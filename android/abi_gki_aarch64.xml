@@ -32682,7 +32682,7 @@
         <parameter type-id='750dbc1d'/>
         <return type-id='95e97e5e'/>
       </function-type>
-      <typedef-decl name='pstate_check_t' type-id='b21b8f21' filepath='arch/arm64/include/asm/insn.h' line='507' column='1' id='470b0e09'/>
+      <typedef-decl name='pstate_check_t' type-id='b21b8f21' filepath='arch/arm64/include/asm/insn.h' line='508' column='1' id='470b0e09'/>
       <pointer-type-def type-id='f8ec0262' size-in-bits='64' id='470be30c'/>
       <typedef-decl name='efi_bool_t' type-id='f9b06939' filepath='include/linux/efi.h' line='47' column='1' id='471304a8'/>
       <pointer-type-def type-id='c89dc0a4' size-in-bits='64' id='47150d4e'/>
@@ -62717,15 +62717,15 @@
         </data-member>
       </class-decl>
       <pointer-type-def type-id='d6574e69' size-in-bits='64' id='8f19938d'/>
-      <class-decl name='iova_cpu_rcache' size-in-bits='192' is-struct='yes' visibility='default' filepath='drivers/iommu/iova.c' line='884' column='1' id='8f19d02e'>
+      <class-decl name='iova_cpu_rcache' size-in-bits='192' is-struct='yes' visibility='default' filepath='drivers/iommu/iova.c' line='885' column='1' id='8f19d02e'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='drivers/iommu/iova.c' line='885' column='1'/>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='drivers/iommu/iova.c' line='886' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='loaded' type-id='0a981d27' visibility='default' filepath='drivers/iommu/iova.c' line='886' column='1'/>
+          <var-decl name='loaded' type-id='0a981d27' visibility='default' filepath='drivers/iommu/iova.c' line='887' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='prev' type-id='0a981d27' visibility='default' filepath='drivers/iommu/iova.c' line='887' column='1'/>
+          <var-decl name='prev' type-id='0a981d27' visibility='default' filepath='drivers/iommu/iova.c' line='888' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='734a42c0' size-in-bits='64' id='8f20abb2'/>
@@ -99837,12 +99837,12 @@
         <return type-id='b50a4934'/>
       </function-type>
       <typedef-decl name='seqcount_t' type-id='3a74ff0b' filepath='include/linux/seqlock.h' line='70' column='1' id='e14c3b11'/>
-      <class-decl name='iova_magazine' size-in-bits='8256' is-struct='yes' visibility='default' filepath='drivers/iommu/iova.c' line='879' column='1' id='e14d461f'>
+      <class-decl name='iova_magazine' size-in-bits='8256' is-struct='yes' visibility='default' filepath='drivers/iommu/iova.c' line='880' column='1' id='e14d461f'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='size' type-id='7359adad' visibility='default' filepath='drivers/iommu/iova.c' line='880' column='1'/>
+          <var-decl name='size' type-id='7359adad' visibility='default' filepath='drivers/iommu/iova.c' line='881' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='pfns' type-id='187c43b2' visibility='default' filepath='drivers/iommu/iova.c' line='881' column='1'/>
+          <var-decl name='pfns' type-id='187c43b2' visibility='default' filepath='drivers/iommu/iova.c' line='882' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='hlist_head' size-in-bits='64' is-struct='yes' visibility='default' filepath='include/linux/types.h' line='182' column='1' id='e151255a'>
@@ -113646,10 +113646,10 @@
         <parameter type-id='2730d015' name='this_mod' filepath='drivers/iio/industrialio-core.c' line='1721' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='__init_rwsem' mangled-name='__init_rwsem' filepath='kernel/locking/rwsem.c' line='325' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__init_rwsem'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='325' column='1'/>
-        <parameter type-id='80f4b756' name='name' filepath='kernel/locking/rwsem.c' line='325' column='1'/>
-        <parameter type-id='a57283f9' name='key' filepath='kernel/locking/rwsem.c' line='326' column='1'/>
+      <function-decl name='__init_rwsem' mangled-name='__init_rwsem' filepath='kernel/locking/rwsem.c' line='327' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__init_rwsem'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='327' column='1'/>
+        <parameter type-id='80f4b756' name='name' filepath='kernel/locking/rwsem.c' line='327' column='1'/>
+        <parameter type-id='a57283f9' name='key' filepath='kernel/locking/rwsem.c' line='328' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='__init_swait_queue_head' mangled-name='__init_swait_queue_head' filepath='kernel/sched/swait.c' line='7' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__init_swait_queue_head'>
@@ -113769,9 +113769,9 @@
         <parameter type-id='0fbf3cfd' name='skb' filepath='net/core/skbuff.c' line='692' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='__kmalloc' mangled-name='__kmalloc' filepath='mm/slub.c' line='4008' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__kmalloc'>
-        <parameter type-id='b59d7dce' name='size' filepath='mm/slub.c' line='4008' column='1'/>
-        <parameter type-id='3eb7c31c' name='flags' filepath='mm/slub.c' line='4008' column='1'/>
+      <function-decl name='__kmalloc' mangled-name='__kmalloc' filepath='mm/slub.c' line='4010' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__kmalloc'>
+        <parameter type-id='b59d7dce' name='size' filepath='mm/slub.c' line='4010' column='1'/>
+        <parameter type-id='3eb7c31c' name='flags' filepath='mm/slub.c' line='4010' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
       <function-decl name='__kthread_init_worker' mangled-name='__kthread_init_worker' filepath='kernel/kthread.c' line='690' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__kthread_init_worker'>
@@ -117152,22 +117152,22 @@
         <parameter type-id='f0981eeb' name='val' filepath='lib/bcd.c' line='11' column='1'/>
         <return type-id='002ac4a6'/>
       </function-decl>
-      <function-decl name='_copy_from_iter' mangled-name='_copy_from_iter' filepath='lib/iov_iter.c' line='765' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_copy_from_iter'>
-        <parameter type-id='eaa32e2f' name='addr' filepath='lib/iov_iter.c' line='765' column='1'/>
-        <parameter type-id='b59d7dce' name='bytes' filepath='lib/iov_iter.c' line='765' column='1'/>
-        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='765' column='1'/>
+      <function-decl name='_copy_from_iter' mangled-name='_copy_from_iter' filepath='lib/iov_iter.c' line='767' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_copy_from_iter'>
+        <parameter type-id='eaa32e2f' name='addr' filepath='lib/iov_iter.c' line='767' column='1'/>
+        <parameter type-id='b59d7dce' name='bytes' filepath='lib/iov_iter.c' line='767' column='1'/>
+        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='767' column='1'/>
         <return type-id='b59d7dce'/>
       </function-decl>
-      <function-decl name='_copy_from_iter_full' mangled-name='_copy_from_iter_full' filepath='lib/iov_iter.c' line='785' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_copy_from_iter_full'>
-        <parameter type-id='eaa32e2f' name='addr' filepath='lib/iov_iter.c' line='785' column='1'/>
-        <parameter type-id='b59d7dce' name='bytes' filepath='lib/iov_iter.c' line='785' column='1'/>
-        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='785' column='1'/>
+      <function-decl name='_copy_from_iter_full' mangled-name='_copy_from_iter_full' filepath='lib/iov_iter.c' line='787' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_copy_from_iter_full'>
+        <parameter type-id='eaa32e2f' name='addr' filepath='lib/iov_iter.c' line='787' column='1'/>
+        <parameter type-id='b59d7dce' name='bytes' filepath='lib/iov_iter.c' line='787' column='1'/>
+        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='787' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
-      <function-decl name='_copy_to_iter' mangled-name='_copy_to_iter' filepath='lib/iov_iter.c' line='630' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_copy_to_iter'>
-        <parameter type-id='eaa32e2f' name='addr' filepath='lib/iov_iter.c' line='630' column='1'/>
-        <parameter type-id='b59d7dce' name='bytes' filepath='lib/iov_iter.c' line='630' column='1'/>
-        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='630' column='1'/>
+      <function-decl name='_copy_to_iter' mangled-name='_copy_to_iter' filepath='lib/iov_iter.c' line='632' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_copy_to_iter'>
+        <parameter type-id='eaa32e2f' name='addr' filepath='lib/iov_iter.c' line='632' column='1'/>
+        <parameter type-id='b59d7dce' name='bytes' filepath='lib/iov_iter.c' line='632' column='1'/>
+        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='632' column='1'/>
         <return type-id='b59d7dce'/>
       </function-decl>
       <function-decl name='_dev_alert' mangled-name='_dev_alert' filepath='drivers/base/core.c' line='4498' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_dev_alert'>
@@ -117635,8 +117635,8 @@
         <parameter type-id='7292109c' name='argcp' filepath='lib/argv_split.c' line='60' column='1'/>
         <return type-id='9b23c9ad'/>
       </function-decl>
-      <var-decl name='arm64_const_caps_ready' type-id='237c0d27' mangled-name='arm64_const_caps_ready' visibility='default' filepath='arch/arm64/kernel/cpufeature.c' line='137' column='1' elf-symbol-id='arm64_const_caps_ready'/>
-      <var-decl name='arm64_use_ng_mappings' type-id='b50a4934' mangled-name='arm64_use_ng_mappings' visibility='default' filepath='arch/arm64/kernel/cpufeature.c' line='107' column='1' elf-symbol-id='arm64_use_ng_mappings'/>
+      <var-decl name='arm64_const_caps_ready' type-id='237c0d27' mangled-name='arm64_const_caps_ready' visibility='default' filepath='arch/arm64/kernel/cpufeature.c' line='142' column='1' elf-symbol-id='arm64_const_caps_ready'/>
+      <var-decl name='arm64_use_ng_mappings' type-id='b50a4934' mangled-name='arm64_use_ng_mappings' visibility='default' filepath='arch/arm64/kernel/cpufeature.c' line='110' column='1' elf-symbol-id='arm64_use_ng_mappings'/>
       <var-decl name='arp_tbl' type-id='aebe1cff' mangled-name='arp_tbl' visibility='default' filepath='net/ipv4/arp.c' line='152' column='1' elf-symbol-id='arp_tbl'/>
       <function-decl name='async_schedule_node' mangled-name='async_schedule_node' filepath='kernel/async.c' line='231' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='async_schedule_node'>
         <parameter type-id='5c19cb0c' name='func' filepath='kernel/async.c' line='231' column='1'/>
@@ -118529,18 +118529,18 @@
         <parameter type-id='531a7450' name='bpf_func' filepath='net/core/filter.c' line='10265' column='1'/>
         <return type-id='f0981eeb'/>
       </function-decl>
-      <function-decl name='bpf_prog_add' mangled-name='bpf_prog_add' filepath='kernel/bpf/syscall.c' line='1857' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_add'>
-        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1857' column='1'/>
-        <parameter type-id='95e97e5e' name='i' filepath='kernel/bpf/syscall.c' line='1857' column='1'/>
+      <function-decl name='bpf_prog_add' mangled-name='bpf_prog_add' filepath='kernel/bpf/syscall.c' line='1858' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_add'>
+        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1858' column='1'/>
+        <parameter type-id='95e97e5e' name='i' filepath='kernel/bpf/syscall.c' line='1858' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='bpf_prog_put' mangled-name='bpf_prog_put' filepath='kernel/bpf/syscall.c' line='1759' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_put'>
-        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1759' column='1'/>
+      <function-decl name='bpf_prog_put' mangled-name='bpf_prog_put' filepath='kernel/bpf/syscall.c' line='1760' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_put'>
+        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1760' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='bpf_prog_sub' mangled-name='bpf_prog_sub' filepath='kernel/bpf/syscall.c' line='1863' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_sub'>
-        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1863' column='1'/>
-        <parameter type-id='95e97e5e' name='i' filepath='kernel/bpf/syscall.c' line='1863' column='1'/>
+      <function-decl name='bpf_prog_sub' mangled-name='bpf_prog_sub' filepath='kernel/bpf/syscall.c' line='1864' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_sub'>
+        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1864' column='1'/>
+        <parameter type-id='95e97e5e' name='i' filepath='kernel/bpf/syscall.c' line='1864' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <var-decl name='bpf_stats_enabled_key' type-id='237c0d27' mangled-name='bpf_stats_enabled_key' visibility='default' filepath='kernel/bpf/core.c' line='2339' column='1' elf-symbol-id='bpf_stats_enabled_key'/>
@@ -118767,9 +118767,9 @@
         <parameter type-id='d504f73d' name='nb' filepath='drivers/base/bus.c' line='901' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='bus_set_iommu' mangled-name='bus_set_iommu' filepath='drivers/iommu/iommu.c' line='1835' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bus_set_iommu'>
-        <parameter type-id='5e2671f8' name='bus' filepath='drivers/iommu/iommu.c' line='1835' column='1'/>
-        <parameter type-id='f1ac64d0' name='ops' filepath='drivers/iommu/iommu.c' line='1835' column='1'/>
+      <function-decl name='bus_set_iommu' mangled-name='bus_set_iommu' filepath='drivers/iommu/iommu.c' line='1838' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bus_set_iommu'>
+        <parameter type-id='5e2671f8' name='bus' filepath='drivers/iommu/iommu.c' line='1838' column='1'/>
+        <parameter type-id='f1ac64d0' name='ops' filepath='drivers/iommu/iommu.c' line='1838' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='bus_unregister' mangled-name='bus_unregister' filepath='drivers/base/bus.c' line='887' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bus_unregister'>
@@ -119605,8 +119605,8 @@
       </function-decl>
       <var-decl name='cpu_all_bits' type-id='afe549fd' mangled-name='cpu_all_bits' visibility='default' filepath='kernel/cpu.c' line='2788' column='1' elf-symbol-id='cpu_all_bits'/>
       <var-decl name='cpu_bit_bitmap' type-id='f959706c' mangled-name='cpu_bit_bitmap' visibility='default' filepath='kernel/cpu.c' line='2777' column='1' elf-symbol-id='cpu_bit_bitmap'/>
-      <function-decl name='cpu_have_feature' mangled-name='cpu_have_feature' filepath='arch/arm64/kernel/cpufeature.c' line='2847' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpu_have_feature'>
-        <parameter type-id='f0981eeb' name='num' filepath='arch/arm64/kernel/cpufeature.c' line='2847' column='1'/>
+      <function-decl name='cpu_have_feature' mangled-name='cpu_have_feature' filepath='arch/arm64/kernel/cpufeature.c' line='2873' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpu_have_feature'>
+        <parameter type-id='f0981eeb' name='num' filepath='arch/arm64/kernel/cpufeature.c' line='2873' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='cpu_hotplug_disable' mangled-name='cpu_hotplug_disable' filepath='kernel/cpu.c' line='359' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpu_hotplug_disable'>
@@ -119615,8 +119615,8 @@
       <function-decl name='cpu_hotplug_enable' mangled-name='cpu_hotplug_enable' filepath='kernel/cpu.c' line='374' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpu_hotplug_enable'>
         <return type-id='48b5725f'/>
       </function-decl>
-      <var-decl name='cpu_hwcap_keys' type-id='cee5a038' mangled-name='cpu_hwcap_keys' visibility='default' filepath='arch/arm64/kernel/cpufeature.c' line='150' column='1' elf-symbol-id='cpu_hwcap_keys'/>
-      <var-decl name='cpu_hwcaps' type-id='f05e8e77' mangled-name='cpu_hwcaps' visibility='default' filepath='arch/arm64/kernel/cpufeature.c' line='100' column='1' elf-symbol-id='cpu_hwcaps'/>
+      <var-decl name='cpu_hwcap_keys' type-id='cee5a038' mangled-name='cpu_hwcap_keys' visibility='default' filepath='arch/arm64/kernel/cpufeature.c' line='155' column='1' elf-symbol-id='cpu_hwcap_keys'/>
+      <var-decl name='cpu_hwcaps' type-id='f05e8e77' mangled-name='cpu_hwcaps' visibility='default' filepath='arch/arm64/kernel/cpufeature.c' line='103' column='1' elf-symbol-id='cpu_hwcaps'/>
       <var-decl name='cpu_irqtime' type-id='3f278a28' mangled-name='cpu_irqtime' visibility='default' filepath='kernel/sched/cputime.c' line='22' column='1' elf-symbol-id='cpu_irqtime'/>
       <function-decl name='cpu_is_hotpluggable' mangled-name='cpu_is_hotpluggable' filepath='drivers/base/cpu.c' line='489' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpu_is_hotpluggable'>
         <parameter type-id='f0981eeb' name='cpu' filepath='drivers/base/cpu.c' line='489' column='1'/>
@@ -122984,16 +122984,16 @@
         <parameter type-id='a965a5b5' name='sem' filepath='kernel/locking/semaphore.c' line='101' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='down_read' mangled-name='down_read' filepath='kernel/locking/rwsem.c' line='1511' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1511' column='1'/>
+      <function-decl name='down_read' mangled-name='down_read' filepath='kernel/locking/rwsem.c' line='1516' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1516' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='down_read_killable' mangled-name='down_read_killable' filepath='kernel/locking/rwsem.c' line='1534' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read_killable'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1534' column='1'/>
+      <function-decl name='down_read_killable' mangled-name='down_read_killable' filepath='kernel/locking/rwsem.c' line='1539' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read_killable'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1539' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='down_read_trylock' mangled-name='down_read_trylock' filepath='kernel/locking/rwsem.c' line='1551' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read_trylock'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1551' column='1'/>
+      <function-decl name='down_read_trylock' mangled-name='down_read_trylock' filepath='kernel/locking/rwsem.c' line='1556' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read_trylock'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1556' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='down_timeout' mangled-name='down_timeout' filepath='kernel/locking/semaphore.c' line='155' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_timeout'>
@@ -123005,16 +123005,16 @@
         <parameter type-id='a965a5b5' name='sem' filepath='kernel/locking/semaphore.c' line='130' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='down_write' mangled-name='down_write' filepath='kernel/locking/rwsem.c' line='1564' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1564' column='1'/>
+      <function-decl name='down_write' mangled-name='down_write' filepath='kernel/locking/rwsem.c' line='1569' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1569' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='down_write_trylock' mangled-name='down_write_trylock' filepath='kernel/locking/rwsem.c' line='1593' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write_trylock'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1593' column='1'/>
+      <function-decl name='down_write_trylock' mangled-name='down_write_trylock' filepath='kernel/locking/rwsem.c' line='1598' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write_trylock'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1598' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='downgrade_write' mangled-name='downgrade_write' filepath='kernel/locking/rwsem.c' line='1628' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='downgrade_write'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1628' column='1'/>
+      <function-decl name='downgrade_write' mangled-name='downgrade_write' filepath='kernel/locking/rwsem.c' line='1633' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='downgrade_write'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1633' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='dput' mangled-name='dput' filepath='fs/dcache.c' line='859' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dput'>
@@ -125438,10 +125438,10 @@
       <function-decl name='dump_stack' mangled-name='dump_stack' filepath='lib/dump_stack.c' line='133' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dump_stack'>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='dup_iter' mangled-name='dup_iter' filepath='lib/iov_iter.c' line='1640' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dup_iter'>
-        <parameter type-id='4fa10f9e' name='new' filepath='lib/iov_iter.c' line='1640' column='1'/>
-        <parameter type-id='4fa10f9e' name='old' filepath='lib/iov_iter.c' line='1640' column='1'/>
-        <parameter type-id='3eb7c31c' name='flags' filepath='lib/iov_iter.c' line='1640' column='1'/>
+      <function-decl name='dup_iter' mangled-name='dup_iter' filepath='lib/iov_iter.c' line='1642' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dup_iter'>
+        <parameter type-id='4fa10f9e' name='new' filepath='lib/iov_iter.c' line='1642' column='1'/>
+        <parameter type-id='4fa10f9e' name='old' filepath='lib/iov_iter.c' line='1642' column='1'/>
+        <parameter type-id='3eb7c31c' name='flags' filepath='lib/iov_iter.c' line='1642' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
       <function-decl name='dw_handle_msi_irq' mangled-name='dw_handle_msi_irq' filepath='drivers/pci/controller/dwc/pcie-designware-host.c' line='56' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dw_handle_msi_irq'>
@@ -126397,8 +126397,8 @@
         <parameter type-id='7e666abe' name='inode' filepath='fs/inode.c' line='1600' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='generic_device_group' mangled-name='generic_device_group' filepath='drivers/iommu/iommu.c' line='1379' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='generic_device_group'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1379' column='1'/>
+      <function-decl name='generic_device_group' mangled-name='generic_device_group' filepath='drivers/iommu/iommu.c' line='1382' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='generic_device_group'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1382' column='1'/>
         <return type-id='0b19fc54'/>
       </function-decl>
       <function-decl name='generic_file_llseek' mangled-name='generic_file_llseek' filepath='fs/read_write.c' line='144' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='generic_file_llseek'>
@@ -126416,9 +126416,9 @@
         <parameter type-id='f0981eeb' name='irq' filepath='kernel/irq/irqdesc.c' line='638' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='generic_iommu_put_resv_regions' mangled-name='generic_iommu_put_resv_regions' filepath='drivers/iommu/iommu.c' line='2811' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='generic_iommu_put_resv_regions'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2811' column='1'/>
-        <parameter type-id='e84b031a' name='list' filepath='drivers/iommu/iommu.c' line='2811' column='1'/>
+      <function-decl name='generic_iommu_put_resv_regions' mangled-name='generic_iommu_put_resv_regions' filepath='drivers/iommu/iommu.c' line='2814' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='generic_iommu_put_resv_regions'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2814' column='1'/>
+        <parameter type-id='e84b031a' name='list' filepath='drivers/iommu/iommu.c' line='2814' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='generic_mii_ioctl' mangled-name='generic_mii_ioctl' filepath='drivers/net/mii.c' line='584' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='generic_mii_ioctl'>
@@ -126638,9 +126638,9 @@
         <parameter type-id='eaa32e2f' name='argp' filepath='block/scsi_ioctl.c' line='591' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='get_slabinfo' mangled-name='get_slabinfo' filepath='mm/slub.c' line='5872' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_slabinfo'>
-        <parameter type-id='f3b4aca8' name='s' filepath='mm/slub.c' line='5872' column='1'/>
-        <parameter type-id='d225de01' name='sinfo' filepath='mm/slub.c' line='5872' column='1'/>
+      <function-decl name='get_slabinfo' mangled-name='get_slabinfo' filepath='mm/slub.c' line='5874' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_slabinfo'>
+        <parameter type-id='f3b4aca8' name='s' filepath='mm/slub.c' line='5874' column='1'/>
+        <parameter type-id='d225de01' name='sinfo' filepath='mm/slub.c' line='5874' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='get_state_synchronize_rcu' mangled-name='get_state_synchronize_rcu' filepath='kernel/rcu/tree.c' line='3688' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_state_synchronize_rcu'>
@@ -127908,13 +127908,13 @@
         <parameter type-id='aa9ea333' name='remove_buffer' filepath='drivers/iio/industrialio-buffer.c' line='1115' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='import_iovec' mangled-name='import_iovec' filepath='lib/iov_iter.c' line='1812' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='import_iovec'>
-        <parameter type-id='95e97e5e' name='type' filepath='lib/iov_iter.c' line='1812' column='1'/>
-        <parameter type-id='2c556848' name='uvec' filepath='lib/iov_iter.c' line='1812' column='1'/>
-        <parameter type-id='f0981eeb' name='nr_segs' filepath='lib/iov_iter.c' line='1813' column='1'/>
-        <parameter type-id='f0981eeb' name='fast_segs' filepath='lib/iov_iter.c' line='1813' column='1'/>
-        <parameter type-id='5d3cb3f9' name='iovp' filepath='lib/iov_iter.c' line='1814' column='1'/>
-        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='1814' column='1'/>
+      <function-decl name='import_iovec' mangled-name='import_iovec' filepath='lib/iov_iter.c' line='1814' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='import_iovec'>
+        <parameter type-id='95e97e5e' name='type' filepath='lib/iov_iter.c' line='1814' column='1'/>
+        <parameter type-id='2c556848' name='uvec' filepath='lib/iov_iter.c' line='1814' column='1'/>
+        <parameter type-id='f0981eeb' name='nr_segs' filepath='lib/iov_iter.c' line='1815' column='1'/>
+        <parameter type-id='f0981eeb' name='fast_segs' filepath='lib/iov_iter.c' line='1815' column='1'/>
+        <parameter type-id='5d3cb3f9' name='iovp' filepath='lib/iov_iter.c' line='1816' column='1'/>
+        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='1816' column='1'/>
         <return type-id='79a0948f'/>
       </function-decl>
       <function-decl name='in4_pton' mangled-name='in4_pton' filepath='net/core/utils.c' line='118' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='in4_pton'>
@@ -128197,56 +128197,56 @@
         <return type-id='bd54fe1a'/>
       </function-decl>
       <var-decl name='iomem_resource' type-id='5218160d' mangled-name='iomem_resource' visibility='default' filepath='kernel/resource.c' line='38' column='1' elf-symbol-id='iomem_resource'/>
-      <function-decl name='iommu_alloc_resv_region' mangled-name='iommu_alloc_resv_region' filepath='drivers/iommu/iommu.c' line='2820' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_alloc_resv_region'>
-        <parameter type-id='2522883d' name='start' filepath='drivers/iommu/iommu.c' line='2820' column='1'/>
-        <parameter type-id='b59d7dce' name='length' filepath='drivers/iommu/iommu.c' line='2821' column='1'/>
-        <parameter type-id='95e97e5e' name='prot' filepath='drivers/iommu/iommu.c' line='2821' column='1'/>
-        <parameter type-id='256c2037' name='type' filepath='drivers/iommu/iommu.c' line='2822' column='1'/>
+      <function-decl name='iommu_alloc_resv_region' mangled-name='iommu_alloc_resv_region' filepath='drivers/iommu/iommu.c' line='2823' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_alloc_resv_region'>
+        <parameter type-id='2522883d' name='start' filepath='drivers/iommu/iommu.c' line='2823' column='1'/>
+        <parameter type-id='b59d7dce' name='length' filepath='drivers/iommu/iommu.c' line='2824' column='1'/>
+        <parameter type-id='95e97e5e' name='prot' filepath='drivers/iommu/iommu.c' line='2824' column='1'/>
+        <parameter type-id='256c2037' name='type' filepath='drivers/iommu/iommu.c' line='2825' column='1'/>
         <return type-id='24b0cc5e'/>
       </function-decl>
-      <function-decl name='iommu_attach_device' mangled-name='iommu_attach_device' filepath='drivers/iommu/iommu.c' line='1942' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_attach_device'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='1942' column='1'/>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1942' column='1'/>
+      <function-decl name='iommu_attach_device' mangled-name='iommu_attach_device' filepath='drivers/iommu/iommu.c' line='1945' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_attach_device'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='1945' column='1'/>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1945' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_attach_group' mangled-name='iommu_attach_group' filepath='drivers/iommu/iommu.c' line='2274' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_attach_group'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2274' column='1'/>
-        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='2274' column='1'/>
+      <function-decl name='iommu_attach_group' mangled-name='iommu_attach_group' filepath='drivers/iommu/iommu.c' line='2277' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_attach_group'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2277' column='1'/>
+        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='2277' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_aux_attach_device' mangled-name='iommu_aux_attach_device' filepath='drivers/iommu/iommu.c' line='3006' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_aux_attach_device'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='3006' column='1'/>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='3006' column='1'/>
+      <function-decl name='iommu_aux_attach_device' mangled-name='iommu_aux_attach_device' filepath='drivers/iommu/iommu.c' line='3009' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_aux_attach_device'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='3009' column='1'/>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='3009' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_aux_detach_device' mangled-name='iommu_aux_detach_device' filepath='drivers/iommu/iommu.c' line='3020' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_aux_detach_device'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='3020' column='1'/>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='3020' column='1'/>
+      <function-decl name='iommu_aux_detach_device' mangled-name='iommu_aux_detach_device' filepath='drivers/iommu/iommu.c' line='3023' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_aux_detach_device'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='3023' column='1'/>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='3023' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iommu_aux_get_pasid' mangled-name='iommu_aux_get_pasid' filepath='drivers/iommu/iommu.c' line='3029' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_aux_get_pasid'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='3029' column='1'/>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='3029' column='1'/>
+      <function-decl name='iommu_aux_get_pasid' mangled-name='iommu_aux_get_pasid' filepath='drivers/iommu/iommu.c' line='3032' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_aux_get_pasid'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='3032' column='1'/>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='3032' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_detach_device' mangled-name='iommu_detach_device' filepath='drivers/iommu/iommu.c' line='2193' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_detach_device'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2193' column='1'/>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2193' column='1'/>
+      <function-decl name='iommu_detach_device' mangled-name='iommu_detach_device' filepath='drivers/iommu/iommu.c' line='2196' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_detach_device'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2196' column='1'/>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2196' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iommu_detach_group' mangled-name='iommu_detach_group' filepath='drivers/iommu/iommu.c' line='2319' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_detach_group'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2319' column='1'/>
-        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='2319' column='1'/>
+      <function-decl name='iommu_detach_group' mangled-name='iommu_detach_group' filepath='drivers/iommu/iommu.c' line='2322' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_detach_group'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2322' column='1'/>
+        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='2322' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iommu_dev_enable_feature' mangled-name='iommu_dev_enable_feature' filepath='drivers/iommu/iommu.c' line='2952' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_dev_enable_feature'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2952' column='1'/>
-        <parameter type-id='29d28711' name='feat' filepath='drivers/iommu/iommu.c' line='2952' column='1'/>
+      <function-decl name='iommu_dev_enable_feature' mangled-name='iommu_dev_enable_feature' filepath='drivers/iommu/iommu.c' line='2955' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_dev_enable_feature'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2955' column='1'/>
+        <parameter type-id='29d28711' name='feat' filepath='drivers/iommu/iommu.c' line='2955' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_dev_feature_enabled' mangled-name='iommu_dev_feature_enabled' filepath='drivers/iommu/iommu.c' line='2983' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_dev_feature_enabled'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2983' column='1'/>
-        <parameter type-id='29d28711' name='feat' filepath='drivers/iommu/iommu.c' line='2983' column='1'/>
+      <function-decl name='iommu_dev_feature_enabled' mangled-name='iommu_dev_feature_enabled' filepath='drivers/iommu/iommu.c' line='2986' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_dev_feature_enabled'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2986' column='1'/>
+        <parameter type-id='29d28711' name='feat' filepath='drivers/iommu/iommu.c' line='2986' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='iommu_device_register' mangled-name='iommu_device_register' filepath='drivers/iommu/iommu.c' line='154' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_device_register'>
@@ -128289,42 +128289,42 @@
         <parameter type-id='91ce1af9' name='size' filepath='drivers/iommu/dma-iommu.c' line='380' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_domain_alloc' mangled-name='iommu_domain_alloc' filepath='drivers/iommu/iommu.c' line='1916' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_domain_alloc'>
-        <parameter type-id='5e2671f8' name='bus' filepath='drivers/iommu/iommu.c' line='1916' column='1'/>
+      <function-decl name='iommu_domain_alloc' mangled-name='iommu_domain_alloc' filepath='drivers/iommu/iommu.c' line='1919' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_domain_alloc'>
+        <parameter type-id='5e2671f8' name='bus' filepath='drivers/iommu/iommu.c' line='1919' column='1'/>
         <return type-id='bff05edb'/>
       </function-decl>
-      <function-decl name='iommu_domain_free' mangled-name='iommu_domain_free' filepath='drivers/iommu/iommu.c' line='1922' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_domain_free'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='1922' column='1'/>
+      <function-decl name='iommu_domain_free' mangled-name='iommu_domain_free' filepath='drivers/iommu/iommu.c' line='1925' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_domain_free'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='1925' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iommu_domain_get_attr' mangled-name='iommu_domain_get_attr' filepath='drivers/iommu/iommu.c' line='2740' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_domain_get_attr'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2740' column='1'/>
-        <parameter type-id='e176cc45' name='attr' filepath='drivers/iommu/iommu.c' line='2741' column='1'/>
-        <parameter type-id='eaa32e2f' name='data' filepath='drivers/iommu/iommu.c' line='2741' column='1'/>
+      <function-decl name='iommu_domain_get_attr' mangled-name='iommu_domain_get_attr' filepath='drivers/iommu/iommu.c' line='2743' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_domain_get_attr'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2743' column='1'/>
+        <parameter type-id='e176cc45' name='attr' filepath='drivers/iommu/iommu.c' line='2744' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='drivers/iommu/iommu.c' line='2744' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_domain_set_attr' mangled-name='iommu_domain_set_attr' filepath='drivers/iommu/iommu.c' line='2768' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_domain_set_attr'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2768' column='1'/>
-        <parameter type-id='e176cc45' name='attr' filepath='drivers/iommu/iommu.c' line='2769' column='1'/>
-        <parameter type-id='eaa32e2f' name='data' filepath='drivers/iommu/iommu.c' line='2769' column='1'/>
+      <function-decl name='iommu_domain_set_attr' mangled-name='iommu_domain_set_attr' filepath='drivers/iommu/iommu.c' line='2771' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_domain_set_attr'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2771' column='1'/>
+        <parameter type-id='e176cc45' name='attr' filepath='drivers/iommu/iommu.c' line='2772' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='drivers/iommu/iommu.c' line='2772' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_fwspec_add_ids' mangled-name='iommu_fwspec_add_ids' filepath='drivers/iommu/iommu.c' line='2912' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_fwspec_add_ids'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2912' column='1'/>
-        <parameter type-id='f9409001' name='ids' filepath='drivers/iommu/iommu.c' line='2912' column='1'/>
-        <parameter type-id='95e97e5e' name='num_ids' filepath='drivers/iommu/iommu.c' line='2912' column='1'/>
+      <function-decl name='iommu_fwspec_add_ids' mangled-name='iommu_fwspec_add_ids' filepath='drivers/iommu/iommu.c' line='2915' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_fwspec_add_ids'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2915' column='1'/>
+        <parameter type-id='f9409001' name='ids' filepath='drivers/iommu/iommu.c' line='2915' column='1'/>
+        <parameter type-id='95e97e5e' name='num_ids' filepath='drivers/iommu/iommu.c' line='2915' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_fwspec_free' mangled-name='iommu_fwspec_free' filepath='drivers/iommu/iommu.c' line='2900' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_fwspec_free'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2900' column='1'/>
+      <function-decl name='iommu_fwspec_free' mangled-name='iommu_fwspec_free' filepath='drivers/iommu/iommu.c' line='2903' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_fwspec_free'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2903' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='iommu_get_dma_cookie' mangled-name='iommu_get_dma_cookie' filepath='drivers/iommu/dma-iommu.c' line='79' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_get_dma_cookie'>
         <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/dma-iommu.c' line='79' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_get_domain_for_dev' mangled-name='iommu_get_domain_for_dev' filepath='drivers/iommu/iommu.c' line='2215' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_get_domain_for_dev'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2215' column='1'/>
+      <function-decl name='iommu_get_domain_for_dev' mangled-name='iommu_get_domain_for_dev' filepath='drivers/iommu/iommu.c' line='2218' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_get_domain_for_dev'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2218' column='1'/>
         <return type-id='bff05edb'/>
       </function-decl>
       <function-decl name='iommu_get_msi_cookie' mangled-name='iommu_get_msi_cookie' filepath='drivers/iommu/dma-iommu.c' line='104' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_get_msi_cookie'>
@@ -128332,100 +128332,100 @@
         <parameter type-id='cf29c9b3' name='base' filepath='drivers/iommu/dma-iommu.c' line='104' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_group_alloc' mangled-name='iommu_group_alloc' filepath='drivers/iommu/iommu.c' line='567' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_alloc'>
+      <function-decl name='iommu_group_alloc' mangled-name='iommu_group_alloc' filepath='drivers/iommu/iommu.c' line='570' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_alloc'>
         <return type-id='0b19fc54'/>
       </function-decl>
-      <function-decl name='iommu_group_for_each_dev' mangled-name='iommu_group_for_each_dev' filepath='drivers/iommu/iommu.c' line='954' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_for_each_dev'>
-        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='954' column='1'/>
-        <parameter type-id='eaa32e2f' name='data' filepath='drivers/iommu/iommu.c' line='954' column='1'/>
-        <parameter type-id='92d15ae9' name='fn' filepath='drivers/iommu/iommu.c' line='955' column='1'/>
+      <function-decl name='iommu_group_for_each_dev' mangled-name='iommu_group_for_each_dev' filepath='drivers/iommu/iommu.c' line='957' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_for_each_dev'>
+        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='957' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='drivers/iommu/iommu.c' line='957' column='1'/>
+        <parameter type-id='92d15ae9' name='fn' filepath='drivers/iommu/iommu.c' line='958' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_group_get' mangled-name='iommu_group_get' filepath='drivers/iommu/iommu.c' line='975' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_get'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='975' column='1'/>
+      <function-decl name='iommu_group_get' mangled-name='iommu_group_get' filepath='drivers/iommu/iommu.c' line='978' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_get'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='978' column='1'/>
         <return type-id='0b19fc54'/>
       </function-decl>
-      <function-decl name='iommu_group_get_iommudata' mangled-name='iommu_group_get_iommudata' filepath='drivers/iommu/iommu.c' line='662' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_get_iommudata'>
-        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='662' column='1'/>
+      <function-decl name='iommu_group_get_iommudata' mangled-name='iommu_group_get_iommudata' filepath='drivers/iommu/iommu.c' line='665' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_get_iommudata'>
+        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='665' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
-      <function-decl name='iommu_group_put' mangled-name='iommu_group_put' filepath='drivers/iommu/iommu.c' line='1007' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_put'>
-        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='1007' column='1'/>
+      <function-decl name='iommu_group_put' mangled-name='iommu_group_put' filepath='drivers/iommu/iommu.c' line='1010' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_put'>
+        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='1010' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iommu_group_ref_get' mangled-name='iommu_group_ref_get' filepath='drivers/iommu/iommu.c' line='993' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_ref_get'>
-        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='993' column='1'/>
+      <function-decl name='iommu_group_ref_get' mangled-name='iommu_group_ref_get' filepath='drivers/iommu/iommu.c' line='996' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_ref_get'>
+        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='996' column='1'/>
         <return type-id='0b19fc54'/>
       </function-decl>
-      <function-decl name='iommu_group_remove_device' mangled-name='iommu_group_remove_device' filepath='drivers/iommu/iommu.c' line='878' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_remove_device'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='878' column='1'/>
+      <function-decl name='iommu_group_remove_device' mangled-name='iommu_group_remove_device' filepath='drivers/iommu/iommu.c' line='881' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_remove_device'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='881' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iommu_group_set_iommudata' mangled-name='iommu_group_set_iommudata' filepath='drivers/iommu/iommu.c' line='678' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_set_iommudata'>
-        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='678' column='1'/>
-        <parameter type-id='eaa32e2f' name='iommu_data' filepath='drivers/iommu/iommu.c' line='678' column='1'/>
-        <parameter type-id='b7f9d8e6' name='release' filepath='drivers/iommu/iommu.c' line='679' column='1'/>
+      <function-decl name='iommu_group_set_iommudata' mangled-name='iommu_group_set_iommudata' filepath='drivers/iommu/iommu.c' line='681' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_set_iommudata'>
+        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='681' column='1'/>
+        <parameter type-id='eaa32e2f' name='iommu_data' filepath='drivers/iommu/iommu.c' line='681' column='1'/>
+        <parameter type-id='b7f9d8e6' name='release' filepath='drivers/iommu/iommu.c' line='682' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iommu_group_set_name' mangled-name='iommu_group_set_name' filepath='drivers/iommu/iommu.c' line='694' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_set_name'>
-        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='694' column='1'/>
-        <parameter type-id='80f4b756' name='name' filepath='drivers/iommu/iommu.c' line='694' column='1'/>
+      <function-decl name='iommu_group_set_name' mangled-name='iommu_group_set_name' filepath='drivers/iommu/iommu.c' line='697' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_group_set_name'>
+        <parameter type-id='0b19fc54' name='group' filepath='drivers/iommu/iommu.c' line='697' column='1'/>
+        <parameter type-id='80f4b756' name='name' filepath='drivers/iommu/iommu.c' line='697' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_iova_to_phys' mangled-name='iommu_iova_to_phys' filepath='drivers/iommu/iommu.c' line='2327' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_iova_to_phys'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2327' column='1'/>
-        <parameter type-id='cf29c9b3' name='iova' filepath='drivers/iommu/iommu.c' line='2327' column='1'/>
+      <function-decl name='iommu_iova_to_phys' mangled-name='iommu_iova_to_phys' filepath='drivers/iommu/iommu.c' line='2330' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_iova_to_phys'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2330' column='1'/>
+        <parameter type-id='cf29c9b3' name='iova' filepath='drivers/iommu/iommu.c' line='2330' column='1'/>
         <return type-id='2522883d'/>
       </function-decl>
-      <function-decl name='iommu_map' mangled-name='iommu_map' filepath='drivers/iommu/iommu.c' line='2488' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_map'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2488' column='1'/>
-        <parameter type-id='7359adad' name='iova' filepath='drivers/iommu/iommu.c' line='2488' column='1'/>
-        <parameter type-id='2522883d' name='paddr' filepath='drivers/iommu/iommu.c' line='2489' column='1'/>
-        <parameter type-id='b59d7dce' name='size' filepath='drivers/iommu/iommu.c' line='2489' column='1'/>
-        <parameter type-id='95e97e5e' name='prot' filepath='drivers/iommu/iommu.c' line='2489' column='1'/>
+      <function-decl name='iommu_map' mangled-name='iommu_map' filepath='drivers/iommu/iommu.c' line='2491' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_map'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2491' column='1'/>
+        <parameter type-id='7359adad' name='iova' filepath='drivers/iommu/iommu.c' line='2491' column='1'/>
+        <parameter type-id='2522883d' name='paddr' filepath='drivers/iommu/iommu.c' line='2492' column='1'/>
+        <parameter type-id='b59d7dce' name='size' filepath='drivers/iommu/iommu.c' line='2492' column='1'/>
+        <parameter type-id='95e97e5e' name='prot' filepath='drivers/iommu/iommu.c' line='2492' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_map_sg' mangled-name='iommu_map_sg' filepath='drivers/iommu/iommu.c' line='2651' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_map_sg'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2651' column='1'/>
-        <parameter type-id='7359adad' name='iova' filepath='drivers/iommu/iommu.c' line='2651' column='1'/>
-        <parameter type-id='bf3ef905' name='sg' filepath='drivers/iommu/iommu.c' line='2652' column='1'/>
-        <parameter type-id='f0981eeb' name='nents' filepath='drivers/iommu/iommu.c' line='2652' column='1'/>
-        <parameter type-id='95e97e5e' name='prot' filepath='drivers/iommu/iommu.c' line='2652' column='1'/>
+      <function-decl name='iommu_map_sg' mangled-name='iommu_map_sg' filepath='drivers/iommu/iommu.c' line='2654' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_map_sg'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2654' column='1'/>
+        <parameter type-id='7359adad' name='iova' filepath='drivers/iommu/iommu.c' line='2654' column='1'/>
+        <parameter type-id='bf3ef905' name='sg' filepath='drivers/iommu/iommu.c' line='2655' column='1'/>
+        <parameter type-id='f0981eeb' name='nents' filepath='drivers/iommu/iommu.c' line='2655' column='1'/>
+        <parameter type-id='95e97e5e' name='prot' filepath='drivers/iommu/iommu.c' line='2655' column='1'/>
         <return type-id='b59d7dce'/>
       </function-decl>
-      <function-decl name='iommu_present' mangled-name='iommu_present' filepath='drivers/iommu/iommu.c' line='1858' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_present'>
-        <parameter type-id='5e2671f8' name='bus' filepath='drivers/iommu/iommu.c' line='1858' column='1'/>
+      <function-decl name='iommu_present' mangled-name='iommu_present' filepath='drivers/iommu/iommu.c' line='1861' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_present'>
+        <parameter type-id='5e2671f8' name='bus' filepath='drivers/iommu/iommu.c' line='1861' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='iommu_put_dma_cookie' mangled-name='iommu_put_dma_cookie' filepath='drivers/iommu/dma-iommu.c' line='131' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_put_dma_cookie'>
         <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/dma-iommu.c' line='131' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iommu_register_device_fault_handler' mangled-name='iommu_register_device_fault_handler' filepath='drivers/iommu/iommu.c' line='1062' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_register_device_fault_handler'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1062' column='1'/>
-        <parameter type-id='a84f5b46' name='handler' filepath='drivers/iommu/iommu.c' line='1063' column='1'/>
-        <parameter type-id='eaa32e2f' name='data' filepath='drivers/iommu/iommu.c' line='1064' column='1'/>
+      <function-decl name='iommu_register_device_fault_handler' mangled-name='iommu_register_device_fault_handler' filepath='drivers/iommu/iommu.c' line='1065' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_register_device_fault_handler'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1065' column='1'/>
+        <parameter type-id='a84f5b46' name='handler' filepath='drivers/iommu/iommu.c' line='1066' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='drivers/iommu/iommu.c' line='1067' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_report_device_fault' mangled-name='iommu_report_device_fault' filepath='drivers/iommu/iommu.c' line='1147' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_report_device_fault'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1147' column='1'/>
-        <parameter type-id='af233abc' name='evt' filepath='drivers/iommu/iommu.c' line='1147' column='1'/>
+      <function-decl name='iommu_report_device_fault' mangled-name='iommu_report_device_fault' filepath='drivers/iommu/iommu.c' line='1150' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_report_device_fault'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1150' column='1'/>
+        <parameter type-id='af233abc' name='evt' filepath='drivers/iommu/iommu.c' line='1150' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='iommu_set_fault_handler' mangled-name='iommu_set_fault_handler' filepath='drivers/iommu/iommu.c' line='1885' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_set_fault_handler'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='1885' column='1'/>
-        <parameter type-id='a01c3626' name='handler' filepath='drivers/iommu/iommu.c' line='1886' column='1'/>
-        <parameter type-id='eaa32e2f' name='token' filepath='drivers/iommu/iommu.c' line='1887' column='1'/>
+      <function-decl name='iommu_set_fault_handler' mangled-name='iommu_set_fault_handler' filepath='drivers/iommu/iommu.c' line='1888' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_set_fault_handler'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='1888' column='1'/>
+        <parameter type-id='a01c3626' name='handler' filepath='drivers/iommu/iommu.c' line='1889' column='1'/>
+        <parameter type-id='eaa32e2f' name='token' filepath='drivers/iommu/iommu.c' line='1890' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iommu_unmap' mangled-name='iommu_unmap' filepath='drivers/iommu/iommu.c' line='2570' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_unmap'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2570' column='1'/>
-        <parameter type-id='7359adad' name='iova' filepath='drivers/iommu/iommu.c' line='2571' column='1'/>
-        <parameter type-id='b59d7dce' name='size' filepath='drivers/iommu/iommu.c' line='2571' column='1'/>
+      <function-decl name='iommu_unmap' mangled-name='iommu_unmap' filepath='drivers/iommu/iommu.c' line='2573' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_unmap'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2573' column='1'/>
+        <parameter type-id='7359adad' name='iova' filepath='drivers/iommu/iommu.c' line='2574' column='1'/>
+        <parameter type-id='b59d7dce' name='size' filepath='drivers/iommu/iommu.c' line='2574' column='1'/>
         <return type-id='b59d7dce'/>
       </function-decl>
-      <function-decl name='iommu_unregister_device_fault_handler' mangled-name='iommu_unregister_device_fault_handler' filepath='drivers/iommu/iommu.c' line='1107' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_unregister_device_fault_handler'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1107' column='1'/>
+      <function-decl name='iommu_unregister_device_fault_handler' mangled-name='iommu_unregister_device_fault_handler' filepath='drivers/iommu/iommu.c' line='1110' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_unregister_device_fault_handler'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1110' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='ioremap_cache' mangled-name='ioremap_cache' filepath='arch/arm64/mm/ioremap.c' line='84' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ioremap_cache'>
@@ -128437,20 +128437,20 @@
         <parameter type-id='fe09dd29' name='io_addr' filepath='arch/arm64/mm/ioremap.c' line='71' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iov_iter_bvec' mangled-name='iov_iter_bvec' filepath='lib/iov_iter.c' line='1188' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iov_iter_bvec'>
-        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='1188' column='1'/>
-        <parameter type-id='f0981eeb' name='direction' filepath='lib/iov_iter.c' line='1188' column='1'/>
-        <parameter type-id='15c9a01b' name='bvec' filepath='lib/iov_iter.c' line='1189' column='1'/>
-        <parameter type-id='7359adad' name='nr_segs' filepath='lib/iov_iter.c' line='1189' column='1'/>
-        <parameter type-id='b59d7dce' name='count' filepath='lib/iov_iter.c' line='1190' column='1'/>
+      <function-decl name='iov_iter_bvec' mangled-name='iov_iter_bvec' filepath='lib/iov_iter.c' line='1190' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iov_iter_bvec'>
+        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='1190' column='1'/>
+        <parameter type-id='f0981eeb' name='direction' filepath='lib/iov_iter.c' line='1190' column='1'/>
+        <parameter type-id='15c9a01b' name='bvec' filepath='lib/iov_iter.c' line='1191' column='1'/>
+        <parameter type-id='7359adad' name='nr_segs' filepath='lib/iov_iter.c' line='1191' column='1'/>
+        <parameter type-id='b59d7dce' name='count' filepath='lib/iov_iter.c' line='1192' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='iov_iter_kvec' mangled-name='iov_iter_kvec' filepath='lib/iov_iter.c' line='1175' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iov_iter_kvec'>
-        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='1175' column='1'/>
-        <parameter type-id='f0981eeb' name='direction' filepath='lib/iov_iter.c' line='1175' column='1'/>
-        <parameter type-id='5199c30d' name='kvec' filepath='lib/iov_iter.c' line='1176' column='1'/>
-        <parameter type-id='7359adad' name='nr_segs' filepath='lib/iov_iter.c' line='1176' column='1'/>
-        <parameter type-id='b59d7dce' name='count' filepath='lib/iov_iter.c' line='1177' column='1'/>
+      <function-decl name='iov_iter_kvec' mangled-name='iov_iter_kvec' filepath='lib/iov_iter.c' line='1177' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iov_iter_kvec'>
+        <parameter type-id='4fa10f9e' name='i' filepath='lib/iov_iter.c' line='1177' column='1'/>
+        <parameter type-id='f0981eeb' name='direction' filepath='lib/iov_iter.c' line='1177' column='1'/>
+        <parameter type-id='5199c30d' name='kvec' filepath='lib/iov_iter.c' line='1178' column='1'/>
+        <parameter type-id='7359adad' name='nr_segs' filepath='lib/iov_iter.c' line='1178' column='1'/>
+        <parameter type-id='b59d7dce' name='count' filepath='lib/iov_iter.c' line='1179' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='ip6_local_out' mangled-name='ip6_local_out' filepath='net/ipv6/output_core.c' line='155' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ip6_local_out'>
@@ -129074,8 +129074,8 @@
         <parameter type-id='204a4632' name='dest' filepath='security/keys/keyring.c' line='521' column='1'/>
         <return type-id='204a4632'/>
       </function-decl>
-      <function-decl name='kfree' mangled-name='kfree' filepath='mm/slub.c' line='4162' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kfree'>
-        <parameter type-id='eaa32e2f' name='x' filepath='mm/slub.c' line='4162' column='1'/>
+      <function-decl name='kfree' mangled-name='kfree' filepath='mm/slub.c' line='4164' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kfree'>
+        <parameter type-id='eaa32e2f' name='x' filepath='mm/slub.c' line='4164' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='kfree_const' mangled-name='kfree_const' filepath='mm/util.c' line='40' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kfree_const'>
@@ -129136,15 +129136,15 @@
         <parameter type-id='f0981eeb' name='order' filepath='mm/slab_common.c' line='872' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
-      <function-decl name='kmem_cache_alloc' mangled-name='kmem_cache_alloc' filepath='mm/slub.c' line='2952' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kmem_cache_alloc'>
-        <parameter type-id='f3b4aca8' name='s' filepath='mm/slub.c' line='2952' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfpflags' filepath='mm/slub.c' line='2952' column='1'/>
+      <function-decl name='kmem_cache_alloc' mangled-name='kmem_cache_alloc' filepath='mm/slub.c' line='2954' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kmem_cache_alloc'>
+        <parameter type-id='f3b4aca8' name='s' filepath='mm/slub.c' line='2954' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfpflags' filepath='mm/slub.c' line='2954' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
-      <function-decl name='kmem_cache_alloc_trace' mangled-name='kmem_cache_alloc_trace' filepath='mm/slub.c' line='2964' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kmem_cache_alloc_trace'>
-        <parameter type-id='f3b4aca8' name='s' filepath='mm/slub.c' line='2964' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfpflags' filepath='mm/slub.c' line='2964' column='1'/>
-        <parameter type-id='b59d7dce' name='size' filepath='mm/slub.c' line='2964' column='1'/>
+      <function-decl name='kmem_cache_alloc_trace' mangled-name='kmem_cache_alloc_trace' filepath='mm/slub.c' line='2966' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kmem_cache_alloc_trace'>
+        <parameter type-id='f3b4aca8' name='s' filepath='mm/slub.c' line='2966' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfpflags' filepath='mm/slub.c' line='2966' column='1'/>
+        <parameter type-id='b59d7dce' name='size' filepath='mm/slub.c' line='2966' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
       <function-decl name='kmem_cache_create' mangled-name='kmem_cache_create' filepath='mm/slab_common.c' line='418' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kmem_cache_create'>
@@ -129169,9 +129169,9 @@
         <parameter type-id='f3b4aca8' name='s' filepath='mm/slab_common.c' line='497' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='kmem_cache_free' mangled-name='kmem_cache_free' filepath='mm/slub.c' line='3206' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kmem_cache_free'>
-        <parameter type-id='f3b4aca8' name='s' filepath='mm/slub.c' line='3206' column='1'/>
-        <parameter type-id='eaa32e2f' name='x' filepath='mm/slub.c' line='3206' column='1'/>
+      <function-decl name='kmem_cache_free' mangled-name='kmem_cache_free' filepath='mm/slub.c' line='3208' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kmem_cache_free'>
+        <parameter type-id='f3b4aca8' name='s' filepath='mm/slub.c' line='3208' column='1'/>
+        <parameter type-id='eaa32e2f' name='x' filepath='mm/slub.c' line='3208' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='kmemdup' mangled-name='kmemdup' filepath='mm/util.c' line='127' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kmemdup'>
@@ -130775,16 +130775,16 @@
         <parameter type-id='e0ea832a' name='lock' filepath='kernel/locking/mutex.c' line='294' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='mutex_lock_interruptible' mangled-name='mutex_lock_interruptible' filepath='kernel/locking/mutex.c' line='1321' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mutex_lock_interruptible'>
-        <parameter type-id='e0ea832a' name='lock' filepath='kernel/locking/mutex.c' line='1321' column='1'/>
+      <function-decl name='mutex_lock_interruptible' mangled-name='mutex_lock_interruptible' filepath='kernel/locking/mutex.c' line='1322' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mutex_lock_interruptible'>
+        <parameter type-id='e0ea832a' name='lock' filepath='kernel/locking/mutex.c' line='1322' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='mutex_lock_killable' mangled-name='mutex_lock_killable' filepath='kernel/locking/mutex.c' line='1345' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mutex_lock_killable'>
-        <parameter type-id='e0ea832a' name='lock' filepath='kernel/locking/mutex.c' line='1345' column='1'/>
+      <function-decl name='mutex_lock_killable' mangled-name='mutex_lock_killable' filepath='kernel/locking/mutex.c' line='1346' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mutex_lock_killable'>
+        <parameter type-id='e0ea832a' name='lock' filepath='kernel/locking/mutex.c' line='1346' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='mutex_trylock' mangled-name='mutex_trylock' filepath='kernel/locking/mutex.c' line='1425' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mutex_trylock'>
-        <parameter type-id='e0ea832a' name='lock' filepath='kernel/locking/mutex.c' line='1425' column='1'/>
+      <function-decl name='mutex_trylock' mangled-name='mutex_trylock' filepath='kernel/locking/mutex.c' line='1426' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mutex_trylock'>
+        <parameter type-id='e0ea832a' name='lock' filepath='kernel/locking/mutex.c' line='1426' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='mutex_trylock_recursive' mangled-name='mutex_trylock_recursive' filepath='kernel/locking/mutex.c' line='92' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mutex_trylock_recursive'>
@@ -132283,8 +132283,8 @@
         <parameter type-id='85196e3f' name='dev' filepath='drivers/pci/pci-driver.c' line='1491' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='pci_device_group' mangled-name='pci_device_group' filepath='drivers/iommu/iommu.c' line='1389' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pci_device_group'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1389' column='1'/>
+      <function-decl name='pci_device_group' mangled-name='pci_device_group' filepath='drivers/iommu/iommu.c' line='1392' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pci_device_group'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='1392' column='1'/>
         <return type-id='0b19fc54'/>
       </function-decl>
       <function-decl name='pci_device_is_present' mangled-name='pci_device_is_present' filepath='drivers/pci/pci.c' line='6149' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pci_device_is_present'>
@@ -133927,36 +133927,36 @@
         <parameter type-id='eaa32e2f' name='data' filepath='fs/proc/generic.c' line='651' column='1'/>
         <return type-id='d077e928'/>
       </function-decl>
-      <function-decl name='proc_dointvec' mangled-name='proc_dointvec' filepath='kernel/sysctl.c' line='803' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_dointvec'>
-        <parameter type-id='631dc3c1' name='table' filepath='kernel/sysctl.c' line='803' column='1'/>
-        <parameter type-id='95e97e5e' name='write' filepath='kernel/sysctl.c' line='803' column='1'/>
-        <parameter type-id='eaa32e2f' name='buffer' filepath='kernel/sysctl.c' line='803' column='1'/>
-        <parameter type-id='78c01427' name='lenp' filepath='kernel/sysctl.c' line='804' column='1'/>
-        <parameter type-id='b53e8dbb' name='ppos' filepath='kernel/sysctl.c' line='804' column='1'/>
+      <function-decl name='proc_dointvec' mangled-name='proc_dointvec' filepath='kernel/sysctl.c' line='830' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_dointvec'>
+        <parameter type-id='631dc3c1' name='table' filepath='kernel/sysctl.c' line='830' column='1'/>
+        <parameter type-id='95e97e5e' name='write' filepath='kernel/sysctl.c' line='830' column='1'/>
+        <parameter type-id='eaa32e2f' name='buffer' filepath='kernel/sysctl.c' line='830' column='1'/>
+        <parameter type-id='78c01427' name='lenp' filepath='kernel/sysctl.c' line='831' column='1'/>
+        <parameter type-id='b53e8dbb' name='ppos' filepath='kernel/sysctl.c' line='831' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='proc_dointvec_minmax' mangled-name='proc_dointvec_minmax' filepath='kernel/sysctl.c' line='960' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_dointvec_minmax'>
-        <parameter type-id='631dc3c1' name='table' filepath='kernel/sysctl.c' line='960' column='1'/>
-        <parameter type-id='95e97e5e' name='write' filepath='kernel/sysctl.c' line='960' column='1'/>
-        <parameter type-id='eaa32e2f' name='buffer' filepath='kernel/sysctl.c' line='961' column='1'/>
-        <parameter type-id='78c01427' name='lenp' filepath='kernel/sysctl.c' line='961' column='1'/>
-        <parameter type-id='b53e8dbb' name='ppos' filepath='kernel/sysctl.c' line='961' column='1'/>
+      <function-decl name='proc_dointvec_minmax' mangled-name='proc_dointvec_minmax' filepath='kernel/sysctl.c' line='987' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_dointvec_minmax'>
+        <parameter type-id='631dc3c1' name='table' filepath='kernel/sysctl.c' line='987' column='1'/>
+        <parameter type-id='95e97e5e' name='write' filepath='kernel/sysctl.c' line='987' column='1'/>
+        <parameter type-id='eaa32e2f' name='buffer' filepath='kernel/sysctl.c' line='988' column='1'/>
+        <parameter type-id='78c01427' name='lenp' filepath='kernel/sysctl.c' line='988' column='1'/>
+        <parameter type-id='b53e8dbb' name='ppos' filepath='kernel/sysctl.c' line='988' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='proc_dostring' mangled-name='proc_dostring' filepath='kernel/sysctl.c' line='360' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_dostring'>
-        <parameter type-id='631dc3c1' name='table' filepath='kernel/sysctl.c' line='360' column='1'/>
-        <parameter type-id='95e97e5e' name='write' filepath='kernel/sysctl.c' line='360' column='1'/>
-        <parameter type-id='eaa32e2f' name='buffer' filepath='kernel/sysctl.c' line='361' column='1'/>
-        <parameter type-id='78c01427' name='lenp' filepath='kernel/sysctl.c' line='361' column='1'/>
-        <parameter type-id='b53e8dbb' name='ppos' filepath='kernel/sysctl.c' line='361' column='1'/>
+      <function-decl name='proc_dostring' mangled-name='proc_dostring' filepath='kernel/sysctl.c' line='387' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_dostring'>
+        <parameter type-id='631dc3c1' name='table' filepath='kernel/sysctl.c' line='387' column='1'/>
+        <parameter type-id='95e97e5e' name='write' filepath='kernel/sysctl.c' line='387' column='1'/>
+        <parameter type-id='eaa32e2f' name='buffer' filepath='kernel/sysctl.c' line='388' column='1'/>
+        <parameter type-id='78c01427' name='lenp' filepath='kernel/sysctl.c' line='388' column='1'/>
+        <parameter type-id='b53e8dbb' name='ppos' filepath='kernel/sysctl.c' line='388' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='proc_douintvec_minmax' mangled-name='proc_douintvec_minmax' filepath='kernel/sysctl.c' line='1029' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_douintvec_minmax'>
-        <parameter type-id='631dc3c1' name='table' filepath='kernel/sysctl.c' line='1029' column='1'/>
-        <parameter type-id='95e97e5e' name='write' filepath='kernel/sysctl.c' line='1029' column='1'/>
-        <parameter type-id='eaa32e2f' name='buffer' filepath='kernel/sysctl.c' line='1030' column='1'/>
-        <parameter type-id='78c01427' name='lenp' filepath='kernel/sysctl.c' line='1030' column='1'/>
-        <parameter type-id='b53e8dbb' name='ppos' filepath='kernel/sysctl.c' line='1030' column='1'/>
+      <function-decl name='proc_douintvec_minmax' mangled-name='proc_douintvec_minmax' filepath='kernel/sysctl.c' line='1056' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_douintvec_minmax'>
+        <parameter type-id='631dc3c1' name='table' filepath='kernel/sysctl.c' line='1056' column='1'/>
+        <parameter type-id='95e97e5e' name='write' filepath='kernel/sysctl.c' line='1056' column='1'/>
+        <parameter type-id='eaa32e2f' name='buffer' filepath='kernel/sysctl.c' line='1057' column='1'/>
+        <parameter type-id='78c01427' name='lenp' filepath='kernel/sysctl.c' line='1057' column='1'/>
+        <parameter type-id='b53e8dbb' name='ppos' filepath='kernel/sysctl.c' line='1057' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='proc_mkdir' mangled-name='proc_mkdir' filepath='fs/proc/generic.c' line='520' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_mkdir'>
@@ -134089,8 +134089,8 @@
         <parameter type-id='33c599da' name='disk' filepath='block/genhd.c' line='1812' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='put_iova_domain' mangled-name='put_iova_domain' filepath='drivers/iommu/iova.c' line='693' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='put_iova_domain'>
-        <parameter type-id='0c2c419d' name='iovad' filepath='drivers/iommu/iova.c' line='693' column='1'/>
+      <function-decl name='put_iova_domain' mangled-name='put_iova_domain' filepath='drivers/iommu/iova.c' line='694' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='put_iova_domain'>
+        <parameter type-id='0c2c419d' name='iovad' filepath='drivers/iommu/iova.c' line='694' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='put_pid' mangled-name='put_pid' filepath='kernel/pid.c' line='105' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='put_pid'>
@@ -135029,11 +135029,11 @@
         <parameter type-id='db9d03e3' name='wq_entry' filepath='kernel/sched/wait.c' line='41' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='report_iommu_fault' mangled-name='report_iommu_fault' filepath='drivers/iommu/iommu.c' line='2710' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='report_iommu_fault'>
-        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2710' column='1'/>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2710' column='1'/>
-        <parameter type-id='7359adad' name='iova' filepath='drivers/iommu/iommu.c' line='2711' column='1'/>
-        <parameter type-id='95e97e5e' name='flags' filepath='drivers/iommu/iommu.c' line='2711' column='1'/>
+      <function-decl name='report_iommu_fault' mangled-name='report_iommu_fault' filepath='drivers/iommu/iommu.c' line='2713' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='report_iommu_fault'>
+        <parameter type-id='bff05edb' name='domain' filepath='drivers/iommu/iommu.c' line='2713' column='1'/>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iommu/iommu.c' line='2713' column='1'/>
+        <parameter type-id='7359adad' name='iova' filepath='drivers/iommu/iommu.c' line='2714' column='1'/>
+        <parameter type-id='95e97e5e' name='flags' filepath='drivers/iommu/iommu.c' line='2714' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='request_any_context_irq' mangled-name='request_any_context_irq' filepath='kernel/irq/manage.c' line='2110' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='request_any_context_irq'>
@@ -135213,59 +135213,59 @@
         <parameter type-id='f0981eeb' name='hash' filepath='lib/rhashtable.c' line='1215' column='1'/>
         <return type-id='33f7eff4'/>
       </function-decl>
-      <function-decl name='rndis_deregister' mangled-name='rndis_deregister' filepath='drivers/usb/gadget/function/rndis.c' line='928' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_deregister'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='928' column='1'/>
+      <function-decl name='rndis_deregister' mangled-name='rndis_deregister' filepath='drivers/usb/gadget/function/rndis.c' line='931' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_deregister'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='931' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='rndis_free_response' mangled-name='rndis_free_response' filepath='drivers/usb/gadget/function/rndis.c' line='1011' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_free_response'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='1011' column='1'/>
-        <parameter type-id='8bff8096' name='buf' filepath='drivers/usb/gadget/function/rndis.c' line='1011' column='1'/>
+      <function-decl name='rndis_free_response' mangled-name='rndis_free_response' filepath='drivers/usb/gadget/function/rndis.c' line='1014' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_free_response'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='1014' column='1'/>
+        <parameter type-id='8bff8096' name='buf' filepath='drivers/usb/gadget/function/rndis.c' line='1014' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='rndis_get_next_response' mangled-name='rndis_get_next_response' filepath='drivers/usb/gadget/function/rndis.c' line='1024' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_get_next_response'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='1024' column='1'/>
-        <parameter type-id='f9409001' name='length' filepath='drivers/usb/gadget/function/rndis.c' line='1024' column='1'/>
+      <function-decl name='rndis_get_next_response' mangled-name='rndis_get_next_response' filepath='drivers/usb/gadget/function/rndis.c' line='1027' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_get_next_response'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='1027' column='1'/>
+        <parameter type-id='f9409001' name='length' filepath='drivers/usb/gadget/function/rndis.c' line='1027' column='1'/>
         <return type-id='8bff8096'/>
       </function-decl>
-      <function-decl name='rndis_msg_parser' mangled-name='rndis_msg_parser' filepath='drivers/usb/gadget/function/rndis.c' line='787' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_msg_parser'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='787' column='1'/>
-        <parameter type-id='8bff8096' name='buf' filepath='drivers/usb/gadget/function/rndis.c' line='787' column='1'/>
+      <function-decl name='rndis_msg_parser' mangled-name='rndis_msg_parser' filepath='drivers/usb/gadget/function/rndis.c' line='790' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_msg_parser'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='790' column='1'/>
+        <parameter type-id='8bff8096' name='buf' filepath='drivers/usb/gadget/function/rndis.c' line='790' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='rndis_register' mangled-name='rndis_register' filepath='drivers/usb/gadget/function/rndis.c' line='876' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_register'>
-        <parameter type-id='b7f9d8e6' name='resp_avail' filepath='drivers/usb/gadget/function/rndis.c' line='876' column='1'/>
-        <parameter type-id='eaa32e2f' name='v' filepath='drivers/usb/gadget/function/rndis.c' line='876' column='1'/>
+      <function-decl name='rndis_register' mangled-name='rndis_register' filepath='drivers/usb/gadget/function/rndis.c' line='879' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_register'>
+        <parameter type-id='b7f9d8e6' name='resp_avail' filepath='drivers/usb/gadget/function/rndis.c' line='879' column='1'/>
+        <parameter type-id='eaa32e2f' name='v' filepath='drivers/usb/gadget/function/rndis.c' line='879' column='1'/>
         <return type-id='7c184d88'/>
       </function-decl>
-      <function-decl name='rndis_set_host_mac' mangled-name='rndis_set_host_mac' filepath='drivers/usb/gadget/function/rndis.c' line='778' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_set_host_mac'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='778' column='1'/>
-        <parameter type-id='bbaf3419' name='addr' filepath='drivers/usb/gadget/function/rndis.c' line='778' column='1'/>
+      <function-decl name='rndis_set_host_mac' mangled-name='rndis_set_host_mac' filepath='drivers/usb/gadget/function/rndis.c' line='781' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_set_host_mac'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='781' column='1'/>
+        <parameter type-id='bbaf3419' name='addr' filepath='drivers/usb/gadget/function/rndis.c' line='781' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='rndis_set_param_dev' mangled-name='rndis_set_param_dev' filepath='drivers/usb/gadget/function/rndis.c' line='952' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_set_param_dev'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='952' column='1'/>
-        <parameter type-id='68a2d05b' name='dev' filepath='drivers/usb/gadget/function/rndis.c' line='952' column='1'/>
-        <parameter type-id='26d4d46f' name='cdc_filter' filepath='drivers/usb/gadget/function/rndis.c' line='953' column='1'/>
+      <function-decl name='rndis_set_param_dev' mangled-name='rndis_set_param_dev' filepath='drivers/usb/gadget/function/rndis.c' line='955' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_set_param_dev'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='955' column='1'/>
+        <parameter type-id='68a2d05b' name='dev' filepath='drivers/usb/gadget/function/rndis.c' line='955' column='1'/>
+        <parameter type-id='26d4d46f' name='cdc_filter' filepath='drivers/usb/gadget/function/rndis.c' line='956' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='rndis_set_param_medium' mangled-name='rndis_set_param_medium' filepath='drivers/usb/gadget/function/rndis.c' line='983' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_set_param_medium'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='983' column='1'/>
-        <parameter type-id='19c2251e' name='medium' filepath='drivers/usb/gadget/function/rndis.c' line='983' column='1'/>
-        <parameter type-id='19c2251e' name='speed' filepath='drivers/usb/gadget/function/rndis.c' line='983' column='1'/>
+      <function-decl name='rndis_set_param_medium' mangled-name='rndis_set_param_medium' filepath='drivers/usb/gadget/function/rndis.c' line='986' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_set_param_medium'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='986' column='1'/>
+        <parameter type-id='19c2251e' name='medium' filepath='drivers/usb/gadget/function/rndis.c' line='986' column='1'/>
+        <parameter type-id='19c2251e' name='speed' filepath='drivers/usb/gadget/function/rndis.c' line='986' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='rndis_set_param_vendor' mangled-name='rndis_set_param_vendor' filepath='drivers/usb/gadget/function/rndis.c' line='968' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_set_param_vendor'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='968' column='1'/>
-        <parameter type-id='19c2251e' name='vendorID' filepath='drivers/usb/gadget/function/rndis.c' line='968' column='1'/>
-        <parameter type-id='80f4b756' name='vendorDescr' filepath='drivers/usb/gadget/function/rndis.c' line='969' column='1'/>
+      <function-decl name='rndis_set_param_vendor' mangled-name='rndis_set_param_vendor' filepath='drivers/usb/gadget/function/rndis.c' line='971' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_set_param_vendor'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='971' column='1'/>
+        <parameter type-id='19c2251e' name='vendorID' filepath='drivers/usb/gadget/function/rndis.c' line='971' column='1'/>
+        <parameter type-id='80f4b756' name='vendorDescr' filepath='drivers/usb/gadget/function/rndis.c' line='972' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='rndis_signal_connect' mangled-name='rndis_signal_connect' filepath='drivers/usb/gadget/function/rndis.c' line='749' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_signal_connect'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='749' column='1'/>
+      <function-decl name='rndis_signal_connect' mangled-name='rndis_signal_connect' filepath='drivers/usb/gadget/function/rndis.c' line='752' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_signal_connect'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='752' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='rndis_uninit' mangled-name='rndis_uninit' filepath='drivers/usb/gadget/function/rndis.c' line='763' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_uninit'>
-        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='763' column='1'/>
+      <function-decl name='rndis_uninit' mangled-name='rndis_uninit' filepath='drivers/usb/gadget/function/rndis.c' line='766' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rndis_uninit'>
+        <parameter type-id='7c184d88' name='params' filepath='drivers/usb/gadget/function/rndis.c' line='766' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <var-decl name='root_task_group' type-id='2d863538' mangled-name='root_task_group' visibility='default' filepath='kernel/sched/core.c' line='7416' column='1' elf-symbol-id='root_task_group'/>
@@ -140418,12 +140418,12 @@
         <parameter type-id='a965a5b5' name='sem' filepath='kernel/locking/semaphore.c' line='178' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='up_read' mangled-name='up_read' filepath='kernel/locking/rwsem.c' line='1607' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='up_read'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1607' column='1'/>
+      <function-decl name='up_read' mangled-name='up_read' filepath='kernel/locking/rwsem.c' line='1612' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='up_read'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1612' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='up_write' mangled-name='up_write' filepath='kernel/locking/rwsem.c' line='1617' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='up_write'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1617' column='1'/>
+      <function-decl name='up_write' mangled-name='up_write' filepath='kernel/locking/rwsem.c' line='1622' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='up_write'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1622' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='update_devfreq' mangled-name='update_devfreq' filepath='drivers/devfreq/devfreq.c' line='394' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='update_devfreq'>
@@ -140556,16 +140556,16 @@
         <parameter type-id='25e60cb2' name='udev' filepath='drivers/usb/core/generic.c' line='56' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_composite_probe' mangled-name='usb_composite_probe' filepath='drivers/usb/gadget/composite.c' line='2473' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_composite_probe'>
-        <parameter type-id='c64e62ba' name='driver' filepath='drivers/usb/gadget/composite.c' line='2473' column='1'/>
+      <function-decl name='usb_composite_probe' mangled-name='usb_composite_probe' filepath='drivers/usb/gadget/composite.c' line='2476' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_composite_probe'>
+        <parameter type-id='c64e62ba' name='driver' filepath='drivers/usb/gadget/composite.c' line='2476' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_composite_setup_continue' mangled-name='usb_composite_setup_continue' filepath='drivers/usb/gadget/composite.c' line='2517' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_composite_setup_continue'>
-        <parameter type-id='2a895c01' name='cdev' filepath='drivers/usb/gadget/composite.c' line='2517' column='1'/>
+      <function-decl name='usb_composite_setup_continue' mangled-name='usb_composite_setup_continue' filepath='drivers/usb/gadget/composite.c' line='2520' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_composite_setup_continue'>
+        <parameter type-id='2a895c01' name='cdev' filepath='drivers/usb/gadget/composite.c' line='2520' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_composite_unregister' mangled-name='usb_composite_unregister' filepath='drivers/usb/gadget/composite.c' line='2501' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_composite_unregister'>
-        <parameter type-id='c64e62ba' name='driver' filepath='drivers/usb/gadget/composite.c' line='2501' column='1'/>
+      <function-decl name='usb_composite_unregister' mangled-name='usb_composite_unregister' filepath='drivers/usb/gadget/composite.c' line='2504' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_composite_unregister'>
+        <parameter type-id='c64e62ba' name='driver' filepath='drivers/usb/gadget/composite.c' line='2504' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='usb_control_msg' mangled-name='usb_control_msg' filepath='drivers/usb/core/message.c' line='136' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_control_msg'>
@@ -142846,14 +142846,14 @@
         <parameter type-id='f23e2572' name='task' filepath='kernel/workqueue.c' line='4864' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='ww_mutex_lock' mangled-name='ww_mutex_lock' filepath='kernel/locking/mutex.c' line='1443' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ww_mutex_lock'>
-        <parameter type-id='7533ba6f' name='lock' filepath='kernel/locking/mutex.c' line='1443' column='1'/>
-        <parameter type-id='c1d02a64' name='ctx' filepath='kernel/locking/mutex.c' line='1443' column='1'/>
+      <function-decl name='ww_mutex_lock' mangled-name='ww_mutex_lock' filepath='kernel/locking/mutex.c' line='1444' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ww_mutex_lock'>
+        <parameter type-id='7533ba6f' name='lock' filepath='kernel/locking/mutex.c' line='1444' column='1'/>
+        <parameter type-id='c1d02a64' name='ctx' filepath='kernel/locking/mutex.c' line='1444' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='ww_mutex_lock_interruptible' mangled-name='ww_mutex_lock_interruptible' filepath='kernel/locking/mutex.c' line='1458' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ww_mutex_lock_interruptible'>
-        <parameter type-id='7533ba6f' name='lock' filepath='kernel/locking/mutex.c' line='1458' column='1'/>
-        <parameter type-id='c1d02a64' name='ctx' filepath='kernel/locking/mutex.c' line='1458' column='1'/>
+      <function-decl name='ww_mutex_lock_interruptible' mangled-name='ww_mutex_lock_interruptible' filepath='kernel/locking/mutex.c' line='1459' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ww_mutex_lock_interruptible'>
+        <parameter type-id='7533ba6f' name='lock' filepath='kernel/locking/mutex.c' line='1459' column='1'/>
+        <parameter type-id='c1d02a64' name='ctx' filepath='kernel/locking/mutex.c' line='1459' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='ww_mutex_unlock' mangled-name='ww_mutex_unlock' filepath='kernel/locking/mutex.c' line='770' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ww_mutex_unlock'>
