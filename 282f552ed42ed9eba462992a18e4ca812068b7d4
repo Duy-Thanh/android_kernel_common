@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb301039_8b7b6a55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-05-09T17:16:06Z",
+      "side": 1,
+      "message": "qq: We are internally backporting this to older branches it seems. Should have been sent to the netdev/net.git tree and CC\u0027ed stable instead with a Fixes: tag?",
+      "revId": "282f552ed42ed9eba462992a18e4ca812068b7d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
