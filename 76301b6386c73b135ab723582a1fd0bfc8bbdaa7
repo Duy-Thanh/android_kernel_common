@@ -16,6 +16,24 @@
       "message": "dmabuf stats are an upstream feature, so I\u0027m pretty sure this fix should go upstream not as ANDROID:\n\nHaving said that, how soon do you need this? There is a pending change to move this setup out of the dma_buf_export function to a work function which also fixes this problem, but it\u0027s pipelined for review and not yet on the mailing list.",
       "revId": "76301b6386c73b135ab723582a1fd0bfc8bbdaa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df387e39_d4cff34f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2022-05-09T19:32:21Z",
+      "side": 1,
+      "message": "Oops.. I had failed to see that this is merged in upstream. This is reported by the  customer hence would say pretty urgent. \n\nSue, will take this change through the upstream path.",
+      "parentUuid": "a96955f2_65a12e76",
+      "revId": "76301b6386c73b135ab723582a1fd0bfc8bbdaa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
