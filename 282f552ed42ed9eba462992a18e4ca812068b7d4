@@ -16,6 +16,41 @@
       "message": "qq: We are internally backporting this to older branches it seems. Should have been sent to the netdev/net.git tree and CC\u0027ed stable instead with a Fixes: tag?",
       "revId": "282f552ed42ed9eba462992a18e4ca812068b7d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "293102eb_29753906",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2022-05-09T17:49:29Z",
+      "side": 1,
+      "message": "It is in the netdev/net.git tree, that\u0027s where it is being cherrypicked from.\n\nAs for CC\u0027ing stable - perhaps.\nAlthough I\u0027m not sure - networking seems to do things differently in this regard, also not sure if Lina Wang was aware of that or not.\n\nI would agree it should probably be in stable.\n\nAs for Fixes tag... not clear what commit we\u0027d need to claim this fixes.\nAFAICT it never worked right... but I think the bug wasn\u0027t triggerable in \u003c\u003d4.19 kernels...",
+      "parentUuid": "bb301039_8b7b6a55",
+      "revId": "282f552ed42ed9eba462992a18e4ca812068b7d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94463b97_9535dfc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2022-05-09T17:49:29Z",
+      "side": 1,
+      "message": "I\u0027m ",
+      "revId": "282f552ed42ed9eba462992a18e4ca812068b7d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
