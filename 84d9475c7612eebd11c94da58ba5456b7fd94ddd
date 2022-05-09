@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0b5cb60_f7a261cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2022-05-09T10:58:21Z",
+      "side": 1,
+      "message": "What\u0027s the proper annotations for a clean cherrypick of https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net.git/commit/?id\u003dcf3ab8d4a797960b4be20565abb3bcd227b18a68",
+      "revId": "84d9475c7612eebd11c94da58ba5456b7fd94ddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
