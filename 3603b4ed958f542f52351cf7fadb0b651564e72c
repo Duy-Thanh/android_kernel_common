@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5501f47_6f61a17f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-09T22:10:26Z",
+      "side": 1,
+      "message": "Please rebase (couldn\u0027t rebase due to conflicts in abi_gki_aarch64_unisoc)",
+      "revId": "3603b4ed958f542f52351cf7fadb0b651564e72c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
