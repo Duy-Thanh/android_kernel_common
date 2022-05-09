@@ -51,6 +51,24 @@
       "message": "https://lore.kernel.org/all/1652125797-2043-1-git-send-email-quic_charante@quicinc.com/  -- Posted the patch to upstream. Thanks.",
       "revId": "76301b6386c73b135ab723582a1fd0bfc8bbdaa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a3b39c3_88d0f0f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-05-09T21:56:35Z",
+      "side": 1,
+      "message": "NP tested it and acked it upstream. Thanks.",
+      "parentUuid": "c446f1fb_74022a31",
+      "revId": "76301b6386c73b135ab723582a1fd0bfc8bbdaa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
