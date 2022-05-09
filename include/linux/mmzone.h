@@ -74,7 +74,18 @@ extern const char * const migratetype_names[MIGRATE_TYPES];
 
 #ifdef CONFIG_CMA
 #  define is_migrate_cma(migratetype) unlikely((migratetype) == MIGRATE_CMA)
-#  define is_migrate_cma_page(_page) (get_pageblock_migratetype(_page) == MIGRATE_CMA)
+#  define is_migrate_cma_page(_page) ({						\
+	/*									\
+	 * Defend against future compiler LTO features, or code refactoring	\
+	 * that inlines the above function, by forcing a single read. Because,	\
+	 * this routine races with set_pageblock_migratetype(), and we want to	\
+	 * avoid reading zero, when actually one or the other flags was set.	\
+	 */									\
+	int __mt = get_pageblock_migratetype(_page);				\
+	int mt = __READ_ONCE(__mt);						\
+	bool ret = mt & (MIGRATE_ISOLATE | MIGRATE_CMA);			\
+	ret;									\
+})
 #  define get_cma_migrate_type() MIGRATE_CMA
 #else
 #  define is_migrate_cma(migratetype) false
