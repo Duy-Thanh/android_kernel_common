@@ -51,6 +51,24 @@
       "message": "I\u0027m ",
       "revId": "282f552ed42ed9eba462992a18e4ca812068b7d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c214f8_7f454213",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-05-09T18:31:56Z",
+      "side": 1,
+      "message": "Got it. I was going by https://docs.kernel.org/process/maintainer-netdev.html#are-there-special-rules-regarding-stable-submissions-on-netdev, but I suppose Dave M will take care of the stable trees. Thanks",
+      "parentUuid": "293102eb_29753906",
+      "revId": "282f552ed42ed9eba462992a18e4ca812068b7d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
