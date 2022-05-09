@@ -69,6 +69,24 @@
       "parentUuid": "293102eb_29753906",
       "revId": "282f552ed42ed9eba462992a18e4ca812068b7d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "989cb058_c2da1b25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2022-05-09T18:35:26Z",
+      "side": 1,
+      "message": "oh I wasn\u0027t aware that that changed...",
+      "parentUuid": "c9c214f8_7f454213",
+      "revId": "282f552ed42ed9eba462992a18e4ca812068b7d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
