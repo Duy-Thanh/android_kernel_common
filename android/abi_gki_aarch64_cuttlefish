@@ -315,6 +315,7 @@
   kernel_read
   kernel_write
   kern_path
+  kill_anon_super
   kobject_create_and_add
   kobject_put
   lockref_get
