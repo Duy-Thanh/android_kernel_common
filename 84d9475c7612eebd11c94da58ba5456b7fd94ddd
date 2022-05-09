@@ -16,6 +16,24 @@
       "message": "What\u0027s the proper annotations for a clean cherrypick of https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net.git/commit/?id\u003dcf3ab8d4a797960b4be20565abb3bcd227b18a68",
       "revId": "84d9475c7612eebd11c94da58ba5456b7fd94ddd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caba0e6b_85439c98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-09T15:17:48Z",
+      "side": 1,
+      "message": "If you are citing a maintainer tree, then it should be \"FROMGIT\". If you are citing Linus\u0027 tree, then UPSTREAM. It looks like you are citing a maintainer tree (or at least a tree other than Linus\u0027)",
+      "parentUuid": "d0b5cb60_f7a261cf",
+      "revId": "84d9475c7612eebd11c94da58ba5456b7fd94ddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
