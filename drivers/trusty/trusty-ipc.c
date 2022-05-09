@@ -1558,8 +1558,10 @@ static ssize_t tipc_write_iter(struct kiocb *iocb, struct iov_iter *iter)
 		return PTR_ERR(txbuf);
 
 	len = txbuf_write_iter(txbuf, iter);
-	if (len < 0)
+	if (len < 0) {
+		ret = len;
 		goto err_out;
+	}
 
 	/* queue message */
 	ret = tipc_chan_queue_msg(dn->chan, txbuf);
