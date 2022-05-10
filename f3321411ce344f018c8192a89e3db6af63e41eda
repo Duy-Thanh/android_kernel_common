@@ -69,6 +69,24 @@
       "message": "Voting -2 because I am convinced that the syzbot analysis results are wrong.",
       "revId": "f3321411ce344f018c8192a89e3db6af63e41eda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe81c16_81a2a19f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2022-05-10T16:27:25Z",
+      "side": 1,
+      "message": "Right. I think we really need to get to the crux of exactly what the problem is.\n\nWhat is it about your patch that makes \u0027name\u0027 NULL? The link might be tenuous.\n\nAnd why does this only repro on android12-5.10?\n\nWould putting NULL protection in be a better (upstreamable) solution?\n\nTo answer those questions, I think we should do some more digging.",
+      "parentUuid": "32356c33_5a3c4401",
+      "revId": "f3321411ce344f018c8192a89e3db6af63e41eda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
