@@ -21,8 +21,8 @@
 #include <linux/capability.h>
 #include <linux/random.h>
 
-#include <include/uapi/linux/fuse.h>
-#include <include/uapi/linux/bpf.h>
+#include <uapi/linux/fuse.h>
+#include <uapi/linux/bpf.h>
 
 static const char *ft_src = "ft-src";
 static const char *ft_dst = "ft-dst";

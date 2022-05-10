@@ -17,8 +17,8 @@
 
 #include <linux/unistd.h>
 
-#include <include/uapi/linux/fuse.h>
-#include <include/uapi/linux/bpf.h>
+#include <uapi/linux/fuse.h>
+#include <uapi/linux/bpf.h>
 
 bool user_messages;
 bool kernel_messages;
