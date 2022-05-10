@@ -51,6 +51,41 @@
       "parentUuid": "75c82f86_330b62e3",
       "revId": "fdb5a629b65325da7407bc6786ad55e45f2b8b15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11bb08e0_899a67ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1591476
+      },
+      "writtenOn": "2022-05-10T17:36:11Z",
+      "side": 1,
+      "message": "Can close this change, as it\u0027s not required anymore.",
+      "revId": "fdb5a629b65325da7407bc6786ad55e45f2b8b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c4863b3_a8d2faaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1591476
+      },
+      "writtenOn": "2022-05-10T17:36:11Z",
+      "side": 1,
+      "message": "sure, i have explained the context and it seems the client of i3c will pursue without this exported symbol. Hence I am losing this change. Thanks a lot for your time and suggestions.",
+      "parentUuid": "f0208bf9_1061b56e",
+      "revId": "fdb5a629b65325da7407bc6786ad55e45f2b8b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
