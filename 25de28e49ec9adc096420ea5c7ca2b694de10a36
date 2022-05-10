@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f7d806d_20d5d82a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2022-05-10T21:21:11Z",
+      "side": 1,
+      "message": "Addressed in aosp/2094753.",
+      "parentUuid": "7b8c24e1_b9a421a8",
+      "revId": "25de28e49ec9adc096420ea5c7ca2b694de10a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26d2da26_f2233e73",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "Thanks, I\u0027ll change to -EPERM.",
       "parentUuid": "26d2da26_f2233e73",
+      "range": {
+        "startLine": 581,
+        "startChar": 10,
+        "endLine": 581,
+        "endChar": 11
+      },
+      "revId": "25de28e49ec9adc096420ea5c7ca2b694de10a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b557cb1f_93996c19",
+        "filename": "lib/kunit/test.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2022-05-10T21:21:11Z",
+      "side": 1,
+      "message": "Added in aosp/2094752.",
+      "parentUuid": "4744a16d_f93a6b74",
       "range": {
         "startLine": 581,
         "startChar": 10,
