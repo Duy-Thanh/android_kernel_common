@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9afb306c_26029f77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869925
+      },
+      "writtenOn": "2022-05-10T21:19:24Z",
+      "side": 1,
+      "message": "remote:   https://android-review.googlesource.com/c/kernel/common/+/2094965 UPSTREAM: printk: ringbuffer: Improve prb_next_seq() performance [NEW]\nremote:",
+      "parentUuid": "e412bc45_c57679be",
+      "revId": "36c82b8c27b4c075dae843321169f0f8dcb1a090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2c2b593_cb64c950",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2022-05-10T20:16:50Z",
       "side": 1,
       "message": "This should be changed to the upstream commit:\n`(cherry picked from commit f244b4dc53e520d4570b2610436aba0593ce6f55)`",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 79
+      },
+      "revId": "36c82b8c27b4c075dae843321169f0f8dcb1a090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0df8beb_14efbf66",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1869925
+      },
+      "writtenOn": "2022-05-10T21:19:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2c2b593_cb64c950",
       "range": {
         "startLine": 35,
         "startChar": 0,
