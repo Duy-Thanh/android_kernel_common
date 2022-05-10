@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b8c24e1_b9a421a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2022-05-10T15:20:26Z",
+      "side": 1,
+      "message": "\u003e Do we have to support it for forever?\nAs it stands now, unfortunately yes. Our use case of wanting the same build for testing and production is not typical. Other KUnit users use CONFIG_KUNIT as the exclusive means to enable/disable it. I do however plan on submitting an upstream patch similar to these changes but more configurable (option to not run built-in and option to require a kernel arg), which if approved would negate the need for us to carry these changes along.\n\n\u003e Where is this new user/kernel api documented?\nI\u0027ll add some.",
+      "parentUuid": "6ce459af_83be02bf",
+      "revId": "25de28e49ec9adc096420ea5c7ca2b694de10a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26d2da26_f2233e73",
         "filename": "lib/kunit/test.c",
         "patchSetId": 5
@@ -31,6 +49,30 @@
       "writtenOn": "2022-05-10T08:46:54Z",
       "side": 1,
       "message": "use ERROR values, not random integers please.",
+      "range": {
+        "startLine": 581,
+        "startChar": 10,
+        "endLine": 581,
+        "endChar": 11
+      },
+      "revId": "25de28e49ec9adc096420ea5c7ca2b694de10a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4744a16d_f93a6b74",
+        "filename": "lib/kunit/test.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2022-05-10T15:20:26Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ll change to -EPERM.",
+      "parentUuid": "26d2da26_f2233e73",
       "range": {
         "startLine": 581,
         "startChar": 10,
