@@ -1628,6 +1628,38 @@ static void yield_task_rt(struct rq *rq)
 #ifdef CONFIG_SMP
 static int find_lowest_rq(struct task_struct *task);
 
+#ifdef CONFIG_RT_SOFTINT_OPTIMIZATION
+/*
+ * Return whether the task on the given cpu is currently non-preemptible
+ * while handling a potentially long softint, or if the task is likely
+ * to block preemptions soon because it is a ksoftirq thread that is
+ * handling slow softints.
+ */
+bool
+task_may_preempt(struct task_struct *task, int cpu)
+{
+	__u32 softirqs = per_cpu(active_softirqs, cpu) |
+			local_softirq_pending();
+
+	struct task_struct *cpu_ksoftirqd = per_cpu(ksoftirqd, cpu);
+	return !((softirqs & LONG_SOFTIRQ_MASK) &&
+		 (task == cpu_ksoftirqd ||
+		  task_thread_info(task)->preempt_count & SOFTIRQ_MASK));
+}
+EXPORT_SYMBOL_GPL(task_may_not_preempt);
+#else
+static inline bool task_may_preempt(struct task_struct *task, int cpu)
+{
+	return true;
+}
+#endif /* CONFIG_RT_SOFTINT_OPTIMIZATION */
+
+bool rt_task_fits_capacity_and_may_preempt(struct task_struct *p, int cpu)
+{
+	return task_may_preempt(p, cpu) && rt_task_fits_capacity(p, cpu);
+}
+
+
 static int
 select_task_rq_rt(struct task_struct *p, int cpu, int flags)
 {
@@ -1638,6 +1670,7 @@ select_task_rq_rt(struct task_struct *p, int cpu, int flags)
 	int target_cpu = -1;
 	bool sync = !!(flags & WF_SYNC);
 	int this_cpu;
+	bool may_not_preempt;
 
 	trace_android_rvh_select_task_rq_rt(p, cpu, flags & 0xF,
 					flags, &target_cpu);
@@ -1656,7 +1689,12 @@ select_task_rq_rt(struct task_struct *p, int cpu, int flags)
 	this_cpu_rq = cpu_rq(this_cpu);
 
 	/*
-	 * If the current task on @p's runqueue is an RT task, then
+	 * If the current task on @p's runqueue is a softirq task,
+	 * it may run without preemption for a time that is
+	 * ill-suited for a waiting RT task. Therefore, try to
+	 * wake this RT task on another runqueue.
+	 *
+	 * Also, if the current task on @p's runqueue is an RT task, then
 	 * try to see if we can wake this RT task up on another
 	 * runqueue. Otherwise simply start this RT task
 	 * on its current runqueue.
@@ -1681,9 +1719,10 @@ select_task_rq_rt(struct task_struct *p, int cpu, int flags)
 	 * requirement of the task - which is only important on heterogeneous
 	 * systems like big.LITTLE.
 	 */
-	test = curr &&
-	       unlikely(rt_task(curr)) &&
-	       (curr->nr_cpus_allowed < 2 || curr->prio <= p->prio);
+	may_not_preempt = !task_may_preempt(curr, cpu);
+	test = (curr && (may_not_preempt ||
+			 (unlikely(rt_task(curr)) &&
+			  (curr->nr_cpus_allowed < 2 || curr->prio <= p->prio))));
 
 	/*
 	 * Respect the sync flag as long as the task can run on this CPU.
@@ -1705,11 +1744,14 @@ select_task_rq_rt(struct task_struct *p, int cpu, int flags)
 			goto out_unlock;
 
 		/*
-		 * Don't bother moving it if the destination CPU is
+		 * If cpu is non-preemptible, prefer remote cpu
+		 * even if it's running a higher-prio task.
+		 * Otherwise: Don't bother moving it if the destination CPU is
 		 * not running a lower priority task.
 		 */
 		if (target != -1 &&
-		    p->prio < cpu_rq(target)->rt.highest_prio.curr)
+		    (may_not_preempt ||
+		     p->prio < cpu_rq(target)->rt.highest_prio.curr))
 			cpu = target;
 	}
 
@@ -1727,7 +1769,7 @@ static void check_preempt_equal_prio(struct rq *rq, struct task_struct *p)
 	 * let's hope p can move out.
 	 */
 	if (rq->curr->nr_cpus_allowed == 1 ||
-	    !cpupri_find(&rq->rd->cpupri, rq->curr, NULL))
+	    !cpupri_find_fitness(&rq->rd->cpupri, rq->curr, NULL, task_may_preempt))
 		return;
 
 	/*
@@ -1735,7 +1777,7 @@ static void check_preempt_equal_prio(struct rq *rq, struct task_struct *p)
 	 * see if it is pushed or pulled somewhere else.
 	 */
 	if (p->nr_cpus_allowed != 1 &&
-	    cpupri_find(&rq->rd->cpupri, p, NULL))
+	    cpupri_find_fitness(&rq->rd->cpupri, p, NULL, task_may_preempt))
 		return;
 
 	/*
@@ -1955,11 +1997,11 @@ static int find_lowest_rq(struct task_struct *task)
 
 		ret = cpupri_find_fitness(&task_rq(task)->rd->cpupri,
 					  task, lowest_mask,
-					  rt_task_fits_capacity);
+					  rt_task_fits_capacity_and_may_preempt);
 	} else {
 
-		ret = cpupri_find(&task_rq(task)->rd->cpupri,
-				  task, lowest_mask);
+		ret = cpupri_find_fitness(&task_rq(task)->rd->cpupri,
+					  task, lowest_mask, task_may_preempt);
 	}
 
 	trace_android_rvh_find_lowest_rq(task, lowest_mask, ret, &cpu);
