@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45445d14_0f3c29a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-10T23:46:54Z",
+      "side": 1,
+      "message": "Why should this be built into the GKI kernel instead of built as a vendor module?",
+      "revId": "02e86846758fcc3cbf60e8ff0f18e372c823761f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
