@@ -16,6 +16,24 @@
       "message": "Does this also need fixing in Mainline and Stable?\n\nI suggest you add the original author (Bart Van Assche) as a reviewer too.",
       "revId": "f3321411ce344f018c8192a89e3db6af63e41eda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "946ff919_6a779005",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899961
+      },
+      "writtenOn": "2022-05-10T15:34:21Z",
+      "side": 1,
+      "message": "No, this doesn\u0027t apply to neither mainline nor stable. It\u0027s Android only.",
+      "parentUuid": "c2fea6af_7081df5d",
+      "revId": "f3321411ce344f018c8192a89e3db6af63e41eda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
