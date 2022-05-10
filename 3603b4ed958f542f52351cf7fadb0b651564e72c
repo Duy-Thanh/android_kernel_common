@@ -16,6 +16,24 @@
       "message": "Please rebase (couldn\u0027t rebase due to conflicts in abi_gki_aarch64_unisoc)",
       "revId": "3603b4ed958f542f52351cf7fadb0b651564e72c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "027e3d34_1eef0cdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1810596
+      },
+      "writtenOn": "2022-05-10T06:52:14Z",
+      "side": 1,
+      "message": "\u003e Please rebase (couldn\u0027t rebase due to conflicts in abi_gki_aarch64_unisoc)\n\ndone",
+      "parentUuid": "c5501f47_6f61a17f",
+      "revId": "3603b4ed958f542f52351cf7fadb0b651564e72c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
