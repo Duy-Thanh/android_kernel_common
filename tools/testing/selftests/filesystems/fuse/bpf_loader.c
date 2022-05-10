@@ -21,8 +21,8 @@
 
 #include <linux/unistd.h>
 
-#include <include/uapi/linux/fuse.h>
-#include <include/uapi/linux/bpf.h>
+#include <uapi/linux/fuse.h>
+#include <uapi/linux/bpf.h>
 
 struct _test_options test_options;
 

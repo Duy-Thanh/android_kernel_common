@@ -4,14 +4,8 @@
 #define __EXPORTED_HEADERS__
 #define __KERNEL__
 
-#ifdef __ANDROID__
-#include <stdint.h>
-#endif
-
-#include <uapi/linux/types.h>
 #include <uapi/linux/bpf.h>
 #include <uapi/linux/fuse.h>
-#include <uapi/linux/errno.h>
 
 struct fuse_bpf_map {
 	int map_type;
