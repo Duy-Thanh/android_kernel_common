@@ -52,6 +52,23 @@
       "parentUuid": "946ff919_6a779005",
       "revId": "f3321411ce344f018c8192a89e3db6af63e41eda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32356c33_5a3c4401",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-05-10T16:14:46Z",
+      "side": 1,
+      "message": "Voting -2 because I am convinced that the syzbot analysis results are wrong.",
+      "revId": "f3321411ce344f018c8192a89e3db6af63e41eda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
