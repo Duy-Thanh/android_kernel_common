@@ -28,7 +28,6 @@ DECLARE_HOOK(android_vh_shrink_slab_bypass,
 DECLARE_HOOK(android_vh_do_shrink_slab,
 	TP_PROTO(struct shrinker *shrinker, struct shrink_control *shrinkctl, int priority),
 	TP_ARGS(shrinker, shrinkctl, priority));
-<<<<<<< HEAD
 DECLARE_HOOK(android_vh_tune_scan_type,
 	TP_PROTO(char *scan_type),
 	TP_ARGS(scan_type));
