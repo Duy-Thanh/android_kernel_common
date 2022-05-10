@@ -123,6 +123,24 @@
       "parentUuid": "fbe81c16_81a2a19f",
       "revId": "f3321411ce344f018c8192a89e3db6af63e41eda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d59a0a90_541f2658",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899961
+      },
+      "writtenOn": "2022-05-10T16:37:08Z",
+      "side": 1,
+      "message": "KASAN is enabled in all syzbot tests I think",
+      "parentUuid": "b8fe48c6_a23900cd",
+      "revId": "f3321411ce344f018c8192a89e3db6af63e41eda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
