@@ -123,6 +123,24 @@
       "parentUuid": "9e94cd83_272039f6",
       "revId": "02e86846758fcc3cbf60e8ff0f18e372c823761f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "840e8d22_d62d9b63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-11T16:36:36Z",
+      "side": 1,
+      "message": "Those functions are fine to export, please add them to the list.",
+      "parentUuid": "6826ec38_8a277c2f",
+      "revId": "02e86846758fcc3cbf60e8ff0f18e372c823761f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
