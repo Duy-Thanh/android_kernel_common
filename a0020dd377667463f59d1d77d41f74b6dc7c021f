@@ -22,6 +22,30 @@
       },
       "revId": "a0020dd377667463f59d1d77d41f74b6dc7c021f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39528107_d9e4b61c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1358017
+      },
+      "writtenOn": "2022-05-11T02:19:32Z",
+      "side": 1,
+      "message": "I hava added upstream commit in commit msg，if it is wrong， please give me more explaination about what should I do， thanks!",
+      "parentUuid": "299612fd_77a5cd5e",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 68
+      },
+      "revId": "a0020dd377667463f59d1d77d41f74b6dc7c021f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
