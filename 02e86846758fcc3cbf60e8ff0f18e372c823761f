@@ -69,6 +69,24 @@
       "message": "This should not be a in a kernel for a \"shipping\" device, only for testing. Please just add it to your testing kernel configuration.",
       "revId": "02e86846758fcc3cbf60e8ff0f18e372c823761f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac7d6b4_284dd682",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-11T14:17:16Z",
+      "side": 1,
+      "message": "Also, it can be built as a module if you want it, please do so if your devices need it.",
+      "parentUuid": "d25ff750_6a231649",
+      "revId": "02e86846758fcc3cbf60e8ff0f18e372c823761f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
