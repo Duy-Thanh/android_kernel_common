@@ -22,6 +22,30 @@
       },
       "revId": "202ee7f5187b8b7f2529604791d757b6f3d5d1b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935735c5_89545fca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-11T18:31:13Z",
+      "side": 1,
+      "message": "I figured this was ok, since the \"normal template\" is included below the text you highlighted. This actually gives some more context that we normally get (these are being enabled specifically for USB_EHSET_TEST_FIXTURE).",
+      "parentUuid": "bc15d4f3_3f86453b",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 48
+      },
+      "revId": "202ee7f5187b8b7f2529604791d757b6f3d5d1b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
