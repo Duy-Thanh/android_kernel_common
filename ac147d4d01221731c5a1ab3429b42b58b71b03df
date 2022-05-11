@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3260481d_797ee2fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2022-05-11T09:00:18Z",
+      "side": 1,
+      "message": "I believe the proper upstream, non stable, sha1 is 4ff2980b6bd2aa6b4ded3ce3b7c0ccfab29980af\n\n$ git co linux/master\nHEAD is now at c5eb0a61238d Linux 5.18-rc6\n\n((v5.18-rc6-0-gc5eb0a61238d))$ git log ..4ff2980b6bd2aa6b4ded3ce3b7c0ccfab29980af\n\n[nothing, ie. sha1 is in the tree]\n\n((v5.18-rc6-0-gc5eb0a61238d))$ git describe 4ff2980b6bd2aa6b4ded3ce3b7c0ccfab29980af\nv5.17-rc5-188-g4ff2980b6bd2\n\n$ git co remotes/linux/v5.17\nUpdating files: 100% (14119/14119), done.\nPrevious HEAD position was c5eb0a61238d Linux 5.18-rc6\nHEAD is now at f443e374ae13 Linux 5.17\n\n$ git log ..4ff2980b6bd2aa6b4ded3ce3b7c0ccfab29980af\n\n[nothing, so commit is present in Linux v5.17]\n\n--\n\nSide note, I have a bug assigned to me (ipv6 ipsec over low mtu ipv4 mtu/mss frag issues) for which this would appear to possibly maybe be a fix, but I\u0027m not 100% convinced yet that this is enough.\n\nI think it fails to clear the DF bit...",
+      "revId": "ac147d4d01221731c5a1ab3429b42b58b71b03df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
