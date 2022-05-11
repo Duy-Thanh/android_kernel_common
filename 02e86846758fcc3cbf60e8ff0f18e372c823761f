@@ -34,6 +34,24 @@
       "parentUuid": "45445d14_0f3c29a5",
       "revId": "02e86846758fcc3cbf60e8ff0f18e372c823761f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30acba91_94202fca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764341
+      },
+      "writtenOn": "2022-05-11T01:20:14Z",
+      "side": 1,
+      "message": "So request is to enable as part of GKI kernel as it is upstream driver, needed for all OEM for compliance. Reduce need of modifying each vendor/OEM defconfig as there is no change/modification needed to use.",
+      "parentUuid": "19eaa15c_5a888e80",
+      "revId": "02e86846758fcc3cbf60e8ff0f18e372c823761f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
