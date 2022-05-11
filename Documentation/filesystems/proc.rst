@@ -1922,13 +1922,16 @@ if precise results are needed.
 3.8	/proc/<pid>/fdinfo/<fd> - Information about opened file
 ---------------------------------------------------------------
 This file provides information associated with an opened file. The regular
-files have at least four fields -- 'pos', 'flags', 'mnt_id' and 'ino'.
+files have at least six fields -- 'pos', 'flags', 'mnt_id', 'ino', 'size',
+and 'path'.
+
 The 'pos' represents the current offset of the opened file in decimal
 form [see lseek(2) for details], 'flags' denotes the octal O_xxx mask the
 file has been created with [see open(2) for details] and 'mnt_id' represents
 mount ID of the file system containing the opened file [see 3.5
 /proc/<pid>/mountinfo for details]. 'ino' represents the inode number of
-the file.
+the file, 'size' represents the size of the file in bytes, and 'path'
+represents the file path.
 
 A typical output is::
 
@@ -1936,6 +1939,8 @@ A typical output is::
 	flags:	0100002
 	mnt_id:	19
 	ino:	63107
+        size:   0
+        path:   /dev/null
 
 All locks associated with a file descriptor are shown in its fdinfo too::
 
@@ -1953,6 +1958,8 @@ Eventfd files
 	flags:	04002
 	mnt_id:	9
 	ino:	63107
+        size:   0
+        path:   anon_inode:[eventfd]
 	eventfd-count:	5a
 
 where 'eventfd-count' is hex value of a counter.
@@ -1966,6 +1973,8 @@ Signalfd files
 	flags:	04002
 	mnt_id:	9
 	ino:	63107
+        size:   0
+        path:   anon_inode:[signalfd]
 	sigmask:	0000000000000200
 
 where 'sigmask' is hex value of the signal mask associated
@@ -1980,6 +1989,8 @@ Epoll files
 	flags:	02
 	mnt_id:	9
 	ino:	63107
+        size:   0
+        path:   anon_inode:[eventpoll]
 	tfd:        5 events:       1d data: ffffffffffffffff pos:0 ino:61af sdev:7
 
 where 'tfd' is a target file descriptor number in decimal form,
@@ -1998,6 +2009,8 @@ For inotify files the format is the following::
 	flags:	02000000
 	mnt_id:	9
 	ino:	63107
+        size:   0
+        path:   anon_inode:inotify
 	inotify wd:3 ino:9e7e sdev:800013 mask:800afce ignored_mask:0 fhandle-bytes:8 fhandle-type:1 f_handle:7e9e0000640d1b6d
 
 where 'wd' is a watch descriptor in decimal form, i.e. a target file
@@ -2021,6 +2034,8 @@ For fanotify files the format is::
 	flags:	02
 	mnt_id:	9
 	ino:	63107
+        size:   0
+        path:   anon_inode:[fanotify]
 	fanotify flags:10 event-flags:0
 	fanotify mnt_id:12 mflags:40 mask:38 ignored_mask:40000003
 	fanotify ino:4f969 sdev:800013 mflags:0 mask:3b ignored_mask:40000000 fhandle-bytes:8 fhandle-type:1 f_handle:69f90400c275b5b4
@@ -2046,6 +2061,8 @@ Timerfd files
 	flags:	02
 	mnt_id:	9
 	ino:	63107
+        size:   0
+        path:   anon_inode:[timerfd]
 	clockid: 0
 	ticks: 0
 	settime flags: 01
@@ -2070,6 +2087,7 @@ DMA Buffer files
 	mnt_id:	9
 	ino:	63107
 	size:   32768
+        path:   /dmabuf:
 	count:  2
 	exp_name:  system-heap
 
