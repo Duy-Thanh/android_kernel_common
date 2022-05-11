@@ -105,6 +105,24 @@
       "parentUuid": "4ac7d6b4_284dd682",
       "revId": "02e86846758fcc3cbf60e8ff0f18e372c823761f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6826ec38_8a277c2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764341
+      },
+      "writtenOn": "2022-05-11T16:18:59Z",
+      "side": 1,
+      "message": "Ok will abandoned this change, and follow up with new change to submit ABI change needed when trying to compile this as module due to below error:\n\n  MODPOST modules-only.symvers\nERROR: modpost: \"usb_control_msg_recv\" [drivers/usb/misc/ehset.ko] undefined!\nERROR: modpost: \"usb_control_msg_send\" [drivers/usb/misc/ehset.ko] undefined!",
+      "parentUuid": "9e94cd83_272039f6",
+      "revId": "02e86846758fcc3cbf60e8ff0f18e372c823761f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
