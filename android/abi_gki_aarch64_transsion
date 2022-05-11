@@ -1,5 +1,7 @@
 [abi_symbol_list]
 # commonly used symbols
+  mnt_drop_write_file
+  mnt_want_write_file
 
 # required by ufs-sprd_qogirl6.ko
   emergency_restart
