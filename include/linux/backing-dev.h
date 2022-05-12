@@ -22,6 +22,13 @@
 static inline struct backing_dev_info *bdi_get(struct backing_dev_info *bdi)
 {
 	kref_get(&bdi->refcnt);
+	printk("LEE: %s %s()[%d]: BDI: %d\n",
+	       __FILE__, __func__, __LINE__, kref_read(&bdi->refcnt));
+
+	if (bdi->dev)
+		printk("LEE: %s %s()[%d]: BDI: %s:\n",
+		       __FILE__, __func__, __LINE__, dev_name(bdi->dev));
+	dump_stack();
 	return bdi;
 }
 
