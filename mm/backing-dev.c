@@ -873,26 +873,57 @@ EXPORT_SYMBOL(bdi_alloc_node);
 int bdi_register_va(struct backing_dev_info *bdi, const char *fmt, va_list args)
 {
 	struct device *dev;
+	int ret;
 
-	if (bdi->dev)	/* The driver needs to use separate queues per device */
-		return 0;
+	printk("0\n");
+
+	bdi_get(bdi);
+
+	if (bdi->dev) {	/* The driver needs to use separate queues per device */
+		ret = 0;
+		goto out;
+	}
+
+	printk("1\n");
+
+	if (bdi->name)
+		printk("LEE: %s %s()[%d]: Device create: %s\n", __FILE__, __func__, __LINE__, bdi->name);
+
+	printk("2\n");
+
+	printk(fmt, args);
+
+	printk("3\n");
 
 	dev = device_create_vargs(bdi_class, NULL, MKDEV(0, 0), bdi, fmt, args);
-	if (IS_ERR(dev))
-		return PTR_ERR(dev);
+	if (IS_ERR(dev)) {
+		ret = PTR_ERR(dev);
+		goto out;
+	}
 
 	cgwb_bdi_register(bdi);
 	bdi->dev = dev;
 
+	printk("4\n");
+
 	bdi_debug_register(bdi, dev_name(dev));
 	set_bit(WB_registered, &bdi->wb.state);
+
+	printk("5\n");
 
 	spin_lock_bh(&bdi_lock);
 	list_add_tail_rcu(&bdi->bdi_list, &bdi_list);
 	spin_unlock_bh(&bdi_lock);
 
+	printk("6\n");
+
 	trace_writeback_bdi_register(bdi);
 	return 0;
+
+out:
+	printk("7\n");
+	bdi_put(bdi);
+	return ret;
 }
 EXPORT_SYMBOL(bdi_register_va);
 
@@ -901,9 +932,12 @@ int bdi_register(struct backing_dev_info *bdi, const char *fmt, ...)
 	va_list args;
 	int ret;
 
+	printk("0\n");
 	va_start(args, fmt);
+	printk("1\n");
 	ret = bdi_register_va(bdi, fmt, args);
 	va_end(args);
+	printk("2\n");
 	return ret;
 }
 EXPORT_SYMBOL(bdi_register);
@@ -951,6 +985,7 @@ void bdi_unregister(struct backing_dev_info *bdi)
 
 	if (bdi->dev) {
 		bdi_debug_unregister(bdi);
+		printk("LEE: %s %s()[%d]: Device unregister: %s\n", __FILE__, __func__, __LINE__, bdi->name);
 		device_unregister(bdi->dev);
 		bdi->dev = NULL;
 	}
@@ -959,12 +994,16 @@ void bdi_unregister(struct backing_dev_info *bdi)
 		put_device(bdi->owner);
 		bdi->owner = NULL;
 	}
+
+	bdi_put(bdi);
 }
 
 static void release_bdi(struct kref *ref)
 {
 	struct backing_dev_info *bdi =
 			container_of(ref, struct backing_dev_info, refcnt);
+
+	printk("LEE: %s %s()[%d]: \n", __FILE__, __func__, __LINE__);
 
 	if (test_bit(WB_registered, &bdi->wb.state))
 		bdi_unregister(bdi);
@@ -976,6 +1015,14 @@ static void release_bdi(struct kref *ref)
 
 void bdi_put(struct backing_dev_info *bdi)
 {
+	printk("LEE: %s %s()[%d]: BDI: %d\n",
+	       __FILE__, __func__, __LINE__, kref_read(&bdi->refcnt));
+
+	if (bdi->dev)
+		printk("LEE: %s %s()[%d]: BDI: %s:\n",
+		       __FILE__, __func__, __LINE__, dev_name(bdi->dev));
+	dump_stack();
+
 	kref_put(&bdi->refcnt, release_bdi);
 }
 EXPORT_SYMBOL(bdi_put);
