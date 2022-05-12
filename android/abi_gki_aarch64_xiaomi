@@ -1,0 +1,9 @@
+[abi_symbol_list]
+# commonly used symbols
+
+#required by mievent.ko
+  cdev_tevent_alloc
+  cdev_tevent_add_int
+  cdev_tevent_add_str
+  cdev_tevent_write
+  cdev_tevent_destroy
