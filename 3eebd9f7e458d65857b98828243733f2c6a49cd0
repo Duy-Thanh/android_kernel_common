@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2995256a_7ac2c39b",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-12T03:43:48Z",
+      "side": 0,
+      "message": "This is a KMI break. Since other partners rely on it, it shouldn\u0027t be removed.",
+      "revId": "3eebd9f7e458d65857b98828243733f2c6a49cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98edf4e2_d83e11b7",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-12T03:43:48Z",
+      "side": 0,
+      "message": "Other partners rely on this, so it would probably be better to keep it in addition to the ones you added.",
+      "revId": "3eebd9f7e458d65857b98828243733f2c6a49cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
