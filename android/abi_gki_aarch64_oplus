@@ -140,10 +140,26 @@
   __traceiter_android_vh_cleanup_old_buffers_bypass
   __traceiter_android_vh_dm_bufio_shrink_scan_bypass
   __traceiter_android_vh_mutex_unlock_slowpath
+<<<<<<< HEAD   (c60388 UPSTREAM: netfilter: nf_tables: disallow rule addition to bo)
   __traceiter_android_vh_rtmutex_waiter_prio
   __traceiter_android_vh_rwsem_can_spin_on_owner
   __traceiter_android_vh_rwsem_opt_spin_finish
   __traceiter_android_vh_rwsem_opt_spin_start
+=======
+  __traceiter_android_vh_mutex_wait_finish
+  __traceiter_android_vh_mutex_wait_start
+  __traceiter_android_vh_override_creds
+  __traceiter_android_vh_page_referenced_check_bypass
+  __traceiter_android_vh_pcplist_add_cma_pages_bypass
+  __traceiter_android_vh_prepare_update_load_avg_se
+  __traceiter_android_vh_printk_hotplug
+  __traceiter_android_vh_process_killed
+  __traceiter_android_vh_killed_process
+  __traceiter_android_vh_revert_creds
+  __traceiter_android_vh_rmqueue
+  __traceiter_android_vh_rwsem_init
+  __traceiter_android_vh_rwsem_wake
+>>>>>>> CHANGE (59735a ANDROID: oplus: Update the ABI xml and symbol list)
   __traceiter_android_vh_rwsem_wake_finish
   __traceiter_android_vh_sched_stat_runtime_rt
   __traceiter_android_vh_shrink_node_memcgs
@@ -213,6 +229,7 @@
   __tracepoint_android_vh_cleanup_old_buffers_bypass
   __tracepoint_android_vh_dm_bufio_shrink_scan_bypass
   __tracepoint_android_vh_mutex_unlock_slowpath
+<<<<<<< HEAD   (c60388 UPSTREAM: netfilter: nf_tables: disallow rule addition to bo)
   __tracepoint_android_vh_record_mutex_lock_starttime
   __tracepoint_android_vh_record_pcpu_rwsem_starttime
   __tracepoint_android_vh_record_rtmutex_lock_starttime
@@ -221,6 +238,21 @@
   __tracepoint_android_vh_rwsem_can_spin_on_owner
   __tracepoint_android_vh_rwsem_opt_spin_finish
   __tracepoint_android_vh_rwsem_opt_spin_start
+=======
+  __tracepoint_android_vh_mutex_wait_finish
+  __tracepoint_android_vh_mutex_wait_start
+  __tracepoint_android_vh_override_creds
+  __tracepoint_android_vh_page_referenced_check_bypass
+  __tracepoint_android_vh_pcplist_add_cma_pages_bypass
+  __tracepoint_android_vh_prepare_update_load_avg_se
+  __tracepoint_android_vh_printk_hotplug
+  __tracepoint_android_vh_process_killed
+  __tracepoint_android_vh_killed_process
+  __tracepoint_android_vh_revert_creds
+  __tracepoint_android_vh_rmqueue
+  __tracepoint_android_vh_rwsem_init
+  __tracepoint_android_vh_rwsem_wake
+>>>>>>> CHANGE (59735a ANDROID: oplus: Update the ABI xml and symbol list)
   __tracepoint_android_vh_rwsem_wake_finish
   __tracepoint_android_vh_sched_stat_runtime_rt
   __tracepoint_android_vh_shrink_node_memcgs
