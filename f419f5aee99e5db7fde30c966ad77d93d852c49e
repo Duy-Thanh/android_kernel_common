@@ -70,6 +70,30 @@
       },
       "revId": "f419f5aee99e5db7fde30c966ad77d93d852c49e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "787f3d7f_597b604b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-05-13T17:36:16Z",
+      "side": 1,
+      "message": "These OWNERS files affect any file in these directories that match the \u0027trusty_\u0027 pattern. Other files should use the parent OWNERS file. Downstream projects might have OWNERS files in these directories as well though so merge conflicts would need to be resolved in that case.",
+      "parentUuid": "e57f04ab_bf3e67cf",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "f419f5aee99e5db7fde30c966ad77d93d852c49e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
