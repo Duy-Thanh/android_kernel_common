@@ -2030,7 +2030,7 @@ static int init_hyp_mode(void)
 		struct page *page;
 		void *page_addr;
 
-		page = alloc_pages(GFP_KERNEL, nvhe_percpu_order());
+		page = alloc_pages(GFP_KERNEL | __GFP_ZERO, nvhe_percpu_order());
 		if (!page) {
 			err = -ENOMEM;
 			goto out_err;
