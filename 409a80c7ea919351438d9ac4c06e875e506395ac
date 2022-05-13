@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bae4e62_930c3b26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-05-13T13:34:10Z",
+      "side": 1,
+      "message": "If there is no change to the ABI, why update the XML ?",
+      "revId": "409a80c7ea919351438d9ac4c06e875e506395ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
