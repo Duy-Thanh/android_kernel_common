@@ -22,6 +22,30 @@
       },
       "revId": "f419f5aee99e5db7fde30c966ad77d93d852c49e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a125395_eec38bf7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-05-13T16:54:49Z",
+      "side": 1,
+      "message": "I don\u0027t think so. Downstream projects should not be touching the trusty config files.",
+      "parentUuid": "afb53e6c_d77aad08",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "f419f5aee99e5db7fde30c966ad77d93d852c49e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
