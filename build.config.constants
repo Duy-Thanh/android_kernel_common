@@ -1,2 +1,6 @@
 BRANCH=android13-5.10
+<<<<<<< HEAD   (95c07d ANDROID: Suppress build.sh deprecation warnings.)
 CLANG_VERSION=r445002
+=======
+CLANG_VERSION=r450784e
+>>>>>>> BRANCH (46fc34 ANDROID: Update the ABI representation)
