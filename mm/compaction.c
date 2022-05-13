@@ -1171,6 +1171,8 @@ isolate_migratepages_range(struct compact_control *cc, unsigned long start_pfn,
 #endif /* CONFIG_COMPACTION || CONFIG_CMA */
 #ifdef CONFIG_COMPACTION
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
 static bool suitable_migration_source(struct compact_control *cc,
 							struct page *page)
 {
@@ -2228,6 +2230,7 @@ compact_zone(struct compact_control *cc, struct capture_control *capc)
 	unsigned long last_migrated_pfn;
 	const bool sync = cc->mode != MIGRATE_ASYNC;
 	bool update_cached;
+	s64 compaction_ts;
 
 	/*
 	 * These counters track activities during zone compaction.  Initialize
@@ -2299,6 +2302,7 @@ compact_zone(struct compact_control *cc, struct capture_control *capc)
 
 	trace_mm_compaction_begin(start_pfn, cc->migrate_pfn,
 				cc->free_pfn, end_pfn, sync);
+	trace_android_vh_mm_compaction_time_begin(&compaction_ts);
 
 	/* lru_add_drain_all could be expensive with involving other CPUs */
 	lru_add_drain();
@@ -2426,6 +2430,7 @@ out:
 	count_compact_events(COMPACTMIGRATE_SCANNED, cc->total_migrate_scanned);
 	count_compact_events(COMPACTFREE_SCANNED, cc->total_free_scanned);
 
+	trace_android_vh_mm_compaction_time_end(&compaction_ts);
 	trace_mm_compaction_end(start_pfn, cc->migrate_pfn,
 				cc->free_pfn, end_pfn, sync, ret);
 
