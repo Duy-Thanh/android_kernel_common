@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "965f635c_14a6882f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-13T17:34:27Z",
+      "side": 1,
+      "message": "This patch causes a suspicious RCU usage warning. These hooks need to be changed to restricted hooks. \n```\n[    4.279114] \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n[    4.282275] WARNING: suspicious RCU usage\n[    4.282282] 5.15.35-android13-4-gf1a4050d3802 #1 Tainted: G S      W        \n[    4.282289] -----------------------------\n[    4.284897] include/trace/hooks/psci.h:19 suspicious rcu_dereference_check() usage!\n[    4.284906] \n[    4.284906] other info that might help us debug this:\n[    4.284906] \n[    4.284911] rcu_scheduler_active \u003d 2, debug_locks \u003d 1\n[    4.286365] RCU used illegally from extended quiescent state!\n[    4.287948] no locks held by swapper/1/0.\n[    4.290108] \n[    4.290108] stack backtrace:\n[    4.292548] CPU: 1 PID: 0 Comm: swapper/1\n[    4.297629] Call trace:\n[    4.300331]  dump_backtrace.cfi_jt+0x0/0x8\n[    4.302692]  dump_stack_lvl+0xac/0x120\n[    4.304065]  lockdep_rcu_suspicious+0x394/0x4c4\n[    4.305671]  trace_android_vh_psci_cpu_suspend+0xe8/0x1e4\n[    4.307372]  psci_0_2_cpu_suspend+0x38/0xfc\n[    4.308697]  psci_suspend_finisher+0x70/0xc4\n[    4.310280]  cpu_suspend+0xa4/0x274\n[    4.311933]  psci_enter_idle_state+0x74/0x10c\n[    4.313552]  cpuidle_enter_state+0x258/0x654\n[    4.313563]  do_idle+0x39c/0x654\n[    4.315325]  cpu_startup_entry+0x28/0x2c\n[    4.316735]  secondary_start_kernel+0x280/0x340\n[    4.318235]  __secondary_switched+0x98/0x9c\n```",
+      "revId": "ace93ca5effc5178f98941be335f72c75c83a594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
