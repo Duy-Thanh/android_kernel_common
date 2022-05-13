@@ -34,6 +34,24 @@
       "parentUuid": "5bae4e62_930c3b26",
       "revId": "409a80c7ea919351438d9ac4c06e875e506395ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "488952fa_50f9696e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-13T13:37:26Z",
+      "side": 1,
+      "message": "There is a change, as seen by the output of libabigail here in the changelog text.\n\nIt\u0027s just that it is a \"safe\" change.",
+      "parentUuid": "5bae4e62_930c3b26",
+      "revId": "409a80c7ea919351438d9ac4c06e875e506395ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
