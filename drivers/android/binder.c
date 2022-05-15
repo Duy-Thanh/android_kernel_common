@@ -2457,6 +2457,58 @@ static int binder_fixup_parent(struct binder_transaction *t,
 }
 
 /**
+ * binder_is_redundant_transaction() - Check if 2 transactons are redundant
+ * @t1, t2: transactionto check
+ *
+ * Return:  true if the 2 transactions are redundent
+ *          false if they are different
+ */
+static bool binder_is_redundant_transaction(struct binder_transaction *t1,
+					    struct binder_transaction *t2)
+{
+	if (t1->to_proc == NULL || t2->to_proc == NULL
+			|| (t1->flags & t2->flags & (TF_ONE_WAY | TF_DEDUPE_TXN))
+			!= (TF_ONE_WAY | TF_DEDUPE_TXN))
+		return false;
+	if (t1->to_proc->pid == t2->to_proc->pid && t1->code == t2->code
+			&& t1->flags == t2->flags
+			&& t1->buffer->pid == t2->buffer->pid
+			&& t1->buffer->target_node->ptr
+			== t2->buffer->target_node->ptr
+			&& t1->buffer->target_node->cookie
+			== t2->buffer->target_node->cookie)
+		return true;
+	return false;
+}
+
+/**
+ * binder_find_redundant_transaction_ilocked() - Find the redundant transaction
+ * @t:		 transaction to send
+ * @target_list: list to find redundant transaction
+ *
+ * Adds the work to the specified list. Asserts that work
+ * is not already on a list.
+ *
+ * Requires the proc->inner_lock to be held.
+ */
+static struct binder_transaction *
+binder_find_redundant_transaction_ilocked(struct binder_transaction *t,
+					  struct list_head *target_list)
+{
+	struct binder_work *w;
+	struct binder_transaction *ret;
+
+	list_for_each_entry(w, target_list, entry) {
+		if (w->type != BINDER_WORK_TRANSACTION)
+			continue;
+		ret = container_of(w, struct binder_transaction, work);
+		if (binder_is_redundant_transaction(t, ret))
+			return ret;
+	}
+	return NULL;
+}
+
+/**
  * binder_proc_transaction() - sends a transaction to a process and wakes it up
  * @t:		transaction to send
  * @proc:	process to send the transaction to
@@ -2482,6 +2534,7 @@ static int binder_proc_transaction(struct binder_transaction *t,
 	struct binder_priority node_prio;
 	bool oneway = !!(t->flags & TF_ONE_WAY);
 	bool pending_async = false;
+	struct binder_transaction *t_redundant = NULL;
 
 	BUG_ON(!node);
 	binder_node_lock(node);
@@ -2522,6 +2575,17 @@ static int binder_proc_transaction(struct binder_transaction *t,
 	} else if (!pending_async) {
 		binder_enqueue_work_ilocked(&t->work, &proc->todo);
 	} else {
+		if ((t->flags & TF_DEDUPE_TXN) && proc->is_frozen) {
+			t_redundant = binder_find_redundant_transaction_ilocked(
+					t, &node->async_todo);
+			if (t_redundant) {
+				pr_info("dedupe redundant transaction %d\n",
+						t_redundant->debug_id);
+				pr_info("%d: %d\n", proc->pid, proc->alloc.free_async_space);
+				list_del_init(&t_redundant->work.entry);
+				proc->outstanding_txns--;
+			}
+		}
 		binder_enqueue_work_ilocked(&t->work, &node->async_todo);
 	}
 
@@ -2531,6 +2595,19 @@ static int binder_proc_transaction(struct binder_transaction *t,
 	proc->outstanding_txns++;
 	binder_inner_proc_unlock(proc);
 	binder_node_unlock(node);
+
+	// To reduce potential contention, free the transaction and buffer
+	// after releasing the locks.
+	if (t_redundant) {
+		struct binder_buffer *buffer = t_redundant->buffer;
+		t_redundant->buffer = NULL;
+		buffer->transaction = NULL;
+		trace_binder_transaction_dedupe_buffer_release(buffer);
+		binder_transaction_buffer_release(proc, NULL, buffer, 0, 0);
+		binder_alloc_free_buf(&proc->alloc, buffer);
+		kfree(t_redundant);
+		binder_stats_deleted(BINDER_STAT_TRANSACTION);
+	}
 
 	return 0;
 }
