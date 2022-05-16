@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7e4726_a86da136",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-05-16T09:55:07Z",
+      "side": 1,
+      "message": "I thought we decided that this isn\u0027t necessary? The host memcpy()s the section in during init",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 2
+      },
+      "revId": "42de633eafeb123937d3c0f2af91b55813d87516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b78284_41293c4c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-05-16T09:55:07Z",
+      "side": 1,
+      "message": "Can\u0027t you get the shadow VM from the shadow vCPU by pointer chasing instead of the container_of?\n\ne.g. vcpu-\u003earch.pkvm.shadow_vm\n\nThen you can avoid introducing the potentially dangerous get_shadow_state() function (dangerous in the sense that if you accidentally give it a host vCPU you\u0027ll get back a bogus pointer without a compiler diagnostic)",
+      "range": {
+        "startLine": 762,
+        "startChar": 7,
+        "endLine": 762,
+        "endChar": 21
+      },
+      "revId": "42de633eafeb123937d3c0f2af91b55813d87516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
