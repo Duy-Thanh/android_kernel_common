@@ -68,6 +68,7 @@
 
 #include <trace/events/vmscan.h>
 
+#include <trace/hooks/cgroup.h>
 struct cgroup_subsys memory_cgrp_subsys __read_mostly;
 EXPORT_SYMBOL(memory_cgrp_subsys);
 
@@ -109,7 +110,6 @@ static const char *const mem_cgroup_lru_names[] = {
 #define THRESHOLDS_EVENTS_TARGET 128
 #define SOFTLIMIT_EVENTS_TARGET 1024
 #define NUMAINFO_EVENTS_TARGET	1024
-
 /*
  * Cgroups above their limits are maintained in a RB-Tree, independent of
  * their hierarchy representation
@@ -5149,6 +5149,7 @@ static struct mem_cgroup *mem_cgroup_alloc(void)
 	INIT_LIST_HEAD(&memcg->event_list);
 	spin_lock_init(&memcg->event_list_lock);
 	memcg->socket_pressure = jiffies;
+	trace_android_rvh_memcgv2_init(memcg);
 #ifdef CONFIG_MEMCG_KMEM
 	memcg->kmemcg_id = -1;
 #endif
@@ -6221,6 +6222,74 @@ static ssize_t memory_max_write(struct kernfs_open_file *of,
 	return nbytes;
 }
 
+static int memory_wm_df_show(struct seq_file *m, void *v)
+{
+	seq_printf(m, "%llu\n", (u64)READ_ONCE(mem_cgroup_from_seq(m)->android_vendor_data1));
+	return 0;
+}
+
+static ssize_t memory_wm_df_write(struct kernfs_open_file *of,
+				char *buf, size_t nbytes, loff_t off)
+{
+	struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
+
+	buf = strstrip(buf);
+	memcg->android_vendor_data1 = simple_strtoull(buf, NULL, 10);
+
+	return nbytes;
+}
+
+static int memory_some_prop_show(struct seq_file *m, void *v)
+{
+	seq_printf(m, "%llu\n", (u64)READ_ONCE(mem_cgroup_from_seq(m)->android_vendor_data2));
+	return 0;
+}
+
+static ssize_t memory_some_prop_write(struct kernfs_open_file *of,
+				char *buf, size_t nbytes, loff_t off)
+{
+	struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
+
+	buf = strstrip(buf);
+	memcg->android_vendor_data2 = simple_strtoull(buf, NULL, 10);
+
+	return nbytes;
+}
+
+static int memory_full_prop_show(struct seq_file *m, void *v)
+{
+	seq_printf(m, "%llu\n", (u64)READ_ONCE(mem_cgroup_from_seq(m)->android_vendor_data3));
+	return 0;
+}
+
+static ssize_t memory_full_prop_write(struct kernfs_open_file *of,
+				char *buf, size_t nbytes, loff_t off)
+{
+	struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
+
+	buf = strstrip(buf);
+	memcg->android_vendor_data3 = simple_strtoull(buf, NULL, 10);
+
+	return nbytes;
+}
+
+static int memory_boost_prop_show(struct seq_file *m, void *v)
+{
+	seq_printf(m, "%llu\n", (u64)READ_ONCE(mem_cgroup_from_seq(m)->android_vendor_data4));
+	return 0;
+}
+
+static ssize_t memory_boost_prop_write(struct kernfs_open_file *of,
+				char *buf, size_t nbytes, loff_t off)
+{
+	struct mem_cgroup *memcg = mem_cgroup_from_css(of_css(of));
+
+	buf = strstrip(buf);
+	memcg->android_vendor_data4 = simple_strtoull(buf, NULL, 10);
+
+	return nbytes;
+}
+
 static void __memory_events_show(struct seq_file *m, atomic_long_t *events)
 {
 	seq_printf(m, "low %lu\n", atomic_long_read(&events[MEMCG_LOW]));
@@ -6344,6 +6413,32 @@ static struct cftype memory_files[] = {
 		.seq_show = memory_oom_group_show,
 		.write = memory_oom_group_write,
 	},
+  /*
+	{
+		.name = "time_decay_factor",
+		.flags = CFTYPE_NOT_ON_ROOT,
+		.seq_show = memory_wm_df_show,
+		.write = memory_wm_df_write,
+	},
+	{
+		.name = "some_prop",
+		.flags = CFTYPE_NOT_ON_ROOT,
+		.seq_show = memory_some_prop_show,
+		.write = memory_some_prop_write,
+	},
+	{
+		.name = "full_prop",
+		.flags = CFTYPE_NOT_ON_ROOT,
+		.seq_show = memory_full_prop_show,
+		.write = memory_full_prop_write,
+	},
+	{
+		.name = "boost_prop",
+		.flags = CFTYPE_NOT_ON_ROOT,
+		.seq_show = memory_boost_prop_show,
+		.write = memory_boost_prop_write,
+	},
+        */
 	{ }	/* terminate */
 };
 
@@ -6468,6 +6563,8 @@ enum mem_cgroup_protection mem_cgroup_protected(struct mem_cgroup *root,
 	/* No parent means a non-hierarchical mode on v1 memcg */
 	if (!parent)
 		return MEMCG_PROT_NONE;
+
+	trace_android_rvh_memcgv2_calc_decayed_watermark(memcg, &emin, &elow);
 
 	if (parent == root)
 		goto exit;
