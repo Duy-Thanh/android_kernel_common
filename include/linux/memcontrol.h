@@ -21,6 +21,7 @@
 #include <linux/vmstat.h>
 #include <linux/writeback.h>
 #include <linux/page-flags.h>
+#include <linux/android_vendor.h>
 
 struct mem_cgroup;
 struct page;
@@ -334,6 +335,9 @@ struct mem_cgroup {
 	struct deferred_split deferred_split_queue;
 #endif
 
+	/* for dynamic low */
+	ANDROID_VENDOR_DATA(1);
+	
 	struct mem_cgroup_per_node *nodeinfo[0];
 	/* WARNING: nodeinfo must be the last member here */
 };
