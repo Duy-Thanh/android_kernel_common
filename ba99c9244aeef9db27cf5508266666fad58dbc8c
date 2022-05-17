@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19c4ebfc_4a997c65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-17T20:44:31Z",
+      "side": 1,
+      "message": "These lines should be added at the end after original patch description and before your Signed-off-by: like this:\n\n...\nReviewed-by: David Hildenbrand \u003cdavid@redhat.com\u003e\nAcked-by: Mike Rapoport \u003crppt@linux.ibm.com\u003e\nReviewed-by: Catalin Marinas \u003ccatalin.marinas@arm.com\u003e\nLink: https://lore.kernel.org/r/43843c5e092bfe3ec4c41e3c8c78a7ee35b69bb0.1611206601.git.sudaraja@codeaurora.org\nSigned-off-by: Will Deacon \u003cwill@kernel.org\u003e\n\nBug: 232733971\n(cherry picked from commit f0b13ee23241846f6f6cd0d119a8ac8059416ec4)\nSigned-off-by: Lecopzer Chen \u003clecopzer.chen@mediatek.com\u003e\nChange-Id: Ie773d51acb8cf7b7a00161e0e864af5994171d07",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 68
+      },
+      "revId": "ba99c9244aeef9db27cf5508266666fad58dbc8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
