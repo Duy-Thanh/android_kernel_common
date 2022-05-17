@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6e7eee9_1e3e1b72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2022-05-17T04:03:25Z",
+      "side": 1,
+      "message": "Please help take a look before I send this patch out for public review, especially the logic to remove and free the transaction. Thanks!",
+      "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e71d27e7_47b05b42",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2584,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2022-05-17T04:03:25Z",
+      "side": 1,
+      "message": "This line is for local debugging and will be removed when I send the patch to upstream community for review.",
+      "range": {
+        "startLine": 2584,
+        "startChar": 4,
+        "endLine": 2584,
+        "endChar": 65
+      },
+      "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
