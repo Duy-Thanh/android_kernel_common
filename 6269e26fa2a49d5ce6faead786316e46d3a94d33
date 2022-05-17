@@ -18,6 +18,40 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e09e57a_e8388347",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2473,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-17T23:00:52Z",
+      "side": 1,
+      "message": "pid is not reliable. Use to_proc-\u003etsk instead. We only use pid for debugging messages.",
+      "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41814a1f_d68ea9b8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2504,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-17T23:00:52Z",
+      "side": 1,
+      "message": "I\u0027d prefer a name like \"queued_t\" or something like that instead of ret since it makes it more obvious that what we are doing with the binder_is_redundant call below.\n\nAlso, \"queued_t\" could be declared inside the list_for_each_entry() scope.",
+      "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e71d27e7_47b05b42",
@@ -37,6 +71,40 @@
         "endLine": 2584,
         "endChar": 65
       },
+      "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29a5b517_53876b9e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2585,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-17T23:00:52Z",
+      "side": 1,
+      "message": "could it be simpler to leave the transaction on the list and discard the new one instead? I think you could return an error of come kind from here and the cleanup would be in the normal error path of binder_transaction(). Then we could get rid of the block of code at line 2599.",
+      "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1423e50_5ec383a7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2599,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-17T23:00:52Z",
+      "side": 1,
+      "message": "please use /* */ for comments",
       "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
