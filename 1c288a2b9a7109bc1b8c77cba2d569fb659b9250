@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2e8f8d1_27f9732c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-05-17T14:32:04Z",
+      "side": 1,
+      "message": "Vendor hook and vendor fields to be added",
+      "revId": "1c288a2b9a7109bc1b8c77cba2d569fb659b9250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c92d11d_862652de",
+        "filename": "arch/arm64/kernel/hibernate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-05-17T14:32:04Z",
+      "side": 1,
+      "message": "Vendor field will be added to accommodate this variable",
+      "range": {
+        "startLine": 89,
+        "startChar": 1,
+        "endLine": 89,
+        "endChar": 12
+      },
+      "revId": "1c288a2b9a7109bc1b8c77cba2d569fb659b9250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2356c69a_70e4fdda",
+        "filename": "arch/arm64/kernel/hibernate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-05-17T14:32:04Z",
+      "side": 1,
+      "message": "vendor hook to be called here, to do this assignment",
+      "revId": "1c288a2b9a7109bc1b8c77cba2d569fb659b9250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
