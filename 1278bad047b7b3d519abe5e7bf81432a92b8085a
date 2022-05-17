@@ -1,0 +1,40 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c608a87e_6bc46ea1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-05-17T15:40:04Z",
+      "side": 1,
+      "message": "\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 448963898 android-build.ayeaye-python-dispatcher_20220516.05_p0\n\nDone",
+      "parentUuid": "0785c0c9_e7007252",
+      "revId": "1278bad047b7b3d519abe5e7bf81432a92b8085a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "738107e3_d1aadd85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-05-17T15:40:04Z",
+      "side": 1,
+      "message": "\u003e ❌ The following files have actionable findings:\n\u003e         \"Commit message\"\n\u003e \n\u003e \n\u003e  If the failed lint checks do not apply to this change then you can override with a +2 on the Lint label. Additionally, please file feedback at http://go/lint-not-useful.\n\u003e For more details see (https://android-build.googleplex.com/builds/treetop/android-review/2096815?revision\u003d1)\n\u003e \n\u003e Have a question? Found a bug? http://go/presubmit-lint-bug\n\nDone.",
+      "parentUuid": "4f3d1300_09a339c9",
+      "revId": "1278bad047b7b3d519abe5e7bf81432a92b8085a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
