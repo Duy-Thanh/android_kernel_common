@@ -4683,8 +4683,86 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 		file_dont_truncate(inode);
 	}
 
+<<<<<<< HEAD   (276565 Revert "netfilter: conntrack: convert to refcount_t api")
 	clear_inode_flag(inode, FI_PREALLOCATED_ALL);
 out_unlock:
+=======
+	if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED)) {
+		ret = -EPERM;
+		goto unlock;
+	}
+
+	ret = generic_write_checks(iocb, from);
+	if (ret > 0) {
+		bool preallocated = false;
+		size_t target_size = 0;
+		int err;
+
+		if (fault_in_iov_iter_readable(from, iov_iter_count(from)))
+			set_inode_flag(inode, FI_NO_PREALLOC);
+
+		if ((iocb->ki_flags & IOCB_NOWAIT)) {
+			if (!f2fs_overwrite_io(inode, iocb->ki_pos,
+						iov_iter_count(from)) ||
+				f2fs_has_inline_data(inode) ||
+				f2fs_force_buffered_io(inode, iocb, from)) {
+				clear_inode_flag(inode, FI_NO_PREALLOC);
+				inode_unlock(inode);
+				ret = -EAGAIN;
+				goto out;
+			}
+			goto write;
+		}
+
+		if (is_inode_flag_set(inode, FI_NO_PREALLOC))
+			goto write;
+
+		if (iocb->ki_flags & IOCB_DIRECT) {
+			/*
+			 * Convert inline data for Direct I/O before entering
+			 * f2fs_direct_IO().
+			 */
+			err = f2fs_convert_inline_inode(inode);
+			if (err)
+				goto out_err;
+			/*
+			 * If force_buffere_io() is true, we have to allocate
+			 * blocks all the time, since f2fs_direct_IO will fall
+			 * back to buffered IO.
+			 */
+			if (!f2fs_force_buffered_io(inode, iocb, from) &&
+					f2fs_lfs_mode(F2FS_I_SB(inode)))
+				goto write;
+		}
+		preallocated = true;
+		target_size = iocb->ki_pos + iov_iter_count(from);
+
+		err = f2fs_preallocate_blocks(iocb, from);
+		if (err) {
+out_err:
+			clear_inode_flag(inode, FI_NO_PREALLOC);
+			inode_unlock(inode);
+			ret = err;
+			goto out;
+		}
+write:
+		ret = __generic_file_write_iter(iocb, from);
+		clear_inode_flag(inode, FI_NO_PREALLOC);
+
+		/* if we couldn't write data, we should deallocate blocks. */
+		if (preallocated && i_size_read(inode) < target_size) {
+			down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+			filemap_invalidate_lock(inode->i_mapping);
+			f2fs_truncate(inode);
+			filemap_invalidate_unlock(inode->i_mapping);
+			up_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
+		}
+
+		if (ret > 0)
+			f2fs_update_iostat(F2FS_I_SB(inode), APP_WRITE_IO, ret);
+	}
+unlock:
+>>>>>>> BRANCH (4bf7f3 Linux 5.15.37)
 	inode_unlock(inode);
 out:
 	trace_f2fs_file_write_iter(inode, orig_pos, orig_count, ret);
