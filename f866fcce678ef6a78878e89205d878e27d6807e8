@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "743f11b2_3cd63d8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-17T20:08:33Z",
+      "side": 1,
+      "message": "This looks odd, yes, but the 5.15.37 release was quite small and the needed changes will be added back later, including the ABI breaking commits at a KABI break point in time.",
+      "revId": "f866fcce678ef6a78878e89205d878e27d6807e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
