@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ae2fbed_87fb3ae5",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6292,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2022-05-18T11:29:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d732d73c_4a46027d",
+      "range": {
+        "startLine": 6224,
+        "startChar": 0,
+        "endLine": 6292,
+        "endChar": 0
+      },
+      "revId": "e1a19eed1bfae08c715a1af33978116e5d32fa44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3203e1e8_1ee5f6c3",
@@ -227,6 +251,30 @@
       "side": 1,
       "message": "We can\u0027t change the UAPI, so this will have to be implemented some other way or upstreamed first. Please explain the usage in the bug and we will try to help with the further direction.",
       "parentUuid": "4f052c17_27aaadb6",
+      "range": {
+        "startLine": 6416,
+        "startChar": 0,
+        "endLine": 6441,
+        "endChar": 10
+      },
+      "revId": "e1a19eed1bfae08c715a1af33978116e5d32fa44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62cbf200_412303d2",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6441,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2022-05-18T11:29:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "39a35fab_043d6a17",
       "range": {
         "startLine": 6416,
         "startChar": 0,
