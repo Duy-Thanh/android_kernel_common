@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44499fdd_cbfa8cdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-05-18T17:30:09Z",
+      "side": 1,
+      "message": "(presubmit failure seems unrelated to this CL, so trying again)",
+      "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "623b84d1_74747b62",
