@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f77ce67a_df656560",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-18T22:02:44Z",
+      "side": 1,
+      "message": "This change includes https://android-review.googlesource.com/c/kernel/common/+/2097537 fix. Please either indicate that in the description or post the original patch with the fix following it.",
+      "revId": "5e06b2fdc2e3217b86bb9e7f1715a9077d38d0ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
