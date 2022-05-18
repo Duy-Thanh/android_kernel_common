@@ -184,6 +184,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "155e9b80_e5bad942",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2585,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-18T00:56:27Z",
+      "side": 1,
+      "message": "Ok, then \"redundant\" isn\u0027t the right term since the truth is that the new transaction is an \"updated\" version of the pending one, not a redundant version. Please change the terminology in the patch. DEDUP is also the wrong name for the flag -- maybe UPDATE? Then the commit message should talk about how these matching async txns are updating transactions that are pending for frozen targets. Please include your rationale above for why we need to update.",
+      "parentUuid": "e0885302_3afa95a9",
+      "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1423e50_5ec383a7",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
