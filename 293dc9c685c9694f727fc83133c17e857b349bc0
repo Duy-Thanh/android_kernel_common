@@ -176,6 +176,30 @@
       },
       "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3df815_6dc25cc0",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-05-18T21:02:49Z",
+      "side": 1,
+      "message": "that I got, actually the question is will `seq_puts(sink-\u003esfile, \"log overflow.\\n\")` increases log-\u003eput?",
+      "parentUuid": "dfadcdd6_7df59fa2",
+      "range": {
+        "startLine": 642,
+        "startChar": 22,
+        "endLine": 642,
+        "endChar": 27
+      },
+      "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
