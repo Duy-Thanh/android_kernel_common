@@ -22,6 +22,30 @@
       },
       "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12aa701_5eb49429",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-05-18T16:52:13Z",
+      "side": 1,
+      "message": "Yes, but that if-statement is in a code path where f_pos and index will already get out of sync.",
+      "parentUuid": "623b84d1_74747b62",
+      "range": {
+        "startLine": 642,
+        "startChar": 22,
+        "endLine": 642,
+        "endChar": 27
+      },
+      "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
