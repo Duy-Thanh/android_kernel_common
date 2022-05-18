@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a3731a6_26a82571",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-05-18T15:53:04Z",
+      "side": 1,
+      "message": "This affects the build time for every build. Is this absolutely necessary to run unconditionally? Perhaps in Kleaf we can parallelise this, but the question still stands whether all builds always need to produce all those artifacts.",
+      "revId": "0172bcb146eabda1c3e62791f41ea6ee284a7646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c0e4362b_d8fc8107",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-05-18T03:11:18Z",
       "side": 1,
       "message": "Those numbers are copied from the existing settings in \"gki_arm64\".\n\nhttps://android-build.googleplex.com/builds/submitted/8604412/gki_arm64-user/latest\n\nClick \"misc_info.txt\":\n  boot-4.19-gz_size\u003d47185920 \n  boot-5.10_size\u003d67108864\n  boot-5.10-gz_size\u003d47185920\n  boot-5.10-lz4_size\u003d53477376\n  boot-5.15_size\u003d67108864\n  boot-5.15-gz_size\u003d47185920\n  boot-5.15-lz4_size\u003d53477376",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 36
+      },
+      "revId": "0172bcb146eabda1c3e62791f41ea6ee284a7646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ab8ddb5_88d586be",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-05-18T15:53:04Z",
+      "side": 1,
+      "message": "Are they never going to change? How to keep this in sync?",
+      "parentUuid": "c0e4362b_d8fc8107",
       "range": {
         "startLine": 21,
         "startChar": 0,
