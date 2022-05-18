@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623b84d1_74747b62",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-05-18T05:16:52Z",
+      "side": 1,
+      "message": "yesterday I was suspecting this part as well.\n\nactually a dump question, will stuff like this affect the condition?\n\n```\n\t\t\tif (!sink-\u003eignore_overflow)\n\t\t\t\tseq_puts(sink-\u003esfile, \"log overflow.\\n\");\n```",
+      "range": {
+        "startLine": 642,
+        "startChar": 22,
+        "endLine": 642,
+        "endChar": 27
+      },
+      "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
