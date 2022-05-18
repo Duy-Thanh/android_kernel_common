@@ -166,6 +166,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0885302_3afa95a9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2585,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2022-05-18T00:48:18Z",
+      "side": 1,
+      "message": "The most spamming oneway transactions come from 1) WindowManager, 2) DisplayManagerService, 3) ConnectivityService and 4) LocationService. The new transactions would carry updated Window/Display Configuration (e.g. rotation and display brightness) or the latest Network/Location information (WiFi and GPS). Therefore we should drop the old one and keep the new one.",
+      "parentUuid": "a5dee64b_97c95e43",
+      "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1423e50_5ec383a7",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
