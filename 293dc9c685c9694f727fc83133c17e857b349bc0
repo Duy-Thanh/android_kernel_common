@@ -70,6 +70,30 @@
       },
       "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39fe1cb7_f90b1d9a",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-05-18T16:59:34Z",
+      "side": 1,
+      "message": "If the amount of log data we lost due to the overflow matches the length of the overflow message, then they could get back in sync. This is very unlikely though and would not really affect this fix. The fix is needed for all the cases where index and f_pos get out of sync. When index and f_pos are the same, both the old and new code work the same.",
+      "parentUuid": "74e366a7_3573b989",
+      "range": {
+        "startLine": 642,
+        "startChar": 22,
+        "endLine": 642,
+        "endChar": 27
+      },
+      "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
