@@ -148,6 +148,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5dee64b_97c95e43",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2585,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-18T00:37:12Z",
+      "side": 1,
+      "message": "Then \"redundant\" isn\u0027t the right term to use for these changes. If it were truly redundant, then it wouldn\u0027t matter which one is discarded. If it really does matter, then perhaps replace \"redundant\" with \"superceded\". Also, if they really aren\u0027t duplicates, then the flag name should also change from \"DEDUPE_TXN\" to something like \"REPLACE_TXN\".\n\nYou get to define the semantics of the TF_DEDUPE_TXN flag -- can\u0027t you declare that it means the new one is redundant and discarded if a matching one is queued. Do you know of cases where that would be a problem?",
+      "parentUuid": "f4faae81_1d15d2f4",
+      "revId": "6269e26fa2a49d5ce6faead786316e46d3a94d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1423e50_5ec383a7",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
