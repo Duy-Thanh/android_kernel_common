@@ -94,6 +94,30 @@
       },
       "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4fdc8d8_85cc0122",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-05-18T17:12:18Z",
+      "side": 1,
+      "message": "\u003e If the amount of log data we lost due to the overflow matches the length of the overflow message, then they could get back in sync. \n\nwhat if they doesn\u0027t match, is there a path that we make sure `log-\u003eput \u003d\u003d (u32)sfile-\u003eindex` after read.\n\nI am not just talking f_pos issue but in general how we can make sure log-\u003eput and sfile-\u003eindex kept in sync.",
+      "parentUuid": "39fe1cb7_f90b1d9a",
+      "range": {
+        "startLine": 642,
+        "startChar": 22,
+        "endLine": 642,
+        "endChar": 27
+      },
+      "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
