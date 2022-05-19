@@ -2068,12 +2068,15 @@ static void _txvq_cb(struct virtqueue *txvq)
 	struct tipc_msg_buf *mb;
 	bool need_wakeup = false;
 	struct tipc_virtio_dev *vds = txvq->vdev->priv;
+	struct device *dev = &vds->vdev->dev;
 
 	/* detach all buffers */
 	mutex_lock(&vds->lock);
 	while ((mb = virtqueue_get_buf(txvq, &len)) != NULL) {
-		if ((int)len < 0)
+		if ((int)len < 0) {
+			dev_err(dev, "Trusty dropped buffer");
 			handle_dropped_mb(vds, mb);
+		}
 		need_wakeup |= _put_txbuf_locked(vds, mb);
 	}
 	mutex_unlock(&vds->lock);
