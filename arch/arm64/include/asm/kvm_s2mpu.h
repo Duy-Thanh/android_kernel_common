@@ -178,6 +178,10 @@ static_assert(SMPT_GRAN <= PAGE_SIZE);
 #define SYNC_CMD_SYNC				BIT(0)
 #define SYNC_COMP_COMPLETE			BIT(0)
 
+enum s2mpu_driver_cmd {
+	S2MPU_CMD_SET_VID_MASK,
+};
+
 /*
  * Iterate over S2MPU gigabyte regions. Skip those that cannot be modified
  * (the MMIO registers are read only, with reset value MPT_PROT_NONE).

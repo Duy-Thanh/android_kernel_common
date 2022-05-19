@@ -118,3 +118,9 @@ int pkvm_iommu_sysmmu_sync_register(struct device *dev, phys_addr_t addr,
 				   SYSMMU_SYNC_S2_MMIO_SIZE, parent);
 }
 EXPORT_SYMBOL_GPL(pkvm_iommu_sysmmu_sync_register);
+
+int pkvm_iommu_s2mpu_set_vid_mask(struct device *dev, unsigned int mask)
+{
+	return pkvm_iommu_device_cmd(dev, S2MPU_CMD_SET_VID_MASK, mask);
+}
+EXPORT_SYMBOL_GPL(pkvm_iommu_s2mpu_set_vid_mask);

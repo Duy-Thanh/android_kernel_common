@@ -337,18 +337,31 @@ static void __mpt_idmap_apply(struct pkvm_iommu *dev, struct mpt *mpt,
 {
 	unsigned int first_gb = first_byte / SZ_1G;
 	unsigned int last_gb = last_byte / SZ_1G;
-	unsigned int gb, vid;
+	unsigned int gb, vid, vid_mask = get_data(dev)->vid_mask;
 	struct fmpt *fmpt;
 
 	for_each_gb_in_range(gb, first_gb, last_gb) {
 		fmpt = &mpt->fmpt[gb];
 
 		if (fmpt->flags & MPT_UPDATE_L1) {
-			for_each_vid(vid)
+			for_each_vid(vid, vid_mask)
 				__set_l1entry_attr_with_fmpt(dev, gb, vid, fmpt);
 		}
 	}
 	__range_invalidation(dev, first_byte, last_byte);
+}
+
+static int __set_vid_mask(struct pkvm_iommu *dev, unsigned int mask)
+{
+	if (dev->powered)
+		return -EBUSY;
+
+	mask &= ALL_VIDS_BITMAP;
+	if (!mask)
+		return -EINVAL;
+
+	get_data(dev)->vid_mask = mask;
+	return 0;
 }
 
 static void s2mpu_host_stage2_idmap_prepare(phys_addr_t start, phys_addr_t end,
@@ -390,6 +403,17 @@ static int s2mpu_suspend(struct pkvm_iommu *dev)
 	 * down and continues issuing DMA traffic.
 	 */
 	return initialize_with_prot(dev, MPT_PROT_NONE);
+}
+
+static int s2mpu_command(struct pkvm_iommu *dev, unsigned long cmd,
+			 unsigned long arg)
+{
+	switch (cmd) {
+	case S2MPU_CMD_SET_VID_MASK:
+		return __set_vid_mask(dev, arg);
+	default:
+		return -EINVAL;
+	}
 }
 
 static u32 host_mmio_reg_access_mask(size_t off, bool is_write)
@@ -555,6 +579,7 @@ const struct pkvm_iommu_ops pkvm_s2mpu_ops = (struct pkvm_iommu_ops){
 	.validate_child = s2mpu_validate_child,
 	.resume = s2mpu_resume,
 	.suspend = s2mpu_suspend,
+	.command = s2mpu_command,
 	.host_stage2_idmap_prepare = s2mpu_host_stage2_idmap_prepare,
 	.host_stage2_idmap_apply = s2mpu_host_stage2_idmap_apply,
 	.host_dabt_handler = s2mpu_host_dabt_handler,
