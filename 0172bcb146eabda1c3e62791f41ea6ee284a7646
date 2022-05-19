@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c600e517_4af68301",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-05-19T02:51:08Z",
+      "side": 1,
+      "message": "From GKI-release\u0027s POV, boot-gz.img is required. (i.e., we release boot.img, boot-gz.img, boot-lz4.img since Android 12 GKI release). Details: go/gki-release.\n\nGiven we only enable Image.gz on aarch64, the build time impact might not be significant overall? (e.g. in go/ab/aosp_kernel-common-android-mainline)\n\nLet me discuss with the GKI release team to see if there is other alternative.\n\nps: in \"gki_arm64\", the Image.gz is generated offline, when picking up a kernel image as a prebuilt into an Android tree.\n\nhttps://cs.android.com/android/platform/superproject/+/master:development/gsi/build_with_kernel/repack_kernels_common.sh;l\u003d73;drc\u003df3e1facf7f8120341b428906e1b756b478ddf497",
+      "parentUuid": "a2ccae38_55f4702c",
+      "revId": "0172bcb146eabda1c3e62791f41ea6ee284a7646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c0e4362b_d8fc8107",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "Are they never going to change? How to keep this in sync?",
       "parentUuid": "c0e4362b_d8fc8107",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 36
+      },
+      "revId": "0172bcb146eabda1c3e62791f41ea6ee284a7646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3cf46f9_12d04887",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-05-19T02:51:08Z",
+      "side": 1,
+      "message": "NO need to keep this in sync. Because the CL here (build boot-*.img in the kernel tree) is to replace \"gki_arm64\" in the Android tree.\n\ni.e., the plan is to sunset \"gki_arm64\" and build boot-*.img directly on the kernel tree. So we don\u0027t have to copy kernel Image/Image.lz4 to an Android tree just to pack boot-*.img.",
+      "parentUuid": "1ab8ddb5_88d586be",
       "range": {
         "startLine": 21,
         "startChar": 0,
