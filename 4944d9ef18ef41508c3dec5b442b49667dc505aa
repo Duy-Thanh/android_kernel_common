@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37a6490b_18122336",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-05-20T22:02:06Z",
+      "side": 1,
+      "message": "Add a TODO tag for zram / zsmalloc because they won\u0027t be necessary after db845c is a mixed build.",
+      "revId": "4944d9ef18ef41508c3dec5b442b49667dc505aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
