@@ -16,6 +16,24 @@
       "message": "Add a TODO tag for zram / zsmalloc because they won\u0027t be necessary after db845c is a mixed build.",
       "revId": "4944d9ef18ef41508c3dec5b442b49667dc505aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f64d51_b36d9102",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-05-20T22:05:58Z",
+      "side": 1,
+      "message": "TODO(b/...): remove ... after db845c is converted to mixed build with base_kernel.",
+      "parentUuid": "37a6490b_18122336",
+      "revId": "4944d9ef18ef41508c3dec5b442b49667dc505aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
