@@ -34,6 +34,24 @@
       "parentUuid": "37a6490b_18122336",
       "revId": "4944d9ef18ef41508c3dec5b442b49667dc505aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b0c6e40_e07cf285",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-05-20T23:21:32Z",
+      "side": 1,
+      "message": "Done. It will need a +2 again.",
+      "parentUuid": "57f64d51_b36d9102",
+      "revId": "4944d9ef18ef41508c3dec5b442b49667dc505aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
