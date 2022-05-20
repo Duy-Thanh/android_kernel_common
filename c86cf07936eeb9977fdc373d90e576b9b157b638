@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5fc2ea7_a4dc7386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-20T22:32:55Z",
+      "side": 1,
+      "message": "This patch is not in android12-5.10. Release branch patches MUST be cherry-picks from android12-5.10.",
+      "revId": "c86cf07936eeb9977fdc373d90e576b9b157b638",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
