@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9fdf7b9_005b1778",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-20T19:11:47Z",
+      "side": 1,
+      "message": "The change breaks KMI. See my suggestion in the bug on how to rework the patch and avoid that breakage.",
+      "revId": "e8868374ec782455b1128e991e2242b2a9c3fe4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
