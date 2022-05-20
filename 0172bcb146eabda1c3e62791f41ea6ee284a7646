@@ -74,6 +74,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e42bc45e_23818c68",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2022-05-20T11:42:21Z",
+      "side": 1,
+      "message": "Skip adding Image.gz in this CL.\n\nWill add that in a separate CL, so we can revert it easily if there is any concern.",
+      "parentUuid": "b8c45cbf_e82943c3",
+      "revId": "0172bcb146eabda1c3e62791f41ea6ee284a7646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c0e4362b_d8fc8107",
         "filename": "build.config.gki.aarch64",
         "patchSetId": 2
