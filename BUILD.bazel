@@ -35,7 +35,13 @@ define_db845c(
         "drivers/base/regmap/regmap-sdw.ko",
         "drivers/base/regmap/regmap-slimbus.ko",
         "drivers/base/regmap/regmap-spmi.ko",
+<<<<<<< HEAD   (79bd68 Merge fea3043314f3 ("Merge tag 'ext4_for_linus' of git://git)
         "drivers/bus/mhi/host/mhi.ko",
+=======
+        # TODO(b/233404531): Remove zram.ko when db845c is a mixed build
+        "drivers/block/zram/zram.ko",
+        "drivers/bus/mhi/core/mhi.ko",
+>>>>>>> CHANGE (eb38c6 ANDROID: db845c: Add zram and zsmalloc to module_outs)
         "drivers/clk/qcom/clk-qcom.ko",
         "drivers/clk/qcom/clk-rpmh.ko",
         "drivers/clk/qcom/clk-spmi-pmic-div.ko",
@@ -169,6 +175,12 @@ define_db845c(
         "drivers/usb/typec/qcom-pmic-typec.ko",
         "drivers/watchdog/pm8916_wdt.ko",
         "drivers/watchdog/qcom-wdt.ko",
+<<<<<<< HEAD   (79bd68 Merge fea3043314f3 ("Merge tag 'ext4_for_linus' of git://git)
+=======
+        # TODO(b/233404531): Remove zsmalloc.ko when db845c is a mixed build
+        "mm/zsmalloc.ko",
+        "net/qrtr/ns.ko",
+>>>>>>> CHANGE (eb38c6 ANDROID: db845c: Add zram and zsmalloc to module_outs)
         "net/qrtr/qrtr.ko",
         "net/qrtr/qrtr-mhi.ko",
         "net/qrtr/qrtr-smd.ko",
