@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea6b6f7_662bd63b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-23T18:15:20Z",
+      "side": 1,
+      "message": "The vendor reported that this patch fixes their problem with SPF and does not introduce performance regressions (unlike my previous attempt).\nIt\u0027s still a hack but the best one I could come up with.",
+      "revId": "3409c967e9cb0fc96ad0f24e384f748727cd0179",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
