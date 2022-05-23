@@ -88,6 +88,24 @@
       "parentUuid": "187d7c3d_a304ef4d",
       "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c27a258c_e08873f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-05-23T21:58:05Z",
+      "side": 1,
+      "message": "Sure. I have added them as reviewer and also send out an email.\n\nI thought, this is to just pass the presubmits and actual changes will go in as part of your KMI update, isn\u0027t it? That\u0027s the reason I have this one in WIP.",
+      "parentUuid": "6f8278b7_aecffc5d",
+      "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
