@@ -22,6 +22,30 @@
       },
       "revId": "78101ecfc06f2d14140ed7a257ecb4a162c0ad71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b3f8b23_ef7eef99",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-23T21:21:28Z",
+      "side": 1,
+      "message": "Ah, you are right. The original fix was needed because of android_vh_cma_alloc_finish hook: https://android-review.googlesource.com/c/kernel/common/+/1666175/5/include/trace/hooks/mm.h#30 which does not exist here.",
+      "parentUuid": "5ec74715_86cfecd7",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 10
+      },
+      "revId": "78101ecfc06f2d14140ed7a257ecb4a162c0ad71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
