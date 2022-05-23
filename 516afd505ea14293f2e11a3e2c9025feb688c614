@@ -52,6 +52,24 @@
       "parentUuid": "e21b7bc5_b111a6a6",
       "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "187d7c3d_a304ef4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-05-23T21:03:04Z",
+      "side": 1,
+      "message": "Don\u0027t know about the past; but these are all generated report files and anything with more than 0 lines have the same content except `.viz` which has some color encoding into it.\n\n```\nABI diff reports have been created\n /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.leaf [0 lines]\n /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.full [0 lines]\n /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.stg.plain [20 lines]\n /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.stg.flat [20 lines]\n /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.stg.small [20 lines]\n /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.stg.viz [23 lines]\n /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.leaf.short [0 lines]\n /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.full.short [0 lines]\n /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.stg.small.short [20 lines]\n```\n\nIt\u0027s also possible that this is because of the symbols from the modules which where not being considered or there were no module symbols part of the ABI until recently;\nso this report generation doesn\u0027t considered this case.",
+      "parentUuid": "bd33b830_78d688ea",
+      "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
