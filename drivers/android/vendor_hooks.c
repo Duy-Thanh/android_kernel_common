@@ -297,3 +297,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_post);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_check_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_memcgv2_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_memcgv2_calc_decayed_watermark);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_watermark);
