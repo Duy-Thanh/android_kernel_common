@@ -34,6 +34,24 @@
       "parentUuid": "7b44723a_2431e524",
       "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd33b830_78d688ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-23T20:33:39Z",
+      "side": 1,
+      "message": "Oh, was the format of the \"short\" report changed? Normally it starts with something like:\n```\n    Leaf changes summary: 1 artifact changed\n    Changed leaf types summary: 0 leaf type changed\n    Removed/Changed/Added functions summary: 0 Removed, 1 Changed, 0 Added function\n    Removed/Changed/Added variables summary: 0 Removed, 0 Changed, 0 Added variable\n    \n    1 function with some sub-type change:\n    ...\n```",
+      "parentUuid": "e21b7bc5_b111a6a6",
+      "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
