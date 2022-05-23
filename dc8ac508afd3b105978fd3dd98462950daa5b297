@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c42f0b87_bc1ea54e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896910
+      },
+      "writtenOn": "2022-05-23T23:46:34Z",
+      "side": 1,
+      "message": "Hi Suren,\n\nYour change causes a build failure when CONFIG_MMU_NOTIFIER is not enabled but CONFIG_SPECULATIVE_PAGE_FAULT is enabled in the kernel configuration, causing the following:\n\nkernel/fork.c: In function \u0027vm_area_free\u0027:\nkernel/fork.c:407:24: error: \u0027struct mm_struct\u0027 has no member named \u0027mmu_notifier_lock\u0027\n    percpu_down_write(mm-\u003emmu_notifier_lock);\n                        ^~\nkernel/fork.c:409:22: error: \u0027struct mm_struct\u0027 has no member named \u0027mmu_notifier_lock\u0027\n    percpu_up_write(mm-\u003emmu_notifier_lock);\n                      ^~\nmake[3]: *** [scripts/Makefile.build:286: kernel/fork.o] Error 1\nmake[3]: *** Waiting for unfinished jobs....\n\n\nthis is due to making an unconditional use of the mmu_notifier_lock which is conditionally defined in struct mm_struct.\n\nThe following would do:\n\ndiff --git a/kernel/fork.c b/kernel/fork.c\nindex b4bfe3e3ff22..2e91575022f7 100644\n--- a/kernel/fork.c\n+++ b/kernel/fork.c\n@@ -403,10 +403,14 @@ void vm_area_free(struct vm_area_struct *vma)\n #ifdef CONFIG_SPECULATIVE_PAGE_FAULT\n        if (atomic_read(\u0026vma-\u003evm_mm-\u003emm_users) \u003e 1) {\n                if (vma-\u003evm_file) {\n+#ifdef CONFIG_MMU_NOTIFIER\n                        struct mm_struct *mm \u003d vma-\u003evm_mm;\n                        percpu_down_write(mm-\u003emmu_notifier_lock);\n+#endif\n                        ____vm_area_free(vma);\n+#ifdef CONFIG_MMU_NOTIFIER\n                        percpu_up_write(mm-\u003emmu_notifier_lock);\n+#endif\n                        return;\n                }\n                call_rcu(\u0026vma-\u003evm_rcu, __vm_area_free);\n\n\nhowever we may consider adding mmu_notifier_{up,down}_write() inline stubs in include/linux/mmu_notifier.h if deemed more convenient and more than one call site gets updated.",
+      "revId": "dc8ac508afd3b105978fd3dd98462950daa5b297",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
