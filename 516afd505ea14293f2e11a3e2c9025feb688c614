@@ -106,6 +106,24 @@
       "parentUuid": "6f8278b7_aecffc5d",
       "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a02680d_93b11a30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-23T22:07:44Z",
+      "side": 1,
+      "message": "These are all additions, so they don\u0027t have to wait for the \"official\" KMI change. I\u0027d be fine with adding them to the KMI change for 06/04 though.",
+      "parentUuid": "c27a258c_e08873f3",
+      "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
