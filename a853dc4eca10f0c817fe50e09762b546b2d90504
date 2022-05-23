@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8dd4a0b_f382bd7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-23T20:28:35Z",
+      "side": 1,
+      "message": "The concept of pausing a CPU doesn\u0027t exist in android13-5.15. Can you describe this in terms that do exist?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "a853dc4eca10f0c817fe50e09762b546b2d90504",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7917aee_23acc6c6",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-23T20:28:35Z",
+      "side": 1,
+      "message": "Please remove this whitespace change",
+      "revId": "a853dc4eca10f0c817fe50e09762b546b2d90504",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
