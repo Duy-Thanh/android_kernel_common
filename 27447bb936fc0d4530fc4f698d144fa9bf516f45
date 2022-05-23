@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84f4007f_ed1d8a45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-23T21:03:52Z",
+      "side": 1,
+      "message": "This is not needed, it\u0027s not an upstream patch and Change-Id already links all cherry-picks.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 68
+      },
+      "revId": "27447bb936fc0d4530fc4f698d144fa9bf516f45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
