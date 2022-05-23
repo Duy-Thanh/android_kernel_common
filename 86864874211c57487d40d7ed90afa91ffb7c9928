@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed9372eb_f1aef4ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-05-23T08:00:56Z",
+      "side": 1,
+      "message": "Please can you do the same thing for android13-5.10? You\u0027ll need to regenerate the revert so that the SHA in the commit message is accurate. Thanks!",
+      "revId": "86864874211c57487d40d7ed90afa91ffb7c9928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
