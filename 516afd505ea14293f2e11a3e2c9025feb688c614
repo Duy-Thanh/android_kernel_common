@@ -124,6 +124,24 @@
       "parentUuid": "c27a258c_e08873f3",
       "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8961d929_7c95031c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-05-23T22:20:04Z",
+      "side": 1,
+      "message": "Oh! I missed the addition point. It will be good if the whole topic can go before 06/04 for Qualcomm to start testing it sooner. I\u0027ll move it out of WIP.",
+      "parentUuid": "8a02680d_93b11a30",
+      "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
