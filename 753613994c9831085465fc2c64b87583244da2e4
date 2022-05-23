@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1fbad7a_09a136c0",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-05-23T19:34:32Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be enabled by default. Linux does not in general log error messages to the kernel log when returning an error to user-space (for a condition that user-space can trigger). If you want to enable this message for a debug build, you can enable it with dynamic debug.",
+      "revId": "753613994c9831085465fc2c64b87583244da2e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
