@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b44723a_2431e524",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-23T15:10:52Z",
+      "side": 1,
+      "message": "The commit message should be the output of the ABI genetration that clearly indicates what the ABI changes were.\n\nI thought ZRAM was already a vendor module -- why does making it an unprotected GKI module result in symbol changes?",
+      "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
