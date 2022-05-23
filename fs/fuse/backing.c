@@ -2664,3 +2664,80 @@ void __exit fuse_bpf_cleanup(void)
 {
 	kmem_cache_destroy(fuse_bpf_aio_request_cachep);
 }
+
+ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct bpf_fuse_args *fa)
+{
+	int i;
+	uint32_t max_size;
+	ssize_t res;
+	bool is_prefilter = !!(fa->opcode & FUSE_PREFILTER);
+	bool is_postfilter = !!(fa->opcode & FUSE_POSTFILTER);
+
+	struct fuse_args args = {
+		.nodeid = fa->nodeid,
+		.opcode = fa->opcode,
+		.error_in = fa->error_in,
+		.in_numargs = is_postfilter ? fa->in_numargs + fa->out_numargs : fa->in_numargs,
+		.out_numargs = is_prefilter ? fa->in_numargs : fa->out_numargs,
+		.force = !!(fa->flags & FUSE_BPF_FORCE),
+		.out_argvar = !!(fa->flags & FUSE_BPF_OUT_ARGVAR),
+	};
+
+	/* Set in args */
+	for (i = 0; i < fa->in_numargs; ++i)
+		args.in_args[i] = (struct fuse_in_arg) {
+			.size = fa->in_args[i].size,
+			.value = fa->in_args[i].value,
+		};
+
+	if (is_postfilter)
+		for (i = 0; i < fa->out_numargs; ++i)
+			args.in_args[fa->in_numargs + i] = (struct fuse_in_arg) {
+				.size = fa->out_args[i].size,
+				.value = fa->out_args[i].value,
+			};
+
+	/* All out args must be writeable */
+	if (is_prefilter)
+		for (i = 0; i < fa->in_numargs; ++i) {
+			max_size = fa->in_args[i].max_size ?: fa->in_args[i].size;
+			if (!bpf_fuse_get_writeable(&fa->in_args[i], max_size, true))
+				return -ENOMEM;
+		}
+
+	if (is_postfilter)
+		for (i = 0; i < fa->out_numargs; ++i) {
+			max_size = fa->out_args[i].max_size ?: fa->out_args[i].size;
+			if (!bpf_fuse_get_writeable(&fa->out_args[i], max_size, true))
+				return -ENOMEM;
+		}
+
+	/* Set out args */
+	if (is_prefilter)
+		for (i = 0; i < args.in_numargs; ++i)
+			args.out_args[i] = (struct fuse_arg) {
+				.size = fa->in_args[i].size,
+				.value = fa->in_args[i].value,
+			};
+	else
+		for (i = 0; i < args.out_numargs; ++i)
+			args.out_args[i] = (struct fuse_arg) {
+				.size = fa->out_args[i].size,
+				.value = fa->out_args[i].value,
+			};
+
+	res = fuse_simple_request(fm, &args);
+
+	/* update used areas of buffers */
+	if (is_prefilter) {
+		for (i = 0; i < fa->in_numargs; ++i)
+			if (fa->in_args[i].flags & BPF_FUSE_VARIABLE_SIZE)
+				fa->in_args[i].size = args.out_args[i].size;
+	} else {
+		for (i = 0; i < fa->out_numargs; ++i)
+			if (fa->out_args[i].flags & BPF_FUSE_VARIABLE_SIZE)
+				fa->out_args[i].size = args.out_args[i].size;
+	}
+
+	return res;
+}

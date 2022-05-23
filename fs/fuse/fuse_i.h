@@ -336,8 +336,8 @@ struct fuse_args {
 	bool page_zeroing:1;
 	bool page_replace:1;
 	bool may_block:1;
-	struct fuse_in_arg in_args[3];
-	struct fuse_arg out_args[2];
+	struct fuse_in_arg in_args[5];
+	struct fuse_arg out_args[3];
 	void (*end)(struct fuse_mount *fm, struct fuse_args *args, int error);
 
 	/* Path used for completing d_canonical_path */
@@ -1947,6 +1947,8 @@ struct fuse_err_ret {
 int __init fuse_bpf_init(void);
 void __exit fuse_bpf_cleanup(void);
 
+ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct bpf_fuse_args *args);
+
 static inline void fuse_bpf_set_in_ends(struct bpf_fuse_args *fa)
 {
 	int i;
@@ -2041,6 +2043,18 @@ static inline void fuse_bpf_free_alloced(struct bpf_fuse_args *fa)
 			break;						\
 		}							\
 									\
+		if (ext_flags & FUSE_BPF_USER_FILTER) {			\
+			locked = fuse_lock_inode(inode);		\
+			res = fuse_bpf_simple_request(fm, &fa);		\
+			fuse_unlock_inode(inode, locked);		\
+			if (res < 0) {					\
+				fer = (struct fuse_err_ret) {		\
+					ERR_PTR(res),			\
+					true,				\
+				};					\
+				break;					\
+			}						\
+		}							\
 		fuse_bpf_set_in_immutable(&fa);				\
 									\
 		err = ERR_PTR(initialize_out(&fa, &feo, args));		\
@@ -2078,6 +2092,16 @@ static inline void fuse_bpf_free_alloced(struct bpf_fuse_args *fa)
 			break;						\
 		}							\
 									\
+		if (!(ext_flags & FUSE_BPF_USER_FILTER))		\
+			break;						\
+									\
+		locked = fuse_lock_inode(inode);			\
+		res = fuse_bpf_simple_request(fm, &fa);			\
+		fuse_unlock_inode(inode, locked);			\
+		if (res < 0) {						\
+			fer.result = ERR_PTR(res);			\
+			break;						\
+		}							\
 	} while (false);						\
 									\
 	if (initialized && fer.ret) {					\
