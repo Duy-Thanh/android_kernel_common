@@ -16,6 +16,24 @@
       "message": "The commit message should be the output of the ABI genetration that clearly indicates what the ABI changes were.\n\nI thought ZRAM was already a vendor module -- why does making it an unprotected GKI module result in symbol changes?",
       "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e21b7bc5_b111a6a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-05-23T18:13:01Z",
+      "side": 1,
+      "message": "\u003e The commit message should be the output of the ABI genetration that clearly indicates what the ABI changes were.\n\nCurrent commit message is what is being printed on the ABI update report:\n\n```\nramjiyani@ramjiyani-desktop:~/Repos/android13-5.15$ cat /usr/local/google/home/ramjiyani/Repos/android13-5.15/out_abi/android13-5.15/dist/abi.report.stg.small.short\nsymbol \u0027unsigned long int zs_compact(struct zs_pool *)\u0027 was added\n\nsymbol \u0027struct zs_pool * zs_create_pool(const char *)\u0027 was added\n\nsymbol \u0027void zs_destroy_pool(struct zs_pool *)\u0027 was added\n\nsymbol \u0027void zs_free(struct zs_pool *, unsigned long int)\u0027 was added\n\nsymbol \u0027unsigned long int zs_get_total_pages(struct zs_pool *)\u0027 was added\n\nsymbol \u0027size_t zs_huge_class_size(struct zs_pool *)\u0027 was added\n\nsymbol \u0027unsigned long int zs_malloc(struct zs_pool *, size_t, gfp_t)\u0027 was added\n\nsymbol \u0027void * zs_map_object(struct zs_pool *, unsigned long int, enum zs_mapmode)\u0027 was added\n\nsymbol \u0027void zs_pool_stats(struct zs_pool *, struct zs_pool_stats *)\u0027 was added\n\nsymbol \u0027void zs_unmap_object(struct zs_pool *, unsigned long int)\u0027 was added\n\nramjiyani@ramjiyani-desktop:~/Repos/android13-5.15$ \n```\n\n\n\u003e I thought ZRAM was already a vendor module -- why does making it an unprotected GKI module result in symbol changes?\n\nThese exports are coming from the zsmalloc.ko which is a dependency for zram.ko. Before they were not set at all in gki_defconfig; so both were part of the vendor modules and inter dependent, with no dependency on KMI/ABI. Now both modules are GKI unprotected modules; these exports become part of the KMI for them to not getting trimmed if someone is using the GKI versions.\n\nDoes it make sense or do you still see something out of order here?",
+      "parentUuid": "7b44723a_2431e524",
+      "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
