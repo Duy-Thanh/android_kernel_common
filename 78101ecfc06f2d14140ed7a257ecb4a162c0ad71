@@ -46,6 +46,30 @@
       },
       "revId": "78101ecfc06f2d14140ed7a257ecb4a162c0ad71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f47dfd6_9407775b",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1891695
+      },
+      "writtenOn": "2022-05-23T21:24:49Z",
+      "side": 1,
+      "message": "I think we need this change once our memory team adds the trace hook mentioned above. I am abandoning this for now and will restore once the trace hook is ported.",
+      "parentUuid": "4b3f8b23_ef7eef99",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 10
+      },
+      "revId": "78101ecfc06f2d14140ed7a257ecb4a162c0ad71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
