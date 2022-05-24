@@ -52,6 +52,24 @@
       "parentUuid": "f6c89c37_f85b1fbe",
       "revId": "dc8ac508afd3b105978fd3dd98462950daa5b297",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "731191a5_c67439e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-24T01:00:03Z",
+      "side": 1,
+      "message": "Posted a fix: https://android-review.googlesource.com/c/kernel/common/+/2103950. Florian, could you please confirm it works for you. I tried locally with that configuration and build seems to be ok.",
+      "parentUuid": "d1176a55_d08050dc",
+      "revId": "dc8ac508afd3b105978fd3dd98462950daa5b297",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
