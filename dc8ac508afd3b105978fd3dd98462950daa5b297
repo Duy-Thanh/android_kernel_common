@@ -34,6 +34,24 @@
       "parentUuid": "c42f0b87_bc1ea54e",
       "revId": "dc8ac508afd3b105978fd3dd98462950daa5b297",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1176a55_d08050dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-24T00:14:58Z",
+      "side": 1,
+      "message": "Actually the fix seems to be simple. I\u0027ll test it and post it shortly instead of reverting the patch.",
+      "parentUuid": "f6c89c37_f85b1fbe",
+      "revId": "dc8ac508afd3b105978fd3dd98462950daa5b297",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
