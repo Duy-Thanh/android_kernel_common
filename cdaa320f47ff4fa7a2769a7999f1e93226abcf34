@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f04ae635_bedbf2ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-05-24T19:41:41Z",
+      "side": 1,
+      "message": "Oh, I need to separate symbol update as different patch.\n\nWill do next respin. Please just focus on the vendor hook implementation part.",
+      "revId": "cdaa320f47ff4fa7a2769a7999f1e93226abcf34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
