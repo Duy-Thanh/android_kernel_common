@@ -21,7 +21,11 @@
 #include <linux/fs.h>
 #include <linux/dma-fence.h>
 #include <linux/wait.h>
+<<<<<<< HEAD   (13a84b ANDROID: GKI: Update symbols to symbol list)
 #include <linux/android_kabi.h>
+=======
+#include <linux/workqueue.h>
+>>>>>>> CHANGE (3b36d1 ANDROID: dma-buf: Move sysfs work out of DMA-BUF export path)
 
 struct device;
 struct dma_buf;
@@ -421,7 +425,15 @@ struct dma_buf {
 #ifdef CONFIG_DMABUF_SYSFS_STATS
 	/* for sysfs stats */
 	struct dma_buf_sysfs_entry {
-		struct kobject kobj;
+		union {
+			struct kobject kobj;
+
+			/** @sysfs_add_work:
+			 *
+			 * For deferred sysfs kobject creation using a workqueue.
+			 */
+			struct work_struct sysfs_add_work;
+		};
 		struct dma_buf *dmabuf;
 	} *sysfs_entry;
 #endif
