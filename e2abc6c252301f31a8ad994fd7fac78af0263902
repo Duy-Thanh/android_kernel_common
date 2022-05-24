@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43a5c1ba_aa2032f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-24T15:11:17Z",
+      "side": 1,
+      "message": "not part of gki_defconfig so does not need to be cherry-picked.",
+      "revId": "e2abc6c252301f31a8ad994fd7fac78af0263902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
