@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb4a7893_02234e3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-24T12:35:38Z",
+      "side": 1,
+      "message": "configs have to be enabled for both arches.\n\nAlso, this will change the boot process, how will Android userspace handle this?  I did not think it wanted or needed devtmpfs at all.",
+      "revId": "9cd0796c8350fbb5d730d99e5af6e42a0fece663",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
