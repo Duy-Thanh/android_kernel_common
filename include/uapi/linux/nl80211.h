@@ -2706,6 +2706,10 @@ enum nl80211_commands {
  * @NL80211_ATTR_MLO_LINKS: A nested array of links, each containing some
  *	per-link information and a link ID.
  *
+ * @NL80211_ATTR_MLO_SUPPORT: Flag attribute to indicate user space supports MLO
+ *	connection. Used with %NL80211_CMD_CONNECT. If this attribute is not
+ *	included in NL80211_CMD_CONNECT drivers must not perform MLO connection.
+ *
  * @NUM_NL80211_ATTR: total number of nl80211_attrs available
  * @NL80211_ATTR_MAX: highest attribute number currently defined
  * @__NL80211_ATTR_AFTER_LAST: internal use
@@ -3240,6 +3244,8 @@ enum nl80211_attrs {
 	NL80211_ATTR_RESERVED_DO_NOT_USE_18 = 329,
 	NL80211_ATTR_RESERVED_DO_NOT_USE_19 = 330,
 	NL80211_ATTR_RESERVED_DO_NOT_USE_20 = 331,
+
+	NL80211_ATTR_MLO_SUPPORT,
 
 	/* add attributes here, update the policy in nl80211.c */
 
