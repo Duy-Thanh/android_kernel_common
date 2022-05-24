@@ -142,6 +142,24 @@
       "parentUuid": "8a02680d_93b11a30",
       "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da33ee9f_ce6df275",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-05-24T20:11:45Z",
+      "side": 1,
+      "message": "Updated commit message as per https://buganizer.corp.google.com/issues/233733601#comment3",
+      "parentUuid": "8961d929_7c95031c",
+      "revId": "516afd505ea14293f2e11a3e2c9025feb688c614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
