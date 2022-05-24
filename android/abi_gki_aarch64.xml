@@ -786,6 +786,7 @@
       <elf-symbol name='debugfs_create_u64' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc3a7fa8'/>
       <elf-symbol name='debugfs_create_x32' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x90c44d2d'/>
       <elf-symbol name='debugfs_initialized' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x716265c7'/>
+      <elf-symbol name='debugfs_lookup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x710e1bc4'/>
       <elf-symbol name='debugfs_remove' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x23332c80'/>
       <elf-symbol name='debugfs_remove_recursive' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8b975c1b'/>
       <elf-symbol name='dec_zone_page_state' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb538b8f2'/>
@@ -28956,7 +28957,7 @@
           <var-decl name='work' type-id='ef9025d0' visibility='default' filepath='mm/slab.h' line='91' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fsnotify_backend.h' line='298' column='1' id='9114ebb7'>
+      <union-decl name='__anonymous_union__4' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fsnotify_backend.h' line='298' column='1' id='9114ebb7'>
         <data-member access='public'>
           <var-decl name='obj' type-id='c66f5ec5' visibility='default' filepath='include/linux/fsnotify_backend.h' line='300' column='1'/>
         </data-member>
@@ -77902,7 +77903,7 @@
           <var-decl name='data_offset' type-id='f0981eeb' visibility='default' filepath='include/media/videobuf2-core.h' line='186' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/media/videobuf2-core.h' line='181' column='1' id='07aa0de4'>
+      <union-decl name='__anonymous_union__1' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/media/videobuf2-core.h' line='181' column='1' id='07aa0de4'>
         <data-member access='public'>
           <var-decl name='offset' type-id='f0981eeb' visibility='default' filepath='include/media/videobuf2-core.h' line='182' column='1'/>
         </data-member>
@@ -120500,6 +120501,11 @@
         <parameter type-id='27675065' name='dentry' filepath='fs/debugfs/inode.c' line='728' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='debugfs_lookup' mangled-name='debugfs_lookup' filepath='fs/debugfs/inode.c' line='292' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='debugfs_lookup'>
+        <parameter type-id='80f4b756' name='name' filepath='fs/debugfs/inode.c' line='292' column='1'/>
+        <parameter type-id='27675065' name='parent' filepath='fs/debugfs/inode.c' line='292' column='1'/>
+        <return type-id='27675065'/>
+      </function-decl>
       <function-decl name='debugfs_initialized' mangled-name='debugfs_initialized' filepath='fs/debugfs/inode.c' line='893' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='debugfs_initialized'>
         <return type-id='b50a4934'/>
       </function-decl>
@@ -121601,7 +121607,7 @@
           <var-decl name='val' type-id='e4266c7e' visibility='default' filepath='include/uapi/asm-generic/posix_types.h' line='80' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fsnotify_backend.h' line='298' column='1' id='9114ebb7'>
+      <union-decl name='__anonymous_union__4' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fsnotify_backend.h' line='298' column='1' id='9114ebb7'>
         <data-member access='public'>
           <var-decl name='obj' type-id='c66f5ec5' visibility='default' filepath='include/linux/fsnotify_backend.h' line='300' column='1'/>
         </data-member>
