@@ -2713,6 +2713,10 @@ enum nl80211_commands {
  * @NL80211_ATTR_MLO_LINKS: A nested array of links, each containing some
  *	per-link information and a link ID.
  *
+ * @NL80211_ATTR_MLO_SUPPORT: Flag attribute to indicate user space supports MLO
+ *	connection. Used with %NL80211_CMD_CONNECT. If this attribute is not
+ *	included in NL80211_CMD_CONNECT drivers must not perform MLO connection.
+ *
  * @NUM_NL80211_ATTR: total number of nl80211_attrs available
  * @NL80211_ATTR_MAX: highest attribute number currently defined
  * @__NL80211_ATTR_AFTER_LAST: internal use
@@ -3267,6 +3271,9 @@ enum nl80211_attrs {
 /* Link: https://lore.kernel.org/linux-wireless/20220520132938.d45ac277fe08.I023f35d382282691d7e2cbc607fb11691355cd63@changeid/ */
 #define NL80211_ATTR_MLO_LINKS NL80211_ATTR_RESERVED_DO_NOT_USE_2
 #define NL80211_ATTR_MLO_LINK_ID NL80211_ATTR_RESERVED_DO_NOT_USE_3
+
+/* Link: https://lore.kernel.org/linux-wireless/1654679797-7740-1-git-send-email-quic_vjakkam@quicinc.com/ */
+#define NL80211_ATTR_MLO_SUPPORT NL80211_ATTR_RESERVED_DO_NOT_USE_4
 
 /* source-level API compatibility */
 #define NL80211_ATTR_SCAN_GENERATION NL80211_ATTR_GENERATION
