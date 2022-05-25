@@ -434,6 +434,7 @@ static void ssbs_thread_switch(struct task_struct *next)
  * __switch_to() a user task.
  */
 DEFINE_PER_CPU(struct task_struct *, __entry_task);
+EXPORT_PER_CPU_SYMBOL(__entry_task);
 
 static void entry_task_switch(struct task_struct *next)
 {
