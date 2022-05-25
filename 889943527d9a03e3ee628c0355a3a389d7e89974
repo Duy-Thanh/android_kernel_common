@@ -16,6 +16,24 @@
       "message": "Android userspace is not expecting to use devtmpfs, so why is this being enabled?\n\nDo you have userspace changes posted somewhere to enable this to actually work with this Android release?  Otherwise this should not be needed.",
       "revId": "889943527d9a03e3ee628c0355a3a389d7e89974",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a2e92c_4dc6cb5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876090
+      },
+      "writtenOn": "2022-05-25T12:39:30Z",
+      "side": 1,
+      "message": "These changes are available in Downstream kernel and we are sharing them to customer. In kernel 5.4, we have added in QGKI. Now we don\u0027t have that option. So asking to add it to gki_defconfig",
+      "parentUuid": "cd0e3f5e_87f3d122",
+      "revId": "889943527d9a03e3ee628c0355a3a389d7e89974",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
