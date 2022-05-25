@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd0e3f5e_87f3d122",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-25T12:23:17Z",
+      "side": 1,
+      "message": "Android userspace is not expecting to use devtmpfs, so why is this being enabled?\n\nDo you have userspace changes posted somewhere to enable this to actually work with this Android release?  Otherwise this should not be needed.",
+      "revId": "889943527d9a03e3ee628c0355a3a389d7e89974",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
