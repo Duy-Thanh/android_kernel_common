@@ -34,6 +34,24 @@
       "parentUuid": "c2288dc9_cc3c2062",
       "revId": "3c0fcc87dca73bcc1957cfda00f5cdacc2792448",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980d2bd0_198f0ac9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-25T15:59:45Z",
+      "side": 1,
+      "message": "Please work upstream to get your needed changes that these hooks are required for, accepted first.\n\nHooks are a stop-gap solution for when your changes are not upstream yet.  You have plenty of time now to get the changes upstream for the next release.",
+      "parentUuid": "2729090e_edd71712",
+      "revId": "3c0fcc87dca73bcc1957cfda00f5cdacc2792448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
