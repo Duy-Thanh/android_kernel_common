@@ -34,6 +34,24 @@
       "parentUuid": "cd0e3f5e_87f3d122",
       "revId": "889943527d9a03e3ee628c0355a3a389d7e89974",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee3c3e8e_c10d28b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-25T13:29:50Z",
+      "side": 1,
+      "message": "These options break normal Android systems, as the testing showed, sorry.  Android userspace will have to be changed in order to be able to support this.  Please feel free to submit those changes for the next release.",
+      "parentUuid": "57a2e92c_4dc6cb5e",
+      "revId": "889943527d9a03e3ee628c0355a3a389d7e89974",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
