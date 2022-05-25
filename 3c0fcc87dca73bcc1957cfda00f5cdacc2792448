@@ -16,6 +16,24 @@
       "message": "Why are hooks needed at all for android-mainline?",
       "revId": "3c0fcc87dca73bcc1957cfda00f5cdacc2792448",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2729090e_edd71712",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2022-05-25T00:07:15Z",
+      "side": 1,
+      "message": "We\u0027re using these hooks in android-12 and android-13, it is also necessary for future versions.\nSo I would like to submit them in android-mainline.",
+      "parentUuid": "c2288dc9_cc3c2062",
+      "revId": "3c0fcc87dca73bcc1957cfda00f5cdacc2792448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
