@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fabf2570_eb802eeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-25T20:31:13Z",
+      "side": 1,
+      "message": "same as in previous patch, should be https://lore.kernel.org/lkml/20220422062436.14384-3-mark-pk.tsai@mediatek.com/",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 84
+      },
+      "revId": "54bfdec5fab1a16515812eaacf1d57e6f8382e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
