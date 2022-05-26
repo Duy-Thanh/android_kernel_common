@@ -39,6 +39,7 @@ MODULES_ORDER=android/gki_aarch64_modules
 
 BUILD_GKI_CERTIFICATION_TOOLS=1
 
+# Sync with BUILD.bazel, define_common_kernels(), target_configs["kernel_aarch64"]
 BUILD_GKI_ARTIFACTS=1
 BUILD_GKI_BOOT_IMG_SIZE=67108864
 BUILD_GKI_BOOT_IMG_LZ4_SIZE=53477376
