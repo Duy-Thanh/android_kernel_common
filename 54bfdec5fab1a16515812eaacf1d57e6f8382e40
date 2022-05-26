@@ -22,6 +22,30 @@
       },
       "revId": "54bfdec5fab1a16515812eaacf1d57e6f8382e40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5976e4c9_75503b78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1576997
+      },
+      "writtenOn": "2022-05-26T01:30:16Z",
+      "side": 1,
+      "message": "update in patchset 2, thanks.",
+      "parentUuid": "fabf2570_eb802eeb",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 84
+      },
+      "revId": "54bfdec5fab1a16515812eaacf1d57e6f8382e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
