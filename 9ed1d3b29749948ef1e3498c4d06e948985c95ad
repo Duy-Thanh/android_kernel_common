@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f911864_0be8936d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-05-26T12:32:02Z",
+      "side": 1,
+      "message": "I have not tracked down the \"lonely\" addition of the `__trace_iter_` symbol.\n\nThis change clearly does pairs of `__trace_iter_` and `__tracepoint_` symbols so it\u0027s not the culprit.",
+      "revId": "9ed1d3b29749948ef1e3498c4d06e948985c95ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
