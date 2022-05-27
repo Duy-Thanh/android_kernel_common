@@ -12,8 +12,12 @@
  * Following tracepoints are not exported in tracefs and provide a
  * mechanism for vendor modules to hook and extend functionality
  */
+/* struct gic_chip_data */
+#include <linux/irqchip/arm-gic-v3.h>
+
 struct irq_data;
 struct cpumask;
+
 DECLARE_HOOK(android_vh_gic_v3_affinity_init,
 	TP_PROTO(int irq, u32 offset, u64 *affinity),
 	TP_ARGS(irq, offset, affinity));
@@ -23,6 +27,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_gic_v3_set_affinity,
 		 void __iomem *rbase, u64 redist_stride),
 	TP_ARGS(d, mask_val, affinity, force, base, rbase, redist_stride),
 	1);
+DECLARE_HOOK(android_vh_gic_resume,
+	TP_PROTO(struct gic_chip_data_v3 *gd),
+	TP_ARGS(gd));
 
 #endif /* _TRACE_HOOK_GIC_V3_H */
 /* This part must be outside protection */

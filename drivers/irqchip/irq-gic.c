@@ -36,6 +36,7 @@
 #include <linux/percpu.h>
 #include <linux/seq_file.h>
 #include <linux/slab.h>
+#include <linux/syscore_ops.h>
 #include <linux/irqchip.h>
 #include <linux/irqchip/chained_irq.h>
 #include <linux/irqchip/arm-gic.h>
@@ -407,6 +408,27 @@ static void gic_irq_print_chip(struct irq_data *d, struct seq_file *p)
 	else
 		seq_printf(p, "GIC-%d", (int)(gic - &gic_data[0]));
 }
+
+#ifdef CONFIG_PM
+void gic_v2_resume(void)
+{
+	trace_android_vh_gic_v2_resume(gic_data_dist_base(&gic_data[0]), &gic_data[0].domain);
+}
+EXPORT_SYMBOL_GPL(gic_v2_resume);
+
+static struct syscore_ops gic_v2_syscore_ops = {
+	.resume = gic_v2_resume,
+};
+
+static void gic_v2_syscore_init(void)
+{
+	register_syscore_ops(&gic_v2_syscore_ops);
+}
+
+#else
+static inline void gic_syscore_init(void) { }
+void gic_v2_resume(void) { }
+#endif
 
 void __init gic_cascade_irq(unsigned int gic_nr, unsigned int irq)
 {
@@ -1260,6 +1282,8 @@ static int gic_init_bases(struct gic_chip_data *gic,
 	ret = gic_pm_init(gic);
 	if (ret)
 		goto error;
+
+	gic_v2_syscore_init();
 
 	return 0;
 
