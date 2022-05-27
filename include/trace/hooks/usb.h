@@ -11,9 +11,13 @@
  * mechanism for vendor modules to hook and extend functionality
  */
 struct usb_device;
+struct dwc3;
 DECLARE_HOOK(android_vh_usb_new_device_added,
 	TP_PROTO(struct usb_device *udev, int *err),
 	TP_ARGS(udev, err));
+DECLARE_HOOK(android_vh_usb_adj_eyediagram,
+	TP_PROTO(struct dwc3 *dwc),
+	TP_ARGS(dwc));
 #endif /* _TRACE_HOOK_USB_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

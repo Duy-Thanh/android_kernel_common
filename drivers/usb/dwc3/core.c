@@ -31,6 +31,7 @@
 #include <linux/usb/gadget.h>
 #include <linux/usb/of.h>
 #include <linux/usb/otg.h>
+#include <trace/hooks/usb.h>
 
 #include "core.h"
 #include "gadget.h"
@@ -299,6 +300,7 @@ int dwc3_core_soft_reset(struct dwc3 *dwc)
 	return -ETIMEDOUT;
 
 done:
+	trace_android_vh_usb_adj_eyediagram(dwc);
 	/*
 	 * For DWC_usb31 controller 1.80a and prior, once DCTL.CSFRST bit
 	 * is cleared, we must wait at least 50ms before accessing the PHY
