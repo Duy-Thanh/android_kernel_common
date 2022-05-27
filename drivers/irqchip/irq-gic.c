@@ -35,9 +35,11 @@
 #include <linux/interrupt.h>
 #include <linux/percpu.h>
 #include <linux/slab.h>
+#include <linux/syscore_ops.h>
 #include <linux/irqchip.h>
 #include <linux/irqchip/chained_irq.h>
 #include <linux/irqchip/arm-gic.h>
+#include <trace/hooks/gic_v2.h>
 #include <trace/hooks/gic.h>
 
 #include <asm/cputype.h>
@@ -60,31 +62,6 @@ static void gic_check_cpu_features(void)
 #else
 #define gic_check_cpu_features()	do { } while(0)
 #endif
-
-union gic_base {
-	void __iomem *common_base;
-	void __percpu * __iomem *percpu_base;
-};
-
-struct gic_chip_data {
-	struct irq_chip chip;
-	union gic_base dist_base;
-	union gic_base cpu_base;
-	void __iomem *raw_dist_base;
-	void __iomem *raw_cpu_base;
-	u32 percpu_offset;
-#if defined(CONFIG_CPU_PM) || defined(CONFIG_ARM_GIC_PM)
-	u32 saved_spi_enable[DIV_ROUND_UP(1020, 32)];
-	u32 saved_spi_active[DIV_ROUND_UP(1020, 32)];
-	u32 saved_spi_conf[DIV_ROUND_UP(1020, 16)];
-	u32 saved_spi_target[DIV_ROUND_UP(1020, 4)];
-	u32 __percpu *saved_ppi_enable;
-	u32 __percpu *saved_ppi_active;
-	u32 __percpu *saved_ppi_conf;
-#endif
-	struct irq_domain *domain;
-	unsigned int gic_irqs;
-};
 
 #ifdef CONFIG_BL_SWITCHER
 
@@ -397,6 +374,27 @@ static void gic_handle_cascade_irq(struct irq_desc *desc)
  out:
 	chained_irq_exit(chip, desc);
 }
+
+#ifdef CONFIG_PM
+void gic_v2_resume(void)
+{
+	trace_android_vh_gic_v2_resume(gic_data);
+}
+EXPORT_SYMBOL_GPL(gic_v2_resume);
+
+static struct syscore_ops gic_v2_syscore_ops = {
+	.resume = gic_v2_resume,
+};
+
+static void gic_v2_syscore_init(void)
+{
+	register_syscore_ops(&gic_v2_syscore_ops);
+}
+
+#else
+static inline void gic_v2_syscore_init(void) { }
+void gic_v2_resume(void) { }
+#endif
 
 static const struct irq_chip gic_chip = {
 	.irq_mask		= gic_mask_irq,
@@ -1240,6 +1238,8 @@ static int gic_init_bases(struct gic_chip_data *gic,
 	ret = gic_pm_init(gic);
 	if (ret)
 		goto error;
+
+	gic_v2_syscore_init();
 
 	return 0;
 
