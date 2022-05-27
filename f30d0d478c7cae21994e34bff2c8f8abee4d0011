@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da84c103_dc967c9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-05-27T22:21:04Z",
+      "side": 1,
+      "message": "Going to wait for some response upstream. This revert will resolve the wifi issues for now -- https://android-review.googlesource.com/c/kernel/common/+/2109450",
+      "revId": "f30d0d478c7cae21994e34bff2c8f8abee4d0011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
