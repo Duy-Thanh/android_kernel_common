@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5867ee05_b6c97ebd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-27T17:04:17Z",
+      "side": 1,
+      "message": "This patch is not needed since the change needs to be part of the 06/01 KMI update where the XML will be regenerated for all the patches in that update.",
+      "revId": "c7ab38297e4ccbfca4cb47bf08c35a126d44a641",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
