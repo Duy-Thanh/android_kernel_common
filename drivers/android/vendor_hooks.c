@@ -67,6 +67,7 @@
 #include <trace/hooks/evdev.h>
 #include <trace/hooks/ipv4.h>
 #include <trace/hooks/signal.h>
+#include <trace/hooks/gic_v2.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -341,3 +342,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_partial_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_mmc_cache_card_properties);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_print_transaction_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_tlb_conf);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_v2_resume);
