@@ -484,10 +484,13 @@ int esp6_output_head(struct xfrm_state *x, struct sk_buff *skb, struct esp_info 
 	struct sk_buff *trailer;
 	int tailen = esp->tailen;
 	unsigned int allocsz;
+<<<<<<< HEAD   (8c3ac0 ANDROID: vendor_hooks: Add hooks for mutex)
 
 	allocsz = ALIGN(skb->data_len + tailen, L1_CACHE_BYTES);
 	if (allocsz > ESP_SKB_FRAG_MAXSIZE)
 		goto cow;
+=======
+>>>>>>> BRANCH (e08dd8 ANDROID: fix up abi issue with struct snd_pcm_runtime, again)
 
 	if (x->encap) {
 		int err = esp6_output_encap(x, skb, esp);
@@ -495,6 +498,10 @@ int esp6_output_head(struct xfrm_state *x, struct sk_buff *skb, struct esp_info 
 		if (err < 0)
 			return err;
 	}
+
+	allocsz = ALIGN(skb->data_len + tailen, L1_CACHE_BYTES);
+	if (allocsz > ESP_SKB_FRAG_MAXSIZE)
+		goto cow;
 
 	if (!skb_cloned(skb)) {
 		if (tailen <= skb_tailroom(skb)) {
@@ -813,8 +820,7 @@ int esp6_input_done2(struct sk_buff *skb, int err)
 		struct tcphdr *th;
 
 		offset = ipv6_skip_exthdr(skb, offset, &nexthdr, &frag_off);
-
-		if (offset < 0) {
+		if (offset == -1) {
 			err = -EINVAL;
 			goto out;
 		}

@@ -1500,8 +1500,13 @@ static int __ip6_append_data(struct sock *sk,
 		      sizeof(struct frag_hdr) : 0) +
 		     rt->rt6i_nfheader_len;
 
+<<<<<<< HEAD   (8c3ac0 ANDROID: vendor_hooks: Add hooks for mutex)
 	if (mtu < fragheaderlen ||
 	    ((mtu - fragheaderlen) & ~7) + fragheaderlen < sizeof(struct frag_hdr))
+=======
+	if (mtu <= fragheaderlen ||
+	    ((mtu - fragheaderlen) & ~7) + fragheaderlen <= sizeof(struct frag_hdr))
+>>>>>>> BRANCH (e08dd8 ANDROID: fix up abi issue with struct snd_pcm_runtime, again)
 		goto emsgsize;
 
 	maxfraglen = ((mtu - fragheaderlen) & ~7) + fragheaderlen -

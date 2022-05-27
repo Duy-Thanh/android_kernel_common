@@ -833,7 +833,11 @@ static int virtblk_probe(struct virtio_device *vdev)
 			dev_err(&vdev->dev,
 				"virtio_blk: invalid block size: 0x%x\n",
 				blk_size);
+<<<<<<< HEAD   (8c3ac0 ANDROID: vendor_hooks: Add hooks for mutex)
 			goto out_cleanup_disk;
+=======
+			goto out_free_tags;
+>>>>>>> BRANCH (e08dd8 ANDROID: fix up abi issue with struct snd_pcm_runtime, again)
 		}
 
 		blk_queue_logical_block_size(q, blk_size);
@@ -879,9 +883,15 @@ static int virtblk_probe(struct virtio_device *vdev)
 
 		virtio_cread(vdev, struct virtio_blk_config, max_discard_seg,
 			     &v);
+
+		/*
+		 * max_discard_seg == 0 is out of spec but we always
+		 * handled it.
+		 */
+		if (!v)
+			v = sg_elems - 2;
 		blk_queue_max_discard_segments(q,
-					       min_not_zero(v,
-							    MAX_DISCARD_SEGMENTS));
+					       min(v, MAX_DISCARD_SEGMENTS));
 
 		blk_queue_flag_set(QUEUE_FLAG_DISCARD, q);
 	}
