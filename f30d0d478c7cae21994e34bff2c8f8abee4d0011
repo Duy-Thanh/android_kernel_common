@@ -16,6 +16,29 @@
       "message": "Going to wait for some response upstream. This revert will resolve the wifi issues for now -- https://android-review.googlesource.com/c/kernel/common/+/2109450",
       "revId": "f30d0d478c7cae21994e34bff2c8f8abee4d0011",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a96dcd46_af260dc4",
+        "filename": "drivers/pci/controller/dwc/pcie-designware-host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-05-27T22:37:28Z",
+      "side": 1,
+      "message": "Can this be null?",
+      "range": {
+        "startLine": 272,
+        "startChar": 2,
+        "endLine": 272,
+        "endChar": 19
+      },
+      "revId": "f30d0d478c7cae21994e34bff2c8f8abee4d0011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
