@@ -136,6 +136,9 @@ struct readahead_control;
 DECLARE_HOOK(android_vh_ra_tuning_max_page,
 	TP_PROTO(struct readahead_control *ractl, unsigned long *max_page),
 	TP_ARGS(ractl, max_page));
+DECLARE_HOOK(android_vh_set_page_reclaim_type,
+	TP_PROTO(struct mm_struct *mm, struct page *page),
+	TP_ARGS(mm, page));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */
