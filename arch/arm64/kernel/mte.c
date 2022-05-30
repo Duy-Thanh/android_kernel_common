@@ -68,6 +68,7 @@ void mte_sync_tags(pte_t *ptep, pte_t pte)
 			mte_sync_page_tags(page, ptep, check_swap);
 	}
 }
+EXPORT_SYMBOL_GPL(mte_sync_tags);
 
 int memcmp_pages(struct page *page1, struct page *page2)
 {
