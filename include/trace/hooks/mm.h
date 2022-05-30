@@ -176,6 +176,12 @@ DECLARE_HOOK(android_vh_madvise_vma,
 	TP_PROTO(struct vm_area_struct *vma, struct vm_area_struct **prev,
 		unsigned long start, unsigned long end, int behavior, long *ret, bool *skip),
 	TP_ARGS(vma, prev, start, end,  behavior, ret, skip));
+DECLARE_HOOK(android_vh_add_nr_swap_pages,
+	TP_PROTO(struct swap_info_struct *si, unsigned int nr_entries, bool *skip),
+	TP_ARGS(si, nr_entries, skip));
+DECLARE_HOOK(android_vh_dec_nr_swap_pages,
+	TP_PROTO(struct swap_info_struct *si, bool *skip),
+	TP_ARGS(si, skip));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */
