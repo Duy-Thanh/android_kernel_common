@@ -173,6 +173,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_madvise_vma,
 	TP_PROTO(int *ret, struct vm_area_struct *vma, struct vm_area_struct **prev,
 		unsigned long start, unsigned long end, int behavior),
 	TP_ARGS(ret, vma, prev, start, end,  behavior), 1);
+DECLARE_HOOK(android_vh_add_to_swap,
+	TP_PROTO(int *ret, bool *skip),
+	TP_ARGS(ret, skip));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */

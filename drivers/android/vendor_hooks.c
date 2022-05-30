@@ -420,3 +420,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_madvise_vma);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_inactive_is_low);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_snapshot_refaults);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_shrink_page_list);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_to_swap);
