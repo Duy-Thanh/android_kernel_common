@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcb36751_fb4c6b5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-05-30T09:52:50Z",
+      "side": 1,
+      "message": "As a follow-up, I will add this to CI using go/ackomator once this lands.",
+      "revId": "07b9c2fecb393fd6327a627a838d4f007c205ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
