@@ -163,9 +163,24 @@ DECLARE_RESTRICTED_HOOK(android_rvh_shmem_unuse_swap_entries,
 			struct vm_area_struct *vma, vm_fault_t *fault_type),
 		int *ret, bool *skip),
 	TP_ARGS(inode, pvec_point, indices, type, shmem_swapin_page, ret, skip), 1);
+DECLARE_HOOK(android_vh_swap_slot_cache_active,
+	TP_PROTO(bool swap_slot_cache_active),
+	TP_ARGS(swap_slot_cache_active), 1);
+DECLARE_HOOK(android_vh_drain_slots_cache_cpu,
+	TP_PROTO(struct swap_slots_cache *cache, unsigned int type,
+		bool free_slots, bool *skip),
+	TP_ARGS(cache, type, free_slots, skip), 1);
+DECLARE_HOOK(android_vh_alloc_swap_slot_cache,
+	TP_PROTO(struct swap_slots_cache *cache,  swp_entry_t **slots,
+		swp_entry_t **slots_ret, int *ret, bool *skip),
+	TP_ARGS(cache, slots, slots_ret, ret, skip), 1);
 DECLARE_RESTRICTED_HOOK(android_rvh_free_swap_slot,
 	TP_PROTO(swp_entry_t entry, struct swap_info_struct *sis, bool *skip),
 	TP_ARGS(entry, sis, skip), 1);
+DECLARE_HOOK(android_vh_get_swap_slot_info,
+	TP_PROTO(struct page *page, struct swap_slots_cache *cache,
+		bool (*check_cache_active)(void), swp_entry_t *entry, bool *skip),
+	TP_ARGS(page, cache, check_cache_active, entry, skip), 1);
 DECLARE_RESTRICTED_HOOK(android_rvh_get_swap_page,
 	TP_PROTO(struct page *page, u64 hotness, swp_entry_t *entry, bool *skip),
 	TP_ARGS(page, hotness, entry, skip), 1);
