@@ -43,6 +43,7 @@
 #include <asm/tlbflush.h>
 #include <linux/swapops.h>
 #include <linux/swap_cgroup.h>
+#include <trace/hooks/mm.h>
 
 static bool swap_count_continued(struct swap_info_struct *, pgoff_t,
 				 unsigned char);
@@ -712,6 +713,7 @@ static void swap_range_free(struct swap_info_struct *si, unsigned long offset,
 	unsigned long begin = offset;
 	unsigned long end = offset + nr_entries - 1;
 	void (*swap_slot_free_notify)(struct block_device *, unsigned long);
+	bool skip = false;
 
 	if (offset < si->lowest_bit)
 		si->lowest_bit = offset;
@@ -722,7 +724,9 @@ static void swap_range_free(struct swap_info_struct *si, unsigned long offset,
 		if (was_full && (si->flags & SWP_WRITEOK))
 			add_to_avail_list(si);
 	}
-	atomic_long_add(nr_entries, &nr_swap_pages);
+	trace_android_vh_add_nr_swap_pages(si, nr_entries, &nr_swap_pages, &skip);
+	if (!skip)
+		atomic_long_add(nr_entries, &nr_swap_pages);
 	si->inuse_pages -= nr_entries;
 	if (si->flags & SWP_BLKDEV)
 		swap_slot_free_notify =
@@ -1137,6 +1141,7 @@ swp_entry_t get_swap_page_of_type(int type)
 {
 	struct swap_info_struct *si = swap_type_to_swap_info(type);
 	pgoff_t offset;
+	bool skip = false;
 
 	if (!si)
 		goto fail;
@@ -1146,7 +1151,9 @@ swp_entry_t get_swap_page_of_type(int type)
 		/* This is called for allocating swap entry, not cache */
 		offset = scan_swap_map(si, 1);
 		if (offset) {
-			atomic_long_dec(&nr_swap_pages);
+			trace_android_vh_dec_nr_swap_pages(si, &nr_swap_pages, &skip);
+			if (!skip)
+				atomic_long_dec(&nr_swap_pages);
 			spin_unlock(&si->lock);
 			return swp_entry(type, offset);
 		}
@@ -1337,12 +1344,16 @@ static unsigned char __swap_entry_free(struct swap_info_struct *p,
 	struct swap_cluster_info *ci;
 	unsigned long offset = swp_offset(entry);
 	unsigned char usage;
+	bool skip = false;
 
 	ci = lock_cluster_or_swap_info(p, offset);
 	usage = __swap_entry_free_locked(p, offset, 1);
 	unlock_cluster_or_swap_info(p, ci);
-	if (!usage)
-		free_swap_slot(entry);
+	if (!usage) {
+		trace_android_vh_free_swap_slot(entry, p, &skip);
+		if (!skip)
+			free_swap_slot(entry);
+	}
 
 	return usage;
 }
@@ -1390,6 +1401,7 @@ void put_swap_page(struct page *page, swp_entry_t entry)
 	unsigned int i, free_entries = 0;
 	unsigned char val;
 	int size = swap_entry_size(thp_nr_pages(page));
+	bool skip = false;
 
 	si = _swap_info_get(entry);
 	if (!si)
@@ -1418,7 +1430,11 @@ void put_swap_page(struct page *page, swp_entry_t entry)
 	for (i = 0; i < size; i++, entry.val++) {
 		if (!__swap_entry_free_locked(si, offset + i, SWAP_HAS_CACHE)) {
 			unlock_cluster_or_swap_info(si, ci);
-			free_swap_slot(entry);
+			skip = false;
+			trace_android_vh_free_swap_slot(entry, si, &skip);
+			if (!skip) {
+				free_swap_slot(entry);
+			}
 			if (i == size - 1)
 				return;
 			lock_cluster_or_swap_info(si, offset);
@@ -2007,6 +2023,7 @@ static int unuse_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 		}
 
 		try_to_free_swap(page);
+		trace_android_vh_set_page_hot(si, page);
 		unlock_page(page);
 		put_page(page);
 
@@ -2245,6 +2262,7 @@ retry:
 		lock_page(page);
 		wait_on_page_writeback(page);
 		try_to_free_swap(page);
+		trace_android_vh_set_page_hot(si, page);
 		unlock_page(page);
 		put_page(page);
 
@@ -2499,10 +2517,15 @@ static void setup_swap_info(struct swap_info_struct *p, int prio,
 
 static void _enable_swap_info(struct swap_info_struct *p)
 {
-	p->flags |= SWP_WRITEOK | SWP_VALID;
-	atomic_long_add(p->pages, &nr_swap_pages);
-	total_swap_pages += p->pages;
+	bool skip = false;
 
+	p->flags |= SWP_WRITEOK | SWP_VALID;
+	trace_android_vh_add_nr_total_swap_pages(p, &nr_swap_pages,
+		&total_swap_pages, &skip);
+	if (!skip) {
+		atomic_long_add(p->pages, &nr_swap_pages);
+		total_swap_pages += p->pages;
+	}
 	assert_spin_locked(&swap_lock);
 	/*
 	 * both lists are plists, and thus priority ordered.
@@ -2574,6 +2597,7 @@ SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
 	struct filename *pathname;
 	int err, found = 0;
 	unsigned int old_block_size;
+	bool skip = false;
 
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
@@ -2628,8 +2652,12 @@ SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
 		least_priority++;
 	}
 	plist_del(&p->list, &swap_active_head);
-	atomic_long_sub(p->pages, &nr_swap_pages);
-	total_swap_pages -= p->pages;
+	trace_android_vh_add_nr_total_swap_pages(p, &nr_swap_pages,
+		&total_swap_pages, &skip);
+	if (!skip) {
+		atomic_long_sub(p->pages, &nr_swap_pages);
+		total_swap_pages -= p->pages;
+	}
 	p->flags &= ~SWP_WRITEOK;
 	spin_unlock(&p->lock);
 	spin_unlock(&swap_lock);
@@ -2881,11 +2909,15 @@ late_initcall(max_swapfiles_check);
 
 static struct swap_info_struct *alloc_swap_info(void)
 {
-	struct swap_info_struct *p;
+	struct swap_info_struct *p = NULL;
 	struct swap_info_struct *defer = NULL;
 	unsigned int type;
 	int i;
+	bool skip = false;
 
+	trace_android_vh_alloc_si(&p, &skip);
+	if (skip)
+		return p;
 	p = kvzalloc(struct_size(p, avail_lists, nr_node_ids), GFP_KERNEL);
 	if (!p)
 		return ERR_PTR(-ENOMEM);
@@ -2927,6 +2959,8 @@ static struct swap_info_struct *alloc_swap_info(void)
 	kvfree(defer);
 	spin_lock_init(&p->lock);
 	spin_lock_init(&p->cont_lock);
+	trace_android_vh_get_functions(nr_swapfiles, scan_swap_map_slots,
+		swap_alloc_cluster);
 
 	return p;
 }
@@ -3369,6 +3403,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 		  (swap_flags & SWAP_FLAG_PRIO_MASK) >> SWAP_FLAG_PRIO_SHIFT;
 	enable_swap_info(p, prio, swap_map, cluster_info, frontswap_map);
 
+	trace_android_vh_init_swap_info_struct(p, swap_avail_heads);
 	pr_info("Adding %uk swap on %s.  Priority:%d extents:%d across:%lluk %s%s%s%s%s\n",
 		p->pages<<(PAGE_SHIFT-10), name->name, p->prio,
 		nr_extents, (unsigned long long)span<<(PAGE_SHIFT-10),
@@ -3429,13 +3464,18 @@ void si_swapinfo(struct sysinfo *val)
 {
 	unsigned int type;
 	unsigned long nr_to_be_unused = 0;
+	bool skip = false;
 
 	spin_lock(&swap_lock);
 	for (type = 0; type < nr_swapfiles; type++) {
 		struct swap_info_struct *si = swap_info[type];
 
-		if ((si->flags & SWP_USED) && !(si->flags & SWP_WRITEOK))
-			nr_to_be_unused += si->inuse_pages;
+		skip = false;
+		trace_android_vh_si_swapinfo(si, &nr_to_be_unused, &skip);
+		if (!skip) {
+			if ((si->flags & SWP_USED) && !(si->flags & SWP_WRITEOK))
+				nr_to_be_unused += si->inuse_pages;
+		}
 	}
 	val->freeswap = atomic_long_read(&nr_swap_pages) + nr_to_be_unused;
 	val->totalswap = total_swap_pages + nr_to_be_unused;
