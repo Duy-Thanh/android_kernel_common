@@ -40,6 +40,7 @@
 #include <linux/fs_parser.h>
 #include <linux/mm_inline.h>
 
+#include <trace/hooks/mm.h>
 #include <asm/tlbflush.h> /* for arch/microblaze update_mmu_cache() */
 
 #include "internal.h"
@@ -1374,6 +1375,7 @@ static int shmem_writepage(struct page *page, struct writeback_control *wbc)
 	struct inode *inode;
 	swp_entry_t swap;
 	pgoff_t index;
+	bool skip = false;
 
 	VM_BUG_ON_PAGE(PageCompound(page), page);
 	BUG_ON(!PageLocked(page));
@@ -1430,7 +1432,9 @@ static int shmem_writepage(struct page *page, struct writeback_control *wbc)
 		SetPageUptodate(page);
 	}
 
-	swap = get_swap_page(page);
+	trace_android_vh_get_swap_page(page, true, &swap, &skip);
+	if (!skip)
+		swap = get_swap_page(page);
 	if (!swap.val)
 		goto redirty;
 

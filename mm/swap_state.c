@@ -23,6 +23,7 @@
 #include <linux/huge_mm.h>
 #include <linux/shmem_fs.h>
 #include "internal.h"
+#include <trace/hooks/mm.h>
 
 /*
  * swapper_space is a fiction, retained to simplify the path through
@@ -218,11 +219,15 @@ int add_to_swap(struct page *page)
 {
 	swp_entry_t entry;
 	int err;
+	int ret = 0;
+	bool skip = false;
 
 	VM_BUG_ON_PAGE(!PageLocked(page), page);
 	VM_BUG_ON_PAGE(!PageUptodate(page), page);
+	trace_android_vh_get_swap_page(page, true, &entry, &skip);
+	if (!skip)
+		entry = get_swap_page(page);
 
-	entry = get_swap_page(page);
 	if (!entry.val)
 		return 0;
 
