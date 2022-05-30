@@ -144,6 +144,12 @@ DECLARE_RESTRICTED_HOOK(android_rvh_do_access_page,
 DECLARE_RESTRICTED_HOOK(android_rvh_vma_flag_process,
 	TP_PROTO(struct vm_fault *vmf, struct page *page, int method),
 	TP_ARGS(vmf, page, method), 1);
+DECLARE_HOOK(android_vh_process_page_state,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page), 1);
+DECLARE_HOOK(android_vh_migrate_page_states,
+	TP_PROTO(struct page *page1, struct page *page2),
+	TP_ARGS(page1, page2), 1);
 DECLARE_RESTRICTED_HOOK(android_rvh_madvise_case_memfusion,
 	TP_PROTO(int *ret, int behavior),
 	TP_ARGS(ret, behavior), 1);
