@@ -3,7 +3,9 @@
   reclaim_pages
   putback_lru_page
   isolate_lru_page
+  swap_slot_cache_enabled
   swapcache_free_entries
   put_swap_page
+  get_swap_page
   swap_info
   _vm_normal_page
