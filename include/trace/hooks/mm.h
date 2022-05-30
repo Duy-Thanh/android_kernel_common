@@ -15,6 +15,8 @@
 #include <trace/hooks/vendor_hooks.h>
 
 struct cma;
+struct swap_slots_cache;
+enum sgp_type;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_set_skip_swapcache_flags,
 			TP_PROTO(gfp_t *flags),
@@ -136,6 +138,13 @@ struct readahead_control;
 DECLARE_HOOK(android_vh_ra_tuning_max_page,
 	TP_PROTO(struct readahead_control *ractl, unsigned long *max_page),
 	TP_ARGS(ractl, max_page));
+DECLARE_HOOK(android_rvh_madvise_case_memfusion,
+	TP_PROTO(int behavior, int *ret, bool *skip),
+	TP_ARGS(behavior, ret, skip), 1);
+DECLARE_HOOK(android_rvh_madvise_vma,
+	TP_PROTO(struct vm_area_struct *vma, struct vm_area_struct **prev,
+		unsigned long start, unsigned long end, int behavior, long *ret, bool *skip),
+	TP_ARGS(vma, prev, start, end,  behavior, ret, skip), 1);
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */

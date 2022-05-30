@@ -29,6 +29,7 @@
 #include <linux/swapops.h>
 #include <linux/shmem_fs.h>
 #include <linux/mmu_notifier.h>
+#include <trace/hooks/mm.h>
 
 #include <asm/tlb.h>
 
@@ -46,6 +47,13 @@ struct madvise_walk_private {
  */
 static int madvise_need_mmap_write(int behavior)
 {
+	int ret = 0;
+	bool skip = false;
+
+	trace_android_rvh_madvise_case_memfusion(behavior, &ret, &skip);
+	if (skip)
+		return ret;
+
 	switch (behavior) {
 	case MADV_REMOVE:
 	case MADV_WILLNEED:
@@ -935,6 +943,13 @@ static long
 madvise_vma(struct vm_area_struct *vma, struct vm_area_struct **prev,
 		unsigned long start, unsigned long end, int behavior)
 {
+	long ret = 0;
+	bool skip = false;
+
+	trace_android_rvh_madvise_vma(vma, prev, start, end, behavior, &ret, &skip);
+	if (skip)
+		return ret;
+
 	switch (behavior) {
 	case MADV_REMOVE:
 		return madvise_remove(vma, prev, start, end);
@@ -955,6 +970,15 @@ madvise_vma(struct vm_area_struct *vma, struct vm_area_struct **prev,
 static bool
 madvise_behavior_valid(int behavior)
 {
+	int ret = 0;
+	bool skip = false;
+
+	trace_android_rvh_madvise_case_memfusion(behavior, &ret, &skip);
+	if ((skip) && (ret))
+		return true;
+	else if (skip)
+		return false;
+
 	switch (behavior) {
 	case MADV_DOFORK:
 	case MADV_DONTFORK:
@@ -993,6 +1017,15 @@ madvise_behavior_valid(int behavior)
 static bool
 process_madvise_behavior_valid(int behavior)
 {
+	int ret = 0;
+	bool skip = false;
+
+	trace_android_rvh_madvise_case_memfusion(behavior, &ret, &skip);
+	if ((skip) && (ret))
+		return true;
+	else if (skip)
+		return false;
+
 	switch (behavior) {
 	case MADV_COLD:
 	case MADV_PAGEOUT:
