@@ -163,6 +163,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_shmem_unuse_swap_entries,
 			struct vm_area_struct *vma, vm_fault_t *fault_type),
 		int *ret, bool *skip),
 	TP_ARGS(inode, pvec_point, indices, type, shmem_swapin_page, ret, skip), 1);
+DECLARE_HOOK(android_vh_free_swap_slot,
+	TP_PROTO(swp_entry_t entry, struct swap_info_struct *sis, bool *skip),
+	TP_ARGS(entry, sis, skip));
 DECLARE_RESTRICTED_HOOK(android_rvh_get_swap_page,
 	TP_PROTO(struct page *page, u64 hotness, swp_entry_t *entry, bool *skip),
 	TP_ARGS(page, hotness, entry, skip), 1);
@@ -176,6 +179,34 @@ DECLARE_RESTRICTED_HOOK(android_rvh_madvise_vma,
 DECLARE_RESTRICTED_HOOK(android_rvh_add_to_swap,
 	TP_PROTO(int *error),
 	TP_ARGS(error), 1);
+DECLARE_HOOK(android_vh_add_nr_swap_pages,
+	TP_PROTO(struct swap_info_struct *si, unsigned int nr_entries,
+		atomic_long_t *nr_swap_pages, bool *skip),
+	TP_ARGS(si, nr_entries, nr_swap_pages, skip));
+DECLARE_HOOK(android_vh_dec_nr_swap_pages,
+	TP_PROTO(struct swap_info_struct *si, atomic_long_t *nr_swap_pages, bool *skip),
+	TP_ARGS(si, nr_swap_pages, skip));
+DECLARE_HOOK(android_vh_set_page_hot,
+	TP_PROTO(struct swap_info_struct *si, struct page *page),
+	TP_ARGS(si, page));
+DECLARE_HOOK(android_vh_add_nr_total_swap_pages,
+	TP_PROTO(struct swap_info_struct *p, atomic_long_t *nr_swap_pages,
+		long *total_swap_pages, bool *skip),
+	TP_ARGS(p, nr_swap_pages, total_swap_pages, skip));
+DECLARE_HOOK(android_vh_init_swap_info_struct,
+	TP_PROTO(struct swap_info_struct *p, struct plist_head *swap_avail_heads),
+	TP_ARGS(p, swap_avail_heads));
+DECLARE_HOOK(android_vh_si_swapinfo,
+	TP_PROTO(struct swap_info_struct *si, unsigned long *nr_to_be_unused, bool *skip),
+	TP_ARGS(si, nr_to_be_unused, skip));
+DECLARE_HOOK(android_vh_get_functions,
+	TP_PROTO(unsigned int nr_swapfiles, int (*function1)(struct swap_info_struct *si,
+			unsigned char usage, int nr, swp_entry_t slots[]),
+		int (*function2)(struct swap_info_struct *si, swp_entry_t *slot)),
+	TP_ARGS(nr_swapfiles, function1, function2));
+DECLARE_HOOK(android_vh_alloc_si,
+	TP_PROTO(struct swap_info_struct **p, bool *skip),
+	TP_ARGS(p, skip));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */
