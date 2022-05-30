@@ -1121,6 +1121,7 @@ static unsigned int shrink_page_list(struct list_head *page_list,
 		enum page_references references = PAGEREF_RECLAIM;
 		bool dirty, writeback, may_enter_fs;
 		unsigned int nr_pages;
+		bool skip = false;
 
 		cond_resched();
 
@@ -1288,7 +1289,8 @@ static unsigned int shrink_page_list(struct list_head *page_list,
 								    page_list))
 						goto activate_locked;
 				}
-				if (!add_to_swap(page)) {
+				trace_android_vh_shrink_page_list(page, &skip);
+				if ((!skip) && (!add_to_swap(page))) {
 					if (!PageTransHuge(page))
 						goto activate_locked_split;
 					/* Fallback to swap normal pages */
@@ -1298,7 +1300,9 @@ static unsigned int shrink_page_list(struct list_head *page_list,
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 					count_vm_event(THP_SWPOUT_FALLBACK);
 #endif
-					if (!add_to_swap(page))
+					skip = false;
+					trace_android_vh_shrink_page_list(page, &skip);
+					if ((!skip) && (!add_to_swap(page)))
 						goto activate_locked_split;
 				}
 
@@ -2270,14 +2274,16 @@ static bool inactive_is_low(struct lruvec *lruvec, enum lru_list inactive_lru)
 	unsigned long inactive, active;
 	unsigned long inactive_ratio;
 	unsigned long gb;
+	bool skip = false;
 
 	inactive = lruvec_page_state(lruvec, NR_LRU_BASE + inactive_lru);
 	active = lruvec_page_state(lruvec, NR_LRU_BASE + active_lru);
 
 	gb = (inactive + active) >> (30 - PAGE_SHIFT);
-	if (gb)
+	trace_android_vh_inactive_is_low(gb, &inactive_ratio, inactive_lru, &skip);
+	if ((!skip) && (gb))
 		inactive_ratio = int_sqrt(10 * gb);
-	else
+	else if (!skip)
 		inactive_ratio = 1;
 
 	trace_android_vh_tune_inactive_ratio(&inactive_ratio, is_file_lru(inactive_lru));
@@ -3079,6 +3085,7 @@ static void snapshot_refaults(struct mem_cgroup *target_memcg, pg_data_t *pgdat)
 	target_lruvec->refaults[0] = refaults;
 	refaults = lruvec_page_state(target_lruvec, WORKINGSET_ACTIVATE_FILE);
 	target_lruvec->refaults[1] = refaults;
+	trace_android_vh_snapshot_refaults(target_lruvec);
 }
 
 /*
