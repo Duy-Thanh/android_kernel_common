@@ -887,6 +887,11 @@ static int __dwc3_gadget_ep_enable(struct dwc3_ep *dep, unsigned int action)
 		trb_link->ctrl |= DWC3_TRB_CTRL_HWO;
 	}
 
+#ifdef CONFIG_USB_PAM
+	if (dep->endpoint.android_kabi_reserved1 = 0xff)
+		usb_phy_init(dwc->pam);
+	else {
+#endif
 	/*
 	 * Issue StartTransfer here with no-op TRB so we can always rely on No
 	 * Response Update Transfer command.
@@ -942,7 +947,9 @@ static int __dwc3_gadget_ep_enable(struct dwc3_ep *dep, unsigned int action)
 				dep->flags |= DWC3_EP_FORCE_RESTART_STREAM;
 		}
 	}
-
+#ifdef CONFIG_USB_PAM
+	}
+#endif
 out:
 	trace_dwc3_gadget_ep_enable(dep);
 
@@ -1077,6 +1084,11 @@ static int dwc3_gadget_ep_disable(struct usb_ep *ep)
 
 	dep = to_dwc3_ep(ep);
 	dwc = dep->dwc;
+
+#ifdef CONFIG_USB_PAM
+	if (ep->android_kabi_reserved1 == 0xff)
+		usb_phy_set_suspend(dwc->pam, 1);
+#endif
 
 	if (dev_WARN_ONCE(dwc->dev, !(dep->flags & DWC3_EP_ENABLED),
 					"%s is already disabled\n",

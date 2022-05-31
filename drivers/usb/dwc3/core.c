@@ -255,6 +255,31 @@ u32 dwc3_core_fifo_space(struct dwc3_ep *dep, u8 type)
 }
 
 /**
+ * dwc3_txdeempsis_adj - change main_cursor, pre_cursor,
+ * post_cursor for eye diagram
+ * @dwc: pointer to our context structure
+ */
+static int dwc3_txdeemphsis_adj(struct dwc3 *dwc)
+{
+	u32 reg;
+
+	/* Gen2 txdeemphsis */
+	reg = 0x8c45;
+	dwc3_writel(dwc->regs, LCSR_TX_DEEMPH, reg);
+	/* CP13 txdeemphsis */
+	reg = 0xe45;
+	dwc3_writel(dwc->regs, LCSR_TX_DEEMPH_1, reg);
+	/* CP14 txdeemphsis */
+	reg = 0x8d80;
+	dwc3_writel(dwc->regs, LCSR_TX_DEEMPH_2, reg);
+	/* CP16 txdeemphsis */
+	reg = 0xf80;
+	dwc3_writel(dwc->regs, LCSR_TX_DEEMPH_3, reg);
+
+	return 0;
+}
+
+/**
  * dwc3_core_soft_reset - Issues core soft reset and PHY reset
  * @dwc: pointer to our context structure
  */
@@ -299,6 +324,7 @@ int dwc3_core_soft_reset(struct dwc3 *dwc)
 	return -ETIMEDOUT;
 
 done:
+	dwc3_txdeemphsis_adj(dwc);
 	/*
 	 * For DWC_usb31 controller 1.80a and prior, once DCTL.CSFRST bit
 	 * is cleared, we must wait at least 50ms before accessing the PHY
@@ -697,6 +723,12 @@ static int dwc3_phy_setup(struct dwc3 *dwc)
 		reg |= DWC3_GUSB2PHYCFG_SUSPHY;
 
 	/*
+	 * Disable phy suspend feature when dwc3 act as host role
+	 */
+	if (dwc->dr_mode == USB_DR_MODE_OTG || dwc->dr_mode == USB_DR_MODE_HOST)
+		reg &= ~DWC3_GUSB2PHYCFG_SUSPHY;
+
+	/*
 	 * For DRD controllers, GUSB2PHYCFG.SUSPHY must be cleared after
 	 * power-on reset, and it can be set after core initialization, which is
 	 * after device soft-reset during initialization.
@@ -833,6 +865,10 @@ static void dwc3_core_setup_global_control(struct dwc3 *dwc)
 static int dwc3_core_get_phy(struct dwc3 *dwc);
 static int dwc3_core_ulpi_init(struct dwc3 *dwc);
 
+#ifdef CONFIG_USB_PAM
+static int dwc3_core_get_pam(struct dwc3 *dwc);
+#endif
+
 /* set global incr burst type configuration registers */
 static void dwc3_set_incr_burst_type(struct dwc3 *dwc)
 {
@@ -962,6 +998,11 @@ static int dwc3_core_init(struct dwc3 *dwc)
 		ret = dwc3_core_get_phy(dwc);
 		if (ret)
 			goto err0a;
+#ifdef CONFIG_USB_PAM
+		ret = dwc3_core_get_pam(dwc);
+		if (ret)
+			goto err0a;
+#endif
 		dwc->phys_ready = true;
 	}
 
@@ -1190,6 +1231,29 @@ static int dwc3_core_get_phy(struct dwc3 *dwc)
 			dwc->usb3_generic_phy = NULL;
 		} else {
 			return dev_err_probe(dev, ret, "no usb3 phy configured\n");
+		}
+	}
+
+	return 0;
+}
+
+#ifdef CONFIG_USB_PAM
+static int dwc3_core_get_pam(struct dwc3 *dwc)
+{
+	struct device 		*dev = dwc->dev;
+	struct device_node	*node = dev->of_node;
+
+	if (node)
+		dwc->pam = devm_usb_get_phy_by_phandle(dev, "usb-pam", 0);
+	else
+		dwc->pam = devm_usb_get_phy(dev, USB_PHY_TYPE_USB3);
+
+	if (IS_ERR(dwc->pam)) {
+		ret = PTR_ERR(dwc->pam);
+		if (ret == -ENXIO || ret == -ENODEV) {
+			dwc->pam = NULL;
+		} else {
+			return dev_err_probe(dev, ret, "no usb pam phy configured\n");
 		}
 	}
 
