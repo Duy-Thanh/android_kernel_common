@@ -6,9 +6,198 @@
 #include <linux/pm_runtime.h>
 #include <ufs/ufshcd.h>
 
-static inline bool ufshcd_is_user_access_allowed(struct ufs_hba *hba)
+/**
+ * struct ufs_hba_priv - Host controller data private to the UFS core driver
+ * @hba: HBA information shared between UFS core and UFS drivers.
+ * @ucdl_base_addr: UFS Command Descriptor base address
+ * @utrdl_base_addr: UTP Transfer Request Descriptor base address
+ * @utmrdl_base_addr: UTP Task Management Descriptor base address
+ * @ucdl_dma_addr: UFS Command Descriptor DMA address
+ * @utrdl_dma_addr: UTRDL DMA address
+ * @utmrdl_dma_addr: UTMRDL DMA address
+ * @host: Scsi_Host instance of the driver
+ * @dev: device handle
+ * @ufs_device_wlun: WLUN that controls the entire UFS device.
+ * @hwmon_device: device instance registered with the hwmon core.
+ * @pm_op_in_progress: whether or not a PM operation is in progress.
+ * @lrb: local reference block
+ * @outstanding_tasks: Bits representing outstanding task requests
+ * @outstanding_lock: Protects @outstanding_reqs.
+ * @outstanding_reqs: Bits representing outstanding transfer requests
+ * @reserved_slot: Used to submit device commands. Protected by @dev_cmd.lock.
+ * @dev_ref_clk_freq: reference clock frequency
+ * @tmf_tag_set: TMF tag set.
+ * @tmf_queue: Used to allocate TMF tags.
+ * @tmf_rqs: array with pointers to TMF requests while these are in progress.
+ * @active_uic_cmd: handle of active UIC command
+ * @uic_cmd_mutex: mutex for UIC command
+ * @uic_async_done: completion used during UIC processing
+ * @ufshcd_state: UFSHCD state
+ * @eh_flags: Error handling flags
+ * @intr_mask: Interrupt Mask Bits
+ * @ee_ctrl_mask: Exception event control mask
+ * @ee_drv_mask: Exception event mask for driver
+ * @ee_usr_mask: Exception event mask for user (set via debugfs)
+ * @ee_ctrl_mutex: Used to serialize exception event information.
+ * @is_powered: flag to check if HBA is powered
+ * @shutting_down: flag to check if shutdown has been invoked
+ * @host_sem: semaphore used to serialize concurrent contexts
+ * @eh_wq: Workqueue that eh_work works on
+ * @eh_work: Worker to handle UFS errors that require s/w attention
+ * @eeh_work: Worker to handle exception events
+ * @errors: HBA errors
+ * @uic_error: UFS interconnect layer error status
+ * @saved_err: sticky error mask
+ * @saved_uic_err: sticky UIC error mask
+ * @ufs_stats: various error counters
+ * @force_reset: flag to force eh_work perform a full reset
+ * @force_pmc: flag to force a power mode change
+ * @silence_err_logs: flag to silence error logs
+ * @dev_cmd: ufs device management command information
+ * @last_dme_cmd_tstamp: time stamp of the last completed DME command
+ * @auto_bkops_enabled: to track whether bkops is enabled in device
+ * @clk_gating: information related to clock gating
+ * @devfreq: frequency scaling information owned by the devfreq core
+ * @clk_scaling: frequency scaling information owned by the UFS driver
+ * @is_sys_suspended: whether or not the entire system has been suspended
+ * @urgent_bkops_lvl: keeps track of urgent bkops level for device
+ * @is_urgent_bkops_lvl_checked: keeps track if the urgent bkops level for
+ *  device is known or not.
+ * @clk_scaling_lock: used to serialize device commands and clock scaling
+ * @desc_size: descriptor sizes reported by device
+ * @scsi_block_reqs_cnt: reference counting for scsi block requests
+ * @bsg_dev: struct device associated with the BSG queue
+ * @bsg_queue: BSG queue associated with the UFS controller
+ * @rpm_dev_flush_recheck_work: used to suspend from RPM (runtime power
+ *	management) after the UFS device has finished a WriteBooster buffer
+ *	flush or auto BKOP.
+ * @hpb_dev: information related to HPB (Host Performance Booster).
+ * @monitor: statistics about UFS commands
+ * @crypto_capabilities: Content of crypto capabilities register (0x100)
+ * @crypto_cfg_register: Start of the crypto cfg array
+ * @crypto_profile: the crypto profile of this hba (if applicable)
+ * @debugfs_root: UFS controller debugfs root directory
+ * @debugfs_ee_work: used to restore ee_ctrl_mask after a delay
+ * @debugfs_ee_rate_limit_ms: user configurable delay after which to restore
+ *	ee_ctrl_mask
+ * @luns_avail: number of regular and well known LUNs supported by the UFS
+ *	device
+ * @complete_put: whether or not to call ufshcd_rpm_put() from inside
+ *	ufshcd_resume_complete()
+ */
+struct ufs_hba_priv {
+	struct ufs_hba hba;
+
+	/* Virtual memory reference */
+	struct utp_transfer_cmd_desc *ucdl_base_addr;
+	struct utp_transfer_req_desc *utrdl_base_addr;
+	struct utp_task_req_desc *utmrdl_base_addr;
+
+	/* DMA memory reference */
+	dma_addr_t ucdl_dma_addr;
+	dma_addr_t utrdl_dma_addr;
+	dma_addr_t utmrdl_dma_addr;
+
+	struct Scsi_Host *host;
+	struct scsi_device *ufs_device_wlun;
+
+#ifdef CONFIG_SCSI_UFS_HWMON
+	struct device *hwmon_device;
+#endif
+
+	int pm_op_in_progress;
+
+	struct ufshcd_lrb *lrb;
+
+	unsigned long outstanding_tasks;
+	spinlock_t outstanding_lock;
+	unsigned long outstanding_reqs;
+
+	u32 reserved_slot;
+
+	enum ufs_ref_clk_freq dev_ref_clk_freq;
+
+	struct blk_mq_tag_set tmf_tag_set;
+	struct request_queue *tmf_queue;
+	struct request **tmf_rqs;
+
+	struct uic_command *active_uic_cmd;
+	struct mutex uic_cmd_mutex;
+	struct completion *uic_async_done;
+
+	enum ufshcd_state ufshcd_state;
+	u32 eh_flags;
+	u32 intr_mask;
+	u16 ee_ctrl_mask;
+	u16 ee_drv_mask;
+	u16 ee_usr_mask;
+	struct mutex ee_ctrl_mutex;
+	bool is_powered;
+	bool shutting_down;
+	struct semaphore host_sem;
+
+	/* Work Queues */
+	struct workqueue_struct *eh_wq;
+	struct work_struct eh_work;
+	struct work_struct eeh_work;
+
+	/* HBA Errors */
+	u32 errors;
+	u32 uic_error;
+	u32 saved_err;
+	u32 saved_uic_err;
+	struct ufs_stats ufs_stats;
+	bool force_reset;
+	bool force_pmc;
+	bool silence_err_logs;
+
+	/* Device management request data */
+	struct ufs_dev_cmd dev_cmd;
+	ktime_t last_dme_cmd_tstamp;
+
+	bool auto_bkops_enabled;
+
+	struct ufs_clk_gating clk_gating;
+
+	struct devfreq *devfreq;
+	struct ufs_clk_scaling clk_scaling;
+
+	bool is_sys_suspended;
+
+	enum bkops_status urgent_bkops_lvl;
+	bool is_urgent_bkops_lvl_checked;
+
+	struct rw_semaphore clk_scaling_lock;
+	unsigned char desc_size[QUERY_DESC_IDN_MAX];
+	atomic_t scsi_block_reqs_cnt;
+
+	struct device		bsg_dev;
+	struct request_queue	*bsg_queue;
+	struct delayed_work rpm_dev_flush_recheck_work;
+
+#ifdef CONFIG_SCSI_UFS_HPB
+	struct ufshpb_dev_info hpb_dev;
+#endif
+
+	struct ufs_hba_monitor	monitor;
+
+#ifdef CONFIG_SCSI_UFS_CRYPTO
+	union ufs_crypto_capabilities crypto_capabilities;
+	u32 crypto_cfg_register;
+	struct blk_crypto_profile crypto_profile;
+#endif
+#ifdef CONFIG_DEBUG_FS
+	struct dentry *debugfs_root;
+	struct delayed_work debugfs_ee_work;
+	u32 debugfs_ee_rate_limit_ms;
+#endif
+	u32 luns_avail;
+	bool complete_put;
+};
+
+static inline bool ufshcd_is_user_access_allowed(struct ufs_hba_priv *priv)
 {
-	return !hba->shutting_down;
+	return !priv->shutting_down;
 }
 
 void ufshcd_schedule_eh_work(struct ufs_hba *hba);
@@ -234,46 +423,56 @@ static inline u8 ufshcd_scsi_to_upiu_lun(unsigned int scsi_lun)
 
 int __ufshcd_write_ee_control(struct ufs_hba *hba, u32 ee_ctrl_mask);
 int ufshcd_write_ee_control(struct ufs_hba *hba);
-int ufshcd_update_ee_control(struct ufs_hba *hba, u16 *mask, u16 *other_mask,
-			     u16 set, u16 clr);
+int ufshcd_update_ee_control(struct ufs_hba_priv *priv, u16 *mask,
+			     u16 *other_mask, u16 set, u16 clr);
 
-static inline int ufshcd_update_ee_drv_mask(struct ufs_hba *hba,
+static inline int ufshcd_update_ee_drv_mask(struct ufs_hba_priv *priv,
 					    u16 set, u16 clr)
 {
-	return ufshcd_update_ee_control(hba, &hba->ee_drv_mask,
-					&hba->ee_usr_mask, set, clr);
+	return ufshcd_update_ee_control(priv, &priv->ee_drv_mask,
+					&priv->ee_usr_mask, set, clr);
 }
 
-static inline int ufshcd_update_ee_usr_mask(struct ufs_hba *hba,
+static inline int ufshcd_update_ee_usr_mask(struct ufs_hba_priv *priv,
 					    u16 set, u16 clr)
 {
-	return ufshcd_update_ee_control(hba, &hba->ee_usr_mask,
-					&hba->ee_drv_mask, set, clr);
+	return ufshcd_update_ee_control(priv, &priv->ee_usr_mask,
+					&priv->ee_drv_mask, set, clr);
 }
 
 static inline int ufshcd_rpm_get_sync(struct ufs_hba *hba)
 {
-	return pm_runtime_get_sync(&hba->ufs_device_wlun->sdev_gendev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	return pm_runtime_get_sync(&priv->ufs_device_wlun->sdev_gendev);
 }
 
 static inline int ufshcd_rpm_put_sync(struct ufs_hba *hba)
 {
-	return pm_runtime_put_sync(&hba->ufs_device_wlun->sdev_gendev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	return pm_runtime_put_sync(&priv->ufs_device_wlun->sdev_gendev);
 }
 
 static inline void ufshcd_rpm_get_noresume(struct ufs_hba *hba)
 {
-	pm_runtime_get_noresume(&hba->ufs_device_wlun->sdev_gendev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	pm_runtime_get_noresume(&priv->ufs_device_wlun->sdev_gendev);
 }
 
 static inline int ufshcd_rpm_resume(struct ufs_hba *hba)
 {
-	return pm_runtime_resume(&hba->ufs_device_wlun->sdev_gendev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	return pm_runtime_resume(&priv->ufs_device_wlun->sdev_gendev);
 }
 
 static inline int ufshcd_rpm_put(struct ufs_hba *hba)
 {
-	return pm_runtime_put(&hba->ufs_device_wlun->sdev_gendev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	return pm_runtime_put(&priv->ufs_device_wlun->sdev_gendev);
 }
 
 /**
