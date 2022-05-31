@@ -16,6 +16,23 @@
       "message": "As we discussed, I submit the original patch, and wait for your good suggestion",
       "revId": "f43ecd41b4c971e565c1d186770ef75a6cc7d851",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b508fbe_eeec64fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-05-31T18:50:29Z",
+      "side": 1,
+      "message": "Please read the kernel documentation for how to write a proper changelog so that the patch can be reviewed.  As it is, I do not know what this is expecting to do at all.\n\nAlso, please submit your dwc3 changes upstream first, before asking us to take them, as is the case for all kernel patches.",
+      "revId": "f43ecd41b4c971e565c1d186770ef75a6cc7d851",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
