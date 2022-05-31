@@ -51,6 +51,23 @@
       "parentUuid": "7ff34e4c_5b78231c",
       "revId": "f3f87608d8d4502826a720f14cf5215cfdf6eb32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38772e79_300e0134",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953820
+      },
+      "writtenOn": "2022-05-31T17:18:38Z",
+      "side": 1,
+      "message": "I noticed that this change is not present in 5.15 kernel. We are using virtio-MMIO transport in 5.15 kernel based product and wanted to understand if we should introduce the same change into 5.15 kernel also. That perhaps depends on understanding the original bug which lead to this change being merged in 5.10:\n\nBug: 141626390\n\nCould someone either share the bug details (I don\u0027t seem to have access to it) or atleast clarify if the same change would be required in 5.15 kernel?",
+      "revId": "f3f87608d8d4502826a720f14cf5215cfdf6eb32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
