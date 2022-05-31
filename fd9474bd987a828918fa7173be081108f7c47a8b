@@ -16,6 +16,24 @@
       "message": "why restricted?",
       "revId": "fd9474bd987a828918fa7173be081108f7c47a8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5c47be_e6fe848a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-05-31T09:15:27Z",
+      "side": 1,
+      "message": "We have changed this to unrestricted.",
+      "parentUuid": "15bfcc4e_26111611",
+      "revId": "fd9474bd987a828918fa7173be081108f7c47a8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
