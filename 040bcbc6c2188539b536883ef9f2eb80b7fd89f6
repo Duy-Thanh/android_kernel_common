@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ca436a0_61ffde39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-31T17:31:24Z",
+      "side": 1,
+      "message": "This should be just this:\n\nSigned-off-by: Liujie Xie \u003cxieliujie@oppo.com\u003e\nSigned-off-by: Peifeng Li \u003clipeifeng@oppo.com\u003e\nChange-Id: Ie0e369f8f8739fea59a95470af20ab0e976869d1",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 46
+      },
+      "revId": "040bcbc6c2188539b536883ef9f2eb80b7fd89f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
