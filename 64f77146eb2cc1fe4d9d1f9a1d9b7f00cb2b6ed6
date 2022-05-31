@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af6678ab_5bbd0dc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-05-31T08:13:23Z",
+      "side": 1,
+      "message": "We have changed this to unrestricted.",
+      "parentUuid": "c47889e3_967c570c",
+      "revId": "64f77146eb2cc1fe4d9d1f9a1d9b7f00cb2b6ed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60a82bcd_e6d804cb",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "The purpose of this parameter is to control the processing of the added hook function. The processing logic of the hook functions need to be added in these places is similar, but the value of page state to be set are different. Therefore, we define a hook for processing, and set different state value of page state according to the value of parameter method.",
       "parentUuid": "60a82bcd_e6d804cb",
+      "range": {
+        "startLine": 590,
+        "startChar": 54,
+        "endLine": 590,
+        "endChar": 56
+      },
+      "revId": "64f77146eb2cc1fe4d9d1f9a1d9b7f00cb2b6ed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6696fd4_ad123778",
+        "filename": "mm/migrate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-05-31T08:13:23Z",
+      "side": 1,
+      "message": "We have changed this.",
+      "parentUuid": "8d63e1f4_19b354aa",
       "range": {
         "startLine": 590,
         "startChar": 54,
