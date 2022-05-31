@@ -87,6 +87,24 @@
       "message": "Hi Suren,\nWe found one CTS regression related with this patch, it is a pure software encoder/decoder test. The root cause is still unknown.\nCtsVideoTestCases \nandroid.video.cts.VideoEncoderDecoderTest#testVp8Goog0Perf1920x1080",
       "revId": "dc8ac508afd3b105978fd3dd98462950daa5b297",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ee8db1e_d891412f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-31T17:05:26Z",
+      "side": 1,
+      "message": "Hi Jindong,\nCould you pleas file a bug and describe the regression in more details?",
+      "parentUuid": "a5e618fd_f93c5672",
+      "revId": "dc8ac508afd3b105978fd3dd98462950daa5b297",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
