@@ -52,12 +52,13 @@ static int ufs_hwmon_read(struct device *dev, enum hwmon_sensor_types type, u32 
 {
 	struct ufs_hwmon_data *data = dev_get_drvdata(dev);
 	struct ufs_hba *hba = data->hba;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	int err;
 
-	down(&hba->host_sem);
+	down(&priv->host_sem);
 
-	if (!ufshcd_is_user_access_allowed(hba)) {
-		up(&hba->host_sem);
+	if (!ufshcd_is_user_access_allowed(priv)) {
+		up(&priv->host_sem);
 		return -EBUSY;
 	}
 
@@ -88,7 +89,7 @@ static int ufs_hwmon_read(struct device *dev, enum hwmon_sensor_types type, u32 
 
 	ufshcd_rpm_put_sync(hba);
 
-	up(&hba->host_sem);
+	up(&priv->host_sem);
 
 	return err;
 }
@@ -98,6 +99,7 @@ static int ufs_hwmon_write(struct device *dev, enum hwmon_sensor_types type, u32
 {
 	struct ufs_hwmon_data *data = dev_get_drvdata(dev);
 	struct ufs_hba *hba = data->hba;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	int err;
 
 	if (attr != hwmon_temp_enable)
@@ -106,23 +108,23 @@ static int ufs_hwmon_write(struct device *dev, enum hwmon_sensor_types type, u32
 	if (val != 0 && val != 1)
 		return -EINVAL;
 
-	down(&hba->host_sem);
+	down(&priv->host_sem);
 
-	if (!ufshcd_is_user_access_allowed(hba)) {
-		up(&hba->host_sem);
+	if (!ufshcd_is_user_access_allowed(priv)) {
+		up(&priv->host_sem);
 		return -EBUSY;
 	}
 
 	ufshcd_rpm_get_sync(hba);
 
 	if (val == 1)
-		err = ufshcd_update_ee_usr_mask(hba, MASK_EE_URGENT_TEMP, 0);
+		err = ufshcd_update_ee_usr_mask(priv, MASK_EE_URGENT_TEMP, 0);
 	else
-		err = ufshcd_update_ee_usr_mask(hba, 0, MASK_EE_URGENT_TEMP);
+		err = ufshcd_update_ee_usr_mask(priv, 0, MASK_EE_URGENT_TEMP);
 
 	ufshcd_rpm_put_sync(hba);
 
-	up(&hba->host_sem);
+	up(&priv->host_sem);
 
 	return err;
 }
@@ -164,6 +166,7 @@ static const struct hwmon_chip_info ufs_hwmon_hba_info = {
 
 void ufs_hwmon_probe(struct ufs_hba *hba, u8 mask)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	struct device *dev = hba->dev;
 	struct ufs_hwmon_data *data;
 	struct device *hwmon;
@@ -182,30 +185,33 @@ void ufs_hwmon_probe(struct ufs_hba *hba, u8 mask)
 		return;
 	}
 
-	hba->hwmon_device = hwmon;
+	priv->hwmon_device = hwmon;
 }
 
 void ufs_hwmon_remove(struct ufs_hba *hba)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	struct ufs_hwmon_data *data;
 
-	if (!hba->hwmon_device)
+	if (!priv->hwmon_device)
 		return;
 
-	data = dev_get_drvdata(hba->hwmon_device);
-	hwmon_device_unregister(hba->hwmon_device);
-	hba->hwmon_device = NULL;
+	data = dev_get_drvdata(priv->hwmon_device);
+	hwmon_device_unregister(priv->hwmon_device);
+	priv->hwmon_device = NULL;
 	kfree(data);
 }
 
 void ufs_hwmon_notify_event(struct ufs_hba *hba, u8 ee_mask)
 {
-	if (!hba->hwmon_device)
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	if (!priv->hwmon_device)
 		return;
 
 	if (ee_mask & MASK_EE_TOO_HIGH_TEMP)
-		hwmon_notify_event(hba->hwmon_device, hwmon_temp, hwmon_temp_max_alarm, 0);
+		hwmon_notify_event(priv->hwmon_device, hwmon_temp, hwmon_temp_max_alarm, 0);
 
 	if (ee_mask & MASK_EE_TOO_LOW_TEMP)
-		hwmon_notify_event(hba->hwmon_device, hwmon_temp, hwmon_temp_min_alarm, 0);
+		hwmon_notify_event(priv->hwmon_device, hwmon_temp, hwmon_temp_min_alarm, 0);
 }

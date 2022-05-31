@@ -34,7 +34,8 @@ void ufs_debugfs_exit(void)
 static int ufs_debugfs_stats_show(struct seq_file *s, void *data)
 {
 	struct ufs_hba *hba = hba_from_file(s->file);
-	struct ufs_event_hist *e = hba->ufs_stats.event;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+	struct ufs_event_hist *e = priv->ufs_stats.event;
 
 #define PRT(fmt, typ) \
 	seq_printf(s, fmt, e[UFS_EVT_ ## typ].cnt)
@@ -60,17 +61,20 @@ DEFINE_SHOW_ATTRIBUTE(ufs_debugfs_stats);
 static int ee_usr_mask_get(void *data, u64 *val)
 {
 	struct ufs_hba *hba = data;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
-	*val = hba->ee_usr_mask;
+	*val = priv->ee_usr_mask;
 	return 0;
 }
 
 static int ufs_debugfs_get_user_access(struct ufs_hba *hba)
-__acquires(&hba->host_sem)
+	__acquires(&priv->host_sem)
 {
-	down(&hba->host_sem);
-	if (!ufshcd_is_user_access_allowed(hba)) {
-		up(&hba->host_sem);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	down(&priv->host_sem);
+	if (!ufshcd_is_user_access_allowed(priv)) {
+		up(&priv->host_sem);
 		return -EBUSY;
 	}
 	ufshcd_rpm_get_sync(hba);
@@ -78,15 +82,18 @@ __acquires(&hba->host_sem)
 }
 
 static void ufs_debugfs_put_user_access(struct ufs_hba *hba)
-__releases(&hba->host_sem)
+	__releases(&priv->host_sem)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
 	ufshcd_rpm_put_sync(hba);
-	up(&hba->host_sem);
+	up(&priv->host_sem);
 }
 
 static int ee_usr_mask_set(void *data, u64 val)
 {
 	struct ufs_hba *hba = data;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	int err;
 
 	if (val & ~(u64)MASK_EE_STATUS)
@@ -94,7 +101,7 @@ static int ee_usr_mask_set(void *data, u64 val)
 	err = ufs_debugfs_get_user_access(hba);
 	if (err)
 		return err;
-	err = ufshcd_update_ee_usr_mask(hba, val, MASK_EE_STATUS);
+	err = ufshcd_update_ee_usr_mask(priv, val, MASK_EE_STATUS);
 	ufs_debugfs_put_user_access(hba);
 	return err;
 }
@@ -103,36 +110,39 @@ DEFINE_DEBUGFS_ATTRIBUTE(ee_usr_mask_fops, ee_usr_mask_get, ee_usr_mask_set, "%#
 
 void ufs_debugfs_exception_event(struct ufs_hba *hba, u16 status)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	bool chgd = false;
 	u16 ee_ctrl_mask;
 	int err = 0;
 
-	if (!hba->debugfs_ee_rate_limit_ms || !status)
+	if (!priv->debugfs_ee_rate_limit_ms || !status)
 		return;
 
-	mutex_lock(&hba->ee_ctrl_mutex);
-	ee_ctrl_mask = hba->ee_drv_mask | (hba->ee_usr_mask & ~status);
-	chgd = ee_ctrl_mask != hba->ee_ctrl_mask;
+	mutex_lock(&priv->ee_ctrl_mutex);
+	ee_ctrl_mask = priv->ee_drv_mask | (priv->ee_usr_mask & ~status);
+	chgd = ee_ctrl_mask != priv->ee_ctrl_mask;
 	if (chgd) {
 		err = __ufshcd_write_ee_control(hba, ee_ctrl_mask);
 		if (err)
 			dev_err(hba->dev, "%s: failed to write ee control %d\n",
 				__func__, err);
 	}
-	mutex_unlock(&hba->ee_ctrl_mutex);
+	mutex_unlock(&priv->ee_ctrl_mutex);
 
 	if (chgd && !err) {
-		unsigned long delay = msecs_to_jiffies(hba->debugfs_ee_rate_limit_ms);
+		unsigned long delay = msecs_to_jiffies(priv->debugfs_ee_rate_limit_ms);
 
-		queue_delayed_work(system_freezable_wq, &hba->debugfs_ee_work, delay);
+		queue_delayed_work(system_freezable_wq, &priv->debugfs_ee_work, delay);
 	}
 }
 
 static void ufs_debugfs_restart_ee(struct work_struct *work)
 {
-	struct ufs_hba *hba = container_of(work, struct ufs_hba, debugfs_ee_work.work);
+	struct ufs_hba_priv *priv = container_of(work, struct ufs_hba_priv,
+						 debugfs_ee_work.work);
+	struct ufs_hba *hba = &priv->hba;
 
-	if (!hba->ee_usr_mask || pm_runtime_suspended(hba->dev) ||
+	if (!priv->ee_usr_mask || pm_runtime_suspended(hba->dev) ||
 	    ufs_debugfs_get_user_access(hba))
 		return;
 	ufshcd_write_ee_control(hba);
@@ -143,12 +153,13 @@ static int ufs_saved_err_show(struct seq_file *s, void *data)
 {
 	struct ufs_debugfs_attr *attr = s->private;
 	struct ufs_hba *hba = hba_from_file(s->file);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	const int *p;
 
 	if (strcmp(attr->name, "saved_err") == 0) {
-		p = &hba->saved_err;
+		p = &priv->saved_err;
 	} else if (strcmp(attr->name, "saved_uic_err") == 0) {
-		p = &hba->saved_uic_err;
+		p = &priv->saved_uic_err;
 	} else {
 		return -ENOENT;
 	}
@@ -162,6 +173,7 @@ static ssize_t ufs_saved_err_write(struct file *file, const char __user *buf,
 {
 	struct ufs_debugfs_attr *attr = file->f_inode->i_private;
 	struct ufs_hba *hba = hba_from_file(file);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	char val_str[16] = { };
 	int val, ret;
 
@@ -173,17 +185,17 @@ static ssize_t ufs_saved_err_write(struct file *file, const char __user *buf,
 	if (ret < 0)
 		return ret;
 
-	spin_lock_irq(hba->host->host_lock);
+	spin_lock_irq(priv->host->host_lock);
 	if (strcmp(attr->name, "saved_err") == 0) {
-		hba->saved_err = val;
+		priv->saved_err = val;
 	} else if (strcmp(attr->name, "saved_uic_err") == 0) {
-		hba->saved_uic_err = val;
+		priv->saved_uic_err = val;
 	} else {
 		ret = -ENOENT;
 	}
 	if (ret == 0)
 		ufshcd_schedule_eh_work(hba);
-	spin_unlock_irq(hba->host->host_lock);
+	spin_unlock_irq(priv->host->host_lock);
 
 	return ret < 0 ? ret : count;
 }
@@ -211,29 +223,32 @@ static const struct ufs_debugfs_attr ufs_attrs[] = {
 
 void ufs_debugfs_hba_init(struct ufs_hba *hba)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	const struct ufs_debugfs_attr *attr;
 	struct dentry *root;
 
 	/* Set default exception event rate limit period to 20ms */
-	hba->debugfs_ee_rate_limit_ms = 20;
-	INIT_DELAYED_WORK(&hba->debugfs_ee_work, ufs_debugfs_restart_ee);
+	priv->debugfs_ee_rate_limit_ms = 20;
+	INIT_DELAYED_WORK(&priv->debugfs_ee_work, ufs_debugfs_restart_ee);
 
 	root = debugfs_create_dir(dev_name(hba->dev), ufs_debugfs_root);
 	if (IS_ERR_OR_NULL(root))
 		return;
-	hba->debugfs_root = root;
+	priv->debugfs_root = root;
 	d_inode(root)->i_private = hba;
 	for (attr = ufs_attrs; attr->name; attr++)
 		debugfs_create_file(attr->name, attr->mode, root, (void *)attr,
 				    attr->fops);
-	debugfs_create_file("exception_event_mask", 0600, hba->debugfs_root,
+	debugfs_create_file("exception_event_mask", 0600, priv->debugfs_root,
 			    hba, &ee_usr_mask_fops);
-	debugfs_create_u32("exception_event_rate_limit_ms", 0600, hba->debugfs_root,
-			   &hba->debugfs_ee_rate_limit_ms);
+	debugfs_create_u32("exception_event_rate_limit_ms", 0600, priv->debugfs_root,
+			   &priv->debugfs_ee_rate_limit_ms);
 }
 
 void ufs_debugfs_hba_exit(struct ufs_hba *hba)
 {
-	debugfs_remove_recursive(hba->debugfs_root);
-	cancel_delayed_work_sync(&hba->debugfs_ee_work);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	debugfs_remove_recursive(priv->debugfs_root);
+	cancel_delayed_work_sync(&priv->debugfs_ee_work);
 }

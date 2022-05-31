@@ -42,6 +42,7 @@ static inline ssize_t ufs_sysfs_pm_lvl_store(struct device *dev,
 					     bool rpm)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	struct ufs_dev_info *dev_info = &hba->dev_info;
 	unsigned long flags, value;
 
@@ -56,12 +57,12 @@ static inline ssize_t ufs_sysfs_pm_lvl_store(struct device *dev,
 	     !(dev_info->wspecversion >= 0x310)))
 		return -EINVAL;
 
-	spin_lock_irqsave(hba->host->host_lock, flags);
+	spin_lock_irqsave(priv->host->host_lock, flags);
 	if (rpm)
 		hba->rpm_lvl = value;
 	else
 		hba->spm_lvl = value;
-	spin_unlock_irqrestore(hba->host->host_lock, flags);
+	spin_unlock_irqrestore(priv->host->host_lock, flags);
 	return count;
 }
 
@@ -159,12 +160,13 @@ static ssize_t auto_hibern8_show(struct device *dev,
 	u32 ahit;
 	int ret;
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
 	if (!ufshcd_is_auto_hibern8_supported(hba))
 		return -EOPNOTSUPP;
 
-	down(&hba->host_sem);
-	if (!ufshcd_is_user_access_allowed(hba)) {
+	down(&priv->host_sem);
+	if (!ufshcd_is_user_access_allowed(priv)) {
 		ret = -EBUSY;
 		goto out;
 	}
@@ -178,7 +180,7 @@ static ssize_t auto_hibern8_show(struct device *dev,
 	ret = sysfs_emit(buf, "%d\n", ufshcd_ahit_to_us(ahit));
 
 out:
-	up(&hba->host_sem);
+	up(&priv->host_sem);
 	return ret;
 }
 
@@ -187,6 +189,7 @@ static ssize_t auto_hibern8_store(struct device *dev,
 				  const char *buf, size_t count)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	unsigned int timer;
 	int ret = 0;
 
@@ -199,8 +202,8 @@ static ssize_t auto_hibern8_store(struct device *dev,
 	if (timer > UFSHCI_AHIBERN8_MAX)
 		return -EINVAL;
 
-	down(&hba->host_sem);
-	if (!ufshcd_is_user_access_allowed(hba)) {
+	down(&priv->host_sem);
+	if (!ufshcd_is_user_access_allowed(priv)) {
 		ret = -EBUSY;
 		goto out;
 	}
@@ -208,7 +211,7 @@ static ssize_t auto_hibern8_store(struct device *dev,
 	ufshcd_auto_hibern8_update(hba, ufshcd_us_to_ahit(timer));
 
 out:
-	up(&hba->host_sem);
+	up(&priv->host_sem);
 	return ret ? ret : count;
 }
 
@@ -224,6 +227,7 @@ static ssize_t wb_on_store(struct device *dev, struct device_attribute *attr,
 			   const char *buf, size_t count)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	unsigned int wb_enable;
 	ssize_t res;
 
@@ -242,8 +246,8 @@ static ssize_t wb_on_store(struct device *dev, struct device_attribute *attr,
 	if (wb_enable != 0 && wb_enable != 1)
 		return -EINVAL;
 
-	down(&hba->host_sem);
-	if (!ufshcd_is_user_access_allowed(hba)) {
+	down(&priv->host_sem);
+	if (!ufshcd_is_user_access_allowed(priv)) {
 		res = -EBUSY;
 		goto out;
 	}
@@ -252,7 +256,7 @@ static ssize_t wb_on_store(struct device *dev, struct device_attribute *attr,
 	res = ufshcd_wb_toggle(hba, wb_enable);
 	ufshcd_rpm_put_sync(hba);
 out:
-	up(&hba->host_sem);
+	up(&priv->host_sem);
 	return res < 0 ? res : count;
 }
 
@@ -285,8 +289,9 @@ static ssize_t monitor_enable_show(struct device *dev,
 				   struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
-	return sysfs_emit(buf, "%d\n", hba->monitor.enabled);
+	return sysfs_emit(buf, "%d\n", priv->monitor.enabled);
 }
 
 static ssize_t monitor_enable_store(struct device *dev,
@@ -294,25 +299,26 @@ static ssize_t monitor_enable_store(struct device *dev,
 				    const char *buf, size_t count)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	unsigned long value, flags;
 
 	if (kstrtoul(buf, 0, &value))
 		return -EINVAL;
 
 	value = !!value;
-	spin_lock_irqsave(hba->host->host_lock, flags);
-	if (value == hba->monitor.enabled)
+	spin_lock_irqsave(priv->host->host_lock, flags);
+	if (value == priv->monitor.enabled)
 		goto out_unlock;
 
 	if (!value) {
-		memset(&hba->monitor, 0, sizeof(hba->monitor));
+		memset(&priv->monitor, 0, sizeof(priv->monitor));
 	} else {
-		hba->monitor.enabled = true;
-		hba->monitor.enabled_ts = ktime_get();
+		priv->monitor.enabled = true;
+		priv->monitor.enabled_ts = ktime_get();
 	}
 
 out_unlock:
-	spin_unlock_irqrestore(hba->host->host_lock, flags);
+	spin_unlock_irqrestore(priv->host->host_lock, flags);
 	return count;
 }
 
@@ -320,8 +326,9 @@ static ssize_t monitor_chunk_size_show(struct device *dev,
 				   struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
-	return sysfs_emit(buf, "%lu\n", hba->monitor.chunk_size);
+	return sysfs_emit(buf, "%lu\n", priv->monitor.chunk_size);
 }
 
 static ssize_t monitor_chunk_size_store(struct device *dev,
@@ -329,16 +336,17 @@ static ssize_t monitor_chunk_size_store(struct device *dev,
 				    const char *buf, size_t count)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	unsigned long value, flags;
 
 	if (kstrtoul(buf, 0, &value))
 		return -EINVAL;
 
-	spin_lock_irqsave(hba->host->host_lock, flags);
+	spin_lock_irqsave(priv->host->host_lock, flags);
 	/* Only allow chunk size change when monitor is disabled */
-	if (!hba->monitor.enabled)
-		hba->monitor.chunk_size = value;
-	spin_unlock_irqrestore(hba->host->host_lock, flags);
+	if (!priv->monitor.enabled)
+		priv->monitor.chunk_size = value;
+	spin_unlock_irqrestore(priv->host->host_lock, flags);
 	return count;
 }
 
@@ -346,25 +354,28 @@ static ssize_t read_total_sectors_show(struct device *dev,
 				       struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
-	return sysfs_emit(buf, "%lu\n", hba->monitor.nr_sec_rw[READ]);
+	return sysfs_emit(buf, "%lu\n", priv->monitor.nr_sec_rw[READ]);
 }
 
 static ssize_t read_total_busy_show(struct device *dev,
 				    struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
 	return sysfs_emit(buf, "%llu\n",
-			  ktime_to_us(hba->monitor.total_busy[READ]));
+			  ktime_to_us(priv->monitor.total_busy[READ]));
 }
 
 static ssize_t read_nr_requests_show(struct device *dev,
 				     struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
-	return sysfs_emit(buf, "%lu\n", hba->monitor.nr_req[READ]);
+	return sysfs_emit(buf, "%lu\n", priv->monitor.nr_req[READ]);
 }
 
 static ssize_t read_req_latency_avg_show(struct device *dev,
@@ -372,7 +383,8 @@ static ssize_t read_req_latency_avg_show(struct device *dev,
 					 char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
-	struct ufs_hba_monitor *m = &hba->monitor;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+	struct ufs_hba_monitor *m = &priv->monitor;
 
 	return sysfs_emit(buf, "%llu\n", div_u64(ktime_to_us(m->lat_sum[READ]),
 						 m->nr_req[READ]));
@@ -383,9 +395,10 @@ static ssize_t read_req_latency_max_show(struct device *dev,
 					 char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
 	return sysfs_emit(buf, "%llu\n",
-			  ktime_to_us(hba->monitor.lat_max[READ]));
+			  ktime_to_us(priv->monitor.lat_max[READ]));
 }
 
 static ssize_t read_req_latency_min_show(struct device *dev,
@@ -393,9 +406,10 @@ static ssize_t read_req_latency_min_show(struct device *dev,
 					 char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
 	return sysfs_emit(buf, "%llu\n",
-			  ktime_to_us(hba->monitor.lat_min[READ]));
+			  ktime_to_us(priv->monitor.lat_min[READ]));
 }
 
 static ssize_t read_req_latency_sum_show(struct device *dev,
@@ -403,9 +417,10 @@ static ssize_t read_req_latency_sum_show(struct device *dev,
 					 char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
 	return sysfs_emit(buf, "%llu\n",
-			  ktime_to_us(hba->monitor.lat_sum[READ]));
+			  ktime_to_us(priv->monitor.lat_sum[READ]));
 }
 
 static ssize_t write_total_sectors_show(struct device *dev,
@@ -413,25 +428,28 @@ static ssize_t write_total_sectors_show(struct device *dev,
 					char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
-	return sysfs_emit(buf, "%lu\n", hba->monitor.nr_sec_rw[WRITE]);
+	return sysfs_emit(buf, "%lu\n", priv->monitor.nr_sec_rw[WRITE]);
 }
 
 static ssize_t write_total_busy_show(struct device *dev,
 				     struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
 	return sysfs_emit(buf, "%llu\n",
-			  ktime_to_us(hba->monitor.total_busy[WRITE]));
+			  ktime_to_us(priv->monitor.total_busy[WRITE]));
 }
 
 static ssize_t write_nr_requests_show(struct device *dev,
 				      struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
-	return sysfs_emit(buf, "%lu\n", hba->monitor.nr_req[WRITE]);
+	return sysfs_emit(buf, "%lu\n", priv->monitor.nr_req[WRITE]);
 }
 
 static ssize_t write_req_latency_avg_show(struct device *dev,
@@ -439,7 +457,8 @@ static ssize_t write_req_latency_avg_show(struct device *dev,
 					  char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
-	struct ufs_hba_monitor *m = &hba->monitor;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+	struct ufs_hba_monitor *m = &priv->monitor;
 
 	return sysfs_emit(buf, "%llu\n", div_u64(ktime_to_us(m->lat_sum[WRITE]),
 						 m->nr_req[WRITE]));
@@ -450,9 +469,10 @@ static ssize_t write_req_latency_max_show(struct device *dev,
 					  char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
 	return sysfs_emit(buf, "%llu\n",
-			  ktime_to_us(hba->monitor.lat_max[WRITE]));
+			  ktime_to_us(priv->monitor.lat_max[WRITE]));
 }
 
 static ssize_t write_req_latency_min_show(struct device *dev,
@@ -460,9 +480,10 @@ static ssize_t write_req_latency_min_show(struct device *dev,
 					  char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
 	return sysfs_emit(buf, "%llu\n",
-			  ktime_to_us(hba->monitor.lat_min[WRITE]));
+			  ktime_to_us(priv->monitor.lat_min[WRITE]));
 }
 
 static ssize_t write_req_latency_sum_show(struct device *dev,
@@ -470,9 +491,10 @@ static ssize_t write_req_latency_sum_show(struct device *dev,
 					  char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 
 	return sysfs_emit(buf, "%llu\n",
-			  ktime_to_us(hba->monitor.lat_sum[WRITE]));
+			  ktime_to_us(priv->monitor.lat_sum[WRITE]));
 }
 
 static DEVICE_ATTR_RW(monitor_enable);
@@ -524,14 +546,15 @@ static ssize_t ufs_sysfs_read_desc_param(struct ufs_hba *hba,
 				  u8 *sysfs_buf,
 				  u8 param_size)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	u8 desc_buf[8] = {0};
 	int ret;
 
 	if (param_size > 8)
 		return -EINVAL;
 
-	down(&hba->host_sem);
-	if (!ufshcd_is_user_access_allowed(hba)) {
+	down(&priv->host_sem);
+	if (!ufshcd_is_user_access_allowed(priv)) {
 		ret = -EBUSY;
 		goto out;
 	}
@@ -564,7 +587,7 @@ static ssize_t ufs_sysfs_read_desc_param(struct ufs_hba *hba,
 	}
 
 out:
-	up(&hba->host_sem);
+	up(&priv->host_sem);
 	return ret;
 }
 
@@ -915,18 +938,19 @@ static ssize_t _name##_show(struct device *dev,				\
 {									\
 	u8 index;							\
 	struct ufs_hba *hba = dev_get_drvdata(dev);			\
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);\
 	int ret;							\
 	int desc_len = QUERY_DESC_MAX_SIZE;				\
 	u8 *desc_buf;							\
 									\
-	down(&hba->host_sem);						\
-	if (!ufshcd_is_user_access_allowed(hba)) {			\
-		up(&hba->host_sem);					\
+	down(&priv->host_sem);						\
+	if (!ufshcd_is_user_access_allowed(priv)) {			\
+		up(&priv->host_sem);					\
 		return -EBUSY;						\
 	}								\
 	desc_buf = kzalloc(QUERY_DESC_MAX_SIZE, GFP_ATOMIC);		\
 	if (!desc_buf) {						\
-		up(&hba->host_sem);					\
+		up(&priv->host_sem);					\
 		return -ENOMEM;						\
 	}								\
 	ufshcd_rpm_get_sync(hba);					\
@@ -948,7 +972,7 @@ static ssize_t _name##_show(struct device *dev,				\
 out:									\
 	ufshcd_rpm_put_sync(hba);					\
 	kfree(desc_buf);						\
-	up(&hba->host_sem);						\
+	up(&priv->host_sem);						\
 	return ret;							\
 }									\
 static DEVICE_ATTR_RO(_name)
@@ -987,10 +1011,11 @@ static ssize_t _name##_show(struct device *dev,				\
 	u8 index = 0;							\
 	int ret;							\
 	struct ufs_hba *hba = dev_get_drvdata(dev);			\
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);\
 									\
-	down(&hba->host_sem);						\
-	if (!ufshcd_is_user_access_allowed(hba)) {			\
-		up(&hba->host_sem);					\
+	down(&priv->host_sem);						\
+	if (!ufshcd_is_user_access_allowed(priv)) {			\
+		up(&priv->host_sem);					\
 		return -EBUSY;						\
 	}								\
 	if (ufshcd_is_wb_flags(QUERY_FLAG_IDN##_uname))			\
@@ -1005,7 +1030,7 @@ static ssize_t _name##_show(struct device *dev,				\
 	}								\
 	ret = sysfs_emit(buf, "%s\n", flag ? "true" : "false");		\
 out:									\
-	up(&hba->host_sem);						\
+	up(&priv->host_sem);						\
 	return ret;							\
 }									\
 static DEVICE_ATTR_RO(_name)
@@ -1055,13 +1080,14 @@ static ssize_t _name##_show(struct device *dev,				\
 	struct device_attribute *attr, char *buf)			\
 {									\
 	struct ufs_hba *hba = dev_get_drvdata(dev);			\
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);\
 	u32 value;							\
 	int ret;							\
 	u8 index = 0;							\
 									\
-	down(&hba->host_sem);						\
-	if (!ufshcd_is_user_access_allowed(hba)) {			\
-		up(&hba->host_sem);					\
+	down(&priv->host_sem);						\
+	if (!ufshcd_is_user_access_allowed(priv)) {			\
+		up(&priv->host_sem);					\
 		return -EBUSY;						\
 	}								\
 	if (ufshcd_is_wb_attrs(QUERY_ATTR_IDN##_uname))			\
@@ -1076,7 +1102,7 @@ static ssize_t _name##_show(struct device *dev,				\
 	}								\
 	ret = sysfs_emit(buf, "0x%08X\n", value);			\
 out:									\
-	up(&hba->host_sem);						\
+	up(&priv->host_sem);						\
 	return ret;							\
 }									\
 static DEVICE_ATTR_RO(_name)
@@ -1154,7 +1180,9 @@ static ssize_t _pname##_show(struct device *dev,			\
 {									\
 	struct scsi_device *sdev = to_scsi_device(dev);			\
 	struct ufs_hba *hba = shost_priv(sdev->host);			\
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);\
 	u8 lun = ufshcd_scsi_to_upiu_lun(sdev->lun);			\
+									\
 	if (!ufs_is_valid_unit_desc_lun(&hba->dev_info, lun,		\
 				_duname##_DESC_PARAM##_puname))		\
 		return -EINVAL;						\
@@ -1218,11 +1246,12 @@ static ssize_t dyn_cap_needed_attribute_show(struct device *dev,
 	u32 value;
 	struct scsi_device *sdev = to_scsi_device(dev);
 	struct ufs_hba *hba = shost_priv(sdev->host);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	u8 lun = ufshcd_scsi_to_upiu_lun(sdev->lun);
 	int ret;
 
-	down(&hba->host_sem);
-	if (!ufshcd_is_user_access_allowed(hba)) {
+	down(&priv->host_sem);
+	if (!ufshcd_is_user_access_allowed(priv)) {
 		ret = -EBUSY;
 		goto out;
 	}
@@ -1239,7 +1268,7 @@ static ssize_t dyn_cap_needed_attribute_show(struct device *dev,
 	ret = sysfs_emit(buf, "0x%08X\n", value);
 
 out:
-	up(&hba->host_sem);
+	up(&priv->host_sem);
 	return ret;
 }
 static DEVICE_ATTR_RO(dyn_cap_needed_attribute);

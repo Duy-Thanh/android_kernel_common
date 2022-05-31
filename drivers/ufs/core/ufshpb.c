@@ -40,13 +40,17 @@ static void ufshpb_update_active_info(struct ufshpb_lu *hpb, int rgn_idx,
 
 bool ufshpb_is_allowed(struct ufs_hba *hba)
 {
-	return !(hba->ufshpb_dev.hpb_disabled);
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	return !priv->hpb_dev.hpb_disabled;
 }
 
 /* HPB version 1.0 is called as legacy version. */
 bool ufshpb_is_legacy(struct ufs_hba *hba)
 {
-	return hba->ufshpb_dev.is_legacy;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+
+	return priv->hpb_dev.is_legacy;
 }
 
 static struct ufshpb_lu *ufshpb_get_hpb_data(struct scsi_device *sdev)
@@ -1260,10 +1264,11 @@ static void ufshpb_set_regions_update(struct ufshpb_lu *hpb)
 
 static void ufshpb_dev_reset_handler(struct ufs_hba *hba)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	struct scsi_device *sdev;
 	struct ufshpb_lu *hpb;
 
-	__shost_for_each_device(sdev, hba->host) {
+	__shost_for_each_device(sdev, priv->host) {
 		hpb = ufshpb_get_hpb_data(sdev);
 		if (!hpb)
 			continue;
@@ -1300,6 +1305,7 @@ static void ufshpb_dev_reset_handler(struct ufs_hba *hba)
  */
 void ufshpb_rsp_upiu(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	struct ufshpb_lu *hpb = ufshpb_get_hpb_data(lrbp->cmd->device);
 	struct utp_hpb_rsp *rsp_field = &lrbp->ucd_rsp_ptr->hr;
 	int data_seg_len;
@@ -1308,7 +1314,7 @@ void ufshpb_rsp_upiu(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
 		struct scsi_device *sdev;
 		bool found = false;
 
-		__shost_for_each_device(sdev, hba->host) {
+		__shost_for_each_device(sdev, priv->host) {
 			hpb = ufshpb_get_hpb_data(sdev);
 
 			if (!hpb)
@@ -2325,10 +2331,11 @@ out:
  */
 void ufshpb_toggle_state(struct ufs_hba *hba, enum UFSHPB_STATE src, enum UFSHPB_STATE dest)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	struct ufshpb_lu *hpb;
 	struct scsi_device *sdev;
 
-	shost_for_each_device(sdev, hba->host) {
+	shost_for_each_device(sdev, priv->host) {
 		hpb = ufshpb_get_hpb_data(sdev);
 
 		if (!hpb || ufshpb_get_state(hpb) != src)
@@ -2344,10 +2351,11 @@ void ufshpb_toggle_state(struct ufs_hba *hba, enum UFSHPB_STATE src, enum UFSHPB
 
 void ufshpb_suspend(struct ufs_hba *hba)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	struct ufshpb_lu *hpb;
 	struct scsi_device *sdev;
 
-	shost_for_each_device(sdev, hba->host) {
+	shost_for_each_device(sdev, priv->host) {
 		hpb = ufshpb_get_hpb_data(sdev);
 		if (!hpb || ufshpb_get_state(hpb) != HPB_PRESENT)
 			continue;
@@ -2359,10 +2367,11 @@ void ufshpb_suspend(struct ufs_hba *hba)
 
 void ufshpb_resume(struct ufs_hba *hba)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	struct ufshpb_lu *hpb;
 	struct scsi_device *sdev;
 
-	shost_for_each_device(sdev, hba->host) {
+	shost_for_each_device(sdev, priv->host) {
 		hpb = ufshpb_get_hpb_data(sdev);
 		if (!hpb || ufshpb_get_state(hpb) != HPB_SUSPEND)
 			continue;
@@ -2451,6 +2460,7 @@ void ufshpb_destroy_lu(struct ufs_hba *hba, struct scsi_device *sdev)
 
 static void ufshpb_hpb_lu_prepared(struct ufs_hba *hba)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	int pool_size;
 	struct ufshpb_lu *hpb;
 	struct scsi_device *sdev;
@@ -2469,7 +2479,7 @@ static void ufshpb_hpb_lu_prepared(struct ufs_hba *hba)
 		mempool_resize(ufshpb_page_pool, tot_active_srgn_pages);
 	}
 
-	shost_for_each_device(sdev, hba->host) {
+	shost_for_each_device(sdev, priv->host) {
 		hpb = ufshpb_get_hpb_data(sdev);
 		if (!hpb)
 			continue;
@@ -2490,6 +2500,7 @@ static void ufshpb_hpb_lu_prepared(struct ufs_hba *hba)
 
 void ufshpb_init_hpb_lu(struct ufs_hba *hba, struct scsi_device *sdev)
 {
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
 	struct ufshpb_lu *hpb;
 	int ret;
 	struct ufshpb_lu_info hpb_lu_info = { 0 };
@@ -2502,7 +2513,7 @@ void ufshpb_init_hpb_lu(struct ufs_hba *hba, struct scsi_device *sdev)
 	if (ret)
 		goto out;
 
-	hpb = ufshpb_alloc_hpb_lu(hba, sdev, &hba->ufshpb_dev,
+	hpb = ufshpb_alloc_hpb_lu(hba, sdev, &priv->hpb_dev,
 				  &hpb_lu_info);
 	if (!hpb)
 		goto out;
@@ -2512,7 +2523,7 @@ void ufshpb_init_hpb_lu(struct ufs_hba *hba, struct scsi_device *sdev)
 
 out:
 	/* All LUs are initialized */
-	if (atomic_dec_and_test(&hba->ufshpb_dev.slave_conf_cnt))
+	if (atomic_dec_and_test(&priv->hpb_dev.slave_conf_cnt))
 		ufshpb_hpb_lu_prepared(hba);
 }
 
@@ -2569,7 +2580,8 @@ release_mctx_cache:
 
 void ufshpb_get_geo_info(struct ufs_hba *hba, u8 *geo_buf)
 {
-	struct ufshpb_dev_info *hpb_info = &hba->ufshpb_dev;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+	struct ufshpb_dev_info *hpb_info = &priv->hpb_dev;
 	int max_active_rgns = 0;
 	int hpb_num_lu;
 
@@ -2595,7 +2607,8 @@ void ufshpb_get_geo_info(struct ufs_hba *hba, u8 *geo_buf)
 
 void ufshpb_get_dev_info(struct ufs_hba *hba, u8 *desc_buf)
 {
-	struct ufshpb_dev_info *hpb_dev_info = &hba->ufshpb_dev;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+	struct ufshpb_dev_info *hpb_dev_info = &priv->hpb_dev;
 	int version, ret;
 	int max_single_cmd;
 
@@ -2633,7 +2646,8 @@ void ufshpb_get_dev_info(struct ufs_hba *hba, u8 *desc_buf)
 
 void ufshpb_init(struct ufs_hba *hba)
 {
-	struct ufshpb_dev_info *hpb_dev_info = &hba->ufshpb_dev;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+	struct ufshpb_dev_info *hpb_dev_info = &priv->hpb_dev;
 	int try;
 	int ret;
 

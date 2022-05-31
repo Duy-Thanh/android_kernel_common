@@ -738,32 +738,17 @@ struct ufs_hba_monitor {
 };
 
 /**
- * struct ufs_hba - per adapter private structure
+ * struct ufs_hba - Host controller data shared between core and drivers
  * @mmio_base: UFSHCI base register address
- * @ucdl_base_addr: UFS Command Descriptor base address
- * @utrdl_base_addr: UTP Transfer Request Descriptor base address
- * @utmrdl_base_addr: UTP Task Management Descriptor base address
- * @ucdl_dma_addr: UFS Command Descriptor DMA address
- * @utrdl_dma_addr: UTRDL DMA address
- * @utmrdl_dma_addr: UTMRDL DMA address
- * @host: Scsi_Host instance of the driver
  * @dev: device handle
- * @ufs_device_wlun: WLUN that controls the entire UFS device.
- * @hwmon_device: device instance registered with the hwmon core.
  * @curr_dev_pwr_mode: active UFS device power mode.
  * @uic_link_state: active state of the link to the UFS device.
  * @rpm_lvl: desired UFS power management level during runtime PM.
  * @spm_lvl: desired UFS power management level during system PM.
- * @pm_op_in_progress: whether or not a PM operation is in progress.
  * @ahit: value of Auto-Hibernate Idle Timer register.
- * @lrb: local reference block
- * @outstanding_tasks: Bits representing outstanding task requests
- * @outstanding_lock: Protects @outstanding_reqs.
- * @outstanding_reqs: Bits representing outstanding transfer requests
  * @capabilities: UFS Controller Capabilities
  * @nutrs: Transfer Request Queue depth supported by controller
  * @nutmrs: Task Management Queue depth supported by controller
- * @reserved_slot: Used to submit device commands. Protected by @dev_cmd.lock.
  * @ufs_version: UFS Version to which controller complies
  * @vops: pointer to variant specific operations
  * @vps: pointer to variant specific parameters
@@ -771,41 +756,10 @@ struct ufs_hba_monitor {
  * @sg_entry_size: size of struct ufshcd_sg_entry (may include variant fields)
  * @irq: Irq number of the controller
  * @is_irq_enabled: whether or not the UFS controller interrupt is enabled.
- * @dev_ref_clk_freq: reference clock frequency
  * @quirks: bitmask with information about deviations from the UFSHCI standard.
  * @dev_quirks: bitmask with information about deviations from the UFS standard.
- * @tmf_tag_set: TMF tag set.
- * @tmf_queue: Used to allocate TMF tags.
- * @tmf_rqs: array with pointers to TMF requests while these are in progress.
- * @active_uic_cmd: handle of active UIC command
- * @uic_cmd_mutex: mutex for UIC command
- * @uic_async_done: completion used during UIC processing
- * @ufshcd_state: UFSHCD state
- * @eh_flags: Error handling flags
- * @intr_mask: Interrupt Mask Bits
- * @ee_ctrl_mask: Exception event control mask
- * @ee_drv_mask: Exception event mask for driver
- * @ee_usr_mask: Exception event mask for user (set via debugfs)
- * @ee_ctrl_mutex: Used to serialize exception event information.
- * @is_powered: flag to check if HBA is powered
- * @shutting_down: flag to check if shutdown has been invoked
- * @host_sem: semaphore used to serialize concurrent contexts
- * @eh_wq: Workqueue that eh_work works on
- * @eh_work: Worker to handle UFS errors that require s/w attention
- * @eeh_work: Worker to handle exception events
- * @errors: HBA errors
- * @uic_error: UFS interconnect layer error status
- * @saved_err: sticky error mask
- * @saved_uic_err: sticky UIC error mask
- * @ufs_stats: various error counters
- * @force_reset: flag to force eh_work perform a full reset
- * @force_pmc: flag to force a power mode change
- * @silence_err_logs: flag to silence error logs
- * @dev_cmd: ufs device management command information
- * @last_dme_cmd_tstamp: time stamp of the last completed DME command
  * @nop_out_timeout: NOP OUT timeout value
  * @dev_info: information about the UFS device
- * @auto_bkops_enabled: to track whether bkops is enabled in device
  * @vreg_info: UFS device voltage regulator information
  * @clk_list_head: UFS host controller clocks list node head
  * @req_abort_count: number of times ufshcd_abort() has been called
@@ -813,79 +767,25 @@ struct ufs_hba_monitor {
  *	controller and the UFS device.
  * @pwr_info: holds current power mode
  * @max_pwr_info: keeps the device max valid pwm
- * @clk_gating: information related to clock gating
  * @caps: bitmask with information about UFS controller capabilities
- * @devfreq: frequency scaling information owned by the devfreq core
- * @clk_scaling: frequency scaling information owned by the UFS driver
- * @is_sys_suspended: whether or not the entire system has been suspended
- * @urgent_bkops_lvl: keeps track of urgent bkops level for device
- * @is_urgent_bkops_lvl_checked: keeps track if the urgent bkops level for
- *  device is known or not.
- * @clk_scaling_lock: used to serialize device commands and clock scaling
- * @desc_size: descriptor sizes reported by device
- * @scsi_block_reqs_cnt: reference counting for scsi block requests
- * @bsg_dev: struct device associated with the BSG queue
- * @bsg_queue: BSG queue associated with the UFS controller
- * @rpm_dev_flush_recheck_work: used to suspend from RPM (runtime power
- *	management) after the UFS device has finished a WriteBooster buffer
- *	flush or auto BKOP.
- * @ufshpb_dev: information related to HPB (Host Performance Booster).
- * @monitor: statistics about UFS commands
- * @crypto_capabilities: Content of crypto capabilities register (0x100)
  * @crypto_cap_array: Array of crypto capabilities
- * @crypto_cfg_register: Start of the crypto cfg array
- * @crypto_profile: the crypto profile of this hba (if applicable)
- * @debugfs_root: UFS controller debugfs root directory
- * @debugfs_ee_work: used to restore ee_ctrl_mask after a delay
- * @debugfs_ee_rate_limit_ms: user configurable delay after which to restore
- *	ee_ctrl_mask
- * @luns_avail: number of regular and well known LUNs supported by the UFS
- *	device
- * @complete_put: whether or not to call ufshcd_rpm_put() from inside
- *	ufshcd_resume_complete()
  */
 struct ufs_hba {
 	void __iomem *mmio_base;
 
-	/* Virtual memory reference */
-	struct utp_transfer_cmd_desc *ucdl_base_addr;
-	struct utp_transfer_req_desc *utrdl_base_addr;
-	struct utp_task_req_desc *utmrdl_base_addr;
-
-	/* DMA memory reference */
-	dma_addr_t ucdl_dma_addr;
-	dma_addr_t utrdl_dma_addr;
-	dma_addr_t utmrdl_dma_addr;
-
-	struct Scsi_Host *host;
 	struct device *dev;
-	struct scsi_device *ufs_device_wlun;
-
-#ifdef CONFIG_SCSI_UFS_HWMON
-	struct device *hwmon_device;
-#endif
 
 	enum ufs_dev_pwr_mode curr_dev_pwr_mode;
 	enum uic_link_state uic_link_state;
-	/* Desired UFS power management level during runtime PM */
 	enum ufs_pm_level rpm_lvl;
-	/* Desired UFS power management level during system PM */
 	enum ufs_pm_level spm_lvl;
-	int pm_op_in_progress;
 
 	/* Auto-Hibernate Idle Timer register value */
 	u32 ahit;
 
-	struct ufshcd_lrb *lrb;
-
-	unsigned long outstanding_tasks;
-	spinlock_t outstanding_lock;
-	unsigned long outstanding_reqs;
-
 	u32 capabilities;
 	int nutrs;
 	int nutmrs;
-	u32 reserved_slot;
 	u32 ufs_version;
 	const struct ufs_hba_variant_ops *vops;
 	struct ufs_hba_variant_params *vps;
@@ -893,55 +793,16 @@ struct ufs_hba {
 	size_t sg_entry_size;
 	unsigned int irq;
 	bool is_irq_enabled;
-	enum ufs_ref_clk_freq dev_ref_clk_freq;
 
 	unsigned int quirks;	/* Deviations from standard UFSHCI spec. */
 
 	/* Device deviations from standard UFS device spec. */
 	unsigned int dev_quirks;
 
-	struct blk_mq_tag_set tmf_tag_set;
-	struct request_queue *tmf_queue;
-	struct request **tmf_rqs;
-
-	struct uic_command *active_uic_cmd;
-	struct mutex uic_cmd_mutex;
-	struct completion *uic_async_done;
-
-	enum ufshcd_state ufshcd_state;
-	u32 eh_flags;
-	u32 intr_mask;
-	u16 ee_ctrl_mask;
-	u16 ee_drv_mask;
-	u16 ee_usr_mask;
-	struct mutex ee_ctrl_mutex;
-	bool is_powered;
-	bool shutting_down;
-	struct semaphore host_sem;
-
-	/* Work Queues */
-	struct workqueue_struct *eh_wq;
-	struct work_struct eh_work;
-	struct work_struct eeh_work;
-
-	/* HBA Errors */
-	u32 errors;
-	u32 uic_error;
-	u32 saved_err;
-	u32 saved_uic_err;
-	struct ufs_stats ufs_stats;
-	bool force_reset;
-	bool force_pmc;
-	bool silence_err_logs;
-
-	/* Device management request data */
-	struct ufs_dev_cmd dev_cmd;
-	ktime_t last_dme_cmd_tstamp;
 	int nop_out_timeout;
 
 	/* Keeps information of the UFS device connected to this host */
 	struct ufs_dev_info dev_info;
-	bool auto_bkops_enabled;
 	struct ufs_vreg_info vreg_info;
 	struct list_head clk_list_head;
 
@@ -953,44 +814,12 @@ struct ufs_hba {
 	struct ufs_pa_layer_attr pwr_info;
 	struct ufs_pwr_mode_info max_pwr_info;
 
-	struct ufs_clk_gating clk_gating;
 	/* Control to enable/disable host capabilities */
 	u32 caps;
 
-	struct devfreq *devfreq;
-	struct ufs_clk_scaling clk_scaling;
-	bool is_sys_suspended;
-
-	enum bkops_status urgent_bkops_lvl;
-	bool is_urgent_bkops_lvl_checked;
-
-	struct rw_semaphore clk_scaling_lock;
-	unsigned char desc_size[QUERY_DESC_IDN_MAX];
-	atomic_t scsi_block_reqs_cnt;
-
-	struct device		bsg_dev;
-	struct request_queue	*bsg_queue;
-	struct delayed_work rpm_dev_flush_recheck_work;
-
-#ifdef CONFIG_SCSI_UFS_HPB
-	struct ufshpb_dev_info ufshpb_dev;
-#endif
-
-	struct ufs_hba_monitor	monitor;
-
 #ifdef CONFIG_SCSI_UFS_CRYPTO
-	union ufs_crypto_capabilities crypto_capabilities;
 	union ufs_crypto_cap_entry *crypto_cap_array;
-	u32 crypto_cfg_register;
-	struct blk_crypto_profile crypto_profile;
 #endif
-#ifdef CONFIG_DEBUG_FS
-	struct dentry *debugfs_root;
-	struct delayed_work debugfs_ee_work;
-	u32 debugfs_ee_rate_limit_ms;
-#endif
-	u32 luns_avail;
-	bool complete_put;
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
@@ -1273,7 +1102,5 @@ int ufshcd_dump_regs(struct ufs_hba *hba, size_t offset, size_t len,
 
 int __ufshcd_write_ee_control(struct ufs_hba *hba, u32 ee_ctrl_mask);
 int ufshcd_write_ee_control(struct ufs_hba *hba);
-int ufshcd_update_ee_control(struct ufs_hba *hba, u16 *mask, u16 *other_mask,
-			     u16 set, u16 clr);
 
 #endif /* End of Header */
