@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "420fa831_dc650f8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-31T21:28:21Z",
+      "side": 1,
+      "message": "This should be done with a vendor-specific definition since there is no user of this in ACK.",
+      "revId": "59692ba7ebc4e601fbd46b39260cb6e7a57c385b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
