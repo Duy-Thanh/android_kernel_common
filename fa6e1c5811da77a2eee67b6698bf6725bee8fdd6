@@ -16,6 +16,24 @@
       "message": "Todd/Steve, please review and close?",
       "revId": "fa6e1c5811da77a2eee67b6698bf6725bee8fdd6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30efea76_e2c5e1b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2022-05-31T17:53:19Z",
+      "side": 1,
+      "message": "This modifies the KMI. I have created and uploaded a change on top of this to update the KMI which is currently in presubmit. I did this Friday also, but while it was in presubmit another KMI update from QC merged and caused a conflict.",
+      "parentUuid": "1a83714a_855bcc2e",
+      "revId": "fa6e1c5811da77a2eee67b6698bf6725bee8fdd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
