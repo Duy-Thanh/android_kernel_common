@@ -44,6 +44,24 @@ define_common_kernels(
                 "lz4": "53477376",
             },
         },
+        # Sync with build.config.gki.x86_64
+        "kernel_x86_64": {
+            # Sync with BUILD_GKI_ARTIFACTS
+            "build_gki_artifacts": True,
+            "gki_boot_img_sizes": {
+                # Sync with BUILD_GKI_BOOT_IMG_SIZE
+                "": "67108864",
+            },
+        },
+        # Sync with build.config.gki-debug.x86_64
+        "kernel_x86_64_debug": {
+            # Sync with BUILD_GKI_ARTIFACTS
+            "build_gki_artifacts": True,
+            "gki_boot_img_sizes": {
+                # Sync with BUILD_GKI_BOOT_IMG_SIZE
+                "": "67108864",
+            },
+        },
     },
 )
 
