@@ -175,12 +175,13 @@ out:
  */
 void ufs_bsg_remove(struct ufs_hba *hba)
 {
-	struct device *bsg_dev = &hba->bsg_dev;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+	struct device *bsg_dev = &priv->bsg_dev;
 
-	if (!hba->bsg_queue)
+	if (!priv->bsg_queue)
 		return;
 
-	bsg_remove_queue(hba->bsg_queue);
+	bsg_remove_queue(priv->bsg_queue);
 
 	device_del(bsg_dev);
 	put_device(bsg_dev);
@@ -199,8 +200,9 @@ static inline void ufs_bsg_node_release(struct device *dev)
  */
 int ufs_bsg_probe(struct ufs_hba *hba)
 {
-	struct device *bsg_dev = &hba->bsg_dev;
-	struct Scsi_Host *shost = hba->host;
+	struct ufs_hba_priv *priv = container_of(hba, typeof(*priv), hba);
+	struct device *bsg_dev = &priv->bsg_dev;
+	struct Scsi_Host *shost = priv->host;
 	struct device *parent = &shost->shost_gendev;
 	struct request_queue *q;
 	int ret;
@@ -222,7 +224,7 @@ int ufs_bsg_probe(struct ufs_hba *hba)
 		goto out;
 	}
 
-	hba->bsg_queue = q;
+	priv->bsg_queue = q;
 
 	return 0;
 
