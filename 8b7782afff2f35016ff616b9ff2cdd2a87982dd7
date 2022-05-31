@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bda94748_7f306797",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-05-31T19:08:15Z",
+      "side": 1,
+      "message": "We don\u0027t normally take FROM* patches into android-mainline. Is there a reason this is so urgent we can\u0027t wait for it to propagate from upstream via the normal merge?",
+      "revId": "8b7782afff2f35016ff616b9ff2cdd2a87982dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
