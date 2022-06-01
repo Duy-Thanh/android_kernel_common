@@ -105,6 +105,24 @@
       "parentUuid": "a5e618fd_f93c5672",
       "revId": "dc8ac508afd3b105978fd3dd98462950daa5b297",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7dc5217_ba2d982c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2022-06-01T05:57:20Z",
+      "side": 1,
+      "message": "Hi Suren,\nIt seems like a performance regression, more details please see:\nhttps://issuetracker.google.com/issues/234527424\nThanks",
+      "parentUuid": "4ee8db1e_d891412f",
+      "revId": "dc8ac508afd3b105978fd3dd98462950daa5b297",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
