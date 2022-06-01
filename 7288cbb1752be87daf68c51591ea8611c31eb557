@@ -16,6 +16,24 @@
       "message": "this commit does nothing 😞",
       "revId": "7288cbb1752be87daf68c51591ea8611c31eb557",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dff74377_7bc1ab7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-01T18:12:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd7f77ad_6b4609e0",
+      "revId": "7288cbb1752be87daf68c51591ea8611c31eb557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
