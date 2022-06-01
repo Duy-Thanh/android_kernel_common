@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cf09271_735de052",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1945330
+      },
+      "writtenOn": "2022-06-01T07:14:21Z",
+      "side": 1,
+      "message": "In fact, I just submit our original patch here, and do want to get some suggestion from you, then, we can continue with the upstream work. I don\u0027t such kind of patch can be accept, this is just for suggestion. Thank you.",
+      "parentUuid": "eb91f792_66685694",
+      "range": {
+        "startLine": 327,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 27
+      },
+      "revId": "f43ecd41b4c971e565c1d186770ef75a6cc7d851",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18fd32de_2275f049",
         "filename": "drivers/usb/dwc3/core.c",
         "patchSetId": 1
@@ -83,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "781caa45_6d125d82",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1945330
+      },
+      "writtenOn": "2022-06-01T07:14:21Z",
+      "side": 1,
+      "message": "Ok, if it is, then, really hard for us to upstream PAM related feature.\nbut we still want to have some try.",
+      "parentUuid": "18fd32de_2275f049",
+      "range": {
+        "startLine": 1001,
+        "startChar": 0,
+        "endLine": 1001,
+        "endChar": 21
+      },
+      "revId": "f43ecd41b4c971e565c1d186770ef75a6cc7d851",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a5b6d24_ffc27e15",
         "filename": "drivers/usb/dwc3/core.c",
         "patchSetId": 1
@@ -94,6 +142,30 @@
       "writtenOn": "2022-05-31T18:51:45Z",
       "side": 1,
       "message": "again, no #ifdef in .c files.",
+      "range": {
+        "startLine": 1240,
+        "startChar": 0,
+        "endLine": 1240,
+        "endChar": 21
+      },
+      "revId": "f43ecd41b4c971e565c1d186770ef75a6cc7d851",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9074883_1bfe7d95",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 1945330
+      },
+      "writtenOn": "2022-06-01T07:14:21Z",
+      "side": 1,
+      "message": "Ok",
+      "parentUuid": "6a5b6d24_ffc27e15",
       "range": {
         "startLine": 1240,
         "startChar": 0,
