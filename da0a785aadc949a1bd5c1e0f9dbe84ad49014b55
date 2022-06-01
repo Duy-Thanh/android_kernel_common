@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f809ece_38d1b402",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-01T18:54:50Z",
+      "side": 1,
+      "message": "Please do not change Change-Ids when cherry-picking. It should be unchanged from what it was originally in https://android-review.googlesource.com/c/kernel/common/+/2041183:\n\nI925856353e63c5a821027de4f8476c833e21b982",
+      "range": {
+        "startLine": 14,
+        "startChar": 11,
+        "endLine": 14,
+        "endChar": 52
+      },
+      "revId": "da0a785aadc949a1bd5c1e0f9dbe84ad49014b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
