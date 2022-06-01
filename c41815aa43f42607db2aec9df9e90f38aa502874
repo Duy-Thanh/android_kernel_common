@@ -16,6 +16,24 @@
       "message": "Why is this still FROMLIST? ",
       "revId": "c41815aa43f42607db2aec9df9e90f38aa502874",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aa705ac_eb37e768",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-06-01T19:20:23Z",
+      "side": 1,
+      "message": "patch has been submitted to LKML, but not  reviewed/accepted into any maintainer tree after multiple reminder. So it is picked up in ack 12-5.10. Now it is cherry pick from 12-5.10. Again we resend patch to mailing list at https://lore.kernel.org/linux-pm/20220531183054.6476-1-quic_manafm@quicinc.com/",
+      "parentUuid": "2df57ff2_d44dfb93",
+      "revId": "c41815aa43f42607db2aec9df9e90f38aa502874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
