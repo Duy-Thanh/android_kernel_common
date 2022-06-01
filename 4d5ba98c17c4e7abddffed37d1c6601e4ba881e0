@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3796aeb_9a6e5ce1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-01T19:15:48Z",
+      "side": 1,
+      "message": "This changes the KMI, so it needs to be added to the final KMI update on 6/17.",
+      "revId": "4d5ba98c17c4e7abddffed37d1c6601e4ba881e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
