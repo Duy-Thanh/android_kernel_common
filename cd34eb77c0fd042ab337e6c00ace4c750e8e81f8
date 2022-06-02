@@ -16,6 +16,41 @@
       "message": "Is this commit necessary?  It\u0027s confusing to bring in some of the blk_keyslot_manager \u003d\u003e blk_crypto_profile refactoring but not all of it.  We should stick with either the old blk-crypto code or the new blk-crypto code, not a mix of both.  (And I thought it was already too late for the new blk-crypto code in android13-*.)  If you\u0027d really like to use the new names in the UFS driver by using compatibility definitions anyway, it would be preferable to limit that to UFS only and not bring in changes outside UFS.",
       "revId": "cd34eb77c0fd042ab337e6c00ace4c750e8e81f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2577996_787ab098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079098
+      },
+      "writtenOn": "2022-06-02T02:24:33Z",
+      "side": 1,
+      "message": "Bart, I do\u0027t think it is a good idea to backport such big change.",
+      "revId": "cd34eb77c0fd042ab337e6c00ace4c750e8e81f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7264d91_d8a129b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079098
+      },
+      "writtenOn": "2022-06-02T02:24:33Z",
+      "side": 1,
+      "message": "It is not a good idea to turn Android13-5.15 UFS as LTS-5.19.",
+      "parentUuid": "5c05783d_136bd45a",
+      "revId": "cd34eb77c0fd042ab337e6c00ace4c750e8e81f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
