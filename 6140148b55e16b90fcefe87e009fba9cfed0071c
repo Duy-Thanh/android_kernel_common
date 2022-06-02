@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01879860_2de39565",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-06-02T09:31:30Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nCould you please help merge the patch? It is used in kenel5.4, and now in kernel5.15, we also need the config.\n\nThanks！",
+      "revId": "6140148b55e16b90fcefe87e009fba9cfed0071c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
