@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79eaf81a_939d0d2b",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2022-06-02T01:19:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6cd77e89_23646040",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 54
+      },
+      "revId": "f2f90e468c27cb824c31d6e2ebf9f9968d14ca61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd4abbbc_d03a23fe",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-01T15:56:13Z",
       "side": 1,
       "message": "the same. Please change like this:\n\n```\n#include \u003ctrace/hooks/cgroup.h\u003e\n\nstatic void propagate_protected_usage(struct page_counter *c,\n```",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "revId": "f2f90e468c27cb824c31d6e2ebf9f9968d14ca61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc3f8e35_582e4ea8",
+        "filename": "mm/page_counter.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2022-06-02T01:19:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd4abbbc_d03a23fe",
       "range": {
         "startLine": 16,
         "startChar": 0,
