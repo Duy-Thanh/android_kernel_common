@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0c7b18a_57beb3aa",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-06-02T20:36:51Z",
+      "side": 1,
+      "message": "I had it there originally but it produces a warning `warning: mixing declarations and code is a C99 extension [-Wdeclaration-after-statement]`, which is a bit odd. It ends up as an error in future kernels with `-Werror`. This does nothing at runtime so it doesn\u0027t really matter where it ends up, but placing it here seemed logically more organized than at the top of `dma_buf_stats_setup` with no context yet on why the check exists.",
+      "parentUuid": "edae5a2f_012e715e",
+      "range": {
+        "startLine": 141,
+        "startChar": 1,
+        "endLine": 143,
+        "endChar": 41
+      },
+      "revId": "f4ccedba550fb09a99918f06bab291e975f69d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee5abadd_da806410",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-02T19:31:07Z",
       "side": 1,
       "message": "any reason for this change?",
+      "range": {
+        "startLine": 193,
+        "startChar": 15,
+        "endLine": 193,
+        "endChar": 22
+      },
+      "revId": "f4ccedba550fb09a99918f06bab291e975f69d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b0b595e_ab381efd",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-06-02T20:36:51Z",
+      "side": 1,
+      "message": "The previous allocation had to be zereod because that\u0027s what `kobject_init_and_add` expects. It doesn\u0027t work correctly otherwise. However `INIT_WORK` fully initializes its argument regardless of its initial state, so we no longer need zereoed memory here. Later in sysfs_add_workfn we have to overwrite this memory with zeros anyway before calling `kobject_init_and_add`.",
+      "parentUuid": "ee5abadd_da806410",
       "range": {
         "startLine": 193,
         "startChar": 15,
