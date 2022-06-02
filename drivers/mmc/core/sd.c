@@ -26,6 +26,8 @@
 #include "sd.h"
 #include "sd_ops.h"
 
+#include <trace/hooks/mmc.h>
+
 static const unsigned int tran_exp[] = {
 	10000,		100000,		1000000,	10000000,
 	0,		0,		0,		0
@@ -393,6 +395,7 @@ int mmc_sd_switch_hs(struct mmc_card *card)
 		return -ENOMEM;
 
 	err = mmc_sd_switch(card, 1, 0, HIGH_SPEED_BUS_SPEED, status);
+	trace_android_vh_mmc_sd_switch_hs(card, status, &err);
 	if (err)
 		goto out;
 
