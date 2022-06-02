@@ -51,6 +51,24 @@
       "parentUuid": "5c05783d_136bd45a",
       "revId": "cd34eb77c0fd042ab337e6c00ace4c750e8e81f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f3e3e27_49a10b75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-06-02T02:33:49Z",
+      "side": 1,
+      "message": "Eric, my strategy to backport upstream UFS changes is to backport all upstream UFS driver patches and also to use the latest upstream kernel API and provide wrappers that convert the latest API into the API is available on the active kernel branch.\n\nThis strategy has the following advantages:\n* The UFS driver code is almost identical to the latest upstream UFS driver code. This makes backporting newer patches easy.\n* It becomes easy to verify the result of backporting patches with diff.\n\nI will see how I can limit the changes in this patch to the UFS driver only.",
+      "parentUuid": "e7264d91_d8a129b4",
+      "revId": "cd34eb77c0fd042ab337e6c00ace4c750e8e81f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
