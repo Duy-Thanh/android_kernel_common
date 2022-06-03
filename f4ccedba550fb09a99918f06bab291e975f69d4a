@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "571e9224_f780722e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-06-03T20:08:57Z",
+      "side": 1,
+      "message": "Ok, hopefully I got the Conflicts section right.",
+      "parentUuid": "e1ac92a4_cdf14656",
+      "revId": "f4ccedba550fb09a99918f06bab291e975f69d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edae5a2f_012e715e",
