@@ -312,6 +312,7 @@ static int snd_card_init(struct snd_card *card, struct device *parent,
 	INIT_LIST_HEAD(&card->ctl_files);
 	spin_lock_init(&card->files_lock);
 	INIT_LIST_HEAD(&card->files_list);
+	hash_init(card->ctl_htable);
 	mutex_init(&card->memory_mutex);
 #ifdef CONFIG_PM
 	init_waitqueue_head(&card->power_sleep);

@@ -14,6 +14,7 @@
 #include <linux/pm.h>			/* pm_message_t */
 #include <linux/stringify.h>
 #include <linux/printk.h>
+#include <linux/hashtable.h>
 #include <linux/android_kabi.h>
 
 /* number of supported soundcards */
@@ -24,6 +25,8 @@
 #endif
 
 #define CONFIG_SND_MAJOR	116	/* standard configuration */
+
+#define SND_CTL_HASH_TABLE_BITS 14	/* buckets numbers: 1 << 14 */
 
 /* forward declarations */
 struct pci_dev;
@@ -108,7 +111,7 @@ struct snd_card {
 	size_t user_ctl_alloc_size;	// current memory allocation by user controls.
 	struct list_head controls;	/* all controls for this card */
 	struct list_head ctl_files;	/* active control files */
-
+	DECLARE_HASHTABLE(ctl_htable, SND_CTL_HASH_TABLE_BITS);
 	struct snd_info_entry *proc_root;	/* root for soundcard specific files */
 	struct proc_dir_entry *proc_root_link;	/* number link to real id */
 
