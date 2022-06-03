@@ -16,6 +16,24 @@
       "message": "Please update the existing commits, do not create new ones as now all review history is gone and we can not see what changed from previous commits.\n\nPlease abandon this series and update your original one that was already reviewed.",
       "revId": "80087f9cfbf51e9d2ffb4d80c11fbbf5dfdcc0a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ecd8eac_f1b41f05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-03T18:20:20Z",
+      "side": 1,
+      "message": "I agree with Greg. Please keep `Change-Id: \u003cSHA\u003e` tag in the patch description unchanged from the original patch so that you do not create clones in Gerrit when pushing the change.\n\nI\u0027ll keep reviewing this original patchset until you update it.",
+      "parentUuid": "88901872_065b8a96",
+      "revId": "80087f9cfbf51e9d2ffb4d80c11fbbf5dfdcc0a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
