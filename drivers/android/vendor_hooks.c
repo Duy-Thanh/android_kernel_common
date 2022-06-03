@@ -412,3 +412,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_vma);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_behavior_valid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wp_page_copy_set_state);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_page_present);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_swap_page_state);

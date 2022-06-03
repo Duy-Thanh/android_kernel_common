@@ -152,6 +152,9 @@ DECLARE_HOOK(android_vh_wp_page_copy_set_state,
 DECLARE_HOOK(android_vh_swap_page_present,
 	TP_PROTO(struct vm_fault *vmf, bool present),
 	TP_ARGS(vmf, present));
+DECLARE_HOOK(android_vh_set_swap_page_state,
+	TP_PROTO(struct vm_fault *vmf, struct page *page),
+	TP_ARGS(vmf, page));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */
