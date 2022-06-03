@@ -16,6 +16,23 @@
       "message": "Hi Todd,\n\nCould you please help merge the patch? It is used in kenel5.4, and now in kernel5.15, we also need the config.\n\nThanks！",
       "revId": "6140148b55e16b90fcefe87e009fba9cfed0071c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dfeeea6_cb5aac57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-03T07:33:03Z",
+      "side": 1,
+      "message": "x86 is also required to be changed.",
+      "revId": "6140148b55e16b90fcefe87e009fba9cfed0071c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
