@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a094d2_dc495abc",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-03T19:47:42Z",
+      "side": 1,
+      "message": "Explicit exports please",
+      "range": {
+        "startLine": 182,
+        "startChar": 2,
+        "endLine": 182,
+        "endChar": 67
+      },
+      "revId": "1cd0691a06042c4e00fe94efb2be5d51ca7ae4c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
