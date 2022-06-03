@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ac92a4_cdf14656",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-03T16:30:34Z",
+      "side": 1,
+      "message": "Actually this I guess should be marked as BACKPORT because it differs from the original to prevent ABI change with a Conflicts: section describing the modification.",
+      "revId": "f4ccedba550fb09a99918f06bab291e975f69d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edae5a2f_012e715e",
