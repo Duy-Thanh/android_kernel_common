@@ -34,6 +34,24 @@
       "parentUuid": "327480f4_db98d0bd",
       "revId": "799c2d471b5c4bc7f26862aff98182d17a153f03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45ab94e6_56c5a0e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-03T07:37:21Z",
+      "side": 1,
+      "message": "please provide this information in the changelog text.\n\nAnd why not just submit your needed changes upstream so that it will always work and no hooks will be needed?  For quirk handling, this should be a very small change, right?",
+      "parentUuid": "3e83f60e_a2b6b547",
+      "revId": "799c2d471b5c4bc7f26862aff98182d17a153f03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
