@@ -1054,8 +1054,16 @@ static struct task_struct *dup_task_struct(struct task_struct *orig, int node)
 #ifdef CONFIG_MEMCG
 	tsk->active_memcg = NULL;
 #endif
+<<<<<<< HEAD   (a649f4 Merge 916654201008 ("Merge tag 'x86_apic_for_v5.19_rc1' of g)
 	memset(&tsk->android_vendor_data1, 0, sizeof(tsk->android_vendor_data1));
 	memset(&tsk->android_oem_data1, 0, sizeof(tsk->android_oem_data1));
+=======
+
+#ifdef CONFIG_CPU_SUP_INTEL
+	tsk->reported_split_lock = 0;
+#endif
+
+>>>>>>> BRANCH (3e2cbc Merge tag 'x86_splitlock_for_v5.19_rc1' of git://git.kernel.)
 	return tsk;
 
 free_stack:
