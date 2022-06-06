@@ -16,6 +16,24 @@
       "message": "If this is needed in older kernels, why does the upstream submission not say that with a Fixes: tag and a stable cc:?",
       "revId": "df274d1b2b07920279be2877dd10e0e68c5b7a61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b95f81_940ca0db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015397
+      },
+      "writtenOn": "2022-06-06T17:01:27Z",
+      "side": 1,
+      "message": "We\u0027d need to contact the author of the change. The fixes may point to one of the original changes of this driver, or at least: https://lore.kernel.org/r/20210628155311.16762-3-m.grzeschik@pengutronix.de\n\nIn my setup, dwc3 on qcom chipsets, it\u0027s a performance improvement for usb2 transmission.",
+      "parentUuid": "44472adf_aeddfb29",
+      "revId": "df274d1b2b07920279be2877dd10e0e68c5b7a61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
