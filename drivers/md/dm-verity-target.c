@@ -1238,7 +1238,12 @@ bad:
 
 static struct target_type verity_target = {
 	.name		= "verity",
+<<<<<<< HEAD   (3bf624 Merge 4.14.281 into android-4.14-stable)
 	.version	= {1, 4, 0},
+=======
+	.features	= DM_TARGET_IMMUTABLE,
+	.version	= {1, 3, 0},
+>>>>>>> BRANCH (b8f3be Linux 4.14.282)
 	.module		= THIS_MODULE,
 	.ctr		= verity_ctr,
 	.dtr		= verity_dtr,
