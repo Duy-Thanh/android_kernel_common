@@ -1139,7 +1139,12 @@ EXPORT_SYMBOL_GPL(verity_ctr);
 
 static struct target_type verity_target = {
 	.name		= "verity",
+<<<<<<< HEAD   (2a14df Merge 4.9.316 into android-4.9-q)
 	.version	= {1, 4, 0},
+=======
+	.features	= DM_TARGET_IMMUTABLE,
+	.version	= {1, 3, 0},
+>>>>>>> BRANCH (a1a1b7 Linux 4.9.317)
 	.module		= THIS_MODULE,
 	.ctr		= verity_ctr,
 	.dtr		= verity_dtr,
