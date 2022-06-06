@@ -33,6 +33,24 @@
       "message": "x86 is also required to be changed.",
       "revId": "6140148b55e16b90fcefe87e009fba9cfed0071c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "260b7dad_2684b784",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-06-06T08:41:49Z",
+      "side": 1,
+      "message": "update",
+      "parentUuid": "5dfeeea6_cb5aac57",
+      "revId": "6140148b55e16b90fcefe87e009fba9cfed0071c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
