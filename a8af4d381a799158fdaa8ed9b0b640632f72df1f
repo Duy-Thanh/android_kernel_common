@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc497014_d8c01bf7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 17
+      },
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "386fa5b3_bd77d121",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "Please add more description. This is a hook version of a feature that has been proposed upstream. Please add description of that and include a link to the upstream submittal.",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9810efeb_7256a894",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "remove extra blank line",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ba9d11_2b4b674d",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2087,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "remove extra blank line",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a485704f_2a22b25b",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2105,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "this changes the behavior when the hook is not used. Why can\u0027t this be done inside the hook handler?",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16dab356_a2c86780",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "remove extra blank line",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55be8b9_2eb3bce9",
+        "filename": "include/linux/mmc/card.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "For the vendor hook version, all of these new fields should be ANDROID_VENDOR_DATA() at the end of the structure. Since they are all u8, all of them fit in a single u64 vendor data field.",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "144d3e59_e51e08ac",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "Please remove. This should be private for your hook implementation.",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "534db96a_fda35bc6",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "Replace with ANDROID_VENDOR_DATA() at the end of the struct (just before the KABI reserved fields)",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "007a381f_4db84524",
+        "filename": "include/trace/hooks/mmc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:11:54Z",
+      "side": 1,
+      "message": "these are not declared as restricted hooks. Change \"rvh\" --\u003e \"vh\".",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
