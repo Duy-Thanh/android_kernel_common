@@ -34,6 +34,24 @@
       "parentUuid": "88901872_065b8a96",
       "revId": "80087f9cfbf51e9d2ffb4d80c11fbbf5dfdcc0a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fa30646_409e7dbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-06-07T10:57:15Z",
+      "side": 1,
+      "message": "The reason for creating this new patch list is that in the original patch list, I could not solve the merge conflict by rebase.\nI have tried the following methods respectively:\n1) Rebase on parent change\n2) Rebase on top of the android12-5.10 branch (breaks relation chain)\n3) Rebase on a specific change, ref, or commit (breaks relation chain)\n\nThree rebase operations have all failed, and an error message similar to the following is displayed:\n\n\tCould not perform action: The change could not be rebased due to a conflict during merge.\n\n\tmerge conflict(s):\n\tdrivers/android/vendor_hooks.c\n\tinclude/trace/hooks/mm.h\n\nCould you please tell me how to solve the merge conflict problem in the original patch list?",
+      "parentUuid": "2ecd8eac_f1b41f05",
+      "revId": "80087f9cfbf51e9d2ffb4d80c11fbbf5dfdcc0a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
