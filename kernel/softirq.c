@@ -250,7 +250,8 @@ static inline void lockdep_softirq_end(bool in_hardirq) { }
 #define softirq_deferred_for_rt(pending)		\
 ({							\
 	__u32 deferred = 0;				\
-	if (cpupri_check_rt()) {			\
+	if (cpupri_check_rt() &&			\
+	    __this_cpu_read(ksoftirqd) == current) {	\
 		deferred = pending & LONG_SOFTIRQ_MASK; \
 		pending &= ~LONG_SOFTIRQ_MASK;		\
 	}						\
