@@ -16,6 +16,24 @@
       "message": "I would expect a larger impact, if any, from this change when use_high_wq is 0 as that is when it has to change the priority of the workqueue function for every message.",
       "revId": "110f10db6736b151c351b99674de9c0d68882408",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbbe5013_4af985ce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-06-07T05:12:38Z",
+      "side": 1,
+      "message": "I think we should test \n\necho 0 \u003e /sys/module/trusty_core/parameters/use_high_wq\n\ntime /data/nativetest64/vendor/tipc-test/tipc-test -t echo -r 10000\n\nwhere we will see the prio changed during execution.",
+      "parentUuid": "8a7675bb_6f01060a",
+      "revId": "110f10db6736b151c351b99674de9c0d68882408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
