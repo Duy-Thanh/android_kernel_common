@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "310c2d96_33f99221",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4534,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T18:35:09Z",
+      "side": 1,
+      "message": "How is this field added in the upstream series? Please backport that patch instead of using this Android-specific patch that should just be adding the namespace to the enums.\n\nIf not backporting an upstream patch for this, then please replace with ANDROID_VENDOR_DATA(1)",
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
