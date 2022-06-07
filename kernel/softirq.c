@@ -276,7 +276,11 @@ asmlinkage __visible void __softirq_entry __do_softirq(void)
 	current->flags &= ~PF_MEMALLOC;
 
 	pending = local_softirq_pending();
-	deferred = softirq_deferred_for_rt(pending);
+	if (__this_cpu_read(ksoftirqd) != current) {
+		deferred = softirq_deferred_for_rt(pending);
+	} else {
+		deferred = 0;
+	}
 	account_irq_enter_time(current);
 	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_OFFSET);
 	in_hardirq = lockdep_softirq_start();
