@@ -52,6 +52,24 @@
       "parentUuid": "cbbe5013_4af985ce",
       "revId": "110f10db6736b151c351b99674de9c0d68882408",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4750d3f0_dce93764",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-06-07T18:57:11Z",
+      "side": 1,
+      "message": "Do you see the same 5%-10% penalty when you switch from `echo 1 \u003e /sys/module/trusty_core/parameters/use_high_wq` to `echo 0 \u003e /sys/module/trusty_core/parameters/use_high_wq` on a running system, or was this only between two different builds?",
+      "parentUuid": "44ac5229_942ea13f",
+      "revId": "110f10db6736b151c351b99674de9c0d68882408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
