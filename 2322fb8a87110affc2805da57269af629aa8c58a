@@ -63,6 +63,30 @@
       },
       "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec100788_915e5084",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4540,
+      "author": {
+        "id": 1946045
+      },
+      "writtenOn": "2022-06-07T19:22:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "84296d92_478c9808",
+      "range": {
+        "startLine": 4540,
+        "startChar": 21,
+        "endLine": 4540,
+        "endChar": 22
+      },
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
