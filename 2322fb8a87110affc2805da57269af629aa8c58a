@@ -16,6 +16,29 @@
       "message": "How is this field added in the upstream series? Please backport that patch instead of using this Android-specific patch that should just be adding the namespace to the enums.\n\nIf not backporting an upstream patch for this, then please replace with ANDROID_VENDOR_DATA(1)",
       "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c398a794_fd81487f",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4540,
+      "author": {
+        "id": 1946045
+      },
+      "writtenOn": "2022-06-07T19:15:21Z",
+      "side": 1,
+      "message": "it seems this is where we\u0027d add new vendor functions (and we should know if these 4 are already being used)",
+      "range": {
+        "startLine": 4540,
+        "startChar": 21,
+        "endLine": 4540,
+        "endChar": 22
+      },
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
