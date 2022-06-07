@@ -52,6 +52,24 @@
       "parentUuid": "2ecd8eac_f1b41f05",
       "revId": "80087f9cfbf51e9d2ffb4d80c11fbbf5dfdcc0a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f57567_32f27180",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-07T16:06:05Z",
+      "side": 1,
+      "message": "Please rebase your local repository, pull or cherry-pick the patches into it, resolving conflicts in the process and then re-push the patches. When gerrit can\u0027t rebase you should be able to do that in your local repo.",
+      "parentUuid": "5fa30646_409e7dbd",
+      "revId": "80087f9cfbf51e9d2ffb4d80c11fbbf5dfdcc0a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
