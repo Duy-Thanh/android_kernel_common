@@ -1696,9 +1696,9 @@ extern int cpuset_cpumask_can_shrink(const struct cpumask *cur, const struct cpu
 extern int task_can_attach(struct task_struct *p, const struct cpumask *cs_cpus_allowed);
 
 #ifdef CONFIG_RT_SOFTINT_OPTIMIZATION
-extern bool cpupri_check_rt(void);
+extern bool cpupri_check_rt_not_throttling(void);
 #else
-static inline bool cpupri_check_rt(void)
+static inline bool cpupri_check_rt_not_throttling(void)
 {
 	return false;
 }

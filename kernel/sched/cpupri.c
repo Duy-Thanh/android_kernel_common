@@ -336,13 +336,13 @@ void cpupri_cleanup(struct cpupri *cp)
 
 #ifdef CONFIG_RT_SOFTINT_OPTIMIZATION
 /*
- * cpupri_check_rt - check if CPU has a RT task
+ * cpupri_check_rt_not_throttling - check if CPU has a RT task
  * should be called from rcu-sched read section.
  */
-bool cpupri_check_rt(void)
+bool cpupri_check_rt_not_throttling(void)
 {
 	int cpu = raw_smp_processor_id();
-
-	return cpu_rq(cpu)->rd->cpupri.cpu_to_pri[cpu] > CPUPRI_NORMAL;
+	return (cpu_rq(cpu)->rd->cpupri.cpu_to_pri[cpu] > CPUPRI_NORMAL) &&
+	       (cpu_rq(cpu)->rt.rt_throttled == 0);
 }
 #endif
