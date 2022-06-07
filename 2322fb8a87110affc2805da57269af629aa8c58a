@@ -39,6 +39,30 @@
       },
       "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84296d92_478c9808",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4540,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-07T19:20:21Z",
+      "side": 1,
+      "message": "No, the KABI fields are exclusively for LTS refactoring. If you need a field here, you should add an ANDROID_VENDOR_DATA field.",
+      "parentUuid": "c398a794_fd81487f",
+      "range": {
+        "startLine": 4540,
+        "startChar": 21,
+        "endLine": 4540,
+        "endChar": 22
+      },
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
