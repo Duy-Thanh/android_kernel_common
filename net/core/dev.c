@@ -1305,6 +1305,7 @@ rollback:
 	return err;
 }
 
+EXPORT_SYMBOL_GPL(dev_change_name);
 /**
  *	dev_set_alias - change ifalias of a device
  *	@dev: device

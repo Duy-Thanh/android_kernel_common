@@ -290,6 +290,7 @@
   del_timer_sync
   destroy_workqueue
   dev_change_flags
+  dev_change_name
   dev_coredumpm
   dev_driver_string
   _dev_err
@@ -1136,6 +1137,7 @@
   mutex_lock_interruptible
   mutex_trylock
   mutex_unlock
+  name_to_dev_t
   neigh_destroy
   neigh_resolve_output
   netdev_alert
