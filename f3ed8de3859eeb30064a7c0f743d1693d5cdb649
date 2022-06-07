@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2925107_7df1112a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-07T16:34:07Z",
+      "side": 1,
+      "message": "why not get your controller driver fix upstream instead?\n\nOr do this in your controller driver, why does this need to be a hook?",
+      "revId": "f3ed8de3859eeb30064a7c0f743d1693d5cdb649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5391688d_641a2812",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-07T16:34:07Z",
+      "side": 1,
+      "message": "move up to be next to the other mmc hook?",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 58
+      },
+      "revId": "f3ed8de3859eeb30064a7c0f743d1693d5cdb649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
