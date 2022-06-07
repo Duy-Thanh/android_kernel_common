@@ -52,6 +52,24 @@
       "parentUuid": "3e83f60e_a2b6b547",
       "revId": "799c2d471b5c4bc7f26862aff98182d17a153f03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f99741b_4c4fe3af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1947925
+      },
+      "writtenOn": "2022-06-07T06:29:59Z",
+      "side": 1,
+      "message": "Because the Cmd Response of some SD cards is not synchronized, it\nwill be recognized as an error by the controller, so we need to add a vendor hook to improve the compatibility of the controller.",
+      "parentUuid": "45ab94e6_56c5a0e9",
+      "revId": "799c2d471b5c4bc7f26862aff98182d17a153f03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
