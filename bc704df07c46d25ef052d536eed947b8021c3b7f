@@ -16,6 +16,24 @@
       "message": "this commit message does not explain _why_ this is needed, or what the resulting kernel change will be.",
       "revId": "bc704df07c46d25ef052d536eed947b8021c3b7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "528c1cc8_54109851",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-06-07T12:49:13Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "1c958e3a_7dc38463",
+      "revId": "bc704df07c46d25ef052d536eed947b8021c3b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
