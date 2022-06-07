@@ -70,6 +70,24 @@
       "parentUuid": "44ac5229_942ea13f",
       "revId": "110f10db6736b151c351b99674de9c0d68882408",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99a4785a_8a4226b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-06-07T19:50:16Z",
+      "side": 1,
+      "message": "`echo 1` vs `echo 0` numbers are between two different machines and builds.\n\nI ran `echo 1` on my current set up with the patch.\n```\necho 1 \u003e /sys/module/trusty_core/parameters/use_high_wq\ntime /data/nativetest64/vendor/tipc-test/tipc-test -t echo -r 10000\n1m04.74s real     0m01.37s user     0m17.87s system\n```",
+      "parentUuid": "4750d3f0_dce93764",
+      "revId": "110f10db6736b151c351b99674de9c0d68882408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
