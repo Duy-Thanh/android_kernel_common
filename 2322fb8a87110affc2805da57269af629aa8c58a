@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "546a9169_78684298",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4534,
+      "author": {
+        "id": 1946045
+      },
+      "writtenOn": "2022-06-08T17:12:28Z",
+      "side": 1,
+      "message": "thinking about this a bit more, is there a reason we need the function pointer in this struct? can we define a global vendor hook instead?",
+      "parentUuid": "310c2d96_33f99221",
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c398a794_fd81487f",
         "filename": "include/net/cfg80211.h",
         "patchSetId": 1
