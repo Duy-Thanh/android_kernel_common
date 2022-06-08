@@ -222,6 +222,7 @@ out:
 	hba->caps &= ~UFSHCD_CAP_CRYPTO;
 	return err;
 }
+EXPORT_SYMBOL(ufshcd_hba_init_crypto_capabilities);
 
 /**
  * ufshcd_init_crypto - Initialize crypto hardware

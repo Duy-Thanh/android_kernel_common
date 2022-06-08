@@ -16,6 +16,8 @@
 #include "ufshcd-pltfrm.h"
 #include "unipro.h"
 
+#include <trace/hooks/ufshcd.h>
+
 #define UFSHCD_DEFAULT_LANES_PER_DIRECTION		2
 
 static int ufshcd_parse_clock_info(struct ufs_hba *hba)
@@ -346,6 +348,15 @@ int ufshcd_pltfrm_init(struct platform_device *pdev,
 	}
 
 	hba->vops = vops;
+
+	if (trace_android_rvh_ufs_mcq_alloc_priv_enabled()) {
+		trace_android_rvh_ufs_mcq_alloc_priv(hba, &err);
+		if(err) {
+			dev_err(&pdev->dev, "%s: alloc hba private failed %d\n",
+					__func__, err);
+			goto dealloc_host;
+		}
+	}
 
 	err = ufshcd_parse_clock_info(hba);
 	if (err) {
