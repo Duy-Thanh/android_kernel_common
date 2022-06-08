@@ -33,6 +33,24 @@
       "message": "Does not match the link provided 😞",
       "revId": "a4889c5e80a05c01f0e6b9e9348931c765fef018",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bbdf031_54615545",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2022-06-08T11:45:54Z",
+      "side": 1,
+      "message": "Hi Greg,\nThe patch in the link is based on latest kernel, it requires some new variable in struct dwc3, like susp_clk, so I did some modification to backport it to 5.15. Or maybe I misunderstand something, please tell me more details, thanks.",
+      "parentUuid": "1ef54723_3b904077",
+      "revId": "a4889c5e80a05c01f0e6b9e9348931c765fef018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
