@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c315c01_ede82f90",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 145199,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-06-08T09:29:59Z",
+      "side": 0,
+      "message": "I need to understand what\u0027s going on here. I will attempt to reproduce.",
+      "range": {
+        "startLine": 145184,
+        "startChar": 0,
+        "endLine": 145199,
+        "endChar": 19
+      },
+      "revId": "825d9968d9ac9177736056b524c6bc6223845a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
