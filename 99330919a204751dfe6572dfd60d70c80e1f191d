@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f22bcee4_b2019d21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-08T22:56:03Z",
+      "side": 1,
+      "message": "This patch would change the KMI in its current form, so it cannot be accepted after June 17. If you wish to pursue it, please update the patch or discuss in the associated bug",
+      "revId": "99330919a204751dfe6572dfd60d70c80e1f191d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
