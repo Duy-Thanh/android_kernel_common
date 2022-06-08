@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "329ea405_76b397d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-06-08T13:10:08Z",
+      "side": 1,
+      "message": "this fails with\n\n```\nERROR: Unable to find drivers/gpu/drm/dp/drm_dp_helper.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/db845c/staging/lib/modules/5.18.0-mainline-25456-g4fa2778f1d1c-abP36004848/kernel\n  GEN     kernel/gki_module_protected.h\n  GEN     kernel/gki_module_exported.h\nTarget //common:db845c_dist failed to build\n\n\nDid something in the module configuration (indirectly) change? Looks like the db845c config needs adjustment?\n```",
+      "revId": "4fa2778f1d1c8fb21a861b3fce0e54b487e9f6ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
