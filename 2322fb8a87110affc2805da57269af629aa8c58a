@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afe87026_1e73f221",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4534,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-08T19:43:46Z",
+      "side": 1,
+      "message": "You can\u0027t. Those would have to remain vendor data so you\u0027d need to manipulate them from a vendor module.",
+      "parentUuid": "cb89fc83_7784ed99",
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c398a794_fd81487f",
         "filename": "include/net/cfg80211.h",
         "patchSetId": 1
