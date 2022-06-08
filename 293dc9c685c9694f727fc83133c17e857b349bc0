@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c782b37_541d0cc1",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-06-08T23:51:01Z",
+      "side": 0,
+      "message": "we can clean up this, but need userspace change before this.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 38
+      },
+      "revId": "293dc9c685c9694f727fc83133c17e857b349bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
