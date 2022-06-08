@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb89fc83_7784ed99",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4534,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2022-06-08T19:25:33Z",
+      "side": 1,
+      "message": "Yeah, I think we can use global vendor hook for this function.\n\n@Todd, In general, Can you please share some details(may be some reference changes) on how can we utilize reserved space post-freeze? can we submit changes with new fields replacing ANDROID_VENDOR_DATA(..)?",
+      "parentUuid": "310c2d96_33f99221",
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c398a794_fd81487f",
         "filename": "include/net/cfg80211.h",
         "patchSetId": 1
