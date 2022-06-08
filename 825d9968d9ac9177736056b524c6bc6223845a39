@@ -22,6 +22,30 @@
       },
       "revId": "825d9968d9ac9177736056b524c6bc6223845a39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4772bfc3_100c2820",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 145199,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-06-08T17:46:04Z",
+      "side": 0,
+      "message": "I refreshed the XML myself and the XML diff looks better now.",
+      "parentUuid": "3c315c01_ede82f90",
+      "range": {
+        "startLine": 145184,
+        "startChar": 0,
+        "endLine": 145199,
+        "endChar": 19
+      },
+      "revId": "825d9968d9ac9177736056b524c6bc6223845a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
