@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d18c918b_a1ce890f",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4534,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2022-06-09T02:34:15Z",
+      "side": 1,
+      "message": "still couldn\u0027t get how to utilize reserved ANDROID_VENDOR_DATA(). can you please help understand how reserved place helps in below case.\n\nfor example We are anticipating some new fields in \"struct wireless_wdev\" defined in this file after GKI freeze. Can we use vendor reserved space to send values of the additional fields added by upstream in \"struct wireless_wdev\"?",
+      "parentUuid": "afe87026_1e73f221",
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c398a794_fd81487f",
         "filename": "include/net/cfg80211.h",
         "patchSetId": 1
