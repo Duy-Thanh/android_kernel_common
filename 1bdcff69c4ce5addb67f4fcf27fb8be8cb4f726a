@@ -16,6 +16,23 @@
       "message": "In patch set-2 taken care all the comments.",
       "revId": "1bdcff69c4ce5addb67f4fcf27fb8be8cb4f726a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a6447c_9abcdbdd",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2104,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-09T16:53:34Z",
+      "side": 1,
+      "message": "cache_card_properties isn\u0027t used anywhere. Remove it?",
+      "revId": "1bdcff69c4ce5addb67f4fcf27fb8be8cb4f726a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

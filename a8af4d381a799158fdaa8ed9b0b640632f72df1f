@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec577a1_48957487",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-09T16:53:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc497014_d8c01bf7",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 17
+      },
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "386fa5b3_bd77d121",
@@ -263,6 +287,24 @@
       "side": 1,
       "message": "Taken care.",
       "parentUuid": "007a381f_4db84524",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58cb1bed_72fe8288",
+        "filename": "include/trace/hooks/mmc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-09T16:53:34Z",
+      "side": 1,
+      "message": "If you are using restricted hooks, then the commit message needs to say why.",
+      "parentUuid": "73fad2d3_0406d3e8",
       "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
