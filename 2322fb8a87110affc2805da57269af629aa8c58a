@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "442e2e11_6ab8a6f2",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4534,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-09T03:29:33Z",
+      "side": 1,
+      "message": "You\u0027ll need to use this field by adding a hook to set/get. There are some other tricks we can use to add fields after KMI freeze, but we need to look at them on a case-by-case basis. For an example see https://source.android.com/devices/architecture/kernel/android-common#kmi-frozen-phase",
+      "parentUuid": "d18c918b_a1ce890f",
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c398a794_fd81487f",
         "filename": "include/net/cfg80211.h",
         "patchSetId": 1
