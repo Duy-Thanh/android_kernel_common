@@ -22,6 +22,30 @@
       },
       "revId": "ae955660f63a007de4cd19406a60ed8fa2db1556",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad2aa632_77ad6002",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-09T16:35:24Z",
+      "side": 1,
+      "message": "You must not \"use enum 148 for one purpose now\" for any shipping product. The assumption is that the upstream change will land soon so the real upstream value can be used for all shipping products. When it does land upstream, the definition will change to its permanent value and break any vendor code that relies on the temporary value. \n\n```\nBELOW the comment /* add new commands above here */ with an additional comment that this is provisional pending merge, and then once the changes are actually merged upstream we backport to the correct location and remove the provisional definition.\n```\nIf this is just renaming \"CMD_RESERVED_DO_NOT_USE\" to something else, then it doesn\u0027t matter much -- but the size of the enum is KMI, so new enums can\u0027t be added after June 17... so we need to pad the enum with enough to ensure that the one you are expecting to land soon is pre-allocated. If not, then we can\u0027t add it.\n\nMaybe I don\u0027t understand your proposal. Feel free to upload a patch that implements your idea and we can discuss it there.",
+      "parentUuid": "8f860775_b982b74c",
+      "range": {
+        "startLine": 1484,
+        "startChar": 0,
+        "endLine": 1484,
+        "endChar": 1
+      },
+      "revId": "ae955660f63a007de4cd19406a60ed8fa2db1556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
