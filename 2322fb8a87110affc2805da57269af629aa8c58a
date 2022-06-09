@@ -126,6 +126,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cfd810f_4c357deb",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4534,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2022-06-09T11:36:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "442e2e11_6ab8a6f2",
+      "revId": "2322fb8a87110affc2805da57269af629aa8c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c398a794_fd81487f",
