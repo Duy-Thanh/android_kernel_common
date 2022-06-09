@@ -51,6 +51,23 @@
       "parentUuid": "1ef54723_3b904077",
       "revId": "a4889c5e80a05c01f0e6b9e9348931c765fef018",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60f34c38_b131eb70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2022-06-09T05:11:18Z",
+      "side": 1,
+      "message": "Hello, could you explain more what I should do for this patch? Thank you",
+      "revId": "a4889c5e80a05c01f0e6b9e9348931c765fef018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
