@@ -46,6 +46,30 @@
       },
       "revId": "ae955660f63a007de4cd19406a60ed8fa2db1556",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0834783f_b85f7ad3",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1946045
+      },
+      "writtenOn": "2022-06-09T23:57:31Z",
+      "side": 1,
+      "message": "like I said, I\u0027m ok with this, I just didn\u0027t see the need to define things like NL80211_CMD_RESERVED_DO_NOT_USE_1 when in the same patch series we have #define NL80211_ATTR_MAX_NUM_AKM_SUITES NL80211_ATTR_RESERVED_DO_NOT_USE_1\n\nAlso note that at least for these nl80211 attributes the size of the enum does not affect the KMI (unless the values exceed 65535) since the enums are transported in the __u16 nla_type field of struct nlattr",
+      "parentUuid": "ad2aa632_77ad6002",
+      "range": {
+        "startLine": 1484,
+        "startChar": 0,
+        "endLine": 1484,
+        "endChar": 1
+      },
+      "revId": "ae955660f63a007de4cd19406a60ed8fa2db1556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
