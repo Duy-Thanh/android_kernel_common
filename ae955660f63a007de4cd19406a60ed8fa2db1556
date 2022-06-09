@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f860775_b982b74c",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1946045
+      },
+      "writtenOn": "2022-06-09T16:09:01Z",
+      "side": 1,
+      "message": "While I\u0027m ok with this, I personally don\u0027t understand the value in reserving UAPI enums in this way. If we use enum 148 for one purpose now, and then later 148 is assigned upstream for another purpose, then we\u0027d need to change both the kernel and userspace to compensate.\n\nThat would be no different if we took a different approach: for enums that have already been proposed upstream but which have not yet reached Linus\u0027 tree, why don\u0027t we just add those enums BELOW the comment /* add new commands above here */ with an additional comment that this is provisional pending merge, and then once the changes are actually merged upstream we backport to the correct location and remove the provisional definition.\n\nOne other thought is that for either approach we start with something like:\n  NL80211_CMD_AFTER_LAST_UPSTREAM,\n  NL80211_CMD_RESERVED_FOR_LTS_OR_BACKPORTS \u003d NL80211_CMD_AFTER_LAST_UPSTREAM + 100",
+      "range": {
+        "startLine": 1484,
+        "startChar": 0,
+        "endLine": 1484,
+        "endChar": 1
+      },
+      "revId": "ae955660f63a007de4cd19406a60ed8fa2db1556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
