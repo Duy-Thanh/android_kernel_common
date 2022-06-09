@@ -58,6 +58,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96aa18f8_6801fa8d",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2022-06-09T16:43:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "9810efeb_7256a894",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06ba9d11_2b4b674d",
@@ -71,6 +89,24 @@
       "writtenOn": "2022-06-07T18:11:54Z",
       "side": 1,
       "message": "remove extra blank line",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cefec665_efce4a9c",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2087,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2022-06-09T16:43:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "06ba9d11_2b4b674d",
       "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +128,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "583fe206_892562d2",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2105,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2022-06-09T16:43:32Z",
+      "side": 1,
+      "message": "Taken care.",
+      "parentUuid": "a485704f_2a22b25b",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16dab356_a2c86780",
@@ -105,6 +159,24 @@
       "writtenOn": "2022-06-07T18:11:54Z",
       "side": 1,
       "message": "remove extra blank line",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4256ef63_e632ec7a",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2022-06-09T16:43:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "16dab356_a2c86780",
       "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -173,6 +245,24 @@
       "writtenOn": "2022-06-07T18:11:54Z",
       "side": 1,
       "message": "these are not declared as restricted hooks. Change \"rvh\" --\u003e \"vh\".",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73fad2d3_0406d3e8",
+        "filename": "include/trace/hooks/mmc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2022-06-09T16:43:32Z",
+      "side": 1,
+      "message": "Taken care.",
+      "parentUuid": "007a381f_4db84524",
       "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
