@@ -16,6 +16,24 @@
       "message": "From the bot:\n\n\u003e WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: shubhij \u003cquic_shubhij@quicinc.com\u003e\u0027 !\u003d \u0027Signed-off-by: Shubhi Jain \u003cquic_shubhij@quicinc.com\u003e\u0027\n\nIt seems like the the gerrit account perhaps doesn\u0027t have your full name set?\n\nWe can bypass for now, but it\u0027s annoying to continue to have to do so, please look into resolving that discrepancy.",
       "revId": "e2fa87de88122ef0cc824eeadba7ca843d8d658c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34fc10f6_99e68a7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2022-06-09T17:09:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "760d8e14_9f1d48ec",
+      "revId": "e2fa87de88122ef0cc824eeadba7ca843d8d658c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
