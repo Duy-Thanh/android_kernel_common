@@ -16,6 +16,24 @@
       "message": "Please add a comment about why it is Ok to use something marked \"DO_NOT_USE\"? Something like \"this is a temporary definition that will become permanent when the UAPI change is accepted upstream \u003clink to upstream patch\u003e. This will not be used in production until the UAPI change lands upstream\"",
       "revId": "bc2e2b5287efbc0ee1b46be9a1947a7c8a89c1c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68882709_194ff4c7",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3226,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2022-06-09T11:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5843bd25_364ba0b6",
+      "revId": "bc2e2b5287efbc0ee1b46be9a1947a7c8a89c1c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
