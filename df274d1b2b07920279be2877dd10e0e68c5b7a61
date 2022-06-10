@@ -52,6 +52,23 @@
       "parentUuid": "50b95f81_940ca0db",
       "revId": "df274d1b2b07920279be2877dd10e0e68c5b7a61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cb879c4_848c3e95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-10T11:07:49Z",
+      "side": 1,
+      "message": "now can be marked FROMGIT",
+      "revId": "df274d1b2b07920279be2877dd10e0e68c5b7a61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
