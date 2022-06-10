@@ -33,6 +33,24 @@
       "message": "cache_card_properties isn\u0027t used anywhere. Remove it?",
       "revId": "1bdcff69c4ce5addb67f4fcf27fb8be8cb4f726a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8457d0b5_548b6c4f",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2104,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2022-06-10T09:15:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55a6447c_9abcdbdd",
+      "revId": "1bdcff69c4ce5addb67f4fcf27fb8be8cb4f726a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
