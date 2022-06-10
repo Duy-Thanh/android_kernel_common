@@ -24,6 +24,31 @@ DECLARE_HOOK(android_vh_mutex_wait_start,
 DECLARE_HOOK(android_vh_mutex_wait_finish,
 	TP_PROTO(struct mutex *lock),
 	TP_ARGS(lock));
+<<<<<<< HEAD   (412d29 ANDROID: Fuse: Fix Passthrough and Cache Coherency)
+||||||| BASE
+DECLARE_HOOK(android_vh_mutex_opt_spin_start,
+	TP_PROTO(struct mutex *lock, bool *time_out, int *cnt),
+	TP_ARGS(lock, time_out, cnt));
+DECLARE_HOOK(android_vh_mutex_opt_spin_finish,
+	TP_PROTO(struct mutex *lock, bool taken),
+	TP_ARGS(lock, taken));
+DECLARE_HOOK(android_vh_mutex_can_spin_on_owner,
+	TP_PROTO(struct mutex *lock, int *retval),
+	TP_ARGS(lock, retval));
+=======
+DECLARE_HOOK(android_vh_mutex_opt_spin_start,
+	TP_PROTO(struct mutex *lock, bool *time_out, int *cnt),
+	TP_ARGS(lock, time_out, cnt));
+DECLARE_HOOK(android_vh_mutex_opt_spin_finish,
+	TP_PROTO(struct mutex *lock, bool taken),
+	TP_ARGS(lock, taken));
+DECLARE_HOOK(android_vh_mutex_can_spin_on_owner,
+	TP_PROTO(struct mutex *lock, int *retval),
+	TP_ARGS(lock, retval));
+DECLARE_HOOK(android_vh_mutex_init,
+	TP_PROTO(struct mutex *lock),
+	TP_ARGS(lock));
+>>>>>>> CHANGE (81fcfd ANDROID: mutex: Add vendor hook to init mutex oem data.)
 
 DECLARE_HOOK(android_vh_rtmutex_wait_start,
 	TP_PROTO(struct rt_mutex_base *lock),
