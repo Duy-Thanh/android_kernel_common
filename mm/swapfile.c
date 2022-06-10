@@ -51,7 +51,9 @@ static void free_swap_count_continuations(struct swap_info_struct *);
 static sector_t map_swap_entry(swp_entry_t, struct block_device**);
 
 DEFINE_SPINLOCK(swap_lock);
-static unsigned int nr_swapfiles;
+EXPORT_SYMBOL_GPL(swap_lock);
+unsigned int nr_swapfiles;
+EXPORT_SYMBOL_GPL(nr_swapfiles);
 atomic_long_t nr_swap_pages;
 /*
  * Some modules use swappable objects and may try to swap them out under
@@ -91,6 +93,7 @@ static struct plist_head *swap_avail_heads;
 static DEFINE_SPINLOCK(swap_avail_lock);
 
 struct swap_info_struct *swap_info[MAX_SWAPFILES];
+EXPORT_SYMBOL_GPL(swap_info);
 
 static DEFINE_MUTEX(swapon_mutex);
 
