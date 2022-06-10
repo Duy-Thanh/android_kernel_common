@@ -222,6 +222,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "793c0264_7bcb46bb",
+        "filename": "include/linux/mmc/card.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-10T15:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b55be8b9_2eb3bce9",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "144d3e59_e51e08ac",
@@ -239,6 +257,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "881b7d97_632926f3",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-10T15:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "144d3e59_e51e08ac",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "534db96a_fda35bc6",
@@ -252,6 +288,24 @@
       "writtenOn": "2022-06-07T18:11:54Z",
       "side": 1,
       "message": "Replace with ANDROID_VENDOR_DATA() at the end of the struct (just before the KABI reserved fields)",
+      "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c141460_759310b8",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-10T15:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "534db96a_fda35bc6",
       "revId": "a8af4d381a799158fdaa8ed9b0b640632f72df1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
