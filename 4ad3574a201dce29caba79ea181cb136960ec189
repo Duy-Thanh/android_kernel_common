@@ -46,6 +46,30 @@
       },
       "revId": "4ad3574a201dce29caba79ea181cb136960ec189",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ab1d23_59a18dac",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-06-10T13:43:48Z",
+      "side": 1,
+      "message": "the file also needs to go and probably also the flags below that refer to symbol lists, like KMI_SYMBOL_LIST_STRICT_MODE ...",
+      "parentUuid": "269cc985_55569f7c",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 39
+      },
+      "revId": "4ad3574a201dce29caba79ea181cb136960ec189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
