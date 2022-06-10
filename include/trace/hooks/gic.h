@@ -9,7 +9,7 @@
 
 #include <trace/hooks/vendor_hooks.h>
 struct gic_chip_data;
-struct irq_data;
+#include <linux/irq.h> /* struct irq_data */
 
 DECLARE_HOOK(android_vh_gic_resume,
        TP_PROTO(struct gic_chip_data *gd),

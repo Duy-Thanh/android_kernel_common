@@ -10,8 +10,8 @@
  * Following tracepoints are not exported in tracefs and provide a
  * mechanism for vendor modules to hook and extend functionality
  */
-struct file;
-union bpf_attr;
+#include <linux/fs.h> /* struct file */
+#include <uapi/linux/bpf.h> /* union bpf_attr */
 DECLARE_HOOK(android_vh_check_mmap_file,
 	TP_PROTO(const struct file *file, unsigned long prot,
 		unsigned long flag, unsigned long ret),

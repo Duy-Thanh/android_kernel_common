@@ -11,7 +11,7 @@
 
 #include <trace/hooks/vendor_hooks.h>
 
-struct dma_buf;
+#include <linux/dma-buf.h> /* struct dma_buf */
 DECLARE_HOOK(android_vh_dma_buf_release,
 		TP_PROTO(struct dma_buf *data),
 		TP_ARGS(data));

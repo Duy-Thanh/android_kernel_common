@@ -10,7 +10,7 @@
  * mechanism for vendor modules to hook and extend functionality
  */
 struct ufs_hba;
-struct request;
+#include <linux/blkdev.h> /* struct request */
 struct ufshcd_lrb;
 
 DECLARE_HOOK(android_vh_ufs_fill_prdt,
@@ -48,7 +48,7 @@ DECLARE_HOOK(android_vh_ufs_check_int_errors,
 	TP_PROTO(struct ufs_hba *hba, bool queue_eh_work),
 	TP_ARGS(hba, queue_eh_work));
 
-struct scsi_device;
+#include <scsi/scsi_device.h> /* struct scsi_device */
 DECLARE_HOOK(android_vh_ufs_update_sdev,
 	TP_PROTO(struct scsi_device *sdev),
 	TP_ARGS(sdev));

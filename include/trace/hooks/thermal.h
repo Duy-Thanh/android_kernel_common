@@ -34,12 +34,12 @@ DECLARE_HOOK(android_vh_thermal_power_cap,
 	TP_PROTO(u32 *power_range),
 	TP_ARGS(power_range));
 
-struct thermal_zone_device;
+#include <linux/thermal.h> /* struct thermal_zone_device */
 DECLARE_HOOK(android_vh_get_thermal_zone_device,
 	TP_PROTO(struct thermal_zone_device *tz),
 	TP_ARGS(tz));
 
-struct thermal_cooling_device;
+#include <linux/thermal.h> /* struct thermal_cooling_device */
 DECLARE_HOOK(android_vh_disable_thermal_cooling_stats,
 	TP_PROTO(struct thermal_cooling_device *cdev, int *disable_stats),
 	TP_ARGS(cdev, disable_stats));
