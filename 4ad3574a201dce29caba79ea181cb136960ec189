@@ -22,6 +22,30 @@
       },
       "revId": "4ad3574a201dce29caba79ea181cb136960ec189",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269cc985_55569f7c",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-10T12:29:43Z",
+      "side": 1,
+      "message": "Ah, that\u0027s why this is still failing, let me test...",
+      "parentUuid": "21141fcd_f2197625",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 39
+      },
+      "revId": "4ad3574a201dce29caba79ea181cb136960ec189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
