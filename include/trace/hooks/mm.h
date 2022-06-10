@@ -151,6 +151,9 @@ DECLARE_HOOK(android_vh_add_anon_rmap,
 DECLARE_HOOK(android_vh_waiting_on_page,
 	TP_PROTO(struct page *page),
 	TP_ARGS(page));
+DECLARE_HOOK(android_vh_migrate_page_states,
+	TP_PROTO(struct page *page, struct page *newpage),
+	TP_ARGS(page, newpage));
 DECLARE_HOOK(android_vh_madvise_need_mmap_write,
 	TP_PROTO(int behavior, int *ret, bool *skip),
 	TP_ARGS(behavior, ret, skip));
