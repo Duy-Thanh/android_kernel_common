@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21141fcd_f2197625",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-06-10T11:07:47Z",
+      "side": 1,
+      "message": "we should also drop the main one, otherwise we basically unexport everything that is not in the (almost empty) main list.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 39
+      },
+      "revId": "4ad3574a201dce29caba79ea181cb136960ec189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
