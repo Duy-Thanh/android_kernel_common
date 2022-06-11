@@ -606,6 +606,8 @@ struct ufs_dev_info {
 	bool	b_rpm_dev_flush_capable;
 	u8	b_presrv_uspc_en;
 	ANDROID_KABI_RESERVE(1);
+
+	ANDROID_OEM_DATA(1);
 };
 
 /*
