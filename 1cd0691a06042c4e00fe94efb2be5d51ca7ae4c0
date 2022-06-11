@@ -46,6 +46,30 @@
       },
       "revId": "1cd0691a06042c4e00fe94efb2be5d51ca7ae4c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c887e7_89de0075",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-06-11T11:43:01Z",
+      "side": 1,
+      "message": "We have removed this pointer of function. Instead we explicit export this symbol to use in our own module.",
+      "parentUuid": "0683b884_0bf741df",
+      "range": {
+        "startLine": 182,
+        "startChar": 2,
+        "endLine": 182,
+        "endChar": 67
+      },
+      "revId": "1cd0691a06042c4e00fe94efb2be5d51ca7ae4c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
