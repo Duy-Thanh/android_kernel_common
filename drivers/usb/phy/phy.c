@@ -615,6 +615,40 @@ struct usb_phy *devm_usb_get_phy_by_phandle(struct device *dev,
 EXPORT_SYMBOL_GPL(devm_usb_get_phy_by_phandle);
 
 /**
+ * devm_of_usb_get_phy_by_phandle - find the USB PHY by phandle in lookup_node
+ * @dev: device that requests this phy
+ * @phandle: name of the property holding the phy phandle value
+ * @index: the index of the phy
+ * @lookup_node: The node to search for PHY phandles.
+ *
+ * Returns the phy driver associated with the given phandle value,
+ * after getting a refcount to it, -ENODEV if there is no such phy or
+ * -EPROBE_DEFER if there is a phandle to the phy, but the device is
+ * not yet loaded. While at that, it also associates the device with
+ * the phy using devres. On driver detach, release function is invoked
+ * on the devres data, then, devres data is freed.
+ *
+ * For use by USB host and peripheral drivers.
+ */
+struct usb_phy *devm_of_usb_get_phy_by_phandle(struct device *dev,
+	const char *phandle, u8 index, struct device_node *lookup_node)
+{
+	struct device_node *node;
+	struct usb_phy	*phy;
+
+	node = of_parse_phandle(lookup_node, phandle, index);
+	if (!node) {
+		dev_dbg(dev, "failed to get %s phandle in %pOF node\n", phandle,
+			dev->of_node);
+		return ERR_PTR(-ENODEV);
+	}
+	phy = devm_usb_get_phy_by_node(dev, node, NULL);
+	of_node_put(node);
+	return phy;
+}
+EXPORT_SYMBOL_GPL(devm_of_usb_get_phy_by_phandle);
+
+/**
  * devm_usb_put_phy - release the USB PHY
  * @dev: device that wants to release this phy
  * @phy: the phy returned by devm_usb_get_phy()

@@ -225,6 +225,8 @@ extern struct usb_phy *devm_usb_get_phy(struct device *dev,
 	enum usb_phy_type type);
 extern struct usb_phy *devm_usb_get_phy_by_phandle(struct device *dev,
 	const char *phandle, u8 index);
+extern struct usb_phy *devm_of_usb_get_phy_by_phandle(struct device *dev,
+	const char *phandle, u8 index, struct device_node *lookup_node);
 extern struct usb_phy *devm_usb_get_phy_by_node(struct device *dev,
 	struct device_node *node, struct notifier_block *nb);
 extern void usb_put_phy(struct usb_phy *);
@@ -250,6 +252,12 @@ static inline struct usb_phy *devm_usb_get_phy(struct device *dev,
 
 static inline struct usb_phy *devm_usb_get_phy_by_phandle(struct device *dev,
 	const char *phandle, u8 index)
+{
+	return ERR_PTR(-ENXIO);
+}
+
+static inline struct usb_phy *devm_of_usb_get_phy_by_phandle(struct device *dev,
+	const char *phandle, u8 index, struct device_node *lookup_node)
 {
 	return ERR_PTR(-ENXIO);
 }
