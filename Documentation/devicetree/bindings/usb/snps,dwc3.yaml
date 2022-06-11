@@ -320,6 +320,32 @@ properties:
 
 unevaluatedProperties: false
 
+  multiport:
+    description:
+      If a single USB controller supports multiple ports, then it's referred to as
+      a multiport controller. Each port of the multiport controller can support
+      either High Speed or Super Speed or both and have their own PHY phandles. Each
+      port is represented by "mport" node and all the "mport" nodes are grouped
+      together inside the "multiport" node where individual "mport" node defines the
+      PHYs supported by that port.
+
+  num_usb2_phy:
+    description: Total number of HS-PHYs defined by the multiport controller.
+    $ref: /schemas/types.yaml#/definitions/uint32
+
+  num_usb3_phy:
+    description: Total number of SS-PHYs defined by the multiport controller.
+    $ref: /schemas/types.yaml#/definitions/uint32
+
+  mport:
+    description: Each mport node represents one port of the multiport controller.
+    oneOf:
+      - required:
+        - usb-phy
+      - required:
+        - phys
+        - phy-names
+
 required:
   - compatible
   - reg
@@ -345,5 +371,32 @@ examples:
       phy-names = "usb2-phy", "usb3-phy";
       snps,dis_u2_susphy_quirk;
       snps,dis_enblslpm_quirk;
+    };
+  - |
+    usb@4a000000 {
+      compatible = "snps,dwc3";
+      reg = <0x4a000000 0xcfff>;
+      interrupts = <0 92 4>;
+
+      multiport {
+
+        MP_1: mport1 {
+          usb-phy = <&usb2_phy0>, <&usb3_phy0>;
+          /* Can define Generic PHYs also */
+        };
+
+        MP_2: mport2 {
+          usb-phy = <&usb2_phy1>, <&usb3_phy1>;
+        };
+
+        MP_3: mport3 {
+          usb-phy = <&usb2_phy2>;
+        };
+
+        MP_4: mport4 {
+          usb-phy = <&usb2_phy3>;
+        };
+
+      };
     };
 ...
