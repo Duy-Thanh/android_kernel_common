@@ -57,7 +57,7 @@ SECTIONS {
 	 * of the .text section, and is aligned to PAGE_SIZE.
 	 */
 	.text : ALIGN_CFI {
-		*(.text.__cfi_check)
+/*		*(.text.__cfi_check) */
 		*(.text .text.[0-9a-zA-Z_]* .text..L.cfi*)
 	}
 #endif
