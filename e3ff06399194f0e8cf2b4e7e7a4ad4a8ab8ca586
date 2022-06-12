@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd95f92_0035b04a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-12T05:20:50Z",
+      "side": 1,
+      "message": "Why not just 1 pointer instead and hang anything else you need off of that?",
+      "revId": "e3ff06399194f0e8cf2b4e7e7a4ad4a8ab8ca586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
