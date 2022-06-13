@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de37599e_38d1111b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-13T18:51:32Z",
+      "side": 1,
+      "message": "Before this line you should add:\n(cherry picked from commit bd3400ea173fb611cdf2030d03620185ff6c0b0e)\n\nSo, it should look like this:\n```\n...\nSigned-off-by: Andrew Morton \u003cakpm@linux-foundation.org\u003e\nSigned-off-by: Linus Torvalds \u003ctorvalds@linux-foundation.org\u003e\n\n(cherry picked from commit bd3400ea173fb611cdf2030d03620185ff6c0b0e)\n\nBug: 235523176\nSigned-off-by: Chinwen Chang \u003cchinwen.chang@mediatek.com\u003e\nChange-Id: I815893d25186847933db2a0872528fb15a00b3c8\n```",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "af45c37aa3c23ae5baafcc291abb3990321a71da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b620d7db_b9d4d843",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-13T18:51:32Z",
+      "side": 1,
+      "message": "This is extra, please remove",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 57
+      },
+      "revId": "af45c37aa3c23ae5baafcc291abb3990321a71da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
