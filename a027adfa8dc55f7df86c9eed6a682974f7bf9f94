@@ -16,6 +16,24 @@
       "message": "The KABI padding is exclusively for LTS updates and must not be used for vendor/OEM features. If you need a field here, please use ANDROID_VENDOR_DATA() or ANDROID_OEM_DATA(). This must land in the final KMI update on June 17.",
       "revId": "a027adfa8dc55f7df86c9eed6a682974f7bf9f94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38e38c7e_1e512811",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-13T15:09:15Z",
+      "side": 1,
+      "message": "Hi Todd, I follow Greg\u0027s suggestion, add a point to hang all fields here.\n\nIf ANDROID_KABI_USE() is not allowed here, any other way I can add an oem pointer\nfield?",
+      "parentUuid": "424a18b7_d916e0cb",
+      "revId": "a027adfa8dc55f7df86c9eed6a682974f7bf9f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
