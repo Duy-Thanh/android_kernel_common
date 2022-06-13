@@ -16,6 +16,24 @@
       "message": "Why not just 1 pointer instead and hang anything else you need off of that?",
       "revId": "e3ff06399194f0e8cf2b4e7e7a4ad4a8ab8ca586",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eb82060_dca43fc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-13T08:03:02Z",
+      "side": 1,
+      "message": "Thanks for your suggestion, let me add one pointer to include all we need...,\nwill push another commit for that. :)",
+      "parentUuid": "afd95f92_0035b04a",
+      "revId": "e3ff06399194f0e8cf2b4e7e7a4ad4a8ab8ca586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
