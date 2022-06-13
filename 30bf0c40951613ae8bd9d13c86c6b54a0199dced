@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01fe39a4_f420a796",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-13T07:15:33Z",
+      "side": 1,
+      "message": "just 1 pointer should be all that is needed here.",
+      "range": {
+        "startLine": 597,
+        "startChar": 1,
+        "endLine": 597,
+        "endChar": 23
+      },
+      "revId": "30bf0c40951613ae8bd9d13c86c6b54a0199dced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
