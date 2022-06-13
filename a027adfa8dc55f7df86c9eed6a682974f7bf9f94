@@ -34,6 +34,24 @@
       "parentUuid": "424a18b7_d916e0cb",
       "revId": "a027adfa8dc55f7df86c9eed6a682974f7bf9f94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e72d9912_df68e6cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-13T15:49:31Z",
+      "side": 1,
+      "message": "Yes, and I told you what it is in my comment -- ANDROID_OEM_DATA()",
+      "parentUuid": "38e38c7e_1e512811",
+      "revId": "a027adfa8dc55f7df86c9eed6a682974f7bf9f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
