@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cba89f7_6c669ce1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2022-06-13T23:05:38Z",
+      "side": 1,
+      "message": "Resolved.",
+      "parentUuid": "de37599e_38d1111b",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "af45c37aa3c23ae5baafcc291abb3990321a71da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b620d7db_b9d4d843",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-13T18:51:32Z",
       "side": 1,
       "message": "This is extra, please remove",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 57
+      },
+      "revId": "af45c37aa3c23ae5baafcc291abb3990321a71da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3beec3dc_37bf5b04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2022-06-13T23:05:38Z",
+      "side": 1,
+      "message": "Resolved.",
+      "parentUuid": "b620d7db_b9d4d843",
       "range": {
         "startLine": 24,
         "startChar": 0,
