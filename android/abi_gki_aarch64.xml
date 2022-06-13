@@ -368,6 +368,7 @@
       <elf-symbol name='__traceiter_android_vh_alter_futex_plist_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x16e632ce'/>
       <elf-symbol name='__traceiter_android_vh_alter_rwsem_list_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2df1762c'/>
       <elf-symbol name='__traceiter_android_vh_arch_set_freq_scale' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb98e0e01'/>
+      <elf-symbol name='__traceiter_android_vh_atomic_remove_fb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5d83fcf9'/>
       <elf-symbol name='__traceiter_android_vh_audio_usb_offload_connect' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x93b3f3db'/>
       <elf-symbol name='__traceiter_android_vh_audio_usb_offload_ep_action' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd6fa02ef'/>
       <elf-symbol name='__traceiter_android_vh_audio_usb_offload_synctype' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe2e8b7e4'/>
@@ -386,6 +387,7 @@
       <elf-symbol name='__traceiter_android_vh_cpufreq_fast_switch' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8b6a275e'/>
       <elf-symbol name='__traceiter_android_vh_cpufreq_resolve_freq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb5490b05'/>
       <elf-symbol name='__traceiter_android_vh_cpufreq_target' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x26ee9be2'/>
+      <elf-symbol name='__traceiter_android_vh_drm_atomic_check_modeset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7043f6ac'/>
       <elf-symbol name='__traceiter_android_vh_dump_throttled_rt_tasks' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1a34d1a3'/>
       <elf-symbol name='__traceiter_android_vh_enable_thermal_power_throttle' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5e711538'/>
       <elf-symbol name='__traceiter_android_vh_free_task' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe2106269'/>
@@ -5853,6 +5855,7 @@
       <elf-symbol name='__tracepoint_android_vh_alter_futex_plist_add' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6a7f96d0'/>
       <elf-symbol name='__tracepoint_android_vh_alter_rwsem_list_add' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb65a03d5'/>
       <elf-symbol name='__tracepoint_android_vh_arch_set_freq_scale' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7600dd62'/>
+      <elf-symbol name='__tracepoint_android_vh_atomic_remove_fb' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6676edb4'/>
       <elf-symbol name='__tracepoint_android_vh_audio_usb_offload_connect' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x33a52dcb'/>
       <elf-symbol name='__tracepoint_android_vh_audio_usb_offload_ep_action' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe0480b53'/>
       <elf-symbol name='__tracepoint_android_vh_audio_usb_offload_synctype' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc6e4f0c5'/>
@@ -5877,6 +5880,7 @@
       <elf-symbol name='__tracepoint_android_vh_cpuidle_psci_exit' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8c331003'/>
       <elf-symbol name='__tracepoint_android_vh_disable_thermal_cooling_stats' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5e447fbe'/>
       <elf-symbol name='__tracepoint_android_vh_dma_buf_release' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb605aa17'/>
+      <elf-symbol name='__tracepoint_android_vh_drm_atomic_check_modeset' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7ae4711b'/>
       <elf-symbol name='__tracepoint_android_vh_dump_throttled_rt_tasks' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd29bebac'/>
       <elf-symbol name='__tracepoint_android_vh_enable_thermal_power_throttle' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x13db5a5d'/>
       <elf-symbol name='__tracepoint_android_vh_free_task' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x25db8da7'/>
@@ -117243,6 +117247,12 @@
         <parameter type-id='1d2c2b85' name='scale' filepath='include/trace/hooks/topology.h' line='13' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_android_vh_atomic_remove_fb' mangled-name='__traceiter_android_vh_atomic_remove_fb' filepath='include/trace/hooks/drm_framebuffer.h' line='15' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_atomic_remove_fb'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/drm_framebuffer.h' line='15' column='1'/>
+        <parameter type-id='7b332e1c' name='fb' filepath='include/trace/hooks/drm_framebuffer.h' line='15' column='1'/>
+        <parameter type-id='d8e6b335' name='allow' filepath='include/trace/hooks/drm_framebuffer.h' line='15' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_android_vh_audio_usb_offload_connect' mangled-name='__traceiter_android_vh_audio_usb_offload_connect' filepath='include/trace/hooks/audio_usboffload.h' line='27' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_audio_usb_offload_connect'>
         <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/audio_usboffload.h' line='27' column='1'/>
         <parameter type-id='8bf48c31' name='intf' filepath='include/trace/hooks/audio_usboffload.h' line='27' column='1'/>
@@ -117356,6 +117366,13 @@
         <parameter type-id='343c3ae4' name='policy' filepath='include/trace/hooks/cpufreq.h' line='36' column='1'/>
         <parameter type-id='807869d3' name='target_freq' filepath='include/trace/hooks/cpufreq.h' line='36' column='1'/>
         <parameter type-id='f0981eeb' name='old_target_freq' filepath='include/trace/hooks/cpufreq.h' line='36' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='__traceiter_android_vh_drm_atomic_check_modeset' mangled-name='__traceiter_android_vh_drm_atomic_check_modeset' filepath='include/trace/hooks/drm_atomic.h' line='16' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_drm_atomic_check_modeset'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/drm_atomic.h' line='16' column='1'/>
+        <parameter type-id='e3dd029e' name='state' filepath='include/trace/hooks/drm_atomic.h' line='16' column='1'/>
+        <parameter type-id='b64ad7cb' name='crtc' filepath='include/trace/hooks/drm_atomic.h' line='16' column='1'/>
+        <parameter type-id='d8e6b335' name='allow' filepath='include/trace/hooks/drm_atomic.h' line='16' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='__traceiter_android_vh_dump_throttled_rt_tasks' mangled-name='__traceiter_android_vh_dump_throttled_rt_tasks' filepath='include/trace/hooks/sched.h' line='88' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_dump_throttled_rt_tasks'>
@@ -117985,6 +118002,7 @@
       <var-decl name='__tracepoint_android_vh_alter_futex_plist_add' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_alter_futex_plist_add' visibility='default' filepath='include/trace/hooks/futex.h' line='14' column='1' elf-symbol-id='__tracepoint_android_vh_alter_futex_plist_add'/>
       <var-decl name='__tracepoint_android_vh_alter_rwsem_list_add' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_alter_rwsem_list_add' visibility='default' filepath='include/trace/hooks/rwsem.h' line='24' column='1' elf-symbol-id='__tracepoint_android_vh_alter_rwsem_list_add'/>
       <var-decl name='__tracepoint_android_vh_arch_set_freq_scale' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_arch_set_freq_scale' visibility='default' filepath='include/trace/hooks/topology.h' line='13' column='1' elf-symbol-id='__tracepoint_android_vh_arch_set_freq_scale'/>
+      <var-decl name='__tracepoint_android_vh_atomic_remove_fb' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_atomic_remove_fb' visibility='default' filepath='include/trace/hooks/drm_framebuffer.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_atomic_remove_fb'/>
       <var-decl name='__tracepoint_android_vh_audio_usb_offload_connect' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_audio_usb_offload_connect' visibility='default' filepath='include/trace/hooks/audio_usboffload.h' line='27' column='1' elf-symbol-id='__tracepoint_android_vh_audio_usb_offload_connect'/>
       <var-decl name='__tracepoint_android_vh_audio_usb_offload_ep_action' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_audio_usb_offload_ep_action' visibility='default' filepath='include/trace/hooks/audio_usboffload.h' line='19' column='1' elf-symbol-id='__tracepoint_android_vh_audio_usb_offload_ep_action'/>
       <var-decl name='__tracepoint_android_vh_audio_usb_offload_synctype' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_audio_usb_offload_synctype' visibility='default' filepath='include/trace/hooks/audio_usboffload.h' line='23' column='1' elf-symbol-id='__tracepoint_android_vh_audio_usb_offload_synctype'/>
@@ -118009,6 +118027,7 @@
       <var-decl name='__tracepoint_android_vh_cpuidle_psci_exit' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpuidle_psci_exit' visibility='default' filepath='include/trace/hooks/cpuidle_psci.h' line='18' column='1' elf-symbol-id='__tracepoint_android_vh_cpuidle_psci_exit'/>
       <var-decl name='__tracepoint_android_vh_disable_thermal_cooling_stats' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_disable_thermal_cooling_stats' visibility='default' filepath='include/trace/hooks/thermal.h' line='43' column='1' elf-symbol-id='__tracepoint_android_vh_disable_thermal_cooling_stats'/>
       <var-decl name='__tracepoint_android_vh_dma_buf_release' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dma_buf_release' visibility='default' filepath='include/trace/hooks/dmabuf.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_dma_buf_release'/>
+      <var-decl name='__tracepoint_android_vh_drm_atomic_check_modeset' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_drm_atomic_check_modeset' visibility='default' filepath='include/trace/hooks/drm_atomic.h' line='16' column='1' elf-symbol-id='__tracepoint_android_vh_drm_atomic_check_modeset'/>
       <var-decl name='__tracepoint_android_vh_dump_throttled_rt_tasks' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dump_throttled_rt_tasks' visibility='default' filepath='include/trace/hooks/sched.h' line='88' column='1' elf-symbol-id='__tracepoint_android_vh_dump_throttled_rt_tasks'/>
       <var-decl name='__tracepoint_android_vh_enable_thermal_power_throttle' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_enable_thermal_power_throttle' visibility='default' filepath='include/trace/hooks/thermal.h' line='29' column='1' elf-symbol-id='__tracepoint_android_vh_enable_thermal_power_throttle'/>
       <var-decl name='__tracepoint_android_vh_free_task' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_free_task' visibility='default' filepath='include/trace/hooks/sched.h' line='318' column='1' elf-symbol-id='__tracepoint_android_vh_free_task'/>
