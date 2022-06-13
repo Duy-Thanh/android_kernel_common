@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46e2cb2f_82f5df8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-13T15:25:07Z",
+      "side": 1,
+      "message": "For respins, these patches MUST be cherry-picks from android12-5.10. Please cherry-pick the patches from there and make sure the Change-Id matches.",
+      "revId": "6495091c6b656c4165a626599ece5d5efd2d5c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
