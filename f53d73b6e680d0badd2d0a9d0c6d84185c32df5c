@@ -16,6 +16,24 @@
       "message": "Needs to be upstream first.",
       "revId": "f53d73b6e680d0badd2d0a9d0c6d84185c32df5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ccf7988_7884478f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-13T08:16:07Z",
+      "side": 1,
+      "message": "Thanks for comments, let me find another way.",
+      "parentUuid": "041237d7_13888412",
+      "revId": "f53d73b6e680d0badd2d0a9d0c6d84185c32df5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
