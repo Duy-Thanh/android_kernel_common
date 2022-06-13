@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f31401a4_2ae67a44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-13T18:08:52Z",
+      "side": 1,
+      "message": "This would be a problem for 32-bit kernels as there is no space for additional flags. GKI enables CONFIG_PAGE_EXTENSION, so perhaps extending page_ext.flags would be a better way.\n\nAlso, neither this description nor the bug explains why this new flag is needed.",
+      "revId": "0ca93f870c6dbeca03cbe3d9c8627774a2ed3ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
