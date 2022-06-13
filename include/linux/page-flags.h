@@ -141,6 +141,7 @@ enum pageflags {
 #ifdef CONFIG_KASAN_HW_TAGS
 	PG_skip_kasan_poison,
 #endif
+	PG_oem_reserved,
 	__NR_PAGEFLAGS,
 
 	/* Filesystems */
