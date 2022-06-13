@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "156f64a9_10d90b5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-06-13T04:05:46Z",
+      "side": 1,
+      "message": "Hi, Greg\n\nSorry for the confusion if you have seen the mail in stable@vger.kernel.org.\n\nWith this commit, there are some mmc related changes included, and that causes the x15 4.14-stable based build failed to boot.\n\nChecked with the author of the mmc related commits, and I tested as well,\nthere are more mmc related commits need to be merged into the 4.14 branch as well. (they are in other branches like 4.19, 5.X already).\n\nI have sent a mail to stable@vger.kernel.org here[1] on the details, could you please help have a look at that, and let me know what I should do next to have the changes merged into the 4.14 version?\n\nThanks in advance!\n\n[1]: https://lore.kernel.org/linux-block/CAMSo37WW9veYH6\u003dtHqUR2pa_7YX1UuzHqLBHit60P2QyzQmCEw@mail.gmail.com/T/#u\n\nThanks,\nYongqin Liu",
+      "revId": "3bf624404a1a02784205e5bf3a80681663c3be0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
