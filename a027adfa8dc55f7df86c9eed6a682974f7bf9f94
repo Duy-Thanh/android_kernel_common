@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e2a37a2_352c68f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-14T03:19:31Z",
+      "side": 1,
+      "message": "Okay, thanks, will use ANDROID_OEM_DATA() instead.",
+      "parentUuid": "e72d9912_df68e6cc",
+      "revId": "a027adfa8dc55f7df86c9eed6a682974f7bf9f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3f9a862_47f325e4",
@@ -67,6 +85,30 @@
       "writtenOn": "2022-06-13T17:27:17Z",
       "side": 1,
       "message": "not how this is to be used at all, NEVER use this macro.",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 40
+      },
+      "revId": "a027adfa8dc55f7df86c9eed6a682974f7bf9f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83044477_ff9c347b",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-14T03:19:31Z",
+      "side": 1,
+      "message": "Okay, will use ANDROID_OEM_DATA() instead.",
+      "parentUuid": "b3f9a862_47f325e4",
       "range": {
         "startLine": 341,
         "startChar": 0,
