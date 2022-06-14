@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91803d94_26e87667",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-06-14T17:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da84c103_dc967c9d",
+      "revId": "f30d0d478c7cae21994e34bff2c8f8abee4d0011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a96dcd46_af260dc4",
@@ -89,6 +107,30 @@
       "side": 1,
       "message": "Good point. I don\u0027t think it can be null if msi_data !\u003d 0.",
       "parentUuid": "a96dcd46_af260dc4",
+      "range": {
+        "startLine": 272,
+        "startChar": 2,
+        "endLine": 272,
+        "endChar": 19
+      },
+      "revId": "f30d0d478c7cae21994e34bff2c8f8abee4d0011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc96400_d8d3554d",
+        "filename": "drivers/pci/controller/dwc/pcie-designware-host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-06-14T17:00:34Z",
+      "side": 1,
+      "message": "This was merged upstream like this. Since it doesn\u0027t hurt to have the check, I\u0027m going to leave it to match upstream.",
+      "parentUuid": "74ea3104_250d9e5f",
       "range": {
         "startLine": 272,
         "startChar": 2,
