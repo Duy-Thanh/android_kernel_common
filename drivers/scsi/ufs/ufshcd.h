@@ -974,6 +974,8 @@ struct ufs_hba {
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+
+	ANDROID_OEM_DATA_ARRAY(2, 2);
 };
 
 /* Returns true if clocks can be gated. Otherwise false */
