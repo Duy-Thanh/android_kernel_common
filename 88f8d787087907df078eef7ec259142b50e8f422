@@ -128,6 +128,24 @@
       "parentUuid": "d3a03bca_c7471df5",
       "revId": "88f8d787087907df078eef7ec259142b50e8f422",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813cf5cc_5868d1f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936870
+      },
+      "writtenOn": "2022-06-14T08:43:42Z",
+      "side": 1,
+      "message": "\u003e ❌ The following files have actionable findings:\n\u003e         \"abi.report.short\"\n\u003e \n\u003e \n\u003e  If the failed lint checks do not apply to this change then you can override with a +2 on the Lint label. Additionally, please file feedback at http://go/lint-not-useful.\n\u003e For more details see (https://android-build.googleplex.com/builds/treetop/android-review/2123892?revision\u003d4)\n\u003e \n\u003e Have a question? Found a bug? http://go/presubmit-lint-bug\n\nPlease fix.",
+      "parentUuid": "75bfc91c_289149e1",
+      "revId": "88f8d787087907df078eef7ec259142b50e8f422",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
