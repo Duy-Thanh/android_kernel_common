@@ -52,6 +52,24 @@
       "parentUuid": "5ad60963_3e40050a",
       "revId": "0ca93f870c6dbeca03cbe3d9c8627774a2ed3ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03cbccc7_bc803a0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-14T23:05:51Z",
+      "side": 1,
+      "message": "Well, IIUC, page_ext approach may has disadvantage that it will allocate extra \u0027unsigned long variable\u0027 for each page, for 64-bits and 32-bits kernel, with 4kb-sized page config, memory usage will increase about 1/512 and 1/1024.\n\nAnd current approach has disadvantage as well, since PG_oem_reserved flag can only be used in 64-bits kernel.\n\nSo, is it possible to upstream both approaches? so after KMI frozen, I have enough time to discuss/decide the trade-off approach with our team...",
+      "parentUuid": "6f3a081c_942c2455",
+      "revId": "0ca93f870c6dbeca03cbe3d9c8627774a2ed3ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
