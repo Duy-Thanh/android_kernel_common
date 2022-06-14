@@ -16,6 +16,24 @@
       "message": "Would be nice to also see the integration work of this like build definitions. As it stands this is dead code for this repository. Or am I missing an earlier/other change that does this?",
       "revId": "acffbf857f0a8196663b0e785a71fae4814d3114",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44f9257a_b8dbaf54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-14T14:45:56Z",
+      "side": 1,
+      "message": "Build config was added with aosp/2110116.\n\nCI was with cl/453935296",
+      "parentUuid": "1615dee9_4b7506da",
+      "revId": "acffbf857f0a8196663b0e785a71fae4814d3114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
