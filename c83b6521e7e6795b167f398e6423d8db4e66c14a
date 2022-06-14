@@ -16,6 +16,24 @@
       "message": "This patch is dependent on aosp/2121345 -- please always submit dependent patches together as a series. aosp/2121345 needs to be redone since it is not a cherry-pick of a android12-5.10 patch (see comments on that patch).",
       "revId": "c83b6521e7e6795b167f398e6423d8db4e66c14a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "047e905a_543aed2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-06-14T18:51:25Z",
+      "side": 1,
+      "message": "done. PTAL",
+      "parentUuid": "d221b249_a5bb93b9",
+      "revId": "c83b6521e7e6795b167f398e6423d8db4e66c14a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
