@@ -34,6 +34,24 @@
       "parentUuid": "f31401a4_2ae67a44",
       "revId": "0ca93f870c6dbeca03cbe3d9c8627774a2ed3ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f3a081c_942c2455",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-14T20:11:55Z",
+      "side": 1,
+      "message": "Looks like you adopted page_ext approach in https://android-review.googlesource.com/c/kernel/common/+/2124914. So, can this patch be abandoned?",
+      "parentUuid": "5ad60963_3e40050a",
+      "revId": "0ca93f870c6dbeca03cbe3d9c8627774a2ed3ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
