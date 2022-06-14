@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3a03bca_c7471df5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-14T05:58:43Z",
+      "side": 1,
+      "message": "The patch affects ABI:\n\n```\nLeaf changes summary: 184 artifacts changed\nChanged leaf types summary: 1 leaf type changed\nRemoved/Changed/Added functions summary: 0 Removed, 183 Changed, 0 Added function\nRemoved/Changed/Added variables summary: 0 Removed, 0 Changed, 0 Added variable\n\n183 functions with some sub-type change:\n\n  [C] \u0027function int _snd_ctl_add_follower(snd_kcontrol*, snd_kcontrol*, unsigned int)\u0027 at vmaster.c:252:1 has some sub-type changes:\n    CRC (modversions) changed from 0xcc44c6e6 to 0x1ca4e2b4\n\n  [C] \u0027function unsigned long int _snd_pcm_stream_lock_irqsave(snd_pcm_substream*)\u0027 at pcm_native.c:164:1 has some sub-type changes:\n    CRC (modversions) changed from 0x3a46a8c9 to 0xb515b4fc\n\n  [C] \u0027function int dapm_clock_event(snd_soc_dapm_widget*, snd_kcontrol*, int)\u0027 at soc-dapm.c:1402:1 has some sub-type changes:\n    CRC (modversions) changed from 0x9dffc6e5 to 0x7ea76a5f\n\n  ... 180 omitted; 183 symbols have only CRC changes\n\n\u0027struct snd_card at core.h:84:1\u0027 changed:\n  type size changed from 19968 to 20288 (in bits)\n  3 data member insertions:\n    \u0027xarray ctl_numids\u0027, at offset 11200 (in bits) at core.h:113:1\n    \u0027xarray ctl_hash\u0027, at offset 11328 (in bits) at core.h:114:1\n    \u0027bool ctl_hash_collision\u0027, at offset 11456 (in bits) at core.h:115:1\n  there are data member changes:\n    23 (\u0027snd_info_entry* proc_root\u0027 .. \u0027u64 android_kabi_reserved2\u0027) offsets changed (by +320 bits)\n  186 impacted interfaces\n  ```\n  \n  Will tag it for inclusion into the next KMI merge window.",
+      "revId": "88f8d787087907df078eef7ec259142b50e8f422",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
