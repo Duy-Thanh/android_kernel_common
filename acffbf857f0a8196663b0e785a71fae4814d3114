@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1615dee9_4b7506da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-06-14T14:40:41Z",
+      "side": 1,
+      "message": "Would be nice to also see the integration work of this like build definitions. As it stands this is dead code for this repository. Or am I missing an earlier/other change that does this?",
+      "revId": "acffbf857f0a8196663b0e785a71fae4814d3114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
