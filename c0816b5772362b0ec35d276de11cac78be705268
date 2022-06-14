@@ -16,6 +16,24 @@
       "message": "Please see comments in https://issuetracker.google.com/234796421\n\nYou also should add that bug here since the change is relevant to it as well:\n```\nBug: 234796421\n```",
       "revId": "c0816b5772362b0ec35d276de11cac78be705268",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb77572_29a742a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1936870
+      },
+      "writtenOn": "2022-06-14T04:27:43Z",
+      "side": 1,
+      "message": "Updated proper bug. Bug: 234796421",
+      "parentUuid": "cebb9f1b_bc4f1841",
+      "revId": "c0816b5772362b0ec35d276de11cac78be705268",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
