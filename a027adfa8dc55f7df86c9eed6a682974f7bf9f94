@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e981670_eafd14f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-14T23:20:50Z",
+      "side": 1,
+      "message": "I\u0027ve updated the patch, could you please help to mark kmi-changes-for-2022-06-17 tag?",
+      "parentUuid": "0e2a37a2_352c68f0",
+      "revId": "a027adfa8dc55f7df86c9eed6a682974f7bf9f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3f9a862_47f325e4",
