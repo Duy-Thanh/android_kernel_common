@@ -70,7 +70,7 @@ struct css_task_iter {
 };
 
 extern struct cgroup_root cgrp_dfl_root;
-extern struct css_set init_css_set;
+extern struct css_set * const init_css_set;
 
 #define SUBSYS(_x) extern struct cgroup_subsys _x ## _cgrp_subsys;
 #include <linux/cgroup_subsys.h>
@@ -530,7 +530,7 @@ task_get_css(struct task_struct *task, int subsys_id)
 static inline bool task_css_is_root(struct task_struct *task, int subsys_id)
 {
 	return task_css_check(task, subsys_id, true) ==
-		init_css_set.subsys[subsys_id];
+		init_css_set->subsys[subsys_id];
 }
 
 static inline struct cgroup *task_cgroup(struct task_struct *task,

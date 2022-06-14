@@ -154,7 +154,7 @@ static int cgroup_css_links_read(struct seq_file *seq, void *v)
 				 * Take out the one additional reference in
 				 * init_css_set.
 				 */
-				if (cset == &init_css_set)
+				if (cset == init_css_set)
 					extra--;
 				extra_refs += extra;
 			}
