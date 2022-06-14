@@ -16,6 +16,24 @@
       "message": "Why Treehugger Robot reports failure, how can I fix this issue?",
       "revId": "569c8caa97f083b0ab54d232c564439765f817da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17546c1a_032f812d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-14T09:10:27Z",
+      "side": 1,
+      "message": "The ABI is breaking here, which is to be expected.",
+      "parentUuid": "1bf4b34a_a17cb782",
+      "revId": "569c8caa97f083b0ab54d232c564439765f817da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
