@@ -301,6 +301,9 @@ static void uvcg_video_pump(struct work_struct *work)
 		if (ret < 0) {
 			uvcg_queue_cancel(queue, 0);
 			break;
+		} else {
+			/* Endpoint now owns the request */
+			req = NULL;
 		}
 	}
 
