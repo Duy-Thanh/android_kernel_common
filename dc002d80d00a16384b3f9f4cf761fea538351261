@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03334ab6_a6d91eeb",
+        "filename": "mm/rmap.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-15T00:59:16Z",
+      "side": 1,
+      "message": "Don\u0027t you need `pra` as a parameter to identify if the page is referenced?",
+      "range": {
+        "startLine": 822,
+        "startChar": 42,
+        "endLine": 822,
+        "endChar": 52
+      },
+      "revId": "dc002d80d00a16384b3f9f4cf761fea538351261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
