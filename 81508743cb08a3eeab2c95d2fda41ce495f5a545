@@ -16,6 +16,23 @@
       "message": "Bart and/or Akilesh, can you review this?",
       "revId": "81508743cb08a3eeab2c95d2fda41ce495f5a545",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4365af8d_ed0495ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-06-15T17:32:03Z",
+      "side": 1,
+      "message": "Can this patch be abandoned now that https://android-review.git.corp.google.com/c/kernel/common/+/2124052 has been merged?",
+      "revId": "81508743cb08a3eeab2c95d2fda41ce495f5a545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
