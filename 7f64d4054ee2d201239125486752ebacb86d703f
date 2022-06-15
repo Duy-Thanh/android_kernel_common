@@ -51,6 +51,24 @@
       "parentUuid": "3fba8bc0_5e7b4515",
       "revId": "7f64d4054ee2d201239125486752ebacb86d703f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "851966df_4a2ede6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-15T09:21:17Z",
+      "side": 1,
+      "message": "upstream is at kernel.org\n\nAnd who uses the information here, and what for exactly?",
+      "parentUuid": "a6e4ca12_55ba9587",
+      "revId": "7f64d4054ee2d201239125486752ebacb86d703f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
