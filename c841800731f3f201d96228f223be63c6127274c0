@@ -16,6 +16,24 @@
       "message": "aosp/2121344 (queued for 6/17) already adds ANDROID_OEM_DATA(1). Please use that or provide some data on why it is not sufficient. ",
       "revId": "c841800731f3f201d96228f223be63c6127274c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbec9419_ec2ed27b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1749518
+      },
+      "writtenOn": "2022-06-15T13:59:54Z",
+      "side": 1,
+      "message": "Hi Todd, we have at least 3 features that need to add members in struct ufs_hba. For decoupling consideration, we need corresponding OEM_DATA members for different pointers belong to different features. Otherwise, different users have to deal with one pointer and allocate/init/release memory carefully. It\u0027s a little dangerous and tricky. So, could you consider this or give some advises?\n\nThanks",
+      "parentUuid": "824fd6f6_00819e84",
+      "revId": "c841800731f3f201d96228f223be63c6127274c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -1,0 +1,28 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f1dd9b6_b974bed3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1749518
+      },
+      "writtenOn": "2022-06-15T13:59:54Z",
+      "side": 1,
+      "message": "\u003e Commit is not signed off by the author!\n\u003e \n\u003e Missing tag: Signed-off-by: Weichao Guo \u003cguoweichao@oppo.com\u003e\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 453930814 android-build.ayeaye-python-dispatcher_20220609.05_p0\n\nPlease fix.",
+      "parentUuid": "8b9ae086_a07f8819",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "04ef16b1252fb031970601eaf5c6554c28010109",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "message": "The KABI padding is reserved exclusively for LTS updates. If you need a field use ANDROID_VENDOR_DATA() or ANDROID_OEM_DATA()",
       "revId": "6291da41b09dd5f6c7f264dbf85637de27bc1b97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "827995ab_e49267db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1749518
+      },
+      "writtenOn": "2022-06-15T13:59:54Z",
+      "side": 1,
+      "message": "OK, Thanks.",
+      "parentUuid": "9683b525_1a819497",
+      "revId": "6291da41b09dd5f6c7f264dbf85637de27bc1b97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
