@@ -68,6 +68,24 @@
       "parentUuid": "81443b60_a0c0420c",
       "revId": "dc03b46f9971debf2c8dca7835a578b1d9aec461",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e77c5b4_959fe5cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-15T09:19:04Z",
+      "side": 1,
+      "message": "Then this needs to be \"FROMLIST:\"",
+      "parentUuid": "595bc43c_e72194a6",
+      "revId": "dc03b46f9971debf2c8dca7835a578b1d9aec461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
