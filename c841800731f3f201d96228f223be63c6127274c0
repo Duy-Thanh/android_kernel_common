@@ -88,6 +88,24 @@
       "parentUuid": "adcb890e_8fb9fd77",
       "revId": "c841800731f3f201d96228f223be63c6127274c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8771f35_39915a1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-15T15:09:58Z",
+      "side": 1,
+      "message": "Hi Todd, totally, we need three data slots in struct ufs_hba... so I guess if you can merge https://android-review.googlesource.com/c/kernel/common/+/2121344, and then keep (2,2) in this patch will be fine to us. :)",
+      "parentUuid": "d849c403_ec2ed7b4",
+      "revId": "c841800731f3f201d96228f223be63c6127274c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
