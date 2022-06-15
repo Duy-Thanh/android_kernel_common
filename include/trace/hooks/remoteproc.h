@@ -10,7 +10,12 @@
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
 
+#ifdef __GENKSYMS__
 struct rproc;
+#else
+/* struct rproc */
+#include <linux/remoteproc.h>
+#endif /* __GENKSYMS__ */
 
 DECLARE_HOOK(android_vh_rproc_recovery,
 	TP_PROTO(struct rproc *rproc),

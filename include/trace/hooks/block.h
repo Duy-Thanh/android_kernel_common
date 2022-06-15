@@ -10,7 +10,12 @@
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
 
+#ifdef __GENKSYMS__
 struct blk_mq_tag_set;
+#else
+/* struct blk_mq_tag_set */
+#include <linux/blk-mq.h>
+#endif /* __GENKSYMS__ */
 struct blk_mq_tags;
 struct blk_mq_alloc_data;
 

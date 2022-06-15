@@ -8,7 +8,12 @@
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
 
+#ifdef __GENKSYMS__
 struct user_struct;
+#else
+/* struct user_struct */
+#include <linux/sched/user.h>
+#endif /* __GENKSYMS__ */
 DECLARE_HOOK(android_vh_alloc_uid,
 	TP_PROTO(struct user_struct *user),
 	TP_ARGS(user));
