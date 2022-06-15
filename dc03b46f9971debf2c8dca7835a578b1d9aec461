@@ -104,6 +104,24 @@
       "parentUuid": "b59caa4a_e49aba89",
       "revId": "dc03b46f9971debf2c8dca7835a578b1d9aec461",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0caf192_cd7336cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-15T21:18:30Z",
+      "side": 1,
+      "message": "Please address Greg\u0027s last comment about changing ANDROID to FROMLIST",
+      "parentUuid": "9cb3d26c_22fcdb27",
+      "revId": "dc03b46f9971debf2c8dca7835a578b1d9aec461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
