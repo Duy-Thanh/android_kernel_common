@@ -33,6 +33,24 @@
       "message": "No driver should ever need this.\n\nAnd if one does need it, why wasn\u0027t it submitted upstream in the past year since the last export of this function?",
       "revId": "7f64d4054ee2d201239125486752ebacb86d703f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6e4ca12_55ba9587",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-06-15T01:58:02Z",
+      "side": 1,
+      "message": "sorry,I\u0027m not clearly what you mean. We need this because we want to get more worker info to confirm owner when worker thread performance unreasonable. Such scenes, what other method do you suggest to do?\n\nBesides upstream means to where? Is google mainline?I see that commit in android12-5.10 has been merged,and sorry i don\u0027t know about need to upstream",
+      "parentUuid": "3fba8bc0_5e7b4515",
+      "revId": "7f64d4054ee2d201239125486752ebacb86d703f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
