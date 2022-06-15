@@ -70,6 +70,30 @@
       },
       "revId": "30bf0c40951613ae8bd9d13c86c6b54a0199dced",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a6c5ec9_4c5b7196",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-15T14:27:38Z",
+      "side": 1,
+      "message": "you say in the commit message that this is for pid and tid -- each are 32-bits. So why do you need more than 1 u64 to hold them?",
+      "parentUuid": "ccea7ae7_a3220ead",
+      "range": {
+        "startLine": 597,
+        "startChar": 1,
+        "endLine": 597,
+        "endChar": 23
+      },
+      "revId": "30bf0c40951613ae8bd9d13c86c6b54a0199dced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
