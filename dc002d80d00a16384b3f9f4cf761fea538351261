@@ -22,6 +22,30 @@
       },
       "revId": "dc002d80d00a16384b3f9f4cf761fea538351261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12ba090b_e5a639a0",
+        "filename": "mm/rmap.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-06-15T03:31:49Z",
+      "side": 1,
+      "message": "No, we do not need pra to check whether the page is referenced.\nWe update the status of the page in trace_android_vh_page_referenced_one_end(), just according to the information of vma.",
+      "parentUuid": "03334ab6_a6d91eeb",
+      "range": {
+        "startLine": 822,
+        "startChar": 42,
+        "endLine": 822,
+        "endChar": 52
+      },
+      "revId": "dc002d80d00a16384b3f9f4cf761fea538351261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
