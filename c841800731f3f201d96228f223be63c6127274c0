@@ -52,6 +52,24 @@
       "parentUuid": "dbec9419_ec2ed27b",
       "revId": "c841800731f3f201d96228f223be63c6127274c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adcb890e_8fb9fd77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1749518
+      },
+      "writtenOn": "2022-06-15T14:54:20Z",
+      "side": 1,
+      "message": "Thanks, so let\u0027s add ANDROID_OEM_DATA_ARRAY(1, 3) for that.",
+      "parentUuid": "28e79054_534677a2",
+      "revId": "c841800731f3f201d96228f223be63c6127274c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
