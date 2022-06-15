@@ -106,6 +106,24 @@
       "parentUuid": "d849c403_ec2ed7b4",
       "revId": "c841800731f3f201d96228f223be63c6127274c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd75c4fe_0adc590b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-06-15T16:03:42Z",
+      "side": 1,
+      "message": "Why to reserve space in struct ufs_hba instead of adding additional members in the host driver private data structure? See also the platform_get_drvdata() and pci_get_drvdata() calls in the UFS host drivers.",
+      "parentUuid": "c8771f35_39915a1d",
+      "revId": "c841800731f3f201d96228f223be63c6127274c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
