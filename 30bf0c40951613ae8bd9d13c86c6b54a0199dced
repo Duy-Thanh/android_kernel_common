@@ -46,6 +46,30 @@
       },
       "revId": "30bf0c40951613ae8bd9d13c86c6b54a0199dced",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccea7ae7_a3220ead",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-06-15T09:59:30Z",
+      "side": 1,
+      "message": "At present, the memory application of our newly added variable depends on the binder_transaction function, and the free depends on the binder_free_transaction function. We can only assign and read variables through the existing hook interface",
+      "parentUuid": "25e6d730_d3ab9bd0",
+      "range": {
+        "startLine": 597,
+        "startChar": 1,
+        "endLine": 597,
+        "endChar": 23
+      },
+      "revId": "30bf0c40951613ae8bd9d13c86c6b54a0199dced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
