@@ -70,6 +70,24 @@
       "parentUuid": "6f3a081c_942c2455",
       "revId": "0ca93f870c6dbeca03cbe3d9c8627774a2ed3ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1555b21_f38aaf46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-15T00:26:06Z",
+      "side": 1,
+      "message": "The problem with merging both approaches and then deciding if you need them is that after KMI freeze we will not be able to remove unused solution. So please discuss and decide whether you really need 32-bit support.",
+      "parentUuid": "03cbccc7_bc803a0b",
+      "revId": "0ca93f870c6dbeca03cbe3d9c8627774a2ed3ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
