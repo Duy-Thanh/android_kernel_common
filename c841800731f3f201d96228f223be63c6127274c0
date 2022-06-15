@@ -70,6 +70,24 @@
       "parentUuid": "28e79054_534677a2",
       "revId": "c841800731f3f201d96228f223be63c6127274c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d849c403_ec2ed7b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-15T15:01:56Z",
+      "side": 1,
+      "message": "No, (1,2) is what you requested and is what is queued. When your vendor code is runnning you get both fields, so this is all you need.",
+      "parentUuid": "adcb890e_8fb9fd77",
+      "revId": "c841800731f3f201d96228f223be63c6127274c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
