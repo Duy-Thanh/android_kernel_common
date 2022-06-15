@@ -88,6 +88,24 @@
       "parentUuid": "03cbccc7_bc803a0b",
       "revId": "0ca93f870c6dbeca03cbe3d9c8627774a2ed3ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073b45ed_ab4bfe92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-15T06:46:23Z",
+      "side": 1,
+      "message": "Hi Suren, we have discussed this problem, and it looks 32-bits kernel support is not necessary/important for us, so could you please help to review current commit? If this commit is fine to you, I will abandon page_ext one. :)",
+      "parentUuid": "f1555b21_f38aaf46",
+      "revId": "0ca93f870c6dbeca03cbe3d9c8627774a2ed3ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
