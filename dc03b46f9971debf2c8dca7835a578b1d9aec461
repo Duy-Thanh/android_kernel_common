@@ -86,6 +86,24 @@
       "parentUuid": "595bc43c_e72194a6",
       "revId": "dc03b46f9971debf2c8dca7835a578b1d9aec461",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cb3d26c_22fcdb27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2022-06-15T19:48:27Z",
+      "side": 1,
+      "message": "The Linux community wants us to revive a thread from Nov 2021 - which seems to have hit a circular dependency - https://lkml.org/lkml/2021/11/21/24. Not sure yet if there is a newer version in the works. The patch also affects multiple architectures and can take time addressing.\n\nFor the near term can we go ahead with increasing the number of regions based on Patrick\u0027s patch?",
+      "parentUuid": "b59caa4a_e49aba89",
+      "revId": "dc03b46f9971debf2c8dca7835a578b1d9aec461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
