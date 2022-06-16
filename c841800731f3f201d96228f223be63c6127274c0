@@ -124,6 +124,24 @@
       "parentUuid": "c8771f35_39915a1d",
       "revId": "c841800731f3f201d96228f223be63c6127274c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a0669d6_5e07b36d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-16T00:57:03Z",
+      "side": 1,
+      "message": "Thanks for your suggestion!\n\nI added padding fields here since I saw most platform-unrelated feature fields were added in structure ufs_hba.\n\nOne concern is it looks it\u0027s difficult to get the structure details from the private data stored in ufs_hba::dev::driver_data?",
+      "parentUuid": "fd75c4fe_0adc590b",
+      "revId": "c841800731f3f201d96228f223be63c6127274c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
