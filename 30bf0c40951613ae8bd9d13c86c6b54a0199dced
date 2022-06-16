@@ -94,6 +94,30 @@
       },
       "revId": "30bf0c40951613ae8bd9d13c86c6b54a0199dced",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3279776_b62112f3",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-06-16T06:23:21Z",
+      "side": 1,
+      "message": "There\u0027s also the timestamp to save, it\u0027s 64-bit.\nOn the Qualcomm platform I can use ANDROID_VENDOR_DATA, but the MTK platform ANDROID_VENDOR_DATA is already occupied, so I only need extra 64 bits to save the timestamp。",
+      "parentUuid": "1a6c5ec9_4c5b7196",
+      "range": {
+        "startLine": 597,
+        "startChar": 1,
+        "endLine": 597,
+        "endChar": 23
+      },
+      "revId": "30bf0c40951613ae8bd9d13c86c6b54a0199dced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
