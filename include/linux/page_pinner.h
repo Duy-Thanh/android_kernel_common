@@ -13,6 +13,7 @@ extern void __reset_page_pinner(struct page *page, unsigned int order, bool free
 extern void __set_page_pinner(struct page *page, unsigned int order);
 extern void __dump_page_pinner(struct page *page);
 void __page_pinner_migration_failed(struct page *page);
+void __page_pinner_put_migration_failed(struct page *page);
 void __page_pinner_mark_migration_failed_pages(struct list_head *page_list);
 
 static inline void reset_page_pinner(struct page *page, unsigned int order)
@@ -44,7 +45,7 @@ static inline void page_pinner_put_page(struct page *page)
 	if (!static_branch_unlikely(&failure_tracking))
 		return;
 
-	__page_pinner_migration_failed(page);
+	__page_pinner_put_migration_failed(page);
 }
 
 static inline void page_pinner_failure_detect(struct page *page)

@@ -325,7 +325,7 @@ void __dump_page_pinner(struct page *page)
 	}
 }
 
-void __page_pinner_migration_failed(struct page *page)
+static void record_page_pinner(struct page *page, bool page_ref_put)
 {
 	struct page_ext *page_ext = lookup_page_ext(page);
 	struct captured_pinner record;
@@ -341,12 +341,24 @@ void __page_pinner_migration_failed(struct page *page)
 	record.handle = save_stack(GFP_NOWAIT|__GFP_NOWARN);
 	record.ts_usec = ktime_to_us(ktime_get_boottime());
 	capture_page_state(page, &record);
+	if (page_ref_put)
+		record.count -= 1;
 
 	spin_lock_irqsave(&acf_pinner.lock, flags);
 	idx = acf_pinner.index++;
 	acf_pinner.index %= LONGTERM_PIN_BUCKETS;
 	acf_pinner.pinner[idx] = record;
 	spin_unlock_irqrestore(&acf_pinner.lock, flags);
+}
+
+void __page_pinner_put_migration_failed(struct page *page)
+{
+	record_page_pinner(page, true);
+}
+
+void __page_pinner_migration_failed(struct page *page)
+{
+	record_page_pinner(page, false);
 }
 EXPORT_SYMBOL(__page_pinner_migration_failed);
 
