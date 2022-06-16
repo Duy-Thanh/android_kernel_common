@@ -16,6 +16,24 @@
       "message": "Please review and merge",
       "revId": "a24917023df29b7bf894b50bee4fea7f3b72668f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63fede05_5525da74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-16T15:58:28Z",
+      "side": 1,
+      "message": "It will be merged on 6/17",
+      "parentUuid": "2d83d570_1f6a364f",
+      "revId": "a24917023df29b7bf894b50bee4fea7f3b72668f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
