@@ -153,6 +153,10 @@ int set_memory_valid(unsigned long addr, int numpages, int enable)
 					__pgprot(PTE_VALID));
 }
 
+#if IS_ENABLED(CONFIG_MTK_DCACHE_INVAL)
+EXPORT_SYMBOL(set_memory_valid);
+#endif
+
 int set_direct_map_invalid_noflush(struct page *page)
 {
 	struct page_change_data data = {
