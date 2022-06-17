@@ -334,7 +334,7 @@ static int i2c_gpio_init_generic_recovery(struct i2c_adapter *adap)
 	 * don't touch the recovery information if the driver is not using
 	 * generic SCL recovery
 	 */
-	if (bri->recover_bus && bri->recover_bus != i2c_generic_scl_recovery)
+	if (bri->recover_bus && bri->recover_bus != i2c_generic_scl_recovery && !(IS_ENABLED(CONFIG_CFI_CLANG) && IS_ENABLED(CONFIG_MODULES)))
 		return 0;
 
 	/*
@@ -415,7 +415,7 @@ static int i2c_init_recovery(struct i2c_adapter *adap)
 		goto err;
 	}
 
-	if (bri->scl_gpiod && bri->recover_bus == i2c_generic_scl_recovery) {
+	if (bri->scl_gpiod && (bri->recover_bus == i2c_generic_scl_recovery || (IS_ENABLED(CONFIG_CFI_CLANG) && IS_ENABLED(CONFIG_MODULES)))) {
 		bri->get_scl = get_scl_gpio_value;
 		bri->set_scl = set_scl_gpio_value;
 		if (bri->sda_gpiod) {
@@ -424,7 +424,7 @@ static int i2c_init_recovery(struct i2c_adapter *adap)
 			if (gpiod_get_direction(bri->sda_gpiod) == 0)
 				bri->set_sda = set_sda_gpio_value;
 		}
-	} else if (bri->recover_bus == i2c_generic_scl_recovery) {
+	} else if (bri->recover_bus == i2c_generic_scl_recovery || (IS_ENABLED(CONFIG_CFI_CLANG) && IS_ENABLED(CONFIG_MODULES))) {
 		/* Generic SCL recovery */
 		if (!bri->set_scl || !bri->get_scl) {
 			err_str = "no {get|set}_scl() found";
