@@ -1137,9 +1137,9 @@ static void check_sync(struct device *dev,
 				dir2name[ref->direction]);
 
 	if (ref->sg_call_ents && ref->type == dma_debug_sg &&
-	    ref->sg_call_ents != entry->sg_call_ents) {
+	    ref->sg_call_ents > entry->sg_call_ents) {
 		err_printk(ref->dev, entry, "device driver syncs "
-			   "DMA sg list with different entry count "
+			   "DMA sg list count larger than map count "
 			   "[map count=%d] [sync count=%d]\n",
 			   entry->sg_call_ents, ref->sg_call_ents);
 	}
