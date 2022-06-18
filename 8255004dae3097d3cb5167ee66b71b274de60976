@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8c98b6_01f17329",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-06-18T18:57:06Z",
+      "side": 1,
+      "message": "I restored the merge resolution done by Todd and subsequent rebases from patchset 11.",
+      "revId": "8255004dae3097d3cb5167ee66b71b274de60976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
