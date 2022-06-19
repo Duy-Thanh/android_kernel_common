@@ -196,6 +196,24 @@
       "parentUuid": "636e18f8_28b581bd",
       "revId": "c841800731f3f201d96228f223be63c6127274c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c11a70b8_b6eeaec2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2022-06-19T02:54:32Z",
+      "side": 1,
+      "message": "There\u0027s an unresolved comment there from three days ago asking clarification on why that patch is really needed. Sorry, it has missed the cut.",
+      "parentUuid": "b71dffee_61f8c7f3",
+      "revId": "c841800731f3f201d96228f223be63c6127274c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
