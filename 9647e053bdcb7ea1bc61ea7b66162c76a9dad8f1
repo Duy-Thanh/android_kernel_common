@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0162bcc3_1c03937f",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-06-19T09:55:15Z",
+      "side": 1,
+      "message": "These are all the vendor hooks we added. May I ask whether the additions of all these vendor hooks are allowed and appropriate?",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 50
+      },
+      "revId": "9647e053bdcb7ea1bc61ea7b66162c76a9dad8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
