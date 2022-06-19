@@ -214,6 +214,24 @@
       "parentUuid": "b71dffee_61f8c7f3",
       "revId": "c841800731f3f201d96228f223be63c6127274c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60684847_f51e990d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1182834
+      },
+      "writtenOn": "2022-06-19T03:01:03Z",
+      "side": 1,
+      "message": "Bart\u0027s questions were posted on both commit: aosp/2123512, and aosp/2121344, and the questions were the same, so I just answered here in aosp/2123512, and got no reply. Could you please check the reply history.. and comments on our issue: https://partnerissuetracker.corp.google.com/u/0/issues/235673196#comment6.",
+      "parentUuid": "c11a70b8_b6eeaec2",
+      "revId": "c841800731f3f201d96228f223be63c6127274c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
