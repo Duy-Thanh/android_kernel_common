@@ -16,6 +16,24 @@
       "message": "Adding an extra parameter to the macro for this one case is hopefully unnecessary.\n\nWe should be passing the same inode to revalidate as we do to lookup (I definitely agree about that) and resolving any issues in fuse_revalidate_initialize_in/out - I wonder if the real mistake is trying to use the same initialize for lookup and revalidate?",
       "revId": "61df55abf408999ee875327e88c61eb2ea488106",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a0e299_7bb6a02f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-06-20T20:05:57Z",
+      "side": 1,
+      "message": "I agree. I thought about changing fuse_lookup_initialize and using another .opcode to differentiate between \"revalidate\" and \"lookup\" operations. But seems, like we don\u0027t have any userspace representation (separate opcode) for the \"revalidate\" operation (it\u0027s basically \"lookup\"), and the only possible solution I currently see, is to use parent inode as a BPF host to have the same behavior.\n\nAnother possible way to avoid changing the macro signature is to introduce another one that will cover the case where BPF host inode and backing inode are the same (majority of cases), but due to it\u0027s not a public API don\u0027t think it\u0027s something required.",
+      "parentUuid": "0c1c3714_56b1d153",
+      "revId": "61df55abf408999ee875327e88c61eb2ea488106",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
