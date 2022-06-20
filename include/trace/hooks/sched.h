@@ -395,6 +395,14 @@ DECLARE_RESTRICTED_HOOK(android_rvh_effective_cpu_util,
 		 struct task_struct *p, unsigned long *new_util),
 	TP_ARGS(cpu, util_cfs, max, type, p, new_util), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_set_cpus_allowed_comm,
+	TP_PROTO(struct task_struct *p, const struct cpumask *new_mask),
+	TP_ARGS(p, new_mask), 1);
+
+DECLARE_HOOK(android_vh_sched_setaffinity_early,
+	TP_PROTO(struct task_struct *p, const struct cpumask *new_mask, int *retval),
+	TP_ARGS(p, new_mask, retval));
+
 DECLARE_HOOK(android_vh_force_compatible_pre,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
