@@ -1831,7 +1831,8 @@ ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct fuse_bpf_args *arg
 
 /*
  * expression statement to wrap the backing filter logic
- * struct inode *inode: inode with bpf and backing inode
+ * struct inode *inode: inode with backing inode
+ * struct unide *inode_with_bpf: inode with bpf
  * typedef io: (typically complex) type whose components fuse_args can point to.
  *	An instance of this type is created locally and passed to initialize
  * void initialize(struct fuse_bpf_args *fa, io *in_out, args...): function that sets
@@ -1841,12 +1842,13 @@ ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct fuse_bpf_args *arg
  * void *finalize(struct fuse_bpf_args *, args...): function that performs any final
  *	work needed to commit the backing io
  */
-#define fuse_bpf_backing(inode, io, initialize, backing, finalize,	\
+#define fuse_bpf_backing(inode, inode_with_bpf, io, initialize, backing, finalize,	\
 			 args...)					\
 ({									\
 	struct fuse_err_ret fer = {0};					\
 	int ext_flags;							\
 	struct fuse_inode *fuse_inode = get_fuse_inode(inode);		\
+	struct fuse_inode *fuse_inode_with_bpf = get_fuse_inode(inode_with_bpf); \
 	struct fuse_mount *fm = get_fuse_mount(inode);			\
 	io feo = {0};							\
 	struct fuse_bpf_args fa = {0}, fa_backup = {0};			\
@@ -1879,8 +1881,8 @@ ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct fuse_bpf_args *arg
 			};						\
 		fa.out_numargs = fa.in_numargs;				\
 									\
-		ext_flags = fuse_inode->bpf ?				\
-			BPF_PROG_RUN(fuse_inode->bpf, &fa) :		\
+		ext_flags = fuse_inode_with_bpf->bpf ?				\
+			BPF_PROG_RUN(fuse_inode_with_bpf->bpf, &fa) :		\
 			FUSE_BPF_BACKING;				\
 		if (ext_flags < 0) {					\
 			fer = (struct fuse_err_ret) {			\
@@ -1935,7 +1937,7 @@ ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct fuse_bpf_args *arg
 					.size = fa.out_args[i].size,	\
 					.value = fa.out_args[i].value,	\
 				};					\
-		ext_flags = BPF_PROG_RUN(fuse_inode->bpf, &fa);		\
+		ext_flags = BPF_PROG_RUN(fuse_inode_with_bpf->bpf, &fa);		\
 		if (ext_flags < 0) {					\
 			fer = (struct fuse_err_ret) {			\
 				ERR_PTR(ext_flags),			\

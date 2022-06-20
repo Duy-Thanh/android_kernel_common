@@ -564,7 +564,7 @@ static int fuse_statfs(struct dentry *dentry, struct kstatfs *buf)
 	}
 
 #ifdef CONFIG_FUSE_BPF
-	fer = fuse_bpf_backing(dentry->d_inode, struct fuse_statfs_out,
+	fer = fuse_bpf_backing(dentry->d_inode, dentry->d_inode, struct fuse_statfs_out,
 			       fuse_statfs_initialize, fuse_statfs_backing,
 			       fuse_statfs_finalize,
 			       dentry, buf);

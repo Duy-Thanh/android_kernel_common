@@ -213,6 +213,7 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 			struct fuse_err_ret fer;
 
 			fer = fuse_bpf_backing(inode,
+					d_inode(entry->d_parent),
 					struct fuse_lookup_io,
 					fuse_lookup_initialize,
 					fuse_revalidate_backing,
@@ -435,7 +436,7 @@ static void fuse_dentry_canonical_path(const struct path *path,
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(inode, struct fuse_dummy_io,
+	fer = fuse_bpf_backing(inode, inode, struct fuse_dummy_io,
 			       fuse_canonical_path_initialize,
 			       fuse_canonical_path_backing,
 			       fuse_canonical_path_finalize, path,
@@ -617,7 +618,7 @@ static struct dentry *fuse_lookup(struct inode *dir, struct dentry *entry,
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(dir, struct fuse_lookup_io,
+	fer = fuse_bpf_backing(dir, dir, struct fuse_lookup_io,
 			       fuse_lookup_initialize, fuse_lookup_backing,
 			       fuse_lookup_finalize,
 			       dir, entry, flags);
@@ -693,7 +694,7 @@ static int fuse_create_open(struct inode *dir, struct dentry *entry,
 	{
 		struct fuse_err_ret fer;
 
-		fer = fuse_bpf_backing(dir, struct fuse_create_open_io,
+		fer = fuse_bpf_backing(dir, dir, struct fuse_create_open_io,
 				       fuse_create_open_initialize,
 				       fuse_create_open_backing,
 				       fuse_create_open_finalize,
@@ -898,7 +899,7 @@ static int fuse_mknod(struct inode *dir, struct dentry *entry, umode_t mode,
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(dir, struct fuse_mknod_in,
+	fer = fuse_bpf_backing(dir, dir, struct fuse_mknod_in,
 			fuse_mknod_initialize, fuse_mknod_backing,
 			fuse_mknod_finalize,
 			dir, entry, mode, rdev);
@@ -937,7 +938,7 @@ static int fuse_mkdir(struct inode *dir, struct dentry *entry, umode_t mode)
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(dir, struct fuse_mkdir_in,
+	fer = fuse_bpf_backing(dir, dir, struct fuse_mkdir_in,
 			fuse_mkdir_initialize, fuse_mkdir_backing,
 			fuse_mkdir_finalize,
 			dir, entry, mode);
@@ -970,7 +971,7 @@ static int fuse_symlink(struct inode *dir, struct dentry *entry,
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(dir, struct fuse_dummy_io,
+	fer = fuse_bpf_backing(dir, dir, struct fuse_dummy_io,
 			fuse_symlink_initialize, fuse_symlink_backing,
 			fuse_symlink_finalize,
 			dir, entry, link, len);
@@ -1016,7 +1017,7 @@ static int fuse_unlink(struct inode *dir, struct dentry *entry)
 	{
 		struct fuse_err_ret fer;
 
-		fer = fuse_bpf_backing(dir, struct fuse_dummy_io,
+		fer = fuse_bpf_backing(dir, dir, struct fuse_dummy_io,
 					fuse_unlink_initialize,
 					fuse_unlink_backing,
 					fuse_unlink_finalize,
@@ -1069,7 +1070,7 @@ static int fuse_rmdir(struct inode *dir, struct dentry *entry)
 	{
 		struct fuse_err_ret fer;
 
-		fer = fuse_bpf_backing(dir, struct fuse_dummy_io,
+		fer = fuse_bpf_backing(dir, dir, struct fuse_dummy_io,
 					fuse_rmdir_initialize,
 					fuse_rmdir_backing,
 					fuse_rmdir_finalize,
@@ -1167,7 +1168,7 @@ static int fuse_rename2(struct inode *olddir, struct dentry *oldent,
 #ifdef CONFIG_FUSE_BPF
 		struct fuse_err_ret fer;
 
-		fer = fuse_bpf_backing(olddir, struct fuse_rename2_in,
+		fer = fuse_bpf_backing(olddir, olddir, struct fuse_rename2_in,
 						fuse_rename2_initialize, fuse_rename2_backing,
 						fuse_rename2_finalize,
 						olddir, oldent, newdir, newent, flags);
@@ -1190,7 +1191,7 @@ static int fuse_rename2(struct inode *olddir, struct dentry *oldent,
 #ifdef CONFIG_FUSE_BPF
 		struct fuse_err_ret fer;
 
-		fer = fuse_bpf_backing(olddir, struct fuse_rename_in,
+		fer = fuse_bpf_backing(olddir, olddir, struct fuse_rename_in,
 						fuse_rename_initialize, fuse_rename_backing,
 						fuse_rename_finalize,
 						olddir, oldent, newdir, newent);
@@ -1218,7 +1219,7 @@ static int fuse_link(struct dentry *entry, struct inode *newdir,
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(inode, struct fuse_link_in, fuse_link_initialize,
+	fer = fuse_bpf_backing(inode, inode, struct fuse_link_in, fuse_link_initialize,
 			       fuse_link_backing, fuse_link_finalize, entry,
 			       newdir, newent);
 	if (fer.ret)
@@ -1342,7 +1343,7 @@ static int fuse_update_get_attr(struct inode *inode, struct file *file,
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(inode, struct fuse_getattr_io,
+	fer = fuse_bpf_backing(inode, inode, struct fuse_getattr_io,
 			       fuse_getattr_initialize,	fuse_getattr_backing,
 			       fuse_getattr_finalize,
 			       path->dentry, stat, request_mask, flags);
@@ -1486,7 +1487,7 @@ static int fuse_access(struct inode *inode, int mask)
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(inode, struct fuse_access_in,
+	fer = fuse_bpf_backing(inode, inode, struct fuse_access_in,
 			       fuse_access_initialize, fuse_access_backing,
 			       fuse_access_finalize, inode, mask);
 	if (fer.ret)
@@ -1552,7 +1553,7 @@ static int fuse_permission(struct inode *inode, int mask)
 		return -EACCES;
 
 #ifdef CONFIG_FUSE_BPF
-	fer = fuse_bpf_backing(inode, struct fuse_access_in,
+	fer = fuse_bpf_backing(inode, inode, struct fuse_access_in,
 			       fuse_access_initialize, fuse_access_backing,
 			       fuse_access_finalize, inode, mask);
 	if (fer.ret)
@@ -1658,7 +1659,7 @@ static const char *fuse_get_link(struct dentry *dentry, struct inode *inode,
 		struct fuse_err_ret fer;
 		const char *out = NULL;
 
-		fer = fuse_bpf_backing(inode, struct fuse_dummy_io,
+		fer = fuse_bpf_backing(inode, inode, struct fuse_dummy_io,
 				       fuse_get_link_initialize,
 				       fuse_get_link_backing,
 				       fuse_get_link_finalize,
@@ -1704,7 +1705,7 @@ static int fuse_dir_release(struct inode *inode, struct file *file)
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(inode, struct fuse_release_in,
+	fer = fuse_bpf_backing(inode, inode, struct fuse_release_in,
 		       fuse_releasedir_initialize, fuse_release_backing,
 		       fuse_release_finalize,
 		       inode, file);
@@ -1730,7 +1731,7 @@ static int fuse_dir_fsync(struct file *file, loff_t start, loff_t end,
 	{
 		struct fuse_err_ret fer;
 
-		fer = fuse_bpf_backing(inode, struct fuse_fsync_in,
+		fer = fuse_bpf_backing(inode, inode, struct fuse_fsync_in,
 				fuse_dir_fsync_initialize, fuse_fsync_backing,
 				fuse_fsync_finalize,
 				file, start, end, datasync);
@@ -1893,7 +1894,7 @@ int fuse_do_setattr(struct dentry *dentry, struct iattr *attr,
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 
-	fer = fuse_bpf_backing(inode, struct fuse_setattr_io,
+	fer = fuse_bpf_backing(inode, inode, struct fuse_setattr_io,
 			       fuse_setattr_initialize, fuse_setattr_backing,
 			       fuse_setattr_finalize, dentry, attr, file);
 	if (fer.ret)
@@ -2070,7 +2071,7 @@ static int fuse_setattr(struct dentry *entry, struct iattr *attr)
 			 * ia_mode calculation may have used stale i_mode.
 			 * Refresh and recalculate.
 			 */
-			fer = fuse_bpf_backing(inode, struct fuse_getattr_io,
+			fer = fuse_bpf_backing(inode, inode, struct fuse_getattr_io,
 					       fuse_getattr_initialize,	fuse_getattr_backing,
 					       fuse_getattr_finalize,
 					       entry, NULL, 0, 0);

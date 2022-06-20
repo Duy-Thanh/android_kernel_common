@@ -577,7 +577,7 @@ int fuse_readdir(struct file *file, struct dir_context *ctx)
 	bool is_continued = false;
 
 again:
-	fer = fuse_bpf_backing(inode, struct fuse_read_io,
+	fer = fuse_bpf_backing(inode, inode, struct fuse_read_io,
 			       fuse_readdir_initialize, fuse_readdir_backing,
 			       fuse_readdir_finalize,
 			       file, ctx, &force_again, &allow_force, is_continued);
