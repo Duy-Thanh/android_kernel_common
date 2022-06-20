@@ -537,6 +537,7 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 		pr_debug("%s(): memory range at pfn 0x%lx %p is busy, retrying\n",
 			 __func__, pfn, pfn_to_page(pfn));
 
+		trace_android_vh_cma_alloc_busy_info(&info);
 		trace_cma_alloc_busy_retry(cma->name, pfn, pfn_to_page(pfn),
 					   count, align);
 		/* try again with a bit different memory target */
