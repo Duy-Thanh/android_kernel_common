@@ -1020,6 +1020,11 @@ static enum page_references page_check_references(struct page *page,
 {
 	int referenced_ptes, referenced_page;
 	unsigned long vm_flags;
+	bool should_protect = false;
+
+	trace_android_vh_page_should_be_protect(page, &should_protect);
+	if (unlikely(should_protect))
+		return PAGEREF_ACTIVATE;
 
 	referenced_ptes = page_referenced(page, 1, sc->target_mem_cgroup,
 					  &vm_flags);
@@ -1757,6 +1762,7 @@ static unsigned long isolate_lru_pages(unsigned long nr_to_scan,
 		case 0:
 			nr_taken += nr_pages;
 			nr_zone_taken[page_zonenum(page)] += nr_pages;
+			trace_android_vh_dec_mapped_mul_op_lrulist(page, lru);
 			list_move(&page->lru, dst);
 			break;
 
@@ -1931,6 +1937,7 @@ static unsigned noinline_for_stack move_pages_to_lru(struct lruvec *lruvec,
 		nr_pages = thp_nr_pages(page);
 		update_lru_size(lruvec, lru, page_zonenum(page), nr_pages);
 		list_move(&page->lru, &lruvec->lists[lru]);
+		trace_android_vh_add_mapped_mul_op_lrulist(page, lru);
 
 		if (put_page_testzero(page)) {
 			__ClearPageLRU(page);
@@ -2084,7 +2091,7 @@ static void shrink_active_list(unsigned long nr_to_scan,
 	unsigned nr_rotated = 0;
 	int file = is_file_lru(lru);
 	struct pglist_data *pgdat = lruvec_pgdat(lruvec);
-	bool bypass = false;
+	bool bypass = false, should_protect = false;
 
 	lru_add_drain();
 
@@ -2117,6 +2124,13 @@ static void shrink_active_list(unsigned long nr_to_scan,
 					try_to_release_page(page, 0);
 				unlock_page(page);
 			}
+		}
+
+		trace_android_vh_page_should_be_protect(page, &should_protect);
+		if (unlikely(should_protect)) {
+			nr_rotated += thp_nr_pages(page);
+			list_add(&page->lru, &l_active);
+			continue;
 		}
 
 		trace_android_vh_page_referenced_check_bypass(page, nr_to_scan, lru, &bypass);
