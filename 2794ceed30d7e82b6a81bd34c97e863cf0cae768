@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e2bb617_abf61404",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-06-20T13:53:24Z",
+      "side": 1,
+      "message": "At this point in time we do not accept any KMI breaking changes on this branch anymore: See the the GKI newsletter: https://docs.partner.android.com/partners/guides/gki/whatsnew?hl\u003den#2022-june-10",
+      "revId": "2794ceed30d7e82b6a81bd34c97e863cf0cae768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
