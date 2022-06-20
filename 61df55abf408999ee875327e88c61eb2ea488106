@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c1c3714_56b1d153",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-06-20T19:54:09Z",
+      "side": 1,
+      "message": "Adding an extra parameter to the macro for this one case is hopefully unnecessary.\n\nWe should be passing the same inode to revalidate as we do to lookup (I definitely agree about that) and resolving any issues in fuse_revalidate_initialize_in/out - I wonder if the real mistake is trying to use the same initialize for lookup and revalidate?",
+      "revId": "61df55abf408999ee875327e88c61eb2ea488106",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
