@@ -73,6 +73,7 @@ struct cgroup_subsys memory_cgrp_subsys __read_mostly;
 EXPORT_SYMBOL(memory_cgrp_subsys);
 
 struct mem_cgroup *root_mem_cgroup __read_mostly;
+EXPORT_SYMBOL_GPL(root_mem_cgroup);
 
 /* Active memory cgroup to use from an interrupt context */
 DEFINE_PER_CPU(struct mem_cgroup *, int_active_memcg);
@@ -1245,6 +1246,7 @@ out:
 
 	return memcg;
 }
+EXPORT_SYMBOL_GPL(mem_cgroup_iter);
 
 /**
  * mem_cgroup_iter_break - abort a hierarchy walk prematurely
@@ -1371,6 +1373,7 @@ out:
 		lruvec->pgdat = pgdat;
 	return lruvec;
 }
+EXPORT_SYMBOL_GPL(mem_cgroup_page_lruvec);
 
 /**
  * mem_cgroup_update_lru_size - account for adding or removing an lru page
