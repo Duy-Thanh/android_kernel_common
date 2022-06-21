@@ -103,6 +103,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c99246b_012b50d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-06-21T15:56:13Z",
+      "side": 1,
+      "message": "\u003e So why can\u0027t we pass the parent inode to the macro to get consistency with regular lookup? What goes wrong?\n\nBecause of \n\n```\nif (!fuse_inode || !fuse_inode-\u003ebacking_inode) { \\\n    break; \\\n} \\\n```\n\ninside the macro which assumes that \"inode with backing inode\" and \"inode with bpf program\" are the same inodes. But revalidate is different because backing inode is the child one, but bpf program must be executed on the parent one for consistency with a regular lookup.\n\n\u003e So I think all we need to do is change the inode to the directory inode in revalidate and we don\u0027t need the extra param.\n\nThat is something we had before, but it triggers redundant lookups on a (data|obb) folders in revalidate case because Android folder doesn\u0027t have backing inode to execute lookup.",
+      "parentUuid": "31fceb73_d41241ff",
+      "revId": "61df55abf408999ee875327e88c61eb2ea488106",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "498740f0_5c546608",
         "filename": "fs/fuse/fuse_i.h",
         "patchSetId": 1
