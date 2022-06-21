@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a28716b1_b577f966",
+        "filename": "drivers/md/dm-bufio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2022-06-21T19:08:40Z",
+      "side": 1,
+      "message": "Perhaps we can rename this to something more generic? `may_sleep` or `atomic`, for example?",
+      "range": {
+        "startLine": 894,
+        "startChar": 44,
+        "endLine": 894,
+        "endChar": 56
+      },
+      "revId": "0b45cd91a4a0afa6150a19ba307c014690d7fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eb443c4_92a233f5",
+        "filename": "drivers/md/dm-bufio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1731,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2022-06-21T19:08:40Z",
+      "side": 1,
+      "message": "Should we just initialize `use_spinlock` to `false` by default and add a new function to enable the `use_spinlock` behavior, so we don\u0027t have to change all the existing callers of this function?",
+      "range": {
+        "startLine": 1731,
+        "startChar": 24,
+        "endLine": 1731,
+        "endChar": 46
+      },
+      "revId": "0b45cd91a4a0afa6150a19ba307c014690d7fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
