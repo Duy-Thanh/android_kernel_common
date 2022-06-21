@@ -34,6 +34,24 @@
       "parentUuid": "be9d3358_13316df2",
       "revId": "4d01c9c0f34b5acdfe8ef915d4ca2b7fb99225bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c91c5fed_0e0ad59d",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-21T17:14:15Z",
+      "side": 1,
+      "message": "ok, agreed that it is simpler.",
+      "parentUuid": "fbe80223_490ab72a",
+      "revId": "4d01c9c0f34b5acdfe8ef915d4ca2b7fb99225bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
