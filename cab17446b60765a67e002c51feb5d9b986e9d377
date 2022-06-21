@@ -34,6 +34,24 @@
       "parentUuid": "2e45edde_18111bea",
       "revId": "cab17446b60765a67e002c51feb5d9b986e9d377",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21492fe8_034031f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-21T12:53:14Z",
+      "side": 1,
+      "message": "As the abi is currently frozen, I do not think so, sorry.",
+      "parentUuid": "8035f660_52b21a87",
+      "revId": "cab17446b60765a67e002c51feb5d9b986e9d377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
