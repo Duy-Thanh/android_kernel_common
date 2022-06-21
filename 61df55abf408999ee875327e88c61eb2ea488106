@@ -121,6 +121,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "995d141e_c6b78519",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-06-21T17:46:00Z",
+      "side": 1,
+      "message": "If simplify, when we want to use fuse BPF for revalidate, we want to execute backing operation (revalidate) on the current inode, but use BPF program from the parent inode that\u0027s why we need both in our macro.",
+      "parentUuid": "2c99246b_012b50d5",
+      "revId": "61df55abf408999ee875327e88c61eb2ea488106",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "498740f0_5c546608",
         "filename": "fs/fuse/fuse_i.h",
         "patchSetId": 1
