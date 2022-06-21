@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5666e84e_07246564",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-21T17:32:36Z",
+      "side": 1,
+      "message": "Please abandon this CL and cherry-pick this from android12-5.10 and make sure the Change-Id matches. (aosp/1620629)",
+      "revId": "6d2d826c3c461cc46d0f066cde8a194fdf719096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
