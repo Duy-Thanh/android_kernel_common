@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31fceb73_d41241ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-06-21T15:35:49Z",
+      "side": 1,
+      "message": "So why can\u0027t we pass the parent inode to the macro to get consistency with regular lookup? What goes wrong?\n\nIn fact, when I look through this macro, the only places we use inode are to get the backing inode and bpf, and to lock for the user requests. But when I look up what the lock protects, it\u0027s lookups and readdirs, so that *should* be the directory inode.\n\nSo I think all we need to do is change the inode to the directory inode in revalidate and we don\u0027t need the extra param.",
+      "parentUuid": "57a0e299_7bb6a02f",
+      "revId": "61df55abf408999ee875327e88c61eb2ea488106",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "498740f0_5c546608",
         "filename": "fs/fuse/fuse_i.h",
         "patchSetId": 1
