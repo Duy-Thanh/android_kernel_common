@@ -27,9 +27,13 @@
 #include <linux/uaccess.h>
 
 #include "internal.h"
+<<<<<<< HEAD   (56d33a ANDROID: disable LTO and CFI)
 #ifndef __GENSYMS__
 #include <trace/hooks/syscall_check.h>
 #endif
+=======
+#include "swap.h"
+>>>>>>> BRANCH (98931d Merge tag 'mm-stable-2022-05-25' of git://git.kernel.org/pub)
 
 /**
  * kfree_const - conditionally free memory
