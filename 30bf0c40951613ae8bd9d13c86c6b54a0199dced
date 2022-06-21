@@ -142,6 +142,30 @@
       },
       "revId": "30bf0c40951613ae8bd9d13c86c6b54a0199dced",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40a694cf_69be637c",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-06-21T10:43:58Z",
+      "side": 1,
+      "message": "Done\n@Todd Kjos Thank you so much for helping with the review!",
+      "parentUuid": "0d27959f_d6318e76",
+      "range": {
+        "startLine": 597,
+        "startChar": 1,
+        "endLine": 597,
+        "endChar": 23
+      },
+      "revId": "30bf0c40951613ae8bd9d13c86c6b54a0199dced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
