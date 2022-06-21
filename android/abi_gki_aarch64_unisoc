@@ -363,6 +363,7 @@
   init_net
   __init_rwsem
   init_timer_key
+  init_on_alloc
   init_user_ns
   init_wait_entry
   init_pseudo
@@ -815,6 +816,7 @@
   sscanf
   __stack_chk_fail
   __stack_chk_guard
+  static_key_count
   strcasecmp
   strcat
   strchr

@@ -3534,6 +3534,7 @@
       <elf-symbol name='sscanf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbcab6ee6'/>
       <elf-symbol name='stack_trace_print' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa45c7b90'/>
       <elf-symbol name='start_tty' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa7710d71'/>
+      <elf-symbol name='static_key_count' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x389b64a2'/>
       <elf-symbol name='static_key_slow_dec' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2f4880df'/>
       <elf-symbol name='static_key_slow_inc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8e92f7c4'/>
       <elf-symbol name='stop_tty' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x66f91713'/>
@@ -4317,6 +4318,7 @@
       <elf-symbol name='i2c_bus_type' size='208' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd4b6880c'/>
       <elf-symbol name='ignore_console_lock_warning' size='4' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x98e508ef'/>
       <elf-symbol name='init_net' size='4352' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc9175eb1'/>
+      <elf-symbol name='init_on_alloc' size='16' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x954cef6f'/>
       <elf-symbol name='init_task' size='3776' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7d9429d7'/>
       <elf-symbol name='init_user_ns' size='568' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfcd2c02'/>
       <elf-symbol name='init_uts_ns' size='440' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa44919c8'/>
@@ -103828,57 +103830,57 @@
       <pointer-type-def type-id='2f07c2f4' size-in-bits='64' id='2859cc56'/>
       <pointer-type-def type-id='f2c03b9b' size-in-bits='64' id='03676ee7'/>
       <pointer-type-def type-id='bce0b727' size-in-bits='64' id='af6d77bb'/>
-      <function-decl name='rproc_alloc' mangled-name='rproc_alloc' filepath='drivers/remoteproc/remoteproc_core.c' line='2177' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_alloc'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/remoteproc/remoteproc_core.c' line='2177' column='1'/>
-        <parameter type-id='80f4b756' name='name' filepath='drivers/remoteproc/remoteproc_core.c' line='2177' column='1'/>
-        <parameter type-id='48daa4cd' name='ops' filepath='drivers/remoteproc/remoteproc_core.c' line='2178' column='1'/>
-        <parameter type-id='80f4b756' name='firmware' filepath='drivers/remoteproc/remoteproc_core.c' line='2179' column='1'/>
-        <parameter type-id='95e97e5e' name='len' filepath='drivers/remoteproc/remoteproc_core.c' line='2179' column='1'/>
+      <function-decl name='rproc_alloc' mangled-name='rproc_alloc' filepath='drivers/remoteproc/remoteproc_core.c' line='2178' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_alloc'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/remoteproc/remoteproc_core.c' line='2178' column='1'/>
+        <parameter type-id='80f4b756' name='name' filepath='drivers/remoteproc/remoteproc_core.c' line='2178' column='1'/>
+        <parameter type-id='48daa4cd' name='ops' filepath='drivers/remoteproc/remoteproc_core.c' line='2179' column='1'/>
+        <parameter type-id='80f4b756' name='firmware' filepath='drivers/remoteproc/remoteproc_core.c' line='2180' column='1'/>
+        <parameter type-id='95e97e5e' name='len' filepath='drivers/remoteproc/remoteproc_core.c' line='2180' column='1'/>
         <return type-id='5771c601'/>
       </function-decl>
-      <function-decl name='rproc_report_crash' mangled-name='rproc_report_crash' filepath='drivers/remoteproc/remoteproc_core.c' line='2392' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_report_crash'>
-        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2392' column='1'/>
-        <parameter type-id='25751b8f' name='type' filepath='drivers/remoteproc/remoteproc_core.c' line='2392' column='1'/>
+      <function-decl name='rproc_report_crash' mangled-name='rproc_report_crash' filepath='drivers/remoteproc/remoteproc_core.c' line='2393' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_report_crash'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2393' column='1'/>
+        <parameter type-id='25751b8f' name='type' filepath='drivers/remoteproc/remoteproc_core.c' line='2393' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='rproc_remove_subdev' mangled-name='rproc_remove_subdev' filepath='drivers/remoteproc/remoteproc_core.c' line='2358' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_remove_subdev'>
-        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2358' column='1'/>
-        <parameter type-id='3591079f' name='subdev' filepath='drivers/remoteproc/remoteproc_core.c' line='2358' column='1'/>
+      <function-decl name='rproc_remove_subdev' mangled-name='rproc_remove_subdev' filepath='drivers/remoteproc/remoteproc_core.c' line='2359' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_remove_subdev'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2359' column='1'/>
+        <parameter type-id='3591079f' name='subdev' filepath='drivers/remoteproc/remoteproc_core.c' line='2359' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='rproc_get_by_child' mangled-name='rproc_get_by_child' filepath='drivers/remoteproc/remoteproc_core.c' line='2370' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_get_by_child'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/remoteproc/remoteproc_core.c' line='2370' column='1'/>
+      <function-decl name='rproc_get_by_child' mangled-name='rproc_get_by_child' filepath='drivers/remoteproc/remoteproc_core.c' line='2371' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_get_by_child'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/remoteproc/remoteproc_core.c' line='2371' column='1'/>
         <return type-id='5771c601'/>
       </function-decl>
-      <function-decl name='rproc_free' mangled-name='rproc_free' filepath='drivers/remoteproc/remoteproc_core.c' line='2276' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_free'>
-        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2276' column='1'/>
+      <function-decl name='rproc_free' mangled-name='rproc_free' filepath='drivers/remoteproc/remoteproc_core.c' line='2277' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_free'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2277' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='rproc_del' mangled-name='rproc_del' filepath='drivers/remoteproc/remoteproc_core.c' line='2313' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_del'>
-        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2313' column='1'/>
+      <function-decl name='rproc_del' mangled-name='rproc_del' filepath='drivers/remoteproc/remoteproc_core.c' line='2314' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_del'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2314' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='rproc_coredump_add_segment' mangled-name='rproc_coredump_add_segment' filepath='drivers/remoteproc/remoteproc_core.c' line='1634' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_coredump_add_segment'>
-        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='1634' column='1'/>
-        <parameter type-id='cf29c9b3' name='da' filepath='drivers/remoteproc/remoteproc_core.c' line='1634' column='1'/>
-        <parameter type-id='b59d7dce' name='size' filepath='drivers/remoteproc/remoteproc_core.c' line='1634' column='1'/>
+      <function-decl name='rproc_coredump_add_segment' mangled-name='rproc_coredump_add_segment' filepath='drivers/remoteproc/remoteproc_core.c' line='1635' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_coredump_add_segment'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='1635' column='1'/>
+        <parameter type-id='cf29c9b3' name='da' filepath='drivers/remoteproc/remoteproc_core.c' line='1635' column='1'/>
+        <parameter type-id='b59d7dce' name='size' filepath='drivers/remoteproc/remoteproc_core.c' line='1635' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='rproc_coredump_add_custom_segment' mangled-name='rproc_coredump_add_custom_segment' filepath='drivers/remoteproc/remoteproc_core.c' line='1665' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_coredump_add_custom_segment'>
-        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='1665' column='1'/>
-        <parameter type-id='cf29c9b3' name='da' filepath='drivers/remoteproc/remoteproc_core.c' line='1666' column='1'/>
-        <parameter type-id='b59d7dce' name='size' filepath='drivers/remoteproc/remoteproc_core.c' line='1666' column='1'/>
-        <parameter type-id='90cfc081' name='dumpfn' filepath='drivers/remoteproc/remoteproc_core.c' line='1667' column='1'/>
-        <parameter type-id='eaa32e2f' name='priv' filepath='drivers/remoteproc/remoteproc_core.c' line='1670' column='1'/>
+      <function-decl name='rproc_coredump_add_custom_segment' mangled-name='rproc_coredump_add_custom_segment' filepath='drivers/remoteproc/remoteproc_core.c' line='1666' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_coredump_add_custom_segment'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='1666' column='1'/>
+        <parameter type-id='cf29c9b3' name='da' filepath='drivers/remoteproc/remoteproc_core.c' line='1667' column='1'/>
+        <parameter type-id='b59d7dce' name='size' filepath='drivers/remoteproc/remoteproc_core.c' line='1667' column='1'/>
+        <parameter type-id='90cfc081' name='dumpfn' filepath='drivers/remoteproc/remoteproc_core.c' line='1668' column='1'/>
+        <parameter type-id='eaa32e2f' name='priv' filepath='drivers/remoteproc/remoteproc_core.c' line='1671' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='rproc_add_subdev' mangled-name='rproc_add_subdev' filepath='drivers/remoteproc/remoteproc_core.c' line='2347' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_add_subdev'>
-        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2347' column='1'/>
-        <parameter type-id='3591079f' name='subdev' filepath='drivers/remoteproc/remoteproc_core.c' line='2347' column='1'/>
+      <function-decl name='rproc_add_subdev' mangled-name='rproc_add_subdev' filepath='drivers/remoteproc/remoteproc_core.c' line='2348' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_add_subdev'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2348' column='1'/>
+        <parameter type-id='3591079f' name='subdev' filepath='drivers/remoteproc/remoteproc_core.c' line='2348' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='rproc_add' mangled-name='rproc_add' filepath='drivers/remoteproc/remoteproc_core.c' line='2080' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_add'>
-        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2080' column='1'/>
+      <function-decl name='rproc_add' mangled-name='rproc_add' filepath='drivers/remoteproc/remoteproc_core.c' line='2081' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_add'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='2081' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-type size-in-bits='64' id='99438dcd'>
@@ -140577,6 +140579,10 @@
         <parameter type-id='f8840c23' name='key' filepath='kernel/jump_label.c' line='267' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='static_key_count' mangled-name='static_key_count' filepath='kernel/jump_label.c' line='104' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='static_key_count'>
+        <parameter type-id='f8840c23' name='key' filepath='kernel/jump_label.c' line='104' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='kernel/kallsyms.c' language='LANG_C89'>
       <function-decl name='sprint_symbol' mangled-name='sprint_symbol' filepath='kernel/kallsyms.c' line='435' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sprint_symbol'>
@@ -154085,11 +154091,6 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='lib/once.c' language='LANG_C89'>
-      <class-decl name='static_key_true' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/linux/jump_label.h' line='346' column='1' id='49a0ad34'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='key' type-id='00205383' visibility='default' filepath='include/linux/jump_label.h' line='347' column='1'/>
-        </data-member>
-      </class-decl>
       <pointer-type-def type-id='49a0ad34' size-in-bits='64' id='ac6963b2'/>
       <function-decl name='__do_once_start' mangled-name='__do_once_start' filepath='lib/once.c' line='37' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__do_once_start'>
         <parameter type-id='d8e6b335' name='done' filepath='lib/once.c' line='37' column='1'/>
@@ -155493,6 +155494,11 @@
       <array-type-def dimensions='1' type-id='447da2ae' size-in-bits='192' id='d371d064'>
         <subrange length='3' type-id='7ff19f0f' id='56f209d2'/>
       </array-type-def>
+      <class-decl name='static_key_true' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/linux/jump_label.h' line='346' column='1' id='49a0ad34'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='key' type-id='00205383' visibility='default' filepath='include/linux/jump_label.h' line='347' column='1'/>
+        </data-member>
+      </class-decl>
       <class-decl name='sysinfo' size-in-bits='896' is-struct='yes' visibility='default' filepath='include/uapi/linux/sysinfo.h' line='8' column='1' id='3c95971e'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='uptime' type-id='6a11bd61' visibility='default' filepath='include/uapi/linux/sysinfo.h' line='9' column='1'/>
@@ -155539,6 +155545,7 @@
       </class-decl>
       <pointer-type-def type-id='6a7d16bb' size-in-bits='64' id='f461c050'/>
       <pointer-type-def type-id='3c95971e' size-in-bits='64' id='0f561784'/>
+      <var-decl name='init_on_alloc' type-id='49a0ad34' mangled-name='init_on_alloc' visibility='default' filepath='mm/page_alloc.c' line='140' column='1' elf-symbol-id='init_on_alloc'/>
       <var-decl name='_totalram_pages' type-id='f22a8abb' mangled-name='_totalram_pages' visibility='default' filepath='mm/page_alloc.c' line='132' column='1' elf-symbol-id='_totalram_pages'/>
       <function-decl name='__alloc_pages_nodemask' mangled-name='__alloc_pages_nodemask' filepath='mm/page_alloc.c' line='4826' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__alloc_pages_nodemask'>
         <parameter type-id='3eb7c31c' name='gfp_mask' filepath='mm/page_alloc.c' line='4826' column='1'/>
@@ -167134,19 +167141,19 @@
         <parameter type-id='95e97e5e' name='cap' filepath='net/netlink/af_netlink.c' line='910' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
-      <function-decl name='__netlink_dump_start' mangled-name='__netlink_dump_start' filepath='net/netlink/af_netlink.c' line='2314' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__netlink_dump_start'>
-        <parameter type-id='f772df6d' name='ssk' filepath='net/netlink/af_netlink.c' line='2314' column='1'/>
-        <parameter type-id='0fbf3cfd' name='skb' filepath='net/netlink/af_netlink.c' line='2314' column='1'/>
-        <parameter type-id='390fbe8f' name='nlh' filepath='net/netlink/af_netlink.c' line='2315' column='1'/>
-        <parameter type-id='6984e365' name='control' filepath='net/netlink/af_netlink.c' line='2316' column='1'/>
+      <function-decl name='__netlink_dump_start' mangled-name='__netlink_dump_start' filepath='net/netlink/af_netlink.c' line='2321' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__netlink_dump_start'>
+        <parameter type-id='f772df6d' name='ssk' filepath='net/netlink/af_netlink.c' line='2321' column='1'/>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/netlink/af_netlink.c' line='2321' column='1'/>
+        <parameter type-id='390fbe8f' name='nlh' filepath='net/netlink/af_netlink.c' line='2322' column='1'/>
+        <parameter type-id='6984e365' name='control' filepath='net/netlink/af_netlink.c' line='2323' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='netlink_unregister_notifier' mangled-name='netlink_unregister_notifier' filepath='net/netlink/af_netlink.c' line='2676' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netlink_unregister_notifier'>
-        <parameter type-id='d504f73d' name='nb' filepath='net/netlink/af_netlink.c' line='2676' column='1'/>
+      <function-decl name='netlink_unregister_notifier' mangled-name='netlink_unregister_notifier' filepath='net/netlink/af_netlink.c' line='2683' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netlink_unregister_notifier'>
+        <parameter type-id='d504f73d' name='nb' filepath='net/netlink/af_netlink.c' line='2683' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='netlink_register_notifier' mangled-name='netlink_register_notifier' filepath='net/netlink/af_netlink.c' line='2670' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netlink_register_notifier'>
-        <parameter type-id='d504f73d' name='nb' filepath='net/netlink/af_netlink.c' line='2670' column='1'/>
+      <function-decl name='netlink_register_notifier' mangled-name='netlink_register_notifier' filepath='net/netlink/af_netlink.c' line='2677' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netlink_register_notifier'>
+        <parameter type-id='d504f73d' name='nb' filepath='net/netlink/af_netlink.c' line='2677' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='netlink_broadcast' mangled-name='netlink_broadcast' filepath='net/netlink/af_netlink.c' line='1541' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netlink_broadcast'>
@@ -182684,65 +182691,65 @@
       <qualified-type-def type-id='8755a6ff' const='yes' id='bae39662'/>
       <pointer-type-def type-id='bae39662' size-in-bits='64' id='7c459358'/>
       <pointer-type-def type-id='044208ec' size-in-bits='64' id='acf1578a'/>
-      <function-decl name='snd_soc_dapm_sync' mangled-name='snd_soc_dapm_sync' filepath='sound/soc/soc-dapm.c' line='2622' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_sync'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='2622' column='1'/>
+      <function-decl name='snd_soc_dapm_sync' mangled-name='snd_soc_dapm_sync' filepath='sound/soc/soc-dapm.c' line='2620' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_sync'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='2620' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_new_controls' mangled-name='snd_soc_dapm_new_controls' filepath='sound/soc/soc-dapm.c' line='3796' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_new_controls'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='3796' column='1'/>
-        <parameter type-id='dae78f89' name='widget' filepath='sound/soc/soc-dapm.c' line='3797' column='1'/>
-        <parameter type-id='95e97e5e' name='num' filepath='sound/soc/soc-dapm.c' line='3798' column='1'/>
+      <function-decl name='snd_soc_dapm_new_controls' mangled-name='snd_soc_dapm_new_controls' filepath='sound/soc/soc-dapm.c' line='3794' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_new_controls'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='3794' column='1'/>
+        <parameter type-id='dae78f89' name='widget' filepath='sound/soc/soc-dapm.c' line='3795' column='1'/>
+        <parameter type-id='95e97e5e' name='num' filepath='sound/soc/soc-dapm.c' line='3796' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_add_routes' mangled-name='snd_soc_dapm_add_routes' filepath='sound/soc/soc-dapm.c' line='3088' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_add_routes'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='3088' column='1'/>
-        <parameter type-id='8f3d28b8' name='route' filepath='sound/soc/soc-dapm.c' line='3089' column='1'/>
-        <parameter type-id='95e97e5e' name='num' filepath='sound/soc/soc-dapm.c' line='3089' column='1'/>
+      <function-decl name='snd_soc_dapm_add_routes' mangled-name='snd_soc_dapm_add_routes' filepath='sound/soc/soc-dapm.c' line='3086' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_add_routes'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='3086' column='1'/>
+        <parameter type-id='8f3d28b8' name='route' filepath='sound/soc/soc-dapm.c' line='3087' column='1'/>
+        <parameter type-id='95e97e5e' name='num' filepath='sound/soc/soc-dapm.c' line='3087' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_new_widgets' mangled-name='snd_soc_dapm_new_widgets' filepath='sound/soc/soc-dapm.c' line='3223' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_new_widgets'>
-        <parameter type-id='3059cd0b' name='card' filepath='sound/soc/soc-dapm.c' line='3223' column='1'/>
+      <function-decl name='snd_soc_dapm_new_widgets' mangled-name='snd_soc_dapm_new_widgets' filepath='sound/soc/soc-dapm.c' line='3221' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_new_widgets'>
+        <parameter type-id='3059cd0b' name='card' filepath='sound/soc/soc-dapm.c' line='3221' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_weak_routes' mangled-name='snd_soc_dapm_weak_routes' filepath='sound/soc/soc-dapm.c' line='3196' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_weak_routes'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='3196' column='1'/>
-        <parameter type-id='8f3d28b8' name='route' filepath='sound/soc/soc-dapm.c' line='3197' column='1'/>
-        <parameter type-id='95e97e5e' name='num' filepath='sound/soc/soc-dapm.c' line='3197' column='1'/>
+      <function-decl name='snd_soc_dapm_weak_routes' mangled-name='snd_soc_dapm_weak_routes' filepath='sound/soc/soc-dapm.c' line='3194' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_weak_routes'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='3194' column='1'/>
+        <parameter type-id='8f3d28b8' name='route' filepath='sound/soc/soc-dapm.c' line='3195' column='1'/>
+        <parameter type-id='95e97e5e' name='num' filepath='sound/soc/soc-dapm.c' line='3195' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_put_volsw' mangled-name='snd_soc_dapm_put_volsw' filepath='sound/soc/soc-dapm.c' line='3360' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_put_volsw'>
-        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3360' column='1'/>
-        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3361' column='1'/>
+      <function-decl name='snd_soc_dapm_put_volsw' mangled-name='snd_soc_dapm_put_volsw' filepath='sound/soc/soc-dapm.c' line='3358' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_put_volsw'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3358' column='1'/>
+        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3359' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_put_pin_switch' mangled-name='snd_soc_dapm_put_pin_switch' filepath='sound/soc/soc-dapm.c' line='3597' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_put_pin_switch'>
-        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3597' column='1'/>
-        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3598' column='1'/>
+      <function-decl name='snd_soc_dapm_put_pin_switch' mangled-name='snd_soc_dapm_put_pin_switch' filepath='sound/soc/soc-dapm.c' line='3595' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_put_pin_switch'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3595' column='1'/>
+        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3596' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_put_enum_double' mangled-name='snd_soc_dapm_put_enum_double' filepath='sound/soc/soc-dapm.c' line='3493' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_put_enum_double'>
-        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3493' column='1'/>
-        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3494' column='1'/>
+      <function-decl name='snd_soc_dapm_put_enum_double' mangled-name='snd_soc_dapm_put_enum_double' filepath='sound/soc/soc-dapm.c' line='3491' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_put_enum_double'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3491' column='1'/>
+        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3492' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_new_control' mangled-name='snd_soc_dapm_new_control' filepath='sound/soc/soc-dapm.c' line='3773' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_new_control'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='3773' column='1'/>
-        <parameter type-id='dae78f89' name='widget' filepath='sound/soc/soc-dapm.c' line='3774' column='1'/>
+      <function-decl name='snd_soc_dapm_new_control' mangled-name='snd_soc_dapm_new_control' filepath='sound/soc/soc-dapm.c' line='3771' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_new_control'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='3771' column='1'/>
+        <parameter type-id='dae78f89' name='widget' filepath='sound/soc/soc-dapm.c' line='3772' column='1'/>
         <return type-id='810606ec'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_mux_update_power' mangled-name='snd_soc_dapm_mux_update_power' filepath='sound/soc/soc-dapm.c' line='2296' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_mux_update_power'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='2296' column='1'/>
-        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='2297' column='1'/>
-        <parameter type-id='95e97e5e' name='mux' filepath='sound/soc/soc-dapm.c' line='2297' column='1'/>
-        <parameter type-id='acf1578a' name='e' filepath='sound/soc/soc-dapm.c' line='2297' column='1'/>
-        <parameter type-id='33146de3' name='update' filepath='sound/soc/soc-dapm.c' line='2298' column='1'/>
+      <function-decl name='snd_soc_dapm_mux_update_power' mangled-name='snd_soc_dapm_mux_update_power' filepath='sound/soc/soc-dapm.c' line='2294' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_mux_update_power'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='2294' column='1'/>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='2295' column='1'/>
+        <parameter type-id='95e97e5e' name='mux' filepath='sound/soc/soc-dapm.c' line='2295' column='1'/>
+        <parameter type-id='acf1578a' name='e' filepath='sound/soc/soc-dapm.c' line='2295' column='1'/>
+        <parameter type-id='33146de3' name='update' filepath='sound/soc/soc-dapm.c' line='2296' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_mixer_update_power' mangled-name='snd_soc_dapm_mixer_update_power' filepath='sound/soc/soc-dapm.c' line='2361' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_mixer_update_power'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='2361' column='1'/>
-        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='2362' column='1'/>
-        <parameter type-id='95e97e5e' name='connect' filepath='sound/soc/soc-dapm.c' line='2362' column='1'/>
-        <parameter type-id='33146de3' name='update' filepath='sound/soc/soc-dapm.c' line='2363' column='1'/>
+      <function-decl name='snd_soc_dapm_mixer_update_power' mangled-name='snd_soc_dapm_mixer_update_power' filepath='sound/soc/soc-dapm.c' line='2359' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_mixer_update_power'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='2359' column='1'/>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='2360' column='1'/>
+        <parameter type-id='95e97e5e' name='connect' filepath='sound/soc/soc-dapm.c' line='2360' column='1'/>
+        <parameter type-id='33146de3' name='update' filepath='sound/soc/soc-dapm.c' line='2361' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='snd_soc_dapm_kcontrol_widget' mangled-name='snd_soc_dapm_kcontrol_widget' filepath='sound/soc/soc-dapm.c' line='576' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_kcontrol_widget'>
@@ -182753,49 +182760,49 @@
         <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='592' column='1'/>
         <return type-id='70d004a5'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_info_pin_switch' mangled-name='snd_soc_dapm_info_pin_switch' filepath='sound/soc/soc-dapm.c' line='3556' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_info_pin_switch'>
-        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3556' column='1'/>
-        <parameter type-id='0e291009' name='uinfo' filepath='sound/soc/soc-dapm.c' line='3557' column='1'/>
+      <function-decl name='snd_soc_dapm_info_pin_switch' mangled-name='snd_soc_dapm_info_pin_switch' filepath='sound/soc/soc-dapm.c' line='3554' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_info_pin_switch'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3554' column='1'/>
+        <parameter type-id='0e291009' name='uinfo' filepath='sound/soc/soc-dapm.c' line='3555' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_ignore_suspend' mangled-name='snd_soc_dapm_ignore_suspend' filepath='sound/soc/soc-dapm.c' line='4728' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_ignore_suspend'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4728' column='1'/>
-        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4729' column='1'/>
+      <function-decl name='snd_soc_dapm_ignore_suspend' mangled-name='snd_soc_dapm_ignore_suspend' filepath='sound/soc/soc-dapm.c' line='4726' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_ignore_suspend'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4726' column='1'/>
+        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4727' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_get_volsw' mangled-name='snd_soc_dapm_get_volsw' filepath='sound/soc/soc-dapm.c' line='3297' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_get_volsw'>
-        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3297' column='1'/>
-        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3298' column='1'/>
+      <function-decl name='snd_soc_dapm_get_volsw' mangled-name='snd_soc_dapm_get_volsw' filepath='sound/soc/soc-dapm.c' line='3295' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_get_volsw'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3295' column='1'/>
+        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3296' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_get_pin_switch' mangled-name='snd_soc_dapm_get_pin_switch' filepath='sound/soc/soc-dapm.c' line='3574' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_get_pin_switch'>
-        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3574' column='1'/>
-        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3575' column='1'/>
+      <function-decl name='snd_soc_dapm_get_pin_switch' mangled-name='snd_soc_dapm_get_pin_switch' filepath='sound/soc/soc-dapm.c' line='3572' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_get_pin_switch'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3572' column='1'/>
+        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3573' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_get_pin_status' mangled-name='snd_soc_dapm_get_pin_status' filepath='sound/soc/soc-dapm.c' line='4705' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_get_pin_status'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4705' column='1'/>
-        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4706' column='1'/>
+      <function-decl name='snd_soc_dapm_get_pin_status' mangled-name='snd_soc_dapm_get_pin_status' filepath='sound/soc/soc-dapm.c' line='4703' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_get_pin_status'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4703' column='1'/>
+        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4704' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_get_enum_double' mangled-name='snd_soc_dapm_get_enum_double' filepath='sound/soc/soc-dapm.c' line='3452' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_get_enum_double'>
-        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3452' column='1'/>
-        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3453' column='1'/>
+      <function-decl name='snd_soc_dapm_get_enum_double' mangled-name='snd_soc_dapm_get_enum_double' filepath='sound/soc/soc-dapm.c' line='3450' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_get_enum_double'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='3450' column='1'/>
+        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-dapm.c' line='3451' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_force_enable_pin' mangled-name='snd_soc_dapm_force_enable_pin' filepath='sound/soc/soc-dapm.c' line='4586' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_force_enable_pin'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4586' column='1'/>
-        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4587' column='1'/>
+      <function-decl name='snd_soc_dapm_force_enable_pin' mangled-name='snd_soc_dapm_force_enable_pin' filepath='sound/soc/soc-dapm.c' line='4584' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_force_enable_pin'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4584' column='1'/>
+        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4585' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_enable_pin' mangled-name='snd_soc_dapm_enable_pin' filepath='sound/soc/soc-dapm.c' line='4519' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_enable_pin'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4519' column='1'/>
-        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4519' column='1'/>
+      <function-decl name='snd_soc_dapm_enable_pin' mangled-name='snd_soc_dapm_enable_pin' filepath='sound/soc/soc-dapm.c' line='4517' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_enable_pin'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4517' column='1'/>
+        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4517' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dapm_disable_pin' mangled-name='snd_soc_dapm_disable_pin' filepath='sound/soc/soc-dapm.c' line='4630' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_disable_pin'>
-        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4630' column='1'/>
-        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4631' column='1'/>
+      <function-decl name='snd_soc_dapm_disable_pin' mangled-name='snd_soc_dapm_disable_pin' filepath='sound/soc/soc-dapm.c' line='4628' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_disable_pin'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4628' column='1'/>
+        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4629' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='dapm_regulator_event' mangled-name='dapm_regulator_event' filepath='sound/soc/soc-dapm.c' line='1336' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dapm_regulator_event'>
