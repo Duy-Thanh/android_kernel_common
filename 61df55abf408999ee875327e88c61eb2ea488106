@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "63c21b9a_c4f144f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-06-21T11:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71ebbf42_5e9021bd",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 228
+      },
+      "revId": "61df55abf408999ee875327e88c61eb2ea488106",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0c1c3714_56b1d153",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -72,6 +96,30 @@
       "writtenOn": "2022-06-21T09:03:29Z",
       "side": 1,
       "message": "`inode`?",
+      "range": {
+        "startLine": 1835,
+        "startChar": 10,
+        "endLine": 1835,
+        "endChar": 15
+      },
+      "revId": "61df55abf408999ee875327e88c61eb2ea488106",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08e9164_0a0ee46a",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1835,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-06-21T11:47:24Z",
+      "side": 1,
+      "message": "Yes, thanks",
+      "parentUuid": "498740f0_5c546608",
       "range": {
         "startLine": 1835,
         "startChar": 10,
