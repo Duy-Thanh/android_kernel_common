@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0e7709e_0572dec1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-21T17:37:44Z",
+      "side": 1,
+      "message": "Please abandon this change and cherry-pick the version from `androi12-5.10` and make sure the Change-Id matches.",
+      "revId": "2abd3844dc53584c1aca0f5be2e61b85ca7fbac7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
