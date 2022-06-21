@@ -104,6 +104,24 @@
       "parentUuid": "851966df_4a2ede6a",
       "revId": "7f64d4054ee2d201239125486752ebacb86d703f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88e1431d_787fe4e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-21T09:00:13Z",
+      "side": 1,
+      "message": "that information should be gathered in userspace, and not done within the kernel itself.  Doing it within the kernel is much more difficult.",
+      "parentUuid": "13a1aa12_11a65880",
+      "revId": "7f64d4054ee2d201239125486752ebacb86d703f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
