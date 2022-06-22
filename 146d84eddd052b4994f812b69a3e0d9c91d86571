@@ -16,6 +16,23 @@
       "message": "why a restricted hook?  Please document why that is needed.",
       "revId": "146d84eddd052b4994f812b69a3e0d9c91d86571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "020f09b2_7c46968d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T20:07:36Z",
+      "side": 1,
+      "message": "Please cherry-pick the android12-5.10 version so the Change-Id matches.",
+      "revId": "146d84eddd052b4994f812b69a3e0d9c91d86571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
