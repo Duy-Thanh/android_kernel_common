@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b551ff72_4e6d395a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-06-22T08:48:29Z",
+      "side": 1,
+      "message": "Please can you cherry-pick this to android13-5.15 as well? It\u0027s easier if you do it, as then I can give you the CR",
+      "revId": "f4fb0a5ce8f8579e19fc63272b71ffaf363138f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10774e17_02c04710",
