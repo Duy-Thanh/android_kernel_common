@@ -9,8 +9,7 @@
  * Following tracepoints are not exported in tracefs and provide a
  * mechanism for vendor modules to hook and extend functionality
  */
-/* struct cgroup_taskset */
-#include <../kernel/cgroup/cgroup-internal.h>
+struct cgroup_taskset;
 /* struct cgroup_subsys_state */
 #include <linux/cgroup-defs.h>
 /* struct em_perf_domain */

@@ -7,8 +7,7 @@
 #define _TRACE_HOOK_CGROUP_H
 #include <trace/hooks/vendor_hooks.h>
 
-/* struct cgroup_taskset */
-#include <../kernel/cgroup/cgroup-internal.h>
+struct cgroup_taskset;
 /* struct cgroup_subsys */
 #include <linux/cgroup-defs.h>
 /* struct task_struct */
