@@ -16,6 +16,23 @@
       "message": "please help review this commit thanks!",
       "revId": "86c4238c7cf959b647189d5408696f0dc203520c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dfd1f60_05d046a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T20:16:58Z",
+      "side": 1,
+      "message": "Please cherry-pick the android12-5.10 version so the Change-Id matches (aosp/1730192)",
+      "revId": "86c4238c7cf959b647189d5408696f0dc203520c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
