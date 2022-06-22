@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8fc56c9_dffbb6b6",
+        "filename": "android/abi_gki_aarch64_transsion",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-22T16:04:26Z",
+      "side": 1,
+      "message": "please do not mess with random scheduler changes like this.  There is a way to modify the needed scheduler functionality without these symbols.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 27
+      },
+      "revId": "ec308f566aed06a3c7f5c8d3749436649e36e534",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
