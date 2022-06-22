@@ -46,6 +46,30 @@
       },
       "revId": "f4fb0a5ce8f8579e19fc63272b71ffaf363138f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "430fe0ec_166222b5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-06-22T08:47:17Z",
+      "side": 1,
+      "message": "It generates the BUG if the condition is *true* though, which isn\u0027t what David was asking (although I\u0027m not sure why the condition being false is interesting).",
+      "parentUuid": "501b40ac_a54c1cd0",
+      "range": {
+        "startLine": 327,
+        "startChar": 2,
+        "endLine": 327,
+        "endChar": 9
+      },
+      "revId": "f4fb0a5ce8f8579e19fc63272b71ffaf363138f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
