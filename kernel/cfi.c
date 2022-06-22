@@ -46,12 +46,15 @@ struct shadow_range {
 #define SHADOW_ORDER	2
 #define SHADOW_PAGES	(1 << SHADOW_ORDER)
 #define SHADOW_SIZE \
-	((SHADOW_PAGES * PAGE_SIZE - sizeof(struct shadow_range)) / sizeof(u16))
+	((SHADOW_PAGES * PAGE_SIZE - sizeof(struct shadow_range) - sizeof(struct rcu_head)) / \
+	  sizeof(u16))
 #define SHADOW_INVALID	0xFFFF
 
 struct cfi_shadow {
 	/* Page range covered by the shadow */
 	struct shadow_range r;
+	/* rcu to free old cfi_shadow asynchronously */
+	struct rcu_head rcu;
 	/* Page offsets to __cfi_check functions in modules */
 	u16 shadow[SHADOW_SIZE];
 };
@@ -181,6 +184,13 @@ static void remove_module_from_shadow(struct cfi_shadow *s, struct module *mod)
 	}
 }
 
+static void _cfi_shadow_free_rcu(struct rcu_head *rcu)
+{
+	struct cfi_shadow *old = container_of(rcu, struct cfi_shadow, rcu);
+
+	free_pages((unsigned long)old, SHADOW_ORDER);
+}
+
 typedef void (*update_shadow_fn)(struct cfi_shadow *, struct module *);
 
 static void update_shadow(struct module *mod, unsigned long min_addr,
@@ -204,11 +214,10 @@ static void update_shadow(struct module *mod, unsigned long min_addr,
 	rcu_assign_pointer(cfi_shadow, next);
 
 	mutex_unlock(&shadow_update_lock);
-	synchronize_rcu();
 
 	if (prev) {
 		set_memory_rw((unsigned long)prev, SHADOW_PAGES);
-		free_pages((unsigned long)prev, SHADOW_ORDER);
+		call_rcu(&prev->rcu, _cfi_shadow_free_rcu);
 	}
 }
 
