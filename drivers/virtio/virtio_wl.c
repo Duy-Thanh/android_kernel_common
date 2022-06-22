@@ -63,10 +63,10 @@
 
 #include <uapi/linux/dma-buf.h>
 
-#ifdef CONFIG_DRM_VIRTIO_GPU
+//#ifdef CONFIG_DRM_VIRTIO_GPU
 #define SEND_VIRTGPU_RESOURCES
 #include <linux/sync_file.h>
-#endif
+//#endif
 
 #define VFD_ILLEGAL_SIGN_BIT 0x80000000
 #define VFD_HOST_VFD_ID_BIT 0x40000000
