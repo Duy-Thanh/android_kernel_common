@@ -293,7 +293,7 @@ out:
 	return f;
 }
 
-void cfi_slowpath_handler(uint64_t id, void *ptr, void *diag)
+void inline void __nocfi _run_cfi_check(uint64_t id, void *ptr, void *diag)
 {
 	cfi_check_fn check = find_cfi_check(ptr);
 
@@ -301,6 +301,15 @@ void cfi_slowpath_handler(uint64_t id, void *ptr, void *diag)
 		check(id, ptr, diag);
 	else /* Don't allow unchecked modules */
 		handle_cfi_failure(ptr);
+}
+
+void cfi_slowpath_handler(uint64_t id, void *ptr, void *diag)
+{
+	/*
+	 * run cfi checking without cfi sanitize to avoid calling
+	 * cfi handler recursively.
+	 */
+	_run_cfi_check(id, ptr, diag);
 }
 EXPORT_SYMBOL_GPL(cfi_slowpath_handler);
 #endif /* CONFIG_MODULES */
