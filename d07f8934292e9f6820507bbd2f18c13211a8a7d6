@@ -16,6 +16,23 @@
       "message": "respin on b/236798015",
       "revId": "d07f8934292e9f6820507bbd2f18c13211a8a7d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c8eccf_cdd22c69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-06-22T13:22:19Z",
+      "side": 1,
+      "message": "Given that kmemleak isn\u0027t enabled in gki_defconfig (CONFIG_DEBUG_KMEMLEAK\u003dn) does this change really justify a respin?",
+      "revId": "d07f8934292e9f6820507bbd2f18c13211a8a7d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
