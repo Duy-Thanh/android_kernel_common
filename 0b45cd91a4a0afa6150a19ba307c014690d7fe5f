@@ -45,6 +45,52 @@
       },
       "revId": "0b45cd91a4a0afa6150a19ba307c014690d7fe5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c59e1a_5d13394f",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-06-22T20:54:44Z",
+      "side": 1,
+      "message": "The new behavior should be controlled by an argument to the dm target rather than be made unconditional, unless the new behavior is always better.",
+      "range": {
+        "startLine": 645,
+        "startChar": 0,
+        "endLine": 646,
+        "endChar": 32
+      },
+      "revId": "0b45cd91a4a0afa6150a19ba307c014690d7fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "756ac808_858039fc",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-06-22T20:54:44Z",
+      "side": 1,
+      "message": "`crypto_alloc_ahash(v-\u003ealg_name, 0, CRYPTO_ALG_ASYNC)` will allocate a synchronous transform.  (It means \"Give me a transform where the ASYNC flag is 0\".)",
+      "range": {
+        "startLine": 1153,
+        "startChar": 1,
+        "endLine": 1153,
+        "endChar": 34
+      },
+      "revId": "0b45cd91a4a0afa6150a19ba307c014690d7fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
