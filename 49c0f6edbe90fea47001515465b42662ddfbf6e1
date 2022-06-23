@@ -16,6 +16,23 @@
       "message": "Matthias/Steve, Please have a look at this LKL patch (Linux Kernel Library - fuzzing tool). Should provide some additional test coverage for android-mainline.\n\nTheir approach looks good to me -- minimal impact on our kernel source. Tool is isolated to arch/lkl and tools/lkl directories with some new build.configs and a couple of fixes for their ARCH_LKL builds.\n\nReferences: go/lkl, https://g3doc.corp.google.com/company/teams/asa/areas/protect/redteam/lkl/g3doc/overview.md?cl\u003dhead",
       "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708df71f_b88f2153",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-23T10:17:22Z",
+      "side": 1,
+      "message": "please submit upstream first.",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
