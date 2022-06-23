@@ -131,6 +131,12 @@ DECLARE_HOOK(android_vh_add_mapped_mul_op_lrulist,
 DECLARE_HOOK(android_vh_dec_mapped_mul_op_lrulist,
 	TP_PROTO(struct page *page, enum lru_list lru),
 	TP_ARGS(page, lru));
+DECLARE_HOOK(android_vh_page_should_be_protected,
+	TP_PROTO(struct page *page, bool *should_protect),
+	TP_ARGS(page, should_protect));
+DECLARE_HOOK(android_vh_mapped_page_try_sorthead,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
 DECLARE_HOOK(android_vh_cma_drain_all_pages_bypass,
 	TP_PROTO(unsigned int migratetype, bool *bypass),
 	TP_ARGS(migratetype, bypass));
