@@ -22,6 +22,30 @@
       },
       "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46633dd1_4f6dbfa6",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-06-23T19:29:58Z",
+      "side": 1,
+      "message": "Oh, thanks for sharing. But here it\u0027s becoming complicated because nodeid \u003d\u003d 0 is the valid case, so I don\u0027t want to do something like this:\n```\n(fii-\u003ebacking_inode !\u003d 0 \u0026\u0026 fii-\u003ebacking_inode \u003d\u003d fi-\u003ebacking_inode) \u0026\u0026\n    (fii-\u003enodeid !\u003d 0 \u0026\u0026 fii-\u003enodeid \u003d\u003d fi-\u003enodeid)\n```\n\nWhat do you think about this one? With this approach we will cover case you mentioned above, but only if nodeid !\u003d 0:\n\n```\n#ifdef CONFIG_FUSE_BPF\n\tif (fii-\u003ebacking_inode) {\n\t\treturn fii-\u003ebacking_inode \u003d\u003d fi-\u003ebacking_inode \u0026\u0026\n\t\t    (fii-\u003enodeid !\u003d 0 \u0026\u0026 fii-\u003enodeid \u003d\u003d fi-\u003enodeid);\n\t}\n#endif\n        return fii-\u003enodeid \u003d\u003d fi-\u003enodeid;\n```\n\nDo you have any better options?",
+      "parentUuid": "6f82b264_27413ef3",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
