@@ -33,6 +33,24 @@
       "message": "Please cherry-pick the android12-5.10 version so the Change-Id matches (aosp/1730192)",
       "revId": "86c4238c7cf959b647189d5408696f0dc203520c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fcdd9c6_add16bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-06-23T02:10:03Z",
+      "side": 1,
+      "message": "Dear Todd,\n    In android12-5.10, CONFIG_SCHEDSTATS is added by google.If cherry-pick that commit, the config need to be added by google again.Please help makesure if still cherry-pick the commit in android12-5.10.Thanks!",
+      "parentUuid": "8dfd1f60_05d046a9",
+      "revId": "86c4238c7cf959b647189d5408696f0dc203520c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
