@@ -74,6 +74,75 @@
       },
       "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c5c554_a31d04d5",
+        "filename": "arch/lkl/kernel/console.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-23T10:41:51Z",
+      "side": 1,
+      "message": "spdx lines are required for every new file.\n\nAnd copyright lines are a Google requirement as well.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 23
+      },
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fec1bd_0d5d60dc",
+        "filename": "lib/raid6/algos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-23T10:41:51Z",
+      "side": 1,
+      "message": "always run checkpatch on your changes.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 29
+      },
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e1afce_b0b9f73b",
+        "filename": "lib/raid6/algos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-23T10:41:51Z",
+      "side": 1,
+      "message": "defined or enabled?",
+      "range": {
+        "startLine": 34,
+        "startChar": 51,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
