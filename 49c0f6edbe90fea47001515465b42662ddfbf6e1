@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fccbc48f_450a2866",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-06-23T12:13:54Z",
+      "side": 1,
+      "message": "strictly speaking that is not a merge (and it also should not be one)",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2723653c_9b343ab8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-06-23T12:13:54Z",
+      "side": 1,
+      "message": "that makes it at least 3 commits.",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01261c9a_fc3aee03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-06-23T12:13:54Z",
+      "side": 1,
+      "message": "why the need to squash this? by keeping the original series alive, this patch series can evolve easier on android-mainline and can be partially reduced once individual patches are taken upstream.",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "80eedf57_ddf990a8",
