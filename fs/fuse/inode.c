@@ -330,11 +330,13 @@ static int fuse_inode_eq(struct inode *inode, void *_nodeidp)
 		(struct fuse_inode_identifier *) _nodeidp;
 	struct fuse_inode *fi = get_fuse_inode(inode);
 
-	return fii->nodeid == fi->nodeid
 #ifdef CONFIG_FUSE_BPF
-		&& fii->backing_inode == fi->backing_inode
+	if (fii->backing_inode) {
+		return fii->backing_inode == fi->backing_inode;
+	}
 #endif
-		;
+
+	return fii->nodeid == fi->nodeid;
 }
 
 static int fuse_inode_set(struct inode *inode, void *_nodeidp)
