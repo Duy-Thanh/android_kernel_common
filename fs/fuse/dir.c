@@ -531,6 +531,7 @@ int fuse_lookup_name(struct super_block *sb, u64 nodeid, const struct qstr *name
 		/* TODO Do we need the same code in revalidate */
 		struct file *backing_file;
 		struct inode *backing_inode;
+		struct fuse_inode *fi;
 
 		err = -ENOENT;
 		if (!entry)
@@ -546,6 +547,8 @@ int fuse_lookup_name(struct super_block *sb, u64 nodeid, const struct qstr *name
 
 		backing_inode = backing_file->f_inode;
 		*inode = fuse_iget_backing(sb, backing_inode);
+		fi = get_fuse_inode(*inode);
+		fi->nodeid = outarg->nodeid;
 		if (!*inode)
 			goto bpf_arg_out;
 

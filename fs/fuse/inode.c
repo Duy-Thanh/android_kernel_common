@@ -330,11 +330,19 @@ static int fuse_inode_eq(struct inode *inode, void *_nodeidp)
 		(struct fuse_inode_identifier *) _nodeidp;
 	struct fuse_inode *fi = get_fuse_inode(inode);
 
-	return fii->nodeid == fi->nodeid
+	return fii->nodeid == fi->nodeid;
+}
+
+static int fuse_backing_inode_eq(struct inode *inode, void *_nodeidp)
+{
+	struct fuse_inode_identifier *fii =
+		(struct fuse_inode_identifier *) _nodeidp;
+	struct fuse_inode *fi = get_fuse_inode(inode);
 #ifdef CONFIG_FUSE_BPF
-		&& fii->backing_inode == fi->backing_inode
+	return fii->backing_inode == fi->backing_inode;
 #endif
-		;
+
+	return 0;
 }
 
 static int fuse_inode_set(struct inode *inode, void *_nodeidp)
@@ -365,7 +373,7 @@ struct inode *fuse_iget_backing(struct super_block *sb,
 	struct fuse_attr attr;
 
 	fuse_fill_attr_from_inode(&attr, backing_inode);
-	inode = iget5_locked(sb, (unsigned long) backing_inode, fuse_inode_eq,
+	inode = iget5_locked(sb, (unsigned long) backing_inode, fuse_backing_inode_eq,
 			     fuse_inode_set, &fii);
 	if (!inode)
 		return NULL;
