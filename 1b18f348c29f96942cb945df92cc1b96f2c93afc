@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c698e9f5_bc5ddac2",
+        "filename": "mm/rmap.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-23T23:48:57Z",
+      "side": 1,
+      "message": "Don\u0027t you need `referenced` to be passed here to make the decision?",
+      "range": {
+        "startLine": 822,
+        "startChar": 42,
+        "endLine": 822,
+        "endChar": 51
+      },
+      "revId": "1b18f348c29f96942cb945df92cc1b96f2c93afc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
