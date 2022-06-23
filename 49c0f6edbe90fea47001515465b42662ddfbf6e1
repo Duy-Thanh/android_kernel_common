@@ -51,6 +51,29 @@
       "parentUuid": "708df71f_b88f2153",
       "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81fa5028_5e8af7af",
+        "filename": "arch/lkl/drivers/pci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-23T10:27:46Z",
+      "side": 1,
+      "message": "no copyright information?\n\nAnd this is not a pci driver, it\u0027s a platform driver for a pci host controller, right?  Please document it as such.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
