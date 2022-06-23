@@ -12,6 +12,9 @@
 #include <linux/memcontrol.h>
 #include <linux/highmem.h>
 
+extern void android_vh_update_page_mapcount(struct page *page, bool inc_size,
+					bool compound, bool *ret, bool *success);
+
 /*
  * The anon_vma heads a list of private "related" vmas, to scan if
  * an anonymous page pointing to this anon_vma needs to be unmapped:
@@ -194,6 +197,11 @@ void hugepage_add_new_anon_rmap(struct page *, struct vm_area_struct *,
 
 static inline void page_dup_rmap(struct page *page, bool compound)
 {
+	bool success = false;
+
+	android_vh_update_page_mapcount(page, true, compound, NULL, &success);
+	if (success)
+		return;
 	atomic_inc(compound ? compound_mapcount_ptr(page) : &page->_mapcount);
 }
 
