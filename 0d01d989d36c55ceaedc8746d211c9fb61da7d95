@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f82b264_27413ef3",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-06-23T19:15:29Z",
+      "side": 1,
+      "message": "I think we still want this - imagine we have an uncompressed zip file and we are using fuse to display its contents. Then each inode will have the same backing inode, but we will use a nodeid to distinguish them",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
