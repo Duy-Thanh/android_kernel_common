@@ -51,6 +51,24 @@
       "parentUuid": "8dfd1f60_05d046a9",
       "revId": "86c4238c7cf959b647189d5408696f0dc203520c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b89cb02a_40da39b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-23T18:19:39Z",
+      "side": 1,
+      "message": "This patch is exactly the same as aosp/1730192 plus aosp/1721950 from android12-5.10, so please cherry-pick both of them here so the Change-Ids match. I don\u0027t understand what you mean by \"the config need to be added by google again\", CONFIG_SCHEDSTATS is already defined in android13-5.15. There is no reason you can\u0027t cherry-pick those two patches.",
+      "parentUuid": "2fcdd9c6_add16bc1",
+      "revId": "86c4238c7cf959b647189d5408696f0dc203520c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
