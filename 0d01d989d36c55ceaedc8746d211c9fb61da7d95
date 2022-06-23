@@ -94,6 +94,30 @@
       },
       "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b949f797_953fbbbc",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-06-23T20:50:50Z",
+      "side": 1,
+      "message": "```\nI\u0027m not entirely happy with this because *this* code is correct, so changing it in this way is breaking it to avoid fixing something else.\n```\n\nYes, this is partially true.\n\nThis code is correct, but not flexible enough that\u0027s why we need to have 3 ways to find an inode:\n\n1. Find by nodeid\n2. Find by backing_inode\n3. Find by both nodeid and backing_inode\n\nThe third options isn\u0027t always correct because sometimes we may have backing_inode but don\u0027t have nodeid, so we wouldn\u0027t be able to use 3 option.\n\nIn this CL I\u0027m introducing 1 and 2 instead of 3 that we have but not actually use (please take a look on updated CL).\n\nSo basically we have 2 totally separate problems:\n\n1. We can\u0027t use nodeid !\u003d 0 for inodes with backing_inode (critical -- affecting current scenarios and blocking future work) -- can be easily fixed\n2. We aren\u0027t covering case where backing_inode is the same but nodeid is different (normal -- useful for the future cases) -- will take us much more time.\n\nSeams like correctly fixing critical problem firstly makes much more sense. So I can introduce test which check that nodeid is is can be not 0 with backing_inode.\n\nBut yes, I think it would be great if you can introduce support of one backing_inode for different nodeids at the same time.\n\nWhat do you think about it?",
+      "parentUuid": "759b8b9d_fd998fbd",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
