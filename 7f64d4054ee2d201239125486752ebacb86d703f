@@ -122,6 +122,24 @@
       "parentUuid": "13a1aa12_11a65880",
       "revId": "7f64d4054ee2d201239125486752ebacb86d703f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ea40918_87ac7d94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-06-23T03:07:18Z",
+      "side": 1,
+      "message": "We only use it to gather the information that can\u0027t be gathered in userspace, such as some work request come from driver.",
+      "parentUuid": "88e1431d_787fe4e5",
+      "revId": "7f64d4054ee2d201239125486752ebacb86d703f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
