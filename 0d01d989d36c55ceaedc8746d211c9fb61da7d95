@@ -70,6 +70,30 @@
       },
       "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "759b8b9d_fd998fbd",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-06-23T20:01:50Z",
+      "side": 1,
+      "message": "Yes, we will need to add the nodeid to fuse_iget_backing\n\nI\u0027m not entirely happy with this because *this* code is correct, so changing it in this way is breaking it to avoid fixing something else.\n\nLet\u0027s have a go at fixing this properly, including adding test cases. I will do it if you prefer?",
+      "parentUuid": "7e9ce2d6_12f020f0",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
