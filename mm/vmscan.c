@@ -1468,7 +1468,15 @@ static enum folio_references folio_check_references(struct folio *folio,
 {
 	int referenced_ptes, referenced_folio;
 	unsigned long vm_flags;
+<<<<<<< HEAD   (7579b2 ANDROID: GKI: Add symbols to symbol list for oplus)
 	int ret = 0;
+=======
+	bool should_protect = false;
+
+	trace_android_vh_page_should_be_protected(page, &should_protect);
+	if (unlikely(should_protect))
+		return PAGEREF_ACTIVATE;
+>>>>>>> CHANGE (ce8b55 ANDROID: vendor_hooks: protect multi-mapcount pages in kerne)
 
 	trace_android_vh_check_folio_look_around_ref(folio, &ret);
 	if (ret)
@@ -2620,6 +2628,11 @@ static void shrink_active_list(unsigned long nr_to_scan,
 	unsigned nr_rotated = 0;
 	int file = is_file_lru(lru);
 	struct pglist_data *pgdat = lruvec_pgdat(lruvec);
+<<<<<<< HEAD   (7579b2 ANDROID: GKI: Add symbols to symbol list for oplus)
+=======
+	bool bypass = false;
+	bool should_protect = false;
+>>>>>>> CHANGE (ce8b55 ANDROID: vendor_hooks: protect multi-mapcount pages in kerne)
 
 	lru_add_drain();
 
@@ -2656,9 +2669,25 @@ static void shrink_active_list(unsigned long nr_to_scan,
 			}
 		}
 
+<<<<<<< HEAD   (7579b2 ANDROID: GKI: Add symbols to symbol list for oplus)
 		/* Referenced or rmap lock contention: rotate */
 		if (folio_referenced(folio, 0, sc->target_mem_cgroup,
 				     &vm_flags) != 0) {
+=======
+		trace_android_vh_page_should_be_protected(page, &should_protect);
+		if (unlikely(should_protect)) {
+			nr_rotated += thp_nr_pages(page);
+			list_add(&page->lru, &l_active);
+			continue;
+		}
+
+		trace_android_vh_page_referenced_check_bypass(page, nr_to_scan, lru, &bypass);
+		if (bypass)
+			goto skip_page_referenced;
+
+		if (page_referenced(page, 0, sc->target_mem_cgroup,
+				    &vm_flags)) {
+>>>>>>> CHANGE (ce8b55 ANDROID: vendor_hooks: protect multi-mapcount pages in kerne)
 			/*
 			 * Identify referenced, file-backed active folios and
 			 * give them one more trip around the active list. So

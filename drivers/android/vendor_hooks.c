@@ -293,6 +293,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_target_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_new_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);
+<<<<<<< HEAD   (7579b2 ANDROID: GKI: Add symbols to symbol list for oplus)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_register);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_unregister);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_thermal_zone_device);
@@ -329,3 +330,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scan_abort_check_wmarks);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_mapcount_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_traversal_lruvec);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_page_mapcount);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_page_to_lrulist);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_del_page_from_lrulist);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_should_be_protected);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mark_page_accessed);
+>>>>>>> CHANGE (ce8b55 ANDROID: vendor_hooks: protect multi-mapcount pages in kerne)
