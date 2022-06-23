@@ -46,6 +46,30 @@
       },
       "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e9ce2d6_12f020f0",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-06-23T19:51:42Z",
+      "side": 1,
+      "message": "But seams like case you mentioned isn\u0027t supported by https://cs.android.com/android/kernel/superproject/+/common-android13-5.10:common/fs/fuse/inode.c;l\u003d356-388 anyway.\n\nSo basically we currently have 2 different ways to get the inode:\n\n1. Based on their nodeid: https://cs.android.com/android/kernel/superproject/+/common-android13-5.10:common/fs/fuse/inode.c;l\u003d390-446\n2. Based on their backing_inode: https://cs.android.com/android/kernel/superproject/+/common-android13-5.10:common/fs/fuse/inode.c;l\u003d356-388 anyway.\n\nSo, for case you mentioned above we just need to use the first one or just introduce the third option which will consider both. \n\nBut I think it should be out of the context for this change.",
+      "parentUuid": "46633dd1_4f6dbfa6",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
