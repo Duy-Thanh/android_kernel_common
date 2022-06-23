@@ -12,6 +12,23 @@
 #include <linux/memcontrol.h>
 #include <linux/highmem.h>
 
+#ifndef TRACE_INCLUDE_PATH
+#define TMP_UNDEF_TRACE_INCLUDE_PATH
+#else
+#define TMP_TRACE_INCLUDE_PATH TRACE_INCLUDE_PATH
+#endif
+#include <trace/hooks/mm.h>
+
+#ifdef TMP_UNDEF_TRACE_INCLUDE_PATH
+#undef TRACE_INCLUDE_PATH
+#undef TMP_UNDEF_TRACE_INCLUDE_PATH
+#endif
+
+#ifdef TMP_TRACE_INCLUDE_PATH
+#undef TRACE_INCLUDE_PATH
+#define TRACE_INCLUDE_PATH TMP_TRACE_INCLUDE_PATH
+#endif
+
 /*
  * The anon_vma heads a list of private "related" vmas, to scan if
  * an anonymous page pointing to this anon_vma needs to be unmapped:
@@ -194,6 +211,13 @@ void hugepage_add_new_anon_rmap(struct page *, struct vm_area_struct *,
 
 static inline void page_dup_rmap(struct page *page, bool compound)
 {
+	bool ret, success = false;
+
+	if (!compound) {
+		trace_android_vh_update_page_mapcount(page, true, &ret, &success);
+		if (likely(success))
+			return;
+	}
 	atomic_inc(compound ? compound_mapcount_ptr(page) : &page->_mapcount);
 }
 
