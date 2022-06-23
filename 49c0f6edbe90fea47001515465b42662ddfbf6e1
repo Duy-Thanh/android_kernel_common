@@ -33,6 +33,24 @@
       "message": "please submit upstream first.",
       "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2418f68_8aa0e69a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-23T10:22:45Z",
+      "side": 1,
+      "message": "one huge reason to get this upstream first, is now we are responsible for all merge issues and abi changes that happen in mainline.  That will slow down the merges from upstream greatly.  If upstream has rejected this submission, that is also good to know as we need to understand how you are going to resolve those reported issues and in what timeframe to expect them to be handled.",
+      "parentUuid": "708df71f_b88f2153",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
