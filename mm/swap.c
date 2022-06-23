@@ -462,9 +462,16 @@ void folio_mark_accessed(struct folio *folio)
 		return;
 	}
 
+<<<<<<< HEAD   (dff0b2 FROMGIT: scsi: ufs: core: changing the status to check infli)
 	if (!folio_test_referenced(folio)) {
 		folio_set_referenced(folio);
 	} else if (folio_test_unevictable(folio)) {
+=======
+	trace_android_vh_mark_page_accessed(page);
+	if (!PageReferenced(page)) {
+		SetPageReferenced(page);
+	} else if (PageUnevictable(page)) {
+>>>>>>> CHANGE (ce8b55 ANDROID: vendor_hooks: protect multi-mapcount pages in kerne)
 		/*
 		 * Unevictable pages are on the "LRU_UNEVICTABLE" list. But,
 		 * this list is never rotated or maintained, so marking an
