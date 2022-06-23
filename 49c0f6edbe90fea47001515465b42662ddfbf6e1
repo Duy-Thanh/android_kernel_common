@@ -55,6 +55,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "743de951_3b0e0bc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-23T10:42:05Z",
+      "side": 1,
+      "message": "also the \"seed\" files are binary, that\u0027s not ok for kernel files.",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81fa5028_5e8af7af",
         "filename": "arch/lkl/drivers/pci.c",
         "patchSetId": 1
