@@ -51,6 +51,24 @@
       "parentUuid": "46c8eccf_cdd22c69",
       "revId": "d07f8934292e9f6820507bbd2f18c13211a8a7d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0376485_7be322f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-06-23T07:22:14Z",
+      "side": 1,
+      "message": "I agree with Will that this patch doesn\u0027t require a GKI respin -- the kernel Image will not change. But it probably makes sense to merge the patch anyway so that downstream users can enable kmemleak for testing purposes.",
+      "parentUuid": "83a0576e_e626739a",
+      "revId": "d07f8934292e9f6820507bbd2f18c13211a8a7d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
