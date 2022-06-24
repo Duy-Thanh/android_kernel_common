@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4119e90_35ad3aef",
+        "filename": "include/trace/hooks/audio_usboffload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-24T09:20:02Z",
+      "side": 1,
+      "message": "can not be a void *.  you will have ABI issues if you try to access a private pointer to a structure that we do not guarantee will stay the same for the next 5+ years.",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 19
+      },
+      "revId": "77695f39bff3f1499b26186d9eba4c5bb1494dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
