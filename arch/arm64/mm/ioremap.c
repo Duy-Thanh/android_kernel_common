@@ -16,7 +16,11 @@
 #include <linux/vmalloc.h>
 #include <linux/slab.h>
 #include <linux/io.h>
+<<<<<<< HEAD   (980482 Merge 5.10.116 into android13-5.10-lts)
 #include <linux/arm-smccc.h>
+=======
+#include <linux/memblock.h>
+>>>>>>> BRANCH (7686a5 Linux 5.10.117)
 
 #include <asm/fixmap.h>
 #include <asm/tlbflush.h>
@@ -260,4 +264,12 @@ EXPORT_SYMBOL(ioremap_cache);
 void __init early_ioremap_init(void)
 {
 	early_ioremap_setup();
+}
+
+bool arch_memremap_can_ram_remap(resource_size_t offset, size_t size,
+				 unsigned long flags)
+{
+	unsigned long pfn = PHYS_PFN(offset);
+
+	return memblock_is_map_memory(pfn);
 }
