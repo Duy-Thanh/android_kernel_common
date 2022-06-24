@@ -113,7 +113,13 @@ static inline void dma_direct_unmap_page(struct device *dev, dma_addr_t addr,
 	if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC))
 		dma_direct_sync_single_for_cpu(dev, addr, size, dir);
 
+<<<<<<< HEAD   (c35614 ANDROID: fix up gpio change in 5.10.111)
 	if (unlikely(is_swiotlb_buffer(dev, phys)))
 		swiotlb_tbl_unmap_single(dev, phys, size, dir, attrs);
+=======
+	if (unlikely(is_swiotlb_buffer(phys)))
+		swiotlb_tbl_unmap_single(dev, phys, size, size, dir,
+					 attrs | DMA_ATTR_SKIP_CPU_SYNC);
+>>>>>>> BRANCH (1052f9 Linux 5.10.112)
 }
 #endif /* _KERNEL_DMA_DIRECT_H */
