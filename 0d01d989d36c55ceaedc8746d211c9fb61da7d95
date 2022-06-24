@@ -118,6 +118,30 @@
       },
       "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9ea360c_b00c7408",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-06-24T19:13:47Z",
+      "side": 1,
+      "message": "Made more investigation and realised that existing implementation (in the current 5.10 at least) has even more problems. Described our current situation here https://docs.google.com/document/d/1qv_lPRngdmCsjIji5RwgnmphlL13gIIU7vmdQjWZWgA/edit# and update CL completely. Can you please take a look?",
+      "parentUuid": "b949f797_953fbbbc",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
