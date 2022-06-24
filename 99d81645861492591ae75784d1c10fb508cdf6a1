@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35e64899_bbb27dfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-24T06:57:36Z",
+      "side": 1,
+      "message": "the .xml file update seems too big, did you create it with `LTO\u003dfull`?",
+      "revId": "99d81645861492591ae75784d1c10fb508cdf6a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
