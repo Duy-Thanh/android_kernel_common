@@ -46,6 +46,30 @@
       },
       "revId": "77695f39bff3f1499b26186d9eba4c5bb1494dcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c0c7b0_1abd7ea7",
+        "filename": "include/trace/hooks/audio_usboffload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-24T09:46:52Z",
+      "side": 1,
+      "message": "Ick, no one noticed those, sorry.  If you change them now, will the ABI break?\n\nAnd yes, they should use real types, otherwise you will have problems.",
+      "parentUuid": "db61572c_a28cba2f",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 19
+      },
+      "revId": "77695f39bff3f1499b26186d9eba4c5bb1494dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
