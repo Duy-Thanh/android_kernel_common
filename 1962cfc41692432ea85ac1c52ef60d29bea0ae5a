@@ -16,6 +16,23 @@
       "message": "cherry-pick from android12-5.10 (aosp/1652167)\npelase help me review this change.\nThank you!",
       "revId": "1962cfc41692432ea85ac1c52ef60d29bea0ae5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34aaded3_133fcd8c",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-24T18:15:03Z",
+      "side": 1,
+      "message": "We can\u0027t change the existing hook since KMI is frozen, instead plese just add a new hook that is what you need. To avoid this for next year, please submit to android-mainline.",
+      "revId": "1962cfc41692432ea85ac1c52ef60d29bea0ae5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
