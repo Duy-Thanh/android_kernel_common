@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7defff4e_eb8e1d22",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2022-06-24T10:40:51Z",
+      "side": 1,
+      "message": "Is it safe to start working on `*inode` before checking if it\u0027s valid?\nWould it make sense to do this after the `if (!*inode)`?",
+      "range": {
+        "startLine": 550,
+        "startChar": 2,
+        "endLine": 551,
+        "endChar": 30
+      },
+      "revId": "0bac5c8cedafb432ed8db68adce67684838ef223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
