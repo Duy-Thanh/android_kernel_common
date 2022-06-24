@@ -16,6 +16,24 @@
       "message": "the .xml file update seems too big, did you create it with `LTO\u003dfull`?",
       "revId": "99d81645861492591ae75784d1c10fb508cdf6a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ea94ae0_cf9e58df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951293
+      },
+      "writtenOn": "2022-06-24T07:04:11Z",
+      "side": 1,
+      "message": "BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update --print-report\n\nI used this command to generate.There is no \"LTO\u003dfull\" as you mentioned.",
+      "parentUuid": "35e64899_bbb27dfe",
+      "revId": "99d81645861492591ae75784d1c10fb508cdf6a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
