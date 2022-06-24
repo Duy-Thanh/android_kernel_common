@@ -22,6 +22,30 @@
       },
       "revId": "77695f39bff3f1499b26186d9eba4c5bb1494dcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db61572c_a28cba2f",
+        "filename": "include/trace/hooks/audio_usboffload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1945880
+      },
+      "writtenOn": "2022-06-24T09:37:02Z",
+      "side": 1,
+      "message": "OK, I will change it.\nShould I change these vendor hooks too? (they are added by me in 2057408) \n\nDECLARE_HOOK(android_vh_audio_usb_offload_vendor_set,\n\tTP_PROTO(void *arg),\n\tTP_ARGS(arg));\n\nDECLARE_HOOK(android_vh_audio_usb_offload_ep_action,\n\tTP_PROTO(void *arg, bool action),\n\tTP_ARGS(arg, action));\n\nDECLARE_HOOK(android_vh_audio_usb_offload_synctype,\n\tTP_PROTO(void *arg, int attr, bool *need_ignore),\n\tTP_ARGS(arg, attr, need_ignore));",
+      "parentUuid": "e4119e90_35ad3aef",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 19
+      },
+      "revId": "77695f39bff3f1499b26186d9eba4c5bb1494dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
