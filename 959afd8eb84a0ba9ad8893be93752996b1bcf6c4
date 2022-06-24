@@ -16,6 +16,24 @@
       "message": "this change is cherrypicked from android12-5.10(aosp/1651833)",
       "revId": "959afd8eb84a0ba9ad8893be93752996b1bcf6c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee17bda7_83316ab2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-24T07:56:35Z",
+      "side": 1,
+      "message": "abi is already frozen, sorry.",
+      "parentUuid": "aadd1a5b_d71aaa74",
+      "revId": "959afd8eb84a0ba9ad8893be93752996b1bcf6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
