@@ -1850,7 +1850,7 @@ ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct fuse_bpf_args *arg
 	struct fuse_mount *fm = get_fuse_mount(inode);			\
 	io feo = {0};							\
 	struct fuse_bpf_args fa = {0}, fa_backup = {0};			\
-	bool locked;							\
+	bool locked = false;						\
 	ssize_t res;							\
 	void *err;							\
 	int i;								\

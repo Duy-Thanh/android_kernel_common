@@ -612,7 +612,7 @@ static struct dentry *fuse_lookup(struct inode *dir, struct dentry *entry,
 	struct inode *inode;
 	struct dentry *newent;
 	bool outarg_valid = true;
-	bool locked;
+	bool locked = false;
 
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
@@ -1337,7 +1337,7 @@ static int fuse_update_get_attr(struct inode *inode, struct file *file,
 {
 	struct fuse_inode *fi = get_fuse_inode(inode);
 	int err = 0;
-	bool sync;
+	bool sync = false;
 
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;

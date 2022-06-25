@@ -328,7 +328,7 @@ static int fuse_readdir_uncached(struct file *file, struct dir_context *ctx)
 	struct fuse_args_pages *ap = &ia.ap;
 	struct fuse_page_desc desc = { .length = PAGE_SIZE };
 	u64 attr_version = 0;
-	bool locked;
+	bool locked = false;
 
 	page = alloc_page(GFP_KERNEL);
 	if (!page)
@@ -573,7 +573,8 @@ int fuse_readdir(struct file *file, struct dir_context *ctx)
 
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
-	bool force_again, allow_force;
+	bool force_again = false;
+	bool allow_force = false;
 	bool is_continued = false;
 
 again:

@@ -1708,7 +1708,7 @@ EXPORT_SYMBOL_GPL(fuse_conn_destroy);
 static void fuse_kill_sb_anon(struct super_block *sb)
 {
 	struct fuse_mount *fm = get_fuse_mount_super(sb);
-	bool last;
+	bool last = false;
 
 	if (fm) {
 		last = fuse_mount_remove(fm);
@@ -1732,7 +1732,7 @@ MODULE_ALIAS_FS("fuse");
 static void fuse_kill_sb_blk(struct super_block *sb)
 {
 	struct fuse_mount *fm = get_fuse_mount_super(sb);
-	bool last;
+	bool last = false;
 
 	if (fm) {
 		last = fuse_mount_remove(fm);

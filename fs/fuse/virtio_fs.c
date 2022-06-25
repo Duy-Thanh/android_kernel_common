@@ -401,7 +401,7 @@ static int send_forget_request(struct virtio_fs_vq *fsvq,
 	struct scatterlist sg;
 	struct virtqueue *vq;
 	int ret = 0;
-	bool notify;
+	bool notify = false;
 	struct virtio_fs_forget_req *req = &forget->req;
 
 	spin_lock(&fsvq->lock);
@@ -799,7 +799,7 @@ static int virtio_fs_setup_dax(struct virtio_device *vdev, struct virtio_fs *fs)
 {
 	struct virtio_shm_region cache_reg;
 	struct dev_pagemap *pgmap;
-	bool have_cache;
+	bool have_cache = false;
 
 	if (!IS_ENABLED(CONFIG_FUSE_DAX))
 		return 0;
@@ -1135,7 +1135,7 @@ static int virtio_fs_enqueue_req(struct virtio_fs_vq *fsvq,
 	unsigned int total_sgs;
 	unsigned int i;
 	int ret;
-	bool notify;
+	bool notify = false;
 	struct fuse_pqueue *fpq;
 
 	/* Does the sglist fit on the stack? */
@@ -1392,7 +1392,7 @@ static void virtio_fs_conn_destroy(struct fuse_mount *fm)
 static void virtio_kill_sb(struct super_block *sb)
 {
 	struct fuse_mount *fm = get_fuse_mount_super(sb);
-	bool last;
+	bool last = false;
 
 	/* If mount failed, we can still be called without any fc */
 	if (fm) {
