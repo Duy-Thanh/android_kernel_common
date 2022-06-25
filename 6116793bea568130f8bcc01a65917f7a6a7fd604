@@ -16,6 +16,24 @@
       "message": "note the LTS commit that fixes the net issues here is this: https://git.kernel.org/stable/c/7fa8312879f7",
       "revId": "6116793bea568130f8bcc01a65917f7a6a7fd604",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "086c9436_4b95bdf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-25T09:19:45Z",
+      "side": 1,
+      "message": "Thanks, now added to the end of this series.",
+      "parentUuid": "7247aee8_e15e31f7",
+      "revId": "6116793bea568130f8bcc01a65917f7a6a7fd604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
