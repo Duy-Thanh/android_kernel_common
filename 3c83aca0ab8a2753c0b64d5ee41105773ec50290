@@ -22,6 +22,30 @@
       },
       "revId": "3c83aca0ab8a2753c0b64d5ee41105773ec50290",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca4b852_513ad283",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-06-25T10:03:27Z",
+      "side": 1,
+      "message": "We have deleted the indents as you suggested.",
+      "parentUuid": "8069680e_17c836c8",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "3c83aca0ab8a2753c0b64d5ee41105773ec50290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
