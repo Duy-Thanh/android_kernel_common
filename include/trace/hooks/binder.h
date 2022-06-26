@@ -45,6 +45,9 @@ DECLARE_HOOK(android_vh_binder_print_transaction_info,
 	TP_PROTO(struct seq_file *m, struct binder_proc *proc,
 		 const char *prefix, struct binder_transaction *t),
 	TP_ARGS(m, proc, prefix, t));
+DECLARE_HOOK(android_vh_binder_transaction_free,
+	TP_PROTO(struct binder_transaction *t),
+	TP_ARGS(t));
 DECLARE_HOOK(android_vh_binder_looper_state_registered,
 	TP_PROTO(struct binder_thread *thread, struct binder_proc *proc),
 	TP_ARGS(thread, proc));
