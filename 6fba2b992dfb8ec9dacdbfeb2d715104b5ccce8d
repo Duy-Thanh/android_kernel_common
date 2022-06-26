@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "910001c3_5ed6337f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-26T14:57:37Z",
+      "side": 1,
+      "message": "Not needed since you can free this in a handler for `trace_binder_txn_latency_free()` which is called `binder_txn_latency_free()` (called at line 1704).",
+      "revId": "6fba2b992dfb8ec9dacdbfeb2d715104b5ccce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
