@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c44ebf9_eb0b76e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876972
+      },
+      "writtenOn": "2022-06-27T02:27:58Z",
+      "side": 1,
+      "message": "cherrypick from android12-5.10 (aosp/1684568)",
+      "revId": "e7052ba0368fb6fea607bec19cb8a91e8990ac3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
