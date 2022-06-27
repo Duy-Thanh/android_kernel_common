@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4423b82d_074cc4d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-27T16:20:55Z",
+      "side": 1,
+      "message": "Please abandon this and cherry-pick the corresponding patch from android-mainline or android12-5.10 so the Change-Id matches. Do the same for all patches in this series.",
+      "revId": "c4b45b05901099ec5a8102a04c455118e7120d1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
