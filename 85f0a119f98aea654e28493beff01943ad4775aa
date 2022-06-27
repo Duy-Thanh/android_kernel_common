@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83320324_97316bde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1945880
+      },
+      "writtenOn": "2022-06-27T11:03:50Z",
+      "side": 1,
+      "message": "I have tested wav music playing / mp3 music playing / recording with non-offload headphones and voice call / voip / FM / wav music playing / mp3 music playing / recording with offload headphones.",
+      "parentUuid": "534ec1e3_25bd44c4",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "85f0a119f98aea654e28493beff01943ad4775aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aeed16d_ca8c173e",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-06-27T07:39:47Z",
       "side": 1,
       "message": "Why isn\u0027t any of the real code that needs the usb offload here submitted upstream yet?",
+      "revId": "85f0a119f98aea654e28493beff01943ad4775aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc588086_d0b134f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945880
+      },
+      "writtenOn": "2022-06-27T11:03:50Z",
+      "side": 1,
+      "message": "Our company\u0027s USB offload function needs the cooperation of our company\u0027s audio DSP and our USB module. Maybe, these hardware related codes are meaningless for the other vendors.\nFor one side, the audio DSP\u0027s code have not open source yet, only upstream audio USB offload codes takes no effect.\nFor another side, USB module tried to upstream their offload codes, but were rejected.\nOnly the audio USB offload codes takes no effect either.",
+      "parentUuid": "6aeed16d_ca8c173e",
       "revId": "85f0a119f98aea654e28493beff01943ad4775aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
