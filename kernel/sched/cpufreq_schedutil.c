@@ -145,7 +145,17 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 				policy->cpuinfo.max_freq : policy->cur;
 
 	util = map_util_perf(util);
+<<<<<<< HEAD   (601149 ANDROID: ABI: Update the tcpci symbols for pixel)
 	freq = map_util_freq(util, freq, max);
+=======
+	trace_android_vh_map_util_freq(util, freq, max, &next_freq);
+	trace_android_vh_map_util_freq_new(util, freq, max, &next_freq, policy,
+			&sg_policy->need_freq_update);
+	if (next_freq)
+		freq = next_freq;
+	else
+		freq = map_util_freq(util, freq, max);
+>>>>>>> CHANGE (455e0a ANDROID: sched: Add vendor hooks to compute new cpu freq.)
 
 	if (freq == sg_policy->cached_raw_freq && !sg_policy->need_freq_update)
 		return sg_policy->next_freq;

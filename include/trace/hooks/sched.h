@@ -209,6 +209,27 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sched_exec,
 	TP_PROTO(bool *cond),
 	TP_ARGS(cond), 1);
 
+<<<<<<< HEAD   (601149 ANDROID: ABI: Update the tcpci symbols for pixel)
+=======
+DECLARE_HOOK(android_vh_map_util_freq,
+	TP_PROTO(unsigned long util, unsigned long freq,
+		unsigned long cap, unsigned long *next_freq),
+	TP_ARGS(util, freq, cap, next_freq));
+
+struct cpufreq_policy;
+DECLARE_HOOK(android_vh_map_util_freq_new,
+	TP_PROTO(unsigned long util, unsigned long freq,
+		unsigned long cap, unsigned long *next_freq, struct cpufreq_policy *policy,
+		bool *need_freq_update),
+	TP_ARGS(util, freq, cap, next_freq, policy, need_freq_update));
+
+DECLARE_HOOK(android_vh_em_cpu_energy,
+	TP_PROTO(struct em_perf_domain *pd,
+		unsigned long max_util, unsigned long sum_util,
+		unsigned long *energy),
+	TP_ARGS(pd, max_util, sum_util, energy));
+
+>>>>>>> CHANGE (455e0a ANDROID: sched: Add vendor hooks to compute new cpu freq.)
 DECLARE_HOOK(android_vh_build_sched_domains,
 	TP_PROTO(bool has_asym),
 	TP_ARGS(has_asym));
