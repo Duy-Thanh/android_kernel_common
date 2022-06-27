@@ -94,6 +94,30 @@
       },
       "revId": "77695f39bff3f1499b26186d9eba4c5bb1494dcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61f8599f_06c5a3af",
+        "filename": "include/trace/hooks/audio_usboffload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1945880
+      },
+      "writtenOn": "2022-06-27T02:49:39Z",
+      "side": 1,
+      "message": "I have changed \"void *\" to \"struct snd_pcm_substream *\".\nI noticed that full types were replacing with declaration, such as change 2123612 and change 2122534. Therefore, I followed them.",
+      "parentUuid": "ecc8d1a8_ced07944",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 19
+      },
+      "revId": "77695f39bff3f1499b26186d9eba4c5bb1494dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
