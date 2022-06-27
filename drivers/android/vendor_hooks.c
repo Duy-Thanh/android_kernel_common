@@ -127,6 +127,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_enable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_can_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_online);
+<<<<<<< HEAD   (19648e ANDROID: fuse-bpf: Make fuse_test compile and pass)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_fork_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ttwu_cond);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_schedule_bug);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_exec);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_map_util_freq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_map_util_freq_new);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_em_cpu_energy);
+>>>>>>> CHANGE (455e0a ANDROID: sched: Add vendor hooks to compute new cpu freq.)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_oops_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_oops_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_size_check);
