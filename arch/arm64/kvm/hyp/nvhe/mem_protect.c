@@ -549,6 +549,28 @@ unlock:
 	return ret;
 }
 
+int host_stage2_wrprotect(u64 addr, u64 size)
+{
+	int err;
+
+	host_lock_component();
+	err = kvm_pgtable_stage2_wrprotect(&host_mmu.pgt, addr, size);
+	host_unlock_component();
+
+	return err;
+}
+
+int host_stage2_relax_perms(u64 addr, enum kvm_pgtable_prot prot)
+{
+	int err;
+
+	host_lock_component();
+	err = kvm_pgtable_stage2_relax_perms(&host_mmu.pgt, addr, prot);
+	host_unlock_component();
+
+	return err;
+}
+
 static void host_inject_abort(struct kvm_cpu_context *host_ctxt)
 {
 	u64 spsr = read_sysreg_el2(SYS_SPSR);
