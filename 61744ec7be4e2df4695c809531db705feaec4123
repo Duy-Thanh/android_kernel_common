@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d0f552_1d9ef748",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2022-06-27T21:39:18Z",
+      "side": 1,
+      "message": "This looks like the cleanest solution, we also use this in 5.10. LGTM.",
+      "revId": "61744ec7be4e2df4695c809531db705feaec4123",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
