@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b242395_b8393f6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "totally agree that this is not a merge. How about \"Adding LKL fuzzing support\", or something else if you have?",
+      "parentUuid": "fccbc48f_450a2866",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2723653c_9b343ab8",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7b10cab_08a1eb38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "I can definitely split this into 3 commits. There are some inter-dependencies but I think I can manage.",
+      "parentUuid": "2723653c_9b343ab8",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01261c9a_fc3aee03",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2022-06-23T12:13:54Z",
       "side": 1,
       "message": "why the need to squash this? by keeping the original series alive, this patch series can evolve easier on android-mainline and can be partially reduced once individual patches are taken upstream.",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b20375c0_92ede04d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "This is first time I make commits into kernel tree so not sure what\u0027s the best practice and would love to follow your advices. A couple reasons of squashing commits:\n1. When we originally took LKL from github project, we ingested the change as a big diff, so we *lost* the individual github LKL commits. I can surely recover that by redoing the merge, if that\u0027s preferred.\n\n2. Not including the individual github LKL commits, we already have 49 commits here after clean up -- I don\u0027t know if spamming kernel team with huge number of code reviews (\u003e100 if we consider using individual commits from LKL github project) is a good idea.\n\n3. Some of the files are changed back and forth (for example, we touched files outside of LKL subtree at the begining, and then reverted those changes as a cleanup effort). When squashing commits together, those files appear as not touched at all; but if we use individual commits, those will show up as changed by some individual commits -- Not sure if this will cause merge problems when we taking upstream linux mainline changes.\n\n4. Some fuzzers initially submitted with a large amount unnecessary test data which were later removed. There is no reason for them to show up in the history, so squashing changes will eliminate the traces of those files.\n\nAnyway, I\u0027m happy to take whatever recommendations from kernel team as long as it makes your work easy.",
+      "parentUuid": "01261c9a_fc3aee03",
       "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -123,6 +177,59 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f049af5_c3a6b741",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "These are handcrafted input seed input files for fuzzing. Usually they are either extracted from a crash dump, or created based on certain binary structure kernel code is using. I think the best I can do is add a README.txt file, and even make a shell script to generate those binary files -- but the content of the shell script is probably no better than hex text file. Do you have any recommendations?",
+      "parentUuid": "743de951_3b0e0bc8",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97ff7545_a6d36dba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "I really appreciate everyone here for the comments and feedbacks. I\u0027ve replied them and explain some details, so please take a look. I will also schedule a meeting going through some of the items so we have a better understanding of the context and are on same page for the solution.",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d70cbb80_c22109c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "I included you in a discussion thread for the background behind of this work. In short: The LKL maintainers have done some effort upstreaming this to linux mainline, but got rejected. One specific reason they received is that this code is doing the similar thing as usermode linux. I\u0027ve chatted with @tavip (who is one of the LKL maintainer and CC\u0027ed in this CR). There are attempt to merge this one with usermode Linux but not very successful because there are some difference on the purposes.\n\nBy upstreaming this to ACK, we are hoping to demonstrate its uniqueness (kernel fuzzing and unit testing) and make it accepted by Linux mainline when it adopted wider by public.\n\nThe maintenance burden you mentioned does exist:\n\nWe are trying our best to localize the changes to dedicated source directory, so merge conflict from upsteam linux shouldn\u0027t be a big concern (until to the point where LKL github project upstreaming request gets accepted, but we can coordinate that for a one time merge).\n\nThe ABI change happen in mainline can be a concern as LKL is implemented as a linux architecture. We definitely need clarify the ownership/responsibilities so that when things are broken RedTeam/LKL maintainer should step up and take a effort of fixing things. I\u0027m working on some document clarifying this and will share it shortly.",
+      "parentUuid": "f2418f68_8aa0e69a",
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81fa5028_5e8af7af",
         "filename": "arch/lkl/drivers/pci.c",
         "patchSetId": 1
@@ -134,6 +241,30 @@
       "writtenOn": "2022-06-23T10:27:46Z",
       "side": 1,
       "message": "no copyright information?\n\nAnd this is not a pci driver, it\u0027s a platform driver for a pci host controller, right?  Please document it as such.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94370004_41917137",
+        "filename": "arch/lkl/drivers/pci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "Sure, I will add documentation for this.",
+      "parentUuid": "81fa5028_5e8af7af",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -169,6 +300,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a157e686_e0e5b9d8",
+        "filename": "arch/lkl/kernel/console.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "I will fix that. Do we have a tool for this?",
+      "parentUuid": "d2c5c554_a31d04d5",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 23
+      },
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50fec1bd_0d5d60dc",
         "filename": "lib/raid6/algos.c",
         "patchSetId": 1
@@ -192,6 +347,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f820c17_e014238f",
+        "filename": "lib/raid6/algos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "I believe this change is something we are going to eliminate. The fix is already in our android12-5.10-lkl repo. I guess I forgot to cherry-pick it. I will make sure I do that, and then run checkpatch anyway for the rest of the changes.",
+      "parentUuid": "50fec1bd_0d5d60dc",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 29
+      },
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1e1afce_b0b9f73b",
         "filename": "lib/raid6/algos.c",
         "patchSetId": 1
@@ -203,6 +382,30 @@
       "writtenOn": "2022-06-23T10:41:51Z",
       "side": 1,
       "message": "defined or enabled?",
+      "range": {
+        "startLine": 34,
+        "startChar": 51,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d5bc1e0_255dd4ae",
+        "filename": "lib/raid6/algos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1137906
+      },
+      "writtenOn": "2022-06-27T20:38:51Z",
+      "side": 1,
+      "message": "again, this will go away once I take the cleanup change.",
+      "parentUuid": "d1e1afce_b0b9f73b",
       "range": {
         "startLine": 34,
         "startChar": 51,
