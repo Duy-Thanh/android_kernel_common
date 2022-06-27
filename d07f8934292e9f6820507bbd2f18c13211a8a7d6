@@ -69,6 +69,23 @@
       "parentUuid": "83a0576e_e626739a",
       "revId": "d07f8934292e9f6820507bbd2f18c13211a8a7d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2aa077e_53208bdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-06-27T04:14:56Z",
+      "side": 1,
+      "message": "Remove aosp/2134073 from respin bug b/236798015 for now",
+      "revId": "d07f8934292e9f6820507bbd2f18c13211a8a7d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
