@@ -324,6 +324,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "762b783b_3bbbbb84",
+        "filename": "arch/lkl/kernel/console.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-28T10:06:19Z",
+      "side": 1,
+      "message": "Not that I know of, they need to be set correctly, make sure you give the proper license and the proper copyright information based on the history of the files.",
+      "parentUuid": "a157e686_e0e5b9d8",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 23
+      },
+      "revId": "49c0f6edbe90fea47001515465b42662ddfbf6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50fec1bd_0d5d60dc",
         "filename": "lib/raid6/algos.c",
         "patchSetId": 1
