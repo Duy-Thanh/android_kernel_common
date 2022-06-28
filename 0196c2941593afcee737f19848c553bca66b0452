@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a467866f_f91adb00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-28T12:52:04Z",
+      "side": 1,
+      "message": ".xml file changes look too big for just 2 new symbols, did you do this with `LTO\u003dfull`?",
+      "revId": "0196c2941593afcee737f19848c553bca66b0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
