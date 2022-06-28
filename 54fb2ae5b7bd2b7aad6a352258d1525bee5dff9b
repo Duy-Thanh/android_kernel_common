@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a33032f_8eed1fd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-28T10:59:40Z",
+      "side": 1,
+      "message": "why area all of these needed in android-mainline at this point in time?\n\nWhy not get the needed functionality that all of these hooks are providing upstream?  What prevents that from happening today?",
+      "revId": "54fb2ae5b7bd2b7aad6a352258d1525bee5dff9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
