@@ -22,6 +22,30 @@
       },
       "revId": "9647e053bdcb7ea1bc61ea7b66162c76a9dad8f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97f19772_2652eb23",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-06-28T08:52:46Z",
+      "side": 1,
+      "message": "There are a few changes of these vendor hooks.",
+      "parentUuid": "0162bcc3_1c03937f",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 50
+      },
+      "revId": "9647e053bdcb7ea1bc61ea7b66162c76a9dad8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
