@@ -16,6 +16,91 @@
       "message": "Please comply with the contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "3df16cabac1a7c82c55f70acdadb72ee05ffa101",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ba502b8_fac47afb",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1388,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-28T15:50:28Z",
+      "side": 1,
+      "message": "all of the above could be in a hook handler",
+      "revId": "3df16cabac1a7c82c55f70acdadb72ee05ffa101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc0dc4c_bcbc5276",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1431,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-28T15:50:28Z",
+      "side": 1,
+      "message": "this block could be in a hook handler",
+      "revId": "3df16cabac1a7c82c55f70acdadb72ee05ffa101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a97c9899_d2653177",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-28T15:50:28Z",
+      "side": 1,
+      "message": "this initialization could be done in hook handler (along with lines 2141-2145)",
+      "revId": "3df16cabac1a7c82c55f70acdadb72ee05ffa101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1af601b7_1ce16e38",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2145,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-28T15:50:28Z",
+      "side": 1,
+      "message": "This could be implemented in a hook handler",
+      "revId": "3df16cabac1a7c82c55f70acdadb72ee05ffa101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c2d6eb2_7466c118",
+        "filename": "include/linux/irqchip/arm-gic-v3.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-28T15:50:28Z",
+      "side": 1,
+      "message": "With KMI freeze, we can\u0027t change this structure. But we could do something like:\n```\n   struct ext_gic_chip_data {\n      struct gic_chip_data;\n      ANDROID_VENDOR_DATA(1);\n   };\n```\nAnd obtain the ext_gic_chip_data by using container_of() where needed.\n\nThis might require a few hooks wherever the struct is initialized or freed (in a quick look, I don\u0027t see any cases where this is embedded in another struct which would make this difficult). We\u0027d also need to redefine the global `gic_data` to be an ext_gic_data and do something like `#define gic_data ext_gic_data.gic_data`",
+      "revId": "3df16cabac1a7c82c55f70acdadb72ee05ffa101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
