@@ -16,6 +16,23 @@
       "message": "cherrypick from android12-5.10 (aosp/1651834)\n",
       "revId": "c4be28f08de16e750485c178fe9546efc8799887",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "401e66f7_8e6750c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-28T19:09:42Z",
+      "side": 1,
+      "message": "Breaks all builds 😞. Please build and test before submitting.\n\n```\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/kernel/sched/core.c:8202:6: error: variable \u0027retval\u0027 is used uninitialized whenever \u0027if\u0027 condition is true [-Werror,-Wsometimes-uninitialized]\n        if (skip)\n            ^~~~\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/kernel/sched/core.c:8213:9: note: uninitialized use occurs here\n        return retval;\n               ^~~~~~\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/kernel/sched/core.c:8202:2: note: remove the \u0027if\u0027 if its condition is always false\n        if (skip)\n        ^~~~~~~~~\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/kernel/sched/core.c:8171:12: note: initialize the variable \u0027retval\u0027 to silence this warning\n        int retval;\n                  ^\n                   \u003d 0\n```",
+      "revId": "c4be28f08de16e750485c178fe9546efc8799887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
