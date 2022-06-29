@@ -16,6 +16,23 @@
       "message": "Sami, can you give this a CR+1 if this looks good to you?",
       "revId": "895340c1f71d060fc22d393069fe54e4cb5aca1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "194d9839_dbbd8f2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2022-06-29T15:17:53Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "895340c1f71d060fc22d393069fe54e4cb5aca1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
