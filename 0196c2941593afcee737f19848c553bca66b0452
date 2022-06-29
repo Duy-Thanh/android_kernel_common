@@ -34,6 +34,24 @@
       "parentUuid": "a467866f_f91adb00",
       "revId": "0196c2941593afcee737f19848c553bca66b0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08421664_d8a46922",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-29T01:39:39Z",
+      "side": 1,
+      "message": "Giuliano, there are a bunch of changes in _type-id_ in the XML that seem unrelated to the new symbols. Any idea why? Should we go ahead and accept this?\n```\n \u003cvar-decl name\u003d\u0027fmt\u0027 type-id\u003d\u0027ac5ab5f0\u0027 visibility\u003d\u0027default\u0027 ...\n```",
+      "parentUuid": "e0a885f5_a9213226",
+      "revId": "0196c2941593afcee737f19848c553bca66b0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
