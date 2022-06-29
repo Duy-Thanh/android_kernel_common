@@ -34,6 +34,24 @@
       "parentUuid": "911f4a92_1f42ae25",
       "revId": "739f5ad3ec0c7eaf4584e9e488802ea20e6d9e00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ccfc880_d07098bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-29T09:03:01Z",
+      "side": 1,
+      "message": "You can always submit a patch from someone else, just properly sign off on it (which is also needed here as well.)",
+      "parentUuid": "bd52dcbe_bc71db66",
+      "revId": "739f5ad3ec0c7eaf4584e9e488802ea20e6d9e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
