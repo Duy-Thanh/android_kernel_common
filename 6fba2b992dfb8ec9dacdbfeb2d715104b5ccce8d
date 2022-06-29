@@ -34,6 +34,24 @@
       "parentUuid": "910001c3_5ed6337f",
       "revId": "6fba2b992dfb8ec9dacdbfeb2d715104b5ccce8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9915751_6249c832",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-29T16:23:28Z",
+      "side": 1,
+      "message": "\u003e EXPORT_TRACEPOINT_SYMBOL_GPL(binder_txn_latency_free);\n\nwhy would that be needed?\n\n\u003e trace_binder_txn_latency_free_enabled do I need to implement too?\n\nthe `trace_binder_txn_latency_free()` tracepoint is in `binder_txn_latency_free()`. Instead of your new hook, your vendor module should attach to that tracepoint (which will cause `trace_binder_txn_latency_free_enabled()` to return true). Then you can free your memory inside your `trace_binder_txn_latency_free()` handkler.",
+      "parentUuid": "8a00d1d1_ca5de0be",
+      "revId": "6fba2b992dfb8ec9dacdbfeb2d715104b5ccce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
