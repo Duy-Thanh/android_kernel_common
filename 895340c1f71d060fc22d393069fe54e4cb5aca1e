@@ -68,6 +68,24 @@
       "parentUuid": "194d9839_dbbd8f2f",
       "revId": "895340c1f71d060fc22d393069fe54e4cb5aca1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93296c78_755a74a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2022-06-29T19:52:48Z",
+      "side": 1,
+      "message": "Using synchronize_rcu is not technically speaking broken, it\u0027s just slower. When this was discussed during upstreaming, they preferred not to use synchronize_rcu_expedited here, but back then, we also didn\u0027t realize that using synchronize_rcu causes a noticeable delay when loading hundreds of modules.\n\nLecopzer, would you mind combining the original two patches (https://android-review.googlesource.com/q/topic:mtk_5.4_cfi) you proposed and sending them to LKML? While a larger change, I suspect that would be easier to upstream.",
+      "parentUuid": "3cfc955c_77f04629",
+      "revId": "895340c1f71d060fc22d393069fe54e4cb5aca1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
