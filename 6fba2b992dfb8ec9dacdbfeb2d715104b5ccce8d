@@ -16,6 +16,24 @@
       "message": "Not needed since you can free this in a handler for `trace_binder_txn_latency_free()` which is called `binder_txn_latency_free()` (called at line 1704).",
       "revId": "6fba2b992dfb8ec9dacdbfeb2d715104b5ccce8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a00d1d1_ca5de0be",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-06-29T09:50:34Z",
+      "side": 1,
+      "message": "If I use this abi, I need to add the following logic？\nEXPORT_TRACEPOINT_SYMBOL_GPL(binder_txn_latency_free);\n\ntrace_binder_txn_latency_free_enabled do I need to implement too? Or to avoid other conflicts, I can apply additional control functions?",
+      "parentUuid": "910001c3_5ed6337f",
+      "revId": "6fba2b992dfb8ec9dacdbfeb2d715104b5ccce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
