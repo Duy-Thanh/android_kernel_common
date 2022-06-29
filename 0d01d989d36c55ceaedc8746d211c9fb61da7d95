@@ -142,6 +142,30 @@
       },
       "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16f0a523_d6d6d7c1",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-06-29T21:54:05Z",
+      "side": 1,
+      "message": "OK - I\u0027m going to work on the \u0027proper\u0027 fix. I\u0027m not really seeing how 2 is different from 3 - we will simply allow 0 as a valid nodeid, and the inodes are only different when both the nodeid and backing inode are different. But that\u0027s OK",
+      "parentUuid": "b949f797_953fbbbc",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "0d01d989d36c55ceaedc8746d211c9fb61da7d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
