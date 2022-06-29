@@ -52,6 +52,24 @@
       "parentUuid": "e0a885f5_a9213226",
       "revId": "0196c2941593afcee737f19848c553bca66b0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5edf5bb3_a4a12213",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2022-06-29T03:35:19Z",
+      "side": 1,
+      "message": "Above \"xml change\" means xml size change.",
+      "parentUuid": "e0a885f5_a9213226",
+      "revId": "0196c2941593afcee737f19848c553bca66b0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
