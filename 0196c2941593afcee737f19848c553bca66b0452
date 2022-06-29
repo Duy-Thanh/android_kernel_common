@@ -16,6 +16,24 @@
       "message": ".xml file changes look too big for just 2 new symbols, did you do this with `LTO\u003dfull`?",
       "revId": "0196c2941593afcee737f19848c553bca66b0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0a885f5_a9213226",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2022-06-29T01:32:59Z",
+      "side": 1,
+      "message": "Hi,\nI just get latest android13-5.15, add 2 new symbols and issue the cmd below to get xml:\nmosesq \"BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update\"\n\nI check previous update xml change (same 2 new symbols), the xml change does not differ much. Any suggestions?\nhttps://android-review.googlesource.com/c/kernel/common/+/2120213",
+      "parentUuid": "a467866f_f91adb00",
+      "revId": "0196c2941593afcee737f19848c553bca66b0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
