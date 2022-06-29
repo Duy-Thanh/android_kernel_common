@@ -11,6 +11,7 @@
       <elf-symbol name='__alloc_disk_node' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x104c3faf'/>
       <elf-symbol name='__alloc_pages_nodemask' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x712a92a7'/>
       <elf-symbol name='__alloc_percpu' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x949f7342'/>
+      <elf-symbol name='__alloc_percpu_gfp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaf793668'/>
       <elf-symbol name='__alloc_skb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa051d53f'/>
       <elf-symbol name='__arch_clear_user' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x55686530'/>
       <elf-symbol name='__arch_copy_from_user' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaf507de1'/>
@@ -290,6 +291,7 @@
       <elf-symbol name='_raw_write_unlock_irq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4ccd378a'/>
       <elf-symbol name='_raw_write_unlock_irqrestore' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1c1b9f8e'/>
       <elf-symbol name='_snd_ctl_add_slave' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5d98b481'/>
+      <elf-symbol name='_snd_pcm_lib_alloc_vmalloc_buffer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5585a378'/>
       <elf-symbol name='ack_all_badblocks' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x49717f83'/>
       <elf-symbol name='add_device_randomness' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2fb6de5d'/>
       <elf-symbol name='add_timer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x65744673'/>
@@ -483,6 +485,7 @@
       <elf-symbol name='bprm_change_interp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb6d43c06'/>
       <elf-symbol name='bsearch' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x50a90e8d'/>
       <elf-symbol name='bt_err' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7b8c32f1'/>
+      <elf-symbol name='bt_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x718b8b7'/>
       <elf-symbol name='buffer_migrate_page' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6fd9058'/>
       <elf-symbol name='build_skb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4fc0beb2'/>
       <elf-symbol name='bus_find_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5411d662'/>
@@ -517,15 +520,23 @@
       <elf-symbol name='cec_transmit_attempt_done_ts' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa60d8de5'/>
       <elf-symbol name='cec_transmit_done_ts' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd956cf41'/>
       <elf-symbol name='cec_unregister_adapter' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc4a9f0d6'/>
+      <elf-symbol name='cfg80211_abandon_assoc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa8fd9e17'/>
       <elf-symbol name='cfg80211_assoc_timeout' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdd5119b4'/>
       <elf-symbol name='cfg80211_auth_timeout' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x203ef6f3'/>
       <elf-symbol name='cfg80211_cac_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xda9b3a63'/>
       <elf-symbol name='cfg80211_calculate_bitrate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15a37cf3'/>
       <elf-symbol name='cfg80211_ch_switch_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf06a8779'/>
+      <elf-symbol name='cfg80211_ch_switch_started_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x21227ce4'/>
+      <elf-symbol name='cfg80211_chandef_compatible' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfae8514f'/>
       <elf-symbol name='cfg80211_chandef_create' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x18b53545'/>
+      <elf-symbol name='cfg80211_chandef_dfs_required' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa90845fa'/>
+      <elf-symbol name='cfg80211_chandef_usable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xca6d996a'/>
       <elf-symbol name='cfg80211_chandef_valid' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x81a471d6'/>
+      <elf-symbol name='cfg80211_check_combinations' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7a319747'/>
+      <elf-symbol name='cfg80211_check_station_change' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2169be6d'/>
       <elf-symbol name='cfg80211_classify8021d' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcc5eba79'/>
       <elf-symbol name='cfg80211_connect_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3a69ec3a'/>
+      <elf-symbol name='cfg80211_cqm_beacon_loss_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xebe0408b'/>
       <elf-symbol name='cfg80211_cqm_pktloss_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc9d7129c'/>
       <elf-symbol name='cfg80211_cqm_rssi_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcfb12720'/>
       <elf-symbol name='cfg80211_del_sta_sinfo' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xda879c85'/>
@@ -533,30 +544,54 @@
       <elf-symbol name='cfg80211_external_auth_request' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8a3c52cd'/>
       <elf-symbol name='cfg80211_find_elem_match' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9d6cba30'/>
       <elf-symbol name='cfg80211_find_vendor_elem' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x79b82a71'/>
+      <elf-symbol name='cfg80211_free_nan_func' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeadfe024'/>
       <elf-symbol name='cfg80211_ft_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5df9efc1'/>
       <elf-symbol name='cfg80211_get_bss' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x348d478b'/>
+      <elf-symbol name='cfg80211_get_drvinfo' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x703cd333'/>
+      <elf-symbol name='cfg80211_get_p2p_attr' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf5596d89'/>
       <elf-symbol name='cfg80211_gtk_rekey_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6ebd5b1f'/>
       <elf-symbol name='cfg80211_ibss_joined' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xac6f9505'/>
+      <elf-symbol name='cfg80211_iftype_allowed' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe1b1e6be'/>
       <elf-symbol name='cfg80211_inform_bss_data' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xff30d183'/>
       <elf-symbol name='cfg80211_inform_bss_frame_data' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd2e3c7f3'/>
+      <elf-symbol name='cfg80211_is_element_inherited' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcc1a7c48'/>
+      <elf-symbol name='cfg80211_iter_combinations' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8278b93b'/>
+      <elf-symbol name='cfg80211_merge_profile' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x117aca91'/>
       <elf-symbol name='cfg80211_mgmt_tx_status' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd040de63'/>
       <elf-symbol name='cfg80211_michael_mic_failure' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdf556deb'/>
+      <elf-symbol name='cfg80211_nan_func_terminated' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x89028998'/>
+      <elf-symbol name='cfg80211_nan_match' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3ccdcfaf'/>
       <elf-symbol name='cfg80211_new_sta' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4749a2b8'/>
       <elf-symbol name='cfg80211_pmksa_candidate_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x67e60e4d'/>
+      <elf-symbol name='cfg80211_probe_status' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x538905fc'/>
       <elf-symbol name='cfg80211_put_bss' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x34d7de42'/>
       <elf-symbol name='cfg80211_radar_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf0fb9858'/>
       <elf-symbol name='cfg80211_ready_on_channel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x847ac1c2'/>
+      <elf-symbol name='cfg80211_ref_bss' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc0d14ab5'/>
+      <elf-symbol name='cfg80211_reg_can_beacon' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x877e7a71'/>
+      <elf-symbol name='cfg80211_reg_can_beacon_relax' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x54e51ee5'/>
       <elf-symbol name='cfg80211_remain_on_channel_expired' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf0605975'/>
+      <elf-symbol name='cfg80211_report_obss_beacon' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbd591948'/>
+      <elf-symbol name='cfg80211_report_wowlan_wakeup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1e28ea48'/>
       <elf-symbol name='cfg80211_roamed' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf5a0e610'/>
       <elf-symbol name='cfg80211_rx_assoc_resp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb249e785'/>
+      <elf-symbol name='cfg80211_rx_control_port' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5c4073b2'/>
       <elf-symbol name='cfg80211_rx_mgmt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x70f4a004'/>
       <elf-symbol name='cfg80211_rx_mlme_mgmt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xda7f6213'/>
+      <elf-symbol name='cfg80211_rx_spurious_frame' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7e129c89'/>
+      <elf-symbol name='cfg80211_rx_unexpected_4addr_frame' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x516f0d8f'/>
       <elf-symbol name='cfg80211_rx_unprot_mlme_mgmt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd16a0451'/>
       <elf-symbol name='cfg80211_scan_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb72ef10'/>
       <elf-symbol name='cfg80211_sched_scan_results' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf98d912b'/>
       <elf-symbol name='cfg80211_sched_scan_stopped' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcdd3e3d4'/>
+      <elf-symbol name='cfg80211_sched_scan_stopped_rtnl' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6d805eb3'/>
+      <elf-symbol name='cfg80211_send_layer2_update' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe071118f'/>
+      <elf-symbol name='cfg80211_shutdown_all_interfaces' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x623bd2c'/>
+      <elf-symbol name='cfg80211_sinfo_alloc_tid_stats' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4bb84e72'/>
+      <elf-symbol name='cfg80211_sta_opmode_change_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x75874a67'/>
       <elf-symbol name='cfg80211_stop_iface' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd93b05db'/>
       <elf-symbol name='cfg80211_tdls_oper_request' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf6aa5fd4'/>
+      <elf-symbol name='cfg80211_tx_mgmt_expired' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc2f5ed48'/>
       <elf-symbol name='cfg80211_tx_mlme_mgmt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x26062d59'/>
       <elf-symbol name='cfg80211_unlink_bss' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x91d86f63'/>
       <elf-symbol name='cfg80211_unregister_wdev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf911756f'/>
@@ -698,6 +733,7 @@
       <elf-symbol name='crc8' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe2aae5cc'/>
       <elf-symbol name='crc8_populate_msb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaa8106bc'/>
       <elf-symbol name='create_empty_buffers' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x242324b9'/>
+      <elf-symbol name='crypto_aead_decrypt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd63adbfb'/>
       <elf-symbol name='crypto_aead_encrypt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc5078c27'/>
       <elf-symbol name='crypto_aead_setauthsize' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x93b44177'/>
       <elf-symbol name='crypto_aead_setkey' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6cbbfc32'/>
@@ -739,6 +775,7 @@
       <elf-symbol name='crypto_sha1_update' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf5f03915'/>
       <elf-symbol name='crypto_shash_digest' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1d82247a'/>
       <elf-symbol name='crypto_shash_final' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfce201f7'/>
+      <elf-symbol name='crypto_shash_finup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc127d267'/>
       <elf-symbol name='crypto_shash_setkey' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdef5f2f6'/>
       <elf-symbol name='crypto_shash_update' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6ddb0e89'/>
       <elf-symbol name='crypto_skcipher_decrypt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x55e7ba01'/>
@@ -786,6 +823,7 @@
       <elf-symbol name='debugfs_create_u32' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2f9345f9'/>
       <elf-symbol name='debugfs_create_u64' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc3a7fa8'/>
       <elf-symbol name='debugfs_create_x32' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x90c44d2d'/>
+      <elf-symbol name='debugfs_create_x8' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa9061c6a'/>
       <elf-symbol name='debugfs_initialized' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x716265c7'/>
       <elf-symbol name='debugfs_lookup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x710e1bc4'/>
       <elf-symbol name='debugfs_remove' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x23332c80'/>
@@ -909,6 +947,7 @@
       <elf-symbol name='device_link_del' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7d5cc4b8'/>
       <elf-symbol name='device_match_fwnode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x78d32ef'/>
       <elf-symbol name='device_match_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x38e9add6'/>
+      <elf-symbol name='device_move' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x93108dfe'/>
       <elf-symbol name='device_property_present' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x68dadcd6'/>
       <elf-symbol name='device_property_read_string' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x666bbe22'/>
       <elf-symbol name='device_property_read_string_array' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5c07d157'/>
@@ -1755,6 +1794,7 @@
       <elf-symbol name='ieee80211_beacon_get_tim' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7e525a78'/>
       <elf-symbol name='ieee80211_beacon_loss' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x272d0c7d'/>
       <elf-symbol name='ieee80211_bss_get_elem' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb695a89d'/>
+      <elf-symbol name='ieee80211_chandef_to_operating_class' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x67d86dcd'/>
       <elf-symbol name='ieee80211_channel_to_freq_khz' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xafe8b001'/>
       <elf-symbol name='ieee80211_chswitch_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb1cc9e15'/>
       <elf-symbol name='ieee80211_connection_loss' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5d23a14e'/>
@@ -1773,13 +1813,16 @@
       <elf-symbol name='ieee80211_get_hdrlen_from_skb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc51b453a'/>
       <elf-symbol name='ieee80211_get_tx_rates' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x99c69e7c'/>
       <elf-symbol name='ieee80211_hdrlen' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7ef39823'/>
+      <elf-symbol name='ieee80211_ie_split_ric' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x275269b3'/>
       <elf-symbol name='ieee80211_iter_chan_contexts_atomic' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf357b1'/>
       <elf-symbol name='ieee80211_iterate_active_interfaces_atomic' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xea065bc'/>
       <elf-symbol name='ieee80211_iterate_interfaces' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x71407a75'/>
       <elf-symbol name='ieee80211_iterate_stations_atomic' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xee29a2aa'/>
       <elf-symbol name='ieee80211_manage_rx_ba_offl' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa9c7e53a'/>
+      <elf-symbol name='ieee80211_mandatory_rates' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x68600c40'/>
       <elf-symbol name='ieee80211_next_txq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4e6d6810'/>
       <elf-symbol name='ieee80211_nullfunc_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xad2cfa6d'/>
+      <elf-symbol name='ieee80211_operating_class_to_band' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3bd8aaa1'/>
       <elf-symbol name='ieee80211_probereq_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaacf7e17'/>
       <elf-symbol name='ieee80211_proberesp_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x259c0466'/>
       <elf-symbol name='ieee80211_pspoll_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa8dc5631'/>
@@ -2150,6 +2193,7 @@
       <elf-symbol name='ktime_get_raw_ts64' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1edb69d6'/>
       <elf-symbol name='ktime_get_real_seconds' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x953e1b9e'/>
       <elf-symbol name='ktime_get_real_ts64' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9ec6ca96'/>
+      <elf-symbol name='ktime_get_seconds' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa9320d27'/>
       <elf-symbol name='ktime_get_ts64' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5e515be6'/>
       <elf-symbol name='ktime_get_with_offset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc4f0da12'/>
       <elf-symbol name='kvasprintf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x587b0954'/>
@@ -2384,6 +2428,7 @@
       <elf-symbol name='netdev_printk' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdfa3765a'/>
       <elf-symbol name='netdev_rx_handler_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfa7dc2a'/>
       <elf-symbol name='netdev_rx_handler_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc4394e78'/>
+      <elf-symbol name='netdev_set_default_ethtool_ops' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3966b4ee'/>
       <elf-symbol name='netdev_upper_dev_link' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15ae32f0'/>
       <elf-symbol name='netdev_upper_dev_unlink' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1ad75747'/>
       <elf-symbol name='netdev_warn' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x12c086db'/>
@@ -2815,6 +2860,7 @@
       <elf-symbol name='pppox_compat_ioctl' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x96fdf88a'/>
       <elf-symbol name='pppox_ioctl' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x97b9343f'/>
       <elf-symbol name='pppox_unbind_sock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaa8dec98'/>
+      <elf-symbol name='prandom_bytes' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa99b39c2'/>
       <elf-symbol name='prandom_u32' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfda9581f'/>
       <elf-symbol name='preempt_schedule' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x43b0c9c3'/>
       <elf-symbol name='preempt_schedule_notrace' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf70e4a4d'/>
@@ -2989,6 +3035,7 @@
       <elf-symbol name='regulator_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6c7b32ab'/>
       <elf-symbol name='regulator_unregister_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6b1478b5'/>
       <elf-symbol name='regulatory_hint' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9080d64a'/>
+      <elf-symbol name='regulatory_pre_cac_allowed' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6cc19faa'/>
       <elf-symbol name='regulatory_set_wiphy_regd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe6cc0df9'/>
       <elf-symbol name='release_firmware' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb7defe80'/>
       <elf-symbol name='release_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd85e6948'/>
@@ -3020,8 +3067,10 @@
       <elf-symbol name='rfkill_set_states' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x85b5e625'/>
       <elf-symbol name='rfkill_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x83eb21c'/>
       <elf-symbol name='rhashtable_destroy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x39d8c1bf'/>
+      <elf-symbol name='rhashtable_free_and_destroy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe1bb64d4'/>
       <elf-symbol name='rhashtable_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf1510dd2'/>
       <elf-symbol name='rhashtable_insert_slow' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x22964e6d'/>
+      <elf-symbol name='rhltable_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf112afd6'/>
       <elf-symbol name='rht_bucket_nested' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb7f990e9'/>
       <elf-symbol name='rht_bucket_nested_insert' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe01d6bec'/>
       <elf-symbol name='round_jiffies' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x91eb9b4'/>
@@ -3260,7 +3309,9 @@
       <elf-symbol name='skb_checksum' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7ab1a43c'/>
       <elf-symbol name='skb_checksum_help' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf121386c'/>
       <elf-symbol name='skb_clone' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15f7526d'/>
+      <elf-symbol name='skb_clone_sk' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x920d74e9'/>
       <elf-symbol name='skb_coalesce_rx_frag' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x22b74f51'/>
+      <elf-symbol name='skb_complete_wifi_ack' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf8e475ea'/>
       <elf-symbol name='skb_copy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xebf634eb'/>
       <elf-symbol name='skb_copy_bits' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6a423e4a'/>
       <elf-symbol name='skb_copy_datagram_iter' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfd15d384'/>
@@ -3270,6 +3321,7 @@
       <elf-symbol name='skb_dequeue_tail' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xde985de4'/>
       <elf-symbol name='skb_ensure_writable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc37225b3'/>
       <elf-symbol name='skb_free_datagram' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4846ca38'/>
+      <elf-symbol name='skb_get_hash_perturb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdf5e8603'/>
       <elf-symbol name='skb_page_frag_refill' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xde6dee7a'/>
       <elf-symbol name='skb_partial_csum_set' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfaec001b'/>
       <elf-symbol name='skb_pull' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb46d4c62'/>
@@ -3351,6 +3403,7 @@
       <elf-symbol name='snd_pcm_add_chmap_ctls' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd17cb482'/>
       <elf-symbol name='snd_pcm_create_iec958_consumer_hw_params' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x11eba48e'/>
       <elf-symbol name='snd_pcm_format_physical_width' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x68a24153'/>
+      <elf-symbol name='snd_pcm_format_set_silence' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5e7f4920'/>
       <elf-symbol name='snd_pcm_format_width' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe56a9336'/>
       <elf-symbol name='snd_pcm_hw_constraint_eld' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6396b5d4'/>
       <elf-symbol name='snd_pcm_hw_constraint_integer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbf5f6b3b'/>
@@ -3362,6 +3415,8 @@
       <elf-symbol name='snd_pcm_hw_rule_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4d9c75b3'/>
       <elf-symbol name='snd_pcm_lib_default_mmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfe668d59'/>
       <elf-symbol name='snd_pcm_lib_free_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa3bf33d4'/>
+      <elf-symbol name='snd_pcm_lib_free_vmalloc_buffer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe293525a'/>
+      <elf-symbol name='snd_pcm_lib_get_vmalloc_page' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15ede57e'/>
       <elf-symbol name='snd_pcm_lib_ioctl' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeb4fefae'/>
       <elf-symbol name='snd_pcm_lib_malloc_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x63493581'/>
       <elf-symbol name='snd_pcm_lib_preallocate_free_for_all' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf35b4301'/>
@@ -44717,6 +44772,10 @@
         <parameter type-id='146bc842' name='req' filepath='crypto/aead.c' line='88' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='crypto_aead_decrypt' mangled-name='crypto_aead_decrypt' filepath='crypto/aead.c' line='105' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crypto_aead_decrypt'>
+        <parameter type-id='146bc842' name='req' filepath='crypto/aead.c' line='105' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <class-decl name='crypto_alg' size-in-bits='4096' is-struct='yes' visibility='default' filepath='include/linux/crypto.h' line='553' column='1' id='514fe525'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='cra_list' type-id='72f469ec' visibility='default' filepath='include/linux/crypto.h' line='554' column='1'/>
@@ -46225,6 +46284,13 @@
         <parameter type-id='95e97e5e' name='count' filepath='crypto/shash.c' line='516' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='crypto_shash_finup' mangled-name='crypto_shash_finup' filepath='crypto/shash.c' line='184' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crypto_shash_finup'>
+        <parameter type-id='32efad44' name='desc' filepath='crypto/shash.c' line='184' column='1'/>
+        <parameter type-id='bbaf3419' name='data' filepath='crypto/shash.c' line='184' column='1'/>
+        <parameter type-id='f0981eeb' name='len' filepath='crypto/shash.c' line='185' column='1'/>
+        <parameter type-id='8bff8096' name='out' filepath='crypto/shash.c' line='185' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='crypto_register_shash' mangled-name='crypto_register_shash' filepath='crypto/shash.c' line='497' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crypto_register_shash'>
         <parameter type-id='1be0f6ab' name='alg' filepath='crypto/shash.c' line='497' column='1'/>
         <return type-id='95e97e5e'/>
@@ -47515,6 +47581,13 @@
         <enumerator name='DL_STATE_ACTIVE' value='3'/>
         <enumerator name='DL_STATE_SUPPLIER_UNBIND' value='4'/>
       </enum-decl>
+      <enum-decl name='dpm_order' filepath='include/linux/pm.h' line='815' column='1' id='ba51dfc4'>
+        <underlying-type type-id='9cac1fee'/>
+        <enumerator name='DPM_ORDER_NONE' value='0'/>
+        <enumerator name='DPM_ORDER_DEV_AFTER_PARENT' value='1'/>
+        <enumerator name='DPM_ORDER_PARENT_BEFORE_DEV' value='2'/>
+        <enumerator name='DPM_ORDER_DEV_LAST' value='3'/>
+      </enum-decl>
       <qualified-type-def type-id='dbf3947c' const='yes' id='fad8dcd1'/>
       <pointer-type-def type-id='fad8dcd1' size-in-bits='64' id='de63df21'/>
       <pointer-type-def type-id='32536656' size-in-bits='64' id='a80fd1bc'/>
@@ -47687,6 +47760,12 @@
       </function-decl>
       <function-decl name='device_register' mangled-name='device_register' filepath='drivers/base/core.c' line='2978' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_register'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/core.c' line='2978' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='device_move' mangled-name='device_move' filepath='drivers/base/core.c' line='3799' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_move'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/core.c' line='3799' column='1'/>
+        <parameter type-id='fa0b179b' name='new_parent' filepath='drivers/base/core.c' line='3799' column='1'/>
+        <parameter type-id='ba51dfc4' name='dpm_order' filepath='drivers/base/core.c' line='3800' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='device_match_name' mangled-name='device_match_name' filepath='drivers/base/core.c' line='4172' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_match_name'>
@@ -120502,11 +120581,11 @@
       <qualified-type-def type-id='8b6b6ef7' const='yes' id='f0f807bc'/>
       <pointer-type-def type-id='f0f807bc' size-in-bits='64' id='ec73f122'/>
       <pointer-type-def type-id='f01e85cf' size-in-bits='64' id='62fa2ea7'/>
-      <function-decl name='debugfs_create_x32' mangled-name='debugfs_create_x32' filepath='fs/debugfs/file.c' line='716' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='debugfs_create_x32'>
-        <parameter type-id='80f4b756' name='name' filepath='fs/debugfs/file.c' line='716' column='1'/>
-        <parameter type-id='2594b00f' name='mode' filepath='fs/debugfs/file.c' line='716' column='1'/>
-        <parameter type-id='27675065' name='parent' filepath='fs/debugfs/file.c' line='717' column='1'/>
-        <parameter type-id='f9409001' name='value' filepath='fs/debugfs/file.c' line='717' column='1'/>
+      <function-decl name='debugfs_create_x8' mangled-name='debugfs_create_x8' filepath='fs/debugfs/file.c' line='680' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='debugfs_create_x8'>
+        <parameter type-id='80f4b756' name='name' filepath='fs/debugfs/file.c' line='680' column='1'/>
+        <parameter type-id='2594b00f' name='mode' filepath='fs/debugfs/file.c' line='680' column='1'/>
+        <parameter type-id='27675065' name='parent' filepath='fs/debugfs/file.c' line='681' column='1'/>
+        <parameter type-id='8bff8096' name='value' filepath='fs/debugfs/file.c' line='681' column='1'/>
         <return type-id='27675065'/>
       </function-decl>
       <function-decl name='debugfs_attr_read' mangled-name='debugfs_attr_read' filepath='fs/debugfs/file.c' line='365' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='debugfs_attr_read'>
@@ -120522,6 +120601,13 @@
         <parameter type-id='b59d7dce' name='len' filepath='fs/debugfs/file.c' line='381' column='1'/>
         <parameter type-id='b53e8dbb' name='ppos' filepath='fs/debugfs/file.c' line='381' column='1'/>
         <return type-id='79a0948f'/>
+      </function-decl>
+      <function-decl name='debugfs_create_x32' mangled-name='debugfs_create_x32' filepath='fs/debugfs/file.c' line='716' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='debugfs_create_x32'>
+        <parameter type-id='80f4b756' name='name' filepath='fs/debugfs/file.c' line='716' column='1'/>
+        <parameter type-id='2594b00f' name='mode' filepath='fs/debugfs/file.c' line='716' column='1'/>
+        <parameter type-id='27675065' name='parent' filepath='fs/debugfs/file.c' line='717' column='1'/>
+        <parameter type-id='f9409001' name='value' filepath='fs/debugfs/file.c' line='717' column='1'/>
+        <return type-id='27675065'/>
       </function-decl>
       <function-decl name='debugfs_create_u64' mangled-name='debugfs_create_u64' filepath='fs/debugfs/file.c' line='586' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='debugfs_create_u64'>
         <parameter type-id='80f4b756' name='name' filepath='fs/debugfs/file.c' line='586' column='1'/>
@@ -149767,6 +149853,9 @@
         <parameter type-id='4151733d' name='ts' filepath='kernel/time/timekeeping.c' line='880' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='ktime_get_seconds' mangled-name='ktime_get_seconds' filepath='kernel/time/timekeeping.c' line='912' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ktime_get_seconds'>
+        <return type-id='1afd27ac'/>
+      </function-decl>
       <function-decl name='ktime_get_real_seconds' mangled-name='ktime_get_real_seconds' filepath='kernel/time/timekeeping.c' line='932' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ktime_get_real_seconds'>
         <return type-id='1afd27ac'/>
       </function-decl>
@@ -154378,6 +154467,11 @@
       <function-decl name='prandom_u32' mangled-name='prandom_u32' filepath='lib/random32.c' line='377' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='prandom_u32'>
         <return type-id='19c2251e'/>
       </function-decl>
+      <function-decl name='prandom_bytes' mangled-name='prandom_bytes' filepath='lib/random32.c' line='392' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='prandom_bytes'>
+        <parameter type-id='eaa32e2f' name='buf' filepath='lib/random32.c' line='392' column='1'/>
+        <parameter type-id='b59d7dce' name='bytes' filepath='lib/random32.c' line='392' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='lib/ratelimit.c' language='LANG_C89'>
       <pointer-type-def type-id='8b829a50' size-in-bits='64' id='ccb97366'/>
@@ -154460,11 +154554,18 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='lib/rhashtable.c' language='LANG_C89'>
+      <class-decl name='rhltable' size-in-bits='1216' is-struct='yes' visibility='default' filepath='include/linux/rhashtable-types.h' line='97' column='1' id='4c843043'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='ht' type-id='9e095f93' visibility='default' filepath='include/linux/rhashtable-types.h' line='98' column='1'/>
+        </data-member>
+      </class-decl>
       <qualified-type-def type-id='984972f4' const='yes' id='3944ca69'/>
       <pointer-type-def type-id='3944ca69' size-in-bits='64' id='6a4a6779'/>
       <qualified-type-def type-id='e4c11782' const='yes' id='83967635'/>
       <pointer-type-def type-id='83967635' size-in-bits='64' id='44dbf2cd'/>
       <pointer-type-def type-id='0f8b1896' size-in-bits='64' id='33f7eff4'/>
+      <pointer-type-def type-id='4c843043' size-in-bits='64' id='3c304633'/>
+      <pointer-type-def type-id='c039af2e' size-in-bits='64' id='debb4ee8'/>
       <function-decl name='rhashtable_init' mangled-name='rhashtable_init' filepath='lib/rhashtable.c' line='1008' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rhashtable_init'>
         <parameter type-id='e6726ce3' name='ht' filepath='lib/rhashtable.c' line='1008' column='1'/>
         <parameter type-id='44dbf2cd' name='params' filepath='lib/rhashtable.c' line='1009' column='1'/>
@@ -154486,11 +154587,22 @@
         <parameter type-id='f0981eeb' name='hash' filepath='lib/rhashtable.c' line='1209' column='1'/>
         <return type-id='33f7eff4'/>
       </function-decl>
+      <function-decl name='rhltable_init' mangled-name='rhltable_init' filepath='lib/rhashtable.c' line='1079' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rhltable_init'>
+        <parameter type-id='3c304633' name='hlt' filepath='lib/rhashtable.c' line='1079' column='1'/>
+        <parameter type-id='44dbf2cd' name='params' filepath='lib/rhashtable.c' line='1079' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='rhashtable_insert_slow' mangled-name='rhashtable_insert_slow' filepath='lib/rhashtable.c' line='622' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rhashtable_insert_slow'>
         <parameter type-id='e6726ce3' name='ht' filepath='lib/rhashtable.c' line='622' column='1'/>
         <parameter type-id='eaa32e2f' name='key' filepath='lib/rhashtable.c' line='622' column='1'/>
         <parameter type-id='3cc8739a' name='obj' filepath='lib/rhashtable.c' line='623' column='1'/>
         <return type-id='eaa32e2f'/>
+      </function-decl>
+      <function-decl name='rhashtable_free_and_destroy' mangled-name='rhashtable_free_and_destroy' filepath='lib/rhashtable.c' line='1123' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rhashtable_free_and_destroy'>
+        <parameter type-id='e6726ce3' name='ht' filepath='lib/rhashtable.c' line='1123' column='1'/>
+        <parameter type-id='debb4ee8' name='free_fn' filepath='lib/rhashtable.c' line='1124' column='1'/>
+        <parameter type-id='eaa32e2f' name='arg' filepath='lib/rhashtable.c' line='1125' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='rhashtable_destroy' mangled-name='rhashtable_destroy' filepath='lib/rhashtable.c' line='1161' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rhashtable_destroy'>
         <parameter type-id='e6726ce3' name='ht' filepath='lib/rhashtable.c' line='1161' column='1'/>
@@ -155669,6 +155781,12 @@
       <function-decl name='free_percpu' mangled-name='free_percpu' filepath='mm/percpu.c' line='1955' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='free_percpu'>
         <parameter type-id='eaa32e2f' name='ptr' filepath='mm/percpu.c' line='1955' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='__alloc_percpu_gfp' mangled-name='__alloc_percpu_gfp' filepath='mm/percpu.c' line='1781' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__alloc_percpu_gfp'>
+        <parameter type-id='b59d7dce' name='size' filepath='mm/percpu.c' line='1781' column='1'/>
+        <parameter type-id='b59d7dce' name='align' filepath='mm/percpu.c' line='1781' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='mm/percpu.c' line='1781' column='1'/>
+        <return type-id='eaa32e2f'/>
       </function-decl>
       <function-decl name='__alloc_percpu' mangled-name='__alloc_percpu' filepath='mm/percpu.c' line='1794' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__alloc_percpu'>
         <parameter type-id='b59d7dce' name='size' filepath='mm/percpu.c' line='1794' column='1'/>
@@ -157239,6 +157357,11 @@
         <parameter is-variadic='yes'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='bt_info' mangled-name='bt_info' filepath='net/bluetooth/lib.c' line='138' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bt_info'>
+        <parameter type-id='80f4b756' name='format' filepath='net/bluetooth/lib.c' line='138' column='1'/>
+        <parameter is-variadic='yes'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='net/core/datagram.c' language='LANG_C89'>
       <function-decl name='skb_copy_datagram_iter' mangled-name='skb_copy_datagram_iter' filepath='net/core/datagram.c' line='533' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='skb_copy_datagram_iter'>
@@ -157715,6 +157838,11 @@
         <parameter type-id='68a2d05b' name='upper_dev' filepath='net/core/dev.c' line='7395' column='1'/>
         <parameter type-id='5799dc94' name='extack' filepath='net/core/dev.c' line='7396' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='netdev_set_default_ethtool_ops' mangled-name='netdev_set_default_ethtool_ops' filepath='net/core/dev.c' line='9539' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netdev_set_default_ethtool_ops'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/core/dev.c' line='9539' column='1'/>
+        <parameter type-id='bdf901f8' name='ops' filepath='net/core/dev.c' line='9540' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='netdev_rx_handler_register' mangled-name='netdev_rx_handler_register' filepath='net/core/dev.c' line='4671' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netdev_rx_handler_register'>
         <parameter type-id='68a2d05b' name='dev' filepath='net/core/dev.c' line='4671' column='1'/>
@@ -158677,6 +158805,8 @@
       </enum-decl>
       <qualified-type-def type-id='bd965180' const='yes' id='e8726a27'/>
       <pointer-type-def type-id='e8726a27' size-in-bits='64' id='f91cf277'/>
+      <qualified-type-def type-id='7799da43' const='yes' id='90ff9313'/>
+      <pointer-type-def type-id='90ff9313' size-in-bits='64' id='7b54c2bb'/>
       <pointer-type-def type-id='85bdf127' size-in-bits='64' id='09dcd1bf'/>
       <pointer-type-def type-id='379be6ec' size-in-bits='64' id='0b8ca8fa'/>
       <pointer-type-def type-id='ad974870' size-in-bits='64' id='117abbea'/>
@@ -158708,6 +158838,11 @@
         <parameter type-id='95e97e5e' name='hlen' filepath='net/core/flow_dissector.c' line='899' column='1'/>
         <parameter type-id='f0981eeb' name='flags' filepath='net/core/flow_dissector.c' line='900' column='1'/>
         <return type-id='b50a4934'/>
+      </function-decl>
+      <function-decl name='skb_get_hash_perturb' mangled-name='skb_get_hash_perturb' filepath='net/core/flow_dissector.c' line='1596' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='skb_get_hash_perturb'>
+        <parameter type-id='11f4a000' name='skb' filepath='net/core/flow_dissector.c' line='1596' column='1'/>
+        <parameter type-id='7b54c2bb' name='perturb' filepath='net/core/flow_dissector.c' line='1597' column='1'/>
+        <return type-id='3f1a6b60'/>
       </function-decl>
       <function-type size-in-bits='64' id='ad974870'>
         <parameter type-id='f0981eeb'/>
@@ -159151,12 +159286,21 @@
         <parameter type-id='03c386c6' name='list' filepath='net/core/skbuff.c' line='3074' column='1'/>
         <return type-id='0fbf3cfd'/>
       </function-decl>
+      <function-decl name='skb_complete_wifi_ack' mangled-name='skb_complete_wifi_ack' filepath='net/core/skbuff.c' line='4771' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='skb_complete_wifi_ack'>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/core/skbuff.c' line='4771' column='1'/>
+        <parameter type-id='b50a4934' name='acked' filepath='net/core/skbuff.c' line='4771' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='skb_coalesce_rx_frag' mangled-name='skb_coalesce_rx_frag' filepath='net/core/skbuff.c' line='563' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='skb_coalesce_rx_frag'>
         <parameter type-id='0fbf3cfd' name='skb' filepath='net/core/skbuff.c' line='563' column='1'/>
         <parameter type-id='95e97e5e' name='i' filepath='net/core/skbuff.c' line='563' column='1'/>
         <parameter type-id='95e97e5e' name='size' filepath='net/core/skbuff.c' line='563' column='1'/>
         <parameter type-id='f0981eeb' name='truesize' filepath='net/core/skbuff.c' line='564' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='skb_clone_sk' mangled-name='skb_clone_sk' filepath='net/core/skbuff.c' line='4626' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='skb_clone_sk'>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/core/skbuff.c' line='4626' column='1'/>
+        <return type-id='0fbf3cfd'/>
       </function-decl>
       <function-decl name='skb_checksum' mangled-name='skb_checksum' filepath='net/core/skbuff.c' line='2729' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='skb_checksum'>
         <parameter type-id='11f4a000' name='skb' filepath='net/core/skbuff.c' line='2729' column='1'/>
@@ -167046,7 +167190,6 @@
       <pointer-type-def type-id='4446be8a' size-in-bits='64' id='73cc7ee4'/>
       <pointer-type-def type-id='26b6dfe0' size-in-bits='64' id='f0385e42'/>
       <pointer-type-def type-id='29ca5ed4' size-in-bits='64' id='6307fc3e'/>
-      <pointer-type-def type-id='c039af2e' size-in-bits='64' id='debb4ee8'/>
       <pointer-type-def type-id='edb04712' size-in-bits='64' id='64ed5260'/>
       <pointer-type-def type-id='9399d16b' size-in-bits='64' id='e25f5feb'/>
       <pointer-type-def type-id='60289ffb' size-in-bits='64' id='49ac960b'/>
@@ -169008,8 +169151,37 @@
         <enumerator name='NL80211_CHAN_HT40MINUS' value='2'/>
         <enumerator name='NL80211_CHAN_HT40PLUS' value='3'/>
       </enum-decl>
+      <function-decl name='cfg80211_reg_can_beacon_relax' mangled-name='cfg80211_reg_can_beacon_relax' filepath='net/wireless/chan.c' line='1141' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_reg_can_beacon_relax'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/chan.c' line='1141' column='1'/>
+        <parameter type-id='0953fbfe' name='chandef' filepath='net/wireless/chan.c' line='1142' column='1'/>
+        <parameter type-id='86505f90' name='iftype' filepath='net/wireless/chan.c' line='1143' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
+      <function-decl name='cfg80211_chandef_usable' mangled-name='cfg80211_chandef_usable' filepath='net/wireless/chan.c' line='884' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_chandef_usable'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/chan.c' line='884' column='1'/>
+        <parameter type-id='af471177' name='chandef' filepath='net/wireless/chan.c' line='885' column='1'/>
+        <parameter type-id='19c2251e' name='prohibited_flags' filepath='net/wireless/chan.c' line='886' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
       <function-decl name='cfg80211_chandef_valid' mangled-name='cfg80211_chandef_valid' filepath='net/wireless/chan.c' line='143' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_chandef_valid'>
         <parameter type-id='af471177' name='chandef' filepath='net/wireless/chan.c' line='143' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
+      <function-decl name='cfg80211_chandef_compatible' mangled-name='cfg80211_chandef_compatible' filepath='net/wireless/chan.c' line='291' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_chandef_compatible'>
+        <parameter type-id='af471177' name='c1' filepath='net/wireless/chan.c' line='291' column='1'/>
+        <parameter type-id='af471177' name='c2' filepath='net/wireless/chan.c' line='292' column='1'/>
+        <return type-id='af471177'/>
+      </function-decl>
+      <function-decl name='cfg80211_chandef_dfs_required' mangled-name='cfg80211_chandef_dfs_required' filepath='net/wireless/chan.c' line='436' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_chandef_dfs_required'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/chan.c' line='436' column='1'/>
+        <parameter type-id='af471177' name='chandef' filepath='net/wireless/chan.c' line='437' column='1'/>
+        <parameter type-id='86505f90' name='iftype' filepath='net/wireless/chan.c' line='438' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='cfg80211_reg_can_beacon' mangled-name='cfg80211_reg_can_beacon' filepath='net/wireless/chan.c' line='1133' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_reg_can_beacon'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/chan.c' line='1133' column='1'/>
+        <parameter type-id='0953fbfe' name='chandef' filepath='net/wireless/chan.c' line='1134' column='1'/>
+        <parameter type-id='86505f90' name='iftype' filepath='net/wireless/chan.c' line='1135' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='cfg80211_chandef_create' mangled-name='cfg80211_chandef_create' filepath='net/wireless/chan.c' line='22' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_chandef_create'>
@@ -172730,6 +172902,10 @@
       <pointer-type-def type-id='49354cf3' size-in-bits='64' id='8baf5297'/>
       <pointer-type-def type-id='68523a94' size-in-bits='64' id='666fb412'/>
       <pointer-type-def type-id='3b132996' size-in-bits='64' id='d0299fd8'/>
+      <function-decl name='cfg80211_shutdown_all_interfaces' mangled-name='cfg80211_shutdown_all_interfaces' filepath='net/wireless/core.c' line='262' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_shutdown_all_interfaces'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/core.c' line='262' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='wiphy_new_nm' mangled-name='wiphy_new_nm' filepath='net/wireless/core.c' line='398' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='wiphy_new_nm'>
         <parameter type-id='8bfdd055' name='ops' filepath='net/wireless/core.c' line='398' column='1'/>
         <parameter type-id='95e97e5e' name='sizeof_priv' filepath='net/wireless/core.c' line='398' column='1'/>
@@ -173328,7 +173504,7 @@
         <return type-id='48b5725f'/>
       </function-type>
       <function-type size-in-bits='64' id='17f99cdb'>
-        <parameter type-id='666fb412'/>
+        <parameter type-id='666fb412' name='wiphy'/>
         <return type-id='48b5725f'/>
       </function-type>
       <function-type size-in-bits='64' id='e357eac3'>
@@ -173384,6 +173560,13 @@
         <parameter type-id='835ace8d'/>
         <return type-id='63c7e8e1'/>
       </function-type>
+    </abi-instr>
+    <abi-instr address-size='64' path='net/wireless/ethtool.c' language='LANG_C89'>
+      <function-decl name='cfg80211_get_drvinfo' mangled-name='cfg80211_get_drvinfo' filepath='net/wireless/ethtool.c' line='7' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_get_drvinfo'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/ethtool.c' line='7' column='1'/>
+        <parameter type-id='8c4c4029' name='info' filepath='net/wireless/ethtool.c' line='7' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='net/wireless/ibss.c' language='LANG_C89'>
       <function-decl name='cfg80211_ibss_joined' mangled-name='cfg80211_ibss_joined' filepath='net/wireless/ibss.c' line='59' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_ibss_joined'>
@@ -173476,8 +173659,125 @@
         <parameter type-id='bda81d86' name='bss' filepath='net/wireless/mlme.c' line='146' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='cfg80211_abandon_assoc' mangled-name='cfg80211_abandon_assoc' filepath='net/wireless/mlme.c' line='162' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_abandon_assoc'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/mlme.c' line='162' column='1'/>
+        <parameter type-id='bda81d86' name='bss' filepath='net/wireless/mlme.c' line='162' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='net/wireless/nl80211.c' language='LANG_C89'>
+      <array-type-def dimensions='1' type-id='0c780827' size-in-bits='infinite' id='ff3ee64b'>
+        <subrange length='infinite' type-id='7ff19f0f' id='031f2035'/>
+      </array-type-def>
+      <class-decl name='sta_opmode_info' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='4342' column='1' id='ef0f7b3b'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='changed' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='4343' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='smps_mode' type-id='7f4af420' visibility='default' filepath='include/net/cfg80211.h' line='4344' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='bw' type-id='e043cccc' visibility='default' filepath='include/net/cfg80211.h' line='4345' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='96'>
+          <var-decl name='rx_nss' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='4346' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='cfg80211_wowlan_wakeup' size-in-bits='320' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='2852' column='1' id='04ce6ea2'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='disconnect' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2853' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8'>
+          <var-decl name='magic_pkt' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2853' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='16'>
+          <var-decl name='gtk_rekey_failure' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2853' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='24'>
+          <var-decl name='eap_identity_req' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2854' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='four_way_handshake' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2854' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='40'>
+          <var-decl name='rfkill_release' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2855' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='48'>
+          <var-decl name='packet_80211' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2855' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='56'>
+          <var-decl name='tcp_match' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2856' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='tcp_connlost' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2856' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='72'>
+          <var-decl name='tcp_nomoretokens' type-id='b50a4934' visibility='default' filepath='include/net/cfg80211.h' line='2856' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='96'>
+          <var-decl name='pattern_idx' type-id='a7832498' visibility='default' filepath='include/net/cfg80211.h' line='2857' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='packet_present_len' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='2858' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='160'>
+          <var-decl name='packet_len' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='2858' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='packet' type-id='eaa32e2f' visibility='default' filepath='include/net/cfg80211.h' line='2859' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='net_detect' type-id='4c95477c' visibility='default' filepath='include/net/cfg80211.h' line='2860' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='cfg80211_wowlan_nd_info' size-in-bits='64' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='2826' column='1' id='86dd1106'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='n_matches' type-id='95e97e5e' visibility='default' filepath='include/net/cfg80211.h' line='2827' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='matches' type-id='ff3ee64b' visibility='default' filepath='include/net/cfg80211.h' line='2828' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='cfg80211_wowlan_nd_match' size-in-bits='320' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='2811' column='1' id='3fd6e55f'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='ssid' type-id='0c960fcf' visibility='default' filepath='include/net/cfg80211.h' line='2812' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='288'>
+          <var-decl name='n_channels' type-id='95e97e5e' visibility='default' filepath='include/net/cfg80211.h' line='2813' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='channels' type-id='c165e8b9' visibility='default' filepath='include/net/cfg80211.h' line='2814' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='cfg80211_nan_match_params' size-in-bits='320' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='7526' column='1' id='b69348b2'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='type' type-id='f796e63e' visibility='default' filepath='include/net/cfg80211.h' line='7527' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='inst_id' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='7528' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='40'>
+          <var-decl name='peer_inst_id' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='7529' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='addr' type-id='bbaf3419' visibility='default' filepath='include/net/cfg80211.h' line='7530' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='info_len' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='7531' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='info' type-id='bbaf3419' visibility='default' filepath='include/net/cfg80211.h' line='7532' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='cookie' type-id='91ce1af9' visibility='default' filepath='include/net/cfg80211.h' line='7533' column='1'/>
+        </data-member>
+      </class-decl>
+      <enum-decl name='nl80211_nan_func_term_reason' filepath='include/uapi/linux/nl80211.h' line='5947' column='1' id='de7c4b9f'>
+        <underlying-type type-id='9cac1fee'/>
+        <enumerator name='NL80211_NAN_FUNC_TERM_REASON_USER_REQUEST' value='0'/>
+        <enumerator name='NL80211_NAN_FUNC_TERM_REASON_TTL_EXPIRED' value='1'/>
+        <enumerator name='NL80211_NAN_FUNC_TERM_REASON_ERROR' value='2'/>
+      </enum-decl>
       <class-decl name='cfg80211_ft_event_params' size-in-bits='320' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='7273' column='1' id='cc4b6920'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ies' type-id='bbaf3419' visibility='default' filepath='include/net/cfg80211.h' line='7274' column='1'/>
@@ -173500,6 +173800,18 @@
         <enumerator name='NL80211_CQM_RSSI_THRESHOLD_EVENT_LOW' value='0'/>
         <enumerator name='NL80211_CQM_RSSI_THRESHOLD_EVENT_HIGH' value='1'/>
         <enumerator name='NL80211_CQM_RSSI_BEACON_LOSS_EVENT' value='2'/>
+      </enum-decl>
+      <enum-decl name='cfg80211_station_type' filepath='include/net/cfg80211.h' line='1262' column='1' id='1f6e949e'>
+        <underlying-type type-id='9cac1fee'/>
+        <enumerator name='CFG80211_STA_AP_CLIENT' value='0'/>
+        <enumerator name='CFG80211_STA_AP_CLIENT_UNASSOC' value='1'/>
+        <enumerator name='CFG80211_STA_AP_MLME_CLIENT' value='2'/>
+        <enumerator name='CFG80211_STA_AP_STA' value='3'/>
+        <enumerator name='CFG80211_STA_IBSS' value='4'/>
+        <enumerator name='CFG80211_STA_TDLS_PEER_SETUP' value='5'/>
+        <enumerator name='CFG80211_STA_TDLS_PEER_ACTIVE' value='6'/>
+        <enumerator name='CFG80211_STA_MESH_PEER_KERNEL' value='7'/>
+        <enumerator name='CFG80211_STA_MESH_PEER_USER' value='8'/>
       </enum-decl>
       <enum-decl name='nl80211_commands' filepath='include/uapi/linux/nl80211.h' line='1107' column='1' id='187e1e49'>
         <underlying-type type-id='9cac1fee'/>
@@ -173938,9 +174250,21 @@
         <enumerator name='NL80211_ATTR_MAX' value='282'/>
       </enum-decl>
       <pointer-type-def type-id='cc4b6920' size-in-bits='64' id='76db5996'/>
+      <pointer-type-def type-id='b69348b2' size-in-bits='64' id='c46ed620'/>
+      <pointer-type-def type-id='86dd1106' size-in-bits='64' id='4c95477c'/>
+      <pointer-type-def type-id='3fd6e55f' size-in-bits='64' id='0c780827'/>
+      <pointer-type-def type-id='04ce6ea2' size-in-bits='64' id='fff1f400'/>
+      <pointer-type-def type-id='ef0f7b3b' size-in-bits='64' id='748fb50b'/>
       <function-decl name='cfg80211_vendor_cmd_reply' mangled-name='cfg80211_vendor_cmd_reply' filepath='net/wireless/nl80211.c' line='13237' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_vendor_cmd_reply'>
         <parameter type-id='0fbf3cfd' name='skb' filepath='net/wireless/nl80211.c' line='13237' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='cfg80211_tx_mgmt_expired' mangled-name='cfg80211_tx_mgmt_expired' filepath='net/wireless/nl80211.c' line='15682' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_tx_mgmt_expired'>
+        <parameter type-id='63c7e8e1' name='wdev' filepath='net/wireless/nl80211.c' line='15682' column='1'/>
+        <parameter type-id='91ce1af9' name='cookie' filepath='net/wireless/nl80211.c' line='15682' column='1'/>
+        <parameter type-id='ec00acfb' name='chan' filepath='net/wireless/nl80211.c' line='15683' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='15684' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='cfg80211_tdls_oper_request' mangled-name='cfg80211_tdls_oper_request' filepath='net/wireless/nl80211.c' line='16732' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_tdls_oper_request'>
         <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='16732' column='1'/>
@@ -173950,10 +174274,49 @@
         <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='16734' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='cfg80211_sta_opmode_change_notify' mangled-name='cfg80211_sta_opmode_change_notify' filepath='net/wireless/nl80211.c' line='16415' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_sta_opmode_change_notify'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='16415' column='1'/>
+        <parameter type-id='bbaf3419' name='mac' filepath='net/wireless/nl80211.c' line='16415' column='1'/>
+        <parameter type-id='748fb50b' name='sta_opmode' filepath='net/wireless/nl80211.c' line='16416' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='16417' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='cfg80211_rx_unprot_mlme_mgmt' mangled-name='cfg80211_rx_unprot_mlme_mgmt' filepath='net/wireless/nl80211.c' line='15192' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_rx_unprot_mlme_mgmt'>
         <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='15192' column='1'/>
         <parameter type-id='bbaf3419' name='buf' filepath='net/wireless/nl80211.c' line='15192' column='1'/>
         <parameter type-id='b59d7dce' name='len' filepath='net/wireless/nl80211.c' line='15193' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='cfg80211_rx_unexpected_4addr_frame' mangled-name='cfg80211_rx_unexpected_4addr_frame' filepath='net/wireless/nl80211.c' line='15840' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_rx_unexpected_4addr_frame'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='15840' column='1'/>
+        <parameter type-id='bbaf3419' name='addr' filepath='net/wireless/nl80211.c' line='15841' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='15841' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
+      <function-decl name='cfg80211_rx_spurious_frame' mangled-name='cfg80211_rx_spurious_frame' filepath='net/wireless/nl80211.c' line='15820' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_rx_spurious_frame'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='15820' column='1'/>
+        <parameter type-id='bbaf3419' name='addr' filepath='net/wireless/nl80211.c' line='15821' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='15821' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
+      <function-decl name='cfg80211_rx_control_port' mangled-name='cfg80211_rx_control_port' filepath='net/wireless/nl80211.c' line='15998' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_rx_control_port'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='15998' column='1'/>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/wireless/nl80211.c' line='15999' column='1'/>
+        <parameter type-id='b50a4934' name='unencrypted' filepath='net/wireless/nl80211.c' line='15999' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
+      <function-decl name='cfg80211_report_wowlan_wakeup' mangled-name='cfg80211_report_wowlan_wakeup' filepath='net/wireless/nl80211.c' line='16617' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_report_wowlan_wakeup'>
+        <parameter type-id='63c7e8e1' name='wdev' filepath='net/wireless/nl80211.c' line='16617' column='1'/>
+        <parameter type-id='fff1f400' name='wakeup' filepath='net/wireless/nl80211.c' line='16618' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='16619' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='cfg80211_report_obss_beacon' mangled-name='cfg80211_report_obss_beacon' filepath='net/wireless/nl80211.c' line='16513' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_report_obss_beacon'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/nl80211.c' line='16513' column='1'/>
+        <parameter type-id='bbaf3419' name='frame' filepath='net/wireless/nl80211.c' line='16514' column='1'/>
+        <parameter type-id='b59d7dce' name='len' filepath='net/wireless/nl80211.c' line='16514' column='1'/>
+        <parameter type-id='95e97e5e' name='freq' filepath='net/wireless/nl80211.c' line='16515' column='1'/>
+        <parameter type-id='95e97e5e' name='sig_dbm' filepath='net/wireless/nl80211.c' line='16515' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='cfg80211_remain_on_channel_expired' mangled-name='cfg80211_remain_on_channel_expired' filepath='net/wireless/nl80211.c' line='15669' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_remain_on_channel_expired'>
@@ -173971,6 +174334,16 @@
         <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='15657' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='cfg80211_probe_status' mangled-name='cfg80211_probe_status' filepath='net/wireless/nl80211.c' line='16470' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_probe_status'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='16470' column='1'/>
+        <parameter type-id='bbaf3419' name='addr' filepath='net/wireless/nl80211.c' line='16470' column='1'/>
+        <parameter type-id='91ce1af9' name='cookie' filepath='net/wireless/nl80211.c' line='16471' column='1'/>
+        <parameter type-id='b50a4934' name='acked' filepath='net/wireless/nl80211.c' line='16471' column='1'/>
+        <parameter type-id='a7832498' name='ack_signal' filepath='net/wireless/nl80211.c' line='16471' column='1'/>
+        <parameter type-id='b50a4934' name='is_valid_ack_signal' filepath='net/wireless/nl80211.c' line='16472' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='16472' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='cfg80211_pmksa_candidate_notify' mangled-name='cfg80211_pmksa_candidate_notify' filepath='net/wireless/nl80211.c' line='16274' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_pmksa_candidate_notify'>
         <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='16274' column='1'/>
         <parameter type-id='95e97e5e' name='index' filepath='net/wireless/nl80211.c' line='16274' column='1'/>
@@ -173984,6 +174357,20 @@
         <parameter type-id='bbaf3419' name='mac_addr' filepath='net/wireless/nl80211.c' line='15695' column='1'/>
         <parameter type-id='7af1dc96' name='sinfo' filepath='net/wireless/nl80211.c' line='15696' column='1'/>
         <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='15696' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='cfg80211_nan_match' mangled-name='cfg80211_nan_match' filepath='net/wireless/nl80211.c' line='12676' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_nan_match'>
+        <parameter type-id='63c7e8e1' name='wdev' filepath='net/wireless/nl80211.c' line='12676' column='1'/>
+        <parameter type-id='c46ed620' name='match' filepath='net/wireless/nl80211.c' line='12677' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='12677' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='cfg80211_nan_func_terminated' mangled-name='cfg80211_nan_func_terminated' filepath='net/wireless/nl80211.c' line='12756' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_nan_func_terminated'>
+        <parameter type-id='63c7e8e1' name='wdev' filepath='net/wireless/nl80211.c' line='12756' column='1'/>
+        <parameter type-id='f9b06939' name='inst_id' filepath='net/wireless/nl80211.c' line='12757' column='1'/>
+        <parameter type-id='de7c4b9f' name='reason' filepath='net/wireless/nl80211.c' line='12758' column='1'/>
+        <parameter type-id='91ce1af9' name='cookie' filepath='net/wireless/nl80211.c' line='12759' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='12759' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='cfg80211_mgmt_tx_status' mangled-name='cfg80211_mgmt_tx_status' filepath='net/wireless/nl80211.c' line='15903' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_mgmt_tx_status'>
@@ -174032,6 +174419,23 @@
         <parameter type-id='bbaf3419' name='peer' filepath='net/wireless/nl80211.c' line='16134' column='1'/>
         <parameter type-id='19c2251e' name='num_packets' filepath='net/wireless/nl80211.c' line='16134' column='1'/>
         <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='16134' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='cfg80211_cqm_beacon_loss_notify' mangled-name='cfg80211_cqm_beacon_loss_notify' filepath='net/wireless/nl80211.c' line='16155' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_cqm_beacon_loss_notify'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='16155' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/nl80211.c' line='16155' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='cfg80211_check_station_change' mangled-name='cfg80211_check_station_change' filepath='net/wireless/nl80211.c' line='5387' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_check_station_change'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/nl80211.c' line='5387' column='1'/>
+        <parameter type-id='5b19f7e6' name='params' filepath='net/wireless/nl80211.c' line='5388' column='1'/>
+        <parameter type-id='1f6e949e' name='statype' filepath='net/wireless/nl80211.c' line='5389' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='cfg80211_ch_switch_started_notify' mangled-name='cfg80211_ch_switch_started_notify' filepath='net/wireless/nl80211.c' line='16352' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_ch_switch_started_notify'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/nl80211.c' line='16352' column='1'/>
+        <parameter type-id='0953fbfe' name='chandef' filepath='net/wireless/nl80211.c' line='16353' column='1'/>
+        <parameter type-id='f9b06939' name='count' filepath='net/wireless/nl80211.c' line='16354' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='cfg80211_ch_switch_notify' mangled-name='cfg80211_ch_switch_notify' filepath='net/wireless/nl80211.c' line='16326' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_ch_switch_notify'>
@@ -174192,6 +174596,10 @@
         <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/reg.c' line='3742' column='1'/>
         <parameter type-id='c24e05b4' name='rd' filepath='net/wireless/reg.c' line='3743' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='regulatory_pre_cac_allowed' mangled-name='regulatory_pre_cac_allowed' filepath='net/wireless/reg.c' line='3871' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='regulatory_pre_cac_allowed'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/reg.c' line='3871' column='1'/>
+        <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='regulatory_hint' mangled-name='regulatory_hint' filepath='net/wireless/reg.c' line='3011' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='regulatory_hint'>
         <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/reg.c' line='3011' column='1'/>
@@ -174680,6 +175088,11 @@
       <pointer-type-def type-id='616d6efe' size-in-bits='64' id='6ff43814'/>
       <pointer-type-def type-id='b1493ece' size-in-bits='64' id='40cd17b4'/>
       <pointer-type-def type-id='1aa7b3b9' size-in-bits='64' id='57a568d1'/>
+      <function-decl name='cfg80211_sched_scan_stopped_rtnl' mangled-name='cfg80211_sched_scan_stopped_rtnl' filepath='net/wireless/scan.c' line='648' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_sched_scan_stopped_rtnl'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='648' column='1'/>
+        <parameter type-id='91ce1af9' name='reqid' filepath='net/wireless/scan.c' line='648' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='cfg80211_put_bss' mangled-name='cfg80211_put_bss' filepath='net/wireless/scan.c' line='1949' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_put_bss'>
         <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1949' column='1'/>
         <parameter type-id='bda81d86' name='pub' filepath='net/wireless/scan.c' line='1949' column='1'/>
@@ -174704,6 +175117,25 @@
         <parameter type-id='a9e8b173' name='request' filepath='net/wireless/scan.c' line='528' column='1'/>
         <parameter type-id='40cd17b4' name='info' filepath='net/wireless/scan.c' line='529' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='cfg80211_ref_bss' mangled-name='cfg80211_ref_bss' filepath='net/wireless/scan.c' line='1933' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_ref_bss'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1933' column='1'/>
+        <parameter type-id='bda81d86' name='pub' filepath='net/wireless/scan.c' line='1933' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='cfg80211_merge_profile' mangled-name='cfg80211_merge_profile' filepath='net/wireless/scan.c' line='1517' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_merge_profile'>
+        <parameter type-id='bbaf3419' name='ie' filepath='net/wireless/scan.c' line='1517' column='1'/>
+        <parameter type-id='b59d7dce' name='ielen' filepath='net/wireless/scan.c' line='1517' column='1'/>
+        <parameter type-id='aa7ca86a' name='mbssid_elem' filepath='net/wireless/scan.c' line='1518' column='1'/>
+        <parameter type-id='aa7ca86a' name='sub_elem' filepath='net/wireless/scan.c' line='1519' column='1'/>
+        <parameter type-id='8bff8096' name='merged_ie' filepath='net/wireless/scan.c' line='1520' column='1'/>
+        <parameter type-id='b59d7dce' name='max_copy_len' filepath='net/wireless/scan.c' line='1520' column='1'/>
+        <return type-id='b59d7dce'/>
+      </function-decl>
+      <function-decl name='cfg80211_is_element_inherited' mangled-name='cfg80211_is_element_inherited' filepath='net/wireless/scan.c' line='182' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_is_element_inherited'>
+        <parameter type-id='aa7ca86a' name='elem' filepath='net/wireless/scan.c' line='182' column='1'/>
+        <parameter type-id='aa7ca86a' name='non_inherit_elem' filepath='net/wireless/scan.c' line='183' column='1'/>
+        <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='cfg80211_inform_bss_frame_data' mangled-name='cfg80211_inform_bss_frame_data' filepath='net/wireless/scan.c' line='1883' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_inform_bss_frame_data'>
         <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1883' column='1'/>
@@ -174906,12 +175338,73 @@
           <var-decl name='data' type-id='29c3368c' visibility='default' filepath='include/linux/ieee80211.h' line='3452' column='1'/>
         </data-member>
       </class-decl>
+      <class-decl name='iface_combination_params' size-in-bits='512' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='1106' column='1' id='61203278'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='num_different_channels' type-id='95e97e5e' visibility='default' filepath='include/net/cfg80211.h' line='1107' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='radar_detect' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='1108' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='iftype_num' type-id='77ba73f2' visibility='default' filepath='include/net/cfg80211.h' line='1109' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='480'>
+          <var-decl name='new_beacon_int' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='1110' column='1'/>
+        </data-member>
+      </class-decl>
+      <enum-decl name='ieee80211_p2p_attr_id' filepath='include/linux/ieee80211.h' line='1206' column='1' id='62b2e45f'>
+        <underlying-type type-id='9cac1fee'/>
+        <enumerator name='IEEE80211_P2P_ATTR_STATUS' value='0'/>
+        <enumerator name='IEEE80211_P2P_ATTR_MINOR_REASON' value='1'/>
+        <enumerator name='IEEE80211_P2P_ATTR_CAPABILITY' value='2'/>
+        <enumerator name='IEEE80211_P2P_ATTR_DEVICE_ID' value='3'/>
+        <enumerator name='IEEE80211_P2P_ATTR_GO_INTENT' value='4'/>
+        <enumerator name='IEEE80211_P2P_ATTR_GO_CONFIG_TIMEOUT' value='5'/>
+        <enumerator name='IEEE80211_P2P_ATTR_LISTEN_CHANNEL' value='6'/>
+        <enumerator name='IEEE80211_P2P_ATTR_GROUP_BSSID' value='7'/>
+        <enumerator name='IEEE80211_P2P_ATTR_EXT_LISTEN_TIMING' value='8'/>
+        <enumerator name='IEEE80211_P2P_ATTR_INTENDED_IFACE_ADDR' value='9'/>
+        <enumerator name='IEEE80211_P2P_ATTR_MANAGABILITY' value='10'/>
+        <enumerator name='IEEE80211_P2P_ATTR_CHANNEL_LIST' value='11'/>
+        <enumerator name='IEEE80211_P2P_ATTR_ABSENCE_NOTICE' value='12'/>
+        <enumerator name='IEEE80211_P2P_ATTR_DEVICE_INFO' value='13'/>
+        <enumerator name='IEEE80211_P2P_ATTR_GROUP_INFO' value='14'/>
+        <enumerator name='IEEE80211_P2P_ATTR_GROUP_ID' value='15'/>
+        <enumerator name='IEEE80211_P2P_ATTR_INTERFACE' value='16'/>
+        <enumerator name='IEEE80211_P2P_ATTR_OPER_CHANNEL' value='17'/>
+        <enumerator name='IEEE80211_P2P_ATTR_INVITE_FLAGS' value='18'/>
+        <enumerator name='IEEE80211_P2P_ATTR_VENDOR_SPECIFIC' value='221'/>
+        <enumerator name='IEEE80211_P2P_ATTR_MAX' value='222'/>
+      </enum-decl>
       <qualified-type-def type-id='251eca3f' const='yes' id='e8ce2004'/>
       <pointer-type-def type-id='e8ce2004' size-in-bits='64' id='aa7ca86a'/>
       <pointer-type-def type-id='1c00b436' size-in-bits='64' id='f61f0f6c'/>
+      <pointer-type-def type-id='61203278' size-in-bits='64' id='fdbd129e'/>
+      <pointer-type-def type-id='3eaa0294' size-in-bits='64' id='269925a1'/>
       <pointer-type-def type-id='5ece574c' size-in-bits='64' id='185e765a'/>
+      <pointer-type-def type-id='dc417304' size-in-bits='64' id='21f3d8d6'/>
       <var-decl name='rfc1042_header' type-id='51f2d827' mangled-name='rfc1042_header' visibility='default' filepath='net/wireless/util.c' line='2026' column='1' elf-symbol-id='rfc1042_header'/>
       <var-decl name='bridge_tunnel_header' type-id='51f2d827' mangled-name='bridge_tunnel_header' visibility='default' filepath='net/wireless/util.c' line='2031' column='1' elf-symbol-id='bridge_tunnel_header'/>
+      <function-decl name='ieee80211_operating_class_to_band' mangled-name='ieee80211_operating_class_to_band' filepath='net/wireless/util.c' line='1565' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_operating_class_to_band'>
+        <parameter type-id='f9b06939' name='operating_class' filepath='net/wireless/util.c' line='1565' column='1'/>
+        <parameter type-id='269925a1' name='band' filepath='net/wireless/util.c' line='1566' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
+      <function-decl name='ieee80211_mandatory_rates' mangled-name='ieee80211_mandatory_rates' filepath='net/wireless/util.c' line='46' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_mandatory_rates'>
+        <parameter type-id='3cad9e1a' name='sband' filepath='net/wireless/util.c' line='46' column='1'/>
+        <parameter type-id='95d46034' name='scan_width' filepath='net/wireless/util.c' line='47' column='1'/>
+        <return type-id='19c2251e'/>
+      </function-decl>
+      <function-decl name='ieee80211_ie_split_ric' mangled-name='ieee80211_ie_split_ric' filepath='net/wireless/util.c' line='1517' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_ie_split_ric'>
+        <parameter type-id='bbaf3419' name='ies' filepath='net/wireless/util.c' line='1517' column='1'/>
+        <parameter type-id='b59d7dce' name='ielen' filepath='net/wireless/util.c' line='1517' column='1'/>
+        <parameter type-id='bbaf3419' name='ids' filepath='net/wireless/util.c' line='1518' column='1'/>
+        <parameter type-id='95e97e5e' name='n_ids' filepath='net/wireless/util.c' line='1518' column='1'/>
+        <parameter type-id='bbaf3419' name='after_ric' filepath='net/wireless/util.c' line='1519' column='1'/>
+        <parameter type-id='95e97e5e' name='n_after_ric' filepath='net/wireless/util.c' line='1519' column='1'/>
+        <parameter type-id='b59d7dce' name='offset' filepath='net/wireless/util.c' line='1520' column='1'/>
+        <return type-id='b59d7dce'/>
+      </function-decl>
       <function-decl name='ieee80211_hdrlen' mangled-name='ieee80211_hdrlen' filepath='net/wireless/util.c' line='420' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_hdrlen'>
         <parameter type-id='23119536' name='fc' filepath='net/wireless/util.c' line='420' column='1'/>
         <return type-id='f0981eeb'/>
@@ -174943,6 +175436,11 @@
         <parameter type-id='3eaa0294' name='band' filepath='net/wireless/util.c' line='75' column='1'/>
         <return type-id='19c2251e'/>
       </function-decl>
+      <function-decl name='ieee80211_chandef_to_operating_class' mangled-name='ieee80211_chandef_to_operating_class' filepath='net/wireless/util.c' line='1592' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_chandef_to_operating_class'>
+        <parameter type-id='0953fbfe' name='chandef' filepath='net/wireless/util.c' line='1592' column='1'/>
+        <parameter type-id='8bff8096' name='op_class' filepath='net/wireless/util.c' line='1593' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
       <function-decl name='ieee80211_bss_get_elem' mangled-name='ieee80211_bss_get_elem' filepath='net/wireless/util.c' line='865' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_bss_get_elem'>
         <parameter type-id='bda81d86' name='bss' filepath='net/wireless/util.c' line='865' column='1'/>
         <parameter type-id='f9b06939' name='id' filepath='net/wireless/util.c' line='865' column='1'/>
@@ -174958,15 +175456,61 @@
         <parameter type-id='bbaf3419' name='check_sa' filepath='net/wireless/util.c' line='703' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='cfg80211_sinfo_alloc_tid_stats' mangled-name='cfg80211_sinfo_alloc_tid_stats' filepath='net/wireless/util.c' line='2012' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_sinfo_alloc_tid_stats'>
+        <parameter type-id='7af1dc96' name='sinfo' filepath='net/wireless/util.c' line='2012' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/util.c' line='2012' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='cfg80211_send_layer2_update' mangled-name='cfg80211_send_layer2_update' filepath='net/wireless/util.c' line='2046' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_send_layer2_update'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/wireless/util.c' line='2046' column='1'/>
+        <parameter type-id='bbaf3419' name='addr' filepath='net/wireless/util.c' line='2046' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='cfg80211_iter_combinations' mangled-name='cfg80211_iter_combinations' filepath='net/wireless/util.c' line='1771' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_iter_combinations'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/util.c' line='1771' column='1'/>
+        <parameter type-id='fdbd129e' name='params' filepath='net/wireless/util.c' line='1772' column='1'/>
+        <parameter type-id='21f3d8d6' name='iter' filepath='net/wireless/util.c' line='1773' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='net/wireless/util.c' line='1775' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='cfg80211_iftype_allowed' mangled-name='cfg80211_iftype_allowed' filepath='net/wireless/util.c' line='2185' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_iftype_allowed'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/util.c' line='2185' column='1'/>
+        <parameter type-id='86505f90' name='iftype' filepath='net/wireless/util.c' line='2185' column='1'/>
+        <parameter type-id='b50a4934' name='is_4addr' filepath='net/wireless/util.c' line='2186' column='1'/>
+        <parameter type-id='f9b06939' name='check_swif' filepath='net/wireless/util.c' line='2186' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
+      <function-decl name='cfg80211_get_p2p_attr' mangled-name='cfg80211_get_p2p_attr' filepath='net/wireless/util.c' line='1372' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_get_p2p_attr'>
+        <parameter type-id='bbaf3419' name='ies' filepath='net/wireless/util.c' line='1372' column='1'/>
+        <parameter type-id='f0981eeb' name='len' filepath='net/wireless/util.c' line='1372' column='1'/>
+        <parameter type-id='62b2e45f' name='attr' filepath='net/wireless/util.c' line='1373' column='1'/>
+        <parameter type-id='8bff8096' name='buf' filepath='net/wireless/util.c' line='1374' column='1'/>
+        <parameter type-id='f0981eeb' name='bufsize' filepath='net/wireless/util.c' line='1374' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='cfg80211_free_nan_func' mangled-name='cfg80211_free_nan_func' filepath='net/wireless/util.c' line='1975' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_free_nan_func'>
+        <parameter type-id='c3524532' name='f' filepath='net/wireless/util.c' line='1975' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='cfg80211_classify8021d' mangled-name='cfg80211_classify8021d' filepath='net/wireless/util.c' line='787' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_classify8021d'>
         <parameter type-id='0fbf3cfd' name='skb' filepath='net/wireless/util.c' line='787' column='1'/>
         <parameter type-id='794da86a' name='qos_map' filepath='net/wireless/util.c' line='788' column='1'/>
         <return type-id='f0981eeb'/>
       </function-decl>
+      <function-decl name='cfg80211_check_combinations' mangled-name='cfg80211_check_combinations' filepath='net/wireless/util.c' line='1888' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_check_combinations'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/util.c' line='1888' column='1'/>
+        <parameter type-id='fdbd129e' name='params' filepath='net/wireless/util.c' line='1889' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='cfg80211_calculate_bitrate' mangled-name='cfg80211_calculate_bitrate' filepath='net/wireless/util.c' line='1355' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_calculate_bitrate'>
         <parameter type-id='185e765a' name='rate' filepath='net/wireless/util.c' line='1355' column='1'/>
         <return type-id='19c2251e'/>
       </function-decl>
+      <function-type size-in-bits='64' id='dc417304'>
+        <parameter type-id='fa32a449'/>
+        <parameter type-id='eaa32e2f'/>
+        <return type-id='48b5725f'/>
+      </function-type>
     </abi-instr>
     <abi-instr address-size='64' path='net/xfrm/xfrm_algo.c' language='LANG_C89'>
       <class-decl name='xfrm_algo_desc' size-in-bits='384' is-struct='yes' visibility='default' filepath='include/net/xfrm.h' line='1381' column='1' id='e8649a20'>
@@ -178535,6 +179079,12 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='sound/core/pcm_memory.c' language='LANG_C89'>
+      <function-decl name='_snd_pcm_lib_alloc_vmalloc_buffer' mangled-name='_snd_pcm_lib_alloc_vmalloc_buffer' filepath='sound/core/pcm_memory.c' line='357' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_snd_pcm_lib_alloc_vmalloc_buffer'>
+        <parameter type-id='06b2cd14' name='substream' filepath='sound/core/pcm_memory.c' line='357' column='1'/>
+        <parameter type-id='b59d7dce' name='size' filepath='sound/core/pcm_memory.c' line='358' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp_flags' filepath='sound/core/pcm_memory.c' line='358' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='snd_pcm_lib_preallocate_pages_for_all' mangled-name='snd_pcm_lib_preallocate_pages_for_all' filepath='sound/core/pcm_memory.c' line='241' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_lib_preallocate_pages_for_all'>
         <parameter type-id='4c9f335b' name='pcm' filepath='sound/core/pcm_memory.c' line='241' column='1'/>
         <parameter type-id='95e97e5e' name='type' filepath='sound/core/pcm_memory.c' line='242' column='1'/>
@@ -178560,12 +179110,27 @@
         <parameter type-id='b59d7dce' name='size' filepath='sound/core/pcm_memory.c' line='287' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='snd_pcm_lib_get_vmalloc_page' mangled-name='snd_pcm_lib_get_vmalloc_page' filepath='sound/core/pcm_memory.c' line='408' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_lib_get_vmalloc_page'>
+        <parameter type-id='06b2cd14' name='substream' filepath='sound/core/pcm_memory.c' line='408' column='1'/>
+        <parameter type-id='7359adad' name='offset' filepath='sound/core/pcm_memory.c' line='409' column='1'/>
+        <return type-id='02f11ed4'/>
+      </function-decl>
+      <function-decl name='snd_pcm_lib_free_vmalloc_buffer' mangled-name='snd_pcm_lib_free_vmalloc_buffer' filepath='sound/core/pcm_memory.c' line='385' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_lib_free_vmalloc_buffer'>
+        <parameter type-id='06b2cd14' name='substream' filepath='sound/core/pcm_memory.c' line='385' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='snd_pcm_lib_free_pages' mangled-name='snd_pcm_lib_free_pages' filepath='sound/core/pcm_memory.c' line='338' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_lib_free_pages'>
         <parameter type-id='06b2cd14' name='substream' filepath='sound/core/pcm_memory.c' line='338' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='sound/core/pcm_misc.c' language='LANG_C89'>
+      <function-decl name='snd_pcm_format_set_silence' mangled-name='snd_pcm_format_set_silence' filepath='sound/core/pcm_misc.c' line='415' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_format_set_silence'>
+        <parameter type-id='67fa9bd5' name='format' filepath='sound/core/pcm_misc.c' line='415' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='sound/core/pcm_misc.c' line='415' column='1'/>
+        <parameter type-id='f0981eeb' name='samples' filepath='sound/core/pcm_misc.c' line='415' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='snd_pcm_rate_to_rate_bit' mangled-name='snd_pcm_rate_to_rate_bit' filepath='sound/core/pcm_misc.c' line='510' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_rate_to_rate_bit'>
         <parameter type-id='f0981eeb' name='rate' filepath='sound/core/pcm_misc.c' line='510' column='1'/>
         <return type-id='f0981eeb'/>
