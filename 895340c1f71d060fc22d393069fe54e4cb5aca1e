@@ -86,6 +86,24 @@
       "parentUuid": "3cfc955c_77f04629",
       "revId": "895340c1f71d060fc22d393069fe54e4cb5aca1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fad20129_ecef8cb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2022-06-30T06:13:27Z",
+      "side": 1,
+      "message": "I\u0027ve asked the commit author Haibo to upstream, he\u0027ll give the lore link.\nafter upstream done, I\u0027ll push a new commit and back to discuss in the Bug 236922027\nthanks!",
+      "parentUuid": "93296c78_755a74a7",
+      "revId": "895340c1f71d060fc22d393069fe54e4cb5aca1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
