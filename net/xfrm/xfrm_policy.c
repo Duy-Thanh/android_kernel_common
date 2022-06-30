@@ -3258,7 +3258,7 @@ xfrm_state_ok(const struct xfrm_tmpl *tmpl, const struct xfrm_state *x,
  */
 static inline int
 xfrm_policy_ok(const struct xfrm_tmpl *tmpl, const struct sec_path *sp, int start,
-	       unsigned short family)
+			   unsigned short family)
 {
 	int idx = start;
 
@@ -3647,8 +3647,15 @@ int __xfrm_policy_check(struct sock *sk, int dir, struct sk_buff *skb,
 		 * Order is _important_. Later we will implement
 		 * some barriers, but at the moment barriers
 		 * are implied between each two transformations.
+		 * Skips verifying secpath entries that have already been
+		 * verified in the past.
 		 */
 		for (i = xfrm_nr-1, k = 0; i >= 0; i--) {
+			if (sp->first_unchecked & 1 << k) {
+				k++;
+				continue; // Already checked, skip.
+			}
+
 			k = xfrm_policy_ok(tpp[i], sp, k, family);
 			if (k < 0) {
 				if (k < -1)
@@ -3665,6 +3672,8 @@ int __xfrm_policy_check(struct sock *sk, int dir, struct sk_buff *skb,
 		}
 
 		xfrm_pols_put(pols, npols);
+		sp->first_unchecked |= (1 << k) - 1;
+
 		return 1;
 	}
 	XFRM_INC_STATS(net, LINUX_MIB_XFRMINPOLBLOCK);
