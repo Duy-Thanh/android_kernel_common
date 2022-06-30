@@ -129,6 +129,7 @@ struct sec_path *secpath_set(struct sk_buff *skb)
 	memset(sp->ovec, 0, sizeof(sp->ovec));
 	sp->olen = 0;
 	sp->len = 0;
+	sp->verified_cnt = 0;
 
 	return sp;
 }
@@ -587,7 +588,7 @@ int xfrm_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
 
 		/* If nested tunnel, check outer states before context is lost. */
 		if (x->outer_mode.flags & XFRM_MODE_FLAG_TUNNEL &&
-		    sp->len > 0 &&
+		    sp->len > sp->verified_cnt &&
 		    !xfrm_policy_check(NULL, XFRM_POLICY_IN, skb, family)) {
 			goto drop;
 		}
