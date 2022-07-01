@@ -970,7 +970,10 @@ int snd_pcm_attach_substream(struct snd_pcm *pcm, int stream,
 
 	runtime->status->state = SNDRV_PCM_STATE_OPEN;
 	mutex_init(&runtime->buffer_mutex);
+<<<<<<< HEAD   (afa006 Merge 5.4.202 into android12-5.4-lts)
 	atomic_set(&runtime->buffer_accessing, 0);
+=======
+>>>>>>> BRANCH (148e4b ANDROID: ABI: update symbols to sunxi whitelist for sunxi-ns)
 
 	substream->runtime = runtime;
 	substream->private_data = pcm->private_data;

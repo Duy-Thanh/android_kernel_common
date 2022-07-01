@@ -426,7 +426,10 @@ struct snd_pcm_runtime {
 #endif
 #ifndef __GENKSYMS__
 	struct mutex buffer_mutex;	/* protect for buffer changes */
+<<<<<<< HEAD   (afa006 Merge 5.4.202 into android12-5.4-lts)
 	atomic_t buffer_accessing;	/* >0: in r/w operation, <0: blocked */
+=======
+>>>>>>> BRANCH (148e4b ANDROID: ABI: update symbols to sunxi whitelist for sunxi-ns)
 #endif
 };
 
