@@ -70,6 +70,30 @@
       },
       "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "002a9612_8f99a9ff",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-01T19:13:49Z",
+      "side": 1,
+      "message": "I just followed how `struct cma` is dealt with here. That is the same case I think.",
+      "parentUuid": "0bdf1aa6_e3120556",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 15
+      },
+      "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
