@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "825bb817_254067f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-01T07:25:49Z",
+      "side": 1,
+      "message": "why would `android-mainline` need this?",
+      "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9625dbd0_c2c4aa85",
