@@ -2148,6 +2148,7 @@
   ufshcd_system_suspend
   ufshcd_uic_hibern8_enter
   ufshcd_uic_hibern8_exit
+  get_storage_boot_device
   __uio_register_device
   uio_unregister_device
   unlock_page
