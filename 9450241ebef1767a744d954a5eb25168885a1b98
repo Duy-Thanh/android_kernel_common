@@ -94,6 +94,30 @@
       },
       "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00603347_35f0088d",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-07-01T19:26:13Z",
+      "side": 1,
+      "message": "I see, LGTM then. IMO I would expect something like:\n```\ndiff --git a/include/trace/hooks/mm.h b/include/trace/hooks/mm.h\nindex c6a017a0ea4d..14b250d9467b 100644\n--- a/include/trace/hooks/mm.h\n+++ b/include/trace/hooks/mm.h\n@@ -50,9 +50,11 @@ DECLARE_HOOK(android_vh_cma_alloc_finish,\n        TP_PROTO(struct cma *cma, struct page *page, unsigned long count,\n                 unsigned int align, gfp_t gfp_mask, s64 ts),\n        TP_ARGS(cma, page, count, align, gfp_mask, ts));\n+#if IS_ENABLED(CONFIG_CONTIG_ALLOC)\n DECLARE_HOOK(android_vh_cma_alloc_busy_info,\n        TP_PROTO(struct acr_info *info),\n        TP_ARGS(info));\n+#endif\n DECLARE_HOOK(android_vh_calc_alloc_flags,\n        TP_PROTO(unsigned int pflags, gfp_t gfp_mask, unsigned int *alloc_flags,\n                bool *bypass),\n```\n\nAfter all it seems we don\u0027t want to declare the hook using `struct acr_info` if `!CONTIG_ALLOC`?",
+      "parentUuid": "002a9612_8f99a9ff",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 15
+      },
+      "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
