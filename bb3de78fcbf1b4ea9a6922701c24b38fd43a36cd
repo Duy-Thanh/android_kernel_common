@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0f6d875_24f473d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-07-01T12:39:24Z",
+      "side": 1,
+      "message": "Tested with `adb shell apex/com.android.compos/bin/composd_cmd test-compile`",
+      "revId": "bb3de78fcbf1b4ea9a6922701c24b38fd43a36cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
