@@ -52,6 +52,24 @@
       "parentUuid": "8a00d1d1_ca5de0be",
       "revId": "6fba2b992dfb8ec9dacdbfeb2d715104b5ccce8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3586f0_ea9d561b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-07-01T09:08:46Z",
+      "side": 1,
+      "message": "| EXPORT_TRACEPOINT_SYMBOL_GPL(binder_txn_latency_free);\n| why would that be needed?\nIf I don\u0027t add it, my ko compilation will report an error: ERROR: modpost: \"__tracepoint_binder_txn_latency_free\" undefined!",
+      "parentUuid": "d9915751_6249c832",
+      "revId": "6fba2b992dfb8ec9dacdbfeb2d715104b5ccce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
