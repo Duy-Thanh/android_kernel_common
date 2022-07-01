@@ -22,6 +22,30 @@
       },
       "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4133b907_4796a6f5",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-01T18:59:19Z",
+      "side": 1,
+      "message": "The definition in `#include \u003clinux/gfp.h\u003e` depends on CONFIG_CONTIG_ALLOC being enabled. When CONFIG_CONTIG_ALLOC\u003dn it\u0027s undefined.",
+      "parentUuid": "2cbfbb0f_8b24160b",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 15
+      },
+      "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
