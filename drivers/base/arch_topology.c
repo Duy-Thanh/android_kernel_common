@@ -20,6 +20,9 @@
 #include <linux/sched.h>
 #include <trace/hooks/topology.h>
 
+#define CREATE_TRACE_POINTS
+#include <trace/events/thermal_pressure.h>
+
 static DEFINE_PER_CPU(struct scale_freq_data __rcu *, sft_data);
 static struct cpumask scale_freq_counters_mask;
 static bool scale_freq_invariant;
@@ -198,6 +201,8 @@ void topology_update_thermal_pressure(const struct cpumask *cpus,
 		capacity = mult_frac(max_capacity, capped_freq, max_freq);
 
 	th_pressure = max_capacity - capacity;
+
+	trace_thermal_pressure_update(cpu, th_pressure);
 
 	for_each_cpu(cpu, cpus)
 		WRITE_ONCE(per_cpu(thermal_pressure, cpu), th_pressure);
