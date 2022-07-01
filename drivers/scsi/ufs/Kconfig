@@ -38,6 +38,7 @@ config SCSI_UFSHCD
 	select PM_DEVFREQ
 	select DEVFREQ_GOV_SIMPLE_ONDEMAND
 	select NLS
+	select UFS_QCOM_CMDLINE if ARCH_QCOM
 	help
 	  This selects the support for UFS devices in Linux, say Y and make
 	  sure that you know the name of your UFS host adapter (the card
@@ -96,6 +97,9 @@ config SCSI_UFS_DWC_TC_PLATFORM
 	  Synopsys Test Chip is a PHY for prototyping purposes.
 
 	  If unsure, say N.
+
+config UFS_QCOM_CMDLINE
+	bool "get the storage type from command line for Qcom devices"
 
 config SCSI_UFS_QCOM
 	tristate "QCOM specific hooks to UFS controller platform driver"
