@@ -16,6 +16,23 @@
       "message": "Breaks the build, please fix.",
       "revId": "6f5df3ae0b896ff0293123cf47de5e9cfc411ed2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b074694_b388b726",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-01T15:45:35Z",
+      "side": 1,
+      "message": "still broken 😞\n",
+      "revId": "6f5df3ae0b896ff0293123cf47de5e9cfc411ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
