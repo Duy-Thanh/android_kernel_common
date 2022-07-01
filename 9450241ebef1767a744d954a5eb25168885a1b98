@@ -46,6 +46,30 @@
       },
       "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bdf1aa6_e3120556",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-07-01T19:05:30Z",
+      "side": 1,
+      "message": "ha sorry, I now realize the issue here. Is this option preferred over hiding the vendor hook definition behind `CONTIG_ALLOC`?\n\nAlso, any chance the reviewer was meant to be carlosgalo@ instead?",
+      "parentUuid": "4133b907_4796a6f5",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 15
+      },
+      "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
