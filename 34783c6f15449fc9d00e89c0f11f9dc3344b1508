@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "870bc519_7bd0d816",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-04T06:58:54Z",
+      "side": 1,
+      "message": "This patch(2/3):\n\nExport the func of memcgroup to get the amount of multi-mapped pages\nwhen enable this feature.",
+      "parentUuid": "a729f143_f959951a",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8944514c_aebeb4b6",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-23T23:01:19Z",
       "side": 1,
       "message": "This is too low level to be exported. Please explain in the bug why you need to call these functions from the driver so that we can suggest alternatives.",
+      "range": {
+        "startLine": 1376,
+        "startChar": 18,
+        "endLine": 1376,
+        "endChar": 40
+      },
+      "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7dd9672_545360c3",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-04T06:58:54Z",
+      "side": 1,
+      "message": "Because our hooks to account mapped-multi pages will be called after insmoding ko.\nWe must know how many mapped-multi pages in kernel when insmoding ko, or the account would be wrong.\nWe will go through every lru in all-memcg to account the count of mapped-multi pages.",
+      "parentUuid": "8944514c_aebeb4b6",
       "range": {
         "startLine": 1376,
         "startChar": 18,
