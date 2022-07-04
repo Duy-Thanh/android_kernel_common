@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26949aa5_bbc107d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-04T06:58:00Z",
+      "side": 1,
+      "message": "I had push its description echo other.\n\nThis patch(1/3):\n\nSupport three hooks as follows to account\nthe amount of multi-mapped pages in kernel:",
+      "parentUuid": "33bfc4bc_d5cf7593",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "09a80a1957100995f364890aa28cf6a072c5d2ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0d5be33_3c2cc9e2",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-23T22:55:58Z",
       "side": 1,
       "message": "Please change the names to reflect where these hooks are called from. `trace_android_vh_add_mapped_mul_op_lrulist` has no meaning for a person who does not know what \"mul\" is. `trace_android_vh_add_page_to_lru_list()/trace_android_vh_del_page_from_lru_list` names would be more appropriate.\n\nSame comment for all other vendor hooks.",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 68,
+        "endChar": 43
+      },
+      "revId": "09a80a1957100995f364890aa28cf6a072c5d2ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a818bd02_e6f7d7e2",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-04T06:58:00Z",
+      "side": 1,
+      "message": "It had been chaged to trace_android_vh_add_page_mapcount_to_op_lrulist and trace_android_vh_del_page_mapcount_from_lru_list.",
+      "parentUuid": "c0d5be33_3c2cc9e2",
       "range": {
         "startLine": 68,
         "startChar": 1,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f7f534b_f202aeda",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-04T06:58:00Z",
+      "side": 1,
+      "message": "All right",
+      "parentUuid": "4f75a142_903a056f",
+      "range": {
+        "startLine": 217,
+        "startChar": 2,
+        "endLine": 217,
+        "endChar": 36
+      },
+      "revId": "09a80a1957100995f364890aa28cf6a072c5d2ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e48122a0_40ea6f49",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79cb49dc_b66b3d5c",
+        "filename": "mm/mmzone.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-04T06:58:00Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "e48122a0_40ea6f49",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 38
+      },
+      "revId": "09a80a1957100995f364890aa28cf6a072c5d2ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f746e083_b6a97783",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-06-23T22:55:58Z",
       "side": 1,
       "message": "Again, what is the logic behind this parameter? `ret` is a terribly non-descriptive name.",
+      "range": {
+        "startLine": 1214,
+        "startChar": 8,
+        "endLine": 1214,
+        "endChar": 11
+      },
+      "revId": "09a80a1957100995f364890aa28cf6a072c5d2ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "174c41e7_23982b58",
+        "filename": "mm/rmap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-04T06:58:00Z",
+      "side": 1,
+      "message": "\"ret\" mean the return-value of \"atomic_inc_and_test(\u0026page[i]._mapcount\" or \"atomic_dec_and_test(\u0026page[i]._mapcount\".",
+      "parentUuid": "f746e083_b6a97783",
       "range": {
         "startLine": 1214,
         "startChar": 8,
