@@ -869,20 +869,52 @@ static void *hyp_mc_alloc_fn(void *unused)
 	return (void *)__get_free_page(GFP_KERNEL_ACCOUNT);
 }
 
-void free_hyp_memcache(struct kvm_hyp_memcache *mc)
+static void account_hyp_memcache(struct kvm_hyp_memcache *mc,
+				 unsigned long prev_nr_pages,
+				 struct kvm *kvm)
 {
-	if (is_protected_kvm_enabled())
-		__free_hyp_memcache(mc, hyp_mc_free_fn,
-				    kvm_host_va, NULL);
+	unsigned long nr_pages = mc->nr_pages;
+
+	if (prev_nr_pages == nr_pages)
+		return;
+
+	if (nr_pages > prev_nr_pages) {
+		atomic64_add((nr_pages - prev_nr_pages) << PAGE_SHIFT,
+			     &kvm->stat.nvhe_mem);
+	} else {
+		atomic64_sub((prev_nr_pages - nr_pages) << PAGE_SHIFT,
+			     &kvm->stat.nvhe_mem);
+	}
 }
 
-int topup_hyp_memcache(struct kvm_hyp_memcache *mc, unsigned long min_pages)
+void free_hyp_memcache(struct kvm_hyp_memcache *mc, struct kvm *kvm)
 {
+	unsigned long prev_nr_pages;
+
+	if (!is_protected_kvm_enabled())
+		return;
+
+	prev_nr_pages = mc->nr_pages;
+	__free_hyp_memcache(mc, hyp_mc_free_fn, kvm_host_va, NULL);
+	account_hyp_memcache(mc, prev_nr_pages, kvm);
+}
+
+int topup_hyp_memcache(struct kvm_hyp_memcache *mc, unsigned long min_pages,
+		       struct kvm *kvm)
+{
+	unsigned long prev_nr_pages;
+	int err;
+
 	if (!is_protected_kvm_enabled())
 		return 0;
 
-	return __topup_hyp_memcache(mc, min_pages, hyp_mc_alloc_fn,
+	prev_nr_pages = mc->nr_pages;
+	err = __topup_hyp_memcache(mc, min_pages, hyp_mc_alloc_fn,
 				    kvm_host_pa, NULL);
+	if (!err)
+		account_hyp_memcache(mc, prev_nr_pages, kvm);
+
+	return err;
 }
 
 /**
@@ -1221,7 +1253,7 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 	u64 pfn;
 	int ret;
 
-	ret = topup_hyp_memcache(hyp_memcache, kvm_mmu_cache_min_pages(kvm));
+	ret = topup_hyp_memcache(hyp_memcache, kvm_mmu_cache_min_pages(kvm), kvm);
 	if (ret)
 		return -ENOMEM;
 
