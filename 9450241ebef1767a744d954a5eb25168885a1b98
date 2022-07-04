@@ -142,6 +142,30 @@
       },
       "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d35986f_a3973684",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-07-04T11:53:34Z",
+      "side": 1,
+      "message": "Downstream partner code may not already be conditional in the same way and while I agree the hook should probably be configuration dependent that ship may have sailed a while ago.",
+      "parentUuid": "c3287239_88e0b949",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 15
+      },
+      "revId": "9450241ebef1767a744d954a5eb25168885a1b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
