@@ -2,8 +2,23 @@
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
 
+# uncomment ABI_DEFINITION when enabling KMI enforcement
+ABI_DEFINITION=android/abi_gki_x86_64.xml
+
+# Update BUILD.bazel, define_common_kernels() if the list differs from
+# android/abi_gki_x86_64* in the filesystem.
+KMI_SYMBOL_LIST=android/abi_gki_x86_64
+ADDITIONAL_KMI_SYMBOL_LISTS="
+android/abi_gki_x86_64_virtual_device
+"
+
+# Update BUILD.bazel, define_common_kernels() if the value is not 1.
+TRIM_NONLISTED_KMI=${TRIM_NONLISTED_KMI:-1}
+KMI_SYMBOL_LIST_STRICT_MODE=${KMI_SYMBOL_LIST_STRICT_MODE:-1}
+
 BUILD_SYSTEM_DLKM=1
 MODULES_LIST=${ROOT_DIR}/${KERNEL_DIR}/android/gki_system_dlkm_modules
+MODULES_ORDER=android/gki_x86_64_modules
 
 BUILD_GKI_ARTIFACTS=1
 BUILD_GKI_BOOT_IMG_SIZE=67108864
