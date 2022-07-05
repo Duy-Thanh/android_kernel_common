@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a7680d1_b1d80b2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2022-07-05T16:10:46Z",
+      "side": 1,
+      "message": "Blocked on an abi issue for x86-64 - b/238100118",
+      "revId": "380a66bbbafbc6b59329f93619dd638c5ad5462a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
