@@ -16,6 +16,24 @@
       "message": "This is not used by any internal users, so why is this needed?",
       "revId": "a35984a9dd65c2b9a87e1c88346615d903eeb4af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2c42bca_e224778e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2022-07-05T11:18:25Z",
+      "side": 1,
+      "message": "This uses for our 5.4 project, since Google TV was announced no GKI needed for android12 5.4 project, but we still follows gki rules that we need all the change for common code need to be upstream first.\n\nThus we didn\u0027t push any symbol list for mtktv in android12-5.4.",
+      "parentUuid": "a5dcdd92_95972377",
+      "revId": "a35984a9dd65c2b9a87e1c88346615d903eeb4af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
