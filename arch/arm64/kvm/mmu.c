@@ -861,6 +861,11 @@ void kvm_free_stage2_pgd(struct kvm_s2_mmu *mmu)
 
 static void hyp_mc_free_fn(void *addr, void *unused)
 {
+	struct kvm_hyp_mc_page *mc_page = addr;
+
+	if (mc_page->flags & KVM_HYP_MC_PAGE_S2)
+		kvm_account_pgtable_pages(addr, -1);
+
 	free_page((unsigned long)addr);
 }
 
@@ -1250,6 +1255,7 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 			  unsigned long hva)
 {
 	struct kvm_hyp_memcache *hyp_memcache = &vcpu->arch.pkvm_memcache;
+	unsigned long prev_nr_pages = hyp_memcache->nr_pages;
 	struct mm_struct *mm = current->mm;
 	unsigned int flags = FOLL_HWPOISON | FOLL_LONGTERM | FOLL_WRITE;
 	struct kvm_pinned_page *ppage;
@@ -1258,9 +1264,13 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 	u64 pfn;
 	int ret;
 
-	ret = topup_hyp_memcache(hyp_memcache, kvm_mmu_cache_min_pages(kvm), kvm, 0);
+	ret = topup_hyp_memcache(hyp_memcache, kvm_mmu_cache_min_pages(kvm), kvm,
+				 KVM_HYP_MC_PAGE_S2);
 	if (ret)
 		return -ENOMEM;
+
+	kvm_account_pgtable_pages(phys_to_virt(hyp_memcache->head),
+				  hyp_memcache->nr_pages - prev_nr_pages);
 
 	ppage = kmalloc(sizeof(*ppage), GFP_KERNEL_ACCOUNT);
 	if (!ppage)

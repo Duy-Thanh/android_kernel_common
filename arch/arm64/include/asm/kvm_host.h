@@ -90,6 +90,8 @@ static inline void hyp_mc_page_set_flags(void *addr, unsigned long flags)
 	mc_page->flags = flags;
 }
 
+#define KVM_HYP_MC_PAGE_S2	(1 << 0)
+
 static inline void push_hyp_memcache(struct kvm_hyp_memcache *mc,
 				     phys_addr_t *p,
 				     phys_addr_t (*to_pa)(void *virt))
