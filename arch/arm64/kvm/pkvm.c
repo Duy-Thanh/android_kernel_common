@@ -194,6 +194,7 @@ static int __pkvm_create_hyp_vm(struct kvm *host_kvm)
 	}
 
 	atomic64_set(&host_kvm->stat.nvhe_mem, total_sz);
+	kvm_account_pgtable_pages(pgd, pgd_sz >> PAGE_SHIFT);
 
 	return 0;
 
@@ -206,6 +207,8 @@ free_vm:
 	free_pages_exact(hyp_vm, hyp_vm_sz);
 free_pgd:
 	free_pages_exact(pgd, pgd_sz);
+	kvm_account_pgtable_pages(pgd, -(pgd_sz >> PAGE_SHIFT));
+
 	return ret;
 }
 
@@ -234,6 +237,8 @@ void pkvm_destroy_hyp_vm(struct kvm *host_kvm)
 
 	host_kvm->arch.pkvm.handle = 0;
 	free_hyp_memcache(&host_kvm->arch.pkvm.teardown_mc, host_kvm);
+	free_hyp_stage2_memcache(&host_kvm->arch.pkvm.teardown_stage2_mc,
+				 host_kvm);
 
 	ppages = &host_kvm->arch.pkvm.pinned_pages;
 	list_for_each_entry_safe(ppage, tmp, ppages, link) {
