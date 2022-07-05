@@ -160,6 +160,10 @@ static struct mod_tree_root {
 	.addr_min = -1UL,
 };
 
+#if defined(CONFIG_DEBUG_KINFO)
+struct mod_tree_root *dbki_mod_tree = &mod_tree;
+#endif
+
 #define module_addr_min mod_tree.addr_min
 #define module_addr_max mod_tree.addr_max
 
@@ -217,6 +221,10 @@ static unsigned long module_addr_min = -1UL, module_addr_max = 0;
 static void mod_tree_insert(struct module *mod) { }
 static void mod_tree_remove_init(struct module *mod) { }
 static void mod_tree_remove(struct module *mod) { }
+
+#if defined(CONFIG_DEBUG_KINFO)
+struct list_head *dbki_modules = &modules;
+#endif
 
 static struct module *mod_find(unsigned long addr)
 {
