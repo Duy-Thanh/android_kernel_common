@@ -71,6 +71,7 @@
   fs_bio_set
   fsync_bdev
   __get_free_pages
+  get_wchan
   idr_alloc
   idr_destroy
   idr_find
@@ -183,6 +184,18 @@
   sysfs_streq
   system_freezable_wq
   system_wq
+  __traceiter_sched_stat_blocked
+  __traceiter_sched_stat_iowait
+  __traceiter_sched_stat_sleep
+  __traceiter_sched_stat_wait
+  __traceiter_sched_waking
+  __traceiter_task_rename
+  __tracepoint_sched_stat_blocked
+  __tracepoint_sched_stat_iowait
+  __tracepoint_sched_stat_sleep
+  __tracepoint_sched_stat_wait
+  __tracepoint_sched_waking
+  __tracepoint_task_rename
   __ubsan_handle_cfi_check_fail_abort
   unlock_page
   unregister_blkdev
@@ -194,6 +207,7 @@
   vzalloc
   __wake_up
   wake_up_process
+  wq_worker_comm
   __traceiter_android_vh_page_referenced_check_bypass
   __traceiter_android_vh_drain_all_pages_bypass
   __traceiter_android_vh_cma_drain_all_pages_bypass
