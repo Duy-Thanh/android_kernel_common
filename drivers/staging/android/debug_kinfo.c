@@ -23,6 +23,11 @@
 extern const unsigned long kallsyms_addresses[] __weak;
 extern const int kallsyms_offsets[] __weak;
 extern const u8 kallsyms_names[] __weak;
+#if defined(CONFIG_MODULES_TREE_LOOKUP)
+extern struct mod_tree_root *dbki_mod_tree;
+#else
+extern struct list_head *dbki_modules;
+#endif
 
 /*
  * Tell the compiler that the count isn't in the small data section if the arch
@@ -174,6 +179,13 @@ static int debug_kinfo_probe(struct platform_device *pdev)
 	info->module_start_va = VMALLOC_START;
 	info->module_end_va = VMALLOC_END;
 #endif
+
+#if defined(CONFIG_MODULES_TREE_LOOKUP)
+	info->module_root_pa = (u64)__pa_symbol(dbki_mod_tree);
+#else
+	info->module_root_pa = (u64)__pa_symbol(dbki_modules);
+#endif
+
 	update_kernel_all_info(all_info);
 
 	return 0;
