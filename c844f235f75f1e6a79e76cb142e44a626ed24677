@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fb26bfd_06503d97",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-07-06T09:19:52Z",
+      "side": 1,
+      "message": "You could reduce the whole block to:\n\n/* Including ../drivers/usb/typec/tcpm/tcpci.h breaks builds. */\nstruct tcpci_data;\n\nBut it\u0027s also fine as-is.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 25
+      },
+      "revId": "c844f235f75f1e6a79e76cb142e44a626ed24677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
