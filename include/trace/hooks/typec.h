@@ -13,8 +13,8 @@
 #ifdef __GENKSYMS__
 struct tcpci_data;
 #else
-/* struct tcpci_data */
-#include <../drivers/usb/typec/tcpm/tcpci.h>
+/* Including ../drivers/usb/typec/tcpm/tcpci.h breaks builds. */
+struct tcpci_data;
 #endif /* __GENKSYMS__ */
 struct tcpci;
 struct tcpm_port;
