@@ -16,6 +16,24 @@
       "message": "Upstream link (Link:) missing in CL description?\nOtherwise LGTM.\n",
       "revId": "99a31d85de393cfc5056596d2f9e425c491bdbf1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "762f35a0_ebbfe083",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2022-07-06T18:35:38Z",
+      "side": 1,
+      "message": "\"Link\" tag will be present only for patches which are submitted through patchwork.\n\nThis commit directly merged into wireless.next git.\n\ncommit ID from the wireless-next.git repo mentioned in commit text.",
+      "parentUuid": "615a3533_03e2a888",
+      "revId": "99a31d85de393cfc5056596d2f9e425c491bdbf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
