@@ -1,0 +1,8 @@
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
+
+DEFCONFIG=crashdump_defconfig
+
+# No modules
+MAKE_GOALS=Image
+IN_KERNEL_MODULES=
