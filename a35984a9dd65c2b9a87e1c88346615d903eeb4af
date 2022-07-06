@@ -52,6 +52,24 @@
       "parentUuid": "f2c42bca_e224778e",
       "revId": "a35984a9dd65c2b9a87e1c88346615d903eeb4af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "176bbd55_27f8f4da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-06T06:03:33Z",
+      "side": 1,
+      "message": "No, that\u0027s fine, I just was confused as to why this was being added.  All is good.",
+      "parentUuid": "193b149f_7f14c99b",
+      "revId": "a35984a9dd65c2b9a87e1c88346615d903eeb4af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
