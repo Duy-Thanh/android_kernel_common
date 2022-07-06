@@ -34,6 +34,24 @@
       "parentUuid": "a5dcdd92_95972377",
       "revId": "a35984a9dd65c2b9a87e1c88346615d903eeb4af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "193b149f_7f14c99b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2022-07-06T01:53:31Z",
+      "side": 1,
+      "message": "Would it be better if we add a symbol list for this?",
+      "parentUuid": "f2c42bca_e224778e",
+      "revId": "a35984a9dd65c2b9a87e1c88346615d903eeb4af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
