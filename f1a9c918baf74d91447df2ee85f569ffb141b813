@@ -20,6 +20,41 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3d7abe64_65b4ed69",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1302614
+      },
+      "writtenOn": "2022-07-06T18:23:15Z",
+      "side": 1,
+      "message": "Usually \"Link\" tag will be present only for patches which are submitted through patchwork.\n\nThis commit directly merged into wireless.next git.",
+      "parentUuid": "e09caf75_a80bfc94",
+      "revId": "f1a9c918baf74d91447df2ee85f569ffb141b813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf9a1e5_628c51a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1302614
+      },
+      "writtenOn": "2022-07-06T18:23:15Z",
+      "side": 1,
+      "message": "FYI, I mentioned cherry-pick source commnit id (from wireless.next git). This as per the ACK gerrits requirement format.",
+      "revId": "f1a9c918baf74d91447df2ee85f569ffb141b813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c50fd31c_efb102c5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
