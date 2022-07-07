@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8d2b6d6_62a1df94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-07T20:15:26Z",
+      "side": 1,
+      "message": "Patch titles should be single line. When looking through patches, you only see the title line. Splitting the line makes it difficult to find, and difficult to know what the patch is about when looking through them.\n\nMaybe something like\nANDROID: fuse-bpf: Fix revalidate error path and backing handling\n\nIt\u0027s better to have minor complaints about title length going slightly over than to split the line.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 54
+      },
+      "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "72558400_513bee3f",
@@ -14,6 +37,29 @@
       "writtenOn": "2022-07-07T16:54:13Z",
       "side": 1,
       "message": "Looks good - a few minor details",
+      "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18ccb1c1_97915fb7",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-07T20:15:26Z",
+      "side": 1,
+      "message": "This whole block should be merged with the equivalent code in fuse_lookup_finalize in backing.c, though I should note that one also has a bug with refcounting.\n\nI think you can get away with the fuse_inode and the fuse_entry_bpf as parameters.",
+      "range": {
+        "startLine": 242,
+        "startChar": 2,
+        "endLine": 242,
+        "endChar": 35
+      },
       "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
