@@ -203,6 +203,30 @@
       },
       "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62abd2d9_199d4222",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-07T20:21:08Z",
+      "side": 1,
+      "message": "Yeah, which we don\u0027t currently do in lookup either.",
+      "parentUuid": "08dd1d6e_40c333cb",
+      "range": {
+        "startLine": 275,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 11
+      },
+      "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
