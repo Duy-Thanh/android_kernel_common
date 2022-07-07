@@ -26,6 +26,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64788dc5_4b072032",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-07T01:12:01Z",
+      "side": 1,
+      "message": "why is all of this needed? There must be a better way.\n\nIf it really is needed, the rationale must be in the commit message.",
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bfae413_fd0a154a",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-07T01:12:01Z",
+      "side": 1,
+      "message": "need rationale for this in commit message.",
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0935db14_e2d3fd03",
         "filename": "include/linux/rmap.h",
         "patchSetId": 6
@@ -187,6 +221,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87db2360_9e55b696",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5629,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-07T01:12:01Z",
+      "side": 1,
+      "message": "Why not just do this printk from inside `trace_android_vh_account_page_mapcount()`? Then we don\u0027t even need those local variables.",
+      "parentUuid": "e4036756_8f90f35a",
+      "range": {
+        "startLine": 5628,
+        "startChar": 0,
+        "endLine": 5629,
+        "endChar": 46
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdd1de32_209766f1",
         "filename": "mm/rmap.c",
         "patchSetId": 6
@@ -204,6 +262,23 @@
         "endLine": 1213,
         "endChar": 21
       },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29473475_a692cc7a",
+        "filename": "mm/rmap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1377,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-07T01:12:01Z",
+      "side": 1,
+      "message": "How can the case that requires a hook be the \"likely\" case. It might be likely for for your specific case, but it is unlikely for all other partners. Please remove this \"likely\" and any others that require a hook handler.",
       "revId": "8259f1b83447bde4332d5553c8f514127531f836",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
