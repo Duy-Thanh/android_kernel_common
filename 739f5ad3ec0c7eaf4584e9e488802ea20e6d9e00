@@ -52,6 +52,23 @@
       "parentUuid": "bd52dcbe_bc71db66",
       "revId": "739f5ad3ec0c7eaf4584e9e488802ea20e6d9e00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64a77a77_a3d139db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869056
+      },
+      "writtenOn": "2022-07-07T02:34:34Z",
+      "side": 1,
+      "message": "Please provide a link to the relevant patches.\nWill you backport those patches to android13-5.15?",
+      "revId": "739f5ad3ec0c7eaf4584e9e488802ea20e6d9e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
