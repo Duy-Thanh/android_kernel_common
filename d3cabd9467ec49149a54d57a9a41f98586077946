@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db1387b2_77f00078",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-07-07T16:07:54Z",
+      "side": 1,
+      "message": "null check?",
+      "range": {
+        "startLine": 1148,
+        "startChar": 4,
+        "endLine": 1148,
+        "endChar": 18
+      },
+      "revId": "d3cabd9467ec49149a54d57a9a41f98586077946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f1ee759_544a3908",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-07-07T16:07:54Z",
+      "side": 1,
+      "message": "+\u003d? so we can combine multiple sleeps",
+      "range": {
+        "startLine": 1148,
+        "startChar": 19,
+        "endLine": 1148,
+        "endChar": 20
+      },
+      "revId": "d3cabd9467ec49149a54d57a9a41f98586077946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45ee6b9b_3245aba6",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-07-07T16:07:54Z",
+      "side": 1,
+      "message": "unsigned",
+      "range": {
+        "startLine": 543,
+        "startChar": 1,
+        "endLine": 543,
+        "endChar": 4
+      },
+      "revId": "d3cabd9467ec49149a54d57a9a41f98586077946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd75cbe4_71a73dc2",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-07-07T16:07:54Z",
+      "side": 1,
+      "message": "check for 0? here os in usleep_interruptible",
+      "range": {
+        "startLine": 592,
+        "startChar": 22,
+        "endLine": 592,
+        "endChar": 36
+      },
+      "revId": "d3cabd9467ec49149a54d57a9a41f98586077946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
