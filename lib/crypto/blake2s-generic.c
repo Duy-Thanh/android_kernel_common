@@ -37,11 +37,15 @@ static inline void blake2s_increment_counter(struct blake2s_state *state,
 	state->t[1] += (state->t[0] < inc);
 }
 
+<<<<<<< HEAD   (107101 UPSTREAM: lib/crypto: blake2s: avoid indirect calls to compr)
 void blake2s_compress(struct blake2s_state *state, const u8 *block,
 		      size_t nblocks, const u32 inc)
 		      __weak __alias(blake2s_compress_generic);
 
 void blake2s_compress_generic(struct blake2s_state *state, const u8 *block,
+=======
+void blake2s_compress_generic(struct blake2s_state *state,const u8 *block,
+>>>>>>> BRANCH (6a10ec Linux 4.19.249)
 			      size_t nblocks, const u32 inc)
 {
 	u32 m[16];

@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (107101 UPSTREAM: lib/crypto: blake2s: avoid indirect calls to compr)
 /* SPDX-License-Identifier: GPL-2.0 */
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM random
@@ -311,3 +312,5 @@ TRACE_EVENT(urandom_read,
 
 /* This part must be outside protection */
 #include <trace/define_trace.h>
+=======
+>>>>>>> BRANCH (6a10ec Linux 4.19.249)
