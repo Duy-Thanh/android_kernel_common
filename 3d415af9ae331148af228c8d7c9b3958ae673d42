@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38622a11_9c22d3e5",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-07T19:43:07Z",
+      "side": 1,
+      "message": "Done here and in the lookup code",
+      "parentUuid": "fc4ff3ff_fb2d459a",
+      "range": {
+        "startLine": 257,
+        "startChar": 9,
+        "endLine": 257,
+        "endChar": 12
+      },
+      "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f2fbe25_71802064",
         "filename": "fs/fuse/dir.c",
         "patchSetId": 2
@@ -77,6 +101,30 @@
       "writtenOn": "2022-07-07T16:54:13Z",
       "side": 1,
       "message": "Don\u0027t we have to check this and put it if it\u0027s already there?",
+      "range": {
+        "startLine": 275,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 11
+      },
+      "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e410c1e0_40cb6c8b",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-07T19:43:07Z",
+      "side": 1,
+      "message": "Not sure that I got your point, can you please expand it a little?",
+      "parentUuid": "6f2fbe25_71802064",
       "range": {
         "startLine": 275,
         "startChar": 8,
