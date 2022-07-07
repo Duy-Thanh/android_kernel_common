@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73902a31_6db0ef04",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-07T00:50:57Z",
+      "side": 1,
+      "message": "This order is neither alphabetical, nor logical. This would make much more sense and reads easier:\n```\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_account_page_mapcount);\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_page_mapcount_to_op_lrulist);\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dec_page_mapcount_to_op_lrulist);\n```",
+      "range": {
+        "startLine": 394,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 73
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0935db14_e2d3fd03",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-07T00:50:57Z",
+      "side": 1,
+      "message": "why not just NULL if it\u0027s unused?",
+      "range": {
+        "startLine": 217,
+        "startChar": 52,
+        "endLine": 217,
+        "endChar": 56
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a09a7a3_481994ce",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2036,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-07T00:50:57Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 2036,
+        "startChar": 6,
+        "endLine": 2036,
+        "endChar": 9
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ca66e8_8d90e687",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-07T00:50:57Z",
+      "side": 1,
+      "message": "NULL",
+      "range": {
+        "startLine": 2169,
+        "startChar": 57,
+        "endLine": 2169,
+        "endChar": 61
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c4466d0_cda2626f",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2184,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-07T00:50:57Z",
+      "side": 1,
+      "message": "Please fix the long line",
+      "range": {
+        "startLine": 2184,
+        "startChar": 70,
+        "endLine": 2184,
+        "endChar": 74
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebdbfe63_ca156fb1",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2184,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-07T00:50:57Z",
+      "side": 1,
+      "message": "NULL",
+      "range": {
+        "startLine": 2184,
+        "startChar": 58,
+        "endLine": 2184,
+        "endChar": 62
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859cfee5_c7c61dbd",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2198,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-07T00:50:57Z",
+      "side": 1,
+      "message": "NULL",
+      "range": {
+        "startLine": 2198,
+        "startChar": 9,
+        "endLine": 2198,
+        "endChar": 13
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4036756_8f90f35a",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5629,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-07T00:50:57Z",
+      "side": 1,
+      "message": "I don\u0027t think this is part of UAPI but this is part of show_mem() report used in OOM-kill, allocation failure and panic reports. I\u0027m not sure if this change might break some userspace tools. Greg, WDYT?",
+      "range": {
+        "startLine": 5628,
+        "startChar": 0,
+        "endLine": 5629,
+        "endChar": 46
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd1de32_209766f1",
+        "filename": "mm/rmap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-07T00:50:57Z",
+      "side": 1,
+      "message": "It looks like you are using this parameter to say \"the mapcount is already accounted, so skip it\". If so, a better name would be `accounted` or something like that.",
+      "range": {
+        "startLine": 1213,
+        "startChar": 14,
+        "endLine": 1213,
+        "endChar": 21
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
