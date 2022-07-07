@@ -22,6 +22,30 @@
       },
       "revId": "c844f235f75f1e6a79e76cb142e44a626ed24677",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33af32c0_9cc24791",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-07-07T08:53:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fb26bfd_06503d97",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 25
+      },
+      "revId": "c844f235f75f1e6a79e76cb142e44a626ed24677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
