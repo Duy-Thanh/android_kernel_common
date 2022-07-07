@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (e2521c Merge 71e80720dbf0 ("Merge tag 'kbuild-v5.19-3' of git://git)
 // SPDX-License-Identifier: GPL-2.0
 // Copyright (C) 2018 Western Digital Corporation
 
@@ -1270,3 +1271,5 @@ void ufs_sysfs_remove_nodes(struct device *dev)
 {
 	sysfs_remove_groups(&dev->kobj, ufs_sysfs_groups);
 }
+=======
+>>>>>>> BRANCH (f2906a Linux 5.19-rc1)
