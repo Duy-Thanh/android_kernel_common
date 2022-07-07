@@ -238,25 +238,56 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 		ret = fuse_simple_request(fm, &args);
 		dput(parent);
 
-		/*
-		 * TODO This doesn't seem sufficient, though we don't plan to
-		 * change the backing file ever, so not sure what is correct
-		 * here yet, especially as we can't return an error to user
-		 */
-		if (bpf_arg.out.backing_action == FUSE_ACTION_REPLACE) {
-			struct file *file = bpf_arg.backing_file;
+#ifdef CONFIG_FUSE_BPF
+		if (ret == sizeof(bpf_arg.out)) {
+			/* TODO Make sure this handles invalid handles */
+			struct file *backing_file;
+			struct inode *backing_inode;
 
-			if (file && !IS_ERR(file))
-				fput(file);
+			ret = -ENOENT;
+			if (!entry)
+				goto out;
+
+			ret = -EINVAL;
+			if (bpf_arg.out.backing_action != FUSE_ACTION_REPLACE)
+				goto out;
+
+			backing_file = bpf_arg.backing_file;
+			if (!backing_file)
+				goto out;
+
+			if (IS_ERR(backing_file)) {
+				ret = PTR_ERR(backing_file);
+				goto out;
+			}
+
+			backing_inode = backing_file->f_inode;
+
+			fi = get_fuse_inode(inode);
+			fi->backing_inode = backing_inode;
+
+			if (bpf_arg.out.bpf_action == FUSE_ACTION_REPLACE) {
+				struct file *bpf_file = bpf_arg.bpf_file;
+				struct bpf_prog *bpf_prog = ERR_PTR(-EINVAL);
+
+				if (bpf_file && !IS_ERR(bpf_file))
+					bpf_prog = fuse_get_bpf_prog(bpf_file);;
+
+				if (IS_ERR(bpf_prog)) {
+					ret = PTR_ERR(bpf_prog);
+					goto bpf_arg_out;
+				}
+				fi->bpf = bpf_prog;
+			}
+
+			get_fuse_dentry(entry)->backing_path = backing_file->f_path;
+			path_get(&get_fuse_dentry(entry)->backing_path);
+
+			ret = 0;
+bpf_arg_out:
+			fput(backing_file);
 		}
-
-		if (bpf_arg.out.bpf_action == FUSE_ACTION_REPLACE) {
-			struct file *file = bpf_arg.bpf_file;
-
-			if (file && !IS_ERR(file))
-				fput(file);
-		}
-
+#endif
 		/* Zero nodeid is same as -ENOENT */
 		if (!ret && !outarg.nodeid)
 			ret = -ENOENT;
@@ -541,8 +572,13 @@ int fuse_lookup_name(struct super_block *sb, u64 nodeid, const struct qstr *name
 			goto out_queue_forget;
 
 		backing_file = bpf_arg.backing_file;
-		if (!backing_file || IS_ERR(backing_file))
+		if (!backing_file)
 			goto out_queue_forget;
+
+		if (IS_ERR(backing_file)) {
+			err = PTR_ERR(backing_file);
+			goto out_queue_forget;
+		}			
 
 		backing_inode = backing_file->f_inode;
 		*inode = fuse_iget_backing(sb, outarg->nodeid, backing_inode);
