@@ -65,6 +65,7 @@
   mempool_free_pages
   blk_pm_runtime_init
   scsi_remove_device
+  kobject_get
 
 #required by cs35l41 module
   regmap_raw_write_async
@@ -125,6 +126,7 @@
   simple_strtoul
   sync_blockdev
   wait_for_device_probe
+  blk_mq_alloc_sq_tag_set
 
 #required by millet.ko
   __traceiter_android_vh_binder_wait_for_work
@@ -155,12 +157,15 @@
 
 #required by pm8941-pwrkey.ko module
   console_printk
+  console_verbose
 
 #required by binderinfo.ko module
   __traceiter_android_vh_binder_transaction_init
   __tracepoint_android_vh_binder_transaction_init
   __traceiter_android_vh_binder_print_transaction_info
   __tracepoint_android_vh_binder_print_transaction_info
+  __traceiter_binder_txn_latency_free
+  __tracepoint_binder_txn_latency_free
 
 #required by reclaim module
 
@@ -180,3 +185,4 @@
 
 #required by swinfo.ko module
   proc_set_size
+
