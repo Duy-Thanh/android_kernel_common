@@ -9,7 +9,7 @@ __modfinal:
 include include/config/auto.conf
 include $(srctree)/scripts/Kbuild.include
 
-# for c_flags and mod-prelink-ext
+# for c_flags
 include $(srctree)/scripts/Makefile.lib
 
 mixed-build-prefix = $(if $(KBUILD_MIXED_TREE),$(KBUILD_MIXED_TREE)/)
@@ -56,10 +56,14 @@ if_changed_except = $(if $(call newer_prereqs_except,$(2))$(cmd-check),      \
 	$(cmd);                                                              \
 	printf '%s\n' 'cmd_$@ := $(make-cmd)' > $(dot-target).cmd, @:)
 
-
 # Re-generate module BTFs if either module's .ko or vmlinux changed
+<<<<<<< HEAD   (8dab7c Merge 0cfd90060d71 ("kbuild: replace $(linked-object) with C)
 $(modules): %.ko: %$(mod-prelink-ext).o %.mod.o scripts/module.lds $(if $(KBUILD_BUILTIN),$(mixed-build-prefix)vmlinux) FORCE
 	+$(call if_changed_except,ld_ko_o,$(mixed-build-prefix)vmlinux)
+=======
+$(modules): %.ko: %.o %.mod.o scripts/module.lds $(if $(KBUILD_BUILTIN),vmlinux) FORCE
+	+$(call if_changed_except,ld_ko_o,vmlinux)
+>>>>>>> BRANCH (a78b6a kbuild: remove redundant cleanups in scripts/link-vmlinux.sh)
 ifdef CONFIG_DEBUG_INFO_BTF_MODULES
 	+$(if $(newer-prereqs),$(call cmd,btf_ko))
 endif
