@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eeca71d_04edb55d",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-08T16:41:32Z",
+      "side": 1,
+      "message": "I see, we can start from introducing stress selftests that will do something similar to EROFS one (https://github.com/erofs/erofsstress/blob/main/stress.c) or our internal Google storage-qa to catch this kind of problems to be able to compare before/after results.\n\nI\u0027m agree that locking is out of the scope for this change because it\u0027s already too much here :)",
+      "parentUuid": "1d57543b_69c313b5",
+      "range": {
+        "startLine": 1234,
+        "startChar": 0,
+        "endLine": 1237,
+        "endChar": 2
+      },
+      "revId": "6010e6037218b37f25f88d71ac9e4efa920bbbf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "905bc174_683668fa",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-07-08T14:49:56Z",
       "side": 1,
       "message": "This seems redundant",
+      "revId": "6010e6037218b37f25f88d71ac9e4efa920bbbf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c56f39_084b3d51",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-08T16:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "905bc174_683668fa",
       "revId": "6010e6037218b37f25f88d71ac9e4efa920bbbf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
