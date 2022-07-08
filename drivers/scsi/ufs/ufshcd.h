@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (6f2d9c UPSTREAM: scripts/check-local-export: avoid 'wait $!' for pr)
 /* SPDX-License-Identifier: GPL-2.0-or-later */
 /*
  * Universal Flash Storage Host controller driver
@@ -1258,3 +1259,5 @@ int ufshcd_update_ee_control(struct ufs_hba *hba, u16 *mask, u16 *other_mask,
 			     u16 set, u16 clr);
 
 #endif /* End of Header */
+=======
+>>>>>>> BRANCH (f2906a Linux 5.19-rc1)

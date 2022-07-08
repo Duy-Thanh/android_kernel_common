@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (6f2d9c UPSTREAM: scripts/check-local-export: avoid 'wait $!' for pr)
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
  * Universal Flash Storage Host controller driver Core
@@ -9971,3 +9972,5 @@ MODULE_AUTHOR("Santosh Yaragnavi <santosh.sy@samsung.com>");
 MODULE_AUTHOR("Vinayak Holikatti <h.vinayak@samsung.com>");
 MODULE_DESCRIPTION("Generic UFS host controller driver Core");
 MODULE_LICENSE("GPL");
+=======
+>>>>>>> BRANCH (f2906a Linux 5.19-rc1)

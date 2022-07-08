@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (6f2d9c UPSTREAM: scripts/check-local-export: avoid 'wait $!' for pr)
 // SPDX-License-Identifier: GPL-2.0
 // Copyright (C) 2018 Western Digital Corporation
 
@@ -1270,3 +1271,5 @@ void ufs_sysfs_remove_nodes(struct device *dev)
 {
 	sysfs_remove_groups(&dev->kobj, ufs_sysfs_groups);
 }
+=======
+>>>>>>> BRANCH (f2906a Linux 5.19-rc1)

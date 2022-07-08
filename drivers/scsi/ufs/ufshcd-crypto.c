@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (6f2d9c UPSTREAM: scripts/check-local-export: avoid 'wait $!' for pr)
 // SPDX-License-Identifier: GPL-2.0
 /*
  * Copyright 2019 Google LLC
@@ -247,3 +248,5 @@ void ufshcd_crypto_register(struct ufs_hba *hba, struct request_queue *q)
 	if (hba->caps & UFSHCD_CAP_CRYPTO)
 		blk_crypto_register(&hba->crypto_profile, q);
 }
+=======
+>>>>>>> BRANCH (f2906a Linux 5.19-rc1)
