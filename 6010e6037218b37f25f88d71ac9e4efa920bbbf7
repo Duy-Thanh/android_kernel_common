@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d57543b_69c313b5",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-07-08T14:49:56Z",
+      "side": 1,
+      "message": "Daniel and I were discussing this yesterday, and we\u0027re worried about the lack of a lock here. This is *not* new in your change, so not something to block check in of this on, but it does need addressed. We think we\u0027ll need a per-fuse-inode lock around reading/getting the bpf/backing inode and this code.\n\nBut again, that should be a separate change, not a blocker for this one, which simply perpetuates this existing issue",
+      "range": {
+        "startLine": 1234,
+        "startChar": 0,
+        "endLine": 1237,
+        "endChar": 2
+      },
+      "revId": "6010e6037218b37f25f88d71ac9e4efa920bbbf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "905bc174_683668fa",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-07-08T14:49:56Z",
+      "side": 1,
+      "message": "This seems redundant",
+      "revId": "6010e6037218b37f25f88d71ac9e4efa920bbbf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
