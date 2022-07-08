@@ -1049,8 +1049,6 @@ static const struct sectioncheck *section_mismatch(
 		const char *fromsec, const char *tosec)
 {
 	int i;
-	int elems = sizeof(sectioncheck) / sizeof(struct sectioncheck);
-	const struct sectioncheck *check = &sectioncheck[0];
 
 	/*
 	 * The target section could be the SHT_NUL section when we're
@@ -1061,14 +1059,15 @@ static const struct sectioncheck *section_mismatch(
 	if (*tosec == '\0')
 		return NULL;
 
-	for (i = 0; i < elems; i++) {
+	for (i = 0; i < ARRAY_SIZE(sectioncheck); i++) {
+		const struct sectioncheck *check = &sectioncheck[i];
+
 		if (match(fromsec, check->fromsec)) {
 			if (check->bad_tosec[0] && match(tosec, check->bad_tosec))
 				return check;
 			if (check->good_tosec[0] && !match(tosec, check->good_tosec))
 				return check;
 		}
-		check++;
 	}
 	return NULL;
 }
@@ -1180,7 +1179,8 @@ static int secref_whitelist(const struct sectioncheck *mismatch,
 
 static inline int is_arm_mapping_symbol(const char *str)
 {
-	return str[0] == '$' && strchr("axtd", str[1])
+	return str[0] == '$' &&
+	       (str[1] == 'a' || str[1] == 'd' || str[1] == 't' || str[1] == 'x')
 	       && (str[2] == '\0' || str[2] == '.');
 }
 
@@ -1270,13 +1270,9 @@ static Elf_Sym *find_elf_symbol2(struct elf_info *elf, Elf_Addr addr,
 			continue;
 		if (!is_valid_name(elf, sym))
 			continue;
-		if (sym->st_value <= addr) {
-			if ((addr - sym->st_value) < distance) {
-				distance = addr - sym->st_value;
-				near = sym;
-			} else if ((addr - sym->st_value) == distance) {
-				near = sym;
-			}
+		if (sym->st_value <= addr && addr - sym->st_value <= distance) {
+			distance = addr - sym->st_value;
+			near = sym;
 		}
 	}
 	return near;
@@ -1883,8 +1879,7 @@ static void section_rel(const char *modname, struct elf_info *elf,
  * to find all references to a section that reference a section that will
  * be discarded and warns about it.
  **/
-static void check_sec_ref(struct module *mod, const char *modname,
-			  struct elf_info *elf)
+static void check_sec_ref(const char *modname, struct elf_info *elf)
 {
 	int i;
 	Elf_Shdr *sechdrs = elf->sechdrs;
@@ -1906,7 +1901,7 @@ static char *remove_dot(char *s)
 
 	if (n && s[n]) {
 		size_t m = strspn(s + n + 1, "0123456789");
-		if (m && (s[n + m] == '.' || s[n + m] == 0))
+		if (m && (s[n + m + 1] == '.' || s[n + m + 1] == 0))
 			s[n] = 0;
 
 		/* strip trailing .prelink */
@@ -2090,7 +2085,7 @@ static void read_symbols(const char *modname)
 		}
 	}
 
-	check_sec_ref(mod, modname, &info);
+	check_sec_ref(modname, &info);
 
 	if (!mod->is_vmlinux) {
 		version = get_modinfo(&info, "version");
