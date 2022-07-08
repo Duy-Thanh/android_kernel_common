@@ -16,6 +16,23 @@
       "message": "Verified with Cutterfish (acloud)",
       "revId": "061af85ebbdadae1525f846d50625ff2b3623184",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e96cdb2_864b50d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-08T15:17:29Z",
+      "side": 1,
+      "message": "is this needed in android12-5.10?",
+      "revId": "061af85ebbdadae1525f846d50625ff2b3623184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
