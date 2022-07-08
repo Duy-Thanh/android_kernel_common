@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "745ca543_d472ae40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2022-07-08T17:46:08Z",
+      "side": 1,
+      "message": "Cherry-pick the CL from android13-5.10 to android12-5.10",
+      "revId": "8de633b735bfb08a9f570c9d68e0f9c6c5b9f684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
