@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b062b50_4fd4d8f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-07-08T18:13:29Z",
+      "side": 1,
+      "message": "fips140.ko doesn\u0027t use these symbols after the v5.15.45 merge.  And changing the ABI is fine because this is the android14 branch, right?  So just remove these symbols from the symbol list instead.",
+      "revId": "3854de0c66b33e320387858617300a48ed346442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
