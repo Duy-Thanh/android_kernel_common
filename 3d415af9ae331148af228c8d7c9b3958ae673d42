@@ -41,6 +41,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f59df5d0_7c8559ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-08T13:09:19Z",
+      "side": 1,
+      "message": "Updated the CL probably now it doens\u0027t look that good :)",
+      "parentUuid": "72558400_513bee3f",
+      "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18ccb1c1_97915fb7",
@@ -66,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9a0812b_0d90f347",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-08T13:09:19Z",
+      "side": 1,
+      "message": "Tried to reuse as much logic as I can, updated CL",
+      "parentUuid": "18ccb1c1_97915fb7",
+      "range": {
+        "startLine": 242,
+        "startChar": 2,
+        "endLine": 242,
+        "endChar": 35
+      },
+      "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4df71d9d_78aa58f7",
         "filename": "fs/fuse/dir.c",
         "patchSetId": 2
@@ -77,6 +119,30 @@
       "writtenOn": "2022-07-07T16:54:13Z",
       "side": 1,
       "message": "In theory, you might keep the backing file and replace the bpf - shouldn\u0027t this wrap the next section?",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 12
+      },
+      "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7ce8c65_d7fc9e17",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-08T13:09:19Z",
+      "side": 1,
+      "message": "Reimplement the whole thing by sharing backing_fd and bpf_program updating logic between revalidate, lookup and backing lookup finalize stage. This problem should move away.",
+      "parentUuid": "4df71d9d_78aa58f7",
       "range": {
         "startLine": 253,
         "startChar": 4,
@@ -124,6 +190,30 @@
       "side": 1,
       "message": "Done here and in the lookup code",
       "parentUuid": "fc4ff3ff_fb2d459a",
+      "range": {
+        "startLine": 257,
+        "startChar": 9,
+        "endLine": 257,
+        "endChar": 12
+      },
+      "revId": "3d415af9ae331148af228c8d7c9b3958ae673d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beea39f7_36b34d5d",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-08T13:09:19Z",
+      "side": 1,
+      "message": "Done it in shared code between revalidate, lookup and backing lookup finalize stage",
+      "parentUuid": "38622a11_9c22d3e5",
       "range": {
         "startLine": 257,
         "startChar": 9,
