@@ -1172,6 +1172,109 @@ int fuse_lookup_backing(struct fuse_bpf_args *fa, struct inode *dir,
 	return 0;
 }
 
+int handle_inode_backing_fd(struct inode *inode, struct dentry *entry,
+			    struct fuse_mount *mount,
+			    struct fuse_entry_bpf_out *febo,
+			    struct fuse_entry_bpf *feb)
+{
+	struct fuse_inode* fi = get_fuse_inode(inode);
+	struct fuse_dentry* fd = get_fuse_dentry(entry);
+	int ret = 0;
+
+	switch (febo->backing_action) {
+	case FUSE_ACTION_KEEP:
+		/* backing inode/path are added in fuse_lookup_backing */
+		break;
+
+	case FUSE_ACTION_REMOVE:
+		iput(fi->backing_inode);
+		fi->backing_inode = NULL;
+		path_put_init(&fd->backing_path);
+		break;
+
+	case FUSE_ACTION_REPLACE: {
+		struct fuse_conn *fc;
+		struct file* backing_file = feb->backing_file;
+
+		fc = mount->fc;
+
+		if (!backing_file)
+			return -EINVAL;
+		if (IS_ERR(backing_file))
+			return PTR_ERR(backing_file);
+
+		if (fi->backing_inode)
+			iput(fi->backing_inode);
+		fi->backing_inode = backing_file->f_inode;
+		ihold(fi->backing_inode);
+
+		path_put(&fd->backing_path);
+		fd->backing_path = backing_file->f_path;
+		path_get(&fd->backing_path);
+
+		fput(backing_file);
+		break;
+	}
+
+	default:
+		break;
+	}
+
+	return ret;
+}
+
+int handle_inode_bpf(struct inode *inode, struct inode *parent,
+		     struct fuse_entry_bpf_out *febo,
+		     struct fuse_entry_bpf *feb)
+{
+	struct fuse_inode* fi = get_fuse_inode(inode);
+	struct fuse_inode* pi;
+	int ret = 0;
+
+	if (fi->bpf) {
+		bpf_prog_put(fi->bpf);
+		fi->bpf = NULL;
+	}
+
+	switch (febo->bpf_action) {
+	case FUSE_ACTION_KEEP:
+		// Parent isn't presented, don't touch
+		// bpf program at all.
+		if (!parent)
+			goto out;
+
+		pi = get_fuse_inode(parent);
+		fi->bpf = pi->bpf;
+		if (fi->bpf)
+			bpf_prog_inc(fi->bpf);
+		break;
+
+	case FUSE_ACTION_REMOVE:
+		fi->bpf = NULL;
+		break;
+
+	case FUSE_ACTION_REPLACE: {
+		struct file *bpf_file = feb->bpf_file;
+		struct bpf_prog *bpf_prog = ERR_PTR(-EINVAL);
+
+		if (bpf_file && !IS_ERR(bpf_file))
+			bpf_prog = fuse_get_bpf_prog(bpf_file);
+
+		if (IS_ERR(bpf_prog))
+			return PTR_ERR(bpf_prog);
+
+		fi->bpf = bpf_prog;
+		break;
+	}
+
+	default:
+		break;
+	}
+
+out:
+	return ret;
+}
+
 struct dentry *fuse_lookup_finalize(struct fuse_bpf_args *fa, struct inode *dir,
 			   struct dentry *entry, unsigned int flags)
 {
@@ -1182,6 +1285,8 @@ struct dentry *fuse_lookup_finalize(struct fuse_bpf_args *fa, struct inode *dir,
 	struct fuse_entry_out *feo = fa->out_args[0].value;
 	struct fuse_entry_bpf_out *febo = fa->out_args[1].value;
 	struct fuse_entry_bpf *feb = container_of(febo, struct fuse_entry_bpf, out);
+	struct fuse_mount *fm;
+	int error = -1;
 	u64 target_nodeid = 0;
 
 	fd = get_fuse_dentry(entry);
@@ -1202,78 +1307,14 @@ struct dentry *fuse_lookup_finalize(struct fuse_bpf_args *fa, struct inode *dir,
 	if (IS_ERR(inode))
 		return ERR_PTR(PTR_ERR(inode));
 
-	/* TODO Make sure this handles invalid handles */
-	/* TODO Do we need the same code in revalidate */
-	if (get_fuse_inode(inode)->bpf) {
-		bpf_prog_put(get_fuse_inode(inode)->bpf);
-		get_fuse_inode(inode)->bpf = NULL;
-	}
+	error = handle_inode_bpf(inode, dir, febo, feb);
+	if (error)
+		return ERR_PTR(error);
 
-	switch (febo->bpf_action) {
-	case FUSE_ACTION_KEEP:
-		get_fuse_inode(inode)->bpf = get_fuse_inode(dir)->bpf;
-		if (get_fuse_inode(inode)->bpf)
-			bpf_prog_inc(get_fuse_inode(inode)->bpf);
-		break;
-
-	case FUSE_ACTION_REMOVE:
-		get_fuse_inode(inode)->bpf = NULL;
-		break;
-
-	case FUSE_ACTION_REPLACE: {
-		struct file *bpf_file = feb->bpf_file;
-		struct bpf_prog *bpf_prog = ERR_PTR(-EINVAL);
-
-		if (bpf_file && !IS_ERR(bpf_file))
-			bpf_prog = fuse_get_bpf_prog(bpf_file);
-
-		if (IS_ERR(bpf_prog))
-			return ERR_PTR(PTR_ERR(bpf_prog));
-
-		get_fuse_inode(inode)->bpf = bpf_prog;
-		break;
-	}
-
-	default:
-		return ERR_PTR(-EIO);
-	}
-
-	switch (febo->backing_action) {
-	case FUSE_ACTION_KEEP:
-		/* backing inode/path are added in fuse_lookup_backing */
-		break;
-
-	case FUSE_ACTION_REMOVE:
-		iput(get_fuse_inode(inode)->backing_inode);
-		get_fuse_inode(inode)->backing_inode = NULL;
-		path_put_init(&get_fuse_dentry(entry)->backing_path);
-		break;
-
-	case FUSE_ACTION_REPLACE: {
-		struct fuse_conn *fc;
-		struct file *backing_file;
-
-		fc = get_fuse_mount(dir)->fc;
-		backing_file = feb->backing_file;
-		if (!backing_file || IS_ERR(backing_file))
-			return ERR_PTR(-EIO);
-
-		iput(get_fuse_inode(inode)->backing_inode);
-		get_fuse_inode(inode)->backing_inode =
-			backing_file->f_inode;
-		ihold(get_fuse_inode(inode)->backing_inode);
-
-		path_put(&get_fuse_dentry(entry)->backing_path);
-		get_fuse_dentry(entry)->backing_path = backing_file->f_path;
-		path_get(&get_fuse_dentry(entry)->backing_path);
-
-		fput(backing_file);
-		break;
-	}
-
-	default:
-		return ERR_PTR(-EIO);
-	}
+	fm = get_fuse_mount(dir);
+	error = handle_inode_backing_fd(inode, entry, fm, febo, feb);
+	if (error)
+		return ERR_PTR(error);
 
 	get_fuse_inode(inode)->nodeid = feo->nodeid;
 
