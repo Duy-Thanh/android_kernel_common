@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90d6d37b_c7049b7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-07-08T11:17:50Z",
+      "side": 1,
+      "message": "Due to the large XML update, unfortunately this cannot be rebased. Please regenerate on top of current android13-5.15.",
+      "revId": "4ddf193409f6d96ad62f68c9b5c707e1a7dfa5eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
