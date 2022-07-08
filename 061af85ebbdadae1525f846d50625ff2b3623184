@@ -33,6 +33,24 @@
       "message": "is this needed in android12-5.10?",
       "revId": "061af85ebbdadae1525f846d50625ff2b3623184",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62a15bce_56876c64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2022-07-08T17:51:34Z",
+      "side": 1,
+      "message": "Ah, yes, 5.4 as well for OEMs.",
+      "parentUuid": "5e96cdb2_864b50d7",
+      "revId": "061af85ebbdadae1525f846d50625ff2b3623184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
