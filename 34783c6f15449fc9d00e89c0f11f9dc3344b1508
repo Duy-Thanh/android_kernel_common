@@ -117,6 +117,30 @@
       },
       "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52d15e79_f497b92f",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:37:27Z",
+      "side": 1,
+      "message": "I have to get all memcg-lru to account how many mapcount-pages in kernel before insmoding the ko, so i export the func above. Can you teach me how to get all memcg-lru without the func, thxs very much.",
+      "parentUuid": "1f3834c7_f0371b64",
+      "range": {
+        "startLine": 1376,
+        "startChar": 18,
+        "endLine": 1376,
+        "endChar": 40
+      },
+      "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
