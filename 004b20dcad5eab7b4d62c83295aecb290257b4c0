@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd1e708_eae594fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-07-09T23:13:07Z",
+      "side": 1,
+      "message": "\"lib/crypto: blake2s: include as built-in\" isn\u0027t being merged correctly with this branch, since this branch contains the arm32 blake2s from v5.12.  The correct merge resolution would get arch/arm/crypto/blake2s* in sync with upstream, by applying the changes from the upstream version of \"lib/crypto: blake2s: include as built-in\".",
+      "revId": "004b20dcad5eab7b4d62c83295aecb290257b4c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
