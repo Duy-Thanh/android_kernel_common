@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dd9b6e5_e1aa1e20",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "Can you pls help to share me how to make it more sense or read easier? because i found it is not logical in others hooks in this file.",
+      "parentUuid": "73902a31_6db0ef04",
+      "range": {
+        "startLine": 394,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 73
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64788dc5_4b072032",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-07-07T01:12:01Z",
       "side": 1,
       "message": "why is all of this needed? There must be a better way.\n\nIf it really is needed, the rationale must be in the commit message.",
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "181d9e1e_c792738c",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "Because i want to include \u003ctrace/hooks/mm.h\u003e in include/linux/mm_inline.h\nand include/linux/rmap.h.\n\nAnd TRACE_INCLUDE_PATH would be defined as \"trace/hooks\" in trace/hooks/mm.h.\n \nIf C file include mm_inline.h or rmap.h, such as init/main.c and so on, TRACE_INCLUDE_PATH will be changed to \"trace/hooks\" from \"trace/events\", which results to fail to find H file when compiling.\n\nDo you have another solution? pls tell me if so.",
+      "parentUuid": "64788dc5_4b072032",
       "revId": "8259f1b83447bde4332d5553c8f514127531f836",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "063fb00d_79c4f5fb",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "Because i want to include \u003ctrace/hooks/mm.h\u003e in include/linux/mm_inline.h\nand include/linux/rmap.h.\n\nAnd TRACE_INCLUDE_PATH would be defined as \"trace/hooks\" in trace/hooks/mm.h.\n \nIf C file include mm_inline.h or rmap.h, such as init/main.c and so on, TRACE_INCLUDE_PATH will be changed to \"trace/hooks\" from \"trace/events\", which results to fail to find H file when compiling.\n\nDo you have another solution? pls tell me if so.",
+      "parentUuid": "7bfae413_fd0a154a",
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0935db14_e2d3fd03",
@@ -71,6 +131,30 @@
       "writtenOn": "2022-07-07T00:50:57Z",
       "side": 1,
       "message": "why not just NULL if it\u0027s unused?",
+      "range": {
+        "startLine": 217,
+        "startChar": 52,
+        "endLine": 217,
+        "endChar": 56
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac358de_54da2954",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "Okay, done。",
+      "parentUuid": "0935db14_e2d3fd03",
       "range": {
         "startLine": 217,
         "startChar": 52,
@@ -104,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78524002_2b7b7f86",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2036,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a09a7a3_481994ce",
+      "range": {
+        "startLine": 2036,
+        "startChar": 6,
+        "endLine": 2036,
+        "endChar": 9
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0ca66e8_8d90e687",
@@ -117,6 +225,30 @@
       "writtenOn": "2022-07-07T00:50:57Z",
       "side": 1,
       "message": "NULL",
+      "range": {
+        "startLine": 2169,
+        "startChar": 57,
+        "endLine": 2169,
+        "endChar": 61
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55643bb7_1d792863",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "okay",
+      "parentUuid": "c0ca66e8_8d90e687",
       "range": {
         "startLine": 2169,
         "startChar": 57,
@@ -173,6 +305,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "471216b1_d172cab3",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2184,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "ebdbfe63_ca156fb1",
+      "range": {
+        "startLine": 2184,
+        "startChar": 58,
+        "endLine": 2184,
+        "endChar": 62
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d293de0a_c1c929db",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2184,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c4466d0_cda2626f",
+      "range": {
+        "startLine": 2184,
+        "startChar": 70,
+        "endLine": 2184,
+        "endChar": 74
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "859cfee5_c7c61dbd",
@@ -186,6 +366,30 @@
       "writtenOn": "2022-07-07T00:50:57Z",
       "side": 1,
       "message": "NULL",
+      "range": {
+        "startLine": 2198,
+        "startChar": 9,
+        "endLine": 2198,
+        "endChar": 13
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a272ee22_e2805c23",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2198,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "859cfee5_c7c61dbd",
       "range": {
         "startLine": 2198,
         "startChar": 9,
@@ -267,6 +471,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a722e4e_f5318367",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5629,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "Ok，it will use trace_android_vh_show_mapcount_pages() to print the info above.",
+      "parentUuid": "cbe4c616_7773dd66",
+      "range": {
+        "startLine": 5628,
+        "startChar": 0,
+        "endLine": 5629,
+        "endChar": 46
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdd1de32_209766f1",
@@ -290,6 +518,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1984879d_f4b0a76a",
+        "filename": "mm/rmap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "Okay, i have removed \"likely\"",
+      "parentUuid": "cdd1de32_209766f1",
+      "range": {
+        "startLine": 1213,
+        "startChar": 14,
+        "endLine": 1213,
+        "endChar": 21
+      },
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29473475_a692cc7a",
@@ -303,6 +555,24 @@
       "writtenOn": "2022-07-07T01:12:01Z",
       "side": 1,
       "message": "How can the case that requires a hook be the \"likely\" case. It might be likely for for your specific case, but it is unlikely for all other partners. Please remove this \"likely\" and any others that require a hook handler.",
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a4eab6b_3fe16ba2",
+        "filename": "mm/rmap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1377,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-09T04:31:31Z",
+      "side": 1,
+      "message": "okay.",
+      "parentUuid": "29473475_a692cc7a",
       "revId": "8259f1b83447bde4332d5553c8f514127531f836",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
