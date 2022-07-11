@@ -1077,6 +1077,8 @@
   __local_bh_enable_ip
   __lock_page
   lock_sock_nested
+  log_buf_addr_get
+  log_buf_len_get
   lookup_page_ext
   match_string
   mbox_chan_received_data
