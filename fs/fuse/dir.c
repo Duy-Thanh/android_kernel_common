@@ -188,13 +188,28 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 	struct dentry *parent;
 	struct fuse_mount *fm;
 	struct fuse_inode *fi;
-	int ret;
+	int ret = 1;
 
 	inode = d_inode_rcu(entry);
 	if (inode && fuse_is_bad(inode))
 		goto invalid;
-	else if (time_before64(fuse_dentry_time(entry), get_jiffies_64()) ||
-		 (flags & LOOKUP_REVAL)) {
+
+#ifdef CONFIG_FUSE_BPF
+	/* TODO: Add bpf support for revalidate.
+	 * Do we need a FUSE_REVALIDATE just for pre/post filters?
+	 * If the node id is zero, userspace doesn't care about the node,
+	 * and doesn't need a forget. If bpf ends up caring, we'll need to
+	 * pass forget to bpf.
+	 */
+	if (get_fuse_dentry(entry)->backing_path.dentry) {
+		ret = fuse_revalidate_backing(NULL, NULL, entry, flags);
+		if (ret == -ECHILD)
+			goto out;
+	}
+#endif
+
+	if (time_before64(fuse_dentry_time(entry), get_jiffies_64()) ||
+		 (flags & LOOKUP_REVAL) || ret <= 0) {
 		struct fuse_entry_out outarg;
 		struct fuse_entry_bpf bpf_arg;
 		FUSE_ARGS(args);
@@ -205,23 +220,13 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 		if (!inode)
 			goto invalid;
 
+		/* If userspace didn't know about this inode, do a fresh lookup */
+		if (!get_fuse_inode(inode)->nodeid)
+			goto invalid;
+
 		ret = -ECHILD;
 		if (flags & LOOKUP_RCU)
 			goto out;
-#ifdef CONFIG_FUSE_BPF
-		{
-			struct fuse_err_ret fer;
-
-			fer = fuse_bpf_backing(entry->d_parent->d_inode,
-					struct fuse_lookup_io,
-					fuse_lookup_initialize,
-					fuse_revalidate_backing,
-					fuse_revalidate_finalize,
-					d_inode(entry->d_parent), entry, flags);
-			if (fer.ret)
-				return PTR_ERR(fer.result);
-		}
-#endif
 		fm = get_fuse_mount(inode);
 
 		forget = fuse_alloc_forget();
