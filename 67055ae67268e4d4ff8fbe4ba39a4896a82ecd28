@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6ea3dfd_23fef2c6",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:14:19Z",
+      "side": 1,
+      "message": "this name looks overly complex. Why not simply\n```\ntrace_android_vh_add_page_to_lru_list()\ntrace_android_vh_del_page_from_lru_list()\n```\n?",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 68,
+        "endChar": 49
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeb60b8e_2f0f6b5e",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:14:19Z",
+      "side": 1,
+      "message": "As Todd mentioned before, non-default cases should not be marked as \"likely\"",
+      "range": {
+        "startLine": 218,
+        "startChar": 6,
+        "endLine": 218,
+        "endChar": 12
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b262996_645433fa",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:14:19Z",
+      "side": 1,
+      "message": "This whole block could be written with minimal changes as:\n\n```\n+\ttrace_android_vh_update_page_mapcount(page, true, \u0026first, \u0026success);\n+\tif (success)\n+\t\tgoto skip;\n\tif (compound) {\n\t\tatomic_t *mapcount;\n\t\tVM_BUG_ON_PAGE(!PageLocked(page), page);\n\t\tVM_BUG_ON_PAGE(!PageTransHuge(page), page);\n\t\tmapcount \u003d compound_mapcount_ptr(page);\n\t\tfirst \u003d atomic_inc_and_test(mapcount);\n\t} else {\n\t\tfirst \u003d atomic_inc_and_test(\u0026page-\u003e_mapcount);\n\t}\n+skip:\n...\n\n```",
+      "range": {
+        "startLine": 1121,
+        "startChar": 0,
+        "endLine": 1133,
+        "endChar": 2
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae45731_80cfb06e",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:14:19Z",
+      "side": 1,
+      "message": "this whole block can be written as:\n```\nif ((success \u0026\u0026 first_mapping) || atomic_inc_and_test(\u0026page-\u003e_mapcount))\n    nr++;\n```\nand the logic behind this change becomes more apparent (you just add one more condition).",
+      "range": {
+        "startLine": 1214,
+        "startChar": 3,
+        "endLine": 1220,
+        "endChar": 4
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91972e04_c357c5d9",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1244,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:14:19Z",
+      "side": 1,
+      "message": "this whole block can be written as:\n```\nif ((success \u0026\u0026 !first_mapping) || !atomic_inc_and_test(\u0026page-\u003e_mapcount))\n    goto out;\n```\nand the logic behind this change becomes more apparent (you just add one more condition).",
+      "range": {
+        "startLine": 1238,
+        "startChar": 2,
+        "endLine": 1244,
+        "endChar": 3
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b74d1ad_a314d4a0",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:14:19Z",
+      "side": 1,
+      "message": "```\nif (success \u0026\u0026 first_mapping) || atomic_add_negative(-1, \u0026page[i]._mapcount))\n\tnr++;\n```",
+      "range": {
+        "startLine": 1270,
+        "startChar": 0,
+        "endLine": 1276,
+        "endChar": 4
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1165f846_7262abb9",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:14:19Z",
+      "side": 1,
+      "message": "```\nif (success \u0026\u0026 !first_mapping) || !!atomic_add_negative(-1, \u0026page-\u003e_mapcount))\n\treturn;\n```",
+      "range": {
+        "startLine": 1287,
+        "startChar": 2,
+        "endLine": 1293,
+        "endChar": 3
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f6c2761_ac4e769e",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:14:19Z",
+      "side": 1,
+      "message": "```\nif ((success \u0026\u0026 first_mapping) || atomic_add_negative(-1, \u0026page[i]._mapcount))\n\tnr++;\n```",
+      "range": {
+        "startLine": 1332,
+        "startChar": 3,
+        "endLine": 1338,
+        "endChar": 4
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71622a27_05582b9d",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:14:19Z",
+      "side": 1,
+      "message": "```\nif ((success \u0026\u0026 !first_mapping) || !atomic_add_negative(-1, \u0026page-\u003e_mapcount))\n\tgoto out;\n```",
+      "range": {
+        "startLine": 1383,
+        "startChar": 1,
+        "endLine": 1391,
+        "endChar": 2
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
