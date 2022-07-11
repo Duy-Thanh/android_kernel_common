@@ -141,6 +141,30 @@
       },
       "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c252903_a46155cb",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-11T20:24:45Z",
+      "side": 1,
+      "message": "I assume you are using these functions to loop over all memcgs, get their LRUs, iterate over all pages, check the mapcount and report the pages mapped more than once.\nSo, instead of exporting these pieces of that function, just implement that function here and export it.\n\nNote also that mem_cgroup_page_lruvec is removed in 5.16, so if we export it now you will have to find a different solution in the next version.",
+      "parentUuid": "52d15e79_f497b92f",
+      "range": {
+        "startLine": 1376,
+        "startChar": 18,
+        "endLine": 1376,
+        "endChar": 40
+      },
+      "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
