@@ -83,6 +83,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8f09ef8_b463c479",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-11T21:52:47Z",
+      "side": 1,
+      "message": "We can\u0027t do this. I recommend that you do something like create a function in a .c file that invokes the hook and then invoke that function from this file. Then you don\u0027t have to include any hook header from this header.\n\nIn a .C file that includes trace/hooks/mm.h:\n```\nvoid foo(page, lru)\n{\n  trace_android_vh_add_page_mapcount_to_op_lrulist(page, lru);\n}\n```\nIn this file:\n```\nstatic __always_inline void add_page_to_lru_list(struct page *page,\n\t\t\t\tstruct lruvec *lruvec, enum lru_list lru)\n{\n\tfoo(page, lru);\n\t...\n}\n```\n(obviously give the function a better name)",
+      "parentUuid": "181d9e1e_c792738c",
+      "revId": "8259f1b83447bde4332d5553c8f514127531f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bfae413_fd0a154a",
