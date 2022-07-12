@@ -437,3 +437,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_ffu_update_cid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmput);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pidfd_open);
