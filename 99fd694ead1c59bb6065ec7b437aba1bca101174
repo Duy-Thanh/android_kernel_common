@@ -17,6 +17,23 @@
       "parentUuid": "86444ad4_ad069eb5",
       "revId": "99fd694ead1c59bb6065ec7b437aba1bca101174",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "473f3f2c_2a233002",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-07-12T17:32:40Z",
+      "side": 1,
+      "message": "Please use android_vh_ufs_update_sdev to disable FUA support on the underlying block device instead, as was suggested earlier.",
+      "revId": "99fd694ead1c59bb6065ec7b437aba1bca101174",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
