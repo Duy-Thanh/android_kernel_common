@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df31573c_798f7a08",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-12T23:27:42Z",
+      "side": 1,
+      "message": "If backing inode or bpf change, we probably would prefer to just invaldate and do the lookup again, and issue a forget if needed, like regular userspace would do if the reported nodeid is different.",
+      "range": {
+        "startLine": 247,
+        "startChar": 3,
+        "endLine": 255,
+        "endChar": 13
+      },
+      "revId": "5ef53181173571a190099c18f56ec246cb027c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "732d44fd_f68e9863",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-12T23:27:42Z",
+      "side": 1,
+      "message": "If our revalidate call returned a different node id, or otherwise altered the backing information, we probably still want to issue a forget to userspace if the id is being tracked by userspace.",
+      "range": {
+        "startLine": 265,
+        "startChar": 4,
+        "endLine": 266,
+        "endChar": 26
+      },
+      "revId": "5ef53181173571a190099c18f56ec246cb027c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
