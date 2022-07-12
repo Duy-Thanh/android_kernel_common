@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a93639bc_b5924d77",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5644,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-12T18:22:24Z",
+      "side": 1,
+      "message": "Good question. I\u0027ll try to find out if that\u0027s supported.",
+      "parentUuid": "b1dafcfe_36510138",
+      "range": {
+        "startLine": 5644,
+        "startChar": 38,
+        "endLine": 5644,
+        "endChar": 42
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b262996_645433fa",
         "filename": "mm/rmap.c",
         "patchSetId": 7
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "I think it hard for user to read if so, so that i rewrited as follows:\n\nif (success \u0026\u0026 first_mapping)                      \n    nr++;                              \nelse if (atomic_inc_and_test(\u0026page[i]._mapcount))  \n    nr++;",
       "parentUuid": "eae45731_80cfb06e",
+      "range": {
+        "startLine": 1214,
+        "startChar": 3,
+        "endLine": 1220,
+        "endChar": 4
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c1a945_cc1dc59d",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-12T18:22:24Z",
+      "side": 1,
+      "message": "Nope. The way I suggested makes it much easier to see what is being changed (we are simply adding one more condition). Please follow my suggestion in all the places I mentioned.",
+      "parentUuid": "61f95ec5_1055ea12",
       "range": {
         "startLine": 1214,
         "startChar": 3,
