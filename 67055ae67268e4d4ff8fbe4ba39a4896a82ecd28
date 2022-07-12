@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f99df0_1bd6daae",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "All right.",
+      "parentUuid": "c6ea3dfd_23fef2c6",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 68,
+        "endChar": 49
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeb60b8e_2f0f6b5e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-11T20:14:19Z",
       "side": 1,
       "message": "As Todd mentioned before, non-default cases should not be marked as \"likely\"",
+      "range": {
+        "startLine": 218,
+        "startChar": 6,
+        "endLine": 218,
+        "endChar": 12
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d47dc8_fe814495",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "Okay.",
+      "parentUuid": "aeb60b8e_2f0f6b5e",
       "range": {
         "startLine": 218,
         "startChar": 6,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1dafcfe_36510138",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5644,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "If i set parameter to \"\", it will cause some compile-err, can you pls help to guide me how solve it?\n\nDECLARE_HOOK(android_vh_show_mapcount_pages,                                                                                                                                                               \n   TP_PROTO(),                                                                                                                                                                    \n   TP_ARGS());\n   \n/data/zhangkui/lipeifeng/android-kernel/common/include/trace/hooks/mm.h:134:1: error: expected parameter declarator\n/data/zhangkui/lipeifeng/android-kernel/common/include/trace/hooks/vendor_hooks.h:16:22: note: expanded from macro \u0027DECLARE_HOOK\u0027\n#define DECLARE_HOOK DECLARE_TRACE\n                     ^\n/data/zhangkui/lipeifeng/android-kernel/common/include/linux/tracepoint.h:423:2: note: expanded from macro \u0027DECLARE_TRACE\u0027\n        __DECLARE_TRACE(name, PARAMS(proto), PARAMS(args),              \\\n        ^\n/data/zhangkui/lipeifeng/android-kernel/common/include/linux/tracepoint.h:283:56: note: expanded from macro \u0027__DECLARE_TRACE\u0027\n        check_trace_callback_type_##name(void (*cb)(data_proto))",
+      "parentUuid": "eb010620_c803f558",
+      "range": {
+        "startLine": 5644,
+        "startChar": 38,
+        "endLine": 5644,
+        "endChar": 42
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b262996_645433fa",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-07-11T20:14:19Z",
       "side": 1,
       "message": "This whole block could be written with minimal changes as:\n\n```\n+\ttrace_android_vh_update_page_mapcount(page, true, \u0026first, \u0026success);\n+\tif (success)\n+\t\tgoto skip;\n\tif (compound) {\n\t\tatomic_t *mapcount;\n\t\tVM_BUG_ON_PAGE(!PageLocked(page), page);\n\t\tVM_BUG_ON_PAGE(!PageTransHuge(page), page);\n\t\tmapcount \u003d compound_mapcount_ptr(page);\n\t\tfirst \u003d atomic_inc_and_test(mapcount);\n\t} else {\n\t\tfirst \u003d atomic_inc_and_test(\u0026page-\u003e_mapcount);\n\t}\n+skip:\n...\n\n```",
+      "range": {
+        "startLine": 1121,
+        "startChar": 0,
+        "endLine": 1133,
+        "endChar": 2
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecc1b0b5_e7c36a4e",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b262996_645433fa",
       "range": {
         "startLine": 1121,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61f95ec5_1055ea12",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "I think it hard for user to read if so, so that i rewrited as follows:\n\nif (success \u0026\u0026 first_mapping)                      \n    nr++;                              \nelse if (atomic_inc_and_test(\u0026page[i]._mapcount))  \n    nr++;",
+      "parentUuid": "eae45731_80cfb06e",
+      "range": {
+        "startLine": 1214,
+        "startChar": 3,
+        "endLine": 1220,
+        "endChar": 4
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91972e04_c357c5d9",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-07-11T20:14:19Z",
       "side": 1,
       "message": "this whole block can be written as:\n```\nif ((success \u0026\u0026 !first_mapping) || !atomic_inc_and_test(\u0026page-\u003e_mapcount))\n    goto out;\n```\nand the logic behind this change becomes more apparent (you just add one more condition).",
+      "range": {
+        "startLine": 1238,
+        "startChar": 2,
+        "endLine": 1244,
+        "endChar": 3
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acf7944e_e079f3ec",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1244,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91972e04_c357c5d9",
       "range": {
         "startLine": 1238,
         "startChar": 2,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15409834_20b688ac",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b74d1ad_a314d4a0",
+      "range": {
+        "startLine": 1270,
+        "startChar": 0,
+        "endLine": 1276,
+        "endChar": 4
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1165f846_7262abb9",
@@ -175,6 +343,30 @@
       "writtenOn": "2022-07-11T20:14:19Z",
       "side": 1,
       "message": "```\nif (success \u0026\u0026 !first_mapping) || !!atomic_add_negative(-1, \u0026page-\u003e_mapcount))\n\treturn;\n```",
+      "range": {
+        "startLine": 1287,
+        "startChar": 2,
+        "endLine": 1293,
+        "endChar": 3
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a685134d_1c28eacf",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1165f846_7262abb9",
       "range": {
         "startLine": 1287,
         "startChar": 2,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69156aa2_c9ef8ba0",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f6c2761_ac4e769e",
+      "range": {
+        "startLine": 1332,
+        "startChar": 3,
+        "endLine": 1338,
+        "endChar": 4
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71622a27_05582b9d",
@@ -221,6 +437,30 @@
       "writtenOn": "2022-07-11T20:14:19Z",
       "side": 1,
       "message": "```\nif ((success \u0026\u0026 !first_mapping) || !atomic_add_negative(-1, \u0026page-\u003e_mapcount))\n\tgoto out;\n```",
+      "range": {
+        "startLine": 1383,
+        "startChar": 1,
+        "endLine": 1391,
+        "endChar": 2
+      },
+      "revId": "67055ae67268e4d4ff8fbe4ba39a4896a82ecd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a195b26e_ca617b2a",
+        "filename": "mm/rmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-12T13:24:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71622a27_05582b9d",
       "range": {
         "startLine": 1383,
         "startChar": 1,
