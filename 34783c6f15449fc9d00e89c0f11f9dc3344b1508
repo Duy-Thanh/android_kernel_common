@@ -189,6 +189,30 @@
       },
       "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdd16126_0b9672c4",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-12T18:38:42Z",
+      "side": 1,
+      "message": "simply copy the code from your driver that does this looping into a function in here and export it. I\u0027m guessing you are doing something like this:\n```\nmemcg \u003d root_mem_cgroup;\nfor_each_mem_cgroup_tree(iter, memcg) {\n...\n}\n```\n\nso, you create a new function here:\n```\nvoid my_func()\n{\n    memcg \u003d root_mem_cgroup;\n    for_each_mem_cgroup_tree(iter, memcg) {\n    ...\n}\n```\nexport it and use it from your driver. Obviously `my_func` would need a better name.\nIf you can share the code of that loop I\u0027ll be able to provide more details but without seeing the code that uses these functions it\u0027s hard to write the final solution.",
+      "parentUuid": "be34e3e2_6333c9c6",
+      "range": {
+        "startLine": 1376,
+        "startChar": 18,
+        "endLine": 1376,
+        "endChar": 40
+      },
+      "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
