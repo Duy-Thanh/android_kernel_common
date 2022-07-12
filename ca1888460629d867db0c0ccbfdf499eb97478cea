@@ -16,6 +16,23 @@
       "message": "Curious why this needs to be backported to android-mainline now instead of letting it come later as part of the organic merge of the upstream kernel",
       "revId": "ca1888460629d867db0c0ccbfdf499eb97478cea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f107b7c_b28fdb29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-07-12T23:51:53Z",
+      "side": 1,
+      "message": "Jeff: This fixes a bug found by our CI system, so as a special case we take it earlier. When this change is part of Linus\u0027s tree and we merge it down, it\u0027ll be replaced with that version.",
+      "revId": "ca1888460629d867db0c0ccbfdf499eb97478cea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
