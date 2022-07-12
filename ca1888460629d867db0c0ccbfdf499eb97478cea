@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc044278_bc0d249a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1946045
+      },
+      "writtenOn": "2022-07-12T21:47:36Z",
+      "side": 1,
+      "message": "Curious why this needs to be backported to android-mainline now instead of letting it come later as part of the organic merge of the upstream kernel",
+      "revId": "ca1888460629d867db0c0ccbfdf499eb97478cea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
