@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ca0b67_588c00ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-13T20:19:07Z",
+      "side": 1,
+      "message": "Also please rebase the patches so that they are on top of each other.",
+      "revId": "75c632ddc029f814ec9fa671e4208c1b5d9d4b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
