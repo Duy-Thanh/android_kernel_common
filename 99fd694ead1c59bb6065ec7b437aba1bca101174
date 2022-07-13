@@ -34,6 +34,24 @@
       "message": "Please use android_vh_ufs_update_sdev to disable FUA support on the underlying block device instead, as was suggested earlier.",
       "revId": "99fd694ead1c59bb6065ec7b437aba1bca101174",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95821de2_b9434d50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954056
+      },
+      "writtenOn": "2022-07-13T03:08:40Z",
+      "side": 1,
+      "message": "Dear Eric\n\n     We have some tests in devices of our customer. If FUA is completely disabled by driver, \nthere will be stability problems (the test includes random power down pressure test and progressive power down test). \nOur customers do not recognize the modification of directly turning off FUA. \nEven if there is a real problem with the flash material, it is impossible to replace the flash in large quantities. \nThe performance test(direct io) of android benchmark is low, and the customers also do not recognize it, \nso We want do disable FUA in direct io by SW according to the  to the specific hardware.\nOr can you provide a document for the low performance about android benchmark(direct io)? We can also explain this to our customer\n\nThanks",
+      "parentUuid": "473f3f2c_2a233002",
+      "revId": "99fd694ead1c59bb6065ec7b437aba1bca101174",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
