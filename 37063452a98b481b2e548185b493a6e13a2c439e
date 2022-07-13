@@ -41,6 +41,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b2ca8b_8664595e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-07-13T22:39:50Z",
+      "side": 1,
+      "message": "Posted my earlier wip attempt to fold together this patch with the following one here in case it\u0027s useful: https://android-review.googlesource.com/c/kernel/common/+/2153193\n\nOther than combining the two patches into one, the main other substantive difference is dropping the cpupri.c changes \u0026 changing cpupri_find -\u003e cpupri_find_fitness calls in rt.c. This simplifies \u0026 shortens the patch but IIRC the resulting logic differs slightly from the original changes \u0026 I hadn\u0027t yet had a chance to dig into whether that difference would be problematic.",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9edb3da_6fbe124c",
