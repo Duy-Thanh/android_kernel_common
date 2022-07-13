@@ -261,6 +261,30 @@
       },
       "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc360ee_2c583516",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-13T20:17:28Z",
+      "side": 1,
+      "message": "Ok, so instead of exporting `mem_cgroup_iter` and `mem_cgroup_page_lruvec`, you can add 2 new functions and export them like this:\n\n```\nvoid doXXX_for_evictable_lrus() {\n\tmemcg \u003d mem_cgroup_iter(NULL, NULL, NULL);\n\tdo {\n\t\tstruct lruvec *lruvec \u003d mem_cgroup_lruvec(memcg, pgdat);\n\n\t\tfor_each_evictable_lru(lru)\n\t\t      trace_android_vh_doXXX(...);\n\t\tmemcg \u003d mem_cgroup_iter(NULL, memcg, NULL);\n\t} while (memcg);\n}\nEXPORT_SYMBOL_GPL(doXXX_for_evictable_lrus);\n```\nand\n```\nbool move_page_to_lruvec(page, pgdat)\n{\n     if (spin_trylock_irq(\u0026pgdat-\u003elru_lock)) {\n\t\tint lru;\n\n\t\tlruvec \u003d mem_cgroup_page_lruvec(page, pgdat);\n\t\tlru \u003d page_lru(page);\n\t\tif (PageLRU(page) \u0026\u0026 !PageUnevictable(page))\n\t\t\tlist_move(\u0026page-\u003elru, \u0026lruvec-\u003elists[lru]);\n\t\tspin_unlock_irq(\u0026pgdat-\u003elru_lock);\n\t}\n}\nEXPORT_SYMBOL_GPL(move_page_to_lruvec);\n```\n\nThen use them from your driver.",
+      "parentUuid": "8aeef2a0_b877a390",
+      "range": {
+        "startLine": 1376,
+        "startChar": 18,
+        "endLine": 1376,
+        "endChar": 40
+      },
+      "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
