@@ -328,6 +328,10 @@ static void set_compress_inode(struct f2fs_sb_info *sbi, struct inode *inode,
 			continue;
 
 		/* Do not use inline_data with compression */
+<<<<<<< HEAD   (43ce4f Merge 5.15.50 into android14-5.15)
+=======
+		stat_dec_inline_inode(inode);
+>>>>>>> BRANCH (372384 Linux 5.15.51)
 		clear_inode_flag(inode, FI_INLINE_DATA);
 		set_compress_context(inode);
 		return;
