@@ -12,6 +12,7 @@
 #include <linux/hrtimer.h>
 #include <linux/dma-mapping.h>
 #include <linux/spinlock.h>
+#include <linux/swiotlb.h>
 #include <xen/xen.h>
 
 #ifdef DEBUG
@@ -246,6 +247,13 @@ static inline bool virtqueue_use_indirect(struct virtqueue *_vq,
 static bool vring_use_dma_api(struct virtio_device *vdev)
 {
 	if (!virtio_has_dma_quirk(vdev))
+		return true;
+
+	/* If the device is configured to use a DMA restricted pool,
+	 * we had better use it.
+	 */
+	if (IS_ENABLED(CONFIG_DMA_RESTRICTED_POOL) &&
+            is_swiotlb_for_alloc(vdev->dev.parent))
 		return true;
 
 	/* Otherwise, we are left to guess. */
