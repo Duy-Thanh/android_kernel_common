@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "324f1e5f_4e67ccd3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T05:54:52Z",
+      "side": 1,
+      "message": "The commit message could use a bit more content.\n\nTODO: Review the bug links to try to see what additional detail can be added.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "47b69717_6f08be17",
@@ -14,6 +37,74 @@
       "writtenOn": "2022-07-13T05:28:30Z",
       "side": 1,
       "message": "Just an initial pass rebasing \u0026 reworking the series. Want to get some review and input before sending to lkml.",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9edb3da_6fbe124c",
+        "filename": "init/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T05:54:52Z",
+      "side": 1,
+      "message": "terminology: Should it be softirq instead of softint to avoid introducing new terms?",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ee9a978_220cbf0c",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T05:54:52Z",
+      "side": 1,
+      "message": "This name feels clunky. Suggestions would be welcome.",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38a5bfb0_2fa7859b",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T05:54:52Z",
+      "side": 1,
+      "message": "Name suggestions here would be very welcome.\n\nis_task_deferrable()?",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd126197_e6515046",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T05:54:52Z",
+      "side": 1,
+      "message": "Wonder if cutting the chunk here under the retry into a sub function would make this cleaner?\n\nret \u003d subfunc(...,drop_noprempts);\nif (!ret \u0026\u0026 drop_noprempts)\n  ret \u003d subfunc(...,false);\n  \nThough it would be more likely to collide with upstream, so maybe an optimization to do once we\u0027ve gotten upstream feedback and its seems likely to be merged.",
       "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
