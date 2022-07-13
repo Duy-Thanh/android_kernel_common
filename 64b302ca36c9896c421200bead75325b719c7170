@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3040da8e_d86a0174",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-07-13T12:36:06Z",
+      "side": 1,
+      "message": "The kernel_kleaf_abi_aarch64 on aosp_kernel-common-android13-5.15 build failure can probably be ignored.\n\nI don\u0027t know what\u0027s up with the other two build failures. The logs seem incomplete.\n\nThe ABI issue is due to multiple declarations of `ns_to_kernel_old_timeval` in the kernel source tree with different but compatible types.\n\nAfter a brief discussion with sidnayyar@ it seems like the best place to resolve this is in `abitidy` by adding a pass to remove (useless and ABI-insignificant) top-level qualifiers on function parameter and return types.",
+      "revId": "64b302ca36c9896c421200bead75325b719c7170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
