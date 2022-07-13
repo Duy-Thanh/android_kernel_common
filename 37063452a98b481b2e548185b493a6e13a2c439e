@@ -94,6 +94,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05a2d1f3_030df988",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T22:16:20Z",
+      "side": 1,
+      "message": "The cpupri values not indexing intuitively to the task priorities makes this comparison particularly confusing.  Rather than comparing the convert_prio(p-\u003eprio) value here, I suspect this can be more clearly replaced with: rt_task(p)",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd126197_e6515046",
         "filename": "kernel/sched/cpupri.c",
         "patchSetId": 2
