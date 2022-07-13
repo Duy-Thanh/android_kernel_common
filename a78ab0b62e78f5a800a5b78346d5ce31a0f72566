@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a9998b_45bcda7c",
+        "filename": "include/linux/interrupt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T05:58:47Z",
+      "side": 1,
+      "message": "I need to look closer here, but it seems like strange use of __u32 here instead of just u32.",
+      "revId": "a78ab0b62e78f5a800a5b78346d5ce31a0f72566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589e258d_70121bf6",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1636,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T05:58:47Z",
+      "side": 1,
+      "message": "again, softints seems like new terminology and softirq is probably best?",
+      "revId": "a78ab0b62e78f5a800a5b78346d5ce31a0f72566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eb18f2f_eb9a2f9a",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1641,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T05:58:47Z",
+      "side": 1,
+      "message": "This line seemed like the right change to forward port this over the earlier __IRQ_STAT(cpu, __softirq_pending), but I\u0027m not 100% on it.",
+      "revId": "a78ab0b62e78f5a800a5b78346d5ce31a0f72566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
