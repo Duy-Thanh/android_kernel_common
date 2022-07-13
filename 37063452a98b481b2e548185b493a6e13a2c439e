@@ -58,6 +58,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce073255_3c4a2794",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-13T22:46:05Z",
+      "side": 1,
+      "message": "Thanks for sharing that! I had considered folding them together per your comment in the bug, but initially some of the logic seemed independent enough to warrant keeping it split. I\u0027ll check out your version!",
+      "parentUuid": "86b2ca8b_8664595e",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9edb3da_6fbe124c",
