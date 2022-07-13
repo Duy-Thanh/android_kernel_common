@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19ee248f_5bea23a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-13T06:24:52Z",
+      "side": 1,
+      "message": "Please no typec hooks, submit the needed changes upstream first and then we can see about backporting them to android kernels.\n\nAlso do not reuse old bugs for new features.",
+      "revId": "afa6262e843b539cd99ed5b500b73feb60021501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
