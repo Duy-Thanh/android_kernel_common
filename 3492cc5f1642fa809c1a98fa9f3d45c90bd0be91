@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78ab050c_79ecc480",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-13T10:53:03Z",
+      "side": 1,
+      "message": "Just want to highlight again that with this change we fully ignoring entry_timeout we received from the userspace in case we have a backing_fd.\n\nFor example:\nUserspace answered to the initial lookup with backing_fd, but with entry_timout equals to hour\n\nI that case I may assume that userspace is expected to receive lookup again after 1 hour probably to change their mind about backing_fd or introduce bpf.\nSo, basically with that change decision about lookup with backing_fd is becoming almost not reversible for userspace which is wrong to my opinion.\n\nWhat do you think about having something like that?\n\n1. Firstly check fuse entry_timeout and if it expired, fully relookup the inode to the userspace\n2. But fix the original problem by executing backing revalidate even if fuse entry_timeout hasn\u0027t been expired",
+      "revId": "3492cc5f1642fa809c1a98fa9f3d45c90bd0be91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
