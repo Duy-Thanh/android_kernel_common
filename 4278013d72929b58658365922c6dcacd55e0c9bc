@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "064692a3_ace48bbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2022-07-13T22:28:31Z",
+      "side": 1,
+      "message": "Tested w/ adb remount on cuttlefish.",
+      "revId": "4278013d72929b58658365922c6dcacd55e0c9bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
