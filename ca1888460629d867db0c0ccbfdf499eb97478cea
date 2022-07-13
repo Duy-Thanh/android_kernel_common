@@ -51,6 +51,23 @@
       "parentUuid": "0f107b7c_b28fdb29",
       "revId": "ca1888460629d867db0c0ccbfdf499eb97478cea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "031adbf0_37f99f59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-07-13T17:10:39Z",
+      "side": 1,
+      "message": "This should be FROMLIST or FROMGIT for mainline, since it cannot be backported to a ToT.",
+      "revId": "ca1888460629d867db0c0ccbfdf499eb97478cea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
