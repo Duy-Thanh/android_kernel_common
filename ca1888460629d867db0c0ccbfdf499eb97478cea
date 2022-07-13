@@ -33,6 +33,24 @@
       "message": "Jeff: This fixes a bug found by our CI system, so as a special case we take it earlier. When this change is part of Linus\u0027s tree and we merge it down, it\u0027ll be replaced with that version.",
       "revId": "ca1888460629d867db0c0ccbfdf499eb97478cea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561e50c0_d9673290",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1946045
+      },
+      "writtenOn": "2022-07-13T16:33:38Z",
+      "side": 1,
+      "message": "thanks for info!",
+      "parentUuid": "0f107b7c_b28fdb29",
+      "revId": "ca1888460629d867db0c0ccbfdf499eb97478cea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
