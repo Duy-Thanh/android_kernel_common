@@ -172,3 +172,7 @@
   __traceiter_android_vh_tune_swappiness
   __tracepoint_android_vh_tune_scan_type
   __tracepoint_android_vh_tune_swappiness
+
+#required by mi_mempool.ko
+  __traceiter_android_vh_mmput
+  __tracepoint_android_vh_mmput
