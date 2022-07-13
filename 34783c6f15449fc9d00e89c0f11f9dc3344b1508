@@ -213,6 +213,30 @@
       },
       "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca68663_2190bd0d",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-13T03:14:59Z",
+      "side": 1,
+      "message": "we need to use the functions above as follows casees:\n\n1.mem_cgroup_iter\n\t\tmemcg \u003d mem_cgroup_iter(NULL, NULL, NULL);\n\t\tdo {\n\t\t\tstruct lruvec *lruvec \u003d mem_cgroup_lruvec(memcg, pgdat);\n\n\t\t\tfor_each_evictable_lru(lru) {\n\t\t\t      ...\n\t\t\t}\n\t\t\tmemcg \u003d mem_cgroup_iter(NULL, memcg, NULL);\n\t\t} while (memcg);\n2.mem_cgroup_page_lruvec\n      if (spin_trylock_irq(\u0026pgdat-\u003elru_lock)) {\n\t\tint lru;\n\n\t\tlruvec \u003d mem_cgroup_page_lruvec(page, pgdat);\n\t\tlru \u003d page_lru(page);\n\t\tif (PageLRU(page) \u0026\u0026 !PageUnevictable(page))\n\t\t\tlist_move(\u0026page-\u003elru, \u0026lruvec-\u003elists[lru]);\n\t\tspin_unlock_irq(\u0026pgdat-\u003elru_lock);\n\t}\n3.root_mem_cgroup\nSolve the compile-err.",
+      "parentUuid": "fdd16126_0b9672c4",
+      "range": {
+        "startLine": 1376,
+        "startChar": 18,
+        "endLine": 1376,
+        "endChar": 40
+      },
+      "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
