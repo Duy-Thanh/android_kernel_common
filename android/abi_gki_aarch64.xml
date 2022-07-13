@@ -733,6 +733,7 @@
       <elf-symbol name='add_device_randomness' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2fb6de5d'/>
       <elf-symbol name='add_memory' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbd7aaaee'/>
       <elf-symbol name='add_memory_subsection' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x690b988e'/>
+      <elf-symbol name='add_random_ready_callback' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x682f92f4'/>
       <elf-symbol name='add_swap_extent' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf6dd2fc5'/>
       <elf-symbol name='add_taint' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x76d451c4'/>
       <elf-symbol name='add_timer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x65744673'/>
@@ -1384,6 +1385,7 @@
       <elf-symbol name='default_wake_function' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaad8c7d6'/>
       <elf-symbol name='deferred_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe730994c'/>
       <elf-symbol name='del_gendisk' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe3e8ddf2'/>
+      <elf-symbol name='del_random_ready_callback' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5b889917'/>
       <elf-symbol name='del_timer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaa4008af'/>
       <elf-symbol name='del_timer_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf15e728e'/>
       <elf-symbol name='delayed_work_timer_fn' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x253af43d'/>
@@ -8468,6 +8470,17 @@
           <var-decl name='msi_host_init' type-id='0681bc12' visibility='default' filepath='drivers/pci/controller/dwc/pcie-designware.h' line='178' column='1'/>
         </data-member>
       </class-decl>
+      <class-decl name='random_ready_callback' size-in-bits='256' is-struct='yes' visibility='default' filepath='include/linux/random.h' line='146' column='1' id='06497f5c'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='list' type-id='72f469ec' visibility='default' filepath='include/linux/random.h' line='147' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='func' type-id='5881f803' visibility='default' filepath='include/linux/random.h' line='148' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='owner' type-id='2730d015' visibility='default' filepath='include/linux/random.h' line='149' column='1'/>
+        </data-member>
+      </class-decl>
       <class-decl name='irq_data' size-in-bits='448' is-struct='yes' visibility='default' filepath='include/linux/irq.h' line='177' column='1' id='064acd7a'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='mask' type-id='19c2251e' visibility='default' filepath='include/linux/irq.h' line='178' column='1'/>
@@ -12744,6 +12757,10 @@
           <var-decl name='interruptible' type-id='b50a4934' visibility='default' filepath='include/drm/drm_modeset_lock.h' line='65' column='1'/>
         </data-member>
       </class-decl>
+      <function-type size-in-bits='64' id='1199c98f'>
+        <parameter type-id='b47c553a' name='rdy'/>
+        <return type-id='48b5725f'/>
+      </function-type>
       <class-decl name='ttm_resource' size-in-bits='576' is-struct='yes' visibility='default' filepath='include/drm/ttm/ttm_resource.h' line='169' column='1' id='11a2bfdd'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='mm_node' type-id='eaa32e2f' visibility='default' filepath='include/drm/ttm/ttm_resource.h' line='170' column='1'/>
@@ -40438,6 +40455,7 @@
       </class-decl>
       <pointer-type-def type-id='3b22df33' size-in-bits='64' id='587d2ba7'/>
       <typedef-decl name='pid_t' type-id='63eb2bf2' filepath='include/linux/types.h' line='22' column='1' id='587f89d2'/>
+      <pointer-type-def type-id='1199c98f' size-in-bits='64' id='5881f803'/>
       <enum-decl name='timespec_type' filepath='include/linux/restart_block.h' line='16' column='1' id='58918b27'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='TT_NONE' value='0'/>
@@ -80178,6 +80196,7 @@
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='2dfcfaf9' size-in-bits='64' id='b47b0d41'/>
+      <pointer-type-def type-id='06497f5c' size-in-bits='64' id='b47c553a'/>
       <enum-decl name='pin_config_param' filepath='include/linux/pinctrl/pinconf-generic.h' line='111' column='1' id='b486b770'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='PIN_CONFIG_BIAS_BUS_HOLD' value='0'/>
@@ -119659,6 +119678,10 @@
         <parameter type-id='91ce1af9' name='size' filepath='mm/memory_hotplug.c' line='1133' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='add_random_ready_callback' mangled-name='add_random_ready_callback' filepath='drivers/char/random.c' line='1550' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='add_random_ready_callback'>
+        <parameter type-id='b47c553a' name='rdy' filepath='drivers/char/random.c' line='1550' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='add_swap_extent' mangled-name='add_swap_extent' filepath='mm/swapfile.c' line='2374' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='add_swap_extent'>
         <parameter type-id='11e11a61' name='sis' filepath='mm/swapfile.c' line='2374' column='1'/>
         <parameter type-id='7359adad' name='start_page' filepath='mm/swapfile.c' line='2374' column='1'/>
@@ -123149,6 +123172,10 @@
       </function-decl>
       <function-decl name='del_gendisk' mangled-name='del_gendisk' filepath='block/genhd.c' line='892' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='del_gendisk'>
         <parameter type-id='33c599da' name='disk' filepath='block/genhd.c' line='892' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='del_random_ready_callback' mangled-name='del_random_ready_callback' filepath='drivers/char/random.c' line='1581' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='del_random_ready_callback'>
+        <parameter type-id='b47c553a' name='rdy' filepath='drivers/char/random.c' line='1581' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='del_timer' mangled-name='del_timer' filepath='kernel/time/timer.c' line='1204' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='del_timer'>
