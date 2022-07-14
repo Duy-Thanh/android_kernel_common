@@ -498,12 +498,12 @@ void dma_fence_release(struct kref *kref)
 
 	trace_dma_fence_destroy(fence);
 
-	if (WARN(!list_empty(&fence->cb_list) &&
-		 !test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->flags),
-		 "Fence %s:%s:%llx:%llx released with pending signals!\n",
-		 fence->ops->get_driver_name(fence),
-		 fence->ops->get_timeline_name(fence),
-		 fence->context, fence->seqno)) {
+	if (!list_empty(&fence->cb_list) &&
+		!test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->flags)) {
+		pr_warn_ratelimited("Fence %s:%s:%llx:%llx released with pending signals!\n",
+				    fence->ops->get_driver_name(fence),
+				    fence->ops->get_timeline_name(fence),
+				    fence->context, fence->seqno);
 		unsigned long flags;
 
 		/*
