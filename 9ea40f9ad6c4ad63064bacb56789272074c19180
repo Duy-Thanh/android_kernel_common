@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a99ddce5_acdc28d3",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-14T16:19:36Z",
+      "side": 1,
+      "message": "It would be better to introduce these and android_vh_do_traversal_lruvec() in a separate patch like it was before.",
+      "range": {
+        "startLine": 1375,
+        "startChar": 0,
+        "endLine": 1405,
+        "endChar": 0
+      },
+      "revId": "9ea40f9ad6c4ad63064bacb56789272074c19180",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e342023_83c64975",
+        "filename": "mm/rmap.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-14T16:19:36Z",
+      "side": 1,
+      "message": "I think this is what Todd suggested but do these functions need to be exported? I don\u0027t think they are used from drivers, do they?",
+      "range": {
+        "startLine": 594,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 50
+      },
+      "revId": "9ea40f9ad6c4ad63064bacb56789272074c19180",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
