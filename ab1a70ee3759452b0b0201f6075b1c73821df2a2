@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "932ce4ef_87f92270",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-14T06:12:27Z",
+      "side": 1,
+      "message": "I had rewrited, pls check.",
+      "parentUuid": "8b6076ee_72b2b2c0",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "ab1a70ee3759452b0b0201f6075b1c73821df2a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c837013_5a02ec32",
@@ -180,6 +204,30 @@
       "side": 1,
       "message": "I see no change in these includes. Todd\u0027s suggestion was not implemented.",
       "parentUuid": "c1c32cb7_3854b1ed",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 6
+      },
+      "revId": "ab1a70ee3759452b0b0201f6075b1c73821df2a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee45a6ee_b7befbc6",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-14T06:12:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0597d29b_437cec76",
       "range": {
         "startLine": 15,
         "startChar": 0,
