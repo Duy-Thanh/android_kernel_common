@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36777106_4a9387c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-14T20:42:59Z",
+      "side": 1,
+      "message": "Instead of this ANDROID-specific patch, could we instead take \"BACKPORT: FROMGIT:\" versions of these 4 patches?",
+      "revId": "950f989afca565113f7076c7b44c9f6464ac2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d5a059_4304dadb",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 3278,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-14T20:42:59Z",
+      "side": 1,
+      "message": "This part can be an ANDROID patch. The commit message can repeat the \"must not be used in production until...\" message of the above comment.",
+      "revId": "950f989afca565113f7076c7b44c9f6464ac2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad29dc8_c16ad087",
+        "filename": "net/wireless/nl80211.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-14T20:42:59Z",
+      "side": 1,
+      "message": "All of the changes in this file should be submitted as backports of the upstream patch(es).",
+      "revId": "950f989afca565113f7076c7b44c9f6464ac2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
