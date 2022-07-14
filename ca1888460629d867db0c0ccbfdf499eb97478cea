@@ -68,6 +68,23 @@
       "message": "This should be FROMLIST or FROMGIT for mainline, since it cannot be backported to a ToT.",
       "revId": "ca1888460629d867db0c0ccbfdf499eb97478cea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60559afb_8545abb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1946045
+      },
+      "writtenOn": "2022-07-14T17:41:07Z",
+      "side": 1,
+      "message": "you may already know this but note there is another proposed change to this logic from Johannes to make the cookie 32-bit:\n\nhttps://lore.kernel.org/linux-wireless/20220713211645.0d320e00e5b6.Ida11d2308dbf999d8bb9b1c49aa6e73af8fd3d33@changeid/T/#u",
+      "revId": "ca1888460629d867db0c0ccbfdf499eb97478cea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
