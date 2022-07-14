@@ -285,6 +285,30 @@
       },
       "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55249aef_6b06b727",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-14T06:50:56Z",
+      "side": 1,
+      "message": "Okay, i had rewrited it in:\nhttps://android-review.googlesource.com/c/kernel/common/+/2133125\n\nThis patch will be abandoned.",
+      "parentUuid": "afc360ee_2c583516",
+      "range": {
+        "startLine": 1376,
+        "startChar": 18,
+        "endLine": 1376,
+        "endChar": 40
+      },
+      "revId": "34783c6f15449fc9d00e89c0f11f9dc3344b1508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
