@@ -52,6 +52,24 @@
       "parentUuid": "473f3f2c_2a233002",
       "revId": "99fd694ead1c59bb6065ec7b437aba1bca101174",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c2e2e89_43724e98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2022-07-14T00:48:25Z",
+      "side": 1,
+      "message": "I think adding this hook in core FS doesn\u0027t make sense. If you cannot fix the flash media which may ignore SYNC_CACHE, could you please find a way to do it in UFS driver side?",
+      "parentUuid": "95821de2_b9434d50",
+      "revId": "99fd694ead1c59bb6065ec7b437aba1bca101174",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
