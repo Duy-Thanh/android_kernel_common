@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea6ff747_e24a3af7",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-15T01:34:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7e9e8c66_4b6f736b",
+      "range": {
+        "startLine": 265,
+        "startChar": 4,
+        "endLine": 266,
+        "endChar": 26
+      },
+      "revId": "5ef53181173571a190099c18f56ec246cb027c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46650e5b_53aeab6e",
@@ -108,6 +132,30 @@
       "writtenOn": "2022-07-15T00:48:34Z",
       "side": 1,
       "message": "This is missing a close",
+      "range": {
+        "startLine": 1758,
+        "startChar": 2,
+        "endLine": 1760,
+        "endChar": 25
+      },
+      "revId": "5ef53181173571a190099c18f56ec246cb027c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "593c4a39_170a5d3d",
+        "filename": "tools/testing/selftests/filesystems/fuse/fuse_test.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1760,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-15T01:34:25Z",
+      "side": 1,
+      "message": "I added it while restoring your previous change.",
+      "parentUuid": "46650e5b_53aeab6e",
       "range": {
         "startLine": 1758,
         "startChar": 2,
