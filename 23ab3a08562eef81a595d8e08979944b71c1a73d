@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8504383d_a2614f7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-15T11:20:41Z",
+      "side": 1,
+      "message": "the line wrapping is odd, are you sure it\u0027s this way?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 39
+      },
+      "revId": "23ab3a08562eef81a595d8e08979944b71c1a73d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
