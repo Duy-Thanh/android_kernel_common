@@ -52,6 +52,24 @@
       "parentUuid": "34dc44f2_94bfb80e",
       "revId": "ba4453b2e5d591f54f468572e6dde9df34ab3f8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ac54d8_95e27857",
+        "filename": "tools/testing/selftests/filesystems/fuse/fuse_test.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1793,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-15T22:55:27Z",
+      "side": 1,
+      "message": "What is the right timing to release backing_fd inside userspace then? Just after answering to fuse driver? Wouldn\u0027t we have a race between closing fd in the userspace side and fget call inside driver code?",
+      "parentUuid": "098c9707_04041d95",
+      "revId": "ba4453b2e5d591f54f468572e6dde9df34ab3f8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
