@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b993982a_2fcbc4ad",
+        "filename": "drivers/md/dm-bufio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1731,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2022-07-15T21:15:06Z",
+      "side": 1,
+      "message": "Maybe I can change the bool to a more general flags argument? I don\u0027t like the idea of switching synchronization primitives after the client has been created. It makes it too easy to introduce race conditions.",
+      "parentUuid": "0eb443c4_92a233f5",
+      "range": {
+        "startLine": 1731,
+        "startChar": 24,
+        "endLine": 1731,
+        "endChar": 46
+      },
+      "revId": "0b45cd91a4a0afa6150a19ba307c014690d7fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49c59e1a_5d13394f",
         "filename": "drivers/md/dm-verity-target.c",
         "patchSetId": 1
