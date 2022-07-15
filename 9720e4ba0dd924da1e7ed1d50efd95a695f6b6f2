@@ -16,6 +16,24 @@
       "message": "upstream first please.\n\nAlso this will generate warnings when built 😞",
       "revId": "9720e4ba0dd924da1e7ed1d50efd95a695f6b6f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0a88af_76f235b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-15T16:57:35Z",
+      "side": 1,
+      "message": "This would not be upstreamable because there would not be an upstream user.\n\nI suggested introducing these functions instead of exporting low level function (see abandoned https://android-review.googlesource.com/c/kernel/common/+/2133126). This way I think it\u0027s more maintainable for us because if upstream changes those low-level functions (and it already removed `mem_cgroup_page_lruvec`), we can reimplement these ones and keep the API intact.",
+      "parentUuid": "0393c45e_689c73ab",
+      "revId": "9720e4ba0dd924da1e7ed1d50efd95a695f6b6f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
