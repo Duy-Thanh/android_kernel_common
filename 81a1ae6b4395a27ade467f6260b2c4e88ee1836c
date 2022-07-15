@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18af075d_8340fe58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-15T02:09:45Z",
+      "side": 1,
+      "message": "Looks like I missed to cherry-pick this SPF patch from android12-5.10",
+      "revId": "81a1ae6b4395a27ade467f6260b2c4e88ee1836c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
