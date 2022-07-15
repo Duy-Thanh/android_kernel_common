@@ -548,13 +548,13 @@ int fuse_lookup_name(struct super_block *sb, u64 nodeid, const struct qstr *name
 		if (!*inode)
 			goto bpf_arg_out;
 
-		err = handle_inode_backing_fd(*inode, entry,
-			&bpf_arg.out, &bpf_arg);
+		err = fuse_handle_backing(&bpf_arg,
+				&get_fuse_inode(*inode)->backing_inode,
+				&get_fuse_dentry(entry)->backing_path);
 		if (err)
 			goto out;
 
-		err = handle_inode_bpf(*inode, NULL,
-			&bpf_arg.out, &bpf_arg);
+		err = fuse_handle_bpf_prog(&bpf_arg, NULL, &get_fuse_inode(*inode)->bpf);
 		if (err)
 			goto out;
 bpf_arg_out:
