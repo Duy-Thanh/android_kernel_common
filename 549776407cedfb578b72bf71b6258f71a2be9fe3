@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58115b6e_37a0e7aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-15T11:52:02Z",
+      "side": 1,
+      "message": "usb-testing gets rebased and is NOT a stable tree to pull from.  Please wait for this to move to usb-next.",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 12
+      },
+      "revId": "549776407cedfb578b72bf71b6258f71a2be9fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
