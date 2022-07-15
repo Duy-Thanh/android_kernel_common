@@ -16,6 +16,40 @@
       "message": "Fixed the mismatched get/puts I saw, but I\u0027d pay close attention to that.",
       "revId": "44a103f0a3deeca44cd3da8c9c2d005e49835f9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14d95abf_583b43ee",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-15T11:42:25Z",
+      "side": 1,
+      "message": "Move it to the `backing.c`?",
+      "revId": "44a103f0a3deeca44cd3da8c9c2d005e49835f9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc57114d_6e5d112e",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1893074
+      },
+      "writtenOn": "2022-07-15T11:42:25Z",
+      "side": 1,
+      "message": "Probably it\u0027s safer to just make `ret \u003d 0` and set some boolean flag which will indicate that we received bpf related answer from the userspace. That\u0027s how we can avoid redundant changes in the existing FUSE source base and have a cleaner code where we will just check on:\n\n`if (bpf_data_received)` rather then `ret \u003d\u003d sizeof(bpf_arg.out)`",
+      "revId": "44a103f0a3deeca44cd3da8c9c2d005e49835f9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
