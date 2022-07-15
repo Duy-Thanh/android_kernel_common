@@ -22,6 +22,23 @@
       },
       "revId": "3100dda36ccc83ae7fb6016777fa5150ed360160",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc650f99_f5725f68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-15T12:24:02Z",
+      "side": 1,
+      "message": "does not even build properly at all, please always test-build your patches 😞",
+      "revId": "3100dda36ccc83ae7fb6016777fa5150ed360160",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
