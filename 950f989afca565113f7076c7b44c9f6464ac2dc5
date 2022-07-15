@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad70e675_f4b0b4a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2022-07-15T13:10:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36777106_4a9387c9",
+      "revId": "950f989afca565113f7076c7b44c9f6464ac2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66d5a059_4304dadb",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d160ff1_3ad70d9c",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 3278,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2022-07-15T13:10:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d5a059_4304dadb",
+      "revId": "950f989afca565113f7076c7b44c9f6464ac2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ad29dc8_c16ad087",
@@ -48,6 +84,41 @@
       "writtenOn": "2022-07-14T20:42:59Z",
       "side": 1,
       "message": "All of the changes in this file should be submitted as backports of the upstream patch(es).",
+      "revId": "950f989afca565113f7076c7b44c9f6464ac2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fe1d2a2_35ba2763",
+        "filename": "net/wireless/nl80211.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2022-07-15T13:10:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ad29dc8_c16ad087",
+      "revId": "950f989afca565113f7076c7b44c9f6464ac2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baae4012_32692d65",
+        "filename": "net/wireless/nl80211.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 16831,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2022-07-15T13:10:30Z",
+      "side": 1,
+      "message": "This line comes to \"ANDROID:\" specific commit only since this change is done to make sure max attribute value equal to last attribute which has valid netlink policy.",
       "revId": "950f989afca565113f7076c7b44c9f6464ac2dc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
