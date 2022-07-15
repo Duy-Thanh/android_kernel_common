@@ -16,6 +16,24 @@
       "message": "We\u0027re currently not closing it inside Android external storage FUSE daemon with the comment like \"It\u0027s handled on the kernel side\". https://source.corp.google.com/android/packages/providers/MediaProvider/jni/FuseDaemon.cpp;l\u003d804-811?q\u003dFuseDaemon.cpp\n\nWhere we\u0027re wrong? Here or there?",
       "revId": "ba4453b2e5d591f54f468572e6dde9df34ab3f8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34dc44f2_94bfb80e",
+        "filename": "tools/testing/selftests/filesystems/fuse/fuse_test.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1793,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2022-07-15T12:55:47Z",
+      "side": 1,
+      "message": "This line in the test is wrong, it\u0027s the kernel that is responsible for closing the fd when the response from the daemon is handled.",
+      "parentUuid": "b527411d_65886ddf",
+      "revId": "ba4453b2e5d591f54f468572e6dde9df34ab3f8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
