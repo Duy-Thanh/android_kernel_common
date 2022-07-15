@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb32bce_6d64a76b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-15T08:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c7930f6_7e5a1aa1",
+      "revId": "9ea40f9ad6c4ad63064bacb56789272074c19180",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a99ddce5_acdc28d3",
@@ -65,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef61b534_d238c13b",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-15T08:45:24Z",
+      "side": 1,
+      "message": "All right, rewrited in the patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/2155313",
+      "parentUuid": "02bf09cc_774cefc9",
+      "range": {
+        "startLine": 1375,
+        "startChar": 0,
+        "endLine": 1405,
+        "endChar": 0
+      },
+      "revId": "9ea40f9ad6c4ad63064bacb56789272074c19180",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e342023_83c64975",
@@ -102,6 +144,30 @@
       "side": 1,
       "message": "I agree. These should not be exported.",
       "parentUuid": "3e342023_83c64975",
+      "range": {
+        "startLine": 594,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 50
+      },
+      "revId": "9ea40f9ad6c4ad63064bacb56789272074c19180",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5ef9339_e3f0691d",
+        "filename": "mm/rmap.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-15T08:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b34bb3e_3a00213f",
       "range": {
         "startLine": 594,
         "startChar": 0,
