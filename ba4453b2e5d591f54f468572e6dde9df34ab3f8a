@@ -34,6 +34,24 @@
       "parentUuid": "b527411d_65886ddf",
       "revId": "ba4453b2e5d591f54f468572e6dde9df34ab3f8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "098c9707_04041d95",
+        "filename": "tools/testing/selftests/filesystems/fuse/fuse_test.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1793,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-15T20:17:15Z",
+      "side": 1,
+      "message": "I believe we changed away from that a while ago. It makes error cases impossible to deal with, and userspace could close the file anyways. If you look in fs/fuse/dev.c under fuse_dev_do_write, when we handle a lookup, or a lookup postfilter in a userspace command, we get a reference to the user provided files if we need them. Later on, we put that reference after we\u0027ve gotten what we need from it.\n\nAs it currently stands, userspace needs to close their own fds.",
+      "parentUuid": "34dc44f2_94bfb80e",
+      "revId": "ba4453b2e5d591f54f468572e6dde9df34ab3f8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
