@@ -16,6 +16,24 @@
       "message": "Just want to highlight again that with this change we fully ignoring entry_timeout we received from the userspace in case we have a backing_fd.\n\nFor example:\nUserspace answered to the initial lookup with backing_fd, but with entry_timout equals to hour\n\nI that case I may assume that userspace is expected to receive lookup again after 1 hour probably to change their mind about backing_fd or introduce bpf.\nSo, basically with that change decision about lookup with backing_fd is becoming almost not reversible for userspace which is wrong to my opinion.\n\nWhat do you think about having something like that?\n\n1. Firstly check fuse entry_timeout and if it expired, fully relookup the inode to the userspace\n2. But fix the original problem by executing backing revalidate even if fuse entry_timeout hasn\u0027t been expired",
       "revId": "3492cc5f1642fa809c1a98fa9f3d45c90bd0be91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "350d1388_3aff3de2",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-15T20:37:25Z",
+      "side": 1,
+      "message": "This does the lower revaldiate if the entry we\u0027re revalidating has a backing path. If it was set up by the normal userspace lookup path, it will have a functioning timeout, and will go through the rest of the revalidate path as well if the lower dentry is still valid. If the backing path\u0027s dentry is not valid, or we get an error, we pass that along. We have to do that in case the backing filesystem returned something like ECHILD in particular, because that signals that we need to call back in a non-RCU context.\n\nThe block after this one checks if the parent entry also has a backing. Under that condition we currently skip the timeout checks because our backing lookup path does not honor the timeout we set there. We can fix that in a separate patch.\n\n\nChanging the backing on a timer doesn\u0027t make much sense to me, unless the timer is 0. If we want to go that route, it may make more sense to have a FUSE_REVALIDATE if only for bpf, so that we can choose to invalidate via the revalidate postfilter. We\u0027d either be able to use the future per-inode data to determine if we\u0027d like to change something.",
+      "parentUuid": "78ab050c_79ecc480",
+      "revId": "3492cc5f1642fa809c1a98fa9f3d45c90bd0be91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
