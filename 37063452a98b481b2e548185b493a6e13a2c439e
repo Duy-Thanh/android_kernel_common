@@ -76,6 +76,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4130fb4d_53900816",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2022-07-15T13:27:39Z",
+      "side": 1,
+      "message": "Oh, so you tried using the fitness_fn(). I had a quick look at the patch and the only thing that stood out is that you created new rt_task_fits_capacity_and_may_preempt() but didn\u0027t replace all call site with the new function and had to add extra conditions of may_not_preempt unnecessarily instead.\n\nI think if you just create new rt_task_fits_cpu() that wrapps that 2 functions (with proper #ifdef CONFIG_..) and replace all call sites of rt_task_fits_capacity() with rt_task_fits_cpu() you should be okay.\n\nI can go and review Connon patch. But if you\u0027ll rework this, it might be easier to build on top of latest stuff.",
+      "parentUuid": "ce073255_3c4a2794",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9edb3da_6fbe124c",
