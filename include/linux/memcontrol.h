@@ -344,7 +344,8 @@ struct mem_cgroup {
 #define MEMCG_CHARGE_BATCH 32U
 
 extern struct mem_cgroup *root_mem_cgroup;
-
+extern struct lruvec *page_to_lruvec(struct page *page, pg_data_t *pgdat);
+extern void do_traversal_all_lruvec(void);
 static __always_inline bool memcg_stat_item_in_bytes(int idx)
 {
 	if (idx == MEMCG_PERCPU_B)
@@ -968,6 +969,14 @@ void split_page_memcg(struct page *head, unsigned int nr);
 #define MEM_CGROUP_ID_MAX	0
 
 struct mem_cgroup;
+
+struct lruvec *page_to_lruvec(struct page *page, pg_data_t *pgdat)
+{
+}
+
+static void do_traversal_all_lruvec(void)
+{
+}
 
 static inline bool mem_cgroup_is_root(struct mem_cgroup *memcg)
 {
