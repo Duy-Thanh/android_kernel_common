@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff73d91a_d3fb169e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-15T16:51:05Z",
+      "side": 1,
+      "message": "Agree. I think these hooks can be in one patch:\n\nandroid_vh_update_page_mapcount\nandroid_vh_add_page_to_lrulist\nandroid_vh_del_page_from_lrulist\n\nThe other two would need a separate patch each as they don\u0027t seem related.",
+      "parentUuid": "c2e2ab08_88e58ad7",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d4a37df_f98d0ddb",
         "filename": "include/linux/mm_inline.h",
         "patchSetId": 13
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-15T11:56:00Z",
       "side": 1,
       "message": "please get the prototypes from the .h file, they do not belong in here.  As is, I am pretty sure this will not even work properly, how did you test this?",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 39
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d2300dc_7bfb9ab7",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-15T16:51:05Z",
+      "side": 1,
+      "message": "This was done to avoid including of trace/hooks/mm.h which leads to some messy workarounds. See comments and the removed code in https://android-review.googlesource.com/c/kernel/common/+/2133125/6..13/include/linux/mm_inline.h#b23",
+      "parentUuid": "6d4a37df_f98d0ddb",
       "range": {
         "startLine": 8,
         "startChar": 1,
