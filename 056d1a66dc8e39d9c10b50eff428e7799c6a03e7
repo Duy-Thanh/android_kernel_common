@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64c68737_242c3199",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-15T16:41:13Z",
+      "side": 1,
+      "message": "This should land after acktomator is updated to use the configs that are moved to common-modules/virtual-device.",
+      "revId": "056d1a66dc8e39d9c10b50eff428e7799c6a03e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
