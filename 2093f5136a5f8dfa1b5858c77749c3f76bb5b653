@@ -39,6 +39,30 @@
       },
       "revId": "2093f5136a5f8dfa1b5858c77749c3f76bb5b653",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580c3815_2e202d8d",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2802,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-16T16:43:52Z",
+      "side": 1,
+      "message": "Good catch. We missed this in android12-5.10 and android13-5.10. We shouldn\u0027t take here. I think we can live with it in the older kernels since it is casting an enum to a (char *) so it isn\u0027t really vulnerable to a struct change... but it is definitely something that shouldn\u0027t be done.",
+      "parentUuid": "8489fac7_768313a8",
+      "range": {
+        "startLine": 2802,
+        "startChar": 0,
+        "endLine": 2802,
+        "endChar": 58
+      },
+      "revId": "2093f5136a5f8dfa1b5858c77749c3f76bb5b653",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
