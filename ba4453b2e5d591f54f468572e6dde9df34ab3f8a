@@ -70,6 +70,24 @@
       "parentUuid": "098c9707_04041d95",
       "revId": "ba4453b2e5d591f54f468572e6dde9df34ab3f8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7afd687d_0e57d099",
+        "filename": "tools/testing/selftests/filesystems/fuse/fuse_test.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1793,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-07-16T00:38:56Z",
+      "side": 1,
+      "message": "The fget happens within the device communication. Once the write has returned, it has a reference on the handle. At that point it doesn\u0027t matter when the file is closed. We should double check that we handle giving closed or invalid file handles correctly.",
+      "parentUuid": "a0ac54d8_95e27857",
+      "revId": "ba4453b2e5d591f54f468572e6dde9df34ab3f8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
