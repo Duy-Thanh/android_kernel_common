@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bfd9383_3987eb9e",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-16T05:01:56Z",
+      "side": 1,
+      "message": "If you attempt it this way, I do not think the proper tracepoint insertion will be done.  Test it and see!\n\nWait, this is in a .h file, you can not now go and add a hook to an inline function that someone might have already built into their module.  This is not going to work at all, sorry.",
+      "parentUuid": "5d2300dc_7bfb9ab7",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 39
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0f381bb_ef448475",
         "filename": "include/linux/rmap.h",
         "patchSetId": 13
