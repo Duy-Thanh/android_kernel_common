@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "653b547d_9f76e719",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-16T16:31:39Z",
+      "side": 1,
+      "message": "why does that matter? the cases where it is already built-in don\u0027t need the hook. I\u0027m a little concerned about unconditionally making this function call from an inline function. Maybe we do need to think of another way.",
+      "parentUuid": "4bfd9383_3987eb9e",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 39
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0f381bb_ef448475",
         "filename": "include/linux/rmap.h",
         "patchSetId": 13
