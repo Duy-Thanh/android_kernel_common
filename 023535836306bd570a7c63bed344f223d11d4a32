@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29b5730f_7840ce30",
+        "filename": "init/init_task.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-07-16T00:11:29Z",
+      "side": 1,
+      "message": "How about leaving out these four lines? Since \u0027init_task\u0027 is a static variable, all members that have not been mentioned are zero-initalized.",
+      "range": {
+        "startLine": 217,
+        "startChar": 1,
+        "endLine": 220,
+        "endChar": 6
+      },
+      "revId": "023535836306bd570a7c63bed344f223d11d4a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
