@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9516f7a3_bb1eec7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2022-07-16T06:56:13Z",
+      "side": 1,
+      "message": "Hi Todd, we need to do special processing for special memcgroups on Android 12. We had to submit a new hook since the API was frozen at that time[https://android-review.googlesource.com/c/kernel/common/+/2077400]. Can an input parameter be added at the beginning of Android 14, or do I still have to submit a new hook point?",
+      "revId": "2093f5136a5f8dfa1b5858c77749c3f76bb5b653",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
