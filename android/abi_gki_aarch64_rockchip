@@ -255,6 +255,8 @@
   drm_atomic_helper_connector_reset
   drm_bridge_add
   drm_bridge_attach
+  drm_bridge_detect
+  drm_bridge_get_modes
   drm_bridge_remove
   drm_compat_ioctl
   drm_connector_attach_encoder
@@ -891,9 +893,12 @@
   drm_dp_aux_unregister
   drm_dp_dpcd_read
   drm_dp_dpcd_write
+  drm_dp_get_phy_test_pattern
   drm_dp_link_rate_to_bw_code
   drm_dp_link_train_channel_eq_delay
   drm_dp_link_train_clock_recovery_delay
+  drm_dp_read_dpcd_caps
+  drm_dp_set_phy_test_pattern
   drm_dp_start_crc
   drm_dp_stop_crc
   drm_modeset_acquire_fini
@@ -1813,6 +1818,8 @@
   drm_property_destroy
   __drm_puts_seq_file
   drm_rect_calc_hscale
+  drm_self_refresh_helper_cleanup
+  drm_self_refresh_helper_init
   drm_send_event_locked
   drm_simple_encoder_init
   drm_universal_plane_init
