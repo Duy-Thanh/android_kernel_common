@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f83cdb8a_2ed3450d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-07-18T23:49:10Z",
+      "side": 1,
+      "message": "You can abandon this and it\u0027s revert in favor of cherry-picking aosp/2109484. ",
+      "revId": "dfbef807731448f8e685d43ea087be59675ed8f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
