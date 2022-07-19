@@ -22,6 +22,30 @@
       },
       "revId": "549776407cedfb578b72bf71b6258f71a2be9fe3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f131254_25b991fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1937092
+      },
+      "writtenOn": "2022-07-19T04:25:45Z",
+      "side": 1,
+      "message": "I see that this change is included in usb-next now. Can you please review again.\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git/commit/?h\u003dusb-next\u0026id\u003d07903626d98853e605fe63e5ce149f1b7314bbea",
+      "parentUuid": "58115b6e_37a0e7aa",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 12
+      },
+      "revId": "549776407cedfb578b72bf71b6258f71a2be9fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
