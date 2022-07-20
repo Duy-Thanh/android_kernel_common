@@ -651,6 +651,12 @@ struct gic_chip_data {
 	bool			has_rss;
 	unsigned int		ppi_nr;
 	struct partition_desc	**ppi_descs;
+	ANDROID_VENDOR_DATA_ARRAY(1,32);
+	ANDROID_VENDOR_DATA_ARRAY(2,32);
+	ANDROID_VENDOR_DATA_ARRAY(3,64);
+	ANDROID_VENDOR_DATA(4);
+	ANDROID_VENDOR_DATA(5);
+	ANDROID_VENDOR_DATA(6);
 };
 
 #if defined(CONFIG_ARM64) || defined(CONFIG_ARM)
