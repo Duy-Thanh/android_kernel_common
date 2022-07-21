@@ -24,6 +24,26 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000026613473",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2163605?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "9f134bd4_f6afca1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-07-21T22:07:53Z",
+      "side": 1,
+      "message": "Commit does not refer to the upstream commit\nPlease add a line like \u0027(cherry picked from commit \u003csha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 462151357 android-build.ayeaye-python-dispatcher_20220720.05_p0",
+      "revId": "7a15fd917515375e51c63d76baa816c6d2bd7c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000026613473",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2163605?revision\u003d1",
       "fixSuggestions": [
         {
           "fixId": "a433bbeb_5c4f0c22",
@@ -52,6 +72,49 @@
         "id": 1757831
       },
       "writtenOn": "2022-07-21T22:07:44Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Wolfram Sang \u003cwsa+renesas@sang-engineering.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 462151357 android-build.ayeaye-python-dispatcher_20220720.05_p0",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "7a15fd917515375e51c63d76baa816c6d2bd7c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000026613473",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2163605?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "5c706a2f_f2571ac1",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Wolfram Sang \u003cwsa+renesas@sang-engineering.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "09046815_d53de961",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-07-21T22:07:53Z",
       "side": 1,
       "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Wolfram Sang \u003cwsa+renesas@sang-engineering.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 462151357 android-build.ayeaye-python-dispatcher_20220720.05_p0",
       "range": {
