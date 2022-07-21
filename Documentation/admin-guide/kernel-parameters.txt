@@ -2335,6 +2335,12 @@
 			Configure the RouterBoard 532 series on-chip
 			Ethernet adapter MAC address.
 
+	kmalloc_cache_disable=slabs	[MM, SLAB, SLUB]
+			Disables the kmalloc slab cache(s) specified on the
+			command line. The slab caches should be listed as a
+			comma-separated list of slab cache names (e.g.
+			kmalloc_cache_disable=kmalloc-192,kmalloc-rcl-192).
+
 	kmemleak=	[KNL] Boot-time kmemleak enable/disable
 			Valid arguments: on, off
 			Default: on
