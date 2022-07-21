@@ -16,6 +16,24 @@
       "message": "Dear Kjos,\n  Please help review this commit which will update abi_gki_aarch64_oplus for android12-5.10. Thanks!",
       "revId": "df1a6703d7c7391a6cf4b6c5326f5656a4e75b92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77b5534d_0e4b2dde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-07-21T02:10:17Z",
+      "side": 1,
+      "message": "Sorry, I made a mistake, this commit is for android12-5.10-2022-05, please help review, thanks",
+      "parentUuid": "01623cfb_cbe4ebf1",
+      "revId": "df1a6703d7c7391a6cf4b6c5326f5656a4e75b92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
