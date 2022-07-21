@@ -1,4 +1,6 @@
 [abi_symbol_list]
 # commonly used symbols
+  kmalloc_min_size
+  kmalloc_shift_low
   module_layout
   __put_task_struct
