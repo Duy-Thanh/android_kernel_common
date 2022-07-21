@@ -68,7 +68,16 @@ DECLARE_HOOK(android_vh_include_reserved_zone,
 DECLARE_HOOK(android_vh_show_mem,
 	TP_PROTO(unsigned int filter, nodemask_t *nodemask),
 	TP_ARGS(filter, nodemask));
+<<<<<<< HEAD   (0ed1a4 UPSTREAM: usb: gadget: uvc: fix list double add in uvcg_vide)
 struct slabinfo;
+=======
+DECLARE_HOOK(android_vh_alloc_pages_slowpath_begin,
+	     TP_PROTO(gfp_t gfp_mask, unsigned int order, unsigned long *pdata),
+	     TP_ARGS(gfp_mask, order, pdata));
+DECLARE_HOOK(android_vh_alloc_pages_slowpath_end,
+	     TP_PROTO(gfp_t gfp_mask, unsigned int order, unsigned long data),
+	     TP_ARGS(gfp_mask, order, data));
+>>>>>>> CHANGE (4536de ANDROID: vendor_hooks: add hooks in __alloc_pages_slowpath)
 struct dirty_throttle_control;
 DECLARE_HOOK(android_vh_mm_dirty_limits,
 	TP_PROTO(struct dirty_throttle_control *const gdtc, bool strictlimit,
