@@ -585,6 +585,13 @@ int xfrm_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
 			goto drop;
 		}
 
+		/* If nested tunnel, check outer states before context is lost. */
+		if (x->outer_mode.flags & XFRM_MODE_FLAG_TUNNEL &&
+		    sp->len > 0 &&
+		    !xfrm_policy_check(NULL, XFRM_POLICY_IN, skb, family)) {
+			goto drop;
+		}
+
 		skb->mark = xfrm_smark_get(skb->mark, x);
 
 		sp->xvec[sp->len++] = x;
