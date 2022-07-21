@@ -891,12 +891,59 @@ unsigned int __weak arch_kmalloc_minalign(void)
 	return ARCH_KMALLOC_MINALIGN;
 }
 
+static char *disabled_kmalloc_caches;
+
+static int __init setup_disabled_kmalloc_caches(char *str)
+{
+	if (*str++ != '=' || !*str)
+		return 1;
+
+	disabled_kmalloc_caches = str;
+	return 1;
+}
+__setup("kmalloc_cache_disable", setup_disabled_kmalloc_caches);
+
+static bool kmalloc_cache_disabled(const char *name)
+{
+	char *iter, *end;
+	size_t len, cmplen;
+
+	if (!disabled_kmalloc_caches)
+		return false;
+
+	len = strlen(name);
+
+	iter = disabled_kmalloc_caches;
+	while (*iter) {
+		end = strchrnul(iter, ',');
+		cmplen = max_t(size_t, len, (end - iter));
+
+		if (!strncmp(name, iter, cmplen))
+			return true;
+
+		if (!*end)
+			break;
+
+		iter = end + 1;
+	}
+
+	return false;
+}
+
+static unsigned int next_kmalloc_cache_size(unsigned int size)
+{
+	if (size < 192)
+		return size + kmalloc_minalign;
+	return roundup_pow_of_two(size + 1);
+}
+
 void __init
 new_kmalloc_cache(int idx, enum kmalloc_cache_type type, slab_flags_t flags)
 {
 	unsigned int minalign = kmalloc_minalign;
 	unsigned int aligned_size = kmalloc_info[idx].size;
 	int aligned_idx = idx;
+	const char *name = kmalloc_info[idx].name[type];
 
 	if (type == KMALLOC_RECLAIM) {
 		flags |= SLAB_RECLAIM_ACCOUNT;
@@ -911,12 +958,23 @@ new_kmalloc_cache(int idx, enum kmalloc_cache_type type, slab_flags_t flags)
 	if (minalign > ARCH_KMALLOC_MINALIGN) {
 		aligned_size = ALIGN(aligned_size, minalign);
 		aligned_idx = __kmalloc_index(aligned_size, false);
+		name = kmalloc_info[idx].name[type];
+	}
+
+	/*
+	 * The second part of the conditional intentionally ignores attempts to disable
+	 * the largest slab cache. Using the next larger allocation size as we do for the
+	 * smaller caches doesn't work, as there may not always be a next larger allocation
+	 * size (i.e. if KMALLOC_SHIFT_HIGH == 26).
+	 */
+	while (kmalloc_cache_disabled(name) && aligned_idx < KMALLOC_SHIFT_HIGH) {
+		aligned_size = next_kmalloc_cache_size(aligned_size);
+		aligned_idx = __kmalloc_index(aligned_size, false);
+		name = kmalloc_info[aligned_idx].name[type];
 	}
 
 	if (!kmalloc_caches[type][aligned_idx])
-		kmalloc_caches[type][aligned_idx] = create_kmalloc_cache(
-					kmalloc_info[aligned_idx].name[type],
-					aligned_size, flags);
+		kmalloc_caches[type][aligned_idx] = create_kmalloc_cache(name, aligned_size, flags);
 	if (idx != aligned_idx)
 		kmalloc_caches[type][idx] = kmalloc_caches[type][aligned_idx];
 
