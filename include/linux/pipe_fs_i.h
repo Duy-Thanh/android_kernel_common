@@ -70,6 +70,10 @@ struct pipe_inode_info {
 	unsigned int files;
 	unsigned int r_counter;
 	unsigned int w_counter;
+<<<<<<< HEAD   (ebc9fb ANDROID: random: fix CRC issues with the merge)
+=======
+	bool poll_usage;
+>>>>>>> BRANCH (70dd2d Linux 5.10.120)
 	struct page *tmp_page;
 	struct fasync_struct *fasync_readers;
 	struct fasync_struct *fasync_writers;
