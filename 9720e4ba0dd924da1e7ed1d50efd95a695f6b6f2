@@ -52,6 +52,24 @@
       "parentUuid": "5e0a88af_76f235b8",
       "revId": "9720e4ba0dd924da1e7ed1d50efd95a695f6b6f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1360640_2310f54c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-24T14:40:43Z",
+      "side": 1,
+      "message": "We will extern them in our .ko which registes the hooks.",
+      "parentUuid": "10e0ddb2_d68221d4",
+      "revId": "9720e4ba0dd924da1e7ed1d50efd95a695f6b6f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
