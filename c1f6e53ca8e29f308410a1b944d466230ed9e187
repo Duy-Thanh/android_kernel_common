@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bb55ef9_e550cb12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-24T07:30:11Z",
+      "side": 1,
+      "message": "Please break this up into one-patch-per-logical-thing.",
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ce1865_36b7256f",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-24T07:30:11Z",
+      "side": 1,
+      "message": "you can not add new values here that are not already upstream.",
+      "range": {
+        "startLine": 1589,
+        "startChar": 0,
+        "endLine": 1589,
+        "endChar": 105
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
