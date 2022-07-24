@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3bc0e1_254bce55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-24T14:47:54Z",
+      "side": 1,
+      "message": "Three funcs it to implemnet the same feature, I thinks it is better to let them in a patch-commit",
+      "parentUuid": "ff73d91a_d3fb169e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d4a37df_f98d0ddb",
@@ -143,6 +167,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e01ba11_859227d2",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-24T14:47:54Z",
+      "side": 1,
+      "message": "SO, what should I do? can it merge in this way?",
+      "parentUuid": "653b547d_9f76e719",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 39
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0f381bb_ef448475",
@@ -166,6 +214,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c39e46a2_bd26db79",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-24T14:47:54Z",
+      "side": 1,
+      "message": "Pls help to teach me how can I use this funcs in include/linux/rmap.h without extern, thxs.",
+      "parentUuid": "a0f381bb_ef448475",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 77
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84272c91_72361b5a",
@@ -179,6 +251,30 @@
       "writtenOn": "2022-07-15T11:56:00Z",
       "side": 1,
       "message": "why can this go around the normal acounting?",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 13
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "402be1ed_6044c8c9",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-24T14:47:54Z",
+      "side": 1,
+      "message": "we account _mapcount or compound_mapcount_ptr in android_vh_update_page_mapcount, so that it don\u0027t need to account again.\n\nIt will run normal-path without registering hooks.",
+      "parentUuid": "84272c91_72361b5a",
       "range": {
         "startLine": 203,
         "startChar": 0,
