@@ -70,6 +70,24 @@
       "parentUuid": "10e0ddb2_d68221d4",
       "revId": "9720e4ba0dd924da1e7ed1d50efd95a695f6b6f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1747cb39_7828685a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-24T15:18:31Z",
+      "side": 1,
+      "message": "Which, as checkpatch.pl will tell you, is not the way to do this at all.\n\nAgain, this is not ok for us to accept as-is.",
+      "parentUuid": "b1360640_2310f54c",
+      "revId": "9720e4ba0dd924da1e7ed1d50efd95a695f6b6f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
