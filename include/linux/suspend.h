@@ -577,4 +577,14 @@ static inline void queue_up_suspend_work(void) {}
 
 #endif /* !CONFIG_PM_AUTOSLEEP */
 
+#ifdef CONFIG_SUSPEND
+
+static inline bool pm_freeze_debug_messages_on(void) { return true; }
+
+#else /* !CONFIG_SUSPEND */
+
+static inline bool pm_freeze_debug_messages_on(void) { return pm_debug_messages_on; }
+
+#endif /* !CONFIG_SUSPEND */
+
 #endif /* _LINUX_SUSPEND_H */
