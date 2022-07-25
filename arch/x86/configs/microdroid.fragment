@@ -27,7 +27,6 @@ CONFIG_KEXEC_FILE=y
 # CONFIG_INCREMENTAL_FS is not set
 # CONFIG_MSDOS_FS is not set
 # CONFIG_VFAT_FS is not set
-# CONFIG_VFAT_FS is not set
 # CONFIG_EXFAT_FS is not set
 
 # CONFIG_EMBEDDED is not set
@@ -52,7 +51,6 @@ CONFIG_KEXEC_FILE=y
 # CONFIG_RC_DECODERS is not set
 # CONFIG_RC_DEVICES is not set
 # CONFIG_MEDIA_CEC_RC is not set
-# CONFIG_THERMAL is not set
 # CONFIG_NETDEVICES is not set
 # CONFIG_VLAN_8021Q is not set
 # CONFIG_I2C is not set
