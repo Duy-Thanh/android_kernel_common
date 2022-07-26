@@ -11,6 +11,7 @@
 
 #include <linux/blk-mq.h>
 #include <linux/delay.h>
+#include <linux/backing-dev.h>
 #include "blk.h"
 #include "blk-mq.h"
 #include "blk-mq-tag.h"
@@ -132,6 +133,9 @@ unsigned int blk_mq_get_tag(struct blk_mq_alloc_data *data)
 	if (tag != -1)
 		goto found_tag;
 
+	set_bdi_congested(data->q->backing_dev_info,BLK_RW_SYNC);
+	set_bdi_congested(data->q->backing_dev_info,BLK_RW_ASYNC);
+
 	if (data->flags & BLK_MQ_REQ_NOWAIT)
 		return BLK_MQ_TAG_FAIL;
 
@@ -187,6 +191,8 @@ unsigned int blk_mq_get_tag(struct blk_mq_alloc_data *data)
 
 	sbitmap_finish_wait(bt, ws, &wait);
 
+	clear_bdi_congested(data->q->backing_dev_info,BLK_RW_SYNC);
+	clear_bdi_congested(data->q->backing_dev_info,BLK_RW_ASYNC);
 found_tag:
 	return tag + tag_offset;
 }
