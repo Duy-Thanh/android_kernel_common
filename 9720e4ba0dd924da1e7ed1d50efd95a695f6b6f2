@@ -88,6 +88,24 @@
       "parentUuid": "b1360640_2310f54c",
       "revId": "9720e4ba0dd924da1e7ed1d50efd95a695f6b6f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca2da4a_d540a66b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-26T01:01:37Z",
+      "side": 1,
+      "message": "I don\u0027t see why you don\u0027t want to add function declarations into a .h file. Care to explain?",
+      "parentUuid": "1747cb39_7828685a",
+      "revId": "9720e4ba0dd924da1e7ed1d50efd95a695f6b6f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
