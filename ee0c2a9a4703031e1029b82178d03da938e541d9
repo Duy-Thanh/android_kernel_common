@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5e731e0_a4fdca77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576997
+      },
+      "writtenOn": "2022-07-26T01:48:23Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nPlease review this commit on android12-5.4 which is cherry-pick from android12-5.4-lts directly.",
+      "revId": "ee0c2a9a4703031e1029b82178d03da938e541d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
