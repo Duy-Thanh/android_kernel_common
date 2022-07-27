@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87229f2c_69179d1a",
+        "filename": "include/trace/hooks/remoteproc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-27T15:59:13Z",
+      "side": 1,
+      "message": "why is this here twice? (see comment on previous patch)",
+      "revId": "ecda665d0e834e3ca26431af5a04533488101100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
