@@ -970,6 +970,10 @@ int snd_pcm_attach_substream(struct snd_pcm *pcm, int stream,
 
 	runtime->status->state = SNDRV_PCM_STATE_OPEN;
 	mutex_init(&runtime->buffer_mutex);
+<<<<<<< HEAD   (9b75ce FROMGIT: arm64: fix oops in concurrently setting insn_emulat)
+=======
+	atomic_set(&runtime->buffer_accessing, 0);
+>>>>>>> BRANCH (9eae8f Merge 5.4.197 into android11-5.4-lts)
 
 	substream->runtime = runtime;
 	substream->private_data = pcm->private_data;
