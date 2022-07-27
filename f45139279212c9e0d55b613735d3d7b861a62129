@@ -307,6 +307,30 @@
       },
       "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9432f70d_f49f9677",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-27T19:52:31Z",
+      "side": 1,
+      "message": "This reply does not explain why you have to implement custom accounting instead of using the normal one. I think that was Greg\u0027s question and I\u0027m also not clear why it\u0027s needed. Could you please explain, maybe in the bug?",
+      "parentUuid": "402be1ed_6044c8c9",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 13
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
