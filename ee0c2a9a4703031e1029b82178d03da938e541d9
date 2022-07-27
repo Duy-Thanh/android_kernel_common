@@ -33,6 +33,24 @@
       "message": "should be same change-id as the other commit that does this same thing.",
       "revId": "ee0c2a9a4703031e1029b82178d03da938e541d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ff59b3_a79bda17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576997
+      },
+      "writtenOn": "2022-07-27T01:44:04Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nI didn\u0027t found the same change on gerrit.\n\nThe only related change id I found is I1aff32e9f0742e4b63a083a6b0ad2b7b93e6dd8b , which is the merge commit on andorid12-5.4-lts and I suppose it\u0027s not what you mean.\n\nSo I\u0027m not sure what the other commit you point out, could you please give me more hint about it?",
+      "parentUuid": "957558c4_29584a16",
+      "revId": "ee0c2a9a4703031e1029b82178d03da938e541d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
