@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb0257e_9455c88d",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-27T17:29:14Z",
+      "side": 1,
+      "message": "nit, no need for export, checkpatch.pl should have told you this.",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 6
+      },
+      "revId": "4fb0e1b5a805ebf97c87a74f3bf8c34dab6ad2b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a095a6ae_f955e797",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-27T17:29:14Z",
+      "side": 1,
+      "message": "will not build, must be static inline.",
+      "range": {
+        "startLine": 973,
+        "startChar": 0,
+        "endLine": 973,
+        "endChar": 66
+      },
+      "revId": "4fb0e1b5a805ebf97c87a74f3bf8c34dab6ad2b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
