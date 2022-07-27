@@ -16,6 +16,24 @@
       "message": "why is this here twice? (see comment on previous patch)",
       "revId": "ecda665d0e834e3ca26431af5a04533488101100",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c9c8d69_861f0e67",
+        "filename": "include/trace/hooks/remoteproc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2022-07-27T21:58:17Z",
+      "side": 1,
+      "message": "My merge conflict wasn\u0027t correct; removing this.",
+      "parentUuid": "87229f2c_69179d1a",
+      "revId": "ecda665d0e834e3ca26431af5a04533488101100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
