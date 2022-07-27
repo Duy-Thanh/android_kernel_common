@@ -240,6 +240,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4b36ac6_94b9363a",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-27T08:13:05Z",
+      "side": 1,
+      "message": "Ok, I think I found a better way to deal with this. Please see https://android-review.googlesource.com/c/kernel/common/+/2166245 and https://android-review.googlesource.com/c/kernel/common/+/2166246. The first patch introduces a PROTECT_TRACE_INCLUDE_PATH macro to allow header to include vendor hooks directly and the second one re-implements this patch to include the vendor hooks directly.",
+      "parentUuid": "c39e46a2_bd26db79",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 77
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84272c91_72361b5a",
         "filename": "include/linux/rmap.h",
         "patchSetId": 13
