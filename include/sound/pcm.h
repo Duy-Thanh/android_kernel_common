@@ -426,6 +426,10 @@ struct snd_pcm_runtime {
 #endif
 #ifndef __GENKSYMS__
 	struct mutex buffer_mutex;	/* protect for buffer changes */
+<<<<<<< HEAD   (397b3c FROMGIT: arm64: fix oops in concurrently setting insn_emulat)
+=======
+	atomic_t buffer_accessing;	/* >0: in r/w operation, <0: blocked */
+>>>>>>> BRANCH (517dc2 Merge 5.4.197 into android12-5.4-lts)
 #endif
 };
 
