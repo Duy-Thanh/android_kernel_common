@@ -8,6 +8,7 @@
  * Author: Jingoo Han <jg1.han@samsung.com>
  */
 
+#include <linux/dma-direct.h>
 #include <linux/irqchip/chained_irq.h>
 #include <linux/irqdomain.h>
 #include <linux/msi.h>
@@ -15,6 +16,7 @@
 #include <linux/of_pci.h>
 #include <linux/pci_regs.h>
 #include <linux/platform_device.h>
+#include <linux/swiotlb.h>
 
 #include "../../pci.h"
 #include "pcie-designware.h"
@@ -296,6 +298,7 @@ int dw_pcie_host_init(struct pcie_port *pp)
 	struct pci_host_bridge *bridge;
 	struct resource *cfg_res;
 	int ret;
+	phys_addr_t msi_msg_phys;
 
 	raw_spin_lock_init(&pci->pp.lock);
 
@@ -386,6 +389,12 @@ int dw_pcie_host_init(struct pcie_port *pp)
 				pp->msi_data = 0;
 				goto err_free_msi;
 			}
+
+			msi_msg_phys = virt_to_phys(&pp->msi_msg);
+			dev_info(dev, "IJM: MSI msg physical address: %pa MSI page DMA addr: %pad swiotlb buffer (bounced)? %s\n",
+				 &msi_msg_phys, &pp->msi_data,
+				 is_swiotlb_buffer(pci->dev, dma_to_phys(pci->dev, pp->msi_data)) ?
+				 "yes" : "no");
 		}
 	}
 
