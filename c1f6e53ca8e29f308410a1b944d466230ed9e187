@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e227c0e_147cfaac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-28T06:32:21Z",
+      "side": 1,
+      "message": "It is a one patch for one feature, and five hooks are related to each other.",
+      "parentUuid": "7bb55ef9_e550cb12",
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0ce1865_36b7256f",
         "filename": "include/linux/sched.h",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2022-07-24T07:30:11Z",
       "side": 1,
       "message": "you can not add new values here that are not already upstream.",
+      "range": {
+        "startLine": 1589,
+        "startChar": 0,
+        "endLine": 1589,
+        "endChar": 105
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d2618c3_326cd8eb",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-28T06:32:21Z",
+      "side": 1,
+      "message": "Why？It just a macro, not a structural modification.",
+      "parentUuid": "f0ce1865_36b7256f",
       "range": {
         "startLine": 1589,
         "startChar": 0,
