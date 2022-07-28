@@ -331,6 +331,30 @@
       },
       "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1601a87e_b8a7fc77",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-28T06:19:46Z",
+      "side": 1,
+      "message": "Because we must account the counts of multi-mapcount pages after this atomic_inc by\nandroid_vh_update_page_mapcount.\n\n\"android_vh_update_page_mapcount\" has been used in mm/rmap.c and mm/huge_page.c, in order to adjust to the above scene,we implement atomic_inc/atomic_dec in \"android_vh_update_page_mapcount\".",
+      "parentUuid": "9432f70d_f49f9677",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 13
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
