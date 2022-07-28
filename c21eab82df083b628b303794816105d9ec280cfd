@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75391a7a_880dbd4c",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-28T06:33:09Z",
+      "side": 1,
+      "message": "again, please remove the `extern`.",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 6
+      },
+      "revId": "c21eab82df083b628b303794816105d9ec280cfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
