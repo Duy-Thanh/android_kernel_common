@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0146b1cb_85c9b1dc",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-28T06:26:56Z",
+      "side": 1,
+      "message": "I am sorry that checkpatch.pl didn\u0027t give any error about it.\n\n\n./scripts/checkpatch.pl 0001-ANDROID-add-two-func-in-mm-memcontrol.c.patch\nERROR: Remove Gerrit Change-Id\u0027s before submitting upstream\n#11: \nChange-Id: I3d4f5159faaca1ee71ffa65f2fc1341f51da637c\n\ntotal: 1 errors, 0 warnings, 61 lines checked",
+      "parentUuid": "dbb0257e_9455c88d",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 6
+      },
+      "revId": "4fb0e1b5a805ebf97c87a74f3bf8c34dab6ad2b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a095a6ae_f955e797",
         "filename": "include/linux/memcontrol.h",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-27T17:29:14Z",
       "side": 1,
       "message": "will not build, must be static inline.",
+      "range": {
+        "startLine": 973,
+        "startChar": 0,
+        "endLine": 973,
+        "endChar": 66
+      },
+      "revId": "4fb0e1b5a805ebf97c87a74f3bf8c34dab6ad2b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b24032e_a7f0fe42",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-28T06:26:56Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "a095a6ae_f955e797",
       "range": {
         "startLine": 973,
         "startChar": 0,
