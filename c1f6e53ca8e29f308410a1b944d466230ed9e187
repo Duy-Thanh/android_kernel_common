@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ac457e3_d18d6b8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-28T21:20:34Z",
+      "side": 1,
+      "message": "what is `wake page`?",
+      "range": {
+        "startLine": 7,
+        "startChar": 35,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bb55ef9_e550cb12",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -50,6 +73,29 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "8e227c0e_147cfaac",
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d99af616_589e3067",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-28T21:20:34Z",
+      "side": 1,
+      "message": "These name convey no useful information and it\u0027s very hard to review their usage. Could you please explain in the bug what each of these is used for and maybe we can come up with better naming.",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 67
+      },
       "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
