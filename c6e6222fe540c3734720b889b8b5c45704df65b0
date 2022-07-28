@@ -16,6 +16,24 @@
       "message": "not a valid symbol for drivers to ever call, sorry.",
       "revId": "c6e6222fe540c3734720b889b8b5c45704df65b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fdbe3fb_9a545a3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-28T06:44:30Z",
+      "side": 1,
+      "message": "Hi Sir:\n\nI don\u0027t know what the meaning is？\n\n1. Drivers should not call it?\nDrivers have their owrn page_list and call it to reclaim their own page_list, any problems would be caused to?\n\n2.Should I declare it in a H file？",
+      "parentUuid": "012a09d7_004da0cc",
+      "revId": "c6e6222fe540c3734720b889b8b5c45704df65b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
