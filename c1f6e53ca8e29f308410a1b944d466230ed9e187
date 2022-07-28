@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a276da8_6d8eceb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-28T06:32:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e227c0e_147cfaac",
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0ce1865_36b7256f",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "Why？It just a macro, not a structural modification.",
       "parentUuid": "f0ce1865_36b7256f",
+      "range": {
+        "startLine": 1589,
+        "startChar": 0,
+        "endLine": 1589,
+        "endChar": 105
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e6c7194_e3970bad",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-07-28T06:32:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d2618c3_326cd8eb",
       "range": {
         "startLine": 1589,
         "startChar": 0,
