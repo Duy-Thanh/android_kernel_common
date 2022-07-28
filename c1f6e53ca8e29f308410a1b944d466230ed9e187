@@ -123,6 +123,30 @@
       },
       "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "169a466f_c5cf74a4",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-28T07:30:54Z",
+      "side": 1,
+      "message": "Again, sorry, but no, you can not modify this file for android-specific things like this.  New bits might be added over time as this kernel is maintained, this is not something that any out-of-tree code can rely on at all.\n\nIf you need a new bit, please get that change upstream.",
+      "parentUuid": "1e6c7194_e3970bad",
+      "range": {
+        "startLine": 1589,
+        "startChar": 0,
+        "endLine": 1589,
+        "endChar": 105
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
