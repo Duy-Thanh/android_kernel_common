@@ -86,6 +86,24 @@
       "message": "Hey! Thanks for the submission!\n\nThis looks like a reasonable backport to me, but I think we may need some additional rationale for why its needed and some assurances that it wouldn\u0027t negatively affect other devices in the field.\n\nDo you mind opening a bug to provide some additional details and then updating this submission to link to it in the commit message?",
       "revId": "ee0c2a9a4703031e1029b82178d03da938e541d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98b2c4bf_01bf0a3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576997
+      },
+      "writtenOn": "2022-07-29T06:28:10Z",
+      "side": 1,
+      "message": "Hi John,\n\nIssue link: https://partnerissuetracker.corp.google.com/u/0/issues/238972009\n\nLTS kernel 5.4 commit: https://android.googlesource.com/kernel/common/+/423f2695007ddb379b86fceb6c10a42e84794158",
+      "parentUuid": "dc17184b_f0a39243",
+      "revId": "ee0c2a9a4703031e1029b82178d03da938e541d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
