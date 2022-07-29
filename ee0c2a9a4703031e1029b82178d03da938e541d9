@@ -69,6 +69,23 @@
       "parentUuid": "76ff59b3_a79bda17",
       "revId": "ee0c2a9a4703031e1029b82178d03da938e541d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc17184b_f0a39243",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-29T04:08:51Z",
+      "side": 1,
+      "message": "Hey! Thanks for the submission!\n\nThis looks like a reasonable backport to me, but I think we may need some additional rationale for why its needed and some assurances that it wouldn\u0027t negatively affect other devices in the field.\n\nDo you mind opening a bug to provide some additional details and then updating this submission to link to it in the commit message?",
+      "revId": "ee0c2a9a4703031e1029b82178d03da938e541d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
