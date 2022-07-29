@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5f7b7c2_f38c8295",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-07-29T03:26:13Z",
+      "side": 1,
+      "message": "It seems like this could be similarly enabled via setting pm_debug_messages in the boot arguments. Is there a stronger rationale for adding a vendor hook for this?",
+      "revId": "11a27b106e0b0d889a744f46c02513bdaf4771a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
