@@ -16,6 +16,24 @@
       "message": "It seems like this could be similarly enabled via setting pm_debug_messages in the boot arguments. Is there a stronger rationale for adding a vendor hook for this?",
       "revId": "11a27b106e0b0d889a744f46c02513bdaf4771a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6814652_c63c3d83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2022-07-29T04:27:23Z",
+      "side": 1,
+      "message": "The setting pm_debug_messages will enable a lot of debug messages during suspend/resume that are not something we want in production. Add a vendor hook to enable the logging of unfrozen tasks only.",
+      "parentUuid": "a5f7b7c2_f38c8295",
+      "revId": "11a27b106e0b0d889a744f46c02513bdaf4771a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
