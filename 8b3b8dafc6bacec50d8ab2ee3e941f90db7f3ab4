@@ -16,6 +16,23 @@
       "message": "Waiting on cl/463944588",
       "revId": "8b3b8dafc6bacec50d8ab2ee3e941f90db7f3ab4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3115aa13_bc4e4fc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-07-29T02:01:23Z",
+      "side": 1,
+      "message": "unresolving",
+      "revId": "8b3b8dafc6bacec50d8ab2ee3e941f90db7f3ab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
