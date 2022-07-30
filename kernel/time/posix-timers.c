@@ -1090,6 +1090,8 @@ SYSCALL_DEFINE2(clock_gettime, const clockid_t, which_clock,
 		return -EINVAL;
 
 	error = kc->clock_get_timespec(which_clock, &kernel_tp);
+    printk("rkir555 %s:%d posix-timers clock=%d kc=%pK tp={ sec=%lld, nsec=%09ld } error=%d\n",
+           __func__, __LINE__, which_clock, kc, kernel_tp.tv_sec, kernel_tp.tv_nsec, error);
 
 	if (!error && put_timespec64(&kernel_tp, tp))
 		error = -EFAULT;
@@ -1172,6 +1174,8 @@ SYSCALL_DEFINE2(clock_gettime32, clockid_t, which_clock,
 		return -EINVAL;
 
 	err = kc->clock_get_timespec(which_clock, &ts);
+    printk("rkir555 %s:%d posix-timers clock=%d kc=%pK tp={ sec=%lld, nsec=%09ld } error=%d\n",
+           __func__, __LINE__, which_clock, kc, ts.tv_sec, ts.tv_nsec, err);
 
 	if (!err && put_old_timespec32(&ts, tp))
 		err = -EFAULT;
