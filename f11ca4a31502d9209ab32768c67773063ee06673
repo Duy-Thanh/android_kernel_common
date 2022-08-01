@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6195a3a6_96353bf6",
+        "filename": "include/trace/hooks/vmscan.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T11:53:55Z",
+      "side": 1,
+      "message": "no need for blank line, right?",
+      "revId": "f11ca4a31502d9209ab32768c67773063ee06673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4da0a080_271834b3",
+        "filename": "include/trace/hooks/vmscan.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T11:53:55Z",
+      "side": 1,
+      "message": "I do not think this is needed, see other comment.",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 47
+      },
+      "revId": "f11ca4a31502d9209ab32768c67773063ee06673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf72a01e_abeec12a",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T11:53:55Z",
+      "side": 1,
+      "message": "true is always passed in here, why is it needed at all?  What does it represent?",
+      "range": {
+        "startLine": 1492,
+        "startChar": 3,
+        "endLine": 1492,
+        "endChar": 45
+      },
+      "revId": "f11ca4a31502d9209ab32768c67773063ee06673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65847d7_807435ae",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T11:53:55Z",
+      "side": 1,
+      "message": "this is passing an opaque pointer to a unknown structure of objects that is on the stack.  Are you sure that is going to be ok?",
+      "range": {
+        "startLine": 2004,
+        "startChar": 0,
+        "endLine": 2004,
+        "endChar": 53
+      },
+      "revId": "f11ca4a31502d9209ab32768c67773063ee06673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
