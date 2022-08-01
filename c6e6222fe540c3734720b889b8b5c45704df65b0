@@ -52,6 +52,24 @@
       "parentUuid": "0fdbe3fb_9a545a3b",
       "revId": "c6e6222fe540c3734720b889b8b5c45704df65b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dec24b1_8674e096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-01T08:40:05Z",
+      "side": 1,
+      "message": "Hi Sir:\n\nWe don\u0027t want to be stuck in reclaim path of kswapd or direct_reclaim if rmap-lock contended in page_referenced_one or try_to_umap_one.\n\nSo we want to down_trylock instead of down_lock rmap-lock in the reclaim path, and if trylock failed, we will wakeup a kthread to reclaim them again so that kswapd and direct_reclaim wound not be stuck.\n\nWe had implemented in some way, such as adding the pages trylock filed to the head of lru-list, but it will caused the page old hard to be reclaim.\n\nSo we think that it is the best methods that wakeup a kthread to reclaim.\nPls accept export the func, thxs.",
+      "parentUuid": "4323197b_0277fde8",
+      "revId": "c6e6222fe540c3734720b889b8b5c45704df65b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
