@@ -123,6 +123,24 @@
       "parentUuid": "d936a3c5_e5026361",
       "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684c7f96_acfc8104",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-08-01T18:21:12Z",
+      "side": 1,
+      "message": "agree, I\u0027ve opened b/240978594 to follow up on such scenarios.",
+      "parentUuid": "ff55d6e9_b9592bec",
+      "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
