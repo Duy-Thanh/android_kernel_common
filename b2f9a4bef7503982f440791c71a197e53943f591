@@ -16,6 +16,24 @@
       "message": "gregkh: The XML churn is due to anonymous struct renumbering in libabigail\u0027s XML writer.",
       "revId": "b2f9a4bef7503982f440791c71a197e53943f591",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4ec7427_e5ef0c57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T15:07:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9fd406c2_a601eb55",
+      "revId": "b2f9a4bef7503982f440791c71a197e53943f591",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
