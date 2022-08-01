@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b1b2108_ea53d406",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T10:34:06Z",
+      "side": 1,
+      "message": "please wrap your changelog text at 72 columns.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 111
+      },
+      "revId": "be8c6f3a1d588752d293c12da8c94d7a2509c06a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2414c819_31ca69a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T10:34:06Z",
+      "side": 1,
+      "message": "need a name here, not an email alias.",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "be8c6f3a1d588752d293c12da8c94d7a2509c06a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "861a46c8_a933d18f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T10:34:06Z",
+      "side": 1,
+      "message": "my complaints are in the original, so feel free to fix that up if you want, otherwise it\u0027s not a big deal.",
+      "revId": "be8c6f3a1d588752d293c12da8c94d7a2509c06a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
