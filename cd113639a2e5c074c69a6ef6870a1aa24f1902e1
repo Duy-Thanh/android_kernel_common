@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "052e51f9_e81baaab",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-01T20:19:08Z",
+      "side": 1,
+      "message": "new lines before and after would be nice.",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 35
+      },
+      "revId": "cd113639a2e5c074c69a6ef6870a1aa24f1902e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7acf8079_b25da559",
         "filename": "include/linux/memcontrol.h",
         "patchSetId": 5
@@ -14,6 +37,30 @@
       "writtenOn": "2022-08-01T11:54:27Z",
       "side": 1,
       "message": "you did not compile this 😞",
+      "range": {
+        "startLine": 973,
+        "startChar": 0,
+        "endLine": 973,
+        "endChar": 80
+      },
+      "revId": "cd113639a2e5c074c69a6ef6870a1aa24f1902e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16f42a91_09c9445a",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-01T20:19:08Z",
+      "side": 1,
+      "message": "Yep, otherwise you would get an error. Please compile both with CONFIG_MEMCG\u003dy and CONFIG_MEMCG\u003dn",
+      "parentUuid": "7acf8079_b25da559",
       "range": {
         "startLine": 973,
         "startChar": 0,
