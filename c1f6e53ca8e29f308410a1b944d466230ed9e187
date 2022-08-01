@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98822af1_a477fe22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-01T08:31:54Z",
+      "side": 1,
+      "message": "I have modify the commit message.",
+      "parentUuid": "2ac457e3_d18d6b8e",
+      "range": {
+        "startLine": 7,
+        "startChar": 35,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bb55ef9_e550cb12",
@@ -90,6 +114,30 @@
       "writtenOn": "2022-07-28T21:20:34Z",
       "side": 1,
       "message": "These name convey no useful information and it\u0027s very hard to review their usage. Could you please explain in the bug what each of these is used for and maybe we can come up with better naming.",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 67
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "112c922a_b0df5cc8",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-01T08:31:54Z",
+      "side": 1,
+      "message": "I have explain them in the bug.",
+      "parentUuid": "d99af616_589e3067",
       "range": {
         "startLine": 304,
         "startChar": 0,
@@ -185,6 +233,30 @@
       "side": 1,
       "message": "Again, sorry, but no, you can not modify this file for android-specific things like this.  New bits might be added over time as this kernel is maintained, this is not something that any out-of-tree code can rely on at all.\n\nIf you need a new bit, please get that change upstream.",
       "parentUuid": "1e6c7194_e3970bad",
+      "range": {
+        "startLine": 1589,
+        "startChar": 0,
+        "endLine": 1589,
+        "endChar": 105
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb462920_a1a0164c",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-01T08:31:54Z",
+      "side": 1,
+      "message": "Hi Sir:\n\nI had removed it,done.",
+      "parentUuid": "169a466f_c5cf74a4",
       "range": {
         "startLine": 1589,
         "startChar": 0,
