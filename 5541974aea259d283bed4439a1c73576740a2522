@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4126452_f9f005c5",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-01T20:39:35Z",
+      "side": 1,
+      "message": "nit: `ret` is not very descriptive. IIUC this is used to indicate the first mapping. If so, why not call it a `first_mapping` ?",
+      "range": {
+        "startLine": 136,
+        "startChar": 9,
+        "endLine": 136,
+        "endChar": 12
+      },
+      "revId": "5541974aea259d283bed4439a1c73576740a2522",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
