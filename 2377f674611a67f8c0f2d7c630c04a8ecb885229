@@ -33,6 +33,24 @@
       "message": "Does the patch work correctly if we hit this case? The bug we are fixing is for the case at line 993 where the node refs gets updated at line 975 and `binder_cleanup_ref_olocked()` will correctly deref the node. But in this case, we bail before incrementing the node (line 975) -- won\u0027t `binder_cleanup_ref_olocked()` decrement incorrectly?",
       "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb13276_62cee949",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-08-01T17:22:09Z",
+      "side": 1,
+      "message": "`binder_cleanup_ref_olocked()` decrements are protected. So if you call it with `strong\u003d0` and a `node-\u003etmp_refs` taken (which is always the case in this error path) it doesn\u0027t decrement the node. Also, note all these paths are `internal\u003d1`.",
+      "parentUuid": "1211891e_68075814",
+      "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
