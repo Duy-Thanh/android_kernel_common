@@ -105,6 +105,24 @@
       "parentUuid": "8cd6e0fa_457cc214",
       "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff55d6e9_b9592bec",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-01T18:01:59Z",
+      "side": 1,
+      "message": "Ok, since this particular case is always \"internal\u003d1\" I think we are fine. If we hit these errors with \"internal\u003d0\", it looks to me like we can end up with incorrect refs on the node so we should look into that (separate from this fix)",
+      "parentUuid": "d936a3c5_e5026361",
+      "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
