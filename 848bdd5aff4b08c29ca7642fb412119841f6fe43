@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e3a59aa_158b659d",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T10:35:00Z",
+      "side": 1,
+      "message": "should be a boolean, not an int, right?",
+      "range": {
+        "startLine": 469,
+        "startChar": 59,
+        "endLine": 469,
+        "endChar": 62
+      },
+      "revId": "848bdd5aff4b08c29ca7642fb412119841f6fe43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
