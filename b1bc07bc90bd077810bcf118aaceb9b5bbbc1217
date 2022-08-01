@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2cf01838_2e2920b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2022-08-01T08:01:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7c52515_83c100c7",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 350
+      },
+      "revId": "b1bc07bc90bd077810bcf118aaceb9b5bbbc1217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d3b44c98_837576b6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -37,6 +61,24 @@
       "writtenOn": "2022-08-01T07:19:02Z",
       "side": 1,
       "message": "changelog text is different from `android13-5.10` version, is that intentional?",
+      "revId": "b1bc07bc90bd077810bcf118aaceb9b5bbbc1217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e97aade_ada05db3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2022-08-01T08:01:37Z",
+      "side": 1,
+      "message": "Yeah, as John mentioned in aosp/2164064, I\u0027ll provide additional rationale for this change.",
+      "parentUuid": "d3b44c98_837576b6",
       "revId": "b1bc07bc90bd077810bcf118aaceb9b5bbbc1217",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
