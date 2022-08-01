@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c52515_83c100c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T07:19:02Z",
+      "side": 1,
+      "message": "please wrap your changelog text at 72 columns, like checkpatch asks for.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 350
+      },
+      "revId": "b1bc07bc90bd077810bcf118aaceb9b5bbbc1217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3b44c98_837576b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T07:19:02Z",
+      "side": 1,
+      "message": "changelog text is different from `android13-5.10` version, is that intentional?",
+      "revId": "b1bc07bc90bd077810bcf118aaceb9b5bbbc1217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
