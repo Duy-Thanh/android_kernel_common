@@ -262,6 +262,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "627e7931_7711e313",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-01T09:56:17Z",
+      "side": 1,
+      "message": "I have modify the patch which follow your suggestions, pls review.",
+      "parentUuid": "a4b36ac6_94b9363a",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 77
+      },
+      "revId": "f45139279212c9e0d55b613735d3d7b861a62129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84272c91_72361b5a",
