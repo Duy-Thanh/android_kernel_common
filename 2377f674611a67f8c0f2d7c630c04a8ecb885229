@@ -69,6 +69,24 @@
       "parentUuid": "6fb13276_62cee949",
       "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cd6e0fa_457cc214",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-08-01T17:30:20Z",
+      "side": 1,
+      "message": "In this error path, we always have `internal\u003d1`. However, even the cleanup has the same checks as here, see line 859. So it is also coordinated in that way.",
+      "parentUuid": "6a3d9c1c_fd24ee07",
+      "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
