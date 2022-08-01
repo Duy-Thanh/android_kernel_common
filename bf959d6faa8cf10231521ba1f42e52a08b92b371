@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64be9ca5_1ca5b0be",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-01T07:18:03Z",
+      "side": 1,
+      "message": "why not at the top of the file?",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 30
+      },
+      "revId": "bf959d6faa8cf10231521ba1f42e52a08b92b371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
