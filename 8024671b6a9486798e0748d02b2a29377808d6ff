@@ -16,6 +16,23 @@
       "message": "Ping...\nThese patches still pending, anything I need to do?",
       "revId": "8024671b6a9486798e0748d02b2a29377808d6ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20cd6118_c9979990",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1352498
+      },
+      "writtenOn": "2022-08-01T07:14:58Z",
+      "side": 1,
+      "message": "@Todd please help to review the patchset. thanks.",
+      "revId": "8024671b6a9486798e0748d02b2a29377808d6ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
