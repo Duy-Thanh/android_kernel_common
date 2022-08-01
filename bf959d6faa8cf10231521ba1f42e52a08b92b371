@@ -22,6 +22,30 @@
       },
       "revId": "bf959d6faa8cf10231521ba1f42e52a08b92b371",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24896c96_3654ebf9",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1445936
+      },
+      "writtenOn": "2022-08-01T08:19:49Z",
+      "side": 1,
+      "message": "It\u0027s referring to the modification of k5.15, on the top will cause ABI change. Here is comment by Todd:\n\n\"It looks like this is causing an ABI change (change in visibility affecting CRC for a function). Can you try moving this inclusion down to line 476 (just ahead of the function with the new hook added).\"",
+      "parentUuid": "64be9ca5_1ca5b0be",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 30
+      },
+      "revId": "bf959d6faa8cf10231521ba1f42e52a08b92b371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
