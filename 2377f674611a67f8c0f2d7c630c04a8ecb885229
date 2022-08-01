@@ -51,6 +51,24 @@
       "parentUuid": "1211891e_68075814",
       "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a3d9c1c_fd24ee07",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-01T17:25:11Z",
+      "side": 1,
+      "message": "So you are saying that in handling this error `node-\u003einternal_strong_refs` won\u0027t be decremented?\n\nIf that is the case, then now does the inc of `node-\u003elocal_weak_refs` (line 988) get undone for our error case? It seems like one of these two cases is broken.",
+      "parentUuid": "6fb13276_62cee949",
+      "revId": "2377f674611a67f8c0f2d7c630c04a8ecb885229",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
