@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88560a47_2d90d623",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-08-01T12:41:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b1b2108_ea53d406",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 111
+      },
+      "revId": "be8c6f3a1d588752d293c12da8c94d7a2509c06a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2414c819_31ca69a9",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-01T10:34:06Z",
       "side": 1,
       "message": "need a name here, not an email alias.",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "be8c6f3a1d588752d293c12da8c94d7a2509c06a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a2c44e_9f2a1bcf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-08-01T12:41:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2414c819_31ca69a9",
       "range": {
         "startLine": 13,
         "startChar": 15,
