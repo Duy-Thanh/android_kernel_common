@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d27ca53e_5a8f7b8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-08-02T21:26:52Z",
+      "side": 1,
+      "message": "I think it needs your Signed-off-by after mine, since you uploaded this.  Otherwise this looks fine; I verified that it\u0027s a clean cherry-pick from android12-5.10.",
+      "revId": "7c1b97cc5c4e71a91ec07d97d7a26ef26bf76aeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
