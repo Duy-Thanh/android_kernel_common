@@ -172,6 +172,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca6f9b6c_0024dac0",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-02T05:01:11Z",
+      "side": 1,
+      "message": "Hi Sir:\n\nI had modified the patch followed your suggestions.",
+      "parentUuid": "3e3531e1_5c11bc75",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 67
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0ce1865_36b7256f",
@@ -304,6 +328,30 @@
       "writtenOn": "2022-08-01T21:10:00Z",
       "side": 1,
       "message": "What\u0027s the point of calling trace_android_vh_setpage_reclaim_trylock and then trace_android_vh_clearpage_reclaim_trylock? Looks like in all possible branches the result will be that trace_android_vh_clearpage_reclaim_trylock will be eventually called?",
+      "range": {
+        "startLine": 2123,
+        "startChar": 2,
+        "endLine": 2123,
+        "endChar": 44
+      },
+      "revId": "c1f6e53ca8e29f308410a1b944d466230ed9e187",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa190b6c_806117e0",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-02T05:01:11Z",
+      "side": 1,
+      "message": "1. trace_android_vh_setpage_reclaim_trylock： set page bit \"trylock instead of lock in reclaim path\", and page_referenced and try_to_unmap will trylock anon/file rwsem lock if the page reclaiming is set the bit above.\n2. trace_android_vh_clearpage_reclaim_trylock：clear the bit above.",
+      "parentUuid": "b2810d11_1ef46753",
       "range": {
         "startLine": 2123,
         "startChar": 2,
