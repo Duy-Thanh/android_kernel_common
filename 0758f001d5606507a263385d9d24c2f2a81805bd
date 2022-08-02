@@ -16,6 +16,23 @@
       "message": "I can\u0027t +2 here. ",
       "revId": "0758f001d5606507a263385d9d24c2f2a81805bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24d68ff_c55a4359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-02T17:51:04Z",
+      "side": 1,
+      "message": "Please conform to the contribution guidelines at https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md (in this case, needs \"ANDROID:\" in the title.",
+      "revId": "0758f001d5606507a263385d9d24c2f2a81805bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
