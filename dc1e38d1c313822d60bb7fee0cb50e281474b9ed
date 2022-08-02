@@ -16,6 +16,24 @@
       "message": "please submit upstream first.",
       "revId": "dc1e38d1c313822d60bb7fee0cb50e281474b9ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cc3347e_51e8507e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1468082
+      },
+      "writtenOn": "2022-08-02T09:11:01Z",
+      "side": 1,
+      "message": "OK, thanks.",
+      "parentUuid": "b2235cdf_2ce4b0b5",
+      "revId": "dc1e38d1c313822d60bb7fee0cb50e281474b9ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
