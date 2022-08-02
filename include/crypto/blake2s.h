@@ -101,7 +101,10 @@ static inline void blake2s(u8 *out, const u8 *in, const u8 *key,
 	blake2s_final(&state, out);
 }
 
+<<<<<<< HEAD   (64f180 Merge branch 'android13-5.10' into branch 'android13-5.10-lt)
 void blake2s256_hmac(u8 *out, const u8 *in, const u8 *key, const size_t inlen,
 		     const size_t keylen);
 
+=======
+>>>>>>> BRANCH (56c31a Linux 5.10.119)
 #endif /* _CRYPTO_BLAKE2S_H */
