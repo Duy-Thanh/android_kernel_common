@@ -16,6 +16,24 @@
       "message": "we could wait for the patch to come via LTS on this branch.",
       "revId": "cc0cf923e89d1bac3c20329979974acfe5b3c8ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c2fd2fd_5174b1b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-02T20:01:31Z",
+      "side": 1,
+      "message": "oops, confused with your other patch. This is fine.",
+      "parentUuid": "d3740c26_cf0d52db",
+      "revId": "cc0cf923e89d1bac3c20329979974acfe5b3c8ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
