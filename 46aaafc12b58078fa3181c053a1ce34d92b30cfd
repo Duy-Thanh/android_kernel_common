@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4a8db8e_be83d2cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-02T09:01:14Z",
+      "side": 1,
+      "message": "use the correct \"cherry-pick\" format please.\n\nAnd this is upstream, not ANDROID: GKI, right?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "46aaafc12b58078fa3181c053a1ce34d92b30cfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea700222_5dfd43af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-02T09:01:14Z",
+      "side": 1,
+      "message": "where are the original signed-off-by lines?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 52
+      },
+      "revId": "46aaafc12b58078fa3181c053a1ce34d92b30cfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ab4547_96ff8f8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-02T09:01:14Z",
+      "side": 1,
+      "message": "should this go to the upstream LTS release of 5.10.y instead?",
+      "revId": "46aaafc12b58078fa3181c053a1ce34d92b30cfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
