@@ -70,6 +70,24 @@
       "parentUuid": "4323197b_0277fde8",
       "revId": "c6e6222fe540c3734720b889b8b5c45704df65b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ebd615e_fdd1afac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-02T23:14:54Z",
+      "side": 1,
+      "message": "Yeah, for what is being done here I do not see an alternative other that upstreaming the feature. Once the feature is public there is no reason not to upstream it, so please prepare to do so. For now I think we have no other option but to allow this export (see more info at https://buganizer.corp.google.com/issues/240003372#comment7).",
+      "parentUuid": "0dec24b1_8674e096",
+      "revId": "c6e6222fe540c3734720b889b8b5c45704df65b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
