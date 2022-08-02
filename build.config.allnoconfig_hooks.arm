@@ -1,0 +1,6 @@
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.arm
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.allnoconfig_hooks
+
+# Image only: no modules
+MAKE_GOALS="zImage"
