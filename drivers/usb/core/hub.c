@@ -34,6 +34,8 @@
 #include <linux/uaccess.h>
 #include <asm/byteorder.h>
 
+#include <trace/hooks/usb.h>
+
 #include "hub.h"
 #include "otg_productlist.h"
 
@@ -4787,6 +4789,10 @@ hub_port_init(struct usb_hub *hub, struct usb_device *udev, int port1,
 			udev->descriptor.bMaxPacketSize0 =
 					buf->bMaxPacketSize0;
 			kfree(buf);
+
+			trace_android_vh_usb_port_init_status(udev, retry_counter, &retval);
+			if (retval < 0)
+				goto fail;
 
 			retval = hub_port_reset(hub, port1, udev, delay, false);
 			if (retval < 0)		/* error or disconnect */
