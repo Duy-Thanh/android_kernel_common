@@ -34,6 +34,24 @@
       "parentUuid": "712415ce_fc3df065",
       "revId": "1eab859d5a7821882fc20432b062fe927183bc17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e03bf97_12a63208",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-02T11:41:03Z",
+      "side": 1,
+      "message": "A module can register for it\u0027s own command line options like always, it can NOT see all command line options, that is a namespace violation and probably a big security hole as well.\n\nWhat have you tried that did not work for your module options?",
+      "parentUuid": "c0f8863f_7866feff",
+      "revId": "1eab859d5a7821882fc20432b062fe927183bc17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
