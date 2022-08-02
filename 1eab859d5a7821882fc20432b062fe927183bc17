@@ -16,6 +16,24 @@
       "message": "this is not how a module can parse the command line, it can only see the options it is given.  This is not allowed, sorry.",
       "revId": "1eab859d5a7821882fc20432b062fe927183bc17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0f8863f_7866feff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1947867
+      },
+      "writtenOn": "2022-08-02T11:15:17Z",
+      "side": 1,
+      "message": "Please let me know which approach to be taken to get kernel command line info for a module.",
+      "parentUuid": "712415ce_fc3df065",
+      "revId": "1eab859d5a7821882fc20432b062fe927183bc17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
