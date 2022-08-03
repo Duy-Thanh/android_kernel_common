@@ -9,6 +9,9 @@
 #include <linux/rcu_sync.h>
 #include <linux/lockdep.h>
 
+void android_vh_record_lock_starttime(struct task_struct *tsk,
+		unsigned long settime, int lock_type);
+
 struct percpu_rw_semaphore {
 	struct rcu_sync		rss;
 	unsigned int __percpu	*read_count;
@@ -73,6 +76,7 @@ static inline void percpu_down_read(struct percpu_rw_semaphore *sem)
 	 * bleeding the critical section out.
 	 */
 	preempt_enable();
+	android_vh_record_lock_starttime(current, jiffies, 3);
 }
 
 static inline bool percpu_down_read_trylock(struct percpu_rw_semaphore *sem)
@@ -93,14 +97,17 @@ static inline bool percpu_down_read_trylock(struct percpu_rw_semaphore *sem)
 	 * bleeding the critical section out.
 	 */
 
-	if (ret)
+	if (ret) {
+		android_vh_record_lock_starttime(current, jiffies, 3);
 		rwsem_acquire_read(&sem->dep_map, 0, 1, _RET_IP_);
+	}
 
 	return ret;
 }
 
 static inline void percpu_up_read(struct percpu_rw_semaphore *sem)
 {
+	android_vh_record_lock_starttime(current, 0, 3);
 	rwsem_release(&sem->dep_map, _RET_IP_);
 
 	preempt_disable();

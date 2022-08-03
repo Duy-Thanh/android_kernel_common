@@ -22,6 +22,10 @@
  */
 #include "sched.h"
 
+#ifndef __GENKSYMS__
+#define PROTECT_TRACE_INCLUDE_PATH
+#include <trace/hooks/dtask.h>
+#endif
 #include <trace/hooks/sched.h>
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_runtime);
@@ -4424,6 +4428,10 @@ check_preempt_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr)
 	s64 delta;
 	bool skip_preempt = false;
 
+	trace_android_vh_locktask_tick_resched(curr, cfs_rq, &skip_preempt);
+	if (skip_preempt)
+		return;
+
 	ideal_runtime = sched_slice(cfs_rq, curr);
 	delta_exec = curr->sum_exec_runtime - curr->prev_sum_exec_runtime;
 	trace_android_rvh_check_preempt_tick(current, &ideal_runtime, &skip_preempt,
@@ -7075,8 +7083,12 @@ static void check_preempt_wakeup(struct rq *rq, struct task_struct *p, int wake_
 	int scale = cfs_rq->nr_running >= sched_nr_latency;
 	int next_buddy_marked = 0;
 	bool preempt = false, nopreempt = false;
+	bool skip_preempt = false;
 
 	if (unlikely(se == pse))
+		return;
+	trace_android_vh_locktask_protect(curr, p, &skip_preempt);
+	if (skip_preempt)
 		return;
 
 	/*

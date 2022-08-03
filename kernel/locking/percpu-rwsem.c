@@ -10,6 +10,15 @@
 #include <linux/slab.h>
 #include <linux/errno.h>
 
+#include <trace/hooks/dtask.h>
+
+void android_vh_record_lock_starttime(struct task_struct *tsk,
+		unsigned long settime, int lock_type)
+{
+	trace_android_vh_record_lock_starttime(tsk, settime, lock_type);
+}
+EXPORT_SYMBOL_GPL(android_vh_record_lock_starttime);
+
 int __percpu_init_rwsem(struct percpu_rw_semaphore *sem,
 			const char *name, struct lock_class_key *key)
 {
@@ -237,11 +246,13 @@ void percpu_down_write(struct percpu_rw_semaphore *sem)
 
 	/* Wait for all active readers to complete. */
 	rcuwait_wait_event(&sem->writer, readers_active_check(sem), TASK_UNINTERRUPTIBLE);
+	trace_android_vh_record_lock_starttime(current, jiffies, 3);
 }
 EXPORT_SYMBOL_GPL(percpu_down_write);
 
 void percpu_up_write(struct percpu_rw_semaphore *sem)
 {
+	trace_android_vh_record_lock_starttime(current, 0, 3);
 	rwsem_release(&sem->dep_map, _RET_IP_);
 
 	/*

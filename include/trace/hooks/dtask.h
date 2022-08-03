@@ -1,4 +1,13 @@
 /* SPDX-License-Identifier: GPL-2.0 */
+#ifdef PROTECT_TRACE_INCLUDE_PATH
+#undef PROTECT_TRACE_INCLUDE_PATH
+
+#include <trace/hooks/save_incpath.h>
+#include <trace/hooks/dtask.h>
+#include <trace/hooks/restore_incpath.h>
+
+#else /* PROTECT_TRACE_INCLUDE_PATH */
+
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM dtask
 #define TRACE_INCLUDE_PATH trace/hooks
@@ -71,9 +80,21 @@ DECLARE_HOOK(android_vh_mutex_unlock_slowpath_end,
 DECLARE_HOOK(android_vh_mutex_start_check_new_owner,
 	TP_PROTO(struct mutex *lock),
 	TP_ARGS(lock));
-
+DECLARE_HOOK(android_vh_record_lock_starttime,
+	TP_PROTO(struct task_struct *tsk, unsigned long settime,
+			int lock_type),
+	TP_ARGS(tsk, settime, lock_type));
+DECLARE_HOOK(android_vh_locktask_protect,
+	TP_PROTO(struct task_struct *curr, struct task_struct *p,
+			bool *skip_preempt),
+	TP_ARGS(curr, p, skip_preempt));
+DECLARE_HOOK(android_vh_locktask_tick_resched,
+	TP_PROTO(struct sched_entity *se, struct cfs_rq *cfs_rq,
+		bool *skip_preempt),
+	TP_ARGS(se, cfs_rq, skip_preempt));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_DTASK_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
+#endif
