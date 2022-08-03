@@ -16,6 +16,24 @@
       "message": "Why is this needed in the kernel source tree?\n\nAnd if it is needed here, why not submit it upstream first?",
       "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00cd658c_cb5e7481",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-08-03T22:34:22Z",
+      "side": 1,
+      "message": "I had put this here since it piggybacks off of the dev-needs.sh script that is already part of the kernel.\n\nThis script is also meant to aid partners who will be developing specifically on this branch. Also, it is tied to Android at the moment because of the adb usage, which I currently need, since I can\u0027t run everything in this script on the device, because toybox doesn\u0027t have tsort. However, there\u0027s nothing Android specific about the application of this script, so I\u0027d like to fix it up first and send it upstream once I\u0027ve decoupled it from Android. However, I would still like to place it here as is so that partners can use it while I can figure out how to upstream it.",
+      "parentUuid": "4f12a655_4e5ecc62",
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
