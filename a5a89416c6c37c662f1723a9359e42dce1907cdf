@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f12a655_4e5ecc62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-03T08:35:44Z",
+      "side": 1,
+      "message": "Why is this needed in the kernel source tree?\n\nAnd if it is needed here, why not submit it upstream first?",
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
