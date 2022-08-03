@@ -33,6 +33,24 @@
       "message": "Please conform to the contribution guidelines at https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md (in this case, needs \"ANDROID:\" in the title.",
       "revId": "0758f001d5606507a263385d9d24c2f2a81805bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6dc2006_e2624acf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-03T09:37:28Z",
+      "side": 1,
+      "message": "Done. However, this change will need to go in kernel/common-modules/virtual-device following Jiyong\u0027s https://r.android.com/2154495, so I\u0027ll abandon this.\n\nShould this CL be marked with Fixes: ?\nIt\u0027s fixing something in the previous CL, but it\u0027s harmless.",
+      "parentUuid": "a24d68ff_c55a4359",
+      "revId": "0758f001d5606507a263385d9d24c2f2a81805bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
