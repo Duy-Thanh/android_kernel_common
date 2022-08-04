@@ -52,6 +52,24 @@
       "parentUuid": "c0f8863f_7866feff",
       "revId": "1eab859d5a7821882fc20432b062fe927183bc17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "335086e6_f3b0f2b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1947867
+      },
+      "writtenOn": "2022-08-04T10:41:29Z",
+      "side": 1,
+      "message": "Thanks, Tried module_param() and it worked.",
+      "parentUuid": "8e03bf97_12a63208",
+      "revId": "1eab859d5a7821882fc20432b062fe927183bc17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
