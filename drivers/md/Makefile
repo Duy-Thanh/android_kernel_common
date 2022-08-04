@@ -84,7 +84,11 @@ obj-$(CONFIG_DM_LOG_WRITES)	+= dm-log-writes.o
 obj-$(CONFIG_DM_INTEGRITY)	+= dm-integrity.o
 obj-$(CONFIG_DM_ZONED)		+= dm-zoned.o
 obj-$(CONFIG_DM_WRITECACHE)	+= dm-writecache.o
+<<<<<<< HEAD   (b5fd3d Merge d7b767b5088d ("Merge tag 'execve-v5.20-rc1' of git://g)
 obj-$(CONFIG_DM_USER)		+= dm-user.o
+=======
+obj-$(CONFIG_SECURITY_LOADPIN_VERITY)	+= dm-verity-loadpin.o
+>>>>>>> BRANCH (6991a5 Merge tag 'hardening-v5.20-rc1' of git://git.kernel.org/pub/)
 
 ifeq ($(CONFIG_DM_INIT),y)
 dm-mod-objs			+= dm-init.o
