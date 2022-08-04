@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb77f66_cb5b12e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2022-08-04T13:29:25Z",
+      "side": 1,
+      "message": "there is no .xml diff generated after ./build/build_abi.sh --update --print-report command.",
+      "parentUuid": "823dc120_d4929a99",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 61
+      },
+      "revId": "7e4964ab4c7c74e602e1896e69eb4d90ff1c48f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4a254eb_fc230cfb",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebdfb760_e5484375",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2022-08-04T13:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4a254eb_fc230cfb",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "7e4964ab4c7c74e602e1896e69eb4d90ff1c48f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53f19039_02a354cc",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-08-04T13:08:31Z",
       "side": 1,
       "message": "please use lowercase as needed.",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 28
+      },
+      "revId": "7e4964ab4c7c74e602e1896e69eb4d90ff1c48f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b46166_60de8344",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2022-08-04T13:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53f19039_02a354cc",
       "range": {
         "startLine": 13,
         "startChar": 15,
