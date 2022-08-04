@@ -461,6 +461,16 @@ static int __recover_dot_dentries(struct inode *dir, nid_t pino)
 		return 0;
 	}
 
+<<<<<<< HEAD   (8c2819 ANDROID: GKI: update .xml file with new symbol needed for zs)
+=======
+	if (!S_ISDIR(dir->i_mode)) {
+		f2fs_err(sbi, "inconsistent inode status, skip recovering inline_dots inode (ino:%lu, i_mode:%u, pino:%u)",
+			  dir->i_ino, dir->i_mode, pino);
+		set_sbi_flag(sbi, SBI_NEED_FSCK);
+		return -ENOTDIR;
+	}
+
+>>>>>>> BRANCH (aed236 Linux 5.15.46)
 	err = f2fs_dquot_initialize(dir);
 	if (err)
 		return err;

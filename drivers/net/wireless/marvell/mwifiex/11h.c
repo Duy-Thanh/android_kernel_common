@@ -303,5 +303,11 @@ void mwifiex_dfs_chan_sw_work_queue(struct work_struct *work)
 
 	mwifiex_dbg(priv->adapter, MSG,
 		    "indicating channel switch completion to kernel\n");
+<<<<<<< HEAD   (8c2819 ANDROID: GKI: update .xml file with new symbol needed for zs)
 	cfg80211_ch_switch_notify(priv->netdev, &priv->dfs_chandef, 0);
+=======
+	mutex_lock(&priv->wdev.mtx);
+	cfg80211_ch_switch_notify(priv->netdev, &priv->dfs_chandef);
+	mutex_unlock(&priv->wdev.mtx);
+>>>>>>> BRANCH (aed236 Linux 5.15.46)
 }

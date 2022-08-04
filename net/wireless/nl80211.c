@@ -3772,9 +3772,14 @@ static int nl80211_send_iface(struct sk_buff *msg, u32 portid, u32 seq, int flag
 	switch (wdev->iftype) {
 	case NL80211_IFTYPE_AP:
 	case NL80211_IFTYPE_P2P_GO:
+<<<<<<< HEAD   (8c2819 ANDROID: GKI: update .xml file with new symbol needed for zs)
 		if (wdev->u.ap.ssid_len &&
 		    nla_put(msg, NL80211_ATTR_SSID, wdev->u.ap.ssid_len,
 			    wdev->u.ap.ssid))
+=======
+		if (wdev->ssid_len &&
+		    nla_put(msg, NL80211_ATTR_SSID, wdev->ssid_len, wdev->ssid))
+>>>>>>> BRANCH (aed236 Linux 5.15.46)
 			goto nla_put_failure_locked;
 		break;
 	case NL80211_IFTYPE_STATION:
@@ -16810,6 +16815,7 @@ static const struct genl_small_ops nl80211_small_ops[] = {
 		.validate = GENL_DONT_VALIDATE_STRICT | GENL_DONT_VALIDATE_DUMP,
 		.doit = nl80211_color_change,
 		.flags = GENL_UNS_ADMIN_PERM,
+<<<<<<< HEAD   (8c2819 ANDROID: GKI: update .xml file with new symbol needed for zs)
 		.internal_flags = IFLAGS(NL80211_FLAG_NEED_NETDEV_UP),
 	},
 	{
@@ -16831,6 +16837,9 @@ static const struct genl_small_ops nl80211_small_ops[] = {
 		.flags = GENL_UNS_ADMIN_PERM,
 		.internal_flags = IFLAGS(NL80211_FLAG_NEED_NETDEV_UP |
 					 NL80211_FLAG_MLO_VALID_LINK_ID),
+=======
+		.internal_flags = NL80211_FLAG_NEED_NETDEV_UP,
+>>>>>>> BRANCH (aed236 Linux 5.15.46)
 	},
 };
 

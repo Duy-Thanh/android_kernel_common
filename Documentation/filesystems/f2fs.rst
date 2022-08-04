@@ -198,7 +198,10 @@ fault_type=%d		 Support configuring fault injection type, should be
 			 FAULT_WRITE_IO		  0x000004000
 			 FAULT_SLAB_ALLOC	  0x000008000
 			 FAULT_DQUOT_INIT	  0x000010000
+<<<<<<< HEAD   (8c2819 ANDROID: GKI: update .xml file with new symbol needed for zs)
 			 FAULT_LOCK_OP		  0x000020000
+=======
+>>>>>>> BRANCH (aed236 Linux 5.15.46)
 			 ===================	  ===========
 mode=%s			 Control block allocation mode which supports "adaptive"
 			 and "lfs". In "lfs" mode, there should be no random
