@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db4cf51b_88e2f70e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-08-04T11:35:03Z",
+      "side": 1,
+      "message": "I don\u0027t think we support ioring in this kernel, but I suppose it can\u0027t hurt to have the fix there as well.",
+      "revId": "3c160baa666b010771e5e5e744dbb9002a221596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
