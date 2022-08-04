@@ -2384,6 +2384,8 @@
   __tracepoint_android_vh_ufs_update_sysfs
   __tracepoint_android_vh_usb_dev_resume
   __tracepoint_android_vh_usb_dev_suspend
+  __tracepoint_android_vh_resume_start
+  __tracepoint_android_vh_resume_end
   __tracepoint_clock_set_rate
   __tracepoint_cpu_frequency
   __tracepoint_device_pm_callback_end
