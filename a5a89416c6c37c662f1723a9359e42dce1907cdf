@@ -52,6 +52,236 @@
       "parentUuid": "00cd658c_cb5e7481",
       "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a33a6d66_ba487a10",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "I think people will miss this because it\u0027s buried so far down the description of -l. Maybe just make it into separate option even though it\u0027s only reversing the list?\n\nMaybe make the options (just suggestions, please feel free to use better names thay make it clear):\n--port-order\n--modularize-order\n--module-load-order",
+      "range": {
+        "startLine": 29,
+        "startChar": 43,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c254e1_e9636c54",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "Maybe clarify you are keeping the first occurrence?",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 76,
+        "endChar": 61
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5e827a_29085f4c",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "Read the last comment now, then the rest will make a bit more sense.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 27
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ab56ab2_a2dbe1da",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "dev_to_compat()?",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 35
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d8d1387_a0313a46",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "dev_to_module()",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 21
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6473b63a_2f9dfc79",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "This is same as the stuff you do for compat strings. I think if you move this to the main part of the script, it\u0027ll be cleaner",
+      "range": {
+        "startLine": 125,
+        "startChar": 1,
+        "endLine": 126,
+        "endChar": 32
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4806c132_73d6e26c",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "create_device_dependency_list()",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 36
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d9aa44_412d16b1",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "Any reason to not run this directly as part of the call to dev-needs? Don\u0027t see any benefit in doing this separately.",
+      "range": {
+        "startLine": 141,
+        "startChar": 1,
+        "endLine": 141,
+        "endChar": 18
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e5d332_f74b4afb",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "I\u0027d move this to the \"main\" part of the script. So it\u0027s kind clear what the script is doing at a high level by looking at the \"main\" part.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 3
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19af7fba_91f0d83a",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-04T18:54:51Z",
+      "side": 1,
+      "message": "I think this should be replaced with a list of calls that\u0027s along the lines of:\n\nget_tsorted_dev_list\ndev_to_compat or dev_to_module based on option.\nremove duplicates\ninvert-list if needed\nwrite to file\n\nThen it\u0027s much easier to understand what the script does at a high level.",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 36
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
