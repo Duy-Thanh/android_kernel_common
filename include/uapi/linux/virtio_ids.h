@@ -69,6 +69,10 @@
 #define VIRTIO_ID_BT			40 /* virtio bluetooth */
 #define VIRTIO_ID_GPIO			41 /* virtio gpio */
 
+/* Chrome OS-specific devices */
+#define VIRTIO_ID_WL           63 /* virtio wayland */
+#define VIRTIO_ID_TPM          62 /* virtio tpm */
+
 /*
  * Virtio Transitional IDs
  */
