@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "230a8ac0_266e31d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-04T14:47:37Z",
+      "side": 1,
+      "message": "what happened to the upstream version of this instead?  Doing a hook like this means you have given up ever trying to fix mainline and this will be required for all time going forward.",
+      "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
