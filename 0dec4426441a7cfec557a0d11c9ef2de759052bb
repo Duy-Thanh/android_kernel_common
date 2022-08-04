@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5f9262_45546630",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-04T09:26:36Z",
+      "side": 1,
+      "message": "This is not built in the gki_defconfig so why is this needed in this branch?",
+      "revId": "0dec4426441a7cfec557a0d11c9ef2de759052bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
