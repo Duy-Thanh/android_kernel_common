@@ -70,6 +70,24 @@
       "parentUuid": "c6c2a4ca_3c609bc1",
       "revId": "0dec4426441a7cfec557a0d11c9ef2de759052bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e3ff8b6_4c6193be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2022-08-04T13:22:22Z",
+      "side": 1,
+      "message": "The other patches were added via LTS merges without Change-IDs.",
+      "parentUuid": "56c4e4a2_52bc507e",
+      "revId": "0dec4426441a7cfec557a0d11c9ef2de759052bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
