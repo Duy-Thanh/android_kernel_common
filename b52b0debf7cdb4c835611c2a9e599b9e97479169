@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41363a49_bbf6b679",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T21:01:04Z",
+      "side": 1,
+      "message": "Bypassing presubmit because tests are flaky and this is just a stand alone script that none of the tests are going to exercise.",
+      "revId": "b52b0debf7cdb4c835611c2a9e599b9e97479169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
