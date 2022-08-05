@@ -1083,6 +1083,15 @@
 			x86 Macs.  Useful for driver authors to determine
 			what data is available or for reverse-engineering.
 
+	dynamic_kmalloc_minalign	[MM]
+			Enabling dynamic_kmalloc_minalign causes the minimum
+			kmalloc alignment and thus minimum kmalloc allocation
+			size to be recomputed at runtime. This can be helpful
+			for systems that have a smaller minimum kmalloc
+			allocation size requirement that is smaller than the
+			hardcoded ARCH_KMALLOC_MINALIGN value that the kernel
+			uses.
+
 	dyndbg[="val"]		[KNL,DYNAMIC_DEBUG]
 	<module>.dyndbg[="val"]
 			Enable debug messages at boot time.  See

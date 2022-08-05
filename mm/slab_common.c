@@ -647,6 +647,7 @@ EXPORT_SYMBOL_GPL(kmem_dump_obj);
 #endif
 
 #ifndef CONFIG_SLOB
+static bool dynamic_kmalloc_minalign_enabled;
 static unsigned int kmalloc_minalign = ARCH_KMALLOC_MINALIGN;
 
 int kmalloc_min_size = KMALLOC_MIN_SIZE;
@@ -655,9 +656,17 @@ EXPORT_SYMBOL_GPL(kmalloc_min_size);
 int kmalloc_shift_low = KMALLOC_SHIFT_LOW;
 EXPORT_SYMBOL_GPL(kmalloc_shift_low);
 
+static int __init setup_dynamic_kmalloc_minalign(char *str)
+{
+	dynamic_kmalloc_minalign_enabled = true;
+	return 1;
+}
+__setup("dynamic_kmalloc_minalign", setup_dynamic_kmalloc_minalign);
+
 void __init init_kmalloc_cache_parameters(void)
 {
-	if (arch_kmalloc_minalign() != kmalloc_minalign) {
+	if (dynamic_kmalloc_minalign_enabled &&
+	    (arch_kmalloc_minalign() != kmalloc_minalign)) {
 		kmalloc_minalign = arch_kmalloc_minalign();
 		kmalloc_shift_low = ilog2(kmalloc_minalign);
 		kmalloc_min_size = 1 << kmalloc_shift_low;
