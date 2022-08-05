@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bbfc917_c0220396",
+        "filename": "scripts/driver-dependencies.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-08-05T17:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2217373d_92748c5b",
+      "range": {
+        "startLine": 66,
+        "startChar": 42,
+        "endLine": 66,
+        "endChar": 44
+      },
+      "revId": "0e65dc26c37c9641ae046bc78adfceb84bb37773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ad33fa0_0aabfe15",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c54e95c2_54b0b3db",
+        "filename": "scripts/driver-dependencies.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-08-05T17:01:46Z",
+      "side": 1,
+      "message": "Yes. What I found was that if I didn\u0027t do that, it would use adb shell $DEV_NEEDS_DEV_PATH but not actually substitute the variable. Using single quotes like that causes it to get expanded.",
+      "parentUuid": "4ad33fa0_0aabfe15",
+      "range": {
+        "startLine": 84,
+        "startChar": 25,
+        "endLine": 84,
+        "endChar": 27
+      },
+      "revId": "0e65dc26c37c9641ae046bc78adfceb84bb37773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32ccd918_db43b513",
         "filename": "scripts/driver-dependencies.sh",
         "patchSetId": 3
@@ -60,6 +108,30 @@
       "writtenOn": "2022-08-05T16:51:43Z",
       "side": 1,
       "message": "Can you move these to the top?",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 0
+      },
+      "revId": "0e65dc26c37c9641ae046bc78adfceb84bb37773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "331d48c2_ab481cf1",
+        "filename": "scripts/driver-dependencies.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-08-05T17:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32ccd918_db43b513",
       "range": {
         "startLine": 89,
         "startChar": 0,
