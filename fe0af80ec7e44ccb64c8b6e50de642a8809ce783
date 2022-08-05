@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2690c5c_6767662a",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T01:42:17Z",
+      "side": 1,
+      "message": "Maybe we should call this script \"driver-dependencies.sh\"?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 8
+      },
+      "revId": "fe0af80ec7e44ccb64c8b6e50de642a8809ce783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9358ac2a_130b1525",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T01:42:17Z",
+      "side": 1,
+      "message": "delete \"in\"?",
+      "range": {
+        "startLine": 16,
+        "startChar": 10,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "fe0af80ec7e44ccb64c8b6e50de642a8809ce783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7215014e_5e872078",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T01:42:17Z",
+      "side": 1,
+      "message": "Aren\u0027t the previous one options too? If you meant optional options, aren\u0027t all of them optional?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 46
+      },
+      "revId": "fe0af80ec7e44ccb64c8b6e50de642a8809ce783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f4f97e6_f20a8ea9",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T01:42:17Z",
+      "side": 1,
+      "message": "If A depends on B, then A has dependencies.\n\nSo, I\u0027d say leaf drivers DO have dependencies. It\u0027s the \"root\" nodes of the graph that don\u0027t have dependencies.\n\nSo this whole para needs to be rewritten. For now, I\u0027d say just delete all the text I\u0027ve marked and submit the script?",
+      "range": {
+        "startLine": 31,
+        "startChar": 51,
+        "endLine": 37,
+        "endChar": 79
+      },
+      "revId": "fe0af80ec7e44ccb64c8b6e50de642a8809ce783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

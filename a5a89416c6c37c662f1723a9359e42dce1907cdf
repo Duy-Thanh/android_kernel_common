@@ -101,6 +101,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb9bdf1_79d5bf87",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T01:42:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ef87c38c_58c2d44e",
+      "range": {
+        "startLine": 29,
+        "startChar": 43,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28c254e1_e9636c54",
@@ -171,6 +195,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a625b42_9441b9d7",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T01:42:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5c5e827a_29085f4c",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 27
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ab56ab2_a2dbe1da",
@@ -218,6 +266,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17073935_24a90e72",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T01:42:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f13cec30_b8728d60",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 35
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d8d1387_a0313a46",
@@ -255,6 +327,30 @@
       "side": 1,
       "message": "devs_to_module_list()",
       "parentUuid": "7d8d1387_a0313a46",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 21
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "050ac85c_6c808691",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T01:42:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "26b232ef_93b3161d",
       "range": {
         "startLine": 105,
         "startChar": 0,
@@ -490,6 +586,30 @@
       "side": 1,
       "message": "This makes sense to me. I implemented it as described above in the next patchset.",
       "parentUuid": "19af7fba_91f0d83a",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 36
+      },
+      "revId": "a5a89416c6c37c662f1723a9359e42dce1907cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fa03110_49d0e1fd",
+        "filename": "scripts/device-dependencies.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T01:42:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "042f2a68_17493964",
       "range": {
         "startLine": 183,
         "startChar": 0,
