@@ -16,6 +16,24 @@
       "message": "what happened to the upstream version of this instead?  Doing a hook like this means you have given up ever trying to fix mainline and this will be required for all time going forward.",
       "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf0d72b_2f0c78a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2022-08-05T10:41:37Z",
+      "side": 1,
+      "message": "Originally, port initialization will keep doing retry to connect when bad accessories are still connected to a USB Host. For Android devices, the retry will cause some timeout issues, such as reboot timeout. In addition, only usbcore driver could know the status of port initialization, so I add this commit to provide the status if vendors want to check.",
+      "parentUuid": "230a8ac0_266e31d0",
+      "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
