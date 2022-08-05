@@ -52,6 +52,24 @@
       "parentUuid": "baf0d72b_2f0c78a4",
       "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e48b6e2b_3bb4e4dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-05T12:31:09Z",
+      "side": 1,
+      "message": "Also, what happened to your upstream submission for a real solution to this issue?  Papering over this \"broken USB hardware\" issue with a vendor-specific android hook feels very wrong as every vendor will have to implement the same heuristics in that hook.\n\nPlease solve this upstream first.",
+      "parentUuid": "03e0c0b5_f6ec474e",
+      "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
