@@ -52,6 +52,23 @@
       "parentUuid": "b09ae113_7c91433d",
       "revId": "0188c903eb99c6b554787341e2f40fca121a46b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a856e0ff_d6b7eb21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-08-05T14:44:15Z",
+      "side": 1,
+      "message": "szuweilin@ is this expected that no presubmit configs on this branch?",
+      "revId": "0188c903eb99c6b554787341e2f40fca121a46b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
