@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68f34b3f_ade5c374",
+        "filename": "scripts/driver-dependencies.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T20:55:37Z",
+      "side": 1,
+      "message": "Lol, that\u0027s because single quotes means don\u0027t expand variables. But you had to use them because I had used `\"` in the command. Another option (Not asking you to change it) is to flip the `\u0027` and `\"`. So sed would use `\u0027` and the whole command would use `\"`.\n\nMake sure it\u0027s working correctly though. I guess that\u0027s why you needed to escape the `$` to make sure it doesn\u0027t actually run find and sed locally.",
+      "parentUuid": "c54e95c2_54b0b3db",
+      "range": {
+        "startLine": 84,
+        "startChar": 25,
+        "endLine": 84,
+        "endChar": 27
+      },
+      "revId": "0e65dc26c37c9641ae046bc78adfceb84bb37773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32ccd918_db43b513",
         "filename": "scripts/driver-dependencies.sh",
         "patchSetId": 3
