@@ -88,6 +88,24 @@
       "parentUuid": "e48b6e2b_3bb4e4dd",
       "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86bbb556_c3ef52e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-05T15:15:59Z",
+      "side": 1,
+      "message": "You are doing this for some unknown broken usb device that the android system is plugging itself into, so this needs to be done for ALL android systems in order to work properly with these broken devices, right?\n\nWhy not just add a quirk for these known broken devices that are causing problems?  Trying to do a module parameter obviously does not work as that does not handle multiple host controllers at all.",
+      "parentUuid": "9909e3ac_8dd1cd02",
+      "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
