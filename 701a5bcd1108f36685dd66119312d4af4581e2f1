@@ -70,6 +70,24 @@
       "parentUuid": "03e0c0b5_f6ec474e",
       "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9909e3ac_8dd1cd02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2022-08-05T15:04:41Z",
+      "side": 1,
+      "message": "\u003e Why not do this in your host controller driver hooks instead?\nSince the get-descriptor result is only accessed in hub.c, I added the hook into hub.c.\n\n\u003e Papering over this \"broken USB hardware\" issue with a vendor-specific android hook feels very wrong as every vendor will have to implement the same heuristics in that hook.\nAs I know, the hook needs to be registered so that vendor could ignore the hook if they didn\u0027t need it. Please correct me if there is anything wrong.\n\n\u003e Also, what happened to your upstream submission for a real solution to this issue?\nI tried to upstream the method for module parameter or add CONFIG_USB_FEW_INIT_RETRIES, but they are not good ways to do.",
+      "parentUuid": "e48b6e2b_3bb4e4dd",
+      "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
