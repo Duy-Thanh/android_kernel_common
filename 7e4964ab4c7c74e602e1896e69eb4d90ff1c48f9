@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea33f8f_e3156626",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-08-05T12:30:04Z",
+      "side": 1,
+      "message": "That may be because you had already updated the XML.",
+      "parentUuid": "ecb77f66_cb5b12e9",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 61
+      },
+      "revId": "7e4964ab4c7c74e602e1896e69eb4d90ff1c48f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4a254eb_fc230cfb",
