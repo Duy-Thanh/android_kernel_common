@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38e03f93_00079585",
+        "filename": "scripts/driver-dependencies.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-08-05T20:57:46Z",
+      "side": 1,
+      "message": "Yes, I\u0027ve verified that the command is working as expected.",
+      "parentUuid": "68f34b3f_ade5c374",
+      "range": {
+        "startLine": 84,
+        "startChar": 25,
+        "endLine": 84,
+        "endChar": 27
+      },
+      "revId": "0e65dc26c37c9641ae046bc78adfceb84bb37773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32ccd918_db43b513",
         "filename": "scripts/driver-dependencies.sh",
         "patchSetId": 3
