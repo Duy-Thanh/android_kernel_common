@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7030f981_6e1fa090",
+        "filename": "scripts/driver-dependencies.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-08-05T20:59:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "38e03f93_00079585",
+      "range": {
+        "startLine": 84,
+        "startChar": 25,
+        "endLine": 84,
+        "endChar": 27
+      },
+      "revId": "0e65dc26c37c9641ae046bc78adfceb84bb37773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32ccd918_db43b513",
