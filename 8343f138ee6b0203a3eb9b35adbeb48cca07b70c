@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c19da4_5996ece8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-08T07:00:24Z",
+      "side": 1,
+      "message": "Sorry, but /proc/cpuinfo can not be changed, it is a user/kernel api that can only be modified if you get your changes upstream.",
+      "revId": "8343f138ee6b0203a3eb9b35adbeb48cca07b70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
