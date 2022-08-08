@@ -339,6 +339,8 @@ static int dw_pcie_msi_host_init(struct dw_pcie_rp *pp)
 	struct platform_device *pdev = to_platform_device(dev);
 	int ret;
 	u32 ctrl, num_ctrls;
+	bool msi_64b = false;
+	u16 msi_capabilities;
 
 	for (ctrl = 0; ctrl < MAX_MSI_CTRLS; ctrl++)
 		pp->irq_mask[ctrl] = ~0;
@@ -376,9 +378,17 @@ static int dw_pcie_msi_host_init(struct dw_pcie_rp *pp)
 						    dw_chained_msi_isr, pp);
 	}
 
-	ret = dma_set_mask_and_coherent(dev, DMA_BIT_MASK(32));
+	msi_capabilities = dw_pcie_msi_capabilities(pci);
+	if (msi_capabilities & PCI_MSI_FLAGS_ENABLE)
+		msi_64b = msi_capabilities & PCI_MSI_FLAGS_64BIT ? true : false;
+
+	dev_info(dev, "Setting MSI DMA mask to %s-bit.\n",
+		msi_64b ? "64" : "32");
+	ret = dma_set_mask_and_coherent(dev, msi_64b ?
+					DMA_BIT_MASK(64) : DMA_BIT_MASK(32));
 	if (ret)
-		dev_warn(dev, "Failed to set DMA mask to 32-bit. Devices with only 32-bit MSI support may not work properly\n");
+		dev_warn(dev, "Failed to set DMA mask to %s-bit.\n",
+			 msi_64b ? "64" : "32");
 
 	pp->msi_page = dma_alloc_coherent(dev, PAGE_SIZE,
 					  &pp->msi_data,

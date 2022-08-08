@@ -432,6 +432,7 @@ void dw_pcie_host_deinit(struct dw_pcie_rp *pp);
 int dw_pcie_allocate_domains(struct dw_pcie_rp *pp);
 void __iomem *dw_pcie_own_conf_map_bus(struct pci_bus *bus, unsigned int devfn,
 				       int where);
+u16 dw_pcie_msi_capabilities(struct dw_pcie *pci);
 #else
 static inline irqreturn_t dw_handle_msi_irq(struct dw_pcie_rp *pp)
 {
@@ -461,6 +462,11 @@ static inline void __iomem *dw_pcie_own_conf_map_bus(struct pci_bus *bus,
 						     int where)
 {
 	return NULL;
+}
+
+static inline u16 dw_pcie_msi_capabilities(struct dw_pcie *pci)
+{
+	return 0;
 }
 #endif
 
