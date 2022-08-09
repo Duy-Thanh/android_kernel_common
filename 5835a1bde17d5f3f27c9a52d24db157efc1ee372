@@ -16,6 +16,24 @@
       "message": "Cannot rebase cleanly. Can you regenerate the XML?",
       "revId": "5835a1bde17d5f3f27c9a52d24db157efc1ee372",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb0d9e13_d203eb6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2022-08-09T10:40:18Z",
+      "side": 1,
+      "message": "I have updated and regenerated the XML and symbol changes. Please review .",
+      "parentUuid": "1f1ec892_997f01b4",
+      "revId": "5835a1bde17d5f3f27c9a52d24db157efc1ee372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
