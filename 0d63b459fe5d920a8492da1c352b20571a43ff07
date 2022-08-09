@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f3ce4cb_1e004c95",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 2059,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-09T17:50:01Z",
+      "side": 1,
+      "message": "not needed in this commit, that comes at the end when you update the .xml file.  As-is, this will break the build.",
+      "range": {
+        "startLine": 2059,
+        "startChar": 0,
+        "endLine": 2059,
+        "endChar": 37
+      },
+      "revId": "0d63b459fe5d920a8492da1c352b20571a43ff07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
