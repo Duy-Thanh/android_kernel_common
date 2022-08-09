@@ -106,6 +106,24 @@
       "parentUuid": "9909e3ac_8dd1cd02",
       "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d0ee9c9_926c3d75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2022-08-09T14:19:01Z",
+      "side": 1,
+      "message": "\u003e You are doing this for some unknown broken usb device that the android system is plugging itself into, so this needs to be done for ALL android systems in order to work properly with these broken devices, right?\nYes, I hope devices didn\u0027t enter ramdump or reset when they connected with these broken accessories.\n\n\u003e Why not just add a quirk for these known broken devices that are causing problems?\nThe usb quirks need vendor/product IDs, but USB enumeration is not complete so that we can\u0027t use usb quirk.\n\nI found there is a port quirk which I can use this quirk to do the same thing. I am checking it. In addition, I may try to add override callback for hub_enable_device(). I will try two methods.",
+      "parentUuid": "86bbb556_c3ef52e6",
+      "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
