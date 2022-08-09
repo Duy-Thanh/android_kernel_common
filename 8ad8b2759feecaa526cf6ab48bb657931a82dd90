@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a5a42fa_e1aab589",
+        "filename": "mm/slab_common.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-09T01:08:10Z",
+      "side": 1,
+      "message": "Technically kernel command-line is counted as UAPI. Question to Todd and Greg: are we ok with adding an out-of-tree one?\n\nI don\u0027t think a vendor hook could be used because the value is used in __init function.",
+      "range": {
+        "startLine": 664,
+        "startChar": 9,
+        "endLine": 664,
+        "endChar": 33
+      },
+      "revId": "8ad8b2759feecaa526cf6ab48bb657931a82dd90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
