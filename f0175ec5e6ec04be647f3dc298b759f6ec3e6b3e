@@ -16,6 +16,24 @@
       "message": "that is removing a kernel security feature and needs to be approved by the Android security team first.\n\nHave you gotten that approval yet?",
       "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb5eff5_f557767c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1860540
+      },
+      "writtenOn": "2022-08-09T19:57:35Z",
+      "side": 1,
+      "message": "..also Vivek you are not explaining why you had to disable swap randomization in commit text.",
+      "parentUuid": "ea57777d_089b6509",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
