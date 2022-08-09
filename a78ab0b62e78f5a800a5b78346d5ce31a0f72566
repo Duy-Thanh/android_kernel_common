@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b8088c2_4f393336",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-09T06:02:41Z",
+      "side": 1,
+      "message": "Switched to using Connor\u0027s reworked version: https://android-review.googlesource.com/c/kernel/common/+/2153193/3",
+      "revId": "a78ab0b62e78f5a800a5b78346d5ce31a0f72566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71a9998b_45bcda7c",
