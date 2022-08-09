@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea57777d_089b6509",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-09T17:45:30Z",
+      "side": 1,
+      "message": "that is removing a kernel security feature and needs to be approved by the Android security team first.\n\nHave you gotten that approval yet?",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
