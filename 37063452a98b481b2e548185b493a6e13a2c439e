@@ -94,6 +94,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c457a7c_dd85a226",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-09T06:01:50Z",
+      "side": 1,
+      "message": "Switched to connor\u0027s version here: https://android-review.googlesource.com/c/kernel/common/+/2153193/3",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9edb3da_6fbe124c",
@@ -146,6 +163,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e643f5_69d5a852",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-09T06:01:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dfe9d404_0ee3b333",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38a5bfb0_2fa7859b",
@@ -181,6 +216,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e7d5ce_836faccb",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-09T06:01:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b4de1f87_310cb70c",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05a2d1f3_030df988",
@@ -194,6 +247,24 @@
       "writtenOn": "2022-07-13T22:16:20Z",
       "side": 1,
       "message": "The cpupri values not indexing intuitively to the task priorities makes this comparison particularly confusing.  Rather than comparing the convert_prio(p-\u003eprio) value here, I suspect this can be more clearly replaced with: rt_task(p)",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "163cce84_e3609936",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-09T06:01:50Z",
+      "side": 1,
+      "message": "This was dropped switching to Connor\u0027s version.",
+      "parentUuid": "05a2d1f3_030df988",
       "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -252,6 +323,24 @@
       "side": 1,
       "message": "I think you can just drop this too if you use fitness_fn properly which handles all these cases.",
       "parentUuid": "cd126197_e6515046",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e64bc6ce_2b2a6a67",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-09T06:01:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "91c1146b_1326c24b",
       "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
