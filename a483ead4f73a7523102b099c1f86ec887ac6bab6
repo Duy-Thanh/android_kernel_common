@@ -3,6 +3,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c097525_59201d9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-08-09T17:09:40Z",
+      "side": 1,
+      "message": "\u003e Commit needs to contain a properly formatted Bug: or Fixes: line\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "42a08021_f7440e95",
+      "revId": "a483ead4f73a7523102b099c1f86ec887ac6bab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a62027e_31c4dd18",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
