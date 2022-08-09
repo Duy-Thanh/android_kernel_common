@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03b1e259_5d4e762c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-09T00:28:43Z",
+      "side": 1,
+      "message": "In all the patches you need a valid bug number. Since I -1\u0027ed the first one I\u0027ll ignore that issue in the rest and will +2 if a patch does not have any other issue to indicate that I reviewed it.",
+      "revId": "a5939b16dae063b60e3c912e6a458eaa9e894810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
