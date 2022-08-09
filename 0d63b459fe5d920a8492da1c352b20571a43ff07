@@ -22,6 +22,29 @@
       },
       "revId": "0d63b459fe5d920a8492da1c352b20571a43ff07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39fd0ea4_6f0eb8d2",
+        "filename": "include/linux/irqchip/arm-gic-v3.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-09T18:20:45Z",
+      "side": 1,
+      "message": "why?\n\nThe branch is KMI frozen, so this can\u0027t be accepted...but even if it were, the commit message needs a pretty compelling argument for why so many are needed - and even if all are needed, why is it not just a single ANDROID_VENDOR_DATA_ARRAY?",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 24
+      },
+      "revId": "0d63b459fe5d920a8492da1c352b20571a43ff07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
