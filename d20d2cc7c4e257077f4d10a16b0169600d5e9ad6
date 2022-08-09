@@ -16,6 +16,24 @@
       "message": "I don\u0027t see page_to_lruvec() function here.",
       "revId": "d20d2cc7c4e257077f4d10a16b0169600d5e9ad6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d6e97d_c5436068",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-09T06:35:39Z",
+      "side": 1,
+      "message": "Because I had found that func:mem_cgroup_page_lruvec was defined in include/linux/memcontrol.h, i can call it instead of page_to_lruvec if so.\n\n777 static inline struct lruvec *mem_cgroup_page_lruvec(struct page *page)     \n778 {                                                                          \n779         pg_data_t *pgdat \u003d page_pgdat(page);                               \n780         struct mem_cgroup *memcg \u003d page_memcg(page);                       \n781                                                                            \n782         VM_WARN_ON_ONCE_PAGE(!memcg \u0026\u0026 !mem_cgroup_disabled(), page);      \n783         return mem_cgroup_lruvec(memcg, pgdat);                            \n784 } \n \nI had compiled pass but not test because our platform-software of kernel-5.10 has not been build.",
+      "parentUuid": "60d489c2_d3404ee3",
+      "revId": "d20d2cc7c4e257077f4d10a16b0169600d5e9ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
