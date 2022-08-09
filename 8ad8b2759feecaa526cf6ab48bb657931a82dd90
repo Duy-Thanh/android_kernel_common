@@ -22,6 +22,30 @@
       },
       "revId": "8ad8b2759feecaa526cf6ab48bb657931a82dd90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4426407_f0dec8dd",
+        "filename": "mm/slab_common.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-09T18:28:45Z",
+      "side": 1,
+      "message": "It isn\u0027t strictly considered UAPI (we don\u0027t necessarily require it to land upstream first) and we have allowed cases like this in the past, however we do want to be careful about this. Is there really no other way? Can we give it a name that we can be confident would never collide with an upstream option (eg \"_android_kmalloc_minalign\")?",
+      "parentUuid": "3a5a42fa_e1aab589",
+      "range": {
+        "startLine": 664,
+        "startChar": 9,
+        "endLine": 664,
+        "endChar": 33
+      },
+      "revId": "8ad8b2759feecaa526cf6ab48bb657931a82dd90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
