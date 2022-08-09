@@ -2079,6 +2079,9 @@
   __tracepoint_android_vh_ufs_send_uic_command
   __tracepoint_android_vh_ufs_update_sdev
   __tracepoint_android_vh_update_topology_flags_workfn
+  __tracepoint_android_vh_disable_randomization
+  __tracepoint_android_vh_init_arch_hibernate_hdr
+  __tracepoint_android_vh_check_randomization
   __tracepoint_binder_transaction_received
   __tracepoint_cpu_frequency_limits
   __tracepoint_cpu_idle
