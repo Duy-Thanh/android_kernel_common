@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a62027e_31c4dd18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-09T17:07:21Z",
+      "side": 1,
+      "message": "figuring out what caused this \"breakage\" would be great, as odds are other devices also need this symbol.\n\nWhat driver needs this that previously did not?",
+      "revId": "a483ead4f73a7523102b099c1f86ec887ac6bab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
