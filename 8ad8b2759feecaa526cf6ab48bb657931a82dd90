@@ -46,6 +46,30 @@
       },
       "revId": "8ad8b2759feecaa526cf6ab48bb657931a82dd90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6413e6bd_109cab02",
+        "filename": "mm/slab_common.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-08-09T18:55:28Z",
+      "side": 1,
+      "message": "I\u0027m not opposed to naming it something else.\n\nThe reason I did it this way (making this something that can be opted into at runtime) is so that it doesn\u0027t break the KMI for devices that have modules compiled with kmalloc\u0027s minimum size as 128 bytes. Those devices will be unaffected by these changes, as by default they won\u0027t have this commandline parameter set.",
+      "parentUuid": "e4426407_f0dec8dd",
+      "range": {
+        "startLine": 664,
+        "startChar": 9,
+        "endLine": 664,
+        "endChar": 33
+      },
+      "revId": "8ad8b2759feecaa526cf6ab48bb657931a82dd90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
