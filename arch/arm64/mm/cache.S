@@ -230,9 +230,12 @@ SYM_FUNC_END_PI(__dma_flush_area)
  *	- dir	- DMA direction
  */
 SYM_FUNC_START_PI(__dma_map_area)
+<<<<<<< HEAD   (022253 ANDROID: GKI: remove CONFIG_RANDOM_TRUST_CPU=y from gki_defc)
 	add	x1, x0, x1
 	cmp	w2, #DMA_FROM_DEVICE
 	b.eq	__dma_inv_area
+=======
+>>>>>>> BRANCH (6a7c3b Linux 5.10.125)
 	b	__dma_clean_area
 SYM_FUNC_END_PI(__dma_map_area)
 
