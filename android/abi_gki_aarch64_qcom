@@ -2194,6 +2194,7 @@
   sg_init_one
   sg_init_table
   sg_miter_next
+  sg_miter_skip
   sg_miter_start
   sg_miter_stop
   sg_next
@@ -2233,6 +2234,7 @@
   skb_complete_wifi_ack
   skb_copy
   skb_copy_bits
+  skb_copy_datagram_from_iter
   skb_copy_datagram_iter
   skb_copy_expand
   skb_dequeue
@@ -2321,6 +2323,7 @@
   snprintf
   soc_device_register
   soc_device_unregister
+  sock_alloc_send_pskb
   sock_alloc_send_skb
   __sock_create
   sock_create_kern
@@ -2498,6 +2501,8 @@
   trace_get_event_file
   trace_handle_return
   __traceiter_android_rvh_account_irq
+  __tracepoint_android_rvh_account_irq_end
+  __tracepoint_android_rvh_account_irq_start
   __traceiter_android_rvh_after_dequeue_task
   __traceiter_android_rvh_after_enqueue_task
   __traceiter_android_rvh_build_perf_domains
