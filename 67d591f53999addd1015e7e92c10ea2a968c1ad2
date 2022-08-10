@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1328f1c3_5722b1d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-08-10T08:59:30Z",
+      "side": 1,
+      "message": "Hi, Amit\n\nAs the subject of this change specified to db845c, just want to check that if you have tested with the hikey960 build? it failed to load the mali module with the error of \"mali_kbase: Unknown symbol refcount_warn_saturate (err -2)\", which seems to be resolved with this change as well.\n\n\n",
+      "revId": "67d591f53999addd1015e7e92c10ea2a968c1ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
