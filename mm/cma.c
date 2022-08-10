@@ -36,6 +36,11 @@
 #include "internal.h"
 #include "cma.h"
 
+#undef CREATE_TRACE_POINTS
+#ifndef __GENKSYMS__
+#include <trace/hooks/mm.h>
+#endif
+
 struct cma cma_areas[MAX_CMA_AREAS];
 unsigned int cma_area_count;
 
@@ -799,7 +804,14 @@ static int cma_range_alloc(struct cma *cma, struct cma_memrange *cmr,
 	if (bitmap_count > bitmap_maxno)
 		goto out;
 
+<<<<<<< HEAD   (5ba878e6b0187011b5635a5cecf46580b0e22263 ANDROID: Re-apply vendor hooks for information of blocked ta)
 	for (start = 0; ; start = bitmap_no + mask + 1) {
+||||||| BASE   (0923bde922b4f6146150bac0d5b98827f9d4984b ANDROID: vendor_hooks: add hook to optimize the madvise proc)
+	for (;;) {
+=======
+	trace_android_vh_cma_alloc_retry(cma->name, &max_retries);
+	for (;;) {
+>>>>>>> CHANGE (5fa4c0d2c0fc53593c70acb5876e2208ea0eba24 ANDROID: mm/cma: add vendor_hook in cma_alloc for retries)
 		spin_lock_irq(&cma->lock);
 		/*
 		 * If the request is larger than the available number
