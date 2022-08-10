@@ -19,6 +19,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f78abb87_ddbff5f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2022-08-10T08:06:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c097525_59201d9a",
+      "revId": "a483ead4f73a7523102b099c1f86ec887ac6bab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a62027e_31c4dd18",
@@ -32,6 +50,24 @@
       "writtenOn": "2022-08-09T17:07:21Z",
       "side": 1,
       "message": "figuring out what caused this \"breakage\" would be great, as odds are other devices also need this symbol.\n\nWhat driver needs this that previously did not?",
+      "revId": "a483ead4f73a7523102b099c1f86ec887ac6bab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab34c81e_0403c102",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2022-08-10T08:06:57Z",
+      "side": 1,
+      "message": "Narrowed down the breakage to v5.4.208 commit 0d3182fbe689 (\"locking/refcount: Move saturation warnings out of line\"), which adds and export refcount_warn_saturate(). It is called only from refcount.h helpers and not directly from any of the existing db845c drivers.",
+      "parentUuid": "0a62027e_31c4dd18",
       "revId": "a483ead4f73a7523102b099c1f86ec887ac6bab6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
