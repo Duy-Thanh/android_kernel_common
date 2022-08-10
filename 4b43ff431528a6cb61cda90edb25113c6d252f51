@@ -16,6 +16,24 @@
       "message": "upstream rejected this, please do this properly.",
       "revId": "4b43ff431528a6cb61cda90edb25113c6d252f51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46e8b4dc_6e7fc5b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2022-08-10T09:31:15Z",
+      "side": 1,
+      "message": "Ack.\n\nI will change to use Android vendor hook instead.",
+      "parentUuid": "427125da_31de9593",
+      "revId": "4b43ff431528a6cb61cda90edb25113c6d252f51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
