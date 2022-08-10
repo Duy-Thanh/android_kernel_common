@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1cef1bc_9424e6df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-10T13:59:08Z",
+      "side": 1,
+      "message": "this is not an allowed symbol, no driver should ever be writing directly to a disk.  Please fix the driver.",
+      "range": {
+        "startLine": 18,
+        "startChar": 25,
+        "endLine": 18,
+        "endChar": 37
+      },
+      "revId": "758457ae3290fbef1b5e9f8deaf8f9ed58bde23a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
