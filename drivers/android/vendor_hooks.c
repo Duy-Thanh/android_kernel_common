@@ -410,3 +410,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout);
  */
 const struct readahead_control *GKI_struct_readahead_control;
 EXPORT_SYMBOL_GPL(GKI_struct_readahead_control);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);
