@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8214a42c_59767ba5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-10T17:21:24Z",
+      "side": 1,
+      "message": "Doing the bare minimum to get a build after cherry picking from the ARCVM repo results in the two CLs in this topic. Please let me know what needs to be updated so this is merge-able",
+      "revId": "f13a74e70a6470055ad4b0ef14d672653c7fa90a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f70bfdeb_859780ce",
+        "filename": "include/uapi/linux/virtio_ids.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-10T17:21:24Z",
+      "side": 1,
+      "message": "This was just copied from the ARCVM branch; I\u0027m not sure what these values should actually be..",
+      "revId": "f13a74e70a6470055ad4b0ef14d672653c7fa90a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
