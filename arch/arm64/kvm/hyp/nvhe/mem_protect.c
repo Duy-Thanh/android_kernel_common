@@ -20,6 +20,10 @@
 #include <nvhe/mm.h>
 
 #define KVM_HOST_S2_FLAGS (KVM_PGTABLE_S2_NOFWB | KVM_PGTABLE_S2_IDMAP)
+#define KVM_HOST_S2_DEFAULT_ATTR   (KVM_PTE_LEAF_ATTR_LO_S2_MEMATTR | \
+                     KVM_PTE_LEAF_ATTR_LO_S2_S2AP_R | \
+                     KVM_PTE_LEAF_ATTR_LO_S2_S2AP_W | \
+                     KVM_PTE_LEAF_ATTR_LO_S2_SH)
 
 struct host_mmu host_mmu;
 
@@ -176,7 +180,7 @@ static bool guest_stage2_force_pte_cb(u64 addr, u64 end,
 
 static bool guest_stage2_pte_is_counted(kvm_pte_t pte)
 {
-	return host_stage2_pte_is_counted(pte);
+	return !!pte;
 }
 
 static void *guest_s2_zalloc_pages_exact(size_t size)
@@ -552,7 +556,14 @@ static bool host_stage2_pte_is_counted(kvm_pte_t pte)
 	 * encode ownership of a page to another entity than the page-table
 	 * owner, whose id is 0.
 	 */
-	return !!pte;
+	if (!kvm_pte_valid(pte))
+		return !!pte;
+
+	if ((pte & KVM_PTE_LEAF_ATTR_HI_SW) != 0)
+		return true;
+
+	pte &= KVM_HOST_S2_DEFAULT_ATTR;
+	return pte != KVM_HOST_S2_DEFAULT_ATTR;
 }
 
 static int host_stage2_idmap(u64 addr)
