@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f61d1753_ffc8bdd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-10T17:44:58Z",
+      "side": 1,
+      "message": "Please comply with the contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md (or click on the Lint-1 label)",
+      "revId": "f13a74e70a6470055ad4b0ef14d672653c7fa90a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f70bfdeb_859780ce",
