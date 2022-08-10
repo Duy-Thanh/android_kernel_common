@@ -22,6 +22,10 @@
 #include <nvhe/mm.h>
 
 #define KVM_HOST_S2_FLAGS (KVM_PGTABLE_S2_NOFWB | KVM_PGTABLE_S2_IDMAP)
+#define KVM_HOST_S2_DEFAULT_ATTR   (KVM_PTE_LEAF_ATTR_LO_S2_MEMATTR | \
+				KVM_PTE_LEAF_ATTR_LO_S2_S2AP_R | \
+				KVM_PTE_LEAF_ATTR_LO_S2_S2AP_W | \
+				KVM_PTE_LEAF_ATTR_LO_S2_SH)
 
 struct host_mmu host_mmu;
 
@@ -178,7 +182,7 @@ static bool guest_stage2_force_pte_cb(u64 addr, u64 end,
 
 static bool guest_stage2_pte_is_counted(kvm_pte_t pte)
 {
-	return host_stage2_pte_is_counted(pte);
+	return !!pte;
 }
 
 static void *guest_s2_zalloc_pages_exact(size_t size)
@@ -661,12 +665,28 @@ static bool host_stage2_force_pte(u64 addr, u64 end, enum kvm_pgtable_prot prot)
 
 static bool host_stage2_pte_is_counted(kvm_pte_t pte)
 {
+	enum kvm_pgtable_prot prot = kvm_pgtable_stage2_pte_prot(pte);
+	u64 prot_mask = 0, default_pte = 0;
+
 	/*
 	 * The refcount tracks valid entries as well as invalid entries if they
 	 * encode ownership of a page to another entity than the page-table
 	 * owner, whose id is 0.
 	 */
-	return !!pte;
+	if (!kvm_pte_valid(pte))
+		return !!pte;
+
+	if ((pte & KVM_PTE_LEAF_ATTR_HI_SW) != 0)
+		return true;
+
+	if (!(prot & KVM_PGTABLE_PROT_X))
+		prot_mask |= KVM_PTE_LEAF_ATTR_HI_S1_XN;
+
+	prot_mask |= KVM_HOST_S2_DEFAULT_ATTR;
+	default_pte = prot_mask;
+	pte &= prot_mask;
+
+	return pte != default_pte;
 }
 
 static int host_stage2_idmap(u64 addr)
