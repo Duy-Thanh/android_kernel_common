@@ -390,6 +390,9 @@ DECLARE_HOOK(android_vh_customize_thp_gfp_orders,
 DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
 	TP_PROTO(struct zone *zone, u64 interval),
 	TP_ARGS(zone, interval));
+DECLARE_HOOK(android_vh_cma_alloc_retry,
+	TP_PROTO(char *name, int *retry),
+	TP_ARGS(name, retry));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
