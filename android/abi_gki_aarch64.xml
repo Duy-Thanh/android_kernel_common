@@ -780,6 +780,7 @@
       <elf-symbol name='alloc_chrdev_region' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe3ec2f2b'/>
       <elf-symbol name='alloc_etherdev_mqs' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xef1766f7'/>
       <elf-symbol name='alloc_io_pgtable_ops' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4b0dbb7e'/>
+      <elf-symbol name='alloc_iova_fast' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7c9bed48'/>
       <elf-symbol name='alloc_netdev_mqs' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x281e7f55'/>
       <elf-symbol name='alloc_page_buffers' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x34fc14dd'/>
       <elf-symbol name='alloc_pages_exact' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5fc72f0e'/>
@@ -2504,6 +2505,7 @@
       <elf-symbol name='free_buffer_head' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfd64922f'/>
       <elf-symbol name='free_candev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9a19aeb7'/>
       <elf-symbol name='free_io_pgtable_ops' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9e5c5bed'/>
+      <elf-symbol name='free_iova_fast' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6907c213'/>
       <elf-symbol name='free_irq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc1514a3b'/>
       <elf-symbol name='free_netdev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4f21dc78'/>
       <elf-symbol name='free_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4302d0eb'/>
@@ -120249,6 +120251,13 @@
         <parameter type-id='eaa32e2f' name='cookie' filepath='drivers/iommu/io-pgtable.c' line='31' column='1'/>
         <return type-id='bf4bdb64'/>
       </function-decl>
+      <function-decl name='alloc_iova_fast' mangled-name='alloc_iova_fast' filepath='include/linux/iova.h' line='152' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='alloc_iova_fast'>
+        <parameter type-id='0c2c419d'/>
+        <parameter type-id='7359adad'/>
+        <parameter type-id='7359adad'/>
+        <parameter type-id='c894953d'/>
+        <return type-id='7359adad'/>
+      </function-decl>
       <function-decl name='alloc_netdev_mqs' mangled-name='alloc_netdev_mqs' filepath='include/linux/netdevice.h' line='4467' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='alloc_netdev_mqs'>
         <parameter type-id='95e97e5e'/>
         <parameter type-id='80f4b756'/>
@@ -129378,6 +129387,12 @@
       </function-decl>
       <function-decl name='free_io_pgtable_ops' mangled-name='free_io_pgtable_ops' filepath='drivers/iommu/io-pgtable.c' line='59' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='free_io_pgtable_ops'>
         <parameter type-id='bf4bdb64' name='ops' filepath='drivers/iommu/io-pgtable.c' line='59' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='free_iova_fast' mangled-name='free_iova_fast' filepath='include/linux/iova.h' line='147' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='free_iova_fast'>
+        <parameter type-id='0c2c419d'/>
+        <parameter type-id='7359adad'/>
+        <parameter type-id='7359adad'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='free_irq' mangled-name='free_irq' filepath='include/linux/interrupt.h' line='188' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='free_irq'>
