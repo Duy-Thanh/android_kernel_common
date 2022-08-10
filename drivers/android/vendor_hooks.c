@@ -68,6 +68,7 @@
 #include <trace/hooks/ipv4.h>
 #include <trace/hooks/signal.h>
 #include <trace/hooks/cfg80211.h>
+#include <trace/hooks/v4l2.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -431,3 +432,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_page_to_lrulist);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_del_page_from_lrulist);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_should_be_protected);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mark_page_accessed);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_v4l2_meta_ptr_update);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_v4l2_fill_fmtdesc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_v4l2_strparm_save);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_v4l2_strparm_restore);

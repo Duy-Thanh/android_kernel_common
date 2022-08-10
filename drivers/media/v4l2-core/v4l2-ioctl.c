@@ -29,6 +29,7 @@
 #include <media/v4l2-mem2mem.h>
 
 #include <trace/events/v4l2.h>
+#include <trace/hooks/v4l2.h>
 
 /* Zero out the end of the struct pointed to by p.  Everything after, but
  * not including, the specified field is cleared. */
@@ -1437,6 +1438,7 @@ static void v4l_fill_fmtdesc(struct v4l2_fmtdesc *fmt)
 		case V4L2_PIX_FMT_MT21C:	descr = "Mediatek Compressed Format"; break;
 		case V4L2_PIX_FMT_SUNXI_TILED_NV12: descr = "Sunxi Tiled NV12 Format"; break;
 		default:
+			trace_android_vh_v4l2_fill_fmtdesc(fmt);
 			if (fmt->description[0])
 				return;
 			WARN(1, "Unknown pixelformat 0x%08x\n", fmt->pixelformat);
@@ -2119,6 +2121,8 @@ static int v4l_s_parm(const struct v4l2_ioctl_ops *ops,
 	if (ret)
 		return ret;
 
+	trace_android_vh_v4l2_strparm_save(p);
+
 	/* Note: extendedmode is never used in drivers */
 	if (V4L2_TYPE_IS_OUTPUT(p->type)) {
 		memset(p->parm.output.reserved, 0,
@@ -2131,6 +2135,9 @@ static int v4l_s_parm(const struct v4l2_ioctl_ops *ops,
 		p->parm.capture.extendedmode = 0;
 		p->parm.capture.capturemode &= V4L2_MODE_HIGHQUALITY;
 	}
+
+	trace_android_vh_v4l2_strparm_restore(p);
+
 	return ops->vidioc_s_parm(file, fh, p);
 }
 
