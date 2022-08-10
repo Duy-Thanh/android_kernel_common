@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fde8310_5f6f84b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2022-08-10T14:16:55Z",
+      "side": 1,
+      "message": "db845c kabi breakage on v5.4.208, earlier reported (aosp/2180455) on android12-5.4-lts as well.",
+      "revId": "cc62c7de3d090c3c94fab89299cabc9ebb97d306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
