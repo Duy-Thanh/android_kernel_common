@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15eae0f7_fcdbeb68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-11T12:28:36Z",
+      "side": 1,
+      "message": "Please remove all file access logic from your driver, that is not acceptable behavior for any driver due to the security issues involved.",
+      "revId": "6b4a1a13a61440914988a5cc1d0c411c12059ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d51dee5_fe992d75",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-11T12:28:36Z",
+      "side": 1,
+      "message": "what driver is calling file open and close?  You forgot to remove these as well.",
+      "range": {
+        "startLine": 475,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 11
+      },
+      "revId": "6b4a1a13a61440914988a5cc1d0c411c12059ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5ce5e96_e4224730",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-11T12:28:36Z",
+      "side": 1,
+      "message": "that is not to be used by a non-filesystem driver, as the symbol namespace says.",
+      "range": {
+        "startLine": 1705,
+        "startChar": 2,
+        "endLine": 1705,
+        "endChar": 11
+      },
+      "revId": "6b4a1a13a61440914988a5cc1d0c411c12059ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
