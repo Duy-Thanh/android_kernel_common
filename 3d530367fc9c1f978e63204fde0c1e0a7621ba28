@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d67566d_cad75462",
+        "filename": "mm/internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-11T06:26:37Z",
+      "side": 1,
+      "message": "what are these odd defines for?  Just open-code them properly, don\u0027t use CamelCase functions in Linux please.",
+      "range": {
+        "startLine": 666,
+        "startChar": 8,
+        "endLine": 666,
+        "endChar": 25
+      },
+      "revId": "3d530367fc9c1f978e63204fde0c1e0a7621ba28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
