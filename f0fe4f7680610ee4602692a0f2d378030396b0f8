@@ -16,6 +16,23 @@
       "message": "respin with b/242118705",
       "revId": "f0fe4f7680610ee4602692a0f2d378030396b0f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c71d2c7_2f0ce37e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-11T04:46:31Z",
+      "side": 1,
+      "message": "Robin, is there a respin bug for this? Why is it needed for 2022-05 AND 2022-06?",
+      "revId": "f0fe4f7680610ee4602692a0f2d378030396b0f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
