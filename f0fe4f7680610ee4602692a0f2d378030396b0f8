@@ -33,6 +33,24 @@
       "message": "Robin, is there a respin bug for this? Why is it needed for 2022-05 AND 2022-06?",
       "revId": "f0fe4f7680610ee4602692a0f2d378030396b0f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d012bd_55a953ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-08-11T07:33:22Z",
+      "side": 1,
+      "message": "It\u0027s respin on b/242118705 for b/238177383. 2022-05 is for R4/O6/B3 \n TM kernel and 2022-06 is for C10P10 TM-D1 kernel.",
+      "parentUuid": "3c71d2c7_2f0ce37e",
+      "revId": "f0fe4f7680610ee4602692a0f2d378030396b0f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
