@@ -16,6 +16,23 @@
       "message": "respin with b/242119099",
       "revId": "6522bf85d2629d73056cc2c6d7d1c674bb831507",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c800242_7e86047c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-08-11T05:07:35Z",
+      "side": 1,
+      "message": "It\u0027s respin on b/242118705 for b/238177383. 2022-05 is for R4/O6/B3 \n TM kernel and 2022-06 is for C10P10 TM-D1 kernel.",
+      "revId": "6522bf85d2629d73056cc2c6d7d1c674bb831507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
