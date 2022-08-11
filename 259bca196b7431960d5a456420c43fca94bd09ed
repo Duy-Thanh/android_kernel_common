@@ -16,6 +16,23 @@
       "message": "Hi Vamsi, can you please pull in the latest patch version (V3)?",
       "revId": "259bca196b7431960d5a456420c43fca94bd09ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b831af8_6827dd37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-08-11T18:51:58Z",
+      "side": 1,
+      "message": "Hi Todd/Greg,\n\nIt looks like we need to update this change, as the cherry-picked version was from V1, and it never made it into the usb-next branch.  How should we go about updating this change on the android13-5.15 branch?\n\nDo you want me to submit a revert, and then push a separate change for the newest version? (v3)\n\nThanks",
+      "revId": "259bca196b7431960d5a456420c43fca94bd09ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
