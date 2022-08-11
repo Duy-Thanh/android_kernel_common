@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7284339_d90b07ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-11T06:30:55Z",
+      "side": 1,
+      "message": "hook into the is_visible callback for this attribute group (you need to add that function) as that controls if they should be displayed or not.",
+      "revId": "82e974ec25362d49b3b23a0e76c2d4e2bddbb66f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "315f216d_bc02bd9f",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-11T06:30:55Z",
+      "side": 1,
+      "message": "bool?",
+      "range": {
+        "startLine": 900,
+        "startChar": 1,
+        "endLine": 900,
+        "endChar": 4
+      },
+      "revId": "82e974ec25362d49b3b23a0e76c2d4e2bddbb66f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb94a037_9226976e",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-11T06:30:55Z",
+      "side": 1,
+      "message": "don\u0027t overwrite a structure like this, that is present for ALL devices, just don\u0027t register allow the sysfs files to be shown for this specific device.\n\nYou can do that in the is_visible callback for the attribute group, no need to mess with this here.",
+      "range": {
+        "startLine": 906,
+        "startChar": 2,
+        "endLine": 906,
+        "endChar": 28
+      },
+      "revId": "82e974ec25362d49b3b23a0e76c2d4e2bddbb66f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
