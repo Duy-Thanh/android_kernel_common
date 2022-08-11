@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dfd01e4_d016d527",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-11T08:34:14Z",
+      "side": 1,
+      "message": "these functions are not allowed to be exported for drivers for obvious reasons.",
+      "range": {
+        "startLine": 19,
+        "startChar": 20,
+        "endLine": 20,
+        "endChar": 39
+      },
+      "revId": "d76aa2a705423ce56bed936f60cfe75f88fac638",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f20f3b7a_3f9d25f1",
