@@ -16,6 +16,23 @@
       "message": "Please fix this properly upstream first, like upstream has been asking for for the past 3 years.",
       "revId": "605acb500e6c19859f775146dbcfbd4a0e38b3ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98a88ba_d395e7a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-12T12:25:40Z",
+      "side": 1,
+      "message": "Also you did not link this to the previous submissions where this was rejected for some reason, making this look new.  That\u0027s not very fair to the reviewers of past submissions 😞",
+      "revId": "605acb500e6c19859f775146dbcfbd4a0e38b3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
