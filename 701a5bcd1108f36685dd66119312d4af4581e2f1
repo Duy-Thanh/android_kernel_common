@@ -142,6 +142,24 @@
       "parentUuid": "4d0ee9c9_926c3d75",
       "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe1212a_b0e40e6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-12T12:23:37Z",
+      "side": 1,
+      "message": "Again, this is an upstream problem, so please fix it upstream first.  You are papering over the issue with this android-only vendor hook that you will now have to rely on for the next 20+ years.\n\nLet\u0027s fix this properly please.",
+      "parentUuid": "9fa17897_3fc7e8b6",
+      "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
