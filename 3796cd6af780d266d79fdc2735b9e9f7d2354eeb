@@ -16,6 +16,24 @@
       "message": "I think you\u0027ll need to add a Bug: tag to both of these commits (you can just use the Bug we already have for this work)",
       "revId": "3796cd6af780d266d79fdc2735b9e9f7d2354eeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baddb026_ad7e4da6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-08-12T09:13:46Z",
+      "side": 1,
+      "message": "Thanks, I added it for this patch but I already submitted the other one without this Bug tag 😞",
+      "parentUuid": "237d6fd7_f20f994b",
+      "revId": "3796cd6af780d266d79fdc2735b9e9f7d2354eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
