@@ -51,6 +51,24 @@
       "parentUuid": "f2602a77_3d93fb3a",
       "revId": "259bca196b7431960d5a456420c43fca94bd09ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f21851c_df3d0797",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002168
+      },
+      "writtenOn": "2022-08-12T17:14:10Z",
+      "side": 1,
+      "message": "look like patchet v3 is having additional code change. missed seeing that. probably will come differently i.e. revert on ACK and applying patchset v3",
+      "parentUuid": "9156cabf_a7301bd3",
+      "revId": "259bca196b7431960d5a456420c43fca94bd09ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
