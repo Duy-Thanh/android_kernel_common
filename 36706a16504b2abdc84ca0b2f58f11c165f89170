@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12193dd_1ed4feb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-12T15:58:32Z",
+      "side": 1,
+      "message": "Ack. I will definitely do this after the code is in a reasonable state!",
+      "parentUuid": "7705cb19_57993937",
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f06be699_2dbb3b8d",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-08-12T07:22:04Z",
       "side": 1,
       "message": "odds are you don\u0027t want to do this, have a pointer to this code somewhere so it can be reviewed properly?",
+      "range": {
+        "startLine": 675,
+        "startChar": 2,
+        "endLine": 675,
+        "endChar": 21
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ece413f2_fdcc680f",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-12T15:58:32Z",
+      "side": 1,
+      "message": "Yes!\n\nEssentially what we are trying to do is to convert this file to be an out of tree module:\n\nhttps://source.corp.google.com/chromeos_public/src/third_party/kernel/v5.10/drivers/virtio/virtio_wl.c?q\u003dpackage:%5Cbchrom%20virtio_wl.c\n\nFor context, that is a fork of the ACK and we are trying to move all of our changes into modules or upstream (to Linux or the ACK) so that we can use the ACK directly.\n\nThis is also the first time I\u0027m modifying kernel code so if you have any pointers to useful reading material I would greatly appreciate them..",
+      "parentUuid": "f06be699_2dbb3b8d",
       "range": {
         "startLine": 675,
         "startChar": 2,
