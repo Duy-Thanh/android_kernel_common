@@ -133,6 +133,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f524682a_8211e545",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-12T19:12:55Z",
+      "side": 1,
+      "message": "Oh wait I just realized in case you didn\u0027t see the other CL in the topic, it\u0027s here:\n\nhttps://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/2182315",
+      "parentUuid": "2ddfa31b_d2b341b8",
+      "range": {
+        "startLine": 675,
+        "startChar": 2,
+        "endLine": 675,
+        "endChar": 21
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d428a84_dccc703b",
         "filename": "android/abi_gki_aarch64_virtual_device",
         "patchSetId": 2
