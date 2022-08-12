@@ -124,6 +124,24 @@
       "parentUuid": "86bbb556_c3ef52e6",
       "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fa17897_3fc7e8b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2022-08-12T11:52:40Z",
+      "side": 1,
+      "message": "I found even if I used a quirk, the problem still existed. Since the broken accessory is still connect to a USB host, the USB retry will start in next port initialization. In addition, xHCI driver didn\u0027t still know the enumeration status.\n\nIf I used a callback, xhci driver could know usbcore driver ran the API hub_enable_device() many times, but it didn\u0027t know the enumeration status. Sometimes, it maybe a normal behavior.\n\nTherefore, I think the vendor hook is needed to let the driver which registered a hook know enumeration status and do corresponding handling.",
+      "parentUuid": "4d0ee9c9_926c3d75",
+      "revId": "701a5bcd1108f36685dd66119312d4af4581e2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
