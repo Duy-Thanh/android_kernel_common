@@ -22,6 +22,30 @@
       },
       "revId": "28f51e217341a75f195b5cf2612a41e1eb4e69c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99d90d31_9bad4e76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2022-08-12T08:56:44Z",
+      "side": 1,
+      "message": "Here are all output from the tool. I\u0027m not sure why I don\u0027t see summary messages.\n```\ncommit f15c2a684fb00d6a9b2fbd0bf7cd8e0ef231b9b1 (HEAD -\u003e update_symbol_list-delete-after-push)\nAuthor: Darren Hsu \u003cdarrenhsu@google.com\u003e\nDate:   Fri Aug 12 15:26:16 2022 +0800\n\n    ANDROID: Update the ABI representation\n    \n    2 symbol(s) added\n      \u0027__traceiter_android_vh_try_to_freeze_todo_logging\u0027\n      \u0027__tracepoint_android_vh_try_to_freeze_todo_logging\u0027\n    \n    Bug: 240091483\n    Signed-off-by: Darren Hsu \u003cdarrenhsu@google.com\u003e\n    Change-Id: I2ba595d12385ba86f2d90e6f1014fcf411269591\n```\n```\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n Comparing ABI against expected definition (android/abi_gki_aarch64.xml)\nABI diff reports have been created\n /usr/local/google/home/darrenhsu/kernel_t-dev-gs-pixel-5.10-tm-qpr1/out_aosp_abi/dist/abi.report.plain [4 lines]\n /usr/local/google/home/darrenhsu/kernel_t-dev-gs-pixel-5.10-tm-qpr1/out_aosp_abi/dist/abi.report.flat [4 lines]\n /usr/local/google/home/darrenhsu/kernel_t-dev-gs-pixel-5.10-tm-qpr1/out_aosp_abi/dist/abi.report.small [4 lines]\n /usr/local/google/home/darrenhsu/kernel_t-dev-gs-pixel-5.10-tm-qpr1/out_aosp_abi/dist/abi.report.short [4 lines]\n /usr/local/google/home/darrenhsu/kernel_t-dev-gs-pixel-5.10-tm-qpr1/out_aosp_abi/dist/abi.report.viz [7 lines]\n\nABI DIFFERENCES HAVE BEEN DETECTED!\n\n2 symbol(s) added\n  \u0027__traceiter_android_vh_try_to_freeze_todo_logging\u0027\n  \u0027__tracepoint_android_vh_try_to_freeze_todo_logging\u0027\n\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n Updating expected ABI definition (android/abi_gki_aarch64.xml)\ncp \u0027/usr/local/google/home/darrenhsu/kernel_t-dev-gs-pixel-5.10-tm-qpr1/out_aosp_abi/dist/abi-ASB-2022-08-05_13-5.10-21-g401676722573b.xml\u0027\nUnstaged changes after reset:\nM\tandroid/abi_gki_aarch64.xml\nM\tandroid/abi_gki_aarch64_generic\n[update_symbol_list-delete-after-push c58a09b90cdf9] ANDROID: Update the ABI representation\n 2 files changed, 135 insertions(+), 125 deletions(-)\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n```",
+      "parentUuid": "758033a6_cdc5f467",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 54
+      },
+      "revId": "28f51e217341a75f195b5cf2612a41e1eb4e69c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
