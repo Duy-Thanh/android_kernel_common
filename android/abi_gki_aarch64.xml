@@ -70394,6 +70394,7 @@
         <enumerator name='USRQUOTA' value='0'/>
         <enumerator name='GRPQUOTA' value='1'/>
         <enumerator name='PRJQUOTA' value='2'/>
+        <enumerator name='TSTQUOTA' value='3'/>
       </enum-decl>
       <pointer-type-def type-id='5092aa98' size-in-bits='64' id='9ffa96ee'/>
       <pointer-type-def type-id='4c98260a' size-in-bits='64' id='a00a45e8'/>
@@ -71633,6 +71634,7 @@
         <enumerator name='TCPC_TX_SUCCESS' value='0'/>
         <enumerator name='TCPC_TX_DISCARDED' value='1'/>
         <enumerator name='TCPC_TX_FAILED' value='2'/>
+        <enumerator name='TCPC_TX_TEST' value='3'/>
       </enum-decl>
       <pointer-type-def type-id='d09873ca' size-in-bits='64' id='a2faabac'/>
       <function-type size-in-bits='64' id='a301f696'>
@@ -152027,6 +152029,7 @@
   </abi-corpus>
 </abi-corpus-group>
 
+<!-- Test comment -->
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
