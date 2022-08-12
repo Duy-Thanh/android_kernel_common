@@ -46,6 +46,30 @@
       },
       "revId": "28f51e217341a75f195b5cf2612a41e1eb4e69c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d811dc_f87d1757",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-12T12:30:19Z",
+      "side": 1,
+      "message": "Should look much like the changelog in this commit: https://android-review.googlesource.com/c/kernel/common/+/2176368",
+      "parentUuid": "99d90d31_9bad4e76",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 54
+      },
+      "revId": "28f51e217341a75f195b5cf2612a41e1eb4e69c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
