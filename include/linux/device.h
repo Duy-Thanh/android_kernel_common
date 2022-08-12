@@ -61,6 +61,7 @@ struct dev_iommu;
  * a specific functionality of a subsystem/class of devices.
  */
 struct subsys_interface {
+	int abc;
 	const char *name;
 	struct bus_type *subsys;
 	struct list_head node;
