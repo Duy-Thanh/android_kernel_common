@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fddde14_e80a4ecd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2022-08-12T19:36:36Z",
+      "side": 1,
+      "message": "BTW, do we need to sync exynos driver which is a vendor module? This may give a merge conflict later when merging linux-stable.",
+      "revId": "efdf5f021f5c5305a58555adeda56f5b9e535a86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
