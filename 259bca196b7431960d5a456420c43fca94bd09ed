@@ -33,6 +33,24 @@
       "message": "Hi Todd/Greg,\n\nIt looks like we need to update this change, as the cherry-picked version was from V1, and it never made it into the usb-next branch.  How should we go about updating this change on the android13-5.15 branch?\n\nDo you want me to submit a revert, and then push a separate change for the newest version? (v3)\n\nThanks",
       "revId": "259bca196b7431960d5a456420c43fca94bd09ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9156cabf_a7301bd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002168
+      },
+      "writtenOn": "2022-08-12T16:19:19Z",
+      "side": 1,
+      "message": "Hi Wesley\n\npatch version (v1) is only merged on android13-5.15 \nSo here getting patch version (v1) on qcom KP branch should be ok. I don\u0027t see any code change between patch version (v1) and patch version (v3).\n\nHi Vamsi\n\nPlease go ahead getting this change into KP.",
+      "parentUuid": "f2602a77_3d93fb3a",
+      "revId": "259bca196b7431960d5a456420c43fca94bd09ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
