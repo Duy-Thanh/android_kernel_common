@@ -16,6 +16,23 @@
       "message": "this is updating the merged change to the latest version. (v3)",
       "revId": "1ccb27ddb740fab29bc931e0114c1f2cd698792e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b48539db_62fb0928",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:04:19Z",
+      "side": 1,
+      "message": "why add it again?",
+      "revId": "1ccb27ddb740fab29bc931e0114c1f2cd698792e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
