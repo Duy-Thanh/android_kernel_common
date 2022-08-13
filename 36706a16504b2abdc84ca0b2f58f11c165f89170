@@ -157,6 +157,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4ac4d47_276941c1",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T08:56:08Z",
+      "side": 1,
+      "message": "Please see my comments on that one.  Work on fixing that driver up first, before submitting this commit.",
+      "parentUuid": "f524682a_8211e545",
+      "range": {
+        "startLine": 675,
+        "startChar": 2,
+        "endLine": 675,
+        "endChar": 21
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d428a84_dccc703b",
         "filename": "android/abi_gki_aarch64_virtual_device",
         "patchSetId": 2
