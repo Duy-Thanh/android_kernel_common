@@ -50,6 +50,42 @@
       "message": "doesn\u0027t even build, how was this tested?",
       "revId": "605acb500e6c19859f775146dbcfbd4a0e38b3ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47e15e05_ab5812bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2022-08-15T07:25:03Z",
+      "side": 1,
+      "message": "The hook implementation patch is here: https://partner-android-review.googlesource.com/c/kernel/private/google-modules/aoc/+/2267040",
+      "parentUuid": "1de42260_e29760e6",
+      "revId": "605acb500e6c19859f775146dbcfbd4a0e38b3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25986ba3_0e2a3805",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2022-08-15T07:25:03Z",
+      "side": 1,
+      "message": "So sorry for the bad feeling. It is not no purpose. Since many modifications from the previous patch, I uploaded it directly without the information for previous one.",
+      "parentUuid": "d98a88ba_d395e7a4",
+      "revId": "605acb500e6c19859f775146dbcfbd4a0e38b3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
