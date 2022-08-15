@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1de03d29_24b7415e",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-15T10:36:50Z",
+      "side": 1,
+      "message": "still not needed by a misc driver, please remove.",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 12
+      },
+      "revId": "2c65f165b6f48e8740e18425d922be484d25c9b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
