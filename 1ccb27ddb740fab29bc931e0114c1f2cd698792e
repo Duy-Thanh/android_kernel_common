@@ -33,6 +33,24 @@
       "message": "why add it again?",
       "revId": "1ccb27ddb740fab29bc931e0114c1f2cd698792e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c83199ff_6e8bce02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764341
+      },
+      "writtenOn": "2022-08-15T15:30:25Z",
+      "side": 1,
+      "message": "version v1 is having bug which is causing USB controller doesn\u0027t go into LPM. \nversion v3 is fixing that with pm_runtime_put (line 2509). Hence we are trying to get version v3 merged on ACK by reverting version v1 (which is already merged on ACK but not part of usb-next).",
+      "parentUuid": "b48539db_62fb0928",
+      "revId": "1ccb27ddb740fab29bc931e0114c1f2cd698792e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
