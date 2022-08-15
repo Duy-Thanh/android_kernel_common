@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24593a9_cd5d8f68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-08-15T20:14:33Z",
+      "side": 1,
+      "message": "done",
+      "revId": "82e974ec25362d49b3b23a0e76c2d4e2bddbb66f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "315f216d_bc02bd9f",
@@ -41,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f1075e7_4b20341c",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-08-15T20:14:33Z",
+      "side": 1,
+      "message": "updated in new patchset",
+      "parentUuid": "315f216d_bc02bd9f",
+      "range": {
+        "startLine": 900,
+        "startChar": 1,
+        "endLine": 900,
+        "endChar": 4
+      },
+      "revId": "82e974ec25362d49b3b23a0e76c2d4e2bddbb66f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb94a037_9226976e",
@@ -54,6 +95,30 @@
       "writtenOn": "2022-08-11T06:30:55Z",
       "side": 1,
       "message": "don\u0027t overwrite a structure like this, that is present for ALL devices, just don\u0027t register allow the sysfs files to be shown for this specific device.\n\nYou can do that in the is_visible callback for the attribute group, no need to mess with this here.",
+      "range": {
+        "startLine": 906,
+        "startChar": 2,
+        "endLine": 906,
+        "endChar": 28
+      },
+      "revId": "82e974ec25362d49b3b23a0e76c2d4e2bddbb66f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "083faea5_75ca992b",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-08-15T20:14:33Z",
+      "side": 1,
+      "message": "updated in new patchset",
+      "parentUuid": "fb94a037_9226976e",
       "range": {
         "startLine": 906,
         "startChar": 2,
