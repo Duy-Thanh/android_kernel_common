@@ -1441,9 +1441,6 @@ static int cpufreq_online(unsigned int cpu)
 			policy->max_freq_req = NULL;
 			goto out_destroy_policy;
 		}
-
-		blocking_notifier_call_chain(&cpufreq_policy_notifier_list,
-				CPUFREQ_CREATE_POLICY, policy);
 	}
 
 	if (cpufreq_driver->get && has_target()) {
@@ -1518,6 +1515,9 @@ static int cpufreq_online(unsigned int cpu)
 		 */
 		if (cpufreq_driver->register_em)
 			cpufreq_driver->register_em(policy);
+
+		blocking_notifier_call_chain(&cpufreq_policy_notifier_list,
+				CPUFREQ_CREATE_POLICY, policy);
 	}
 
 	ret = cpufreq_init_policy(policy);
