@@ -86,6 +86,42 @@
       "parentUuid": "d98a88ba_d395e7a4",
       "revId": "605acb500e6c19859f775146dbcfbd4a0e38b3ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40340a7a_4e5dc3b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-15T10:40:58Z",
+      "side": 1,
+      "message": "That does not allow us to understand what changed from previous versions, and review it properly.  Please do not do this, think of the reviewer.",
+      "parentUuid": "25986ba3_0e2a3805",
+      "revId": "605acb500e6c19859f775146dbcfbd4a0e38b3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99a361c_0fa5d827",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-15T10:40:58Z",
+      "side": 1,
+      "message": "aosp changes can not depend on non-aosp changes for obvious legal and technical reasons.  Also, topics do not cross gerrit systems like I think you were trying to do here, so we can not see this all happening at the same time.\n\nAlso, you can not break the ABI like what happens here, please always test build your changes before submitting them.",
+      "parentUuid": "47e15e05_ab5812bf",
+      "revId": "605acb500e6c19859f775146dbcfbd4a0e38b3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
