@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1abaeaa_f9699464",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2022-08-15T02:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d51dee5_fe992d75",
+      "range": {
+        "startLine": 475,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 11
+      },
+      "revId": "6b4a1a13a61440914988a5cc1d0c411c12059ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5ce5e96_e4224730",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-11T12:28:36Z",
       "side": 1,
       "message": "that is not to be used by a non-filesystem driver, as the symbol namespace says.",
+      "range": {
+        "startLine": 1705,
+        "startChar": 2,
+        "endLine": 1705,
+        "endChar": 11
+      },
+      "revId": "6b4a1a13a61440914988a5cc1d0c411c12059ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9d80046_2cebb27c",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2022-08-15T02:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5ce5e96_e4224730",
       "range": {
         "startLine": 1705,
         "startChar": 2,
