@@ -22,6 +22,30 @@
       },
       "revId": "01a28c682180eeae125272a215caef97860562b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3b46869_bd0408c4",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2022-08-15T02:51:16Z",
+      "side": 1,
+      "message": "We encounter the phenomenon that the process is preempted in the kernel for a long time in the high stress test scenario, resulting in delay. Therefore, we need to change the priority here. mm is not necessary for the time being.\n\nFor example, we count the time consuming of function unmap_page_range():\n[ 2670.945898] MONSTER: 19891(WorkingThread)(priority 0/19) tgid\u003d19140 duration\u003d648ms duration_runnable \u003d 647271877ns duration_running\u003d3811616ns\n[ 2670.948031] MONSTER: 19891(WorkingThread)(priority 0/19) tgid\u003d19140 duration\u003d4ms duration_runnable \u003d 0ns duration_running\u003d540833ns\n[ 2674.869969] MONSTER: 19891(WorkingThread)(priority 0/19) tgid\u003d19140 duration\u003d204ms duration_runnable \u003d 205896146ns duration_running\u003d1429636ns\n[ 2689.432833] MONSTER: 19891(WorkingThread)(priority 0/19) tgid\u003d19140 duration\u003d1768ms duration_runnable \u003d 1765409953ns duration_running\u003d4043282ns",
+      "parentUuid": "ce78c245_cafd40e7",
+      "range": {
+        "startLine": 1163,
+        "startChar": 25,
+        "endLine": 1163,
+        "endChar": 29
+      },
+      "revId": "01a28c682180eeae125272a215caef97860562b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
