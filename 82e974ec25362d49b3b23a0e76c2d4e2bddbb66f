@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdc73f23_b6e83244",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-08-15T20:15:45Z",
+      "side": 1,
+      "message": "will update in next patch",
+      "parentUuid": "d7284339_d90b07ee",
+      "revId": "82e974ec25362d49b3b23a0e76c2d4e2bddbb66f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "315f216d_bc02bd9f",
         "filename": "drivers/thermal/thermal_sysfs.c",
         "patchSetId": 2
