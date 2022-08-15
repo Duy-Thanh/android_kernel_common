@@ -4231,8 +4231,20 @@ vm_fault_t finish_fault(struct vm_fault *vmf)
 			return 0;
 	}
 
+<<<<<<< HEAD   (8a4561 ANDROID: fix up sysctl_vals change in 5.15.58)
 	if (!pte_map_lock(vmf))
 		return VM_FAULT_RETRY;
+=======
+	/*
+	 * See comment in handle_pte_fault() for how this scenario happens, we
+	 * need to return NOPAGE so that we drop this page.
+	 */
+	if (pmd_devmap_trans_unstable(vmf->pmd))
+		return VM_FAULT_NOPAGE;
+
+	vmf->pte = pte_offset_map_lock(vma->vm_mm, vmf->pmd,
+				      vmf->address, &vmf->ptl);
+>>>>>>> BRANCH (d676d6 Linux 5.15.59)
 	ret = 0;
 	/* Re-check under ptl */
 	if (likely(pte_none(*vmf->pte)))
