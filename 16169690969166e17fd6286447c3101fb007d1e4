@@ -113,6 +113,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04edc5c5_6f4aed18",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T14:52:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "800c3d27_cf68971f",
+      "range": {
+        "startLine": 896,
+        "startChar": 9,
+        "endLine": 896,
+        "endChar": 13
+      },
+      "revId": "16169690969166e17fd6286447c3101fb007d1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02d67d3c_9c3eaed2",
