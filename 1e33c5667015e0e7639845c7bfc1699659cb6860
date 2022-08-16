@@ -16,6 +16,24 @@
       "message": "please provide full output of abigail report in changelog text, as is normally done.",
       "revId": "1e33c5667015e0e7639845c7bfc1699659cb6860",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1821d37e_27bdaf6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2022-08-16T07:24:11Z",
+      "side": 1,
+      "message": "After I synced aosp repo today, and all abi reports format has changed(much simplifed).",
+      "parentUuid": "836cd5ec_150eba85",
+      "revId": "1e33c5667015e0e7639845c7bfc1699659cb6860",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
