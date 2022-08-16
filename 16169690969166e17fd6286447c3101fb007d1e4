@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2b3b80d_f6ddb761",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T05:43:21Z",
+      "side": 1,
+      "message": "this can never be not NULL.\n\nAlso, write out the if statement, don\u0027t bury it in a return ? : statement.\n\nAnd why isn\u0027t the hook in here?",
+      "range": {
+        "startLine": 896,
+        "startChar": 9,
+        "endLine": 896,
+        "endChar": 13
+      },
+      "revId": "16169690969166e17fd6286447c3101fb007d1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d67d3c_9c3eaed2",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T05:43:21Z",
+      "side": 1,
+      "message": "why is the hook here still?",
+      "range": {
+        "startLine": 912,
+        "startChar": 0,
+        "endLine": 912,
+        "endChar": 53
+      },
+      "revId": "16169690969166e17fd6286447c3101fb007d1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
