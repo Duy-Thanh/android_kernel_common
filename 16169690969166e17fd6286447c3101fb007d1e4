@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c23d5662_57cccf5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T07:17:31Z",
+      "side": 1,
+      "message": "don\u0027t mark things resolved if you don\u0027t upload a new commit...",
+      "revId": "16169690969166e17fd6286447c3101fb007d1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2b3b80d_f6ddb761",
         "filename": "drivers/thermal/thermal_sysfs.c",
         "patchSetId": 3
