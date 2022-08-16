@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72f70872_7f933741",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930676
+      },
+      "writtenOn": "2022-08-16T23:26:00Z",
+      "side": 1,
+      "message": "Hi Greg, Giuliano\n\nCurrent ACK shows simple ABI report as below.\n\nABI DIFFERENCES HAVE BEEN DETECTED!\n\n3 symbol(s) added\n  \u0027dev_pm_opp_find_freq_ceil_by_volt\u0027\n  \u0027device_property_read_string_array\u0027\n  \u0027of_add_property\u0027\n  \nSo we didn\u0027t get any additional ABI diff information from build report like \"abi.report.*\"\n\nWe are referencing below link when we update our symbol list and submit our changes.\nhttps://preview.source.android.com/docs/core/architecture/kernel/abi-monitor#updating-ack-abi-files\n\nSo, we need new guide if this guide is not up-tp-date.\n",
+      "revId": "63c58bb7a1766cee8248672321181db6e5f5bda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
