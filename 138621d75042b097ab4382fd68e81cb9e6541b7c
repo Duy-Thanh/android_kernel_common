@@ -22,6 +22,30 @@
       },
       "revId": "138621d75042b097ab4382fd68e81cb9e6541b7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ef2483_d8565aea",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-08-16T11:35:59Z",
+      "side": 1,
+      "message": "I will update \u0027if\u0027 in next patch.\n\nyes, if we enable this stats for one cdev, all subsequent cdev will enable sysfs attribute group even if hook bypass the stats for those cdev. It is because of static common attribute group it is using right now.",
+      "parentUuid": "19683ed8_a608623a",
+      "range": {
+        "startLine": 896,
+        "startChar": 0,
+        "endLine": 896,
+        "endChar": 37
+      },
+      "revId": "138621d75042b097ab4382fd68e81cb9e6541b7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
