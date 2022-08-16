@@ -46,7 +46,6 @@
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/shmem_fs.h>
-#include <trace/hooks/mm.h>
 
 static struct vfsmount *shm_mnt;
 
@@ -1431,7 +1430,6 @@ static int shmem_writepage(struct page *page, struct writeback_control *wbc)
 		SetPageUptodate(page);
 	}
 
-	trace_android_vh_set_shmem_page_flag(page);
 	swap = get_swap_page(page);
 	if (!swap.val)
 		goto redirty;

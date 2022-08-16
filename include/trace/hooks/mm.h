@@ -257,9 +257,6 @@ DECLARE_HOOK(android_vh_alloc_si,
 DECLARE_HOOK(android_vh_free_pages,
 	TP_PROTO(struct page *page, unsigned int order),
 	TP_ARGS(page, order));
-DECLARE_HOOK(android_vh_set_shmem_page_flag,
-	TP_PROTO(struct page *page),
-	TP_ARGS(page));
 DECLARE_HOOK(android_vh_remove_vmalloc_stack,
 	TP_PROTO(struct vm_struct *vm),
 	TP_ARGS(vm));
