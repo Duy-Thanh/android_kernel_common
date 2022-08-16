@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03dcb0ac_a402029b",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T09:33:37Z",
+      "side": 1,
+      "message": "you just crashed the system when panic-on-warn is set.\n\nIf this is something that can happen, handle it properly, don\u0027t crash.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9a39c8f_4210d872",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T09:33:37Z",
+      "side": 1,
+      "message": "checkpatch.pl is your friend.",
+      "range": {
+        "startLine": 54,
+        "startChar": 11,
+        "endLine": 54,
+        "endChar": 13
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1181d69d_1634e330",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T09:33:37Z",
+      "side": 1,
+      "message": "logic is backwards, check for error and handle that, don\u0027t have the \"normal\" path\nbe an error.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 12
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f23d2fd0_cf9e60e9",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T09:33:37Z",
+      "side": 1,
+      "message": "ftrace is your friend, use that instead please.\n\nAlso dev_dbg() gives you __func__ for free, no need to add it again.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a891133_66c8e201",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T09:33:37Z",
+      "side": 1,
+      "message": "again, use ftrace, and never use __func__ in a dev_dbg() call.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 41
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
