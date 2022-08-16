@@ -244,7 +244,18 @@ static int cpufreq_get_requested_power(struct thermal_cooling_device *cdev,
 
 	*power = get_dynamic_power(cpufreq_cdev, freq);
 
+<<<<<<< HEAD   (500484 BACKPORT: FROMGIT: Multi-gen LRU: fix workingset accounting)
 	trace_thermal_power_cpu_get_power_simple(policy->cpu, *power);
+=======
+	trace_android_vh_modify_thermal_cpu_get_power(policy, power);
+
+	if (load_cpu) {
+		trace_thermal_power_cpu_get_power(policy->related_cpus, freq,
+						  load_cpu, i, *power);
+
+		kfree(load_cpu);
+	}
+>>>>>>> CHANGE (d4680f ANDROID: vendor_hooks: Add hooks for ipa)
 
 	return 0;
 }
