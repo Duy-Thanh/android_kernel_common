@@ -293,4 +293,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_lruvec_blk_plug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reclaim_pages_plug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_end);
+<<<<<<< HEAD   (2a253f ANDROID: power: Add vendor hook for suspend)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_memcg_scan_type);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pidfd_open);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmput);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
+>>>>>>> CHANGE (737a53 ANDROID: power: Add vendor hook for suspend)
 
