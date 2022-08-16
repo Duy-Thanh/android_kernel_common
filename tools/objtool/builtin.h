@@ -8,7 +8,12 @@
 #include <subcmd/parse-options.h>
 
 extern const struct option check_options[];
+<<<<<<< HEAD   (3581e4 Revert "cgroup: Use separate src/dst nodes when preloading c)
 extern bool no_fp, no_unreachable, retpoline, module, backtrace, uaccess, stats, validate_dup, vmlinux, mcount, noinstr;
+=======
+extern bool no_fp, no_unreachable, retpoline, module, backtrace, uaccess, stats,
+            validate_dup, vmlinux, sls, unret, rethunk;
+>>>>>>> BRANCH (503493 Linux 5.10.133)
 
 extern int cmd_check(int argc, const char **argv);
 extern int cmd_orc(int argc, const char **argv);

@@ -18,7 +18,12 @@
 #include "builtin.h"
 #include "objtool.h"
 
+<<<<<<< HEAD   (3581e4 Revert "cgroup: Use separate src/dst nodes when preloading c)
 bool no_fp, no_unreachable, retpoline, module, backtrace, uaccess, stats, validate_dup, vmlinux, mcount, noinstr;
+=======
+bool no_fp, no_unreachable, retpoline, module, backtrace, uaccess, stats,
+     validate_dup, vmlinux, sls, unret, rethunk;
+>>>>>>> BRANCH (503493 Linux 5.10.133)
 
 static const char * const check_usage[] = {
 	"objtool check [<options>] file.o",
@@ -29,6 +34,8 @@ const struct option check_options[] = {
 	OPT_BOOLEAN('f', "no-fp", &no_fp, "Skip frame pointer validation"),
 	OPT_BOOLEAN('u', "no-unreachable", &no_unreachable, "Skip 'unreachable instruction' warnings"),
 	OPT_BOOLEAN('r', "retpoline", &retpoline, "Validate retpoline assumptions"),
+	OPT_BOOLEAN(0,   "rethunk", &rethunk, "validate and annotate rethunk usage"),
+	OPT_BOOLEAN(0,   "unret", &unret, "validate entry unret placement"),
 	OPT_BOOLEAN('m', "module", &module, "Indicates the object will be part of a kernel module"),
 	OPT_BOOLEAN('b', "backtrace", &backtrace, "unwind on error"),
 	OPT_BOOLEAN('a', "uaccess", &uaccess, "enable uaccess checking"),
@@ -36,7 +43,11 @@ const struct option check_options[] = {
 	OPT_BOOLEAN('d', "duplicate", &validate_dup, "duplicate validation for vmlinux.o"),
 	OPT_BOOLEAN('n', "noinstr", &noinstr, "noinstr validation for vmlinux.o"),
 	OPT_BOOLEAN('l', "vmlinux", &vmlinux, "vmlinux.o validation"),
+<<<<<<< HEAD   (3581e4 Revert "cgroup: Use separate src/dst nodes when preloading c)
 	OPT_BOOLEAN('M', "mcount", &mcount, "generate __mcount_loc"),
+=======
+	OPT_BOOLEAN('S', "sls", &sls, "validate straight-line-speculation"),
+>>>>>>> BRANCH (503493 Linux 5.10.133)
 	OPT_END(),
 };
 

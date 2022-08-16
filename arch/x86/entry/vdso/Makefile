@@ -90,7 +90,12 @@ ifneq ($(RETPOLINE_VDSO_CFLAGS),)
 endif
 endif
 
+<<<<<<< HEAD   (3581e4 Revert "cgroup: Use separate src/dst nodes when preloading c)
 $(vobjs): KBUILD_CFLAGS := $(filter-out $(CC_FLAGS_LTO) $(GCC_PLUGINS_CFLAGS) $(RETPOLINE_CFLAGS),$(KBUILD_CFLAGS)) $(CFL)
+=======
+$(vobjs): KBUILD_CFLAGS := $(filter-out $(GCC_PLUGINS_CFLAGS) $(RETPOLINE_CFLAGS),$(KBUILD_CFLAGS)) $(CFL)
+$(vobjs): KBUILD_AFLAGS += -DBUILD_VDSO
+>>>>>>> BRANCH (503493 Linux 5.10.133)
 
 #
 # vDSO code runs in userspace and -pg doesn't help with profiling anyway.
