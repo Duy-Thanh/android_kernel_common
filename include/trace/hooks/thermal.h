@@ -32,6 +32,10 @@ DECLARE_HOOK(android_vh_modify_thermal_target_freq,
 	TP_PROTO(struct cpufreq_policy *policy, unsigned int *target_freq),
 	TP_ARGS(policy, target_freq));
 
+DECLARE_HOOK(android_vh_modify_thermal_cpu_get_power,
+	TP_PROTO(struct cpufreq_policy *policy, u32 *power),
+	TP_ARGS(policy, power));
+
 #endif /* _TRACE_HOOK_THERMAL_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
