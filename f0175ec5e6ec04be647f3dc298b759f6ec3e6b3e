@@ -51,6 +51,24 @@
       "message": "This code is common between your swap device and other swap devices in the system (e.g. ZRAM devices). For ZRAM, the kernel does want swap slot offsets to be randomized (see: https://android.googlesource.com/kernel/common/+/refs/heads/android13-5.15/drivers/block/zram/zram_drv.c#1929).\n\nHow will you ensure that noswap_randomize is true only for the device used to hold the hibernation image?",
       "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f038b1_66f22917",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2022-08-16T22:26:33Z",
+      "side": 1,
+      "message": "Vivek, do we have any kernel command knowledge that hibernation is enabled through bootloader passing it?",
+      "parentUuid": "a801d998_d56b64b3",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
