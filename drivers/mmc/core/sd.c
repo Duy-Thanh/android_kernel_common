@@ -1523,6 +1523,9 @@ retry:
 		if (err)
 			goto free_card;
 
+		trace_android_rvh_mmc_sd_cmdline_tuning(card, &err);
+		if (err)
+			goto free_card;
 		/*
 		 * Switch to wider bus (if supported).
 		 */
@@ -1536,6 +1539,10 @@ retry:
 		}
 
 		trace_android_vh_mmc_sd_update_dataline_timing(card, &err);
+		if (err)
+			goto free_card;
+
+		trace_android_rvh_mmc_sd_dataline_tuning(card, &err);
 		if (err)
 			goto free_card;
 	}
