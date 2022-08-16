@@ -22,6 +22,30 @@
       },
       "revId": "11f6b4fe7d632af423deb10b9f0a58aeab32dacb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e27194_c4edf545",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2022-08-16T06:54:37Z",
+      "side": 1,
+      "message": "Thanks for your comment.\nI remove add_taint, and upload new patchset",
+      "parentUuid": "0d332e61_81241dd5",
+      "range": {
+        "startLine": 4,
+        "startChar": 2,
+        "endLine": 4,
+        "endChar": 11
+      },
+      "revId": "11f6b4fe7d632af423deb10b9f0a58aeab32dacb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
