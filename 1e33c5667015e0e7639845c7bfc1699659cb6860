@@ -34,6 +34,24 @@
       "parentUuid": "836cd5ec_150eba85",
       "revId": "1e33c5667015e0e7639845c7bfc1699659cb6860",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a378d89_270f6f35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2022-08-16T07:26:11Z",
+      "side": 1,
+      "message": "There\u0027re some changes on abitools.\n\n4b777b2d4233 (HEAD, m/common-android13-5.15, aosp/master-kernel-build-2022) abitool.py: shorten ABI report paths by removing .stg\n22fd96611461 abitool.py: simplify Delegated diff_abi code\n9f01685e7018 abitool.py: diff_abi --abi-tool delegated no longer invokes abidiff\n6600002eccaa abitool.py: repoint compatibility links at STG short report\nf4abb5175872 abitool.py: prefer stgdiff reports over abidiff reports\n31e3be649ab5 abitool.py: remove dead stgdiff post-processing code\n2ae37a98ebb7 abitool.py: replace stgdiff post-processing with own functionality\n3d45fa2a5ba5 abitool.py: factor out function to link report files\ne60e8b68d8e1 abitool.py: drop support for --abi-tool STG",
+      "parentUuid": "1821d37e_27bdaf6c",
+      "revId": "1e33c5667015e0e7639845c7bfc1699659cb6860",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
