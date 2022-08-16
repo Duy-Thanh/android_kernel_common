@@ -52,6 +52,24 @@
       "parentUuid": "1821d37e_27bdaf6c",
       "revId": "1e33c5667015e0e7639845c7bfc1699659cb6860",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a11c579_f412ce03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T07:38:10Z",
+      "side": 1,
+      "message": "The output of the log file should still be present and can be pasted in here.  We need to see the difference between functions and symbols and what their types are.",
+      "parentUuid": "1a378d89_270f6f35",
+      "revId": "1e33c5667015e0e7639845c7bfc1699659cb6860",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
