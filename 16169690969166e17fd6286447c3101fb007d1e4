@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6664778a_d22c28e0",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-08-16T06:37:13Z",
+      "side": 1,
+      "message": "no, cdev-\u003estats is NULL pointer initially and it will be allocated memory only if cooling stats is NOT disabled via hook (in line#926). So I don\u0027t think we need to call hook again here. Moreover, all these stats sysfs callbacks are using data from cdev-\u003estats, so if it is NULL, no need to expose those sysfs nodes.",
+      "parentUuid": "d2b3b80d_f6ddb761",
+      "range": {
+        "startLine": 896,
+        "startChar": 9,
+        "endLine": 896,
+        "endChar": 13
+      },
+      "revId": "16169690969166e17fd6286447c3101fb007d1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02d67d3c_9c3eaed2",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-16T05:43:21Z",
       "side": 1,
       "message": "why is the hook here still?",
+      "range": {
+        "startLine": 912,
+        "startChar": 0,
+        "endLine": 912,
+        "endChar": 53
+      },
+      "revId": "16169690969166e17fd6286447c3101fb007d1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc0d490b_3b4d4cb7",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-08-16T06:37:13Z",
+      "side": 1,
+      "message": "This hook is introduced majorly to avoid large junk of memory consumed by this stats feature at line#926 along with avoid exposing those related sysfs node.\nWe need to bail out from memory allocation based on hook result from here.\n\nThis memory consumption is well discussed in the bug. please refer (https://partnerissuetracker.corp.google.com/issues/218825214)",
+      "parentUuid": "02d67d3c_9c3eaed2",
       "range": {
         "startLine": 912,
         "startChar": 0,
