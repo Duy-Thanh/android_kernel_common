@@ -70,6 +70,24 @@
       "parentUuid": "1a378d89_270f6f35",
       "revId": "1e33c5667015e0e7639845c7bfc1699659cb6860",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6bf8380_78c7c00d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2022-08-16T07:44:51Z",
+      "side": 1,
+      "message": "I used a command below to add commit msg.\nCould you give us a guide to add full reports on msg please?\n\ngit commit -s -F out_abi/android13-5.15/dist/abi.report.short",
+      "parentUuid": "1a378d89_270f6f35",
+      "revId": "1e33c5667015e0e7639845c7bfc1699659cb6860",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
