@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19683ed8_a608623a",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T09:11:14Z",
+      "side": 1,
+      "message": "again, make this an if statement please.\n\nBut with the hook change below, is this callback even being called?",
+      "range": {
+        "startLine": 896,
+        "startChar": 0,
+        "endLine": 896,
+        "endChar": 37
+      },
+      "revId": "138621d75042b097ab4382fd68e81cb9e6541b7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
