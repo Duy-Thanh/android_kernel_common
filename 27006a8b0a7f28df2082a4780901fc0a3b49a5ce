@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c567f7_a8a8c26d",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-16T13:33:16Z",
+      "side": 1,
+      "message": "checkpatch should have told you to use a blank line before this one 😞",
+      "range": {
+        "startLine": 895,
+        "startChar": 0,
+        "endLine": 895,
+        "endChar": 18
+      },
+      "revId": "27006a8b0a7f28df2082a4780901fc0a3b49a5ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
