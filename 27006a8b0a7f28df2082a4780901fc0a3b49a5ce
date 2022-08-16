@@ -22,6 +22,30 @@
       },
       "revId": "27006a8b0a7f28df2082a4780901fc0a3b49a5ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82a64ede_6cb7bb20",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-08-16T14:46:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8c567f7_a8a8c26d",
+      "range": {
+        "startLine": 895,
+        "startChar": 0,
+        "endLine": 895,
+        "endChar": 18
+      },
+      "revId": "27006a8b0a7f28df2082a4780901fc0a3b49a5ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
