@@ -68,6 +68,18 @@ DECLARE_HOOK(android_vh_mmc_sd_update_dataline_timing,
 	TP_PROTO(struct mmc_card *card, int *err),
 	TP_ARGS(card, err));
 
+DECLARE_RESTRICTED_HOOK(android_rvh_mmc_protect,
+	TP_PROTO(struct mmc_card *card),
+	TP_ARGS(card), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_mmc_sd_cmdline_tuning,
+	TP_PROTO(struct mmc_card *card, int *err),
+	TP_ARGS(card, err), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_mmc_sd_dataline_tuning,
+	TP_PROTO(struct mmc_card *card, int *err),
+	TP_ARGS(card, err), 1);
+
 #endif /* _TRACE_HOOK_MMC_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
