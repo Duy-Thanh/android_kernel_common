@@ -272,6 +272,30 @@
       },
       "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa46cbd9_03c8aa5d",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:55:21Z",
+      "side": 1,
+      "message": "This symbol isn\u0027t even used in the driver anymore, as you sure you got this correct?",
+      "parentUuid": "6131b5a3_42c39732",
+      "range": {
+        "startLine": 678,
+        "startChar": 2,
+        "endLine": 678,
+        "endChar": 10
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
