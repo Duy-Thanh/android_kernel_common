@@ -248,6 +248,30 @@
       },
       "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6131b5a3_42c39732",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:54:03Z",
+      "side": 1,
+      "message": "See my comments on the driver, don\u0027t lie about being a filesystem please.",
+      "parentUuid": "f0828750_dc2ae3d1",
+      "range": {
+        "startLine": 678,
+        "startChar": 2,
+        "endLine": 678,
+        "endChar": 10
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
