@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9c9b6d4_ed350c9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-17T02:52:22Z",
+      "side": 1,
+      "message": "I can barely parse if we\u0027re adding or removing the vendor hook in this commit.  :) \n\nPlease, avoid revert:revert:revert:...  subjects. Make sure the commit message provide the rationale for why the change needs to be added to the tree, and then at the bottom you can add a historical footnote that it is re-adding the original commit which has been reverted multiple times.",
+      "revId": "4afb3fa28e8f15209b442e610782ecdf1c7bd22d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
