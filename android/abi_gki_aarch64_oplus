@@ -39,6 +39,7 @@
   __ClearPageMovable
   congestion_wait
   contig_page_data
+  cpufreq_update_util_data
   __cpuhp_remove_state
   __cpuhp_setup_state
   __cpuhp_state_add_instance
@@ -293,7 +294,9 @@
   __tracepoint_android_vh_cache_show
   __tracepoint_android_vh_cma_drain_all_pages_bypass
   __tracepoint_android_vh_drain_all_pages_bypass
+  __tracepoint_android_vh_dup_task_struct
   __tracepoint_android_vh_exit_signal
+  __tracepoint_android_vh_free_task
   __tracepoint_android_vh_futex_sleep_start
   __tracepoint_android_vh_irqtime_account_process_tick
   __tracepoint_android_vh_page_referenced_check_bypass
@@ -316,6 +319,7 @@
   __tracepoint_sched_stat_wait
   __tracepoint_sched_waking
   __tracepoint_task_rename
+  tracing_is_on
   __ubsan_handle_cfi_check_fail_abort
   unlock_page
   unregister_blkdev
