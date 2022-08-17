@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a9eca1_774c8a91",
+        "filename": "build.config.db845c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-08-17T20:19:10Z",
+      "side": 0,
+      "message": "I think you can keep these two lines; ref:\n\nhttps://android.googlesource.com/kernel/google-modules/raviole-device/+/refs/heads/android13-gs-raviole-5.15/build.config.gs101",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 48
+      },
+      "revId": "60f3188cf9c838cf6c220be01895a3a78a0023f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
