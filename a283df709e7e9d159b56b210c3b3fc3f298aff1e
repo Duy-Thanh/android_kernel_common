@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72517288_1af31188",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2022-08-17T17:39:49Z",
+      "side": 1,
+      "message": "I\u0027m not scheduler expert, appreciate if somebody could review this if I\u0027ve correctly solved problem for CONFIG_SMP\u003dn. Effectively, aosp/2172189 seems to need to be fully guarded by CONFIG_SMP. I\u0027m pretty sure I\u0027ve achieved that now.",
+      "revId": "a283df709e7e9d159b56b210c3b3fc3f298aff1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
