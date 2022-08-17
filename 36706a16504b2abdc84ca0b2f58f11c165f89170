@@ -179,6 +179,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d364acf_8baf1435",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4ac4d47_276941c1",
+      "range": {
+        "startLine": 675,
+        "startChar": 2,
+        "endLine": 675,
+        "endChar": 21
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d428a84_dccc703b",
@@ -192,6 +216,30 @@
       "writtenOn": "2022-08-12T07:22:04Z",
       "side": 1,
       "message": "kernel drivers should not be messing with files directly.  Please fix.",
+      "range": {
+        "startLine": 678,
+        "startChar": 2,
+        "endLine": 678,
+        "endChar": 10
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0828750_dc2ae3d1",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:36:30Z",
+      "side": 1,
+      "message": "I\u0027ve cut down the newly used file APIs a bit.\n\nThis driver is essentially for proxying a wayland connection between the guest and host. Part of that involves taking fds in the host and creating proxy fds in the guest. Given that purpose, some bare minimum of interaction with files is necessary.",
+      "parentUuid": "0d428a84_dccc703b",
       "range": {
         "startLine": 678,
         "startChar": 2,
