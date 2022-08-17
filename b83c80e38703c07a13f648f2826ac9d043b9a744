@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b382c6_6a91a2f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-08-17T22:30:19Z",
+      "side": 1,
+      "message": "These failures are fixed by aosp/2186990",
+      "revId": "b83c80e38703c07a13f648f2826ac9d043b9a744",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
