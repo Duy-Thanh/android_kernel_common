@@ -22,6 +22,30 @@
       },
       "revId": "60f3188cf9c838cf6c220be01895a3a78a0023f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1192b0a_8d1cfbd7",
+        "filename": "build.config.db845c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-08-17T20:29:14Z",
+      "side": 0,
+      "message": "(just a nit; I don\u0027t think it hurts much)",
+      "parentUuid": "f3a9eca1_774c8a91",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 48
+      },
+      "revId": "60f3188cf9c838cf6c220be01895a3a78a0023f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
