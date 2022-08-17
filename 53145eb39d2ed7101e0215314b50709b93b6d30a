@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef8d2a5d_3ec2b63a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T07:32:54Z",
+      "side": 1,
+      "message": "As the lint tool says, please read the documentation for what is needed for the changelog text (first line, bug id, etc.)\n\nOther than that, this looks correct from a technical point of view, nice!",
+      "revId": "53145eb39d2ed7101e0215314b50709b93b6d30a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
