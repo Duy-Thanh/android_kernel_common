@@ -46,6 +46,30 @@
       },
       "revId": "60f3188cf9c838cf6c220be01895a3a78a0023f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b56dfd_39a342f5",
+        "filename": "build.config.db845c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-08-17T21:50:45Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "e1192b0a_8d1cfbd7",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 48
+      },
+      "revId": "60f3188cf9c838cf6c220be01895a3a78a0023f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
