@@ -123,6 +123,24 @@
       "parentUuid": "43f038b1_66f22917",
       "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1fc93e_55b1b77c",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-08-18T19:12:07Z",
+      "side": 1,
+      "message": "IIUC, you\u0027re invoking trace_android_vh_disable_randomization() in the following call-chain?\n\n```\ndo_initcall\n \u003d\u003e software_resume\n  \u003d\u003e swsusp_check()\n   \u003d\u003e trace_android_vh_check_randomization(p-\u003ebdev, \u0026noswap_randomize)\n```\n\nIf so, I don\u0027t think this will work, because this call-chain occurs before userspace is even up, which means that your module will not have been loaded and registered with the trace hook yet.\n\nFurthermore, I\u0027m concerned about using `GENHD_FL_NO_RANDOMIZE.` This seems to be a flag that you\u0027re using an arbitrary bit position for, since it\u0027s not part of the core kernel. What happens if the kernel starts using the same flag that you\u0027re using for another purpose?",
+      "parentUuid": "30453945_3b0b36a4",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
