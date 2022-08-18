@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45281886_c1c924d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T14:18:46Z",
+      "side": 1,
+      "message": "Needs to be reworked and simplified a lot.  Most all of this logic should be in your module, not in the core kernel.",
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50f6cf03_54967351",
+        "filename": "include/trace/hooks/rmap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T14:18:46Z",
+      "side": 1,
+      "message": "checkpatch will complain about too long of a line I think.",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 104
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b23734_7242d005",
+        "filename": "include/trace/hooks/vmscan.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T14:18:46Z",
+      "side": 1,
+      "message": "two different flags makes no sense, why do you need them both?",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 53
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "454fe08e_06f39919",
+        "filename": "mm/migrate.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T14:18:46Z",
+      "side": 1,
+      "message": "checkpatch will complain about this.\n\nAnd you are putting logic into the kernel for a tracepoint, please do this in your tracepoint function instead, it should not be here.",
+      "range": {
+        "startLine": 611,
+        "startChar": 2,
+        "endLine": 615,
+        "endChar": 29
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f6d0ad7_88d61766",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2410,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T14:18:46Z",
+      "side": 1,
+      "message": "again, this should not be here, do it in your tracepoint logic.\n\nOtherwise you are forcing this tracepoint to always do this type of functionality, which is not how tracepoints work.",
+      "range": {
+        "startLine": 2410,
+        "startChar": 0,
+        "endLine": 2410,
+        "endChar": 34
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e05c902_8083d7ba",
+        "filename": "mm/rmap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T14:18:46Z",
+      "side": 1,
+      "message": "just pass in referenced to the tracepoint and then no need for success at all.",
+      "range": {
+        "startLine": 796,
+        "startChar": 0,
+        "endLine": 796,
+        "endChar": 17
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e285dcd4_d947f4d4",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T14:18:46Z",
+      "side": 1,
+      "message": "again, you are putting logic in the kernel for how a tracepoint is causing changes.  The changes should be done in your kernel module that you hook the tracepoint into, not in here.",
+      "range": {
+        "startLine": 1033,
+        "startChar": 1,
+        "endLine": 1041,
+        "endChar": 3
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
