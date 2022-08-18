@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ccbcd33e_20f2225a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-08-18T05:06:01Z",
+      "side": 1,
+      "message": "@Greg\n\u003e\u003e\nthat is removing a kernel security feature and needs to be approved by the Android security team first.\n\u003e\u003e\n\nI have not reviewed it, with security team, you mean QC\u0027s security team or Google\u0027s ? Please let me know, how to raise this if with Google.\n\n@Trilok\nHave updated the commit text with more explanation",
+      "parentUuid": "0cb5eff5_f557767c",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a801d998_d56b64b3",
         "filename": "mm/swapfile.c",
         "patchSetId": 1
