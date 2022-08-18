@@ -178,8 +178,8 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sched_cpu_dying,
 	TP_ARGS(cpu), 1);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_account_irq,
-	TP_PROTO(struct task_struct *curr, int cpu, s64 delta),
-	TP_ARGS(curr, cpu, delta), 1);
+	TP_PROTO(struct task_struct *curr, int cpu, s64 delta, bool start),
+	TP_ARGS(curr, cpu, delta, start), 1);
 
 struct sched_entity;
 DECLARE_RESTRICTED_HOOK(android_rvh_place_entity,
