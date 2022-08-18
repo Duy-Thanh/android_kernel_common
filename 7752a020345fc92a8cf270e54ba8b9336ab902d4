@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6539187_f9688be2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2022-08-18T07:05:29Z",
+      "side": 1,
+      "message": "Since AOSP repo was updated, I updated abi symbol list with original commit style.\nPlease review this commit.",
+      "revId": "7752a020345fc92a8cf270e54ba8b9336ab902d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
