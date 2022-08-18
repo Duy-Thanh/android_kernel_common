@@ -296,6 +296,30 @@
       },
       "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5277ce8f_5f0e69d0",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-18T05:46:42Z",
+      "side": 1,
+      "message": "Which symbol are you referring to? All of the symbols in patchset 3 are used in the driver (__fdget is used by the inlined fdget function)?",
+      "parentUuid": "fa46cbd9_03c8aa5d",
+      "range": {
+        "startLine": 678,
+        "startChar": 2,
+        "endLine": 678,
+        "endChar": 10
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
