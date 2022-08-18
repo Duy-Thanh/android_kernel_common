@@ -344,6 +344,30 @@
       },
       "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b792be9a_1c85a819",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-18T05:59:39Z",
+      "side": 1,
+      "message": "Right, it\u0027s not needed. As such, it has been removed in patchset 3.",
+      "parentUuid": "99929d38_7880de12",
+      "range": {
+        "startLine": 678,
+        "startChar": 2,
+        "endLine": 678,
+        "endChar": 10
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
