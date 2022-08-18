@@ -368,6 +368,30 @@
       },
       "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e26bda5_692d62e3",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T06:10:52Z",
+      "side": 1,
+      "message": "Ah good, that wasn\u0027t obvious here in gerrit at all 😊",
+      "parentUuid": "b792be9a_1c85a819",
+      "range": {
+        "startLine": 678,
+        "startChar": 2,
+        "endLine": 678,
+        "endChar": 10
+      },
+      "revId": "36706a16504b2abdc84ca0b2f58f11c165f89170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
