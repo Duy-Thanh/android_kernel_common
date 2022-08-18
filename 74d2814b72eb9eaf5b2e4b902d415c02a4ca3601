@@ -16,6 +16,24 @@
       "message": "build.config.gki.aarch64 already includes the prior files, so you can drop lines 1-2",
       "revId": "74d2814b72eb9eaf5b2e4b902d415c02a4ca3601",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c68aee23_6abe1dee",
+        "filename": "build.config.db845c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-08-18T16:41:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbe4a4db_051c55db",
+      "revId": "74d2814b72eb9eaf5b2e4b902d415c02a4ca3601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
