@@ -70,6 +70,30 @@
       },
       "revId": "3d530367fc9c1f978e63204fde0c1e0a7621ba28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea2d2230_c1ae2be6",
+        "filename": "mm/internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T05:49:48Z",
+      "side": 1,
+      "message": "Please do not add new CamelCase functions to the kernel if at all possible as this will not pass the checkpatch.pl tool.",
+      "parentUuid": "fde57184_0ff32bdb",
+      "range": {
+        "startLine": 666,
+        "startChar": 8,
+        "endLine": 666,
+        "endChar": 25
+      },
+      "revId": "3d530367fc9c1f978e63204fde0c1e0a7621ba28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
