@@ -63,6 +63,30 @@
       },
       "revId": "6f22a31cdd51714d96c45afa76564a2ca162f469",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a02d0efe_e6d3b4e9",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T05:47:28Z",
+      "side": 1,
+      "message": "Drivers should not operate differently if tracing is on or not, please fix your code to not care.  You can add normal tracing functionality to your driver that will be enabled if tracing is enabled, otherwise it will just work normally.",
+      "parentUuid": "634ac47a_677739ed",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 15
+      },
+      "revId": "6f22a31cdd51714d96c45afa76564a2ca162f469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
