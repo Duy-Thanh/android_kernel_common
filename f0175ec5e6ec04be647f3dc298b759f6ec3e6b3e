@@ -69,6 +69,24 @@
       "parentUuid": "a801d998_d56b64b3",
       "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30453945_3b0b36a4",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-08-18T05:03:28Z",
+      "side": 1,
+      "message": "@Issac \nhttps://android-review.googlesource.com/c/kernel/common/+/2180456/1/kernel/power/swap.c#1531\n\n(trace_android_vh_disable_randomization(hib_resume_bdev);\nThis vendor hook is used to identify the SWAP device which will be used for storing hibernation image, in the vendor hook implementation.\n\nIn The vendor hook implementation I am setting flag\nhib_resume_bdev-\u003ebd_disk-\u003eflags | \u003d  GENHD_FL_NO_RANDOMIZE;\n                               \n\nNow when this vendor hook is called \"trace_android_vh_check_randomization(p-\u003ebdev, \u0026noswap_randomize)\" \nnoswap_randomize will be set, true only if it is the swap device, i.e it has this flag \"GENHD_FL_NO_RANDOMIZE\"\n\n@Trilok: \n\u003e\u003eVivek, do we have any kernel command knowledge that hibernation is enabled through bootloader passing it?\n\u003e\u003e\nNo, as of now, there is nothing like this, it will be as if resumed from Kernel hibernation, if seen via dmesg",
+      "parentUuid": "43f038b1_66f22917",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
