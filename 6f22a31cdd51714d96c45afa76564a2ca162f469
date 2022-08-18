@@ -39,6 +39,30 @@
       },
       "revId": "6f22a31cdd51714d96c45afa76564a2ca162f469",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "634ac47a_677739ed",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-08-18T02:13:14Z",
+      "side": 1,
+      "message": "We need to export this symbol so that we can record some debugging trace information in the driver when user records the trace information.  And this symbol has already been exported in Android12-5.10. The related link is as follows. So we want to export this symbol in the latest version as well.\nhttps://android-review.googlesource.com/c/kernel/common/+/2123259\nhttps://android-review.googlesource.com/c/kernel/common/+/2132196",
+      "parentUuid": "2d3627cd_4fcffd65",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 15
+      },
+      "revId": "6f22a31cdd51714d96c45afa76564a2ca162f469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
