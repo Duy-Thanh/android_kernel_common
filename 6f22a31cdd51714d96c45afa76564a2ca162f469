@@ -87,6 +87,30 @@
       },
       "revId": "6f22a31cdd51714d96c45afa76564a2ca162f469",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6e272f9_4c8f4189",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-08-19T01:48:33Z",
+      "side": 1,
+      "message": "Please help review the commit one more time, thanks",
+      "parentUuid": "a02d0efe_e6d3b4e9",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 15
+      },
+      "revId": "6f22a31cdd51714d96c45afa76564a2ca162f469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
