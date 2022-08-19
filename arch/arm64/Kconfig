@@ -226,7 +226,11 @@ config ARM64
 	select THREAD_INFO_IN_TASK
 	select HAVE_ARCH_USERFAULTFD_MINOR if USERFAULTFD
 	select TRACE_IRQFLAGS_SUPPORT
+<<<<<<< HEAD   (83399d Merge 5.15.60 into android13-5.15-lts)
 	select ARCH_SUPPORTS_SPECULATIVE_PAGE_FAULT
+=======
+	select TRACE_IRQFLAGS_NMI_SUPPORT
+>>>>>>> BRANCH (374bf3 Linux 5.15.61)
 	help
 	  ARM 64-bit (AArch64) Linux support.
 

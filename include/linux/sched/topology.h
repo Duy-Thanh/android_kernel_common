@@ -76,8 +76,12 @@ struct sched_domain_shared {
 	atomic_t	ref;
 	atomic_t	nr_busy_cpus;
 	int		has_idle_cores;
+<<<<<<< HEAD   (83399d Merge 5.15.60 into android13-5.15-lts)
 
 	ANDROID_VENDOR_DATA(1);
+=======
+	int		nr_idle_scan;
+>>>>>>> BRANCH (374bf3 Linux 5.15.61)
 };
 
 struct sched_domain {

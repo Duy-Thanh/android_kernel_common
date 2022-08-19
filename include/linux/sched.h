@@ -1829,6 +1829,7 @@ current_restore_flags(unsigned long orig_flags, unsigned long flags)
 }
 
 extern int cpuset_cpumask_can_shrink(const struct cpumask *cur, const struct cpumask *trial);
+<<<<<<< HEAD   (83399d Merge 5.15.60 into android13-5.15-lts)
 extern int task_can_attach(struct task_struct *p, const struct cpumask *cs_cpus_allowed);
 
 #ifdef CONFIG_RT_SOFTINT_OPTIMIZATION
@@ -1840,6 +1841,9 @@ static inline bool cpupri_check_rt(void)
 }
 #endif
 
+=======
+extern int task_can_attach(struct task_struct *p, const struct cpumask *cs_effective_cpus);
+>>>>>>> BRANCH (374bf3 Linux 5.15.61)
 #ifdef CONFIG_SMP
 extern void do_set_cpus_allowed(struct task_struct *p, const struct cpumask *new_mask);
 extern int set_cpus_allowed_ptr(struct task_struct *p, const struct cpumask *new_mask);
