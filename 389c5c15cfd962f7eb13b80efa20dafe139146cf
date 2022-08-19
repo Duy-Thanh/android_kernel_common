@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "94299cb5_1422025e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-08-19T17:49:36Z",
+      "side": 1,
+      "message": "Explain the intentions of the CL here. e.g. \"Why does it need to be converted to a mixed build? What\u0027s bad about not converting it to mixed builds?\"",
+      "revId": "389c5c15cfd962f7eb13b80efa20dafe139146cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ec3a8ad0_be55b02a",
@@ -14,6 +31,69 @@
       "writtenOn": "2022-08-18T16:41:42Z",
       "side": 1,
       "message": "Thank you for the review.",
+      "revId": "389c5c15cfd962f7eb13b80efa20dafe139146cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10813de5_361007cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-08-19T17:49:36Z",
+      "side": 1,
+      "message": "Also android-mainline change",
+      "revId": "389c5c15cfd962f7eb13b80efa20dafe139146cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38749159_6cca02e1",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-08-19T17:49:36Z",
+      "side": 1,
+      "message": "Is this still produced? Otherwise it can be dropped.\n\nThe definition of the variable itself can be deleted as well if this is the only use case here.",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 26
+      },
+      "revId": "389c5c15cfd962f7eb13b80efa20dafe139146cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7960ac60_5720cd97",
+        "filename": "build.config.db845c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-08-19T17:49:36Z",
+      "side": 1,
+      "message": "I think we should stick to \n\n```\n. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common\n. ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64\n```\n\nIn particular, build.config.gki.aarch64 sets things specific to the GKI, e.g. the GKI system_dlkm, the gki_defconfig, etc.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 52
+      },
       "revId": "389c5c15cfd962f7eb13b80efa20dafe139146cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
