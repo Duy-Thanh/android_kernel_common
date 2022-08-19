@@ -78,6 +78,7 @@ extern void dcache_clean_pop(unsigned long start, unsigned long end);
 extern void dcache_clean_pou(unsigned long start, unsigned long end);
 extern long caches_clean_inval_user_pou(unsigned long start, unsigned long end);
 extern void sync_icache_aliases(unsigned long start, unsigned long end);
+extern void arch_dcache_clean_poc(unsigned long start, unsigned long end);
 
 static inline void flush_icache_range(unsigned long start, unsigned long end)
 {

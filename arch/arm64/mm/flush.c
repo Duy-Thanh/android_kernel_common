@@ -93,3 +93,9 @@ void arch_invalidate_pmem(void *addr, size_t size)
 }
 EXPORT_SYMBOL_GPL(arch_invalidate_pmem);
 #endif
+
+void arch_dcache_clean_poc(unsigned long start, unsigned long end)
+{
+	dcache_clean_poc(start, end);
+}
+EXPORT_SYMBOL_GPL(arch_dcache_clean_poc);

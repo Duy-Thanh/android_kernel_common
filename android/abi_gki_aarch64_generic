@@ -34,6 +34,8 @@
   __arch_copy_from_user
   __arch_copy_in_user
   __arch_copy_to_user
+  arch_dcache_clean_poc
+  arch_sync_dma_for_device
   arch_timer_read_counter
   argv_free
   argv_split
