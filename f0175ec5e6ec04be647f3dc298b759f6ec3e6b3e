@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bd209d3_c8fe0501",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-08-19T13:37:54Z",
+      "side": 1,
+      "message": "Sure, I have raised a separate Issue tracker to get it reviewed https://partnerissuetracker.corp.google.com/issues/243122615",
+      "parentUuid": "e4bb2df6_620037bc",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a801d998_d56b64b3",
         "filename": "mm/swapfile.c",
         "patchSetId": 1
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "IIUC, you\u0027re invoking trace_android_vh_disable_randomization() in the following call-chain?\n\n```\ndo_initcall\n \u003d\u003e software_resume\n  \u003d\u003e swsusp_check()\n   \u003d\u003e trace_android_vh_check_randomization(p-\u003ebdev, \u0026noswap_randomize)\n```\n\nIf so, I don\u0027t think this will work, because this call-chain occurs before userspace is even up, which means that your module will not have been loaded and registered with the trace hook yet.\n\nFurthermore, I\u0027m concerned about using `GENHD_FL_NO_RANDOMIZE.` This seems to be a flag that you\u0027re using an arbitrary bit position for, since it\u0027s not part of the core kernel. What happens if the kernel starts using the same flag that you\u0027re using for another purpose?",
       "parentUuid": "30453945_3b0b36a4",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d7a995_a94b0567",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-08-19T13:37:54Z",
+      "side": 1,
+      "message": "@Isaac: We are calling, the swusp_check, via a hibernation script in userspace, triggered, after boot to HMI and post module loading.\nuserspace echo (major:minor number of the swap block device)\n\u003d\u003eresume_store\n  \u003d\u003esoftware_resume\n   \u003d\u003eswsusp_check\n   \u003d\u003etrace_android_vh_check_randomization(p-\u003ebdev, \u0026noswap_randomize)\n     \nRegarding the usage of GENHD_FL_NO_RANDOMIZE  within gendisk flags, yes, for now we are using this, as we have to mark the swap device in some manner, I could have used a Android vendor field, but that would have modified a core data structure, let me know if you have better ideas.",
+      "parentUuid": "5a1fc93e_55b1b77c",
       "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
