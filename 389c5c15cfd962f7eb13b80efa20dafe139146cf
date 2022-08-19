@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1ef8f6dc_6f75a9b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-08-19T18:45:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94299cb5_1422025e",
+      "revId": "389c5c15cfd962f7eb13b80efa20dafe139146cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ec3a8ad0_be55b02a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -75,6 +93,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c6e82cd_27c68926",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-08-19T18:45:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38749159_6cca02e1",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 26
+      },
+      "revId": "389c5c15cfd962f7eb13b80efa20dafe139146cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7960ac60_5720cd97",
@@ -88,6 +130,30 @@
       "writtenOn": "2022-08-19T17:49:36Z",
       "side": 1,
       "message": "I think we should stick to \n\n```\n. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common\n. ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64\n```\n\nIn particular, build.config.gki.aarch64 sets things specific to the GKI, e.g. the GKI system_dlkm, the gki_defconfig, etc.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 52
+      },
+      "revId": "389c5c15cfd962f7eb13b80efa20dafe139146cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19334baa_11df996c",
+        "filename": "build.config.db845c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-08-19T18:45:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7960ac60_5720cd97",
       "range": {
         "startLine": 1,
         "startChar": 0,
