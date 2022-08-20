@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b38a4979_5617e283",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-20T15:16:46Z",
+      "side": 1,
+      "message": "use your name please, not your email alias.",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b6f4ef_838db0d4",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-20T15:16:46Z",
+      "side": 1,
+      "message": "you can not add new taint flags to the kernel as this is a user/kernel api that must be stable.",
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6ddda5_8a4fd738",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-20T15:16:46Z",
+      "side": 1,
+      "message": "this should not be used by any kernel module.",
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c454ae2f_ccc55bb1",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1713,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-20T15:16:46Z",
+      "side": 1,
+      "message": "Are you sure you want to use ubi?  What storage device requires this?",
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
