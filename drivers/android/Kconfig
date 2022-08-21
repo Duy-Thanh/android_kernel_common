@@ -1,13 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0
 menu "Android"
 
-config ANDROID
-	bool "Android Drivers"
-	help
-	  Enable support for various drivers needed on the Android platform
-
-if ANDROID
-
 config ANDROID_BINDER_IPC
 	bool "Android Binder IPC Driver"
 	depends on MMU
@@ -54,6 +47,7 @@ config ANDROID_BINDER_IPC_SELFTEST
 	  exhaustively with combinations of various buffer sizes and
 	  alignments.
 
+<<<<<<< HEAD   (dccd5d ANDROID: add VIDEO_V4L2_SUBDEV_API to the GKI_HIDDEN_MEDIA_C)
 config ANDROID_VENDOR_HOOKS
 	bool "Android Vendor Hooks"
 	depends on TRACEPOINTS
@@ -76,4 +70,6 @@ config ANDROID_DEBUG_KINFO
 
 endif # if ANDROID
 
+=======
+>>>>>>> BRANCH (228dfe Merge tag 'char-misc-6.0-rc1' of git://git.kernel.org/pub/sc)
 endmenu
