@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a0cc355_cb2ec1f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-22T06:20:01Z",
+      "side": 1,
+      "message": "ok,I will modify it.",
+      "parentUuid": "45281886_c1c924d8",
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50f6cf03_54967351",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-08-18T14:18:46Z",
       "side": 1,
       "message": "checkpatch will complain about too long of a line I think.",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 104
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6285ca1_20589685",
+        "filename": "include/trace/hooks/rmap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-22T06:20:01Z",
+      "side": 1,
+      "message": "have been modified.",
+      "parentUuid": "50f6cf03_54967351",
       "range": {
         "startLine": 15,
         "startChar": 1,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5baebf9c_4d39c4a6",
+        "filename": "include/trace/hooks/vmscan.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-22T06:20:01Z",
+      "side": 1,
+      "message": "the first flag means whether go the tracepoint logic. the second flag control which value to return.",
+      "parentUuid": "25b23734_7242d005",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 53
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af5ba163_88ddadc6",
@@ -81,6 +147,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "897fbd22_6257a371",
+        "filename": "mm/internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-22T06:20:01Z",
+      "side": 1,
+      "message": "yeah,I have move it to my vendor hook module.",
+      "parentUuid": "af5ba163_88ddadc6",
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "454fe08e_06f39919",
@@ -94,6 +178,30 @@
       "writtenOn": "2022-08-18T14:18:46Z",
       "side": 1,
       "message": "checkpatch will complain about this.\n\nAnd you are putting logic into the kernel for a tracepoint, please do this in your tracepoint function instead, it should not be here.",
+      "range": {
+        "startLine": 611,
+        "startChar": 2,
+        "endLine": 615,
+        "endChar": 29
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f7b226_f4cc5fa5",
+        "filename": "mm/migrate.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-22T06:20:01Z",
+      "side": 1,
+      "message": "got it.",
+      "parentUuid": "454fe08e_06f39919",
       "range": {
         "startLine": 611,
         "startChar": 2,
@@ -127,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4f10863_dfe621c9",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2410,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-22T06:20:01Z",
+      "side": 1,
+      "message": "I have moved it to driver module.",
+      "parentUuid": "3f6d0ad7_88d61766",
+      "range": {
+        "startLine": 2410,
+        "startChar": 0,
+        "endLine": 2410,
+        "endChar": 34
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e05c902_8083d7ba",
@@ -150,6 +282,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9496487f_770eb38e",
+        "filename": "mm/rmap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-22T06:20:01Z",
+      "side": 1,
+      "message": "yeah,you are right,thanks!",
+      "parentUuid": "9e05c902_8083d7ba",
+      "range": {
+        "startLine": 796,
+        "startChar": 0,
+        "endLine": 796,
+        "endChar": 17
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e285dcd4_d947f4d4",
@@ -163,6 +319,30 @@
       "writtenOn": "2022-08-18T14:18:46Z",
       "side": 1,
       "message": "again, you are putting logic in the kernel for how a tracepoint is causing changes.  The changes should be done in your kernel module that you hook the tracepoint into, not in here.",
+      "range": {
+        "startLine": 1033,
+        "startChar": 1,
+        "endLine": 1041,
+        "endChar": 3
+      },
+      "revId": "0b1bbcb902ed647223cb0f953bcf359b76494907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d8b1fc_df25d74f",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-22T06:20:01Z",
+      "side": 1,
+      "message": "In there , It will return PAGEREF_ACTIVATE or PAGEREF_KEEP,if move thest logic to kernel module.This functionality cannot be implemented.",
+      "parentUuid": "e285dcd4_d947f4d4",
       "range": {
         "startLine": 1033,
         "startChar": 1,
