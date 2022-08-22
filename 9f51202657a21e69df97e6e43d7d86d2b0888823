@@ -33,6 +33,24 @@
       "message": "This error also needs to be fixed:\n\n`WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: \"wanwei.jiang\" \u003cwanwei.jiang@amlogic.com\u003e\u0027 !\u003d \u0027Signed-off-by: Wanwei Jiang \u003cwanwei.jiang@amlogic.com\u003e\u0027\n`",
       "revId": "9f51202657a21e69df97e6e43d7d86d2b0888823",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fd449ea_3dc3ab1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-22T19:44:15Z",
+      "side": 1,
+      "message": "yes, the abi report shows that the changelog is incorrect.  Please regenerate it properly and resubmit.",
+      "parentUuid": "a91115ab_e538c96b",
+      "revId": "9f51202657a21e69df97e6e43d7d86d2b0888823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
