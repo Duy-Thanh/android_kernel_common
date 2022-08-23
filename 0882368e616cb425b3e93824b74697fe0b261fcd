@@ -16,6 +16,23 @@
       "message": "checkpatch is ok as this is just an upstream revert.",
       "revId": "0882368e616cb425b3e93824b74697fe0b261fcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b0e05bd_6f24b46f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-08-23T16:53:12Z",
+      "side": 1,
+      "message": "From what I understand the reverted commit fixed several UAF scenarios of the `binder_alloc-\u003evma` pointer. So I\u0027ve opened b/243528889 to track the re-apply of this patch in a ABI-stable compliant way.",
+      "revId": "0882368e616cb425b3e93824b74697fe0b261fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
