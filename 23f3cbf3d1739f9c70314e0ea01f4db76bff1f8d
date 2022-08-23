@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0497a05_0b9ff983",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-23T16:39:29Z",
+      "side": 1,
+      "message": "nit: Please keep lines \u003c\u003d75 chars",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "23f3cbf3d1739f9c70314e0ea01f4db76bff1f8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26af9611_b1682f64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-23T16:39:29Z",
+      "side": 1,
+      "message": "Remove the empty line.",
+      "revId": "23f3cbf3d1739f9c70314e0ea01f4db76bff1f8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
