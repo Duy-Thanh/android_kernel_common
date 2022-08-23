@@ -2152,6 +2152,7 @@ static int mtk_dip_remove(struct platform_device *pdev)
 {
 	struct mtk_dip_dev *dip_dev = dev_get_drvdata(&pdev->dev);
 
+	pr_info("%s +\n", __func__);
 	mtk_dip_res_release(dip_dev);
 	pm_runtime_disable(&pdev->dev);
 	mtk_dip_dev_v4l2_release(dip_dev);
@@ -2166,6 +2167,7 @@ static int __maybe_unused mtk_dip_runtime_suspend(struct device *dev)
 {
 	struct mtk_dip_dev *dip_dev = dev_get_drvdata(dev);
 
+	dev_info(dip_dev->dev, "%s: +\n", __func__);
 	rproc_shutdown(dip_dev->rproc_handle);
 	clk_bulk_disable_unprepare(dip_dev->num_clks,
 				   dip_dev->clks);
@@ -2207,6 +2209,9 @@ static int __maybe_unused mtk_dip_pm_suspend(struct device *dev)
 
 	if (pm_runtime_suspended(dev))
 		return 0;
+
+	dev_info(dev, "%s: wait for composing num(%d) to suspend\n",
+		 __func__, atomic_read(&dip_dev->num_composing));
 
 	ret = wait_event_timeout
 		(dip_dev->flushing_waitq,
