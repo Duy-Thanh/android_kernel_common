@@ -16,6 +16,24 @@
       "message": "Changelog text is still incorrect.\n\nPlease rebase your patch and regenerate the .xml file again, and put the output of the report files in the changelog.\n\nAs proof of the incorrectness, the build system is saying:\n`37 symbol(s) added`",
       "revId": "2edd666b9ea892bb61e33149f94d49b45896dd02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "895eb951_14e977bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-23T13:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f08b203_bbda0faa",
+      "revId": "2edd666b9ea892bb61e33149f94d49b45896dd02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

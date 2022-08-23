@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0480800_0dbb89f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-23T13:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34d25c00_3ab25f73",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57b6f4ef_838db0d4",
@@ -79,6 +103,24 @@
       "side": 1,
       "message": "Thank you. I have modified my driver and no longer use add_taint and security_locked_down functions.",
       "parentUuid": "57b6f4ef_838db0d4",
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "982653e0_be084d37",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-23T13:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae94d248_408a95ae",
       "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -118,6 +160,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc33fa1e_a3bb55ff",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-23T13:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1799a99a_7b66505e",
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c454ae2f_ccc55bb1",
@@ -149,6 +209,24 @@
       "side": 1,
       "message": "Thank you for your careful review. The UBI function is really not used in our Android products. I have disabled it.",
       "parentUuid": "c454ae2f_ccc55bb1",
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e804ecc_decd3295",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1713,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-23T13:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "541d4d94_a97cb418",
       "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
