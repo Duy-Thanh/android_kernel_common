@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34d25c00_3ab25f73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2022-08-23T10:14:41Z",
+      "side": 1,
+      "message": "Thanks very much! I will modify it.",
+      "parentUuid": "b38a4979_5617e283",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57b6f4ef_838db0d4",
         "filename": "android/abi_gki_aarch64_amlogic",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2022-08-20T15:16:46Z",
       "side": 1,
       "message": "you can not add new taint flags to the kernel as this is a user/kernel api that must be stable.",
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae94d248_408a95ae",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2022-08-23T10:14:41Z",
+      "side": 1,
+      "message": "Thank you. I have modified my driver and no longer use add_taint and security_locked_down functions.",
+      "parentUuid": "57b6f4ef_838db0d4",
       "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1799a99a_7b66505e",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2022-08-23T10:14:41Z",
+      "side": 1,
+      "message": "Sorry, we don\u0027t know that we can\u0027t use these two functions security_locked_down() and add_taint(), because the ABI tool doesn\u0027t find out them. Are there other functions that are not suitable? Can we find out by ourselves?\n\nRefer to the kernel function parse_one() in kernel/params.c(parse_one.png in attachment) to realize our parameters analysis in gki_tool module for our other drivers.\n\nWe will learn to implement this feature without using the functions security_locked_down() and add_taint().",
+      "parentUuid": "9c6ddda5_8a4fd738",
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c454ae2f_ccc55bb1",
         "filename": "android/abi_gki_aarch64_amlogic",
         "patchSetId": 1
@@ -71,6 +131,24 @@
       "writtenOn": "2022-08-20T15:16:46Z",
       "side": 1,
       "message": "Are you sure you want to use ubi?  What storage device requires this?",
+      "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "541d4d94_a97cb418",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1713,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2022-08-23T10:14:41Z",
+      "side": 1,
+      "message": "Thank you for your careful review. The UBI function is really not used in our Android products. I have disabled it.",
+      "parentUuid": "c454ae2f_ccc55bb1",
       "revId": "5c0a11c2247a898769102dd786b290b0eee329fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

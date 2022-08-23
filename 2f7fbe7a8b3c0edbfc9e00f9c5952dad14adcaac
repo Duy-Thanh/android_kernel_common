@@ -16,6 +16,24 @@
       "message": "changelog does not match your commit at all 😞\n\nAlso please rebase and resubmit.",
       "revId": "2f7fbe7a8b3c0edbfc9e00f9c5952dad14adcaac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb2140c2_b4e59418",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2022-08-23T10:14:41Z",
+      "side": 1,
+      "message": "okay, I\u0027ll deal with it immediately",
+      "parentUuid": "6887c984_16b393b1",
+      "revId": "2f7fbe7a8b3c0edbfc9e00f9c5952dad14adcaac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

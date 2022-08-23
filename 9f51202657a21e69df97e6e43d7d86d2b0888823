@@ -51,6 +51,42 @@
       "parentUuid": "a91115ab_e538c96b",
       "revId": "9f51202657a21e69df97e6e43d7d86d2b0888823",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "489e4fa8_f9fd4ae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2022-08-23T10:14:41Z",
+      "side": 1,
+      "message": "My changelog text is copied from out_abi/android13-5.15/dist/abi.report. So I don\u0027t know how to deal with it. Please give me some more guidance. Thank you so much!",
+      "parentUuid": "a91115ab_e538c96b",
+      "revId": "9f51202657a21e69df97e6e43d7d86d2b0888823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2d4481e_c70278b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2022-08-23T10:14:41Z",
+      "side": 1,
+      "message": "Thank you for your suggestion. I have handled it.",
+      "parentUuid": "58fef730_6adee039",
+      "revId": "9f51202657a21e69df97e6e43d7d86d2b0888823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
