@@ -16,6 +16,24 @@
       "message": "does this change the abi?  Let me do a build...",
       "revId": "ee8783cc4f3714366b904498a76e14f1e2029264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a17c2450_9d026a4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015397
+      },
+      "writtenOn": "2022-08-23T01:24:03Z",
+      "side": 1,
+      "message": "I don\u0027t believe so, the local build I did indicated 0 lines for all the ABI diff reports.",
+      "parentUuid": "133d1f69_6b311cb0",
+      "revId": "ee8783cc4f3714366b904498a76e14f1e2029264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
