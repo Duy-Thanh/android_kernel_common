@@ -1933,6 +1933,7 @@ config MODULE_SIG_FORMAT
 	def_bool n
 	select SYSTEM_DATA_VERIFICATION
 
+<<<<<<< HEAD   (08f32f Merge c8a684e2e110 ("Merge tag 'leds-5.20-rc1' of git://git.)
 menuconfig MODULES
 	bool "Enable loadable module support"
 	modules
@@ -2238,6 +2239,9 @@ endif # MODULES
 config MODULES_TREE_LOOKUP
 	def_bool y
 	depends on PERF_EVENTS || TRACING || CFI_CLANG
+=======
+source "kernel/module/Kconfig"
+>>>>>>> BRANCH (e74acd Merge tag 'modules-6.0-rc1' of git://git.kernel.org/pub/scm/)
 
 config INIT_ALL_POSSIBLE
 	bool
