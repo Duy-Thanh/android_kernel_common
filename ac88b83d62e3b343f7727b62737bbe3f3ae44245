@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "62490314_53188d3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-23T08:22:39Z",
+      "side": 1,
+      "message": "please note that this variable is no longer exported in newer kernel versions, so you will have to fix your out-of-tree code in the future.",
+      "range": {
+        "startLine": 21,
+        "startChar": 25,
+        "endLine": 21,
+        "endChar": 49
+      },
+      "revId": "ac88b83d62e3b343f7727b62737bbe3f3ae44245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db6a0da1_69828122",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-23T08:22:39Z",
+      "side": 1,
+      "message": "should be your name, not your email alias.",
+      "range": {
+        "startLine": 25,
+        "startChar": 15,
+        "endLine": 25,
+        "endChar": 24
+      },
+      "revId": "ac88b83d62e3b343f7727b62737bbe3f3ae44245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9e3f10ce_0ed20797",
