@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f705803_789ef612",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-23T15:16:01Z",
+      "side": 0,
+      "message": "Deleting an upstream file is a no-go.",
+      "revId": "86be1a3d9f5a43437b9d1815a6014b4be96e1349",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
