@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c02ac3d1_b2a3a11c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-08-23T09:16:13Z",
+      "side": 1,
+      "message": "OK,thanks a lot!",
+      "parentUuid": "62490314_53188d3b",
+      "range": {
+        "startLine": 21,
+        "startChar": 25,
+        "endLine": 21,
+        "endChar": 49
+      },
+      "revId": "ac88b83d62e3b343f7727b62737bbe3f3ae44245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db6a0da1_69828122",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-23T08:22:39Z",
       "side": 1,
       "message": "should be your name, not your email alias.",
+      "range": {
+        "startLine": 25,
+        "startChar": 15,
+        "endLine": 25,
+        "endChar": 24
+      },
+      "revId": "ac88b83d62e3b343f7727b62737bbe3f3ae44245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0806111f_7b06ac1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-08-23T09:16:13Z",
+      "side": 1,
+      "message": "The warning message has changed.Author name has same as other commit. Please review one more time.",
+      "parentUuid": "db6a0da1_69828122",
       "range": {
         "startLine": 25,
         "startChar": 15,
