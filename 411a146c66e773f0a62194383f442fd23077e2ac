@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af086d38_01307fb2",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-24T12:43:13Z",
+      "side": 1,
+      "message": "I want to use struct page_vma_mapped_walk in my hook,but if i include include/linux/rmap.h, It has some compile errors.\nit seem that this header file can not be included.\nHow should I solve this problem?",
+      "parentUuid": "545b7e96_b983a4ba",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 29
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0572c90_ee34efd1",
         "filename": "include/trace/hooks/vmscan.h",
         "patchSetId": 10
