@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f7059e8_09a5ddae",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5148,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-24T11:58:18Z",
+      "side": 1,
+      "message": "function calls in this function are \"gfp_mask, order\", why not follow the standard here?",
+      "range": {
+        "startLine": 5148,
+        "startChar": 45,
+        "endLine": 5148,
+        "endChar": 61
+      },
+      "revId": "afa5a5d9a88543ed247694ae155da5b615efbeca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
