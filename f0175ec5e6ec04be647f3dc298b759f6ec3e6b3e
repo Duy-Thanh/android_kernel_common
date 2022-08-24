@@ -195,6 +195,24 @@
       "parentUuid": "c3d7a995_a94b0567",
       "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f5544c6_361605dc",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-08-24T19:54:48Z",
+      "side": 1,
+      "message": "\u003e let me know if you have better ideas.\n\nWhat about the following? Suppose the core kernel exposes a function with the following signature and assume that the function is exported to modules:\n\n`bool is_hibernation_resume_bdev(struct block_device *bdev)`\n\nThis function takes a bdev as input and returns true if it\u0027s the same device used to store the hibernation image. False otherwise.\n\nThen, you add a vendor hook in the scan_swap_map_slots() https://android.googlesource.com/kernel/common/+/refs/heads/android13-5.15/mm/swapfile.c#777.\n\nThe tracehook can take in the bdev pointer for the swap area,`swap_bdev`, and a pointer to a boolean, call it `ssd_ok` for lack of a better term. In the tracehook, you can use:\n\n`*ssd_ok \u003d !is_hibernation_resume_bdev(swap_bdev)`\n\nand then change the checks in scan_swap_map_slots() as follows:\n\n```\n- if (si-\u003ecluster_info)\n+ if (ssd_ok \u0026\u0026 si-\u003ecluster_info)\n```\n\nAnd that should let you bypass the SSD allocation logic and use the HDD swap slot allocation logic instead. Would that work for your usecase?",
+      "parentUuid": "cc14f3fd_6ae0c0dc",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
