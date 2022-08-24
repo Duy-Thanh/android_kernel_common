@@ -34,6 +34,23 @@
       "parentUuid": "9f705803_789ef612",
       "revId": "86be1a3d9f5a43437b9d1815a6014b4be96e1349",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8daba2f0_1e625660",
+        "filename": "mm/migrate.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-24T10:35:09Z",
+      "side": 0,
+      "message": "do not delete whitespace for no reason.",
+      "revId": "86be1a3d9f5a43437b9d1815a6014b4be96e1349",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

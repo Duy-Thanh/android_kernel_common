@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ebbaa0_09720c35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-24T10:35:09Z",
+      "side": 1,
+      "message": "This is exporting internal kernel structures and freezing them into an ABI that we must support for 10+ years.  These structures are NOT set up this way at all, so this will not work, sorry.",
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "545b7e96_b983a4ba",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-24T10:35:09Z",
+      "side": 1,
+      "message": "sorry, but no, we are not going to support this structure for forever, as it is an internal kernel api that should never be exported and can change over time.\n\nAlso, it should not need to be moved to a different .h file, that is very odd.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 29
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0572c90_ee34efd1",
+        "filename": "include/trace/hooks/vmscan.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-24T10:35:09Z",
+      "side": 1,
+      "message": "this is an internal kernel structure that we do not want to have frozen into the abi.",
+      "range": {
+        "startLine": 57,
+        "startChar": 10,
+        "endLine": 57,
+        "endChar": 28
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
