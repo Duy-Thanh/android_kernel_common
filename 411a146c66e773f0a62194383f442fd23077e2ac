@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "648bf9fe_943400ec",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-24T12:40:51Z",
+      "side": 1,
+      "message": "What\u0027s the reason this structure is being moved from include/linux/rmap.h into this header? AFAIKT both headers can be included from drivers, so there is no difference. What am I missing?",
+      "parentUuid": "545b7e96_b983a4ba",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 29
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0572c90_ee34efd1",
         "filename": "include/trace/hooks/vmscan.h",
         "patchSetId": 10
