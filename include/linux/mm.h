@@ -44,6 +44,16 @@ struct writeback_control;
 struct bdi_writeback;
 struct pt_regs;
 
+struct page_vma_mapped_walk {
+	struct page *page;
+	struct vm_area_struct *vma;
+	unsigned long address;
+	pmd_t *pmd;
+	pte_t *pte;
+	spinlock_t *ptl;
+	unsigned int flags;
+};
+
 extern int sysctl_page_lock_unfairness;
 
 void init_mm_internals(void);
