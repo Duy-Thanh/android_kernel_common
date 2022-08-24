@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "197c4c5c_5759ff25",
+        "filename": "mm/migrate.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-24T07:55:42Z",
+      "side": 1,
+      "message": "have deleted it.",
+      "parentUuid": "1898e50e_c7dd6ec1",
+      "range": {
+        "startLine": 590,
+        "startChar": 1,
+        "endLine": 590,
+        "endChar": 22
+      },
+      "revId": "11138f3dc9904e7e4c3ecc98efa9be88578702a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0c04e40_27525ca6",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc250d6_cdd0e3ce",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2392,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-24T07:55:42Z",
+      "side": 1,
+      "message": "have delete it.",
+      "parentUuid": "c0c04e40_27525ca6",
+      "range": {
+        "startLine": 2392,
+        "startChar": 1,
+        "endLine": 2392,
+        "endChar": 22
+      },
+      "revId": "11138f3dc9904e7e4c3ecc98efa9be88578702a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da2f9f73_27b858e7",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-08-23T15:16:01Z",
       "side": 1,
       "message": "The way these variable are used, they can be combined into one variable:\n\ntrace_android_vh_check_page_look_around_ref(page, \u0026lookaround_ref);\nif (lookaround_ref) {\n    if (PageReferenced(page))\n        return PAGEREF_ACTIVATE;\n    else {\n        SetPageReferenced(page);\n        return PAGEREF_KEEP;\n    }\n}",
+      "range": {
+        "startLine": 1033,
+        "startChar": 1,
+        "endLine": 1034,
+        "endChar": 23
+      },
+      "revId": "11138f3dc9904e7e4c3ecc98efa9be88578702a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17a5b488_3bfe0386",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-24T07:55:42Z",
+      "side": 1,
+      "message": "ok,i have modified.",
+      "parentUuid": "da2f9f73_27b858e7",
       "range": {
         "startLine": 1033,
         "startChar": 1,
