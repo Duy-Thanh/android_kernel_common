@@ -22,6 +22,30 @@
       },
       "revId": "7623b946a3d7120890dabecc90216dce533137d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fe735e_a0a19f3b",
+        "filename": "mm/memblock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1910,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-24T16:43:11Z",
+      "side": 1,
+      "message": "This pattern is quite widely used in the kernel (see for example cases in page_alloc.c) and I don\u0027t think this is an overkill. If kernel command line contains mistakes, the kernel should not proceed until its fixed IMO.",
+      "parentUuid": "7da9cc08_5f7bfec2",
+      "range": {
+        "startLine": 1910,
+        "startChar": 1,
+        "endLine": 1910,
+        "endChar": 48
+      },
+      "revId": "7623b946a3d7120890dabecc90216dce533137d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
