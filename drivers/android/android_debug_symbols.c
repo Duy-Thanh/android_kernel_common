@@ -76,6 +76,7 @@ static const struct ads_entry ads_entries[ADS_END] = {
 	ADS_ENTRY(ADS_SYSCTL_LEGACY_VA_LAYOUT, &sysctl_legacy_va_layout),
 #endif
 	ADS_ENTRY(ADS_SHOW_MEM, show_mem),
+	ADS_ENTRY(ADS_PUT_TASK_STACK, put_task_stack),
 };
 
 /*
