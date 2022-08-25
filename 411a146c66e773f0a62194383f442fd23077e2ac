@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "044527e4_0eb3b8c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-25T09:07:04Z",
+      "side": 1,
+      "message": "This structure can not be used in a hook.",
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "545b7e96_b983a4ba",
@@ -197,6 +214,29 @@
         "startChar": 0,
         "endLine": 47,
         "endChar": 29
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1021c872_7601bfd6",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-25T09:07:04Z",
+      "side": 1,
+      "message": "this is an internal kernel structure that can not be exported in a hook, sorry.",
+      "range": {
+        "startLine": 261,
+        "startChar": 10,
+        "endLine": 261,
+        "endChar": 43
       },
       "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
