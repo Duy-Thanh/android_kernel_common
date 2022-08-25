@@ -16,6 +16,24 @@
       "message": "Sorry for the error correction CL, we put the trace in the wrong place. This CL follows up to correct it.",
       "revId": "7befab01377ee84c31a001142d50a8ac0cbaab08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10268d47_04b0f920",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-25T22:00:32Z",
+      "side": 1,
+      "message": "This patch should have a \"Fixes:\" tag that cites the patch which it is fixing. Since it fix fixing a prior patch, it should be titled \"Fix vendor hook...\" instead of \"Add vendor hook\". You statement of the \"correction\" should be in the commit text.",
+      "parentUuid": "4136b6fa_5f6c295f",
+      "revId": "7befab01377ee84c31a001142d50a8ac0cbaab08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
