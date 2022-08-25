@@ -5,6 +5,9 @@
  *
  * Copyright 2020 Google LLC
  */
+#ifndef __GENKSYMS__
+#include <linux/rmap.h>
+#endif
 
 #define CREATE_TRACE_POINTS
 #include <trace/hooks/vendor_hooks.h>
