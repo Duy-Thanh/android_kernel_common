@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42561584_2979fa32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-08-25T18:37:58Z",
+      "side": 1,
+      "message": "Since this patch is upstream, shouldn\u0027t the tag \"UPSTREAM:\" be used instead of \"BACKPORT:\"? See also https://source.android.com/docs/core/architecture/kernel/kernel-code.",
+      "revId": "9598d9912eead6596ce1fd339c00a2840f2cd148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
