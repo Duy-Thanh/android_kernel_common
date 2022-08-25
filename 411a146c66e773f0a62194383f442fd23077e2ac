@@ -156,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a327167d_bb12e1cd",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-25T02:16:13Z",
+      "side": 1,
+      "message": "if i include include/linux/rmap.h in include/trace/hooks/mm.h. it cause\nimplicit declaration or redefinition function errors, see below:\n \n/data/zhangkui/lipeifeng/android-kernel/common/include/linux/rmap.h:204:3: error: implicit declaration of function \u0027trace_android_vh_update_page_mapcount\u0027 [-Werror,-Wimplicit-function-declaration]\nandroid-kernel/common/include/linux/rmap.h:204:3: error: implicit declaration of function \u0027trace_android_vh_update_page_mapcount\u0027 [-Werror,-Wimplicit-function-declaration]\nandroid-kernel/common/include/trace/hooks/mm.h:49:1: error: redefinition of \u0027__tpstrtab_android_rvh_set_skip_swapcache_flags\u0027\nandroid-kernel/common/include/trace/hooks/mm.h:49:1: error: redefinition of \u0027__traceiter_android_rvh_set_skip_swapcache_flags\u0027\nandroid-kernel/common/include/trace/hooks/mm.h:52:1: error: redefinition of \u0027__tpstrtab_android_rvh_set_gfp_zone_flags\u0027\nandroid-kernel/common/include/trace/hooks/mm.h:52:1: error: redefinition of \u0027__traceiter_android_rvh_set_gfp_zone_flags\u0027\nandroid-kernel/common/include/trace/hooks/mm.h:55:1: error: redefinition of \u0027__tpstrtab_android_rvh_set_readahead_gfp_mask\u0027\nandroid-kernel/common/include/trace/hooks/mm.h:55:1: error: redefinition of \u0027__traceiter_android_rvh_set_readahead_gfp_mask\u0027\nandroid-kernel/common/include/trace/hooks/mm.h:59:11: error: unexpected type name \u0027s64\u0027: expected identifier\nandroid-kernel/common/include/trace/hooks/mm.h:59:15: error: expected \u0027)\u0027\nandroid-kernel/common/include/trace/hooks/mm.h:58:14: error: a parameter list without types is only allowed in a function definition\nandroid-kernel/common/include/trace/hooks/mm.h:62:11: error: expected identifier\nandroid-kernel/common/include/trace/hooks/mm.h:61:13: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\nandroid-kernel/common/include/trace/hooks/mm.h:61:13: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\nandroid-kernel/common/include/trace/hooks/mm.h:66:11: error: expected identifier\nandroid-kernel/common/include/trace/hooks/mm.h:65:13: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\nandroid-kernel/common/include/trace/hooks/mm.h:65:13: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\nandroid-kernel/common/include/trace/hooks/mm.h:72:11: error: expected identifier\nandroid-kernel/common/include/trace/hooks/mm.h:71:13: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\nandroid-kernel/common/include/trace/hooks/mm.h:71:13: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\nandroid-kernel/common/include/trace/hooks/mm.h:76:11: error: expected identifier\nandroid-kernel/common/include/trace/hooks/mm.h:75:13: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\nandroid-kernel/common/include/trace/hooks/mm.h:75:13: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\nandroid-kernel/common/include/trace/hooks/mm.h:79:11: error: expected identifier",
+      "parentUuid": "46898184_c43fbef9",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 29
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0572c90_ee34efd1",
         "filename": "include/trace/hooks/vmscan.h",
         "patchSetId": 10
