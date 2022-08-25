@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6fdeaa31_5980c308",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2022-08-25T12:37:28Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "738d37a9_30ccd2c1",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 91
+      },
+      "revId": "8566ca2a968347110779bad40d9c9c4cf424414b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "48d0e584_666087bb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2022-08-25T12:25:33Z",
       "side": 1,
       "message": "If no symbols are added, no need to change the .xml file.",
+      "revId": "8566ca2a968347110779bad40d9c9c4cf424414b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7e14ad0_da6db707",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2022-08-25T12:37:28Z",
+      "side": 1,
+      "message": "removed .xml file.",
+      "parentUuid": "48d0e584_666087bb",
       "revId": "8566ca2a968347110779bad40d9c9c4cf424414b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
