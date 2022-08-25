@@ -34,7 +34,11 @@
 #include <linux/rseq.h>
 #include <linux/seqlock.h>
 #include <linux/kcsan.h>
+<<<<<<< HEAD   (8fde13 Merge changes I6d1559bf,Ia54fa6f7,Ifb6b6d3f,I6c72d9c0,Ib0b1f)
 #include <linux/android_vendor.h>
+=======
+#include <linux/rv.h>
+>>>>>>> BRANCH (965a9d Merge tag 'trace-v6.0' of git://git.kernel.org/pub/scm/linux)
 #include <asm/kmap_size.h>
 
 /* task_struct member predeclarations (sorted alphabetically): */
@@ -1507,6 +1511,16 @@ struct task_struct {
 	 * cores
 	 */
 	struct callback_head		l1d_flush_kill;
+#endif
+
+#ifdef CONFIG_RV
+	/*
+	 * Per-task RV monitor. Nowadays fixed in RV_PER_TASK_MONITORS.
+	 * If we find justification for more monitors, we can think
+	 * about adding more or developing a dynamic method. So far,
+	 * none of these are justified.
+	 */
+	union rv_task_monitor		rv[RV_PER_TASK_MONITORS];
 #endif
 
 	/*
