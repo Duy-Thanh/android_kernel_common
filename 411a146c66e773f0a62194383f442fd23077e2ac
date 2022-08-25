@@ -244,6 +244,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e504e2e6_f3b94479",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-25T09:56:44Z",
+      "side": 1,
+      "message": "But,my hook must to use this structure.pls help to solve this issue.\nwhy can not include this header file? It\u0027s not reasonable.\nit seem that is the inclide/linux/rmap.h include \u003ctrace/hooks/mm.h\u003e cause this issue.",
+      "parentUuid": "1021c872_7601bfd6",
+      "range": {
+        "startLine": 261,
+        "startChar": 10,
+        "endLine": 261,
+        "endChar": 43
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0572c90_ee34efd1",
         "filename": "include/trace/hooks/vmscan.h",
         "patchSetId": 10
