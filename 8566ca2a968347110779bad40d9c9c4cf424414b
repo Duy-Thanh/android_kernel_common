@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "738d37a9_30ccd2c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-25T12:25:33Z",
+      "side": 1,
+      "message": "you can just say \"no changes happened to the .xml file\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 91
+      },
+      "revId": "8566ca2a968347110779bad40d9c9c4cf424414b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d0e584_666087bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-25T12:25:33Z",
+      "side": 1,
+      "message": "If no symbols are added, no need to change the .xml file.",
+      "revId": "8566ca2a968347110779bad40d9c9c4cf424414b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
