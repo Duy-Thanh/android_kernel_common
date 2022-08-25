@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0184e4e_8a8a5c6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-25T08:19:25Z",
+      "side": 1,
+      "message": "As stated before, these should never be used by any external driver.",
+      "revId": "434d93b337161467f509d4ff005ebf719039edc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
