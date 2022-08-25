@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e8b020_2fe152c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-25T09:03:23Z",
+      "side": 1,
+      "message": "breaks the build, not all of these are symbols that can be exported properly.",
+      "revId": "4b33b6f30d2e1b90f854b200be9c2c7aa637788c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
