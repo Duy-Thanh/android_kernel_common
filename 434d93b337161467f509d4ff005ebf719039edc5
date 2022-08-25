@@ -16,6 +16,24 @@
       "message": "As stated before, these should never be used by any external driver.",
       "revId": "434d93b337161467f509d4ff005ebf719039edc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a16d1d77_e9cc4206",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-25T16:49:01Z",
+      "side": 1,
+      "message": "Need to implement vendor hooks (feature from android12-5.10)",
+      "parentUuid": "c0184e4e_8a8a5c6c",
+      "revId": "434d93b337161467f509d4ff005ebf719039edc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
