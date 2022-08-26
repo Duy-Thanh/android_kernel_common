@@ -45,6 +45,30 @@
       },
       "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbe94085_df18ea67",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-08-26T16:00:04Z",
+      "side": 1,
+      "message": "I think we should be able to use `trace_suspend_resume(TPS(\"machine_suspend\"), state, false);` if we can just hook it (assuming the symbol exported). \n\nThe error or bail out cases are never being the full resume flow and I am not sure the timing is representative anyway.",
+      "parentUuid": "498a3264_3dd30357",
+      "range": {
+        "startLine": 456,
+        "startChar": 2,
+        "endLine": 456,
+        "endChar": 19
+      },
+      "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
