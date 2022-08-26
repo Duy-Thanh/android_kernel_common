@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498a3264_3dd30357",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-08-26T02:11:05Z",
+      "side": 1,
+      "message": "should we have the trace point `trace_android_vh_early_resume_begin(NULL);` after `error \u003d suspend_ops-\u003eenter(state);` ??\n\nmaybe right before syscore_resume()",
+      "range": {
+        "startLine": 456,
+        "startChar": 2,
+        "endLine": 456,
+        "endChar": 19
+      },
+      "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
