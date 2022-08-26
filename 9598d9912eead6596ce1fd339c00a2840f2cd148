@@ -16,6 +16,24 @@
       "message": "Since this patch is upstream, shouldn\u0027t the tag \"UPSTREAM:\" be used instead of \"BACKPORT:\"? See also https://source.android.com/docs/core/architecture/kernel/kernel-code.",
       "revId": "9598d9912eead6596ce1fd339c00a2840f2cd148",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "584d4578_65da2c9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885698
+      },
+      "writtenOn": "2022-08-26T05:42:31Z",
+      "side": 1,
+      "message": "The path change from \"drivers/ufs/core/ufshcd.c\" to \"drivers/scsi/ufs/ufshcd.c\". This is treated as UPSTREAM instead of BACKPORT?",
+      "parentUuid": "42561584_2979fa32",
+      "revId": "9598d9912eead6596ce1fd339c00a2840f2cd148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
