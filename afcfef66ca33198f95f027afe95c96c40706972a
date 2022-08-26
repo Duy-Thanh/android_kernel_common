@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b933dd2_b4de2f71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-08-26T02:12:57Z",
+      "side": 1,
+      "message": "ANDROID: power: fixes vendor hook for early_resume",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "498a3264_3dd30357",
         "filename": "kernel/power/suspend.c",
         "patchSetId": 2
