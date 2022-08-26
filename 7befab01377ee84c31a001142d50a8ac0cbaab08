@@ -70,6 +70,24 @@
       "parentUuid": "39fe3dcd_8b910a56",
       "revId": "7befab01377ee84c31a001142d50a8ac0cbaab08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aecc49d_2e1987e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-08-26T18:41:26Z",
+      "side": 1,
+      "message": "https://www.kernel.org/doc/html/v4.17/process/submitting-patches.html#describe-your-changes\n\nIf your patch fixes a bug in a specific commit, e.g. you found an issue using git bisect, please use the ‘Fixes:’ tag with the first 12 characters of the SHA-1 ID, and the one line summary. For example:\n\nFixes: e21d2170f366 (\"video: remove unnecessary platform_set_drvdata()\")",
+      "parentUuid": "e8036e7d_e5119e3f",
+      "revId": "7befab01377ee84c31a001142d50a8ac0cbaab08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
