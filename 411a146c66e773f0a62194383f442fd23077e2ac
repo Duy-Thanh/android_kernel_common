@@ -388,6 +388,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8da265b5_46953387",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-26T15:31:18Z",
+      "side": 1,
+      "message": "Why can\u0027t you use simply a forward-declaration in the include/trace/hooks/mm.h of this structure? There are a number of other structures forward-declared in that file.",
+      "parentUuid": "5b9f40cb_46966e95",
+      "range": {
+        "startLine": 261,
+        "startChar": 10,
+        "endLine": 261,
+        "endChar": 43
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0572c90_ee34efd1",
         "filename": "include/trace/hooks/vmscan.h",
         "patchSetId": 10
