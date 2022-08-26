@@ -16,6 +16,24 @@
       "message": "breaks the build, not all of these are symbols that can be exported properly.",
       "revId": "4b33b6f30d2e1b90f854b200be9c2c7aa637788c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77b62e2c_5c8c6bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1268395
+      },
+      "writtenOn": "2022-08-26T03:59:43Z",
+      "side": 1,
+      "message": "Sorry for the inconvence. I\u0027ve updated the patch. Please review again. Thanks. BTW may I get the details of build log without a @google.com account?",
+      "parentUuid": "62e8b020_2fe152c0",
+      "revId": "4b33b6f30d2e1b90f854b200be9c2c7aa637788c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
