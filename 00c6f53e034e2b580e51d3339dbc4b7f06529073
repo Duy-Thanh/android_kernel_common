@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fad95032_d3fdcd44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964658
+      },
+      "writtenOn": "2022-08-26T10:51:09Z",
+      "side": 1,
+      "message": "psodagud@codeaurora.org Can you help to check.",
+      "revId": "00c6f53e034e2b580e51d3339dbc4b7f06529073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7310974_9476a360",
         "filename": "drivers/irqchip/irq-gic-v3.c",
         "patchSetId": 3
@@ -14,6 +31,24 @@
       "writtenOn": "2022-08-26T10:45:54Z",
       "side": 1,
       "message": "we want to use this vendor hook API, and we call register_trace_android_vh_gic_v3_affinity_init() on vendor module name like gic.ko.\n\nAfter GKI kernel booting finish then init process start to load vendor’s module gic.ko, but in that time the GIC already been initialized.\nSo, we don’t figure out how to insert gic.ko module before gic_dist_init() been called ?\n\nDo you have any idea or suggestion for this issue ? \nThank you for your kind assistance.",
+      "revId": "00c6f53e034e2b580e51d3339dbc4b7f06529073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9bc1880_8e80d305",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1964658
+      },
+      "writtenOn": "2022-08-26T10:51:09Z",
+      "side": 1,
+      "message": "psodagud@codeaurora.org Can you help to check.",
+      "parentUuid": "e7310974_9476a360",
       "revId": "00c6f53e034e2b580e51d3339dbc4b7f06529073",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
