@@ -69,6 +69,30 @@
       },
       "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc676f41_26225116",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1347762
+      },
+      "writtenOn": "2022-08-26T16:04:02Z",
+      "side": 1,
+      "message": "Thanks,Wei. \nSeems like we have not export trace_suspend_resume in aosp, so we have two choices:\n1. export trace_suspend_resume\n2. use trace_android_vh_early_resume_begin and put that after trace_suspend_resume(...) given we have already define and export it in aosp.",
+      "parentUuid": "dbe94085_df18ea67",
+      "range": {
+        "startLine": 456,
+        "startChar": 2,
+        "endLine": 456,
+        "endChar": 19
+      },
+      "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
