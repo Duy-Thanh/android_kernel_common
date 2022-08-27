@@ -16,6 +16,24 @@
       "message": "Please no typec hooks, submit the needed changes upstream first and then we can see about backporting them to android kernels.\n\nAlso do not reuse old bugs for new features.",
       "revId": "afa6262e843b539cd99ed5b500b73feb60021501",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dec7494_131b1000",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2022-08-27T01:04:22Z",
+      "side": 1,
+      "message": "This is a cherry-pick of vendor hook from \nandroid12-5.10 branch. Not a new feature. We haven\u0027t yet figured out how to upstream this yet.",
+      "parentUuid": "19ee248f_5bea23a3",
+      "revId": "afa6262e843b539cd99ed5b500b73feb60021501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
