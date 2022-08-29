@@ -3058,11 +3058,16 @@ bool ext4_empty_dir(struct inode *inode)
 		de = (struct ext4_dir_entry_2 *) (bh->b_data +
 					(offset & (sb->s_blocksize - 1)));
 		if (ext4_check_dir_entry(inode, NULL, de, bh,
+<<<<<<< HEAD   (a3a983 Merge 5.10.137 into android12-5.10-lts)
 					 bh->b_data, bh->b_size, 0, offset)) {
 			offset = (offset | (sb->s_blocksize - 1)) + 1;
 			continue;
 		}
 		if (le32_to_cpu(de->inode)) {
+=======
+					 bh->b_data, bh->b_size, offset) ||
+		    le32_to_cpu(de->inode)) {
+>>>>>>> BRANCH (fa3303 Linux 5.10.138)
 			brelse(bh);
 			return false;
 		}
