@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "106aac27_520f07be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-29T18:53:04Z",
+      "side": 1,
+      "message": "Please explain why the final solution can\u0027t be backported and a revert is needed. From what I can see the upstream 5.15 still has this code not reverted.",
+      "revId": "be9fbe6cc4be12bab6a488882c0275ee54e7433b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
