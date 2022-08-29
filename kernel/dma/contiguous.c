@@ -461,6 +461,7 @@ static int __init rmem_cma_setup(struct reserved_mem *rmem)
 	bool default_cma = of_get_flat_dt_prop(node, "linux,cma-default", NULL);
 	struct cma *cma;
 	int err;
+	bool gcma;
 
 	if (size_cmdline != -1 && default_cma) {
 		pr_info("Reserved memory: bypass %s node, using cmdline CMA params instead\n",
@@ -477,8 +478,10 @@ static int __init rmem_cma_setup(struct reserved_mem *rmem)
 		return -EINVAL;
 	}
 
+	gcma = !!of_get_flat_dt_prop(node, "guarantee", NULL);
+
 	err = cma_init_reserved_mem(rmem->base, rmem->size, 0, rmem->name, &cma,
-				    false);
+				    gcma);
 	if (err) {
 		pr_err("Reserved memory: unable to setup CMA region\n");
 		return err;
