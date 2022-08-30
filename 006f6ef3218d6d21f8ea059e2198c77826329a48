@@ -16,6 +16,24 @@
       "message": "This particular commit has a merge conflict when cherry-picking, so it should be BACKPORT (rather than UPSTREAM), and there should be a brief note at the end of the commit message about how you resolved the conflict.",
       "revId": "006f6ef3218d6d21f8ea059e2198c77826329a48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade4e9f3_773cd5c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-08-30T21:05:36Z",
+      "side": 1,
+      "message": "It looks like you replaced the `hint 34` instructions with `bti c`.  However, this kernel doesn\u0027t have upstream commit 9be34be87cc8 (\"arm64: Add macro version of the BTI instruction\") backported to it.  Isn\u0027t that a prerequisite for using `bti c`?  You\u0027ll either need to backport that commit too, or leave the `hint 34` instructions as-is.",
+      "parentUuid": "18f49e0b_f95ff75f",
+      "revId": "006f6ef3218d6d21f8ea059e2198c77826329a48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
