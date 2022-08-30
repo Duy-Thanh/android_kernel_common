@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eefa4e7d_62e31888",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2949,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-30T21:11:54Z",
+      "side": 1,
+      "message": "This hook is not needed. Use the one that was already ere.",
+      "revId": "e9fd310a65a9525c386fb7550f55dbc923b091c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
