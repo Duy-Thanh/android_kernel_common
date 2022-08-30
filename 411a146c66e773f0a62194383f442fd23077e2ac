@@ -652,6 +652,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a94c4e16_0cc79be7",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-30T15:41:14Z",
+      "side": 1,
+      "message": "Most partners do not want to do a full build of all vendor code every time they update boot.img for a security update. We will not accept this as long as it is void * - other partners might use this hook.",
+      "parentUuid": "5aeb3ff7_2161a52e",
+      "range": {
+        "startLine": 261,
+        "startChar": 10,
+        "endLine": 261,
+        "endChar": 43
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0572c90_ee34efd1",
         "filename": "include/trace/hooks/vmscan.h",
         "patchSetId": 10
