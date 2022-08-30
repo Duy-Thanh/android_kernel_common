@@ -16,6 +16,24 @@
       "message": "Please explain why the final solution can\u0027t be backported and a revert is needed. From what I can see the upstream 5.15 still has this code not reverted.",
       "revId": "be9fbe6cc4be12bab6a488882c0275ee54e7433b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef51027b_008c22dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1887446
+      },
+      "writtenOn": "2022-08-30T02:21:59Z",
+      "side": 1,
+      "message": "The changes in kmemleak introduced new interfaces and brought side-effects of API inconsistency, such as, (1)https://github.com/torvalds/linux/commit/a317ebccaa3609917a2c021af870cf3fa607ab0c\n(2) https://github.com/torvalds/linux/commit/07313a2b29ed1079eaa7722624544b97b3ead84b\n\nThey are fixed in LK6.0. And the vendor modules will suffer as well. \n\nWe suggest these changes land in next gen (Android-14) and remind vendors to review the usage. For Android-13, reverting the source is a better option.",
+      "parentUuid": "106aac27_520f07be",
+      "revId": "be9fbe6cc4be12bab6a488882c0275ee54e7433b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
