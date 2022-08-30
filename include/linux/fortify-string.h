@@ -14,11 +14,17 @@ void __read_overflow2_field(size_t avail, size_t wanted) __compiletime_warning("
 void __write_overflow(void) __compiletime_error("detected write beyond size of object (1st parameter)");
 void __write_overflow_field(size_t avail, size_t wanted) __compiletime_warning("detected write beyond size of field (1st parameter); maybe use struct_group()?");
 
+#ifdef CONFIG_CC_HAS_BUILTIN_DYNAMIC_OBJECT_SIZE
+#define __object_size __builtin_dynamic_object_size
+#else
+#define __object_size __builtin_object_size
+#endif
+
 #define __compiletime_strlen(p)					\
 ({								\
 	unsigned char *__p = (unsigned char *)(p);		\
 	size_t __ret = (size_t)-1;				\
-	size_t __p_size = __builtin_object_size(p, 1);		\
+	size_t __p_size = __object_size(p, 1);			\
 	if (__p_size != (size_t)-1) {				\
 		size_t __p_len = __p_size - 1;			\
 		if (__builtin_constant_p(__p[__p_len]) &&	\
