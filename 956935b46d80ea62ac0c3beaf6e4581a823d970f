@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "440a41bf_1e877c50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2022-08-30T19:03:34Z",
+      "side": 1,
+      "message": "Squashed with https://android-review.googlesource.com/c/kernel/common/+/2064327/ as per instructions on https://partnerissuetracker.corp.google.com/issues/200103201\nPlease abandon this change.",
+      "revId": "956935b46d80ea62ac0c3beaf6e4581a823d970f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
