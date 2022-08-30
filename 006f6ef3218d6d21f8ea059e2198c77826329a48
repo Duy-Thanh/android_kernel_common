@@ -34,6 +34,24 @@
       "parentUuid": "18f49e0b_f95ff75f",
       "revId": "006f6ef3218d6d21f8ea059e2198c77826329a48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "995fe793_2bbd970b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2022-08-30T21:35:26Z",
+      "side": 1,
+      "message": "Cherry-picked the other patch as well. Looks like everything applies cleanly now.",
+      "parentUuid": "ade4e9f3_773cd5c4",
+      "revId": "006f6ef3218d6d21f8ea059e2198c77826329a48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
