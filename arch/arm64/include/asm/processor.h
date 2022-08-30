@@ -34,7 +34,6 @@
 #include <linux/stddef.h>
 #include <linux/string.h>
 #include <linux/thread_info.h>
-#include <linux/android_vendor.h>
 
 #include <vdso/processor.h>
 
@@ -149,6 +148,11 @@ struct thread_struct {
 		struct user_fpsimd_state fpsimd_state;
 	} uw;
 
+	/*
+	 * Unused now that commit 74555f39924d ("ANDROID: vendor_hooks: FPSIMD
+	 * save/restore by using vendor_hooks") is reverted, but remains to
+	 * preserve the ABI in the android13-5.10 branch.
+	 */
 	ANDROID_VENDOR_DATA(1);
 
 	unsigned int		fpsimd_cpu;
