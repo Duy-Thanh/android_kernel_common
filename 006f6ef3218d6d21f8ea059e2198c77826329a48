@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f49e0b_f95ff75f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-08-30T20:54:20Z",
+      "side": 1,
+      "message": "This particular commit has a merge conflict when cherry-picking, so it should be BACKPORT (rather than UPSTREAM), and there should be a brief note at the end of the commit message about how you resolved the conflict.",
+      "revId": "006f6ef3218d6d21f8ea059e2198c77826329a48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
