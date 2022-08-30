@@ -532,6 +532,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d118672_1084a04f",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-08-30T03:52:58Z",
+      "side": 1,
+      "message": "if this structure have changed. our vendor module will rebuild on new code.\nit seem that just affect our module.\n\nor do you have other solution to use this structure? pls give a solution!",
+      "parentUuid": "04f8197f_fb14b7c1",
+      "range": {
+        "startLine": 261,
+        "startChar": 10,
+        "endLine": 261,
+        "endChar": 43
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0572c90_ee34efd1",
         "filename": "include/trace/hooks/vmscan.h",
         "patchSetId": 10
