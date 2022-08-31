@@ -16,6 +16,24 @@
       "message": "Changelog is still incorrect.  Please regenerate this properly.",
       "revId": "a5f155ace674900ea58c84a80e6450fc65460a3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad9547f_22cb31c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1268395
+      },
+      "writtenOn": "2022-08-31T02:24:18Z",
+      "side": 1,
+      "message": "I\u0027ve updated the patch according to the TOT. Please review it again. Thank you very much.",
+      "parentUuid": "f4f47def_04be7875",
+      "revId": "a5f155ace674900ea58c84a80e6450fc65460a3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
