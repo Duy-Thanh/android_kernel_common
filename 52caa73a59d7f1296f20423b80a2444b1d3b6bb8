@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5be495d_5837d2a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-08-31T16:54:30Z",
+      "side": 1,
+      "message": "DM_DEFAULT_KEY needs to be made a bool for this to work, otherwise it breaks allmodconfig.",
+      "revId": "52caa73a59d7f1296f20423b80a2444b1d3b6bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
