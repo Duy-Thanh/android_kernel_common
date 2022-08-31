@@ -287,7 +287,7 @@ config DM_CRYPT
 	  If unsure, say N.
 
 config DM_DEFAULT_KEY
-	tristate "Default-key target support"
+	bool "Default-key target support"
 	depends on BLK_DEV_DM
 	depends on BLK_INLINE_ENCRYPTION
 	# dm-default-key doesn't require -o inlinecrypt, but it does currently
