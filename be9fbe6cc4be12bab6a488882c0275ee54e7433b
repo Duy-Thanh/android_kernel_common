@@ -52,6 +52,24 @@
       "parentUuid": "ef51027b_008c22dd",
       "revId": "be9fbe6cc4be12bab6a488882c0275ee54e7433b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f36c2662_46575268",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1887446
+      },
+      "writtenOn": "2022-08-31T03:59:58Z",
+      "side": 1,
+      "message": "The out-of-bound physical address however is rare in kernel. It is possibly brought by incorrect dts descriptions. For that case, one could correct dts file manually. And so far, we did not see such case in Android distribution.\n\nIn our opinion, the patch is an immature fix and caused failures as above. Before the main changes, we can apply the prior version so kmemleak works in Android 13.",
+      "parentUuid": "b531a5fc_bce52c99",
+      "revId": "be9fbe6cc4be12bab6a488882c0275ee54e7433b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
