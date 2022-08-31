@@ -772,6 +772,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8c5fb60_a1ccda04",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-31T17:30:19Z",
+      "side": 1,
+      "message": "You are still exporting a new structure that we currently did not anticipate having to remain stable over time.  Are you sure we are ok to do that?",
+      "parentUuid": "296af5b3_e0d78a3b",
+      "range": {
+        "startLine": 261,
+        "startChar": 10,
+        "endLine": 261,
+        "endChar": 43
+      },
+      "revId": "411a146c66e773f0a62194383f442fd23077e2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0572c90_ee34efd1",
         "filename": "include/trace/hooks/vmscan.h",
         "patchSetId": 10
