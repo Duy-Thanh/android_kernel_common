@@ -1556,6 +1556,13 @@ static struct xfrm_state *xfrm_state_clone(struct xfrm_state *orig,
 	x->km.seq = orig->km.seq;
 	x->replay = orig->replay;
 	x->preplay = orig->preplay;
+<<<<<<< HEAD   (44cde6 Merge 5.10.139 into android12-5.10-lts)
+=======
+	x->mapping_maxage = orig->mapping_maxage;
+	x->lastused = orig->lastused;
+	x->new_mapping = 0;
+	x->new_mapping_sport = 0;
+>>>>>>> BRANCH (18ed76 Linux 5.10.140)
 
 	return x;
 
