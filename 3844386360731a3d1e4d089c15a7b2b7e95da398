@@ -16,6 +16,24 @@
       "message": "changelog text does not match the abi report.\n\nPlease regenerate it again properly and paste it in to the changelog text.",
       "revId": "3844386360731a3d1e4d089c15a7b2b7e95da398",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa867017_7e0ac2f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-31T09:34:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e31b66b6_3fcdb883",
+      "revId": "3844386360731a3d1e4d089c15a7b2b7e95da398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
