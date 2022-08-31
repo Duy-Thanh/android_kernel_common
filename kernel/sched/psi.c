@@ -1258,9 +1258,6 @@ static int psi_cpu_show(struct seq_file *m, void *v)
 
 static int psi_open(struct file *file, int (*psi_show)(struct seq_file *, void *))
 {
-	if (file->f_mode & FMODE_WRITE && !capable(CAP_SYS_RESOURCE))
-		return -EPERM;
-
 	return single_open(file, psi_show, NULL);
 }
 
