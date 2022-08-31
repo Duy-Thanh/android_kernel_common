@@ -33,6 +33,24 @@
       "message": "argh, forgot about `allmodconfig` builds.  Nevermind, thanks for the review!",
       "revId": "52caa73a59d7f1296f20423b80a2444b1d3b6bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bec57411_faba83b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-08-31T17:00:07Z",
+      "side": 1,
+      "message": "I actually think it would be fine to make DM_DEFAULT_KEY a bool though, if you want to do that.",
+      "parentUuid": "2999da5e_a23ea14b",
+      "revId": "52caa73a59d7f1296f20423b80a2444b1d3b6bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
