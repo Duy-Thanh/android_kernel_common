@@ -34,6 +34,24 @@
       "parentUuid": "106aac27_520f07be",
       "revId": "be9fbe6cc4be12bab6a488882c0275ee54e7433b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b531a5fc_bce52c99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-31T00:32:22Z",
+      "side": 1,
+      "message": "IIUC, reverting this patch would re-introduce the issue it was fixing. Please discuss this upstream since 5.15 stable branches should be suffering from the same issue.",
+      "parentUuid": "ef51027b_008c22dd",
+      "revId": "be9fbe6cc4be12bab6a488882c0275ee54e7433b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
