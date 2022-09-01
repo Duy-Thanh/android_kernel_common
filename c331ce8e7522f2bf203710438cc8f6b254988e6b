@@ -34,6 +34,24 @@
       "parentUuid": "854932d4_69cee48c",
       "revId": "c331ce8e7522f2bf203710438cc8f6b254988e6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2222f885_6a349837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-01T08:41:47Z",
+      "side": 1,
+      "message": "Yes, I mean get the real solution upstream properly.  Don\u0027t give up on that, as if you have a hook here, you now need to rely on that for the next 20+ years, and that is never a good thing.\n\nIf upstream rejects the solution, then perhaps this is also not ok to take the hook as something is wrong with it.",
+      "parentUuid": "0ab2bea2_dc2d779b",
+      "revId": "c331ce8e7522f2bf203710438cc8f6b254988e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
