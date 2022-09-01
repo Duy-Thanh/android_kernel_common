@@ -20,6 +20,7 @@
 #include <linux/security.h>
 #include <linux/types.h>
 #include <linux/kernel.h>
+#include <trace/hooks/fuse.h>
 
 static void fuse_advise_use_readdirplus(struct inode *dir)
 {
@@ -869,6 +870,14 @@ static int fuse_symlink(struct user_namespace *mnt_userns, struct inode *dir,
 	args.in_args[1].size = len;
 	args.in_args[1].value = link;
 	return create_new_entry(fm, &args, dir, entry, S_IFLNK);
+}
+
+static int fuse_tmpfile(struct user_namespace *mnt_userns, struct inode *dir,
+			struct dentry *entry, umode_t mode)
+{
+	int rtn = -ENOSYS;
+	trace_android_vh_fuse_tmpfile(mnt_userns, dir, entry, mode, &rtn);
+	return rtn;
 }
 
 void fuse_flush_time_update(struct inode *inode)
@@ -1965,6 +1974,7 @@ static const struct inode_operations fuse_dir_inode_operations = {
 	.set_acl	= fuse_set_acl,
 	.fileattr_get	= fuse_fileattr_get,
 	.fileattr_set	= fuse_fileattr_set,
+	.tmpfile	= fuse_tmpfile,
 };
 
 static const struct file_operations fuse_dir_operations = {

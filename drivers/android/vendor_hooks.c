@@ -69,6 +69,7 @@
 #include <trace/hooks/signal.h>
 #include <trace/hooks/cfg80211.h>
 #include <trace/hooks/user.h>
+#include <trace/hooks/fuse.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -460,3 +461,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_cache_forced_ra);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_acct_update_power);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_tmpfile);
