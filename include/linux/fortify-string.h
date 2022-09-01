@@ -18,8 +18,8 @@ void __write_overflow_field(size_t avail, size_t wanted) __compiletime_warning("
 ({								\
 	unsigned char *__p = (unsigned char *)(p);		\
 	size_t __ret = (size_t)-1;				\
-	size_t __p_size = __builtin_object_size(p, 1);		\
-	if (__p_size != (size_t)-1) {				\
+	size_t __p_size = __builtin_object_size(p, 3);		\
+	if (__p_size != (size_t)0) {				\
 		size_t __p_len = __p_size - 1;			\
 		if (__builtin_constant_p(__p[__p_len]) &&	\
 		    __p[__p_len] == '\0')			\
@@ -104,12 +104,12 @@ char *strcat(char * const POS p, const char *q)
 extern __kernel_size_t __real_strnlen(const char *, __kernel_size_t) __RENAME(strnlen);
 __FORTIFY_INLINE __kernel_size_t strnlen(const char * const POS p, __kernel_size_t maxlen)
 {
-	size_t p_size = __builtin_object_size(p, 1);
+	size_t p_size = __builtin_object_size(p, 3);
 	size_t p_len = __compiletime_strlen(p);
 	size_t ret;
 
 	/* We can take compile-time actions when maxlen is const. */
-	if (__builtin_constant_p(maxlen) && p_len != (size_t)-1) {
+	if (__builtin_constant_p(maxlen) && p_len != (size_t)0) {
 		/* If p is const, we can use its compile-time-known len. */
 		if (maxlen >= p_size)
 			return p_len;
@@ -134,10 +134,10 @@ __FORTIFY_INLINE __diagnose_as(__builtin_strlen, 1)
 __kernel_size_t __fortify_strlen(const char * const POS p)
 {
 	__kernel_size_t ret;
-	size_t p_size = __builtin_object_size(p, 1);
+	size_t p_size = __builtin_object_size(p, 3);
 
 	/* Give up if we don't know how large p is. */
-	if (p_size == (size_t)-1)
+	if (p_size == (size_t)0)
 		return __underlying_strlen(p);
 	ret = strnlen(p, p_size);
 	if (p_size <= ret)
