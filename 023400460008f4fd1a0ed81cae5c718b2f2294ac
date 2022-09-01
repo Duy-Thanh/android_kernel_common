@@ -70,6 +70,24 @@
       "parentUuid": "709699dd_5159e342",
       "revId": "023400460008f4fd1a0ed81cae5c718b2f2294ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3885d9a2_28e38574",
+        "filename": "mm/rmap.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-01T04:01:24Z",
+      "side": 1,
+      "message": "rmap.h is not needed for the tracepoint definition. It is enough to forward declare (line 278). For the KMI we do need it to be defined when the tracepoint function is instantiated (in vendor_hooks.c). Try it.",
+      "parentUuid": "5991607d_8456a4df",
+      "revId": "023400460008f4fd1a0ed81cae5c718b2f2294ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
