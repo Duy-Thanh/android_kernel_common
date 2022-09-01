@@ -16,6 +16,24 @@
       "message": "submit upstream first?",
       "revId": "c331ce8e7522f2bf203710438cc8f6b254988e6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab2bea2_dc2d779b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-09-01T06:53:44Z",
+      "side": 1,
+      "message": "I was under the impression that vendor hooks are not supposed to be submitted upstream. If you\u0027re suggesting that we try to upstream the non-vendor hook version, then that has been attempted, and the revived discussion looks unlikely to result in a resolution. The lore link can be found in the linked bug and commit message.",
+      "parentUuid": "854932d4_69cee48c",
+      "revId": "c331ce8e7522f2bf203710438cc8f6b254988e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
