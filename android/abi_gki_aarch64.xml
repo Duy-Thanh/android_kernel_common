@@ -77856,9 +77856,6 @@
         </data-member>
       </class-decl>
       <class-decl name='sk_buff' size-in-bits='1920' is-struct='yes' visibility='default' filepath='include/linux/skbuff.h' line='717' column='1' id='ae8bfcdd'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='' type-id='da6f1b1a' visibility='default' filepath='include/linux/skbuff.h' line='718' column='1'/>
-        </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
           <var-decl name='' type-id='a6d66544' visibility='default' filepath='include/linux/skbuff.h' line='737' column='1'/>
         </data-member>
