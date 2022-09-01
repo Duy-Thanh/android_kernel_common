@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3633761_28f35faf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-09-01T17:59:51Z",
+      "side": 1,
+      "message": "Sumit, could you please first file a bug describing the issue and providing the logs you collected before reverting this patch? That way you can also add Bug: tag in the commit message for easy reference.",
+      "revId": "c77b4ec08537c4343975a802d3810df99754564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
