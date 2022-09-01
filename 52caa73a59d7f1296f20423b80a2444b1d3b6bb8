@@ -69,6 +69,24 @@
       "parentUuid": "bec57411_faba83b4",
       "revId": "52caa73a59d7f1296f20423b80a2444b1d3b6bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21d5f84_c14b44bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-01T13:44:36Z",
+      "side": 1,
+      "message": "Still breaks due to other dependencies.  This really isn\u0027t worth it, I\u0027ll just leave it as-is for now.",
+      "parentUuid": "afbddcd2_5e9624e3",
+      "revId": "52caa73a59d7f1296f20423b80a2444b1d3b6bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
