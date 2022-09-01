@@ -77855,7 +77855,7 @@
           <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='include/linux/kernfs.h' line='285' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='sk_buff' size-in-bits='1920' is-struct='yes' visibility='default' filepath='include/linux/skbuff.h' line='717' column='1' id='ae8bfcdd'>
+      <class-decl name='sk_buff_is_my_hero' size-in-bits='1920' is-struct='yes' visibility='default' filepath='include/linux/skbuff.h' line='717' column='1' id='ae8bfcdd'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='' type-id='da6f1b1a' visibility='default' filepath='include/linux/skbuff.h' line='718' column='1'/>
         </data-member>
