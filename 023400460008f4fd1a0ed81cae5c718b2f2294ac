@@ -16,6 +16,24 @@
       "message": "Do you really need all of pvmw? Please explain why? You could pass one or two individual fields instead...",
       "revId": "023400460008f4fd1a0ed81cae5c718b2f2294ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6658c2b_be3318f7",
+        "filename": "mm/rmap.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-09-01T02:37:01Z",
+      "side": 1,
+      "message": "yeah. we use most members of this structure. In our lookaroud logic will use this structure to do our optimize.\ni think it is a bug that the header file(rmap.h) can\u0027t not be used.",
+      "parentUuid": "9980c84a_9c4d4332",
+      "revId": "023400460008f4fd1a0ed81cae5c718b2f2294ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
