@@ -52,6 +52,24 @@
       "parentUuid": "0ab2bea2_dc2d779b",
       "revId": "c331ce8e7522f2bf203710438cc8f6b254988e6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ba80e4_6652950e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-09-01T16:08:49Z",
+      "side": 1,
+      "message": "I agree with the general sentiment, but I\u0027m not sure if there\u0027s much I can do in this specific case. IIUC the maintainer rejected the proposed solution because it\u0027s not atomic. Currently namei.c makes separate create and open calls for creating temp files. Since vfs doesn\u0027t support atomic_tmpfile or the passing of sufficient information for a clean uapi to be created the proposed solution is not acceptable. While the proposed solution isn\u0027t correct for the general case (ex: files over networks), it is acceptable in our (local storage) use case so a vendor hook seems reasonable.\n\nWe probably won\u0027t have to wait 20+ years to get rid of this hook. According to https://lwn.net/Articles/896153/ there\u0027s interest in supporting atomic temp file creation, however, there\u0027s no agreement on the how (potentially refactoring namei and or modifying vfs). Once that has been addressed, we will be able to properly address the fuse implementation. Since we have the ability to update both the kernel and entire Android at once, removing the hook should be feasible.",
+      "parentUuid": "2222f885_6a349837",
+      "revId": "c331ce8e7522f2bf203710438cc8f6b254988e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
