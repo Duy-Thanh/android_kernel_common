@@ -57,9 +57,16 @@ else
 KBUILD_LDFLAGS += $(shell $(LD) --help 2>&1 | grep -q "\-z noreloc-overflow" \
 	&& echo "-z noreloc-overflow -pie --no-dynamic-linker")
 endif
+<<<<<<< HEAD   (1f0546 Merge 5.4.210 into android12-5.4-lts)
 ifeq ($(CONFIG_RELOCATABLE), y)
 KBUILD_LDFLAGS += -z notext
 endif
+=======
+
+KBUILD_LDFLAGS += -z noexecstack
+KBUILD_LDFLAGS += $(call ld-option,--no-warn-rwx-segments)
+
+>>>>>>> BRANCH (684cc1 Linux 5.4.211)
 LDFLAGS_vmlinux := -T
 
 hostprogs-y	:= mkpiggy
