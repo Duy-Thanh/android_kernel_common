@@ -51,6 +51,24 @@
       "parentUuid": "2999da5e_a23ea14b",
       "revId": "52caa73a59d7f1296f20423b80a2444b1d3b6bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afbddcd2_5e9624e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-01T06:24:19Z",
+      "side": 1,
+      "message": "Ok, that seems sane, let me do that and see how the build goes...",
+      "parentUuid": "bec57411_faba83b4",
+      "revId": "52caa73a59d7f1296f20423b80a2444b1d3b6bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
