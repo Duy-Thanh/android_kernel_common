@@ -2,7 +2,6 @@
 # Copyright (C) 2021 The Android Open Source Project
 
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels", "define_db845c")
-load("//build/kernel/kleaf:constants.bzl", "aarch64_gz_outs")
 load("//build/kernel/kleaf:kernel.bzl", "ddk_headers")
 load(":modules.bzl", "get_gki_modules_list")
 
@@ -74,7 +73,7 @@ define_common_kernels(target_configs = {
 # Sync with build.config.db845c
 define_db845c(
     name = "db845c",
-    outs = aarch64_gz_outs + [
+    outs = [
         "arch/arm64/boot/dts/qcom/qrb5165-rb5.dtb",
         "arch/arm64/boot/dts/qcom/sdm845-db845c.dtb",
     ],
@@ -83,8 +82,6 @@ define_db845c(
         "crypto/michael_mic.ko",
         "drivers/base/regmap/regmap-sdw.ko",
         "drivers/base/regmap/regmap-slimbus.ko",
-        # TODO(b/233404531): Remove zram.ko when db845c is a mixed build
-        "drivers/block/zram/zram.ko",
         "drivers/bus/mhi/host/mhi.ko",
         "drivers/clk/qcom/clk-qcom.ko",
         "drivers/clk/qcom/clk-rpmh.ko",
@@ -213,8 +210,6 @@ define_db845c(
         "drivers/usb/typec/qcom-pmic-typec.ko",
         "drivers/watchdog/pm8916_wdt.ko",
         "drivers/watchdog/qcom-wdt.ko",
-        # TODO(b/233404531): Remove zsmalloc.ko when db845c is a mixed build
-        "mm/zsmalloc.ko",
         "net/mac80211/mac80211.ko",
         "net/qrtr/qrtr.ko",
         "net/qrtr/qrtr-mhi.ko",
