@@ -146,6 +146,7 @@ enum tipc_chan_state {
 	TIPC_CONNECTING,
 	TIPC_CONNECTED,
 	TIPC_STALE,
+	TIPC_CONNECTED_TX_FULL,
 };
 
 struct tipc_chan {
@@ -159,6 +160,7 @@ struct tipc_chan {
 	u32 local;
 	u32 max_msg_size;
 	u32 max_msg_cnt;
+	u32 pending_msg_cnt;
 	char srv_name[MAX_SRV_NAME_LEN];
 };
 
@@ -369,37 +371,42 @@ static void vds_put_txbuf(struct tipc_virtio_dev *vds, struct tipc_msg_buf *mb)
 	mutex_unlock(&vds->lock);
 }
 
-static struct tipc_msg_buf *vds_get_txbuf(struct tipc_virtio_dev *vds,
+static struct tipc_msg_buf *vds_get_txbuf(struct tipc_chan *chan,
 					  long timeout)
 {
-	struct tipc_msg_buf *mb;
+	struct tipc_virtio_dev *vds = chan->vds;
+	struct tipc_msg_buf *mb = ERR_PTR(-EAGAIN);
 
-	mb = _vds_get_txbuf(vds);
+	DEFINE_WAIT_FUNC(wait, woken_wake_function);
 
-	if ((PTR_ERR(mb) == -EAGAIN) && timeout) {
-		DEFINE_WAIT_FUNC(wait, woken_wake_function);
-
-		timeout = msecs_to_jiffies(timeout);
-		add_wait_queue(&vds->sendq, &wait);
-		for (;;) {
-			timeout = wait_woken(&wait, TASK_INTERRUPTIBLE,
-					     timeout);
-			if (!timeout) {
-				mb = ERR_PTR(-ETIMEDOUT);
-				break;
-			}
-
-			if (signal_pending(current)) {
-				mb = ERR_PTR(-ERESTARTSYS);
-				break;
-			}
-
+	timeout = msecs_to_jiffies(timeout);
+	add_wait_queue(&vds->sendq, &wait);
+	for (;;) {
+		if (chan->state != TIPC_CONNECTED_TX_FULL) {
 			mb = _vds_get_txbuf(vds);
-			if (PTR_ERR(mb) != -EAGAIN)
-				break;
+			if (PTR_ERR(mb) != -EAGAIN) {
+				break; /* success or error to pass back to caller */
+			}
 		}
-		remove_wait_queue(&vds->sendq, &wait);
+
+		if (timeout == 0) {
+			break; /* caller wants EAGAIN rather than ETIMEDOUT */
+		}
+
+		timeout = wait_woken(&wait, TASK_INTERRUPTIBLE,
+					 timeout);
+		if (!timeout) {
+			mb = ERR_PTR(-ETIMEDOUT);
+			break;
+		}
+
+		if (signal_pending(current)) {
+			mb = ERR_PTR(-ERESTARTSYS);
+			break;
+		}
+
 	}
+	remove_wait_queue(&vds->sendq, &wait);
 
 	if (IS_ERR(mb))
 		return mb;
@@ -529,16 +536,21 @@ static struct tipc_chan *vds_create_channel(struct tipc_virtio_dev *vds,
 	return chan;
 }
 
-static void fill_msg_hdr(struct tipc_msg_buf *mb, u32 src, u32 dst)
+static void fill_msg_hdr_wflags(struct tipc_msg_buf *mb, u32 src, u32 dst, u16 flags)
 {
 	struct tipc_msg_hdr *hdr = mb_get_data(mb, sizeof(*hdr));
 
 	hdr->src = src;
 	hdr->dst = dst;
 	hdr->len = mb_avail_data(mb);
-	hdr->flags = 0;
+	hdr->flags = flags;
 	hdr->shm_cnt = mb->shm_cnt;
 	hdr->reserved = 0;
+}
+
+static void fill_msg_hdr(struct tipc_msg_buf *mb, u32 src, u32 dst)
+{
+	fill_msg_hdr_wflags(mb, src, dst, 0);
 }
 
 static int tipc_shared_handle_new(struct tipc_shared_handle **shared_handle,
@@ -738,13 +750,19 @@ EXPORT_SYMBOL(tipc_chan_get_rxbuf);
 void tipc_chan_put_rxbuf(struct tipc_chan *chan, struct tipc_msg_buf *mb)
 {
 	vds_free_msg_buf(chan->vds, mb);
+
+	/* flow control - track write-read pairs, since
+	 * FC is only needed for large NS->TA transfers */
+	if (chan->pending_msg_cnt > 0) {
+		--chan->pending_msg_cnt;
+	}
 }
 EXPORT_SYMBOL(tipc_chan_put_rxbuf);
 
 struct tipc_msg_buf *tipc_chan_get_txbuf_timeout(struct tipc_chan *chan,
 						 long timeout)
 {
-	return vds_get_txbuf(chan->vds, timeout);
+	return vds_get_txbuf(chan, timeout);
 }
 EXPORT_SYMBOL(tipc_chan_get_txbuf_timeout);
 
@@ -761,7 +779,19 @@ int tipc_chan_queue_msg(struct tipc_chan *chan, struct tipc_msg_buf *mb)
 	mutex_lock(&chan->lock);
 	switch (chan->state) {
 	case TIPC_CONNECTED:
-		fill_msg_hdr(mb, chan->local, chan->remote);
+		/* flow control - use header flags to tell Trusty to enable FC when necessary
+		 * - single buffer channels - when 2nd is sent before rx to 1st is 'put'
+		 * - >1 buffer channels - upon sending msg that would fill the last buffer
+		 *                        available on server (note that 2 buffer channels
+		 *                        behave like single buffer channels due to math)
+		 */
+		if ((chan->max_msg_cnt == 1 && chan->pending_msg_cnt >= 1) ||
+			(chan->max_msg_cnt > 1 && chan->pending_msg_cnt >= (chan->max_msg_cnt - 1))) {
+			fill_msg_hdr_wflags(mb, chan->local, chan->remote, 0x1); //FIXME: define NS->TA flag bits
+		} else {
+			fill_msg_hdr(mb, chan->local, chan->remote);
+		}
+
 		err = vds_queue_txbuf(chan->vds, mb);
 		if (err) {
 			/* this should never happen */
@@ -769,6 +799,21 @@ int tipc_chan_queue_msg(struct tipc_chan *chan, struct tipc_msg_buf *mb)
 				"%s: failed to queue tx buffer (%d)\n",
 			       __func__, err);
 		}
+		/* flow control - automatically pause tx on channel when pending count for
+		 * channel would exceed buffer count that was reported by Trusty for channel
+		 * See note above for different behavior depending on buffer count.
+		 */
+		++chan->pending_msg_cnt;
+		if ((chan->max_msg_cnt == 1 && chan->pending_msg_cnt > 1) ||
+			(chan->max_msg_cnt > 1 && chan->pending_msg_cnt > (chan->max_msg_cnt - 1))) {
+			chan->state = TIPC_CONNECTED_TX_FULL;
+		}
+		break;
+	case TIPC_CONNECTED_TX_FULL:
+		dev_err(&chan->vds->vdev->dev,
+				"%s: tx full for chan= %d, returning EAGAIN\n",__func__,
+				chan->local);
+		err = -EAGAIN; /* this shouldn't happen. Full state is detected when allocating */
 		break;
 	case TIPC_DISCONNECTED:
 	case TIPC_CONNECTING:
@@ -796,7 +841,7 @@ int tipc_chan_connect(struct tipc_chan *chan, const char *name)
 	struct tipc_conn_req_body *body;
 	struct tipc_msg_buf *txbuf;
 
-	txbuf = vds_get_txbuf(chan->vds, TXBUF_TIMEOUT);
+	txbuf = vds_get_txbuf(chan, TXBUF_TIMEOUT);
 	if (IS_ERR(txbuf))
 		return PTR_ERR(txbuf);
 
@@ -830,6 +875,7 @@ int tipc_chan_connect(struct tipc_chan *chan, const char *name)
 		}
 		break;
 	case TIPC_CONNECTED:
+	case TIPC_CONNECTED_TX_FULL:
 	case TIPC_CONNECTING:
 		/* check if we are trying to connect to the same service */
 		if (strcmp(chan->srv_name, body->name) == 0)
@@ -868,12 +914,12 @@ int tipc_chan_shutdown(struct tipc_chan *chan)
 	struct tipc_msg_buf *txbuf = NULL;
 
 	/* get tx buffer */
-	txbuf = vds_get_txbuf(chan->vds, TXBUF_TIMEOUT);
+	txbuf = vds_get_txbuf(chan, TXBUF_TIMEOUT);
 	if (IS_ERR(txbuf))
 		return PTR_ERR(txbuf);
 
 	mutex_lock(&chan->lock);
-	if (chan->state == TIPC_CONNECTED || chan->state == TIPC_CONNECTING) {
+	if (chan->state == TIPC_CONNECTED || chan->state == TIPC_CONNECTED_TX_FULL || chan->state == TIPC_CONNECTING) {
 		/* reserve space for disconnect request control message */
 		msg = mb_put_data(txbuf, sizeof(*msg) + sizeof(*body));
 		body = (struct tipc_disc_req_body *)msg->body;
@@ -915,7 +961,7 @@ EXPORT_SYMBOL(tipc_chan_destroy);
 /***************************************************************************/
 
 struct tipc_dn_chan {
-	int state;
+	enum tipc_chan_state state;
 	struct mutex lock; /* protects rx_msg_queue list and channel state */
 	struct tipc_chan *chan;
 	wait_queue_head_t readq;
@@ -1583,8 +1629,8 @@ static __poll_t tipc_poll(struct file *filp, poll_table *wait)
 
 	poll_wait(filp, &dn->readq, wait);
 
-	/* Writes always succeed for now */
-	mask |= EPOLLOUT | EPOLLWRNORM;
+	if (dn->state == TIPC_CONNECTED)
+		mask |= EPOLLOUT | EPOLLWRNORM;
 
 	if (!list_empty(&dn->rx_msg_queue))
 		mask |= EPOLLIN | EPOLLRDNORM;
@@ -1812,6 +1858,7 @@ static void _handle_conn_rsp(struct tipc_virtio_dev *vds,
 				chan->state = TIPC_CONNECTED;
 				chan->remote = rsp->remote;
 				chan->max_msg_cnt = rsp->max_msg_cnt;
+				chan->pending_msg_cnt = 0;
 				chan->max_msg_size = rsp->max_msg_size;
 				chan_trigger_event(chan,
 						   TIPC_CHANNEL_CONNECTED);
@@ -2122,7 +2169,27 @@ static int _handle_oobrxbuf(struct tipc_virtio_dev *vds,
 		msg->src, msg->dst, msg->len, msg->flags, msg->reserved,
 		msg->shm_cnt);
 
-	/* TODO: trigger tx flow control from here */
+	/* Lookup channel */
+	chan = vds_lookup_channel(vds, msg->dst);
+	if (!chan) {
+		dev_err(dev, "%s: no chan for dst= %d (flags= %x, src= %d)\n", __func__, msg->dst, msg->flags, msg->src);
+		goto drop_it;
+	}
+
+	/* flow control - simple XON/XOFF */
+	mutex_lock(&chan->lock);
+	if ((msg->flags & 0x1) != 0) { //FIXME: define bit flags for TA->NS
+		/* XOFF */
+		/* !! ignored in lieu of automatically entering based on pending_msg_cnt */
+	} else {
+		/* XON */
+		if (chan->state == TIPC_CONNECTED_TX_FULL) {
+			chan->state = TIPC_CONNECTED;
+			chan->pending_msg_cnt = 0;
+			wake_up_interruptible_all(&vds->sendq);
+		}
+	}
+	mutex_unlock(&chan->lock);
 
 drop_it:
 	/* add the buffer back to the virtqueue */
