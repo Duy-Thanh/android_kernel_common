@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44ce8174_c6924628",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-09-02T10:11:55Z",
+      "side": 1,
+      "message": "Need the patch as follows to be merged before, or it will cause to build-err.\nhttps://android-review.googlesource.com/c/kernel/common/+/2202365",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "6c0d96d24ac2aa60f9e281fbae93a8bb54c8bb32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
