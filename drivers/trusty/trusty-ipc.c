@@ -125,6 +125,7 @@ struct tipc_virtio_dev {
 	struct virtio_device *vdev;
 	struct virtqueue *rxvq;
 	struct virtqueue *txvq;
+	struct virtqueue *oobrxvq;
 	unsigned int msg_buf_cnt;
 	unsigned int msg_buf_max_cnt;
 	size_t msg_buf_max_sz;
@@ -2085,14 +2086,82 @@ static void _txvq_cb(struct virtqueue *txvq)
 	}
 }
 
+static int _handle_oobrxbuf(struct tipc_virtio_dev *vds,
+			 struct tipc_msg_buf *rxbuf, size_t rxlen)
+{
+	int err;
+	struct scatterlist sg;
+	struct tipc_msg_hdr *msg;
+	struct device *dev = &vds->vdev->dev;
+	struct tipc_chan *chan = NULL;
+
+	/* message sanity check */
+	if (rxlen > rxbuf->buf_sz) {
+		dev_warn(dev, "inbound msg is too big: %zd\n", rxlen);
+		goto drop_it;
+	}
+
+	if (rxlen < sizeof(*msg)) {
+		dev_warn(dev, "inbound msg is too short: %zd\n", rxlen);
+		goto drop_it;
+	}
+
+	/* reset buffer and put data  */
+	mb_reset(rxbuf);
+	mb_put_data(rxbuf, rxlen);
+
+	/* get message header */
+	msg = mb_get_data(rxbuf, sizeof(*msg));
+	if (mb_avail_data(rxbuf) != msg->len) {
+		dev_warn(dev, "inbound msg length mismatch: (%zu vs. %d)\n",
+			 mb_avail_data(rxbuf), msg->len);
+		goto drop_it;
+	}
+
+	dev_dbg(dev, "From: %d, To: %d, Len: %d, Flags: 0x%x, Reserved: %d, shm_cnt: %d\n",
+		msg->src, msg->dst, msg->len, msg->flags, msg->reserved,
+		msg->shm_cnt);
+
+	/* TODO: trigger tx flow control from here */
+
+drop_it:
+	/* add the buffer back to the virtqueue */
+	sg_init_one(&sg, rxbuf, rxbuf->buf_sz);
+	err = virtqueue_add_inbuf(vds->oobrxvq, &sg, 1, rxbuf, GFP_KERNEL);
+	if (err < 0) {
+		dev_err(dev, "oobrx failed to add a virtqueue buffer: %d\n", err);
+		return err;
+	}
+
+	return 0;
+}
+
+static void _oobrxvq_cb(struct virtqueue *oobrxvq)
+{
+	unsigned int len;
+	struct tipc_msg_buf *mb;
+	unsigned int msg_cnt = 0;
+	struct tipc_virtio_dev *vds = oobrxvq->vdev->priv;
+
+	while ((mb = virtqueue_get_buf(oobrxvq, &len)) != NULL) {
+		if (_handle_oobrxbuf(vds, mb, len))
+			break;
+		msg_cnt++;
+	}
+
+	/* tell the other size that we added rx buffers */
+	if (msg_cnt)
+		virtqueue_kick(oobrxvq);
+}
+
 static int tipc_virtio_probe(struct virtio_device *vdev)
 {
 	int err, i;
 	struct tipc_virtio_dev *vds;
 	struct tipc_dev_config config;
-	struct virtqueue *vqs[2];
-	vq_callback_t *vq_cbs[] = {_rxvq_cb, _txvq_cb};
-	static const char * const vq_names[] = { "rx", "tx" };
+	struct virtqueue *vqs[3];
+	vq_callback_t *vq_cbs[] = {_rxvq_cb, _txvq_cb, _oobrxvq_cb};
+	static const char * const vq_names[] = { "rx", "tx", "oobrx" };
 
 	vds = kzalloc(sizeof(*vds), GFP_KERNEL);
 	if (!vds)
@@ -2123,13 +2192,14 @@ static int tipc_virtio_probe(struct virtio_device *vdev)
 	vds->cdev_name[sizeof(vds->cdev_name)-1] = '\0';
 
 	/* find tx virtqueues (rx and tx and in this order) */
-	err = vdev->config->find_vqs(vdev, 2, vqs, vq_cbs, vq_names, NULL,
+	err = vdev->config->find_vqs(vdev, 3, vqs, vq_cbs, vq_names, NULL,
 				     NULL);
 	if (err)
 		goto err_find_vqs;
 
 	vds->rxvq = vqs[0];
 	vds->txvq = vqs[1];
+	vds->oobrxvq = vqs[2];
 
 	/* save max buffer size and count */
 	vds->msg_buf_max_sz = config.msg_buf_max_size;
@@ -2152,12 +2222,31 @@ static int tipc_virtio_probe(struct virtio_device *vdev)
 		WARN_ON(err); /* sanity check; this can't really happen */
 	}
 
+	/* set up the out-of-band receive buffers */
+	for (i = 0; i < virtqueue_get_vring_size(vds->oobrxvq); i++) {
+		struct scatterlist sg;
+		struct tipc_msg_buf *rxbuf;
+
+		rxbuf = vds_alloc_msg_buf(vds, true);
+		if (!rxbuf) {
+			dev_err(&vdev->dev, "failed to allocate oobrx buffer\n");
+			err = -ENOMEM;
+			goto err_free_oobrx_buffers;
+		}
+
+		sg_init_one(&sg, rxbuf, rxbuf->buf_sz);
+		err = virtqueue_add_inbuf(vds->oobrxvq, &sg, 1, rxbuf, GFP_KERNEL);
+		WARN_ON(err); /* sanity check; this can't really happen */
+	}
+
 	vdev->priv = vds;
 	vds->state = VDS_OFFLINE;
 
 	dev_dbg(&vdev->dev, "%s: done\n", __func__);
 	return 0;
 
+err_free_oobrx_buffers:
+	_cleanup_vq(vds, vds->oobrxvq);
 err_free_rx_buffers:
 	_cleanup_vq(vds, vds->rxvq);
 err_find_vqs:
@@ -2182,6 +2271,7 @@ static void tipc_virtio_remove(struct virtio_device *vdev)
 
 	_cleanup_vq(vds, vds->rxvq);
 	_cleanup_vq(vds, vds->txvq);
+	_cleanup_vq(vds, vds->oobrxvq);
 	vds_free_msg_buf_list(vds, &vds->free_buf_list);
 
 	vdev->config->del_vqs(vds->vdev);
