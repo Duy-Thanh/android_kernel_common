@@ -93,6 +93,30 @@
       },
       "revId": "c331ce8e7522f2bf203710438cc8f6b254988e6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd10919_37db1351",
+        "filename": "fs/fuse/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-09-02T00:49:14Z",
+      "side": 1,
+      "message": "We can add a vendor hook for this, but I opted not to because I was hoping to keep the code slightly more clean. The reason why a hook is not necessary is because https://elixir.bootlin.com/linux/v5.10.139/source/fs/namei.c#L3354 will never directly call open with O_TMPFILE. When O_TMPFILE is set, it goes through the tempfile create then open path. Since fuse lacks the information to remove O_TMPFILE on create we have to remove it on open. In other words, the only possible way for O_TMPFILE to reach this point is through the tempfile code path, assuming there\u0027s no bug on the caller side. Granted, this is not very defensive and makes assumptions about the caller so it might be safer to install a vendor hook to keep this \"low-risk\" assumption limited to only acrvm. I\u0027m happy to make the change if you feel that\u0027s a better approach.",
+      "parentUuid": "d7ddc281_d225dc23",
+      "range": {
+        "startLine": 30,
+        "startChar": 58,
+        "endLine": 30,
+        "endChar": 69
+      },
+      "revId": "c331ce8e7522f2bf203710438cc8f6b254988e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
