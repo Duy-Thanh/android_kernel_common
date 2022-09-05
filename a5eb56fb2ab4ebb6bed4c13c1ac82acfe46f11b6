@@ -34,6 +34,24 @@
       "parentUuid": "6054a905_6c0f653b",
       "revId": "a5eb56fb2ab4ebb6bed4c13c1ac82acfe46f11b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad251f1c_1cc09f87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-05T05:13:41Z",
+      "side": 1,
+      "message": "```Summary:\n\nWARNING:NO_AUTHOR_SIGN_OFF: Missing Signed-off-by: line by nominal patch author \u0027\u0027```\n\nYou author name and signed-off-by name did not match as your Gerrit name is not the same as that.  This looks fine to me so I\u0027ll override it.",
+      "parentUuid": "0d0385b4_7061f7ba",
+      "revId": "a5eb56fb2ab4ebb6bed4c13c1ac82acfe46f11b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
