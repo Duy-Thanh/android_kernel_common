@@ -52,6 +52,24 @@
       "parentUuid": "0d0385b4_7061f7ba",
       "revId": "a5eb56fb2ab4ebb6bed4c13c1ac82acfe46f11b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8a1fd70_2dc363f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-09-05T13:04:29Z",
+      "side": 1,
+      "message": "for the record, this caused a build failure as `checkpatch` was flagging it. Our commit message linter (Lint+1!) accepted it.",
+      "parentUuid": "ad251f1c_1cc09f87",
+      "revId": "a5eb56fb2ab4ebb6bed4c13c1ac82acfe46f11b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
