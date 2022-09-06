@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "264b190c_67ceb0d9",
+        "filename": "arch/arm64/kernel/hibernate.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-06T20:12:50Z",
+      "side": 1,
+      "message": "Given that this is an opaque structure defined in a C file, how does your vendor module known the offset of the android_vendor_data field?",
+      "revId": "9ca6244de3782d86eaed43ea28d0df2587f1609a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e76e609_156023a0",
+        "filename": "arch/arm64/kernel/hibernate.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-06T20:12:50Z",
+      "side": 1,
+      "message": "Since the vendor module can\u0027t access fields of this opaque structure, should you pass a pointer to the field instead? Like:\n\n  trace_android_vh_init_arc_hibernate(\u0026hdr-\u003eandroid_vendor_data1, __pa(cpu_resume));",
+      "revId": "9ca6244de3782d86eaed43ea28d0df2587f1609a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
