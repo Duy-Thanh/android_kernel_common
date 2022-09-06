@@ -51,6 +51,24 @@
       "message": "Sumit: Has this issue been seen against android-mainline as well? \n\nIf so, its probably worth raising to lkml.",
       "revId": "c77b4ec08537c4343975a802d3810df99754564d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c9000c_3f472102",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-09-06T21:40:48Z",
+      "side": 1,
+      "message": "The SPF patchset is not upstream and therefore is not part of android-mainline",
+      "parentUuid": "2acac3d2_68e3a4b4",
+      "revId": "c77b4ec08537c4343975a802d3810df99754564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
