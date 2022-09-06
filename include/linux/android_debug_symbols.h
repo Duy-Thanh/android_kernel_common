@@ -40,6 +40,7 @@ enum android_debug_symbol {
 	ADS_SYSCTL_LEGACY_VA_LAYOUT,
 #endif
 	ADS_SHOW_MEM,
+	ADS_PRINTK_PRB,
 	ADS_END
 };
 
