@@ -87,6 +87,24 @@
       "parentUuid": "ca8ebf2f_06c0af87",
       "revId": "c77b4ec08537c4343975a802d3810df99754564d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cf3ac35_dfd919a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-09-06T22:51:42Z",
+      "side": 1,
+      "message": "Ah, fair point. I saw it was FROMLIST and assumed it landed upstream. Maybe still worth raising in the upstream patch discussion?",
+      "parentUuid": "2acac3d2_68e3a4b4",
+      "revId": "c77b4ec08537c4343975a802d3810df99754564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
