@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae82b7b0_435f064f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-06T08:51:41Z",
+      "side": 1,
+      "message": "this is upstream now, not just in a git tree.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "0167e81a33618dc706424e23ce2354d0985d5991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a5f173_3ce98996",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-06T08:51:41Z",
+      "side": 1,
+      "message": "wrong git branch.\n\nBut again, this is upstream in Linus\u0027s tree already.",
+      "range": {
+        "startLine": 31,
+        "startChar": 68,
+        "endLine": 31,
+        "endChar": 72
+      },
+      "revId": "0167e81a33618dc706424e23ce2354d0985d5991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2809f5c_96275929",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-06T08:51:41Z",
+      "side": 1,
+      "message": "Why just this one branch?",
+      "revId": "0167e81a33618dc706424e23ce2354d0985d5991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
