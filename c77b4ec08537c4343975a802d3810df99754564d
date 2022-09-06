@@ -69,6 +69,24 @@
       "parentUuid": "2acac3d2_68e3a4b4",
       "revId": "c77b4ec08537c4343975a802d3810df99754564d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f649b8e_b61a1bdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-09-06T21:42:25Z",
+      "side": 1,
+      "message": "Once we have the details and logs I\u0027ll be able to approve this revert. Until then I don\u0027t really have the data required for this revert.",
+      "parentUuid": "ca8ebf2f_06c0af87",
+      "revId": "c77b4ec08537c4343975a802d3810df99754564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
