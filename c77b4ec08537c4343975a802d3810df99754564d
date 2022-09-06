@@ -16,6 +16,41 @@
       "message": "Sumit, could you please first file a bug describing the issue and providing the logs you collected before reverting this patch? That way you can also add Bug: tag in the commit message for easy reference.",
       "revId": "c77b4ec08537c4343975a802d3810df99754564d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca8ebf2f_06c0af87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-09-06T21:07:02Z",
+      "side": 1,
+      "message": "Opened b/245389404 to track this. Happy to add additional details (like the logs) as well there.",
+      "parentUuid": "b3633761_28f35faf",
+      "revId": "c77b4ec08537c4343975a802d3810df99754564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2acac3d2_68e3a4b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-09-06T21:07:02Z",
+      "side": 1,
+      "message": "Sumit: Has this issue been seen against android-mainline as well? \n\nIf so, its probably worth raising to lkml.",
+      "revId": "c77b4ec08537c4343975a802d3810df99754564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
