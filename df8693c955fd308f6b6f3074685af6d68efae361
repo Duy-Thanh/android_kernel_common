@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5671ab5_287c0e3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-09-06T10:01:46Z",
+      "side": 1,
+      "message": "this needs to have a change-id of a change in android12-5.10 to identify that as a cherry-pick",
+      "revId": "df8693c955fd308f6b6f3074685af6d68efae361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
