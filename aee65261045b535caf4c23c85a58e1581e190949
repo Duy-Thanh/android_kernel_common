@@ -16,6 +16,29 @@
       "message": "Please submit your changes upstream first.",
       "revId": "aee65261045b535caf4c23c85a58e1581e190949",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82059ecc_1140d8d2",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-09-06T20:37:22Z",
+      "side": 1,
+      "message": "This used to be `ANDROID_OEM_DATA_ARRAY(1, 2)` in the original commit, so I assume you no longer need one of the two elements in the commit message. Can you please explain?",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 575,
+        "endChar": 17
+      },
+      "revId": "aee65261045b535caf4c23c85a58e1581e190949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
