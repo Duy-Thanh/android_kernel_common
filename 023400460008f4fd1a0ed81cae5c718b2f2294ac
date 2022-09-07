@@ -129,6 +129,30 @@
       },
       "revId": "023400460008f4fd1a0ed81cae5c718b2f2294ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92769b8_3676291f",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2022-09-07T06:30:42Z",
+      "side": 1,
+      "message": "yeah,it could be in the vendro module. but if do like that,it will increase a new flag . the code will like this:\n\tif (lookaround_ref) {\n\t\tif (page_refenenced_flag)\n\t\t\treturn PAGEREF_ACTIVATE;\n\t\telse {\n\t\t\treturn PAGEREF_KEEP;\n\t\t}\n\t}\nI don\u0027t think it makes much difference. \ndo you mean the page flag stuff must in the vendor module?",
+      "parentUuid": "9e486153_48526553",
+      "range": {
+        "startLine": 1032,
+        "startChar": 1,
+        "endLine": 1040,
+        "endChar": 2
+      },
+      "revId": "023400460008f4fd1a0ed81cae5c718b2f2294ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
