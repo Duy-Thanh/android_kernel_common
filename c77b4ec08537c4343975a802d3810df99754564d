@@ -123,6 +123,24 @@
       "parentUuid": "9cf3ac35_dfd919a2",
       "revId": "c77b4ec08537c4343975a802d3810df99754564d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69236c54_8eafa7c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052193
+      },
+      "writtenOn": "2022-09-07T06:02:25Z",
+      "side": 1,
+      "message": "Thank you John for creating the bug.\nSuren, I\u0027ve updated the patch with the bug number.",
+      "parentUuid": "2f649b8e_b61a1bdd",
+      "revId": "c77b4ec08537c4343975a802d3810df99754564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
