@@ -16,6 +16,24 @@
       "message": "Should be \"Bug: \"",
       "revId": "a932af53e346718f002e09760a29114dd552ee39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d72f1b94_a4e38983",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-07T18:35:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77e28dd9_29ce4cc7",
+      "revId": "a932af53e346718f002e09760a29114dd552ee39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

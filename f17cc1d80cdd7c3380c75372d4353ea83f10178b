@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a99cf04f_b6aebd76",
+        "filename": "include/linux/printk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-07T18:35:38Z",
+      "side": 1,
+      "message": "I really don\u0027t like \"prb\" as a global variable name - it is not descriptive and sets us up for namespace conflicts later. How about exporting a pointer to it, something like `extern struct **current_printk_ringbuffer`. Then in printk.c:\n```\nstruct current_printk_ringbuffer \u003d \u0026prb;\n```\nand in android_debug_symbols.c\n```\nADS_ENTRY(ADS_PRINTK_PRB, current_printk_ringbuffer),\n```",
+      "revId": "f17cc1d80cdd7c3380c75372d4353ea83f10178b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
