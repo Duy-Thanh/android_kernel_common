@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07602be6_cae6d6f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-07T11:00:38Z",
+      "side": 1,
+      "message": "no changelog text saying why this is needed and what it is for and how it works?",
+      "revId": "61814ef31ff3a8ab13e4c1a8bf86d6271ab787ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c44944b_26b93a37",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-07T11:00:38Z",
+      "side": 1,
+      "message": "no, this is not ok, sorry.  That\u0027s a horrible way to do an api, and it diverges from upstream.\n\nIf you need something \"odd\" for a flag, make a separate function in your hook logic instead.",
+      "range": {
+        "startLine": 441,
+        "startChar": 51,
+        "endLine": 441,
+        "endChar": 70
+      },
+      "revId": "61814ef31ff3a8ab13e4c1a8bf86d6271ab787ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
