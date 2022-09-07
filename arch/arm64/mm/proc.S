@@ -47,17 +47,19 @@
 
 #ifdef CONFIG_KASAN_HW_TAGS
 #define TCR_MTE_FLAGS SYS_TCR_EL1_TCMA1 | TCR_TBI1 | TCR_TBID1
-#else
+#elif defined(CONFIG_ARM64_MTE)
 /*
  * The mte_zero_clear_page_tags() implementation uses DC GZVA, which relies on
  * TBI being enabled at EL1.
  */
 #define TCR_MTE_FLAGS TCR_TBI1 | TCR_TBID1
+#else
+#define TCR_MTE_FLAGS 0
 #endif
 
 /*
  * Default MAIR_EL1. MT_NORMAL_TAGGED is initially mapped as Normal memory and
- * changed during __cpu_setup to Normal Tagged if the system supports MTE.
+ * changed during mte_cpu_setup to Normal Tagged if the system supports MTE.
  */
 #define MAIR_EL1_SET							\
 	(MAIR_ATTRIDX(MAIR_ATTR_DEVICE_nGnRnE, MT_DEVICE_nGnRnE) |	\
@@ -426,6 +428,7 @@ SYM_FUNC_START(__cpu_setup)
 	/*
 	 * Memory region attributes
 	 */
+<<<<<<< HEAD   (5fe8b1 ANDROID: fuse-bpf: Do not change bpf program in lookups)
 	mov_q	x5, MAIR_EL1_SET
 #ifdef CONFIG_ARM64_MTE
 	mte_tcr	.req	x20
@@ -481,6 +484,16 @@ SYM_FUNC_START(__cpu_setup)
 	.unreq	mte_tcr
 #endif
 	tcr_clear_errata_bits x10, x9, x5
+=======
+	mair	.req	x17
+	tcr	.req	x16
+	mov_q	mair, MAIR_EL1_SET
+	mov_q	tcr, TCR_TxSZ(VA_BITS) | TCR_CACHE_FLAGS | TCR_SMP_FLAGS | \
+			TCR_TG_FLAGS | TCR_KASLR_FLAGS | TCR_ASID16 | \
+			TCR_TBI0 | TCR_A1 | TCR_KASAN_SW_FLAGS | TCR_MTE_FLAGS
+
+	tcr_clear_errata_bits tcr, x9, x5
+>>>>>>> CHANGE (6a2905 FROMLIST: arm64: mte: move register initialization to C)
 
 #ifdef CONFIG_ARM64_VA_BITS_52
 	ldr_l		x9, vabits_actual

@@ -1870,6 +1870,13 @@ static void bti_enable(const struct arm64_cpu_capabilities *__unused)
 #ifdef CONFIG_ARM64_MTE
 static void cpu_enable_mte(struct arm64_cpu_capabilities const *cap)
 {
+<<<<<<< HEAD   (5fe8b1 ANDROID: fuse-bpf: Do not change bpf program in lookups)
+=======
+	sysreg_clear_set(sctlr_el1, 0, SCTLR_ELx_ATA | SCTLR_EL1_ATA0);
+
+	mte_cpu_setup();
+
+>>>>>>> CHANGE (6a2905 FROMLIST: arm64: mte: move register initialization to C)
 	/*
 	 * Clear the tags in the zero page. This needs to be done via the
 	 * linear map which has the Tagged attribute.
