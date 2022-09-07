@@ -2326,8 +2326,9 @@ static void __add_sum_entry(struct f2fs_sb_info *sbi, int type,
  */
 int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra)
 {
-	int valid_sum_count = 0;
-	int i, sum_in_page;
+	unsigned long valid_sum_count = 0;
+	int i;
+	unsigned long sum_in_page;
 
 	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++) {
 		if (sbi->ckpt->alloc_type[i] == SSR)
