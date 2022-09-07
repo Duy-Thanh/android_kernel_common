@@ -39,6 +39,30 @@
       },
       "revId": "aee65261045b535caf4c23c85a58e1581e190949",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "250206be_09182a94",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-09-07T02:32:58Z",
+      "side": 1,
+      "message": "1. At present, we have switched to the pointer scheme. \n2. We planned to use ANDROID_VENDOR_DATA according to your previous suggestion, but now it is occupied by Qualcomm and MTK, and it is not allowed to share with us. so, so we need to apply for a variable used by the OEM alone",
+      "parentUuid": "82059ecc_1140d8d2",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 575,
+        "endChar": 17
+      },
+      "revId": "aee65261045b535caf4c23c85a58e1581e190949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
