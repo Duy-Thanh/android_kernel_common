@@ -438,7 +438,7 @@ static inline void rt_queue_push_tasks(struct rq *rq)
 }
 #endif /* CONFIG_SMP */
 
-static void enqueue_top_rt_rq(struct rt_rq *rt_rq);
+static void enqueue_top_rt_rq(struct rt_rq *rt_rq, unsigned int flags);
 static void dequeue_top_rt_rq(struct rt_rq *rt_rq);
 
 static inline int on_rt_rq(struct sched_rt_entity *rt_se)
@@ -543,7 +543,7 @@ static void sched_rt_rq_enqueue(struct rt_rq *rt_rq)
 
 	if (rt_rq->rt_nr_running) {
 		if (!rt_se)
-			enqueue_top_rt_rq(rt_rq);
+			enqueue_top_rt_rq(rt_rq, 0);
 		else if (!on_rt_rq(rt_se))
 			enqueue_rt_entity(rt_se, 0);
 
@@ -640,7 +640,7 @@ static inline void sched_rt_rq_enqueue(struct rt_rq *rt_rq)
 	if (!rt_rq->rt_nr_running)
 		return;
 
-	enqueue_top_rt_rq(rt_rq);
+	enqueue_top_rt_rq(rt_rq, 0);
 	resched_curr(rq);
 }
 
@@ -1069,7 +1069,7 @@ dequeue_top_rt_rq(struct rt_rq *rt_rq)
 }
 
 static void
-enqueue_top_rt_rq(struct rt_rq *rt_rq)
+enqueue_top_rt_rq(struct rt_rq *rt_rq, unsigned int flags)
 {
 	struct rq *rq = rq_of_rt_rq(rt_rq);
 
@@ -1087,7 +1087,7 @@ enqueue_top_rt_rq(struct rt_rq *rt_rq)
 	}
 
 	/* Kick cpufreq (see the comment in kernel/sched/sched.h). */
-	cpufreq_update_util(rq, 0);
+	cpufreq_update_util(rq, flags);
 }
 
 #if defined CONFIG_SMP
@@ -1363,7 +1363,10 @@ static void enqueue_rt_entity(struct sched_rt_entity *rt_se, unsigned int flags)
 	dequeue_rt_stack(rt_se, flags);
 	for_each_sched_rt_entity(rt_se)
 		__enqueue_rt_entity(rt_se, flags);
-	enqueue_top_rt_rq(&rq->rt);
+
+	trace_android_vh_update_sched_flags(rt_task_of(rt_se), &flags);
+
+	enqueue_top_rt_rq(&rq->rt, flags);
 }
 
 static void dequeue_rt_entity(struct sched_rt_entity *rt_se, unsigned int flags)
@@ -1378,7 +1381,10 @@ static void dequeue_rt_entity(struct sched_rt_entity *rt_se, unsigned int flags)
 		if (rt_rq && rt_rq->rt_nr_running)
 			__enqueue_rt_entity(rt_se, flags);
 	}
-	enqueue_top_rt_rq(&rq->rt);
+
+	trace_android_vh_update_sched_flags(rt_task_of(rt_se), &flags);
+
+	enqueue_top_rt_rq(&rq->rt, flags);
 }
 
 #ifdef CONFIG_SMP

@@ -406,6 +406,10 @@ DECLARE_HOOK(android_vh_pidfd_open,
 DECLARE_HOOK(android_vh_mmput,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
+
+DECLARE_HOOK(android_vh_update_sched_flags,
+	TP_PROTO(struct task_struct *t, unsigned int *flags),
+	TP_ARGS(t, flags));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
