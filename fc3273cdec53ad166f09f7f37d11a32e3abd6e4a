@@ -34,6 +34,23 @@
       "parentUuid": "ea568e12_269997bd",
       "revId": "fc3273cdec53ad166f09f7f37d11a32e3abd6e4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "683ff6f7_cf0c321a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-08T10:47:53Z",
+      "side": 1,
+      "message": "Please solve this upstream properly first and then we can take the backported patch.  Do not rely on a vendor hook for basic system functionality, ESPECIALLY for ACPI issues.",
+      "revId": "fc3273cdec53ad166f09f7f37d11a32e3abd6e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
