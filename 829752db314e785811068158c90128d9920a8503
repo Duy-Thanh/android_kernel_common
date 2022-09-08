@@ -16,6 +16,24 @@
       "message": "Needs to wait until the android13-5.10 version lands.",
       "revId": "829752db314e785811068158c90128d9920a8503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c786ce0_ee2a7771",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-09-08T18:54:19Z",
+      "side": 1,
+      "message": "Is this something I could have figured out myself? I haven\u0027t found the android13-5.10-2022-09 branch on go/pixelkernel-branching. Is there perhaps another document that explains the Pixel kernel branching strategy?",
+      "parentUuid": "1cf8f5ac_eb8379a2",
+      "revId": "829752db314e785811068158c90128d9920a8503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
