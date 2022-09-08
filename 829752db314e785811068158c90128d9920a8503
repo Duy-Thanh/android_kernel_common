@@ -34,6 +34,24 @@
       "parentUuid": "1cf8f5ac_eb8379a2",
       "revId": "829752db314e785811068158c90128d9920a8503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c63f9cb0_8dcde695",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-08T19:09:37Z",
+      "side": 1,
+      "message": "All patches going into a release branch (2022-xx) must first land in the dev branch (all release branches are subset of dev branch to ensure all changes propagate to later release branches).\n\nWe don\u0027t have visibility to which Pixel branches correspond to which of our GKI release branches. You need to ask Pixel release folks for that.",
+      "parentUuid": "6c786ce0_ee2a7771",
+      "revId": "829752db314e785811068158c90128d9920a8503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
