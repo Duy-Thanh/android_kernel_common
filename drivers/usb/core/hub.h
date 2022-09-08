@@ -89,6 +89,8 @@ struct usb_hub {
  * @is_superspeed cache super-speed status
  * @usb3_lpm_u1_permit: whether USB3 U1 LPM is permitted.
  * @usb3_lpm_u2_permit: whether USB3 U2 LPM is permitted.
+ * @ignore_connect: ignore the connection or not.
+ * @quick_init: limit the numbers of retries for port initialization
  */
 struct usb_port {
 	struct usb_device *child;
@@ -102,6 +104,8 @@ struct usb_port {
 	u32 over_current_count;
 	u8 portnum;
 	u32 quirks;
+	bool ignore_connect;
+	bool quick_init;
 	unsigned int is_superspeed:1;
 	unsigned int usb3_lpm_u1_permit:1;
 	unsigned int usb3_lpm_u2_permit:1;

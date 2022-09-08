@@ -3016,6 +3016,29 @@ done:
 	return status;
 }
 
+/* Check whether a hub would stop enumeration or ignore events on the port. */
+static bool hub_port_stop_enumerate(struct usb_hub *hub, int port1, int retries)
+{
+	struct usb_port *port_dev = hub->ports[port1 - 1];
+
+	if (port_dev->quick_init) {
+		if (port_dev->ignore_connect)
+			return true;
+
+		/*
+		 * Since some normal devices will be timeout in the first attempt,
+		 * set the condition to half of the retries
+		 */
+		if (retries < (PORT_INIT_TRIES - 1) / 2)
+			return false;
+
+		port_dev->ignore_connect = true;
+	} else
+		port_dev->ignore_connect = false;
+
+	return port_dev->ignore_connect;
+}
+
 /* Check if a port is power on */
 static int port_is_power_on(struct usb_hub *hub, unsigned portstatus)
 {
@@ -4788,6 +4811,11 @@ hub_port_init(struct usb_hub *hub, struct usb_device *udev, int port1,
 					buf->bMaxPacketSize0;
 			kfree(buf);
 
+			if (r < 0 && port_dev->quick_init) {
+				retval = r;
+				goto fail;
+			}
+
 			retval = hub_port_reset(hub, port1, udev, delay, false);
 			if (retval < 0)		/* error or disconnect */
 				goto fail;
@@ -5314,6 +5342,9 @@ loop:
 		if ((status == -ENOTCONN) || (status == -ENOTSUPP))
 			break;
 
+		if (hub_port_stop_enumerate(hub, port1, i))
+			break;
+
 		/* When halfway through our retry count, power-cycle the port */
 		if (i == (PORT_INIT_TRIES - 1) / 2) {
 			dev_info(&port_dev->dev, "attempt power cycle\n");
@@ -5540,6 +5571,9 @@ static void port_event(struct usb_hub *hub, int port1)
 
 	/* skip port actions that require the port to be powered on */
 	if (!pm_runtime_active(&port_dev->dev))
+		return;
+
+	if (hub_port_stop_enumerate(hub, port1, 0))
 		return;
 
 	if (hub_handle_remote_wakeup(hub, port1, portstatus, portchange))
@@ -5861,6 +5895,9 @@ static int usb_reset_and_verify_device(struct usb_device *udev)
 		ret = hub_port_init(parent_hub, udev, port1, i);
 		if (ret >= 0 || ret == -ENOTCONN || ret == -ENODEV)
 			break;
+
+		if (hub_port_stop_enumerate(parent_hub, port1, i))
+			goto stop_enumerate;
 	}
 	mutex_unlock(hcd->address0_mutex);
 
@@ -5949,6 +5986,8 @@ done:
 	udev->bos = bos;
 	return 0;
 
+stop_enumerate:
+	mutex_unlock(hcd->address0_mutex);
 re_enumerate:
 	usb_release_bos_descriptor(udev);
 	udev->bos = bos;
