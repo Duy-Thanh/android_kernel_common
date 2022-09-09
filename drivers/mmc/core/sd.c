@@ -1521,7 +1521,7 @@ retry:
 
 		trace_android_vh_mmc_sd_update_cmdline_timing(card, &err);
 		trace_android_rvh_mmc_sd_cmdline_timing(card, &err);
-		if (err)
+		if (err < 0)
 			goto free_card;
 
 		/*
@@ -1538,7 +1538,7 @@ retry:
 
 		trace_android_vh_mmc_sd_update_dataline_timing(card, &err);
 		trace_android_rvh_mmc_sd_dataline_timing(card, &err);
-		if (err)
+		if (err < 0)
 			goto free_card;
 	}
 
