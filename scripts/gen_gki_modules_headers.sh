@@ -68,7 +68,7 @@ generate_header() {
 	/*
 	 * DO NOT EDIT
 	 *
-	 * Build generated header file with GKI module symbols/exports
+	 * Build generated header file with unprotected symbols/exports
 	 */
 
 	#define NO_OF_$(printf ${symbol_type} | tr [:lower:] [:upper:])_SYMBOLS \\
@@ -81,21 +81,15 @@ generate_header() {
 
 	# If a valid symbol_file present add symbols in an array except the 1st line
 	if [  -s "${symbol_file}" ]; then
-		sed -e 1d -e 's/^[ \t]*/\t"/;s/[ \t]*$/",/' "${symbol_file}" >> "${header_file}"
+		sed -e 's/^[ \t]*/\t"/;s/[ \t]*$/",/' "${symbol_file}" >> "${header_file}"
 	fi
 
 	# Terminate the file
 	echo "};" >> "${header_file}"
 }
 
-if [ "$(basename "${TARGET}")" = "gki_module_protected.h" ]; then
-	# Sorted list of protected symbols
-	GKI_PROTECTED_SYMBOLS="${SRCTREE}/android/abi_gki_modules_protected"
+# Sorted list of vendor symbols
+GKI_VENDOR_SYMBOLS="${OUT_DIR}/abi_symbollist.raw"
 
-	generate_header "${TARGET}" "${GKI_PROTECTED_SYMBOLS}" "protected"
-else
-	# Sorted list of exported symbols
-	GKI_EXPORTED_SYMBOLS="${SRCTREE}/android/abi_gki_modules_exports"
+generate_header "${TARGET}" "${GKI_VENDOR_SYMBOLS}" "unprotected"
 
-	generate_header "${TARGET}" "${GKI_EXPORTED_SYMBOLS}" "exported"
-fi
