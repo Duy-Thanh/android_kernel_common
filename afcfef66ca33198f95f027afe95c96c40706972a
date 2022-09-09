@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "618a569b_6e058e5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1963266
+      },
+      "writtenOn": "2022-09-09T18:06:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b933dd2_b4de2f71",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "498a3264_3dd30357",
@@ -108,6 +132,30 @@
       "writtenOn": "2022-09-09T18:06:09Z",
       "side": 1,
       "message": "okay either way",
+      "parentUuid": "cc676f41_26225116",
+      "range": {
+        "startLine": 456,
+        "startChar": 2,
+        "endLine": 456,
+        "endChar": 19
+      },
+      "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab248e5d_c445c563",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1963266
+      },
+      "writtenOn": "2022-09-09T18:06:39Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "cc676f41_26225116",
       "range": {
         "startLine": 456,
