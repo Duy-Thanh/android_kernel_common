@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9fefecc_bd328ba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-09-09T08:31:22Z",
+      "side": 1,
+      "message": "Uploaded to have a quick look on that this is going in the right track. In a final version; I\u0027ll probably first revert the earlier implementation and add this new implementation so future porting to new kernel branches stays clean and easy.",
+      "revId": "7010c49a8b36791cab485695ebb94224e547594b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
