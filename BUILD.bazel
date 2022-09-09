@@ -1,3 +1,6 @@
+load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//build/kernel/kleaf:kernel.bzl", "kernel_build", "kernel_images", "kernel_modules_install")
+
 # Copyright (C) 2021 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -217,4 +220,21 @@ define_db845c(
         "sound/soc/qcom/snd-soc-sdm845.ko",
         "sound/soc/qcom/snd-soc-sm8250.ko",
     ],
+)
+
+kernel_build(
+    name = "fips140",
+    outs = [],
+    base_kernel = ":kernel_aarch64",
+    build_config = "build.config.gki.aarch64.fips140",
+    module_outs = ["crypto/fips140.ko"],
+)
+
+copy_to_dist_dir(
+    name = "fips140_dist",
+    data = [
+        ":fips140",
+    ],
+    dist_dir = "out/fips140/dist",
+    flat = True,
 )
