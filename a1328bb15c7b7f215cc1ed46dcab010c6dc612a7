@@ -16,6 +16,23 @@
       "message": "As issue tracker assigned gprocida for b/245485515, I\u0027m adding as reviewer.\nPlease merge this patch.\n\nThanks.",
       "revId": "a1328bb15c7b7f215cc1ed46dcab010c6dc612a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "200c2e1c_f7b2fe50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-09-09T16:21:20Z",
+      "side": 1,
+      "message": "Note: 12-5.10.",
+      "revId": "a1328bb15c7b7f215cc1ed46dcab010c6dc612a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
