@@ -16,6 +16,24 @@
       "message": "shouldn\u0027t this be `ADS_ENTRY(ADS_PRINTK_RINGBUFFER, current_printk_ringbuffer)` (no \u0027\u0026\u0027 since it is already a pointer to `prb`, which is a pointer). I don\u0027t think you need the double indirection here.",
       "revId": "98d1c0f227a924a0ce8a90930ff696d901c79b7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ed18dd_175e08c6",
+        "filename": "drivers/android/android_debug_symbols.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1965279
+      },
+      "writtenOn": "2022-09-09T09:48:45Z",
+      "side": 1,
+      "message": "I have tried this, but got these errror \"error: initializer element is not a compile-time constant\".\nIt seems ADS list is statically defined, but value of current_printk_ringbuffer is not set during compilation. So we can only have the address of current_printk_ringbuffer here.",
+      "parentUuid": "45892283_450b9e09",
+      "revId": "98d1c0f227a924a0ce8a90930ff696d901c79b7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
