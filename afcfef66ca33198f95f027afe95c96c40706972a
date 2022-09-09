@@ -93,6 +93,30 @@
       },
       "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10df956b_e4784441",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-09-09T18:06:09Z",
+      "side": 1,
+      "message": "okay either way",
+      "parentUuid": "cc676f41_26225116",
+      "range": {
+        "startLine": 456,
+        "startChar": 2,
+        "endLine": 456,
+        "endChar": 19
+      },
+      "revId": "afcfef66ca33198f95f027afe95c96c40706972a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
