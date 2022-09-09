@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0e420c3_5519cf39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-09T15:46:25Z",
+      "side": 1,
+      "message": "Add suggested changes to help with child patch",
+      "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c0c687_b05bf898",
+        "filename": "include/linux/printk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-09T15:46:25Z",
+      "side": 1,
+      "message": "make this `extern const struct ...`",
+      "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a78b590_ad362eea",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-09T15:46:25Z",
+      "side": 1,
+      "message": "make this\n```\nconst struct printk_ringbuffer **current_printk_ringbuffer \u003d \n  (const struct printk_ringbuffer **)\u0026prb;\n```",
+      "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
