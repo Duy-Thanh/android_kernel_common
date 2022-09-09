@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8432a17_c950c774",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3085,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-09-09T16:23:37Z",
+      "side": 1,
+      "message": "I think there will likely be an issue with sock_i_uid.",
+      "range": {
+        "startLine": 3085,
+        "startChar": 2,
+        "endLine": 3085,
+        "endChar": 12
+      },
+      "revId": "597225027fcfe56e1bc47b92337b1945d521968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
