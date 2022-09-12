@@ -63,6 +63,30 @@
       },
       "revId": "aee65261045b535caf4c23c85a58e1581e190949",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a16c842f_b45d3ae1",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-09-12T19:50:36Z",
+      "side": 1,
+      "message": "Will the single pointer be enough to hold the two 32-bit ids plus the 64-bit timestamp? I just want to make sure the commit message is accurate.",
+      "parentUuid": "250206be_09182a94",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 575,
+        "endChar": 17
+      },
+      "revId": "aee65261045b535caf4c23c85a58e1581e190949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
