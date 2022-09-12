@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9084e2_1f1b5f6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-12T17:15:47Z",
+      "side": 1,
+      "message": "Output of type analysis tool comparing to previous XML:\n```\n$ mi old.xml new.xml\nsymbols: . (absent), ? (untyped), T (typed)\nTT: 3932\n??: 21\n.: 0\n?: 21\nT: 3932\ntypes: . (absent), ? (undefined), D (defined)\nDD: 2684\n.D: 83\n??: 75\n?D: 22\n.?: 3 (struct audit_aux_data, struct audit_tree_refs, struct tipc_discoverer)\nD?: 1 (struct can_dev_rcv_lists)\n.: 0\n?: 79\nD: 2789\n```",
+      "revId": "7108d9d0e5f2ff1a531dd36714c68a330ba84823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
