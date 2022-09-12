@@ -180,6 +180,7 @@ struct pci_bus *pci_acpi_scan_root(struct acpi_pci_root *root)
 	struct pci_bus *bus, *child;
 	struct acpi_pci_root_ops *root_ops;
 	struct pci_host_bridge *host;
+        char noop;
 
 	ri = kzalloc(sizeof(*ri), GFP_KERNEL);
 	if (!ri)
