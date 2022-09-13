@@ -204,6 +204,9 @@ static void amu_scale_freq_tick(void)
 	u64 prev_core_cnt, prev_const_cnt;
 	u64 core_cnt, const_cnt, scale;
 
+	if (!cpumask_test_cpu(smp_processor_id(), amu_fie_cpus))
+		return;
+
 	prev_const_cnt = this_cpu_read(arch_const_cycles_prev);
 	prev_core_cnt = this_cpu_read(arch_core_cycles_prev);
 
