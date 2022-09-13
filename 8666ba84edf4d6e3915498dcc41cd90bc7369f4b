@@ -52,6 +52,24 @@
       "parentUuid": "5e662e9b_3b30bc55",
       "revId": "8666ba84edf4d6e3915498dcc41cd90bc7369f4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561e3631_d8a15c60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899961
+      },
+      "writtenOn": "2022-09-13T18:50:27Z",
+      "side": 1,
+      "message": "Ok, Lint is green now. Thanks for the hint.",
+      "parentUuid": "0e9fdc42_5b4e469b",
+      "revId": "8666ba84edf4d6e3915498dcc41cd90bc7369f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
