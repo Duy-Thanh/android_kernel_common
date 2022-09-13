@@ -163,6 +163,24 @@
       "parentUuid": "bdbd47ce_d99f8b83",
       "revId": "0167e81a33618dc706424e23ce2354d0985d5991",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3083ad5e_3e454be9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937105
+      },
+      "writtenOn": "2022-09-13T08:55:07Z",
+      "side": 1,
+      "message": "Hi Greg. Currently I need this on 5.15 Android-13 and 5.10 Android-12.\nShall I go ahead and make these two gerrits or do we need to push this change to all branches ? Can you help suggest how to proceed further.\n\nThanks,\nKrishna,",
+      "parentUuid": "56f274ce_062577b3",
+      "revId": "0167e81a33618dc706424e23ce2354d0985d5991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
