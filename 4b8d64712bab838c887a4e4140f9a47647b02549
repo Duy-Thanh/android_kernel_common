@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d58e284b_d9ce803b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-13T00:39:59Z",
+      "side": 1,
+      "message": "Comparison of visibility vs previous version.\n```\n$ mi old.xml new.xml\nsymbols: . (absent), ? (untyped), T (typed)\nTT: 6807\n??: 28\n.: 0\n?: 28\nT: 6807\ntypes: . (absent), ? (undefined), D (defined)\nDD: 3083\n??: 91\n.D: 46\n?D: 16\n.?: 3 (struct audit_aux_data, struct audit_tree_refs, struct tipc_discoverer)\nD?: 1 (struct pinmux_ops)\n.: 0\n?: 95\nD: 3145\n```",
+      "revId": "4b8d64712bab838c887a4e4140f9a47647b02549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
