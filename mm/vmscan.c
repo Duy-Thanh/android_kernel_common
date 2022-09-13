@@ -1270,7 +1270,24 @@ static enum page_references page_check_references(struct page *page,
 {
 	int referenced_ptes, referenced_page;
 	unsigned long vm_flags;
+<<<<<<< HEAD   (feb80c UPSTREAM: gfs2: Don't deref jdesc in evict)
+=======
+	bool should_protect = false;
+	bool trylock_fail = false;
+	int ret = 0;
+>>>>>>> CHANGE (b2b959 ANDROID: vendor_hooks: Add hooks for lookaround)
 
+<<<<<<< HEAD   (feb80c UPSTREAM: gfs2: Don't deref jdesc in evict)
+=======
+	trace_android_vh_page_should_be_protected(page, &should_protect);
+	if (unlikely(should_protect))
+		return PAGEREF_ACTIVATE;
+
+	trace_android_vh_page_trylock_set(page);
+	trace_android_vh_check_page_look_around_ref(page, &ret);
+	if (ret)
+		return ret;
+>>>>>>> CHANGE (b2b959 ANDROID: vendor_hooks: Add hooks for lookaround)
 	referenced_ptes = page_referenced(page, 1, sc->target_mem_cgroup,
 					  &vm_flags);
 	referenced_page = TestClearPageReferenced(page);

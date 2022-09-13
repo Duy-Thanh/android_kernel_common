@@ -74,6 +74,11 @@
 #include <linux/khugepaged.h>
 #include <linux/buffer_head.h>
 #include <trace/hooks/mm.h>
+<<<<<<< HEAD   (feb80c UPSTREAM: gfs2: Don't deref jdesc in evict)
+=======
+#include <trace/hooks/vmscan.h>
+
+>>>>>>> CHANGE (b2b959 ANDROID: vendor_hooks: Add hooks for lookaround)
 #include <asm/sections.h>
 #include <asm/tlbflush.h>
 #include <asm/div64.h>
@@ -2609,6 +2614,7 @@ static void prep_new_page(struct page *page, unsigned int order, gfp_t gfp_flags
 		set_page_pfmemalloc(page);
 	else
 		clear_page_pfmemalloc(page);
+	trace_android_vh_test_clear_look_around_ref(page);
 }
 
 /*

@@ -55,6 +55,12 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/migrate.h>
+<<<<<<< HEAD   (feb80c UPSTREAM: gfs2: Don't deref jdesc in evict)
+=======
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
+#include <trace/hooks/vmscan.h>
+>>>>>>> CHANGE (b2b959 ANDROID: vendor_hooks: Add hooks for lookaround)
 
 #include "internal.h"
 
@@ -562,6 +568,7 @@ void migrate_page_states(struct page *newpage, struct page *page)
 		SetPageChecked(newpage);
 	if (PageMappedToDisk(page))
 		SetPageMappedToDisk(newpage);
+	trace_android_vh_look_around_migrate_page(page, newpage);
 
 	/* Move dirty on pages not done by migrate_page_move_mapping() */
 	if (PageDirty(page))
