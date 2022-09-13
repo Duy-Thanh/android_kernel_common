@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "03187380_acce6b50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-13T18:15:32Z",
+      "side": 1,
+      "message": "please fix typo (\"cuurent\")",
+      "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e0e420c3_5519cf39",
@@ -31,6 +48,24 @@
       "writtenOn": "2022-09-09T15:46:25Z",
       "side": 1,
       "message": "make this `extern const struct ...`",
+      "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c189dec3_58872e00",
+        "filename": "include/linux/printk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-13T18:15:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78c0c687_b05bf898",
       "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -66,6 +101,24 @@
       "side": 1,
       "message": "I tried your suggestions, but still got the compile error. Per my understanding, we need to make the variable to a const pointer, so should it be \"struct printk_ringbuffer ** const\"? Anyway, I tried both of them and got the same error. Seems the compiler cannot accept even it\u0027s a const variable.",
       "parentUuid": "8a78b590_ad362eea",
+      "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65779aa7_08b181a1",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-13T18:15:32Z",
+      "side": 1,
+      "message": "Ok, thanks for trying.",
+      "parentUuid": "6d83c63c_95b82c2b",
       "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
