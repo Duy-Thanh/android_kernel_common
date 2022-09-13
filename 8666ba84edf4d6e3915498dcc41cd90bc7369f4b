@@ -16,6 +16,24 @@
       "message": "Please conform to the ACK contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "8666ba84edf4d6e3915498dcc41cd90bc7369f4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e662e9b_3b30bc55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899961
+      },
+      "writtenOn": "2022-09-13T18:44:13Z",
+      "side": 1,
+      "message": "Sorry, it\u0027s been a while since I last pushed an Android specific review.\nDoes it look better now?",
+      "parentUuid": "c1498254_5327fa4a",
+      "revId": "8666ba84edf4d6e3915498dcc41cd90bc7369f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
