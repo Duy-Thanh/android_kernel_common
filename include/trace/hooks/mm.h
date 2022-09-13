@@ -44,6 +44,7 @@ struct readahead_control;
 #endif /* __GENKSYMS__ */
 struct cma;
 struct swap_slots_cache;
+struct page_vma_mapped_walk;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_set_skip_swapcache_flags,
 			TP_PROTO(gfp_t *flags),
@@ -263,6 +264,30 @@ DECLARE_HOOK(android_vh_free_pages,
 DECLARE_HOOK(android_vh_set_shmem_page_flag,
 	TP_PROTO(struct page *page),
 	TP_ARGS(page));
+<<<<<<< HEAD   (1883f5 UPSTREAM: psi: Fix psi state corruption when schedule() race)
+=======
+DECLARE_HOOK(android_vh_remove_vmalloc_stack,
+	TP_PROTO(struct vm_struct *vm),
+	TP_ARGS(vm));
+DECLARE_HOOK(android_vh_alloc_pages_reclaim_bypass,
+	TP_PROTO(gfp_t gfp_mask, int order, int alloc_flags,
+	int migratetype, struct page **page),
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, page));
+DECLARE_HOOK(android_vh_alloc_pages_failure_bypass,
+	TP_PROTO(gfp_t gfp_mask, int order, int alloc_flags,
+	int migratetype, struct page **page),
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, page));
+DECLARE_HOOK(android_vh_test_clear_look_around_ref,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_look_around_migrate_page,
+	TP_PROTO(struct page *old_page, struct page *new_page),
+	TP_ARGS(old_page, new_page));
+DECLARE_HOOK(android_vh_look_around,
+	TP_PROTO(struct page_vma_mapped_walk *pvmw, struct page *page,
+		struct vm_area_struct *vma, int *referenced),
+	TP_ARGS(pvmw, page, vma, referenced));
+>>>>>>> CHANGE (f50f24 ANDROID: vendor_hooks: Add hooks for lookaround)
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */
