@@ -34,6 +34,24 @@
       "parentUuid": "c1498254_5327fa4a",
       "revId": "8666ba84edf4d6e3915498dcc41cd90bc7369f4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e9fdc42_5b4e469b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-13T18:48:07Z",
+      "side": 1,
+      "message": "You should see a green check by Lint when it is correct (\"BUG:\" should be \"Bug:\")",
+      "parentUuid": "5e662e9b_3b30bc55",
+      "revId": "8666ba84edf4d6e3915498dcc41cd90bc7369f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
