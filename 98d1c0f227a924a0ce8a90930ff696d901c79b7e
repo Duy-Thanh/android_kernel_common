@@ -52,6 +52,24 @@
       "parentUuid": "04ed18dd_175e08c6",
       "revId": "98d1c0f227a924a0ce8a90930ff696d901c79b7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1229d1d0_6b7b8b3d",
+        "filename": "drivers/android/android_debug_symbols.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1965279
+      },
+      "writtenOn": "2022-09-13T11:03:26Z",
+      "side": 1,
+      "message": "Replied at the parent patch",
+      "parentUuid": "b9fdca35_f07681db",
+      "revId": "98d1c0f227a924a0ce8a90930ff696d901c79b7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
