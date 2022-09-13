@@ -22,6 +22,30 @@
       },
       "revId": "db36fcebef80e37396cb89d49dbe959c5782bda7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e7410b_6802b4e9",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-13T15:39:46Z",
+      "side": 1,
+      "message": "Yes, the idea would be to create new vendor_hooks.c files in those directories as we\u0027ve already done with kernel/sched/vendor_hooks.c. I\u0027ve been having some trouble doing that on KMI-frozen branches though since CRC needs to be preserved, so some or all of these might persist for the lifetime of android13-5.15 (but we we can prevent it in android14* and later branches)",
+      "parentUuid": "a488a877_9288a85b",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 47
+      },
+      "revId": "db36fcebef80e37396cb89d49dbe959c5782bda7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
