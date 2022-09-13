@@ -826,9 +826,25 @@ static bool folio_referenced_one(struct folio *folio,
 		}
 
 		if (pvmw.pte) {
+<<<<<<< HEAD   (c8ad90 ANDROID: abi_gki_aarch64_qcom: ufshcd_mcq_poll_cqe_lock)
 			if (lru_gen_enabled() && pte_young(*pvmw.pte)) {
 				lru_gen_look_around(&pvmw);
 				referenced++;
+=======
+			trace_android_vh_look_around(&pvmw, page, vma, &referenced);
+			if (ptep_clear_flush_young_notify(vma, address,
+						pvmw.pte)) {
+				/*
+				 * Don't treat a reference through
+				 * a sequentially read mapping as such.
+				 * If the page has been used in another mapping,
+				 * we will catch it; if this other mapping is
+				 * already gone, the unmap path will have set
+				 * PG_referenced or activated the page.
+				 */
+				if (likely(!(vma->vm_flags & VM_SEQ_READ)))
+					referenced++;
+>>>>>>> CHANGE (f50f24 ANDROID: vendor_hooks: Add hooks for lookaround)
 			}
 
 			if (ptep_clear_flush_young_notify(vma, address,

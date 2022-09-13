@@ -1468,11 +1468,30 @@ static enum folio_references folio_check_references(struct folio *folio,
 {
 	int referenced_ptes, referenced_folio;
 	unsigned long vm_flags;
+<<<<<<< HEAD   (c8ad90 ANDROID: abi_gki_aarch64_qcom: ufshcd_mcq_poll_cqe_lock)
+=======
+	bool should_protect = false;
+	bool trylock_fail = false;
+	int ret = 0;
+>>>>>>> CHANGE (f50f24 ANDROID: vendor_hooks: Add hooks for lookaround)
 
 	referenced_ptes = folio_referenced(folio, 1, sc->target_mem_cgroup,
 					   &vm_flags);
 	referenced_folio = folio_test_clear_referenced(folio);
 
+<<<<<<< HEAD   (c8ad90 ANDROID: abi_gki_aarch64_qcom: ufshcd_mcq_poll_cqe_lock)
+=======
+	trace_android_vh_page_trylock_set(page);
+	trace_android_vh_check_page_look_around_ref(page, &ret);
+	if (ret)
+		return ret;
+	referenced_ptes = page_referenced(page, 1, sc->target_mem_cgroup,
+					  &vm_flags);
+	referenced_page = TestClearPageReferenced(page);
+	trace_android_vh_page_trylock_get_result(page, &trylock_fail);
+	if (trylock_fail)
+		return PAGEREF_KEEP;
+>>>>>>> CHANGE (f50f24 ANDROID: vendor_hooks: Add hooks for lookaround)
 	/*
 	 * The supposedly reclaimable folio was found to be in a VM_LOCKED vma.
 	 * Let the folio, now marked Mlocked, be moved to the unevictable list.

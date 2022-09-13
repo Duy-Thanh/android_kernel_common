@@ -55,6 +55,12 @@
 #include <asm/tlbflush.h>
 
 #include <trace/events/migrate.h>
+<<<<<<< HEAD   (c8ad90 ANDROID: abi_gki_aarch64_qcom: ufshcd_mcq_poll_cqe_lock)
+=======
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
+#include <trace/hooks/vmscan.h>
+>>>>>>> CHANGE (f50f24 ANDROID: vendor_hooks: Add hooks for lookaround)
 
 #include "internal.h"
 
@@ -554,9 +560,30 @@ void folio_migrate_flags(struct folio *newfolio, struct folio *folio)
 	if (folio_test_mappedtodisk(folio))
 		folio_set_mappedtodisk(newfolio);
 
+<<<<<<< HEAD   (c8ad90 ANDROID: abi_gki_aarch64_qcom: ufshcd_mcq_poll_cqe_lock)
 	/* Move dirty on pages not done by folio_migrate_mapping() */
 	if (folio_test_dirty(folio))
 		folio_set_dirty(newfolio);
+=======
+	if (PageError(page))
+		SetPageError(newpage);
+	if (PageReferenced(page))
+		SetPageReferenced(newpage);
+	if (PageUptodate(page))
+		SetPageUptodate(newpage);
+	if (TestClearPageActive(page)) {
+		VM_BUG_ON_PAGE(PageUnevictable(page), page);
+		SetPageActive(newpage);
+	} else if (TestClearPageUnevictable(page))
+		SetPageUnevictable(newpage);
+	if (PageWorkingset(page))
+		SetPageWorkingset(newpage);
+	if (PageChecked(page))
+		SetPageChecked(newpage);
+	if (PageMappedToDisk(page))
+		SetPageMappedToDisk(newpage);
+	trace_android_vh_look_around_migrate_page(page, newpage);
+>>>>>>> CHANGE (f50f24 ANDROID: vendor_hooks: Add hooks for lookaround)
 
 	if (folio_test_young(folio))
 		folio_set_young(newfolio);
