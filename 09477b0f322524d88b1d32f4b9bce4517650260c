@@ -50,6 +50,24 @@
       "message": "make this\n```\nconst struct printk_ringbuffer **current_printk_ringbuffer \u003d \n  (const struct printk_ringbuffer **)\u0026prb;\n```",
       "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d83c63c_95b82c2b",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1965279
+      },
+      "writtenOn": "2022-09-13T11:03:09Z",
+      "side": 1,
+      "message": "I tried your suggestions, but still got the compile error. Per my understanding, we need to make the variable to a const pointer, so should it be \"struct printk_ringbuffer ** const\"? Anyway, I tried both of them and got the same error. Seems the compiler cannot accept even it\u0027s a const variable.",
+      "parentUuid": "8a78b590_ad362eea",
+      "revId": "09477b0f322524d88b1d32f4b9bce4517650260c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
