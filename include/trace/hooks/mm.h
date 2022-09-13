@@ -29,6 +29,66 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_readahead_gfp_mask,
 			TP_ARGS(flags), 1);
 
 */
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
+||||||| BASE   (1f20251dbd8822556c2c42ae9ccb2c3b6ee2a397 ANDROID: mm, oom: add vendor hook to prevent oom panic)
+struct mem_cgroup;
+DECLARE_HOOK(android_vh_mem_cgroup_alloc,
+	TP_PROTO(struct mem_cgroup *memcg),
+	TP_ARGS(memcg));
+DECLARE_HOOK(android_vh_mem_cgroup_free,
+	TP_PROTO(struct mem_cgroup *memcg),
+	TP_ARGS(memcg));
+
+DECLARE_HOOK(android_vh_cma_alloc_bypass,
+	TP_PROTO(struct cma *cma, unsigned long count, unsigned int align,
+		gfp_t gfp_mask, struct page **page, bool *bypass),
+	TP_ARGS(cma, count, align, gfp_mask, page, bypass));
+
+struct compact_control;
+DECLARE_HOOK(android_vh_isolate_freepages,
+	TP_PROTO(struct compact_control *cc, struct page *page, bool *bypass),
+	TP_ARGS(cc, page, bypass));
+
+struct oom_control;
+DECLARE_HOOK(android_vh_oom_check_panic,
+	TP_PROTO(struct oom_control *oc, int *ret),
+	TP_ARGS(oc, ret));
+=======
+struct mem_cgroup;
+DECLARE_HOOK(android_vh_mem_cgroup_alloc,
+	TP_PROTO(struct mem_cgroup *memcg),
+	TP_ARGS(memcg));
+DECLARE_HOOK(android_vh_mem_cgroup_free,
+	TP_PROTO(struct mem_cgroup *memcg),
+	TP_ARGS(memcg));
+
+DECLARE_HOOK(android_vh_cma_alloc_bypass,
+	TP_PROTO(struct cma *cma, unsigned long count, unsigned int align,
+		gfp_t gfp_mask, struct page **page, bool *bypass),
+	TP_ARGS(cma, count, align, gfp_mask, page, bypass));
+
+struct compact_control;
+DECLARE_HOOK(android_vh_isolate_freepages,
+	TP_PROTO(struct compact_control *cc, struct page *page, bool *bypass),
+	TP_ARGS(cc, page, bypass));
+
+struct oom_control;
+DECLARE_HOOK(android_vh_oom_check_panic,
+	TP_PROTO(struct oom_control *oc, int *ret),
+	TP_ARGS(oc, ret));
+
+struct page_vma_mapped_walk;
+DECLARE_HOOK(android_vh_test_clear_look_around_ref,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_look_around_migrate_folio,
+	TP_PROTO(struct folio *old_folio, struct folio *new_folio),
+	TP_ARGS(old_folio, new_folio));
+DECLARE_HOOK(android_vh_look_around,
+	TP_PROTO(struct page_vma_mapped_walk *pvmw, struct folio *folio,
+		struct vm_area_struct *vma, int *referenced),
+	TP_ARGS(pvmw, folio, vma, referenced));
+>>>>>>> CHANGE (ce49759c543fabc7a9299e7af1350614cf26d801 ANDROID: vendor_hooks: Add hooks for lookaround)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

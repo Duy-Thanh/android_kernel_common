@@ -113,6 +113,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_shmem_get_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_write_timeout_estab_retrans);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_format_check);
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks_dn);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
@@ -120,3 +121,20 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_capacity_show);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ep_create_wakeup_source);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timerfd_create);
+||||||| BASE   (1f20251dbd8822556c2c42ae9ccb2c3b6ee2a397 ANDROID: mm, oom: add vendor hook to prevent oom panic)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_check_panic);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_check_panic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_folio_look_around_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);
+>>>>>>> CHANGE (ce49759c543fabc7a9299e7af1350614cf26d801 ANDROID: vendor_hooks: Add hooks for lookaround)

@@ -81,6 +81,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/migrate.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
+
 #include "internal.h"
 
 static struct kmem_cache *anon_vma_cachep;
@@ -894,8 +897,21 @@ static bool folio_referenced_one(struct folio *folio,
 			return false;
 		}
 
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
 		if (lru_gen_enabled() && pvmw.pte) {
 			if (lru_gen_look_around(&pvmw))
+||||||| BASE   (1f20251dbd8822556c2c42ae9ccb2c3b6ee2a397 ANDROID: mm, oom: add vendor hook to prevent oom panic)
+		if (pvmw.pte) {
+			if (lru_gen_enabled() &&
+			    pte_young(ptep_get(pvmw.pte))) {
+				lru_gen_look_around(&pvmw);
+=======
+		if (pvmw.pte) {
+			trace_android_vh_look_around(&pvmw, folio, vma, &referenced);
+			if (lru_gen_enabled() &&
+			    pte_young(ptep_get(pvmw.pte))) {
+				lru_gen_look_around(&pvmw);
+>>>>>>> CHANGE (ce49759c543fabc7a9299e7af1350614cf26d801 ANDROID: vendor_hooks: Add hooks for lookaround)
 				referenced++;
 		} else if (pvmw.pte) {
 			if (ptep_clear_flush_young_notify(vma, address,

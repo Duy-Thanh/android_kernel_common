@@ -910,7 +910,18 @@ static enum folio_references folio_check_references(struct folio *folio,
 						  struct scan_control *sc)
 {
 	int referenced_ptes, referenced_folio;
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
 	vm_flags_t vm_flags;
+||||||| BASE   (1f20251dbd8822556c2c42ae9ccb2c3b6ee2a397 ANDROID: mm, oom: add vendor hook to prevent oom panic)
+	unsigned long vm_flags;
+=======
+	unsigned long vm_flags;
+	int ret = 0;
+
+	trace_android_vh_check_folio_look_around_ref(folio, &ret);
+	if (ret)
+		return ret;
+>>>>>>> CHANGE (ce49759c543fabc7a9299e7af1350614cf26d801 ANDROID: vendor_hooks: Add hooks for lookaround)
 
 	referenced_ptes = folio_referenced(folio, 1, sc->target_mem_cgroup,
 					   &vm_flags);
