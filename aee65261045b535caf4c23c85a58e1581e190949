@@ -87,6 +87,30 @@
       },
       "revId": "aee65261045b535caf4c23c85a58e1581e190949",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10a84bb_9b9bf4c8",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-09-13T03:22:07Z",
+      "side": 1,
+      "message": "At present, by creating a structure, the structure contains two 32-bit ids and 64-bit timestamp.\nThen point to the structure through a pointer, which is enough for now.",
+      "parentUuid": "a16c842f_b45d3ae1",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 575,
+        "endChar": 17
+      },
+      "revId": "aee65261045b535caf4c23c85a58e1581e190949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
