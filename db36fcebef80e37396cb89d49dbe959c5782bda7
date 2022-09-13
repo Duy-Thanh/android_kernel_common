@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a488a877_9288a85b",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-09-13T10:39:45Z",
+      "side": 1,
+      "message": "yikes, but perhaps we can also refactor those out in a later change?\nIn any case, this is already better than not having the type information.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 47
+      },
+      "revId": "db36fcebef80e37396cb89d49dbe959c5782bda7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
