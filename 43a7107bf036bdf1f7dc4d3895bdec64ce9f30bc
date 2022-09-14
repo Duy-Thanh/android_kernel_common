@@ -45,6 +45,54 @@
       },
       "revId": "43a7107bf036bdf1f7dc4d3895bdec64ce9f30bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c92d3f20_23b125d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1957957
+      },
+      "writtenOn": "2022-09-14T09:28:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22bd2c66_3911e777",
+      "range": {
+        "startLine": 9,
+        "startChar": 26,
+        "endLine": 9,
+        "endChar": 33
+      },
+      "revId": "43a7107bf036bdf1f7dc4d3895bdec64ce9f30bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "736fe2d0_a39222c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1957957
+      },
+      "writtenOn": "2022-09-14T09:28:59Z",
+      "side": 1,
+      "message": "This commit do add symbols to unisoc list so I corrected the title. However these new symbols already existed in other symbol lists like those of MTK and pixel. Please check whether the new commit message is suitable.",
+      "parentUuid": "5a07fc46_55e94934",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 34
+      },
+      "revId": "43a7107bf036bdf1f7dc4d3895bdec64ce9f30bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
