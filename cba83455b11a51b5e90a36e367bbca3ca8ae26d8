@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30a1e659_d2dc34af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-14T22:47:32Z",
+      "side": 1,
+      "message": "The patch breaks KMI:\n```\nsymbol \u0027void * android_debug_symbol(enum android_debug_symbol)\u0027 changed\n  CRC changed from 0xbd5ade9a to 0x99833086\n\ntype \u0027enum android_debug_symbol\u0027 changed\n  enumerator \u0027ADS_PRINTK_RINGBUFFER\u0027 (21) was added\n  enumerator \u0027ADS_END\u0027 value changed from 21 to 22\n```\n\nThe change to ADS_END is significant because it is used to size an array. You\u0027ll need to find a diferent way.\n",
+      "revId": "cba83455b11a51b5e90a36e367bbca3ca8ae26d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
