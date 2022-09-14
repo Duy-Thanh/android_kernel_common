@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60b9259b_cadb9021",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2022-09-14T03:31:08Z",
+      "side": 1,
+      "message": "Doesn\u0027t the OEM\u0027s HOOK have to be submitted to the upstream first? Can you help remove the -2？",
+      "parentUuid": "f4d34a34_f770fb13",
+      "revId": "aee65261045b535caf4c23c85a58e1581e190949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82059ecc_1140d8d2",
         "filename": "drivers/android/binder_internal.h",
         "patchSetId": 2
