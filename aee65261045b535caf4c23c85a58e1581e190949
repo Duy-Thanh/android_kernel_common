@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f3bd23b_20cadf51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-09-14T03:52:18Z",
+      "side": 1,
+      "message": "The hook-less version of your patch is what should be submitted upstream. Not this exact change. That would include the logic to populate t-\u003efrom for async transactions and also the transaction latency stats you have behind the hook.\n\nThis way you won\u0027t have to rebase these patches for every new branch.\n\nI think is OK to merge this into this branch for now, but we need to wait for Greg\u0027s answer.",
+      "parentUuid": "60b9259b_cadb9021",
+      "revId": "aee65261045b535caf4c23c85a58e1581e190949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82059ecc_1140d8d2",
         "filename": "drivers/android/binder_internal.h",
         "patchSetId": 2
