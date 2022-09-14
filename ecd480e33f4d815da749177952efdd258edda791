@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "911b322d_77942e22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-09-14T14:48:09Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/2202383（symbol list）\nmake below 5 commit as 1 commit for add symbol list, total 42 symbol,so this commit not have same change id in AOSP change\nhttps://android-review.googlesource.com/c/kernel/common/+/2154510 \nhttps://android-review.googlesource.com/c/kernel/common/+/2185344  \nhttps://android-review.googlesource.com/c/kernel/common/+/2186378  \nhttps://android-review.googlesource.com/c/kernel/common/+/2173926 \nhttps://android-review.googlesource.com/c/kernel/common/+/2191338 ",
+      "revId": "ecd480e33f4d815da749177952efdd258edda791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
