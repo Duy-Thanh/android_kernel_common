@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a07fc46_55e94934",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-09-14T08:09:41Z",
+      "side": 1,
+      "message": "I can see that this only _adds_ symbols. I would expect less entries in the list for a deduplication step. What am I missing?\n\nIf this change does add new symbols to the ABI that all already have been listed in other symbol lists, the change is fine. Just the commit message could need an update.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 34
+      },
+      "revId": "43a7107bf036bdf1f7dc4d3895bdec64ce9f30bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22bd2c66_3911e777",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-09-14T08:09:41Z",
+      "side": 1,
+      "message": "nit: symbols",
+      "range": {
+        "startLine": 9,
+        "startChar": 26,
+        "endLine": 9,
+        "endChar": 33
+      },
+      "revId": "43a7107bf036bdf1f7dc4d3895bdec64ce9f30bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
