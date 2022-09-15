@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a460f7f_112adf58",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-09-15T01:05:27Z",
+      "side": 0,
+      "message": "build breakage detected on pixel kernel:\n\n/private/gs-google/include/trace/hooks/mm.h:80:40: error: declaration of \u0027struct vm_unmapped_area_info\u0027 will not be visible outside of this function [-Werror,-Wvisibility]\n        TP_PROTO(struct mm_struct *mm, struct vm_unmapped_area_info *info,\n                                              ^",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "d6ab8e3ba2d7f0060959bb607959cd8df5aa7b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
