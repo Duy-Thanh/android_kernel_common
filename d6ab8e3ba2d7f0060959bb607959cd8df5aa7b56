@@ -22,6 +22,30 @@
       },
       "revId": "d6ab8e3ba2d7f0060959bb607959cd8df5aa7b56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e41262_14dd81b2",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-15T03:35:42Z",
+      "side": 0,
+      "message": "Robin, can you try it with a forward decl added before the hook declaration:\n```\nstruct vm_unmapped_area_info;\n```\n\nThat should fix the issue (not sure why that didn\u0027t show up in our builds). If you upload the patch after verifying it, we can land it during the day PDT.",
+      "parentUuid": "2a460f7f_112adf58",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "d6ab8e3ba2d7f0060959bb607959cd8df5aa7b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
