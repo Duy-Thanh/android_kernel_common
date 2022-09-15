@@ -74,6 +74,24 @@
       "parentUuid": "81acbdca_d5f85b70",
       "revId": "61814ef31ff3a8ab13e4c1a8bf86d6271ab787ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a2c638_c778f336",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2022-09-15T00:20:09Z",
+      "side": 1,
+      "message": "I actually thought about it, but I\u0027m worrying about some race condition may corrupt the flag value - 2 rt tasks are enqueued to the same cpu at the same time, which is rare but theoretically could happen.",
+      "parentUuid": "ce9b60da_27f56d2b",
+      "revId": "61814ef31ff3a8ab13e4c1a8bf86d6271ab787ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
