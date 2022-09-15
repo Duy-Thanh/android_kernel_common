@@ -3,6 +3,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7a11376_eeb38a10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-09-15T14:33:43Z",
+      "side": 1,
+      "message": "\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 474297938 android-build.ayeaye-python-dispatcher_20220914.05_p0\n\nPlease fix. Also, do not indent the \"Bug: \" line, please.",
+      "parentUuid": "795ce92a_8011f27f",
+      "revId": "a1d2f552fad696d56ebc27177b8538573e95d6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fdfcfb72_15371637",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
