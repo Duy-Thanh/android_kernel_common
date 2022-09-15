@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d652ade_5d7ca75e",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-15T18:16:09Z",
+      "side": 1,
+      "message": "This needs to be moved to kernel/sched/vendor_hooks.c",
+      "revId": "e9fd310a65a9525c386fb7550f55dbc923b091c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eefa4e7d_62e31888",
         "filename": "kernel/sched/core.c",
         "patchSetId": 10
