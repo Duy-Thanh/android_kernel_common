@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e15a0e_9f48d623",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-15T18:35:56Z",
+      "side": 1,
+      "message": "Is this for assymetric 32-bit/64-bit core support? Can you provide the complete context?",
+      "revId": "f131f219f686209013e88ea2b8310f6896264e7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab56b6c6_f633c578",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-15T18:35:56Z",
+      "side": 1,
+      "message": "move these to kernel/sched/vendor_hooks.c",
+      "revId": "f131f219f686209013e88ea2b8310f6896264e7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
