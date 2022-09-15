@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f36307_2ed377bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-15T18:31:39Z",
+      "side": 1,
+      "message": "Let\u0027s be consistent about feature names. In other patches in the series you call it \"CPU Pause\".",
+      "revId": "1423f7de251fab9f8baac40cd302c402756c18ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3be9769_a41493fe",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-15T18:31:39Z",
+      "side": 1,
+      "message": "move to kernel/sched/vendor_hooks.c",
+      "revId": "1423f7de251fab9f8baac40cd302c402756c18ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
