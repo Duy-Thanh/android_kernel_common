@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67095032_7c648dc7",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-15T20:08:34Z",
+      "side": 1,
+      "message": "All of these need to be moved to kernel/sched/vendor_hooks.c",
+      "revId": "587421ebffbed73258ae8ff411ed54b12e8675d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
