@@ -28,6 +28,9 @@ DECLARE_HOOK(android_vh_shrink_slab_bypass,
 DECLARE_HOOK(android_vh_do_shrink_slab,
 	TP_PROTO(struct shrinker *shrinker, struct shrink_control *shrinkctl, int priority),
 	TP_ARGS(shrinker, shrinkctl, priority));
+DECLARE_HOOK(android_vh_check_page_look_around_ref,
+	TP_PROTO(struct page *page, int *skip),
+	TP_ARGS(page, skip));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
