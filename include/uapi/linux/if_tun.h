@@ -75,6 +75,8 @@
 #define IFF_MULTI_QUEUE 0x0100
 #define IFF_ATTACH_QUEUE 0x0200
 #define IFF_DETACH_QUEUE 0x0400
+/* Used in TUNSETIFF to bring up tun/tap without carrier */
+#define IFF_NO_CARRIER IFF_DETACH_QUEUE
 /* read-only flag */
 #define IFF_PERSIST	0x0800
 #define IFF_NOFILTER	0x1000
