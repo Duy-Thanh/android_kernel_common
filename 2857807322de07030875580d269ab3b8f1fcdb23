@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000029203924",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2220002?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "be53289d_17a13676",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-09-16T16:53:49Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 474547350 android-build.ayeaye-python-dispatcher_20220915.04_p0",
+      "revId": "2857807322de07030875580d269ab3b8f1fcdb23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
