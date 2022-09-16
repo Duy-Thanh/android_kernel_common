@@ -2613,6 +2613,26 @@ static int binder_proc_transaction(struct binder_transaction *t,
 	bool pending_async = false;
 	struct binder_transaction *t_outdated = NULL;
 
+	bool tryrun = !!(t->flags & 0x80);
+	bool frozen = proc->is_frozen;
+	if (tryrun) {
+		struct binder_buffer *buffer = t->buffer;
+		trace_printk("binder to %d (oneway==%d) (frozen==%d)\n",
+			     t->to_proc->pid, oneway, frozen);
+
+		if (frozen) {
+			return BR_FROZEN_REPLY;
+		} else {
+			t->buffer = NULL;
+			buffer->transaction = NULL;
+			trace_binder_transaction_update_buffer_release(buffer);
+			binder_transaction_buffer_release(proc, NULL, buffer, 0, 0);
+			binder_alloc_free_buf(&proc->alloc, buffer);
+			kfree(t);
+			return 0;
+		}
+	}
+
 	BUG_ON(!node);
 	binder_node_lock(node);
 
