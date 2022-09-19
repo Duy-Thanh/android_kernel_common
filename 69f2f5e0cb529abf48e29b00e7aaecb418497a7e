@@ -16,6 +16,24 @@
       "message": "Why? What feature? (presumably assym 32/64)",
       "revId": "69f2f5e0cb529abf48e29b00e7aaecb418497a7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49290251_49429896",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2022-09-19T19:58:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d817b0a7_99ab11c4",
+      "revId": "69f2f5e0cb529abf48e29b00e7aaecb418497a7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
