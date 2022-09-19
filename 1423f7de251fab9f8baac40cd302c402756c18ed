@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c616ebc_64ecee8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2022-09-19T19:55:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2f36307_2ed377bf",
+      "revId": "1423f7de251fab9f8baac40cd302c402756c18ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3be9769_a41493fe",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-09-15T18:31:39Z",
       "side": 1,
       "message": "move to kernel/sched/vendor_hooks.c",
+      "revId": "1423f7de251fab9f8baac40cd302c402756c18ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9d6d6d_d5117870",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2022-09-19T19:55:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3be9769_a41493fe",
       "revId": "1423f7de251fab9f8baac40cd302c402756c18ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
