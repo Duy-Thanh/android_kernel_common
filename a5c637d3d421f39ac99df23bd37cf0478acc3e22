@@ -16,6 +16,24 @@
       "message": "Can you say what feature this is enabling?",
       "revId": "a5c637d3d421f39ac99df23bd37cf0478acc3e22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c34a5195_8588f0dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2022-09-19T19:56:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d40087b8_926f6922",
+      "revId": "a5c637d3d421f39ac99df23bd37cf0478acc3e22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
