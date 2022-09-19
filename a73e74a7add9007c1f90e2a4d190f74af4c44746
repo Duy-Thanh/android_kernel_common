@@ -16,6 +16,24 @@
       "message": "move to kernel/sched/vendor_hooks.c",
       "revId": "a73e74a7add9007c1f90e2a4d190f74af4c44746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09a1ad2a_528be937",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2022-09-19T19:54:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96241166_a94f1866",
+      "revId": "a73e74a7add9007c1f90e2a4d190f74af4c44746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
