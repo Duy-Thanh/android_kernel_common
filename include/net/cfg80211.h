@@ -8724,6 +8724,16 @@ void cfg80211_pmsr_complete(struct wireless_dev *wdev,
 			    gfp_t gfp);
 
 /**
+ * cfg80211_send_pmsr_capa - send the pmsr capabilities.
+ * @cap: peer measurement capabilities
+ * @skb: The skb to send pmsr capa
+ *
+ * Send the peer measurement capabilities to skb.
+ */
+int cfg80211_send_pmsr_capa(const struct cfg80211_pmsr_capabilities *cap,
+			    struct sk_buff *msg);
+
+/**
  * cfg80211_iftype_allowed - check whether the interface can be allowed
  * @wiphy: the wiphy
  * @iftype: interface type
