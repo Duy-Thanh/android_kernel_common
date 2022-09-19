@@ -16,6 +16,24 @@
       "message": "Please submit needed functionality upstream first.",
       "revId": "cbeb67a05f57bb352cd355172364de19b8444ded",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1738a15_adbedf85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-19T21:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d68ac52e_8e93df21",
+      "revId": "cbeb67a05f57bb352cd355172364de19b8444ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
