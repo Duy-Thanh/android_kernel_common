@@ -16,6 +16,24 @@
       "message": "why area all of these needed in android-mainline at this point in time?\n\nWhy not get the needed functionality that all of these hooks are providing upstream?  What prevents that from happening today?",
       "revId": "54fb2ae5b7bd2b7aad6a352258d1525bee5dff9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "331b83ea_bd24be4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-19T21:49:49Z",
+      "side": 1,
+      "message": "needed since QC is starting now for U products based on the next LTS. Schedule-wise, much of the support needs to be in place brefore the next GKI kernel branches from android-mainline.",
+      "parentUuid": "5a33032f_8eed1fd3",
+      "revId": "54fb2ae5b7bd2b7aad6a352258d1525bee5dff9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

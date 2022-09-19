@@ -16,6 +16,24 @@
       "message": "You are referencing a closed bug id on all of these commits, which does not make any sense 😞",
       "revId": "602e97dc529b51b3f2147eed4240362e47111f10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18d2feba_55129621",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-19T21:49:49Z",
+      "side": 1,
+      "message": "It makes some sense considering most of the series is restoring the functionality that used to be android-mainline.",
+      "parentUuid": "793a8871_f0c0f4ed",
+      "revId": "602e97dc529b51b3f2147eed4240362e47111f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
