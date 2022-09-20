@@ -16,6 +16,24 @@
       "message": "Pulling in TJ, as I\u0027m familiar with the reported perf issue w/ the statfs but I thought we had a temporary perf fix in the android tree to work around it until the cgroup accounting that TJ is working on upstream lands.",
       "revId": "3e9e03291d2c55ec7c0293ae520499bd397039ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09cfd34b_2b816577",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-09-20T08:41:16Z",
+      "side": 1,
+      "message": "1) This feature is not useless, even if it can cause perf problems.\n2) As John mentioned, a temporary perf fix was merged in this kernel here:\nhttps://android-review.googlesource.com/c/kernel/common/+/2112350\n   and has been reported to resolve one perf issue I\u0027m aware of.\n3) The android-mainline kernel did not receive the fix as it was not accepted upstream, and we\u0027re working on other plans to address this.\n4) The trace in this change is for the free path, not the creation path. There was no change to the free path in the fix above (at the request of the upstream maintainers), but this work already occurs in a kernel thread since fputs are deferred.\n\nI would not merge this into a common branch, as we still use this.",
+      "parentUuid": "cd42cf55_c98f5f9c",
+      "revId": "3e9e03291d2c55ec7c0293ae520499bd397039ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
