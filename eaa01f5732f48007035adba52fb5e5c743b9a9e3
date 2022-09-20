@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bec4971e_a64b37dc",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3234,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-09-20T06:57:17Z",
+      "side": 1,
+      "message": "can we just set hw-\u003ewiphy-\u003epsmr_capa directly in mac80211_hwsim_new_radio instead of creating new API for that? (like https://github.com/torvalds/linux/blob/master/drivers/net/wireless/intel/iwlwifi/mvm/mac80211.c#L381?)",
+      "range": {
+        "startLine": 3229,
+        "startChar": 1,
+        "endLine": 3234,
+        "endChar": 2
+      },
+      "revId": "eaa01f5732f48007035adba52fb5e5c743b9a9e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
