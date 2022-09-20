@@ -16,6 +16,23 @@
       "message": "shit in theway fr",
       "revId": "faa980034684547c0b0a96f3b7a864535cf150e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d0f828_9c545ac8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902352
+      },
+      "writtenOn": "2022-09-20T16:58:06Z",
+      "side": 1,
+      "message": "Some flaky display tests are failing:\njava.lang.AssertionError: Failed to successfully record display content\n\tat org.junit.Assert.fail(Assert.java:89)\n\tat org.junit.Assert.assertTrue(Assert.java:42)\n\tat android.display.cts.MediaProjectionGlobalTest.testCreateVirtualDisplay(MediaProjectionGlobalTest.java:156)\n\nI restarted the test. Maybe it will pass eventually.",
+      "revId": "faa980034684547c0b0a96f3b7a864535cf150e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
