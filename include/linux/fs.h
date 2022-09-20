@@ -1893,11 +1893,15 @@ struct file_operations {
 				   struct file *file_out, loff_t pos_out,
 				   loff_t len, unsigned int remap_flags);
 	int (*fadvise)(struct file *, loff_t, loff_t, int);
+<<<<<<< HEAD   (a9e0c3 ANDROID: arm64: Fix merge issue with __dma_map_area)
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+	bool may_pollfree;
+>>>>>>> BRANCH (0b8e37 Linux 5.10.141)
 } __randomize_layout;
 
 struct inode_operations {
