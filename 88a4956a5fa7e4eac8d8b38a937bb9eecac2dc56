@@ -16,6 +16,24 @@
       "message": "upstream first please.",
       "revId": "88a4956a5fa7e4eac8d8b38a937bb9eecac2dc56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd92c024_329c8fba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-21T16:28:52Z",
+      "side": 1,
+      "message": "This can\u0027t go upstream since the binder patches for priority inheritance were rejected upstream and this relies on those patches.",
+      "parentUuid": "87330e33_db3efcee",
+      "revId": "88a4956a5fa7e4eac8d8b38a937bb9eecac2dc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
