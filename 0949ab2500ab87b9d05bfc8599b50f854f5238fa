@@ -93,6 +93,30 @@
       },
       "revId": "0949ab2500ab87b9d05bfc8599b50f854f5238fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e2574e_d1eb88db",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-22T16:08:36Z",
+      "side": 1,
+      "message": "As the .h is only for ARM64, shouldn\u0027t this just break the build on x86?",
+      "parentUuid": "12462780_2599921f",
+      "range": {
+        "startLine": 469,
+        "startChar": 0,
+        "endLine": 469,
+        "endChar": 17
+      },
+      "revId": "0949ab2500ab87b9d05bfc8599b50f854f5238fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
