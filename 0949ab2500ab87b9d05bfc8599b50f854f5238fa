@@ -117,6 +117,30 @@
       },
       "revId": "0949ab2500ab87b9d05bfc8599b50f854f5238fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6470488_35dd9c30",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-22T16:16:07Z",
+      "side": 1,
+      "message": "It doesn\u0027t break the build since the type is forward declared so the global pointer to the opaque type works - the inclusion isn\u0027t needed to create the pointer.",
+      "parentUuid": "e9e2574e_d1eb88db",
+      "range": {
+        "startLine": 469,
+        "startChar": 0,
+        "endLine": 469,
+        "endChar": 17
+      },
+      "revId": "0949ab2500ab87b9d05bfc8599b50f854f5238fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
