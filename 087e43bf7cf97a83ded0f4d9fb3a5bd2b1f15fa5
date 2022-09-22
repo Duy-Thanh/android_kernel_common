@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f271ae73_4a05469e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-22T13:52:29Z",
+      "side": 1,
+      "message": "The commit message should also show the removed variable.",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 70
+      },
+      "revId": "087e43bf7cf97a83ded0f4d9fb3a5bd2b1f15fa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
