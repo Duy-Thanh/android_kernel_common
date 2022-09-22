@@ -94,6 +94,30 @@
       },
       "revId": "1580e320d2ce2e039224c4fd9bcd1547a51897e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a932707_683294a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-09-22T11:05:31Z",
+      "side": 1,
+      "message": "Hi Sir:\n\nI had modify the commit-message, pls review again.\n\nBut the orignal is given in abi.report.short automatically.",
+      "parentUuid": "39305f2c_f55373fd",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 77
+      },
+      "revId": "1580e320d2ce2e039224c4fd9bcd1547a51897e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
