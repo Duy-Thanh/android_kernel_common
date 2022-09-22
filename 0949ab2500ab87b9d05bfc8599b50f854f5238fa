@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1070e013_795aa942",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-22T15:26:00Z",
+      "side": 1,
+      "message": "sure, I\u0027ll do that.",
+      "parentUuid": "f35f311a_c1fa1a36",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "0949ab2500ab87b9d05bfc8599b50f854f5238fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7c319c3_994fba04",
         "filename": "drivers/android/vendor_hooks.c",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-22T08:12:54Z",
       "side": 1,
       "message": "shouldn\u0027t this only be defined if CONFIG_ARM64?",
+      "range": {
+        "startLine": 469,
+        "startChar": 0,
+        "endLine": 469,
+        "endChar": 17
+      },
+      "revId": "0949ab2500ab87b9d05bfc8599b50f854f5238fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12462780_2599921f",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-22T15:26:00Z",
+      "side": 1,
+      "message": "I left it outside ARM64 thinking that we don\u0027t have a way to exclude it from the symbol lists. Since we only have ARM64 KMI, I can do that now and we can fix it if/when we have x86 kmi.",
+      "parentUuid": "e7c319c3_994fba04",
       "range": {
         "startLine": 469,
         "startChar": 0,
