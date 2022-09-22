@@ -34,6 +34,24 @@
       "parentUuid": "cd42cf55_c98f5f9c",
       "revId": "3e9e03291d2c55ec7c0293ae520499bd397039ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02c31460_1f09461c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2022-09-22T08:33:33Z",
+      "side": 1,
+      "message": "Dear TJ Mercier:\n    We already have your fix(https://android-review.googlesource.com/c/kernel/common/+/2112350) in our code, but there is still dma-buf-sys waiting for the rwsem lock problem for a long time, and the current process has been spinning there and will not go to sleep. The spin time there is even more than 4 seconds.",
+      "parentUuid": "09cfd34b_2b816577",
+      "revId": "3e9e03291d2c55ec7c0293ae520499bd397039ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
