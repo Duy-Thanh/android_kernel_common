@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f95164d_6b8f2f49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-22T08:16:48Z",
+      "side": 1,
+      "message": "Greg, Todd, Matthias, this renames a symbol that\u0027s too long to be used in the KMI. Do we want the KMI update to be separate from the patch that renames the symbol even in this case",
+      "revId": "826e0651791b2f9d99f0f271987959a493cb4840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
