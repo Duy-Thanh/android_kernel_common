@@ -956,6 +956,12 @@ static void rebuild_root_domains(void)
 {
 	struct cpuset *cs = NULL;
 	struct cgroup_subsys_state *pos_css;
+	bool bypass = false;
+
+	trace_android_vh_rebuild_root_domains_bypass(cpuhp_tasks_frozen, &bypass);
+
+	if (bypass)
+		return;
 
 	percpu_rwsem_assert_held(&cpuset_rwsem);
 	lockdep_assert_cpus_held();
