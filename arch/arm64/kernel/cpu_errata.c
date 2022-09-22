@@ -551,11 +551,21 @@ const struct arm64_cpu_capabilities arm64_errata[] = {
 				  1, 0),
 	},
 #endif
+<<<<<<< HEAD   (516599 Revert "USB: core: Prevent nested device-reset calls")
 #ifdef CONFIG_ARM64_WORKAROUND_TSB_FLUSH_FAILURE
 	{
 		.desc = "ARM erratum 2067961 or 2054223",
 		.capability = ARM64_WORKAROUND_TSB_FLUSH_FAILURE,
 		ERRATA_MIDR_RANGE_LIST(tsb_flush_fail_cpus),
+=======
+#ifdef CONFIG_ARM64_ERRATUM_2457168
+	{
+		.desc = "ARM erratum 2457168",
+		.capability = ARM64_WORKAROUND_2457168,
+		.type = ARM64_CPUCAP_WEAK_LOCAL_CPU_FEATURE,
+		/* Cortex-A510 r0p0-r1p1 */
+		CAP_MIDR_RANGE(MIDR_CORTEX_A510, 0, 0, 1, 1)
+>>>>>>> BRANCH (f11012 Linux 5.10.143)
 	},
 #endif
 	{

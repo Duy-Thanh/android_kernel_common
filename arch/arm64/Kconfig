@@ -669,6 +669,7 @@ config ARM64_ERRATUM_1508412
 
 	  If unsure, say Y.
 
+<<<<<<< HEAD   (516599 Revert "USB: core: Prevent nested device-reset calls")
 config ARM64_ERRATUM_2051678
 	bool "Cortex-A510: 2051678: disable Hardware Update of the page table's dirty bit"
 	help
@@ -709,6 +710,23 @@ config ARM64_ERRATUM_2067961
 	  of the trace cached.
 
 	  Workaround is to issue two TSB consecutively on affected cores.
+=======
+config ARM64_ERRATUM_2457168
+	bool "Cortex-A510: 2457168: workaround for AMEVCNTR01 incrementing incorrectly"
+	depends on ARM64_AMU_EXTN
+	default y
+	help
+	  This option adds the workaround for ARM Cortex-A510 erratum 2457168.
+
+	  The AMU counter AMEVCNTR01 (constant counter) should increment at the same rate
+	  as the system counter. On affected Cortex-A510 cores AMEVCNTR01 increments
+	  incorrectly giving a significantly higher output value.
+
+	  Work around this problem by keeping the reference values of affected counters
+	  to 0 thus signaling an error case. This effect is the same to firmware disabling
+	  affected counters, in which case 0 will be returned when reading the disabled
+	  counters.
+>>>>>>> BRANCH (f11012 Linux 5.10.143)
 
 	  If unsure, say Y.
 

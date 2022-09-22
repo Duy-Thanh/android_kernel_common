@@ -2338,12 +2338,21 @@ EXPORT_SYMBOL_GPL(task_cgroup_path);
  * Unfortunately, letting ->attach() operations acquire cpus_read_lock() can
  * lead to deadlocks.
  *
+<<<<<<< HEAD   (516599 Revert "USB: core: Prevent nested device-reset calls")
  * Bringing up a CPU may involve creating new tasks which requires read-locking
  * threadgroup_rwsem, so threadgroup_rwsem nests inside cpus_read_lock(). If we
  * call an ->attach() which acquires the cpus lock while write-locking
  * threadgroup_rwsem, the locking order is reversed and we end up waiting for an
  * on-going CPU hotplug operation which in turn is waiting for the
  * threadgroup_rwsem to be released to create new tasks. For more details:
+=======
+ * Bringing up a CPU may involve creating and destroying tasks which requires
+ * read-locking threadgroup_rwsem, so threadgroup_rwsem nests inside
+ * cpus_read_lock(). If we call an ->attach() which acquires the cpus lock while
+ * write-locking threadgroup_rwsem, the locking order is reversed and we end up
+ * waiting for an on-going CPU hotplug operation which in turn is waiting for
+ * the threadgroup_rwsem to be released to create new tasks. For more details:
+>>>>>>> BRANCH (f11012 Linux 5.10.143)
  *
  *   http://lkml.kernel.org/r/20220711174629.uehfmqegcwn2lqzu@wubuntu
  *
@@ -2853,8 +2862,12 @@ int cgroup_attach_task(struct cgroup *dst_cgrp, struct task_struct *leader,
 }
 
 struct task_struct *cgroup_procs_write_start(char *buf, bool threadgroup,
+<<<<<<< HEAD   (516599 Revert "USB: core: Prevent nested device-reset calls")
 					     bool *threadgroup_locked,
 					     struct cgroup *dst_cgrp)
+=======
+					     bool *threadgroup_locked)
+>>>>>>> BRANCH (f11012 Linux 5.10.143)
 {
 	struct task_struct *tsk;
 	pid_t pid;
@@ -2977,7 +2990,11 @@ static int cgroup_update_dfl_csses(struct cgroup *cgrp)
 	DEFINE_CGROUP_MGCTX(mgctx);
 	struct cgroup_subsys_state *d_css;
 	struct cgroup *dsct;
+<<<<<<< HEAD   (516599 Revert "USB: core: Prevent nested device-reset calls")
 	struct ext_css_set *ext_src_set;
+=======
+	struct css_set *src_cset;
+>>>>>>> BRANCH (f11012 Linux 5.10.143)
 	bool has_tasks;
 	int ret;
 
@@ -4902,7 +4919,11 @@ static ssize_t cgroup_procs_write(struct kernfs_open_file *of,
 	if (!dst_cgrp)
 		return -ENODEV;
 
+<<<<<<< HEAD   (516599 Revert "USB: core: Prevent nested device-reset calls")
 	task = cgroup_procs_write_start(buf, true, &threadgroup_locked, dst_cgrp);
+=======
+	task = cgroup_procs_write_start(buf, true, &threadgroup_locked);
+>>>>>>> BRANCH (f11012 Linux 5.10.143)
 	ret = PTR_ERR_OR_ZERO(task);
 	if (ret)
 		goto out_unlock;
