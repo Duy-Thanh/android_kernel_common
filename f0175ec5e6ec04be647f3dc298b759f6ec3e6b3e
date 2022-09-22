@@ -267,6 +267,24 @@
       "parentUuid": "8607aecf_e4f311b5",
       "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1b6cda5_fa000324",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-09-22T16:56:17Z",
+      "side": 1,
+      "message": "Going by the code logic, I think it will work.\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android13-5.15/kernel/power/swap.c#1526\n\nIn this file, we have to implement the suggested API\nbool is_hibernation_resume_bdev(struct block_device *bdev)  \nEXPORT_SYMBOL(is_hibernation_resume_bdev)\n\nand the tracehook implemented at\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android13-5.15/mm/swapfile.c#777.\n\nIs going to use the exported symbol, to fill in the local variable *ssd_ok\n\nPlease confirm, if Google is willing to accept a new EXPORT_SYMBOL post KMI freeze, if yes, I will test this out and udpate asap.",
+      "parentUuid": "07e9b1b0_37659215",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
