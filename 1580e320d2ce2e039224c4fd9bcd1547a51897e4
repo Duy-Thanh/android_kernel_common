@@ -166,6 +166,30 @@
       },
       "revId": "1580e320d2ce2e039224c4fd9bcd1547a51897e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac889f6a_bc8ca8fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-22T16:50:16Z",
+      "side": 1,
+      "message": "I was looking at this too, but funnily enough the AbiAnalyzer report only shows the right things being removed and added ...",
+      "parentUuid": "92de6391_cd05a0d8",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 77
+      },
+      "revId": "1580e320d2ce2e039224c4fd9bcd1547a51897e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
