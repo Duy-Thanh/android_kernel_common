@@ -22,6 +22,30 @@
       },
       "revId": "1580e320d2ce2e039224c4fd9bcd1547a51897e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a345318f_c655a433",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-09-22T10:24:33Z",
+      "side": 1,
+      "message": "Hi Sir：\n\nI just used the method as follows to creat new symbols:\nLTO\u003dfull BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update\n\nCan you tell me why the variables had been removed? and I had not changed it.\n  [D] \u0027const blk_mq_alloc_data* GKI_struct_blk_mq_alloc_data\u0027\n  [D] \u0027const readahead_control* GKI_struct_readahead_control\u0027\n  [D] \u0027selinux_state* GKI_struct_selinux_state\u0027\n  [D] \u0027tracepoint",
+      "parentUuid": "3d9e1753_95ad5e62",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 77
+      },
+      "revId": "1580e320d2ce2e039224c4fd9bcd1547a51897e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
