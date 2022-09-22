@@ -16,6 +16,24 @@
       "message": "You can not remove symbols, sorry.",
       "revId": "ef8a9e2a249e157fe28e8e2768f217c4b1621386",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5220235_cbf56a81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1053408
+      },
+      "writtenOn": "2022-09-22T18:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "914b7de4_77c07835",
+      "revId": "ef8a9e2a249e157fe28e8e2768f217c4b1621386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
