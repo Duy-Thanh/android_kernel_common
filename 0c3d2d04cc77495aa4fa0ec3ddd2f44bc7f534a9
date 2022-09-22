@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad6d3c8a_2bb98e98",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1053408
+      },
+      "writtenOn": "2022-09-22T04:47:56Z",
+      "side": 0,
+      "message": "I am not sure if the symbol removal is expected here. The abi generator seems to be removing the GKI_* symbols automatically which were added in https://android-review.googlesource.com/c/kernel/common/+/2221621",
+      "revId": "0c3d2d04cc77495aa4fa0ec3ddd2f44bc7f534a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
