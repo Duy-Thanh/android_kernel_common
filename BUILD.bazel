@@ -87,7 +87,6 @@ define_db845c(
         "crypto/michael_mic.ko",
         "drivers/base/regmap/regmap-sdw.ko",
         "drivers/base/regmap/regmap-slimbus.ko",
-        "drivers/base/regmap/regmap-spmi.ko",
         # TODO(b/233404531): Remove zram.ko when db845c is a mixed build
         "drivers/block/zram/zram.ko",
         "drivers/bus/mhi/host/mhi.ko",
