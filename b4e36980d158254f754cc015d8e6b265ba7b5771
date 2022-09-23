@@ -16,6 +16,24 @@
       "message": "Why not just fix this properly upstream so that no hook is needed at all?\n\nThen we can take the backported fix as a bugfix easily.",
       "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a9d148_33fb076d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2022-09-23T08:09:06Z",
+      "side": 1,
+      "message": "Hi Greg, according to the conclusion by https://partnerissuetracker.corp.google.com/u/3/issues/228783879, this patch is aimed to fix MediaTek MCQ solution in Android13-5.15. The MCQ feature adopted in Android13-5.15 adopted is MediaTek\u0027s implementation of early MCQ specification (not fully compatible to final standard anyway) so it is not suitable to be upstreamed.",
+      "parentUuid": "5fda5bb7_e3ae6369",
+      "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
