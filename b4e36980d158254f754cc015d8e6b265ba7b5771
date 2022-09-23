@@ -34,6 +34,24 @@
       "parentUuid": "5fda5bb7_e3ae6369",
       "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddd1de54_7e3c27d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-23T08:17:54Z",
+      "side": 1,
+      "message": "non-standard hardware is supported upstream every day.  That\u0027s never an excuse to not get the needed changes merged, it should be easy to do with a device quirk.",
+      "parentUuid": "e1a9d148_33fb076d",
+      "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
