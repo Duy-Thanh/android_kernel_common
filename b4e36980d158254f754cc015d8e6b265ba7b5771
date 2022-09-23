@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fda5bb7_e3ae6369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-23T07:54:43Z",
+      "side": 1,
+      "message": "Why not just fix this properly upstream so that no hook is needed at all?\n\nThen we can take the backported fix as a bugfix easily.",
+      "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
