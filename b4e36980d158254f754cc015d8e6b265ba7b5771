@@ -88,6 +88,24 @@
       "parentUuid": "1659b641_ee635e39",
       "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3963d78a_be4dba69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2022-09-24T13:07:25Z",
+      "side": 1,
+      "message": "Hi Greg, be honestly, we can not upstream \"exactly the same\" MCQ implementation because we re-organized this patch specifically for ACK13-5.15 earlier to not hack too much common code. This \nis a compromised way in that time because ACK13-5.15 KMI freeze date was very closed but customer need this feature in MTK platform. Now we have to stay at this version and try to fix any bugs to make customer MP successful.",
+      "parentUuid": "ed36730a_33ff1258",
+      "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
