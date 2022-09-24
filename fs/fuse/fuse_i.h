@@ -860,6 +860,9 @@ struct fuse_conn {
 	/** BPF Only, no Daemon running */
 	unsigned int no_daemon:1;
 
+	/* Is tmpfile not implemented by fs? */
+	unsigned int no_tmpfile:1;
+
 	/** The number of requests waiting for completion */
 	atomic_t num_waiting;
 
