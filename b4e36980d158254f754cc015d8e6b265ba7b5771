@@ -70,6 +70,24 @@
       "parentUuid": "ddd1de54_7e3c27d9",
       "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed36730a_33ff1258",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-24T08:12:56Z",
+      "side": 1,
+      "message": "Please submit it upstream first now, we can easily backport quirks to this tree if they are accepted there.",
+      "parentUuid": "1659b641_ee635e39",
+      "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
