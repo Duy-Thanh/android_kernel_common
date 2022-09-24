@@ -52,6 +52,24 @@
       "parentUuid": "e1a9d148_33fb076d",
       "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1659b641_ee635e39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2022-09-24T02:39:05Z",
+      "side": 1,
+      "message": "Hi Greg, we certainly try to upstream this MCQ implementation later because our current product adopting this MCQ implementation may need to align the mainline after future kernel migration.\n\nHowever the upstream is too late for our product using ACK13-5.15 currently regarding to the time to market. Our customers now need this MCQ implementation and following fixes.\n\nPlease kindly consider this special situation. Thanks.",
+      "parentUuid": "ddd1de54_7e3c27d9",
+      "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
