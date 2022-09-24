@@ -673,6 +673,7 @@ config ARM64_ERRATUM_1508412
 
 	  If unsure, say Y.
 
+<<<<<<< HEAD   (d32ea5 Merge 5.15.64 into android14-5.15)
 config ARM64_WORKAROUND_TRBE_OVERWRITE_FILL_MODE
 	bool
 
@@ -781,6 +782,22 @@ config ARM64_ERRATUM_2224489
 
 	  Work around this in the driver by always making sure that there is a
 	  page beyond the TRBLIMITR_EL1.LIMIT, within the space allowed for the TRBE.
+=======
+config ARM64_ERRATUM_2441009
+	bool "Cortex-A510: Completion of affected memory accesses might not be guaranteed by completion of a TLBI"
+	default y
+	select ARM64_WORKAROUND_REPEAT_TLBI
+	help
+	  This option adds a workaround for ARM Cortex-A510 erratum #2441009.
+
+	  Under very rare circumstances, affected Cortex-A510 CPUs
+	  may not handle a race between a break-before-make sequence on one
+	  CPU, and another CPU accessing the same page. This could allow a
+	  store to a page that has been unmapped.
+
+	  Work around this by adding the affected CPUs to the list that needs
+	  TLB sequences to be done twice.
+>>>>>>> BRANCH (633c3b Linux 5.15.65)
 
 	  If unsure, say Y.
 
