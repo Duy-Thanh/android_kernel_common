@@ -124,6 +124,24 @@
       "parentUuid": "3963d78a_be4dba69",
       "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c04e929f_a5808d0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2022-09-24T13:49:09Z",
+      "side": 1,
+      "message": "Hi Greg, please refer to the base patch of MTK UFS MCQ implementation in ACK13-5.15 first: https://android-review.googlesource.com/c/kernel/common/+/2104904\n\nWe would not expect that we need to do different way for following fixes of this implementation.",
+      "parentUuid": "d2526d08_40f9fa20",
+      "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
