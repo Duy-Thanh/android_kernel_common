@@ -106,6 +106,24 @@
       "parentUuid": "ed36730a_33ff1258",
       "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2526d08_40f9fa20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-24T13:11:05Z",
+      "side": 1,
+      "message": "I didn\u0027t say to submit the \"same\" code, do it properly upstream first, and then we can work on a correct way to backport it here.\n\nTHe 5.15 KMI freeze for `android13` is long past, that should not affect anything here as you are not changing any abi.  If your upstream change does modify the ABI, then we will be glad to revisit it at that point in time.",
+      "parentUuid": "3963d78a_be4dba69",
+      "revId": "b4e36980d158254f754cc015d8e6b265ba7b5771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
