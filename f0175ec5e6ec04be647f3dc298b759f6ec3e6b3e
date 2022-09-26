@@ -285,6 +285,24 @@
       "parentUuid": "07e9b1b0_37659215",
       "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aecfcedb_07dd97dd",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-09-26T19:12:49Z",
+      "side": 1,
+      "message": "\u003e Please confirm, if Google is willing to accept a new EXPORT_SYMBOL post KMI freeze, if yes, I will test this out and udpate asap.\n\nAdding a new symbol doesn\u0027t break the ABI, so it\u0027s fine to try this out.",
+      "parentUuid": "d1b6cda5_fa000324",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
