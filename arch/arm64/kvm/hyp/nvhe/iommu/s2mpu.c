@@ -172,7 +172,8 @@ static void __wait_while(void __iomem *addr, u32 mask)
 		continue;
 }
 
-static void __wait_for_invalidation_complete(struct pkvm_iommu *dev)
+/* Initiate invalidation barrier. */
+static void __invalidation_barrier_init(struct pkvm_iommu *dev)
 {
 	struct pkvm_iommu *sync;
 
@@ -180,10 +181,21 @@ static void __wait_for_invalidation_complete(struct pkvm_iommu *dev)
 	 * Wait for transactions to drain if SysMMU_SYNCs were registered.
 	 * Assumes that they are in the same power domain as the S2MPU.
 	 */
-	for_each_child(sync, dev) {
+	for_each_child(sync, dev)
 		writel_relaxed(SYNC_CMD_SYNC, sync->va + REG_NS_SYNC_CMD);
+}
+
+/* Wait for invalidation to complete. */
+static void __invalidation_barrier(struct pkvm_iommu *dev)
+{
+	struct pkvm_iommu *sync;
+
+	/*
+	 * Wait for transactions to drain if SysMMU_SYNCs were registered.
+	 * Assumes that they are in the same power domain as the S2MPU.
+	 */
+	for_each_child(sync, dev)
 		__wait_until(sync->va + REG_NS_SYNC_COMP, SYNC_COMP_COMPLETE);
-	}
 
 	/* Must not access SFRs while S2MPU is busy invalidating (v9 only). */
 	if (is_version(dev, S2MPU_VERSION_9)) {
@@ -195,7 +207,7 @@ static void __wait_for_invalidation_complete(struct pkvm_iommu *dev)
 static void __all_invalidation(struct pkvm_iommu *dev)
 {
 	writel_relaxed(INVALIDATION_INVALIDATE, dev->va + REG_NS_ALL_INVALIDATION);
-	__wait_for_invalidation_complete(dev);
+	__invalidation_barrier_init(dev);
 }
 
 static void __range_invalidation(struct pkvm_iommu *dev, phys_addr_t first_byte,
@@ -207,7 +219,7 @@ static void __range_invalidation(struct pkvm_iommu *dev, phys_addr_t first_byte,
 	writel_relaxed(start_ppn, dev->va + REG_NS_RANGE_INVALIDATION_START_PPN);
 	writel_relaxed(end_ppn, dev->va + REG_NS_RANGE_INVALIDATION_END_PPN);
 	writel_relaxed(INVALIDATION_INVALIDATE, dev->va + REG_NS_RANGE_INVALIDATION);
-	__wait_for_invalidation_complete(dev);
+	__invalidation_barrier_init(dev);
 }
 
 static void __set_l1entry_attr_with_prot(struct pkvm_iommu *dev, unsigned int gb,
@@ -253,6 +265,7 @@ static int initialize_with_prot(struct pkvm_iommu *dev, enum mpt_prot prot)
 	for_each_gb_and_vid(gb, vid)
 		__set_l1entry_attr_with_prot(dev, gb, vid, prot);
 	__all_invalidation(dev);
+	__invalidation_barrier(dev);
 
 	/* Set control registers, enable the S2MPU. */
 	__set_control_regs(dev);
@@ -279,6 +292,7 @@ static int initialize_with_mpt(struct pkvm_iommu *dev, struct mpt *mpt)
 		__set_l1entry_attr_with_fmpt(dev, gb, vid, fmpt);
 	}
 	__all_invalidation(dev);
+	__invalidation_barrier(dev);
 
 	/* Set control registers, enable the S2MPU. */
 	__set_control_regs(dev);
@@ -360,6 +374,11 @@ static void s2mpu_host_stage2_idmap_apply(struct pkvm_iommu *dev,
 		return;
 
 	__mpt_idmap_apply(dev, &host_mpt, start, end - 1);
+}
+
+static void s2mpu_host_stage2_idmap_complete(struct pkvm_iommu *dev)
+{
+	__mpt_idmap_complete(dev, &host_mpt);
 }
 
 static int s2mpu_resume(struct pkvm_iommu *dev)
@@ -550,6 +569,7 @@ const struct pkvm_iommu_ops pkvm_s2mpu_ops = (struct pkvm_iommu_ops){
 	.suspend = s2mpu_suspend,
 	.host_stage2_idmap_prepare = s2mpu_host_stage2_idmap_prepare,
 	.host_stage2_idmap_apply = s2mpu_host_stage2_idmap_apply,
+	.host_stage2_idmap_complete = s2mpu_host_stage2_idmap_complete,
 	.host_dabt_handler = s2mpu_host_dabt_handler,
 	.data_size = sizeof(struct s2mpu_drv_data),
 };
