@@ -1,0 +1,8 @@
+[abi_symbol_list]
+# commonly used symbols
+  snd_soc_component_enable_pin
+  snd_soc_component_get_pin_status
+  end_buffer_write_sync
+  regulator_get_drvdata
+  console_verbose
+  register_sysrq_key
