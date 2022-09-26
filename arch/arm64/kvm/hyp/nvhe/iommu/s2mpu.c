@@ -162,22 +162,6 @@ static void __set_control_regs(struct pkvm_iommu *dev)
 	writel_relaxed(ctrl0, dev->va + REG_NS_CTRL0);
 }
 
-/*
- * Poll the given SFR until its value has all bits of a given mask set.
- * Returns true if successful, false if not successful after a given number of
- * attempts.
- */
-static bool __wait_until(void __iomem *addr, u32 mask, size_t max_attempts)
-{
-	size_t i;
-
-	for (i = 0; i < max_attempts; i++) {
-		if ((readl_relaxed(addr) & mask) == mask)
-			return true;
-	}
-	return false;
-}
-
 /* Poll the given SFR as long as its value has all bits of a given mask set. */
 static void __wait_while(void __iomem *addr, u32 mask)
 {
@@ -185,9 +169,32 @@ static void __wait_while(void __iomem *addr, u32 mask)
 		continue;
 }
 
-static void __wait_for_invalidation_complete(struct pkvm_iommu *dev)
+static void __sync_cmd_start(struct pkvm_iommu *sync) {
+	writel_relaxed(SYNC_CMD_SYNC, sync->va + REG_NS_SYNC_CMD);
+}
+
+static bool __is_sync_cmd_complete(struct pkvm_iommu *sync) {
+	return !!(readl_relaxed(sync->va + REG_NS_SYNC_COMP) & SYNC_COMP_COMPLETE);
+}
+
+/*
+ * Poll the given SFR until its value has all bits of a given mask set.
+ * Returns true if successful, false if not successful after a given number of
+ * attempts.
+ */
+static bool __wait_until_sync_cmd_complete(struct pkvm_iommu *sync, size_t max_attempts)
 {
-	struct pkvm_iommu *sync;
+	size_t i;
+
+	for (i = 0; i < max_attempts; i++) {
+		if (__is_sync_cmd_complete(sync))
+			return true;
+	}
+	return false;
+}
+
+static void __invalidation_barrier_slow(struct pkvm_iommu *sync)
+{
 	size_t i, timeout;
 
 	/*
@@ -199,16 +206,41 @@ static void __wait_for_invalidation_complete(struct pkvm_iommu *dev)
 	 * timeout exponentially each time. If this cycle fails a given number
 	 * of times, the algorithm will give up completely to avoid deadlock.
 	 */
+	timeout = SYNC_TIMEOUT;
+	for (i = 0; i < SYNC_MAX_RETRIES; i++) {
+		__sync_cmd_start(sync);
+		if (__wait_until_sync_cmd_complete(sync, timeout))
+			break;
+		timeout *= SYNC_TIMEOUT_MULTIPLIER;
+	}
+}
+
+/* Initiate invalidation barrier. */
+static void __invalidation_barrier_init(struct pkvm_iommu *dev)
+{
+	struct pkvm_iommu *sync;
+
+	for_each_child(sync, dev)
+		__sync_cmd_start(sync);
+}
+
+/* Wait for invalidation to complete. */
+static void __invalidation_barrier(struct pkvm_iommu *dev)
+{
+	struct pkvm_iommu *sync;
+
+	/*
+	 * Wait for transactions to drain if SysMMU_SYNCs were registered.
+	 * Assumes that they are in the same power domain as the S2MPU.
+	 *
+	 * The algorithm will try initiating the SYNC if the SYNC_COMP_COMPLETE
+	 * bit has not been set after a given number of attempts, increasing the
+	 * timeout exponentially each time. If this cycle fails a given number
+	 * of times, the algorithm will give up completely to avoid deadlock.
+	 */
 	for_each_child(sync, dev) {
-		timeout = SYNC_TIMEOUT;
-		for (i = 0; i < SYNC_MAX_RETRIES; i++) {
-			writel_relaxed(SYNC_CMD_SYNC, sync->va + REG_NS_SYNC_CMD);
-			if (__wait_until(sync->va + REG_NS_SYNC_COMP,
-					 SYNC_COMP_COMPLETE, timeout)) {
-				break;
-			}
-			timeout *= SYNC_TIMEOUT_MULTIPLIER;
-		}
+		if (!__is_sync_cmd_complete(sync))
+			__invalidation_barrier_slow(sync);
 	}
 
 	/* Must not access SFRs while S2MPU is busy invalidating (v9 only). */
@@ -221,7 +253,7 @@ static void __wait_for_invalidation_complete(struct pkvm_iommu *dev)
 static void __all_invalidation(struct pkvm_iommu *dev)
 {
 	writel_relaxed(INVALIDATION_INVALIDATE, dev->va + REG_NS_ALL_INVALIDATION);
-	__wait_for_invalidation_complete(dev);
+	__invalidation_barrier_init(dev);
 }
 
 static void __range_invalidation(struct pkvm_iommu *dev, phys_addr_t first_byte,
@@ -233,7 +265,7 @@ static void __range_invalidation(struct pkvm_iommu *dev, phys_addr_t first_byte,
 	writel_relaxed(start_ppn, dev->va + REG_NS_RANGE_INVALIDATION_START_PPN);
 	writel_relaxed(end_ppn, dev->va + REG_NS_RANGE_INVALIDATION_END_PPN);
 	writel_relaxed(INVALIDATION_INVALIDATE, dev->va + REG_NS_RANGE_INVALIDATION);
-	__wait_for_invalidation_complete(dev);
+	__invalidation_barrier_init(dev);
 }
 
 static void __set_l1entry_attr_with_prot(struct pkvm_iommu *dev, unsigned int gb,
@@ -279,6 +311,7 @@ static int initialize_with_prot(struct pkvm_iommu *dev, enum mpt_prot prot)
 	for_each_gb_and_vid(gb, vid)
 		__set_l1entry_attr_with_prot(dev, gb, vid, prot);
 	__all_invalidation(dev);
+	__invalidation_barrier(dev);
 
 	/* Set control registers, enable the S2MPU. */
 	__set_control_regs(dev);
@@ -305,6 +338,7 @@ static int initialize_with_mpt(struct pkvm_iommu *dev, struct mpt *mpt)
 		__set_l1entry_attr_with_fmpt(dev, gb, vid, fmpt);
 	}
 	__all_invalidation(dev);
+	__invalidation_barrier(dev);
 
 	/* Set control registers, enable the S2MPU. */
 	__set_control_regs(dev);
@@ -370,6 +404,11 @@ static void __mpt_idmap_apply(struct pkvm_iommu *dev, struct mpt *mpt,
 	__range_invalidation(dev, first_byte, last_byte);
 }
 
+static void __mpt_idmap_complete(struct pkvm_iommu *dev, struct mpt *mpt)
+{
+	__invalidation_barrier(dev);
+}
+
 static void s2mpu_host_stage2_idmap_prepare(phys_addr_t start, phys_addr_t end,
 					    enum kvm_pgtable_prot prot)
 {
@@ -386,6 +425,11 @@ static void s2mpu_host_stage2_idmap_apply(struct pkvm_iommu *dev,
 		return;
 
 	__mpt_idmap_apply(dev, &host_mpt, start, end - 1);
+}
+
+static void s2mpu_host_stage2_idmap_complete(struct pkvm_iommu *dev)
+{
+	__mpt_idmap_complete(dev, &host_mpt);
 }
 
 static int s2mpu_resume(struct pkvm_iommu *dev)
@@ -576,6 +620,7 @@ const struct pkvm_iommu_ops pkvm_s2mpu_ops = (struct pkvm_iommu_ops){
 	.suspend = s2mpu_suspend,
 	.host_stage2_idmap_prepare = s2mpu_host_stage2_idmap_prepare,
 	.host_stage2_idmap_apply = s2mpu_host_stage2_idmap_apply,
+	.host_stage2_idmap_complete = s2mpu_host_stage2_idmap_complete,
 	.host_dabt_handler = s2mpu_host_dabt_handler,
 	.data_size = sizeof(struct s2mpu_drv_data),
 };
