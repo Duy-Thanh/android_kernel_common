@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c9a997_5d61067b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-09-26T06:57:34Z",
+      "side": 1,
+      "message": "The detail document is upload to issue id 247963676. \nPlease review, comments are welcome",
+      "parentUuid": "29485e12_96631920",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "d8bfde9c08afb1ff113af23ce5f57c7129c96898",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4dbfebe8_02834786",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "Again, document this in the changelog text please.",
       "parentUuid": "cc2c2d82_66c08d7a",
+      "range": {
+        "startLine": 217,
+        "startChar": 54,
+        "endLine": 217,
+        "endChar": 59
+      },
+      "revId": "d8bfde9c08afb1ff113af23ce5f57c7129c96898",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "951d3f14_756e1aef",
+        "filename": "drivers/thermal/cpufreq_cooling.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-09-26T06:57:34Z",
+      "side": 1,
+      "message": "The detail document is upload to issue id 247963676. \nPlease review, comments are welcome",
+      "parentUuid": "67b8ba09_47a70ea1",
       "range": {
         "startLine": 217,
         "startChar": 54,
