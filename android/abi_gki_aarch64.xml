@@ -1,7 +1,6 @@
 <abi-corpus-group version='2.0' architecture='elf-arm-aarch64'>
   <abi-corpus version='2.0' path='vmlinux' architecture='elf-arm-aarch64'>
     <elf-function-symbols>
-      <elf-symbol name='PDE_DATA' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfb24a559'/>
       <elf-symbol name='__ClearPageMovable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x12641630'/>
       <elf-symbol name='__SetPageMovable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xba0d0a4a'/>
       <elf-symbol name='___pskb_trim' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4f0b3b26'/>
