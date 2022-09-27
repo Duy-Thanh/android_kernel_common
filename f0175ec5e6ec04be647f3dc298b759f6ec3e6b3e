@@ -321,6 +321,24 @@
       "parentUuid": "aecfcedb_07dd97dd",
       "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3e8c835_5ddb6bcb",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-09-27T16:29:09Z",
+      "side": 1,
+      "message": "@Todd / Isaac\nHave added another patch to export this symbol with EXPORT_SYMBOL_GPL\nhttps://android-review.googlesource.com/c/kernel/common/+/2234926\n\n\n@Isaac: \nWell, I have avoided using the GEHND flag as suggested, but relying on \n- if (si-\u003ecluster_info)\n+ if (ssd_ok \u0026\u0026 si-\u003ecluster_info)\n\nthis does not work, One simple reason I can see, is i si-\u003ecluster_info is NOT NULL,\nthere are some other places in the code, where the flow changes.\n\nOne example is \nhttps://android.googlesource.com/kernel/common/+/refs/heads/android13-5.15/mm/swapfile.c#554\n\nSo, I have used the original logic in patchset#3, and instead of relying on the genhd bit flag, our vendor hook will now query if the given block device is a hibernation swap using an export symbol, exposed by this gerrit\nhttps://android-review.googlesource.com/c/kernel/common/+/2234926",
+      "parentUuid": "baa1c7e7_b351313f",
+      "revId": "f0175ec5e6ec04be647f3dc298b759f6ec3e6b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "996332bf_77da6cfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-09-27T16:29:09Z",
+      "side": 1,
+      "message": "Resolved in latest patchset",
+      "parentUuid": "949a9e4f_e6bd04a2",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 562
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8d7957c_58788ce1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-23T11:15:43Z",
       "side": 1,
       "message": "\"Bug\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 3
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4455e413_8b838553",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-09-27T16:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8d7957c_58788ce1",
       "range": {
         "startLine": 11,
         "startChar": 0,
@@ -124,6 +172,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f12cad11_0ec89b67",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-09-27T16:29:09Z",
+      "side": 1,
+      "message": "have given another name",
+      "parentUuid": "0c365f59_58e70758",
+      "range": {
+        "startLine": 1531,
+        "startChar": 2,
+        "endLine": 1531,
+        "endChar": 40
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bb2f3ef_2df16243",
         "filename": "mm/swapfile.c",
         "patchSetId": 4
@@ -147,6 +219,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c85533d5_4dde39c3",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2531,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-09-27T16:29:09Z",
+      "side": 1,
+      "message": "fixed in latest one",
+      "parentUuid": "0bb2f3ef_2df16243",
+      "range": {
+        "startLine": 2531,
+        "startChar": 6,
+        "endLine": 2531,
+        "endChar": 22
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdacf5f4_31e605a6",
         "filename": "mm/swapfile.c",
         "patchSetId": 4
@@ -158,6 +254,30 @@
       "writtenOn": "2022-09-23T11:15:43Z",
       "side": 1,
       "message": "this does nothing.",
+      "range": {
+        "startLine": 2622,
+        "startChar": 48,
+        "endLine": 2622,
+        "endChar": 64
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c459b3c9_bd6049c1",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2622,
+      "author": {
+        "id": 1948876
+      },
+      "writtenOn": "2022-09-27T16:29:09Z",
+      "side": 1,
+      "message": "replaced this variable with hibernation_swap, with the intended usage",
+      "parentUuid": "bdacf5f4_31e605a6",
       "range": {
         "startLine": 2622,
         "startChar": 48,
