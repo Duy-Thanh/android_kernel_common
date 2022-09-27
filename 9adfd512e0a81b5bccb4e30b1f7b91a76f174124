@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad8e324b_2e6d847d",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 5
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-27T17:11:19Z",
+      "side": 1,
+      "message": "must be in a follow-on commit, not in this one.",
+      "range": {
+        "startLine": 2133,
+        "startChar": 0,
+        "endLine": 2133,
+        "endChar": 49
+      },
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
