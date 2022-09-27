@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c36ebd2_b95c9394",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-09-27T04:04:31Z",
+      "side": 1,
+      "message": "jaeman@, can you review this CL as well?",
+      "revId": "eaa01f5732f48007035adba52fb5e5c743b9a9e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bec4971e_a64b37dc",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "I assume that you\u0027re suggesting code like L4217. Could you correct me if I\u0027m wrong?\n\nThe code in the link is setting hw, so we need to parse nl_msg and its nl_attr to C struct type. I\u0027ve done the similar at the L4217.\n\nThis code is for building nl_msg and its nlattr from C struct to share capacity outside of mac80211_hwsim (e.g. to userspace). So reusing existing APIs to generate complex nested attr seems better choice for me.\n\nFeel free to reopen if you have different thoughts.",
       "parentUuid": "bec4971e_a64b37dc",
+      "range": {
+        "startLine": 3229,
+        "startChar": 1,
+        "endLine": 3234,
+        "endChar": 2
+      },
+      "revId": "eaa01f5732f48007035adba52fb5e5c743b9a9e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "869947bd_7a15b9dd",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3234,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-09-27T04:04:31Z",
+      "side": 1,
+      "message": "thanks, I just wanna find a way to use existing API, but I agree with you.",
+      "parentUuid": "22989041_a9b691ac",
       "range": {
         "startLine": 3229,
         "startChar": 1,
