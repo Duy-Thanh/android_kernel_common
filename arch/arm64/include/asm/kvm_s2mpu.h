@@ -223,6 +223,7 @@ struct fmpt {
 };
 
 struct mpt {
+	bool is_dirty;
 	struct fmpt fmpt[NR_GIGABYTES];
 };
 

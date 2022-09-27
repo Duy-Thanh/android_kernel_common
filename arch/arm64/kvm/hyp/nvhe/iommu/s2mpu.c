@@ -327,15 +327,18 @@ static void __mpt_idmap_prepare(struct mpt *mpt, phys_addr_t first_byte,
 	unsigned int gb;
 	struct fmpt *fmpt;
 
+	mpt->is_dirty = false;
 	for_each_gb_in_range(gb, first_gb, last_gb) {
 		fmpt = &mpt->fmpt[gb];
 		start_gb_byte = (gb == first_gb) ? first_byte % SZ_1G : 0;
 		end_gb_byte = (gb == last_gb) ? (last_byte % SZ_1G) + 1 : SZ_1G;
 
 		__set_fmpt_range(fmpt, start_gb_byte, end_gb_byte, prot);
+		mpt->is_dirty |= !!fmpt->flags;
 
 		if (fmpt->flags & MPT_UPDATE_L2)
 			kvm_flush_dcache_to_poc(fmpt->smpt, SMPT_SIZE);
+
 	}
 }
 
@@ -347,6 +350,9 @@ static void __mpt_idmap_apply(struct pkvm_iommu *dev, struct mpt *mpt,
 	unsigned int gb, vid;
 	struct fmpt *fmpt;
 
+	if (!mpt->is_dirty)
+		return;
+
 	for_each_gb_in_range(gb, first_gb, last_gb) {
 		fmpt = &mpt->fmpt[gb];
 
@@ -356,6 +362,12 @@ static void __mpt_idmap_apply(struct pkvm_iommu *dev, struct mpt *mpt,
 		}
 	}
 	__range_invalidation(dev, first_byte, last_byte);
+}
+
+static void __mpt_idmap_complete(struct pkvm_iommu *dev, struct mpt *mpt)
+{
+	if (mpt->is_dirty)
+		__invalidation_barrier(dev);
 }
 
 static void s2mpu_host_stage2_idmap_prepare(phys_addr_t start, phys_addr_t end,
