@@ -383,12 +383,16 @@ static struct bio *bio_map_kern(struct request_queue *q, void *data,
 	unsigned long end = (kaddr + len + PAGE_SIZE - 1) >> PAGE_SHIFT;
 	unsigned long start = kaddr >> PAGE_SHIFT;
 	const int nr_pages = end - start;
+	int nr_bvecs = nr_pages;
 	bool is_vmalloc = is_vmalloc_addr(data);
 	struct page *page;
 	int offset, i;
 	struct bio *bio;
 
-	bio = bio_kmalloc(gfp_mask, nr_pages);
+	if (q->limits.max_segment_size < PAGE_SIZE)
+		nr_bvecs *= (PAGE_SIZE + q->limits.max_segment_size - 1) /
+			q->limits.max_segment_size;
+	bio = bio_kmalloc(gfp_mask, nr_bvecs);
 	if (!bio)
 		return ERR_PTR(-ENOMEM);
 
@@ -528,8 +532,10 @@ int blk_rq_append_bio(struct request *rq, struct bio **bio)
 
 	blk_queue_bounce(rq->q, bio);
 
-	bio_for_each_bvec(bv, *bio, iter)
+	bio_for_each_bvec(bv, *bio, iter) {
+		bv.bv_len = min(bv.bv_len, rq->q->limits.max_segment_size);
 		nr_segs++;
+	}
 
 	if (!rq->bio) {
 		blk_rq_bio_prep(rq, *bio, nr_segs);
