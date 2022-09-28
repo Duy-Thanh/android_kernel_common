@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aa07a72_2331adb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-28T15:00:19Z",
+      "side": 1,
+      "message": "I\u0027m guessing the lockdep tests run with symbol trimming disabled? Either way, works for me.",
+      "revId": "0541262473ad3cca2e4b8d9efd33f7d965a3fbe8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
