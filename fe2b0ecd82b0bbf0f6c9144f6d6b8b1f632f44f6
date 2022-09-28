@@ -16,6 +16,24 @@
       "message": "Sorry for all this trouble, but the XML update is still containing the removal of three symbols. That is referring to the change Todd submitted and on top of which this series needs to be rebased.",
       "revId": "fe2b0ecd82b0bbf0f6c9144f6d6b8b1f632f44f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a9cfa4_73e8b01c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-09-28T12:34:48Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "5684e356_9454fa76",
+      "revId": "fe2b0ecd82b0bbf0f6c9144f6d6b8b1f632f44f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
