@@ -16,6 +16,24 @@
       "message": "I\u0027m guessing the lockdep tests run with symbol trimming disabled? Either way, works for me.",
       "revId": "0541262473ad3cca2e4b8d9efd33f7d965a3fbe8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceb8a023_4d94c6e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2022-09-28T17:12:14Z",
+      "side": 1,
+      "message": "We set `TRIM_NONLISTED_KMI\u003d0` and `KMI_SYMBOL_LIST_STRICT_MODE\u003d0`.",
+      "parentUuid": "9aa07a72_2331adb6",
+      "revId": "0541262473ad3cca2e4b8d9efd33f7d965a3fbe8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
