@@ -1101,11 +1101,15 @@ static void mmc_blk_issue_discard_rq(struct mmc_queue *mq, struct request *req)
 	unsigned int from, nr;
 	int err = 0, type = MMC_BLK_DISCARD;
 	blk_status_t status = BLK_STS_OK;
+	unsigned int arg = card->erase_arg;
 
 	if (!mmc_can_erase(card)) {
 		status = BLK_STS_NOTSUPP;
 		goto fail;
 	}
+
+	if (arg == MMC_DISCARD_ARG && mmc_card_broken_sd_discard(card))
+		arg = SD_ERASE_ARG;
 
 	from = blk_rq_pos(req);
 	nr = blk_rq_sectors(req);
