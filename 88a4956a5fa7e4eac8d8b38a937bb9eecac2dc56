@@ -99,6 +99,30 @@
       },
       "revId": "88a4956a5fa7e4eac8d8b38a937bb9eecac2dc56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a94294_7be4a4a5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2987,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2022-09-28T07:06:34Z",
+      "side": 1,
+      "message": "If the children tasks forked by the inherited binders and don\u0027t have \"sched_reset_on_fork\" flag, their original uclamp will be influenced permanently.",
+      "parentUuid": "d3c76b87_886248ce",
+      "range": {
+        "startLine": 2987,
+        "startChar": 35,
+        "endLine": 2987,
+        "endChar": 66
+      },
+      "revId": "88a4956a5fa7e4eac8d8b38a937bb9eecac2dc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
