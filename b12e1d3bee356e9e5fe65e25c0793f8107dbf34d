@@ -1,6 +1,69 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "350be3d7_4f23e22e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-09-28T18:45:07Z",
+      "side": 1,
+      "message": "Just a couple nits.",
+      "revId": "b12e1d3bee356e9e5fe65e25c0793f8107dbf34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "171900f5_09a830bc",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-09-28T18:45:07Z",
+      "side": 1,
+      "message": "Is it possible that this address_space is freed by the time we inspect the captured record? If so then dereferencing it would result in UAF. I see that you only print the pointer value without dereferencing but is that done just to know the page is file-backed?",
+      "range": {
+        "startLine": 43,
+        "startChar": 23,
+        "endLine": 43,
+        "endChar": 30
+      },
+      "revId": "b12e1d3bee356e9e5fe65e25c0793f8107dbf34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a58fb442_c9aa66b4",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-09-28T18:45:07Z",
+      "side": 1,
+      "message": "any reason to prevent inlining?",
+      "range": {
+        "startLine": 77,
+        "startChar": 7,
+        "endLine": 77,
+        "endChar": 15
+      },
+      "revId": "b12e1d3bee356e9e5fe65e25c0793f8107dbf34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cee68365_ede0e2e6",
@@ -50,6 +113,29 @@
       "side": 1,
       "message": "Oh wow, ok thanks.",
       "parentUuid": "311cdfcc_99f1e823",
+      "revId": "b12e1d3bee356e9e5fe65e25c0793f8107dbf34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e816f3d_3a289b6b",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-09-28T18:45:07Z",
+      "side": 1,
+      "message": "reason is missing?",
+      "range": {
+        "startLine": 399,
+        "startChar": 38,
+        "endLine": 399,
+        "endChar": 39
+      },
       "revId": "b12e1d3bee356e9e5fe65e25c0793f8107dbf34d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
