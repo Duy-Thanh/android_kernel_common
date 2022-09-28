@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f215003f_11c970e6",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-09-28T20:14:22Z",
+      "side": 1,
+      "message": "Yub because file systems have static address_space operation so not modified usually once they are loaded.\n\nAnd actually, Android doesn\u0027t allow to allocate pages for file-backing from CMA but it has sometimes due to some bug(I know where but that\u0027s orthogonal topic).\nSo if it works as expected, actually, we don\u0027t need the mapping field from record. \n\nHowever, let\u0027s defer the discussion to other bug/CL since this is just backport patch from 12-5.10",
+      "parentUuid": "171900f5_09a830bc",
+      "range": {
+        "startLine": 43,
+        "startChar": 23,
+        "endLine": 43,
+        "endChar": 30
+      },
+      "revId": "b12e1d3bee356e9e5fe65e25c0793f8107dbf34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a58fb442_c9aa66b4",
         "filename": "mm/page_pinner.c",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-28T18:45:07Z",
       "side": 1,
       "message": "any reason to prevent inlining?",
+      "range": {
+        "startLine": 77,
+        "startChar": 7,
+        "endLine": 77,
+        "endChar": 15
+      },
+      "revId": "b12e1d3bee356e9e5fe65e25c0793f8107dbf34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b765021_314e6ad5",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-09-28T20:14:22Z",
+      "side": 1,
+      "message": "I guess it\u0027s related to backtrace depth. Anyway, just followed the page_owner.",
+      "parentUuid": "a58fb442_c9aa66b4",
       "range": {
         "startLine": 77,
         "startChar": 7,
@@ -130,6 +178,30 @@
       "writtenOn": "2022-09-28T18:45:07Z",
       "side": 1,
       "message": "reason is missing?",
+      "range": {
+        "startLine": 399,
+        "startChar": 38,
+        "endLine": 399,
+        "endChar": 39
+      },
+      "revId": "b12e1d3bee356e9e5fe65e25c0793f8107dbf34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9457a6c3_e1f98427",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-09-28T20:14:22Z",
+      "side": 1,
+      "message": "-_-, original Cl also missed it.\n\nIn this chance, let\u0027s fix it from 5.15.\n\n\"page_pinner disabled due to failure of buffer allocation\"\nLet\u0027s me upload CL again.",
+      "parentUuid": "5e816f3d_3a289b6b",
       "range": {
         "startLine": 399,
         "startChar": 38,
