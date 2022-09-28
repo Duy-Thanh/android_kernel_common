@@ -160,6 +160,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "179c1592_4a00648b",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-09-28T23:37:02Z",
+      "side": 1,
+      "message": "Then, let me resolve this since it\u0027s not a critical.",
+      "parentUuid": "cdb63a69_ef8c805e",
+      "range": {
+        "startLine": 77,
+        "startChar": 7,
+        "endLine": 77,
+        "endChar": 15
+      },
+      "revId": "b12e1d3bee356e9e5fe65e25c0793f8107dbf34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cee68365_ede0e2e6",
