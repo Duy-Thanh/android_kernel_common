@@ -52,6 +52,24 @@
       "parentUuid": "09cfd34b_2b816577",
       "revId": "3e9e03291d2c55ec7c0293ae520499bd397039ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe0ccaf_6dd21bea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-09-28T22:39:09Z",
+      "side": 1,
+      "message": "That is terrible. We\u0027ve recently seen a priority inversion problem that might be similar to this, but on the page pool mutex instead of the kernfs semaphore. One idea was to use a rt-mutex instead of a regular mutex for priority inheritance, but that won\u0027t work for your trace. Ultimately we did not make the change anyway because scheduler issues were identified as the cause of the delay. Perhaps that is also a factor in your example.\n\nBut this is a UAPI change for an already-shipped kernel. So I don\u0027t think we can take this for Android 13. For 14 we\u0027re hoping to replace it.\n\nWithout this feature, bug reports will be missing information about how many dmabufs are allocated. We\u0027ve used this information within the last couple of months to identify a driver memory leak. So we cannot simply disable this without giving up information that we expect to be present; we still have ways to get some dmabuf information for processes without this feature. However unmapped buffers where no processes hold a FD will be untraceable if we disable this.",
+      "parentUuid": "02c31460_1f09461c",
+      "revId": "3e9e03291d2c55ec7c0293ae520499bd397039ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
