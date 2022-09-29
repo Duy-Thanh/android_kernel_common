@@ -2668,6 +2668,7 @@ static __init int kvm_arm_init(void)
 
 	if (is_protected_kvm_enabled()) {
 		kvm_info("Protected nVHE mode initialized successfully\n");
+		BUG();
 	} else if (in_hyp_mode) {
 		kvm_info("VHE mode initialized successfully\n");
 	} else {
