@@ -5967,6 +5967,14 @@ re_enumerate_no_bos:
  * the reset is over (using their post_reset method).
  *
  * Return: The same as for usb_reset_and_verify_device().
+<<<<<<< HEAD   (331809 Merge 5.10.145 into android13-5.10-lts)
+=======
+ * However, if a reset is already in progress (for instance, if a
+ * driver doesn't have pre_reset() or post_reset() callbacks, and while
+ * being unbound or re-bound during the ongoing reset its disconnect()
+ * or probe() routine tries to perform a second, nested reset), the
+ * routine returns -EINPROGRESS.
+>>>>>>> BRANCH (62aea6 Linux 5.10.146)
  *
  * Note:
  * The caller must own the device lock.  For example, it's safe to use
