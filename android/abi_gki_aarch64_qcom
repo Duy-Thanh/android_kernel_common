@@ -1515,6 +1515,7 @@
   powercap_register_zone
   powercap_unregister_control_type
   powercap_unregister_zone
+  power_kobj
   power_supply_changed
   power_supply_get_by_name
   power_supply_get_drvdata
