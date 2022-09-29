@@ -16,6 +16,23 @@
       "message": "Please make a patch series.",
       "revId": "34031d0c6bbb32553a15a95d911c1576bf922e0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c2f9a56_86c2ac76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-09-29T17:29:40Z",
+      "side": 1,
+      "message": "This patch is a combination of https://android-review.googlesource.com/c/kernel/common/+/1754334 and https://android-review.googlesource.com/c/kernel/common/+/1755649. Please cherry-pick them properly and push them together.",
+      "revId": "34031d0c6bbb32553a15a95d911c1576bf922e0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
