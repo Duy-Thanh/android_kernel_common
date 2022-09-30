@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9515cd25_8bbe9fb9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-30T08:24:46Z",
+      "side": 1,
+      "message": "Could you please avoid ifdefery like that inline? Maybe just factor these out into helpers which are stubbed for CONFIG_UCLAMP_TASK\u003dn.",
+      "range": {
+        "startLine": 683,
+        "startChar": 6,
+        "endLine": 683,
+        "endChar": 25
+      },
+      "revId": "db110dc6130fcf9dbd2418c445589baae7aeed1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b5b4b2_bc6ee482",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-30T08:24:46Z",
+      "side": 1,
+      "message": "Can you not replace the sched_setscheduler_nocheck below by this? This would avoid calling in __sched_setscheduler() twice, which would avoid taking the rq lock twice, etc.",
+      "range": {
+        "startLine": 757,
+        "startChar": 1,
+        "endLine": 757,
+        "endChar": 37
+      },
+      "revId": "db110dc6130fcf9dbd2418c445589baae7aeed1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
