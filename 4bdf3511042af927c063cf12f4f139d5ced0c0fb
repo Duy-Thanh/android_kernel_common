@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75a6358e_135ceeda",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-30T11:44:54Z",
+      "side": 1,
+      "message": "All these need to go as well please 😊",
+      "range": {
+        "startLine": 690,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 6
+      },
+      "revId": "4bdf3511042af927c063cf12f4f139d5ced0c0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "579b4c85_3e101c59",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-30T11:44:54Z",
+      "side": 1,
+      "message": "And this one.",
+      "range": {
+        "startLine": 838,
+        "startChar": 0,
+        "endLine": 841,
+        "endChar": 6
+      },
+      "revId": "4bdf3511042af927c063cf12f4f139d5ced0c0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ccfc3a_1ecade9c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2989,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-30T11:44:54Z",
+      "side": 1,
+      "message": "This one as well.",
+      "range": {
+        "startLine": 2984,
+        "startChar": 0,
+        "endLine": 2989,
+        "endChar": 6
+      },
+      "revId": "4bdf3511042af927c063cf12f4f139d5ced0c0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32bfa6e5_cc60d96d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5374,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-30T11:44:54Z",
+      "side": 1,
+      "message": "And this one.",
+      "range": {
+        "startLine": 5371,
+        "startChar": 0,
+        "endLine": 5374,
+        "endChar": 6
+      },
+      "revId": "4bdf3511042af927c063cf12f4f139d5ced0c0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
