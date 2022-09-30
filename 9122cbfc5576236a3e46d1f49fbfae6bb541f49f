@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb96feab_d1d38048",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 155607,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-09-30T11:30:04Z",
+      "side": 0,
+      "message": "That is odd, Giuliano, would you say that is caused by an earlier mis-merge?",
+      "revId": "9122cbfc5576236a3e46d1f49fbfae6bb541f49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
