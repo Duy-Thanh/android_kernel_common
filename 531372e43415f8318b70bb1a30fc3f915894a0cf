@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1a3f2d0_c74eb44e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-09-30T08:49:37Z",
+      "side": 1,
+      "message": "I quite like this version, it\u0027s nice and simple.\n\nFor completeness there is another option. We could maybe \u0027steal\u0027 one bit in the CRCs to represent the \u0027state\u0027 of a symbol in ksymtab... I think that was proposed some time ago, but not sure who did? Anyway, during relatively early boot, the kernel would have to walk its ksymtab, and force the MSB of its exported symbols to 0 or 1 depending on whether they are protected or not. And then we would need to hack the CRC comparison in check_version() to work differently depending on the signature of the module being loaded. Specifically, the CRC comparison would ignore the MSB if we\u0027re loading a GKI module, or expect the MSB of the kernel symbol to be e.g. 1 if this is a vendor module, something along those lines. The main benefit would be to save the bsearch for every symbol resolution. Thoughts?",
+      "revId": "531372e43415f8318b70bb1a30fc3f915894a0cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
