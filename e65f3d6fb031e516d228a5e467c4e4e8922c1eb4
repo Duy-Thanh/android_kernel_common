@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec851a6_3c326010",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-30T11:24:23Z",
+      "side": 1,
+      "message": "something is odd with the .xml update, it should not be that big for just 2 new symbols.",
+      "revId": "e65f3d6fb031e516d228a5e467c4e4e8922c1eb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
