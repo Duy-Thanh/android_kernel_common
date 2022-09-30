@@ -314,6 +314,7 @@ err_no_vma:
 static inline void binder_alloc_set_vma(struct binder_alloc *alloc,
 		struct vm_area_struct *vma)
 {
+<<<<<<< HEAD   (4248b8 Merge 5.15.69 into android13-5.15-lts)
 	if (vma)
 		alloc->vma_vm_mm = vma->vm_mm;
 	/*
@@ -324,6 +325,16 @@ static inline void binder_alloc_set_vma(struct binder_alloc *alloc,
 	 */
 	smp_wmb();
 	alloc->vma = vma;
+=======
+	unsigned long vm_start = 0;
+
+	if (vma) {
+		vm_start = vma->vm_start;
+		mmap_assert_write_locked(alloc->vma_vm_mm);
+	}
+
+	alloc->vma_addr = vm_start;
+>>>>>>> BRANCH (3e98e3 Linux 5.15.70)
 }
 
 static inline struct vm_area_struct *binder_alloc_get_vma(
