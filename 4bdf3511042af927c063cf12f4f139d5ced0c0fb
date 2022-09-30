@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b048e9e9_be5928bc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2022-09-30T12:49:51Z",
+      "side": 1,
+      "message": "have no better idea to remove them, especially for uclamp_req",
+      "parentUuid": "75a6358e_135ceeda",
+      "range": {
+        "startLine": 690,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 6
+      },
+      "revId": "4bdf3511042af927c063cf12f4f139d5ced0c0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d280e0b_8ff52d06",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-30T11:51:50Z",
       "side": 1,
       "message": "Do you need to set SCHED_FLAG_KEEP_ALL in the else path?",
+      "range": {
+        "startLine": 755,
+        "startChar": 1,
+        "endLine": 759,
+        "endChar": 2
+      },
+      "revId": "4bdf3511042af927c063cf12f4f139d5ced0c0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fdf4499_08434191",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2022-09-30T12:49:51Z",
+      "side": 1,
+      "message": "yes, we need it.",
+      "parentUuid": "3d280e0b_8ff52d06",
       "range": {
         "startLine": 755,
         "startChar": 1,
