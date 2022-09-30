@@ -22,6 +22,30 @@
       },
       "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a01df25e_8bfb63bb",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 5
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-09-30T11:55:26Z",
+      "side": 1,
+      "message": "Hi Greg,\nDo you suggest we split the patch - one to address the swap randomize, and other for the header change?",
+      "parentUuid": "ad8e324b_2e6d847d",
+      "range": {
+        "startLine": 2133,
+        "startChar": 0,
+        "endLine": 2133,
+        "endChar": 49
+      },
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
