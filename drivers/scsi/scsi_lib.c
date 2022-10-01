@@ -1805,6 +1805,8 @@ void __scsi_init_queue(struct Scsi_Host *shost, struct request_queue *q)
 {
 	struct device *dev = shost->dma_dev;
 
+	blk_queue_flag_set(QUEUE_FLAG_SUB_PAGE_SEGMENTS, q);
+
 	/*
 	 * this limit is imposed by hardware restrictions
 	 */
