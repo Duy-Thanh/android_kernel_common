@@ -11,3 +11,6 @@ ARM
    hypercalls
    pvtime
    ptp_kvm
+   getfreq
+   uclamp
+   get_freqtbl

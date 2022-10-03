@@ -8303,6 +8303,29 @@ structure.
 When getting the Modified Change Topology Report value, the attr->addr
 must point to a byte where the value will be stored or retrieved from.
 
+8.40 KVM_CAP_GET_CPUFREQ
+--------------------
+
+:Architectures: arm64
+
+This capability indicates that the KVM get cpufreq is supported.
+
+8.41 KVM_CAP_UCLAMP_SYNC
+------------------------
+
+:Architectures: arm64
+
+This capability indicates that the KVM uclamp sync service is supported
+in the host. A VMM can check whether the service is available to the
+guest on migration.
+
+8.42 KVM_CAP_GET_CPUFREQ
+--------------------
+
+:Architectures: arm64
+
+This capability indicates that the KVM get cpufreq table is supported.
+
 9. Known KVM API problems
 =========================
 
