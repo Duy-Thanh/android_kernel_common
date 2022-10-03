@@ -8259,3 +8259,24 @@ Ordering of KVM_GET_*/KVM_SET_* ioctls
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 TBD
+8.40 KVM_CAP_GET_CPUFREQ
+--------------------
+
+:Architectures: arm64
+
+This capability indicates that the KVM get cpufreq is supported.
+
+8.41 KVM_CAP_UTIL_SYNC
+------------------------
+
+:Architectures: arm64
+
+This capability indicates that the KVM util sync service is supported
+in the host.
+
+8.42 KVM_CAP_GET_CPUFREQ
+--------------------
+
+:Architectures: arm64
+
+This capability indicates that the KVM get cpufreq table is supported.

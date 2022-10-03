@@ -1974,6 +1974,16 @@ static void __setscheduler_uclamp(struct task_struct *p,
 	}
 }
 
+static void __setscheduler_task_util(struct task_struct *p,
+				  const struct sched_attr *attr)
+{
+
+	if (likely(!(attr->sched_flags & SCHED_FLAG_UTIL_UPDATE)))
+		return;
+
+	p->se.avg.util_guest = attr->sched_util;
+	p->guest_util_hint = 1;
+}
 static void uclamp_fork(struct task_struct *p)
 {
 	enum uclamp_id clamp_id;
@@ -7633,6 +7643,8 @@ recheck:
 			goto change;
 		if (attr->sched_flags & SCHED_FLAG_UTIL_CLAMP)
 			goto change;
+		if (attr->sched_flags & SCHED_FLAG_UTIL_UPDATE)
+			goto change;
 
 		p->sched_reset_on_fork = reset_on_fork;
 		retval = 0;
@@ -7720,6 +7732,9 @@ change:
 		__setscheduler_prio(p, newprio);
 	}
 	__setscheduler_uclamp(p, attr);
+
+	if (attr->sched_flags & SCHED_FLAG_UTIL_UPDATE)
+		__setscheduler_task_util(p, attr);
 
 	if (queued) {
 		/*

@@ -119,6 +119,7 @@ struct sched_attr {
 	/* Utilization hints */
 	__u32 sched_util_min;
 	__u32 sched_util_max;
+	__u32 sched_util;
 
 };
 

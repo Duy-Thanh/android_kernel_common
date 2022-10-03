@@ -502,6 +502,7 @@ struct sched_avg {
 	unsigned long			load_avg;
 	unsigned long			runnable_avg;
 	unsigned long			util_avg;
+	unsigned long			util_guest;
 	struct util_est			util_est;
 } ____cacheline_aligned;
 
@@ -962,6 +963,7 @@ struct task_struct {
 	/* delay due to memory thrashing */
 	unsigned                        in_thrashing:1;
 #endif
+	unsigned                        guest_util_hint:1;
 
 	unsigned long			atomic_flags; /* Flags requiring atomic access. */
 
