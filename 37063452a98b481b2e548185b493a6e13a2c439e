@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c9797965_1bba34bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-10-03T23:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "324f1e5f_4e67ccd3",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "47b69717_6f08be17",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -124,6 +148,24 @@
       "writtenOn": "2022-07-13T05:54:52Z",
       "side": 1,
       "message": "terminology: Should it be softirq instead of softint to avoid introducing new terms?",
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "202eb07f_d753d185",
+        "filename": "init/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-10-03T23:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9edb3da_6fbe124c",
       "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -292,6 +334,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "671f9706_d118eb01",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-10-03T23:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a762a608_4fc246aa",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 25
+      },
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd126197_e6515046",
@@ -368,6 +434,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d711ec_808836d2",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-10-03T23:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad5b7972_b46c7aa8",
+      "range": {
+        "startLine": 197,
+        "startChar": 8,
+        "endLine": 197,
+        "endChar": 26
+      },
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ff2c8fa_2a4c1dc7",
@@ -381,6 +471,30 @@
       "writtenOn": "2022-07-15T13:20:38Z",
       "side": 1,
       "message": "If you use fitness_fn you can get rid of this logic too",
+      "range": {
+        "startLine": 215,
+        "startChar": 2,
+        "endLine": 218,
+        "endChar": 2
+      },
+      "revId": "37063452a98b481b2e548185b493a6e13a2c439e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d202c938_1dac59a6",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-10-03T23:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ff2c8fa_2a4c1dc7",
       "range": {
         "startLine": 215,
         "startChar": 2,
