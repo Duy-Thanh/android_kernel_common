@@ -135,7 +135,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_size_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_format_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_dump_buffer);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_fill_prdt);
+<<<<<<< HEAD   (92432f ANDROID: GKI: Update the ABI symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_reprogram_all_keys);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_complete_init);
+>>>>>>> CHANGE (c0f245 ANDROID: scsi: ufs: add complete init vendor hook)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_prepare_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command);
