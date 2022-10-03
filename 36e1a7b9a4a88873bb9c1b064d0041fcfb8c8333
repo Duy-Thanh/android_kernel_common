@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d972794b_a3d1218d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-03T22:18:05Z",
+      "side": 1,
+      "message": "If this is standards-based, why isn\u0027t this implemented upstream instead of introducing a hook here?",
+      "revId": "36e1a7b9a4a88873bb9c1b064d0041fcfb8c8333",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "bcb40f91_7e6803e0",
