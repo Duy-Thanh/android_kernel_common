@@ -126,6 +126,7 @@ static DEFINE_PER_CPU_READ_MOSTLY(unsigned long, arch_max_freq_scale);
 static DEFINE_PER_CPU(u64, arch_const_cycles_prev);
 static DEFINE_PER_CPU(u64, arch_core_cycles_prev);
 static cpumask_var_t amu_fie_cpus;
+static cpumask_var_t virt_fie_cpus;
 
 void update_freq_counters_refs(void)
 {
@@ -386,3 +387,74 @@ int cpc_write_ffh(int cpunum, struct cpc_reg *reg, u64 val)
 	return -EOPNOTSUPP;
 }
 #endif /* CONFIG_ACPI_CPPC_LIB */
+
+static void virt_scale_freq_tick(void)
+{
+	unsigned long scale, cur_freq, max_freq;
+	struct arm_smccc_res hvc_res;
+
+	preempt_disable();
+	arm_smccc_1_1_invoke(ARM_SMCCC_VENDOR_HYP_KVM_GET_CPUFREQ_FUNC_ID,
+			0, &hvc_res);
+	preempt_enable();
+
+	cur_freq = hvc_res.a0;
+	max_freq = cpufreq_get_hw_max_freq(task_cpu(current));
+	scale = (cur_freq << SCHED_CAPACITY_SHIFT) / max_freq;
+
+	this_cpu_write(arch_freq_scale, (unsigned long)scale);
+}
+
+static struct scale_freq_data virt_sfd = {
+	.source = SCALE_FREQ_SOURCE_ARCH,
+	.set_freq_scale = virt_scale_freq_tick,
+};
+
+static void virt_fie_setup(const struct cpumask *cpus)
+{
+	/* We are already set since the last insmod of cpufreq driver */
+	if (unlikely(cpumask_subset(cpus, virt_fie_cpus)))
+		return;
+
+	cpumask_or(virt_fie_cpus, virt_fie_cpus, cpus);
+
+	topology_set_scale_freq_source(&virt_sfd, virt_fie_cpus);
+
+	pr_debug("CPUs[%*pbl]: virt freq scale will be used for FIE.",
+		 cpumask_pr_args(cpus));
+}
+
+static int init_virt_fie_callback(struct notifier_block *nb, unsigned long val,
+				 void *data)
+{
+	struct cpufreq_policy *policy = data;
+
+	if (val == CPUFREQ_CREATE_POLICY)
+		virt_fie_setup(policy->related_cpus);
+
+	/*
+	 * todo to handle CPUFREQ_REMOVE_POLICY event.
+	 */
+
+	return 0;
+}
+
+static struct notifier_block init_virt_fie_notifier = {
+	.notifier_call = init_virt_fie_callback,
+};
+
+static int __init init_virt_fie(void)
+{
+	int ret;
+
+	if (!zalloc_cpumask_var(&virt_fie_cpus, GFP_KERNEL))
+		return -ENOMEM;
+
+	ret = cpufreq_register_notifier(&init_virt_fie_notifier,
+					CPUFREQ_POLICY_NOTIFIER);
+	if (ret)
+		free_cpumask_var(virt_fie_cpus);
+
+	return ret;
+}
+core_initcall(init_virt_fie);
