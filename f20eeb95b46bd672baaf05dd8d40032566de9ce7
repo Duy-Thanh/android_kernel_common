@@ -16,6 +16,24 @@
       "message": "what is the upstream git commit id of this?",
       "revId": "f20eeb95b46bd672baaf05dd8d40032566de9ce7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab3e1af6_32eaf586",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2022-10-03T10:13:36Z",
+      "side": 1,
+      "message": "add upstream git commit id, thanks~\n\n(cherry picked from commit f87904c075515f3e1d8f4a7115869d3b914674fd)",
+      "parentUuid": "fc14c74b_fc29963a",
+      "revId": "f20eeb95b46bd672baaf05dd8d40032566de9ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
