@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "995ba205_ef57171d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2022-10-04T03:07:06Z",
+      "side": 1,
+      "message": "Do you mean like the latest patchset? Thanks😊",
+      "parentUuid": "6981bdb2_7c79d82f",
+      "range": {
+        "startLine": 690,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 6
+      },
+      "revId": "4bdf3511042af927c063cf12f4f139d5ced0c0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d280e0b_8ff52d06",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
