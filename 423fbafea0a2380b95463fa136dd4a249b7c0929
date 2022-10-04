@@ -51,6 +51,24 @@
       "parentUuid": "d1156160_54850131",
       "revId": "423fbafea0a2380b95463fa136dd4a249b7c0929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb5e1d8_c9eef158",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-04T15:59:50Z",
+      "side": 1,
+      "message": "Is there any reason the rationale can\u0027t be put into the commit message at this point?",
+      "parentUuid": "bd4a234f_900319b4",
+      "revId": "423fbafea0a2380b95463fa136dd4a249b7c0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
