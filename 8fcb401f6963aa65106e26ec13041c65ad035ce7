@@ -33,6 +33,23 @@
       "message": "This will not even build properly, so obviously it\u0027s not tested 😞",
       "revId": "8fcb401f6963aa65106e26ec13041c65ad035ce7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0ed63c4_8262c37d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-10-04T00:48:57Z",
+      "side": 1,
+      "message": "As per my latest comment on https://android-review.googlesource.com/c/kernel/common/+/2180456/5, this is not needed.",
+      "revId": "8fcb401f6963aa65106e26ec13041c65ad035ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
