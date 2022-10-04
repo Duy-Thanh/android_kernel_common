@@ -87,6 +87,24 @@
       "parentUuid": "eeb5e1d8_c9eef158",
       "revId": "423fbafea0a2380b95463fa136dd4a249b7c0929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d84cbcb6_6f264131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-10-04T16:44:52Z",
+      "side": 1,
+      "message": "Fair question. I\u0027m reopening b/191439466 for partner to follow up.",
+      "parentUuid": "0732aa3b_f6bebe40",
+      "revId": "423fbafea0a2380b95463fa136dd4a249b7c0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
