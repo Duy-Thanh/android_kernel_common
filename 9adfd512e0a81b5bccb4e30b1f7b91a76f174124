@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f36e578_a38b5539",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-04T00:26:56Z",
+      "side": 1,
+      "message": "fix typos (at least 4 in this commit message)",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 13
+      },
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad8e324b_2e6d847d",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 5
@@ -67,6 +90,63 @@
         "startChar": 0,
         "endLine": 2133,
         "endChar": 49
+      },
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa668f06_10c8e496",
+        "filename": "arch/arm64/kernel/hibernate.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-04T00:26:56Z",
+      "side": 1,
+      "message": "this name doesn\u0027t seem right anymore.",
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4635ee_710eaaaa",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-04T00:26:56Z",
+      "side": 1,
+      "message": "this doesn\u0027t match the callsite:\n```\ntrace_android_vh_init_arch_hibernate_hdr(\u0026hdr-\u003eandroid_vendor_data1,\n\t\t\t\t\t\t__pa(cpu_resume));\n```",
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f1cc405_f2605df6",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3236,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-04T00:26:56Z",
+      "side": 1,
+      "message": "parens are unnecessary",
+      "range": {
+        "startLine": 3236,
+        "startChar": 17,
+        "endLine": 3236,
+        "endChar": 35
       },
       "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
