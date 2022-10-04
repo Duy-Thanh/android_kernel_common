@@ -33,6 +33,24 @@
       "message": "If you really need this, please describe the feature and cite the vendor hooks that require this function.",
       "revId": "423fbafea0a2380b95463fa136dd4a249b7c0929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4a234f_900319b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-10-04T15:49:15Z",
+      "side": 1,
+      "message": "Explanation was provided here https://buganizer.corp.google.com/issues/191439466#comment4 when the original patch was posted in 5.10 branch.",
+      "parentUuid": "d1156160_54850131",
+      "revId": "423fbafea0a2380b95463fa136dd4a249b7c0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
