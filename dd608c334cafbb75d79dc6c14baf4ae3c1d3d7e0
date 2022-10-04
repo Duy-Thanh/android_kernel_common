@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eb154c8_d93fb2db",
+        "filename": "arch/arm64/kernel/topology.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-10-04T17:53:32Z",
+      "side": 1,
+      "message": "None of this new code is really ARM64 arch code, right? So, can\u0027t we move this into the vm-cpufreq driver?\n\nI\u0027d think there an arch independent API for the hyper calls.",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 1
+      },
+      "revId": "dd608c334cafbb75d79dc6c14baf4ae3c1d3d7e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
