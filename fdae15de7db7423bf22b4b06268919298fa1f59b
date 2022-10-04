@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac6af8f_9d38c5a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-10-04T16:44:48Z",
+      "side": 1,
+      "message": "I tested one of the previous versions on a Pixel 6a and didn\u0027t notice any regressions so far. This was not an extensive test at all but at least is a good sign. The patch LGTM so lets address the last few comments. Thanks!",
+      "revId": "fdae15de7db7423bf22b4b06268919298fa1f59b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f9761d9_87741c5a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-10-04T16:44:48Z",
+      "side": 1,
+      "message": "nit: Could you move this whole section next to the other priority related functions?",
+      "revId": "fdae15de7db7423bf22b4b06268919298fa1f59b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf60a0fa_0e4bd7e0",
