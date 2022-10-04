@@ -16,6 +16,23 @@
       "message": "no driver should ever be calling this function, what type of driver is this that feels it is required?",
       "revId": "423fbafea0a2380b95463fa136dd4a249b7c0929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1156160_54850131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-04T15:45:09Z",
+      "side": 1,
+      "message": "If you really need this, please describe the feature and cite the vendor hooks that require this function.",
+      "revId": "423fbafea0a2380b95463fa136dd4a249b7c0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
