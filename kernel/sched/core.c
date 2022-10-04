@@ -7391,6 +7391,12 @@ unsigned long sched_cpu_util(int cpu)
 {
 	return effective_cpu_util(cpu, cpu_util_cfs(cpu), ENERGY_UTIL, NULL);
 }
+
+unsigned long sched_cpu_util_freq(int cpu)
+{
+	return effective_cpu_util(cpu, cpu_util_cfs(cpu), FREQUENCY_UTIL, NULL);
+}
+
 #endif /* CONFIG_SMP */
 
 /**

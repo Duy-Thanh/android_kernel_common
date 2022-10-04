@@ -2281,6 +2281,7 @@ static inline bool owner_on_cpu(struct task_struct *owner)
 
 /* Returns effective CPU energy utilization, as seen by the scheduler */
 unsigned long sched_cpu_util(int cpu);
+unsigned long sched_cpu_util_freq(int cpu);
 #endif /* CONFIG_SMP */
 
 #ifdef CONFIG_RSEQ
