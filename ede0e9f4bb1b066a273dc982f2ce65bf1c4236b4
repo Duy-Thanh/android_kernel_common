@@ -286,6 +286,30 @@
       },
       "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c92ae4_d9826814",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2622,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-10-04T00:47:59Z",
+      "side": 1,
+      "message": "I checked on my end, and I believe I found the issue with my approach. That being said, getting it right I think would require a bit of rework. I think the following approach should work:\n\n1. Add a vendor hook in `swsusp_check()` https://android.googlesource.com/kernel/common/+/refs/heads/android13-5.15/kernel/power/swap.c#1521 which passes. The vendor hook can take in the pointer to the block device used for hibernation, `hib_resume_bdev`, and store it.\n\n2. Add a vendor hook in the syscall handlers for swapon and swapoff as you\u0027re doing in this patch. The vendor hook will work by checking the block device against the hibernation block device that you saved in [1].\n\nThis avoids having to add a function in the kernel to expose the hibernation device. Please let me know what you think.",
+      "parentUuid": "c459b3c9_bd6049c1",
+      "range": {
+        "startLine": 2622,
+        "startChar": 48,
+        "endLine": 2622,
+        "endChar": 64
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
