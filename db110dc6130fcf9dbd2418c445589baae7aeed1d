@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18f5368d_c6cce130",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-04T10:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fbf6eac_48577ca7",
+      "range": {
+        "startLine": 683,
+        "startChar": 6,
+        "endLine": 683,
+        "endChar": 25
+      },
+      "revId": "db110dc6130fcf9dbd2418c445589baae7aeed1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7b5b4b2_bc6ee482",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "f7b5b4b2_bc6ee482",
+      "range": {
+        "startLine": 757,
+        "startChar": 1,
+        "endLine": 757,
+        "endChar": 37
+      },
+      "revId": "db110dc6130fcf9dbd2418c445589baae7aeed1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5360548d_e823e0c4",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-04T10:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c99e5f8b_da78e10a",
       "range": {
         "startLine": 757,
         "startChar": 1,
