@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5795614_e555533a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-10-04T07:50:30Z",
+      "side": 1,
+      "message": "Is this also needed on android13-5.15 and android14-5.15?",
+      "revId": "4aecd91e3fae343eb3cac21156ca6d18f50144dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
