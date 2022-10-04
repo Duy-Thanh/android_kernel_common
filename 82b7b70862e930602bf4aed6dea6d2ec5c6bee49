@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af8f7d5d_417cfcd4",
+        "filename": "arch/arm64/kernel/topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-10-04T22:00:05Z",
+      "side": 1,
+      "message": "Feels a bit over complicated. Is there going to be a case where you\u0027d only want to do this for some of the CPUs? What\u0027s wrong with setting this for all possible cpus?",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 433,
+        "endChar": 39
+      },
+      "revId": "82b7b70862e930602bf4aed6dea6d2ec5c6bee49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40b181b_c96485cf",
+        "filename": "arch/arm64/kernel/topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-10-04T22:00:05Z",
+      "side": 1,
+      "message": "So even on a host kernel this is going to install this incorrect freq source. Yet another reason this should be part of the cpufreq driver.",
+      "range": {
+        "startLine": 446,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 29
+      },
+      "revId": "82b7b70862e930602bf4aed6dea6d2ec5c6bee49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
