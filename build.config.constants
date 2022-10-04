@@ -1,2 +1,7 @@
+<<<<<<< HEAD   (b5b1ab ANDROID: gki_config: enable F2FS_UNFAIR_RWSEM)
 BRANCH=android14-5.15
 CLANG_VERSION=r458507
+=======
+BRANCH=android-mainline
+CLANG_VERSION=r468909
+>>>>>>> CHANGE (367613 ANDROID: clang: update to 15.0.2)
