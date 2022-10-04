@@ -16,6 +16,24 @@
       "message": "Is this also needed on android13-5.15 and android14-5.15?",
       "revId": "4aecd91e3fae343eb3cac21156ca6d18f50144dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4157f3b8_870e509b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2022-10-04T17:18:33Z",
+      "side": 1,
+      "message": "I backported this into other GKI families except android14-5.15. Let me update that with other upstream patches after PULL_REQUEST this week.",
+      "parentUuid": "d5795614_e555533a",
+      "revId": "4aecd91e3fae343eb3cac21156ca6d18f50144dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
