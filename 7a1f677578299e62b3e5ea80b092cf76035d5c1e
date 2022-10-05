@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99b4705_fe27b688",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-05T16:14:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe6240a4_e81f4820",
+      "revId": "7a1f677578299e62b3e5ea80b092cf76035d5c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b4212c3_411cbf85",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-10-05T15:56:00Z",
       "side": 1,
       "message": "Please leave \" ? 1 : 0\" out since the compiler does this for you when assigning a boolean to an int.",
+      "range": {
+        "startLine": 1118,
+        "startChar": 32,
+        "endLine": 1118,
+        "endChar": 40
+      },
+      "revId": "7a1f677578299e62b3e5ea80b092cf76035d5c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df215a78_b7ef4af6",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-05T16:14:58Z",
+      "side": 1,
+      "message": "Too late. This patch needs to exactly match what landed in android13-5.15.",
+      "parentUuid": "5b4212c3_411cbf85",
       "range": {
         "startLine": 1118,
         "startChar": 32,
