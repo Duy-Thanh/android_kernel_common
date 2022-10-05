@@ -301,6 +301,7 @@ enum bpf_arg_type {
 	ARG_CONST_ALLOC_SIZE_OR_ZERO,	/* number of allocated bytes requested */
 	ARG_PTR_TO_BTF_ID_SOCK_COMMON,	/* pointer to in-kernel sock_common or bpf-mirrored bpf_sock */
 	ARG_PTR_TO_PERCPU_BTF_ID,	/* pointer to in-kernel percpu type */
+	ARG_PTR_TO_PACKET,	/* pointer to packet */
 	__BPF_ARG_TYPE_MAX,
 };
 
@@ -426,6 +427,7 @@ struct bpf_insn_access_aux {
 	union {
 		int ctx_field_size;
 		u32 btf_id;
+		int data_id;
 	};
 	struct bpf_verifier_log *log; /* for verbose logs */
 };
@@ -1896,6 +1898,8 @@ extern const struct bpf_func_proto bpf_copy_from_user_proto;
 extern const struct bpf_func_proto bpf_snprintf_btf_proto;
 extern const struct bpf_func_proto bpf_per_cpu_ptr_proto;
 extern const struct bpf_func_proto bpf_this_cpu_ptr_proto;
+extern const struct bpf_func_proto bpf_fuse_get_writeable_in_proto;
+extern const struct bpf_func_proto bpf_fuse_get_writeable_out_proto;
 
 const struct bpf_func_proto *bpf_tracing_func_proto(
 	enum bpf_func_id func_id, const struct bpf_prog *prog);

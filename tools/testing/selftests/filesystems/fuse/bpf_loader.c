@@ -21,8 +21,8 @@
 
 #include <linux/unistd.h>
 
-#include <include/uapi/linux/fuse.h>
-#include <include/uapi/linux/bpf.h>
+#include <uapi/linux/fuse.h>
+#include <uapi/linux/bpf.h>
 
 struct _test_options test_options;
 
@@ -684,8 +684,9 @@ out:
 	return result;
 }
 
-int install_elf_bpf(const char *file, const char *section, int *fd,
-		    struct map_relocation **map_relocations, size_t *map_count)
+static int install_elf_bpf_helper(const char *file, const char *section, int *fd,
+		    struct map_relocation **map_relocations, size_t *map_count,
+		    bool is_valid)
 {
 	int result = TEST_FAILURE;
 	char path[PATH_MAX] = {};
@@ -769,12 +770,29 @@ int install_elf_bpf(const char *file, const char *section, int *fd,
 		ksft_print_msg("%s\n", log);
 	if (*fd == -1 && errno == ENOSPC)
 		ksft_print_msg("bpf log size too small!\n");
-	TESTNE(*fd, -1);
+	if (is_valid)
+		TESTNE(*fd, -1);
+	else
+		TESTEQUAL(*fd, -1);
 
 	result = TEST_SUCCESS;
 out:
 	close(filter_fd);
 	return result;
+}
+
+int install_elf_bpf(const char *file, const char *section, int *fd,
+		    struct map_relocation **map_relocations, size_t *map_count)
+{
+	return install_elf_bpf_helper(file, section, fd, map_relocations,
+			map_count, true);
+}
+
+int install_elf_bpf_invalid(const char *file, const char *section, int *fd,
+		    struct map_relocation **map_relocations, size_t *map_count)
+{
+	return install_elf_bpf_helper(file, section, fd, map_relocations,
+			map_count, false);
 }
 
 

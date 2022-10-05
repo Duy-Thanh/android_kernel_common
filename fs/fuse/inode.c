@@ -23,6 +23,7 @@
 #include <linux/exportfs.h>
 #include <linux/posix_acl.h>
 #include <linux/pid_namespace.h>
+#include <uapi/linux/magic.h>
 
 MODULE_AUTHOR("Miklos Szeredi <miklos@szeredi.hu>");
 MODULE_DESCRIPTION("Filesystem in Userspace");
@@ -365,6 +366,7 @@ static int fuse_inode_backing_set(struct inode *inode, void *_nodeidp)
 
 	fi->nodeid = fii->nodeid;
 #ifdef CONFIG_FUSE_BPF
+	BUG_ON(fi->backing_inode != NULL);
 	fi->backing_inode = fii->backing_inode;
 	if (fi->backing_inode)
 		ihold(fi->backing_inode);
@@ -579,9 +581,6 @@ static int fuse_statfs(struct dentry *dentry, struct kstatfs *buf)
 	FUSE_ARGS(args);
 	struct fuse_statfs_out outarg;
 	int err;
-#ifdef CONFIG_FUSE_BPF
-	struct fuse_err_ret fer;
-#endif
 
 	if (!fuse_allow_current_process(fm->fc)) {
 		buf->f_type = FUSE_SUPER_MAGIC;
@@ -589,12 +588,11 @@ static int fuse_statfs(struct dentry *dentry, struct kstatfs *buf)
 	}
 
 #ifdef CONFIG_FUSE_BPF
-	fer = fuse_bpf_backing(dentry->d_inode, struct fuse_statfs_out,
-			       fuse_statfs_initialize, fuse_statfs_backing,
-			       fuse_statfs_finalize,
-			       dentry, buf);
-	if (fer.ret)
-		return PTR_ERR(fer.result);
+	if (fuse_bpf_backing(dentry->d_inode, struct fuse_statfs_out, err,
+			       fuse_statfs_initialize_in, fuse_statfs_initialize_out,
+			       fuse_statfs_backing, fuse_statfs_finalize,
+			       dentry, buf))
+		return err;
 #endif
 
 	memset(&outarg, 0, sizeof(outarg));
@@ -892,7 +890,7 @@ EXPORT_SYMBOL_GPL(fuse_mount_put);
 struct fuse_mount *fuse_mount_get(struct fuse_mount *fm)
 {
 	refcount_inc(&fm->count);
-	return fm;
+		return fm;
 }
 EXPORT_SYMBOL_GPL(fuse_mount_get);
 
@@ -995,6 +993,14 @@ static int fuse_encode_fh(struct inode *inode, u32 *fh, int *max_len,
 
 	nodeid = get_fuse_inode(inode)->nodeid;
 	generation = inode->i_generation;
+
+#ifdef CONFIG_FUSE_BPF
+	/* TODO: Does it make sense to support this in some cases? */
+	if (!nodeid && get_fuse_inode(inode)->backing_inode) {
+		*max_len = 0;
+		return FILEID_INVALID;
+	}
+#endif
 
 	fh[0] = (u32)(nodeid >> 32);
 	fh[1] = (u32)(nodeid & 0xffffffff);
@@ -1591,21 +1597,21 @@ static int fuse_fill_super(struct super_block *sb, struct fs_context *fsc)
 	struct fuse_conn *fc;
 	struct fuse_mount *fm;
 
-	err = -EINVAL;
-	if (!ctx->no_daemon) {
-		file = fget(ctx->fd);
-		if (!file)
-			goto err;
+        err = -EINVAL;
+        if (!ctx->no_daemon) {
+                file = fget(ctx->fd);
+                if (!file)
+                        goto err;
 
-		/*
-		 * Require mount to happen from the same user namespace which
-		 * opened /dev/fuse to prevent potential attacks.
-		 */
-		if ((file->f_op != &fuse_dev_operations) ||
-		    (file->f_cred->user_ns != sb->s_user_ns))
-			goto err_fput;
-		ctx->fudptr = &file->private_data;
-	}
+                /*
+                 * Require mount to happen from the same user namespace which
+                 * opened /dev/fuse to prevent potential attacks.
+                 */
+                if ((file->f_op != &fuse_dev_operations) ||
+                    (file->f_cred->user_ns != sb->s_user_ns))
+                        goto err_fput;
+                ctx->fudptr = &file->private_data;
+        }
 
 	fc = kmalloc(sizeof(*fc), GFP_KERNEL);
 	err = -ENOMEM;
@@ -1631,8 +1637,7 @@ static int fuse_fill_super(struct super_block *sb, struct fs_context *fsc)
 	 * memory barrier for file->private_data to be visible on all
 	 * CPUs after this
 	 */
-	if (!ctx->no_daemon)
-		fput(file);
+	fput(file);
 	fuse_send_init(get_fuse_mount_super(sb));
 	return 0;
 
@@ -1640,8 +1645,7 @@ static int fuse_fill_super(struct super_block *sb, struct fs_context *fsc)
 	fuse_mount_put(fm);
 	sb->s_fs_info = NULL;
  err_fput:
-	if (!ctx->no_daemon)
-		fput(file);
+	fput(file);
  err:
 	return err;
 }
@@ -1649,6 +1653,9 @@ static int fuse_fill_super(struct super_block *sb, struct fs_context *fsc)
 static int fuse_get_tree(struct fs_context *fc)
 {
 	struct fuse_fs_context *ctx = fc->fs_private;
+
+	if (ctx->no_daemon)
+		return get_tree_nodev(fc, fuse_fill_super);;
 
 	if (!ctx->fd_present || !ctx->rootmode_present ||
 	    !ctx->user_id_present || !ctx->group_id_present)

@@ -528,6 +528,8 @@ ssize_t fuse_simple_request(struct fuse_mount *fm, struct fuse_args *args)
 		BUG_ON(args->out_numargs == 0);
 		ret = args->out_args[args->out_numargs - 1].size;
 	}
+	if (args->is_filter)
+		args->ret = req->out.h.error;
 	fuse_put_request(req);
 
 	return ret;
@@ -1029,10 +1031,27 @@ static int fuse_copy_one(struct fuse_copy_state *cs, void *val, unsigned size)
 	return 0;
 }
 
+/* Copy the fuse-bpf lookup args and verify them */
+static int fuse_copy_lookup(struct fuse_copy_state *cs, void *val, unsigned size)
+{
+	struct fuse_entry_bpf_out *febo = (struct fuse_entry_bpf_out *)val;
+	struct fuse_entry_bpf *feb = container_of(febo, struct fuse_entry_bpf, out);
+	int err;
+
+	if (size && size != sizeof(*febo))
+		return -EINVAL;
+	err = fuse_copy_one(cs, val, size);
+	if (err)
+		return err;
+	if (size)
+		err = parse_fuse_entry_bpf(feb);
+	return err;
+}
+
 /* Copy request arguments to/from userspace buffer */
 static int fuse_copy_args(struct fuse_copy_state *cs, unsigned numargs,
 			  unsigned argpages, struct fuse_arg *args,
-			  int zeroing)
+			  int zeroing, unsigned is_lookup)
 {
 	int err = 0;
 	unsigned i;
@@ -1041,6 +1060,8 @@ static int fuse_copy_args(struct fuse_copy_state *cs, unsigned numargs,
 		struct fuse_arg *arg = &args[i];
 		if (i == numargs - 1 && argpages)
 			err = fuse_copy_pages(cs, arg->size, zeroing);
+		else if (i == numargs - 1 && is_lookup)
+			err = fuse_copy_lookup(cs, arg->value, arg->size);
 		else
 			err = fuse_copy_one(cs, arg->value, arg->size);
 	}
@@ -1318,7 +1339,7 @@ static ssize_t fuse_dev_do_read(struct fuse_dev *fud, struct file *file,
 	err = fuse_copy_one(cs, &req->in.h, sizeof(req->in.h));
 	if (!err)
 		err = fuse_copy_args(cs, args->in_numargs, args->in_pages,
-				     (struct fuse_arg *) args->in_args, 0);
+				     (struct fuse_arg *) args->in_args, 0, 0);
 	fuse_copy_finish(cs);
 	spin_lock(&fpq->lock);
 	clear_bit(FR_LOCKED, &req->flags);
@@ -1857,7 +1878,7 @@ static int copy_out_args(struct fuse_copy_state *cs, struct fuse_args *args,
 		lastarg->size -= diffsize;
 	}
 	return fuse_copy_args(cs, args->out_numargs, args->out_pages,
-			      args->out_args, args->page_zeroing);
+			      args->out_args, args->page_zeroing, args->is_lookup);
 }
 
 /*
@@ -1951,19 +1972,6 @@ static ssize_t fuse_dev_do_write(struct fuse_dev *fud,
 		path[req->args->out_args[0].size - 1] = 0;
 		req->out.h.error =
 			kern_path(path, 0, req->args->canonical_path);
-	}
-
-	if (!err && (req->in.h.opcode == FUSE_LOOKUP ||
-		     req->in.h.opcode == (FUSE_LOOKUP | FUSE_POSTFILTER)) &&
-		req->args->out_args[1].size == sizeof(struct fuse_entry_bpf_out)) {
-		struct fuse_entry_bpf_out *febo = (struct fuse_entry_bpf_out *)
-				req->args->out_args[1].value;
-		struct fuse_entry_bpf *feb = container_of(febo, struct fuse_entry_bpf, out);
-
-		if (febo->backing_action == FUSE_ACTION_REPLACE)
-			feb->backing_file = fget(febo->backing_fd);
-		if (febo->bpf_action == FUSE_ACTION_REPLACE)
-			feb->bpf_file = fget(febo->bpf_fd);
 	}
 
 	spin_lock(&fpq->lock);

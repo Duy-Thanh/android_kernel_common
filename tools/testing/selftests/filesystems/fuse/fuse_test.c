@@ -21,8 +21,8 @@
 #include <linux/capability.h>
 #include <linux/random.h>
 
-#include <include/uapi/linux/fuse.h>
-#include <include/uapi/linux/bpf.h>
+#include <uapi/linux/fuse.h>
+#include <uapi/linux/bpf.h>
 
 static const char *ft_src = "ft-src";
 static const char *ft_dst = "ft-dst";
@@ -836,6 +836,75 @@ out:
 	return result;
 }
 
+static int bpf_test_verifier(const char *mount_dir)
+{
+	int result = TEST_FAILURE;
+	int bpf_fd1 = -1;
+	int bpf_fd2 = -1;
+	int bpf_fd3 = -1;
+
+	TESTEQUAL(install_elf_bpf("test_bpf.bpf", "test_verify",
+				  &bpf_fd1, NULL, NULL), 0);
+	TESTEQUAL(install_elf_bpf_invalid("test_bpf.bpf", "test_verify_fail",
+				  &bpf_fd2, NULL, NULL), 0);
+	TESTEQUAL(install_elf_bpf_invalid("test_bpf.bpf", "test_verify_fail2",
+				  &bpf_fd3, NULL, NULL), 0);
+	result = TEST_SUCCESS;
+out:
+	close(bpf_fd1);
+	close(bpf_fd2);
+	close(bpf_fd3);
+	return result;
+}
+
+static int bpf_test_verifier_out_args(const char *mount_dir)
+{
+	int result = TEST_FAILURE;
+	int bpf_fd1 = -1;
+	int bpf_fd2 = -1;
+
+	TESTEQUAL(install_elf_bpf_invalid("test_bpf.bpf", "test_verify_fail3",
+				  &bpf_fd1, NULL, NULL), 0);
+	TESTEQUAL(install_elf_bpf_invalid("test_bpf.bpf", "test_verify_fail4",
+				  &bpf_fd2, NULL, NULL), 0);
+	result = TEST_SUCCESS;
+out:
+	close(bpf_fd1);
+	close(bpf_fd2);
+	return result;
+}
+
+static int bpf_test_verifier_packet_invalidation(const char *mount_dir)
+{
+	int result = TEST_FAILURE;
+	int bpf_fd1 = -1;
+	int bpf_fd2 = -1;
+
+	TESTEQUAL(install_elf_bpf_invalid("test_bpf.bpf", "test_verify_fail5",
+				  &bpf_fd1, NULL, NULL), 0);
+	TESTEQUAL(install_elf_bpf("test_bpf.bpf", "test_verify5",
+				  &bpf_fd2, NULL, NULL), 0);
+	result = TEST_SUCCESS;
+out:
+	close(bpf_fd1);
+	close(bpf_fd2);
+	return result;
+}
+
+static int bpf_test_verifier_nonsense_read(const char *mount_dir)
+{
+	int result = TEST_FAILURE;
+	int bpf_fd1 = -1;
+
+	TESTEQUAL(install_elf_bpf_invalid("test_bpf.bpf", "test_verify_fail6",
+				  &bpf_fd1, NULL, NULL), 0);
+	result = TEST_SUCCESS;
+out:
+	close(bpf_fd1);
+	return result;
+}
+
+
 static int bpf_test_mknod(const char *mount_dir)
 {
 	const char *file_name = "real";
@@ -1144,6 +1213,77 @@ static int bpf_test_set_backing(const char *mount_dir)
 			.bpf_fd = bpf_fd,
 			}));
 		read(fuse_dev, bytes_in, sizeof(bytes_in));
+		TESTSYSCALL(close(bpf_fd));
+		TESTSYSCALL(close(backing_fd));
+	FUSE_DONE
+
+	result = TEST_SUCCESS;
+out:
+	if (!pid)
+		exit(TEST_FAILURE);
+	close(fuse_dev);
+	close(fd);
+	umount(mount_dir);
+	return result;
+}
+
+static int bpf_test_set_backing_folder(const char *mount_dir)
+{
+	const char *backing_name = "backingdir";
+	const char *test_name = "testdir";
+	const char *names[] = {"file", ".", ".."};
+
+	int result = TEST_FAILURE;
+	int fuse_dev = -1;
+	int fd = -1;
+	int pid = -1;
+	int status;
+
+	TESTEQUAL(mount_fuse_no_init(mount_dir, -1, -1, &fuse_dev), 0);
+	FUSE_ACTION
+		DIR *dir = NULL;
+		struct dirent *dirent;
+		int i, j;
+
+		TEST(dir = s_opendir(s_path(s(mount_dir), s(test_name))), dir);
+
+		for (i = 0; i < ARRAY_SIZE(names); ++i) {
+			TEST(dirent = readdir(dir), dirent);
+
+			for (j = 0; j < ARRAY_SIZE(names); ++j)
+				if (names[j] &&
+				    strcmp(names[j], dirent->d_name) == 0) {
+					names[j] = NULL;
+					break;
+				}
+			TESTNE(j, ARRAY_SIZE(names));
+		}
+		TEST(dirent = readdir(dir), dirent == NULL);
+		TESTSYSCALL(closedir(dir));
+		dir = NULL;
+		TESTEQUAL(bpf_test_trace("readdir"), 0);
+		TESTSYSCALL(umount(mount_dir));
+	FUSE_DAEMON
+		int bpf_fd  = -1;
+		int backing_fd = -1;
+
+		TESTSYSCALL(s_mkdir(s_path(s(ft_src), s(backing_name)), 0777));
+		TESTERR(backing_fd = s_open(s_path(s(ft_src), s(backing_name)), O_RDONLY | O_CLOEXEC),
+					backing_fd != -1);
+		TESTSYSCALL(s_mkdir(s_pathn(3, s(ft_src), s(backing_name), s(names[0])), 0777));
+		TESTEQUAL(install_elf_bpf("test_bpf.bpf", "test_simple",
+					  &bpf_fd, NULL, NULL), 0);
+
+		TESTFUSEINIT();
+		TESTFUSELOOKUP(test_name, 0);
+
+		TESTFUSEOUT2(fuse_entry_out, ((struct fuse_entry_out) {0}),
+			     fuse_entry_bpf_out, ((struct fuse_entry_bpf_out) {
+			.backing_action = FUSE_ACTION_REPLACE,
+			.backing_fd = backing_fd,
+			.bpf_action = FUSE_ACTION_REPLACE,
+			.bpf_fd = bpf_fd,
+			}));
 		TESTSYSCALL(close(bpf_fd));
 		TESTSYSCALL(close(backing_fd));
 	FUSE_DONE
@@ -2090,6 +2230,7 @@ int main(int argc, char *argv[])
 		MAKE_TEST(bpf_test_xattr),
 		MAKE_TEST(bpf_test_redact_readdir),
 		MAKE_TEST(bpf_test_set_backing),
+		MAKE_TEST(bpf_test_set_backing_folder),
 		MAKE_TEST(bpf_test_remove_backing),
 		MAKE_TEST(bpf_test_dir_rename),
 		MAKE_TEST(bpf_test_file_rename),
@@ -2103,6 +2244,10 @@ int main(int argc, char *argv[])
 		MAKE_TEST(bpf_test_readdirplus_not_overriding_backing),
 		MAKE_TEST(bpf_test_no_readdirplus_without_nodeid),
 		MAKE_TEST(bpf_test_revalidate_handle_backing_fd),
+		MAKE_TEST(bpf_test_verifier),
+		MAKE_TEST(bpf_test_verifier_out_args),
+		MAKE_TEST(bpf_test_verifier_packet_invalidation),
+		MAKE_TEST(bpf_test_verifier_nonsense_read),
 		MAKE_TEST(bpf_test_lookup_postfilter),
 	};
 #undef MAKE_TEST

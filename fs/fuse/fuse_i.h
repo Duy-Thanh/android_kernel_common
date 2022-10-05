@@ -14,10 +14,11 @@
 #endif
 
 #include <linux/filter.h>
-#include <linux/pagemap.h>
 #include <linux/fuse.h>
 #include <linux/fs.h>
 #include <linux/mount.h>
+#include <linux/pagemap.h>
+#include <linux/statfs.h>
 #include <linux/wait.h>
 #include <linux/list.h>
 #include <linux/spinlock.h>
@@ -33,9 +34,8 @@
 #include <linux/pid_namespace.h>
 #include <linux/refcount.h>
 #include <linux/user_namespace.h>
-#include <linux/statfs.h>
-
-#define FUSE_SUPER_MAGIC 0x65735546
+#include <linux/bpf_fuse.h>
+#include <linux/magic.h>
 
 /** Default max number of pages that can be used in a single read request */
 #define FUSE_DEFAULT_MAX_PAGES_PER_REQ 32
@@ -91,7 +91,7 @@ static inline void get_fuse_backing_path(const struct dentry *d,
 	struct fuse_dentry *di = get_fuse_dentry(d);
 
 	if (!di) {
-		*path = (struct path) {};
+		*path = (struct path) { .mnt = 0, .dentry = 0 };
 		return;
 	}
 
@@ -326,24 +326,38 @@ struct fuse_page_desc {
 	unsigned int offset;
 };
 
+/* To deal with bpf pre and post filters in userspace calls, we must support
+ * passing the inputs and outputs as inputs, and we must have enough space in
+ * outputs to handle all of the inputs.
+ */
+#define FUSE_EXTENDED_MAX_ARGS_IN (FUSE_MAX_ARGS_IN + FUSE_MAX_ARGS_OUT)
+#if FUSE_MAX_ARGS_IN > FUSE_MAX_ARGS_OUT
+#define FUSE_EXTENDED_MAX_ARGS_OUT FUSE_MAX_ARGS_IN
+#else
+#define FUSE_EXTENDED_MAX_ARGS_OUT FUSE_MAX_ARGS_OUT
+#endif
+
 struct fuse_args {
 	uint64_t nodeid;
 	uint32_t opcode;
 	uint32_t error_in;
 	unsigned short in_numargs;
 	unsigned short out_numargs;
-	int force:1;
-	int noreply:1;
-	int nocreds:1;
-	int in_pages:1;
-	int out_pages:1;
-	int user_pages:1;
-	int out_argvar:1;
-	int page_zeroing:1;
-	int page_replace:1;
-	int may_block:1;
-	struct fuse_in_arg in_args[FUSE_MAX_IN_ARGS];
-	struct fuse_arg out_args[FUSE_MAX_OUT_ARGS];
+	bool force:1;
+	bool noreply:1;
+	bool nocreds:1;
+	bool in_pages:1;
+	bool out_pages:1;
+	bool user_pages:1;
+	bool out_argvar:1;
+	bool page_zeroing:1;
+	bool page_replace:1;
+	bool may_block:1;
+	bool is_filter:1;
+	bool is_lookup:1;
+	uint32_t ret;
+	struct fuse_in_arg in_args[FUSE_EXTENDED_MAX_ARGS_IN];
+	struct fuse_arg out_args[FUSE_EXTENDED_MAX_ARGS_OUT];
 	void (*end)(struct fuse_mount *fm, struct fuse_args *args, int error);
 
 	/* Path used for completing d_canonical_path */
@@ -579,8 +593,8 @@ struct fuse_fs_context {
 	bool no_control:1;
 	bool no_force_umount:1;
 	bool legacy_opts_show:1;
-	bool dax:1;
 	bool no_daemon:1;
+	bool dax:1;
 	unsigned int max_read;
 	unsigned int blksize;
 	const char *subtype;
@@ -976,7 +990,7 @@ extern const struct dentry_operations fuse_dentry_operations;
 extern const struct dentry_operations fuse_root_dentry_operations;
 
 /**
- * Get a filled-in inode
+ * Get a filled in inode
  */
 struct inode *fuse_iget_backing(struct super_block *sb,
 				u64 nodeid,
@@ -1023,6 +1037,7 @@ struct fuse_io_args {
 
 void fuse_read_args_fill(struct fuse_io_args *ia, struct file *file, loff_t pos,
 			 size_t count, int opcode);
+
 
 /**
  * Send OPEN or OPENDIR request
@@ -1328,7 +1343,6 @@ bool fuse_dax_check_alignment(struct fuse_conn *fc, unsigned int map_alignment);
 void fuse_dax_cancel_work(struct fuse_conn *fc);
 
 /* passthrough.c */
-void fuse_copyattr(struct file *dst_file, struct file *src_file);
 int fuse_passthrough_open(struct fuse_dev *fud, u32 lower_fd);
 int fuse_passthrough_setup(struct fuse_conn *fc, struct fuse_file *ff,
 			   struct fuse_open_out *openarg);
@@ -1340,6 +1354,7 @@ ssize_t fuse_passthrough_mmap(struct file *file, struct vm_area_struct *vma);
 /* backing.c */
 
 struct bpf_prog *fuse_get_bpf_prog(struct file *file);
+void fuse_get_backing_path(struct file *file, struct path *path);
 
 /*
  * Dummy io passed to fuse_bpf_backing when io operation needs no scratch space
@@ -1348,17 +1363,28 @@ struct fuse_dummy_io {
 	int unused;
 };
 
+struct fuse_entry_bpf {
+	struct fuse_entry_bpf_out out;
+
+	struct path backing_path;
+	struct bpf_prog *bpf;
+};
+
+int parse_fuse_entry_bpf(struct fuse_entry_bpf *feb);
+
 struct fuse_open_io {
 	struct fuse_open_in foi;
 	struct fuse_open_out foo;
 };
 
-int fuse_open_initialize(struct fuse_bpf_args *fa, struct fuse_open_io *foi,
-			 struct inode *inode, struct file *file, bool isdir);
-int fuse_open_backing(struct fuse_bpf_args *fa,
+int fuse_open_initialize_in(struct bpf_fuse_args *fa, struct fuse_open_io *foi,
+			    struct inode *inode, struct file *file, bool isdir);
+int fuse_open_initialize_out(struct bpf_fuse_args *fa, struct fuse_open_io *foi,
+			     struct inode *inode, struct file *file, bool isdir);
+int fuse_open_backing(struct bpf_fuse_args *fa, int *out,
 		      struct inode *inode, struct file *file, bool isdir);
-void *fuse_open_finalize(struct fuse_bpf_args *fa,
-		       struct inode *inode, struct file *file, bool isdir);
+int fuse_open_finalize(struct bpf_fuse_args *fa, int *out,
+			 struct inode *inode, struct file *file, bool isdir);
 
 struct fuse_create_open_io {
 	struct fuse_create_in fci;
@@ -1366,188 +1392,223 @@ struct fuse_create_open_io {
 	struct fuse_open_out foo;
 };
 
-int fuse_create_open_initialize(
-		struct fuse_bpf_args *fa, struct fuse_create_open_io *fcoi,
-		struct inode *dir, struct dentry *entry,
-		struct file *file, unsigned int flags, umode_t mode);
-int fuse_create_open_backing(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry,
-		struct file *file, unsigned int flags, umode_t mode);
-void *fuse_create_open_finalize(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry,
-		struct file *file, unsigned int flags, umode_t mode);
+int fuse_create_open_initialize_in(struct bpf_fuse_args *fa, struct fuse_create_open_io *fcoi,
+				   struct inode *dir, struct dentry *entry,
+				   struct file *file, unsigned int flags, umode_t mode);
+int fuse_create_open_initialize_out(struct bpf_fuse_args *fa, struct fuse_create_open_io *fcoi,
+				    struct inode *dir, struct dentry *entry,
+				    struct file *file, unsigned int flags, umode_t mode);
+int fuse_create_open_backing(struct bpf_fuse_args *fa, int *out,
+			     struct inode *dir, struct dentry *entry,
+			     struct file *file, unsigned int flags, umode_t mode);
+int fuse_create_open_finalize(struct bpf_fuse_args *fa, int *out,
+			      struct inode *dir, struct dentry *entry,
+			      struct file *file, unsigned int flags, umode_t mode);
 
-int fuse_mknod_initialize(
-		struct fuse_bpf_args *fa, struct fuse_mknod_in *fmi,
-		struct inode *dir, struct dentry *entry, umode_t mode, dev_t rdev);
-int fuse_mknod_backing(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry, umode_t mode, dev_t rdev);
-void *fuse_mknod_finalize(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry, umode_t mode, dev_t rdev);
+int fuse_mknod_initialize_in(struct bpf_fuse_args *fa, struct fuse_mknod_in *fmi,
+			     struct inode *dir, struct dentry *entry, umode_t mode, dev_t rdev);
+int fuse_mknod_initialize_out(struct bpf_fuse_args *fa, struct fuse_mknod_in *fmi,
+			      struct inode *dir, struct dentry *entry, umode_t mode, dev_t rdev);
+int fuse_mknod_backing(struct bpf_fuse_args *fa, int *out,
+		       struct inode *dir, struct dentry *entry, umode_t mode, dev_t rdev);
+int fuse_mknod_finalize(struct bpf_fuse_args *fa, int *out,
+			struct inode *dir, struct dentry *entry, umode_t mode, dev_t rdev);
 
-int fuse_mkdir_initialize(
-		struct fuse_bpf_args *fa, struct fuse_mkdir_in *fmi,
-		struct inode *dir, struct dentry *entry, umode_t mode);
-int fuse_mkdir_backing(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry, umode_t mode);
-void *fuse_mkdir_finalize(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry, umode_t mode);
+int fuse_mkdir_initialize_in(struct bpf_fuse_args *fa, struct fuse_mkdir_in *fmi,
+			     struct inode *dir, struct dentry *entry, umode_t mode);
+int fuse_mkdir_initialize_out(struct bpf_fuse_args *fa, struct fuse_mkdir_in *fmi,
+			      struct inode *dir, struct dentry *entry, umode_t mode);
+int fuse_mkdir_backing(struct bpf_fuse_args *fa, int *out,
+		       struct inode *dir, struct dentry *entry, umode_t mode);
+int fuse_mkdir_finalize(struct bpf_fuse_args *fa, int *out,
+			struct inode *dir, struct dentry *entry, umode_t mode);
 
-int fuse_rmdir_initialize(
-		struct fuse_bpf_args *fa, struct fuse_dummy_io *fmi,
-		struct inode *dir, struct dentry *entry);
-int fuse_rmdir_backing(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry);
-void *fuse_rmdir_finalize(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry);
+int fuse_rmdir_initialize_in(struct bpf_fuse_args *fa, struct fuse_dummy_io *fmi,
+			     struct inode *dir, struct dentry *entry);
+int fuse_rmdir_initialize_out(struct bpf_fuse_args *fa, struct fuse_dummy_io *fmi,
+			      struct inode *dir, struct dentry *entry);
+int fuse_rmdir_backing(struct bpf_fuse_args *fa, int *out, struct inode *dir, struct dentry *entry);
+int fuse_rmdir_finalize(struct bpf_fuse_args *fa, int *out,
+			struct inode *dir, struct dentry *entry);
 
-int fuse_rename2_initialize(struct fuse_bpf_args *fa, struct fuse_rename2_in *fri,
-			    struct inode *olddir, struct dentry *oldent,
-			    struct inode *newdir, struct dentry *newent,
-			    unsigned int flags);
-int fuse_rename2_backing(struct fuse_bpf_args *fa,
+int fuse_rename2_initialize_in(struct bpf_fuse_args *fa, struct fuse_rename2_in *fri,
+			       struct inode *olddir, struct dentry *oldent,
+			       struct inode *newdir, struct dentry *newent,
+			       unsigned int flags);
+int fuse_rename2_initialize_out(struct bpf_fuse_args *fa, struct fuse_rename2_in *fri,
+				struct inode *olddir, struct dentry *oldent,
+				struct inode *newdir, struct dentry *newent,
+				unsigned int flags);
+int fuse_rename2_backing(struct bpf_fuse_args *fa, int *out,
 			 struct inode *olddir, struct dentry *oldent,
 			 struct inode *newdir, struct dentry *newent,
 			 unsigned int flags);
-void *fuse_rename2_finalize(struct fuse_bpf_args *fa,
-			    struct inode *olddir, struct dentry *oldent,
-			    struct inode *newdir, struct dentry *newent,
-			    unsigned int flags);
+int fuse_rename2_finalize(struct bpf_fuse_args *fa, int *out,
+			  struct inode *olddir, struct dentry *oldent,
+			  struct inode *newdir, struct dentry *newent,
+			  unsigned int flags);
 
-int fuse_rename_initialize(struct fuse_bpf_args *fa, struct fuse_rename_in *fri,
-			   struct inode *olddir, struct dentry *oldent,
-			   struct inode *newdir, struct dentry *newent);
-int fuse_rename_backing(struct fuse_bpf_args *fa,
+int fuse_rename_initialize_in(struct bpf_fuse_args *fa, struct fuse_rename_in *fri,
+			      struct inode *olddir, struct dentry *oldent,
+			      struct inode *newdir, struct dentry *newent);
+int fuse_rename_initialize_out(struct bpf_fuse_args *fa, struct fuse_rename_in *fri,
+			       struct inode *olddir, struct dentry *oldent,
+			       struct inode *newdir, struct dentry *newent);
+int fuse_rename_backing(struct bpf_fuse_args *fa, int *out,
 			struct inode *olddir, struct dentry *oldent,
 			struct inode *newdir, struct dentry *newent);
-void *fuse_rename_finalize(struct fuse_bpf_args *fa,
-			   struct inode *olddir, struct dentry *oldent,
-			   struct inode *newdir, struct dentry *newent);
+int fuse_rename_finalize(struct bpf_fuse_args *fa, int *out,
+			 struct inode *olddir, struct dentry *oldent,
+			 struct inode *newdir, struct dentry *newent);
 
-int fuse_unlink_initialize(
-		struct fuse_bpf_args *fa, struct fuse_dummy_io *fmi,
-		struct inode *dir, struct dentry *entry);
-int fuse_unlink_backing(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry);
-void *fuse_unlink_finalize(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry);
+int fuse_unlink_initialize_in(struct bpf_fuse_args *fa, struct fuse_dummy_io *fmi,
+			      struct inode *dir, struct dentry *entry);
+int fuse_unlink_initialize_out(struct bpf_fuse_args *fa, struct fuse_dummy_io *fmi,
+			       struct inode *dir, struct dentry *entry);
+int fuse_unlink_backing(struct bpf_fuse_args *fa, int *out,
+			struct inode *dir, struct dentry *entry);
+int fuse_unlink_finalize(struct bpf_fuse_args *fa, int *out,
+			 struct inode *dir, struct dentry *entry);
 
-int fuse_link_initialize(struct fuse_bpf_args *fa, struct fuse_link_in *fli,
-			  struct dentry *entry, struct inode *dir,
-			  struct dentry *newent);
-int fuse_link_backing(struct fuse_bpf_args *fa, struct dentry *entry,
+int fuse_link_initialize_in(struct bpf_fuse_args *fa, struct fuse_link_in *fli,
+			    struct dentry *entry, struct inode *dir,
+			    struct dentry *newent);
+int fuse_link_initialize_out(struct bpf_fuse_args *fa, struct fuse_link_in *fli,
+			     struct dentry *entry, struct inode *dir,
+			     struct dentry *newent);
+int fuse_link_backing(struct bpf_fuse_args *fa, int *out, struct dentry *entry,
 		      struct inode *dir, struct dentry *newent);
-void *fuse_link_finalize(struct fuse_bpf_args *fa, struct dentry *entry,
-			 struct inode *dir, struct dentry *newent);
+int fuse_link_finalize(struct bpf_fuse_args *fa, int *out, struct dentry *entry,
+		       struct inode *dir, struct dentry *newent);
 
-int fuse_release_initialize(struct fuse_bpf_args *fa, struct fuse_release_in *fri,
-			    struct inode *inode, struct file *file);
-int fuse_releasedir_initialize(struct fuse_bpf_args *fa,
-			struct fuse_release_in *fri,
-			struct inode *inode, struct file *file);
-int fuse_release_backing(struct fuse_bpf_args *fa,
+int fuse_release_initialize_in(struct bpf_fuse_args *fa, struct fuse_release_in *fri,
+			       struct inode *inode, struct file *file);
+int fuse_release_initialize_out(struct bpf_fuse_args *fa, struct fuse_release_in *fri,
+				struct inode *inode, struct file *file);
+int fuse_releasedir_initialize_in(struct bpf_fuse_args *fa,
+				  struct fuse_release_in *fri,
+				  struct inode *inode, struct file *file);
+int fuse_releasedir_initialize_out(struct bpf_fuse_args *fa,
+				   struct fuse_release_in *fri,
+				   struct inode *inode, struct file *file);
+int fuse_release_backing(struct bpf_fuse_args *fa, int *out,
 			 struct inode *inode, struct file *file);
-void *fuse_release_finalize(struct fuse_bpf_args *fa,
+int fuse_release_finalize(struct bpf_fuse_args *fa, int *out,
 			    struct inode *inode, struct file *file);
 
-int fuse_flush_initialize(struct fuse_bpf_args *fa, struct fuse_flush_in *ffi,
-			  struct file *file, fl_owner_t id);
-int fuse_flush_backing(struct fuse_bpf_args *fa, struct file *file, fl_owner_t id);
-void *fuse_flush_finalize(struct fuse_bpf_args *fa,
-			  struct file *file, fl_owner_t id);
+int fuse_flush_initialize_in(struct bpf_fuse_args *fa, struct fuse_flush_in *ffi,
+			     struct file *file, fl_owner_t id);
+int fuse_flush_initialize_out(struct bpf_fuse_args *fa, struct fuse_flush_in *ffi,
+			      struct file *file, fl_owner_t id);
+int fuse_flush_backing(struct bpf_fuse_args *fa, int *out, struct file *file, fl_owner_t id);
+int fuse_flush_finalize(struct bpf_fuse_args *fa, int *out,
+			struct file *file, fl_owner_t id);
 
 struct fuse_lseek_io {
 	struct fuse_lseek_in fli;
 	struct fuse_lseek_out flo;
 };
 
-int fuse_lseek_initialize(struct fuse_bpf_args *fa, struct fuse_lseek_io *fli,
-			  struct file *file, loff_t offset, int whence);
-int fuse_lseek_backing(struct fuse_bpf_args *fa, struct file *file, loff_t offset, int whence);
-void *fuse_lseek_finalize(struct fuse_bpf_args *fa, struct file *file, loff_t offset, int whence);
+int fuse_lseek_initialize_in(struct bpf_fuse_args *fa, struct fuse_lseek_io *fli,
+			     struct file *file, loff_t offset, int whence);
+int fuse_lseek_initialize_out(struct bpf_fuse_args *fa, struct fuse_lseek_io *fli,
+			      struct file *file, loff_t offset, int whence);
+int fuse_lseek_backing(struct bpf_fuse_args *fa, loff_t *out, struct file *file,
+		       loff_t offset, int whence);
+int fuse_lseek_finalize(struct bpf_fuse_args *fa, loff_t *out, struct file *file,
+			loff_t offset, int whence);
 
 struct fuse_copy_file_range_io {
 	struct fuse_copy_file_range_in fci;
 	struct fuse_write_out fwo;
 };
 
-int fuse_copy_file_range_initialize(struct fuse_bpf_args *fa,
-				   struct fuse_copy_file_range_io *fcf,
-				   struct file *file_in, loff_t pos_in,
-				   struct file *file_out, loff_t pos_out,
-				   size_t len, unsigned int flags);
-int fuse_copy_file_range_backing(struct fuse_bpf_args *fa,
+int fuse_copy_file_range_initialize_in(struct bpf_fuse_args *fa,
+				       struct fuse_copy_file_range_io *fcf,
+				       struct file *file_in, loff_t pos_in,
+				       struct file *file_out, loff_t pos_out,
+				       size_t len, unsigned int flags);
+int fuse_copy_file_range_initialize_out(struct bpf_fuse_args *fa,
+					struct fuse_copy_file_range_io *fcf,
+					struct file *file_in, loff_t pos_in,
+					struct file *file_out, loff_t pos_out,
+					size_t len, unsigned int flags);
+int fuse_copy_file_range_backing(struct bpf_fuse_args *fa, ssize_t *out,
 				 struct file *file_in, loff_t pos_in,
 				 struct file *file_out, loff_t pos_out,
 				 size_t len, unsigned int flags);
-void *fuse_copy_file_range_finalize(struct fuse_bpf_args *fa,
-				    struct file *file_in, loff_t pos_in,
-				    struct file *file_out, loff_t pos_out,
-				    size_t len, unsigned int flags);
+int fuse_copy_file_range_finalize(struct bpf_fuse_args *fa, ssize_t *out,
+				  struct file *file_in, loff_t pos_in,
+				  struct file *file_out, loff_t pos_out,
+				  size_t len, unsigned int flags);
 
-int fuse_fsync_initialize(struct fuse_bpf_args *fa, struct fuse_fsync_in *ffi,
-		   struct file *file, loff_t start, loff_t end, int datasync);
-int fuse_fsync_backing(struct fuse_bpf_args *fa,
-		   struct file *file, loff_t start, loff_t end, int datasync);
-void *fuse_fsync_finalize(struct fuse_bpf_args *fa,
-		   struct file *file, loff_t start, loff_t end, int datasync);
-int fuse_dir_fsync_initialize(struct fuse_bpf_args *fa, struct fuse_fsync_in *ffi,
-		   struct file *file, loff_t start, loff_t end, int datasync);
+int fuse_fsync_initialize_in(struct bpf_fuse_args *fa, struct fuse_fsync_in *ffi,
+			     struct file *file, loff_t start, loff_t end, int datasync);
+int fuse_fsync_initialize_out(struct bpf_fuse_args *fa, struct fuse_fsync_in *ffi,
+			      struct file *file, loff_t start, loff_t end, int datasync);
+int fuse_fsync_backing(struct bpf_fuse_args *fa, int *out,
+		       struct file *file, loff_t start, loff_t end, int datasync);
+int fuse_fsync_finalize(struct bpf_fuse_args *fa, int *out,
+			struct file *file, loff_t start, loff_t end, int datasync);
+int fuse_dir_fsync_initialize_in(struct bpf_fuse_args *fa, struct fuse_fsync_in *ffi,
+				 struct file *file, loff_t start, loff_t end, int datasync);
+int fuse_dir_fsync_initialize_out(struct bpf_fuse_args *fa, struct fuse_fsync_in *ffi,
+				  struct file *file, loff_t start, loff_t end, int datasync);
 
 struct fuse_getxattr_io {
 	struct fuse_getxattr_in fgi;
 	struct fuse_getxattr_out fgo;
 };
 
-int fuse_getxattr_initialize(
-		struct fuse_bpf_args *fa, struct fuse_getxattr_io *fgio,
-		struct dentry *dentry, const char *name, void *value,
-		size_t size);
-int fuse_getxattr_backing(
-		struct fuse_bpf_args *fa,
-		struct dentry *dentry, const char *name, void *value,
-		size_t size);
-void *fuse_getxattr_finalize(
-		struct fuse_bpf_args *fa,
-		struct dentry *dentry, const char *name, void *value,
-		size_t size);
+int fuse_getxattr_initialize_in(struct bpf_fuse_args *fa, struct fuse_getxattr_io *fgio,
+				struct dentry *dentry, const char *name, void *value,
+				size_t size);
+int fuse_getxattr_initialize_out(struct bpf_fuse_args *fa, struct fuse_getxattr_io *fgio,
+				 struct dentry *dentry, const char *name, void *value,
+				 size_t size);
+int fuse_getxattr_backing(struct bpf_fuse_args *fa, int *out,
+			  struct dentry *dentry, const char *name, void *value,
+			  size_t size);
+int fuse_getxattr_finalize(struct bpf_fuse_args *fa, int *out,
+			   struct dentry *dentry, const char *name, void *value,
+			   size_t size);
 
-int fuse_listxattr_initialize(struct fuse_bpf_args *fa,
-			       struct fuse_getxattr_io *fgio,
-			       struct dentry *dentry, char *list, size_t size);
-int fuse_listxattr_backing(struct fuse_bpf_args *fa, struct dentry *dentry,
+int fuse_listxattr_initialize_in(struct bpf_fuse_args *fa,
+				 struct fuse_getxattr_io *fgio,
+				 struct dentry *dentry, char *list, size_t size);
+int fuse_listxattr_initialize_out(struct bpf_fuse_args *fa,
+				  struct fuse_getxattr_io *fgio,
+				  struct dentry *dentry, char *list, size_t size);
+int fuse_listxattr_backing(struct bpf_fuse_args *fa, ssize_t *out, struct dentry *dentry,
 			   char *list, size_t size);
-void *fuse_listxattr_finalize(struct fuse_bpf_args *fa, struct dentry *dentry,
-			      char *list, size_t size);
+int fuse_listxattr_finalize(struct bpf_fuse_args *fa, ssize_t *out, struct dentry *dentry,
+			    char *list, size_t size);
 
-int fuse_setxattr_initialize(struct fuse_bpf_args *fa,
-			     struct fuse_setxattr_in *fsxi,
-			     struct dentry *dentry, const char *name,
-			     const void *value, size_t size, int flags);
-int fuse_setxattr_backing(struct fuse_bpf_args *fa, struct dentry *dentry,
+int fuse_setxattr_initialize_in(struct bpf_fuse_args *fa,
+				struct fuse_setxattr_in *fsxi,
+				struct dentry *dentry, const char *name,
+				const void *value, size_t size, int flags);
+int fuse_setxattr_initialize_out(struct bpf_fuse_args *fa,
+				 struct fuse_setxattr_in *fsxi,
+				 struct dentry *dentry, const char *name,
+				 const void *value, size_t size, int flags);
+int fuse_setxattr_backing(struct bpf_fuse_args *fa, int *out, struct dentry *dentry,
 			  const char *name, const void *value, size_t size,
 			  int flags);
-void *fuse_setxattr_finalize(struct fuse_bpf_args *fa, struct dentry *dentry,
-			     const char *name, const void *value, size_t size,
-			     int flags);
+int fuse_setxattr_finalize(struct bpf_fuse_args *fa, int *out, struct dentry *dentry,
+			   const char *name, const void *value, size_t size,
+			   int flags);
 
-int fuse_removexattr_initialize(struct fuse_bpf_args *fa,
-				struct fuse_dummy_io *unused,
-				struct dentry *dentry, const char *name);
-int fuse_removexattr_backing(struct fuse_bpf_args *fa,
+int fuse_removexattr_initialize_in(struct bpf_fuse_args *fa,
+				   struct fuse_dummy_io *unused,
+				   struct dentry *dentry, const char *name);
+int fuse_removexattr_initialize_out(struct bpf_fuse_args *fa,
+				    struct fuse_dummy_io *unused,
+				    struct dentry *dentry, const char *name);
+int fuse_removexattr_backing(struct bpf_fuse_args *fa, int *out,
 			     struct dentry *dentry, const char *name);
-void *fuse_removexattr_finalize(struct fuse_bpf_args *fa,
-				struct dentry *dentry, const char *name);
+int fuse_removexattr_finalize(struct bpf_fuse_args *fa, int *out,
+			      struct dentry *dentry, const char *name);
 
 struct fuse_read_iter_out {
 	uint64_t ret;
@@ -1557,13 +1618,14 @@ struct fuse_file_read_iter_io {
 	struct fuse_read_iter_out frio;
 };
 
-int fuse_file_read_iter_initialize(
-		struct fuse_bpf_args *fa, struct fuse_file_read_iter_io *fri,
-		struct kiocb *iocb, struct iov_iter *to);
-int fuse_file_read_iter_backing(struct fuse_bpf_args *fa,
-		struct kiocb *iocb, struct iov_iter *to);
-void *fuse_file_read_iter_finalize(struct fuse_bpf_args *fa,
-		struct kiocb *iocb, struct iov_iter *to);
+int fuse_file_read_iter_initialize_in(struct bpf_fuse_args *fa, struct fuse_file_read_iter_io *fri,
+				      struct kiocb *iocb, struct iov_iter *to);
+int fuse_file_read_iter_initialize_out(struct bpf_fuse_args *fa, struct fuse_file_read_iter_io *fri,
+				       struct kiocb *iocb, struct iov_iter *to);
+int fuse_file_read_iter_backing(struct bpf_fuse_args *fa, ssize_t *out,
+				struct kiocb *iocb, struct iov_iter *to);
+int fuse_file_read_iter_finalize(struct bpf_fuse_args *fa, ssize_t *out,
+				 struct kiocb *iocb, struct iov_iter *to);
 
 struct fuse_write_iter_out {
 	uint64_t ret;
@@ -1574,124 +1636,149 @@ struct fuse_file_write_iter_io {
 	struct fuse_write_iter_out fwio;
 };
 
-int fuse_file_write_iter_initialize(
-		struct fuse_bpf_args *fa, struct fuse_file_write_iter_io *fwio,
-		struct kiocb *iocb, struct iov_iter *from);
-int fuse_file_write_iter_backing(struct fuse_bpf_args *fa,
-		struct kiocb *iocb, struct iov_iter *from);
-void *fuse_file_write_iter_finalize(struct fuse_bpf_args *fa,
-		struct kiocb *iocb, struct iov_iter *from);
+int fuse_file_write_iter_initialize_in(struct bpf_fuse_args *fa,
+				       struct fuse_file_write_iter_io *fwio,
+				       struct kiocb *iocb, struct iov_iter *from);
+int fuse_file_write_iter_initialize_out(struct bpf_fuse_args *fa,
+					struct fuse_file_write_iter_io *fwio,
+					struct kiocb *iocb, struct iov_iter *from);
+int fuse_file_write_iter_backing(struct bpf_fuse_args *fa, ssize_t *out,
+				 struct kiocb *iocb, struct iov_iter *from);
+int fuse_file_write_iter_finalize(struct bpf_fuse_args *fa, ssize_t *out,
+				  struct kiocb *iocb, struct iov_iter *from);
 
 ssize_t fuse_backing_mmap(struct file *file, struct vm_area_struct *vma);
 
-int fuse_file_fallocate_initialize(struct fuse_bpf_args *fa,
-		struct fuse_fallocate_in *ffi,
-		struct file *file, int mode, loff_t offset, loff_t length);
-int fuse_file_fallocate_backing(struct fuse_bpf_args *fa,
-		struct file *file, int mode, loff_t offset, loff_t length);
-void *fuse_file_fallocate_finalize(struct fuse_bpf_args *fa,
-		struct file *file, int mode, loff_t offset, loff_t length);
+int fuse_file_fallocate_initialize_in(struct bpf_fuse_args *fa,
+				      struct fuse_fallocate_in *ffi,
+				      struct file *file, int mode, loff_t offset, loff_t length);
+int fuse_file_fallocate_initialize_out(struct bpf_fuse_args *fa,
+				       struct fuse_fallocate_in *ffi,
+				       struct file *file, int mode, loff_t offset, loff_t length);
+int fuse_file_fallocate_backing(struct bpf_fuse_args *fa, int *out,
+				struct file *file, int mode, loff_t offset, loff_t length);
+int fuse_file_fallocate_finalize(struct bpf_fuse_args *fa, int *out,
+				 struct file *file, int mode, loff_t offset, loff_t length);
 
 struct fuse_lookup_io {
 	struct fuse_entry_out feo;
 	struct fuse_entry_bpf feb;
 };
 
-int fuse_handle_backing(struct fuse_entry_bpf *feb, struct inode **backing_inode,
-			struct path *backing_path);
+int fuse_handle_backing(struct fuse_entry_bpf *feb, struct path *backing_path);
 int fuse_handle_bpf_prog(struct fuse_entry_bpf *feb, struct inode *parent,
 			 struct bpf_prog **bpf);
 
-int fuse_lookup_initialize(struct fuse_bpf_args *fa, struct fuse_lookup_io *feo,
-	       struct inode *dir, struct dentry *entry, unsigned int flags);
-int fuse_lookup_backing(struct fuse_bpf_args *fa, struct inode *dir,
-			  struct dentry *entry, unsigned int flags);
-struct dentry *fuse_lookup_finalize(struct fuse_bpf_args *fa, struct inode *dir,
-			   struct dentry *entry, unsigned int flags);
+int fuse_lookup_initialize_in(struct bpf_fuse_args *fa, struct fuse_lookup_io *feo,
+			      struct inode *dir, struct dentry *entry, unsigned int flags);
+int fuse_lookup_initialize_out(struct bpf_fuse_args *fa, struct fuse_lookup_io *feo,
+			       struct inode *dir, struct dentry *entry, unsigned int flags);
+int fuse_lookup_backing(struct bpf_fuse_args *fa, struct dentry **out, struct inode *dir,
+			struct dentry *entry, unsigned int flags);
+int fuse_lookup_finalize(struct bpf_fuse_args *fa, struct dentry **out,
+			 struct inode *dir, struct dentry *entry, unsigned int flags);
 int fuse_revalidate_backing(struct dentry *entry, unsigned int flags);
 
-int fuse_canonical_path_initialize(struct fuse_bpf_args *fa,
-				   struct fuse_dummy_io *fdi,
-				   const struct path *path,
-				   struct path *canonical_path);
-int fuse_canonical_path_backing(struct fuse_bpf_args *fa, const struct path *path,
+int fuse_canonical_path_initialize_in(struct bpf_fuse_args *fa,
+				      struct fuse_dummy_io *fdi,
+				      const struct path *path,
+				      struct path *canonical_path);
+int fuse_canonical_path_initialize_out(struct bpf_fuse_args *fa,
+				       struct fuse_dummy_io *fdi,
+				       const struct path *path,
+				       struct path *canonical_path);
+int fuse_canonical_path_backing(struct bpf_fuse_args *fa, int *out, const struct path *path,
 				struct path *canonical_path);
-void *fuse_canonical_path_finalize(struct fuse_bpf_args *fa,
-				   const struct path *path,
-				   struct path *canonical_path);
+int fuse_canonical_path_finalize(struct bpf_fuse_args *fa, int *out,
+				 const struct path *path,
+				 struct path *canonical_path);
 
 struct fuse_getattr_io {
 	struct fuse_getattr_in fgi;
 	struct fuse_attr_out fao;
 };
-int fuse_getattr_initialize(struct fuse_bpf_args *fa, struct fuse_getattr_io *fgio,
-			const struct dentry *entry, struct kstat *stat,
-			u32 request_mask, unsigned int flags);
-int fuse_getattr_backing(struct fuse_bpf_args *fa,
-			const struct dentry *entry, struct kstat *stat,
-			u32 request_mask, unsigned int flags);
-void *fuse_getattr_finalize(struct fuse_bpf_args *fa,
-			const struct dentry *entry, struct kstat *stat,
-			u32 request_mask, unsigned int flags);
+int fuse_getattr_initialize_in(struct bpf_fuse_args *fa, struct fuse_getattr_io *fgio,
+			       const struct dentry *entry, struct kstat *stat,
+			       u32 request_mask, unsigned int flags);
+int fuse_getattr_initialize_out(struct bpf_fuse_args *fa, struct fuse_getattr_io *fgio,
+				const struct dentry *entry, struct kstat *stat,
+				u32 request_mask, unsigned int flags);
+int fuse_getattr_backing(struct bpf_fuse_args *fa, int *out,
+			 const struct dentry *entry, struct kstat *stat,
+			 u32 request_mask, unsigned int flags);
+int fuse_getattr_finalize(struct bpf_fuse_args *fa, int *out,
+			  const struct dentry *entry, struct kstat *stat,
+			  u32 request_mask, unsigned int flags);
 
 struct fuse_setattr_io {
 	struct fuse_setattr_in fsi;
 	struct fuse_attr_out fao;
 };
 
-int fuse_setattr_initialize(struct fuse_bpf_args *fa, struct fuse_setattr_io *fsi,
-		struct dentry *dentry, struct iattr *attr, struct file *file);
-int fuse_setattr_backing(struct fuse_bpf_args *fa,
-		struct dentry *dentry, struct iattr *attr, struct file *file);
-void *fuse_setattr_finalize(struct fuse_bpf_args *fa,
-		struct dentry *dentry, struct iattr *attr, struct file *file);
+int fuse_setattr_initialize_in(struct bpf_fuse_args *fa, struct fuse_setattr_io *fsi,
+			       struct dentry *dentry, struct iattr *attr, struct file *file);
+int fuse_setattr_initialize_out(struct bpf_fuse_args *fa, struct fuse_setattr_io *fsi,
+				struct dentry *dentry, struct iattr *attr, struct file *file);
+int fuse_setattr_backing(struct bpf_fuse_args *fa, int *out,
+			 struct dentry *dentry, struct iattr *attr, struct file *file);
+int fuse_setattr_finalize(struct bpf_fuse_args *fa, int *out,
+			  struct dentry *dentry, struct iattr *attr, struct file *file);
 
-int fuse_statfs_initialize(struct fuse_bpf_args *fa, struct fuse_statfs_out *fso,
-		struct dentry *dentry, struct kstatfs *buf);
-int fuse_statfs_backing(struct fuse_bpf_args *fa,
-		struct dentry *dentry, struct kstatfs *buf);
-void *fuse_statfs_finalize(struct fuse_bpf_args *fa,
-		struct dentry *dentry, struct kstatfs *buf);
+int fuse_statfs_initialize_in(struct bpf_fuse_args *fa, struct fuse_statfs_out *fso,
+			      struct dentry *dentry, struct kstatfs *buf);
+int fuse_statfs_initialize_out(struct bpf_fuse_args *fa, struct fuse_statfs_out *fso,
+			       struct dentry *dentry, struct kstatfs *buf);
+int fuse_statfs_backing(struct bpf_fuse_args *fa, int *out,
+			struct dentry *dentry, struct kstatfs *buf);
+int fuse_statfs_finalize(struct bpf_fuse_args *fa, int *out,
+			 struct dentry *dentry, struct kstatfs *buf);
 
-int fuse_get_link_initialize(struct fuse_bpf_args *fa, struct fuse_dummy_io *dummy,
-		struct inode *inode, struct dentry *dentry,
-		struct delayed_call *callback, const char **out);
-int fuse_get_link_backing(struct fuse_bpf_args *fa,
-		struct inode *inode, struct dentry *dentry,
-		struct delayed_call *callback, const char **out);
-void *fuse_get_link_finalize(struct fuse_bpf_args *fa,
-		struct inode *inode, struct dentry *dentry,
-		struct delayed_call *callback, const char **out);
+int fuse_get_link_initialize_in(struct bpf_fuse_args *fa, struct fuse_dummy_io *dummy,
+				struct inode *inode, struct dentry *dentry,
+				struct delayed_call *callback);
+int fuse_get_link_initialize_out(struct bpf_fuse_args *fa, struct fuse_dummy_io *dummy,
+				 struct inode *inode, struct dentry *dentry,
+				 struct delayed_call *callback);
+int fuse_get_link_backing(struct bpf_fuse_args *fa, const char **out,
+			  struct inode *inode, struct dentry *dentry,
+			  struct delayed_call *callback);
+int fuse_get_link_finalize(struct bpf_fuse_args *fa, const char **out,
+			   struct inode *inode, struct dentry *dentry,
+			   struct delayed_call *callback);
 
-int fuse_symlink_initialize(
-		struct fuse_bpf_args *fa, struct fuse_dummy_io *unused,
-		struct inode *dir, struct dentry *entry, const char *link, int len);
-int fuse_symlink_backing(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry, const char *link, int len);
-void *fuse_symlink_finalize(
-		struct fuse_bpf_args *fa,
-		struct inode *dir, struct dentry *entry, const char *link, int len);
+int fuse_symlink_initialize_in(struct bpf_fuse_args *fa, struct fuse_dummy_io *unused,
+			       struct inode *dir, struct dentry *entry, const char *link, int len);
+int fuse_symlink_initialize_out(struct bpf_fuse_args *fa, struct fuse_dummy_io *unused,
+				struct inode *dir, struct dentry *entry, const char *link, int len);
+int fuse_symlink_backing(struct bpf_fuse_args *fa, int *out,
+			 struct inode *dir, struct dentry *entry, const char *link, int len);
+int fuse_symlink_finalize(struct bpf_fuse_args *fa, int *out,
+			  struct inode *dir, struct dentry *entry, const char *link, int len);
 
 struct fuse_read_io {
 	struct fuse_read_in fri;
 	struct fuse_read_out fro;
 };
 
-int fuse_readdir_initialize(struct fuse_bpf_args *fa, struct fuse_read_io *frio,
-			    struct file *file, struct dir_context *ctx,
-			    bool *force_again, bool *allow_force, bool is_continued);
-int fuse_readdir_backing(struct fuse_bpf_args *fa,
+int fuse_readdir_initialize_in(struct bpf_fuse_args *fa, struct fuse_read_io *frio,
+			       struct file *file, struct dir_context *ctx,
+			       bool *force_again, bool *allow_force, bool is_continued);
+int fuse_readdir_initialize_out(struct bpf_fuse_args *fa, struct fuse_read_io *frio,
+				struct file *file, struct dir_context *ctx,
+				bool *force_again, bool *allow_force, bool is_continued);
+int fuse_readdir_backing(struct bpf_fuse_args *fa, int *out,
 			 struct file *file, struct dir_context *ctx,
 			 bool *force_again, bool *allow_force, bool is_continued);
-void *fuse_readdir_finalize(struct fuse_bpf_args *fa,
+int fuse_readdir_finalize(struct bpf_fuse_args *fa, int *out,
 			    struct file *file, struct dir_context *ctx,
 			    bool *force_again, bool *allow_force, bool is_continued);
 
-int fuse_access_initialize(struct fuse_bpf_args *fa, struct fuse_access_in *fai,
-			   struct inode *inode, int mask);
-int fuse_access_backing(struct fuse_bpf_args *fa, struct inode *inode, int mask);
-void *fuse_access_finalize(struct fuse_bpf_args *fa, struct inode *inode, int mask);
+int fuse_access_initialize_in(struct bpf_fuse_args *fa, struct fuse_access_in *fai,
+			      struct inode *inode, int mask);
+int fuse_access_initialize_out(struct bpf_fuse_args *fa, struct fuse_access_in *fai,
+			       struct inode *inode, int mask);
+int fuse_access_backing(struct bpf_fuse_args *fa, int *out, struct inode *inode, int mask);
+int fuse_access_finalize(struct bpf_fuse_args *fa, int *out, struct inode *inode, int mask);
 
 /*
  * FUSE caches dentries and attributes with separate timeout.  The
@@ -1720,7 +1807,7 @@ static inline u64 attr_timeout(struct fuse_attr_out *o)
 	return time_to_jiffies(o->attr_valid, o->attr_valid_nsec);
 }
 
-static inline bool update_mtime(unsigned ivalid, bool trust_local_mtime)
+static inline bool update_mtime(unsigned int ivalid, bool trust_local_mtime)
 {
 	/* Always update if mtime is explicitly set  */
 	if (ivalid & ATTR_MTIME_SET)
@@ -1744,7 +1831,7 @@ void fuse_fillattr(struct inode *inode, struct fuse_attr *attr,
 static inline void iattr_to_fattr(struct fuse_conn *fc, struct iattr *iattr,
 			   struct fuse_setattr_in *arg, bool trust_local_cmtime)
 {
-	unsigned ivalid = iattr->ia_valid;
+	unsigned int ivalid = iattr->ia_valid;
 
 	if (ivalid & ATTR_MODE)
 		arg->valid |= FATTR_MODE,   arg->mode = iattr->ia_mode;
@@ -1822,152 +1909,164 @@ static inline void convert_fuse_statfs(struct kstatfs *stbuf, struct fuse_kstatf
 }
 
 #ifdef CONFIG_FUSE_BPF
-struct fuse_err_ret {
-	void *result;
-	bool ret;
-};
-
 int __init fuse_bpf_init(void);
 void __exit fuse_bpf_cleanup(void);
 
-ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct fuse_bpf_args *args);
+ssize_t fuse_prefilter_simple_request(struct fuse_mount *fm, struct bpf_fuse_args *args);
+ssize_t fuse_postfilter_simple_request(struct fuse_mount *fm, struct bpf_fuse_args *args);
+
+static inline void fuse_bpf_set_in_ends(struct bpf_fuse_args *fa)
+{
+	int i;
+
+	for (i = 0; i < FUSE_MAX_ARGS_IN; i++)
+		fa->in_args[i].end_offset = (void *)
+			((char *)fa->in_args[i].value
+			+ fa->in_args[i].size);
+}
+
+static inline void fuse_bpf_set_in_immutable(struct bpf_fuse_args *fa)
+{
+	int i;
+
+	for (i = 0; i < FUSE_MAX_ARGS_IN; i++)
+		fa->in_args[i].flags |= BPF_FUSE_IMMUTABLE;
+}
+
+static inline void fuse_bpf_set_out_ends(struct bpf_fuse_args *fa)
+{
+	int i;
+
+	for (i = 0; i < FUSE_MAX_ARGS_OUT; i++)
+		fa->out_args[i].end_offset = (void *)
+			((char *)fa->out_args[i].value
+			+ fa->out_args[i].size);
+}
+
+static inline void fuse_bpf_free_alloced(struct bpf_fuse_args *fa)
+{
+	int i;
+
+	for (i = 0; i < FUSE_MAX_ARGS_IN; i++)
+		if (fa->in_args[i].flags & BPF_FUSE_ALLOCATED)
+			kfree(fa->in_args[i].value);
+	for (i = 0; i < FUSE_MAX_ARGS_OUT; i++)
+		if (fa->out_args[i].flags & BPF_FUSE_ALLOCATED)
+			kfree(fa->out_args[i].value);
+}
 
 /*
  * expression statement to wrap the backing filter logic
  * struct inode *inode: inode with bpf and backing inode
  * typedef io: (typically complex) type whose components fuse_args can point to.
  *	An instance of this type is created locally and passed to initialize
- * void initialize(struct fuse_bpf_args *fa, io *in_out, args...): function that sets
+ * void initialize_in(struct bpf_fuse_args *fa, io *in_out, args...): function that sets
  *	up fa and io based on args
- * int backing(struct fuse_bpf_args *fa, args...): function that actually performs
+ * void initialize_out(struct bpf_fuse_args *fa, io *in_out, args...): function that sets
+ *	up fa and io based on args
+ * int backing(struct fuse_bpf_args_internal *fa, args...): function that actually performs
  *	the backing io operation
  * void *finalize(struct fuse_bpf_args *, args...): function that performs any final
  *	work needed to commit the backing io
  */
-#define fuse_bpf_backing(inode, io, initialize, backing, finalize,	\
-			 args...)					\
+#define fuse_bpf_backing(inode, io, out, initialize_in, initialize_out,	\
+			 backing, finalize, args...)			\
 ({									\
-	struct fuse_err_ret fer = {0};					\
-	int ext_flags;							\
 	struct fuse_inode *fuse_inode = get_fuse_inode(inode);		\
 	struct fuse_mount *fm = get_fuse_mount(inode);			\
-	io feo = {0};							\
-	struct fuse_bpf_args fa = {0}, fa_backup = {0};			\
+	struct bpf_fuse_args fa = { 0 };				\
+	bool initialized = false;					\
+	bool handled = false;						\
 	bool locked;							\
 	ssize_t res;							\
-	void *err;							\
-	int i;								\
-	bool initialized = false;					\
+	int bpf_next;							\
+	io feo = { 0 };							\
+	int error = 0;							\
 									\
 	do {								\
 		if (!fuse_inode || !fuse_inode->backing_inode)		\
 			break;						\
 									\
-		err = ERR_PTR(initialize(&fa, &feo, args));		\
-		if (err) {						\
-			fer = (struct fuse_err_ret) {			\
-				err,					\
-				true,					\
-			};						\
+		handled = true;						\
+		error = initialize_in(&fa, &feo, args);			\
+		if (error)						\
 			break;						\
-		}							\
-		initialized = true;					\
+		fuse_bpf_set_in_ends(&fa);				\
 									\
-		fa_backup = fa;						\
 		fa.opcode |= FUSE_PREFILTER;				\
-		for (i = 0; i < fa.in_numargs; ++i)			\
-			fa.out_args[i] = (struct fuse_bpf_arg) {	\
-				.size = fa.in_args[i].size,		\
-				.value = (void *)fa.in_args[i].value,	\
-			};						\
-		fa.out_numargs = fa.in_numargs;				\
-									\
-		ext_flags = fuse_inode->bpf ?				\
+		bpf_next = fuse_inode->bpf ?				\
 			BPF_PROG_RUN(fuse_inode->bpf, &fa) :		\
-			FUSE_BPF_BACKING;				\
-		if (ext_flags < 0) {					\
-			fer = (struct fuse_err_ret) {			\
-				ERR_PTR(ext_flags),			\
-				true,					\
-			};						\
+			BPF_FUSE_CONTINUE;				\
+		if (bpf_next < 0) {					\
+			error = bpf_next;				\
 			break;						\
 		}							\
 									\
-		if (ext_flags & FUSE_BPF_USER_FILTER) {			\
+		if (bpf_next == BPF_FUSE_USER_PREFILTER) {		\
 			locked = fuse_lock_inode(inode);		\
-			res = fuse_bpf_simple_request(fm, &fa);		\
+			res = fuse_prefilter_simple_request(fm, &fa);	\
 			fuse_unlock_inode(inode, locked);		\
 			if (res < 0) {					\
-				fer = (struct fuse_err_ret) {		\
-					ERR_PTR(res),			\
-					true,				\
-				};					\
+				error = res;				\
 				break;					\
 			}						\
+			bpf_next = fa.ret;				\
+		}							\
+		fuse_bpf_set_in_immutable(&fa);				\
+									\
+		error = initialize_out(&fa, &feo, args);		\
+		if (error)						\
+			break;						\
+		fuse_bpf_set_out_ends(&fa);				\
+									\
+		initialized = true;					\
+		if (bpf_next == BPF_FUSE_USER) {			\
+			handled = false;				\
+			break;						\
 		}							\
 									\
-		if (!(ext_flags & FUSE_BPF_BACKING))			\
-			break;						\
-									\
 		fa.opcode &= ~FUSE_PREFILTER;				\
-		for (i = 0; i < fa.in_numargs; ++i)			\
-			fa.in_args[i] = (struct fuse_bpf_in_arg) {	\
-				.size = fa.out_args[i].size,		\
-				.value = fa.out_args[i].value,		\
-			};						\
-		for (i = 0; i < fa_backup.out_numargs; ++i)		\
-			fa.out_args[i] = (struct fuse_bpf_arg) {	\
-				.size = fa_backup.out_args[i].size,	\
-				.value = fa_backup.out_args[i].value,	\
-			};						\
-		fa.out_numargs = fa_backup.out_numargs;			\
 									\
-		fer = (struct fuse_err_ret) {				\
-			ERR_PTR(backing(&fa, args)),			\
-			true,						\
-		};							\
-		if (IS_ERR(fer.result))					\
-			fa.error_in = PTR_ERR(fer.result);		\
-		if (!(ext_flags & FUSE_BPF_POST_FILTER))		\
+		error = backing(&fa, &out, args);			\
+		if (error < 0)						\
+			fa.error_in = error;				\
+									\
+		if (bpf_next == BPF_FUSE_CONTINUE)			\
 			break;						\
 									\
 		fa.opcode |= FUSE_POSTFILTER;				\
-		for (i = 0; i < fa.out_numargs; ++i)			\
-			fa.in_args[fa.in_numargs++] =			\
-				(struct fuse_bpf_in_arg) {		\
-					.size = fa.out_args[i].size,	\
-					.value = fa.out_args[i].value,	\
-				};					\
-		ext_flags = BPF_PROG_RUN(fuse_inode->bpf, &fa);		\
-		if (ext_flags < 0) {					\
-			fer = (struct fuse_err_ret) {			\
-				ERR_PTR(ext_flags),			\
-				true,					\
-			};						\
+		if (bpf_next == BPF_FUSE_POSTFILTER)			\
+			bpf_next = BPF_PROG_RUN(fuse_inode->bpf, &fa);	\
+		if (bpf_next < 0) {					\
+			error = bpf_next;				\
 			break;						\
 		}							\
-		if (!(ext_flags & FUSE_BPF_USER_FILTER))		\
+									\
+		if (!(bpf_next == BPF_FUSE_USER_POSTFILTER))		\
 			break;						\
 									\
-		fa.out_args[0].size = fa_backup.out_args[0].size;	\
-		fa.out_args[1].size = fa_backup.out_args[1].size;	\
-		fa.out_numargs = fa_backup.out_numargs;			\
 		locked = fuse_lock_inode(inode);			\
-		res = fuse_bpf_simple_request(fm, &fa);			\
+		res = fuse_postfilter_simple_request(fm, &fa);		\
 		fuse_unlock_inode(inode, locked);			\
 		if (res < 0) {						\
-			fer.result = ERR_PTR(res);			\
+			error = res;					\
 			break;						\
 		}							\
 	} while (false);						\
 									\
-	if (initialized && fer.ret) {					\
-		err = finalize(&fa, args);				\
-		if (err)						\
-			fer.result = err;				\
+	if (initialized && handled) {					\
+		res = finalize(&fa, &out, args);			\
+		if (res)						\
+			error = res;					\
 	}								\
+	fuse_bpf_free_alloced(&fa);					\
 									\
-	fer;								\
+	out = error ? _Generic((out),					\
+			default: error,					\
+			struct dentry*: ERR_PTR(error),			\
+			const char*: ERR_PTR(error)			\
+			) : (out);					\
+	handled;							\
 })
 #endif /* CONFIG_FUSE_BPF */
 

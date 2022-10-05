@@ -15,7 +15,7 @@
 #include <sys/statfs.h>
 #include <sys/types.h>
 
-#include <include/uapi/linux/fuse.h>
+#include <uapi/linux/fuse.h>
 
 #define PAGE_SIZE 4096
 #define FUSE_POSTFILTER 0x20000
@@ -322,5 +322,7 @@ int mount_fuse(const char *mount_dir, int bpf_fd, int dir_fd,
 int mount_fuse_no_init(const char *mount_dir, int bpf_fd, int dir_fd,
 	       int *fuse_dev_ptr);
 int install_elf_bpf(const char *file, const char *section, int *fd,
+		    struct map_relocation **map_relocations, size_t *map_count);
+int install_elf_bpf_invalid(const char *file, const char *section, int *fd,
 		    struct map_relocation **map_relocations, size_t *map_count);
 #endif

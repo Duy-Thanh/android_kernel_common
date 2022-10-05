@@ -574,23 +574,23 @@ int fuse_readdir(struct file *file, struct dir_context *ctx)
 	int err;
 
 #ifdef CONFIG_FUSE_BPF
-	struct fuse_err_ret fer;
+	bool bpf_ret = false;
 	bool allow_force;
 	bool force_again = false;
 	bool is_continued = false;
 
 again:
-	fer = fuse_bpf_backing(inode, struct fuse_read_io,
-			       fuse_readdir_initialize, fuse_readdir_backing,
-			       fuse_readdir_finalize,
+	bpf_ret = fuse_bpf_backing(inode, struct fuse_read_io, err,
+			       fuse_readdir_initialize_in, fuse_readdir_initialize_out,
+			       fuse_readdir_backing, fuse_readdir_finalize,
 			       file, ctx, &force_again, &allow_force, is_continued);
-	if (force_again && !IS_ERR(fer.result)) {
+	if (force_again && err >= 0) {
 		is_continued = true;
 		goto again;
 	}
 
-	if (fer.ret)
-		return PTR_ERR(fer.result);
+	if (bpf_ret)
+		return err;
 #endif
 
 	if (fuse_is_bad(inode))

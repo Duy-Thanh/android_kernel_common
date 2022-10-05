@@ -114,14 +114,11 @@ ssize_t fuse_listxattr(struct dentry *entry, char *list, size_t size)
 	ssize_t ret;
 
 #ifdef CONFIG_FUSE_BPF
-	struct fuse_err_ret fer;
-
-	fer = fuse_bpf_backing(inode, struct fuse_getxattr_io,
-			       fuse_listxattr_initialize,
+	if (fuse_bpf_backing(inode, struct fuse_getxattr_io, ret,
+			       fuse_listxattr_initialize_in, fuse_listxattr_initialize_out,
 			       fuse_listxattr_backing, fuse_listxattr_finalize,
-			       entry, list, size);
-	if (fer.ret)
-		return PTR_ERR(fer.result);
+			       entry, list, size))
+		return ret;
 #endif
 
 	if (fuse_is_bad(inode))
@@ -193,14 +190,13 @@ static int fuse_xattr_get(const struct xattr_handler *handler,
 			 const char *name, void *value, size_t size, int flags)
 {
 #ifdef CONFIG_FUSE_BPF
-	struct fuse_err_ret fer;
+	int err;
 
-	fer = fuse_bpf_backing(inode, struct fuse_getxattr_io,
-			       fuse_getxattr_initialize, fuse_getxattr_backing,
-			       fuse_getxattr_finalize,
-			       dentry, name, value, size);
-	if (fer.ret)
-		return PTR_ERR(fer.result);
+	if (fuse_bpf_backing(inode, struct fuse_getxattr_io, err,
+			       fuse_getxattr_initialize_in, fuse_getxattr_initialize_out,
+			       fuse_getxattr_backing, fuse_getxattr_finalize,
+			       dentry, name, value, size))
+		return err;
 #endif
 
 	if (fuse_is_bad(inode))
@@ -215,21 +211,21 @@ static int fuse_xattr_set(const struct xattr_handler *handler,
 			  int flags)
 {
 #ifdef CONFIG_FUSE_BPF
-	struct fuse_err_ret fer;
+	int err;
+	bool handled;
 
 	if (value)
-		fer = fuse_bpf_backing(inode, struct fuse_setxattr_in,
-			       fuse_setxattr_initialize, fuse_setxattr_backing,
-			       fuse_setxattr_finalize, dentry, name, value,
-			       size, flags);
+		handled = fuse_bpf_backing(inode, struct fuse_setxattr_in, err,
+			       fuse_setxattr_initialize_in, fuse_setxattr_initialize_out,
+			       fuse_setxattr_backing, fuse_setxattr_finalize,
+			       dentry, name, value, size, flags);
 	else
-		fer = fuse_bpf_backing(inode, struct fuse_dummy_io,
-				       fuse_removexattr_initialize,
-				       fuse_removexattr_backing,
-				       fuse_removexattr_finalize,
-				       dentry, name);
-	if (fer.ret)
-		return PTR_ERR(fer.result);
+		handled = fuse_bpf_backing(inode, struct fuse_dummy_io, err,
+			       fuse_removexattr_initialize_in, fuse_removexattr_initialize_out,
+			       fuse_removexattr_backing, fuse_removexattr_finalize,
+			       dentry, name);
+	if (handled)
+		return err;
 #endif
 
 	if (fuse_is_bad(inode))
