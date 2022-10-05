@@ -1,5 +1,4 @@
 [abi_symbol_list]
-
 # commonly used symbols
   arm64_const_caps_ready
   __cpuhp_remove_state
@@ -8,6 +7,8 @@
   kasan_flag_enabled
   kfree
   kmalloc_caches
+  kmalloc_min_size
+  kmalloc_shift_low
   kmem_cache_alloc_trace
   memcpy
   module_layout
