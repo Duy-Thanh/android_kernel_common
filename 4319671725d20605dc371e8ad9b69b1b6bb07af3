@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa70977_8205133e",
+        "filename": "mm/madvise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-10-05T13:54:56Z",
+      "side": 1,
+      "message": "allow_shared",
+      "range": {
+        "startLine": 446,
+        "startChar": 7,
+        "endLine": 446,
+        "endChar": 21
+      },
+      "revId": "4319671725d20605dc371e8ad9b69b1b6bb07af3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
