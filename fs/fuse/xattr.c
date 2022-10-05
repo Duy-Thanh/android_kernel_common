@@ -113,19 +113,11 @@ ssize_t fuse_listxattr(struct dentry *entry, char *list, size_t size)
 	struct fuse_getxattr_out outarg;
 	ssize_t ret;
 
-#ifdef CONFIG_FUSE_BPF
-	struct fuse_err_ret fer;
-
-	fer = fuse_bpf_backing(inode, struct fuse_getxattr_io,
-			       fuse_listxattr_initialize,
-			       fuse_listxattr_backing, fuse_listxattr_finalize,
-			       entry, list, size);
-	if (fer.ret)
-		return PTR_ERR(fer.result);
-#endif
-
 	if (fuse_is_bad(inode))
 		return -EIO;
+
+	if (fuse_bpf_listxattr(&ret, inode, entry, list, size))
+		return ret;
 
 	if (!fuse_allow_current_process(fm->fc))
 		return -EACCES;
@@ -192,19 +184,13 @@ static int fuse_xattr_get(const struct xattr_handler *handler,
 			 struct dentry *dentry, struct inode *inode,
 			 const char *name, void *value, size_t size, int flags)
 {
-#ifdef CONFIG_FUSE_BPF
-	struct fuse_err_ret fer;
-
-	fer = fuse_bpf_backing(inode, struct fuse_getxattr_io,
-			       fuse_getxattr_initialize, fuse_getxattr_backing,
-			       fuse_getxattr_finalize,
-			       dentry, name, value, size);
-	if (fer.ret)
-		return PTR_ERR(fer.result);
-#endif
+	int err;
 
 	if (fuse_is_bad(inode))
 		return -EIO;
+
+	if (fuse_bpf_getxattr(&err, inode, dentry, name, value, size))
+		return err;
 
 	return fuse_getxattr(inode, name, value, size);
 }
@@ -214,26 +200,18 @@ static int fuse_xattr_set(const struct xattr_handler *handler,
 			  const char *name, const void *value, size_t size,
 			  int flags)
 {
-#ifdef CONFIG_FUSE_BPF
-	struct fuse_err_ret fer;
-
-	if (value)
-		fer = fuse_bpf_backing(inode, struct fuse_setxattr_in,
-			       fuse_setxattr_initialize, fuse_setxattr_backing,
-			       fuse_setxattr_finalize, dentry, name, value,
-			       size, flags);
-	else
-		fer = fuse_bpf_backing(inode, struct fuse_dummy_io,
-				       fuse_removexattr_initialize,
-				       fuse_removexattr_backing,
-				       fuse_removexattr_finalize,
-				       dentry, name);
-	if (fer.ret)
-		return PTR_ERR(fer.result);
-#endif
+	int err;
+	bool handled;
 
 	if (fuse_is_bad(inode))
 		return -EIO;
+
+	if (value)
+		handled = fuse_bpf_setxattr(&err, inode, dentry, name, value, size, flags);
+	else
+		handled = fuse_bpf_removexattr(&err, inode, dentry, name);
+	if (handled)
+		return err;
 
 	if (!value)
 		return fuse_removexattr(inode, name);

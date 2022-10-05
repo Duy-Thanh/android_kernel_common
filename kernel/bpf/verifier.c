@@ -22,6 +22,7 @@
 #include <linux/error-injection.h>
 #include <linux/bpf_lsm.h>
 #include <linux/btf_ids.h>
+#include <linux/bpf_fuse.h>
 
 #include "disasm.h"
 
@@ -240,6 +241,7 @@ struct bpf_call_arg_meta {
 	int func_id;
 	u32 btf_id;
 	u32 ret_btf_id;
+	u32 data_id;
 };
 
 struct btf *btf_vmlinux;
@@ -1081,6 +1083,12 @@ static bool reg_is_pkt_pointer_any(const struct bpf_reg_state *reg)
 {
 	return reg_is_pkt_pointer(reg) ||
 	       reg->type == PTR_TO_PACKET_END;
+}
+
+static bool reg_is_specific_pkt_pointer_any(const struct bpf_reg_state *reg, u32 id)
+{
+	return (reg_is_pkt_pointer(reg) ||
+	       reg->type == PTR_TO_PACKET_END) && reg->data_id == id;
 }
 
 /* Unmodified PTR_TO_PACKET[_META,_END] register from ctx access. */
@@ -2807,8 +2815,9 @@ static int __check_mem_access(struct bpf_verifier_env *env, int regno,
 	case PTR_TO_PACKET:
 	case PTR_TO_PACKET_META:
 	case PTR_TO_PACKET_END:
-		verbose(env, "invalid access to packet, off=%d size=%d, R%d(id=%d,off=%d,r=%d)\n",
-			off, size, regno, reg->id, off, mem_size);
+		verbose(env,
+			"invalid access to packet %d, off=%d size=%d, R%d(id=%d,off=%d,r=%d)\n",
+			reg->data_id, off, size, regno, reg->id, off, mem_size);
 		break;
 	case PTR_TO_MEM:
 	default:
@@ -2931,6 +2940,7 @@ static bool may_access_direct_pkt_data(struct bpf_verifier_env *env,
 	case BPF_PROG_TYPE_SK_REUSEPORT:
 	case BPF_PROG_TYPE_FLOW_DISSECTOR:
 	case BPF_PROG_TYPE_CGROUP_SKB:
+	case BPF_PROG_TYPE_FUSE:
 		if (t == BPF_WRITE)
 			return false;
 		fallthrough;
@@ -3002,7 +3012,7 @@ static int check_packet_access(struct bpf_verifier_env *env, u32 regno, int off,
 /* check access to 'struct bpf_context' fields.  Supports fixed offsets only */
 static int check_ctx_access(struct bpf_verifier_env *env, int insn_idx, int off, int size,
 			    enum bpf_access_type t, enum bpf_reg_type *reg_type,
-			    u32 *btf_id)
+			    u32 *btf_id, u32 *data_id)
 {
 	struct bpf_insn_access_aux info = {
 		.reg_type = *reg_type,
@@ -3022,6 +3032,8 @@ static int check_ctx_access(struct bpf_verifier_env *env, int insn_idx, int off,
 
 		if (*reg_type == PTR_TO_BTF_ID || *reg_type == PTR_TO_BTF_ID_OR_NULL)
 			*btf_id = info.btf_id;
+		else if (*reg_type == PTR_TO_PACKET || *reg_type == PTR_TO_PACKET_END)
+			*data_id = info.data_id;
 		else
 			env->insn_aux_data[insn_idx].ctx_field_size = info.ctx_field_size;
 		/* remember the offset of last byte accessed in ctx */
@@ -3802,6 +3814,7 @@ static int check_mem_access(struct bpf_verifier_env *env, int insn_idx, u32 regn
 	} else if (reg->type == PTR_TO_CTX) {
 		enum bpf_reg_type reg_type = SCALAR_VALUE;
 		u32 btf_id = 0;
+		u32 data_id = 0;
 
 		if (t == BPF_WRITE && value_regno >= 0 &&
 		    is_pointer_value(env, value_regno)) {
@@ -3813,7 +3826,8 @@ static int check_mem_access(struct bpf_verifier_env *env, int insn_idx, u32 regn
 		if (err < 0)
 			return err;
 
-		err = check_ctx_access(env, insn_idx, off, size, t, &reg_type, &btf_id);
+		err = check_ctx_access(env, insn_idx, off, size, t, &reg_type, &btf_id,
+				       &data_id);
 		if (err)
 			verbose_linfo(env, insn_idx, "; ");
 		if (!err && t == BPF_READ && value_regno >= 0) {
@@ -3837,6 +3851,10 @@ static int check_mem_access(struct bpf_verifier_env *env, int insn_idx, u32 regn
 				if (reg_type == PTR_TO_BTF_ID ||
 				    reg_type == PTR_TO_BTF_ID_OR_NULL)
 					regs[value_regno].btf_id = btf_id;
+				else if (reg_type == PTR_TO_PACKET ||
+				    reg_type == PTR_TO_PACKET_END ||
+				    reg_type == PTR_TO_PACKET_META)
+					regs[value_regno].data_id = data_id;
 			}
 			regs[value_regno].type = reg_type;
 		}
@@ -4266,6 +4284,11 @@ static bool arg_type_is_alloc_size(enum bpf_arg_type type)
 	return type == ARG_CONST_ALLOC_SIZE_OR_ZERO;
 }
 
+static bool arg_type_is_packet(enum bpf_arg_type type)
+{
+	return type == ARG_PTR_TO_PACKET;
+}
+
 static bool arg_type_is_int_ptr(enum bpf_arg_type type)
 {
 	return type == ARG_PTR_TO_INT ||
@@ -4374,6 +4397,7 @@ static const struct bpf_reg_types const_map_ptr_types = { .types = { CONST_PTR_T
 static const struct bpf_reg_types btf_ptr_types = { .types = { PTR_TO_BTF_ID } };
 static const struct bpf_reg_types spin_lock_types = { .types = { PTR_TO_MAP_VALUE } };
 static const struct bpf_reg_types percpu_btf_ptr_types = { .types = { PTR_TO_PERCPU_BTF_ID } };
+static const struct bpf_reg_types packet_ptr_types = { .types = { PTR_TO_PACKET } };
 
 static const struct bpf_reg_types *compatible_reg_types[__BPF_ARG_TYPE_MAX] = {
 	[ARG_PTR_TO_MAP_KEY]		= &map_key_value_types,
@@ -4402,6 +4426,7 @@ static const struct bpf_reg_types *compatible_reg_types[__BPF_ARG_TYPE_MAX] = {
 	[ARG_PTR_TO_INT]		= &int_ptr_types,
 	[ARG_PTR_TO_LONG]		= &int_ptr_types,
 	[ARG_PTR_TO_PERCPU_BTF_ID]	= &percpu_btf_ptr_types,
+	[ARG_PTR_TO_PACKET]		= &packet_ptr_types,
 };
 
 static int check_reg_type(struct bpf_verifier_env *env, u32 regno,
@@ -4649,6 +4674,8 @@ skip_type_check:
 		if (err)
 			return err;
 		err = check_ptr_alignment(env, reg, 0, size, true);
+	} else if (arg_type_is_packet(arg_type)) {
+		meta->data_id = reg->data_id;
 	}
 
 	return err;
@@ -4981,12 +5008,35 @@ static bool check_btf_id_ok(const struct bpf_func_proto *fn)
 	return true;
 }
 
+static bool check_packet_ok(const struct bpf_func_proto *fn)
+{
+	int count = 0;
+
+	if (arg_type_is_packet(fn->arg1_type))
+		count++;
+	if (arg_type_is_packet(fn->arg2_type))
+		count++;
+	if (arg_type_is_packet(fn->arg3_type))
+		count++;
+	if (arg_type_is_packet(fn->arg4_type))
+		count++;
+	if (arg_type_is_packet(fn->arg5_type))
+		count++;
+
+	/* We only support one arg being a packet at the moment,
+	 * which is sufficient for the helper functions we have right now.
+	 */
+	return count <= 1;
+}
+
+
 static int check_func_proto(const struct bpf_func_proto *fn, int func_id)
 {
 	return check_raw_mode_ok(fn) &&
 	       check_arg_pair_ok(fn) &&
 	       check_btf_id_ok(fn) &&
-	       check_refcount_ok(fn, func_id) ? 0 : -EINVAL;
+	       check_refcount_ok(fn, func_id) &&
+	       check_packet_ok(fn) ? 0 : -EINVAL;
 }
 
 /* Packet data might have moved, any old PTR_TO_PACKET[_META,_END]
@@ -5010,6 +5060,25 @@ static void __clear_all_pkt_pointers(struct bpf_verifier_env *env,
 	}
 }
 
+static void __clear_specific_pkt_pointers(struct bpf_verifier_env *env,
+				     struct bpf_func_state *state,
+				     u32 data_id)
+{
+	struct bpf_reg_state *regs = state->regs, *reg;
+	int i;
+
+	for (i = 0; i < MAX_BPF_REG; i++)
+		if (reg_is_specific_pkt_pointer_any(&regs[i], data_id))
+			mark_reg_unknown(env, regs, i);
+
+	bpf_for_each_spilled_reg(i, state, reg) {
+		if (!reg)
+			continue;
+		if (reg_is_specific_pkt_pointer_any(reg, data_id))
+			__mark_reg_unknown(env, reg);
+	}
+}
+
 static void clear_all_pkt_pointers(struct bpf_verifier_env *env)
 {
 	struct bpf_verifier_state *vstate = env->cur_state;
@@ -5017,6 +5086,15 @@ static void clear_all_pkt_pointers(struct bpf_verifier_env *env)
 
 	for (i = 0; i <= vstate->curframe; i++)
 		__clear_all_pkt_pointers(env, vstate->frame[i]);
+}
+
+static void clear_specific_pkt_pointers(struct bpf_verifier_env *env, u32 data_id)
+{
+	struct bpf_verifier_state *vstate = env->cur_state;
+	int i;
+
+	for (i = 0; i <= vstate->curframe; i++)
+		__clear_specific_pkt_pointers(env, vstate->frame[i], data_id);
 }
 
 static void release_reg_references(struct bpf_verifier_env *env,
@@ -5335,6 +5413,7 @@ static int check_helper_call(struct bpf_verifier_env *env, int func_id, int insn
 	struct bpf_reg_state *regs;
 	struct bpf_call_arg_meta meta;
 	bool changes_data;
+	bool changes_specific_data;
 	int i, err;
 
 	/* find function prototype */
@@ -5367,6 +5446,17 @@ static int check_helper_call(struct bpf_verifier_env *env, int func_id, int insn
 	changes_data = bpf_helper_changes_pkt_data(fn->func);
 	if (changes_data && fn->arg1_type != ARG_PTR_TO_CTX) {
 		verbose(env, "kernel subsystem misconfigured func %s#%d: r1 != ctx\n",
+			func_id_name(func_id), func_id);
+		return -EINVAL;
+	}
+
+	changes_specific_data = bpf_helper_changes_one_pkt_data(fn->func);
+	if (changes_specific_data && !arg_type_is_packet(fn->arg1_type) &&
+			    !arg_type_is_packet(fn->arg2_type) &&
+			    !arg_type_is_packet(fn->arg3_type) &&
+			    !arg_type_is_packet(fn->arg4_type) &&
+			    !arg_type_is_packet(fn->arg5_type)) {
+		verbose(env, "kernel subsystem misconfigured func %s#%d: no packet arg\n",
 			func_id_name(func_id), func_id);
 		return -EINVAL;
 	}
@@ -5577,6 +5667,8 @@ static int check_helper_call(struct bpf_verifier_env *env, int func_id, int insn
 
 	if (changes_data)
 		clear_all_pkt_pointers(env);
+	if (changes_specific_data)
+		clear_specific_pkt_pointers(env, meta.data_id);
 	return 0;
 }
 
@@ -7839,17 +7931,19 @@ static bool try_match_pkt_pointers(const struct bpf_insn *insn,
 
 	switch (BPF_OP(insn->code)) {
 	case BPF_JGT:
-		if ((dst_reg->type == PTR_TO_PACKET &&
+		if (dst_reg->data_id == src_reg->data_id &&
+		    ((dst_reg->type == PTR_TO_PACKET &&
 		     src_reg->type == PTR_TO_PACKET_END) ||
 		    (dst_reg->type == PTR_TO_PACKET_META &&
-		     reg_is_init_pkt_pointer(src_reg, PTR_TO_PACKET))) {
+		     reg_is_init_pkt_pointer(src_reg, PTR_TO_PACKET)))) {
 			/* pkt_data' > pkt_end, pkt_meta' > pkt_data */
 			find_good_pkt_pointers(this_branch, dst_reg,
 					       dst_reg->type, false);
-		} else if ((dst_reg->type == PTR_TO_PACKET_END &&
+		} else if ((dst_reg->data_id == src_reg->data_id &&
+			    ((dst_reg->type == PTR_TO_PACKET_END &&
 			    src_reg->type == PTR_TO_PACKET) ||
 			   (reg_is_init_pkt_pointer(dst_reg, PTR_TO_PACKET) &&
-			    src_reg->type == PTR_TO_PACKET_META)) {
+			    src_reg->type == PTR_TO_PACKET_META)))) {
 			/* pkt_end > pkt_data', pkt_data > pkt_meta' */
 			find_good_pkt_pointers(other_branch, src_reg,
 					       src_reg->type, true);
@@ -7858,17 +7952,19 @@ static bool try_match_pkt_pointers(const struct bpf_insn *insn,
 		}
 		break;
 	case BPF_JLT:
-		if ((dst_reg->type == PTR_TO_PACKET &&
-		     src_reg->type == PTR_TO_PACKET_END) ||
+		if (dst_reg->data_id == src_reg->data_id &&
+		    ((dst_reg->type == PTR_TO_PACKET &&
+		     src_reg->type == PTR_TO_PACKET_END && dst_reg->data_id == src_reg->data_id) ||
 		    (dst_reg->type == PTR_TO_PACKET_META &&
-		     reg_is_init_pkt_pointer(src_reg, PTR_TO_PACKET))) {
+		     reg_is_init_pkt_pointer(src_reg, PTR_TO_PACKET)))) {
 			/* pkt_data' < pkt_end, pkt_meta' < pkt_data */
 			find_good_pkt_pointers(other_branch, dst_reg,
 					       dst_reg->type, true);
-		} else if ((dst_reg->type == PTR_TO_PACKET_END &&
+		} else if (dst_reg->data_id == src_reg->data_id &&
+			    ((dst_reg->type == PTR_TO_PACKET_END &&
 			    src_reg->type == PTR_TO_PACKET) ||
 			   (reg_is_init_pkt_pointer(dst_reg, PTR_TO_PACKET) &&
-			    src_reg->type == PTR_TO_PACKET_META)) {
+			    src_reg->type == PTR_TO_PACKET_META))) {
 			/* pkt_end < pkt_data', pkt_data > pkt_meta' */
 			find_good_pkt_pointers(this_branch, src_reg,
 					       src_reg->type, false);
@@ -7877,17 +7973,19 @@ static bool try_match_pkt_pointers(const struct bpf_insn *insn,
 		}
 		break;
 	case BPF_JGE:
-		if ((dst_reg->type == PTR_TO_PACKET &&
+		if (dst_reg->data_id == src_reg->data_id &&
+		    ((dst_reg->type == PTR_TO_PACKET &&
 		     src_reg->type == PTR_TO_PACKET_END) ||
 		    (dst_reg->type == PTR_TO_PACKET_META &&
-		     reg_is_init_pkt_pointer(src_reg, PTR_TO_PACKET))) {
+		     reg_is_init_pkt_pointer(src_reg, PTR_TO_PACKET)))) {
 			/* pkt_data' >= pkt_end, pkt_meta' >= pkt_data */
 			find_good_pkt_pointers(this_branch, dst_reg,
 					       dst_reg->type, true);
-		} else if ((dst_reg->type == PTR_TO_PACKET_END &&
+		} else if (dst_reg->data_id == src_reg->data_id &&
+			   ((dst_reg->type == PTR_TO_PACKET_END &&
 			    src_reg->type == PTR_TO_PACKET) ||
 			   (reg_is_init_pkt_pointer(dst_reg, PTR_TO_PACKET) &&
-			    src_reg->type == PTR_TO_PACKET_META)) {
+			    src_reg->type == PTR_TO_PACKET_META))) {
 			/* pkt_end >= pkt_data', pkt_data >= pkt_meta' */
 			find_good_pkt_pointers(other_branch, src_reg,
 					       src_reg->type, false);
@@ -7896,17 +7994,19 @@ static bool try_match_pkt_pointers(const struct bpf_insn *insn,
 		}
 		break;
 	case BPF_JLE:
-		if ((dst_reg->type == PTR_TO_PACKET &&
-		     src_reg->type == PTR_TO_PACKET_END) ||
+		if (dst_reg->data_id == src_reg->data_id &&
+		    ((dst_reg->type == PTR_TO_PACKET &&
+		     src_reg->type == PTR_TO_PACKET_END && dst_reg->data_id == src_reg->data_id) ||
 		    (dst_reg->type == PTR_TO_PACKET_META &&
-		     reg_is_init_pkt_pointer(src_reg, PTR_TO_PACKET))) {
+		     reg_is_init_pkt_pointer(src_reg, PTR_TO_PACKET)))) {
 			/* pkt_data' <= pkt_end, pkt_meta' <= pkt_data */
 			find_good_pkt_pointers(other_branch, dst_reg,
 					       dst_reg->type, false);
-		} else if ((dst_reg->type == PTR_TO_PACKET_END &&
+		} else if (dst_reg->data_id == src_reg->data_id &&
+			   ((dst_reg->type == PTR_TO_PACKET_END &&
 			    src_reg->type == PTR_TO_PACKET) ||
 			   (reg_is_init_pkt_pointer(dst_reg, PTR_TO_PACKET) &&
-			    src_reg->type == PTR_TO_PACKET_META)) {
+			    src_reg->type == PTR_TO_PACKET_META))) {
 			/* pkt_end <= pkt_data', pkt_data <= pkt_meta' */
 			find_good_pkt_pointers(this_branch, src_reg,
 					       src_reg->type, true);

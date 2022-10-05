@@ -38,6 +38,10 @@ static int test_case_fail;
 #error Big endian not supported!
 #endif
 
+#ifndef ARRAY_SIZE
+#define ARRAY_SIZE(array) (sizeof(array)/sizeof(*array))
+#endif
+
 struct _test_options {
 	int file;
 	bool verbose;
@@ -149,8 +153,6 @@ _TEST_OPERATOR(cp, char *, "%px")
 
 /* For testing a syscall that returns 0 on success and sets errno otherwise */
 #define TESTSYSCALL(statement) TESTCONDERR((statement) == 0)
-
-#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
 
 static inline void print_bytes(const void *data, size_t size)
 {
