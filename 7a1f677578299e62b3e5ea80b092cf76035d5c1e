@@ -16,6 +16,29 @@
       "message": "please preserve the original bug 248447556 in the commit message :-/",
       "revId": "7a1f677578299e62b3e5ea80b092cf76035d5c1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b4212c3_411cbf85",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-10-05T15:56:00Z",
+      "side": 1,
+      "message": "Please leave \" ? 1 : 0\" out since the compiler does this for you when assigning a boolean to an int.",
+      "range": {
+        "startLine": 1118,
+        "startChar": 32,
+        "endLine": 1118,
+        "endChar": 40
+      },
+      "revId": "7a1f677578299e62b3e5ea80b092cf76035d5c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
