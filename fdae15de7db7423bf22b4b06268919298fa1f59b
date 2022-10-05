@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5841d6c8_9c8a632a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2022-10-05T03:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f9761d9_87741c5a",
+      "revId": "fdae15de7db7423bf22b4b06268919298fa1f59b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf60a0fa_0e4bd7e0",
         "filename": "drivers/android/binder.c",
         "patchSetId": 7
@@ -48,6 +66,30 @@
       "writtenOn": "2022-10-04T10:21:25Z",
       "side": 1,
       "message": "I guess this can be merged with set_default_uclamp() into\n\nstatic void set_binder_prio_uclamp(struct binder_priority *prio, struct task_struct *task)",
+      "range": {
+        "startLine": 516,
+        "startChar": 12,
+        "endLine": 516,
+        "endChar": 28
+      },
+      "revId": "fdae15de7db7423bf22b4b06268919298fa1f59b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5ff9d1d_7cebcd1d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2022-10-05T03:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf60a0fa_0e4bd7e0",
       "range": {
         "startLine": 516,
         "startChar": 12,
@@ -83,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2e5f5b0_a25ea398",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2022-10-05T03:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1b4457f_44f46a3f",
+      "range": {
+        "startLine": 524,
+        "startChar": 5,
+        "endLine": 524,
+        "endChar": 29
+      },
+      "revId": "fdae15de7db7423bf22b4b06268919298fa1f59b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcbc19a4_e3f356d0",
         "filename": "drivers/android/binder.c",
         "patchSetId": 7
@@ -94,6 +160,30 @@
       "writtenOn": "2022-10-04T10:21:25Z",
       "side": 1,
       "message": "A more descriptive name would be helpful. is_uclamp_equal() ?",
+      "range": {
+        "startLine": 536,
+        "startChar": 12,
+        "endLine": 536,
+        "endChar": 24
+      },
+      "revId": "fdae15de7db7423bf22b4b06268919298fa1f59b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79e16bbb_91583af7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2022-10-05T03:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcbc19a4_e3f356d0",
       "range": {
         "startLine": 536,
         "startChar": 12,
