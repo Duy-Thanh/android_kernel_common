@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9901f585_14ed2b07",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-05T07:22:57Z",
+      "side": 1,
+      "message": "`current` is a task no? Maybe just pass it to set_binder_prio_uclamp() directly?",
+      "range": {
+        "startLine": 662,
+        "startChar": 28,
+        "endLine": 662,
+        "endChar": 34
+      },
+      "revId": "79939d46f6b2bea6a0c0bf2e39c9e3189b9dd0b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf116aae_21642462",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3009,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-05T07:22:57Z",
+      "side": 1,
+      "message": "tiny nit, but no need for curly brackets",
+      "range": {
+        "startLine": 3009,
+        "startChar": 31,
+        "endLine": 3009,
+        "endChar": 32
+      },
+      "revId": "79939d46f6b2bea6a0c0bf2e39c9e3189b9dd0b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
