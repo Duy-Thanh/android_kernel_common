@@ -303,6 +303,7 @@ enum device_link_state {
 	DL_STATE_CONSUMER_PROBE,
 	DL_STATE_ACTIVE,
 	DL_STATE_SUPPLIER_UNBIND,
+	DL_STATE_TEST,
 };
 
 /*
