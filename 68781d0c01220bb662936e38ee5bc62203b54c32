@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "115b57f1_7bca98d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2022-10-05T02:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d026e629_017655ab",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 52
+      },
+      "revId": "68781d0c01220bb662936e38ee5bc62203b54c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1ec3bec_49fbc63a",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb6af193_e95d8bdb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2022-10-05T02:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1ec3bec_49fbc63a",
+      "range": {
+        "startLine": 30,
+        "startChar": 61,
+        "endLine": 30,
+        "endChar": 62
+      },
+      "revId": "68781d0c01220bb662936e38ee5bc62203b54c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dfd5d2c_ca3c3b37",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-10-04T16:38:01Z",
       "side": 1,
       "message": "The formatting of the bug field is not correct.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "68781d0c01220bb662936e38ee5bc62203b54c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a44deead_4a02b394",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2022-10-05T02:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dfd5d2c_ca3c3b37",
       "range": {
         "startLine": 32,
         "startChar": 0,
