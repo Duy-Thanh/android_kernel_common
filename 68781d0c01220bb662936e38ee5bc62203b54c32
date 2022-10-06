@@ -245,6 +245,24 @@
       "parentUuid": "664fa53a_1ee60fa0",
       "revId": "68781d0c01220bb662936e38ee5bc62203b54c32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44566495_df246f88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2022-10-06T02:13:47Z",
+      "side": 1,
+      "message": "Hi Greg,\n\n  As far as I\u0027m concerned,  \"copy paste\" is used not \"git cherry-pick\" this time.\n  We now know \"copy paste\" commit message is erratic, will stick on \"git cherry-pick\" next time.\n  \n  Thanks,\n  Chun-Hung",
+      "parentUuid": "692b44a4_7d0d42bf",
+      "revId": "68781d0c01220bb662936e38ee5bc62203b54c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
