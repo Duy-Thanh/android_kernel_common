@@ -63,6 +63,30 @@
       },
       "revId": "0f49d1c586e0dc89278bc5f3ad265cee749db22a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fbc1ccb_cd69614b",
+        "filename": "drivers/virtio/virtio_balloon.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1786238
+      },
+      "writtenOn": "2022-10-07T21:24:16Z",
+      "side": 1,
+      "message": "Also balloon_page_alloc() is order-aligned, so this only shifts out zeroes and the device can reconstruct the GPA.",
+      "parentUuid": "c9233e76_a8305432",
+      "range": {
+        "startLine": 220,
+        "startChar": 4,
+        "endLine": 220,
+        "endChar": 51
+      },
+      "revId": "0f49d1c586e0dc89278bc5f3ad265cee749db22a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
