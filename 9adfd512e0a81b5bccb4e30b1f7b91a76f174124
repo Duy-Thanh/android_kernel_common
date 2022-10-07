@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6eba11a_a8fc409f",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 5
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-10-07T16:51:26Z",
+      "side": 1,
+      "message": "Will push a follow-up change to update the ABI.",
+      "parentUuid": "286add08_1f4867b4",
+      "range": {
+        "startLine": 2133,
+        "startChar": 0,
+        "endLine": 2133,
+        "endChar": 49
+      },
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa668f06_10c8e496",
         "filename": "arch/arm64/kernel/hibernate.c",
         "patchSetId": 5
@@ -108,6 +132,24 @@
       "writtenOn": "2022-10-04T00:26:56Z",
       "side": 1,
       "message": "this name doesn\u0027t seem right anymore.",
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a53a5dd_c73d6378",
+        "filename": "arch/arm64/kernel/hibernate.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-10-07T16:51:26Z",
+      "side": 1,
+      "message": "Changed the name. Please comment if this seems appropriate.",
+      "parentUuid": "aa668f06_10c8e496",
       "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -131,6 +173,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8aeca3e_85e8628d",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-10-07T16:51:26Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "3c4635ee_710eaaaa",
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f1cc405_f2605df6",
         "filename": "mm/swapfile.c",
         "patchSetId": 5
@@ -142,6 +202,30 @@
       "writtenOn": "2022-10-04T00:26:56Z",
       "side": 1,
       "message": "parens are unnecessary",
+      "range": {
+        "startLine": 3236,
+        "startChar": 17,
+        "endLine": 3236,
+        "endChar": 35
+      },
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5add97ff_f0449576",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3236,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-10-07T16:51:26Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "2f1cc405_f2605df6",
       "range": {
         "startLine": 3236,
         "startChar": 17,
