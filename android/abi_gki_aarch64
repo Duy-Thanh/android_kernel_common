@@ -1,5 +1,4 @@
 [abi_symbol_list]
-
 # commonly used symbols
   arm64_const_caps_ready
   __cpuhp_remove_state
@@ -87,6 +86,7 @@
   unregister_blkdev
   up_read
   up_write
+  use_kmalloc_64
   vfree
   vzalloc
   zs_compact
