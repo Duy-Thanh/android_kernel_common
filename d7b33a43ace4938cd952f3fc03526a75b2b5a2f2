@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "d7b33a43ace4938cd952f3fc03526a75b2b5a2f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32e6171_5abdeb45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-07T22:44:22Z",
+      "side": 1,
+      "message": "This is a partially implemented hook - it is at the call site, but has no definition in include/trace/hook/*.h. The call site is not config\u0027d into our gki_defconfig so the lack of definition only causes problems in non-GKI builds. Caught by kernelci.",
+      "revId": "d7b33a43ace4938cd952f3fc03526a75b2b5a2f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
