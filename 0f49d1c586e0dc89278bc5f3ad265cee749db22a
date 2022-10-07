@@ -39,6 +39,30 @@
       },
       "revId": "0f49d1c586e0dc89278bc5f3ad265cee749db22a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9233e76_a8305432",
+        "filename": "drivers/virtio/virtio_balloon.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1020578
+      },
+      "writtenOn": "2022-10-07T20:25:34Z",
+      "side": 1,
+      "message": "page_to_balloon_pfn() calculates `(address \u003e\u003e PAGE_SHIFT)` (which is 12 for 4k).\n\nIn this patch, we might be allocating hugepages, for which we have to do the following to get the start of the PFN for the hugepage: `(address \u003e\u003e PAGE_SHIFT) \u003e\u003e hugepage_order`.\n\nWe don\u0027t send unshifted addresses, it\u0027s double shifted so that the device can construct the GPA from the hugepage PFN correctly.",
+      "parentUuid": "b84d2dc4_e128bdf9",
+      "range": {
+        "startLine": 220,
+        "startChar": 4,
+        "endLine": 220,
+        "endChar": 51
+      },
+      "revId": "0f49d1c586e0dc89278bc5f3ad265cee749db22a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
