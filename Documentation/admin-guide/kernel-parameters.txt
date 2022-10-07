@@ -6097,6 +6097,10 @@
 					not on uas)
 			Example: quirks=0419:aaf5:rl,0421:0433:rc
 
+	use_kmalloc_64	[MM]
+			Creates all kmalloc variants of the 64-byte slab cache,
+			if the hardware supports it.
+
 	user_debug=	[KNL,ARM]
 			Format: <int>
 			See arch/arm/Kconfig.debug help text.

@@ -646,6 +646,15 @@ EXPORT_SYMBOL_GPL(kmem_dump_obj);
 #endif
 
 #ifndef CONFIG_SLOB
+static int __init setup_use_kmalloc_64(char *str)
+{
+	if (IS_ALIGNED(64, cache_line_size()))
+		use_kmalloc_64 = true;
+
+	return 1;
+}
+__setup("use_kmalloc_64", setup_use_kmalloc_64);
+
 /* Create a cache during boot when no slab services are available yet */
 void __init create_boot_cache(struct kmem_cache *s, const char *name,
 		unsigned int size, slab_flags_t flags,
@@ -653,6 +662,14 @@ void __init create_boot_cache(struct kmem_cache *s, const char *name,
 {
 	int err;
 	unsigned int align = ARCH_KMALLOC_MINALIGN;
+
+	/*
+	 * Ensure object alignment is 64. Otherwise, it can be larger
+	 * (e.g. 128 with ARM64), which causes SLUB to increase the object
+	 * size to 128 bytes to conform with the alignment.
+	 */
+	if (use_kmalloc_64 && size == 64)
+		align = 64;
 
 	s->name = name;
 	s->size = s->object_size = size;
@@ -697,6 +714,9 @@ struct kmem_cache *
 kmalloc_caches[NR_KMALLOC_TYPES][KMALLOC_SHIFT_HIGH + 1] __ro_after_init =
 { /* initialization for https://bugs.llvm.org/show_bug.cgi?id=42570 */ };
 EXPORT_SYMBOL(kmalloc_caches);
+
+bool use_kmalloc_64 __ro_after_init;
+EXPORT_SYMBOL_GPL(use_kmalloc_64);
 
 /*
  * Conversion table for small slabs sizes / 8 to the index in the
@@ -844,6 +864,10 @@ void __init setup_kmalloc_cache_index_table(void)
 		size_index[elem] = KMALLOC_SHIFT_LOW;
 	}
 
+	if (use_kmalloc_64)
+		for (i = 8; i <= 64; i += 8)
+			size_index[size_index_elem(i)] = 6;
+
 	if (KMALLOC_MIN_SIZE >= 64) {
 		/*
 		 * The 96 byte size cache is not used if the alignment
@@ -900,6 +924,10 @@ void __init create_kmalloc_caches(slab_flags_t flags)
 {
 	int i;
 	enum kmalloc_cache_type type;
+
+	if (use_kmalloc_64)
+		for (type = KMALLOC_NORMAL; type <= KMALLOC_RECLAIM; type++)
+			new_kmalloc_cache(6, type, flags);
 
 	/*
 	 * Including KMALLOC_CGROUP if CONFIG_MEMCG_KMEM defined
