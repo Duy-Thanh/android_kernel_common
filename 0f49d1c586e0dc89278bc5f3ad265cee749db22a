@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82520348_f4e52956",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583282
+      },
+      "writtenOn": "2022-10-07T19:59:05Z",
+      "side": 1,
+      "message": "tomcherry@ || srichman@ should also review this. Overall it looks fine to me.",
+      "revId": "0f49d1c586e0dc89278bc5f3ad265cee749db22a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84d2dc4_e128bdf9",
+        "filename": "drivers/virtio/virtio_balloon.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1583282
+      },
+      "writtenOn": "2022-10-07T19:59:05Z",
+      "side": 1,
+      "message": "So we send unshifted addresses to the device? (That\u0027s fine, just trying to understand what the device sees.)",
+      "range": {
+        "startLine": 220,
+        "startChar": 4,
+        "endLine": 220,
+        "endChar": 51
+      },
+      "revId": "0f49d1c586e0dc89278bc5f3ad265cee749db22a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
