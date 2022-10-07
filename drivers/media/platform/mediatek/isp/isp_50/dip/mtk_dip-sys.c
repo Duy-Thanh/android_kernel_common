@@ -215,6 +215,12 @@ static void dip_mdp_cb_func(struct cmdq_cb_data data)
 	struct mtk_dip_dev *dip_dev;
 	struct mdp_cmdq_cmd *cmd;
 
+	if (data.sta < 0) {
+		pr_err("%s: callback data return error\n",
+		       __func__);
+		return;
+	}
+
 	cmd = container_of(data.pkt, struct mdp_cmdq_cmd, pkt);
 	if (!cmd) {
 		pr_err("%s: cmd is NULL\n", __func__);
