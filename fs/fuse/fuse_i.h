@@ -1390,8 +1390,8 @@ int fuse_bpf_getxattr(int *out, struct inode *inode, struct dentry *dentry,
 		      const char *name, void *value, size_t size);
 int fuse_bpf_listxattr(ssize_t *out, struct inode *inode, struct dentry *dentry, char *list, size_t size);
 int fuse_bpf_setxattr(int *out, struct inode *inode, struct dentry *dentry,
-			  const char *name, const void *value, size_t size,
-			  int flags);
+		      const char *name, const void *value, size_t size,
+		      int flags);
 int fuse_bpf_removexattr(int *out, struct inode *inode, struct dentry *dentry, const char *name);
 int fuse_bpf_file_read_iter(ssize_t *out, struct inode *inode, struct kiocb *iocb, struct iov_iter *to);
 int fuse_bpf_file_write_iter(ssize_t *out, struct inode *inode, struct kiocb *iocb, struct iov_iter *from);
@@ -1409,6 +1409,7 @@ int fuse_bpf_access(int *out, struct inode *inode, int mask);
 int fuse_bpf_canonical_path(int *out, struct inode *inode,
 			    const struct path *path,
 			    struct path *canonical_path);
+
 #else
 
 static inline int fuse_bpf_open(int *err, struct inode *inode, struct file *file, bool isdir)
@@ -1438,14 +1439,14 @@ static inline int fuse_bpf_rmdir(int *out, struct inode *dir, struct dentry *ent
 }
 
 static inline int fuse_bpf_rename2(int *out, struct inode *olddir, struct dentry *oldent,
-		     struct inode *newdir, struct dentry *newent,
-		     unsigned int flags)
+				   struct inode *newdir, struct dentry *newent,
+				   unsigned int flags)
 {
 	return 0;
 }
 
 static inline int fuse_bpf_rename(int *out, struct inode *olddir, struct dentry *oldent,
-		    struct inode *newdir, struct dentry *newent)
+				  struct inode *newdir, struct dentry *newent)
 {
 	return 0;
 }
@@ -1481,8 +1482,8 @@ static inline int fuse_bpf_lseek(loff_t *out, struct inode *inode, struct file *
 }
 
 static inline int fuse_bpf_copy_file_range(ssize_t *out, struct inode *inode, struct file *file_in, loff_t pos_in,
-			     struct file *file_out, loff_t pos_out,
-			     size_t len, unsigned int flags)
+					   struct file *file_out, loff_t pos_out,
+					   size_t len, unsigned int flags)
 {
 	return 0;
 }
@@ -1498,7 +1499,7 @@ static inline int fuse_bpf_dir_fsync(int *out, struct inode *inode, struct file 
 }
 
 static inline int fuse_bpf_getxattr(int *out, struct inode *inode, struct dentry *dentry,
-		      const char *name, void *value, size_t size)
+				    const char *name, void *value, size_t size)
 {
 	return 0;
 }
@@ -1509,8 +1510,8 @@ static inline int fuse_bpf_listxattr(ssize_t *out, struct inode *inode, struct d
 }
 
 static inline int fuse_bpf_setxattr(int *out, struct inode *inode, struct dentry *dentry,
-			  const char *name, const void *value, size_t size,
-			  int flags)
+				    const char *name, const void *value, size_t size,
+				    int flags)
 {
 	return 0;
 }
@@ -1541,7 +1542,7 @@ static inline int fuse_bpf_lookup(struct dentry **out, struct inode *dir, struct
 }
 
 static inline int fuse_bpf_getattr(int *out, struct inode *inode, const struct dentry *entry, struct kstat *stat,
-		     u32 request_mask, unsigned int flags)
+				   u32 request_mask, unsigned int flags)
 {
 	return 0;
 }
@@ -1578,12 +1579,13 @@ static inline int fuse_bpf_access(int *out, struct inode *inode, int mask)
 }
 
 static inline int fuse_bpf_canonical_path(int *out, struct inode *inode,
-				 const struct path *path,
-				 struct path *canonical_path)
+					  const struct path *path,
+					  struct path *canonical_path)
 {
 	return 0;
 }
-#endif
+
+#endif // CONFIG_FUSE_BPF
 
 ssize_t fuse_backing_mmap(struct file *file, struct vm_area_struct *vma);
 
@@ -1705,7 +1707,6 @@ static inline void convert_fuse_statfs(struct kstatfs *stbuf, struct fuse_kstatf
 #ifdef CONFIG_FUSE_BPF
 int __init fuse_bpf_init(void);
 void __exit fuse_bpf_cleanup(void);
-
 #endif /* CONFIG_FUSE_BPF */
 
 #endif /* _FS_FUSE_I_H */
