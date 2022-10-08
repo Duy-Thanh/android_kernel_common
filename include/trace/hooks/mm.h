@@ -19,6 +19,7 @@
 #include <trace/hooks/vendor_hooks.h>
 
 #ifdef __GENKSYMS__
+#include <linux/fs.h>
 #include <linux/types.h>
 #include <linux/mm.h>
 #include <linux/oom.h>
@@ -146,6 +147,11 @@ DECLARE_HOOK(android_vh_rmqueue,
 DECLARE_HOOK(android_vh_kmalloc_slab,
 	TP_PROTO(unsigned int index, gfp_t flags, struct kmem_cache **s),
 	TP_ARGS(index, flags, s));
+DECLARE_HOOK(android_vh_do_file_map,
+	TP_PROTO(struct inode *inode, pgoff_t offset,
+		unsigned long pagesize),
+	TP_ARGS(inode, offset, pagesize));
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

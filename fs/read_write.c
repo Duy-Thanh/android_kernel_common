@@ -24,6 +24,8 @@
 
 #include <linux/uaccess.h>
 #include <asm/unistd.h>
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/fs.h>
 
 const struct file_operations generic_ro_fops = {
 	.llseek		= generic_file_llseek,
@@ -472,6 +474,8 @@ ssize_t vfs_read(struct file *file, char __user *buf, size_t count, loff_t *pos)
 		return -EINVAL;
 	if (unlikely(!access_ok(buf, count)))
 		return -EFAULT;
+
+	trace_android_vh_do_fs_read(file, pos, count);
 
 	ret = rw_verify_area(READ, file, pos, count);
 	if (ret)

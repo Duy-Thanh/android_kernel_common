@@ -56,6 +56,8 @@
 
 #include <asm/mman.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
 /*
  * Shared mappings implemented 30.11.1994. It's not fully working yet,
  * though.
@@ -3052,6 +3054,8 @@ vm_fault_t filemap_fault(struct vm_fault *vmf)
 	struct page *page;
 	vm_fault_t ret = 0;
 	bool mapping_locked = false;
+
+	trace_android_vh_do_file_map(inode, offset, PAGE_SIZE);
 
 	if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
 		page = find_get_page(mapping, offset);
