@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f2a1fd8_69f4f63b",
+        "filename": "include/linux/psi_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-08T06:47:55Z",
+      "side": 1,
+      "message": "\u003d1 to be explicit?",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 16
+      },
+      "revId": "2852c15da736982a32e6faa8341f324bb0552353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d99a0f35_b1d282a3",
+        "filename": "kernel/sched/psi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-08T06:47:55Z",
+      "side": 1,
+      "message": "should go into the normal file with the rest of the atomic functions?",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 53
+      },
+      "revId": "2852c15da736982a32e6faa8341f324bb0552353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
