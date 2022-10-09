@@ -877,6 +877,13 @@ L:	netdev@vger.kernel.org
 S:	Maintained
 F:	drivers/net/ethernet/altera/
 
+ALTERA TSE PCS
+M:	Maxime Chevallier <maxime.chevallier@bootlin.com>
+L:	netdev@vger.kernel.org
+S:	Supported
+F:	drivers/net/pcs/pcs-altera-tse.c
+F:	include/linux/pcs-altera-tse.h
+
 ALTERA UART/JTAG UART SERIAL DRIVERS
 M:	Tobias Klauser <tklauser@distanz.ch>
 L:	linux-serial@vger.kernel.org
@@ -1331,6 +1338,15 @@ F:	drivers/iio/adc/ltc249*
 F:	drivers/iio/amplifiers/hmc425a.c
 F:	drivers/staging/iio/*/ad*
 X:	drivers/iio/*/adjd*
+
+ANALOG DEVICES INC MAX31760 DRIVER
+M:	Ibrahim Tilki <Ibrahim.Tilki@analog.com>
+S:	Maintained
+W:	http://wiki.analog.com/
+W:	https://ez.analog.com/linux-software-drivers
+F:	Documentation/devicetree/bindings/hwmon/adi,max31760.yaml
+F:	Documentation/hwmon/max31760.rst
+F:	drivers/hwmon/max31760.c
 
 ANALOGBITS PLL LIBRARIES
 M:	Paul Walmsley <paul.walmsley@sifive.com>
@@ -2392,6 +2408,7 @@ N:	atmel
 ARM/Microchip Sparx5 SoC support
 M:	Lars Povlsen <lars.povlsen@microchip.com>
 M:	Steen Hegelund <Steen.Hegelund@microchip.com>
+M:	Daniel Machon <daniel.machon@microchip.com>
 M:	UNGLinuxDriver@microchip.com
 L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
 S:	Supported
@@ -3230,13 +3247,6 @@ L:	linux-hwmon@vger.kernel.org
 S:	Maintained
 F:	drivers/hwmon/asus_wmi_sensors.c
 
-ASUS WMI EC HARDWARE MONITOR DRIVER
-M:	Eugene Shalygin <eugene.shalygin@gmail.com>
-M:	Denis Pauk <pauk.denis@gmail.com>
-L:	linux-hwmon@vger.kernel.org
-S:	Maintained
-F:	drivers/hwmon/asus_wmi_ec_sensors.c
-
 ASUS EC HARDWARE MONITOR DRIVER
 M:	Eugene Shalygin <eugene.shalygin@gmail.com>
 L:	linux-hwmon@vger.kernel.org
@@ -3822,6 +3832,7 @@ F:	kernel/bpf/dispatcher.c
 F:	kernel/bpf/trampoline.c
 F:	include/linux/bpf*
 F:	include/linux/filter.h
+F:	include/linux/tnum.h
 
 BPF [BTF]
 M:	Martin KaFai Lau <martin.lau@linux.dev>
@@ -5720,13 +5731,6 @@ F:	include/linux/tfrc.h
 F:	include/uapi/linux/dccp.h
 F:	net/dccp/
 
-DECnet NETWORK LAYER
-L:	linux-decnet-user@lists.sourceforge.net
-S:	Orphan
-W:	http://linux-decnet.sourceforge.net
-F:	Documentation/networking/decnet.rst
-F:	net/decnet/
-
 DECSTATION PLATFORM SUPPORT
 M:	"Maciej W. Rozycki" <macro@orcam.me.uk>
 L:	linux-mips@vger.kernel.org
@@ -6179,7 +6183,7 @@ F:	Documentation/devicetree/bindings/memory-controllers/samsung,exynos5422-dmc.y
 F:	drivers/memory/samsung/exynos5422-dmc.c
 
 DME1737 HARDWARE MONITOR DRIVER
-M:	Juerg Haefliger <juergh@gmail.com>
+M:	Juerg Haefliger <juergh@proton.me>
 L:	linux-hwmon@vger.kernel.org
 S:	Maintained
 F:	Documentation/hwmon/dme1737.rst
@@ -12987,9 +12991,9 @@ F:	drivers/input/touchscreen/melfas_mip4.c
 
 MELLANOX BLUEFIELD I2C DRIVER
 M:	Khalil Blaiech <kblaiech@nvidia.com>
+M:	Asmaa Mnebhi <asmaa@nvidia.com>
 L:	linux-i2c@vger.kernel.org
 S:	Supported
-F:	Documentation/devicetree/bindings/i2c/mellanox,i2c-mlxbf.yaml
 F:	drivers/i2c/busses/i2c-mlxbf.c
 
 MELLANOX ETHERNET DRIVER (mlx4_en)
@@ -13437,6 +13441,14 @@ S:	Supported
 F:	Documentation/devicetree/bindings/nvmem/microchip,sama7g5-otpc.yaml
 F:	drivers/nvmem/microchip-otpc.c
 F:	include/dt-bindings/nvmem/microchip,sama7g5-otpc.h
+
+MICROCHIP PCI1XXXX I2C DRIVER
+M:	Tharun Kumar P <tharunkumar.pasumarthi@microchip.com>
+M:	Kumaravel Thiagarajan <kumaravel.thiagarajan@microchip.com>
+M:	Microchip Linux Driver Support <UNGLinuxDriver@microchip.com>
+L:	linux-i2c@vger.kernel.org
+S:	Maintained
+F:	drivers/i2c/busses/i2c-mchp-pci1xxxx.c
 
 MICROCHIP PWM DRIVER
 M:	Claudiu Beznea <claudiu.beznea@microchip.com>
@@ -14750,6 +14762,13 @@ F:	include/soc/mscc/ocelot*
 F:	net/dsa/tag_ocelot.c
 F:	net/dsa/tag_ocelot_8021q.c
 F:	tools/testing/selftests/drivers/net/ocelot/*
+
+OCELOT EXTERNAL SWITCH CONTROL
+M:	Colin Foster <colin.foster@in-advantage.com>
+S:	Supported
+F:	Documentation/devicetree/bindings/mfd/mscc,ocelot.yaml
+F:	drivers/mfd/ocelot*
+F:	include/linux/mfd/ocelot.h
 
 OCXL (Open Coherent Accelerator Processor Interface OpenCAPI) DRIVER
 M:	Frederic Barrat <fbarrat@linux.ibm.com>
@@ -19526,6 +19545,11 @@ L:	netdev@vger.kernel.org
 S:	Maintained
 F:	drivers/net/ethernet/dlink/sundance.c
 
+SUN HAPPY MEAL ETHERNET DRIVER
+M:	Sean Anderson <seanga2@gmail.com>
+S:	Maintained
+F:	drivers/net/ethernet/sun/sunhme.*
+
 SUNPLUS ETHERNET DRIVER
 M:	Wells Lu <wellslutw@gmail.com>
 L:	netdev@vger.kernel.org
@@ -20633,6 +20657,13 @@ W:	https://kernsec.org/wiki/index.php/Linux_Kernel_Integrity
 Q:	https://patchwork.kernel.org/project/linux-integrity/list/
 T:	git git://git.kernel.org/pub/scm/linux/kernel/git/jarkko/linux-tpmdd.git
 F:	drivers/char/tpm/
+
+TPS546D24 DRIVER
+M:	Duke Du <dukedu83@gmail.com>
+L:	linux-hwmon@vger.kernel.org
+S:	Maintained
+F:	Documentation/hwmon/tps546d24.rst
+F:	drivers/hwmon/pmbus/tps546d24.c
 
 TRACING
 M:	Steven Rostedt <rostedt@goodmis.org>
@@ -21837,7 +21868,7 @@ F:	lib/test_scanf.c
 F:	lib/vsprintf.c
 
 VT1211 HARDWARE MONITOR DRIVER
-M:	Juerg Haefliger <juergh@gmail.com>
+M:	Juerg Haefliger <juergh@proton.me>
 L:	linux-hwmon@vger.kernel.org
 S:	Maintained
 F:	Documentation/hwmon/vt1211.rst
@@ -21896,9 +21927,11 @@ F:	drivers/input/tablet/wacom_serial4.c
 
 WANGXUN ETHERNET DRIVER
 M:	Jiawen Wu <jiawenwu@trustnetic.com>
+M:	Mengyuan Lou <mengyuanlou@net-swift.com>
+W:	https://www.net-swift.com
 L:	netdev@vger.kernel.org
 S:	Maintained
-F:	Documentation/networking/device_drivers/ethernet/wangxun/txgbe.rst
+F:	Documentation/networking/device_drivers/ethernet/wangxun/*
 F:	drivers/net/ethernet/wangxun/
 
 WATCHDOG DEVICE DRIVERS
