@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0573728d_f53b43fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-09T07:04:44Z",
+      "side": 1,
+      "message": "Can you wait until after 6.1-rc1 is merged here to remove the merge conflicts this will cause?",
+      "revId": "2a9ed747e8f637346175798dc1c102051a3fcf04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
