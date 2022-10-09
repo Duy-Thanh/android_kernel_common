@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a7c6e0c_e0a8beee",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-09T07:35:04Z",
+      "side": 1,
+      "message": "no normal driver should be calling this, please do not do so.",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f1fc63_29fabc64",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-09T07:35:04Z",
+      "side": 1,
+      "message": "what driver needs this, that is not a normal symbol to use by a driver.",
+      "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
