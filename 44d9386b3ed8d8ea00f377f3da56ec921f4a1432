@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "441f3184_b6b579a5",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1191259
+      },
+      "writtenOn": "2022-10-10T02:28:18Z",
+      "side": 1,
+      "message": "Sir, we need to use add_interrupt_randomness() to speep up random crng initialization for the optimization of system startup. Because the boringssl_self_test will block for 2.5s when the entropy pool has not been initialized.\n\nlog as follows:\n\n17:35:41.563   193   193 W         : boringssl_self_test_fast\n17:35:41.571   193   193 W \u003cunknown\u003e: getrandom indicates that the entropy pool has not been initialized. Rather than continue with poor entropy, this process will block until entropy is available.\n17:35:44.024     0     0 I [    C1] random: crng init done\n17:35:44.045   193   193 W         : boringssl_self_test_rsa",
+      "parentUuid": "6a7c6e0c_e0a8beee",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1f1fc63_29fabc64",
         "filename": "android/abi_gki_aarch64_sunxi",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2022-10-09T07:35:04Z",
       "side": 1,
       "message": "what driver needs this, that is not a normal symbol to use by a driver.",
+      "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7583d297_3fc3245f",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1191259
+      },
+      "writtenOn": "2022-10-10T02:28:18Z",
+      "side": 1,
+      "message": "Yes, this can be removed, thanks for pointing it out.\nI have resubmitted the patch, please review.",
+      "parentUuid": "e1f1fc63_29fabc64",
       "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
