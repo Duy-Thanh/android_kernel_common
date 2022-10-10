@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf33d7cc_d6c64830",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-10T16:10:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8582286_2dba1fc7",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1f1fc63_29fabc64",
@@ -127,6 +151,24 @@
       "side": 1,
       "message": "Yes, this can be removed, thanks for pointing it out.\nI have resubmitted the patch, please review.",
       "parentUuid": "e1f1fc63_29fabc64",
+      "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30493493_1b3dcf6f",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-10T16:10:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7583d297_3fc3245f",
       "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
