@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d59794be_984bf5ce",
+        "filename": "include/linux/psi_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-10T17:00:18Z",
+      "side": 1,
+      "message": "As you are requiring these to be specific bits, I would be explicit 😊",
+      "parentUuid": "ffd0b3b5_22131cd4",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 16
+      },
+      "revId": "2852c15da736982a32e6faa8341f324bb0552353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d99a0f35_b1d282a3",
         "filename": "kernel/sched/psi.c",
         "patchSetId": 2
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "As this is an out-of-tree patch to work around the ABI breakage, I want to keep it as local as possible to minimize future merge conflicts. If you insist I will move them to the proper place though.",
       "parentUuid": "d99a0f35_b1d282a3",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 53
+      },
+      "revId": "2852c15da736982a32e6faa8341f324bb0552353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54233123_8f490712",
+        "filename": "kernel/sched/psi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-10T17:00:18Z",
+      "side": 1,
+      "message": "Ok, this is fine.",
+      "parentUuid": "35c75777_16e6b8a6",
       "range": {
         "startLine": 194,
         "startChar": 0,
