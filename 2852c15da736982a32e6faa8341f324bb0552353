@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffd0b3b5_22131cd4",
+        "filename": "include/linux/psi_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-10-10T16:10:04Z",
+      "side": 1,
+      "message": "That\u0027s not the style used in this header but I can do that.",
+      "parentUuid": "2f2a1fd8_69f4f63b",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 16
+      },
+      "revId": "2852c15da736982a32e6faa8341f324bb0552353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d99a0f35_b1d282a3",
         "filename": "kernel/sched/psi.c",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-08T06:47:55Z",
       "side": 1,
       "message": "should go into the normal file with the rest of the atomic functions?",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 53
+      },
+      "revId": "2852c15da736982a32e6faa8341f324bb0552353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35c75777_16e6b8a6",
+        "filename": "kernel/sched/psi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-10-10T16:10:04Z",
+      "side": 1,
+      "message": "As this is an out-of-tree patch to work around the ABI breakage, I want to keep it as local as possible to minimize future merge conflicts. If you insist I will move them to the proper place though.",
+      "parentUuid": "d99a0f35_b1d282a3",
       "range": {
         "startLine": 194,
         "startChar": 0,
