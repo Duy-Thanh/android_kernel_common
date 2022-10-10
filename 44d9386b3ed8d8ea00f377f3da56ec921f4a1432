@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8582286_2dba1fc7",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1191259
+      },
+      "writtenOn": "2022-10-10T14:24:50Z",
+      "side": 1,
+      "message": "Yes, some of our platform with hardware random generator can work well.\nBut some of our platform does not have the hardware random generator, so that is why we require this interface. But you are right, there really shouldn\u0027t be a driver calling this interface. We will find other solutions, thanks!\n\nI have removed it and resubmitted the patch, please review.",
+      "parentUuid": "bbdec9f0_3a4866e5",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1f1fc63_29fabc64",
         "filename": "android/abi_gki_aarch64_sunxi",
         "patchSetId": 1
