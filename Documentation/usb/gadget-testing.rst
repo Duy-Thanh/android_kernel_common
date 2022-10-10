@@ -787,6 +787,8 @@ The uvc function provides these attributes in its function directory:
 	function_name       name of the interface
 	req_int_skip_div    divisor of total requests to aid in calculating
 			    interrupt frequency, 0 indicates all interrupt
+	sg_supported        allow for scatter gather to be used if the UDC
+			    hw supports it
 	=================== ================================================
 
 There are also "control" and "streaming" subdirectories, each of which contain

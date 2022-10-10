@@ -148,11 +148,11 @@ int uvcg_queue_init(struct uvc_video_queue *queue, struct device *dev, enum v4l2
 	queue->queue.buf_struct_size = sizeof(struct uvc_buffer);
 	queue->queue.ops = &uvc_queue_qops;
 	queue->queue.lock = lock;
-	if (cdev->gadget->sg_supported) {
+	if (queue->use_sg && cdev->gadget->sg_supported) {
 		queue->queue.mem_ops = &vb2_dma_sg_memops;
-		queue->use_sg = 1;
 	} else {
 		queue->queue.mem_ops = &vb2_vmalloc_memops;
+		queue->use_sg = false;
 	}
 
 	queue->queue.timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC

@@ -9,6 +9,7 @@ Description:	UVC function directory
 		streaming_interval	1..16
 		function_name		string [32]
 		req_int_skip_div	unsigned int
+		sg_supported		0..1
 		===================	=============================
 
 What:		/config/usb-gadget/gadget/functions/uvc.name/control

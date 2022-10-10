@@ -2423,6 +2423,7 @@ UVCG_OPTS_ATTR(streaming_interval, streaming_interval, 16);
 UVCG_OPTS_ATTR(streaming_maxpacket, streaming_maxpacket, 3072);
 UVCG_OPTS_ATTR(streaming_maxburst, streaming_maxburst, 15);
 UVCG_OPTS_ATTR(req_int_skip_div, req_int_skip_div, UINT_MAX);
+UVCG_OPTS_ATTR(sg_supported, sg_supported, 1);
 
 #undef UVCG_OPTS_ATTR
 
@@ -2471,6 +2472,7 @@ static struct configfs_attribute *uvc_attrs[] = {
 	&f_uvc_opts_attr_streaming_maxpacket,
 	&f_uvc_opts_attr_streaming_maxburst,
 	&f_uvc_opts_attr_req_int_skip_div,
+	&f_uvc_opts_attr_sg_supported,
 	&f_uvc_opts_string_attr_function_name,
 	NULL,
 };
