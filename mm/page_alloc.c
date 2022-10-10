@@ -8557,6 +8557,8 @@ static void __setup_per_zone_wmarks(void)
 		zone->_watermark[WMARK_HIGH] = min_wmark_pages(zone) + tmp * 2;
 
 		spin_unlock_irqrestore(&zone->lock, flags);
+
+		trace_android_vh_setup_per_zone_wmarks(zone);
 	}
 
 	/* update totalreserve_pages */
