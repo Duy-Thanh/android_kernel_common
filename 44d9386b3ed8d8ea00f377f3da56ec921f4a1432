@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bbdec9f0_3a4866e5",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-10T06:19:30Z",
+      "side": 1,
+      "message": "This should not be an issue on 5.15 anymore with the rewrite of the random pool logic.  And where are you getting the randomness from to seed the pool?  A normal hardware random generator in your system will already handle this just fine, no driver should ever call this function.",
+      "parentUuid": "441f3184_b6b579a5",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "44d9386b3ed8d8ea00f377f3da56ec921f4a1432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1f1fc63_29fabc64",
         "filename": "android/abi_gki_aarch64_sunxi",
         "patchSetId": 1
