@@ -360,6 +360,7 @@ enum rwsem_wake_type {
  * however unlikely.
  */
 #define MAX_READERS_WAKEUP	0x100
+#define MAX_HANDOFF_SPIN       10
 
 static inline void
 rwsem_add_waiter(struct rw_semaphore *sem, struct rwsem_waiter *waiter)
@@ -1070,6 +1071,7 @@ rwsem_down_write_slowpath(struct rw_semaphore *sem, int state)
 	long count;
 	struct rwsem_waiter waiter;
 	DEFINE_WAKE_Q(wake_q);
+	int handoff_spins = 0;
 	bool already_on_list = false;
 
 	/* do optimistic spinning and steal lock if possible */
@@ -1152,6 +1154,13 @@ wait:
 		 * has just released the lock, OWNER_NULL will be returned.
 		 * In this case, we attempt to acquire the lock again
 		 * without sleeping.
+		 * It is possible the new lock owner (writer) can be preempted
+		 * before setting the owner field and if the current(e.g RT task)
+		 * waiter is the task that preempts the new lock owner, it will
+		 * spin in this loop for a long time. Avoid wasting cpu time
+		 * and delaying the release of the lock by yielding the cpu if
+		 * handoff optimistic spinning has been done multiple times with
+		 * NULL owner.
 		 */
 		if (waiter.handoff_set) {
 			enum owner_state owner_state;
@@ -1160,8 +1169,10 @@ wait:
 			owner_state = rwsem_spin_on_owner(sem);
 			preempt_enable();
 
-			if (owner_state == OWNER_NULL)
+			if ((owner_state == OWNER_NULL)&&(handoff_spins < MAX_HANDOFF_SPIN)) {
+				handoff_spins++;
 				goto trylock_again;
+			}
 		}
 
 		schedule();
