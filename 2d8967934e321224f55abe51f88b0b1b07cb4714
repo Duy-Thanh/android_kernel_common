@@ -33,6 +33,42 @@
       "message": "You removed symbols, please rebase and regenerate the .xml file.",
       "revId": "2d8967934e321224f55abe51f88b0b1b07cb4714",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b4008f8_f2898c21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-11T17:09:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b5b462e_ca223057",
+      "revId": "2d8967934e321224f55abe51f88b0b1b07cb4714",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd1549cc_e3b5b0a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-11T17:09:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c5bde06_d4e7c197",
+      "revId": "2d8967934e321224f55abe51f88b0b1b07cb4714",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
