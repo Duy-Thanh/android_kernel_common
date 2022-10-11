@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e24d0ee_aee8e9bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:30:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2744b81_8d35f197",
+      "range": {
+        "startLine": 12,
+        "startChar": 29,
+        "endLine": 12,
+        "endChar": 38
+      },
+      "revId": "f2adbbb7ccf752c0993e038a81be5df5806c5ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63423b9b_3a947439",
@@ -79,6 +103,24 @@
       "side": 1,
       "message": "Removed",
       "parentUuid": "63423b9b_3a947439",
+      "revId": "f2adbbb7ccf752c0993e038a81be5df5806c5ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e033f34c_a55e28b3",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:30:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27d4c5e1_421e337e",
       "revId": "f2adbbb7ccf752c0993e038a81be5df5806c5ee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
