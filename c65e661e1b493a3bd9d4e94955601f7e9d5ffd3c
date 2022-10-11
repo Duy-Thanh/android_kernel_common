@@ -34,6 +34,24 @@
       "parentUuid": "27d8dde7_cbc14d52",
       "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2024966b_0c1a41cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-11T07:12:41Z",
+      "side": 1,
+      "message": "Then please just wait a few days for it to be merged here.  You can see the merge of upstream changes in this branch already, it is currently stalled due to some build errors, but they will be fixed soon.\n\nI\u0027ll just abandon this for now.",
+      "parentUuid": "03c4f8d4_04029572",
+      "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
