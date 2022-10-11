@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25679e26_ac8bd69a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-10-11T17:53:12Z",
+      "side": 1,
+      "message": "Actually, these are UPSTREAM now. Could you change this over?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "9ca37979b6ea003b86c8e348952dd6ea9ba87ee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
