@@ -16,6 +16,24 @@
       "message": "Why is this not upstream first?\n\nAnd if it is upstream, when will it get merged into Linus\u0027s tree?",
       "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03c4f8d4_04029572",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902100
+      },
+      "writtenOn": "2022-10-11T07:04:52Z",
+      "side": 1,
+      "message": "it was merged here\nhttps://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/?id\u003d7aa429e8d40ed7e8ab3c0ff5e2836c051ab2434a",
+      "parentUuid": "27d8dde7_cbc14d52",
+      "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
