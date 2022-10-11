@@ -52,6 +52,24 @@
       "parentUuid": "03c4f8d4_04029572",
       "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60b3e6f5_6064b0cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902100
+      },
+      "writtenOn": "2022-10-11T07:23:20Z",
+      "side": 1,
+      "message": "Hi, do you mean this change will be included after this merged ?\nhttps://android-review.googlesource.com/c/kernel/common/+/2242163",
+      "parentUuid": "2024966b_0c1a41cd",
+      "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
