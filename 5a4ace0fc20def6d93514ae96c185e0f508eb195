@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63db8614_3335eb52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-10-11T17:06:43Z",
+      "side": 1,
+      "message": "I think there are other OWNERS files in the tree, you need to remove them all most likey.",
+      "revId": "5a4ace0fc20def6d93514ae96c185e0f508eb195",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
