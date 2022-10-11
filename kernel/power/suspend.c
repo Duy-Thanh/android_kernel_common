@@ -137,7 +137,13 @@ static void s2idle_loop(void)
 			break;
 		}
 
+<<<<<<< HEAD   (c444ad Merge 1c2daf52185b ("Merge tag 'tag-chrome-platform-for-v6.1)
 		clear_wakeup_reasons();
+=======
+		if (s2idle_ops && s2idle_ops->check)
+			s2idle_ops->check();
+
+>>>>>>> BRANCH (7fb68b Merge tag 'platform-drivers-x86-v6.1-1' of git://git.kernel.)
 		s2idle_enter();
 	}
 
