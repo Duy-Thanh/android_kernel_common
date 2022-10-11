@@ -3741,8 +3741,8 @@ out:
 	return result;
 }
 
-static int nl80211_send_chandef(struct sk_buff *msg,
-				const struct cfg80211_chan_def *chandef)
+int cfg80211_send_chandef(struct sk_buff *msg,
+			  const struct cfg80211_chan_def *chandef)
 {
 	if (WARN_ON(!cfg80211_chandef_valid(chandef)))
 		return -EINVAL;
@@ -3772,6 +3772,13 @@ static int nl80211_send_chandef(struct sk_buff *msg,
 	    nla_put_u32(msg, NL80211_ATTR_CENTER_FREQ2, chandef->center_freq2))
 		return -ENOBUFS;
 	return 0;
+}
+EXPORT_SYMBOL(cfg80211_send_chandef);
+
+static int nl80211_send_chandef(struct sk_buff *msg,
+				const struct cfg80211_chan_def *chandef)
+{
+	return cfg80211_send_chandef(msg, chandef);
 }
 
 static int nl80211_send_iface(struct sk_buff *msg, u32 portid, u32 seq, int flags,
