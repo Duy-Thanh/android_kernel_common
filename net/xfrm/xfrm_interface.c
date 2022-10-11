@@ -207,6 +207,71 @@ static void xfrmi_scrub_packet(struct sk_buff *skb, bool xnet)
 	skb->mark = 0;
 }
 
+static int xfrmi_rcv(struct sk_buff *skb, unsigned short family)
+{
+	rcu_read_lock();
+	if (!xfrm_policy_check(NULL, XFRM_POLICY_IN, skb, family)) {
+		rcu_read_unlock();
+		goto discard;
+	}
+
+	rcu_read_unlock();
+
+	if (family == AF_INET)
+		return xfrm4_rcv(skb);
+	else
+		return xfrm6_rcv(skb);
+
+discard:
+	kfree_skb(skb);
+	return 0;
+}
+
+static int xfrmi4_rcv(struct sk_buff *skb)
+{
+	return xfrmi_rcv(skb, AF_INET);
+}
+
+static int xfrmi6_rcv(struct sk_buff *skb)
+{
+	return xfrmi_rcv(skb, AF_INET6);
+}
+
+static int xfrmi_input(struct sk_buff *skb, int nexthdr, __be32 spi,
+		       int encap_type, unsigned short family)
+{
+	struct xfrm_if *xi;
+
+	rcu_read_lock();
+	xi = xfrmi_decode_session(skb, family);
+	if (xi) {
+		if (!xfrm_policy_check(NULL, XFRM_POLICY_IN,
+				       skb, family)) {
+			rcu_read_unlock();
+			goto discard;
+		}
+
+		rcu_read_unlock();
+		return xfrm_input(skb, nexthdr, spi, encap_type);
+	}
+	rcu_read_unlock();
+	return -EINVAL;
+
+discard:
+	kfree_skb(skb);
+	return 0;
+}
+
+static int xfrmi4_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
+{
+	return xfrmi_input(skb, nexthdr, spi, encap_type, AF_INET);
+}
+
+static int xfrmi6_input(struct sk_buff *skb, int nexthdr, __be32 spi, int encap_type)
+{
+	return xfrmi_input(skb, nexthdr, spi, encap_type, AF_INET6);
+}
+
 static int xfrmi_rcv_cb(struct sk_buff *skb, int err)
 {
 	const struct xfrm_mode *inner_mode;
@@ -780,8 +845,8 @@ static struct pernet_operations xfrmi_net_ops = {
 };
 
 static struct xfrm6_protocol xfrmi_esp6_protocol __read_mostly = {
-	.handler	=	xfrm6_rcv,
-	.input_handler	=	xfrm_input,
+	.handler	=	xfrmi6_rcv,
+	.input_handler	=	xfrmi6_input,
 	.cb_handler	=	xfrmi_rcv_cb,
 	.err_handler	=	xfrmi6_err,
 	.priority	=	10,
@@ -831,8 +896,8 @@ static struct xfrm6_tunnel xfrmi_ip6ip_handler __read_mostly = {
 #endif
 
 static struct xfrm4_protocol xfrmi_esp4_protocol __read_mostly = {
-	.handler	=	xfrm4_rcv,
-	.input_handler	=	xfrm_input,
+	.handler	=	xfrmi4_rcv,
+	.input_handler	=	xfrmi4_input,
 	.cb_handler	=	xfrmi_rcv_cb,
 	.err_handler	=	xfrmi4_err,
 	.priority	=	10,
