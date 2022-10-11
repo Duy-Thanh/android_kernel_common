@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b312bea_6f312f8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-11T06:56:38Z",
+      "side": 1,
+      "message": "You are still removing symbols, please rebase and rebuild:\n\n`ERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - __traceiter_softirq_entry\n - __traceiter_softirq_exit\n - __tracepoint_softirq_entry\n - __tracepoint_softirq_exit`",
+      "revId": "081bebc57047809406106608c2cc24dcff8125f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
