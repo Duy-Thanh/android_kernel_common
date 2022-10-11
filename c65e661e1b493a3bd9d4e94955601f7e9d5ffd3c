@@ -70,6 +70,24 @@
       "parentUuid": "2024966b_0c1a41cd",
       "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a65bb7cc_83a9e4e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897817
+      },
+      "writtenOn": "2022-10-11T08:04:12Z",
+      "side": 1,
+      "message": "Hi Greg, \nThis change is needed for our current QCOM LTS change merge.\nSince we have CONFIG_INTERCONNECT_QCOM\u003dm instead of only bool here. Without the chagne it will affect the abi check failed abi build. \n\nwe don\u0027t want to have an intermedia solution for CONFIG_INTERCONNECT_QCOM\u003dy and merge it in android gki defconfig. That\u0027s why we need to merge this change to the android-mainline as soon as possible.",
+      "parentUuid": "60b3e6f5_6064b0cb",
+      "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
