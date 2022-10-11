@@ -88,6 +88,41 @@
       "parentUuid": "60b3e6f5_6064b0cb",
       "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4431168e_90381004",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-11T14:31:20Z",
+      "side": 1,
+      "message": "Yes, this will be merged within a few days taking it directly from upstream there is no need to add it here now during the middle of merging all of the upstream 6.1-rc1 changes.\n\nAlso, there is no ABI issues in this branch, so I do not understand why it is required right now, especially given the very very heavy churn that is happening right now in this branch.  Just wait a week or so and it will be added automatically and all will be fine, right?",
+      "parentUuid": "a65bb7cc_83a9e4e4",
+      "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde57728_92bc4014",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-11T14:31:20Z",
+      "side": 1,
+      "message": "Also we couldn\u0027t even take this as is for the obvious changelog problems 😊",
+      "revId": "c65e661e1b493a3bd9d4e94955601f7e9d5ffd3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
