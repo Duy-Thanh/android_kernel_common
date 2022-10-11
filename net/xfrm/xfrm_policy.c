@@ -3557,7 +3557,7 @@ int __xfrm_policy_check(struct sock *sk, int dir, struct sk_buff *skb,
 	int xerr_idx = -1;
 	const struct xfrm_if_cb *ifcb;
 	struct sec_path *sp;
-	struct xfrm_if *xi;
+	struct xfrm_if *xi = NULL;
 	u32 if_id = 0;
 
 	rcu_read_lock();
@@ -3698,6 +3698,9 @@ int __xfrm_policy_check(struct sock *sk, int dir, struct sk_buff *skb,
 			XFRM_INC_STATS(net, LINUX_MIB_XFRMINTMPLMISMATCH);
 			goto reject;
 		}
+
+		if (xi)
+			secpath_reset(skb);
 
 		xfrm_pols_put(pols, npols);
 		sp->verified_cnt = k;
