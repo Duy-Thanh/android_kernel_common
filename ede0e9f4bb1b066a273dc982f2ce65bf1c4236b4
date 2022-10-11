@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41a02a51_98918c0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "996332bf_77da6cfc",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 562
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8d7957c_58788ce1",
@@ -147,6 +171,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00970813_da81370e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "521ff161_c967f0b6",
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a6d2f00_05fef544",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0045876_21086e8e",
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c365f59_58e70758",
@@ -194,6 +254,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7739a8b1_8cea513f",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f12cad11_0ec89b67",
+      "range": {
+        "startLine": 1531,
+        "startChar": 2,
+        "endLine": 1531,
+        "endChar": 40
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bb2f3ef_2df16243",
@@ -231,6 +315,30 @@
       "side": 1,
       "message": "fixed in latest one",
       "parentUuid": "0bb2f3ef_2df16243",
+      "range": {
+        "startLine": 2531,
+        "startChar": 6,
+        "endLine": 2531,
+        "endChar": 22
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13d99417_47b81618",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2531,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c85533d5_4dde39c3",
       "range": {
         "startLine": 2531,
         "startChar": 6,
@@ -326,6 +434,30 @@
       "side": 1,
       "message": "Thanks for the suggestions Isaac. This method works. Added a new vendor hook trace_android_vh_save_hib_resume_bdev.",
       "parentUuid": "28c92ae4_d9826814",
+      "range": {
+        "startLine": 2622,
+        "startChar": 48,
+        "endLine": 2622,
+        "endChar": 64
+      },
+      "revId": "ede0e9f4bb1b066a273dc982f2ce65bf1c4236b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73314c49_f5885bb5",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2622,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df442247_afb91127",
       "range": {
         "startLine": 2622,
         "startChar": 48,

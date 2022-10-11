@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86ce86a4_69dc5e77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f36e578_a38b5539",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 13
+      },
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad8e324b_2e6d847d",
@@ -119,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e267a89e_5daad8ff",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 5
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6eba11a_a8fc409f",
+      "range": {
+        "startLine": 2133,
+        "startChar": 0,
+        "endLine": 2133,
+        "endChar": 49
+      },
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa668f06_10c8e496",
@@ -154,6 +202,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11f2c009_c930a8bb",
+        "filename": "arch/arm64/kernel/hibernate.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a53a5dd_c73d6378",
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c4635ee_710eaaaa",
@@ -185,6 +251,24 @@
       "side": 1,
       "message": "Fixed.",
       "parentUuid": "3c4635ee_710eaaaa",
+      "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e081281a_5b0668cf",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8aeca3e_85e8628d",
       "revId": "9adfd512e0a81b5bccb4e30b1f7b91a76f174124",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

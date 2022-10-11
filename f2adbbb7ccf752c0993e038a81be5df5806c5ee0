@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff31ddf7_1bca80b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "\"leveling\"",
+      "range": {
+        "startLine": 12,
+        "startChar": 29,
+        "endLine": 12,
+        "endChar": 38
+      },
+      "revId": "f2adbbb7ccf752c0993e038a81be5df5806c5ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63423b9b_3a947439",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-11T16:15:16Z",
+      "side": 1,
+      "message": "this struct is not needed.",
+      "revId": "f2adbbb7ccf752c0993e038a81be5df5806c5ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
