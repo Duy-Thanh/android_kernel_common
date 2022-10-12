@@ -70,6 +70,24 @@
       "parentUuid": "22cfd0d2_7cd13260",
       "revId": "2a9ed747e8f637346175798dc1c102051a3fcf04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ddfb0c3_6ad46187",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-12T07:46:37Z",
+      "side": 1,
+      "message": "As proof, the merge of the upstream 6.1-rc1 scheduler changes is huge and very complex and odds are will require a lot of WALT changes as well, so this tree can not be used for any system that requires this at this point in time at all.",
+      "parentUuid": "2e394f76_bfd87986",
+      "revId": "2a9ed747e8f637346175798dc1c102051a3fcf04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
