@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "515e24ab_7b7284b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-12T07:18:15Z",
+      "side": 1,
+      "message": "this is not allowed to be exported, sorry, it would be a security issue if it was.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 40
+      },
+      "revId": "6eed16bacd5009fcd7e0aec61c98a40018f8e20c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
