@@ -52,6 +52,24 @@
       "parentUuid": "c7edfcaa_de04c096",
       "revId": "2a9ed747e8f637346175798dc1c102051a3fcf04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e394f76_bfd87986",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-12T07:06:28Z",
+      "side": 1,
+      "message": "There is no way you are taking the android-mainline tree right now in the middle of the 6.1-rc1 merge cycle as it is not in any shape to be used anywhere, so I think waiting a bit is fine 😊",
+      "parentUuid": "22cfd0d2_7cd13260",
+      "revId": "2a9ed747e8f637346175798dc1c102051a3fcf04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
