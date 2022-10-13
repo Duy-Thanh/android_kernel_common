@@ -7,6 +7,8 @@ config GKI_HIDDEN_DRM_CONFIGS
 	select VIDEOMODE_HELPERS
 	select WANT_DEV_COREDUMP
 	select INTERVAL_TREE
+	select DRM_DISPLAY_HELPER
+	select DRM_DISPLAY_DP_HELPER
 	help
 	  Dummy config option used to enable hidden DRM configs.
 	  These are normally selected implicitly when including a
