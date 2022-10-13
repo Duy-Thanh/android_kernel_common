@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16ef5c85_4a9e82d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2022-10-13T18:42:13Z",
+      "side": 1,
+      "message": "Hi, We can remove QCOM_QFPROM from this list, which got renamed to NVMEM_QCOM_QFPROM. I had a similar patch to go as well aosp/2245313 and was waiting for the relevant tree to land in android-mainline.",
+      "revId": "e44f84be3d19a19accaf9a5f20e67047a8f98d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
