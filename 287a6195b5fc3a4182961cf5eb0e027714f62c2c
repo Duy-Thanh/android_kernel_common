@@ -16,6 +16,24 @@
       "message": "Something went really wrong with the abi checker here.  Giuliano, can you look at it?",
       "revId": "287a6195b5fc3a4182961cf5eb0e027714f62c2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df9efdd4_5f2cf6aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083383
+      },
+      "writtenOn": "2022-10-14T06:08:03Z",
+      "side": 1,
+      "message": "I\u0027ve updated the patch. Please review it again. Thank you.",
+      "parentUuid": "e8ea2d8a_72039cfa",
+      "revId": "287a6195b5fc3a4182961cf5eb0e027714f62c2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
