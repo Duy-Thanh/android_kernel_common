@@ -16,6 +16,23 @@
       "message": "This series fixes the out of tree backport of upstream commit f0fe00d4972a (\"security: allow using Clang\u0027s zero initialization for stack variables\"), done as commit 1b6a6a2efea1 (\"UPSTREAM: security: allow using Clang\u0027s zero initialization for stack variables\") in this branch. If there are other 5.4 branches that this should be applied to, I am happy to cherry pick them over.",
       "revId": "d51591f006b17d85a1a4cd3ad3ce56584d125af2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f4e0d5_2ace7b66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118753
+      },
+      "writtenOn": "2022-10-14T15:43:40Z",
+      "side": 1,
+      "message": "I cannot see the presubmit failure but I suspect it is defconfig related, as the first patch in the series will make zero initialization the default. I have updated the defconfig in this branch in aosp/2254856. I will do the same thing for the other branches shortly.",
+      "revId": "d51591f006b17d85a1a4cd3ad3ce56584d125af2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
