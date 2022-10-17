@@ -541,7 +541,11 @@ static int blk_crypto_fallback_init(void)
 	if (blk_crypto_fallback_inited)
 		return 0;
 
+<<<<<<< HEAD   (51058b Merge 8636df94ec91 ("Merge tag 'perf-tools-for-v6.1-2-2022-1)
 	prandom_bytes(blank_key, BLK_CRYPTO_MAX_STANDARD_KEY_SIZE);
+=======
+	get_random_bytes(blank_key, BLK_CRYPTO_MAX_KEY_SIZE);
+>>>>>>> BRANCH (f1947d Merge tag 'random-6.1-rc1-for-linus' of git://git.kernel.org)
 
 	err = bioset_init(&crypto_bio_split, 64, 0, 0);
 	if (err)
