@@ -16,6 +16,24 @@
       "message": "Why is this patch not submitted for the stable/LTS releases?",
       "revId": "cbd536c7ca055837a7118a2c1a3ffde7c13ca84a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a32b697_f54dd3da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-17T14:20:14Z",
+      "side": 1,
+      "message": "Nevermind, is not needed there, this is needed due to an android backport.",
+      "parentUuid": "35375423_a96f2c11",
+      "revId": "cbd536c7ca055837a7118a2c1a3ffde7c13ca84a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
