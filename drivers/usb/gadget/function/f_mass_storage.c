@@ -194,6 +194,8 @@
 
 #include <linux/nospec.h>
 
+#include <trace/hooks/msd_scsi.h>
+
 #include "configfs.h"
 
 
@@ -2066,6 +2068,7 @@ unknown_cmnd:
 		}
 		break;
 	}
+	trace_android_vh_msd_scsi_command(common->cmnd, common->cmnd_size);
 	up_read(&common->filesem);
 
 	if (reply == -EINTR || signal_pending(current))
