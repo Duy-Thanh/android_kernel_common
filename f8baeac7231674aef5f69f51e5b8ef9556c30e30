@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecc4e412_fc8eb275",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-10-18T06:25:38Z",
+      "side": 1,
+      "message": "Let me run by the change in MtpServer w/ the Google folks responsible.  If they think its not the correct fix, then will fix this comment as well.",
+      "parentUuid": "0af70481_f5dd7fbb",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fd7a3c3e_b07e96a9",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-10-18T06:14:11Z",
       "side": 1,
       "message": "the os-x issues should be fixed, right?  If not, can you send the fix upstream?",
+      "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c4d4f70_e098482b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-10-18T06:25:38Z",
+      "side": 1,
+      "message": "Problem is that the MTP function is using USB FFS, so function drivers are basically existing as an userspace application.  The issue lies in the MtpServer, which is basically treating the -EPIPE status as a critical error, and leads to the MtpServer being stopped/killed.  This leads to the MTP functionality not working.  We did do some testing w/ the changes in MtpServer, but I\u0027m not personally too experienced with that particular layer. (MtpServer is part of the Google framework)\n\nIf preferred, I can see if we can push a change to MtpServer that worked w/ limited testing, and see if we can come to a conclusion in the application itself.  If there are some things which can\u0027t be addressed, maybe this kernel change would be the only option for the short term.",
+      "parentUuid": "fd7a3c3e_b07e96a9",
       "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
