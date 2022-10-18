@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0af70481_f5dd7fbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-18T06:14:11Z",
+      "side": 1,
+      "message": "please just add it again, don\u0027t do a revert of a revert.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd7a3c3e_b07e96a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-18T06:14:11Z",
+      "side": 1,
+      "message": "the os-x issues should be fixed, right?  If not, can you send the fix upstream?",
+      "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
