@@ -87,6 +87,24 @@
       "parentUuid": "2d8f40e6_2444e791",
       "revId": "b8bb1683ac4bbdab1c8859512fc9aa23f2c39893",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d003dba1_39abab39",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2022-10-18T20:21:36Z",
+      "side": 1,
+      "message": "OK - the patch is ready - just compiling it before pushing.\nActually, I tested it on RB5 platform with 5.15 kernel - so I had it ready.\nFew minutes.",
+      "parentUuid": "9fbaca57_67c63151",
+      "revId": "b8bb1683ac4bbdab1c8859512fc9aa23f2c39893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
