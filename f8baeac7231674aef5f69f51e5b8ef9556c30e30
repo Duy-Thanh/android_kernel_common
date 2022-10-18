@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "30401b0f_9dd834ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-10-18T07:21:38Z",
+      "side": 1,
+      "message": "android12-5.10 has this change, so most likely it wasn\u0027t caught until our current product cycle.  Not sure why it wasn\u0027t seen, or addressed on the Pixel devices, but anyway, I will start a discussion to see if they can add this fix in the Mtp application.  Thanks, Greg!",
+      "parentUuid": "7c57b373_56d67fa1",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fd7a3c3e_b07e96a9",
