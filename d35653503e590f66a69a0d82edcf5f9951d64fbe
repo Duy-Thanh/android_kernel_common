@@ -33,6 +33,24 @@
       "message": "This shouldn\u0027t be here - is it?\nA rebase issue?",
       "revId": "d35653503e590f66a69a0d82edcf5f9951d64fbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72caa80a_ac441b59",
+        "filename": "drivers/mmc/core/block.c.rej",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-10-18T19:22:12Z",
+      "side": 1,
+      "message": "The patch did not apply cleanly with \u0027git am\u0027 so I used patch -p1 to apply the patch from the mailing list. The .rej file was created by the \u0027patch\u0027 tool. I have removed it.",
+      "parentUuid": "9d9d5f9f_080c3a9c",
+      "revId": "d35653503e590f66a69a0d82edcf5f9951d64fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
