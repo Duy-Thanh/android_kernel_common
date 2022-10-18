@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f743ec6_859e4ec3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2022-10-18T19:02:34Z",
+      "side": 1,
+      "message": "There is a rebase issue: drivers/mmc/core/block.c.rej shouldn\u0027t be there",
+      "revId": "d35653503e590f66a69a0d82edcf5f9951d64fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9d5f9f_080c3a9c",
+        "filename": "drivers/mmc/core/block.c.rej",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2022-10-18T19:02:34Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be here - is it?\nA rebase issue?",
+      "revId": "d35653503e590f66a69a0d82edcf5f9951d64fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
