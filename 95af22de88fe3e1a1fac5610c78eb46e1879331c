@@ -16,6 +16,24 @@
       "message": "Fine with me.\n\nGreg, is this guy on your -stable radar?",
       "revId": "95af22de88fe3e1a1fac5610c78eb46e1879331c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99487298_65ad347d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-18T15:35:12Z",
+      "side": 1,
+      "message": "It is already in the following stable releases:\n`5.4.215 5.10.145 5.15.70 5.19.11 6.0`",
+      "parentUuid": "7830d4ce_6f21670a",
+      "revId": "95af22de88fe3e1a1fac5610c78eb46e1879331c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
