@@ -16,6 +16,24 @@
       "message": "invalid git id used in the changelog text 😞",
       "revId": "de5a3a0c308aa65f7617d265b589dba91af63362",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e51e8b08_f9eb4b3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2022-10-18T09:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef42a04_19af7d91",
+      "revId": "de5a3a0c308aa65f7617d265b589dba91af63362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
