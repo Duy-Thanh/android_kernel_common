@@ -2297,7 +2297,10 @@
   rtc_update_irq
   rtc_valid_tm
   rtnl_is_locked
+<<<<<<< HEAD   (6bd08d ANDROID: mm/filemap: Fix missing put_page() for speculative )
   __rtnl_link_register
+=======
+>>>>>>> CHANGE (439fc0 ANDROID: GKI: Update symbols to symbol list)
   __rtnl_link_unregister
   rtnl_lock
   rtnl_unlock
