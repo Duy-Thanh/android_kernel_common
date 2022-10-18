@@ -123,6 +123,24 @@
       "parentUuid": "d003dba1_39abab39",
       "revId": "b8bb1683ac4bbdab1c8859512fc9aa23f2c39893",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f23bbc08_631de5e2",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-10-18T20:48:10Z",
+      "side": 1,
+      "message": "I think the subject has 52 characters. I\u0027m fine with the subject being 2 characters more than the recommended limit :-)",
+      "parentUuid": "fa4ad280_d42f2159",
+      "revId": "b8bb1683ac4bbdab1c8859512fc9aa23f2c39893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
