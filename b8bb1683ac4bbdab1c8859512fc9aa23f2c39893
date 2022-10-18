@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb559a78_a09d8441",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2022-10-18T19:49:07Z",
+      "side": 1,
+      "message": "This doesn\u0027t look right either.\nDid you pick the correct patch?\n\nYou can either take it from Ulf\u0027s tree - git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/mmc.git\ncommit 07d2872bf4c8 (mmc: core: Add SD card quirk for broken discard)\n\nor from linux-stable both 5.19 \u0026 6.0.",
+      "revId": "b8bb1683ac4bbdab1c8859512fc9aa23f2c39893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
