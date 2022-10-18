@@ -16,6 +16,24 @@
       "message": "upstream?",
       "revId": "9d9682dfc729b639f7eb99a5588636233f0309d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e483883_787d94e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015397
+      },
+      "writtenOn": "2022-10-18T18:14:53Z",
+      "side": 1,
+      "message": "This one is already marked as stable and I see it in 5.15.46",
+      "parentUuid": "cc729408_be400998",
+      "revId": "9d9682dfc729b639f7eb99a5588636233f0309d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
