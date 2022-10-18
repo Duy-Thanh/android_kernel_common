@@ -20,6 +20,7 @@
 #include <linux/dma-mapping.h>
 
 #include "trusty-smc.h"
+#include "trusty-share-api.h"
 
 struct trusty_state;
 static struct platform_driver trusty_driver;
@@ -45,6 +46,7 @@ struct trusty_state {
 	struct list_head nop_queue;
 	spinlock_t nop_lock; /* protects nop_queue */
 	struct device_dma_parameters dma_parms;
+	void *trusty_share_state;
 	void *ffa_tx;
 	void *ffa_rx;
 	u16 ffa_local_id;
@@ -850,6 +852,7 @@ static int trusty_probe(struct platform_device *pdev)
 	work_func_t work_func;
 	struct trusty_state *s;
 	struct device_node *node = pdev->dev.of_node;
+	void *share;
 
 	if (!node) {
 		dev_err(&pdev->dev, "of_node required\n");
@@ -922,8 +925,17 @@ static int trusty_probe(struct platform_device *pdev)
 		goto err_add_children;
 	}
 
-	return 0;
+	share = trusty_register_share(&pdev->dev);
+	if (!share) {
+		ret = SM_ERR_INTERNAL_FAILURE;
+		dev_err(&pdev->dev, "Trusty-Share Registration failed!\n");
+		goto err_trusty_share_register;
+	}
+	s->trusty_share_state = share;
 
+	return ret;
+
+err_trusty_share_register:
 err_add_children:
 	for_each_possible_cpu(cpu) {
 		struct trusty_work *tw = per_cpu_ptr(s->nop_works, cpu);
@@ -950,7 +962,14 @@ err_allocate_state:
 static int trusty_remove(struct platform_device *pdev)
 {
 	unsigned int cpu;
+	int ret;
 	struct trusty_state *s = platform_get_drvdata(pdev);
+
+	ret = trusty_unregister_share(s->trusty_share_state);
+	if (ret != 0) {
+		dev_err(&pdev->dev, "Failed to unregister trusty-shared: %d\n",
+			ret);
+	}
 
 	device_for_each_child(&pdev->dev, NULL, trusty_remove_child);
 
@@ -968,7 +987,7 @@ static int trusty_remove(struct platform_device *pdev)
 	s->dev->dma_parms = NULL;
 	kfree(s->version_str);
 	kfree(s);
-	return 0;
+	return ret;
 }
 
 static const struct of_device_id trusty_of_match[] = {
