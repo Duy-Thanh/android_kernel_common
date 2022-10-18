@@ -105,6 +105,24 @@
       "parentUuid": "9fbaca57_67c63151",
       "revId": "b8bb1683ac4bbdab1c8859512fc9aa23f2c39893",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa4ad280_d42f2159",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2022-10-18T20:38:32Z",
+      "side": 1,
+      "message": "Getting an error:\nremote: commit 4b835bc: warning: subject \u003e50 characters; use shorter first paragraph\n\n????",
+      "parentUuid": "d003dba1_39abab39",
+      "revId": "b8bb1683ac4bbdab1c8859512fc9aa23f2c39893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
