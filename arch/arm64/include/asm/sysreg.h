@@ -1305,8 +1305,17 @@
 #define read_sysreg_s(r) ({						\
 	u64 __val;							\
 	asm volatile(__mrs_s("%0", r) : "=r" (__val));			\
+	if (r == SYS_ID_AA64PFR0_EL1) __val = filter_pfr0(__val);	\
 	__val;								\
 })
+
+static inline unsigned long filter_pfr0(unsigned long x)
+{
+	/* Cluster 0 is 64-bit only */
+	if (!(read_sysreg_s(SYS_MPIDR_EL1) & 0xff00))
+  		x &= ~0xfULL;
+	return x;
+}
 
 #define write_sysreg_s(v, r) do {					\
 	u64 __val = (u64)(v);						\
