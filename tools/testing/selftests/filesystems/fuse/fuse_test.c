@@ -2247,7 +2247,7 @@ int main(int argc, char *argv[])
 		MAKE_TEST(bpf_test_verifier),
 		MAKE_TEST(bpf_test_verifier_out_args),
 		MAKE_TEST(bpf_test_verifier_packet_invalidation),
-		MAKE_TEST(bpf_test_verifier_nonsense_read)
+		MAKE_TEST(bpf_test_verifier_nonsense_read),
 		MAKE_TEST(bpf_test_lookup_postfilter),
 	};
 #undef MAKE_TEST

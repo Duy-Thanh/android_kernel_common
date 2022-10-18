@@ -800,14 +800,14 @@ int verify_pass_test6(struct __bpf_fuse_args *fa)
 }
 
 SEC("test_lookup_postfilter")
-int lookuppostfilter_test(struct fuse_bpf_args *fa)
+int lookuppostfilter_test(struct __bpf_fuse_args *fa)
 {
 	switch(fa->opcode) {
 	case FUSE_LOOKUP | FUSE_PREFILTER:
-		return FUSE_BPF_BACKING | FUSE_BPF_POST_FILTER;
+		return BPF_FUSE_POSTFILTER;
 	case FUSE_LOOKUP | FUSE_POSTFILTER:
-		return FUSE_BPF_USER_FILTER;
+		return BPF_FUSE_USER_POSTFILTER;
 	default:
-		return FUSE_BPF_BACKING;
+		return BPF_FUSE_CONTINUE;
 	}
 }
