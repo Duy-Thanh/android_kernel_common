@@ -16,6 +16,24 @@
       "message": "Huge updates in the \u0027abi_gki_aarch64.xml\u0027 file.\nI thinkn, someone didn\u0027t update this file before.",
       "revId": "8ead9e36f86c8ff6ac54b4ecf40ac392dbd78f46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4c4fbb_b83db975",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-10-19T13:58:09Z",
+      "side": 1,
+      "message": "No. This is caused by unstable anonymous type ids. In Android 14 we regenerate these ids, but in Android 13, we are subject to whatever libabigail gives us.",
+      "parentUuid": "607881ca_9a8101a2",
+      "revId": "8ead9e36f86c8ff6ac54b4ecf40ac392dbd78f46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
