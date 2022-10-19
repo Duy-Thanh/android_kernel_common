@@ -953,6 +953,7 @@ csum_partial:
 		uh->check = CSUM_MANGLED_0;
 
 send:
+	trace_android_vh_udp_sendskb(sk, skb);
 	err = ip_send_skb(sock_net(sk), skb);
 	if (err) {
 		if (err == -ENOBUFS && !inet->recverr) {
@@ -1811,6 +1812,7 @@ try_again:
 	if (!skb)
 		return err;
 	trace_android_rvh_udp_recvmsg(sk);
+	trace_android_vh_udp_recvskb(sk, skb);
 
 	ulen = udp_skb_len(skb);
 	copied = len;

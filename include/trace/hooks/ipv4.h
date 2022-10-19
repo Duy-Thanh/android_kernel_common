@@ -29,6 +29,14 @@ DECLARE_RESTRICTED_HOOK(android_rvh_tcp_recvmsg_stat,
 	TP_PROTO(struct sock *sk, int size),
 	TP_ARGS(sk, size), 1);
 
+DECLARE_RESTRICTED_HOOK(android_vh_udp_recvskb,
+	TP_PROTO(struct sock *sk, struct sk_buff *skb),
+	TP_ARGS(sk, skb), 1);
+
+DECLARE_RESTRICTED_HOOK(android_vh_udp_sendskb,
+	TP_PROTO(struct sock *sk, struct sk_buff *skb),
+	TP_ARGS(sk, skb), 1);
+
 #endif /* _TRACE_HOOK_IPV4_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
