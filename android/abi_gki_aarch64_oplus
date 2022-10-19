@@ -517,6 +517,8 @@
   __tracepoint_android_vh_tune_inactive_ratio
   __tracepoint_android_vh_tune_scan_type
   __tracepoint_android_vh_tune_swappiness
+  __tracepoint_android_vh_udp_recvskb
+  __tracepoint_android_vh_udp_sendskb
   __tracepoint_android_vh_update_page_mapcount
   __tracepoint_net_dev_queue
   __tracepoint_net_dev_xmit
