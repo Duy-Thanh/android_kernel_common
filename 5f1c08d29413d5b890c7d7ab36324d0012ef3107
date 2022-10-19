@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cd60958_0a5ca696",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-19T11:44:53Z",
+      "side": 1,
+      "message": "not a valid .h file to build against.  nothing outside of include/ should be allowed.",
+      "range": {
+        "startLine": 714,
+        "startChar": 0,
+        "endLine": 714,
+        "endChar": 40
+      },
+      "revId": "5f1c08d29413d5b890c7d7ab36324d0012ef3107",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
