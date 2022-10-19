@@ -244,6 +244,17 @@ static int trusty_test_rw(struct trusty_test_state *s,
 	return 0;
 }
 
+static int trusty_test_sve_regs(struct trusty_test_state *s)
+{
+	int ret = trusty_std_call32(s->trusty_dev, SMC_SC_TEST_SVE_REGS_RESTORE, 0, 0, 0);
+
+	if (ret < 0) {
+		dev_err(s->dev,
+			"trusty std call (SMC_SC_TEST_SVE_REGS_RESTORE) failed: %d\n", ret);
+	}
+	return ret;
+}
+
 /*
  * Run test on every test object in @obj_list. Repeat @repeat_access times.
  */
@@ -358,25 +369,33 @@ static ssize_t trusty_test_run_store(struct device *dev,
 	size_t obj_count;
 	size_t repeat_share;
 	size_t repeat_access;
-	int ret;
 	char *buf_next;
+	ulong test_num = simple_strtoul(buf, &buf_next, 0);
 
-	while (true) {
-		while (isspace(*buf))
-			buf++;
-		size = simple_strtoul(buf, &buf_next, 0);
-		if (buf_next == buf)
-			return count;
-		buf = buf_next;
-		obj_count = trusty_test_get_arg(&buf, 1);
-		repeat_share = trusty_test_get_arg(&buf, 1);
-		repeat_access = trusty_test_get_arg(&buf, 3);
+	if (buf_next == buf)
+		return count;
+	switch (test_num) {
+	case 0:
+		while (true) {
+			while (isspace(*buf))
+				buf++;
+			size = simple_strtoul(buf, &buf_next, 0);
+			if (buf_next == buf)
+				return count;
+			buf = buf_next;
+			obj_count = trusty_test_get_arg(&buf, 1);
+			repeat_share = trusty_test_get_arg(&buf, 1);
+			repeat_access = trusty_test_get_arg(&buf, 3);
 
-		ret = trusty_test_run(s, DIV_ROUND_UP(size, PAGE_SIZE),
-				      obj_count, repeat_share, repeat_access);
-		if (ret)
-			return ret;
+			return trusty_test_run(s, DIV_ROUND_UP(size, PAGE_SIZE),
+					      obj_count, repeat_share, repeat_access);
+		}
+	break;
+	case 1:
+	  trusty_test_sve_regs(s);
+	break;
 	}
+	return count;
 }
 
 static DEVICE_ATTR_WO(trusty_test_run);
