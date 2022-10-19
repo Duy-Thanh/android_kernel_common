@@ -5249,6 +5249,7 @@
       <elf-symbol name='snd_usb_endpoint_close' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x445aac28'/>
       <elf-symbol name='snd_usb_endpoint_configure' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3a0342b4'/>
       <elf-symbol name='snd_usb_endpoint_open' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe350577b'/>
+      <elf-symbol name='snd_usb_power_domain_set' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa599786d'/>
       <elf-symbol name='snprintf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x656e4a6e'/>
       <elf-symbol name='soc_device_match' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x87f305d1'/>
       <elf-symbol name='soc_device_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x87205e6a'/>
@@ -119500,7 +119501,17 @@
           <var-decl name='in6_u' type-id='ac5ab649' visibility='default' filepath='include/uapi/linux/in6.h' line='40' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='snd_usb_power_domain' is-struct='yes' visibility='default' is-declaration-only='yes' id='f709b458'/>
+      <class-decl name='snd_usb_power_domain' size-in-bits='96' is-struct='yes' visibility='default' filepath='sound/usb/power.h' line='5' column='1' id='f709b458'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='pd_id' type-id='95e97e5e' visibility='default' filepath='sound/usb/power.h' line='6' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='pd_d1d0_rec' type-id='95e97e5e' visibility='default' filepath='sound/usb/power.h' line='7' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='pd_d2d0_rec' type-id='95e97e5e' visibility='default' filepath='sound/usb/power.h' line='8' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='a2ac80c1' size-in-bits='64' id='f7114ca5'/>
       <function-type size-in-bits='64' id='f712e2b7'>
         <parameter type-id='95e97e5e'/>
@@ -152028,6 +152039,12 @@
         <parameter type-id='9b87bc37' name='params' filepath='sound/usb/endpoint.c' line='741' column='1'/>
         <parameter type-id='b50a4934' name='is_sync_ep' filepath='sound/usb/endpoint.c' line='742' column='1'/>
         <return type-id='d59ce2e7'/>
+      </function-decl>
+      <function-decl name='snd_usb_power_domain_set' mangled-name='snd_usb_power_domain_set' filepath='sound/usb/power.c' line='52' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_usb_power_domain_set'>
+        <parameter type-id='d86551c2' name='chip' filepath='sound/usb/power.c' line='52' column='1'/>
+        <parameter type-id='ec0e067e' name='pd' filepath='sound/usb/power.c' line='53' column='1'/>
+        <parameter type-id='002ac4a6' name='state' filepath='sound/usb/power.c' line='54' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='snprintf' mangled-name='snprintf' filepath='include/linux/kernel.h' line='204' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snprintf'>
         <parameter type-id='26a90f95'/>
