@@ -22,6 +22,30 @@
       },
       "revId": "5f1c08d29413d5b890c7d7ab36324d0012ef3107",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23096b3_50fc1866",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-19T18:32:48Z",
+      "side": 1,
+      "message": "(I assume this applies to the other 3 CLs right? Let\u0027s discuss in CL:2237490 and I\u0027ll update this one and the subsequent ones)",
+      "parentUuid": "5cd60958_0a5ca696",
+      "range": {
+        "startLine": 714,
+        "startChar": 0,
+        "endLine": 714,
+        "endChar": 40
+      },
+      "revId": "5f1c08d29413d5b890c7d7ab36324d0012ef3107",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
