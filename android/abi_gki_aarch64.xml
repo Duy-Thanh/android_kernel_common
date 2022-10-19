@@ -123502,7 +123502,7 @@
       <pointer-type-def type-id='46f53066' size-in-bits='64' id='fffb07a4'/>
       <qualified-type-def type-id='55efd1a3' const='yes' id='fffdaf52'/>
       <var-decl name='GKI_struct_blk_mq_alloc_data' type-id='17c43c95' mangled-name='GKI_struct_blk_mq_alloc_data' visibility='default' filepath='block/vendor_hooks.c' line='22' column='1' elf-symbol-id='GKI_struct_blk_mq_alloc_data'/>
-      <var-decl name='GKI_struct_readahead_control' type-id='9ec8ec17' mangled-name='GKI_struct_readahead_control' visibility='default' filepath='drivers/android/vendor_hooks.c' line='408' column='1' elf-symbol-id='GKI_struct_readahead_control'/>
+      <var-decl name='GKI_struct_readahead_control' type-id='9ec8ec17' mangled-name='GKI_struct_readahead_control' visibility='default' filepath='drivers/android/vendor_hooks.c' line='411' column='1' elf-symbol-id='GKI_struct_readahead_control'/>
       <var-decl name='GKI_struct_selinux_state' type-id='4ae52763' mangled-name='GKI_struct_selinux_state' visibility='default' filepath='security/selinux/vendor_hooks.c' line='21' column='1' elf-symbol-id='GKI_struct_selinux_state'/>
       <function-decl name='I_BDEV' mangled-name='I_BDEV' filepath='block/bdev.c' line='42' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='I_BDEV'>
         <parameter type-id='7e666abe' name='inode' filepath='block/bdev.c' line='42' column='1'/>
@@ -128094,16 +128094,16 @@
         <parameter type-id='7359adad' name='usecs' filepath='arch/arm64/lib/delay.c' line='49' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='__udp4_lib_lookup' mangled-name='__udp4_lib_lookup' filepath='net/ipv4/udp.c' line='485' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__udp4_lib_lookup'>
-        <parameter type-id='a2bff676' name='net' filepath='net/ipv4/udp.c' line='485' column='1'/>
-        <parameter type-id='78a133c2' name='saddr' filepath='net/ipv4/udp.c' line='485' column='1'/>
-        <parameter type-id='84a5c3d4' name='sport' filepath='net/ipv4/udp.c' line='486' column='1'/>
-        <parameter type-id='78a133c2' name='daddr' filepath='net/ipv4/udp.c' line='486' column='1'/>
-        <parameter type-id='84a5c3d4' name='dport' filepath='net/ipv4/udp.c' line='486' column='1'/>
-        <parameter type-id='95e97e5e' name='dif' filepath='net/ipv4/udp.c' line='486' column='1'/>
-        <parameter type-id='95e97e5e' name='sdif' filepath='net/ipv4/udp.c' line='487' column='1'/>
-        <parameter type-id='115daa23' name='udptable' filepath='net/ipv4/udp.c' line='487' column='1'/>
-        <parameter type-id='0fbf3cfd' name='skb' filepath='net/ipv4/udp.c' line='487' column='1'/>
+      <function-decl name='__udp4_lib_lookup' mangled-name='__udp4_lib_lookup' filepath='net/ipv4/udp.c' line='486' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__udp4_lib_lookup'>
+        <parameter type-id='a2bff676' name='net' filepath='net/ipv4/udp.c' line='486' column='1'/>
+        <parameter type-id='78a133c2' name='saddr' filepath='net/ipv4/udp.c' line='486' column='1'/>
+        <parameter type-id='84a5c3d4' name='sport' filepath='net/ipv4/udp.c' line='487' column='1'/>
+        <parameter type-id='78a133c2' name='daddr' filepath='net/ipv4/udp.c' line='487' column='1'/>
+        <parameter type-id='84a5c3d4' name='dport' filepath='net/ipv4/udp.c' line='487' column='1'/>
+        <parameter type-id='95e97e5e' name='dif' filepath='net/ipv4/udp.c' line='487' column='1'/>
+        <parameter type-id='95e97e5e' name='sdif' filepath='net/ipv4/udp.c' line='488' column='1'/>
+        <parameter type-id='115daa23' name='udptable' filepath='net/ipv4/udp.c' line='488' column='1'/>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/ipv4/udp.c' line='488' column='1'/>
         <return type-id='f772df6d'/>
       </function-decl>
       <function-decl name='__udp6_lib_lookup' mangled-name='__udp6_lib_lookup' filepath='net/ipv6/udp.c' line='219' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__udp6_lib_lookup'>
@@ -134564,16 +134564,16 @@
         <parameter type-id='a965a5b5' name='sem' filepath='kernel/locking/semaphore.c' line='103' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='down_read' mangled-name='down_read' filepath='kernel/locking/rwsem.c' line='1508' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1508' column='1'/>
+      <function-decl name='down_read' mangled-name='down_read' filepath='kernel/locking/rwsem.c' line='1529' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1529' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='down_read_killable' mangled-name='down_read_killable' filepath='kernel/locking/rwsem.c' line='1531' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read_killable'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1531' column='1'/>
+      <function-decl name='down_read_killable' mangled-name='down_read_killable' filepath='kernel/locking/rwsem.c' line='1552' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read_killable'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1552' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='down_read_trylock' mangled-name='down_read_trylock' filepath='kernel/locking/rwsem.c' line='1548' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read_trylock'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1548' column='1'/>
+      <function-decl name='down_read_trylock' mangled-name='down_read_trylock' filepath='kernel/locking/rwsem.c' line='1569' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_read_trylock'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1569' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='down_timeout' mangled-name='down_timeout' filepath='kernel/locking/semaphore.c' line='158' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_timeout'>
@@ -134585,20 +134585,20 @@
         <parameter type-id='a965a5b5' name='sem' filepath='kernel/locking/semaphore.c' line='133' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='down_write' mangled-name='down_write' filepath='kernel/locking/rwsem.c' line='1561' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1561' column='1'/>
+      <function-decl name='down_write' mangled-name='down_write' filepath='kernel/locking/rwsem.c' line='1582' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1582' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='down_write_killable' mangled-name='down_write_killable' filepath='kernel/locking/rwsem.c' line='1572' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write_killable'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1572' column='1'/>
+      <function-decl name='down_write_killable' mangled-name='down_write_killable' filepath='kernel/locking/rwsem.c' line='1593' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write_killable'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1593' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='down_write_trylock' mangled-name='down_write_trylock' filepath='kernel/locking/rwsem.c' line='1590' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write_trylock'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1590' column='1'/>
+      <function-decl name='down_write_trylock' mangled-name='down_write_trylock' filepath='kernel/locking/rwsem.c' line='1611' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='down_write_trylock'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1611' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='downgrade_write' mangled-name='downgrade_write' filepath='kernel/locking/rwsem.c' line='1625' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='downgrade_write'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1625' column='1'/>
+      <function-decl name='downgrade_write' mangled-name='downgrade_write' filepath='kernel/locking/rwsem.c' line='1646' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='downgrade_write'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1646' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='dput' mangled-name='dput' filepath='fs/dcache.c' line='869' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dput'>
@@ -154295,13 +154295,13 @@
         <parameter type-id='2c25e09d' name='ucsi' filepath='drivers/usb/typec/ucsi/ucsi.c' line='1370' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='udp4_hwcsum' mangled-name='udp4_hwcsum' filepath='net/ipv4/udp.c' line='825' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='udp4_hwcsum'>
-        <parameter type-id='0fbf3cfd' name='skb' filepath='net/ipv4/udp.c' line='825' column='1'/>
-        <parameter type-id='78a133c2' name='src' filepath='net/ipv4/udp.c' line='825' column='1'/>
-        <parameter type-id='78a133c2' name='dst' filepath='net/ipv4/udp.c' line='825' column='1'/>
+      <function-decl name='udp4_hwcsum' mangled-name='udp4_hwcsum' filepath='net/ipv4/udp.c' line='826' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='udp4_hwcsum'>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/ipv4/udp.c' line='826' column='1'/>
+        <parameter type-id='78a133c2' name='src' filepath='net/ipv4/udp.c' line='826' column='1'/>
+        <parameter type-id='78a133c2' name='dst' filepath='net/ipv4/udp.c' line='826' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <var-decl name='udp_table' type-id='9a516b13' mangled-name='udp_table' visibility='default' filepath='net/ipv4/udp.c' line='120' column='1' elf-symbol-id='udp_table'/>
+      <var-decl name='udp_table' type-id='9a516b13' mangled-name='udp_table' visibility='default' filepath='net/ipv4/udp.c' line='121' column='1' elf-symbol-id='udp_table'/>
       <function-decl name='ufshcd_add_command_trace' mangled-name='ufshcd_add_command_trace' filepath='drivers/scsi/ufs/ufshcd.c' line='378' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ufshcd_add_command_trace'>
         <parameter type-id='442b8d89' name='hba' filepath='drivers/scsi/ufs/ufshcd.c' line='378' column='1'/>
         <parameter type-id='f0981eeb' name='tag' filepath='drivers/scsi/ufs/ufshcd.c' line='378' column='1'/>
@@ -154745,12 +154745,12 @@
         <parameter type-id='a965a5b5' name='sem' filepath='kernel/locking/semaphore.c' line='182' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='up_read' mangled-name='up_read' filepath='kernel/locking/rwsem.c' line='1604' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='up_read'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1604' column='1'/>
+      <function-decl name='up_read' mangled-name='up_read' filepath='kernel/locking/rwsem.c' line='1625' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='up_read'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1625' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='up_write' mangled-name='up_write' filepath='kernel/locking/rwsem.c' line='1614' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='up_write'>
-        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1614' column='1'/>
+      <function-decl name='up_write' mangled-name='up_write' filepath='kernel/locking/rwsem.c' line='1635' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='up_write'>
+        <parameter type-id='9b58df93' name='sem' filepath='kernel/locking/rwsem.c' line='1635' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='update_devfreq' mangled-name='update_devfreq' filepath='drivers/devfreq/devfreq.c' line='445' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='update_devfreq'>
