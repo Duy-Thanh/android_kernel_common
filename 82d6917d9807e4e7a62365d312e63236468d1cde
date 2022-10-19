@@ -16,6 +16,24 @@
       "message": "see comments on `android12-5.10` submission",
       "revId": "82d6917d9807e4e7a62365d312e63236468d1cde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb744d49_1cd21f65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967685
+      },
+      "writtenOn": "2022-10-19T12:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5e8534b_4a3ec952",
+      "revId": "82d6917d9807e4e7a62365d312e63236468d1cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
