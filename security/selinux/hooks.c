@@ -7012,6 +7012,19 @@ static int selinux_uring_cmd(struct io_uring_cmd *ioucmd)
 	return avc_has_perm(&selinux_state, current_sid(), isec->sid,
 			    SECCLASS_IO_URING, IO_URING__CMD, &ad);
 }
+/**
+ * selinux_uring_setup - check to see if io_uring setup is allowed
+ *
+ * Check to see if the current task is allowed to execute io_uring_setup.
+ */
+
+static int selinux_uring_setup(void)
+{
+	int sid = current_sid();
+
+	return avc_has_perm(&selinux_state, sid, sid, SECCLASS_IO_URING,
+			    IO_URING__SETUP, NULL);
+}
 #endif /* CONFIG_IO_URING */
 
 /*
@@ -7069,7 +7082,8 @@ static struct security_hook_list selinux_hooks[] __lsm_ro_after_init = {
 
 	LSM_HOOK_INIT(inode_free_security, selinux_inode_free_security),
 	LSM_HOOK_INIT(inode_init_security, selinux_inode_init_security),
-	LSM_HOOK_INIT(inode_init_security_anon, selinux_inode_init_security_anon),
+	LSM_HOOK_INIT(inode_init_security_anon,
+		      selinux_inode_init_security_anon),
 	LSM_HOOK_INIT(inode_create, selinux_inode_create),
 	LSM_HOOK_INIT(inode_link, selinux_inode_link),
 	LSM_HOOK_INIT(inode_unlink, selinux_inode_unlink),
@@ -7185,7 +7199,7 @@ static struct security_hook_list selinux_hooks[] __lsm_ro_after_init = {
 	LSM_HOOK_INIT(socket_shutdown, selinux_socket_shutdown),
 	LSM_HOOK_INIT(socket_sock_rcv_skb, selinux_socket_sock_rcv_skb),
 	LSM_HOOK_INIT(socket_getpeersec_stream,
-			selinux_socket_getpeersec_stream),
+		      selinux_socket_getpeersec_stream),
 	LSM_HOOK_INIT(socket_getpeersec_dgram, selinux_socket_getpeersec_dgram),
 	LSM_HOOK_INIT(sk_free_security, selinux_sk_free_security),
 	LSM_HOOK_INIT(sk_clone_security, selinux_sk_clone_security),
@@ -7220,7 +7234,7 @@ static struct security_hook_list selinux_hooks[] __lsm_ro_after_init = {
 	LSM_HOOK_INIT(xfrm_state_delete_security, selinux_xfrm_state_delete),
 	LSM_HOOK_INIT(xfrm_policy_lookup, selinux_xfrm_policy_lookup),
 	LSM_HOOK_INIT(xfrm_state_pol_flow_match,
-			selinux_xfrm_state_pol_flow_match),
+		      selinux_xfrm_state_pol_flow_match),
 	LSM_HOOK_INIT(xfrm_decode_session, selinux_xfrm_decode_session),
 #endif
 
@@ -7258,6 +7272,7 @@ static struct security_hook_list selinux_hooks[] __lsm_ro_after_init = {
 	LSM_HOOK_INIT(uring_override_creds, selinux_uring_override_creds),
 	LSM_HOOK_INIT(uring_sqpoll, selinux_uring_sqpoll),
 	LSM_HOOK_INIT(uring_cmd, selinux_uring_cmd),
+	LSM_HOOK_INIT(uring_setup, selinux_uring_setup),
 #endif
 
 	/*
