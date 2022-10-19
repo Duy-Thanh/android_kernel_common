@@ -116,6 +116,7 @@
 #if IS_ENABLED(CONFIG_IPV6)
 #include <net/ipv6_stubs.h>
 #endif
+#include <trace/hooks/ipv4.h>
 
 struct udp_table udp_table __read_mostly;
 EXPORT_SYMBOL(udp_table);
@@ -964,6 +965,7 @@ csum_partial:
 		uh->check = CSUM_MANGLED_0;
 
 send:
+	trace_android_vh_udp_sendskb(sk, skb);
 	err = ip_send_skb(sock_net(sk), skb);
 	if (err) {
 		if (err == -ENOBUFS && !inet->recverr) {
@@ -1862,6 +1864,7 @@ try_again:
 	skb = __skb_recv_udp(sk, flags, noblock, &off, &err);
 	if (!skb)
 		return err;
+	trace_android_vh_udp_recvskb(sk, skb);
 
 	ulen = udp_skb_len(skb);
 	copied = len;
