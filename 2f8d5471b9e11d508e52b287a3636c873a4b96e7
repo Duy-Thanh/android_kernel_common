@@ -16,6 +16,24 @@
       "message": "breaks the build 😞",
       "revId": "2f8d5471b9e11d508e52b287a3636c873a4b96e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f04c3cd8_157c1a01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-20T08:03:59Z",
+      "side": 1,
+      "message": "This is already merged into the -lts branch in an abi-safe way.",
+      "parentUuid": "fd48f412_8be2ab7c",
+      "revId": "2f8d5471b9e11d508e52b287a3636c873a4b96e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
