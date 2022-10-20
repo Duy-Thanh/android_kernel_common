@@ -2721,24 +2721,6 @@ EXPORT_SYMBOL_GPL(apply_to_existing_page_range);
 
 #ifdef CONFIG_SPECULATIVE_PAGE_FAULT
 
-/*
- * speculative_page_walk_begin() ... speculative_page_walk_end() protects
- * against races with page table reclamation.
- *
- * This is similar to what fast GUP does, but fast GUP also needs to
- * protect against races with THP page splitting, so it always needs
- * to disable interrupts.
- * Speculative page faults only need to protect against page table reclamation,
- * so rcu_read_lock() is sufficient in the MMU_GATHER_RCU_TABLE_FREE case.
- */
-#ifdef CONFIG_MMU_GATHER_RCU_TABLE_FREE
-#define speculative_page_walk_begin() rcu_read_lock()
-#define speculative_page_walk_end()   rcu_read_unlock()
-#else
-#define speculative_page_walk_begin() local_irq_disable()
-#define speculative_page_walk_end()   local_irq_enable()
-#endif
-
 bool __pte_map_lock(struct vm_fault *vmf)
 {
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
@@ -2755,14 +2737,14 @@ bool __pte_map_lock(struct vm_fault *vmf)
 		return true;
 	}
 
-	speculative_page_walk_begin();
+	local_irq_disable();
 	if (!mmap_seq_read_check(vmf->vma->vm_mm, vmf->seq,
 				 SPF_ABORT_PTE_MAP_LOCK_SEQ1))
 		goto fail;
 	/*
 	 * The mmap sequence count check guarantees that the page
 	 * tables are still valid at that point, and
-	 * speculative_page_walk_begin() ensures that they stay around.
+	 * local_irq_disable() ensures that they stay around.
 	 */
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 	/*
@@ -2778,12 +2760,22 @@ bool __pte_map_lock(struct vm_fault *vmf)
 	ptl = pte_lockptr(vmf->vma->vm_mm, vmf->pmd);
 	if (!pte)
 		pte = pte_offset_map(vmf->pmd, vmf->address);
+
+	/*
+	 * Verify that the ptl we retrieved is still valid.
+	 */
+	pmdval = READ_ONCE(*vmf->pmd);
+	if (!pmd_same(pmdval, vmf->orig_pmd)) {
+		count_vm_spf_event(SPF_ABORT_PTE_MAP_LOCK_PMD);
+		goto fail;
+	}
+
 	/*
 	 * Try locking the page table.
 	 *
 	 * Note that we might race against zap_pte_range() which
 	 * invalidates TLBs while holding the page table lock.
-	 * We are still under the speculative_page_walk_begin() section,
+	 * We are still under the local_irq_disable() section,
 	 * and zap_pte_range() could thus deadlock with us if we tried
 	 * using spin_lock() here.
 	 *
@@ -2797,7 +2789,7 @@ bool __pte_map_lock(struct vm_fault *vmf)
 	if (!mmap_seq_read_check(vmf->vma->vm_mm, vmf->seq,
 				 SPF_ABORT_PTE_MAP_LOCK_SEQ2))
 		goto unlock_fail;
-	speculative_page_walk_end();
+	local_irq_enable();
 	vmf->pte = pte;
 	vmf->ptl = ptl;
 	return true;
@@ -2807,7 +2799,7 @@ unlock_fail:
 fail:
 	if (pte)
 		pte_unmap(pte);
-	speculative_page_walk_end();
+	local_irq_enable();
 	return false;
 }
 
@@ -4807,7 +4799,7 @@ static vm_fault_t __handle_mm_fault(struct vm_area_struct *vma,
 
 		vmf.seq = seq;
 
-		speculative_page_walk_begin();
+		local_irq_disable();
 		pgd = pgd_offset(mm, address);
 		pgdval = READ_ONCE(*pgd);
 		if (pgd_none(pgdval) || unlikely(pgd_bad(pgdval))) {
@@ -4881,12 +4873,12 @@ static vm_fault_t __handle_mm_fault(struct vm_area_struct *vma,
 			vmf.pte = NULL;
 		}
 
-		speculative_page_walk_end();
+		local_irq_enable();
 
 		return handle_pte_fault(&vmf);
 
 	spf_fail:
-		speculative_page_walk_end();
+		local_irq_enable();
 		return VM_FAULT_RETRY;
 	}
 #endif	/* CONFIG_SPECULATIVE_PAGE_FAULT */
