@@ -16,6 +16,24 @@
       "message": "I think this is the KMI breakage.  Instead of using an rq scratch mask, something else will need to be done (perhaps a per-cpu scratch_mask variable).",
       "revId": "224b1378e5c2b7682451c5fe23a3e7db9a96f83b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "834ba985_804d137a",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1891329
+      },
+      "writtenOn": "2022-10-20T05:23:50Z",
+      "side": 1,
+      "message": "yes , waiting for Todd to once confirm and then we can update the change?",
+      "parentUuid": "9a2c7e26_7edb8fd2",
+      "revId": "224b1378e5c2b7682451c5fe23a3e7db9a96f83b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
