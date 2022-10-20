@@ -16,6 +16,24 @@
       "message": "No individual driver should ever be calling this function, it is an internal-to-alsa function with no public .h export.\n\nWhat functionality is your driver needing that requires this function?",
       "revId": "bb2591d285b291242c830838fb56f51e7885d4eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ca01dba_d8d512ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2022-10-20T11:25:06Z",
+      "side": 1,
+      "message": "Our vendor module uses this to ensure that when stream is enabled the power domain state is set to D0 state. So this is kind of necessary for the vendor module to make that state transition.",
+      "parentUuid": "58c41d87_5f7fd611",
+      "revId": "bb2591d285b291242c830838fb56f51e7885d4eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
