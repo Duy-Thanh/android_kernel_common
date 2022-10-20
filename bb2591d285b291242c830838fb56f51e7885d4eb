@@ -52,6 +52,24 @@
       "parentUuid": "5ca01dba_d8d512ed",
       "revId": "bb2591d285b291242c830838fb56f51e7885d4eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f62a6112_19bd2189",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-20T12:05:10Z",
+      "side": 1,
+      "message": "Yes, the USB sound core makes this type of call, not any external module, that\u0027s not ok.\n\nIf you need changes to the USB sound core for your hardware, that\u0027s fine, please submit the needed changes upstream.  But exposing internal state and functions of the USB sound layer is not safe nor allowed or recommended at all.\n\nPlease solve this properly upstream.",
+      "parentUuid": "c6f3e738_bc421f7c",
+      "revId": "bb2591d285b291242c830838fb56f51e7885d4eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
