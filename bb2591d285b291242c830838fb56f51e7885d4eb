@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58c41d87_5f7fd611",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-20T07:18:14Z",
+      "side": 1,
+      "message": "No individual driver should ever be calling this function, it is an internal-to-alsa function with no public .h export.\n\nWhat functionality is your driver needing that requires this function?",
+      "revId": "bb2591d285b291242c830838fb56f51e7885d4eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
