@@ -34,6 +34,24 @@
       "parentUuid": "9a2c7e26_7edb8fd2",
       "revId": "224b1378e5c2b7682451c5fe23a3e7db9a96f83b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5757768c_156e9c60",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-20T16:28:11Z",
+      "side": 1,
+      "message": "This is definitely a KMI breaking change. I haven\u0027t actually reviewed the patches yet since it is not clear where they came from - I don\u0027t see them in upstream Linux. Are they really \"FROMLIST\"? If so, I want to see them land in a maintainer tree before we take them.",
+      "parentUuid": "834ba985_804d137a",
+      "revId": "224b1378e5c2b7682451c5fe23a3e7db9a96f83b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
