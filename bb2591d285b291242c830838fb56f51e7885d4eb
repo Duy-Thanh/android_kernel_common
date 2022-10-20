@@ -34,6 +34,24 @@
       "parentUuid": "58c41d87_5f7fd611",
       "revId": "bb2591d285b291242c830838fb56f51e7885d4eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f3e738_bc421f7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2022-10-20T11:34:16Z",
+      "side": 1,
+      "message": "https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git/commit/sound/usb/pcm.c?id\u003da0a4959eb4e94ce98ee5549dd7d1296d41162ca8\nThis is the patch which talks about the states.",
+      "parentUuid": "5ca01dba_d8d512ed",
+      "revId": "bb2591d285b291242c830838fb56f51e7885d4eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
