@@ -16,6 +16,24 @@
       "message": "This is not a valid sha1 in Linux mainline.",
       "revId": "2aaf1cefbc26e8920dc61a15f475b239c1ff5192",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c740dea_189480d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1897063
+      },
+      "writtenOn": "2022-10-21T03:43:00Z",
+      "side": 1,
+      "message": "My bad, I fixed the commit sha1 from Peterz tree\nhttps://git.kernel.org/pub/scm/linux/kernel/git/peterz/queue.git/log/?h\u003dsched/core",
+      "parentUuid": "89fd6852_cc761f93",
+      "revId": "2aaf1cefbc26e8920dc61a15f475b239c1ff5192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
