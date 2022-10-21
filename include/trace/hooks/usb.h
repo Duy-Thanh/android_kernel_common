@@ -15,6 +15,9 @@
 DECLARE_HOOK(android_vh_usb_persist_overwrite,
 	TP_PROTO(struct usb_device *udev),
 	TP_ARGS(udev));
+DECLARE_HOOK(android_vh_usb_pwrgood_overwrite,
+	TP_PROTO(struct usb_hub_descriptor *desc),
+	TP_ARGS(desc));
 #endif /* _TRACE_HOOK_USB_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

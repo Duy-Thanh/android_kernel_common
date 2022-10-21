@@ -15,6 +15,8 @@
 #include "xhci.h"
 #include "xhci-trace.h"
 
+#include <trace/hooks/usb.h>
+
 #define	PORT_WAKE_BITS	(PORT_WKOC_E | PORT_WKDISC_E | PORT_WKCONN_E)
 #define	PORT_RWC_BITS	(PORT_CSC | PORT_PEC | PORT_WRC | PORT_OCC | \
 			 PORT_RC | PORT_PLC | PORT_PE)
@@ -259,6 +261,8 @@ static void xhci_usb3_hub_descriptor(struct usb_hcd *hcd, struct xhci_hcd *xhci,
 	desc->bDescriptorType = USB_DT_SS_HUB;
 	desc->bDescLength = USB_DT_SS_HUB_SIZE;
 	desc->bPwrOn2PwrGood = 50;	/* usb 3.1 may fail if less than 100ms */
+
+	trace_android_vh_usb_pwrgood_overwrite(desc);
 
 	/* header decode latency should be zero for roothubs,
 	 * see section 4.23.5.2.
