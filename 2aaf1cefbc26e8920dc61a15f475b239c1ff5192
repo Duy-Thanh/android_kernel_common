@@ -34,6 +34,24 @@
       "parentUuid": "89fd6852_cc761f93",
       "revId": "2aaf1cefbc26e8920dc61a15f475b239c1ff5192",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d8abce1_8b564ff0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-21T20:43:10Z",
+      "side": 1,
+      "message": "Please look at the FROMGIT section of https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md. This should be \"BACKPORT: FROMGIT:\" and the \"cherry picked from\" comment needs to include the repo and branch.\n\nPlease fix this in all the patches of the series.",
+      "parentUuid": "3c740dea_189480d2",
+      "revId": "2aaf1cefbc26e8920dc61a15f475b239c1ff5192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
