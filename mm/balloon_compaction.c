@@ -7,6 +7,7 @@
  * Copyright (C) 2012, Red Hat, Inc.  Rafael Aquini <aquini@redhat.com>
  */
 #include "linux/gfp.h"
+#include "linux/jump_label.h"
 #include "linux/types.h"
 #include <linux/mm.h>
 #include <linux/slab.h>
@@ -127,13 +128,19 @@ EXPORT_SYMBOL_GPL(balloon_page_list_dequeue);
  */
 struct page *balloon_page_alloc(int order)
 {
+	const bool saved_init_on_alloc = static_key_enabled(&init_on_alloc);
 	struct page *page;
 	gfp_t gfp_mask = balloon_mapping_gfp_mask() | __GFP_NOMEMALLOC |
 			 __GFP_NORETRY | __GFP_NOWARN;
 	if (order != 0) {
 		gfp_mask |= __GFP_COMP;
 	}
+	static_branch_disable(&init_on_alloc);
+	BUG_ON(static_key_enabled(&init_on_alloc));
 	page = alloc_pages(gfp_mask, order);
+	if (saved_init_on_alloc) {
+		static_branch_enable(&init_on_alloc);
+	}
 	return page;
 }
 EXPORT_SYMBOL_GPL(balloon_page_alloc);
