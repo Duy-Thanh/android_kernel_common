@@ -19,7 +19,28 @@ package(
 
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels", "define_db845c")
-load("//build/kernel/kleaf:kernel.bzl", "kernel_build")
+load("//build/kernel/kleaf:kernel.bzl", "kernel_build", "my_alias", "myrule")
+load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
+
+myrule(
+    name = "mykernel",
+    build_config = select({
+        "//build/kernel/kleaf:my_cpu_is_aarch64": "build.config.aarch64",
+        "//build/kernel/kleaf:my_cpu_is_x86_64": "build.config.x86_64",
+    }),
+)
+
+my_alias(
+    name = "mykernel_aarch64",
+    actual = "mykernel",
+    arch = "aarch64",
+)
+
+my_alias(
+    name = "mykernel_x86_64",
+    actual = "mykernel",
+    arch = "x86_64",
+)
 
 _aarch64_additional_kmi_symbol_lists = [
     # keep sorted
