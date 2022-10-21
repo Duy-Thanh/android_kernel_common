@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "535ed20f_a9600ead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-21T06:28:28Z",
+      "side": 1,
+      "message": "You don\u0027t want to hook between netfilter and the core, just use netfilter, that is what it is there for.  This tracepoint is the exact same codepath as netfilter can read from, please use that instead.",
+      "revId": "53bf54c439623d128ddf1376346a417b3ca8d93e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
