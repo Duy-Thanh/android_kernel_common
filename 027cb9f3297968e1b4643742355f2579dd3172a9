@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65433238_dfef7fb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954368
+      },
+      "writtenOn": "2022-10-21T14:02:12Z",
+      "side": 1,
+      "message": "this symbol list change is base on \nhttps://android-review.googlesource.com/c/kernel/common/+/2194167\nhttps://android-review.googlesource.com/c/kernel/common/+/2218122\nhttps://android-review.googlesource.com/c/kernel/common/+/2226458\nhttps://android-review.googlesource.com/c/kernel/common/+/2264888\nhttps://android-review.googlesource.com/c/kernel/common/+/2259086\n\nwe Renamed trace_android_vh_record_percpu_rwsem_lock_starttime to trace_android_vh_record_pcpu_rwsem_starttime,so we can see remove function\n[D] \u0027function int __traceiter_android_vh_record_percpu_rwsem_lock_starttime(void*, task_struct*, unsigned long int)\u0027\n[D] \u0027tracepoint __tracepoint_android_vh_record_percpu_rwsem_lock_starttime\u0027",
+      "revId": "027cb9f3297968e1b4643742355f2579dd3172a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
