@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000031056617",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2264625?revision\u003d5",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "05191c77_175706e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-10-21T07:09:25Z",
+      "side": 1,
+      "message": "Please attach an open respin request bug to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 482494272 android-build.ayeaye-python-dispatcher_20221020.05_p0",
+      "revId": "a8906c915dc4b5e13229c1ef4816a8c8639b692e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
