@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da2f3966_ffd85f26",
+        "filename": "android/abi_gki_aarch64_honor",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-22T07:51:43Z",
+      "side": 1,
+      "message": "please sort these properly.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 41
+      },
+      "revId": "fda5647e9ddf402acfe46598b140156796b693d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
