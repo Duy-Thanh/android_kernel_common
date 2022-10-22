@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee8bee1a_b66d8032",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1972535
+      },
+      "writtenOn": "2022-10-22T15:44:35Z",
+      "side": 1,
+      "message": "new update",
+      "revId": "4f1e1edb085918eade2df42d56d83a84061ecfae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
