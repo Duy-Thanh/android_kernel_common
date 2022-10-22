@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4386c812_fa8a2b38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-22T06:16:41Z",
+      "side": 1,
+      "message": "I\u0027ve updated the CL to only include headers used by external modules. Headers used by in-tree modules are not included.",
+      "revId": "4884cb8eb49a782a6054be1fe0dcb6f3c114e3d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
