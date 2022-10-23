@@ -1,0 +1,5 @@
+[abi_symbol_list]
+  __tracepoint_android_rvh_udp_recvmsg
+  __tracepoint_android_rvh_udp_sendmsg
+  __tracepoint_android_rvh_tcp_recvmsg
+  __tracepoint_android_rvh_tcp_sendmsg_locked
