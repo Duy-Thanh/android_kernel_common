@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000031135651",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2266723?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2b5eaa4e_b92f572d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-10-23T04:01:30Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 482494272 android-build.ayeaye-python-dispatcher_20221020.05_p0",
+      "revId": "4e7cad02188161a2668a5c3637840c3ec445af1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000031135651",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2266723?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "f3e4d2ef_8cfa3b5f",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Guo Hailin \u003cguo.hailin@zte.com.cn\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "84a19015_c11cd8f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-10-23T04:01:30Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Guo Hailin \u003cguo.hailin@zte.com.cn\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 482494272 android-build.ayeaye-python-dispatcher_20221020.05_p0",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "4e7cad02188161a2668a5c3637840c3ec445af1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
