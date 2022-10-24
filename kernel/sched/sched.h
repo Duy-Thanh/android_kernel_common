@@ -1131,13 +1131,12 @@ struct rq {
 	unsigned int		core_forceidle_seq;
 #endif
 
-	/* Scratch cpumask to be temporarily used under rq_lock */
-	cpumask_var_t		scratch_mask;
-
 	ANDROID_VENDOR_DATA_ARRAY(1, 96);
 	ANDROID_OEM_DATA_ARRAY(1, 16);
 
-	ANDROID_KABI_RESERVE(1);
+	/* Scratch cpumask to be temporarily used under rq_lock */
+	ANDROID_KABI_USE(1, struct cpumask *scratch_mask);
+
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
