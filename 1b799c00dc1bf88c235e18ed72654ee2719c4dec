@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0899f0ba_6ce57d50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2022-10-24T18:40:55Z",
+      "side": 1,
+      "message": "Is there a plan to make the Vendor Scheduler not depend on this hook in the future?",
+      "revId": "1b799c00dc1bf88c235e18ed72654ee2719c4dec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
