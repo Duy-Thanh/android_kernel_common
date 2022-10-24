@@ -70,6 +70,24 @@
       "parentUuid": "5757768c_156e9c60",
       "revId": "224b1378e5c2b7682451c5fe23a3e7db9a96f83b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32f38fc7_7db720ec",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-24T10:32:32Z",
+      "side": 1,
+      "message": "Should be fixed by https://android-review.googlesource.com/c/kernel/common/+/2266188/",
+      "parentUuid": "6bdb4547_eec1afef",
+      "revId": "224b1378e5c2b7682451c5fe23a3e7db9a96f83b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
