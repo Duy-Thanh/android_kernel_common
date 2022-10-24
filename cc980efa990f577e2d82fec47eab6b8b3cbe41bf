@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cf481a4_4d8459ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-10-24T07:04:03Z",
+      "side": 1,
+      "message": "the failed tests is not caused by this cl.\n\nv2/android-gki/ack_platform_integration_master_cf_x86_64_cts_presubmit",
+      "revId": "cc980efa990f577e2d82fec47eab6b8b3cbe41bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
