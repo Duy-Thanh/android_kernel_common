@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "968a8175_8f8dc6d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-24T07:31:21Z",
+      "side": 1,
+      "message": "Changing to CR-2 due to ABI breakage.",
+      "revId": "6d3d458c85841843f854212753eccf1bc3c51d78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
