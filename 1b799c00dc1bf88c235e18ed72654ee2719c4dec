@@ -16,6 +16,24 @@
       "message": "Is there a plan to make the Vendor Scheduler not depend on this hook in the future?",
       "revId": "1b799c00dc1bf88c235e18ed72654ee2719c4dec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b7c9d1_46876131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1971857
+      },
+      "writtenOn": "2022-10-24T19:17:44Z",
+      "side": 1,
+      "message": "We apply same scheduler as in 5.15, where this hook is already applied(android13-5.15). \nWe dont have a plan to make scheduler change not dependent on this hook",
+      "parentUuid": "0899f0ba_6ce57d50",
+      "revId": "1b799c00dc1bf88c235e18ed72654ee2719c4dec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
