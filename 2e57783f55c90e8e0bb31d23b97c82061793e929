@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000031178414",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2267957?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "400e5016_4733a98f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-10-24T15:30:26Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 482494272 android-build.ayeaye-python-dispatcher_20221020.05_p0",
+      "revId": "2e57783f55c90e8e0bb31d23b97c82061793e929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000031178414",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2267957?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "f5e60afb_5334958d",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Paul Lawrence \u003cpaullawrence@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "dd91686d_6dd939c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-10-24T15:30:26Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Paul Lawrence \u003cpaullawrence@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 482494272 android-build.ayeaye-python-dispatcher_20221020.05_p0",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 0
+      },
+      "revId": "2e57783f55c90e8e0bb31d23b97c82061793e929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
