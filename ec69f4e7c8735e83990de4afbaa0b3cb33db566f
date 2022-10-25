@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef991f28_e73ce0b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-10-25T18:13:45Z",
+      "side": 1,
+      "message": "IMO it would have been better to have the ignore_references as a parameter to the vendor hook but since that would require to introduce a new hook, I guess this is a better way for now. If the logic becomes more complex we might remove these conditions and add a new hook instead.",
+      "revId": "ec69f4e7c8735e83990de4afbaa0b3cb33db566f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
