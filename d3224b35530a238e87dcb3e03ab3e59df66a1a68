@@ -16,6 +16,23 @@
       "message": "Ping! Hi, need some presubmit clicks on this CL as well. Thanks.",
       "revId": "d3224b35530a238e87dcb3e03ab3e59df66a1a68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f8c71bb_80cfd3fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-10-25T08:26:15Z",
+      "side": 1,
+      "message": "Adding Todd, as I don\u0027t appear to be listed as a code owner for this branch",
+      "revId": "d3224b35530a238e87dcb3e03ab3e59df66a1a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
