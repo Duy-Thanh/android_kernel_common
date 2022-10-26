@@ -955,6 +955,34 @@ static int noinstr kvm_arm_vcpu_enter_exit(struct kvm_vcpu *vcpu)
 	return ret;
 }
 
+/*
+ * Some PVM HVCs yield to the host after completion. Count them here.
+ */
+static void kvm_account_pvm_hvc64(struct kvm_vcpu *vcpu)
+{
+	struct kvm *kvm = vcpu->kvm;
+	u32 fn;
+
+	/* Only accounting things for protected VMs */
+	if (!is_protected_kvm_enabled() ||
+	    !kvm_vm_is_protected(kvm))
+		return;
+
+	if (kvm_vcpu_trap_get_class(vcpu) != ESR_ELx_EC_HVC64)
+		return;
+
+	fn = smccc_get_function(vcpu);
+
+	switch (fn) {
+	case ARM_SMCCC_VENDOR_HYP_KVM_MEM_SHARE_FUNC_ID:
+		atomic64_add(PAGE_SIZE, &kvm->stat.protected_shared_mem);
+		break;
+	case ARM_SMCCC_VENDOR_HYP_KVM_MEM_UNSHARE_FUNC_ID:
+		atomic64_sub(PAGE_SIZE, &kvm->stat.protected_shared_mem);
+		break;
+	}
+}
+
 /**
  * kvm_arch_vcpu_ioctl_run - the main VCPU run function to execute guest code
  * @vcpu:	The VCPU pointer
@@ -1130,6 +1158,8 @@ int kvm_arch_vcpu_ioctl_run(struct kvm_vcpu *vcpu)
 			vcpu->arch.target = -1;
 			ret = ARM_EXCEPTION_IL;
 		}
+
+		kvm_account_pvm_hvc64(vcpu);
 
 		ret = handle_exit(vcpu, ret);
 	}
