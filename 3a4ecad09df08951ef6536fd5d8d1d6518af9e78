@@ -16,6 +16,24 @@
       "message": "I see there was a fix for that patch upstream: 034e5afad921 (:mm: re-allow pinning of zero pfns\"). I think you need both patches.",
       "revId": "3a4ecad09df08951ef6536fd5d8d1d6518af9e78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d300242_be9ce392",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2022-10-26T02:19:24Z",
+      "side": 1,
+      "message": "It has been added to another patch, https://android-review.googlesource.com/c/kernel/common/+/2270586, thanks.",
+      "parentUuid": "ea757c9c_ff8e3c31",
+      "revId": "3a4ecad09df08951ef6536fd5d8d1d6518af9e78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
