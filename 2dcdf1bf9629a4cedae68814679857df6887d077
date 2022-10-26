@@ -61,6 +61,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f45e7c0f_20191f4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-26T10:56:30Z",
+      "side": 1,
+      "message": "as all of the code is public and released under the GPLv2, there is nothing to hide here.  But sure, feel free to let me know details in the bug.\n\nWorst case, just submit patches by subsystem, like others have done.\n\nSomething like:\n  - tracepoint symbols added\n  - USB symbols added\n  - GPIO symbols added\n  - Sound symbols added\n  - misc other symbols added\n\nAgain, there is nothing secret about Linux kernel code.",
+      "parentUuid": "be6d78a0_aff7d7ae",
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1b02593_69f9bb7c",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
