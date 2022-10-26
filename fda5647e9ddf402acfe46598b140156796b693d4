@@ -3,6 +3,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27761f58_f67e14b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-10-26T10:13:53Z",
+      "side": 1,
+      "message": "\u003e Commit needs to contain a properly formatted Bug: or Fixes: line.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 482494272 android-build.ayeaye-python-dispatcher_20221020.05_p0\n\nPlease fix.",
+      "parentUuid": "8da65e4b_2187fb20",
+      "revId": "fda5647e9ddf402acfe46598b140156796b693d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da2f3966_ffd85f26",
         "filename": "android/abi_gki_aarch64_honor",
         "patchSetId": 1
