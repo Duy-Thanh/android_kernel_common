@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba4ede2_27460d24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-26T10:38:45Z",
+      "side": 1,
+      "message": "Please break this up into reviewable chunks.  Like one per subsystem or driver.  Adding this many symbols all at once is very hard to review at a single time.",
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
