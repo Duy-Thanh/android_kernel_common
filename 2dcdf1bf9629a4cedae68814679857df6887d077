@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07870e5f_b85ffab7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-26T10:42:33Z",
+      "side": 1,
+      "message": "should not be touched by any drivers.",
+      "range": {
+        "startLine": 218,
+        "startChar": 16,
+        "endLine": 218,
+        "endChar": 43
+      },
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dba4ede2_27460d24",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -14,6 +37,75 @@
       "writtenOn": "2022-10-26T10:38:45Z",
       "side": 1,
       "message": "Please break this up into reviewable chunks.  Like one per subsystem or driver.  Adding this many symbols all at once is very hard to review at a single time.",
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b02593_69f9bb7c",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-26T10:42:33Z",
+      "side": 1,
+      "message": "Should not be needed by any driver, please do not use this.",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 131,
+        "endChar": 19
+      },
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f51bf1f1_f8d9e74e",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-26T10:42:33Z",
+      "side": 1,
+      "message": "no driver should ever call this.  Please remove.",
+      "range": {
+        "startLine": 442,
+        "startChar": 2,
+        "endLine": 442,
+        "endChar": 13
+      },
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f72a00f2_c581728e",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-26T10:42:33Z",
+      "side": 1,
+      "message": "should never be needed.",
+      "range": {
+        "startLine": 443,
+        "startChar": 2,
+        "endLine": 443,
+        "endChar": 20
+      },
       "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
