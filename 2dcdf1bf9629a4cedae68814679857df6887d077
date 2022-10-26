@@ -79,6 +79,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8bf3cae_4f125a13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710319
+      },
+      "writtenOn": "2022-10-26T11:13:34Z",
+      "side": 1,
+      "message": "you\u0027re right. We do not hide the symbol list.\nHowever, I was a little embarrassed because it was different from Kernel-5.15.\n\nAs you said, I will write more in the Issue Tracker.\nThank you for the review.",
+      "parentUuid": "f45e7c0f_20191f4b",
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1b02593_69f9bb7c",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
