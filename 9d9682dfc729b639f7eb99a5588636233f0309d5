@@ -34,6 +34,23 @@
       "parentUuid": "cc729408_be400998",
       "revId": "9d9682dfc729b639f7eb99a5588636233f0309d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b19238_6c32ef5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015397
+      },
+      "writtenOn": "2022-10-26T15:28:38Z",
+      "side": 1,
+      "message": "This change is no longer necessary since https://android-review.googlesource.com/c/kernel/common/+/2258730/1?usp\u003drelated-change was rejected.",
+      "revId": "9d9682dfc729b639f7eb99a5588636233f0309d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
