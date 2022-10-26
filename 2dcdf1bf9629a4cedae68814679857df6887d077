@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be6d78a0_aff7d7ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710319
+      },
+      "writtenOn": "2022-10-26T10:53:58Z",
+      "side": 1,
+      "message": "Hello\nWe do not want to disclose to other vendor which symbol the device driver uses.\nCan we share in issue tracker whether we use symbol for each device driver?",
+      "parentUuid": "dba4ede2_27460d24",
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1b02593_69f9bb7c",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
