@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0214f6d_398a02d3",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-10-27T22:32:10Z",
+      "side": 1,
+      "message": "`bool skip_sysfs_release \u003d false;` ?",
+      "range": {
+        "startLine": 127,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "d34473032dfe8107e5d804f35d6e9d99244aa7b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
