@@ -34,6 +34,24 @@
       "parentUuid": "6003262d_ad1d9ce4",
       "revId": "9da7cb8133a30b1903300c238f72d585c1f55730",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11357cb0_b11c7aa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-27T16:13:58Z",
+      "side": 1,
+      "message": "Hmm. Normally it is auto rebasing these days so I assumed there was a non-trivial conflict. Not sure what you can do differently.",
+      "parentUuid": "5cb3798e_67fcbee9",
+      "revId": "9da7cb8133a30b1903300c238f72d585c1f55730",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
