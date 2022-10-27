@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "654ef6e0_1efa81e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-27T17:40:19Z",
+      "side": 1,
+      "message": "These are not x86 drivers, so why are they needed for an x86 build?",
+      "revId": "2ee4aaa5e5b9fc022973f2ab82ad42ce5eba4966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
