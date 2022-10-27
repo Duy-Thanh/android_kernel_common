@@ -33,6 +33,8 @@
 #include <linux/extable.h>
 #include <linux/log2.h>
 
+#include <trace/hooks/bpf.h>
+
 #include <asm/barrier.h>
 #include <asm/unaligned.h>
 
@@ -251,6 +253,7 @@ struct bpf_prog *bpf_prog_realloc(struct bpf_prog *fp_old, unsigned int size,
 
 void __bpf_prog_free(struct bpf_prog *fp)
 {
+	trace_android_vh_unset_bpf_protect(fp, fp->pages);
 	if (fp->aux) {
 		mutex_destroy(&fp->aux->used_maps_mutex);
 		mutex_destroy(&fp->aux->dst_mutex);
@@ -897,6 +900,7 @@ void bpf_jit_binary_free(struct bpf_binary_header *hdr)
 {
 	u32 pages = hdr->pages;
 
+	trace_android_vh_unset_bpf_protect(hdr, pages);
 	bpf_jit_free_exec(hdr);
 	bpf_jit_uncharge_modmem(pages);
 }
@@ -1933,6 +1937,7 @@ struct bpf_prog *bpf_prog_select_runtime(struct bpf_prog *fp, int *err)
 
 finalize:
 	bpf_prog_lock_ro(fp);
+	trace_android_vh_set_bpf_protect(fp, fp->pages);
 
 	/* The tail call compatibility check can only be done at
 	 * this late stage as we need to determine, if we deal
