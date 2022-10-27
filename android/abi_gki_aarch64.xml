@@ -19847,7 +19847,6 @@
         <enumerator name='POWER_SUPPLY_USB_TYPE_PD' value='6'/>
         <enumerator name='POWER_SUPPLY_USB_TYPE_PD_DRP' value='7'/>
         <enumerator name='POWER_SUPPLY_USB_TYPE_PD_PPS' value='8'/>
-        <enumerator name='POWER_SUPPLY_USB_TYPE_APPLE_BRICK_ID' value='9'/>
       </enum-decl>
       <pointer-type-def type-id='72790540' size-in-bits='64' id='1f7f0216'/>
       <class-decl name='v4l2_ctrl_vp8_frame' size-in-bits='9856' is-struct='yes' visibility='default' filepath='include/uapi/linux/v4l2-controls.h' line='1838' column='1' id='1f8b1638'>
@@ -20759,17 +20758,7 @@
           <var-decl name='latency' type-id='95e97e5e' visibility='default' filepath='include/linux/ppp_channel.h' line='44' column='1'/>
         </data-member>
       </class-decl>
-      <enum-decl name='event_trigger_type' filepath='include/linux/trace_events.h' line='678' column='1' id='21b4096c'>
-        <underlying-type type-id='9cac1fee'/>
-        <enumerator name='ETT_NONE' value='0'/>
-        <enumerator name='ETT_TRACE_ONOFF' value='1'/>
-        <enumerator name='ETT_SNAPSHOT' value='2'/>
-        <enumerator name='ETT_STACKTRACE' value='4'/>
-        <enumerator name='ETT_EVENT_ENABLE' value='8'/>
-        <enumerator name='ETT_EVENT_HIST' value='16'/>
-        <enumerator name='ETT_HIST_ENABLE' value='32'/>
-        <enumerator name='ETT_EVENT_EPROBE' value='64'/>
-      </enum-decl>
+      <enum-decl name='event_trigger_type' is-declaration-only='yes' filepath='include/linux/trace_events.h' line='678' column='1' id='21b4096c'/>
       <pointer-type-def type-id='74edcdba' size-in-bits='64' id='21b6f944'/>
       <pointer-type-def type-id='a70ecbd0' size-in-bits='64' id='21c375e6'/>
       <qualified-type-def type-id='b545ce08' const='yes' id='21c5156b'/>
