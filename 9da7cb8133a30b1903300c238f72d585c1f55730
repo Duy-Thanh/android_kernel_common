@@ -16,6 +16,24 @@
       "message": "Please rebase the series.",
       "revId": "9da7cb8133a30b1903300c238f72d585c1f55730",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb3798e_67fcbee9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015397
+      },
+      "writtenOn": "2022-10-27T16:04:37Z",
+      "side": 1,
+      "message": "Rebase done, it was trivial on my side. Is there anything I can do differently to ensure there\u0027s no merge conflict in gerrit? I\u0027m confused as to why it\u0027s not automatically rebasing. I\u0027ll also need to cherry-pick these changes to the September/October release branches and we\u0027ll probably hit those same problems there...",
+      "parentUuid": "6003262d_ad1d9ce4",
+      "revId": "9da7cb8133a30b1903300c238f72d585c1f55730",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
