@@ -22,6 +22,30 @@
       },
       "revId": "d34473032dfe8107e5d804f35d6e9d99244aa7b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "552bdf3f_b04b8fa2",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-10-27T23:28:23Z",
+      "side": 1,
+      "message": "Yeah better. Will update and send for real once we hear back from Honor. Thanks!",
+      "parentUuid": "f0214f6d_398a02d3",
+      "range": {
+        "startLine": 127,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "d34473032dfe8107e5d804f35d6e9d99244aa7b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
