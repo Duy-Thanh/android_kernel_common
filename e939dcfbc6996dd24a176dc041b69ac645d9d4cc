@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba7a54e_d9b3d4ca",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-27T11:20:32Z",
+      "side": 1,
+      "message": "Nothing to do with your patch, but I\u0027m now thinking we need to do this last. The pages should stay pinned for as long as we\u0027re touching \u0026hyp_vm-\u003ehost_kvm-\u003earch.pkvm.teardown_mc ...",
+      "range": {
+        "startLine": 828,
+        "startChar": 1,
+        "endLine": 828,
+        "endChar": 62
+      },
+      "revId": "e939dcfbc6996dd24a176dc041b69ac645d9d4cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
