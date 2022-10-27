@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15787d31_62207e62",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1770,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-27T14:42:10Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this go outside of the if? Otherwise the references for pages that have been shared back will leak (they don\u0027t have NEED_POISONING set).\n\nAlternatively we could call psci_mem_protect_dec() on the guest-to-host share path?",
+      "range": {
+        "startLine": 1770,
+        "startChar": 2,
+        "endLine": 1770,
+        "endChar": 25
+      },
+      "revId": "79606fce48278e18448c23f7758e2c878805843b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
