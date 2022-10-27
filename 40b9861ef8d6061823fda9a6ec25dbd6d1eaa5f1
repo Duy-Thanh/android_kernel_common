@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11418f70_90048014",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "there is already a dev pointer in trusty_state. If trusty_share_info is fixed size we could embed it in trusty_state instead of making it a separate allocation.",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2080feff_17e29bec",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "use goto to handle errors and cleanup or use `*devm*` apis to avoid manual cleanup.",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aedafbb1_71407d80",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "Take the size of the actual struct you use, not guess what the size will be",
+      "range": {
+        "startLine": 94,
+        "startChar": 18,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "327a0515_628ade7b",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "you need to actually leak it though. Your code below returns it to the linux heap even though trusty might still be writing to it. Also you need to call trusty_reclaim_memory and check that that succeeded not just SMC_SC_SHARE_UNREGISTER",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d73e85f_b0fedeba",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "add size of trusty_shared and size of trusty_shadow_priority to ease compatibility between versions.",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c929ade9_95b12c68",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "We can leave this out and have a comment describing where it is",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efa65024_8494c324",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "These should go in smcall.h with the other calls using SMC_ENTITY_SECURE_MONITOR so no-one adds another call with the same number.  They should also have kerneldoc comments describing the arguments",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "244463bd_e6a64757",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "this does not need to be a void *. There is only one use case for this so it should have a specific type.",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4837350_9bbf4720",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "this needs to undo the work done in the previous step",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84cd1bba_34bb9d26",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-10-27T19:04:34Z",
+      "side": 1,
+      "message": "Why are you adding a failure point here. It does affect anything you do here, and I don\u0027t think the caller checks the return code (or can do anything useful if remove fails)",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
