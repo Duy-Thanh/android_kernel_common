@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa52fee_ac965892",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-28T17:01:58Z",
+      "side": 1,
+      "message": "Is there a respin request associated with this change? The cited bug is not for the 2022-10 branch https://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
+      "revId": "e7b9743e281f70bc102bcef7b9553493a92abf4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
