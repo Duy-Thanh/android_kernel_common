@@ -16,6 +16,24 @@
       "message": "Is there a respin request associated with this change? The cited bug is not for the 2022-10 branch https://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
       "revId": "e7b9743e281f70bc102bcef7b9553493a92abf4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b323bd78_da879a7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1891695
+      },
+      "writtenOn": "2022-10-28T18:22:23Z",
+      "side": 1,
+      "message": "created a respin request for the change and updated the Bug Id respectively.",
+      "parentUuid": "2aa52fee_ac965892",
+      "revId": "e7b9743e281f70bc102bcef7b9553493a92abf4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
