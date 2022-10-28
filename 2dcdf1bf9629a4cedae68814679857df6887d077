@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d5e26b_1224e56b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1971857
+      },
+      "writtenOn": "2022-10-28T13:28:36Z",
+      "side": 1,
+      "message": "We have enable CONFIG_FB\u003dm for our product, hence this symbol is included. This product is old SoC launching with T using FB framework, hence it is required for our driver. Please consider it.",
+      "parentUuid": "07870e5f_b85ffab7",
+      "range": {
+        "startLine": 218,
+        "startChar": 16,
+        "endLine": 218,
+        "endChar": 43
+      },
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dba4ede2_27460d24",
@@ -95,6 +119,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa38a25b_a9de50b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1971857
+      },
+      "writtenOn": "2022-10-28T13:28:36Z",
+      "side": 1,
+      "message": "Added symbol file for each device driver to issue tracker",
+      "parentUuid": "a8bf3cae_4f125a13",
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1b02593_69f9bb7c",
@@ -108,6 +150,30 @@
       "writtenOn": "2022-10-26T10:42:33Z",
       "side": 1,
       "message": "Should not be needed by any driver, please do not use this.",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 131,
+        "endChar": 19
+      },
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f4368d_257158f8",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1971857
+      },
+      "writtenOn": "2022-10-28T13:28:36Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "a1b02593_69f9bb7c",
       "range": {
         "startLine": 131,
         "startChar": 2,
@@ -141,6 +207,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16ecec01_3a918cfe",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1971857
+      },
+      "writtenOn": "2022-10-28T13:28:36Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "f51bf1f1_f8d9e74e",
+      "range": {
+        "startLine": 442,
+        "startChar": 2,
+        "endLine": 442,
+        "endChar": 13
+      },
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f72a00f2_c581728e",
@@ -154,6 +244,30 @@
       "writtenOn": "2022-10-26T10:42:33Z",
       "side": 1,
       "message": "should never be needed.",
+      "range": {
+        "startLine": 443,
+        "startChar": 2,
+        "endLine": 443,
+        "endChar": 20
+      },
+      "revId": "2dcdf1bf9629a4cedae68814679857df6887d077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01b11cc5_b8b410f7",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1971857
+      },
+      "writtenOn": "2022-10-28T13:28:36Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "f72a00f2_c581728e",
       "range": {
         "startLine": 443,
         "startChar": 2,
