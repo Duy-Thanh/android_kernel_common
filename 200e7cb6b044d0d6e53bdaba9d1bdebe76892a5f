@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf95e665_a8d6f1a4",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-10-28T21:43:59Z",
+      "side": 1,
+      "message": "zsmalloc in the mainline is now being auto selected based on the zram selection; so no need to explicitly set it to module. `CONFIG_ZSMALLOC\u003dm` has been dropped from the cherry pick for this reason. This matches arm64 gki_defconfig.",
+      "revId": "200e7cb6b044d0d6e53bdaba9d1bdebe76892a5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
