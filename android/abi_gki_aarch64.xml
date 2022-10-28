@@ -4,6 +4,7 @@
       <elf-symbol name='I_BDEV' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x23dd175'/>
       <elf-symbol name='LZ4_decompress_safe_partial' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15bed7a5'/>
       <elf-symbol name='PDE_DATA' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3da3813e'/>
+      <elf-symbol name='PageMovable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x31c4eaf4'/>
       <elf-symbol name='__ClearPageMovable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x66bae922'/>
       <elf-symbol name='__SetPageMovable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2873c5ec'/>
       <elf-symbol name='___pskb_trim' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd884a6e3'/>
@@ -139405,21 +139406,21 @@
         <enumerator name='CPUHP_ONLINE' value='210'/>
       </enum-decl>
       <pointer-type-def type-id='db7d07ef' size-in-bits='64' id='f02a5e83'/>
-      <var-decl name='cpu_bit_bitmap' type-id='f959706c' mangled-name='cpu_bit_bitmap' visibility='default' filepath='kernel/cpu.c' line='2374' column='1' elf-symbol-id='cpu_bit_bitmap'/>
-      <var-decl name='cpu_all_bits' type-id='afe549fd' mangled-name='cpu_all_bits' visibility='default' filepath='kernel/cpu.c' line='2385' column='1' elf-symbol-id='cpu_all_bits'/>
+      <var-decl name='cpu_bit_bitmap' type-id='f959706c' mangled-name='cpu_bit_bitmap' visibility='default' filepath='kernel/cpu.c' line='2376' column='1' elf-symbol-id='cpu_bit_bitmap'/>
+      <var-decl name='cpu_all_bits' type-id='afe549fd' mangled-name='cpu_all_bits' visibility='default' filepath='kernel/cpu.c' line='2387' column='1' elf-symbol-id='cpu_all_bits'/>
       <var-decl name='cpuhp_tasks_frozen' type-id='b50a4934' mangled-name='cpuhp_tasks_frozen' visibility='default' filepath='kernel/cpu.c' line='266' column='1' elf-symbol-id='cpuhp_tasks_frozen'/>
-      <var-decl name='__cpu_possible_mask' type-id='1354385d' mangled-name='__cpu_possible_mask' visibility='default' filepath='kernel/cpu.c' line='2392' column='1' elf-symbol-id='__cpu_possible_mask'/>
-      <var-decl name='__cpu_online_mask' type-id='1354385d' mangled-name='__cpu_online_mask' visibility='default' filepath='kernel/cpu.c' line='2396' column='1' elf-symbol-id='__cpu_online_mask'/>
-      <var-decl name='__cpu_present_mask' type-id='1354385d' mangled-name='__cpu_present_mask' visibility='default' filepath='kernel/cpu.c' line='2399' column='1' elf-symbol-id='__cpu_present_mask'/>
-      <var-decl name='__cpu_active_mask' type-id='1354385d' mangled-name='__cpu_active_mask' visibility='default' filepath='kernel/cpu.c' line='2402' column='1' elf-symbol-id='__cpu_active_mask'/>
-      <var-decl name='__num_online_cpus' type-id='49178f86' mangled-name='__num_online_cpus' visibility='default' filepath='kernel/cpu.c' line='2405' column='1' elf-symbol-id='__num_online_cpus'/>
-      <function-decl name='__cpuhp_setup_state' mangled-name='__cpuhp_setup_state' filepath='kernel/cpu.c' line='1898' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_setup_state'>
-        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='1898' column='1'/>
-        <parameter type-id='80f4b756' name='name' filepath='kernel/cpu.c' line='1899' column='1'/>
-        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='1899' column='1'/>
-        <parameter type-id='f02a5e83' name='startup' filepath='kernel/cpu.c' line='1900' column='1'/>
-        <parameter type-id='f02a5e83' name='teardown' filepath='kernel/cpu.c' line='1901' column='1'/>
-        <parameter type-id='b50a4934' name='multi_instance' filepath='kernel/cpu.c' line='1902' column='1'/>
+      <var-decl name='__cpu_possible_mask' type-id='1354385d' mangled-name='__cpu_possible_mask' visibility='default' filepath='kernel/cpu.c' line='2394' column='1' elf-symbol-id='__cpu_possible_mask'/>
+      <var-decl name='__cpu_online_mask' type-id='1354385d' mangled-name='__cpu_online_mask' visibility='default' filepath='kernel/cpu.c' line='2398' column='1' elf-symbol-id='__cpu_online_mask'/>
+      <var-decl name='__cpu_present_mask' type-id='1354385d' mangled-name='__cpu_present_mask' visibility='default' filepath='kernel/cpu.c' line='2401' column='1' elf-symbol-id='__cpu_present_mask'/>
+      <var-decl name='__cpu_active_mask' type-id='1354385d' mangled-name='__cpu_active_mask' visibility='default' filepath='kernel/cpu.c' line='2404' column='1' elf-symbol-id='__cpu_active_mask'/>
+      <var-decl name='__num_online_cpus' type-id='49178f86' mangled-name='__num_online_cpus' visibility='default' filepath='kernel/cpu.c' line='2407' column='1' elf-symbol-id='__num_online_cpus'/>
+      <function-decl name='__cpuhp_setup_state' mangled-name='__cpuhp_setup_state' filepath='kernel/cpu.c' line='1900' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_setup_state'>
+        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='1900' column='1'/>
+        <parameter type-id='80f4b756' name='name' filepath='kernel/cpu.c' line='1901' column='1'/>
+        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='1901' column='1'/>
+        <parameter type-id='f02a5e83' name='startup' filepath='kernel/cpu.c' line='1902' column='1'/>
+        <parameter type-id='f02a5e83' name='teardown' filepath='kernel/cpu.c' line='1903' column='1'/>
+        <parameter type-id='b50a4934' name='multi_instance' filepath='kernel/cpu.c' line='1904' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='cpus_read_lock' mangled-name='cpus_read_lock' filepath='kernel/cpu.c' line='293' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpus_read_lock'>
@@ -139428,9 +139429,9 @@
       <function-decl name='cpus_read_unlock' mangled-name='cpus_read_unlock' filepath='kernel/cpu.c' line='305' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpus_read_unlock'>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='__cpuhp_remove_state' mangled-name='__cpuhp_remove_state' filepath='kernel/cpu.c' line='2000' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_remove_state'>
-        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='2000' column='1'/>
-        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='2000' column='1'/>
+      <function-decl name='__cpuhp_remove_state' mangled-name='__cpuhp_remove_state' filepath='kernel/cpu.c' line='2002' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_remove_state'>
+        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='2002' column='1'/>
+        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='2002' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='cpu_up' mangled-name='cpu_up' filepath='kernel/cpu.c' line='1276' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpu_up'>
@@ -139447,25 +139448,25 @@
         <parameter type-id='f0981eeb' name='cpu' filepath='kernel/cpu.c' line='1123' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='__cpuhp_state_remove_instance' mangled-name='__cpuhp_state_remove_instance' filepath='kernel/cpu.c' line='1914' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_state_remove_instance'>
-        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='1914' column='1'/>
-        <parameter type-id='08cbad52' name='node' filepath='kernel/cpu.c' line='1915' column='1'/>
-        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='1915' column='1'/>
+      <function-decl name='__cpuhp_state_remove_instance' mangled-name='__cpuhp_state_remove_instance' filepath='kernel/cpu.c' line='1916' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_state_remove_instance'>
+        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='1916' column='1'/>
+        <parameter type-id='08cbad52' name='node' filepath='kernel/cpu.c' line='1917' column='1'/>
+        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='1917' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='__cpuhp_state_add_instance' mangled-name='__cpuhp_state_add_instance' filepath='kernel/cpu.c' line='1810' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_state_add_instance'>
-        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='1810' column='1'/>
-        <parameter type-id='08cbad52' name='node' filepath='kernel/cpu.c' line='1810' column='1'/>
-        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='1811' column='1'/>
+      <function-decl name='__cpuhp_state_add_instance' mangled-name='__cpuhp_state_add_instance' filepath='kernel/cpu.c' line='1812' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_state_add_instance'>
+        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='1812' column='1'/>
+        <parameter type-id='08cbad52' name='node' filepath='kernel/cpu.c' line='1812' column='1'/>
+        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='1813' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='__cpuhp_setup_state_cpuslocked' mangled-name='__cpuhp_setup_state_cpuslocked' filepath='kernel/cpu.c' line='1839' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_setup_state_cpuslocked'>
-        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='1839' column='1'/>
-        <parameter type-id='80f4b756' name='name' filepath='kernel/cpu.c' line='1840' column='1'/>
-        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='1840' column='1'/>
-        <parameter type-id='f02a5e83' name='startup' filepath='kernel/cpu.c' line='1841' column='1'/>
-        <parameter type-id='f02a5e83' name='teardown' filepath='kernel/cpu.c' line='1842' column='1'/>
-        <parameter type-id='b50a4934' name='multi_instance' filepath='kernel/cpu.c' line='1843' column='1'/>
+      <function-decl name='__cpuhp_setup_state_cpuslocked' mangled-name='__cpuhp_setup_state_cpuslocked' filepath='kernel/cpu.c' line='1841' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__cpuhp_setup_state_cpuslocked'>
+        <parameter type-id='245a0e38' name='state' filepath='kernel/cpu.c' line='1841' column='1'/>
+        <parameter type-id='80f4b756' name='name' filepath='kernel/cpu.c' line='1842' column='1'/>
+        <parameter type-id='b50a4934' name='invoke' filepath='kernel/cpu.c' line='1842' column='1'/>
+        <parameter type-id='f02a5e83' name='startup' filepath='kernel/cpu.c' line='1843' column='1'/>
+        <parameter type-id='f02a5e83' name='teardown' filepath='kernel/cpu.c' line='1844' column='1'/>
+        <parameter type-id='b50a4934' name='multi_instance' filepath='kernel/cpu.c' line='1845' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-type size-in-bits='64' id='db7d07ef'>
@@ -156266,6 +156267,10 @@
         <parameter type-id='02f11ed4' name='page' filepath='mm/compaction.c' line='120' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='PageMovable' mangled-name='PageMovable' filepath='mm/compaction.c' line='96' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='PageMovable'>
+        <parameter type-id='02f11ed4' name='page' filepath='mm/compaction.c' line='96' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='mm/debug.c' language='LANG_C89'>
       <function-decl name='dump_page' mangled-name='dump_page' filepath='mm/debug.c' line='111' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dump_page'>
@@ -167682,16 +167687,16 @@
         <parameter type-id='3a1577c5' name='vif' filepath='net/mac80211/mlme.c' line='2617' column='1'/>
         <return type-id='0fbf3cfd'/>
       </function-decl>
-      <function-decl name='ieee80211_cqm_rssi_notify' mangled-name='ieee80211_cqm_rssi_notify' filepath='net/mac80211/mlme.c' line='5681' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_cqm_rssi_notify'>
-        <parameter type-id='3a1577c5' name='vif' filepath='net/mac80211/mlme.c' line='5681' column='1'/>
-        <parameter type-id='b8189423' name='rssi_event' filepath='net/mac80211/mlme.c' line='5682' column='1'/>
-        <parameter type-id='a7832498' name='rssi_level' filepath='net/mac80211/mlme.c' line='5683' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfp' filepath='net/mac80211/mlme.c' line='5684' column='1'/>
+      <function-decl name='ieee80211_cqm_rssi_notify' mangled-name='ieee80211_cqm_rssi_notify' filepath='net/mac80211/mlme.c' line='5686' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_cqm_rssi_notify'>
+        <parameter type-id='3a1577c5' name='vif' filepath='net/mac80211/mlme.c' line='5686' column='1'/>
+        <parameter type-id='b8189423' name='rssi_event' filepath='net/mac80211/mlme.c' line='5687' column='1'/>
+        <parameter type-id='a7832498' name='rssi_level' filepath='net/mac80211/mlme.c' line='5688' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/mac80211/mlme.c' line='5689' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='ieee80211_cqm_beacon_loss_notify' mangled-name='ieee80211_cqm_beacon_loss_notify' filepath='net/mac80211/mlme.c' line='5694' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_cqm_beacon_loss_notify'>
-        <parameter type-id='3a1577c5' name='vif' filepath='net/mac80211/mlme.c' line='5694' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfp' filepath='net/mac80211/mlme.c' line='5694' column='1'/>
+      <function-decl name='ieee80211_cqm_beacon_loss_notify' mangled-name='ieee80211_cqm_beacon_loss_notify' filepath='net/mac80211/mlme.c' line='5699' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_cqm_beacon_loss_notify'>
+        <parameter type-id='3a1577c5' name='vif' filepath='net/mac80211/mlme.c' line='5699' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/mac80211/mlme.c' line='5699' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='ieee80211_connection_loss' mangled-name='ieee80211_connection_loss' filepath='net/mac80211/mlme.c' line='2755' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_connection_loss'>
@@ -167766,17 +167771,17 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='net/mac80211/scan.c' language='LANG_C89'>
-      <function-decl name='ieee80211_sched_scan_stopped' mangled-name='ieee80211_sched_scan_stopped' filepath='net/mac80211/scan.c' line='1399' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_sched_scan_stopped'>
-        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/scan.c' line='1399' column='1'/>
+      <function-decl name='ieee80211_sched_scan_stopped' mangled-name='ieee80211_sched_scan_stopped' filepath='net/mac80211/scan.c' line='1401' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_sched_scan_stopped'>
+        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/scan.c' line='1401' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='ieee80211_sched_scan_results' mangled-name='ieee80211_sched_scan_results' filepath='net/mac80211/scan.c' line='1361' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_sched_scan_results'>
-        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/scan.c' line='1361' column='1'/>
+      <function-decl name='ieee80211_sched_scan_results' mangled-name='ieee80211_sched_scan_results' filepath='net/mac80211/scan.c' line='1363' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_sched_scan_results'>
+        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/scan.c' line='1363' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='ieee80211_scan_completed' mangled-name='ieee80211_scan_completed' filepath='net/mac80211/scan.c' line='475' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_scan_completed'>
-        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/scan.c' line='475' column='1'/>
-        <parameter type-id='40cd17b4' name='info' filepath='net/mac80211/scan.c' line='476' column='1'/>
+      <function-decl name='ieee80211_scan_completed' mangled-name='ieee80211_scan_completed' filepath='net/mac80211/scan.c' line='477' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_scan_completed'>
+        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/scan.c' line='477' column='1'/>
+        <parameter type-id='40cd17b4' name='info' filepath='net/mac80211/scan.c' line='478' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <pointer-type-def type-id='b1493ece' size-in-bits='64' id='40cd17b4'/>
@@ -168111,10 +168116,10 @@
         <parameter type-id='95e97e5e' name='queue' filepath='net/mac80211/util.c' line='445' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='ieee80211_txq_get_depth' mangled-name='ieee80211_txq_get_depth' filepath='net/mac80211/util.c' line='4055' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_txq_get_depth'>
-        <parameter type-id='cde83d0f' name='txq' filepath='net/mac80211/util.c' line='4055' column='1'/>
-        <parameter type-id='1d2c2b85' name='frame_cnt' filepath='net/mac80211/util.c' line='4056' column='1'/>
-        <parameter type-id='1d2c2b85' name='byte_cnt' filepath='net/mac80211/util.c' line='4057' column='1'/>
+      <function-decl name='ieee80211_txq_get_depth' mangled-name='ieee80211_txq_get_depth' filepath='net/mac80211/util.c' line='4058' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_txq_get_depth'>
+        <parameter type-id='cde83d0f' name='txq' filepath='net/mac80211/util.c' line='4058' column='1'/>
+        <parameter type-id='1d2c2b85' name='frame_cnt' filepath='net/mac80211/util.c' line='4059' column='1'/>
+        <parameter type-id='1d2c2b85' name='byte_cnt' filepath='net/mac80211/util.c' line='4060' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='ieee80211_stop_queues' mangled-name='ieee80211_stop_queues' filepath='net/mac80211/util.c' line='592' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_stop_queues'>
@@ -168126,8 +168131,8 @@
         <parameter type-id='95e97e5e' name='queue' filepath='net/mac80211/util.c' line='512' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='ieee80211_radar_detected' mangled-name='ieee80211_radar_detected' filepath='net/mac80211/util.c' line='3445' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_radar_detected'>
-        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/util.c' line='3445' column='1'/>
+      <function-decl name='ieee80211_radar_detected' mangled-name='ieee80211_radar_detected' filepath='net/mac80211/util.c' line='3448' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_radar_detected'>
+        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/util.c' line='3448' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='ieee80211_queue_delayed_work' mangled-name='ieee80211_queue_delayed_work' filepath='net/mac80211/util.c' line='881' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_queue_delayed_work'>
@@ -176515,100 +176520,100 @@
       <pointer-type-def type-id='616d6efe' size-in-bits='64' id='6ff43814'/>
       <pointer-type-def type-id='b1493ece' size-in-bits='64' id='40cd17b4'/>
       <pointer-type-def type-id='1aa7b3b9' size-in-bits='64' id='57a568d1'/>
-      <function-decl name='cfg80211_sched_scan_stopped_rtnl' mangled-name='cfg80211_sched_scan_stopped_rtnl' filepath='net/wireless/scan.c' line='648' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_sched_scan_stopped_rtnl'>
-        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='648' column='1'/>
-        <parameter type-id='91ce1af9' name='reqid' filepath='net/wireless/scan.c' line='648' column='1'/>
+      <function-decl name='cfg80211_sched_scan_stopped_rtnl' mangled-name='cfg80211_sched_scan_stopped_rtnl' filepath='net/wireless/scan.c' line='653' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_sched_scan_stopped_rtnl'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='653' column='1'/>
+        <parameter type-id='91ce1af9' name='reqid' filepath='net/wireless/scan.c' line='653' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='cfg80211_put_bss' mangled-name='cfg80211_put_bss' filepath='net/wireless/scan.c' line='1949' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_put_bss'>
-        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1949' column='1'/>
-        <parameter type-id='bda81d86' name='pub' filepath='net/wireless/scan.c' line='1949' column='1'/>
+      <function-decl name='cfg80211_put_bss' mangled-name='cfg80211_put_bss' filepath='net/wireless/scan.c' line='1972' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_put_bss'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1972' column='1'/>
+        <parameter type-id='bda81d86' name='pub' filepath='net/wireless/scan.c' line='1972' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='cfg80211_unlink_bss' mangled-name='cfg80211_unlink_bss' filepath='net/wireless/scan.c' line='1965' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_unlink_bss'>
-        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1965' column='1'/>
-        <parameter type-id='bda81d86' name='pub' filepath='net/wireless/scan.c' line='1965' column='1'/>
+      <function-decl name='cfg80211_unlink_bss' mangled-name='cfg80211_unlink_bss' filepath='net/wireless/scan.c' line='1988' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_unlink_bss'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1988' column='1'/>
+        <parameter type-id='bda81d86' name='pub' filepath='net/wireless/scan.c' line='1988' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='cfg80211_sched_scan_stopped' mangled-name='cfg80211_sched_scan_stopped' filepath='net/wireless/scan.c' line='660' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_sched_scan_stopped'>
-        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='660' column='1'/>
-        <parameter type-id='91ce1af9' name='reqid' filepath='net/wireless/scan.c' line='660' column='1'/>
+      <function-decl name='cfg80211_sched_scan_stopped' mangled-name='cfg80211_sched_scan_stopped' filepath='net/wireless/scan.c' line='665' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_sched_scan_stopped'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='665' column='1'/>
+        <parameter type-id='91ce1af9' name='reqid' filepath='net/wireless/scan.c' line='665' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='cfg80211_sched_scan_results' mangled-name='cfg80211_sched_scan_results' filepath='net/wireless/scan.c' line='630' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_sched_scan_results'>
-        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='630' column='1'/>
-        <parameter type-id='91ce1af9' name='reqid' filepath='net/wireless/scan.c' line='630' column='1'/>
+      <function-decl name='cfg80211_sched_scan_results' mangled-name='cfg80211_sched_scan_results' filepath='net/wireless/scan.c' line='635' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_sched_scan_results'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='635' column='1'/>
+        <parameter type-id='91ce1af9' name='reqid' filepath='net/wireless/scan.c' line='635' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='cfg80211_scan_done' mangled-name='cfg80211_scan_done' filepath='net/wireless/scan.c' line='528' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_scan_done'>
-        <parameter type-id='a9e8b173' name='request' filepath='net/wireless/scan.c' line='528' column='1'/>
-        <parameter type-id='40cd17b4' name='info' filepath='net/wireless/scan.c' line='529' column='1'/>
+      <function-decl name='cfg80211_scan_done' mangled-name='cfg80211_scan_done' filepath='net/wireless/scan.c' line='533' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_scan_done'>
+        <parameter type-id='a9e8b173' name='request' filepath='net/wireless/scan.c' line='533' column='1'/>
+        <parameter type-id='40cd17b4' name='info' filepath='net/wireless/scan.c' line='534' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='cfg80211_ref_bss' mangled-name='cfg80211_ref_bss' filepath='net/wireless/scan.c' line='1933' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_ref_bss'>
-        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1933' column='1'/>
-        <parameter type-id='bda81d86' name='pub' filepath='net/wireless/scan.c' line='1933' column='1'/>
+      <function-decl name='cfg80211_ref_bss' mangled-name='cfg80211_ref_bss' filepath='net/wireless/scan.c' line='1956' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_ref_bss'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1956' column='1'/>
+        <parameter type-id='bda81d86' name='pub' filepath='net/wireless/scan.c' line='1956' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='cfg80211_merge_profile' mangled-name='cfg80211_merge_profile' filepath='net/wireless/scan.c' line='1517' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_merge_profile'>
-        <parameter type-id='bbaf3419' name='ie' filepath='net/wireless/scan.c' line='1517' column='1'/>
-        <parameter type-id='b59d7dce' name='ielen' filepath='net/wireless/scan.c' line='1517' column='1'/>
-        <parameter type-id='aa7ca86a' name='mbssid_elem' filepath='net/wireless/scan.c' line='1518' column='1'/>
-        <parameter type-id='aa7ca86a' name='sub_elem' filepath='net/wireless/scan.c' line='1519' column='1'/>
-        <parameter type-id='8bff8096' name='merged_ie' filepath='net/wireless/scan.c' line='1520' column='1'/>
-        <parameter type-id='b59d7dce' name='max_copy_len' filepath='net/wireless/scan.c' line='1520' column='1'/>
+      <function-decl name='cfg80211_merge_profile' mangled-name='cfg80211_merge_profile' filepath='net/wireless/scan.c' line='1536' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_merge_profile'>
+        <parameter type-id='bbaf3419' name='ie' filepath='net/wireless/scan.c' line='1536' column='1'/>
+        <parameter type-id='b59d7dce' name='ielen' filepath='net/wireless/scan.c' line='1536' column='1'/>
+        <parameter type-id='aa7ca86a' name='mbssid_elem' filepath='net/wireless/scan.c' line='1537' column='1'/>
+        <parameter type-id='aa7ca86a' name='sub_elem' filepath='net/wireless/scan.c' line='1538' column='1'/>
+        <parameter type-id='8bff8096' name='merged_ie' filepath='net/wireless/scan.c' line='1539' column='1'/>
+        <parameter type-id='b59d7dce' name='max_copy_len' filepath='net/wireless/scan.c' line='1539' column='1'/>
         <return type-id='b59d7dce'/>
       </function-decl>
-      <function-decl name='cfg80211_is_element_inherited' mangled-name='cfg80211_is_element_inherited' filepath='net/wireless/scan.c' line='182' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_is_element_inherited'>
-        <parameter type-id='aa7ca86a' name='elem' filepath='net/wireless/scan.c' line='182' column='1'/>
-        <parameter type-id='aa7ca86a' name='non_inherit_elem' filepath='net/wireless/scan.c' line='183' column='1'/>
+      <function-decl name='cfg80211_is_element_inherited' mangled-name='cfg80211_is_element_inherited' filepath='net/wireless/scan.c' line='176' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_is_element_inherited'>
+        <parameter type-id='aa7ca86a' name='elem' filepath='net/wireless/scan.c' line='176' column='1'/>
+        <parameter type-id='aa7ca86a' name='non_inherit_elem' filepath='net/wireless/scan.c' line='177' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
-      <function-decl name='cfg80211_inform_bss_frame_data' mangled-name='cfg80211_inform_bss_frame_data' filepath='net/wireless/scan.c' line='1883' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_inform_bss_frame_data'>
-        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1883' column='1'/>
-        <parameter type-id='6ff43814' name='data' filepath='net/wireless/scan.c' line='1884' column='1'/>
-        <parameter type-id='57a568d1' name='mgmt' filepath='net/wireless/scan.c' line='1885' column='1'/>
-        <parameter type-id='b59d7dce' name='len' filepath='net/wireless/scan.c' line='1885' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/scan.c' line='1886' column='1'/>
+      <function-decl name='cfg80211_inform_bss_frame_data' mangled-name='cfg80211_inform_bss_frame_data' filepath='net/wireless/scan.c' line='1906' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_inform_bss_frame_data'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1906' column='1'/>
+        <parameter type-id='6ff43814' name='data' filepath='net/wireless/scan.c' line='1907' column='1'/>
+        <parameter type-id='57a568d1' name='mgmt' filepath='net/wireless/scan.c' line='1908' column='1'/>
+        <parameter type-id='b59d7dce' name='len' filepath='net/wireless/scan.c' line='1908' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/scan.c' line='1909' column='1'/>
         <return type-id='bda81d86'/>
       </function-decl>
-      <function-decl name='cfg80211_inform_bss_data' mangled-name='cfg80211_inform_bss_data' filepath='net/wireless/scan.c' line='1664' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_inform_bss_data'>
-        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1664' column='1'/>
-        <parameter type-id='6ff43814' name='data' filepath='net/wireless/scan.c' line='1665' column='1'/>
-        <parameter type-id='b556f108' name='ftype' filepath='net/wireless/scan.c' line='1666' column='1'/>
-        <parameter type-id='bbaf3419' name='bssid' filepath='net/wireless/scan.c' line='1667' column='1'/>
-        <parameter type-id='91ce1af9' name='tsf' filepath='net/wireless/scan.c' line='1667' column='1'/>
-        <parameter type-id='1dc6a898' name='capability' filepath='net/wireless/scan.c' line='1667' column='1'/>
-        <parameter type-id='1dc6a898' name='beacon_interval' filepath='net/wireless/scan.c' line='1668' column='1'/>
-        <parameter type-id='bbaf3419' name='ie' filepath='net/wireless/scan.c' line='1668' column='1'/>
-        <parameter type-id='b59d7dce' name='ielen' filepath='net/wireless/scan.c' line='1668' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/scan.c' line='1669' column='1'/>
+      <function-decl name='cfg80211_inform_bss_data' mangled-name='cfg80211_inform_bss_data' filepath='net/wireless/scan.c' line='1685' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_inform_bss_data'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='1685' column='1'/>
+        <parameter type-id='6ff43814' name='data' filepath='net/wireless/scan.c' line='1686' column='1'/>
+        <parameter type-id='b556f108' name='ftype' filepath='net/wireless/scan.c' line='1687' column='1'/>
+        <parameter type-id='bbaf3419' name='bssid' filepath='net/wireless/scan.c' line='1688' column='1'/>
+        <parameter type-id='91ce1af9' name='tsf' filepath='net/wireless/scan.c' line='1688' column='1'/>
+        <parameter type-id='1dc6a898' name='capability' filepath='net/wireless/scan.c' line='1688' column='1'/>
+        <parameter type-id='1dc6a898' name='beacon_interval' filepath='net/wireless/scan.c' line='1689' column='1'/>
+        <parameter type-id='bbaf3419' name='ie' filepath='net/wireless/scan.c' line='1689' column='1'/>
+        <parameter type-id='b59d7dce' name='ielen' filepath='net/wireless/scan.c' line='1689' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='net/wireless/scan.c' line='1690' column='1'/>
         <return type-id='bda81d86'/>
       </function-decl>
-      <function-decl name='cfg80211_get_bss' mangled-name='cfg80211_get_bss' filepath='net/wireless/scan.c' line='916' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_get_bss'>
-        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='916' column='1'/>
-        <parameter type-id='ec00acfb' name='channel' filepath='net/wireless/scan.c' line='917' column='1'/>
-        <parameter type-id='bbaf3419' name='bssid' filepath='net/wireless/scan.c' line='918' column='1'/>
-        <parameter type-id='bbaf3419' name='ssid' filepath='net/wireless/scan.c' line='919' column='1'/>
-        <parameter type-id='b59d7dce' name='ssid_len' filepath='net/wireless/scan.c' line='919' column='1'/>
-        <parameter type-id='cb952348' name='bss_type' filepath='net/wireless/scan.c' line='920' column='1'/>
-        <parameter type-id='d2b455cb' name='privacy' filepath='net/wireless/scan.c' line='921' column='1'/>
+      <function-decl name='cfg80211_get_bss' mangled-name='cfg80211_get_bss' filepath='net/wireless/scan.c' line='921' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_get_bss'>
+        <parameter type-id='666fb412' name='wiphy' filepath='net/wireless/scan.c' line='921' column='1'/>
+        <parameter type-id='ec00acfb' name='channel' filepath='net/wireless/scan.c' line='922' column='1'/>
+        <parameter type-id='bbaf3419' name='bssid' filepath='net/wireless/scan.c' line='923' column='1'/>
+        <parameter type-id='bbaf3419' name='ssid' filepath='net/wireless/scan.c' line='924' column='1'/>
+        <parameter type-id='b59d7dce' name='ssid_len' filepath='net/wireless/scan.c' line='924' column='1'/>
+        <parameter type-id='cb952348' name='bss_type' filepath='net/wireless/scan.c' line='925' column='1'/>
+        <parameter type-id='d2b455cb' name='privacy' filepath='net/wireless/scan.c' line='926' column='1'/>
         <return type-id='bda81d86'/>
       </function-decl>
-      <function-decl name='cfg80211_find_vendor_elem' mangled-name='cfg80211_find_vendor_elem' filepath='net/wireless/scan.c' line='736' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_find_vendor_elem'>
-        <parameter type-id='f0981eeb' name='oui' filepath='net/wireless/scan.c' line='736' column='1'/>
-        <parameter type-id='95e97e5e' name='oui_type' filepath='net/wireless/scan.c' line='736' column='1'/>
-        <parameter type-id='bbaf3419' name='ies' filepath='net/wireless/scan.c' line='737' column='1'/>
-        <parameter type-id='f0981eeb' name='len' filepath='net/wireless/scan.c' line='738' column='1'/>
+      <function-decl name='cfg80211_find_vendor_elem' mangled-name='cfg80211_find_vendor_elem' filepath='net/wireless/scan.c' line='741' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_find_vendor_elem'>
+        <parameter type-id='f0981eeb' name='oui' filepath='net/wireless/scan.c' line='741' column='1'/>
+        <parameter type-id='95e97e5e' name='oui_type' filepath='net/wireless/scan.c' line='741' column='1'/>
+        <parameter type-id='bbaf3419' name='ies' filepath='net/wireless/scan.c' line='742' column='1'/>
+        <parameter type-id='f0981eeb' name='len' filepath='net/wireless/scan.c' line='743' column='1'/>
         <return type-id='aa7ca86a'/>
       </function-decl>
-      <function-decl name='cfg80211_find_elem_match' mangled-name='cfg80211_find_elem_match' filepath='net/wireless/scan.c' line='720' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_find_elem_match'>
-        <parameter type-id='f9b06939' name='eid' filepath='net/wireless/scan.c' line='720' column='1'/>
-        <parameter type-id='bbaf3419' name='ies' filepath='net/wireless/scan.c' line='720' column='1'/>
-        <parameter type-id='f0981eeb' name='len' filepath='net/wireless/scan.c' line='720' column='1'/>
-        <parameter type-id='bbaf3419' name='match' filepath='net/wireless/scan.c' line='721' column='1'/>
-        <parameter type-id='f0981eeb' name='match_len' filepath='net/wireless/scan.c' line='721' column='1'/>
-        <parameter type-id='f0981eeb' name='match_offset' filepath='net/wireless/scan.c' line='722' column='1'/>
+      <function-decl name='cfg80211_find_elem_match' mangled-name='cfg80211_find_elem_match' filepath='net/wireless/scan.c' line='725' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cfg80211_find_elem_match'>
+        <parameter type-id='f9b06939' name='eid' filepath='net/wireless/scan.c' line='725' column='1'/>
+        <parameter type-id='bbaf3419' name='ies' filepath='net/wireless/scan.c' line='725' column='1'/>
+        <parameter type-id='f0981eeb' name='len' filepath='net/wireless/scan.c' line='725' column='1'/>
+        <parameter type-id='bbaf3419' name='match' filepath='net/wireless/scan.c' line='726' column='1'/>
+        <parameter type-id='f0981eeb' name='match_len' filepath='net/wireless/scan.c' line='726' column='1'/>
+        <parameter type-id='f0981eeb' name='match_offset' filepath='net/wireless/scan.c' line='727' column='1'/>
         <return type-id='aa7ca86a'/>
       </function-decl>
       <pointer-type-def type-id='e8ce2004' size-in-bits='64' id='aa7ca86a'/>
