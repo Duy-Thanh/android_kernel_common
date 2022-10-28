@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f9d93d4_11a0d558",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-28T14:57:02Z",
+      "side": 1,
+      "message": "we already have hooks for this protection, why not use them instead?",
+      "revId": "8d644256beb2bfeca3aa3f6c63acffde19dab8b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
