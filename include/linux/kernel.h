@@ -190,6 +190,7 @@ void __might_fault(const char *file, int line);
 static inline void might_fault(void) { }
 #endif
 
+extern void (*panic_oem_callback)(void);
 void do_exit(long error_code) __noreturn;
 void complete_and_exit(struct completion *, long) __noreturn;
 

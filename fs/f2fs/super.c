@@ -3879,6 +3879,11 @@ void f2fs_handle_stop(struct f2fs_sb_info *sbi, unsigned char reason)
 	f2fs_up_write(&sbi->sb_lock);
 }
 
+void f2fs_handle_panic(struct super_block *sb)
+{
+	f2fs_handle_stop(F2FS_SB(sb), STOP_CP_REASON_SYSTEM_PANIC);
+}
+
 static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
 {
 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);

@@ -16,6 +16,7 @@
   __put_task_struct
   __stack_chk_fail
   __ubsan_handle_cfi_check_fail_abort
+  do_handle_panic
 
 # required by zram.ko
   __alloc_percpu

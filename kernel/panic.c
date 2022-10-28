@@ -71,6 +71,8 @@ ATOMIC_NOTIFIER_HEAD(panic_notifier_list);
 
 EXPORT_SYMBOL(panic_notifier_list);
 
+extern void do_handle_panic(void);
+
 static long no_blink(int state)
 {
 	return 0;
@@ -167,6 +169,18 @@ static void panic_print_sys_info(void)
 		ftrace_dump(DUMP_ALL);
 }
 
+static void panic_hook(void)
+{
+	static bool panicing = false;
+
+	if (panicing)
+		return;
+
+	panicing = true;
+
+	do_handle_panic();
+}
+
 /**
  *	panic - halt the system
  *	@fmt: The text string to print
@@ -219,6 +233,8 @@ void panic(const char *fmt, ...)
 	va_start(args, fmt);
 	len = vscnprintf(buf, sizeof(buf), fmt, args);
 	va_end(args);
+
+	panic_hook();
 
 	if (len && buf[len - 1] == '\n')
 		buf[len - 1] = '\0';
