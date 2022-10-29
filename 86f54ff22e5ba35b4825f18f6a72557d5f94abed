@@ -111,6 +111,30 @@
       },
       "revId": "86f54ff22e5ba35b4825f18f6a72557d5f94abed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ca7649a_781daa89",
+        "filename": "android/gki_system_dlkm_modules",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-29T01:49:57Z",
+      "side": 1,
+      "message": "That could be better resolved by:\n\n- editing BUILD files to delete a module\n- Either disable the checks for missing items in `module_implicit_outs` (see built modules that aren\u0027t declared), OR disable the configs that builds the module we don\u0027t want",
+      "parentUuid": "de143538_4dba7d6a",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "86f54ff22e5ba35b4825f18f6a72557d5f94abed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
