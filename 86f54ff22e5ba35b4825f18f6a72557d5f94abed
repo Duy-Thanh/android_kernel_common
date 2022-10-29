@@ -87,6 +87,30 @@
       },
       "revId": "86f54ff22e5ba35b4825f18f6a72557d5f94abed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de143538_4dba7d6a",
+        "filename": "android/gki_system_dlkm_modules",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-10-29T01:40:08Z",
+      "side": 1,
+      "message": "Thanks Yifan.\n\nYes, It can be but in that case if we don\u0027t want to put certain modules and their dependecies in `system_dlkm.img` during kernel development; then we can\u0027t.",
+      "parentUuid": "bd4f9aaf_144e5234",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "86f54ff22e5ba35b4825f18f6a72557d5f94abed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
