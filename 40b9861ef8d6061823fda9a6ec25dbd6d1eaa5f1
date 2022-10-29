@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e40a196_4cc1bfdd",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "IMHO, it should be preferable to hide module-specific details in a module. This approach prevents cluttering the core trusty-driver and is much easier to read/comprehend. That may be the likely reason other modules in the trusty-driver have chosen to maintain module-state privately.",
+      "parentUuid": "11418f70_90048014",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2080feff_17e29bec",
         "filename": "drivers/trusty/trusty-share.c",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-27T19:04:34Z",
       "side": 1,
       "message": "use goto to handle errors and cleanup or use `*devm*` apis to avoid manual cleanup.",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ac134b4_17c8378b",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2080feff_17e29bec",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -60,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f67ce63f_6d215b80",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "This data-structure contains variable length array, hence the need for calculation. Exactly same calculation is performed on the trusty-kernel side.",
+      "parentUuid": "aedafbb1_71407d80",
+      "range": {
+        "startLine": 94,
+        "startChar": 18,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "327a0515_628ade7b",
         "filename": "drivers/trusty/trusty-share.c",
         "patchSetId": 3
@@ -71,6 +131,24 @@
       "writtenOn": "2022-10-27T19:04:34Z",
       "side": 1,
       "message": "you need to actually leak it though. Your code below returns it to the linux heap even though trusty might still be writing to it. Also you need to call trusty_reclaim_memory and check that that succeeded not just SMC_SC_SHARE_UNREGISTER",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb452063_8cb0ad6e",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "327a0515_628ade7b",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -94,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4cca4985_91ee0c92",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "Perhaps, I am missing something. How does sizeof(struct) account for variable length array, the extent of which is determined during runtime?",
+      "parentUuid": "2d73e85f_b0fedeba",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c929ade9_95b12c68",
         "filename": "drivers/trusty/trusty-share.h",
         "patchSetId": 3
@@ -111,6 +207,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc1454d2_4d054e77",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "I shall engage you on chat to understand your comment.",
+      "parentUuid": "c929ade9_95b12c68",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efa65024_8494c324",
         "filename": "drivers/trusty/trusty-share.h",
         "patchSetId": 3
@@ -122,6 +236,24 @@
       "writtenOn": "2022-10-27T19:04:34Z",
       "side": 1,
       "message": "These should go in smcall.h with the other calls using SMC_ENTITY_SECURE_MONITOR so no-one adds another call with the same number.  They should also have kerneldoc comments describing the arguments",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32a7409d_cd0eaa97",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "efa65024_8494c324",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -145,6 +277,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bffb96db_e6afff72",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "I was trying to hide the module-specific unnecessary details from the core driver, but I shall make the change if you think it would be better.",
+      "parentUuid": "244463bd_e6a64757",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4837350_9bbf4720",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3
@@ -162,6 +312,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9cb5ba93_09aaa6d9",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "Let me discuss on chat.",
+      "parentUuid": "f4837350_9bbf4720",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84cd1bba_34bb9d26",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3
@@ -173,6 +341,24 @@
       "writtenOn": "2022-10-27T19:04:34Z",
       "side": 1,
       "message": "Why are you adding a failure point here. It does affect anything you do here, and I don\u0027t think the caller checks the return code (or can do anything useful if remove fails)",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e86b95e_32fee113",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-10-29T00:40:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "84cd1bba_34bb9d26",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
