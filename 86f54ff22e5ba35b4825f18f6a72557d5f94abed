@@ -63,6 +63,30 @@
       },
       "revId": "86f54ff22e5ba35b4825f18f6a72557d5f94abed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd4f9aaf_144e5234",
+        "filename": "android/gki_system_dlkm_modules",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-29T01:36:09Z",
+      "side": 1,
+      "message": "hmm, sounds like it is eligible to be generated from depmod instead of having a hardcoded list",
+      "parentUuid": "950c873d_72c7806c",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "86f54ff22e5ba35b4825f18f6a72557d5f94abed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
