@@ -2424,3 +2424,5 @@
   xsk_tx_peek_desc
   xsk_tx_release
   xsk_uses_need_wakeup
+  mmc_get_ext_csd
+  mmc_wait_for_cmd
