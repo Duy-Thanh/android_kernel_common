@@ -258,6 +258,8 @@
       <elf-symbol name='__traceiter_android_vh_aes_expandkey' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdc004b58'/>
       <elf-symbol name='__traceiter_android_vh_arch_set_freq_scale' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb98e0e01'/>
       <elf-symbol name='__traceiter_android_vh_bh_lru_install' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe1a04404'/>
+      <elf-symbol name='__traceiter_android_vh_binder_restore_priority' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe3678434'/>
+      <elf-symbol name='__traceiter_android_vh_binder_set_priority' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdb1a8afe'/>
       <elf-symbol name='__traceiter_android_vh_cma_alloc_adjust' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa4f83aea'/>
       <elf-symbol name='__traceiter_android_vh_cma_alloc_finish' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2c702b9d'/>
       <elf-symbol name='__traceiter_android_vh_cma_alloc_start' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x44fcd06e'/>
@@ -3800,6 +3802,8 @@
       <elf-symbol name='__tracepoint_android_vh_aes_expandkey' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x71396455'/>
       <elf-symbol name='__tracepoint_android_vh_arch_set_freq_scale' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7600dd62'/>
       <elf-symbol name='__tracepoint_android_vh_bh_lru_install' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x41cae643'/>
+      <elf-symbol name='__tracepoint_android_vh_binder_restore_priority' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbf6d3788'/>
+      <elf-symbol name='__tracepoint_android_vh_binder_set_priority' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3b21b81'/>
       <elf-symbol name='__tracepoint_android_vh_cma_alloc_adjust' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6340c42e'/>
       <elf-symbol name='__tracepoint_android_vh_cma_alloc_finish' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa90e8afe'/>
       <elf-symbol name='__tracepoint_android_vh_cma_alloc_start' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe870063b'/>
@@ -101716,6 +101720,7 @@
           <var-decl name='code' type-id='930ea9f9' visibility='default' filepath='include/drm/drm_edid.h' line='142' column='1'/>
         </data-member>
       </class-decl>
+      <class-decl name='binder_transaction' is-struct='yes' visibility='default' is-declaration-only='yes' id='ebce8e86'/>
       <pointer-type-def type-id='0f840455' size-in-bits='64' id='ebd313ed'/>
       <class-decl name='netns_nf_frag' size-in-bits='64' is-struct='yes' visibility='default' filepath='include/net/netns/ipv6.h' line='125' column='1' id='ebd39a5d'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -105097,6 +105102,7 @@
           <var-decl name='android_kabi_reserved4' type-id='91ce1af9' visibility='default' filepath='sound/usb/usbaudio.h' line='73' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='ebce8e86' size-in-bits='64' id='f4c3bb4c'/>
       <pointer-type-def type-id='43c38462' size-in-bits='64' id='f4c93d58'/>
       <class-decl name='mii_timestamper' size-in-bits='384' is-struct='yes' visibility='default' filepath='include/linux/mii_timestamper.h' line='46' column='1' id='f4d09092'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -110991,6 +110997,18 @@
         <parameter type-id='d8e6b335' name='flush' filepath='include/trace/hooks/buffer.h' line='13' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_android_vh_binder_restore_priority' mangled-name='__traceiter_android_vh_binder_restore_priority' filepath='include/trace/hooks/binder.h' line='30' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_binder_restore_priority'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/binder.h' line='30' column='1'/>
+        <parameter type-id='f4c3bb4c' name='t' filepath='include/trace/hooks/binder.h' line='30' column='1'/>
+        <parameter type-id='f23e2572' name='task' filepath='include/trace/hooks/binder.h' line='30' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='__traceiter_android_vh_binder_set_priority' mangled-name='__traceiter_android_vh_binder_set_priority' filepath='include/trace/hooks/binder.h' line='27' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_binder_set_priority'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/binder.h' line='27' column='1'/>
+        <parameter type-id='f4c3bb4c' name='t' filepath='include/trace/hooks/binder.h' line='27' column='1'/>
+        <parameter type-id='f23e2572' name='task' filepath='include/trace/hooks/binder.h' line='27' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_android_vh_cma_alloc_adjust' mangled-name='__traceiter_android_vh_cma_alloc_adjust' filepath='include/trace/hooks/mm.h' line='100' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_cma_alloc_adjust'>
         <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/mm.h' line='100' column='1'/>
         <parameter type-id='0a0aff97' name='zone' filepath='include/trace/hooks/mm.h' line='100' column='1'/>
@@ -111574,6 +111592,8 @@
       <var-decl name='__tracepoint_android_vh_aes_expandkey' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_aes_expandkey' visibility='default' filepath='include/trace/hooks/fips140.h' line='26' column='1' elf-symbol-id='__tracepoint_android_vh_aes_expandkey'/>
       <var-decl name='__tracepoint_android_vh_arch_set_freq_scale' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_arch_set_freq_scale' visibility='default' filepath='include/trace/hooks/topology.h' line='18' column='1' elf-symbol-id='__tracepoint_android_vh_arch_set_freq_scale'/>
       <var-decl name='__tracepoint_android_vh_bh_lru_install' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_bh_lru_install' visibility='default' filepath='include/trace/hooks/buffer.h' line='13' column='1' elf-symbol-id='__tracepoint_android_vh_bh_lru_install'/>
+      <var-decl name='__tracepoint_android_vh_binder_restore_priority' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_binder_restore_priority' visibility='default' filepath='include/trace/hooks/binder.h' line='30' column='1' elf-symbol-id='__tracepoint_android_vh_binder_restore_priority'/>
+      <var-decl name='__tracepoint_android_vh_binder_set_priority' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_binder_set_priority' visibility='default' filepath='include/trace/hooks/binder.h' line='27' column='1' elf-symbol-id='__tracepoint_android_vh_binder_set_priority'/>
       <var-decl name='__tracepoint_android_vh_cma_alloc_adjust' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cma_alloc_adjust' visibility='default' filepath='include/trace/hooks/mm.h' line='100' column='1' elf-symbol-id='__tracepoint_android_vh_cma_alloc_adjust'/>
       <var-decl name='__tracepoint_android_vh_cma_alloc_finish' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cma_alloc_finish' visibility='default' filepath='include/trace/hooks/mm.h' line='41' column='1' elf-symbol-id='__tracepoint_android_vh_cma_alloc_finish'/>
       <var-decl name='__tracepoint_android_vh_cma_alloc_start' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cma_alloc_start' visibility='default' filepath='include/trace/hooks/mm.h' line='38' column='1' elf-symbol-id='__tracepoint_android_vh_cma_alloc_start'/>
