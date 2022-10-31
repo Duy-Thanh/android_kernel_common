@@ -1213,6 +1213,8 @@
   mmc_set_bus_width
   mmc_set_clock
   mmc_set_timing
+  mmc_get_ext_csd
+  mmc_wait_for_cmd
   mmput
   mod_delayed_work_on
   mod_node_page_state
