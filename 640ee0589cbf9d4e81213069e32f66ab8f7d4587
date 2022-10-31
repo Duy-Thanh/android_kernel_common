@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcfb9b82_49a6472c",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 5710,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-31T19:07:21Z",
+      "side": 1,
+      "message": "The builds are failing with:\n```\ntype \u0027struct wiphy\u0027 changed\n  member \u0027union { const struct wiphy_backport * backport; struct { u64 android_backport_reserved1; }; union { }; }\u0027 was added\n  member \u0027u64 android_backport_reserved1\u0027 was removed\n```\n\nSo it appears that `ANDROID_BACKPORT_RESERVED_USE(...)` is not working the way `ANDROID_KABI_USE(...)` does.",
+      "revId": "640ee0589cbf9d4e81213069e32f66ab8f7d4587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
