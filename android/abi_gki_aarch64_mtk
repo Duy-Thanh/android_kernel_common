@@ -1567,8 +1567,12 @@
   rb_next
   rb_prev
   rb_replace_node
+  rc_allocate_device
+  rc_free_device
+  rc_register_device
   rcu_idle_enter
   rcu_idle_exit
+  rc_unregister_device
   __rcu_read_lock
   __rcu_read_unlock
   rdev_get_dev
