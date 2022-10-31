@@ -16,6 +16,24 @@
       "message": "Is there a respin request for this series? \nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin",
       "revId": "cbe392ed5aa9dcdb8882a8b21ac599a2dad234ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a302a9cc_73ca3cc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015397
+      },
+      "writtenOn": "2022-10-31T16:43:06Z",
+      "side": 1,
+      "message": "Yes, under b/256211191",
+      "parentUuid": "183ccf34_c740207a",
+      "revId": "cbe392ed5aa9dcdb8882a8b21ac599a2dad234ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
