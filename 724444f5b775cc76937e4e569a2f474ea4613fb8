@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "adc96a1f_fbf4b1c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-31T23:06:05Z",
+      "side": 1,
+      "message": "Why is this needed? Please be more descriptive about the feature this is implementing and why it can\u0027t be done upstream. Greg shouldn\u0027t need to ask about what driver needs it since it should all be described here in the commit message.",
+      "revId": "724444f5b775cc76937e4e569a2f474ea4613fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "554e8726_951d244a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
