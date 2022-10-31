@@ -19,6 +19,26 @@
       "message": "Please attach an open respin request bug to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 484240509 android-build.ayeaye-python-dispatcher_20221027.03_p0",
       "revId": "c9d6f098a8de4815b68edf76b6f5defaf29b6a4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000031550344",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2277530?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "65cba6c2_23e4fed1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-10-31T10:35:17Z",
+      "side": 1,
+      "message": "Please attach an open respin request bug to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 484240509 android-build.ayeaye-python-dispatcher_20221027.03_p0",
+      "revId": "c9d6f098a8de4815b68edf76b6f5defaf29b6a4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
