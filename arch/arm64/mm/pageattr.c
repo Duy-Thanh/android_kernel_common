@@ -61,6 +61,25 @@ static int __change_memory_common(unsigned long start, unsigned long size,
 	return ret;
 }
 
+/*
+ * This function assumes that the range is mapped with PAGE_SIZE pages.
+ */
+int change_memory_nc(unsigned long start, unsigned long size,
+				pgprot_t set_mask, pgprot_t clear_mask)
+{
+	struct page_change_data data;
+	int ret;
+
+	data.set_mask = __pgprot(PROT_NORMAL_NC);
+	data.clear_mask = __pgprot(0);
+
+	ret = apply_to_page_range(&init_mm, start, size, change_page_range,
+					&data);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(change_memory_nc);
+
 static int change_memory_common(unsigned long addr, int numpages,
 				pgprot_t set_mask, pgprot_t clear_mask)
 {
