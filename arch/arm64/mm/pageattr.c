@@ -159,6 +159,25 @@ int set_memory_valid(unsigned long addr, int numpages, int enable)
 					__pgprot(PTE_VALID));
 }
 
+/*
+ * This skips TLB maintenance on the assumption that this will be called
+ * with remove_memory() afterwards, which calls flush_tlb_kernel_range().
+ */
+int set_direct_map_range_noncached(unsigned long addr, unsigned long numpages)
+{
+	struct page_change_data data = {
+		.set_mask = __pgprot(PROT_NORMAL_NC),
+		.clear_mask = __pgprot(0),
+	};
+
+	if (!can_set_direct_map())
+		return 0;
+
+	return apply_to_page_range(&init_mm, addr, PAGE_SIZE * numpages,
+				   change_page_range, &data);
+}
+EXPORT_SYMBOL_GPL(set_direct_map_range_nc);
+
 int set_direct_map_invalid_noflush(struct page *page)
 {
 	struct page_change_data data = {
