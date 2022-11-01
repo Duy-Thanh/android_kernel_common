@@ -120,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "636cded2_4f5886b4",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-11-01T00:16:24Z",
+      "side": 1,
+      "message": "After discussions on the chat, it is clear to me what needs to be done.",
+      "parentUuid": "f67ce63f_6d215b80",
+      "range": {
+        "startLine": 94,
+        "startChar": 18,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "327a0515_628ade7b",
         "filename": "drivers/trusty/trusty-share.c",
         "patchSetId": 3
@@ -190,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7d8428d_c4328577",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-11-01T00:16:24Z",
+      "side": 1,
+      "message": "After discussions on the chat, it is clear to me what needs to be done.",
+      "parentUuid": "4cca4985_91ee0c92",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c929ade9_95b12c68",
         "filename": "drivers/trusty/trusty-share.h",
         "patchSetId": 3
@@ -219,6 +261,24 @@
       "side": 1,
       "message": "I shall engage you on chat to understand your comment.",
       "parentUuid": "c929ade9_95b12c68",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f585b51c_e43fed88",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-11-01T00:16:24Z",
+      "side": 1,
+      "message": "After discussions on the chat, it is clear to me what needs to be done.",
+      "parentUuid": "cc1454d2_4d054e77",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
