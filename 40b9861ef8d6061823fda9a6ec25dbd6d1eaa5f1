@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a50fec_fc0d4d16",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-11-01T00:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e40a196_4cc1bfdd",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2080feff_17e29bec",
@@ -142,6 +160,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db9dada5_ccb5ecf6",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-11-01T00:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "636cded2_4f5886b4",
+      "range": {
+        "startLine": 94,
+        "startChar": 18,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "327a0515_628ade7b",
@@ -230,6 +272,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f13c9bd_8bdba0ff",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-11-01T00:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7d8428d_c4328577",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c929ade9_95b12c68",
@@ -279,6 +339,24 @@
       "side": 1,
       "message": "After discussions on the chat, it is clear to me what needs to be done.",
       "parentUuid": "cc1454d2_4d054e77",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd66e11_4f7f5f03",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-11-01T00:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f585b51c_e43fed88",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -353,6 +431,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bf92341_81359edc",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-11-01T00:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bffb96db_e6afff72",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4837350_9bbf4720",
@@ -384,6 +480,24 @@
       "side": 1,
       "message": "Let me discuss on chat.",
       "parentUuid": "f4837350_9bbf4720",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9caf9c86_209acd14",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-11-01T00:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cb5ba93_09aaa6d9",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
