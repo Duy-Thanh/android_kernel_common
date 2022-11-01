@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f242956_f298297b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-01T01:27:28Z",
+      "side": 1,
+      "message": "I decided to spend some more time on this issue to make sure we did not miss any possible races (the code is quite complex). -1 for now to prevent accidental merge.",
+      "revId": "e70bbe2a41358d56b24630ec1ad7ff4974361a1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
