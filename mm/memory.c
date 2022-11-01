@@ -217,6 +217,16 @@ static void free_pte_range(struct mmu_gather *tlb, pmd_t *pmd,
 			   unsigned long addr)
 {
 	pgtable_t token = pmd_pgtable(*pmd);
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+	/*
+	 * Ensure page table destruction is blocked if __pte_map_lock managed
+	 * to take this lock. Without this barrier tlb_remove_table_rcu can
+	 * destroy ptl after __pte_map_lock locked it and during unlock would
+	 * cause a use-after-free.
+	 */
+	spinlock_t *ptl = pmd_lock(tlb->mm, pmd);
+	spin_unlock(ptl);
+#endif
 	pmd_clear(pmd);
 	pte_free_tlb(tlb, token, addr);
 	mm_dec_nr_ptes(tlb->mm);
@@ -2779,6 +2789,16 @@ bool __pte_map_lock(struct vm_fault *vmf)
 	if (!pte)
 		pte = pte_offset_map(vmf->pmd, vmf->address);
 	/*
+	 * We check if the pmd value is still the same to ensure that it was
+	 * not cleared by pmd_clear in free_pte_range and ptl is still valid.
+	 */
+	pmdval = READ_ONCE(*vmf->pmd);
+	if (!pmd_same(pmdval, vmf->orig_pmd)) {
+		count_vm_spf_event(SPF_ABORT_PTE_MAP_LOCK_PMD);
+		goto fail;
+	}
+
+	/*
 	 * Try locking the page table.
 	 *
 	 * Note that we might race against zap_pte_range() which
@@ -2794,6 +2814,10 @@ bool __pte_map_lock(struct vm_fault *vmf)
 		count_vm_spf_event(SPF_ABORT_PTE_MAP_LOCK_PTL);
 		goto fail;
 	}
+	/*
+	 * The check below will fail if __pte_map_lock passed its ptl barrier
+	 * before we took the ptl lock.
+	 */
 	if (!mmap_seq_read_check(vmf->vma->vm_mm, vmf->seq,
 				 SPF_ABORT_PTE_MAP_LOCK_SEQ2))
 		goto unlock_fail;
