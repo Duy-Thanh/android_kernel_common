@@ -16,6 +16,24 @@
       "message": "upstream first?",
       "revId": "7c196fab67f4fd42dfb223c9da45f6432f046561",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84218ee1_86b15aa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-02T17:40:24Z",
+      "side": 1,
+      "message": "Please see the reasons this might not be appropriate to discuss upstream in the attached bug.",
+      "parentUuid": "7e2bf2a0_47692e25",
+      "revId": "7c196fab67f4fd42dfb223c9da45f6432f046561",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
