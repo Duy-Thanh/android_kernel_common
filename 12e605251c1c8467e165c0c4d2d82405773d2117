@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c3b84a_4aff64c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1090168
+      },
+      "writtenOn": "2022-11-02T16:47:02Z",
+      "side": 1,
+      "message": "In Android t, establishing an IPsec VPN will cause a high probability of kernel null pointers.",
+      "revId": "12e605251c1c8467e165c0c4d2d82405773d2117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
