@@ -686,8 +686,9 @@ int __xfrm_state_delete(struct xfrm_state *x)
 		list_del(&x->km.all);
 		hlist_del_rcu(&x->bydst);
 		hlist_del_rcu(&x->bysrc);
-		if (x->km.seq)
+		if ((x->km.seq) && !hlist_unhashed(&x->byseq)) {
 			hlist_del_rcu(&x->byseq);
+		}
 		if (x->id.spi)
 			hlist_del_rcu(&x->byspi);
 		net->xfrm.state_num--;
