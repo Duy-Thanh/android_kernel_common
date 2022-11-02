@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ab9646_54807139",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-02T00:30:49Z",
+      "side": 1,
+      "message": "how does passing this stack pointer \"carry on state from zap_pte_range_tlb_start to\nzap_pte_range_tlb_end\"? Can you say more in the commit message?",
+      "revId": "328e12023c4c45c2eba06c81d856515e61e3fd8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
