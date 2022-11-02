@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50b10357_7c0072e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-11-02T15:27:50Z",
+      "side": 1,
+      "message": "Just an update of the test status for the once fix from the Android perspective.\n\nThis has been tested with the Android Q/R/S/Master versions which were broken before, and the kernel panic problem is not reproduced now.",
+      "revId": "dc2233fe533ce620ec8f6a80d140b6d44783ed98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
