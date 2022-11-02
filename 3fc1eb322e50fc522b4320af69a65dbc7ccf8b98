@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98485311_1013f35a",
+        "filename": "include/linux/skbuff.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-02T08:37:58Z",
+      "side": 1,
+      "message": "`_ANDROID_KABI_REPLACE` emits a union with the original type, so this will be padded to 64 bits, but is there a reason to omit the __u16 member from the new struct declaration?",
+      "range": {
+        "startLine": 896,
+        "startChar": 4,
+        "endLine": 896,
+        "endChar": 9
+      },
+      "revId": "3fc1eb322e50fc522b4320af69a65dbc7ccf8b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
