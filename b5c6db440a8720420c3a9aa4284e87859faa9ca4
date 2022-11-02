@@ -16,6 +16,24 @@
       "message": ".xml file is generated incorrectly, please rebase and resubmit.",
       "revId": "b5c6db440a8720420c3a9aa4284e87859faa9ca4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81c2a5ea_387b4f2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1971857
+      },
+      "writtenOn": "2022-11-02T07:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5018017_13943b06",
+      "revId": "b5c6db440a8720420c3a9aa4284e87859faa9ca4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
