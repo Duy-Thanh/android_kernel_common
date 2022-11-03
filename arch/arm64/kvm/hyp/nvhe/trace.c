@@ -297,6 +297,12 @@ static int rb_page_init(struct hyp_buffer_page *bpage, unsigned long hva)
 	if (ret)
 		return ret;
 
+	ret = host_stage2_wrprotect(hyp_virt_to_phys(hyp_va), PAGE_SIZE);
+	if (ret) {
+		hyp_unpin_shared_mem(hyp_va, hyp_va + PAGE_SIZE);
+		return ret;
+	}
+
 	INIT_LIST_HEAD(&bpage->list);
 	bpage->page = (struct buffer_data_page *)hyp_va;
 
@@ -328,6 +334,9 @@ static void rb_cpu_teardown(struct hyp_rb_per_cpu *cpu_buffer)
 
 		if (!bpage->page)
 			continue;
+
+		host_stage2_relax_perms(hyp_virt_to_phys((void *)bpage->page),
+					KVM_PGTABLE_PROT_W);
 
 		hyp_unpin_shared_mem((void *)bpage->page,
 				     (void *)bpage->page + PAGE_SIZE);
