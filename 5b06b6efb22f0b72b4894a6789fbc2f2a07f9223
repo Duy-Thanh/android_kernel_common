@@ -16,6 +16,24 @@
       "message": "what does it mean to have CR +2 on \"refs/tags/*\"? What are you trying to do here?",
       "revId": "5b06b6efb22f0b72b4894a6789fbc2f2a07f9223",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac3ded00_60403343",
+        "filename": "project.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-11-03T20:30:04Z",
+      "side": 1,
+      "message": "Oh I just realized I didn\u0027t do this correctly. Oops! Good catch.\n\nI created a new CL that should be correct. https://android-review.googlesource.com/c/kernel/common/+/2286013/1/project.config",
+      "parentUuid": "8073a48e_c008e2b0",
+      "revId": "5b06b6efb22f0b72b4894a6789fbc2f2a07f9223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
