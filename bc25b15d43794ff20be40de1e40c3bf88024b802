@@ -84,6 +84,24 @@
       "message": "On the point to avoid priority inversion, do you really want spin_lock_irqsave here? As preemption would still be possible otherwise, no?",
       "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fede1a26_2b38fdc0",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-11-03T17:13:53Z",
+      "side": 1,
+      "message": "this is never called in IRQ context and IRQ should be short, right?",
+      "parentUuid": "869548e1_b0c096fb",
+      "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
