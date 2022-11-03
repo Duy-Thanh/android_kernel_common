@@ -1604,8 +1604,15 @@ static struct device_attribute format_attr_##_name = __ATTR_RO(_name)
 int perf_event_init_cpu(unsigned int cpu);
 int perf_event_exit_cpu(unsigned int cpu);
 #else
-#define perf_event_init_cpu	NULL
-#define perf_event_exit_cpu	NULL
+static inline int perf_event_init_cpu(unsigned int cpu)
+{
+	return 0;
+}
+
+static inline int perf_event_exit_cpu(unsigned int cpu)
+{
+	return 0;
+}
 #endif
 
 extern void __weak arch_perf_update_userpage(struct perf_event *event,
