@@ -106,6 +106,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7652714_337b14d4",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-03T18:11:24Z",
+      "side": 1,
+      "message": "I wonder if this function is heavy enough that it\u0027s worth moving out. IIUC it\u0027s a per-cpu counter and can\u0027t block.",
+      "range": {
+        "startLine": 48,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "869548e1_b0c096fb",
         "filename": "drivers/dma-buf/heaps/page_pool.c",
         "patchSetId": 1
