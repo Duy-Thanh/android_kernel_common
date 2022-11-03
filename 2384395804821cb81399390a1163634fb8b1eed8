@@ -34,6 +34,24 @@
       "parentUuid": "6d126956_aaf12956",
       "revId": "2384395804821cb81399390a1163634fb8b1eed8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd414106_f7a172f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-03T21:52:41Z",
+      "side": 1,
+      "message": "yes, let\u0027s do the revert/apply. I really doubt we\u0027ll have bisections right now that hit this and for our debt analysis it would be nice to replace the FROMLIST with an UPSTREAM rather than FROMLIST+ANDROID.",
+      "parentUuid": "f8804300_fdacefc4",
+      "revId": "2384395804821cb81399390a1163634fb8b1eed8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
