@@ -16,6 +16,23 @@
       "message": "Just in case: Ccing John",
       "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec6e3777_7e59510c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-11-03T16:03:07Z",
+      "side": 1,
+      "message": "Looks reasonable.",
+      "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
