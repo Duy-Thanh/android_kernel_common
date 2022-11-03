@@ -33,6 +33,57 @@
       "message": "Looks reasonable.",
       "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ea6de3a_2f304baf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-11-03T16:06:13Z",
+      "side": 1,
+      "message": "Actually, still drinking my coffee. As the kernel is preemptable, shouldn\u0027t you disable irqs to avoid the potential of being scheduled out while holding the spinlock?",
+      "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0cc9582_8b6efeaa",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-11-03T16:06:13Z",
+      "side": 1,
+      "message": "_irqsave/_irqrestore here as well?",
+      "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "869548e1_b0c096fb",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-11-03T16:06:13Z",
+      "side": 1,
+      "message": "On the point to avoid priority inversion, do you really want spin_lock_irqsave here? As preemption would still be possible otherwise, no?",
+      "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
