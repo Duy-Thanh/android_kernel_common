@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6511cac_4375e79e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-03T02:36:18Z",
+      "side": 1,
+      "message": "Must also add the new file to the bazel kleaf files in order for the build to succeed.",
+      "revId": "d747d0f82e597f97c201ccfa597aa9e0b82809f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
