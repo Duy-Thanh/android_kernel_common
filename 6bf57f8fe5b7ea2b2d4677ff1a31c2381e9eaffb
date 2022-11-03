@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000031813412",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2286017?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4af018c0_27bf53d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-11-03T21:35:37Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 485873479 android-build.ayeaye-python-dispatcher_20221103.05_p0",
+      "revId": "6bf57f8fe5b7ea2b2d4677ff1a31c2381e9eaffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000031813412",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2286017?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "e406165c_ed6d8dac",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Stephen Barber \u003csmbarber@chromium.org\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "288e9277_9857c7b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-11-03T21:35:37Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Stephen Barber \u003csmbarber@chromium.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 485873479 android-build.ayeaye-python-dispatcher_20221103.05_p0",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 0
+      },
+      "revId": "6bf57f8fe5b7ea2b2d4677ff1a31c2381e9eaffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
