@@ -175,6 +175,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab4e91dc_28fa0ace",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-11-04T17:32:37Z",
+      "side": 1,
+      "message": "Agree it should be thread safe. I think `pool-\u003eorder` could be a UAF if `dmabuf_page_pool_destroy` gets called simultaneously without external synchronization (which seems pretty silly). But it looks like the only place that gets called is if we fail to initialize the heap. The heaps never get unloaded.\n\nSo not a real problem today.",
+      "parentUuid": "7cf13383_747b8556",
+      "range": {
+        "startLine": 48,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "bc25b15d43794ff20be40de1e40c3bf88024b802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "869548e1_b0c096fb",
