@@ -52,6 +52,24 @@
       "parentUuid": "ece8bbc0_463298cd",
       "revId": "640ee0589cbf9d4e81213069e32f66ab8f7d4587",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83a5e237_b1f03db5",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 5710,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2022-11-04T16:30:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90becfe7_94996a21",
+      "revId": "640ee0589cbf9d4e81213069e32f66ab8f7d4587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
