@@ -16,6 +16,24 @@
       "message": "What feature is this for? Is this part of CPU Pause? Please be more descriptive of what this is for.",
       "revId": "d6ac9cc9c4b010be6b679c8dcd3297d7a1984bc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75c1562c_e5a3b7e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1928805
+      },
+      "writtenOn": "2022-11-04T04:12:46Z",
+      "side": 1,
+      "message": "I have amended the commit message to include more detail.",
+      "parentUuid": "bbbbab9b_87f3ffe3",
+      "revId": "d6ac9cc9c4b010be6b679c8dcd3297d7a1984bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
