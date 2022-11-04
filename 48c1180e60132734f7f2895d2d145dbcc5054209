@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "365991b0_53f08bbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-11-04T21:13:42Z",
+      "side": 1,
+      "message": "This should probably be using the same ChangeID as the original? Do you mind cherry-picking the original and resubmitting?",
+      "revId": "48c1180e60132734f7f2895d2d145dbcc5054209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
