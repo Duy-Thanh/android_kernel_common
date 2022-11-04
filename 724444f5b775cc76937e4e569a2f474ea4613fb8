@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3e8ef7a_61dada40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1928805
+      },
+      "writtenOn": "2022-11-04T04:09:12Z",
+      "side": 1,
+      "message": "Apologies. I have amended the commit message.",
+      "parentUuid": "adc96a1f_fbf4b1c1",
+      "revId": "724444f5b775cc76937e4e569a2f474ea4613fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "554e8726_951d244a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
