@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c42c6f2_57c5c84c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-11-04T17:55:07Z",
+      "side": 1,
+      "message": "presubmit failure is checkpatch:\n\nWARNING:LONG_LINE_COMMENT: line over 80 characters\n#48: FILE: arch/x86/include/asm/msr-index.h:45:\n\nupstream wants a v2 anyways.",
+      "revId": "6a4d4ba56e38593fb05124acffbe9ff601d40717",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
