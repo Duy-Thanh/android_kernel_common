@@ -155,6 +155,7 @@
       <elf-symbol name='__pci_register_driver' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x49db0a50'/>
       <elf-symbol name='__platform_driver_probe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x56048cc3'/>
       <elf-symbol name='__platform_driver_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc63c1c69'/>
+      <elf-symbol name='__platform_register_drivers' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeae06743'/>
       <elf-symbol name='__pm_relax' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x242e07e2'/>
       <elf-symbol name='__pm_runtime_disable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa15d2b0'/>
       <elf-symbol name='__pm_runtime_idle' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x889b1352'/>
@@ -914,6 +915,7 @@
       <elf-symbol name='d_delete' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbf74e40d'/>
       <elf-symbol name='d_make_root' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa00f473c'/>
       <elf-symbol name='d_path' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaba95da9'/>
+      <elf-symbol name='dapm_pinctrl_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x680ce2f9'/>
       <elf-symbol name='dapm_regulator_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa1776873'/>
       <elf-symbol name='datagram_poll' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb3542737'/>
       <elf-symbol name='deactivate_task' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x19939899'/>
@@ -926,6 +928,7 @@
       <elf-symbol name='debugfs_create_file' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x685fd899'/>
       <elf-symbol name='debugfs_create_file_unsafe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3ecf183e'/>
       <elf-symbol name='debugfs_create_size_t' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1117a511'/>
+      <elf-symbol name='debugfs_create_symlink' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb903b0ac'/>
       <elf-symbol name='debugfs_create_u16' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x806cb34e'/>
       <elf-symbol name='debugfs_create_u32' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb7b4491e'/>
       <elf-symbol name='debugfs_create_u64' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x294895e4'/>
@@ -1074,6 +1077,10 @@
       <elf-symbol name='device_remove_groups' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15ac5bc4'/>
       <elf-symbol name='device_set_wakeup_capable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x896e4e1a'/>
       <elf-symbol name='device_set_wakeup_enable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb621ed7e'/>
+      <elf-symbol name='device_show_bool' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1432605c'/>
+      <elf-symbol name='device_show_int' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8140241b'/>
+      <elf-symbol name='device_store_bool' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x18de307c'/>
+      <elf-symbol name='device_store_int' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb51ae115'/>
       <elf-symbol name='device_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x27cbf779'/>
       <elf-symbol name='device_wakeup_disable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x481edb6e'/>
       <elf-symbol name='device_wakeup_enable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa501ffba'/>
@@ -1127,6 +1134,7 @@
       <elf-symbol name='devm_kfree' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbb249514'/>
       <elf-symbol name='devm_kmalloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4415af5a'/>
       <elf-symbol name='devm_kmemdup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9f3d3e93'/>
+      <elf-symbol name='devm_krealloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd9cbd937'/>
       <elf-symbol name='devm_kstrdup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4b0a6bbc'/>
       <elf-symbol name='devm_kstrdup_const' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xba90ef13'/>
       <elf-symbol name='devm_kvasprintf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x127dba4d'/>
@@ -2652,6 +2660,7 @@
       <elf-symbol name='pinctrl_enable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfff738ed'/>
       <elf-symbol name='pinctrl_force_default' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaa004bbe'/>
       <elf-symbol name='pinctrl_force_sleep' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xad839908'/>
+      <elf-symbol name='pinctrl_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcdf46e90'/>
       <elf-symbol name='pinctrl_lookup_state' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x41c2ae73'/>
       <elf-symbol name='pinctrl_pm_select_default_state' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb15191c2'/>
       <elf-symbol name='pinctrl_pm_select_idle_state' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5f055b26'/>
@@ -2701,12 +2710,14 @@
       <elf-symbol name='pm_genpd_remove_subdomain' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf1fb863'/>
       <elf-symbol name='pm_relax' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xafe749f1'/>
       <elf-symbol name='pm_runtime_allow' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3d1ee0d6'/>
+      <elf-symbol name='pm_runtime_barrier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2013a99b'/>
       <elf-symbol name='pm_runtime_enable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8faeff4e'/>
       <elf-symbol name='pm_runtime_forbid' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc0ff2134'/>
       <elf-symbol name='pm_runtime_force_resume' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3bf71248'/>
       <elf-symbol name='pm_runtime_force_suspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x21145666'/>
       <elf-symbol name='pm_runtime_get_if_active' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3054296'/>
       <elf-symbol name='pm_runtime_irq_safe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdf176571'/>
+      <elf-symbol name='pm_runtime_no_callbacks' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x33200463'/>
       <elf-symbol name='pm_runtime_set_autosuspend_delay' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x656957e1'/>
       <elf-symbol name='pm_stay_awake' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf1889637'/>
       <elf-symbol name='pm_system_wakeup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8c0215f2'/>
@@ -2746,6 +2757,7 @@
       <elf-symbol name='proc_remove' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe9c214e2'/>
       <elf-symbol name='proc_set_size' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9b58ed5a'/>
       <elf-symbol name='proc_set_user' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6d1fa6cd'/>
+      <elf-symbol name='proc_symlink' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb55c8d8c'/>
       <elf-symbol name='proto_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x541d6ee9'/>
       <elf-symbol name='proto_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd48c14c3'/>
       <elf-symbol name='ps2_begin_command' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x37b78d12'/>
@@ -3167,6 +3179,7 @@
       <elf-symbol name='snd_dma_alloc_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe4a65267'/>
       <elf-symbol name='snd_dma_free_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x193c19db'/>
       <elf-symbol name='snd_dmaengine_pcm_prepare_slave_config' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xda125f15'/>
+      <elf-symbol name='snd_hwdep_new' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe134a490'/>
       <elf-symbol name='snd_info_create_card_entry' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x71696aee'/>
       <elf-symbol name='snd_jack_new' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2a4e9f87'/>
       <elf-symbol name='snd_jack_report' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb9845ba2'/>
@@ -3189,17 +3202,21 @@
       <elf-symbol name='snd_pcm_lib_free_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbdd19e4d'/>
       <elf-symbol name='snd_pcm_lib_ioctl' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xacb984d7'/>
       <elf-symbol name='snd_pcm_lib_malloc_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x95495b83'/>
+      <elf-symbol name='snd_pcm_lib_preallocate_free_for_all' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8cdaff91'/>
       <elf-symbol name='snd_pcm_lib_preallocate_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x69901dc5'/>
       <elf-symbol name='snd_pcm_new' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc79fae33'/>
       <elf-symbol name='snd_pcm_period_elapsed' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5f4cad80'/>
+      <elf-symbol name='snd_pcm_rate_range_to_bits' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8d864069'/>
       <elf-symbol name='snd_pcm_set_managed_buffer_all' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7c8e21aa'/>
       <elf-symbol name='snd_pcm_set_ops' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfce24b16'/>
       <elf-symbol name='snd_pcm_set_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x35f8c8ac'/>
       <elf-symbol name='snd_soc_add_component_controls' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7519990f'/>
       <elf-symbol name='snd_soc_add_dai_controls' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x84731b0'/>
+      <elf-symbol name='snd_soc_bytes_info_ext' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfdeba583'/>
       <elf-symbol name='snd_soc_bytes_tlv_callback' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbc667e28'/>
       <elf-symbol name='snd_soc_card_get_kcontrol' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc4932897'/>
       <elf-symbol name='snd_soc_card_jack_new' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x39344a05'/>
+      <elf-symbol name='snd_soc_component_async_complete' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd64c2b99'/>
       <elf-symbol name='snd_soc_component_disable_pin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x47eb12c8'/>
       <elf-symbol name='snd_soc_component_enable_pin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5396028d'/>
       <elf-symbol name='snd_soc_component_force_enable_pin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x56869a15'/>
@@ -3210,6 +3227,7 @@
       <elf-symbol name='snd_soc_component_set_pll' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcb12a5f4'/>
       <elf-symbol name='snd_soc_component_set_sysclk' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9c65e977'/>
       <elf-symbol name='snd_soc_component_update_bits' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc0ab7cb6'/>
+      <elf-symbol name='snd_soc_component_update_bits_async' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x26a56bca'/>
       <elf-symbol name='snd_soc_component_write' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x71c63bf3'/>
       <elf-symbol name='snd_soc_dai_get_channel_map' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x436ace5e'/>
       <elf-symbol name='snd_soc_dai_link_set_capabilities' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbf40cf96'/>
@@ -3222,6 +3240,7 @@
       <elf-symbol name='snd_soc_dapm_del_routes' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x60fc6cd8'/>
       <elf-symbol name='snd_soc_dapm_disable_pin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7361fb2a'/>
       <elf-symbol name='snd_soc_dapm_disable_pin_unlocked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x13965536'/>
+      <elf-symbol name='snd_soc_dapm_enable_pin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbbdbc34b'/>
       <elf-symbol name='snd_soc_dapm_force_enable_pin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x66ea3b71'/>
       <elf-symbol name='snd_soc_dapm_force_enable_pin_unlocked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x403de08a'/>
       <elf-symbol name='snd_soc_dapm_get_enum_double' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeaa520b1'/>
@@ -3241,15 +3260,19 @@
       <elf-symbol name='snd_soc_dapm_put_volsw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x18a9247f'/>
       <elf-symbol name='snd_soc_dapm_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4e9847ba'/>
       <elf-symbol name='snd_soc_dapm_sync_unlocked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8330a209'/>
+      <elf-symbol name='snd_soc_dapm_weak_routes' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x25399d2e'/>
+      <elf-symbol name='snd_soc_find_dai' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x316d3be1'/>
       <elf-symbol name='snd_soc_get_enum_double' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x316320d6'/>
       <elf-symbol name='snd_soc_get_pcm_runtime' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6cd73d0a'/>
       <elf-symbol name='snd_soc_get_volsw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xba0c9091'/>
       <elf-symbol name='snd_soc_get_volsw_range' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa67ffbee'/>
       <elf-symbol name='snd_soc_get_volsw_sx' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3ebe5d82'/>
+      <elf-symbol name='snd_soc_get_xr_sx' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa0891bb8'/>
       <elf-symbol name='snd_soc_info_enum_double' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2c12b3d6'/>
       <elf-symbol name='snd_soc_info_volsw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6a018054'/>
       <elf-symbol name='snd_soc_info_volsw_range' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe21003dd'/>
       <elf-symbol name='snd_soc_info_volsw_sx' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc7840bca'/>
+      <elf-symbol name='snd_soc_info_xr_sx' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x355ed440'/>
       <elf-symbol name='snd_soc_jack_add_gpios' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2d3e9f9a'/>
       <elf-symbol name='snd_soc_jack_report' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8cb582b0'/>
       <elf-symbol name='snd_soc_lookup_component' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x61d395e7'/>
@@ -3270,11 +3293,15 @@
       <elf-symbol name='snd_soc_put_volsw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4dd1af32'/>
       <elf-symbol name='snd_soc_put_volsw_range' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7e33b3e8'/>
       <elf-symbol name='snd_soc_put_volsw_sx' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x453c3a19'/>
+      <elf-symbol name='snd_soc_put_xr_sx' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5754241b'/>
       <elf-symbol name='snd_soc_register_card' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x91912fbf'/>
       <elf-symbol name='snd_soc_register_component' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf71b28f3'/>
       <elf-symbol name='snd_soc_runtime_calc_hw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x14489b6a'/>
       <elf-symbol name='snd_soc_runtime_set_dai_fmt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x39eb4f55'/>
       <elf-symbol name='snd_soc_set_runtime_hwparams' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdb002703'/>
+      <elf-symbol name='snd_soc_tplg_component_load' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf51ec55c'/>
+      <elf-symbol name='snd_soc_tplg_component_remove' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x63965b0f'/>
+      <elf-symbol name='snd_soc_tplg_widget_bind_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbb7a5b82'/>
       <elf-symbol name='snd_soc_unregister_card' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xec92f30b'/>
       <elf-symbol name='snd_soc_unregister_component' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb292fa5c'/>
       <elf-symbol name='snd_vendor_set_ops' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3e8300ae'/>
@@ -3390,6 +3417,7 @@
       <elf-symbol name='sysfs_emit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe783e261'/>
       <elf-symbol name='sysfs_emit_at' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x99f2d00a'/>
       <elf-symbol name='sysfs_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x51c744c1'/>
+      <elf-symbol name='sysfs_remove_bin_file' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x22f48da2'/>
       <elf-symbol name='sysfs_remove_file_from_group' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x99350b92'/>
       <elf-symbol name='sysfs_remove_file_ns' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf2967207'/>
       <elf-symbol name='sysfs_remove_group' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc3de88b'/>
@@ -7522,6 +7550,7 @@
       <pointer-type-def type-id='7b49a935' size-in-bits='64' id='0a95e709'/>
       <pointer-type-def type-id='325adc8b' size-in-bits='64' id='0a9b173b'/>
       <qualified-type-def type-id='486f930e' const='yes' id='0aade30f'/>
+      <pointer-type-def type-id='c9365c7b' size-in-bits='64' id='0ab14abf'/>
       <class-decl name='drm_client_dev' size-in-bits='832' is-struct='yes' visibility='default' filepath='include/drm/drm_client.h' line='70' column='1' id='0ab6a08c'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='dev' type-id='8898134d' visibility='default' filepath='include/drm/drm_client.h' line='74' column='1'/>
@@ -7696,6 +7725,13 @@
         <return type-id='95398de2'/>
       </function-type>
       <pointer-type-def type-id='a71373a3' size-in-bits='64' id='0b56752f'/>
+      <function-type size-in-bits='64' id='0b57727f'>
+        <parameter type-id='2567e379'/>
+        <parameter type-id='80f4b756'/>
+        <parameter type-id='bd54fe1a'/>
+        <parameter type-id='b53e8dbb'/>
+        <return type-id='bd54fe1a'/>
+      </function-type>
       <array-type-def dimensions='1' type-id='282b2805' size-in-bits='64' id='0b5c2c22'>
         <subrange length='2' type-id='7ff19f0f' id='52efc4ef'/>
       </array-type-def>
@@ -11168,6 +11204,12 @@
           <var-decl name='max_flows' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='1605' column='1'/>
         </data-member>
       </class-decl>
+      <function-type size-in-bits='64' id='1432736a'>
+        <parameter type-id='2567e379'/>
+        <parameter type-id='77e79a4b'/>
+        <parameter type-id='2ae08426'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
       <class-decl name='drm_dsc_config' size-in-bits='1088' is-struct='yes' visibility='default' filepath='include/drm/drm_dsc.h' line='75' column='1' id='1435ffc6'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='line_buf_depth' type-id='f9b06939' visibility='default' filepath='include/drm/drm_dsc.h' line='80' column='1'/>
@@ -13250,6 +13292,7 @@
         <parameter type-id='a47516e5'/>
         <return type-id='48b5725f'/>
       </function-type>
+      <pointer-type-def type-id='b60126bf' size-in-bits='64' id='18cfbc8f'/>
       <pointer-type-def type-id='31975058' size-in-bits='64' id='18d7129a'/>
       <pointer-type-def type-id='c2e5ce3f' size-in-bits='64' id='18d76f87'/>
       <function-type size-in-bits='64' id='18da11bd'>
@@ -14025,6 +14068,8 @@
           <var-decl name='fb_probe' type-id='4a5aa6b9' visibility='default' filepath='include/drm/drm_fb_helper.h' line='92' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='e4574076' size-in-bits='64' id='1a240138'/>
+      <qualified-type-def type-id='9cec1ba7' const='yes' id='1a35d82e'/>
       <function-type size-in-bits='64' id='1a4194ca'>
         <parameter type-id='8212a608'/>
         <parameter type-id='f0acc909'/>
@@ -14629,7 +14674,7 @@
       </class-decl>
       <pointer-type-def type-id='064acd7a' size-in-bits='64' id='1c475548'/>
       <pointer-type-def type-id='97e3fb6c' size-in-bits='64' id='1c51ec16'/>
-      <class-decl name='pci_sriov' size-in-bits='1280' is-struct='yes' visibility='default' filepath='drivers/pci/controller/dwc/../../pci.h' line='324' column='1' id='1c590219'>
+      <class-decl name='pci_sriov' size-in-bits='1280' is-struct='yes' visibility='default' filepath='drivers/pci/pci.h' line='324' column='1' id='1c590219'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='pos' type-id='95e97e5e' visibility='default' filepath='drivers/pci/pci.h' line='325' column='1'/>
         </data-member>
@@ -18139,6 +18184,7 @@
           <var-decl name='android_kabi_reserved4' type-id='91ce1af9' visibility='default' filepath='include/linux/sched.h' line='501' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='31b13f91' size-in-bits='64' id='2567e379'/>
       <function-type size-in-bits='64' id='256a6e6c'>
         <parameter type-id='2661e0d9'/>
         <parameter type-id='95e97e5e'/>
@@ -20972,6 +21018,11 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <qualified-type-def type-id='b486b770' const='yes' id='2d24e48c'/>
+      <function-type size-in-bits='64' id='2d274c62'>
+        <parameter type-id='2567e379'/>
+        <parameter type-id='67acad02'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
       <array-type-def dimensions='1' type-id='0120aad5' size-in-bits='infinite' id='2d2c12ad'>
         <subrange length='infinite' type-id='7ff19f0f' id='031f2035'/>
       </array-type-def>
@@ -22472,6 +22523,56 @@
           <var-decl name='wait_lock' type-id='641c41d1' visibility='default' filepath='include/asm-generic/qrwlock_types.h' line='26' column='1'/>
         </data-member>
       </class-decl>
+      <class-decl name='snd_hwdep' size-in-bits='10112' is-struct='yes' visibility='default' filepath='include/sound/hwdep.h' line='42' column='1' id='31b13f91'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='card' type-id='52704eb7' visibility='default' filepath='include/sound/hwdep.h' line='43' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='list' type-id='72f469ec' visibility='default' filepath='include/sound/hwdep.h' line='44' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='device' type-id='95e97e5e' visibility='default' filepath='include/sound/hwdep.h' line='45' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='224'>
+          <var-decl name='id' type-id='16dc656a' visibility='default' filepath='include/sound/hwdep.h' line='46' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='480'>
+          <var-decl name='name' type-id='aa5ff375' visibility='default' filepath='include/sound/hwdep.h' line='47' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1120'>
+          <var-decl name='iface' type-id='95e97e5e' visibility='default' filepath='include/sound/hwdep.h' line='48' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1152'>
+          <var-decl name='ops' type-id='5cb0616a' visibility='default' filepath='include/sound/hwdep.h' line='55' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1920'>
+          <var-decl name='open_wait' type-id='b5ab048f' visibility='default' filepath='include/sound/hwdep.h' line='56' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2112'>
+          <var-decl name='private_data' type-id='eaa32e2f' visibility='default' filepath='include/sound/hwdep.h' line='57' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2176'>
+          <var-decl name='private_free' type-id='1a240138' visibility='default' filepath='include/sound/hwdep.h' line='58' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2240'>
+          <var-decl name='dev' type-id='66e487eb' visibility='default' filepath='include/sound/hwdep.h' line='59' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='9536'>
+          <var-decl name='open_mutex' type-id='925167dc' visibility='default' filepath='include/sound/hwdep.h' line='61' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='9920'>
+          <var-decl name='used' type-id='95e97e5e' visibility='default' filepath='include/sound/hwdep.h' line='62' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='9952'>
+          <var-decl name='dsp_loaded' type-id='f0981eeb' visibility='default' filepath='include/sound/hwdep.h' line='63' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='9984'>
+          <var-decl name='exclusive' type-id='f0981eeb' visibility='default' filepath='include/sound/hwdep.h' line='64' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='10048'>
+          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/sound/hwdep.h' line='66' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='fbcd72c8' size-in-bits='64' id='31b542ce'/>
       <function-type size-in-bits='64' id='31b74d85'>
         <parameter type-id='95e97e5e'/>
@@ -23907,6 +24008,7 @@
         <parameter type-id='4fa10f9e'/>
         <return type-id='79a0948f'/>
       </function-type>
+      <pointer-type-def type-id='2567e379' size-in-bits='64' id='358adba9'/>
       <pointer-type-def type-id='835b9b57' size-in-bits='64' id='3591079f'/>
       <qualified-type-def type-id='b07b6d69' const='yes' id='359a7eea'/>
       <pointer-type-def type-id='64615833' size-in-bits='64' id='35a0b4f8'/>
@@ -24361,6 +24463,7 @@
       </function-type>
       <typedef-decl name='sa_family_t' type-id='93d679c6' filepath='include/linux/socket.h' line='26' column='1' id='376fda66'/>
       <pointer-type-def type-id='d31161f1' size-in-bits='64' id='3778bdcd'/>
+      <pointer-type-def type-id='93301493' size-in-bits='64' id='377be647'/>
       <pointer-type-def type-id='1edc0ccb' size-in-bits='64' id='377cc68f'/>
       <class-decl name='wiphy_iftype_ext_capab' size-in-bits='256' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='4683' column='1' id='378a6c5a'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -29149,6 +29252,23 @@
         <parameter type-id='f1397309'/>
         <return type-id='95e97e5e'/>
       </function-type>
+      <class-decl name='snd_hwdep_dsp_image' size-in-bits='768' is-struct='yes' visibility='default' filepath='include/uapi/sound/asound.h' line='140' column='1' id='4410ddbf'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='index' type-id='f0981eeb' visibility='default' filepath='include/uapi/sound/asound.h' line='141' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='name' type-id='b1888bf8' visibility='default' filepath='include/uapi/sound/asound.h' line='142' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='576'>
+          <var-decl name='image' type-id='cf536864' visibility='default' filepath='include/uapi/sound/asound.h' line='143' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='640'>
+          <var-decl name='length' type-id='b59d7dce' visibility='default' filepath='include/uapi/sound/asound.h' line='144' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='704'>
+          <var-decl name='driver_data' type-id='7359adad' visibility='default' filepath='include/uapi/sound/asound.h' line='145' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='c112c396' size-in-bits='64' id='4426dbe0'/>
       <pointer-type-def type-id='fbedd770' size-in-bits='64' id='442ae2b6'/>
       <pointer-type-def type-id='bc6d8611' size-in-bits='64' id='442b8d89'/>
@@ -30012,6 +30132,7 @@
         <enumerator name='USBPHY_INTERFACE_MODE_SERIAL' value='4'/>
         <enumerator name='USBPHY_INTERFACE_MODE_HSIC' value='5'/>
       </enum-decl>
+      <pointer-type-def type-id='1a35d82e' size-in-bits='64' id='46c30e4c'/>
       <function-type size-in-bits='64' id='46c85660'>
         <parameter type-id='fb1092f1'/>
         <parameter type-id='2ae08426'/>
@@ -30841,6 +30962,7 @@
         <parameter type-id='4dfe71de'/>
         <return type-id='91ce1af9'/>
       </function-type>
+      <pointer-type-def type-id='bfa69bfb' size-in-bits='64' id='4998c99f'/>
       <qualified-type-def type-id='ae89b201' const='yes' id='499c8dd8'/>
       <class-decl name='static_key_true' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/linux/jump_label.h' line='367' column='1' id='49a0ad34'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -33553,6 +33675,7 @@
         <parameter type-id='e90f4666'/>
         <return type-id='b59d7dce'/>
       </function-type>
+      <pointer-type-def type-id='d7cfbbe1' size-in-bits='64' id='51119d2d'/>
       <function-type size-in-bits='64' id='5113b296'>
         <parameter type-id='80f4b756'/>
         <return type-id='95e97e5e'/>
@@ -36051,6 +36174,7 @@
       <pointer-type-def type-id='944dbe72' size-in-bits='64' id='571ea5c0'/>
       <pointer-type-def type-id='4c8d9cac' size-in-bits='64' id='572fbdca'/>
       <pointer-type-def type-id='6fca7363' size-in-bits='64' id='57309e07'/>
+      <pointer-type-def type-id='0b57727f' size-in-bits='64' id='5732f87b'/>
       <pointer-type-def type-id='b7e0fed2' size-in-bits='64' id='57376310'/>
       <pointer-type-def type-id='72093c11' size-in-bits='64' id='573a5ee9'/>
       <pointer-type-def type-id='1621811c' size-in-bits='64' id='574ff926'/>
@@ -38564,6 +38688,44 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <pointer-type-def type-id='09978275' size-in-bits='64' id='5cae2f79'/>
+      <class-decl name='snd_hwdep_ops' size-in-bits='768' is-struct='yes' visibility='default' filepath='include/sound/hwdep.h' line='17' column='1' id='5cb0616a'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='llseek' type-id='4998c99f' visibility='default' filepath='include/sound/hwdep.h' line='18' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='read' type-id='8aa9d34a' visibility='default' filepath='include/sound/hwdep.h' line='20' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='write' type-id='5732f87b' visibility='default' filepath='include/sound/hwdep.h' line='22' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='open' type-id='51119d2d' visibility='default' filepath='include/sound/hwdep.h' line='24' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='release' type-id='51119d2d' visibility='default' filepath='include/sound/hwdep.h' line='25' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='poll' type-id='377be647' visibility='default' filepath='include/sound/hwdep.h' line='26' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='384'>
+          <var-decl name='ioctl' type-id='8fb9d791' visibility='default' filepath='include/sound/hwdep.h' line='28' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='448'>
+          <var-decl name='ioctl_compat' type-id='8fb9d791' visibility='default' filepath='include/sound/hwdep.h' line='30' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='512'>
+          <var-decl name='mmap' type-id='80eb3fbc' visibility='default' filepath='include/sound/hwdep.h' line='32' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='576'>
+          <var-decl name='dsp_status' type-id='8cc78bbc' visibility='default' filepath='include/sound/hwdep.h' line='34' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='640'>
+          <var-decl name='dsp_load' type-id='0ab14abf' visibility='default' filepath='include/sound/hwdep.h' line='36' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='704'>
+          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/sound/hwdep.h' line='39' column='1'/>
+        </data-member>
+      </class-decl>
       <class-decl name='pinctrl_gpio_range' size-in-bits='512' is-struct='yes' visibility='default' filepath='include/linux/pinctrl/pinctrl.h' line='58' column='1' id='5cb32b9b'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='node' type-id='72f469ec' visibility='default' filepath='include/linux/pinctrl/pinctrl.h' line='59' column='1'/>
@@ -42958,6 +43120,7 @@
       <pointer-type-def type-id='a80d6b6e' size-in-bits='64' id='67a2c0c8'/>
       <pointer-type-def type-id='d5551a73' size-in-bits='64' id='67a981e3'/>
       <pointer-type-def type-id='fd48a067' size-in-bits='64' id='67aca04f'/>
+      <pointer-type-def type-id='7ac013b4' size-in-bits='64' id='67acad02'/>
       <pointer-type-def type-id='aec72305' size-in-bits='64' id='67adf9a9'/>
       <pointer-type-def type-id='16c375b8' size-in-bits='64' id='67b214d6'/>
       <class-decl name='rcu_node' is-struct='yes' visibility='default' is-declaration-only='yes' id='67b24a02'/>
@@ -49214,6 +49377,7 @@
           <var-decl name='first' type-id='023b769e' visibility='default' filepath='include/linux/llist.h' line='55' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='7c7c6daa' size-in-bits='64' id='77e06080'/>
       <qualified-type-def type-id='ca10d3ca' const='yes' id='77e48e1b'/>
       <pointer-type-def type-id='e5ce629e' size-in-bits='64' id='77e5615c'/>
       <function-type size-in-bits='64' id='77e739eb'>
@@ -50170,6 +50334,26 @@
         </data-member>
       </class-decl>
       <pointer-type-def type-id='56a7b834' size-in-bits='64' id='7aa5a21e'/>
+      <class-decl name='snd_hwdep_dsp_status' size-in-bits='512' is-struct='yes' visibility='default' filepath='include/uapi/sound/asound.h' line='131' column='1' id='7ac013b4'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='version' type-id='f0981eeb' visibility='default' filepath='include/uapi/sound/asound.h' line='132' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='id' type-id='fc872715' visibility='default' filepath='include/uapi/sound/asound.h' line='133' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='288'>
+          <var-decl name='num_dsps' type-id='f0981eeb' visibility='default' filepath='include/uapi/sound/asound.h' line='134' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='dsp_loaded' type-id='f0981eeb' visibility='default' filepath='include/uapi/sound/asound.h' line='135' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='352'>
+          <var-decl name='chip_ready' type-id='f0981eeb' visibility='default' filepath='include/uapi/sound/asound.h' line='136' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='384'>
+          <var-decl name='reserved' type-id='92a46553' visibility='default' filepath='include/uapi/sound/asound.h' line='137' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='68b6a809' size-in-bits='64' id='7ac48c21'/>
       <function-type size-in-bits='64' id='7ac88bec'>
         <parameter type-id='8898134d'/>
@@ -50931,6 +51115,7 @@
       <array-type-def dimensions='1' type-id='0f8b1896' size-in-bits='infinite' id='7c792e5e'>
         <subrange length='infinite' type-id='7ff19f0f' id='031f2035'/>
       </array-type-def>
+      <qualified-type-def type-id='d53c2eb5' const='yes' id='7c7c6daa'/>
       <class-decl name='ctl_dir' size-in-bits='704' is-struct='yes' visibility='default' filepath='include/linux/sysctl.h' line='150' column='1' id='7c7d6006'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='header' type-id='ed51618b' visibility='default' filepath='include/linux/sysctl.h' line='152' column='1'/>
@@ -53392,6 +53577,7 @@
           <var-decl name='common_ie_len' type-id='b59d7dce' visibility='default' filepath='include/net/mac80211.h' line='1160' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='1432736a' size-in-bits='64' id='80eb3fbc'/>
       <class-decl name='reciprocal_value' size-in-bits='64' is-struct='yes' visibility='default' filepath='include/linux/reciprocal_div.h' line='23' column='1' id='80ebe7f7'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='m' type-id='19c2251e' visibility='default' filepath='include/linux/reciprocal_div.h' line='24' column='1'/>
@@ -57375,6 +57561,7 @@
           <var-decl name='gain' type-id='3f1a6b60' visibility='default' filepath='include/uapi/sound/compress_params.h' line='317' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='c89340f8' size-in-bits='64' id='8aa9d34a'/>
       <pointer-type-def type-id='5a602650' size-in-bits='64' id='8aae90f2'/>
       <function-type size-in-bits='64' id='8ab5a2af'>
         <parameter type-id='fa0b179b'/>
@@ -58191,6 +58378,7 @@
           <var-decl name='fqdir' type-id='943ad75f' visibility='default' filepath='include/net/netns/ieee802154_6lowpan.h' line='19' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='2d274c62' size-in-bits='64' id='8cc78bbc'/>
       <class-decl name='nf_icmp_net' size-in-bits='32' is-struct='yes' visibility='default' filepath='include/net/netns/conntrack.h' line='42' column='1' id='8cc9c55b'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='timeout' type-id='f0981eeb' visibility='default' filepath='include/net/netns/conntrack.h' line='43' column='1'/>
@@ -59290,6 +59478,7 @@
           <var-decl name='timer' type-id='abe41e67' visibility='default' filepath='include/linux/kthread.h' line='111' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='98ef1b95' size-in-bits='64' id='8fb9d791'/>
       <pointer-type-def type-id='8e2d4615' size-in-bits='64' id='8fbb31d1'/>
       <enum-decl name='nl80211_mesh_power_mode' filepath='include/uapi/linux/nl80211.h' line='4188' column='1' id='8fbf0816'>
         <underlying-type type-id='9cac1fee'/>
@@ -61008,6 +61197,12 @@
       <pointer-type-def type-id='8754454d' size-in-bits='64' id='93226281'/>
       <pointer-type-def type-id='225a561d' size-in-bits='64' id='9324451e'/>
       <qualified-type-def type-id='5bbd300b' const='yes' id='93286cfa'/>
+      <function-type size-in-bits='64' id='93301493'>
+        <parameter type-id='2567e379'/>
+        <parameter type-id='77e79a4b'/>
+        <parameter type-id='a54c778f'/>
+        <return type-id='8f254b08'/>
+      </function-type>
       <class-decl name='trace_event_buffer' size-in-bits='448' is-struct='yes' visibility='default' filepath='include/linux/trace_events.h' line='230' column='1' id='933375ec'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='buffer' type-id='573a5ee9' visibility='default' filepath='include/linux/trace_events.h' line='231' column='1'/>
@@ -63034,6 +63229,13 @@
       <pointer-type-def type-id='66bc63b4' size-in-bits='64' id='98d7a132'/>
       <pointer-type-def type-id='05cc5338' size-in-bits='64' id='98dbb7da'/>
       <pointer-type-def type-id='eea20e13' size-in-bits='64' id='98eca9c3'/>
+      <function-type size-in-bits='64' id='98ef1b95'>
+        <parameter type-id='2567e379'/>
+        <parameter type-id='77e79a4b'/>
+        <parameter type-id='f0981eeb'/>
+        <parameter type-id='7359adad'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
       <pointer-type-def type-id='d8488877' size-in-bits='64' id='98f35cbb'/>
       <class-decl name='uprobe_task' size-in-bits='512' is-struct='yes' visibility='default' filepath='include/linux/uprobes.h' line='61' column='1' id='98f6607e'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -64163,6 +64365,7 @@
           <var-decl name='debugfs_prefix' type-id='80f4b756' visibility='default' filepath='include/sound/soc-component.h' line='229' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='4410ddbf' size-in-bits='64' id='9ba8bea7'/>
       <pointer-type-def type-id='72b61a2d' size-in-bits='64' id='9baaf905'/>
       <function-type size-in-bits='64' id='9babdafa'>
         <parameter type-id='572fbdca'/>
@@ -64623,6 +64826,14 @@
       </class-decl>
       <pointer-type-def type-id='a72f8b53' size-in-bits='64' id='9ce2e6e7'/>
       <qualified-type-def type-id='8b7a2cd1' const='yes' id='9ce849da'/>
+      <class-decl name='snd_soc_tplg_widget_events' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/sound/soc-topology.h' line='101' column='1' id='9cec1ba7'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='type' type-id='1dc6a898' visibility='default' filepath='include/sound/soc-topology.h' line='102' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='event_handler' type-id='af92413d' visibility='default' filepath='include/sound/soc-topology.h' line='103' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='80126e32' size-in-bits='64' id='9d025b00'/>
       <function-type size-in-bits='64' id='9d05a3e9'>
         <parameter type-id='cc26d15f'/>
@@ -77045,6 +77256,7 @@
         </data-member>
       </class-decl>
       <pointer-type-def type-id='4f01e87c' size-in-bits='64' id='b600bf62'/>
+      <qualified-type-def type-id='ed5b2002' const='yes' id='b60126bf'/>
       <pointer-type-def type-id='9e33bce1' size-in-bits='64' id='b60e7255'/>
       <class-decl name='cfg80211_pmsr_ftm_request_peer' size-in-bits='96' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='3518' column='1' id='b60e74e3'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -82086,6 +82298,13 @@
       </function-type>
       <pointer-type-def type-id='7dda8bf2' size-in-bits='64' id='bf95a8f0'/>
       <pointer-type-def type-id='d80ff7d4' size-in-bits='64' id='bfa2746e'/>
+      <function-type size-in-bits='64' id='bfa69bfb'>
+        <parameter type-id='2567e379'/>
+        <parameter type-id='77e79a4b'/>
+        <parameter type-id='1eb56b1e'/>
+        <parameter type-id='95e97e5e'/>
+        <return type-id='1eb56b1e'/>
+      </function-type>
       <pointer-type-def type-id='aecc739e' size-in-bits='64' id='bfa7bda0'/>
       <pointer-type-def type-id='84f0d8f8' size-in-bits='64' id='bfacbc7a'/>
       <pointer-type-def type-id='b3cab718' size-in-bits='64' id='bfaf027a'/>
@@ -85657,6 +85876,13 @@
         <parameter type-id='84a5c3d4'/>
         <return type-id='95e97e5e'/>
       </function-type>
+      <function-type size-in-bits='64' id='c89340f8'>
+        <parameter type-id='2567e379'/>
+        <parameter type-id='26a90f95'/>
+        <parameter type-id='bd54fe1a'/>
+        <parameter type-id='b53e8dbb'/>
+        <return type-id='bd54fe1a'/>
+      </function-type>
       <type-decl name='bool' size-in-bits='8' id='c894953d'/>
       <function-type size-in-bits='64' id='c89dc0a4'>
         <parameter type-id='f0981eeb'/>
@@ -85796,6 +86022,11 @@
       <array-type-def dimensions='1' type-id='d30cc3b8' size-in-bits='576' id='c93659c6'>
         <subrange length='4' type-id='7ff19f0f' id='16fe7105'/>
       </array-type-def>
+      <function-type size-in-bits='64' id='c9365c7b'>
+        <parameter type-id='2567e379'/>
+        <parameter type-id='9ba8bea7'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
       <pointer-type-def type-id='d51a347b' size-in-bits='64' id='c9405b83'/>
       <pointer-type-def type-id='6c9a7f66' size-in-bits='64' id='c9414b9c'/>
       <pointer-type-def type-id='4add39c5' size-in-bits='64' id='c942333d'/>
@@ -91210,6 +91441,11 @@
           <var-decl name='driver_data' type-id='0791d6c8' visibility='default' filepath='include/linux/mod_devicetable.h' line='397' column='1'/>
         </data-member>
       </class-decl>
+      <function-type size-in-bits='64' id='d7cfbbe1'>
+        <parameter type-id='2567e379'/>
+        <parameter type-id='77e79a4b'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
       <pointer-type-def type-id='8a06bdac' size-in-bits='64' id='d7d1bff6'/>
       <class-decl name='reg_field' size-in-bits='160' is-struct='yes' visibility='default' filepath='include/linux/regmap.h' line='1169' column='1' id='d7d5e052'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -96876,6 +97112,10 @@
         <enumerator name='TYPEC_HOST' value='1'/>
       </enum-decl>
       <qualified-type-def type-id='098cab97' const='yes' id='e45577b8'/>
+      <function-type size-in-bits='64' id='e4574076'>
+        <parameter type-id='2567e379'/>
+        <return type-id='48b5725f'/>
+      </function-type>
       <pointer-type-def type-id='a1494618' size-in-bits='64' id='e4575f22'/>
       <pointer-type-def type-id='be50a64d' size-in-bits='64' id='e46089fd'/>
       <function-type size-in-bits='64' id='e4639b91'>
@@ -111805,6 +112045,12 @@
         <parameter type-id='2730d015' name='owner' filepath='drivers/base/platform.c' line='808' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__platform_register_drivers' mangled-name='__platform_register_drivers' filepath='drivers/base/platform.c' line='972' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__platform_register_drivers'>
+        <parameter type-id='77e06080' name='drivers' filepath='drivers/base/platform.c' line='972' column='1'/>
+        <parameter type-id='f0981eeb' name='count' filepath='drivers/base/platform.c' line='973' column='1'/>
+        <parameter type-id='2730d015' name='owner' filepath='drivers/base/platform.c' line='973' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__pm_relax' mangled-name='__pm_relax' filepath='drivers/base/power/wakeup.c' line='757' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__pm_relax'>
         <parameter type-id='1ea237a6' name='ws' filepath='drivers/base/power/wakeup.c' line='757' column='1'/>
         <return type-id='48b5725f'/>
@@ -116235,6 +116481,12 @@
         <parameter type-id='95e97e5e' name='buflen' filepath='fs/d_path.c' line='262' column='1'/>
         <return type-id='26a90f95'/>
       </function-decl>
+      <function-decl name='dapm_pinctrl_event' mangled-name='dapm_pinctrl_event' filepath='sound/soc/soc-dapm.c' line='1377' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dapm_pinctrl_event'>
+        <parameter type-id='810606ec' name='w' filepath='sound/soc/soc-dapm.c' line='1377' column='1'/>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='1378' column='1'/>
+        <parameter type-id='95e97e5e' name='event' filepath='sound/soc/soc-dapm.c' line='1378' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='dapm_regulator_event' mangled-name='dapm_regulator_event' filepath='sound/soc/soc-dapm.c' line='1343' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dapm_regulator_event'>
         <parameter type-id='810606ec' name='w' filepath='sound/soc/soc-dapm.c' line='1343' column='1'/>
         <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-dapm.c' line='1344' column='1'/>
@@ -116315,6 +116567,12 @@
         <parameter type-id='27675065' name='parent' filepath='fs/debugfs/file.c' line='734' column='1'/>
         <parameter type-id='78c01427' name='value' filepath='fs/debugfs/file.c' line='734' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='debugfs_create_symlink' mangled-name='debugfs_create_symlink' filepath='fs/debugfs/inode.c' line='654' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='debugfs_create_symlink'>
+        <parameter type-id='80f4b756' name='name' filepath='fs/debugfs/inode.c' line='654' column='1'/>
+        <parameter type-id='27675065' name='parent' filepath='fs/debugfs/inode.c' line='654' column='1'/>
+        <parameter type-id='80f4b756' name='target' filepath='fs/debugfs/inode.c' line='655' column='1'/>
+        <return type-id='27675065'/>
       </function-decl>
       <function-decl name='debugfs_create_u16' mangled-name='debugfs_create_u16' filepath='fs/debugfs/file.c' line='478' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='debugfs_create_u16'>
         <parameter type-id='80f4b756' name='name' filepath='fs/debugfs/file.c' line='478' column='1'/>
@@ -117068,6 +117326,32 @@
         <parameter type-id='b50a4934' name='enable' filepath='drivers/base/power/wakeup.c' line='540' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='device_show_bool' mangled-name='device_show_bool' filepath='drivers/base/core.c' line='2081' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_show_bool'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/core.c' line='2081' column='1'/>
+        <parameter type-id='89a2612a' name='attr' filepath='drivers/base/core.c' line='2081' column='1'/>
+        <parameter type-id='26a90f95' name='buf' filepath='drivers/base/core.c' line='2082' column='1'/>
+        <return type-id='79a0948f'/>
+      </function-decl>
+      <function-decl name='device_show_int' mangled-name='device_show_int' filepath='drivers/base/core.c' line='2059' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_show_int'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/core.c' line='2059' column='1'/>
+        <parameter type-id='89a2612a' name='attr' filepath='drivers/base/core.c' line='2060' column='1'/>
+        <parameter type-id='26a90f95' name='buf' filepath='drivers/base/core.c' line='2061' column='1'/>
+        <return type-id='79a0948f'/>
+      </function-decl>
+      <function-decl name='device_store_bool' mangled-name='device_store_bool' filepath='drivers/base/core.c' line='2069' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_store_bool'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/core.c' line='2069' column='1'/>
+        <parameter type-id='89a2612a' name='attr' filepath='drivers/base/core.c' line='2069' column='1'/>
+        <parameter type-id='80f4b756' name='buf' filepath='drivers/base/core.c' line='2070' column='1'/>
+        <parameter type-id='b59d7dce' name='size' filepath='drivers/base/core.c' line='2070' column='1'/>
+        <return type-id='79a0948f'/>
+      </function-decl>
+      <function-decl name='device_store_int' mangled-name='device_store_int' filepath='drivers/base/core.c' line='2039' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_store_int'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/core.c' line='2039' column='1'/>
+        <parameter type-id='89a2612a' name='attr' filepath='drivers/base/core.c' line='2040' column='1'/>
+        <parameter type-id='80f4b756' name='buf' filepath='drivers/base/core.c' line='2041' column='1'/>
+        <parameter type-id='b59d7dce' name='size' filepath='drivers/base/core.c' line='2041' column='1'/>
+        <return type-id='79a0948f'/>
+      </function-decl>
       <function-decl name='device_unregister' mangled-name='device_unregister' filepath='drivers/base/core.c' line='3463' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_unregister'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/core.c' line='3463' column='1'/>
         <return type-id='48b5725f'/>
@@ -117372,6 +117656,13 @@
         <parameter type-id='eaa32e2f' name='src' filepath='drivers/base/devres.c' line='1082' column='1'/>
         <parameter type-id='b59d7dce' name='len' filepath='drivers/base/devres.c' line='1082' column='1'/>
         <parameter type-id='3eb7c31c' name='gfp' filepath='drivers/base/devres.c' line='1082' column='1'/>
+        <return type-id='eaa32e2f'/>
+      </function-decl>
+      <function-decl name='devm_krealloc' mangled-name='devm_krealloc' filepath='drivers/base/devres.c' line='864' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_krealloc'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/devres.c' line='864' column='1'/>
+        <parameter type-id='eaa32e2f' name='ptr' filepath='drivers/base/devres.c' line='864' column='1'/>
+        <parameter type-id='b59d7dce' name='new_size' filepath='drivers/base/devres.c' line='864' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='drivers/base/devres.c' line='864' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
       <function-decl name='devm_kstrdup' mangled-name='devm_kstrdup' filepath='drivers/base/devres.c' line='955' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_kstrdup'>
@@ -125298,6 +125589,10 @@
         <parameter type-id='10216dc5' name='pctldev' filepath='drivers/pinctrl/core.c' line='1479' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='pinctrl_get' mangled-name='pinctrl_get' filepath='drivers/pinctrl/core.c' line='1114' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pinctrl_get'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/pinctrl/core.c' line='1114' column='1'/>
+        <return type-id='73ea90c5'/>
+      </function-decl>
       <function-decl name='pinctrl_lookup_state' mangled-name='pinctrl_lookup_state' filepath='drivers/pinctrl/core.c' line='1205' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pinctrl_lookup_state'>
         <parameter type-id='73ea90c5' name='p' filepath='drivers/pinctrl/core.c' line='1205' column='1'/>
         <parameter type-id='80f4b756' name='name' filepath='drivers/pinctrl/core.c' line='1206' column='1'/>
@@ -125525,6 +125820,10 @@
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/power/runtime.c' line='1502' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='pm_runtime_barrier' mangled-name='pm_runtime_barrier' filepath='drivers/base/power/runtime.c' line='1368' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pm_runtime_barrier'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/power/runtime.c' line='1368' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='pm_runtime_enable' mangled-name='pm_runtime_enable' filepath='drivers/base/power/runtime.c' line='1446' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pm_runtime_enable'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/power/runtime.c' line='1446' column='1'/>
         <return type-id='48b5725f'/>
@@ -125548,6 +125847,10 @@
       </function-decl>
       <function-decl name='pm_runtime_irq_safe' mangled-name='pm_runtime_irq_safe' filepath='drivers/base/power/runtime.c' line='1548' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pm_runtime_irq_safe'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/power/runtime.c' line='1548' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='pm_runtime_no_callbacks' mangled-name='pm_runtime_no_callbacks' filepath='drivers/base/power/runtime.c' line='1527' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pm_runtime_no_callbacks'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/power/runtime.c' line='1527' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='pm_runtime_set_autosuspend_delay' mangled-name='pm_runtime_set_autosuspend_delay' filepath='drivers/base/power/runtime.c' line='1606' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pm_runtime_set_autosuspend_delay'>
@@ -125766,6 +126069,12 @@
         <parameter type-id='d80b72e6' name='uid' filepath='fs/proc/generic.c' line='670' column='1'/>
         <parameter type-id='094d8048' name='gid' filepath='fs/proc/generic.c' line='670' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='proc_symlink' mangled-name='proc_symlink' filepath='fs/proc/generic.c' line='461' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_symlink'>
+        <parameter type-id='80f4b756' name='name' filepath='fs/proc/generic.c' line='461' column='1'/>
+        <parameter type-id='d077e928' name='parent' filepath='fs/proc/generic.c' line='462' column='1'/>
+        <parameter type-id='80f4b756' name='dest' filepath='fs/proc/generic.c' line='462' column='1'/>
+        <return type-id='d077e928'/>
       </function-decl>
       <function-decl name='proto_register' mangled-name='proto_register' filepath='net/core/sock.c' line='3485' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proto_register'>
         <parameter type-id='d2524501' name='prot' filepath='net/core/sock.c' line='3485' column='1'/>
@@ -127954,6 +128263,13 @@
         <parameter type-id='4f22192a' name='slave_config' filepath='sound/soc/soc-generic-dmaengine-pcm.c' line='47' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='snd_hwdep_new' mangled-name='snd_hwdep_new' filepath='sound/core/hwdep.c' line='358' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_hwdep_new'>
+        <parameter type-id='52704eb7' name='card' filepath='sound/core/hwdep.c' line='358' column='1'/>
+        <parameter type-id='26a90f95' name='id' filepath='sound/core/hwdep.c' line='358' column='1'/>
+        <parameter type-id='95e97e5e' name='device' filepath='sound/core/hwdep.c' line='358' column='1'/>
+        <parameter type-id='358adba9' name='rhwdep' filepath='sound/core/hwdep.c' line='359' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='snd_info_create_card_entry' mangled-name='snd_info_create_card_entry' filepath='sound/core/info.c' line='739' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_info_create_card_entry'>
         <parameter type-id='52704eb7' name='card' filepath='sound/core/info.c' line='739' column='1'/>
         <parameter type-id='80f4b756' name='name' filepath='sound/core/info.c' line='740' column='1'/>
@@ -128080,6 +128396,10 @@
         <parameter type-id='b59d7dce' name='size' filepath='sound/core/pcm_memory.c' line='381' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='snd_pcm_lib_preallocate_free_for_all' mangled-name='snd_pcm_lib_preallocate_free_for_all' filepath='sound/core/pcm_memory.c' line='117' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_lib_preallocate_free_for_all'>
+        <parameter type-id='4c9f335b' name='pcm' filepath='sound/core/pcm_memory.c' line='117' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='snd_pcm_lib_preallocate_pages' mangled-name='snd_pcm_lib_preallocate_pages' filepath='sound/core/pcm_memory.c' line='277' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_lib_preallocate_pages'>
         <parameter type-id='06b2cd14' name='substream' filepath='sound/core/pcm_memory.c' line='277' column='1'/>
         <parameter type-id='95e97e5e' name='type' filepath='sound/core/pcm_memory.c' line='278' column='1'/>
@@ -128100,6 +128420,11 @@
       <function-decl name='snd_pcm_period_elapsed' mangled-name='snd_pcm_period_elapsed' filepath='sound/core/pcm_lib.c' line='1791' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_period_elapsed'>
         <parameter type-id='06b2cd14' name='substream' filepath='sound/core/pcm_lib.c' line='1791' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='snd_pcm_rate_range_to_bits' mangled-name='snd_pcm_rate_range_to_bits' filepath='sound/core/pcm_misc.c' line='595' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_rate_range_to_bits'>
+        <parameter type-id='f0981eeb' name='rate_min' filepath='sound/core/pcm_misc.c' line='595' column='1'/>
+        <parameter type-id='f0981eeb' name='rate_max' filepath='sound/core/pcm_misc.c' line='596' column='1'/>
+        <return type-id='f0981eeb'/>
       </function-decl>
       <function-decl name='snd_pcm_set_managed_buffer_all' mangled-name='snd_pcm_set_managed_buffer_all' filepath='sound/core/pcm_memory.c' line='341' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_pcm_set_managed_buffer_all'>
         <parameter type-id='4c9f335b' name='pcm' filepath='sound/core/pcm_memory.c' line='341' column='1'/>
@@ -128132,6 +128457,11 @@
         <parameter type-id='95e97e5e' name='num_controls' filepath='sound/soc/soc-core.c' line='2161' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='snd_soc_bytes_info_ext' mangled-name='snd_soc_bytes_info_ext' filepath='sound/soc/soc-ops.c' line='760' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_bytes_info_ext'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-ops.c' line='760' column='1'/>
+        <parameter type-id='0e291009' name='ucontrol' filepath='sound/soc/soc-ops.c' line='761' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='snd_soc_bytes_tlv_callback' mangled-name='snd_soc_bytes_tlv_callback' filepath='sound/soc/soc-ops.c' line='772' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_bytes_tlv_callback'>
         <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-ops.c' line='772' column='1'/>
         <parameter type-id='95e97e5e' name='op_flag' filepath='sound/soc/soc-ops.c' line='772' column='1'/>
@@ -128152,6 +128482,10 @@
         <parameter type-id='fcd78288' name='pins' filepath='sound/soc/soc-card.c' line='62' column='1'/>
         <parameter type-id='f0981eeb' name='num_pins' filepath='sound/soc/soc-card.c' line='62' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='snd_soc_component_async_complete' mangled-name='snd_soc_component_async_complete' filepath='sound/soc/soc-component.c' line='586' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_component_async_complete'>
+        <parameter type-id='807b7702' name='component' filepath='sound/soc/soc-component.c' line='586' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='snd_soc_component_disable_pin' mangled-name='snd_soc_component_disable_pin' filepath='sound/soc/soc-component.c' line='156' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_component_disable_pin'>
         <parameter type-id='807b7702' name='component' filepath='sound/soc/soc-component.c' line='156' column='1'/>
@@ -128210,6 +128544,13 @@
         <parameter type-id='f0981eeb' name='reg' filepath='sound/soc/soc-component.c' line='525' column='1'/>
         <parameter type-id='f0981eeb' name='mask' filepath='sound/soc/soc-component.c' line='525' column='1'/>
         <parameter type-id='f0981eeb' name='val' filepath='sound/soc/soc-component.c' line='525' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='snd_soc_component_update_bits_async' mangled-name='snd_soc_component_update_bits_async' filepath='sound/soc/soc-component.c' line='560' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_component_update_bits_async'>
+        <parameter type-id='807b7702' name='component' filepath='sound/soc/soc-component.c' line='560' column='1'/>
+        <parameter type-id='f0981eeb' name='reg' filepath='sound/soc/soc-component.c' line='561' column='1'/>
+        <parameter type-id='f0981eeb' name='mask' filepath='sound/soc/soc-component.c' line='561' column='1'/>
+        <parameter type-id='f0981eeb' name='val' filepath='sound/soc/soc-component.c' line='561' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='snd_soc_component_write' mangled-name='snd_soc_component_write' filepath='sound/soc/soc-component.c' line='479' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_component_write'>
@@ -128286,6 +128627,11 @@
       <function-decl name='snd_soc_dapm_disable_pin_unlocked' mangled-name='snd_soc_dapm_disable_pin_unlocked' filepath='sound/soc/soc-dapm.c' line='4644' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_disable_pin_unlocked'>
         <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4644' column='1'/>
         <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4645' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='snd_soc_dapm_enable_pin' mangled-name='snd_soc_dapm_enable_pin' filepath='sound/soc/soc-dapm.c' line='4550' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_enable_pin'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='4550' column='1'/>
+        <parameter type-id='80f4b756' name='pin' filepath='sound/soc/soc-dapm.c' line='4550' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='snd_soc_dapm_force_enable_pin' mangled-name='snd_soc_dapm_force_enable_pin' filepath='sound/soc/soc-dapm.c' line='4617' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_force_enable_pin'>
@@ -128385,6 +128731,16 @@
         <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='2613' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='snd_soc_dapm_weak_routes' mangled-name='snd_soc_dapm_weak_routes' filepath='sound/soc/soc-dapm.c' line='3206' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dapm_weak_routes'>
+        <parameter type-id='70d004a5' name='dapm' filepath='sound/soc/soc-dapm.c' line='3206' column='1'/>
+        <parameter type-id='8f3d28b8' name='route' filepath='sound/soc/soc-dapm.c' line='3207' column='1'/>
+        <parameter type-id='95e97e5e' name='num' filepath='sound/soc/soc-dapm.c' line='3207' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='snd_soc_find_dai' mangled-name='snd_soc_find_dai' filepath='sound/soc/soc-core.c' line='810' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_find_dai'>
+        <parameter type-id='18cfbc8f' name='dlc' filepath='sound/soc/soc-core.c' line='811' column='1'/>
+        <return type-id='1c936db9'/>
+      </function-decl>
       <function-decl name='snd_soc_get_enum_double' mangled-name='snd_soc_get_enum_double' filepath='sound/soc/soc-ops.c' line='59' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_get_enum_double'>
         <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-ops.c' line='59' column='1'/>
         <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-ops.c' line='60' column='1'/>
@@ -128410,6 +128766,11 @@
         <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-ops.c' line='379' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='snd_soc_get_xr_sx' mangled-name='snd_soc_get_xr_sx' filepath='sound/soc/soc-ops.c' line='831' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_get_xr_sx'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-ops.c' line='831' column='1'/>
+        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-ops.c' line='832' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='snd_soc_info_enum_double' mangled-name='snd_soc_info_enum_double' filepath='sound/soc/soc-ops.c' line='40' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_info_enum_double'>
         <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-ops.c' line='40' column='1'/>
         <parameter type-id='0e291009' name='uinfo' filepath='sound/soc/soc-ops.c' line='41' column='1'/>
@@ -128428,6 +128789,11 @@
       <function-decl name='snd_soc_info_volsw_sx' mangled-name='snd_soc_info_volsw_sx' filepath='sound/soc/soc-ops.c' line='210' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_info_volsw_sx'>
         <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-ops.c' line='210' column='1'/>
         <parameter type-id='0e291009' name='uinfo' filepath='sound/soc/soc-ops.c' line='211' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='snd_soc_info_xr_sx' mangled-name='snd_soc_info_xr_sx' filepath='sound/soc/soc-ops.c' line='804' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_info_xr_sx'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-ops.c' line='804' column='1'/>
+        <parameter type-id='0e291009' name='uinfo' filepath='sound/soc/soc-ops.c' line='805' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='snd_soc_jack_add_gpios' mangled-name='snd_soc_jack_add_gpios' filepath='sound/soc/soc-jack.c' line='312' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_jack_add_gpios'>
@@ -128538,6 +128904,11 @@
         <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-ops.c' line='416' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='snd_soc_put_xr_sx' mangled-name='snd_soc_put_xr_sx' filepath='sound/soc/soc-ops.c' line='877' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_put_xr_sx'>
+        <parameter type-id='7a5054b7' name='kcontrol' filepath='sound/soc/soc-ops.c' line='877' column='1'/>
+        <parameter type-id='144a5d4c' name='ucontrol' filepath='sound/soc/soc-ops.c' line='878' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='snd_soc_register_card' mangled-name='snd_soc_register_card' filepath='sound/soc/soc-core.c' line='2176' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_register_card'>
         <parameter type-id='3059cd0b' name='card' filepath='sound/soc/soc-core.c' line='2176' column='1'/>
         <return type-id='95e97e5e'/>
@@ -128563,6 +128934,25 @@
       <function-decl name='snd_soc_set_runtime_hwparams' mangled-name='snd_soc_set_runtime_hwparams' filepath='sound/soc/soc-pcm.c' line='263' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_set_runtime_hwparams'>
         <parameter type-id='06b2cd14' name='substream' filepath='sound/soc/soc-pcm.c' line='263' column='1'/>
         <parameter type-id='d661a615' name='hw' filepath='sound/soc/soc-pcm.c' line='264' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='snd_soc_tplg_component_load' mangled-name='snd_soc_tplg_component_load' filepath='sound/soc/soc-topology.c' line='2807' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_tplg_component_load'>
+        <parameter type-id='807b7702' name='comp' filepath='sound/soc/soc-topology.c' line='2807' column='1'/>
+        <parameter type-id='76e6e22f' name='ops' filepath='sound/soc/soc-topology.c' line='2808' column='1'/>
+        <parameter type-id='fce0537d' name='fw' filepath='sound/soc/soc-topology.c' line='2808' column='1'/>
+        <parameter type-id='19c2251e' name='id' filepath='sound/soc/soc-topology.c' line='2808' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='snd_soc_tplg_component_remove' mangled-name='snd_soc_tplg_component_remove' filepath='sound/soc/soc-topology.c' line='2874' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_tplg_component_remove'>
+        <parameter type-id='807b7702' name='comp' filepath='sound/soc/soc-topology.c' line='2874' column='1'/>
+        <parameter type-id='19c2251e' name='index' filepath='sound/soc/soc-topology.c' line='2874' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='snd_soc_tplg_widget_bind_event' mangled-name='snd_soc_tplg_widget_bind_event' filepath='sound/soc/soc-topology.c' line='663' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_tplg_widget_bind_event'>
+        <parameter type-id='810606ec' name='w' filepath='sound/soc/soc-topology.c' line='663' column='1'/>
+        <parameter type-id='46c30e4c' name='events' filepath='sound/soc/soc-topology.c' line='664' column='1'/>
+        <parameter type-id='95e97e5e' name='num_events' filepath='sound/soc/soc-topology.c' line='665' column='1'/>
+        <parameter type-id='1dc6a898' name='event_type' filepath='sound/soc/soc-topology.c' line='665' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='snd_soc_unregister_card' mangled-name='snd_soc_unregister_card' filepath='sound/soc/soc-core.c' line='2209' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_unregister_card'>
@@ -129135,6 +129525,11 @@
         <parameter type-id='d30bdc51' name='kobj' filepath='fs/sysfs/file.c' line='173' column='1'/>
         <parameter type-id='80f4b756' name='dir' filepath='fs/sysfs/file.c' line='173' column='1'/>
         <parameter type-id='80f4b756' name='attr' filepath='fs/sysfs/file.c' line='173' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='sysfs_remove_bin_file' mangled-name='sysfs_remove_bin_file' filepath='fs/sysfs/file.c' line='557' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sysfs_remove_bin_file'>
+        <parameter type-id='d30bdc51' name='kobj' filepath='fs/sysfs/file.c' line='557' column='1'/>
+        <parameter type-id='559ac6f0' name='attr' filepath='fs/sysfs/file.c' line='558' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='sysfs_remove_file_from_group' mangled-name='sysfs_remove_file_from_group' filepath='fs/sysfs/file.c' line='513' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sysfs_remove_file_from_group'>
