@@ -27,6 +27,10 @@ DECLARE_HOOK(android_vh_f2fs_init_inode_oem_data,
 	TP_PROTO(struct inode *inode),
 	TP_ARGS(inode));
 
+DECLARE_HOOK(android_vh_f2fs_get_data_segment_type,
+	TP_PROTO(struct inode *inode, pgoff_t pgofs, int *type),
+	TP_ARGS(inode, pgofs, type));
+
 DECLARE_HOOK(android_vh_f2fs_record_outplace_write_info,
 	TP_PROTO(struct dnode_of_data *dn),
 	TP_ARGS(dn));

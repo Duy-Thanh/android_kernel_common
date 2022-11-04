@@ -3298,6 +3298,7 @@ static int __get_segment_type_4(struct f2fs_io_info *fio)
 static int __get_segment_type_6(struct f2fs_io_info *fio)
 {
 	if (fio->type == DATA) {
+		int type = NO_CHECK_TYPE;
 		struct inode *inode = fio->page->mapping->host;
 
 		if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
@@ -3311,6 +3312,9 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
 			else
 				return CURSEG_COLD_DATA;
 		}
+		trace_android_vh_f2fs_get_data_segment_type(inode, fio->page->index, &type);
+		if (type != NO_CHECK_TYPE)
+			return type;
 		if (file_is_cold(inode) || f2fs_need_compress_data(inode))
 			return CURSEG_COLD_DATA;
 		if (file_is_hot(inode) ||
