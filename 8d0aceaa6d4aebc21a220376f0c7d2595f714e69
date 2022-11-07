@@ -52,6 +52,24 @@
       "parentUuid": "01be2bd6_aabb52a3",
       "revId": "8d0aceaa6d4aebc21a220376f0c7d2595f714e69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a894f66_5937b56d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975062
+      },
+      "writtenOn": "2022-11-07T13:16:41Z",
+      "side": 1,
+      "message": "Hi @gregkh@google.com,\n\nEven we saw the changes related to kioctx in the xml file after rebasing also, which is not related to our symbols. But the xml file is updating without any changes from our side in latest kernel source, ie skip 1,2 from above steps and  just Run command : tools/bazel run //common:kernel_aarch64_abi_update. In that case  bazel-out/k8-fastbuild/bin/common/kernel_aarch64_abi_diff/abi_diff/abi.report.short is empty too.",
+      "parentUuid": "6ae342bf_c117b821",
+      "revId": "8d0aceaa6d4aebc21a220376f0c7d2595f714e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
