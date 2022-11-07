@@ -16,6 +16,24 @@
       "message": "This change will not work, as it will cause boot failure like this:\n```\n[    2.197390][    T1] init: Loading module /lib/modules/cfg80211.ko with args \u0027\u0027\n[    2.261072][    T1] cfg80211: Loading compiled-in X.509 certificates for regulatory database\n[    2.274003][    T1] cfg80211: Loaded X.509 cert \u0027sforshee: 00b28ddf47aef9cea7\u0027\n[    2.281517][   T69] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2\n[    2.290850][    T1] init: Loaded kernel module /lib/modules/cfg80211.ko\n[    2.290928][   T69] cfg80211: failed to load regulatory.db\n[    2.297759][    T1] init: Loading module /lib/modules/ath.ko with args \u0027\u0027\n[    2.334765][    T1] init: Loaded kernel module /lib/modules/ath.ko\n[    2.341445][    T1] init: Loading module /lib/modules/mac80211.ko with args \u0027\u0027\n[    2.404956][    T1] init: Loaded kernel module /lib/modules/mac80211.ko\n[    2.411819][    T1] init: Loading module /lib/modules/ath10k_core.ko with args \u0027\u0027\n[    2.423710][    T1] ath10k_core: disagrees about version of symbol ieee80211_alloc_hw_nm\n[    2.431971][    T1] ath10k_core: Unknown symbol ieee80211_alloc_hw_nm (err -22)\n[    2.466270][    T1] init: Failed to insmod \u0027/lib/modules/ath10k_core.ko\u0027 with args \u0027\u0027: Invalid argument\n[    2.475822][    T1] init: LoadWithAliases was unable to load ath10k_core\n[    2.483187][    T1] init: Failed to load kernel modules\n[    2.489201][    T1] init: InitFatalReboot: signal 6\n\n```",
       "revId": "eefe33f68b8abadd5e4952cdc9f0886244161775",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c48bba34_a47348ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-07T11:46:23Z",
+      "side": 1,
+      "message": "Thank you for double checking, I see you submitted https://android-review.git.corp.google.com/c/kernel/build/+/2289633 so let\u0027s continue there.",
+      "parentUuid": "3c118845_50405413",
+      "revId": "eefe33f68b8abadd5e4952cdc9f0886244161775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
