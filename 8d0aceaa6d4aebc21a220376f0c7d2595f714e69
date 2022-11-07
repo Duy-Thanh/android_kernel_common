@@ -16,6 +16,24 @@
       "message": "Why doesn\u0027t the summary in the commit message match the summary from stgdiff?",
       "revId": "8d0aceaa6d4aebc21a220376f0c7d2595f714e69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01be2bd6_aabb52a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975062
+      },
+      "writtenOn": "2022-11-07T12:44:00Z",
+      "side": 1,
+      "message": "Hi @willdeacon@google.com ,\n\nCould you please help us to understand more about the stgdiff summery?\n\nWe followed below steps to generate the android/abi_gki_aarch64.xml\n1. Copy our symbol list to android/abi_gki_aarch64_exynos \u0026 to the master (after repo sync)\n2. edited build.config.gki.aarch64 \u0026 BUILD.bazel\n3. Run command :  tools/bazel run //common:kernel_aarch64_abi_update\n4. Pushed the changes \u0026 updated android/abi_gki_aarch64.xml with commit message as \nbazel-out/k8-fastbuild/bin/common/kernel_aarch64_abi_diff/abi_diff/abi.report.short\n\nAre we missing anything from our side?",
+      "parentUuid": "cf11d2b0_6e29a17a",
+      "revId": "8d0aceaa6d4aebc21a220376f0c7d2595f714e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
