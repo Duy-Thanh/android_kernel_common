@@ -16,6 +16,24 @@
       "message": "Won\u0027t the inode be visible in /proc/\u003cpid\u003e/fdinfo/\u003cfd\u003e? Adding Kalesh as well since he worked on related issues of memory accounting for dmabufs.",
       "revId": "1c34eafce69902204290e09ba37ed526e7b22903",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8102e6e_524f92cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-11-07T20:51:39Z",
+      "side": 1,
+      "message": "The inode is available in fdinfo. But AIUI we want to avoid the parsing.",
+      "parentUuid": "31dc2a44_835cc738",
+      "revId": "1c34eafce69902204290e09ba37ed526e7b22903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
