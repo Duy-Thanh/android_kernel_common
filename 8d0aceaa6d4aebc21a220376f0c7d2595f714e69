@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf11d2b0_6e29a17a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-07T08:44:22Z",
+      "side": 1,
+      "message": "Why doesn\u0027t the summary in the commit message match the summary from stgdiff?",
+      "revId": "8d0aceaa6d4aebc21a220376f0c7d2595f714e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
