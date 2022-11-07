@@ -16,6 +16,24 @@
       "message": "Waiting for these to land upstream",
       "revId": "5d67dd201f1f9f16db445f1f8f96f3f407f90cca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "399b9108_cf52d9bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-07T08:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9620a8ef_8ab9bb6c",
+      "revId": "5d67dd201f1f9f16db445f1f8f96f3f407f90cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
