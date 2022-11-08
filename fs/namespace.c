@@ -1707,6 +1707,7 @@ out_unlock:
 	unlock_mount_hash();
 	namespace_unlock();
 }
+EXPORT_SYMBOL_GPL(__detach_mounts);
 
 /*
  * Is the caller allowed to modify his namespace?
