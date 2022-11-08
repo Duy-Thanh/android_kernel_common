@@ -16,6 +16,24 @@
       "message": "@gprocida@google.com  Could you please help check why TreeHugger failed?",
       "revId": "b6f53ea58f33824ca31bbdfcd3acb7494a0d0d80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0a5fda_b6e256d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-11-08T14:17:24Z",
+      "side": 1,
+      "message": "My guess is that it\u0027s the current issue we have with our test infrastructure - resulting in lower availability of test devices.\n\nThe problem is being actively dealt with. I\u0027ll see if there\u0027s any good news.",
+      "parentUuid": "3cec5382_f2d42cd9",
+      "revId": "b6f53ea58f33824ca31bbdfcd3acb7494a0d0d80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
