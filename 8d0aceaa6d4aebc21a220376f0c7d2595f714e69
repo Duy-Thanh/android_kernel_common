@@ -70,6 +70,24 @@
       "parentUuid": "6ae342bf_c117b821",
       "revId": "8d0aceaa6d4aebc21a220376f0c7d2595f714e69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a374c390_1a974a7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975062
+      },
+      "writtenOn": "2022-11-08T04:55:08Z",
+      "side": 1,
+      "message": "Hi @gregkh@google.com @willdeacon@google.com,\n\nFor more clarity, \n\n1. As Greg suggested, we rebased and tried generating android/abi_gki_aarch64.xml with steps in my first comment in this thread. \nBut the generated xml file remains same as android/abi_gki_aarch64.xml in latest patch set (patch set 10) in this commit \u0026 abi.report.short also same as the commit message.  \n\n2. When we checked android/abi_gki_aarch64.xml, some \"kioctx\" symbols got added which is not part of our symbol list. \n\n3. So, we tried command: tools/bazel run //common:kernel_aarch64_abi_update on freshly checked out kernel (without any changes from our side) and android/abi_gki_aarch64.xml is updated with \" kioctx \" symbols. But abi.report.short is empty.\n\n4. When we checked further, the \"kioctx\" symbols are removed from android/abi_gki_aarch64.xml with the below commit\n\n    commit 9ffd177dcec75427898aa4ad2394969d69d2c241\n    Author: Minchan Kim \u003cminchan@google.com\u003e\n    Date:   Thu Nov 3 07:38:38 2022 -0700\n\n    ANDROID: Update the ABI representation\n\n    1 function symbol(s) added\n      \u0027int __traceiter_android_vh_shrink_lruvec_blk_plug(void *, bool *)\u0027\n\n    1 variable symbol(s) added\n      \u0027struct tracepoint __tracepoint_android_vh_shrink_lruvec_blk_plug\u0027\n\n    Bug: 255471591\n    Bug: 238728493\n    Change-Id: I8746bbe2f7ccc09e366deed6aa00bc4834643084\n    Signed-off-by: Minchan Kim \u003cminchan@google.com\u003e\n\nIt is getting to add back to xml file, when we build with command: tools/bazel run //common:kernel_aarch64_abi_update. \n\nCould you please guide us with, what we can do from our side in this situation?",
+      "parentUuid": "9a894f66_5937b56d",
+      "revId": "8d0aceaa6d4aebc21a220376f0c7d2595f714e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
