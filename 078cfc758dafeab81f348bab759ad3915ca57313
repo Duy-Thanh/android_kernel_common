@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbb15182_ceea7f0f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-08T18:19:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b988f563_99aa9708",
+      "range": {
+        "startLine": 21,
+        "startChar": 56,
+        "endLine": 21,
+        "endChar": 68
+      },
+      "revId": "078cfc758dafeab81f348bab759ad3915ca57313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b24e34a7_ea49efe6",
@@ -84,6 +108,30 @@
       "writtenOn": "2022-11-08T12:01:45Z",
       "side": 1,
       "message": "Nit: No newline at end of right file.",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 1
+      },
+      "revId": "078cfc758dafeab81f348bab759ad3915ca57313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26151d57_3ddb314f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-08T18:19:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b24e34a7_ea49efe6",
       "range": {
         "startLine": 284,
         "startChar": 0,
