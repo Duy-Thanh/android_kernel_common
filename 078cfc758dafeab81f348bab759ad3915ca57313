@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4b432ba_920b3106",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-08T12:01:45Z",
+      "side": 1,
+      "message": "nit: Duplicated word.",
+      "range": {
+        "startLine": 13,
+        "startChar": 25,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "078cfc758dafeab81f348bab759ad3915ca57313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24e34a7_ea49efe6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-08T12:01:45Z",
+      "side": 1,
+      "message": "Nit: No newline at end of right file.",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 1
+      },
+      "revId": "078cfc758dafeab81f348bab759ad3915ca57313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
