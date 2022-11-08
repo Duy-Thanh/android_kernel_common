@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffa0c794_f404a064",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-08T22:16:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3e8ef7a_61dada40",
+      "revId": "724444f5b775cc76937e4e569a2f474ea4613fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "554e8726_951d244a",
@@ -49,6 +67,24 @@
       "writtenOn": "2022-10-28T06:31:07Z",
       "side": 1,
       "message": "Why is this not upstream already?  Why do we still need this hook?  What driver needs this?",
+      "revId": "724444f5b775cc76937e4e569a2f474ea4613fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f81db5bd_7f83ce4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-08T22:16:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "554e8726_951d244a",
       "revId": "724444f5b775cc76937e4e569a2f474ea4613fb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
