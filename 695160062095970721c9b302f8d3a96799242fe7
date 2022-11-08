@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4edbf3bc_7c275c2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954368
+      },
+      "writtenOn": "2022-11-08T06:30:42Z",
+      "side": 1,
+      "message": "current change is base on android13-5.15 \n\nhttps://android-review.googlesource.com/c/kernel/common/+/2238255\nhttps://android-review.googlesource.com/c/kernel/common/+/2259084\nhttps://android-review.googlesource.com/c/kernel/common/+/2263002\nhttps://android-review.googlesource.com/c/kernel/common/+/2276334",
+      "revId": "695160062095970721c9b302f8d3a96799242fe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
