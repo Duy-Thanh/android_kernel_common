@@ -16,6 +16,69 @@
       "message": "In Android t, establishing an IPsec VPN will cause a high probability of kernel null pointers.",
       "revId": "12e605251c1c8467e165c0c4d2d82405773d2117",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30ed301e_b8b5cb38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-11-08T18:20:57Z",
+      "side": 1,
+      "message": "Why isn\u0027t this being sent upstream first? Also, it seems the correct fix should be this instead:\nhttps://lore.kernel.org/all/20221102101848.ibvumaxg2jdvk52y@intra2net.com/",
+      "revId": "12e605251c1c8467e165c0c4d2d82405773d2117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52114166_3fc49d0c",
+        "filename": "net/xfrm/xfrm_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-11-08T18:20:57Z",
+      "side": 1,
+      "message": "nit: remove unnecessary parenthesis",
+      "range": {
+        "startLine": 689,
+        "startChar": 6,
+        "endLine": 689,
+        "endChar": 7
+      },
+      "revId": "12e605251c1c8467e165c0c4d2d82405773d2117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f3592a5_c12b3ddf",
+        "filename": "net/xfrm/xfrm_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-11-08T18:20:57Z",
+      "side": 1,
+      "message": "nit: remove unnecessary curly braces",
+      "range": {
+        "startLine": 689,
+        "startChar": 49,
+        "endLine": 689,
+        "endChar": 50
+      },
+      "revId": "12e605251c1c8467e165c0c4d2d82405773d2117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
