@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a0787a_fe0f978f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-08T18:19:12Z",
+      "side": 1,
+      "message": "it isn\u0027t actually; I was meant to say\n\n(is filled in) (in follow up CLs)",
+      "parentUuid": "c4b432ba_920b3106",
+      "range": {
+        "startLine": 13,
+        "startChar": 25,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "078cfc758dafeab81f348bab759ad3915ca57313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b988f563_99aa9708",
