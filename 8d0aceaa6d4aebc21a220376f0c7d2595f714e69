@@ -88,6 +88,24 @@
       "parentUuid": "9a894f66_5937b56d",
       "revId": "8d0aceaa6d4aebc21a220376f0c7d2595f714e69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d089e68_572ceefd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975062
+      },
+      "writtenOn": "2022-11-08T09:31:27Z",
+      "side": 1,
+      "message": "Rebased and pushed the patch again, could you please review?",
+      "parentUuid": "a374c390_1a974a7c",
+      "revId": "8d0aceaa6d4aebc21a220376f0c7d2595f714e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
