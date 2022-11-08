@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b988f563_99aa9708",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-08T12:05:11Z",
+      "side": 1,
+      "message": "is this used?",
+      "range": {
+        "startLine": 21,
+        "startChar": 56,
+        "endLine": 21,
+        "endChar": 68
+      },
+      "revId": "078cfc758dafeab81f348bab759ad3915ca57313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b24e34a7_ea49efe6",
         "filename": "BUILD.bazel",
         "patchSetId": 2
