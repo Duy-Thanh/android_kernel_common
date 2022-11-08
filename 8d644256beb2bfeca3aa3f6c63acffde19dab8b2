@@ -16,6 +16,41 @@
       "message": "we already have hooks for this protection, why not use them instead?",
       "revId": "8d644256beb2bfeca3aa3f6c63acffde19dab8b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a897e662_488cc3b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973520
+      },
+      "writtenOn": "2022-11-08T07:49:21Z",
+      "side": 1,
+      "message": "Hi, Kroah, can you tell us which hooks we can use to implement the protection?\nBecause wen want to use these hooks to do runtime check or set hardware protect region in ATF, hypervisor or TEEOS. It\u0027s a runtime protection.When bpf free，the protection shoult be remove from ATF,hypervisor or TEEOS.\n\nThe hook API \u0027trace_android_vh_check_bpf_syscall\u0027 will not match our reqirement. This can protect the operation to the BPF program from system call. But the BPF program itself will not be protected. After compile the BPF program into binary and start to run, we want to make sure the binary will be hacked or can check if it has be tampered.",
+      "parentUuid": "9f9d93d4_11a0d558",
+      "revId": "8d644256beb2bfeca3aa3f6c63acffde19dab8b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d866a1b_63d2240f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973520
+      },
+      "writtenOn": "2022-11-08T07:49:21Z",
+      "side": 1,
+      "message": "Hi,Kroah. Please check the reply for your question.",
+      "revId": "8d644256beb2bfeca3aa3f6c63acffde19dab8b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
