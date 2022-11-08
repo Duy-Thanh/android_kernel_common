@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000032042696",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2291848?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "b5d62c66_2d3b869f",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Paul Semel \u003csemelpaul@gmail.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "bd02cbb7_1080295f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-11-08T11:37:54Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Paul Semel \u003csemelpaul@gmail.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 486671560 android-build.ayeaye-python-dispatcher_20221107.05_p0",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "1b5ee50451af6241f7a10e1312e509ccc5e685be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
