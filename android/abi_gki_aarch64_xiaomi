@@ -299,6 +299,7 @@
 
 #required by mifs.ko module
   __cleancache_get_page
+  __detach_mounts
   __dquot_alloc_space
   __dquot_free_space
   __dquot_transfer
@@ -311,6 +312,8 @@
   __fscrypt_prepare_rename
   __fscrypt_prepare_setattr
   __iomap_dio_rw
+  __mod_lruvec_state
+  __mod_zone_page_state
   __page_file_mapping
   __pagevec_release
   __percpu_counter_init
@@ -338,6 +341,7 @@
   capable_wrt_inode_uidgid
   clear_page_dirty_for_io
   current_umask
+  d_delete
   d_instantiate_new
   d_invalidate
   d_tmpfile
@@ -452,6 +456,7 @@
   iter_file_splice_write
   kernfs_get
   kset_register
+  mem_cgroup_update_lru_size
   migrate_page_move_mapping
   migrate_page_states
   mnt_drop_write_file
@@ -473,6 +478,7 @@
   posix_acl_chmod
   posix_acl_equiv_mode
   redirty_page_for_writepage
+  root_mem_cgroup
   security_inode_init_security
   seq_escape
   set_cached_acl
