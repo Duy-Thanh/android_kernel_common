@@ -125,6 +125,10 @@ void ioremap_phys_range_hook(phys_addr_t phys_addr, size_t size, pgprot_t prot)
 	if (!static_branch_unlikely(&ioremap_guard_key))
 		return;
 
+	if (!IS_ALIGNED(phys_addr, PAGE_SIZE) ||
+	    !IS_ALIGNED(phys_addr, PAGE_SIZE))
+		return;
+
 	mutex_lock(&ioremap_guard_lock);
 
 	while (size) {
@@ -182,7 +186,8 @@ void iounmap_phys_range_hook(phys_addr_t phys_addr, size_t size)
 	if (!static_branch_unlikely(&ioremap_guard_key))
 		return;
 
-	VM_BUG_ON(phys_addr & ~PAGE_MASK || size & ~PAGE_MASK);
+	VM_BUG_ON(!IS_ALIGNED(phys_addr, PAGE_SIZE) ||
+		  !IS_ALIGNED(phys_addr, PAGE_SIZE));
 
 	mutex_lock(&ioremap_guard_lock);
 
