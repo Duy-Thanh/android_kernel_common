@@ -49,7 +49,12 @@
 	{(unsigned long)__GFP_RECLAIM,		"__GFP_RECLAIM"},	\
 	{(unsigned long)__GFP_DIRECT_RECLAIM,	"__GFP_DIRECT_RECLAIM"},\
 	{(unsigned long)__GFP_KSWAPD_RECLAIM,	"__GFP_KSWAPD_RECLAIM"},\
+<<<<<<< TARGET BRANCH (8e2e0a BACKPORT: scsi: ufs: Optimize serialization of setup_xfer_re)
 	{(unsigned long)__GFP_NO_INIT_ON_ALLOC,	"__GFP_NO_INIT_ON_ALLOC"}\
+=======
+	{(unsigned long)__GFP_ZEROTAGS,		"__GFP_ZEROTAGS"},	\
+	{(unsigned long)__GFP_SKIP_KASAN_POISON,"__GFP_SKIP_KASAN_POISON"}\
+>>>>>>> SOURCE BRANCH (b85a4a UPSTREAM: mmflags.h: add missing __GFP_ZEROTAGS and __GFP_SK)
 
 #define show_gfp_flags(flags)						\
 	(flags) ? __print_flags(flags, "|",				\
