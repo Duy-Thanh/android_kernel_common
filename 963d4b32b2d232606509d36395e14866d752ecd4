@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbbadd38_56c491a8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-11-10T11:45:14Z",
+      "side": 1,
+      "message": "Can we gracefully handle the BUG, or could we have some corrupt state at EL2?",
+      "revId": "963d4b32b2d232606509d36395e14866d752ecd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
