@@ -268,6 +268,7 @@ static void sdio_release_func(struct device *dev)
 {
 	struct sdio_func *func = dev_to_sdio_func(dev);
 
+<<<<<<< HEAD   (79b5f3 UPSTREAM: linux/const.h: move UL() macro to include/linux/co)
 #ifdef CONFIG_MMC_EMBEDDED_SDIO
 	/*
 	 * If this device is embedded then we never allocated
@@ -275,6 +276,9 @@ static void sdio_release_func(struct device *dev)
 	 */
 	if (!func->card->host->embedded_sdio_data.funcs)
 #endif
+=======
+	if (!(func->card->quirks & MMC_QUIRK_NONSTD_SDIO))
+>>>>>>> BRANCH (a901bb Linux 4.14.298)
 		sdio_free_func_cis(func);
 
 	kfree(func->info);
