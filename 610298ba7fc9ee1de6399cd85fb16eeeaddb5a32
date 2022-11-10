@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8252b4ab_5b01c978",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-10T13:52:08Z",
+      "side": 1,
+      "message": "IIUC, the anchor thingy exists to rebuild block mapping?\n\nIn the stage2_set_owner() case, force_pte\u003dtrue which makes stage2_leaf_mapping_allowed() return always false.\n\nCouldn\u0027t we use this mechanism instead? having force_pte\u003dfalse for the reclaim portion? That would avoid having to detect in the common pgtable code if we are 1. on the reclaim path 2. on the host stage-2 pgtable?\n\nstage2_leaf_mapping_allowed() could be aware of the refcount and would let the PRE callback destroy the mapping when appropriate?",
+      "revId": "610298ba7fc9ee1de6399cd85fb16eeeaddb5a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
