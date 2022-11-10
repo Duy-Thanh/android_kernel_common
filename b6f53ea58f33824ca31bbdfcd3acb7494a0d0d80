@@ -34,6 +34,24 @@
       "parentUuid": "3cec5382_f2d42cd9",
       "revId": "b6f53ea58f33824ca31bbdfcd3acb7494a0d0d80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "975df85b_41448634",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941790
+      },
+      "writtenOn": "2022-11-10T02:28:19Z",
+      "side": 1,
+      "message": "Thank you. The tests passed.",
+      "parentUuid": "9e0a5fda_b6e256d8",
+      "revId": "b6f53ea58f33824ca31bbdfcd3acb7494a0d0d80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
