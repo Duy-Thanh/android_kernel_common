@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "903d5cff_d7017d6f",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-11T13:00:12Z",
+      "side": 1,
+      "message": "`do { } while (0)` style would match other non-expression macros in this file",
+      "revId": "7a2e68aa5573ad1fcd3ed6fba543c1e2912d4841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c6b9fb0_cd2018ff",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-11T13:00:12Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "7a2e68aa5573ad1fcd3ed6fba543c1e2912d4841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1a6916_db6b15b9",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-11T13:00:12Z",
+      "side": 1,
+      "message": "Double bang not needed on result of a logical operator. Clearer without?",
+      "revId": "7a2e68aa5573ad1fcd3ed6fba543c1e2912d4841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
