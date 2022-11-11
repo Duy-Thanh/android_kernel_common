@@ -17,6 +17,7 @@
 
 #include <asm/unaligned.h>
 
+#define TESTING 0
 /*
  * SoC version type with major number in the upper 16 bits and minor
  * number in the lower 16 bits.
