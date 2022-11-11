@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b247fb98_020ba53d",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-11-11T14:56:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "903d5cff_d7017d6f",
+      "revId": "7a2e68aa5573ad1fcd3ed6fba543c1e2912d4841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c6b9fb0_cd2018ff",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9252751_ff8f380f",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-11-11T14:56:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c6b9fb0_cd2018ff",
+      "revId": "7a2e68aa5573ad1fcd3ed6fba543c1e2912d4841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de1a6916_db6b15b9",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-11-11T13:00:12Z",
       "side": 1,
       "message": "Double bang not needed on result of a logical operator. Clearer without?",
+      "revId": "7a2e68aa5573ad1fcd3ed6fba543c1e2912d4841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65843ec6_e44c088c",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-11-11T14:56:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de1a6916_db6b15b9",
       "revId": "7a2e68aa5573ad1fcd3ed6fba543c1e2912d4841",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
