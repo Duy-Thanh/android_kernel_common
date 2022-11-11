@@ -16,6 +16,24 @@
       "message": "Can we gracefully handle the BUG, or could we have some corrupt state at EL2?",
       "revId": "963d4b32b2d232606509d36395e14866d752ecd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0963e030_52ab1e8b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-11T15:03:52Z",
+      "side": 1,
+      "message": "Now you mention it this is probably susceptible to bogus `ipa` values passed from the guest. Yikes. I will fix.",
+      "parentUuid": "dbbadd38_56c491a8",
+      "revId": "963d4b32b2d232606509d36395e14866d752ecd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
