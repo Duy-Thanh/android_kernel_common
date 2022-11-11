@@ -1174,6 +1174,13 @@ void snd_usb_set_format_quirk(struct snd_usb_substream *subs,
 	case USB_ID(0x041e, 0x3f19): /* E-Mu 0204 USB */
 		set_format_emu_quirk(subs, fmt);
 		break;
+<<<<<<< HEAD   (1b654b BACKPORT: ARM: 9039/1: assembler: generalize byte swapping m)
+=======
+	case USB_ID(0x534d, 0x0021): /* MacroSilicon MS2100/MS2106 */
+	case USB_ID(0x534d, 0x2109): /* MacroSilicon MS2109 */
+		subs->stream_offset_adj = 2;
+		break;
+>>>>>>> BRANCH (d419ec Linux 4.19.265)
 	}
 }
 
