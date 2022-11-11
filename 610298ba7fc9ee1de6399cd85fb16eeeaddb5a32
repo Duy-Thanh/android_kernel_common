@@ -52,6 +52,24 @@
       "parentUuid": "1ab1acb5_8b1dbda1",
       "revId": "610298ba7fc9ee1de6399cd85fb16eeeaddb5a32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc08581f_b213c3a2",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-11T09:48:47Z",
+      "side": 1,
+      "message": "What I meant is it is weird to set `force_pte\u003dtrue` while actually behind the scenes PTEs will not be forced and blocks might be recreated.\n\nAlso, I see the need to identify the host stage-2 pgtable with IDMAP. But if it is true at the moment, I suppose this might change in the future? (probably someone with more experience could {dis,}confirm)\n\nSo how about reusing the block mapping recreation code that is already in place instead? PRE/POST could be aware of the refcount and only clear the PTE if the refcount falls to 0? And the unshare path would just need to set force_pte\u003dfalse?",
+      "parentUuid": "891a755d_52b10598",
+      "revId": "610298ba7fc9ee1de6399cd85fb16eeeaddb5a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
