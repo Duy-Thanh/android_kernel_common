@@ -258,6 +258,58 @@ copy_to_dist_dir(
     flat = True,
 )
 
+# allmodconfig build tests.
+# These are build tests only, so:
+# - outs are intentionally set to empty to not copy anything to DIST_DIR
+# - module_implicit_outs is used instead of module_outs to avoid copying modules.
+kernel_build(
+    name = "allmodconfig_aarch64",
+    outs = [],
+    build_config = "build.config.allmodconfig.aarch64",
+    module_implicit_outs = ["auto"],
+    visibility = ["//visibility:private"],
+)
+
+copy_to_dist_dir(
+    name = "allmodconfig_aarch64_dist",
+    data = [":allmodconfig_aarch64"],
+    dist_dir = "out/allmodconfig_aarch64/dist",
+    flat = True,
+    visibility = ["//visibility:private"],
+)
+
+kernel_build(
+    name = "allmodconfig_x86_64",
+    outs = [],
+    build_config = "build.config.allmodconfig.x86_64",
+    module_implicit_outs = ["auto"],
+    visibility = ["//visibility:private"],
+)
+
+copy_to_dist_dir(
+    name = "allmodconfig_x86_64_dist",
+    data = [":allmodconfig_x86_64"],
+    dist_dir = "out/allmodconfig_x86_64/dist",
+    flat = True,
+    visibility = ["//visibility:private"],
+)
+
+kernel_build(
+    name = "allmodconfig_arm",
+    outs = [],
+    build_config = "build.config.allmodconfig.arm",
+    module_implicit_outs = ["auto"],
+    visibility = ["//visibility:private"],
+)
+
+copy_to_dist_dir(
+    name = "allmodconfig_arm_dist",
+    data = [":allmodconfig_arm"],
+    dist_dir = "out/allmodconfig_arm/dist",
+    flat = True,
+    visibility = ["//visibility:private"],
+)
+
 # DDK Headers
 # All headers. These are the public targets for DDK modules to use.
 alias(
