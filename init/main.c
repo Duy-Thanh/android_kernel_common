@@ -851,6 +851,7 @@ static void __init mm_init(void)
 	page_ext_init_flatmem_late();
 	kmem_cache_init();
 	kmemleak_init();
+	init_vma_users_waitqueue();
 	pgtable_init();
 	debug_objects_mem_init();
 	vmalloc_init();

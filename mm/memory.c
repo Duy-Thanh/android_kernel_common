@@ -209,6 +209,84 @@ static void check_sync_rss_stat(struct task_struct *task)
 
 #endif /* SPLIT_RSS_COUNTING */
 
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+
+static wait_queue_head_t vma_users_wait;
+static atomic_t vma_user_waiters;
+
+void init_vma_users_waitqueue(void)
+{
+	atomic_set(&vma_user_waiters, 0);
+	init_waitqueue_head(&vma_users_wait);
+}
+
+static inline bool wait_for_vma_users(struct vm_area_struct *vma)
+{
+	bool result;
+
+	/*
+	 * A well-behaving process should not be unmapping an area
+	 * while it's faulting a page, therefore normally this succeeds.
+	 * Unused VMA's refcount jumps to -1 to prevent get_vma from
+	 * getting it and the next put_vma will free it.
+	 */
+	if (likely(atomic_cmpxchg(&vma->file_ref_count, 0, -1) == 0))
+		return true;
+
+	atomic_inc(&vma_user_waiters);
+	/*
+	 * When atomic_cmpxchg fails it does not provide memory barrier, so
+	 * use explicit one.
+	 */
+	smp_mb();
+	result = !wait_event_interruptible(vma_users_wait,
+			atomic_cmpxchg(&vma->file_ref_count, 0, -1) == 0);
+	atomic_dec(&vma_user_waiters);
+
+	return result;
+}
+
+struct vm_area_struct *get_vma(struct mm_struct *mm, unsigned long addr)
+{
+	struct vm_area_struct *vma;
+
+	rcu_read_lock();
+	vma = __find_vma(mm, addr);
+	if (vma) {
+		if (vma->vm_start > addr ||
+		    !atomic_inc_unless_negative(&vma->file_ref_count))
+			vma = NULL;
+	}
+	rcu_read_unlock();
+
+	return vma;
+}
+
+void put_vma(struct vm_area_struct *vma)
+{
+	int new_ref_count;
+
+	/*
+	 * wait_for_vma_users sets vma_user_waiters then checks file_ref_count.
+	 * put_vma sets file_ref_count then checks vma_user_waiters.
+	 */
+	new_ref_count = atomic_dec_return(&vma->file_ref_count);
+	/* Implicit smp_mb due to atomic_dec_return */
+	if (new_ref_count == 0 && unlikely(atomic_read(&vma_user_waiters) > 0))
+		wake_up_interruptible(&vma_users_wait);
+	else if (new_ref_count < 0)
+		vm_area_free_no_check(vma);
+}
+
+#else	/* CONFIG_SPECULATIVE_PAGE_FAULT */
+
+static inline bool wait_for_vma_users(struct vm_area_struct *vma)
+{
+	return true;
+}
+
+#endif	/* CONFIG_SPECULATIVE_PAGE_FAULT */
+
 /*
  * Note: this doesn't free the actual pages themselves. That
  * has been handled earlier when unmapping all the memory regions.
@@ -405,6 +483,8 @@ void free_pgtables(struct mmu_gather *tlb, struct vm_area_struct *vma,
 		struct vm_area_struct *next = vma->vm_next;
 		unsigned long addr = vma->vm_start;
 
+		/* Ensure no concurrent speculative page faults */
+		wait_for_vma_users(vma);
 		/*
 		 * Hide vma from rmap and truncate_pagecache before freeing
 		 * pgtables
@@ -423,6 +503,7 @@ void free_pgtables(struct mmu_gather *tlb, struct vm_area_struct *vma,
 			       && !is_vm_hugetlb_page(next)) {
 				vma = next;
 				next = vma->vm_next;
+				wait_for_vma_users(vma);
 				unlink_anon_vmas(vma);
 				unlink_file_vma(vma);
 			}

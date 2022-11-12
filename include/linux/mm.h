@@ -253,6 +253,7 @@ void setup_initial_init_mm(void *start_code, void *end_code,
 
 struct vm_area_struct *vm_area_alloc(struct mm_struct *);
 struct vm_area_struct *vm_area_dup(struct vm_area_struct *);
+void vm_area_free_no_check(struct vm_area_struct *);
 void vm_area_free(struct vm_area_struct *);
 
 #ifndef CONFIG_MMU
@@ -685,6 +686,10 @@ static inline void vma_init(struct vm_area_struct *vma, struct mm_struct *mm)
 	memset(vma, 0, sizeof(*vma));
 	vma->vm_mm = mm;
 	vma->vm_ops = &dummy_vm_ops;
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+        /* Start from 0 to use atomic_inc_unless_negative() in get_vma() */
+	atomic_set(&vma->file_ref_count, 0);
+#endif
 	INIT_LIST_HEAD(&vma->anon_vma_chain);
 }
 
@@ -3379,6 +3384,10 @@ static inline bool pte_spinlock(struct vm_fault *vmf)
 	return __pte_map_lock(vmf);
 }
 
+void init_vma_users_waitqueue(void);
+struct vm_area_struct *get_vma(struct mm_struct *mm, unsigned long addr);
+void put_vma(struct vm_area_struct *vma);
+
 #else	/* !CONFIG_SPECULATIVE_PAGE_FAULT */
 
 #define pte_map_lock(___vmf)						\
@@ -3394,6 +3403,8 @@ static inline bool pte_spinlock(struct vm_fault *vmf)
 	spin_lock(___vmf->ptl);						\
 	true;								\
 })
+
+static inline void init_vma_users_waitqueue(void) {}
 
 #endif	/* CONFIG_SPECULATIVE_PAGE_FAULT */
 #endif	/* CONFIG_MMU */
