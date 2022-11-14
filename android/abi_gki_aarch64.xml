@@ -211,6 +211,7 @@
       <elf-symbol name='__tasklet_schedule' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9d2ab8ac'/>
       <elf-symbol name='__trace_bprintk' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa20d01ba'/>
       <elf-symbol name='__trace_bputs' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb1e25684'/>
+      <elf-symbol name='__traceiter_android_rvh_after_enqueue_task' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x312a51f'/>
       <elf-symbol name='__traceiter_android_rvh_arm64_serror_panic' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe90dfa30'/>
       <elf-symbol name='__traceiter_android_rvh_attach_entity_load_avg' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc4a0bd87'/>
       <elf-symbol name='__traceiter_android_rvh_bad_mode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3dc2e9e1'/>
@@ -2199,6 +2200,7 @@
       <elf-symbol name='memunmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9e9fdd9d'/>
       <elf-symbol name='mfd_add_devices' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcb16acd3'/>
       <elf-symbol name='mfd_remove_devices' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3d08078a'/>
+      <elf-symbol name='migrate_swap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x759ca836'/>
       <elf-symbol name='mii_ethtool_get_link_ksettings' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4f230eb6'/>
       <elf-symbol name='mii_ethtool_gset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa0ed1187'/>
       <elf-symbol name='mii_ethtool_set_link_ksettings' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbf3f43ef'/>
@@ -3838,6 +3840,7 @@
       <elf-symbol name='__drm_debug' size='4' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4f18a150'/>
       <elf-symbol name='__num_online_cpus' size='4' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc60d0620'/>
       <elf-symbol name='__per_cpu_offset' size='256' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x280f9f14'/>
+      <elf-symbol name='__tracepoint_android_rvh_after_enqueue_task' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x36d08831'/>
       <elf-symbol name='__tracepoint_android_rvh_arm64_serror_panic' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3eeb0795'/>
       <elf-symbol name='__tracepoint_android_rvh_attach_entity_load_avg' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9476c5e4'/>
       <elf-symbol name='__tracepoint_android_rvh_bad_mode' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x11c4733a'/>
@@ -10163,23 +10166,7 @@
           <var-decl name='rcu' type-id='e3d8ce29' visibility='default' filepath='net/8021q/vlan.h' line='36' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='drm_self_refresh_data' size-in-bits='1664' is-struct='yes' visibility='default' filepath='drivers/gpu/drm/drm_self_refresh_helper.c' line='58' column='1' id='12506762'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='crtc' type-id='b64ad7cb' visibility='default' filepath='drivers/gpu/drm/drm_self_refresh_helper.c' line='59' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='entry_work' type-id='5ad6e0ef' visibility='default' filepath='drivers/gpu/drm/drm_self_refresh_helper.c' line='60' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1152'>
-          <var-decl name='avg_mutex' type-id='925167dc' visibility='default' filepath='drivers/gpu/drm/drm_self_refresh_helper.c' line='62' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1536'>
-          <var-decl name='entry_avg_ms' type-id='6e15744f' visibility='default' filepath='drivers/gpu/drm/drm_self_refresh_helper.c' line='63' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1600'>
-          <var-decl name='exit_avg_ms' type-id='6e15744f' visibility='default' filepath='drivers/gpu/drm/drm_self_refresh_helper.c' line='64' column='1'/>
-        </data-member>
-      </class-decl>
+      <class-decl name='drm_self_refresh_data' is-struct='yes' visibility='default' is-declaration-only='yes' id='12506762'/>
       <class-decl name='v4l2_event_subscription' size-in-bits='256' is-struct='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2413' column='1' id='1251351e'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='type' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2414' column='1'/>
@@ -20142,7 +20129,7 @@
         <parameter type-id='855e3679'/>
         <return type-id='95e97e5e'/>
       </function-type>
-      <typedef-decl name='va_list' type-id='7f896fb4' filepath='/home/khalid/product/google_repo/prebuilts/clang/host/linux-x86/clang-r450784e/lib64/clang/14.0.7/include/stdarg.h' line='14' column='1' id='2aee9912'/>
+      <typedef-decl name='va_list' type-id='7f896fb4' filepath='prebuilts/clang/host/linux-x86/clang-r450784e/lib64/clang/14.0.7/include/stdarg.h' line='14' column='1' id='2aee9912'/>
       <class-decl name='transport_container' size-in-bits='832' is-struct='yes' visibility='default' filepath='include/linux/transport_class.h' line='56' column='1' id='2af4292a'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ac' type-id='52bea74f' visibility='default' filepath='include/linux/transport_class.h' line='57' column='1'/>
@@ -45564,11 +45551,6 @@
         <enumerator name='REGCACHE_COMPRESSED' value='2'/>
         <enumerator name='REGCACHE_FLAT' value='3'/>
       </enum-decl>
-      <class-decl name='ewma_psr_time' size-in-bits='64' is-struct='yes' visibility='default' filepath='drivers/gpu/drm/drm_self_refresh_helper.c' line='56' column='1' id='6e15744f'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='internal' type-id='7359adad' visibility='default' filepath='drivers/gpu/drm/drm_self_refresh_helper.c' line='56' column='1'/>
-        </data-member>
-      </class-decl>
       <typedef-decl name='uint' type-id='f0981eeb' filepath='include/linux/types.h' line='87' column='1' id='6e160b14'/>
       <class-decl name='cec_event_entry' size-in-bits='768' is-struct='yes' visibility='default' filepath='include/media/cec.h' line='75' column='1' id='6e21d41e'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -111314,6 +111296,12 @@
         <parameter type-id='80f4b756' name='str' filepath='kernel/trace/trace.c' line='1064' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_android_rvh_after_enqueue_task' mangled-name='__traceiter_android_rvh_after_enqueue_task' filepath='include/trace/hooks/sched.h' line='298' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_rvh_after_enqueue_task'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/sched.h' line='298' column='1'/>
+        <parameter type-id='6ed6b432' name='rq' filepath='include/trace/hooks/sched.h' line='298' column='1'/>
+        <parameter type-id='f23e2572' name='p' filepath='include/trace/hooks/sched.h' line='298' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_android_rvh_arm64_serror_panic' mangled-name='__traceiter_android_rvh_arm64_serror_panic' filepath='include/trace/hooks/traps.h' line='24' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_rvh_arm64_serror_panic'>
         <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/traps.h' line='24' column='1'/>
         <parameter type-id='4616a179' name='regs' filepath='include/trace/hooks/traps.h' line='24' column='1'/>
@@ -112267,6 +112255,7 @@
         <parameter type-id='19c2251e' name='act' filepath='include/trace/events/xdp.h' line='28' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <var-decl name='__tracepoint_android_rvh_after_enqueue_task' type-id='4ca0c298' mangled-name='__tracepoint_android_rvh_after_enqueue_task' visibility='default' filepath='include/trace/hooks/sched.h' line='298' column='1' elf-symbol-id='__tracepoint_android_rvh_after_enqueue_task'/>
       <var-decl name='__tracepoint_android_rvh_arm64_serror_panic' type-id='4ca0c298' mangled-name='__tracepoint_android_rvh_arm64_serror_panic' visibility='default' filepath='include/trace/hooks/traps.h' line='24' column='1' elf-symbol-id='__tracepoint_android_rvh_arm64_serror_panic'/>
       <var-decl name='__tracepoint_android_rvh_attach_entity_load_avg' type-id='4ca0c298' mangled-name='__tracepoint_android_rvh_attach_entity_load_avg' visibility='default' filepath='include/trace/hooks/sched.h' line='360' column='1' elf-symbol-id='__tracepoint_android_rvh_attach_entity_load_avg'/>
       <var-decl name='__tracepoint_android_rvh_bad_mode' type-id='4ca0c298' mangled-name='__tracepoint_android_rvh_bad_mode' visibility='default' filepath='include/trace/hooks/traps.h' line='20' column='1' elf-symbol-id='__tracepoint_android_rvh_bad_mode'/>
@@ -122155,6 +122144,13 @@
         <parameter type-id='fa0b179b' name='parent' filepath='drivers/mfd/mfd-core.c' line='389' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='migrate_swap' mangled-name='migrate_swap' filepath='kernel/sched/core.c' line='2290' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_swap'>
+        <parameter type-id='f23e2572' name='cur' filepath='kernel/sched/core.c' line='2290' column='1'/>
+        <parameter type-id='f23e2572' name='p' filepath='kernel/sched/core.c' line='2290' column='1'/>
+        <parameter type-id='95e97e5e' name='target_cpu' filepath='kernel/sched/core.c' line='2291' column='1'/>
+        <parameter type-id='95e97e5e' name='curr_cpu' filepath='kernel/sched/core.c' line='2291' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='mii_ethtool_get_link_ksettings' mangled-name='mii_ethtool_get_link_ksettings' filepath='drivers/net/mii.c' line='145' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mii_ethtool_get_link_ksettings'>
         <parameter type-id='f0150b1d' name='mii' filepath='drivers/net/mii.c' line='145' column='1'/>
         <parameter type-id='70de91e2' name='cmd' filepath='drivers/net/mii.c' line='146' column='1'/>
@@ -130543,6 +130539,7 @@
     </abi-instr>
   </abi-corpus>
 </abi-corpus-group>
+
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
