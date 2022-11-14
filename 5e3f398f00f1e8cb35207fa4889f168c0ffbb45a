@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b4f7ae7_7a06ac6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-14T23:48:27Z",
+      "side": 1,
+      "message": "Is there a reason the checkpatch issues can\u0027t be resolved?\n\nYou should point out in the commit message that this series has been tested extensively in `android13-5.10` (assuming it has).",
+      "revId": "5e3f398f00f1e8cb35207fa4889f168c0ffbb45a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
