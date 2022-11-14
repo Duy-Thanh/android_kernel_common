@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "873f95fc_0ba852e5",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-14T12:52:55Z",
+      "side": 1,
+      "message": "I like this idea because it offers flexibility for having different `_is_counted(..)` mechanisms per entity. I will do this.",
+      "parentUuid": "4e3dc6de_19a6cba1",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "610298ba7fc9ee1de6399cd85fb16eeeaddb5a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8252b4ab_5b01c978",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 1
