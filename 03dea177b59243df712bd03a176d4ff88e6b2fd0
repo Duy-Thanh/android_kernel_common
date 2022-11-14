@@ -22,6 +22,30 @@
       },
       "revId": "03dea177b59243df712bd03a176d4ff88e6b2fd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc95dbf_11427d4d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-14T13:21:57Z",
+      "side": 1,
+      "message": "\u003e Also, @willdeacon@google.com I think this has the potential of breaking your psci_mem_protect stuff as this relinquish path in its current state can effectively implement an unshare but not using the normal API.\n\nActually I take that back, this does \u0027shared-with-host\u0027 -\u003e \u0027owned-by-host\u0027 without touching the psci_mem_protect refcount, but that is in fact correct, so n/m.",
+      "parentUuid": "85721790_ecd694c6",
+      "range": {
+        "startLine": 278,
+        "startChar": 1,
+        "endLine": 279,
+        "endChar": 29
+      },
+      "revId": "03dea177b59243df712bd03a176d4ff88e6b2fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
