@@ -70,6 +70,24 @@
       "parentUuid": "891a755d_52b10598",
       "revId": "610298ba7fc9ee1de6399cd85fb16eeeaddb5a32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5bfdb7_cf79ef7f",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-14T11:18:08Z",
+      "side": 1,
+      "message": "Blocks are re-created lazily on first access and not on this code path. The `force_pte\u003dtrue` mechanism was here before coalescing and I don\u0027t see how it changes semantics because I only extend the current functionality with this.\n\nThe second concern is true but I raised this up with @qperret@google.com before implementing this. It turns out it is not the only place where we are making this assumption: (eg. take a look on the pkvm reclaim path).\n\nI explored your suggested option as we discussed together on Friday: relying on the anchor which is set in _PRE to re-create the block mappings in _POST in `stage2_map_walk_leaf`. This will involve setting `force_pte\u003dfalse` on the `kvm_pgtable_stage2_set_owner` path but this API is also invoked from hyp and guest. One issue is that it will not invalidated caches on this path.",
+      "parentUuid": "dc08581f_b213c3a2",
+      "revId": "610298ba7fc9ee1de6399cd85fb16eeeaddb5a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
