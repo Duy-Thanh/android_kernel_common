@@ -70,6 +70,30 @@
       },
       "revId": "80a243c9eb3c9035e5e7be59d04753dd11869f53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6eca5ce_827fd7e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-11-14T23:53:07Z",
+      "side": 1,
+      "message": "There were some minor conflict in arch/Kconfig",
+      "parentUuid": "fc7116b7_45bd5f87",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "80a243c9eb3c9035e5e7be59d04753dd11869f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
