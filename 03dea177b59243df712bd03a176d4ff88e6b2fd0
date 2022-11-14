@@ -46,6 +46,30 @@
       },
       "revId": "03dea177b59243df712bd03a176d4ff88e6b2fd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b03eca_ae77faf6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-14T15:29:10Z",
+      "side": 1,
+      "message": "To be honest I\u0027m not sure we actually *need* to be able to relinquish `SHARED_*` pages. It just seemed easy to do so and made the code a bit simpler. I could instead return an error from here, propagated back to the guest. Shall I give that a go?",
+      "parentUuid": "2dc95dbf_11427d4d",
+      "range": {
+        "startLine": 278,
+        "startChar": 1,
+        "endLine": 279,
+        "endChar": 29
+      },
+      "revId": "03dea177b59243df712bd03a176d4ff88e6b2fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
