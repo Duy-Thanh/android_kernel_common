@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e3dc6de_19a6cba1",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-14T12:15:52Z",
+      "side": 1,
+      "message": "I\u0027m still thinking this doesn\u0027t belong in here -- the definition of \u0027this is a mapping with default permissions\u0027 is very much host specific, so it ought to be moved somewhere else.\n\nProposed alternative: generalize the kvm_pgtable_force_pte_cb_t stuff into a set of optional callbacks (maybe in a dedicated struct), and a new callback in there for \u0027pte_is_counted()\u0027. And then much of the logic can be moved to mem_protect.c where it belongs IMO. Thoughts?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "610298ba7fc9ee1de6399cd85fb16eeeaddb5a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8252b4ab_5b01c978",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 1
