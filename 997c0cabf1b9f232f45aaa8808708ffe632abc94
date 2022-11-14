@@ -22,6 +22,30 @@
       },
       "revId": "997c0cabf1b9f232f45aaa8808708ffe632abc94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17c24a5a_24e752ca",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-14T10:47:38Z",
+      "side": 1,
+      "message": "From pKVM\u0027s perspective, the only \u0027dangerous\u0027 FF-A calls are the one related to memory management. So if we see any of these that we don\u0027t support, we\u0027ll return FFA_RET_NOT_SUPPORTED, but otherwise, there is no reason to not let them through. E.g. the host and TrustZone should be able to use scheduling primitives and such.",
+      "parentUuid": "a14474a9_1639dfa9",
+      "range": {
+        "startLine": 107,
+        "startChar": 6,
+        "endLine": 107,
+        "endChar": 26
+      },
+      "revId": "997c0cabf1b9f232f45aaa8808708ffe632abc94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
