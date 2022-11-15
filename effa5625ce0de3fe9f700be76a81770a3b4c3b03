@@ -68,6 +68,29 @@
       },
       "revId": "effa5625ce0de3fe9f700be76a81770a3b4c3b03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92739cf9_9d6ed723",
+        "filename": "arch/arm64/kvm/hyp/nvhe/psci-relay.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-15T15:50:00Z",
+      "side": 1,
+      "message": "psci_0_2_handler() also takes this lock prior to forwarding PSCI_0_2_FN_SYSTEM_RESET, so we\u0027re just going to deadlock I think",
+      "range": {
+        "startLine": 310,
+        "startChar": 2,
+        "endLine": 310,
+        "endChar": 35
+      },
+      "revId": "effa5625ce0de3fe9f700be76a81770a3b4c3b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
