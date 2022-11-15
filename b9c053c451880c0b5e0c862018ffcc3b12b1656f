@@ -16,6 +16,24 @@
       "message": "merge issues, let me fix these up...",
       "revId": "b9c053c451880c0b5e0c862018ffcc3b12b1656f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deec3df2_21efba98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-15T08:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e89109b6_ffea7d44",
+      "revId": "b9c053c451880c0b5e0c862018ffcc3b12b1656f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
