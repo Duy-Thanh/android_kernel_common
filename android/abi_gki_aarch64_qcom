@@ -804,6 +804,9 @@
   get_unused_fd_flags
   get_user_ifreq
   get_zeroed_page
+  gic_cpu_init
+  gic_dist_init
+  gic_dist_wait_for_rwp
   gic_nonsecure_priorities
   gic_resume
   gic_v2_resume
@@ -2323,6 +2326,7 @@
   __tracepoint_android_vh_ftrace_oops_exit
   __tracepoint_android_vh_ftrace_size_check
   __tracepoint_android_vh_gic_resume
+  __tracepoint_android_vh_gic_suspend
   __tracepoint_android_vh_gic_v2_resume
   __tracepoint_android_vh_handle_tlb_conf
   __tracepoint_android_vh_init_aes_encrypt
