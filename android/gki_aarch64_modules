@@ -1,0 +1,22 @@
+<<<<<<< HEAD   (338ed9 ANDROID: GKI: Convert NFC support as GKI module)
+=======
+mm/zsmalloc.ko
+drivers/block/zram/zram.ko
+drivers/net/can/dev/can-dev.ko
+drivers/net/can/vcan.ko
+drivers/net/can/slcan.ko
+drivers/usb/class/cdc-acm.ko
+drivers/usb/serial/usbserial.ko
+drivers/usb/serial/ftdi_sio.ko
+net/can/can-raw.ko
+net/can/can-bcm.ko
+net/can/can-gw.ko
+net/bluetooth/rfcomm/rfcomm.ko
+net/bluetooth/hidp/hidp.ko
+net/8021q/8021q.ko
+net/wireless/cfg80211.ko
+net/mac80211/mac80211.ko
+net/tipc/tipc.ko
+net/tipc/diag.ko
+net/nfc/nfc.ko
+>>>>>>> CHANGE (4747c6 ANDROID: GKI: Covnert Bluetooth HIDP as module)

@@ -7,6 +7,11 @@ drivers/usb/serial/ftdi_sio.ko
 drivers/usb/serial/usbserial.ko
 mm/zsmalloc.ko
 net/8021q/8021q.ko
+<<<<<<< HEAD   (338ed9 ANDROID: GKI: Convert NFC support as GKI module)
+=======
+net/bluetooth/hidp/hidp.ko
+net/bluetooth/rfcomm/rfcomm.ko
+>>>>>>> CHANGE (4747c6 ANDROID: GKI: Covnert Bluetooth HIDP as module)
 net/can/can-bcm.ko
 net/can/can-gw.ko
 net/can/can-raw.ko
