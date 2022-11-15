@@ -70,6 +70,29 @@
       },
       "revId": "03dea177b59243df712bd03a176d4ff88e6b2fd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c31e1f_47a85730",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-15T11:49:10Z",
+      "side": 1,
+      "message": "Q: Don\u0027t we have to unmap the guest IPA range only when the physical address `ppa` is set from the reclaim_walker handler and consider it a failure in any other cases ?",
+      "range": {
+        "startLine": 342,
+        "startChar": 9,
+        "endLine": 342,
+        "endChar": 10
+      },
+      "revId": "03dea177b59243df712bd03a176d4ff88e6b2fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
