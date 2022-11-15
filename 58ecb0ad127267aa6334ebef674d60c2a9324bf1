@@ -16,6 +16,23 @@
       "message": "+1 to confirm the patch matches https://git.gitlab.arm.com/linux-arm/linux-rm/-/commit/e845684b89304c533da5ffa97101a40d66d297f5. Adding Will as a more knowledgeable reviewer to check the details.",
       "revId": "58ecb0ad127267aa6334ebef674d60c2a9324bf1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef9a56a1_61fc7ba0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-15T23:27:48Z",
+      "side": 1,
+      "message": "breaks KMI",
+      "revId": "58ecb0ad127267aa6334ebef674d60c2a9324bf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
