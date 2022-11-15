@@ -1,0 +1,22 @@
+COMMON_GKI_MODULES_LIST = [
+    # keep sorted
+    "drivers/block/zram/zram.ko",
+    "drivers/net/can/dev/can-dev.ko",
+    "drivers/net/can/slcan.ko",
+    "drivers/net/can/vcan.ko",
+    "drivers/usb/class/cdc-acm.ko",
+    "drivers/usb/serial/ftdi_sio.ko",
+    "drivers/usb/serial/usbserial.ko",
+    "mm/zsmalloc.ko",
+    "net/8021q/8021q.ko",
+    "net/bluetooth/hidp/hidp.ko",
+    "net/bluetooth/rfcomm/rfcomm.ko",
+    "net/can/can-bcm.ko",
+    "net/can/can-gw.ko",
+    "net/can/can-raw.ko",
+    "net/mac80211/mac80211.ko",
+    "net/nfc/nfc.ko",
+    "net/tipc/diag.ko",
+    "net/tipc/tipc.ko",
+    "net/wireless/cfg80211.ko",
+]
