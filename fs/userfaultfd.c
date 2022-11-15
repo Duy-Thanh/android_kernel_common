@@ -986,8 +986,13 @@ static int resolve_userfault_fork(struct userfaultfd_ctx *new,
 {
 	int fd;
 
+<<<<<<< HEAD   (0118fb Merge branch 'android12-5.10' into branch 'android12-5.10-lt)
 	fd = anon_inode_getfd_secure("[userfaultfd]", &userfaultfd_fops, new,
 			O_RDWR | (new->flags & UFFD_SHARED_FCNTL_FLAGS), inode);
+=======
+	fd = anon_inode_getfd("[userfaultfd]", &userfaultfd_fops, new,
+			      O_RDONLY | (new->flags & UFFD_SHARED_FCNTL_FLAGS));
+>>>>>>> BRANCH (a10a57 Linux 5.10.150)
 	if (fd < 0)
 		return fd;
 
@@ -2100,8 +2105,13 @@ SYSCALL_DEFINE1(userfaultfd, int, flags)
 	/* prevent the mm struct to be freed */
 	mmgrab(ctx->mm);
 
+<<<<<<< HEAD   (0118fb Merge branch 'android12-5.10' into branch 'android12-5.10-lt)
 	fd = anon_inode_getfd_secure("[userfaultfd]", &userfaultfd_fops, ctx,
 			O_RDWR | (flags & UFFD_SHARED_FCNTL_FLAGS), NULL);
+=======
+	fd = anon_inode_getfd("[userfaultfd]", &userfaultfd_fops, ctx,
+			      O_RDONLY | (flags & UFFD_SHARED_FCNTL_FLAGS));
+>>>>>>> BRANCH (a10a57 Linux 5.10.150)
 	if (fd < 0) {
 		mmdrop(ctx->mm);
 		kmem_cache_free(userfaultfd_ctx_cachep, ctx);

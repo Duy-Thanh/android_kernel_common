@@ -554,7 +554,11 @@ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
 
 	/* there is background inflight IO or foreground operation recently */
 	if (is_inflight_io(sbi, REQ_TIME) ||
+<<<<<<< HEAD   (0118fb Merge branch 'android12-5.10' into branch 'android12-5.10-lt)
 		(!f2fs_time_over(sbi, REQ_TIME) && f2fs_rwsem_is_locked(&sbi->cp_rwsem)))
+=======
+		(!f2fs_time_over(sbi, REQ_TIME) && rwsem_is_locked(&sbi->cp_rwsem)))
+>>>>>>> BRANCH (a10a57 Linux 5.10.150)
 		return;
 
 	/* exceed periodical checkpoint timeout threshold */
@@ -562,7 +566,11 @@ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
 		goto do_sync;
 
 	/* checkpoint is the only way to shrink partial cached entries */
+<<<<<<< HEAD   (0118fb Merge branch 'android12-5.10' into branch 'android12-5.10-lt)
 	if (f2fs_available_free_memory(sbi, NAT_ENTRIES) ||
+=======
+	if (f2fs_available_free_memory(sbi, NAT_ENTRIES) &&
+>>>>>>> BRANCH (a10a57 Linux 5.10.150)
 		f2fs_available_free_memory(sbi, INO_ENTRIES))
 		return;
 
@@ -573,7 +581,11 @@ do_sync:
 		mutex_lock(&sbi->flush_lock);
 
 		blk_start_plug(&plug);
+<<<<<<< HEAD   (0118fb Merge branch 'android12-5.10' into branch 'android12-5.10-lt)
 		f2fs_sync_dirty_inodes(sbi, FILE_INODE);
+=======
+		f2fs_sync_dirty_inodes(sbi, FILE_INODE, false);
+>>>>>>> BRANCH (a10a57 Linux 5.10.150)
 		blk_finish_plug(&plug);
 
 		mutex_unlock(&sbi->flush_lock);
