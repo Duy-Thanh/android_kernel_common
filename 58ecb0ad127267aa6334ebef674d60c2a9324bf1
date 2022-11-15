@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de6ccee6_f5b37a5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-15T19:27:18Z",
+      "side": 1,
+      "message": "+1 to confirm the patch matches https://git.gitlab.arm.com/linux-arm/linux-rm/-/commit/e845684b89304c533da5ffa97101a40d66d297f5. Adding Will as a more knowledgeable reviewer to check the details.",
+      "revId": "58ecb0ad127267aa6334ebef674d60c2a9324bf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
