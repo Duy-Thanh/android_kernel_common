@@ -214,10 +214,11 @@ static void gic_do_wait_for_rwp(void __iomem *base, u32 bit)
 }
 
 /* Wait for completion of a distributor change */
-static void gic_dist_wait_for_rwp(void)
+void gic_dist_wait_for_rwp(void)
 {
 	gic_do_wait_for_rwp(gic_data.dist_base, GICD_CTLR_RWP);
 }
+EXPORT_SYMBOL_GPL(gic_dist_wait_for_rwp);
 
 /* Wait for completion of a redistributor change */
 static void gic_redist_wait_for_rwp(void)
@@ -765,7 +766,7 @@ static bool gic_has_group0(void)
 	return val != 0;
 }
 
-static void __init gic_dist_init(void)
+void gic_dist_init(void)
 {
 	unsigned int i;
 	u64 affinity;
@@ -827,6 +828,7 @@ static void __init gic_dist_init(void)
 		gic_write_irouter(affinity, base + GICD_IROUTERnE + i * 8);
 	}
 }
+EXPORT_SYMBOL_GPL(gic_dist_init);
 
 static int gic_iterate_rdists(int (*fn)(struct redist_region *, void __iomem *))
 {
@@ -1108,7 +1110,7 @@ static int gic_dist_supports_lpis(void)
 		!gicv3_nolpi);
 }
 
-static void gic_cpu_init(void)
+void gic_cpu_init(void)
 {
 	void __iomem *rbase;
 	int i;
@@ -1135,6 +1137,7 @@ static void gic_cpu_init(void)
 	/* initialise system registers */
 	gic_cpu_sys_reg_init();
 }
+EXPORT_SYMBOL_GPL(gic_cpu_init);
 
 #ifdef CONFIG_SMP
 
@@ -1337,8 +1340,15 @@ void gic_resume(void)
 }
 EXPORT_SYMBOL_GPL(gic_resume);
 
+static int gic_suspend(void)
+{
+	trace_android_vh_gic_suspend(&gic_data);
+	return 0;
+}
+
 static struct syscore_ops gic_syscore_ops = {
 	.resume = gic_resume,
+	.suspend = gic_suspend,
 };
 
 static void gic_syscore_init(void)
@@ -1349,6 +1359,7 @@ static void gic_syscore_init(void)
 #else
 static inline void gic_syscore_init(void) { }
 void gic_resume(void) { }
+static int gic_suspend(void) { return 0; }
 #endif
 
 
