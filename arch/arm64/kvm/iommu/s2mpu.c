@@ -34,7 +34,7 @@ static int init_s2mpu_driver(u32 version)
 
 	/* Allocate SMPT buffers. */
 	for_each_gb(gb) {
-		addr = __get_free_pages(GFP_KERNEL, SMPT_ORDER);
+		addr = __get_free_pages(GFP_KERNEL, smpt_order_from_version(version));
 		if (!addr) {
 			ret = -ENOMEM;
 			goto out_free;
@@ -62,7 +62,8 @@ out_free:
 	/* TODO - will driver return the memory? */
 	if (ret) {
 		for_each_gb(gb)
-			free_pages((unsigned long)mpt->fmpt[gb].smpt, SMPT_ORDER);
+			free_pages((unsigned long)mpt->fmpt[gb].smpt,
+			smpt_order_from_version(version));
 		free_page((unsigned long)mpt);
 	}
 out:
