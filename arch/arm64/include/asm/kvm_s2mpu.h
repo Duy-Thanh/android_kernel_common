@@ -199,7 +199,13 @@ V9_READ_PTLB_SET(set) |  V9_READ_PTLB_PTLB(ptlb_index) | V9_READ_PTLB_PMMU(pmmu_
 #define V9_L1ENTRY_ATTR_GRAN_MASK                 BIT(3)
 #define V9_MPT_PROT_BITS                          4
 #define V9_MPT_ACCESS_SHIFT               2
+/**********************************************************/
+/* V1,V2 variants */
+#define MPT_ACCESS_SHIFT		0
+#define L1ENTRY_ATTR_GRAN_MASK			GENMASK(5, 4)
+#define MPT_PROT_BITS				2
 
+/**********************************************************/
 
 #define REG_NS_CTRL0				0x0
 #define REG_NS_CTRL1				0x4
@@ -316,13 +322,12 @@ V9_READ_PTLB_SET(set) |  V9_READ_PTLB_PTLB(ptlb_index) | V9_READ_PTLB_PMMU(pmmu_
 #define L1ENTRY_ATTR_GRAN_4K			0x0
 #define L1ENTRY_ATTR_GRAN_64K			0x1
 #define L1ENTRY_ATTR_GRAN_2M			0x2
+#define L1ENTRY_ATTR_GRAN(gran, msk)              FIELD_PREP(msk, gran)
 #define L1ENTRY_ATTR_PROT_MASK			GENMASK(2, 1)
-#define L1ENTRY_ATTR_GRAN_MASK			GENMASK(5, 4)
 #define L1ENTRY_ATTR_PROT(prot)			FIELD_PREP(L1ENTRY_ATTR_PROT_MASK, prot)
-#define L1ENTRY_ATTR_GRAN(gran)			FIELD_PREP(L1ENTRY_ATTR_GRAN_MASK, gran)
 #define L1ENTRY_ATTR_1G(prot)			L1ENTRY_ATTR_PROT(prot)
-#define L1ENTRY_ATTR_L2(gran)			(L1ENTRY_ATTR_GRAN(gran) | \
-						 L1ENTRY_ATTR_L2TABLE_EN)
+#define L1ENTRY_ATTR_L2(gran, msk)			(L1ENTRY_ATTR_GRAN(gran, msk) | \
+							 L1ENTRY_ATTR_L2TABLE_EN)
 
 #define NR_GIGABYTES				64
 #define RO_GIGABYTES_FIRST			4
@@ -339,16 +344,19 @@ V9_READ_PTLB_SET(set) |  V9_READ_PTLB_PTLB(ptlb_index) | V9_READ_PTLB_PMMU(pmmu_
 #endif
 static_assert(SMPT_GRAN <= PAGE_SIZE);
 
-#define MPT_PROT_BITS				2
-#define SMPT_WORD_SIZE				sizeof(u32)
-#define SMPT_ELEMS_PER_BYTE			(BITS_PER_BYTE / MPT_PROT_BITS)
-#define SMPT_ELEMS_PER_WORD			(SMPT_WORD_SIZE * SMPT_ELEMS_PER_BYTE)
-#define SMPT_WORD_BYTE_RANGE			(SMPT_GRAN * SMPT_ELEMS_PER_WORD)
-#define SMPT_NUM_ELEMS				(SZ_1G / SMPT_GRAN)
-#define SMPT_SIZE				(SMPT_NUM_ELEMS / SMPT_ELEMS_PER_BYTE)
-#define SMPT_NUM_WORDS				(SMPT_SIZE / SMPT_WORD_SIZE)
-#define SMPT_NUM_PAGES				(SMPT_SIZE / PAGE_SIZE)
-#define SMPT_ORDER				get_order(SMPT_SIZE)
+
+#define SMPT_WORD_SIZE						sizeof(u32)
+#define SMPT_ELEMS_PER_BYTE(prot_bits)		(BITS_PER_BYTE / (prot_bits))
+#define SMPT_ELEMS_PER_WORD(prot_bits)		(SMPT_WORD_SIZE * SMPT_ELEMS_PER_BYTE(prot_bits))
+#define SMPT_WORD_BYTE_RANGE(prot_bits)		(SMPT_GRAN * SMPT_ELEMS_PER_WORD(prot_bits))
+#define SMPT_NUM_ELEMS						(SZ_1G / SMPT_GRAN)
+#define SMPT_SIZE(prot_bits)			(SMPT_NUM_ELEMS / SMPT_ELEMS_PER_BYTE(prot_bits))
+#define SMPT_NUM_WORDS(prot_bits)			(SMPT_SIZE(prot_bits) / SMPT_WORD_SIZE)
+#define SMPT_NUM_PAGES(prot_bits)			(SMPT_SIZE(prot_bits) / PAGE_SIZE)
+#define SMPT_ORDER(prot_bits)				get_order(SMPT_SIZE(prot_bits))
+
+
+#define SMPT_GRAN_MASK					0x3
 
 /* SysMMU_SYNC registers, relative to SYSMMU_SYNC_S2_OFFSET. */
 #define REG_NS_SYNC_CMD				0x0
@@ -373,7 +381,18 @@ enum s2mpu_version {
 	S2MPU_VERSION_1 = 0x11000000,
 	S2MPU_VERSION_2 = 0x20000000,
 	S2MPU_VERSION_9 = 0x90000000,
+
 };
+static inline int smpt_order_from_version(enum s2mpu_version version)
+{
+	if (version == S2MPU_VERSION_9)
+		return SMPT_ORDER(V9_MPT_PROT_BITS);
+	else if ((version == S2MPU_VERSION_1) || (version == S2MPU_VERSION_2))
+		return SMPT_ORDER(MPT_PROT_BITS);
+	else
+		return 0;
+}
+
 enum pkvm_iommu_driver_id {
 	PKVM_IOMMU_DRIVER_S2MPU,
 	PKVM_IOMMU_DRIVER_SYSMMU_SYNC,
