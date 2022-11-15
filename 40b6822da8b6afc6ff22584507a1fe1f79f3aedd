@@ -16,6 +16,24 @@
       "message": "I fixed the checkpatch warnings and errors that made sense. I have not fixed the warnings in the macros, since they would need extensively reworked.",
       "revId": "40b6822da8b6afc6ff22584507a1fe1f79f3aedd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f018a9_cd7ecfb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-15T22:15:32Z",
+      "side": 1,
+      "message": "The checkpatch errors need to be fixed. We can live with the warnings.",
+      "parentUuid": "adbcb44b_9f1a8c50",
+      "revId": "40b6822da8b6afc6ff22584507a1fe1f79f3aedd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
