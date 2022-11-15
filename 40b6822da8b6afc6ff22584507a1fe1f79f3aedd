@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adbcb44b_9f1a8c50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-11-15T19:28:18Z",
+      "side": 1,
+      "message": "I fixed the checkpatch warnings and errors that made sense. I have not fixed the warnings in the macros, since they would need extensively reworked.",
+      "revId": "40b6822da8b6afc6ff22584507a1fe1f79f3aedd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
