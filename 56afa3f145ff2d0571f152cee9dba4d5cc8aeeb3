@@ -70,6 +70,24 @@
       "parentUuid": "f6b5e9b4_2cb35684",
       "revId": "56afa3f145ff2d0571f152cee9dba4d5cc8aeeb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "214c38ac_5f978b70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-11-16T08:19:56Z",
+      "side": 1,
+      "message": "Hi, Ramji\n\nThanks for the confirmation!\n\nI will check the system_dlkm partition feature and send mails for questions later.\n\none thing I want to be clear here is about \"build.sh is going to be deprecated by end of this month\", does it mean from next month the build.sh method could not be run completely, or it still could be used to build kernels like the the hikey960 device with out of tree patches? I am asking just want to decide the priority of the migration work for the hikey960/hikey/x15 builds.\n\nThanks,\nYongqin Liu",
+      "parentUuid": "188b1433_ede9feef",
+      "revId": "56afa3f145ff2d0571f152cee9dba4d5cc8aeeb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
