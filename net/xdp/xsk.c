@@ -370,17 +370,24 @@ static u32 xsk_tx_peek_release_fallback(struct xsk_buff_pool *pool, struct xdp_d
 	return nb_pkts;
 }
 
+<<<<<<< HEAD   (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 u32 xsk_tx_peek_release_desc_batch(struct xsk_buff_pool *pool, struct xdp_desc *descs,
 				   u32 max_entries)
+=======
+u32 xsk_tx_peek_release_desc_batch(struct xsk_buff_pool *pool, u32 nb_pkts)
+>>>>>>> BRANCH (bd8a59 Linux 5.15.75)
 {
 	struct xdp_sock *xs;
-	u32 nb_pkts;
 
 	rcu_read_lock();
 	if (!list_is_singular(&pool->xsk_tx_list)) {
 		/* Fallback to the non-batched version */
 		rcu_read_unlock();
+<<<<<<< HEAD   (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 		return xsk_tx_peek_release_fallback(pool, descs, max_entries);
+=======
+		return xsk_tx_peek_release_fallback(pool, nb_pkts);
+>>>>>>> BRANCH (bd8a59 Linux 5.15.75)
 	}
 
 	xs = list_first_or_null_rcu(&pool->xsk_tx_list, struct xdp_sock, tx_list);
@@ -389,11 +396,15 @@ u32 xsk_tx_peek_release_desc_batch(struct xsk_buff_pool *pool, struct xdp_desc *
 		goto out;
 	}
 
+<<<<<<< HEAD   (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 	nb_pkts = xskq_cons_peek_desc_batch(xs->tx, descs, pool, max_entries);
 	if (!nb_pkts) {
 		xs->tx->queue_empty_descs++;
 		goto out;
 	}
+=======
+	nb_pkts = xskq_cons_nb_entries(xs->tx, nb_pkts);
+>>>>>>> BRANCH (bd8a59 Linux 5.15.75)
 
 	/* This is the backpressure mechanism for the Tx path. Try to
 	 * reserve space in the completion queue for all packets, but
@@ -401,12 +412,26 @@ u32 xsk_tx_peek_release_desc_batch(struct xsk_buff_pool *pool, struct xdp_desc *
 	 * packets. This avoids having to implement any buffering in
 	 * the Tx path.
 	 */
+<<<<<<< HEAD   (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 	nb_pkts = xskq_prod_reserve_addr_batch(pool->cq, descs, nb_pkts);
+=======
+	nb_pkts = xskq_prod_nb_free(pool->cq, nb_pkts);
+>>>>>>> BRANCH (bd8a59 Linux 5.15.75)
 	if (!nb_pkts)
 		goto out;
 
+<<<<<<< HEAD   (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 	xskq_cons_release_n(xs->tx, nb_pkts);
+=======
+	nb_pkts = xskq_cons_read_desc_batch(xs->tx, pool, nb_pkts);
+	if (!nb_pkts) {
+		xs->tx->queue_empty_descs++;
+		goto out;
+	}
+
+>>>>>>> BRANCH (bd8a59 Linux 5.15.75)
 	__xskq_cons_release(xs->tx);
+	xskq_prod_write_addr_batch(pool->cq, pool->tx_descs, nb_pkts);
 	xs->sk.sk_write_space(&xs->sk);
 
 out:

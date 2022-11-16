@@ -168,7 +168,12 @@ static int virtio_gpu_object_shmem_init(struct virtio_gpu_device *vgdev,
 	 */
 	shmem->pages = drm_gem_shmem_get_sg_table(&bo->base.base);
 	if (IS_ERR(shmem->pages)) {
+<<<<<<< HEAD   (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 		drm_gem_shmem_unpin(&bo->base.base);
+=======
+		drm_gem_shmem_unpin(&bo->base);
+		shmem->pages = NULL;
+>>>>>>> BRANCH (bd8a59 Linux 5.15.75)
 		return PTR_ERR(shmem->pages);
 	}
 
@@ -247,6 +252,8 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
 
 	ret = virtio_gpu_object_shmem_init(vgdev, bo, &ents, &nents);
 	if (ret != 0) {
+		if (fence)
+			virtio_gpu_array_unlock_resv(objs);
 		virtio_gpu_array_put_free(objs);
 		virtio_gpu_free_object(&shmem_obj->base);
 		return ret;
