@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/259292930",
       "revId": "72cb45dbf2303b6f2dfa75ac5f56b2b088e2f273",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e38bfb91_5e14e9a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951960
+      },
+      "writtenOn": "2022-11-16T03:36:05Z",
+      "side": 1,
+      "message": "Hi Huan Tang, please help to add \"Bug: 259292930\" in the commit message.",
+      "revId": "72cb45dbf2303b6f2dfa75ac5f56b2b088e2f273",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
