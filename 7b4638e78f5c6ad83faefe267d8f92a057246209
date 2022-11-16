@@ -20,6 +20,41 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1f5dd87c_c173be69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-11-16T17:46:20Z",
+      "side": 1,
+      "message": "Thanks for the review! Regarding the Ack\u0027d comments, I\u0027m not sure whether all of this code is correct but this one is cherry picked verbatim, and I think if we want to modify it we should do it in a future patch so that we don\u0027t introduce merge conflicts for the subsequent cherry picks.\n\nPlus, it\u0027ll make the histories more similar which is always nice.",
+      "revId": "7b4638e78f5c6ad83faefe267d8f92a057246209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3759065f_e1820256",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-11-16T17:46:20Z",
+      "side": 1,
+      "message": "Hm I don\u0027t think so.. If we did have to that means that any time someone does a cherry pick, they\u0027d have to update the licenses of all the code they cherry pick. That seems not scalable and worse it means that you\u0027d have to inspect even cherry picks that land cleanly. \n\nPlus, if the source branch changes the license in a future patch you\u0027d get a merge conflict.",
+      "parentUuid": "bd1db981_a66f78e8",
+      "revId": "7b4638e78f5c6ad83faefe267d8f92a057246209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "42b23783_14e81134",
         "filename": "drivers/virtio/Kconfig",
         "patchSetId": 2
@@ -52,6 +87,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3bc415_73d09104",
+        "filename": "drivers/virtio/virtio_wl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-11-16T17:46:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "71dc4dd6_a5d6c810",
+      "revId": "7b4638e78f5c6ad83faefe267d8f92a057246209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f111332_88b3735e",
@@ -65,6 +118,24 @@
       "writtenOn": "2022-11-16T01:54:35Z",
       "side": 1,
       "message": "is VIRTIO_ID_TPM needed?",
+      "revId": "7b4638e78f5c6ad83faefe267d8f92a057246209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99669f5f_3a8ddabc",
+        "filename": "include/uapi/linux/virtio_ids.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-11-16T17:46:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6f111332_88b3735e",
       "revId": "7b4638e78f5c6ad83faefe267d8f92a057246209",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
