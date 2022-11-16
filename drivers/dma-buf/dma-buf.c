@@ -1274,21 +1274,24 @@ int dma_buf_begin_cpu_access_partial(struct dma_buf *dmabuf,
 				     enum dma_data_direction direction,
 				     unsigned int offset, unsigned int len)
 {
-	int ret = 0;
+	int ret;
 
 	if (WARN_ON(!dmabuf))
 		return -EINVAL;
 
-	if (dmabuf->ops->begin_cpu_access_partial)
+	if (dmabuf->ops->begin_cpu_access_partial) {
 		ret = dmabuf->ops->begin_cpu_access_partial(dmabuf, direction,
 							    offset, len);
 
-	/* Ensure that all fences are waited upon - but we first allow
-	 * the native handler the chance to do so more efficiently if it
-	 * chooses. A double invocation here will be reasonably cheap no-op.
-	 */
-	if (ret == 0)
-		ret = __dma_buf_begin_cpu_access(dmabuf, direction);
+		/* Ensure that all fences are waited upon - but we first allow
+		 * the native handler the chance to do so more efficiently if it
+		 * chooses. A double invocation here will be reasonably cheap no-op.
+		 */
+		if (ret == 0)
+			ret = __dma_buf_begin_cpu_access(dmabuf, direction);
+	} else {
+		ret = dma_buf_begin_cpu_access(dmabuf, direction);
+	}
 
 	return ret;
 }
@@ -1326,13 +1329,15 @@ int dma_buf_end_cpu_access_partial(struct dma_buf *dmabuf,
 				   enum dma_data_direction direction,
 				   unsigned int offset, unsigned int len)
 {
-	int ret = 0;
+	int ret;
 
 	WARN_ON(!dmabuf);
 
 	if (dmabuf->ops->end_cpu_access_partial)
 		ret = dmabuf->ops->end_cpu_access_partial(dmabuf, direction,
 							  offset, len);
+	else
+		ret = dma_buf_end_cpu_access(dmabuf, direction);
 
 	return ret;
 }
