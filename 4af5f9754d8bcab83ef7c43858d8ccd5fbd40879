@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce7479f9_133a1dde",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-16T16:30:13Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 592,
+        "startChar": 0,
+        "endLine": 592,
+        "endChar": 1
+      },
+      "revId": "4af5f9754d8bcab83ef7c43858d8ccd5fbd40879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a703b169_a13a638b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-16T16:30:13Z",
+      "side": 1,
+      "message": "empty line",
+      "revId": "4af5f9754d8bcab83ef7c43858d8ccd5fbd40879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
