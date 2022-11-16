@@ -16,6 +16,24 @@
       "message": "Any reason you dropped the change in arch/microblaze/include/asm/page.h? If there are no compelling reasons please include all parts of the original patch. If it\u0027s problematic to include them then please add a note about that like this:\n```\nConflicts:\n        arch/microblaze/include/asm/page.h\n\n1. Dropped the changes for microblaze architecture because ....\n```\nFor format see https://android-review.git.corp.google.com/c/kernel/common/+/1861114 as an example.",
       "revId": "996e6ee483c0520710b87f2f12a2abea59481b0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b85ad36d_69e3fc46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491014
+      },
+      "writtenOn": "2022-11-16T02:04:52Z",
+      "side": 1,
+      "message": "Thanks for the reminder 😊",
+      "parentUuid": "487577e4_73566685",
+      "revId": "996e6ee483c0520710b87f2f12a2abea59481b0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
