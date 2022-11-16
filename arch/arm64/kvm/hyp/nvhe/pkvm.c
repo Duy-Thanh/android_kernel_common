@@ -467,8 +467,9 @@ static void init_pkvm_hyp_vm(struct kvm *host_kvm, struct pkvm_hyp_vm *hyp_vm,
 		pvmfw_load_addr = READ_ONCE(host_kvm->arch.pkvm.pvmfw_load_addr);
 	hyp_vm->kvm.arch.pkvm.pvmfw_load_addr = pvmfw_load_addr;
 
-	hyp_vm->kvm.arch.mmu.last_vcpu_ran = last_ran;
-	memset(hyp_vm->kvm.arch.mmu.last_vcpu_ran, -1, pkvm_get_last_ran_size());
+	hyp_vm->kvm.arch.mmu.last_vcpu_ran = (int __percpu *) last_ran;
+	memset((__force void *)hyp_vm->kvm.arch.mmu.last_vcpu_ran, -1,
+	       pkvm_get_last_ran_size());
 }
 
 static int init_pkvm_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu,
@@ -668,7 +669,7 @@ int __pkvm_init_vm(struct kvm *host_kvm, unsigned long vm_hva,
 		   unsigned long pgd_hva, unsigned long last_ran_hva)
 {
 	struct pkvm_hyp_vm *hyp_vm = NULL;
-	void *last_ran = NULL;
+	int *last_ran = NULL;
 	size_t vm_size, pgd_size, last_ran_size;
 	unsigned int nr_vcpus;
 	void *pgd = NULL;
@@ -722,7 +723,7 @@ err_unlock:
 	hyp_spin_unlock(&vm_table_lock);
 err_remove_mappings:
 	unmap_donated_memory(hyp_vm, vm_size);
-	unmap_donated_memory(last_ran, last_ran_size);
+	unmap_donated_memory((__force void *)last_ran, last_ran_size);
 	unmap_donated_memory(pgd, pgd_size);
 err_unpin_kvm:
 	hyp_unpin_shared_mem(host_kvm, host_kvm + 1);
@@ -844,8 +845,9 @@ int __pkvm_teardown_vm(pkvm_handle_t handle)
 	}
 
 	last_ran_size = pkvm_get_last_ran_size();
-	teardown_donated_memory(mc, hyp_vm->kvm.arch.mmu.last_vcpu_ran,
-				last_ran_size);
+	teardown_donated_memory(mc,
+		(__force void * )hyp_vm->kvm.arch.mmu.last_vcpu_ran,
+		last_ran_size);
 
 	vm_size = pkvm_get_hyp_vm_size(hyp_vm->kvm.created_vcpus);
 	teardown_donated_memory(mc, hyp_vm, vm_size);
