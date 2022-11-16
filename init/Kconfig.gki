@@ -235,6 +235,13 @@ config GKI_HIDDEN_DMA_CONFIGS
 	  Dummy config option used to enable the hidden DMA configs,
 	  required by various SoC platforms.
 
+config GKI_HIDDEN_PCIE_ROCKCHIP_CONFIGS
+    bool "Hidden PCIE rockchip configuration needed for GKI"
+    select PCIE_ROCKCHIP
+    help
+      Dummy config option used to enable the hidden PCIE rockchip configs,
+      required by rockchip.
+
 config GKI_NET_XFRM_HACKS
 	bool "XFRM changes required by Android"
 	help
@@ -273,6 +280,7 @@ config GKI_HACKS_TO_FIX
 	select GKI_HIDDEN_MM_CONFIGS
 	select GKI_HIDDEN_ETHERNET_CONFIGS
 	select GKI_HIDDEN_DMA_CONFIGS
+	select GKI_HIDDEN_PCIE_ROCKCHIP_CONFIGS
 
 	help
 	  Dummy config option used to enable core functionality used by
