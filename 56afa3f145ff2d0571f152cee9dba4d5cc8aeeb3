@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b56b3662_99c30ad9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-11-16T01:17:00Z",
+      "side": 1,
+      "message": "Hi, Ramji\n\nI see you have done some work recently on converting many modules to the gki modules, Could you please share any context about that? I am asking just want to see if there is anything we should update for the LKFT project, Like changing to use the gki modules instead of the vendor modules as possible as we can.\n\nThanks,\nYongqin Liu",
+      "revId": "56afa3f145ff2d0571f152cee9dba4d5cc8aeeb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
