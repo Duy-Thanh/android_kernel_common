@@ -52,6 +52,24 @@
       "parentUuid": "a3125d86_5179477c",
       "revId": "56afa3f145ff2d0571f152cee9dba4d5cc8aeeb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "188b1433_ede9feef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-11-16T06:28:25Z",
+      "side": 1,
+      "message": "Thanks for the explanations.\n\n1. Yes.\n2. Yes.\n3. Yes, better to move to bazel as build.sh is going to be deprecated by end of this month. So, for this devices GKI modules are going through the `vendor_boot` partition and not the `system_dlkm` partition? If it\u0027s running the full Android, why not just built the `system_dlkm` partition in platform and load the modules from there. That will be a good addition to the testing. [1]\n4. Yes, if you are not using the GKI image for the device; there is no point of using GKI modules. Is this device going to have it\u0027s own symbol list in the ACK? If yes, then it\u0027s going to be an issue as that symbol list needs to allow list symbols for the vendor modules making many of these GKI modules overridable.\n5. Yes. Mainline doesn\u0027t have symbol list; so that should be fine but android14-X branches need to make sure we are not having any symbol lists as part of KMI_SYMBOL_LISTS.\n\nProbably we should take this discussion over to buganizer/email; so we can iterate over it until we have everything figure out.\n\n[1]: https://preview.source.android.com/docs/core/architecture/bootloader/partitions/gki-partitions",
+      "parentUuid": "f6b5e9b4_2cb35684",
+      "revId": "56afa3f145ff2d0571f152cee9dba4d5cc8aeeb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
