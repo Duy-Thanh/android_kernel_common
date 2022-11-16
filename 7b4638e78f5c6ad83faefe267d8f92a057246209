@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd1db981_a66f78e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-11-16T01:54:35Z",
+      "side": 1,
+      "message": "Do we need to update all the licenses before submitting to this repo?",
+      "revId": "7b4638e78f5c6ad83faefe267d8f92a057246209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42b23783_14e81134",
+        "filename": "drivers/virtio/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-11-16T01:54:35Z",
+      "side": 1,
+      "message": "fwiw, I think this depends on CONFIG_VIRTIO_DMA_SHARED_BUFFER. \nGetting the dependency right here doesn\u0027t really matter though.",
+      "revId": "7b4638e78f5c6ad83faefe267d8f92a057246209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71dc4dd6_a5d6c810",
+        "filename": "drivers/virtio/virtio_wl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-11-16T01:54:35Z",
+      "side": 1,
+      "message": "ooc, why not inline this?",
+      "revId": "7b4638e78f5c6ad83faefe267d8f92a057246209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f111332_88b3735e",
+        "filename": "include/uapi/linux/virtio_ids.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-11-16T01:54:35Z",
+      "side": 1,
+      "message": "is VIRTIO_ID_TPM needed?",
+      "revId": "7b4638e78f5c6ad83faefe267d8f92a057246209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
