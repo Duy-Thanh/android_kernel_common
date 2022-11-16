@@ -34,6 +34,24 @@
       "parentUuid": "b56b3662_99c30ad9",
       "revId": "56afa3f145ff2d0571f152cee9dba4d5cc8aeeb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b5e9b4_2cb35684",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-11-16T04:04:06Z",
+      "side": 1,
+      "message": "Hi, Ramji\n\nHere is the LKFT project[1] I mentioned previously, and we do test based on the matrix[2] listed under it.\nRegarding to this topic, for android14-5.15 branch we test the db845c build,\nand for the android-mainline branch we do tests with the db845c, hikey960, hikey and beagle-x15(32bit arm) devices, where the db845c is supported by default with the bazel method, the hikey960/hikey/beagle-x15 builds have out of tree patches, and are still built with the build.sh method. \n\nbase on the above facts, here are my understandings, could you please help confirm?\n1. android14-5.15 db845c build has the gki_modules_list specified[3], not all gki modules will be used by default, then dropping the gki_modules_list to have all gki modules used by default is the right direction? in the case that it is possible\n\n2. android-mainline db845c uses all the gki modules by default, so we could leave it as it is now I think.\n\n3. android-mainline hikey960 build,should it be changed to the bazel method first, and use all the gki modules by default? Or the gki modules from the bazel method could be used together with the modules from the build.sh method?\n   and the hikey960 build does not support the vendor_boot partition feature, do you think there will be any affections?\n\n4. android-mainline hikey build, it has problems to use the gki kernel, for such case the gki modules should not be considered, right? which means gki modules should only be used with the GKI kernel.\n\n5. android-mainline x15 build, since it\u0027s the arm32 build, it could be ignored I think.\n\n\n[1]: https://source.android.com/docs/core/architecture/kernel/android-common?hl\u003den#linaro-kernel-functional-testing\n[2]: https://source.android.com/docs/core/architecture/kernel/android-common?hl\u003den#test_matrix\n[3]: https://android.googlesource.com/kernel/common/+/refs/heads/android14-5.15/BUILD.bazel#94",
+      "parentUuid": "a3125d86_5179477c",
+      "revId": "56afa3f145ff2d0571f152cee9dba4d5cc8aeeb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
