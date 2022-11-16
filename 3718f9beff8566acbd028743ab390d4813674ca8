@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c0ad3e5_4738c033",
+        "filename": "arch/arm64/kvm/hyp/exception.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-16T14:17:44Z",
+      "side": 0,
+      "message": "This isn\u0027t sufficient here, as you\u0027ll also need to update the caller. I already took care of that in aosp/2281093 but it doesn\u0027t seem to be present in the context here so I\u0027m a bit confused :/",
+      "range": {
+        "startLine": 107,
+        "startChar": 1,
+        "endLine": 107,
+        "endChar": 41
+      },
+      "revId": "3718f9beff8566acbd028743ab390d4813674ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
