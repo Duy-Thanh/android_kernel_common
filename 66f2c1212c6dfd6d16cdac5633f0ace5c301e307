@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "852442c8_ed35a2c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-17T20:40:12Z",
+      "side": 1,
+      "message": "do_wp_page() still calls userfaultfd_pte_wp(), which still reads the current `vma_flags` from the VMA, not the cached `vmf.vma_flags`. So I think a concurrent `UFFDIO_REGISTER` can probably still hit this codepath.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "66f2c1212c6dfd6d16cdac5633f0ace5c301e307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
