@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e670e8_328760a4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-17T17:11:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d85ae9ba_633adeff",
+      "range": {
+        "startLine": 806,
+        "startChar": 1,
+        "endLine": 807,
+        "endChar": 25
+      },
+      "revId": "effa5625ce0de3fe9f700be76a81770a3b4c3b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b8d3485_fbe3b24c",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8395eb4_335a9945",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-17T17:11:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b8d3485_fbe3b24c",
+      "range": {
+        "startLine": 818,
+        "startChar": 2,
+        "endLine": 818,
+        "endChar": 25
+      },
+      "revId": "effa5625ce0de3fe9f700be76a81770a3b4c3b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bc314ee_eac79e88",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-14T10:37:56Z",
       "side": 1,
       "message": "Actually, maybe this one too should have a matching _dec() in the error path?",
+      "range": {
+        "startLine": 1007,
+        "startChar": 2,
+        "endLine": 1007,
+        "endChar": 25
+      },
+      "revId": "effa5625ce0de3fe9f700be76a81770a3b4c3b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e04248f5_5ba30878",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-17T17:11:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bc314ee_eac79e88",
       "range": {
         "startLine": 1007,
         "startChar": 2,
