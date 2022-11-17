@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad38425a_feed0793",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-11-17T18:43:29Z",
+      "side": 1,
+      "message": "This change could use a Fixes: tag to specify in which patch the issue was introduced.",
+      "revId": "2a5556bdda78b2cff1f9aa94d831dd6e94969a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
