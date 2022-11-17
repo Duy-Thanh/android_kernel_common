@@ -3104,6 +3104,7 @@ static int rmqueue_bulk(struct zone *zone, unsigned int order,
 	 * both PREEMPT_RT and non-PREEMPT_RT configurations.
 	 */
 	spin_lock(&zone->lock);
+	trace_android_rvh_rmqueue_bulk(NULL);
 	for (i = 0; i < count; ++i) {
 		struct page *page;
 

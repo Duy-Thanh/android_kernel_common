@@ -161,6 +161,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_cpus_allowed);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_skip_swapcache_flags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);
+<<<<<<< HEAD   (57017a ANDROID: scsi: ufs: Improve MCQ error handling)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_readahead_gfp_mask);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_rmqueue_bulk);
+>>>>>>> CHANGE (50b1d2 ANDROID: mm: add a vendor hook to rmqueue_bulk())
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_preempt_disable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_preempt_enable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_disable);
