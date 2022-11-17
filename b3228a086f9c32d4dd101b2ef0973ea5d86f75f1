@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bedbe5f4_468d0b3d",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-17T15:24:22Z",
+      "side": 1,
+      "message": "Do we really need this? If a non-idmap\u0027d user has an empty table, I presume we can just free it all the same?",
+      "range": {
+        "startLine": 815,
+        "startChar": 4,
+        "endLine": 817,
+        "endChar": 15
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80c0cdd9_06b123b6",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-17T15:24:22Z",
+      "side": 1,
+      "message": "And what about this? Ideally this should always work even if not comming from the set ownership path no?",
+      "range": {
+        "startLine": 822,
+        "startChar": 8,
+        "endLine": 822,
+        "endChar": 37
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e10961e_7c9d8ab6",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-17T15:24:22Z",
+      "side": 1,
+      "message": "Same thing, can we remove all host-specific references? It would be preferable to have a logic that \u0027just works\u0027 :)",
+      "range": {
+        "startLine": 829,
+        "startChar": 8,
+        "endLine": 829,
+        "endChar": 27
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
