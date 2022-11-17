@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36d05257_69ff97cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-17T01:19:36Z",
+      "side": 1,
+      "message": "Please squash with aosp/2305432 (this is android-mainline, let\u0027s add the the fixed patch instead of a patch and a set of fixes)",
+      "revId": "154a5c731c3f6d4e339e5135bdd29fdb6b731f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
