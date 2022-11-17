@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c40dacbb_d1937985",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1956079
+      },
+      "writtenOn": "2022-11-17T01:09:22Z",
+      "side": 1,
+      "message": "Is cherry-pick original commit required?",
+      "parentUuid": "d4a8db8e_be83d2cf",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "46aaafc12b58078fa3181c053a1ce34d92b30cfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea700222_5dfd43af",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cdee07e0_709842f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1956079
+      },
+      "writtenOn": "2022-11-17T01:09:22Z",
+      "side": 1,
+      "message": "Reported-by: Ken Schalk \u003ckschalk@nvidia.com\u003e\nSigned-off-by: Miklos Szeredi \u003cmszeredi@redhat.com\u003e",
+      "parentUuid": "ea700222_5dfd43af",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 52
+      },
+      "revId": "46aaafc12b58078fa3181c053a1ce34d92b30cfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73ab4547_96ff8f8c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -60,6 +108,24 @@
       "writtenOn": "2022-08-02T09:01:14Z",
       "side": 1,
       "message": "should this go to the upstream LTS release of 5.10.y instead?",
+      "revId": "46aaafc12b58078fa3181c053a1ce34d92b30cfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "151284c9_72fb8d6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956079
+      },
+      "writtenOn": "2022-11-17T01:09:22Z",
+      "side": 1,
+      "message": "This needs to be submitted to android12-5.10, currently android13-5.15 has been merged.",
+      "parentUuid": "73ab4547_96ff8f8c",
       "revId": "46aaafc12b58078fa3181c053a1ce34d92b30cfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
