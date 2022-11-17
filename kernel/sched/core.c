@@ -2610,9 +2610,7 @@ int dup_user_cpus_ptr(struct task_struct *dst, struct task_struct *src,
 		      int node)
 {
 	unsigned long flags;
-
-	if (!src->user_cpus_ptr)
-		return 0;
+	struct cpumask *user_mask = NULL;
 
 	dst->user_cpus_ptr = kmalloc_node(cpumask_size(), GFP_KERNEL, node);
 	if (!dst->user_cpus_ptr)
@@ -2620,6 +2618,12 @@ int dup_user_cpus_ptr(struct task_struct *dst, struct task_struct *src,
 
 	/* Use pi_lock to protect content of user_cpus_ptr */
 	raw_spin_lock_irqsave(&src->pi_lock, flags);
+	if (!src->user_cpus_ptr) {
+	    user_mask = clear_user_cpus_ptr(dst);
+	    raw_spin_unlock_irqrestore(&src->pi_lock, flags);
+	    kfree(user_mask);
+	    return 0;
+	}
 	cpumask_copy(dst->user_cpus_ptr, src->user_cpus_ptr);
 	raw_spin_unlock_irqrestore(&src->pi_lock, flags);
 	return 0;
