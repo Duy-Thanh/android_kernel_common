@@ -33,6 +33,24 @@
       "message": "breaks KMI",
       "revId": "58ecb0ad127267aa6334ebef674d60c2a9324bf1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb30f68_f3d18822",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2022-11-18T14:02:24Z",
+      "side": 1,
+      "message": "Resolved by allocating errata id from the reserved pool.\nNote that the relevant commit on the referenced git repository has been updated as well.",
+      "parentUuid": "ef9a56a1_61fc7ba0",
+      "revId": "58ecb0ad127267aa6334ebef674d60c2a9324bf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
