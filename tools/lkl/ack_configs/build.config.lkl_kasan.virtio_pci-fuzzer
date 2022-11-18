@@ -1,0 +1,4 @@
+LKL_PCI=1
+FUZZ_TARGET=virtio_pci
+
+. ${ROOT_DIR}/common/tools/lkl/ack_configs/build.config.lkl_kasan.default-fuzzer

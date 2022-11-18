@@ -1,0 +1,34 @@
+LKL_FUZZING=1
+. ${ROOT_DIR}/common/tools/lkl/ack_configs/build.config.lkl_kasan.common
+
+FUZZ_TARGET_DIR=tools/lkl/fuzzers/${FUZZ_TARGET}
+
+DEFCONFIG=fuzz_defconfig
+PRE_DEFCONFIG_CMDS="${PRE_DEFCONFIG_CMDS} && \
+cp ${ROOT_DIR}/${KERNEL_DIR}/${FUZZ_TARGET_DIR}/defconfig_kasan \
+${ROOT_DIR}/${KERNEL_DIR}/arch/lkl/configs/${DEFCONFIG}"
+POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/lkl/configs/${DEFCONFIG}"
+
+POST_KERNEL_BUILD_CMDS="
+OUTPUT=${OUT_LKL_BUILD_DIR} \
+    make -C ${KERNEL_DIR}/tools/lkl \
+    ${OUT_LKL_BUILD_DIR}/${FUZZ_TARGET_DIR}/${FUZZ_TARGET}-fuzzer \
+    V=${LKL_VERBOSE_BUILD}"
+
+FILES="
+tools/lkl/liblkl.a
+"
+
+DIST_CMDS="cp -r ${INSTALL_PATH}/include ${DIST_DIR}/ && \
+cp ${ROOT_DIR}/${KERNEL_DIR}/tools/lkl/include/*.h ${DIST_DIR}/include/ && \
+mkdir -p ${DIST_DIR}/fuzzers/${FUZZ_TARGET}/ && \
+cp ${OUT_LKL_BUILD_DIR}/${FUZZ_TARGET_DIR}/${FUZZ_TARGET}-fuzzer \
+  ${ROOT_DIR}/${KERNEL_DIR}/${FUZZ_TARGET_DIR}/config.json \
+  ${DIST_DIR}/fuzzers/${FUZZ_TARGET}/ && \
+cp -r ${ROOT_DIR}/${KERNEL_DIR}/${FUZZ_TARGET_DIR}/seeds ${DIST_DIR}/fuzzers/${FUZZ_TARGET}/ && \
+zip -rjq ${DIST_DIR}/fuzzers/${FUZZ_TARGET}/${FUZZ_TARGET}-fuzzer_seed_corpus.zip ${DIST_DIR}/fuzzers/${FUZZ_TARGET}/seeds/ && \
+zip -jq ${DIST_DIR}/fuzzers/${FUZZ_TARGET}/${FUZZ_TARGET}-fuzzer.zip \
+  ${DIST_DIR}/fuzzers/${FUZZ_TARGET}/${FUZZ_TARGET}-fuzzer \
+  ${DIST_DIR}/fuzzers/${FUZZ_TARGET}/config.json \
+  ${DIST_DIR}/fuzzers/${FUZZ_TARGET}/${FUZZ_TARGET}-fuzzer_seed_corpus.zip
+"

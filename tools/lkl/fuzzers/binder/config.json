@@ -1,0 +1,14 @@
+{
+    "cc": [
+        "android-security-assurance-redteam@google.com"
+    ],
+    "componentid" : 825342,
+    "hotlists": [
+        "3671388",
+        "3705175"
+    ],
+    "libfuzzer_options" : [
+        "max_len=4096",
+        "close_fd_mask=3"
+    ]
+}

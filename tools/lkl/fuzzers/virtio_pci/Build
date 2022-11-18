@@ -1,0 +1,2 @@
+# SPDX-License-Identifier: GPL-2.0
+virtio_pci-fuzzer-y += virtio_pci-fuzzer.o

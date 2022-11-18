@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: GPL-2.0
+CXXFLAGS_data.pb.o += -DNDEBUG
+
+libprotobuf_mutator_test-fuzzer-y += test.o data.pb.o

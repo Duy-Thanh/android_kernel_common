@@ -1,0 +1,35 @@
+libs-y += lib/liblkl
+
+ifneq ($(LKL_HOST_CONFIG_BSD),y)
+libs-$(LKL_HOST_CONFIG_POSIX) += lib/hijack/liblkl-hijack
+endif
+LDFLAGS_lib/hijack/liblkl-hijack-y += -shared -nodefaultlibs
+LDLIBS_lib/hijack/liblkl-hijack-y += -ldl
+LDLIBS_lib/hijack/liblkl-hijack-$(LKL_HOST_CONFIG_ARM) += -lgcc -lc
+LDLIBS_lib/hijack/liblkl-hijack-$(LKL_HOST_CONFIG_AARCH64) += -lc
+LDLIBS_lib/hijack/liblkl-hijack-$(LKL_HOST_CONFIG_I386) += -lc_nonshared
+
+progs-$(LKL_HOST_CONFIG_FUSE) += lklfuse
+LDLIBS_lklfuse-y := -lfuse
+
+progs-$(LKL_HOST_CONFIG_ARCHIVE) += fs2tar
+LDLIBS_fs2tar-y := -larchive
+LDLIBS_fs2tar-$(LKL_HOST_CONFIG_NEEDS_LARGP) += -largp
+
+
+progs-$(LKL_HOST_CONFIG_ARCHIVE) += cptofs
+LDLIBS_cptofs-y := -larchive
+LDLIBS_cptofs-$(LKL_HOST_CONFIG_NEEDS_LARGP) += -largp
+
+progs-y += fuzzers/hid/hid-fuzzer
+progs-y += fuzzers/vfat/vfat-fuzzer
+progs-y += fuzzers/rndis/rndis-fuzzer
+progs-y += fuzzers/binder/binder-fuzzer
+progs-y += fuzzers/virtio_blk/virtio_blk-fuzzer
+progs-y += fuzzers/virtio_ring/virtio_ring-fuzzer
+progs-y += fuzzers/virtio_pci/virtio_pci-fuzzer
+progs-y += tests/boot
+progs-y += tests/disk
+progs-y += tests/disk-vfio-pci
+progs-y += tests/net-test
+

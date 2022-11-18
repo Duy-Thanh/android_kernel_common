@@ -1,0 +1,5 @@
+LKL_MMU_ENABLED=1
+
+FUZZ_TARGET=binder
+
+. ${ROOT_DIR}/common/tools/lkl/ack_configs/build.config.lkl_kasan.default-fuzzer

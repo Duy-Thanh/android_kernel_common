@@ -1,0 +1,152 @@
+# SPDX-License-Identifier: GPL-2.0
+POSIX_HOSTS=elf64 elf32
+NT_HOSTS=pe
+
+define set_autoconf_var
+  $(shell echo "#define LKL_HOST_CONFIG_$(1) $(2)" \
+	  >> $(OUTPUT)/include/lkl_autoconf.h)
+  $(shell echo "LKL_HOST_CONFIG_$(1)=$(2)" >> $(OUTPUT)/tests/autoconf.sh)
+  export LKL_HOST_CONFIG_$(1)=$(2)
+endef
+
+define set_kernel_config
+  $(shell echo "#define $(1) $(2)" \
+	  >> $(OUTPUT)/include/kernel_config.h)
+endef
+
+define find_include
+  $(eval include_paths=$(shell $(CC) -E -Wp,-v -xc /dev/null 2>&1 | grep '^ '))
+  $(foreach f, $(include_paths), $(wildcard $(f)/$(1)))
+endef
+
+define is_defined
+$(shell $(CC) -dM -E - </dev/null | grep $(1))
+endef
+
+define android_host
+  $(call set_autoconf_var,ANDROID,y)
+endef
+
+define bsd_host
+  $(call set_autoconf_var,BSD,y)
+endef
+
+define arm_host
+  $(call set_autoconf_var,ARM,y)
+endef
+
+define aarch64_host
+  $(call set_autoconf_var,AARCH64,y)
+endef
+
+define virtio_net_dpdk
+  $(call set_autoconf_var,VIRTIO_NET_DPDK,y)
+  RTE_SDK ?= $(OUTPUT)/dpdk-17.02
+  RTE_TARGET ?= build
+  DPDK_LIBS = -lrte_pmd_vmxnet3_uio -lrte_pmd_ixgbe -lrte_pmd_e1000
+  DPDK_LIBS += -lrte_pmd_virtio
+  DPDK_LIBS += -lrte_timer -lrte_hash -lrte_mbuf -lrte_ethdev -lrte_eal
+  DPDK_LIBS += -lrte_mempool -lrte_ring -lrte_pmd_ring
+  DPDK_LIBS += -lrte_kvargs -lrte_net
+  CFLAGS += -I$$(RTE_SDK)/$$(RTE_TARGET)/include -msse4.2 -mpopcnt
+  LDFLAGS +=-L$$(RTE_SDK)/$$(RTE_TARGET)/lib
+  LDFLAGS +=-Wl,--whole-archive $$(DPDK_LIBS) -Wl,--no-whole-archive -lm -ldl
+endef
+
+define virtio_net_vde
+  $(call set_autoconf_var,VIRTIO_NET_VDE,y)
+  LDLIBS += $(shell pkg-config --libs vdeplug)
+endef
+
+define generic_kasan
+  $(call set_kernel_config,LKL_CONFIG_KASAN,1)
+  $(call set_kernel_config,LKL_CONFIG_KASAN_SHADOW_OFFSET,$(1))
+  $(call set_kernel_config,LKL_CONFIG_KASAN_SHADOW_SIZE,$(2))
+endef
+
+define posix_host
+  $(call set_autoconf_var,POSIX,y)
+  $(call set_autoconf_var,VIRTIO_NET,y)
+  # Disable VFIO_PCI for fuzzing to force using mock lkl_pci.c implementation.
+  $(if $(LKL_PCI),\
+    $(call set_autoconf_var,LKL_PCI,y),\
+    $(if $(strip $(call find_include,linux/vfio.h)),$(call set_autoconf_var,VFIO_PCI,y)))
+  LDFLAGS += -fuse-ld=lld -Wl,-z,notext  -Wl,-no-pie
+  LDFLAGS += --sysroot=$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/sysroot \
+	     -B$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/lib/gcc/x86_64-linux/4.8.3 \
+	     -L$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/lib/gcc/x86_64-linux/4.8.3 \
+	     -L$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/x86_64-linux/lib64
+
+  CFLAGS += --sysroot=$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/sysroot \
+            -I$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/sysroot/usr/include/ \
+            -I$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/sysroot/usr/include/x86_64-linux-gnu/
+  CFLAGS += -fPIC -pthread -fno-omit-frame-pointer
+  # Check tools/build/Makefile.build and tools/build/Build.include for the the recepies
+  # for building .c and .cpp files.
+  CXXFLAGS += --sysroot=$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/sysroot \
+            -I$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/sysroot/usr/include/ \
+            -I$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/sysroot/usr/include/x86_64-linux-gnu/ \
+            -I$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/x86_64-linux/include/c++/4.8.3/ \
+            -I$(LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST)/x86_64-linux/include/c++/4.8.3/x86_64-linux/
+  CXXFLAGS += -fPIC -pthread -fno-omit-frame-pointer
+  SOSUF := .so
+  $(if $(call is_defined,__ANDROID__),$(call android_host),LDLIBS += -lrt -lpthread)
+  $(if $(filter $(1),elf64-x86-64-freebsd),$(call bsd_host))
+  $(if $(filter $(1),elf32-littlearm),$(call arm_host))
+  $(if $(filter $(1),elf64-littleaarch64),$(call aarch64_host))
+  $(if $(filter yes,$(dpdk)),$(call virtio_net_dpdk))
+  $(if $(filter yes,$(vde)),$(call virtio_net_vde))
+  $(if $(strip $(call find_include,fuse.h)),$(call set_autoconf_var,FUSE,y))
+  $(if $(strip $(call find_include,archive.h)),$(call set_autoconf_var,ARCHIVE,y))
+  $(if $(strip $(call find_include,linux/if_tun.h)),$(call set_autoconf_var,VIRTIO_NET_MACVTAP,y))
+  $(if $(filter $(1),elf64-x86-64-freebsd),$(call set_autoconf_var,NEEDS_LARGP,y))
+  $(if $(filter $(1),elf32-i386),$(call set_autoconf_var,I386,y))
+  $(if $(strip $(call find_include,jsmn.h)),$(call set_autoconf_var,JSMN,y))
+
+  # These values should be consistent with the ones provided in Kconfig.
+  # Consult arch/lkl/auto.conf for the default values.
+  $(eval LKL_KASAN_SHADOW_OFFSET := 0x0000200000000000)
+  $(eval LKL_KASAN_SHADOW_SIZE := 0x0000100000000000)
+  $(if $(LKL_KASAN),$(call generic_kasan,$(LKL_KASAN_SHADOW_OFFSET),$(LKL_KASAN_SHADOW_SIZE)))
+endef
+
+define nt64_host
+  $(call set_autoconf_var,NEEDS_LARGP,y)
+  CFLAGS += -Wl,--enable-auto-image-base -Wl,--image-base -Wl,0x10000000 \
+  	 -Wl,--out-implib=$(OUTPUT)liblkl.dll.a -Wl,--export-all-symbols \
+	 -Wl,--enable-auto-import
+  LDFLAGS +=-Wl,--image-base -Wl,0x10000000 -Wl,--enable-auto-image-base \
+   	   -Wl,--out-implib=$(OUTPUT)liblkl.dll.a -Wl,--export-all-symbols \
+	   -Wl,--enable-auto-import
+endef
+
+define nt_host
+  $(call set_autoconf_var,NT,y)
+  KOPT = "KALLSYMS_EXTRA_PASS=1"
+  LDLIBS += -lws2_32
+  EXESUF := .exe
+  SOSUF := .dll
+  CFLAGS += -Iinclude/mingw32
+  $(if $(filter $(1),pe-x86-64),$(call nt64_host))
+  $(if $(LKL_KASAN),$(callerror LKL KASan is currently not supported for NT host))
+endef
+
+define do_autoconf
+  $(eval LD_FMT := $(shell ld -r -print-output-format))
+  $(eval EXEC_FMT := $(shell echo $(LD_FMT) | cut -d "-" -f1))
+  $(if $(or $(filter $(EXEC_FMT),elf64),$(filter $(LD_FMT),pe-x86-64)),$(call set_kernel_config,LKL_CONFIG_64BIT,1))
+  $(if $(filter $(EXEC_FMT),elf64-s390),$(call set_kernel_config,LKL_CONFIG_ENDIAN,1))
+  $(if $(filter $(EXEC_FMT),$(POSIX_HOSTS)),$(call posix_host,$(LD_FMT)))
+  $(if $(filter $(EXEC_FMT),$(NT_HOSTS)),$(call nt_host,$(LD_FMT)))
+endef
+
+export do_autoconf
+
+
+$(OUTPUT)Makefile.conf: Makefile.autoconf
+	$(shell mkdir -p $(OUTPUT)/include)
+	$(shell mkdir -p $(OUTPUT)/tests)
+	$(shell echo -n "" > $(OUTPUT)/include/lkl_autoconf.h)
+	$(shell echo -n "" > $(OUTPUT)/include/kernel_config.h)
+	$(shell echo -n "" > $(OUTPUT)/tests/autoconf.sh)
+	@echo "$$do_autoconf" > $(OUTPUT)/Makefile.conf
