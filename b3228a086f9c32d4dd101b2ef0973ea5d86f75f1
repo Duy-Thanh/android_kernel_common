@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4afcf8eb_7a81f95a",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-18T16:24:03Z",
+      "side": 1,
+      "message": "I think we need to do this verification that we are coming from the `set_ownership` path because we don\u0027t want to drop references if we are trying to create mappings.",
+      "parentUuid": "80c0cdd9_06b123b6",
+      "range": {
+        "startLine": 822,
+        "startChar": 8,
+        "endLine": 822,
+        "endChar": 37
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e10961e_7c9d8ab6",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 3
@@ -60,6 +84,30 @@
       "writtenOn": "2022-11-17T15:24:22Z",
       "side": 1,
       "message": "Same thing, can we remove all host-specific references? It would be preferable to have a logic that \u0027just works\u0027 :)",
+      "range": {
+        "startLine": 829,
+        "startChar": 8,
+        "endLine": 829,
+        "endChar": 27
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db5b0ba_cdb4c750",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-18T16:24:03Z",
+      "side": 1,
+      "message": "I am afraid we cannot do the same for a guest but I might be wrong. My concern is that when we do `__pkvm_teardown_vm` and `reclaim_guest_pages` we invoke the reclaim_walker which looks at the encoded state of a page and I am afraid of breaking this. This also applies to the previous comment (why am I doing the check for S2_IDMAP) to detect if I am running with the host pgtables.",
+      "parentUuid": "9e10961e_7c9d8ab6",
       "range": {
         "startLine": 829,
         "startChar": 8,
