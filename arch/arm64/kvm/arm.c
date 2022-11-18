@@ -2274,6 +2274,12 @@ static int __init finalize_hyp_mode(void)
 		return 0;
 
 	/*
+	 * Modules can play an essential part in the pKVM protection. Do not
+	 * proceed with boot if they can't be found.
+	 */
+	BUG_ON(pkvm_load_early_modules());
+
+	/*
 	 * Exclude HYP sections from kmemleak so that they don't get peeked
 	 * at, which would end badly once inaccessible.
 	 */
