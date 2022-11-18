@@ -46,6 +46,8 @@ struct pkvm_el2_module_args {
 	void *hyp_hva_text;
 };
 
+int pkvm_load_early_modules(void);
+
 #ifdef MODULE
 int __pkvm_load_el2_module(struct pkvm_el2_module *mod, struct module *this);
 
