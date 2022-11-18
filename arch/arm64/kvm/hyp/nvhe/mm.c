@@ -105,8 +105,6 @@ void *__pkvm_alloc_module_va(u64 nr_pages)
 	unsigned long addr;
 	int ret;
 
-	/* TODO: block once deprivileged */
-
 	ret = pkvm_alloc_private_va_range(nr_pages << PAGE_SHIFT, &addr);
 
 	return ret ? NULL : (void *)addr;
@@ -115,8 +113,6 @@ void *__pkvm_alloc_module_va(u64 nr_pages)
 int __pkvm_map_module_page(u64 pfn, void *va, enum kvm_pgtable_prot prot)
 {
 	int ret;
-
-	/* TODO: block once deprivileged */
 
 	ret = __pkvm_host_donate_hyp(pfn, 1);
 	if (ret)

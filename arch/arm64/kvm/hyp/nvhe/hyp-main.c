@@ -1153,6 +1153,10 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__kvm_tlb_flush_vmid_ipa),
 	HANDLE_FUNC(__kvm_tlb_flush_vmid),
 	HANDLE_FUNC(__kvm_flush_cpu_context),
+	HANDLE_FUNC(__pkvm_alloc_module_va),
+	HANDLE_FUNC(__pkvm_map_module_page),
+	HANDLE_FUNC(__pkvm_init_module),
+	HANDLE_FUNC(__pkvm_register_hcall),
 	HANDLE_FUNC(__pkvm_prot_finalize),
 
 	HANDLE_FUNC(__pkvm_host_share_hyp),
@@ -1170,10 +1174,6 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__pkvm_vcpu_load),
 	HANDLE_FUNC(__pkvm_vcpu_put),
 	HANDLE_FUNC(__pkvm_vcpu_sync_state),
-	HANDLE_FUNC(__pkvm_alloc_module_va),
-	HANDLE_FUNC(__pkvm_map_module_page),
-	HANDLE_FUNC(__pkvm_init_module),
-	HANDLE_FUNC(__pkvm_register_hcall),
 };
 
 static void handle_host_hcall(struct kvm_cpu_context *host_ctxt)
