@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d898605_f434e51d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1864326
+      },
+      "writtenOn": "2022-11-18T00:38:25Z",
+      "side": 1,
+      "message": "Hi Todd, I was told by Mukesh, that this change is required to fix the failed presubmit verification. Let us know what is needed to batch both changes together:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2307779 \u003c-- this one\nhttps://android-review.googlesource.com/c/kernel/common/+/2297677 \u003c-- presubmit failed",
+      "revId": "ab34dfb23b3ab53c780d15218e27383891bff867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
