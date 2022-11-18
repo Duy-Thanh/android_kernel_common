@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a4d1161_9513f567",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-18T15:55:56Z",
+      "side": 1,
+      "message": "Good point, thanks for spotting this !",
+      "parentUuid": "af1e9ef5_1f739aa5",
+      "range": {
+        "startLine": 32,
+        "startChar": 34,
+        "endLine": 32,
+        "endChar": 51
+      },
+      "revId": "a4702516256dc6826906777523920d10df5a6306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48427ded_0f2acc97",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-17T15:01:28Z",
       "side": 1,
       "message": "This doesn\u0027t need to be re-assigned every time a guest is created I think, you could do it only once.",
+      "range": {
+        "startLine": 263,
+        "startChar": 1,
+        "endLine": 264,
+        "endChar": 66
+      },
+      "revId": "a4702516256dc6826906777523920d10df5a6306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "831c0e85_1fcdd2b4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-18T15:55:56Z",
+      "side": 1,
+      "message": "Done, I did this in the static declaration.",
+      "parentUuid": "48427ded_0f2acc97",
       "range": {
         "startLine": 263,
         "startChar": 1,
