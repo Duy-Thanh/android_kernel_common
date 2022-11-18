@@ -16,6 +16,24 @@
       "message": "Please update https://android-review.git.corp.google.com/c/kernel/common/+/2301520 as well.",
       "revId": "137df4afabdbcc19543336b3c0511e89ef024d54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a974bcd3_b2ee6a6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2022-11-18T00:36:38Z",
+      "side": 1,
+      "message": "Hello @Chuanghua.Zhao@mediatek.com, please help update 2301520, thanks.",
+      "parentUuid": "77b839b3_1695c631",
+      "revId": "137df4afabdbcc19543336b3c0511e89ef024d54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
