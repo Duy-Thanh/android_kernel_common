@@ -39,6 +39,30 @@
       },
       "revId": "8c146d893723980a79be78ab6a957a9ff44a7b3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9fd3bec_2f1d3db8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-18T11:14:34Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "031dc0fc_eb5be457",
+      "range": {
+        "startLine": 791,
+        "startChar": 1,
+        "endLine": 791,
+        "endChar": 24
+      },
+      "revId": "8c146d893723980a79be78ab6a957a9ff44a7b3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
