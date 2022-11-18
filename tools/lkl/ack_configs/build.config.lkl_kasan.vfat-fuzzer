@@ -1,0 +1,3 @@
+FUZZ_TARGET=vfat
+
+. ${ROOT_DIR}/common/tools/lkl/ack_configs/build.config.lkl_kasan.default-fuzzer

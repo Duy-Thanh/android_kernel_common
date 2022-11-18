@@ -1,0 +1,2 @@
+LKL_KASAN=1
+. ${ROOT_DIR}/common/tools/lkl/ack_configs/build.config.lkl.common

@@ -1,0 +1,2 @@
+# SPDX-License-Identifier: GPL-2.0
+virtio_blk-fuzzer-y += virtio_blk-fuzzer.o

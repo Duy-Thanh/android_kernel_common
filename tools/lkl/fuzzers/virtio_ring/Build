@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: GPL-2.0
+CFLAGS_virtio_ring-fuzzer.o += -O0
+
+virtio_ring-fuzzer-y += virtio_ring-fuzzer.o
+virtio_ring-fuzzer-y += log.o

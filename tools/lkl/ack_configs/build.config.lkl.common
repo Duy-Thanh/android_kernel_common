@@ -1,0 +1,36 @@
+KERNEL_DIR=common
+
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+
+# Enable debug symbols for fuzzing and crash reporting.
+KCFLAGS="${KCFLAGS} -g"
+
+unset IN_KERNEL_MODULES
+SKIP_CP_KERNEL_HDR=1
+
+# LKL needs ld for HERMETIC_TOOLCHAIN mode
+ADDITIONAL_HOST_TOOLS="ld zip"
+
+# Fuzzers needs C++ as well
+CXX=clang++
+
+OUT_DIR=$(readlink -m ${OUT_DIR:-${ROOT_DIR}/out${OUT_DIR_SUFFIX}/${BRANCH}})
+DIST_DIR=$(readlink -m ${DIST_DIR:-${OUT_DIR}/dist})
+
+INSTALL_PATH=${OUT_DIR}/${KERNEL_DIR}/tools/lkl
+MAKE_GOALS="vmlinux install"
+
+ARCH=lkl
+SUBARCH=x86
+LINUX_GCC_CROSS_COMPILE_PREBUILTS_HOST=${ROOT_DIR}/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8
+
+# Needed by scripts/Makefile.clang
+CLANG_TARGET_FLAGS_lkl=x86_64-linux-gnu
+
+OUT_LKL_BUILD_DIR=${OUT_DIR}/${KERNEL_DIR}
+
+# Generate extra LKL config headers on which LKL arch uapi includes depend on.
+PRE_DEFCONFIG_CMDS="mkdir -p ${OUT_LKL_BUILD_DIR} && \
+OUTPUT=${OUT_LKL_BUILD_DIR} make -C ${KERNEL_DIR}/tools/lkl \
+${OUT_LKL_BUILD_DIR}/tools/lkl/Makefile.conf \
+${OUT_LKL_BUILD_DIR}/tools/lkl/../../arch/lkl/include/generated/uapi/asm/config.h"

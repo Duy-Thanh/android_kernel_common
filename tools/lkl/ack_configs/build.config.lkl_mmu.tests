@@ -1,0 +1,28 @@
+. ${ROOT_DIR}/common/tools/lkl/ack_configs/build.config.lkl.common
+
+DEFCONFIG=mmu_defconfig
+LKL_MMU_ENABLED=1
+
+POST_KERNEL_BUILD_CMDS="
+OUTPUT=${OUT_LKL_BUILD_DIR} \
+make -C ${KERNEL_DIR}/tools/lkl \
+${OUT_LKL_BUILD_DIR}/tools/lkl/tests/disk \
+${OUT_LKL_BUILD_DIR}/tools/lkl/tests/boot \
+V=${LKL_VERBOSE_BUILD}"
+
+FILES="
+tools/lkl/lib/liblkl.so
+tools/lkl/liblkl.a
+tools/lkl/tests/autoconf.sh
+tools/lkl/tests/boot
+tools/lkl/tests/disk
+"
+
+DIST_CMDS="cp -r ${INSTALL_PATH}/include ${DIST_DIR}/ && \
+cp ${ROOT_DIR}/${KERNEL_DIR}/tools/lkl/include/*.h ${DIST_DIR}/include/ && \
+
+cp ${ROOT_DIR}/${KERNEL_DIR}/tools/lkl/tests/boot.sh ${DIST_DIR}/ && \
+cp ${ROOT_DIR}/${KERNEL_DIR}/tools/lkl/tests/disk.sh ${DIST_DIR}/ && \
+cp ${ROOT_DIR}/${KERNEL_DIR}/tools/lkl/tests/run.py ${DIST_DIR}/ && \
+cp ${ROOT_DIR}/${KERNEL_DIR}/tools/lkl/tests/tap13.py ${DIST_DIR}/ && \
+cp ${ROOT_DIR}/${KERNEL_DIR}/tools/lkl/tests/test.sh ${DIST_DIR}/"
