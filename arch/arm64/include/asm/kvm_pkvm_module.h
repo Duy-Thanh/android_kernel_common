@@ -39,6 +39,8 @@ struct pkvm_el2_module {
 	int (*init)(const struct pkvm_module_ops *ops);
 };
 
+int pkvm_load_early_modules(void);
+
 #ifdef MODULE
 int __pkvm_load_el2_module(struct pkvm_el2_module *mod, struct module *this,
 			   unsigned long *token);
