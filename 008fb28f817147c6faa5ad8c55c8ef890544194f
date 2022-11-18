@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527d2a5c_7b634cf9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-18T17:30:51Z",
+      "side": 1,
+      "message": "Please add a \"Fixes:\" tag that cites the patch that introduced the issue. If it wasn\u0027t introduced by an \"ANDROID:\" patch, then shouldn\u0027t this be submitted upstream\u0027?",
+      "revId": "008fb28f817147c6faa5ad8c55c8ef890544194f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
