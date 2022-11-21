@@ -52,6 +52,24 @@
       "parentUuid": "b36eebbb_fb0e0431",
       "revId": "f5b7aaefd01c4cb7854c4cd5b79eb65c6e921bed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76a69c1d_bb1262b3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-21T17:53:41Z",
+      "side": 1,
+      "message": "Because the IOMMU layer doesn\u0027t know about IOMMU drivers.\nAn IOMMU driver will register itself and provide its ops through pointer to functions that can be NULL.\nso if one of these pointers is missing the IOMMU layer treats the operation as success.",
+      "parentUuid": "0aab3b14_6ca476e0",
+      "revId": "f5b7aaefd01c4cb7854c4cd5b79eb65c6e921bed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
