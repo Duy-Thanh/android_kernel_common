@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cff57c1_90d34369",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-21T16:22:56Z",
+      "side": 1,
+      "message": "Note that this will lead to unnecessary page table allocations (including page zeroing) on almost every page fault.",
+      "range": {
+        "startLine": 439,
+        "startChar": 1,
+        "endLine": 439,
+        "endChar": 35
+      },
+      "revId": "8498d6286969ea7d89d425af7c179ea0113d5324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03cdd156_47521228",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-21T16:22:56Z",
+      "side": 1,
+      "message": "AFAICS, in the unmap_region() path, nothing takes this lock:\n\n - Unless unmap_page_range() encounters THP entries, it only takes PTE locks.\n - free_pgtables() doesn\u0027t take any spinlocks.\n\nSo unmap_region() can free the page table under us even after we\u0027ve gone through pmd_spinlock(), pmd_spinlock() doesn\u0027t provide any protection.",
+      "range": {
+        "startLine": 458,
+        "startChar": 1,
+        "endLine": 458,
+        "endChar": 51
+      },
+      "revId": "8498d6286969ea7d89d425af7c179ea0113d5324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aadcd4d_9d662792",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2674,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-21T16:22:56Z",
+      "side": 1,
+      "message": "huge collapse should be happening with everything else locked out, it should have mmap lock held exclusively and be under vm_write_begin(), triggering a bailout on vma_has_changed().\nFrom what I can tell, collapse_pte_mapped_thp() and retract_page_tables() don\u0027t currently use vm_write_begin() (only collapse_huge_page() uses it) but that should be addressed in the THP code, not here.\n\n(But if you want to keep this check here additionally in case something\u0027s wrong on the THP end, and document that this is a redundant safety check, I\u0027m not opposed to that.)",
+      "range": {
+        "startLine": 2664,
+        "startChar": 0,
+        "endLine": 2674,
+        "endChar": 6
+      },
+      "revId": "8498d6286969ea7d89d425af7c179ea0113d5324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32d487d9_f910c94f",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3905,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-21T16:22:56Z",
+      "side": 1,
+      "message": "For SPF (at least the current version in this tree), this code can only run after we\u0027ve already checked in ___handle_speculative_fault() that the PMD is a normal PMD:\n\n```\n\t/*\n\t * pmd_none could mean that a hugepage collapse is in progress\n\t * in our back as collapse_huge_page() mark it before\n\t * invalidating the pte (which is done once the IPI is catched\n\t * by all CPU and we have interrupt disabled).\n\t * For this reason we cannot handle THP in a speculative way since we\n\t * can\u0027t safely indentify an in progress collapse operation done in our\n\t * back on that PMD.\n\t * Regarding the order of the following checks, see comment in\n\t * pmd_devmap_trans_unstable()\n\t */\n\tif (unlikely(pmd_devmap(vmf.orig_pmd) ||\n\t\t     pmd_none(vmf.orig_pmd) || pmd_trans_huge(vmf.orig_pmd) ||\n\t\t     is_swap_pmd(vmf.orig_pmd)))\n\t\tgoto out_walk;\n```\n\nWhich means it\u0027s stable unless someone does munmap() or equivalent, which would change the sequence count.\n\nSo the easier fix here would probably to skip pte_alloc() if SPF is active because we know that either the page table is still there or the sequence count changed?",
+      "range": {
+        "startLine": 3903,
+        "startChar": 0,
+        "endLine": 3905,
+        "endChar": 61
+      },
+      "revId": "8498d6286969ea7d89d425af7c179ea0113d5324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
