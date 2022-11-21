@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc490e4d_ea591e2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-21T16:22:59Z",
+      "side": 1,
+      "message": "nit: s/userspace/userfault/?",
+      "range": {
+        "startLine": 7,
+        "startChar": 57,
+        "endLine": 7,
+        "endChar": 66
+      },
+      "revId": "74fcaac8c010ee5b1a77cfcfa0fc25b9d5857d60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
