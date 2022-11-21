@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/259901921",
       "revId": "9a85037e02f3ad6a9e62f1f29a61a47a9edf0fdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dbe3e41_76307def",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951960
+      },
+      "writtenOn": "2022-11-21T09:51:51Z",
+      "side": 1,
+      "message": "Hi Chinwen Chang, please help to add \"Bug: 259901921\" in the commit message.",
+      "revId": "9a85037e02f3ad6a9e62f1f29a61a47a9edf0fdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
