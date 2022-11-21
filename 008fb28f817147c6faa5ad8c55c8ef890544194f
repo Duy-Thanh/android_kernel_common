@@ -16,6 +16,29 @@
       "message": "Please add a \"Fixes:\" tag that cites the patch that introduced the issue. If it wasn\u0027t introduced by an \"ANDROID:\" patch, then shouldn\u0027t this be submitted upstream\u0027?",
       "revId": "008fb28f817147c6faa5ad8c55c8ef890544194f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe5e62e_56c9ce0b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2624,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-21T10:32:50Z",
+      "side": 1,
+      "message": "Can we please that that away from the fast path?",
+      "range": {
+        "startLine": 2624,
+        "startChar": 1,
+        "endLine": 2624,
+        "endChar": 69
+      },
+      "revId": "008fb28f817147c6faa5ad8c55c8ef890544194f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
