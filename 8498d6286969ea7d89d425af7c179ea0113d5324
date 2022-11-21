@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "133c0b66_447dc509",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2674,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-21T20:18:37Z",
+      "side": 1,
+      "message": "Sorry, missed that. I pushed additional patch https://android-review.git.corp.google.com/c/kernel/common/+/2311166",
+      "parentUuid": "b6b0d602_4e70830d",
+      "range": {
+        "startLine": 2664,
+        "startChar": 0,
+        "endLine": 2674,
+        "endChar": 6
+      },
+      "revId": "8498d6286969ea7d89d425af7c179ea0113d5324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32d487d9_f910c94f",
         "filename": "mm/memory.c",
         "patchSetId": 1
