@@ -16,6 +16,24 @@
       "message": "Q: This logic feels a bit strange:\nIf the driver doesn\u0027t provide a resume callback \u003d\u003e dev-\u003epowered \u003d 1 (So I imagine it is always powered on)\nIf the driver doesn\u0027t provide a suspend callback \u003d\u003e dev-\u003epowered \u003d 0\nWhy don\u0027t we modify the state of dev-\u003epowered in the suspend/resume callbacks ?",
       "revId": "f5b7aaefd01c4cb7854c4cd5b79eb65c6e921bed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b36eebbb_fb0e0431",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T17:25:25Z",
+      "side": 1,
+      "message": "The host is the one in charge of power here. The callbacks are just for the driver to react to power changes. Maybe the callbacks should be called `on_resume` and `on_suspend` to make it clearer?\n\nAnother thing to note is that the `dev-\u003epowered` is really just a boolean to identify which devices should be updated when a page changes ownership. So `resume` is an opportunity for the driver to return zero if the device was found ready or non-zero otherwise. In the latter case EL2 will ignore a powered IOMMU.",
+      "parentUuid": "0aab3b14_6ca476e0",
+      "revId": "f5b7aaefd01c4cb7854c4cd5b79eb65c6e921bed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
