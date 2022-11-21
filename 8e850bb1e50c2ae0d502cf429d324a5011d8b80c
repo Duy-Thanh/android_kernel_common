@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bced69_20b9ecd7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-21T16:23:01Z",
+      "side": 1,
+      "message": "I think __do_fault() still has an unprotected pmd_none() check?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "8e850bb1e50c2ae0d502cf429d324a5011d8b80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b97ddafe_adcfd480",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4235,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-21T16:23:01Z",
+      "side": 1,
+      "message": "Putting this in a block that\u0027s conditional on pmd_none() means you won\u0027t catch cases anymore where some other thread concurrently inserted a THP before we reached the pmd_none() check.\n\nI think you\u0027ll need to add a separate conditional \"if not speculative\" block here.",
+      "range": {
+        "startLine": 4233,
+        "startChar": 0,
+        "endLine": 4235,
+        "endChar": 12
+      },
+      "revId": "8e850bb1e50c2ae0d502cf429d324a5011d8b80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
