@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae56cc3f_c10148b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-21T06:52:53Z",
+      "side": 1,
+      "message": "In the new version even if vma-\u003evm_flags are changed we still bail out.",
+      "parentUuid": "852442c8_ed35a2c6",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "66f2c1212c6dfd6d16cdac5633f0ace5c301e307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ed1721d_894acb46",
         "filename": "mm/memory.c",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-17T21:14:53Z",
       "side": 1,
       "message": "actually, does this maybe also need a check for VM_UFFD_MINOR? and similarly to my other comment, calls to userfaultfd_minor() only look at the VMA - though if you get rid of the `allow_file_spec_access` code, that won\u0027t be a problem",
+      "range": {
+        "startLine": 4961,
+        "startChar": 49,
+        "endLine": 4961,
+        "endChar": 59
+      },
+      "revId": "66f2c1212c6dfd6d16cdac5633f0ace5c301e307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90724cca_b0272654",
+        "filename": "mm/memory.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4961,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-21T06:52:53Z",
+      "side": 1,
+      "message": "Added VM_UFFD_MINOR.",
+      "parentUuid": "6ed1721d_894acb46",
       "range": {
         "startLine": 4961,
         "startChar": 49,
