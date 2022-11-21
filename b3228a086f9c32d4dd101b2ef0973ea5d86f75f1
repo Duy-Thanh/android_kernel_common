@@ -164,6 +164,30 @@
       },
       "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02993df4_d820a075",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-21T16:36:09Z",
+      "side": 1,
+      "message": "In that case I can try to remove this (and the above checks) and give it a spin. Thanks !",
+      "parentUuid": "8b298576_da97f843",
+      "range": {
+        "startLine": 829,
+        "startChar": 8,
+        "endLine": 829,
+        "endChar": 27
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
