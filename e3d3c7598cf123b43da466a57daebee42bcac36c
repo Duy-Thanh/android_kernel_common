@@ -16,6 +16,24 @@
       "message": "break up into one-patch-per-hook please and provide the requested information.",
       "revId": "e3d3c7598cf123b43da466a57daebee42bcac36c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b325b8cd_0f599466",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975062
+      },
+      "writtenOn": "2022-11-21T14:18:20Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nExynos mobile scheduler of android13-5.15 is applied to android13-5.10 as well.\nSince we have ported same scheduler from android13-5.15, we also need to apply following vendor hooks which are already used in android13-5.15 for making different decision for optimization on exynos mobile devices.\n\nThese vendor hooks are already included in android mainline. \nhttps://android-review.googlesource.com/c/kernel/common/+/1506450\n\nWe cherry picked mainline patch and trimmed it with only required hooks (4 out of 13) and kept same change id, as @tkjos@google.com mentioned in https://android-review.googlesource.com/c/kernel/common/+/2264881.\n\nSo, we abandoned https://android-review.googlesource.com/c/kernel/common/+/2264881 and raised this patch with same change id as original commit in mainline.",
+      "parentUuid": "498a8810_801417a0",
+      "revId": "e3d3c7598cf123b43da466a57daebee42bcac36c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
