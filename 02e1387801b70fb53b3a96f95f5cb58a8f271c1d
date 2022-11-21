@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "606f2234_fa736df4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-21T09:47:36Z",
+      "side": 1,
+      "message": "This should not have been merged as FROMGIT as it is _not_ in a maintainers tree and I don\u0027t think it has even been posted to the list. It\u0027s a hugely invasive change and I really not happy that we\u0027ve taken this in without any external review.\n\nIt\u0027s also not immediately clear to me that we couldn\u0027t move a bunch of this out into a vendor hook, especially since the bulk of the workaround appears to be indirected through a new set of DMA ops.\n\nCan we revert it, please?",
+      "revId": "02e1387801b70fb53b3a96f95f5cb58a8f271c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
