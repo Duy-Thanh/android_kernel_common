@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dafb9d3_8905151a",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-21T17:47:42Z",
+      "side": 1,
+      "message": "I dropped it, thanks !",
+      "parentUuid": "bedbe5f4_468d0b3d",
+      "range": {
+        "startLine": 815,
+        "startChar": 4,
+        "endLine": 817,
+        "endChar": 15
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80c0cdd9_06b123b6",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "We\u0027re in the TABLE_POST walker here, so if we find a table that doesn\u0027t have any counted PTEs in, why should we keep it even if we\u0027re out of the set_ownership path?",
       "parentUuid": "4afcf8eb_7a81f95a",
+      "range": {
+        "startLine": 822,
+        "startChar": 8,
+        "endLine": 822,
+        "endChar": 37
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "516312eb_4421671f",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-21T17:47:42Z",
+      "side": 1,
+      "message": "Right, I don\u0027t think we need to keep it. I will try without this verification.",
+      "parentUuid": "eee0536f_05805146",
       "range": {
         "startLine": 822,
         "startChar": 8,
@@ -180,6 +228,30 @@
       "side": 1,
       "message": "In that case I can try to remove this (and the above checks) and give it a spin. Thanks !",
       "parentUuid": "8b298576_da97f843",
+      "range": {
+        "startLine": 829,
+        "startChar": 8,
+        "endLine": 829,
+        "endChar": 27
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "945502ed_b259f754",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-21T17:47:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02993df4_d820a075",
       "range": {
         "startLine": 829,
         "startChar": 8,
