@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84112dfa_02ce2df9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T16:50:46Z",
+      "side": 1,
+      "message": "nit: missing empty line above",
+      "range": {
+        "startLine": 580,
+        "startChar": 0,
+        "endLine": 580,
+        "endChar": 58
+      },
+      "revId": "a03997c1d2958b710f825ba916ea7ccd481a9769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
