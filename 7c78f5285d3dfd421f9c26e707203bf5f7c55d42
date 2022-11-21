@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8652e87_38f3f44f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-21T08:06:59Z",
+      "side": 1,
+      "message": "need a valid name, you can not use fake ones, sorry.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 56
+      },
+      "revId": "7c78f5285d3dfd421f9c26e707203bf5f7c55d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
