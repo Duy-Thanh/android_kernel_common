@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eee0536f_05805146",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-21T15:22:38Z",
+      "side": 1,
+      "message": "We\u0027re in the TABLE_POST walker here, so if we find a table that doesn\u0027t have any counted PTEs in, why should we keep it even if we\u0027re out of the set_ownership path?",
+      "parentUuid": "4afcf8eb_7a81f95a",
+      "range": {
+        "startLine": 822,
+        "startChar": 8,
+        "endLine": 822,
+        "endChar": 37
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e10961e_7c9d8ab6",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 3
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "I am afraid we cannot do the same for a guest but I might be wrong. My concern is that when we do `__pkvm_teardown_vm` and `reclaim_guest_pages` we invoke the reclaim_walker which looks at the encoded state of a page and I am afraid of breaking this. This also applies to the previous comment (why am I doing the check for S2_IDMAP) to detect if I am running with the host pgtables.",
       "parentUuid": "9e10961e_7c9d8ab6",
+      "range": {
+        "startLine": 829,
+        "startChar": 8,
+        "endLine": 829,
+        "endChar": 27
+      },
+      "revId": "b3228a086f9c32d4dd101b2ef0973ea5d86f75f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b298576_da97f843",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-21T15:22:38Z",
+      "side": 1,
+      "message": "Right, but again, if there are no PTEs left that are counted in the table, why should we keep it around? IOW, it would be a bug to have a table without counted PTEs that cannot be freed, so it feels like all these extra checks are not really adding any value no?",
+      "parentUuid": "3db5b0ba_cdb4c750",
       "range": {
         "startLine": 829,
         "startChar": 8,
