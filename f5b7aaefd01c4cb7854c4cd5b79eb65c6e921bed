@@ -70,6 +70,24 @@
       "parentUuid": "0aab3b14_6ca476e0",
       "revId": "f5b7aaefd01c4cb7854c4cd5b79eb65c6e921bed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3a0a97f_430f1db9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-21T18:04:19Z",
+      "side": 1,
+      "message": "Thanks for the explanation, now I get it",
+      "parentUuid": "76a69c1d_bb1262b3",
+      "revId": "f5b7aaefd01c4cb7854c4cd5b79eb65c6e921bed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
