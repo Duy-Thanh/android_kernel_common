@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aab3b14_6ca476e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-21T16:56:38Z",
+      "side": 1,
+      "message": "Q: This logic feels a bit strange:\nIf the driver doesn\u0027t provide a resume callback \u003d\u003e dev-\u003epowered \u003d 1 (So I imagine it is always powered on)\nIf the driver doesn\u0027t provide a suspend callback \u003d\u003e dev-\u003epowered \u003d 0\nWhy don\u0027t we modify the state of dev-\u003epowered in the suspend/resume callbacks ?",
+      "revId": "f5b7aaefd01c4cb7854c4cd5b79eb65c6e921bed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
