@@ -46,6 +46,30 @@
       },
       "revId": "2f24eb78c5c06006069f89808d55a28a927a648f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22e8e0d6_bf186aa2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-22T13:28:34Z",
+      "side": 1,
+      "message": "Thanks a lot for checking -- my test clearly failed to exercise any of this. Cherry-picked as aosp/2312026.",
+      "parentUuid": "be0b8cfd_3754149b",
+      "range": {
+        "startLine": 125,
+        "startChar": 42,
+        "endLine": 125,
+        "endChar": 63
+      },
+      "revId": "2f24eb78c5c06006069f89808d55a28a927a648f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
