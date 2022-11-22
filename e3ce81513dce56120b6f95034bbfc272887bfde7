@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/260052298",
       "revId": "e3ce81513dce56120b6f95034bbfc272887bfde7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f4a257_30346cdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951960
+      },
+      "writtenOn": "2022-11-22T09:48:36Z",
+      "side": 1,
+      "message": "Hi Po-Wen Kao, please help to add \"Bug: 260052298\" in the commit message.",
+      "revId": "e3ce81513dce56120b6f95034bbfc272887bfde7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
