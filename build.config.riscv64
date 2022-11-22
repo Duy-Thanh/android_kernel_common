@@ -1,0 +1,17 @@
+ARCH=riscv
+MAKE_GOALS="
+Image
+modules
+"
+
+FILES="
+arch/riscv64/boot/Image
+vmlinux
+System.map
+vmlinux.symvers
+modules.builtin
+modules.builtin.modinfo
+"
+
+# FIXME: Update when there is a stable NDK
+#NDK_TRIPLE=riscv64-linux-android
