@@ -16,6 +16,23 @@
       "message": "Not an expert in this code but don\u0027t you need lock_device_hotplug before calling alloc_swapdev_block?",
       "revId": "ac7f97cc67caa2dd024dd52391e07913604a084c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a06460b5_2c00afa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-22T20:22:15Z",
+      "side": 1,
+      "message": "checkpatch issues:\n```\nSummary:\n\nERROR:CODE_INDENT: code indent should use tabs where possible\n#91: FILE: include/trace/hooks/bl_hib.h:45:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#92: FILE: include/trace/hooks/bl_hib.h:46:\n```\n\nPlease fix (and in the future, run checkpatch before uploading patches)",
+      "revId": "ac7f97cc67caa2dd024dd52391e07913604a084c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
