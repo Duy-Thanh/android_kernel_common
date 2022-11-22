@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "297feca0_66abff60",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-22T17:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "232de6ef_62119b66",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 23
+      },
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f1bdaf4_e0058fd7",
@@ -75,6 +99,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3067538_b6e16f08",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-22T17:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f1bdaf4_e0058fd7",
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f490d250_f722e90d",
@@ -88,6 +130,24 @@
       "writtenOn": "2022-05-17T14:30:06Z",
       "side": 1,
       "message": "Vendor hook for encrypt_page to be called",
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29ce2c93_5388dc86",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-22T17:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f490d250_f722e90d",
       "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -111,6 +171,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "022f0dcd_17282f0a",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-22T17:08:30Z",
+      "side": 1,
+      "message": "what does this mean?",
+      "parentUuid": "b6b18c88_61859718",
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d7598bc_45be8a7b",
         "filename": "kernel/power/swap.c",
         "patchSetId": 1
@@ -122,6 +200,24 @@
       "writtenOn": "2022-05-17T14:30:06Z",
       "side": 1,
       "message": "Vendor hook to be implanted here, to allocate swapdev block",
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "077925d8_ae836d7b",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-22T17:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d7598bc_45be8a7b",
       "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -139,6 +235,24 @@
       "writtenOn": "2022-05-17T14:30:06Z",
       "side": 1,
       "message": "Vendor hooks to be called for init_aes_encrypt",
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e869640f_6b08c84d",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 964,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-22T17:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6371e201_84efee62",
       "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
