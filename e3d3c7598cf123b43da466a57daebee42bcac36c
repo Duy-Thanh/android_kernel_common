@@ -70,6 +70,24 @@
       "parentUuid": "0ad18949_154e250b",
       "revId": "e3d3c7598cf123b43da466a57daebee42bcac36c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "736c27d8_cf2dfc4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-22T16:42:15Z",
+      "side": 1,
+      "message": "Please go ahead and do what Greg asks. Cite the original patch in the commit message for the ones that have a new Change-Id.\n\nAlso, since this is now at least the 2nd year of this feature, please be more descriptive of what it is doing.",
+      "parentUuid": "2380af16_63a88f45",
+      "revId": "e3d3c7598cf123b43da466a57daebee42bcac36c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
