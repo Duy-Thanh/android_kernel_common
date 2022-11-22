@@ -10,6 +10,8 @@
 #include <trace/hooks/vendor_hooks.h>
 
 struct block_device;
+struct qcom_crypto_params;
+struct hib_bio_batch;
 
 DECLARE_HOOK(android_vh_check_hibernation_swap,
 	TP_PROTO(struct block_device *resume_block, bool *hib_swap),
@@ -22,6 +24,26 @@ DECLARE_HOOK(android_vh_save_cpu_resume,
 DECLARE_HOOK(android_vh_save_hib_resume_bdev,
 	TP_PROTO(struct block_device *hib_resume_bdev),
 	TP_ARGS(hib_resume_bdev));
+
+DECLARE_HOOK(android_vh_encrypt_page,
+	TP_PROTO(void *buf),
+	TP_ARGS(buf));
+
+DECLARE_HOOK(android_vh_populate_secure_params,
+	TP_PROTO(struct qcom_crypto_params *params),
+	TP_ARGS(params));
+
+DECLARE_HOOK(android_vh_init_aes_encrypt,
+	TP_PROTO(int *error),
+	TP_ARGS(error));
+
+DECLARE_HOOK(android_vh_qcom_secure_hibernation_enabled,
+	TP_PROTO(int *status),
+	TP_ARGS(status));
+
+DECLARE_HOOK(android_vh_post_image_save,
+        TP_PROTO(struct hib_bio_batch *hb, unsigned short root_swap),
+        TP_ARGS(hb, root_swap));
 
 #endif /* _TRACE_HOOK_S2D_H */
 /* This part must be outside protection */

@@ -2428,3 +2428,10 @@
   xsk_tx_peek_desc
   xsk_tx_release
   xsk_uses_need_wakeup
+  snapshot_get_image_size
+  __tracepoint_android_vh_encrypt_page
+  __tracepoint_android_vh_init_aes_encrypt
+  __tracepoint_android_vh_qcom_secure_hibernation_enabled
+  write_page
+  alloc_swapdev_block
+  __tracepoint_android_vh_post_image_save
