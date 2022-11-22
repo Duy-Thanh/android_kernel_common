@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124a3ab0_16208475",
+        "filename": "mm/mremap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-22T18:07:14Z",
+      "side": 1,
+      "message": "This doesn\u0027t address the problem I had in mind. I think you also have to revert the change that added vma-\u003eanon_vma \u003d NULL; in unlink_anon_vmas().\nYou can have a situation where thread A starts doing an SPF walk through VMA A and gets past the point of no return (where the page table lock is held), then thread B merges VMA A into an adjacent VMA B, which causes VMA A to be removed from the VMA tree and unlinked from the anon_vma.\nThe anon_vma is guaranteed to still be there; VMA B must be associated with the same anon_vma, otherwise the merge wouldn\u0027t have been possible, and VMA B still holds a reference to the anon_vma.\nBut VMA A suddenly isn\u0027t pointing to it anymore, the -\u003eanon_vma pointer was nulled out by unlink_anon_vmas().",
+      "range": {
+        "startLine": 686,
+        "startChar": 0,
+        "endLine": 694,
+        "endChar": 6
+      },
+      "revId": "d02eef982a338bb9e4fb369e4aacbc4bfa3d15e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
