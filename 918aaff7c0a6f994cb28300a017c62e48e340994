@@ -16,6 +16,24 @@
       "message": "Are you going to change the test to accept \u003dy or \u003dm?",
       "revId": "918aaff7c0a6f994cb28300a017c62e48e340994",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fe47bf6_a550f4f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-11-22T00:02:44Z",
+      "side": 1,
+      "message": "Probably a better solution. L2TP is for legacy VPNs, I doubt it is used by all vertical configurations.",
+      "parentUuid": "9342a260_0e17ecce",
+      "revId": "918aaff7c0a6f994cb28300a017c62e48e340994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
