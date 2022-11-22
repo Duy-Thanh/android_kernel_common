@@ -16,6 +16,24 @@
       "message": "Build tested only, needs more testing.",
       "revId": "45c5e69bd1bfc20b8491ebec68e9c74dacc064a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7cff80_3858de6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-22T17:47:55Z",
+      "side": 1,
+      "message": "I\u0027ve tested this with Trusty and the FFA selftests we have.",
+      "parentUuid": "60e2f344_467909ff",
+      "revId": "45c5e69bd1bfc20b8491ebec68e9c74dacc064a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
