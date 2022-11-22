@@ -34,6 +34,24 @@
       "parentUuid": "9342a260_0e17ecce",
       "revId": "918aaff7c0a6f994cb28300a017c62e48e340994",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7793e3ac_a246ac79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-11-22T00:23:37Z",
+      "side": 1,
+      "message": "Thanks, I couldn\u0027t find the test code so I submitted the revert to unblock Paul. Thanks Alistair pointing out the pieces to this puzzle. Looks like there will be issue with other configs too which have been converted to modules like PPP; so either I need to find a way to accept both \u003dy or \u003dm OR just remove these configs from the required config altogether.\n\nI\u0027ll abandon this change.",
+      "parentUuid": "6fe47bf6_a550f4f6",
+      "revId": "918aaff7c0a6f994cb28300a017c62e48e340994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
