@@ -22,6 +22,30 @@
       },
       "revId": "2f24eb78c5c06006069f89808d55a28a927a648f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be0b8cfd_3754149b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-22T12:28:06Z",
+      "side": 1,
+      "message": "Yes, it\u0027s still needed. I guess you can either squash it here or have it as a cherry-pick from android13-5.15 depending on whether we want to include that for upstream.",
+      "parentUuid": "5de4c63c_2f49ac7e",
+      "range": {
+        "startLine": 125,
+        "startChar": 42,
+        "endLine": 125,
+        "endChar": 63
+      },
+      "revId": "2f24eb78c5c06006069f89808d55a28a927a648f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
