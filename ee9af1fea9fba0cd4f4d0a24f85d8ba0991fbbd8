@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8be658e_bf8c49e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-22T18:08:53Z",
+      "side": 1,
+      "message": "The mempolicy is also needed for stuff like do_anonymous_page(), not just the do_numa_page() path. I think you have to either prevent building SPF\u0026\u0026NUMA or add the mempolicy refcounting stuff from 5.10.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 68
+      },
+      "revId": "ee9af1fea9fba0cd4f4d0a24f85d8ba0991fbbd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
