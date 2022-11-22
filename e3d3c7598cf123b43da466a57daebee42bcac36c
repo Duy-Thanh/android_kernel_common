@@ -52,6 +52,24 @@
       "parentUuid": "b325b8cd_0f599466",
       "revId": "e3d3c7598cf123b43da466a57daebee42bcac36c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2380af16_63a88f45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-22T10:30:59Z",
+      "side": 1,
+      "message": "Ok, will defer to Todd here.",
+      "parentUuid": "0ad18949_154e250b",
+      "revId": "e3d3c7598cf123b43da466a57daebee42bcac36c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
