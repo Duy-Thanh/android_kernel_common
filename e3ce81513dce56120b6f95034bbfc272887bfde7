@@ -33,6 +33,24 @@
       "message": "Hi Po-Wen Kao, please help to add \"Bug: 260052298\" in the commit message.",
       "revId": "e3ce81513dce56120b6f95034bbfc272887bfde7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "114e6bd2_10bb1330",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885698
+      },
+      "writtenOn": "2022-11-23T05:20:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57f4a257_30346cdb",
+      "revId": "e3ce81513dce56120b6f95034bbfc272887bfde7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
