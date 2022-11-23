@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a47c32b_80aac98f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-11-23T09:41:00Z",
+      "side": 1,
+      "message": "Are you referring to the Encrypted Hibernation series of patches as in https://lwn.net/Articles/913800/?\n\nThis seems to be not yet merged to upstream.\nSorry, are you referring to any other implementation?",
+      "parentUuid": "8754ee12_f3c369bb",
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ea838ee_cc572ed6",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ce66f18_a5bbb433",
+        "filename": "kernel/power/snapshot.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2081,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-11-23T09:41:00Z",
+      "side": 1,
+      "message": "HI Greg,\nThe vendor implementation has an Authentiaction tag assiciated with each encryped page. This is needed by the vendor hooks implementation to know the image size for making the required allocations for storing the authentication tags.\n\nCan i make it EXPORT_SYMBOL_GPL?",
+      "parentUuid": "9ea838ee_cc572ed6",
+      "range": {
+        "startLine": 2081,
+        "startChar": 4,
+        "endLine": 2081,
+        "endChar": 5
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "768b3fb3_e87de956",
         "filename": "kernel/power/swap.c",
         "patchSetId": 6
@@ -54,6 +96,30 @@
       "writtenOn": "2022-11-23T07:32:25Z",
       "side": 1,
       "message": "should not be exported.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 39
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d3b2929_bc903520",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-11-23T09:41:00Z",
+      "side": 1,
+      "message": "We have an implementation where the inputs for decryption needs to be passed to the bootloader for bootloader-based hibernation.\nFor this, we are saving the decryption parameters in the swap slots following the snapshot image.",
+      "parentUuid": "768b3fb3_e87de956",
       "range": {
         "startLine": 190,
         "startChar": 0,
