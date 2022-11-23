@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d388de7_38906444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-23T11:37:08Z",
+      "side": 1,
+      "message": "Yes, why not use that instead?",
+      "parentUuid": "7a47c32b_80aac98f",
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea838ee_cc572ed6",
         "filename": "kernel/power/snapshot.c",
         "patchSetId": 6
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "HI Greg,\nThe vendor implementation has an Authentiaction tag assiciated with each encryped page. This is needed by the vendor hooks implementation to know the image size for making the required allocations for storing the authentication tags.\n\nCan i make it EXPORT_SYMBOL_GPL?",
       "parentUuid": "9ea838ee_cc572ed6",
+      "range": {
+        "startLine": 2081,
+        "startChar": 4,
+        "endLine": 2081,
+        "endChar": 5
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91297433_496601c0",
+        "filename": "kernel/power/snapshot.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2081,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-23T11:37:08Z",
+      "side": 1,
+      "message": "All new exports HAVE to have `_GPL`, so that\u0027s not the question here.\n\nThe issue is that no driver should be doing this.  So if you really need these, we can add them to a separate namespace just for encrypted images.",
+      "parentUuid": "2ce66f18_a5bbb433",
       "range": {
         "startLine": 2081,
         "startChar": 4,
