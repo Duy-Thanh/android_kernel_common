@@ -16,6 +16,24 @@
       "message": "The commit message and XML update do not match.\n\nIt\u0027s possible the symbols have already been added by another partner in which case the ABI XML file change can be dropped from this commit.",
       "revId": "26f46dd78a4d6692ebd079fa06ff3004074d5d8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4fc3032_c4c348aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878599
+      },
+      "writtenOn": "2022-11-23T12:06:05Z",
+      "side": 1,
+      "message": "I have compiled from tip. \n\nCommit message is not coming with build_abi.sh. So i have prepared it based on previous patch sets.\n\nCan you please share what needs to be changed?",
+      "parentUuid": "a08f0f1f_366f7f3b",
+      "revId": "26f46dd78a4d6692ebd079fa06ff3004074d5d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
