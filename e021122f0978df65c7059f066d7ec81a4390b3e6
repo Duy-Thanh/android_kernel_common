@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ade92e_7a66764d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-23T16:07:57Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 364,
+        "startChar": 21,
+        "endLine": 364,
+        "endChar": 22
+      },
+      "revId": "e021122f0978df65c7059f066d7ec81a4390b3e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90d0e58_cdc0c232",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-23T16:07:57Z",
+      "side": 1,
+      "message": "alignment",
+      "range": {
+        "startLine": 364,
+        "startChar": 2,
+        "endLine": 364,
+        "endChar": 5
+      },
+      "revId": "e021122f0978df65c7059f066d7ec81a4390b3e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
