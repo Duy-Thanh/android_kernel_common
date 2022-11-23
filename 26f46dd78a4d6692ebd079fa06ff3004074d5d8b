@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a08f0f1f_366f7f3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-11-23T11:56:05Z",
+      "side": 1,
+      "message": "The commit message and XML update do not match.\n\nIt\u0027s possible the symbols have already been added by another partner in which case the ABI XML file change can be dropped from this commit.",
+      "revId": "26f46dd78a4d6692ebd079fa06ff3004074d5d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
