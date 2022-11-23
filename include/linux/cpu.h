@@ -89,6 +89,7 @@ extern ssize_t arch_cpu_release(const char *, size_t);
 
 #ifdef CONFIG_SMP
 extern bool cpuhp_tasks_frozen;
+extern int cpu_hotplug_disabled;
 int add_cpu(unsigned int cpu);
 int cpu_device_up(struct device *dev);
 void notify_cpu_starting(unsigned int cpu);
