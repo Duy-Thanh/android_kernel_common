@@ -654,7 +654,7 @@ static void unmap_donated_memory_noclear(void *va, size_t size)
  *
  * Unmaps the donated memory from the host at stage 2.
  *
- * kvm: A pointer to the host's struct kvm.
+ * host_kvm: A pointer to the host's struct kvm.
  * vm_hva: The host va of the area being donated for the VM state.
  *	   Must be page aligned.
  * pgd_hva: The host va of the area being donated for the stage-2 PGD for
@@ -802,6 +802,7 @@ int __pkvm_teardown_vm(pkvm_handle_t handle)
 	int __percpu *last_vcpu_ran;
 	struct kvm_hyp_memcache *mc;
 	struct pkvm_hyp_vm *hyp_vm;
+	struct kvm *host_kvm;
 	unsigned int idx;
 	int err;
 
@@ -817,19 +818,19 @@ int __pkvm_teardown_vm(pkvm_handle_t handle)
 		goto err_unlock;
 	}
 
+	host_kvm = hyp_vm->host_kvm;
+
 	/* Ensure the VMID is clean before it can be reallocated */
 	__kvm_tlb_flush_vmid(&hyp_vm->kvm.arch.mmu);
 	remove_vm_table_entry(handle);
 	hyp_spin_unlock(&vm_table_lock);
 
 	/* Reclaim guest pages (including page-table pages) */
-	mc = &hyp_vm->host_kvm->arch.pkvm.teardown_mc;
+	mc = &host_kvm->arch.pkvm.teardown_mc;
 	reclaim_guest_pages(hyp_vm, mc);
 	unpin_host_vcpus(hyp_vm->vcpus, hyp_vm->nr_vcpus);
 
 	/* Push the metadata pages to the teardown memcache */
-	hyp_unpin_shared_mem(hyp_vm->host_kvm, hyp_vm->host_kvm + 1);
-
 	for (idx = 0; idx < hyp_vm->nr_vcpus; ++idx) {
 		struct pkvm_hyp_vcpu *hyp_vcpu = hyp_vm->vcpus[idx];
 		struct kvm_hyp_memcache *vcpu_mc;
@@ -852,6 +853,7 @@ int __pkvm_teardown_vm(pkvm_handle_t handle)
 
 	vm_size = pkvm_get_hyp_vm_size(hyp_vm->kvm.created_vcpus);
 	teardown_donated_memory(mc, hyp_vm, vm_size);
+	hyp_unpin_shared_mem(host_kvm, host_kvm + 1);
 	return 0;
 
 err_unlock:
