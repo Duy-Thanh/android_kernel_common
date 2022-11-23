@@ -88,6 +88,24 @@
       "parentUuid": "2380af16_63a88f45",
       "revId": "e3d3c7598cf123b43da466a57daebee42bcac36c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b327feb6_36bc56e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1971857
+      },
+      "writtenOn": "2022-11-23T20:18:37Z",
+      "side": 1,
+      "message": "We have created a new patchset by splitting each vendor hook, please review it at the same tracker id",
+      "parentUuid": "736c27d8_cf2dfc4c",
+      "revId": "e3d3c7598cf123b43da466a57daebee42bcac36c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
