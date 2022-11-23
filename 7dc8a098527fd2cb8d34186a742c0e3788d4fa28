@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98275d20_d54c0334",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-23T20:46:16Z",
+      "side": 1,
+      "message": "Build breakage caused by b/256248232. Until that\u0027s fixed, this CL cannot go in.",
+      "revId": "7dc8a098527fd2cb8d34186a742c0e3788d4fa28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
