@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8754ee12_f3c369bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-23T07:32:25Z",
+      "side": 1,
+      "message": "There should already be upstream support for encrypted hibernation, hooks should not be needed here.  Why not use the in-kernel support for this?",
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ea838ee_cc572ed6",
+        "filename": "kernel/power/snapshot.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2081,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-23T07:32:25Z",
+      "side": 1,
+      "message": "please do not export.\n\nAnd if you do need to export things, please provide a description of why, and it MUST be exported as `_GPL`",
+      "range": {
+        "startLine": 2081,
+        "startChar": 4,
+        "endLine": 2081,
+        "endChar": 5
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "768b3fb3_e87de956",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-23T07:32:25Z",
+      "side": 1,
+      "message": "should not be exported.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 39
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e41cec8_4fb1bbe1",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-23T07:32:25Z",
+      "side": 1,
+      "message": "should not be exported, no driver should ever be calling this.",
+      "range": {
+        "startLine": 411,
+        "startChar": 0,
+        "endLine": 411,
+        "endChar": 30
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
