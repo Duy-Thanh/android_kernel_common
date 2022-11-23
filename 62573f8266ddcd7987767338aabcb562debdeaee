@@ -189,6 +189,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e034d946_f4e14702",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-11-23T05:52:08Z",
+      "side": 1,
+      "message": "this refers to the vendor hook trace_android_vh_qcom_secure_hibernation_enabled",
+      "parentUuid": "022f0dcd_17282f0a",
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d7598bc_45be8a7b",
         "filename": "kernel/power/swap.c",
         "patchSetId": 1

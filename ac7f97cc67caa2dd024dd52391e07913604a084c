@@ -33,6 +33,24 @@
       "message": "checkpatch issues:\n```\nSummary:\n\nERROR:CODE_INDENT: code indent should use tabs where possible\n#91: FILE: include/trace/hooks/bl_hib.h:45:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#92: FILE: include/trace/hooks/bl_hib.h:46:\n```\n\nPlease fix (and in the future, run checkpatch before uploading patches)",
       "revId": "ac7f97cc67caa2dd024dd52391e07913604a084c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "750106af_3707bda8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-11-23T05:52:08Z",
+      "side": 1,
+      "message": "lock_device_hotplus is already called at https://elixir.bootlin.com/linux/v5.15.41/source/kernel/power/hibernate.c#L739 before calling swsusp_write.\n\nThe vendor hook would be called with the lock held.",
+      "parentUuid": "f304ffa1_0fc781d2",
+      "revId": "ac7f97cc67caa2dd024dd52391e07913604a084c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
