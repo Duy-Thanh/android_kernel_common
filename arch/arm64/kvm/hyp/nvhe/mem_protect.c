@@ -62,6 +62,31 @@ static void hyp_unlock_component(void)
 	hyp_spin_unlock(&pkvm_pgd_lock);
 }
 
+int hyp_refill_host_s2_pool(struct kvm_hyp_memcache *host_mc, unsigned long nr_pages)
+{
+	struct kvm_hyp_memcache mc = { .head = 0, .nr_pages = 0 };
+	struct hyp_page *p;
+	void *addr;
+	int ret;
+
+	ret = refill_memcache(&mc, nr_pages, host_mc);
+	if (ret)
+		return ret;
+
+	while (mc.nr_pages) {
+		addr = pop_hyp_memcache(&mc, hyp_phys_to_virt);
+		if (!addr)
+			return -ENOMEM;
+
+		p = hyp_virt_to_page(addr);
+		memset(p, 0, sizeof(*p));
+		p->refcount = 1;
+		hyp_put_page(&host_s2_pool, addr);
+	}
+
+	return 0;
+}
+
 static void *host_s2_zalloc_pages_exact(size_t size)
 {
 	void *addr = hyp_alloc_pages(&host_s2_pool, get_order(size));
@@ -2174,6 +2199,21 @@ bool __pkvm_check_ioguard_page(struct pkvm_hyp_vcpu *hyp_vcpu)
 	if ((end & PAGE_MASK) != (ipa & PAGE_MASK))
 		ret &= __check_ioguard_page(hyp_vcpu, end);
 	guest_unlock_component(vm);
+
+	return ret;
+}
+
+int host_stage2_protect_pfns(u64 pfn, u64 nr_pages)
+{
+	phys_addr_t addr = hyp_pfn_to_phys(pfn);
+	size_t size = nr_pages << PAGE_SHIFT;
+	int ret;
+
+	host_lock_component();
+	ret = __host_check_page_state_range(addr, size, PKVM_PAGE_OWNED);
+	if (!ret)
+		ret = host_stage2_set_owner_locked(addr, size, PKVM_ID_PROTECTED);
+	host_unlock_component();
 
 	return ret;
 }

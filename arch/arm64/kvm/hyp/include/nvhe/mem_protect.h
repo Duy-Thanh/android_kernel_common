@@ -60,7 +60,8 @@ enum pkvm_component_id {
 	PKVM_ID_HYP,
 	PKVM_ID_GUEST,
 	PKVM_ID_FFA,
-	PKVM_ID_MAX = PKVM_ID_FFA,
+	PKVM_ID_PROTECTED,
+	PKVM_ID_MAX = PKVM_ID_PROTECTED,
 };
 
 extern unsigned long hyp_nr_cpus;
@@ -87,6 +88,7 @@ bool addr_is_memory(phys_addr_t phys);
 int host_stage2_idmap_locked(phys_addr_t addr, u64 size, enum kvm_pgtable_prot prot,
 			     bool update_iommu);
 int host_stage2_set_owner_locked(phys_addr_t addr, u64 size, enum pkvm_component_id owner_id);
+int host_stage2_protect_pfns(u64 pfn, u64 nr_pages);
 int host_stage2_unmap_dev_locked(phys_addr_t start, u64 size);
 int kvm_host_prepare_stage2(void *pgt_pool_base);
 int kvm_guest_prepare_stage2(struct pkvm_hyp_vm *vm, void *pgd);
@@ -99,6 +101,7 @@ void reclaim_guest_pages(struct pkvm_hyp_vm *vm, struct kvm_hyp_memcache *mc);
 int hyp_protect_host_page(u64 pfn, enum kvm_pgtable_prot prot);
 int refill_memcache(struct kvm_hyp_memcache *mc, unsigned long min_pages,
 		    struct kvm_hyp_memcache *host_mc);
+int hyp_refill_host_s2_pool(struct kvm_hyp_memcache *host_mc, unsigned long nr_pages);
 
 void psci_mem_protect_inc(u64 n);
 void psci_mem_protect_dec(u64 n);

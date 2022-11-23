@@ -1199,6 +1199,24 @@ handle___pkvm_close_module_registration(struct kvm_cpu_context *host_ctxt)
 	cpu_reg(host_ctxt, 1) = __pkvm_close_module_registration();
 }
 
+static void handle___pkvm_protect_pfns(struct kvm_cpu_context *host_ctxt)
+{
+	DECLARE_REG(u64, pfn, host_ctxt, 1);
+	DECLARE_REG(u64, nr_pages, host_ctxt, 2);
+	DECLARE_REG(phys_addr_t, head, host_ctxt, 3);
+	struct kvm_hyp_memcache host_mc = {
+		.head = head,
+		.nr_pages = __hyp_pgtable_max_pages(nr_pages)
+	};
+	int ret;
+
+	ret = hyp_refill_host_s2_pool(&host_mc, host_mc.nr_pages);
+	if (!ret)
+	       ret = host_stage2_protect_pfns(pfn, nr_pages);
+
+	cpu_reg(host_ctxt, 1) = (u64)ret;
+}
+
 typedef void (*hcall_t)(struct kvm_cpu_context *);
 
 #define HANDLE_FUNC(x)	[__KVM_HOST_SMCCC_FUNC_##x] = (hcall_t)handle_##x
@@ -1216,6 +1234,7 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__kvm_tlb_flush_vmid_ipa),
 	HANDLE_FUNC(__kvm_tlb_flush_vmid),
 	HANDLE_FUNC(__kvm_flush_cpu_context),
+	HANDLE_FUNC(__pkvm_protect_pfns),
 	HANDLE_FUNC(__pkvm_prot_finalize),
 
 	HANDLE_FUNC(__pkvm_host_share_hyp),
