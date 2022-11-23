@@ -16,6 +16,24 @@
       "message": "This should not have been merged as FROMGIT as it is _not_ in a maintainers tree and I don\u0027t think it has even been posted to the list. It\u0027s a hugely invasive change and I really not happy that we\u0027ve taken this in without any external review.\n\nIt\u0027s also not immediately clear to me that we couldn\u0027t move a bunch of this out into a vendor hook, especially since the bulk of the workaround appears to be indirected through a new set of DMA ops.\n\nCan we revert it, please?",
       "revId": "02e1387801b70fb53b3a96f95f5cb58a8f271c1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38401c9_ab8075c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2022-11-23T11:24:24Z",
+      "side": 1,
+      "message": "Hi Will,\n\nApologies for wrongly tagging the patches - was kinda mislead with the requirement for tagging when the change is not picked from upstream. Though none of them (tags) apply in this case so I guess it should not add any (?). \n\nAs per moving a part of the changes (the DMA ops as other bits are purely core) into a vendor hook : this is not really feasible as most of the functionality there is core kernel and is not available for loadable modules. We do appreciate that the changes are somewhat extensive though having them wrapped up in dedicated DMA ops keeps it self-contained. If you have any suggestions on how to tweak it more to offset parts of it to vendor hooks we would definitely pursue that.",
+      "parentUuid": "606f2234_fa736df4",
+      "revId": "02e1387801b70fb53b3a96f95f5cb58a8f271c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
