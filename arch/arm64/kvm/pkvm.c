@@ -9,12 +9,15 @@
 #include <linux/memblock.h>
 #include <linux/mm.h>
 #include <linux/mutex.h>
+#include <linux/of_address.h>
 #include <linux/of_fdt.h>
 #include <linux/of_reserved_mem.h>
 #include <linux/sort.h>
 
 #include <asm/kvm_hyp.h>
+#include <asm/kvm_host.h>
 #include <asm/kvm_mmu.h>
+#include <asm/kvm_pgtable.h>
 #include <asm/kvm_pkvm.h>
 #include <asm/kvm_pkvm_module.h>
 
@@ -585,3 +588,41 @@ int __pkvm_register_el2_call(dyn_hcall_t hfn, unsigned long token,
 	return ret;
 }
 EXPORT_SYMBOL_GPL(__pkvm_register_el2_call);
+
+static void *mc_alloc_fn(void *unused)
+{
+	return (void *)__get_free_page(GFP_KERNEL);
+}
+
+int pkvm_protect_regions(void)
+{
+	struct device_node *np;
+
+	for_each_compatible_node(np, NULL, "pkvm,protected-region") {
+		struct kvm_hyp_memcache mc = { .head = 0, .nr_pages = 0 };
+		u64 nr_pages, start, end;
+		struct resource res;
+		int ret;
+
+		ret = of_address_to_resource(np, 0, &res);
+		if (ret)
+			return ret;
+
+		start = res.start;
+		end = res.end + 1;
+		if (!PAGE_ALIGNED(start) || !PAGE_ALIGNED(end))
+			return -EINVAL;
+
+		nr_pages = (end - start) >> PAGE_SHIFT;
+		ret = __topup_hyp_memcache(&mc, __hyp_pgtable_max_pages(nr_pages), mc_alloc_fn,
+					   kvm_host_pa, NULL);
+		if (ret)
+			return ret;
+
+		ret = kvm_call_hyp_nvhe(__pkvm_protect_pfns, __phys_to_pfn(start), nr_pages,  mc.head);
+		if (ret)
+			return ret;
+	}
+
+	return 0;
+}
