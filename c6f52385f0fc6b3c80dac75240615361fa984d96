@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba5074a_27148c59",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-23T16:17:10Z",
+      "side": 1,
+      "message": "This should also check KVM_PTE_LEAF_ATTR_HI_S2_XN no? So presumably, the mask and the expected results are going to be different things (in which case you can fold in the HI_SW check too).",
+      "range": {
+        "startLine": 565,
+        "startChar": 1,
+        "endLine": 566,
+        "endChar": 40
+      },
+      "revId": "c6f52385f0fc6b3c80dac75240615361fa984d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
