@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb5c0119_b4493a0c",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 20378,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2022-11-24T02:11:57Z",
+      "side": 0,
+      "message": "absulute path appear here, something wrong in the xml generator script, please help to check. we fix this by hand in this patch.",
+      "range": {
+        "startLine": 20378,
+        "startChar": 5,
+        "endLine": 20378,
+        "endChar": 216
+      },
+      "revId": "26369cdee4f1d9808fdddf391856346a94921680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
