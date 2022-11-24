@@ -131,6 +131,16 @@ void free_hyp_memcache(struct kvm_hyp_memcache *mc, struct kvm *kvm);
 void free_hyp_stage2_memcache(struct kvm_hyp_memcache *mc, struct kvm *kvm);
 int topup_hyp_memcache(struct kvm_vcpu *vcpu);
 
+static inline phys_addr_t kvm_host_pa(void *addr)
+{
+	return __pa(addr);
+}
+
+static inline void *kvm_host_va(phys_addr_t phys)
+{
+	return __va(phys);
+}
+
 struct kvm_vmid {
 	atomic64_t id;
 };
