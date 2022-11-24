@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c1e7735_0cc0f5d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-24T12:01:18Z",
+      "side": 1,
+      "message": "Drivers should never be touching these functions or variables.\n\nWhat code requires this?",
+      "revId": "b2a9424bf28f36f93cbf1e3deadf6541cdfc5256",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfbf6154_2a2d379a",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-24T12:01:18Z",
+      "side": 1,
+      "message": "not allowed to be touched by drivers.",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 41
+      },
+      "revId": "b2a9424bf28f36f93cbf1e3deadf6541cdfc5256",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ceaec6_0386c5ac",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-24T12:01:18Z",
+      "side": 1,
+      "message": "not allowed to be exported to drivers, sorry.",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 40
+      },
+      "revId": "b2a9424bf28f36f93cbf1e3deadf6541cdfc5256",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
