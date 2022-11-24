@@ -34,6 +34,24 @@
       "parentUuid": "a08f0f1f_366f7f3b",
       "revId": "26f46dd78a4d6692ebd079fa06ff3004074d5d8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e7d184_3b41c81b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-11-24T11:37:55Z",
+      "side": 1,
+      "message": "The XML does not introduce new symbols. So, odds are that those symbols are already in another symbol list and therefore there is no addition of those. I will drop the XML from your change and validate the result.",
+      "parentUuid": "a4fc3032_c4c348aa",
+      "revId": "26f46dd78a4d6692ebd079fa06ff3004074d5d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
