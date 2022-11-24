@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa42e921_c7656d68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905498
+      },
+      "writtenOn": "2022-11-24T13:07:19Z",
+      "side": 1,
+      "message": "To be used in vendor module. when CPU needs to be isolated, this process needs to hold  the lock to avoid hotplug CPU concurrently.",
+      "parentUuid": "0c1e7735_0cc0f5d9",
+      "revId": "b2a9424bf28f36f93cbf1e3deadf6541cdfc5256",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfbf6154_2a2d379a",
