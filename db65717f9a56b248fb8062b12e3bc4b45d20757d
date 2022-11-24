@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "800a3ffc_27c127da",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-24T12:28:26Z",
+      "side": 1,
+      "message": "Note: This was moved to fix the linter warning https://github.com/bazelbuild/buildtools/blob/master/WARNINGS.md#load-on-top",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 1
+      },
+      "revId": "db65717f9a56b248fb8062b12e3bc4b45d20757d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
