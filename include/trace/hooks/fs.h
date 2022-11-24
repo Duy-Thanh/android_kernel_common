@@ -17,6 +17,9 @@ DECLARE_HOOK(android_vh_ep_create_wakeup_source,
 DECLARE_HOOK(android_vh_timerfd_create,
 	TP_PROTO(char *name, int len),
 	TP_ARGS(name, len));
+DECLARE_RESTRICTED_HOOK(android_rvh_f2fs_write_statistics,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused), 1);
 #endif /* _TRACE_HOOK_FS_H */
 
 /* This part must be outside protection */

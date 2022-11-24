@@ -27,6 +27,7 @@
 #include "segment.h"
 #include <trace/events/f2fs.h>
 #include <trace/events/android_fs.h>
+#include <trace/hooks/fs.h>
 
 #define NUM_PREALLOC_POST_READ_CTXS	128
 
@@ -3229,6 +3230,8 @@ static int f2fs_write_data_pages(struct address_space *mapping,
 			    struct writeback_control *wbc)
 {
 	struct inode *inode = mapping->host;
+
+	trace_android_rvh_f2fs_write_statistics(NULL);
 
 	return __f2fs_write_data_pages(mapping, wbc,
 			F2FS_I(inode)->cp_task == current ?
