@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10e371ba_2c71365e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T15:11:48Z",
+      "side": 1,
+      "message": "Not done. The comment is a sentence or a paragraph of sentences. Please write it as one. Why does it start with a lower case? Why is there no full stop at the end?",
+      "parentUuid": "fee509eb_842b9ae4",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 67
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7c3f034_917a4b82",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
         "patchSetId": 15
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Reusing registration lock might cause deadlocks\nIn this case\n-Thread1 calling pkvm_iommu_host_stage2_idmap\nlocking order  mmu_lock \u003d\u003e registration_lock\n\n-Thread2 calling __pkvm_iommu_driver_init\nlocking order registration_lock \u003d\u003e mmu_lock\n\n\nAfter finalizing we would stop driver registration, so we shouldn\u0027t need the lock. I was thinking of having ptr to function for lock and unlock which are switched to empty functions after finalize.",
       "parentUuid": "c7c3f034_917a4b82",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 43
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd13c59d_a1738af1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T15:11:48Z",
+      "side": 1,
+      "message": "Okay, so the order is:\n```\nregistration_lock -\u003e mmu_lock -\u003e drv_lock\n```\n\nSo how about protecting `iommu_drivers` with `mmu_lock`? \n 1. `get_driver` could take `mmu_lock` instead of `drv_lock`\n 2. `__pkvm_register_iommu_driver` could take `mmu_lock` instead of `drv_lock`\n 3. `pkvm_iommu_host_stage2_idmap` already is under `mmu_lock`\n \nWhereas 1 and 2 happen only a handful of times during boot, 3 happens all the time. If we can avoid taking an extra lock there, it will make a difference.\n\n\u003e I was thinking of having ptr to function for lock and unlock which are switched to empty functions after finalize.\n\nThat\u0027s still an indirect function call that we should try to avoid in `pkvm_iommu_host_stage2_idmap`. Too bad we don\u0027t have static keys at this point.",
+      "parentUuid": "97223685_5107db85",
       "range": {
         "startLine": 31,
         "startChar": 0,
@@ -220,6 +268,24 @@
       "side": 1,
       "message": "Is that necessary? this is a static function and it has one caller from the same file, it is easy to verify this at compile time",
       "parentUuid": "97881490_edf0ac94",
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94d2506d_d1b413ea",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T15:11:48Z",
+      "side": 1,
+      "message": "Yes, it\u0027s necessary. When somebody else edits your code they will only see a function that takes a driver pointer. If there are any preconditions for using that function safely, it must either be obvious from the name/comment (that\u0027s why a lot of functions have the suffix \"_locked\"), or it must be enforced.",
+      "parentUuid": "100093a0_b50de24d",
       "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -414,6 +480,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d071b57_7110f92a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T15:11:48Z",
+      "side": 1,
+      "message": "Yeah, and the compiler will optimize it out before the linker figures out that the symbol is missing. Try it out. This is quite common in the kernel. It has the massive advantage that the compiler will actually compile the C code before discarding it. So for example, it would tell you if you\u0027re removing a variable that is still used behind a disabled config option.",
+      "parentUuid": "b2919add_565f8822",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 32
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "155c4e66_c4aab7b1",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
         "patchSetId": 15
@@ -449,6 +539,30 @@
       "side": 1,
       "message": "Because these are built in drivers, and the IOMMU layer doesn\u0027t have them in static array as before.\n\nIn case of EL2 modules, they will have an init function where they call __pkvm_register_iommu_driver to register themselves.\n\nFor builtin drivers this needs to be hardcoded somewhere in the IOMMU code.\n\nI see the problem, as this might be called multiple times, because we register sync drivers also. may be we can protect this by a flag, or we have iommu_init function that is called early during pKVM init.",
       "parentUuid": "155c4e66_c4aab7b1",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 56
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c5422cf_52dd6668",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T15:11:48Z",
+      "side": 1,
+      "message": "This is really broken. I think you should keep the enum of driver IDs as it was for now and select which driver to register here. You can remove the enum once you move the drivers to a vendor module.",
+      "parentUuid": "40bd3771_51b8cc9e",
       "range": {
         "startLine": 282,
         "startChar": 0,

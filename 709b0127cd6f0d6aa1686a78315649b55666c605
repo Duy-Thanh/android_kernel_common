@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad56514d_989fc29a",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T15:11:48Z",
+      "side": 0,
+      "message": "why remove",
+      "revId": "709b0127cd6f0d6aa1686a78315649b55666c605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
