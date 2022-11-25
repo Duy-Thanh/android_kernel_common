@@ -16,6 +16,24 @@
       "message": "make a child of parent commit properly.",
       "revId": "4861de99992229d924bd4e9a3a1e15547fb7e98a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cfac490_f5789a9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975062
+      },
+      "writtenOn": "2022-11-25T09:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6032324_606af203",
+      "revId": "4861de99992229d924bd4e9a3a1e15547fb7e98a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
