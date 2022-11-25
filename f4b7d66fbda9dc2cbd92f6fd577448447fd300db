@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad06255_5742e5e8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 0,
+      "message": "why remove",
+      "revId": "f4b7d66fbda9dc2cbd92f6fd577448447fd300db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1acd63ed_9322e56e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 0,
+      "message": "why remove",
+      "revId": "f4b7d66fbda9dc2cbd92f6fd577448447fd300db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

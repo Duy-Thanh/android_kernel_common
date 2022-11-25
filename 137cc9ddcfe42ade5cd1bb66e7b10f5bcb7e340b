@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2d40fea_b42cdc17",
+        "filename": "arch/arm64/include/asm/kvm_s2mpu.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "Why the banner? You don\u0027t have a banner around the other V1/2 constants.",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 60
+      },
+      "revId": "137cc9ddcfe42ade5cd1bb66e7b10f5bcb7e340b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae34e51d_0bb7f75f",
+        "filename": "arch/arm64/include/asm/kvm_s2mpu.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "`BUG();`",
+      "range": {
+        "startLine": 393,
+        "startChar": 2,
+        "endLine": 393,
+        "endChar": 11
+      },
+      "revId": "d0de2e6f6847353ad3af84761c00172a5f4a2035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6c3b97c_88e130b8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "Remove and replace use with a literal",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 15
+      },
+      "revId": "d0de2e6f6847353ad3af84761c00172a5f4a2035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7968bfdd_83e3f85f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 188,
+        "startChar": 1,
+        "endLine": 188,
+        "endChar": 2
+      },
+      "revId": "d0de2e6f6847353ad3af84761c00172a5f4a2035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6aef9f_ff2b96e6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 190,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 2
+      },
+      "revId": "d0de2e6f6847353ad3af84761c00172a5f4a2035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

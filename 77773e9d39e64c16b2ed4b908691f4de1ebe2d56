@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7b4244_b8513b18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "fullstop",
+      "range": {
+        "startLine": 9,
+        "startChar": 60,
+        "endLine": 9,
+        "endChar": 61
+      },
+      "revId": "77773e9d39e64c16b2ed4b908691f4de1ebe2d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7575d6ad_bc7ff122",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "minimal",
+      "range": {
+        "startLine": 11,
+        "startChar": 27,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "77773e9d39e64c16b2ed4b908691f4de1ebe2d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3988effb_fc402b65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "used",
+      "range": {
+        "startLine": 13,
+        "startChar": 35,
+        "endLine": 13,
+        "endChar": 38
+      },
+      "revId": "77773e9d39e64c16b2ed4b908691f4de1ebe2d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6543355f_0bd82f4c",
+        "filename": "arch/arm64/include/asm/kvm_s2mpu.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "align with TABs",
+      "range": {
+        "startLine": 325,
+        "startChar": 36,
+        "endLine": 325,
+        "endChar": 50
+      },
+      "revId": "77773e9d39e64c16b2ed4b908691f4de1ebe2d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "515658b3_a112a24c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "align with tabs",
+      "range": {
+        "startLine": 13,
+        "startChar": 27,
+        "endLine": 13,
+        "endChar": 29
+      },
+      "revId": "77773e9d39e64c16b2ed4b908691f4de1ebe2d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cec5bca5_647307f3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "Please write your comments as a paragraph of sentences with a capital letter and a fullstop.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 3
+      },
+      "revId": "77773e9d39e64c16b2ed4b908691f4de1ebe2d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01386df6_3f4d4f40",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 31,
+        "startChar": 3,
+        "endLine": 31,
+        "endChar": 12
+      },
+      "revId": "77773e9d39e64c16b2ed4b908691f4de1ebe2d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb21e76_81ea08e2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "77773e9d39e64c16b2ed4b908691f4de1ebe2d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37b19308_5a89c885",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T18:03:44Z",
+      "side": 1,
+      "message": "Yeah, let\u0027s make `read_only` the default return value and only list the writable ones here. Means you can get rid of many of these constants as well.",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 426,
+        "endChar": 15
+      },
+      "revId": "77773e9d39e64c16b2ed4b908691f4de1ebe2d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
