@@ -34,6 +34,24 @@
       "parentUuid": "ad56514d_989fc29a",
       "revId": "709b0127cd6f0d6aa1686a78315649b55666c605",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dbb64ff_28650038",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T16:19:22Z",
+      "side": 0,
+      "message": "It was there to separate generic IOMMU declarations and s2mpu-specific ones. In general I would avoid touching code unnecessarily - increases the likelihood of your patch conflicting with others.",
+      "parentUuid": "03b1e6f4_a468721c",
+      "revId": "709b0127cd6f0d6aa1686a78315649b55666c605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
