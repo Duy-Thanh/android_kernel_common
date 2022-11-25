@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be2edc1b_1fe82708",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-25T19:52:49Z",
+      "side": 1,
+      "message": "No args necessary anymore with the latest refactor.",
+      "parentUuid": "f8bbbea9_28077707",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 64,
+        "endChar": 64
+      },
+      "revId": "a8547e1d9b1ca933f5dc9d9ca0ed9d77d461b17e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d7af2d2_a7c8c90b",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "ACK for kmalloc. See above for the discussion about arguments.",
       "parentUuid": "0d7af2d2_a7c8c90b",
+      "range": {
+        "startLine": 487,
+        "startChar": 39,
+        "endLine": 487,
+        "endChar": 62
+      },
+      "revId": "a8547e1d9b1ca933f5dc9d9ca0ed9d77d461b17e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f3a5387_46fed964",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-25T19:52:49Z",
+      "side": 1,
+      "message": "No args necessary anymore with the latest refactor",
+      "parentUuid": "5af76333_9181121a",
       "range": {
         "startLine": 487,
         "startChar": 39,
