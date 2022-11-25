@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adc188d2_1bb47db0",
+        "filename": "arch/arm64/include/asm/kvm_s2mpu.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9869de89_4b4eba37",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 27
+      },
+      "revId": "0faccf6b836850dc59c84543fb612a130bbf8cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0feda53_52eb1a10",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-25T15:11:48Z",
       "side": 1,
       "message": "this isn\u0027t used anymore",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 23
+      },
+      "revId": "0faccf6b836850dc59c84543fb612a130bbf8cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c655365_367d0383",
+        "filename": "arch/arm64/include/asm/kvm_s2mpu.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0feda53_52eb1a10",
       "range": {
         "startLine": 200,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b375779_04fd1a5f",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b30ec382_cc6187ae",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 78,
+        "endChar": 4
+      },
+      "revId": "0faccf6b836850dc59c84543fb612a130bbf8cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87925e21_c5c1cb76",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-11-25T15:11:48Z",
       "side": 1,
       "message": "Don\u0027t need this",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 32
+      },
+      "revId": "0faccf6b836850dc59c84543fb612a130bbf8cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9947ef5_c31a77f6",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87925e21_c5c1cb76",
       "range": {
         "startLine": 115,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50896a9c_ebd2155c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48e7b54e_940bad0f",
+      "range": {
+        "startLine": 115,
+        "startChar": 1,
+        "endLine": 115,
+        "endChar": 3
+      },
+      "revId": "0faccf6b836850dc59c84543fb612a130bbf8cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39ff4553_bd8e5d21",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-11-25T15:11:48Z",
       "side": 1,
       "message": "this now fits on the previous line",
+      "range": {
+        "startLine": 341,
+        "startChar": 5,
+        "endLine": 341,
+        "endChar": 16
+      },
+      "revId": "0faccf6b836850dc59c84543fb612a130bbf8cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf609ff2_8e8c8790",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39ff4553_bd8e5d21",
       "range": {
         "startLine": 341,
         "startChar": 5,

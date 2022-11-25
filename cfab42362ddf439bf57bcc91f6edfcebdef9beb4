@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f434aac_71447dbe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10e371ba_2c71365e",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 67
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7c3f034_917a4b82",
@@ -286,6 +310,24 @@
       "side": 1,
       "message": "Yes, it\u0027s necessary. When somebody else edits your code they will only see a function that takes a driver pointer. If there are any preconditions for using that function safely, it must either be obvious from the name/comment (that\u0027s why a lot of functions have the suffix \"_locked\"), or it must be enforced.",
       "parentUuid": "100093a0_b50de24d",
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acf63a45_e0841393",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94d2506d_d1b413ea",
       "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -502,6 +544,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74fcd94a_00d8ec86",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d071b57_7110f92a",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 32
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "155c4e66_c4aab7b1",
@@ -563,6 +629,30 @@
       "side": 1,
       "message": "This is really broken. I think you should keep the enum of driver IDs as it was for now and select which driver to register here. You can remove the enum once you move the drivers to a vendor module.",
       "parentUuid": "40bd3771_51b8cc9e",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 56
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6104987_f1f09b33",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:09:49Z",
+      "side": 1,
+      "message": "I updated the code so at init, the driver corresponding the id in init will be registered only.",
+      "parentUuid": "3c5422cf_52dd6668",
       "range": {
         "startLine": 282,
         "startChar": 0,
