@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80bc5fa2_fc8867ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 20
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T13:27:34Z",
+      "side": 1,
+      "message": "long line",
+      "range": {
+        "startLine": 12,
+        "startChar": 72,
+        "endLine": 12,
+        "endChar": 73
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91d51883_18315a45",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T13:27:34Z",
+      "side": 1,
+      "message": "bikeshed: Isn\u0027t `s2mpu_pgtable_ops` a form of version ops as well? Is this `s2mpu_reg_ops`?",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 20
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b7cd30a_034e47cd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T13:27:34Z",
+      "side": 1,
+      "message": "Would it make sense to split this into v8 and v9 now?",
+      "range": {
+        "startLine": 126,
+        "startChar": 11,
+        "endLine": 126,
+        "endChar": 23
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27682328_45875226",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T13:27:34Z",
+      "side": 1,
+      "message": "`/* Make sure access is within device range */`",
+      "range": {
+        "startLine": 409,
+        "startChar": 1,
+        "endLine": 409,
+        "endChar": 42
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03013e3c_0661c826",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T13:27:34Z",
+      "side": 1,
+      "message": "Why do you do this check twice? Why do you need it in the first place? The IOMMU framework will only call this function if the offset falls in the device mem region.",
+      "range": {
+        "startLine": 440,
+        "startChar": 1,
+        "endLine": 442,
+        "endChar": 19
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba04b418_0baba80e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T13:27:34Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this one go to v8/9 only? The register still exists in the new revision but the mask is different.\n\nSide note: I would be okay with simplifying this to \"read always allowed\". Then you just need to keep the write-only ones. Could be a separate patch before this one.",
+      "range": {
+        "startLine": 446,
+        "startChar": 1,
+        "endLine": 447,
+        "endChar": 32
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06f23f92_b6cf456d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T13:27:34Z",
+      "side": 1,
+      "message": "C",
+      "range": {
+        "startLine": 473,
+        "startChar": 4,
+        "endLine": 473,
+        "endChar": 5
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e3b44a_f9f1a55b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T13:27:34Z",
+      "side": 1,
+      "message": "Could we also select the pgtable_ops here? Would be nice to have it in one place.",
+      "range": {
+        "startLine": 524,
+        "startChar": 0,
+        "endLine": 524,
+        "endChar": 27
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
