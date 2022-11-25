@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97223685_5107db85",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T11:56:25Z",
+      "side": 1,
+      "message": "Reusing registration lock might cause deadlocks\nIn this case\n-Thread1 calling pkvm_iommu_host_stage2_idmap\nlocking order  mmu_lock \u003d\u003e registration_lock\n\n-Thread2 calling __pkvm_iommu_driver_init\nlocking order registration_lock \u003d\u003e mmu_lock\n\n\nAfter finalizing we would stop driver registration, so we shouldn\u0027t need the lock. I was thinking of having ptr to function for lock and unlock which are switched to empty functions after finalize.",
+      "parentUuid": "c7c3f034_917a4b82",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 43
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1de337ed_32391527",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
         "patchSetId": 15
@@ -106,6 +130,24 @@
       "writtenOn": "2022-11-25T11:31:04Z",
       "side": 1,
       "message": "assert that `iommu_drv_lock` is held",
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "100093a0_b50de24d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T11:56:25Z",
+      "side": 1,
+      "message": "Is that necessary? this is a static function and it has one caller from the same file, it is easy to verify this at compile time",
+      "parentUuid": "97881490_edf0ac94",
       "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -204,6 +246,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2919add_565f8822",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T11:56:25Z",
+      "side": 1,
+      "message": "but the symbol pkvm_s2mpu_driver won\u0027t be there if config is disabled",
+      "parentUuid": "81a075fe_6ba624c8",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 32
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "155c4e66_c4aab7b1",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
         "patchSetId": 15
@@ -215,6 +281,30 @@
       "writtenOn": "2022-11-25T11:31:04Z",
       "side": 1,
       "message": "This is odd - why does calling `driver_init` register two random drivers? And why does it only succeed for the first `driver_init` call?",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 56
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40bd3771_51b8cc9e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T11:56:25Z",
+      "side": 1,
+      "message": "Because these are built in drivers, and the IOMMU layer doesn\u0027t have them in static array as before.\n\nIn case of EL2 modules, they will have an init function where they call __pkvm_register_iommu_driver to register themselves.\n\nFor builtin drivers this needs to be hardcoded somewhere in the IOMMU code.\n\nI see the problem, as this might be called multiple times, because we register sync drivers also. may be we can protect this by a flag, or we have iommu_init function that is called early during pKVM init.",
+      "parentUuid": "155c4e66_c4aab7b1",
       "range": {
         "startLine": 282,
         "startChar": 0,
@@ -273,6 +363,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d840eab_8b78d944",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T11:56:25Z",
+      "side": 1,
+      "message": "struct can\u0027t be const as it has state variable",
+      "parentUuid": "1e0a3a95_fb4af8d9",
+      "range": {
+        "startLine": 626,
+        "startChar": 0,
+        "endLine": 626,
+        "endChar": 6
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "958d75ad_c019189a",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
         "patchSetId": 15
@@ -312,6 +426,30 @@
         "startChar": 48,
         "endLine": 630,
         "endChar": 53
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a717d2_59d073ef",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T11:56:25Z",
+      "side": 1,
+      "message": "struct can\u0027t be const as it has state variable",
+      "parentUuid": "958d75ad_c019189a",
+      "range": {
+        "startLine": 630,
+        "startChar": 0,
+        "endLine": 630,
+        "endChar": 6
       },
       "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
