@@ -1,0 +1,343 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7eb7c06_010e2127",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "nit: Declarations don\u0027t need `#ifdef`, the code won\u0027t compile without the definitions anyway and it keeps the header files a bit simpler.",
+      "range": {
+        "startLine": 395,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 32
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a02f9f6a_489c3b86",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "nit:\n```\n/* List of registered IOMMU drivers, protected with iommu_drv_lock. */\n```",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 67
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c3f034_917a4b82",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "Do you gain much from introducing a new lock? Could you use the registration lock?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 43
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1de337ed_32391527",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "nit: empty line between functions",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 68
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97881490_edf0ac94",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "assert that `iommu_drv_lock` is held",
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e910e41a_d3806229",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "nit: empty line between functions",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 63
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2083c72f_ec2e32f8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "nit: You could easily avoid all the `goto`s here:\n\n```\n        hyp_spin_lock(\u0026iommu_drv_lock);\n        if (!iommu_finalized) {\n                hyp_spin_lock(\u0026iommu_drv_lock);\n                if (validate_driver_id_unique(drv))\n                        list_add_tail(\u0026drv-\u003elist, \u0026iommu_drivers);\n                else\n                        ret \u003d -EEXIST;\n                hyp_spin_unlock(\u0026iommu_drv_lock);\n        } else {\n                ret \u003d -EPERM;\n        }\n        hyp_spin_unlock(\u0026iommu_drv_lock);\n```",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 43
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb317aa5_e79b461f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "nit: empty line after declarations",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 13
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81a075fe_6ba624c8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "Make this a real IF statement. The compiler will remove the dead code for you when it\u0027s disabled.",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 32
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155c4e66_c4aab7b1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "This is odd - why does calling `driver_init` register two random drivers? And why does it only succeed for the first `driver_init` call?",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 56
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e0a3a95_fb4af8d9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "const struct",
+      "range": {
+        "startLine": 626,
+        "startChar": 0,
+        "endLine": 626,
+        "endChar": 6
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "237584d5_c03d009c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "two spaces",
+      "range": {
+        "startLine": 626,
+        "startChar": 45,
+        "endLine": 626,
+        "endChar": 46
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "958d75ad_c019189a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "const struct",
+      "range": {
+        "startLine": 630,
+        "startChar": 0,
+        "endLine": 630,
+        "endChar": 6
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1afe8832_fba8a786",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "spaces",
+      "range": {
+        "startLine": 630,
+        "startChar": 48,
+        "endLine": 630,
+        "endChar": 53
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a0b732c_3e42e3b3",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T11:31:04Z",
+      "side": 1,
+      "message": "one or both of these can now fit on the previous line",
+      "range": {
+        "startLine": 21,
+        "startChar": 3,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
