@@ -52,6 +52,24 @@
       "parentUuid": "03b1e6f4_a468721c",
       "revId": "709b0127cd6f0d6aa1686a78315649b55666c605",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce26c480_703ce6e1",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T16:29:46Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "4dbb64ff_28650038",
+      "revId": "709b0127cd6f0d6aa1686a78315649b55666c605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
