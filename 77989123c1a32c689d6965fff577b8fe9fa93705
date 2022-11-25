@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d961ab_0a59fed2",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5329,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-11-25T03:24:19Z",
+      "side": 1,
+      "message": "https://android-review.git.corp.google.com/c/kernel/common/+/2301523/comment/51c57fd7_b98d7ddf/\n\ncan we set pmsr_capa only if virtio is enabled or wmediumd in local is available?",
+      "range": {
+        "startLine": 5318,
+        "startChar": 1,
+        "endLine": 5329,
+        "endChar": 2
+      },
+      "revId": "77989123c1a32c689d6965fff577b8fe9fa93705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
