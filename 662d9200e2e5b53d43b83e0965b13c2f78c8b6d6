@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d180f54c_d8044ea5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:32:49Z",
+      "side": 1,
+      "message": "I would remove it, primarily because I think it might actually slow things down.",
+      "parentUuid": "4833acbd_8a8a1d8b",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "404e31b6_0a4f6fe1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 18
