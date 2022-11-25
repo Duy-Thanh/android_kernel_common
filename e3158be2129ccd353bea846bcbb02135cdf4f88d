@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cceb39d_b29f5e9b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T17:05:51Z",
+      "side": 1,
+      "message": "In fact, why are these two separate structs? Why not just have `s2mpu_version_ops` that encompasses all the variations? It would simplify some of your consistency checks as well.",
+      "parentUuid": "91d51883_18315a45",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 20
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b7cd30a_034e47cd",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
         "patchSetId": 20
