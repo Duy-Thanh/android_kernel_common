@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4833acbd_8a8a1d8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T12:29:30Z",
+      "side": 1,
+      "message": "No, I didn\u0027t do measurements for this.\nMy point was to decrease number of functions. I can remove this patch if you see it doesn\u0027t value.",
+      "parentUuid": "3251a8f5_03d6553c",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "404e31b6_0a4f6fe1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 18
@@ -134,6 +158,30 @@
         "startChar": 47,
         "endLine": 11,
         "endChar": 49
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58fc35c_b567f999",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T12:29:30Z",
+      "side": 1,
+      "message": "If we will keep this patch, I can added a shift for this entry.",
+      "parentUuid": "3924b26e_27bd9fd5",
+      "range": {
+        "startLine": 11,
+        "startChar": 9,
+        "endLine": 11,
+        "endChar": 44
       },
       "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
