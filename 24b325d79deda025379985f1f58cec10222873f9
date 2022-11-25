@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "315516bc_c440bf37",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3332,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-25T04:24:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daf163d7_5cc14957",
+      "range": {
+        "startLine": 3332,
+        "startChar": 1,
+        "endLine": 3332,
+        "endChar": 8
+      },
+      "revId": "24b325d79deda025379985f1f58cec10222873f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51c57fd7_b98d7ddf",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-25T03:23:09Z",
       "side": 1,
       "message": "what happens if it doesn\u0027t use neither virtio nor wmediumd in local? should we return not supported msg in this case?",
+      "range": {
+        "startLine": 3421,
+        "startChar": 0,
+        "endLine": 3424,
+        "endChar": 45
+      },
+      "revId": "24b325d79deda025379985f1f58cec10222873f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d5e83a0_a0714543",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3424,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-25T04:24:35Z",
+      "side": 1,
+      "message": "Question: Can we detect whether wmediumd exist? I\u0027m happy to add check although no-op looks OK to me. No-op can be considered as simulating no response from firmware.",
+      "parentUuid": "51c57fd7_b98d7ddf",
       "range": {
         "startLine": 3421,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cea5b7d_26b4e810",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3504,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-25T04:24:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0832ee97_0cae4e85",
+      "range": {
+        "startLine": 3504,
+        "startChar": 7,
+        "endLine": 3504,
+        "endChar": 34
+      },
+      "revId": "24b325d79deda025379985f1f58cec10222873f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f2851e7_c1304209",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-25T03:23:09Z",
       "side": 1,
       "message": "out of curiosity, nla_parse_nested is for the case that every field is filled, and the lines below is the case that only parts of fields are filled, isn\u0027t it?\n\nare the fields supposed to be optional? (i am not familiar with nla_policy)",
+      "range": {
+        "startLine": 3556,
+        "startChar": 1,
+        "endLine": 3569,
+        "endChar": 0
+      },
+      "revId": "24b325d79deda025379985f1f58cec10222873f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a46f624_a958ba5f",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3569,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-25T04:24:35Z",
+      "side": 1,
+      "message": "`nla_parse_nested` doesn\u0027t requires every field, so safe to use in anywhere. Choice between `nla_parse_nested` vs `nla_for_each_nested` depend on the range of attributes. Although there are some exception.\n\n`nla_parse_nested` is suitable if we\u0027re interested of most of the attributes, and not interested in out of range type. It reads all children and put them in the array by using children\u0027s type as indices while discarding out-of-range types. `nla_parse_nested` is good choice here because `nl80211_peer_measurement_ftm_resp` (where NL80211_PMSR_FTM_RESP_ATTR_MAX`) only have 23 items and we\u0027ll read all of them.\n\n`nla_for_each_nested` is suitable if we\u0027re interested of partial subset of attributes among the max attributes or want to know out of bound attributes. For example, L3696 uses `nla_for_each_nested` because it wants to log unknown attributes. Other example is reading `NL80211_ATTR_xx` because there are more than hundreds of attributes and it\u0027s rare to have interest in all attributes there.",
+      "parentUuid": "9f2851e7_c1304209",
       "range": {
         "startLine": 3556,
         "startChar": 1,
