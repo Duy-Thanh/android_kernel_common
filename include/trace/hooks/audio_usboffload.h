@@ -18,6 +18,7 @@
 struct snd_usb_audio;
 struct usb_interface;
 struct snd_pcm_substream;
+struct urb;
 
 DECLARE_HOOK(android_vh_audio_usb_offload_vendor_set,
 	TP_PROTO(void *arg),
@@ -42,6 +43,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_audio_usb_offload_disconnect,
 DECLARE_HOOK(android_vh_audio_usb_offload_suspend,
 	TP_PROTO(struct snd_pcm_substream *substream, int cmd, bool *suspend),
 	TP_ARGS(substream, cmd, suspend));
+
+DECLARE_HOOK(android_vh_audio_usb_urb_set_params,
+	TP_PROTO(struct urb *urb),
+	TP_ARGS(urb));
 
 #endif /* _TRACE_HOOK_AUDIO_USBOFFLOAD_H */
 /* This part must be outside protection */

@@ -1198,6 +1198,7 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep)
 			goto out_of_memory;
 		u->urb->pipe = ep->pipe;
 		u->urb->transfer_flags = URB_NO_TRANSFER_DMA_MAP;
+		trace_android_vh_audio_usb_urb_set_params(u->urb);
 		u->urb->interval = 1 << ep->datainterval;
 		u->urb->context = u;
 		u->urb->complete = snd_complete_urb;
@@ -1240,6 +1241,7 @@ static int sync_ep_set_params(struct snd_usb_endpoint *ep)
 		u->urb->transfer_buffer_length = 4;
 		u->urb->pipe = ep->pipe;
 		u->urb->transfer_flags = URB_NO_TRANSFER_DMA_MAP;
+		trace_android_vh_audio_usb_urb_set_params(u->urb);
 		u->urb->number_of_packets = 1;
 		u->urb->interval = 1 << ep->syncinterval;
 		u->urb->context = u;
