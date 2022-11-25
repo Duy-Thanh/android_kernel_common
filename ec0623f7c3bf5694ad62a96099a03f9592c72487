@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fae2976_fde14629",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-11-25T18:25:13Z",
+      "side": 1,
+      "message": "FYI it looks like there will be some more cleanup of the error paths in this function soon: https://lore.kernel.org/all/83944425-c177-7918-bcde-9cf7296a613f@amd.com/",
+      "revId": "ec0623f7c3bf5694ad62a96099a03f9592c72487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
