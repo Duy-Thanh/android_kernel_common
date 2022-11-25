@@ -22,6 +22,30 @@
       },
       "revId": "c6f52385f0fc6b3c80dac75240615361fa984d96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bfd6210_c2448e11",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-25T11:09:23Z",
+      "side": 1,
+      "message": "I modified this logic a bit as we discussed: if the PTE is part of an MMIO region we use a default mask that has XN set. I will push the updated version shortly, thanks !",
+      "parentUuid": "1ba5074a_27148c59",
+      "range": {
+        "startLine": 565,
+        "startChar": 1,
+        "endLine": 566,
+        "endChar": 40
+      },
+      "revId": "c6f52385f0fc6b3c80dac75240615361fa984d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
