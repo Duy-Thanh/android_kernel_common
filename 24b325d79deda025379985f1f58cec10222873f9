@@ -16,6 +16,98 @@
       "message": "Tell me if you prefer to get review directly from kernel maintainer.",
       "revId": "24b325d79deda025379985f1f58cec10222873f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf163d7_5cc14957",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3332,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-11-25T03:23:09Z",
+      "side": 1,
+      "message": "doesn\u0027t it need to check here like req or peer?",
+      "range": {
+        "startLine": 3332,
+        "startChar": 1,
+        "endLine": 3332,
+        "endChar": 8
+      },
+      "revId": "24b325d79deda025379985f1f58cec10222873f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c57fd7_b98d7ddf",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3424,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-11-25T03:23:09Z",
+      "side": 1,
+      "message": "what happens if it doesn\u0027t use neither virtio nor wmediumd in local? should we return not supported msg in this case?",
+      "range": {
+        "startLine": 3421,
+        "startChar": 0,
+        "endLine": 3424,
+        "endChar": 45
+      },
+      "revId": "24b325d79deda025379985f1f58cec10222873f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0832ee97_0cae4e85",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3504,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-11-25T03:23:09Z",
+      "side": 1,
+      "message": "it looks like there is nla_parse_nested, can we use it nla_parse_nested instead of nla_parse_nested_deprecated?",
+      "range": {
+        "startLine": 3504,
+        "startChar": 7,
+        "endLine": 3504,
+        "endChar": 34
+      },
+      "revId": "24b325d79deda025379985f1f58cec10222873f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2851e7_c1304209",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3569,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-11-25T03:23:09Z",
+      "side": 1,
+      "message": "out of curiosity, nla_parse_nested is for the case that every field is filled, and the lines below is the case that only parts of fields are filled, isn\u0027t it?\n\nare the fields supposed to be optional? (i am not familiar with nla_policy)",
+      "range": {
+        "startLine": 3556,
+        "startChar": 1,
+        "endLine": 3569,
+        "endChar": 0
+      },
+      "revId": "24b325d79deda025379985f1f58cec10222873f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
