@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5bd52dd_fe4b76c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:19:35Z",
+      "side": 1,
+      "message": "Remove, here and all the other functions. It was only needed because the functions were in a header file.",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "eac751d27fb127ed1347f01c99563b7480bde9d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
