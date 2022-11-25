@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b6e6c19_3283deb4",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3424,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-11-25T05:19:51Z",
+      "side": 1,
+      "message": "we can know if wmediumd exist in local env by checking _portid !\u003d 0\n\nI am okay with either no-op here or prohibit setting psmr in this case.",
+      "parentUuid": "4d5e83a0_a0714543",
+      "range": {
+        "startLine": 3421,
+        "startChar": 0,
+        "endLine": 3424,
+        "endChar": 45
+      },
+      "revId": "24b325d79deda025379985f1f58cec10222873f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0832ee97_0cae4e85",
         "filename": "drivers/net/wireless/mac80211_hwsim.c",
         "patchSetId": 4
