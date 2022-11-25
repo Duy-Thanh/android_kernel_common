@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3251a8f5_03d6553c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "Does this actually improve things? Do you have any numbers? See my comments below",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "404e31b6_0a4f6fe1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "That was to keep the code readable - I think you agree that this is quite complex. The kernel is compiled with -O2, so it does get inlined, I\u0027ve checked.",
+      "range": {
+        "startLine": 9,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 18
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15666233_e55002bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "That\u0027s true but one uses `writel` and the other `writel_relaxed`. So you\u0027re adding an unnecessary barrier to `__set_l1entry_attr_with_prot`",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed6f9c3_ccc0fbc0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "This argument is not used. Doesn\u0027t the compiler print a warning for this?",
+      "range": {
+        "startLine": 8,
+        "startChar": 61,
+        "endLine": 8,
+        "endChar": 65
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3924b26e_27bd9fd5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "I\u0027ll give you points for cleverness but this really hangs on `L1ENTRY_ATTR_L2TABLE_EN \u003d\u003d BIT(0)`. Add a static assertion inside this function. We\u0027ve seen constants like this being redefined between S2MPU versions and this code will break if that happens.",
+      "range": {
+        "startLine": 11,
+        "startChar": 9,
+        "endLine": 11,
+        "endChar": 44
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d804658_651005c9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "spaces",
+      "range": {
+        "startLine": 11,
+        "startChar": 47,
+        "endLine": 11,
+        "endChar": 49
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7584dec_2b55efa1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "Please no magic numbers. This should be a named constant in `kvm_s2mpu.h`",
+      "range": {
+        "startLine": 19,
+        "startChar": 27,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db3effca_a0e31ad6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "`/*l2_enable*/ false`",
+      "range": {
+        "startLine": 19,
+        "startChar": 24,
+        "endLine": 19,
+        "endChar": 25
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e037af61_38e72567",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "Keep the original comment. It is not obvious why this has to be `writel` and not `writel_relaxed`.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 52
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5661ff6_f4ca1a5e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "alignment",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 8
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4bf21c0_cd0e63b1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "alignment",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 9
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27d2a737_8aa89cad",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-25T12:16:54Z",
+      "side": 1,
+      "message": "alignment",
+      "range": {
+        "startLine": 51,
+        "startChar": 3,
+        "endLine": 51,
+        "endChar": 7
+      },
+      "revId": "662d9200e2e5b53d43b83e0965b13c2f78c8b6d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
