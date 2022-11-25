@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7ef0aaa_cede6d37",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-25T14:54:06Z",
+      "side": 1,
+      "message": "Since we trust the host at that point anyway (we\u0027re about to blindly jump to whatever offset it gave us in hyp_init_offset) we can probably just map with the fixmap and not bother with a donation. Alternatively, we could pass all this in parameters, that would be much faster (no TLBI on unmap, etc)",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 64,
+        "endChar": 64
+      },
+      "revId": "a8547e1d9b1ca933f5dc9d9ca0ed9d77d461b17e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7af2d2_a7c8c90b",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-25T14:54:06Z",
+      "side": 1,
+      "message": "Nit: can be simplified as __get_free_page(GFP_KERNEL)\n\nBut given that all the host is considered trusted at that point, we might as well just use kmalloc? Or use HVC parameters as suggested earlier?",
+      "range": {
+        "startLine": 487,
+        "startChar": 39,
+        "endLine": 487,
+        "endChar": 62
+      },
+      "revId": "a8547e1d9b1ca933f5dc9d9ca0ed9d77d461b17e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
