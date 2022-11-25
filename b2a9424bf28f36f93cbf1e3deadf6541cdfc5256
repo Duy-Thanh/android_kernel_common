@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aed21658_0e53d295",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-25T08:07:56Z",
+      "side": 1,
+      "message": "No module should be doing that at all.  The cpu hotplug logic should take care of this on its own, what is currently not working that needs this type of interaction?",
+      "parentUuid": "fa42e921_c7656d68",
+      "revId": "b2a9424bf28f36f93cbf1e3deadf6541cdfc5256",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bfbf6154_2a2d379a",
         "filename": "kernel/cpu.c",
         "patchSetId": 2
