@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a73d8050_70fca9f0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T17:19:52Z",
+      "side": 1,
+      "message": "I think it is better to separate register config from mpt operations\nIn the future there may be another S2MPU with exact same mpt ops but different init sequence, so we can reuse same mpt ops without modifications",
+      "parentUuid": "91d51883_18315a45",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 20
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b7cd30a_034e47cd",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
         "patchSetId": 20
@@ -84,6 +108,30 @@
       "writtenOn": "2022-11-25T13:27:34Z",
       "side": 1,
       "message": "Would it make sense to split this into v8 and v9 now?",
+      "range": {
+        "startLine": 126,
+        "startChar": 11,
+        "endLine": 126,
+        "endChar": 23
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e4a0f0_a6a15c72",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T17:19:52Z",
+      "side": 1,
+      "message": "I though about it, and didn\u0027t see much added value, we would have a new struct of version_ops. And v8/v9 they are identical in everything else(except the contexts), so I kept it as before.",
+      "parentUuid": "5b7cd30a_034e47cd",
       "range": {
         "startLine": 126,
         "startChar": 11,
@@ -199,6 +247,30 @@
       "writtenOn": "2022-11-25T13:27:34Z",
       "side": 1,
       "message": "Could we also select the pgtable_ops here? Would be nice to have it in one place.",
+      "range": {
+        "startLine": 524,
+        "startChar": 0,
+        "endLine": 524,
+        "endChar": 27
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c208fad_27a5f5df",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T17:19:52Z",
+      "side": 1,
+      "message": "In the next patches, there will be another if condition with another version, calling pagetable ops(now called mpt_ops) will done twice in each if.",
+      "parentUuid": "43e3b44a_f9f1a55b",
       "range": {
         "startLine": 524,
         "startChar": 0,
