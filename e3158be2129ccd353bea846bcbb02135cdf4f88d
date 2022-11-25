@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3746dd1a_8532e6c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 20
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T19:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80bc5fa2_fc8867ff",
+      "range": {
+        "startLine": 12,
+        "startChar": 72,
+        "endLine": 12,
+        "endChar": 73
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91d51883_18315a45",
@@ -165,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49223b54_7ec2bd7d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T19:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27682328_45875226",
+      "range": {
+        "startLine": 409,
+        "startChar": 1,
+        "endLine": 409,
+        "endChar": 42
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03013e3c_0661c826",
@@ -178,6 +226,30 @@
       "writtenOn": "2022-11-25T13:27:34Z",
       "side": 1,
       "message": "Why do you do this check twice? Why do you need it in the first place? The IOMMU framework will only call this function if the offset falls in the device mem region.",
+      "range": {
+        "startLine": 440,
+        "startChar": 1,
+        "endLine": 442,
+        "endChar": 19
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7179d69_0be4c6c9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T19:14:12Z",
+      "side": 1,
+      "message": "This is redundant, I removed it.",
+      "parentUuid": "03013e3c_0661c826",
       "range": {
         "startLine": 440,
         "startChar": 1,
@@ -211,6 +283,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf38304b_dd6dc635",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T19:14:12Z",
+      "side": 1,
+      "message": "I agree, moved it to v8/v9 regs\nFor the next s2mpu version, I will add the correct mask",
+      "parentUuid": "ba04b418_0baba80e",
+      "range": {
+        "startLine": 446,
+        "startChar": 1,
+        "endLine": 447,
+        "endChar": 32
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06f23f92_b6cf456d",
@@ -224,6 +320,30 @@
       "writtenOn": "2022-11-25T13:27:34Z",
       "side": 1,
       "message": "C",
+      "range": {
+        "startLine": 473,
+        "startChar": 4,
+        "endLine": 473,
+        "endChar": 5
+      },
+      "revId": "e3158be2129ccd353bea846bcbb02135cdf4f88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81adff07_edc4c559",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T19:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06f23f92_b6cf456d",
       "range": {
         "startLine": 473,
         "startChar": 4,
