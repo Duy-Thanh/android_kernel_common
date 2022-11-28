@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ca1fdc_dc862091",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05f5338a_0a87eed1",
+      "range": {
+        "startLine": 8,
+        "startChar": 53,
+        "endLine": 8,
+        "endChar": 55
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c16ff0bb_ce6f423d",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00f81fb5_b19250d7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "This converts an address byte to index in smpt table, each entry is a word, but I want to make the name clear it is used for smpt.",
+      "parentUuid": "c16ff0bb_ce6f423d",
+      "range": {
+        "startLine": 14,
+        "startChar": 8,
+        "endLine": 14,
+        "endChar": 26
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9056530a_533c04c9",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
         "patchSetId": 27
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-25T18:03:44Z",
       "side": 1,
       "message": "What does \"lut\" mean?",
+      "range": {
+        "startLine": 25,
+        "startChar": 18,
+        "endLine": 25,
+        "endChar": 33
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ccbe66_559c9d91",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Look up table, to look up protection dword from protection type.",
+      "parentUuid": "9056530a_533c04c9",
       "range": {
         "startLine": 25,
         "startChar": 18,
@@ -110,6 +182,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0afcbe1a_77cdaa25",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16e014e8_3e603c73",
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abded9f8_7594ba44",
@@ -123,6 +213,24 @@
       "writtenOn": "2022-11-25T18:03:44Z",
       "side": 1,
       "message": "empty line after function",
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "206b6b33_671f53a4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abded9f8_7594ba44",
       "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -144,6 +252,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8484418_be8f9869",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63b5e7e3_c0298790",
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b054a65_c225ad6e",
@@ -161,6 +287,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16f1d6a3_8fb98c15",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b054a65_c225ad6e",
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b7c0988_43030ab1",
@@ -174,6 +318,30 @@
       "writtenOn": "2022-11-25T18:03:44Z",
       "side": 1,
       "message": "use BYTE_TO_SMPT_INDEX?",
+      "range": {
+        "startLine": 75,
+        "startChar": 13,
+        "endLine": 75,
+        "endChar": 70
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b9fcb16_0d7d5853",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b7c0988_43030ab1",
       "range": {
         "startLine": 75,
         "startChar": 13,
@@ -207,6 +375,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8aef1fb_277274b0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18c11a77_3919196d",
+      "range": {
+        "startLine": 88,
+        "startChar": 50,
+        "endLine": 88,
+        "endChar": 52
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "193e986a_3ffd0617",
@@ -220,6 +412,30 @@
       "writtenOn": "2022-11-25T18:03:44Z",
       "side": 1,
       "message": "too long, mutliline comment",
+      "range": {
+        "startLine": 123,
+        "startChar": 69,
+        "endLine": 123,
+        "endChar": 93
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c16e414_e98e4c7e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "193e986a_3ffd0617",
       "range": {
         "startLine": 123,
         "startChar": 69,
@@ -247,6 +463,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3093987_da470b79",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fac5836b_6b1d3b3b",
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "520ef571_84e6c0c6",
@@ -270,6 +504,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71a1cc4f_5c94e434",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "520ef571_84e6c0c6",
+      "range": {
+        "startLine": 279,
+        "startChar": 39,
+        "endLine": 279,
+        "endChar": 66
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42b14fba_411953bd",
@@ -283,6 +541,30 @@
       "writtenOn": "2022-11-25T18:03:44Z",
       "side": 1,
       "message": "two spaces",
+      "range": {
+        "startLine": 284,
+        "startChar": 13,
+        "endLine": 284,
+        "endChar": 15
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fed9262e_809c8473",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42b14fba_411953bd",
       "range": {
         "startLine": 284,
         "startChar": 13,
@@ -318,6 +600,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32b00391_659f7bcd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "I added this to make sure MPT ops will not misbehave in the future if anything changed outside of this file, this enforces the constraint that only one version is registered at run time.",
+      "parentUuid": "dff0a8ed_1f2f2a95",
+      "range": {
+        "startLine": 296,
+        "startChar": 1,
+        "endLine": 297,
+        "endChar": 14
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cca9319_fa346b3f",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
         "patchSetId": 27
@@ -329,6 +635,30 @@
       "writtenOn": "2022-11-25T18:03:44Z",
       "side": 1,
       "message": "2MB what",
+      "range": {
+        "startLine": 298,
+        "startChar": 4,
+        "endLine": 298,
+        "endChar": 7
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9f2338b_800d620e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "granularity, added it in the comment",
+      "parentUuid": "7cca9319_fa346b3f",
       "range": {
         "startLine": 298,
         "startChar": 4,
@@ -362,6 +692,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de823230_c50baeb8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7f00138_f196bafb",
+      "range": {
+        "startLine": 306,
+        "startChar": 10,
+        "endLine": 306,
+        "endChar": 12
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efceb1bb_5a161809",
@@ -375,6 +729,30 @@
       "writtenOn": "2022-11-25T18:03:44Z",
       "side": 1,
       "message": "only DECERR",
+      "range": {
+        "startLine": 178,
+        "startChar": 11,
+        "endLine": 178,
+        "endChar": 24
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "412b832a_8ce89ca1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efceb1bb_5a161809",
       "range": {
         "startLine": 178,
         "startChar": 11,
@@ -408,6 +786,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9cc2f0_42d50761",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16dd3da7_cbe3dc89",
+      "range": {
+        "startLine": 588,
+        "startChar": 5,
+        "endLine": 588,
+        "endChar": 19
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65f5c16d_f9eb7364",
@@ -431,6 +833,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b0ddf28_c198a590",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65f5c16d_f9eb7364",
+      "range": {
+        "startLine": 613,
+        "startChar": 18,
+        "endLine": 613,
+        "endChar": 37
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86089aa8_7c2febd5",
@@ -444,6 +870,24 @@
       "writtenOn": "2022-11-25T18:03:44Z",
       "side": 1,
       "message": "`const int smtp_order \u003d smpt_order_from_version(version)` and use it in both places below",
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ad722d2_fb279943",
+        "filename": "arch/arm64/kvm/iommu/s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T10:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86089aa8_7c2febd5",
       "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
