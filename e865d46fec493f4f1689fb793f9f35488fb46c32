@@ -167,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fc87312_1bcc0339",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T16:36:27Z",
+      "side": 1,
+      "message": "I though about it, I saw it will add more memory and as the new variables should be loaded in the beginning of the function and there are a lot of iterations accessing memory, I didn\u0027t think it will differ much.\n\nI tried this now\nDifference in MicrodroidBenchmarks:\nMost of parameters are the nearly the same.\nnoticeable changes in bootloader_time_average_ms[protectedVM\u003dtrue]. for template, time decreases from 0.7243 to 0.6145\n\nDifference in Size(vmlinux): when using template, .text size increased from 0x141E188 to 0x141F188 (4K)\n\nIf this trade-off is acceptable I can add a new patch with templating",
+      "parentUuid": "76d645b5_f54b5e6a",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16e014e8_3e603c73",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
         "patchSetId": 27
