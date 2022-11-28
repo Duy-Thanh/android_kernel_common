@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54517f78_405dde10",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-28T10:28:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d547448_938add02",
+      "range": {
+        "startLine": 682,
+        "startChar": 1,
+        "endLine": 683,
+        "endChar": 42
+      },
+      "revId": "6f7b41b9393f642b67ebcf06542b9a2980346315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7263b10a_2026132c",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I updated this to keep it in a convoluted way. Thanks !",
       "parentUuid": "7263b10a_2026132c",
+      "range": {
+        "startLine": 686,
+        "startChar": 1,
+        "endLine": 689,
+        "endChar": 27
+      },
+      "revId": "6f7b41b9393f642b67ebcf06542b9a2980346315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a00a7b_bfce5619",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-28T10:28:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de2236b5_2cef0ab3",
       "range": {
         "startLine": 686,
         "startChar": 1,
