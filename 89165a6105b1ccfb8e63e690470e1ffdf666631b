@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4bbf9e2_99555436",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-28T16:46:48Z",
+      "side": 1,
+      "message": "I was thinking that init_s2mpu_driver() (and its sysmmu counterpart) should call __pkvm_register_iommu_driver() and pass a pointer to the pkvm_iommu_driver struct directly. Alternatively you could pass that pointer to __pkvm_iommu_driver_init() directly and have it call __pkvm_register_iommu_driver() unconditionally?\n\nAlso, do we really need this patch for now or is it only going to be useful when we modularize everything?",
+      "parentUuid": "3149ba2d_ac94027f",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 290,
+        "endChar": 2
+      },
+      "revId": "89165a6105b1ccfb8e63e690470e1ffdf666631b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecaaf51d_0bd34e56",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
         "patchSetId": 20
