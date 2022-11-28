@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7dbe2289_7f0087d9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T17:03:57Z",
+      "side": 1,
+      "message": "This will be useful when we have modules, it is also a step for decoupling iommu and s2mpu(now we have only this place with hardcoding compared to many before), as we want to prepare for having smmu drivers.\n\ninit_s2mpu_driver is an EL1 function which does hypercall to __pkvm_iommu_driver_init\n\nAnd pkvm_s2mpu_driver is el2 struct, we can pass it by address and do the address conversion? but as finalize is not called at this point, and this struct has function ptrs(code execution) I will try to avoid this",
+      "parentUuid": "f4bbf9e2_99555436",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 290,
+        "endChar": 2
+      },
+      "revId": "89165a6105b1ccfb8e63e690470e1ffdf666631b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecaaf51d_0bd34e56",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
         "patchSetId": 20
