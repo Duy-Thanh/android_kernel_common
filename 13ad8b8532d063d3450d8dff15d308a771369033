@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1c39d3_26ed8aa9",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4253,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-28T15:54:31Z",
+      "side": 1,
+      "message": "why not use the hook at the end of this function instead?",
+      "range": {
+        "startLine": 4253,
+        "startChar": 0,
+        "endLine": 4253,
+        "endChar": 34
+      },
+      "revId": "13ad8b8532d063d3450d8dff15d308a771369033",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
