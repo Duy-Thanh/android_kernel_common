@@ -106,6 +106,24 @@
       "parentUuid": "23d74d61_2acd83db",
       "revId": "5e5cc843b68dd84217ac1d54fde69780b87404fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f9fcaa_23d3775b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-28T22:53:16Z",
+      "side": 1,
+      "message": "If this series is replaced with the one at aosp/2319691, please abandon this series.",
+      "parentUuid": "009fba70_7d9cd7e1",
+      "revId": "5e5cc843b68dd84217ac1d54fde69780b87404fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
