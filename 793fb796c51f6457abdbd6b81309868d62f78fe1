@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12a4408d_d6fd46fc",
+        "filename": "drivers/usb/typec/ucsi/ucsi.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-11-28T15:10:21Z",
+      "side": 1,
+      "message": "This breaks the stable ABI and is therefore not acceptable on this branch.",
+      "revId": "793fb796c51f6457abdbd6b81309868d62f78fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
