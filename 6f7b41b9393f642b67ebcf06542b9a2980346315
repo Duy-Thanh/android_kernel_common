@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d547448_938add02",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-28T10:27:23Z",
+      "side": 1,
+      "message": "I thought I can get around comparing the address ranges by using the assumption that all MMIO has bit XN set in the PTE, but looking again at this doesn\u0027t seem correct so I re-wrote this portion.",
+      "parentUuid": "54f892ce_d450236f",
+      "range": {
+        "startLine": 682,
+        "startChar": 1,
+        "endLine": 683,
+        "endChar": 42
+      },
+      "revId": "6f7b41b9393f642b67ebcf06542b9a2980346315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7263b10a_2026132c",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 8
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-25T16:51:33Z",
       "side": 1,
       "message": "This looks like a convoluted way of writing \n\n    return (pte \u0026 prot_mask) !\u003d prot_mask;\n    \nno?",
+      "range": {
+        "startLine": 686,
+        "startChar": 1,
+        "endLine": 689,
+        "endChar": 27
+      },
+      "revId": "6f7b41b9393f642b67ebcf06542b9a2980346315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de2236b5_2cef0ab3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-28T10:27:23Z",
+      "side": 1,
+      "message": "I updated this to keep it in a convoluted way. Thanks !",
+      "parentUuid": "7263b10a_2026132c",
       "range": {
         "startLine": 686,
         "startChar": 1,
