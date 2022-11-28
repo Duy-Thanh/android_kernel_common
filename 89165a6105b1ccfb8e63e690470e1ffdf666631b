@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "daa20218_c8ee91af",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-28T17:13:40Z",
+      "side": 1,
+      "message": "\u003e And pkvm_s2mpu_driver is el2 struct, we can pass it by address and do the address conversion?\n\nYup, the host can even do it for us.\n\n\u003e but as finalize is not called at this point, and this struct has function ptrs(code execution) I will try to avoid this\n\nWell we\u0027re going to load the actual code dynamically soon anyway, so we better trust the caller here.",
+      "parentUuid": "7dbe2289_7f0087d9",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 290,
+        "endChar": 2
+      },
+      "revId": "89165a6105b1ccfb8e63e690470e1ffdf666631b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecaaf51d_0bd34e56",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
         "patchSetId": 20
