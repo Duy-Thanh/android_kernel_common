@@ -88,6 +88,24 @@
       "parentUuid": "1f2a6a9f_e4a250a5",
       "revId": "5e5cc843b68dd84217ac1d54fde69780b87404fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "009fba70_7d9cd7e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1840060
+      },
+      "writtenOn": "2022-11-28T09:47:38Z",
+      "side": 1,
+      "message": "Hi Jaegeuk, we now do upstream and post it here as FROMLIST, change id: 2319691. Could you review this patch series? Thanks!",
+      "parentUuid": "23d74d61_2acd83db",
+      "revId": "5e5cc843b68dd84217ac1d54fde69780b87404fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
