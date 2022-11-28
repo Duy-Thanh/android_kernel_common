@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "effc4e6f_1a304426",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-11-28T15:32:19Z",
+      "side": 1,
+      "message": "lgtm, jaeman@ wdyt?",
+      "revId": "3a2e3e8e34676d105c868df8aa3a50d76aca3fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eef06343_cfd5cf77",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3388,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-11-28T15:32:19Z",
+      "side": 1,
+      "message": "nits: check if pmsr feature is enabled or not?",
+      "range": {
+        "startLine": 3388,
+        "startChar": 4,
+        "endLine": 3388,
+        "endChar": 39
+      },
+      "revId": "3a2e3e8e34676d105c868df8aa3a50d76aca3fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
