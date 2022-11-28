@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab1417d_817e9397",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1864326
+      },
+      "writtenOn": "2022-11-28T15:12:27Z",
+      "side": 1,
+      "message": "Fixes below error during android build if merged into QC mainline:\n\nkernel/cpu.c:1686:21: error: called object type \u0027void *\u0027 is not a function or function pointer: perf_event_init_cpu(cpu);",
+      "revId": "69909187901728fdc0f7caf65a715eb8bc7e4e52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
