@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11e054c7_ec8529a4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-28T16:14:41Z",
+      "side": 1,
+      "message": "These should really be rwlock when we get support for that.\n@willdeacon@google.com FYI",
+      "parentUuid": "cd13c59d_a1738af1",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 43
+      },
+      "revId": "cfab42362ddf439bf57bcc91f6edfcebdef9beb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1de337ed_32391527",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
         "patchSetId": 15
