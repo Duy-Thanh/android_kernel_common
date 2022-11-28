@@ -16,6 +16,29 @@
       "message": "Fixes below error during android build if merged into QC mainline:\n\nkernel/cpu.c:1686:21: error: called object type \u0027void *\u0027 is not a function or function pointer: perf_event_init_cpu(cpu);",
       "revId": "69909187901728fdc0f7caf65a715eb8bc7e4e52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254a584b_d2b8cf29",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1686,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-28T15:59:17Z",
+      "side": 1,
+      "message": "ifdefs do not belong in .c files, please fix the .h file properly instead if this is really needed.",
+      "range": {
+        "startLine": 1686,
+        "startChar": 0,
+        "endLine": 1686,
+        "endChar": 25
+      },
+      "revId": "69909187901728fdc0f7caf65a715eb8bc7e4e52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
