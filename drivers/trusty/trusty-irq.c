@@ -174,7 +174,7 @@ static irqreturn_t trusty_irq_handler(int irq, void *data)
 		spin_unlock(&is->normal_irqs_lock);
 	}
 
-	trusty_enqueue_nop(is->trusty_dev, NULL);
+	trusty_enqueue_nop(is->trusty_dev, NULL, true);
 
 	dev_dbg(is->dev, "%s: irq %d done\n", __func__, irq);
 
@@ -201,7 +201,7 @@ static int trusty_irq_cpu_up(unsigned int cpu, struct hlist_node *node)
 	 * (e.g. loss of an IPI) may make this workaround unnecessary
 	 * in the future.
 	 */
-	trusty_enqueue_nop(is->trusty_dev, NULL);
+	trusty_enqueue_nop(is->trusty_dev, NULL, true);
 
 	return 0;
 }

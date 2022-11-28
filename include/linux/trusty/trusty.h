@@ -12,6 +12,13 @@
 #include <linux/pagemap.h>
 
 
+/*
+ * map Trusty priorities to Linux nice values (see trusty-sched-share.h)
+ */
+#define LINUX_NICE_FOR_TRUSTY_PRIORITY_LOW  0
+#define LINUX_NICE_FOR_TRUSTY_PRIORITY_NORMAL  (MIN_NICE / 2)
+#define LINUX_NICE_FOR_TRUSTY_PRIORITY_HIGH  MIN_NICE
+
 #if IS_ENABLED(CONFIG_TRUSTY)
 s32 trusty_std_call32(struct device *dev, u32 smcnr, u32 a0, u32 a1, u32 a2);
 s32 trusty_fast_call32(struct device *dev, u32 smcnr, u32 a0, u32 a1, u32 a2);
@@ -125,7 +132,7 @@ static inline void trusty_nop_init(struct trusty_nop *nop,
 	nop->args[2] = arg2;
 }
 
-void trusty_enqueue_nop(struct device *dev, struct trusty_nop *nop);
+void trusty_enqueue_nop(struct device *dev, struct trusty_nop *nop, int escalate_prio);
 void trusty_dequeue_nop(struct device *dev, struct trusty_nop *nop);
 
 #endif

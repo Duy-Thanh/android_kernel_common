@@ -152,7 +152,7 @@ static bool trusty_virtio_notify(struct virtqueue *vq)
 		atomic_set(&tvr->needs_kick, 1);
 		queue_work(tctx->kick_wq, &tctx->kick_vqs);
 	} else {
-		trusty_enqueue_nop(tctx->dev->parent, &tvr->kick_nop);
+		trusty_enqueue_nop(tctx->dev->parent, &tvr->kick_nop, true);
 	}
 
 	return true;
