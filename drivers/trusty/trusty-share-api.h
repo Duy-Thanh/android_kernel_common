@@ -14,4 +14,8 @@
 extern void *trusty_register_share(struct device *device);
 extern int trusty_unregister_share(void *share_state);
 
+struct trusty_share_state;
+int trusty_get_requested_nice(unsigned int cpu_num, struct trusty_share_state *tcpu_state);
+int trusty_set_actual_nice(unsigned int cpu_num, struct trusty_share_state *tcpu_state, int nice);
+
 #endif /* _TRUSTY_SHARE_API_H_ */

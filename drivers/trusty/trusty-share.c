@@ -299,3 +299,55 @@ int trusty_unregister_share(void *state)
 
 	return result; /* if unregister failed, trusty may have leaked some resources */
 }
+
+static inline int map_trusty_prio_to_linux_nice(int trusty_prio)
+{
+	int new_nice;
+
+	switch (trusty_prio) {
+	case TRUSTY_SHADOW_PRIORITY_HIGH:
+		new_nice = MIN_NICE;
+		break;
+	case TRUSTY_SHADOW_PRIORITY_LOW:
+		new_nice = MAX_NICE;
+		break;
+	case TRUSTY_SHADOW_PRIORITY_NORMAL:
+	default:
+		new_nice = 0;
+		break;
+	}
+
+	return new_nice;
+}
+
+static inline struct trusty_percpu_data *trusty_get_trusty_percpu_data(
+		struct trusty_shared *tsh, int cpu_num)
+{
+	return (struct trusty_percpu_data *)((unsigned char *)tsh + tsh->hdr_size +
+			(cpu_num * tsh->percpu_data_size));
+}
+
+int trusty_get_requested_nice(unsigned int cpu_num, struct trusty_share_state *tcpu_state)
+{
+	struct trusty_shared *tsh = (struct trusty_shared *)tcpu_state->vm_shared;
+
+	return map_trusty_prio_to_linux_nice(
+			trusty_get_trusty_percpu_data(tsh, cpu_num)->ask_shadow_priority);
+}
+
+void trusty_set_actual_nice(unsigned int cpu_num,
+		struct trusty_share_state *tcpu_state, int act_nice)
+{
+	struct trusty_shared *tsh = (struct trusty_shared *)tcpu_state->vm_shared;
+	int new_prio;
+
+	if (act_nice >= map_trusty_prio_to_linux_nice(TRUSTY_SHADOW_PRIORITY_LOW))
+		new_prio = TRUSTY_SHADOW_PRIORITY_LOW;
+	else if (act_nice <= map_trusty_prio_to_linux_nice(TRUSTY_SHADOW_PRIORITY_HIGH))
+		new_prio = TRUSTY_SHADOW_PRIORITY_HIGH;
+	else
+		new_prio = TRUSTY_SHADOW_PRIORITY_NORMAL;
+
+	trusty_get_trusty_percpu_data(tsh, cpu_num)->cur_shadow_priority = new_prio;
+}
+
