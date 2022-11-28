@@ -50,6 +50,24 @@
       "message": "Hi Yonghua Zuo, please help to add \"Bug: 260530885\" in the commit message",
       "revId": "ec0623f7c3bf5694ad62a96099a03f9592c72487",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ab2b86_d2a08e17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-11-28T10:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a2cb656_54b2c31f",
+      "revId": "ec0623f7c3bf5694ad62a96099a03f9592c72487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
