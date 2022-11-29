@@ -16,6 +16,24 @@
       "message": "Can you elaborate a bit on why this isn\u0027t needed for normal Android systems, please? BPF _is_ used in Android, so it\u0027s not clear to me why we don\u0027t need this fix.",
       "revId": "2d19e77e73cf9f6fee4e56dac9fcb8a44c722767",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a7ccd19_f88d5be6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-29T12:03:24Z",
+      "side": 1,
+      "message": "Our bpf usage on this branch does not collide with this issue from everything I can determine.  If it does, we can bring this back in an abi-safe way.",
+      "parentUuid": "cd7a59d7_a9562d18",
+      "revId": "2d19e77e73cf9f6fee4e56dac9fcb8a44c722767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
