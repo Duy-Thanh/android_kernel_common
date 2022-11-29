@@ -206,6 +206,30 @@
       },
       "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c5ffcc1_4b5bb1ea",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-29T16:59:18Z",
+      "side": 1,
+      "message": "I still don\u0027t see it.\nThis checks if the new element doesn\u0027t cause a loop with next or prev\n(new \u003d\u003d prev || new \u003d\u003d next)\n\nBut there is no check (or need I believe) to check that the ptrs of the new member of the list are initialized",
+      "parentUuid": "3d7dac47_c5c73b32",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 26
+      },
+      "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
