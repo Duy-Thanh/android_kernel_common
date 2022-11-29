@@ -1988,11 +1988,19 @@ static struct l2cap_chan *l2cap_global_chan_by_psm(int state, __le16 psm,
 			src_match = !bacmp(&c->src, src);
 			dst_match = !bacmp(&c->dst, dst);
 			if (src_match && dst_match) {
+<<<<<<< HEAD   (ac30bb UPSTREAM: binder: Gracefully handle BINDER_TYPE_FDA objects )
 				c = l2cap_chan_hold_unless_zero(c);
 				if (c) {
 					read_unlock(&chan_list_lock);
 					return c;
 				}
+=======
+				if (!l2cap_chan_hold_unless_zero(c))
+					continue;
+
+				read_unlock(&chan_list_lock);
+				return c;
+>>>>>>> BRANCH (0118fb Merge branch 'android12-5.10' into branch 'android12-5.10-lt)
 			}
 
 			/* Closest match */
