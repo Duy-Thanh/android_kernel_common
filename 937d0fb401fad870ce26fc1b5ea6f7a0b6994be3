@@ -158,6 +158,30 @@
       },
       "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d7dac47_c5c73b32",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-29T16:50:21Z",
+      "side": 1,
+      "message": "Then maybe our hypervisor implementation of this is out of date 😞\n\nhttps://elixir.bootlin.com/linux/latest/source/lib/list_debug.c#L23",
+      "parentUuid": "8926102d_57224ddd",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 26
+      },
+      "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
