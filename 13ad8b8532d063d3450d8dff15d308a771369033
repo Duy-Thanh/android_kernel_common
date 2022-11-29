@@ -22,6 +22,30 @@
       },
       "revId": "13ad8b8532d063d3450d8dff15d308a771369033",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "299d6d45_9a3b4dfd",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4253,
+      "author": {
+        "id": 1975062
+      },
+      "writtenOn": "2022-11-29T12:52:56Z",
+      "side": 1,
+      "message": "With updated scheduler logic, we won\u0027t be using this vendor hook",
+      "parentUuid": "6f1c39d3_26ed8aa9",
+      "range": {
+        "startLine": 4253,
+        "startChar": 0,
+        "endLine": 4253,
+        "endChar": 34
+      },
+      "revId": "13ad8b8532d063d3450d8dff15d308a771369033",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
