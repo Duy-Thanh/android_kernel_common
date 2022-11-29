@@ -51,6 +51,24 @@
       "message": "Apologies, I started looking at this yesterday and got distracted. It looks ok to me.",
       "revId": "03bbcb520e4455f9e9ffd85aa07c9008a5198112",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df6fbeac_d6ea8abf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-11-29T17:00:05Z",
+      "side": 1,
+      "message": "As for the non-merged dma-buf patches, they are probably still necessary for vendor heap implementations. I\u0027d love to upstream them but upstream maintainers don\u0027t like the idea of modular heaps (which they see in service of proprietary gpu drivers) and require example uses using fully open driver stacks.\n\nI could see about taking another pass at pushing them to the list, to see if views have softened.",
+      "parentUuid": "263f17e4_1e939f88",
+      "revId": "03bbcb520e4455f9e9ffd85aa07c9008a5198112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
