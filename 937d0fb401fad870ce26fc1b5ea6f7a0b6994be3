@@ -134,6 +134,30 @@
       },
       "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8926102d_57224ddd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-29T16:43:12Z",
+      "side": 1,
+      "message": "This might be a silly question, but I don\u0027t see why\n\nlist_debug, doesn\u0027t check the members of new(\u0026drv-\u003elist)\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android14-5.15/arch/arm64/kvm/hyp/nvhe/list_debug.c#29\n \nAnd __list_add doesn\u0027t read it https://android.googlesource.com/kernel/common/+/refs/heads/android14-5.15/include/linux/list.h#63",
+      "parentUuid": "214175e9_e758432e",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 26
+      },
+      "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
