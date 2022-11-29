@@ -22,6 +22,30 @@
       },
       "revId": "74ed1243b04aacbc5dd77a1bb76a43400f8c95fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce073a05_6e8c61d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 38
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-29T15:51:36Z",
+      "side": 1,
+      "message": "That is cherry-picked of this commit + modifications as it will not compile with the new design.",
+      "parentUuid": "14698e34_bcdfe93b",
+      "range": {
+        "startLine": 17,
+        "startChar": 27,
+        "endLine": 17,
+        "endChar": 67
+      },
+      "revId": "74ed1243b04aacbc5dd77a1bb76a43400f8c95fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
