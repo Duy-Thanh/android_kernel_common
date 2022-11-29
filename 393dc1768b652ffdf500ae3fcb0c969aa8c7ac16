@@ -16,6 +16,23 @@
       "message": "Thanks Greg for the CR+2.\nHi Todd, would appreciate if you could help confirm these CLs and vote CR.",
       "revId": "393dc1768b652ffdf500ae3fcb0c969aa8c7ac16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "695a7186_2fa7ecbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1352498
+      },
+      "writtenOn": "2022-11-29T07:38:28Z",
+      "side": 1,
+      "message": "Hi Todd and Greg, it seems this one is ready to submit now. Could you help to submit the CL or let Rockchip know what\u0027s missing from their end? Thanks.",
+      "revId": "393dc1768b652ffdf500ae3fcb0c969aa8c7ac16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
