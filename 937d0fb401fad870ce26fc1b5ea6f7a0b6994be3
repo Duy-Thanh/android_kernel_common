@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34e30c36_ae2fff28",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-29T16:26:47Z",
+      "side": 1,
+      "message": "Id allocation should be handled in the kernel now.\n\nwe can remove this variable and use the address(64bits) of the struct as the identifier sent in all HVCs",
+      "parentUuid": "c2cd422a_2692c154",
+      "range": {
+        "startLine": 404,
+        "startChar": 1,
+        "endLine": 404,
+        "endChar": 14
+      },
+      "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98e521fc_31b499d6",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
         "patchSetId": 22
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-29T15:35:58Z",
       "side": 1,
       "message": "I _think_ this guy might need to be initialized with INIT_LIST_HEAD() first.",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 26
+      },
+      "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e2c2fd4_8f930138",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-29T16:26:47Z",
+      "side": 1,
+      "message": "The head is initialized with LIST_HEAD in line 25",
+      "parentUuid": "98e521fc_31b499d6",
       "range": {
         "startLine": 117,
         "startChar": 16,
