@@ -215,6 +215,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "147360fc_805b3b0e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-29T16:45:10Z",
+      "side": 1,
+      "message": "Is it better to do it in the same patch or a new patch?",
+      "parentUuid": "023656c9_532a8682",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16e014e8_3e603c73",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
         "patchSetId": 27
@@ -684,6 +708,30 @@
       "side": 1,
       "message": "Maybe add a WARN_ON?",
       "parentUuid": "32b00391_659f7bcd",
+      "range": {
+        "startLine": 296,
+        "startChar": 1,
+        "endLine": 297,
+        "endChar": 14
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "534b06ae_7c4709d5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-29T16:45:10Z",
+      "side": 1,
+      "message": "Agree",
+      "parentUuid": "cf5bc66d_d64d59c4",
       "range": {
         "startLine": 296,
         "startChar": 1,
