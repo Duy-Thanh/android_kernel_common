@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd7a59d7_a9562d18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-29T09:16:56Z",
+      "side": 1,
+      "message": "Can you elaborate a bit on why this isn\u0027t needed for normal Android systems, please? BPF _is_ used in Android, so it\u0027s not clear to me why we don\u0027t need this fix.",
+      "revId": "2d19e77e73cf9f6fee4e56dac9fcb8a44c722767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
