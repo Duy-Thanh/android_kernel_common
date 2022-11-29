@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eab795aa_a8dbb736",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-29T17:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c016b7b1_c86ae28d",
+      "range": {
+        "startLine": 787,
+        "startChar": 2,
+        "endLine": 787,
+        "endChar": 7
+      },
+      "revId": "5a7b3defaf432ef1cf4a592e2007b363f3780b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f7b30fe_79d10d5b",
@@ -94,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc26c0fa_2c3990f4",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-29T17:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f7b30fe_79d10d5b",
+      "range": {
+        "startLine": 806,
+        "startChar": 1,
+        "endLine": 806,
+        "endChar": 5
+      },
+      "revId": "5a7b3defaf432ef1cf4a592e2007b363f3780b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92c8330b_1cb3d145",
@@ -107,6 +155,30 @@
       "writtenOn": "2022-11-29T15:59:38Z",
       "side": 1,
       "message": "Ditto.",
+      "range": {
+        "startLine": 817,
+        "startChar": 1,
+        "endLine": 817,
+        "endChar": 5
+      },
+      "revId": "5a7b3defaf432ef1cf4a592e2007b363f3780b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c41c8a7a_1f73ac7d",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-29T17:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92c8330b_1cb3d145",
       "range": {
         "startLine": 817,
         "startChar": 1,
