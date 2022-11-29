@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daa201a9_0faebff2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928585
+      },
+      "writtenOn": "2022-11-29T15:00:30Z",
+      "side": 1,
+      "message": "Why do not pick commit a43cfc87caaf(\"android: binder: stop saving a pointer to the VMA\") to fix this issue for kernel-5.15?",
+      "revId": "201d5f4a3ec12c639ecf2284da45a1ebd9e2141d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
