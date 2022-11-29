@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d9a05e3_110533e6",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3388,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-29T05:58:34Z",
+      "side": 1,
+      "message": "It\u0027s handled earlier in the `nl80211.c`, so no need to double check here.",
+      "parentUuid": "eef06343_cfd5cf77",
+      "range": {
+        "startLine": 3388,
+        "startChar": 4,
+        "endLine": 3388,
+        "endChar": 39
+      },
+      "revId": "3a2e3e8e34676d105c868df8aa3a50d76aca3fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d570d67_553656e6",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-11-29T01:55:43Z",
       "side": 1,
       "message": "Similar logic of the function mac80211_hwsim_start_pmsr is under the condition (err \u0026\u0026 skb) does this also need to check err?",
+      "revId": "3a2e3e8e34676d105c868df8aa3a50d76aca3fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a7573d7_878342ff",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3497,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-29T05:58:34Z",
+      "side": 1,
+      "message": "Done. Good catch.",
+      "parentUuid": "6d570d67_553656e6",
       "revId": "3a2e3e8e34676d105c868df8aa3a50d76aca3fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
