@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bed7fd4_a3869ca4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-29T15:56:00Z",
+      "side": 1,
+      "message": "I still don\u0027t think this is correct, this would fail to count a non-executable mapping to memory no? KVM_PTE_LEAF_ATTR_HI_S1_XN should always be set in the mask, not always in the expected value depending on @phys.\n\nAlso, as mentioned in previous comments, if you separate the mask from the expected value, you should be able to fold the check on KVM_PTE_LEAF_ATTR_HI_SW in here as well.",
+      "range": {
+        "startLine": 685,
+        "startChar": 2,
+        "endLine": 685,
+        "endChar": 42
+      },
+      "revId": "5a7b3defaf432ef1cf4a592e2007b363f3780b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
