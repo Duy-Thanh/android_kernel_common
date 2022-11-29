@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "023656c9_532a8682",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-29T15:45:41Z",
+      "side": 1,
+      "message": "LGTM, 4K is nothing to be worried about, so the perf improvement is desirable.",
+      "parentUuid": "6fc87312_1bcc0339",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16e014e8_3e603c73",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
         "patchSetId": 27
@@ -636,6 +660,30 @@
       "side": 1,
       "message": "I added this to make sure MPT ops will not misbehave in the future if anything changed outside of this file, this enforces the constraint that only one version is registered at run time.",
       "parentUuid": "dff0a8ed_1f2f2a95",
+      "range": {
+        "startLine": 296,
+        "startChar": 1,
+        "endLine": 297,
+        "endChar": 14
+      },
+      "revId": "e865d46fec493f4f1689fb793f9f35488fb46c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf5bc66d_d64d59c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-mpt-s2mpu.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-29T15:45:41Z",
+      "side": 1,
+      "message": "Maybe add a WARN_ON?",
+      "parentUuid": "32b00391_659f7bcd",
       "range": {
         "startLine": 296,
         "startChar": 1,
