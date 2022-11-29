@@ -110,6 +110,30 @@
       },
       "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "214175e9_e758432e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-29T16:30:46Z",
+      "side": 1,
+      "message": "That\u0027s the head of the list, I was talking about the `list` member inside the drv struct -- it needs to be initialized too. This would probably explode with CONFIG_DEBUG_LIST\u003dy.",
+      "parentUuid": "7e2c2fd4_8f930138",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 26
+      },
+      "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
