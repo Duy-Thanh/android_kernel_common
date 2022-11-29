@@ -452,11 +452,19 @@ regular_page:
 			continue;
 		}
 
+<<<<<<< HEAD   (485c01 ANDROID: GKI: MGLRU ABI Fixup)
 		/* Do not interfere with other mappings of this page */
 		if (!allow_shared && page_mapcount(page) != 1)
 			continue;
 
 		if (pageout_anon_only && !PageAnon(page))
+=======
+		/*
+		 * Do not interfere with other mappings of this page and
+		 * non-LRU page.
+		 */
+		if (!PageLRU(page) || page_mapcount(page) != 1)
+>>>>>>> BRANCH (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 			continue;
 
 		VM_BUG_ON_PAGE(PageTransCompound(page), page);
@@ -1086,6 +1094,8 @@ static int madvise_inject_error(int behavior,
 			pr_info("Injecting memory failure for pfn %#lx at process virtual address %#lx\n",
 				 pfn, start);
 			ret = memory_failure(pfn, MF_COUNT_INCREASED);
+			if (ret == -EOPNOTSUPP)
+				ret = 0;
 		}
 
 		if (ret)
