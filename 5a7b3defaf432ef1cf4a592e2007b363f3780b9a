@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb9c540b_d09f10ba",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-11-29T17:56:05Z",
+      "side": 1,
+      "message": "I added `KVM_PTE_LEAF_ATTR_HI_S1_XN` as part of the default mask and I tested. I think this should increase the chances of coalescing (as there are many more PTEs with KVM_PTE_LEAF_ATTR_HI_S1_XN set).",
+      "parentUuid": "1bed7fd4_a3869ca4",
+      "range": {
+        "startLine": 685,
+        "startChar": 2,
+        "endLine": 685,
+        "endChar": 42
+      },
+      "revId": "5a7b3defaf432ef1cf4a592e2007b363f3780b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c016b7b1_c86ae28d",
