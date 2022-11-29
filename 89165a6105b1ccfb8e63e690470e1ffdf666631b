@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32d60f22_e2fee642",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-29T10:27:37Z",
+      "side": 1,
+      "message": "I updated the patch, now __pkvm_iommu_driver_init uses struct address instead of id.\n\nFor EL2 modules, we can just call __pkvm_iommu_driver_init from the module init and ignore this hypercall in EL1. (previously el2 module would register the driver in module init and kernel module will issue this hypercall to init the driver)\n\nAs, __pkvm_iommu_driver_init can be called from EL2 now, the hvc handler for it will address conversion kern-\u003ehyp",
+      "parentUuid": "41d12fbb_da5b5661",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 290,
+        "endChar": 2
+      },
+      "revId": "89165a6105b1ccfb8e63e690470e1ffdf666631b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecaaf51d_0bd34e56",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
         "patchSetId": 20
