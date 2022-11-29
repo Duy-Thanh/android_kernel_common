@@ -159,6 +159,7 @@
   cpufreq_cpu_get
   cpufreq_cpu_get_raw
   cpufreq_cpu_put
+  cpufreq_cpu_release
   cpufreq_disable_fast_switch
   cpufreq_driver_fast_switch
   cpufreq_driver_resolve_freq
