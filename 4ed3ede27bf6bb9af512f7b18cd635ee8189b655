@@ -16,6 +16,24 @@
       "message": "Removing this label leaves a dangling reference in line 200. That one is dropped in one of the subsequent patches, so it is no big deal (and the cryptodev version has the same issue).",
       "revId": "4ed3ede27bf6bb9af512f7b18cd635ee8189b655",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ad6e64_26033971",
+        "filename": "crypto/algboss.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-11-30T19:05:42Z",
+      "side": 0,
+      "message": "Thanks, I asked Herbert if he wants to fix this bisection hazard, but it might be too late.",
+      "parentUuid": "4a46fe93_e9237549",
+      "revId": "4ed3ede27bf6bb9af512f7b18cd635ee8189b655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
