@@ -393,6 +393,11 @@ static_assert(SMPT_GRAN <= PAGE_SIZE);
 #define for_each_vid(i)			for ((i) = 0; (i) < NR_VIDS; (i)++)
 #define for_each_gb_and_vid(gb, vid)	for_each_vid((vid)) for_each_gb((gb))
 
+#define GRAN_BYTE(gran)			((gran << V9_MPT_PROT_BITS) | (gran))
+#define GRAN_HWORD(gran)		((GRAN_BYTE(gran) << 8) | (GRAN_BYTE(gran)))
+#define GRAN_WORD(gran)			(((u32)(GRAN_HWORD(gran) << 16) | (GRAN_HWORD(gran))))
+#define GRAN_DWORD(gran)		((u64)((u64)GRAN_WORD(gran) << 32) | (u64)(GRAN_WORD(gran)))
+
 enum s2mpu_version {
 	S2MPU_VERSION_1 = 0x11000000,
 	S2MPU_VERSION_2 = 0x20000000,
@@ -431,6 +436,25 @@ struct fmpt {
 struct mpt {
 	struct fmpt fmpt[NR_GIGABYTES];
 	enum s2mpu_version version;
+};
+
+/*
+ * Page table entries for different protection look up table
+ * granularity is compile time config, so we can do this also for
+ * this array without having duplicate arrays.
+ */
+static const u64 v9_mpt_prot_doubleword[] = {
+	[MPT_PROT_NONE] = 0x0000000000000000 | GRAN_DWORD(SMPT_GRAN_ATTR),
+	[MPT_PROT_R]    = 0x4444444444444444 | GRAN_DWORD(SMPT_GRAN_ATTR),
+	[MPT_PROT_W]	= 0x8888888888888888 | GRAN_DWORD(SMPT_GRAN_ATTR),
+	[MPT_PROT_RW]   = 0xcccccccccccccccc | GRAN_DWORD(SMPT_GRAN_ATTR),
+};
+
+static const u64 mpt_prot_doubleword[] = {
+	[MPT_PROT_NONE] = 0x0000000000000000,
+	[MPT_PROT_R]    = 0x5555555555555555,
+	[MPT_PROT_W]	= 0xaaaaaaaaaaaaaaaa,
+	[MPT_PROT_RW]   = 0xffffffffffffffff,
 };
 
 #endif /* __ARM64_KVM_S2MPU_H__ */
