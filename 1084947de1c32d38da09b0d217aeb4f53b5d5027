@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17255097_5d31c0bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-11-30T10:50:32Z",
+      "side": 1,
+      "message": "Test has been skipped for now:\nPrevious attempts have lost devices, skipped next attempts to preserve devices.",
+      "revId": "1084947de1c32d38da09b0d217aeb4f53b5d5027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
