@@ -187,6 +187,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be7b9a2f_8c917744",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-30T09:31:14Z",
+      "side": 1,
+      "message": "Looking again into this approach, in case of el2 modules, if they need to call __pkvm_iommu_driver_init, they will need to allocate MPT (4.25MB)\n\nSo we either separate HVCs to have register driver and init driver\n-in case of modules\n -only register called from el2 module init \n -driver_init called from el1 module\n \n or we can leave the hardcoded driver, and it would be removed when we have modules",
+      "parentUuid": "32d60f22_e2fee642",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 290,
+        "endChar": 2
+      },
+      "revId": "89165a6105b1ccfb8e63e690470e1ffdf666631b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecaaf51d_0bd34e56",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
         "patchSetId": 20
