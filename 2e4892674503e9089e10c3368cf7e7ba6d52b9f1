@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000033382778",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2320156?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "25a7e647_61247302",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 2,
+                "endChar": 0
+              },
+              "replacement": "COMMON_GKI_MODULES_LIST \u003d [\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "5cee8394_b9c9b376",
+        "filename": "modules.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-11-30T19:52:05Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier modules.bzl` to format the file, or apply the suggested fix.",
+      "revId": "2e4892674503e9089e10c3368cf7e7ba6d52b9f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
