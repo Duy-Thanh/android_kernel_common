@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce1a97d6_1227f886",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-30T20:50:59Z",
+      "side": 1,
+      "message": "Greg, I think we need to wait for a day or two to straighten out the QC traceiter symbol issue. I think they will be uploading a patch today. I\u0027d like to get theirs in first in case the LTS update changes any of the hook-related structs (and therefore breaks the KMI that QC is relying on). b/260757963.\n\nSorry about the delay.",
+      "revId": "9960422eb91ea610607fb94962f1f62fb5e4bbed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
