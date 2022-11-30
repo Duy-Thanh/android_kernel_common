@@ -1,3 +1,5 @@
+# List of common gki modules.
+
 COMMON_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/block/zram/zram.ko",
