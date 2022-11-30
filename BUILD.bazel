@@ -3,7 +3,14 @@
 
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels", "define_db845c")
-load("//build/kernel/kleaf:kernel.bzl", "ddk_headers", "kernel_build", "kernel_images", "kernel_modules_install")
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "boot_image_builder",
+    "ddk_headers",
+    "kernel_build",
+    "kernel_images",
+    "kernel_modules_install",
+)
 load(":modules.bzl", "COMMON_GKI_MODULES_LIST")
 
 package(
@@ -31,6 +38,18 @@ define_common_kernels(target_configs = {
         "module_implicit_outs": COMMON_GKI_MODULES_LIST,
     },
 })
+
+boot_image_builder(
+    name = "kernel_aarch64_build_boot_image",
+    default_ramdisk = "@aosp_arm64_prebuilts//ramdisk.img",
+    kernel_image = ":kernel_aarch64_download_or_build/Image",
+)
+
+boot_image_builder(
+    name = "kernel_x86_64_build_boot_image",
+    default_ramdisk = "@aosp_x86_64_prebuilts//ramdisk.img",
+    kernel_image = ":kernel_x86_64_download_or_build/bzImage",
+)
 
 define_db845c(
     name = "db845c",
