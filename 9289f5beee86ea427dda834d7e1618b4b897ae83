@@ -16,6 +16,24 @@
       "message": "```\nSymbols missing from symbol list:\n - rng_is_initialized\n ```",
       "revId": "9289f5beee86ea427dda834d7e1618b4b897ae83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b63426fb_34bba2b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-11-30T16:12:28Z",
+      "side": 1,
+      "message": "ick, that had to be added by hand, thanks for figuring it out...  I\u0027ll go do that and regenerate the .xml file.",
+      "parentUuid": "a3c01ff3_de8e5b3e",
+      "revId": "9289f5beee86ea427dda834d7e1618b4b897ae83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
