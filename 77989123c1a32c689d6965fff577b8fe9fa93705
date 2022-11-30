@@ -22,6 +22,30 @@
       },
       "revId": "77989123c1a32c689d6965fff577b8fe9fa93705",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa6b687_d3d5c71f",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5329,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-30T01:13:19Z",
+      "side": 1,
+      "message": "What do you think about keeping it as-is? This CL itself doesn\u0027t related `virtio` nor `wmediumd` and also having capability (i.e. I can do XXX) doesn\u0027t mean working (i.e. I will do XXX).",
+      "parentUuid": "d9d961ab_0a59fed2",
+      "range": {
+        "startLine": 5318,
+        "startChar": 1,
+        "endLine": 5329,
+        "endChar": 2
+      },
+      "revId": "77989123c1a32c689d6965fff577b8fe9fa93705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
