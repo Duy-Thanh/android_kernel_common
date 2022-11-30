@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7d4371a_9aa38eba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1165189
+      },
+      "writtenOn": "2022-11-30T01:10:50Z",
+      "side": 1,
+      "message": "Let me explain the background. We understand that using a generic approach like https://lwn.net/Articles/913800/ is preferred. But, we want to start with a vendor hook and then will switch to the cros patch.\nThe reason is that we have big milestones in Dec and in Mar, but the cros patch is just upstreamed and under review. We are not sure when it will be merged, so can\u0027t take a risk.\nHope this explains the situation.",
+      "parentUuid": "8d388de7_38906444",
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea838ee_cc572ed6",
         "filename": "kernel/power/snapshot.c",
         "patchSetId": 6
