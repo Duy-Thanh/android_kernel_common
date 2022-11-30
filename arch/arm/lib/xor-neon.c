@@ -22,6 +22,17 @@ MODULE_LICENSE("GPL");
  */
 #ifdef CONFIG_CC_IS_GCC
 #pragma GCC optimize "tree-vectorize"
+<<<<<<< HEAD   (8ff999 ANDROID: cpufreq: times: record fast switch frequency transi)
+=======
+#else
+/*
+ * While older versions of GCC do not generate incorrect code, they fail to
+ * recognize the parallel nature of these functions, and emit plain ARM code,
+ * which is known to be slower than the optimized ARM code in asm-arm/xor.h.
+ *
+ * #warning This code requires at least version 4.6 of GCC
+ */
+>>>>>>> BRANCH (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 #endif
 
 #pragma GCC diagnostic ignored "-Wunused-variable"

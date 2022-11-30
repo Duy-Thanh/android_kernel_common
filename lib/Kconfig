@@ -121,12 +121,19 @@ config INDIRECT_IOMEM_FALLBACK
 	  mmio accesses when the IO memory address is not a registered
 	  emulated region.
 
+<<<<<<< HEAD   (8ff999 ANDROID: cpufreq: times: record fast switch frequency transi)
 config TRACE_MMIO_ACCESS
 	bool "Register read/write tracing"
 	depends on TRACING && ARCH_HAVE_TRACE_MMIO_ACCESS
 	help
 	  Create tracepoints for MMIO read/write operations. These trace events
 	  can be used for logging all MMIO read/write operations.
+=======
+source "lib/crypto/Kconfig"
+
+config LIB_MEMNEQ
+	bool
+>>>>>>> BRANCH (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 
 config CRC_CCITT
 	tristate "CRC-CCITT functions"

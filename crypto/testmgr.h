@@ -32583,6 +32583,7 @@ static const struct hash_testvec blake2b_512_tv_template[] = {{
 			  0xae, 0x15, 0x81, 0x15, 0xd0, 0x88, 0xa0, 0x3c, },
 }};
 
+<<<<<<< HEAD   (8ff999 ANDROID: cpufreq: times: record fast switch frequency transi)
 static const struct hash_testvec blakes2s_128_tv_template[] = {{
 	.digest = (u8[]){ 0x64, 0x55, 0x0d, 0x6f, 0xfe, 0x2c, 0x0a, 0x01,
 			  0xa1, 0x4a, 0xba, 0x1e, 0xad, 0xe0, 0x20, 0x0c, },
@@ -34336,4 +34337,6 @@ static const struct cipher_testvec aes_hctr2_tv_template[] = {
 
 };
 
+=======
+>>>>>>> BRANCH (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 #endif	/* _CRYPTO_TESTMGR_H */
