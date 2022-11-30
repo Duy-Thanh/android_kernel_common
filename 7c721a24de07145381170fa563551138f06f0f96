@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10e94c53_494a7900",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1165189
+      },
+      "writtenOn": "2022-11-30T18:17:32Z",
+      "side": 1,
+      "message": "Got the point. I will work with QCOM to have the comments applied.",
+      "parentUuid": "110d6ba2_900bba88",
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea838ee_cc572ed6",
         "filename": "kernel/power/snapshot.c",
         "patchSetId": 6
