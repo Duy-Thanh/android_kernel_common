@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60bd97e7_cd166f58",
+        "filename": "arch/arm64/kernel/patching.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-30T18:09:03Z",
+      "side": 1,
+      "message": "I think this might be cleaner along the lines of:\n\nstatic int __kprobes __aarch64_text_write(void *dst, void *src, size_t sz);\n\nwhich could hold the locking and the fixmap stuff, as well as confirm that dst lies within the text section. Then it can be reused by aarch64_insn_write() too.\n\nWhat do you think?",
+      "range": {
+        "startLine": 91,
+        "startChar": 14,
+        "endLine": 91,
+        "endChar": 32
+      },
+      "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55684d37_bec1e3d8",
+        "filename": "arch/arm64/kernel/patching.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-30T18:09:03Z",
+      "side": 1,
+      "message": "Why do you need these two assignments?\n\nOh, they\u0027re copied from the other function :/ Weird code. Maybe clean that up upstream separately?",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 25
+      },
+      "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
