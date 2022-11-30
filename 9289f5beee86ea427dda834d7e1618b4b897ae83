@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c01ff3_de8e5b3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-11-30T15:41:55Z",
+      "side": 1,
+      "message": "```\nSymbols missing from symbol list:\n - rng_is_initialized\n ```",
+      "revId": "9289f5beee86ea427dda834d7e1618b4b897ae83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
