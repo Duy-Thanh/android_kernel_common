@@ -16,6 +16,24 @@
       "message": ".xml file still needs to be updated, rebuilding now...",
       "revId": "6d874473c8ef2b3a21cd0d4e981609b25aa29fc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce023be9_44c1c756",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-01T16:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbfef127_ccdc2aa3",
+      "revId": "6d874473c8ef2b3a21cd0d4e981609b25aa29fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
