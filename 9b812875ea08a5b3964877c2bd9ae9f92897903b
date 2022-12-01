@@ -141,6 +141,30 @@
       },
       "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb1aaf77_5212b879",
+        "filename": "arch/arm64/kernel/patching.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-12-01T15:10:56Z",
+      "side": 1,
+      "message": "Which section holds the relocs? If it\u0027s not mapped r/o, then we could avoid the fixmap here altogether...",
+      "parentUuid": "80a92958_cfa74831",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 25
+      },
+      "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
