@@ -34,6 +34,24 @@
       "message": "is there a respin request for this patch? https://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
       "revId": "5617c5d87931a2b9a9792b91be9704d3902e4c2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1d1cfbc_ad49937f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-12-01T06:15:31Z",
+      "side": 1,
+      "message": "yes, this priority is P2.",
+      "parentUuid": "adb8961e_021813a3",
+      "revId": "5617c5d87931a2b9a9792b91be9704d3902e4c2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
