@@ -16,6 +16,24 @@
       "message": "Also needs an SPDX line and a Copyright line, right?",
       "revId": "123c71650358e0896bea12be7e78950bd33bd84d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d81ce919_fdd6571b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-12-01T13:14:13Z",
+      "side": 1,
+      "message": "Done,",
+      "parentUuid": "a85b67b9_8b1e3260",
+      "revId": "123c71650358e0896bea12be7e78950bd33bd84d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
