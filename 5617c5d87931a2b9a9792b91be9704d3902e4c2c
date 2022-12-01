@@ -52,6 +52,24 @@
       "parentUuid": "adb8961e_021813a3",
       "revId": "5617c5d87931a2b9a9792b91be9704d3902e4c2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "645e124c_8650b49d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-01T19:44:34Z",
+      "side": 1,
+      "message": "What is the bug ID?",
+      "parentUuid": "b1d1cfbc_ad49937f",
+      "revId": "5617c5d87931a2b9a9792b91be9704d3902e4c2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
