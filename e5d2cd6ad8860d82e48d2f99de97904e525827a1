@@ -22,6 +22,30 @@
       },
       "revId": "e5d2cd6ad8860d82e48d2f99de97904e525827a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9a53306_119a67cc",
+        "filename": "fs/crypto/fscrypt_private.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-12-01T23:17:32Z",
+      "side": 1,
+      "message": "Unfortunately, changes between fwd declaration only and full definition appear all too random in the extracted ABI information. Somewhere on the way of compilation-\u003elinking(LTO!)-\u003eextraction-\u003ededuplication the full type is sometimes not preserved. We are working on improved tooling for android14* and are happy to have a chat with you to fill you in more details and/or collect more of your feedback!",
+      "parentUuid": "f045380c_ddedff16",
+      "range": {
+        "startLine": 229,
+        "startChar": 11,
+        "endLine": 229,
+        "endChar": 27
+      },
+      "revId": "e5d2cd6ad8860d82e48d2f99de97904e525827a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
