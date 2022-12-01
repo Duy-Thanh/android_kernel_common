@@ -33,6 +33,24 @@
       "message": "This symbol is not part of the base branch\u0027s symbol list in https://android.googlesource.com/kernel/common/+/android13-5.15/android/abi_gki_aarch64_mtk. Please add it there first. This is in accordance of our policy to always land any change on the base branch (i.e. android13-5.15) first. (Preferably use the same change-id Iaf94c8210f83923580b01c871bd0ab25e66df003 when making that change there in order to identify this as a cherry-pick).",
       "revId": "1fdcf29adfb5dfc730d457775c85b9e4a6bdd41f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c32cadfe_418ea862",
+        "filename": "android/abi_gki_aarch64_mtk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2042,
+      "author": {
+        "id": 1084238
+      },
+      "writtenOn": "2022-12-01T01:51:00Z",
+      "side": 1,
+      "message": "change for android13-5.15 is also under review, I already modify the change-id of that change to Iaf94c8210f83923580b01c871bd0ab25e66df003",
+      "parentUuid": "0f9cb1a0_2da42ac3",
+      "revId": "1fdcf29adfb5dfc730d457775c85b9e4a6bdd41f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
