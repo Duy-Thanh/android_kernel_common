@@ -93,6 +93,30 @@
       },
       "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1de6744_0a2e2f78",
+        "filename": "arch/arm64/kernel/patching.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-12-01T14:05:32Z",
+      "side": 1,
+      "message": "Guess we want to keep the `aarch64_xxxxx_write()` format, so how about `insn_dst` or `insn_addr` -\u003e `aarch64_insn_addr_write()`/`aarch64_insn_dst_write()`?",
+      "parentUuid": "00366719_b0bdb488",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 25
+      },
+      "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
