@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f045380c_ddedff16",
+        "filename": "fs/crypto/fscrypt_private.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-12-01T20:16:09Z",
+      "side": 1,
+      "message": "The whole `struct fscrypt_info` is private to `fs/crypto/`.  So, it doesn\u0027t even matter whether the size is the same.  This struct used to just have a forward declaration in the ABI XML, not a full declaration.  It\u0027s unclear why that changed.  I would appreciate any advice on how to fix that so that people don\u0027t have to waste time on this sort of thing in the future.",
+      "range": {
+        "startLine": 229,
+        "startChar": 11,
+        "endLine": 229,
+        "endChar": 27
+      },
+      "revId": "e5d2cd6ad8860d82e48d2f99de97904e525827a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
