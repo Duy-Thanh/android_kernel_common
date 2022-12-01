@@ -117,6 +117,30 @@
       },
       "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a92958_cfa74831",
+        "filename": "arch/arm64/kernel/patching.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-01T15:03:22Z",
+      "side": 1,
+      "message": "Is \u0027insn\u0027 supposed to be the shorthand version of \u0027instruction\u0027? If so, it\u0027s a bit funny because in this case we\u0027re not actually patching an instruction. I suppose you could even argue that using FIX_TEXT_POKE0 is kinda wrong for this. Need to think about it a bit more ...",
+      "parentUuid": "e1de6744_0a2e2f78",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 25
+      },
+      "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
