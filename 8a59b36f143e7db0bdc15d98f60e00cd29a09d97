@@ -39,6 +39,24 @@
       "message": "Why is this needed?  What is being built multiple times that this config option matters for?",
       "revId": "8a59b36f143e7db0bdc15d98f60e00cd29a09d97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c16353_a776d4d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-12-01T11:03:04Z",
+      "side": 1,
+      "message": "from the bug referenced here:\n\nWhen using sandboxes, when building kernel_aarch64_allmodconfig_config, the include directory is built. We did not tar the directory. Instead we use directory_with_structure to store the directory (which is just ctx.actions.declare_directory).\nThe file is at ./bazel-out/k8-fastbuild/bin/common/kernel_aarch64_allmodconfig_config_include/generated/randstruct_hash.h\nWhen building kernel_aarch64_allmodconfig, we restore the file to the new sandbox. However, we don\u0027t set the file to writable.\nHowever, the file is re-built because it is under always-y.\n\nAnd that eventually causes a \"permission denied\" on a readonly file.\n\nAnd I added there:\n\nrandstruct implies the use of a compiler plugin to randomize the layout of structs. This is a security feature, but obviously much less strong for GKI kernels as we publish the binaries. Additionally, unless we seed the randomization, we will not get deterministic builds, obviously. So, disabling this feature for any build (including allmodconfig) is perfectly fine and the way forward.\n\n\n(let alone the ABI implications of this feature)",
+      "parentUuid": "0dd21b55_e0cd2c55",
+      "revId": "8a59b36f143e7db0bdc15d98f60e00cd29a09d97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
