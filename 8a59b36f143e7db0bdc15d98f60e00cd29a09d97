@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd21b55_e0cd2c55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-01T10:39:03Z",
+      "side": 1,
+      "message": "Why is this needed?  What is being built multiple times that this config option matters for?",
+      "revId": "8a59b36f143e7db0bdc15d98f60e00cd29a09d97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
