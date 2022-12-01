@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48348983_492f4776",
+        "filename": "arch/arm64/kernel/patching.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-01T10:17:53Z",
+      "side": 1,
+      "message": "Ack, this probably just means generalizing __arch64_insn_write() (and renaming it), which should be dead easy it has only one user. I\u0027ll have a go at it.",
+      "parentUuid": "60bd97e7_cd166f58",
+      "range": {
+        "startLine": 91,
+        "startChar": 14,
+        "endLine": 91,
+        "endChar": 32
+      },
+      "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55684d37_bec1e3d8",
         "filename": "arch/arm64/kernel/patching.c",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-30T18:09:03Z",
       "side": 1,
       "message": "Why do you need these two assignments?\n\nOh, they\u0027re copied from the other function :/ Weird code. Maybe clean that up upstream separately?",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 25
+      },
+      "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00366719_b0bdb488",
+        "filename": "arch/arm64/kernel/patching.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-01T10:17:53Z",
+      "side": 1,
+      "message": "I guess we can have a patch that just generalizes __aarch64_insn_write() and cleans that up at the same time, and then have a separate patch that adds aarch64_addr_write() (still hate that name though, better ideas welcome 😊) ?",
+      "parentUuid": "55684d37_bec1e3d8",
       "range": {
         "startLine": 93,
         "startChar": 1,
