@@ -33,6 +33,24 @@
       "message": "Hi Qianfeng Rong, please help to add \"Bug: 260945126\" in the commit message.",
       "revId": "4bc4e839e11ee4cfe6b5c2e6cb3b209f1f14e87d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc318774_9565319d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-12-01T12:49:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee08d7a_5e36b584",
+      "revId": "4bc4e839e11ee4cfe6b5c2e6cb3b209f1f14e87d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
