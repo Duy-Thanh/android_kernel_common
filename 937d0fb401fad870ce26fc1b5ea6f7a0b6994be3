@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2953fd19_a3054a78",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-12-01T12:00:16Z",
+      "side": 1,
+      "message": "Done, struct address is used as an ID",
+      "parentUuid": "34e30c36_ae2fff28",
+      "range": {
+        "startLine": 404,
+        "startChar": 1,
+        "endLine": 404,
+        "endChar": 14
+      },
+      "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98e521fc_31b499d6",
@@ -222,6 +246,30 @@
       "side": 1,
       "message": "I still don\u0027t see it.\nThis checks if the new element doesn\u0027t cause a loop with next or prev\n(new \u003d\u003d prev || new \u003d\u003d next)\n\nBut there is no check (or need I believe) to check that the ptrs of the new member of the list are initialized",
       "parentUuid": "3d7dac47_c5c73b32",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 26
+      },
+      "revId": "937d0fb401fad870ce26fc1b5ea6f7a0b6994be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d535570c_5aecb10a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-12-01T12:00:16Z",
+      "side": 1,
+      "message": "Resolved",
+      "parentUuid": "1c5ffcc1_4b5bb1ea",
       "range": {
         "startLine": 117,
         "startChar": 16,
