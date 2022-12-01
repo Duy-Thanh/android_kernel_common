@@ -16,6 +16,24 @@
       "message": "This bug was actually introduced by commit 8aa0abda8bd6.",
       "revId": "55a66a3e09818cb4b1b107d8eaa7852935898ccc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47fe601e_fe6e0887",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-12-01T20:24:30Z",
+      "side": 1,
+      "message": "Thanks for having reported this. The Fixes tag has been updated.",
+      "parentUuid": "55270a5f_df35f96f",
+      "revId": "55a66a3e09818cb4b1b107d8eaa7852935898ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
