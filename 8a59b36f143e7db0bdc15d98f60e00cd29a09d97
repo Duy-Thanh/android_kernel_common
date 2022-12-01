@@ -57,6 +57,24 @@
       "parentUuid": "0dd21b55_e0cd2c55",
       "revId": "8a59b36f143e7db0bdc15d98f60e00cd29a09d97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb492eb9_7b7f1cbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-01T11:51:12Z",
+      "side": 1,
+      "message": "Ok, sorry for that, I should have read the bug.  Yes, for GKI we have to have this disabled, didn\u0027t realize it was also needed for the `allmodconfig` build target as that was not the way with the old build system.",
+      "parentUuid": "b4c16353_a776d4d1",
+      "revId": "8a59b36f143e7db0bdc15d98f60e00cd29a09d97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
