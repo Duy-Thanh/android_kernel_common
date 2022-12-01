@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d89eb839_508b5a56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2022-12-01T11:15:05Z",
+      "side": 1,
+      "message": "@ebiggers@google.com",
+      "revId": "c2b86b727a415baa58f778dc65d599f352dca00e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde81fa7_cadcecec",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2022-12-01T11:15:05Z",
+      "side": 1,
+      "message": "I have a question about this modification.\nWhy finding by pointer address replaced finding by key value?\n\nThis modification leads to some issue when we try to call submit_bio with a cloned block_crypto_key.",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 1
+      },
+      "revId": "c2b86b727a415baa58f778dc65d599f352dca00e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
