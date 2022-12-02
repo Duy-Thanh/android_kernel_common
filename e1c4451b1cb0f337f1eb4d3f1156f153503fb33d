@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "885a297d_89abe3fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-02T08:25:18Z",
+      "side": 1,
+      "message": "As-is, we can\u0027t take this patch as it mixes hooks and exports and structure additions.  Please make this a patch series, one patch per each logical thing you are doing.",
+      "revId": "e1c4451b1cb0f337f1eb4d3f1156f153503fb33d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
