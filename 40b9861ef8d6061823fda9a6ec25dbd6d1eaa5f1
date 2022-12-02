@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "217af602_6685ba34",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-02T23:25:00Z",
+      "side": 1,
+      "message": "The other modules in the trusty driver directory depend on the core trusty driver and have separate device tree nodes. This one will be used by the core trusty driver so it is not directly comparable. Linux has a lot of code where you embed one struct into another one.",
+      "parentUuid": "d7a50fec_fc0d4d16",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2080feff_17e29bec",
         "filename": "drivers/trusty/trusty-share.c",
         "patchSetId": 3
@@ -215,6 +233,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "327a0515_628ade7b",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3522bb9e_9d536953",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-02T23:25:00Z",
+      "side": 1,
+      "message": "I don\u0027t see any fixes addressing this.",
+      "parentUuid": "eb452063_8cb0ad6e",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -504,6 +540,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fddc2e10_77cdbeda",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-02T23:25:00Z",
+      "side": 1,
+      "message": "I don\u0027t see any fixes for this in the latest version",
+      "parentUuid": "9caf9c86_209acd14",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84cd1bba_34bb9d26",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3
@@ -533,6 +587,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "84cd1bba_34bb9d26",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b92dd33d_73a9694c",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-02T23:25:00Z",
+      "side": 1,
+      "message": "I don\u0027t see any fixes for this in the latest version",
+      "parentUuid": "4e86b95e_32fee113",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
