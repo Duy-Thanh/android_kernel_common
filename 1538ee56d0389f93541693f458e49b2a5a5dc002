@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74e8612d_f4c8b9c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-02T12:29:47Z",
+      "side": 1,
+      "message": "why?  What needs this?\n\nAnd where is this variable?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "1538ee56d0389f93541693f458e49b2a5a5dc002",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdfb1a5f_c5cf3efc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
