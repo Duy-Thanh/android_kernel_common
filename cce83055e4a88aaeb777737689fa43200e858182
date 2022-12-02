@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93f68917_36539a5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-02T23:30:20Z",
+      "side": 1,
+      "message": "Also note that your code needs to be backwards compatible. The presubmit failures here indicate that it is not.",
+      "revId": "cce83055e4a88aaeb777737689fa43200e858182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e98a206_4d0458e6",
         "filename": "drivers/trusty/trusty-share.c",
         "patchSetId": 7
