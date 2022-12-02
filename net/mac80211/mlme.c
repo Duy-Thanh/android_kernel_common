@@ -3692,7 +3692,11 @@ static void ieee80211_rx_mgmt_assoc_resp(struct ieee80211_sub_if_data *sdata,
 	struct ieee80211_mgd_assoc_data *assoc_data = ifmgd->assoc_data;
 	u16 capab_info, status_code, aid;
 	struct ieee802_11_elems *elems;
+<<<<<<< HEAD   (35c0e6 ANDROID: abi_gki_aarch64_qcom: Update symbol list)
 	int ac;
+=======
+	int ac, uapsd_queues = -1;
+>>>>>>> BRANCH (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 	u8 *pos;
 	bool reassoc;
 	struct cfg80211_bss *cbss;

@@ -1079,7 +1079,11 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 
 		spin_unlock_irq(&epfile->ffs->eps_lock);
 
+<<<<<<< HEAD   (35c0e6 ANDROID: abi_gki_aarch64_qcom: Update symbol list)
 		if (unlikely(wait_for_completion_interruptible(&io_data->done))) {
+=======
+		if (wait_for_completion_interruptible(&io_data->done)) {
+>>>>>>> BRANCH (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 			spin_lock_irq(&epfile->ffs->eps_lock);
 			if (epfile->ep != ep) {
 				ret = -ESHUTDOWN;
