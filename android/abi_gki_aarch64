@@ -82,7 +82,6 @@
   strcpy
   strlcpy
   strlen
-  __sysfs_match_string
   sysfs_streq
   unregister_blkdev
   up_read
