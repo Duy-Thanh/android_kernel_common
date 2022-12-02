@@ -331,6 +331,30 @@
       },
       "revId": "7c721a24de07145381170fa563551138f06f0f96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4439a2a0_32c4a9a7",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-02T08:48:24Z",
+      "side": 1,
+      "message": "This is a very risky function to export to anyone.  Iff we take this, it has to be in a namespace that restricts its use, AND acknowledges the risk involved and that anyone who uses it is really really really on their own here, AND that it will not be exported in any other branches/releases.",
+      "parentUuid": "376a2e4f_be20eefd",
+      "range": {
+        "startLine": 411,
+        "startChar": 0,
+        "endLine": 411,
+        "endChar": 30
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
