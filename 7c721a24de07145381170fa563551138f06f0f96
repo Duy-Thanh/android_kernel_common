@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4efe026e_62aa2436",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-02T05:21:19Z",
+      "side": 1,
+      "message": "As discussed, can we proceed with this vendor hook implementation for now? We will meanwhile evaluate the upstream implementation for upcoming Android upgrade.\n\nAny tentative plan on when the patches of https://lwn.net/Articles/913800/ would get merged on upstream? i see its still not in the upstream.",
+      "parentUuid": "10e94c53_494a7900",
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea838ee_cc572ed6",
         "filename": "kernel/power/snapshot.c",
         "patchSetId": 6
@@ -169,6 +187,30 @@
       "side": 1,
       "message": "All new exports HAVE to have `_GPL`, so that\u0027s not the question here.\n\nThe issue is that no driver should be doing this.  So if you really need these, we can add them to a separate namespace just for encrypted images.",
       "parentUuid": "2ce66f18_a5bbb433",
+      "range": {
+        "startLine": 2081,
+        "startChar": 4,
+        "endLine": 2081,
+        "endChar": 5
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f53d2f_97c17196",
+        "filename": "kernel/power/snapshot.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2081,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-02T05:21:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91297433_496601c0",
       "range": {
         "startLine": 2081,
         "startChar": 4,
@@ -239,6 +281,30 @@
       "writtenOn": "2022-11-23T07:32:25Z",
       "side": 1,
       "message": "should not be exported, no driver should ever be calling this.",
+      "range": {
+        "startLine": 411,
+        "startChar": 0,
+        "endLine": 411,
+        "endChar": 30
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "376a2e4f_be20eefd",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-02T05:21:19Z",
+      "side": 1,
+      "message": "We will need an API that enables vendor hooks to write pages related to encryption data, to the swap dev, after the data pages of the snapshot are completely written. We are considering to use the same hib_io_batch to save the rest of the encryption data-pages. \n\nCan we have this API exported? Can you please help us understand the concerns of doing so?",
+      "parentUuid": "3e41cec8_4fb1bbe1",
       "range": {
         "startLine": 411,
         "startChar": 0,
