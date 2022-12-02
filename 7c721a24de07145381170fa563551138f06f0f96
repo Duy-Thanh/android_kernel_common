@@ -355,6 +355,30 @@
       },
       "revId": "7c721a24de07145381170fa563551138f06f0f96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1118889e_8b9ff6bc",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-02T08:49:22Z",
+      "side": 1,
+      "message": "Also the name is incorrect and will collide with others if exported this way, so it needs to be changed as well.  Same for the other exports you are making here, turning local functions into global ones is tricky and need to be done in a way that does not break anything else.",
+      "parentUuid": "4439a2a0_32c4a9a7",
+      "range": {
+        "startLine": 411,
+        "startChar": 0,
+        "endLine": 411,
+        "endChar": 30
+      },
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
