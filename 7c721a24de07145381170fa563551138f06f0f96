@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5c55bfe_993a76fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-02T08:23:49Z",
+      "side": 1,
+      "message": "As I mentioned before, please work with upstream and help get those changes accepted.  Provide reviews of the code, or state that the design does, or does not, work for your use case.  Do not just hope that others will do this work without any input from you as you need/want this feature to be implemented properly for your use case.\n\nThat will help get it upstreamed, and it will let you know when, and if, it will be accepted.",
+      "parentUuid": "4efe026e_62aa2436",
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea838ee_cc572ed6",
         "filename": "kernel/power/snapshot.c",
         "patchSetId": 6
