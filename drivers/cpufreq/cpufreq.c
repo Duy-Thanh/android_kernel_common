@@ -1615,6 +1615,7 @@ static int cpufreq_offline(unsigned int cpu)
 	}
 
 	if (cpufreq_thermal_control_enabled(cpufreq_driver)) {
+		dev_set_uevent_suppress(&policy->cdev->device, true);
 		cpufreq_cooling_unregister(policy->cdev);
 		policy->cdev = NULL;
 	}
