@@ -16,6 +16,23 @@
       "message": "Looks like you forgot to add the symbol file: android/abi_gki_aarch64_tuxera",
       "revId": "5de8bbb979c6c50e36dcced0062c9e8e4f21d4f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "997dd72f_e0c8ef09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-02T08:50:16Z",
+      "side": 1,
+      "message": "You forgot to add the symbol list to the commit 😞",
+      "revId": "5de8bbb979c6c50e36dcced0062c9e8e4f21d4f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
