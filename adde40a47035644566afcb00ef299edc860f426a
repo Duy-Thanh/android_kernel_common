@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4465ff1_1a04e2ee",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2437,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-02T16:40:38Z",
+      "side": 1,
+      "message": "Needs the __traceiter* versions of the tracepoint symbols too.",
+      "revId": "adde40a47035644566afcb00ef299edc860f426a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

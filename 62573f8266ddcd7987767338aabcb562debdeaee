@@ -207,6 +207,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "310a1eeb_a1a3b8cc",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-02T16:40:38Z",
+      "side": 1,
+      "message": "Yes, but what are you trying to tell us by saying that it is \"to be called again\"?",
+      "parentUuid": "e034d946_f4e14702",
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d7598bc_45be8a7b",
         "filename": "kernel/power/swap.c",
         "patchSetId": 1
