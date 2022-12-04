@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fcbef5b_2d6ebd25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-04T12:03:50Z",
+      "side": 1,
+      "message": "John, same dma-heap.c resolution here as was made in the `android-mainline` branch.",
+      "revId": "880a2689a31b6ddf158cb2c6052ca71d8f839ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
