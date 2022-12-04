@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e539e12_c2356838",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-04T11:56:33Z",
+      "side": 1,
+      "message": "Giuliano, the ABI change monitoring info seems to be adding a ton of symbols, which should have been added in the previous merge commit, not this one.  Is this all correct?",
+      "revId": "4aecf98f921f3e072166facdea87cada7349b373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
