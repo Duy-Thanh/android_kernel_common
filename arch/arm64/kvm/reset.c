@@ -323,7 +323,24 @@ int kvm_set_ipa_limit(void)
 	 * Check with ARMv8.5-GTG that our PAGE_SIZE is supported at
 	 * Stage-2. If not, things will stop very quickly.
 	 */
+<<<<<<< HEAD   (24b99d Merge 5.10.152 into android13-5.10-lts)
 	switch (cpuid_feature_extract_unsigned_field(mmfr0, ID_AA64MMFR0_TGRAN_2_SHIFT)) {
+=======
+	switch (PAGE_SIZE) {
+	default:
+	case SZ_4K:
+		tgran_2 = ID_AA64MMFR0_TGRAN4_2_SHIFT;
+		break;
+	case SZ_16K:
+		tgran_2 = ID_AA64MMFR0_TGRAN16_2_SHIFT;
+		break;
+	case SZ_64K:
+		tgran_2 = ID_AA64MMFR0_TGRAN64_2_SHIFT;
+		break;
+	}
+
+	switch (cpuid_feature_extract_unsigned_field(mmfr0, tgran_2)) {
+>>>>>>> BRANCH (95aa34 Linux 5.10.153)
 	case ID_AA64MMFR0_TGRAN_2_SUPPORTED_NONE:
 		kvm_err("PAGE_SIZE not supported at Stage-2, giving up\n");
 		return -EINVAL;
