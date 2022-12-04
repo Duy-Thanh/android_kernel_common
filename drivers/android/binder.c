@@ -2797,6 +2797,7 @@ static int binder_fixup_parent(struct list_head *pf_head,
 	buffer_offset = bp->parent_offset +
 			(uintptr_t)parent->buffer - (uintptr_t)b->user_data;
 	return binder_add_fixup(pf_head, buffer_offset, bp->buffer, 0);
+<<<<<<< HEAD   (7ac01f Merge 5.10.156 into android13-5.10-lts)
 }
 
 /**
@@ -2847,6 +2848,8 @@ binder_find_outdated_transaction_ilocked(struct binder_transaction *t,
 			return t_queued;
 	}
 	return NULL;
+=======
+>>>>>>> BRANCH (f4245f Linux 5.10.157)
 }
 
 /**
@@ -3022,7 +3025,10 @@ static void binder_transaction(struct binder_proc *proc,
 	int t_debug_id = atomic_inc_return(&binder_last_id);
 	char *secctx = NULL;
 	u32 secctx_sz = 0;
+<<<<<<< HEAD   (7ac01f Merge 5.10.156 into android13-5.10-lts)
 	bool is_nested = false;
+=======
+>>>>>>> BRANCH (f4245f Linux 5.10.157)
 	struct list_head sgc_head;
 	struct list_head pf_head;
 	const void __user *user_buffer = (const void __user *)
@@ -3677,10 +3683,14 @@ static void binder_transaction(struct binder_proc *proc,
 		return_error_line = __LINE__;
 		goto err_copy_data_failed;
 	}
+<<<<<<< HEAD   (7ac01f Merge 5.10.156 into android13-5.10-lts)
 	if (t->buffer->oneway_spam_suspect)
 		tcomplete->type = BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT;
 	else
 		tcomplete->type = BINDER_WORK_TRANSACTION_COMPLETE;
+=======
+	tcomplete->type = BINDER_WORK_TRANSACTION_COMPLETE;
+>>>>>>> BRANCH (f4245f Linux 5.10.157)
 	t->work.type = BINDER_WORK_TRANSACTION;
 
 	if (reply) {
