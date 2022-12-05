@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "500a491b_f4e420ae",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-05T14:22:21Z",
+      "side": 1,
+      "message": "This is still not correct I think. With this all PTEs that don\u0027t have XN set (which is basically all of memory) will be counted. Kind of defeats the point no?\n\nAgain, you need *different* values for the mask and the expected value I believe.\n\nFor example, you should probably have something like\n\n    return (pte \u0026 HOST_S2_PTE_COUNT_MASK) !\u003d expected_pte;\n    \nIn this case, HOST_S2_PTE_COUNT_MASK would describe all the bits of interest in the PTE (basically your KVM_HOST_S2_ATTR thing + KVM_PTE_LEAF_ATTR_HI_SW I think). And `expected_pte` will be computed at run-time, and as the name suggest, encode what we expect to see in the PTE to say \u0027it should not be counted\u0027. That value is different since XN may or may not be set in it depending on the physical address that the PTE points to. And that expected value will have all the bits for KVM_PTE_LEAF_ATTR_HI_SW cleared, so your check above can be folded in this directly.\n\nMakes sense?",
+      "range": {
+        "startLine": 680,
+        "startChar": 44,
+        "endLine": 680,
+        "endChar": 68
+      },
+      "revId": "4fa3243e420be180200212d6d444d70e58600b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
