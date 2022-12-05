@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc47e31_f1dbd4b9",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-05T13:52:59Z",
+      "side": 1,
+      "message": "Probably for a future patch, but this shouldn\u0027t be here really.",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 399,
+        "endChar": 70
+      },
+      "revId": "20660940085e8c8d88d523ba4c30381a78ec34e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51e94f50_76db012c",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-05T13:52:59Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 409,
+        "endChar": 31
+      },
+      "revId": "20660940085e8c8d88d523ba4c30381a78ec34e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
