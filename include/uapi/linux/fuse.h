@@ -991,6 +991,9 @@ struct fuse_bpf_arg {
 #define FUSE_MAX_IN_ARGS 5
 #define FUSE_MAX_OUT_ARGS 3
 
+#define FUSE_BPF_MAJOR_VERSION 1
+#define FUSE_BPF_MINOR_VERSION 0
+
 #define FUSE_BPF_FORCE (1 << 0)
 #define FUSE_BPF_OUT_ARGVAR (1 << 6)
 
