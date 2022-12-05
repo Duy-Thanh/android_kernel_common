@@ -225,6 +225,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b019ae5_2e94cd09",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-05T10:42:31Z",
+      "side": 1,
+      "message": "The initial comment was just for our reference from the initial author to add a trace hook at this place. We can ignore it.",
+      "parentUuid": "310a1eeb_a1a3b8cc",
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d7598bc_45be8a7b",
         "filename": "kernel/power/swap.c",
         "patchSetId": 1

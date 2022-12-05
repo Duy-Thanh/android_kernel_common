@@ -16,6 +16,24 @@
       "message": "As-is, we can\u0027t take this patch as it mixes hooks and exports and structure additions.  Please make this a patch series, one patch per each logical thing you are doing.",
       "revId": "e1c4451b1cb0f337f1eb4d3f1156f153503fb33d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9bf0aa8_933b7c30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-05T10:42:31Z",
+      "side": 1,
+      "message": "HI Greg,\nAs mentioned, we have split this patch into 2. The other patch is https://android-review.googlesource.com/c/kernel/common/+/2325001.\nPlease review.",
+      "parentUuid": "885a297d_89abe3fa",
+      "revId": "e1c4451b1cb0f337f1eb4d3f1156f153503fb33d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
