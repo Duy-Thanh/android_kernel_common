@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5e6d247_01086973",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-05T12:44:45Z",
+      "side": 1,
+      "message": "This will not even work from a technical point of view, so I do not know how this was tested.\n\nSee other comments for other problems with this as well.",
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da725d6d_a76a285c",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-05T12:44:45Z",
+      "side": 1,
+      "message": "this is not a structure that can be added to the ABI, sorry.\n\nTo be specific, this will not actually build properly for you, so I do not understand how this was tested.",
+      "range": {
+        "startLine": 496,
+        "startChar": 0,
+        "endLine": 496,
+        "endChar": 21
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a49729_a731e766",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-05T12:44:45Z",
+      "side": 1,
+      "message": "this is not a valid symbol name for the global namespace at all.",
+      "range": {
+        "startLine": 526,
+        "startChar": 11,
+        "endLine": 526,
+        "endChar": 21
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0cd7f00_5bb0d7a0",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-05T12:44:45Z",
+      "side": 1,
+      "message": "again, this is not a valid way to name a symbol in the global kernel namespace.\n\nAND you are adding a structure requirement here to the ABI for a structure that we do not currently guarantee will be stable for the next 7+ years 😞",
+      "range": {
+        "startLine": 378,
+        "startChar": 4,
+        "endLine": 378,
+        "endChar": 14
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
