@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24ef1150_2dd4dc46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2022-12-05T14:19:44Z",
+      "side": 1,
+      "message": "Its been a while since symbol list for db845c was updated for android13-5.15, so this update end up adding a lot more symbols and not just the missing symbols which caused this recent boot regression on db845c.",
+      "revId": "ce550b4d7760c305ee69b6ca1040f4db33daf75f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
