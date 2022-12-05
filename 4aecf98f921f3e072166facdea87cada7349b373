@@ -16,6 +16,24 @@
       "message": "Giuliano, the ABI change monitoring info seems to be adding a ton of symbols, which should have been added in the previous merge commit, not this one.  Is this all correct?",
       "revId": "4aecf98f921f3e072166facdea87cada7349b373",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf953352_de6cfd51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-12-05T16:34:48Z",
+      "side": 1,
+      "message": "The many additions are likely due to the comparison of this presubmit with an older postsubmit that was current at the time of the presubmit.",
+      "parentUuid": "1e539e12_c2356838",
+      "revId": "4aecf98f921f3e072166facdea87cada7349b373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
