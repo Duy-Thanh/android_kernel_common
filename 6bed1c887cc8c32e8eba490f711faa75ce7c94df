@@ -16,6 +16,24 @@
       "message": "@jaegeuk@google.com Hi Jaegeuk, do you have some advices for the patchset? We prefer to have it in branch android12-5.10 before Feb 2023, and we can improve it with your advices ASAP. Thanks!",
       "revId": "6bed1c887cc8c32e8eba490f711faa75ce7c94df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b235f1e4_6f4146c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2022-12-05T19:05:11Z",
+      "side": 1,
+      "message": "Hi, Xiaoyu,\n\nI just posted a refactored patch series.\nhttps://lore.kernel.org/linux-f2fs-devel/20221205185433.3479699-1-jaegeuk@kernel.org/T/#t\n\nCould you please check whether that works for you?\n\nThanks,",
+      "parentUuid": "7c54b5d6_8bce1e6e",
+      "revId": "6bed1c887cc8c32e8eba490f711faa75ce7c94df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
