@@ -136,8 +136,26 @@ static inline unsigned int refcount_read(const refcount_t *r)
 	return atomic_read(&r->refs);
 }
 
+<<<<<<< HEAD   (407aa8 ANDROID: fuse: Support errors from fuse daemon in canonical )
 static inline __must_check __signed_wrap
 bool __refcount_add_not_zero(int i, refcount_t *r, int *oldp)
+||||||| BASE
+static inline __must_check bool __refcount_add_not_zero(int i, refcount_t *r, int *oldp)
+=======
+/**
+ * refcount_reset_if_equal - reset refcount to zero if the @count is matched
+ * @r: the refcount
+ * @count: the expected value to be equal to current refcount's value
+ *
+ * Return: true if the @count is equal to refcount's value, false otherwise
+ */
+static inline bool refcount_reset_if_equal(refcount_t *r, int count)
+{
+	return likely(atomic_cmpxchg(&r->refs, count, 0) == count);
+}
+
+static inline __must_check bool __refcount_add_not_zero(int i, refcount_t *r, int *oldp)
+>>>>>>> CHANGE (0292bd ANDROID: locking/refcount: introduce refcount_reset_if_equal)
 {
 	int old = refcount_read(r);
 
