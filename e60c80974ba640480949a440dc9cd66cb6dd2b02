@@ -16,6 +16,24 @@
       "message": "Not sure we really need those, but I guess they don\u0027t actively harm, so ...",
       "revId": "e60c80974ba640480949a440dc9cd66cb6dd2b02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d516361_e5092218",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 43
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-05T14:09:53Z",
+      "side": 1,
+      "message": "Actually, given that this makes a bit of a mess of the hypervisor code, do we actually need to merge these? E.g., do we have support in the CI to run these, or is it just dead code?",
+      "parentUuid": "ce15eb47_08ef5d87",
+      "revId": "e60c80974ba640480949a440dc9cd66cb6dd2b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
