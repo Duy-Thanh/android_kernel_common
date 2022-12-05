@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e67c76f_cc133bbe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-05T14:26:26Z",
+      "side": 1,
+      "message": "Also, as mentioned in a previous comment, we should return true here when pte is a table.",
+      "range": {
+        "startLine": 667,
+        "startChar": 12,
+        "endLine": 667,
+        "endChar": 38
+      },
+      "revId": "4fa3243e420be180200212d6d444d70e58600b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "500a491b_f4e420ae",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 10
