@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35193a30_7386d361",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-05T12:45:29Z",
+      "side": 1,
+      "message": "these are internal kernel structures and can not be exported properly, or safely.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 21
+      },
+      "revId": "682935b279508727bac5cd978a22f3fc9f5ed266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
