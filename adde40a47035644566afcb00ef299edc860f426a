@@ -16,6 +16,24 @@
       "message": "Needs the __traceiter* versions of the tracepoint symbols too.",
       "revId": "adde40a47035644566afcb00ef299edc860f426a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff64987_2fcbdae2",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2437,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-06T17:47:09Z",
+      "side": 1,
+      "message": "Will upload it in a follow up patch for ABI update, once the vendor hook implementation is approved.",
+      "parentUuid": "d4465ff1_1a04e2ee",
+      "revId": "adde40a47035644566afcb00ef299edc860f426a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -22,6 +22,30 @@
       },
       "revId": "682935b279508727bac5cd978a22f3fc9f5ed266",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2942b734_612b3382",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-06T17:47:09Z",
+      "side": 1,
+      "message": "Removed hib_bio_batch.",
+      "parentUuid": "35193a30_7386d361",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 21
+      },
+      "revId": "682935b279508727bac5cd978a22f3fc9f5ed266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
