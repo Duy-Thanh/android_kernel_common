@@ -34,6 +34,24 @@
       "parentUuid": "7c54b5d6_8bce1e6e",
       "revId": "6bed1c887cc8c32e8eba490f711faa75ce7c94df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20fa5710_ff1fc969",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1840060
+      },
+      "writtenOn": "2022-12-06T02:57:31Z",
+      "side": 1,
+      "message": "Hi Jaegeuk, thank you for your patch series! We will check it.\nThanks",
+      "parentUuid": "b235f1e4_6f4146c4",
+      "revId": "6bed1c887cc8c32e8eba490f711faa75ce7c94df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
