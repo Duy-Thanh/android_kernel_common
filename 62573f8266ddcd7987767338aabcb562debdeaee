@@ -241,6 +241,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcff9da4_9b42897f",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-06T20:43:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b019ae5_2e94cd09",
+      "revId": "62573f8266ddcd7987767338aabcb562debdeaee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d7598bc_45be8a7b",
