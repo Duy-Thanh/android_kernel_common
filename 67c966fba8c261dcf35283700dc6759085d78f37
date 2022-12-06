@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc4ba21e_41edfe90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-06T17:49:47Z",
+      "side": 1,
+      "message": "We have tested the latest patchset and validated to be working.",
+      "parentUuid": "c5e6d247_01086973",
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da725d6d_a76a285c",
         "filename": "include/linux/swap.h",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2022-12-05T12:44:45Z",
       "side": 1,
       "message": "this is not a structure that can be added to the ABI, sorry.\n\nTo be specific, this will not actually build properly for you, so I do not understand how this was tested.",
+      "range": {
+        "startLine": 496,
+        "startChar": 0,
+        "endLine": 496,
+        "endChar": 21
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bddc10dd_d23bde95",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-06T17:49:47Z",
+      "side": 1,
+      "message": "Removed the struct export.",
+      "parentUuid": "da725d6d_a76a285c",
       "range": {
         "startLine": 496,
         "startChar": 0,
@@ -66,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "940e17f3_dd2e8adf",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-06T17:49:47Z",
+      "side": 1,
+      "message": "Created a wrapper function hib_write_page() that internally calls write_page. Can this be exported?",
+      "parentUuid": "62a49729_a731e766",
+      "range": {
+        "startLine": 526,
+        "startChar": 11,
+        "endLine": 526,
+        "endChar": 21
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0cd7f00_5bb0d7a0",
         "filename": "kernel/power/swap.c",
         "patchSetId": 1
@@ -77,6 +143,30 @@
       "writtenOn": "2022-12-05T12:44:45Z",
       "side": 1,
       "message": "again, this is not a valid way to name a symbol in the global kernel namespace.\n\nAND you are adding a structure requirement here to the ABI for a structure that we do not currently guarantee will be stable for the next 7+ years 😞",
+      "range": {
+        "startLine": 378,
+        "startChar": 4,
+        "endLine": 378,
+        "endChar": 14
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89db17fb_2eca9a4c",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-06T17:49:47Z",
+      "side": 1,
+      "message": "Removed the export for this function. Instead introduced hib_write_page(). Please let us know if we can export hib_write_page().",
+      "parentUuid": "f0cd7f00_5bb0d7a0",
       "range": {
         "startLine": 378,
         "startChar": 4,
