@@ -5,8 +5,6 @@
  * Encryption hooks for higher-level filesystem operations.
  */
 
-#include <linux/key.h>
-
 #include "fscrypt_private.h"
 
 /**
@@ -158,14 +156,23 @@ int fscrypt_prepare_setflags(struct inode *inode,
 		ci = inode->i_crypt_info;
 		if (ci->ci_policy.version != FSCRYPT_POLICY_V2)
 			return -EINVAL;
+<<<<<<< HEAD   (8f1557 Merge 5.10.153 into android13-5.10-lts)
 		key = ci->ci_master_key;
 		mk = key->payload.data[0];
 		down_read(&key->sem);
+=======
+		mk = ci->ci_master_key;
+		down_read(&mk->mk_sem);
+>>>>>>> BRANCH (f5b40c Linux 5.10.154)
 		if (is_master_key_secret_present(&mk->mk_secret))
 			err = fscrypt_derive_dirhash_key(ci, mk);
 		else
 			err = -ENOKEY;
+<<<<<<< HEAD   (8f1557 Merge 5.10.153 into android13-5.10-lts)
 		up_read(&key->sem);
+=======
+		up_read(&mk->mk_sem);
+>>>>>>> BRANCH (f5b40c Linux 5.10.154)
 		return err;
 	}
 	return 0;
