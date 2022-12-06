@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "101c987a_814b4faa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954368
+      },
+      "writtenOn": "2022-12-06T13:40:44Z",
+      "side": 1,
+      "message": "symbol is base on \nhttps://android-review.googlesource.com/c/kernel/common/+/2294180\nhttps://android-review.googlesource.com/c/kernel/common/+/2325059",
+      "revId": "5d72605845c3240f34e60c4410c1779afd3fd709",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
