@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef8e9f2f_31757260",
+        "filename": "arch/arm64/kvm/hyp/nvhe/serial.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-12-06T13:02:34Z",
+      "side": 1,
+      "message": "Another candidate for cmpxchg() :)",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 24
+      },
+      "revId": "e5aa70ddee3c906665cf823f14f921ed524bddf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
