@@ -83,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6793619_aaea6139",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-06T19:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bddc10dd_d23bde95",
+      "range": {
+        "startLine": 496,
+        "startChar": 0,
+        "endLine": 496,
+        "endChar": 21
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62a49729_a731e766",
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "Created a wrapper function hib_write_page() that internally calls write_page. Can this be exported?",
       "parentUuid": "62a49729_a731e766",
+      "range": {
+        "startLine": 526,
+        "startChar": 11,
+        "endLine": 526,
+        "endChar": 21
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a0e6a8_4ab561c9",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-06T19:00:31Z",
+      "side": 1,
+      "message": "bad name, see below.",
+      "parentUuid": "940e17f3_dd2e8adf",
       "range": {
         "startLine": 526,
         "startChar": 11,
