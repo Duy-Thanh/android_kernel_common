@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06f1c391_e929b5c7",
+        "filename": "arch/arm64/kernel/patching.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-12-06T12:36:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "48348983_492f4776",
+      "range": {
+        "startLine": 91,
+        "startChar": 14,
+        "endLine": 91,
+        "endChar": 32
+      },
+      "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55684d37_bec1e3d8",
