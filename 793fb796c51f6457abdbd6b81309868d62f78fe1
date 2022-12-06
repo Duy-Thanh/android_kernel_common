@@ -52,6 +52,24 @@
       "parentUuid": "752ff277_e2593c31",
       "revId": "793fb796c51f6457abdbd6b81309868d62f78fe1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f166ff9_d53cb08f",
+        "filename": "drivers/usb/typec/ucsi/ucsi.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2022-12-06T08:51:40Z",
+      "side": 1,
+      "message": "got it, I\u0027ll tune it to make sure we get a stable abi",
+      "parentUuid": "5ab4e93a_98c8405f",
+      "revId": "793fb796c51f6457abdbd6b81309868d62f78fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
