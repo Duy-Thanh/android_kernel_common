@@ -458,6 +458,7 @@ static int swap_write_page(struct swap_map_handle *handle, void *buf,
 {
 	int error = 0;
 	sector_t offset;
+	int status = 0;
 
 	if (!handle->cur)
 		return -EINVAL;
@@ -471,9 +472,12 @@ static int swap_write_page(struct swap_map_handle *handle, void *buf,
 		if (!offset)
 			return -ENOSPC;
 		handle->cur->next_swap = offset;
-		error = write_page(handle->cur, handle->cur_swap, hb);
-		if (error)
-			goto out;
+		trace_android_vh_qcom_secure_hibernation_enabled(&status);
+		if (!status) {
+			error = write_page(handle->cur, handle->cur_swap, hb);
+			if (error)
+				goto out;
+		}
 		clear_page(handle->cur);
 		handle->cur_swap = offset;
 		handle->k = 0;
@@ -568,6 +572,7 @@ static int save_image(struct swap_map_handle *handle,
 		ret = snapshot_read_next(snapshot);
 		if (ret <= 0)
 			break;
+		trace_android_vh_encrypt_page(data_of(*snapshot));
 		ret = swap_write_page(handle, data_of(*snapshot), &hb);
 		if (ret)
 			break;
@@ -576,6 +581,7 @@ static int save_image(struct swap_map_handle *handle,
 				nr_pages / m * 10);
 		nr_pages++;
 	}
+	trace_android_vh_post_image_save((void *)&hb, root_swap);
 	err2 = hib_wait_io(&hb);
 	hib_finish_batch(&hb);
 	stop = ktime_get();
@@ -930,6 +936,7 @@ int swsusp_write(unsigned int flags)
 		pr_err("Cannot get swap writer\n");
 		return error;
 	}
+	trace_android_vh_init_aes_encrypt(&error);
 	if (flags & SF_NOCOMPRESS_MODE) {
 		if (!enough_swap(pages)) {
 			pr_err("Not enough free swap\n");
