@@ -16,6 +16,24 @@
       "message": "This breaks the stable ABI and is therefore not acceptable on this branch.",
       "revId": "793fb796c51f6457abdbd6b81309868d62f78fe1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752ff277_e2593c31",
+        "filename": "drivers/usb/typec/ucsi/ucsi.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2022-12-06T05:03:14Z",
+      "side": 1,
+      "message": "Hi Matthias,\nApologies, could you please help suggest what can we do to get this change merged?\ndo we update the abi xml file?\nhttps://android-review.googlesource.com/c/kernel/common/+/2325058/2/android/abi_gki_aarch64.xml\nor something else we need to do ?",
+      "parentUuid": "12a4408d_d6fd46fc",
+      "revId": "793fb796c51f6457abdbd6b81309868d62f78fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
