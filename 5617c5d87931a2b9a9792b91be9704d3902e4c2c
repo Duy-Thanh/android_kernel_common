@@ -178,6 +178,24 @@
       "parentUuid": "656850ea_05e4e399",
       "revId": "5617c5d87931a2b9a9792b91be9704d3902e4c2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8603de9_b8356f7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-12-06T03:07:22Z",
+      "side": 1,
+      "message": "I have created a new bug id: 261517935",
+      "parentUuid": "b9c886b7_c46d3195",
+      "revId": "5617c5d87931a2b9a9792b91be9704d3902e4c2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -16,6 +16,24 @@
       "message": "I still don\u0027t see any respin bug. If there is one, please post it here.",
       "revId": "f807e6bc954055088d0be5ee24d33c9de100f7c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f380aab_bb4e9e32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-12-06T03:07:22Z",
+      "side": 1,
+      "message": "I have created a new bug id: 261517935",
+      "parentUuid": "2bd5e59d_fe1ef916",
+      "revId": "f807e6bc954055088d0be5ee24d33c9de100f7c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
