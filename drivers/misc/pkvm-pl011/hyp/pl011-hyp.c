@@ -43,6 +43,12 @@ struct putc_fn_struct {
 
 const struct putc_fn_struct putc_struct = { .putc_fn = pl011_hyp_putc };
 
+static void pl011_hyp_puts(const char *str)
+{
+	while (*str)
+		pl011_hyp_putc(*str++);
+	pl011_hyp_putc('\n');
+}
 
 int pl011_hyp_init(const struct pkvm_module_ops *ops)
 {
@@ -53,5 +59,11 @@ int pl011_hyp_init(const struct pkvm_module_ops *ops)
 	if (ret)
 		return ret;
 
-	return ops->register_serial_driver(putc_struct.putc_fn);
+	ret = ops->register_serial_driver(putc_struct.putc_fn);
+	if (ret)
+		return ret;
+
+	pl011_hyp_puts("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam euismod placerat mauris sit amet faucibus. Ut at arcu fringilla, accumsan sem sit amet, fermentum lorem. Quisque nisi leo, auctor quis leo vitae, aliquam ultricies justo. Mauris ac ultricies tellus, a dignissim nulla. Cras facilisis dolor ut purus cursus pellentesque. Nam ac scelerisque mauris, in bibendum ante. Vivamus mollis, elit eu vestibulum aliquam, orci nunc feugiat mi, a bibendum felis tellus ac purus. Nunc felis sapien, lacinia sit amet mauris nec, placerat volutpat nibh. Nam et nibh massa. Maecenas vel volutpat metus. Nunc neque augue, rutrum in felis et, posuere rutrum eros.");
+
+	return 0;
 }
