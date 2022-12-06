@@ -68,6 +68,23 @@
       "message": "Respin Bug: b/261532072",
       "revId": "f807e6bc954055088d0be5ee24d33c9de100f7c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b90730_9b72c241",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951960
+      },
+      "writtenOn": "2022-12-06T04:57:21Z",
+      "side": 1,
+      "message": "Hi Liujie, please help to add \"Bug: 261532072\" in the commit message, thank you",
+      "revId": "f807e6bc954055088d0be5ee24d33c9de100f7c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
