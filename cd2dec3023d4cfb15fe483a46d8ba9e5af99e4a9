@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb2ebf9a_c6516c6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-06T19:00:10Z",
+      "side": 1,
+      "message": "How is the code that uses this even compiling?",
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d88992b4_75da3c5c",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-06T19:00:10Z",
+      "side": 1,
+      "message": "will not work, see .c file for why.",
+      "range": {
+        "startLine": 525,
+        "startChar": 54,
+        "endLine": 525,
+        "endChar": 58
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ebf87b9_7862a800",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-06T19:00:10Z",
+      "side": 1,
+      "message": "this will not work, you do not know what this structure is, so how can you pass it in?",
+      "range": {
+        "startLine": 412,
+        "startChar": 47,
+        "endLine": 412,
+        "endChar": 55
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3f702f4_3e1792e4",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-06T19:00:10Z",
+      "side": 1,
+      "message": "everywhere else in this file is called \"swap\", what is \"hib\"?",
+      "range": {
+        "startLine": 412,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 18
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
