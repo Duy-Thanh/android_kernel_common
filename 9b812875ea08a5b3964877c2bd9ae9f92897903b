@@ -189,6 +189,30 @@
       },
       "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a03f26fd_20bf7862",
+        "filename": "arch/arm64/kernel/patching.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-06T09:35:14Z",
+      "side": 1,
+      "message": "I went with the simpler option of still using the TEXT_POKE0 fixmap for now and just refactoring the code a bit -- this is now split in two patches.",
+      "parentUuid": "1fd0d03a_3f41a848",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 25
+      },
+      "revId": "9b812875ea08a5b3964877c2bd9ae9f92897903b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
