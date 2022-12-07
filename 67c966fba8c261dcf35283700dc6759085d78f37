@@ -204,6 +204,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "557ef058_50134cde",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:58:58Z",
+      "side": 1,
+      "message": "Renamed to hib_write_data_to_swap(), can we have this name?",
+      "parentUuid": "2b9b3438_43287032",
+      "range": {
+        "startLine": 526,
+        "startChar": 11,
+        "endLine": 526,
+        "endChar": 21
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0cd7f00_5bb0d7a0",
         "filename": "kernel/power/swap.c",
         "patchSetId": 1
@@ -239,6 +263,30 @@
       "side": 1,
       "message": "Removed the export for this function. Instead introduced hib_write_page(). Please let us know if we can export hib_write_page().",
       "parentUuid": "f0cd7f00_5bb0d7a0",
+      "range": {
+        "startLine": 378,
+        "startChar": 4,
+        "endLine": 378,
+        "endChar": 14
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37fd860e_b1628a04",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:58:58Z",
+      "side": 1,
+      "message": "Removed the export for this function. Instead introduced hib_write_data_to_swap(). Please let us know if we can export hib_write_data_to_swap().",
+      "parentUuid": "89db17fb_2eca9a4c",
       "range": {
         "startLine": 378,
         "startChar": 4,

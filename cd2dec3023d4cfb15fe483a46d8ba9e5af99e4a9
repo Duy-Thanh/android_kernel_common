@@ -175,6 +175,30 @@
       },
       "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb3b36d0_f97b9d61",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:58:58Z",
+      "side": 1,
+      "message": "The same structure hib_bio_batch is redefined in the vendor module. However, we will take care of changes to the structure in the main tree and update accordingly in the vendor module during updates.",
+      "parentUuid": "7035d5df_6be5cea4",
+      "range": {
+        "startLine": 412,
+        "startChar": 47,
+        "endLine": 412,
+        "endChar": 55
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
