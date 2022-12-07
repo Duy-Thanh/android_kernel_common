@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "093b607a_08421d3f",
+        "filename": "drivers/usb/typec/ucsi/ucsi.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2022-12-07T09:26:41Z",
+      "side": 1,
+      "message": "sure will rename it",
+      "parentUuid": "5f0f3a22_e4d9dc4d",
+      "range": {
+        "startLine": 307,
+        "startChar": 7,
+        "endLine": 307,
+        "endChar": 18
+      },
+      "revId": "68b46cc6f505c658b0a4d38f3083319940cee8a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42b8ff47_5ffe54b6",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-07T07:54:21Z",
       "side": 1,
       "message": "these can all go in the original place from the upstream commit, no need to wrap them, right?",
+      "range": {
+        "startLine": 311,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 45
+      },
+      "revId": "68b46cc6f505c658b0a4d38f3083319940cee8a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09f6da50_c6ae9e84",
+        "filename": "drivers/usb/typec/ucsi/ucsi.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2022-12-07T09:26:41Z",
+      "side": 1,
+      "message": "yeah no need of this i\u0027ll move them to original place.",
+      "parentUuid": "42b8ff47_5ffe54b6",
       "range": {
         "startLine": 311,
         "startChar": 0,
