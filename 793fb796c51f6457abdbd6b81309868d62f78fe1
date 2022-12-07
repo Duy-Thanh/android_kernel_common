@@ -70,6 +70,24 @@
       "parentUuid": "5ab4e93a_98c8405f",
       "revId": "793fb796c51f6457abdbd6b81309868d62f78fe1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1817629a_ed8e3282",
+        "filename": "drivers/usb/typec/ucsi/ucsi.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2022-12-07T06:38:14Z",
+      "side": 1,
+      "message": "have tweaked the patch with a vendor wrapper.",
+      "parentUuid": "3f166ff9_d53cb08f",
+      "revId": "793fb796c51f6457abdbd6b81309868d62f78fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
