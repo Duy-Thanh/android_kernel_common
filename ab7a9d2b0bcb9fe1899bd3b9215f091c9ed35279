@@ -39,6 +39,30 @@
       },
       "revId": "ab7a9d2b0bcb9fe1899bd3b9215f091c9ed35279",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "806cb2b1_2f9ad35a",
+        "filename": "drivers/usb/typec/ucsi/ucsi.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2022-12-07T11:27:13Z",
+      "side": 1,
+      "message": "done, added the description of the struct as well.",
+      "parentUuid": "1a614775_83ac1f99",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 21
+      },
+      "revId": "ab7a9d2b0bcb9fe1899bd3b9215f091c9ed35279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
