@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70f32955_bec96928",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:37:50Z",
+      "side": 1,
+      "message": "Sure, we will work with upstream to get the patches merged. But can we meanwhile take these patches to address the current requirements?",
+      "parentUuid": "e5c55bfe_993a76fc",
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea838ee_cc572ed6",
         "filename": "kernel/power/snapshot.c",
         "patchSetId": 6

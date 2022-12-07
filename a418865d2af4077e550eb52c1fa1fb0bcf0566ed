@@ -22,6 +22,30 @@
       },
       "revId": "a418865d2af4077e550eb52c1fa1fb0bcf0566ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d42b25_cca38f10",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:37:50Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "1846192e_c5167017",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "a418865d2af4077e550eb52c1fa1fb0bcf0566ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
