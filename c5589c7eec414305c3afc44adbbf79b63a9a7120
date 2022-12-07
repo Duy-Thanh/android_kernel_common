@@ -22,6 +22,30 @@
       },
       "revId": "c5589c7eec414305c3afc44adbbf79b63a9a7120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19a1ea55_5cccb8cc",
+        "filename": "include/trace/hooks/dmabuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2022-12-07T05:20:15Z",
+      "side": 1,
+      "message": "I meant !CONFIG_DMABUF_SYSFS_STATS",
+      "parentUuid": "452e8520_6c64b527",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 15
+      },
+      "revId": "c5589c7eec414305c3afc44adbbf79b63a9a7120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
