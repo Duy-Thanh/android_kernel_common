@@ -180,6 +180,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b9b3438_43287032",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:42:24Z",
+      "side": 1,
+      "message": "Renamed to hib_rite_data_to_swap(), can we have this name?",
+      "parentUuid": "f4a0e6a8_4ab561c9",
+      "range": {
+        "startLine": 526,
+        "startChar": 11,
+        "endLine": 526,
+        "endChar": 21
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0cd7f00_5bb0d7a0",
         "filename": "kernel/power/swap.c",
         "patchSetId": 1

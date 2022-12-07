@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cec7aee2_c18b1f0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:42:24Z",
+      "side": 1,
+      "message": "Its compile tested and validated to be working.",
+      "parentUuid": "eb2ebf9a_c6516c6d",
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d88992b4_75da3c5c",
         "filename": "include/linux/swap.h",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2022-12-06T19:00:10Z",
       "side": 1,
       "message": "will not work, see .c file for why.",
+      "range": {
+        "startLine": 525,
+        "startChar": 54,
+        "endLine": 525,
+        "endChar": 58
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c34f8a3_de4a690d",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:42:24Z",
+      "side": 1,
+      "message": "Can we consider this to be a data passed to the vendor module?",
+      "parentUuid": "d88992b4_75da3c5c",
       "range": {
         "startLine": 525,
         "startChar": 54,
@@ -77,6 +119,54 @@
       "writtenOn": "2022-12-06T19:00:10Z",
       "side": 1,
       "message": "everywhere else in this file is called \"swap\", what is \"hib\"?",
+      "range": {
+        "startLine": 412,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 18
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7035d5df_6be5cea4",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:42:24Z",
+      "side": 1,
+      "message": "The same structure hib_bio_batch is redefined in the vendor module. However, we will take care of changes to the structure i the main tree and update accordingly in the vendor module during updates.",
+      "parentUuid": "1ebf87b9_7862a800",
+      "range": {
+        "startLine": 412,
+        "startChar": 47,
+        "endLine": 412,
+        "endChar": 55
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95e3e8a2_66082c22",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-07T04:42:24Z",
+      "side": 1,
+      "message": "renamed to hib_write_data_to_swap(). Does this seem fine?",
+      "parentUuid": "c3f702f4_3e1792e4",
       "range": {
         "startLine": 412,
         "startChar": 4,
