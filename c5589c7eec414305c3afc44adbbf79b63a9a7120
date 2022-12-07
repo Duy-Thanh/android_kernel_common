@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "452e8520_6c64b527",
+        "filename": "include/trace/hooks/dmabuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2022-12-07T05:19:27Z",
+      "side": 1,
+      "message": "This is causing some trouble on builds with !\n\nWe don\u0027t need to give the dma_buf_sysfs_entry definition here right? given that this trace hook is exported, the struct would be covered by KMI any way. we can get away with forward declaration like below. can you provide your comment on this?\n\ndiff --git a/include/trace/hooks/dmabuf.h b/include/trace/hooks/dmabuf.h\nindex 8963742..af49525 100644\n--- a/include/trace/hooks/dmabuf.h\n+++ b/include/trace/hooks/dmabuf.h\n@@ -11,12 +11,7 @@\n\n #include \u003ctrace/hooks/vendor_hooks.h\u003e\n\n-#ifdef __GENKSYMS__\n struct dma_buf_sysfs_entry;\n-#else\n-/* struct dma_buf_sysfs_entry */\n-#include \u003clinux/dma-buf.h\u003e\n-#endif\n\n DECLARE_RESTRICTED_HOOK(android_rvh_dma_buf_stats_teardown,\n        TP_PROTO(struct dma_buf_sysfs_entry *sysfs_entry, bool *skip_sysfs_release),",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 15
+      },
+      "revId": "c5589c7eec414305c3afc44adbbf79b63a9a7120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
