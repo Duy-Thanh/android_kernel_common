@@ -13,6 +13,7 @@
 #include <hyp/adjust_pc.h>
 #include <linux/kvm_host.h>
 #include <asm/kvm_emulate.h>
+#include <asm/kvm_mmu.h>
 
 #if !defined (__KVM_NVHE_HYPERVISOR__) && !defined (__KVM_VHE_HYPERVISOR__)
 #error Hypervisor code only!
@@ -100,7 +101,11 @@ unsigned long get_except64_cpsr(unsigned long old, bool has_mte,
 	new |= (old & PSR_C_BIT);
 	new |= (old & PSR_V_BIT);
 
+<<<<<<< HEAD   (704838 Revert "net: macb: Specify PHY PM management done by MAC")
 	if (has_mte)
+=======
+	if (kvm_has_mte(kern_hyp_va(vcpu->kvm)))
+>>>>>>> BRANCH (509a32 Linux 5.15.78)
 		new |= PSR_TCO_BIT;
 
 	new |= (old & PSR_DIT_BIT);
