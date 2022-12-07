@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4bd41b_df683633",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-07T09:36:21Z",
+      "side": 1,
+      "message": "Changelog say \"51\" symbols, but only \"50\" are added, is this ok?",
+      "revId": "884dddd59b90c5a5ce730b3fee66d0a332408b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
