@@ -16,6 +16,24 @@
       "message": "How is the ABI breakage addressed?",
       "revId": "8f155782818cf4d89338d1433dc661d1fecbb5eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f68bc821_94bbb210",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-07T18:53:33Z",
+      "side": 1,
+      "message": "That breakage is in the _next_ commit in this series, not in this one.  Will trigger TH again to show that.  And that breakage is resolved later in the series as well.",
+      "parentUuid": "566d125a_06622b95",
+      "revId": "8f155782818cf4d89338d1433dc661d1fecbb5eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
