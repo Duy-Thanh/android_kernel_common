@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "418a3b78_1f59d02d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-07T10:30:09Z",
+      "side": 1,
+      "message": "Much better!",
+      "revId": "ab7a9d2b0bcb9fe1899bd3b9215f091c9ed35279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a614775_83ac1f99",
+        "filename": "drivers/usb/typec/ucsi/ucsi.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-07T10:30:09Z",
+      "side": 1,
+      "message": "A comment here expaining why this is needed and maybe pointing to the bug number that this is covered under?",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 21
+      },
+      "revId": "ab7a9d2b0bcb9fe1899bd3b9215f091c9ed35279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
