@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d1d221_28a760e2",
+        "filename": "arch/x86/configs/gki_defconfig.backup",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-12-08T23:12:11Z",
+      "side": 1,
+      "message": "any reason to keep the backup file around?",
+      "revId": "8b869651c43c63b7a46aac489f65b41bf2fadaf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
