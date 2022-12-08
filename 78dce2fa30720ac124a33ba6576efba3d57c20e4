@@ -51,6 +51,23 @@
       "message": "Thanks! I\u0027m doing another round of local test and will upload the patch under the same topic.",
       "revId": "78dce2fa30720ac124a33ba6576efba3d57c20e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79cd0615_87b4eae2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2022-12-08T06:14:36Z",
+      "side": 1,
+      "message": "Tested with https://r.android.com/2334883",
+      "revId": "78dce2fa30720ac124a33ba6576efba3d57c20e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
