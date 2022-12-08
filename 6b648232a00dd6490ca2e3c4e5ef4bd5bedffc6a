@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c356ca_eeb7cea5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-08T00:32:41Z",
+      "side": 1,
+      "message": "The CRC errors on cma_alloc/cma_release needs to be fixed",
+      "revId": "6b648232a00dd6490ca2e3c4e5ef4bd5bedffc6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
