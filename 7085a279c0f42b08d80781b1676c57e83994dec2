@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6041679_1c3f2272",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-12-08T17:42:38Z",
+      "side": 1,
+      "message": "This will always be true I think, `pte` includes address bits etc ... You need the mask back 😊",
+      "range": {
+        "startLine": 693,
+        "startChar": 9,
+        "endLine": 693,
+        "endChar": 45
+      },
+      "revId": "7085a279c0f42b08d80781b1676c57e83994dec2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
