@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6caebc7a_d6d2748a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-12-08T02:55:35Z",
+      "side": 1,
+      "message": "Please note that if you are cherry-picking a change from another branch, like in this case from https://android-review.git.corp.google.com/c/kernel/common/+/2193467, then you should keep the Change-Id the same.",
+      "revId": "a0470c9a44b82e86bbffda3413c83c3aaaf4dce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
