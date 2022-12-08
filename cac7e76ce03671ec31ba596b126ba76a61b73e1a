@@ -16,6 +16,23 @@
       "message": "going to require a compiler respin to pick up fixes for this one.",
       "revId": "cac7e76ce03671ec31ba596b126ba76a61b73e1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f28443_ba05ed9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-12-08T17:56:31Z",
+      "side": 1,
+      "message": "I don\u0027t expect the android14-5.15 build to pass with 16.0.1; we\u0027re in the process of respinning AOSP clang with some upstream fixes for some regressions in 16.0.1.\n\n5.15 was still on -std\u003dgnu89, mainline is on -std\u003dgnu11.\n\nThe fixes we\u0027re picking up are specific to -std\u003dgnu89.",
+      "revId": "cac7e76ce03671ec31ba596b126ba76a61b73e1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
