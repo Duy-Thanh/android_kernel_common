@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb2163a_5a664d85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-12-08T18:33:00Z",
+      "side": 1,
+      "message": "Once you rebase the child patch over  https://android-review.git.corp.google.com/c/kernel/common/+/2334038 and post additional patch to update the symbol list, you can abandon this one.",
+      "parentUuid": "d6be32ea_7b80b0ad",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "a0470c9a44b82e86bbffda3413c83c3aaaf4dce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6caebc7a_d6d2748a",
