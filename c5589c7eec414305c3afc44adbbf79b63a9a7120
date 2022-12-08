@@ -46,6 +46,30 @@
       },
       "revId": "c5589c7eec414305c3afc44adbbf79b63a9a7120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7941d3d1_aaccc8e1",
+        "filename": "include/trace/hooks/dmabuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-12-08T18:32:15Z",
+      "side": 1,
+      "message": "I see, because dma_buf_sysfs_entry is never declared in the header in that case.  The latest vendor hook instructions mention that we should have full includes in these hook declaration files (for ABI monitoring like you mention), but here I copied the pattern used by others on this branch which I don\u0027t think actually achieves that (because of the \\_\\_GENKSYMS\\_\\_). In this case, I don\u0027t think it makes much sense to even declare the hook if it can never be called, but as this is already exported don\u0027t think we can do that. However I think we could conditionally forward declare based on CONFIG_DMABUF_SYSFS_STATS similar to what binder does here: https://cs.android.com/android/kernel/superproject/+/common-android12-5.10:common/include/trace/hooks/binder.h;drc\u003d8d868467814e79d4770c276f954e5dd928401da6;l\u003d14",
+      "parentUuid": "19a1ea55_5cccb8cc",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 15
+      },
+      "revId": "c5589c7eec414305c3afc44adbbf79b63a9a7120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
