@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9382db70_cd4f6e8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-12-08T17:24:37Z",
+      "side": 1,
+      "message": "In that case simply revert the https://android-review.git.corp.google.com/c/kernel/common/+/2223941. This way it will be clear that the patch was cherry-picked, then reverted and then re-reverted.",
+      "parentUuid": "77fbe742_e6de5acc",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "a0470c9a44b82e86bbffda3413c83c3aaaf4dce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6caebc7a_d6d2748a",
