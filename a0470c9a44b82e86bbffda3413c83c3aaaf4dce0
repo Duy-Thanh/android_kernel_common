@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6be32ea_7b80b0ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-12-08T17:27:28Z",
+      "side": 1,
+      "message": "I created the revert here: https://android-review.git.corp.google.com/c/kernel/common/+/2334038 and commented to Greg\u0027s comment. Hopefully he agrees with me.",
+      "parentUuid": "9382db70_cd4f6e8c",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "a0470c9a44b82e86bbffda3413c83c3aaaf4dce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6caebc7a_d6d2748a",
