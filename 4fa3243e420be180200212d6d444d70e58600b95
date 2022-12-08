@@ -117,6 +117,30 @@
       },
       "revId": "4fa3243e420be180200212d6d444d70e58600b95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "964f681d_ccf7c221",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-12-08T18:00:06Z",
+      "side": 1,
+      "message": "Thanks for spotting the bug ! It was not coalescing anything without it.",
+      "parentUuid": "277beada_70be941e",
+      "range": {
+        "startLine": 680,
+        "startChar": 44,
+        "endLine": 680,
+        "endChar": 68
+      },
+      "revId": "4fa3243e420be180200212d6d444d70e58600b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
