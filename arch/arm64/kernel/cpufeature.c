@@ -144,9 +144,30 @@ static cpumask_var_t cpu_32bit_el0_mask __cpumask_var_read_mostly;
  */
 DEFINE_STATIC_KEY_FALSE(arm64_const_caps_ready);
 EXPORT_SYMBOL(arm64_const_caps_ready);
+static int __pauth_forced = 1; /*pointer authentication is on bydefault*/
 static inline void finalize_system_capabilities(void)
 {
 	static_branch_enable(&arm64_const_caps_ready);
+}
+
+static __always_inline int is_pauth_forced(void)
+{
+        return __pauth_forced;
+}
+
+static bool is_ptr_auth_capability(const struct arm64_cpu_capabilities *entry)
+{
+	switch(entry->capability) {
+		case ARM64_HAS_GENERIC_AUTH_ARCH:
+		case ARM64_HAS_GENERIC_AUTH_IMP_DEF:
+		case ARM64_HAS_ADDRESS_AUTH_ARCH:
+		case ARM64_HAS_ADDRESS_AUTH_IMP_DEF:
+		case ARM64_HAS_ADDRESS_AUTH:
+		case ARM64_HAS_GENERIC_AUTH:
+			return true;
+		default:
+			return false;
+	}
 }
 
 void dump_cpu_features(void)
@@ -1323,6 +1344,9 @@ has_cpuid_feature(const struct arm64_cpu_capabilities *entry, int scope)
 {
 	u64 val;
 
+	if (is_ptr_auth_capability(entry) && !is_pauth_forced())
+		return false;
+
 	WARN_ON(scope == SCOPE_LOCAL_CPU && preemptible());
 	if (scope == SCOPE_SYSTEM)
 		val = read_sanitised_ftr_reg(entry->sys_reg);
@@ -1604,6 +1628,19 @@ static int __init parse_kpti(char *str)
 }
 early_param("kpti", parse_kpti);
 
+static int __init parse_pauth(char *str)
+{
+	bool enabled;
+	int ret = strtobool(str, &enabled);
+
+	if (ret)
+		return ret;
+
+	__pauth_forced = enabled ? 1 : 0;
+	return 0;
+}
+early_param("pauth", parse_pauth);
+
 #ifdef CONFIG_ARM64_HW_AFDBM
 static inline void __cpu_enable_hw_dbm(void)
 {
@@ -1784,6 +1821,9 @@ static bool has_address_auth_cpucap(const struct arm64_cpu_capabilities *entry, 
 {
 	int boot_val, sec_val;
 
+	if (is_ptr_auth_capability(entry) && !is_pauth_forced())
+		return false;
+
 	/* We don't expect to be called with SCOPE_SYSTEM */
 	WARN_ON(scope == SCOPE_SYSTEM);
 	/*
@@ -1816,6 +1856,8 @@ static bool has_address_auth_metacap(const struct arm64_cpu_capabilities *entry,
 static bool has_generic_auth(const struct arm64_cpu_capabilities *entry,
 			     int __unused)
 {
+	if (is_ptr_auth_capability(entry) && !is_pauth_forced())
+		return false;
 	return __system_matches_cap(ARM64_HAS_GENERIC_AUTH_ARCH) ||
 	       __system_matches_cap(ARM64_HAS_GENERIC_AUTH_IMP_DEF);
 }
