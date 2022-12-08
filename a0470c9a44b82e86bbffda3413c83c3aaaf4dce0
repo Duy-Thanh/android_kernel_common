@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "77fbe742_e6de5acc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2022-12-08T03:10:06Z",
+      "side": 1,
+      "message": "We did cherry-pick from another branch, However we have done it before: https://android-review.googlesource.com/c/kernel/common/+/2195215, and has been reverted due to no abi list added(https://android-review.googlesource.com/c/kernel/common/+/2223941). With the comment of revert patch, we should upload new one, but the Change-Id can not keep same for there is already one.",
+      "parentUuid": "3e79e228_cc70e24c",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "a0470c9a44b82e86bbffda3413c83c3aaaf4dce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6caebc7a_d6d2748a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
