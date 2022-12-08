@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94fd4ed9_c469cb90",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-08T11:14:39Z",
+      "side": 1,
+      "message": "Removed function.",
+      "parentUuid": "9c34f8a3_de4a690d",
+      "range": {
+        "startLine": 525,
+        "startChar": 54,
+        "endLine": 525,
+        "endChar": 58
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ebf87b9_7862a800",
         "filename": "kernel/power/swap.c",
         "patchSetId": 2
@@ -220,6 +244,54 @@
         "startChar": 47,
         "endLine": 412,
         "endChar": 55
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deab3e36_a62e2c5c",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-08T11:14:39Z",
+      "side": 1,
+      "message": "Removed the change.",
+      "parentUuid": "b9e2c02c_796eccfc",
+      "range": {
+        "startLine": 412,
+        "startChar": 47,
+        "endLine": 412,
+        "endChar": 55
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4741e68_f2be5209",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-08T11:14:39Z",
+      "side": 1,
+      "message": "Removed change.",
+      "parentUuid": "95e3e8a2_66082c22",
+      "range": {
+        "startLine": 412,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 18
       },
       "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
