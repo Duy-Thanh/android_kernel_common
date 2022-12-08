@@ -39,9 +39,7 @@
 #include "cma.h"
 
 #undef CREATE_TRACE_POINTS
-#ifndef __GENKSYMS__
 #include <trace/hooks/mm.h>
-#endif
 
 struct cma cma_areas[MAX_CMA_AREAS];
 unsigned cma_area_count;
