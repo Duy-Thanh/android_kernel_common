@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a3d8f46_8b390135",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-08T16:25:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc4ba21e_41edfe90",
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da725d6d_a76a285c",
@@ -250,6 +268,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f164b76_4a62eee4",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-08T16:25:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc84ffc0_202b843a",
+      "range": {
+        "startLine": 526,
+        "startChar": 11,
+        "endLine": 526,
+        "endChar": 21
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0cd7f00_5bb0d7a0",
@@ -335,6 +377,30 @@
       "side": 1,
       "message": "Removed change.",
       "parentUuid": "37fd860e_b1628a04",
+      "range": {
+        "startLine": 378,
+        "startChar": 4,
+        "endLine": 378,
+        "endChar": 14
+      },
+      "revId": "67c966fba8c261dcf35283700dc6759085d78f37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69c24121_da8912e7",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-08T16:25:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e289f41e_12c5d436",
       "range": {
         "startLine": 378,
         "startChar": 4,

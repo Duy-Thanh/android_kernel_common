@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "452a5dc6_48bd6a3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-08T16:25:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cec7aee2_c18b1f0e",
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d88992b4_75da3c5c",
@@ -97,6 +115,30 @@
       "side": 1,
       "message": "Removed function.",
       "parentUuid": "9c34f8a3_de4a690d",
+      "range": {
+        "startLine": 525,
+        "startChar": 54,
+        "endLine": 525,
+        "endChar": 58
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc5ab441_d67be7e0",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-08T16:25:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94fd4ed9_c469cb90",
       "range": {
         "startLine": 525,
         "startChar": 54,
@@ -292,6 +334,54 @@
         "startChar": 4,
         "endLine": 412,
         "endChar": 18
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fe923e2_cb66a75f",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-08T16:25:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4741e68_f2be5209",
+      "range": {
+        "startLine": 412,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 18
+      },
+      "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a397e1_f198073e",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-08T16:25:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deab3e36_a62e2c5c",
+      "range": {
+        "startLine": 412,
+        "startChar": 47,
+        "endLine": 412,
+        "endChar": 55
       },
       "revId": "cd2dec3023d4cfb15fe483a46d8ba9e5af99e4a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
