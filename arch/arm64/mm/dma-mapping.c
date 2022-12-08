@@ -636,8 +636,11 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
 	int cls = cache_line_size_of_cpu();
 #ifdef CONFIG_ARM64_ERRATUM_2454944
 	bool noalias = !coherent && cpus_have_cap(ARM64_WORKAROUND_NO_DMA_ALIAS);
+	bool drv_noalias = false;
 
-	if (noalias) {
+	trace_android_vh_iommu_noalias(dev, &drv_noalias);
+
+	if (noalias && drv_noalias) {
 		dev_info(dev, "applying no-alias DMA workaround\n");
 		dev->dma_ops = &arm64_noalias_ops;
 	}
@@ -656,7 +659,7 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
 		trace_android_rvh_iommu_setup_dma_ops(dev, dma_base, size);
 	}
 #if defined(CONFIG_ARM64_ERRATUM_2454944) && defined(CONFIG_IOMMU_DMA)
-	if (noalias && dev->dma_ops != &arm64_noalias_ops)
+	if (noalias && drv_noalias && dev->dma_ops != &arm64_noalias_ops)
 		arm64_init_iommu_ops(dev);
 #endif
 

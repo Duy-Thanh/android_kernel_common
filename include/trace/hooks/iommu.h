@@ -43,6 +43,9 @@ DECLARE_HOOK(android_vh_iommu_iovad_free_iova,
 	TP_PROTO(struct iova_domain *iovad, dma_addr_t iova, size_t size),
 	TP_ARGS(iovad, iova, size));
 
+DECLARE_HOOK(android_vh_iommu_noalias,
+	TP_PROTO(struct device *dev, bool *noalias),
+	TP_ARGS(dev, noalias));
 
 #endif /* _TRACE_HOOK_IOMMU_H */
 
