@@ -291,11 +291,18 @@ static int rb_update_footers(struct hyp_rb_per_cpu *cpu_buffer)
 static int rb_page_init(struct hyp_buffer_page *bpage, unsigned long hva)
 {
 	void *hyp_va = (void *)kern_hyp_va(hva);
+	struct hyp_page *page;
 	int ret;
 
 	ret = hyp_pin_shared_mem(hyp_va, hyp_va + PAGE_SIZE);
 	if (ret)
 		return ret;
+
+	page = hyp_virt_to_page(hyp_va);
+	if (!(page->flags & HOST_PAGE_WRPROTECT)) {
+		hyp_unpin_shared_mem(hyp_va, hyp_va + PAGE_SIZE);
+		return -EINVAL;
+	}
 
 	INIT_LIST_HEAD(&bpage->list);
 	bpage->page = (struct buffer_data_page *)hyp_va;
