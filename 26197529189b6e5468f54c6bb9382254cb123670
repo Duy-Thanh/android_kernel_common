@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "871de26b_c4b656fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-12-09T11:35:56Z",
+      "side": 1,
+      "message": "Cache maintenance routines should not be used directly from modules as the DMA API makes this unnecessary.",
+      "revId": "26197529189b6e5468f54c6bb9382254cb123670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
