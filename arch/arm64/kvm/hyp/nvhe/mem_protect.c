@@ -864,6 +864,7 @@ struct pkvm_mem_transition {
 struct pkvm_mem_share {
 	const struct pkvm_mem_transition	tx;
 	const enum kvm_pgtable_prot		completer_prot;
+	const enum kvm_pgtable_prot		initiator_prot;
 };
 
 struct pkvm_mem_donation {
@@ -926,6 +927,26 @@ static int __host_check_page_state_range(u64 addr, u64 size,
 	struct check_walk_data d = {
 		.desired	= state,
 		.get_page_state	= host_get_page_state,
+	};
+
+	hyp_assert_lock_held(&host_mmu.lock);
+	return check_page_state_range(&host_mmu.pgt, addr, size, &d);
+}
+
+static enum pkvm_page_state host_get_restricted_page_state(kvm_pte_t pte)
+{
+	if (!kvm_pte_valid(pte) && pte)
+		return PKVM_NOPAGE;
+
+	return pkvm_getstate(kvm_pgtable_stage2_pte_prot(pte));
+}
+
+static int __host_check_restricted_page_state_range(u64 addr, u64 size,
+						    enum pkvm_page_state state)
+{
+	struct check_walk_data d = {
+		.desired	= state,
+		.get_page_state	= host_get_restricted_page_state,
 	};
 
 	hyp_assert_lock_held(&host_mmu.lock);
@@ -1088,6 +1109,16 @@ static int __hyp_check_page_state_range(u64 addr, u64 size,
 	return check_page_state_range(&pkvm_pgtable, addr, size, &d);
 }
 
+static int __hyp_set_page_state_range(u64 addr, u64 size,
+				      enum pkvm_page_state state,
+				      enum kvm_pgtable_prot perms)
+{
+	void *start = (void *)addr, *end = start + size;
+	enum kvm_pgtable_prot prot = pkvm_mkstate(perms, state);
+
+	return pkvm_create_mappings_locked(start, end, prot);
+}
+
 static int hyp_request_donation(u64 *completer_addr,
 				const struct pkvm_mem_transition *tx)
 {
@@ -1156,11 +1187,10 @@ static int hyp_ack_donation(u64 addr, const struct pkvm_mem_transition *tx)
 static int hyp_complete_share(u64 addr, const struct pkvm_mem_transition *tx,
 			      enum kvm_pgtable_prot perms)
 {
-	void *start = (void *)addr, *end = start + (tx->nr_pages * PAGE_SIZE);
-	enum kvm_pgtable_prot prot;
+	u64 size = tx->nr_pages * PAGE_SIZE;
 
-	prot = pkvm_mkstate(perms, PKVM_PAGE_SHARED_BORROWED);
-	return pkvm_create_mappings_locked(start, end, prot);
+	return __hyp_set_page_state_range(addr, size, PKVM_PAGE_SHARED_BORROWED,
+					  perms);
 }
 
 static int hyp_complete_unshare(u64 addr, const struct pkvm_mem_transition *tx)
@@ -1174,10 +1204,9 @@ static int hyp_complete_unshare(u64 addr, const struct pkvm_mem_transition *tx)
 static int hyp_complete_donation(u64 addr,
 				 const struct pkvm_mem_transition *tx)
 {
-	void *start = (void *)addr, *end = start + (tx->nr_pages * PAGE_SIZE);
-	enum kvm_pgtable_prot prot = pkvm_mkstate(PAGE_HYP, PKVM_PAGE_OWNED);
+	u64 size = tx->nr_pages * PAGE_SIZE;
 
-	return pkvm_create_mappings_locked(start, end, prot);
+	return __hyp_set_page_state_range(addr, size, PKVM_PAGE_OWNED, PAGE_HYP);
 }
 
 static enum pkvm_page_state guest_get_page_state(kvm_pte_t pte)
@@ -1690,6 +1719,139 @@ static int do_donate(struct pkvm_mem_donation *donation)
 	return WARN_ON(__do_donate(donation));
 }
 
+static int check_unshare_restricted(struct pkvm_mem_share *share)
+{
+	const struct pkvm_mem_transition *tx = &share->tx;
+	u64 hyp_addr, host_addr, size;
+	struct hyp_page *page;
+	int ret;
+
+	size = tx->nr_pages * PAGE_SIZE;
+	host_addr = tx->initiator.addr;
+	hyp_addr = tx->initiator.host.completer_addr;
+	page = hyp_virt_to_page(hyp_addr);
+
+	if (!(page->flags & HOST_PAGE_SHARED_RESTRICTED))
+		return -EPERM;
+
+	ret = __host_check_restricted_page_state_range(host_addr, size,
+						       PKVM_PAGE_SHARED_OWNED);
+	if (ret)
+		return ret;
+
+	return hyp_ack_unshare(hyp_addr, tx);
+}
+
+static int __do_share_and_restrict(struct pkvm_mem_share *share)
+{
+	const struct pkvm_mem_transition *tx = &share->tx;
+	u64 hyp_addr, host_addr, size;
+	enum kvm_pgtable_prot prot;
+	struct hyp_page *page;
+	int ret;
+
+	size = tx->nr_pages * PAGE_SIZE;
+	host_addr = tx->initiator.addr;
+	hyp_addr = tx->initiator.host.completer_addr;
+	page = hyp_virt_to_page(hyp_addr);
+	prot = pkvm_mkstate(share->initiator_prot, PKVM_PAGE_SHARED_OWNED);
+
+	ret = host_stage2_idmap_locked(host_addr, size, prot, true);
+	if (ret)
+		return ret;
+
+	ret = __hyp_set_page_state_range(hyp_addr, size,
+					 PKVM_PAGE_SHARED_BORROWED, PAGE_HYP);
+	if (!ret)
+		page->flags |= HOST_PAGE_SHARED_RESTRICTED;
+
+	return ret;
+}
+
+static int __do_unshare_restricted(struct pkvm_mem_share *share)
+{
+	const struct pkvm_mem_transition *tx = &share->tx;
+	u64 hyp_addr, host_addr, size;
+	enum kvm_pgtable_prot prot;
+	struct hyp_page *page;
+	int ret;
+
+	size = tx->nr_pages * PAGE_SIZE;
+	host_addr = tx->initiator.addr;
+	hyp_addr = tx->initiator.host.completer_addr;
+	page = hyp_virt_to_page(hyp_addr);
+	prot = pkvm_mkstate(PKVM_HOST_MEM_PROT, PKVM_PAGE_OWNED);
+
+	ret = kvm_pgtable_hyp_unmap(&pkvm_pgtable, hyp_addr, size);
+	if (ret != size)
+		return -EFAULT;
+
+	ret = host_stage2_idmap_locked(host_addr, size, prot, true);
+	if (!ret)
+		page->flags &= ~HOST_PAGE_SHARED_RESTRICTED;
+
+	return ret;
+}
+
+/*
+ * do_share_and_restrict():
+ *
+ * The page owner grants access to another component. The owner itself agrees to
+ * restrict its access.
+ *
+ * The ownership being not changed, the restriction must be guaranteed via a
+ * different mechanism such as hyp page refcounting (hyp_pin_shared_mem()).
+ *
+ * Initiator: OWNED	=> SHARED_OWNED
+ * Completer: NOPAGE	=> SHARED_BORROWED
+ */
+static int do_share_and_restrict(struct pkvm_mem_share *share)
+{
+	const struct pkvm_mem_transition *tx = &share->tx;
+	int ret;
+
+	/* The prot must be "restricted" */
+	if (share->initiator_prot == PKVM_HOST_MEM_PROT)
+		return -EINVAL;
+
+	if (tx->initiator.id != PKVM_ID_HOST ||
+	    tx->completer.id != PKVM_ID_HYP)
+		return -EINVAL;
+
+	ret = check_share(share);
+	if (ret)
+		return ret;
+
+	return WARN_ON(__do_share_and_restrict(share));
+}
+
+/*
+ * do_unshare_restricted():
+ *
+ * The page owner ask to retrieve its full access to the pages.
+ *
+ * It is down to the Completer to validate if it is safe to unshare and give
+ * back full access to the pages.
+ *
+ * Initiator: SHARE_OWNED	=> OWNED
+ * Completer: SHARED_BORROWED	=> NO_PAGE
+ */
+static int do_unshare_restricted(struct pkvm_mem_share *share)
+{
+	const struct pkvm_mem_transition *tx = &share->tx;
+	int ret;
+
+	if (tx->initiator.id != PKVM_ID_HOST ||
+	    tx->completer.id != PKVM_ID_HYP)
+		return -EINVAL;
+
+	ret = check_unshare_restricted(share);
+	if (ret)
+		return ret;
+
+	return WARN_ON(__do_unshare_restricted(share));
+}
+
 int __pkvm_host_share_hyp(u64 pfn)
 {
 	int ret;
@@ -1716,6 +1878,72 @@ int __pkvm_host_share_hyp(u64 pfn)
 	hyp_lock_component();
 
 	ret = do_share(&share);
+
+	hyp_unlock_component();
+	host_unlock_component();
+
+	return ret;
+}
+
+int __pkvm_host_wrprotect_share_hyp(u64 pfn)
+{
+	int ret;
+	u64 host_addr = hyp_pfn_to_phys(pfn);
+	u64 hyp_addr = (u64)__hyp_va(host_addr);
+	struct pkvm_mem_share share = {
+		.tx	= {
+			.nr_pages	= 1,
+			.initiator	= {
+				.id	= PKVM_ID_HOST,
+				.addr	= host_addr,
+				.host	= {
+					.completer_addr = hyp_addr,
+				},
+			},
+			.completer	= {
+				.id	= PKVM_ID_HYP,
+			},
+		},
+		.initiator_prot = KVM_PGTABLE_PROT_R,
+		.completer_prot = PAGE_HYP,
+	};
+
+	host_lock_component();
+	hyp_lock_component();
+
+	ret = do_share_and_restrict(&share);
+
+	hyp_unlock_component();
+	host_unlock_component();
+
+	return ret;
+}
+
+int __pkvm_host_wrprotect_unshare_hyp(u64 pfn)
+{
+	int ret;
+	u64 host_addr = hyp_pfn_to_phys(pfn);
+	u64 hyp_addr = (u64)__hyp_va(host_addr);
+	struct pkvm_mem_share share = {
+		.tx	= {
+			.nr_pages	= 1,
+			.initiator	= {
+				.id	= PKVM_ID_HOST,
+				.addr	= host_addr,
+				.host	= {
+					.completer_addr = hyp_addr,
+				},
+			},
+			.completer	= {
+				.id	= PKVM_ID_HYP,
+			},
+		},
+	};
+
+	host_lock_component();
+	hyp_lock_component();
+
+	ret = do_unshare_restricted(&share);
 
 	hyp_unlock_component();
 	host_unlock_component();
@@ -1939,6 +2167,47 @@ int hyp_pin_shared_mem(void *from, void *to)
 	for (cur = start; cur < end; cur += PAGE_SIZE)
 		hyp_page_ref_inc(hyp_virt_to_page(cur));
 
+unlock:
+	hyp_unlock_component();
+	host_unlock_component();
+
+	return ret;
+}
+
+int hyp_pin_restricted_shared_mem(void *from, void *to)
+{
+	u64 cur, start = ALIGN_DOWN((u64)from, PAGE_SIZE);
+	u64 end = PAGE_ALIGN((u64)to);
+	u64 size = end - start;
+	int ret;
+
+	host_lock_component();
+	hyp_lock_component();
+
+	ret = __host_check_restricted_page_state_range(__hyp_pa(start), size,
+							 PKVM_PAGE_SHARED_OWNED);
+	if (ret)
+		goto unlock;
+
+	ret = __hyp_check_page_state_range(start, size,
+					   PKVM_PAGE_SHARED_BORROWED);
+	if (ret)
+		goto unlock;
+
+	for (cur = start; cur < end; cur += PAGE_SIZE) {
+		struct hyp_page *page = hyp_virt_to_page(cur);
+
+		hyp_page_ref_inc(page);
+
+		if (!(page->flags & HOST_PAGE_SHARED_RESTRICTED)) {
+			ret = -EPERM;
+
+			for (; cur >= start; cur -= PAGE_SIZE)
+				hyp_page_ref_dec(hyp_virt_to_page(cur));
+
+			goto unlock;
+		}
+	}
 unlock:
 	hyp_unlock_component();
 	host_unlock_component();
