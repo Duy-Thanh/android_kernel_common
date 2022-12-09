@@ -293,6 +293,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51741ab6_f8215762",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-09T21:10:19Z",
+      "side": 1,
+      "message": "OK, but that only addresses the Also... part. If unregister fails, trusty_reclaim_memory will likely also fail. If trusty_reclaim_memory fails, it is not safe to free the memory that you had previously shared. Your best option at that point is to print a warning and leak the memory.",
+      "parentUuid": "4d6ab854_ea877081",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d73e85f_b0fedeba",
         "filename": "drivers/trusty/trusty-share.h",
         "patchSetId": 3
