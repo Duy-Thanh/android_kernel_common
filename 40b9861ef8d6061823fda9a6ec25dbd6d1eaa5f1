@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07778d8a_d2d975a8",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-09T20:32:49Z",
+      "side": 1,
+      "message": "Given the schedule deadline coming up soon, I have opted to defer this improvement for later.",
+      "parentUuid": "217af602_6685ba34",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2080feff_17e29bec",
@@ -251,6 +269,24 @@
       "side": 1,
       "message": "I don\u0027t see any fixes addressing this.",
       "parentUuid": "eb452063_8cb0ad6e",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d6ab854_ea877081",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-09T20:32:49Z",
+      "side": 1,
+      "message": "The file name has changed. The code now calls trusty_reclaim_memory.",
+      "parentUuid": "3522bb9e_9d536953",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -556,6 +592,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a26c9396_148cd304",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-09T20:32:49Z",
+      "side": 1,
+      "message": "Code has changed. Please review.",
+      "parentUuid": "fddc2e10_77cdbeda",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84cd1bba_34bb9d26",
@@ -605,6 +659,24 @@
       "side": 1,
       "message": "I don\u0027t see any fixes for this in the latest version",
       "parentUuid": "4e86b95e_32fee113",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f8644e9_ffd0b144",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-09T20:32:49Z",
+      "side": 1,
+      "message": "Code has changed. Please review.",
+      "parentUuid": "b92dd33d_73a9694c",
       "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

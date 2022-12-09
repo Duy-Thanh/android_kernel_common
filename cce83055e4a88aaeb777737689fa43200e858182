@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fc49d8b_b5338e1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-09T20:32:49Z",
+      "side": 1,
+      "message": "presubmit run has been submitted. I am expecting it to pass now due to code changes made in the trusty-driver for backward compatibility.",
+      "parentUuid": "93f68917_36539a5d",
+      "revId": "cce83055e4a88aaeb777737689fa43200e858182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e98a206_4d0458e6",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-12-02T23:25:00Z",
       "side": 1,
       "message": "If you have an optional debugfs file, list it as an option in the Kconfig file and use that. It is best to put all of this in a separate CL though.",
+      "revId": "cce83055e4a88aaeb777737689fa43200e858182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "583da3e2_d64932cb",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-09T20:32:49Z",
+      "side": 1,
+      "message": "The debugfs related code has been refactored out. It will be submitted under a separate CL as advised.",
+      "parentUuid": "3e98a206_4d0458e6",
       "revId": "cce83055e4a88aaeb777737689fa43200e858182",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b46dcb4_23a639ad",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-09T20:32:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "513988ae_0784c74a",
+      "revId": "cce83055e4a88aaeb777737689fa43200e858182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "508a06a1_fdc4ab7e",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-12-02T23:25:00Z",
       "side": 1,
       "message": "I think I posted this comment elsewhere as well. This comment should go in the kerneldoc comment.",
+      "revId": "cce83055e4a88aaeb777737689fa43200e858182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36527242_4d2d9885",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-09T20:32:49Z",
+      "side": 1,
+      "message": "The file name has changed and the issue has been addressed.",
+      "parentUuid": "508a06a1_fdc4ab7e",
       "revId": "cce83055e4a88aaeb777737689fa43200e858182",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
