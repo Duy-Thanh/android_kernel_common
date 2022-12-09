@@ -16,6 +16,24 @@
       "message": "nope, I messed something up here...",
       "revId": "3b1adeb107cb4d40b3753d0a676699d87867cef2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "726ed112_caa5b4ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-09T08:36:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44d5a760_2ca6c39d",
+      "revId": "3b1adeb107cb4d40b3753d0a676699d87867cef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
