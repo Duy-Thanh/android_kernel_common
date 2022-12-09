@@ -55,9 +55,46 @@ struct pkvm_el2_module {
 int __pkvm_load_el2_module(struct pkvm_el2_module *mod, struct module *this,
 			   unsigned long *token);
 
+<<<<<<< HEAD   (9972a4 ANDROID: dma-buf: Add vendorhook to allow mmaping more memor)
 int __pkvm_register_el2_call(dyn_hcall_t hfn, unsigned long token,
 			     unsigned long hyp_text_kern_va);
+=======
+int __pkvm_register_el2_call(unsigned long hfn_hyp_va);
+#else
+static inline int __pkvm_load_el2_module(struct module *this,
+					 unsigned long *token)
+{
+	return -ENOSYS;
+}
+
+static inline int __pkvm_register_el2_call(unsigned long hfn_hyp_va)
+{
+	return -ENOSYS;
+}
+#endif /* CONFIG_MODULES */
+
+>>>>>>> CHANGE (b867e5 ANDROID: KVM: arm64: Add helper for pKVM modules addr conver)
 #ifdef MODULE
+<<<<<<< HEAD   (9972a4 ANDROID: dma-buf: Add vendorhook to allow mmaping more memor)
+=======
+/*
+ * Convert an EL2 module addr from the kernel VA to the hyp VA
+ */
+#define pkvm_el2_mod_va(kern_va, token)					\
+({									\
+	unsigned long hyp_text_kern_va =				\
+		(unsigned long)THIS_MODULE->arch.hyp.text.start;	\
+	unsigned long offset;						\
+									\
+	offset = (unsigned long)kern_va - hyp_text_kern_va;		\
+	token + offset;							\
+})
+
+/*
+ * function_nocfi() does not work with function pointers, hence the macro in
+ * lieu of a function.
+ */
+>>>>>>> CHANGE (b867e5 ANDROID: KVM: arm64: Add helper for pKVM modules addr conver)
 #define pkvm_load_el2_module(init_fn, token)				\
 ({									\
 	extern char __kvm_nvhe___hypmod_text_start[];			\
@@ -90,11 +127,16 @@ int __pkvm_register_el2_call(dyn_hcall_t hfn, unsigned long token,
 
 #define pkvm_register_el2_mod_call(hfn, token)				\
 ({									\
+<<<<<<< HEAD   (9972a4 ANDROID: dma-buf: Add vendorhook to allow mmaping more memor)
 	extern char __kvm_nvhe___hypmod_text_start[];			\
 	unsigned long hyp_text_kern_va = 				\
 		(unsigned long)__kvm_nvhe___hypmod_text_start;		\
 	__pkvm_register_el2_call(hfn, token,				\
 				 hyp_text_kern_va);			\
+=======
+	__pkvm_register_el2_call(pkvm_el2_mod_va(function_nocfi(hfn),	\
+						 token));		\
+>>>>>>> CHANGE (b867e5 ANDROID: KVM: arm64: Add helper for pKVM modules addr conver)
 })
 
 #define pkvm_el2_mod_call(id, ...)					\
