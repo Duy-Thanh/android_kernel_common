@@ -16,6 +16,24 @@
       "message": "any reason to keep the backup file around?",
       "revId": "8b869651c43c63b7a46aac489f65b41bf2fadaf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f2a9de8_1bfe4dde",
+        "filename": "arch/x86/configs/gki_defconfig.backup",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-12-09T01:45:38Z",
+      "side": 1,
+      "message": "It\u0027s not really necessary but just might make it easy to see what things we might be missing if there are issues. For example, I had to look there to find the CONFIG_MODULE_SIG flag which was missing in https://android-review.git.corp.google.com/c/kernel/common/+/2337063/1",
+      "parentUuid": "f6d1d221_28a760e2",
+      "revId": "8b869651c43c63b7a46aac489f65b41bf2fadaf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
