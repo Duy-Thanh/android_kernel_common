@@ -293,7 +293,7 @@ static int rb_page_init(struct hyp_buffer_page *bpage, unsigned long hva)
 	void *hyp_va = (void *)kern_hyp_va(hva);
 	int ret;
 
-	ret = hyp_pin_shared_mem(hyp_va, hyp_va + PAGE_SIZE);
+	ret = hyp_pin_restricted_shared_mem(hyp_va, hyp_va + PAGE_SIZE);
 	if (ret)
 		return ret;
 
