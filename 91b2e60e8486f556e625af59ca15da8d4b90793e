@@ -50,6 +50,42 @@
       "message": "Hi hi HONOR, please help to add \"Bug: 261919505\" in the commit message.",
       "revId": "91b2e60e8486f556e625af59ca15da8d4b90793e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eef37a85_915e29bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-12-09T11:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8673d9c9_be54e63d",
+      "revId": "91b2e60e8486f556e625af59ca15da8d4b90793e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "223601da_1afb2c2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-12-09T11:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79a5ebc4_8389938c",
+      "revId": "91b2e60e8486f556e625af59ca15da8d4b90793e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
