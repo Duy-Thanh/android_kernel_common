@@ -78,12 +78,14 @@ struct ring_buffer_ext_cb hyp_cb = {
 
 static inline int share_page(unsigned long va)
 {
-	return kvm_call_hyp_nvhe(__pkvm_host_share_hyp, virt_to_pfn(va), 1);
+	return kvm_call_hyp_nvhe(__pkvm_host_wrprotect_share_hyp,
+				 virt_to_pfn(va), 1);
 }
 
 static inline int unshare_page(unsigned long va)
 {
-	return kvm_call_hyp_nvhe(__pkvm_host_unshare_hyp, virt_to_pfn(va), 1);
+	return kvm_call_hyp_nvhe(__pkvm_host_wrprotect_unshare_hyp,
+				 virt_to_pfn(va), 1);
 }
 
 static int trace_pack_pages_apply(struct trace_buffer_pack *trace_pack,
