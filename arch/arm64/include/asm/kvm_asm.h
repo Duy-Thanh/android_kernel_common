@@ -68,6 +68,8 @@ enum __kvm_host_smccc_func {
 	/* Hypercalls available after pKVM finalisation */
 	__KVM_HOST_SMCCC_FUNC___pkvm_host_share_hyp,
 	__KVM_HOST_SMCCC_FUNC___pkvm_host_unshare_hyp,
+	__KVM_HOST_SMCCC_FUNC___pkvm_host_wrprotect_share_hyp,
+	__KVM_HOST_SMCCC_FUNC___pkvm_host_wrprotect_unshare_hyp,
 	__KVM_HOST_SMCCC_FUNC___pkvm_host_reclaim_page,
 	__KVM_HOST_SMCCC_FUNC___pkvm_host_map_guest,
 	__KVM_HOST_SMCCC_FUNC___kvm_adjust_pc,
