@@ -311,6 +311,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f1c739b_b5275284",
+        "filename": "drivers/trusty/trusty-share.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-10T00:34:24Z",
+      "side": 1,
+      "message": "On a closer look it looks like you are always leaking the memory (at least in the current version) that needs to be leaked in the failure case, so the fix is to not leak it in the success case, not to add the leak in the failure case.",
+      "parentUuid": "51741ab6_f8215762",
+      "revId": "40b9861ef8d6061823fda9a6ec25dbd6d1eaa5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d73e85f_b0fedeba",
         "filename": "drivers/trusty/trusty-share.h",
         "patchSetId": 3

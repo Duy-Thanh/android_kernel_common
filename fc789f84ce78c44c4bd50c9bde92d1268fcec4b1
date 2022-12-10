@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d956cc_2e494394",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-10T00:34:24Z",
+      "side": 1,
+      "message": "Don\u0027t return here. It leaks more memory than needed.",
+      "revId": "fc789f84ce78c44c4bd50c9bde92d1268fcec4b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c553ecf8_42715774",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-10T00:34:24Z",
+      "side": 1,
+      "message": "Don\u0027t return here. It leaks more memory than needed.",
+      "revId": "fc789f84ce78c44c4bd50c9bde92d1268fcec4b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
