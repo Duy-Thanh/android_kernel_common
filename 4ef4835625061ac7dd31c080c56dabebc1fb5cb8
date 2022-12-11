@@ -16,6 +16,24 @@
       "message": "Greg- since this enables Tuxera\u0027s 3rd party filesystem used by our OEMs, they need access to some of the symbols in `build/kernel/abi/symbols.deny`. Is there a way to grant an exception for this without opening up those symbols to all vendor modules? Namespaces?\n```\nsymbol \u0027filp_open\u0027 is not allowed: Drivers should not open files directly\n```",
       "revId": "4ef4835625061ac7dd31c080c56dabebc1fb5cb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5edb4993_86926e4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-11T12:45:52Z",
+      "side": 1,
+      "message": "No, this function should not be used by filesystems either.  It is namespaced, and they have had over a year to remove the use of it from their closed source kernel modules, so I can not recommend that it be allowed again.  If we add it to the list, then any other driver can access it, which is not ok.",
+      "parentUuid": "5a9a9ff7_d0c3c93f",
+      "revId": "4ef4835625061ac7dd31c080c56dabebc1fb5cb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
