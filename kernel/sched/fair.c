@@ -4109,8 +4109,13 @@ static inline int task_fits_capacity(struct task_struct *p, long capacity)
 static inline void update_misfit_status(struct task_struct *p, struct rq *rq)
 {
 	bool need_update = true;
+	bool done = false;
 
 	if (!static_branch_unlikely(&sched_asym_cpucapacity) || !need_update)
+		return;
+
+	trace_android_rvh_update_misfit_status(p, rq, &done);
+	if (done)
 		return;
 
 	if (!p || p->nr_cpus_allowed == 1) {

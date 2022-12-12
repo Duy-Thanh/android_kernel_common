@@ -266,6 +266,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_util_est_update,
 	TP_PROTO(struct cfs_rq *cfs_rq, struct task_struct *p, bool task_sleep, int *ret),
 	TP_ARGS(cfs_rq, p, task_sleep, ret), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_update_misfit_status,
+	TP_PROTO(struct task_struct *p, struct rq *rq, bool *done),
+	TP_ARGS(p, rq , done), 1);
+
 DECLARE_HOOK(android_vh_account_task_time,
 	TP_PROTO(struct task_struct *p, struct rq *rq, int user_tick),
 	TP_ARGS(p, rq, user_tick));
