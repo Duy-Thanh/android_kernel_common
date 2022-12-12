@@ -51,6 +51,24 @@
       "parentUuid": "6a224de2_41bf1250",
       "revId": "1300dc69687d1350a176db11c71722488852539e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eac6b92_f473ec13",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T22:27:29Z",
+      "side": 1,
+      "message": "Modified the code per recommendation.",
+      "parentUuid": "2c1e0c27_4cdcc817",
+      "revId": "1300dc69687d1350a176db11c71722488852539e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

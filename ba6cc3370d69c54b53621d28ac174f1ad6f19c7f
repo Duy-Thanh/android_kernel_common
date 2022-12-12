@@ -276,6 +276,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b378b22_d7ac0d0e",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T22:27:29Z",
+      "side": 1,
+      "message": "Modified code per discussion.",
+      "parentUuid": "c09ecbfe_2c337dba",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b85e5e2f_44b7ee4a",
@@ -569,6 +587,30 @@
       "writtenOn": "2022-12-10T00:34:24Z",
       "side": 1,
       "message": "0 (or add SM_NO_ERROR to sm_err.h)? NO_ERROR is not defined here.",
+      "range": {
+        "startLine": 82,
+        "startChar": 5,
+        "endLine": 82,
+        "endChar": 13
+      },
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eff66924_ef16b39d",
+        "filename": "include/linux/trusty/smcall.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T22:27:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2198dffb_ee642f9c",
       "range": {
         "startLine": 82,
         "startChar": 5,
