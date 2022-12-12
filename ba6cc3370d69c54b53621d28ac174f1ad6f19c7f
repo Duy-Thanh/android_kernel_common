@@ -260,6 +260,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c09ecbfe_2c337dba",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T20:39:22Z",
+      "side": 1,
+      "message": "I need to discuss this issue on chat. I have already ping\u0027d you with context.",
+      "parentUuid": "4f4e7958_aca88e38",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b85e5e2f_44b7ee4a",
         "filename": "drivers/trusty/trusty-sched-share.c",
         "patchSetId": 9

@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1809645_3cf9ba31",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T20:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8d956cc_2e494394",
+      "revId": "fc789f84ce78c44c4bd50c9bde92d1268fcec4b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c553ecf8_42715774",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-12-10T00:34:24Z",
       "side": 1,
       "message": "Don\u0027t return here. It leaks more memory than needed.",
+      "revId": "fc789f84ce78c44c4bd50c9bde92d1268fcec4b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adad569d_e2958f22",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T20:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c553ecf8_42715774",
       "revId": "fc789f84ce78c44c4bd50c9bde92d1268fcec4b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
