@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d233f7_7c2ad023",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T23:09:29Z",
+      "side": 1,
+      "message": "you should probably remove this error message as well to prevent future checkpatch problems.",
+      "revId": "d0dc38a5419697144c35de8a147cd024cb291cb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f8b5d16_77287a0a",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T23:09:29Z",
+      "side": 1,
+      "message": "dev_warn or dev_info",
+      "range": {
+        "startLine": 140,
+        "startChar": 2,
+        "endLine": 140,
+        "endChar": 9
+      },
+      "revId": "d0dc38a5419697144c35de8a147cd024cb291cb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ad96c6_9d4e3577",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T23:09:29Z",
+      "side": 1,
+      "message": "add comment why you are leaking the memory like in trusty-log.c",
+      "revId": "d0dc38a5419697144c35de8a147cd024cb291cb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d37d9877_86f3ac53",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T23:09:29Z",
+      "side": 1,
+      "message": "dev_warn? This condition is not necessarily an error.",
+      "range": {
+        "startLine": 173,
+        "startChar": 1,
+        "endLine": 173,
+        "endChar": 8
+      },
+      "revId": "d0dc38a5419697144c35de8a147cd024cb291cb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc7998c5_5853431d",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T23:09:29Z",
+      "side": 1,
+      "message": "linux normally uses `if (result)` not `if (result !\u003d 0)` for this. checkpatch only seem to explicitly complain about comparisons with NULL, false and true, but this follows the same pattern comparing with NULL or false.",
+      "range": {
+        "startLine": 190,
+        "startChar": 5,
+        "endLine": 190,
+        "endChar": 16
+      },
+      "revId": "d0dc38a5419697144c35de8a147cd024cb291cb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

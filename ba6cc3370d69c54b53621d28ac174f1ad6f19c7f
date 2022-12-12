@@ -172,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc587f40_707fb42e",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T23:09:29Z",
+      "side": 1,
+      "message": "I don\u0027t see any comment here about removing this check. My comment about this elsewhere was about removing the error message that checkpatch complains about, not the check itself.",
+      "parentUuid": "212c1748_b1a66217",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ff57ea6_603ebec3",
         "filename": "drivers/trusty/trusty-sched-share.c",
         "patchSetId": 9
@@ -629,6 +647,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "2198dffb_ee642f9c",
+      "range": {
+        "startLine": 82,
+        "startChar": 5,
+        "endLine": 82,
+        "endChar": 13
+      },
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c01bc8_a667392e",
+        "filename": "include/linux/trusty/smcall.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T23:09:29Z",
+      "side": 1,
+      "message": "Not done as of PS#13",
+      "parentUuid": "eff66924_ef16b39d",
       "range": {
         "startLine": 82,
         "startChar": 5,
