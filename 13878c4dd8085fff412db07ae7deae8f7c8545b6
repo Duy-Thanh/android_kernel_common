@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d4800c0_487acf25",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-12T17:31:07Z",
+      "side": 1,
+      "message": "bool?",
+      "range": {
+        "startLine": 455,
+        "startChar": 1,
+        "endLine": 455,
+        "endChar": 4
+      },
+      "revId": "13878c4dd8085fff412db07ae7deae8f7c8545b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
