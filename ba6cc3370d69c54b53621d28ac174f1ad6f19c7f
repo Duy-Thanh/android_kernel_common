@@ -242,6 +242,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f4e7958_aca88e38",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T19:17:20Z",
+      "side": 1,
+      "message": "As of PS#11 you have not fixed this. You MUST leak the memory that you shared if trusty_reclaim_memory fails. It is not safe to tell Linux that the memory is no longer in use while trusty still has access to it.",
+      "parentUuid": "c3859d6a_54ab4188",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b85e5e2f_44b7ee4a",
         "filename": "drivers/trusty/trusty-sched-share.c",
         "patchSetId": 9
