@@ -38,6 +38,10 @@ DECLARE_HOOK(android_vh_page_add_new_anon_rmap,
 		unsigned long address),
 	TP_ARGS(page, vma, address));
 
+DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused), 1);
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

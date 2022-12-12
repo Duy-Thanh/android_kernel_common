@@ -247,3 +247,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_acct_update_power);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_request_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_target_freq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ctl_dirty_rate);
