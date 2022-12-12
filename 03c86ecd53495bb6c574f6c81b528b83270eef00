@@ -39,6 +39,30 @@
       },
       "revId": "03c86ecd53495bb6c574f6c81b528b83270eef00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d986a777_0ed75a6d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-12-12T14:17:30Z",
+      "side": 1,
+      "message": "Thanks, I moved them",
+      "parentUuid": "8a2228f2_f0faba5d",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 28
+      },
+      "revId": "03c86ecd53495bb6c574f6c81b528b83270eef00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
