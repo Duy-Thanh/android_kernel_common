@@ -34,6 +34,10 @@ DECLARE_HOOK(android_vh_alloc_pages_failure_bypass,
 	int migratetype, struct page **page),
 	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, page));
 
+DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused), 1);
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

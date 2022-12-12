@@ -184,3 +184,7 @@
 #required by mi_log.ko
   __traceiter_android_vh_binder_proc_transaction
   __tracepoint_android_vh_binder_proc_transaction
+
+#required by io_limit.ko
+  __traceiter_android_rvh_ctl_dirty_rate
+  __tracepoint_android_rvh_ctl_dirty_rate
