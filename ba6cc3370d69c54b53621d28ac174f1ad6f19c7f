@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f622e1_b74483a4",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b57f7847_7bd103d0",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ed38322_88f2a312",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-12-10T00:34:24Z",
       "side": 1,
       "message": "don\u0027t use dev_info for debug messages, use dev_dbg",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "023ccfac_5240deae",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ed38322_88f2a312",
       "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec658635_91f439d2",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ea87378_ebabe364",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 7
+      },
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eff9a6fc_580dffd4",
@@ -88,6 +148,24 @@
       "writtenOn": "2022-12-10T00:34:24Z",
       "side": 1,
       "message": "check for NULL?",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "212c1748_b1a66217",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "I did check for NULL in a previous version and your review comment was to remove it giving the reason that kzalloc() will never fail.",
+      "parentUuid": "eff9a6fc_580dffd4",
       "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -109,6 +187,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c7df3f6_cf961e53",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "I have tried to define functions to isolate/assign distinct responsibilities.\n \nIn case of error, each function is responsible for releasing the resources they allocated. I think I fixed the memory leak pointed out by you.",
+      "parentUuid": "9ff57ea6_603ebec3",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccb79fce_d55da951",
@@ -122,6 +218,24 @@
       "writtenOn": "2022-12-10T00:34:24Z",
       "side": 1,
       "message": "if result is 0 you should free the memory you allocated (look at trusty-log.c for an example since you seem to have copied the allocation code from there)",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3859d6a_54ab4188",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "I think I have fixed it.",
+      "parentUuid": "ccb79fce_d55da951",
       "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -143,6 +257,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aa6541a_67bbc74b",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b85e5e2f_44b7ee4a",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ec52051_5468860f",
@@ -156,6 +288,24 @@
       "writtenOn": "2022-12-10T00:34:24Z",
       "side": 1,
       "message": "WARN_ON will dump the linux stack trace here, which is probably not useful",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bb06202_382081b3",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ec52051_5468860f",
       "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -177,6 +327,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d021bf15_c6fbc97c",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "205fee3d_325f944b",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0927df3_30faf1c3",
@@ -190,6 +358,24 @@
       "writtenOn": "2022-12-10T00:34:24Z",
       "side": 1,
       "message": "this should be an error message (and perhaps make it more clear that you ARE leaking memory)",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88357b25_1c9e3827",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0927df3_30faf1c3",
       "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -211,6 +397,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d8fbdca_b52198ff",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8365ab55_65bffbe7",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea795569_27a3ec29",
@@ -224,6 +428,24 @@
       "writtenOn": "2022-12-10T00:34:24Z",
       "side": 1,
       "message": "\"trusty-sched-share-api.h\", which you include, has this line so you should not need it here.",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d619a1f_425c75a6",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ea795569_27a3ec29",
       "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -245,6 +467,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc2d33ae_6eb55595",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "395aeb58_4cdaf99f",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4e702e9_34cb1376",
@@ -258,6 +498,24 @@
       "writtenOn": "2022-12-10T00:34:24Z",
       "side": 1,
       "message": "Move to trusty_unregister_sched_share and call trusty_unregister_sched_share unconditionally.",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c69cea2_884de097",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-12T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4e702e9_34cb1376",
       "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
