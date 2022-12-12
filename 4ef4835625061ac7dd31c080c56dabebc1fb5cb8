@@ -34,6 +34,24 @@
       "parentUuid": "5a9a9ff7_d0c3c93f",
       "revId": "4ef4835625061ac7dd31c080c56dabebc1fb5cb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25403fee_9bf5e05f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978086
+      },
+      "writtenOn": "2022-12-12T09:58:50Z",
+      "side": 1,
+      "message": "I don\u0027t understand why we can\u0027t use those functions.  They are exactly what is correct to use when we want to create a file on the file system from inside the kernel driver but ok we can disable for now whilst we look how to work around it.  We have video edition ioctls which use filp_open() and filp_close() when for example splitting a video file into two, merging two video files, etc...\n\nAnyway, here is updated patch uploaded which does not use filp_open() and filp_closed() and we will disable our ioctls for now whilst we work out how to do it without those calls.",
+      "parentUuid": "5edb4993_86926e4c",
+      "revId": "4ef4835625061ac7dd31c080c56dabebc1fb5cb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
