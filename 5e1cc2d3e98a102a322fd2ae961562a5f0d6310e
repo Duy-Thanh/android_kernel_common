@@ -34,6 +34,24 @@
       "parentUuid": "7e6a09b1_21af0509",
       "revId": "5e1cc2d3e98a102a322fd2ae961562a5f0d6310e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a88126_db28993c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/psci-relay.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1980590
+      },
+      "writtenOn": "2022-12-12T23:49:44Z",
+      "side": 1,
+      "message": "PKVM_PSCI_RESUME is enough for both resume and cpu_on. Thanks!",
+      "parentUuid": "7ce6ec7f_fcd27999",
+      "revId": "5e1cc2d3e98a102a322fd2ae961562a5f0d6310e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
