@@ -69,6 +69,24 @@
       "parentUuid": "2c1e0c27_4cdcc817",
       "revId": "1300dc69687d1350a176db11c71722488852539e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf25fc1_f9c56927",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T22:28:35Z",
+      "side": 1,
+      "message": "- this error message is printed if SMC_SC_SCHED_SHARE_UNREGISTER. You have another error message if trusty_reclaim_memory. If you are referring to leaking resources on the Linux side, you don\u0027t need to leak anything here if trusty_reclaim_memory succeeds.\n- the point of these error checks is not to detect problems in Linux, it is to detect problems elsewhere and prevent them from turning into a problem here. For these calls to work correctly the hypervisor(s), el3 and trusty all need to work as expected.\n- returning an error from the driver\u0027s remove function does not trigger a reboot, it is likely to be silently ignored\n\n(PS#12 removes this extra error message though)",
+      "parentUuid": "2c1e0c27_4cdcc817",
+      "revId": "1300dc69687d1350a176db11c71722488852539e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

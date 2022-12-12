@@ -16,6 +16,23 @@
       "message": "Changes made per last review comments. Please review.",
       "revId": "557edc4e732f388ef82acb352a62747af4753a43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd742a74_9e8d0aff",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T22:28:35Z",
+      "side": 1,
+      "message": "I would add a comment similar to what trusty-log.c has for this.",
+      "revId": "557edc4e732f388ef82acb352a62747af4753a43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
