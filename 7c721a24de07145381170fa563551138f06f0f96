@@ -182,6 +182,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efc6619d_b1418efd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-12T08:44:12Z",
+      "side": 1,
+      "message": "We plan to validate the patches and check if they meet out requirements. We will respond post that.",
+      "parentUuid": "c0e147a3_2fc18801",
+      "revId": "7c721a24de07145381170fa563551138f06f0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea838ee_cc572ed6",
         "filename": "kernel/power/snapshot.c",
         "patchSetId": 6
