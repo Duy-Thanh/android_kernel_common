@@ -16,6 +16,24 @@
       "message": "you reverted the fix here",
       "revId": "bb468c994ea23123f0f6fcbd5ea516f293add5c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b9734c_57d38d9d",
+        "filename": "include/linux/trusty/smcall.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-13T21:30:21Z",
+      "side": 1,
+      "message": "I tried to match it up with the trusty-side, which is constrained by c-lang. What is the change you don\u0027t like?",
+      "parentUuid": "aed0fb31_fd67abb9",
+      "revId": "bb468c994ea23123f0f6fcbd5ea516f293add5c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
