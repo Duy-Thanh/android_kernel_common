@@ -22,6 +22,8 @@
 #include <asm/cputype.h>
 #include <asm/topology.h>
 
+#include <trace/hooks/topology.h>
+
 #ifdef CONFIG_ACPI
 static bool __init acpi_cpu_is_threaded(int cpu)
 {
@@ -190,6 +192,7 @@ static void amu_scale_freq_tick(void)
 			  const_cnt - prev_const_cnt);
 
 	scale = min_t(unsigned long, scale, SCHED_CAPACITY_SCALE);
+	trace_android_vh_amu_scale_freq_tick(smp_processor_id(), &scale);
 	this_cpu_write(arch_freq_scale, (unsigned long)scale);
 }
 
