@@ -263,6 +263,7 @@ static int lt9611_pll_setup(struct lt9611 *lt9611,
 		{ 0x26, 0x55 },
 		{ 0x27, 0x66 },
 		{ 0x28, 0x88 },
+		{ 0x2a, 0x20 },
 	};
 
 	regmap_multi_reg_write(lt9611->regmap, reg_cfg, ARRAY_SIZE(reg_cfg));
