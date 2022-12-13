@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000034244010",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2344993?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f4a5e763_8259bc50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-12-13T13:22:21Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 494658934 android-build.ayeaye-python-dispatcher_20221212.01_p0",
+      "revId": "93d26cbe2c498a343344f746f7575bcce078d1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000034244010",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2344993?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d9b96fc8_af89c7d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-12-13T13:22:21Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. The following inter-diff was found between this change and the original change\u0027:\n\n```\n1:  93d26cbe2 ! 1:  e8a2596de UPSTREAM: fbcon: Prevent that screen size is smaller than font size\n    @@ Commit message\n         Bug: 240019719\n         Signed-off-by: Todd Kjos \u003ctkjos@google.com\u003e\n         Change-Id: I61fbbdb40db7fb34c997c8241eea23553aa4921c\n    -    Signed-off-by: Lee Jones \u003cjoneslee@google.com\u003e\n     \n      ## drivers/video/fbdev/core/fbcon.c ##\n     @@ drivers/video/fbdev/core/fbcon.c: void fbcon_update_vcs(struct fb_info *info, bool all)\n\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 494658934 android-build.ayeaye-python-dispatcher_20221212.01_p0",
+      "revId": "93d26cbe2c498a343344f746f7575bcce078d1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
