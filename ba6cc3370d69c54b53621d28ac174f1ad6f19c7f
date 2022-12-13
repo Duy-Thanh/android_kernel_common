@@ -188,6 +188,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a35c8f77_6fc0223d",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-13T00:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc587f40_707fb42e",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ff57ea6_603ebec3",
@@ -326,6 +344,24 @@
       "side": 1,
       "message": "This error path is still not fixed as of PS#12",
       "parentUuid": "c09ecbfe_2c337dba",
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cf86286_74f2f470",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-13T00:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab13bcba_c6319d8d",
       "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -671,6 +707,30 @@
       "side": 1,
       "message": "Not done as of PS#13",
       "parentUuid": "eff66924_ef16b39d",
+      "range": {
+        "startLine": 82,
+        "startChar": 5,
+        "endLine": 82,
+        "endChar": 13
+      },
+      "revId": "ba6cc3370d69c54b53621d28ac174f1ad6f19c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3256671_5c737900",
+        "filename": "include/linux/trusty/smcall.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-13T00:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5c01bc8_a667392e",
       "range": {
         "startLine": 82,
         "startChar": 5,
