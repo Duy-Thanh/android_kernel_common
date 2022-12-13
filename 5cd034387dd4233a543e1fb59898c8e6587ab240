@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11d46d1a_3c10522d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-13T12:02:50Z",
+      "side": 1,
+      "message": "Why is this needed now?  Why not fix the driver to properly have the remove function?",
+      "revId": "5cd034387dd4233a543e1fb59898c8e6587ab240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
