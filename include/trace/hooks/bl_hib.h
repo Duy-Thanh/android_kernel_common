@@ -48,6 +48,10 @@ DECLARE_HOOK(android_vh_hibernate_save_cmp_len,
         TP_PROTO(size_t cmp_len),
         TP_ARGS(cmp_len));
 
-#endif /* _TRACE_HOOK_BL_HIB_H */
+DECLARE_HOOK(android_vh_qcom_place_marker,
+        TP_PROTO(char *name),
+        TP_ARGS(name));
+
+#endif /* _TRACE_HOOK_S2D_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
