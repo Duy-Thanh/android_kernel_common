@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f7e3663_765913bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-13T23:33:45Z",
+      "side": 1,
+      "message": "This causes a build-break:\n\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - __raw_spin_lock_init\n - __rwlock_init\n - preempt_count_add\n - preempt_count_sub\n - trace_hardirqs_off\n - trace_hardirqs_on\n\nThese are all added in your symbol list, but not exported by the kernel either because they lack EXPORT_SYMBOL or they are config\u0027d out. For example, CONFIG_PREEMPTIRQ_TRACEPOINTS is not enabled so, the trace_hardirqs_off() is not compiled.\n\nPlease build and test before submitting. See [Building Kernels](https://source.android.com/docs/setup/build/building-kernels).",
+      "revId": "89d5fd585503d06a8b7f20588b3ea70ce51d2d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
