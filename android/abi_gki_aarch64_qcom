@@ -4242,3 +4242,5 @@
   zs_map_object
   zs_pool_stats
   zs_unmap_object
+  __tracepoint_android_vh_qcom_place_marker
+  __traceiter_android_vh_qcom_place_marker
