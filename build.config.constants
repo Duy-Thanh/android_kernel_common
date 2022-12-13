@@ -1,2 +1,7 @@
+<<<<<<< HEAD   (757d54 ANDROID: kernel: sched: Export reweight_task)
 BRANCH=android14-5.15
 CLANG_VERSION=r468909
+=======
+BRANCH=android-mainline
+CLANG_VERSION=r475365b
+>>>>>>> CHANGE (8ad96c ANDROID: clang: update to 16.0.2)
