@@ -32,6 +32,7 @@
 #include <linux/security.h>
 #include <linux/secretmem.h>
 #include <trace/events/power.h>
+#include <trace/hooks/bl_hib.h>
 
 #include "power.h"
 
@@ -363,7 +364,7 @@ static int create_image(int platform_mode)
 
  Platform_finish:
 	platform_finish(platform_mode);
-
+	trace_android_vh_qcom_place_marker("M - Hibernation: Start device resume");
 	dpm_resume_start(in_suspend ?
 		(error ? PMSG_RECOVER : PMSG_THAW) : PMSG_RESTORE);
 
@@ -440,6 +441,7 @@ int hibernation_snapshot(int platform_mode)
 	resume_console();
 	dpm_complete(msg);
 
+	trace_android_vh_qcom_place_marker("M - Hibernation: End device resume");
  Close:
 	platform_end(platform_mode);
 	return error;
@@ -820,6 +822,7 @@ int hibernate(void)
 		pm_restore_gfp_mask();
 	} else {
 		pm_pr_dbg("Hibernation image restored successfully.\n");
+		trace_android_vh_qcom_place_marker("M - Hibernation: Image restored done");
 	}
 
  Free_bitmaps:
@@ -843,6 +846,7 @@ int hibernate(void)
 	hibernate_release();
  Unlock:
 	unlock_system_sleep(sleep_flags);
+	trace_android_vh_qcom_place_marker("M - Hibernation: Exit");
 	pr_info("hibernation exit\n");
 
 	return error;
