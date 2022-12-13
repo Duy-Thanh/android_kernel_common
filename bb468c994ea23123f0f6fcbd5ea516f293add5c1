@@ -34,6 +34,24 @@
       "parentUuid": "aed0fb31_fd67abb9",
       "revId": "bb468c994ea23123f0f6fcbd5ea516f293add5c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82429ba9_78f4f50a",
+        "filename": "include/linux/trusty/smcall.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1966057
+      },
+      "writtenOn": "2022-12-13T21:36:03Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "c1b9734c_57d38d9d",
+      "revId": "bb468c994ea23123f0f6fcbd5ea516f293add5c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
