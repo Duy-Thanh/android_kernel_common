@@ -34,6 +34,23 @@
       "parentUuid": "4baac008_30ec4494",
       "revId": "e281359e752d93e2113ad87ff3bfb45e915a546b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb65fa81_bdf90c7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-12-14T19:47:37Z",
+      "side": 1,
+      "message": "You need a follow-up patch to add the new vendor hooks into exported symbol list and regenerated ABI definition. Please push both patches together so that there is a parent-child relation between them.",
+      "revId": "e281359e752d93e2113ad87ff3bfb45e915a546b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
