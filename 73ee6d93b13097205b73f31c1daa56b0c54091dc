@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e75b490_eeccc6f6",
+        "filename": "kernel/gki_protected_modules.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-14T12:25:25Z",
+      "side": 1,
+      "message": "needs an #ifdef/#define protection to prevent being included twice.",
+      "revId": "73ee6d93b13097205b73f31c1daa56b0c54091dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
