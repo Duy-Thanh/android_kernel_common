@@ -68,6 +68,24 @@
       "message": "Wait, wasn\u0027t this patch already merged in android12-5.10 branch here: https://android-review.git.corp.google.com/c/kernel/common/+/2151375 ? Was it reverted?",
       "revId": "e281359e752d93e2113ad87ff3bfb45e915a546b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae57b203_a361561d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-12-14T22:08:55Z",
+      "side": 1,
+      "message": "Oh, I see the revert. Instead of posting a new one which causes loss of history, let\u0027s re-revert it. I posted the revert at https://android-review.git.corp.google.com/c/kernel/common/+/2355984. If it looks good please abandon this one.",
+      "parentUuid": "b58d3377_2f067f4b",
+      "revId": "e281359e752d93e2113ad87ff3bfb45e915a546b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
