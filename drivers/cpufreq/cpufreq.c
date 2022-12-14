@@ -1620,6 +1620,7 @@ static void __cpufreq_offline(unsigned int cpu, struct cpufreq_policy *policy)
 		policy->last_policy = policy->policy;
 
 	if (cpufreq_thermal_control_enabled(cpufreq_driver)) {
+		trace_android_vh_cpufreq_offline(&policy->cdev->device, true);
 		cpufreq_cooling_unregister(policy->cdev);
 		policy->cdev = NULL;
 	}
