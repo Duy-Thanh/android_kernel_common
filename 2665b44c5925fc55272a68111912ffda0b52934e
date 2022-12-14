@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84b514d6_28a2673c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-14T09:42:32Z",
+      "side": 1,
+      "message": "needs the same commit-id as other branches so that things can be tracked properly.",
+      "revId": "2665b44c5925fc55272a68111912ffda0b52934e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
