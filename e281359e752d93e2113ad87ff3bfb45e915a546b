@@ -51,6 +51,23 @@
       "message": "You need a follow-up patch to add the new vendor hooks into exported symbol list and regenerated ABI definition. Please push both patches together so that there is a parent-child relation between them.",
       "revId": "e281359e752d93e2113ad87ff3bfb45e915a546b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58d3377_2f067f4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-12-14T22:06:25Z",
+      "side": 1,
+      "message": "Wait, wasn\u0027t this patch already merged in android12-5.10 branch here: https://android-review.git.corp.google.com/c/kernel/common/+/2151375 ? Was it reverted?",
+      "revId": "e281359e752d93e2113ad87ff3bfb45e915a546b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
