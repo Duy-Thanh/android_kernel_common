@@ -16,6 +16,24 @@
       "message": "This causes a build-break:\n\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - __raw_spin_lock_init\n - __rwlock_init\n - preempt_count_add\n - preempt_count_sub\n - trace_hardirqs_off\n - trace_hardirqs_on\n\nThese are all added in your symbol list, but not exported by the kernel either because they lack EXPORT_SYMBOL or they are config\u0027d out. For example, CONFIG_PREEMPTIRQ_TRACEPOINTS is not enabled so, the trace_hardirqs_off() is not compiled.\n\nPlease build and test before submitting. See [Building Kernels](https://source.android.com/docs/setup/build/building-kernels).",
       "revId": "89d5fd585503d06a8b7f20588b3ea70ce51d2d13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "376ec1aa_fc5de933",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978086
+      },
+      "writtenOn": "2022-12-14T10:31:25Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nMy colleague who did the work said that: \"I build the aosp kernel with update symbol \"parameter\" and then abi generation \"parameter\" and it built it fine and I even copied the kernel to terra and built our modules there. I\u0027m guessing that if you build the kernel \"normally\" without updating the symbols, the error appears.\"\n\nSo apologies about that but we did actually do a build and it worked for us.\n\nNew patch with updated files - hopefully correct this time...\n\nBest regards,\n\nAnton",
+      "parentUuid": "9f7e3663_765913bb",
+      "revId": "89d5fd585503d06a8b7f20588b3ea70ce51d2d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
