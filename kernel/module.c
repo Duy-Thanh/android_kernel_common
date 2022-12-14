@@ -4042,6 +4042,13 @@ static int load_module(struct load_info *info, const char __user *uargs,
 		goto free_copy;
 	}
 
+	/* If module is not signed; check if it's protected */
+	if (!info->sig_ok && gki_is_module_protected(info->name)) {
+		err = -EPERM;
+		pr_err("Module %s is not signed and protected\n", info->name);
+		goto free_copy;
+	}
+
 	err = rewrite_section_headers(info, flags);
 	if (err)
 		goto free_copy;

@@ -10,6 +10,8 @@
 #include <linux/printk.h>
 #include <linux/string.h>
 
+#include "gki_protected_modules.h"
+
 /*
  * Build time generated header files
  *
@@ -40,5 +42,31 @@ bool gki_is_module_unprotected_symbol(const char *name)
 		 * Treat evertything accessible in this case.
 		 */
 		return true;
+	}
+}
+
+/* bsearch() comparision callback for module names */
+static int cmp_module_name(const void *mod, const void *protected_mod)
+{
+	return strncmp(mod, protected_mod, MODULE_NAME_LEN);
+}
+
+/**
+ * gki_is_module_protected - Is module protected i.e. must use the signed GKI version?
+ *
+ * @name:	Name of the module being checked in list of protected modules
+ */
+bool gki_is_module_protected(const char *name)
+{
+	if (NO_OF_UNPROTECTED_SYMBOLS) {
+		return bsearch(name, gki_protected_modules, NUM_OF_PROTECTED_MODULES,
+				MODULE_NAME_LEN, cmp_module_name) != NULL;
+	} else {
+		/*
+		 * If there are no symbols in unprotected list;
+		 * there isn't a KMI enforcement for the kernel.
+		 * Treat every module loadable in this case.
+		 */
+		return false;
 	}
 }
