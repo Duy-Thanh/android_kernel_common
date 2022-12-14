@@ -16,6 +16,24 @@
       "message": "https://android-review.googlesource.com/c/kernel/common/+/2183774",
       "revId": "e281359e752d93e2113ad87ff3bfb45e915a546b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b56cb0_a9aeab78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2022-12-14T09:29:33Z",
+      "side": 1,
+      "message": "Created for that previous one was reverted: https://android-review.googlesource.com/c/kernel/common/+/2183774, and I have on right to revert the revert.",
+      "parentUuid": "4baac008_30ec4494",
+      "revId": "e281359e752d93e2113ad87ff3bfb45e915a546b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
