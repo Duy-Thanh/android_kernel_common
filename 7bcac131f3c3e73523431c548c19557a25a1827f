@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597cb737_9908fa8a",
+        "filename": "kernel/gki_protected_modules.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-12-14T19:47:42Z",
+      "side": 1,
+      "message": "Can you use NUM instead of NO so it\u0027s a little more clear?",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 10
+      },
+      "revId": "7bcac131f3c3e73523431c548c19557a25a1827f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
