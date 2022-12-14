@@ -16,6 +16,23 @@
       "message": "Fixes v6.2 merge window breakage",
       "revId": "a2045a06065a350c10df1d6308de60aaf129c1d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "616444e8_65feb5b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2022-12-14T14:17:03Z",
+      "side": 1,
+      "message": "Fix required when upstream v6.2 merge-window commit ce8a79d5601a (\"Merge tag \u0027for-6.2/block-2022-12-08\u0027 of git://git.kernel.dk/linux\") lands in android-mainline.",
+      "revId": "a2045a06065a350c10df1d6308de60aaf129c1d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
