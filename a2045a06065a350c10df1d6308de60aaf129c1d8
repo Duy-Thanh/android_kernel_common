@@ -33,6 +33,40 @@
       "message": "Fix required when upstream v6.2 merge-window commit ce8a79d5601a (\"Merge tag \u0027for-6.2/block-2022-12-08\u0027 of git://git.kernel.dk/linux\") lands in android-mainline.",
       "revId": "a2045a06065a350c10df1d6308de60aaf129c1d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb9b0efd_bce1d489",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-12-14T19:22:28Z",
+      "side": 1,
+      "message": "Thanks.  This is going to be need to be submitted at the same time as the actual merge commit.",
+      "revId": "a2045a06065a350c10df1d6308de60aaf129c1d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7996f4_249cb4a9",
+        "filename": "drivers/md/dm-default-key.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-12-14T19:22:28Z",
+      "side": 1,
+      "message": "Combine the arguments into one line?",
+      "revId": "a2045a06065a350c10df1d6308de60aaf129c1d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
