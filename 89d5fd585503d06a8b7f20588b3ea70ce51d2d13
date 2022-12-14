@@ -52,6 +52,24 @@
       "parentUuid": "376ec1aa_fc5de933",
       "revId": "89d5fd585503d06a8b7f20588b3ea70ce51d2d13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65b98390_2559d73d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-14T20:13:06Z",
+      "side": 1,
+      "message": "One more symbol that isn\u0027t in the kernel symbol table but is in the new symbol list:\n```\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - __this_module\nSymbols missing from symbol list:\n``\n\nx86 builds succeed, so could this symbol be x86 specific? Are you building arm64?",
+      "parentUuid": "a178913e_61183232",
+      "revId": "89d5fd585503d06a8b7f20588b3ea70ce51d2d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
