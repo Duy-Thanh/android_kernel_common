@@ -16,6 +16,24 @@
       "message": "The problem is that for NP guest on P, we need `MEMINFO` and `MEM_RELINQUISH` reported in `ARM_SMCCC_VENDOR_HYP_KVM_FEATURES_FUNC_ID`. This is handled at EL1 for NP guest, and hence the need to get those bits set in `smccc_feat-\u003evendor_hyp_bmap`.\n\nI agree this is fragile. What would be nicer is if `kvm_hyp_handle_hvc64` could or in the above bits to the EL1-supplied return value. But I don\u0027t know how easy it would be to apply a post-filter in EL2?",
       "revId": "9ddf12276d47acfd3a93bd90f945f0fd52b5c186",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e05371_0335ac6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-12-15T17:41:41Z",
+      "side": 1,
+      "message": "I started looking at doing this in EL2, but it\u0027s a bit grotty. Effectively, we\u0027d have to add a NP equivalent to `handle_pvm_entry_hvc64`, however these handlers run _after_ the hyp vcpu state has been flushed for NP guests and so we can\u0027t determine the hypercall we\u0027re handling by looking at x0.\n\nFor now, I\u0027ve abandoned this as the current code is correct.",
+      "parentUuid": "a785091b_53157183",
+      "revId": "9ddf12276d47acfd3a93bd90f945f0fd52b5c186",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
