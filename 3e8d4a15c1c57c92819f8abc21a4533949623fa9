@@ -33,6 +33,24 @@
       "message": "Hi Charan Teja Kalla, please help to add \"Bug: 262666413\" in the commit message",
       "revId": "3e8d4a15c1c57c92819f8abc21a4533949623fa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab2fd4c_8cd787f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2022-12-15T07:36:57Z",
+      "side": 1,
+      "message": "Sorry, isn\u0027t the Bug: 261818147 proper?  This is the bug id where the original patch is linked with. BTW I can\u0027t access b/262666413",
+      "parentUuid": "edf65f0c_df45fd47",
+      "revId": "3e8d4a15c1c57c92819f8abc21a4533949623fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
