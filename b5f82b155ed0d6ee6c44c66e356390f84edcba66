@@ -50,6 +50,24 @@
       "message": "Hi Charan Teja Kalla, please help to add \"Bug: 262666413\" in the commit message",
       "revId": "b5f82b155ed0d6ee6c44c66e356390f84edcba66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2fec229_d23d7959",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2022-12-15T09:49:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34f1db35_538a6136",
+      "revId": "b5f82b155ed0d6ee6c44c66e356390f84edcba66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
