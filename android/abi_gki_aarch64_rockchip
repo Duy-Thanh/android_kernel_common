@@ -38,6 +38,8 @@
   blk_queue_max_discard_sectors
   blk_queue_max_write_zeroes_sectors
   blk_queue_physical_block_size
+  blk_rq_map_user
+  blk_rq_unmap_user
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
@@ -52,6 +54,8 @@
   cancel_delayed_work_sync
   cancel_work_sync
   capable
+  cdev_add
+  cdev_del
   cdev_device_add
   cdev_device_del
   cdev_init
@@ -240,6 +244,7 @@
   devm_kmalloc
   devm_kmemdup
   devm_kstrdup
+  devm_led_classdev_register_ext
   devm_mfd_add_devices
   devm_nvmem_register
   devm_of_clk_add_hw_provider
@@ -343,6 +348,7 @@
   dma_unmap_page_attrs
   dma_unmap_resource
   dma_unmap_sg_attrs
+  down
   down_read
   down_write
   driver_register
@@ -532,6 +538,7 @@
   gpiod_set_value_cansleep
   gpiod_to_irq
   gpio_free
+  gpio_request
   gpio_to_desc
   handle_nested_irq
   handle_simple_irq
@@ -540,6 +547,16 @@
   hdmi_drm_infoframe_pack
   hdmi_infoframe_pack
   hdmi_vendor_infoframe_pack
+  hid_debug
+  hid_hw_close
+  hid_hw_open
+  hid_hw_start
+  hid_hw_stop
+  hid_open_report
+  __hid_register_driver
+  __hid_request
+  hid_unregister_driver
+  hid_validate_values
   hrtimer_cancel
   hrtimer_forward
   hrtimer_init
@@ -552,8 +569,10 @@
   i2c_get_adapter
   i2c_put_adapter
   i2c_register_driver
+  i2c_smbus_read_byte
   i2c_smbus_read_byte_data
   i2c_smbus_read_i2c_block_data
+  i2c_smbus_read_word_data
   i2c_smbus_write_byte_data
   i2c_smbus_write_i2c_block_data
   __i2c_smbus_xfer
@@ -565,6 +584,7 @@
   idr_find
   idr_for_each
   idr_get_next
+  idr_preload
   idr_remove
   iio_buffer_init
   iio_buffer_put
@@ -576,9 +596,16 @@
   init_timer_key
   init_wait_entry
   __init_waitqueue_head
+  input_allocate_device
   input_event
+  input_ff_create_memless
+  input_free_device
+  input_mt_init_slots
+  input_mt_report_slot_state
   input_register_device
+  input_set_abs_params
   input_set_capability
+  input_unregister_device
   iommu_attach_device
   iommu_attach_group
   iommu_detach_device
@@ -657,6 +684,8 @@
   ktime_get_with_offset
   kvfree
   kvmalloc_node
+  led_classdev_register_ext
+  led_classdev_unregister
   led_set_brightness_nosleep
   led_trigger_register
   led_trigger_unregister
@@ -704,6 +733,7 @@
   __mmdrop
   mod_delayed_work_on
   mod_timer
+  __module_get
   module_layout
   module_put
   __msecs_to_jiffies
@@ -790,6 +820,7 @@
   of_usb_get_dr_mode_by_phy
   __page_pinner_put_page
   panic_notifier_list
+  param_array_ops
   param_ops_bool
   param_ops_byte
   param_ops_int
@@ -915,6 +946,8 @@
   regcache_cache_only
   regcache_mark_dirty
   regcache_sync
+  __register_chrdev
+  register_chrdev_region
   register_pm_notifier
   register_reboot_notifier
   register_shrinker
@@ -974,6 +1007,12 @@
   schedule
   schedule_timeout
   scnprintf
+  scsi_compat_ioctl
+  scsi_device_get
+  scsi_device_put
+  scsi_ioctl
+  scsi_ioctl_block_when_processing_errors
+  sdev_prefix_printk
   sdhci_add_host
   sdhci_get_property
   sdhci_pltfm_clk_get_max_clock
@@ -1004,6 +1043,7 @@
   simple_attr_release
   simple_read_from_buffer
   simple_strtol
+  simple_strtoul
   single_open
   single_release
   skb_clone
@@ -1124,6 +1164,7 @@
   typec_switch_unregister
   __udelay
   unlock_page
+  __unregister_chrdev
   unregister_chrdev_region
   unregister_reboot_notifier
   unregister_shrinker
@@ -1150,6 +1191,7 @@
   usb_hcd_link_urb_to_ep
   usb_hcd_resume_root_hub
   usb_hcd_unlink_urb_from_ep
+  usb_hid_driver
   usb_match_id
   usbnet_change_mtu
   usbnet_defer_kevent
@@ -1345,7 +1387,6 @@
   complete_and_exit
   dev_close
   dev_open
-  down
   down_interruptible
   down_timeout
   eth_type_trans
@@ -1417,7 +1458,6 @@
   sdio_writel
   sdio_writew
   set_cpus_allowed_ptr
-  simple_strtoul
   skb_copy
   __skb_pad
   skb_realloc_headroom
@@ -1475,7 +1515,6 @@
   of_dma_is_coherent
   of_property_read_variable_u64_array
   PageMovable
-  param_array_ops
   pid_task
   pin_user_pages
   pin_user_pages_remote
@@ -1530,6 +1569,12 @@
   ipv6_stub
   __vlan_find_dev_deep_rcu
 
+# required by ch.ko
+  scsi_device_lookup
+  __scsi_execute
+  scsi_print_sense_hdr
+  scsi_register_driver
+
 # required by clk-link.ko
   pm_clk_add
   pm_clk_resume
@@ -1571,6 +1616,9 @@
   of_clk_hw_onecell_get
   scmi_driver_register
   scmi_driver_unregister
+
+# required by cm3218.ko
+  i2c_smbus_write_word_data
 
 # required by cpufreq-dt.ko
   cpufreq_enable_boost_support
@@ -1740,6 +1788,16 @@
   irq_get_domain_generic_chip
   of_pinctrl_get
 
+# required by hid-alps.ko
+  input_alloc_absinfo
+  input_mt_sync_frame
+
+# required by hid-holtek-kbd.ko
+  usb_ifnum_to_if
+
+# required by hid-primax.ko
+  hid_report_raw_event
+
 # required by i2c-dev.ko
   bus_register_notifier
   bus_unregister_notifier
@@ -1747,7 +1805,6 @@
   i2c_bus_type
   i2c_for_each_dev
   i2c_verify_client
-  register_chrdev_region
 
 # required by i2c-gpio.ko
   desc_to_gpio
@@ -1756,11 +1813,9 @@
 # required by i2c-hid.ko
   hid_add_device
   hid_allocate_device
-  hid_debug
   hid_destroy_device
   hid_input_report
   hid_parse_report
-  i2c_smbus_read_byte
 
 # required by i2c-mux.ko
   __i2c_transfer
@@ -1792,9 +1847,6 @@
 
 # required by kfifo_buf.ko
   __kfifo_to_user
-
-# required by leds-gpio.ko
-  devm_led_classdev_register_ext
 
 # required by leds-rgb13h.ko
   led_classdev_flash_register_ext
@@ -1835,8 +1887,6 @@
   blk_queue_virt_boundary
   blk_queue_write_cache
   blk_rq_map_kern
-  blk_rq_map_user
-  blk_rq_unmap_user
   blk_set_queue_dying
   blk_status_to_errno
   blk_sync_queue
@@ -2072,7 +2122,6 @@
   kernel_kobj
 
 # required by rfkill-rk.ko
-  gpio_request
   kstrtoll
   rfkill_init_sw_state
   rfkill_set_hw_state
@@ -2083,7 +2132,6 @@
   dma_fence_wait_timeout
   free_iova_fast
   idr_alloc_cyclic
-  idr_preload
   kstrdup_quotable_cmdline
   mmput
 
@@ -2159,8 +2207,6 @@
   swiotlb_max_segment
 
 # required by rk_vcodec.ko
-  cdev_add
-  cdev_del
   devm_iounmap
   dev_pm_domain_attach
   dev_pm_opp_get_freq
@@ -2172,7 +2218,6 @@
   iommu_dma_reserve_iova
   __kthread_init_worker
   kthread_worker_fn
-  __module_get
   of_device_alloc
   of_dma_configure_id
   platform_device_del
@@ -2461,6 +2506,38 @@
   sdhci_remove_host
   sdhci_request
 
+# required by sensor_dev.ko
+  class_create_file_ns
+  class_remove_file_ns
+
+# required by sg.ko
+  blk_get_request
+  blk_put_request
+  blk_rq_map_user_iov
+  blk_verify_command
+  cdev_alloc
+  class_interface_unregister
+  fasync_helper
+  get_sg_io_hdr
+  import_iovec
+  kill_fasync
+  put_sg_io_hdr
+  _raw_read_lock_irqsave
+  _raw_read_unlock_irqrestore
+  _raw_write_lock_irq
+  _raw_write_lock_irqsave
+  _raw_write_unlock_irq
+  _raw_write_unlock_irqrestore
+  scsi_autopm_get_device
+  scsi_autopm_put_device
+  scsi_block_when_processing_errors
+  scsi_command_size_tbl
+  scsi_normalize_sense
+  __scsi_print_sense
+  scsi_register_interface
+  sg_scsi_ioctl
+  __task_pid_nr_ns
+
 # required by sha1-ce.ko
   crypto_sha1_finup
   crypto_sha1_update
@@ -2557,10 +2634,8 @@
   spi_finalize_current_transfer
 
 # required by spidev.ko
-  __register_chrdev
   spi_setup
   stream_open
-  __unregister_chrdev
 
 # required by sw_sync.ko
   dma_fence_free
@@ -2568,7 +2643,6 @@
   __get_task_comm
 
 # required by tcpci_husb311.ko
-  i2c_smbus_read_word_data
   tcpci_get_tcpm_port
   tcpci_irq
   tcpci_register_port
