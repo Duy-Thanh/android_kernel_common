@@ -70,6 +70,24 @@
       "parentUuid": "a178913e_61183232",
       "revId": "89d5fd585503d06a8b7f20588b3ea70ce51d2d13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "334ee00c_068cd3f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978086
+      },
+      "writtenOn": "2022-12-15T03:04:58Z",
+      "side": 1,
+      "message": "Thanks.\n\nI am told we are definitely not building x86.  Also, looking inside the kernel sources:\n\nkernel/trace/ftrace.c:4126:    \"All modules have the symbol this_module\"\n\nand from scripts/gen_autoksyms.sh: +64 \"Ignore __this_module. It\u0027s not an exported symbol, and will be resolved when the final .ko\u0027s are linked.\"\n\nRemoving that symbol now so hopefully all will work this time round!",
+      "parentUuid": "65b98390_2559d73d",
+      "revId": "89d5fd585503d06a8b7f20588b3ea70ce51d2d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
