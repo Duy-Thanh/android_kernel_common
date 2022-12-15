@@ -1835,6 +1835,7 @@ void xhci_free_erst(struct xhci_hcd *xhci, struct xhci_erst *erst)
 void xhci_mem_cleanup(struct xhci_hcd *xhci)
 {
 	struct device	*dev = xhci_to_hcd(xhci)->self.sysdev;
+	struct xhci_sec *sec, *tmp;
 	int i, j, num_ports;
 
 	cancel_delayed_work_sync(&xhci->cmd_timer);
@@ -1845,6 +1846,16 @@ void xhci_mem_cleanup(struct xhci_hcd *xhci)
 		xhci_ring_free(xhci, xhci->event_ring);
 	xhci->event_ring = NULL;
 	xhci_dbg_trace(xhci, trace_xhci_dbg_init, "Freed event ring");
+
+	list_for_each_entry_safe(sec, tmp, &xhci->xhci_sec_list, list) {
+		list_del(&sec->list);
+		if (sec->event_ring) {
+			xhci_ring_free(xhci, sec->event_ring);
+			xhci_dbg_trace(xhci, trace_xhci_dbg_init,
+						"Freed secondary ring %d", sec->intr_num);
+		}
+		kfree(sec);
+	}
 
 	if (xhci->cmd_ring)
 		xhci_ring_free(xhci, xhci->cmd_ring);
@@ -2087,18 +2098,18 @@ static int xhci_check_trb_in_td_math(struct xhci_hcd *xhci)
 	return 0;
 }
 
-static void xhci_set_hc_event_deq(struct xhci_hcd *xhci)
+static void xhci_set_hc_event_deq(struct xhci_hcd *xhci, struct xhci_ring *er,
+				struct xhci_intr_reg __iomem *ir_set)
 {
 	u64 temp;
 	dma_addr_t deq;
 
-	deq = xhci_trb_virt_to_dma(xhci->event_ring->deq_seg,
-			xhci->event_ring->dequeue);
+	deq = xhci_trb_virt_to_dma(er->deq_seg, er->dequeue);
 	if (!deq)
 		xhci_warn(xhci, "WARN something wrong with SW event ring "
 				"dequeue ptr.\n");
 	/* Update HC event ring dequeue pointer */
-	temp = xhci_read_64(xhci, &xhci->ir_set->erst_dequeue);
+	temp = xhci_read_64(xhci, &ir_set->erst_dequeue);
 	temp &= ERST_PTR_MASK;
 	/* Don't clear the EHB bit (which is RW1C) because
 	 * there might be more events to service.
@@ -2108,7 +2119,7 @@ static void xhci_set_hc_event_deq(struct xhci_hcd *xhci)
 			"// Write event ring dequeue pointer, "
 			"preserving EHB bit");
 	xhci_write_64(xhci, ((u64) deq & (u64) ~ERST_PTR_MASK) | temp,
-			&xhci->ir_set->erst_dequeue);
+			&ir_set->erst_dequeue);
 }
 
 static void xhci_add_in_port(struct xhci_hcd *xhci, unsigned int num_ports,
@@ -2375,10 +2386,159 @@ static int xhci_setup_port_arrays(struct xhci_hcd *xhci, gfp_t flags)
 	return 0;
 }
 
+static void xhci_reset_evt_ring_base(struct xhci_hcd *xhci, struct xhci_ring *er,
+		struct xhci_erst *erst, struct xhci_intr_reg __iomem *ir_set)
+{
+	u64	val_64;
+
+	xhci_dbg_trace(xhci, trace_xhci_dbg_init,
+			"// Set ERST entries to point to event ring.");
+	/* set the segment table base address */
+	xhci_dbg_trace(xhci, trace_xhci_dbg_init,
+			"// Set ERST base address for ir_set 0 = 0x%llx",
+			(unsigned long long)erst->erst_dma_addr);
+	val_64 = xhci_read_64(xhci, &ir_set->erst_base);
+	val_64 &= ERST_PTR_MASK;
+	pr_err("after clearing ptr = 0x%llx\n", val_64);
+	val_64 |= (erst->erst_dma_addr & (u64) ~ERST_PTR_MASK);
+		pr_err("after clearing ptr = 0x%llx\n", val_64);
+
+	xhci_write_64(xhci, val_64, &ir_set->erst_base);
+	xhci_dbg_trace(xhci, trace_xhci_dbg_init,
+			"done.");
+	/* Set the event ring dequeue address */
+	xhci_set_hc_event_deq(xhci, er, ir_set);
+	xhci_dbg_trace(xhci, trace_xhci_dbg_init,
+			"Wrote ERST address to ir_set 0.");
+}
+
+void xhci_handle_sec_intr_events(struct xhci_hcd *xhci, struct xhci_ring *ring,
+	struct xhci_intr_reg __iomem *ir_set, struct xhci_sec *sec)
+{
+	union xhci_trb *erdp_trb, *current_trb;
+	struct xhci_segment	*seg;
+	u64 erdp_reg;
+	u32 iman_reg;
+	dma_addr_t deq;
+	unsigned long segment_offset;
+	struct xhci_erst *erst = &sec->erst;
+
+	/* disable irq, ack pending interrupt and ack all pending events */
+
+	iman_reg = readl_relaxed(&ir_set->irq_pending);
+	iman_reg &= ~IMAN_IE;
+	writel_relaxed(iman_reg, &ir_set->irq_pending);
+	iman_reg = readl_relaxed(&ir_set->irq_pending);
+	if (iman_reg & IMAN_IP)
+		writel_relaxed(iman_reg, &ir_set->irq_pending);
+
+	/* last acked event trb is in erdp reg  */
+	erdp_reg = xhci_read_64(xhci, &ir_set->erst_dequeue);
+	deq = (dma_addr_t)(erdp_reg & ~ERST_PTR_MASK);
+	if (!deq) {
+		pr_debug("%s: event ring handling not required\n", __func__);
+		return;
+	}
+
+	seg = ring->first_seg;
+	segment_offset = deq - seg->dma;
+
+	/* find out virtual address of the last acked event trb */
+	erdp_trb = current_trb = &seg->trbs[0] +
+				(segment_offset/sizeof(*current_trb));
+
+	/* read cycle state of the last acked trb to find out CCS */
+	ring->cycle_state = le32_to_cpu(current_trb->event_cmd.flags) & TRB_CYCLE;
+
+	while (1) {
+		/* last trb of the event ring: toggle cycle state */
+		if (current_trb == &seg->trbs[TRBS_PER_SEGMENT - 1]) {
+			ring->cycle_state ^= 1;
+			current_trb = &seg->trbs[0];
+		} else {
+			current_trb++;
+		}
+
+		/* cycle state transition */
+		if ((le32_to_cpu(current_trb->event_cmd.flags) & TRB_CYCLE) !=
+		    ring->cycle_state)
+			break;
+	}
+
+	if (erdp_trb != current_trb) {
+		deq = xhci_trb_virt_to_dma(ring->deq_seg, current_trb);
+		if (deq == 0)
+			xhci_warn(xhci,
+				"WARN invalid SW event ring dequeue ptr.\n");
+		/* Update HC event ring dequeue pointer */
+		erdp_reg &= ERST_PTR_MASK;
+		erdp_reg |= ((u64) deq & (u64) ~ERST_PTR_MASK);
+	}
+
+	/* Clear the event handler busy flag (RW1C); event ring is empty. */
+	erdp_reg |= ERST_EHB;
+	xhci_write_64(xhci, erdp_reg, &ir_set->erst_dequeue);
+
+	xhci_reset_evt_ring_base(xhci, ring, erst, ir_set);
+}
+
+static int xhci_event_ring_setup(struct xhci_hcd *xhci, struct xhci_ring **er,
+	struct xhci_erst *erst,	struct xhci_intr_reg __iomem *ir_set,
+	unsigned int intr_num, gfp_t flags)
+{
+	int ret;
+	unsigned int	val;
+
+	/*
+	 * Event ring setup: Allocate a normal ring, but also setup
+	 * the event ring segment table (ERST).  Section 4.9.3.
+	 */
+	xhci_dbg_trace(xhci, trace_xhci_dbg_init, "// Allocating event ring");
+	*er = xhci_ring_alloc(xhci, ERST_NUM_SEGS, 1, TYPE_EVENT,
+					0, flags);
+	if (!*er)
+		return -ENOMEM;
+
+	ret = xhci_alloc_erst(xhci, *er, erst, flags);
+	if (ret)
+		return ret;
+
+	/* set ERST count with the number of entries in the segment table */
+	val = readl(&ir_set->erst_size);
+	val &= ERST_SIZE_MASK;
+	val |= ERST_NUM_SEGS;
+	xhci_dbg_trace(xhci, trace_xhci_dbg_init,
+			"// Write ERST size = %i to ir_set 0 (some bits preserved)",
+			val);
+	writel(val, &ir_set->erst_size);
+
+	xhci_reset_evt_ring_base(xhci, *er, erst, ir_set);
+
+	return 0;
+}
+
+int xhci_mem_sec_init(struct xhci_hcd *xhci, struct xhci_sec *sec)
+{
+	int ret;
+
+	sec->ir_set = &xhci->run_regs->ir_set[sec->intr_num];
+	ret = xhci_event_ring_setup(xhci, &sec->event_ring,
+				&sec->erst, sec->ir_set, sec->intr_num, GFP_KERNEL);
+	if (ret) {
+		xhci_err(xhci, "sec event ring setup failed inter#%d\n",
+			sec->intr_num);
+		return ret;
+	}
+	sec->xhci = 0;
+
+	return 0;
+}
+
 int xhci_mem_init(struct xhci_hcd *xhci, gfp_t flags)
 {
 	dma_addr_t	dma;
 	struct device	*dev = xhci_to_hcd(xhci)->self.sysdev;
+	struct xhci_sec *sec;
 	unsigned int	val, val2;
 	u64		val_64;
 	u32		page_size, temp;
@@ -2497,46 +2657,23 @@ int xhci_mem_init(struct xhci_hcd *xhci, gfp_t flags)
 	/* Set ir_set to interrupt register set 0 */
 	xhci->ir_set = &xhci->run_regs->ir_set[0];
 
-	/*
-	 * Event ring setup: Allocate a normal ring, but also setup
-	 * the event ring segment table (ERST).  Section 4.9.3.
-	 */
-	xhci_dbg_trace(xhci, trace_xhci_dbg_init, "// Allocating event ring");
-	xhci->event_ring = xhci_ring_alloc(xhci, ERST_NUM_SEGS, 1, TYPE_EVENT,
-					0, flags);
-	if (!xhci->event_ring)
+	ret = xhci_event_ring_setup(xhci, &xhci->event_ring, &xhci->erst, xhci->ir_set, 0, flags);
+	if (ret < 0)
 		goto fail;
+
 	if (xhci_check_trb_in_td_math(xhci) < 0)
 		goto fail;
 
-	ret = xhci_alloc_erst(xhci, xhci->event_ring, &xhci->erst, flags);
-	if (ret)
-		goto fail;
-
-	/* set ERST count with the number of entries in the segment table */
-	val = readl(&xhci->ir_set->erst_size);
-	val &= ERST_SIZE_MASK;
-	val |= ERST_NUM_SEGS;
-	xhci_dbg_trace(xhci, trace_xhci_dbg_init,
-			"// Write ERST size = %i to ir_set 0 (some bits preserved)",
-			val);
-	writel(val, &xhci->ir_set->erst_size);
-
-	xhci_dbg_trace(xhci, trace_xhci_dbg_init,
-			"// Set ERST entries to point to event ring.");
-	/* set the segment table base address */
-	xhci_dbg_trace(xhci, trace_xhci_dbg_init,
-			"// Set ERST base address for ir_set 0 = 0x%llx",
-			(unsigned long long)xhci->erst.erst_dma_addr);
-	val_64 = xhci_read_64(xhci, &xhci->ir_set->erst_base);
-	val_64 &= ERST_PTR_MASK;
-	val_64 |= (xhci->erst.erst_dma_addr & (u64) ~ERST_PTR_MASK);
-	xhci_write_64(xhci, val_64, &xhci->ir_set->erst_base);
-
-	/* Set the event ring dequeue address */
-	xhci_set_hc_event_deq(xhci);
-	xhci_dbg_trace(xhci, trace_xhci_dbg_init,
-			"Wrote ERST address to ir_set 0.");
+	/* Setup secondary interrupters (if any) */
+	INIT_LIST_HEAD(&xhci->xhci_sec_list);
+	for (i = 0; i < xhci->max_interrupters; i++) {
+		sec = kzalloc(sizeof(struct xhci_sec), GFP_KERNEL);
+		if (sec) {
+			sec->intr_num = i + 1;
+			xhci_mem_sec_init(xhci, sec);
+			list_add_tail(&sec->list, &xhci->xhci_sec_list);
+		}
+	}
 
 	xhci->isoc_bei_interval = AVOID_BEI_INTERVAL_MAX;
 

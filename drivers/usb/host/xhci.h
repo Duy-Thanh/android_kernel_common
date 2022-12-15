@@ -1926,6 +1926,7 @@ struct xhci_hcd {
 	struct dentry		*debugfs_root;
 	struct dentry		*debugfs_slots;
 	struct list_head	regset_list;
+	struct list_head	xhci_sec_list;
 
 	void			*dbc;
 	/* platform-specific data -- must come last */
@@ -1943,6 +1944,17 @@ struct xhci_driver_overrides {
 			     struct usb_host_endpoint *ep);
 	int (*check_bandwidth)(struct usb_hcd *, struct usb_device *);
 	void (*reset_bandwidth)(struct usb_hcd *, struct usb_device *);
+};
+
+struct xhci_sec {
+	struct xhci_ring	*event_ring;
+	struct xhci_erst	erst;
+	/* secondary interrupter */
+	struct xhci_intr_reg __iomem *ir_set;
+	struct xhci_hcd		*xhci;
+	int			intr_num;
+
+	struct list_head	list;
 };
 
 #define	XHCI_CFC_DELAY		10
@@ -2034,6 +2046,9 @@ void xhci_dbg_trace(struct xhci_hcd *xhci, void (*trace)(struct va_format *),
 /* xHCI memory management */
 void xhci_mem_cleanup(struct xhci_hcd *xhci);
 int xhci_mem_init(struct xhci_hcd *xhci, gfp_t flags);
+void xhci_handle_sec_intr_events(struct xhci_hcd *xhci,
+		struct xhci_ring *ring, struct xhci_intr_reg __iomem *ir_set, struct xhci_sec *sec);
+int xhci_mem_sec_init(struct xhci_hcd *xhci, struct xhci_sec *sec);
 void xhci_free_virt_device(struct xhci_hcd *xhci, int slot_id);
 int xhci_alloc_virt_device(struct xhci_hcd *xhci, int slot_id, struct usb_device *udev, gfp_t flags);
 int xhci_setup_addressable_virt_dev(struct xhci_hcd *xhci, struct usb_device *udev);

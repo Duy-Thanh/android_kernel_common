@@ -2101,6 +2101,64 @@ int xhci_add_endpoint(struct usb_hcd *hcd, struct usb_device *udev,
 }
 EXPORT_SYMBOL_GPL(xhci_add_endpoint);
 
+static int xhci_stop_endpoint(struct usb_hcd *hcd, struct usb_device *udev,
+						struct usb_host_endpoint *ep)
+{
+	struct xhci_hcd *xhci = hcd_to_xhci(hcd);
+	unsigned int ep_index;
+	struct xhci_virt_device *virt_dev;
+	struct xhci_command *cmd;
+	unsigned long flags;
+	int ret = 0;
+
+	ret = xhci_check_args(hcd, udev, ep, 1, true, __func__);
+	if (ret <= 0)
+		return ret;
+
+	cmd = xhci_alloc_command(xhci, true, GFP_NOIO);
+	if (!cmd)
+		return -ENOMEM;
+
+	spin_lock_irqsave(&xhci->lock, flags);
+	virt_dev = xhci->devs[udev->slot_id];
+	if (!virt_dev) {
+		ret = -ENODEV;
+		goto err;
+	}
+
+	ep_index = xhci_get_endpoint_index(&ep->desc);
+	if (virt_dev->eps[ep_index].ring &&
+			virt_dev->eps[ep_index].ring->dequeue) {
+		ret = xhci_queue_stop_endpoint(xhci, cmd, udev->slot_id,
+				ep_index, 0);
+		if (ret)
+			goto err;
+
+		xhci_ring_cmd_db(xhci);
+		spin_unlock_irqrestore(&xhci->lock, flags);
+
+		/* Wait for stop endpoint command to finish */
+		wait_for_completion(cmd->completion);
+
+		if (cmd->status == COMP_COMMAND_ABORTED ||
+				cmd->status == COMP_STOPPED) {
+			xhci_warn(xhci,
+				"stop endpoint command timeout for ep%d%s\n",
+				usb_endpoint_num(&ep->desc),
+				usb_endpoint_dir_in(&ep->desc) ? "in" : "out");
+			ret = -ETIME;
+				}
+		goto free_cmd;
+	}
+
+err:
+	spin_unlock_irqrestore(&xhci->lock, flags);
+free_cmd:
+	xhci_free_command(xhci, cmd);
+
+	return ret;
+}
+
 static void xhci_zero_in_ctx(struct xhci_hcd *xhci, struct xhci_virt_device *virt_dev)
 {
 	struct xhci_input_control_ctx *ctrl_ctx;
@@ -5278,6 +5336,110 @@ static void xhci_hcd_init_usb3_data(struct xhci_hcd *xhci, struct usb_hcd *hcd)
 	xhci->usb3_rhub.hcd = hcd;
 }
 
+/*
+ * Free a XHCI interrupter that was previously allocated.  Ensure that the
+ * event ring which was used is reset to the proper state, and recycle the
+ * interrupter for next use by clearing the XHCI reference.
+ */
+static int xhci_free_interrupter(struct usb_hcd *hcd, int intr_num)
+{
+	struct xhci_hcd *xhci = hcd_to_xhci(hcd);
+	struct xhci_sec *sec;
+
+	mutex_lock(&xhci->mutex);
+	list_for_each_entry(sec, &xhci->xhci_sec_list, list) {
+		if (sec->intr_num == intr_num) {
+			xhci_handle_sec_intr_events(xhci, sec->event_ring, sec->ir_set, sec);
+			sec->xhci = 0;
+		}
+	}
+	mutex_unlock(&xhci->mutex);
+
+	return 0;
+}
+
+/*
+ * Reserve a XHCI interrupter, and pass the base address of the event ring for
+ * this pariticular interrupter back to the client.
+ */
+static phys_addr_t xhci_update_interrupter(struct usb_hcd *hcd, int intr_num,
+								dma_addr_t *dma)
+{
+	struct xhci_hcd *xhci = hcd_to_xhci(hcd);
+	struct device *dev = hcd->self.sysdev;
+	struct sg_table sgt;
+	phys_addr_t pa;
+	struct xhci_sec *sec;
+
+	if (!HCD_RH_RUNNING(hcd) ||
+			(xhci->xhc_state & XHCI_STATE_HALTED))
+		return 0;
+
+	mutex_lock(&xhci->mutex);
+	list_for_each_entry(sec, &xhci->xhci_sec_list, list) {
+		if (sec->intr_num == intr_num) {
+			dma_get_sgtable(dev, &sgt, sec->event_ring->first_seg->trbs,
+				sec->event_ring->first_seg->dma, TRB_SEGMENT_SIZE);
+
+			*dma = sec->event_ring->first_seg->dma;
+
+			pa = page_to_phys(sg_page(sgt.sgl));
+			sg_free_table(&sgt);
+			sec->xhci = xhci;
+			mutex_unlock(&xhci->mutex);
+
+			return pa;
+		}
+	}
+	mutex_unlock(&xhci->mutex);
+
+	return 0;
+}
+
+/* Retrieve the transfer ring base address for a specific endpoint. */
+static phys_addr_t xhci_get_xfer_resource(struct usb_device *udev,
+					struct usb_host_endpoint *ep, dma_addr_t *dma)
+{
+	struct usb_hcd *hcd = bus_to_hcd(udev->bus);
+	struct device *dev = hcd->self.sysdev;
+	struct xhci_hcd *xhci = hcd_to_xhci(hcd);
+	struct sg_table sgt;
+	phys_addr_t pa;
+	int ret;
+	unsigned int ep_index;
+	struct xhci_virt_device *virt_dev;
+
+	if (!HCD_RH_RUNNING(hcd))
+		return 0;
+
+	ret = xhci_check_args(hcd, udev, ep, 1, true, __func__);
+	if (ret <= 0) {
+		xhci_err(xhci, "%s: invalid args\n", __func__);
+		return 0;
+	}
+
+	virt_dev = xhci->devs[udev->slot_id];
+	ep_index = xhci_get_endpoint_index(&ep->desc);
+
+	if (virt_dev->eps[ep_index].ring &&
+		virt_dev->eps[ep_index].ring->first_seg) {
+
+		dma_get_sgtable(dev, &sgt,
+			virt_dev->eps[ep_index].ring->first_seg->trbs,
+			virt_dev->eps[ep_index].ring->first_seg->dma,
+			TRB_SEGMENT_SIZE);
+
+		*dma = virt_dev->eps[ep_index].ring->first_seg->dma;
+
+		pa = page_to_phys(sg_page(sgt.sgl));
+		sg_free_table(&sgt);
+
+		return pa;
+	}
+
+	return 0;
+}
+
 int xhci_gen_setup(struct usb_hcd *hcd, xhci_get_quirks_t get_quirks)
 {
 	struct xhci_hcd		*xhci;
@@ -5321,6 +5483,8 @@ int xhci_gen_setup(struct usb_hcd *hcd, xhci_get_quirks_t get_quirks)
 		xhci->hcc_params2 = readl(&xhci->cap_regs->hcc_params2);
 
 	xhci->quirks |= quirks;
+	xhci->max_interrupters = min_t(u32, HCS_MAX_INTRS(xhci->hcs_params1),
+		      xhci->max_interrupters);
 
 	get_quirks(dev, xhci);
 
@@ -5454,7 +5618,10 @@ static const struct hc_driver xhci_hc_driver = {
 	.enable_device =	xhci_enable_device,
 	.update_hub_device =	xhci_update_hub_device,
 	.reset_device =		xhci_discover_or_reset_device,
-
+	.update_interrupter =	xhci_update_interrupter,
+	.free_interrupter =	xhci_free_interrupter,
+	.get_transfer_resource =	xhci_get_xfer_resource,
+	.stop_endpoint =	xhci_stop_endpoint,
 	/*
 	 * scheduling support
 	 */
