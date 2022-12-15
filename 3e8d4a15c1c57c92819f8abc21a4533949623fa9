@@ -51,6 +51,24 @@
       "parentUuid": "edf65f0c_df45fd47",
       "revId": "3e8d4a15c1c57c92819f8abc21a4533949623fa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50400aaa_41ff9f92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-12-15T09:47:16Z",
+      "side": 1,
+      "message": "262666413 is the bug used for the respin request, and so it needs to be listed here as well as the original bug. So please just add an extra Bug: line.",
+      "parentUuid": "3ab2fd4c_8cd787f2",
+      "revId": "3e8d4a15c1c57c92819f8abc21a4533949623fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
