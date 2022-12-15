@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc518692_67a04d7b",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-15T19:51:43Z",
+      "side": 1,
+      "message": "where are the __traceiter versions of these? Please generate the symbol list as documented. Without the __traceiter versions, these symbols are not properly protected in the KMI.",
+      "revId": "5795dba7383e8d1aa99ab08a8ac18630bcbfd533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
