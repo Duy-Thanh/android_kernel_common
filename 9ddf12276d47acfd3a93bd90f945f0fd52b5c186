@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a785091b_53157183",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-15T14:38:29Z",
+      "side": 1,
+      "message": "The problem is that for NP guest on P, we need `MEMINFO` and `MEM_RELINQUISH` reported in `ARM_SMCCC_VENDOR_HYP_KVM_FEATURES_FUNC_ID`. This is handled at EL1 for NP guest, and hence the need to get those bits set in `smccc_feat-\u003evendor_hyp_bmap`.\n\nI agree this is fragile. What would be nicer is if `kvm_hyp_handle_hvc64` could or in the above bits to the EL1-supplied return value. But I don\u0027t know how easy it would be to apply a post-filter in EL2?",
+      "revId": "9ddf12276d47acfd3a93bd90f945f0fd52b5c186",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
