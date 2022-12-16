@@ -16,6 +16,24 @@
       "message": "where are the __traceiter versions of these? Please generate the symbol list as documented. Without the __traceiter versions, these symbols are not properly protected in the KMI.",
       "revId": "5795dba7383e8d1aa99ab08a8ac18630bcbfd533",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f9fbe9_dff31136",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 1950430
+      },
+      "writtenOn": "2022-12-16T13:41:09Z",
+      "side": 1,
+      "message": "Adding it to a following patch https://android-review.googlesource.com/c/kernel/common/+/2361841",
+      "parentUuid": "cc518692_67a04d7b",
+      "revId": "5795dba7383e8d1aa99ab08a8ac18630bcbfd533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
