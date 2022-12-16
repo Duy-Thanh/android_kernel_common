@@ -34,6 +34,24 @@
       "parentUuid": "2e0541a0_39348bb6",
       "revId": "7363a34ec716a3ab6111dd3d176e403cc57d2a41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "163c4dc7_d281b19b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-16T16:48:45Z",
+      "side": 1,
+      "message": "I\u0027m thinking of something like an AyeAye plugin that just looks for additions of \"\u003dm\" to gki_defconfig and throws a warning. Then the reviewer can check whether it needs to be added to the protected modules list.",
+      "parentUuid": "821a9687_85162e3d",
+      "revId": "7363a34ec716a3ab6111dd3d176e403cc57d2a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
