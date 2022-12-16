@@ -16,6 +16,24 @@
       "message": "Is there any tooling we could do to make sure that when someone adds a new gki module by adding \"\u003dm\" in gki_defconfig, this list is updated? Otherwise, a newly added module will default to unprotected. (this could be done in a later patch next year)",
       "revId": "7363a34ec716a3ab6111dd3d176e403cc57d2a41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "821a9687_85162e3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-12-16T16:46:13Z",
+      "side": 1,
+      "message": "This is source of difference between protected vs unprotected. So, it\u0027s hard to differentiate a module missing here is intentional or unintentional.\n\nI\u0027ll look if in build we can link this to change of gki_defconfig can be catch; and we print a build notice or something an let user decide.\n\nI\u0027ll add this step as part of GKI module conversion doc step.",
+      "parentUuid": "2e0541a0_39348bb6",
+      "revId": "7363a34ec716a3ab6111dd3d176e403cc57d2a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
