@@ -20,6 +20,10 @@ DECLARE_HOOK(android_vh_update_topology_flags_workfn,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
 
+DECLARE_HOOK(android_vh_cpu_amu_enable,
+	TP_PROTO(int cpu, bool *enable),
+	TP_ARGS(cpu, enable));
+
 #endif /* _TRACE_HOOK_TOPOLOGY_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
