@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e0541a0_39348bb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-16T16:33:24Z",
+      "side": 1,
+      "message": "Is there any tooling we could do to make sure that when someone adds a new gki module by adding \"\u003dm\" in gki_defconfig, this list is updated? Otherwise, a newly added module will default to unprotected. (this could be done in a later patch next year)",
+      "revId": "7363a34ec716a3ab6111dd3d176e403cc57d2a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
