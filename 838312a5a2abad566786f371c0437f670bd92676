@@ -34,6 +34,29 @@
       "parentUuid": "f82ef27f_369a0392",
       "revId": "838312a5a2abad566786f371c0437f670bd92676",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0837a7fc_b6a9fe62",
+        "filename": "include/vdso/bits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1020839
+      },
+      "writtenOn": "2022-12-17T01:04:39Z",
+      "side": 1,
+      "message": "This also matches master kernel branch, where BIT() is defined in this file",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 33
+      },
+      "revId": "838312a5a2abad566786f371c0437f670bd92676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
