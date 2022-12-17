@@ -16,6 +16,24 @@
       "message": "This is not needed for the GKI kernel image, only for external code to this repo, right?  And if so, please just change the include file for that driver as was done in the Pixel repository (as an example.)",
       "revId": "838312a5a2abad566786f371c0437f670bd92676",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b193d33_8f5b3fd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020839
+      },
+      "writtenOn": "2022-12-17T01:03:02Z",
+      "side": 1,
+      "message": "This is what I hit:\n\nIn file included from kernel/time/vsyscall.c:12:\nIn file included from include/vdso/datapage.h:13:\ninclude/vdso/bits.h:5:9: warning: \u0027BIT\u0027 macro redefined [-Wmacro-redefined]\n#define BIT(nr)                 (1UL \u003c\u003c (nr))\n        ^\ninclude/linux/bits.h:17:9: note: previous definition is here\n#define BIT(nr)                 (UL(1) \u003c\u003c (nr))\n        ^\n1 warning generated.\n\nIn file included from arch/arm64/kernel/vdso.c:34:\nIn file included from include/vdso/datapage.h:13:\ninclude/vdso/bits.h:5:9: warning: \u0027BIT\u0027 macro redefined [-Wmacro-redefined]\n#define BIT(nr)                 (1UL \u003c\u003c (nr))\n        ^\ninclude/linux/bits.h:17:9: note: previous definition is here\n#define BIT(nr)                 (UL(1) \u003c\u003c (nr))\n        ^\n1 warning generated.\n\nIn file included from arch/arm64/kernel/asm-offsets.c:28:\nIn file included from include/vdso/datapage.h:13:\ninclude/vdso/bits.h:5:9: warning: \u0027BIT\u0027 macro redefined [-Wmacro-redefined]\n#define BIT(nr)                 (1UL \u003c\u003c (nr))\n        ^\ninclude/linux/bits.h:17:9: note: previous definition is here\n#define BIT(nr)                 (UL(1) \u003c\u003c (nr))\n        ^\n1 warning generated.\n\nAlso, I do not have access to the Pixel kernel source that has the affecting commit merged.",
+      "parentUuid": "f82ef27f_369a0392",
+      "revId": "838312a5a2abad566786f371c0437f670bd92676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
