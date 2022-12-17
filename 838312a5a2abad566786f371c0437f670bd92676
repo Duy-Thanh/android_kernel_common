@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82ef27f_369a0392",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-17T00:23:50Z",
+      "side": 1,
+      "message": "This is not needed for the GKI kernel image, only for external code to this repo, right?  And if so, please just change the include file for that driver as was done in the Pixel repository (as an example.)",
+      "revId": "838312a5a2abad566786f371c0437f670bd92676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
