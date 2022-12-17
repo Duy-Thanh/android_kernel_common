@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03d86ad0_878cd2c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-17T09:37:34Z",
+      "side": 1,
+      "message": "What kernel configuration is causing this warning?  the `gki_defconfig` one or something else?",
+      "parentUuid": "2b193d33_8f5b3fd9",
+      "revId": "838312a5a2abad566786f371c0437f670bd92676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0837a7fc_b6a9fe62",
         "filename": "include/vdso/bits.h",
         "patchSetId": 1
