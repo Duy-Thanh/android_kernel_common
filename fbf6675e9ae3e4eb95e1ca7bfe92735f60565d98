@@ -16,6 +16,23 @@
       "message": "It looks like the db845c override doesn\u0027t exist on this branch. Can we see if this patchset builds?",
       "revId": "fbf6675e9ae3e4eb95e1ca7bfe92735f60565d98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d47e8d65_7f2c9f84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2022-12-19T15:12:38Z",
+      "side": 1,
+      "message": "Can\u0027t run TH on this stack of CLs without approvals, but I don\u0027t have the privileges for approval here.\n\nTodd,\nIs there a better way to run TH here without requiring approval?",
+      "revId": "fbf6675e9ae3e4eb95e1ca7bfe92735f60565d98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
