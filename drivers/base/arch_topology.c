@@ -131,16 +131,19 @@ void topology_set_freq_scale(const struct cpumask *cpus, unsigned long cur_freq,
 {
 	unsigned long scale;
 	int i;
+	bool use_amu_fie = true;
 
 	if (WARN_ON_ONCE(!cur_freq || !max_freq))
 		return;
+
+	trace_android_vh_use_amu_fie(cpumask_first(cpus), &use_amu_fie);
 
 	/*
 	 * If the use of counters for FIE is enabled, just return as we don't
 	 * want to update the scale factor with information from CPUFREQ.
 	 * Instead the scale factor will be updated from arch_scale_freq_tick.
 	 */
-	if (supports_scale_freq_counters(cpus))
+	if (use_amu_fie && supports_scale_freq_counters(cpus))
 		return;
 
 	scale = (cur_freq << SCHED_CAPACITY_SHIFT) / max_freq;
