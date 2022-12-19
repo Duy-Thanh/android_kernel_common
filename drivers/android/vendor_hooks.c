@@ -277,6 +277,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
+<<<<<<< PATCH SET (e17990 ANDROID: topology: Add vendor hook for use_amu_fie)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pagevec_drain);
@@ -289,3 +292,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_madvise_blk_plug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_inactive_list_blk_plug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_lruvec_blk_plug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reclaim_pages_plug);
+>>>>>>> BASE      (bbac37 ANDROID: scsi: sd_zbc: Work around non-compliance)
