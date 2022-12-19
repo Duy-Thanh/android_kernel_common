@@ -288,6 +288,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
+<<<<<<< PATCH SET (93cb1328dc23d02604bee82f73a1f02761f6a32d ANDROID: topology: Add vendor hook for use_amu_fie)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
+||||||| BASE      (9c8fb18c9387eb441d9b34f0d4e1f8c94d801e0b ANDROID: GKI: Update symbols list for exynos)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
+>>>>>>> BASE      (5edc297fc550efe41d7bac8aace92a567c815097 ANDROID: vendor_hook: add trace_android_rvh_setscheduler_pri)
