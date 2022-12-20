@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afe91032_1260f2eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-20T08:00:10Z",
+      "side": 1,
+      "message": "This is not a valid symbol for the mali driver to use, please push back on the developers of that code to fix this.",
+      "revId": "c46b0dc03db9a4d218b1ddd3124f8536945a11de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
