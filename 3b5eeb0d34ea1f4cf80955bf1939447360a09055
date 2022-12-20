@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5945da67_f846c062",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-20T17:37:04Z",
+      "side": 1,
+      "message": "this patch is meaningless without aosp/2357403. Please resubmit with this patch rebased on top of aosp/2357403.",
+      "revId": "3b5eeb0d34ea1f4cf80955bf1939447360a09055",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
