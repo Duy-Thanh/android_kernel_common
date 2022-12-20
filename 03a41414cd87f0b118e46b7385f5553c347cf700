@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0403d0f2_d1a98182",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-20T09:04:17Z",
+      "side": 1,
+      "message": "Not allowed to be used by drivers, and will be removed upstream soon.  Please push back on the Mali driver authors to remove this from their codebase as it should not be needed.",
+      "range": {
+        "startLine": 910,
+        "startChar": 2,
+        "endLine": 910,
+        "endChar": 13
+      },
+      "revId": "03a41414cd87f0b118e46b7385f5553c347cf700",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
