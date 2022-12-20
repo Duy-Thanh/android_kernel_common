@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f017ac95_0fe66af6",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2022-12-20T15:54:56Z",
+      "side": 1,
+      "message": "sched_shared_vm\u003d%p (this won\u0027t compile on the device kernel workspace)\nor just remove - does it really add value?",
+      "revId": "eb250270951596703233995f618852baed66e5bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "815b8fb3_5e4d261e",
         "filename": "drivers/trusty/trusty-sched-share.c",
         "patchSetId": 17
