@@ -1,8 +1,8 @@
 
 [abi_symbol_list]
   access_process_vm
-  activate_task
   ack_all_badblocks
+  activate_task
   add_cpu
   add_device_randomness
   add_memory
@@ -16,12 +16,12 @@
   alloc_anon_inode
   alloc_chrdev_region
   alloc_io_pgtable_ops
+  alloc_page_buffers
   __alloc_pages
   __alloc_percpu
   __alloc_skb
   alloc_skb_with_frags
   alloc_workqueue
-  alloc_page_buffers
   amba_bustype
   amba_driver_register
   amba_driver_unregister
@@ -51,29 +51,29 @@
   available_idle_cpu
   backlight_device_get_by_type
   backlight_device_set_brightness
-  __balance_callbacks
-  balance_push_callback
   badblocks_clear
   badblocks_exit
   badblocks_init
   badblocks_set
   badblocks_show
   badblocks_store
+  __balance_callbacks
+  balance_push_callback
+  bdev_check_media_change
+  bdevname
+  bdev_read_only
   bd_link_disk_holder
   bd_unlink_disk_holder
-  bdev_check_media_change
-  bdev_read_only
-  bdevname
   bio_add_page
-  bio_clone_fast
-  bio_init
-  bio_put
-  bio_split
-  bioset_exit
-  bioset_init
   bio_associate_blkg
+  bio_clone_fast
   bio_endio
   bio_end_io_acct_remapped
+  bio_init
+  bio_put
+  bioset_exit
+  bioset_init
+  bio_split
   bio_start_io_acct
   bitmap_allocate_region
   __bitmap_and
@@ -85,12 +85,15 @@
   bitmap_release_region
   __bitmap_set
   bitmap_zalloc
-  __blkdev_issue_discard
   __blk_alloc_disk
   blk_cleanup_disk
   blk_cleanup_queue
   blkdev_get_by_dev
+  blkdev_get_by_dev
+  __blkdev_issue_discard
+  blkdev_put
   blk_execute_rq_nowait
+  blk_finish_plug
   blk_freeze_queue_start
   blk_get_queue
   blk_get_request
@@ -126,20 +129,17 @@
   blk_queue_io_opt
   blk_queue_logical_block_size
   blk_queue_max_discard_sectors
+  blk_queue_max_write_same_sectors
   blk_queue_max_write_zeroes_sectors
   blk_queue_physical_block_size
+  blk_queue_split
   blk_queue_virt_boundary
   blk_rq_map_user
   blk_rq_map_user_iov
   blk_rq_unmap_user
-  blk_sync_queue
-  blk_finish_plug
-  blk_queue_max_write_same_sectors
-  blk_queue_split
   blk_set_stacking_limits
   blk_start_plug
-  blkdev_get_by_dev
-  blkdev_put
+  blk_sync_queue
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
@@ -307,6 +307,7 @@
   cpus_read_unlock
   cpu_subsys
   cpu_topology
+  crc32_be
   crc8
   crc8_populate_msb
   crypto_ahash_digest
@@ -325,7 +326,6 @@
   csum_partial
   _ctype
   datagram_poll
-  disk_stack_limits
   deactivate_task
   debugfs_attr_read
   debugfs_attr_write
@@ -516,6 +516,7 @@
   disable_irq_nosync
   disable_percpu_irq
   disk_end_io_acct
+  disk_stack_limits
   disk_start_io_acct
   divider_get_val
   divider_recalc_rate
@@ -701,6 +702,7 @@
   __fdget
   fd_install
   fget
+  file_path
   _find_first_bit
   _find_first_zero_bit
   _find_next_bit
@@ -708,7 +710,6 @@
   find_vpid
   finish_wait
   firmware_request_nowarn
-  file_path
   flow_block_cb_setup_simple
   flow_rule_match_basic
   flow_rule_match_ipv4_addrs
@@ -717,10 +718,11 @@
   flush_dcache_page
   flush_delayed_fput
   flush_delayed_work
+  flush_signals
   flush_work
   flush_workqueue
-  flush_signals
   fput
+  free_buffer_head
   free_io_pgtable_ops
   free_irq
   __free_pages
@@ -730,7 +732,6 @@
   freq_qos_add_request
   freq_qos_remove_request
   freq_qos_update_request
-  free_buffer_head
   fsync_bdev
   ftrace_dump
   fwnode_find_reference
@@ -967,8 +968,8 @@
   interval_tree_iter_first
   interval_tree_iter_next
   interval_tree_remove
-  int_sqrt
   int_pow
+  int_sqrt
   invalidate_bdev
   iomem_resource
   iommu_alloc_resv_region
@@ -1453,12 +1454,12 @@
   __percpu_init_rwsem
   __per_cpu_offset
   per_cpu_ptr_to_phys
-  percpu_up_write
   percpu_ref_exit
   percpu_ref_init
   percpu_ref_is_zero
   percpu_ref_switch_to_atomic_sync
   percpu_ref_switch_to_percpu
+  percpu_up_write
   perf_aux_output_begin
   perf_aux_output_end
   perf_aux_output_flag
@@ -1878,6 +1879,7 @@
   sdhci_setup_host
   select_fallback_rq
   seq_buf_printf
+  seq_file_path
   seq_lseek
   seq_printf
   seq_putc
@@ -1885,7 +1887,6 @@
   seq_read
   seq_release
   seq_vprintf
-  seq_file_path
   set_capacity
   set_capacity_and_notify
   set_cpus_allowed_ptr
@@ -2231,6 +2232,7 @@
   __traceiter_android_vh_ufs_update_sdev
   __traceiter_android_vh_update_topology_flags_workfn
   __traceiter_binder_transaction_received
+  __traceiter_block_bio_remap
   __traceiter_cpu_frequency_limits
   __traceiter_cpu_idle
   __traceiter_ipi_entry
@@ -2241,8 +2243,6 @@
   __traceiter_sched_switch
   __traceiter_suspend_resume
   __traceiter_unmap
-  __traceiter_block_bio_remap
-  __tracepoint_block_bio_remap
   __tracepoint_android_rvh_account_irq_end
   __tracepoint_android_rvh_account_irq_start
   __tracepoint_android_rvh_after_dequeue_task
@@ -2346,6 +2346,7 @@
   __tracepoint_android_vh_ufs_update_sdev
   __tracepoint_android_vh_update_topology_flags_workfn
   __tracepoint_binder_transaction_received
+  __tracepoint_block_bio_remap
   __tracepoint_cpu_frequency_limits
   __tracepoint_cpu_idle
   __tracepoint_ipi_entry
