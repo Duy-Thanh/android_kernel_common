@@ -60,7 +60,6 @@
 
 struct {
 	int file;
-	int test;
 	bool verbose;
 } options;
 
@@ -935,12 +934,13 @@ static int load_hash_tree(const char *mount_dir, struct test_file *file)
 	struct incfs_fill_blocks fill_blocks = {
 		.count = file->mtree_block_count,
 	};
-	struct incfs_fill_block *fill_block_array =
-		calloc(fill_blocks.count, sizeof(struct incfs_fill_block));
+	struct incfs_fill_block *fill_block_array;
 
 	if (fill_blocks.count == 0)
 		return 0;
 
+	fill_block_array =
+		calloc(fill_blocks.count, sizeof(struct incfs_fill_block));
 	if (!fill_block_array)
 		return -ENOMEM;
 	fill_blocks.fill_blocks = ptr_to_u64(fill_block_array);
@@ -1070,6 +1070,7 @@ static int cant_touch_index_test(const char *mount_dir)
 	free(index_path);
 	free(dst_name);
 	free(filename_in_index);
+	free(file_path);
 	if (umount(mount_dir) != 0) {
 		print_error("Can't unmout FS");
 		goto failure;
@@ -1082,6 +1083,7 @@ failure:
 	free(dst_name);
 	free(index_path);
 	free(filename_in_index);
+	free(file_path);
 	close(cmd_fd);
 	umount(mount_dir);
 	return TEST_FAILURE;
@@ -1353,9 +1355,13 @@ static int basic_file_ops_test(const char *mount_dir)
 		goto failure;
 	}
 
+	free(subdir1);
+	free(subdir2);
 	return TEST_SUCCESS;
 
 failure:
+	free(subdir1);
+	free(subdir2);
 	close(cmd_fd);
 	umount(mount_dir);
 	return TEST_FAILURE;
@@ -2637,13 +2643,14 @@ static int emit_partial_test_file_hash(const char *mount_dir,
 	struct incfs_fill_blocks fill_blocks = {
 		.count = 1,
 	};
-	struct incfs_fill_block *fill_block_array =
-		calloc(fill_blocks.count, sizeof(struct incfs_fill_block));
+	struct incfs_fill_block *fill_block_array;
 	uint8_t data[INCFS_DATA_FILE_BLOCK_SIZE];
 
 	if (file->size <= 4096 / 32 * 4096)
 		return 0;
 
+	fill_block_array =
+		calloc(fill_blocks.count, sizeof(struct incfs_fill_block));
 	if (!fill_block_array)
 		return -ENOMEM;
 	fill_blocks.fill_blocks = ptr_to_u64(fill_block_array);
@@ -2678,7 +2685,7 @@ failure:
 static int validate_hash_ranges(const char *mount_dir, struct test_file *file)
 {
 	int block_cnt = 1 + (file->size - 1) / INCFS_DATA_FILE_BLOCK_SIZE;
-	char *filename = concat_file_name(mount_dir, file->name);
+	char *filename = NULL;
 	int fd;
 	struct incfs_filled_range ranges[128];
 	struct incfs_get_filled_blocks_args fba = {
@@ -2694,6 +2701,7 @@ static int validate_hash_ranges(const char *mount_dir, struct test_file *file)
 	if (file->size <= 4096 / 32 * 4096)
 		return 0;
 
+	filename = concat_file_name(mount_dir, file->name);
 	fd = open(filename, O_RDONLY | O_CLOEXEC);
 	free(filename);
 	if (fd <= 0)
@@ -2805,12 +2813,8 @@ static int large_file_test(const char *mount_dir)
 	int result = TEST_FAILURE, ret;
 	uint8_t data[INCFS_DATA_FILE_BLOCK_SIZE] = {};
 	int block_count = THREE_GB / INCFS_DATA_FILE_BLOCK_SIZE;
-	struct incfs_fill_block *block_buf =
-		calloc(block_count, sizeof(struct incfs_fill_block));
-	struct incfs_fill_blocks fill_blocks = {
-		.count = block_count,
-		.fill_blocks = ptr_to_u64(block_buf),
-	};
+	struct incfs_fill_block *block_buf = NULL;
+	struct incfs_fill_blocks fill_blocks;
 	incfs_uuid_t id;
 	int fd = -1;
 	struct statvfs svfs;
@@ -2846,6 +2850,14 @@ static int large_file_test(const char *mount_dir)
 		      NULL) < 0)
 		goto failure;
 
+	block_buf = calloc(block_count, sizeof(struct incfs_fill_block));
+	if (!block_buf)
+		goto failure;
+	fill_blocks = (struct incfs_fill_blocks) {
+		.count = block_count,
+		.fill_blocks = ptr_to_u64(block_buf),
+	};
+
 	for (i = 0; i < block_count; i++) {
 		block_buf[i].compression = COMPRESSION_NONE;
 		block_buf[i].block_index = i;
@@ -2872,6 +2884,7 @@ failure:
 	unlink("very_large_file");
 	umount(mount_dir);
 	free(backing_dir);
+	free(block_buf);
 	return result;
 }
 
@@ -3965,7 +3978,7 @@ static int memzero(const unsigned char *buf, size_t size)
 static int validate_verity(const char *mount_dir, struct test_file *file)
 {
 	int result = TEST_FAILURE;
-	char *filename = concat_file_name(mount_dir, file->name);
+	char *filename = 0;
 	int fd = -1;
 	uint64_t flags;
 	struct fsverity_digest *digest;
@@ -4677,7 +4690,50 @@ static char *setup_mount_dir()
 	return mount_dir;
 }
 
-int parse_options(int argc, char *const *argv)
+static void parse_range(const char *ranges, bool *run_test, size_t tests)
+{
+	size_t i;
+	char *range;
+
+	for (i = 0; i < tests; ++i)
+		run_test[i] = false;
+
+	range = strtok(optarg, ",");
+	while (range) {
+		char *dash = strchr(range, '-');
+
+		if (dash) {
+			size_t start = 1, end = tests;
+			char *end_ptr;
+
+			if (dash > range) {
+				start = strtol(range, &end_ptr, 10);
+				if (*end_ptr != '-' || start <= 0 || start > tests)
+					ksft_exit_fail_msg("Bad range\n");
+			}
+
+			if (dash[1]) {
+				end = strtol(dash + 1, &end_ptr, 10);
+				if (*end_ptr || end <= start || end > tests)
+					ksft_exit_fail_msg("Bad range\n");
+			}
+
+			for (i = start; i <= end; ++i)
+				run_test[i - 1] = true;
+		} else {
+			char *end;
+			long value = strtol(range, &end, 10);
+
+			if (*end || value <= 0 || value > tests)
+				ksft_exit_fail_msg("Bad range\n");
+			run_test[value - 1] = true;
+		}
+		range = strtok(NULL, ",");
+	}
+}
+
+int parse_options(int argc, char *const *argv, bool *run_test,
+		  size_t tests)
 {
 	signed char c;
 
@@ -4688,7 +4744,7 @@ int parse_options(int argc, char *const *argv)
 			break;
 
 		case 't':
-			options.test = strtol(optarg, NULL, 10);
+			parse_range(optarg, run_test, tests);
 			break;
 
 		case 'v':
@@ -4727,9 +4783,6 @@ int main(int argc, char *argv[])
 	char *mount_dir = NULL;
 	int i;
 	int fd, count;
-
-	if (parse_options(argc, argv))
-		ksft_exit_fail_msg("Bad options\n");
 
 	// Seed randomness pool for testing on QEMU
 	// NOTE - this abuses the concept of randomness - do *not* ever do this
@@ -4784,18 +4837,20 @@ int main(int argc, char *argv[])
 		MAKE_TEST(stacked_mount_test),
 	};
 #undef MAKE_TEST
+	bool run_test[ARRAY_SIZE(cases)];
 
-	if (options.test) {
-		if (options.test <= 0 || options.test > ARRAY_SIZE(cases))
-			ksft_exit_fail_msg("Invalid test\n");
+	for (int i = 0; i < ARRAY_SIZE(cases); ++i)
+		run_test[i] = true;
 
-		ksft_set_plan(1);
-		run_one_test(mount_dir, &cases[options.test - 1]);
-	} else {
-		ksft_set_plan(ARRAY_SIZE(cases));
-		for (i = 0; i < ARRAY_SIZE(cases); ++i)
+	if (parse_options(argc, argv, run_test, ARRAY_SIZE(cases)))
+		ksft_exit_fail_msg("Bad options\n");
+
+	ksft_set_plan(ARRAY_SIZE(cases));
+	for (i = 0; i < ARRAY_SIZE(run_test); ++i)
+		if (run_test[i])
 			run_one_test(mount_dir, &cases[i]);
-	}
+		else
+			ksft_cnt.ksft_xskip++;
 
 	umount2(mount_dir, MNT_FORCE);
 	rmdir(mount_dir);
