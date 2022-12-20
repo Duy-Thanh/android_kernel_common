@@ -2717,6 +2717,7 @@
   __traceiter_android_vh_check_bpf_syscall
   __traceiter_android_vh_check_file_open
   __traceiter_android_vh_check_mmap_file
+<<<<<<< HEAD   (66cd99 BACKPORT: UPSTREAM: phy: qcom-qmp: Introduce Kconfig symbols)
   __traceiter_android_vh_check_uninterrupt_tasks
   __traceiter_android_vh_compaction_exit
   __traceiter_android_vh_compaction_try_to_compact_pages_exit
@@ -2724,6 +2725,10 @@
   __traceiter_android_vh_cpu_idle_enter
   __traceiter_android_vh_cpu_idle_exit
   __traceiter_android_vh_dump_throttled_rt_tasks
+=======
+  __traceiter_android_vh_check_uninterruptible_tasks
+  __traceiter_android_vh_cpufreq_offline
+>>>>>>> CHANGE (57c0c7 ANDROID: GKI: Update symbol list for mtk)
   __traceiter_android_vh_iommu_iovad_alloc_iova
   __traceiter_android_vh_iommu_iovad_free_iova
   __traceiter_android_vh_is_fpsimd_save
@@ -2825,6 +2830,7 @@
   __tracepoint_android_vh_check_bpf_syscall
   __tracepoint_android_vh_check_file_open
   __tracepoint_android_vh_check_mmap_file
+<<<<<<< HEAD   (66cd99 BACKPORT: UPSTREAM: phy: qcom-qmp: Introduce Kconfig symbols)
   __tracepoint_android_vh_check_uninterrupt_tasks
   __tracepoint_android_vh_compaction_exit
   __tracepoint_android_vh_compaction_try_to_compact_pages_exit
@@ -2832,6 +2838,10 @@
   __tracepoint_android_vh_cpu_idle_enter
   __tracepoint_android_vh_cpu_idle_exit
   __tracepoint_android_vh_dump_throttled_rt_tasks
+=======
+  __tracepoint_android_vh_check_uninterruptible_tasks
+  __tracepoint_android_vh_cpufreq_offline
+>>>>>>> CHANGE (57c0c7 ANDROID: GKI: Update symbol list for mtk)
   __tracepoint_android_vh_iommu_iovad_alloc_iova
   __tracepoint_android_vh_iommu_iovad_free_iova
   __tracepoint_android_vh_is_fpsimd_save
