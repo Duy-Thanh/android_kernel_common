@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e85b188_e57b8885",
+        "filename": "mm/mremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2022-12-20T17:02:27Z",
+      "side": 1,
+      "message": "Where is the reverse of this operation? Don\u0027t we need to get back to 1 ref count once mremap is done?",
+      "range": {
+        "startLine": 223,
+        "startChar": 11,
+        "endLine": 223,
+        "endChar": 54
+      },
+      "revId": "40d94630ac27aed2f4fe2ac84d5c387176d5e15c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
