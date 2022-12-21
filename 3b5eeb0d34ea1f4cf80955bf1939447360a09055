@@ -34,6 +34,24 @@
       "parentUuid": "5945da67_f846c062",
       "revId": "3b5eeb0d34ea1f4cf80955bf1939447360a09055",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26225210_078f7e7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083383
+      },
+      "writtenOn": "2022-12-21T03:04:04Z",
+      "side": 1,
+      "message": "We\u0027ve rebased the patch. Please review it again. Thanks.",
+      "parentUuid": "af3c3e69_7eba3e01",
+      "revId": "3b5eeb0d34ea1f4cf80955bf1939447360a09055",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
