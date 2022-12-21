@@ -13,6 +13,14 @@
 #include <linux/trusty/trusty.h>
 #include "trusty-sched-share.h"
 
+#define DEBUG
+
+#define TRUSTY_SCHED_SHARE_DEBUGFS (1)
+
+#if TRUSTY_SCHED_SHARE_DEBUGFS
+#include <linux/debugfs.h>
+#endif /* TRUSTY_SCHED_SHARE_DEBUGFS */
+
 /**
  * struct trusty_sched_share_state - Trusty share resources state local to Trusty-Driver
  * @dev: ptr to the trusty-device instance
@@ -22,6 +30,8 @@
  * @mem_size: size of trusty shared-memory block in bytes
  * @buf_size: page-aligned size of trusty shared-memory buffer in bytes
  * @num_pages: number of pages containing the allocated shared-memory buffer
+ * @debugfs_dir: used for exposing trusty-share information to debugfs
+ * @debugfs_file: file in the debugfs directory to expose the per-cpu shadow priorities
  */
 struct trusty_sched_share_state {
 	struct device *dev;
@@ -31,7 +41,16 @@ struct trusty_sched_share_state {
 	u32 mem_size;
 	u32 buf_size;
 	u32 num_pages;
+#if TRUSTY_SCHED_SHARE_DEBUGFS
+	struct dentry *debugfs_dir;
+	struct dentry *debugfs_file;
+#endif /* TRUSTY_SCHED_SHARE_DEBUGFS */
 };
+
+#if TRUSTY_SCHED_SHARE_DEBUGFS
+static void trusty_sched_share_debugfs_init(struct trusty_sched_share_state *share_state);
+static void trusty_sched_share_debugfs_fini(struct trusty_sched_share_state *share_state);
+#endif /* TRUSTY_SCHED_SHARE_DEBUGFS */
 
 static int
 trusty_sched_share_resources_allocate(struct trusty_sched_share_state *share_state)
@@ -67,8 +86,9 @@ trusty_sched_share_resources_allocate(struct trusty_sched_share_state *share_sta
 		goto err_rsrc_alloc_mem;
 	}
 	share_state->sched_shared_vm = mem;
-	dev_dbg(share_state->dev, "%s: sched_shared_vm=%p  size=%d\n",
-		__func__, share_state->sched_shared_vm, share_state->buf_size);
+	dev_dbg(share_state->dev, "%s: sched_shared_vm=0x%llx  size=%d\n",
+		__func__, (unsigned long long)share_state->sched_shared_vm,
+		share_state->buf_size);
 
 	sg_init_table(share_state->sg, share_state->num_pages);
 	for_each_sg(share_state->sg, sg, share_state->num_pages, i) {
@@ -76,7 +96,7 @@ trusty_sched_share_resources_allocate(struct trusty_sched_share_state *share_sta
 
 		if (!pg) {
 			result = -ENOMEM;
-			goto err_rsrc_sg_lookup;
+			goto err_rsrc_alloc_page;
 		}
 		sg_set_page(sg, pg, PAGE_SIZE, 0);
 	}
@@ -99,7 +119,7 @@ trusty_sched_share_resources_allocate(struct trusty_sched_share_state *share_sta
 	return result;
 
 err_rsrc_share_mem:
-err_rsrc_sg_lookup:
+err_rsrc_alloc_page:
 	vfree(share_state->sched_shared_vm);
 err_rsrc_alloc_mem:
 	kfree(share_state->sg);
@@ -151,6 +171,10 @@ struct trusty_sched_share_state *trusty_register_sched_share(struct device *devi
 	dev_dbg(device, "%s: sched_share_state=%llx\n", __func__,
 		(u64)sched_share_state);
 
+#if TRUSTY_SCHED_SHARE_DEBUGFS
+	trusty_sched_share_debugfs_init(sched_share_state);
+#endif /* TRUSTY_SCHED_SHARE_DEBUGFS */
+
 	return sched_share_state;
 
 err_smc_std_call32:
@@ -187,6 +211,10 @@ void trusty_unregister_sched_share(struct trusty_sched_share_state *sched_share_
 	if (!sched_share_state)
 		return;
 
+#if TRUSTY_SCHED_SHARE_DEBUGFS
+	trusty_sched_share_debugfs_fini(sched_share_state);
+#endif /* TRUSTY_SCHED_SHARE_DEBUGFS */
+
 	/* ask Trusty to release the Trusty-side resources */
 	result = trusty_std_call32(
 		sched_share_state->dev, SMC_SC_SCHED_SHARE_UNREGISTER,
@@ -218,3 +246,85 @@ void trusty_unregister_sched_share(struct trusty_sched_share_state *sched_share_
 	kfree(sched_share_state->sg);
 	kfree(sched_share_state);
 }
+
+#if TRUSTY_SCHED_SHARE_DEBUGFS
+
+struct shprio_value {
+	struct trusty_percpu_data *percpu_data;
+	u32 cur_value;
+	u32 ask_value;
+};
+
+static void trusty_sched_share_debugfs_get(void *value_ptr)
+{
+	struct shprio_value *vptr = value_ptr;
+
+	vptr->cur_value = vptr->percpu_data->cur_shadow_priority;
+	vptr->ask_value = vptr->percpu_data->ask_shadow_priority;
+}
+
+static int trusty_sched_share_debugfs_show(struct seq_file *s, void *data)
+{
+	struct trusty_sched_shared *sched_shared;
+	unsigned char *share_ptr;
+	int result;
+	int i;
+
+	sched_shared = (struct trusty_sched_shared *)(s->private);
+	share_ptr = (unsigned char *)sched_shared;
+
+	for (i = 0; i < sched_shared->cpu_count; i++) {
+		struct shprio_value prio_value;
+
+		prio_value.percpu_data =
+			(struct trusty_percpu_data *)
+				 (share_ptr + sched_shared->hdr_size +
+				    (i * sched_shared->percpu_data_size));
+		result = smp_call_function_single(i, trusty_sched_share_debugfs_get,
+						  (void *)&prio_value, 1);
+		if (result != 0) {
+			/* set a value that indicates an error in reading */
+			prio_value.cur_value = TRUSTY_SHADOW_PRIORITY_HIGH + 1;
+			prio_value.ask_value = TRUSTY_SHADOW_PRIORITY_HIGH + 1;
+		}
+
+		seq_printf(s, "cpu[%d]: cur_priority=%d ask_priority=%d\n", i,
+			   prio_value.cur_value, prio_value.ask_value);
+	}
+	return 0;
+}
+
+DEFINE_SHOW_ATTRIBUTE(trusty_sched_share_debugfs);
+
+static void trusty_sched_share_debugfs_init(struct trusty_sched_share_state *share_state)
+{
+	share_state->debugfs_dir = debugfs_create_dir("trusty-sched-share", NULL);
+	if (!share_state->debugfs_dir) {
+		pr_warn("Error creating debugfs dir for trusty-share\n");
+		goto err_debugfs_dir;
+	}
+	share_state->debugfs_file = debugfs_create_file(
+		"shadow-priority", 0444, share_state->debugfs_dir,
+		share_state->sched_shared_vm, &trusty_sched_share_debugfs_fops);
+	if (!share_state->debugfs_file) {
+		pr_warn("Error creating shadow-priority file in debugfs dir for trusty-share\n");
+		goto err_debugfs_file;
+	}
+	dev_info(share_state->dev,
+		 "*** %s: 'debugfs_dir' and 'debugfs_file' created, shared-mem=0x%llx\n",
+		 __func__, (unsigned long long)share_state->sched_shared_vm);
+	return;
+
+err_debugfs_file:
+	debugfs_remove_recursive(share_state->debugfs_dir);
+	share_state->debugfs_dir = NULL;
+err_debugfs_dir:
+	share_state->debugfs_file = NULL;
+}
+
+static void trusty_sched_share_debugfs_fini(struct trusty_sched_share_state *share_state)
+{
+	debugfs_remove_recursive(share_state->debugfs_dir);
+}
+
+#endif /* TRUSTY_SCHED_SHARE_DEBUGFS */
