@@ -34,6 +34,24 @@
       "parentUuid": "67eb8872_2bd25c0e",
       "revId": "bba87a101b0d4367f1c43838d881acfe68840e83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f62b5d_d52b36ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-21T18:26:20Z",
+      "side": 1,
+      "message": "Can you respond on the upstream patch with some numbers for how this benefits your use-case (use % improvement if you are uncomfortable with actual numbers for your device). Patches that clearly benefit the Android community should be upstream - not carried in ACK kernels. If you want this patch in the future, then help it land upstream.",
+      "parentUuid": "14ed5744_0b82a5e8",
+      "revId": "bba87a101b0d4367f1c43838d881acfe68840e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
