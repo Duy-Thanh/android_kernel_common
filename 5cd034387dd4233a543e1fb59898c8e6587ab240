@@ -16,6 +16,24 @@
       "message": "Why is this needed now?  Why not fix the driver to properly have the remove function?",
       "revId": "5cd034387dd4233a543e1fb59898c8e6587ab240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65470dfb_41bdb034",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1980812
+      },
+      "writtenOn": "2022-12-21T05:44:34Z",
+      "side": 1,
+      "message": "Hi Greg, I have replied to your comments on the upstream patch for the same change. The remove function would not actually be needed for our QCOM SPMI PMIC driver as there are no explicit cleanups needed, it would effectively be an empty function. This seems to be the better change to make architecturally as a remove function might not always be needed.\n\nI can also see some other buses having similar checks for remove API in their drivers:\n\nAMBA example: \nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/amba/bus.c#n328\n\nPCI example: \nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/pci/pci-driver.c#n474\n\nI have uploaded the same change here: https://lore.kernel.org/all/1671601032-18397-2-git-send-email-quic_jprakash@quicinc.com/T/#u with commit text updated as you mentioned, can you please have a look?",
+      "parentUuid": "11d46d1a_3c10522d",
+      "revId": "5cd034387dd4233a543e1fb59898c8e6587ab240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
