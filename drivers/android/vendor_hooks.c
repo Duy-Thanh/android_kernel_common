@@ -5,6 +5,7 @@
  *
  * Copyright 2020 Google LLC
  */
+#include <linux/iova.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/hooks/vendor_hooks.h>
@@ -58,6 +59,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_undef);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_hw_protection_shutdown);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_dma_info_to_prot);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_iovad_init_alloc_algo);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_logbuf);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_panic_unhandled);
