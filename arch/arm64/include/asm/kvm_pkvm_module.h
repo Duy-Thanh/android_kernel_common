@@ -39,10 +39,19 @@ struct pkvm_el2_module {
 	int (*init)(const struct pkvm_module_ops *ops);
 };
 
-#ifdef MODULE
 int __pkvm_load_el2_module(struct pkvm_el2_module *mod, struct module *this,
 			   unsigned long *token);
 
+<<<<<<< HEAD   (602558 Merge "Merge remote-tracking branch 'aosp/upstream-f2fs-stab)
+=======
+int __pkvm_register_el2_call(dyn_hcall_t hfn, unsigned long token,
+			     unsigned long hyp_text_kern_va);
+#ifdef MODULE
+/*
+ * function_nocfi() does not work with function pointers, hence the macro in
+ * lieu of a function.
+ */
+>>>>>>> CHANGE (efdbab ANDROID: KVM: arm64: Always declare pKVM module loading func)
 #define pkvm_load_el2_module(init_fn, token)				\
 ({									\
 	extern char __kvm_nvhe___hypmod_text_start[];			\
@@ -72,9 +81,6 @@ int __pkvm_load_el2_module(struct pkvm_el2_module *mod, struct module *this,
 									\
 	__pkvm_load_el2_module(&mod, THIS_MODULE, token);		\
 })
-
-int __pkvm_register_el2_call(dyn_hcall_t hfn, unsigned long token,
-			     unsigned long hyp_text_kern_va);
 
 #define pkvm_register_el2_mod_call(hfn, token)				\
 ({									\
