@@ -16,6 +16,24 @@
       "message": "Please add a patch to add the hook symbols to your symbol list (separate patch submitted along with this one)",
       "revId": "08737d99258eff963e2110c87039cedef696b483",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2804cc1a_caa1bb9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1893826
+      },
+      "writtenOn": "2022-12-23T03:31:12Z",
+      "side": 1,
+      "message": "Do we have symbol list file for now? It seems android/abi_gki_aarch64_qcom is not exist?",
+      "parentUuid": "8f4ec3f0_b9ce1622",
+      "revId": "08737d99258eff963e2110c87039cedef696b483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
