@@ -16,6 +16,24 @@
       "message": "Please use what is being accepted upstream, this patch was rejected.",
       "revId": "adb6d4f52c97b0c8b47ed2479cb8fc071b063e5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b828957_58cc47fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576997
+      },
+      "writtenOn": "2022-12-23T07:33:35Z",
+      "side": 1,
+      "message": "@gregkh@google.com\n\nDo you mean we should backport the below patch?\n\nhttps://lore.kernel.org/lkml/20221209140150.1453-1-johan+linaro@kernel.org/\n\nThis patch seems not accepted yet, so I just want to make sure about that.\nThen I\u0027ll try to backport it as a FROMLIST solution.",
+      "parentUuid": "b6b59b0c_90a0777f",
+      "revId": "adb6d4f52c97b0c8b47ed2479cb8fc071b063e5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
