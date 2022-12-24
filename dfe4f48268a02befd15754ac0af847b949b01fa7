@@ -16,6 +16,24 @@
       "message": "How are you generating the symbols? Vendor hooks must have two symbols declared in the symbol-list. You have `__tracepoint_android_vh_gic_suspend`, but not `__traceiter_android_vh_gic_suspend` which is needed for KMI stability.\n\nPlease generate the symbol-list correctly. See https://source.android.com/docs/core/architecture/kernel/abi-monitor#work-with-sym-lists",
       "revId": "dfe4f48268a02befd15754ac0af847b949b01fa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3213a13_5d687b8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973577
+      },
+      "writtenOn": "2022-12-24T03:16:07Z",
+      "side": 1,
+      "message": "Thanks for pointing this, i have missed to add __traceiter_android_vh_gic_suspend.\ni have fixed and updated in new patchset.",
+      "parentUuid": "d6c6946c_f3e07958",
+      "revId": "dfe4f48268a02befd15754ac0af847b949b01fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
