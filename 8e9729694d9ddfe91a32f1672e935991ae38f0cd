@@ -16,6 +16,23 @@
       "message": "BUG No. has been updated",
       "revId": "8e9729694d9ddfe91a32f1672e935991ae38f0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "919a6fba_ab719627",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951960
+      },
+      "writtenOn": "2022-12-26T03:38:05Z",
+      "side": 1,
+      "message": "Respin Bug: b/263683959",
+      "revId": "8e9729694d9ddfe91a32f1672e935991ae38f0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
