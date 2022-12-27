@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1fe12b7_a339f127",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-12-27T20:39:01Z",
+      "side": 1,
+      "message": "Don\u0027t we need to update symbol files if the CL exports new function?",
+      "revId": "6b7bac927457f8a478a3b98d2046086c25bd8b5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
