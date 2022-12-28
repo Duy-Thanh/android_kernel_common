@@ -16,6 +16,24 @@
       "message": "Please ensure you have refreshed the XML using LTO\u003dfull.\n\nSid, Todd: ABI fidelity issue here, let\u0027s hope it\u0027s just an LTO thing. I will check the build-generated ABI later today.",
       "revId": "2a10ba2c6a6755e2f24f31ac4dbd034b8d50d0b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c4b531_16594d1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-12-28T11:42:50Z",
+      "side": 1,
+      "message": "There is no need to check the LTO level.\n\nThe generated and committed XML match (at both parent and current commit).\n\nSo this is a confirmed fidelity issue:\n\n```\ntype \u0027struct mtd_info\u0027 changed\n  was fully defined, is now only declared\n\n```\n\nTodd can decide whether covering this type (and its dependencies) is needed.",
+      "parentUuid": "ea4a11f4_840a3f06",
+      "revId": "2a10ba2c6a6755e2f24f31ac4dbd034b8d50d0b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
