@@ -126,6 +126,8 @@ struct mem_cgroup_per_node {
 	bool			on_tree;
 	struct mem_cgroup	*memcg;		/* Back pointer, we cannot */
 						/* use container_of	   */
+	ANDROID_OEM_DATA(1);
+	ANDROID_OEM_DATA(2);
 };
 
 struct mem_cgroup_threshold {
