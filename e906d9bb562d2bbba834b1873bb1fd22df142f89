@@ -16,6 +16,23 @@
       "message": "update bug id and fix conflict in patch2",
       "revId": "e906d9bb562d2bbba834b1873bb1fd22df142f89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba5cd02_df0feaab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2022-12-29T04:35:02Z",
+      "side": 1,
+      "message": "Respin Bug: b/263349133",
+      "revId": "e906d9bb562d2bbba834b1873bb1fd22df142f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
