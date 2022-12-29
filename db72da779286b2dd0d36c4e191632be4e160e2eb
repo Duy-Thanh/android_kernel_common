@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d46d927_9bdc8ee6",
+        "filename": "mm/vmstat.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-12-29T18:03:14Z",
+      "side": 1,
+      "message": "This is a UAPI change. We can\u0027t do that without upstreaming first.",
+      "range": {
+        "startLine": 1164,
+        "startChar": 2,
+        "endLine": 1164,
+        "endChar": 18
+      },
+      "revId": "db72da779286b2dd0d36c4e191632be4e160e2eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
