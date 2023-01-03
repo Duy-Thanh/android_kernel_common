@@ -5084,6 +5084,8 @@ static int ufshcd_slave_alloc(struct scsi_device *sdev)
 		blk_queue_flag_set(QUEUE_FLAG_SUB_PAGE_SEGMENTS,
 				   sdev->request_queue);
 
+        blk_queue_max_segment_size(sdev->request_queue, 4096);
+
 	ufshcd_set_queue_depth(sdev);
 
 	ufshcd_get_lu_power_on_wp_status(hba, sdev);
