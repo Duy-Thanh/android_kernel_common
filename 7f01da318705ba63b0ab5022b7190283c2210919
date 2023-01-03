@@ -50,6 +50,24 @@
       "message": "What about Android 11?",
       "revId": "7f01da318705ba63b0ab5022b7190283c2210919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48bbb9eb_8a336f38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-03T17:09:56Z",
+      "side": 1,
+      "message": "Ignore this one.",
+      "parentUuid": "27c36923_ce3fe712",
+      "revId": "7f01da318705ba63b0ab5022b7190283c2210919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
