@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0c402b9_65e5b783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-03T18:36:16Z",
+      "side": 1,
+      "message": "I think you need to update ABI representation as well. Please post a follow-up patch updating the symbol list and the ABI xml.",
+      "revId": "b02d410f72c776bcaf4b2b0c7903e1f13852435c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
