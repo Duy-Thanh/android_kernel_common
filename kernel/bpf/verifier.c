@@ -23,6 +23,10 @@
 #include <linux/bpf_lsm.h>
 #include <linux/btf_ids.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/bpf.h>
+#include <trace/hooks/memory.h>
+
 #include "disasm.h"
 
 static const struct bpf_verifier_ops * const bpf_verifier_ops[] = {
@@ -12531,6 +12535,8 @@ static int jit_subprogs(struct bpf_verifier_env *env)
 	 */
 	for (i = 0; i < env->subprog_cnt; i++) {
 		bpf_prog_lock_ro(func[i]);
+		trace_android_vh_set_permit_after_jit_compile(
+				(void *)func[i], func[i]->pages);
 		bpf_prog_kallsyms_add(func[i]);
 	}
 
@@ -12575,6 +12581,8 @@ out_free:
 		if (!func[i])
 			continue;
 		func[i]->aux->poke_tab = NULL;
+		trace_android_vh_set_memory_rw((unsigned long)func[i], func[i]->pages);
+		trace_android_vh_set_memory_nx((unsigned long)func[i], func[i]->pages);
 		bpf_jit_free(func[i]);
 	}
 	kfree(func);
