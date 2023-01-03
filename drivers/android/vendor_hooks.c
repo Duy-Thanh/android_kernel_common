@@ -78,6 +78,7 @@
 #include <trace/hooks/creds.h>
 #include <trace/hooks/memory.h>
 #include <trace/hooks/module.h>
+#include <trace/hooks/bpf.h>
 #ifdef __GENKSYMS__
 #include <trace/hooks/selinux.h>
 #endif
@@ -266,6 +267,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_check_panic);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_mmap_file);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_bpf_syscall);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_permit_after_jit_compile);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);

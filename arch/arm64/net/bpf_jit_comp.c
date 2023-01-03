@@ -19,6 +19,9 @@
 #include <asm/insn.h>
 #include <asm/set_memory.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/bpf.h>
+
 #include "bpf_jit.h"
 
 #define TMP_REG_1 (MAX_BPF_JIT_REG + 0)
@@ -1120,6 +1123,8 @@ skip_init_ctx:
 			goto out_off;
 		}
 		bpf_jit_binary_lock_ro(header);
+		trace_android_vh_set_permit_after_jit_compile(
+				header, header->pages);
 	} else {
 		jit_data->ctx = ctx;
 		jit_data->image = image_ptr;
