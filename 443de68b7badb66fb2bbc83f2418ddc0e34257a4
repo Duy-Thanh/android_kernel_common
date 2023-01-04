@@ -16,6 +16,24 @@
       "message": "Hi Huang,\n\nCould you please apply this to android12-5.10 and then cherry pick it to this branch (keeping the change ID). In addition to the KernelCommit warning, I think that is also the source of the ABI check errors.",
       "revId": "443de68b7badb66fb2bbc83f2418ddc0e34257a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d11f81d0_2ea3272b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2023-01-04T03:16:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfd23c70_c88f7959",
+      "revId": "443de68b7badb66fb2bbc83f2418ddc0e34257a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
