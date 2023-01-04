@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ad9040_4577253e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2023-01-04T19:08:12Z",
+      "side": 1,
+      "message": "Thanks Lee for narrowing the breakage! A VTS test case failure will be taken care of by test filter config change.",
+      "revId": "688d8438bc116ea691c132c31216c665bdeeb943",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
