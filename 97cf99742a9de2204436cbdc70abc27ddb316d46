@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "322c9c39_75468db1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-01-04T11:04:23Z",
+      "side": 1,
+      "message": "\u003e Commit does not refer to the upstream commit.\n\u003e Please add a line like \u0027(cherry picked from commit \u003csha1\u003e)\u0027.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "7c8e3bda_4f32e84f",
+      "revId": "97cf99742a9de2204436cbdc70abc27ddb316d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a509068_8d008e77",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-01-04T11:04:23Z",
+      "side": 1,
+      "message": "This is a KMI frozen branch. Incompatible changes to the ABI are no longer acceptable. Please rework the patch in a non-ABI-breaking way if you still need it.",
+      "revId": "97cf99742a9de2204436cbdc70abc27ddb316d46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
