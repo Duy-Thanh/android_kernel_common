@@ -1132,6 +1132,7 @@
   oops_in_progress
   page_endio
   page_mapping
+  PageMovable
   panic
   panic_notifier_list
   param_array_ops
