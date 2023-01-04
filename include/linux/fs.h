@@ -42,7 +42,10 @@
 #include <linux/mount.h>
 #include <linux/cred.h>
 #include <linux/mnt_idmapping.h>
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 #include <linux/android_kabi.h>
+=======
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 
 #include <asm/byteorder.h>
 #include <uapi/linux/fs.h>
@@ -1675,7 +1678,11 @@ static inline void i_gid_write(struct inode *inode, gid_t gid)
 static inline kuid_t i_uid_into_mnt(struct user_namespace *mnt_userns,
 				    const struct inode *inode)
 {
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 	return mapped_kuid_fs(mnt_userns, i_user_ns(inode), inode->i_uid);
+=======
+	return mapped_kuid_fs(mnt_userns, &init_user_ns, inode->i_uid);
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 }
 
 /**
@@ -1689,7 +1696,11 @@ static inline kuid_t i_uid_into_mnt(struct user_namespace *mnt_userns,
 static inline kgid_t i_gid_into_mnt(struct user_namespace *mnt_userns,
 				    const struct inode *inode)
 {
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 	return mapped_kgid_fs(mnt_userns, i_user_ns(inode), inode->i_gid);
+=======
+	return mapped_kgid_fs(mnt_userns, &init_user_ns, inode->i_gid);
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 }
 
 /**
@@ -1738,10 +1749,17 @@ static inline bool fsuidgid_has_mapping(struct super_block *sb,
 	kuid_t kuid;
 	kgid_t kgid;
 
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 	kuid = mapped_fsuid(mnt_userns, fs_userns);
 	if (!uid_valid(kuid))
 		return false;
 	kgid = mapped_fsgid(mnt_userns, fs_userns);
+=======
+	kuid = mapped_fsuid(mnt_userns);
+	if (!uid_valid(kuid))
+		return false;
+	kgid = mapped_fsgid(mnt_userns);
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 	if (!gid_valid(kgid))
 		return false;
 	return kuid_has_mapping(fs_userns, kuid) &&
@@ -2716,6 +2734,7 @@ static inline struct user_namespace *file_mnt_user_ns(struct file *file)
  * is_idmapped_mnt - check whether a mount is mapped
  * @mnt: the mount to check
  *
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
  * If @mnt has an idmapping attached different from the
  * filesystem's idmapping then @mnt is mapped.
  *
@@ -2724,6 +2743,15 @@ static inline struct user_namespace *file_mnt_user_ns(struct file *file)
 static inline bool is_idmapped_mnt(const struct vfsmount *mnt)
 {
 	return mnt_user_ns(mnt) != mnt->mnt_sb->s_user_ns;
+=======
+ * If @mnt has an idmapping attached to it @mnt is mapped.
+ *
+ * Return: true if mount is mapped, false if not.
+ */
+static inline bool is_idmapped_mnt(const struct vfsmount *mnt)
+{
+	return mnt_user_ns(mnt) != &init_user_ns;
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 }
 
 extern long vfs_truncate(const struct path *, loff_t);

@@ -421,7 +421,11 @@ int cap_inode_getsecurity(struct user_namespace *mnt_userns,
 	kroot = make_kuid(fs_ns, root);
 
 	/* If this is an idmapped mount shift the kuid. */
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 	kroot = mapped_kuid_fs(mnt_userns, fs_ns, kroot);
+=======
+	kroot = mapped_kuid_fs(mnt_userns, &init_user_ns, kroot);
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 
 	/* If the root kuid maps to a valid uid in current ns, then return
 	 * this as a nscap. */
@@ -563,7 +567,12 @@ int cap_convert_nscap(struct user_namespace *mnt_userns, struct dentry *dentry,
 			/* user is privileged, just write the v2 */
 			return size;
 
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 	rootid = rootid_from_xattr(*ivalue, size, task_ns, mnt_userns, fs_ns);
+=======
+	rootid = rootid_from_xattr(*ivalue, size, task_ns, mnt_userns,
+				   &init_user_ns);
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 	if (!uid_valid(rootid))
 		return -EINVAL;
 
@@ -704,7 +713,11 @@ int get_vfs_caps_from_disk(struct user_namespace *mnt_userns,
 	/* Limit the caps to the mounter of the filesystem
 	 * or the more limited uid specified in the xattr.
 	 */
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 	rootkuid = mapped_kuid_fs(mnt_userns, fs_ns, rootkuid);
+=======
+	rootkuid = mapped_kuid_fs(mnt_userns, &init_user_ns, rootkuid);
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 	if (!rootid_owns_currentns(rootkuid))
 		return -ENODATA;
 

@@ -377,8 +377,13 @@ posix_acl_permission(struct user_namespace *mnt_userns, struct inode *inode,
                                 break;
                         case ACL_USER:
 				uid = mapped_kuid_fs(mnt_userns,
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 						     i_user_ns(inode),
 						     pa->e_uid);
+=======
+						      &init_user_ns,
+						      pa->e_uid);
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 				if (uid_eq(uid, current_fsuid()))
                                         goto mask;
 				break;
@@ -392,8 +397,13 @@ posix_acl_permission(struct user_namespace *mnt_userns, struct inode *inode,
 				break;
                         case ACL_GROUP:
 				gid = mapped_kgid_fs(mnt_userns,
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 						     i_user_ns(inode),
 						     pa->e_gid);
+=======
+						      &init_user_ns,
+						      pa->e_gid);
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 				if (in_group_p(gid)) {
 					found = 1;
 					if ((pa->e_perm & want) == want)
