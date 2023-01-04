@@ -905,6 +905,11 @@ int wiphy_register(struct wiphy *wiphy)
 				rdev->wiphy.wowlan->pattern_max_len)))
 		return -EINVAL;
 #endif
+	if (!wiphy->max_num_akm_suites)
+		wiphy->max_num_akm_suites = NL80211_MAX_NR_AKM_SUITES;
+	else if (wiphy->max_num_akm_suites < NL80211_MAX_NR_AKM_SUITES ||
+		 wiphy->max_num_akm_suites > CFG80211_MAX_NUM_AKM_SUITES)
+		return -EINVAL;
 
 	/* check and set up bitrates */
 	ieee80211_set_bitrate_flags(wiphy);

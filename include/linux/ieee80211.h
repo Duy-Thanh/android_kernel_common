@@ -3857,4 +3857,6 @@ struct ieee80211_neighbor_ap_info {
        u8 channel;
 } __packed;
 
+/* multi-link device */
+#define IEEE80211_MLD_MAX_NUM_LINKS	15
 #endif /* LINUX_IEEE80211_H */
