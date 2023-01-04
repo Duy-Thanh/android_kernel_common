@@ -654,9 +654,8 @@ int chown_common(const struct path *path, uid_t user, gid_t group)
 	gid = make_kgid(current_user_ns(), group);
 
 	mnt_userns = mnt_user_ns(path->mnt);
-	fs_userns = i_user_ns(inode);
-	uid = mapped_kuid_user(mnt_userns, fs_userns, uid);
-	gid = mapped_kgid_user(mnt_userns, fs_userns, gid);
+	uid = mapped_kuid_user(mnt_userns, &init_user_ns, uid);
+	gid = mapped_kgid_user(mnt_userns, &init_user_ns, gid);
 
 retry_deleg:
 	newattrs.ia_valid =  ATTR_CTIME;
