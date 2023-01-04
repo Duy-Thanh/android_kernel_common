@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c0965d3_fbd91821",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1066944
+      },
+      "writtenOn": "2023-01-04T04:27:39Z",
+      "side": 1,
+      "message": "This fixes Change-Id: Ie365179ac296c43c7c5c54b46f9f9f7587d5d263.\n\nWasn\u0027t sure if I were to mention it directly in the commit message as upstream doesn\u0027t as well.\n\nThanks.",
+      "revId": "bcad58f5424d75145aec6c3652ee5ac4efa2aa87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
