@@ -196,6 +196,7 @@ static inline kgid_t mapped_kgid_user(struct user_namespace *mnt_userns,
 /**
  * mapped_fsuid - return caller's fsuid mapped up into a mnt_userns
  * @mnt_userns: the mount's idmapping
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
  * @fs_userns: the filesystem's idmapping
  *
  * Use this helper to initialize a new vfs or filesystem object based on
@@ -229,6 +230,37 @@ static inline kgid_t mapped_fsgid(struct user_namespace *mnt_userns,
 				  struct user_namespace *fs_userns)
 {
 	return mapped_kgid_user(mnt_userns, fs_userns, current_fsgid());
+=======
+ *
+ * Use this helper to initialize a new vfs or filesystem object based on
+ * the caller's fsuid. A common example is initializing the i_uid field of
+ * a newly allocated inode triggered by a creation event such as mkdir or
+ * O_CREAT. Other examples include the allocation of quotas for a specific
+ * user.
+ *
+ * Return: the caller's current fsuid mapped up according to @mnt_userns.
+ */
+static inline kuid_t mapped_fsuid(struct user_namespace *mnt_userns)
+{
+	return mapped_kuid_user(mnt_userns, &init_user_ns, current_fsuid());
+}
+
+/**
+ * mapped_fsgid - return caller's fsgid mapped up into a mnt_userns
+ * @mnt_userns: the mount's idmapping
+ *
+ * Use this helper to initialize a new vfs or filesystem object based on
+ * the caller's fsgid. A common example is initializing the i_gid field of
+ * a newly allocated inode triggered by a creation event such as mkdir or
+ * O_CREAT. Other examples include the allocation of quotas for a specific
+ * user.
+ *
+ * Return: the caller's current fsgid mapped up according to @mnt_userns.
+ */
+static inline kgid_t mapped_fsgid(struct user_namespace *mnt_userns)
+{
+	return mapped_kgid_user(mnt_userns, &init_user_ns, current_fsgid());
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 }
 
 #endif /* _LINUX_MNT_IDMAPPING_H */

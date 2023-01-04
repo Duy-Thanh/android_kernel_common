@@ -39,6 +39,11 @@ const struct blk_crypto_mode blk_crypto_modes[] = {
 		.security_strength = 32,
 		.ivsize = 32,
 	},
+	[BLK_ENCRYPTION_MODE_SM4_XTS] = {
+		.cipher_str = "xts(sm4)",
+		.keysize = 32,
+		.ivsize = 16,
+	},
 };
 
 /*
@@ -384,6 +389,13 @@ bool blk_crypto_config_supported_natively(struct block_device *bdev,
 					  cfg);
 }
 
+bool blk_crypto_config_supported_natively(struct block_device *bdev,
+					  const struct blk_crypto_config *cfg)
+{
+	return __blk_crypto_cfg_supported(bdev_get_queue(bdev)->crypto_profile,
+					  cfg);
+}
+
 /*
  * Check if bios with @cfg can be en/decrypted by blk-crypto (i.e. either the
  * block_device it's submitted to supports inline crypto, or the
@@ -392,10 +404,15 @@ bool blk_crypto_config_supported_natively(struct block_device *bdev,
 bool blk_crypto_config_supported(struct block_device *bdev,
 				 const struct blk_crypto_config *cfg)
 {
+<<<<<<< HEAD   (3c7625 ANDROID: update "fscrypt: add support for hardware-wrapped k)
 	if (IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK) &&
 	    cfg->key_type == BLK_CRYPTO_KEY_TYPE_STANDARD)
 		return true;
 	return blk_crypto_config_supported_natively(bdev, cfg);
+=======
+	return IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK) ||
+	       blk_crypto_config_supported_natively(bdev, cfg);
+>>>>>>> BRANCH (03c9b7 fsverity: simplify fsverity_get_digest())
 }
 
 /**
