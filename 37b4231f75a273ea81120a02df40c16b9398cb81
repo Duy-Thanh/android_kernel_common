@@ -16,6 +16,29 @@
       "message": "Please provide more description. Why does the bio need to be updated here and why can\u0027t that feature be added upstream?",
       "revId": "37b4231f75a273ea81120a02df40c16b9398cb81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64d48908_98c2718a",
+        "filename": "include/trace/hooks/direct_io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-04T22:04:19Z",
+      "side": 1,
+      "message": "please remove this section. There shouldn\u0027t be any inclusion of kernel headers for definitions. Instead use:\n\nIf necessary for KMI visibility we can include these files from vendor_hooks.c.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 6
+      },
+      "revId": "37b4231f75a273ea81120a02df40c16b9398cb81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
