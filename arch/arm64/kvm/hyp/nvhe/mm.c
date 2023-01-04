@@ -73,7 +73,7 @@ int pkvm_alloc_private_va_range(size_t size, unsigned long *haddr)
 	if (!addr || cur > __hyp_vmemmap || (cur - __private_range_base) > __PKVM_PRIVATE_SZ) {
 		ret = -ENOMEM;
 	} else {
-		__private_range_cur = cur;
+		WRITE_ONCE(__private_range_cur, cur);
 		*haddr = addr;
 	}
 
@@ -116,7 +116,14 @@ void *__pkvm_alloc_module_va(u64 nr_pages)
 
 int __pkvm_map_module_page(u64 pfn, void *va, enum kvm_pgtable_prot prot)
 {
+	unsigned long addr = (unsigned long)va;
 	int ret = -EACCES;
+
+	/*
+	 * Best-effort sanity check that the given VA is in the allocated
+	 * private range. The range only grows, so don't bother locking.
+	 */
+	WARN_ON(addr < __private_range_base || READ_ONCE(__private_range_cur) <= addr);
 
 	pkvm_modules_lock();
 
@@ -127,7 +134,7 @@ int __pkvm_map_module_page(u64 pfn, void *va, enum kvm_pgtable_prot prot)
 	if (ret)
 		goto err;
 
-	ret = __pkvm_create_mappings((unsigned long)va, PAGE_SIZE, hyp_pfn_to_phys(pfn), prot);
+	ret = __pkvm_create_mappings(addr, PAGE_SIZE, hyp_pfn_to_phys(pfn), prot);
 err:
 	pkvm_modules_unlock();
 
