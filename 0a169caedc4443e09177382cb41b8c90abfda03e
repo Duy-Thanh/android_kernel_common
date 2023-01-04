@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8c0d3b2_6df873f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-04T19:04:37Z",
+      "side": 1,
+      "message": "Please also pick up follow-up SPF fixes from https://android-review.git.corp.google.com/q/topic:%22spf_race_fix5.15%22.",
+      "revId": "0a169caedc4443e09177382cb41b8c90abfda03e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
