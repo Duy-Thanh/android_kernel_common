@@ -33,6 +33,24 @@
       "message": "Why isn\u0027t this in an upstream 5.10 stable release instead?",
       "revId": "bcad58f5424d75145aec6c3652ee5ac4efa2aa87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ff2aa3_1dc0c6f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1066944
+      },
+      "writtenOn": "2023-01-05T14:28:35Z",
+      "side": 1,
+      "message": "The original commit 4c1ad562d303 (\"remoteproc: Add a rproc_set_firmware() API\") was introduced with v5.11 and was backported to ACK v5.10 with Change-Id: Ie365179ac296c43c7c5c54b46f9f9f7587d5d263, presumably with Qualcomm\u0027s request.\n\nThe subsequent fix (this commit) was merged with v5.12 so stable 5.15 is fine.",
+      "parentUuid": "585cf50b_06f9ad3d",
+      "revId": "bcad58f5424d75145aec6c3652ee5ac4efa2aa87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
