@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "098a50a6_69a90a7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-05T14:20:38Z",
+      "side": 1,
+      "message": "still not really needed, just fix the offending driver for now until upstream takes this please.",
+      "revId": "72a6878a6a9d584018a49ac7634e3553a72d4be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
