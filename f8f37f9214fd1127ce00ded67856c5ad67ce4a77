@@ -34,6 +34,24 @@
       "parentUuid": "49f01bd7_18f8d47b",
       "revId": "f8f37f9214fd1127ce00ded67856c5ad67ce4a77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96655d02_b9ec7c86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-05T14:11:18Z",
+      "side": 1,
+      "message": "Please work with upstream to get the full series accepted first (and fix this one.)",
+      "parentUuid": "ddb00d52_73327ffa",
+      "revId": "f8f37f9214fd1127ce00ded67856c5ad67ce4a77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
