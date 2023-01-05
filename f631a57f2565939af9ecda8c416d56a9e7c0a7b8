@@ -16,6 +16,24 @@
       "message": "Please add more detail here. Commit message should answer these questions:\n\nWhy is this flag needed? Give a concrete example.\nWhy shouldn\u0027t this feature be implemented upstream?",
       "revId": "f631a57f2565939af9ecda8c416d56a9e7c0a7b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c3b6364_599c61be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1759937
+      },
+      "writtenOn": "2023-01-05T04:31:31Z",
+      "side": 1,
+      "message": "I updated the message.",
+      "parentUuid": "32e6cae2_d9d1c593",
+      "revId": "f631a57f2565939af9ecda8c416d56a9e7c0a7b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
