@@ -22,6 +22,30 @@
       },
       "revId": "4c77cf9b6bfcb50c929c31b7ddd5624cd8467512",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "853e74b7_572982ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2023-01-05T22:47:51Z",
+      "side": 1,
+      "message": "Updated the description and fixed the typo. Thanks",
+      "parentUuid": "e062cb5c_6b0e5b02",
+      "range": {
+        "startLine": 12,
+        "startChar": 12,
+        "endLine": 12,
+        "endChar": 17
+      },
+      "revId": "4c77cf9b6bfcb50c929c31b7ddd5624cd8467512",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
