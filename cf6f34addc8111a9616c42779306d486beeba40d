@@ -34,6 +34,24 @@
       "parentUuid": "723b557d_554333d4",
       "revId": "cf6f34addc8111a9616c42779306d486beeba40d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab4d8ba3_6261aa40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-05T14:10:57Z",
+      "side": 1,
+      "message": "Please work with upstream to resolve the reported problems and get them merged and then submit the full series here.",
+      "parentUuid": "05b79e1a_dc6e5d93",
+      "revId": "cf6f34addc8111a9616c42779306d486beeba40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
