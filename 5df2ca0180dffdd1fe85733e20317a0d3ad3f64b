@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae17447_3b06da6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-05T14:09:08Z",
+      "side": 1,
+      "message": "why not just take the whole commit instead?  Piece-meal like this is not going to go well when we have to merge the -lts branch in here.",
+      "revId": "5df2ca0180dffdd1fe85733e20317a0d3ad3f64b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
