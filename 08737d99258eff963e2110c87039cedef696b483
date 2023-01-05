@@ -34,6 +34,41 @@
       "parentUuid": "8f4ec3f0_b9ce1622",
       "revId": "08737d99258eff963e2110c87039cedef696b483",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0c92bbe_ba2c4c38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-05T18:34:43Z",
+      "side": 1,
+      "message": "You are right, we aren\u0027t enforcing KMI yet on 6.1.",
+      "parentUuid": "2804cc1a_caa1bb9c",
+      "revId": "08737d99258eff963e2110c87039cedef696b483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fff642d7_8b709e2b",
+        "filename": "kernel/time/timer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-05T18:34:43Z",
+      "side": 1,
+      "message": "why is this different from the previous version (aosp/1564662)?\n\nWhen re-applying a patch that came from a previous release, please use the same Change-Id or clearly cite the previous version of the patch.",
+      "revId": "08737d99258eff963e2110c87039cedef696b483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
