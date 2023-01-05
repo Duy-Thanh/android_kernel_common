@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0df50c8_eaa42446",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-05T18:19:05Z",
+      "side": 1,
+      "message": "Presubmits fail due to a KI: b/263272128",
+      "revId": "097796d7f45227774f21172ee64145c3ecc54d3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
