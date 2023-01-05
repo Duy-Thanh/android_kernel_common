@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d27926_6db94ee7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-05T09:12:01Z",
+      "side": 1,
+      "message": "CR-2 to prevent this from being merged -- as discussed on the bug, we could/should improve the pkvm_modules_lock() first.",
+      "revId": "42e6d821a0c9d9eddeb4d98f1f25a19c7b9bfde1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
