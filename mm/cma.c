@@ -216,6 +216,12 @@ int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
 	cma_area_count++;
 	totalcma_pages += (size / PAGE_SIZE);
 
+	/*
+	 * kmemleak scans/reads tracked objects for pointers to other
+	 * objects but this address isnt mapped and accessible
+	 */
+	kmemleak_ignore_phys(base);
+
 	return 0;
 }
 
