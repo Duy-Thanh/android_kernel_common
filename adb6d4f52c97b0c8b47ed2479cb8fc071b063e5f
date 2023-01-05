@@ -34,6 +34,24 @@
       "parentUuid": "b6b59b0c_90a0777f",
       "revId": "adb6d4f52c97b0c8b47ed2479cb8fc071b063e5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f89f1a8f_79c00e00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-05T14:25:44Z",
+      "side": 1,
+      "message": "thank you, please mirror what is accepted by upstream.",
+      "parentUuid": "5b828957_58cc47fb",
+      "revId": "adb6d4f52c97b0c8b47ed2479cb8fc071b063e5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
