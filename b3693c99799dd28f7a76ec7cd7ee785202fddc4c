@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a576b6_3222e523",
+        "filename": "kernel/bpf/verifier.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 12539,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-05T14:30:28Z",
+      "side": 1,
+      "message": "this is a structure, you can\u0027t export it like this and expect anything to continue to work after the next kernel update.",
+      "range": {
+        "startLine": 12539,
+        "startChar": 4,
+        "endLine": 12539,
+        "endChar": 19
+      },
+      "revId": "b3693c99799dd28f7a76ec7cd7ee785202fddc4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
