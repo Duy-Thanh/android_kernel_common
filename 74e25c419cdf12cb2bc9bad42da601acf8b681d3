@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a77c16d6_83e9d613",
+        "filename": "drivers/iommu/dma-iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-01-06T21:54:51Z",
+      "side": 1,
+      "message": "Previously, the device driver had to call a function to enable the best-fit algorithm for its IOVA domain. However, it seems like now you\u0027re going to invoke your hook for every IOVA domain. Are you planning on using the device structure somehow to tell you if best-fit needs to be used?",
+      "revId": "74e25c419cdf12cb2bc9bad42da601acf8b681d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
