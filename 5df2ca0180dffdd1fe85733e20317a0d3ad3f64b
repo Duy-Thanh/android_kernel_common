@@ -16,6 +16,24 @@
       "message": "why not just take the whole commit instead?  Piece-meal like this is not going to go well when we have to merge the -lts branch in here.",
       "revId": "5df2ca0180dffdd1fe85733e20317a0d3ad3f64b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff768245_62a71ac7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-06T08:16:29Z",
+      "side": 1,
+      "message": "This is the whole commit taken *directly* from the -lts branch:\n\n0f544353fec8e io_uring: kill goto error handling in io_sqpoll_wait_sq()",
+      "parentUuid": "eae17447_3b06da6e",
+      "revId": "5df2ca0180dffdd1fe85733e20317a0d3ad3f64b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
