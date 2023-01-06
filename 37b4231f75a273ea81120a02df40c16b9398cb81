@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d56a571_6160e2a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-06T17:19:38Z",
+      "side": 1,
+      "message": "still not resolved. Why does the OEM-specific field need to be updated? What feature is this associated with?",
+      "parentUuid": "90015e84_fe1fdcd8",
+      "revId": "37b4231f75a273ea81120a02df40c16b9398cb81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64d48908_98c2718a",
         "filename": "include/trace/hooks/direct_io.h",
         "patchSetId": 2
