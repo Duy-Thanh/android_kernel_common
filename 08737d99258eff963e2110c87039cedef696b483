@@ -87,6 +87,24 @@
       "parentUuid": "fff642d7_8b709e2b",
       "revId": "08737d99258eff963e2110c87039cedef696b483",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607cce29_bccb5cad",
+        "filename": "kernel/time/timer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-06T19:32:25Z",
+      "side": 1,
+      "message": "No, in that case just cite the original patch with it\u0027s aosp/XYZ or sha1.",
+      "parentUuid": "df45e210_df312f88",
+      "revId": "08737d99258eff963e2110c87039cedef696b483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
