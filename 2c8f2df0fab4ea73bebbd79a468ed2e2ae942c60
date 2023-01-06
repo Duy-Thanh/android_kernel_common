@@ -16,6 +16,24 @@
       "message": "Hi suren, we also have same issue here. when open large amount of apps, and use onekey clear to kill all apps. do we need get_task_struct here to prevent task destroyed? find_task_entry would use task-\u003epid",
       "revId": "2c8f2df0fab4ea73bebbd79a468ed2e2ae942c60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09d72562_0c496d4d",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2023-01-06T08:31:54Z",
+      "side": 1,
+      "message": "BTW, happy new year. waiting for your CL merged ❤️",
+      "parentUuid": "a865dd13_36461a01",
+      "revId": "2c8f2df0fab4ea73bebbd79a468ed2e2ae942c60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
