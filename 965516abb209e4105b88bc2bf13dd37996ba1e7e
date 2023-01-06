@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4341423_a17be94c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-01-06T18:02:06Z",
+      "side": 1,
+      "message": "Why not wait for LTS?  There should be no need to do anything special in Android for this fix.",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
