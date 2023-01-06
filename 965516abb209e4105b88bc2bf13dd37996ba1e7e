@@ -70,6 +70,24 @@
       "parentUuid": "727f65d8_286621a4",
       "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98062be0_2996b8d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-01-06T21:06:28Z",
+      "side": 1,
+      "message": "Okay, I didn\u0027t realize that you were backporting this because it Fixes a commit that was backported to this kernel branch.  That\u0027s fine then.\n\nIn parallel I think I\u0027m still going to get this included in 5.10 and 5.15 LTS, as it applies to there too.  It was ambiguous what to put in the Fixes tag (see the commit message).",
+      "parentUuid": "bfe6134b_acc3096f",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
