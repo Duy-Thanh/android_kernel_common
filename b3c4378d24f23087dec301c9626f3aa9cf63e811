@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "738e1c65_da7543fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-06T08:21:55Z",
+      "side": 1,
+      "message": "This symbol should not have been accepted, I\u0027ll revert it now, but it has been rejected many times in the past...",
+      "revId": "b3c4378d24f23087dec301c9626f3aa9cf63e811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
