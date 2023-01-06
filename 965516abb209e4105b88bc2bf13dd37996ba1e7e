@@ -52,6 +52,24 @@
       "parentUuid": "484f9cae_21040c37",
       "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe6134b_acc3096f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1979492
+      },
+      "writtenOn": "2023-01-06T20:57:21Z",
+      "side": 1,
+      "message": "I rechecked the patch. Another (and maybe the strongest) reason why it\u0027s needed is that the blamed commit was introduced in v5.18 and it\u0027s not available in linux-stable/linux-5.15.y, but available in aosp/android13-5.15-lts. Thus the fix will never arrive in 5.15.y if no-one has an interest in backporting the blamed commit as well. And we would end up waiting indefinitely for the fix to get to android.\n\nAnd regarding the first arguments, I prefer closing the bugs than spending time tracking them, I find the later more time consuming. At least that\u0027s what I feel until now.",
+      "parentUuid": "727f65d8_286621a4",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
