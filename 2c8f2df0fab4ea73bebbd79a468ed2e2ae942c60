@@ -34,6 +34,24 @@
       "parentUuid": "a865dd13_36461a01",
       "revId": "2c8f2df0fab4ea73bebbd79a468ed2e2ae942c60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cbc147f_7ffa5d02",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-06T21:47:13Z",
+      "side": 1,
+      "message": "Good point about get_task_struct(). I\u0027m working on an alternative approach using rw_semaphore, which is simpler. Let me see if that works and if so we will drip this solution. Otherwise I\u0027ll make a change to use get_task_struct/put_task_struct. Thanks!",
+      "parentUuid": "09d72562_0c496d4d",
+      "revId": "2c8f2df0fab4ea73bebbd79a468ed2e2ae942c60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
