@@ -16,6 +16,24 @@
       "message": "Why not wait for LTS?  There should be no need to do anything special in Android for this fix.",
       "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "484f9cae_21040c37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1979492
+      },
+      "writtenOn": "2023-01-06T20:29:59Z",
+      "side": 1,
+      "message": "Having the fix sooner in the relevant branches extends the testing period. It also spares me of the time spent tracking such bugs. I can extend your question as well: why do we use the UPSTREAM tag at all? Why don\u0027t we wait for the android-lts branch to be merged into its android correspondent branches?",
+      "parentUuid": "f4341423_a17be94c",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
