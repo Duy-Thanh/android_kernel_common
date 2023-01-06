@@ -16,6 +16,41 @@
       "message": "why not submit this upstream to the stable",
       "revId": "1a9501550908a7644508f181667756d390d074af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b20f0dd8_9de0c95b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1979492
+      },
+      "writtenOn": "2023-01-06T12:39:55Z",
+      "side": 1,
+      "message": "The upstream patch is already in stable in linux-5.10.y branch, and was queued to android12-5.10-lts (see dd887f83ea54), but it broke the build due to some android changes that were never upstreamed (see 705a3e5b1852), so the fix was reverted (see eaa4878a26e1). I went beyond that and checked what that new support does and how to adapt the fix so that it works as in mainline. So I BACKPORTed the fix. I saw that ext4_check_dir_entry() has a new parameter named \"lblk\" and that the author of the patch passed value zero for lblk where ext4_check_dir_entry() was called before his commit. I did the same, I backported the fix and passed zero value for lblk when calling ext4_check_dir_entry(). I described in fewer words what I did in the commit message, above my S-o-b tag, in the [ta: bla bla] section.",
+      "revId": "1a9501550908a7644508f181667756d390d074af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "390f6594_74aabb82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1979492
+      },
+      "writtenOn": "2023-01-06T12:39:55Z",
+      "side": 1,
+      "message": "The upstream patch is already in stable in linux-5.10.y branch, and was queued to android12-5.10-lts (see dd887f83ea54), but it broke the build due to some android changes that were never upstreamed (see 705a3e5b1852), so the fix was reverted (see eaa4878a26e1).  I went beyond that and checked what that new support does and how to adapt the fix so that it works as in mainline. So I BACKPORTed the fix. I saw that  ext4_check_dir_entry() has a new parameter named \"lblk\" and that the author of the patch passed value zero for lblk where ext4_check_dir_entry() was called before his commit. I did the same, I backported the fix and passed zero value for lblk when calling ext4_check_dir_entry(). I described in fewer words what I did in the commit message, above my S-o-b tag, in the [ta: bla bla] section.",
+      "parentUuid": "ee953ab9_6469a69f",
+      "revId": "1a9501550908a7644508f181667756d390d074af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
