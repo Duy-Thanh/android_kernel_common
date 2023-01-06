@@ -16,6 +16,24 @@
       "message": "Add a new line between lines 7 and 8, please.",
       "revId": "f67697bff547f7830e8fb3f02375b776d92d13f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9773125_c1f96c5c",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2023-01-06T23:35:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "556e4272_00cbf4f1",
+      "revId": "f67697bff547f7830e8fb3f02375b776d92d13f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
