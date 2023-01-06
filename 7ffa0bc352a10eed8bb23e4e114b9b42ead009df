@@ -16,6 +16,23 @@
       "message": "what is the plan for upstreaming this feature?",
       "revId": "7ffa0bc352a10eed8bb23e4e114b9b42ead009df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05dcdeb9_42adb34e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-06T10:59:17Z",
+      "side": 1,
+      "message": "Please work with the upstream submissions of the needed changes for this and do not use a vendor hook for this feature.",
+      "revId": "7ffa0bc352a10eed8bb23e4e114b9b42ead009df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
