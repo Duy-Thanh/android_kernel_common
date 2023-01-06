@@ -16,6 +16,24 @@
       "message": "Previously, the device driver had to call a function to enable the best-fit algorithm for its IOVA domain. However, it seems like now you\u0027re going to invoke your hook for every IOVA domain. Are you planning on using the device structure somehow to tell you if best-fit needs to be used?",
       "revId": "74e25c419cdf12cb2bc9bad42da601acf8b681d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2333df98_4702d8f2",
+        "filename": "drivers/iommu/dma-iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2023-01-06T22:23:30Z",
+      "side": 1,
+      "message": "I am thinking of having this hook check a new device tree property and initialize the -\u003eandroid_vendor_data1 field. So the users will have to set the property in the DT for each device that needs the best-fit algorithm.",
+      "parentUuid": "a77c16d6_83e9d613",
+      "revId": "74e25c419cdf12cb2bc9bad42da601acf8b681d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
