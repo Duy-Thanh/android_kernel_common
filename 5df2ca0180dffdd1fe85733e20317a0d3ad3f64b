@@ -52,6 +52,24 @@
       "parentUuid": "ff768245_62a71ac7",
       "revId": "5df2ca0180dffdd1fe85733e20317a0d3ad3f64b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29328f83_987b98da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-06T09:05:28Z",
+      "side": 1,
+      "message": "It\u0027s a \"hunk\" of a Mainline commit, backported into Stable.",
+      "parentUuid": "d2cdbb61_e6b3e03f",
+      "revId": "5df2ca0180dffdd1fe85733e20317a0d3ad3f64b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
