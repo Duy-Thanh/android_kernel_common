@@ -34,6 +34,24 @@
       "parentUuid": "f4341423_a17be94c",
       "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727f65d8_286621a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-01-06T20:34:53Z",
+      "side": 1,
+      "message": "The UPSTREAM tag exists primarily for patches that are wanted in Android but not LTS.  For example, new features.\n\nYou can submit this anyway, if you want to, but I think your time would be better spent working on bugs that have not already been fixed.  Not like there\u0027s a shortage of them: https://syzkaller.appspot.com",
+      "parentUuid": "484f9cae_21040c37",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
