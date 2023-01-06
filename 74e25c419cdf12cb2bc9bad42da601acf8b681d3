@@ -34,6 +34,24 @@
       "parentUuid": "a77c16d6_83e9d613",
       "revId": "74e25c419cdf12cb2bc9bad42da601acf8b681d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d24a03_09f97878",
+        "filename": "drivers/iommu/dma-iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-01-06T22:30:39Z",
+      "side": 1,
+      "message": "Okay, that seems reasonable to me; thanks for the explanation.",
+      "parentUuid": "2333df98_4702d8f2",
+      "revId": "74e25c419cdf12cb2bc9bad42da601acf8b681d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
