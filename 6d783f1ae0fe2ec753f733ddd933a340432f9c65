@@ -16,6 +16,23 @@
       "message": "Respin bug added in the commit message. Not sure why Lint still complains.\nBug: 264729140",
       "revId": "6d783f1ae0fe2ec753f733ddd933a340432f9c65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9ce76fe_f288143a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951960
+      },
+      "writtenOn": "2023-01-07T07:21:34Z",
+      "side": 1,
+      "message": "Respin Bug: b/264729140",
+      "revId": "6d783f1ae0fe2ec753f733ddd933a340432f9c65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
