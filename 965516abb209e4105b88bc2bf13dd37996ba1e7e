@@ -140,6 +140,24 @@
       "parentUuid": "5460b2ae_5987943f",
       "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc3ea74_059a212e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1979492
+      },
+      "writtenOn": "2023-01-09T11:18:24Z",
+      "side": 1,
+      "message": "\u003e Please strip out the new line and the duplicated Reported-by.\n\nOk. Regarding the new line, I followed the description from: https://android.googlesource.com/kernel/common/. You\u0027ll notice that there\u0027s a new line after author\u0027s S-o-b in the UPSTREAM and BACKPORT cases. I\u0027ll send a patch to fix that doc then.\n\nOh, I did not notice that the reported-by tags are identical. I\u0027ll remove it, thanks.\n\n\u003e \n\u003e Please refrain from adding your own Reported-by tags.\n\nWhat usually happens is that syzbot reports the bug on linux mainline, but the same bug is raised again as an android one with a dedicated syzbot ID. I think we should also add the android reported-by tag so that people know that it solves that bug too. Or better to add a LINK tag to the android specific bug. Please let me know what you think, so that we have an agreement from here onwards.\n\n\u003e \n\u003e Also, as a rule, we should go to the effort to fix Stable *before* fixing ACK.\n\nI had a discussion with Eric about that. The reason why it\u0027s not in stable is that the blamed commit was introduced in v5.18. So if we backport the blamed commit, we can backport this fix as well.",
+      "parentUuid": "6aa22936_8d68e23a",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
