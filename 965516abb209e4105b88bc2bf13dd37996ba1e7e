@@ -194,6 +194,24 @@
       "parentUuid": "9dc3ea74_059a212e",
       "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5385a62b_cea1f855",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-01-09T22:31:03Z",
+      "side": 1,
+      "message": "The root cause is in older kernels, but the commit that exposed the actual problem is only in v5.18+ and Android kernels.\n\nIn retrospect, for the Fixes tag I should have used the root cause instead.  At https://lore.kernel.org/linux-ext4/Y7nWexWBpMWKwdeB@sol.localdomain/T/#u, I\u0027ve explicitly requested that this fix be applied to LTS 4.19 through 5.15.\n\nI personally prefer that there be an empty line between the part of the commit message from upstream and the part for the Android cherry-pick, as that makes them cleanly separated.",
+      "parentUuid": "7ae40983_1309bfb4",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
