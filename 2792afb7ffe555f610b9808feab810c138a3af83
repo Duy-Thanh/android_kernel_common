@@ -16,6 +16,24 @@
       "message": "Please provide more information. What feature does this enable? Why do vendor modules need this?",
       "revId": "2792afb7ffe555f610b9808feab810c138a3af83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cba2cb2_af67cf92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1930750
+      },
+      "writtenOn": "2023-01-09T02:28:50Z",
+      "side": 1,
+      "message": "Hi, \nExynos have collected hrtimer_expire_entry/exit infos for debugging by this vendorhook tracepoints. We makes debug driver as kernel module. so we needs vendor_hook tracepoints",
+      "parentUuid": "557391a8_a05cb75d",
+      "revId": "2792afb7ffe555f610b9808feab810c138a3af83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
