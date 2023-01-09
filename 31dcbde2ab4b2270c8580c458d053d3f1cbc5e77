@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bc09486_ed75eae5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-09T10:36:06Z",
+      "side": 1,
+      "message": "/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/5/execroot/__main__/common/arch/arm64/include/asm/module.h:53:8: error: redefinition of \u0027mod_arch_specific\u0027\nstruct mod_arch_specific {\n       ^\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/5/execroot/__main__/common/include/asm-generic/module.h:10:8: note: previous definition is here\nstruct mod_arch_specific\n       ^\n1 error generated.",
+      "revId": "31dcbde2ab4b2270c8580c458d053d3f1cbc5e77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
