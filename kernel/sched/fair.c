@@ -11951,7 +11951,11 @@ static inline int on_null_domain(struct rq *rq)
 static inline int find_new_ilb(void)
 {
 	const struct cpumask *hk_mask;
-	int ilb_cpu;
+	int ilb_cpu = -1;
+
+	trace_android_rvh_find_new_ilb(nohz.idle_cpus_mask, &ilb_cpu);
+	if (ilb_cpu >= 0)
+		return ilb_cpu;
 
 	hk_mask = housekeeping_cpumask(HK_TYPE_MISC);
 
