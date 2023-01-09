@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daebe084_6d686c8d",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-09T09:44:32Z",
+      "side": 1,
+      "message": "why here?",
+      "range": {
+        "startLine": 421,
+        "startChar": 0,
+        "endLine": 421,
+        "endChar": 68
+      },
+      "revId": "0cc88e363f2df3d7b7ec1c4bd95cc193a78c8cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
