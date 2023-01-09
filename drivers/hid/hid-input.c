@@ -20,6 +20,8 @@
 #include <linux/hid.h>
 #include <linux/hid-debug.h>
 
+#include <trace/hooks/hid.h>
+
 #include "hid-ids.h"
 
 #define unk	KEY_UNKNOWN
@@ -593,6 +595,7 @@ static void hidinput_configure_usage(struct hid_input *hidinput, struct hid_fiel
 	struct hid_device *device = input_get_drvdata(input);
 	int max = 0, code;
 	unsigned long *bit = NULL;
+	bool is_vh_reconfigured = false;
 
 	field->hidinput = hidinput;
 
@@ -616,6 +619,11 @@ static void hidinput_configure_usage(struct hid_input *hidinput, struct hid_fiel
 			goto mapped;
 		if (ret < 0)
 			goto ignore;
+	}
+
+	trace_android_vh_hidinput_pre_configure_usage(hidinput, field, usage, &bit, &max, &is_vh_reconfigured);
+	if (is_vh_reconfigured) {
+		goto mapped;
 	}
 
 	switch (usage->hid & HID_USAGE_PAGE) {
