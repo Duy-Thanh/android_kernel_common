@@ -70,6 +70,24 @@
       "parentUuid": "d2cdbb61_e6b3e03f",
       "revId": "5df2ca0180dffdd1fe85733e20317a0d3ad3f64b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4457ad75_e91a32d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-09T09:02:24Z",
+      "side": 1,
+      "message": "Added \"Cherry-pick from\" line.",
+      "parentUuid": "29328f83_987b98da",
+      "revId": "5df2ca0180dffdd1fe85733e20317a0d3ad3f64b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
