@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c0b0f3_a4a3d76c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-09T09:42:12Z",
+      "side": 1,
+      "message": "Hook should not be needed for `android-mainline`",
+      "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
