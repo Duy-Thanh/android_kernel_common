@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eedd9ab_9f07ad4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-01-09T17:00:02Z",
+      "side": 1,
+      "message": "Richard,\n\nThe PCP drain series has multiple patchset based on the FROMLIST so need to review what we need really and merge later since it\u0027s little subtle.\nI will sync with you.",
+      "revId": "dd6a6af220083865a1e83d229acbcc20a8b8ec19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
