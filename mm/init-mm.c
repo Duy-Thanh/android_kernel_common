@@ -38,6 +38,8 @@ struct mm_struct init_mm = {
 	.arg_lock	=  __SPIN_LOCK_UNLOCKED(init_mm.arg_lock),
 	.mmlist		= LIST_HEAD_INIT(init_mm.mmlist),
 #ifdef CONFIG_PER_VMA_LOCK
+	.vma_writer_wait =
+		__WAIT_QUEUE_HEAD_INITIALIZER(init_mm.vma_writer_wait),
 	.mm_lock_seq	= 0,
 #endif
 	.user_ns	= &init_user_ns,

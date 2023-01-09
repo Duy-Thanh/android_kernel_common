@@ -468,9 +468,8 @@ static bool vma_lock_alloc(struct vm_area_struct *vma)
 	vma->vm_lock = kmem_cache_alloc(vma_lock_cachep, GFP_KERNEL);
 	if (!vma->vm_lock)
 		return false;
-
-	init_rwsem(&vma->vm_lock->lock);
-	vma->vm_lock_seq = -1;
+	atomic_set(&vma->vm_lock->count, 0);
+	vma->vm_lock->lock_seq = -1;
 
 	return true;
 }
@@ -542,7 +541,7 @@ static void vm_area_free_rcu_cb(struct rcu_head *head)
 						  vm_rcu);
 
 	/* The vma should not be locked while being destroyed. */
-	VM_BUG_ON_VMA(rwsem_is_locked(&vma->vm_lock->lock), vma);
+	VM_BUG_ON_VMA(atomic_read(&vma->vm_lock->count) > 0, vma);
 	__vm_area_free(vma);
 }
 #endif
@@ -1225,6 +1224,7 @@ static struct mm_struct *mm_init(struct mm_struct *mm, struct task_struct *p,
 	mmap_init_lock(mm);
 	INIT_LIST_HEAD(&mm->mmlist);
 #ifdef CONFIG_PER_VMA_LOCK
+	init_waitqueue_head(&mm->vma_writer_wait);
 	mm->mm_lock_seq = 0;
 #endif
 	mm_pgtables_bytes_init(mm);

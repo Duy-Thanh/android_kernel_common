@@ -437,7 +437,13 @@ struct anon_vma_name {
 };
 
 struct vma_lock {
-	struct rw_semaphore lock;
+	/*
+	 * count > 0 ==> read-locked with 'count' number of readers
+	 * count < 0 ==> write-locked
+	 * count = 0 ==> unlocked
+	 */
+	atomic_t count;
+	int lock_seq;
 };
 
 /*
@@ -492,7 +498,6 @@ struct vm_area_struct {
 	 * counter reuse can only lead to occasional unnecessary use of the
 	 * slowpath.
 	 */
-	int vm_lock_seq;
 	struct vma_lock *vm_lock;
 
 	/* Flag to indicate areas detached from the mm->mm_mt tree */
@@ -632,6 +637,7 @@ struct mm_struct {
 					  * by mmlist_lock
 					  */
 #ifdef CONFIG_PER_VMA_LOCK
+		struct wait_queue_head vma_writer_wait;
 		/*
 		 * This field has lock-like semantics, meaning it is sometimes
 		 * accessed with ACQUIRE/RELEASE semantics.

@@ -644,11 +644,18 @@ static inline bool vma_start_read(struct vm_area_struct *vma)
 	 * we don't rely on for anything - the mm_lock_seq read against which we
 	 * need ordering is below.
 	 */
-	if (READ_ONCE(vma->vm_lock_seq) == READ_ONCE(vma->vm_mm->mm_lock_seq))
+	if (READ_ONCE(vma->vm_lock->lock_seq) == READ_ONCE(vma->vm_mm->mm_lock_seq))
 		return false;
 
-	if (unlikely(down_read_trylock(&vma->vm_lock->lock) == 0))
+	if (unlikely(!atomic_inc_unless_negative(&vma->vm_lock->count)))
 		return false;
+
+	/* If atomic_t overflows, restore and fail to lock. */
+	if (unlikely(atomic_read(&vma->vm_lock->count) < 0)) {
+		if (atomic_dec_and_test(&vma->vm_lock->count))
+			wake_up(&vma->vm_mm->vma_writer_wait);
+		return false;
+	}
 
 	/*
 	 * Overflow might produce false locked result.
@@ -661,8 +668,9 @@ static inline bool vma_start_read(struct vm_area_struct *vma)
 	 * after it has been unlocked.
 	 * This pairs with RELEASE semantics in vma_end_write_all().
 	 */
-	if (unlikely(vma->vm_lock_seq == smp_load_acquire(&vma->vm_mm->mm_lock_seq))) {
-		up_read(&vma->vm_lock->lock);
+	if (unlikely(vma->vm_lock->lock_seq == smp_load_acquire(&vma->vm_mm->mm_lock_seq))) {
+		if (atomic_dec_and_test(&vma->vm_lock->count))
+			wake_up(&vma->vm_mm->vma_writer_wait);
 		return false;
 	}
 	return true;
@@ -671,7 +679,8 @@ static inline bool vma_start_read(struct vm_area_struct *vma)
 static inline void vma_end_read(struct vm_area_struct *vma)
 {
 	rcu_read_lock(); /* keeps vma alive till the end of up_read */
-	up_read(&vma->vm_lock->lock);
+	if (atomic_dec_and_test(&vma->vm_lock->count))
+		wake_up(&vma->vm_mm->vma_writer_wait);
 	rcu_read_unlock();
 }
 
@@ -685,7 +694,7 @@ static bool __is_vma_write_locked(struct vm_area_struct *vma, int *mm_lock_seq)
 	 * mm->mm_lock_seq can't be concurrently modified.
 	 */
 	*mm_lock_seq = vma->vm_mm->mm_lock_seq;
-	return (vma->vm_lock_seq == *mm_lock_seq);
+	return (vma->vm_lock->lock_seq == *mm_lock_seq);
 }
 
 /*
@@ -700,15 +709,19 @@ static inline void vma_start_write(struct vm_area_struct *vma)
 	if (__is_vma_write_locked(vma, &mm_lock_seq))
 		return;
 
-	down_write(&vma->vm_lock->lock);
+	if (atomic_cmpxchg(&vma->vm_lock->count, 0, -1))
+		wait_event(vma->vm_mm->vma_writer_wait,
+			   atomic_cmpxchg(&vma->vm_lock->count, 0, -1) == 0);
 	/*
 	 * We should use WRITE_ONCE() here because we can have concurrent reads
 	 * from the early lockless pessimistic check in vma_start_read().
 	 * We don't really care about the correctness of that early check, but
 	 * we should use WRITE_ONCE() for cleanliness and to keep KCSAN happy.
 	 */
-	WRITE_ONCE(vma->vm_lock_seq, mm_lock_seq);
-	up_write(&vma->vm_lock->lock);
+	WRITE_ONCE(vma->vm_lock->lock_seq, mm_lock_seq);
+	/* Write barrier to ensure lock_seq change is visible before count */
+	smp_wmb();
+	atomic_set(&vma->vm_lock->count, 0);
 }
 
 static inline bool vma_try_start_write(struct vm_area_struct *vma)
@@ -718,11 +731,13 @@ static inline bool vma_try_start_write(struct vm_area_struct *vma)
 	if (__is_vma_write_locked(vma, &mm_lock_seq))
 		return true;
 
-	if (!down_write_trylock(&vma->vm_lock->lock))
+	if (atomic_cmpxchg(&vma->vm_lock->count, 0, -1))
 		return false;
 
-	WRITE_ONCE(vma->vm_lock_seq, mm_lock_seq);
-	up_write(&vma->vm_lock->lock);
+	WRITE_ONCE(vma->vm_lock->lock_seq, mm_lock_seq);
+	/* Write barrier to ensure lock_seq change is visible before count */
+	smp_wmb();
+	atomic_set(&vma->vm_lock->count, 0);
 	return true;
 }
 
@@ -735,7 +750,7 @@ static inline void vma_assert_write_locked(struct vm_area_struct *vma)
 
 static inline void vma_assert_locked(struct vm_area_struct *vma)
 {
-	if (!rwsem_is_locked(&vma->vm_lock->lock))
+	if (atomic_read(&vma->vm_lock->count) < 1)
 		vma_assert_write_locked(vma);
 }
 
