@@ -170,11 +170,35 @@ TRACE_EVENT(trusty_enqueue_nop,
 	TP_printk("arg1=0x%x, arg2=0x%x, arg3=0x%x", __entry->arg1, __entry->arg2, __entry->arg3)
 );
 
+TRACE_EVENT(trusty_dequeue_nop,
+	TP_PROTO(bool signaled, bool nop_dequeued, bool queue_emptied, int false_cnt),
+	TP_ARGS(signaled, nop_dequeued, queue_emptied, false_cnt),
+	TP_STRUCT__entry(
+		__field(bool, signaled)
+		__field(bool, nop_dequeued)
+		__field(bool, queue_emptied)
+		__field(int, false_cnt)
+	),
+	TP_fast_assign(
+		__entry->signaled = signaled;
+		__entry->nop_dequeued = nop_dequeued;
+		__entry->queue_emptied = queue_emptied;
+		__entry->false_cnt = false_cnt;
+	),
+	TP_printk("%c%c%c (F:%d)",
+		__entry->signaled ? 'S' : ' ',
+		__entry->nop_dequeued ? 'D' : ' ',
+		__entry->queue_emptied ? 'E' : ' ',
+		__entry->false_cnt
+	)
+);
+
 #define CPUNICE_CAUSE_LIST (			\
 	cpu_nice(CAUSE_DEFAULT)	\
 	cpu_nice(CAUSE_USE_HIGH_WQ)		\
 	cpu_nice(CAUSE_TRUSTY_REQ)	\
-	cpu_nice_end(CAUSE_NOP_ESCALATE)	\
+	cpu_nice(CAUSE_NOP_ESCALATE)	\
+	cpu_nice_end(CAUSE_ENQUEUE_BOOST)	\
 	)
 
 #undef cpu_nice
