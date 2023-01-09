@@ -5185,6 +5185,9 @@ retry:
 	if (current->flags & PF_MEMALLOC)
 		goto nopage;
 
+	trace_android_rvh_alloc_pages_reclaim_defer(gfp_mask, order,
+		alloc_flags, ac->migratetype);
+
 	trace_android_vh_alloc_pages_reclaim_bypass(gfp_mask, order,
 		alloc_flags, ac->migratetype, &page);
 

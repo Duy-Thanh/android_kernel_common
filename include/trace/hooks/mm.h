@@ -159,6 +159,11 @@ DECLARE_HOOK(android_vh_kmalloc_slab,
 DECLARE_HOOK(android_vh_madvise_cold_or_pageout,
 	TP_PROTO(struct vm_area_struct *vma, bool *allow_shared),
 	TP_ARGS(vma, allow_shared));
+DECLARE_RESTRICTED_HOOK(android_rvh_alloc_pages_reclaim_defer,
+	TP_PROTO(gfp_t gfp_mask, int order, int alloc_flags,
+		int migratetype),
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype), 1);
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
