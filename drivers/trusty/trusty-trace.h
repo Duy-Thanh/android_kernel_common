@@ -174,7 +174,8 @@ TRACE_EVENT(trusty_enqueue_nop,
 	cpu_nice(CAUSE_DEFAULT)	\
 	cpu_nice(CAUSE_USE_HIGH_WQ)		\
 	cpu_nice(CAUSE_TRUSTY_REQ)	\
-	cpu_nice_end(CAUSE_NOP_ESCALATE)	\
+	cpu_nice(CAUSE_NOP_ESCALATE)	\
+	cpu_nice_end(CAUSE_ENQUEUE_BOOST)	\
 	)
 
 #undef cpu_nice
