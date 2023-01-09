@@ -88,6 +88,23 @@
       "parentUuid": "bfe6134b_acc3096f",
       "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa22936_8d68e23a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-09T09:53:20Z",
+      "side": 1,
+      "message": "Please strip out the new line and the duplicated Reported-by.\n\nPlease refrain from adding your own Reported-by tags.\n\nAlso, as a rule, we should go to the effort to fix Stable *before* fixing ACK.",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
