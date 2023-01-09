@@ -301,6 +301,20 @@ void blk_queue_max_segment_size(struct request_queue *q, unsigned int max_size)
 	unsigned int min_max_segment_size = blk_queue_sub_page_segments(q) ?
 		SECTOR_SIZE : PAGE_SIZE;
 
+#ifdef	CONFIG_BLK_SUB_PAGE_SEGMENTS
+	printk(KERN_INFO "%s: CONFIG_BLK_SUB_PAGE_SEGMENTS is set", __func__);
+#else
+	printk(KERN_INFO "%s: CONFIG_BLK_SUB_PAGE_SEGMENTS NOT set", __func__);
+#endif
+
+	if (test_bit(QUEUE_FLAG_SUB_PAGE_SEGMENTS, &(q)->queue_flags)) {
+	  printk(KERN_INFO "%s: aosp test_bit(QUEUE_FLAG_SUB_PAGE_SEGMENTS) set \n", __func__);
+	} else {
+	  printk(KERN_INFO "%s: aosp test_bit(QUEUE_FLAG_SUB_PAGE_SEGMENTS) NOT set \n", __func__);
+	}
+
+	printk(KERN_INFO "%s: aosp SECTOR_SIZE=%u PAGE_SIZE=%u min_max_segment_size=%u max_size=%u\n",
+	       __func__, SECTOR_SIZE, PAGE_SIZE, min_max_segment_size, max_size);
 	if (max_size < min_max_segment_size) {
 		max_size = min_max_segment_size;
 		printk(KERN_INFO "%s: set to minimum %u\n", __func__, max_size);

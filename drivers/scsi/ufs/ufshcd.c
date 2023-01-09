@@ -5080,9 +5080,12 @@ static int ufshcd_slave_alloc(struct scsi_device *sdev)
 	/* WRITE_SAME command is not supported */
 	sdev->no_write_same = 1;
 
-	if (hba->quirks & UFSHCD_QUIRK_SUB_PAGE_SEGMENTS)
+	pr_info("%s: aosp about to set QUEUE_FLAG_SUB_PAGE_SEGMENTS \n", __func__);
+	if (hba->quirks & UFSHCD_QUIRK_SUB_PAGE_SEGMENTS) {
 		blk_queue_flag_set(QUEUE_FLAG_SUB_PAGE_SEGMENTS,
 				   sdev->request_queue);
+		pr_info("%s: aosp Setting QUEUE_FLAG_SUB_PAGE_SEGMENTS \n", __func__);
+	}
 
 	ufshcd_set_queue_depth(sdev);
 

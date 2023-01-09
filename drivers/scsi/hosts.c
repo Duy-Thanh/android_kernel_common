@@ -461,10 +461,14 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 	else
 		shost->max_sectors = SCSI_DEFAULT_MAX_SECTORS;
 
-	if (sht->max_segment_size)
-		shost->max_segment_size = sht->max_segment_size;
-	else
-		shost->max_segment_size = BLK_MAX_SEGMENT_SIZE;
+  pr_info("%s: sht->max_segment_size = %u", __func__, sht->max_segment_size);
+  if (sht->max_segment_size) {
+    shost_printk(KERN_INFO, shost, "%s: (if) sht->max_segment_size = %u \n", __func__, sht->max_segment_size);
+    shost->max_segment_size = sht->max_segment_size;
+  } else {
+    shost_printk(KERN_INFO, shost, "%s: (else) sht->max_segment_size = %u \n", __func__, BLK_MAX_SEGMENT_SIZE);
+    shost->max_segment_size = BLK_MAX_SEGMENT_SIZE;
+  }
 
 	/*
 	 * assume a 4GB boundary, if not set
