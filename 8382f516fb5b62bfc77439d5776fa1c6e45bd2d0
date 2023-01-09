@@ -16,6 +16,24 @@
       "message": "also needs to go to android-mainline, right?",
       "revId": "8382f516fb5b62bfc77439d5776fa1c6e45bd2d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2232b59_207034af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2023-01-09T03:26:55Z",
+      "side": 1,
+      "message": "Yes, I already cherry pick to android-mainline branch.",
+      "parentUuid": "d330da86_9c9b4be3",
+      "revId": "8382f516fb5b62bfc77439d5776fa1c6e45bd2d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
