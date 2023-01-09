@@ -7,7 +7,7 @@
 #define _TRACE_HOOK_FUTEX_H
 #include <trace/hooks/vendor_hooks.h>
 
-#ifndef __GENKSYMS__
+#ifdef __GENKSYMS__
 #include <linux/plist.h>
 #include <linux/futex.h>
 #endif
