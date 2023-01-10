@@ -1264,9 +1264,13 @@
   mmc_cqe_request_done
   mmc_execute_tuning
   mmc_get_ext_csd
+<<<<<<< HEAD   (613471 ANDROID: Update the GKI symbol list and ABI XML)
   mmc_get_card
   mmc_hs200_tuning
   mmc_issue_type
+=======
+  mmc_hs200_tuning
+>>>>>>> CHANGE (5e05d4 ANDROID: GKI: Update abi_gki_aarch64_qcom symbols.)
   mmc_of_parse
   __mmc_poll_for_busy
   mmc_prepare_busy_cmd
@@ -1282,7 +1286,10 @@
   mmc_select_hs400
   mmc_select_hs_ddr
   mmc_select_timing
+<<<<<<< HEAD   (613471 ANDROID: Update the GKI symbol list and ABI XML)
   mmc_send_status
+=======
+>>>>>>> CHANGE (5e05d4 ANDROID: GKI: Update abi_gki_aarch64_qcom symbols.)
   mmc_send_tuning
   mmc_set_bus_mode
   mmc_set_bus_width
