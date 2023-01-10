@@ -16,6 +16,23 @@
       "message": "IIUC we won\u0027t have android13 with 5.15, let me know whether I should abandon this CL.",
       "revId": "845a610b59a6d0e14059682ea3596af0852214f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "513e16d6_29d7558a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-10T18:00:12Z",
+      "side": 1,
+      "message": "need to update ABI like you did in 5.10",
+      "revId": "845a610b59a6d0e14059682ea3596af0852214f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
