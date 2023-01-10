@@ -5127,10 +5127,6 @@ static int ufshcd_slave_alloc(struct scsi_device *sdev)
 
 	ufshcd_lu_init(hba, sdev);
 
-	if (hba->quirks & UFSHCD_QUIRK_SUB_PAGE_SEGMENTS)
-		blk_queue_flag_set(QUEUE_FLAG_SUB_PAGE_SEGMENTS,
-				   sdev->request_queue);
-
 	ufshcd_setup_links(hba, sdev);
 
 	trace_android_vh_ufs_update_sdev(sdev);
