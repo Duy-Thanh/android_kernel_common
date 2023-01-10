@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5055311_8306b09e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-10T17:37:00Z",
+      "side": 1,
+      "message": "Is that expected here as I don\u0027t see any READ_ONCE in that patch?",
+      "revId": "a1ec79e383345886791767da2191ceeff65c9fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
