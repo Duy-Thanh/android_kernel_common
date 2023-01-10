@@ -2615,10 +2615,15 @@
   xsk_tx_peek_desc
   xsk_tx_release
   xsk_uses_need_wakeup
+  dev_pm_opp_remove
+  mmc_get_card
   mmc_hs200_tuning
+  mmc_issue_type
+  mmc_put_card
   mmc_select_bus_width
   mmc_select_hs
   mmc_select_hs400
   mmc_select_hs_ddr
   mmc_select_timing
+  mmc_send_status
   mmc_set_initial_state
