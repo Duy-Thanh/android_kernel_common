@@ -212,6 +212,24 @@
       "parentUuid": "7ae40983_1309bfb4",
       "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "332ba220_3666df28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-10T09:22:08Z",
+      "side": 1,
+      "message": "As you say, it\u0027s a preference thing.  More often than not the \u0027\\n\u0027 is omitted.\n\nMy views aren\u0027t strong enough to hold anyone to ransom on it however.",
+      "parentUuid": "5385a62b_cea1f855",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
