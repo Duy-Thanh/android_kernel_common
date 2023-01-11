@@ -490,6 +490,14 @@ filegroup(
     visibility = ["//visibility:private"],
 )
 
+filegroup(
+    name = "pkvm_module",
+    srcs = ["arch/arm64/kvm/hyp/nvhe/module.lds.S"],
+    visibility = [
+        "//private/devices/google:__subpackages__",
+    ],
+)
+
 # DDK headers unsafe list. This is the list of all headers and include
 # directories that may be used during migration from kernel_module's, but
 # should be avoided in general.
