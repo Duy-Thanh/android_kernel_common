@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "578f1b64_4f5fac57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-01-11T13:36:30Z",
+      "side": 1,
+      "message": "Note, this broke the hikey build with hitting a fairly trivial warning:\n\n```\ncommon-android13-5.10/common/../hikey-modules/midgard/mali_kbase_sync_file.c:70:6: error: unused variable \u0027fd\u0027 [-Werror,-Wunused-variable]\nint fd;\n^\n1 error generated.\n```",
+      "revId": "c82a7304deb06047105c7c3c43479ba159ab98c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
