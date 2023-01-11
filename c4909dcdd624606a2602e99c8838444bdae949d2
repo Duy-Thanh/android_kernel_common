@@ -46,6 +46,30 @@
       },
       "revId": "c4909dcdd624606a2602e99c8838444bdae949d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1df1b7a_11ec3d8b",
+        "filename": "kernel/hung_task.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-11T12:52:42Z",
+      "side": 1,
+      "message": "ah, that wasn\u0027t obvious at all.  Please document this \"null\" tracehook as to what needs to be done in it, and maybe rename these to have the full \"done\" in them?\n\n`trace_android_vh_check_uninterrupt_tasks_done`?  \"dn\" also could be seen as short for \"down\".  Sorry, naming is hard...",
+      "parentUuid": "0d1d3dd3_4ae4ba48",
+      "range": {
+        "startLine": 219,
+        "startChar": 46,
+        "endLine": 219,
+        "endChar": 48
+      },
+      "revId": "c4909dcdd624606a2602e99c8838444bdae949d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
