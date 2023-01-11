@@ -33,6 +33,24 @@
       "message": "need to update ABI like you did in 5.10",
       "revId": "845a610b59a6d0e14059682ea3596af0852214f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8807db55_3b3d8485",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1759142
+      },
+      "writtenOn": "2023-01-11T05:05:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "513e16d6_29d7558a",
+      "revId": "845a610b59a6d0e14059682ea3596af0852214f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
