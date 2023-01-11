@@ -16,6 +16,24 @@
       "message": "Duplicate of https://android-review.git.corp.google.com/c/kernel/common/+/2367630  ?\n\nAs this is an upstream change, you can use the ABI reserved fields for it, please do so in a way that will keep the most space for future use.",
       "revId": "73f163c8620ebfaed541b185fdbe91a8cfba1d5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "479a2daa_a2f9ee00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982375
+      },
+      "writtenOn": "2023-01-11T20:55:53Z",
+      "side": 1,
+      "message": "Yes this is a duplicate of https://android-review.git.corp.google.com/c/kernel/common/+/2367630.\n\nSure.Let me re-upload with this modification.Thank you",
+      "parentUuid": "281bab27_7a445ad2",
+      "revId": "73f163c8620ebfaed541b185fdbe91a8cfba1d5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
