@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bee846e_04eb4a46",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-01-11T10:16:26Z",
+      "side": 1,
+      "message": "What bothers me is the dependency from common to private.\n\nFurther, any modules builds should just be able to consume a `kernel_build` directly and it should provide all prerequisites to build modules. I believe this is just a missing prerequisite that gets filtered out and should be preserved in https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/impl/utils.bzl;l\u003d188",
+      "revId": "a6f363ae61b7366f5ce80d8da9a16a07a5407638",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
