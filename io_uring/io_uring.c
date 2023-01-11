@@ -461,6 +461,7 @@ struct io_ring_ctx {
 	};
 };
 
+#ifndef __GENKSYMS__	// Needed to keep the Android CRC ABI stable
 struct io_uring_task {
 	/* submission side */
 	int			cached_refs;
@@ -477,6 +478,7 @@ struct io_uring_task {
 	struct callback_head	task_work;
 	bool			task_running;
 };
+#endif
 
 /*
  * First field must be the file pointer in all the
