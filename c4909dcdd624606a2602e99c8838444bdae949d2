@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e34e34c6_8ba371c7",
+        "filename": "kernel/hung_task.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-11T08:32:51Z",
+      "side": 1,
+      "message": "what does \"dn\" mean here?  Why is this hook needed?",
+      "range": {
+        "startLine": 219,
+        "startChar": 46,
+        "endLine": 219,
+        "endChar": 48
+      },
+      "revId": "c4909dcdd624606a2602e99c8838444bdae949d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
