@@ -87,6 +87,30 @@
       },
       "revId": "ac935d1d1505b1116783a43e031bbe0748a65ace",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd190065_35f9eeae",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5191,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2023-01-11T12:55:40Z",
+      "side": 1,
+      "message": "We expect hook functions to sleep because we want to delay some unimportant processes from allocating or reclaiming memory when memory is tight, leaving resources to other important processes.",
+      "parentUuid": "eab29e79_c0068b40",
+      "range": {
+        "startLine": 5191,
+        "startChar": 0,
+        "endLine": 5191,
+        "endChar": 61
+      },
+      "revId": "ac935d1d1505b1116783a43e031bbe0748a65ace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
