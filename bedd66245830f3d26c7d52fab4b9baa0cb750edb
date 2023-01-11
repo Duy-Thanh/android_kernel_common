@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "571018ed_2bf11fed",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2023-01-11T00:29:23Z",
+      "side": 1,
+      "message": "nit: would it be clearer to name this struct \u0026 the work function something related to exited tasks?",
+      "range": {
+        "startLine": 640,
+        "startChar": 7,
+        "endLine": 640,
+        "endChar": 18
+      },
+      "revId": "bedd66245830f3d26c7d52fab4b9baa0cb750edb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f769533_7f269c0d",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2023-01-11T00:29:23Z",
+      "side": 1,
+      "message": "Pretty minor but would it make sense to just call `add_uid_tasks_io_stats` directly inside #ifdef blocks here and in `add_uid_io_stats`? I was confused at first about the null task_entry pointer being passed into `__add_uid_io_stats` in the !UID_SYS_STATS_DEBUG case\n\nIIUC this would also eliminate the need for the empty `find_or_register_task` and `add_uid_tasks_io_stats` implementations",
+      "range": {
+        "startLine": 670,
+        "startChar": 1,
+        "endLine": 670,
+        "endChar": 6
+      },
+      "revId": "bedd66245830f3d26c7d52fab4b9baa0cb750edb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
