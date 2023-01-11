@@ -16,6 +16,24 @@
       "message": "Couldn\u0027t this be in done in io_uring.c as the #else (__GENKSYMS) next to the \"real\" definition? Or in vendor_hooks.c. If it\u0027s in a C file then there is no way for partners to use it so the warnings wouldn\u0027t be needed.",
       "revId": "6db760994b876e730ba843714d487a713d443b27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa59f153_6e1f0528",
+        "filename": "include/linux/io_uring.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-11T16:59:58Z",
+      "side": 1,
+      "message": "the problem the public functions/structures have the io_uring structure as \"known knowledge\" in the CRC so it has to be in a .h file that the rest of the kernel sees.\n\nThis first attempt didn\u0027t work properly, let me see what went wrong...",
+      "parentUuid": "dfe19f9a_36f9ac9e",
+      "revId": "6db760994b876e730ba843714d487a713d443b27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
