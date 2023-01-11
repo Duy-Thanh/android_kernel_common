@@ -1,6 +1,14 @@
 #ifndef INTERNAL_IO_WQ_H
 #define INTERNAL_IO_WQ_H
 
+/*
+ * ANDROID
+ * crc preservation hack, see comment in the linux/io_uring.h file for details.
+ */
+#ifdef __GENKSYMS__
+#include <linux/io_uring.h>
+#endif
+
 #include <linux/refcount.h>
 
 struct io_wq;
