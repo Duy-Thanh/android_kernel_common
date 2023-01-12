@@ -52,6 +52,24 @@
       "parentUuid": "8b834a44_e60be0d9",
       "revId": "9a100e770a3adb9b04487d934e0293d92a86f7ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acaf6ad0_9fcf38cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-12T17:05:51Z",
+      "side": 1,
+      "message": "I meant add more information to the commit message. If this is just for debugging, then why is it needed in the production kernel? Please describe the feature and why it is important for production.\n\nDo the same for the other two patches in the series.",
+      "parentUuid": "d715d2b3_dab1df02",
+      "revId": "9a100e770a3adb9b04487d934e0293d92a86f7ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
