@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9e22061_e1d1c7cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-12T09:35:01Z",
+      "side": 1,
+      "message": "properly wrap changelog lines at 72 columns and explain this in more detail as to why this is needed and what it is needed for.",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "98912a52591dfe28b6d4ac5aab110eee6e73c46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17669687_61150822",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-12T09:35:01Z",
+      "side": 1,
+      "message": "real name please, not email alias.",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 23
+      },
+      "revId": "98912a52591dfe28b6d4ac5aab110eee6e73c46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f32e0a5_54140ac6",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5188,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-12T09:35:01Z",
+      "side": 1,
+      "message": "again, I do not understand why this is needed and you can not just use the other hook right below this one.  Please document this really really well why two hooks are required.",
+      "range": {
+        "startLine": 5188,
+        "startChar": 0,
+        "endLine": 5188,
+        "endChar": 61
+      },
+      "revId": "98912a52591dfe28b6d4ac5aab110eee6e73c46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
