@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd066ea6_3e46de17",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1318,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-12T09:33:07Z",
+      "side": 1,
+      "message": "you just \"burned\" 64 bits to hold a 8 bit value 😞\n\nPlease reserve the other remaining bits so that we can use them in the future as well.",
+      "range": {
+        "startLine": 1318,
+        "startChar": 0,
+        "endLine": 1318,
+        "endChar": 46
+      },
+      "revId": "ad19a82427d8b8d0a5984325d7cffabc07b4dfd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
