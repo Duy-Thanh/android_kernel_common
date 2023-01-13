@@ -46,6 +46,30 @@
       },
       "revId": "4fa690983de16baf7995040065a29d4173688854",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb5cfcd_cc1cece5",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-13T22:25:33Z",
+      "side": 0,
+      "message": "Ah, ok. I see the problem now. Please update the description of the patch to say that __wake_oom_reaper() is supposed to be called after get_task_struct() and oom_reap_task() will later drop that reference. Therefore add_to_oom_reaper() should not drop the reference count itself, unless someone else already queued the same task for reaping.",
+      "parentUuid": "966c263d_e8be2186",
+      "range": {
+        "startLine": 1281,
+        "startChar": 1,
+        "endLine": 1287,
+        "endChar": 20
+      },
+      "revId": "4fa690983de16baf7995040065a29d4173688854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
