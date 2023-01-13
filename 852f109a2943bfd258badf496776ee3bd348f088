@@ -33,6 +33,24 @@
       "message": "Hi Blagovest Kolenichev, please add \"Bug: 265356072\" in the commit message.",
       "revId": "852f109a2943bfd258badf496776ee3bd348f088",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6987892b_00d6ffd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-13T23:40:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f290f9fb_99b456dc",
+      "revId": "852f109a2943bfd258badf496776ee3bd348f088",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

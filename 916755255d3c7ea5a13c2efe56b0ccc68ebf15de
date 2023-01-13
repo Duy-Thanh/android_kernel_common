@@ -34,6 +34,24 @@
       "parentUuid": "6f3e10de_b37506b7",
       "revId": "916755255d3c7ea5a13c2efe56b0ccc68ebf15de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d2ee715_19c8ae7a",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-13T23:40:45Z",
+      "side": 0,
+      "message": "Just drop the change to abi_gki_aarch64 and regenerate the XML.",
+      "parentUuid": "ad9932dc_4c70b641",
+      "revId": "916755255d3c7ea5a13c2efe56b0ccc68ebf15de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
