@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ea7ed00_d5060ea4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2023-01-13T20:53:47Z",
+      "side": 1,
+      "message": "ok I will create a new bug ID here. thanks",
+      "parentUuid": "e4ab6f8a_9fe15c1b",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "de32ec5c2c8e97e44da9873b8dfa63bfef2cc9d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fe6ad252_8210cc1a",
