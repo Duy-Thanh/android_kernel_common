@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4251f3a9_a1d2dbd0",
+        "filename": "include/linux/timekeeping.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-13T13:13:35Z",
+      "side": 1,
+      "message": "Please add comments for the added fields",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 1
+      },
+      "revId": "fb6a781c861dee6b728e8bd0d5c1a10053fb8e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
