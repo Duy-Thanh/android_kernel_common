@@ -22,6 +22,30 @@
       },
       "revId": "4fa690983de16baf7995040065a29d4173688854",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "966c263d_e8be2186",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2023-01-13T20:50:45Z",
+      "side": 0,
+      "message": "static void __wake_oom_reaper(struct task_struct *tsk)\n{\n\tstruct mm_struct *mm \u003d tsk-\u003esignal-\u003eoom_mm;\n\tunsigned long flags;\n\n\t/* The victim managed to terminate on its own - see exit_mmap */\n\tif (test_bit(MMF_OOM_SKIP, \u0026mm-\u003eflags)) {\n-----\u003e\t\tput_task_struct(tsk);\n\t\treturn;\n\t}\n\n\tspin_lock_irqsave(\u0026oom_reaper_lock, flags);\n\ttsk-\u003eoom_reaper_list \u003d oom_reaper_list;\n\toom_reaper_list \u003d tsk;\n\tspin_unlock_irqrestore(\u0026oom_reaper_lock, flags);\n\ttrace_wake_reaper(tsk-\u003epid);\n\twake_up(\u0026oom_reaper_wait);\n}\t\n\noom_reap_task() will also put_task_struct \n\t\nthe final line put_task_struct again, so the imblance comes",
+      "parentUuid": "ef7103f0_88fcd441",
+      "range": {
+        "startLine": 1281,
+        "startChar": 1,
+        "endLine": 1287,
+        "endChar": 20
+      },
+      "revId": "4fa690983de16baf7995040065a29d4173688854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
