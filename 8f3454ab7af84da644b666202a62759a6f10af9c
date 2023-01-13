@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "212f74b9_a5b7e790",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:32:06Z",
+      "side": 1,
+      "message": "Not only teardown right? This can happen after any unshare, which can be between the host and the hyp?",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66af6c80_2a182462",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:32:06Z",
+      "side": 1,
+      "message": "it doesn\u0027t say modify \"how\". \n\nI suppose you want to say \"Also recreate a block mapping when the only left \"OWNED\" PTEs have the default access permissions (RW). This is done by excluding those PTEs from the refcount\" Something between those lines?",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8599963_069ca26f",
+        "filename": "arch/arm64/include/asm/kvm_pgtable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:32:06Z",
+      "side": 1,
+      "message": "Probably not a big deal but it should be KVM_PTE_LEAF_ATTR_LO_S2_AF?\n\nAlso maybe DEFAULT_ATTR_MASK?",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6476375_871870c3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:32:06Z",
+      "side": 1,
+      "message": "Should be move to guest_stage2_pte_is_counted()? When PTE are refcounted is slightly different now in the case of the host.",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca2a413_8f07a70f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:32:06Z",
+      "side": 1,
+      "message": "IIUC, this allows mappings with default attributes (info we can afford losing) to be folded into a block mapping. So with this change, coalescing will be effective for a block where we have default mapping + annotations.\n\nIt\u0027s not a big deal, but it should probably be separated into a different patch for later upstream submission.",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27814b92_802222f9",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:32:06Z",
+      "side": 1,
+      "message": "nit: I believe the kernel coding style imposes brackets for this if now you have for the else.",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5309f869_f9f744c7",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:32:06Z",
+      "side": 1,
+      "message": "nit: should be aligned with u64 addr. See stage2_map_walk_table_post() below as an example.",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fbeadef_c2b97847",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:32:06Z",
+      "side": 1,
+      "message": "It might be more correct here to talk about \"annotate\"? This is the name in pgtable.c (kvm_pgtable_stage2_annotate())\n\nAnd actually, I wonder if the function shouldn\u0027t be coalesce_annotations as this is the only path where this is active?",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
