@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e58861_b7532d66",
+        "filename": "mm/compaction.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1956236
+      },
+      "writtenOn": "2023-01-13T02:13:52Z",
+      "side": 1,
+      "message": "@minchan@google.com\n\"get_pageblock_migratetype(page) \u003d\u003d MIGRATE_MOVABLE\" return true or false\nAnd is_migrate_cma()\u0027s argument is migratetype not true or false\nDoesn\u0027t make sense...correct me if I am wrong. Thanks",
+      "revId": "8bc0a3baf69de299651e624d03aa0b973b3ac361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
