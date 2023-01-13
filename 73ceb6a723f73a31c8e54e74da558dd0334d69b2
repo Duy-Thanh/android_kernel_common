@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b2b362b_8eca2790",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-13T17:56:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87b22912_1038420f",
+      "range": {
+        "startLine": 10,
+        "startChar": 27,
+        "endLine": 10,
+        "endChar": 33
+      },
+      "revId": "73ceb6a723f73a31c8e54e74da558dd0334d69b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "756d0680_6f90d4a3",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-01-12T17:13:16Z",
       "side": 1,
       "message": "remove needless newline so this is on the same line as \"differen\"",
+      "revId": "73ceb6a723f73a31c8e54e74da558dd0334d69b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4443317_77caf622",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-13T17:56:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "756d0680_6f90d4a3",
       "revId": "73ceb6a723f73a31c8e54e74da558dd0334d69b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
