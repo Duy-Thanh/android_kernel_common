@@ -16,6 +16,24 @@
       "message": "you should not remove symbols from other symbol lists",
       "revId": "916755255d3c7ea5a13c2efe56b0ccc68ebf15de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad9932dc_4c70b641",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1864326
+      },
+      "writtenOn": "2023-01-13T14:50:31Z",
+      "side": 0,
+      "message": "This is done by the ABI update command:\n\nLTO\u003dfull BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 ./build/build_abi.sh --update --print-report\n\nIf you think this is not correct I\u0027ll discard that delta? Also I noticed that delta does not exist in android13-5.15 branch:\n\n  $ git diff refs/remotes/aosp/android13-5.15 refs/remotes/aosp/android13-5.15-2022-12 -- android/abi_gki_aarch64\n  diff --git a/android/abi_gki_aarch64 b/android/abi_gki_aarch64\n  index 90bf4ede4711..908036738584 100644\n  --- a/android/abi_gki_aarch64\n  +++ b/android/abi_gki_aarch64\n  @@ -142,3 +142,6 @@\n     unregister_shrinker\n     wait_on_page_bit\n     __wake_up\n  +\n  +# preserved by --additions-only\n  +  __sysfs_match_string",
+      "parentUuid": "6f3e10de_b37506b7",
+      "revId": "916755255d3c7ea5a13c2efe56b0ccc68ebf15de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
