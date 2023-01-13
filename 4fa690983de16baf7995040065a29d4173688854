@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef7103f0_88fcd441",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-13T19:34:23Z",
+      "side": 0,
+      "message": "get_task_struct/put_task_struct here look perfectly balanced here, as they should be. If you found imbalance, it comes from somewhere else. Please fix it in the right place instead.",
+      "range": {
+        "startLine": 1281,
+        "startChar": 1,
+        "endLine": 1287,
+        "endChar": 20
+      },
+      "revId": "4fa690983de16baf7995040065a29d4173688854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
