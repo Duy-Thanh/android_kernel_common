@@ -77,6 +77,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38887f20_6aa2985b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:45:17Z",
+      "side": 1,
+      "message": "Could be part of the check below? The mask would just include KVM_PTE_TYPE?",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e20613_7b1c2214",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-13T17:45:17Z",
+      "side": 1,
+      "message": "nit: a bit of a shame to invert here even if it probably doesn\u0027t have any impact on the compiled version.",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ca2a413_8f07a70f",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
