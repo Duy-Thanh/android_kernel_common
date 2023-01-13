@@ -22,6 +22,30 @@
       },
       "revId": "ad19a82427d8b8d0a5984325d7cffabc07b4dfd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "683aed26_be20b5cb",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1318,
+      "author": {
+        "id": 1982375
+      },
+      "writtenOn": "2023-01-13T00:45:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd066ea6_3e46de17",
+      "range": {
+        "startLine": 1318,
+        "startChar": 0,
+        "endLine": 1318,
+        "endChar": 46
+      },
+      "revId": "ad19a82427d8b8d0a5984325d7cffabc07b4dfd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
