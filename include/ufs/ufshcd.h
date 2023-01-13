@@ -1151,6 +1151,7 @@ struct ufs_hw_queue {
 	spinlock_t cq_lock;
 	/* prevent concurrent access to submission queue */
 	struct mutex sq_mutex;
+	bool mcq_sup;
 };
 
 static inline bool is_mcq_enabled(struct ufs_hba *hba)
