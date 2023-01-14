@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c69bf9e2_3703189c",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1318,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-14T13:31:36Z",
+      "side": 1,
+      "message": "full 64 bits are still \"burned\", please add the needed padding to the end of this structure so that the other bits can be used in the future.\n\nSomething like:\n`ANDROID_KABI_USE(1, struct { u8 clear_stall_protocol; u8 padding1; u8 padding2;...};",
+      "range": {
+        "startLine": 1318,
+        "startChar": 1,
+        "endLine": 1318,
+        "endChar": 57
+      },
+      "revId": "a8649863dcb4da0903516c233a8f0f009bb33db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
