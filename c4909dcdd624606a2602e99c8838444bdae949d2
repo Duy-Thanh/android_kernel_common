@@ -142,6 +142,30 @@
       },
       "revId": "c4909dcdd624606a2602e99c8838444bdae949d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4acb17cf_d90b81a8",
+        "filename": "kernel/hung_task.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-14T13:38:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa926c27_ace3fd2d",
+      "range": {
+        "startLine": 219,
+        "startChar": 46,
+        "endLine": 219,
+        "endChar": 48
+      },
+      "revId": "c4909dcdd624606a2602e99c8838444bdae949d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
