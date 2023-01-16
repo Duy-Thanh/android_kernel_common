@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b041acc7_c7ea33a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T18:29:21Z",
+      "side": 1,
+      "message": "Right, do you have any concerns regarding this code path ?",
+      "parentUuid": "25b3486a_feef2fbd",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66af6c80_2a182462",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -190,6 +208,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1938f50a_46dc3e2f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T18:29:21Z",
+      "side": 1,
+      "message": "Let\u0027s keep it as it is because I think is more readable than making it part of the mask.",
+      "parentUuid": "38887f20_6aa2985b",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55e20613_7b1c2214",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
@@ -201,6 +237,24 @@
       "writtenOn": "2023-01-13T17:45:17Z",
       "side": 1,
       "message": "nit: a bit of a shame to invert here even if it probably doesn\u0027t have any impact on the compiled version.",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "018d552b_e760d162",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T18:29:21Z",
+      "side": 1,
+      "message": "I don\u0027t follow, can you please let me know what is your concern ?",
+      "parentUuid": "55e20613_7b1c2214",
       "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -312,6 +366,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e458dab_1c6ae434",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T18:29:21Z",
+      "side": 1,
+      "message": "I will fix the alignment, thanks for letting me know",
+      "parentUuid": "5309f869_f9f744c7",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2fbeadef_c2b97847",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 2
@@ -323,6 +395,24 @@
       "writtenOn": "2023-01-13T17:32:06Z",
       "side": 1,
       "message": "It might be more correct here to talk about \"annotate\"? This is the name in pgtable.c (kvm_pgtable_stage2_annotate())\n\nAnd actually, I wonder if the function shouldn\u0027t be coalesce_annotations as this is the only path where this is active?",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b407191_ebe48727",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T18:29:21Z",
+      "side": 1,
+      "message": "I think they both refer to the same operation because setting ownership refers to building a particular type of annotation, but I would like to keep it as it is.",
+      "parentUuid": "2fbeadef_c2b97847",
       "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
