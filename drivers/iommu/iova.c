@@ -217,8 +217,13 @@ static int __alloc_and_insert_iova_range(struct iova_domain *iovad,
 		goto iova32_full;
 
 	curr = __get_cached_rbnode(iovad, limit_pfn);
+<<<<<<< HEAD   (e3a5b6 UPSTREAM: usb: dwc3: gadget: Skip waiting for CMDACT cleared)
 	curr_iova = rb_entry(curr, struct iova, node);
 	low_pfn_new = curr_iova->pfn_hi + 1;
+=======
+	curr_iova = to_iova(curr);
+	retry_pfn = curr_iova->pfn_hi;
+>>>>>>> CHANGE (2eac4b UPSTREAM: iommu/iova: Fix alloc iova overflows issue)
 
 retry:
 	do {
@@ -232,9 +237,15 @@ retry:
 	if (high_pfn < size || new_pfn < low_pfn) {
 		if (low_pfn == iovad->start_pfn && low_pfn_new < limit_pfn) {
 			high_pfn = limit_pfn;
+<<<<<<< HEAD   (e3a5b6 UPSTREAM: usb: dwc3: gadget: Skip waiting for CMDACT cleared)
 			low_pfn = low_pfn_new;
 			curr = &iovad->anchor.node;
 			curr_iova = rb_entry(curr, struct iova, node);
+=======
+			low_pfn = retry_pfn + 1;
+			curr = iova_find_limit(iovad, limit_pfn);
+			curr_iova = to_iova(curr);
+>>>>>>> CHANGE (2eac4b UPSTREAM: iommu/iova: Fix alloc iova overflows issue)
 			goto retry;
 		}
 		iovad->max32_alloc_size = size;
