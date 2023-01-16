@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a143d168_cc800f5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-16T19:09:37Z",
+      "side": 1,
+      "message": "No concern, but that description is then not completely accurate.",
+      "parentUuid": "b041acc7_c7ea33a1",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66af6c80_2a182462",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -156,6 +174,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9f5b810_13137700",
+        "filename": "arch/arm64/include/asm/kvm_pgtable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-16T19:09:37Z",
+      "side": 1,
+      "message": "My point was to make it more descriptive by stating this is a mask. but that\u0027s really a nit, don\u0027t waste your time with that.",
+      "parentUuid": "7020896b_1a4d07ed",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6476375_871870c3",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
@@ -224,6 +260,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16ff175c_bce183de",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-16T19:09:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1938f50a_46dc3e2f",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55e20613_7b1c2214",
@@ -255,6 +309,24 @@
       "side": 1,
       "message": "I don\u0027t follow, can you please let me know what is your concern ?",
       "parentUuid": "55e20613_7b1c2214",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7f44e25_5d37ed30",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-16T19:09:37Z",
+      "side": 1,
+      "message": "```\nif (addr_is_memory(phys)\n   return ... KVM_HOST_S2_DEFAULT_MMIO_PTE\nelse\n   return\n```   \n \nTo drop the \u0027!\u0027",
+      "parentUuid": "018d552b_e760d162",
       "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
