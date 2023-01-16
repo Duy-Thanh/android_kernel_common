@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25b3486a_feef2fbd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-16T12:09:54Z",
+      "side": 1,
+      "message": "__pkvm_host_donate_hyp() seems to rely on host_stage2_set_owner_locked(). It\u0027s used by the S2MPU, modules and it\u0027ll be by tracing.",
+      "parentUuid": "258eaf01_6605930d",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66af6c80_2a182462",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -218,6 +236,24 @@
       "side": 1,
       "message": "I don\u0027t get the second part of your comment `So with this change, coalescing will be effective for a block where we have default mapping + annotations`. With this change, we increase our chances of coalescing because we don\u0027t do `get_page` for default mappings (lets say we have a 4Kb page mapping) so when we look at the page table page that holds our mapping and we see that it is not referenced (refcount \u003d\u003d 1) we can zap the entire page table page which re-creates a 2MB available block.\n\nI agree we can separate the refcounting thingy from zapping the page table pages on the _post callback, but these two are highly coupled so without the refcounting trick I don\u0027t think I\u0027ll see any coalescing.",
       "parentUuid": "0ca2a413_8f07a70f",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d8a9f5c_3eff6da7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-16T12:09:54Z",
+      "side": 1,
+      "message": "I suppose without the refcounting, you would see coalescing in the a following case (all entries of a table have owner_id !\u003d0)\n\n```\npkvm_host_donate_hyp(XX, nr_pages\u003d512);\n\n...\n\npkvm_hyp_donate_host(XXm nr_pages\u003d512);\n\n```\n\nOr even with less pages with owner_id !\u003d 0, if the other entries of the tables have never been accessed.",
+      "parentUuid": "2709f52b_e16335e4",
       "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
