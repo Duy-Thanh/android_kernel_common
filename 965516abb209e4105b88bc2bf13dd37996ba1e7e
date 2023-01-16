@@ -248,6 +248,24 @@
       "parentUuid": "98062be0_2996b8d4",
       "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3859f226_2ef9dbbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2023-01-16T10:54:58Z",
+      "side": 1,
+      "message": "I thought more about this and I have a change of heart. Since there is no strict timeframe/deadline until a bugfix should be integrated into the android branches, I\u0027ll backport these 2 fixes once they are integrated into android*-lts. I\u0027ll track the status of a fix with some scripts so I won\u0027t spend too much time on tracking it.",
+      "parentUuid": "332ba220_3666df28",
+      "revId": "965516abb209e4105b88bc2bf13dd37996ba1e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
