@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "258eaf01_6605930d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T11:40:40Z",
+      "side": 1,
+      "message": "The coalescing code is triggered on `host_stage2_set_owner_locked` path when we annotate the entries in the host stage2 page-tables with an invalid entry that has the owner set to `PKVM_ID_HOST`. So it can also be triggered from `page_relinquish` when we do page insertion in the ballooning code.",
+      "parentUuid": "212f74b9_a5b7e790",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66af6c80_2a182462",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2023-01-13T17:32:06Z",
       "side": 1,
       "message": "it doesn\u0027t say modify \"how\". \n\nI suppose you want to say \"Also recreate a block mapping when the only left \"OWNED\" PTEs have the default access permissions (RW). This is done by excluding those PTEs from the refcount\" Something between those lines?",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d938e432_dec6446a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T11:40:40Z",
+      "side": 1,
+      "message": "Hmm, I wouldn\u0027t add that part to avoid confusion because we don\u0027t literally recreate block mappings `but` we rely on the host to lazily re-create it for us on the fault path. In some way we just do a cleanup which is allowing the host to find a larger portion where it can map stuff. I think the missing part in the description is to mention that `we are not longer refcounting the following descriptors in the host stage2 page tables(..)`",
+      "parentUuid": "66af6c80_2a182462",
       "range": {
         "startLine": 22,
         "startChar": 37,
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7020896b_1a4d07ed",
+        "filename": "arch/arm64/include/asm/kvm_pgtable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T11:40:40Z",
+      "side": 1,
+      "message": "You are right, thanks for pointing out. I will use `KVM_PTE_LEAF_ATTR_LO_S2_AF`. I would like to keep this name as it is a bit more descriptive unless you are very keen on renaming it.",
+      "parentUuid": "e8599963_069ca26f",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6476375_871870c3",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
@@ -71,6 +131,24 @@
       "writtenOn": "2023-01-13T17:32:06Z",
       "side": 1,
       "message": "Should be move to guest_stage2_pte_is_counted()? When PTE are refcounted is slightly different now in the case of the host.",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e29a8d9f_9fcff4ed",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T11:40:40Z",
+      "side": 1,
+      "message": "Right, we can move it but the comment is still true for the host_stage2.",
+      "parentUuid": "f6476375_871870c3",
       "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -128,6 +206,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2709f52b_e16335e4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T11:40:40Z",
+      "side": 1,
+      "message": "I don\u0027t get the second part of your comment `So with this change, coalescing will be effective for a block where we have default mapping + annotations`. With this change, we increase our chances of coalescing because we don\u0027t do `get_page` for default mappings (lets say we have a 4Kb page mapping) so when we look at the page table page that holds our mapping and we see that it is not referenced (refcount \u003d\u003d 1) we can zap the entire page table page which re-creates a 2MB available block.\n\nI agree we can separate the refcounting thingy from zapping the page table pages on the _post callback, but these two are highly coupled so without the refcounting trick I don\u0027t think I\u0027ll see any coalescing.",
+      "parentUuid": "0ca2a413_8f07a70f",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27814b92_802222f9",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 2
@@ -139,6 +235,24 @@
       "writtenOn": "2023-01-13T17:32:06Z",
       "side": 1,
       "message": "nit: I believe the kernel coding style imposes brackets for this if now you have for the else.",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f82ee7_3b83cda5",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-16T11:40:40Z",
+      "side": 1,
+      "message": "I will fix this, cheers",
+      "parentUuid": "27814b92_802222f9",
       "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
