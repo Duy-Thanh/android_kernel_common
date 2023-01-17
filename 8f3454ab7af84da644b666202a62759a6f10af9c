@@ -210,6 +210,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "805490fb_c8f5513e",
+        "filename": "arch/arm64/include/asm/kvm_pgtable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T14:24:04Z",
+      "side": 1,
+      "message": "I will add MASK suffix to the name but I don\u0027t get the second part of the comment. The intended effect is to mask out the AF bits to prevent wrong refcounting. I am thinking of the following case:\n\n- if we don\u0027t mask out the AF bits and (pte \u0026 mask) \u003d\u003d default_pte \u003d\u003e we will return not refconted and then on the first access we will return refcounted\n\nLet me know what do you think, thanks",
+      "parentUuid": "04a2e4bf_472d4938",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6476375_871870c3",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
