@@ -16,6 +16,24 @@
       "message": "Todd, Matthias.\n\nThe loss of mtd_info is in the generated ABI XML as well.",
       "revId": "32c0edb691fb6d275f0fa1a00304173c2907264e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "331f9934_ff3308bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-17T18:21:40Z",
+      "side": 1,
+      "message": "Seiya please add an inclusion of `\u003clinux/mtd/mtd.h\u003e` to drivers/android/vendor_hooks.h (inside `#ifdef __GENKSYMS__`)",
+      "parentUuid": "160bde0f_af214087",
+      "revId": "32c0edb691fb6d275f0fa1a00304173c2907264e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
