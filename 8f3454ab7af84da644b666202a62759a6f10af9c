@@ -270,6 +270,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e6dda05_a1120cca",
+        "filename": "arch/arm64/include/asm/kvm_pgtable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-01-17T17:44:15Z",
+      "side": 1,
+      "message": "AF is _always_ set for the host stage-2 so I\u0027d like to leave it as part of the mask and into `KVM_HOST_S2_FAULT_MEM_PTE` instead. That way, we basically say \"mask out the attributes and check them all\". Does that make sense?",
+      "parentUuid": "805490fb_c8f5513e",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6476375_871870c3",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
