@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c10bcb9_5ea9a033",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T15:37:59Z",
+      "side": 1,
+      "message": "Gotcha, let me add the missing parts to the commit message.",
+      "parentUuid": "a143d168_cc800f5c",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66af6c80_2a182462",
@@ -127,6 +145,30 @@
       "side": 1,
       "message": "Hmm, I wouldn\u0027t add that part to avoid confusion because we don\u0027t literally recreate block mappings `but` we rely on the host to lazily re-create it for us on the fault path. In some way we just do a cleanup which is allowing the host to find a larger portion where it can map stuff. I think the missing part in the description is to mention that `we are not longer refcounting the following descriptors in the host stage2 page tables(..)`",
       "parentUuid": "66af6c80_2a182462",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "502065ef_fa11b441",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T15:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d938e432_dec6446a",
       "range": {
         "startLine": 22,
         "startChar": 37,
@@ -261,6 +303,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bbdfd35_a7a8792c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T15:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e29a8d9f_9fcff4ed",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38887f20_6aa2985b",
@@ -369,6 +429,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "448af4ff_9f82268e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T15:37:59Z",
+      "side": 1,
+      "message": "In that case",
+      "parentUuid": "c7f44e25_5d37ed30",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ca2a413_8f07a70f",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
@@ -420,6 +498,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afefd7b7_5c53a0d7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T15:37:59Z",
+      "side": 1,
+      "message": "I would like to keep it in the same patch because is highly coupled with the scope of this change and without it nothing will coalesce.",
+      "parentUuid": "9d8a9f5c_3eff6da7",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27814b92_802222f9",
@@ -451,6 +547,24 @@
       "side": 1,
       "message": "I will fix this, cheers",
       "parentUuid": "27814b92_802222f9",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b978dba_b40459a0",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T15:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5f82ee7_3b83cda5",
       "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -490,6 +604,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ed4124_a3e34ad9",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T15:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e458dab_1c6ae434",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fbeadef_c2b97847",
@@ -521,6 +653,24 @@
       "side": 1,
       "message": "I think they both refer to the same operation because setting ownership refers to building a particular type of annotation, but I would like to keep it as it is.",
       "parentUuid": "2fbeadef_c2b97847",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e1b90f_6e69921a",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T15:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b407191_ebe48727",
       "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
