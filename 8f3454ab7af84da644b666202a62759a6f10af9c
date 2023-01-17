@@ -445,6 +445,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b57a695_c9f784c3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-01-17T15:38:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "448af4ff_9f82268e",
+      "revId": "8f3454ab7af84da644b666202a62759a6f10af9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ca2a413_8f07a70f",
