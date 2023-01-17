@@ -70,6 +70,24 @@
       "parentUuid": "d715d2b3_dab1df02",
       "revId": "9a100e770a3adb9b04487d934e0293d92a86f7ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e233afc_ce4b7c89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1930750
+      },
+      "writtenOn": "2023-01-17T08:05:59Z",
+      "side": 1,
+      "message": "Add information on commit messages\nThank you very much",
+      "parentUuid": "acaf6ad0_9fcf38cb",
+      "revId": "9a100e770a3adb9b04487d934e0293d92a86f7ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
