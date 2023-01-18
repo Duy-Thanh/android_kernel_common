@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68a7d577_0d999758",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-01-18T10:00:13Z",
+      "side": 1,
+      "message": "The presubmit will tell us if the parent commit resolves the ABI type loss issue. If it does, you will need to update the XML here.",
+      "revId": "7e3f8adfda5f6544d5c41e61efff4bda64cb9e07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
