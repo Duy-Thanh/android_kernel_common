@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3dc2b00_983c7205",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-18T20:42:23Z",
+      "side": 1,
+      "message": "The partner confirmed this patch solves the issue.\nMinchan, could you please add the Bug reference to the description and remove WIP once you are happy with its state?",
+      "revId": "049118d44f42c6d46362ae173053259872127ee6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
