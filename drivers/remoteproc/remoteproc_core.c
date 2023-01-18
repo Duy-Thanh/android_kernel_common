@@ -1869,10 +1869,16 @@ static void rproc_crash_handler_work(struct work_struct *work)
 
 	mutex_lock(&rproc->lock);
 
-	if (rproc->state == RPROC_CRASHED || rproc->state == RPROC_OFFLINE) {
+	if (rproc->state == RPROC_CRASHED) {
 		/* handle only the first crash detected */
 		mutex_unlock(&rproc->lock);
 		return;
+	}
+
+	if (rproc->state == RPROC_OFFLINE) {
+		/* Don't recover if the remote processor was stopped */
+		mutex_unlock(&rproc->lock);
+		goto out;
 	}
 
 	rproc->state = RPROC_CRASHED;
@@ -1884,8 +1890,12 @@ static void rproc_crash_handler_work(struct work_struct *work)
 	if (!rproc->recovery_disabled)
 		rproc_trigger_recovery(rproc);
 
+<<<<<<< HEAD   (9a38b5 Merge 6.1.3 into android14-6.1)
 	trace_android_vh_rproc_recovery(rproc);
 
+=======
+out:
+>>>>>>> BRANCH (2cb8e6 Linux 6.1.4)
 	pm_relax(rproc->dev.parent);
 }
 
