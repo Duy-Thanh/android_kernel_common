@@ -33,6 +33,24 @@
       "message": "Change is not merging?",
       "revId": "82ffbebfe311b34f8b7766c19cf06d733e7a9d60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef291704_56df37c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-01-18T10:09:58Z",
+      "side": 1,
+      "message": "There is another pending change that may resolve the XML diff seen here. If it does, I\u0027ll repush this change as well.\n\nThere is also an unrelated test failure, not caused by this commit.",
+      "parentUuid": "cd5580df_0d7bf77d",
+      "revId": "82ffbebfe311b34f8b7766c19cf06d733e7a9d60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
