@@ -34,6 +34,24 @@
       "parentUuid": "49c0b0f3_a4a3d76c",
       "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca1a9610_471c505a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-18T12:06:20Z",
+      "side": 1,
+      "message": "I do not understand, why is this needed now for the `android-mainline` branch?  What relies on it being here and why can you not just get your needed out-of-tree code upstream now so that the mainline hook will not be needed?",
+      "parentUuid": "7ece6e19_0d809c8e",
+      "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
