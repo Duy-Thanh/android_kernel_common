@@ -16,6 +16,24 @@
       "message": "Hmm, should this not rather be added to the `#ifndef __GENKSYSMS__` section? Otherwise it will for sure affect CRCs and still escape the binary analysis.",
       "revId": "1343a35a26f120978b4dda2fd8a5fb65e260be61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f0aa908_d1cec0df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-18T23:41:50Z",
+      "side": 1,
+      "message": "Yes, it should be `#ifndef __GENKSYMS__`. Presumably this inclusion is making `mtd_info` fully defined in the KMI.",
+      "parentUuid": "2e981537_7318d546",
+      "revId": "1343a35a26f120978b4dda2fd8a5fb65e260be61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
