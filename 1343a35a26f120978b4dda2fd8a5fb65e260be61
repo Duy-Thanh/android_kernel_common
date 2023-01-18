@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e981537_7318d546",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-01-18T15:03:16Z",
+      "side": 1,
+      "message": "Hmm, should this not rather be added to the `#ifndef __GENKSYSMS__` section? Otherwise it will for sure affect CRCs and still escape the binary analysis.",
+      "revId": "1343a35a26f120978b4dda2fd8a5fb65e260be61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
