@@ -176,6 +176,7 @@ inherit_comp:
 	}
 }
 
+<<<<<<< HEAD   (db0cab ANDROID: KVM: arm64: Coalesce host stage2 entries on ownersh)
 /*
  * Set file's temperature for hot/cold data separation
  */
@@ -202,6 +203,8 @@ static void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *inode,
 		file_set_hot(inode);
 }
 
+=======
+>>>>>>> BRANCH (d6a980 Linux 6.1.2)
 static struct inode *f2fs_new_inode(struct user_namespace *mnt_userns,
 						struct inode *dir, umode_t mode,
 						const char *name)
@@ -333,6 +336,39 @@ fail_drop:
 	return ERR_PTR(err);
 }
 
+<<<<<<< HEAD   (db0cab ANDROID: KVM: arm64: Coalesce host stage2 entries on ownersh)
+=======
+/*
+ * Set file's temperature for hot/cold data separation
+ */
+static inline void set_file_temperature(struct f2fs_sb_info *sbi, struct inode *inode,
+		const unsigned char *name)
+{
+	__u8 (*extlist)[F2FS_EXTENSION_LEN] = sbi->raw_super->extension_list;
+	int i, cold_count, hot_count;
+
+	f2fs_down_read(&sbi->sb_lock);
+
+	cold_count = le32_to_cpu(sbi->raw_super->extension_count);
+	hot_count = sbi->raw_super->hot_ext_count;
+
+	for (i = 0; i < cold_count + hot_count; i++) {
+		if (is_extension_exist(name, extlist[i], true))
+			break;
+	}
+
+	f2fs_up_read(&sbi->sb_lock);
+
+	if (i == cold_count + hot_count)
+		return;
+
+	if (i < cold_count)
+		file_set_cold(inode);
+	else
+		file_set_hot(inode);
+}
+
+>>>>>>> BRANCH (d6a980 Linux 6.1.2)
 static int f2fs_create(struct user_namespace *mnt_userns, struct inode *dir,
 		       struct dentry *dentry, umode_t mode, bool excl)
 {
@@ -354,6 +390,12 @@ static int f2fs_create(struct user_namespace *mnt_userns, struct inode *dir,
 	if (IS_ERR(inode))
 		return PTR_ERR(inode);
 
+<<<<<<< HEAD   (db0cab ANDROID: KVM: arm64: Coalesce host stage2 entries on ownersh)
+=======
+	if (!test_opt(sbi, DISABLE_EXT_IDENTIFY))
+		set_file_temperature(sbi, inode, dentry->d_name.name);
+
+>>>>>>> BRANCH (d6a980 Linux 6.1.2)
 	inode->i_op = &f2fs_file_inode_operations;
 	inode->i_fop = &f2fs_file_operations;
 	inode->i_mapping->a_ops = &f2fs_dblock_aops;

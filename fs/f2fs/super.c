@@ -4228,6 +4228,15 @@ try_onemore:
 	if (err)
 		goto free_bio_info;
 
+<<<<<<< HEAD   (db0cab ANDROID: KVM: arm64: Coalesce host stage2 entries on ownersh)
+=======
+	spin_lock_init(&sbi->error_lock);
+	memcpy(sbi->errors, raw_super->s_errors, MAX_F2FS_ERRORS);
+
+	init_f2fs_rwsem(&sbi->cp_rwsem);
+	init_f2fs_rwsem(&sbi->quota_sem);
+	init_waitqueue_head(&sbi->cp_wait);
+>>>>>>> BRANCH (d6a980 Linux 6.1.2)
 	init_sb_info(sbi);
 
 	err = f2fs_init_iostat(sbi);

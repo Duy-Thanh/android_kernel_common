@@ -1463,7 +1463,11 @@ retry:
 		if (i + 1 < dpolicy->granularity)
 			break;
 
+<<<<<<< HEAD   (db0cab ANDROID: KVM: arm64: Coalesce host stage2 entries on ownersh)
 		if (i + 1 < dcc->max_ordered_discard && dpolicy->ordered)
+=======
+		if (i + 1 < DEFAULT_DISCARD_GRANULARITY && dpolicy->ordered)
+>>>>>>> BRANCH (d6a980 Linux 6.1.2)
 			return __issue_discard_cmd_orderly(sbi, dpolicy);
 
 		pend_list = &dcc->pend_list[i];

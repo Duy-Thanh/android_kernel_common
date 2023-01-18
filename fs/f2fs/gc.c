@@ -156,6 +156,7 @@ do_gc:
 		/* balancing f2fs's metadata periodically */
 		f2fs_balance_fs_bg(sbi, true);
 next:
+<<<<<<< HEAD   (db0cab ANDROID: KVM: arm64: Coalesce host stage2 entries on ownersh)
 		if (sbi->gc_mode != GC_NORMAL) {
 			spin_lock(&sbi->gc_remaining_trials_lock);
 			if (sbi->gc_remaining_trials) {
@@ -164,6 +165,16 @@ next:
 					sbi->gc_mode = GC_NORMAL;
 			}
 			spin_unlock(&sbi->gc_remaining_trials_lock);
+=======
+		if (sbi->gc_mode == GC_URGENT_HIGH) {
+			spin_lock(&sbi->gc_urgent_high_lock);
+			if (sbi->gc_urgent_high_remaining) {
+				sbi->gc_urgent_high_remaining--;
+				if (!sbi->gc_urgent_high_remaining)
+					sbi->gc_mode = GC_NORMAL;
+			}
+			spin_unlock(&sbi->gc_urgent_high_lock);
+>>>>>>> BRANCH (d6a980 Linux 6.1.2)
 		}
 		sb_end_write(sbi->sb);
 
