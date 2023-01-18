@@ -16,6 +16,24 @@
       "message": "Hook should not be needed for `android-mainline`",
       "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ece6e19_0d809c8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878105
+      },
+      "writtenOn": "2023-01-18T01:42:17Z",
+      "side": 1,
+      "message": "The 6.1 patch is merged.\nWe need the hook in the android-mainline branch so this duplicate hook is not needed in the future.\nI add the same detail to the commit message as 6.1.\nPlease review, thank you.",
+      "parentUuid": "49c0b0f3_a4a3d76c",
+      "revId": "735d5167cc3fccc155d6f2ddcf4b667eeab9980f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
