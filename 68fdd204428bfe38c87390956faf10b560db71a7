@@ -16,6 +16,24 @@
       "message": "ABI change.\n\n\u0027struct devfreq at devfreq.h:148:1\u0027 changed:\n  type size changed from 15872 to 15936 (in bits)\n  1 data member insertion:\n    \u0027void* governor_data\u0027, at offset 9664 (in bits) at devfreq.h:163:1\n  there are data member changes:\n    13 (\u0027unsigned long int min_freq\u0027 .. \u0027srcu_notifier_head transition_notifier_list\u0027) offsets changed (by +64 bits)\n  38 impacted interfaces",
       "revId": "68fdd204428bfe38c87390956faf10b560db71a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d541785f_a141d2fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-19T13:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a386288_21536b72",
+      "revId": "68fdd204428bfe38c87390956faf10b560db71a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
