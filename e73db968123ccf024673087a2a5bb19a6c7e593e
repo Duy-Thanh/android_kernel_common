@@ -93,6 +93,30 @@
       },
       "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dcadba0_05e111e1",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-19T14:14:20Z",
+      "side": 1,
+      "message": "The 4k buffer size is the value set by upstream.  Enlarging that value would likely be rejected and seems wasteful from an Embedded Programming stand-point.  Reducing the 16k limit also seems like a bad idea.  The original author made it that large for a reason.  I have no way of knowing what that reason was, but it\u0027s likely to break something for somebody - probably userspace, which is a non-starter.  All we\u0027re doing here is enforcing the current limitations which, at least for me, is the least impactful, lowest risk (no-)action we can take.",
+      "parentUuid": "8b428d12_b58ff601",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1088,
+        "endChar": 61
+      },
+      "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
