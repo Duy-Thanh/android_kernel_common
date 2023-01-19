@@ -34,6 +34,24 @@
       "parentUuid": "2e981537_7318d546",
       "revId": "1343a35a26f120978b4dda2fd8a5fb65e260be61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65f91ef3_cd032f08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083383
+      },
+      "writtenOn": "2023-01-19T05:32:50Z",
+      "side": 1,
+      "message": "I removed #include \u003clinux/mtd/mtd.h\u003e from #ifndef __GENKSYMS__ . Please let me know if I am not doing right. Thanks.",
+      "parentUuid": "7f0aa908_d1cec0df",
+      "revId": "1343a35a26f120978b4dda2fd8a5fb65e260be61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
