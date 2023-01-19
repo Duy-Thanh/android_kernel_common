@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e09e88c_41347ad9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-19T16:53:46Z",
+      "side": 1,
+      "message": "No need. mtd.h is now included in the proper way without this patch.",
+      "revId": "5c3079fa6172789d0d8d001e6a408408e8aae399",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "282f0d52_7cf347ac",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-19T16:53:46Z",
+      "side": 1,
+      "message": "It looks like the rebased version of this has it correct so you can abandon this patch. Notice that in the base version, mtd.h is now included at line 19 inside the `#ifndef __GENKSYMS__` block.",
+      "revId": "5c3079fa6172789d0d8d001e6a408408e8aae399",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
