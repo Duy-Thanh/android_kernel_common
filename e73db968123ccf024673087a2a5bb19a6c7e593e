@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc7d69dd_614946eb",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-19T08:50:07Z",
+      "side": 1,
+      "message": "why does this need a new function, why not always check this for all control requests?\n\nAnd what about bulk requests that are \"too big\"?  Where are they checked?",
+      "range": {
+        "startLine": 1575,
+        "startChar": 10,
+        "endLine": 1575,
+        "endChar": 35
+      },
+      "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd373b0_b4624fbe",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-19T08:50:07Z",
+      "side": 1,
+      "message": "again, why not put this logic at the top of acc_ctrlrequest()?",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1088,
+        "endChar": 61
+      },
+      "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
