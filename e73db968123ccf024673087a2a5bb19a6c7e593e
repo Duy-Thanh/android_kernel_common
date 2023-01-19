@@ -69,6 +69,30 @@
       },
       "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b428d12_b58ff601",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-19T11:24:33Z",
+      "side": 1,
+      "message": "They should both have the same max size, otherwise that\u0027s crazy.  Make the buffers identical and check for an overflow always, that makes things simpler, right?",
+      "parentUuid": "dbfde3f7_021c54d2",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1088,
+        "endChar": 61
+      },
+      "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
