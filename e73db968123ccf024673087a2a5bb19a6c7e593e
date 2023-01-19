@@ -45,6 +45,30 @@
       },
       "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbfde3f7_021c54d2",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-19T10:07:51Z",
+      "side": 1,
+      "message": "How would you know how big the buffer is supposed to be?\n\nacc_ctrlrequest() has two call sites - one that supports 4k buffers, the other 16k.",
+      "parentUuid": "ffd373b0_b4624fbe",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1088,
+        "endChar": 61
+      },
+      "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
