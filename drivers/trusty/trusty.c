@@ -345,7 +345,7 @@ int trusty_transfer_memory(struct device *dev, u64 *id,
 		emad->comp_mrd_offset = comp_mrd_offset;
 		emad->reserved_8_15 = 0;
 	}
-	comp_mrd->total_page_count = len / PAGE_SIZE;
+	comp_mrd->total_page_count = len / FFA_PAGE_SIZE;
 	comp_mrd->address_range_count = nents;
 	comp_mrd->reserved_8_15 = 0;
 
@@ -360,7 +360,7 @@ int trusty_transfer_memory(struct device *dev, u64 *id,
 
 		for (i = 0; i < lcount; i++) {
 			cons_mrd[i].address = sg_dma_address(sg);
-			cons_mrd[i].page_count = sg_dma_len(sg) / PAGE_SIZE;
+			cons_mrd[i].page_count = sg_dma_len(sg) / FFA_PAGE_SIZE;
 			cons_mrd[i].reserved_12_15 = 0;
 			sg = sg_next(sg);
 		}
@@ -613,24 +613,24 @@ static int trusty_init_msg_buf(struct trusty_state *s, struct device *dev)
 	s->ffa_local_id = smc_ret.r2;
 	s->ffa_remote_id = 0x8000;
 
-	s->ffa_tx = kmalloc(PAGE_SIZE, GFP_KERNEL);
+	s->ffa_tx = kmalloc(FFA_PAGE_SIZE, GFP_KERNEL);
 	if (!s->ffa_tx) {
 		ret = -ENOMEM;
 		goto err_alloc_tx;
 	}
 	tx_paddr = virt_to_phys(s->ffa_tx);
-	if (WARN_ON(tx_paddr & (PAGE_SIZE - 1))) {
+	if (WARN_ON(tx_paddr & (FFA_PAGE_SIZE - 1))) {
 		ret = -EINVAL;
 		goto err_unaligned_tx_buf;
 	}
 
-	s->ffa_rx = kmalloc(PAGE_SIZE, GFP_KERNEL);
+	s->ffa_rx = kmalloc(FFA_PAGE_SIZE, GFP_KERNEL);
 	if (!s->ffa_rx) {
 		ret = -ENOMEM;
 		goto err_alloc_rx;
 	}
 	rx_paddr = virt_to_phys(s->ffa_rx);
-	if (WARN_ON(rx_paddr & (PAGE_SIZE - 1))) {
+	if (WARN_ON(rx_paddr & (FFA_PAGE_SIZE - 1))) {
 		ret = -EINVAL;
 		goto err_unaligned_rx_buf;
 	}
