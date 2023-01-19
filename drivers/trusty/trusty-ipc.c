@@ -2142,11 +2142,13 @@ static int tipc_virtio_probe(struct virtio_device *vdev)
 
 	/* set default max message size and alignment */
 	memset(&config, 0, sizeof(config));
-	config.msg_buf_max_size  = DEFAULT_MSG_BUF_SIZE;
-	config.msg_buf_alignment = DEFAULT_MSG_BUF_ALIGN;
 
 	/* get configuration if present */
 	vdev->config->get(vdev, 0, &config, sizeof(config));
+
+	/* Use page-sized buffers (required for pKVM) */
+	config.msg_buf_max_size  = DEFAULT_MSG_BUF_SIZE;
+	config.msg_buf_alignment = DEFAULT_MSG_BUF_ALIGN;
 
 	/* copy dev name */
 	strncpy(vds->cdev_name, config.dev_name, sizeof(vds->cdev_name));
