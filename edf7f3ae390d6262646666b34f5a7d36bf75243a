@@ -16,6 +16,24 @@
       "message": "The series breaks the KMI. Please refactor to avoid the change to \u0027struct net_device_path`:\n```\ntype \u0027struct net_device_path\u0027 changed\n  member \u0027union { struct { u16 id; __be16 proto; u8 h_dest[6]; } encap; struct { enum { DEV_PATH_BR_VLAN_KEEP \u003d 0, DEV_PATH_BR_VLAN_TAG \u003d 1, DEV_PATH_BR_VLAN_UNTAG \u003d 2, DEV_PATH_BR_VLAN_UNTAG_HW \u003d 3, } vlan_mode; u16 vlan_id; __be16 vlan_proto; } bridge; struct { int port; u16 proto; } dsa; }\u0027 was added\nkernel_debug_aarch64:aosp_kernel-common-android13-5.15\n[Build] kernel_debug_aarch64 on aosp_kernel-common-android13-5.15 \nError: the build failed.\n```",
       "revId": "edf7f3ae390d6262646666b34f5a7d36bf75243a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "342c4cdf_606d9cd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1900056
+      },
+      "writtenOn": "2023-01-19T19:24:23Z",
+      "side": 1,
+      "message": "None of the CLs in the sequence changes net_device_path. Tried building the tree locally and it didn\u0027t complain of the ABI mismatch either. Hopefully this was just an infra flake!",
+      "parentUuid": "73b4277b_fad44536",
+      "revId": "edf7f3ae390d6262646666b34f5a7d36bf75243a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
