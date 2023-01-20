@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9befd72_1420aafa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-20T00:40:56Z",
+      "side": 1,
+      "message": "Since it\u0027s upstream you can just sent it to stable@vger.kernel.org # 6.1 and we will pick it up via LTS merge.",
+      "revId": "2fb5d395f951d52f3fbd746f68801199d3621bd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
