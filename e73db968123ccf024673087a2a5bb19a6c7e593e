@@ -117,6 +117,30 @@
       },
       "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302e9928_dbe0fa78",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-20T10:29:39Z",
+      "side": 1,
+      "message": "4k -\u003e 16k is a trivial update for a system with Gb of memory in it 😊\n\nBut this is a hacked-up android-only file, so feel free to handle it how ever you think is best.\n\nBut note, you are ONLY changing the control message length here, make sure bulk messages don\u0027t have the same issue.",
+      "parentUuid": "2dcadba0_05e111e1",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1088,
+        "endChar": 61
+      },
+      "revId": "e73db968123ccf024673087a2a5bb19a6c7e593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
