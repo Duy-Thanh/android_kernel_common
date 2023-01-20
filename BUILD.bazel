@@ -225,6 +225,7 @@ define_db845c(
         "sound/soc/qcom/snd-soc-qcom-common.ko",
         "sound/soc/qcom/snd-soc-sdm845.ko",
         "sound/soc/qcom/snd-soc-sm8250.ko",
+        "sound/soc/qcom/snd-soc-qcom-sdw.ko",
     ],
 )
 
