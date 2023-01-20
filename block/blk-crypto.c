@@ -389,6 +389,13 @@ bool blk_crypto_config_supported_natively(struct block_device *bdev,
 					  cfg);
 }
 
+bool blk_crypto_config_supported_natively(struct block_device *bdev,
+					  const struct blk_crypto_config *cfg)
+{
+	return __blk_crypto_cfg_supported(bdev_get_queue(bdev)->crypto_profile,
+					  cfg);
+}
+
 /*
  * Check if bios with @cfg can be en/decrypted by blk-crypto (i.e. either the
  * block_device it's submitted to supports inline crypto, or the
@@ -397,10 +404,15 @@ bool blk_crypto_config_supported_natively(struct block_device *bdev,
 bool blk_crypto_config_supported(struct block_device *bdev,
 				 const struct blk_crypto_config *cfg)
 {
+<<<<<<< HEAD   (ecd7f3 Merge 96f7e448b9f4 ("Merge tag 'for-6.2/io_uring-next-2022-1)
 	if (IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK) &&
 	    cfg->key_type == BLK_CRYPTO_KEY_TYPE_STANDARD)
 		return true;
 	return blk_crypto_config_supported_natively(bdev, cfg);
+=======
+	return IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK) ||
+	       blk_crypto_config_supported_natively(bdev, cfg);
+>>>>>>> BRANCH (ce8a79 Merge tag 'for-6.2/block-2022-12-08' of git://git.kernel.dk/)
 }
 
 /**
