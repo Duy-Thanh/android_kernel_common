@@ -1,0 +1,51 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000036479089",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2396876?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "7b663c72_4f899730",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 226,
+                "startChar": 0,
+                "endLine": 226,
+                "endChar": 0
+              },
+              "replacement": "        \"sound/soc/qcom/snd-soc-qcom-sdw.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 228,
+                "startChar": 0,
+                "endLine": 229,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "d0d7fd7d_db23e906",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-01-20T11:42:39Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "793024c70fd64bef1188ae34f5229bfc6806cbec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
