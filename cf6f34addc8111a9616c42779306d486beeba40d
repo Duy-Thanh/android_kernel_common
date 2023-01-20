@@ -52,6 +52,23 @@
       "parentUuid": "05b79e1a_dc6e5d93",
       "revId": "cf6f34addc8111a9616c42779306d486beeba40d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d5a4ae2_b6dc4d95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1986766
+      },
+      "writtenOn": "2023-01-20T11:41:54Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/all/20230120113321.30433-1-quic_ahari@quicinc.com/\nhttps://lore.kernel.org/all/20230120113321.30433-2-quic_ahari@quicinc.com/",
+      "revId": "cf6f34addc8111a9616c42779306d486beeba40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
