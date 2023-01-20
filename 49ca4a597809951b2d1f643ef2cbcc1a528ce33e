@@ -16,6 +16,24 @@
       "message": "This change needs an xml update to acknowledge.",
       "revId": "49ca4a597809951b2d1f643ef2cbcc1a528ce33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2505e6c_31b3e76d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-20T12:44:58Z",
+      "side": 1,
+      "message": "Nope, should all be good now.",
+      "parentUuid": "3a8176a4_973dda39",
+      "revId": "49ca4a597809951b2d1f643ef2cbcc1a528ce33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
