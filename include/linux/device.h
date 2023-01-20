@@ -573,6 +573,17 @@ extern void class_destroy(struct class *cls);
 	__class_create(owner, name, &__key);	\
 })
 
+static inline bool dev_has_sync_state(struct device *dev)
+{
+	if (!dev)
+		return false;
+	if (dev->driver && dev->driver->sync_state)
+		return true;
+	if (dev->bus && dev->bus->sync_state)
+		return true;
+	return false;
+}
+
 /*
  * The type of device, "struct device" is embedded in. A class
  * or bus can contain devices of different types
