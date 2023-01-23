@@ -34,6 +34,24 @@
       "parentUuid": "3c6be42e_44154c8f",
       "revId": "62f4151e2893ec939315702ce4944ee354bb8f96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70d7748a_2c06f9a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-23T18:41:55Z",
+      "side": 1,
+      "message": "It\u0027s not auto merged, but it is merged by Greg ahead of LTS updates on our development branches.",
+      "parentUuid": "a9c1ebba_306d65de",
+      "revId": "62f4151e2893ec939315702ce4944ee354bb8f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
