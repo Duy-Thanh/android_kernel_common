@@ -266,10 +266,16 @@ config FRAME_WARN
 	int "Warn for stack frames larger than (needs gcc 4.4)"
 	range 0 8192
 	default 2048 if GCC_PLUGIN_LATENT_ENTROPY
+<<<<<<< HEAD   (73069c Revert "net: add atomic_long_t to net_device_stats fields")
 	default 2048 if PARISC
 	default 1536 if (!64BIT && XTENSA)
 	default 1280 if KASAN && !64BIT
 	default 1024 if !64BIT
+=======
+	default 1280 if KASAN && !64BIT
+	default 1280 if (!64BIT && PARISC)
+	default 1024 if (!64BIT && !PARISC)
+>>>>>>> BRANCH (57b912 Merge tag 'android12-5.4.225_r00' into android12-5.4)
 	default 2048 if 64BIT
 	help
 	  Tell gcc to warn at build time for stack frames larger than this.
