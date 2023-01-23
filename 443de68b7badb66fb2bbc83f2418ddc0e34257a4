@@ -34,6 +34,23 @@
       "parentUuid": "cfd23c70_c88f7959",
       "revId": "443de68b7badb66fb2bbc83f2418ddc0e34257a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ede0c1b_6ac150c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-01-23T10:46:36Z",
+      "side": 1,
+      "message": "Please remove the ^M in the symbol list file (convert to Unix line endings).\n\nI\u0027ve done this for `android-12-5.10`. Once that change lands, you should be able to retry this one.",
+      "revId": "443de68b7badb66fb2bbc83f2418ddc0e34257a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
