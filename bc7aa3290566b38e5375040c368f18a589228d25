@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "086d21a0_3f598f18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-24T18:48:34Z",
+      "side": 1,
+      "message": "Please re-write the commit message for a single commit. At the end, list the separate patches that led to this one:\n```\n\u003csingle commit message describing patch\u003e\n\nThis patch includes content from these patches from previous releases:\nANDROID: gic: Add vendor hook for gic-v3 resume\nANDROID: gic-v3: Add vendor hook to GIC v3\nANDROID: gic: Add vendor hook to GIC\n```",
+      "revId": "bc7aa3290566b38e5375040c368f18a589228d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30d5b612_306223af",
