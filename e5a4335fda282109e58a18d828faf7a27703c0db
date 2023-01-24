@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e80b1f2c_d11ce951",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-01-24T11:50:55Z",
+      "side": 1,
+      "message": "this scenario can happen when entities like rc rules and gadget hal  can run together. There is nothing which stops them from running together which will end up corrupting the pointers",
+      "revId": "e5a4335fda282109e58a18d828faf7a27703c0db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
