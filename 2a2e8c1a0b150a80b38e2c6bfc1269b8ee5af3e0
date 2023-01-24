@@ -16,6 +16,24 @@
       "message": "hmm ... reverts usually do not use \"ANDROID\" tags. Or is this reverting an Android patch?",
       "revId": "2a2e8c1a0b150a80b38e2c6bfc1269b8ee5af3e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89999180_01dd80a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-24T16:48:20Z",
+      "side": 1,
+      "message": "This is an ANDROID-only type patch because it\u0027s a build system issue for some reason and Lee picked this name for it 😊\n\nIt\u0027s a cherry-pick of a commit that is already in the android11-5.4-lts branch, and fixes a TH issue.  We can rename the subject line if you wish.",
+      "parentUuid": "7da5e8d4_ce021569",
+      "revId": "2a2e8c1a0b150a80b38e2c6bfc1269b8ee5af3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
