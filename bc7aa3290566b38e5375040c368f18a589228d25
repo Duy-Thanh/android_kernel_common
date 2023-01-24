@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30d5b612_306223af",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-24T18:40:51Z",
+      "side": 1,
+      "message": "remove inclusion. Use forward-declarations instead.",
+      "revId": "bc7aa3290566b38e5375040c368f18a589228d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2775fc9_28ea62d9",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-24T18:40:51Z",
+      "side": 1,
+      "message": "remove inclusion",
+      "revId": "bc7aa3290566b38e5375040c368f18a589228d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd30e170_d5e20d2d",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-24T18:40:51Z",
+      "side": 1,
+      "message": "remove- no longer needed",
+      "revId": "bc7aa3290566b38e5375040c368f18a589228d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09b5763e_adb8b0f0",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-24T18:40:51Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 6
+      },
+      "revId": "bc7aa3290566b38e5375040c368f18a589228d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac13c49e_1a911b2d",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-24T18:40:51Z",
+      "side": 1,
+      "message": "Please remove unnecessary inclusion",
+      "revId": "bc7aa3290566b38e5375040c368f18a589228d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c842bdbc_58a1df77",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-24T18:40:51Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "bc7aa3290566b38e5375040c368f18a589228d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63eb8766_b2962a94",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-24T18:40:51Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 6
+      },
+      "revId": "bc7aa3290566b38e5375040c368f18a589228d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
