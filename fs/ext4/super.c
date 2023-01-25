@@ -1100,7 +1100,6 @@ static struct inode *ext4_alloc_inode(struct super_block *sb)
 	ei->i_da_metadata_calc_len = 0;
 	ei->i_da_metadata_calc_last_lblock = 0;
 	spin_lock_init(&(ei->i_block_reservation_lock));
-	ext4_init_pending_tree(&ei->i_pending_tree);
 #ifdef CONFIG_QUOTA
 	ei->i_reserved_quota = 0;
 	memset(&ei->i_dquot, 0, sizeof(ei->i_dquot));
@@ -6352,6 +6351,7 @@ static int __init ext4_init_fs(void)
 	if (err)
 		return err;
 
+<<<<<<< HEAD   (09f264 BACKPORT: mac80211_hwsim: add concurrent channels scanning s)
 	err = ext4_init_post_read_processing();
 	if (err)
 		goto out7;
@@ -6360,6 +6360,8 @@ static int __init ext4_init_fs(void)
 	if (err)
 		goto out6;
 
+=======
+>>>>>>> BRANCH (b17faf Linux 4.19.271)
 	err = ext4_init_pageio();
 	if (err)
 		goto out5;
@@ -6398,10 +6400,13 @@ out3:
 out4:
 	ext4_exit_pageio();
 out5:
+<<<<<<< HEAD   (09f264 BACKPORT: mac80211_hwsim: add concurrent channels scanning s)
 	ext4_exit_pending();
 out6:
 	ext4_exit_post_read_processing();
 out7:
+=======
+>>>>>>> BRANCH (b17faf Linux 4.19.271)
 	ext4_exit_es();
 
 	return err;
@@ -6420,7 +6425,6 @@ static void __exit ext4_exit_fs(void)
 	ext4_exit_pageio();
 	ext4_exit_post_read_processing();
 	ext4_exit_es();
-	ext4_exit_pending();
 }
 
 MODULE_AUTHOR("Remy Card, Stephen Tweedie, Andrew Morton, Andreas Dilger, Theodore Ts'o and others");
