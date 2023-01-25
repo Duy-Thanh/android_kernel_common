@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a96a278_53237110",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-01-25T13:08:43Z",
+      "side": 1,
+      "message": "Please can you replace this with your full name, so that it matches the name used for the Owner?",
+      "range": {
+        "startLine": 24,
+        "startChar": 15,
+        "endLine": 24,
+        "endChar": 20
+      },
+      "revId": "a818439bae527503b3dab4206b22d2b15979cd52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
