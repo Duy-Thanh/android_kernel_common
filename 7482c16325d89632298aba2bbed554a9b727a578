@@ -34,6 +34,24 @@
       "parentUuid": "023447e8_d220621c",
       "revId": "7482c16325d89632298aba2bbed554a9b727a578",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e1d4a5_2b8c95b4",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/clock.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-25T17:54:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6978c147_79ae6796",
+      "revId": "7482c16325d89632298aba2bbed554a9b727a578",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
