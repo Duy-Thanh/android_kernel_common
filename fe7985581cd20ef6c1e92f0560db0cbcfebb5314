@@ -34,6 +34,23 @@
       "parentUuid": "f4403659_2a3425e8",
       "revId": "fe7985581cd20ef6c1e92f0560db0cbcfebb5314",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6803d05b_316e1997",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-01-25T07:07:34Z",
+      "side": 1,
+      "message": "Please can you use the same Change-Id across the multiple branches? This is already applied on android13-5.10 in aosp/2030911, so please reuse that Change-Id.",
+      "revId": "fe7985581cd20ef6c1e92f0560db0cbcfebb5314",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
