@@ -16,6 +16,24 @@
       "message": "Is this needed? The PSCI proxi is only in use when pKCM is enabled, and we never set HCR_TSC on the host otherwise, do we?",
       "revId": "8b1e32dd40f16ad3f5cd47c5c234450c0ff6c307",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce54b73_4eae4160",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-25T15:00:41Z",
+      "side": 1,
+      "message": "Good point, it should be safe to remove that. I\u0027ll push an update.",
+      "parentUuid": "e543fa4a_fbeef7ea",
+      "revId": "8b1e32dd40f16ad3f5cd47c5c234450c0ff6c307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
