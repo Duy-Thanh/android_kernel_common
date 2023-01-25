@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e5c0a4_8ec5e6e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-01-25T17:09:00Z",
+      "side": 1,
+      "message": "```\ncommon/drivers/of/fdt.c:1189:8: error: use of undeclared label \u0027handle_cmdline\u0027\n                goto handle_cmdline;\n                     ^\n1 error generated.\n```",
+      "revId": "f17f4a6da4347bebc6bb4903461b37728c716592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
