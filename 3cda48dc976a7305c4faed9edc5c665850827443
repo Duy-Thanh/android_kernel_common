@@ -19,6 +19,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0569d423_e88a6747",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-26T12:11:23Z",
+      "side": 1,
+      "message": "Resolving.",
+      "parentUuid": "8858a528_f44efb42",
+      "revId": "3cda48dc976a7305c4faed9edc5c665850827443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "806558c4_01b42a09",
@@ -32,6 +50,24 @@
       "writtenOn": "2023-01-26T11:32:10Z",
       "side": 1,
       "message": "Please make the linter happy and reference an upstream commit according to the contribution guidelines.",
+      "revId": "3cda48dc976a7305c4faed9edc5c665850827443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "188f054d_23e581b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-01-26T12:11:23Z",
+      "side": 1,
+      "message": "Resolving.",
+      "parentUuid": "806558c4_01b42a09",
       "revId": "3cda48dc976a7305c4faed9edc5c665850827443",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
