@@ -16,6 +16,24 @@
       "message": "Please keep it static inline",
       "revId": "069d1dd2fa33e15dcec0f63d0c71388256b1e34a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b422fc9_d581642e",
+        "filename": "arch/arm64/kvm/hyp_trace.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-26T13:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1c20825_1f5d2159",
+      "revId": "069d1dd2fa33e15dcec0f63d0c71388256b1e34a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
