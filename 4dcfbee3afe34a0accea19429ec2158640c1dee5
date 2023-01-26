@@ -22,6 +22,30 @@
       },
       "revId": "4dcfbee3afe34a0accea19429ec2158640c1dee5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d68c086_36d3c102",
+        "filename": "arch/arm64/include/asm/el2_setup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-26T13:57:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "787bfb57_c66210b0",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 41
+      },
+      "revId": "4dcfbee3afe34a0accea19429ec2158640c1dee5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
