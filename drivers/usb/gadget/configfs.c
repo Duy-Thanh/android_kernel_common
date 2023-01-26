@@ -424,6 +424,7 @@ static void gadget_info_attr_release(struct config_item *item)
 	WARN_ON(!list_empty(&gi->string_list));
 	WARN_ON(!list_empty(&gi->available_func));
 	kfree(gi->composite.gadget_driver.function);
+	kfree(gi->composite.gadget_driver.driver.name);
 	kfree(gi);
 }
 
@@ -1715,7 +1716,6 @@ static const struct usb_gadget_driver configfs_driver_template = {
 	.max_speed	= USB_SPEED_SUPER_PLUS,
 	.driver = {
 		.owner          = THIS_MODULE,
-		.name		= "configfs-gadget",
 	},
 	.match_existing_only = 1,
 };
@@ -1851,17 +1851,27 @@ static struct config_group *gadgets_make(
 
 	gi->composite.gadget_driver = configfs_driver_template;
 
+	gi->composite.gadget_driver.driver.name = kasprintf(GFP_KERNEL,
+							    "configfs-gadget.%s", name);
+	if (!gi->composite.gadget_driver.driver.name)
+		goto err;
+
 	gi->composite.gadget_driver.function = kstrdup(name, GFP_KERNEL);
 	gi->composite.name = gi->composite.gadget_driver.function;
 
 	if (!gi->composite.gadget_driver.function)
-		goto err;
+		goto out_free_driver_name;
 
 	if (android_device_create(gi) < 0)
 		goto err;
 
 	return &gi->group;
 
+<<<<<<< HEAD   (39176c ANDROID: KVM: arm64: Fix PKVM_PAGE_RESTRICTED_PROT conflict)
+=======
+out_free_driver_name:
+	kfree(gi->composite.gadget_driver.driver.name);
+>>>>>>> BRANCH (93f875 Linux 6.1.8)
 err:
 	kfree(gi);
 	return ERR_PTR(-ENOMEM);
