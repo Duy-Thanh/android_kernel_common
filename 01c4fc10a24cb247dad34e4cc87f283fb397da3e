@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d388050_aeddf9b3",
+        "filename": "arch/arm64/mm/dma-mapping.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-01-26T16:56:18Z",
+      "side": 1,
+      "message": "It\u0027s a bit weird that we check the CWG for the current CPU, rather than the biggest one we\u0027ve seen so far, but that\u0027s a pre-existing problem with the code so I think your change is ok.",
+      "range": {
+        "startLine": 44,
+        "startChar": 11,
+        "endLine": 44,
+        "endChar": 33
+      },
+      "revId": "01c4fc10a24cb247dad34e4cc87f283fb397da3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
