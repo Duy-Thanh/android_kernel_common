@@ -1405,6 +1405,7 @@
   pci_stop_root_bus
   pci_unlock_rescan_remove
   pci_pio_to_address
+  pcie_capability_clear_and_set_dword
   PDE_DATA
   __per_cpu_offset
   perf_event_create_kernel_counter
