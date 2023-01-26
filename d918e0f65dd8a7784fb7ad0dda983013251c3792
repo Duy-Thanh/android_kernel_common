@@ -16,6 +16,24 @@
       "message": "Instead of introducing an issue and then fixing it in the same series, please just do it correctly in the first patch.",
       "revId": "d918e0f65dd8a7784fb7ad0dda983013251c3792",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d95bc35b_0f5354fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-26T00:32:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61186e33_a015a830",
+      "revId": "d918e0f65dd8a7784fb7ad0dda983013251c3792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
