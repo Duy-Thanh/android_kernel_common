@@ -1298,7 +1298,10 @@ static struct usb_function *hidg_alloc(struct usb_function_instance *fi)
 						 GFP_KERNEL);
 		if (!hidg->report_desc) {
 			put_device(&hidg->dev);
+<<<<<<< HEAD   (75bf10 Merge 5.4.230 into android12-5.4-lts)
 			--opts->refcnt;
+=======
+>>>>>>> BRANCH (0ed90f UPSTREAM: ALSA: pcm: Move rwsem lock inside snd_ctl_elem_rea)
 			mutex_unlock(&opts->lock);
 			return ERR_PTR(-ENOMEM);
 		}
