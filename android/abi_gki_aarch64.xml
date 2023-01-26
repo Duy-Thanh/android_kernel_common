@@ -4352,6 +4352,7 @@
       <elf-symbol name='pcibios_resource_to_bus' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7339f651'/>
       <elf-symbol name='pcie_aspm_enabled' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x743fe2f7'/>
       <elf-symbol name='pcie_bus_configure_settings' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9c81fd1e'/>
+      <elf-symbol name='pcie_capability_clear_and_set_dword' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfb9bf598'/>
       <elf-symbol name='pcie_capability_clear_and_set_word' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x55b7116d'/>
       <elf-symbol name='pcie_capability_read_dword' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc79ca687'/>
       <elf-symbol name='pcie_capability_read_word' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb46db593'/>
@@ -149559,6 +149560,13 @@
       <function-decl name='pcie_bus_configure_settings' mangled-name='pcie_bus_configure_settings' filepath='drivers/pci/probe.c' line='2775' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pcie_bus_configure_settings'>
         <parameter type-id='d1feb554' name='bus' filepath='drivers/pci/probe.c' line='2775' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='pcie_capability_clear_and_set_dword' mangled-name='pcie_capability_clear_and_set_dword' filepath='drivers/pci/access.c' line='509' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pcie_capability_clear_and_set_dword'>
+        <parameter type-id='85196e3f' name='dev' filepath='drivers/pci/access.c' line='509' column='1'/>
+        <parameter type-id='95e97e5e' name='pos' filepath='drivers/pci/access.c' line='509' column='1'/>
+        <parameter type-id='19c2251e' name='clear' filepath='drivers/pci/access.c' line='510' column='1'/>
+        <parameter type-id='19c2251e' name='set' filepath='drivers/pci/access.c' line='510' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='pcie_capability_clear_and_set_word' mangled-name='pcie_capability_clear_and_set_word' filepath='drivers/pci/access.c' line='492' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pcie_capability_clear_and_set_word'>
         <parameter type-id='85196e3f' name='dev' filepath='drivers/pci/access.c' line='492' column='1'/>
