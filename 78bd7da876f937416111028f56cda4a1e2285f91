@@ -16,6 +16,24 @@
       "message": "abi issues still, will fix up in follow-on patch.",
       "revId": "78bd7da876f937416111028f56cda4a1e2285f91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec773dec_891c7392",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-26T16:10:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "475cfbfb_cf5a6b40",
+      "revId": "78bd7da876f937416111028f56cda4a1e2285f91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
