@@ -16,6 +16,41 @@
       "message": "This whole patch is modifying stuff added in aosp/2400298. Please squash so that patch adds it correctly the first time.",
       "revId": "9b9da9d025d307e9229b0737e49d78777cc7617a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8650dcf8_2170d350",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-26T00:32:18Z",
+      "side": 1,
+      "message": "Done.",
+      "revId": "9b9da9d025d307e9229b0737e49d78777cc7617a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62b199d5_d3d99262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-26T00:32:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "852e11e7_cd0f35d7",
+      "revId": "9b9da9d025d307e9229b0737e49d78777cc7617a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
