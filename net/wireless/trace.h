@@ -3757,6 +3757,7 @@ TRACE_EVENT(cfg80211_pmsr_complete,
 );
 
 TRACE_EVENT(cfg80211_update_owe_info_event,
+<<<<<<< HEAD   (d3d8a2ccd287572f302515bc07f9fee8b6cd1185 UPSTREAM: net: skbuff: propagate shared-frag marker through )
 	    TP_PROTO(struct wiphy *wiphy, struct net_device *netdev,
 		     struct cfg80211_update_owe_info *owe_info),
 	    TP_ARGS(wiphy, netdev, owe_info),
@@ -3771,6 +3772,47 @@ TRACE_EVENT(cfg80211_update_owe_info_event,
 				  owe_info->ie_len);),
 	    TP_printk(WIPHY_PR_FMT ", " NETDEV_PR_FMT ", peer: " MAC_PR_FMT,
 		      WIPHY_PR_ARG, NETDEV_PR_ARG, MAC_PR_ARG(peer))
+||||||| BASE   (048ad5d37537464d0401856b76faf896b5e7a4b2 UPSTREAM: wifi: cfg80211: Extend cfg80211_new_sta() for MLD )
+	    TP_PROTO(struct wiphy *wiphy, struct net_device *netdev,
+		     struct cfg80211_update_owe_info *owe_info),
+	    TP_ARGS(wiphy, netdev, owe_info),
+	    TP_STRUCT__entry(WIPHY_ENTRY
+			     NETDEV_ENTRY
+			     MAC_ENTRY(peer)
+			     __dynamic_array(u8, ie, owe_info->ie_len)),
+	    TP_fast_assign(WIPHY_ASSIGN;
+			   NETDEV_ASSIGN;
+			   MAC_ASSIGN(peer, owe_info->peer);
+			   memcpy(__get_dynamic_array(ie), owe_info->ie,
+				  owe_info->ie_len);),
+	    TP_printk(WIPHY_PR_FMT ", " NETDEV_PR_FMT ", peer: %pM",
+		      WIPHY_PR_ARG, NETDEV_PR_ARG, __entry->peer)
+=======
+	TP_PROTO(struct wiphy *wiphy, struct net_device *netdev,
+		 struct cfg80211_update_owe_info *owe_info),
+	TP_ARGS(wiphy, netdev, owe_info),
+	TP_STRUCT__entry(
+		WIPHY_ENTRY
+		NETDEV_ENTRY
+		MAC_ENTRY(peer)
+		__dynamic_array(u8, ie, owe_info->ie_len)
+		__field(int, assoc_link_id)
+		MAC_ENTRY(peer_mld_addr)
+	),
+	TP_fast_assign(
+		WIPHY_ASSIGN;
+		NETDEV_ASSIGN;
+		MAC_ASSIGN(peer, owe_info->peer);
+		memcpy(__get_dynamic_array(ie), owe_info->ie,
+		       owe_info->ie_len);
+		__entry->assoc_link_id = owe_info->assoc_link_id;
+		MAC_ASSIGN(peer_mld_addr, owe_info->peer_mld_addr);
+	),
+	TP_printk(WIPHY_PR_FMT ", " NETDEV_PR_FMT ", peer: %pM,"
+	          " assoc_link_id: %d, peer_mld_addr: %pM",
+		  WIPHY_PR_ARG, NETDEV_PR_ARG, __entry->peer,
+		  __entry->assoc_link_id, __entry->peer_mld_addr)
+>>>>>>> CHANGE (fab4d02938f358f8319621788998e69a35d05c76 UPSTREAM: wifi: cfg80211: Extend cfg80211_update_owe_info_ev)
 );
 
 TRACE_EVENT(cfg80211_bss_color_notify,
