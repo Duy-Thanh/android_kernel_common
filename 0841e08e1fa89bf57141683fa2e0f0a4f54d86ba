@@ -422,6 +422,30 @@
       },
       "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc26f5d9_9db7bcfd",
+        "filename": "mm/gcma.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T21:15:28Z",
+      "side": 1,
+      "message": "Small patches are always good, so let\u0027s keep them separate. If we can\u0027t move that function here, it\u0027s not a big issue IMO.",
+      "parentUuid": "c210a5d6_020d973b",
+      "range": {
+        "startLine": 6,
+        "startChar": 5,
+        "endLine": 6,
+        "endChar": 19
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
