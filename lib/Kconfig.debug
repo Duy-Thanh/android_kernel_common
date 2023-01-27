@@ -298,10 +298,16 @@ config FRAME_WARN
 	int "Warn for stack frames larger than"
 	range 0 8192
 	default 2048 if GCC_PLUGIN_LATENT_ENTROPY
+<<<<<<< HEAD   (31dc70 Merge 5.10.161 into android13-5.10-lts)
 	default 2048 if PARISC
 	default 1536 if (!64BIT && XTENSA)
 	default 1280 if KASAN && !64BIT
 	default 1024 if !64BIT
+=======
+	default 1280 if KASAN && !64BIT
+	default 1280 if (!64BIT && PARISC)
+	default 1024 if (!64BIT && !PARISC)
+>>>>>>> BRANCH (930e60 ANDROID: update the .xml file due to changes in the 5.10.150)
 	default 2048 if 64BIT
 	help
 	  Tell gcc to warn at build time for stack frames larger than this.
