@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb862ade_14361b6e",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:20:49Z",
+      "side": 1,
+      "message": "Why do we disable IRQs here? A comment?",
+      "range": {
+        "startLine": 343,
+        "startChar": 1,
+        "endLine": 343,
+        "endChar": 21
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bd39679_a9dbbf6a",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:20:49Z",
+      "side": 1,
+      "message": "page?",
+      "range": {
+        "startLine": 360,
+        "startChar": 14,
+        "endLine": 360,
+        "endChar": 17
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d431860e_56edf1e4",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:20:49Z",
+      "side": 1,
+      "message": "Now I really think this should be called `gcma_get_page()`",
+      "range": {
+        "startLine": 370,
+        "startChar": 7,
+        "endLine": 370,
+        "endChar": 27
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2800c9b6_4c15d3cc",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:20:49Z",
+      "side": 1,
+      "message": "Suggestion: `The page is being freed but did not reach the free list.`",
+      "range": {
+        "startLine": 374,
+        "startChar": 6,
+        "endLine": 375,
+        "endChar": 19
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87badc69_fa404716",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:20:49Z",
+      "side": 1,
+      "message": "nit: for symmetry this should be done after `gcma_put_page`",
+      "range": {
+        "startLine": 392,
+        "startChar": 3,
+        "endLine": 392,
+        "endChar": 21
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b142f968_2c0ba018",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:20:49Z",
+      "side": 1,
+      "message": "Merge the comments?",
+      "range": {
+        "startLine": 422,
+        "startChar": 3,
+        "endLine": 423,
+        "endChar": 4
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e334238_47773a73",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:20:49Z",
+      "side": 1,
+      "message": "nit: Start with a capital letter for consistency.",
+      "range": {
+        "startLine": 439,
+        "startChar": 5,
+        "endLine": 439,
+        "endChar": 12
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a00a66a_b27bf239",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:20:49Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 447,
+        "startChar": 5,
+        "endLine": 447,
+        "endChar": 12
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d72da5bb_2496af8b",
+        "filename": "mm/gcma.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:20:49Z",
+      "side": 1,
+      "message": "It\u0027s a bit strange that gcma_area_init() implementation was introduced in aosp/2380589 where it was unused...",
+      "range": {
+        "startLine": 6,
+        "startChar": 5,
+        "endLine": 6,
+        "endChar": 19
+      },
+      "revId": "0841e08e1fa89bf57141683fa2e0f0a4f54d86ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
