@@ -16,6 +16,24 @@
       "message": "Is this ABI change ok?",
       "revId": "e3ef676a41709e2da3c0154d46ac39251054648b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbdaf38e_bb0af312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-27T07:57:32Z",
+      "side": 1,
+      "message": "abi is fixed up in later commits in this series.",
+      "parentUuid": "43c5bef6_fc91952a",
+      "revId": "e3ef676a41709e2da3c0154d46ac39251054648b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
