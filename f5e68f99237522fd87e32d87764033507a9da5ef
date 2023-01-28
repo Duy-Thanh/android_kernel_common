@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a419bc99_1c0ef644",
+        "filename": "include/linux/cma.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-28T07:47:29Z",
+      "side": 1,
+      "message": "that\u0027s a horrible api that everyone will then have to look up every time you see that function call.\n\nMake this 2 calls, one with gcma, and one without, so that this flag is not needed (do the flag inside the file with the call)",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 16
+      },
+      "revId": "f5e68f99237522fd87e32d87764033507a9da5ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1ec0d15_2babf598",
+        "filename": "kernel/dma/contiguous.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-28T07:47:29Z",
+      "side": 1,
+      "message": "see, now you have to look up what this flag means.\n\nIf there were a different call, then you wouldn\u0027t even have to change this line.",
+      "range": {
+        "startLine": 428,
+        "startChar": 8,
+        "endLine": 428,
+        "endChar": 13
+      },
+      "revId": "f5e68f99237522fd87e32d87764033507a9da5ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
