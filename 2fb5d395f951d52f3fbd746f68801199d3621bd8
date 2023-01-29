@@ -16,6 +16,24 @@
       "message": "Since it\u0027s upstream you can just sent it to stable@vger.kernel.org # 6.1 and we will pick it up via LTS merge.",
       "revId": "2fb5d395f951d52f3fbd746f68801199d3621bd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad41df9e_367e088e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902398
+      },
+      "writtenOn": "2023-01-29T07:18:11Z",
+      "side": 1,
+      "message": "From: gregkh@linuxfoundation.org \u003cgregkh@linuxfoundation.org\u003e\nSent: 2023年1月15日 15:59\nTo: gregkh@linuxfoundation.org; jroedel@suse.de; robin.murphy@arm.com; YF Wang \u003cYF.Wang@mediatek.com\u003e\nCc: stable-commits@vger.kernel.org\nSubject: Patch \"iommu/iova: Fix alloc iova overflows issue\" has been added to the 6.1-stable tree\n\nThis is a note to let you know that I\u0027ve just added the patch titled\n\n    iommu/iova: Fix alloc iova overflows issue\n\nto the 6.1-stable tree which can be found at:\n    https://urldefense.com/v3/__http://www.kernel.org/git/?p\u003dlinux*kernel*git*stable*stable-queue.git;a\u003dsummary__;Ly8vLw!!CTRNKA9wMg0ARbw!lbS9UWx-Kkg3P3NDAsXAi3iZ9AkApnHMT7DIGpwJw0cU7P_9fUxCkum2hEhbP8IWGix_Ubpv0jW-mrs31Lc3lH4y$ \n \nThe filename of the patch is:\n     iommu-iova-fix-alloc-iova-overflows-issue.patch\nand it can be found in the queue-6.1 subdirectory.\n\n\nthank you for your reminder.",
+      "parentUuid": "d9befd72_1420aafa",
+      "revId": "2fb5d395f951d52f3fbd746f68801199d3621bd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
