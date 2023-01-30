@@ -20,6 +20,70 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b196ee32_ebcf7479",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-30T18:15:55Z",
+      "side": 1,
+      "message": "Will add.",
+      "parentUuid": "8b1a0cc5_56d6c975",
+      "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66878e5d_72d3e844",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-30T18:15:55Z",
+      "side": 1,
+      "message": "Removing this as it\u0027s not longer required.",
+      "range": {
+        "startLine": 140,
+        "startChar": 29,
+        "endLine": 140,
+        "endChar": 50
+      },
+      "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67edd10e_9a372dcc",
+        "filename": "include/linux/irqchip/arm-gic-v3.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-30T18:15:55Z",
+      "side": 1,
+      "message": "Removing this as internal discussion with team revealed that this is no longer required.",
+      "range": {
+        "startLine": 644,
+        "startChar": 7,
+        "endLine": 644,
+        "endChar": 21
+      },
+      "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b99066d6_2550d0c4",
         "filename": "include/trace/hooks/gic.h",
         "patchSetId": 1
@@ -31,6 +95,24 @@
       "writtenOn": "2023-01-26T01:11:46Z",
       "side": 1,
       "message": "Which gic_chip_data is this referring to? The v3 one you defined in gic-v3.h? Or the original one defined in irq-gic.c?\n\nSince the set_affinity hook is in irq-gic.c, it would see the original version - is gic_chip_data indirectly passed to this hook?\n\nThe gic_resume will see the v3 version - should it be renamed gic_v3_resume to be consistent with the naming of other v3 hooks? Should it be moved to the gic-v3.h header? Do we even need these both headers?\n\nCan we somehow change the code so there aren\u0027t two separate definitions of gic_chip_data? Maybe rename the one that is just in a C file? Do that in a separate patch with this one on top of it.",
+      "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1646cd52_b1ccde88",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-30T18:15:55Z",
+      "side": 1,
+      "message": "Removing this as internal discussion revealed that this is no longer required.",
+      "parentUuid": "b99066d6_2550d0c4",
       "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
