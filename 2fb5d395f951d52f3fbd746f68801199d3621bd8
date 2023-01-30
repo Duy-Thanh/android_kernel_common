@@ -34,6 +34,24 @@
       "parentUuid": "d9befd72_1420aafa",
       "revId": "2fb5d395f951d52f3fbd746f68801199d3621bd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a9b0f6_b8a9e4aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-30T22:11:22Z",
+      "side": 1,
+      "message": "Ok, then I believe Greg will pick it up as part of LTS release.",
+      "parentUuid": "ad41df9e_367e088e",
+      "revId": "2fb5d395f951d52f3fbd746f68801199d3621bd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
