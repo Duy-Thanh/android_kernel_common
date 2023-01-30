@@ -2357,6 +2357,25 @@ event_sched_out(struct perf_event *event,
 		perf_cgroup_event_disable(event, ctx);
 		state = PERF_EVENT_STATE_OFF;
 	}
+<<<<<<< HEAD   (bfbd22 Merge 5.15.83 into android13-5.15-lts)
+=======
+
+	if (event->pending_sigtrap) {
+		bool dec = true;
+
+		event->pending_sigtrap = 0;
+		if (state != PERF_EVENT_STATE_OFF &&
+		    !event->pending_work) {
+			event->pending_work = 1;
+			dec = false;
+			WARN_ON_ONCE(!atomic_long_inc_not_zero(&event->refcount));
+			task_work_add(current, &event->pending_task, TWA_RESUME);
+		}
+		if (dec)
+			local_dec(&event->ctx->nr_pending);
+	}
+
+>>>>>>> BRANCH (d68f50 Linux 5.15.84)
 	perf_event_set_state(event, state);
 
 	if (!is_software_event(event))
@@ -2396,6 +2415,7 @@ group_sched_out(struct perf_event *group_event,
 
 #define DETACH_GROUP	0x01UL
 #define DETACH_CHILD	0x02UL
+#define DETACH_DEAD	0x04UL
 
 /*
  * Cross CPU call to remove a performance event
@@ -2416,12 +2436,20 @@ __perf_remove_from_context(struct perf_event *event,
 		update_cgrp_time_from_cpuctx(cpuctx, false);
 	}
 
+	/*
+	 * Ensure event_sched_out() switches to OFF, at the very least
+	 * this avoids raising perf_pending_task() at this time.
+	 */
+	if (flags & DETACH_DEAD)
+		event->pending_disable = 1;
 	event_sched_out(event, cpuctx, ctx);
 	if (flags & DETACH_GROUP)
 		perf_group_detach(event);
 	if (flags & DETACH_CHILD)
 		perf_child_detach(event);
 	list_del_event(event, ctx);
+	if (flags & DETACH_DEAD)
+		event->state = PERF_EVENT_STATE_DEAD;
 
 	if (!ctx->nr_events && ctx->is_active) {
 		if (ctx == &cpuctx->ctx)
@@ -5185,9 +5213,7 @@ int perf_event_release_kernel(struct perf_event *event)
 
 	ctx = perf_event_ctx_lock(event);
 	WARN_ON_ONCE(ctx->parent_ctx);
-	perf_remove_from_context(event, DETACH_GROUP);
 
-	raw_spin_lock_irq(&ctx->lock);
 	/*
 	 * Mark this event as STATE_DEAD, there is no external reference to it
 	 * anymore.
@@ -5199,8 +5225,7 @@ int perf_event_release_kernel(struct perf_event *event)
 	 * Thus this guarantees that we will in fact observe and kill _ALL_
 	 * child events.
 	 */
-	event->state = PERF_EVENT_STATE_DEAD;
-	raw_spin_unlock_irq(&ctx->lock);
+	perf_remove_from_context(event, DETACH_GROUP|DETACH_DEAD);
 
 	perf_event_ctx_unlock(event, ctx);
 
@@ -6599,7 +6624,36 @@ static void perf_pending_event(struct irq_work *entry)
 		perf_swevent_put_recursion_context(rctx);
 }
 
+<<<<<<< HEAD   (bfbd22 Merge 5.15.83 into android13-5.15-lts)
 /*
+=======
+static void perf_pending_task(struct callback_head *head)
+{
+	struct perf_event *event = container_of(head, struct perf_event, pending_task);
+	int rctx;
+
+	/*
+	 * If we 'fail' here, that's OK, it means recursion is already disabled
+	 * and we won't recurse 'further'.
+	 */
+	preempt_disable_notrace();
+	rctx = perf_swevent_get_recursion_context();
+
+	if (event->pending_work) {
+		event->pending_work = 0;
+		perf_sigtrap(event);
+		local_dec(&event->ctx->nr_pending);
+	}
+
+	if (rctx >= 0)
+		perf_swevent_put_recursion_context(rctx);
+	preempt_enable_notrace();
+
+	put_event(event);
+}
+
+/*              
+>>>>>>> BRANCH (d68f50 Linux 5.15.84)
  * We assume there is only KVM supporting the callbacks.
  * Later on, we might change it to a list if there is
  * another virtualization implementation supporting the callbacks.
