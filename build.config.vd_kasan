@@ -1,0 +1,24 @@
+DEFCONFIG=vd_defconfig
+POST_DEFCONFIG_CMDS=update_kasan_config
+KERNEL_DIR=common
+LTO=none
+BUILD_GOLDFISH_DRIVERS=y
+BUILD_VIRTUAL_DEVICE=y
+KCONFIG_EXT_PREFIX=../common-modules/virtual-device
+
+function update_kasan_config() {
+    ${KERNEL_DIR}/scripts/config --file ${OUT_DIR}/.config \
+         -e CONFIG_KASAN \
+         -e CONFIG_KASAN_PANIC_ON_WARN \
+         -e CONFIG_KCOV \
+         -e CONFIG_PANIC_ON_WARN_DEFAULT_ENABLE \
+         -d CONFIG_RANDOMIZE_BASE \
+         -d CONFIG_KASAN_OUTLINE \
+         --set-val CONFIG_FRAME_WARN 0 \
+         -d CFI \
+         -d CFI_PERMISSIVE \
+         -d CFI_CLANG \
+         -d SHADOW_CALL_STACK
+    (cd ${OUT_DIR} && \
+     make ${TOOL_ARGS} O=${OUT_DIR} olddefconfig)
+}

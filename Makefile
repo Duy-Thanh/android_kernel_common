@@ -681,6 +681,7 @@ ifdef need-config
 include include/config/auto.conf
 endif
 
+
 ifeq ($(KBUILD_EXTMOD),)
 # Objects we will link into vmlinux / subdirs we need to visit
 core-y		:= init/ usr/ arch/$(SRCARCH)/
@@ -688,6 +689,7 @@ drivers-y	:= drivers/ sound/
 drivers-$(CONFIG_SAMPLES) += samples/
 drivers-$(CONFIG_NET) += net/
 drivers-y	+= virt/
+drivers-$(CONFIG_BUILTIN_VD)	+= ../common-modules/virtual-device/
 libs-y		:= lib/
 endif # KBUILD_EXTMOD
 
