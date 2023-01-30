@@ -492,7 +492,10 @@ void free_task(struct task_struct *tsk)
 #ifdef CONFIG_SECCOMP
 	WARN_ON_ONCE(tsk->seccomp.filter);
 #endif
+<<<<<<< HEAD   (50e124 Merge 5.15.85 into android13-5.15-lts)
 	cpufreq_task_times_exit(tsk);
+=======
+>>>>>>> BRANCH (90ffbb Linux 5.15.86)
 	release_user_cpus_ptr(tsk);
 	scs_release(tsk);
 
