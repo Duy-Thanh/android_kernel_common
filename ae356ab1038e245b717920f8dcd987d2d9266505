@@ -70,6 +70,24 @@
       "parentUuid": "261175a6_be3b1ab4",
       "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dd71079_c270773b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-01-31T20:23:03Z",
+      "side": 1,
+      "message": "It seems odd that there\u0027s a sysfs entry for a dm driver, but we\u0027re not supposed to use it.\n\nThe file is used to read and write the state of the device - it can be in TRIM, CHECKPOINT or COMMITTED state. There might well be better ways of doing this, but not without breaking user space.\n\nI mean I can (and will) add documentation, but I don\u0027t think that\u0027s the core of the problem here.",
+      "parentUuid": "f45ab60f_b5900357",
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
