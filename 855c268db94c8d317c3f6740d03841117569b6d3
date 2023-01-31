@@ -16,6 +16,24 @@
       "message": "This should be added to android-mainline",
       "revId": "855c268db94c8d317c3f6740d03841117569b6d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e1c972_e2d40eb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-31T17:50:35Z",
+      "side": 1,
+      "message": "Done. Here it is for your review: aosp/2412173",
+      "parentUuid": "d3116152_8350e6a4",
+      "revId": "855c268db94c8d317c3f6740d03841117569b6d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
