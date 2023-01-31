@@ -2623,7 +2623,11 @@ int dup_user_cpus_ptr(struct task_struct *dst, struct task_struct *src,
 	 * It is not worth the extra overhead of taking the pi_lock on
 	 * every fork/clone.
 	 */
+<<<<<<< HEAD   (773ec5 Merge 5.15.88 into android13-5.15-lts)
 	if (!src->user_cpus_ptr)
+=======
+	if (data_race(!src->user_cpus_ptr))
+>>>>>>> BRANCH (3bcc86 Linux 5.15.89)
 		return 0;
 
 	user_mask = kmalloc_node(cpumask_size(), GFP_KERNEL, node);
