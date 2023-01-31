@@ -52,6 +52,24 @@
       "parentUuid": "ac428d94_2af7eaa6",
       "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f45ab60f_b5900357",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-31T20:13:50Z",
+      "side": 1,
+      "message": "So is the problem that this is something that the dm layer does not normally do?  Why do you need this sysfs file at all?  What is it responsible for?\n\nI see no Documentation/ABI/ entry for the sysfs file, so as no one is obviously using it, just remove it from the code 😊",
+      "parentUuid": "261175a6_be3b1ab4",
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
