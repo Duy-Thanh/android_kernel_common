@@ -16,6 +16,40 @@
       "message": "Hi Todd could you please review the latest patchset? Thanks.",
       "revId": "55835164a9576056afd2e1f3844253bd5582f81f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b4eb99_0e49c73c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-31T20:41:46Z",
+      "side": 1,
+      "message": "Please split this into two patches (gic and gic-v3). Sorry about that since I asked you to combine them all, but now that it is down to this vastly improved simple patch, it seems natural to do one for each gic version. The next version should be good to go.",
+      "revId": "55835164a9576056afd2e1f3844253bd5582f81f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a7f08db_3a68096b",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-31T20:41:46Z",
+      "side": 1,
+      "message": "why is this inclusion needed?",
+      "revId": "55835164a9576056afd2e1f3844253bd5582f81f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
