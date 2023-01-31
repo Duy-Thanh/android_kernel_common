@@ -16,6 +16,24 @@
       "message": "Do we have access to KMI_SYMBOL_LIST and ADDITIONAL_KMI_SYMBOL_LISTS?",
       "revId": "669d240b50880950df853b0aa0f42aa2b6b7daf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec8c99b_aca9a885",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-01-31T19:32:07Z",
+      "side": 1,
+      "message": "This change is to filter out files like `abi_gki_aarch64.xml` or soon `abi_gki_aarch64.stg`, if the symbol lists mentioned don\u0027t have any extension they will be included (subject to the regex).",
+      "parentUuid": "2c2d4ed4_82e94980",
+      "revId": "669d240b50880950df853b0aa0f42aa2b6b7daf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
