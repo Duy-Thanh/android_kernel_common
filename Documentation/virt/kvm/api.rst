@@ -8296,6 +8296,17 @@ must point to a byte where the value will be stored or retrieved from.
 This capability indicates that the KVM supports getting the
 frequency of the current CPU that the vCPU thread is running on.
 
+8.41 KVM_CAP_UTIL_SYNC
+----------------------
+
+:Architectures: arm64
+
+This capability indicates that the KVM supports taking utilization
+hints from the guest. This is useful when guests are able to track
+workload sizes of its own vCPU's and is able to feed that
+information to host. This allows the host to make more accurate frequency
+selections for its CPUs.
+
 9. Known KVM API problems
 =========================
 

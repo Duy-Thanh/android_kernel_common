@@ -12,3 +12,4 @@ ARM
    pvtime
    ptp_kvm
    getfreq
+   util
