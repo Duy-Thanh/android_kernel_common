@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "185370c1_b1a2aaa9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1902398
+      },
+      "writtenOn": "2023-01-31T08:47:01Z",
+      "side": 1,
+      "message": "thanks for your suggestion， I fixed it.",
+      "parentUuid": "30ec7e8c_c6902682",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "2fb5d395f951d52f3fbd746f68801199d3621bd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7eeaf36b_4766dd15",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-31T06:52:28Z",
       "side": 1,
       "message": "normal cherry-pick id here please.",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 48,
+        "endChar": 73
+      },
+      "revId": "2fb5d395f951d52f3fbd746f68801199d3621bd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec82b2f2_a54e7290",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1902398
+      },
+      "writtenOn": "2023-01-31T08:47:01Z",
+      "side": 1,
+      "message": "thanks for your suggestion， I fixed it.",
+      "parentUuid": "7eeaf36b_4766dd15",
       "range": {
         "startLine": 47,
         "startChar": 1,
