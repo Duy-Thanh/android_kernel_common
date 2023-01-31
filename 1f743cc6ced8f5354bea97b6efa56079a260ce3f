@@ -57,6 +57,23 @@
       "parentUuid": "f2f9d702_47b59859",
       "revId": "1f743cc6ced8f5354bea97b6efa56079a260ce3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a1c7c89_a73a5382",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-31T09:08:26Z",
+      "side": 1,
+      "message": "+1 to what Sami and Greg said -- disabling CFI on hooks made sense with Clang CFI for performance reasons due to indirect branches to modules hitting the CFI slow path, but kCFI doesn\u0027t need it. OTOH disabling (k)CFI on hooks has a (negative) security impact, so a justification would be needed for us to consider this patch.",
+      "revId": "1f743cc6ced8f5354bea97b6efa56079a260ce3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
