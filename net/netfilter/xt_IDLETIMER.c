@@ -663,7 +663,12 @@ static void idletimer_tg_destroy(const struct xt_tgdtor_param *par)
 		pr_debug("deleting timer %s\n", info->label);
 
 		list_del(&info->timer->entry);
+<<<<<<< HEAD   (03b368 Merge 72a85e2b0a1e ("Merge tag 'spi-fix-v6.2-rc1' of git://g)
 		del_timer_sync(&info->timer->timer);
+=======
+		timer_shutdown_sync(&info->timer->timer);
+		cancel_work_sync(&info->timer->work);
+>>>>>>> BRANCH (1b929c Linux 6.2-rc1)
 		sysfs_remove_file(idletimer_tg_kobj, &info->timer->attr.attr);
 		unregister_pm_notifier(&info->timer->pm_nb);
 		cancel_work_sync(&info->timer->work);
@@ -692,7 +697,7 @@ static void idletimer_tg_destroy_v1(const struct xt_tgdtor_param *par)
 		if (info->timer->timer_type & XT_IDLETIMER_ALARM) {
 			alarm_cancel(&info->timer->alarm);
 		} else {
-			del_timer_sync(&info->timer->timer);
+			timer_shutdown_sync(&info->timer->timer);
 		}
 		sysfs_remove_file(idletimer_tg_kobj, &info->timer->attr.attr);
 		unregister_pm_notifier(&info->timer->pm_nb);
