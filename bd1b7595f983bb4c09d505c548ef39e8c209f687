@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94fe77fc_acd9c62e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-31T00:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b196ee32_ebcf7479",
+      "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66878e5d_72d3e844",
@@ -49,6 +67,30 @@
       "writtenOn": "2023-01-30T18:15:55Z",
       "side": 1,
       "message": "Removing this as it\u0027s not longer required.",
+      "range": {
+        "startLine": 140,
+        "startChar": 29,
+        "endLine": 140,
+        "endChar": 50
+      },
+      "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a8cd618_e82afc36",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-31T00:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66878e5d_72d3e844",
       "range": {
         "startLine": 140,
         "startChar": 29,
@@ -177,6 +219,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b48f3cb1_7995d8e6",
+        "filename": "include/linux/irqchip/arm-gic-v3.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-31T00:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67edd10e_9a372dcc",
+      "range": {
+        "startLine": 644,
+        "startChar": 7,
+        "endLine": 644,
+        "endChar": 21
+      },
+      "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b99066d6_2550d0c4",
@@ -208,6 +274,24 @@
       "side": 1,
       "message": "Removing this as internal discussion revealed that this is no longer required.",
       "parentUuid": "b99066d6_2550d0c4",
+      "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2822533_94e35bb5",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-01-31T00:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1646cd52_b1ccde88",
       "revId": "bd1b7595f983bb4c09d505c548ef39e8c209f687",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
