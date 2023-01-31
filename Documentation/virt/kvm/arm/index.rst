@@ -13,3 +13,4 @@ ARM
    ptp_kvm
    getfreq
    util
+   get_freqtbl

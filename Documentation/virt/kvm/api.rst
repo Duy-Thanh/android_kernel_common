@@ -8307,6 +8307,17 @@ workload sizes of its own vCPU's and is able to feed that
 information to host. This allows the host to make more accurate frequency
 selections for its CPUs.
 
+8.42 KVM_CAP_GET_CPUFREQ_TBL
+---------------------------
+
+:Architectures: arm64
+
+This capability indicates that the KVM supports getting frequency
+tables of CPUs when available. Assuming that vCPUs are pinned to
+each host physical CPU, this allows the guest to be able to
+populate its cpufreq driver's frequency table that matches that of
+the host.
+
 9. Known KVM API problems
 =========================
 
