@@ -82,6 +82,7 @@ enum hwsim_tx_control_flags {
  * @HWSIM_CMD_DEL_MAC_ADDR: remove the MAC address again, the attributes
  *	are the same as to @HWSIM_CMD_ADD_MAC_ADDR.
  * @HWSIM_CMD_START_PMSR: start PMSR
+ * @HWSIM_CMD_ABORT_PMSR: abort PMSR
  * @__HWSIM_CMD_MAX: enum limit
  */
 enum {
@@ -95,6 +96,7 @@ enum {
 	HWSIM_CMD_ADD_MAC_ADDR,
 	HWSIM_CMD_DEL_MAC_ADDR,
 	HWSIM_CMD_START_PMSR,
+	HWSIM_CMD_ABORT_PMSR,
 	__HWSIM_CMD_MAX,
 };
 #define HWSIM_CMD_MAX (_HWSIM_CMD_MAX - 1)
