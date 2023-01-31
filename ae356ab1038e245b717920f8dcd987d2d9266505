@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f09c189c_229c98fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-31T17:09:50Z",
+      "side": 1,
+      "message": "If you create during resume, when is the sysfs file removed?  This feels wrong.",
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
