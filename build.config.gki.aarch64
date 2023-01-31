@@ -27,6 +27,12 @@ android/abi_gki_aarch64_unisoc
 android/abi_gki_aarch64_virtual_device
 android/abi_gki_aarch64_vivo
 android/abi_gki_aarch64_xiaomi
+<<<<<<< HEAD   (dc4677 FROMLIST: binder: fix UAF of alloc->vma in race with munmap()
+=======
+android/abi_gki_aarch64_asus
+android/abi_gki_aarch64_transsion
+android/abi_gki_aarch64_tuxera
+>>>>>>> CHANGE (5f30de ANDROID: GKI: Add Tuxera symbol list)
 "
 
 FILES="${FILES}
