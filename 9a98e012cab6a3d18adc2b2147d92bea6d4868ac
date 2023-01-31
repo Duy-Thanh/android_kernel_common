@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad255353_e78135fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2023-01-31T22:50:56Z",
+      "side": 1,
+      "message": "Todd, the commit message mentions the purpose.\n\nZiyi, probably add some explicit work \"which are used by vendor kernel module\" after \"The purpose of these symbols are used for getting counter and metrics of long running irq...\"",
+      "parentUuid": "5890416e_2cf4c35c",
+      "revId": "9a98e012cab6a3d18adc2b2147d92bea6d4868ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9fe46842_1b1087bb",
