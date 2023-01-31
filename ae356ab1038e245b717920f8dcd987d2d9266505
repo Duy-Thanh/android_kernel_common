@@ -16,6 +16,24 @@
       "message": "If you create during resume, when is the sysfs file removed?  This feels wrong.",
       "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac428d94_2af7eaa6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-01-31T17:14:55Z",
+      "side": 1,
+      "message": "It\u0027s created on first resume, and removed in dm_bow_dtr. But not arguing, this is weird.",
+      "parentUuid": "f09c189c_229c98fe",
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
