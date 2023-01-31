@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a42c2337_4fc16bed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-31T06:55:01Z",
+      "side": 1,
+      "message": "what compatibility issue?\n\nChange logs without text are usually rejected automatically 😊",
+      "revId": "f7688acce5dad1019b61ab17ac2b70fc0c44a5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9412b1b6_b06f1d4c",
         "filename": "drivers/md/dm-bow.c",
         "patchSetId": 1
