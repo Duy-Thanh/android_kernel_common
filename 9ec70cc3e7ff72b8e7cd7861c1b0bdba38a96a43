@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae227af_2645357a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-31T07:01:29Z",
+      "side": 1,
+      "message": "not a good global namespace function (`dmabuf_get_each` perhaps?)",
+      "range": {
+        "startLine": 68,
+        "startChar": 21,
+        "endLine": 68,
+        "endChar": 36
+      },
+      "revId": "9ec70cc3e7ff72b8e7cd7861c1b0bdba38a96a43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
