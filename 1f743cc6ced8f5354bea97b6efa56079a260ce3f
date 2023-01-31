@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2f9d702_47b59859",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-01-31T01:59:42Z",
+      "side": 1,
+      "message": "6.1 uses KCFI instead of Clang CFI. Before submitting this CL, please provide benchmark numbers that confirm a similar performance regression still exists with KCFI.",
+      "revId": "1f743cc6ced8f5354bea97b6efa56079a260ce3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
