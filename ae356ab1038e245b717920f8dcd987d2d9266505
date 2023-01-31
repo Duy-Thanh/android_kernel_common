@@ -34,6 +34,24 @@
       "parentUuid": "f09c189c_229c98fe",
       "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "261175a6_be3b1ab4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-01-31T18:08:24Z",
+      "side": 1,
+      "message": "sysfs node is created:\n\nDM_TABLE_LOAD\ntable_load\ndm_setup_md_queue\ndm_sysfs_init\n\nsysfs node is destroyed:\n\nDM_DEV_REMOVE_CMD\ndm_remove\ndm_destroy\n__dm_destroy\nfree_dev\ncleanup_mapped_device\ndm_sysfs_exit\n\nBut there is nowhere to hook table_load - see target_type for list of target-implementable functions. So we hook resume as a proxy for a late constructor, construct only on first call, and destroy in dtr.\n\nI don\u0027t love this, but it seems to be the way to get our construction/destruction of sysfs closest to the dm layer\u0027s construction/destruction",
+      "parentUuid": "ac428d94_2af7eaa6",
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
