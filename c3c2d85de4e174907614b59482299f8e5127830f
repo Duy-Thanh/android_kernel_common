@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92928db6_beedb529",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-31T07:44:04Z",
+      "side": 1,
+      "message": "document this in kernel doc format and explain that a lock is held?  The lock is important here, right?",
+      "range": {
+        "startLine": 49,
+        "startChar": 3,
+        "endLine": 49,
+        "endChar": 9
+      },
+      "revId": "c3c2d85de4e174907614b59482299f8e5127830f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
