@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "44383907_be7a3ffa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1963266
+      },
+      "writtenOn": "2023-01-31T20:59:30Z",
+      "side": 1,
+      "message": "We use these tracepoints(trace_softirq_entry, trace_softirq_exit, etc) to get irq/softirq latency. \n\nThis is for monitoring and debugging. \n\nThey are not called by vendor hook; \n\nwe use tracepoints that were defined in trace/events/irq.h, the same tracepoints were called in kernel/softirq.c",
+      "parentUuid": "13df0846_3b9c577a",
+      "revId": "9a98e012cab6a3d18adc2b2147d92bea6d4868ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9fe46842_1b1087bb",
