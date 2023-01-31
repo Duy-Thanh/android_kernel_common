@@ -16,6 +16,24 @@
       "message": "6.1 uses KCFI instead of Clang CFI. Before submitting this CL, please provide benchmark numbers that confirm a similar performance regression still exists with KCFI.",
       "revId": "1f743cc6ced8f5354bea97b6efa56079a260ce3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e269c1ac_59a62508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-01-31T02:11:07Z",
+      "side": 1,
+      "message": "And just to elaborate: Unlike Clang CFI, which had additional overhead for indirect calls between modules and the core kernel, KCFI has the exact same cost for all indirect calls and the overhead is much lower as there are no function calls involved in the checks. Any benchmarks that were used to justify disabling CFI earlier should be re-run to confirm a regression still exists.",
+      "parentUuid": "f2f9d702_47b59859",
+      "revId": "1f743cc6ced8f5354bea97b6efa56079a260ce3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
