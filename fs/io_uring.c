@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (bf7603 Merge branch 'android12-5.10' into android12-5.10-lts)
 // SPDX-License-Identifier: GPL-2.0
 /*
  * Shared application/kernel submission and completion ring pairs, for
@@ -9964,3 +9965,5 @@ static int __init io_uring_init(void)
 	return 0;
 };
 __initcall(io_uring_init);
+=======
+>>>>>>> BRANCH (0fe454 Linux 5.10.162)
