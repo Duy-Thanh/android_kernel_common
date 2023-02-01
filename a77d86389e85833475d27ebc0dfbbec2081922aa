@@ -16,6 +16,24 @@
       "message": "abi break, will be fixed up.",
       "revId": "a77d86389e85833475d27ebc0dfbbec2081922aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2da111a3_f2dad8da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T16:03:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b34415f2_b8aa69de",
+      "revId": "a77d86389e85833475d27ebc0dfbbec2081922aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
