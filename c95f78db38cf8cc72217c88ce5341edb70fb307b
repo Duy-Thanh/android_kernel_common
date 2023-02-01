@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9bb5f0e_f68f13d7",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1947111
+      },
+      "writtenOn": "2023-02-01T13:56:59Z",
+      "side": 1,
+      "message": "Hi Isaac,\n\nSorry to ask one question, why do you add this symbol here? Is there any additional change using this symbol?",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 27
+      },
+      "revId": "c95f78db38cf8cc72217c88ce5341edb70fb307b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
