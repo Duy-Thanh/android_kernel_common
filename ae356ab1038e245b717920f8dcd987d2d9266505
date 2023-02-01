@@ -88,6 +88,230 @@
       "parentUuid": "f45ab60f_b5900357",
       "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6744a089_6779c4a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "Minor review comments.  Nothing to stop you from merging this, it just looks like it hasn\u0027t been looked at in a while which makes sense.",
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3073f97_208cff1c",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "date needs to be updated.",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71ac6b0_2c95771e",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "needs a real SPDX line.",
+      "range": {
+        "startLine": 4,
+        "startChar": 32,
+        "endLine": 4,
+        "endChar": 38
+      },
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54fbce8e_ffdbae0e",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "state should not need to be atomic, use a real lock 😊",
+      "range": {
+        "startLine": 512,
+        "startChar": 59,
+        "endLine": 512,
+        "endChar": 64
+      },
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022e7ef8_23ad635b",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "you have a lock you just grabbed, don\u0027t use yet-another-one in the state field too, this does not need to be atomic.",
+      "range": {
+        "startLine": 530,
+        "startChar": 1,
+        "endLine": 530,
+        "endChar": 42
+      },
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfde6bb3_79946361",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "is state an enumerated type or an integer?  You\u0027re treating it as both here.",
+      "range": {
+        "startLine": 531,
+        "startChar": 14,
+        "endLine": 531,
+        "endChar": 28
+      },
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e06ea19f_d9d4e3e8",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "lock is useless as this value can change right after it is read.",
+      "range": {
+        "startLine": 574,
+        "startChar": 1,
+        "endLine": 574,
+        "endChar": 11
+      },
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d1334a_d26ebba9",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "sysfs_emit() please.",
+      "range": {
+        "startLine": 578,
+        "startChar": 8,
+        "endLine": 578,
+        "endChar": 17
+      },
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf3fd76_41d176b1",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "meta-comment, this is wrong, but it\u0027s not your fault, the dm subsystem shouldn\u0027t be doing this.  release functions have to free memory, not run completions and then not free memory.  Oh well...",
+      "range": {
+        "startLine": 593,
+        "startChar": 1,
+        "endLine": 593,
+        "endChar": 30
+      },
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17f912e7_05847014",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-01T06:47:56Z",
+      "side": 1,
+      "message": "very odd, you shouldn\u0027t have to poke in a kobject like this, how would it not be initialized?",
+      "range": {
+        "startLine": 609,
+        "startChar": 11,
+        "endLine": 609,
+        "endChar": 28
+      },
+      "revId": "ae356ab1038e245b717920f8dcd987d2d9266505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
