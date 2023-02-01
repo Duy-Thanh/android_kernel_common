@@ -46,6 +46,30 @@
       },
       "revId": "9ec70cc3e7ff72b8e7cd7861c1b0bdba38a96a43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d0f2e97_51a41401",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-02-01T00:43:36Z",
+      "side": 1,
+      "message": "This is a cherry-pick from an older kernel and as such IMHO the names should stay unchanged.\nWhile we are on this topic, the cherry-picked patch is more that a year old. Was there any attempt to upstream the minidump feature using it?",
+      "parentUuid": "24e2da3e_a16ae20b",
+      "range": {
+        "startLine": 68,
+        "startChar": 21,
+        "endLine": 68,
+        "endChar": 36
+      },
+      "revId": "9ec70cc3e7ff72b8e7cd7861c1b0bdba38a96a43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
