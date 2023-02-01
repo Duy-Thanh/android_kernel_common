@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c07cd2_7bbf99c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-02-01T02:42:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bf1bcad_37a18e89",
+      "range": {
+        "startLine": 7,
+        "startChar": 42,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "2ebf0724e3ddd219be742db99d8b2b86b1472422",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7504121b_b6c5b5a7",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-01T01:43:50Z",
       "side": 1,
       "message": "There is only one. How about:\n```\nThis patch is a refactored version of the android13-5.15 commit\n9c25e5d6f583 (\"ANDROID: gic: Add vendor hook to GIC\").\n```",
+      "range": {
+        "startLine": 12,
+        "startChar": 61,
+        "endLine": 12,
+        "endChar": 69
+      },
+      "revId": "2ebf0724e3ddd219be742db99d8b2b86b1472422",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42dfb9bf_fab5efd7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-02-01T02:42:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7504121b_b6c5b5a7",
       "range": {
         "startLine": 12,
         "startChar": 61,
