@@ -461,11 +461,23 @@ static int config_usb_cfg_link(
 	 * from another gadget or a random directory.
 	 * Also a function instance can only be linked once.
 	 */
+<<<<<<< HEAD   (47c6b1 ANDROID: GKI: Enable symbol trimming)
 	list_for_each_entry(iter, &gi->available_func, cfs_list) {
 		if (iter != fi)
 			continue;
 		a_fi = iter;
 		break;
+=======
+
+	if (gi->composite.gadget_driver.udc_name) {
+		ret = -EINVAL;
+		goto out;
+	}
+
+	list_for_each_entry(a_fi, &gi->available_func, cfs_list) {
+		if (a_fi == fi)
+			break;
+>>>>>>> CHANGE (6f810b FROMGIT: usb: gadget: configfs: Restrict symlink creation is)
 	}
 	if (!a_fi) {
 		ret = -EINVAL;
