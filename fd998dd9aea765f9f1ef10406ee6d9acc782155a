@@ -16,6 +16,41 @@
       "message": "Why can this not be done with the existing netfilter hooks, or bpf?  Why is a vendor hook somehow required here to look at all network data?",
       "revId": "fd998dd9aea765f9f1ef10406ee6d9acc782155a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd78992d_52046750",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988791
+      },
+      "writtenOn": "2023-02-02T21:55:59Z",
+      "side": 1,
+      "message": "This can\u0027t be done using bpf because Vendor does not have a direct accept to bpf.",
+      "parentUuid": "7e749c70_93ac324d",
+      "revId": "fd998dd9aea765f9f1ef10406ee6d9acc782155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0f8e53a_392834f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988791
+      },
+      "writtenOn": "2023-02-02T21:55:59Z",
+      "side": 1,
+      "message": "ke",
+      "revId": "fd998dd9aea765f9f1ef10406ee6d9acc782155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
