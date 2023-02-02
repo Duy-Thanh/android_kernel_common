@@ -69,6 +69,23 @@
       "message": "https://lore.kernel.org/all/20230120113321.30433-1-quic_ahari@quicinc.com/\nhttps://lore.kernel.org/all/20230120113321.30433-2-quic_ahari@quicinc.com/",
       "revId": "cf6f34addc8111a9616c42779306d486beeba40d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55085e98_bd618dfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1986766
+      },
+      "writtenOn": "2023-02-02T16:21:24Z",
+      "side": 1,
+      "message": "Update:\nRevised patches posted to upstream:\n\nhttps://lore.kernel.org/all/20230202161045.3956-1-quic_ahari@quicinc.com/\nhttps://lore.kernel.org/all/20230202161045.3956-2-quic_ahari@quicinc.com/\n\nHighlights:\nFixed kernel bot related issues\nAddressed comments from previous patchsets",
+      "revId": "cf6f34addc8111a9616c42779306d486beeba40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
