@@ -16,6 +16,24 @@
       "message": "Is there a respin request for this patch?",
       "revId": "6d5a80510e06316a234772e077b91906c8e0244a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85e43589_e56f9939",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2023-02-02T06:35:19Z",
+      "side": 1,
+      "message": "Ok, this CL doesn\u0027t need to go in -qpr2. Let me drop.",
+      "parentUuid": "861199d6_399c37b5",
+      "revId": "6d5a80510e06316a234772e077b91906c8e0244a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
