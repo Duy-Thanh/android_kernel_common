@@ -16,6 +16,24 @@
       "message": "Would it be possible to keep this in tree and patch that one for the time being?\n\nI ask because I am in the process of setting up the build infrastructure and getting automated builds to work with the out-of-tree modules will take much longer, and it would be better to start testing our work as early as possible.\n\nWill this be a hindrance to your work? From my understanding, this should actually simplify the development process as you can just replace the kernel binary as opposed to requiring a new Android build.",
       "revId": "bc1eae21f27f3b2f36b0b4fdfdff56ec4293055d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56f7cfc1_52107d9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2023-02-02T10:50:52Z",
+      "side": 1,
+      "message": "Sure, sounds reasonable.\n\nSo just to make it clear. For now I will update builtin virtio_video to match latest version from 5.10 and we\u0027ll back to the topic when out of tree approach is ready. Is this what you mean?",
+      "parentUuid": "ad112d1a_7a7e8c1d",
+      "revId": "bc1eae21f27f3b2f36b0b4fdfdff56ec4293055d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
