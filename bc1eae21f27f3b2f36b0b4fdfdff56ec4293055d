@@ -34,6 +34,24 @@
       "parentUuid": "ad112d1a_7a7e8c1d",
       "revId": "bc1eae21f27f3b2f36b0b4fdfdff56ec4293055d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c12cb82_b98a3ec3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2023-02-02T18:18:48Z",
+      "side": 1,
+      "message": "Yes I believe so, though I assume that we may also need additional changes to get things to work with 5.15?\n\nFrom a high level, we should keep all development in the kernel tree for now",
+      "parentUuid": "56f7cfc1_52107d9c",
+      "revId": "bc1eae21f27f3b2f36b0b4fdfdff56ec4293055d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
