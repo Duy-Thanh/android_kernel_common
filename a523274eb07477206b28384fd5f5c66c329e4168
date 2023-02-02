@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e83aac_2645004c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-02T09:13:06Z",
+      "side": 1,
+      "message": "you dropped all the upstream information here that was on the original submission 😞",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 53
+      },
+      "revId": "a523274eb07477206b28384fd5f5c66c329e4168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6ba6f9f_db17bf16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-02T09:13:06Z",
+      "side": 1,
+      "message": "this is not a real email address, please use your corporate one to sign-off on patches.",
+      "range": {
+        "startLine": 23,
+        "startChar": 43,
+        "endLine": 23,
+        "endChar": 65
+      },
+      "revId": "a523274eb07477206b28384fd5f5c66c329e4168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
