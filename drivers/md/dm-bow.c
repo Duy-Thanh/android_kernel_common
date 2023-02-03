@@ -587,9 +587,11 @@ static struct attribute *bow_attrs[] = {
 	NULL
 };
 
+ATTRIBUTE_GROUPS(bow);
+
 static struct kobj_type bow_ktype = {
 	.sysfs_ops = &kobj_sysfs_ops,
-	.default_attrs = bow_attrs,
+	.default_groups = bow_groups,
 	.release = dm_kobject_release
 };
 
@@ -708,7 +710,6 @@ static int dm_bow_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 
 	ti->num_flush_bios = 1;
 	ti->num_discard_bios = 1;
-	ti->num_write_same_bios = 1;
 	ti->private = bc;
 
 	ret = dm_get_device(ti, argv[0], dm_table_get_mode(ti->table),
@@ -737,7 +738,7 @@ static int dm_bow_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 	mutex_init(&bc->ranges_lock);
 	bc->ranges = RB_ROOT;
 	bc->bufio = dm_bufio_client_create(bc->dev->bdev, bc->block_size, 1, 0,
-					   NULL, NULL);
+					   NULL, NULL, 0);
 	if (IS_ERR(bc->bufio)) {
 		ti->error = "Cannot initialize dm-bufio";
 		ret = PTR_ERR(bc->bufio);
@@ -1138,7 +1139,9 @@ static int dm_bow_map(struct dm_target *ti, struct bio *bio)
 			else
 				/* pass-through */;
 		} else if (state == CHECKPOINT) {
-			if (bio->bi_iter.bi_sector == 0)
+			if (!bio->bi_iter.bi_size)
+				/* pass-through */;
+			else if (bio->bi_iter.bi_sector == 0)
 				ret = handle_sector0(bc, bio);
 			else if (bio_data_dir(bio) == WRITE)
 				ret = queue_write(bc, bio);
