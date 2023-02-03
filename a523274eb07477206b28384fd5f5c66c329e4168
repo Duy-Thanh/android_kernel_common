@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a18b1ff7_488574f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1955425
+      },
+      "writtenOn": "2023-02-03T01:03:01Z",
+      "side": 1,
+      "message": "Add the upstream information back.",
+      "parentUuid": "d6e83aac_2645004c",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 53
+      },
+      "revId": "a523274eb07477206b28384fd5f5c66c329e4168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6ba6f9f_db17bf16",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-02T09:13:06Z",
       "side": 1,
       "message": "this is not a real email address, please use your corporate one to sign-off on patches.",
+      "range": {
+        "startLine": 23,
+        "startChar": 43,
+        "endLine": 23,
+        "endChar": 65
+      },
+      "revId": "a523274eb07477206b28384fd5f5c66c329e4168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "959b97b2_078f6153",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1955425
+      },
+      "writtenOn": "2023-02-03T01:03:01Z",
+      "side": 1,
+      "message": "Now use the corporate email.\nAlso add \"Signed-off-by: Liam Howlett \u003cliam.howlett@oracle.com\u003e\" to satisfy Lint.",
+      "parentUuid": "d6ba6f9f_db17bf16",
       "range": {
         "startLine": 23,
         "startChar": 43,
