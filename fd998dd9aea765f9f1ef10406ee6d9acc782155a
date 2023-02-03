@@ -51,6 +51,41 @@
       "message": "ke",
       "revId": "fd998dd9aea765f9f1ef10406ee6d9acc782155a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4bb88dd_0420adb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-03T20:01:49Z",
+      "side": 1,
+      "message": "When you get asked questions like Greg\u0027s above, it is a _hint_ that this information should be provided in the commit message.\n\nPlease update the commit message to clearly state why netfilter and bpf (and any other packet filtering mechanism) is not sufficient. It should also include examples what \"network info\" is being collected and what kind of performance benefits this results in.",
+      "parentUuid": "cd78992d_52046750",
+      "revId": "fd998dd9aea765f9f1ef10406ee6d9acc782155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a832581e_9af7e02b",
+        "filename": "include/trace/hooks/ipv4.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-03T20:01:49Z",
+      "side": 1,
+      "message": "Please remove this unnecessary header inclusion",
+      "revId": "fd998dd9aea765f9f1ef10406ee6d9acc782155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
