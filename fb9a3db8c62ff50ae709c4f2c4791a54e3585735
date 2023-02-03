@@ -56,6 +56,29 @@
       "message": "What happened to your upstream submission for this same change?",
       "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155eed4a_d0a9e68b",
+        "filename": "drivers/gpu/drm/drm_property.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-03T07:22:02Z",
+      "side": 1,
+      "message": "why compute this again?",
+      "range": {
+        "startLine": 575,
+        "startChar": 18,
+        "endLine": 575,
+        "endChar": 57
+      },
+      "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
