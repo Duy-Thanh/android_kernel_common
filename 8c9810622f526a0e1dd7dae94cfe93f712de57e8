@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c33707f6_e8d4fcaa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1840060
+      },
+      "writtenOn": "2023-02-03T04:55:26Z",
+      "side": 1,
+      "message": "\u003e Please **attach an open respin request bug** to this change. Refer the following link for more information:\n\u003e https://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 506619300 android-build.ayeaye-python-dispatcher_20230202.05_p0\n\nPlease fix.",
+      "parentUuid": "60d9a3a5_524c3329",
+      "revId": "8c9810622f526a0e1dd7dae94cfe93f712de57e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
