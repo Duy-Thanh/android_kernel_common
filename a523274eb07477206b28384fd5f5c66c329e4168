@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ea32ff_3bc03bd6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-03T05:44:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a18b1ff7_488574f7",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 53
+      },
+      "revId": "a523274eb07477206b28384fd5f5c66c329e4168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6ba6f9f_db17bf16",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Now use the corporate email.\nAlso add \"Signed-off-by: Liam Howlett \u003cliam.howlett@oracle.com\u003e\" to satisfy Lint.",
       "parentUuid": "d6ba6f9f_db17bf16",
+      "range": {
+        "startLine": 23,
+        "startChar": 43,
+        "endLine": 23,
+        "endChar": 65
+      },
+      "revId": "a523274eb07477206b28384fd5f5c66c329e4168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b30c65_a647b025",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-03T05:44:21Z",
+      "side": 1,
+      "message": "Do not add that at the end, you need your signed-off-by to be last.",
+      "parentUuid": "959b97b2_078f6153",
       "range": {
         "startLine": 23,
         "startChar": 43,
