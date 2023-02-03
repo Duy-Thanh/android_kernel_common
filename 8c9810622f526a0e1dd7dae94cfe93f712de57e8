@@ -53,6 +53,24 @@
       "parentUuid": "60d9a3a5_524c3329",
       "revId": "8c9810622f526a0e1dd7dae94cfe93f712de57e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e69d8d0e_5814cd6d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969300
+      },
+      "writtenOn": "2023-02-03T05:56:05Z",
+      "side": 1,
+      "message": "attached Bug: 267697963",
+      "parentUuid": "f9c3f481_00714743",
+      "revId": "8c9810622f526a0e1dd7dae94cfe93f712de57e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
