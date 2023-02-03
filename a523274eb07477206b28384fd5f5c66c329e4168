@@ -141,6 +141,30 @@
       },
       "revId": "a523274eb07477206b28384fd5f5c66c329e4168",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38e31ad_b398d99a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1955425
+      },
+      "writtenOn": "2023-02-03T09:27:47Z",
+      "side": 1,
+      "message": "Move it upper.",
+      "parentUuid": "61b30c65_a647b025",
+      "range": {
+        "startLine": 23,
+        "startChar": 43,
+        "endLine": 23,
+        "endChar": 65
+      },
+      "revId": "a523274eb07477206b28384fd5f5c66c329e4168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
