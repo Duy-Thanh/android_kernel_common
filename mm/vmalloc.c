@@ -2514,7 +2514,11 @@ struct vm_struct *find_vm_area(const void *addr)
 
 	return va->vm;
 }
+<<<<<<< HEAD   (78369d CHROMIUM: Set CONFIG_MODULE_SIG=y to fix sign-file build err)
 EXPORT_SYMBOL(find_vm_area);
+=======
+EXPORT_SYMBOL_GPL(find_vm_area);
+>>>>>>> BRANCH (18eaf7 FROMGIT: scsi: ufs: Try harder to change the power mode)
 
 /**
  * remove_vm_area - find and remove a continuous kernel virtual area
