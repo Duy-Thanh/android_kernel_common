@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b59c726d_0bf5312e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-02-03T00:06:45Z",
+      "side": 1,
+      "message": "\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 506619300 android-build.ayeaye-python-dispatcher_20230202.05_p0\n\nPlease fix.",
+      "parentUuid": "ba8afca0_1d914f36",
+      "revId": "4fbae4524dc90bb2e968fa356efd34c72cb2239f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "656aa7a3_3798ac8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-02-03T00:06:45Z",
+      "side": 1,
+      "message": "Let\u0027s submit these only after there is a slider_gki_16k target to avoid breaking others",
+      "revId": "4fbae4524dc90bb2e968fa356efd34c72cb2239f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
