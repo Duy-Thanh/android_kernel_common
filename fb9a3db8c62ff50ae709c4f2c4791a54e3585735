@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d986491_1aa30b54",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-03T06:59:09Z",
+      "side": 1,
+      "message": "please properly wrap your changelog at 72 columns like the editor asked you to 😊",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 318
+      },
+      "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef8a0d08_0ad47540",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-03T06:59:09Z",
+      "side": 1,
+      "message": "Changelog does not say this is a DRM-specific thing at all 😞",
+      "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
