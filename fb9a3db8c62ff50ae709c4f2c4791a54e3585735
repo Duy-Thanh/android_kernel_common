@@ -60,6 +60,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3f52d13_5c5cf1a5",
+        "filename": "drivers/gpu/drm/drm_property.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-03T21:51:59Z",
+      "side": 1,
+      "message": "drm_property wasn\u0027t initialized to NULL so this is just testing stack contents if nothing is attached to the hook.",
+      "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "155eed4a_d0a9e68b",
         "filename": "drivers/gpu/drm/drm_property.c",
         "patchSetId": 1
@@ -77,6 +94,23 @@
         "endLine": 575,
         "endChar": 57
       },
+      "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa3bec38_6a19c31f",
+        "filename": "include/trace/hooks/drm_property.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-03T21:51:59Z",
+      "side": 1,
+      "message": "This should be uncommented. Why isn\u0027t it?",
       "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
