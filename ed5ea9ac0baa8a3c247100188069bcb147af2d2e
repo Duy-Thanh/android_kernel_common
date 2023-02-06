@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7a63f7e_e1aaad34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-06T17:12:55Z",
+      "side": 1,
+      "message": "This patch doesn\u0027t introduce any \"Hook\". Just say \"...Add vendor data field to struct irq_desc\"",
+      "revId": "ed5ea9ac0baa8a3c247100188069bcb147af2d2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da2c962_b43815c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-06T17:12:55Z",
+      "side": 1,
+      "message": "Please cite the vendor hooks that require this field and the patch that added them.",
+      "revId": "ed5ea9ac0baa8a3c247100188069bcb147af2d2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
