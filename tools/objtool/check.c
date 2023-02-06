@@ -136,6 +136,7 @@ static bool __dead_end_function(struct objtool_file *file, struct symbol *func,
 		"panic",
 		"do_exit",
 		"do_task_dead",
+		"make_task_dead",
 		"__module_put_and_exit",
 		"complete_and_exit",
 		"__reiserfs_panic",
@@ -143,8 +144,12 @@ static bool __dead_end_function(struct objtool_file *file, struct symbol *func,
 		"fortify_panic",
 		"usercopy_abort",
 		"machine_real_restart",
+<<<<<<< HEAD   (130d43 Merge branch 'android12-5.4' into android12-5.4-lts)
 		"rewind_stack_do_exit",
 		"kunit_try_catch_throw",
+=======
+		"rewind_stack_and_make_dead",
+>>>>>>> BRANCH (593423 Linux 5.4.231)
 		"cpu_bringup_and_idle",
 	};
 
