@@ -16,6 +16,23 @@
       "message": "Sorry about this. This patch is combine of 1679907 and fix 1690646.",
       "revId": "6edea2bf150069ab40425e858223bb05ead54fad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0712e2c_26398bb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-02-06T14:35:22Z",
+      "side": 1,
+      "message": "We have noticed that the old bug 178721511 attached to the new changes 2422242, 2418479 and 2412182. Could you create a new bug for these updates and link it from the commit messages?",
+      "revId": "6edea2bf150069ab40425e858223bb05ead54fad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
