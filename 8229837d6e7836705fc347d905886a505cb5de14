@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5576db4f_79860f5a",
+        "filename": "drivers/net/wireless/mac80211_hwsim.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3253,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-02-06T02:03:56Z",
+      "side": 1,
+      "message": "I think we need to handle ret code of mac80211_hwsim_send_pmsr_ftm_request_peer",
+      "range": {
+        "startLine": 3253,
+        "startChar": 1,
+        "endLine": 3253,
+        "endChar": 42
+      },
+      "revId": "8229837d6e7836705fc347d905886a505cb5de14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
