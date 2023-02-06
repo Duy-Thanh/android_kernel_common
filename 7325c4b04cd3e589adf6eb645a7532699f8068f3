@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a31a0ed_69dd501d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-02-06T18:12:45Z",
+      "side": 1,
+      "message": "Hi! I have uploaded fixed abi_gki_aarch64.xml with clear ABI update. Please fetch the new commit if you plan to rebase or modify it.",
+      "revId": "7325c4b04cd3e589adf6eb645a7532699f8068f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
