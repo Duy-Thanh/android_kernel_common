@@ -16,6 +16,23 @@
       "message": "Hi! I have uploaded fixed abi_gki_aarch64.xml with clear ABI update. Please fetch the new commit if you plan to rebase or modify it.",
       "revId": "7325c4b04cd3e589adf6eb645a7532699f8068f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9794c3a4_5447fcaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-07T11:49:41Z",
+      "side": 1,
+      "message": "Pending the parent change.",
+      "revId": "7325c4b04cd3e589adf6eb645a7532699f8068f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
