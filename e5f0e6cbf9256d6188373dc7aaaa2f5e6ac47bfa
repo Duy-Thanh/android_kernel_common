@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000037663883",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2423326?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "5c1e9159_410aa028",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Charan Teja Reddy \u003ccharante@codeaurora.org\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "ad053777_49f6cf03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-02-07T13:47:45Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Charan Teja Reddy \u003ccharante@codeaurora.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 507495205 android-build.ayeaye-python-dispatcher_20230206.05_p0",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "revId": "e5f0e6cbf9256d6188373dc7aaaa2f5e6ac47bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
