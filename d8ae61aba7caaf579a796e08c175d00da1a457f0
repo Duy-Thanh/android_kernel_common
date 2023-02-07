@@ -16,6 +16,29 @@
       "message": "Was this removal intentional? (This was recently added)",
       "revId": "d8ae61aba7caaf579a796e08c175d00da1a457f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd3ee0b8_b1675249",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1006514
+      },
+      "writtenOn": "2023-02-07T18:54:12Z",
+      "side": 0,
+      "message": "Why are we removing, can you pls cross check again and make sure we indeed don\u0027t need the symbol?",
+      "range": {
+        "startLine": 534,
+        "startChar": 2,
+        "endLine": 534,
+        "endChar": 15
+      },
+      "revId": "d8ae61aba7caaf579a796e08c175d00da1a457f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
