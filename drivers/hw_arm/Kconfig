@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# Module to provide information about the ARM cpu and caches configuration.
+#
+
+menu "ARM cpu info"
+
+config HW_ARM_CPU_INFO
+	tristate "ARM cpu and caches information"
+	depends on ARM || ARM64
+	default y
+	help
+		Enable support for printing ARM cpu and caches configuration. The ARM
+		information will be available in the kernel logs for simplicity.
+
+		The driver can be built as a module.
+
+endmenu
+
