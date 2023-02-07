@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8804b660_59e41a9d",
+        "filename": "include/trace/hooks/suspend.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2023-02-07T18:59:07Z",
+      "side": 1,
+      "message": "remove one extra blank line",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "6e29e92a98bd17452278bdca4572874d53f5cdc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
