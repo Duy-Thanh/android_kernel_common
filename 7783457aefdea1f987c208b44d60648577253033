@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "687016bb_0555b4b9",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 2406,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2023-02-07T11:41:16Z",
+      "side": 1,
+      "message": "Please add the corresponding __traceiter symbols as well.",
+      "range": {
+        "startLine": 2405,
+        "startChar": 2,
+        "endLine": 2406,
+        "endChar": 27
+      },
+      "revId": "7783457aefdea1f987c208b44d60648577253033",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
