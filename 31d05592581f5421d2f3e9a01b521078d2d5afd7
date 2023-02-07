@@ -22,6 +22,30 @@
       },
       "revId": "31d05592581f5421d2f3e9a01b521078d2d5afd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c504dc_73bb3fc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965775
+      },
+      "writtenOn": "2023-02-07T16:22:06Z",
+      "side": 1,
+      "message": "is below the expecation?\n\nANDROID: ABI: Update allowed list for QCOM\n\nAdd tracepoint_rwmmio_read and tracepoint_rwmmio_write to QCOM whitelist.",
+      "parentUuid": "4604d5e4_8311a7d9",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 51
+      },
+      "revId": "31d05592581f5421d2f3e9a01b521078d2d5afd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
