@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae19eae1_1feb1035",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2023-02-07T19:55:37Z",
+      "side": 1,
+      "message": "Symbol presence status for symbols new in branch is as follows (❌ - Absent, ✅ - Present, ➖ - Unknown):\n\n| Symbols                       |  12-5.4 (Older)  |  12-5.10 (Older)  |  13-5.10 (Sibling)  |  14-5.15 (Newer)  |  14-6.1 (Newer)  |\n|:------------------------------|:----------------:|:-----------------:|:-------------------:|:-----------------:|:----------------:|\n| __kfifo_from_user             |        ✅         |         ✅         |          ❌          |         ❌         |        ❌         |\n| mangle_path                   |        ✅         |         ✅         |          ❌          |         ❌         |        ❌         |\n| read_sanitised_ftr_reg        |        ❌         |         ❌         |          ❌          |         ❌         |        ✅         |\n| register_wide_hw_breakpoint   |        ❌         |         ✅         |          ❌          |         ✅         |        ✅         |\n| snd_soc_jack_free_gpios       |        ❌         |         ❌         |          ❌          |         ✅         |        ❌         |\n| unregister_wide_hw_breakpoint |        ❌         |         ❌         |          ❌          |         ✅         |        ❌         |",
+      "revId": "5af82f714b9c9e16111fe27f81e07b3979a875c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3227875f_42ad0997",
