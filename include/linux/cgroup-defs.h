@@ -275,6 +275,12 @@ struct css_set {
 
 	/* For RCU-protected deletion */
 	struct rcu_head rcu_head;
+
+	/* Keep Android12-5.4 KMI/ABI compatibility */
+#ifndef __GENKSYMS__
+	struct list_head mg_src_preload_node;
+	struct list_head mg_dst_preload_node;
+#endif
 };
 
 struct cgroup_base_stat {
