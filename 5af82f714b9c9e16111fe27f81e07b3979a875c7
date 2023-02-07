@@ -1,5 +1,52 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3227875f_42ad0997",
+        "filename": "include/linux/device.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2023-02-07T19:36:34Z",
+      "side": 1,
+      "message": "| Symbols                                     |  12-5.4  |  12-5.10  |  13-5.10  |  13-5.15  |  14-5.15  |  14-6.1  |\n|:--------------------------------------------|:--------:|:---------:|:---------:|:---------:|:---------:|:--------:|\n| csum_ipv6_magic                             |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| csum_partial                                |    ✅     |     ✅     |     ✅     |     ✅     |     ❌     |    ➖     |\n| dev_get_by_name                             |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| devm_extcon_dev_register                    |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| __devm_regmap_init_i2c                      |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| do_traversal_all_lruvec                     |    ❌     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| d_path                                      |    ❌     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_atomic_state_clear                      |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_crtc_arm_vblank_event                   |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_crtc_vblank_get                         |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_framebuffer_lookup                      |    ✅     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| drm_kms_helper_hotplug_event                |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_modeset_acquire_fini                    |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_modeset_acquire_init                    |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_modeset_backoff                         |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_modeset_drop_locks                      |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_property_lookup_blob                    |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| drm_property_replace_blob                   |    ❌     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| extcon_set_state_sync                       |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| find_vpid                                   |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| get_cpu_idle_time_us                        |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| get_cpu_iowait_time_us                      |    ❌     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| gpiod_get_raw_value_cansleep                |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| kernel_cpustat                              |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| __kfifo_from_user                           |    ❌     |     ❌     |     ❌     |     ✅     |     ❌     |    ➖     |\n| kill_pid                                    |    ✅     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| mangle_path                                 |    ❌     |     ❌     |     ❌     |     ✅     |     ❌     |    ➖     |\n| nla_strscpy                                 |    ❌     |     ❌     |     ❌     |     ✅     |     ✅     |    ➖     |\n| __page_mapcount                             |    ❌     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| print_hex_dump                              |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| proc_mkdir_data                             |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| __pskb_copy_fclone                          |    ✅     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| _raw_write_lock_irqsave                     |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| _raw_write_unlock_irqrestore                |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| read_sanitised_ftr_reg                      |    ❌     |     ❌     |     ❌     |     ✅     |     ❌     |    ➖     |\n| register_wide_hw_breakpoint                 |    ❌     |     ❌     |     ❌     |     ✅     |     ❌     |    ➖     |\n| regmap_raw_write                            |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| sched_setattr_nocheck                       |    ❌     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| sdio_align_size                             |    ✅     |     ❌     |     ❌     |     ✅     |     ❌     |    ➖     |\n| show_regs                                   |    ❌     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| smp_call_function_single                    |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| snd_pcm_stop                                |    ✅     |     ✅     |     ✅     |     ✅     |     ❌     |    ➖     |\n| _snd_pcm_stream_lock_irqsave                |    ❌     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| snd_pcm_stream_unlock_irqrestore            |    ❌     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| snd_soc_bytes_tlv_callback                  |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| snd_soc_card_jack_new                       |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| snd_soc_component_update_bits               |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| snd_soc_get_volsw_range                     |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| snd_soc_info_volsw_range                    |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| snd_soc_jack_free_gpios                     |    ❌     |     ❌     |     ❌     |     ✅     |     ❌     |    ➖     |\n| snd_soc_jack_report                         |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| snd_soc_put_volsw_range                     |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| snd_soc_register_component                  |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| strpbrk                                     |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| __tasklet_hi_schedule                       |    ✅     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| __traceiter_android_vh_do_traversal_lruvec  |    ❌     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| __traceiter_android_vh_rmqueue              |    ❌     |     ✅     |     ✅     |     ✅     |     ❌     |    ➖     |\n| __tracepoint_android_vh_do_traversal_lruvec |    ❌     |     ✅     |     ❌     |     ✅     |     ❌     |    ➖     |\n| __tracepoint_android_vh_rmqueue             |    ❌     |     ✅     |     ✅     |     ✅     |     ❌     |    ➖     |\n| tracepoint_probe_unregister                 |    ❌     |     ✅     |     ✅     |     ✅     |     ✅     |    ➖     |\n| unregister_wide_hw_breakpoint               |    ❌     |     ❌     |     ❌     |     ✅     |     ❌     |    ➖     |\n| vm_insert_page                              |    ✅     |     ✅     |     ✅     |     ✅     |     ❌     |    ➖     |\n| yield                                       |    ✅     |     ❌     |     ❌     |     ✅     |     ❌     |    ➖     |",
+      "range": {
+        "startLine": 303,
+        "startChar": 1,
+        "endLine": 303,
+        "endChar": 24
+      },
+      "revId": "5af82f714b9c9e16111fe27f81e07b3979a875c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217ed8dc_3c3b583a",
+        "filename": "include/linux/device.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2023-02-07T19:36:34Z",
+      "side": 1,
+      "message": "Symbol presence status for symbols new in branch is as follows (❌ - Absent, ✅ - Present, ➖ - Unknown):\n\n| Symbols                           |  12-5.4 (Older)  |  12-5.10 (Older)  |  13-5.10 (Sibling)  |  14-5.15 (Newer)  |  14-6.1 (Newer)  |\n|:----------------------------------|:----------------:|:-----------------:|:-------------------:|:-----------------:|:----------------:|\n| __traceiter_android_vh_psi_group  |        ❌         |         ❌         |          ❌          |         ❌         |        ➖         |\n| __tracepoint_android_vh_psi_group |        ❌         |         ✅         |          ❌          |         ❌         |        ➖         |",
+      "range": {
+        "startLine": 306,
+        "startChar": 1,
+        "endLine": 306,
+        "endChar": 14
+      },
+      "revId": "5af82f714b9c9e16111fe27f81e07b3979a875c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
