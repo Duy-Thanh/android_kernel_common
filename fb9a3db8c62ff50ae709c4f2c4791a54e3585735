@@ -100,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f15217e_4aceaa8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2023-02-07T08:33:33Z",
+      "side": 1,
+      "message": "On the premise of not affecting the original logic, we merge a modification for the honor feature through the vendorhook decoupling method.",
+      "parentUuid": "5cc1c90e_f1d8c18c",
+      "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3f52d13_5c5cf1a5",
@@ -158,6 +176,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb2bb413_83b65a8c",
+        "filename": "drivers/gpu/drm/drm_property.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2023-02-07T08:33:33Z",
+      "side": 1,
+      "message": "The size variable is no longer used, and it remains the same as before modification",
+      "parentUuid": "155eed4a_d0a9e68b",
+      "range": {
+        "startLine": 575,
+        "startChar": 18,
+        "endLine": 575,
+        "endChar": 57
+      },
+      "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa3bec38_6a19c31f",
@@ -171,6 +213,24 @@
       "writtenOn": "2023-02-03T21:51:59Z",
       "side": 1,
       "message": "This should be uncommented. Why isn\u0027t it?",
+      "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e58b2df_1b782fb0",
+        "filename": "include/trace/hooks/drm_property.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2023-02-07T08:33:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa3bec38_6a19c31f",
       "revId": "fb9a3db8c62ff50ae709c4f2c4791a54e3585735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
