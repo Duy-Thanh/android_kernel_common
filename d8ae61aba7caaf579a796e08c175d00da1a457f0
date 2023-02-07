@@ -39,6 +39,30 @@
       },
       "revId": "d8ae61aba7caaf579a796e08c175d00da1a457f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec2d1e2_25e3371b",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1891695
+      },
+      "writtenOn": "2023-02-07T19:01:01Z",
+      "side": 0,
+      "message": "Yes, it was added to upstream by chirs in another gerrit and i missed it. Added the function back.",
+      "parentUuid": "dd3ee0b8_b1675249",
+      "range": {
+        "startLine": 534,
+        "startChar": 2,
+        "endLine": 534,
+        "endChar": 15
+      },
+      "revId": "d8ae61aba7caaf579a796e08c175d00da1a457f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
