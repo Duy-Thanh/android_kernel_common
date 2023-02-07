@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a8d3523_8ba71278",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-07T13:42:25Z",
+      "side": 1,
+      "message": "no extra line needed.",
+      "revId": "2a253f699b056bfa05a5c84658c3fb28c57828c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bf5f258_5cee3c98",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-07T13:42:25Z",
+      "side": 1,
+      "message": "no need for a blank line.",
+      "revId": "2a253f699b056bfa05a5c84658c3fb28c57828c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
