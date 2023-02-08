@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56589d02_7dd707a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-02-08T07:11:19Z",
+      "side": 1,
+      "message": "This is the backport which was used for testing the FROMLIST patch on android13-5.10 tree.",
+      "revId": "bac6a065e15b1a415c83e2a4c5256f1f6fd4e443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
