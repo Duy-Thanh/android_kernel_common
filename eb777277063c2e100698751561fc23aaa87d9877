@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7c5f4db_7d75c073",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2023-02-08T15:16:27Z",
+      "side": 1,
+      "message": "My plan A was to revert the problematic commit, aosp/2426472, but while reviewing the revert I realised that this is a more reasonable fix instead. Please review.",
+      "revId": "eb777277063c2e100698751561fc23aaa87d9877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
