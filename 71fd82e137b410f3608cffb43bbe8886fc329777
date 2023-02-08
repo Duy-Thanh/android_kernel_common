@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2aeb69_b753fa55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-08T13:31:19Z",
+      "side": 1,
+      "message": "\u003e Original change \u0027aosp/2387837\u0027 for this cherry pick, on base branch \u0027android12-5.10\u0027 is NOT MERGED.\n\u003e Please merge the original change.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix. That applies to all patches of this series. Changes for this branch have to land on android12-5.10 first.",
+      "parentUuid": "442423f4_8c63436d",
+      "revId": "71fd82e137b410f3608cffb43bbe8886fc329777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
