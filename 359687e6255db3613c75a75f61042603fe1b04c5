@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000037743991",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2425894?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bc3669e9_72a00087",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-02-08T07:52:46Z",
+      "side": 1,
+      "message": "Original change \u0027aosp/2387836\u0027 for this cherry pick, on base branch \u0027android12-5.10\u0027 is NOT MERGED.\nPlease merge the original change.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 507802662 android-build.ayeaye-python-dispatcher_20230207.05_p0",
+      "revId": "359687e6255db3613c75a75f61042603fe1b04c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000037743991",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2425894?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "7097a695_fe2b1416",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-02-08T07:52:46Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 507802662 android-build.ayeaye-python-dispatcher_20230207.05_p0",
+      "revId": "359687e6255db3613c75a75f61042603fe1b04c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
