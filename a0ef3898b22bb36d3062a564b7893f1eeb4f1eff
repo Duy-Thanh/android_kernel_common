@@ -81,6 +81,24 @@
       "parentUuid": "f282b34b_99b03d06",
       "revId": "a0ef3898b22bb36d3062a564b7893f1eeb4f1eff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eba5390_46a330d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-08T08:16:59Z",
+      "side": 1,
+      "message": "There is no rush, you are adding symbols which can be done at any time, even after the freeze.  Please do it properly and get this upstream first.",
+      "parentUuid": "3489b604_f16cb59d",
+      "revId": "a0ef3898b22bb36d3062a564b7893f1eeb4f1eff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
