@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba01d81c_a674d395",
+        "filename": "include/trace/hooks/psi.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-08T12:21:59Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by GKI Guidelines: \n\nPlease do not add #include statements to headers under include/trace/hooks/. These should only be getting forward decls and not new includes (to avoid CRC changes due to visibility). See https://source.android.com/docs/core/architecture/kernel/kernel-code#defining-vendor-hooks for details.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 29
+      },
+      "revId": "fe76d01092a8ccf1d0ddfca369d23b4b6d0d96aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
