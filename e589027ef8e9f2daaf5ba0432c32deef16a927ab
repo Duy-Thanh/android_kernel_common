@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb2b3624_fa82822b",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-02-08T12:33:37Z",
+      "side": 1,
+      "message": "Are you sure this check is needed? I think we\u0027re dropping the parent\u0027s reference to the child table here, so the pte value at the child shouldn\u0027t make a difference.",
+      "range": {
+        "startLine": 1239,
+        "startChar": 15,
+        "endLine": 1239,
+        "endChar": 32
+      },
+      "revId": "e589027ef8e9f2daaf5ba0432c32deef16a927ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
