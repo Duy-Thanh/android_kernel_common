@@ -17,6 +17,24 @@
       "parentUuid": "442423f4_8c63436d",
       "revId": "71fd82e137b410f3608cffb43bbe8886fc329777",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0063f8ec_4c2353b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1840060
+      },
+      "writtenOn": "2023-02-08T23:52:35Z",
+      "side": 1,
+      "message": "Now has been updated as android12-5.10.",
+      "parentUuid": "3c2aeb69_b753fa55",
+      "revId": "71fd82e137b410f3608cffb43bbe8886fc329777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
