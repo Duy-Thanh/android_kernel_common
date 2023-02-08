@@ -22,6 +22,30 @@
       },
       "revId": "e589027ef8e9f2daaf5ba0432c32deef16a927ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "094f1662_ef15c592",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-02-08T13:05:26Z",
+      "side": 1,
+      "message": "Because it is always 1 if it\u0027s a table, I guess you are right we can drop this.",
+      "parentUuid": "eb2b3624_fa82822b",
+      "range": {
+        "startLine": 1239,
+        "startChar": 15,
+        "endLine": 1239,
+        "endChar": 32
+      },
+      "revId": "e589027ef8e9f2daaf5ba0432c32deef16a927ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
