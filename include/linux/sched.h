@@ -735,6 +735,7 @@ struct kmap_ctrl {
 };
 
 struct task_struct {
+        unsigned int			oops;
 #ifdef CONFIG_THREAD_INFO_IN_TASK
 	/*
 	 * For reasons of header soup (see current_thread_info()), this
