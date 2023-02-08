@@ -16,6 +16,23 @@
       "message": "My plan A was to revert the problematic commit, aosp/2426472, but while reviewing the revert I realised that this is a more reasonable fix instead. Please review.",
       "revId": "eb777277063c2e100698751561fc23aaa87d9877",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f1e44c_641d8b82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-02-08T17:08:44Z",
+      "side": 1,
+      "message": "The upstream commit ba81043753fffbc2ad6e0c5ff2659f12ac2f46b4 adds an \u0027err\u0027 argument to ufshcd_clock_scaling_unprepare(). I think that argument is missing from the android14-5.15 branch and also from this CL. Can you please add that argument in this CL?",
+      "revId": "eb777277063c2e100698751561fc23aaa87d9877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
