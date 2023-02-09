@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000037843172",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2428573?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4b63aac4_af861cd9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-02-09T07:16:19Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 507802662 android-build.ayeaye-python-dispatcher_20230207.05_p0",
+      "revId": "d1340ba84d758d7c5f6cbd8ce62a74875e4aa053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
