@@ -22,6 +22,30 @@
       },
       "revId": "42f5e7d1fb06e18de8393ae53ad46b5c78f2b80f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eee59b1_b60362ec",
+        "filename": "fs/f2fs/super.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4512,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2023-02-09T22:05:57Z",
+      "side": 1,
+      "message": "No, I\u0027d like to keep zero vendor hook in f2fs.",
+      "parentUuid": "8bf97443_18247bbb",
+      "range": {
+        "startLine": 4512,
+        "startChar": 1,
+        "endLine": 4512,
+        "endChar": 19
+      },
+      "revId": "42f5e7d1fb06e18de8393ae53ad46b5c78f2b80f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
