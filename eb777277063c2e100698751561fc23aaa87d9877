@@ -69,6 +69,24 @@
       "parentUuid": "91b1dbe2_e7c45b1c",
       "revId": "eb777277063c2e100698751561fc23aaa87d9877",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c053e926_84e68b50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2023-02-09T14:41:09Z",
+      "side": 1,
+      "message": "And I skipped that err argument in my fix because there is another function which is calling ufshcd_clock_scaling_unprepare() with only two args, so I also assumed that there might be one or more upstream commit(s) missing in android14-5.15 which didn\u0027t make the cut.",
+      "parentUuid": "567da565_c1b7f8c7",
+      "revId": "eb777277063c2e100698751561fc23aaa87d9877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
