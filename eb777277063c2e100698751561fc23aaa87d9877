@@ -87,6 +87,24 @@
       "parentUuid": "567da565_c1b7f8c7",
       "revId": "eb777277063c2e100698751561fc23aaa87d9877",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f63c67_a200d1bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-02-09T18:35:24Z",
+      "side": 1,
+      "message": "The other function that calls ufshcd_clock_scaling_unprepare() occurs in the Android tree but not in the upstream kernel. That code is not upstream and can\u0027t be sent upstream before the Pixel 6 UFS Exynos driver has been sent upstream. The Pixel 6 UFS Exynos driver can\u0027t be sent upstream before its dependencies are upstream.",
+      "parentUuid": "c053e926_84e68b50",
+      "revId": "eb777277063c2e100698751561fc23aaa87d9877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
