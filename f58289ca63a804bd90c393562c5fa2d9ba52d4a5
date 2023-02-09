@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8767728b_409cbb8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-02-09T00:38:28Z",
+      "side": 1,
+      "message": "don\u0027t you need to create a symbol list first? `android/abi_gki_aarch64`",
+      "revId": "f58289ca63a804bd90c393562c5fa2d9ba52d4a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
