@@ -16,6 +16,23 @@
       "message": "@maennich@google.com This is a slightly odd-looking that appears in include/linux/percpu-rwsem.h only. I don\u0027t have concerns about the arguments being poorly typed in the ABI.",
       "revId": "978dd18829b817dd299b3752fac5dc782bc041a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adefe070_f730180d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-02-09T15:01:25Z",
+      "side": 1,
+      "message": "The XML update is not actually needed... but it increases fidelity.",
+      "revId": "978dd18829b817dd299b3752fac5dc782bc041a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
