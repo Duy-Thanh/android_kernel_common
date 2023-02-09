@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c875b0_87a125f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-02-09T15:35:26Z",
+      "side": 1,
+      "message": "It already exists",
+      "parentUuid": "8767728b_409cbb8a",
+      "revId": "f58289ca63a804bd90c393562c5fa2d9ba52d4a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87954fd4_527e598b",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-09T09:42:10Z",
       "side": 1,
       "message": "You should check the .bzl instead. Please document documentation issues.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 42
+      },
+      "revId": "f58289ca63a804bd90c393562c5fa2d9ba52d4a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "718edf9a_273de08d",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-02-09T15:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87954fd4_527e598b",
       "range": {
         "startLine": 11,
         "startChar": 0,
