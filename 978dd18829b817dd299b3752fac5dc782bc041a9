@@ -33,6 +33,42 @@
       "message": "The XML update is not actually needed... but it increases fidelity.",
       "revId": "978dd18829b817dd299b3752fac5dc782bc041a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0117336d_33a4fd35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-09T18:11:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "adefe070_f730180d",
+      "revId": "978dd18829b817dd299b3752fac5dc782bc041a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b1e33c9_43197e29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-09T18:11:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "824c1329_a8872159",
+      "revId": "978dd18829b817dd299b3752fac5dc782bc041a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
