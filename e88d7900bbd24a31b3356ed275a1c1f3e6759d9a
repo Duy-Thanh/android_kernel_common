@@ -35,6 +35,24 @@
       "parentUuid": "a6c4feb7_7359a1bc",
       "revId": "e88d7900bbd24a31b3356ed275a1c1f3e6759d9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ddc3af_60bcad16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-09T10:23:26Z",
+      "side": 1,
+      "message": "Every change on release branches needs to be accounted for with a bug. Respin bugs and security fix bugs are currently eligible. The fact that a change is already included in a later release is not sufficient as per our guidelines. I will approve this change now as it is a noop for the release. Please work along our guidelines for future changes.",
+      "parentUuid": "4c61b089_e124e0a8",
+      "revId": "e88d7900bbd24a31b3356ed275a1c1f3e6759d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
