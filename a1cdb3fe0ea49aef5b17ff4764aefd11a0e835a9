@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85dd1676_33df2200",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-02-09T09:42:10Z",
+      "side": 0,
+      "message": "@elsk@google.com Can we drop the build.config files in Android 14 or do they still have some use?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "a1cdb3fe0ea49aef5b17ff4764aefd11a0e835a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
