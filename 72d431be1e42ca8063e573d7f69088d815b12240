@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f14455c5_22bcd18d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-10T05:43:55Z",
+      "side": 1,
+      "message": "there should be an annotation describing what changes were needed as part of the \"BACKPORT\". See example commit message in https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "72d431be1e42ca8063e573d7f69088d815b12240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9651f63a_8d94dcad",
         "filename": "drivers/pci/controller/dwc/pcie-designware.c",
         "patchSetId": 3
