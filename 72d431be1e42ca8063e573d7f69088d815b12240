@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9651f63a_8d94dcad",
+        "filename": "drivers/pci/controller/dwc/pcie-designware.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-10T05:40:29Z",
+      "side": 1,
+      "message": "Please see my comment on this in the now abandoned aosp/2378292. Since you sqashed that patch into this (at my suggestion), you should now resolve the issues cited there in this patch.",
+      "revId": "72d431be1e42ca8063e573d7f69088d815b12240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
