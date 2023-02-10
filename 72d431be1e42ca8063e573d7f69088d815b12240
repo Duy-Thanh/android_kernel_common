@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98ed94b7_3062447e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2023-02-10T07:02:43Z",
+      "side": 1,
+      "message": "Forgot to add the change for backport, add the info in new patch.",
+      "parentUuid": "f14455c5_22bcd18d",
+      "revId": "72d431be1e42ca8063e573d7f69088d815b12240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9651f63a_8d94dcad",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "oops, should be \"from the now abandoned aosp/2378293\"",
       "parentUuid": "9651f63a_8d94dcad",
+      "revId": "72d431be1e42ca8063e573d7f69088d815b12240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd89d070_f60340cd",
+        "filename": "drivers/pci/controller/dwc/pcie-designware.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2023-02-10T07:02:43Z",
+      "side": 1,
+      "message": "Which issue do you think is not resolved?\nI have remove the iatu_unroll_enabled assigned with DWC_IATU_IOCFG_SHARED, vendor module need to do it if fit this condition.",
+      "parentUuid": "46e08b81_5f5cafba",
       "revId": "72d431be1e42ca8063e573d7f69088d815b12240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
