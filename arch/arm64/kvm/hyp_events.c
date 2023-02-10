@@ -208,19 +208,18 @@ bool kvm_hyp_events_enable_early(void)
 	return enabled;
 }
 
-void kvm_hyp_init_events_tracefs(struct dentry *parent)
+static struct dentry *event_tracefs;
+
+static void hyp_event_table_init_tracefs(struct hyp_event *event, int nr_events)
 {
-	struct hyp_event *event = __start_hyp_events;
 	struct dentry *d, *event_dir;
+	int i;
 
-	parent = tracefs_create_dir("events", parent);
-	if (!parent) {
-		pr_err("Failed to create tracefs folder for hyp events\n");
+	if (!event_tracefs)
 		return;
-	}
 
-	for (; (unsigned long)event < (unsigned long)__stop_hyp_events; event++) {
-		event_dir = tracefs_create_dir(event->name, parent);
+	for (i = 0; i < nr_events; event++, i++) {
+		event_dir = tracefs_create_dir(event->name, event_tracefs);
 		if (!event_dir) {
 			pr_err("Failed to create events/hyp/%s\n", event->name);
 			continue;
@@ -244,35 +243,75 @@ void kvm_hyp_init_events_tracefs(struct dentry *parent)
 	}
 }
 
-/*
- * Register hyp events and write their id into the hyp section _hyp_event_ids.
- */
-int kvm_hyp_init_events(void)
+static int hyp_event_table_init(struct hyp_event *event, int nr_events,
+				struct hyp_event_id *event_id, int nr_event_ids)
 {
-	struct hyp_event *event = __start_hyp_events;
-	struct hyp_event_id *hyp_event_id = __hyp_event_ids_start;
-	int ret, err = -ENODEV;
+	int i, ret, err = -EINVAL;
 
-	/* TODO: BUILD_BUG nr events host side / hyp side */
+	if (nr_events != nr_event_ids) {
+		pr_err("Failed to init hyp events: kernel table doesn't match hyp's");
+		return -EINVAL;
+	}
 
-	for (; (unsigned long)event < (unsigned long)__stop_hyp_events;
-		event++, hyp_event_id++) {
+	for (i = 0; i < nr_events; event++, event_id++, i++) {
 		event->call->name = event->name;
 		ret = register_trace_event(&event->call->event);
 		if (!ret) {
-			pr_warn("Couldn't register trace event for %s\n", event->name);
+			pr_warn("Couldn't register trace event for %s\n",
+				event->name);
 			continue;
 		}
 
 		/*
-		 * Both the host and the hypervisor relies on the same hyp event
+		 * Both the host and the hypervisor rely on the same hyp event
 		 * declarations from kvm_hypevents.h. We have then a 1:1
 		 * mapping.
 		 */
-		hyp_event_id->id = ret;
+		event_id->id = ret;
 
 		err = 0;
 	}
 
 	return err;
+}
+
+#define nr_events(__start, __stop) \
+	(((unsigned long)__stop - (unsigned long)__start) / sizeof(*__start))
+
+void kvm_hyp_init_events_tracefs(struct dentry *parent)
+{
+	int nr_events = nr_events(__start_hyp_events, __stop_hyp_events);
+
+	event_tracefs = tracefs_create_dir("events", parent);
+	if (!event_tracefs) {
+		pr_err("Failed to create tracefs folder for hyp events\n");
+		return;
+	}
+
+	hyp_event_table_init_tracefs(__start_hyp_events, nr_events);
+}
+
+/*
+ * Register hyp events and write their id into the hyp section _hyp_event_ids.
+ */
+int kvm_hyp_init_events(void)
+{
+	int nr_events = nr_events(__start_hyp_events, __stop_hyp_events);
+	int nr_event_ids = nr_events(__hyp_event_ids_start, __hyp_event_ids_end);
+
+	return hyp_event_table_init(__start_hyp_events, nr_events,
+				    __hyp_event_ids_start, nr_event_ids);
+}
+
+int kvm_hyp_init_mod_events(struct hyp_event *event, int nr_events,
+			    struct hyp_event_id *event_id, int nr_event_ids)
+{
+	int ret = hyp_event_table_init(event, nr_events, event_id, nr_event_ids);
+
+	if (ret)
+		return ret;
+
+	hyp_event_table_init_tracefs(event, nr_events);
+
+	return 0;
 }
