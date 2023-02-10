@@ -16,6 +16,24 @@
       "message": "isn\u0027t this a duplicate of https://android-review.git.corp.google.com/c/kernel/common/+/2428205",
       "revId": "e6b4666426abeec33db400ba431e36a5843e285e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ea85826_00a49dee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-02-10T09:32:15Z",
+      "side": 1,
+      "message": "Thanks Greg. Taking over this as I need this to get unblock on http://aosp/2410926.\n\nNo, this is not the duplicate. This one is for the `14-5.15` and other one is for the `14-6.1` branch.\n\nSymbol list updates should be done with the ABI tooling for the branch and shouldn\u0027t be cherry picked to avoid stale symbols due to kernel changes.\n\nI removed the unrelated new line change from here like your comment on the other one.",
+      "parentUuid": "58c3c8bd_e400ab88",
+      "revId": "e6b4666426abeec33db400ba431e36a5843e285e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
