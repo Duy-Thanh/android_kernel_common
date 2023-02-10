@@ -16,6 +16,24 @@
       "message": "This bug has no relationship to this patch. Please file a new bug that talks about the need for this.",
       "revId": "0c43fc2f626da9d19e7c55e133af31def1ec79c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "add3cc53_c898e28a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2023-02-10T04:59:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6401777_aa7173be",
+      "revId": "0c43fc2f626da9d19e7c55e133af31def1ec79c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
