@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cad879c_bffd5cef",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-10T14:11:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "44e08348_3c1f0526",
+      "range": {
+        "startLine": 590,
+        "startChar": 2,
+        "endLine": 590,
+        "endChar": 21
+      },
+      "revId": "5dd8853478b1a8300dca4e00fad18ab85997f182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7b76867_3bf1bfd6",
