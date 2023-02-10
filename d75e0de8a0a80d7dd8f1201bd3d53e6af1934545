@@ -16,6 +16,23 @@
       "message": "Needs a respin request. See https://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
       "revId": "d75e0de8a0a80d7dd8f1201bd3d53e6af1934545",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d31ac51_bc317b0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-10T18:27:26Z",
+      "side": 1,
+      "message": "Respin bug is b/268310072",
+      "revId": "d75e0de8a0a80d7dd8f1201bd3d53e6af1934545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
