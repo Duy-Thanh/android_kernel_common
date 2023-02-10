@@ -40,6 +40,7 @@ struct hyp_rb_per_cpu *rb_this_cpu(void);
 void *rb_reserve_trace_entry(struct hyp_rb_per_cpu *cpu_buffer,
 			     unsigned long length);
 void rb_release_trace_entry(struct hyp_rb_per_cpu *cpu_buffer);
+int register_hyp_event_ids(unsigned long start, unsigned long end);
 
 #undef HYP_EVENT
 #define HYP_EVENT(__name, __proto, __struct, __assign, __printk)		\
@@ -81,6 +82,11 @@ static inline void *rb_reserve_trace_entry(struct hyp_rb_per_cpu *cpu_buffer,
 }
 
 static inline void rb_release_trace_entry(struct hyp_rb_per_cpu *cpu_buffer) { }
+
+static inline int register_hyp_event_ids(unsigned long start, unsigned long end)
+{
+	return -ENODEV;
+}
 
 static inline int __pkvm_load_tracing(unsigned long pack_va, size_t pack_size)
 {
