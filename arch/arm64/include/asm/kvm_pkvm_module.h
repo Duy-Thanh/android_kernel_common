@@ -44,6 +44,10 @@ struct pkvm_module_ops {
 	phys_addr_t (*hyp_pa)(void *x);
 	void* (*hyp_va)(phys_addr_t phys);
 	unsigned long (*kern_hyp_va)(unsigned long x);
+	int (*register_hyp_event_ids)(unsigned long start, unsigned long end);
+	struct hyp_rb_per_cpu *(*rb_this_cpu)(void);
+	void *(*rb_reserve_trace_entry)(struct hyp_rb_per_cpu *rb, unsigned long length);
+	void (*rb_release_trace_entry)(struct hyp_rb_per_cpu *rb);
 };
 
 int __pkvm_load_el2_module(struct module *this, unsigned long *token);
