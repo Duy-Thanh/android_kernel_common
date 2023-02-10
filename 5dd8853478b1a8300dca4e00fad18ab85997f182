@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16e8618b_f8dde826",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-02-10T09:49:54Z",
+      "side": 1,
+      "message": "Unfortunately, not. 😊\n\nsymbol sorting in the ABI tooling[1] will sort this symbol as this symbol is: `devkfreeskbirq__`. This was the reason I need to sort these symbol again for runtime protection lookup with kernel `bsearch()` with the `LC_ALL\u003dC` in the header generation script.\n\n[1] go/aocs/android/kernel/superproject/+/common-android-mainline:build/kernel/abi/extract_symbols.py;l\u003d41",
+      "parentUuid": "3de21516_43c6b8fa",
+      "range": {
+        "startLine": 590,
+        "startChar": 2,
+        "endLine": 590,
+        "endChar": 21
+      },
+      "revId": "5dd8853478b1a8300dca4e00fad18ab85997f182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7b76867_3bf1bfd6",
         "filename": "android/abi_gki_protected_exports",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2023-02-10T08:10:35Z",
       "side": 1,
       "message": "no blank line needed.",
+      "revId": "5dd8853478b1a8300dca4e00fad18ab85997f182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7c5cddf_d469c2a4",
+        "filename": "android/abi_gki_protected_exports",
+        "patchSetId": 2
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-02-10T09:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7b76867_3bf1bfd6",
       "revId": "5dd8853478b1a8300dca4e00fad18ab85997f182",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
