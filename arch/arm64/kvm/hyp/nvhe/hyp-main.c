@@ -63,8 +63,6 @@ static inline void hyp_reqs_smccc_encode(unsigned long ret, struct kvm_cpu_conte
 	req->type = KVM_HYP_LAST_REQ;
 }
 
-void __kvm_hyp_host_forward_smc(struct kvm_cpu_context *host_ctxt);
-
 static bool (*default_host_smc_handler)(struct user_pt_regs *regs);
 static bool (*default_trap_handler)(struct user_pt_regs *regs);
 static bool (*unmask_serror)(void);

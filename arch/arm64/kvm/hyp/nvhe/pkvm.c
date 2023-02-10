@@ -7,6 +7,8 @@
 #include <linux/kvm_host.h>
 #include <linux/mm.h>
 
+#include <hyp/adjust_pc.h>
+
 #include <kvm/arm_hypercalls.h>
 #include <kvm/arm_psci.h>
 
@@ -14,6 +16,7 @@
 
 #include <nvhe/alloc.h>
 #include <nvhe/arm-smccc.h>
+#include <nvhe/ffa.h>
 #include <nvhe/mem_protect.h>
 #include <nvhe/memory.h>
 #include <nvhe/mm.h>
@@ -1668,6 +1671,25 @@ static bool pkvm_forward_trng(struct kvm_vcpu *vcpu)
 	}
 
 	return true;
+}
+
+bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
+{
+	u32 fn = smccc_get_function(vcpu);
+	struct pkvm_hyp_vcpu *hyp_vcpu;
+	u64 val[4] = { SMCCC_RET_NOT_SUPPORTED };
+	bool handled = true;
+
+	hyp_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
+	if (is_ffa_call(fn)) {
+		handled = kvm_guest_ffa_handler(hyp_vcpu, exit_code);
+		if (!handled && *exit_code != ARM_EXCEPTION_HYP_REQ)
+			__kvm_hyp_host_forward_smc(&vcpu->arch.ctxt);
+	} else
+		smccc_set_retval(vcpu, val[0], val[1], val[2], val[3]);
+
+	__kvm_skip_instr(vcpu);
+	return handled;
 }
 
 /*

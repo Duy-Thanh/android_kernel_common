@@ -646,6 +646,52 @@ out_handled:
 	return true;
 }
 
+bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
+{
+	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
+	struct kvm_cpu_context *ctxt = &vcpu->arch.ctxt;
+	DECLARE_REG(u64, func_id, ctxt, 0);
+	DECLARE_REG(u64, arg1, ctxt, 1);
+	DECLARE_REG(u64, arg2, ctxt, 2);
+	DECLARE_REG(u64, arg3, ctxt, 3);
+	DECLARE_REG(u64, arg4, ctxt, 4);
+	struct arm_smccc_res res;
+	bool handled = true;
+	int err = 0;
+
+	switch (func_id) {
+	case FFA_FEATURES:
+		if (!do_ffa_features(&res, ctxt)) {
+			handled = false;
+			goto unhandled;
+		}
+		break;
+	/* Memory management */
+	case FFA_FN64_RXTX_MAP:
+	case FFA_RXTX_UNMAP:
+	case FFA_MEM_SHARE:
+	case FFA_FN64_MEM_SHARE:
+	case FFA_MEM_RECLAIM:
+	case FFA_MEM_LEND:
+	case FFA_FN64_MEM_LEND:
+	case FFA_MEM_FRAG_TX:
+		break;
+	default:
+		if (ffa_call_supported(func_id)) {
+			handled = false;
+			goto unhandled;
+		}
+
+		ffa_to_smccc_error(&res, FFA_RET_NOT_SUPPORTED);
+	}
+
+	ffa_set_retval(ctxt, &res);
+	err = res.a0 == FFA_SUCCESS ? 0 : res.a2;
+unhandled:
+	trace_guest_ffa_call(func_id, arg1, arg2, arg3, arg4, handled, err, *exit_code);
+	return handled;
+}
+
 static int hyp_ffa_post_init(void)
 {
 	size_t min_rxtx_sz;
