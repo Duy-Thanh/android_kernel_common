@@ -10,6 +10,7 @@
 #include <nvhe/mm.h>
 #include <nvhe/serial.h>
 #include <nvhe/spinlock.h>
+#include <nvhe/trace.h>
 #include <nvhe/trap_handler.h>
 
 static void __kvm_flush_dcache_to_poc(void *addr, size_t size)
@@ -82,6 +83,10 @@ const struct pkvm_module_ops module_ops = {
 	.hyp_pa = hyp_virt_to_phys,
 	.hyp_va = hyp_phys_to_virt,
 	.kern_hyp_va = __kern_hyp_va,
+	.register_hyp_event_ids = register_hyp_event_ids,
+	.rb_this_cpu = rb_this_cpu,
+	.rb_reserve_trace_entry = rb_reserve_trace_entry,
+	.rb_release_trace_entry = rb_release_trace_entry,
 };
 
 int __pkvm_init_module(void *module_init)

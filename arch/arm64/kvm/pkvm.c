@@ -642,6 +642,13 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 	endrel = (void *)mod->relocs + mod->nr_relocs * sizeof(*endrel);
 	kvm_apply_hyp_module_relocations(start, hyp_va, mod->relocs, endrel);
 
+	ret = kvm_hyp_init_mod_events(mod->hyp_events,
+				      mod->nr_hyp_events,
+				      mod->hyp_event_ids,
+				      mod->nr_hyp_event_ids);
+	if (ret)
+		kvm_err("Failed to init module events: %d\n", ret);
+
 	ret = pkvm_map_module_sections(secs_map, hyp_va, ARRAY_SIZE(secs_map));
 	if (ret) {
 		kvm_err("Failed to map EL2 module page: %d\n", ret);
