@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44e08348_3c1f0526",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-02-10T09:56:57Z",
+      "side": 1,
+      "message": "Correction:\n\nUnfortunately, yes it is sorted as designed but it is confusing until you notice it and take a look at the comments in the sorting logic at https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/abi/extract_symbols.py;l\u003d41",
+      "parentUuid": "16e8618b_f8dde826",
+      "range": {
+        "startLine": 590,
+        "startChar": 2,
+        "endLine": 590,
+        "endChar": 21
+      },
+      "revId": "5dd8853478b1a8300dca4e00fad18ab85997f182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7b76867_3bf1bfd6",
         "filename": "android/abi_gki_protected_exports",
         "patchSetId": 2
