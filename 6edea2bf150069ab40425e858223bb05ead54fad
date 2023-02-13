@@ -33,6 +33,24 @@
       "message": "We have noticed that the old bug 178721511 attached to the new changes 2422242, 2418479 and 2412182. Could you create a new bug for these updates and link it from the commit messages?",
       "revId": "6edea2bf150069ab40425e858223bb05ead54fad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17c73bda_c88e3f5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2023-02-13T02:43:49Z",
+      "side": 1,
+      "message": "I have created a new bug with id 268290366.",
+      "parentUuid": "f0712e2c_26398bb5",
+      "revId": "6edea2bf150069ab40425e858223bb05ead54fad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

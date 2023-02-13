@@ -16,6 +16,24 @@
       "message": "Please always test-build your changes before submitting them 😞",
       "revId": "c37971d6f834c2057b65d9582e578fd8a29a5171",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a52f60a7_67b39957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2023-02-13T02:43:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f3c45b4_791f5886",
+      "revId": "c37971d6f834c2057b65d9582e578fd8a29a5171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
