@@ -33,6 +33,24 @@
       "message": "Is this ifdef really needed? I don\u0027t see it in other hooks.\n\nAs far as I know, trace/hooks/vendor_hooks.h already has a suppression mechanism, which makes DECLARE_HOOK noop if tracepoints/vendor_hooks are disabled.",
       "revId": "ade3951c6c470f1e4748b68a5ad18588df18e917",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9438bf34_f0606b72",
+        "filename": "include/trace/hooks/psi.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-13T17:34:09Z",
+      "side": 1,
+      "message": "This should be removed (obsolete)",
+      "parentUuid": "e04bb830_c4d950e0",
+      "revId": "ade3951c6c470f1e4748b68a5ad18588df18e917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
