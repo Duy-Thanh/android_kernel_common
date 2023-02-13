@@ -50,6 +50,23 @@
       "message": "This causes a build-break.\n\nThe vendor hook `_trace_android_vh_record_pcpu_rwsem_starttime` is not in the `android12-5.10-2022-09` kernel tree. You need to cherry-pick the patch(s) that add the hook or drop that symbol from the list.\n\nPlease build and test your changes before submitting.",
       "revId": "d75e0de8a0a80d7dd8f1201bd3d53e6af1934545",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e164c564_cebd9f45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951960
+      },
+      "writtenOn": "2023-02-13T00:59:21Z",
+      "side": 1,
+      "message": "Respin Bug: b/268310072",
+      "revId": "d75e0de8a0a80d7dd8f1201bd3d53e6af1934545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
