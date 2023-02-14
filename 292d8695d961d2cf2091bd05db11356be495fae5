@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23540d80_72061e00",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1980590
+      },
+      "writtenOn": "2023-02-14T06:19:13Z",
+      "side": 1,
+      "message": "I think it needs to check condition whether FEAT_FGT is supported or not at this point because several Arm cores haven\u0027t support Armv8.6 which includes FEAT_FGT extension. What do you think?",
+      "revId": "292d8695d961d2cf2091bd05db11356be495fae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
