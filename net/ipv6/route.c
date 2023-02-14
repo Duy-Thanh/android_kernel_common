@@ -4989,6 +4989,7 @@ static const struct nla_policy rtm_ipv6_policy[RTA_MAX+1] = {
 	[RTA_SPORT]		= { .type = NLA_U16 },
 	[RTA_DPORT]		= { .type = NLA_U16 },
 	[RTA_NH_ID]		= { .type = NLA_U32 },
+	[RTA_IGNORE_DEV_DOWN]	= { .type = NLA_U8 },
 };
 
 static int rtm_to_fib6_config(struct sk_buff *skb, struct nlmsghdr *nlh,
@@ -5088,6 +5089,9 @@ static int rtm_to_fib6_config(struct sk_buff *skb, struct nlmsghdr *nlh,
 
 	if (tb[RTA_TABLE])
 		cfg->fc_table = nla_get_u32(tb[RTA_TABLE]);
+
+	if (tb[RTA_IGNORE_DEV_DOWN])
+		cfg->fc_ignore_dev_down = nla_get_u8(tb[RTA_IGNORE_DEV_DOWN]);
 
 	if (tb[RTA_MULTIPATH]) {
 		cfg->fc_mp = nla_data(tb[RTA_MULTIPATH]);
