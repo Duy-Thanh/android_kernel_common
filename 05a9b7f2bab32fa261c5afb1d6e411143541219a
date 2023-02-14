@@ -22,6 +22,30 @@
       },
       "revId": "05a9b7f2bab32fa261c5afb1d6e411143541219a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2eb767_529467e4",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-14T17:48:50Z",
+      "side": 1,
+      "message": "... and then the ABI definition needs to be updated to only contain the trimmed surface.",
+      "parentUuid": "56033b69_68554aaa",
+      "range": {
+        "startLine": 33,
+        "startChar": 9,
+        "endLine": 33,
+        "endChar": 27
+      },
+      "revId": "05a9b7f2bab32fa261c5afb1d6e411143541219a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
