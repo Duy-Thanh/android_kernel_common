@@ -401,8 +401,13 @@ int pkvm_iommu_register(struct device *dev, u64 drv,
 int pkvm_iommu_suspend(struct device *dev);
 int pkvm_iommu_resume(struct device *dev);
 
-/* Reject future calls to pkvm_iommu_driver_init() and pkvm_iommu_register(). */
-int pkvm_iommu_finalize(void);
+/*
+ * Reject future calls to pkvm_iommu_driver_init() and pkvm_iommu_register().
+ * state of finalize
+ * - true: Everything is OK and DMA isolation can be established.
+ * - false: DMA isolation can't be guarnteed.
+ */
+int pkvm_iommu_finalize(bool state);
 
 struct vcpu_reset_state {
 	unsigned long	pc;
