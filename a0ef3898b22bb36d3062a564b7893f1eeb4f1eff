@@ -119,6 +119,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bdcf0e6_fd040c20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-02-14T21:19:39Z",
+      "side": 1,
+      "message": "Checkpatch is failing with \"ERROR:NO_AUTHOR_SIGN_OFF: Missing Signed-off-by: line by nominal patch author \u0027Charan Teja Reddy \u003ccharante@codeaurora.org\u003e\u0027\"\nPlease fix and resubmit.",
+      "revId": "a0ef3898b22bb36d3062a564b7893f1eeb4f1eff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8001c206_b6210022",
