@@ -26,6 +26,7 @@
 #include <asm/kvm_emulate.h>
 #include <asm/kvm_hyp.h>
 #include <asm/kvm_mmu.h>
+#include <asm/kvm_pkvm.h>
 #include <asm/fpsimd.h>
 #include <asm/debug-monitors.h>
 #include <asm/processor.h>
@@ -161,6 +162,7 @@ static inline void __hyp_sve_restore_guest(struct kvm_vcpu *vcpu)
 static bool kvm_hyp_handle_fpsimd(struct kvm_vcpu *vcpu, u64 *exit_code)
 {
 	bool sve_guest;
+	bool sve_host;
 	u8 esr_ec;
 	u64 reg;
 
@@ -168,6 +170,12 @@ static bool kvm_hyp_handle_fpsimd(struct kvm_vcpu *vcpu, u64 *exit_code)
 		return false;
 
 	sve_guest = vcpu_has_sve(vcpu);
+	/*
+	 * Non-protected mode relies on the host restoring its sve state.
+	 * Protected mode restores the host's sve state as not to reveal that
+	 * sve was in fact used by a protected guest.
+	 */
+	sve_host = is_protected_kvm_enabled() && system_supports_sve();
 	esr_ec = kvm_vcpu_trap_get_class(vcpu);
 
 	/* Don't handle SVE traps for non-SVE vcpus here: */
@@ -185,7 +193,7 @@ static bool kvm_hyp_handle_fpsimd(struct kvm_vcpu *vcpu, u64 *exit_code)
 		sysreg_clear_set(cpacr_el1, 0, reg);
 	} else {
 		reg = CPTR_EL2_TFP;
-		if (sve_guest)
+		if (sve_guest || sve_host)
 			reg |= CPTR_EL2_TZ;
 
 		sysreg_clear_set(cptr_el2, reg, 0);
@@ -193,8 +201,25 @@ static bool kvm_hyp_handle_fpsimd(struct kvm_vcpu *vcpu, u64 *exit_code)
 	isb();
 
 	/* Write out the host state if it's in the registers */
-	if (vcpu->arch.fp_state == FP_STATE_HOST_OWNED)
-		__fpsimd_save_state(vcpu->arch.host_fpsimd_state);
+	if (vcpu->arch.fp_state == FP_STATE_HOST_OWNED) {
+		if (sve_host) {
+			struct kvm_host_sve_state *sve_state;
+			u32 vl = hyp_sve_max_vl;
+
+			sve_state = vcpu->arch.host_sve_state;
+			sve_state->zcr_el1 = read_sysreg_el1(SYS_ZCR);
+			vl = min(vl, sve_vl_from_zcr(sve_state->zcr_el1));
+			__sve_save_state(sve_state->sve_regs + sve_ffr_offset(vl),
+					 &sve_state->fpsr);
+
+			if (!sve_guest) {
+				sysreg_clear_set(cptr_el2, 0, CPTR_EL2_TZ);
+				isb();
+			}
+		} else {
+			__fpsimd_save_state(vcpu->arch.host_fpsimd_state);
+		}
+	}
 
 	/* Restore the guest state */
 	if (sve_guest)

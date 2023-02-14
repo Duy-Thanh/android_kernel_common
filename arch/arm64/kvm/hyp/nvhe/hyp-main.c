@@ -416,6 +416,14 @@ static struct user_fpsimd_state *get_host_fpsimd_state(void)
 	return &host_fp_states[hyp_smp_processor_id()].fpsimd_state;
 }
 
+static struct kvm_host_sve_state *get_host_sve_state(void)
+{
+	char *state = (char *) host_fp_states +
+		      pkvm_host_fp_state_size() * hyp_smp_processor_id();
+
+	return (struct kvm_host_sve_state *) state;
+}
+
 static void flush_hyp_vgic_state(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
 	struct kvm_vcpu *host_vcpu = hyp_vcpu->host_vcpu;
@@ -689,16 +697,25 @@ static void fpsimd_host_restore(void)
 
 	if (unlikely(is_protected_kvm_enabled())) {
 		struct pkvm_hyp_vcpu *hyp_vcpu = pkvm_get_loaded_hyp_vcpu();
-		struct user_fpsimd_state *host_fpsimd_state;
-
-		host_fpsimd_state = get_host_fpsimd_state();
 
 		if (vcpu_has_sve(&hyp_vcpu->vcpu))
 			__hyp_sve_save_guest(hyp_vcpu);
 		else
 			__fpsimd_save_state(&hyp_vcpu->vcpu.arch.ctxt.fp_regs);
 
-		__fpsimd_restore_state(host_fpsimd_state);
+		if (system_supports_sve()) {
+			struct kvm_host_sve_state *sve_state;
+			u32 vl = hyp_sve_max_vl;
+
+			sve_state = hyp_vcpu->vcpu.arch.host_sve_state;
+			vl = min(vl, sve_vl_from_zcr(sve_state->zcr_el1));
+
+			write_sysreg_el1(sve_state->zcr_el1, SYS_ZCR);
+			__sve_restore_state(sve_state->sve_regs + sve_ffr_offset(vl),
+					    &sve_state->fpsr);
+		} else {
+			__fpsimd_restore_state(get_host_fpsimd_state());
+		}
 
 		hyp_vcpu->vcpu.arch.fp_state = FP_STATE_HOST_OWNED;
 	}
@@ -732,7 +749,10 @@ static void handle___pkvm_vcpu_load(struct kvm_cpu_context *host_ctxt)
 		*last_ran = hyp_vcpu->vcpu.vcpu_id;
 	}
 
-	hyp_vcpu->vcpu.arch.host_fpsimd_state = get_host_fpsimd_state();
+	if (system_supports_sve())
+		hyp_vcpu->vcpu.arch.host_sve_state = get_host_sve_state();
+	else
+		hyp_vcpu->vcpu.arch.host_fpsimd_state = get_host_fpsimd_state();
 	hyp_vcpu->vcpu.arch.fp_state = FP_STATE_HOST_OWNED;
 
 	if (pkvm_hyp_vcpu_is_protected(hyp_vcpu)) {
