@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abe0d73a_b11dd3af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-02-14T19:52:28Z",
+      "side": 1,
+      "message": "The patchset replaces older FROMGIT backport solution with the final upstream backports.",
+      "revId": "282937042214e79a098ddd98641aacff156b8b8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
