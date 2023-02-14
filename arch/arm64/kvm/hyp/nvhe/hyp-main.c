@@ -411,12 +411,25 @@ static const hyp_entry_exit_handler_fn exit_hyp_vm_handlers[] = {
 	[ESR_ELx_EC_DABT_LOW]		= handle_vm_exit_abt,
 };
 
-static struct user_fpsimd_state *get_host_fpsimd_state(void)
+static void *get_host_fpsimd_memory(void)
 {
-	char *state = (char *) host_fp_state +
-		      sizeof(struct user_fpsimd_state) * hyp_smp_processor_id();
+	void *state = host_fp_state +
+		      size_mul(pkvm_host_fp_state_size(), hyp_smp_processor_id());
 
-	return (struct user_fpsimd_state *) state;
+	if (state < host_fp_state)
+		return NULL;
+
+	return state;
+}
+
+struct user_fpsimd_state *get_host_fpsimd_state(void)
+{
+	return get_host_fpsimd_memory();
+}
+
+struct kvm_host_sve_state *get_host_sve_state(void)
+{
+	return get_host_fpsimd_memory();
 }
 
 static void flush_hyp_vgic_state(struct pkvm_hyp_vcpu *hyp_vcpu)
@@ -687,16 +700,24 @@ static void fpsimd_host_restore(void)
 
 	if (unlikely(is_protected_kvm_enabled())) {
 		struct pkvm_hyp_vcpu *hyp_vcpu = pkvm_get_loaded_hyp_vcpu();
-		struct user_fpsimd_state *host_fpsimd_state;
-
-		host_fpsimd_state = get_host_fpsimd_state();
 
 		if (vcpu_has_sve(&hyp_vcpu->vcpu))
 			__hyp_sve_save_guest(hyp_vcpu);
 		else
 			__fpsimd_save_state(&hyp_vcpu->vcpu.arch.ctxt.fp_regs);
 
-		__fpsimd_restore_state(host_fpsimd_state);
+		if (system_supports_sve()) {
+			struct kvm_host_sve_state *sve_state = get_host_sve_state();
+			u64 vq_len = sve_vq_from_vl(kvm_host_sve_max_vl) - 1;
+
+			write_sysreg_el1(sve_state->zcr_el1, SYS_ZCR);
+			sve_cond_update_zcr_vq(vq_len, SYS_ZCR_EL2);
+			__sve_restore_state(sve_state->sve_regs +
+					    sve_ffr_offset(kvm_host_sve_max_vl),
+					    &sve_state->fpsr);
+		} else {
+			__fpsimd_restore_state(get_host_fpsimd_state());
+		}
 
 		hyp_vcpu->vcpu.arch.fp_state = FP_STATE_HOST_OWNED;
 	}
@@ -733,7 +754,6 @@ static void handle___pkvm_vcpu_load(struct kvm_cpu_context *host_ctxt)
 		*last_ran = hyp_vcpu->vcpu.vcpu_id;
 	}
 
-	hyp_vcpu->vcpu.arch.host_fpsimd_state = get_host_fpsimd_state();
 	hyp_vcpu->vcpu.arch.fp_state = FP_STATE_HOST_OWNED;
 
 	if (pkvm_hyp_vcpu_is_protected(hyp_vcpu)) {
