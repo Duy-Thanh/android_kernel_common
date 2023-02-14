@@ -356,10 +356,17 @@ bool mutex_spin_on_owner(struct mutex *lock, struct task_struct *owner,
 			 struct ww_acquire_ctx *ww_ctx, struct mutex_waiter *waiter)
 {
 	bool ret = true;
+	int cnt = 0;
+	bool time_out = false;
 
 	lockdep_assert_preemption_disabled();
 
 	while (__mutex_owner(lock) == owner) {
+		trace_android_vh_mutex_opt_spin_start(lock, &time_out, &cnt);
+		if (time_out) {
+			ret = false;
+			break;
+		}
 		/*
 		 * Ensure we emit the owner->on_cpu, dereference _after_
 		 * checking lock->owner still matches owner. And we already
@@ -409,7 +416,13 @@ static inline int mutex_can_spin_on_owner(struct mutex *lock)
 	 */
 	owner = __mutex_owner(lock);
 	if (owner)
+<<<<<<< HEAD   (601149 ANDROID: ABI: Update the tcpci symbols for pixel)
 		retval = owner_on_cpu(owner);
+=======
+		retval = owner->on_cpu && !vcpu_is_preempted(task_cpu(owner));
+	rcu_read_unlock();
+	trace_android_vh_mutex_can_spin_on_owner(lock, &retval);
+>>>>>>> CHANGE (a0a817 ANDROID: vendor_hooks: Add hooks for mutex and rwsem optimis)
 
 	/*
 	 * If lock->owner is not set, the mutex has been released. Return true
@@ -491,6 +504,7 @@ mutex_optimistic_spin(struct mutex *lock, struct ww_acquire_ctx *ww_ctx,
 	if (!waiter)
 		osq_unlock(&lock->osq);
 
+	trace_android_vh_mutex_opt_spin_finish(lock, true);
 	return true;
 
 
@@ -499,6 +513,7 @@ fail_unlock:
 		osq_unlock(&lock->osq);
 
 fail:
+	trace_android_vh_mutex_opt_spin_finish(lock, false);
 	/*
 	 * If we fell out of the spin path because of need_resched(),
 	 * reschedule now, before we try-lock the mutex. This avoids getting
