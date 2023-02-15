@@ -228,6 +228,67 @@ err_unmap:
 	return ret;
 }
 
+static int guest_share_hyp_buffers(struct kvm_cpu_context *ctxt, u64 vmid)
+{
+	DECLARE_REG(phys_addr_t, tx, ctxt, 1);
+	DECLARE_REG(phys_addr_t, rx, ctxt, 2);
+	struct kvm_vcpu *vcpu = ctxt->__hyp_running_vcpu;
+	struct pkvm_hyp_vcpu *pkvm_vcpu;
+	struct pkvm_hyp_vm *vm;
+	int ret;
+	void *rx_virt, *tx_virt;
+	phys_addr_t phys;
+	kvm_pte_t pte;
+
+	if (!vcpu)
+		vcpu = container_of(ctxt, struct kvm_vcpu, arch.ctxt);
+
+	pkvm_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
+	ret = __pkvm_guest_share_hyp(pkvm_vcpu, tx);
+	if (ret) {
+		ret = FFA_RET_INVALID_PARAMETERS;
+		goto err_unmap;
+	}
+
+	ret = __pkvm_guest_share_hyp(pkvm_vcpu, rx);
+	if (ret) {
+		ret = FFA_RET_INVALID_PARAMETERS;
+		goto err_unshare_tx;
+	}
+
+	/* Convert the guest IPA address to hyp virtual address */
+	vm = pkvm_hyp_vcpu_to_hyp_vm(pkvm_vcpu);
+	ret = kvm_pgtable_get_leaf(&vm->pgt, tx, &pte, NULL);
+	if (ret) {
+		ret = FFA_RET_INVALID_PARAMETERS;
+		goto err_unshare_rx;
+	}
+
+	phys = kvm_pte_to_phys(pte);
+	tx_virt = __hyp_va(phys);
+
+	ret = kvm_pgtable_get_leaf(&vm->pgt, rx, &pte, NULL);
+	if (ret) {
+		ret = FFA_RET_INVALID_PARAMETERS;
+		goto err_unshare_rx;
+	}
+
+	phys = kvm_pte_to_phys(pte);
+	rx_virt = __hyp_va(phys);
+
+	non_secure_el1_buffers[0].tx = tx_virt;
+	non_secure_el1_buffers[0].rx = rx_virt;
+	hyp_buffer_refcnt++;
+	return ret;
+err_unshare_rx:
+	__pkvm_guest_unshare_hyp(pkvm_vcpu, rx);
+err_unshare_tx:
+	__pkvm_guest_unshare_hyp(pkvm_vcpu, tx);
+err_unmap:
+	spmd_unmap_ffa_buffers();
+	return ret;
+}
+
 static void do_ffa_rxtx_map(struct arm_smccc_res *res,
 			    struct kvm_cpu_context *ctxt,
 			    u64 vmid)
@@ -263,6 +324,8 @@ static void do_ffa_rxtx_map(struct arm_smccc_res *res,
 
 	if (vmid == 0)
 		ret = host_share_hyp_buffers(ctxt);
+	else
+		ret = guest_share_hyp_buffers(ctxt, vmid);
 
 out_unlock:
 	hyp_spin_unlock(&hyp_buffers.lock);
