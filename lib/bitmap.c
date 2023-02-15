@@ -80,6 +80,7 @@ bool __bitmap_or_equal(const unsigned long *bitmap1,
 	tmp = (bitmap1[k] | bitmap2[k]) ^ bitmap3[k];
 	return (tmp & BITMAP_LAST_WORD_MASK(bits)) == 0;
 }
+EXPORT_SYMBOL(__bitmap_or_equal);
 
 void __bitmap_complement(unsigned long *dst, const unsigned long *src, unsigned int bits)
 {
