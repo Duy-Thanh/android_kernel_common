@@ -26,9 +26,9 @@ SECTIONS {
 	 * alignment for when linking into vmlinux.
 	 */
 	. = ALIGN(PAGE_SIZE);
-	BEGIN_HYP_SECTION(.data..percpu)
+	HYP_SECTION_NAME(.data..percpu) : {
 		PERCPU_INPUT(L1_CACHE_BYTES)
-	END_HYP_SECTION
+	}
 
 	HYP_SECTION(.bss)
 	HYP_SECTION(.data)

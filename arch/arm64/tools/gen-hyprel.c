@@ -40,6 +40,7 @@
 #include <generated/autoconf.h>
 
 #define HYP_SECTION_PREFIX		".hyp"
+#define HYP_SECTION_MARKER_SUFFIX	".start"
 #define HYP_RELOC_SECTION		".hyp.reloc"
 #define HYP_SECTION_SYMBOL_PREFIX	"__hyp_section_"
 
@@ -303,8 +304,13 @@ static void emit_prologue(void)
 /* Print ASM statements needed as a prologue to a processed hyp section. */
 static void emit_section_prologue(const char *sh_orig_name)
 {
-	/* Declare the hyp section symbol. */
-	printf(".global %s%s\n", HYP_SECTION_SYMBOL_PREFIX, sh_orig_name);
+	printf(".pushsection %s%s, \"a\"\n"
+	       ".globl %s%s\n"
+	       "%s%s:\n"
+	       ".popsection\n",
+		sh_orig_name, HYP_SECTION_MARKER_SUFFIX,
+		HYP_SECTION_SYMBOL_PREFIX, sh_orig_name,
+		HYP_SECTION_SYMBOL_PREFIX, sh_orig_name);
 }
 
 /*
@@ -365,6 +371,9 @@ static void emit_rela_section(Elf64_Shdr *sh_rela)
 
 	/* Skip all non-hyp sections. */
 	if (!starts_with(sh_orig_name, HYP_SECTION_PREFIX))
+		return;
+
+	if (!sh_rela->sh_size)
 		return;
 
 	emit_section_prologue(sh_orig_name);

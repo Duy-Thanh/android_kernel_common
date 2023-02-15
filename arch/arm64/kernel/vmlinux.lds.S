@@ -27,8 +27,8 @@
 	HYP_SECTION_NAME(.rodata) : {				\
 		. = ALIGN(PAGE_SIZE);				\
 		__hyp_rodata_start = .;				\
-		*(HYP_SECTION_NAME(.data..ro_after_init))	\
-		*(HYP_SECTION_NAME(.rodata))			\
+		HYP_INPUT_SECTIONS(.data..ro_after_init)	\
+		HYP_INPUT_SECTIONS(.rodata)			\
 		HYPERVISOR_EVENT_IDS				\
 		. = ALIGN(PAGE_SIZE);				\
 		__hyp_rodata_end = .;				\
@@ -38,7 +38,7 @@
 	HYP_SECTION_NAME(.data) : {				\
 		. = ALIGN(PAGE_SIZE);				\
 		__hyp_data_start = .;				\
-		*(HYP_SECTION_NAME(.data))			\
+		HYP_INPUT_SECTIONS(.data)			\
 		. = ALIGN(PAGE_SIZE);				\
 		__hyp_data_end = .;				\
 	}
@@ -46,7 +46,7 @@
 #define HYPERVISOR_PERCPU_SECTION				\
 	. = ALIGN(PAGE_SIZE);					\
 	HYP_SECTION_NAME(.data..percpu) : {			\
-		*(HYP_SECTION_NAME(.data..percpu))		\
+		HYP_INPUT_SECTIONS(.data..percpu)		\
 	}
 
 #define HYPERVISOR_RELOC_SECTION				\
@@ -58,7 +58,7 @@
 
 #define BSS_FIRST_SECTIONS					\
 	__hyp_bss_start = .;					\
-	*(HYP_SECTION_NAME(.bss))				\
+	HYP_INPUT_SECTIONS(.bss)				\
 	. = ALIGN(PAGE_SIZE);					\
 	__hyp_bss_end = .;
 
@@ -110,10 +110,10 @@ jiffies = jiffies_64;
 #define HYPERVISOR_TEXT					\
 	. = ALIGN(PAGE_SIZE);				\
 	__hyp_idmap_text_start = .;			\
-	*(.hyp.idmap.text)				\
+	HYP_INPUT_SECTIONS(.idmap.text)			\
 	__hyp_idmap_text_end = .;			\
 	__hyp_text_start = .;				\
-	*(.hyp.text)					\
+	HYP_INPUT_SECTIONS(.text)			\
 	HYPERVISOR_EXTABLE				\
 	. = ALIGN(PAGE_SIZE);				\
 	__hyp_text_end = .;

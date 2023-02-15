@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
+#include <asm/hyp_image.h>
 #include <asm/page-def.h>
 
 SECTIONS {
@@ -23,19 +24,19 @@ SECTIONS {
 
 #ifdef CONFIG_KVM
 	.hyp.text : ALIGN(PAGE_SIZE) {
-		*(.hyp.text)
+		HYP_INPUT_SECTIONS(.text)
 		. = ALIGN(PAGE_SIZE);
 	}
 	.hyp.bss : ALIGN(PAGE_SIZE) {
-		*(.hyp.bss)
+		HYP_INPUT_SECTIONS(.bss)
 		. = ALIGN(PAGE_SIZE);
 	}
 	.hyp.rodata : ALIGN(PAGE_SIZE) {
-		*(.hyp.rodata)
+		HYP_INPUT_SECTIONS(.rodata)
 		. = ALIGN(PAGE_SIZE);
 	}
 	.hyp.data : ALIGN(PAGE_SIZE) {
-		*(.hyp.data)
+		HYP_INPUT_SECTIONS(.data)
 		. = ALIGN(PAGE_SIZE);
 	}
 	.hyp.reloc : ALIGN(4) {	*(.hyp.reloc) }

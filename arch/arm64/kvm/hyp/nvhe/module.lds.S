@@ -4,23 +4,8 @@
 #include <asm/page-def.h>
 
 SECTIONS {
-	.hyp.text : {
-		HYP_SECTION_SYMBOL_NAME(.text) = .;
-		*(.text .text.*)
-	}
-
-	.hyp.bss : {
-		HYP_SECTION_SYMBOL_NAME(.bss) = .;
-		*(.bss .bss.*)
-	}
-
-	.hyp.rodata : {
-		HYP_SECTION_SYMBOL_NAME(.rodata) = .;
-		*(.rodata .rodata.*)
-	}
-
-	.hyp.data : {
-		HYP_SECTION_SYMBOL_NAME(.data) = .;
-		*(.data .data.*)
-	}
+	HYP_SECTION(.text)
+	HYP_SECTION(.bss)
+	HYP_SECTION(.rodata)
+	HYP_SECTION(.data)
 }
