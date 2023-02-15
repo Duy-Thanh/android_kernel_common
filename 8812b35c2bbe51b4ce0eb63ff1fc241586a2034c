@@ -73,6 +73,29 @@
       },
       "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44674004_113d03e7",
+        "filename": "lib/bitmap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-02-15T17:25:51Z",
+      "side": 1,
+      "message": "Also, add to a symbol list?",
+      "range": {
+        "startLine": 83,
+        "startChar": 14,
+        "endLine": 83,
+        "endChar": 31
+      },
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
