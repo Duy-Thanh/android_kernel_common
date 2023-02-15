@@ -138,6 +138,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68d5e7f6_62344baa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-02-15T17:30:34Z",
+      "side": 1,
+      "message": "Not resolved yet.",
+      "parentUuid": "0bdcf0e6_fd040c20",
+      "revId": "a0ef3898b22bb36d3062a564b7893f1eeb4f1eff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8001c206_b6210022",
         "filename": "mm/shmem.c",
         "patchSetId": 2
@@ -167,6 +185,24 @@
       "side": 1,
       "message": "Help in correcting me If my understanding about this isolated ref count is wrong. AFAIK, this counter will be incremented for the pages that are getting isolated in the reclaim path so that the parallel reclaims happening won\u0027t isolate too many pages thus lowering the number of pages on the LRU lists(check too_many_isolated()). I think the same logic is applicable to any path that is isolating that can directly effect the reclaim logic by isolating the pages for longer times.\n\nBut If I am sure that the isolation of pages is only short lived event, then I need not increase these stats. Eg: madvise_cold_or_pageout_pte_range, mlock_vma_page e.t.c.  Here too, the isolation of pages is not for too long.\n\nBTW, these changes are aligned to https://android-review.googlesource.com/c/kernel/common/+/2144662.",
       "parentUuid": "8001c206_b6210022",
+      "revId": "a0ef3898b22bb36d3062a564b7893f1eeb4f1eff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cfbcef4_3a063c22",
+        "filename": "mm/shmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4363,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-02-15T17:30:34Z",
+      "side": 1,
+      "message": "Ah, I see. You squashed the later fix into this patch. Would be best to make a note in the commit message so that it\u0027s easier to track.",
+      "parentUuid": "f11cff4f_61e54dd6",
       "revId": "a0ef3898b22bb36d3062a564b7893f1eeb4f1eff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
