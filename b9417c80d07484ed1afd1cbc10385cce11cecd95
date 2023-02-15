@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a0582f_9a5ae677",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1790,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-02-15T16:31:33Z",
+      "side": 1,
+      "message": "TODO: Revert this change",
+      "revId": "b9417c80d07484ed1afd1cbc10385cce11cecd95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
