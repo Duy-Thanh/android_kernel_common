@@ -52,6 +52,60 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d034e72_ab4f3ca6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-02-15T19:01:55Z",
+      "side": 1,
+      "message": "Will add.",
+      "parentUuid": "52b0e227_676bb96c",
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eebdebc_ddea345b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-02-15T19:01:55Z",
+      "side": 1,
+      "message": "Sorry, could you clarify the question?",
+      "parentUuid": "4ea78da9_6a82f2c0",
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf423d11_daed4f9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-02-15T19:01:55Z",
+      "side": 1,
+      "message": "Yes. A vendor module we\u0027re using requires this symbol via its wrapper API `cpumask_or_equal`.",
+      "parentUuid": "0ccd9cfe_b3f152c2",
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbcfbcd8_d3aebfda",
@@ -88,6 +142,54 @@
       "writtenOn": "2023-02-15T17:25:51Z",
       "side": 1,
       "message": "Also, add to a symbol list?",
+      "range": {
+        "startLine": 83,
+        "startChar": 14,
+        "endLine": 83,
+        "endChar": 31
+      },
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33cfc97e_7d34733d",
+        "filename": "lib/bitmap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-02-15T19:01:55Z",
+      "side": 1,
+      "message": "Sorry - will change to `EXPORT_SYMBOL_GPL`.",
+      "parentUuid": "fbcfbcd8_d3aebfda",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 13
+      },
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "329d02b9_d547c8da",
+        "filename": "lib/bitmap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-02-15T19:01:55Z",
+      "side": 1,
+      "message": "Yes, will raise that as a separate change.",
+      "parentUuid": "44674004_113d03e7",
       "range": {
         "startLine": 83,
         "startChar": 14,
