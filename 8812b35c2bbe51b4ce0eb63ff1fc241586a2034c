@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6560193_b8899d7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-02-15T19:03:19Z",
+      "side": 1,
+      "message": "To clarify, this is a new vendor module that requires this symbol.",
+      "parentUuid": "cf423d11_daed4f9d",
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbcfbcd8_d3aebfda",
         "filename": "lib/bitmap.c",
         "patchSetId": 4
