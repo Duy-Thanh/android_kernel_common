@@ -33,6 +33,23 @@
       "message": "also a Fixes: tag?",
       "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ccd9cfe_b3f152c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-15T09:34:20Z",
+      "side": 1,
+      "message": "and the referenced commit was from the 5.4 kernel release, are you SURE you need this symbol?  If so, what code needs it?",
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
