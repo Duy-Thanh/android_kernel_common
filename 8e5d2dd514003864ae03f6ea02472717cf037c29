@@ -16,6 +16,24 @@
       "message": "It would be good to mention in the commit text that you\u0027ve squashed https://android-review.googlesource.com/c/kernel/common/+/2000233 and https://android-review.googlesource.com/c/kernel/common/+/2000835/4 into this patch, LGTM otherwise.",
       "revId": "8e5d2dd514003864ae03f6ea02472717cf037c29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b88482_b709ca3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2023-02-15T02:28:28Z",
+      "side": 1,
+      "message": "Agree. I have appended the information to the commit message. Thanks.",
+      "parentUuid": "130fd71f_e7506c0a",
+      "revId": "8e5d2dd514003864ae03f6ea02472717cf037c29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
