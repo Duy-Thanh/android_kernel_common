@@ -707,7 +707,9 @@ static void show_rcu_tasks_rude_gp_kthread(void)
 #endif /* #ifndef CONFIG_TINY_RCU */
 
 #else /* #ifdef CONFIG_TASKS_RUDE_RCU */
-static void show_rcu_tasks_rude_gp_kthread(void) {}
+#ifndef CONFIG_TINY_RCU
+static inline void show_rcu_tasks_rude_gp_kthread(void) {}
+#endif /* #ifndef CONFIG_TINY_RCU */
 #endif /* #else #ifdef CONFIG_TASKS_RUDE_RCU */
 
 ////////////////////////////////////////////////////////////////////////
