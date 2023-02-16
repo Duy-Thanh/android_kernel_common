@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24d0e38f_b38e77ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-02-16T19:00:58Z",
+      "side": 1,
+      "message": "Checked android14-5.15, android13-{5.15,5.10}, android12-{5.10,5.4}; this was only other branch where patch needed",
+      "revId": "efb8d784628273884a03f75312b2d1228f0fa82a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
