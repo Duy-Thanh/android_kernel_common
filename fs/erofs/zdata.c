@@ -258,8 +258,15 @@ int __init z_erofs_init_zip_subsystem(void)
 
 	z_erofs_workqueue = alloc_workqueue("erofs_worker",
 			WQ_UNBOUND | WQ_HIGHPRI, num_possible_cpus());
+<<<<<<< PATCH SET (ca1654 UPSTREAM: erofs: fix an error code in z_erofs_init_zip_subsy)
+	if (!z_erofs_workqueue) {
+		err = -ENOMEM;
+		goto out_error_workqueue_init;
+	}
+=======
 	if (!z_erofs_workqueue)
 		goto out_error_workqueue_init;
+>>>>>>> BASE      (4b0d70 BACKPORT: erofs: add per-cpu threads for decompression as an)
 
 	err = erofs_init_percpu_workers();
 	if (err)
