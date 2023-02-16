@@ -937,6 +937,7 @@ struct xhci_virt_ep {
 	 * have to restore the device state to the previous state
 	 */
 	struct xhci_ring		*new_ring;
+	unsigned int			err_count;
 	unsigned int			ep_state;
 #define SET_DEQ_PENDING		(1 << 0)
 #define EP_HALTED		(1 << 1)	/* For stall handling */
@@ -1558,7 +1559,10 @@ struct xhci_td {
 	struct list_head	td_list;
 	struct list_head	cancelled_td_list;
 	int			status;
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 	enum xhci_cancelled_td_status	cancel_status;
+=======
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 	struct urb		*urb;
 	struct xhci_segment	*start_seg;
 	union xhci_trb		*first_trb;
@@ -1625,7 +1629,6 @@ struct xhci_ring {
 	 * if we own the TRB (if we are the consumer).  See section 4.9.1.
 	 */
 	u32			cycle_state;
-	unsigned int            err_count;
 	unsigned int		stream_id;
 	unsigned int		num_segs;
 	unsigned int		num_trbs_free;

@@ -830,6 +830,7 @@ static int xhci_td_cleanup(struct xhci_hcd *xhci, struct xhci_td *td,
 		urb->actual_length = 0;
 		status = 0;
 	}
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 	/* TD might be removed from td_list if we are giving back a cancelled URB */
 	if (!list_empty(&td->td_list))
 		list_del_init(&td->td_list);
@@ -1054,6 +1055,79 @@ static struct xhci_td *find_halted_td(struct xhci_virt_ep *ep)
 			return td;
 	}
 	return NULL;
+=======
+	list_del_init(&td->td_list);
+	/* Was this TD slated to be cancelled but completed anyway? */
+	if (!list_empty(&td->cancelled_td_list))
+		list_del_init(&td->cancelled_td_list);
+
+	inc_td_cnt(urb);
+	/* Giveback the urb when all the tds are completed */
+	if (last_td_in_urb(td)) {
+		if ((urb->actual_length != urb->transfer_buffer_length &&
+		     (urb->transfer_flags & URB_SHORT_NOT_OK)) ||
+		    (status != 0 && !usb_endpoint_xfer_isoc(&urb->ep->desc)))
+			xhci_dbg(xhci, "Giveback URB %p, len = %d, expected = %d, status = %d\n",
+				 urb, urb->actual_length,
+				 urb->transfer_buffer_length, status);
+
+		/* set isoc urb status to 0 just as EHCI, UHCI, and OHCI */
+		if (usb_pipetype(urb->pipe) == PIPE_ISOCHRONOUS)
+			status = 0;
+		xhci_giveback_urb_in_irq(xhci, td, status);
+	}
+
+	return 0;
+}
+
+static int xhci_reset_halted_ep(struct xhci_hcd *xhci, unsigned int slot_id,
+				unsigned int ep_index, enum xhci_ep_reset_type reset_type)
+{
+	struct xhci_command *command;
+	int ret = 0;
+
+	command = xhci_alloc_command(xhci, false, GFP_ATOMIC);
+	if (!command) {
+		ret = -ENOMEM;
+		goto done;
+	}
+
+	ret = xhci_queue_reset_ep(xhci, command, slot_id, ep_index, reset_type);
+done:
+	if (ret)
+		xhci_err(xhci, "ERROR queuing reset endpoint for slot %d ep_index %d, %d\n",
+			 slot_id, ep_index, ret);
+	return ret;
+}
+
+static void xhci_handle_halted_endpoint(struct xhci_hcd *xhci,
+				struct xhci_virt_ep *ep, unsigned int stream_id,
+				struct xhci_td *td,
+				enum xhci_ep_reset_type reset_type)
+{
+	unsigned int slot_id = ep->vdev->slot_id;
+	int err;
+
+	/*
+	 * Avoid resetting endpoint if link is inactive. Can cause host hang.
+	 * Device will be reset soon to recover the link so don't do anything
+	 */
+	if (ep->vdev->flags & VDEV_PORT_ERROR)
+		return;
+
+	ep->ep_state |= EP_HALTED;
+
+	err = xhci_reset_halted_ep(xhci, slot_id, ep->ep_index, reset_type);
+	if (err)
+		return;
+
+	if (reset_type == EP_HARD_RESET) {
+		ep->ep_state |= EP_HARD_CLEAR_TOGGLE;
+		xhci_cleanup_stalled_ring(xhci, slot_id, ep->ep_index, stream_id,
+					  td);
+	}
+	xhci_ring_cmd_db(xhci);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 }
 
 /*
@@ -2201,13 +2275,29 @@ int xhci_is_vendor_info_code(struct xhci_hcd *xhci, unsigned int trb_comp_code)
 	return 0;
 }
 
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 static int finish_td(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 		     struct xhci_ring *ep_ring, struct xhci_td *td,
 		     u32 trb_comp_code)
+=======
+static int finish_td(struct xhci_hcd *xhci, struct xhci_td *td,
+	struct xhci_transfer_event *event, struct xhci_virt_ep *ep)
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 {
 	struct xhci_ep_ctx *ep_ctx;
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
+=======
+	struct xhci_ring *ep_ring;
+	u32 trb_comp_code;
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 	ep_ctx = xhci_get_ep_ctx(xhci, ep->vdev->out_ctx, ep->ep_index);
+=======
+	ep_ring = xhci_dma_to_transfer_ring(ep, le64_to_cpu(event->buffer));
+	ep_ctx = xhci_get_ep_ctx(xhci, ep->vdev->out_ctx, ep->ep_index);
+	trb_comp_code = GET_COMP_CODE(le32_to_cpu(event->transfer_len));
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 
 	switch (trb_comp_code) {
 	case COMP_STOPPED_LENGTH_INVALID:
@@ -2265,23 +2355,39 @@ static int finish_td(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 		 * stall later. Hub TT buffer should only be cleared for FS/LS
 		 * devices behind HS hubs for functional stalls.
 		 */
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 		if (ep->ep_index != 0)
+=======
+		if ((ep->ep_index != 0) || (trb_comp_code != COMP_STALL_ERROR))
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 			xhci_clear_hub_tt_buffer(xhci, td, ep);
 
 		xhci_handle_halted_endpoint(xhci, ep, ep_ring->stream_id, td,
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 					    EP_HARD_RESET);
 
 		return 0; /* xhci_handle_halted_endpoint marked td cancelled */
 	default:
 		break;
+=======
+					     EP_HARD_RESET);
+	} else {
+		/* Update ring dequeue pointer */
+		while (ep_ring->dequeue != td->last_trb)
+			inc_deq(xhci, ep_ring);
+		inc_deq(xhci, ep_ring);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 	}
 
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 	/* Update ring dequeue pointer */
 	ep_ring->dequeue = td->last_trb;
 	ep_ring->deq_seg = td->last_trb_seg;
 	ep_ring->num_trbs_free += td->num_trbs - 1;
 	inc_deq(xhci, ep_ring);
 
+=======
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 	return xhci_td_cleanup(xhci, td, ep_ring, td->status);
 }
 
@@ -2303,9 +2409,15 @@ static int sum_trb_lengths(struct xhci_hcd *xhci, struct xhci_ring *ring,
 /*
  * Process control tds, update urb status and actual_length.
  */
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 static int process_ctrl_td(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 		struct xhci_ring *ep_ring,  struct xhci_td *td,
 			   union xhci_trb *ep_trb, struct xhci_transfer_event *event)
+=======
+static int process_ctrl_td(struct xhci_hcd *xhci, struct xhci_td *td,
+	union xhci_trb *ep_trb, struct xhci_transfer_event *event,
+	struct xhci_virt_ep *ep)
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 {
 	struct xhci_ep_ctx *ep_ctx;
 	u32 trb_comp_code;
@@ -2393,15 +2505,25 @@ static int process_ctrl_td(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 		td->urb->actual_length = requested;
 
 finish_td:
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 	return finish_td(xhci, ep, ep_ring, td, trb_comp_code);
+=======
+	return finish_td(xhci, td, event, ep);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 }
 
 /*
  * Process isochronous tds, update urb packet status and actual_length.
  */
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 static int process_isoc_td(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 		struct xhci_ring *ep_ring, struct xhci_td *td,
 		union xhci_trb *ep_trb, struct xhci_transfer_event *event)
+=======
+static int process_isoc_td(struct xhci_hcd *xhci, struct xhci_td *td,
+	union xhci_trb *ep_trb, struct xhci_transfer_event *event,
+	struct xhci_virt_ep *ep)
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 {
 	struct urb_priv *urb_priv;
 	int idx;
@@ -2478,7 +2600,11 @@ static int process_isoc_td(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 
 	td->urb->actual_length += frame->actual_length;
 
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 	return finish_td(xhci, ep, ep_ring, td, trb_comp_code);
+=======
+	return finish_td(xhci, td, event, ep);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 }
 
 static int skip_isoc_td(struct xhci_hcd *xhci, struct xhci_td *td,
@@ -2499,9 +2625,14 @@ static int skip_isoc_td(struct xhci_hcd *xhci, struct xhci_td *td,
 	frame->actual_length = 0;
 
 	/* Update ring dequeue pointer */
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 	ep->ring->dequeue = td->last_trb;
 	ep->ring->deq_seg = td->last_trb_seg;
 	ep->ring->num_trbs_free += td->num_trbs - 1;
+=======
+	while (ep->ring->dequeue != td->last_trb)
+		inc_deq(xhci, ep->ring);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 	inc_deq(xhci, ep->ring);
 
 	return xhci_td_cleanup(xhci, td, ep->ring, status);
@@ -2510,15 +2641,25 @@ static int skip_isoc_td(struct xhci_hcd *xhci, struct xhci_td *td,
 /*
  * Process bulk and interrupt tds, update urb status and actual_length.
  */
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 static int process_bulk_intr_td(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 		struct xhci_ring *ep_ring, struct xhci_td *td,
 		union xhci_trb *ep_trb, struct xhci_transfer_event *event)
+=======
+static int process_bulk_intr_td(struct xhci_hcd *xhci, struct xhci_td *td,
+	union xhci_trb *ep_trb, struct xhci_transfer_event *event,
+	struct xhci_virt_ep *ep)
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 {
 	struct xhci_slot_ctx *slot_ctx;
 	u32 trb_comp_code;
 	u32 remaining, requested, ep_trb_len;
 
 	slot_ctx = xhci_get_slot_ctx(xhci, ep->vdev->out_ctx);
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
+=======
+	ep_ring = xhci_dma_to_transfer_ring(ep, le64_to_cpu(event->buffer));
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 	trb_comp_code = GET_COMP_CODE(le32_to_cpu(event->transfer_len));
 	remaining = EVENT_TRB_LEN(le32_to_cpu(event->transfer_len));
 	ep_trb_len = TRB_LEN(le32_to_cpu(ep_trb->generic.field[2]));
@@ -2526,7 +2667,7 @@ static int process_bulk_intr_td(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 
 	switch (trb_comp_code) {
 	case COMP_SUCCESS:
-		ep_ring->err_count = 0;
+		ep->err_count = 0;
 		/* handle success with untransferred data as short packet */
 		if (ep_trb != td->last_trb || remaining) {
 			xhci_warn(xhci, "WARN Successful completion on short TX\n");
@@ -2552,7 +2693,7 @@ static int process_bulk_intr_td(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 		break;
 	case COMP_USB_TRANSACTION_ERROR:
 		if (xhci->quirks & XHCI_NO_SOFT_RETRY ||
-		    (ep_ring->err_count++ > MAX_SOFT_RETRY) ||
+		    (ep->err_count++ > MAX_SOFT_RETRY) ||
 		    le32_to_cpu(slot_ctx->tt_info) & TT_SLOT)
 			break;
 
@@ -2578,8 +2719,12 @@ finish_td:
 			  remaining);
 		td->urb->actual_length = 0;
 	}
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 
 	return finish_td(xhci, ep, ep_ring, td, trb_comp_code);
+=======
+	return finish_td(xhci, td, event, ep);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 }
 
 /*
@@ -2633,8 +2778,19 @@ static int handle_tx_event(struct xhci_hcd *xhci,
 		case COMP_USB_TRANSACTION_ERROR:
 		case COMP_INVALID_STREAM_TYPE_ERROR:
 		case COMP_INVALID_STREAM_ID_ERROR:
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 			xhci_handle_halted_endpoint(xhci, ep, 0, NULL,
 						    EP_SOFT_RESET);
+=======
+			xhci_dbg(xhci, "Stream transaction error ep %u no id\n",
+				 ep_index);
+			if (ep->err_count++ > MAX_SOFT_RETRY)
+				xhci_handle_halted_endpoint(xhci, ep, 0, NULL,
+							    EP_HARD_RESET);
+			else
+				xhci_handle_halted_endpoint(xhci, ep, 0, NULL,
+							    EP_SOFT_RESET);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 			goto cleanup;
 		case COMP_RING_UNDERRUN:
 		case COMP_RING_OVERRUN:
@@ -2921,11 +3077,23 @@ static int handle_tx_event(struct xhci_hcd *xhci,
 
 		/* update the urb's actual_length and give back to the core */
 		if (usb_endpoint_xfer_control(&td->urb->ep->desc))
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 			process_ctrl_td(xhci, ep, ep_ring, td, ep_trb, event);
+=======
+			process_ctrl_td(xhci, td, ep_trb, event, ep);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 		else if (usb_endpoint_xfer_isoc(&td->urb->ep->desc))
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 			process_isoc_td(xhci, ep, ep_ring, td, ep_trb, event);
+=======
+			process_isoc_td(xhci, td, ep_trb, event, ep);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 		else
+<<<<<<< HEAD   (2702f0 Revert "ASoC/SoundWire: dai: expand 'stream' concept beyond )
 			process_bulk_intr_td(xhci, ep, ep_ring, td, ep_trb, event);
+=======
+			process_bulk_intr_td(xhci, td, ep_trb, event, ep);
+>>>>>>> BRANCH (3a9f1b Linux 5.10.164)
 cleanup:
 		handling_skipped_tds = ep->skip &&
 			trb_comp_code != COMP_MISSED_SERVICE_ERROR &&
