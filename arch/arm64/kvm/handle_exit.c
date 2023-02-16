@@ -22,6 +22,8 @@
 
 #include <kvm/arm_hypercalls.h>
 
+#include <trace/hooks/hyp_panic.h>
+
 #define CREATE_TRACE_POINTS
 #include "trace_handle_exit.h"
 
@@ -392,6 +394,9 @@ void __noreturn __cold nvhe_hyp_panic_handler(u64 esr, u64 spsr,
 	 * hyp VAs to vmlinux addresses.
 	 */
 	kvm_err("Hyp Offset: 0x%llx\n", hyp_offset);
+
+	trace_android_vh_hyp_panic(hyp_offset, spsr, elr_virt, esr,
+				   far, hpfar, par, vcpu, elr_phys);
 
 	panic("HYP panic:\nPS:%08llx PC:%016llx ESR:%016llx\nFAR:%016llx HPFAR:%016llx PAR:%016llx\nVCPU:%016lx\n",
 	      spsr, elr_virt, esr, far, hpfar, par, vcpu);
