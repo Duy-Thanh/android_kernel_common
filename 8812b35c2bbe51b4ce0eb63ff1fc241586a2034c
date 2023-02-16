@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5e0129e_ab06bec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-16T07:08:52Z",
+      "side": 1,
+      "message": "That is not a valid symbol for any driver or kernel module to use, sorry.  Please fix the code to not use it, OR submit it upstream for others to review.",
+      "parentUuid": "e6560193_b8899d7c",
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbcfbcd8_d3aebfda",
         "filename": "lib/bitmap.c",
         "patchSetId": 4
