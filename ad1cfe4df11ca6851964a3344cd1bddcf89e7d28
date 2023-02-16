@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c70dffa4_6633d1f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-16T16:53:12Z",
+      "side": 1,
+      "message": "Please confirm the Abi representation is filtered such that only symbols from the symbol list are considered.",
+      "revId": "ad1cfe4df11ca6851964a3344cd1bddcf89e7d28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
