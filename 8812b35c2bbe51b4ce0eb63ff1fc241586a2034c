@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "347e192f_e876904c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-02-16T17:02:48Z",
+      "side": 1,
+      "message": "But there are plenty of bitmap APIs already being included in the QCOM symbol list currently:\n\n```\n$ grep \"__bitmap\" android/abi_gki_aarch64_qcom\n  __bitmap_and\n  __bitmap_andnot\n  __bitmap_clear\n  __bitmap_complement\n  __bitmap_equal\n  __bitmap_intersects\n  __bitmap_or\n  __bitmap_set\n  __bitmap_subset\n  __bitmap_weight\n```\n\nThis is just adding one more.",
+      "parentUuid": "e5e0129e_ab06bec0",
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbcfbcd8_d3aebfda",
         "filename": "lib/bitmap.c",
         "patchSetId": 4
