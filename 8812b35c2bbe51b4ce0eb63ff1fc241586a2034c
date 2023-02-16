@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "488c5f15_16d9fe58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-16T17:13:54Z",
+      "side": 1,
+      "message": "Those are already exported, this one is not as there is no in-kernel user of it. The only in-kernel user should never be called by external code.",
+      "parentUuid": "347e192f_e876904c",
+      "revId": "8812b35c2bbe51b4ce0eb63ff1fc241586a2034c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbcfbcd8_d3aebfda",
         "filename": "lib/bitmap.c",
         "patchSetId": 4
