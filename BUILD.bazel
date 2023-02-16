@@ -533,3 +533,11 @@ ddk_headers(
     includes = [],
     visibility = ["//visibility:private"],
 )
+
+cc_binary(
+    name = "scripts/basic/fixdep",
+    srcs = [
+        "scripts/basic/fixdep.c",
+    ],
+    linkstatic = True,
+)
