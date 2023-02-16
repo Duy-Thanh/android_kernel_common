@@ -46,6 +46,30 @@
       },
       "revId": "cf2721cc6175a430358e38eb945978608758eab1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36dec6d3_1d54a035",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-16T13:09:18Z",
+      "side": 1,
+      "message": "No, again, this should be FROMLIST, not ANDROID.\n\nAnd provide the correct Link: tag underneath the Bug: line, as the documentation asks for.",
+      "parentUuid": "4ce762ba_fd188cea",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "cf2721cc6175a430358e38eb945978608758eab1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
