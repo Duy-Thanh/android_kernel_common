@@ -92,6 +92,7 @@ static void end_report(unsigned long *flags, unsigned long addr)
 	pr_err("==================================================================\n");
 	add_taint(TAINT_BAD_PAGE, LOCKDEP_NOW_UNRELIABLE);
 	spin_unlock_irqrestore(&report_lock, *flags);
+<<<<<<< HEAD   (c49dfe Merge 5.10.165 into android12-5.10-lts)
 	if (panic_on_warn && !test_bit(KASAN_BIT_MULTI_SHOT, &kasan_flags)) {
 		/*
 		 * This thread may hit another WARN() in the panic path.
@@ -106,6 +107,10 @@ static void end_report(unsigned long *flags, unsigned long addr)
 	if (kasan_flag_panic)
 		panic("kasan.fault=panic set ...\n");
 #endif
+=======
+	if (!test_bit(KASAN_BIT_MULTI_SHOT, &kasan_flags))
+		check_panic_on_warn("KASAN");
+>>>>>>> BRANCH (8d823a Linux 5.10.166)
 	kasan_enable_current();
 }
 
