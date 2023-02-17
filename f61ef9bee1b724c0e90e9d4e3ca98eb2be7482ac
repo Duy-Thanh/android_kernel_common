@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d0026e_6c3643b3",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-02-17T12:28:40Z",
+      "side": 1,
+      "message": "typo: guaranteed",
+      "range": {
+        "startLine": 408,
+        "startChar": 35,
+        "endLine": 408,
+        "endChar": 44
+      },
+      "revId": "f61ef9bee1b724c0e90e9d4e3ca98eb2be7482ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab2c324b_b0fcce43",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-02-17T12:28:40Z",
+      "side": 1,
+      "message": "Perhaps `int err` might be better for this, especially if we want to handle different failure reasons in the future?",
+      "range": {
+        "startLine": 410,
+        "startChar": 24,
+        "endLine": 410,
+        "endChar": 34
+      },
+      "revId": "f61ef9bee1b724c0e90e9d4e3ca98eb2be7482ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
