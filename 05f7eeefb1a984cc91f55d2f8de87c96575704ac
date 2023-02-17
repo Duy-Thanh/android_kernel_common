@@ -34,6 +34,24 @@
       "parentUuid": "600e20b5_db6c7d26",
       "revId": "05f7eeefb1a984cc91f55d2f8de87c96575704ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15974cf_aca9023e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-02-17T19:33:33Z",
+      "side": 1,
+      "message": "Rsolving based on the clarification provide over GKI team chat that it\u0027s not true.\n\nSee, http://b/269674780 for efforts going on to resolve the failures reported here.",
+      "parentUuid": "986a5102_cdf90bef",
+      "revId": "05f7eeefb1a984cc91f55d2f8de87c96575704ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
