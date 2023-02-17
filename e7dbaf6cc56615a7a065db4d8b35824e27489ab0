@@ -16,6 +16,24 @@
       "message": "If this was accepted, please change to \"UPSTREAM\".\n\nIf it was not, please provide the reason why.",
       "revId": "e7dbaf6cc56615a7a065db4d8b35824e27489ab0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11dafd8e_3a19b3a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-02-17T01:49:01Z",
+      "side": 1,
+      "message": "It was accepted but it had to be modified during backport to 5.10. I see upstream stable backports up to 5.15 but not back to 5.10. So, I\u0027m not sure this is still valid for 5.10 version. Hopefully ppc@ as the author can review and confirm this will still work for 5.10.",
+      "parentUuid": "12df64d5_1f262254",
+      "revId": "e7dbaf6cc56615a7a065db4d8b35824e27489ab0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
