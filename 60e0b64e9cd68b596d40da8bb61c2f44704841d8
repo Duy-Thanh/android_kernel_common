@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c43c7cf_7c5424e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-17T13:10:16Z",
+      "side": 1,
+      "message": "The addition of the enum value might be ok in this case. Effectively this is a change to the API, not really ABI. Can you update the ABI representation accordingly and add some rationale why this is a safe change to the commit message? Perhaps all of that should happen in a separate change that follows this one.",
+      "revId": "60e0b64e9cd68b596d40da8bb61c2f44704841d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
