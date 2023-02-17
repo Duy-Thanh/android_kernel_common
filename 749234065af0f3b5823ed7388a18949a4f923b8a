@@ -86,6 +86,24 @@
       "parentUuid": "3184a8c2_e250ec8c",
       "revId": "749234065af0f3b5823ed7388a18949a4f923b8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e49e4b83_cc443385",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-17T12:21:54Z",
+      "side": 1,
+      "message": "Great, please cherry-pick it there after this one is merged.",
+      "parentUuid": "8e42e5a5_409b9f0d",
+      "revId": "749234065af0f3b5823ed7388a18949a4f923b8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
