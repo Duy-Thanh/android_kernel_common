@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4502a1fa_849c85f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2023-02-17T06:03:07Z",
+      "side": 1,
+      "message": "Changes are updated properly now.",
+      "parentUuid": "e19dcdc3_7e36449a",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "a0ef3898b22bb36d3062a564b7893f1eeb4f1eff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f282b34b_99b03d06",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -341,6 +365,24 @@
       "side": 1,
       "message": "Yeah, Mistake in uploading the patches. Let me resubmit them. Sorry for the repeated task here.",
       "parentUuid": "ebef52e7_d16d4fee",
+      "revId": "a0ef3898b22bb36d3062a564b7893f1eeb4f1eff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46388d72_9211eca3",
+        "filename": "mm/shmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4363,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2023-02-17T06:03:07Z",
+      "side": 1,
+      "message": "Just updated the commit message. Hope that should suffice.",
+      "parentUuid": "c82933f8_22f7bb8f",
       "revId": "a0ef3898b22bb36d3062a564b7893f1eeb4f1eff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
