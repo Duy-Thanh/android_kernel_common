@@ -16,6 +16,24 @@
       "message": "Please add some detail to the commit message. What is fuse-bpf and why is it needed? Perhaps one of the early patches from 5.10 that are squashed here has some overview text.",
       "revId": "d5f2e6640da3002466013b74bdeced41dc924318",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb228d71_661cf528",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-02-17T19:45:19Z",
+      "side": 1,
+      "message": "I added the first paragraph from our upstreaming effort, along with a link to that\n\nI also merged the bug fix CL",
+      "parentUuid": "5c920780_fd5171f4",
+      "revId": "d5f2e6640da3002466013b74bdeced41dc924318",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
