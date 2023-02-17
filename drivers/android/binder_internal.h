@@ -410,8 +410,6 @@ enum binder_prio_state {
  *                        (protected by @inner_lock)
  * @tmp_ref:              temporary reference to indicate proc is in use
  *                        (protected by @inner_lock)
- * @default_priority:     default scheduler priority
- *                        (invariant after initialized)
  * @debugfs_entry:        debugfs node
  * @alloc:                binder allocator bookkeeping
  * @context:              binder_context for this proc
@@ -451,7 +449,6 @@ struct binder_proc {
 	int requested_threads;
 	int requested_threads_started;
 	int tmp_ref;
-	struct binder_priority default_priority;
 	struct dentry *debugfs_entry;
 	struct binder_alloc alloc;
 	struct binder_context *context;

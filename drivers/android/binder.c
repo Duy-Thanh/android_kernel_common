@@ -3311,9 +3311,6 @@ static void binder_transaction(struct binder_proc *proc,
 		/* Inherit supported policies for synchronous transactions */
 		t->priority.sched_policy = current->policy;
 		t->priority.prio = current->normal_prio;
-	} else {
-		/* Otherwise, fall back to the default priority */
-		t->priority = target_proc->default_priority;
 	}
 
 	if (target_node && target_node->txn_security_ctx) {
@@ -4509,8 +4506,6 @@ retry:
 			wait_event_interruptible(binder_user_error_wait,
 						 binder_stop_on_user_error < 2);
 		}
-		trace_android_vh_binder_restore_priority(NULL, current);
-		binder_restore_priority(thread, &proc->default_priority);
 	}
 
 	if (non_block) {
@@ -5726,13 +5721,6 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	proc->cred = get_cred(filp->f_cred);
 	INIT_LIST_HEAD(&proc->todo);
 	init_waitqueue_head(&proc->freeze_wait);
-	if (binder_supported_policy(current->policy)) {
-		proc->default_priority.sched_policy = current->policy;
-		proc->default_priority.prio = current->normal_prio;
-	} else {
-		proc->default_priority.sched_policy = SCHED_NORMAL;
-		proc->default_priority.prio = NICE_TO_PRIO(0);
-	}
 
 	/* binderfs stashes devices in i_private */
 	if (is_binderfs_device(nodp)) {
