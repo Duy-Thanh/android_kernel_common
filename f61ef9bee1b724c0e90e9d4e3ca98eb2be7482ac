@@ -45,6 +45,30 @@
       },
       "revId": "f61ef9bee1b724c0e90e9d4e3ca98eb2be7482ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59f164c6_a6b3e7ec",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-02-17T12:43:47Z",
+      "side": 1,
+      "message": "I thought about it, but found it might be too much, as this is a very specific hypercall for IOMMU and I can\u0027t find other types of errors. so it would be better to abstract pKVM errors from it.\nHowever I can update it to int, just in case we found something else for it.",
+      "parentUuid": "ab2c324b_b0fcce43",
+      "range": {
+        "startLine": 410,
+        "startChar": 24,
+        "endLine": 410,
+        "endChar": 34
+      },
+      "revId": "f61ef9bee1b724c0e90e9d4e3ca98eb2be7482ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
