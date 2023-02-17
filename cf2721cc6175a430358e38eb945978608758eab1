@@ -70,6 +70,30 @@
       },
       "revId": "cf2721cc6175a430358e38eb945978608758eab1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da2a8105_9242018b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1933031
+      },
+      "writtenOn": "2023-02-17T03:32:02Z",
+      "side": 1,
+      "message": "I have modified the commit again\n\nthanks a lot",
+      "parentUuid": "36dec6d3_1d54a035",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "cf2721cc6175a430358e38eb945978608758eab1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
