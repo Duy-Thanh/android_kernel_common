@@ -16,6 +16,24 @@
       "message": "This will fail due to:\n```\n[    1.463835][    T1] init: Loading module /lib/modules/6.1.12-maybe-dirty/kernel/net/rfkill/rfkill.ko with args \u0027\u0027\n[    1.464876][    T1] rfkill: exports protected symbol rfkill_alloc\n[    1.465008][    T1] init: Failed to insmod \u0027/lib/modules/6.1.12-maybe-dirty/kernel/net/rfkill/rfkill.ko\u0027 with args \u0027\u0027: Permission denied\n[    1.465211][    T1] init: LoadWithAliases was unable to load /lib/modules/6.1.12-maybe-dirty/kernel/net/rfkill/rfkill.ko\n```",
       "revId": "05f7eeefb1a984cc91f55d2f8de87c96575704ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "986a5102_cdf90bef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-02-17T10:58:26Z",
+      "side": 1,
+      "message": "@ramjiyani@google.com, the verification script also needs to ensure that the entirety of symbols on symbol lists are not on the list of protected symbols.",
+      "parentUuid": "600e20b5_db6c7d26",
+      "revId": "05f7eeefb1a984cc91f55d2f8de87c96575704ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
