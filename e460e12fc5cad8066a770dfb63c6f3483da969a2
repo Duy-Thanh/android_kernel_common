@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a70ceb_7f080bff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-02-17T22:22:05Z",
+      "side": 1,
+      "message": "Thanks Todd. Based on some comments from the team I wanted to try the nested mutex approach before merging this. But if this fix is needed ASAP we can follow up with that later.",
+      "revId": "e460e12fc5cad8066a770dfb63c6f3483da969a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
