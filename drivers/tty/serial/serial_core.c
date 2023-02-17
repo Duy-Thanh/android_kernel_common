@@ -1484,6 +1484,49 @@ out:
 	return ret;
 }
 
+#ifdef CONFIG_COMPAT
+static long
+uart_compat_ioctl(struct tty_struct *tty, unsigned int cmd, unsigned long arg)
+{
+	struct uart_state *state = tty->driver_data;
+	struct tty_port *port = &state->port;
+	struct uart_port *uport;
+	long ret = -ENOIOCTLCMD;
+
+
+	switch (cmd) {
+	case TIOCSISO7816:
+	case TIOCGISO7816:
+		ret = uart_ioctl(tty, cmd, arg);
+		break;
+	}
+
+	if (ret != -ENOIOCTLCMD)
+		goto out;
+
+	mutex_lock(&port->mutex);
+	uport = uart_port_check(state);
+
+	if (!uport || tty_io_error(tty)) {
+		ret = -EIO;
+		goto out_up;
+	}
+
+	/*
+	 * There is no compat_ioctl for uport, so call ioctl
+	 */
+
+	if (uport->ops->ioctl)
+		ret = uport->ops->ioctl(uport, cmd, arg);
+out_up:
+	mutex_unlock(&port->mutex);
+out:
+	return ret;
+}
+#else
+#define uart_compat_ioctl NULL
+#endif
+
 static void uart_set_ldisc(struct tty_struct *tty)
 {
 	struct uart_state *state = tty->driver_data;
@@ -2535,6 +2578,7 @@ static const struct tty_operations uart_ops = {
 	.chars_in_buffer= uart_chars_in_buffer,
 	.flush_buffer	= uart_flush_buffer,
 	.ioctl		= uart_ioctl,
+	.compat_ioctl	= uart_compat_ioctl,
 	.throttle	= uart_throttle,
 	.unthrottle	= uart_unthrottle,
 	.send_xchar	= uart_send_xchar,
