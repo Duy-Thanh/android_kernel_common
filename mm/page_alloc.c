@@ -5234,10 +5234,16 @@ static inline void free_the_page(struct page *page, unsigned int order)
 
 void __free_pages(struct page *page, unsigned int order)
 {
+<<<<<<< HEAD   (415137 Merge 5.10.167 into android12-5.10-lts)
 	trace_android_vh_free_pages(page, order);
+=======
+	/* get PageHead before we drop reference */
+	int head = PageHead(page);
+
+>>>>>>> BRANCH (707c48 Linux 5.10.168)
 	if (put_page_testzero(page))
 		free_the_page(page, order);
-	else if (!PageHead(page))
+	else if (!head)
 		while (order-- > 0)
 			free_the_page(page + (1 << order), order);
 }
