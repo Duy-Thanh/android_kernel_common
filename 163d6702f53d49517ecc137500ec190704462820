@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000038676844",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2445096?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "155eaf8a_67fd91ba",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Dylan Yudaken \u003cdylany@meta.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "a04451ff_3bf3d063",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-02-18T09:32:18Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Dylan Yudaken \u003cdylany@meta.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 510159830 android-build.ayeaye-python-dispatcher_20230216.01_p0",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "163d6702f53d49517ecc137500ec190704462820",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
