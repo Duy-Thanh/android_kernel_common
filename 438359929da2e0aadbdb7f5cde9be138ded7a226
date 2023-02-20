@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa1c3bd2_05a45019",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2023-02-20T11:21:24Z",
+      "side": 1,
+      "message": "Hi,\n\nMediaTek and ARM want to keep this patch.\nWe have uploaded the symbol list by https://android-review.googlesource.com/c/kernel/common/+/2445842\n\nThanks",
+      "revId": "438359929da2e0aadbdb7f5cde9be138ded7a226",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
