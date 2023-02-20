@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e253e44a_394b59cc",
+        "filename": "arch/arm64/include/asm/kvm_asm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-02-20T11:12:34Z",
+      "side": 1,
+      "message": "The renaming only makes sense with this patch. \n\nPreviously it was start/stop where start was also loading and stop tearing down.\n\nNow it\u0027s loading / enabling / teardown . enabling being start/stop",
+      "parentUuid": "396d4aa3_cc3c35b2",
+      "revId": "5a459ad0682caaec05733f28586863f170afa5bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "884728a4_659e067b",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-20T11:03:13Z",
       "side": 1,
       "message": "Q: The `atomic_read` was replaced with a direct access of bpages from `rb_cpu_loaded` function. Is this because the atomic_read was not needed in the first place ?",
+      "revId": "5a459ad0682caaec05733f28586863f170afa5bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bead3a7_f0621d74",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-02-20T11:12:34Z",
+      "side": 1,
+      "message": "The status is a tri-state \"non-writable\" \"writable\" \"writing\" (maybe that actually could be renamed ...) to force the hyp to not write anything the status needs to be switched to \"non-writable\". Nonetheless the buffer is still loaded. Hence the need for another way of identifying it. I reused one of the variable for that purpose (if it has a backing memory then it\u0027s loaded)\n\nThis is always accessed behind the tracing spinlock, so no need for any other sync.",
+      "parentUuid": "884728a4_659e067b",
       "revId": "5a459ad0682caaec05733f28586863f170afa5bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
