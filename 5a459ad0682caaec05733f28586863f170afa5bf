@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "396d4aa3_cc3c35b2",
+        "filename": "arch/arm64/include/asm/kvm_asm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-02-20T11:03:13Z",
+      "side": 1,
+      "message": "MAYBE: Keep the name refactorization in a separate patch ? The commit name/description doesn\u0027t reflect these changes",
+      "revId": "5a459ad0682caaec05733f28586863f170afa5bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "884728a4_659e067b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/trace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-02-20T11:03:13Z",
+      "side": 1,
+      "message": "Q: The `atomic_read` was replaced with a direct access of bpages from `rb_cpu_loaded` function. Is this because the atomic_read was not needed in the first place ?",
+      "revId": "5a459ad0682caaec05733f28586863f170afa5bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
