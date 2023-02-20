@@ -2138,6 +2138,58 @@ int __pkvm_guest_unshare_hyp(struct pkvm_hyp_vcpu *vcpu, u64 ipa)
 	return ret;
 }
 
+int __pkvm_guest_share_ffa(struct pkvm_hyp_vcpu *vcpu, u64 ipa)
+{
+	int ret;
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
+	struct pkvm_mem_transition share = {
+		.nr_pages	= 1,
+		.initiator	= {
+			.id	= PKVM_ID_GUEST,
+			.addr	= ipa,
+			.guest  = {
+				.hyp_vm = vm,
+			},
+		},
+		.completer	= {
+			.id	= PKVM_ID_FFA,
+		},
+	};
+	u64 nr_unshared;
+
+	guest_lock_component(vm);
+	ret = do_share(&share, &nr_unshared);
+	guest_unlock_component(vm);
+
+	return ret;
+}
+
+int __pkvm_guest_unshare_ffa(struct pkvm_hyp_vcpu *vcpu, u64 ipa)
+{
+	int ret;
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
+	struct pkvm_mem_transition unshare = {
+		.nr_pages	= 1,
+		.initiator	= {
+			.id	= PKVM_ID_GUEST,
+			.addr	= ipa,
+			.guest  = {
+				.hyp_vm = vm,
+			},
+		},
+		.completer	= {
+			.id	= PKVM_ID_FFA,
+		},
+	};
+	u64 nr_unshared;
+
+	guest_lock_component(vm);
+	ret = do_unshare(&unshare, &nr_unshared);
+	guest_unlock_component(vm);
+
+	return ret;
+}
+
 int __pkvm_guest_unshare_host(struct pkvm_hyp_vcpu *vcpu, u64 ipa, u64 nr_pages,
 			      u64 *nr_unshared)
 {
