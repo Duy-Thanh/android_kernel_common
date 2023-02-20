@@ -51,6 +51,24 @@
       "parentUuid": "8e26162e_eb6c6326",
       "revId": "adef04f515f1fe2f5231f32042d33a642884b928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9ed0748_92c64564",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-02-20T16:33:46Z",
+      "side": 1,
+      "message": "The relation chain seems to be broken now. Please can you rebase the patches correctly, so that each patch is based on top of its parent change?",
+      "parentUuid": "6997e233_643c9f04",
+      "revId": "adef04f515f1fe2f5231f32042d33a642884b928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
