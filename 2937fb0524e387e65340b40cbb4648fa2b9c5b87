@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b808c15_411f7040",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-02-20T16:51:00Z",
+      "side": 1,
+      "message": "Bypassing presubmits to synchronize with Pixel b/269674780#comment26",
+      "revId": "2937fb0524e387e65340b40cbb4648fa2b9c5b87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
