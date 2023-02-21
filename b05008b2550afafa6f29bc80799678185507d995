@@ -123,6 +123,24 @@
       "parentUuid": "f7b1e89c_8fa0f712",
       "revId": "b05008b2550afafa6f29bc80799678185507d995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7105efac_54687d40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933445
+      },
+      "writtenOn": "2023-02-21T17:19:22Z",
+      "side": 1,
+      "message": "i dont have +2 approvals too, not sure who can place,\n\ni am new to this UI and coming to the total changes are 3 only, right?\n\nandroid13-5.15-2023-01:\nhttps://android-review.googlesource.com/c/kernel/common/+/2447548  \nhttps://android-review.googlesource.com/c/kernel/common/+/2447802 \nhttps://android-review.googlesource.com/c/kernel/common/+/2447803 \n\ni have requested respin for above gerrits",
+      "parentUuid": "ca33e647_66d1da6f",
+      "revId": "b05008b2550afafa6f29bc80799678185507d995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
