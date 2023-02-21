@@ -93,6 +93,30 @@
       },
       "revId": "f61ef9bee1b724c0e90e9d4e3ca98eb2be7482ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6d48f6_ee4c0912",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-02-21T09:55:48Z",
+      "side": 1,
+      "message": "Yes, please. I have a thing against `bool` parameters to functions because they don\u0027t scale to additional states and they typically don\u0027t provide any context at the call site.",
+      "parentUuid": "59f164c6_a6b3e7ec",
+      "range": {
+        "startLine": 410,
+        "startChar": 24,
+        "endLine": 410,
+        "endChar": 34
+      },
+      "revId": "f61ef9bee1b724c0e90e9d4e3ca98eb2be7482ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
