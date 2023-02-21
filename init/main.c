@@ -1501,6 +1501,10 @@ void __weak free_initmem(void)
 static int __ref kernel_init(void *unused)
 {
 	int ret;
+	char blow_stack[4096];
+
+	memset(blow_stack, 0xff, sizeof(*blow_stack));
+	printk("blow_stack: %x\n", blow_stack[13]);
 
 	/*
 	 * Wait until kthreadd is all set-up.
