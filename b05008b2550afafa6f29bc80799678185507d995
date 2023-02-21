@@ -69,6 +69,24 @@
       "parentUuid": "42211c88_5ee2c103",
       "revId": "b05008b2550afafa6f29bc80799678185507d995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13f8d8be_461ffc96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-02-21T16:56:16Z",
+      "side": 1,
+      "message": "The order you mentioned before is correct. The problem is that you are not cherry-picking the second on top of the first.\n\nI tried it via the gerrit UI - when you cherry pick the second one, put the sha of the first into \"Provide base commit sha1 for cherry-pick\". You can get the sha of the first from the field next to \u0027Base ... Patchset 2\u0027",
+      "parentUuid": "70d59492_2a6f4de0",
+      "revId": "b05008b2550afafa6f29bc80799678185507d995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
