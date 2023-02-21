@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a1c0fec_c30baaa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-02-21T20:51:47Z",
+      "side": 1,
+      "message": "Let\u0027s wait on merging these patches because I think the issue also exists in 6.1 stable kernel and it would be better if partner reports upstream and we get the fixes as part of LTS. merge",
+      "revId": "65b6087929a51b60c0286c5c20d5745de84f18ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
