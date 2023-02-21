@@ -175,6 +175,24 @@
       "message": "Please submit the patches together as Paul suggests. Once Paul is satisfied with the series, then I can take a look if necessary.",
       "revId": "b05008b2550afafa6f29bc80799678185507d995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f2bc901_39d09253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933445
+      },
+      "writtenOn": "2023-02-21T17:49:39Z",
+      "side": 1,
+      "message": "Hi Paul,\n\ni have set the changes as per the previous comments, is still something needs to be corrected? let me know\n\n\u003e\u003eThe order you mentioned before is correct. The problem is that you are not cherry-picking the second on top of the first.\n\nI tried it via the gerrit UI - when you cherry pick the second one, put the sha of the first into \"Provide base commit sha1 for cherry-pick\". You can get the sha of the first from the field next to \u0027Base ... Patchset 2\u0027\n\u003c\u003c\u003c\n\nThanks,\nSiva.",
+      "parentUuid": "7105efac_54687d40",
+      "revId": "b05008b2550afafa6f29bc80799678185507d995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
