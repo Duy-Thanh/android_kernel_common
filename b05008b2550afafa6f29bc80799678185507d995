@@ -141,6 +141,23 @@
       "parentUuid": "ca33e647_66d1da6f",
       "revId": "b05008b2550afafa6f29bc80799678185507d995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "958f8ddc_2a0f0382",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933445
+      },
+      "writtenOn": "2023-02-21T17:24:20Z",
+      "side": 1,
+      "message": "Hi Todd/Sandeep,\n\nThese changes are picking to January release as requested by team\n\ncan you please provide the +2 approvals?\n\nandroid13-5.15-2023-01:\nhttps://android-review.googlesource.com/c/kernel/common/+/2447548  \nhttps://android-review.googlesource.com/c/kernel/common/+/2447802 \nhttps://android-review.googlesource.com/c/kernel/common/+/2447803 \n\nThanks,\nsiva.",
+      "revId": "b05008b2550afafa6f29bc80799678185507d995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
