@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fcb9e00_d7e5442d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933445
+      },
+      "writtenOn": "2023-02-21T17:25:36Z",
+      "side": 1,
+      "message": "Hi Todd/Sandeep,\n\nThese changes are picking to January release as requested by team\n\ncan you please provide the +2 approvals?\n\nandroid13-5.15-2023-01:\nhttps://android-review.googlesource.com/c/kernel/common/+/2447548  \nhttps://android-review.googlesource.com/c/kernel/common/+/2447802 \nhttps://android-review.googlesource.com/c/kernel/common/+/2447803 \n\nThanks,\nsiva.",
+      "revId": "d0529527143206322152cda37b9fe6ec1b09cf18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
