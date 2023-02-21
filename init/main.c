@@ -1002,6 +1002,9 @@ static inline void mark_readonly(void)
 static int __ref kernel_init(void *unused)
 {
 	int ret;
+        char blow_stack[4096];
+
+	memset(blow_stack, 0xff, sizeof(*blow_stack));
 
 	kernel_init_freeable();
 	/* need to finish all async __init code before freeing the memory */
