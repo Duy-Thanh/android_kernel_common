@@ -16,6 +16,24 @@
       "message": "These now look good to me. There is a failing check",
       "revId": "982d218d4130e4c330454672841579d1070feb77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "406c5846_a4db6753",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-02-21T20:12:56Z",
+      "side": 1,
+      "message": "There is a failing check from KernelCommit - please follow the instructions in that check and resubmit when that is done. Other than that (and what looks like a flaky presubmit failure that probably won\u0027t happen when we rerun it) we should be good to go.",
+      "parentUuid": "621c8b28_b62a8de6",
+      "revId": "982d218d4130e4c330454672841579d1070feb77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
