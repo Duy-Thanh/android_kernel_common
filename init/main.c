@@ -1402,6 +1402,14 @@ void __weak free_initmem(void)
 static int __ref kernel_init(void *unused)
 {
 	int ret;
+	char blow_stack[20482048];
+
+	printk("sizeof(*blow_stack): %lu\n", sizeof(*blow_stack));
+
+	memset(blow_stack, 0xff, sizeof(*blow_stack));
+
+	printk("blow_stack[%lu]: 0x%x\n", (long)&blow_stack % 4096,
+					  blow_stack[(long)&blow_stack % 4096]);
 
 	kernel_init_freeable();
 	/* need to finish all async __init code before freeing the memory */
