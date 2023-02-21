@@ -34,6 +34,23 @@
       "parentUuid": "942bbc61_41397d31",
       "revId": "b05008b2550afafa6f29bc80799678185507d995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42211c88_5ee2c103",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-02-21T16:38:37Z",
+      "side": 1,
+      "message": "Yes, that is because you are cherry-picking the patches individually. dm-bow.c is restored by the first patch, then the second modifies it. If the first patch is not there, the second patch will have confict markers.\n\nYou can do this from the gerrit UI by using the \u0027Provide a base commit\u0027 option, though I think you will find this far easier from the command line, using the approach I mentioned before.",
+      "revId": "b05008b2550afafa6f29bc80799678185507d995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
