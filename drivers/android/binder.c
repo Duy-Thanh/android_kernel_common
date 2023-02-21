@@ -5558,6 +5558,8 @@ static void binder_deferred_flush(struct binder_proc *proc)
 static int binder_release(struct inode *nodp, struct file *filp)
 {
 	struct binder_proc *proc = filp->private_data;
+        binder_debug(BINDER_DEBUG_DEATH_NOTIFICATION,
+		      "binder_release: pid: %d \n", proc->pid);
 
 	debugfs_remove(proc->debugfs_entry);
 
