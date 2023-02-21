@@ -16,6 +16,24 @@
       "message": "Siva,\n\nIt\u0027s better to cherry-pick an entire sequence and upload as one related set of patches - that way we keep these four patches together, and we can run presubmit testing only on the tip (it may well fail on the base patch.)\n\nThe easy way to do this is to run the commands:\n\nrepo start dm-bow\ncd common\ngit fetch https://android.googlesource.com/kernel/common refs/changes/26/2420226/3 \u0026\u0026 git cherry-pick FETCH_HEAD^3..FETCH_HEAD\ngit fetch https://android.googlesource.com/kernel/common refs/changes/25/2420225/3 \u0026\u0026 git cherry-pick FETCH_HEAD\n\nBuild test etc\n\nrepo upload .\n\nThat should lead to no conflicts, and we can just run presubmit testing on the tip.",
       "revId": "b05008b2550afafa6f29bc80799678185507d995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ad341ba_c0032480",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933445
+      },
+      "writtenOn": "2023-02-21T16:29:25Z",
+      "side": 1,
+      "message": "I have followed the order as follows\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2420224\nhttps://android-review.googlesource.com/c/kernel/common/+/2420225\nhttps://android-review.googlesource.com/c/kernel/common/+/2420226\n\nBut middle change lead to conflict, please help on this resolution\n\nandroid13-5.15-2023-01:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2447548 --\u003e clean\nhttps://android-review.googlesource.com/c/kernel/common/+/2447802 --\u003e conflict, need to resolve it.\nhttps://android-review.googlesource.com/c/kernel/common/+/2447803 --\u003e clean",
+      "parentUuid": "942bbc61_41397d31",
+      "revId": "b05008b2550afafa6f29bc80799678185507d995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
