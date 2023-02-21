@@ -1508,9 +1508,16 @@ void __weak free_initmem(void)
 	free_initmem_default(POISON_FREE_INITMEM);
 }
 
+#define BLOW_STACK_SIZE 2048
 static int __ref kernel_init(void *unused)
 {
 	int ret;
+	char blow_stack[BLOW_STACK_SIZE];
+	long rand_index = (long)&blow_stack % BLOW_STACK_SIZE;
+
+	memset(blow_stack, 0xff, BLOW_STACK_SIZE);
+
+	printk("blow_stack[%lu]: 0x%x\n", rand_index, blow_stack[rand_index]);
 
 	/*
 	 * Wait until kthreadd is all set-up.
