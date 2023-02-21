@@ -87,6 +87,24 @@
       "parentUuid": "70d59492_2a6f4de0",
       "revId": "b05008b2550afafa6f29bc80799678185507d995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b1e89c_8fa0f712",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933445
+      },
+      "writtenOn": "2023-02-21T16:59:16Z",
+      "side": 1,
+      "message": "Oh, got it now.\n\ni think you have pushed a new patch and these gerrits are good to go now.\n\nAnyway, thanks for the quick help paul.",
+      "parentUuid": "13f8d8be_461ffc96",
+      "revId": "b05008b2550afafa6f29bc80799678185507d995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
