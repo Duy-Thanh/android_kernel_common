@@ -10476,6 +10476,11 @@ pointer_reference {
   pointee_type_id: 0x56eec1e5
 }
 pointer_reference {
+  id: 0x1f305080
+  kind: POINTER
+  pointee_type_id: 0x5681a49c
+}
+pointer_reference {
   id: 0x1f3595db
   kind: POINTER
   pointee_type_id: 0x5696b1f1
@@ -298519,6 +298524,16 @@ function {
   parameter_id: 0x295c7202
 }
 function {
+  id: 0x9a17d2c3
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
+  parameter_id: 0x92233392
+  parameter_id: 0x11c404ba
+  parameter_id: 0x92233392
+  parameter_id: 0x2e0f9112
+}
+function {
   id: 0x9a1a471c
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -298631,6 +298646,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9a343225
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9a35acc8
   return_type_id: 0x6720d32f
   parameter_id: 0x1f97e1e4
@@ -298655,6 +298678,13 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x111ee6f8
   parameter_id: 0xfc0e1dbd
+}
+function {
+  id: 0x9a37ef2c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
+  parameter_id: 0x13580d6c
 }
 function {
   id: 0x9a38f171
@@ -299530,6 +299560,14 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x9b10bb14
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x2e029f76
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9b110126
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -299556,6 +299594,13 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x1aeeade4
   parameter_id: 0x0a134144
+}
+function {
+  id: 0x9b13661d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x2e029f76
+  parameter_id: 0x13580d6c
 }
 function {
   id: 0x9b144a97
@@ -300457,6 +300502,14 @@ function {
   parameter_id: 0xfc0e1dbd
 }
 function {
+  id: 0x9b79ad21
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3776a166
+  parameter_id: 0x2e029f76
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9b79f513
   return_type_id: 0x6720d32f
   parameter_id: 0x188b9e81
@@ -300603,6 +300656,15 @@ function {
   parameter_id: 0x30c17c17
 }
 function {
+  id: 0x9b922d94
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0ed82db2
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x6d7f5ff6
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9b923492
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
@@ -300630,6 +300692,30 @@ function {
   parameter_id: 0x18ea6ae3
   parameter_id: 0x0483e6f8
   parameter_id: 0xf435685e
+}
+function {
+  id: 0x9b96d02c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0ed82db2
+  parameter_id: 0x082be49e
+}
+function {
+  id: 0x9b96f247
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0ed82db2
+  parameter_id: 0x082be49e
+  parameter_id: 0x089ac080
+}
+function {
+  id: 0x9b974729
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0ed82db2
+  parameter_id: 0x082be49e
+  parameter_id: 0x6720d32f
+  parameter_id: 0x2e18f543
 }
 function {
   id: 0x9b9c3080
@@ -301084,6 +301170,14 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x9bc302e5
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x6720d32f
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x9bc32d4a
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -301143,6 +301237,16 @@ function {
   parameter_id: 0x18ea6ae3
   parameter_id: 0x18bd6530
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x9bca85c1
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x44891609
+  parameter_id: 0x1f305080
+  parameter_id: 0x1f305080
+  parameter_id: 0x13580d6c
 }
 function {
   id: 0x9bcabd9d
@@ -301365,6 +301469,14 @@ function {
   parameter_id: 0x386883b9
 }
 function {
+  id: 0x9bd6ff14
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x3593bec8
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9bd7d214
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -301418,6 +301530,18 @@ function {
   parameter_id: 0x18ea6ae3
   parameter_id: 0x18bd6530
   parameter_id: 0x0537eb7c
+}
+function {
+  id: 0x9bda0446
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x064d6086
+  parameter_id: 0x11cfee5a
+  parameter_id: 0x33756485
+  parameter_id: 0x0ed82db2
+  parameter_id: 0x082be49e
+  parameter_id: 0x4585663f
 }
 function {
   id: 0x9bda37a0
@@ -301507,6 +301631,13 @@ function {
   parameter_id: 0x13fd63de
 }
 function {
+  id: 0x9bdc9aae
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x1d19a9d5
+}
+function {
   id: 0x9bdd30f1
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
@@ -301592,6 +301723,13 @@ function {
   parameter_id: 0x18ea6ae3
   parameter_id: 0x18bd6530
   parameter_id: 0x1ca06989
+}
+function {
+  id: 0x9bdfaf3f
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x11cfee5a
 }
 function {
   id: 0x9bdfcecb
@@ -312589,6 +312727,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_can_migrate_task"
 }
 elf_symbol {
+  id: 0xc93c7d6d
+  name: "__traceiter_android_rvh_check_preempt_tick"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x99e1535a
+  type_id: 0x9bda0446
+  full_name: "__traceiter_android_rvh_check_preempt_tick"
+}
+elf_symbol {
   id: 0x9d00b8f0
   name: "__traceiter_android_rvh_check_preempt_wakeup"
   is_defined: true
@@ -312596,6 +312743,15 @@ elf_symbol {
   crc: 0xb597bd0f
   type_id: 0x9b10b4a6
   full_name: "__traceiter_android_rvh_check_preempt_wakeup"
+}
+elf_symbol {
+  id: 0x5e9397c4
+  name: "__traceiter_android_rvh_check_preempt_wakeup_ignore"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x92535c0f
+  type_id: 0x9bdfaf3f
+  full_name: "__traceiter_android_rvh_check_preempt_wakeup_ignore"
 }
 elf_symbol {
   id: 0xf11256cf
@@ -312616,6 +312772,42 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_cpu_cgroup_online"
 }
 elf_symbol {
+  id: 0x4053abff
+  name: "__traceiter_android_rvh_cpu_overutilized"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7f085466
+  type_id: 0x9a37ef2c
+  full_name: "__traceiter_android_rvh_cpu_overutilized"
+}
+elf_symbol {
+  id: 0x8f1b1c1e
+  name: "__traceiter_android_rvh_dequeue_entity"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x22052613
+  type_id: 0x9b96d02c
+  full_name: "__traceiter_android_rvh_dequeue_entity"
+}
+elf_symbol {
+  id: 0xd6290b85
+  name: "__traceiter_android_rvh_dequeue_task"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x74004355
+  type_id: 0x9b116af7
+  full_name: "__traceiter_android_rvh_dequeue_task"
+}
+elf_symbol {
+  id: 0x3e4ab4f6
+  name: "__traceiter_android_rvh_dequeue_task_fair"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4b27fc8d
+  type_id: 0x9b116af7
+  full_name: "__traceiter_android_rvh_dequeue_task_fair"
+}
+elf_symbol {
   id: 0x81449840
   name: "__traceiter_android_rvh_do_sched_yield"
   is_defined: true
@@ -312623,6 +312815,51 @@ elf_symbol {
   crc: 0x0cca93bd
   type_id: 0x9b17b01e
   full_name: "__traceiter_android_rvh_do_sched_yield"
+}
+elf_symbol {
+  id: 0x6682daab
+  name: "__traceiter_android_rvh_enqueue_entity"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9df52e64
+  type_id: 0x9b96d02c
+  full_name: "__traceiter_android_rvh_enqueue_entity"
+}
+elf_symbol {
+  id: 0x24dfaeb0
+  name: "__traceiter_android_rvh_enqueue_task"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x54692266
+  type_id: 0x9b116af7
+  full_name: "__traceiter_android_rvh_enqueue_task"
+}
+elf_symbol {
+  id: 0xd5b05c65
+  name: "__traceiter_android_rvh_enqueue_task_fair"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfcbe7ab0
+  type_id: 0x9b116af7
+  full_name: "__traceiter_android_rvh_enqueue_task_fair"
+}
+elf_symbol {
+  id: 0xebecb2ce
+  name: "__traceiter_android_rvh_entity_tick"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1dcc65e0
+  type_id: 0x9b96d02c
+  full_name: "__traceiter_android_rvh_entity_tick"
+}
+elf_symbol {
+  id: 0xf94ce10d
+  name: "__traceiter_android_rvh_find_busiest_group"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8102c842
+  type_id: 0x9b79ad21
+  full_name: "__traceiter_android_rvh_find_busiest_group"
 }
 elf_symbol {
   id: 0x45d21f87
@@ -312641,6 +312878,15 @@ elf_symbol {
   crc: 0xb48045e2
   type_id: 0x9bd47a1d
   full_name: "__traceiter_android_rvh_find_lowest_rq"
+}
+elf_symbol {
+  id: 0xf6f47b2e
+  name: "__traceiter_android_rvh_finish_prio_fork"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9f618bb5
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_android_rvh_finish_prio_fork"
 }
 elf_symbol {
   id: 0xede4c5f2
@@ -312706,6 +312952,33 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_new_task_stats"
 }
 elf_symbol {
+  id: 0x88e9b222
+  name: "__traceiter_android_rvh_pick_next_entity"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7544ae66
+  type_id: 0x9b96f247
+  full_name: "__traceiter_android_rvh_pick_next_entity"
+}
+elf_symbol {
+  id: 0x097e467e
+  name: "__traceiter_android_rvh_place_entity"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4d67a674
+  type_id: 0x9b974729
+  full_name: "__traceiter_android_rvh_place_entity"
+}
+elf_symbol {
+  id: 0xeccbc3c1
+  name: "__traceiter_android_rvh_prepare_prio_fork"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe7a53035
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_android_rvh_prepare_prio_fork"
+}
+elf_symbol {
   id: 0xe3e24295
   name: "__traceiter_android_rvh_replace_next_task_fair"
   is_defined: true
@@ -312715,6 +312988,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_replace_next_task_fair"
 }
 elf_symbol {
+  id: 0xd90a9a58
+  name: "__traceiter_android_rvh_rtmutex_prepare_setprio"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1c16e9f2
+  type_id: 0x9bdc9aae
+  full_name: "__traceiter_android_rvh_rtmutex_prepare_setprio"
+}
+elf_symbol {
   id: 0xbf64b0b6
   name: "__traceiter_android_rvh_rto_next_cpu"
   is_defined: true
@@ -312722,6 +313004,15 @@ elf_symbol {
   crc: 0xc8030a93
   type_id: 0x9a3d4ac3
   full_name: "__traceiter_android_rvh_rto_next_cpu"
+}
+elf_symbol {
+  id: 0xb25ca194
+  name: "__traceiter_android_rvh_sched_balance_rt"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7d629dca
+  type_id: 0x9b10bb14
+  full_name: "__traceiter_android_rvh_sched_balance_rt"
 }
 elf_symbol {
   id: 0x53bf1227
@@ -312749,6 +313040,15 @@ elf_symbol {
   crc: 0xd854f169
   type_id: 0x9be885da
   full_name: "__traceiter_android_rvh_sched_exec"
+}
+elf_symbol {
+  id: 0x33e2d3a7
+  name: "__traceiter_android_rvh_sched_fork"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1f8a89fa
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_android_rvh_sched_fork"
 }
 elf_symbol {
   id: 0x0ff9bdf0
@@ -312787,6 +313087,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_sched_nohz_balancer_kick"
 }
 elf_symbol {
+  id: 0x415dd5e7
+  name: "__traceiter_android_rvh_sched_rebalance_domains"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa635848f
+  type_id: 0x9b13661d
+  full_name: "__traceiter_android_rvh_sched_rebalance_domains"
+}
+elf_symbol {
   id: 0xd7ca6cc8
   name: "__traceiter_android_rvh_sched_setaffinity"
   is_defined: true
@@ -312803,6 +313112,24 @@ elf_symbol {
   crc: 0x3b4b74e6
   type_id: 0x9bdc22a4
   full_name: "__traceiter_android_rvh_schedule"
+}
+elf_symbol {
+  id: 0x40bb3f78
+  name: "__traceiter_android_rvh_schedule_bug"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfa5d1e9c
+  type_id: 0x9bcd4ff7
+  full_name: "__traceiter_android_rvh_schedule_bug"
+}
+elf_symbol {
+  id: 0x0f807f10
+  name: "__traceiter_android_rvh_select_fallback_rq"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbcbc7686
+  type_id: 0x9a343225
+  full_name: "__traceiter_android_rvh_select_fallback_rq"
 }
 elf_symbol {
   id: 0xe48752ef
@@ -312850,6 +313177,24 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_set_task_cpu"
 }
 elf_symbol {
+  id: 0x9b0cc890
+  name: "__traceiter_android_rvh_set_user_nice"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb9c53c54
+  type_id: 0x9bd6ff14
+  full_name: "__traceiter_android_rvh_set_user_nice"
+}
+elf_symbol {
+  id: 0xa01b20ce
+  name: "__traceiter_android_rvh_setscheduler"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3b402faf
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_android_rvh_setscheduler"
+}
+elf_symbol {
   id: 0x46515de8
   name: "__traceiter_android_rvh_show_max_freq"
   is_defined: true
@@ -312895,6 +313240,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_ttwu_cond"
 }
 elf_symbol {
+  id: 0xcce6f612
+  name: "__traceiter_android_rvh_uclamp_eff_get"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbbfb5d13
+  type_id: 0x9bca85c1
+  full_name: "__traceiter_android_rvh_uclamp_eff_get"
+}
+elf_symbol {
   id: 0xcd824552
   name: "__traceiter_android_rvh_update_cpu_capacity"
   is_defined: true
@@ -312920,6 +313274,15 @@ elf_symbol {
   crc: 0x9b6452c3
   type_id: 0x9a33392f
   full_name: "__traceiter_android_rvh_update_thermal_stats"
+}
+elf_symbol {
+  id: 0x13c17b96
+  name: "__traceiter_android_rvh_util_est_update"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd395a231
+  type_id: 0x9b922d94
+  full_name: "__traceiter_android_rvh_util_est_update"
 }
 elf_symbol {
   id: 0xebcd0234
@@ -312956,6 +313319,15 @@ elf_symbol {
   crc: 0xd8cc2a03
   type_id: 0x9bc0fd25
   full_name: "__traceiter_android_vh_binder_wakeup_ilocked"
+}
+elf_symbol {
+  id: 0xe479b209
+  name: "__traceiter_android_vh_build_sched_domains"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf1522f52
+  type_id: 0x9a1a471c
+  full_name: "__traceiter_android_vh_build_sched_domains"
 }
 elf_symbol {
   id: 0x9247dcb1
@@ -313001,6 +313373,24 @@ elf_symbol {
   crc: 0xb028d8b5
   type_id: 0x9bf7b86e
   full_name: "__traceiter_android_vh_do_wake_up_sync"
+}
+elf_symbol {
+  id: 0x42312ccc
+  name: "__traceiter_android_vh_dump_throttled_rt_tasks"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1a34d1a3
+  type_id: 0x9a17d2c3
+  full_name: "__traceiter_android_vh_dump_throttled_rt_tasks"
+}
+elf_symbol {
+  id: 0x5ecff02f
+  name: "__traceiter_android_vh_free_task"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xeed5e8e1
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_android_vh_free_task"
 }
 elf_symbol {
   id: 0xe172d11a
@@ -313109,6 +313499,15 @@ elf_symbol {
   crc: 0x91bb4545
   type_id: 0x9b17b01e
   full_name: "__traceiter_android_vh_scheduler_tick"
+}
+elf_symbol {
+  id: 0xa2fe718f
+  name: "__traceiter_android_vh_setscheduler_uclamp"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x33b0d86d
+  type_id: 0x9bc302e5
+  full_name: "__traceiter_android_vh_setscheduler_uclamp"
 }
 elf_symbol {
   id: 0xe7f6f975
@@ -313435,6 +313834,15 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_can_migrate_task"
 }
 elf_symbol {
+  id: 0x60b5a917
+  name: "__tracepoint_android_rvh_check_preempt_tick"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xd8871c3f
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_check_preempt_tick"
+}
+elf_symbol {
   id: 0x1dd402e6
   name: "__tracepoint_android_rvh_check_preempt_wakeup"
   is_defined: true
@@ -313442,6 +313850,15 @@ elf_symbol {
   crc: 0x7e34ad6c
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_check_preempt_wakeup"
+}
+elf_symbol {
+  id: 0x070d1e2a
+  name: "__tracepoint_android_rvh_check_preempt_wakeup_ignore"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xe4c0aab3
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_check_preempt_wakeup_ignore"
 }
 elf_symbol {
   id: 0xf4fe0429
@@ -313462,6 +313879,42 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_cpu_cgroup_online"
 }
 elf_symbol {
+  id: 0x05576f29
+  name: "__tracepoint_android_rvh_cpu_overutilized"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x29b33046
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_cpu_overutilized"
+}
+elf_symbol {
+  id: 0x3eb0f084
+  name: "__tracepoint_android_rvh_dequeue_entity"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x5f0191c3
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_dequeue_entity"
+}
+elf_symbol {
+  id: 0x832ab9cf
+  name: "__tracepoint_android_rvh_dequeue_task"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xf992211e
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_dequeue_task"
+}
+elf_symbol {
+  id: 0xaa8affb8
+  name: "__tracepoint_android_rvh_dequeue_task_fair"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x34684643
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_dequeue_task_fair"
+}
+elf_symbol {
   id: 0x411e7a56
   name: "__tracepoint_android_rvh_do_sched_yield"
   is_defined: true
@@ -313469,6 +313922,51 @@ elf_symbol {
   crc: 0xe4ee9cad
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_do_sched_yield"
+}
+elf_symbol {
+  id: 0xf9b36d15
+  name: "__tracepoint_android_rvh_enqueue_entity"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xa9c271c6
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_enqueue_entity"
+}
+elf_symbol {
+  id: 0xbade8646
+  name: "__tracepoint_android_rvh_enqueue_task"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x55965c95
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_enqueue_task"
+}
+elf_symbol {
+  id: 0x395b2a73
+  name: "__tracepoint_android_rvh_enqueue_task_fair"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x6eb0e4b8
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_enqueue_task_fair"
+}
+elf_symbol {
+  id: 0x4a5c5988
+  name: "__tracepoint_android_rvh_entity_tick"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x966e8ae2
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_entity_tick"
+}
+elf_symbol {
+  id: 0xb05fc507
+  name: "__tracepoint_android_rvh_find_busiest_group"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x49269776
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_find_busiest_group"
 }
 elf_symbol {
   id: 0xe0cf8a85
@@ -313487,6 +313985,15 @@ elf_symbol {
   crc: 0xd1276946
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_find_lowest_rq"
+}
+elf_symbol {
+  id: 0xa6457550
+  name: "__tracepoint_android_rvh_finish_prio_fork"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x33e0a813
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_finish_prio_fork"
 }
 elf_symbol {
   id: 0xb894fcfc
@@ -313552,6 +314059,33 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_new_task_stats"
 }
 elf_symbol {
+  id: 0x18752990
+  name: "__tracepoint_android_rvh_pick_next_entity"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x99d20b2c
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_pick_next_entity"
+}
+elf_symbol {
+  id: 0x448fc4e4
+  name: "__tracepoint_android_rvh_place_entity"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8b5c0688
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_place_entity"
+}
+elf_symbol {
+  id: 0x50605d97
+  name: "__tracepoint_android_rvh_prepare_prio_fork"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xadd0283e
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_prepare_prio_fork"
+}
+elf_symbol {
   id: 0x18bac297
   name: "__tracepoint_android_rvh_replace_next_task_fair"
   is_defined: true
@@ -313561,6 +314095,15 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_replace_next_task_fair"
 }
 elf_symbol {
+  id: 0x69e37d02
+  name: "__tracepoint_android_rvh_rtmutex_prepare_setprio"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7740c625
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_rtmutex_prepare_setprio"
+}
+elf_symbol {
   id: 0xeda5c5b0
   name: "__tracepoint_android_rvh_rto_next_cpu"
   is_defined: true
@@ -313568,6 +314111,15 @@ elf_symbol {
   crc: 0x81a1754b
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_rto_next_cpu"
+}
+elf_symbol {
+  id: 0x3cd58ada
+  name: "__tracepoint_android_rvh_sched_balance_rt"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb60d730e
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_sched_balance_rt"
 }
 elf_symbol {
   id: 0xad77fe31
@@ -313595,6 +314147,15 @@ elf_symbol {
   crc: 0x39d63958
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_sched_exec"
+}
+elf_symbol {
+  id: 0xdacb8e65
+  name: "__tracepoint_android_rvh_sched_fork"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x62081353
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_sched_fork"
 }
 elf_symbol {
   id: 0xf04adbae
@@ -313633,6 +314194,15 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_sched_nohz_balancer_kick"
 }
 elf_symbol {
+  id: 0x7babd1c5
+  name: "__tracepoint_android_rvh_sched_rebalance_domains"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1149ef27
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_sched_rebalance_domains"
+}
+elf_symbol {
   id: 0x43527efa
   name: "__tracepoint_android_rvh_sched_setaffinity"
   is_defined: true
@@ -313649,6 +314219,24 @@ elf_symbol {
   crc: 0xb6bce8f8
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_schedule"
+}
+elf_symbol {
+  id: 0xa5be18ba
+  name: "__tracepoint_android_rvh_schedule_bug"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x0650a8c4
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_schedule_bug"
+}
+elf_symbol {
+  id: 0x0daed96e
+  name: "__tracepoint_android_rvh_select_fallback_rq"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x65c25846
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_select_fallback_rq"
 }
 elf_symbol {
   id: 0x3bb904a5
@@ -313696,6 +314284,24 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_set_task_cpu"
 }
 elf_symbol {
+  id: 0x42fff08e
+  name: "__tracepoint_android_rvh_set_user_nice"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x4529c9f1
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_set_user_nice"
+}
+elf_symbol {
+  id: 0xe48123a4
+  name: "__tracepoint_android_rvh_setscheduler"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xfa177030
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_setscheduler"
+}
+elf_symbol {
   id: 0xe8cacf26
   name: "__tracepoint_android_rvh_show_max_freq"
   is_defined: true
@@ -313741,6 +314347,15 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_ttwu_cond"
 }
 elf_symbol {
+  id: 0x64e2c288
+  name: "__tracepoint_android_rvh_uclamp_eff_get"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x76a8e7d1
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_uclamp_eff_get"
+}
+elf_symbol {
   id: 0xdc2af26c
   name: "__tracepoint_android_rvh_update_cpu_capacity"
   is_defined: true
@@ -313766,6 +314381,15 @@ elf_symbol {
   crc: 0x2c27bcc8
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_update_thermal_stats"
+}
+elf_symbol {
+  id: 0xa68c0f10
+  name: "__tracepoint_android_rvh_util_est_update"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb2c941f9
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_util_est_update"
 }
 elf_symbol {
   id: 0xdcf22716
@@ -313802,6 +314426,15 @@ elf_symbol {
   crc: 0x220013f3
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_binder_wakeup_ilocked"
+}
+elf_symbol {
+  id: 0x0d3c7607
+  name: "__tracepoint_android_vh_build_sched_domains"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xe9491ecd
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_build_sched_domains"
 }
 elf_symbol {
   id: 0x26324a1f
@@ -313847,6 +314480,24 @@ elf_symbol {
   crc: 0x24bef402
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_do_wake_up_sync"
+}
+elf_symbol {
+  id: 0x988719fa
+  name: "__tracepoint_android_vh_dump_throttled_rt_tasks"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xd29bebac
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_dump_throttled_rt_tasks"
+}
+elf_symbol {
+  id: 0xe6918e09
+  name: "__tracepoint_android_vh_free_task"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x25db8da7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_free_task"
 }
 elf_symbol {
   id: 0xbacc3060
@@ -313955,6 +314606,15 @@ elf_symbol {
   crc: 0xa3e74b24
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_scheduler_tick"
+}
+elf_symbol {
+  id: 0x923147c1
+  name: "__tracepoint_android_vh_setscheduler_uclamp"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7ae79b81
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_setscheduler_uclamp"
 }
 elf_symbol {
   id: 0x42ad45a3
@@ -353933,8 +354593,16 @@ symbols {
     value: 0xadc13d20
   }
   symbol {
+    key: "__traceiter_android_rvh_check_preempt_tick"
+    value: 0xc93c7d6d
+  }
+  symbol {
     key: "__traceiter_android_rvh_check_preempt_wakeup"
     value: 0x9d00b8f0
+  }
+  symbol {
+    key: "__traceiter_android_rvh_check_preempt_wakeup_ignore"
+    value: 0x5e9397c4
   }
   symbol {
     key: "__traceiter_android_rvh_cpu_cgroup_attach"
@@ -353945,8 +354613,44 @@ symbols {
     value: 0x6c4603a3
   }
   symbol {
+    key: "__traceiter_android_rvh_cpu_overutilized"
+    value: 0x4053abff
+  }
+  symbol {
+    key: "__traceiter_android_rvh_dequeue_entity"
+    value: 0x8f1b1c1e
+  }
+  symbol {
+    key: "__traceiter_android_rvh_dequeue_task"
+    value: 0xd6290b85
+  }
+  symbol {
+    key: "__traceiter_android_rvh_dequeue_task_fair"
+    value: 0x3e4ab4f6
+  }
+  symbol {
     key: "__traceiter_android_rvh_do_sched_yield"
     value: 0x81449840
+  }
+  symbol {
+    key: "__traceiter_android_rvh_enqueue_entity"
+    value: 0x6682daab
+  }
+  symbol {
+    key: "__traceiter_android_rvh_enqueue_task"
+    value: 0x24dfaeb0
+  }
+  symbol {
+    key: "__traceiter_android_rvh_enqueue_task_fair"
+    value: 0xd5b05c65
+  }
+  symbol {
+    key: "__traceiter_android_rvh_entity_tick"
+    value: 0xebecb2ce
+  }
+  symbol {
+    key: "__traceiter_android_rvh_find_busiest_group"
+    value: 0xf94ce10d
   }
   symbol {
     key: "__traceiter_android_rvh_find_busiest_queue"
@@ -353955,6 +354659,10 @@ symbols {
   symbol {
     key: "__traceiter_android_rvh_find_lowest_rq"
     value: 0x8bd49e8e
+  }
+  symbol {
+    key: "__traceiter_android_rvh_finish_prio_fork"
+    value: 0xf6f47b2e
   }
   symbol {
     key: "__traceiter_android_rvh_flush_task"
@@ -353985,12 +354693,32 @@ symbols {
     value: 0x0d22882d
   }
   symbol {
+    key: "__traceiter_android_rvh_pick_next_entity"
+    value: 0x88e9b222
+  }
+  symbol {
+    key: "__traceiter_android_rvh_place_entity"
+    value: 0x097e467e
+  }
+  symbol {
+    key: "__traceiter_android_rvh_prepare_prio_fork"
+    value: 0xeccbc3c1
+  }
+  symbol {
     key: "__traceiter_android_rvh_replace_next_task_fair"
     value: 0xe3e24295
   }
   symbol {
+    key: "__traceiter_android_rvh_rtmutex_prepare_setprio"
+    value: 0xd90a9a58
+  }
+  symbol {
     key: "__traceiter_android_rvh_rto_next_cpu"
     value: 0xbf64b0b6
+  }
+  symbol {
+    key: "__traceiter_android_rvh_sched_balance_rt"
+    value: 0xb25ca194
   }
   symbol {
     key: "__traceiter_android_rvh_sched_cpu_dying"
@@ -354003,6 +354731,10 @@ symbols {
   symbol {
     key: "__traceiter_android_rvh_sched_exec"
     value: 0x2614daf2
+  }
+  symbol {
+    key: "__traceiter_android_rvh_sched_fork"
+    value: 0x33e2d3a7
   }
   symbol {
     key: "__traceiter_android_rvh_sched_fork_init"
@@ -354021,12 +354753,24 @@ symbols {
     value: 0x671862a7
   }
   symbol {
+    key: "__traceiter_android_rvh_sched_rebalance_domains"
+    value: 0x415dd5e7
+  }
+  symbol {
     key: "__traceiter_android_rvh_sched_setaffinity"
     value: 0xd7ca6cc8
   }
   symbol {
     key: "__traceiter_android_rvh_schedule"
     value: 0x2bb177b4
+  }
+  symbol {
+    key: "__traceiter_android_rvh_schedule_bug"
+    value: 0x40bb3f78
+  }
+  symbol {
+    key: "__traceiter_android_rvh_select_fallback_rq"
+    value: 0x0f807f10
   }
   symbol {
     key: "__traceiter_android_rvh_select_task_rq_fair"
@@ -354049,6 +354793,14 @@ symbols {
     value: 0xc6a28b4a
   }
   symbol {
+    key: "__traceiter_android_rvh_set_user_nice"
+    value: 0x9b0cc890
+  }
+  symbol {
+    key: "__traceiter_android_rvh_setscheduler"
+    value: 0xa01b20ce
+  }
+  symbol {
     key: "__traceiter_android_rvh_show_max_freq"
     value: 0x46515de8
   }
@@ -354069,6 +354821,10 @@ symbols {
     value: 0x23097c08
   }
   symbol {
+    key: "__traceiter_android_rvh_uclamp_eff_get"
+    value: 0xcce6f612
+  }
+  symbol {
     key: "__traceiter_android_rvh_update_cpu_capacity"
     value: 0xcd824552
   }
@@ -354079,6 +354835,10 @@ symbols {
   symbol {
     key: "__traceiter_android_rvh_update_thermal_stats"
     value: 0xc1ba0eb6
+  }
+  symbol {
+    key: "__traceiter_android_rvh_util_est_update"
+    value: 0x13c17b96
   }
   symbol {
     key: "__traceiter_android_rvh_wake_up_new_task"
@@ -354095,6 +354855,10 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_binder_wakeup_ilocked"
     value: 0x53fba77d
+  }
+  symbol {
+    key: "__traceiter_android_vh_build_sched_domains"
+    value: 0xe479b209
   }
   symbol {
     key: "__traceiter_android_vh_cpu_idle_enter"
@@ -354115,6 +354879,14 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_do_wake_up_sync"
     value: 0x9dbd7b92
+  }
+  symbol {
+    key: "__traceiter_android_vh_dump_throttled_rt_tasks"
+    value: 0x42312ccc
+  }
+  symbol {
+    key: "__traceiter_android_vh_free_task"
+    value: 0x5ecff02f
   }
   symbol {
     key: "__traceiter_android_vh_ftrace_dump_buffer"
@@ -354163,6 +354935,10 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_scheduler_tick"
     value: 0xb841c45e
+  }
+  symbol {
+    key: "__traceiter_android_vh_setscheduler_uclamp"
+    value: 0xa2fe718f
   }
   symbol {
     key: "__traceiter_android_vh_show_resume_epoch_val"
@@ -354309,8 +355085,16 @@ symbols {
     value: 0xfe3875f6
   }
   symbol {
+    key: "__tracepoint_android_rvh_check_preempt_tick"
+    value: 0x60b5a917
+  }
+  symbol {
     key: "__tracepoint_android_rvh_check_preempt_wakeup"
     value: 0x1dd402e6
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_check_preempt_wakeup_ignore"
+    value: 0x070d1e2a
   }
   symbol {
     key: "__tracepoint_android_rvh_cpu_cgroup_attach"
@@ -354321,8 +355105,44 @@ symbols {
     value: 0xb2f08341
   }
   symbol {
+    key: "__tracepoint_android_rvh_cpu_overutilized"
+    value: 0x05576f29
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_dequeue_entity"
+    value: 0x3eb0f084
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_dequeue_task"
+    value: 0x832ab9cf
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_dequeue_task_fair"
+    value: 0xaa8affb8
+  }
+  symbol {
     key: "__tracepoint_android_rvh_do_sched_yield"
     value: 0x411e7a56
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_enqueue_entity"
+    value: 0xf9b36d15
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_enqueue_task"
+    value: 0xbade8646
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_enqueue_task_fair"
+    value: 0x395b2a73
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_entity_tick"
+    value: 0x4a5c5988
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_find_busiest_group"
+    value: 0xb05fc507
   }
   symbol {
     key: "__tracepoint_android_rvh_find_busiest_queue"
@@ -354331,6 +355151,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_rvh_find_lowest_rq"
     value: 0x1a0c7568
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_finish_prio_fork"
+    value: 0xa6457550
   }
   symbol {
     key: "__tracepoint_android_rvh_flush_task"
@@ -354361,12 +355185,32 @@ symbols {
     value: 0x62726c6f
   }
   symbol {
+    key: "__tracepoint_android_rvh_pick_next_entity"
+    value: 0x18752990
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_place_entity"
+    value: 0x448fc4e4
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_prepare_prio_fork"
+    value: 0x50605d97
+  }
+  symbol {
     key: "__tracepoint_android_rvh_replace_next_task_fair"
     value: 0x18bac297
   }
   symbol {
+    key: "__tracepoint_android_rvh_rtmutex_prepare_setprio"
+    value: 0x69e37d02
+  }
+  symbol {
     key: "__tracepoint_android_rvh_rto_next_cpu"
     value: 0xeda5c5b0
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_sched_balance_rt"
+    value: 0x3cd58ada
   }
   symbol {
     key: "__tracepoint_android_rvh_sched_cpu_dying"
@@ -354379,6 +355223,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_rvh_sched_exec"
     value: 0x0b064224
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_sched_fork"
+    value: 0xdacb8e65
   }
   symbol {
     key: "__tracepoint_android_rvh_sched_fork_init"
@@ -354397,12 +355245,24 @@ symbols {
     value: 0x8ffb9d8d
   }
   symbol {
+    key: "__tracepoint_android_rvh_sched_rebalance_domains"
+    value: 0x7babd1c5
+  }
+  symbol {
     key: "__tracepoint_android_rvh_sched_setaffinity"
     value: 0x43527efa
   }
   symbol {
     key: "__tracepoint_android_rvh_schedule"
     value: 0x51af6212
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_schedule_bug"
+    value: 0xa5be18ba
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_select_fallback_rq"
+    value: 0x0daed96e
   }
   symbol {
     key: "__tracepoint_android_rvh_select_task_rq_fair"
@@ -354425,6 +355285,14 @@ symbols {
     value: 0xc5049f7c
   }
   symbol {
+    key: "__tracepoint_android_rvh_set_user_nice"
+    value: 0x42fff08e
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_setscheduler"
+    value: 0xe48123a4
+  }
+  symbol {
     key: "__tracepoint_android_rvh_show_max_freq"
     value: 0xe8cacf26
   }
@@ -354445,6 +355313,10 @@ symbols {
     value: 0xafe46ece
   }
   symbol {
+    key: "__tracepoint_android_rvh_uclamp_eff_get"
+    value: 0x64e2c288
+  }
+  symbol {
     key: "__tracepoint_android_rvh_update_cpu_capacity"
     value: 0xdc2af26c
   }
@@ -354455,6 +355327,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_rvh_update_thermal_stats"
     value: 0x0e614ab0
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_util_est_update"
+    value: 0xa68c0f10
   }
   symbol {
     key: "__tracepoint_android_rvh_wake_up_new_task"
@@ -354471,6 +355347,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_binder_wakeup_ilocked"
     value: 0x506628ab
+  }
+  symbol {
+    key: "__tracepoint_android_vh_build_sched_domains"
+    value: 0x0d3c7607
   }
   symbol {
     key: "__tracepoint_android_vh_cpu_idle_enter"
@@ -354491,6 +355371,14 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_do_wake_up_sync"
     value: 0xe2d7542c
+  }
+  symbol {
+    key: "__tracepoint_android_vh_dump_throttled_rt_tasks"
+    value: 0x988719fa
+  }
+  symbol {
+    key: "__tracepoint_android_vh_free_task"
+    value: 0xe6918e09
   }
   symbol {
     key: "__tracepoint_android_vh_ftrace_dump_buffer"
@@ -354539,6 +355427,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_scheduler_tick"
     value: 0xff2bccb8
+  }
+  symbol {
+    key: "__tracepoint_android_vh_setscheduler_uclamp"
+    value: 0x923147c1
   }
   symbol {
     key: "__tracepoint_android_vh_show_resume_epoch_val"
