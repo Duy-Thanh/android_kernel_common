@@ -18,6 +18,8 @@ struct sched_entity;
 struct task_struct;
 struct uclamp_se;
 struct sched_attr;
+struct kernel_clone_args;
+struct task_group;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_select_task_rq_fair,
 	TP_PROTO(struct task_struct *p, int prev_cpu, int sd_flag, int wake_flags, int *new_cpu),
@@ -424,6 +426,14 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_blocked_fair,
 DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
 	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
 	TP_ARGS(now, rq, tsk, running), 1);
+
+DECLARE_HOOK(android_rvh_sched_cgroup_fork,
+	TP_PROTO(struct task_struct *p, struct kernel_clone_args *kargs, struct task_group **tg),
+	TP_ARGS(p, kargs, tg));
+
+DECLARE_HOOK(android_rvh_sched_change_group,
+	TP_PROTO(struct task_struct *tsk, int type, struct task_group **tg),
+	TP_ARGS(tsk, type, tg));
 
 /* macro versions of hooks are no longer required */
 
