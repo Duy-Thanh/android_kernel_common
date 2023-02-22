@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b16a1c5_6be431be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2023-02-22T17:54:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9906f3f_efa136f6",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 9
+      },
+      "revId": "a2bc499bf2dbc348e4156e387184eecac4fd0529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "222e61e7_c83096e6",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b8c4b3_256af2f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2023-02-22T17:54:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "222e61e7_c83096e6",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "a2bc499bf2dbc348e4156e387184eecac4fd0529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a11d37a_b52eb97b",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-02-22T16:47:50Z",
       "side": 1,
       "message": "no, this \"fixes\" the -Werror change, it does not fix any rcu code.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 85
+      },
+      "revId": "a2bc499bf2dbc348e4156e387184eecac4fd0529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e797aee0_78fd2ada",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2023-02-22T17:54:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a11d37a_b52eb97b",
       "range": {
         "startLine": 29,
         "startChar": 0,
