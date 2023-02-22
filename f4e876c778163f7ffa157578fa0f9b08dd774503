@@ -52,6 +52,24 @@
       "parentUuid": "34109669_26707d80",
       "revId": "f4e876c778163f7ffa157578fa0f9b08dd774503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6096b38b_edb5edc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-02-22T23:25:21Z",
+      "side": 1,
+      "message": "According to https://buganizer.corp.google.com/issues/267486295#comment10, this export is needed not only for minidump but for other reasons as well. I think we won\u0027t need it after TJ upstreams his memcg-based dmabuf accounting patchset but until then we have to export it.",
+      "parentUuid": "849ac01d_217e3a1f",
+      "revId": "f4e876c778163f7ffa157578fa0f9b08dd774503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
