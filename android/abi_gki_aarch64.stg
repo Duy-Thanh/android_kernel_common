@@ -299754,6 +299754,12 @@ function {
   parameter_id: 0x0a134144
 }
 function {
+  id: 0x9b3a4e29
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x257d12af
+}
+function {
   id: 0x9b3a71c6
   return_type_id: 0x6720d32f
   parameter_id: 0x1c3dbe5a
@@ -313183,6 +313189,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_ufs_send_uic_command"
 }
 elf_symbol {
+  id: 0x810f6abf
+  name: "__traceiter_android_vh_ufs_update_sdev"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5afd339e
+  type_id: 0x9b3a4e29
+  full_name: "__traceiter_android_vh_ufs_update_sdev"
+}
+elf_symbol {
   id: 0xcc8dcd0c
   name: "__traceiter_android_vh_ufs_update_sysfs"
   is_defined: true
@@ -314009,6 +314024,15 @@ elf_symbol {
   crc: 0xa319f0c8
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_ufs_send_uic_command"
+}
+elf_symbol {
+  id: 0xb7ba0c6d
+  name: "__tracepoint_android_vh_ufs_update_sdev"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1b2613e0
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_ufs_update_sdev"
 }
 elf_symbol {
   id: 0xaf7a4dba
@@ -354142,6 +354166,10 @@ symbols {
     value: 0x4f428de5
   }
   symbol {
+    key: "__traceiter_android_vh_ufs_update_sdev"
+    value: 0x810f6abf
+  }
+  symbol {
     key: "__traceiter_android_vh_ufs_update_sysfs"
     value: 0xcc8dcd0c
   }
@@ -354508,6 +354536,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_ufs_send_uic_command"
     value: 0x5a3916cb
+  }
+  symbol {
+    key: "__tracepoint_android_vh_ufs_update_sdev"
+    value: 0xb7ba0c6d
   }
   symbol {
     key: "__tracepoint_android_vh_ufs_update_sysfs"
