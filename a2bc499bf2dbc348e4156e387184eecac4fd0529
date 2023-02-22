@@ -85,6 +85,24 @@
       "message": "minor changelog text changes please.",
       "revId": "a2bc499bf2dbc348e4156e387184eecac4fd0529",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "143da283_13a4d896",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2023-02-22T17:51:13Z",
+      "side": 1,
+      "message": "addressed review comments.",
+      "parentUuid": "5c1b4d34_3b8b7ed9",
+      "revId": "a2bc499bf2dbc348e4156e387184eecac4fd0529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
