@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc554a0_8e2fb1f4",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-22T08:27:43Z",
+      "side": 1,
+      "message": "should not be added to this .h file, it is not needed here.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "8fad863cf78afce3a11acbe388be9587edbe4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "153e5212_b5a16857",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-22T08:27:43Z",
+      "side": 1,
+      "message": "note that if you add these, they are ONLY allowed to be used for upstream ABI changes that happen in LTS releases, and not for any Android-specific abi changes and can not be used by anyone else.\n\nIs that what you want here?",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 2
+      },
+      "revId": "8fad863cf78afce3a11acbe388be9587edbe4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
