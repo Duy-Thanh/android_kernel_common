@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "333f0dee_1e5d76a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-22T08:29:52Z",
+      "side": 1,
+      "message": "Again, please submit this type of functionality upstream first.",
+      "parentUuid": "773fd5dc_164bccad",
+      "range": {
+        "startLine": 9,
+        "startChar": 30,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "b4de11fcccaea1aa88f9d41b6ea451291fb8695d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad040cc7_4fb8d728",
         "filename": "arch/arm64/net/bpf_jit_comp.c",
         "patchSetId": 2
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "Mmaybe the description is not clean., sorry for it.\nKernel will alloc memory to store the eBPF native code. For some eBPF filters, allow at least 128 extra bytes to insert a random section of illegal/arch-dep instructions. So this memory space will bigger than the space with eBPF native code.And the start address of eBPF native code is a random address place in this memory.",
       "parentUuid": "ad040cc7_4fb8d728",
+      "range": {
+        "startLine": 1126,
+        "startChar": 0,
+        "endLine": 1126,
+        "endChar": 62
+      },
+      "revId": "b4de11fcccaea1aa88f9d41b6ea451291fb8695d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ce53d43_a4d39d02",
+        "filename": "arch/arm64/net/bpf_jit_comp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-22T08:29:52Z",
+      "side": 1,
+      "message": "Please document this much better when you submit the needed changes upstream.",
+      "parentUuid": "9d31e860_1d1dbb32",
       "range": {
         "startLine": 1126,
         "startChar": 0,
@@ -180,6 +228,30 @@
       "side": 1,
       "message": "I have test this code out of the architecture-specific filed.",
       "parentUuid": "0a6fa9f1_ebf83fac",
+      "range": {
+        "startLine": 1128,
+        "startChar": 8,
+        "endLine": 1128,
+        "endChar": 13
+      },
+      "revId": "b4de11fcccaea1aa88f9d41b6ea451291fb8695d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cbded25_6259f701",
+        "filename": "arch/arm64/net/bpf_jit_comp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-22T08:29:52Z",
+      "side": 1,
+      "message": "not resolved yet.",
+      "parentUuid": "0edc14aa_1508caf6",
       "range": {
         "startLine": 1128,
         "startChar": 8,
