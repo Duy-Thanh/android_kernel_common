@@ -175,6 +175,11 @@ static int debug_kinfo_probe(struct platform_device *pdev)
 #endif
 	info->enabled_module_scmversion = IS_ENABLED(CONFIG_MODULE_SCMVERSION);
 	info->mod_scmversion_offset = offsetof(struct module, scmversion);
+	info->va_bits = VA_BITS;
+	info->page_offset = PAGE_OFFSET;
+	info->page_end = PAGE_END;
+	info->phys_offset = PHYS_OFFSET;
+	info->kimage_voffset = kimage_voffset;
 	update_kernel_all_info(all_info);
 
 	return 0;

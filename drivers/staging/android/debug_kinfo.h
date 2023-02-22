@@ -64,6 +64,13 @@ struct kernel_info {
 	/* For module scmversion */
 	__u32 enabled_module_scmversion;
 	__u32 mod_scmversion_offset;
+
+	/* For kernel virt_to_phys */
+	__u32 va_bits;
+	__u64 page_offset;
+	__u64 page_end;
+	__u64 phys_offset;
+	__u64 kimage_voffset;
 } __packed;
 
 struct kernel_all_info {
