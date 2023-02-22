@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9906f3f_efa136f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-22T16:47:50Z",
+      "side": 1,
+      "message": "nit, just use \"commit XXXX (\"....\")\" in the changelog text here, no need ever for footnotes, that just is madness and complicates things.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 9
+      },
+      "revId": "a2bc499bf2dbc348e4156e387184eecac4fd0529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "222e61e7_c83096e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-22T16:47:50Z",
+      "side": 1,
+      "message": "12 characters should always be used, as per the upstream kernel documentation.",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "a2bc499bf2dbc348e4156e387184eecac4fd0529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a11d37a_b52eb97b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-22T16:47:50Z",
+      "side": 1,
+      "message": "no, this \"fixes\" the -Werror change, it does not fix any rcu code.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 85
+      },
+      "revId": "a2bc499bf2dbc348e4156e387184eecac4fd0529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c1b4d34_3b8b7ed9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-22T16:47:50Z",
+      "side": 1,
+      "message": "minor changelog text changes please.",
+      "revId": "a2bc499bf2dbc348e4156e387184eecac4fd0529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
