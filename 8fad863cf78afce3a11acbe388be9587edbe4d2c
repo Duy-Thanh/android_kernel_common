@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96dcfc9b_087b7a30",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-23T07:45:12Z",
+      "side": 1,
+      "message": "Put the include in fscrypt.h instead please.",
+      "parentUuid": "b761fba3_28e68734",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "8fad863cf78afce3a11acbe388be9587edbe4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "153e5212_b5a16857",
         "filename": "include/linux/fscrypt.h",
         "patchSetId": 1
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I don\u0027t get your point exactly, but this is the cherry-pick from 41f53f8.\n(https://android-review.googlesource.com/c/kernel/common/+/1890135)\n\nWe have been merged this change to every android kernel version.\nThis is just for android-specific change, not for lts releases.",
       "parentUuid": "153e5212_b5a16857",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 2
+      },
+      "revId": "8fad863cf78afce3a11acbe388be9587edbe4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ddc17e4_fd3eaf47",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-23T07:45:12Z",
+      "side": 1,
+      "message": "The use of these macros are ONLY for LTS merges, not for any vendor or any other future changes.\n\nI\u0027ll gladly take this, but note that you can not use them, so I do not understand why you want them.",
+      "parentUuid": "f14647e3_69749ebc",
       "range": {
         "startLine": 180,
         "startChar": 1,
