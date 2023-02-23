@@ -779,6 +779,8 @@ static void mark_oom_victim(struct task_struct *tsk)
 	trace_mark_victim(tsk->pid);
 }
 
+EXPORT_TRACEPOINT_SYMBOL_GPL(mark_victim);
+
 /**
  * exit_oom_victim - note the exit of an OOM victim
  */
@@ -1260,3 +1262,5 @@ put_task:
 	return -ENOSYS;
 #endif /* CONFIG_MMU */
 }
+
+EXPORT_SYMBOL_GPL(out_of_memory);
