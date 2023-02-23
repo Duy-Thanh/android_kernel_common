@@ -1,0 +1,15 @@
+What:       /proc/memhealth/
+Date:       July 2023
+Contact:    carlosgalo@google.com
+Description:
+        This folder contains attributes that tracks different memory related signals.
+
+What:       /proc/memhealth/oom_victim_list
+Date:       July 2023
+Contact:    carlosgalo@google.com
+Description:
+        This file tracks out-of-memory (OOM) victims.
+        This attribute shows information about out-of-memory (OOM)
+        victims. The format is "<timestamp> <pid> <uid> <process_name>\n",
+        each value is separated by an empty space, and the end of an
+        entry is determined by a line break.

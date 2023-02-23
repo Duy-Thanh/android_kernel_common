@@ -102,4 +102,12 @@ config ANDROID_VENDOR_OEM_DATA
 
 	  If even slightly unsure, say Y.
 
+config ANDROID_MEMHEALTH
+	tristate "Android memory health module"
+	help
+	  Android module to expose memory health-related signals to userspace.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called android_memhealth.
+
 endmenu
