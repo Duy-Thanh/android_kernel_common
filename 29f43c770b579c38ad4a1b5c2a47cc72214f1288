@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cef33e9_eb08e1cc",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-02-23T17:50:53Z",
+      "side": 1,
+      "message": "Is this fine?",
+      "range": {
+        "startLine": 1084,
+        "startChar": 2,
+        "endLine": 1084,
+        "endChar": 28
+      },
+      "revId": "29f43c770b579c38ad4a1b5c2a47cc72214f1288",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
