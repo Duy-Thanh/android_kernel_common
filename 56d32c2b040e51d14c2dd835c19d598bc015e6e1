@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0ede18_3b43e9bb",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 3
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-23T19:59:19Z",
+      "side": 1,
+      "message": "should not be needed by any kernel driver.",
+      "range": {
+        "startLine": 553,
+        "startChar": 2,
+        "endLine": 553,
+        "endChar": 8
+      },
+      "revId": "56d32c2b040e51d14c2dd835c19d598bc015e6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
