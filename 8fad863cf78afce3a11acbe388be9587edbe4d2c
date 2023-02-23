@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b761fba3_28e68734",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1885635
+      },
+      "writtenOn": "2023-02-23T00:02:09Z",
+      "side": 1,
+      "message": "This is for fixing the build errors below.\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:180:2: error: type name requires a specifier or qualifier\n\n        ANDROID_KABI_RESERVE(1);\n\n        ^\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:180:23: error: expected parameter declarator\n\n        ANDROID_KABI_RESERVE(1);\n\n                             ^\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:180:23: error: expected \u0027)\u0027\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:180:22: note: to match this \u0027(\u0027\n\n        ANDROID_KABI_RESERVE(1);\n\n                            ^\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:180:22: error: a function declaration without a prototype is deprecated in all versions of C [-Werror,-Wstrict-prototypes]\n\n        ANDROID_KABI_RESERVE(1);\n\n                            ^\n\n                              void\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:181:2: error: type name requires a specifier or qualifier\n\n        ANDROID_KABI_RESERVE(2);\n\n        ^\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:181:23: error: expected parameter declarator\n\n        ANDROID_KABI_RESERVE(2);\n\n                             ^\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:181:23: error: expected \u0027)\u0027\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:181:22: note: to match this \u0027(\u0027\n\n        ANDROID_KABI_RESERVE(2);\n\n                            ^\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:181:22: error: a function declaration without a prototype is deprecated in all versions of C [-Werror,-Wstrict-prototypes]\n\n        ANDROID_KABI_RESERVE(2);\n\n                            ^\n\n                              void\n\n/home/jinwoo/bridge/repository/gkiVendorPaddingGoogleRequest/common/include/linux/fscrypt.h:181:2: error: duplicate member \u0027ANDROID_KABI_RESERVE\u0027\n\n        ANDROID_KABI_RESERVE(2);\n\n        ^",
+      "parentUuid": "6fc554a0_8e2fb1f4",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "8fad863cf78afce3a11acbe388be9587edbe4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "153e5212_b5a16857",
         "filename": "include/linux/fscrypt.h",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-22T08:27:43Z",
       "side": 1,
       "message": "note that if you add these, they are ONLY allowed to be used for upstream ABI changes that happen in LTS releases, and not for any Android-specific abi changes and can not be used by anyone else.\n\nIs that what you want here?",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 2
+      },
+      "revId": "8fad863cf78afce3a11acbe388be9587edbe4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f14647e3_69749ebc",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1885635
+      },
+      "writtenOn": "2023-02-23T00:02:09Z",
+      "side": 1,
+      "message": "I don\u0027t get your point exactly, but this is the cherry-pick from 41f53f8.\n(https://android-review.googlesource.com/c/kernel/common/+/1890135)\n\nWe have been merged this change to every android kernel version.\nThis is just for android-specific change, not for lts releases.",
+      "parentUuid": "153e5212_b5a16857",
       "range": {
         "startLine": 180,
         "startChar": 1,
