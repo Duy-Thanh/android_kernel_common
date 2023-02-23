@@ -778,6 +778,7 @@ static void mark_oom_victim(struct task_struct *tsk)
 	atomic_inc(&oom_victims);
 	trace_mark_victim(tsk->pid);
 }
+EXPORT_TRACEPOINT_SYMBOL_GPL(mark_victim);
 
 /**
  * exit_oom_victim - note the exit of an OOM victim
