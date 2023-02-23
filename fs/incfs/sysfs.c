@@ -33,11 +33,21 @@ static struct kobj_attribute name##_attr = __ATTR_RO(name)
 DECLARE_FEATURE_FLAG(corefs);
 DECLARE_FEATURE_FLAG(zstd);
 DECLARE_FEATURE_FLAG(v2);
+<<<<<<< HEAD   (d057d9 ANDROID: KVM: arm64: Move addr_is_allowed_memory() check int)
+=======
+DECLARE_FEATURE_FLAG(bugfix_throttling);
+DECLARE_FEATURE_FLAG(bugfix_inode_eviction);
+>>>>>>> CHANGE (f01e7d ANDROID: incremental fs: Evict inodes before freeing mount d)
 
 static struct attribute *attributes[] = {
 	&corefs_attr.attr,
 	&zstd_attr.attr,
 	&v2_attr.attr,
+<<<<<<< HEAD   (d057d9 ANDROID: KVM: arm64: Move addr_is_allowed_memory() check int)
+=======
+	&bugfix_throttling_attr.attr,
+	&bugfix_inode_eviction_attr.attr,
+>>>>>>> CHANGE (f01e7d ANDROID: incremental fs: Evict inodes before freeing mount d)
 	NULL,
 };
 
