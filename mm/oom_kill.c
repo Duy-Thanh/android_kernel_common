@@ -778,6 +778,7 @@ static void mark_oom_victim(struct task_struct *tsk)
 	atomic_inc(&oom_victims);
 	trace_mark_victim(tsk->pid);
 }
+EXPORT_TRACEPOINT_SYMBOL_GPL(mark_victim);
 
 /**
  * exit_oom_victim - note the exit of an OOM victim
@@ -1175,6 +1176,8 @@ bool out_of_memory(struct oom_control *oc)
 				 "Memory cgroup out of memory");
 	return !!oc->chosen;
 }
+/* TODO: for testing only, should be removed! */
+EXPORT_SYMBOL_GPL(out_of_memory);
 
 /*
  * The pagefault handler calls here because some allocation has failed. We have
