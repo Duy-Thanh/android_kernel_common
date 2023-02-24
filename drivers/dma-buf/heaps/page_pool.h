@@ -52,4 +52,7 @@ void dmabuf_page_pool_destroy(struct dmabuf_page_pool *pool);
 struct page *dmabuf_page_pool_alloc(struct dmabuf_page_pool *pool);
 void dmabuf_page_pool_free(struct dmabuf_page_pool *pool, struct page *page);
 
+/* get pool size in bytes */
+unsigned long dmabuf_page_pool_get_size(struct dmabuf_page_pool *pool);
+
 #endif /* _DMABUF_PAGE_POOL_H */

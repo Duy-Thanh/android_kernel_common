@@ -176,6 +176,23 @@ void dmabuf_page_pool_destroy(struct dmabuf_page_pool *pool)
 }
 EXPORT_SYMBOL_GPL(dmabuf_page_pool_destroy);
 
+unsigned long dmabuf_page_pool_get_size(struct dmabuf_page_pool *pool)
+{
+	int i;
+	unsigned long num_pages = 0;
+	struct dmabuf_page_pool_with_spinlock *container_pool =
+		container_of(pool, struct dmabuf_page_pool_with_spinlock, pool);
+
+	spin_lock(&container_pool->spinlock);
+	for (i = 0; i < POOL_TYPE_SIZE; ++i)
+		num_pages += pool->count[i];
+	spin_unlock(&container_pool->spinlock);
+	num_pages <<= pool->order; /* pool order is immutable */
+
+	return num_pages * PAGE_SIZE;
+}
+EXPORT_SYMBOL_GPL(dmabuf_page_pool_get_size);
+
 static int dmabuf_page_pool_do_shrink(struct dmabuf_page_pool *pool, gfp_t gfp_mask,
 				      int nr_to_scan)
 {
