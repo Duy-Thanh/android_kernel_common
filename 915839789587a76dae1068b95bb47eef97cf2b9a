@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf4a24b_52aa5f6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-02-24T14:31:37Z",
+      "side": 1,
+      "message": "Should be \n\n`Android: KVM: arm64: ...`",
+      "revId": "915839789587a76dae1068b95bb47eef97cf2b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31917c6e_3739a984",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-02-24T14:31:37Z",
+      "side": 1,
+      "message": "This is a different change that must go into its own patch. Especially here as we have a change for userspace.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 48
+      },
+      "revId": "915839789587a76dae1068b95bb47eef97cf2b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
