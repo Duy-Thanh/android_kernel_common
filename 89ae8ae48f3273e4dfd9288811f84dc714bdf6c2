@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/270550933",
       "revId": "89ae8ae48f3273e4dfd9288811f84dc714bdf6c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d79ce5_9d5a8455",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2023-02-24T02:52:33Z",
+      "side": 1,
+      "message": "Hi, please help to add \"Bug: 270550933\" in the commit message",
+      "revId": "89ae8ae48f3273e4dfd9288811f84dc714bdf6c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
