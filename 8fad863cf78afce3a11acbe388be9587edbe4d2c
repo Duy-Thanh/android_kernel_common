@@ -141,6 +141,30 @@
       },
       "revId": "8fad863cf78afce3a11acbe388be9587edbe4d2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4860cf5b_6442e816",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1885635
+      },
+      "writtenOn": "2023-02-24T00:56:57Z",
+      "side": 1,
+      "message": "According to the history, Eric sumbitted the changes for us in two times.\n    1. https://android-review.googlesource.com/c/kernel/common/+/1754704 : Added \"ANDROID_KABI_RESERVE(X)\"\n    2. https://android-review.googlesource.com/c/kernel/common/+/1754705 : Added \"ANDROID_OEM_DATA_ARRAY(1, 4)\"\n\nUnfortunately, I don\u0027t remember why he submitted the first change at the time.\nI doubt if the first change was just to reserve some bytes before \"ANDROID_OEM_DATA_ARRAY(1, 4)\".\nCould you ask Eric what the intent was to submit the code.\n\nAnyway, I\u0027ve cherry-picked those two changes into every android kernel version.\nSo that\u0027s why I requested it this time also.\n\nBy the way, I\u0027m only using \"ANDROID_OEM_DATA_ARRAY1[4]\".\nSo as you said, I only need the second change which I\u0027m planning to cherry-pick after this one is submitted.",
+      "parentUuid": "4ddc17e4_fd3eaf47",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 2
+      },
+      "revId": "8fad863cf78afce3a11acbe388be9587edbe4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
