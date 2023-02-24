@@ -34,6 +34,24 @@
       "parentUuid": "e88a5d11_d2cec522",
       "revId": "7ec5e86043b1eb8d1a1cec95095f50275216f571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c70a32e5_37ef1b8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-24T08:40:05Z",
+      "side": 1,
+      "message": "Please provide proper git information, the Link does not show that.",
+      "parentUuid": "99885485_e005bbf1",
+      "revId": "7ec5e86043b1eb8d1a1cec95095f50275216f571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
