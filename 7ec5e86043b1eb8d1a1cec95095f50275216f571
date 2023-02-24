@@ -16,6 +16,24 @@
       "message": "Since this has a UAPI change, we should wait for it to land in mainline. Currently at 6.2-rc6 so should be less than two weeks.",
       "revId": "7ec5e86043b1eb8d1a1cec95095f50275216f571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99885485_e005bbf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2023-02-24T06:18:46Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nNow these changes are in mainline kernel. Can you please approve this gerrit.",
+      "parentUuid": "e88a5d11_d2cec522",
+      "revId": "7ec5e86043b1eb8d1a1cec95095f50275216f571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
