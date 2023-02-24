@@ -52,6 +52,24 @@
       "parentUuid": "99885485_e005bbf1",
       "revId": "7ec5e86043b1eb8d1a1cec95095f50275216f571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "872a0e0e_e2411c16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2023-02-24T09:00:30Z",
+      "side": 1,
+      "message": "\"Link:\" tag is from upstream commit.\n\nI updated the patch subject tag as \"UPSTREAM\" since the change is available in mainline kernel now.",
+      "parentUuid": "c70a32e5_37ef1b8c",
+      "revId": "7ec5e86043b1eb8d1a1cec95095f50275216f571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
