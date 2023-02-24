@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d09077_71d99872",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-02-24T22:19:40Z",
+      "side": 1,
+      "message": "There\u0027s nothing about this API that assumes or enforces CPU pinning. You are also going to immediately get a \"but we can\u0027t make the assumption\" reply. Don\u0027t set yourself up for that :)\n\nJust drop the line and instead talk about it as being able to query the current CPU\u0027s table.\n\nAlso, are the APIs called services in the existing cases? If no, calling it \"service\" feels like overkill and makes it sound even more complicated that it is.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 36
+      },
+      "revId": "8a779aab31b99a7b978516e4992a249dc547b636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "543836c8_709c835b",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-02-24T22:19:40Z",
+      "side": 1,
+      "message": "You are missing the equivalent _put() call.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 1
+      },
+      "revId": "8a779aab31b99a7b978516e4992a249dc547b636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
