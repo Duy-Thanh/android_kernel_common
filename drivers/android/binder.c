@@ -2863,6 +2863,7 @@ static int binder_fixup_parent(struct list_head *pf_head,
 	buffer_offset = bp->parent_offset +
 			(uintptr_t)parent->buffer - (uintptr_t)b->user_data;
 	return binder_add_fixup(pf_head, buffer_offset, bp->buffer, 0);
+<<<<<<< HEAD   (89c821 Merge 5.15.95 into android14-5.15)
 }
 
 /**
@@ -2913,6 +2914,8 @@ binder_find_outdated_transaction_ilocked(struct binder_transaction *t,
 			return t_queued;
 	}
 	return NULL;
+=======
+>>>>>>> BRANCH (d383d0 Linux 5.15.96)
 }
 
 /**
@@ -3093,7 +3096,10 @@ static void binder_transaction(struct binder_proc *proc,
 	int t_debug_id = atomic_inc_return(&binder_last_id);
 	char *secctx = NULL;
 	u32 secctx_sz = 0;
+<<<<<<< HEAD   (89c821 Merge 5.15.95 into android14-5.15)
 	bool is_nested = false;
+=======
+>>>>>>> BRANCH (d383d0 Linux 5.15.96)
 	struct list_head sgc_head;
 	struct list_head pf_head;
 	const void __user *user_buffer = (const void __user *)
