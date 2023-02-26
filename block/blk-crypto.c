@@ -409,17 +409,19 @@ int blk_crypto_start_using_key(const struct blk_crypto_key *key,
 EXPORT_SYMBOL_GPL(blk_crypto_start_using_key);
 
 /**
- * blk_crypto_evict_key() - Evict a key from any inline encryption hardware
- *			    it may have been programmed into
- * @q: The request queue who's associated inline encryption hardware this key
- *     might have been programmed into
- * @key: The key to evict
+ * blk_crypto_evict_key() - Evict a blk_crypto_key from a request_queue
+ * @q: a request_queue on which I/O using the key may have been done
+ * @key: the key to evict
  *
- * Upper layers (filesystems) must call this function to ensure that a key is
- * evicted from any hardware that it might have been programmed into.  The key
- * must not be in use by any in-flight IO when this function is called.
+ * For a given request_queue, this function removes the given blk_crypto_key
+ * from the keyslot management structures and evicts it from any underlying
+ * hardware or fallback keyslot(s) it may have been programmed into.
  *
- * Return: 0 on success or if key is not present in the q's ksm, -err on error.
+ * Context: May sleep.
+ * Return: 0 on success or if the key wasn't in any keyslot; -errno if the key
+ *	   failed to be evicted from a hardware keyslot.  Even in the -errno
+ *	   case, the key is removed from the keyslot management structures and
+ *	   the caller is allowed (and expected) to free the blk_crypto_key.
  */
 int blk_crypto_evict_key(struct request_queue *q,
 			 const struct blk_crypto_key *key)

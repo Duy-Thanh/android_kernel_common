@@ -350,19 +350,11 @@ bool blk_ksm_crypto_cfg_supported(struct blk_keyslot_manager *ksm,
 	return true;
 }
 
-/**
- * blk_ksm_evict_key() - Evict a key from the lower layer device.
- * @ksm: The keyslot manager to evict from
- * @key: The key to evict
- *
- * Find the keyslot that the specified key was programmed into, and evict that
- * slot from the lower layer device. The slot must not be in use by any
- * in-flight IO when this function is called.
- *
- * Context: Process context. Takes and releases ksm->lock.
- * Return: 0 on success or if there's no keyslot with the specified key, -EBUSY
- *	   if the keyslot is still in use, or another -errno value on other
- *	   error.
+/*
+ * This is an internal function that evicts a key from an inline encryption
+ * device that can be either a real device or the blk-crypto-fallback "device".
+ * It is used only for blk_crypto_evict_key().  For details on what this does,
+ * see the documentation for blk_crypto_evict_key().
  */
 int blk_ksm_evict_key(struct blk_keyslot_manager *ksm,
 		      const struct blk_crypto_key *key)
@@ -382,22 +374,23 @@ int blk_ksm_evict_key(struct blk_keyslot_manager *ksm,
 
 	blk_ksm_hw_enter(ksm);
 	slot = blk_ksm_find_keyslot(ksm, key);
-	if (!slot)
-		goto out_unlock;
-
-	if (WARN_ON_ONCE(atomic_read(&slot->slot_refs) != 0)) {
-		err = -EBUSY;
-		goto out_unlock;
+	if (slot) {
+		/*
+		 * Note: it is a bug if the key is still in use by I/O here.
+		 * But 'slot_refs > 0' can't be used to detect such bugs here,
+		 * since the keyslot isn't released until after upper layers
+		 * have already been told the I/O is complete.
+		 */
+		err = ksm->ksm_ll_ops.keyslot_evict(
+				ksm, key, blk_ksm_get_slot_idx(slot));
+		/*
+		 * Even on ->keyslot_evict failure, we must remove the
+		 * blk_crypto_key from the keyslot management structures, since
+		 * the caller is allowed to free it regardless.
+		 */
+		hlist_del(&slot->hash_node);
+		slot->key = NULL;
 	}
-	err = ksm->ksm_ll_ops.keyslot_evict(ksm, key,
-					    blk_ksm_get_slot_idx(slot));
-	if (err)
-		goto out_unlock;
-
-	hlist_del(&slot->hash_node);
-	slot->key = NULL;
-	err = 0;
-out_unlock:
 	blk_ksm_hw_exit(ksm);
 	return err;
 }
