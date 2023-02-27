@@ -33,6 +33,23 @@
       "message": "Respin Bug : b/270887867",
       "revId": "0b3b979ef0e38314613d855e2bf37eb1001bc1de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a72a698b_3f7a1dc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982581
+      },
+      "writtenOn": "2023-02-27T04:52:49Z",
+      "side": 1,
+      "message": "Please help to add \"Bug : 270887867 in the commit message.\"",
+      "revId": "0b3b979ef0e38314613d855e2bf37eb1001bc1de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
