@@ -16,6 +16,23 @@
       "message": "Hi @huangdezhi@hihonor.com just need the respin bug now. Sorry this took a while.",
       "revId": "0b3b979ef0e38314613d855e2bf37eb1001bc1de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1e76a1b_897b6328",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982581
+      },
+      "writtenOn": "2023-02-27T04:51:34Z",
+      "side": 1,
+      "message": "Respin Bug : b/270887867",
+      "revId": "0b3b979ef0e38314613d855e2bf37eb1001bc1de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
