@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a2c877b_dd708f45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2023-02-27T21:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d09077_71d99872",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 36
+      },
+      "revId": "8a779aab31b99a7b978516e4992a249dc547b636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "543836c8_709c835b",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-24T22:19:40Z",
       "side": 1,
       "message": "You are missing the equivalent _put() call.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 1
+      },
+      "revId": "8a779aab31b99a7b978516e4992a249dc547b636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcd6baca_f264d219",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2023-02-27T21:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "543836c8_709c835b",
       "range": {
         "startLine": 57,
         "startChar": 0,
