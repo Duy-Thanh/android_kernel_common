@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d43e6f52_f3cf8bdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-28T09:33:21Z",
+      "side": 1,
+      "message": "Why not submit your hypervisor interface upstream first, and then we can take the proposed changes directly instead of this hook?",
+      "revId": "86378839193f1f2d6c7f45b36d178dabaa119b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "818cc6b2_e0e3035b",
+        "filename": "arch/arm64/kernel/jump_label.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-02-28T09:33:21Z",
+      "side": 1,
+      "message": "there is no \"security check\" possible here because you are not able to \"fail\" this from happening as the transformation has already occured.\n\nHow was this tested?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 58
+      },
+      "revId": "86378839193f1f2d6c7f45b36d178dabaa119b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
