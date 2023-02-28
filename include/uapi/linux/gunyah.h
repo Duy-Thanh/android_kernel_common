@@ -265,5 +265,7 @@ struct gh_vcpu_run {
 #define GH_ANDROID_IOCTL_TYPE		'A'
 
 #define GH_ANDROID_TENTATIVE_UAPI	_IO(GH_ANDROID_IOCTL_TYPE, 0x10)
+#define GH_VM_ANDROID_LEND_USER_MEM	_IOW(GH_ANDROID_IOCTL_TYPE, 0x11, \
+						struct gh_userspace_memory_region)
 
 #endif
