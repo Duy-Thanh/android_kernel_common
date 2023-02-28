@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5ae53ca_f58b3db1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-02-28T16:40:17Z",
+      "side": 1,
+      "message": "Removed STG update from this change, because the update should be on top of all KMI changes. Now it is clean revert.",
+      "revId": "07f4d6208ef3badbaabb45914a45e84264c6126f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
