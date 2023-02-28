@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d24229d_ef1f14d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983635
+      },
+      "writtenOn": "2023-02-28T10:32:09Z",
+      "side": 1,
+      "message": "We\u0027re planning how to modify this interface to facilitate proper submission upstream.",
+      "parentUuid": "d43e6f52_f3cf8bdb",
+      "revId": "86378839193f1f2d6c7f45b36d178dabaa119b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "818cc6b2_e0e3035b",
         "filename": "arch/arm64/kernel/jump_label.c",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-28T09:33:21Z",
       "side": 1,
       "message": "there is no \"security check\" possible here because you are not able to \"fail\" this from happening as the transformation has already occured.\n\nHow was this tested?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 58
+      },
+      "revId": "86378839193f1f2d6c7f45b36d178dabaa119b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb504775_c9811111",
+        "filename": "arch/arm64/kernel/jump_label.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1983635
+      },
+      "writtenOn": "2023-02-28T10:32:09Z",
+      "side": 1,
+      "message": "The patch text modification here is correct,  but we need to capture this operation and update the stage2 page table attributes.If other modules or hacker code try to modify illegally.At this time, we can prevent it, because the memory area has been set to RX in stage-2, it will generate a data abort.\nIf it\u0027s modified through device DMA, stage2 is bypassed, After it\u0027s modified, it\u0027s necessary to compare the orginal value to find out whether it has been tampered with.If yes, the system can be halted or an alarm issue or correct it to the original value.",
+      "parentUuid": "818cc6b2_e0e3035b",
       "range": {
         "startLine": 30,
         "startChar": 0,
