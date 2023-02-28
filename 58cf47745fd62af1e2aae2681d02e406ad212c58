@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7d0f90c_12b997f4",
+        "filename": "Documentation/virt/kvm/api.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 8296,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-02-28T23:24:44Z",
+      "side": 1,
+      "message": "delete \"the\"?",
+      "range": {
+        "startLine": 8296,
+        "startChar": 31,
+        "endLine": 8296,
+        "endChar": 34
+      },
+      "revId": "58cf47745fd62af1e2aae2681d02e406ad212c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b9c8c0f_318749b1",
+        "filename": "Documentation/virt/kvm/arm/get_cur_cpufreq.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-02-28T23:24:44Z",
+      "side": 1,
+      "message": "stale name",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 7
+      },
+      "revId": "58cf47745fd62af1e2aae2681d02e406ad212c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6234bb8_794c20fe",
+        "filename": "Documentation/virt/kvm/arm/get_cur_cpufreq.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-02-28T23:24:44Z",
+      "side": 1,
+      "message": "...get current frequency (in KHz)...",
+      "range": {
+        "startLine": 6,
+        "startChar": 30,
+        "endLine": 6,
+        "endChar": 31
+      },
+      "revId": "58cf47745fd62af1e2aae2681d02e406ad212c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3657f06c_d79d1541",
+        "filename": "Documentation/virt/kvm/arm/get_cur_cpufreq.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-02-28T23:24:44Z",
+      "side": 1,
+      "message": "stale name",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 7
+      },
+      "revId": "58cf47745fd62af1e2aae2681d02e406ad212c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
