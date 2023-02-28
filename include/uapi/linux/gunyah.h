@@ -265,11 +265,14 @@ struct gh_vcpu_run {
 #define GH_ANDROID_IOCTL_TYPE		'A'
 
 #define GH_ANDROID_CAP_UAPI		1
+#define GH_ANDROID_CAP_USER_MEM_LEND	2
 
 /*
  * Check if a gunyah ACK extension is available.  Argument is extension number,
  * return is 1 (yes) or 0 (no, sorry).
  */
 #define GH_ANDROID_CHECK_EXTENSION	_IO(GH_ANDROID_IOCTL_TYPE, 0x10)
+#define GH_VM_ANDROID_LEND_USER_MEM	_IOW(GH_ANDROID_IOCTL_TYPE, 0x11, \
+						struct gh_userspace_memory_region)
 
 #endif

@@ -653,8 +653,12 @@ static long gh_vm_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	struct gh_vm *ghvm = filp->private_data;
 	void __user *argp = (void __user *)arg;
 	long r;
+	bool lend = false;
 
 	switch (cmd) {
+	case GH_VM_ANDROID_LEND_USER_MEM:
+		lend = true;
+		fallthrough;
 	case GH_VM_SET_USER_MEM_REGION: {
 		struct gh_userspace_memory_region region;
 
@@ -668,7 +672,7 @@ static long gh_vm_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		if (region.flags & ~(GH_MEM_ALLOW_READ | GH_MEM_ALLOW_WRITE | GH_MEM_ALLOW_EXEC))
 			return -EINVAL;
 
-		r = gh_vm_mem_alloc(ghvm, &region);
+		r = gh_vm_mem_alloc(ghvm, &region, lend);
 		break;
 	}
 	case GH_VM_SET_DTB_CONFIG: {
@@ -778,6 +782,7 @@ static long gh_android_check_extension(unsigned long arg)
 {
 	switch (arg) {
 	case GH_ANDROID_CAP_UAPI:
+	case GH_ANDROID_CAP_USER_MEM_LEND:
 		return 1;
 	default:
 		return 0;

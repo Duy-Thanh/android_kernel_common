@@ -85,6 +85,8 @@ other bits must be 0 and are reserved for future use. The ioctl will return
 
   - GH_MEM_ALLOW_READ/GH_MEM_ALLOW_WRITE/GH_MEM_ALLOW_EXEC sets read/write/exec
     permissions for the guest, respectively.
+  - GH_MEM_LENT means that the memory will be unmapped from the host and be
+    unaccessible by the host while the guest has the region.
 
 To add a memory region, call GH_VM_SET_USER_MEM_REGION with fields set as
 described above.
