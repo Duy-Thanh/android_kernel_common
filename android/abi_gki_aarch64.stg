@@ -303219,6 +303219,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9bae28ba
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x019e2530
+  parameter_id: 0x1bf16028
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x9baf3eaf
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -316003,6 +316011,33 @@ elf_symbol {
   full_name: "__traceiter_android_vh_cpu_idle_exit"
 }
 elf_symbol {
+  id: 0x9c5d1bdd
+  name: "__traceiter_android_vh_cpufreq_fast_switch"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf9cea3cc
+  type_id: 0x9bae28ba
+  full_name: "__traceiter_android_vh_cpufreq_fast_switch"
+}
+elf_symbol {
+  id: 0x5c9fa956
+  name: "__traceiter_android_vh_cpufreq_resolve_freq"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd0c668dc
+  type_id: 0x9bae28ba
+  full_name: "__traceiter_android_vh_cpufreq_resolve_freq"
+}
+elf_symbol {
+  id: 0xca50936b
+  name: "__traceiter_android_vh_cpufreq_target"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3b08a512
+  type_id: 0x9bae28ba
+  full_name: "__traceiter_android_vh_cpufreq_target"
+}
+elf_symbol {
   id: 0x431c5bf5
   name: "__traceiter_android_vh_cpuidle_psci_enter"
   is_defined: true
@@ -317108,6 +317143,33 @@ elf_symbol {
   crc: 0x51b29892
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_cpu_idle_exit"
+}
+elf_symbol {
+  id: 0x4a3c01db
+  name: "__tracepoint_android_vh_cpufreq_fast_switch"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x6abcf30a
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_cpufreq_fast_switch"
+}
+elf_symbol {
+  id: 0x463f3244
+  name: "__tracepoint_android_vh_cpufreq_resolve_freq"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x5f71ddfa
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_cpufreq_resolve_freq"
+}
+elf_symbol {
+  id: 0x750e1421
+  name: "__tracepoint_android_vh_cpufreq_target"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb90693f4
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_cpufreq_target"
 }
 elf_symbol {
   id: 0x66a766d7
@@ -359333,6 +359395,18 @@ symbols {
     value: 0xfd04e27a
   }
   symbol {
+    key: "__traceiter_android_vh_cpufreq_fast_switch"
+    value: 0x9c5d1bdd
+  }
+  symbol {
+    key: "__traceiter_android_vh_cpufreq_resolve_freq"
+    value: 0x5c9fa956
+  }
+  symbol {
+    key: "__traceiter_android_vh_cpufreq_target"
+    value: 0xca50936b
+  }
+  symbol {
     key: "__traceiter_android_vh_cpuidle_psci_enter"
     value: 0x431c5bf5
   }
@@ -359823,6 +359897,18 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_cpu_idle_exit"
     value: 0x4ade2774
+  }
+  symbol {
+    key: "__tracepoint_android_vh_cpufreq_fast_switch"
+    value: 0x4a3c01db
+  }
+  symbol {
+    key: "__tracepoint_android_vh_cpufreq_resolve_freq"
+    value: 0x463f3244
+  }
+  symbol {
+    key: "__tracepoint_android_vh_cpufreq_target"
+    value: 0x750e1421
   }
   symbol {
     key: "__tracepoint_android_vh_cpuidle_psci_enter"
