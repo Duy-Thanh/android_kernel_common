@@ -16,6 +16,9 @@ drivers/net/slip/slhc.ko
 drivers/usb/class/cdc-acm.ko
 drivers/usb/serial/ftdi_sio.ko
 drivers/usb/serial/usbserial.ko
+drivers/virt/gunyah/gunyah_vcpu.ko
+drivers/virt/gunyah/gunyah_irqfd.ko
+drivers/virt/gunyah/gunyah_ioeventfd.ko
 lib/crypto/libarc4.ko
 mm/zsmalloc.ko
 net/6lowpan/6lowpan.ko
