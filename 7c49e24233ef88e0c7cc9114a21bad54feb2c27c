@@ -16,6 +16,24 @@
       "message": "do we need to manually pull this and the other non-arm defconfig changes into gki_defconfig?",
       "revId": "7c49e24233ef88e0c7cc9114a21bad54feb2c27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edfb3866_5b1af285",
+        "filename": "arch/x86/configs/x86_64_arcvm_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2023-03-01T23:35:22Z",
+      "side": 1,
+      "message": "Yep we will have to do that",
+      "parentUuid": "a11b3fe3_2e63adb5",
+      "revId": "7c49e24233ef88e0c7cc9114a21bad54feb2c27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
