@@ -303799,6 +303799,14 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9bd746a2
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x33756485
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9bd7d214
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -316006,6 +316014,24 @@ elf_symbol {
   full_name: "__traceiter_android_vh_build_sched_domains"
 }
 elf_symbol {
+  id: 0x005c7625
+  name: "__traceiter_android_vh_check_uninterrupt_tasks"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x799dda40
+  type_id: 0x9bd746a2
+  full_name: "__traceiter_android_vh_check_uninterrupt_tasks"
+}
+elf_symbol {
+  id: 0xf3accb84
+  name: "__traceiter_android_vh_check_uninterrupt_tasks_done"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xee9cf1fb
+  type_id: 0x9bcd4ff7
+  full_name: "__traceiter_android_vh_check_uninterrupt_tasks_done"
+}
+elf_symbol {
   id: 0x9247dcb1
   name: "__traceiter_android_vh_cpu_idle_enter"
   is_defined: true
@@ -317138,6 +317164,24 @@ elf_symbol {
   crc: 0xe9491ecd
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_build_sched_domains"
+}
+elf_symbol {
+  id: 0x5cc4ca5b
+  name: "__tracepoint_android_vh_check_uninterrupt_tasks"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xcc643163
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_check_uninterrupt_tasks"
+}
+elf_symbol {
+  id: 0x607a7f0a
+  name: "__tracepoint_android_vh_check_uninterrupt_tasks_done"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x72d14168
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_check_uninterrupt_tasks_done"
 }
 elf_symbol {
   id: 0x26324a1f
@@ -359409,6 +359453,14 @@ symbols {
     value: 0xe479b209
   }
   symbol {
+    key: "__traceiter_android_vh_check_uninterrupt_tasks"
+    value: 0x005c7625
+  }
+  symbol {
+    key: "__traceiter_android_vh_check_uninterrupt_tasks_done"
+    value: 0xf3accb84
+  }
+  symbol {
     key: "__traceiter_android_vh_cpu_idle_enter"
     value: 0x9247dcb1
   }
@@ -359911,6 +359963,14 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_build_sched_domains"
     value: 0x0d3c7607
+  }
+  symbol {
+    key: "__tracepoint_android_vh_check_uninterrupt_tasks"
+    value: 0x5cc4ca5b
+  }
+  symbol {
+    key: "__tracepoint_android_vh_check_uninterrupt_tasks_done"
+    value: 0x607a7f0a
   }
   symbol {
     key: "__tracepoint_android_vh_cpu_idle_enter"
