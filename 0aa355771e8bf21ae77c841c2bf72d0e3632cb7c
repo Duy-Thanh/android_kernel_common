@@ -22,6 +22,30 @@
       },
       "revId": "0aa355771e8bf21ae77c841c2bf72d0e3632cb7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8164f80_0c90e5a0",
+        "filename": "include/trace/hooks/hyp_panic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1991675
+      },
+      "writtenOn": "2023-03-02T11:42:59Z",
+      "side": 1,
+      "message": "Okay I understand your comment. I will change uintptr_t to struct kvm_vcpu * type.",
+      "parentUuid": "68af00ff_70ecf2d8",
+      "range": {
+        "startLine": 12,
+        "startChar": 31,
+        "endLine": 12,
+        "endChar": 45
+      },
+      "revId": "0aa355771e8bf21ae77c841c2bf72d0e3632cb7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
