@@ -109,8 +109,11 @@ int __fsverity_verify_signature(const struct inode *inode, const u8 *signature,
 		return err;
 	}
 
+<<<<<<< HEAD   (bf0d1e ANDROID: revert core of "xfrm: Use actual socket sk instead )
 	pr_debug("Valid signature for file digest %s:%*phN\n",
 		 hash_alg->name, hash_alg->digest_size, file_digest);
+=======
+>>>>>>> BRANCH (8ad9df fscrypt: support decrypting data from large folios)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(__fsverity_verify_signature);
