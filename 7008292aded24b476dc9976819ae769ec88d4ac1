@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1adfc59_426cc27b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1994261
+      },
+      "writtenOn": "2023-03-02T12:58:39Z",
+      "side": 1,
+      "message": "Hi Greg, thanks very much for your help, I have removed defconfig change from this gerrit, will raise another gerrit for defconfig, thanks",
+      "parentUuid": "392182d7_c94a4441",
+      "revId": "7008292aded24b476dc9976819ae769ec88d4ac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee8d2a50_f00a9386",
