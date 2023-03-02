@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41ea5b51_d8c35c1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1994261
+      },
+      "writtenOn": "2023-03-02T13:20:07Z",
+      "side": 1,
+      "message": "Raised an other gerrit for GKI defconfig, https://android-review.googlesource.com/c/kernel/common/+/2466340,  thanks for review it",
+      "revId": "4a12d597dacfe7c0100faedc648ebbaecaf115a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
