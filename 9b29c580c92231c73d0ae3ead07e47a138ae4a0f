@@ -33,6 +33,24 @@
       "message": "Submit the needed features that is, there should NOT be a hook needed here.",
       "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c70c416e_7f337f1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-03-02T10:08:15Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nThese are cherry-picks from android12-5.10 branch and are not new additions. We are gradually making progress towards upstreaming as many patches as we can which lead to dropping the following vendor hooks:\nhttps://android-review.git.corp.google.com/c/kernel/common/+/1664771\nhttps://android-review.git.corp.google.com/c/kernel/common/+/1647090\nand the following OOT patches which were not vendor hooks:\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2464459/1\nhttps://android-review.git.corp.google.com/c/kernel/common/+/1508653\n\nI am pretty much hands full with enabling contaminant detection based on the linux upstream patches and would not have cycles for android 14 to upstream any more vendor hooks. Given that please approve the vendor hook changes in the topic. Rest assured we will be continuing to upstream them.",
+      "parentUuid": "a4b43a72_fd760db6",
+      "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
