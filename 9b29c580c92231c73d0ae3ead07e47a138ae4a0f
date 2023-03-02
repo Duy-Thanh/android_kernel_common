@@ -51,6 +51,24 @@
       "parentUuid": "a4b43a72_fd760db6",
       "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ffeee1_201a8b07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-02T10:12:07Z",
+      "side": 1,
+      "message": "The original patches you are cherry-picking from is almost a year old, we took those hooks then due to the \"time pressure\" at that point in time, but that is not now, and we can not constantly take hooks due to lack of attempting to do the work upstream, sorry.\n\nYou all have had a year to do this work.",
+      "parentUuid": "c70c416e_7f337f1c",
+      "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
