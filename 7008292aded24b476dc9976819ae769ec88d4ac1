@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "392182d7_c94a4441",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-02T12:38:47Z",
+      "side": 1,
+      "message": "Please split the defconfig change out to a different commit entirely, it can NOT be mixed with abi symbol updates.",
+      "revId": "7008292aded24b476dc9976819ae769ec88d4ac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee8d2a50_f00a9386",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-02T12:38:47Z",
+      "side": 1,
+      "message": "not allowed for only arm64, this needs to go to x86-64 also.",
+      "revId": "7008292aded24b476dc9976819ae769ec88d4ac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
