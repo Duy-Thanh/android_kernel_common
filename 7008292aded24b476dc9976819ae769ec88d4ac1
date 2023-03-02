@@ -51,6 +51,24 @@
       "message": "not allowed for only arm64, this needs to go to x86-64 also.",
       "revId": "7008292aded24b476dc9976819ae769ec88d4ac1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1fff65_ac06172e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-03-02T13:08:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ee8d2a50_f00a9386",
+      "revId": "7008292aded24b476dc9976819ae769ec88d4ac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
