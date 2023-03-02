@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6be2064_9747b544",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-02T16:37:16Z",
+      "side": 1,
+      "message": "Please mention that this is replacing the use of the `android_vh_logbuf` and `android_vh_logbuf_pr_cont`\nvendor hooks in previous GKI kernels",
+      "revId": "b214d9f115599ab1faf7ad17adcf9fbd55befe16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "979ea13c_fbe555db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-02T16:37:16Z",
+      "side": 1,
+      "message": "Please upload the update to your symbol list as a new patch in this series. (no need to build the ABI definition for android14 kernels).",
+      "revId": "b214d9f115599ab1faf7ad17adcf9fbd55befe16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
