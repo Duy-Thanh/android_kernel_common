@@ -50,6 +50,24 @@
       "message": "The gki_defconfig change should be split out or, at the very least, mentioned in the commit message.",
       "revId": "b538f22e7cef5eb6397d3406878ae16ecc87604e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4f612c1_4bd81acb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1994261
+      },
+      "writtenOn": "2023-03-02T12:23:55Z",
+      "side": 1,
+      "message": "Hi Giuliano, thanks for your comment, I have updated gerrit commit message, please help to review it, thanks very much",
+      "parentUuid": "32e2bbab_fefa7de1",
+      "revId": "b538f22e7cef5eb6397d3406878ae16ecc87604e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
