@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f11391f7_e92c2d29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-03T18:14:17Z",
+      "side": 1,
+      "message": "Should have a \"Fixes:\" tag. If this is fixing something in a parent patch that has not been merged, then squash this into the other patch.",
+      "revId": "89f633a9f41259a168473917674dd5cb1bfb991d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
