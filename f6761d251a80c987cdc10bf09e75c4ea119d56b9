@@ -34,6 +34,23 @@
       "parentUuid": "fd1fb658_0c04dbf6",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffbf95fd_91638583",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-03T08:42:05Z",
+      "side": 1,
+      "message": "Can you wait until after 6.3-rc1 is out so the merge conflicts are not so big?\n\nAnd why is this needed in android-mainline at all anyway?",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
