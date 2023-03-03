@@ -16,6 +16,24 @@
       "message": "holding because there are ABI changes",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8faabbc9_fad99a1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-03-03T08:40:28Z",
+      "side": 1,
+      "message": "Passive ABI monitoring reports on `android-mainline` are just informational.",
+      "parentUuid": "fd1fb658_0c04dbf6",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
