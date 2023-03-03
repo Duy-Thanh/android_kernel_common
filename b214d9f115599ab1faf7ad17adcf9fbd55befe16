@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e09a5336_46fe3427",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1889770
+      },
+      "writtenOn": "2023-03-03T01:46:12Z",
+      "side": 1,
+      "message": "Sure.\nI\u0027ve updated the comment and the initial abi list also pushed.",
+      "parentUuid": "d6be2064_9747b544",
+      "revId": "b214d9f115599ab1faf7ad17adcf9fbd55befe16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "979ea13c_fbe555db",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
