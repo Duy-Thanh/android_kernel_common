@@ -51,6 +51,24 @@
       "message": "Can you wait until after 6.3-rc1 is out so the merge conflicts are not so big?\n\nAnd why is this needed in android-mainline at all anyway?",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38a4fee4_16105614",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-03-03T22:41:12Z",
+      "side": 1,
+      "message": "\u003e Can you wait until after 6.3-rc1\n\nSure I can wait.\n\n\u003e And why is this needed in android-mainline at all anyway?\n\nThere\u0027s a test that I am trying to re-enable. The test is about checking that module scmversions are set properly when the stamping flag is effective in Kleaf. The test is executed on both android14 and on android-mainline.\n\nCL:2459649 is the CL that re-enables the test.\n\nThe alternatives to this CL would be to:\n\n(1) Disable that test just for android mainline (I need to find a way to filter out tests based on branches); OR\n\n(2) Only enable that test if `CONFIG_MODULE_SCMVERSION` is enabled. This requires some excessive churn in the test because I would also need the kernel image in the test and extract configs using `extract-ikconfig.sh` from the image. (Not using `.config` because it is not part of the distribution, and external modules can be built against prebuilts -- though we can also consider distributing the `.config` file as well). Also, this means the test on kernel modules also pulls in dependencies from the core kernel.\n\nIf you think the cost of (1) or (2) is not as high as maintaining this patch on mainline, please reject this patch.",
+      "parentUuid": "ffbf95fd_91638583",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
