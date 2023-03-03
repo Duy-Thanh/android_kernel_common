@@ -50,6 +50,24 @@
       "message": "This also disables CONFIG_IIO_TRIGGER. Please document the rationale for this in the commit message.",
       "revId": "89c2223090af89324541bf34727f0b62705fef84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b330300c_97112c6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1994261
+      },
+      "writtenOn": "2023-03-03T13:41:15Z",
+      "side": 1,
+      "message": "Hi Giuliano, I added description in commit message, please help to review it, thanks very much",
+      "parentUuid": "29b5c3ce_7332eef7",
+      "revId": "89c2223090af89324541bf34727f0b62705fef84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
