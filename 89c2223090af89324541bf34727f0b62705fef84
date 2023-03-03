@@ -33,6 +33,23 @@
       "message": "does this change the abi?  Let\u0027s run TH to see...",
       "revId": "89c2223090af89324541bf34727f0b62705fef84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29b5c3ce_7332eef7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-03-03T09:36:12Z",
+      "side": 1,
+      "message": "This also disables CONFIG_IIO_TRIGGER. Please document the rationale for this in the commit message.",
+      "revId": "89c2223090af89324541bf34727f0b62705fef84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
