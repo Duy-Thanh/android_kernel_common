@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e38c2f41_e0925851",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-03T18:14:30Z",
+      "side": 1,
+      "message": "Please describe what this patch is and why it cannot be upstreamed.",
+      "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57b852ca_fc2a78ce",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -67,6 +84,23 @@
       "side": 1,
       "message": "The original patches you are cherry-picking from is almost a year old, we took those hooks then due to the \"time pressure\" at that point in time, but that is not now, and we can not constantly take hooks due to lack of attempting to do the work upstream, sorry.\n\nYou all have had a year to do this work.",
       "parentUuid": "c70c416e_7f337f1c",
+      "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e37424c_db002a4a",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-03T18:14:30Z",
+      "side": 1,
+      "message": "Please remove this inclusion which is not needed",
       "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
