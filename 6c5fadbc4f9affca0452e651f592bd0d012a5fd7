@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1265dbb5_629e2a71",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-03T18:16:46Z",
+      "side": 1,
+      "message": "Please remove this inclusion.",
+      "revId": "6c5fadbc4f9affca0452e651f592bd0d012a5fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
