@@ -97,6 +97,7 @@
 #include "../smpboot.h"
 
 #include <trace/hooks/sched.h>
+#include <trace/hooks/dtask.h>
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/dtask.h>
 
