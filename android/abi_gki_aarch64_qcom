@@ -686,6 +686,7 @@
   devm_fwnode_iio_channel_get_by_name
   devm_fwnode_pwm_get
   devm_gen_pool_create
+  devm_gh_rm_register_platform_ops
   devm_gpiochip_add_data_with_key
   devm_gpiod_get
   devm_gpiod_get_optional
@@ -1296,6 +1297,7 @@
   get_user_pages
   get_wiphy_regdom
   get_zeroed_page
+  gh_rm_call
   gic_nonsecure_priorities
   gov_attr_set_init
   gov_attr_set_put
@@ -3411,6 +3413,7 @@
   __traceiter_android_rvh_flush_task
   __traceiter_android_rvh_get_nohz_timer_target
   __traceiter_android_rvh_gic_v3_set_affinity
+  __traceiter_android_rvh_gunyah_loader_dev_ioctl
   __traceiter_android_rvh_iommu_setup_dma_ops
   __traceiter_android_rvh_is_cpu_allowed
   __traceiter_android_rvh_migrate_queued_task
@@ -3533,6 +3536,7 @@
   __tracepoint_android_rvh_flush_task
   __tracepoint_android_rvh_get_nohz_timer_target
   __tracepoint_android_rvh_gic_v3_set_affinity
+  __tracepoint_android_rvh_gunyah_loader_dev_ioctl
   __tracepoint_android_rvh_iommu_setup_dma_ops
   __tracepoint_android_rvh_is_cpu_allowed
   __tracepoint_android_rvh_migrate_queued_task
