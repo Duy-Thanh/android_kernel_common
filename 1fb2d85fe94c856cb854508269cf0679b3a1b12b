@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a572c431_335048d8",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-04T12:17:54Z",
+      "side": 1,
+      "message": "no need for this, just make the real ioctl call and look at the return value.",
+      "range": {
+        "startLine": 785,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 35
+      },
+      "revId": "1fb2d85fe94c856cb854508269cf0679b3a1b12b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
