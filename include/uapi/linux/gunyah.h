@@ -15,6 +15,7 @@
 
 #define GH_IOCTL_TYPE			'G'
 
+
 /*
  * ioctls for /dev/gunyah fds:
  */
@@ -253,5 +254,22 @@ struct gh_vcpu_run {
 
 #define GH_VCPU_RUN		_IO(GH_IOCTL_TYPE, 0x5)
 #define GH_VCPU_MMAP_SIZE	_IO(GH_IOCTL_TYPE, 0x6)
+
+/**
+ * ANDROID: android14-6.1 unfortunately contains UAPI that won't be carried
+ * in kernel.org. Expose orthogonal ioctls that will never conflict with
+ * kernel.org for these UAPIs. This interface is available/stable on all ACK
+ * kernels which 1) have gunyah support and 2) diverge from upstream UAPI.
+ * See b/268234781.
+ */
+#define GH_ANDROID_IOCTL_TYPE		'A'
+
+#define GH_ANDROID_CAP_UAPI		1
+
+/*
+ * Check if a gunyah ACK extension is available.  Argument is extension number,
+ * return is 1 (yes) or 0 (no, sorry).
+ */
+#define GH_ANDROID_CHECK_EXTENSION	_IO(GH_ANDROID_IOCTL_TYPE, 0x10)
 
 #endif

@@ -774,11 +774,23 @@ err_destroy_vm:
 	return err;
 }
 
+static long gh_android_check_extension(unsigned long arg)
+{
+	switch (arg) {
+	case GH_ANDROID_CAP_UAPI:
+		return 1;
+	default:
+		return 0;
+	}
+}
+
 long gh_dev_vm_mgr_ioctl(struct gh_rm *rm, unsigned int cmd, unsigned long arg)
 {
 	switch (cmd) {
 	case GH_CREATE_VM:
 		return gh_dev_ioctl_create_vm(rm, arg);
+	case GH_ANDROID_CHECK_EXTENSION:
+		return gh_android_check_extension(arg);
 	default:
 		return -ENOIOCTLCMD;
 	}
