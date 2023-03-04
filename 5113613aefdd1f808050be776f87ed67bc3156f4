@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc288982_ecd691bc",
+        "filename": "drivers/virt/gunyah/rsc_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-04T12:13:44Z",
+      "side": 1,
+      "message": "sorry, but this is not a valid type of hook.  Just implement the needed ioctl interfaces directly, or as a module, but do not use a hook for this as this is totally unchecked and unable to be reviewed.",
+      "range": {
+        "startLine": 745,
+        "startChar": 0,
+        "endLine": 745,
+        "endChar": 66
+      },
+      "revId": "5113613aefdd1f808050be776f87ed67bc3156f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
