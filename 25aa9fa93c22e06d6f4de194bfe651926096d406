@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fc6e956_403b3578",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-04T12:16:54Z",
+      "side": 1,
+      "message": "all you need to really do here for your \"extension\" is return 0 from this ioctl, no need for a special call.  If the upstream code does not have this ioctl value at all, you will get an error returned to you.",
+      "range": {
+        "startLine": 793,
+        "startChar": 0,
+        "endLine": 793,
+        "endChar": 41
+      },
+      "revId": "25aa9fa93c22e06d6f4de194bfe651926096d406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa60a6d9_a6cf00df",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-04T12:16:54Z",
+      "side": 1,
+      "message": "wrong error value for no ioctl being handled.",
+      "range": {
+        "startLine": 795,
+        "startChar": 10,
+        "endLine": 795,
+        "endChar": 21
+      },
+      "revId": "25aa9fa93c22e06d6f4de194bfe651926096d406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
