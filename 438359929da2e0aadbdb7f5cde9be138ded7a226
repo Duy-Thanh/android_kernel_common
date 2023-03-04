@@ -34,6 +34,24 @@
       "parentUuid": "fa1c3bd2_05a45019",
       "revId": "438359929da2e0aadbdb7f5cde9be138ded7a226",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef27ddae_aac380b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-04T12:25:34Z",
+      "side": 1,
+      "message": "There was no user of this hook ever submitted, so I\u0027m restoring this and will rebase and resubmit it as it\u0027s obviously not being used.",
+      "parentUuid": "2ff8d7fd_0920e023",
+      "revId": "438359929da2e0aadbdb7f5cde9be138ded7a226",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
