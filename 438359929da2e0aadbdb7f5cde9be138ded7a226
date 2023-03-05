@@ -88,6 +88,24 @@
       "parentUuid": "f8a35621_e4bb6937",
       "revId": "438359929da2e0aadbdb7f5cde9be138ded7a226",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da5faa19_057f9bd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-05T16:37:25Z",
+      "side": 1,
+      "message": "As you are not using the hook now for anything, just resubmit it when you need it.",
+      "parentUuid": "df73ac0f_89c304ad",
+      "revId": "438359929da2e0aadbdb7f5cde9be138ded7a226",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
