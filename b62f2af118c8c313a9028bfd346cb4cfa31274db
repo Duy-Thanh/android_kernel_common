@@ -51,6 +51,23 @@
       "message": "bump",
       "revId": "b62f2af118c8c313a9028bfd346cb4cfa31274db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb78be7_b3b6147b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1306712
+      },
+      "writtenOn": "2023-03-05T15:55:25Z",
+      "side": 1,
+      "message": "What failed? Presubmit passed before.",
+      "revId": "b62f2af118c8c313a9028bfd346cb4cfa31274db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
