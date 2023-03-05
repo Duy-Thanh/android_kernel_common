@@ -70,6 +70,24 @@
       "parentUuid": "ef27ddae_aac380b7",
       "revId": "438359929da2e0aadbdb7f5cde9be138ded7a226",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df73ac0f_89c304ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2023-03-05T02:12:49Z",
+      "side": 1,
+      "message": "Hi Greg, we will upload the patch to use this hook soon. Please do not revert this patch, thanks.",
+      "parentUuid": "f8a35621_e4bb6937",
+      "revId": "438359929da2e0aadbdb7f5cde9be138ded7a226",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
