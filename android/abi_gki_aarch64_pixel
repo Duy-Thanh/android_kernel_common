@@ -2386,6 +2386,7 @@
   trace_seq_printf
   trace_seq_putc
   __trace_trigger_soft_disabled
+  tracing_is_on
   try_module_get
   try_to_del_timer_sync
   tty_flip_buffer_push
