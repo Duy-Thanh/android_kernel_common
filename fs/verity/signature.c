@@ -109,8 +109,11 @@ int __fsverity_verify_signature(const struct inode *inode, const u8 *signature,
 		return err;
 	}
 
+<<<<<<< HEAD   (d19970 ANDROID: Update the ABI representation)
 	pr_debug("Valid signature for file digest %s:%*phN\n",
 		 hash_alg->name, hash_alg->digest_size, file_digest);
+=======
+>>>>>>> BRANCH (91209b fscrypt: fix ext4 breakage in fscrypt)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(__fsverity_verify_signature);
