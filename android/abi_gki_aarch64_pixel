@@ -1,10 +1,9 @@
 [abi_symbol_list]
   activate_task
   add_cpu
-  add_timer
-  add_timer_on
   add_wait_queue
   adjust_managed_page_count
+  add_timer
   alarm_cancel
   alarm_init
   alarm_start_relative
