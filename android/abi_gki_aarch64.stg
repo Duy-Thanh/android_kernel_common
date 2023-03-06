@@ -288874,6 +288874,12 @@ function {
   parameter_id: 0x1dce0fdd
 }
 function {
+  id: 0x5460037c
+  return_type_id: 0x18bd6530
+  parameter_id: 0x0bbe1c3e
+  parameter_id: 0x064d6086
+}
+function {
   id: 0x5468daf3
   return_type_id: 0x18bd6530
   parameter_id: 0x0258f96e
@@ -334375,6 +334381,15 @@ elf_symbol {
   full_name: "idr_get_next"
 }
 elf_symbol {
+  id: 0xbb70a764
+  name: "idr_get_next_ul"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcc1b882a
+  type_id: 0x5460037c
+  full_name: "idr_get_next_ul"
+}
+elf_symbol {
   id: 0x18b26540
   name: "idr_preload"
   is_defined: true
@@ -368208,6 +368223,10 @@ symbols {
   symbol {
     key: "idr_get_next"
     value: 0x80fbce75
+  }
+  symbol {
+    key: "idr_get_next_ul"
+    value: 0xbb70a764
   }
   symbol {
     key: "idr_preload"
