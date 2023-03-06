@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0dc01af9_b95752b5",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-06T18:03:43Z",
+      "side": 1,
+      "message": "Please just add a new ioctl, that\u0027s what you will have to do upstream, no difference here.",
+      "parentUuid": "0161f68e_0b131647",
+      "range": {
+        "startLine": 793,
+        "startChar": 0,
+        "endLine": 793,
+        "endChar": 41
+      },
+      "revId": "25aa9fa93c22e06d6f4de194bfe651926096d406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa60a6d9_a6cf00df",
         "filename": "drivers/virt/gunyah/vm_mgr.c",
         "patchSetId": 3
