@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7fa99fb_d1861ed4",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-06T18:08:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d55eeea1_481b35c6",
+      "range": {
+        "startLine": 2280,
+        "startChar": 1,
+        "endLine": 2280,
+        "endChar": 7
+      },
+      "revId": "34820a03afd11a220eb4a654c6638204e9d172ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c5f952a_6172ef5f",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-28T19:39:58Z",
       "side": 1,
       "message": "This is quite large -- can we mark it as __initdata ?",
+      "range": {
+        "startLine": 505,
+        "startChar": 31,
+        "endLine": 505,
+        "endChar": 48
+      },
+      "revId": "34820a03afd11a220eb4a654c6638204e9d172ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "704db84c_ba5bbd95",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-06T18:08:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6c5f952a_6172ef5f",
       "range": {
         "startLine": 505,
         "startChar": 31,
