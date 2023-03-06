@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed1c6d91_1c0b54f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2023-03-06T21:36:09Z",
+      "side": 1,
+      "message": "should we combine https://android-review.git.corp.google.com/c/kernel/common/+/2470501 with this one?",
+      "revId": "effbec92479aa8145f85bbacdf69e1bb2fefae47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
