@@ -1,16 +1,15 @@
 [abi_symbol_list]
   add_cpu
-  add_timer
-  add_timer_on
   add_wait_queue
   adjust_managed_page_count
+  add_timer
   alarm_cancel
   alarm_init
   alarm_start_relative
   alarmtimer_get_rtcdev
   alarm_try_to_cancel
-  alloc_chrdev_region
   alloc_etherdev_mqs
+  alloc_chrdev_region
   alloc_netdev_mqs
   __alloc_pages
   alloc_pages_exact

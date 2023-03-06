@@ -211231,13 +211231,6 @@ struct_union {
   id: 0x39817cf5
   kind: STRUCT
   name: "cfg80211_pkt_pattern"
-  definition {
-    bytesize: 24
-    member_id: 0xa80c68a8
-    member_id: 0x9b346739
-    member_id: 0xe58f0084
-    member_id: 0xa971f923
-  }
 }
 struct_union {
   id: 0x9d941aa3
