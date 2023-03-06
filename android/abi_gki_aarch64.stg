@@ -294547,6 +294547,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_dup_task_struct"
 }
 elf_symbol {
+  id: 0x02c8f91b
+  name: "__traceiter_android_vh_early_resume_begin"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc6021d79
+  type_id: 0x9bcd4ff7
+  full_name: "__traceiter_android_vh_early_resume_begin"
+}
+elf_symbol {
   id: 0xdcaa59a3
   name: "__traceiter_android_vh_enable_thermal_genl_check"
   is_defined: true
@@ -294590,6 +294599,15 @@ elf_symbol {
   crc: 0x3f999f8c
   type_id: 0x9b364b52
   full_name: "__traceiter_android_vh_logbuf_pr_cont"
+}
+elf_symbol {
+  id: 0xf10ce16f
+  name: "__traceiter_android_vh_resume_end"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x54c248df
+  type_id: 0x9bcd4ff7
+  full_name: "__traceiter_android_vh_resume_end"
 }
 elf_symbol {
   id: 0xb841c45e
@@ -295519,6 +295537,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_dup_task_struct"
 }
 elf_symbol {
+  id: 0xe5deb919
+  name: "__tracepoint_android_vh_early_resume_begin"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xa960bfb2
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_early_resume_begin"
+}
+elf_symbol {
   id: 0x54b2cd01
   name: "__tracepoint_android_vh_enable_thermal_genl_check"
   is_defined: true
@@ -295562,6 +295589,15 @@ elf_symbol {
   crc: 0x0d281fc1
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_logbuf_pr_cont"
+}
+elf_symbol {
+  id: 0xd6904c6d
+  name: "__tracepoint_android_vh_resume_end"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xed1903b3
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_resume_end"
 }
 elf_symbol {
   id: 0xff2bccb8
@@ -329204,6 +329240,10 @@ symbols {
     value: 0xf432d1c9
   }
   symbol {
+    key: "__traceiter_android_vh_early_resume_begin"
+    value: 0x02c8f91b
+  }
+  symbol {
     key: "__traceiter_android_vh_enable_thermal_genl_check"
     value: 0xdcaa59a3
   }
@@ -329222,6 +329262,10 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_logbuf_pr_cont"
     value: 0x57087e9e
+  }
+  symbol {
+    key: "__traceiter_android_vh_resume_end"
+    value: 0xf10ce16f
   }
   symbol {
     key: "__traceiter_android_vh_scheduler_tick"
@@ -329636,6 +329680,10 @@ symbols {
     value: 0x732a182b
   }
   symbol {
+    key: "__tracepoint_android_vh_early_resume_begin"
+    value: 0xe5deb919
+  }
+  symbol {
     key: "__tracepoint_android_vh_enable_thermal_genl_check"
     value: 0x54b2cd01
   }
@@ -329654,6 +329702,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_logbuf_pr_cont"
     value: 0x94ddd62c
+  }
+  symbol {
+    key: "__tracepoint_android_vh_resume_end"
+    value: 0xd6904c6d
   }
   symbol {
     key: "__tracepoint_android_vh_scheduler_tick"
