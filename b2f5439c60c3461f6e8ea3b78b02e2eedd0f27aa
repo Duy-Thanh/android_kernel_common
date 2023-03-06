@@ -16,6 +16,24 @@
       "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "b2f5439c60c3461f6e8ea3b78b02e2eedd0f27aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34d03c5a_56955d38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-06T16:39:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93ae8447_cff75d52",
+      "revId": "b2f5439c60c3461f6e8ea3b78b02e2eedd0f27aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
