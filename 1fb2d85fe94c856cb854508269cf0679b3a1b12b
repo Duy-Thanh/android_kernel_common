@@ -22,6 +22,30 @@
       },
       "revId": "1fb2d85fe94c856cb854508269cf0679b3a1b12b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "172ad222_a993a2cc",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-06T17:21:54Z",
+      "side": 1,
+      "message": "Userspace will eventually need a way to know whether it can use restricted_memfd lending mechanism or use this ACK-specific lending mechanism. crosvm will need to know ahead of time whether restricted_memfd support is present. I don\u0027t know yet whether restricted_memfd changes will be able to have a capability flag in upstream kernel.org since Gunyah support hasn\u0027t merged.",
+      "parentUuid": "a572c431_335048d8",
+      "range": {
+        "startLine": 785,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 35
+      },
+      "revId": "1fb2d85fe94c856cb854508269cf0679b3a1b12b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
