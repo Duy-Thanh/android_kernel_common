@@ -971,6 +971,7 @@
   drm_client_init
   drm_client_modeset_commit_locked
   drm_client_register
+  drm_connector_list_update
   drm_compat_ioctl
   drm_connector_attach_encoder
   drm_connector_cleanup
@@ -1004,6 +1005,7 @@
   drm_dev_register
   drm_dev_unregister
   drm_display_mode_from_cea_vic
+  drm_dp_mst_dump_topology
   drm_edid_duplicate
   drm_edid_get_monitor_name
   drm_edid_is_valid
@@ -1047,6 +1049,8 @@
   drm_kms_helper_poll_enable
   drm_kms_helper_poll_fini
   drm_kms_helper_poll_init
+  drm_master_get
+  drm_master_put
   drm_mm_init
   drm_mm_insert_node_in_range
   drmm_mode_config_init
@@ -1058,11 +1062,13 @@
   drm_mode_copy
   drm_mode_create
   drm_mode_create_dp_colorspace_property
+  drm_mode_create_tile_group
   drm_mode_debug_printmodeline
   drm_mode_duplicate
   drm_mode_equal
   drm_mode_is_420_only
   drm_mode_match
+  drm_mode_prune_invalid
   drm_mode_object_find
   drm_mode_object_get
   drm_mode_object_put
@@ -1077,6 +1083,7 @@
   drm_modeset_lock_all_ctx
   drm_modeset_lock_single_interruptible
   drm_mode_set_name
+  drm_mode_sort
   drm_modeset_unlock
   drm_modeset_unlock_all
   drm_mode_vrefresh
@@ -3454,6 +3461,7 @@
   __traceiter_android_rvh_update_cpu_capacity
   __traceiter_android_rvh_update_cpus_allowed
   __traceiter_android_rvh_update_misfit_status
+  __traceiter_android_rvh_update_readahead_gfp_mask
   __traceiter_android_rvh_update_thermal_stats
   __traceiter_android_rvh_util_est_update
   __traceiter_android_rvh_wake_up_new_task
@@ -3493,9 +3501,9 @@
   __traceiter_android_vh_ufs_compl_command
   __traceiter_android_vh_ufs_send_command
   __traceiter_android_vh_ufs_send_tm_command
-  __traceiter_android_vh_ufs_send_uic_command
   __traceiter_android_vh_update_topology_flags_workfn
   __traceiter_android_vh_ufs_update_sdev
+  __traceiter_android_vh_ufs_send_uic_command
   __traceiter_binder_transaction_received
   __traceiter_cpu_frequency_limits
   __traceiter_cpu_idle
@@ -3576,6 +3584,7 @@
   __tracepoint_android_rvh_update_cpu_capacity
   __tracepoint_android_rvh_update_cpus_allowed
   __tracepoint_android_rvh_update_misfit_status
+  __tracepoint_android_rvh_update_readahead_gfp_mask
   __tracepoint_android_rvh_update_thermal_stats
   __tracepoint_android_rvh_util_est_update
   __tracepoint_android_rvh_wake_up_new_task
@@ -3874,13 +3883,16 @@
   uuid_parse
   v4l2_compat_ioctl32
   v4l2_ctrl_find
+  v4l2_ctrl_get_name
   v4l2_ctrl_handler_free
   v4l2_ctrl_handler_init_class
+  __v4l2_ctrl_modify_range
   v4l2_ctrl_new_custom
   v4l2_ctrl_new_std
   v4l2_ctrl_new_std_menu
   v4l2_ctrl_request_complete
   v4l2_ctrl_request_setup
+  __v4l2_ctrl_s_ctrl
   v4l2_ctrl_subscribe_event
   v4l2_device_register
   v4l2_device_register_subdev
@@ -3907,6 +3919,7 @@
   v4l2_m2m_release
   v4l2_m2m_request_queue
   v4l2_m2m_unregister_media_controller
+  v4l2_s_ctrl
   v4l2_src_change_event_subscribe
   v4l2_subdev_call_wrappers
   v4l2_subdev_init
