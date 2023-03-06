@@ -16,6 +16,24 @@
       "message": "conflict marker here",
       "revId": "e8d4958cef2e077eb7f4e2a390b41f500991edad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "783dfa1b_e4094dbf",
+        "filename": "include/linux/arm-smccc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2023-03-06T23:24:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2c76629_48ec412e",
+      "revId": "e8d4958cef2e077eb7f4e2a390b41f500991edad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
