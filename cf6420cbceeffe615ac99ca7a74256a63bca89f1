@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dfb896d_e3fb8d21",
+        "filename": "include/trace/hooks/hyp_panic.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-06T10:11:22Z",
+      "side": 1,
+      "message": "Please don\u0027t forward declare the struct, it would be preferable for the ABI monitoring tools to have visibility over the full type.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
