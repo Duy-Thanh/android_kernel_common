@@ -46,6 +46,30 @@
       },
       "revId": "1fb2d85fe94c856cb854508269cf0679b3a1b12b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c0303f_158b9c33",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-06T18:04:59Z",
+      "side": 1,
+      "message": "Call the ioctl and see if it succeeds, like you would doing the same thing for when you implement this upstream properly.  No need for a special ioctl.",
+      "parentUuid": "172ad222_a993a2cc",
+      "range": {
+        "startLine": 785,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 35
+      },
+      "revId": "1fb2d85fe94c856cb854508269cf0679b3a1b12b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
