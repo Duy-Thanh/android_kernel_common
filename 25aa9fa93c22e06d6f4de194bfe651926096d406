@@ -141,6 +141,30 @@
       },
       "revId": "25aa9fa93c22e06d6f4de194bfe651926096d406",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b739c564_326a9932",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-06T18:04:19Z",
+      "side": 1,
+      "message": "Don\u0027t resolve until you have submitted a fixed change, otherwise we can not track it properly.",
+      "parentUuid": "39114162_16e0ef31",
+      "range": {
+        "startLine": 795,
+        "startChar": 10,
+        "endLine": 795,
+        "endChar": 21
+      },
+      "revId": "25aa9fa93c22e06d6f4de194bfe651926096d406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
