@@ -16,6 +16,23 @@
       "message": "you are not really preserving the abi here 😞",
       "revId": "b8878e142452e477e057c612ddfb0fe0493aac23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfb18191_acbf2c94",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-07T15:58:30Z",
+      "side": 1,
+      "message": "that hides the member from the CRC calculation, but it will still be part of the observable ABI.",
+      "revId": "b8878e142452e477e057c612ddfb0fe0493aac23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
