@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e6f7a9_353fa4f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-07T15:06:38Z",
+      "side": 1,
+      "message": "symbol_get/put should not be allowed, I\u0027ll go revert those symbols for now as those will break without you noticing as they are not API safe.",
+      "revId": "9ec6b2ff43c6522b24ba9a30dd24f153476877ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
