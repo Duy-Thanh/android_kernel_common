@@ -16,6 +16,24 @@
       "message": "symbol_get/put should not be allowed, I\u0027ll go revert those symbols for now as those will break without you noticing as they are not API safe.",
       "revId": "9ec6b2ff43c6522b24ba9a30dd24f153476877ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5034a2_0a33231c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2023-03-07T16:05:51Z",
+      "side": 1,
+      "message": "Sorry let me confirm it, are these three symbols?\n  __symbol_get\n  __symbol_put\n  symbol_put_addr\n\nand we have to fix before next GKI image released, would that happen in March release or latter?\n\nI just check which module will be dead, and one of them is dvb-core.\n\nThe dvb-core is upstream code but we build as module, and it uses symbol_put_addr(). and config MEDIA_ATTACH is `default MODULES`.\n\nhttps://android.googlesource.com/kernel/common/+/e013dc7081691ff8a593576a6a228a68ad507516/drivers/media/dvb-core/dvb_frontend.c#3060",
+      "parentUuid": "73e6f7a9_353fa4f9",
+      "revId": "9ec6b2ff43c6522b24ba9a30dd24f153476877ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
