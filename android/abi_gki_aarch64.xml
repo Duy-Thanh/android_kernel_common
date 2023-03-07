@@ -51587,7 +51587,7 @@
       </class-decl>
       <pointer-type-def type-id='3e1d184a' size-in-bits='64' id='6aee814c'/>
       <pointer-type-def type-id='74e7a035' size-in-bits='64' id='6af64a09'/>
-      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv4/route.c' line='1505' column='1' id='6b1203e5'>
+      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv6/route.c' line='130' column='1' id='6b1203e5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='net/ipv4/route.c' line='1506' column='1'/>
         </data-member>
@@ -162621,6 +162621,7 @@
     </abi-instr>
   </abi-corpus>
 </abi-corpus-group>
+
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
