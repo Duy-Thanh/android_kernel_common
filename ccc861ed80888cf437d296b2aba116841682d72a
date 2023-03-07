@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636c282c_2f26ae82",
+        "filename": "arch/arm64/configs/arm64_arcvm_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1710171
+      },
+      "writtenOn": "2023-03-07T20:14:17Z",
+      "side": 0,
+      "message": "BTI kernel comment can not be removed or it will break the build. See https://crrev.com/c/4199487.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "ccc861ed80888cf437d296b2aba116841682d72a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
