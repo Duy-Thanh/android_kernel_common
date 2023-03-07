@@ -69,6 +69,24 @@
       "parentUuid": "ffbf95fd_91638583",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3672cec3_8f3f975a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-03-07T22:56:01Z",
+      "side": 1,
+      "message": "@gregkh@google.com Do you know when does 6.3-rc1 go in?\n\nAlso, could you PTAL at my comments above and see if the patch should go in or not? Thanks!",
+      "parentUuid": "38a4fee4_16105614",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
