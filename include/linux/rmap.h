@@ -49,9 +49,18 @@ struct anon_vma {
 	 * This counter is used for making decision about reusing anon_vma
 	 * instead of forking new one. See comments in function anon_vma_clone.
 	 */
+#ifndef __GENKSYMS__
+	/*
+	 * Android ABI CRC preservation due to commit 2555283eb40df ("mm/rmap: Fix
+	 * anon_vma->degree ambiguity leading to double-reuse") replacing this
+	 * attribute with the 2 below.
+	 */
+	unsigned degree;
+#else
 	unsigned long num_children;
 	/* Count of VMAs whose ->anon_vma pointer points to this object. */
 	unsigned long num_active_vmas;
+#endif
 
 	struct anon_vma *parent;	/* Parent of this anon_vma */
 
