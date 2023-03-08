@@ -34,6 +34,24 @@
       "parentUuid": "73e6f7a9_353fa4f9",
       "revId": "9ec6b2ff43c6522b24ba9a30dd24f153476877ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc8e59b2_56d9154b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-08T06:56:45Z",
+      "side": 1,
+      "message": "If you need the dvb-core, we can build that in, no need for that to be in an external module that you are forced to build, right?",
+      "parentUuid": "9c5034a2_0a33231c",
+      "revId": "9ec6b2ff43c6522b24ba9a30dd24f153476877ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
