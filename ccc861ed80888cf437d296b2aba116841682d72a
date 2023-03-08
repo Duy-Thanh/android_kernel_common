@@ -46,6 +46,30 @@
       },
       "revId": "ccc861ed80888cf437d296b2aba116841682d72a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6296d37_a218a8f4",
+        "filename": "arch/arm64/configs/arm64_arcvm_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1089769
+      },
+      "writtenOn": "2023-03-08T06:51:53Z",
+      "side": 0,
+      "message": "Yup, with the https://android-review.git.corp.google.com/c/kernel/common/+/2474350/ cherry-picked at the same time, the resulting build should be okay.",
+      "parentUuid": "d0210b0f_95cfecd9",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "ccc861ed80888cf437d296b2aba116841682d72a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
