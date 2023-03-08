@@ -46,6 +46,30 @@
       },
       "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b694f4cb_066749be",
+        "filename": "include/trace/hooks/hyp_panic.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-08T11:35:12Z",
+      "side": 1,
+      "message": "Yes, that is correct. We need visibility over the full kvm_vcpu type if possible.",
+      "parentUuid": "13cd1f4c_36344e3d",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
