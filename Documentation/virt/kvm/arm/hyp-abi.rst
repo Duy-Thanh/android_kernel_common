@@ -76,3 +76,14 @@ success, and HVC_STUB_ERR on error. A stub hypercall is allowed to
 clobber any of the caller-saved registers (x0-x18 on arm64, r0-r3 and
 ip on arm). It is thus recommended to use a function call to perform
 the hypercall.
+
+=========================================================
+Internal ABI between the kernel and protected VM firmware
+=========================================================
+
+When a protected VM is booted, pKVM configures the registers as follows:
+
+- x0-x14 are preserved, as configured by the VMM
+- x15 contains the boot protocol version (currently 0)
+- x16-x30 are reserved for the hypervisor ABI (currently 0)
+- the PC is set to the entry point of the protected VM firmware
