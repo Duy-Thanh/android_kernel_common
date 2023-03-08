@@ -34,6 +34,24 @@
       "parentUuid": "06aac4cc_f94545fb",
       "revId": "2fb62193415ad821e3e6c8623f82d11ce24b29cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6eb6a92_9b41aa4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-03-08T17:08:02Z",
+      "side": 1,
+      "message": "We don\u0027t currently have an android13 specific trusty branch. The changes in android12-trusty-5.10 are merged/cherry-picked into any device kernel that uses trusty.",
+      "parentUuid": "6beafe8f_5f56d107",
+      "revId": "2fb62193415ad821e3e6c8623f82d11ce24b29cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
