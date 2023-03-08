@@ -16,6 +16,24 @@
       "message": "This is needed for aosp/2475309",
       "revId": "2fb62193415ad821e3e6c8623f82d11ce24b29cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6beafe8f_5f56d107",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-08T07:07:05Z",
+      "side": 1,
+      "message": "How can an android13 change be needed for a branch that is android12 based?",
+      "parentUuid": "06aac4cc_f94545fb",
+      "revId": "2fb62193415ad821e3e6c8623f82d11ce24b29cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
