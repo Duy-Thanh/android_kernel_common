@@ -16,6 +16,24 @@
       "message": "Would it be possible to list the defconfig patches this is merging?\nIt\u0027s hard to tell if the deltas came from a patch or is undoing gki_defconfig specific patches.",
       "revId": "2d8c9362369540c9c687e1faaa5d539003497f35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "879186aa_4089e9c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2023-03-08T19:53:49Z",
+      "side": 1,
+      "message": "Updated the commit message to contain the arcvm commits.\n\nActually we only have a single gki_defconfig specific patch:\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2337063",
+      "parentUuid": "fe6ed92e_917f5d9c",
+      "revId": "2d8c9362369540c9c687e1faaa5d539003497f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
