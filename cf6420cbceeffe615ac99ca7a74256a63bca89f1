@@ -94,6 +94,30 @@
       },
       "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd509c28_3065346d",
+        "filename": "include/trace/hooks/hyp_panic.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-08T15:48:48Z",
+      "side": 1,
+      "message": "My apologies, your original patch was in fact correct, that was a misunderstanding from my end. Could you please revert back to the first version?\n\nAs an added note, we also need to add the newly exported symbol to your symbol list. This needs to be done as a separate patch, but in the same patch series for us to be able to merge.",
+      "parentUuid": "b16961a8_75e96f7d",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
