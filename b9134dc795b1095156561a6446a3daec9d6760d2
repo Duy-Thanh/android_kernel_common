@@ -16,6 +16,24 @@
       "message": "Still breaks the build because the cites hooks are not present in the kernel.",
       "revId": "b9134dc795b1095156561a6446a3daec9d6760d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49e2826e_e88a1ac0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-08T13:51:18Z",
+      "side": 1,
+      "message": "unresolving the comment to make it actionable",
+      "parentUuid": "ef97eb22_b928bc2c",
+      "revId": "b9134dc795b1095156561a6446a3daec9d6760d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
