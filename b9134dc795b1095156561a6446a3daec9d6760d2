@@ -34,6 +34,23 @@
       "parentUuid": "ef97eb22_b928bc2c",
       "revId": "b9134dc795b1095156561a6446a3daec9d6760d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18c1b153_1dd23bea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-08T16:07:08Z",
+      "side": 1,
+      "message": "`android12-5.10-2022-09` is no longer eligible for respins. See https://source.android.com/docs/core/architecture/kernel/gki-android12-5_10-release-builds#september-2022-releases\n\nPlease update to a later release branch (2023-02?).\n\nAlso, you need to submit a respin request for patches on release branches. See https://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
+      "revId": "b9134dc795b1095156561a6446a3daec9d6760d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
