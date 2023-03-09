@@ -175,6 +175,24 @@
       "parentUuid": "cc1591ea_a370a2f5",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb4803f0_78474bbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-03-09T06:58:27Z",
+      "side": 1,
+      "message": "And the original change that took this Change-Id was CL:1585247",
+      "parentUuid": "ed58de90_bcfa4120",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
