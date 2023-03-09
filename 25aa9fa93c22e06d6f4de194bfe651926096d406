@@ -189,6 +189,30 @@
       },
       "revId": "25aa9fa93c22e06d6f4de194bfe651926096d406",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f5fee56_5c7e51ed",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-09T23:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b739c564_326a9932",
+      "range": {
+        "startLine": 795,
+        "startChar": 10,
+        "endLine": 795,
+        "endChar": 21
+      },
+      "revId": "25aa9fa93c22e06d6f4de194bfe651926096d406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
