@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "565c632c_5423131d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-09T13:47:42Z",
+      "side": 1,
+      "message": "Can you elaborate please? It builds, and runs, fine. Should it complain about something? What did I miss?",
+      "parentUuid": "30e022d9_f51cf8ad",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33560f4e_69b5acc1",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "As a quick note, we had things like this in the past, and given that struct rq is by definition per-cpu, the easiest solution to not touch the ABI was to move the new fields to a dedicated per-cpu variable, and leave struct rq alone...",
       "parentUuid": "42cbffad_26b301f8",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a24ed2a2_aa6569df",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-09T13:47:42Z",
+      "side": 1,
+      "message": "Stable has partially picked this series actually. I did post them to stable 5.10 and 5.15.\n\nVincent Guittot has later pushed a patch that reverts this capacity inverted by the way; but it\u0027s more of an improvement on how we search for best fit cpu under thermal pressure. We can consider taking that change too \n\nhttps://lore.kernel.org/lkml/20230201143628.270912-1-vincent.guittot@linaro.org/",
+      "parentUuid": "bc7285c6_71167884",
       "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
