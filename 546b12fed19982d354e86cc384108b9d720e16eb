@@ -141,6 +141,24 @@
       "parentUuid": "f776bff7_a60433ce",
       "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eef46c2_80a6009f",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-09T14:08:59Z",
+      "side": 1,
+      "message": "The stable merge points are well documented in the weekly newsletter.",
+      "parentUuid": "62f49c8f_b1ca45a3",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
