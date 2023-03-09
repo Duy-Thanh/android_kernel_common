@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33560f4e_69b5acc1",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-03-09T05:03:28Z",
+      "side": 1,
+      "message": "For bisection sake, should the cpu_capacity_inverted location be made in the patch that introduces it?",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
