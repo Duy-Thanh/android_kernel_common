@@ -16,6 +16,24 @@
       "message": "from c3f20577c5dd928baf3930567080c4695b5afc55\nmissing CONFIG_RCU_NOCB_CPU_DEFAULT_ALL\u003dy",
       "revId": "9591ea7f0c71852cb0d31a1b30afcbe04e81f44e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9df1f14_a844911a",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2023-03-09T00:02:33Z",
+      "side": 1,
+      "message": "I think the flag is inherently set elsewhere which is why it\u0027s removed.\n\nIf you try to build with it, you\u0027ll get \n\n```\nERROR: savedefconfig does not match common/arch/x86/configs/gki_defconfig\n```\n\ntelling you to remove it",
+      "parentUuid": "c0e315e1_79f07890",
+      "revId": "9591ea7f0c71852cb0d31a1b30afcbe04e81f44e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
