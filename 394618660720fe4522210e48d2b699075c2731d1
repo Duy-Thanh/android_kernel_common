@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4ff1c2d_27098635",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-09T16:48:42Z",
+      "side": 1,
+      "message": "With the symbol list, I can see these hooks were in previous GKI kernels. Why is this not a cherry pick of the version(s) in earlier branches? If there is a good reason not to cherry-pick, it should at least cite all of the previous patches it is based on. See https://android-review.git.corp.google.com/q/Ib436fbd8d0ad509c3b5a73ea8f5170e0761a13fd",
+      "revId": "394618660720fe4522210e48d2b699075c2731d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
