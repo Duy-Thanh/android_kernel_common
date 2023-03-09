@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000040088610",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2479753?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "fe9bbd6d_92d1344e",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Geert Uytterhoeven \u003cgeert+renesas@glider.be\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "df54b030_6ee4af30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-03-09T11:51:43Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Geert Uytterhoeven \u003cgeert+renesas@glider.be\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 515050625 android-build.ayeaye-python-dispatcher_20230308.05_p0",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "revId": "47b4728f6d8111b17a88d1d0ffb2d852381c6d1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
