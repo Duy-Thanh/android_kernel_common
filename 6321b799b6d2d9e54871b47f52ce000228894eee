@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c663bda0_7c8773dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-03-09T18:12:09Z",
+      "side": 1,
+      "message": "I\u0027ve got a few reports of this issue affecting vendors. So wanted to submit it to common now instead of waiting for it to get merged upstream and then through stable.",
+      "revId": "6321b799b6d2d9e54871b47f52ce000228894eee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
