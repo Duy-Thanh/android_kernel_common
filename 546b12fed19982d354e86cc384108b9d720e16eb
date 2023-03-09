@@ -54,6 +54,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b468fc4d_2f5fb1bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-09T18:48:11Z",
+      "side": 1,
+      "message": "It seems I created more confusion with this series thinking I am being helpful. Apologies. Let\u0027s see how the discussion on stable goes and revisit.",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8558d9f_1d5fe1f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-09T18:48:11Z",
+      "side": 1,
+      "message": "Maybe our workflow is different. If they\u0027re not part of the regular build script then no I didn\u0027t run any of those. And I have no info on any other scripts. I thought they\u0027d be run automatically and shout out either in the regular build script or as part of pushing to gerrit.",
+      "parentUuid": "5239f5b0_819d0048",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "244eb3f5_4b2c4974",
@@ -67,6 +102,30 @@
       "writtenOn": "2023-03-09T17:32:49Z",
       "side": 1,
       "message": "should we remove this? I think with the whole series we are adding cpu_capacity_inverted so probably just put it into one of ANDROID_KABI_RESERVE so the size of the struct rq stays same?",
+      "range": {
+        "startLine": 1088,
+        "startChar": 1,
+        "endLine": 1088,
+        "endChar": 25
+      },
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0224ca74_c0b8f94b",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-09T18:48:11Z",
+      "side": 1,
+      "message": "ANDROID_KABI_RESERVE is 8 bytes. unsigned long is 4 bytes. Hence the additional reserve.",
+      "parentUuid": "244eb3f5_4b2c4974",
       "range": {
         "startLine": 1088,
         "startChar": 1,
@@ -198,6 +257,24 @@
       "side": 1,
       "message": "The stable merge points are well documented in the weekly newsletter.",
       "parentUuid": "62f49c8f_b1ca45a3",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d90cf5_6aa9c918",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-09T18:48:11Z",
+      "side": 1,
+      "message": "I never had one of those in my inbox. If they\u0027re published somewhere, can you share a link please?",
+      "parentUuid": "8eef46c2_80a6009f",
       "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
