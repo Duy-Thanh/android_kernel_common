@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8554f2f_3cf308a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2023-03-09T14:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "771755b4_fc24d6f5",
+      "revId": "7b9adfa4bd3e5d0ebfb8a7b79640b7b2922ed005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f084ebf_59f0682c",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-03-07T13:41:00Z",
       "side": 1,
       "message": "Adding here will make the value of NL80211_ATTR_PUNCT_BITMAP as 337..\nBut as per upstream kernel assigned UAPI value is  322\n\ni.e, it will break UAPI.\n\nyou should replace \"NL80211_ATTR_RESERVED_DO_NOT_USE_11 \u003d 322\"",
+      "revId": "7b9adfa4bd3e5d0ebfb8a7b79640b7b2922ed005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c55a1e_57b55e42",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3328,
+      "author": {
+        "id": 1839988
+      },
+      "writtenOn": "2023-03-09T14:06:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f084ebf_59f0682c",
       "revId": "7b9adfa4bd3e5d0ebfb8a7b79640b7b2922ed005",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
