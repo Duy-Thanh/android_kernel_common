@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30e022d9_f51cf8ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-09T07:19:54Z",
+      "side": 1,
+      "message": "nit, this does not actually keep KMI compatibility at all, try building it and see...",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33560f4e_69b5acc1",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 1
