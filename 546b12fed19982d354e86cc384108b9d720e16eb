@@ -51,6 +51,24 @@
       "parentUuid": "33560f4e_69b5acc1",
       "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc7285c6_71167884",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-09T08:21:13Z",
+      "side": 1,
+      "message": "As a quick note, we had things like this in the past, and given that struct rq is by definition per-cpu, the easiest solution to not touch the ABI was to move the new fields to a dedicated per-cpu variable, and leave struct rq alone...",
+      "parentUuid": "42cbffad_26b301f8",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
