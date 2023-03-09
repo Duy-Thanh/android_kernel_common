@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000040077900",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2479635?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "405b2e25_ee47ad72",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Aran Dalton \u003carda@allwinnertec.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "8c031c31_fd0134c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-03-09T08:39:08Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Aran Dalton \u003carda@allwinnertec.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 515050625 android-build.ayeaye-python-dispatcher_20230308.05_p0",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "64a933c38dde7a66b25caa9c221cda2dc7534873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
