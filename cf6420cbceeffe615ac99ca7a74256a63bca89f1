@@ -118,6 +118,30 @@
       },
       "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf65b9ad_d6060c96",
+        "filename": "include/trace/hooks/hyp_panic.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1991675
+      },
+      "writtenOn": "2023-03-09T05:29:42Z",
+      "side": 1,
+      "message": "Okay. I will revert back to the first version.",
+      "parentUuid": "fd509c28_3065346d",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
