@@ -105,6 +105,24 @@
       "parentUuid": "bc7285c6_71167884",
       "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f776bff7_a60433ce",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-09T13:56:58Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused, why do we need this series if we\u0027ll be getting the patches via -stable?",
+      "parentUuid": "a24ed2a2_aa6569df",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
