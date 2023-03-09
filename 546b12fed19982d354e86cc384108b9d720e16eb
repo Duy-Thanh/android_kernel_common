@@ -56,6 +56,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "244eb3f5_4b2c4974",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2023-03-09T17:32:49Z",
+      "side": 1,
+      "message": "should we remove this? I think with the whole series we are adding cpu_capacity_inverted so probably just put it into one of ANDROID_KABI_RESERVE so the size of the struct rq stays same?",
+      "range": {
+        "startLine": 1088,
+        "startChar": 1,
+        "endLine": 1088,
+        "endChar": 25
+      },
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33560f4e_69b5acc1",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 1
