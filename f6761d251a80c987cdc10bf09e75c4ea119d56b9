@@ -139,6 +139,24 @@
       "message": "wait, why doesn\u0027t this have the same Change-Id as the other branches?",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc1591ea_a370a2f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-03-09T06:56:34Z",
+      "side": 1,
+      "message": "Because that Change-Id is already used one time back in 2021 to be merged. Then it gets reverted due to merge conflicts. A different Change-Id is needed for relanding the change.\n\nI put this up and ask for your review because it has caused conflicts before.\n\nLet me know if you want me to edit the commit message to say\n\n```\nANDROID: Reland \"modules: re-introduce the MODULE_SCMVERSION config\"\n```\nor something like that",
+      "parentUuid": "9f595eb2_3174be71",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
