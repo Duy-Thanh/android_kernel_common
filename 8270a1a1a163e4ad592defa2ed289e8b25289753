@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "915e35f8_0a1e595f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-03-10T00:44:15Z",
+      "side": 1,
+      "message": "This supersedes https://r.android.com/2468400 which handled CRCs only.",
+      "revId": "8270a1a1a163e4ad592defa2ed289e8b25289753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
