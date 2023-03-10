@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 
+subdir-ccflags-y += -DFSVERITY_INTERNAL
+
 # Subset of W=1 warnings
 subdir-ccflags-y += -Wextra -Wunused -Wno-unused-parameter
 subdir-ccflags-y += -Wmissing-declarations

@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 
+subdir-ccflags-y += -DFSVERITY_INTERNAL
+
 obj-$(CONFIG_FS_VERITY) += enable.o \
 			   hash_algs.o \
 			   init.o \

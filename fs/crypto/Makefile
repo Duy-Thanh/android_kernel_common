@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0-only
 obj-$(CONFIG_FS_ENCRYPTION)	+= fscrypto.o
 
+subdir-ccflags-y += -DFSCRYPT_INTERNAL
+
 fscrypto-y := crypto.o \
 	      fname.o \
 	      hkdf.o \
