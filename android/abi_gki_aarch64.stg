@@ -302461,6 +302461,12 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x9b2239e7
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x2360e10b
+}
+function {
   id: 0x9b225ec0
   return_type_id: 0xf435685e
   parameter_id: 0x3f0185ef
@@ -303699,6 +303705,12 @@ function {
   parameter_id: 0x1bf16028
 }
 function {
+  id: 0x9bad4369
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x00be4281
+}
+function {
   id: 0x9bad5a77
   return_type_id: 0x6720d32f
   parameter_id: 0x18150d9f
@@ -304669,6 +304681,12 @@ function {
   parameter_id: 0x18bd6530
   parameter_id: 0x13580d6c
   parameter_id: 0x31c0ce8c
+}
+function {
+  id: 0x9beff51f
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1013df15
 }
 function {
   id: 0x9bf1e232
@@ -316746,6 +316764,24 @@ elf_symbol {
   full_name: "__traceiter_android_vh_jiffies_update"
 }
 elf_symbol {
+  id: 0xe17999f4
+  name: "__traceiter_android_vh_mutex_wait_finish"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x026aa9f9
+  type_id: 0x9b2239e7
+  full_name: "__traceiter_android_vh_mutex_wait_finish"
+}
+elf_symbol {
+  id: 0x721b87b7
+  name: "__traceiter_android_vh_mutex_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x35e8a506
+  type_id: 0x9b2239e7
+  full_name: "__traceiter_android_vh_mutex_wait_start"
+}
+elf_symbol {
   id: 0x7d499dab
   name: "__traceiter_android_vh_printk_hotplug"
   is_defined: true
@@ -316771,6 +316807,69 @@ elf_symbol {
   crc: 0xb63695c9
   type_id: 0x9b08a261
   full_name: "__traceiter_android_vh_rproc_recovery_set"
+}
+elf_symbol {
+  id: 0x3ef508a2
+  name: "__traceiter_android_vh_rtmutex_wait_finish"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x29bd9cc4
+  type_id: 0x9beff51f
+  full_name: "__traceiter_android_vh_rtmutex_wait_finish"
+}
+elf_symbol {
+  id: 0xfb1b8d64
+  name: "__traceiter_android_vh_rtmutex_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd2344f4b
+  type_id: 0x9beff51f
+  full_name: "__traceiter_android_vh_rtmutex_wait_start"
+}
+elf_symbol {
+  id: 0xbffefc2b
+  name: "__traceiter_android_vh_rwsem_read_wait_finish"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x75745d30
+  type_id: 0x9bad4369
+  full_name: "__traceiter_android_vh_rwsem_read_wait_finish"
+}
+elf_symbol {
+  id: 0x3d83999a
+  name: "__traceiter_android_vh_rwsem_read_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa394a9e0
+  type_id: 0x9bad4369
+  full_name: "__traceiter_android_vh_rwsem_read_wait_start"
+}
+elf_symbol {
+  id: 0x93333e39
+  name: "__traceiter_android_vh_rwsem_write_wait_finish"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5fb5d8a4
+  type_id: 0x9bad4369
+  full_name: "__traceiter_android_vh_rwsem_write_wait_finish"
+}
+elf_symbol {
+  id: 0x947bd437
+  name: "__traceiter_android_vh_rwsem_write_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0d3aa91b
+  type_id: 0x9bad4369
+  full_name: "__traceiter_android_vh_rwsem_write_wait_start"
+}
+elf_symbol {
+  id: 0xb5ed74f6
+  name: "__traceiter_android_vh_sched_show_task"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x58c65bae
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_android_vh_sched_show_task"
 }
 elf_symbol {
   id: 0xb841c45e
@@ -317961,6 +318060,24 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_jiffies_update"
 }
 elf_symbol {
+  id: 0x76e879b6
+  name: "__tracepoint_android_vh_mutex_wait_finish"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xaf33e17b
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mutex_wait_finish"
+}
+elf_symbol {
+  id: 0xae5bbde9
+  name: "__tracepoint_android_vh_mutex_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x63ae9c7e
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mutex_wait_start"
+}
+elf_symbol {
   id: 0x49b95a49
   name: "__tracepoint_android_vh_printk_hotplug"
   is_defined: true
@@ -317986,6 +318103,69 @@ elf_symbol {
   crc: 0xf3adfa5d
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_rproc_recovery_set"
+}
+elf_symbol {
+  id: 0xa3915d70
+  name: "__tracepoint_android_vh_rtmutex_wait_finish"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x9397e82e
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rtmutex_wait_finish"
+}
+elf_symbol {
+  id: 0xf01f02ea
+  name: "__tracepoint_android_vh_rtmutex_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xc443185a
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rtmutex_wait_start"
+}
+elf_symbol {
+  id: 0xe7ef7059
+  name: "__tracepoint_android_vh_rwsem_read_wait_finish"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xc2e8063f
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rwsem_read_wait_finish"
+}
+elf_symbol {
+  id: 0xf2d006c8
+  name: "__tracepoint_android_vh_rwsem_read_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x65ad336b
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rwsem_read_wait_start"
+}
+elf_symbol {
+  id: 0x203fab27
+  name: "__tracepoint_android_vh_rwsem_write_wait_finish"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xa8c3dad3
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rwsem_write_wait_finish"
+}
+elf_symbol {
+  id: 0xbe3d9b79
+  name: "__tracepoint_android_vh_rwsem_write_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xfe512d7a
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rwsem_write_wait_start"
+}
+elf_symbol {
+  id: 0x931fa088
+  name: "__tracepoint_android_vh_sched_show_task"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x66f7b6a4
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_sched_show_task"
 }
 elf_symbol {
   id: 0xff2bccb8
@@ -360510,6 +360690,14 @@ symbols {
     value: 0xf83fbd26
   }
   symbol {
+    key: "__traceiter_android_vh_mutex_wait_finish"
+    value: 0xe17999f4
+  }
+  symbol {
+    key: "__traceiter_android_vh_mutex_wait_start"
+    value: 0x721b87b7
+  }
+  symbol {
     key: "__traceiter_android_vh_printk_hotplug"
     value: 0x7d499dab
   }
@@ -360520,6 +360708,34 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_rproc_recovery_set"
     value: 0x91384eff
+  }
+  symbol {
+    key: "__traceiter_android_vh_rtmutex_wait_finish"
+    value: 0x3ef508a2
+  }
+  symbol {
+    key: "__traceiter_android_vh_rtmutex_wait_start"
+    value: 0xfb1b8d64
+  }
+  symbol {
+    key: "__traceiter_android_vh_rwsem_read_wait_finish"
+    value: 0xbffefc2b
+  }
+  symbol {
+    key: "__traceiter_android_vh_rwsem_read_wait_start"
+    value: 0x3d83999a
+  }
+  symbol {
+    key: "__traceiter_android_vh_rwsem_write_wait_finish"
+    value: 0x93333e39
+  }
+  symbol {
+    key: "__traceiter_android_vh_rwsem_write_wait_start"
+    value: 0x947bd437
+  }
+  symbol {
+    key: "__traceiter_android_vh_sched_show_task"
+    value: 0xb5ed74f6
   }
   symbol {
     key: "__traceiter_android_vh_scheduler_tick"
@@ -361050,6 +361266,14 @@ symbols {
     value: 0xafbca760
   }
   symbol {
+    key: "__tracepoint_android_vh_mutex_wait_finish"
+    value: 0x76e879b6
+  }
+  symbol {
+    key: "__tracepoint_android_vh_mutex_wait_start"
+    value: 0xae5bbde9
+  }
+  symbol {
     key: "__tracepoint_android_vh_printk_hotplug"
     value: 0x49b95a49
   }
@@ -361060,6 +361284,34 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_rproc_recovery_set"
     value: 0x3fc5ffc9
+  }
+  symbol {
+    key: "__tracepoint_android_vh_rtmutex_wait_finish"
+    value: 0xa3915d70
+  }
+  symbol {
+    key: "__tracepoint_android_vh_rtmutex_wait_start"
+    value: 0xf01f02ea
+  }
+  symbol {
+    key: "__tracepoint_android_vh_rwsem_read_wait_finish"
+    value: 0xe7ef7059
+  }
+  symbol {
+    key: "__tracepoint_android_vh_rwsem_read_wait_start"
+    value: 0xf2d006c8
+  }
+  symbol {
+    key: "__tracepoint_android_vh_rwsem_write_wait_finish"
+    value: 0x203fab27
+  }
+  symbol {
+    key: "__tracepoint_android_vh_rwsem_write_wait_start"
+    value: 0xbe3d9b79
+  }
+  symbol {
+    key: "__tracepoint_android_vh_sched_show_task"
+    value: 0x931fa088
   }
   symbol {
     key: "__tracepoint_android_vh_scheduler_tick"
