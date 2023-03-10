@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33deee45_143caf93",
+        "filename": "arch/arm64/kvm/hyp/include/hyp/switch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-10T15:10:38Z",
+      "side": 1,
+      "message": "This is ZCR_EL1 but this code runs at EL2 -- does the ordering matter here?",
+      "range": {
+        "startLine": 150,
+        "startChar": 39,
+        "endLine": 150,
+        "endChar": 46
+      },
+      "revId": "6ce806c44ea4cd9aab8a6728404efd71050c54d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d71a055a_cee1f852",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-10T15:10:38Z",
+      "side": 1,
+      "message": "Does the ZCR update have to happen after the CPTR write? If not, we could remove this `isb()` and move the earlier one after the `if (system_supports_sve())` block.\n\nThat said, is the `isb()` required for updating ZCR.LEN? The architecture states:\n\n```\nAn indirect read of ZCR_EL1.LEN appears to occur in program order relative to a direct write of the same register, without the need for explicit synchronization.\n```",
+      "range": {
+        "startLine": 690,
+        "startChar": 2,
+        "endLine": 690,
+        "endChar": 5
+      },
+      "revId": "6ce806c44ea4cd9aab8a6728404efd71050c54d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
