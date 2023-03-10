@@ -91,6 +91,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7da3efe5_d3660034",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-10T09:03:23Z",
+      "side": 1,
+      "message": "Presubmit would definitely complain if it had run I think, feel free to kick it if you\u0027d like an example.\n\nIf that can be of any help, here is the documentation for the ABI tooling: https://source.android.com/docs/core/architecture/kernel/abi-monitor\n\nYou can run all this manually if you want to, but yeah otherwise presubmit will flag it.",
+      "parentUuid": "d8558d9f_1d5fe1f8",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a8b5d45_78b6baae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-10T09:03:23Z",
+      "side": 1,
+      "message": "Note that we can totally accept these type of patches in special cases. For instance if they are fixing a launch-blocker bug of some kind and we can\u0027t afford to wait for the LTS merge to land. If that is the case here please let us know via the bug, but if not, getting this lot via stable is probably the best way forward indeed. Cheers!",
+      "parentUuid": "b468fc4d_2f5fb1bf",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "244eb3f5_4b2c4974",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 1
@@ -126,6 +162,30 @@
       "side": 1,
       "message": "ANDROID_KABI_RESERVE is 8 bytes. unsigned long is 4 bytes. Hence the additional reserve.",
       "parentUuid": "244eb3f5_4b2c4974",
+      "range": {
+        "startLine": 1088,
+        "startChar": 1,
+        "endLine": 1088,
+        "endChar": 25
+      },
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95097b8_4f50c339",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-10T09:03:23Z",
+      "side": 1,
+      "message": "\u003e unsigned long is 4 bytes\n\nWell, it\u0027s definitely 8 bytes 😊\n\nAnd fwiw using reserved slots should done using the dedicated macro (`ANDROID_KABI_USE()` or something like that IIRC), to avoid CRC issues and whatnot. But you really shouldn\u0027t need this anyway, those slots are reserved to fixup LTS merges.",
+      "parentUuid": "0224ca74_c0b8f94b",
       "range": {
         "startLine": 1088,
         "startChar": 1,
