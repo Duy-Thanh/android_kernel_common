@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aff9c4ba_1cd4a721",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-10T13:10:04Z",
+      "side": 1,
+      "message": "Sorry for missing this before, but I think we should put this change in its own patch",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 43
+      },
+      "revId": "882f4b9634bb701d55add7d8ce4129a4e6c6e378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
