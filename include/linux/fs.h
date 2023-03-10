@@ -739,11 +739,19 @@ struct inode {
 #endif
 
 #ifdef CONFIG_FS_ENCRYPTION
+#ifdef FSCRYPT_INTERNAL
 	struct fscrypt_info	*i_crypt_info;
+#else
+	void			*i_crypt_info;
+#endif
 #endif
 
 #ifdef CONFIG_FS_VERITY
+#ifdef FSVERITY_INTERNAL
 	struct fsverity_info	*i_verity_info;
+#else
+	void			*i_verity_info;
+#endif
 #endif
 
 	void			*i_private; /* fs or device private pointer */
@@ -1524,11 +1532,20 @@ struct super_block {
 #endif
 	const struct xattr_handler **s_xattr;
 #ifdef CONFIG_FS_ENCRYPTION
+#ifdef FSCRYPT_INTERNAL
 	const struct fscrypt_operations	*s_cop;
 	struct fscrypt_keyring	*s_master_keys; /* master crypto keys in use */
+#else
+	const void *s_cop;
+	void *s_master_keys;
+#endif
 #endif
 #ifdef CONFIG_FS_VERITY
+#ifdef FSVERITY_INTERNAL
 	const struct fsverity_operations *s_vop;
+#else
+	const void *s_vop;
+#endif
 #endif
 #ifdef CONFIG_UNICODE
 	struct unicode_map *s_encoding;
