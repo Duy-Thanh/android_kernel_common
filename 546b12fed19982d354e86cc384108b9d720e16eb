@@ -125,6 +125,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09714db9_3b1370fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-10T12:38:17Z",
+      "side": 1,
+      "message": "I think we can wait first to see how it goes via LTS. Thanks!",
+      "parentUuid": "6a8b5d45_78b6baae",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96000c2_f3386014",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-10T12:38:17Z",
+      "side": 1,
+      "message": "Thanks for the info!",
+      "parentUuid": "7da3efe5_d3660034",
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "244eb3f5_4b2c4974",
@@ -186,6 +222,30 @@
       "side": 1,
       "message": "\u003e unsigned long is 4 bytes\n\nWell, it\u0027s definitely 8 bytes 😊\n\nAnd fwiw using reserved slots should done using the dedicated macro (`ANDROID_KABI_USE()` or something like that IIRC), to avoid CRC issues and whatnot. But you really shouldn\u0027t need this anyway, those slots are reserved to fixup LTS merges.",
       "parentUuid": "0224ca74_c0b8f94b",
+      "range": {
+        "startLine": 1088,
+        "startChar": 1,
+        "endLine": 1088,
+        "endChar": 25
+      },
+      "revId": "546b12fed19982d354e86cc384108b9d720e16eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae6452f_68243fd5",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-10T12:38:17Z",
+      "side": 1,
+      "message": "Right. I got too lazy to write a test code and checked the ABI table which said 32bits; but I can see above it now it says long is 64bits\n\nhttps://developer.arm.com/documentation/den0024/a/Porting-to-A64/Data-types\n\n\u003e But you really shouldn\u0027t need this anyway, those slots are reserved to fixup LTS merges.\n\nGot it. Next time might be easier to just flag the potential breakage only then.",
+      "parentUuid": "b95097b8_4f50c339",
       "range": {
         "startLine": 1088,
         "startChar": 1,
