@@ -16,6 +16,24 @@
       "message": "This is more of an RFC so didn\u0027t put much work into the language itself; happy to rework if we see value in this documentation.",
       "revId": "703854dbbebc8efaae240d1cd226a7b7a98f9969",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c3c4e0b_14782783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-10T12:29:08Z",
+      "side": 1,
+      "message": "I think it makes sense to document this, but let\u0027s put it in pkvm.rst",
+      "parentUuid": "3fc4a09d_b293d750",
+      "revId": "703854dbbebc8efaae240d1cd226a7b7a98f9969",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
