@@ -614,6 +614,12 @@ static int hub_ext_port_status(struct usb_hub *hub, int port1, int type,
 		ret = 0;
 	}
 	mutex_unlock(&hub->status_mutex);
+
+#if defined(CONFIG_TRACEPOINTS) && defined(CONFIG_ANDROID_VENDOR_HOOKS)
+	if (!ret)
+		trace_android_vh_usb_phy_port_change(hub->hdev, port1, *status, *change);
+#endif
+
 	return ret;
 }
 

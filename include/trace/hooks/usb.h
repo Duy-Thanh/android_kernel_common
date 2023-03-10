@@ -24,6 +24,10 @@ DECLARE_HOOK(android_vh_usb_dev_resume,
 	TP_PROTO(struct usb_device *udev, pm_message_t msg, int *bypass),
 	TP_ARGS(udev, msg, bypass));
 
+DECLARE_HOOK(android_vh_usb_phy_port_change,
+	TP_PROTO(struct usb_device *hdev, int port1, u16 portstatus, u16 portchange),
+	TP_ARGS(hdev, port1, portstatus, portchange));
+
 #endif /* _TRACE_HOOK_USB_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
