@@ -6,7 +6,7 @@
 
 #ifdef CONFIG_PAGE_PINNER
 extern struct static_key_false page_pinner_inited;
-extern struct static_key_true failure_tracking;
+extern struct static_key_false failure_tracking;
 extern struct page_ext_operations page_pinner_ops;
 
 extern void __reset_page_pinner(struct page *page, unsigned int order, bool free);
