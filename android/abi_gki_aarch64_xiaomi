@@ -200,3 +200,20 @@
   wakeup_sources_read_unlock
   wakeup_sources_walk_start
   wakeup_sources_walk_next
+<<<<<<< HEAD   (fb4b72 ANDROID: GKI: Add Tuxera symbol list)
+=======
+
+#required by mi_mempool.ko module
+  __traceiter_android_vh_mmput
+  __tracepoint_android_vh_mmput
+  __traceiter_android_vh_alloc_pages_reclaim_bypass
+  __tracepoint_android_vh_alloc_pages_reclaim_bypass
+  __traceiter_android_vh_alloc_pages_failure_bypass
+  __tracepoint_android_vh_alloc_pages_failure_bypass
+
+#required by us_prox.ko module
+  iio_trigger_alloc
+  __iio_trigger_register
+  iio_trigger_free
+  iio_trigger_unregister
+>>>>>>> CHANGE (26638f ANDROID: GKI: update xiaomi symbol list)
