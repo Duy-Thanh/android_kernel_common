@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d96ce33_f7cb8b07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-13T17:14:55Z",
+      "side": 1,
+      "message": "The alternate solution I thought was to move all the android14-6.1 ioctls to some other ioctl type that isn\u0027t GH_IOCTL_TYPE (G). This approach will definitely require all userspace to have two bindings: one for the android14-6.1 kernel and one for the upstream kernel.",
+      "parentUuid": "04982d1b_65d12109",
+      "revId": "da2a437893bc188e5041847247246776fa9009bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f6a660f_cf2abd4a",
         "filename": "include/uapi/linux/gunyah.h",
         "patchSetId": 6
