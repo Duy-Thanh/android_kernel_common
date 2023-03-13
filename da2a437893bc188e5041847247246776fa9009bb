@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdc09737_147d850c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-13T18:46:16Z",
+      "side": 1,
+      "message": "How about working on getting the first portion of these changes merged first, the ones that were submitted upstream for review.  And then, if you all still need changes like this, then we can review and evaluate them independent of the overall feature here.\n\nAnd using a totally new uapi ioctl number for the android kernel is not a good idea, please don\u0027t do that.",
+      "parentUuid": "4d96ce33_f7cb8b07",
+      "revId": "da2a437893bc188e5041847247246776fa9009bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f6a660f_cf2abd4a",
         "filename": "include/uapi/linux/gunyah.h",
         "patchSetId": 6
