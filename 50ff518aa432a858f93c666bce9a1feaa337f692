@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc85a10_d04ef7b0",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-13T13:02:39Z",
+      "side": 1,
+      "message": "The typing really confuses me here. Why is this `char *`?",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 7
+      },
+      "revId": "50ff518aa432a858f93c666bce9a1feaa337f692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
