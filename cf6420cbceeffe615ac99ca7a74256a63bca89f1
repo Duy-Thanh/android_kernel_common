@@ -166,6 +166,30 @@
       },
       "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9554440_c01a2464",
+        "filename": "include/trace/hooks/hyp_panic.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-13T13:56:39Z",
+      "side": 1,
+      "message": "As discussed during the meeting last week, yes adding a symbol list is needed prior to merging this patch. The symbol list patch should go on top of this patch ideally, thanks!",
+      "parentUuid": "e94bd676_d498d6e5",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
