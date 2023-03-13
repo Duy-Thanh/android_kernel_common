@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "150d5d53_36944030",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-13T07:57:48Z",
+      "side": 1,
+      "message": "please wrap changelog text at the proper 72 column boundry.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 307
+      },
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "075bb25f_36c31dd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-13T07:57:48Z",
+      "side": 1,
+      "message": "Please submit changes like this upstream first for review and then we can backport it.",
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
