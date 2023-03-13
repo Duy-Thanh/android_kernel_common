@@ -33,6 +33,23 @@
       "message": "Why is this only relevant to android-mainline?",
       "revId": "1bcd69594a8da54cb58d9f3eb39c8bffdff793a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47260f0_1b8816cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-03-13T14:40:35Z",
+      "side": 1,
+      "message": "Discussed with Alexey.  This issue is extending testing times for everyone.\n\nThis issue does not appear to exist in Mainline.\n\nThis patch does not exist anywhere in ACK except this branch.\n\nAlexey will attempt to get to the bottom of the issue and provide a proper fix.\n\nMerging in the meantime - due for review in a week or so.",
+      "revId": "1bcd69594a8da54cb58d9f3eb39c8bffdff793a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
