@@ -153,6 +153,23 @@
       "parentUuid": "fd7a3c3e_b07e96a9",
       "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1648b4aa_ea34b14c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2023-03-13T19:47:34Z",
+      "side": 1,
+      "message": "Hi Saravana,\n\nFix in userspace is here, but it hasn\u0027t been reviewed by Google for awhile:\nhttps://android-review.googlesource.com/c/platform/frameworks/av/+/2257932",
+      "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
