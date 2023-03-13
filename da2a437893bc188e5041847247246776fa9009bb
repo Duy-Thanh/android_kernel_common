@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f6a660f_cf2abd4a",
+        "filename": "include/uapi/linux/gunyah.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-13T16:49:44Z",
+      "side": 1,
+      "message": "please use your own ioctl type, not a custom one.\n\nand why start at 0x10?",
+      "range": {
+        "startLine": 266,
+        "startChar": 38,
+        "endLine": 266,
+        "endChar": 59
+      },
+      "revId": "da2a437893bc188e5041847247246776fa9009bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
