@@ -57,6 +57,24 @@
       "parentUuid": "075bb25f_36c31dd0",
       "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ec3016_3acf42b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-13T11:38:32Z",
+      "side": 1,
+      "message": "Ah, sorry, you are right, this is an android-specific change.\n\nReassigning to the author...",
+      "parentUuid": "f57ad709_5410e037",
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
