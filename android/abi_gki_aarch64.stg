@@ -264046,6 +264046,13 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x16ab491c
+  return_type_id: 0x48b5725f
+  parameter_id: 0x14abdd00
+  parameter_id: 0xc7f025a7
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x16b0ef4b
   return_type_id: 0x48b5725f
   parameter_id: 0x18a2fb63
@@ -268962,6 +268969,13 @@ function {
   parameter_id: 0x3ca2533c
 }
 function {
+  id: 0x1fb862d7
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3f84ee3c
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+}
+function {
   id: 0x1fbef67f
   return_type_id: 0x48b5725f
   parameter_id: 0x3c9a9fb2
@@ -270051,6 +270065,14 @@ function {
   parameter_id: 0x0258f96e
   parameter_id: 0x3e10b518
   parameter_id: 0xf1a6dfed
+}
+function {
+  id: 0x3e8d4bea
+  return_type_id: 0x33756485
+  parameter_id: 0x3f84ee3c
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+  parameter_id: 0x6d7f5ff6
 }
 function {
   id: 0x3e902c00
@@ -297135,6 +297157,15 @@ elf_symbol {
   full_name: "alloc_io_pgtable_ops"
 }
 elf_symbol {
+  id: 0x9cff6ebf
+  name: "alloc_iova_fast"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x65ea3313
+  type_id: 0x3e8d4bea
+  full_name: "alloc_iova_fast"
+}
+elf_symbol {
   id: 0xcf6df527
   name: "alloc_netdev_mqs"
   is_defined: true
@@ -307889,6 +307920,15 @@ elf_symbol {
   full_name: "free_io_pgtable_ops"
 }
 elf_symbol {
+  id: 0x998ad938
+  name: "free_iova_fast"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x350e1145
+  type_id: 0x1fb862d7
+  full_name: "free_iova_fast"
+}
+elf_symbol {
   id: 0x27e49ce0
   name: "free_irq"
   is_defined: true
@@ -308123,6 +308163,15 @@ elf_symbol {
   full_name: "gen_pool_avail"
 }
 elf_symbol {
+  id: 0x8d516f3b
+  name: "gen_pool_best_fit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb737b185
+  type_id: 0x30ff8ddd
+  full_name: "gen_pool_best_fit"
+}
+elf_symbol {
   id: 0xcde73eff
   name: "gen_pool_create"
   is_defined: true
@@ -308184,6 +308233,15 @@ elf_symbol {
   crc: 0x1f557414
   type_id: 0xfb7e748c
   full_name: "gen_pool_has_addr"
+}
+elf_symbol {
+  id: 0x62469fff
+  name: "gen_pool_set_algo"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x96e5d30f
+  type_id: 0x16ab491c
+  full_name: "gen_pool_set_algo"
 }
 elf_symbol {
   id: 0xc5fee33e
@@ -310992,6 +311050,15 @@ elf_symbol {
   crc: 0xacaed4ee
   type_id: 0x91296bda
   full_name: "init_dummy_netdev"
+}
+elf_symbol {
+  id: 0xe42479db
+  name: "init_iova_domain"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6330e4b1
+  type_id: 0x1fb862d7
+  full_name: "init_iova_domain"
 }
 elf_symbol {
   id: 0xd8b14976
@@ -317837,6 +317904,15 @@ elf_symbol {
   crc: 0x60be5796
   type_id: 0x100e6fc8
   full_name: "put_device"
+}
+elf_symbol {
+  id: 0x01768311
+  name: "put_iova_domain"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8d26a975
+  type_id: 0x1f796a1c
+  full_name: "put_iova_domain"
 }
 elf_symbol {
   id: 0x1744651d
@@ -330613,6 +330689,10 @@ symbols {
     value: 0xeba70df6
   }
   symbol {
+    key: "alloc_iova_fast"
+    value: 0x9cff6ebf
+  }
+  symbol {
     key: "alloc_netdev_mqs"
     value: 0xcf6df527
   }
@@ -335393,6 +335473,10 @@ symbols {
     value: 0x9b815cdc
   }
   symbol {
+    key: "free_iova_fast"
+    value: 0x998ad938
+  }
+  symbol {
     key: "free_irq"
     value: 0x27e49ce0
   }
@@ -335497,6 +335581,10 @@ symbols {
     value: 0x838e302b
   }
   symbol {
+    key: "gen_pool_best_fit"
+    value: 0x8d516f3b
+  }
+  symbol {
     key: "gen_pool_create"
     value: 0xcde73eff
   }
@@ -335523,6 +335611,10 @@ symbols {
   symbol {
     key: "gen_pool_has_addr"
     value: 0xb307a45b
+  }
+  symbol {
+    key: "gen_pool_set_algo"
+    value: 0x62469fff
   }
   symbol {
     key: "gen_pool_size"
@@ -336771,6 +336863,10 @@ symbols {
   symbol {
     key: "init_dummy_netdev"
     value: 0x7ded1ffe
+  }
+  symbol {
+    key: "init_iova_domain"
+    value: 0xe42479db
   }
   symbol {
     key: "init_net"
@@ -339815,6 +339911,10 @@ symbols {
   symbol {
     key: "put_device"
     value: 0x71551ba9
+  }
+  symbol {
+    key: "put_iova_domain"
+    value: 0x01768311
   }
   symbol {
     key: "put_pid"
