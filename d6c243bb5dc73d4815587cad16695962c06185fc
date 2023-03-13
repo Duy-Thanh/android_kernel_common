@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16f74e5d_5dbb308b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1032,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-13T11:48:22Z",
+      "side": 1,
+      "message": "Can we do this in `kvm_hyp_init_symbols()` instead?",
+      "range": {
+        "startLine": 1032,
+        "startChar": 0,
+        "endLine": 1032,
+        "endChar": 44
+      },
+      "revId": "d6c243bb5dc73d4815587cad16695962c06185fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
