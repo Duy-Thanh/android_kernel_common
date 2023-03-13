@@ -109,8 +109,11 @@ int __fsverity_verify_signature(const struct inode *inode, const u8 *signature,
 		return err;
 	}
 
+<<<<<<< HEAD   (68e294 ANDROID: ABI: update symbol list for galaxy)
 	pr_debug("Valid signature for file digest %s:%*phN\n",
 		 hash_alg->name, hash_alg->digest_size, file_digest);
+=======
+>>>>>>> BRANCH (8ad9df fscrypt: support decrypting data from large folios)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(__fsverity_verify_signature);
