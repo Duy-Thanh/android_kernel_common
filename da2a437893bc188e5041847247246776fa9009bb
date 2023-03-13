@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04982d1b_65d12109",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-13T17:10:32Z",
+      "side": 1,
+      "message": "These changes aren\u0027t accepted upstream yet, so I am concerned about if there are UAPI changes requested during upstream review. If that happens, then Android code will have to figure out if it is talking to this \"botched\" UAPI or the fully upstream one.\n\nI\u0027m cautiously optimistic the UAPI will be accepted, so I wanted to make it so userspace didn\u0027t have to definitely maintain two UAPI bindings if this one is probably going to be accepted anyway.",
+      "parentUuid": "bee57076_58ae4db4",
+      "revId": "da2a437893bc188e5041847247246776fa9009bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f6a660f_cf2abd4a",
         "filename": "include/uapi/linux/gunyah.h",
         "patchSetId": 6
@@ -31,6 +49,30 @@
       "writtenOn": "2023-03-13T16:49:44Z",
       "side": 1,
       "message": "please use your own ioctl type, not a custom one.\n\nand why start at 0x10?",
+      "range": {
+        "startLine": 266,
+        "startChar": 38,
+        "endLine": 266,
+        "endChar": 59
+      },
+      "revId": "da2a437893bc188e5041847247246776fa9009bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de77da4e_7935d655",
+        "filename": "include/uapi/linux/gunyah.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-13T17:10:32Z",
+      "side": 1,
+      "message": "\u003e please use your own ioctl type, not a custom one.\n\nI don\u0027t want to conflict with upstream ioctl numbers. If I pick 0x6 (arbitrary), then upstream can never use 0x6 which will look odd due to downstream usage of that number. Using separate ioctl type that would never be submitted upstream lets me avoid this conflict.\n\n\u003e and why start at 0x10?\n\nNo particular reason to start at 0x10.",
+      "parentUuid": "2f6a660f_cf2abd4a",
       "range": {
         "startLine": 266,
         "startChar": 38,
