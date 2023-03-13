@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03cab332_435fbd91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-13T19:04:00Z",
+      "side": 1,
+      "message": "\u003e And using a totally new uapi ioctl number for the android kernel is not a good idea, please don\u0027t do that.\n\nI can follow some other convention for ACK-specific ioctls, but I\u0027m not sure what those conventions are.",
+      "parentUuid": "fdc09737_147d850c",
+      "revId": "da2a437893bc188e5041847247246776fa9009bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f6a660f_cf2abd4a",
         "filename": "include/uapi/linux/gunyah.h",
         "patchSetId": 6
