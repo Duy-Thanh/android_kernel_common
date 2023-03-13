@@ -50,6 +50,24 @@
       "message": "Discussed with Alexey.  This issue is extending testing times for everyone.\n\nThis issue does not appear to exist in Mainline.\n\nThis patch does not exist anywhere in ACK except this branch.\n\nAlexey will attempt to get to the bottom of the issue and provide a proper fix.\n\nMerging in the meantime - due for review in a week or so.",
       "revId": "1bcd69594a8da54cb58d9f3eb39c8bffdff793a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b24e60f3_6bd13b57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2023-03-13T14:49:33Z",
+      "side": 1,
+      "message": "Maybe I am misunderstanding, but the patch being reverted only exists in 6.3-rc1 (for now at least). android-mainline received it via I5a687405d995a11e26f21f01415932f5631f7bb9",
+      "parentUuid": "4df2161a_7bee71ad",
+      "revId": "1bcd69594a8da54cb58d9f3eb39c8bffdff793a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
