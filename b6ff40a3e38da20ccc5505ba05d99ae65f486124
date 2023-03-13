@@ -39,6 +39,24 @@
       "message": "Please submit changes like this upstream first for review and then we can backport it.",
       "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f57ad709_5410e037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1996136
+      },
+      "writtenOn": "2023-03-13T10:06:47Z",
+      "side": 1,
+      "message": "Why do you want to do this, the official kernel(https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/mm?h\u003dv5.10.173) does not seem to have a page pinner, how do you apply an upstream patch that modifies the page pinner, and then backport it back?",
+      "parentUuid": "075bb25f_36c31dd0",
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
