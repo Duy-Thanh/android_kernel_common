@@ -16,7 +16,7 @@
 #include <generated/utsrelease.h>
 #include "ar-internal.h"
 
-static const char rxrpc_version_string[65] = "linux-" UTS_RELEASE " AF_RXRPC";
+const char rxrpc_version_string[65] = "linux-" UTS_RELEASE " AF_RXRPC";
 
 /*
  * Reply to a version request
