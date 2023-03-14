@@ -16,6 +16,24 @@
       "message": "retrying with reverted change in topic that might have broken the presubmit",
       "revId": "d02b0b627e4b9e9e16d3a77a51edd29f68e34156",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1210aade_d2a24047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1759142
+      },
+      "writtenOn": "2023-03-14T02:17:26Z",
+      "side": 1,
+      "message": "Thanks a lot for fixing the presubmit efficiently!",
+      "parentUuid": "b886beaa_5c0a361b",
+      "revId": "d02b0b627e4b9e9e16d3a77a51edd29f68e34156",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
