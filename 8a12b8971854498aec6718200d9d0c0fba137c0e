@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca57976_4feb8666",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-14T18:20:06Z",
+      "side": 1,
+      "message": "at this point we need to concede that this is not going to land upstream, so flip this to \"ANDROID\" (keep the \"Link\" tag so we can see the attempt at upstreaming)",
+      "revId": "8a12b8971854498aec6718200d9d0c0fba137c0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
