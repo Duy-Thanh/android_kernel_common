@@ -188,6 +188,24 @@
       "parentUuid": "1648b4aa_ea34b14c",
       "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286206ff_5c99ede3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2023-03-14T00:38:19Z",
+      "side": 1,
+      "message": "ADB was fixed sometime back from Google\u0027s side.\nhttps://android-review.googlesource.com/c/platform/packages/modules/adb/+/1699250",
+      "parentUuid": "4e5e04d3_f19f0185",
+      "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
