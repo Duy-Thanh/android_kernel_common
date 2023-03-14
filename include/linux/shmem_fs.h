@@ -27,6 +27,8 @@ struct shmem_inode_info {
 	struct timespec64	i_crtime;	/* file creation time */
 	unsigned int		fsflags;	/* flags for FS_IOC_[SG]ETFLAGS */
 	struct inode		vfs_inode;
+
+	ANDROID_VENDOR_DATA(1);
 };
 
 #define SHMEM_FL_USER_VISIBLE		FS_FL_USER_VISIBLE
