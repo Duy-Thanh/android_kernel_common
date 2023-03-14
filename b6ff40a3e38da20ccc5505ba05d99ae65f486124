@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44e9800_8bcb7ba2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1996136
+      },
+      "writtenOn": "2023-03-14T01:02:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "150d5d53_36944030",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 307
+      },
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "179cfe1f_b0428fb6",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-13T20:05:41Z",
       "side": 1,
       "message": "Patch looks good for me. Thanks.\n\nI am wondering what was your workload for the read syscall benchmark. \n\nThe failure_tracking checking is always behind page_pinner_inited checking so I thought it\u0027s very unlikely to reach failure_tracking checking unless you enabled \"page_pinner\u003don\"\n\nHowever, it could produce totally different binary output so affecting code size in the hot path and affects cache behavior?\nHowever, I am doubting 5.2% regression.",
+      "range": {
+        "startLine": 24,
+        "startChar": 72,
+        "endLine": 24,
+        "endChar": 128
+      },
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc19afa_745be776",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1996136
+      },
+      "writtenOn": "2023-03-14T01:02:01Z",
+      "side": 1,
+      "message": "OK，the 5.2% regression detail data is as below (ns),thank you~\n\n```\nsyscall\t before     after      Diff       Diff(%)\nread\t   3672.9221   3482.1913  -190.7308   -5.2%\n```\n-\u003e Test code snapshot\n\n```\n\nstatic long long unsigned syscallRead(int times){\n    struct timespec ts;\n    char buf[512];\n    int fd, i;\n    long long unsigned start_ns, end_ns;\n    long long unsigned delta;\n    long long unsigned sum_time_spent \u003d 0;\n    memset(buf, \u0027*\u0027, SIZE);\n    fd \u003d open(\"testfile\", O_RDWR | O_CREAT, 0700);\n    write(fd, buf, SIZE);\n    for(i\u003d0; i \u003c times; i++){\n        lseek(fd, 0, SEEK_SET);\n        start_ns \u003d time_ns(\u0026ts);\n        read(fd, buf, SIZE);\n        end_ns \u003d time_ns(\u0026ts);\n        sum_time_spent +\u003d (end_ns - start_ns);\n        usleep(DELAY_TIME);\n    }\n    close(fd);\n    printf(\"[%s] loop:%d time elapsed: %lluns\\n\", __func__, times, sum_time_spent);\n    return sum_time_spent;\n}\n\n```\n\n-\u003e Test step\n```\n1. install syscallMea case\n2. fix highest_freq\n3. run test case\n   taskset 08 ./syscallMea -b read -t 10000\n4. get test data, for example not included the patch data:\n   build-in arg:read\n   test times:10000\n   case:read\n   [syscallRead] loop:10000 time elapsed: 36729221ns\n   num cmd:1 times:10000 avg time elapsed: 3672.9221 nano seconds\n```",
+      "parentUuid": "179cfe1f_b0428fb6",
       "range": {
         "startLine": 24,
         "startChar": 72,
@@ -95,6 +143,24 @@
       "writtenOn": "2023-03-13T11:38:32Z",
       "side": 1,
       "message": "Ah, sorry, you are right, this is an android-specific change.\n\nReassigning to the author...",
+      "parentUuid": "f57ad709_5410e037",
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "448cf670_abdffc90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1996136
+      },
+      "writtenOn": "2023-03-14T01:02:01Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "f57ad709_5410e037",
       "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
