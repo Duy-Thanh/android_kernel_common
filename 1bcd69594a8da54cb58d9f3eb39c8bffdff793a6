@@ -86,6 +86,24 @@
       "parentUuid": "b24e60f3_6bd13b57",
       "revId": "1bcd69594a8da54cb58d9f3eb39c8bffdff793a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c67fd50e_3c4bb8bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1989876
+      },
+      "writtenOn": "2023-03-14T23:25:49Z",
+      "side": 1,
+      "message": "First of all, I did not know that there is such option that we can report some issues upstream (LKML). I ask around how to proceed better with this and I sent this as a regression email to LKML: https://lore.kernel.org/lkml/20230314230004.961993-1-alexey.klimov@linaro.org/\nThere is some more analysis there about what\u0027s going on.\n\nAnd yes, fixing it via upstream changes coming into repo will be more preferred, I totally agree.",
+      "parentUuid": "70814c25_2426bbe7",
+      "revId": "1bcd69594a8da54cb58d9f3eb39c8bffdff793a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
