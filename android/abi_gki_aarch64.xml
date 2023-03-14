@@ -1291,6 +1291,7 @@
       <elf-symbol name='devm_of_phy_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdd21c452'/>
       <elf-symbol name='devm_of_phy_get_by_index' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3efa16a5'/>
       <elf-symbol name='devm_of_platform_populate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe92e187e'/>
+      <elf-symbol name='devm_of_pwm_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe3688e7f'/>
       <elf-symbol name='devm_pci_alloc_host_bridge' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb54e917'/>
       <elf-symbol name='devm_pci_remap_cfg_resource' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc6f26f1a'/>
       <elf-symbol name='devm_phy_create' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3f7f5e60'/>
@@ -124884,6 +124885,12 @@
       <function-decl name='devm_of_platform_populate' mangled-name='devm_of_platform_populate' filepath='drivers/of/platform.c' line='612' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_of_platform_populate'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/of/platform.c' line='612' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='devm_of_pwm_get' mangled-name='devm_of_pwm_get' filepath='drivers/pwm/core.c' line='1185' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_of_pwm_get'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/pwm/core.c' line='1185' column='1'/>
+        <parameter type-id='9a537bbe' name='np' filepath='drivers/pwm/core.c' line='1185' column='1'/>
+        <parameter type-id='80f4b756' name='con_id' filepath='drivers/pwm/core.c' line='1186' column='1'/>
+        <return type-id='f06adae0'/>
       </function-decl>
       <function-decl name='devm_pci_alloc_host_bridge' mangled-name='devm_pci_alloc_host_bridge' filepath='drivers/pci/probe.c' line='621' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_pci_alloc_host_bridge'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/pci/probe.c' line='621' column='1'/>
