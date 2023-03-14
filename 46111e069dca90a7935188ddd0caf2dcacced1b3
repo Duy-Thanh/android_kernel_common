@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "675f2f49_dcad299a",
+        "filename": "arch/arm64/include/asm/kvm_hyp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-14T15:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0bc96a2_25e84fa7",
+      "range": {
+        "startLine": 143,
+        "startChar": 8,
+        "endLine": 143,
+        "endChar": 21
+      },
+      "revId": "46111e069dca90a7935188ddd0caf2dcacced1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "112c91da_30371219",
@@ -60,6 +84,30 @@
       "writtenOn": "2023-03-13T13:07:01Z",
       "side": 1,
       "message": "Why do we need to take the minimum VL here? If we configure `ZCR_EL2` properly for the host, then won\u0027t it be clamped to `hyp_sve_max_vl` by construction?",
+      "range": {
+        "startLine": 211,
+        "startChar": 8,
+        "endLine": 211,
+        "endChar": 11
+      },
+      "revId": "46111e069dca90a7935188ddd0caf2dcacced1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70092345_91d4f78c",
+        "filename": "arch/arm64/kvm/hyp/include/hyp/switch.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-14T15:21:03Z",
+      "side": 1,
+      "message": "The actual vector length yes, but here we\u0027re calculating the host\u0027s vector length based on ZCR_EL1, which could be bigger than the supported vector length. We use the vl the following line to calculate the offset.",
+      "parentUuid": "112c91da_30371219",
       "range": {
         "startLine": 211,
         "startChar": 8,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8adfaebf_f71216f3",
+        "filename": "arch/arm64/kvm/hyp/include/hyp/switch.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-14T15:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "169ae07f_5e58bcc2",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 7
+      },
+      "revId": "46111e069dca90a7935188ddd0caf2dcacced1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9a858f1_8c0e3843",
@@ -106,6 +178,30 @@
       "writtenOn": "2023-03-13T13:07:01Z",
       "side": 1,
       "message": "I think this is quite error-prone: if we don\u0027t have SVE, then the union type is complete and we can access `host_fp_states` like an array, whereas _with_ SVE I think you allocate the variable length array immediately after the end of each entry in the array, and so the type system is would give you the wrong pointer if you used array indexing. Is that right?\n\nIf so, I think we should either declare `host_fp_states` as an array of bytes or allocate the `sve_regs` structures at the end of the array and access them via an indirection from the main structure.",
+      "range": {
+        "startLine": 421,
+        "startChar": 1,
+        "endLine": 424,
+        "endChar": 44
+      },
+      "revId": "46111e069dca90a7935188ddd0caf2dcacced1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f84f99_d1e3293d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-14T15:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9a858f1_8c0e3843",
       "range": {
         "startLine": 421,
         "startChar": 1,
