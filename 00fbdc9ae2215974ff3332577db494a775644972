@@ -39,6 +39,30 @@
       },
       "revId": "00fbdc9ae2215974ff3332577db494a775644972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebe26fef_9d24cd39",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1875,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2023-03-15T16:34:41Z",
+      "side": 1,
+      "message": "The new \u0027snd_usb_register_platform_ops\u0027 \u0026 \u0027snd_usb_unregister_platform_ops\u0027 symbols are from this upstream change:\nhttps://patchwork.kernel.org/project/linux-usb/patch/20230308235751.495-10-quic_wcheng@quicinc.com/",
+      "parentUuid": "27b78124_5991ff00",
+      "range": {
+        "startLine": 1875,
+        "startChar": 0,
+        "endLine": 1875,
+        "endChar": 33
+      },
+      "revId": "00fbdc9ae2215974ff3332577db494a775644972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
