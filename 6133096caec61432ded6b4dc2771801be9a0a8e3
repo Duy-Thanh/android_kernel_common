@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d816d896_8e4348ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-03-15T19:24:16Z",
+      "side": 1,
+      "message": "That\u0027s unfortunate!  How can I get more details about this issue?  I had tested this change using the following commands and there did not seem to be any issue:\n\n```\ntools/bazel run //common:kernel_aarch64_abi_dist\ntools/bazel run //common:kernel_aarch64_abi_update_symbol_list\ntools/bazel run //common:kernel_aarch64_abi_update\n```",
+      "parentUuid": "2a6ec395_30250223",
+      "revId": "6133096caec61432ded6b4dc2771801be9a0a8e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c61a7b9f_2cd039cc",
         "filename": "include/linux/fs.h",
         "patchSetId": 5
@@ -31,6 +49,30 @@
       "writtenOn": "2023-03-15T16:08:24Z",
       "side": 1,
       "message": "Why is this kind of construct necessary? Does this mean that changes in struct fscrypt_info affect the ABI of the structures in which pointers to struct fscrypt_info are embedded? If so, shouldn\u0027t this issue be fixed by modifying the tools that generate the ABI definition rather than by merging an out-of-tree kernel patch?",
+      "range": {
+        "startLine": 695,
+        "startChar": 0,
+        "endLine": 699,
+        "endChar": 6
+      },
+      "revId": "6133096caec61432ded6b4dc2771801be9a0a8e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46d28d3d_8edf7f15",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-03-15T19:24:16Z",
+      "side": 1,
+      "message": "\u003e Why is this kind of construct necessary? Does this mean that changes in struct fscrypt_info affect the ABI of the structures in which pointers to struct fscrypt_info are embedded?\n\nYes, that\u0027s the problem we\u0027re trying to solve.\n\n\u003e If so, shouldn\u0027t this issue be fixed by modifying the tools that generate the ABI definition rather than by merging an out-of-tree kernel patch?\n\nI would hope so too, but the kernel team does not want to do that.",
+      "parentUuid": "c61a7b9f_2cd039cc",
       "range": {
         "startLine": 695,
         "startChar": 0,
