@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a6ec395_30250223",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-15T16:10:03Z",
+      "side": 1,
+      "message": "Can\u0027t submit now. Appears to confuse the ABI checker (looks like it finds two versions of the type).",
+      "revId": "6133096caec61432ded6b4dc2771801be9a0a8e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c61a7b9f_2cd039cc",
