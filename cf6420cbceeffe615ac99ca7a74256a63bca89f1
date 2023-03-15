@@ -190,6 +190,30 @@
       },
       "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb1a592_55b547bd",
+        "filename": "include/trace/hooks/hyp_panic.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1991675
+      },
+      "writtenOn": "2023-03-15T06:18:02Z",
+      "side": 1,
+      "message": "As a result of internal discussion, we will push the patch that updates the abi symbol list after the entire abi symbol list of S.LSI is merged. And this patch will be merged together at that time.",
+      "parentUuid": "f9554440_c01a2464",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "cf6420cbceeffe615ac99ca7a74256a63bca89f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
