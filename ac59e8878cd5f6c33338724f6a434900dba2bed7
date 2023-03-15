@@ -22,6 +22,30 @@
       },
       "revId": "ac59e8878cd5f6c33338724f6a434900dba2bed7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "479b751b_d0742c3e",
+        "filename": "Documentation/virt/kvm/arm/get_freqtbl.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2023-03-15T01:16:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2272d24b_10705210",
+      "range": {
+        "startLine": 6,
+        "startChar": 25,
+        "endLine": 6,
+        "endChar": 26
+      },
+      "revId": "ac59e8878cd5f6c33338724f6a434900dba2bed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
