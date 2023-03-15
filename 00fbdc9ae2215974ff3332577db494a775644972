@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50a20b17_1c238dfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-15T16:50:29Z",
+      "side": 1,
+      "message": "Then resolve that in your branch, not here.",
+      "parentUuid": "4bba03be_6672fef2",
+      "revId": "00fbdc9ae2215974ff3332577db494a775644972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27b78124_5991ff00",
         "filename": "android/abi_gki_aarch64_pixel",
         "patchSetId": 2
