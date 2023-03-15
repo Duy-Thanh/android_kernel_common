@@ -63,6 +63,30 @@
       },
       "revId": "00fbdc9ae2215974ff3332577db494a775644972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a9d55b6_e54081d4",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1875,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-15T16:49:34Z",
+      "side": 1,
+      "message": "That patchset is obviously NOT in this branch, so adding a symbol like this is not ok and will not work.\n\nI\u0027ll just abandon this one for now.",
+      "parentUuid": "ebe26fef_9d24cd39",
+      "range": {
+        "startLine": 1875,
+        "startChar": 0,
+        "endLine": 1875,
+        "endChar": 33
+      },
+      "revId": "00fbdc9ae2215974ff3332577db494a775644972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
