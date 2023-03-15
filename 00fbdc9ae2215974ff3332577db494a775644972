@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14c98520_fae0fe29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-15T15:08:27Z",
+      "side": 1,
+      "message": "How does this build as these are not valid symbols?",
+      "revId": "00fbdc9ae2215974ff3332577db494a775644972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b78124_5991ff00",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1875,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-15T15:08:27Z",
+      "side": 1,
+      "message": "this is not a symbol in this kernel tree, so I do not think this will actually build.",
+      "range": {
+        "startLine": 1875,
+        "startChar": 0,
+        "endLine": 1875,
+        "endChar": 33
+      },
+      "revId": "00fbdc9ae2215974ff3332577db494a775644972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
