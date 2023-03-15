@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c61a7b9f_2cd039cc",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-03-15T16:08:24Z",
+      "side": 1,
+      "message": "Why is this kind of construct necessary? Does this mean that changes in struct fscrypt_info affect the ABI of the structures in which pointers to struct fscrypt_info are embedded? If so, shouldn\u0027t this issue be fixed by modifying the tools that generate the ABI definition rather than by merging an out-of-tree kernel patch?",
+      "range": {
+        "startLine": 695,
+        "startChar": 0,
+        "endLine": 699,
+        "endChar": 6
+      },
+      "revId": "6133096caec61432ded6b4dc2771801be9a0a8e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
