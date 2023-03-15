@@ -81,6 +81,30 @@
       },
       "revId": "6133096caec61432ded6b4dc2771801be9a0a8e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fb30d1d_f2c9de13",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-15T19:45:18Z",
+      "side": 1,
+      "message": "It\u0027s not enough to suppress them from the KMI. We need to prevent them from being used by partners since they will assume that if `struct inode` is protected, it\u0027s fields are protected too. Failure to do this is likely to result in corruption if the type changes in the kernel but not in the vendor modules.",
+      "parentUuid": "46d28d3d_8edf7f15",
+      "range": {
+        "startLine": 695,
+        "startChar": 0,
+        "endLine": 699,
+        "endChar": 6
+      },
+      "revId": "6133096caec61432ded6b4dc2771801be9a0a8e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
