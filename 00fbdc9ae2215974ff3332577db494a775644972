@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bba03be_6672fef2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2023-03-15T16:49:43Z",
+      "side": 1,
+      "message": "But we cherry pick the upstream into aosp-staging branch, there are kleaf build break erros (b/272685462).\n\nERROR: modpost: \"snd_usb_unregister_platform_ops\" [../private/google-modules/aoc/alsa/aoc_alsa_dev_util.ko] undefined!\nERROR: modpost: \"snd_usb_register_platform_ops\" [../private/google-modules/aoc/alsa/aoc_alsa_dev_util.ko] undefined!",
+      "revId": "00fbdc9ae2215974ff3332577db494a775644972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27b78124_5991ff00",
