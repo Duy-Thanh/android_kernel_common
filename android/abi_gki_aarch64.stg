@@ -291094,6 +291094,19 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x6cfb566e
+  return_type_id: 0x1d44326e
+  parameter_id: 0x0ca27481
+  parameter_id: 0xe276adef
+  parameter_id: 0x7584e7da
+  parameter_id: 0xe276adef
+  parameter_id: 0x7584e7da
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x0ac23bc5
+  parameter_id: 0x054f691a
+}
+function {
   id: 0x6d9955d1
   return_type_id: 0x054f691a
   parameter_id: 0x1dc3d428
@@ -291175,6 +291188,30 @@ function {
   parameter_id: 0xf1a6dfed
 }
 function {
+  id: 0x6f1e53de
+  return_type_id: 0x1d44326e
+  parameter_id: 0x0ca27481
+  parameter_id: 0x1f48062a
+  parameter_id: 0x3b461cc8
+  parameter_id: 0x7584e7da
+  parameter_id: 0x3b461cc8
+  parameter_id: 0x914dbfdc
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+}
+function {
+  id: 0x6f2829be
+  return_type_id: 0x1d44326e
+  parameter_id: 0x0ca27481
+  parameter_id: 0x1f48062a
+  parameter_id: 0xe276adef
+  parameter_id: 0x7584e7da
+  parameter_id: 0xe276adef
+  parameter_id: 0x914dbfdc
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x6f37ee87
   return_type_id: 0x054f691a
   parameter_id: 0x1d44326e
@@ -291199,6 +291236,19 @@ function {
   return_type_id: 0x347303b4
   parameter_id: 0x6720d32f
   parameter_id: 0x1bf16028
+}
+function {
+  id: 0x6f9cf068
+  return_type_id: 0x1d44326e
+  parameter_id: 0x0ca27481
+  parameter_id: 0x3b461cc8
+  parameter_id: 0x7584e7da
+  parameter_id: 0x3b461cc8
+  parameter_id: 0x7584e7da
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x0ac23bc5
+  parameter_id: 0x054f691a
 }
 function {
   id: 0x6fa775f5
@@ -298756,6 +298806,12 @@ function {
   parameter_id: 0x5d8155a5
   parameter_id: 0xe5f7924d
   parameter_id: 0x78f4e574
+}
+function {
+  id: 0x970921d5
+  return_type_id: 0x6720d32f
+  parameter_id: 0x29c600bb
+  parameter_id: 0x3e10b518
 }
 function {
   id: 0x970deb9a
@@ -315630,6 +315686,24 @@ elf_symbol {
   full_name: "__ieee80211_schedule_txq"
 }
 elf_symbol {
+  id: 0x64c84a6a
+  name: "__inet6_lookup_established"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3c630c25
+  type_id: 0x6f1e53de
+  full_name: "__inet6_lookup_established"
+}
+elf_symbol {
+  id: 0x56e8b9af
+  name: "__inet_lookup_established"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7be96523
+  type_id: 0x6f2829be
+  full_name: "__inet_lookup_established"
+}
+elf_symbol {
   id: 0x88943e29
   name: "__init_rwsem"
   is_defined: true
@@ -319751,6 +319825,24 @@ elf_symbol {
   crc: 0x9e7d6bd0
   type_id: 0x1c4508b2
   full_name: "__udelay"
+}
+elf_symbol {
+  id: 0x79821b1f
+  name: "__udp4_lib_lookup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x69306bc4
+  type_id: 0x6cfb566e
+  full_name: "__udp4_lib_lookup"
+}
+elf_symbol {
+  id: 0xdf489de4
+  name: "__udp6_lib_lookup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8d26811b
+  type_id: 0x6f9cf068
+  full_name: "__udp6_lib_lookup"
 }
 elf_symbol {
   id: 0xd853ca80
@@ -349464,6 +349556,15 @@ elf_symbol {
   full_name: "rproc_report_crash"
 }
 elf_symbol {
+  id: 0xa2e29e3b
+  name: "rproc_set_firmware"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf9ecfa1b
+  type_id: 0x970921d5
+  full_name: "rproc_set_firmware"
+}
+elf_symbol {
   id: 0x74c27ecd
   name: "rproc_shutdown"
   is_defined: true
@@ -352713,6 +352814,15 @@ elf_symbol {
   full_name: "sock_diag_unregister"
 }
 elf_symbol {
+  id: 0xbcf8b9bf
+  name: "sock_edemux"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5872e964
+  type_id: 0x11cb8bd5
+  full_name: "sock_edemux"
+}
+elf_symbol {
   id: 0x83497546
   name: "sock_efree"
   is_defined: true
@@ -354219,6 +354329,15 @@ elf_symbol {
   full_name: "tasklist_lock"
 }
 elf_symbol {
+  id: 0xeb0e3e9b
+  name: "tcp_hashinfo"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xa70ed9dc
+  type_id: 0x5760fe36
+  full_name: "tcp_hashinfo"
+}
+elf_symbol {
   id: 0x857e5dc9
   name: "tcpci_get_tcpm_port"
   is_defined: true
@@ -355513,6 +355632,15 @@ elf_symbol {
   crc: 0x78622c7b
   type_id: 0x9ea1fe03
   full_name: "udp_sock_create6"
+}
+elf_symbol {
+  id: 0x3bea1d77
+  name: "udp_table"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x95a67b07
+  type_id: 0x0148098b
+  full_name: "udp_table"
 }
 elf_symbol {
   id: 0x83627eaa
@@ -361087,6 +361215,14 @@ symbols {
     value: 0x1ed50f6f
   }
   symbol {
+    key: "__inet6_lookup_established"
+    value: 0x64c84a6a
+  }
+  symbol {
+    key: "__inet_lookup_established"
+    value: 0x56e8b9af
+  }
+  symbol {
     key: "__init_rwsem"
     value: 0x88943e29
   }
@@ -362917,6 +363053,14 @@ symbols {
   symbol {
     key: "__udelay"
     value: 0xb882f62e
+  }
+  symbol {
+    key: "__udp4_lib_lookup"
+    value: 0x79821b1f
+  }
+  symbol {
+    key: "__udp6_lib_lookup"
+    value: 0xdf489de4
   }
   symbol {
     key: "__uio_register_device"
@@ -376123,6 +376267,10 @@ symbols {
     value: 0x74844b2a
   }
   symbol {
+    key: "rproc_set_firmware"
+    value: 0xa2e29e3b
+  }
+  symbol {
     key: "rproc_shutdown"
     value: 0x74c27ecd
   }
@@ -377567,6 +377715,10 @@ symbols {
     value: 0x5ca98337
   }
   symbol {
+    key: "sock_edemux"
+    value: 0xbcf8b9bf
+  }
+  symbol {
     key: "sock_efree"
     value: 0x83497546
   }
@@ -378239,6 +378391,10 @@ symbols {
     value: 0x6c3c9573
   }
   symbol {
+    key: "tcp_hashinfo"
+    value: 0xeb0e3e9b
+  }
+  symbol {
     key: "tcpci_get_tcpm_port"
     value: 0x857e5dc9
   }
@@ -378813,6 +378969,10 @@ symbols {
   symbol {
     key: "udp_sock_create6"
     value: 0x2259ac6a
+  }
+  symbol {
+    key: "udp_table"
+    value: 0x3bea1d77
   }
   symbol {
     key: "udp_tunnel6_xmit_skb"
