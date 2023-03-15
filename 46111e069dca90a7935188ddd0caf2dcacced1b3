@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d625dc6_f91568f5",
+        "filename": "arch/arm64/kvm/hyp/include/hyp/switch.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-15T13:45:07Z",
+      "side": 1,
+      "message": "With the latest patch this is irrelevant (and gone), since as long as we are consistent, we can always save/restore using the max value as the offset.\n\nThis does not affect the vector size itself, which is determined by ZCR_EL2.",
+      "parentUuid": "b971ed68_fb4f9f72",
+      "range": {
+        "startLine": 211,
+        "startChar": 8,
+        "endLine": 211,
+        "endChar": 11
+      },
+      "revId": "46111e069dca90a7935188ddd0caf2dcacced1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "169ae07f_5e58bcc2",
@@ -273,6 +297,30 @@
       "writtenOn": "2023-03-13T13:07:01Z",
       "side": 1,
       "message": "Same comment as before; not sure why this is necessary if ZCR_EL2 is configured properly",
+      "range": {
+        "startLine": 711,
+        "startChar": 8,
+        "endLine": 711,
+        "endChar": 11
+      },
+      "revId": "46111e069dca90a7935188ddd0caf2dcacced1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade22499_b11e0958",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-15T13:45:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8451b1b_a6460842",
       "range": {
         "startLine": 711,
         "startChar": 8,
