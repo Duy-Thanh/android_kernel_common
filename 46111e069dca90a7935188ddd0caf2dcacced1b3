@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b971ed68_fb4f9f72",
+        "filename": "arch/arm64/kvm/hyp/include/hyp/switch.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-15T10:04:50Z",
+      "side": 1,
+      "message": "For more context, here\u0027s a link to the spec on accesses (read/write) to ZCR_EL1\n\nhttps://developer.arm.com/documentation/ddi0595/2021-03/AArch64-Registers/ZCR-EL1--SVE-Control-Register--EL1-",
+      "parentUuid": "70092345_91d4f78c",
+      "range": {
+        "startLine": 211,
+        "startChar": 8,
+        "endLine": 211,
+        "endChar": 11
+      },
+      "revId": "46111e069dca90a7935188ddd0caf2dcacced1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "169ae07f_5e58bcc2",
         "filename": "arch/arm64/kvm/hyp/include/hyp/switch.h",
         "patchSetId": 6
