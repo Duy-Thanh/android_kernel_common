@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9987c098_0ac435b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-03-16T12:41:50Z",
+      "side": 1,
+      "message": "I have verified this fixes the issue with:\n\ntools/bazel build //common:kernel_aarch64_abi_dist",
+      "revId": "77ba93e199e50669a1fb3abc364bd5bc445a7fbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
