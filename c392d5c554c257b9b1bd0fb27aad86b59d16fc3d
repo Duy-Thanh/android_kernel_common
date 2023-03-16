@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98270059_d060bad4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-03-16T16:02:44Z",
+      "side": 1,
+      "message": "\"ABI is broken\" finding is wrong, these symbols are not present on LKGB, but present on tip of the tree.",
+      "revId": "c392d5c554c257b9b1bd0fb27aad86b59d16fc3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
