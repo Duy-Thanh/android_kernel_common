@@ -16,6 +16,24 @@
       "message": "Should `kmi_symbol_list_strict_mode` also be disabled on android13 branches for debug builds?\n\nIf not, why does it need to be disabled for debug builds here? What has changed?",
       "revId": "399d9da288b46dd1d48874ebea767b84a5a6ff0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21cd450c_cc268799",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-16T23:16:40Z",
+      "side": 1,
+      "message": "I am not sure about anrdoid13.\n\nFor this change refer here: https://chat.google.com/room/AAAAp0zXizA/Ywr3Wt5QYbY",
+      "parentUuid": "484e460d_1ed5c487",
+      "revId": "399d9da288b46dd1d48874ebea767b84a5a6ff0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
