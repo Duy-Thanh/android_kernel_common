@@ -893,6 +893,27 @@ static struct binder_node *binder_get_node(struct binder_proc *proc,
 	return node;
 }
 
+static void binder_node_priority_setup(struct binder_node *node, u32 flags)
+{
+	int user_prio;
+	int policy;
+
+	user_prio = flags & FLAT_BINDER_FLAG_PRIORITY_MASK;
+	policy = (flags & FLAT_BINDER_FLAG_SCHED_POLICY_MASK) >>
+		FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT;
+
+	node->sched_policy = policy;
+	node->min_priority = to_kernel_prio(policy, user_prio);
+	node->inherit_rt = !!(flags & FLAT_BINDER_FLAG_INHERIT_RT);
+
+	/* if needed, verify current task can realtime */
+	if ((node->inherit_rt || is_rt_policy(policy)) &&
+	    !capable(CAP_SYS_NICE) && !rlimit(RLIMIT_RTPRIO)) {
+		binder_user_error("%d: RLIMIT_RTPRIO not set\n",
+			current->pid);
+	}
+}
+
 static struct binder_node *binder_init_node_ilocked(
 						struct binder_proc *proc,
 						struct binder_node *new_node,
@@ -904,7 +925,6 @@ static struct binder_node *binder_init_node_ilocked(
 	binder_uintptr_t ptr = fp ? fp->binder : 0;
 	binder_uintptr_t cookie = fp ? fp->cookie : 0;
 	__u32 flags = fp ? fp->flags : 0;
-	s8 priority;
 
 	assert_spin_locked(&proc->inner_lock);
 
@@ -937,12 +957,8 @@ static struct binder_node *binder_init_node_ilocked(
 	node->ptr = ptr;
 	node->cookie = cookie;
 	node->work.type = BINDER_WORK_NODE;
-	priority = flags & FLAT_BINDER_FLAG_PRIORITY_MASK;
-	node->sched_policy = (flags & FLAT_BINDER_FLAG_SCHED_POLICY_MASK) >>
-		FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT;
-	node->min_priority = to_kernel_prio(node->sched_policy, priority);
+	binder_node_priority_setup(node, flags);
 	node->accept_fds = !!(flags & FLAT_BINDER_FLAG_ACCEPTS_FDS);
-	node->inherit_rt = !!(flags & FLAT_BINDER_FLAG_INHERIT_RT);
 	node->txn_security_ctx = !!(flags & FLAT_BINDER_FLAG_TXN_SECURITY_CTX);
 	spin_lock_init(&node->lock);
 	INIT_LIST_HEAD(&node->work.entry);
