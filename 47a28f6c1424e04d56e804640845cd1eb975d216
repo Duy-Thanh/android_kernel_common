@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b43e407_eeb13462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-16T21:05:40Z",
+      "side": 1,
+      "message": "Needed urgently for wear OS devs. Will revert if userspace issue is fixed for devs using macbooks.",
+      "revId": "47a28f6c1424e04d56e804640845cd1eb975d216",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
