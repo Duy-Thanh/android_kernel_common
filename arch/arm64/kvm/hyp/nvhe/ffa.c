@@ -706,7 +706,13 @@ static void do_ffa_mem_frag_tx(struct arm_smccc_res *res,
 	memcpy(buf, non_secure_el1_buffers[vmid].tx, fraglen);
 	nr_ranges = fraglen / sizeof(*buf);
 
-	ret = ffa_host_share_ranges(buf, nr_ranges);
+	if (vmid == 0) {
+		ret = ffa_host_share_ranges(buf, nr_ranges);
+	} else {
+		ret = ffa_guest_share_ranges(buf, nr_ranges,
+					     ctxt, vmid);
+	}
+
 	if (ret) {
 		/*
 		 * We're effectively aborting the transaction, so we need
@@ -719,8 +725,14 @@ static void do_ffa_mem_frag_tx(struct arm_smccc_res *res,
 	}
 
 	spmd_mem_frag_tx(res, handle_lo, handle_hi, fraglen, endpoint_id);
-	if (res->a0 != FFA_SUCCESS && res->a0 != FFA_MEM_FRAG_RX)
-		WARN_ON(ffa_host_unshare_ranges(buf, nr_ranges));
+	if (res->a0 != FFA_SUCCESS && res->a0 != FFA_MEM_FRAG_RX) {
+		if (vmid == 0) {
+			WARN_ON(ffa_host_unshare_ranges(buf, nr_ranges));
+		} else {
+			WARN_ON(ffa_guest_unshare_ranges(buf, nr_ranges,
+							 ctxt, vmid));
+		}
+	}
 
 out_unlock:
 	hyp_spin_unlock(&hyp_buffers.lock);
@@ -1125,9 +1137,11 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu)
 	case FFA_MEM_RECLAIM:
 		do_ffa_mem_reclaim(&res, ctxt, vmid);
 		goto out_handled;
+	case FFA_MEM_FRAG_TX:
+		do_ffa_mem_frag_tx(&res, ctxt, vmid);
+		goto out_handled;
 	case FFA_MEM_LEND:
 	case FFA_FN64_MEM_LEND:
-	case FFA_MEM_FRAG_TX:
 		break;
 	}
 
