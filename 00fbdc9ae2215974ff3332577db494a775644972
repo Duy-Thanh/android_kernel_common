@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd678f6b_14eda8f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2023-03-16T01:01:10Z",
+      "side": 1,
+      "message": "Got it. I will phase in that cherry pick first.",
+      "parentUuid": "50a20b17_1c238dfc",
+      "revId": "00fbdc9ae2215974ff3332577db494a775644972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27b78124_5991ff00",
         "filename": "android/abi_gki_aarch64_pixel",
         "patchSetId": 2
@@ -114,6 +132,30 @@
       "side": 1,
       "message": "That patchset is obviously NOT in this branch, so adding a symbol like this is not ok and will not work.\n\nI\u0027ll just abandon this one for now.",
       "parentUuid": "ebe26fef_9d24cd39",
+      "range": {
+        "startLine": 1875,
+        "startChar": 0,
+        "endLine": 1875,
+        "endChar": 33
+      },
+      "revId": "00fbdc9ae2215974ff3332577db494a775644972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf35496b_0d9235ad",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1875,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2023-03-16T01:01:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a9d55b6_e54081d4",
       "range": {
         "startLine": 1875,
         "startChar": 0,
