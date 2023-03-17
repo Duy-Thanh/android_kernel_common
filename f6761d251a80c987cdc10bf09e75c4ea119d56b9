@@ -211,6 +211,24 @@
       "parentUuid": "0550823b_a1064396",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5afbc44f_d5b4a22b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-03-17T23:49:03Z",
+      "side": 1,
+      "message": "patiently waiting as 6.3-rc1 doesn\u0027t seem to be fully done yet; we are at https://android.googlesource.com/kernel/common/+/14d5cd06da48af816c7fa1baeda01a4c12486359 right now \n\n```\nMerge 13e574b4941e (\"Merge tag \u0027spi-v6.3\u0027 of git://git.kernel.org/pub/scm/linux/kernel/git/broonie/spi\") into android-mainline\n\nSteps on the way to 6.3-rc1\n\nChange-Id: I468cdb13059002a2f3f52f4c617a9cccbecefdbe\n```",
+      "parentUuid": "53c51c84_5d8c8ba9",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
