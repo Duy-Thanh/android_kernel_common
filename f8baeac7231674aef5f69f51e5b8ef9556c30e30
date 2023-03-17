@@ -122,6 +122,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "29230adc_a6af3d84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-03-17T01:24:25Z",
+      "side": 1,
+      "message": "Lets merge this for now, and revert when the userspace fix is available.",
+      "parentUuid": "fc1c52fe_34a390ee",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fd7a3c3e_b07e96a9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -204,6 +228,24 @@
       "side": 1,
       "message": "ADB was fixed sometime back from Google\u0027s side.\nhttps://android-review.googlesource.com/c/platform/packages/modules/adb/+/1699250",
       "parentUuid": "4e5e04d3_f19f0185",
+      "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2409b94b_95845b4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-03-17T01:24:25Z",
+      "side": 1,
+      "message": "Lets merge this for now, and revert when the userspace fix is available.",
+      "parentUuid": "286206ff_5c99ede3",
       "revId": "f8baeac7231674aef5f69f51e5b8ef9556c30e30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
