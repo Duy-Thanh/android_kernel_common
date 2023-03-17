@@ -1106,6 +1106,7 @@ struct dwc3_scratchpad_array {
  *		     address.
  * @num_ep_resized: carries the current number endpoints which have had its tx
  *		    fifo resized.
+ * @debug_root: root debugfs directory for this device to put its files in.
  */
 struct dwc3 {
 	struct work_struct	drd_work;
@@ -1317,11 +1318,15 @@ struct dwc3 {
 	int			max_cfg_eps;
 	int			last_fifo_depth;
 	int			num_ep_resized;
+<<<<<<< HEAD   (ea8aeb Merge 5.15.99 into android14-5.15)
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+	struct dentry		*debug_root;
+>>>>>>> BRANCH (d214f2 Linux 5.15.100)
 };
 
 #define INCRX_BURST_MODE 0

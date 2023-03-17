@@ -221,11 +221,28 @@ static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
 		return;
 
 	ts_diff = jiffies - iostat_ctx->submit_ts;
+<<<<<<< HEAD   (ea8aeb Merge 5.15.99 into android14-5.15)
 	if (page_type == META_FLUSH) {
 		page_type = META;
 	} else if (page_type >= NR_PAGE_TYPE) {
 		f2fs_warn(sbi, "%s: %d over NR_PAGE_TYPE", __func__, page_type);
 		return;
+=======
+	if (iotype == META_FLUSH) {
+		iotype = META;
+	} else if (iotype >= NR_PAGE_TYPE) {
+		f2fs_warn(sbi, "%s: %d over NR_PAGE_TYPE", __func__, iotype);
+		return;
+	}
+
+	if (rw == 0) {
+		idx = READ_IO;
+	} else {
+		if (is_sync)
+			idx = WRITE_SYNC_IO;
+		else
+			idx = WRITE_ASYNC_IO;
+>>>>>>> BRANCH (d214f2 Linux 5.15.100)
 	}
 
 	spin_lock_irqsave(&sbi->iostat_lat_lock, flags);
