@@ -34,6 +34,24 @@
       "parentUuid": "7055dce8_058e13ad",
       "revId": "75b31f55ac77b9d5d4bb86711719fd61aaf1109d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d480c2f0_7fcbb381",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-03-17T23:50:51Z",
+      "side": 1,
+      "message": "Sounds good. Thank you for the explanation.",
+      "parentUuid": "59331473_a94f767a",
+      "revId": "75b31f55ac77b9d5d4bb86711719fd61aaf1109d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
