@@ -16,6 +16,24 @@
       "message": "WQ_CPU_INTENSIVE flag was removed in previous chain in the list as it was meaningless when WQ_UNBOUND was used. Now that this patch removes WQ_UNBOUND, do you want to bring back the WQ_CPU_INTENSIVE? Or keeping the goal in mind of reducing latency (improving performance), do you have any numbers with and without WQ_CPU_INTENSIVE to justify inclusion or removal?",
       "revId": "75b31f55ac77b9d5d4bb86711719fd61aaf1109d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59331473_a94f767a",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-03-17T23:41:23Z",
+      "side": 1,
+      "message": "A dm-verity work item doesn\u0027t use that much CPU time. I\u0027d expect WQ_CPU_INTENSIVE to have no impact with accelerated algorithms.\n\nIIUC WQ_CPU_INTENSIVE is to take workers with long running jobs out of the worker pool management and have them only managed by the scheduler. Since a dm-verity work is so short, removing the worker from the worker pool doesn\u0027t seem useful. I don\u0027t think that flag should have been enabled in the first place.",
+      "parentUuid": "7055dce8_058e13ad",
+      "revId": "75b31f55ac77b9d5d4bb86711719fd61aaf1109d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
