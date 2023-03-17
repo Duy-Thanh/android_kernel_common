@@ -157855,6 +157855,12 @@ member {
   offset: 96
 }
 member {
+  id: 0x4f8c91e3
+  name: "retries"
+  type_id: 0x6720d32f
+  offset: 160
+}
+member {
   id: 0x4f8c92df
   name: "retries"
   type_id: 0x6720d32f
@@ -226684,6 +226690,7 @@ struct_union {
     member_id: 0xbf9f3e0b
     member_id: 0xb54d95a7
     member_id: 0x114cfa02
+    member_id: 0x4f8c91e3
     member_id: 0x201ba81a
   }
 }
