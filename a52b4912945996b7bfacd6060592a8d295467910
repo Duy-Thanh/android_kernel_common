@@ -16,6 +16,24 @@
       "message": "I know this is supposed to be a cherry-pick but this isn\u0027t andorid13-5.15. if its targeted to multiple kernels you might leave out the version here to avoid confusion.",
       "revId": "a52b4912945996b7bfacd6060592a8d295467910",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8301528a_9bf66fea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2023-03-18T08:19:10Z",
+      "side": 1,
+      "message": "Done as suggested. Info about version is deleted.",
+      "parentUuid": "4d4e08c4_25ca30b2",
+      "revId": "a52b4912945996b7bfacd6060592a8d295467910",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
