@@ -229,6 +229,24 @@
       "parentUuid": "53c51c84_5d8c8ba9",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bbc71e1_41fe2db9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-19T14:21:25Z",
+      "side": 1,
+      "message": "Yes, merges are stalled a bit due to gpio driver changes, feel free to pitch in if you can help with that!",
+      "parentUuid": "5afbc44f_d5b4a22b",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
