@@ -287389,6 +287389,12 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x1f5469d6
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3e10b518
+  parameter_id: 0x120540d1
+}
+function {
   id: 0x1f558355
   return_type_id: 0x48b5725f
   parameter_id: 0x3e10b518
@@ -325748,6 +325754,15 @@ elf_symbol {
   full_name: "debugfs_lookup"
 }
 elf_symbol {
+  id: 0x0d94ff56
+  name: "debugfs_lookup_and_remove"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x04b0b18c
+  type_id: 0x1f5469d6
+  full_name: "debugfs_lookup_and_remove"
+}
+elf_symbol {
   id: 0xc28b6d25
   name: "debugfs_remove"
   is_defined: true
@@ -329368,6 +329383,15 @@ elf_symbol {
   crc: 0x9fbb87ab
   type_id: 0xab344d2b
   full_name: "drm_atomic_get_old_connector_for_encoder"
+}
+elf_symbol {
+  id: 0xd9c6b1b6
+  name: "drm_atomic_get_old_private_obj_state"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4084ee9b
+  type_id: 0x8715e05e
+  full_name: "drm_atomic_get_old_private_obj_state"
 }
 elf_symbol {
   id: 0x0a479d68
@@ -365703,6 +365727,10 @@ symbols {
     value: 0x5e671464
   }
   symbol {
+    key: "debugfs_lookup_and_remove"
+    value: 0x0d94ff56
+  }
+  symbol {
     key: "debugfs_remove"
     value: 0xc28b6d25
   }
@@ -367305,6 +367333,10 @@ symbols {
   symbol {
     key: "drm_atomic_get_old_connector_for_encoder"
     value: 0xf53e2c51
+  }
+  symbol {
+    key: "drm_atomic_get_old_private_obj_state"
+    value: 0xd9c6b1b6
   }
   symbol {
     key: "drm_atomic_get_plane_state"
