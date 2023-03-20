@@ -818,6 +818,6 @@ long gh_dev_vm_mgr_ioctl(struct gh_rm *rm, unsigned int cmd, unsigned long arg)
 	case GH_ANDROID_TENTATIVE_UAPI:
 		return 0;
 	default:
-		return -ENOIOCTLCMD;
+		return -ENOTTY;
 	}
 }
