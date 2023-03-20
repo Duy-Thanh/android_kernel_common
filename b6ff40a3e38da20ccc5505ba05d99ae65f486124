@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5bac97b_665115b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1996136
+      },
+      "writtenOn": "2023-03-20T06:51:09Z",
+      "side": 1,
+      "message": "we do test in the low-end device, and has more drop, the specification:\n\n```\n1) Process is 12nm\n2) CPU is 2x A75 2.0GHZ, 256KB L2,  6x A55 1.7GHZ, 64KB L2, 1MB L3\n3) GPU is ARM G52 MC2 ~820MHZ, Manhattan 3.0 ~21fps\n4) Memory 1x LP3 933MHz ,up to 4GB, 2x LP4x 1800MHZ, up to 8GB, eMMC 5.1, Memory size 4GB.\n```\ncould you help to provide the device specification in your side? and how did you test within stddev? thank you~",
+      "parentUuid": "7a170d05_271cb616",
+      "range": {
+        "startLine": 24,
+        "startChar": 72,
+        "endLine": 24,
+        "endChar": 128
+      },
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "075bb25f_36c31dd0",
