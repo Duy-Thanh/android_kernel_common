@@ -428,10 +428,17 @@ static void gh_vm_free(struct work_struct *work)
 		}
 		mutex_unlock(&ghvm->resources_lock);
 
-		ret = gh_rm_vm_reset(ghvm->rm, ghvm->vmid);
-		if (ret)
-			dev_err(ghvm->parent, "Failed to reset the vm: %d\n", ret);
-		wait_event(ghvm->vm_status_wait, ghvm->vm_status == GH_RM_VM_STATUS_RESET);
+		/* vm_status == LOAD if user creates VM, but then destroys it
+		 * without ever trying to start it. In that case, we have only
+		 * allocated VMID. Clean up functions (above), memory (below),
+		 * and dealloc vmid (below), but no call gh_rm_vm_reset().
+		 */
+		if (ghvm->vm_status != GH_RM_VM_STATUS_LOAD) {
+			ret = gh_rm_vm_reset(ghvm->rm, ghvm->vmid);
+			if (ret)
+				dev_err(ghvm->parent, "Failed to reset the vm: %d\n", ret);
+			wait_event(ghvm->vm_status_wait, ghvm->vm_status == GH_RM_VM_STATUS_RESET);
+		}
 
 		mutex_lock(&ghvm->mm_lock);
 		list_for_each_entry_safe(mapping, tmp, &ghvm->memory_mappings, list) {
@@ -540,8 +547,6 @@ static int gh_vm_start(struct gh_vm *ghvm)
 		return 0;
 	}
 
-	ghvm->vm_status = GH_RM_VM_STATUS_RESET;
-
 	mutex_lock(&ghvm->mm_lock);
 	list_for_each_entry(mapping, &ghvm->memory_mappings, list) {
 		switch (mapping->share_type) {
@@ -598,6 +603,7 @@ static int gh_vm_start(struct gh_vm *ghvm)
 	}
 
 	ret = gh_rm_vm_init(ghvm->rm, ghvm->vmid);
+	ghvm->vm_status = GH_RM_VM_STATUS_RESET;
 	if (ret) {
 		dev_warn(ghvm->parent, "Failed to initialize VM: %d\n", ret);
 		goto err;
