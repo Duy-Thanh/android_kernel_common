@@ -368,6 +368,12 @@ static DECLARE_DELAYED_WORK(delayed_fput_work, delayed_fput);
 
 void fput(struct file *file)
 {
+	if (CHECK_DATA_CORRUPTION(file_count(file) == 0,
+			"VFS: Close: file count is 0 (f_op=%ps)",
+			file->f_op)) {
+		return;
+	}
+
 	if (atomic_long_dec_and_test(&file->f_count)) {
 		struct task_struct *task = current;
 
