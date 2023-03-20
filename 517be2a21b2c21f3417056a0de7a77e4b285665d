@@ -52,6 +52,24 @@
       "parentUuid": "85e5b122_b85641e4",
       "revId": "517be2a21b2c21f3417056a0de7a77e4b285665d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bec3481e_e995845b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-20T23:27:31Z",
+      "side": 1,
+      "message": "\u003e I meant the new crossvm can call a normal future gh ioctl to test that existence so there is no need for GH_ANDROID_TENATIVE_UAPI.\n\nI don\u0027t think we can be sure that the \"normal future gh ioctl\" will have a different number than what ACK has. For instance, if `struct gh_userspace_memory_region` changes during kernel.org review, ACK will have the older version and crosvm won\u0027t know whether it should use the android14-6.1 `struct gh_userspace_memory_region` or the final kernel.org definition.\n\n(I picked `struct gh_userspace_memory_region` as it was the first struct in include/uapi/linux/gunyah.h; no special concerns about this particular struct)",
+      "parentUuid": "7912ba2c_5db22cfc",
+      "revId": "517be2a21b2c21f3417056a0de7a77e4b285665d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
