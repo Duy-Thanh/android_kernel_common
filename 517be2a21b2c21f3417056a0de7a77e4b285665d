@@ -16,6 +16,24 @@
       "message": "who is using this? It sounds like no one is using until there is a 2nd ABI. Why not flip this around so the a future version of crossvm is using existence of a future ioctl definition to look for the future ABI. It seems like this patch wouldn\u0027t be needed then.\n\n...or we can add this ioctl later in preperation for W or X when crossvm implements the new ABI.",
       "revId": "517be2a21b2c21f3417056a0de7a77e4b285665d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e5b122_b85641e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-20T22:57:00Z",
+      "side": 1,
+      "message": "\u003e Why not flip this around so the a future version of crossvm is using existence of a future ioctl definition to look for the future ABI.\n\nI don\u0027t think kernel.org take an ioctl definition to say \"I\u0027m from kernel.org\" to support downstream kernels?\n\nI will check with crosvm team how they want to handle possibility that future kernel might break crosvm.",
+      "parentUuid": "86e63697_6274f07b",
+      "revId": "517be2a21b2c21f3417056a0de7a77e4b285665d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
