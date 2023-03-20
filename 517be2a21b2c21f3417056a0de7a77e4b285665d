@@ -34,6 +34,24 @@
       "parentUuid": "86e63697_6274f07b",
       "revId": "517be2a21b2c21f3417056a0de7a77e4b285665d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7912ba2c_5db22cfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-20T23:20:48Z",
+      "side": 1,
+      "message": "I meant the new crossvm can call a normal future gh ioctl to test that existence so there is no need for GH_ANDROID_TENATIVE_UAPI. I think this patch should be dropped since GH_ANDROID_TENATIVE_UAPI is not needed to discover whether it is the new UAPI... or in the unlikely case it is needed, it can be added to `android14-6.1` later since the addition of this wouldn\u0027t affect KMI.",
+      "parentUuid": "85e5b122_b85641e4",
+      "revId": "517be2a21b2c21f3417056a0de7a77e4b285665d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
