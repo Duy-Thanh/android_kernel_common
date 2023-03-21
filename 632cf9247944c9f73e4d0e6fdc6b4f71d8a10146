@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f5eee8_da5c22ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-03-21T02:54:20Z",
+      "side": 1,
+      "message": "While it was an android recommended config awhile back, its not been in the gki_defconfig for the last few years. Could you expand a bit here as to why its useful so folks can understand the rational for the change?",
+      "revId": "632cf9247944c9f73e4d0e6fdc6b4f71d8a10146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b719df_bc4ebb7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-03-21T02:54:20Z",
+      "side": 1,
+      "message": "Thank you for the edit! I\u0027ve got another minor request to expand a bit on the patch rational in the commit message.",
+      "revId": "632cf9247944c9f73e4d0e6fdc6b4f71d8a10146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
