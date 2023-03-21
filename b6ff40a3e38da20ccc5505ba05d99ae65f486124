@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac931b73_967cb283",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-03-21T01:28:59Z",
+      "side": 1,
+      "message": "Thanks for the detail info.\n\nMy device was\n```\nOcta-core (2x2.85 GHz Cortex-X1 \u0026 2x2.35 GHz Cortex-A78 \u0026 4x1.80 GHz Cortex-A55)\n```\n\nI ran it on little/middle/big core affinity.\n\nAnyway, the put_page overhead would be higher than other function in pinner.h\n\nThen, this patch fixes your regression?\n\n```\n static inline void page_pinner_failure_detect(struct page *page)\n {\n-       if (!static_branch_unlikely(\u0026failure_tracking))\n+       if (!static_branch_unlikely(\u0026page_pinner_inited))\n                return;\n-\n        __page_pinner_migration_failed(page);\n }\n \n static inline void page_pinner_mark_migration_failed_pages(struct list_head *page_list)\n {\n-       if (!static_branch_unlikely(\u0026failure_tracking))\n+       if (!static_branch_unlikely(\u0026page_pinner_inited))\n                return;\n-\n        __page_pinner_mark_migration_failed_pages(page_list);\n }\n #else\ndiff --git a/mm/page_pinner.c b/mm/page_pinner.c\nindex a444584103ad..738c4c219ba7 100644\n--- a/mm/page_pinner.c\n+++ b/mm/page_pinner.c\n@@ -337,6 +337,9 @@ void __page_pinner_migration_failed(struct page *page)\n        unsigned long flags;\n        unsigned int idx;\n \n+       if (!static_branch_unlikely(\u0026failure_tracking))\n+               return;\n+\n        if (unlikely(!page_ext))\n                return;\n\n```",
+      "parentUuid": "0abf0578_f2631ee2",
+      "range": {
+        "startLine": 24,
+        "startChar": 72,
+        "endLine": 24,
+        "endChar": 128
+      },
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "075bb25f_36c31dd0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
