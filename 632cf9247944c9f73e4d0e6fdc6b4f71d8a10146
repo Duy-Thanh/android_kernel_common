@@ -33,6 +33,23 @@
       "message": "Thank you for the edit! I\u0027ve got another minor request to expand a bit on the patch rational in the commit message.",
       "revId": "632cf9247944c9f73e4d0e6fdc6b4f71d8a10146",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ba32e76_50db8f9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-03-21T02:55:13Z",
+      "side": 1,
+      "message": "@Greg: Wanted to see if you had any objection to enabling this before the ABI freeze?",
+      "revId": "632cf9247944c9f73e4d0e6fdc6b4f71d8a10146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
