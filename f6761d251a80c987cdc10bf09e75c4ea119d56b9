@@ -247,6 +247,24 @@
       "parentUuid": "5afbc44f_d5b4a22b",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123088d2_7e1ef6c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-03-21T01:00:21Z",
+      "side": 1,
+      "message": "I\u0027d love to but I know little about gpio drivers, so I\u0027d rather wait 😊",
+      "parentUuid": "4bbc71e1_41fe2db9",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
