@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98c4deab_fb01b1ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-21T12:38:38Z",
+      "side": 1,
+      "message": "I\u0027m inclined to think this is premature optimisation -- do you have any numbers showing this makes a real difference on existing CPUs?",
+      "revId": "a2257088a8d446b7620d3851ea431f73d61a840e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
