@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c986dafd_c3d1b815",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-21T12:48:25Z",
+      "side": 1,
+      "message": "Could you possibly return a `union` type here rather than the `void *` and then have the caller pick the appropriate member depending on whether or not SVE is supported?",
+      "range": {
+        "startLine": 414,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 6
+      },
+      "revId": "6c2f7e33a6c06ff4f1fe8b9691c98721e996cdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "240533df_79f7d367",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-21T12:48:25Z",
+      "side": 1,
+      "message": "Do we ever call this helper with a VL other than the maximum?",
+      "range": {
+        "startLine": 417,
+        "startChar": 8,
+        "endLine": 417,
+        "endChar": 31
+      },
+      "revId": "6c2f7e33a6c06ff4f1fe8b9691c98721e996cdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa0dee7_9d177dcd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-21T12:48:25Z",
+      "side": 1,
+      "message": "It might be worth looking at `linux/overflow.h` for some of these calculations. IIRC, it has logic to handle variable length array members as well as ensuring that the arithmetic is within bounds. Not sure if it works at EL2 though!",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 54
+      },
+      "revId": "6c2f7e33a6c06ff4f1fe8b9691c98721e996cdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac1fe56a_797aa6d3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-21T12:48:25Z",
+      "side": 1,
+      "message": "Is this still needed now that we have the `get_host_fpsimd_state()` helper? i.e. could we avoid using `vcpu.arch.host_fpsimd_state` altogether at EL2?",
+      "range": {
+        "startLine": 746,
+        "startChar": 22,
+        "endLine": 746,
+        "endChar": 39
+      },
+      "revId": "6c2f7e33a6c06ff4f1fe8b9691c98721e996cdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
