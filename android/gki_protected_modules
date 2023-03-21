@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (ec61e5 FROMGIT: f2fs: fix scheduling while atomic in decompression )
 drivers/bluetooth/btbcm.ko
 drivers/bluetooth/btqca.ko
 drivers/bluetooth/btsdio.ko
@@ -45,3 +46,5 @@ net/tipc/diag.ko
 net/tipc/tipc.ko
 net/wireless/cfg80211.ko
 
+=======
+>>>>>>> CHANGE (0d5b95 ANDROID: GKI: Multi arch exports protection support)
