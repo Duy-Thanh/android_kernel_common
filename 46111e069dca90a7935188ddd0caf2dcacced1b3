@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4ef5bcb_0c32cc75",
+        "filename": "arch/arm64/include/asm/kvm_hyp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-21T15:06:50Z",
+      "side": 1,
+      "message": "This whole function isn\u0027t needed anymore.",
+      "parentUuid": "8df37899_dd93fa5f",
+      "range": {
+        "startLine": 141,
+        "startChar": 44,
+        "endLine": 141,
+        "endChar": 45
+      },
+      "revId": "46111e069dca90a7935188ddd0caf2dcacced1b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0bc96a2_25e84fa7",
