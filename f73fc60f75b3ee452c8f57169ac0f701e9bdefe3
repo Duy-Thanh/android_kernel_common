@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e163631_fb012dc0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-22T15:25:43Z",
+      "side": 1,
+      "message": "I\u0027d rename this something like `__get_host_fpsimd_bytes` to make it obvious that you shouldn\u0027t be calling it!",
+      "range": {
+        "startLine": 46,
+        "startChar": 13,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "f73fc60f75b3ee452c8f57169ac0f701e9bdefe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24aa9a8d_a76246c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-22T15:25:43Z",
+      "side": 1,
+      "message": "Redundant \u0027else\u0027. This can just be:\n\n```\nif (likely(!is_protected_kvm_enabled()))\n    return vcpu-\u003earch.host_fpsimd_state;\n\nWARN_ON(system_supports_sve());\nreturn __get_host_fpsimd_bytes();\n```",
+      "range": {
+        "startLine": 61,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 7
+      },
+      "revId": "f73fc60f75b3ee452c8f57169ac0f701e9bdefe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "531fac09_f2e3915e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/switch.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-22T15:25:43Z",
+      "side": 1,
+      "message": "Please use braces when you have a multi-line condition",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 59
+      },
+      "revId": "f73fc60f75b3ee452c8f57169ac0f701e9bdefe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
