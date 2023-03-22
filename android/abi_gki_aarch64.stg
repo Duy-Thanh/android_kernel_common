@@ -313269,6 +313269,15 @@ elf_symbol {
   full_name: "kthread_queue_work"
 }
 elf_symbol {
+  id: 0x1504ce0b
+  name: "kthread_set_per_cpu"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0ac202df
+  type_id: 0x1642b8aa
+  full_name: "kthread_set_per_cpu"
+}
+elf_symbol {
   id: 0xeb6e491f
   name: "kthread_should_park"
   is_defined: true
@@ -338001,6 +338010,10 @@ symbols {
   symbol {
     key: "kthread_queue_work"
     value: 0xb27aa180
+  }
+  symbol {
+    key: "kthread_set_per_cpu"
+    value: 0x1504ce0b
   }
   symbol {
     key: "kthread_should_park"
