@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "344dcc80_89784627",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-22T15:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e163631_fb012dc0",
+      "range": {
+        "startLine": 46,
+        "startChar": 13,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "f73fc60f75b3ee452c8f57169ac0f701e9bdefe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24aa9a8d_a76246c4",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e4a6358_9f8d36ef",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-22T15:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24aa9a8d_a76246c4",
+      "range": {
+        "startLine": 61,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 7
+      },
+      "revId": "f73fc60f75b3ee452c8f57169ac0f701e9bdefe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "531fac09_f2e3915e",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-03-22T15:25:43Z",
       "side": 1,
       "message": "Please use braces when you have a multi-line condition",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 59
+      },
+      "revId": "f73fc60f75b3ee452c8f57169ac0f701e9bdefe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10310112_67f19212",
+        "filename": "arch/arm64/kvm/hyp/nvhe/switch.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-03-22T15:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "531fac09_f2e3915e",
       "range": {
         "startLine": 116,
         "startChar": 0,
