@@ -283393,6 +283393,15 @@ function {
   parameter_id: 0x064d6086
 }
 function {
+  id: 0x9b67b049
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x310ec01d
+  parameter_id: 0x310ec01d
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x1bf16028
+}
+function {
   id: 0x9b68bcfc
   return_type_id: 0x6720d32f
   parameter_id: 0x18e64f74
@@ -290570,6 +290579,11 @@ function {
   parameter_id: 0x0d5f1839
 }
 function {
+  id: 0xcd9f7f34
+  return_type_id: 0x4585663f
+  parameter_id: 0x0d10073d
+}
+function {
   id: 0xcdea9cab
   return_type_id: 0x4585663f
   parameter_id: 0x0cc78943
@@ -294819,6 +294833,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_select_task_rq_rt"
 }
 elf_symbol {
+  id: 0xbe8d73f2
+  name: "__traceiter_android_rvh_set_cpus_allowed_by_task"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3478c488
+  type_id: 0x9b67b049
+  full_name: "__traceiter_android_rvh_set_cpus_allowed_by_task"
+}
+elf_symbol {
   id: 0x9c2c2d71
   name: "__traceiter_android_rvh_set_iowait"
   is_defined: true
@@ -295843,6 +295866,15 @@ elf_symbol {
   crc: 0xa1f10509
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_select_task_rq_rt"
+}
+elf_symbol {
+  id: 0x4bc6b114
+  name: "__tracepoint_android_rvh_set_cpus_allowed_by_task"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb9f0b1bc
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_set_cpus_allowed_by_task"
 }
 elf_symbol {
   id: 0xbe9f9d4f
@@ -328587,6 +328619,15 @@ elf_symbol {
   full_name: "xhci_gen_setup"
 }
 elf_symbol {
+  id: 0xf30af7b3
+  name: "xhci_get_endpoint_index"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x57d4050a
+  type_id: 0xcd9f7f34
+  full_name: "xhci_get_endpoint_index"
+}
+elf_symbol {
   id: 0x71f2808e
   name: "xhci_init_driver"
   is_defined: true
@@ -329803,6 +329844,10 @@ symbols {
     value: 0x4c24a4be
   }
   symbol {
+    key: "__traceiter_android_rvh_set_cpus_allowed_by_task"
+    value: 0xbe8d73f2
+  }
+  symbol {
     key: "__traceiter_android_rvh_set_iowait"
     value: 0x9c2c2d71
   }
@@ -330257,6 +330302,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_rvh_select_task_rq_rt"
     value: 0xec4d6758
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_set_cpus_allowed_by_task"
+    value: 0x4bc6b114
   }
   symbol {
     key: "__tracepoint_android_rvh_set_iowait"
@@ -344813,6 +344862,10 @@ symbols {
   symbol {
     key: "xhci_gen_setup"
     value: 0xc46f1f1f
+  }
+  symbol {
+    key: "xhci_get_endpoint_index"
+    value: 0xf30af7b3
   }
   symbol {
     key: "xhci_init_driver"
