@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e5b9d46_dacbc3a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-22T08:41:37Z",
+      "side": 1,
+      "message": "Please properly list the symbols you are adding in the changelog text like all other abi updates show.",
+      "revId": "9c7b268a8ae2e687ce1fe61ea6d7686944b1d24e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
