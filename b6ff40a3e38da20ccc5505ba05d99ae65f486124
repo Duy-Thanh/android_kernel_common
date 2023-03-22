@@ -263,6 +263,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fafb72a_04b66a13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-03-22T16:33:07Z",
+      "side": 1,
+      "message": "Oops, It was missing somehow.\nThis was full patchset diff\n\nIt passed build_abi.sh, too.\n\nIf it fixes your regression, please revise your patch in this way with updating your description including testing device spec/workload/pointing out the put_page path.\n\nThanks!\n\n```\ndiff --git a/include/linux/page_pinner.h b/include/linux/page_pinner.h\nindex ba14d7636dc0..4e5386734df6 100644\n--- a/include/linux/page_pinner.h\n+++ b/include/linux/page_pinner.h\n@@ -41,25 +41,22 @@ static inline void dump_page_pinner(struct page *page)\n \n static inline void page_pinner_put_page(struct page *page)\n {\n-       if (!static_branch_unlikely(\u0026failure_tracking))\n+       if (!static_branch_unlikely(\u0026page_pinner_inited))\n                return;\n-\n        __page_pinner_migration_failed(page);\n }\n \n static inline void page_pinner_failure_detect(struct page *page)\n {\n-       if (!static_branch_unlikely(\u0026failure_tracking))\n+       if (!static_branch_unlikely(\u0026page_pinner_inited))\n                return;\n-\n        __page_pinner_migration_failed(page);\n }\n \n static inline void page_pinner_mark_migration_failed_pages(struct list_head *page_list)\n {\n-       if (!static_branch_unlikely(\u0026failure_tracking))\n+       if (!static_branch_unlikely(\u0026page_pinner_inited))\n                return;\n-\n        __page_pinner_mark_migration_failed_pages(page_list);\n }\n #else\ndiff --git a/mm/page_pinner.c b/mm/page_pinner.c\nindex a444584103ad..738c4c219ba7 100644\n--- a/mm/page_pinner.c\n+++ b/mm/page_pinner.c\n@@ -337,6 +337,9 @@ void __page_pinner_migration_failed(struct page *page)\n        unsigned long flags;\n        unsigned int idx;\n \n+       if (!static_branch_unlikely(\u0026failure_tracking))\n+               return;\n+\n        if (unlikely(!page_ext))\n                return;\n\n```",
+      "parentUuid": "59f9da98_ee7b13b2",
+      "range": {
+        "startLine": 24,
+        "startChar": 72,
+        "endLine": 24,
+        "endChar": 128
+      },
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "075bb25f_36c31dd0",
