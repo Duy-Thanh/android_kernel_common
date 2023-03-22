@@ -22,6 +22,30 @@
       },
       "revId": "41409ce7b779576b9a137fce746059288db227db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d738f4_9e7882bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-03-22T21:48:50Z",
+      "side": 1,
+      "message": "Done. Cherry-pick picked up the signoffs from the original change.",
+      "parentUuid": "9325cce2_be0b8ade",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 53
+      },
+      "revId": "41409ce7b779576b9a137fce746059288db227db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
