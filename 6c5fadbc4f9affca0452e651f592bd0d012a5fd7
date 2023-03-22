@@ -34,6 +34,24 @@
       "parentUuid": "1265dbb5_629e2a71",
       "revId": "6c5fadbc4f9affca0452e651f592bd0d012a5fd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2557bcf0_d03e9595",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-22T19:36:54Z",
+      "side": 1,
+      "message": "That is not a header that is available to external modules, sorry.\n\nAnd no, you can not define that value here.",
+      "parentUuid": "3d389656_1e27cbe2",
+      "revId": "6c5fadbc4f9affca0452e651f592bd0d012a5fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
