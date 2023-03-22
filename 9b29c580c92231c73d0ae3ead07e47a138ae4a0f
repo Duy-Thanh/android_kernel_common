@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acaaec17_50aae8a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-03-22T19:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e38c2f41_e0925851",
+      "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57b852ca_fc2a78ce",
@@ -101,6 +119,24 @@
       "writtenOn": "2023-03-03T18:14:30Z",
       "side": 1,
       "message": "Please remove this inclusion which is not needed",
+      "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "378015b5_d75e9617",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-03-22T19:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e37424c_db002a4a",
       "revId": "9b29c580c92231c73d0ae3ead07e47a138ae4a0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
