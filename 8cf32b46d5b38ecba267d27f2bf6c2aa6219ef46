@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "353ad5eb_48d2589d",
+        "filename": "include/uapi/linux/gunyah.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-22T19:59:26Z",
+      "side": 1,
+      "message": "again, don\u0027t make android-specific user/kernel apis please.",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 34
+      },
+      "revId": "8cf32b46d5b38ecba267d27f2bf6c2aa6219ef46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
