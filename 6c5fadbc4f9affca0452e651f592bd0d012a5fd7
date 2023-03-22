@@ -16,6 +16,24 @@
       "message": "Please remove this inclusion.",
       "revId": "6c5fadbc4f9affca0452e651f592bd0d012a5fd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d389656_1e27cbe2",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-03-22T18:59:04Z",
+      "side": 1,
+      "message": "PDO_MAX_OBJECTS used in line 49 is declared in this header: https://elixir.bootlin.com/linux/v5.15.103/source/include/linux/usb/pd.h#L204.\n\nIf I had to remove the header inclusion, I would have to declare PDO_MAX_OBJECTS locally here. Would that be OK ?",
+      "parentUuid": "1265dbb5_629e2a71",
+      "revId": "6c5fadbc4f9affca0452e651f592bd0d012a5fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
