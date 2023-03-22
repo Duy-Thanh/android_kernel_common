@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b007495_8f2bc8f9",
+        "filename": "include/linux/device.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2023-03-22T15:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3227875f_42ad0997",
+      "range": {
+        "startLine": 303,
+        "startChar": 1,
+        "endLine": 303,
+        "endChar": 24
+      },
+      "revId": "5af82f714b9c9e16111fe27f81e07b3979a875c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "217ed8dc_3c3b583a",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-02-07T19:36:34Z",
       "side": 1,
       "message": "Symbol presence status for symbols new in branch is as follows (❌ - Absent, ✅ - Present, ➖ - Unknown):\n\n| Symbols                           |  12-5.4 (Older)  |  12-5.10 (Older)  |  13-5.10 (Sibling)  |  14-5.15 (Newer)  |  14-6.1 (Newer)  |\n|:----------------------------------|:----------------:|:-----------------:|:-------------------:|:-----------------:|:----------------:|\n| __traceiter_android_vh_psi_group  |        ❌         |         ❌         |          ❌          |         ❌         |        ➖         |\n| __tracepoint_android_vh_psi_group |        ❌         |         ✅         |          ❌          |         ❌         |        ➖         |",
+      "range": {
+        "startLine": 306,
+        "startChar": 1,
+        "endLine": 306,
+        "endChar": 14
+      },
+      "revId": "5af82f714b9c9e16111fe27f81e07b3979a875c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "593c4ae0_749c5896",
+        "filename": "include/linux/device.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2023-03-22T15:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "217ed8dc_3c3b583a",
       "range": {
         "startLine": 306,
         "startChar": 1,
