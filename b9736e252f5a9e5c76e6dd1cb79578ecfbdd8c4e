@@ -34,6 +34,23 @@
       "parentUuid": "8b688111_8a758cb1",
       "revId": "b9736e252f5a9e5c76e6dd1cb79578ecfbdd8c4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "984a9e8a_007899d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-23T17:03:13Z",
+      "side": 1,
+      "message": "That must not have been a clean version of `android14-5.15` then. Those symbols don\u0027t exist in the branch (yet).",
+      "revId": "b9736e252f5a9e5c76e6dd1cb79578ecfbdd8c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
