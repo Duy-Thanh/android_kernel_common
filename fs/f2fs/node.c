@@ -432,7 +432,11 @@ static void cache_nat_entry(struct f2fs_sb_info *sbi, nid_t nid,
 	struct nat_entry *new, *e;
 
 	/* Let's mitigate lock contention of nat_tree_lock during checkpoint */
+<<<<<<< HEAD   (6c3a18 Merge 5.15.102 into android14-5.15)
 	if (f2fs_rwsem_is_locked(&sbi->cp_global_sem))
+=======
+	if (rwsem_is_locked(&sbi->cp_global_sem))
+>>>>>>> BRANCH (8020ae Linux 5.15.103)
 		return;
 
 	new = __alloc_nat_entry(sbi, nid, false);
@@ -577,11 +581,21 @@ retry:
 	 * nat_tree_lock. Therefore, we should retry, if we failed to grab here
 	 * while not bothering checkpoint.
 	 */
+<<<<<<< HEAD   (6c3a18 Merge 5.15.102 into android14-5.15)
 	if (!f2fs_rwsem_is_locked(&sbi->cp_global_sem) || checkpoint_context) {
+=======
+	if (!rwsem_is_locked(&sbi->cp_global_sem) || checkpoint_context) {
+>>>>>>> BRANCH (8020ae Linux 5.15.103)
 		down_read(&curseg->journal_rwsem);
+<<<<<<< HEAD   (6c3a18 Merge 5.15.102 into android14-5.15)
 	} else if (f2fs_rwsem_is_contended(&nm_i->nat_tree_lock) ||
 				!down_read_trylock(&curseg->journal_rwsem)) {
 		f2fs_up_read(&nm_i->nat_tree_lock);
+=======
+	} else if (rwsem_is_contended(&nm_i->nat_tree_lock) ||
+				!down_read_trylock(&curseg->journal_rwsem)) {
+		up_read(&nm_i->nat_tree_lock);
+>>>>>>> BRANCH (8020ae Linux 5.15.103)
 		goto retry;
 	}
 

@@ -726,7 +726,11 @@ retry:
 
 		if (err == -ENOMEM || ++count <= DEFAULT_RETRY_IO_COUNT)
 			goto retry;
+<<<<<<< HEAD   (6c3a18 Merge 5.15.102 into android14-5.15)
 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_UPDATE_INODE);
+=======
+		f2fs_stop_checkpoint(sbi, false);
+>>>>>>> BRANCH (8020ae Linux 5.15.103)
 		return;
 	}
 	f2fs_update_inode(inode, node_page);

@@ -276,6 +276,55 @@ static void __complete_revoke_list(struct inode *inode, struct list_head *head,
 			start_index = cur->index + 1;
 		}
 
+<<<<<<< HEAD   (6c3a18 Merge 5.15.102 into android14-5.15)
+=======
+		f2fs_wait_on_page_writeback(page, DATA, true, true);
+
+		if (recover) {
+			struct dnode_of_data dn;
+			struct node_info ni;
+
+			trace_f2fs_commit_inmem_page(page, INMEM_REVOKE);
+retry:
+			set_new_dnode(&dn, inode, NULL, NULL, 0);
+			err = f2fs_get_dnode_of_data(&dn, page->index,
+								LOOKUP_NODE);
+			if (err) {
+				if (err == -ENOMEM) {
+					congestion_wait(BLK_RW_ASYNC,
+							DEFAULT_IO_TIMEOUT);
+					cond_resched();
+					goto retry;
+				}
+				err = -EAGAIN;
+				goto next;
+			}
+
+			err = f2fs_get_node_info(sbi, dn.nid, &ni, false);
+			if (err) {
+				f2fs_put_dnode(&dn);
+				return err;
+			}
+
+			if (cur->old_addr == NEW_ADDR) {
+				f2fs_invalidate_blocks(sbi, dn.data_blkaddr);
+				f2fs_update_data_blkaddr(&dn, NEW_ADDR);
+			} else
+				f2fs_replace_block(sbi, &dn, dn.data_blkaddr,
+					cur->old_addr, ni.version, true, true);
+			f2fs_put_dnode(&dn);
+		}
+next:
+		/* we don't need to invalidate this in the sccessful status */
+		if (drop || recover) {
+			ClearPageUptodate(page);
+			clear_page_private_gcing(page);
+		}
+		detach_page_private(page);
+		set_page_private(page, 0);
+		f2fs_put_page(page, 1);
+
+>>>>>>> BRANCH (8020ae Linux 5.15.103)
 		list_del(&cur->list);
 		kmem_cache_free(revoke_entry_slab, cur);
 	}
