@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000041110600",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2505595?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "d749b65f_c293cbbb",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Johannes Berg \u003cjohannes.berg@intel.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "9de5b651_ee8a704d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-03-23T10:33:44Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Johannes Berg \u003cjohannes.berg@intel.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 518577080 android-build.ayeaye-python-dispatcher_20230322.05_p0",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "3318acc6e223c338a30f090beb9e75633c0a8d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
