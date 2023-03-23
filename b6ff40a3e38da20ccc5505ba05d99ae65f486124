@@ -337,6 +337,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "096f843d_c2f32270",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-03-23T18:11:07Z",
+      "side": 1,
+      "message": "Sure. I cherry picked it into android12-5.10 and android13-5.10:\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2506836\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2506837",
+      "parentUuid": "7778ff84_1f2658bb",
+      "range": {
+        "startLine": 24,
+        "startChar": 72,
+        "endLine": 24,
+        "endChar": 128
+      },
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "075bb25f_36c31dd0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
