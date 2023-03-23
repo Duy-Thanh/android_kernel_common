@@ -1292,6 +1292,10 @@ static struct usb_function *hidg_alloc(struct usb_function_instance *fi)
 						 GFP_KERNEL);
 		if (!hidg->report_desc) {
 			put_device(&hidg->dev);
+<<<<<<< HEAD   (092199 BACKPORT: wifi: nl80211: Allow authentication frames and set)
+=======
+			--opts->refcnt;
+>>>>>>> BRANCH (5448b2 Merge 5.15.94 into android13-5.15-lts)
 			mutex_unlock(&opts->lock);
 			return ERR_PTR(-ENOMEM);
 		}

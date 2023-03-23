@@ -25,7 +25,11 @@ int efi_set_mapping_permissions(struct mm_struct *mm, efi_memory_desc_t *md);
 ({									\
 	efi_virtmap_load();						\
 	__efi_fpsimd_begin();						\
+<<<<<<< HEAD   (092199 BACKPORT: wifi: nl80211: Allow authentication frames and set)
 	raw_spin_lock(&efi_rt_lock);					\
+=======
+	spin_lock(&efi_rt_lock);					\
+>>>>>>> BRANCH (5448b2 Merge 5.15.94 into android13-5.15-lts)
 })
 
 #define arch_efi_call_virt(p, f, args...)				\
@@ -37,12 +41,20 @@ int efi_set_mapping_permissions(struct mm_struct *mm, efi_memory_desc_t *md);
 
 #define arch_efi_call_virt_teardown()					\
 ({									\
+<<<<<<< HEAD   (092199 BACKPORT: wifi: nl80211: Allow authentication frames and set)
 	raw_spin_unlock(&efi_rt_lock);					\
+=======
+	spin_unlock(&efi_rt_lock);					\
+>>>>>>> BRANCH (5448b2 Merge 5.15.94 into android13-5.15-lts)
 	__efi_fpsimd_end();						\
 	efi_virtmap_unload();						\
 })
 
+<<<<<<< HEAD   (092199 BACKPORT: wifi: nl80211: Allow authentication frames and set)
 extern raw_spinlock_t efi_rt_lock;
+=======
+extern spinlock_t efi_rt_lock;
+>>>>>>> BRANCH (5448b2 Merge 5.15.94 into android13-5.15-lts)
 efi_status_t __efi_rt_asm_wrapper(void *, const char *, ...);
 
 #define ARCH_EFI_IRQ_FLAGS_MASK (PSR_D_BIT | PSR_A_BIT | PSR_I_BIT | PSR_F_BIT)

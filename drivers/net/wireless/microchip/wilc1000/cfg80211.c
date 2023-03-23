@@ -950,7 +950,12 @@ static inline void wilc_wfi_cfg_parse_ch_attr(u8 *buf, u32 len, u8 sta_ch)
 		if (index + sizeof(*e) + attr_size > len)
 			return;
 
+<<<<<<< HEAD   (092199 BACKPORT: wifi: nl80211: Allow authentication frames and set)
 		if (e->attr_type == IEEE80211_P2P_ATTR_CHANNEL_LIST)
+=======
+		if (e->attr_type == IEEE80211_P2P_ATTR_CHANNEL_LIST &&
+		    attr_size >= (sizeof(struct wilc_attr_ch_list) - sizeof(*e)))
+>>>>>>> BRANCH (5448b2 Merge 5.15.94 into android13-5.15-lts)
 			ch_list_idx = index;
 		else if (e->attr_type == IEEE80211_P2P_ATTR_OPER_CHANNEL &&
 			 attr_size == (sizeof(struct wilc_attr_oper_ch) - sizeof(*e)))
