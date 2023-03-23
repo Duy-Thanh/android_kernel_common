@@ -278,6 +278,11 @@ static int __ffs_ep0_queue_wait(struct ffs_data *ffs, char *data, size_t len)
 	struct usb_request *req = ffs->ep0req;
 	int ret;
 
+	if (!req) {
+		spin_unlock_irq(&ffs->ev.waitq.lock);
+		return -EINVAL;
+	}
+
 	req->zero     = len < le16_to_cpu(ffs->ev.setup.wLength);
 
 	spin_unlock_irq(&ffs->ev.waitq.lock);
@@ -1902,10 +1907,15 @@ static void functionfs_unbind(struct ffs_data *ffs)
 	if (!WARN_ON(!ffs->gadget)) {
 		/* dequeue before freeing ep0req */
 		usb_ep_dequeue(ffs->gadget->ep0, ffs->ep0req);
+<<<<<<< HEAD   (07edbc UPSTREAM: ext4: fix another off-by-one fsmap error on 1k blo)
+=======
+		mutex_lock(&ffs->mutex);
+>>>>>>> BRANCH (1a2954 Merge 5.4.233 into android12-5.4-lts)
 		usb_ep_free_request(ffs->gadget->ep0, ffs->ep0req);
 		ffs->ep0req = NULL;
 		ffs->gadget = NULL;
 		clear_bit(FFS_FL_BOUND, &ffs->flags);
+		mutex_unlock(&ffs->mutex);
 		ffs_data_put(ffs);
 	}
 }
