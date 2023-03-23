@@ -318163,6 +318163,15 @@ elf_symbol {
   full_name: "__page_mapcount"
 }
 elf_symbol {
+  id: 0xe595f8f9
+  name: "__page_pinner_put_page"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9c81e126
+  type_id: 0x11388634
+  full_name: "__page_pinner_put_page"
+}
+elf_symbol {
   id: 0xdc9a73c7
   name: "__pagevec_release"
   is_defined: true
@@ -351562,6 +351571,15 @@ elf_symbol {
   full_name: "page_mapping"
 }
 elf_symbol {
+  id: 0x44e50ff8
+  name: "page_pinner_inited"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xacfe4142
+  type_id: 0x8e47c273
+  full_name: "page_pinner_inited"
+}
+elf_symbol {
   id: 0xec5c680b
   name: "page_pool_alloc_pages"
   is_defined: true
@@ -373946,6 +373964,10 @@ symbols {
     value: 0x8d43f7e0
   }
   symbol {
+    key: "__page_pinner_put_page"
+    value: 0xe595f8f9
+  }
+  symbol {
     key: "__pagevec_release"
     value: 0xdc9a73c7
   }
@@ -388784,6 +388806,10 @@ symbols {
   symbol {
     key: "page_mapping"
     value: 0x4f3e5356
+  }
+  symbol {
+    key: "page_pinner_inited"
+    value: 0x44e50ff8
   }
   symbol {
     key: "page_pool_alloc_pages"
