@@ -287,6 +287,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de2945d3_9ab39a77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1996136
+      },
+      "writtenOn": "2023-03-23T01:12:10Z",
+      "side": 1,
+      "message": "@minchan, BTW, we should to add \"EXPORT_SYMBOL(page_pinner_inited)\" as \"EXPORT_SYMBOL(failure_tracking)\", otherwise occur build error \"ERROR: modpost： “page_pinner_inited” [mm/zsmalloc.ko] undefined!\". thanks\n\n```\ndiff --git a/mm/page_pinner.c b/mm/page_pinner.c\nindex 6a825777afac..5fe8b0dc4031 100644\n--- a/mm/page_pinner.c\n+++ b/mm/page_pinner.c\n@@ -57,6 +57,7 @@ static struct longterm_pinner acf_pinner \u003d {\nstatic bool page_pinner_enabled;\nDEFINE_STATIC_KEY_FALSE(page_pinner_inited);\n+EXPORT_SYMBOL(page_pinner_inited);\nDEFINE_STATIC_KEY_TRUE(failure_tracking);\nEXPORT_SYMBOL(failure_tracking);\n```",
+      "parentUuid": "3fafb72a_04b66a13",
+      "range": {
+        "startLine": 24,
+        "startChar": 72,
+        "endLine": 24,
+        "endChar": 128
+      },
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "075bb25f_36c31dd0",
