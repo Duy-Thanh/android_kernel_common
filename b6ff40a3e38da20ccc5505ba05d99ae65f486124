@@ -311,6 +311,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7778ff84_1f2658bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-03-23T04:44:51Z",
+      "side": 1,
+      "message": "I ran  BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh but it didn\u0027t generate any abi.report.short file.\n\nWhile I was looking, I found Suren already fixed the other issue - https://android-review.git.corp.google.com/c/kernel/common/+/2319426\nIt will also address your issue, too.\n\nSuren, could you cp your CL into android12-5.10?",
+      "parentUuid": "de2945d3_9ab39a77",
+      "range": {
+        "startLine": 24,
+        "startChar": 72,
+        "endLine": 24,
+        "endChar": 128
+      },
+      "revId": "b6ff40a3e38da20ccc5505ba05d99ae65f486124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "075bb25f_36c31dd0",
