@@ -1292,6 +1292,10 @@ static struct usb_function *hidg_alloc(struct usb_function_instance *fi)
 						 GFP_KERNEL);
 		if (!hidg->report_desc) {
 			put_device(&hidg->dev);
+<<<<<<< HEAD   (989d4c UPSTREAM: ext4: fix another off-by-one fsmap error on 1k blo)
+=======
+			--opts->refcnt;
+>>>>>>> BRANCH (b34e09 Revert "nvmem: core: Fix a conflict between MTD and NVMEM on)
 			mutex_unlock(&opts->lock);
 			return ERR_PTR(-ENOMEM);
 		}
