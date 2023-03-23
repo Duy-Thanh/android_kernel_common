@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b688111_8a758cb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-23T16:57:21Z",
+      "side": 1,
+      "message": "The error is due to these symbols not being in the kernel:\n```\nSymbols missing from the ksymtab:\n  __traceiter_android_rvh_set_cpus_allowed_by_task\n  __traceiter_android_rvh_typec_tcpci_get_vbus\n  __traceiter_android_vh_sched_setaffinity_early\n  __traceiter_android_vh_typec_store_partner_src_caps\n  __traceiter_android_vh_typec_tcpci_override_toggling\n  __traceiter_android_vh_typec_tcpm_get_timer\n  __traceiter_android_vh_typec_tcpm_log\n  __tracepoint_android_rvh_set_cpus_allowed_by_task\n  __tracepoint_android_rvh_typec_tcpci_get_vbus\n  __tracepoint_android_vh_sched_setaffinity_early\n  __tracepoint_android_vh_typec_store_partner_src_caps\n  __tracepoint_android_vh_typec_tcpci_override_toggling\n  __tracepoint_android_vh_typec_tcpm_get_timer\n  __tracepoint_android_vh_typec_tcpm_log\n  snd_usb_register_platform_ops\n  snd_usb_unregister_platform_ops\n```\nif those patches are pending in gerrit, you can rebase your patches on top. Alternately, you can start with a clean version of android14-5.15 and upload just your change.",
+      "revId": "b9736e252f5a9e5c76e6dd1cb79578ecfbdd8c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
