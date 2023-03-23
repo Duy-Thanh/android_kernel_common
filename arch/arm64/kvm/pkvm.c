@@ -223,6 +223,11 @@ static int __pkvm_create_hyp_vcpu(struct kvm *host_kvm, struct kvm_vcpu *host_vc
 	return ret;
 }
 
+static void __pkvm_vcpu_hyp_created(struct kvm_vcpu *vcpu)
+{
+	vcpu->arch.sve_state = NULL;
+}
+
 /*
  * Allocates and donates memory for hypervisor VM structs at EL2.
  *
@@ -290,6 +295,7 @@ static int __pkvm_create_hyp_vm(struct kvm *host_kvm)
 		ret = __pkvm_create_hyp_vcpu(host_kvm, host_vcpu, idx, &total_sz);
 		if (ret)
 			goto destroy_vm;
+		__pkvm_vcpu_hyp_created(host_vcpu);
 	}
 
 	atomic64_set(&host_kvm->stat.protected_hyp_mem, total_sz);
