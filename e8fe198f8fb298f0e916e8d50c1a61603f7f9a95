@@ -22,6 +22,30 @@
       },
       "revId": "e8fe198f8fb298f0e916e8d50c1a61603f7f9a95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f67c5b8_c4eeb9ed",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 4
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-03-24T16:05:37Z",
+      "side": 1,
+      "message": "Under 14-5.15, there is no abi_gki_aarch64_generic any longer.",
+      "parentUuid": "6e2e6a23_ad4e9fdf",
+      "range": {
+        "startLine": 1395,
+        "startChar": 2,
+        "endLine": 1395,
+        "endChar": 20
+      },
+      "revId": "e8fe198f8fb298f0e916e8d50c1a61603f7f9a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
