@@ -307307,6 +307307,12 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9be74aa5
+  return_type_id: 0x11c404ba
+  parameter_id: 0x11c404ba
+  parameter_id: 0x11c404ba
+}
+function {
   id: 0x9be80513
   return_type_id: 0x6720d32f
   parameter_id: 0x1a1051a0
@@ -342035,6 +342041,15 @@ elf_symbol {
   full_name: "kthread_worker_fn"
 }
 elf_symbol {
+  id: 0x95d94296
+  name: "ktime_add_safe"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x03952887
+  type_id: 0x9be74aa5
+  full_name: "ktime_add_safe"
+}
+elf_symbol {
   id: 0x25143c30
   name: "ktime_get"
   is_defined: true
@@ -374095,6 +374110,10 @@ symbols {
   symbol {
     key: "kthread_worker_fn"
     value: 0xc6d4a959
+  }
+  symbol {
+    key: "ktime_add_safe"
+    value: 0x95d94296
   }
   symbol {
     key: "ktime_get"
