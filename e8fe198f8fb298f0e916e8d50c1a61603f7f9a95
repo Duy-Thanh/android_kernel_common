@@ -46,6 +46,30 @@
       },
       "revId": "e8fe198f8fb298f0e916e8d50c1a61603f7f9a95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dfbe125_f4a0b303",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 4
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-03-24T16:31:30Z",
+      "side": 1,
+      "message": "Right, pixel should just use the _pixel symbol list",
+      "parentUuid": "0f67c5b8_c4eeb9ed",
+      "range": {
+        "startLine": 1395,
+        "startChar": 2,
+        "endLine": 1395,
+        "endChar": 20
+      },
+      "revId": "e8fe198f8fb298f0e916e8d50c1a61603f7f9a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
