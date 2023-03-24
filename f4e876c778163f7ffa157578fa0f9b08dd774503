@@ -105,6 +105,24 @@
       "parentUuid": "f4f4b1f7_f7ce1f02",
       "revId": "f4e876c778163f7ffa157578fa0f9b08dd774503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d3191b_59ebc8c3",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1902398
+      },
+      "writtenOn": "2023-03-24T05:48:57Z",
+      "side": 1,
+      "message": "This api is used by the dma-buf debug dump mechanism we provide to customers, this part has no upstream.\n\nCurrently, there is no existing method to check this, so upstream it by cherry-pick from android13-5.15.",
+      "parentUuid": "21eca645_4de5b375",
+      "revId": "f4e876c778163f7ffa157578fa0f9b08dd774503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
