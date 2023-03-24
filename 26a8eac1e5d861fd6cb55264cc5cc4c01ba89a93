@@ -34,6 +34,24 @@
       "parentUuid": "27245500_67ed094c",
       "revId": "26a8eac1e5d861fd6cb55264cc5cc4c01ba89a93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7985922_d6e0a5d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-24T11:28:28Z",
+      "side": 1,
+      "message": "Thanks for the link, as that is a new feature, why not wait until that is merged before adding this here as well?",
+      "parentUuid": "2b10dd54_6a003c1b",
+      "revId": "26a8eac1e5d861fd6cb55264cc5cc4c01ba89a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
