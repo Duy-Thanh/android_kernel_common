@@ -2002,3 +2002,7 @@
   xhci_resume
   xhci_run
   xhci_suspend
+  __might_fault
+  __might_sleep
+  __raw_spin_lock_init
+  __rwlock_init
