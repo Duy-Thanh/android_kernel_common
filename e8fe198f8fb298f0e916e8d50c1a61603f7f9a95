@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2e6a23_ad4e9fdf",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 4
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-03-24T16:02:38Z",
+      "side": 1,
+      "message": "Should we add it into android/abi_gki_aarch64_generic instead? We know other vendors use page_pinner as well. That\u0027s what I did in earlier kernels: aosp/2506882",
+      "range": {
+        "startLine": 1395,
+        "startChar": 2,
+        "endLine": 1395,
+        "endChar": 20
+      },
+      "revId": "e8fe198f8fb298f0e916e8d50c1a61603f7f9a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
