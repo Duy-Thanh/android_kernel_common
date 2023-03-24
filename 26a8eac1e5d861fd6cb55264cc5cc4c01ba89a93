@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27245500_67ed094c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-24T07:43:41Z",
+      "side": 1,
+      "message": "What about x86?\n\nAnd what is the user for this configuration option?  What tool will use the stats and what is the performance impact of this being enabled?",
+      "revId": "26a8eac1e5d861fd6cb55264cc5cc4c01ba89a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
