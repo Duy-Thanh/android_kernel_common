@@ -16,6 +16,24 @@
       "message": "lost some symbols somehow that db845 needs, will regenerate the symbol list for that target...",
       "revId": "607c9cdde2b2e679c30e52c311987dfcb3d299b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c99c6e2_28092a0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-24T10:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "789e57e0_247d8299",
+      "revId": "607c9cdde2b2e679c30e52c311987dfcb3d299b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
