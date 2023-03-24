@@ -1292,6 +1292,10 @@ static struct usb_function *hidg_alloc(struct usb_function_instance *fi)
 						 GFP_KERNEL);
 		if (!hidg->report_desc) {
 			put_device(&hidg->dev);
+<<<<<<< HEAD   (f8c975 UPSTREAM: hwrng: virtio - add an internal buffer)
+=======
+			--opts->refcnt;
+>>>>>>> BRANCH (5448b2 Merge 5.15.94 into android13-5.15-lts)
 			mutex_unlock(&opts->lock);
 			return ERR_PTR(-ENOMEM);
 		}
