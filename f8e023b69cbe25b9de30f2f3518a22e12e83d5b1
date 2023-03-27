@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c45d3a7_a5dc9e5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-27T16:30:50Z",
+      "side": 1,
+      "message": "Just submit the UPSTREAM commit and add a comment at the bottom saying something like \"bringing back the upstream change now that the root problem for it being reverted is resolved\" or something like that.",
+      "parentUuid": "97c64891_cc01909a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 76
+      },
+      "revId": "f8e023b69cbe25b9de30f2f3518a22e12e83d5b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7a97ae1b_2acb7739",
