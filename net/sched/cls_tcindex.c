@@ -502,7 +502,11 @@ tcindex_set_parms(struct net *net, struct tcf_proto *tp, unsigned long base,
 		/* lookup the filter, guaranteed to exist */
 		for (cf = rcu_dereference_bh_rtnl(*fp); cf;
 		     fp = &cf->next, cf = rcu_dereference_bh_rtnl(*fp))
+<<<<<<< HEAD   (fa7bbe Merge 5.15.98 into android13-5.15-lts)
 			if (cf->key == (u16)handle)
+=======
+			if (cf->key == handle)
+>>>>>>> BRANCH (5476e1 Merge "Merge tag 'android13-5.15.94_r00' into android13-5.15)
 				break;
 
 		f->next = cf->next;
