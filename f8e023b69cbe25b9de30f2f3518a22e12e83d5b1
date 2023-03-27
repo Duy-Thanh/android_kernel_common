@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbd3e4a3_1b378f84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-27T13:41:31Z",
+      "side": 1,
+      "message": "so this is a revert of a revert?\n\nIf so, just submit the real commit, with the needed changelog text that shows why it is required here, don\u0027t confuse us with revert chains please 😊",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 76
+      },
+      "revId": "f8e023b69cbe25b9de30f2f3518a22e12e83d5b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
