@@ -1,4 +1,9 @@
+<<<<<<< HEAD   (3d44f9 FROMGIT: f2fs v2: factor out discard_cmd usage from general )
 BRANCH=android14-6.1
 CLANG_VERSION=r475365b
+=======
+BRANCH=android-mainline
+CLANG_VERSION=r487747
+>>>>>>> CHANGE (bb1a06 ANDROID: clang: update to 17.0.0)
 AARCH64_NDK_TRIPLE=aarch64-linux-android31
 X86_64_NDK_TRIPLE=x86_64-linux-android31
