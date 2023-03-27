@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20be93d9_0c5837b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-03-27T23:58:18Z",
+      "side": 1,
+      "message": "You need to add a follow-up patch to add newly exported symbols and vendor hooks into your symbols list and update the ABI definition.",
+      "revId": "d9893cbb1a22f07abaca1bbbfa9908418ecdc183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
