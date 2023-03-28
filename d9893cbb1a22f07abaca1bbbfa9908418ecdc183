@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9ae970c_6f2e4a50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-28T15:42:28Z",
+      "side": 1,
+      "message": "I don\u0027t see any symbol list update... why is this KMI symbol information here?",
+      "revId": "d9893cbb1a22f07abaca1bbbfa9908418ecdc183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43db8bb1_e0949210",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-28T15:42:28Z",
+      "side": 1,
+      "message": "instead of this \"conflicts\" section, add a comment above \"Bug:\" below that describes what needed to be done as part of the backport (in square brackets)",
+      "revId": "d9893cbb1a22f07abaca1bbbfa9908418ecdc183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba921082_6afd5ba6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-28T15:42:28Z",
+      "side": 1,
+      "message": "This link is from 2021. It looks like no one followed up on the upstream submit. Please resend it and get it landed.",
+      "revId": "d9893cbb1a22f07abaca1bbbfa9908418ecdc183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "20be93d9_0c5837b8",
