@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f586341c_a2dd9cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1989876
+      },
+      "writtenOn": "2023-03-28T11:59:44Z",
+      "side": 1,
+      "message": "KernelCommit bot suggests that is not a clean upstream patch but it was not a clean revert in a first place due to long commit history and merge commits.",
+      "revId": "bb9b96d96f583b1953c1c190fb5f0c8a2c144b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
