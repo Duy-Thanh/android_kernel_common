@@ -1292,6 +1292,7 @@ impl IoctlHandler for Process {
             bindings::BINDER_VERSION => this.version(data)?,
             bindings::BINDER_GET_FROZEN_INFO => get_frozen_status(data)?,
             bindings::BINDER_FREEZE => ioctl_freeze(data)?,
+            bindings::BINDER_GET_EXTENDED_ERROR => thread.get_extended_error(data)?,
             _ => return Err(EINVAL),
         }
         Ok(0)

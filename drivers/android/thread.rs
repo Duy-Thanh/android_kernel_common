@@ -291,6 +291,8 @@ const LOOPER_WAITING: u32 = 0x10;
 const LOOPER_POLL: u32 = 0x20;
 const LOOPER_WAITING_PROC: u32 = 0x40;
 
+static DEBUG_ID: AtomicU32 = AtomicU32::new(1);
+
 struct InnerThread {
     /// Determines the looper state of the thread. It is a bit-wise combination of the constants
     /// prefixed with `LOOPER_`.
@@ -317,6 +319,8 @@ struct InnerThread {
     process_work_list: bool,
     work_list: List<DeliverToReadListAdapter>,
     current_transaction: Option<Arc<Transaction>>,
+    // Extended error information for this thread.
+    extended_error: ExtendedError,
 }
 
 impl InnerThread {
@@ -330,6 +334,7 @@ impl InnerThread {
             current_transaction: None,
             return_work: None,
             reply_work: None,
+            extended_error: ExtendedError::new(DEBUG_ID.fetch_add(1, Ordering::Relaxed), BR_OK, 0),
         }
     }
 
@@ -490,6 +495,13 @@ impl Thread {
         }
 
         Ok(thread)
+    }
+
+    pub(crate) fn get_extended_error(&self, data: UserSlicePtr) -> Result {
+        let mut writer = data.writer();
+        let ee = &self.inner.lock().extended_error;
+        writer.write(ee)?;
+        Ok(())
     }
 
     #[inline(never)]
@@ -1193,6 +1205,9 @@ impl Thread {
     {
         if let Err(err) = inner(self, tr) {
             if err.reply != BR_TRANSACTION_COMPLETE {
+                let mut ee = self.inner.lock().extended_error;
+                ee.command = err.reply;
+                ee.param = err.source.unwrap_or(EINVAL).to_errno();
                 pr_warn!(
                     "Transaction failed: {:?} my_pid:{}",
                     err,
