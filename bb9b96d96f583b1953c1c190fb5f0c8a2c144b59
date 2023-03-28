@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ee6c136_ed73a509",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-03-28T16:58:22Z",
+      "side": 1,
+      "message": "This patch is different because after the revert https://lore.kernel.org/r/20230112195540.130014793@infradead.org was applied. So this is bringing back the reverted patch with the updated cpuidle helpers.",
+      "parentUuid": "ede6abd1_6e1fa59f",
+      "revId": "bb9b96d96f583b1953c1c190fb5f0c8a2c144b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e5bb4f3_3ad3cbd1",
