@@ -116,6 +116,7 @@ decl_wrapper!(BinderVersion, bindings::binder_version);
 decl_wrapper!(BinderfsDevice, bindings::binderfs_device);
 decl_wrapper!(BinderFrozenStatusInfo, bindings::binder_frozen_status_info);
 decl_wrapper!(BinderFreezeInfo, bindings::binder_freeze_info);
+decl_wrapper!(ExtendedError, bindings::binder_extended_error);
 
 impl BinderVersion {
     pub(crate) fn current() -> Self {
@@ -142,5 +143,11 @@ impl BinderTransactionDataSecctx {
             &mut *(&mut self.transaction_data as *mut bindings::binder_transaction_data
                 as *mut BinderTransactionData)
         }
+    }
+}
+
+impl ExtendedError {
+    pub(crate) fn new(id: u32, command: u32, param: i32) -> Self {
+        Self(bindings::binder_extended_error { id, command, param })
     }
 }
