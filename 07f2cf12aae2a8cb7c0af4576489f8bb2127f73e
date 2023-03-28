@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "069039b0_afaf0631",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-03-28T17:55:40Z",
+      "side": 1,
+      "message": "android/abi_gki_aarch64_qcom and the .stg file should be in a separate patch.",
+      "revId": "07f2cf12aae2a8cb7c0af4576489f8bb2127f73e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
