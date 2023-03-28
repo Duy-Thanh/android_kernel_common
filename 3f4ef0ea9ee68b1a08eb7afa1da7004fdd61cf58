@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c1c698f_5409db48",
+        "filename": "include/linux/usb/gadget.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-28T08:39:47Z",
+      "side": 1,
+      "message": "this affects KMI",
+      "revId": "3f4ef0ea9ee68b1a08eb7afa1da7004fdd61cf58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
