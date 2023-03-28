@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9868c074_1781e96a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-28T08:41:44Z",
+      "side": 1,
+      "message": "This series introduces several incompatible changes to the KMI that need to be addressed:\n\n```\n1 function symbol(s) removed\n  \u0027int usb_gadget_probe_driver(struct usb_gadget_driver *)\u0027\n\nfunction symbol \u0027int __traceiter_dwc3_ep_queue(void *, struct dwc3_request *)\u0027 changed\n  CRC changed from 0xb8b724a to 0x1d78d9d8\n\nfunction symbol \u0027int config_ep_by_speed(struct usb_gadget *, struct usb_function *, struct usb_ep *)\u0027 changed\n  CRC changed from 0xcc9d7673 to 0x4025ff3e\n\nfunction symbol \u0027int dwc3_send_gadget_ep_cmd(struct dwc3_ep *, unsigned int, struct dwc3_gadget_ep_cmd_params *)\u0027 changed\n  CRC changed from 0x226d1906 to 0x50957515\n\n... 38 omitted; 41 symbols have only CRC changes\n\ntype \u0027struct usb_gadget\u0027 changed\n  byte size changed from 1096 to 1104\n  member \u0027int id_number\u0027 was added\n  4 members (\u0027u64 android_kabi_reserved1\u0027 .. \u0027u64 android_kabi_reserved4\u0027) changed\n    offset changed by 64\n\ntype \u0027struct usb_composite_driver\u0027 changed\n  byte size changed from 352 to 336\n\ntype \u0027struct usb_gadget_driver\u0027 changed\n  byte size changed from 280 to 264\n  member \u0027struct list_head pending\u0027 was removed\n  member \u0027unsigned int match_existing_only\u0027 changed\n    offset changed by -128\n  member \u0027bool is_bound\u0027 was added\n```\n\nFurther, some of the changes do documentation updates only. Do they need to be ported back here?",
+      "revId": "06f3a6a2406a14f52136b1c952d8f80a9a6fcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
