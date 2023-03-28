@@ -74,6 +74,30 @@
       },
       "revId": "bb9b96d96f583b1953c1c190fb5f0c8a2c144b59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caedb8d6_f5b81423",
+        "filename": "drivers/cpuidle/cpuidle-big_little.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-03-28T16:56:58Z",
+      "side": 1,
+      "message": "Found it\u0027s due to https://lore.kernel.org/r/20230112195540.130014793@infradead.org. So this does match upstream",
+      "parentUuid": "5e5bb4f3_3ad3cbd1",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 129,
+        "endChar": 17
+      },
+      "revId": "bb9b96d96f583b1953c1c190fb5f0c8a2c144b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
