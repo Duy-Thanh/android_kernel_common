@@ -33,6 +33,24 @@
       "message": "This patch looks different than upstream. Looking at the inter-diff, this should probably be a `BACKPORT` change. At least please comment on the difference to upstream in the commit message.\n\n\ndifference to upstream patch:\n\n```\n      ## drivers/acpi/processor_idle.c ##\n     @@ drivers/acpi/processor_idle.c: static int acpi_processor_setup_lpi_states(struct acpi_processor *pr)\n              state-\u003etarget_residency \u003d lpi-\u003emin_residency;\n    @@ drivers/cpuidle/cpuidle-big_little.c: static struct cpuidle_driver bl_idle_big_d\n              .name            \u003d \"C1\",\n              .desc            \u003d \"ARM big-cluster power down\",\n          },\n    -@@ drivers/cpuidle/cpuidle-big_little.c: static int bl_enter_powerdown(struct cpuidle_device *dev,\n    -                 struct cpuidle_driver *drv, int idx)\n    +@@ drivers/cpuidle/cpuidle-big_little.c: static int notrace bl_powerdown_finisher(unsigned long arg)\n    +  * Called from the CPUidle framework to program the device to the\n    +  * specified target state selected by the governor.\n    +  */\n    +-static int bl_enter_powerdown(struct cpuidle_device *dev,\n    +-                struct cpuidle_driver *drv, int idx)\n    ++static __cpuidle int bl_enter_powerdown(struct cpuidle_device *dev,\n    ++                    struct cpuidle_driver *drv, int idx)\n      {\n          cpu_pm_enter();\n    -+    ct_idle_enter();\n    ++    ct_cpuidle_enter();\n\n          cpu_suspend(0, bl_powerdown_finisher);\n\n          /* signals the MCPM core that CPU is out of low power state */\n          mcpm_cpu_powered_up();\n    -+    ct_idle_exit();\n    ++    ct_cpuidle_exit();\n\n          cpu_pm_exit();\n\n    @@ drivers/cpuidle/dt_idle_states.c: static int init_state_node(struct cpuidle_stat\n          if (of_property_read_bool(state_node, \"local-timer-stop\"))\n              idle_state-\u003eflags |\u003d CPUIDLE_FLAG_TIMER_STOP;\n          /*\n    -\n    - ## include/linux/cpuidle.h ##\n    -@@ include/linux/cpuidle.h: extern s64 cpuidle_governor_latency_req(unsigned int cpu);\n    -     if (!is_retention)                        \\\n    -         __ret \u003d  cpu_pm_enter();                \\\n    -     if (!__ret) {                            \\\n    -+        ct_idle_enter();                    \\\n    -         __ret \u003d low_level_idle_enter(state);            \\\n    -+        ct_idle_exit();                        \\\n    -         if (!is_retention)                    \\\n    -             cpu_pm_exit();                    \\\n    -     }                                \\\n```\n\n(there is a chance that I am wrong since this is a brand-new experimental linter flagging this. In this case: sorry for the noise.)",
       "revId": "bb9b96d96f583b1953c1c190fb5f0c8a2c144b59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ede6abd1_6e1fa59f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-28T14:12:23Z",
+      "side": 1,
+      "message": "argh, expanding the commit message shows the explanation. Yet, backport is still probably better in that case: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "0d2eedb8_3fa00162",
+      "revId": "bb9b96d96f583b1953c1c190fb5f0c8a2c144b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
