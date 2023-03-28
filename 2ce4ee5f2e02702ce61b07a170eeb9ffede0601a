@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34593e0_d6738484",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-28T11:23:22Z",
+      "side": 1,
+      "message": "Nice!  This should also go to all older kernels as well as `android12-5.10`",
+      "revId": "2ce4ee5f2e02702ce61b07a170eeb9ffede0601a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
