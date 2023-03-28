@@ -51,6 +51,29 @@
       "parentUuid": "0d2eedb8_3fa00162",
       "revId": "bb9b96d96f583b1953c1c190fb5f0c8a2c144b59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e5bb4f3_3ad3cbd1",
+        "filename": "drivers/cpuidle/cpuidle-big_little.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-03-28T16:49:49Z",
+      "side": 1,
+      "message": "why aren\u0027t you using ct_idle_exit like upstream does?",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 129,
+        "endChar": 17
+      },
+      "revId": "bb9b96d96f583b1953c1c190fb5f0c8a2c144b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
