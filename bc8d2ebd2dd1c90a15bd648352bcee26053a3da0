@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56ab7f02_d5c2891b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-29T21:49:55Z",
+      "side": 1,
+      "message": "The `android12-5.10-2022-04` branch is deprecated. It is older than 6-mos old and no longer compliant to LTS requirements in the ASB. See https://preview.source.android.com/docs/core/architecture/kernel/gki-android12-5_10-release-builds#april-2022-releases.\n\nPlease move to a more recent release branch.",
+      "revId": "bc8d2ebd2dd1c90a15bd648352bcee26053a3da0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
