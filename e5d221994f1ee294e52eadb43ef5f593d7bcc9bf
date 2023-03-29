@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000041542178",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2513436?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6f50ee8d_5eaec90e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-03-29T13:19:09Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/76ca8da989c7d97a7f76c75d475fe95a584439d7) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d76ca8da989c7d97a7f76c75d475fe95a584439d7)\n\n```\n      ## drivers/hid/hid-bigbenff.c ##\n     @@ drivers/hid/hid-bigbenff.c: struct bigben_device {\n    @@ drivers/hid/hid-bigbenff.c: struct bigben_device {\n      static void bigben_worker(struct work_struct *work)\n      {\n     @@ drivers/hid/hid-bigbenff.c: static void bigben_worker(struct work_struct *work)\n    - \tu32 len;\n    - \tunsigned long flags;\n    + \t\tstruct bigben_device, worker);\n    + \tstruct hid_field *report_field \u003d bigben-\u003ereport-\u003efield[0];\n      \n    --\tif (bigben-\u003eremoved)\n    +-\tif (bigben-\u003eremoved || !report_field)\n     -\t\treturn;\n     -\n    - \tbuf \u003d hid_alloc_report_buf(bigben-\u003ereport, GFP_KERNEL);\n    - \tif (!buf)\n    - \t\treturn;\n    + \tif (bigben-\u003ework_led) {\n    + \t\tbigben-\u003ework_led \u003d false;\n    + \t\treport_field-\u003evalue[0] \u003d 0x01; /* 1 \u003d led message */\n     @@ drivers/hid/hid-bigbenff.c: static int hid_bigben_play_effect(struct input_dev *dev, void *data,\n    + \t\tbigben-\u003eright_motor_on   \u003d right_motor_on;\n    + \t\tbigben-\u003eleft_motor_force \u003d left_motor_force;\n      \t\tbigben-\u003ework_ff \u003d true;\n    - \t\tspin_unlock_irqrestore(\u0026bigben-\u003elock, flags);\n    - \n     -\t\tschedule_work(\u0026bigben-\u003eworker);\n    ++\n     +\t\tbigben_schedule_work(bigben);\n      \t}\n      \n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 520072788 android-build.ayeaye-python-dispatcher_20230328.04_p1",
+      "revId": "e5d221994f1ee294e52eadb43ef5f593d7bcc9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
