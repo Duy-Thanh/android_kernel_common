@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e55f789_dc51e813",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2023-03-29T19:28:39Z",
+      "side": 1,
+      "message": "For the reviewer in 2 weeks - the raviole presubmit failure should be bypassed and the fix in http://pagit/2442440 re-run or bypassed as well.",
+      "revId": "11e0720519a04a35a47063ab09b58e2255b5bf4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
