@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000041583155",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2464460?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f62e6a87_d8a92d60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-03-29T20:41:25Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/599f008c257d913674b2b2f2fa9e273c1058ec2e) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d599f008c257d913674b2b2f2fa9e273c1058ec2e)\n\n```\n      ## drivers/usb/typec/tcpm/tcpm.c ##\n     @@\n    @@ drivers/usb/typec/tcpm/tcpm.c: enum frs_typec_current {\n      #define LOG_BUFFER_ENTRIES\t1024\n      #define LOG_BUFFER_ENTRY_SIZE\t128\n     @@ drivers/usb/typec/tcpm/tcpm.c: struct tcpm_port {\n    - \t * SNK_READY for non-pd link.\n      \t */\n      \tbool slow_charger_loop;\n    -+\n    + \n     +\t/*\n     +\t * When true indicates that the lower level drivers indicate potential presence\n     +\t * of contaminant in the connector pins based on the tcpm state machine\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 520072788 android-build.ayeaye-python-dispatcher_20230328.04_p1",
+      "revId": "d292436f492c6292b8ed99aa6d8cabf874aeadc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
