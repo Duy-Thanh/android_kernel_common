@@ -28,7 +28,7 @@ obj-$(CONFIG_MODULE_UNLOAD_TAINT_TRACKING) += tracking.o
 $(obj)/gki_module.o: $(obj)/gki_module_protected_exports.h \
 			$(obj)/gki_module_unprotected.h
 
-ALL_KMI_SYMBOLS := all_kmi_symbols
+ALL_KMI_SYMBOLS := $(obj)/abi_gki_kmi_symbols
 
 $(obj)/gki_module_unprotected.h: $(ALL_KMI_SYMBOLS) \
 				$(srctree)/scripts/gen_gki_modules_headers.sh
@@ -36,8 +36,8 @@ $(obj)/gki_module_unprotected.h: $(ALL_KMI_SYMBOLS) \
 	"$(srctree)" \
 	$(ALL_KMI_SYMBOLS)
 
-# Generate symbol list with union of all symbol list for arm64; empty for others
-$(ALL_KMI_SYMBOLS): $(if $(filter arm64,$(ARCH)),$(wildcard $(srctree)/android/abi_gki_aarch64_*),)
+# Copy raw KMI symbol list from CONFIG_UNUSED_KSYMS_WHITELIST if set else empty
+$(ALL_KMI_SYMBOLS): $(CONFIG_UNUSED_KSYMS_WHITELIST)
 	$(if $(strip $^),cat $^ > $(ALL_KMI_SYMBOLS), echo "" > $(ALL_KMI_SYMBOLS))
 
 # ABI protected exports list file specific to ARCH if exists else empty
