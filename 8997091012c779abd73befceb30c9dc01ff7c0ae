@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25f696d7_c301541c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-30T13:54:54Z",
+      "side": 1,
+      "message": "If we are going to have to manage a stable x86 api, please let\u0027s discuss it somewhere else before committing this symbol list to it first.",
+      "revId": "8997091012c779abd73befceb30c9dc01ff7c0ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
