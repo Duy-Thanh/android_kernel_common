@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9be9fa_5bc3a297",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-03-30T19:02:41Z",
+      "side": 1,
+      "message": "Latest patchset has successful presubmits propagated from top of the chain. However, lint doesn\u0027t remove its -1, when presubmit runs in other change of the chain. Bypassing lint.",
+      "revId": "7c6c7ddd99350cb78684a3f2a5830a853d4193e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
