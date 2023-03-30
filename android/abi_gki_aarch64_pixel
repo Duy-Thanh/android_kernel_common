@@ -776,6 +776,8 @@
   extcon_get_property
   extcon_get_state
   extcon_register_notifier
+  dwc3_send_gadget_ep_cmd
+  dwc3_stop_active_transfer
   extcon_set_property
   extcon_set_property_capability
   extcon_set_state_sync
