@@ -28,6 +28,11 @@ _aarch64_additional_kmi_symbol_lists = [
     "android/abi_gki_aarch64_virtual_device",
 ]
 
+_x86_64_additional_kmi_symbol_lists = [
+    # keep sorted
+    "android/abi_gki_x86_64_virtual_device",
+]
+
 define_common_kernels(target_configs = {
     "kernel_aarch64": {
         "kmi_symbol_list_strict_mode": True,
@@ -52,10 +57,14 @@ define_common_kernels(target_configs = {
     "kernel_x86_64": {
         "kmi_symbol_list_strict_mode": False,
         "module_implicit_outs": COMMON_GKI_MODULES_LIST,
+        "kmi_symbol_list": "android/abi_gki_x86_64",
+        "additional_kmi_symbol_lists": _x86_64_additional_kmi_symbol_lists,
     },
     "kernel_x86_64_debug": {
         "kmi_symbol_list_strict_mode": False,
         "module_implicit_outs": COMMON_GKI_MODULES_LIST,
+        "kmi_symbol_list": "android/abi_gki_x86_64",
+        "additional_kmi_symbol_lists": _x86_64_additional_kmi_symbol_lists,
     },
 })
 
