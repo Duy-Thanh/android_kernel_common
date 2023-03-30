@@ -22,6 +22,30 @@
       },
       "revId": "5c94cd953d2b4143870343c7009ff62b9227e5d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89c4bda1_04358703",
+        "filename": "arch/arm64/kvm/hyp_trace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-30T13:33:12Z",
+      "side": 1,
+      "message": "Sadly, this is used to reset the tracing buffers.",
+      "parentUuid": "8acb4288_e1a5a6a8",
+      "range": {
+        "startLine": 662,
+        "startChar": 1,
+        "endLine": 662,
+        "endChar": 30
+      },
+      "revId": "5c94cd953d2b4143870343c7009ff62b9227e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
