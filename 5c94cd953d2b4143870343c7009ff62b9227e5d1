@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8acb4288_e1a5a6a8",
+        "filename": "arch/arm64/kvm/hyp_trace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-03-30T13:31:56Z",
+      "side": 1,
+      "message": "Can we not just not expose the file to start with?",
+      "range": {
+        "startLine": 662,
+        "startChar": 1,
+        "endLine": 662,
+        "endChar": 30
+      },
+      "revId": "5c94cd953d2b4143870343c7009ff62b9227e5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
