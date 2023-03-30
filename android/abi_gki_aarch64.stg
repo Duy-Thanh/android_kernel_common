@@ -1,4 +1,4 @@
-root_id: 0x25a8b173
+root_id: 0x84ea5130
 void {
   id: 0x48b5725f
 }
@@ -287105,6 +287105,12 @@ function {
   parameter_id: 0x27d0317f
 }
 function {
+  id: 0x9d89fb4c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0e2680c2
+  parameter_id: 0xe02e14d6
+}
+function {
   id: 0x9d8b7529
   return_type_id: 0x6720d32f
   parameter_id: 0x0258f96e
@@ -308246,6 +308252,15 @@ elf_symbol {
   crc: 0x7e54a0bd
   type_id: 0x1ccc8f30
   full_name: "dw_pcie_write_dbi"
+}
+elf_symbol {
+  id: 0x1db037a0
+  name: "dwc3_gadget_ep_custom_transfer"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3c4fdbaf
+  type_id: 0x9d89fb4c
+  full_name: "dwc3_gadget_ep_custom_transfer"
 }
 elf_symbol {
   id: 0xfa137f83
@@ -329426,7 +329441,7 @@ elf_symbol {
   full_name: "zs_unmap_object"
 }
 symbols {
-  id: 0x25a8b173
+  id: 0x84ea5130
   symbol {
     key: "PDE_DATA"
     value: 0x4b0079a1
@@ -336266,6 +336281,10 @@ symbols {
   symbol {
     key: "dw_pcie_write_dbi"
     value: 0x2475753e
+  }
+  symbol {
+    key: "dwc3_gadget_ep_custom_transfer"
+    value: 0x1db037a0
   }
   symbol {
     key: "em_cpu_get"
