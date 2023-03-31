@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e49273_b1fe1915",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-31T08:47:12Z",
+      "side": 1,
+      "message": "This is too many symbols to be adding at once.\n\nIt is too hard to review this many at the same time, and our review tools can not handle them.  Please break them up into logical chunks and make a patch series and we will be glad to review them, thanks!",
+      "revId": "837a5b7f914104659c5ecf72066c4dc1ce51821d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
