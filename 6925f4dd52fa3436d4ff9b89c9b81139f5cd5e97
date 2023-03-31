@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b842ddbe_c405c0fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-31T08:10:26Z",
+      "side": 1,
+      "message": "Please do not submit patches to this branch, it is for upstream LTS merges only.\n\nIf you want to have patches accepted into the android13-5.15 branch, use that one\nplease, not this one.\n\nAlso, they were not in the correct style, please see the lint message for the correct way to do this.\n\nI\u0027m going to abandon all of these as they are not relevant here",
+      "revId": "6925f4dd52fa3436d4ff9b89c9b81139f5cd5e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
