@@ -16,6 +16,24 @@
       "message": "Why is this needed in `android-4.14-stable`?",
       "revId": "b137ba079ea12e10084be50e26be065cdd2b6526",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b36928_ce5c6778",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2023-03-31T18:04:37Z",
+      "side": 1,
+      "message": "Resolved offline - This series is needed to support testing of this kernel branch on the later cuttlefish branches (Android 12+) which utilize Blake2b.",
+      "parentUuid": "c3e4e122_2fe7f130",
+      "revId": "b137ba079ea12e10084be50e26be065cdd2b6526",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
