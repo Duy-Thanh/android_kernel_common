@@ -16,6 +16,23 @@
       "message": "The change looks good to me, I\u0027ve added @elsk@google.com for the final +2. Thank you.",
       "revId": "a96ca82c4db29b2272b8c274dbd7e2cd1fa71ea7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82452c43_dd6668f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-03-31T17:43:17Z",
+      "side": 1,
+      "message": "Instead of defining this as a variable in an extension, please",
+      "revId": "a96ca82c4db29b2272b8c274dbd7e2cd1fa71ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
