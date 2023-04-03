@@ -265,6 +265,24 @@
       "parentUuid": "4bbc71e1_41fe2db9",
       "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dcf2409_3e373907",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-03T22:57:41Z",
+      "side": 1,
+      "message": "@gregkh@google.com friendly ping. Is the work for 6.3-rc1 completed? I can\u0027t tell by just looking at https://android.googlesource.com/kernel/common/+log .",
+      "parentUuid": "123088d2_7e1ef6c5",
+      "revId": "f6761d251a80c987cdc10bf09e75c4ea119d56b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
