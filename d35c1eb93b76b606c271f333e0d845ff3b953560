@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "267a59be_a7713ec5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-04-03T23:55:19Z",
+      "side": 1,
+      "message": "Presubmit failure is a known issue (b/275613961).  Still need OWNERS, though.",
+      "revId": "d35c1eb93b76b606c271f333e0d845ff3b953560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
