@@ -34,6 +34,24 @@
       "parentUuid": "577eadb7_49ddd9e5",
       "revId": "645d2caf98edcfb0eb93a2f87a0be60e1cda76c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d256cd56_d71becc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-03T18:48:34Z",
+      "side": 1,
+      "message": "Your commit message should explain why the symbols are needed. As Greg said, these are not normally used by drivers. If you have a vendor module that needs them, then please explain why.",
+      "parentUuid": "95fd97d5_1927fd9e",
+      "revId": "645d2caf98edcfb0eb93a2f87a0be60e1cda76c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
