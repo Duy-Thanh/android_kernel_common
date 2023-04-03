@@ -500,14 +500,23 @@ bool addr_is_memory(phys_addr_t phys)
 	return !!find_mem_range(phys, &range);
 }
 
-static bool addr_is_allowed_memory(phys_addr_t phys)
+static bool addr_is_state_allowed(phys_addr_t phys, enum pkvm_page_state state)
 {
 	struct memblock_region *reg;
 	struct kvm_mem_range range;
 
 	reg = find_mem_range(phys, &range);
 
-	return reg && !(reg->flags & MEMBLOCK_NOMAP);
+	/*
+	 * Sharing of MMIO regions is not supported yet to avoid having to
+	 * deal with pinning (which requires hyp_vmemmap entries for the
+	 * refcount), but everything else is fair game. Both SHARED_* states
+	 * are encoded using PKVM_PAGE_STATE_PROT_MASK bits, exclusively.
+	 */
+	if (!reg)
+		return !(state & PKVM_PAGE_STATE_PROT_MASK);
+
+	return !(reg->flags & MEMBLOCK_NOMAP);
 }
 
 static bool is_in_mem_range(u64 addr, struct kvm_mem_range *range)
@@ -978,7 +987,7 @@ static int __check_page_state_visitor(u64 addr, u64 end, u32 level,
 	struct check_walk_data *d = arg;
 	kvm_pte_t pte = *ptep;
 
-	if (kvm_pte_valid(pte) && !addr_is_allowed_memory(kvm_pte_to_phys(pte)))
+	if (kvm_pte_valid(pte) && !addr_is_state_allowed(kvm_pte_to_phys(pte), d->desired))
 		return -EINVAL;
 
 	return d->get_page_state(pte, addr) == d->desired ? 0 : -EPERM;
@@ -1428,7 +1437,7 @@ static int __guest_request_page_transition(u64 *completer_addr,
 		return -EINVAL;
 
 	phys = kvm_pte_to_phys(pte);
-	if (!addr_is_allowed_memory(phys))
+	if (!addr_is_state_allowed(phys, desired))
 		return -EINVAL;
 
 	return __guest_get_completer_addr(completer_addr, phys, tx);
