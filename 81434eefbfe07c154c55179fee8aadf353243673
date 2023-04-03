@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b7e680_6a0a9e5b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-04-03T20:00:08Z",
+      "side": 1,
+      "message": "FWIW this patch isn\u0027t strictly necessary I think. We should be fine CMO-wise even w/o reordering for the host, so happy to drop it, but it felt like a reasonable clean up.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "81434eefbfe07c154c55179fee8aadf353243673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
