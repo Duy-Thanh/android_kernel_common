@@ -88,6 +88,24 @@
       "parentUuid": "09593662_c7dccb70",
       "revId": "645d2caf98edcfb0eb93a2f87a0be60e1cda76c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aee8cf74_ac66cd1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-04T21:55:54Z",
+      "side": 1,
+      "message": "I agree with Greg\u0027s sentiments, but these symbols are already approved in 13-5.15 and 14-6.1, so we\u0027ll take them in 12-5.10.\n\nYou can expect push-back on symbols like this every year since the _right_ approach is to implement your statistics gathering upstream.",
+      "parentUuid": "638009fe_dc04b5f7",
+      "revId": "645d2caf98edcfb0eb93a2f87a0be60e1cda76c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
