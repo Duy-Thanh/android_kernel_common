@@ -74,7 +74,8 @@ static int uinput_dev_event(struct input_dev *dev,
 	struct uinput_device	*udev = input_get_drvdata(dev);
 	struct timespec64	ts;
 
-	ktime_get_ts64(&ts);
+	ktime_t *timestamp = input_get_timestamp(dev);
+	ts = ktime_to_timespec64(timestamp[INPUT_CLK_MONO]);
 
 	udev->buff[udev->head] = (struct input_event) {
 		.input_event_sec = ts.tv_sec,
@@ -574,6 +575,7 @@ static ssize_t uinput_inject_events(struct uinput_device *udev,
 {
 	struct input_event ev;
 	size_t bytes = 0;
+	ktime_t timestamp;
 
 	if (count != 0 && count < input_event_size())
 		return -EINVAL;
@@ -587,6 +589,9 @@ static ssize_t uinput_inject_events(struct uinput_device *udev,
 		 */
 		if (input_event_from_user(buffer + bytes, &ev))
 			return -EFAULT;
+
+		timestamp = ktime_set(ev.input_event_sec, ev.input_event_usec * NSEC_PER_USEC);
+		input_set_timestamp(udev->dev, timestamp);
 
 		input_event(udev->dev, ev.type, ev.code, ev.value);
 		bytes += input_event_size();
