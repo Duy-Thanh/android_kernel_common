@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/276804472",
       "revId": "3922a0ba5b7d401b16e94ddc7b29429902cb4af5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "599e0e5e_0ef88f2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-04-04T16:12:58Z",
+      "side": 1,
+      "message": "aosp/2521275 is now merged. I tried rerunning the presubmits a few times but this check doesn\u0027t get retriggered it seems.",
+      "revId": "3922a0ba5b7d401b16e94ddc7b29429902cb4af5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
