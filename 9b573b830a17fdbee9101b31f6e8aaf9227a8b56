@@ -33,6 +33,24 @@
       "message": "Could you please also cherry-pick to android14-5.15? This makes things more consistent. Thank you!\n\nThis is optional though.",
       "revId": "9b573b830a17fdbee9101b31f6e8aaf9227a8b56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa3233b0_7e0bbea2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2023-04-04T07:13:19Z",
+      "side": 1,
+      "message": "It seems like the list is different from 6.1.\nCherry-picked with conflicts fix.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2521602",
+      "parentUuid": "bfe8c639_9cb40c1a",
+      "revId": "9b573b830a17fdbee9101b31f6e8aaf9227a8b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
