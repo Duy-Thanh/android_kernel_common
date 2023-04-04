@@ -70,6 +70,24 @@
       "parentUuid": "d256cd56_d71becc6",
       "revId": "645d2caf98edcfb0eb93a2f87a0be60e1cda76c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "638009fe_dc04b5f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-04T15:06:49Z",
+      "side": 1,
+      "message": "Sorry, but again, this is not anything that a normal android driver should be touching at all.  If you have networking core changes that the kernel does not currently provide, please submit those changes upstream and then we will be glad to backport them to our kernels.",
+      "parentUuid": "09593662_c7dccb70",
+      "revId": "645d2caf98edcfb0eb93a2f87a0be60e1cda76c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
