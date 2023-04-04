@@ -16,6 +16,23 @@
       "message": "upload patchset#6 since symbol list updated(oplus)",
       "revId": "9b573b830a17fdbee9101b31f6e8aaf9227a8b56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe8c639_9cb40c1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-04T07:04:40Z",
+      "side": 1,
+      "message": "Could you please also cherry-pick to android14-5.15? This makes things more consistent. Thank you!\n\nThis is optional though.",
+      "revId": "9b573b830a17fdbee9101b31f6e8aaf9227a8b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
