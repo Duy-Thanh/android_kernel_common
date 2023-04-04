@@ -33,6 +33,7 @@
 #define UINPUT_NAME		"uinput"
 #define UINPUT_BUFFER_SIZE	16
 #define UINPUT_NUM_REQUESTS	16
+#define UINPUT_TIMESTAMP_ALLOWED_OFFSET_SECS 10
 
 enum uinput_state { UIST_NEW_DEVICE, UIST_SETUP_COMPLETE, UIST_CREATED };
 
@@ -72,9 +73,8 @@ static int uinput_dev_event(struct input_dev *dev,
 			    unsigned int type, unsigned int code, int value)
 {
 	struct uinput_device	*udev = input_get_drvdata(dev);
-	struct timespec64	ts;
-
-	ktime_get_ts64(&ts);
+	ktime_t*	timestamp = input_get_timestamp(dev);
+	struct timespec64	ts = ktime_to_timespec64(timestamp[INPUT_CLK_MONO]);
 
 	udev->buff[udev->head] = (struct input_event) {
 		.input_event_sec = ts.tv_sec,
@@ -569,11 +569,37 @@ static int uinput_setup_device_legacy(struct uinput_device *udev,
 	return retval;
 }
 
+static bool is_valid_timestamp(ktime_t timestamp)
+{
+	ktime_t zeroTime;
+	ktime_t currentTime;
+	ktime_t minTime;
+	ktime_t offset;
+
+	zeroTime = ktime_set(0, 0);
+	if (ktime_compare(zeroTime, timestamp) >= 0)
+		return false;
+
+	/*
+	 * Check whether the given timestamp is within the
+	 * allowed offset from the current time.
+	 */
+	currentTime = ktime_get();
+	offset = ktime_set(UINPUT_TIMESTAMP_ALLOWED_OFFSET_SECS, 0);
+	minTime = ktime_sub(currentTime, offset);
+
+	if (ktime_compare(minTime, timestamp) >= 0)
+		return false;
+
+	return true;
+}
+
 static ssize_t uinput_inject_events(struct uinput_device *udev,
 				    const char __user *buffer, size_t count)
 {
 	struct input_event ev;
 	size_t bytes = 0;
+	ktime_t timestamp;
 
 	if (count != 0 && count < input_event_size())
 		return -EINVAL;
@@ -587,6 +613,10 @@ static ssize_t uinput_inject_events(struct uinput_device *udev,
 		 */
 		if (input_event_from_user(buffer + bytes, &ev))
 			return -EFAULT;
+
+		timestamp = ktime_set(ev.input_event_sec, ev.input_event_usec * NSEC_PER_USEC);
+		if (is_valid_timestamp(timestamp))
+			input_set_timestamp(udev->dev, timestamp);
 
 		input_event(udev->dev, ev.type, ev.code, ev.value);
 		bytes += input_event_size();
