@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd661ce_05d670af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-04-04T08:02:02Z",
+      "side": 1,
+      "message": "Is this also needed on other android branches, and do you intend to submit it upstream?",
+      "revId": "f96eed0e7bf345294001af45e791152c2cc6eb84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
