@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6d5c084_207bcb62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-04T22:20:31Z",
+      "side": 1,
+      "message": "Paul, this patch doesn\u0027t affect KMI, so it would be fine to submit now instead of waiting until KMI update on April 12",
+      "revId": "b21115cd060f6d55b6d502f8e3d030722d6976a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
