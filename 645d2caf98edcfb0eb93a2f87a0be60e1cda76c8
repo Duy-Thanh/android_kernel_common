@@ -52,6 +52,24 @@
       "parentUuid": "95fd97d5_1927fd9e",
       "revId": "645d2caf98edcfb0eb93a2f87a0be60e1cda76c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09593662_c7dccb70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1872346
+      },
+      "writtenOn": "2023-04-04T06:32:51Z",
+      "side": 1,
+      "message": "our network statistic module add a hook function in INPUT  chain to static the input flow.but for the no established udp skb-\u003esk is null,so we need call __udp4_lib_lookup to lookup the skb\u0027s sk parameter.and the he follow symbol\u0027s need be added to symbol list,\n__udp4_lib_lookup\n__udp6_lib_lookup\nudp_table",
+      "parentUuid": "d256cd56_d71becc6",
+      "revId": "645d2caf98edcfb0eb93a2f87a0be60e1cda76c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
