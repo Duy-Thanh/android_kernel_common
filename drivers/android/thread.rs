@@ -2,7 +2,7 @@
 
 use core::{
     alloc::AllocError,
-    mem::size_of,
+    mem::{size_of, MaybeUninit},
     sync::atomic::{AtomicU32, Ordering},
 };
 use kernel::{
@@ -14,13 +14,13 @@ use kernel::{
     security,
     sync::{Arc, CondVar, SpinLock},
     types::Either,
-    user_ptr::{UserSlicePtr, UserSlicePtrWriter},
+    user_ptr::{UserSlicePtr, UserSlicePtrReader, UserSlicePtrWriter},
 };
 
 use crate::{
     allocation::{Allocation, AllocationView},
     defs::*,
-    process::{AllocationInfo, Process},
+    process::Process,
     ptr_align,
     transaction::{FileInfo, Transaction},
     DeliverCode, DeliverToRead, DeliverToReadListAdapter,
@@ -30,31 +30,256 @@ pub(crate) type BinderResult<T = ()> = core::result::Result<T, BinderError>;
 
 pub(crate) struct BinderError {
     pub(crate) reply: u32,
+    source: Option<Error>,
 }
 
 impl BinderError {
     pub(crate) fn new_failed() -> Self {
         Self {
             reply: BR_FAILED_REPLY,
+            source: None,
         }
     }
 
     pub(crate) fn new_dead() -> Self {
         Self {
             reply: BR_DEAD_REPLY,
+            source: None,
         }
+    }
+
+    pub(crate) fn new_frozen() -> Self {
+        Self {
+            reply: BR_FROZEN_REPLY,
+            source: None,
+        }
+    }
+
+    pub(crate) fn is_dead(&self) -> bool {
+        self.reply == BR_DEAD_REPLY
     }
 }
 
 impl From<Error> for BinderError {
-    fn from(_: Error) -> Self {
-        Self::new_failed()
+    fn from(source: Error) -> Self {
+        Self {
+            reply: BR_FAILED_REPLY,
+            source: Some(source),
+        }
     }
 }
 
 impl From<AllocError> for BinderError {
     fn from(_: AllocError) -> Self {
-        Self::new_failed()
+        Self {
+            reply: BR_FAILED_REPLY,
+            source: Some(ENOMEM),
+        }
+    }
+}
+
+impl core::fmt::Debug for BinderError {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        match self.reply {
+            BR_FAILED_REPLY => match self.source.as_ref() {
+                Some(source) => f
+                    .debug_struct("BR_FAILED_REPLY")
+                    .field("source", source)
+                    .finish(),
+                None => f.pad("BR_FAILED_REPLY"),
+            },
+            BR_DEAD_REPLY => f.pad("BR_DEAD_REPLY"),
+            BR_FROZEN_REPLY => f.pad("BR_FROZEN_REPLY"),
+            BR_TRANSACTION_COMPLETE => f.pad("BR_TRANSACTION_COMPLETE"),
+            _ => f
+                .debug_struct("BinderError")
+                .field("reply", &self.reply)
+                .finish(),
+        }
+    }
+}
+
+/// Stores the layout of the scatter-gather entries. This is used during the `translate_objects`
+/// call and is discarded when it returns.
+struct ScatterGatherState {
+    /// A struct that tracks the amount of unused buffer space.
+    unused_buffer_space: UnusedBufferSpace,
+    /// Scatter-gather entries to copy.
+    sg_entries: Vec<ScatterGatherEntry>,
+    /// Indexes into `sg_entries` corresponding to the last binder_buffer_object that
+    /// was processed and all of its ancestors. The array is in sorted order.
+    ancestors: Vec<usize>,
+}
+
+/// This entry specifies an additional buffer that should be copied using the scatter-gather
+/// mechanism.
+struct ScatterGatherEntry {
+    /// The index in the offset array of the BINDER_TYPE_PTR that this entry originates from.
+    obj_index: usize,
+    /// Offset in target buffer.
+    offset: usize,
+    /// User address in source buffer.
+    sender_uaddr: usize,
+    /// Number of bytes to copy.
+    length: usize,
+    /// The minimum offset of the next fixup in this buffer.
+    fixup_min_offset: usize,
+    /// The offsets within this buffer that contain pointers which should be translated.
+    pointer_fixups: Vec<PointerFixupEntry>,
+}
+
+/// This entry specifies that a fixup should happen at `target_offset` of the
+/// buffer. If `skip` is nonzero, then the fixup is a `binder_fd_array_object`
+/// and is applied later. Otherwise if `skip` is zero, then the size of the
+/// fixup is `sizeof::<u64>()` and `pointer_value` is written to the buffer.
+struct PointerFixupEntry {
+    /// The number of bytes to skip, or zero for a `binder_buffer_object` fixup.
+    skip: usize,
+    /// The translated pointer to write when `skip` is zero.
+    pointer_value: u64,
+    /// The offset at which the value should be written. The offset is relative
+    /// to the original buffer.
+    target_offset: usize,
+}
+
+/// Return type of `apply_and_validate_fixup_in_parent`.
+struct ParentFixupInfo {
+    /// The index of the parent buffer in `sg_entries`.
+    parent_sg_index: usize,
+    /// The number of ancestors of the buffer.
+    ///
+    /// The buffer is considered an ancestor of itself, so this is always at
+    /// least one.
+    num_ancestors: usize,
+    /// New value of `fixup_min_offset` if this fixup is applied.
+    new_min_offset: usize,
+    /// The offset of the fixup in the target buffer.
+    target_offset: usize,
+}
+
+impl ScatterGatherState {
+    /// Called when a `binder_buffer_object` or `binder_fd_array_object` tries
+    /// to access a region in its parent buffer. These accesses have various
+    /// restrictions, which this method verifies.
+    ///
+    /// The `parent_offset` and `length` arguments describe the offset and
+    /// length of the access in the parent buffer.
+    ///
+    /// # Detailed restrictions
+    ///
+    /// Obviously the fixup must be in-bounds for the parent buffer.
+    ///
+    /// For safety reasons, we only allow fixups inside a buffer to happen
+    /// at increasing offsets; additionally, we only allow fixup on the last
+    /// buffer object that was verified, or one of its parents.
+    ///
+    /// Example of what is allowed:
+    ///
+    /// A
+    ///   B (parent = A, offset = 0)
+    ///   C (parent = A, offset = 16)
+    ///     D (parent = C, offset = 0)
+    ///   E (parent = A, offset = 32) // min_offset is 16 (C.parent_offset)
+    ///
+    /// Examples of what is not allowed:
+    ///
+    /// Decreasing offsets within the same parent:
+    /// A
+    ///   C (parent = A, offset = 16)
+    ///   B (parent = A, offset = 0) // decreasing offset within A
+    ///
+    /// Arcerring to a parent that wasn't the last object or any of its parents:
+    /// A
+    ///   B (parent = A, offset = 0)
+    ///   C (parent = A, offset = 0)
+    ///   C (parent = A, offset = 16)
+    ///     D (parent = B, offset = 0) // B is not A or any of A's parents
+    fn validate_parent_fixup(
+        &self,
+        parent: usize,
+        parent_offset: usize,
+        length: usize,
+    ) -> Result<ParentFixupInfo> {
+        // Using `position` would also be correct, but `rposition` avoids
+        // quadratic running times.
+        let ancestors_i = self
+            .ancestors
+            .iter()
+            .copied()
+            .rposition(|sg_idx| self.sg_entries[sg_idx].obj_index == parent)
+            .ok_or(EINVAL)?;
+
+        let sg_idx = self.ancestors[ancestors_i];
+        let sg_entry = match self.sg_entries.get(sg_idx) {
+            Some(sg_entry) => sg_entry,
+            None => {
+                pr_err!(
+                    "self.ancestors[{}] is {}, but self.sg_entries.len() is {}",
+                    ancestors_i,
+                    sg_idx,
+                    self.sg_entries.len()
+                );
+                return Err(EINVAL);
+            }
+        };
+
+        if sg_entry.fixup_min_offset > parent_offset {
+            pr_warn!(
+                "validate_parent_fixup: fixup_min_offset={}, parent_offset={}",
+                sg_entry.fixup_min_offset,
+                parent_offset
+            );
+            return Err(EINVAL);
+        }
+
+        let new_min_offset = parent_offset.checked_add(length).ok_or(EINVAL)?;
+        if new_min_offset > sg_entry.length {
+            pr_warn!(
+                "validate_parent_fixup: new_min_offset={}, sg_entry.length={}",
+                new_min_offset,
+                sg_entry.length
+            );
+            return Err(EINVAL);
+        }
+
+        let target_offset = sg_entry.offset.checked_add(parent_offset).ok_or(EINVAL)?;
+
+        // The `ancestors_i + 1` operation can't overflow since the result is
+        // at most `self.ancestors.len()`, which also fits in an usize.
+        Ok(ParentFixupInfo {
+            parent_sg_index: sg_idx,
+            num_ancestors: ancestors_i + 1,
+            new_min_offset,
+            target_offset,
+        })
+    }
+}
+
+/// Keeps track of how much unused buffer space is left. The initial amount is the number of bytes
+/// requested by the user using the `buffers_size` field of `binder_transaction_data_sg`. Each time
+/// we translate an object of type `BINDER_TYPE_PTR`, some of the unused buffer space is consumed.
+struct UnusedBufferSpace {
+    /// The start of the remaining space.
+    offset: usize,
+    /// The end of the remaining space.
+    limit: usize,
+}
+
+impl UnusedBufferSpace {
+    /// Claim the next `size` bytes from the unused buffer space. The offset for the claimed chunk
+    /// into the buffer is returned.
+    fn claim_next(&mut self, size: usize) -> Result<usize> {
+        // We require every chunk to be aligned.
+        let size = ptr_align(size);
+        let new_offset = self.offset.checked_add(size).ok_or(EINVAL)?;
+
+        if new_offset <= self.limit {
+            let offset = self.offset;
+            self.offset = new_offset;
+            Ok(offset)
+        } else {
+            Err(EINVAL)
+        }
     }
 }
 
@@ -64,11 +289,15 @@ const LOOPER_EXITED: u32 = 0x04;
 const LOOPER_INVALID: u32 = 0x08;
 const LOOPER_WAITING: u32 = 0x10;
 const LOOPER_POLL: u32 = 0x20;
+const LOOPER_WAITING_PROC: u32 = 0x40;
 
 struct InnerThread {
     /// Determines the looper state of the thread. It is a bit-wise combination of the constants
     /// prefixed with `LOOPER_`.
     looper_flags: u32,
+
+    /// Determines whether the looper should return.
+    looper_need_return: bool,
 
     /// Determines if thread is dead.
     is_dead: bool,
@@ -94,6 +323,7 @@ impl InnerThread {
     fn new() -> Self {
         Self {
             looper_flags: 0,
+            looper_need_return: false,
             is_dead: false,
             process_work_list: false,
             work_list: List::new(),
@@ -146,13 +376,14 @@ impl InnerThread {
         ret
     }
 
-    fn push_work_deferred(&mut self, work: Arc<dyn DeliverToRead>) {
-        self.work_list.push_back(work);
+    fn push_work_deferred(&mut self, work: Arc<dyn DeliverToRead>) -> bool {
+        self.work_list.push_back(work)
     }
 
-    fn push_work(&mut self, work: Arc<dyn DeliverToRead>) {
-        self.push_work_deferred(work);
-        self.process_work_list = true;
+    fn push_work(&mut self, work: Arc<dyn DeliverToRead>) -> bool {
+        let success = self.work_list.push_back(work);
+        self.process_work_list |= success;
+        success
     }
 
     fn has_work(&self) -> bool {
@@ -244,7 +475,6 @@ impl Thread {
     pub(crate) fn new(id: i32, process: Arc<Process>) -> Result<Arc<Self>> {
         let return_work = Arc::try_new(ThreadError::new(InnerThread::set_return_work))?;
         let reply_work = Arc::try_new(ThreadError::new(InnerThread::set_reply_work))?;
-
         let thread = Arc::pin_init(pin_init!(Thread {
             id,
             process,
@@ -262,32 +492,107 @@ impl Thread {
         Ok(thread)
     }
 
+    #[inline(never)]
+    pub(crate) fn debug_print(&self, m: &mut crate::debug::SeqFile) {
+        let looper_flags;
+        let looper_need_return;
+        let is_dead;
+        let has_work;
+        let process_work_list;
+        let current_transaction;
+        {
+            let inner = self.inner.lock();
+            looper_flags = inner.looper_flags;
+            looper_need_return = inner.looper_need_return;
+            is_dead = inner.is_dead;
+            has_work = !inner.work_list.is_empty();
+            process_work_list = inner.process_work_list;
+            current_transaction = inner.current_transaction.clone();
+        }
+        seq_print!(m, "  tid: {}\n", self.id);
+        seq_print!(m, "  state:");
+        if is_dead {
+            seq_print!(m, " dead");
+        }
+        if looper_need_return {
+            seq_print!(m, " pending_flush_wakeup");
+        }
+        if has_work && process_work_list {
+            seq_print!(m, " has_work");
+        }
+        if has_work && !process_work_list {
+            seq_print!(m, " has_deferred_work");
+        }
+        if looper_flags & LOOPER_REGISTERED != 0 {
+            seq_print!(m, " registered");
+        }
+        if looper_flags & LOOPER_ENTERED != 0 {
+            seq_print!(m, " entered");
+        }
+        if looper_flags & LOOPER_EXITED != 0 {
+            seq_print!(m, " exited");
+        }
+        if looper_flags & LOOPER_INVALID != 0 {
+            seq_print!(m, " invalid");
+        }
+        if looper_flags & LOOPER_WAITING != 0 {
+            if looper_flags & LOOPER_WAITING_PROC != 0 {
+                seq_print!(m, " in_get_work");
+            } else {
+                seq_print!(m, " in_get_work_local");
+            }
+        }
+        if looper_flags & LOOPER_POLL != 0 {
+            seq_print!(m, " poll_is_initialized");
+        }
+        seq_print!(m, "\n");
+        if current_transaction.is_some() {
+            seq_print!(m, "  tstack:");
+
+            let mut t = current_transaction;
+            while let Some(tt) = t.as_ref() {
+                seq_print!(m, " ");
+                tt.debug_print(m);
+                t = tt.clone_next();
+            }
+            seq_print!(m, "\n");
+        }
+    }
+
     pub(crate) fn set_current_transaction(&self, transaction: Arc<Transaction>) {
         self.inner.lock().current_transaction = Some(transaction);
+    }
+
+    pub(crate) fn has_current_transaction(&self) -> bool {
+        self.inner.lock().current_transaction.is_some()
     }
 
     /// Attempts to fetch a work item from the thread-local queue. The behaviour if the queue is
     /// empty depends on `wait`: if it is true, the function waits for some work to be queued (or a
     /// signal); otherwise it returns indicating that none is available.
-    fn get_work_local(self: &Arc<Self>, wait: bool) -> Result<Arc<dyn DeliverToRead>> {
+    fn get_work_local(self: &Arc<Self>, wait: bool) -> Result<Option<Arc<dyn DeliverToRead>>> {
         // Try once if the caller does not want to wait.
         if !wait {
-            return self.inner.lock().pop_work().ok_or(EAGAIN);
+            return self.inner.lock().pop_work().ok_or(EAGAIN).map(Some);
         }
 
         // Loop waiting only on the local queue (i.e., not registering with the process queue).
         let mut inner = self.inner.lock();
         loop {
             if let Some(work) = inner.pop_work() {
-                return Ok(work);
+                return Ok(Some(work));
             }
 
             inner.looper_flags |= LOOPER_WAITING;
+            inner.looper_need_return = false;
             let signal_pending = self.work_condvar.wait(&mut inner);
             inner.looper_flags &= !LOOPER_WAITING;
 
             if signal_pending {
                 return Err(ERESTARTSYS);
+            }
+            if inner.looper_need_return {
+                return Ok(None);
             }
         }
     }
@@ -297,12 +602,12 @@ impl Thread {
     ///
     /// This must only be called when the thread is not participating in a transaction chain. If it
     /// is, the local version (`get_work_local`) should be used instead.
-    fn get_work(self: &Arc<Self>, wait: bool) -> Result<Arc<dyn DeliverToRead>> {
+    fn get_work(self: &Arc<Self>, wait: bool) -> Result<Option<Arc<dyn DeliverToRead>>> {
         // Try to get work from the thread's work queue, using only a local lock.
         {
             let mut inner = self.inner.lock();
             if let Some(work) = inner.pop_work() {
-                return Ok(work);
+                return Ok(Some(work));
             }
         }
 
@@ -311,24 +616,25 @@ impl Thread {
         // We know nothing will have been queued directly to the thread queue because it is not in
         // a transaction and it is not in the process' ready list.
         if !wait {
-            return self.process.get_work().ok_or(EAGAIN);
+            return self.process.get_work().ok_or(EAGAIN).map(Some);
         }
 
         // Get work from the process queue. If none is available, atomically register as ready.
         let reg = match self.process.get_work_or_register(self) {
-            Either::Left(work) => return Ok(work),
+            Either::Left(work) => return Ok(Some(work)),
             Either::Right(reg) => reg,
         };
 
         let mut inner = self.inner.lock();
         loop {
             if let Some(work) = inner.pop_work() {
-                return Ok(work);
+                return Ok(Some(work));
             }
 
-            inner.looper_flags |= LOOPER_WAITING;
+            inner.looper_flags |= LOOPER_WAITING | LOOPER_WAITING_PROC;
+            inner.looper_need_return = false;
             let signal_pending = self.work_condvar.wait(&mut inner);
-            inner.looper_flags &= !LOOPER_WAITING;
+            inner.looper_flags &= !(LOOPER_WAITING | LOOPER_WAITING_PROC);
 
             if signal_pending {
                 // A signal is pending. We need to pull the thread off the list, then check the
@@ -337,21 +643,41 @@ impl Thread {
                 // error).
                 drop(inner);
                 drop(reg);
-                return self.inner.lock().pop_work().ok_or(ERESTARTSYS);
+                return self.inner.lock().pop_work().ok_or(ERESTARTSYS).map(Some);
+            }
+            if inner.looper_need_return {
+                drop(inner);
+                drop(reg);
+                return Ok(None);
             }
         }
     }
 
-    pub(crate) fn push_work(&self, work: Arc<dyn DeliverToRead>) -> BinderResult {
+    pub(crate) fn push_work(
+        &self,
+        work: Arc<dyn DeliverToRead>,
+    ) -> Result<bool, (BinderError, Arc<dyn DeliverToRead>)> {
+        let sync = work.should_sync_wakeup();
         {
             let mut inner = self.inner.lock();
             if inner.is_dead {
-                return Err(BinderError::new_dead());
+                return Err((BinderError::new_dead(), work));
             }
-            inner.push_work(work);
+            let ty_name = work.debug_name();
+            if !inner.push_work(work) {
+                return Ok(false);
+            }
+            if inner.work_list.is_empty() {
+                pr_warn!("Failure: work_list empty after pushing {}", ty_name);
+                return Ok(false);
+            }
         }
-        self.work_condvar.notify_one();
-        Ok(())
+        if sync {
+            self.work_condvar.notify_sync();
+        } else {
+            self.work_condvar.notify_one();
+        }
+        Ok(true)
     }
 
     /// Attempts to push to given work item to the thread if it's a looper thread (i.e., if it's
@@ -373,49 +699,49 @@ impl Thread {
 
     fn translate_object(
         &self,
-        index_offset: usize,
+        obj_index: usize,
+        offset: usize,
+        object: BinderObjectArc<'_>,
         view: &mut AllocationView<'_, '_>,
         allow_fds: bool,
+        sg_state: &mut ScatterGatherState,
     ) -> BinderResult {
-        let offset = view.alloc.read(index_offset)?;
-        let header = view.read::<bindings::binder_object_header>(offset)?;
         // TODO: Handle other types.
-        match header.type_ {
-            BINDER_TYPE_WEAK_BINDER | BINDER_TYPE_BINDER => {
-                let strong = header.type_ == BINDER_TYPE_BINDER;
-                view.transfer_binder_object(offset, strong, |obj| {
-                    // SAFETY: `binder` is a `binder_uintptr_t`; any bit pattern is a valid
-                    // representation.
-                    let ptr = unsafe { obj.__bindgen_anon_1.binder } as _;
-                    let cookie = obj.cookie as _;
-                    let flags = obj.flags as _;
-                    let node = self.process.as_arc_borrow().get_node(
-                        ptr,
-                        cookie,
-                        flags,
-                        strong,
-                        Some(self),
-                    )?;
-                    security::binder_transfer_binder(&self.process.cred, &view.alloc.process.cred)?;
-                    Ok(node)
-                })?;
+        match object {
+            BinderObjectArc::Binder(obj) => {
+                let strong = obj.hdr.type_ == BINDER_TYPE_BINDER;
+
+                // SAFETY: `binder` is a `binder_uintptr_t`; any bit pattern is a valid
+                // representation.
+                let ptr = unsafe { obj.__bindgen_anon_1.binder } as _;
+                let cookie = obj.cookie as _;
+                let flags = obj.flags as _;
+                let node = self.process.as_arc_borrow().get_node(
+                    ptr,
+                    cookie,
+                    flags,
+                    strong,
+                    Some(self),
+                )?;
+                security::binder_transfer_binder(&self.process.cred, &view.alloc.process.cred)?;
+
+                view.transfer_binder_object(offset, obj, strong, node)?;
             }
-            BINDER_TYPE_WEAK_HANDLE | BINDER_TYPE_HANDLE => {
-                let strong = header.type_ == BINDER_TYPE_HANDLE;
-                view.transfer_binder_object(offset, strong, |obj| {
-                    // SAFETY: `handle` is a `u32`; any bit pattern is a valid representation.
-                    let handle = unsafe { obj.__bindgen_anon_1.handle } as _;
-                    let node = self.process.get_node_from_handle(handle, strong)?;
-                    security::binder_transfer_binder(&self.process.cred, &view.alloc.process.cred)?;
-                    Ok(node)
-                })?;
+            BinderObjectArc::Handle(obj) => {
+                let strong = obj.hdr.type_ == BINDER_TYPE_HANDLE;
+
+                // SAFETY: `handle` is a `u32`; any bit pattern is a valid representation.
+                let handle = unsafe { obj.__bindgen_anon_1.handle } as _;
+                let node = self.process.get_node_from_handle(handle, strong)?;
+                security::binder_transfer_binder(&self.process.cred, &view.alloc.process.cred)?;
+
+                view.transfer_binder_object(offset, obj, strong, node)?;
             }
-            BINDER_TYPE_FD => {
+            BinderObjectArc::Fd(obj) => {
                 if !allow_fds {
                     return Err(BinderError::new_failed());
                 }
 
-                let obj = view.read::<bindings::binder_fd_object>(offset)?;
                 // SAFETY: `fd` is a `u32`; any bit pattern is a valid representation.
                 let fd = unsafe { obj.__bindgen_anon_1.fd };
                 let file = File::from_fd(fd)?;
@@ -424,71 +750,371 @@ impl Thread {
                     &view.alloc.process.cred,
                     &file,
                 )?;
+
+                // To avoid leaking the sender's fd, we zero that field.
+                obj.__bindgen_anon_1.fd = u32::MAX;
+                view.write::<bindings::binder_fd_object>(offset, &*obj)?;
+
                 let field_offset =
                     kernel::offset_of!(bindings::binder_fd_object, __bindgen_anon_1.fd) as usize;
-                let file_info = Box::try_new(FileInfo::new(file, offset + field_offset))?;
+                let file_info = Box::try_new(FileInfo::new(file, offset + field_offset, false))?;
                 view.alloc.add_file_info(file_info);
             }
-            _ => pr_warn!("Unsupported binder object type: {:x}\n", header.type_),
+            BinderObjectArc::Ptr(obj) => {
+                let obj_length = obj.length.try_into().map_err(|_| EINVAL)?;
+                let alloc_offset = match sg_state.unused_buffer_space.claim_next(obj_length) {
+                    Ok(alloc_offset) => alloc_offset,
+                    Err(err) => {
+                        pr_warn!(
+                            "Failed to claim space for a BINDER_TYPE_PTR. (offset: {}, limit: {}, size: {})",
+                            sg_state.unused_buffer_space.offset,
+                            sg_state.unused_buffer_space.limit,
+                            obj_length,
+                        );
+                        return Err(err.into());
+                    }
+                };
+
+                let sg_state_idx = sg_state.sg_entries.len();
+                sg_state
+                    .sg_entries
+                    .try_push(ScatterGatherEntry {
+                        obj_index,
+                        offset: alloc_offset,
+                        sender_uaddr: obj.buffer as _,
+                        length: obj_length,
+                        pointer_fixups: Vec::new(),
+                        fixup_min_offset: 0,
+                    })
+                    .map_err(|_| ENOMEM)?;
+
+                let buffer_ptr_in_user_space = (view.alloc.ptr + alloc_offset) as u64;
+
+                if obj.flags & bindings::BINDER_BUFFER_FLAG_HAS_PARENT == 0 {
+                    sg_state.ancestors.clear();
+                    sg_state
+                        .ancestors
+                        .try_push(sg_state_idx)
+                        .map_err(|_| ENOMEM)?;
+                } else {
+                    // Another buffer also has a pointer to this buffer, and we need to fixup that
+                    // pointer too.
+
+                    let parent_index = usize::try_from(obj.parent).map_err(|_| EINVAL)?;
+                    let parent_offset = usize::try_from(obj.parent_offset).map_err(|_| EINVAL)?;
+
+                    let info = sg_state.validate_parent_fixup(
+                        parent_index,
+                        parent_offset,
+                        size_of::<u64>(),
+                    )?;
+
+                    sg_state.ancestors.truncate(info.num_ancestors);
+                    sg_state
+                        .ancestors
+                        .try_push(sg_state_idx)
+                        .map_err(|_| ENOMEM)?;
+
+                    let parent_entry = match sg_state.sg_entries.get_mut(info.parent_sg_index) {
+                        Some(parent_entry) => parent_entry,
+                        None => {
+                            pr_err!(
+                                "validate_parent_fixup returned index out of bounds for sg.entries"
+                            );
+                            return Err(EINVAL.into());
+                        }
+                    };
+
+                    parent_entry.fixup_min_offset = info.new_min_offset;
+                    parent_entry
+                        .pointer_fixups
+                        .try_push(PointerFixupEntry {
+                            skip: 0,
+                            pointer_value: buffer_ptr_in_user_space,
+                            target_offset: info.target_offset,
+                        })
+                        .map_err(|_| ENOMEM)?;
+                }
+
+                // Update pointer in `binder_buffer_object`.
+                obj.buffer = buffer_ptr_in_user_space;
+                if let Err(err) = view.write::<bindings::binder_buffer_object>(offset, &*obj) {
+                    pr_warn!("Failed to write BINDER_TYPE_PTR to view: {:?}", err);
+                    return Err(err.into());
+                }
+            }
+            BinderObjectArc::Fda(obj) => {
+                let parent_index = usize::try_from(obj.parent).map_err(|_| EINVAL)?;
+                let parent_offset = usize::try_from(obj.parent_offset).map_err(|_| EINVAL)?;
+                let num_fds = usize::try_from(obj.num_fds).map_err(|_| EINVAL)?;
+                let fds_len = num_fds.checked_mul(size_of::<u32>()).ok_or(EINVAL)?;
+
+                let info = sg_state.validate_parent_fixup(parent_index, parent_offset, fds_len)?;
+
+                sg_state.ancestors.truncate(info.num_ancestors);
+                let parent_entry = match sg_state.sg_entries.get_mut(info.parent_sg_index) {
+                    Some(parent_entry) => parent_entry,
+                    None => {
+                        pr_err!(
+                            "validate_parent_fixup returned index out of bounds for sg.entries"
+                        );
+                        return Err(EINVAL.into());
+                    }
+                };
+
+                parent_entry.fixup_min_offset = info.new_min_offset;
+                parent_entry
+                    .pointer_fixups
+                    .try_push(PointerFixupEntry {
+                        skip: fds_len,
+                        pointer_value: 0,
+                        target_offset: info.target_offset,
+                    })
+                    .map_err(|_| ENOMEM)?;
+
+                let fda_uaddr = parent_entry
+                    .sender_uaddr
+                    .checked_add(parent_offset)
+                    .ok_or(EINVAL)?;
+                let fda_bytes = unsafe { UserSlicePtr::new(fda_uaddr as _, fds_len) }.read_all()?;
+
+                if fds_len != fda_bytes.len() {
+                    pr_err!("UserSlicePtr::read_all returned wrong length in BINDER_TYPE_FDA");
+                    return Err(EINVAL.into());
+                }
+
+                for i in (0..fds_len).step_by(size_of::<u32>()) {
+                    let fd = {
+                        let mut fd_bytes = [0u8; size_of::<u32>()];
+                        fd_bytes.copy_from_slice(&fda_bytes[i..i + size_of::<u32>()]);
+                        u32::from_ne_bytes(fd_bytes)
+                    };
+
+                    let file = File::from_fd(fd)?;
+                    security::binder_transfer_file(
+                        &self.process.cred,
+                        &view.alloc.process.cred,
+                        &file,
+                    )?;
+
+                    // The `validate_parent_fixup` call ensuers that this addition will not
+                    // overflow.
+                    let file_info =
+                        Box::try_new(FileInfo::new(file, info.target_offset + i, true))?;
+                    view.alloc.add_file_info(file_info);
+                }
+                drop(fda_bytes);
+
+                view.write::<bindings::binder_fd_array_object>(offset, &*obj)?;
+            }
         }
+
         Ok(())
     }
 
-    fn translate_objects(
+    fn apply_sg(
         &self,
         alloc: &mut Allocation<'_>,
-        start: usize,
-        end: usize,
-        allow_fds: bool,
+        sg_state: &mut ScatterGatherState,
     ) -> BinderResult {
-        let mut view = AllocationView::new(alloc, start);
-        for i in (start..end).step_by(size_of::<usize>()) {
-            if let Err(err) = self.translate_object(i, &mut view, allow_fds) {
-                alloc.set_info(AllocationInfo { offsets: start..i });
-                return Err(err);
+        for sg_entry in &mut sg_state.sg_entries {
+            let mut end_of_previous_fixup = sg_entry.offset;
+            let offset_end = sg_entry.offset.checked_add(sg_entry.length).ok_or(EINVAL)?;
+
+            let mut reader =
+                unsafe { UserSlicePtr::new(sg_entry.sender_uaddr as _, sg_entry.length) }.reader();
+            for fixup in &mut sg_entry.pointer_fixups {
+                let fixup_len = if fixup.skip == 0 {
+                    size_of::<u64>()
+                } else {
+                    fixup.skip
+                };
+
+                let target_offset_end = fixup.target_offset.checked_add(fixup_len).ok_or(EINVAL)?;
+
+                if fixup.target_offset < end_of_previous_fixup || offset_end < target_offset_end {
+                    pr_warn!(
+                        "Fixups oob {} {} {} {}",
+                        fixup.target_offset,
+                        end_of_previous_fixup,
+                        offset_end,
+                        target_offset_end
+                    );
+                    return Err(EINVAL.into());
+                }
+
+                let copy_off = end_of_previous_fixup;
+                let copy_len = fixup.target_offset - end_of_previous_fixup;
+                if let Err(err) = alloc.copy_into(&mut reader, copy_off, copy_len) {
+                    pr_warn!("Failed copying into alloc: {:?}", err);
+                    return Err(err.into());
+                }
+                if fixup.skip == 0 {
+                    if let Err(err) = alloc.write::<u64>(fixup.target_offset, &fixup.pointer_value)
+                    {
+                        pr_warn!("Failed copying ptr into alloc: {:?}", err);
+                        return Err(err.into());
+                    }
+                }
+                if let Err(err) = reader.skip(fixup_len) {
+                    pr_warn!("Failed skipping {} from reader: {:?}", fixup_len, err);
+                    return Err(err.into());
+                }
+                end_of_previous_fixup = target_offset_end;
+            }
+
+            let copy_off = end_of_previous_fixup;
+            let copy_len = offset_end - end_of_previous_fixup;
+            if let Err(err) = alloc.copy_into(&mut reader, copy_off, copy_len) {
+                pr_warn!("Failed copying remainder into alloc: {:?}", err);
+                return Err(err.into());
             }
         }
-        alloc.set_info(AllocationInfo {
-            offsets: start..end,
-        });
         Ok(())
     }
 
     pub(crate) fn copy_transaction_data<'a>(
         &self,
         to_process: &'a Process,
-        tr: &BinderTransactionData,
+        tr: &BinderTransactionDataSg,
         allow_fds: bool,
+        txn_security_ctx_offset: Option<&mut usize>,
     ) -> BinderResult<Allocation<'a>> {
-        let data_size = tr.data_size as _;
+        let trd = &tr.transaction_data;
+        let is_oneway = trd.flags & TF_ONE_WAY != 0;
+
+        let mut secctx = if let Some(offset) = txn_security_ctx_offset {
+            let secid = self.process.cred.get_secid();
+            let ctx = match security::SecurityCtx::from_secid(secid) {
+                Ok(ctx) => ctx,
+                Err(err) => {
+                    pr_warn!("Failed to get security ctx for id {}: {:?}", secid, err);
+                    return Err(err.into());
+                }
+            };
+            Some((offset, ctx))
+        } else {
+            None
+        };
+
+        let data_size = trd.data_size.try_into().map_err(|_| EINVAL)?;
         let adata_size = ptr_align(data_size);
-        let offsets_size = tr.offsets_size as _;
+        let offsets_size = trd.offsets_size.try_into().map_err(|_| EINVAL)?;
         let aoffsets_size = ptr_align(offsets_size);
+        let buffers_size = tr.buffers_size.try_into().map_err(|_| EINVAL)?;
+        let abuffers_size = ptr_align(buffers_size);
+        let asecctx_size = secctx
+            .as_ref()
+            .map(|(_, ctx)| ptr_align(ctx.len()))
+            .unwrap_or(0);
 
         // This guarantees that at least `sizeof(usize)` bytes will be allocated.
         let len = core::cmp::max(
-            adata_size.checked_add(aoffsets_size).ok_or(ENOMEM)?,
+            adata_size
+                .checked_add(aoffsets_size)
+                .and_then(|sum| sum.checked_add(abuffers_size))
+                .and_then(|sum| sum.checked_add(asecctx_size))
+                .ok_or(ENOMEM)?,
             size_of::<usize>(),
         );
-        let mut alloc = to_process.buffer_alloc(len)?;
+        let secctx_off = adata_size + aoffsets_size + abuffers_size;
+        let mut alloc = match to_process.buffer_alloc(len, is_oneway) {
+            Ok(alloc) => alloc,
+            Err(err) => {
+                pr_warn!(
+                    "Failed to allocate buffer. len:{}, is_oneway:{}",
+                    len,
+                    is_oneway
+                );
+                return Err(err);
+            }
+        };
 
-        // Copy raw data.
-        let mut reader = unsafe { UserSlicePtr::new(tr.data.ptr.buffer as _, data_size) }.reader();
-        alloc.copy_into(&mut reader, 0, data_size)?;
+        let mut buffer_reader =
+            unsafe { UserSlicePtr::new(trd.data.ptr.buffer as _, data_size) }.reader();
+        let mut end_of_previous_object = 0;
+        let mut sg_state = None;
 
         // Copy offsets if there are any.
         if offsets_size > 0 {
-            let mut reader =
-                unsafe { UserSlicePtr::new(tr.data.ptr.offsets as _, offsets_size) }.reader();
-            alloc.copy_into(&mut reader, adata_size, offsets_size)?;
+            {
+                let mut reader =
+                    unsafe { UserSlicePtr::new(trd.data.ptr.offsets as _, offsets_size) }.reader();
+                alloc.copy_into(&mut reader, adata_size, offsets_size)?;
+            }
+
+            let offsets_start = adata_size;
+            let offsets_end = adata_size + aoffsets_size;
+
+            // This state is used for BINDER_TYPE_PTR objects.
+            sg_state = Some(ScatterGatherState {
+                unused_buffer_space: UnusedBufferSpace {
+                    offset: offsets_end,
+                    limit: len,
+                },
+                sg_entries: Vec::new(),
+                ancestors: Vec::new(),
+            });
+            let sg_state = sg_state.as_mut().unwrap();
 
             // Traverse the objects specified.
-            self.translate_objects(
-                &mut alloc,
-                adata_size,
-                adata_size + aoffsets_size,
-                allow_fds,
-            )?;
+            let mut view = AllocationView::new(&mut alloc, data_size);
+            for (index, index_offset) in (offsets_start..offsets_end)
+                .step_by(size_of::<usize>())
+                .enumerate()
+            {
+                let offset = view.alloc.read(index_offset)?;
+
+                // Copy data between two objects.
+                if end_of_previous_object < offset {
+                    view.alloc.copy_into(
+                        &mut buffer_reader,
+                        end_of_previous_object,
+                        offset - end_of_previous_object,
+                    )?;
+                }
+
+                let mut object = BinderObject::read_from(&mut buffer_reader)?;
+
+                match self.translate_object(
+                    index,
+                    offset,
+                    object.as_ref()?,
+                    &mut view,
+                    allow_fds,
+                    sg_state,
+                ) {
+                    Ok(()) => end_of_previous_object = offset + object.size()?,
+                    Err(err) => {
+                        pr_warn!("Error while translating object.");
+                        alloc.set_info_offsets(offsets_start..index_offset);
+                        return Err(err);
+                    }
+                }
+            }
+            alloc.set_info_offsets(offsets_start..offsets_end);
+        }
+
+        // Copy remaining raw data.
+        alloc.copy_into(
+            &mut buffer_reader,
+            end_of_previous_object,
+            data_size - end_of_previous_object,
+        )?;
+
+        if let Some(sg_state) = sg_state.as_mut() {
+            if let Err(err) = self.apply_sg(&mut alloc, sg_state) {
+                pr_warn!("Failure in apply_sg: {:?}", err);
+                return Err(err.into());
+            }
+        }
+
+        if let Some((off_out, secctx)) = secctx.as_mut() {
+            if let Err(err) = alloc.write(secctx_off, secctx.as_bytes()) {
+                pr_warn!("Failed to write security context: {:?}", err);
+                return Err(err.into());
+            }
+            **off_out = secctx_off;
         }
 
         Ok(alloc)
@@ -540,13 +1166,15 @@ impl Thread {
             }
 
             match reply {
-                Either::Left(work) => inner.push_work(work),
+                Either::Left(work) => {
+                    inner.push_work(work);
+                }
                 Either::Right(code) => inner.push_reply_work(code),
             }
         }
 
         // Notify the thread now that we've released the inner lock.
-        self.work_condvar.notify_one();
+        self.work_condvar.notify_sync();
         false
     }
 
@@ -559,16 +1187,23 @@ impl Thread {
         }
     }
 
-    fn transaction<T>(self: &Arc<Self>, tr: &BinderTransactionData, inner: T)
+    fn transaction<T>(self: &Arc<Self>, tr: &BinderTransactionDataSg, inner: T)
     where
-        T: FnOnce(&Arc<Self>, &BinderTransactionData) -> BinderResult,
+        T: FnOnce(&Arc<Self>, &BinderTransactionDataSg) -> BinderResult,
     {
         if let Err(err) = inner(self, tr) {
+            if err.reply != BR_TRANSACTION_COMPLETE {
+                pr_warn!(
+                    "Transaction failed: {:?} my_pid:{}",
+                    err,
+                    self.process.task.pid_in_current_ns()
+                );
+            }
             self.inner.lock().push_return_work(err.reply);
         }
     }
 
-    fn reply_inner(self: &Arc<Self>, tr: &BinderTransactionData) -> BinderResult {
+    fn reply_inner(self: &Arc<Self>, tr: &BinderTransactionDataSg) -> BinderResult {
         let orig = self.inner.lock().pop_transaction_to_reply(self)?;
         if !orig.from.is_current_transaction(&orig) {
             return Err(BinderError::new_failed());
@@ -587,6 +1222,10 @@ impl Thread {
         .map_err(|mut err| {
             // At this point we only return `BR_TRANSACTION_COMPLETE` to the caller, and we must let
             // the sender know that the transaction has completed (with an error in this case).
+            pr_warn!(
+                "Failure {:?} during reply - delivering BR_FAILED_REPLY to sender.",
+                err
+            );
             let reply = Either::Right(BR_FAILED_REPLY);
             orig.from.deliver_reply(reply, &orig);
             err.reply = BR_TRANSACTION_COMPLETE;
@@ -609,8 +1248,8 @@ impl Thread {
         })
     }
 
-    fn oneway_transaction_inner(self: &Arc<Self>, tr: &BinderTransactionData) -> BinderResult {
-        let handle = unsafe { tr.target.handle };
+    fn oneway_transaction_inner(self: &Arc<Self>, tr: &BinderTransactionDataSg) -> BinderResult {
+        let handle = unsafe { tr.transaction_data.target.handle };
         let node_ref = self.process.get_transaction_node(handle)?;
         security::binder_transaction(&self.process.cred, &node_ref.node.owner.cred)?;
         let completion = Arc::try_new(DeliverCode::new(BR_TRANSACTION_COMPLETE))?;
@@ -621,8 +1260,8 @@ impl Thread {
         Ok(())
     }
 
-    fn transaction_inner(self: &Arc<Self>, tr: &BinderTransactionData) -> BinderResult {
-        let handle = unsafe { tr.target.handle };
+    fn transaction_inner(self: &Arc<Self>, tr: &BinderTransactionDataSg) -> BinderResult {
+        let handle = unsafe { tr.transaction_data.target.handle };
         let node_ref = self.process.get_transaction_node(handle)?;
         security::binder_transaction(&self.process.cred, &node_ref.node.owner.cred)?;
         // TODO: We need to ensure that there isn't a pending transaction in the work queue. How
@@ -639,11 +1278,11 @@ impl Thread {
                 return Err(BinderError::new_failed());
             }
             inner.current_transaction = Some(transaction.clone());
-        }
 
-        // We push the completion as a deferred work so that we wait for the reply before returning
-        // to userland.
-        self.push_work_deferred(completion);
+            // We push the completion as a deferred work so that we wait for the reply before returning
+            // to userland.
+            inner.push_work_deferred(completion);
+        }
         // TODO: Remove completion if submission fails?
         transaction.submit()?;
         Ok(())
@@ -656,16 +1295,32 @@ impl Thread {
 
         while reader.len() >= size_of::<u32>() && self.inner.lock().return_work.is_some() {
             let before = reader.len();
-            match reader.read::<u32>()? {
+            let cmd = reader.read::<u32>()?;
+            match cmd {
                 BC_TRANSACTION => {
-                    let tr = reader.read::<BinderTransactionData>()?;
-                    if tr.flags & TF_ONE_WAY != 0 {
+                    let tr = reader.read::<BinderTransactionData>()?.with_buffers_size(0);
+                    if tr.transaction_data.flags & TF_ONE_WAY != 0 {
                         self.transaction(&tr, Self::oneway_transaction_inner)
                     } else {
                         self.transaction(&tr, Self::transaction_inner)
                     }
                 }
-                BC_REPLY => self.transaction(&reader.read()?, Self::reply_inner),
+                BC_TRANSACTION_SG => {
+                    let tr = reader.read::<BinderTransactionDataSg>()?;
+                    if tr.transaction_data.flags & TF_ONE_WAY != 0 {
+                        self.transaction(&tr, Self::oneway_transaction_inner)
+                    } else {
+                        self.transaction(&tr, Self::transaction_inner)
+                    }
+                }
+                BC_REPLY => {
+                    let tr = reader.read::<BinderTransactionData>()?.with_buffers_size(0);
+                    self.transaction(&tr, Self::reply_inner)
+                }
+                BC_REPLY_SG => {
+                    let tr = reader.read::<BinderTransactionDataSg>()?;
+                    self.transaction(&tr, Self::reply_inner)
+                }
                 BC_FREE_BUFFER => drop(self.process.buffer_get(reader.read()?)),
                 BC_INCREFS => self.process.update_ref(reader.read()?, true, false)?,
                 BC_ACQUIRE => self.process.update_ref(reader.read()?, true, true)?,
@@ -683,7 +1338,6 @@ impl Thread {
                 BC_ENTER_LOOPER => self.inner.lock().looper_enter(),
                 BC_EXIT_LOOPER => self.inner.lock().looper_exit(),
 
-                // TODO: Add support for BC_TRANSACTION_SG and BC_REPLY_SG.
                 // BC_ATTEMPT_ACQUIRE and BC_ACQUIRE_RESULT are no longer supported.
                 _ => return Err(EINVAL),
             }
@@ -713,20 +1367,35 @@ impl Thread {
         // Reserve some room at the beginning of the read buffer so that we can send a
         // BR_SPAWN_LOOPER if we need to.
         if req.read_consumed == 0 {
-            writer.write(&BR_NOOP)?;
+            if let Err(err) = writer.write(&BR_NOOP) {
+                pr_warn!("Failure when writing BR_NOOP at beginning of buffer.");
+                return Err(err);
+            }
         }
 
         // Loop doing work while there is room in the buffer.
         let initial_len = writer.len();
-        while writer.len() >= size_of::<u32>() {
+        while writer.len() >= size_of::<bindings::binder_transaction_data_secctx>() + 4 {
             match getter(self, wait && initial_len == writer.len()) {
-                Ok(work) => {
-                    if !work.do_work(self, &mut writer)? {
-                        break;
+                Ok(Some(work)) => {
+                    let work_ty = work.debug_name();
+                    match work.do_work(self, &mut writer) {
+                        Ok(true) => {}
+                        Ok(false) => break,
+                        Err(err) => {
+                            pr_warn!("Failure inside do_work of type {}.", work_ty);
+                            return Err(err);
+                        }
                     }
+                }
+                Ok(None) => {
+                    break;
                 }
                 Err(err) => {
                     // Propagate the error if we haven't written anything else.
+                    if err != ERESTARTSYS && err != EAGAIN {
+                        pr_warn!("Failure in work getter: {:?}", err);
+                    }
                     if initial_len == writer.len() {
                         return Err(err);
                     } else {
@@ -758,6 +1427,11 @@ impl Thread {
         // Go through the write buffer.
         if req.write_size > 0 {
             if let Err(err) = self.write(&mut req) {
+                pr_warn!(
+                    "Write failure {:?} in pid:{}",
+                    err,
+                    self.process.task.pid_in_current_ns()
+                );
                 req.read_consumed = 0;
                 writer.write(&req)?;
                 return Err(err);
@@ -768,6 +1442,13 @@ impl Thread {
         let mut ret = Ok(());
         if req.read_size > 0 {
             ret = self.read(&mut req, wait);
+            if ret.is_err() && ret != Err(ERESTARTSYS) {
+                pr_warn!(
+                    "Read failure {:?} in pid:{}",
+                    ret,
+                    self.process.task.pid_in_current_ns()
+                );
+            }
         }
 
         // Write the request back so that the consumed fields are visible to the caller.
@@ -782,7 +1463,20 @@ impl Thread {
         (inner.should_use_process_work_queue(), inner.poll())
     }
 
-    pub(crate) fn notify_if_poll_ready(&self) {
+    pub(crate) fn notify_flush(&self) {
+        let mut inner = self.inner.lock();
+        let notify = inner.looper_flags & LOOPER_WAITING != 0;
+        if notify {
+            inner.looper_need_return = true;
+        }
+        drop(inner);
+
+        if notify {
+            self.work_condvar.notify_one();
+        }
+    }
+
+    pub(crate) fn notify_if_poll_ready(&self, sync: bool) {
         // Determine if we need to notify. This requires the lock.
         let inner = self.inner.lock();
         let notify = inner.looper_flags & LOOPER_POLL != 0
@@ -792,7 +1486,11 @@ impl Thread {
 
         // Now that the lock is no longer held, notify the waiters if we have to.
         if notify {
-            self.work_condvar.notify_one();
+            if sync {
+                self.work_condvar.notify_sync();
+            } else {
+                self.work_condvar.notify_one();
+            }
         }
     }
 
@@ -805,7 +1503,7 @@ impl Thread {
         self.inner.lock().is_dead = true;
 
         // Cancel all pending work items.
-        while let Ok(work) = self.get_work_local(false) {
+        while let Ok(Some(work)) = self.get_work_local(false) {
             work.cancel();
         }
 
@@ -861,5 +1559,90 @@ impl DeliverToRead for ThreadError {
 
     fn get_links(&self) -> &Links<dyn DeliverToRead> {
         &self.links
+    }
+
+    fn should_sync_wakeup(&self) -> bool {
+        false
+    }
+}
+
+#[repr(C)]
+union BinderObject {
+    hdr: bindings::binder_object_header,
+    fbo: bindings::flat_binder_object,
+    fdo: bindings::binder_fd_object,
+    bbo: bindings::binder_buffer_object,
+    fdao: bindings::binder_fd_array_object,
+}
+
+enum BinderObjectArc<'a> {
+    Binder(&'a mut bindings::flat_binder_object),
+    Handle(&'a mut bindings::flat_binder_object),
+    Fd(&'a mut bindings::binder_fd_object),
+    Ptr(&'a mut bindings::binder_buffer_object),
+    Fda(&'a mut bindings::binder_fd_array_object),
+}
+
+impl BinderObject {
+    fn read_from(reader: &mut UserSlicePtrReader) -> Result<BinderObject> {
+        // Create a zeroed binder object.
+        //
+        // Safety: All bit patterns are valid for all variants of this union. By zeroing the data
+        // and not providing any way of deinitializing it, we ensure that uninitialized data is
+        // never read.
+        let mut obj = unsafe { MaybeUninit::<BinderObject>::zeroed().assume_init() };
+
+        // Safety: The length is at most the size of the variable.
+        //
+        // Since the variable is already zeroed, all of its bytes remain initialized regardless of
+        // how short `len` is.
+        unsafe {
+            let len = core::cmp::min(size_of::<BinderObject>(), reader.len());
+            reader
+                .clone_reader()
+                .read_raw((&mut obj) as *mut BinderObject as *mut u8, len)?;
+        }
+
+        // If we used a object type smaller than the largest object size, then we've read more
+        // bytes than we needed to. However, we used `.clone_reader()` to avoid advancing the
+        // original reader. Now, we call `skip` so that the caller's reader is advanced by the
+        // right amount.
+        //
+        // The `skip` call fails if the reader doesn't have `size` bytes available.
+        reader.skip(obj.size()?)?;
+
+        Ok(obj)
+    }
+
+    fn size(&self) -> Result<usize> {
+        // Safety: The entire object is initialized, so accessing this field is safe.
+        let type_ = unsafe { self.hdr.type_ };
+
+        match type_ {
+            BINDER_TYPE_WEAK_BINDER => Ok(size_of::<bindings::flat_binder_object>()),
+            BINDER_TYPE_BINDER => Ok(size_of::<bindings::flat_binder_object>()),
+            BINDER_TYPE_WEAK_HANDLE => Ok(size_of::<bindings::flat_binder_object>()),
+            BINDER_TYPE_HANDLE => Ok(size_of::<bindings::flat_binder_object>()),
+            BINDER_TYPE_FD => Ok(size_of::<bindings::binder_fd_object>()),
+            BINDER_TYPE_PTR => Ok(size_of::<bindings::binder_buffer_object>()),
+            BINDER_TYPE_FDA => Ok(size_of::<bindings::binder_fd_array_object>()),
+            _ => Err(EINVAL),
+        }
+    }
+
+    fn as_ref(&mut self) -> Result<BinderObjectArc<'_>> {
+        use BinderObjectArc::*;
+        // Safety: The constructor ensures that all bytes of `self` are initialized, and all
+        // variants are valid for all bit patterns.
+        unsafe {
+            match self.hdr.type_ {
+                BINDER_TYPE_WEAK_BINDER | BINDER_TYPE_BINDER => Ok(Binder(&mut self.fbo)),
+                BINDER_TYPE_WEAK_HANDLE | BINDER_TYPE_HANDLE => Ok(Handle(&mut self.fbo)),
+                BINDER_TYPE_FD => Ok(Fd(&mut self.fdo)),
+                BINDER_TYPE_PTR => Ok(Ptr(&mut self.bbo)),
+                BINDER_TYPE_FDA => Ok(Fda(&mut self.fdao)),
+                _ => Err(EINVAL),
+            }
+        }
     }
 }

@@ -18,8 +18,10 @@ pub_no_prefix!(
     BR_OK,
     BR_ERROR,
     BR_TRANSACTION,
+    BR_TRANSACTION_SEC_CTX,
     BR_REPLY,
     BR_DEAD_REPLY,
+    BR_FROZEN_REPLY,
     BR_TRANSACTION_COMPLETE,
     BR_INCREFS,
     BR_ACQUIRE,
@@ -35,7 +37,9 @@ pub_no_prefix!(
 pub_no_prefix!(
     binder_driver_command_protocol_,
     BC_TRANSACTION,
+    BC_TRANSACTION_SG,
     BC_REPLY,
+    BC_REPLY_SG,
     BC_FREE_BUFFER,
     BC_INCREFS,
     BC_ACQUIRE,
@@ -51,18 +55,28 @@ pub_no_prefix!(
     BC_DEAD_BINDER_DONE
 );
 
-pub_no_prefix!(transaction_flags_, TF_ONE_WAY, TF_ACCEPT_FDS);
-
-pub_no_prefix!(flat_binder_object_flags_, FLAT_BINDER_FLAG_ACCEPTS_FDS);
+pub_no_prefix!(
+    flat_binder_object_flags_,
+    FLAT_BINDER_FLAG_ACCEPTS_FDS,
+    FLAT_BINDER_FLAG_TXN_SECURITY_CTX
+);
+pub_no_prefix!(
+    transaction_flags_,
+    TF_ONE_WAY,
+    TF_ACCEPT_FDS,
+    TF_CLEAR_BUF,
+    TF_UPDATE_TXN
+);
 
 pub(crate) use bindings::{
-    BINDER_TYPE_BINDER, BINDER_TYPE_FD, BINDER_TYPE_HANDLE, BINDER_TYPE_WEAK_BINDER,
-    BINDER_TYPE_WEAK_HANDLE,
+    BINDER_TYPE_BINDER, BINDER_TYPE_FD, BINDER_TYPE_FDA, BINDER_TYPE_HANDLE, BINDER_TYPE_PTR,
+    BINDER_TYPE_WEAK_BINDER, BINDER_TYPE_WEAK_HANDLE,
 };
 
 macro_rules! decl_wrapper {
     ($newname:ident, $wrapped:ty) => {
         #[derive(Copy, Clone, Default)]
+        #[repr(transparent)]
         pub(crate) struct $newname($wrapped);
 
         // TODO: This must be justified by inspecting the type, so should live outside the macro or
@@ -86,16 +100,47 @@ macro_rules! decl_wrapper {
 }
 
 decl_wrapper!(BinderNodeDebugInfo, bindings::binder_node_debug_info);
-decl_wrapper!(BinderNodeInfoForArc, bindings::binder_node_info_for_ref);
+decl_wrapper!(BinderNodeInfoForRef, bindings::binder_node_info_for_ref);
 decl_wrapper!(FlatBinderObject, bindings::flat_binder_object);
 decl_wrapper!(BinderTransactionData, bindings::binder_transaction_data);
+decl_wrapper!(
+    BinderTransactionDataSecctx,
+    bindings::binder_transaction_data_secctx
+);
+decl_wrapper!(
+    BinderTransactionDataSg,
+    bindings::binder_transaction_data_sg
+);
 decl_wrapper!(BinderWriteRead, bindings::binder_write_read);
 decl_wrapper!(BinderVersion, bindings::binder_version);
+decl_wrapper!(BinderfsDevice, bindings::binderfs_device);
+decl_wrapper!(BinderFrozenStatusInfo, bindings::binder_frozen_status_info);
+decl_wrapper!(BinderFreezeInfo, bindings::binder_freeze_info);
 
 impl BinderVersion {
     pub(crate) fn current() -> Self {
         Self(bindings::binder_version {
             protocol_version: bindings::BINDER_CURRENT_PROTOCOL_VERSION as _,
         })
+    }
+}
+
+impl BinderTransactionData {
+    pub(crate) fn with_buffers_size(self, buffers_size: u64) -> BinderTransactionDataSg {
+        BinderTransactionDataSg(bindings::binder_transaction_data_sg {
+            transaction_data: self.0,
+            buffers_size,
+        })
+    }
+}
+
+impl BinderTransactionDataSecctx {
+    /// View the inner data as wrapped in `BinderTransactionData`.
+    pub(crate) fn tr_data(&mut self) -> &mut BinderTransactionData {
+        // SAFETY: Transparent wrapper is safe to transmute.
+        unsafe {
+            &mut *(&mut self.transaction_data as *mut bindings::binder_transaction_data
+                as *mut BinderTransactionData)
+        }
     }
 }

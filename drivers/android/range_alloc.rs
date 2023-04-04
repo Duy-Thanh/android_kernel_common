@@ -1,30 +1,38 @@
 // SPDX-License-Identifier: GPL-2.0
-
+use core::mem::MaybeUninit;
 use core::ptr::NonNull;
 use kernel::{
     linked_list::{CursorMut, GetLinks, Links, List},
     prelude::*,
 };
-
 pub(crate) struct RangeAllocator<T> {
     list: List<Box<Descriptor<T>>>,
+    free_oneway_space: usize,
 }
-
 #[derive(Debug, PartialEq, Eq)]
 enum DescriptorState {
     Free,
-    Reserved,
-    Allocated,
+    Reserved { is_oneway: bool },
+    Allocated { is_oneway: bool },
 }
-
+impl DescriptorState {
+    fn is_allocated(&self) -> bool {
+        match self {
+            DescriptorState::Allocated { .. } => true,
+            _ => false,
+        }
+    }
+}
 impl<T> RangeAllocator<T> {
     pub(crate) fn new(size: usize) -> Result<Self> {
         let desc = Box::try_new(Descriptor::new(0, size))?;
         let mut list = List::new();
         list.push_back(desc);
-        Ok(Self { list })
+        Ok(Self {
+            free_oneway_space: size / 2,
+            list,
+        })
     }
-
     fn find_best_match(&self, size: usize) -> Option<NonNull<Descriptor<T>>> {
         // TODO: Use a binary tree instead of list for this lookup.
         let mut best = None;
@@ -35,53 +43,96 @@ impl<T> RangeAllocator<T> {
                 if size == desc.size {
                     return Some(NonNull::from(desc));
                 }
-
                 if size < desc.size && desc.size < best_size {
                     best = Some(NonNull::from(desc));
                     best_size = desc.size;
                 }
             }
-
             cursor.move_next();
         }
         best
     }
-
-    pub(crate) fn reserve_new(&mut self, size: usize) -> Result<usize> {
+    /// Try to reserve a new buffer, using the provided allocation if necessary.
+    pub(crate) fn reserve_new(
+        &mut self,
+        size: usize,
+        is_oneway: bool,
+        alloc: ReserveNewBox<T>,
+    ) -> Result<usize> {
+        // Compute new value of free_oneway_space, which is set only on success.
+        let new_oneway_space = if is_oneway {
+            match self.free_oneway_space.checked_sub(size) {
+                Some(new_oneway_space) => new_oneway_space,
+                None => return Err(ENOSPC),
+            }
+        } else {
+            self.free_oneway_space
+        };
         let desc_ptr = match self.find_best_match(size) {
-            None => return Err(ENOMEM),
+            None => return Err(ENOSPC),
             Some(found) => found,
         };
-
+        self.free_oneway_space = new_oneway_space;
         // SAFETY: We hold the only mutable reference to list, so it cannot have changed.
         let desc = unsafe { &mut *desc_ptr.as_ptr() };
         if desc.size == size {
-            desc.state = DescriptorState::Reserved;
+            desc.state = DescriptorState::Reserved { is_oneway };
             return Ok(desc.offset);
         }
-
         // We need to break up the descriptor.
-        let new = Box::try_new(Descriptor::new(desc.offset + size, desc.size - size))?;
+        let new = alloc.initialize(Descriptor::new(desc.offset + size, desc.size - size));
         unsafe { self.list.insert_after(desc_ptr, new) };
-        desc.state = DescriptorState::Reserved;
+        desc.state = DescriptorState::Reserved { is_oneway };
         desc.size = size;
         Ok(desc.offset)
     }
-
-    fn free_with_cursor(cursor: &mut CursorMut<'_, Box<Descriptor<T>>>) -> Result {
-        let mut size = match cursor.current() {
+    /// Try to reserve a new buffer, but don't allocate more memory.
+    ///
+    /// If this returns `Ok(None)`, the caller should make an allocation and try again by calling
+    /// `reserve_new`.
+    pub(crate) fn reserve_new_noalloc(
+        &mut self,
+        size: usize,
+        is_oneway: bool,
+    ) -> Result<Option<usize>> {
+        // Compute new value of free_oneway_space, which is set only on success.
+        let new_oneway_space = if is_oneway {
+            match self.free_oneway_space.checked_sub(size) {
+                Some(new_oneway_space) => new_oneway_space,
+                None => return Err(ENOSPC),
+            }
+        } else {
+            self.free_oneway_space
+        };
+        let desc_ptr = match self.find_best_match(size) {
+            None => return Err(ENOSPC),
+            Some(found) => found,
+        };
+        // SAFETY: We hold the only mutable reference to list, so it cannot have changed.
+        let desc = unsafe { &mut *desc_ptr.as_ptr() };
+        if desc.size == size {
+            self.free_oneway_space = new_oneway_space;
+            desc.state = DescriptorState::Reserved { is_oneway };
+            Ok(Some(desc.offset))
+        } else {
+            Ok(None)
+        }
+    }
+    // Returns how much to increase `free_oneway_space` by.
+    fn free_with_cursor(cursor: &mut CursorMut<'_, Box<Descriptor<T>>>) -> Result<usize> {
+        let (mut size, is_oneway) = match cursor.current() {
             None => return Err(EINVAL),
             Some(ref mut entry) => {
-                match entry.state {
+                let is_oneway = match entry.state {
                     DescriptorState::Free => return Err(EINVAL),
-                    DescriptorState::Allocated => return Err(EPERM),
-                    DescriptorState::Reserved => {}
-                }
+                    DescriptorState::Allocated { .. } => return Err(EPERM),
+                    DescriptorState::Reserved { is_oneway } => is_oneway,
+                };
                 entry.state = DescriptorState::Free;
-                entry.size
+                (entry.size, is_oneway)
             }
         };
-
+        let free_oneway_space_add = if is_oneway { size } else { 0 };
         // Try to merge with the next entry.
         if let Some(next) = cursor.peek_next() {
             if next.state == DescriptorState::Free {
@@ -91,7 +142,6 @@ impl<T> RangeAllocator<T> {
                 cursor.remove_current();
             }
         }
-
         // Try to merge with the previous entry.
         if let Some(prev) = cursor.peek_prev() {
             if prev.state == DescriptorState::Free {
@@ -99,41 +149,40 @@ impl<T> RangeAllocator<T> {
                 cursor.remove_current();
             }
         }
-
-        Ok(())
+        Ok(free_oneway_space_add)
     }
-
     fn find_at_offset(&mut self, offset: usize) -> Option<CursorMut<'_, Box<Descriptor<T>>>> {
         let mut cursor = self.list.cursor_front_mut();
         while let Some(desc) = cursor.current() {
             if desc.offset == offset {
                 return Some(cursor);
             }
-
             if desc.offset > offset {
                 return None;
             }
-
             cursor.move_next();
         }
         None
     }
-
     pub(crate) fn reservation_abort(&mut self, offset: usize) -> Result {
         // TODO: The force case is currently O(n), but could be made O(1) with unsafe.
         let mut cursor = self.find_at_offset(offset).ok_or(EINVAL)?;
-        Self::free_with_cursor(&mut cursor)
+        let free_oneway_space_add = Self::free_with_cursor(&mut cursor)?;
+        self.free_oneway_space += free_oneway_space_add;
+        Ok(())
     }
-
     pub(crate) fn reservation_commit(&mut self, offset: usize, data: Option<T>) -> Result {
         // TODO: This is currently O(n), make it O(1).
         let mut cursor = self.find_at_offset(offset).ok_or(ENOENT)?;
         let desc = cursor.current().unwrap();
-        desc.state = DescriptorState::Allocated;
+        let is_oneway = match desc.state {
+            DescriptorState::Reserved { is_oneway } => is_oneway,
+            _ => return Err(ENOENT),
+        };
+        desc.state = DescriptorState::Allocated { is_oneway };
         desc.data = data;
         Ok(())
     }
-
     /// Takes an entry at the given offset from [`DescriptorState::Allocated`] to
     /// [`DescriptorState::Reserved`].
     ///
@@ -142,25 +191,23 @@ impl<T> RangeAllocator<T> {
         // TODO: This is currently O(n), make it O(log n).
         let mut cursor = self.find_at_offset(offset).ok_or(ENOENT)?;
         let desc = cursor.current().unwrap();
-        if desc.state != DescriptorState::Allocated {
-            return Err(ENOENT);
-        }
-        desc.state = DescriptorState::Reserved;
+        let is_oneway = match desc.state {
+            DescriptorState::Allocated { is_oneway } => is_oneway,
+            _ => return Err(ENOENT),
+        };
+        desc.state = DescriptorState::Reserved { is_oneway };
         Ok((desc.size, desc.data.take()))
     }
-
     pub(crate) fn for_each<F: Fn(usize, usize, Option<T>)>(&mut self, callback: F) {
         let mut cursor = self.list.cursor_front_mut();
         while let Some(desc) = cursor.current() {
-            if desc.state == DescriptorState::Allocated {
+            if desc.state.is_allocated() {
                 callback(desc.offset, desc.size, desc.data.take());
             }
-
             cursor.move_next();
         }
     }
 }
-
 struct Descriptor<T> {
     state: DescriptorState,
     size: usize,
@@ -168,7 +215,6 @@ struct Descriptor<T> {
     links: Links<Descriptor<T>>,
     data: Option<T>,
 }
-
 impl<T> Descriptor<T> {
     fn new(offset: usize, size: usize) -> Self {
         Self {
@@ -180,10 +226,31 @@ impl<T> Descriptor<T> {
         }
     }
 }
-
 impl<T> GetLinks for Descriptor<T> {
     type EntryType = Self;
     fn get_links(desc: &Self) -> &Links<Self> {
         &desc.links
+    }
+}
+/// An allocation for use by `reserve_new`.
+pub(crate) struct ReserveNewBox<T> {
+    inner: Box<MaybeUninit<Descriptor<T>>>,
+}
+impl<T> ReserveNewBox<T> {
+    pub(crate) fn try_new() -> Result<Self> {
+        Ok(Self {
+            inner: Box::try_new_uninit()?,
+        })
+    }
+    fn initialize(self, desc: Descriptor<T>) -> Box<Descriptor<T>> {
+        // SAFETY: Since we are initializing the memory with a valid value, its ok to transmute the
+        // box into an initialized one.
+        //
+        // This can just be `Box::write(self.inner, desc)` when that method is stabilized.
+        unsafe {
+            let inner = Box::into_raw(self.inner) as *mut Descriptor<T>;
+            core::ptr::write(inner, desc);
+            Box::from_raw(inner)
+        }
     }
 }

@@ -6,23 +6,23 @@ use kernel::{
     cred::Credential,
     file::{self, File, IoctlCommand, IoctlHandler, PollTable},
     io_buffer::{IoBufferReader, IoBufferWriter},
-    linked_list::List,
+    linked_list::{GetLinks, Links, List},
     mm,
     pages::Pages,
     prelude::*,
     rbtree::RBTree,
-    sync::{Arc, ArcBorrow, Guard, Mutex, MutexBackend, UniqueArc},
+    sync::{Arc, ArcBorrow, CondVar, CondVarTimeoutResult, Guard, Mutex, SpinLock, UniqueArc},
     task::Task,
-    types::ARef,
-    types::Either,
+    types::{ARef, Either},
     user_ptr::{UserSlicePtr, UserSlicePtrReader},
+    workqueue::{self, Work},
 };
 
 use crate::{
-    allocation::Allocation,
+    allocation::{Allocation, DeferredFdClose},
     context::Context,
     defs::*,
-    node::{Node, NodeDeath, NodeRef},
+    node::{DeliveredNodeDeath, Node, NodeDeath, NodeRef},
     range_alloc::RangeAllocator,
     thread::{BinderError, BinderResult, Thread},
     DeliverToRead, DeliverToReadListAdapter,
@@ -31,9 +31,25 @@ use crate::{
 // TODO: Review this:
 // Lock order: Process::node_refs -> Process::inner -> Thread::inner
 
+#[derive(Default)]
 pub(crate) struct AllocationInfo {
     /// Range within the allocation where we can find the offsets to the object descriptors.
-    pub(crate) offsets: Range<usize>,
+    pub(crate) offsets: Option<Range<usize>>,
+    /// The target node of the transaction this allocation is associated to.
+    /// Not set for replies.
+    pub(crate) target_node: Option<NodeRef>,
+    /// When this allocation is dropped, call `pending_oneway_finished` on the node.
+    ///
+    /// This is used to serialize oneway transaction on the same node. Binder guarantees that
+    /// oneway transactions to the same node are delivered sequentially in the order they are sent.
+    pub(crate) oneway_node: Option<Arc<Node>>,
+    /// Zero the data in the buffer on free.
+    pub(crate) clear_on_free: bool,
+    /// If this is `None`, then we should not clean up fds in BINDER_TYPE_FDA objects.
+    ///
+    /// If this is `Some`, then the DeferredFdClose object has enough space to store all fds in all
+    /// of the BINDER_TYPE_FDA objects.
+    pub(crate) fda_cleanup: Option<DeferredFdClose>,
 }
 
 struct Mapping {
@@ -53,6 +69,9 @@ impl Mapping {
     }
 }
 
+const PROC_DEFER_FLUSH: u8 = 1;
+const PROC_DEFER_RELEASE: u8 = 2;
+
 // TODO: Make this private.
 pub(crate) struct ProcessInner {
     is_manager: bool,
@@ -63,7 +82,7 @@ pub(crate) struct ProcessInner {
     mapping: Option<Mapping>,
     nodes: RBTree<usize, Arc<Node>>,
 
-    delivered_deaths: List<Arc<NodeDeath>>,
+    delivered_deaths: List<DeliveredNodeDeath>,
 
     /// The number of requested threads that haven't registered yet.
     requested_thread_count: u32,
@@ -73,6 +92,19 @@ pub(crate) struct ProcessInner {
 
     /// The number of threads the started and registered with the thread pool.
     started_thread_count: u32,
+
+    /// Bitmap of deferred work to do.
+    defer_work: u8,
+
+    /// Number of transactions to be transmitted before processes in freeze_wait
+    /// are woken up.
+    outstanding_txns: u32,
+    /// Process is frozen and unable to service binder transactions.
+    pub(crate) is_frozen: bool,
+    /// Process received sync transactions since last frozen.
+    pub(crate) sync_recv: bool,
+    /// Process received async transactions since last frozen.
+    pub(crate) async_recv: bool,
 }
 
 impl ProcessInner {
@@ -89,27 +121,57 @@ impl ProcessInner {
             max_threads: 0,
             started_thread_count: 0,
             delivered_deaths: List::new(),
+            defer_work: 0,
+            outstanding_txns: 0,
+            is_frozen: false,
+            sync_recv: false,
+            async_recv: false,
         }
     }
 
-    fn push_work(&mut self, work: Arc<dyn DeliverToRead>) -> BinderResult {
+    pub(crate) fn push_work(
+        &mut self,
+        work: Arc<dyn DeliverToRead>,
+    ) -> Result<(), (BinderError, Arc<dyn DeliverToRead>)> {
         // Try to find a ready thread to which to push the work.
         if let Some(thread) = self.ready_threads.pop_front() {
             // Push to thread while holding state lock. This prevents the thread from giving up
             // (for example, because of a signal) when we're about to deliver work.
-            thread.push_work(work)
+            match thread.push_work(work) {
+                Ok(true) => Ok(()),
+                Ok(false) => {
+                    // We failed to push to the list since the work item is already in another
+                    // list. In this case, we put the thread back into the list. We don't need to
+                    // worry about the destructor of the work item, because it is another list so
+                    // its refcount won't drop to zero.
+                    self.ready_threads.push_back(thread);
+                    Ok(())
+                }
+                Err(err_work) => Err(err_work),
+            }
         } else if self.is_dead {
-            Err(BinderError::new_dead())
+            Err((BinderError::new_dead(), work))
         } else {
+            let sync = work.should_sync_wakeup();
+
             // There are no ready threads. Push work to process queue.
             self.work.push_back(work);
 
             // Wake up polling threads, if any.
             for thread in self.threads.values() {
-                thread.notify_if_poll_ready();
+                thread.notify_if_poll_ready(sync);
             }
             Ok(())
         }
+    }
+
+    /// Push work to be cancelled. Should only be used during process release.
+    pub(crate) fn push_work_for_release(&mut self, work: Arc<dyn DeliverToRead>) {
+        self.work.push_back(work);
+    }
+
+    pub(crate) fn is_dead(&self) -> bool {
+        self.is_dead
     }
 
     // TODO: Should this be private?
@@ -124,10 +186,10 @@ impl ProcessInner {
         node: &Arc<Node>,
         inc: bool,
         strong: bool,
-        biased: bool,
+        count: usize,
         othread: Option<&Thread>,
     ) {
-        let push = node.update_refcount_locked(inc, strong, biased, self);
+        let push = node.update_refcount_locked(inc, strong, count, self);
 
         // If we decided that we need to push work, push either to the process or to a thread if
         // one is specified.
@@ -137,7 +199,8 @@ impl ProcessInner {
             } else {
                 let _ = self.push_work(node.clone());
                 // Nothing to do: `push_work` may fail if the process is dead, but that's ok as in
-                // that case, it doesn't care about the notification.
+                // that case, it doesn't care about the notification. Additionally, since we still
+                // hold a reference to the node, its refcount wont drop to zero.
             }
         }
     }
@@ -149,7 +212,7 @@ impl ProcessInner {
         strong: bool,
         thread: Option<&Thread>,
     ) -> NodeRef {
-        self.update_node_refcount(&node, true, strong, false, thread);
+        self.update_node_refcount(&node, true, strong, 1, thread);
         let strong_count = if strong { 1 } else { 0 };
         NodeRef::new(node, strong_count, 1 - strong_count)
     }
@@ -212,6 +275,24 @@ impl ProcessInner {
     pub(crate) fn death_delivered(&mut self, death: Arc<NodeDeath>) {
         self.delivered_deaths.push_back(death);
     }
+
+    pub(crate) fn add_outstanding_txn(&mut self) {
+        self.outstanding_txns += 1;
+    }
+
+    fn txns_pending_locked(&self) -> bool {
+        if self.outstanding_txns > 0 {
+            return true;
+        }
+
+        for thread in self.threads.values() {
+            if thread.has_current_transaction() {
+                return true;
+            }
+        }
+
+        false
+    }
 }
 
 struct NodeRefInfo {
@@ -244,7 +325,7 @@ impl ProcessNodeRefs {
 
 #[pin_data]
 pub(crate) struct Process {
-    ctx: Arc<Context>,
+    pub(crate) ctx: Arc<Context>,
 
     // The task leader (process).
     pub(crate) task: ARef<Task>,
@@ -252,17 +333,55 @@ pub(crate) struct Process {
     // Credential associated with file when `Process` is created.
     pub(crate) cred: ARef<Credential>,
 
-    // TODO: For now this a mutex because we have allocations in RangeAllocator while holding the
-    // lock. We may want to split up the process state at some point to use a spin lock for the
-    // other fields.
     // TODO: Make this private again.
     #[pin]
-    pub(crate) inner: Mutex<ProcessInner>,
+    pub(crate) inner: SpinLock<ProcessInner>,
 
-    // References are in a different mutex to avoid recursive acquisition when
+    // Waitqueue of processes waiting for all outstanding transactions to be
+    // processed.
+    #[pin]
+    freeze_wait: CondVar,
+
+    // Arcerences are in a different mutex to avoid recursive acquisition when
     // incrementing/decrementing a node in another process.
     #[pin]
     node_refs: Mutex<ProcessNodeRefs>,
+
+    // Work node for deferred work item.
+    #[pin]
+    defer_work: Work<Arc<Process>>,
+
+    // Links for process list in Context.
+    links: Links<Process>,
+}
+
+kernel::impl_has_work! {
+    impl HasWork<Arc<Process>> for Process { self.defer_work }
+}
+
+impl GetLinks for Process {
+    type EntryType = Process;
+    fn get_links(data: &Process) -> &Links<Process> {
+        &data.links
+    }
+}
+
+impl workqueue::ArcWorkItem for Process {
+    fn run(self: Arc<Self>) {
+        let defer;
+        {
+            let mut inner = self.inner.lock();
+            defer = inner.defer_work;
+            inner.defer_work = 0;
+        }
+
+        if defer & PROC_DEFER_FLUSH != 0 {
+            self.deferred_flush();
+        }
+        if defer & PROC_DEFER_RELEASE != 0 {
+            self.deferred_release();
+        }
+    }
 }
 
 #[allow(clippy::non_send_fields_in_send_ty)]
@@ -271,13 +390,107 @@ unsafe impl Sync for Process {}
 
 impl Process {
     fn new(ctx: Arc<Context>, cred: ARef<Credential>) -> Result<Arc<Self>> {
-        Ok(Arc::pin_init(pin_init!(Process {
+        let process = Arc::pin_init(pin_init!(Process {
             ctx,
             cred,
             task: kernel::current!().group_leader().into(),
-            inner <- kernel::new_mutex!(ProcessInner::new(), "Process::inner"),
+            inner <- kernel::new_spinlock!(ProcessInner::new(), "Process::inner"),
             node_refs <- kernel::new_mutex!(ProcessNodeRefs::new(), "Process::node_refs"),
-        }))?)
+            freeze_wait <- kernel::new_condvar!("Process::freeze_wait"),
+            // SAFETY: `node_refs` is initialised in the call to `init_work_item` below.
+            defer_work <- kernel::new_work!(),
+            links: Links::new(),
+        }))?;
+
+        process.ctx.register_process(process.clone());
+
+        Ok(process)
+    }
+
+    #[inline(never)]
+    pub(crate) fn debug_print(&self, m: &mut crate::debug::SeqFile) -> Result<()> {
+        seq_print!(m, "pid: {}\n", self.task.pid_in_current_ns());
+
+        let is_manager;
+        let started_threads;
+        let has_proc_work;
+        let mut ready_threads = Vec::new();
+        let mut all_threads = Vec::new();
+        let mut all_nodes = Vec::new();
+        loop {
+            let inner = self.inner.lock();
+            let ready_threads_len = {
+                let mut ready_threads_len = 0;
+                let mut cursor = inner.ready_threads.cursor_front();
+                while cursor.current().is_some() {
+                    ready_threads_len += 1;
+                    cursor.move_next();
+                }
+                ready_threads_len
+            };
+            let all_threads_len = inner.threads.values().count();
+            let all_nodes_len = inner.nodes.values().count();
+
+            let resize_ready_threads = ready_threads_len > ready_threads.capacity();
+            let resize_all_threads = all_threads_len > all_threads.capacity();
+            let resize_all_nodes = all_nodes_len > all_nodes.capacity();
+            if resize_ready_threads || resize_all_threads || resize_all_nodes {
+                drop(inner);
+                ready_threads.try_reserve(ready_threads_len)?;
+                all_threads.try_reserve(all_threads_len)?;
+                all_nodes.try_reserve(all_nodes_len)?;
+                continue;
+            }
+
+            is_manager = inner.is_manager;
+            started_threads = inner.started_thread_count;
+            has_proc_work = !inner.work.is_empty();
+
+            {
+                let mut cursor = inner.ready_threads.cursor_front();
+                while let Some(thread) = cursor.current() {
+                    assert!(ready_threads.len() < ready_threads.capacity());
+                    ready_threads.try_push(thread.id)?;
+                    cursor.move_next();
+                }
+            }
+
+            for thread in inner.threads.values() {
+                assert!(all_threads.len() < all_threads.capacity());
+                all_threads.try_push(thread.clone())?;
+            }
+
+            for node in inner.nodes.values() {
+                assert!(all_nodes.len() < all_nodes.capacity());
+                all_nodes.try_push(node.clone())?;
+            }
+
+            break;
+        }
+
+        seq_print!(m, "is_manager: {}\n", is_manager);
+        seq_print!(m, "started_threads: {}\n", started_threads);
+        seq_print!(m, "has_proc_work: {}\n", has_proc_work);
+        if ready_threads.is_empty() {
+            seq_print!(m, "ready_thread_ids: none\n");
+        } else {
+            seq_print!(m, "ready_thread_ids:");
+            for thread_id in ready_threads {
+                seq_print!(m, " {}", thread_id);
+            }
+            seq_print!(m, "\n");
+        }
+
+        for node in all_nodes {
+            node.debug_print(m)?;
+        }
+
+        seq_print!(m, "all threads:\n");
+        for thread in all_threads {
+            thread.debug_print(m);
+        }
+
+        Ok(())
     }
 
     /// Attempts to fetch a work item from the process queue.
@@ -331,7 +544,15 @@ impl Process {
     }
 
     pub(crate) fn push_work(&self, work: Arc<dyn DeliverToRead>) -> BinderResult {
-        self.inner.lock().push_work(work)
+        // If push_work fails, drop the work item outside the lock.
+        let res = self.inner.lock().push_work(work);
+        match res {
+            Ok(()) => Ok(()),
+            Err((err, work)) => {
+                drop(work);
+                Err(err)
+            }
+        }
     }
 
     fn set_as_manager(
@@ -446,11 +667,17 @@ impl Process {
 
     pub(crate) fn get_transaction_node(&self, handle: u32) -> BinderResult<NodeRef> {
         // When handle is zero, try to get the context manager.
-        if handle == 0 {
+        let node = if handle == 0 {
             self.ctx.get_manager_node(true)
         } else {
             self.get_node_from_handle(handle, true)
+        };
+
+        if let Ok(node_ref) = &node {
+            node_ref.node.set_used_for_transaction();
         }
+
+        node
     }
 
     pub(crate) fn get_node_from_handle(&self, handle: u32, strong: bool) -> BinderResult<NodeRef> {
@@ -502,25 +729,43 @@ impl Process {
     }
 
     /// Decrements the refcount of the given node, if one exists.
-    pub(crate) fn update_node(&self, ptr: usize, cookie: usize, strong: bool, biased: bool) {
+    pub(crate) fn update_node(&self, ptr: usize, cookie: usize, strong: bool) {
         let mut inner = self.inner.lock();
         if let Ok(Some(node)) = inner.get_existing_node(ptr, cookie) {
-            inner.update_node_refcount(&node, false, strong, biased, None);
+            inner.update_node_refcount(&node, false, strong, 1, None);
         }
     }
 
     pub(crate) fn inc_ref_done(&self, reader: &mut UserSlicePtrReader, strong: bool) -> Result {
         let ptr = reader.read::<usize>()?;
         let cookie = reader.read::<usize>()?;
-        self.update_node(ptr, cookie, strong, true);
+        let mut inner = self.inner.lock();
+        if let Ok(Some(node)) = inner.get_existing_node(ptr, cookie) {
+            if node.inc_ref_done_locked(strong, &mut inner) {
+                let _ = inner.push_work(node);
+            }
+        }
         Ok(())
     }
 
-    pub(crate) fn buffer_alloc(&self, size: usize) -> BinderResult<Allocation<'_>> {
+    pub(crate) fn buffer_alloc(
+        &self,
+        size: usize,
+        is_oneway: bool,
+    ) -> BinderResult<Allocation<'_>> {
         let mut inner = self.inner.lock();
-        let mapping = inner.mapping.as_mut().ok_or_else(BinderError::new_dead)?;
-
-        let offset = mapping.alloc.reserve_new(size)?;
+        let mut mapping = inner.mapping.as_mut().ok_or_else(BinderError::new_dead)?;
+        let offset = match mapping.alloc.reserve_new_noalloc(size, is_oneway)? {
+            Some(offset) => offset,
+            None => {
+                drop(mapping);
+                drop(inner);
+                let alloc = crate::range_alloc::ReserveNewBox::try_new()?;
+                inner = self.inner.lock();
+                mapping = inner.mapping.as_mut().ok_or_else(BinderError::new_dead)?;
+                mapping.alloc.reserve_new(size, is_oneway, alloc)?
+            }
+        };
         Ok(Allocation::new(
             self,
             offset,
@@ -588,12 +833,17 @@ impl Process {
         }
 
         let ref_pages = Arc::try_new(pages)?;
+        let mapping = Mapping::new(vma.start(), size, ref_pages)?;
 
         // Save pages for later.
         let mut inner = self.inner.lock();
         match &inner.mapping {
-            None => inner.mapping = Some(Mapping::new(vma.start(), size, ref_pages)?),
-            Some(_) => return Err(EBUSY),
+            None => inner.mapping = Some(mapping),
+            Some(_) => {
+                drop(inner);
+                drop(mapping);
+                return Err(EBUSY);
+            }
         }
         Ok(())
     }
@@ -637,7 +887,7 @@ impl Process {
 
     fn get_node_info_from_ref(&self, data: UserSlicePtr) -> Result {
         let (mut reader, mut writer) = data.reader_writer();
-        let mut out = reader.read::<BinderNodeInfoForArc>()?;
+        let mut out = reader.read::<BinderNodeInfoForRef>()?;
 
         if out.strong_count != 0
             || out.weak_count != 0
@@ -755,6 +1005,233 @@ impl Process {
             death.set_notification_done(thread);
         }
     }
+
+    pub(crate) fn flush(this: ArcBorrow<'_, Process>) -> Result {
+        let should_schedule;
+        {
+            let mut inner = this.inner.lock();
+            should_schedule = inner.defer_work == 0;
+            inner.defer_work |= PROC_DEFER_FLUSH;
+        }
+
+        if should_schedule {
+            // Ignore failures to schedule to the workqueue. Those just mean that we're already
+            // scheduled for execution.
+            let _ = workqueue::system().enqueue(Arc::from(this));
+        }
+
+        Ok(())
+    }
+
+    fn deferred_flush(&self) {
+        let inner = self.inner.lock();
+        for thread in inner.threads.values() {
+            thread.notify_flush();
+        }
+    }
+
+    fn deferred_release(self: Arc<Self>) {
+        // Mark this process as dead. We'll do the same for the threads later.
+        let is_manager = {
+            let mut inner = self.inner.lock();
+            inner.is_dead = true;
+            inner.is_frozen = false;
+            inner.sync_recv = false;
+            inner.async_recv = false;
+            inner.is_manager
+        };
+
+        // If this process is the manager, unset it.
+        if is_manager {
+            self.ctx.unset_manager_node();
+        }
+
+        self.ctx.deregister_process(&self);
+
+        // Move oneway_todo into the process todolist.
+        {
+            let mut inner = self.inner.lock();
+            let nodes = take(&mut inner.nodes);
+            for node in nodes.values() {
+                node.release(&mut inner);
+            }
+            inner.nodes = nodes;
+        }
+
+        // Cancel all pending work items.
+        while let Some(work) = self.get_work() {
+            work.cancel();
+        }
+
+        // Free any resources kept alive by allocated buffers.
+        let omapping = self.inner.lock().mapping.take();
+        if let Some(mut mapping) = omapping {
+            let address = mapping.address;
+            let pages = mapping.pages.clone();
+            mapping.alloc.for_each(|offset, size, odata| {
+                let ptr = offset + address;
+                let mut alloc = Allocation::new(&self, offset, size, ptr, pages.clone());
+                if let Some(data) = odata {
+                    alloc.set_info(data);
+                }
+                drop(alloc)
+            });
+        }
+
+        // Drop all references. We do this dance with `swap` to avoid destroying the references
+        // while holding the lock.
+        let mut refs = self.node_refs.lock();
+        let mut node_refs = take(&mut refs.by_handle);
+        drop(refs);
+
+        // Remove all death notifications from the nodes (that belong to a different process).
+        for info in node_refs.values_mut() {
+            let death = if let Some(existing) = info.death.take() {
+                existing
+            } else {
+                continue;
+            };
+
+            death.set_cleared(false);
+        }
+
+        // Do similar dance for the state lock.
+        let mut inner = self.inner.lock();
+        let threads = take(&mut inner.threads);
+        let nodes = take(&mut inner.nodes);
+        drop(inner);
+
+        // Release all threads.
+        for thread in threads.values() {
+            thread.release();
+        }
+
+        // Deliver death notifications.
+        for node in nodes.values() {
+            loop {
+                let death = {
+                    let mut inner = self.inner.lock();
+                    if let Some(death) = node.next_death(&mut inner) {
+                        death
+                    } else {
+                        break;
+                    }
+                };
+
+                death.set_dead();
+            }
+        }
+    }
+
+    pub(crate) fn drop_outstanding_txn(&self) {
+        let wake = {
+            let mut inner = self.inner.lock();
+            if inner.outstanding_txns == 0 {
+                pr_err!("outstanding_txns underflow");
+                return;
+            }
+            inner.outstanding_txns -= 1;
+            inner.is_frozen && inner.outstanding_txns == 0
+        };
+
+        if wake {
+            self.freeze_wait.notify_all();
+        }
+    }
+
+    pub(crate) fn ioctl_freeze(&self, info: &mut BinderFreezeInfo) -> Result {
+        if info.enable != 0 {
+            let mut inner = self.inner.lock();
+            inner.sync_recv = false;
+            inner.async_recv = false;
+            inner.is_frozen = false;
+            return Ok(());
+        }
+
+        let mut inner = self.inner.lock();
+        inner.sync_recv = false;
+        inner.async_recv = false;
+        inner.is_frozen = true;
+
+        if info.timeout_ms > 0 {
+            // Safety: Just an FFI call.
+            let jiffies = unsafe { bindings::__msecs_to_jiffies(info.timeout_ms) };
+            loop {
+                if inner.outstanding_txns == 0 {
+                    break;
+                }
+
+                match self.freeze_wait.wait_timeout(&mut inner, jiffies) {
+                    CondVarTimeoutResult::Signal { .. } => {
+                        inner.is_frozen = false;
+                        return Err(ERESTARTSYS);
+                    }
+                    CondVarTimeoutResult::Woken { .. } => {}
+                    CondVarTimeoutResult::Timeout => {}
+                }
+            }
+        }
+
+        if inner.txns_pending_locked() {
+            Err(EAGAIN)
+        } else {
+            Ok(())
+        }
+    }
+}
+
+fn get_frozen_status(data: UserSlicePtr) -> Result {
+    let (mut reader, mut writer) = data.reader_writer();
+
+    let mut info = reader.read::<BinderFrozenStatusInfo>()?;
+    info.sync_recv = 0;
+    info.async_recv = 0;
+    let mut found = false;
+
+    let ctxs = crate::context::get_all_contexts()?;
+    for ctx in ctxs {
+        ctx.for_each_proc(|proc| {
+            if proc.task.pid() == info.pid as _ {
+                found = true;
+                let inner = proc.inner.lock();
+                let txns_pending = inner.txns_pending_locked();
+                info.async_recv |= inner.async_recv as u32;
+                info.sync_recv |= inner.sync_recv as u32;
+                info.sync_recv |= (txns_pending as u32) << 1;
+            }
+        });
+    }
+
+    if found {
+        writer.write(&info)?;
+
+        Ok(())
+    } else {
+        Err(EINVAL)
+    }
+}
+
+fn ioctl_freeze(data: UserSlicePtr) -> Result {
+    let (mut reader, mut writer) = data.reader_writer();
+    let mut info = reader.read::<BinderFreezeInfo>()?;
+
+    // Very unlikely for there to be more than 3, since a process normally uses at most binder and
+    // hwbinder.
+    let mut procs = Vec::try_with_capacity(3)?;
+
+    let ctxs = crate::context::get_all_contexts()?;
+    for ctx in ctxs {
+        for proc in ctx.get_procs_with_pid(info.pid as i32)? {
+            procs.try_push(proc)?;
+        }
+    }
+
+    for proc in procs {
+        proc.ioctl_freeze(&mut info)?;
+    }
+
+    writer.write(&info)?;
+    Ok(())
 }
 
 impl IoctlHandler for Process {
@@ -774,6 +1251,7 @@ impl IoctlHandler for Process {
             bindings::BINDER_SET_CONTEXT_MGR_EXT => {
                 this.set_as_manager(Some(reader.read()?), &thread)?
             }
+            bindings::BINDER_ENABLE_ONEWAY_SPAM_DETECTION => { /* do nothing */ }
             _ => return Err(EINVAL),
         }
         Ok(0)
@@ -792,6 +1270,8 @@ impl IoctlHandler for Process {
             bindings::BINDER_GET_NODE_DEBUG_INFO => this.get_node_debug_info(data)?,
             bindings::BINDER_GET_NODE_INFO_FOR_REF => this.get_node_info_from_ref(data)?,
             bindings::BINDER_VERSION => this.version(data)?,
+            bindings::BINDER_GET_FROZEN_INFO => get_frozen_status(data)?,
+            bindings::BINDER_FREEZE => ioctl_freeze(data)?,
             _ => return Err(EINVAL),
         }
         Ok(0)
@@ -804,82 +1284,21 @@ impl file::Operations for Process {
     type OpenData = Arc<Context>;
 
     fn open(ctx: &Arc<Context>, file: &File) -> Result<Self::Data> {
-        Self::new(ctx.clone(), file.cred().into())
+        Self::new(ctx.clone(), ARef::from(file.cred()))
     }
 
-    fn release(obj: Self::Data, _file: &File) {
-        // Mark this process as dead. We'll do the same for the threads later.
-        obj.inner.lock().is_dead = true;
-
-        // If this process is the manager, unset it.
-        if obj.inner.lock().is_manager {
-            obj.ctx.unset_manager_node();
+    fn release(this: Self::Data, _file: &File) {
+        let should_schedule;
+        {
+            let mut inner = this.inner.lock();
+            should_schedule = inner.defer_work == 0;
+            inner.defer_work |= PROC_DEFER_RELEASE;
         }
 
-        // TODO: Do this in a worker?
-
-        // Cancel all pending work items.
-        while let Some(work) = obj.get_work() {
-            work.cancel();
-        }
-
-        // Free any resources kept alive by allocated buffers.
-        let omapping = obj.inner.lock().mapping.take();
-        if let Some(mut mapping) = omapping {
-            let address = mapping.address;
-            let pages = mapping.pages.clone();
-            mapping.alloc.for_each(|offset, size, odata| {
-                let ptr = offset + address;
-                let mut alloc = Allocation::new(&obj, offset, size, ptr, pages.clone());
-                if let Some(data) = odata {
-                    alloc.set_info(data);
-                }
-                drop(alloc)
-            });
-        }
-
-        // Drop all references. We do this dance with `swap` to avoid destroying the references
-        // while holding the lock.
-        let mut refs = obj.node_refs.lock();
-        let mut node_refs = take(&mut refs.by_handle);
-        drop(refs);
-
-        // Remove all death notifications from the nodes (that belong to a different process).
-        for info in node_refs.values_mut() {
-            let death = if let Some(existing) = info.death.take() {
-                existing
-            } else {
-                continue;
-            };
-
-            death.set_cleared(false);
-        }
-
-        // Do similar dance for the state lock.
-        let mut inner = obj.inner.lock();
-        let threads = take(&mut inner.threads);
-        let nodes = take(&mut inner.nodes);
-        drop(inner);
-
-        // Release all threads.
-        for thread in threads.values() {
-            thread.release();
-        }
-
-        // Deliver death notifications.
-        for node in nodes.values() {
-            loop {
-                let death = {
-                    let mut inner = obj.inner.lock();
-                    if let Some(death) = node.next_death(&mut inner) {
-                        death
-                    } else {
-                        break;
-                    }
-                };
-
-                death.set_dead();
-            }
+        if should_schedule {
+            // Ignore failures to schedule to the workqueue. Those just mean that we're already
+            // scheduled for execution.
+            let _ = workqueue::system().enqueue(this);
         }
     }
 
@@ -938,7 +1357,7 @@ impl<'a> Registration<'a> {
     fn new(
         process: &'a Process,
         thread: &'a Arc<Thread>,
-        guard: &mut Guard<'_, ProcessInner, MutexBackend>,
+        guard: &mut Guard<'_, ProcessInner, kernel::sync::SpinLockBackend>,
     ) -> Self {
         guard.ready_threads.push_back(thread.clone());
         Self { process, thread }

@@ -10,6 +10,8 @@
 #include <linux/refcount.h>
 #include <linux/wait.h>
 #include <linux/sched.h>
+#include <linux/errname.h>
+#include <linux/file.h>
 #include <linux/fs.h>
 #include <linux/fdtable.h>
 #include <linux/jiffies.h>
@@ -18,11 +20,14 @@
 #include <linux/uio.h>
 #include <linux/uidgid.h>
 #include <linux/security.h>
+#include <linux/seq_file.h>
 #include <linux/task_work.h>
 #include <linux/pid_namespace.h>
 #include <linux/poll.h>
 #include <linux/workqueue.h>
+#include <linux/rust_binder.h>
 #include <uapi/linux/android/binder.h>
+#include <uapi/linux/android/binderfs.h>
 
 /* `bindgen` gets confused at certain things. */
 const gfp_t BINDINGS_GFP_KERNEL = GFP_KERNEL;

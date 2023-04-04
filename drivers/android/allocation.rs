@@ -1,13 +1,21 @@
 // SPDX-License-Identifier: GPL-2.0
 
-use core::mem::{replace, size_of, MaybeUninit};
+use core::alloc::AllocError;
+use core::mem::{replace, size_of, size_of_val, MaybeUninit};
+use core::ops::Range;
 use kernel::{
-    bindings, linked_list::List, pages::Pages, prelude::*, sync::Arc, user_ptr::UserSlicePtrReader,
+    bindings,
+    linked_list::List,
+    pages::Pages,
+    prelude::*,
+    sync::Arc,
+    task_work::{TaskWork, TaskWorkEntry},
+    user_ptr::UserSlicePtrReader,
 };
 
 use crate::{
     defs::*,
-    node::NodeRef,
+    node::{Node, NodeRef},
     process::{AllocationInfo, Process},
     thread::{BinderError, BinderResult},
     transaction::FileInfo,
@@ -103,15 +111,21 @@ impl<'a> Allocation<'a> {
         Ok(unsafe { out.assume_init() })
     }
 
-    pub(crate) fn write<T>(&self, offset: usize, obj: &T) -> Result {
+    pub(crate) fn write<T: ?Sized>(&self, offset: usize, obj: &T) -> Result {
         let mut obj_offset = 0;
-        self.iterate(offset, size_of::<T>(), |page, offset, to_copy| {
+        self.iterate(offset, size_of_val(obj), |page, offset, to_copy| {
             // SAFETY: The sum of `offset` and `to_copy` is bounded by the size of T.
             let obj_ptr = unsafe { (obj as *const T as *const u8).add(obj_offset) };
             // SAFETY: We have a reference to the object, so the pointer is valid.
             unsafe { page.write(obj_ptr, offset, to_copy) }?;
             obj_offset += to_copy;
             Ok(())
+        })
+    }
+
+    pub(crate) fn fill_zero(&self) -> Result {
+        self.iterate(0, self.size, |page, offset, len| {
+            page.fill_zero(offset, len)
         })
     }
 
@@ -124,6 +138,30 @@ impl<'a> Allocation<'a> {
     pub(crate) fn set_info(&mut self, info: AllocationInfo) {
         self.allocation_info = Some(info);
     }
+
+    pub(crate) fn get_or_init_info(&mut self) -> &mut AllocationInfo {
+        self.allocation_info.get_or_insert_with(Default::default)
+    }
+
+    pub(crate) fn set_info_offsets(&mut self, offsets: Range<usize>) {
+        self.get_or_init_info().offsets = Some(offsets);
+    }
+
+    pub(crate) fn set_info_oneway_node(&mut self, oneway_node: Arc<Node>) {
+        self.get_or_init_info().oneway_node = Some(oneway_node);
+    }
+
+    pub(crate) fn set_info_clear_on_drop(&mut self) {
+        self.get_or_init_info().clear_on_free = true;
+    }
+
+    pub(crate) fn set_info_target_node(&mut self, target_node: NodeRef) {
+        self.get_or_init_info().target_node = Some(target_node);
+    }
+
+    pub(crate) fn set_fda_cleanup(&mut self, fda_cleanup: DeferredFdClose) {
+        self.get_or_init_info().fda_cleanup = Some(fda_cleanup);
+    }
 }
 
 impl Drop for Allocation<'_> {
@@ -132,12 +170,30 @@ impl Drop for Allocation<'_> {
             return;
         }
 
-        if let Some(info) = &self.allocation_info {
-            let offsets = info.offsets.clone();
-            let view = AllocationView::new(self, offsets.start);
-            for i in offsets.step_by(size_of::<usize>()) {
-                if view.cleanup_object(i).is_err() {
-                    pr_warn!("Error cleaning up object at offset {}\n", i)
+        if let Some(mut info) = self.allocation_info.take() {
+            if let Some(oneway_node) = info.oneway_node.as_ref() {
+                oneway_node.pending_oneway_finished();
+            }
+
+            info.target_node = None;
+
+            if let Some(offsets) = info.offsets.clone() {
+                let view = AllocationView::new(self, offsets.start);
+                for i in offsets.step_by(size_of::<usize>()) {
+                    if view.cleanup_object(i).is_err() {
+                        pr_warn!("Error cleaning up object at offset {}\n", i)
+                    }
+                }
+            }
+
+            if let Some(fda_cleanup) = info.fda_cleanup.take() {
+                fda_cleanup.submit_deferred_close();
+            }
+
+            if info.clear_on_free {
+                match self.fill_zero() {
+                    Err(e) => pr_warn!("Failed to clear data on free: {:?}", e),
+                    Ok(()) => (),
                 }
             }
         }
@@ -170,23 +226,18 @@ impl<'a, 'b> AllocationView<'a, 'b> {
         self.alloc.write(offset, obj)
     }
 
-    pub(crate) fn transfer_binder_object<T>(
+    pub(crate) fn transfer_binder_object(
         &self,
         offset: usize,
+        obj: &bindings::flat_binder_object,
         strong: bool,
-        get_node: T,
-    ) -> BinderResult
-    where
-        T: FnOnce(&bindings::flat_binder_object) -> BinderResult<NodeRef>,
-    {
+        node_arc: NodeRef,
+    ) -> BinderResult {
         // TODO: Do we want this function to take a &mut self?
-        let obj = self.read::<bindings::flat_binder_object>(offset)?;
-        let node_ref = get_node(&obj)?;
-
-        if core::ptr::eq(&*node_ref.node.owner, self.alloc.process) {
+        if core::ptr::eq(&*node_arc.node.owner, self.alloc.process) {
             // The receiving process is the owner of the node, so send it a binder object (instead
             // of a handle).
-            let (ptr, cookie) = node_ref.node.get_id();
+            let (ptr, cookie) = node_arc.node.get_id();
             let newobj = bindings::flat_binder_object {
                 hdr: bindings::binder_object_header {
                     type_: if strong {
@@ -203,14 +254,14 @@ impl<'a, 'b> AllocationView<'a, 'b> {
 
             // Increment the user ref count on the node. It will be decremented as part of the
             // destruction of the buffer, when we see a binder or weak-binder object.
-            node_ref.node.update_refcount(true, strong);
+            node_arc.node.update_refcount(true, 1, strong);
         } else {
             // The receiving process is different from the owner, so we need to insert a handle to
             // the binder object.
             let handle = self
                 .alloc
                 .process
-                .insert_or_update_handle(node_ref, false)?;
+                .insert_or_update_handle(node_arc, false)?;
 
             let newobj = bindings::flat_binder_object {
                 hdr: bindings::binder_object_header {
@@ -249,7 +300,7 @@ impl<'a, 'b> AllocationView<'a, 'b> {
                 // populated.
                 let ptr = unsafe { obj.__bindgen_anon_1.binder } as usize;
                 let cookie = obj.cookie as usize;
-                self.alloc.process.update_node(ptr, cookie, strong, false);
+                self.alloc.process.update_node(ptr, cookie, strong);
                 Ok(())
             }
             BINDER_TYPE_WEAK_HANDLE | BINDER_TYPE_HANDLE => {
@@ -261,6 +312,103 @@ impl<'a, 'b> AllocationView<'a, 'b> {
                 self.alloc.process.update_ref(handle, false, strong)
             }
             _ => Ok(()),
+        }
+    }
+}
+
+/// A list of files to close deferred.
+///
+/// TODO: How can we do this without directly calling the C bindings?
+pub(crate) struct DeferredFdClose {
+    task_work: TaskWorkEntry<DeferredFdCloseInner>,
+    unclosed_fds: Vec<u32>,
+}
+
+struct DeferredFdCloseInner {
+    to_close: Vec<*mut bindings::file>,
+}
+
+impl DeferredFdClose {
+    pub(crate) fn new(size: usize) -> Result<Self, AllocError> {
+        let inner = DeferredFdCloseInner {
+            to_close: Vec::try_with_capacity(size).map_err(|_| AllocError)?,
+        };
+        Ok(Self {
+            task_work: TaskWorkEntry::new(inner)?,
+            unclosed_fds: Vec::try_with_capacity(size).map_err(|_| AllocError)?,
+        })
+    }
+
+    pub(crate) fn push_fd(&mut self, fd: u32) -> Result<(), AllocError> {
+        let will_realloc = self.unclosed_fds.len() >= self.unclosed_fds.capacity();
+        self.unclosed_fds.try_push(fd).map_err(|_| AllocError)?;
+        if will_realloc {
+            self.task_work
+                .get_mut()
+                .to_close
+                .try_reserve_exact(self.unclosed_fds.capacity())
+                .map_err(|_| AllocError)?;
+        }
+        Ok(())
+    }
+
+    pub(crate) fn submit_deferred_close(mut self) {
+        if self.unclosed_fds.len() > 0 {
+            for fd in core::mem::take(&mut self.unclosed_fds) {
+                self.close_fd(fd);
+            }
+
+            self.task_work.submit_twa_resume();
+        }
+    }
+
+    fn close_fd(&mut self, fd: u32) {
+        let to_close = &mut self.task_work.get_mut().to_close;
+        if to_close.len() == to_close.capacity() {
+            pr_err!(
+                "DeferredFdClose::close_fd called too many times (cap:{})",
+                to_close.len()
+            );
+            return;
+        }
+
+        // SAFETY: This is always safe - its just like closing an fd from userspace.
+        // It returns a null pointer if there's no fd with that value.
+        let file = unsafe { bindings::close_fd_get_file(fd) };
+
+        if !file.is_null() {
+            // SAFETY: That's what C binder does, so we do the same.
+            //
+            // TODO: What does this actually do?
+            unsafe {
+                bindings::get_file(file);
+                let current = bindings::get_current();
+                bindings::filp_close(file, (*current).files.cast());
+            }
+
+            // This `try_push` can't fail because of the check above.
+            let _ = to_close.try_push(file);
+        }
+    }
+}
+
+impl TaskWork for DeferredFdCloseInner {
+    fn run_task_work(&mut self) {
+        for file in self.to_close.iter().copied() {
+            // SAFETY: We got this pointer from `close_fd_get_file`.
+            unsafe {
+                bindings::fput(file);
+            }
+        }
+        self.to_close.clear();
+    }
+}
+
+impl Drop for DeferredFdCloseInner {
+    fn drop(&mut self) {
+        if self.to_close.len() > 0 {
+            pr_err!("DeferredFdCloseInner was not submitted!");
+            self.run_task_work();
         }
     }
 }
