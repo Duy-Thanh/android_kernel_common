@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cc84faa_c766e1a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-04-04T23:14:26Z",
+      "side": 1,
+      "message": "It will be hard to maintain all these changes to the .c files, and I cannot upstream these changes as there is no justification for them upstream.",
+      "revId": "5d3e01f24bbb422b81305cd6f7058680f404c33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
