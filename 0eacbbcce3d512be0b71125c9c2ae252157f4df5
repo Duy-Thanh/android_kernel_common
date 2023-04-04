@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1719093f_6db0cdd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-04-04T16:16:02Z",
+      "side": 1,
+      "message": "aosp/2521275 is now merged. I tried rerunning the presubmits a few times but this check doesn\u0027t get retriggered it seems.",
+      "revId": "0eacbbcce3d512be0b71125c9c2ae252157f4df5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
