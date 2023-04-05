@@ -34,6 +34,24 @@
       "parentUuid": "c646432a_068a808d",
       "revId": "438bc290f551693131dbb55d86fe912eb44abc40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5158914_f3d9da7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-04-05T10:27:57Z",
+      "side": 1,
+      "message": "Yes, making them void* without #ifdef: aosp/2523798.",
+      "parentUuid": "97fb8579_1f55d843",
+      "revId": "438bc290f551693131dbb55d86fe912eb44abc40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
