@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5f7d004_57181f1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2023-04-05T09:47:20Z",
+      "side": 1,
+      "message": "Submitted this fix on stable@vger as well for 5.10+ LTS versions.",
+      "revId": "2fd9a6141f93e7b5ffb752e5a3268e79631bd28d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
