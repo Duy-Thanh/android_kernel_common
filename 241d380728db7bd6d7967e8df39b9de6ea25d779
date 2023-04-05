@@ -22,6 +22,47 @@
       },
       "revId": "241d380728db7bd6d7967e8df39b9de6ea25d779",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5019077a_c95b0016",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-05T10:14:17Z",
+      "side": 1,
+      "message": "duplicate of what?",
+      "parentUuid": "5b4ba712_d6f9d637",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 48
+      },
+      "revId": "241d380728db7bd6d7967e8df39b9de6ea25d779",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e07b0e74_d022ec59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-05T10:14:17Z",
+      "side": 1,
+      "message": "Please wait for this to be accepted upstream and then backport as FROMGIT.",
+      "revId": "241d380728db7bd6d7967e8df39b9de6ea25d779",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
