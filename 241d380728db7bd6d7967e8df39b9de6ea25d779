@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "739f54ad_8c9f2557",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-05T18:24:31Z",
+      "side": 1,
+      "message": "Ah, that\u0027s fine, not an issue.  The larger issue is that it should now be marked `FROMGIT:` and that RD fix up his email system as I mailed him about so that upstream doesn\u0027t reject his patches going forward...",
+      "parentUuid": "5ae2f6d1_d3818d30",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 48
+      },
+      "revId": "241d380728db7bd6d7967e8df39b9de6ea25d779",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e07b0e74_d022ec59",
