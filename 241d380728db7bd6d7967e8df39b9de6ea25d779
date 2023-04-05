@@ -152,6 +152,24 @@
       "message": "Can be now `FROMGIT:`",
       "revId": "241d380728db7bd6d7967e8df39b9de6ea25d779",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7419a6d_9a6bd396",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1960732
+      },
+      "writtenOn": "2023-04-05T23:08:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "050463b4_073bc383",
+      "revId": "241d380728db7bd6d7967e8df39b9de6ea25d779",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
