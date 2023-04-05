@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ae2f6d1_d3818d30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-04-05T15:31:23Z",
+      "side": 1,
+      "message": "RD being the author of the patch submitted to linux opensource, does he have to have Signed-off-by again while submitting to AOSP as well ? (lines 19 and 24)",
+      "parentUuid": "5019077a_c95b0016",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 48
+      },
+      "revId": "241d380728db7bd6d7967e8df39b9de6ea25d779",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e07b0e74_d022ec59",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
