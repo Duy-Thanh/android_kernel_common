@@ -16,6 +16,23 @@
       "message": "Please add this config for x86 too. (`arch/x86/configs/gki_defconfig`)",
       "revId": "d7b03b164d34926f2297d62b0fa28e54ae5189db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a065f709_9709386c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-05T16:53:03Z",
+      "side": 1,
+      "message": "Has to have both arches at the same time.",
+      "revId": "d7b03b164d34926f2297d62b0fa28e54ae5189db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
