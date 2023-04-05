@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f42268c9_ed668dce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2023-04-05T08:12:24Z",
+      "side": 1,
+      "message": "We need to figure out how to avoid people from the kernel team being cc\u0027ed on this branch as the point of this branch is to allow prototyping without constantly spamming the kernel folks.\n\nPlease follow this guide for how to upload tag patches: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\ne.g. This one seems like it should be a \"FROMLIST\" or \"FROMGIT\".\n\nIt may not be strictly necessary on this branch, but it\u0027ll help later if we do end up cherry-picking changes to the main kernel branch.",
+      "revId": "e7af50ddd3f4789f47c70abbe221e4ebe80d53f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
