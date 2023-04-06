@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20594e44_28db7172",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-06T20:35:25Z",
+      "side": 1,
+      "message": "this error message would be more accurate in trusty_register_sched_share, but we already have other error messages there so we could just drop this one. trusty_alloc_sched_share should abort probe now as it is no longer failing if the trusty image is old",
+      "revId": "c910777765ea5eb7471bf3ca59ee4728df8fefef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88d17482_6f57e616",
+        "filename": "drivers/trusty/trusty-sched-share.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-06T20:35:25Z",
+      "side": 1,
+      "message": "If we don\u0027t initialize these values to TRUSTY_SHADOW_PRIORITY_NORMAL in trusty_alloc_sched_share, I think we need a comment and explicit `case 0:` line here explaining and enforcing that the default value is not covered by the TRUSTY_SHADOW_PRIORITY_* defines.",
+      "revId": "c910777765ea5eb7471bf3ca59ee4728df8fefef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "312f569b_30b8e1e3",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-06T20:35:25Z",
+      "side": 1,
+      "message": "I don\u0027t think we want this in this patch. We could add it as a separate patch, be if the trusty-irq module can\u0027t be loaded while of_platform_populate is running, we should remove it as a separate module and include it in trusty-core instead (this should also be a separate patch though as me might not need it)",
+      "revId": "c910777765ea5eb7471bf3ca59ee4728df8fefef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91c69f29_49c77b2c",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 954,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-06T20:35:25Z",
+      "side": 1,
+      "message": "trusty_enqueue_nop is not only called by trusty interrupts. We don\u0027t need to wait for interrupts to be received though.",
+      "revId": "c910777765ea5eb7471bf3ca59ee4728df8fefef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7875dbf4_6436ec76",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-06T20:35:25Z",
+      "side": 1,
+      "message": "this should check for errors now",
+      "revId": "c910777765ea5eb7471bf3ca59ee4728df8fefef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d9e908_693fb8e8",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-06T20:35:25Z",
+      "side": 1,
+      "message": "this also needs to free trusty_sched_share_state, not a new problem, but the you need to add a separate free function in this patch anyway, so you might as well use it everywhere it is needed",
+      "revId": "c910777765ea5eb7471bf3ca59ee4728df8fefef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
