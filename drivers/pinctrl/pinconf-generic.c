@@ -71,6 +71,11 @@ static void pinconf_generic_dump_one(struct pinctrl_dev *pctldev,
 						   gname, &config);
 		else
 			ret = pin_config_get_for_pin(pctldev, pin, &config);
+		/* No access */
+		if (ret == -EACCES) {
+			seq_puts(s, "NO ACCESS");
+			break;
+		}
 		/* These are legal errors */
 		if (ret == -EINVAL || ret == -ENOTSUPP)
 			continue;
