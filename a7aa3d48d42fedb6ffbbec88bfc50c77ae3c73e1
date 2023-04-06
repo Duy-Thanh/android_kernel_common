@@ -73,6 +73,43 @@
       "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "a7aa3d48d42fedb6ffbbec88bfc50c77ae3c73e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000042210972",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2526747?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "aefffbe0_b026e02d",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "        \"android/abi_gki_aarch64_xiaomi\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "9824f4a0_a6b46fac",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-04-06T09:45:07Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "a7aa3d48d42fedb6ffbbec88bfc50c77ae3c73e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
