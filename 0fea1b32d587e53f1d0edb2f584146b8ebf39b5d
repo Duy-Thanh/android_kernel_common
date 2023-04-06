@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02800832_a036cf2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2023-04-06T16:31:36Z",
+      "side": 1,
+      "message": "Fixes the AOSP bootanim loop we see on Dragonboards running v6.3-rc as well.",
+      "revId": "0fea1b32d587e53f1d0edb2f584146b8ebf39b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
