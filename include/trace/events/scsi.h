@@ -258,6 +258,7 @@ DECLARE_EVENT_CLASS(scsi_cmd_done_timeout_template,
 		__field( unsigned int,	prot_sglen )
 		__field( unsigned char,	prot_op )
 		__dynamic_array(unsigned char,	cmnd, cmd->cmd_len)
+		__array(unsigned char,  sense_data, SCSI_SENSE_BUFFERSIZE)
 	),
 
 	TP_fast_assign(
@@ -272,11 +273,13 @@ DECLARE_EVENT_CLASS(scsi_cmd_done_timeout_template,
 		__entry->prot_sglen	= scsi_prot_sg_count(cmd);
 		__entry->prot_op	= scsi_get_prot_op(cmd);
 		memcpy(__get_dynamic_array(cmnd), cmd->cmnd, cmd->cmd_len);
+		memcpy(__entry->sense_data, cmd->sense_buffer,
+		       SCSI_SENSE_BUFFERSIZE);
 	),
 
 	TP_printk("host_no=%u channel=%u id=%u lun=%u data_sgl=%u " \
 		  "prot_sgl=%u prot_op=%s cmnd=(%s %s raw=%s) result=(driver=" \
-		  "%s host=%s message=%s status=%s)",
+		  "%s host=%s message=%s status=%s%s%s)",
 		  __entry->host_no, __entry->channel, __entry->id,
 		  __entry->lun, __entry->data_sglen, __entry->prot_sglen,
 		  show_prot_op_name(__entry->prot_op),
@@ -286,7 +289,17 @@ DECLARE_EVENT_CLASS(scsi_cmd_done_timeout_template,
 		  "DRIVER_OK",
 		  show_hostbyte_name(((__entry->result) >> 16) & 0xff),
 		  "COMMAND_COMPLETE",
-		  show_statusbyte_name(__entry->result & 0xff))
+		  show_statusbyte_name(__entry->result & 0xff),
+		  __entry->result & 0xff ? " sense_data=" : "",
+		  __entry->result & 0xff ?
+		  ({
+			  unsigned int len = SCSI_SENSE_BUFFERSIZE;
+
+			  while (len && __entry->sense_data[len - 1] == 0)
+				  len--;
+			  __print_hex(__entry->sense_data, len);
+		  })
+		  : "")
 );
 
 DEFINE_EVENT(scsi_cmd_done_timeout_template, scsi_dispatch_cmd_done,
