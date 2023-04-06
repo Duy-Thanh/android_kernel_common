@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5210f742_0bc6442f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-06T07:46:28Z",
+      "side": 1,
+      "message": "Something went wrong, you are not adding new symbols overall, you are removing some from the abi list.  Are you sure that is intended?  And if so, the removal will have to wait until the next point in time where we are allowed to \"break\" the abi, see the weekly newsletter for when that is.",
+      "revId": "4df0a0165dbc9d7fce250cb93fe8e16fa95fb0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
