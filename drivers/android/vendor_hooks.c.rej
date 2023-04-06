@@ -1,0 +1,10 @@
+--- drivers/android/vendor_hooks.c
++++ drivers/android/vendor_hooks.c
+@@ -113,6 +113,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_mmap_file);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_file_open);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_bpf_syscall);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf);
++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery_set);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);
