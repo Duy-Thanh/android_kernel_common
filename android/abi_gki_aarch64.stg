@@ -1,4 +1,4 @@
-root_id: 0x25a8b173
+root_id: 0x84ea5130
 void {
   id: 0x48b5725f
 }
@@ -124,6 +124,11 @@ pointer_reference {
   id: 0x005aaa92
   kind: POINTER
   pointee_type_id: 0x2b2a4cd4
+}
+pointer_reference {
+  id: 0x006b8dfd
+  kind: POINTER
+  pointee_type_id: 0x2beed169
 }
 pointer_reference {
   id: 0x006cda7e
@@ -589,6 +594,11 @@ pointer_reference {
   id: 0x021d4376
   kind: POINTER
   pointee_type_id: 0x2235eb47
+}
+pointer_reference {
+  id: 0x022383b2
+  kind: POINTER
+  pointee_type_id: 0x22cee855
 }
 pointer_reference {
   id: 0x02268d94
@@ -3849,6 +3859,11 @@ pointer_reference {
   id: 0x0c98988d
   kind: POINTER
   pointee_type_id: 0x182284a8
+}
+pointer_reference {
+  id: 0x0c9ac346
+  kind: POINTER
+  pointee_type_id: 0x182beb86
 }
 pointer_reference {
   id: 0x0c9af3aa
@@ -9316,6 +9331,11 @@ pointer_reference {
   pointee_type_id: 0x4910a95a
 }
 pointer_reference {
+  id: 0x18d82e82
+  kind: POINTER
+  pointee_type_id: 0x49205c94
+}
+pointer_reference {
   id: 0x18ded2d3
   kind: POINTER
   pointee_type_id: 0x493badd2
@@ -9449,6 +9469,11 @@ pointer_reference {
   id: 0x198099dc
   kind: POINTER
   pointee_type_id: 0x4c4281ed
+}
+pointer_reference {
+  id: 0x1992ce85
+  kind: POINTER
+  pointee_type_id: 0x4c0bdc8a
 }
 pointer_reference {
   id: 0x1997473c
@@ -11156,6 +11181,11 @@ pointer_reference {
   pointee_type_id: 0xaea51fc6
 }
 pointer_reference {
+  id: 0x21450ae9
+  kind: POINTER
+  pointee_type_id: 0xaf54cd38
+}
+pointer_reference {
   id: 0x2145f7aa
   kind: POINTER
   pointee_type_id: 0xaf573835
@@ -11204,6 +11234,11 @@ pointer_reference {
   id: 0x217dc8c4
   kind: POINTER
   pointee_type_id: 0xafb7c58e
+}
+pointer_reference {
+  id: 0x217f99ba
+  kind: POINTER
+  pointee_type_id: 0xafbe8077
 }
 pointer_reference {
   id: 0x219262d4
@@ -11424,6 +11459,11 @@ pointer_reference {
   id: 0x22ce5396
   kind: POINTER
   pointee_type_id: 0xa179a8c5
+}
+pointer_reference {
+  id: 0x22cee855
+  kind: POINTER
+  pointee_type_id: 0xa17b47ca
 }
 pointer_reference {
   id: 0x22d082e5
@@ -21536,6 +21576,11 @@ pointer_reference {
   pointee_type_id: 0x94b946cc
 }
 pointer_reference {
+  id: 0x2fc06ea0
+  kind: POINTER
+  pointee_type_id: 0x95415c1d
+}
+pointer_reference {
   id: 0x2fc09bbf
   kind: POINTER
   pointee_type_id: 0x95428860
@@ -21571,6 +21616,16 @@ pointer_reference {
   pointee_type_id: 0x9550eada
 }
 pointer_reference {
+  id: 0x2fc40583
+  kind: POINTER
+  pointee_type_id: 0x9550f091
+}
+pointer_reference {
+  id: 0x2fc4a4b7
+  kind: POINTER
+  pointee_type_id: 0x95527441
+}
+pointer_reference {
   id: 0x2fc4c761
   kind: POINTER
   pointee_type_id: 0x9553fb18
@@ -21579,6 +21634,11 @@ pointer_reference {
   id: 0x2fc4e84d
   kind: POINTER
   pointee_type_id: 0x955347a9
+}
+pointer_reference {
+  id: 0x2fc57d27
+  kind: POINTER
+  pointee_type_id: 0x95551200
 }
 pointer_reference {
   id: 0x2fc6747c
@@ -21719,6 +21779,11 @@ pointer_reference {
   id: 0x2fe70c6a
   kind: POINTER
   pointee_type_id: 0x95dcd734
+}
+pointer_reference {
+  id: 0x2fe9613c
+  kind: POINTER
+  pointee_type_id: 0x95e5626e
 }
 pointer_reference {
   id: 0x2fe9a253
@@ -24219,6 +24284,11 @@ pointer_reference {
   id: 0x358c4a59
   kind: POINTER
   pointee_type_id: 0xfc71cff8
+}
+pointer_reference {
+  id: 0x358ed535
+  kind: POINTER
+  pointee_type_id: 0xfc7bb24b
 }
 pointer_reference {
   id: 0x358ff5b7
@@ -35673,6 +35743,11 @@ array {
   id: 0x9bee62e7
   number_of_elements: 4
   element_type_id: 0x5e8dc7f4
+}
+array {
+  id: 0x9c404df6
+  number_of_elements: 6
+  element_type_id: 0xf784797b
 }
 array {
   id: 0x9c59388e
@@ -57374,6 +57449,12 @@ member {
   offset: 192
 }
 member {
+  id: 0xb681e609
+  name: "chip_ready"
+  type_id: 0x4585663f
+  offset: 352
+}
+member {
   id: 0x951e95bc
   name: "chip_select"
   type_id: 0x295c7202
@@ -70654,6 +70735,12 @@ member {
   offset: 1984
 }
 member {
+  id: 0xce1ac4d6
+  name: "dev"
+  type_id: 0x23230326
+  offset: 2176
+}
+member {
   id: 0xce1ac5a8
   name: "dev"
   type_id: 0x23230326
@@ -75619,6 +75706,12 @@ member {
   offset: 1536
 }
 member {
+  id: 0x6d79728e
+  name: "driver_data"
+  type_id: 0x33756485
+  offset: 704
+}
+member {
   id: 0x6da5d6a0
   name: "driver_data"
   type_id: 0xefd377fd
@@ -76161,6 +76254,30 @@ member {
   name: "dsn"
   type_id: 0x74d29cf1
   offset: 608
+}
+member {
+  id: 0xbf3c7083
+  name: "dsp_load"
+  type_id: 0x2fe9613c
+  offset: 640
+}
+member {
+  id: 0x7d8eb938
+  name: "dsp_loaded"
+  type_id: 0x4585663f
+  offset: 8544
+}
+member {
+  id: 0x7d8eb982
+  name: "dsp_loaded"
+  type_id: 0x4585663f
+  offset: 320
+}
+member {
+  id: 0x51fefdf1
+  name: "dsp_status"
+  type_id: 0x2fc57d27
+  offset: 576
 }
 member {
   id: 0x3913e589
@@ -80933,6 +81050,13 @@ member {
   name: "exclude_user"
   type_id: 0xedf277ba
   offset: 324
+  bitsize: 1
+}
+member {
+  id: 0x1520e961
+  name: "exclusive"
+  type_id: 0x4585663f
+  offset: 8576
   bitsize: 1
 }
 member {
@@ -99415,6 +99539,12 @@ member {
   type_id: 0x43acdd98
 }
 member {
+  id: 0xcc6c8d77
+  name: "id"
+  type_id: 0x43acdd98
+  offset: 32
+}
+member {
   id: 0xcc6d01b7
   name: "id"
   type_id: 0x42201dce
@@ -99441,6 +99571,12 @@ member {
   id: 0xcc747f06
   name: "id"
   type_id: 0x5b5397f8
+}
+member {
+  id: 0xcc75f0e2
+  name: "id"
+  type_id: 0x5adf57ae
+  offset: 224
 }
 member {
   id: 0xcc8634a1
@@ -100626,6 +100762,12 @@ member {
   offset: 320
 }
 member {
+  id: 0x817b9489
+  name: "iface"
+  type_id: 0x6720d32f
+  offset: 1120
+}
+member {
   id: 0x81e47045
   name: "iface"
   type_id: 0xf8c43e2a
@@ -101069,6 +101211,12 @@ member {
   id: 0x7712821d
   name: "image"
   type_id: 0x18bd6530
+}
+member {
+  id: 0x7717c666
+  name: "image"
+  type_id: 0x1df06cce
+  offset: 576
 }
 member {
   id: 0x77e682c9
@@ -104672,6 +104820,12 @@ member {
   offset: 768
 }
 member {
+  id: 0x4d4b9f7f
+  name: "ioctl"
+  type_id: 0x2fc06ea0
+  offset: 384
+}
+member {
   id: 0x4d4bbccf
   name: "ioctl"
   type_id: 0x2fe3def6
@@ -104688,6 +104842,12 @@ member {
   name: "ioctl_active"
   type_id: 0x74d29cf1
   offset: 6528
+}
+member {
+  id: 0x7f374859
+  name: "ioctl_compat"
+  type_id: 0x2fc06ea0
+  offset: 448
 }
 member {
   id: 0x71d5bbe1
@@ -111585,6 +111745,12 @@ member {
   offset: 576
 }
 member {
+  id: 0xb5995149
+  name: "length"
+  type_id: 0xf435685e
+  offset: 640
+}
+member {
   id: 0xb59953d1
   name: "length"
   type_id: 0xf435685e
@@ -113232,6 +113398,11 @@ member {
   name: "llseek"
   type_id: 0x01c91228
   offset: 64
+}
+member {
+  id: 0x839f19f1
+  name: "llseek"
+  type_id: 0x18d82e82
 }
 member {
   id: 0xb57cc749
@@ -122939,6 +123110,12 @@ member {
   type_id: 0x07ba491c
 }
 member {
+  id: 0x87fca00b
+  name: "mmap"
+  type_id: 0x2fc4a4b7
+  offset: 512
+}
+member {
   id: 0x87fd15d3
   name: "mmap"
   type_id: 0x2e7c1d11
@@ -126635,6 +126812,12 @@ member {
   offset: 64
 }
 member {
+  id: 0x0dda82b2
+  name: "name"
+  type_id: 0x01ef5f77
+  offset: 480
+}
+member {
   id: 0x0dda8bac
   name: "name"
   type_id: 0x01ef5f77
@@ -126892,6 +127075,12 @@ member {
   name: "name"
   type_id: 0x20fd6195
   offset: 58176
+}
+member {
+  id: 0x0dffaa34
+  name: "name"
+  type_id: 0x24cb52fe
+  offset: 32
 }
 member {
   id: 0xba9d0a41
@@ -133230,6 +133419,12 @@ member {
   offset: 64
 }
 member {
+  id: 0xe0dce54c
+  name: "num_dsps"
+  type_id: 0x4585663f
+  offset: 288
+}
+member {
   id: 0x20cdc315
   name: "num_elems"
   type_id: 0x0baa70a7
@@ -136221,6 +136416,12 @@ member {
   offset: 256
 }
 member {
+  id: 0xad9b4d09
+  name: "open"
+  type_id: 0x2fc40583
+  offset: 192
+}
+member {
   id: 0xad9b8e0f
   name: "open"
   type_id: 0x2f070300
@@ -136321,6 +136522,12 @@ member {
   offset: 2880
 }
 member {
+  id: 0x485159b3
+  name: "open_mutex"
+  type_id: 0xa7c362b0
+  offset: 8256
+}
+member {
   id: 0x48515a2b
   name: "open_mutex"
   type_id: 0xa7c362b0
@@ -136337,6 +136544,12 @@ member {
   name: "open_wait"
   type_id: 0x03913382
   offset: 1472
+}
+member {
+  id: 0x60e6fc7c
+  name: "open_wait"
+  type_id: 0x03913382
+  offset: 1856
 }
 member {
   id: 0x60e6ff81
@@ -136481,6 +136694,12 @@ member {
   id: 0xaf3431b0
   name: "ops"
   type_id: 0xbf311330
+}
+member {
+  id: 0xaf67dd7d
+  name: "ops"
+  type_id: 0xecd302d8
+  offset: 1152
 }
 member {
   id: 0xaf890e76
@@ -144937,6 +145156,12 @@ member {
   offset: 320
 }
 member {
+  id: 0x5e152199
+  name: "poll"
+  type_id: 0x006b8dfd
+  offset: 320
+}
+member {
   id: 0x5e15e341
   name: "poll"
   type_id: 0x00a8eb28
@@ -148371,6 +148596,12 @@ member {
   offset: 6208
 }
 member {
+  id: 0xf21ad0be
+  name: "private_data"
+  type_id: 0x18bd6530
+  offset: 2048
+}
+member {
   id: 0xf21ad0fb
   name: "private_data"
   type_id: 0x18bd6530
@@ -148483,6 +148714,12 @@ member {
   name: "private_free"
   type_id: 0x0c0edcf8
   offset: 1088
+}
+member {
+  id: 0x567ed7ab
+  name: "private_free"
+  type_id: 0x0c9ac346
+  offset: 2112
 }
 member {
   id: 0x567f0e57
@@ -154089,6 +154326,12 @@ member {
   offset: 704
 }
 member {
+  id: 0x487c24fc
+  name: "read"
+  type_id: 0x217f99ba
+  offset: 64
+}
+member {
   id: 0x487dfa57
   name: "read"
   type_id: 0x20a66919
@@ -156948,6 +157191,12 @@ member {
   offset: 64
 }
 member {
+  id: 0xaeb73635
+  name: "release"
+  type_id: 0x2fc40583
+  offset: 256
+}
+member {
   id: 0xe8e1b50a
   name: "release_agent_path"
   type_id: 0x8e7b8b93
@@ -158841,6 +159090,12 @@ member {
   name: "reserved"
   type_id: 0x5434eb98
   offset: 96
+}
+member {
+  id: 0xd438fe7f
+  name: "reserved"
+  type_id: 0x5b5397f8
+  offset: 384
 }
 member {
   id: 0xd43d43d1
@@ -193969,6 +194224,12 @@ member {
   offset: 256
 }
 member {
+  id: 0x8bd936f8
+  name: "used"
+  type_id: 0x6720d32f
+  offset: 8512
+}
+member {
   id: 0x8bd93b07
   name: "used"
   type_id: 0x6720d32f
@@ -200793,6 +201054,12 @@ member {
   id: 0x340ef030
   name: "write"
   type_id: 0x0e24c2f6
+}
+member {
+  id: 0x3421983a
+  name: "write"
+  type_id: 0x21450ae9
+  offset: 128
 }
 member {
   id: 0x34294171
@@ -248855,6 +249122,75 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xa17b47ca
+  kind: STRUCT
+  name: "snd_hwdep"
+  definition {
+    bytesize: 1080
+    member_id: 0x6c9f8205
+    member_id: 0x7c00ebb3
+    member_id: 0xea5500df
+    member_id: 0xcc75f0e2
+    member_id: 0x0dda82b2
+    member_id: 0x817b9489
+    member_id: 0xaf67dd7d
+    member_id: 0x60e6fc7c
+    member_id: 0xf21ad0be
+    member_id: 0x567ed7ab
+    member_id: 0xce1ac4d6
+    member_id: 0x485159b3
+    member_id: 0x8bd936f8
+    member_id: 0x7d8eb938
+    member_id: 0x1520e961
+  }
+}
+struct_union {
+  id: 0xfc7bb24b
+  kind: STRUCT
+  name: "snd_hwdep_dsp_image"
+  definition {
+    bytesize: 96
+    member_id: 0xad7c8dd9
+    member_id: 0x0dffaa34
+    member_id: 0x7717c666
+    member_id: 0xb5995149
+    member_id: 0x6d79728e
+  }
+}
+struct_union {
+  id: 0x4c0bdc8a
+  kind: STRUCT
+  name: "snd_hwdep_dsp_status"
+  definition {
+    bytesize: 64
+    member_id: 0xa624b11c
+    member_id: 0xcc6c8d77
+    member_id: 0xe0dce54c
+    member_id: 0x7d8eb982
+    member_id: 0xb681e609
+    member_id: 0xd438fe7f
+  }
+}
+struct_union {
+  id: 0xecd302d8
+  kind: STRUCT
+  name: "snd_hwdep_ops"
+  definition {
+    bytesize: 88
+    member_id: 0x839f19f1
+    member_id: 0x487c24fc
+    member_id: 0x3421983a
+    member_id: 0xad9b4d09
+    member_id: 0xaeb73635
+    member_id: 0x5e152199
+    member_id: 0x4d4b9f7f
+    member_id: 0x7f374859
+    member_id: 0x87fca00b
+    member_id: 0x51fefdf1
+    member_id: 0xbf3c7083
+  }
+}
+struct_union {
   id: 0x7c95d721
   kind: STRUCT
   name: "snd_info_buffer"
@@ -287139,6 +287475,11 @@ function {
   parameter_id: 0x4a500dc8
 }
 function {
+  id: 0x182beb86
+  return_type_id: 0x48b5725f
+  parameter_id: 0x22cee855
+}
+function {
   id: 0x184069d1
   return_type_id: 0x48b5725f
   parameter_id: 0x2360e10b
@@ -292433,6 +292774,12 @@ function {
   parameter_id: 0x3d435d11
 }
 function {
+  id: 0x1fc98171
+  return_type_id: 0x48b5725f
+  parameter_id: 0x391f15ea
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x1fca95d0
   return_type_id: 0x48b5725f
   parameter_id: 0x3e10b518
@@ -292889,6 +293236,13 @@ function {
   return_type_id: 0x2b754442
   parameter_id: 0x0258f96e
   parameter_id: 0x3e10b518
+}
+function {
+  id: 0x2beed169
+  return_type_id: 0xb94e10c7
+  parameter_id: 0x22cee855
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x28ddd932
 }
 function {
   id: 0x2c0dbc38
@@ -294208,6 +294562,14 @@ function {
   parameter_id: 0x3f54a013
 }
 function {
+  id: 0x49205c94
+  return_type_id: 0x39470e64
+  parameter_id: 0x22cee855
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x39470e64
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x4951a397
   return_type_id: 0xc9082b19
   parameter_id: 0x32a623d7
@@ -294730,6 +295092,13 @@ function {
   id: 0x5548a022
   return_type_id: 0x18bd6530
   parameter_id: 0x0f78474f
+}
+function {
+  id: 0x555557dd
+  return_type_id: 0x18bd6530
+  parameter_id: 0x0b30ee00
+  parameter_id: 0x4585663f
+  parameter_id: 0x6720d32f
 }
 function {
   id: 0x558481fc
@@ -298915,6 +299284,14 @@ function {
   parameter_id: 0x914dbfdc
 }
 function {
+  id: 0x9175015c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x33f8b54b
+  parameter_id: 0x0483e6f8
+  parameter_id: 0x6720d32f
+  parameter_id: 0x022383b2
+}
+function {
   id: 0x91761011
   return_type_id: 0x6720d32f
   parameter_id: 0x3176a085
@@ -302566,6 +302943,14 @@ function {
   parameter_id: 0x295c7202
 }
 function {
+  id: 0x95415c1d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x22cee855
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x4585663f
+  parameter_id: 0x33756485
+}
+function {
   id: 0x954268bb
   return_type_id: 0x6720d32f
   parameter_id: 0x25782362
@@ -302640,6 +303025,19 @@ function {
   parameter_id: 0x30474302
 }
 function {
+  id: 0x9550f091
+  return_type_id: 0x6720d32f
+  parameter_id: 0x22cee855
+  parameter_id: 0x18ea6ae3
+}
+function {
+  id: 0x95527441
+  return_type_id: 0x6720d32f
+  parameter_id: 0x22cee855
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x0a134144
+}
+function {
   id: 0x955347a9
   return_type_id: 0x6720d32f
   parameter_id: 0x2060db23
@@ -302649,6 +303047,12 @@ function {
   id: 0x9553fb18
   return_type_id: 0x6720d32f
   parameter_id: 0x234c60dd
+}
+function {
+  id: 0x95551200
+  return_type_id: 0x6720d32f
+  parameter_id: 0x22cee855
+  parameter_id: 0x1992ce85
 }
 function {
   id: 0x95587b1f
@@ -303061,6 +303465,12 @@ function {
   id: 0x95dcd734
   return_type_id: 0x6720d32f
   parameter_id: 0x2170d06d
+}
+function {
+  id: 0x95e5626e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x22cee855
+  parameter_id: 0x358ed535
 }
 function {
   id: 0x95e66878
@@ -305436,6 +305846,12 @@ function {
   parameter_id: 0x295c7202
 }
 function {
+  id: 0x98e6a470
+  return_type_id: 0x6720d32f
+  parameter_id: 0x14b9453b
+  parameter_id: 0x1205844a
+}
+function {
   id: 0x98e78094
   return_type_id: 0x6720d32f
   parameter_id: 0x19c40476
@@ -306233,6 +306649,15 @@ function {
   id: 0x9930cdbf
   return_type_id: 0x6720d32f
   parameter_id: 0x12c0ba43
+}
+function {
+  id: 0x99314acb
+  return_type_id: 0x6720d32f
+  parameter_id: 0x14b9453b
+  parameter_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0xf435685e
+  parameter_id: 0xf435685e
 }
 function {
   id: 0x9932312d
@@ -316672,6 +317097,14 @@ function {
   parameter_id: 0x09a83f1c
 }
 function {
+  id: 0xaf54cd38
+  return_type_id: 0xfc0e1dbd
+  parameter_id: 0x22cee855
+  parameter_id: 0x3e10b518
+  parameter_id: 0xfc0e1dbd
+  parameter_id: 0x0379c823
+}
+function {
   id: 0xaf57be52
   return_type_id: 0x2584a3b9
   parameter_id: 0x2584a3b9
@@ -316683,6 +317116,14 @@ function {
   return_type_id: 0x31e58fe0
   parameter_id: 0x015f6fbc
   parameter_id: 0x13580d6c
+}
+function {
+  id: 0xafbe8077
+  return_type_id: 0xfc0e1dbd
+  parameter_id: 0x22cee855
+  parameter_id: 0x0483e6f8
+  parameter_id: 0xfc0e1dbd
+  parameter_id: 0x0379c823
 }
 function {
   id: 0xafc2e9e9
@@ -358300,6 +358741,15 @@ elf_symbol {
   full_name: "snd_ctl_notify"
 }
 elf_symbol {
+  id: 0x20fc506b
+  name: "snd_ctl_remove"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2e7d048b
+  type_id: 0x91d0f233
+  full_name: "snd_ctl_remove"
+}
+elf_symbol {
   id: 0x74d92df1
   name: "snd_dma_alloc_dir_pages"
   is_defined: true
@@ -358316,6 +358766,15 @@ elf_symbol {
   crc: 0xcf108c4c
   type_id: 0x1c27266a
   full_name: "snd_dma_free_pages"
+}
+elf_symbol {
+  id: 0xf8dd0a45
+  name: "snd_hwdep_new"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe29d968e
+  type_id: 0x9175015c
+  full_name: "snd_hwdep_new"
 }
 elf_symbol {
   id: 0x8a143ba0
@@ -358552,6 +359011,15 @@ elf_symbol {
   full_name: "snd_pcm_period_elapsed"
 }
 elf_symbol {
+  id: 0xba998ee2
+  name: "snd_pcm_set_managed_buffer"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1fed70a4
+  type_id: 0x99314acb
+  full_name: "snd_pcm_set_managed_buffer"
+}
+elf_symbol {
   id: 0x74420600
   name: "snd_pcm_set_managed_buffer_all"
   is_defined: true
@@ -358568,6 +359036,24 @@ elf_symbol {
   crc: 0x890b86cc
   type_id: 0x15694c5f
   full_name: "snd_pcm_set_ops"
+}
+elf_symbol {
+  id: 0xb2f7eb17
+  name: "snd_pcm_std_chmaps"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x04e1b99f
+  type_id: 0x9c404df6
+  full_name: "snd_pcm_std_chmaps"
+}
+elf_symbol {
+  id: 0x8eb5b50d
+  name: "snd_pcm_stop"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe9c585ef
+  type_id: 0x98e6a470
+  full_name: "snd_pcm_stop"
 }
 elf_symbol {
   id: 0x0af8ff72
@@ -364684,6 +365170,15 @@ elf_symbol {
   full_name: "v4l2_fh_init"
 }
 elf_symbol {
+  id: 0x592a4678
+  name: "v4l2_fh_is_singular"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x07cd4162
+  type_id: 0x91e301dd
+  full_name: "v4l2_fh_is_singular"
+}
+elf_symbol {
   id: 0xff77e1ca
   name: "v4l2_fh_open"
   is_defined: true
@@ -366250,6 +366745,15 @@ elf_symbol {
   full_name: "vm_map_pages"
 }
 elf_symbol {
+  id: 0xee1009c9
+  name: "vm_map_ram"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x59d0b54d
+  type_id: 0x555557dd
+  full_name: "vm_map_ram"
+}
+elf_symbol {
   id: 0xdc09fb10
   name: "vm_mmap"
   is_defined: true
@@ -366275,6 +366779,15 @@ elf_symbol {
   crc: 0x2fc505ec
   type_id: 0xfc37fa4b
   full_name: "vm_node_stat"
+}
+elf_symbol {
+  id: 0xef2c49d1
+  name: "vm_unmap_ram"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x03fd2571
+  type_id: 0x1fc98171
+  full_name: "vm_unmap_ram"
 }
 elf_symbol {
   id: 0xca7f93d5
@@ -367573,7 +368086,7 @@ elf_symbol {
   full_name: "zs_unmap_object"
 }
 symbols {
-  id: 0x25a8b173
+  id: 0x84ea5130
   symbol {
     key: "I_BDEV"
     value: 0x2dddbe52
@@ -384631,12 +385144,20 @@ symbols {
     value: 0x6b08a95c
   }
   symbol {
+    key: "snd_ctl_remove"
+    value: 0x20fc506b
+  }
+  symbol {
     key: "snd_dma_alloc_dir_pages"
     value: 0x74d92df1
   }
   symbol {
     key: "snd_dma_free_pages"
     value: 0xafa6f89a
+  }
+  symbol {
+    key: "snd_hwdep_new"
+    value: 0xf8dd0a45
   }
   symbol {
     key: "snd_info_create_card_entry"
@@ -384743,12 +385264,24 @@ symbols {
     value: 0xf21d6619
   }
   symbol {
+    key: "snd_pcm_set_managed_buffer"
+    value: 0xba998ee2
+  }
+  symbol {
     key: "snd_pcm_set_managed_buffer_all"
     value: 0x74420600
   }
   symbol {
     key: "snd_pcm_set_ops"
     value: 0x92edca7e
+  }
+  symbol {
+    key: "snd_pcm_std_chmaps"
+    value: 0xb2f7eb17
+  }
+  symbol {
+    key: "snd_pcm_stop"
+    value: 0x8eb5b50d
   }
   symbol {
     key: "snd_soc_add_component_controls"
@@ -387471,6 +388004,10 @@ symbols {
     value: 0x9499bc08
   }
   symbol {
+    key: "v4l2_fh_is_singular"
+    value: 0x592a4678
+  }
+  symbol {
     key: "v4l2_fh_open"
     value: 0xff77e1ca
   }
@@ -388167,6 +388704,10 @@ symbols {
     value: 0x1c065008
   }
   symbol {
+    key: "vm_map_ram"
+    value: 0xee1009c9
+  }
+  symbol {
     key: "vm_mmap"
     value: 0xdc09fb10
   }
@@ -388177,6 +388718,10 @@ symbols {
   symbol {
     key: "vm_node_stat"
     value: 0xaf85c216
+  }
+  symbol {
+    key: "vm_unmap_ram"
+    value: 0xef2c49d1
   }
   symbol {
     key: "vm_zone_stat"
