@@ -3408,6 +3408,9 @@
   tasklist_lock
   __task_pid_nr_ns
   __task_rq_lock
+  task_rq_lock
+  __task_rq_unlock
+  task_rq_unlock
   tcp_hashinfo
   thermal_cdev_update
   thermal_cooling_device_register
