@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "327e61b5_9fc21da7",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-04-06T20:51:11Z",
+      "side": 1,
+      "message": "Why can\u0027t this variable and related logic be part of your driver and `trace_android_vh_kswapd_per_node` just returns the decision to skip or not like in previous version here: https://android-review.git.corp.google.com/c/kernel/common/+/2022857/7/mm/vmscan.c#4482 ?",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 34
+      },
+      "revId": "5d24514c6e47199ceb1717851cb5b6e0f861504c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
