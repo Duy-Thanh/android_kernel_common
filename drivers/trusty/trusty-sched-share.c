@@ -13,8 +13,6 @@
 #include <linux/trusty/trusty.h>
 #include "trusty-sched-share.h"
 
-#define FFA_INVALID_MEMID (0xffffffffffffffff)
-
 /**
  * struct trusty_sched_share_state - Trusty share resources state local to Trusty-Driver
  * @dev: ptr to the trusty-device instance
@@ -34,6 +32,7 @@ struct trusty_sched_share_state {
 	u32 buf_size;
 	u32 num_pages;
 	bool is_registered;
+	bool vm_is_shared;
 };
 
 static inline struct trusty_percpu_data *trusty_get_trusty_percpu_data(
@@ -42,6 +41,32 @@ static inline struct trusty_percpu_data *trusty_get_trusty_percpu_data(
 	return (struct trusty_percpu_data *)((unsigned char *)tsh +
 			sizeof(struct trusty_sched_shared) +
 			(cpu_num * sizeof(struct trusty_percpu_data)));
+}
+
+static void trusty_sched_share_reclaim_memory(
+		struct trusty_sched_share_state *sched_share_state)
+{
+	int result;
+
+	if (sched_share_state->vm_is_shared) {
+		result = trusty_reclaim_memory(sched_share_state->dev,
+					       sched_share_state->sched_shared_mem_id,
+					       sched_share_state->sg,
+					       sched_share_state->num_pages);
+		if (result != 0) {
+			dev_err(sched_share_state->dev,
+				"trusty_reclaim_memory() failed: ret=%d mem_id=0x%llx\n",
+				result, sched_share_state->sched_shared_mem_id);
+			/*
+			 * It is not safe to free this memory if trusty_reclaim_memory()
+			 * failed. Leak it in that case.
+			 */
+			dev_err(sched_share_state->dev,
+				"WARNING: leaking some allocated resources!!\n");
+		} else {
+			sched_share_state->vm_is_shared = false;
+		}
+	}
 }
 
 int trusty_alloc_sched_share(struct device *device,
@@ -58,8 +83,8 @@ int trusty_alloc_sched_share(struct device *device,
 	if (!sched_share_state)
 		goto err_sched_state_alloc;
 	sched_share_state->dev = device;
-	sched_share_state->sched_shared_mem_id = FFA_INVALID_MEMID;
 	sched_share_state->is_registered = false;
+	sched_share_state->vm_is_shared = false;
 
 	sched_share_state->mem_size = sizeof(struct trusty_sched_shared) +
 				nr_cpu_ids * sizeof(struct trusty_percpu_data);
@@ -139,6 +164,7 @@ void trusty_register_sched_share(struct device *device,
 	dev_dbg(sched_share_state->dev, "%s: sched_shared_mem_id=0x%llx", __func__,
 		mem_id);
 	sched_share_state->sched_shared_mem_id = mem_id;
+	sched_share_state->vm_is_shared = true;
 
 	dev_dbg(device, "%s: calling api SMC_SC_SCHED_SHARE_REGISTER...\n",
 		__func__);
@@ -169,23 +195,7 @@ void trusty_register_sched_share(struct device *device,
 	return;
 
 err_smc_std_call32:
-	result = trusty_reclaim_memory(sched_share_state->dev,
-				       sched_share_state->sched_shared_mem_id,
-				       sched_share_state->sg,
-				       sched_share_state->num_pages);
-	if (result != 0) {
-		dev_err(sched_share_state->dev,
-			"trusty_reclaim_memory() failed: ret=%d mem_id=0x%llx\n",
-			result, sched_share_state->sched_shared_mem_id);
-		/*
-		 * It is not safe to free this memory if trusty_reclaim_memory()
-		 * failed. Leak it in that case.
-		 */
-		dev_err(sched_share_state->dev,
-			"WARNING: leaking some allocated resources!!\n");
-	} else {
-		sched_share_state->sched_shared_mem_id = FFA_INVALID_MEMID;
-	}
+	trusty_sched_share_reclaim_memory(sched_share_state);
 err_rsrc_share_mem:
 err_rsrc_sg_lookup:
 	kfree(sched_share_state->sg);
@@ -215,32 +225,14 @@ void trusty_unregister_sched_share(struct trusty_sched_share_state *sched_share_
 	}
 
 
-	if (sched_share_state->sched_shared_mem_id != FFA_INVALID_MEMID) {
-		result = trusty_reclaim_memory(sched_share_state->dev,
-					       sched_share_state->sched_shared_mem_id,
-					       sched_share_state->sg,
-					       sched_share_state->num_pages);
-		if (result) {
-			dev_err(sched_share_state->dev,
-				"trusty_reclaim_memory() failed: ret=%d mem_id=0x%llx\n",
-				result, sched_share_state->sched_shared_mem_id);
-			/*
-			 * It is not safe to free this memory if trusty_reclaim_memory()
-			 * failed. Leak it in that case.
-			 */
-			dev_err(sched_share_state->dev,
-				"WARNING: leaking some allocated resources!!\n");
-		} else {
-			sched_share_state->sched_shared_mem_id = FFA_INVALID_MEMID;
-		}
-	}
+	trusty_sched_share_reclaim_memory(sched_share_state);
 
 	kfree(sched_share_state->sg);
 }
 
 void trusty_free_sched_share(struct trusty_sched_share_state *sched_share_state)
 {
-	if (sched_share_state->sched_shared_mem_id == FFA_INVALID_MEMID)
+	if (sched_share_state->vm_is_shared)
 		vfree(sched_share_state->sched_shared_vm);
 
 	kfree(sched_share_state);

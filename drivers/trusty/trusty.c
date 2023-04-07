@@ -203,8 +203,8 @@ static void trusty_std_call_cpu_idle(struct trusty_state *s)
 	ret = wait_for_completion_timeout(&s->cpu_idle_completion, HZ * 10);
 	if (!ret) {
 		dev_warn(s->dev,
-			 "%s: timed out waiting for cpu idle to clear, retry anyway\n",
-			 __func__);
+			 "%s: cpu= %lu timed out waiting for cpu idle to clear, retry anyway\n",
+			 __func__, smp_processor_id());
 	}
 }
 
