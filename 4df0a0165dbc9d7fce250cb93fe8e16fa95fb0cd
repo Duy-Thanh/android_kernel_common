@@ -105,6 +105,24 @@
       "parentUuid": "1f5ebd38_57b46cf9",
       "revId": "4df0a0165dbc9d7fce250cb93fe8e16fa95fb0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58f51fc2_62d6db20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-04-07T17:39:12Z",
+      "side": 1,
+      "message": "As per GKI partner newsletter dated Jan 27, 2023 uploading the STG file update is now optional and not mandatory. That is why the ABI file is not updated in this patch. Please let us know if anything has changed in this regard.",
+      "parentUuid": "b41eb79d_4f3cd957",
+      "revId": "4df0a0165dbc9d7fce250cb93fe8e16fa95fb0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
