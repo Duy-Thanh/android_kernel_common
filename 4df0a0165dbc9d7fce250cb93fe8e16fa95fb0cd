@@ -51,6 +51,24 @@
       "message": "symbols are being added but they are already in the symbol table being tracked?",
       "revId": "4df0a0165dbc9d7fce250cb93fe8e16fa95fb0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8308969_83c08323",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-04-07T17:30:31Z",
+      "side": 1,
+      "message": "By symbol table, do you mean android/abi_gki_aarch64.stg? If so, yes - the newly-added symbols all exist (I just checked). They were brought in originally by [this change](https://android-review.googlesource.com/c/kernel/common/+/2488676).",
+      "parentUuid": "40e7bbc4_483cdcca",
+      "revId": "4df0a0165dbc9d7fce250cb93fe8e16fa95fb0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
