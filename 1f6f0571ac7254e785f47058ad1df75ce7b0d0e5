@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c484199_e069356c",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-07T17:34:20Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "26d6e19b_1eebcffe",
+      "range": {
+        "startLine": 1097,
+        "startChar": 2,
+        "endLine": 1097,
+        "endChar": 27
+      },
+      "revId": "1f6f0571ac7254e785f47058ad1df75ce7b0d0e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57348575_2854ff79",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-05T22:32:25Z",
       "side": 0,
       "message": "These two removals are removing duplicates at lines 3344 and 3345. Sorry about the duplicates - we are refining our downstream process for symbol list submissions.",
+      "range": {
+        "startLine": 3355,
+        "startChar": 2,
+        "endLine": 3355,
+        "endChar": 21
+      },
+      "revId": "1f6f0571ac7254e785f47058ad1df75ce7b0d0e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19ac05e8_4237b637",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 3355,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-07T17:34:20Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "57348575_2854ff79",
       "range": {
         "startLine": 3355,
         "startChar": 2,
