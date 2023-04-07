@@ -16,6 +16,24 @@
       "message": "Something went wrong, you are not adding new symbols overall, you are removing some from the abi list.  Are you sure that is intended?  And if so, the removal will have to wait until the next point in time where we are allowed to \"break\" the abi, see the weekly newsletter for when that is.",
       "revId": "4df0a0165dbc9d7fce250cb93fe8e16fa95fb0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f5ebd38_57b46cf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952985
+      },
+      "writtenOn": "2023-04-07T16:54:13Z",
+      "side": 1,
+      "message": "Could you please re-review the commit message and the inline comments in the patch?\n\n\u003e you are not adding new symbols\n\nYes, I am and they are listed in the commit message.\n\n\u003e removing some from the abi list\n\nYes, because they are duplicates - duly annotated in the patch as Gerrit comments.",
+      "parentUuid": "5210f742_0bc6442f",
+      "revId": "4df0a0165dbc9d7fce250cb93fe8e16fa95fb0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
