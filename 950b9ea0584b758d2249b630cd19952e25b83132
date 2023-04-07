@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a6b7fa2_6b39ef58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-07T09:13:23Z",
+      "side": 1,
+      "message": "This is too many symbols to review and handle all at once.  Please break this up into a series of patches that adds the symbols in logical, and reviewable, chunks.\n\nOur review tools can not properly handle this many symbols being added at the same time, sorry.",
+      "revId": "950b9ea0584b758d2249b630cd19952e25b83132",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
