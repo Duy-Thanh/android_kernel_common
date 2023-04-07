@@ -16,6 +16,24 @@
       "message": "shouldn\u0027t this be removing the symbols from the abi list?",
       "revId": "c5b3dc7c8ac945fc0d4bb6198565f8565f002e83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62304389_37c86023",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-04-07T08:43:56Z",
+      "side": 1,
+      "message": "Thanks Greg.\n\nNo. That is only required if we set these config items to from `\u003dm` to `\u003dn`. In this case we just need to remove the symbols exported by these modules from the protected export list; so when the custom version of these modules load as unsigned module it can export those symbols.\n\nSince keeping these modules as GKI modules i.e. `\u003dm` in `gki_defconfig` trimming will not trim down the symbols being used by these modules even though they are not listed in any vendor symbol list. But if any unsigned vendor module try to use these spared symbols without listing them in symbol list; runtime check will fail the module loading.\n\nSo, when vendor module override these modules they have to update their symbol list. We don\u0027t have to do anything to reclassify these modules as unprotected.\n\nHopefully, this makes it clear.",
+      "parentUuid": "2c212e24_8f83afab",
+      "revId": "c5b3dc7c8ac945fc0d4bb6198565f8565f002e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
