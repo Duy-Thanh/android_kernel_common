@@ -69,6 +69,24 @@
       "parentUuid": "40e7bbc4_483cdcca",
       "revId": "4df0a0165dbc9d7fce250cb93fe8e16fa95fb0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b41eb79d_4f3cd957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-07T17:34:07Z",
+      "side": 1,
+      "message": "Ok, thanks, it wasn\u0027t obvious what was happening with a symbol list update but no abi file update at the same time.",
+      "parentUuid": "d8308969_83c08323",
+      "revId": "4df0a0165dbc9d7fce250cb93fe8e16fa95fb0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
