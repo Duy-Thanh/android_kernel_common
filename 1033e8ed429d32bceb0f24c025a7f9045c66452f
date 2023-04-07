@@ -33,6 +33,29 @@
       "message": "There are too many symbols being added at once here for our tools to handle properly, sorry.  Can you please break this up into smaller patches, i.e. logical chunks of symbols, as a patch series, so we can properly review and accept them?\n\nThanks!",
       "revId": "1033e8ed429d32bceb0f24c025a7f9045c66452f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de6ca5a_ce7a65ba",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-07T13:55:21Z",
+      "side": 1,
+      "message": "please place in sorted order, as the error asks.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 42
+      },
+      "revId": "1033e8ed429d32bceb0f24c025a7f9045c66452f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
