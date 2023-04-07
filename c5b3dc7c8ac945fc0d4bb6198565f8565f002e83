@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c212e24_8f83afab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-07T08:33:30Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be removing the symbols from the abi list?",
+      "revId": "c5b3dc7c8ac945fc0d4bb6198565f8565f002e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
