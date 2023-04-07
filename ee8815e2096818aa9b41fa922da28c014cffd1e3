@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4431750a_c6e5a30f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-07T08:32:58Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be removing symbols from the symbol list that the abi checker uses?",
+      "revId": "ee8815e2096818aa9b41fa922da28c014cffd1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
