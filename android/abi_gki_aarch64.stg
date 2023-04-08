@@ -320779,6 +320779,11 @@ function {
   parameter_id: 0x15a30023
 }
 function {
+  id: 0xfca015af
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x08113aaf
+}
+function {
   id: 0xfcb3294d
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x09427c40
@@ -362863,6 +362868,24 @@ elf_symbol {
   full_name: "tcpm_pd_transmit_complete"
 }
 elf_symbol {
+  id: 0x4c16a6b4
+  name: "tcpm_port_clean"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd680581d
+  type_id: 0x129c1f38
+  full_name: "tcpm_port_clean"
+}
+elf_symbol {
+  id: 0xc8ad19b6
+  name: "tcpm_port_is_toggling"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xda86a83d
+  type_id: 0xfca015af
+  full_name: "tcpm_port_is_toggling"
+}
+elf_symbol {
   id: 0xdebe76ba
   name: "tcpm_sink_frs"
   is_defined: true
@@ -388006,6 +388029,14 @@ symbols {
   symbol {
     key: "tcpm_pd_transmit_complete"
     value: 0xbabc4102
+  }
+  symbol {
+    key: "tcpm_port_clean"
+    value: 0x4c16a6b4
+  }
+  symbol {
+    key: "tcpm_port_is_toggling"
+    value: 0xc8ad19b6
   }
   symbol {
     key: "tcpm_sink_frs"
