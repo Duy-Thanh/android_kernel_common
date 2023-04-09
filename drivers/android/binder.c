@@ -664,8 +664,13 @@ static void set_binder_prio_uclamp(struct binder_priority *prio, struct task_str
 	if (!uclamp_is_used())
 		return;
 
-	prio->uclamp[UCLAMP_MIN] = task->uclamp_req[UCLAMP_MIN].value;
-	prio->uclamp[UCLAMP_MAX] = task->uclamp_req[UCLAMP_MAX].value;
+	if (task) {
+		prio->uclamp[UCLAMP_MIN] = task->uclamp_req[UCLAMP_MIN].value;
+		prio->uclamp[UCLAMP_MAX] = task->uclamp_req[UCLAMP_MAX].value;
+	} else {
+		prio->uclamp[UCLAMP_MIN] = 0;
+		prio->uclamp[UCLAMP_MAX] = SCHED_CAPACITY_SCALE;
+	}
 }
 
 static void set_inherited_uclamp(struct binder_transaction *t)
@@ -5782,7 +5787,7 @@ static int binder_open(struct inode *nodp, struct file *filp)
 		proc->default_priority.prio = NICE_TO_PRIO(0);
 	}
 
-	set_binder_prio_uclamp(&proc->default_priority, current);
+	set_binder_prio_uclamp(&proc->default_priority, NULL);
 
 	/* binderfs stashes devices in i_private */
 	if (is_binderfs_device(nodp)) {
