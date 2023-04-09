@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7e5c968_16c265a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2023-04-09T08:58:39Z",
+      "side": 1,
+      "message": "Fixes the boot regression reported on DB845c and RB5 running android14-6.1 https://bugs.linaro.org/show_bug.cgi?id\u003d5947. Thank you.",
+      "revId": "ca97f2d45317d03e437ddfea84a64844d9537555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
