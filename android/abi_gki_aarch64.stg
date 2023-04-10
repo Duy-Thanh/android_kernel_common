@@ -360103,6 +360103,15 @@ elf_symbol {
   full_name: "sock_efree"
 }
 elf_symbol {
+  id: 0x4ece0732
+  name: "sock_gen_put"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0d70adc5
+  type_id: 0x17c95d08
+  full_name: "sock_gen_put"
+}
+elf_symbol {
   id: 0x284bec0f
   name: "sock_gettstamp"
   is_defined: true
@@ -385856,6 +385865,10 @@ symbols {
   symbol {
     key: "sock_efree"
     value: 0x83497546
+  }
+  symbol {
+    key: "sock_gen_put"
+    value: 0x4ece0732
   }
   symbol {
     key: "sock_gettstamp"
