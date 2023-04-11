@@ -105,6 +105,42 @@
       "parentUuid": "9461b387_f29fd548",
       "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c27052b9_94896293",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-04-11T14:46:30Z",
+      "side": 1,
+      "message": "pKVM modules are regular kernel modules, using the same build system. They endup iunstalled in the same place.",
+      "parentUuid": "6ca977cc_2bea2d92",
+      "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4fc68a5_69da8220",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-04-11T14:46:30Z",
+      "side": 1,
+      "message": "I declared the option only for arm64 as this is the only usage right now. But I can move the option next to MODPROBE_PATH in kernel/module/Kconfig?",
+      "parentUuid": "e07ebab8_7e8d5650",
+      "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
