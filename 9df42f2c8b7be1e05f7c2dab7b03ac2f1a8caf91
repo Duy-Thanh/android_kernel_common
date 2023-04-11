@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59d67f87_bad11ae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-04-11T13:59:03Z",
+      "side": 1,
+      "message": "I see that fscrypt_keyring changed from FULLY_DEFINED to DECLARATION_ONLY, but this structure is defined only in fs/crypto/keyring.c (not even a header) and inaccessible for modules. Approving this change.",
+      "revId": "9df42f2c8b7be1e05f7c2dab7b03ac2f1a8caf91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
