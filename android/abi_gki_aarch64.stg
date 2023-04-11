@@ -1,4 +1,4 @@
-root_id: 0x25a8b173
+root_id: 0x84ea5130
 void {
   id: 0x48b5725f
 }
@@ -285646,6 +285646,14 @@ function {
   parameter_id: 0xfc0e1dbd
 }
 function {
+  id: 0x9b79ad21
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3776a166
+  parameter_id: 0x2e029f76
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9b79f513
   return_type_id: 0x6720d32f
   parameter_id: 0x188b9e81
@@ -297099,6 +297107,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_enqueue_task_fair"
 }
 elf_symbol {
+  id: 0xf94ce10d
+  name: "__traceiter_android_rvh_find_busiest_group"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4176d199
+  type_id: 0x9b79ad21
+  full_name: "__traceiter_android_rvh_find_busiest_group"
+}
+elf_symbol {
   id: 0x83371e9e
   name: "__traceiter_android_rvh_find_energy_efficient_cpu"
   is_defined: true
@@ -298564,6 +298581,15 @@ elf_symbol {
   crc: 0x6eb0e4b8
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_enqueue_task_fair"
+}
+elf_symbol {
+  id: 0xb05fc507
+  name: "__tracepoint_android_rvh_find_busiest_group"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x49269776
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_find_busiest_group"
 }
 elf_symbol {
   id: 0x60184478
@@ -332895,7 +332921,7 @@ elf_symbol {
   full_name: "zs_unmap_object"
 }
 symbols {
-  id: 0x25a8b173
+  id: 0x84ea5130
   symbol {
     key: "I_BDEV"
     value: 0x2dddbe52
@@ -333941,6 +333967,10 @@ symbols {
     value: 0xd5b05c65
   }
   symbol {
+    key: "__traceiter_android_rvh_find_busiest_group"
+    value: 0xf94ce10d
+  }
+  symbol {
     key: "__traceiter_android_rvh_find_energy_efficient_cpu"
     value: 0x83371e9e
   }
@@ -334591,6 +334621,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_rvh_enqueue_task_fair"
     value: 0x395b2a73
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_find_busiest_group"
+    value: 0xb05fc507
   }
   symbol {
     key: "__tracepoint_android_rvh_find_energy_efficient_cpu"
