@@ -16,6 +16,23 @@
       "message": "forgot x86 😞",
       "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec1dc3a_351318b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-11T14:24:38Z",
+      "side": 1,
+      "message": "This is not the only place that android places modules, why does it matter what the kernel is set to?  This shouldn\u0027t be needed to be changed.",
+      "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
