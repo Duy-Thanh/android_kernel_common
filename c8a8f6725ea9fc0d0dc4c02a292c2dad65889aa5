@@ -33,6 +33,42 @@
       "message": "This is not the only place that android places modules, why does it matter what the kernel is set to?  This shouldn\u0027t be needed to be changed.",
       "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf515f5_b5f56cad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-04-11T14:27:38Z",
+      "side": 1,
+      "message": "This is for loading pKVM modules. This is arm64 only.",
+      "parentUuid": "d837b585_3a6a6a7c",
+      "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9461b387_f29fd548",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-04-11T14:27:38Z",
+      "side": 1,
+      "message": "This is to support early loading of pKVM modules. We need to give this path to modprobe, otherwise it\u0027ll look for modules in `/lib/modules/\u003cuname\u003e`.",
+      "parentUuid": "4ec1dc3a_351318b0",
+      "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
