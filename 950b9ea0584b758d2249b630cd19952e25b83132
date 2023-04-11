@@ -50,6 +50,24 @@
       "message": "The file was added as executable. Should be 0644 like the other symbol list files.",
       "revId": "950b9ea0584b758d2249b630cd19952e25b83132",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "078723e8_6c8cd5a0",
+        "filename": "android/abi_gki_aarch64_mtk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-11T07:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "886fb563_7f713451",
+      "revId": "950b9ea0584b758d2249b630cd19952e25b83132",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
