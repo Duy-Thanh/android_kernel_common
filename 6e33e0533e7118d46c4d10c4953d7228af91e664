@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e48036d_78159cef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-11T07:04:28Z",
+      "side": 1,
+      "message": "where is this \"recommended\"?  The GKI kernel configuration has been the required list for many years now, are you referring to older documentation somewhere?  If so, a link here would be good.\n\nAnd please wrap your changelog lines at 72 columns.",
+      "range": {
+        "startLine": 9,
+        "startChar": 34,
+        "endLine": 9,
+        "endChar": 78
+      },
+      "revId": "6e33e0533e7118d46c4d10c4953d7228af91e664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2efdd57a_ef0f896c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-11T07:04:28Z",
+      "side": 1,
+      "message": "reported how?",
+      "range": {
+        "startLine": 12,
+        "startChar": 47,
+        "endLine": 12,
+        "endChar": 55
+      },
+      "revId": "6e33e0533e7118d46c4d10c4953d7228af91e664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe78f9af_1bd6bc36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-11T07:04:28Z",
+      "side": 1,
+      "message": "real numbers please, performance matters for many users, and this needs to be documented in order to be able to know what to do here.",
+      "range": {
+        "startLine": 13,
+        "startChar": 62,
+        "endLine": 13,
+        "endChar": 83
+      },
+      "revId": "6e33e0533e7118d46c4d10c4953d7228af91e664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
