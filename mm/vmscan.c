@@ -1409,6 +1409,7 @@ static unsigned int shrink_page_list(struct list_head *page_list,
 	unsigned int nr_reclaimed = 0;
 	unsigned int pgactivate = 0;
 	bool do_demote_pass;
+	int page_trylock_result;
 
 	memset(stat, 0, sizeof(*stat));
 	cond_resched();
@@ -1831,6 +1832,7 @@ activate_locked:
 			count_memcg_page_event(page, PGACTIVATE);
 		}
 keep_locked:
+		trace_android_vh_page_trylock_get_result(page, &page_trylock_result);
 		unlock_page(page);
 keep:
 		list_add(&page->lru, &ret_pages);
