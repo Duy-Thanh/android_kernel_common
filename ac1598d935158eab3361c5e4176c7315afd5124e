@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bd55936_faa42048",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-11T12:19:22Z",
+      "side": 1,
+      "message": "Sorry, but our review tools can not handle this many symbols being added at once.\n\nPlease break this up into smaller patches, one that adds the new file, and symbols that are already in the tree, and then break up the symbol additions as other patches after that.",
+      "revId": "ac1598d935158eab3361c5e4176c7315afd5124e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
