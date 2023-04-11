@@ -67,6 +67,23 @@
       "message": "You need to add a follow-up patch to add newly exported symbols and vendor hooks into your symbols list and update the ABI definition.",
       "revId": "d9893cbb1a22f07abaca1bbbfa9908418ecdc183",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06d82a37_55961778",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-11T07:23:35Z",
+      "side": 1,
+      "message": "This was rejected by upstream, it is not a \"BACKPORT\"",
+      "revId": "d9893cbb1a22f07abaca1bbbfa9908418ecdc183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
