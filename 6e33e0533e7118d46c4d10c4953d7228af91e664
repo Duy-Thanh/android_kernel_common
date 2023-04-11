@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed7ce944_e1285fab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-04-11T17:51:12Z",
+      "side": 1,
+      "message": "I believe by \"recommended\" they mean the android-recommended config fragment which was used for 4.19 and earlier kernels (and, yes, still documented here: https://source.android.com/docs/core/architecture/kernel/config)\n\nIn fact, the fragments are still upstream:\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/configs/android-recommended.config",
+      "parentUuid": "0e48036d_78159cef",
+      "range": {
+        "startLine": 9,
+        "startChar": 34,
+        "endLine": 9,
+        "endChar": 78
+      },
+      "revId": "6e33e0533e7118d46c4d10c4953d7228af91e664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2efdd57a_ef0f896c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
