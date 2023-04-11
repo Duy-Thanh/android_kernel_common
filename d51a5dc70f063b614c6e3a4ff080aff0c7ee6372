@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2902202c_d4db16a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-04-11T14:43:00Z",
+      "side": 1,
+      "message": "Actually, fidelity change is not present in clean build of ABI XML, reuploading change with this XML.",
+      "revId": "d51a5dc70f063b614c6e3a4ff080aff0c7ee6372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
