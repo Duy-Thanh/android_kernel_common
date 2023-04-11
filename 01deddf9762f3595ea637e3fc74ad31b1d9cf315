@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ba56d2a_1512572a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-11T08:51:49Z",
+      "side": 1,
+      "message": "you had a symbol listed that was not being exported, which caused the build to break, will go remove it...",
+      "revId": "01deddf9762f3595ea637e3fc74ad31b1d9cf315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
