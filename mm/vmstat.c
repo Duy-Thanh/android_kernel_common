@@ -1406,6 +1406,9 @@ const char * const vmstat_text[] = {
 	"SPF_ATTEMPT_PTE",
 	"SPF_ATTEMPT_WP",
 #endif
+#ifdef CONFIG_LRU_GEN
+	"nr_mglru_kswapd_blocked",
+#endif
 #endif /* CONFIG_VM_EVENT_COUNTERS || CONFIG_MEMCG */
 };
 #endif /* CONFIG_PROC_FS || CONFIG_SYSFS || CONFIG_NUMA || CONFIG_MEMCG */

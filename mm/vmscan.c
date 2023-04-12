@@ -4214,9 +4214,12 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
 	} while (mm);
 done:
 	if (!success) {
-		if (sc->priority <= DEF_PRIORITY - 2)
+		if (sc->priority <= DEF_PRIORITY - 2) {
+			if (current_is_kswapd())
+				count_vm_events(NR_MGLRU_KSWAPD_BLOCKED, 1);
 			wait_event_killable(lruvec->mm_state.wait,
 					    max_seq < READ_ONCE(lrugen->max_seq));
+		}
 		return false;
 	}
 
