@@ -581,7 +581,6 @@
   __pskb_pull_tail
   put_device
   __put_task_struct
-  qcom_icc_xlate_extended
   qcom_smem_state_register
   qcom_smem_state_unregister
   qcom_smem_state_update_bits
@@ -1137,6 +1136,9 @@
 # required by icc-osm-l3.ko
   icc_std_aggregate
   of_icc_xlate_onecell
+
+# required by icc-rpmh.ko
+  qcom_icc_xlate_extended
 
 # required by leds-qcom-lpg.ko
   __bitmap_clear
@@ -1755,10 +1757,6 @@
   regulator_get_current_limit_regmap
   regulator_set_current_limit_regmap
 
-# required by qnoc-sm8450.ko
-  icc_provider_add
-  icc_provider_del
-
 # required by qrtr-tun.ko
   _copy_to_iter
 
@@ -1970,6 +1968,7 @@
   dmabuf_page_pool_create
   dmabuf_page_pool_destroy
   dmabuf_page_pool_free
+  dmabuf_page_pool_get_size
   dma_heap_add
   dma_heap_get_dev
   dma_heap_get_name
@@ -2050,3 +2049,5 @@
 
 # preserved by --additions-only
   __alloc_pages
+  icc_provider_add
+  icc_provider_del
