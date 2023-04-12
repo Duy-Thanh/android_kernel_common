@@ -51,6 +51,24 @@
       "message": "https://r.android.com/2480478 didn\u0027t work out, so this is going to be needed again",
       "revId": "fdfd900edfef194316024b15936e8f0651c9bb35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d794e80_2ef64e9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-04-12T07:39:31Z",
+      "side": 1,
+      "message": "Resolving.",
+      "parentUuid": "9f4c0c9c_95d91427",
+      "revId": "fdfd900edfef194316024b15936e8f0651c9bb35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
