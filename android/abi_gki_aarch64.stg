@@ -25311,6 +25311,11 @@ pointer_reference {
   pointee_type_id: 0xf43ed6df
 }
 pointer_reference {
+  id: 0x37a5cb14
+  kind: POINTER
+  pointee_type_id: 0xf4d7cace
+}
+pointer_reference {
   id: 0x37a89a4a
   kind: POINTER
   pointee_type_id: 0xf4e28fb7
@@ -33014,6 +33019,11 @@ qualified {
   id: 0xf4a306a1
   qualifier: CONST
   qualified_type_id: 0xa2cbac0e
+}
+qualified {
+  id: 0xf4d7cace
+  qualifier: CONST
+  qualified_type_id: 0xa3189db3
 }
 qualified {
   id: 0xf4e28fb7
@@ -284680,6 +284690,11 @@ function {
   parameter_id: 0x1e820193
 }
 function {
+  id: 0x12bd0b6f
+  return_type_id: 0x48b5725f
+  parameter_id: 0x08956bf0
+}
+function {
   id: 0x12c0cb4c
   return_type_id: 0x48b5725f
   parameter_id: 0x09626b7f
@@ -284689,6 +284704,12 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x0930c6d9
   parameter_id: 0x054f691a
+}
+function {
+  id: 0x12c1ad66
+  return_type_id: 0x48b5725f
+  parameter_id: 0x09427c40
+  parameter_id: 0x0258f96e
 }
 function {
   id: 0x12c494e3
@@ -318237,6 +318258,11 @@ function {
   parameter_id: 0x31fa879c
 }
 function {
+  id: 0xc3320c3e
+  return_type_id: 0x4585663f
+  parameter_id: 0x37a5cb14
+}
+function {
   id: 0xc33e01cf
   return_type_id: 0x4585663f
   parameter_id: 0x347303b4
@@ -318673,6 +318699,11 @@ function {
   parameter_id: 0x3360dff4
   parameter_id: 0x33756485
   parameter_id: 0x33756485
+}
+function {
+  id: 0xce3c45e2
+  return_type_id: 0x4585663f
+  parameter_id: 0x039cec64
 }
 function {
   id: 0xce4d40a0
@@ -320645,6 +320676,12 @@ function {
   parameter_id: 0x09427c40
   parameter_id: 0x1e820193
   parameter_id: 0x15a30023
+}
+function {
+  id: 0xfca40809
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x08956bf0
+  parameter_id: 0x09427c40
 }
 function {
   id: 0xfcb3294d
@@ -328114,6 +328151,33 @@ elf_symbol {
   full_name: "bitmap_zalloc"
 }
 elf_symbol {
+  id: 0x4ffac461
+  name: "blk_crypto_keyslot_index"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5ba9c87f
+  type_id: 0xce3c45e2
+  full_name: "blk_crypto_keyslot_index"
+}
+elf_symbol {
+  id: 0xad8bab96
+  name: "blk_crypto_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe4d0fa27
+  type_id: 0xfca40809
+  full_name: "blk_crypto_register"
+}
+elf_symbol {
+  id: 0x528ef002
+  name: "blk_crypto_reprogram_all_keys"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x411e0937
+  type_id: 0x12bd0b6f
+  full_name: "blk_crypto_reprogram_all_keys"
+}
+elf_symbol {
   id: 0x90bf9007
   name: "blk_execute_rq"
   is_defined: true
@@ -328166,6 +328230,15 @@ elf_symbol {
   crc: 0xe4718a72
   type_id: 0x1738d1f7
   full_name: "blk_mq_complete_request"
+}
+elf_symbol {
+  id: 0x6458d26a
+  name: "blk_mq_destroy_queue"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd1fc61a0
+  type_id: 0x12c8ce83
+  full_name: "blk_mq_destroy_queue"
 }
 elf_symbol {
   id: 0x2e876bee
@@ -328319,6 +328392,24 @@ elf_symbol {
   crc: 0x8828fc4b
   type_id: 0x15ff0e04
   full_name: "blk_mq_virtio_map_queues"
+}
+elf_symbol {
+  id: 0x76783663
+  name: "blk_pm_runtime_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa896d73e
+  type_id: 0x12c1ad66
+  full_name: "blk_pm_runtime_init"
+}
+elf_symbol {
+  id: 0xeae629ca
+  name: "blk_put_queue"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa28fb858
+  type_id: 0x12c8ce83
+  full_name: "blk_put_queue"
 }
 elf_symbol {
   id: 0x012046d8
@@ -357642,6 +357733,15 @@ elf_symbol {
   full_name: "sb800_prefetch"
 }
 elf_symbol {
+  id: 0x56cb7a36
+  name: "sbitmap_weight"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf2de9307
+  type_id: 0xc3320c3e
+  full_name: "sbitmap_weight"
+}
+elf_symbol {
   id: 0xe8c754b0
   name: "scatterwalk_ffwd"
   is_defined: true
@@ -357984,6 +358084,15 @@ elf_symbol {
   full_name: "scsi_dma_unmap"
 }
 elf_symbol {
+  id: 0x30f6b9b1
+  name: "scsi_done"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xef41b253
+  type_id: 0x1f7d7689
+  full_name: "scsi_done"
+}
+elf_symbol {
   id: 0x32b196e0
   name: "scsi_host_alloc"
   is_defined: true
@@ -358063,6 +358172,15 @@ elf_symbol {
   crc: 0x93b45655
   type_id: 0x9d725f0c
   full_name: "scsi_register_interface"
+}
+elf_symbol {
+  id: 0x42390c70
+  name: "scsi_remove_device"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5573498a
+  type_id: 0x19c71538
+  full_name: "scsi_remove_device"
 }
 elf_symbol {
   id: 0x8deacb1d
@@ -372465,6 +372583,18 @@ symbols {
     value: 0x226328f4
   }
   symbol {
+    key: "blk_crypto_keyslot_index"
+    value: 0x4ffac461
+  }
+  symbol {
+    key: "blk_crypto_register"
+    value: 0xad8bab96
+  }
+  symbol {
+    key: "blk_crypto_reprogram_all_keys"
+    value: 0x528ef002
+  }
+  symbol {
     key: "blk_execute_rq"
     value: 0x90bf9007
   }
@@ -372487,6 +372617,10 @@ symbols {
   symbol {
     key: "blk_mq_complete_request"
     value: 0x51c471d6
+  }
+  symbol {
+    key: "blk_mq_destroy_queue"
+    value: 0x6458d26a
   }
   symbol {
     key: "blk_mq_end_request"
@@ -372555,6 +372689,14 @@ symbols {
   symbol {
     key: "blk_mq_virtio_map_queues"
     value: 0xa36916c0
+  }
+  symbol {
+    key: "blk_pm_runtime_init"
+    value: 0x76783663
+  }
+  symbol {
+    key: "blk_put_queue"
+    value: 0xeae629ca
   }
   symbol {
     key: "blk_queue_alignment_offset"
@@ -385585,6 +385727,10 @@ symbols {
     value: 0x84f045c2
   }
   symbol {
+    key: "sbitmap_weight"
+    value: 0x56cb7a36
+  }
+  symbol {
     key: "scatterwalk_ffwd"
     value: 0xe8c754b0
   }
@@ -385737,6 +385883,10 @@ symbols {
     value: 0x18cbd7f9
   }
   symbol {
+    key: "scsi_done"
+    value: 0x30f6b9b1
+  }
+  symbol {
     key: "scsi_host_alloc"
     value: 0x32b196e0
   }
@@ -385771,6 +385921,10 @@ symbols {
   symbol {
     key: "scsi_register_interface"
     value: 0x5286bfd6
+  }
+  symbol {
+    key: "scsi_remove_device"
+    value: 0x42390c70
   }
   symbol {
     key: "scsi_remove_host"
