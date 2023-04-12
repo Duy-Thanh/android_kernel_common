@@ -16,6 +16,24 @@
       "message": "Kib?",
       "revId": "863fccdacdda116ee4531af2cd387a575b07c55c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b72bc641_fbb4bc11",
+        "filename": "Documentation/ABI/testing/sysfs-kernel-dmaheap",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-04-12T21:03:49Z",
+      "side": 1,
+      "message": "Yup: https://en.wikipedia.org/wiki/Byte#Multiple-byte_units\nMaybe the B should be capitalized.",
+      "parentUuid": "2443e492_ef18a17e",
+      "revId": "863fccdacdda116ee4531af2cd387a575b07c55c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
