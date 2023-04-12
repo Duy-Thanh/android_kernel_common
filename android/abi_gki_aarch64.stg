@@ -282511,6 +282511,14 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x032333c6
+  return_type_id: 0x48b5725f
+  parameter_id: 0x4585663f
+  parameter_id: 0xb0c2eb21
+  parameter_id: 0x6720d32f
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x033c2ce9
   return_type_id: 0x48b5725f
   parameter_id: 0x4585663f
@@ -322468,6 +322476,15 @@ elf_symbol {
   full_name: "__irq_resolve_mapping"
 }
 elf_symbol {
+  id: 0xafc169af
+  name: "__irq_set_handler"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2f31193c
+  type_id: 0x032333c6
+  full_name: "__irq_set_handler"
+}
+elf_symbol {
   id: 0xcaf40f72
   name: "__kfifo_alloc"
   is_defined: true
@@ -346651,6 +346668,15 @@ elf_symbol {
   full_name: "irq_set_chip_data"
 }
 elf_symbol {
+  id: 0x0bad9216
+  name: "irq_set_handler_data"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3dcb88a0
+  type_id: 0x8c834f34
+  full_name: "irq_set_handler_data"
+}
+elf_symbol {
   id: 0xb2b17b6f
   name: "irq_set_irq_type"
   is_defined: true
@@ -370033,6 +370059,10 @@ symbols {
     value: 0xe064ac65
   }
   symbol {
+    key: "__irq_set_handler"
+    value: 0xafc169af
+  }
+  symbol {
     key: "__kfifo_alloc"
     value: 0xcaf40f72
   }
@@ -380775,6 +380805,10 @@ symbols {
   symbol {
     key: "irq_set_chip_data"
     value: 0x7c906e0d
+  }
+  symbol {
+    key: "irq_set_handler_data"
+    value: 0x0bad9216
   }
   symbol {
     key: "irq_set_irq_type"
