@@ -16,6 +16,24 @@
       "message": "What about the other branches?",
       "revId": "a4bf6293b2820230e2c0d5f68448837fc3e722ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "568511d9_44a4aca8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2023-04-12T12:23:23Z",
+      "side": 1,
+      "message": "Because we are not using other branches, I send this patch to the 5.15, just because we hope we can get the patch as soon as possible. Because the rc\u0027s upgrade may be late. After other branches are upgraded with minor versions, this patch will be included，so I think the other branches iis no need at now.\n\nThanks!",
+      "parentUuid": "40c3c61a_9f8ba9e9",
+      "revId": "a4bf6293b2820230e2c0d5f68448837fc3e722ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
