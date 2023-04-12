@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dbcdc78_67e2e7d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2023-04-12T06:24:47Z",
+      "side": 1,
+      "message": "When tasks are forked, the default uclamp min and max values for each task are 0 and SCHED_CAPACITY_SCALE(1024), respectively. These default values should not change over time, and SCHED_CAPACITY_SCALE(1024) should always be the maximum scaling capacity.",
+      "parentUuid": "8e1850d8_01cb8ab1",
+      "range": {
+        "startLine": 9,
+        "startChar": 134,
+        "endLine": 9,
+        "endChar": 138
+      },
+      "revId": "016aa6afc9bb9e3c4aad2967b8ec9f31fcf713a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9695b025_78f064f6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -83,6 +107,24 @@
       "writtenOn": "2023-04-11T12:20:50Z",
       "side": 1,
       "message": "Please submit upstream first.",
+      "revId": "016aa6afc9bb9e3c4aad2967b8ec9f31fcf713a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e77ece2_c3f857d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2023-04-12T06:24:47Z",
+      "side": 1,
+      "message": "this relies on binder inheritance chnages which were rejected upstream before.",
+      "parentUuid": "9695b025_78f064f6",
       "revId": "016aa6afc9bb9e3c4aad2967b8ec9f31fcf713a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
