@@ -141,6 +141,24 @@
       "parentUuid": "e07ebab8_7e8d5650",
       "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32ace65_3949e05e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-04-12T15:25:36Z",
+      "side": 1,
+      "message": "I renamed this option CONFIG_PKVM_MODULE_PATH to make it obvious this is PKVM and arm64 only.",
+      "parentUuid": "a4fc68a5_69da8220",
+      "revId": "c8a8f6725ea9fc0d0dc4c02a292c2dad65889aa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
