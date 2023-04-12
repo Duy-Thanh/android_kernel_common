@@ -52,6 +52,24 @@
       "parentUuid": "58d18df0_957384ee",
       "revId": "568f61986dee263793de79b3a8bbb5010b9e5df4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15f74f09_e571904e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-12T07:35:04Z",
+      "side": 1,
+      "message": "I just looked at the new symbol list you added, and removed them from your list of symbols.  Nothing complex 😊\n\nNow you can submit patches for your new symbols and we can review them.",
+      "parentUuid": "9cb17246_3d49ed4d",
+      "revId": "568f61986dee263793de79b3a8bbb5010b9e5df4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
