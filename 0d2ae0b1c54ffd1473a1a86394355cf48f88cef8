@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d22c387_49c27f4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2023-04-13T20:53:01Z",
+      "side": 1,
+      "message": "Thanks Yifan for filling in the details.\nTwo questions:\n\n(1) What is the version string like after you complete your work? Can you give me an example (assuming kernel is pinned to android13-5.15-2023-02_r1)?\n\n(2) I sounds like the issue will be fixed in android mainline + Kleaf soon. Can you suggest a workaround for Android 13 + build.sh?",
+      "parentUuid": "7d24d6c9_1fd105b2",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bbf62ab_092994dc",
         "filename": "scripts/setlocalversion",
         "patchSetId": 2
