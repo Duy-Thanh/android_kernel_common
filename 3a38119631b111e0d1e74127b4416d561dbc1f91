@@ -16,6 +16,24 @@
       "message": "Please submit upstream first.",
       "revId": "3a38119631b111e0d1e74127b4416d561dbc1f91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbc4fa31_a659a9b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2023-04-13T15:32:01Z",
+      "side": 1,
+      "message": "Hi Greg,\nSorry for late reply. \nCould we move `dwc3_gadget_ep_custom_transfer` to vendor modules to make it simple and export these two usb/dwc3 symbols? Thanks!",
+      "parentUuid": "ed298c98_4de0b87d",
+      "revId": "3a38119631b111e0d1e74127b4416d561dbc1f91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
