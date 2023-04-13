@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3f7389c_06e5d284",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-13T18:04:52Z",
+      "side": 1,
+      "message": "Then, can we move the logic out into a separate tool so that we do not constantly get merge conflicts?\n\nIf you look at how this file was refactored in 6.3-rc1, it is much different now, and these changes will not apply at all.",
+      "parentUuid": "fea8b7c5_70417ee5",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bbf62ab_092994dc",
         "filename": "scripts/setlocalversion",
         "patchSetId": 2
