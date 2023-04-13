@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e693104c_d1ddc7c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-13T21:48:55Z",
+      "side": 1,
+      "message": "Has a generic way been proposed upstream? If not, what is the plan for that?",
+      "revId": "fe7c4395cbaded3d1201cb5223c16609f6506b40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb7d0b1_2608b5ae",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-13T21:48:55Z",
+      "side": 1,
+      "message": "Can\u0027t this just be a forward decl: `enum typec_timer;` ?",
+      "revId": "fe7c4395cbaded3d1201cb5223c16609f6506b40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
