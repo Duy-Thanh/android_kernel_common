@@ -270,6 +270,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c26ca0d_589a42bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2023-04-13T21:42:57Z",
+      "side": 1,
+      "message": "Hm...the problem is that we are not using Bazel in Android13 for our project.\nFixing Bazel is something we\u0027ll want to do, if we can repro the issue there.\n\nBut my short term interest is to fix Android13 + build.sh for our device.",
+      "parentUuid": "7142ea89_72904251",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bbf62ab_092994dc",
         "filename": "scripts/setlocalversion",
         "patchSetId": 2
