@@ -24756,6 +24756,11 @@ pointer_reference {
   pointee_type_id: 0xf0128d16
 }
 pointer_reference {
+  id: 0x3694d3c2
+  kind: POINTER
+  pointee_type_id: 0xf013a996
+}
+pointer_reference {
   id: 0x369662d6
   kind: POINTER
   pointee_type_id: 0xf0196dc4
@@ -32874,6 +32879,11 @@ qualified {
   id: 0xf005ac66
   qualifier: CONST
   qualified_type_id: 0xb0510713
+}
+qualified {
+  id: 0xf013a996
+  qualifier: CONST
+  qualified_type_id: 0xb00910d2
 }
 qualified {
   id: 0xf02f20a3
@@ -168737,6 +168747,12 @@ member {
   offset: 6592
 }
 member {
+  id: 0x3d9ec2a7
+  name: "set"
+  type_id: 0x4086b7da
+  offset: 64
+}
+member {
   id: 0x3d9ecaea
   name: "set"
   type_id: 0x4086b7da
@@ -255026,6 +255042,18 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xb00910d2
+  kind: STRUCT
+  name: "typec_mux_desc"
+  definition {
+    bytesize: 32
+    member_id: 0x6e4d805e
+    member_id: 0x3d9ec2a7
+    member_id: 0x0de5752a
+    member_id: 0x7020be32
+  }
+}
+struct_union {
   id: 0xe936a00b
   kind: STRUCT
   name: "typec_mux_dev"
@@ -296921,6 +296949,12 @@ function {
   parameter_id: 0xa52a0930
 }
 function {
+  id: 0x6caf01af
+  return_type_id: 0x30dd91a5
+  parameter_id: 0x0258f96e
+  parameter_id: 0x3694d3c2
+}
+function {
   id: 0x6cb3f0eb
   return_type_id: 0x014b8475
   parameter_id: 0x18bd6530
@@ -297127,6 +297161,14 @@ function {
   parameter_id: 0x9565759f
   parameter_id: 0xf435685e
   parameter_id: 0x33756485
+}
+function {
+  id: 0x70203fbf
+  return_type_id: 0x1d19a9d5
+  parameter_id: 0x2c7bd73f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x4585663f
+  parameter_id: 0x3e10b518
 }
 function {
   id: 0x7028bf98
@@ -347736,6 +347778,15 @@ elf_symbol {
   full_name: "kthread_complete_and_exit"
 }
 elf_symbol {
+  id: 0x4ed76f28
+  name: "kthread_create_on_cpu"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x10a0b150
+  type_id: 0x70203fbf
+  full_name: "kthread_create_on_cpu"
+}
+elf_symbol {
   id: 0x54d851dc
   name: "kthread_create_on_node"
   is_defined: true
@@ -354276,6 +354327,15 @@ elf_symbol {
   crc: 0x902fee31
   type_id: 0x9d16dd74
   full_name: "pm_runtime_force_suspend"
+}
+elf_symbol {
+  id: 0x322949f1
+  name: "pm_runtime_get_if_active"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8ca898f3
+  type_id: 0x9ca3200b
+  full_name: "pm_runtime_get_if_active"
 }
 elf_symbol {
   id: 0x878b97bb
@@ -363768,6 +363828,15 @@ elf_symbol {
   full_name: "typec_mux_get_drvdata"
 }
 elf_symbol {
+  id: 0x29215b38
+  name: "typec_mux_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x29a3326a
+  type_id: 0x6caf01af
+  full_name: "typec_mux_register"
+}
+elf_symbol {
   id: 0x22d09ebb
   name: "typec_register_partner"
   is_defined: true
@@ -366160,6 +366229,15 @@ elf_symbol {
   crc: 0xa5d9812c
   type_id: 0x9e0a7037
   full_name: "usb_submit_urb"
+}
+elf_symbol {
+  id: 0x5d6fb7c5
+  name: "usb_udc_vbus_handler"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xff906e8b
+  type_id: 0x1874e22c
+  full_name: "usb_udc_vbus_handler"
 }
 elf_symbol {
   id: 0x4eea2829
@@ -381303,6 +381381,10 @@ symbols {
     value: 0xd20ecdb9
   }
   symbol {
+    key: "kthread_create_on_cpu"
+    value: 0x4ed76f28
+  }
+  symbol {
     key: "kthread_create_on_node"
     value: 0x54d851dc
   }
@@ -384209,6 +384291,10 @@ symbols {
   symbol {
     key: "pm_runtime_force_suspend"
     value: 0x80df38ea
+  }
+  symbol {
+    key: "pm_runtime_get_if_active"
+    value: 0x322949f1
   }
   symbol {
     key: "pm_runtime_irq_safe"
@@ -388431,6 +388517,10 @@ symbols {
     value: 0x8fafe0a6
   }
   symbol {
+    key: "typec_mux_register"
+    value: 0x29215b38
+  }
+  symbol {
     key: "typec_register_partner"
     value: 0x22d09ebb
   }
@@ -389493,6 +389583,10 @@ symbols {
   symbol {
     key: "usb_submit_urb"
     value: 0x6fe64b22
+  }
+  symbol {
+    key: "usb_udc_vbus_handler"
+    value: 0x5d6fb7c5
   }
   symbol {
     key: "usb_unanchor_urb"
