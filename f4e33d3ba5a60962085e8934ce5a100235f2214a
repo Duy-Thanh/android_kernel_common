@@ -16,6 +16,24 @@
       "message": "Will this also be needed for the android14-5.15 branch?",
       "revId": "f4e33d3ba5a60962085e8934ce5a100235f2214a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58e838d2_f8ac69c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-04-13T18:03:52Z",
+      "side": 1,
+      "message": "No because we were able to modify the KMI there to completely remove the mutex.",
+      "parentUuid": "70d4a222_ed25a270",
+      "revId": "f4e33d3ba5a60962085e8934ce5a100235f2214a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
