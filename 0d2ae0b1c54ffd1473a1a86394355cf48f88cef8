@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b905cc3_611572c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2023-04-13T17:48:49Z",
+      "side": 1,
+      "message": "\u003e We already have facilities to control the version string (the build number is embedded via that mechanism).\n\nCan you elaborate on the mechanism?\n\nWhen we pin common/kernel to android13-5.15-2023-02_r1, build vmlinux, and check the version string:\n- Without this patch: the version string is \"5.15.78-android13-8\"\n- With this patch: the version string is \"5.15.78-android13-8-android13-5.15-2023-02_r1\"\n\nSo, on a running device, how do we uniquely identify the kernel version without the patch? We don\u0027t really need SHA1 - we just need an identifier.\n\nPlease advise.",
+      "parentUuid": "cf1e21c0_8294c377",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bbf62ab_092994dc",
         "filename": "scripts/setlocalversion",
         "patchSetId": 2
