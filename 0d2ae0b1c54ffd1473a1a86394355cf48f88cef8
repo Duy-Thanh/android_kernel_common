@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fd4dbe4_b268feda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-13T18:38:15Z",
+      "side": 1,
+      "message": "@gregkh@google.com , once I finish my work on stamping (https://android-review.git.corp.google.com/q/hashtag:%22kleaf-stamp-repo%22+(status:open%20OR%20status:merged) ) and delete build.sh, we can revert to the mainline version for this file. So rest assured that it won\u0027t happen again (well, maybe we still need to resolve some conflicts for 6.3-rc1, but definitely not after that)",
+      "parentUuid": "e3f7389c_06e5d284",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bbf62ab_092994dc",
         "filename": "scripts/setlocalversion",
         "patchSetId": 2
