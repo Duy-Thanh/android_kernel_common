@@ -22531,6 +22531,11 @@ pointer_reference {
   pointee_type_id: 0xf0128d16
 }
 pointer_reference {
+  id: 0x3694d3c2
+  kind: POINTER
+  pointee_type_id: 0xf013a996
+}
+pointer_reference {
   id: 0x369662d6
   kind: POINTER
   pointee_type_id: 0xf0196dc4
@@ -29994,6 +29999,11 @@ qualified {
   id: 0xf005ac66
   qualifier: CONST
   qualified_type_id: 0xb0510713
+}
+qualified {
+  id: 0xf013a996
+  qualifier: CONST
+  qualified_type_id: 0xb00910d2
 }
 qualified {
   id: 0xf02f20a3
@@ -157251,6 +157261,12 @@ member {
   offset: 7936
 }
 member {
+  id: 0x3d9ec2a7
+  name: "set"
+  type_id: 0x4086b7da
+  offset: 64
+}
+member {
   id: 0x3d9eccc5
   name: "set"
   type_id: 0x4086b7da
@@ -238172,6 +238188,18 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xb00910d2
+  kind: STRUCT
+  name: "typec_mux_desc"
+  definition {
+    bytesize: 32
+    member_id: 0x6e4d805e
+    member_id: 0x3d9ec2a7
+    member_id: 0x0de5752a
+    member_id: 0x7020be32
+  }
+}
+struct_union {
   id: 0xea4ef7ea
   kind: STRUCT
   name: "typec_mux_state"
@@ -271441,6 +271469,12 @@ function {
   parameter_id: 0x2ed8b8f9
 }
 function {
+  id: 0x28e6828a
+  return_type_id: 0x1c551dee
+  parameter_id: 0x0258f96e
+  parameter_id: 0x3694d3c2
+}
+function {
   id: 0x29da83bb
   return_type_id: 0x042af17e
   parameter_id: 0x2668e644
@@ -272971,6 +273005,11 @@ function {
   parameter_id: 0x0258f96e
   parameter_id: 0x4585663f
   parameter_id: 0x6d7f5ff6
+}
+function {
+  id: 0x5183f68a
+  return_type_id: 0x18bd6530
+  parameter_id: 0x1c551dee
 }
 function {
   id: 0x51a856ed
@@ -330018,6 +330057,24 @@ elf_symbol {
   full_name: "typec_get_drvdata"
 }
 elf_symbol {
+  id: 0x8fafe0a6
+  name: "typec_mux_get_drvdata"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x888e9a70
+  type_id: 0x5183f68a
+  full_name: "typec_mux_get_drvdata"
+}
+elf_symbol {
+  id: 0x29215b38
+  name: "typec_mux_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcf480f17
+  type_id: 0x28e6828a
+  full_name: "typec_mux_register"
+}
+elf_symbol {
   id: 0x22d09ebb
   name: "typec_register_partner"
   is_defined: true
@@ -349443,6 +349500,14 @@ symbols {
   symbol {
     key: "typec_get_drvdata"
     value: 0x84b20708
+  }
+  symbol {
+    key: "typec_mux_get_drvdata"
+    value: 0x8fafe0a6
+  }
+  symbol {
+    key: "typec_mux_register"
+    value: 0x29215b38
   }
   symbol {
     key: "typec_register_partner"
