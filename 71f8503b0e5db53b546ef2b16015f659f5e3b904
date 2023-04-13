@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00845684_b588e283",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2023-04-13T06:58:12Z",
+      "side": 1,
+      "message": "After adding the initial symbol list, my plan is to divide the new symbols into two parts. This is one of them. If there are still too many, I will further subdivide them.",
+      "parentUuid": "21605931_56da6bd0",
+      "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4081de77_da6df18c",
         "filename": "android/abi_gki_aarch64_imx",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2023-04-13T06:26:19Z",
       "side": 1,
       "message": "what driver needs access to the audit logs?",
+      "range": {
+        "startLine": 23,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0ed381_f8cd742c",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2023-04-13T06:58:12Z",
+      "side": 1,
+      "message": "NXP SNVS security violation driver",
+      "parentUuid": "4081de77_da6df18c",
       "range": {
         "startLine": 23,
         "startChar": 3,
