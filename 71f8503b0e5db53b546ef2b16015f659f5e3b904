@@ -16,6 +16,29 @@
       "message": "Please break this up into logical additions per subsystem/driver as a set of patches.  As stated before, large new symbol additions like this are not reviewable.",
       "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4081de77_da6df18c",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-13T06:26:19Z",
+      "side": 1,
+      "message": "what driver needs access to the audit logs?",
+      "range": {
+        "startLine": 23,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
