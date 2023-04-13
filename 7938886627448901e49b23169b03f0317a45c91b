@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02398ca7_20f35d52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-04-13T17:16:43Z",
+      "side": 1,
+      "message": "This patchset revives cleancache in 6.1 until we can upstream a user for it and revive it in upstream as well.",
+      "revId": "7938886627448901e49b23169b03f0317a45c91b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
