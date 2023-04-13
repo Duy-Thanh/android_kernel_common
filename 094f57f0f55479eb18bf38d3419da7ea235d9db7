@@ -16,6 +16,24 @@
       "message": "Please wait a few days for these to be reviewed and accepted upstream first.",
       "revId": "094f57f0f55479eb18bf38d3419da7ea235d9db7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4d22c52_b9a77e54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-13T07:50:42Z",
+      "side": 1,
+      "message": "Rejected by upstream.",
+      "parentUuid": "12d0254a_bab28631",
+      "revId": "094f57f0f55479eb18bf38d3419da7ea235d9db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
