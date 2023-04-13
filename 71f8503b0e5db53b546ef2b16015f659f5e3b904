@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21605931_56da6bd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-13T06:25:14Z",
+      "side": 1,
+      "message": "Please break this up into logical additions per subsystem/driver as a set of patches.  As stated before, large new symbol additions like this are not reviewable.",
+      "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
