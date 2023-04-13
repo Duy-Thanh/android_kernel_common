@@ -3,10 +3,15 @@
 LLVM=1
 DEPMOD=depmod
 CLANG_PREBUILT_BIN=prebuilts/clang/host/linux-x86/clang-${CLANG_VERSION}/bin
+RUST_PREBUILT_BIN=prebuilts/rust/linux-x86/${RUSTC_VERSION}/bin
 BUILDTOOLS_PREBUILT_BIN=build/kernel/build-tools/path/linux-x86
 DTC=${ROOT_DIR}/${BUILDTOOLS_PREBUILT_BIN}/dtc
 
 KCFLAGS="${KCFLAGS} -D__ANDROID_COMMON_KERNEL__"
+COMMON_RUST_FLAGS="-C linker=clang -C linker-flavor=gcc -C link-arg=-fuse-ld=lld -A stable-features"
+KRUSTFLAGS="${KRUSTFLAGS} ${COMMON_RUST_FLAGS}"
+HOSTRUSTFLAGS="${HOSTRUSTFLAGS} ${COMMON_RUST_FLAGS}"
+
 EXTRA_CMDS=''
 STOP_SHIP_TRACEPRINTK=1
 IN_KERNEL_MODULES=1

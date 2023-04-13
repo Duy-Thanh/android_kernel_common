@@ -3,7 +3,8 @@
 always-$(CONFIG_RUST) += target.json
 no-clean-files += target.json
 
-obj-$(CONFIG_RUST) += core.o compiler_builtins.o
+rust-support :=
+rust-support += core.o compiler_builtins.o
 always-$(CONFIG_RUST) += exports_core_generated.h
 
 # Missing prototypes are expected in the helpers since these are exported
@@ -15,17 +16,20 @@ always-$(CONFIG_RUST) += libmacros.so
 no-clean-files += libmacros.so
 
 always-$(CONFIG_RUST) += bindings/bindings_generated.rs bindings/bindings_helpers_generated.rs
-obj-$(CONFIG_RUST) += alloc.o bindings.o kernel.o
+rust-support += alloc.o bindings.o kernel.o
 always-$(CONFIG_RUST) += exports_alloc_generated.h exports_bindings_generated.h \
     exports_kernel_generated.h
 
 ifdef CONFIG_RUST_BUILD_ASSERT_ALLOW
-obj-$(CONFIG_RUST) += build_error.o
+rust-support += build_error.o
 else
 always-$(CONFIG_RUST) += build_error.o
 endif
 
-obj-$(CONFIG_RUST) += exports.o
+# TODO add config switch to switch this between obj/always depending on whether
+# we're doing standalone mods or kernel support
+lib-$(CONFIG_RUST) := $(rust-support)
+obj-$(CONFIG_RUST) += lib.a
 
 # Avoids running `$(RUSTC)` for the sysroot when it may not be available.
 ifdef CONFIG_RUST
@@ -314,8 +318,7 @@ quiet_cmd_exports = EXPORTS $@
       cmd_exports = \
 	$(NM) -p --defined-only $< \
 		| grep -E ' (T|R|D) ' | cut -d ' ' -f 3 \
-		| xargs -Isymbol \
-		echo 'EXPORT_SYMBOL_RUST_GPL(symbol);' > $@
+		| awk 'NF {printf "EXPORT_SYMBOL_RUST_GPL(%s);\n",$$0}' > $@
 
 $(obj)/exports_core_generated.h: $(obj)/core.o FORCE
 	$(call if_changed,exports)
@@ -332,6 +335,7 @@ $(obj)/exports_kernel_generated.h: $(obj)/kernel.o FORCE
 quiet_cmd_rustc_procmacro = $(RUSTC_OR_CLIPPY_QUIET) P $@
       cmd_rustc_procmacro = \
 	$(RUSTC_OR_CLIPPY) $(rust_common_flags) \
+		-C linker-flavor=gcc -C linker=$(HOSTCC) \
 		--emit=dep-info,link --extern proc_macro \
 		--crate-type proc-macro --out-dir $(objtree)/$(obj) \
 		--crate-name $(patsubst lib%.so,%,$(notdir $@)) $<; \

@@ -56,4 +56,5 @@ COMMON_GKI_MODULES_LIST = [
     "net/tipc/diag.ko",
     "net/tipc/tipc.ko",
     "net/wireless/cfg80211.ko",
+    "samples/rust/rust_minimal.ko",
 ]
