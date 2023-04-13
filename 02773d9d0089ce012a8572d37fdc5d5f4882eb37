@@ -16,6 +16,24 @@
       "message": "you have to list your new symbols here.",
       "revId": "02773d9d0089ce012a8572d37fdc5d5f4882eb37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "151a55ad_2a9a5c1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-04-13T14:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e106f2c_e53a7945",
+      "revId": "02773d9d0089ce012a8572d37fdc5d5f4882eb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
