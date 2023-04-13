@@ -216,6 +216,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7142ea89_72904251",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-13T21:20:22Z",
+      "side": 1,
+      "message": "android13 is similar with some differences:\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android13-5.15:build/kernel/kleaf/workspace_status_stamp.py\n\n* Bazel calls scripts/setlocalversion common/ (see workspaace_status_stamp.py) and store the result somewhere\n* Before entering Kbuild, Bazel creates a .scmversion file in the source tree\n* Then when Kbuild enters setlocalversion, it sees .scmversion and exits early.\n\nSo you\u0027ll still need to change workspaace_status_stamp.py to call `--save_tags`, I think...",
+      "parentUuid": "af6a93c1_a7849ed9",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c19f0901_1e2eb40f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-13T21:20:22Z",
+      "side": 1,
+      "message": "(1) The version string is the same. My work is mostly refactoring and there should not be any changes to the final result.\n\nHowever, I am not sure where `2023-02_r1` is from. Is this a tag that I should check out and try?\n\n(2) see the other comment. You can try adding --save_tags to workspace_status_stamp.py and cherry-pick this change to android13 branches.\n\nI am also not sure whether the issue will be fixed in android mainline + Kleaf soon. Please let me know about a tag you want me to check out and the command you want me to build, and the result you expect to see (preferrably in a go/kleaf-bug)",
+      "parentUuid": "4d22c387_49c27f4e",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bbf62ab_092994dc",
         "filename": "scripts/setlocalversion",
         "patchSetId": 2
