@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb1cf446_7f9da611",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-13T21:51:14Z",
+      "side": 1,
+      "message": "Please remove this needless header inclusion. If a struct is needed for the interface, then forward-declare it.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "f27fa2642e7aec99c63b7bcb20e7af7c32bfdf8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
