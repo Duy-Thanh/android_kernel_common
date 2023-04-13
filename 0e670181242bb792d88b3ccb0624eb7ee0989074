@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "751983f0_cb088a66",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-13T16:08:18Z",
+      "side": 1,
+      "message": "Why do the hooks need to be the restricted version? Why do you need to measure cred lifetime.",
+      "revId": "0e670181242bb792d88b3ccb0624eb7ee0989074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
