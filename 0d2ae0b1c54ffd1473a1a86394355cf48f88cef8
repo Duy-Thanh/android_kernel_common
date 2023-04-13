@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b90945f7_c65ee97d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-13T14:28:29Z",
+      "side": 1,
+      "message": "meta-comment, we are diverging a LOT from the upstream version of this file.  Can all of the android-specific changes go into a different file/tool or move somewhere else out of this file as it is getting very very very difficult to keep the merges from blowing up on this file.\n\nOr better yet, get the android changes upstream!",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bbf62ab_092994dc",
         "filename": "scripts/setlocalversion",
         "patchSetId": 2
