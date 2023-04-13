@@ -288,6 +288,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1577e67_df034a1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-13T21:48:29Z",
+      "side": 1,
+      "message": "In that case please cherry-pick this to android13 branches and ask for a review there.",
+      "parentUuid": "6c26ca0d_589a42bb",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bbf62ab_092994dc",
         "filename": "scripts/setlocalversion",
         "patchSetId": 2
