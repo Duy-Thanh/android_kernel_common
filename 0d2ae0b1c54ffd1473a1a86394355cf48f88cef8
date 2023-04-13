@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d24d6c9_1fd105b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-13T18:52:48Z",
+      "side": 1,
+      "message": "The mechanism is here:\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/workspace_status_stamp.py\n\nThe process is going to be transformed a lot after https://android-review.git.corp.google.com/q/hashtag:%22kleaf-stamp-repo%22+(status:open%20OR%20status:merged), but the general idea is still:\n\n- Bazel calls `scripts/setlocalversion common/` (see workspaace_status_stamp.py) and store the result somewhere\n- Bazel unsets `CONFIG_LOCALVERSION_AUTO` and set `LOCALVERSION\u003d` empty\n- When entering Kbuild, Bazel restores the result to $OUT_DIR/localversion, so when Kbuild executes `setlocalversion` it just `cat $OUT_DIR/localversion`",
+      "parentUuid": "0b905cc3_611572c6",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bbf62ab_092994dc",
         "filename": "scripts/setlocalversion",
         "patchSetId": 2
@@ -137,6 +155,24 @@
       "writtenOn": "2023-04-13T12:04:10Z",
       "side": 1,
       "message": "Is this really a problem on android-mainline? I believe when building with Kleaf, we ensure .scmversion is set and hence we will never even go further in this function? @elsk@google.com ?",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41d07bb2_75a315c1",
+        "filename": "scripts/setlocalversion",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-13T18:52:48Z",
+      "side": 1,
+      "message": "See the other comment. We use `$OUT_DIR/localversion` and we unset `CONFIG_LOCALVERSION_AUTO` and set `LOCALVERSION\u003d` before entering the script in Kbuild.",
+      "parentUuid": "8bbf62ab_092994dc",
       "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
