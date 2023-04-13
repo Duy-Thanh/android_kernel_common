@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf1e21c0_8294c377",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-04-13T12:04:10Z",
+      "side": 1,
+      "message": "I am a little reluctant to keep such an out-of-tree patch. We already have facilities to control the version string (the build number is embedded via that mechanism). I do not see the functional issue that is solved with this patch. Does the kernel need to produce said sha anywhere? Also, the kernel/common SHA1 is not really representative for what all goes into a kernel build. Tools and other ingredients are not accounted for in the SHA. Yet, the build number that is usually appended points to a valid manifest to trace back the individual commits of all repositories.",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bbf62ab_092994dc",
+        "filename": "scripts/setlocalversion",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-04-13T12:04:10Z",
+      "side": 1,
+      "message": "Is this really a problem on android-mainline? I believe when building with Kleaf, we ensure .scmversion is set and hence we will never even go further in this function? @elsk@google.com ?",
+      "revId": "0d2ae0b1c54ffd1473a1a86394355cf48f88cef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
