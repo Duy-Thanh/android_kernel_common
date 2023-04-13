@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "698201cc_8f096d0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-13T07:49:33Z",
+      "side": 1,
+      "message": "There are too many, please break up into logical chunks.",
+      "parentUuid": "00845684_b588e283",
+      "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4081de77_da6df18c",
         "filename": "android/abi_gki_aarch64_imx",
         "patchSetId": 2
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "NXP SNVS security violation driver",
       "parentUuid": "4081de77_da6df18c",
+      "range": {
+        "startLine": 23,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76138740_946b882f",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-13T07:49:33Z",
+      "side": 1,
+      "message": "Please break this out into module descriptions so that this is more obvious in future submissions.",
+      "parentUuid": "9e0ed381_f8cd742c",
       "range": {
         "startLine": 23,
         "startChar": 3,
