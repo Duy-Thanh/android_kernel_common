@@ -16,6 +16,24 @@
       "message": "It seems to me the main problem here is caching these \"default\" values and restoring them after each transaction. This also includes the scheduling policy and the priority not just uclamp. I don\u0027t see why a thread couldn\u0027t instead go back to whatever settings it had before the transaction was initiated. Doesn\u0027t this make more sense to drop `proc-\u003edefault_priority`?",
       "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a5acb58_8db8273d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2023-04-14T05:50:04Z",
+      "side": 1,
+      "message": "Indeed, may we dircetly use proc-\u003edefault_priority to store the setting a default CFS task should have?",
+      "parentUuid": "e087548e_f4d34f67",
+      "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
