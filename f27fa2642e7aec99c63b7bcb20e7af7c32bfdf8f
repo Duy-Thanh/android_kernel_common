@@ -22,6 +22,53 @@
       },
       "revId": "f27fa2642e7aec99c63b7bcb20e7af7c32bfdf8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e161a8ee_f3c3e371",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-04-14T02:28:08Z",
+      "side": 1,
+      "message": "Ack ! Removing. Was using it for PDO_MAX_OBJECTS. Looks like the vendor hooks declaration does not actually need it here.",
+      "parentUuid": "bb1cf446_7f9da611",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "f27fa2642e7aec99c63b7bcb20e7af7c32bfdf8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ae62ed_b4843b34",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-04-14T02:28:08Z",
+      "side": 1,
+      "message": "This is actually unused as struct tcpm_port is internal to tcpm.c so removing.",
+      "range": {
+        "startLine": 47,
+        "startChar": 10,
+        "endLine": 47,
+        "endChar": 32
+      },
+      "revId": "f27fa2642e7aec99c63b7bcb20e7af7c32bfdf8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
