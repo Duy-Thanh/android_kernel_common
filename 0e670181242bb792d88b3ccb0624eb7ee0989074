@@ -34,6 +34,24 @@
       "parentUuid": "751983f0_cb088a66",
       "revId": "0e670181242bb792d88b3ccb0624eb7ee0989074",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3f1b4ef_2c3e7c41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-14T16:09:44Z",
+      "side": 1,
+      "message": "I don\u0027t see any explanation for why these need to be restricted hooks. Do the handlers sleep? Are they invoked in an atomic context? What is the reason? It should be in the commit message.\n\nAlso not in the detailed explanation: Why do the cred lifetimes need to be monitored? Answer that in the commit message too.",
+      "parentUuid": "130aa970_7774b28d",
+      "revId": "0e670181242bb792d88b3ccb0624eb7ee0989074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
