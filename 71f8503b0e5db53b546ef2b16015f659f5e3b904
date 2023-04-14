@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d85c9d7_2a8b0d85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2023-04-14T12:04:51Z",
+      "side": 1,
+      "message": "This patch has been changed to add sound/soc/ related symbols, Please help review, thanks.",
+      "parentUuid": "698201cc_8f096d0d",
+      "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4081de77_da6df18c",
         "filename": "android/abi_gki_aarch64_imx",
         "patchSetId": 2
