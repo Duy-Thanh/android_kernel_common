@@ -16,6 +16,24 @@
       "message": "Why do the hooks need to be the restricted version? Why do you need to measure cred lifetime.",
       "revId": "0e670181242bb792d88b3ccb0624eb7ee0989074",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "130aa970_7774b28d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2023-04-14T10:33:34Z",
+      "side": 1,
+      "message": "We expect the hooks will only be attached once by our module and it will never be unloaded. For the reason to measure cred lifetime, please check the detailed explanation in 248994334, thanks.",
+      "parentUuid": "751983f0_cb088a66",
+      "revId": "0e670181242bb792d88b3ccb0624eb7ee0989074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
