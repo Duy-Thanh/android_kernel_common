@@ -1466,6 +1466,7 @@
   pci_aer_clear_nonfatal_status
   pcibios_resource_to_bus
   pci_bus_type
+  pci_d3cold_disable
   pci_dev_get
   pci_device_group
   pci_device_is_present
@@ -1497,6 +1498,7 @@
   pci_sriov_configure_simple
   pci_store_saved_state
   pci_walk_bus
+  pci_write_config_byte
   pci_write_config_dword
   pcpu_nr_pages
   __percpu_down_read
@@ -2305,6 +2307,7 @@
   __traceiter_sched_switch
   __traceiter_suspend_resume
   __traceiter_unmap
+  __traceiter_xhci_dbg_quirks
   __tracepoint_android_rvh_account_irq_end
   __tracepoint_android_rvh_account_irq_start
   __tracepoint_android_rvh_after_dequeue_task
@@ -2430,6 +2433,7 @@
   __tracepoint_sched_switch
   __tracepoint_suspend_resume
   __tracepoint_unmap
+  __tracepoint_xhci_dbg_quirks
   trace_print_array_seq
   trace_raw_output_prep
   trace_seq_printf
@@ -2528,6 +2532,7 @@
   usb_debug_root
   usb_decode_ctrl
   usb_driver_set_configuration
+  usb_enable_intel_xhci_ports
   usb_ep_alloc_request
   usb_ep_autoconfig
   usb_ep_dequeue
@@ -2645,6 +2650,8 @@
   xfrm_lookup
   xhci_alloc_command
   xhci_alloc_erst
+  xhci_dbg_trace
+  xhci_ext_cap_init
   xhci_free_command
   xhci_free_erst
   xhci_get_endpoint_index
@@ -2652,6 +2659,7 @@
   xhci_ring_alloc
   xhci_ring_cmd_db
   xhci_ring_free
+  xhci_shutdown
   xhci_trb_virt_to_dma
   xp_alloc
   xp_dma_map
