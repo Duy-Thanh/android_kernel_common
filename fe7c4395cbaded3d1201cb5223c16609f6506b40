@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bfe509b_87d5d545",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-04-14T02:27:52Z",
+      "side": 1,
+      "message": "Not yet, but have started to work on this within our team this year and should be upstreamed by android 15.",
+      "parentUuid": "e693104c_d1ddc7c4",
+      "revId": "fe7c4395cbaded3d1201cb5223c16609f6506b40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccb7d0b1_2608b5ae",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-13T21:48:55Z",
       "side": 1,
       "message": "Can\u0027t this just be a forward decl: `enum typec_timer;` ?",
+      "revId": "fe7c4395cbaded3d1201cb5223c16609f6506b40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa49e271_a891f39e",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-04-14T02:27:52Z",
+      "side": 1,
+      "message": "enum typec_timer is specific to the android_vh_typec_tcpm_get_timer vendor hook. So, if I make this a forward declaration here, wondering where the actual declaration would be. Any hints ?",
+      "parentUuid": "ccb7d0b1_2608b5ae",
       "revId": "fe7c4395cbaded3d1201cb5223c16609f6506b40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
