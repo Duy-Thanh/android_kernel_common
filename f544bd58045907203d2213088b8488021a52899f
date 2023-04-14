@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fc45207_67ffe632",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-14T19:43:11Z",
+      "side": 1,
+      "message": "Please update bug id to 278138377",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65d37571_d8863c7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-14T19:43:11Z",
+      "side": 1,
+      "message": "This patch set should be re-targeted to android-mainline, then backported to android13 and android 14 kernels.",
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64ea7732_fc3efb88",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-14T19:43:11Z",
+      "side": 1,
+      "message": "Does this have to be 1:1?  Would the contention issues resolved by sharing 16 locks in blocks of 64 hash buckets?",
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2530c9f8_bc3cbb2a",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-14T19:43:11Z",
+      "side": 1,
+      "message": "Since this function is no longer called with a global lock, please rename and remove the _locked suffix.",
+      "range": {
+        "startLine": 489,
+        "startChar": 12,
+        "endLine": 489,
+        "endChar": 38
+      },
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
