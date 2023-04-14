@@ -16,6 +16,23 @@
       "message": "This looks like maze@ or lorenzo@ should be looking at it, not me.",
       "revId": "a8d3f0bf9ad81dfec3c495bf6b73fb7fcf445bd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45ddaf85_24d3b592",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-04-14T22:40:29Z",
+      "side": 1,
+      "message": "apparently the reason is that:\n\nsystem/netd/server/NetlinkCommands.h\n\nconst uint16_t NETLINK_REQUEST_FLAGS \u003d NLM_F_REQUEST | NLM_F_ACK;\nconst uint16_t NETLINK_ROUTE_CREATE_FLAGS \u003d NETLINK_REQUEST_FLAGS | NLM_F_CREATE | NLM_F_EXCL;\n\nand\n\nbionic/libc/kernel/uapi/linux/netlink.h\n#define NLM_F_EXCL 0x200\n#define NLM_F_CREATE 0x400\n#define NLM_F_APPEND 0x800\n#define NLM_F_NONREC 0x100\n#define NLM_F_BULK 0x200\n\ninclude/uapi/linux/netlink.h\n\n/* Flags values */\n\n#define NLM_F_REQUEST\t\t0x01\t/* It is request message. \t*/\n#define NLM_F_MULTI\t\t0x02\t/* Multipart message, terminated by NLMSG_DONE */\n#define NLM_F_ACK\t\t0x04\t/* Reply with ack, with zero or error code */\n#define NLM_F_ECHO\t\t0x08\t/* Receive resulting notifications */\n#define NLM_F_DUMP_INTR\t\t0x10\t/* Dump was inconsistent due to sequence change */\n#define NLM_F_DUMP_FILTERED\t0x20\t/* Dump was filtered as requested */\n\n/* Modifiers to GET request */\n#define NLM_F_ROOT\t0x100\t/* specify tree\troot\t*/\n#define NLM_F_MATCH\t0x200\t/* return all matching\t*/\n#define NLM_F_ATOMIC\t0x400\t/* atomic GET\t\t*/\n#define NLM_F_DUMP\t(NLM_F_ROOT|NLM_F_MATCH)\n\n/* Modifiers to NEW request */\n#define NLM_F_REPLACE\t0x100\t/* Override existing\t\t*/\n#define NLM_F_EXCL\t0x200\t/* Do not touch, if it exists\t*/\n#define NLM_F_CREATE\t0x400\t/* Create, if it does not exist\t*/\n#define NLM_F_APPEND\t0x800\t/* Add to end of list\t\t*/\n\n/* Modifiers to DELETE request */\n#define NLM_F_NONREC\t0x100\t/* Do not delete recursively\t*/\n#define NLM_F_BULK\t0x200\t/* Delete multiple objects\t*/\n\n/* Flags for ACK message */\n#define NLM_F_CAPPED\t0x100\t/* request was capped */\n#define NLM_F_ACK_TLVS\t0x200\t/* extended ACK TVLs were included */\n\nso interesting question whether this is bad userspace or bad kernel change...",
+      "revId": "a8d3f0bf9ad81dfec3c495bf6b73fb7fcf445bd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
