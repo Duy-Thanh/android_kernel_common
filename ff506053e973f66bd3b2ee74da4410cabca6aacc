@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a4b29f_c7e35365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-14T07:58:43Z",
+      "side": 1,
+      "message": "Hi Todd,\nPlease help to review this commit which cp from android13-5.15.And help to cherry pick the below commit to branch android14-5.15.Thanks a lot!\nhttps://android-review.googlesource.com/c/kernel/common/+/2135756/",
+      "revId": "ff506053e973f66bd3b2ee74da4410cabca6aacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
