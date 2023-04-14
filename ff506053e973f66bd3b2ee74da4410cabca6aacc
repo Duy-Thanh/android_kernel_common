@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e9c20dc_45982d59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-14T15:59:43Z",
+      "side": 1,
+      "message": "Please provide more context regarding why these are needed. Also, please upload the symbol file change as part of the same series.\n\nSince there are a bunch of patches like this, I suggest consolidating them all into 1 series so there is a single update to the symbol file.",
+      "revId": "ff506053e973f66bd3b2ee74da4410cabca6aacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "99a4b29f_c7e35365",
