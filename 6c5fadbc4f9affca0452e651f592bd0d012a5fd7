@@ -52,6 +52,24 @@
       "parentUuid": "3d389656_1e27cbe2",
       "revId": "6c5fadbc4f9affca0452e651f592bd0d012a5fd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "139ada01_8941f44f",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-04-14T21:47:37Z",
+      "side": 1,
+      "message": "The dependency on the header has been removed.",
+      "parentUuid": "2557bcf0_d03e9595",
+      "revId": "6c5fadbc4f9affca0452e651f592bd0d012a5fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
