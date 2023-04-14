@@ -16,6 +16,69 @@
       "message": "ISTR the pixel folks had something equivalent? Probably worth posting on the list.",
       "revId": "91eb79e08e0f5a79a6ca646179f95423ec456666",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae722cc_f4b14592",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-04-14T14:33:48Z",
+      "side": 1,
+      "message": "e",
+      "revId": "91eb79e08e0f5a79a6ca646179f95423ec456666",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b05b72a6_3cbeecce",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-04-14T14:33:48Z",
+      "side": 1,
+      "message": "can we generalize this instead? we can make it a flag to specify what needs to be reset at fork",
+      "range": {
+        "startLine": 888,
+        "startChar": 12,
+        "endLine": 888,
+        "endChar": 31
+      },
+      "revId": "91eb79e08e0f5a79a6ca646179f95423ec456666",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df6749fb_97b2f4f1",
+        "filename": "include/uapi/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-04-14T14:33:48Z",
+      "side": 1,
+      "message": "I was thinking maybe we can make it more generic with something like SCHED_FLAG_RESET_ON_FORK_SEL (selective).\n\nAny parameter set with this flag means we should reset to default for forked tasks. For example if policy and uclamp_min are set. Only these will be reset on fork.\n\nThe disadvantage is that users might have to issue more syscalls. If for example they set policy and uclamp and only want to reset uclamp, you need to issue another syscall without the policy flag so only uclamp is reset.\n\nThe advantage is that we should never have to add another reset on fork for any potential new param. And should give users flexibility to mix and match at the, potential, expense of more syscalls. Depends how many params they modify in one go usually.",
+      "range": {
+        "startLine": 135,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 39
+      },
+      "revId": "91eb79e08e0f5a79a6ca646179f95423ec456666",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
