@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfc91e3d_87b13f8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-15T07:37:56Z",
+      "side": 1,
+      "message": "done。",
+      "parentUuid": "9fc45207_67ffe632",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65d37571_d8863c7e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2023-04-14T19:43:11Z",
       "side": 1,
       "message": "This patch set should be re-targeted to android-mainline, then backported to android13 and android 14 kernels.",
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9fc2d70_80c1afb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-15T07:37:56Z",
+      "side": 1,
+      "message": "Hi Sir：\n\nI had start the issue to android-mainline already but the partners of google said that it looked like not a Mainline issue and let me start handled AndroidOS.\n\nhttps://partnerissuetracker.corp.google.com/issues/278016673",
+      "parentUuid": "65d37571_d8863c7e",
       "revId": "f544bd58045907203d2213088b8488021a52899f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2d99599_b63888df",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-15T07:37:56Z",
+      "side": 1,
+      "message": "Hi Sir：\n\nI think this is a balanced art：\n1.To memory, 1000 lock would not occupy much memory we can\u0027t accept in androidOS.\n2.To contention, 1:1 would be the better without questions but it will cause more opts of lock/unlock if traverse all uid threads to get info.\n\nIn my opinion, the code logic of 1:1 will be relatively simpler and the benefit will be better.",
+      "parentUuid": "64ea7732_fc3efb88",
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2530c9f8_bc3cbb2a",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 1
@@ -71,6 +131,30 @@
       "writtenOn": "2023-04-14T19:43:11Z",
       "side": 1,
       "message": "Since this function is no longer called with a global lock, please rename and remove the _locked suffix.",
+      "range": {
+        "startLine": 489,
+        "startChar": 12,
+        "endLine": 489,
+        "endChar": 38
+      },
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8d94e71_576ccb5d",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-15T07:37:56Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "2530c9f8_bc3cbb2a",
       "range": {
         "startLine": 489,
         "startChar": 12,
