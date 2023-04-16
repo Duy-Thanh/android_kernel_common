@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8447a9a1_674695ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-16T03:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfc91e3d_87b13f8f",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65d37571_d8863c7e",
@@ -83,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "287cc76c_d19bdcd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-16T03:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9fc2d70_80c1afb6",
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64ea7732_fc3efb88",
@@ -114,6 +156,24 @@
       "side": 1,
       "message": "Hi Sir：\n\nI think this is a balanced art：\n1.To memory, 1000 lock would not occupy much memory we can\u0027t accept in androidOS.\n2.To contention, 1:1 would be the better without questions but it will cause more opts of lock/unlock if traverse all uid threads to get info.\n\nIn my opinion, the code logic of 1:1 will be relatively simpler and the benefit will be better.",
       "parentUuid": "64ea7732_fc3efb88",
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19e281b0_000fb530",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-16T03:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2d99599_b63888df",
       "revId": "f544bd58045907203d2213088b8488021a52899f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -155,6 +215,30 @@
       "side": 1,
       "message": "done.",
       "parentUuid": "2530c9f8_bc3cbb2a",
+      "range": {
+        "startLine": 489,
+        "startChar": 12,
+        "endLine": 489,
+        "endChar": 38
+      },
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "555e7abe_de2f3f08",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-16T03:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8d94e71_576ccb5d",
       "range": {
         "startLine": 489,
         "startChar": 12,
