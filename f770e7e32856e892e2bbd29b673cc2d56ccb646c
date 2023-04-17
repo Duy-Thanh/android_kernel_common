@@ -16,6 +16,24 @@
       "message": "Should this be at the end of this function to unwind in the reverse order? If interrupts are not needed for other exit steps, then for symmetry at least? More of a question than a suggestion.",
       "revId": "f770e7e32856e892e2bbd29b673cc2d56ccb646c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2554f9e_ed865ded",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-17T21:37:52Z",
+      "side": 1,
+      "message": "We have other dependent modules that don\u0027t currently let us test the unload path, but yes, this should be at the end. We make stdcalls on the shutdown path as well. Those should not need random numbers, which is what triggered sleeps and the need for interrupts in b/276729665, but they could need other interrupts.",
+      "parentUuid": "65bd7bef_a3d232da",
+      "revId": "f770e7e32856e892e2bbd29b673cc2d56ccb646c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
