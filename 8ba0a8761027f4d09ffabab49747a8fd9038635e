@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000042940983",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2540493?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "380ed39e_a6754202",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-04-17T14:43:45Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2539895](https://android-review.googlesource.com/c/2539895)\n\n```\n      ## fs/erofs/zdata.c ##\n     @@ fs/erofs/zdata.c: int __init z_erofs_init_zip_subsystem(void)\n    + \tint err \u003d z_erofs_create_pcluster_pool();\n      \n    - \tz_erofs_workqueue \u003d alloc_workqueue(\"erofs_worker\",\n    - \t\t\tWQ_UNBOUND | WQ_HIGHPRI, num_possible_cpus());\n    --\tif (!z_erofs_workqueue)\n    + \tif (err)\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c PATCH SET (a0b5bb UPSTREAM: erofs: fix an error code in z_erofs_init_zip_subsy)\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (043baa UPSTREAM: efi: rt-wrapper: Add missing include)\n    ++\t\treturn err;\n    ++\terr \u003d z_erofs_init_workqueue();\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\t\tgoto out_error_pcluster_pool;\n    ++\n    ++\tz_erofs_workqueue \u003d alloc_workqueue(\"erofs_worker\",\n    ++\t\t\tWQ_UNBOUND | WQ_HIGHPRI, num_possible_cpus());\n     +\tif (!z_erofs_workqueue) {\n     +\t\terr \u003d -ENOMEM;\n    - \t\tgoto out_error_workqueue_init;\n    ++\t\tgoto out_error_workqueue_init;\n     +\t}\n    ++\n    ++\terr \u003d erofs_init_percpu_workers();\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (1476f2 UPSTREAM: erofs: fix an error code in z_erofs_init_zip_subsy)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    + \t\tgoto out_error_pcluster_pool;\n    + \n    + \tz_erofs_workqueue \u003d alloc_workqueue(\"erofs_worker\",\n    +@@ fs/erofs/zdata.c: int __init z_erofs_init_zip_subsystem(void)\n    + \t\tgoto out_error_workqueue_init;\n      \n      \terr \u003d erofs_init_percpu_workers();\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e BASE      (860b7f BACKPORT: erofs: add per-cpu threads for decompression as an)\n      \tif (err)\n    + \t\tgoto out_error_pcpu_worker;\n    + \n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 524017666 android-build.ayeaye-python-dispatcher_20230413.05_p0",
+      "revId": "8ba0a8761027f4d09ffabab49747a8fd9038635e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000042940983",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2540493?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d7b4fe0f_e5d907d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-04-17T14:43:45Z",
+      "side": 1,
+      "message": "Original change \u0027aosp/2539895\u0027 for this cherry pick, on base branch \u0027android12-5.10\u0027 is NOT MERGED.\nPlease merge the original change.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 524017666 android-build.ayeaye-python-dispatcher_20230413.05_p0",
+      "revId": "8ba0a8761027f4d09ffabab49747a8fd9038635e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000042940983",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2540493?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2ed86c05_dd342d96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-04-17T14:43:45Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 524017666 android-build.ayeaye-python-dispatcher_20230413.05_p0",
+      "revId": "8ba0a8761027f4d09ffabab49747a8fd9038635e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000042940983",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2540493?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3ab9de7e_994dd98b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-04-17T14:43:45Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/8d1b80a79452630f157bf634ae9cfcd9f4eed161) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d8d1b80a79452630f157bf634ae9cfcd9f4eed161)\n\n```\n      ## fs/erofs/zdata.c ##\n     @@ fs/erofs/zdata.c: int __init z_erofs_init_zip_subsystem(void)\n    + \tint err \u003d z_erofs_create_pcluster_pool();\n      \n    - \tz_erofs_workqueue \u003d alloc_workqueue(\"erofs_worker\",\n    - \t\t\tWQ_UNBOUND | WQ_HIGHPRI, num_possible_cpus());\n    --\tif (!z_erofs_workqueue)\n    + \tif (err)\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c PATCH SET (a0b5bb UPSTREAM: erofs: fix an error code in z_erofs_init_zip_subsy)\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (043baa UPSTREAM: efi: rt-wrapper: Add missing include)\n    ++\t\treturn err;\n    ++\terr \u003d z_erofs_init_workqueue();\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\t\tgoto out_error_pcluster_pool;\n    ++\n    ++\tz_erofs_workqueue \u003d alloc_workqueue(\"erofs_worker\",\n    ++\t\t\tWQ_UNBOUND | WQ_HIGHPRI, num_possible_cpus());\n     +\tif (!z_erofs_workqueue) {\n     +\t\terr \u003d -ENOMEM;\n    - \t\tgoto out_error_workqueue_init;\n    ++\t\tgoto out_error_workqueue_init;\n     +\t}\n    ++\n    ++\terr \u003d erofs_init_percpu_workers();\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (1476f2 UPSTREAM: erofs: fix an error code in z_erofs_init_zip_subsy)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    + \t\tgoto out_error_pcluster_pool;\n    + \n    + \tz_erofs_workqueue \u003d alloc_workqueue(\"erofs_worker\",\n    +@@ fs/erofs/zdata.c: int __init z_erofs_init_zip_subsystem(void)\n    + \t\tgoto out_error_workqueue_init;\n      \n      \terr \u003d erofs_init_percpu_workers();\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e BASE      (860b7f BACKPORT: erofs: add per-cpu threads for decompression as an)\n      \tif (err)\n    + \t\tgoto out_error_pcpu_worker;\n    + \n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 524017666 android-build.ayeaye-python-dispatcher_20230413.05_p0",
+      "revId": "8ba0a8761027f4d09ffabab49747a8fd9038635e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
