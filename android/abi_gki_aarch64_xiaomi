@@ -129,3 +129,14 @@
   wakeup_sources_read_unlock
   wakeup_sources_walk_start
   wakeup_sources_walk_next
+
+  #required by ufs-qcom.ko
+  blk_crypto_reprogram_all_keys
+  blk_crypto_register
+  blk_crypto_keyslot_index
+  blk_mq_destroy_queue
+  blk_put_queue
+  blk_pm_runtime_init
+  sbitmap_weight
+  scsi_done
+  scsi_remove_device
