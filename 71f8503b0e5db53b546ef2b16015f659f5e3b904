@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f08d752a_730eb3bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-17T11:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d85c9d7_2a8b0d85",
+      "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4081de77_da6df18c",
@@ -133,6 +151,30 @@
       "side": 1,
       "message": "Please break this out into module descriptions so that this is more obvious in future submissions.",
       "parentUuid": "9e0ed381_f8cd742c",
+      "range": {
+        "startLine": 23,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "71f8503b0e5db53b546ef2b16015f659f5e3b904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c0aa678_48247b37",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-17T11:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76138740_946b882f",
       "range": {
         "startLine": 23,
         "startChar": 3,
