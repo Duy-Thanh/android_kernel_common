@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d76b941_9f5d6f99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-17T21:59:39Z",
+      "side": 1,
+      "message": "also test the Ipv6 tunneling test on android platform side?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "dac95494c7aaa55a4dbbef533d60d459d951bc95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3ccd26e9_f14c229b",
