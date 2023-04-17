@@ -57,6 +57,30 @@
       },
       "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcf1c97_04fdaef5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2023-04-17T15:47:21Z",
+      "side": 1,
+      "message": "Done, and I think `set_inherited_uclamp` is duplicated. we can replace it with `set_binder_prio_uclamp`",
+      "parentUuid": "d5f46574_b5779e82",
+      "range": {
+        "startLine": 668,
+        "startChar": 29,
+        "endLine": 668,
+        "endChar": 63
+      },
+      "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
