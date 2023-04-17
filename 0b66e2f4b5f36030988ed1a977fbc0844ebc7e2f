@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "953de073_ba771e92",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 159933,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-17T18:40:32Z",
+      "side": 1,
+      "message": "This change to the .xml file is not necessary as the KMI is unchanged. Please remove the .xml file from this patch.",
+      "range": {
+        "startLine": 159932,
+        "startChar": 1,
+        "endLine": 159933,
+        "endChar": 117
+      },
+      "revId": "0b66e2f4b5f36030988ed1a977fbc0844ebc7e2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
