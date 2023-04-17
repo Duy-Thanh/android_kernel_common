@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ccd26e9_f14c229b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1221725
+      },
+      "writtenOn": "2023-04-17T21:09:18Z",
+      "side": 1,
+      "message": "Cherry-picking to 5.15, which also has the same issue.",
+      "revId": "dac95494c7aaa55a4dbbef533d60d459d951bc95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
