@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "50ae4cb6_9555efa7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-17T15:41:48Z",
+      "side": 1,
+      "message": "1. add details to the commit message (not responses to this comment)\n\n2. No, don\u0027t squash them together - submit the set of patches as a single series instead of separately. (one git/repo upload that includes N patches)\n\n3. Yes - submit them all together with one symbol list update patch",
+      "parentUuid": "d790ba98_a8cba118",
+      "revId": "ff506053e973f66bd3b2ee74da4410cabca6aacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "99a4b29f_c7e35365",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
