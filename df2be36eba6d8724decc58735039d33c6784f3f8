@@ -34,6 +34,29 @@
       "parentUuid": "e087548e_f4d34f67",
       "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5f46574_b5779e82",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-04-17T11:31:47Z",
+      "side": 1,
+      "message": "Why are we not using uclamp_eff_value() here?",
+      "range": {
+        "startLine": 668,
+        "startChar": 29,
+        "endLine": 668,
+        "endChar": 63
+      },
+      "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
