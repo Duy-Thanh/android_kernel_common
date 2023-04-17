@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88be40c9_e340d695",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-17T19:02:20Z",
+      "side": 1,
+      "message": "KMI is unchanged, please remove abi_gki_aarch64.xml from patch set.",
+      "revId": "d6c4eba1a304b95ca286ab23f59b6d4e661fe286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
