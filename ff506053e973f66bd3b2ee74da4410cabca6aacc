@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d790ba98_a8cba118",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-17T04:02:43Z",
+      "side": 1,
+      "message": "1 why these are needed\nWe need this because we want to get thread scheduling info when thread happened abnormal situation.\n\n2 consolidating them all into 1 series\nDo you mean to combine the following three revisions into one?\nhttps://android-review.googlesource.com/c/kernel/common/+/2123521\nhttps://android-review.googlesource.com/c/kernel/common/+/2135756\nhttps://android-review.googlesource.com/c/kernel/common/+/2133264\n\n3 symbol list patch\nWe also have some other patchs need to update symbol list, can we make them all in one symbol list patch?",
+      "parentUuid": "3e9c20dc_45982d59",
+      "revId": "ff506053e973f66bd3b2ee74da4410cabca6aacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "99a4b29f_c7e35365",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
