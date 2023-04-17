@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95236598_9a3f7fa7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-17T17:58:09Z",
+      "side": 1,
+      "message": "@lipeifeng@oppo.com, I believe this is a terminology issue causing confusion. The bug you linked above (278016673) was filed under the Handheld\u003eMainline component in bugzilla. The new bug is filed under Handheld\u003eAndroid OS, which is correct. \n\nHowever, this patch set is for the android13-5.15 branch of the kernel/common repo. Without changing the bug, this patch set should first be merged into the android-mainline branch of the kernel/common repo, as we want to make sure all devices running this the uid_sys_stats code perform the same. \n\nOnce the patch is merged into android-mainline branch of the kernel/common repo, it can be cherry picked into the android13 and android14 kernel branches.",
+      "parentUuid": "287cc76c_d19bdcd8",
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64ea7732_fc3efb88",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 1
@@ -174,6 +192,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "d2d99599_b63888df",
+      "revId": "f544bd58045907203d2213088b8488021a52899f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5569f7ec_3613e24c",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-17T17:58:09Z",
+      "side": 1,
+      "message": "Ok, that\u0027s understandable. Thanks.",
+      "parentUuid": "19e281b0_000fb530",
       "revId": "f544bd58045907203d2213088b8488021a52899f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
