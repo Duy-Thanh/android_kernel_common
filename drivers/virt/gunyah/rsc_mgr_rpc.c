@@ -308,7 +308,7 @@ int gh_rm_mem_reclaim(struct gh_rm *rm, struct gh_rm_mem_parcel *parcel)
 	int ret;
 
 	ret = gh_rm_call(rm, GH_RM_RPC_MEM_RECLAIM, &req, sizeof(req), NULL, NULL);
-	/* Do not call platform mem reclaim hooks: the reclaim didn't happen*/
+	/* Only call the platform mem reclaim hooks if we reclaimed the memory */
 	if (ret)
 		return ret;
 

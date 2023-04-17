@@ -163,5 +163,5 @@ static void gh_irqfd_unbind(struct gh_vm_function_instance *f)
 }
 
 DECLARE_GH_VM_FUNCTION_INIT(irqfd, GH_FN_IRQFD, 2, gh_irqfd_bind, gh_irqfd_unbind);
-MODULE_DESCRIPTION("Gunyah irqfds");
+MODULE_DESCRIPTION("Gunyah irqfd VM Function");
 MODULE_LICENSE("GPL");

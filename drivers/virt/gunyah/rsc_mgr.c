@@ -126,7 +126,8 @@ struct gh_rm_connection {
  * @dev: pointer to device
  * @tx_ghrsc: message queue resource to TX to RM
  * @rx_ghrsc: message queue resource to RX from RM
- * @msgq: mailbox instance of above
+ * @msgq: mailbox instance of TX/RX resources above
+ * @msgq_client: mailbox client of above msgq
  * @active_rx_connection: ongoing gh_rm_connection for which we're receiving fragments
  * @last_tx_ret: return value of last mailbox tx
  * @call_xarray: xarray to allocate & lookup sequence IDs for Request/Response flows
@@ -160,7 +161,7 @@ struct gh_rm {
 
 /**
  * gh_rm_remap_error() - Remap Gunyah resource manager errors into a Linux error code
- * @gh_error: "Standard" return value from Gunyah resource manager
+ * @rm_error: "Standard" return value from Gunyah resource manager
  */
 static inline int gh_rm_remap_error(enum gh_rm_error rm_error)
 {
