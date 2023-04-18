@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed45d6fe_ed984b98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-18T12:49:19Z",
+      "side": 1,
+      "message": "These are not allowed to be used by any kernel driver, sorry.",
+      "revId": "6e18a49bfca250d940e4d799fe20319ca08da4c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
