@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfb1372d_eba966b2",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8202,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-18T12:52:27Z",
+      "side": 1,
+      "message": "bool?",
+      "range": {
+        "startLine": 8202,
+        "startChar": 1,
+        "endLine": 8202,
+        "endChar": 4
+      },
+      "revId": "c81be18cc95468589b0edfa38ad73337fc5940d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
