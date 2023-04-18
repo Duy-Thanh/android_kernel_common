@@ -28,6 +28,7 @@
   ip_route_me_harder
   ipv6_find_hdr
   jiffies_64_to_clock_t
+  kfree_skb
   ktime_get_coarse_real_ts64
   memory_cgrp_subsys
   memory_cgrp_subsys_enabled_key
@@ -69,6 +70,16 @@
   tcf_exts_dump_stats
   tcf_exts_validate
   tcf_queue_work
+  __traceiter_android_vh_binder_alloc_new_buf_locked
+  __traceiter_android_vh_binder_reply
+  __traceiter_android_vh_binder_trans
+  __traceiter_android_vh_binder_preset
+  __traceiter_android_vh_do_send_sig_info
+  __tracepoint_android_vh_binder_alloc_new_buf_locked
+  __tracepoint_android_vh_binder_reply
+  __tracepoint_android_vh_binder_trans
+  __tracepoint_android_vh_binder_preset
+  __tracepoint_android_vh_do_send_sig_info
   __trace_puts
   typec_mux_get_drvdata
   unregister_memory_notifier
