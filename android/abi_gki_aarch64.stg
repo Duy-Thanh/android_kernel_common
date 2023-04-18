@@ -273759,6 +273759,15 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x1c8990ad
+  return_type_id: 0x48b5725f
+  parameter_id: 0x32a623d7
+  parameter_id: 0x2a65af3d
+  parameter_id: 0x4585663f
+  parameter_id: 0x295c7202
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x1c8a4c12
   return_type_id: 0x48b5725f
   parameter_id: 0x32a623d7
@@ -309065,6 +309074,15 @@ elf_symbol {
   full_name: "cfg80211_ch_switch_notify"
 }
 elf_symbol {
+  id: 0x9f9711d2
+  name: "cfg80211_ch_switch_started_notify"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6c7a584b
+  type_id: 0x1c8990ad
+  full_name: "cfg80211_ch_switch_started_notify"
+}
+elf_symbol {
   id: 0x765456f6
   name: "cfg80211_chandef_create"
   is_defined: true
@@ -343506,6 +343524,15 @@ elf_symbol {
   full_name: "xhci_suspend"
 }
 elf_symbol {
+  id: 0xb8e9cd09
+  name: "xhci_update_hub_device"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1dd9208a
+  type_id: 0x94e2d352
+  full_name: "xhci_update_hub_device"
+}
+elf_symbol {
   id: 0x23b2a72a
   name: "xp_alloc"
   is_defined: true
@@ -347233,6 +347260,10 @@ symbols {
   symbol {
     key: "cfg80211_ch_switch_notify"
     value: 0x75a9b982
+  }
+  symbol {
+    key: "cfg80211_ch_switch_started_notify"
+    value: 0x9f9711d2
   }
   symbol {
     key: "cfg80211_chandef_create"
@@ -362525,6 +362556,10 @@ symbols {
   symbol {
     key: "xhci_suspend"
     value: 0xb834cd77
+  }
+  symbol {
+    key: "xhci_update_hub_device"
+    value: 0xb8e9cd09
   }
   symbol {
     key: "xp_alloc"
