@@ -16,6 +16,23 @@
       "message": "forked the bug 278667358 from the parent bug 275266466",
       "revId": "c00a37e169811aa8c24184ec13cf75f46f6e40ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1b69493_eab56cf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-18T12:38:46Z",
+      "side": 1,
+      "message": "I do not understand why this is needed, the xhci pci driver is built in, so it shouldn\u0027t be exported at all anymore.",
+      "revId": "c00a37e169811aa8c24184ec13cf75f46f6e40ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
