@@ -17878,7 +17878,7 @@
           <var-decl name='tv_nsec' type-id='1eb56b1e' visibility='default' filepath='include/uapi/linux/time_types.h' line='9' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='anon_vma' size-in-bits='704' is-struct='yes' visibility='default' filepath='include/linux/rmap.h' line='29' column='1' id='14f332cc'>
+      <class-decl name='anon_vma' size-in-bits='832' is-struct='yes' visibility='default' filepath='include/linux/rmap.h' line='29' column='1' id='14f332cc'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='root' type-id='a8f86cda' visibility='default' filepath='include/linux/rmap.h' line='30' column='1'/>
         </data-member>
@@ -17889,13 +17889,19 @@
           <var-decl name='refcount' type-id='49178f86' visibility='default' filepath='include/linux/rmap.h' line='39' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='480'>
-          <var-decl name='degree' type-id='f0981eeb' visibility='default' filepath='include/linux/rmap.h' line='47' column='1'/>
+          <var-decl name='degree' type-id='f0981eeb' visibility='default' filepath='include/linux/rmap.h' line='41' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='512'>
-          <var-decl name='parent' type-id='a8f86cda' visibility='default' filepath='include/linux/rmap.h' line='49' column='1'/>
+          <var-decl name='parent' type-id='a8f86cda' visibility='default' filepath='include/linux/rmap.h' line='43' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='576'>
-          <var-decl name='rb_root' type-id='6fe1603d' visibility='default' filepath='include/linux/rmap.h' line='61' column='1'/>
+          <var-decl name='rb_root' type-id='6fe1603d' visibility='default' filepath='include/linux/rmap.h' line='55' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='704'>
+          <var-decl name='num_children' type-id='7359adad' visibility='default' filepath='include/linux/rmap.h' line='70' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='768'>
+          <var-decl name='num_active_vmas' type-id='7359adad' visibility='default' filepath='include/linux/rmap.h' line='72' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='bio_crypt_ctx' size-in-bits='320' is-struct='yes' visibility='default' filepath='include/linux/blk-crypto.h' line='71' column='1' id='b545ce08'>
@@ -123589,7 +123595,7 @@
       <array-type-def dimensions='1' type-id='a84c031d' size-in-bits='infinite' id='e84913bd'>
         <subrange length='infinite' type-id='7ff19f0f' id='031f2035'/>
       </array-type-def>
-      <class-decl name='anon_vma' size-in-bits='704' is-struct='yes' visibility='default' filepath='include/linux/rmap.h' line='29' column='1' id='14f332cc'>
+      <class-decl name='anon_vma' size-in-bits='832' is-struct='yes' visibility='default' filepath='include/linux/rmap.h' line='29' column='1' id='14f332cc'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='root' type-id='a8f86cda' visibility='default' filepath='include/linux/rmap.h' line='30' column='1'/>
         </data-member>
@@ -123600,13 +123606,19 @@
           <var-decl name='refcount' type-id='49178f86' visibility='default' filepath='include/linux/rmap.h' line='39' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='480'>
-          <var-decl name='degree' type-id='f0981eeb' visibility='default' filepath='include/linux/rmap.h' line='47' column='1'/>
+          <var-decl name='degree' type-id='f0981eeb' visibility='default' filepath='include/linux/rmap.h' line='41' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='512'>
-          <var-decl name='parent' type-id='a8f86cda' visibility='default' filepath='include/linux/rmap.h' line='49' column='1'/>
+          <var-decl name='parent' type-id='a8f86cda' visibility='default' filepath='include/linux/rmap.h' line='43' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='576'>
-          <var-decl name='rb_root' type-id='6fe1603d' visibility='default' filepath='include/linux/rmap.h' line='61' column='1'/>
+          <var-decl name='rb_root' type-id='6fe1603d' visibility='default' filepath='include/linux/rmap.h' line='55' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='704'>
+          <var-decl name='num_children' type-id='7359adad' visibility='default' filepath='include/linux/rmap.h' line='70' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='768'>
+          <var-decl name='num_active_vmas' type-id='7359adad' visibility='default' filepath='include/linux/rmap.h' line='72' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='assoc_array_ptr' is-struct='yes' visibility='default' is-declaration-only='yes' id='3249e303'/>
@@ -141459,138 +141471,138 @@
     </abi-instr>
     <abi-instr address-size='64' path='kernel/irq/irqdomain.c' language='LANG_C89'>
       <pointer-type-def type-id='88370ce9' size-in-bits='64' id='ebc26324'/>
-      <function-decl name='__irq_domain_add' mangled-name='__irq_domain_add' filepath='kernel/irq/irqdomain.c' line='130' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__irq_domain_add'>
-        <parameter type-id='4a935625' name='fwnode' filepath='kernel/irq/irqdomain.c' line='130' column='1'/>
-        <parameter type-id='95e97e5e' name='size' filepath='kernel/irq/irqdomain.c' line='130' column='1'/>
-        <parameter type-id='88370ce9' name='hwirq_max' filepath='kernel/irq/irqdomain.c' line='131' column='1'/>
-        <parameter type-id='95e97e5e' name='direct_max' filepath='kernel/irq/irqdomain.c' line='131' column='1'/>
-        <parameter type-id='2c202856' name='ops' filepath='kernel/irq/irqdomain.c' line='132' column='1'/>
-        <parameter type-id='eaa32e2f' name='host_data' filepath='kernel/irq/irqdomain.c' line='133' column='1'/>
-        <return type-id='7544e824'/>
-      </function-decl>
-      <function-decl name='irq_domain_remove' mangled-name='irq_domain_remove' filepath='kernel/irq/irqdomain.c' line='243' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_remove'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='243' column='1'/>
+      <function-decl name='irq_domain_remove' mangled-name='irq_domain_remove' filepath='kernel/irq/irqdomain.c' line='267' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_remove'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='267' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='irq_find_mapping' mangled-name='irq_find_mapping' filepath='kernel/irq/irqdomain.c' line='897' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_find_mapping'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='897' column='1'/>
-        <parameter type-id='88370ce9' name='hwirq' filepath='kernel/irq/irqdomain.c' line='898' column='1'/>
+      <function-decl name='irq_find_mapping' mangled-name='irq_find_mapping' filepath='kernel/irq/irqdomain.c' line='954' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_find_mapping'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='954' column='1'/>
+        <parameter type-id='88370ce9' name='hwirq' filepath='kernel/irq/irqdomain.c' line='955' column='1'/>
         <return type-id='f0981eeb'/>
       </function-decl>
-      <function-decl name='irq_domain_set_info' mangled-name='irq_domain_set_info' filepath='kernel/irq/irqdomain.c' line='1226' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_set_info'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1226' column='1'/>
-        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='1226' column='1'/>
-        <parameter type-id='88370ce9' name='hwirq' filepath='kernel/irq/irqdomain.c' line='1227' column='1'/>
-        <parameter type-id='8846a616' name='chip' filepath='kernel/irq/irqdomain.c' line='1227' column='1'/>
-        <parameter type-id='eaa32e2f' name='chip_data' filepath='kernel/irq/irqdomain.c' line='1228' column='1'/>
-        <parameter type-id='cdb741d3' name='handler' filepath='kernel/irq/irqdomain.c' line='1228' column='1'/>
-        <parameter type-id='eaa32e2f' name='handler_data' filepath='kernel/irq/irqdomain.c' line='1229' column='1'/>
-        <parameter type-id='80f4b756' name='handler_name' filepath='kernel/irq/irqdomain.c' line='1229' column='1'/>
+      <function-decl name='irq_domain_set_info' mangled-name='irq_domain_set_info' filepath='kernel/irq/irqdomain.c' line='1286' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_set_info'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1286' column='1'/>
+        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='1286' column='1'/>
+        <parameter type-id='88370ce9' name='hwirq' filepath='kernel/irq/irqdomain.c' line='1287' column='1'/>
+        <parameter type-id='8846a616' name='chip' filepath='kernel/irq/irqdomain.c' line='1287' column='1'/>
+        <parameter type-id='eaa32e2f' name='chip_data' filepath='kernel/irq/irqdomain.c' line='1288' column='1'/>
+        <parameter type-id='cdb741d3' name='handler' filepath='kernel/irq/irqdomain.c' line='1288' column='1'/>
+        <parameter type-id='eaa32e2f' name='handler_data' filepath='kernel/irq/irqdomain.c' line='1289' column='1'/>
+        <parameter type-id='80f4b756' name='handler_name' filepath='kernel/irq/irqdomain.c' line='1289' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='irq_find_matching_fwspec' mangled-name='irq_find_matching_fwspec' filepath='kernel/irq/irqdomain.c' line='385' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_find_matching_fwspec'>
-        <parameter type-id='2869bb38' name='fwspec' filepath='kernel/irq/irqdomain.c' line='385' column='1'/>
-        <parameter type-id='385b8018' name='bus_token' filepath='kernel/irq/irqdomain.c' line='386' column='1'/>
+      <function-decl name='irq_find_matching_fwspec' mangled-name='irq_find_matching_fwspec' filepath='kernel/irq/irqdomain.c' line='409' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_find_matching_fwspec'>
+        <parameter type-id='2869bb38' name='fwspec' filepath='kernel/irq/irqdomain.c' line='409' column='1'/>
+        <parameter type-id='385b8018' name='bus_token' filepath='kernel/irq/irqdomain.c' line='410' column='1'/>
         <return type-id='7544e824'/>
       </function-decl>
-      <function-decl name='irq_domain_xlate_twocell' mangled-name='irq_domain_xlate_twocell' filepath='kernel/irq/irqdomain.c' line='950' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_xlate_twocell'>
-        <parameter type-id='7544e824' name='d' filepath='kernel/irq/irqdomain.c' line='950' column='1'/>
-        <parameter type-id='9a537bbe' name='ctrlr' filepath='kernel/irq/irqdomain.c' line='950' column='1'/>
-        <parameter type-id='aded214c' name='intspec' filepath='kernel/irq/irqdomain.c' line='951' column='1'/>
-        <parameter type-id='f0981eeb' name='intsize' filepath='kernel/irq/irqdomain.c' line='951' column='1'/>
-        <parameter type-id='ebc26324' name='out_hwirq' filepath='kernel/irq/irqdomain.c' line='952' column='1'/>
-        <parameter type-id='807869d3' name='out_type' filepath='kernel/irq/irqdomain.c' line='952' column='1'/>
+      <function-decl name='irq_domain_xlate_twocell' mangled-name='irq_domain_xlate_twocell' filepath='kernel/irq/irqdomain.c' line='1007' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_xlate_twocell'>
+        <parameter type-id='7544e824' name='d' filepath='kernel/irq/irqdomain.c' line='1007' column='1'/>
+        <parameter type-id='9a537bbe' name='ctrlr' filepath='kernel/irq/irqdomain.c' line='1007' column='1'/>
+        <parameter type-id='aded214c' name='intspec' filepath='kernel/irq/irqdomain.c' line='1008' column='1'/>
+        <parameter type-id='f0981eeb' name='intsize' filepath='kernel/irq/irqdomain.c' line='1008' column='1'/>
+        <parameter type-id='ebc26324' name='out_hwirq' filepath='kernel/irq/irqdomain.c' line='1009' column='1'/>
+        <parameter type-id='807869d3' name='out_type' filepath='kernel/irq/irqdomain.c' line='1009' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='irq_domain_xlate_onetwocell' mangled-name='irq_domain_xlate_onetwocell' filepath='kernel/irq/irqdomain.c' line='972' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_xlate_onetwocell'>
-        <parameter type-id='7544e824' name='d' filepath='kernel/irq/irqdomain.c' line='972' column='1'/>
-        <parameter type-id='9a537bbe' name='ctrlr' filepath='kernel/irq/irqdomain.c' line='973' column='1'/>
-        <parameter type-id='aded214c' name='intspec' filepath='kernel/irq/irqdomain.c' line='974' column='1'/>
-        <parameter type-id='f0981eeb' name='intsize' filepath='kernel/irq/irqdomain.c' line='974' column='1'/>
-        <parameter type-id='1d2c2b85' name='out_hwirq' filepath='kernel/irq/irqdomain.c' line='975' column='1'/>
-        <parameter type-id='807869d3' name='out_type' filepath='kernel/irq/irqdomain.c' line='975' column='1'/>
+      <function-decl name='irq_domain_xlate_onetwocell' mangled-name='irq_domain_xlate_onetwocell' filepath='kernel/irq/irqdomain.c' line='1029' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_xlate_onetwocell'>
+        <parameter type-id='7544e824' name='d' filepath='kernel/irq/irqdomain.c' line='1029' column='1'/>
+        <parameter type-id='9a537bbe' name='ctrlr' filepath='kernel/irq/irqdomain.c' line='1030' column='1'/>
+        <parameter type-id='aded214c' name='intspec' filepath='kernel/irq/irqdomain.c' line='1031' column='1'/>
+        <parameter type-id='f0981eeb' name='intsize' filepath='kernel/irq/irqdomain.c' line='1031' column='1'/>
+        <parameter type-id='1d2c2b85' name='out_hwirq' filepath='kernel/irq/irqdomain.c' line='1032' column='1'/>
+        <parameter type-id='807869d3' name='out_type' filepath='kernel/irq/irqdomain.c' line='1032' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='irq_domain_xlate_onecell' mangled-name='irq_domain_xlate_onecell' filepath='kernel/irq/irqdomain.c' line='931' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_xlate_onecell'>
-        <parameter type-id='7544e824' name='d' filepath='kernel/irq/irqdomain.c' line='931' column='1'/>
-        <parameter type-id='9a537bbe' name='ctrlr' filepath='kernel/irq/irqdomain.c' line='931' column='1'/>
-        <parameter type-id='aded214c' name='intspec' filepath='kernel/irq/irqdomain.c' line='932' column='1'/>
-        <parameter type-id='f0981eeb' name='intsize' filepath='kernel/irq/irqdomain.c' line='932' column='1'/>
-        <parameter type-id='1d2c2b85' name='out_hwirq' filepath='kernel/irq/irqdomain.c' line='933' column='1'/>
-        <parameter type-id='807869d3' name='out_type' filepath='kernel/irq/irqdomain.c' line='933' column='1'/>
+      <function-decl name='irq_domain_xlate_onecell' mangled-name='irq_domain_xlate_onecell' filepath='kernel/irq/irqdomain.c' line='988' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_xlate_onecell'>
+        <parameter type-id='7544e824' name='d' filepath='kernel/irq/irqdomain.c' line='988' column='1'/>
+        <parameter type-id='9a537bbe' name='ctrlr' filepath='kernel/irq/irqdomain.c' line='988' column='1'/>
+        <parameter type-id='aded214c' name='intspec' filepath='kernel/irq/irqdomain.c' line='989' column='1'/>
+        <parameter type-id='f0981eeb' name='intsize' filepath='kernel/irq/irqdomain.c' line='989' column='1'/>
+        <parameter type-id='1d2c2b85' name='out_hwirq' filepath='kernel/irq/irqdomain.c' line='990' column='1'/>
+        <parameter type-id='807869d3' name='out_type' filepath='kernel/irq/irqdomain.c' line='990' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='irq_domain_update_bus_token' mangled-name='irq_domain_update_bus_token' filepath='kernel/irq/irqdomain.c' line='269' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_update_bus_token'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='269' column='1'/>
-        <parameter type-id='385b8018' name='bus_token' filepath='kernel/irq/irqdomain.c' line='270' column='1'/>
+      <function-decl name='irq_domain_update_bus_token' mangled-name='irq_domain_update_bus_token' filepath='kernel/irq/irqdomain.c' line='293' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_update_bus_token'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='293' column='1'/>
+        <parameter type-id='385b8018' name='bus_token' filepath='kernel/irq/irqdomain.c' line='294' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='irq_domain_set_hwirq_and_chip' mangled-name='irq_domain_set_hwirq_and_chip' filepath='kernel/irq/irqdomain.c' line='1198' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_set_hwirq_and_chip'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1198' column='1'/>
-        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='1198' column='1'/>
-        <parameter type-id='88370ce9' name='hwirq' filepath='kernel/irq/irqdomain.c' line='1199' column='1'/>
-        <parameter type-id='8846a616' name='chip' filepath='kernel/irq/irqdomain.c' line='1199' column='1'/>
-        <parameter type-id='eaa32e2f' name='chip_data' filepath='kernel/irq/irqdomain.c' line='1200' column='1'/>
+      <function-decl name='irq_domain_set_hwirq_and_chip' mangled-name='irq_domain_set_hwirq_and_chip' filepath='kernel/irq/irqdomain.c' line='1258' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_set_hwirq_and_chip'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1258' column='1'/>
+        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='1258' column='1'/>
+        <parameter type-id='88370ce9' name='hwirq' filepath='kernel/irq/irqdomain.c' line='1259' column='1'/>
+        <parameter type-id='8846a616' name='chip' filepath='kernel/irq/irqdomain.c' line='1259' column='1'/>
+        <parameter type-id='eaa32e2f' name='chip_data' filepath='kernel/irq/irqdomain.c' line='1260' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='irq_domain_get_irq_data' mangled-name='irq_domain_get_irq_data' filepath='kernel/irq/irqdomain.c' line='1176' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_get_irq_data'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1176' column='1'/>
-        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='1177' column='1'/>
+      <function-decl name='irq_domain_get_irq_data' mangled-name='irq_domain_get_irq_data' filepath='kernel/irq/irqdomain.c' line='1236' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_get_irq_data'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1236' column='1'/>
+        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='1237' column='1'/>
         <return type-id='1c475548'/>
       </function-decl>
-      <function-decl name='irq_domain_free_irqs_parent' mangled-name='irq_domain_free_irqs_parent' filepath='kernel/irq/irqdomain.c' line='1609' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_free_irqs_parent'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1609' column='1'/>
-        <parameter type-id='f0981eeb' name='irq_base' filepath='kernel/irq/irqdomain.c' line='1610' column='1'/>
-        <parameter type-id='f0981eeb' name='nr_irqs' filepath='kernel/irq/irqdomain.c' line='1610' column='1'/>
+      <function-decl name='irq_domain_free_irqs_parent' mangled-name='irq_domain_free_irqs_parent' filepath='kernel/irq/irqdomain.c' line='1679' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_free_irqs_parent'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1679' column='1'/>
+        <parameter type-id='f0981eeb' name='irq_base' filepath='kernel/irq/irqdomain.c' line='1680' column='1'/>
+        <parameter type-id='f0981eeb' name='nr_irqs' filepath='kernel/irq/irqdomain.c' line='1680' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='irq_domain_free_irqs_common' mangled-name='irq_domain_free_irqs_common' filepath='kernel/irq/irqdomain.c' line='1255' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_free_irqs_common'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1255' column='1'/>
-        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='1255' column='1'/>
-        <parameter type-id='f0981eeb' name='nr_irqs' filepath='kernel/irq/irqdomain.c' line='1256' column='1'/>
+      <function-decl name='irq_domain_free_irqs_common' mangled-name='irq_domain_free_irqs_common' filepath='kernel/irq/irqdomain.c' line='1315' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_free_irqs_common'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1315' column='1'/>
+        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='1315' column='1'/>
+        <parameter type-id='f0981eeb' name='nr_irqs' filepath='kernel/irq/irqdomain.c' line='1316' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='irq_domain_create_hierarchy' mangled-name='irq_domain_create_hierarchy' filepath='kernel/irq/irqdomain.c' line='1053' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_create_hierarchy'>
-        <parameter type-id='7544e824' name='parent' filepath='kernel/irq/irqdomain.c' line='1053' column='1'/>
-        <parameter type-id='f0981eeb' name='flags' filepath='kernel/irq/irqdomain.c' line='1054' column='1'/>
-        <parameter type-id='f0981eeb' name='size' filepath='kernel/irq/irqdomain.c' line='1055' column='1'/>
-        <parameter type-id='4a935625' name='fwnode' filepath='kernel/irq/irqdomain.c' line='1056' column='1'/>
-        <parameter type-id='2c202856' name='ops' filepath='kernel/irq/irqdomain.c' line='1057' column='1'/>
-        <parameter type-id='eaa32e2f' name='host_data' filepath='kernel/irq/irqdomain.c' line='1058' column='1'/>
+      <function-decl name='irq_domain_create_hierarchy' mangled-name='irq_domain_create_hierarchy' filepath='kernel/irq/irqdomain.c' line='1110' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_create_hierarchy'>
+        <parameter type-id='7544e824' name='parent' filepath='kernel/irq/irqdomain.c' line='1110' column='1'/>
+        <parameter type-id='f0981eeb' name='flags' filepath='kernel/irq/irqdomain.c' line='1111' column='1'/>
+        <parameter type-id='f0981eeb' name='size' filepath='kernel/irq/irqdomain.c' line='1112' column='1'/>
+        <parameter type-id='4a935625' name='fwnode' filepath='kernel/irq/irqdomain.c' line='1113' column='1'/>
+        <parameter type-id='2c202856' name='ops' filepath='kernel/irq/irqdomain.c' line='1114' column='1'/>
+        <parameter type-id='eaa32e2f' name='host_data' filepath='kernel/irq/irqdomain.c' line='1115' column='1'/>
         <return type-id='7544e824'/>
       </function-decl>
-      <function-decl name='irq_domain_alloc_irqs_parent' mangled-name='irq_domain_alloc_irqs_parent' filepath='kernel/irq/irqdomain.c' line='1589' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_alloc_irqs_parent'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1589' column='1'/>
-        <parameter type-id='f0981eeb' name='irq_base' filepath='kernel/irq/irqdomain.c' line='1590' column='1'/>
-        <parameter type-id='f0981eeb' name='nr_irqs' filepath='kernel/irq/irqdomain.c' line='1590' column='1'/>
-        <parameter type-id='eaa32e2f' name='arg' filepath='kernel/irq/irqdomain.c' line='1591' column='1'/>
+      <function-decl name='irq_domain_alloc_irqs_parent' mangled-name='irq_domain_alloc_irqs_parent' filepath='kernel/irq/irqdomain.c' line='1659' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_alloc_irqs_parent'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='1659' column='1'/>
+        <parameter type-id='f0981eeb' name='irq_base' filepath='kernel/irq/irqdomain.c' line='1660' column='1'/>
+        <parameter type-id='f0981eeb' name='nr_irqs' filepath='kernel/irq/irqdomain.c' line='1660' column='1'/>
+        <parameter type-id='eaa32e2f' name='arg' filepath='kernel/irq/irqdomain.c' line='1661' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='irq_domain_add_simple' mangled-name='irq_domain_add_simple' filepath='kernel/irq/irqdomain.c' line='319' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_add_simple'>
-        <parameter type-id='9a537bbe' name='of_node' filepath='kernel/irq/irqdomain.c' line='319' column='1'/>
-        <parameter type-id='f0981eeb' name='size' filepath='kernel/irq/irqdomain.c' line='320' column='1'/>
-        <parameter type-id='f0981eeb' name='first_irq' filepath='kernel/irq/irqdomain.c' line='321' column='1'/>
-        <parameter type-id='2c202856' name='ops' filepath='kernel/irq/irqdomain.c' line='322' column='1'/>
-        <parameter type-id='eaa32e2f' name='host_data' filepath='kernel/irq/irqdomain.c' line='323' column='1'/>
+      <function-decl name='irq_domain_add_simple' mangled-name='irq_domain_add_simple' filepath='kernel/irq/irqdomain.c' line='343' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_domain_add_simple'>
+        <parameter type-id='9a537bbe' name='of_node' filepath='kernel/irq/irqdomain.c' line='343' column='1'/>
+        <parameter type-id='f0981eeb' name='size' filepath='kernel/irq/irqdomain.c' line='344' column='1'/>
+        <parameter type-id='f0981eeb' name='first_irq' filepath='kernel/irq/irqdomain.c' line='345' column='1'/>
+        <parameter type-id='2c202856' name='ops' filepath='kernel/irq/irqdomain.c' line='346' column='1'/>
+        <parameter type-id='eaa32e2f' name='host_data' filepath='kernel/irq/irqdomain.c' line='347' column='1'/>
         <return type-id='7544e824'/>
       </function-decl>
-      <function-decl name='irq_dispose_mapping' mangled-name='irq_dispose_mapping' filepath='kernel/irq/irqdomain.c' line='871' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_dispose_mapping'>
-        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='871' column='1'/>
+      <function-decl name='irq_dispose_mapping' mangled-name='irq_dispose_mapping' filepath='kernel/irq/irqdomain.c' line='928' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_dispose_mapping'>
+        <parameter type-id='f0981eeb' name='virq' filepath='kernel/irq/irqdomain.c' line='928' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='irq_create_of_mapping' mangled-name='irq_create_of_mapping' filepath='kernel/irq/irqdomain.c' line='856' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_create_of_mapping'>
-        <parameter type-id='51a94113' name='irq_data' filepath='kernel/irq/irqdomain.c' line='856' column='1'/>
+      <function-decl name='irq_create_of_mapping' mangled-name='irq_create_of_mapping' filepath='kernel/irq/irqdomain.c' line='913' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_create_of_mapping'>
+        <parameter type-id='51a94113' name='irq_data' filepath='kernel/irq/irqdomain.c' line='913' column='1'/>
         <return type-id='f0981eeb'/>
       </function-decl>
-      <function-decl name='irq_create_fwspec_mapping' mangled-name='irq_create_fwspec_mapping' filepath='kernel/irq/irqdomain.c' line='765' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_create_fwspec_mapping'>
-        <parameter type-id='2869bb38' name='fwspec' filepath='kernel/irq/irqdomain.c' line='765' column='1'/>
+      <function-decl name='irq_create_fwspec_mapping' mangled-name='irq_create_fwspec_mapping' filepath='kernel/irq/irqdomain.c' line='815' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_create_fwspec_mapping'>
+        <parameter type-id='2869bb38' name='fwspec' filepath='kernel/irq/irqdomain.c' line='815' column='1'/>
         <return type-id='f0981eeb'/>
       </function-decl>
-      <function-decl name='irq_create_mapping_affinity' mangled-name='irq_create_mapping_affinity' filepath='kernel/irq/irqdomain.c' line='652' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_create_mapping_affinity'>
-        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='652' column='1'/>
-        <parameter type-id='88370ce9' name='hwirq' filepath='kernel/irq/irqdomain.c' line='653' column='1'/>
-        <parameter type-id='07779cd9' name='affinity' filepath='kernel/irq/irqdomain.c' line='654' column='1'/>
+      <function-decl name='irq_create_mapping_affinity' mangled-name='irq_create_mapping_affinity' filepath='kernel/irq/irqdomain.c' line='718' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='irq_create_mapping_affinity'>
+        <parameter type-id='7544e824' name='domain' filepath='kernel/irq/irqdomain.c' line='718' column='1'/>
+        <parameter type-id='88370ce9' name='hwirq' filepath='kernel/irq/irqdomain.c' line='719' column='1'/>
+        <parameter type-id='07779cd9' name='affinity' filepath='kernel/irq/irqdomain.c' line='720' column='1'/>
         <return type-id='f0981eeb'/>
+      </function-decl>
+      <function-decl name='__irq_domain_add' mangled-name='__irq_domain_add' filepath='kernel/irq/irqdomain.c' line='243' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__irq_domain_add'>
+        <parameter type-id='4a935625' name='fwnode' filepath='kernel/irq/irqdomain.c' line='243' column='1'/>
+        <parameter type-id='95e97e5e' name='size' filepath='kernel/irq/irqdomain.c' line='243' column='1'/>
+        <parameter type-id='88370ce9' name='hwirq_max' filepath='kernel/irq/irqdomain.c' line='244' column='1'/>
+        <parameter type-id='95e97e5e' name='direct_max' filepath='kernel/irq/irqdomain.c' line='244' column='1'/>
+        <parameter type-id='2c202856' name='ops' filepath='kernel/irq/irqdomain.c' line='245' column='1'/>
+        <parameter type-id='eaa32e2f' name='host_data' filepath='kernel/irq/irqdomain.c' line='246' column='1'/>
+        <return type-id='7544e824'/>
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='kernel/irq/manage.c' language='LANG_C89'>
@@ -179877,17 +179889,6 @@
           <var-decl name='accuracy' type-id='19c2251e' visibility='default' filepath='include/sound/pcm.h' line='322' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='snd_pcm_sync_id' size-in-bits='128' visibility='default' filepath='include/uapi/sound/asound.h' line='324' column='1' id='85b4e5de'>
-        <data-member access='public'>
-          <var-decl name='id' type-id='92a46553' visibility='default' filepath='include/uapi/sound/asound.h' line='325' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='id16' type-id='ff13edc1' visibility='default' filepath='include/uapi/sound/asound.h' line='326' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='id32' type-id='49580a63' visibility='default' filepath='include/uapi/sound/asound.h' line='327' column='1'/>
-        </data-member>
-      </union-decl>
       <class-decl name='snd_pcm_runtime' size-in-bits='6400' is-struct='yes' visibility='default' filepath='include/sound/pcm.h' line='342' column='1' id='bc78c060'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='trigger_master' type-id='06b2cd14' visibility='default' filepath='include/sound/pcm.h' line='344' column='1'/>
@@ -180064,6 +180065,17 @@
           <var-decl name='buffer_accessing' type-id='49178f86' visibility='default' filepath='include/sound/pcm.h' line='429' column='1'/>
         </data-member>
       </class-decl>
+      <union-decl name='snd_pcm_sync_id' size-in-bits='128' visibility='default' filepath='include/uapi/sound/asound.h' line='324' column='1' id='85b4e5de'>
+        <data-member access='public'>
+          <var-decl name='id' type-id='92a46553' visibility='default' filepath='include/uapi/sound/asound.h' line='325' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='id16' type-id='ff13edc1' visibility='default' filepath='include/uapi/sound/asound.h' line='326' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='id32' type-id='49580a63' visibility='default' filepath='include/uapi/sound/asound.h' line='327' column='1'/>
+        </data-member>
+      </union-decl>
       <typedef-decl name='snd_pcm_sframes_t' type-id='bd54fe1a' filepath='include/uapi/sound/asound.h' line='160' column='1' id='721b74e7'/>
       <typedef-decl name='snd_pcm_access_t' type-id='95e97e5e' filepath='include/uapi/sound/asound.h' line='184' column='1' id='6459083c'/>
       <typedef-decl name='snd_pcm_format_t' type-id='95e97e5e' filepath='include/uapi/sound/asound.h' line='192' column='1' id='67fa9bd5'/>
