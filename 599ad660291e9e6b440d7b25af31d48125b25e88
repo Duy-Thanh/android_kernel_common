@@ -69,6 +69,30 @@
       },
       "revId": "599ad660291e9e6b440d7b25af31d48125b25e88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb879d6_3666a5e3",
+        "filename": "drivers/trusty/trusty-irq.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-18T19:24:00Z",
+      "side": 1,
+      "message": "I don\u0027t see that in other drivers, so I skip that here at least for now.",
+      "parentUuid": "1fc8d77b_74a934cc",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 27
+      },
+      "revId": "599ad660291e9e6b440d7b25af31d48125b25e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
