@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d27d20e3_4a526ff6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-04-18T23:02:01Z",
+      "side": 1,
+      "message": "No, I think we want to drop the `proc-\u003edefault_priority` entirely. The task should go back to whatever uclamp settings it had before initiating the transaction. The driver shouldn\u0027t override these with any arbitrary values.\n\nI think we should test this approach first. I\u0027ll start working on something like aosp/2544910.",
+      "parentUuid": "1a5acb58_8db8273d",
+      "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5f46574_b5779e82",
         "filename": "drivers/android/binder.c",
         "patchSetId": 5
