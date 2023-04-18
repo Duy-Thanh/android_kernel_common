@@ -34,6 +34,41 @@
       "parentUuid": "39b613ff_9896747b",
       "revId": "8a0f1538967a362e3425687246851c94fff2022e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69528df1_1c3b910d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-18T03:02:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a47456f5_53f6bff6",
+      "revId": "8a0f1538967a362e3425687246851c94fff2022e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9decf24_95b3cd44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-04-18T03:02:20Z",
+      "side": 1,
+      "message": "Thanks, I have +2\u0027d that version. Will abandon this change.",
+      "revId": "8a0f1538967a362e3425687246851c94fff2022e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
