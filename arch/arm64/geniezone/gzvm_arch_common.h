@@ -50,6 +50,8 @@ enum {
 #define MT_HVC_GZVM_ENABLE_CAP		GZVM_HCALL_ID(GZVM_FUNC_ENABLE_CAP)
 #define MT_HVC_GZVM_MEMREGION_PURPOSE	GZVM_HCALL_ID(GZVM_FUNC_MEMREGION_PURPOSE)
 #define MT_HVC_GZVM_SET_DTB_CONFIG	GZVM_HCALL_ID(GZVM_FUNC_SET_DTB_CONFIG)
+#define GIC_V3_NR_LRS			16
+
 /**
  * gzvm_hypercall_wrapper()
  *
@@ -74,6 +76,11 @@ static inline gzvm_vcpu_id_t get_vcpuid_from_tuple(unsigned int tuple)
 {
 	return (gzvm_vcpu_id_t)(tuple & 0xffff);
 }
+
+struct gzvm_vcpu_hwstate {
+	__u32 nr_lrs;
+	__u64 lr[GIC_V3_NR_LRS];
+};
 
 static inline unsigned int
 assemble_vm_vcpu_tuple(gzvm_id_t vmid, gzvm_vcpu_id_t vcpuid)
