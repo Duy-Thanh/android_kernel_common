@@ -117,7 +117,6 @@ static void tick_do_update_jiffies64(ktime_t now)
 
 	/* Advance jiffies to complete the jiffies_seq protected job */
 	jiffies_64 += ticks;
-
 	/*
 	 * Keep the tick_next_period variable up to date.
 	 */
@@ -782,7 +781,7 @@ static void tick_nohz_restart(struct tick_sched *ts, ktime_t now)
 	hrtimer_set_expires(&ts->sched_timer, ts->last_tick);
 
 	/* Forward the time to expire in the future */
-	hrtimer_forward(&ts->sched_timer, now, TICK_NSEC);
+	hrtimer_forward(&ts->sched_timer, now, DYN_TICK_NSEC);
 
 	if (ts->nohz_mode == NOHZ_MODE_HIGHRES) {
 		hrtimer_start_expires(&ts->sched_timer,
@@ -1403,7 +1402,7 @@ static void tick_nohz_handler(struct clock_event_device *dev)
 		return;
 	}
 
-	hrtimer_forward(&ts->sched_timer, now, TICK_NSEC);
+	hrtimer_forward(&ts->sched_timer, now, DYN_TICK_NSEC);
 	tick_program_event(hrtimer_get_expires(&ts->sched_timer), 1);
 }
 
@@ -1513,7 +1512,7 @@ static enum hrtimer_restart tick_sched_timer(struct hrtimer *timer)
 	if (unlikely(ts->tick_stopped))
 		return HRTIMER_NORESTART;
 
-	hrtimer_forward(timer, now, TICK_NSEC);
+	hrtimer_forward(timer, now, DYN_TICK_NSEC);
 
 	return HRTIMER_RESTART;
 }
