@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1e08e11_f4b6ca04",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-18T17:40:36Z",
+      "side": 1,
+      "message": "No, this is talking about the `as a module` part.",
+      "parentUuid": "744c6507_6305a25c",
+      "range": {
+        "startLine": 32,
+        "startChar": 3,
+        "endLine": 32,
+        "endChar": 38
+      },
+      "revId": "599ad660291e9e6b440d7b25af31d48125b25e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fc8d77b_74a934cc",
