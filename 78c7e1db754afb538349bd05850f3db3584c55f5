@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87b1d186_9087f07a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-04-18T19:15:09Z",
+      "side": 1,
+      "message": "The whole patchset is basically a clean cherry-pick of the feature. What is the connection with the bug though? It comes from a gmail account and there is a pending performance request from sunkesulaa@?",
+      "revId": "78c7e1db754afb538349bd05850f3db3584c55f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
