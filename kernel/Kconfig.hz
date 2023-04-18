@@ -55,5 +55,14 @@ config HZ
 	default 300 if HZ_300
 	default 1000 if HZ_1000
 
+config DYN_HZ
+	bool "Support dynamic HZ via boot argument"
+	default n
+	help
+	 Allow for the tick rate to be set at boot time via the dynhz=
+	 boot argument. This allows the tick rate to be lower then the
+	 build time configured HZ value.
+	 If you are unsure, say no.
+
 config SCHED_HRTICK
 	def_bool HIGH_RES_TIMERS

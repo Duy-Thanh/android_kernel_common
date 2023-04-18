@@ -312,7 +312,7 @@ static enum hrtimer_restart tick_nohz_handler(struct hrtimer *timer)
 	if (unlikely(tick_sched_flag_test(ts, TS_FLAG_STOPPED)))
 		return HRTIMER_NORESTART;
 
-	hrtimer_forward(timer, now, TICK_NSEC);
+	hrtimer_forward(timer, now, DYN_TICK_NSEC);
 
 	return HRTIMER_RESTART;
 }
@@ -853,7 +853,7 @@ static void tick_nohz_restart(struct tick_sched *ts, ktime_t now)
 	hrtimer_set_expires(&ts->sched_timer, ts->last_tick);
 
 	/* Forward the time to expire in the future */
-	hrtimer_forward(&ts->sched_timer, now, TICK_NSEC);
+	hrtimer_forward(&ts->sched_timer, now, DYN_TICK_NSEC);
 
 	if (tick_sched_flag_test(ts, TS_FLAG_HIGHRES)) {
 		hrtimer_start_expires(&ts->sched_timer,

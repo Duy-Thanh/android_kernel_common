@@ -14,6 +14,13 @@
 #include <linux/rcupdate.h>
 #include <linux/static_key.h>
 
+#ifdef CONFIG_DYN_HZ
+extern long long dyn_tick_nsec;
+#define DYN_TICK_NSEC (dyn_tick_nsec)
+#else
+#define DYN_TICK_NSEC TICK_NSEC
+#endif
+
 #ifdef CONFIG_GENERIC_CLOCKEVENTS
 extern void __init tick_init(void);
 /* Should be core only, but ARM BL switcher requires it */
@@ -155,11 +162,11 @@ static inline bool tick_nohz_idle_got_tick(void) { return false; }
 static inline ktime_t tick_nohz_get_next_hrtimer(void)
 {
 	/* Next wake up is the tick period, assume it starts now */
-	return ktime_add(ktime_get(), TICK_NSEC);
+	return ktime_add(ktime_get(), DYN_TICK_NSEC);
 }
 static inline ktime_t tick_nohz_get_sleep_length(ktime_t *delta_next)
 {
-	*delta_next = TICK_NSEC;
+	*delta_next = DYN_TICK_NSEC;
 	return *delta_next;
 }
 static inline u64 get_cpu_idle_time_us(int cpu, u64 *unused) { return -1; }
