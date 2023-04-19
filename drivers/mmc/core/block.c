@@ -49,6 +49,8 @@
 
 #include <linux/uaccess.h>
 
+#include <trace/hooks/mmc.h>
+
 #include "queue.h"
 #include "block.h"
 #include "core.h"
@@ -1011,8 +1013,10 @@ static int mmc_blk_reset(struct mmc_blk_data *md, struct mmc_host *host,
 	 * in that case.
 	 */
 	main_md->part_curr = err ? MMC_BLK_PART_INVALID : main_md->part_type;
-	if (err)
+	if (err) {
+		trace_android_vh_mmc_blk_reset(host, err);
 		return err;
+	}
 	/* Ensure we switch back to the correct partition */
 	if (mmc_blk_part_switch(host->card, md->part_type))
 		/*
@@ -1867,6 +1871,7 @@ static void mmc_blk_mq_rw_recovery(struct mmc_queue *mq, struct request *req)
 	    err && mmc_blk_reset(md, card->host, type)) {
 		pr_err("%s: recovery failed!\n", req->q->disk->disk_name);
 		mqrq->retries = MMC_NO_RETRIES;
+		trace_android_vh_mmc_blk_mq_rw_recovery(card);
 		return;
 	}
 
