@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6dd952a_3a6fca12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1759142
+      },
+      "writtenOn": "2023-04-19T17:19:24Z",
+      "side": 1,
+      "message": "base branch was fixed by aosp/2496755",
+      "parentUuid": "aaa444cc_1971f67d",
+      "revId": "30b24dba15315db744dedf5ac097bc2eadb2fe32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
