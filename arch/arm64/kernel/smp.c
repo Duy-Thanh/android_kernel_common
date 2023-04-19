@@ -50,11 +50,15 @@
 #include <asm/tlbflush.h>
 #include <asm/ptrace.h>
 #include <asm/virt.h>
+//#include <trace/events/power.h>  // by jay
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/ipi.h>
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/debug.h>
+
+#include <trace/hooks/power.h>  // by jay
+#include "../../../kernel/sched/sched.h"  // by jay
 
 DEFINE_PER_CPU_READ_MOSTLY(int, cpu_number);
 EXPORT_PER_CPU_SYMBOL(cpu_number);
@@ -70,6 +74,31 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(ipi_exit);
 struct secondary_data secondary_data;
 /* Number of CPUs which aren't online, but looping in kernel text. */
 static int cpus_stuck_in_kernel;
+
+// by jay
+static ktime_t cpu0_start_t;
+static ktime_t cpu1_start_t;
+static ktime_t cpu2_start_t;
+static ktime_t cpu3_start_t;
+static ktime_t cpu4_start_t;
+static ktime_t cpu5_start_t;
+static ktime_t cpu6_start_t;
+static ktime_t cpu7_start_t;
+static ktime_t cl0_max_latency;
+static ktime_t cl1_max_latency;
+static ktime_t cl2_max_latency;
+
+// by jay
+int cpu_is_idle(int cpu)
+{
+	struct rq *rq = cpu_rq(cpu);
+	if (rq) {
+		if (rq->nr_running == 0)
+			return 1;
+	}
+	return 0;
+}
+
 
 enum ipi_msg_type {
 	IPI_RESCHEDULE,
@@ -907,6 +936,75 @@ static void do_handle_IPI(int ipinr)
 
 	switch (ipinr) {
 	case IPI_RESCHEDULE:
+		// by jay
+		if (cpu == 0 && cpu0_start_t > 0) {
+			ktime_t t;
+			t = ktime_sub(ktime_get(), cpu0_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl0_max_latency)) {
+				cl0_max_latency = t;
+				pr_info("[TOTORO] cl0_max_latency (us) = %d\n", ktime_to_us(cl0_max_latency));
+			}
+			cpu0_start_t = 0;
+		} else if (cpu == 1 && cpu1_start_t > 0) {
+			ktime_t t;
+			t = ktime_sub(ktime_get(), cpu1_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl0_max_latency)) {
+				cl0_max_latency = t;
+				pr_info("[TOTORO] cl0_max_latency (us) = %d\n", ktime_to_us(cl0_max_latency));
+			}
+			cpu1_start_t = 0;
+		} else if (cpu == 2 && cpu2_start_t > 0) {
+			ktime_t t;
+			t = ktime_sub(ktime_get(), cpu2_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl0_max_latency)) {
+				cl0_max_latency = t;
+				pr_info("[TOTORO] cl0_max_latency (us) = %d\n", ktime_to_us(cl0_max_latency));
+			}
+			cpu2_start_t = 0;
+		} else if (cpu == 3 && cpu3_start_t > 0) {
+			ktime_t t;
+			t = ktime_sub(ktime_get(), cpu3_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl0_max_latency)) {
+				cl0_max_latency = t;
+				pr_info("[TOTORO] cl0_max_latency (us) = %d\n", ktime_to_us(cl0_max_latency));
+			}
+			cpu3_start_t = 0;
+		} else if (cpu == 4 && cpu4_start_t > 0) {
+			ktime_t t;
+			t = ktime_sub(ktime_get(), cpu4_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl1_max_latency)) {
+				cl1_max_latency = t;
+				pr_info("[TOTORO] cl1_max_latency (us) = %d\n", ktime_to_us(cl1_max_latency));
+			}
+			cpu4_start_t = 0;
+		} else if (cpu == 5 && cpu5_start_t > 0) {
+			ktime_t t;
+			t = ktime_sub(ktime_get(), cpu5_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl1_max_latency)) {
+				cl1_max_latency = t;
+				pr_info("[TOTORO] cl1_max_latency (us) = %d\n", ktime_to_us(cl1_max_latency));
+			}
+			cpu5_start_t = 0;
+		} else if (cpu == 6 && cpu6_start_t > 0) {
+			ktime_t t;
+			trace_android_vh_try_to_freeze_todo(0, 0, false);
+			t = ktime_sub(ktime_get(), cpu6_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl2_max_latency)) {
+				cl2_max_latency = t;
+				pr_info("[TOTORO] cl2_max_latency (us) = %d\n", ktime_to_us(cl2_max_latency));
+			}
+			cpu6_start_t = 0;
+		} else if (cpu == 7 && cpu7_start_t > 0) {
+			ktime_t t;
+			trace_android_vh_try_to_freeze_todo_unfrozen(NULL);
+			t = ktime_sub(ktime_get(), cpu7_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl2_max_latency)) {
+				cl2_max_latency = t;
+				pr_info("[TOTORO] cl2_max_latency (us) = %d\n", ktime_to_us(cl2_max_latency));
+			}
+			cpu7_start_t = 0;
+		}
+		//printk("[TOTORO] ipi cpu=%d\n", cpu);
 		scheduler_ipi();
 		break;
 
@@ -1022,6 +1120,47 @@ void __init set_smp_ipi_range(int ipi_base, int n)
 
 void smp_send_reschedule(int cpu)
 {
+	// by jay
+	if (cpu == 0) {
+		if (cpu_is_idle(0) == 1) {
+			cpu0_start_t = ktime_get();
+		}
+	} else if (cpu == 1) {
+		if (cpu_is_idle(1) == 1) {
+			cpu1_start_t = ktime_get();
+		}
+	} else if (cpu == 2) {
+		if (cpu_is_idle(2) == 1) {
+			cpu2_start_t = ktime_get();
+		}
+	} else if (cpu == 3) {
+		if (cpu_is_idle(3) == 1) {
+			cpu3_start_t = ktime_get();
+		}
+	} else if (cpu == 4) {
+		//if (cpu_is_idle(4) == 1 && cpu_is_idle(5) == 1) {  // assume cluster power down
+		if (cpu_is_idle(4) == 1 && cpu_is_idle(5) == 0) {  // CL on
+			cpu4_start_t = ktime_get();
+		}
+	} else if (cpu == 5) {
+		//if (cpu_is_idle(4) == 1 && cpu_is_idle(5) == 1) {  // assume cluster power down
+		if (cpu_is_idle(4) == 0 && cpu_is_idle(5) == 1) {  // CL on
+			cpu5_start_t = ktime_get();
+		}
+	} else if (cpu == 6) {
+		//if (cpu_is_idle(6) == 1 && cpu_is_idle(7) == 1) {  // assume cluster power down
+		if (cpu_is_idle(6) == 1 && cpu_is_idle(7) == 0) {  // CL on
+			cpu6_start_t = ktime_get();
+			trace_android_vh_try_to_freeze_todo(1, 0, false);
+		}
+	} else if (cpu == 7) {
+		//if (cpu_is_idle(6) == 1 && cpu_is_idle(7) == 1) {  // assume cluster power down
+		if (cpu_is_idle(6) == 0 && cpu_is_idle(7) == 1) {  // CL on
+			cpu7_start_t = ktime_get();
+			trace_android_vh_try_to_freeze_todo_unfrozen(current);
+		}
+	}
+	//printk("[TOTORO]  trigger = %d  cpu=%d \n", smp_processor_id(), cpu);
 	smp_cross_call(cpumask_of(cpu), IPI_RESCHEDULE);
 }
 
