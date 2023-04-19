@@ -22,6 +22,30 @@
       },
       "revId": "c81be18cc95468589b0edfa38ad73337fc5940d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb37651b_4efd2e37",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8202,
+      "author": {
+        "id": 2003345
+      },
+      "writtenOn": "2023-04-19T12:28:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfb1372d_eba966b2",
+      "range": {
+        "startLine": 8202,
+        "startChar": 1,
+        "endLine": 8202,
+        "endChar": 4
+      },
+      "revId": "c81be18cc95468589b0edfa38ad73337fc5940d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
