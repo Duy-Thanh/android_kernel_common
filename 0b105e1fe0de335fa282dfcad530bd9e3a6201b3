@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8951cd62_74526195",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-04-19T22:29:09Z",
+      "side": 1,
+      "message": "Posting before it makes into upstream because it seems to cause troubles in android14 as well: b/278783533",
+      "revId": "0b105e1fe0de335fa282dfcad530bd9e3a6201b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
