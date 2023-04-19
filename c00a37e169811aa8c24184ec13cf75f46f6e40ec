@@ -33,6 +33,24 @@
       "message": "I do not understand why this is needed, the xhci pci driver is built in, so it shouldn\u0027t be exported at all anymore.",
       "revId": "c00a37e169811aa8c24184ec13cf75f46f6e40ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc0b6d5_c61d9435",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1427064
+      },
+      "writtenOn": "2023-04-19T02:36:32Z",
+      "side": 1,
+      "message": "We want to use the override update_hub_device in our module, so we need to export xhci_update_hub_device.",
+      "parentUuid": "f1b69493_eab56cf5",
+      "revId": "c00a37e169811aa8c24184ec13cf75f46f6e40ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
