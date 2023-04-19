@@ -316069,6 +316069,12 @@ function {
   parameter_id: 0x054f691a
 }
 function {
+  id: 0x9d411575
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x15f20052
+}
+function {
   id: 0x9d419277
   return_type_id: 0x6720d32f
   parameter_id: 0x04c27a37
@@ -337242,6 +337248,15 @@ elf_symbol {
   full_name: "devm_gpiod_put_array"
 }
 elf_symbol {
+  id: 0x753fb351
+  name: "devm_hwrng_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6da31bd1
+  type_id: 0x9d411575
+  full_name: "devm_hwrng_register"
+}
+elf_symbol {
   id: 0x40c3a63b
   name: "devm_hwspin_lock_register"
   is_defined: true
@@ -349164,6 +349179,15 @@ elf_symbol {
   crc: 0x5dfe2251
   type_id: 0x5d304295
   full_name: "irq_find_matching_fwspec"
+}
+elf_symbol {
+  id: 0xc6121864
+  name: "irq_force_affinity"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1000ff31
+  type_id: 0x8c2581a0
+  full_name: "irq_force_affinity"
 }
 elf_symbol {
   id: 0xa9c80d6c
@@ -378248,6 +378272,10 @@ symbols {
     value: 0x0ea63f59
   }
   symbol {
+    key: "devm_hwrng_register"
+    value: 0x753fb351
+  }
+  symbol {
     key: "devm_hwspin_lock_register"
     value: 0x40c3a63b
   }
@@ -383538,6 +383566,10 @@ symbols {
   symbol {
     key: "irq_find_matching_fwspec"
     value: 0x362487ea
+  }
+  symbol {
+    key: "irq_force_affinity"
+    value: 0xc6121864
   }
   symbol {
     key: "irq_get_irq_data"
