@@ -22154,7 +22154,7 @@
         <parameter type-id='855e3679'/>
         <return type-id='95e97e5e'/>
       </function-type>
-      <typedef-decl name='va_list' type-id='7f896fb4' filepath='/usr/local/google/home/davidchiang/common-android13-5.10-2023-03/prebuilts/clang/host/linux-x86/clang-r450784e/lib64/clang/14.0.7/include/stdarg.h' line='14' column='1' id='2aee9912'/>
+      <typedef-decl name='va_list' type-id='7f896fb4' filepath='prebuilts/clang/host/linux-x86/clang-r450784e/lib64/clang/14.0.7/include/stdarg.h' line='14' column='1' id='2aee9912'/>
       <class-decl name='transport_container' size-in-bits='832' is-struct='yes' visibility='default' filepath='include/linux/transport_class.h' line='56' column='1' id='2af4292a'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ac' type-id='52bea74f' visibility='default' filepath='include/linux/transport_class.h' line='57' column='1'/>
