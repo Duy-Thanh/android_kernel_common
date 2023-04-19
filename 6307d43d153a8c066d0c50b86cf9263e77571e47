@@ -16,6 +16,24 @@
       "message": "This needs an ABI update. The XML can be taken from\n\nhttps://android-build.googleplex.com/builds/pending/P54729470/kernel_abi_aarch64/latest/abi-generated.xml",
       "revId": "6307d43d153a8c066d0c50b86cf9263e77571e47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6909c448_a4e2962f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-04-19T17:46:18Z",
+      "side": 1,
+      "message": "What is this?  Does it include the changes from this CL?\n\nIf so, how does one obtain it?",
+      "parentUuid": "ec70016c_8f2d1a81",
+      "revId": "6307d43d153a8c066d0c50b86cf9263e77571e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
