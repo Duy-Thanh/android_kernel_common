@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4dc1437_7f74d2a7",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-04-19T17:01:57Z",
+      "side": 1,
+      "message": "Please remove this symbol from symbol list, because it is \"static inline\" starting from common-android14-6.1 and it does not need to be exported.",
+      "revId": "24f5035c054b6e44096f855da93c0e0368b37b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
