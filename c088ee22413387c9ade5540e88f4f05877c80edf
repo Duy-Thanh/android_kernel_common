@@ -35,6 +35,24 @@
       "parentUuid": "cdef9ed8_661d87bd",
       "revId": "c088ee22413387c9ade5540e88f4f05877c80edf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8827b2b3_90d39378",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1840060
+      },
+      "writtenOn": "2023-04-19T09:54:44Z",
+      "side": 1,
+      "message": "Could you help to review the original change aosp/2539890 and merge it? Thanks.",
+      "parentUuid": "59ac5812_21ac9e50",
+      "revId": "c088ee22413387c9ade5540e88f4f05877c80edf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
