@@ -51,6 +51,24 @@
       "parentUuid": "f1b69493_eab56cf5",
       "revId": "c00a37e169811aa8c24184ec13cf75f46f6e40ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aec4f7f3_f068a112",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-19T07:36:56Z",
+      "side": 1,
+      "message": "Should only be needed by the xhci pci driver, and that is now built-in, so this export isn\u0027t relevant anymore.\n\nIf you think it is, what xhci driver are you using that requires this?  Pointers to the source please.",
+      "parentUuid": "acc0b6d5_c61d9435",
+      "revId": "c00a37e169811aa8c24184ec13cf75f46f6e40ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
