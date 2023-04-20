@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c379ce44_44b6004f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-04-20T17:26:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66af4303_41e3dfd0",
+      "revId": "f4e876c778163f7ffa157578fa0f9b08dd774503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4f4b1f7_f7ce1f02",
@@ -157,6 +175,24 @@
       "side": 1,
       "message": "TJ\u0027s comment is still not addressed.",
       "parentUuid": "47d3191b_59ebc8c3",
+      "revId": "f4e876c778163f7ffa157578fa0f9b08dd774503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "110747a8_eaf7545c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-04-20T17:26:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5683c94f_854b498a",
       "revId": "f4e876c778163f7ffa157578fa0f9b08dd774503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
