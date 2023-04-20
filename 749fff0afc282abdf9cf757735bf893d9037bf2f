@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59655a80_67e9cfbc",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1556,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-04-20T17:27:50Z",
+      "side": 1,
+      "message": "This will remove the mb information for trace_trusty_ipc_read_end in the normal case. I think it would be better to modify trace_trusty_ipc_read_end to accept buf_id and shm_cnt arguments instead of rxbuf. Otherwise we need to move the call up before the free and add some state to skip calling it again if already called at the current call site.",
+      "revId": "749fff0afc282abdf9cf757735bf893d9037bf2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
