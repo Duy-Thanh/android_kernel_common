@@ -2328,6 +2328,11 @@ int kvm_arch_init(void *opaque)
 		return -ENODEV;
 	}
 
+	if (cpus_have_final_cap(ARM64_WORKAROUND_NXP_ERR050104)) {
+		kvm_info("KVM is not supported on this system\n");
+		return -ENODEV;
+	}
+
 	err = kvm_sys_reg_table_init();
 	if (err) {
 		kvm_info("Error initializing system register tables");

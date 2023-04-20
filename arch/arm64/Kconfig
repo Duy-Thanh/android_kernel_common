@@ -1156,6 +1156,18 @@ config ANDROID_ARM64_WORKAROUND_DMA_BEYOND_POC
 
 	  If unsure, say Y.
 
+config NXP_IMX8QM_ERRATUM_ERR050104
+	bool "NXP iMX8QM ERR050104: broken cache/tlb invalidation"
+	default y
+	help
+	  On iMX8QM, addresses above bit 35 are not broadcast correctly for
+	  TLBI or IC operations, making TLBI and IC unreliable.
+
+	  Work around this erratum by using TLBI *ALL*IS and IC IALLUIS
+	  operations. EL0 use of IC IVAU is trapped and upgraded to IC IALLUIS.
+
+	  If unsure, say Y.
+
 endmenu # "ARM errata workarounds via the alternatives framework"
 
 choice

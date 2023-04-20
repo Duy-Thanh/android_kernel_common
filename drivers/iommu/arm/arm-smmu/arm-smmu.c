@@ -1683,6 +1683,10 @@ static int arm_smmu_device_cfg_probe(struct arm_smmu_device *smmu)
 	/* ID0 */
 	id = arm_smmu_gr0_read(smmu, ARM_SMMU_GR0_ID0);
 
+	/* Do not use Broadcast TLB Maintenance on affected platforms */
+	if (cpus_have_final_cap(ARM64_WORKAROUND_NXP_ERR050104))
+		id &= ~ARM_SMMU_ID0_BTM;
+
 	/* Restrict available stages based on module parameter */
 	if (force_stage == 1)
 		id &= ~(ARM_SMMU_ID0_S2TS | ARM_SMMU_ID0_NTS);

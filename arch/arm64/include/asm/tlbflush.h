@@ -37,7 +37,11 @@
 			    : : )
 
 #define __TLBI_1(op, arg) asm (ARM64_ASM_PREAMBLE			       \
-			       "tlbi " #op ", %0\n"			       \
+		   ALTERNATIVE("tlbi " #op ", %0\n",			       \
+			       "tlbi vmalle1is\n",			       \
+			       ARM64_WORKAROUND_NXP_ERR050104)		       \
+			    : : "r" (arg));				       \
+			  asm (ARM64_ASM_PREAMBLE			       \
 		   ALTERNATIVE("nop\n			nop",		       \
 			       "dsb ish\n		tlbi " #op ", %0",     \
 			       ARM64_WORKAROUND_REPEAT_TLBI,		       \

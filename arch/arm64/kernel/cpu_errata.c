@@ -8,6 +8,7 @@
 #include <linux/arm-smccc.h>
 #include <linux/types.h>
 #include <linux/cpu.h>
+#include <linux/of.h>
 #include <asm/cpu.h>
 #include <asm/cputype.h>
 #include <asm/cpufeature.h>
@@ -53,6 +54,14 @@ is_kryo_midr(const struct arm64_cpu_capabilities *entry, int scope)
 		 MIDR_ARCHITECTURE_MASK;
 
 	return model == entry->midr_range.model;
+}
+
+static bool __maybe_unused
+is_imx8qm_soc(const struct arm64_cpu_capabilities *entry, int scope)
+{
+	WARN_ON(preemptible());
+
+	return of_machine_is_compatible("fsl,imx8qm");
 }
 
 static bool
@@ -721,6 +730,15 @@ const struct arm64_cpu_capabilities arm64_errata[] = {
 		ERRATA_MIDR_RANGE(MIDR_CORTEX_A510, 0, 0, 1, 1),
 		MIDR_FIXED(MIDR_CPU_VAR_REV(1,1), BIT(25)),
 		.cpu_enable = cpu_clear_bf16_from_user_emulation,
+	},
+#endif
+#ifdef CONFIG_NXP_IMX8QM_ERRATUM_ERR050104
+	{
+		.desc = "NXP erratum ERR050104",
+		.capability = ARM64_WORKAROUND_NXP_ERR050104,
+		.type = ARM64_CPUCAP_STRICT_BOOT_CPU_FEATURE,
+		.matches = is_imx8qm_soc,
+		.cpu_enable = cpu_enable_cache_maint_trap,
 	},
 #endif
 	{
