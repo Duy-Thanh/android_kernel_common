@@ -34,6 +34,24 @@
       "parentUuid": "b4dc1437_7f74d2a7",
       "revId": "24f5035c054b6e44096f855da93c0e0368b37b03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63b2acfa_7b4767ff",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2023-04-20T01:16:05Z",
+      "side": 1,
+      "message": "We cherry-picked this commit from android13-5.15, so it happened.\nhttps://android-review.googlesource.com/c/kernel/common/+/1878288\n\nUntil the commit is merged into android14-6.1, I\u0027ll remove it.\nThanks for uploading patchset#2",
+      "parentUuid": "ee75fe12_e21bac84",
+      "revId": "24f5035c054b6e44096f855da93c0e0368b37b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
