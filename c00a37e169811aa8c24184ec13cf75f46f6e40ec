@@ -87,6 +87,24 @@
       "parentUuid": "aec4f7f3_f068a112",
       "revId": "c00a37e169811aa8c24184ec13cf75f46f6e40ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ece483f_8499354e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-20T17:13:03Z",
+      "side": 1,
+      "message": "That patch is not ok, please do this properly.",
+      "parentUuid": "4994ba8b_8cf86693",
+      "revId": "c00a37e169811aa8c24184ec13cf75f46f6e40ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
