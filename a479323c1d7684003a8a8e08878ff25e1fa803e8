@@ -33,6 +33,24 @@
       "message": "Hi Bosser Yeh , please help to add \"Bug: 279010544\" in the commit message.",
       "revId": "a479323c1d7684003a8a8e08878ff25e1fa803e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca7c404_5a462a29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1886360
+      },
+      "writtenOn": "2023-04-20T15:13:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37365ed2_aee4dfbf",
+      "revId": "a479323c1d7684003a8a8e08878ff25e1fa803e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
