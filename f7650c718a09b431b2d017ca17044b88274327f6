@@ -16,6 +16,24 @@
       "message": "Hi Jisshin, Please help add \"Bug : 279016494\" in the commit message",
       "revId": "f7650c718a09b431b2d017ca17044b88274327f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebdc738a_b34483ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2023-04-20T17:19:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df2fa018_a99371a4",
+      "revId": "f7650c718a09b431b2d017ca17044b88274327f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
