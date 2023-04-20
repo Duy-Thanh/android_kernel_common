@@ -22776,6 +22776,11 @@ pointer_reference {
   pointee_type_id: 0xf225c65d
 }
 pointer_reference {
+  id: 0x361a6cc2
+  kind: POINTER
+  pointee_type_id: 0xf2295596
+}
+pointer_reference {
   id: 0x361b0907
   kind: POINTER
   pointee_type_id: 0xf22cc280
@@ -294339,6 +294344,14 @@ function {
   parameter_id: 0x1bb6a471
 }
 function {
+  id: 0x9d1e6fc4
+  return_type_id: 0x6720d32f
+  parameter_id: 0x026c3dea
+  parameter_id: 0x026c3dea
+  parameter_id: 0x361a6cc2
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x9d1fcda3
   return_type_id: 0x6720d32f
   parameter_id: 0x01c5a749
@@ -300297,6 +300310,11 @@ function {
   id: 0xf226477c
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x320871e3
+}
+function {
+  id: 0xf2295596
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x32343a4a
 }
 function {
   id: 0xf22e04eb
@@ -341225,6 +341243,15 @@ elf_symbol {
   full_name: "uuid_null"
 }
 elf_symbol {
+  id: 0xa4a25993
+  name: "v4l2_ctrl_add_handler"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6064ddf0
+  type_id: 0x9d1e6fc4
+  full_name: "v4l2_ctrl_add_handler"
+}
+elf_symbol {
   id: 0xd811c59d
   name: "v4l2_ctrl_handler_free"
   is_defined: true
@@ -361628,6 +361655,10 @@ symbols {
   symbol {
     key: "uuid_null"
     value: 0xe7b3f166
+  }
+  symbol {
+    key: "v4l2_ctrl_add_handler"
+    value: 0xa4a25993
   }
   symbol {
     key: "v4l2_ctrl_handler_free"
