@@ -34,6 +34,24 @@
       "parentUuid": "d786b3ea_a4ebe9c7",
       "revId": "f596a1661babf917b82f65edda2635a1cee7238f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf2e5ee_4f9eee85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-04-20T09:01:53Z",
+      "side": 1,
+      "message": "I believe this branch has no fix suggestions and a manual update needs to be done using `build_abi.sh --update`",
+      "parentUuid": "3640309f_6b60a53c",
+      "revId": "f596a1661babf917b82f65edda2635a1cee7238f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
