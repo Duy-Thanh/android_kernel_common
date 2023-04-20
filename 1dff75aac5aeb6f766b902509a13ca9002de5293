@@ -22,6 +22,30 @@
       },
       "revId": "1dff75aac5aeb6f766b902509a13ca9002de5293",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b654592a_43edc45e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-04-20T01:43:54Z",
+      "side": 1,
+      "message": "did this comment get cut off?",
+      "parentUuid": "63dbed86_b8ea50bc",
+      "range": {
+        "startLine": 671,
+        "startChar": 1,
+        "endLine": 672,
+        "endChar": 49
+      },
+      "revId": "1dff75aac5aeb6f766b902509a13ca9002de5293",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

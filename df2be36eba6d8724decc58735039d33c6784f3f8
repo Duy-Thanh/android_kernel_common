@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b267353_e95a44d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-04-20T01:43:54Z",
+      "side": 1,
+      "message": "Yes the uclamp values stored in binder_priority are assigned to a task later on via `sched_setattr_nocheck()` as part of the priority inheritance. See aosp/2222625.\n\nThe task\u0027s previous values are supposed to be restored after the transaction is over. However, the `default_priority` will override everything at the end. I\u0027m trying to remove this behavior but it\u0027s a little complicated.",
+      "parentUuid": "2696abca_5e5d4c82",
+      "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5f46574_b5779e82",
         "filename": "drivers/android/binder.c",
         "patchSetId": 5
