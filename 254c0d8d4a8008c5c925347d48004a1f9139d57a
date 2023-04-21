@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a081fd6f_1ce8d906",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-04-21T19:46:05Z",
+      "side": 1,
+      "message": "This symbol was introduced later than 5.15. So maybe we should just drop this symbol from abi_gki_aarch64 and leave it up to vendors to add it.",
+      "revId": "254c0d8d4a8008c5c925347d48004a1f9139d57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
