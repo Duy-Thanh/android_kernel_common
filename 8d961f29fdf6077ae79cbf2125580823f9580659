@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c13cc06_8e6a350b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-21T18:53:03Z",
+      "side": 1,
+      "message": "I am not sure how to handle this error. A partner is trying to use `compile.h` in their external modules, but `modules_prepare` doesn\u0027t include the file, causing them to be unable to use it.\n\nThis was fixed as a side-effect in the mentioned patch, but I don\u0027t know how to backport it.\n\nSee bug for context.",
+      "revId": "8d961f29fdf6077ae79cbf2125580823f9580659",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
