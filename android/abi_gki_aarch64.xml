@@ -21,6 +21,7 @@
       <elf-symbol name='__bitmap_and' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x39b52d19'/>
       <elf-symbol name='__bitmap_andnot' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xadfdfcef'/>
       <elf-symbol name='__bitmap_clear' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x922f45a6'/>
+      <elf-symbol name='__bitmap_complement' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7c173634'/>
       <elf-symbol name='__bitmap_equal' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf3e6402e'/>
       <elf-symbol name='__bitmap_or' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa084749a'/>
       <elf-symbol name='__bitmap_set' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x615911d7'/>
@@ -311,6 +312,7 @@
       <elf-symbol name='__traceiter_android_vh_cma_alloc_start' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x44fcd06e'/>
       <elf-symbol name='__traceiter_android_vh_cpu_idle_enter' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbdc34d2e'/>
       <elf-symbol name='__traceiter_android_vh_cpu_idle_exit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd966796c'/>
+      <elf-symbol name='__traceiter_android_vh_dmabuf_heap_flags_validation' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe05cf986'/>
       <elf-symbol name='__traceiter_android_vh_do_madvise_blk_plug' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x48ab7543'/>
       <elf-symbol name='__traceiter_android_vh_dump_throttled_rt_tasks' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1a34d1a3'/>
       <elf-symbol name='__traceiter_android_vh_dup_task_struct' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x75831bf5'/>
@@ -4774,6 +4776,7 @@
       <elf-symbol name='__tracepoint_android_vh_cma_alloc_start' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe870063b'/>
       <elf-symbol name='__tracepoint_android_vh_cpu_idle_enter' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x656d334c'/>
       <elf-symbol name='__tracepoint_android_vh_cpu_idle_exit' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x51b29892'/>
+      <elf-symbol name='__tracepoint_android_vh_dmabuf_heap_flags_validation' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9f94a498'/>
       <elf-symbol name='__tracepoint_android_vh_do_madvise_blk_plug' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3c0ed048'/>
       <elf-symbol name='__tracepoint_android_vh_dump_throttled_rt_tasks' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd29bebac'/>
       <elf-symbol name='__tracepoint_android_vh_dup_task_struct' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x14fff0cf'/>
@@ -6356,7 +6359,7 @@
           <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/sound/soc.h' line='1284' column='1'/>
         </data-member>
       </class-decl>
-      <enum-decl name='dwc3_ep0_state' filepath='drivers/usb/dwc3/core.h' line='781' column='1' id='045093ad'>
+      <enum-decl name='dwc3_ep0_state' filepath='drivers/usb/dwc3/core.h' line='782' column='1' id='045093ad'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='EP0_UNCONNECTED' value='0'/>
         <enumerator name='EP0_SETUP_PHASE' value='1'/>
@@ -6828,30 +6831,30 @@
       <array-type-def dimensions='1' type-id='8f048e17' size-in-bits='72' id='060772ed'>
         <subrange length='9' type-id='7ff19f0f' id='12e4273c'/>
       </array-type-def>
-      <class-decl name='dma_heap' size-in-bits='1600' is-struct='yes' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='38' column='1' id='060e2e70'>
+      <class-decl name='dma_heap' size-in-bits='1600' is-struct='yes' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='40' column='1' id='060e2e70'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='name' type-id='80f4b756' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='39' column='1'/>
+          <var-decl name='name' type-id='80f4b756' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='41' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='ops' type-id='cabcb658' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='40' column='1'/>
+          <var-decl name='ops' type-id='cabcb658' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='42' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='priv' type-id='eaa32e2f' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='41' column='1'/>
+          <var-decl name='priv' type-id='eaa32e2f' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='43' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='heap_devt' type-id='8504f260' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='42' column='1'/>
+          <var-decl name='heap_devt' type-id='8504f260' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='44' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='list' type-id='72f469ec' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='43' column='1'/>
+          <var-decl name='list' type-id='72f469ec' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='45' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='384'>
-          <var-decl name='heap_cdev' type-id='22f86351' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='44' column='1'/>
+          <var-decl name='heap_cdev' type-id='22f86351' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='46' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1472'>
-          <var-decl name='refcount' type-id='400fb07b' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='45' column='1'/>
+          <var-decl name='refcount' type-id='400fb07b' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='47' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1536'>
-          <var-decl name='heap_dev' type-id='fa0b179b' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='46' column='1'/>
+          <var-decl name='heap_dev' type-id='fa0b179b' visibility='default' filepath='drivers/dma-buf/dma-heap.c' line='48' column='1'/>
         </data-member>
       </class-decl>
       <array-type-def dimensions='1' type-id='8f048e17' size-in-bits='40' id='06106d49'>
@@ -8448,7 +8451,7 @@
       <pointer-type-def type-id='4e8a6f85' size-in-bits='64' id='0a0775b5'/>
       <pointer-type-def type-id='be9189df' size-in-bits='64' id='0a0aff97'/>
       <pointer-type-def type-id='fd1f8b7c' size-in-bits='64' id='0a18715a'/>
-      <enum-decl name='typec_port_type' filepath='include/linux/usb/typec.h' line='25' column='1' id='0a19b04e'>
+      <enum-decl name='typec_port_type' filepath='include/linux/usb/typec.h' line='26' column='1' id='0a19b04e'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='TYPEC_PORT_SRC' value='0'/>
         <enumerator name='TYPEC_PORT_SNK' value='1'/>
@@ -12093,7 +12096,7 @@
           <var-decl name='pmk_r0_name' type-id='bbaf3419' visibility='default' filepath='include/net/cfg80211.h' line='3319' column='1'/>
         </data-member>
       </class-decl>
-      <enum-decl name='typec_orientation' filepath='include/linux/usb/typec.h' line='70' column='1' id='131b0a9c'>
+      <enum-decl name='typec_orientation' filepath='include/linux/usb/typec.h' line='71' column='1' id='131b0a9c'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='TYPEC_ORIENTATION_NONE' value='0'/>
         <enumerator name='TYPEC_ORIENTATION_NORMAL' value='1'/>
@@ -15704,7 +15707,7 @@
       </class-decl>
       <union-decl name='pn' size-in-bits='64' visibility='default' filepath='include/net/macsec.h' line='31' column='1' id='1b1f0e7e'>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43f94' visibility='default' filepath='include/net/macsec.h' line='32' column='1'/>
+          <var-decl name='' type-id='e7f43f95' visibility='default' filepath='include/net/macsec.h' line='32' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='full64' type-id='91ce1af9' visibility='default' filepath='include/net/macsec.h' line='43' column='1'/>
@@ -17079,42 +17082,42 @@
       </function-type>
       <pointer-type-def type-id='5d1d7263' size-in-bits='64' id='1f211d93'/>
       <pointer-type-def type-id='ae89b201' size-in-bits='64' id='1f2a8949'/>
-      <class-decl name='typec_capability' size-in-bits='576' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='243' column='1' id='1f2b9a61'>
+      <class-decl name='typec_capability' size-in-bits='576' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='249' column='1' id='1f2b9a61'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='type' type-id='0a19b04e' visibility='default' filepath='include/linux/usb/typec.h' line='244' column='1'/>
+          <var-decl name='type' type-id='0a19b04e' visibility='default' filepath='include/linux/usb/typec.h' line='250' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='data' type-id='89aae82e' visibility='default' filepath='include/linux/usb/typec.h' line='245' column='1'/>
+          <var-decl name='data' type-id='89aae82e' visibility='default' filepath='include/linux/usb/typec.h' line='251' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='revision' type-id='1dc6a898' visibility='default' filepath='include/linux/usb/typec.h' line='246' column='1'/>
+          <var-decl name='revision' type-id='1dc6a898' visibility='default' filepath='include/linux/usb/typec.h' line='252' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='80'>
-          <var-decl name='pd_revision' type-id='1dc6a898' visibility='default' filepath='include/linux/usb/typec.h' line='247' column='1'/>
+          <var-decl name='pd_revision' type-id='1dc6a898' visibility='default' filepath='include/linux/usb/typec.h' line='253' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='96'>
-          <var-decl name='svdm_version' type-id='664a29a4' visibility='default' filepath='include/linux/usb/typec.h' line='248' column='1'/>
+          <var-decl name='svdm_version' type-id='664a29a4' visibility='default' filepath='include/linux/usb/typec.h' line='254' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='prefer_role' type-id='95e97e5e' visibility='default' filepath='include/linux/usb/typec.h' line='249' column='1'/>
+          <var-decl name='prefer_role' type-id='95e97e5e' visibility='default' filepath='include/linux/usb/typec.h' line='255' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='160'>
-          <var-decl name='accessory' type-id='ee8e0be0' visibility='default' filepath='include/linux/usb/typec.h' line='250' column='1'/>
+          <var-decl name='accessory' type-id='ee8e0be0' visibility='default' filepath='include/linux/usb/typec.h' line='256' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='orientation_aware' type-id='f0981eeb' visibility='default' filepath='include/linux/usb/typec.h' line='251' column='1'/>
+          <var-decl name='orientation_aware' type-id='f0981eeb' visibility='default' filepath='include/linux/usb/typec.h' line='257' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='320'>
-          <var-decl name='fwnode' type-id='4a935625' visibility='default' filepath='include/linux/usb/typec.h' line='253' column='1'/>
+          <var-decl name='fwnode' type-id='4a935625' visibility='default' filepath='include/linux/usb/typec.h' line='259' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='384'>
-          <var-decl name='driver_data' type-id='eaa32e2f' visibility='default' filepath='include/linux/usb/typec.h' line='254' column='1'/>
+          <var-decl name='driver_data' type-id='eaa32e2f' visibility='default' filepath='include/linux/usb/typec.h' line='260' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='448'>
-          <var-decl name='ops' type-id='ebbbab1e' visibility='default' filepath='include/linux/usb/typec.h' line='256' column='1'/>
+          <var-decl name='ops' type-id='ebbbab1e' visibility='default' filepath='include/linux/usb/typec.h' line='262' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='512'>
-          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/linux/usb/typec.h' line='257' column='1'/>
+          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/linux/usb/typec.h' line='263' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='neigh_hash_table' size-in-bits='384' is-struct='yes' visibility='default' filepath='include/net/neighbour.h' line='192' column='1' id='1f305e7e'>
@@ -23081,42 +23084,42 @@
         <parameter type-id='95e97e5e'/>
         <return type-id='95e97e5e'/>
       </function-type>
-      <class-decl name='dwc3_hwparams' size-in-bits='448' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='866' column='1' id='2d79d174'>
+      <class-decl name='dwc3_hwparams' size-in-bits='448' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='867' column='1' id='2d79d174'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='hwparams0' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='867' column='1'/>
+          <var-decl name='hwparams0' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='868' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='hwparams1' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='868' column='1'/>
+          <var-decl name='hwparams1' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='869' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='hwparams2' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='869' column='1'/>
+          <var-decl name='hwparams2' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='870' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='96'>
-          <var-decl name='hwparams3' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='870' column='1'/>
+          <var-decl name='hwparams3' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='871' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='hwparams4' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='871' column='1'/>
+          <var-decl name='hwparams4' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='872' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='160'>
-          <var-decl name='hwparams5' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='872' column='1'/>
+          <var-decl name='hwparams5' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='873' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='hwparams6' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='873' column='1'/>
+          <var-decl name='hwparams6' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='874' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='224'>
-          <var-decl name='hwparams7' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='874' column='1'/>
+          <var-decl name='hwparams7' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='875' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='hwparams8' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='875' column='1'/>
+          <var-decl name='hwparams8' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='876' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='288'>
-          <var-decl name='hwparams9' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='876' column='1'/>
+          <var-decl name='hwparams9' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='877' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='320'>
-          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='878' column='1'/>
+          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='879' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='384'>
-          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='879' column='1'/>
+          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='880' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='425bcb9d' size-in-bits='64' id='2d81b115'/>
@@ -25867,7 +25870,7 @@
           <var-decl name='lists' type-id='a8e1fb22' visibility='default' filepath='include/linux/mmzone.h' line='542' column='1'/>
         </data-member>
       </class-decl>
-      <enum-decl name='typec_accessory' filepath='include/linux/usb/typec.h' line='62' column='1' id='357a6a78'>
+      <enum-decl name='typec_accessory' filepath='include/linux/usb/typec.h' line='63' column='1' id='357a6a78'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='TYPEC_ACCESSORY_NONE' value='0'/>
         <enumerator name='TYPEC_ACCESSORY_AUDIO' value='1'/>
@@ -27860,18 +27863,18 @@
         <parameter type-id='87447c2d'/>
         <return type-id='b59d7dce'/>
       </function-type>
-      <class-decl name='typec_partner_desc' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='197' column='1' id='3ad5d94d'>
+      <class-decl name='typec_partner_desc' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='203' column='1' id='3ad5d94d'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='usb_pd' type-id='f0981eeb' visibility='default' filepath='include/linux/usb/typec.h' line='198' column='1'/>
+          <var-decl name='usb_pd' type-id='f0981eeb' visibility='default' filepath='include/linux/usb/typec.h' line='204' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='accessory' type-id='357a6a78' visibility='default' filepath='include/linux/usb/typec.h' line='199' column='1'/>
+          <var-decl name='accessory' type-id='357a6a78' visibility='default' filepath='include/linux/usb/typec.h' line='205' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='identity' type-id='09dbca85' visibility='default' filepath='include/linux/usb/typec.h' line='200' column='1'/>
+          <var-decl name='identity' type-id='09dbca85' visibility='default' filepath='include/linux/usb/typec.h' line='206' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='pd_revision' type-id='1dc6a898' visibility='default' filepath='include/linux/usb/typec.h' line='201' column='1'/>
+          <var-decl name='pd_revision' type-id='1dc6a898' visibility='default' filepath='include/linux/usb/typec.h' line='207' column='1'/>
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='3ae10cc4'>
@@ -31525,7 +31528,7 @@
           <var-decl name='flags' type-id='1dc6a898' visibility='default' filepath='include/../drivers/net/wireless/intel/ipw2x00/libipw.h' line='312' column='1'/>
         </data-member>
       </class-decl>
-      <enum-decl name='typec_pwr_opmode' filepath='include/linux/usb/typec.h' line='55' column='1' id='44ea1984'>
+      <enum-decl name='typec_pwr_opmode' filepath='include/linux/usb/typec.h' line='56' column='1' id='44ea1984'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='TYPEC_PWR_MODE_USB' value='0'/>
         <enumerator name='TYPEC_PWR_MODE_1_5A' value='1'/>
@@ -32764,60 +32767,60 @@
         <parameter type-id='83c1bde6'/>
         <return type-id='48b5725f'/>
       </function-type>
-      <class-decl name='dwc3_request' size-in-bits='1664' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='919' column='1' id='48288128'>
+      <class-decl name='dwc3_request' size-in-bits='1664' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='920' column='1' id='48288128'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='request' type-id='43806adf' visibility='default' filepath='drivers/usb/dwc3/core.h' line='920' column='1'/>
+          <var-decl name='request' type-id='43806adf' visibility='default' filepath='drivers/usb/dwc3/core.h' line='921' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='832'>
-          <var-decl name='list' type-id='72f469ec' visibility='default' filepath='drivers/usb/dwc3/core.h' line='921' column='1'/>
+          <var-decl name='list' type-id='72f469ec' visibility='default' filepath='drivers/usb/dwc3/core.h' line='922' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='960'>
-          <var-decl name='dep' type-id='b31af340' visibility='default' filepath='drivers/usb/dwc3/core.h' line='922' column='1'/>
+          <var-decl name='dep' type-id='b31af340' visibility='default' filepath='drivers/usb/dwc3/core.h' line='923' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1024'>
-          <var-decl name='sg' type-id='bf3ef905' visibility='default' filepath='drivers/usb/dwc3/core.h' line='923' column='1'/>
+          <var-decl name='sg' type-id='bf3ef905' visibility='default' filepath='drivers/usb/dwc3/core.h' line='924' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1088'>
-          <var-decl name='start_sg' type-id='bf3ef905' visibility='default' filepath='drivers/usb/dwc3/core.h' line='924' column='1'/>
+          <var-decl name='start_sg' type-id='bf3ef905' visibility='default' filepath='drivers/usb/dwc3/core.h' line='925' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1152'>
-          <var-decl name='num_pending_sgs' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='926' column='1'/>
+          <var-decl name='num_pending_sgs' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='927' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1184'>
-          <var-decl name='num_queued_sgs' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='927' column='1'/>
+          <var-decl name='num_queued_sgs' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='928' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1216'>
-          <var-decl name='remaining' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='928' column='1'/>
+          <var-decl name='remaining' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='929' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1248'>
-          <var-decl name='status' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='930' column='1'/>
+          <var-decl name='status' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='931' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1280'>
-          <var-decl name='epnum' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='939' column='1'/>
+          <var-decl name='epnum' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='940' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1344'>
-          <var-decl name='trb' type-id='0d6a59e1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='940' column='1'/>
+          <var-decl name='trb' type-id='0d6a59e1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='941' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1408'>
-          <var-decl name='trb_dma' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='941' column='1'/>
+          <var-decl name='trb_dma' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='942' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1472'>
-          <var-decl name='num_trbs' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='943' column='1'/>
+          <var-decl name='num_trbs' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='944' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1504'>
-          <var-decl name='needs_extra_trb' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='945' column='1'/>
+          <var-decl name='needs_extra_trb' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='946' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1505'>
-          <var-decl name='direction' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='946' column='1'/>
+          <var-decl name='direction' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='947' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1506'>
-          <var-decl name='mapped' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='947' column='1'/>
+          <var-decl name='mapped' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='948' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1536'>
-          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='949' column='1'/>
+          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='950' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1600'>
-          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='950' column='1'/>
+          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='951' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='08594205' size-in-bits='64' id='482ccc39'/>
@@ -34216,7 +34219,7 @@
           <var-decl name='hard_use_expires_seconds' type-id='d3130597' visibility='default' filepath='include/uapi/linux/xfrm.h' line='74' column='1'/>
         </data-member>
       </class-decl>
-      <array-type-def dimensions='1' type-id='e7f43fb1' size-in-bits='2048' id='4cb10997'>
+      <array-type-def dimensions='1' type-id='e7f43fb2' size-in-bits='2048' id='4cb10997'>
         <subrange length='16' type-id='7ff19f0f' id='848d0938'/>
       </array-type-def>
       <function-type size-in-bits='64' id='4cb2ce2a'>
@@ -38387,7 +38390,7 @@
         <enumerator name='REF_CLK_FREQ_52_MHZ' value='3'/>
         <enumerator name='REF_CLK_FREQ_INVAL' value='-1'/>
       </enum-decl>
-      <enum-decl name='dwc3_ep0_next' filepath='drivers/usb/dwc3/core.h' line='774' column='1' id='56e3bcb9'>
+      <enum-decl name='dwc3_ep0_next' filepath='drivers/usb/dwc3/core.h' line='775' column='1' id='56e3bcb9'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='DWC3_EP0_UNKNOWN' value='0'/>
         <enumerator name='DWC3_EP0_COMPLETE' value='1'/>
@@ -38529,18 +38532,18 @@
         </data-member>
       </class-decl>
       <pointer-type-def type-id='fa35cea9' size-in-bits='64' id='57b94931'/>
-      <class-decl name='usb_pd_identity' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='102' column='1' id='57bfbe05'>
+      <class-decl name='usb_pd_identity' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='103' column='1' id='57bfbe05'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='id_header' type-id='19c2251e' visibility='default' filepath='include/linux/usb/typec.h' line='103' column='1'/>
+          <var-decl name='id_header' type-id='19c2251e' visibility='default' filepath='include/linux/usb/typec.h' line='104' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='cert_stat' type-id='19c2251e' visibility='default' filepath='include/linux/usb/typec.h' line='104' column='1'/>
+          <var-decl name='cert_stat' type-id='19c2251e' visibility='default' filepath='include/linux/usb/typec.h' line='105' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='product' type-id='19c2251e' visibility='default' filepath='include/linux/usb/typec.h' line='105' column='1'/>
+          <var-decl name='product' type-id='19c2251e' visibility='default' filepath='include/linux/usb/typec.h' line='106' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='96'>
-          <var-decl name='vdo' type-id='1c745afe' visibility='default' filepath='include/linux/usb/typec.h' line='106' column='1'/>
+          <var-decl name='vdo' type-id='1c745afe' visibility='default' filepath='include/linux/usb/typec.h' line='107' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='92a295b4' size-in-bits='64' id='57c9915e'/>
@@ -44840,7 +44843,7 @@
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='7a7796b6' size-in-bits='64' id='66421794'/>
-      <enum-decl name='usb_pd_svdm_ver' filepath='include/linux/usb/typec.h' line='222' column='1' id='664a29a4'>
+      <enum-decl name='usb_pd_svdm_ver' filepath='include/linux/usb/typec.h' line='228' column='1' id='664a29a4'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='SVDM_VER_1_0' value='0'/>
         <enumerator name='SVDM_VER_2_0' value='1'/>
@@ -46220,7 +46223,7 @@
           <var-decl name='pmsr_capa' type-id='5abfac26' visibility='default' filepath='include/net/cfg80211.h' line='5066' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='11072'>
-          <var-decl name='tid_config_support' type-id='e7f43f92' visibility='default' filepath='include/net/cfg80211.h' line='5071' column='1'/>
+          <var-decl name='tid_config_support' type-id='e7f43f93' visibility='default' filepath='include/net/cfg80211.h' line='5071' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='11264'>
           <var-decl name='max_data_retry_count' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='5073' column='1'/>
@@ -49290,18 +49293,18 @@
           <var-decl name='head' type-id='d504f73d' visibility='default' filepath='include/linux/notifier.h' line='67' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='dwc3_trb' size-in-bits='128' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='846' column='1' id='70923669'>
+      <class-decl name='dwc3_trb' size-in-bits='128' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='847' column='1' id='70923669'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='bpl' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='847' column='1'/>
+          <var-decl name='bpl' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='848' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='bph' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='848' column='1'/>
+          <var-decl name='bph' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='849' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='size' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='849' column='1'/>
+          <var-decl name='size' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='850' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='96'>
-          <var-decl name='ctrl' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='850' column='1'/>
+          <var-decl name='ctrl' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='851' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='pci_error_handlers' size-in-bits='448' is-struct='yes' visibility='default' filepath='include/linux/pci.h' line='813' column='1' id='709bf5ba'>
@@ -56092,390 +56095,390 @@
           <var-decl name='control_mode' type-id='f9b06939' visibility='default' filepath='drivers/scsi/ufs/ufshcd.h' line='741' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='dwc3' size-in-bits='10432' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1108' column='1' id='80824a72'>
+      <class-decl name='dwc3' size-in-bits='10432' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1109' column='1' id='80824a72'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='drd_work' type-id='ef9025d0' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1109' column='1'/>
+          <var-decl name='drd_work' type-id='ef9025d0' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1110' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='384'>
-          <var-decl name='ep0_trb' type-id='0d6a59e1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1110' column='1'/>
+          <var-decl name='ep0_trb' type-id='0d6a59e1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1111' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='448'>
-          <var-decl name='bounce' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1111' column='1'/>
+          <var-decl name='bounce' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1112' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='512'>
-          <var-decl name='scratchbuf' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1112' column='1'/>
+          <var-decl name='scratchbuf' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1113' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='576'>
-          <var-decl name='setup_buf' type-id='8bff8096' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1113' column='1'/>
+          <var-decl name='setup_buf' type-id='8bff8096' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1114' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='640'>
-          <var-decl name='ep0_trb_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1114' column='1'/>
+          <var-decl name='ep0_trb_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1115' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='704'>
-          <var-decl name='bounce_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1115' column='1'/>
+          <var-decl name='bounce_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1116' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='768'>
-          <var-decl name='scratch_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1116' column='1'/>
+          <var-decl name='scratch_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1117' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='832'>
-          <var-decl name='ep0_usb_req' type-id='48288128' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1117' column='1'/>
+          <var-decl name='ep0_usb_req' type-id='48288128' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1118' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2496'>
-          <var-decl name='ep0_in_setup' type-id='f9fef04f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1118' column='1'/>
+          <var-decl name='ep0_in_setup' type-id='f9fef04f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1119' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2752'>
-          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1121' column='1'/>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1122' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2816'>
-          <var-decl name='mutex' type-id='925167dc' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1124' column='1'/>
+          <var-decl name='mutex' type-id='925167dc' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1125' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='3200'>
-          <var-decl name='dev' type-id='fa0b179b' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1126' column='1'/>
+          <var-decl name='dev' type-id='fa0b179b' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1127' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='3264'>
-          <var-decl name='sysdev' type-id='fa0b179b' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1127' column='1'/>
+          <var-decl name='sysdev' type-id='fa0b179b' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1128' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='3328'>
-          <var-decl name='xhci' type-id='db362995' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1129' column='1'/>
+          <var-decl name='xhci' type-id='db362995' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1130' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='3392'>
-          <var-decl name='xhci_resources' type-id='05e8efcf' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1130' column='1'/>
+          <var-decl name='xhci_resources' type-id='05e8efcf' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1131' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='4928'>
-          <var-decl name='ev_buf' type-id='c4c1659e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1132' column='1'/>
+          <var-decl name='ev_buf' type-id='c4c1659e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1133' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='4992'>
-          <var-decl name='eps' type-id='21edd5c3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1133' column='1'/>
+          <var-decl name='eps' type-id='21edd5c3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1134' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7040'>
-          <var-decl name='gadget' type-id='49a58c0c' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1135' column='1'/>
+          <var-decl name='gadget' type-id='49a58c0c' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1136' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7104'>
-          <var-decl name='gadget_driver' type-id='9762ede1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1136' column='1'/>
+          <var-decl name='gadget_driver' type-id='9762ede1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1137' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7168'>
-          <var-decl name='clks' type-id='2942e355' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1138' column='1'/>
+          <var-decl name='clks' type-id='2942e355' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1139' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7232'>
-          <var-decl name='num_clks' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1139' column='1'/>
+          <var-decl name='num_clks' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1140' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7296'>
-          <var-decl name='reset' type-id='9f9b8114' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1141' column='1'/>
+          <var-decl name='reset' type-id='9f9b8114' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1142' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7360'>
-          <var-decl name='usb2_phy' type-id='ca9354d1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1143' column='1'/>
+          <var-decl name='usb2_phy' type-id='ca9354d1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1144' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7424'>
-          <var-decl name='usb3_phy' type-id='ca9354d1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1144' column='1'/>
+          <var-decl name='usb3_phy' type-id='ca9354d1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1145' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7488'>
-          <var-decl name='usb2_generic_phy' type-id='503ff1ba' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1146' column='1'/>
+          <var-decl name='usb2_generic_phy' type-id='503ff1ba' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1147' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7552'>
-          <var-decl name='usb3_generic_phy' type-id='503ff1ba' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1147' column='1'/>
+          <var-decl name='usb3_generic_phy' type-id='503ff1ba' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1148' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7616'>
-          <var-decl name='phys_ready' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1149' column='1'/>
+          <var-decl name='phys_ready' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1150' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7680'>
-          <var-decl name='ulpi' type-id='144a094f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1151' column='1'/>
+          <var-decl name='ulpi' type-id='144a094f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1152' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7744'>
-          <var-decl name='ulpi_ready' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1152' column='1'/>
+          <var-decl name='ulpi_ready' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1153' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7808'>
-          <var-decl name='regs' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1154' column='1'/>
+          <var-decl name='regs' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1155' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7872'>
-          <var-decl name='regs_size' type-id='b59d7dce' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1155' column='1'/>
+          <var-decl name='regs_size' type-id='b59d7dce' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1156' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7936'>
-          <var-decl name='dr_mode' type-id='d291aaf1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1157' column='1'/>
+          <var-decl name='dr_mode' type-id='d291aaf1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1158' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7968'>
-          <var-decl name='current_dr_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1158' column='1'/>
+          <var-decl name='current_dr_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1159' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8000'>
-          <var-decl name='desired_dr_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1159' column='1'/>
+          <var-decl name='desired_dr_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1160' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8064'>
-          <var-decl name='edev' type-id='c0d6fada' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1160' column='1'/>
+          <var-decl name='edev' type-id='c0d6fada' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1161' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8128'>
-          <var-decl name='edev_nb' type-id='9b08f7cd' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1161' column='1'/>
+          <var-decl name='edev_nb' type-id='9b08f7cd' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1162' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8320'>
-          <var-decl name='hsphy_mode' type-id='46b5771e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1162' column='1'/>
+          <var-decl name='hsphy_mode' type-id='46b5771e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1163' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8384'>
-          <var-decl name='role_sw' type-id='3e3cd44f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1163' column='1'/>
+          <var-decl name='role_sw' type-id='3e3cd44f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1164' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8448'>
-          <var-decl name='role_switch_default_mode' type-id='d291aaf1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1164' column='1'/>
+          <var-decl name='role_switch_default_mode' type-id='d291aaf1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1165' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8512'>
-          <var-decl name='usb_psy' type-id='c0c93c9e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1166' column='1'/>
+          <var-decl name='usb_psy' type-id='c0c93c9e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1167' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8576'>
-          <var-decl name='fladj' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1168' column='1'/>
+          <var-decl name='fladj' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1169' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8608'>
-          <var-decl name='irq_gadget' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1169' column='1'/>
+          <var-decl name='irq_gadget' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1170' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8640'>
-          <var-decl name='otg_irq' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1170' column='1'/>
+          <var-decl name='otg_irq' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1171' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8672'>
-          <var-decl name='current_otg_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1171' column='1'/>
+          <var-decl name='current_otg_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1172' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8704'>
-          <var-decl name='desired_otg_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1172' column='1'/>
+          <var-decl name='desired_otg_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1173' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8736'>
-          <var-decl name='otg_restart_host' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1173' column='1'/>
+          <var-decl name='otg_restart_host' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1174' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8768'>
-          <var-decl name='nr_scratch' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1174' column='1'/>
+          <var-decl name='nr_scratch' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1175' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8800'>
-          <var-decl name='u1u2' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1175' column='1'/>
+          <var-decl name='u1u2' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1176' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8832'>
-          <var-decl name='maximum_speed' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1176' column='1'/>
+          <var-decl name='maximum_speed' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1177' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8864'>
-          <var-decl name='gadget_max_speed' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1177' column='1'/>
+          <var-decl name='gadget_max_speed' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1178' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8896'>
-          <var-decl name='max_ssp_rate' type-id='a9ea967a' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1178' column='1'/>
+          <var-decl name='max_ssp_rate' type-id='a9ea967a' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1179' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8928'>
-          <var-decl name='gadget_ssp_rate' type-id='a9ea967a' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1179' column='1'/>
+          <var-decl name='gadget_ssp_rate' type-id='a9ea967a' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1180' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8960'>
-          <var-decl name='ip' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1181' column='1'/>
+          <var-decl name='ip' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1182' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8992'>
-          <var-decl name='revision' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1187' column='1'/>
+          <var-decl name='revision' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1188' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9024'>
-          <var-decl name='version_type' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1225' column='1'/>
+          <var-decl name='version_type' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1226' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9056'>
-          <var-decl name='ep0_next_event' type-id='56e3bcb9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1235' column='1'/>
+          <var-decl name='ep0_next_event' type-id='56e3bcb9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1236' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9088'>
-          <var-decl name='ep0state' type-id='045093ad' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1236' column='1'/>
+          <var-decl name='ep0state' type-id='045093ad' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1237' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9120'>
-          <var-decl name='link_state' type-id='9775e40e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1237' column='1'/>
+          <var-decl name='link_state' type-id='9775e40e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1238' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9152'>
-          <var-decl name='u2sel' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1239' column='1'/>
+          <var-decl name='u2sel' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1240' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9168'>
-          <var-decl name='u2pel' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1240' column='1'/>
+          <var-decl name='u2pel' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1241' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9184'>
-          <var-decl name='u1sel' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1241' column='1'/>
+          <var-decl name='u1sel' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1242' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9192'>
-          <var-decl name='u1pel' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1242' column='1'/>
+          <var-decl name='u1pel' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1243' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9200'>
-          <var-decl name='speed' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1244' column='1'/>
+          <var-decl name='speed' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1245' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9208'>
-          <var-decl name='num_eps' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1246' column='1'/>
+          <var-decl name='num_eps' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1247' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9216'>
-          <var-decl name='hwparams' type-id='2d79d174' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1248' column='1'/>
+          <var-decl name='hwparams' type-id='2d79d174' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1249' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9664'>
-          <var-decl name='root' type-id='27675065' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1249' column='1'/>
+          <var-decl name='root' type-id='27675065' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1250' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9728'>
-          <var-decl name='regset' type-id='62fa2ea7' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1250' column='1'/>
+          <var-decl name='regset' type-id='62fa2ea7' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1251' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9792'>
-          <var-decl name='dbg_lsp_select' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1252' column='1'/>
+          <var-decl name='dbg_lsp_select' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1253' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9824'>
-          <var-decl name='test_mode' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1254' column='1'/>
+          <var-decl name='test_mode' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1255' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9832'>
-          <var-decl name='test_mode_nr' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1255' column='1'/>
+          <var-decl name='test_mode_nr' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1256' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9840'>
-          <var-decl name='lpm_nyet_threshold' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1256' column='1'/>
+          <var-decl name='lpm_nyet_threshold' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1257' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9848'>
-          <var-decl name='hird_threshold' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1257' column='1'/>
+          <var-decl name='hird_threshold' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1258' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9856'>
-          <var-decl name='rx_thr_num_pkt_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1258' column='1'/>
+          <var-decl name='rx_thr_num_pkt_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1259' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9864'>
-          <var-decl name='rx_max_burst_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1259' column='1'/>
+          <var-decl name='rx_max_burst_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1260' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9872'>
-          <var-decl name='tx_thr_num_pkt_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1260' column='1'/>
+          <var-decl name='tx_thr_num_pkt_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1261' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9880'>
-          <var-decl name='tx_max_burst_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1261' column='1'/>
+          <var-decl name='tx_max_burst_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1262' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9888'>
-          <var-decl name='tx_fifo_resize_max_num' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1262' column='1'/>
+          <var-decl name='tx_fifo_resize_max_num' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1263' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9920'>
-          <var-decl name='hsphy_interface' type-id='80f4b756' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1264' column='1'/>
+          <var-decl name='hsphy_interface' type-id='80f4b756' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1265' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9984'>
-          <var-decl name='connected' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1266' column='1'/>
+          <var-decl name='connected' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1267' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9985'>
-          <var-decl name='delayed_status' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1267' column='1'/>
+          <var-decl name='delayed_status' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1268' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9986'>
-          <var-decl name='ep0_bounced' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1268' column='1'/>
+          <var-decl name='ep0_bounced' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1269' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9987'>
-          <var-decl name='ep0_expect_in' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1269' column='1'/>
+          <var-decl name='ep0_expect_in' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1270' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9988'>
-          <var-decl name='has_hibernation' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1270' column='1'/>
+          <var-decl name='has_hibernation' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1271' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9989'>
-          <var-decl name='sysdev_is_parent' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1271' column='1'/>
+          <var-decl name='sysdev_is_parent' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1272' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9990'>
-          <var-decl name='has_lpm_erratum' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1272' column='1'/>
+          <var-decl name='has_lpm_erratum' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1273' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9991'>
-          <var-decl name='is_utmi_l1_suspend' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1273' column='1'/>
+          <var-decl name='is_utmi_l1_suspend' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1274' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9992'>
-          <var-decl name='is_fpga' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1274' column='1'/>
+          <var-decl name='is_fpga' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1275' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9993'>
-          <var-decl name='pending_events' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1275' column='1'/>
+          <var-decl name='pending_events' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1276' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9994'>
-          <var-decl name='do_fifo_resize' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1276' column='1'/>
+          <var-decl name='do_fifo_resize' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1277' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9995'>
-          <var-decl name='pullups_connected' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1277' column='1'/>
+          <var-decl name='pullups_connected' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1278' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9996'>
-          <var-decl name='setup_packet_pending' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1278' column='1'/>
+          <var-decl name='setup_packet_pending' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1279' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9997'>
-          <var-decl name='three_stage_setup' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1279' column='1'/>
+          <var-decl name='three_stage_setup' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1280' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9998'>
-          <var-decl name='dis_start_transfer_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1280' column='1'/>
+          <var-decl name='dis_start_transfer_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1281' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9999'>
-          <var-decl name='usb3_lpm_capable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1281' column='1'/>
+          <var-decl name='usb3_lpm_capable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1282' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10000'>
-          <var-decl name='usb2_lpm_disable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1282' column='1'/>
+          <var-decl name='usb2_lpm_disable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1283' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10001'>
-          <var-decl name='usb2_gadget_lpm_disable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1283' column='1'/>
+          <var-decl name='usb2_gadget_lpm_disable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1284' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10002'>
-          <var-decl name='disable_scramble_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1285' column='1'/>
+          <var-decl name='disable_scramble_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1286' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10003'>
-          <var-decl name='u2exit_lfps_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1286' column='1'/>
+          <var-decl name='u2exit_lfps_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1287' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10004'>
-          <var-decl name='u2ss_inp3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1287' column='1'/>
+          <var-decl name='u2ss_inp3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1288' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10005'>
-          <var-decl name='req_p1p2p3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1288' column='1'/>
+          <var-decl name='req_p1p2p3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1289' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10006'>
-          <var-decl name='del_p1p2p3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1289' column='1'/>
+          <var-decl name='del_p1p2p3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1290' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10007'>
-          <var-decl name='del_phy_power_chg_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1290' column='1'/>
+          <var-decl name='del_phy_power_chg_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1291' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10008'>
-          <var-decl name='lfps_filter_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1291' column='1'/>
+          <var-decl name='lfps_filter_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1292' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10009'>
-          <var-decl name='rx_detect_poll_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1292' column='1'/>
+          <var-decl name='rx_detect_poll_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1293' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10010'>
-          <var-decl name='dis_u3_susphy_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1293' column='1'/>
+          <var-decl name='dis_u3_susphy_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1294' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10011'>
-          <var-decl name='dis_u2_susphy_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1294' column='1'/>
+          <var-decl name='dis_u2_susphy_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1295' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10012'>
-          <var-decl name='dis_enblslpm_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1295' column='1'/>
+          <var-decl name='dis_enblslpm_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1296' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10013'>
-          <var-decl name='dis_u1_entry_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1296' column='1'/>
+          <var-decl name='dis_u1_entry_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1297' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10014'>
-          <var-decl name='dis_u2_entry_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1297' column='1'/>
+          <var-decl name='dis_u2_entry_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1298' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10015'>
-          <var-decl name='dis_rxdet_inp3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1298' column='1'/>
+          <var-decl name='dis_rxdet_inp3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1299' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10016'>
-          <var-decl name='dis_u2_freeclk_exists_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1299' column='1'/>
+          <var-decl name='dis_u2_freeclk_exists_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1300' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10017'>
-          <var-decl name='dis_del_phy_power_chg_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1300' column='1'/>
+          <var-decl name='dis_del_phy_power_chg_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1301' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10018'>
-          <var-decl name='dis_tx_ipgap_linecheck_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1301' column='1'/>
+          <var-decl name='dis_tx_ipgap_linecheck_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1302' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10019'>
-          <var-decl name='parkmode_disable_ss_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1302' column='1'/>
+          <var-decl name='parkmode_disable_ss_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1303' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10020'>
-          <var-decl name='tx_de_emphasis_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1304' column='1'/>
+          <var-decl name='tx_de_emphasis_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1305' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10021'>
-          <var-decl name='tx_de_emphasis' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1305' column='1'/>
+          <var-decl name='tx_de_emphasis' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1306' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10023'>
-          <var-decl name='dis_metastability_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1307' column='1'/>
+          <var-decl name='dis_metastability_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1308' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10024'>
-          <var-decl name='dis_split_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1309' column='1'/>
+          <var-decl name='dis_split_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1310' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10025'>
-          <var-decl name='async_callbacks' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1310' column='1'/>
+          <var-decl name='async_callbacks' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1311' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10032'>
-          <var-decl name='imod_interval' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1312' column='1'/>
+          <var-decl name='imod_interval' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1313' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10048'>
-          <var-decl name='max_cfg_eps' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1314' column='1'/>
+          <var-decl name='max_cfg_eps' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1315' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10080'>
-          <var-decl name='last_fifo_depth' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1315' column='1'/>
+          <var-decl name='last_fifo_depth' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1316' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10112'>
-          <var-decl name='num_ep_resized' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1316' column='1'/>
+          <var-decl name='num_ep_resized' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1317' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10176'>
-          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10240'>
-          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
+          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1320' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10304'>
-          <var-decl name='android_kabi_reserved3' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1320' column='1'/>
+          <var-decl name='android_kabi_reserved3' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1321' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10368'>
-          <var-decl name='android_kabi_reserved4' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1321' column='1'/>
+          <var-decl name='android_kabi_reserved4' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1322' column='1'/>
         </data-member>
       </class-decl>
       <enum-decl name='irqreturn' filepath='include/linux/irqreturn.h' line='11' column='1' id='8086ea38'>
@@ -59051,7 +59054,7 @@
       <pointer-type-def type-id='94b5478d' size-in-bits='64' id='87447c2d'/>
       <union-decl name='salt' size-in-bits='96' visibility='default' filepath='include/net/macsec.h' line='23' column='1' id='8745f074'>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43f93' visibility='default' filepath='include/net/macsec.h' line='24' column='1'/>
+          <var-decl name='' type-id='e7f43f94' visibility='default' filepath='include/net/macsec.h' line='24' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='bytes' type-id='4d79ed19' visibility='default' filepath='include/net/macsec.h' line='28' column='1'/>
@@ -60120,7 +60123,7 @@
       </class-decl>
       <pointer-type-def type-id='dbf3947c' size-in-bits='64' id='89a2612a'/>
       <pointer-type-def type-id='bf77b476' size-in-bits='64' id='89a8217c'/>
-      <enum-decl name='typec_port_data' filepath='include/linux/usb/typec.h' line='31' column='1' id='89aae82e'>
+      <enum-decl name='typec_port_data' filepath='include/linux/usb/typec.h' line='32' column='1' id='89aae82e'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='TYPEC_PORT_DFP' value='0'/>
         <enumerator name='TYPEC_PORT_UFP' value='1'/>
@@ -60659,17 +60662,7 @@
           <var-decl name='granu' type-id='ac5ab5d6' visibility='default' filepath='include/uapi/linux/iommu.h' line='270' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='v4l2_ctrl_helper' size-in-bits='192' is-struct='yes' visibility='default' filepath='drivers/media/v4l2-core/v4l2-ctrls.c' line='36' column='1' id='8a6e72bc'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='mref' type-id='9f3a0131' visibility='default' filepath='drivers/media/v4l2-core/v4l2-ctrls.c' line='38' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='ref' type-id='9f3a0131' visibility='default' filepath='drivers/media/v4l2-core/v4l2-ctrls.c' line='40' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='next' type-id='19c2251e' visibility='default' filepath='drivers/media/v4l2-core/v4l2-ctrls.c' line='43' column='1'/>
-        </data-member>
-      </class-decl>
+      <class-decl name='v4l2_ctrl_helper' is-struct='yes' visibility='default' is-declaration-only='yes' id='8a6e72bc'/>
       <function-type size-in-bits='64' id='8a70282a'>
         <parameter type-id='e324928d'/>
         <parameter type-id='1d2c2b85'/>
@@ -65712,18 +65705,18 @@
       <pointer-type-def type-id='9f5a4f22' size-in-bits='64' id='9682fd8c'/>
       <pointer-type-def type-id='699ab992' size-in-bits='64' id='96846df4'/>
       <pointer-type-def type-id='56e9279b' size-in-bits='64' id='9689f21b'/>
-      <class-decl name='typec_altmode_desc' size-in-bits='96' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='122' column='1' id='968d5b5b'>
+      <class-decl name='typec_altmode_desc' size-in-bits='96' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='123' column='1' id='968d5b5b'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='svid' type-id='1dc6a898' visibility='default' filepath='include/linux/usb/typec.h' line='123' column='1'/>
+          <var-decl name='svid' type-id='1dc6a898' visibility='default' filepath='include/linux/usb/typec.h' line='124' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='16'>
-          <var-decl name='mode' type-id='f9b06939' visibility='default' filepath='include/linux/usb/typec.h' line='124' column='1'/>
+          <var-decl name='mode' type-id='f9b06939' visibility='default' filepath='include/linux/usb/typec.h' line='125' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='vdo' type-id='19c2251e' visibility='default' filepath='include/linux/usb/typec.h' line='125' column='1'/>
+          <var-decl name='vdo' type-id='19c2251e' visibility='default' filepath='include/linux/usb/typec.h' line='126' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='roles' type-id='89aae82e' visibility='default' filepath='include/linux/usb/typec.h' line='127' column='1'/>
+          <var-decl name='roles' type-id='89aae82e' visibility='default' filepath='include/linux/usb/typec.h' line='128' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='f3cb01e4' size-in-bits='64' id='9693d74a'/>
@@ -65996,7 +65989,7 @@
         <return type-id='f9f4b16f'/>
       </function-type>
       <pointer-type-def type-id='b718d3f9' size-in-bits='64' id='9762ede1'/>
-      <enum-decl name='dwc3_link_state' filepath='drivers/usb/dwc3/core.h' line='788' column='1' id='9775e40e'>
+      <enum-decl name='dwc3_link_state' filepath='drivers/usb/dwc3/core.h' line='789' column='1' id='9775e40e'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='DWC3_LINK_STATE_U0' value='0'/>
         <enumerator name='DWC3_LINK_STATE_U1' value='1'/>
@@ -66356,7 +66349,7 @@
           <var-decl name='rx_sc' type-id='ec973d27' visibility='default' filepath='include/net/macsec.h' line='241' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='sa' type-id='e7f43f95' visibility='default' filepath='include/net/macsec.h' line='249' column='1'/>
+          <var-decl name='sa' type-id='e7f43f96' visibility='default' filepath='include/net/macsec.h' line='249' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1408'>
           <var-decl name='stats' type-id='ac5ab5bf' visibility='default' filepath='include/net/macsec.h' line='256' column='1'/>
@@ -66471,7 +66464,7 @@
           <var-decl name='thread' type-id='f23e2572' visibility='default' filepath='drivers/media/rc/rc-core-priv.h' line='50' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='kfifo' type-id='e7f43fb0' visibility='default' filepath='drivers/media/rc/rc-core-priv.h' line='52' column='1'/>
+          <var-decl name='kfifo' type-id='e7f43fb1' visibility='default' filepath='drivers/media/rc/rc-core-priv.h' line='52' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='33152'>
           <var-decl name='last_event' type-id='fbc017ef' visibility='default' filepath='drivers/media/rc/rc-core-priv.h' line='53' column='1'/>
@@ -70168,7 +70161,7 @@
           <var-decl name='dimm_id' type-id='80f4b756' visibility='default' filepath='drivers/nvdimm/nd-core.h' line='39' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7744'>
-          <var-decl name='sec' type-id='e7f43fbd' visibility='default' filepath='drivers/nvdimm/nd-core.h' line='46' column='1'/>
+          <var-decl name='sec' type-id='e7f43fbe' visibility='default' filepath='drivers/nvdimm/nd-core.h' line='46' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8064'>
           <var-decl name='dwork' type-id='5ad6e0ef' visibility='default' filepath='drivers/nvdimm/nd-core.h' line='47' column='1'/>
@@ -71999,10 +71992,10 @@
           <var-decl name='cookie' type-id='6867e656' visibility='default' filepath='drivers/android/binder_internal.h' line='247' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='832'>
-          <var-decl name='' type-id='e7f43f85' visibility='default' filepath='drivers/android/binder_internal.h' line='248' column='1'/>
+          <var-decl name='' type-id='e7f43f86' visibility='default' filepath='drivers/android/binder_internal.h' line='248' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='840'>
-          <var-decl name='' type-id='e7f43f86' visibility='default' filepath='drivers/android/binder_internal.h' line='258' column='1'/>
+          <var-decl name='' type-id='e7f43f87' visibility='default' filepath='drivers/android/binder_internal.h' line='258' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='856'>
           <var-decl name='has_async_transaction' type-id='b50a4934' visibility='default' filepath='drivers/android/binder_internal.h' line='268' column='1'/>
@@ -74134,15 +74127,15 @@
         <enumerator name='DEVFREQ_TIMER_NUM' value='2'/>
       </enum-decl>
       <pointer-type-def type-id='644441a6' size-in-bits='64' id='aae3718c'/>
-      <class-decl name='dwc3_gadget_ep_cmd_params' size-in-bits='96' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1481' column='1' id='aaf4c449'>
+      <class-decl name='dwc3_gadget_ep_cmd_params' size-in-bits='96' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1482' column='1' id='aaf4c449'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='param2' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1482' column='1'/>
+          <var-decl name='param2' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1483' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='param1' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1483' column='1'/>
+          <var-decl name='param1' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1484' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='param0' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1484' column='1'/>
+          <var-decl name='param0' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1485' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='173cc5a0' size-in-bits='64' id='ab05e282'/>
@@ -74865,7 +74858,7 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='5120' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/aead.h' line='20' column='1' id='ac5ab5a4'>
         <data-member access='public'>
-          <var-decl name='s' type-id='e7f43f81' visibility='default' filepath='include/crypto/internal/aead.h' line='24' column='1'/>
+          <var-decl name='s' type-id='e7f43f82' visibility='default' filepath='include/crypto/internal/aead.h' line='24' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='alg' type-id='94111b83' visibility='default' filepath='include/crypto/internal/aead.h' line='25' column='1'/>
@@ -74873,7 +74866,7 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='6144' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/hash.h' line='34' column='1' id='ac5ab5a5'>
         <data-member access='public'>
-          <var-decl name='s' type-id='e7f43f82' visibility='default' filepath='include/crypto/internal/hash.h' line='38' column='1'/>
+          <var-decl name='s' type-id='e7f43f83' visibility='default' filepath='include/crypto/internal/hash.h' line='38' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='alg' type-id='d0f077d9' visibility='default' filepath='include/crypto/internal/hash.h' line='39' column='1'/>
@@ -74975,7 +74968,7 @@
           <var-decl name='' type-id='e7f43fe5' visibility='default' filepath='include/linux/skbuff.h' line='933' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fbc' visibility='default' filepath='include/linux/skbuff.h' line='933' column='1'/>
+          <var-decl name='' type-id='e7f43fbd' visibility='default' filepath='include/linux/skbuff.h' line='933' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='' type-id='ac5ab5f7' visibility='default' filepath='include/linux/skbuff.h' line='933' column='1'/>
@@ -74983,7 +74976,7 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='6144' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/hash.h' line='45' column='1' id='ac5ab5b2'>
         <data-member access='public'>
-          <var-decl name='s' type-id='e7f43f82' visibility='default' filepath='include/crypto/internal/hash.h' line='49' column='1'/>
+          <var-decl name='s' type-id='e7f43f83' visibility='default' filepath='include/crypto/internal/hash.h' line='49' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='alg' type-id='b73dd29b' visibility='default' filepath='include/crypto/internal/hash.h' line='50' column='1'/>
@@ -74991,7 +74984,7 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='5120' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/skcipher.h' line='22' column='1' id='ac5ab5b3'>
         <data-member access='public'>
-          <var-decl name='s' type-id='e7f43f81' visibility='default' filepath='include/crypto/internal/skcipher.h' line='26' column='1'/>
+          <var-decl name='s' type-id='e7f43f82' visibility='default' filepath='include/crypto/internal/skcipher.h' line='26' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='alg' type-id='dd37d315' visibility='default' filepath='include/crypto/internal/skcipher.h' line='27' column='1'/>
@@ -74999,10 +74992,10 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/skcipher.h' line='36' column='1' id='ac5ab5b4'>
         <data-member access='public'>
-          <var-decl name='phys' type-id='e7f43f83' visibility='default' filepath='include/crypto/internal/skcipher.h' line='40' column='1'/>
+          <var-decl name='phys' type-id='e7f43f84' visibility='default' filepath='include/crypto/internal/skcipher.h' line='40' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='virt' type-id='e7f43f84' visibility='default' filepath='include/crypto/internal/skcipher.h' line='45' column='1'/>
+          <var-decl name='virt' type-id='e7f43f85' visibility='default' filepath='include/crypto/internal/skcipher.h' line='45' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='drivers/android/binder_internal.h' line='236' column='1' id='ac5ab5b5'>
@@ -75047,34 +75040,34 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='576' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='145' column='1' id='ac5ab5ba'>
         <data-member access='public'>
-          <var-decl name='socketcall' type-id='e7f43f87' visibility='default' filepath='include/../kernel/audit.h' line='149' column='1'/>
+          <var-decl name='socketcall' type-id='e7f43f88' visibility='default' filepath='include/../kernel/audit.h' line='149' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='ipc' type-id='e7f43f88' visibility='default' filepath='include/../kernel/audit.h' line='160' column='1'/>
+          <var-decl name='ipc' type-id='e7f43f89' visibility='default' filepath='include/../kernel/audit.h' line='160' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='mq_getsetattr' type-id='e7f43f89' visibility='default' filepath='include/../kernel/audit.h' line='164' column='1'/>
+          <var-decl name='mq_getsetattr' type-id='e7f43f8a' visibility='default' filepath='include/../kernel/audit.h' line='164' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='mq_notify' type-id='e7f43f8a' visibility='default' filepath='include/../kernel/audit.h' line='168' column='1'/>
+          <var-decl name='mq_notify' type-id='e7f43f8b' visibility='default' filepath='include/../kernel/audit.h' line='168' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='mq_sendrecv' type-id='e7f43f8b' visibility='default' filepath='include/../kernel/audit.h' line='174' column='1'/>
+          <var-decl name='mq_sendrecv' type-id='e7f43f8c' visibility='default' filepath='include/../kernel/audit.h' line='174' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='mq_open' type-id='e7f43f8c' visibility='default' filepath='include/../kernel/audit.h' line='179' column='1'/>
+          <var-decl name='mq_open' type-id='e7f43f8d' visibility='default' filepath='include/../kernel/audit.h' line='179' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='capset' type-id='e7f43f8d' visibility='default' filepath='include/../kernel/audit.h' line='183' column='1'/>
+          <var-decl name='capset' type-id='e7f43f8e' visibility='default' filepath='include/../kernel/audit.h' line='183' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='mmap' type-id='e7f43f8e' visibility='default' filepath='include/../kernel/audit.h' line='187' column='1'/>
+          <var-decl name='mmap' type-id='e7f43f8f' visibility='default' filepath='include/../kernel/audit.h' line='187' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='execve' type-id='e7f43f8f' visibility='default' filepath='include/../kernel/audit.h' line='190' column='1'/>
+          <var-decl name='execve' type-id='e7f43f90' visibility='default' filepath='include/../kernel/audit.h' line='190' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='module' type-id='e7f43f90' visibility='default' filepath='include/../kernel/audit.h' line='193' column='1'/>
+          <var-decl name='module' type-id='e7f43f91' visibility='default' filepath='include/../kernel/audit.h' line='193' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/linux/keyctl.h' line='35' column='1' id='ac5ab5bb'>
@@ -75136,15 +75129,15 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='96' is-anonymous='yes' visibility='default' filepath='include/net/netfilter/nf_log.h' line='22' column='1' id='ac5ab5c1'>
         <data-member access='public'>
-          <var-decl name='ulog' type-id='e7f43f96' visibility='default' filepath='include/net/netfilter/nf_log.h' line='31' column='1'/>
+          <var-decl name='ulog' type-id='e7f43f97' visibility='default' filepath='include/net/netfilter/nf_log.h' line='31' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='log' type-id='e7f43f97' visibility='default' filepath='include/net/netfilter/nf_log.h' line='35' column='1'/>
+          <var-decl name='log' type-id='e7f43f98' visibility='default' filepath='include/net/netfilter/nf_log.h' line='35' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='29' column='1' id='ac5ab5c2'>
         <data-member access='public'>
-          <var-decl name='s' type-id='e7f43f98' visibility='default' filepath='include/net/netns/generic.h' line='33' column='1'/>
+          <var-decl name='s' type-id='e7f43f99' visibility='default' filepath='include/net/netns/generic.h' line='33' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='ptr' type-id='baf98fd3' visibility='default' filepath='include/net/netns/generic.h' line='35' column='1'/>
@@ -75152,7 +75145,7 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='1024' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/socket.h' line='17' column='1' id='ac5ab5c3'>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43f99' visibility='default' filepath='include/uapi/linux/socket.h' line='18' column='1'/>
+          <var-decl name='' type-id='e7f43f9a' visibility='default' filepath='include/uapi/linux/socket.h' line='18' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='__align' type-id='eaa32e2f' visibility='default' filepath='include/uapi/linux/socket.h' line='25' column='1'/>
@@ -75188,7 +75181,7 @@
           <var-decl name='mlock' type-id='925167dc' visibility='default' filepath='include/linux/pm_domain.h' line='156' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43f9a' visibility='default' filepath='include/linux/pm_domain.h' line='157' column='1'/>
+          <var-decl name='' type-id='e7f43f9b' visibility='default' filepath='include/linux/pm_domain.h' line='157' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='384' is-anonymous='yes' visibility='default' filepath='drivers/base/regmap/internal.h' line='50' column='1' id='ac5ab5c7'>
@@ -75196,7 +75189,7 @@
           <var-decl name='mutex' type-id='925167dc' visibility='default' filepath='drivers/base/regmap/internal.h' line='51' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43f9b' visibility='default' filepath='drivers/base/regmap/internal.h' line='52' column='1'/>
+          <var-decl name='' type-id='e7f43f9c' visibility='default' filepath='drivers/base/regmap/internal.h' line='52' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/linux/dma-fence.h' line='84' column='1' id='ac5ab5c8'>
@@ -75236,10 +75229,10 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='56' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='106' column='1' id='ac5ab5cc'>
         <data-member access='public'>
-          <var-decl name='gtf2' type-id='e7f43fa7' visibility='default' filepath='include/drm/drm_edid.h' line='114' column='1'/>
+          <var-decl name='gtf2' type-id='e7f43fa8' visibility='default' filepath='include/drm/drm_edid.h' line='114' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='cvt' type-id='e7f43fa8' visibility='default' filepath='include/drm/drm_edid.h' line='123' column='1'/>
+          <var-decl name='cvt' type-id='e7f43fa9' visibility='default' filepath='include/drm/drm_edid.h' line='123' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='104' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='151' column='1' id='ac5ab5cd'>
@@ -75327,16 +75320,16 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='96' column='1' id='ac5ab5d4'>
         <data-member access='public'>
-          <var-decl name='arm_lpae_s1_cfg' type-id='e7f43faa' visibility='default' filepath='include/linux/io-pgtable.h' line='108' column='1'/>
+          <var-decl name='arm_lpae_s1_cfg' type-id='e7f43fab' visibility='default' filepath='include/linux/io-pgtable.h' line='108' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='arm_lpae_s2_cfg' type-id='e7f43fab' visibility='default' filepath='include/linux/io-pgtable.h' line='121' column='1'/>
+          <var-decl name='arm_lpae_s2_cfg' type-id='e7f43fac' visibility='default' filepath='include/linux/io-pgtable.h' line='121' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='arm_v7s_cfg' type-id='e7f43fac' visibility='default' filepath='include/linux/io-pgtable.h' line='128' column='1'/>
+          <var-decl name='arm_v7s_cfg' type-id='e7f43fad' visibility='default' filepath='include/linux/io-pgtable.h' line='128' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='arm_mali_lpae_cfg' type-id='e7f43fad' visibility='default' filepath='include/linux/io-pgtable.h' line='133' column='1'/>
+          <var-decl name='arm_mali_lpae_cfg' type-id='e7f43fae' visibility='default' filepath='include/linux/io-pgtable.h' line='133' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='448' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/iommu.h' line='118' column='1' id='ac5ab5d5'>
@@ -75406,7 +75399,7 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/media/media-entity.h' line='314' column='1' id='ac5ab5dc'>
         <data-member access='public'>
-          <var-decl name='dev' type-id='e7f43fb2' visibility='default' filepath='include/media/media-entity.h' line='318' column='1'/>
+          <var-decl name='dev' type-id='e7f43fb3' visibility='default' filepath='include/media/media-entity.h' line='318' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='drivers/media/rc/rc-core-priv.h' line='52' column='1' id='ac5ab5dd'>
@@ -75445,10 +75438,10 @@
           <var-decl name='device_name' type-id='80f4b756' visibility='default' filepath='include/media/v4l2-async.h' line='83' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='i2c' type-id='e7f43fb3' visibility='default' filepath='include/media/v4l2-async.h' line='87' column='1'/>
+          <var-decl name='i2c' type-id='e7f43fb4' visibility='default' filepath='include/media/v4l2-async.h' line='87' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='custom' type-id='e7f43fb4' visibility='default' filepath='include/media/v4l2-async.h' line='92' column='1'/>
+          <var-decl name='custom' type-id='e7f43fb5' visibility='default' filepath='include/media/v4l2-async.h' line='92' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='16' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/v4l2-mediabus.h' line='41' column='1' id='ac5ab5e0'>
@@ -75573,18 +75566,18 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='256' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2037' column='1' id='ac5ab5ec'>
         <data-member access='public'>
-          <var-decl name='raw' type-id='e7f43fb6' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2040' column='1'/>
+          <var-decl name='raw' type-id='e7f43fb7' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2040' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='512' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2073' column='1' id='ac5ab5ed'>
         <data-member access='public'>
-          <var-decl name='stop' type-id='e7f43fb7' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2076' column='1'/>
+          <var-decl name='stop' type-id='e7f43fb8' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2076' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='start' type-id='e7f43fb8' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2086' column='1'/>
+          <var-decl name='start' type-id='e7f43fb9' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2086' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='raw' type-id='e7f43fb9' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2090' column='1'/>
+          <var-decl name='raw' type-id='e7f43fba' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2090' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='8' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2262' column='1' id='ac5ab5ee'>
@@ -75689,10 +75682,10 @@
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1' id='ac5ab5f6'>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fbb' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1'/>
+          <var-decl name='' type-id='e7f43fbc' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fbc' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1'/>
+          <var-decl name='' type-id='e7f43fbd' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='' type-id='ac5ab5f7' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1'/>
@@ -75731,7 +75724,7 @@
           <var-decl name='initialized' type-id='b50a4934' visibility='default' filepath='include/linux/gpio/driver.h' line='278' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fbc' visibility='default' filepath='include/linux/gpio/driver.h' line='278' column='1'/>
+          <var-decl name='' type-id='e7f43fbd' visibility='default' filepath='include/linux/gpio/driver.h' line='278' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='' type-id='ac5ab5f7' visibility='default' filepath='include/linux/gpio/driver.h' line='278' column='1'/>
@@ -75750,7 +75743,7 @@
           <var-decl name='eh_timed_out2' type-id='37ef4d2b' visibility='default' filepath='include/scsi/scsi_host.h' line='520' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fbc' visibility='default' filepath='include/scsi/scsi_host.h' line='520' column='1'/>
+          <var-decl name='' type-id='e7f43fbd' visibility='default' filepath='include/scsi/scsi_host.h' line='520' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='' type-id='ac5ab5f7' visibility='default' filepath='include/scsi/scsi_host.h' line='520' column='1'/>
@@ -75811,7 +75804,7 @@
           <var-decl name='vendor_ops' type-id='1e9ca7e3' visibility='default' filepath='drivers/usb/host/xhci.h' line='1941' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fbc' visibility='default' filepath='drivers/usb/host/xhci.h' line='1941' column='1'/>
+          <var-decl name='' type-id='e7f43fbd' visibility='default' filepath='drivers/usb/host/xhci.h' line='1941' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='' type-id='ac5ab5f7' visibility='default' filepath='drivers/usb/host/xhci.h' line='1941' column='1'/>
@@ -76309,7 +76302,7 @@
           <var-decl name='pf_io_worker' type-id='eaa32e2f' visibility='default' filepath='include/linux/sched.h' line='1384' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fbc' visibility='default' filepath='include/linux/sched.h' line='1384' column='1'/>
+          <var-decl name='' type-id='e7f43fbd' visibility='default' filepath='include/linux/sched.h' line='1384' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='' type-id='ac5ab5f7' visibility='default' filepath='include/linux/sched.h' line='1384' column='1'/>
@@ -77622,7 +77615,7 @@
         <enumerator name='DRM_RENDER_ALLOW' value='32'/>
       </enum-decl>
       <pointer-type-def type-id='7e1ff049' size-in-bits='64' id='ad60bf5d'/>
-      <enum-decl name='typec_role' filepath='include/linux/usb/typec.h' line='50' column='1' id='ad61830a'>
+      <enum-decl name='typec_role' filepath='include/linux/usb/typec.h' line='51' column='1' id='ad61830a'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='TYPEC_SINK' value='0'/>
         <enumerator name='TYPEC_SOURCE' value='1'/>
@@ -92259,7 +92252,7 @@
       <typedef-decl name='irq_flow_handler_t' type-id='8937f3c2' filepath='include/linux/irqhandler.h' line='12' column='1' id='cdb741d3'/>
       <union-decl name='__anonymous_union__' size-in-bits='1088' visibility='default' filepath='include/linux/efi.h' line='270' column='1' id='cdbb8fcd' is-anonymous='yes'>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fa4' visibility='default' filepath='include/linux/efi.h' line='271' column='1'/>
+          <var-decl name='' type-id='e7f43fa5' visibility='default' filepath='include/linux/efi.h' line='271' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='mixed_mode' type-id='04f91c05' visibility='default' filepath='include/linux/efi.h' line='288' column='1'/>
@@ -94601,24 +94594,24 @@
         <parameter type-id='b9af02c3'/>
         <return type-id='48b5725f'/>
       </function-type>
-      <class-decl name='typec_operations' size-in-bits='384' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='212' column='1' id='d3860975'>
+      <class-decl name='typec_operations' size-in-bits='384' is-struct='yes' visibility='default' filepath='include/linux/usb/typec.h' line='218' column='1' id='d3860975'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='try_role' type-id='d7a90e3b' visibility='default' filepath='include/linux/usb/typec.h' line='213' column='1'/>
+          <var-decl name='try_role' type-id='d7a90e3b' visibility='default' filepath='include/linux/usb/typec.h' line='219' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='dr_set' type-id='55ebe352' visibility='default' filepath='include/linux/usb/typec.h' line='214' column='1'/>
+          <var-decl name='dr_set' type-id='55ebe352' visibility='default' filepath='include/linux/usb/typec.h' line='220' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='pr_set' type-id='331e3ac7' visibility='default' filepath='include/linux/usb/typec.h' line='215' column='1'/>
+          <var-decl name='pr_set' type-id='331e3ac7' visibility='default' filepath='include/linux/usb/typec.h' line='221' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='vconn_set' type-id='331e3ac7' visibility='default' filepath='include/linux/usb/typec.h' line='216' column='1'/>
+          <var-decl name='vconn_set' type-id='331e3ac7' visibility='default' filepath='include/linux/usb/typec.h' line='222' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='port_type_set' type-id='6507da23' visibility='default' filepath='include/linux/usb/typec.h' line='217' column='1'/>
+          <var-decl name='port_type_set' type-id='6507da23' visibility='default' filepath='include/linux/usb/typec.h' line='223' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='320'>
-          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/linux/usb/typec.h' line='219' column='1'/>
+          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/linux/usb/typec.h' line='225' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='bpf_local_storage_map_bucket' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/linux/bpf_local_storage.h' line='19' column='1' id='d38c200b'>
@@ -97324,7 +97317,7 @@
           <var-decl name='scan_index' type-id='95e97e5e' visibility='default' filepath='include/linux/iio/iio.h' line='241' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='224'>
-          <var-decl name='scan_type' type-id='e7f43fa9' visibility='default' filepath='include/linux/iio/iio.h' line='249' column='1'/>
+          <var-decl name='scan_type' type-id='e7f43faa' visibility='default' filepath='include/linux/iio/iio.h' line='249' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='320'>
           <var-decl name='info_mask_separate' type-id='bd54fe1a' visibility='default' filepath='include/linux/iio/iio.h' line='250' column='1'/>
@@ -98453,7 +98446,7 @@
           <var-decl name='val' type-id='a7832498' visibility='default' filepath='include/media/v4l2-ctrls.h' line='293' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1504'>
-          <var-decl name='cur' type-id='e7f43fba' visibility='default' filepath='include/media/v4l2-ctrls.h' line='296' column='1'/>
+          <var-decl name='cur' type-id='e7f43fbb' visibility='default' filepath='include/media/v4l2-ctrls.h' line='296' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1536'>
           <var-decl name='p_def' type-id='3f78e6a9' visibility='default' filepath='include/media/v4l2-ctrls.h' line='298' column='1'/>
@@ -98729,46 +98722,46 @@
           <var-decl name='flags' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='719' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1344'>
-          <var-decl name='trb_enqueue' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='746' column='1'/>
+          <var-decl name='trb_enqueue' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='747' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1352'>
-          <var-decl name='trb_dequeue' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='747' column='1'/>
+          <var-decl name='trb_dequeue' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='748' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1360'>
-          <var-decl name='number' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='749' column='1'/>
+          <var-decl name='number' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='750' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1368'>
-          <var-decl name='type' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='750' column='1'/>
+          <var-decl name='type' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='751' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1376'>
-          <var-decl name='resource_index' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='751' column='1'/>
+          <var-decl name='resource_index' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='752' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1408'>
-          <var-decl name='frame_number' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='752' column='1'/>
+          <var-decl name='frame_number' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='753' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1440'>
-          <var-decl name='interval' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='753' column='1'/>
+          <var-decl name='interval' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='754' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1472'>
-          <var-decl name='name' type-id='664ac0b7' visibility='default' filepath='drivers/usb/dwc3/core.h' line='755' column='1'/>
+          <var-decl name='name' type-id='664ac0b7' visibility='default' filepath='drivers/usb/dwc3/core.h' line='756' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1632'>
-          <var-decl name='direction' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='757' column='1'/>
+          <var-decl name='direction' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='758' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1633'>
-          <var-decl name='stream_capable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='758' column='1'/>
+          <var-decl name='stream_capable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='759' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1640'>
-          <var-decl name='combo_num' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='761' column='1'/>
+          <var-decl name='combo_num' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='762' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1664'>
-          <var-decl name='start_cmd_status' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='762' column='1'/>
+          <var-decl name='start_cmd_status' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='763' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1728'>
-          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='764' column='1'/>
+          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='765' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1792'>
-          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='765' column='1'/>
+          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='766' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='a9559bf8' size-in-bits='64' id='dc1e097e'/>
@@ -100467,7 +100460,7 @@
       <pointer-type-def type-id='4e1213ff' size-in-bits='64' id='e0602613'/>
       <class-decl name='blk_mq_hw_ctx' size-in-bits='5632' is-struct='yes' visibility='default' filepath='include/linux/blk-mq.h' line='16' column='1' id='e063028f'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='' type-id='e7f43fbe' visibility='default' filepath='include/linux/blk-mq.h' line='17' column='1'/>
+          <var-decl name='' type-id='e7f43f81' visibility='default' filepath='include/linux/blk-mq.h' line='17' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='512'>
           <var-decl name='run_work' type-id='5ad6e0ef' visibility='default' filepath='include/linux/blk-mq.h' line='38' column='1'/>
@@ -101668,7 +101661,7 @@
           <var-decl name='base' type-id='eaa32e2f' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1152' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='fmt' type-id='e7f43fb5' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1162' column='1'/>
+          <var-decl name='fmt' type-id='e7f43fb6' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1162' column='1'/>
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='e215eeb6'>
@@ -102873,7 +102866,7 @@
           <var-decl name='driver' type-id='00c7b870' visibility='default' filepath='drivers/base/base.h' line='63' column='1'/>
         </data-member>
       </class-decl>
-      <enum-decl name='typec_data_role' filepath='include/linux/usb/typec.h' line='45' column='1' id='e453a0cb'>
+      <enum-decl name='typec_data_role' filepath='include/linux/usb/typec.h' line='46' column='1' id='e453a0cb'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='TYPEC_DEVICE' value='0'/>
         <enumerator name='TYPEC_HOST' value='1'/>
@@ -104411,7 +104404,18 @@
           <var-decl name='rq_lists' type-id='e8ef2bd5' visibility='default' filepath='block/blk-mq.h' line='21' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='5120' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/aead.h' line='21' column='1' id='e7f43f81'>
+      <class-decl name='__anonymous_struct__' size-in-bits='512' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/blk-mq.h' line='17' column='1' id='e7f43f81'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='include/linux/blk-mq.h' line='19' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='dispatch' type-id='72f469ec' visibility='default' filepath='include/linux/blk-mq.h' line='27' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='state' type-id='7359adad' visibility='default' filepath='include/linux/blk-mq.h' line='32' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='__anonymous_struct__' size-in-bits='5120' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/aead.h' line='21' column='1' id='e7f43f82'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='head' type-id='e3204322' visibility='default' filepath='include/crypto/internal/aead.h' line='22' column='1'/>
         </data-member>
@@ -104419,7 +104423,7 @@
           <var-decl name='base' type-id='85c172d2' visibility='default' filepath='include/crypto/internal/aead.h' line='23' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='6144' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/hash.h' line='35' column='1' id='e7f43f82'>
+      <class-decl name='__anonymous_struct__' size-in-bits='6144' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/hash.h' line='35' column='1' id='e7f43f83'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='head' type-id='d1617432' visibility='default' filepath='include/crypto/internal/hash.h' line='36' column='1'/>
         </data-member>
@@ -104427,7 +104431,7 @@
           <var-decl name='base' type-id='85c172d2' visibility='default' filepath='include/crypto/internal/hash.h' line='37' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/skcipher.h' line='37' column='1' id='e7f43f83'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/skcipher.h' line='37' column='1' id='e7f43f84'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='page' type-id='02f11ed4' visibility='default' filepath='include/crypto/internal/skcipher.h' line='38' column='1'/>
         </data-member>
@@ -104435,7 +104439,7 @@
           <var-decl name='offset' type-id='7359adad' visibility='default' filepath='include/crypto/internal/skcipher.h' line='39' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/skcipher.h' line='42' column='1' id='e7f43f84'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/crypto/internal/skcipher.h' line='42' column='1' id='e7f43f85'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='page' type-id='8bff8096' visibility='default' filepath='include/crypto/internal/skcipher.h' line='43' column='1'/>
         </data-member>
@@ -104443,7 +104447,7 @@
           <var-decl name='addr' type-id='eaa32e2f' visibility='default' filepath='include/crypto/internal/skcipher.h' line='44' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='8' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/android/binder_internal.h' line='248' column='1' id='e7f43f85'>
+      <class-decl name='__anonymous_struct__' size-in-bits='8' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/android/binder_internal.h' line='248' column='1' id='e7f43f86'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='has_strong_ref' type-id='f9b06939' visibility='default' filepath='drivers/android/binder_internal.h' line='253' column='1'/>
         </data-member>
@@ -104457,7 +104461,7 @@
           <var-decl name='pending_weak_ref' type-id='f9b06939' visibility='default' filepath='drivers/android/binder_internal.h' line='256' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='16' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/android/binder_internal.h' line='258' column='1' id='e7f43f86'>
+      <class-decl name='__anonymous_struct__' size-in-bits='16' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/android/binder_internal.h' line='258' column='1' id='e7f43f87'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='sched_policy' type-id='f9b06939' visibility='default' filepath='drivers/android/binder_internal.h' line='262' column='1'/>
         </data-member>
@@ -104474,7 +104478,7 @@
           <var-decl name='min_priority' type-id='f9b06939' visibility='default' filepath='drivers/android/binder_internal.h' line='266' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='448' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='146' column='1' id='e7f43f87'>
+      <class-decl name='__anonymous_struct__' size-in-bits='448' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='146' column='1' id='e7f43f88'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='nargs' type-id='95e97e5e' visibility='default' filepath='include/../kernel/audit.h' line='147' column='1'/>
         </data-member>
@@ -104482,7 +104486,7 @@
           <var-decl name='args' type-id='613ff906' visibility='default' filepath='include/../kernel/audit.h' line='148' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='320' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='150' column='1' id='e7f43f88'>
+      <class-decl name='__anonymous_struct__' size-in-bits='320' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='150' column='1' id='e7f43f89'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='uid' type-id='d80b72e6' visibility='default' filepath='include/../kernel/audit.h' line='151' column='1'/>
         </data-member>
@@ -104511,7 +104515,7 @@
           <var-decl name='qbytes' type-id='7359adad' visibility='default' filepath='include/../kernel/audit.h' line='159' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='576' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='161' column='1' id='e7f43f89'>
+      <class-decl name='__anonymous_struct__' size-in-bits='576' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='161' column='1' id='e7f43f8a'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='mqdes' type-id='a4bb20dd' visibility='default' filepath='include/../kernel/audit.h' line='162' column='1'/>
         </data-member>
@@ -104519,7 +104523,7 @@
           <var-decl name='mqstat' type-id='7e411fe7' visibility='default' filepath='include/../kernel/audit.h' line='163' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='165' column='1' id='e7f43f8a'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='165' column='1' id='e7f43f8b'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='mqdes' type-id='a4bb20dd' visibility='default' filepath='include/../kernel/audit.h' line='166' column='1'/>
         </data-member>
@@ -104527,7 +104531,7 @@
           <var-decl name='sigev_signo' type-id='95e97e5e' visibility='default' filepath='include/../kernel/audit.h' line='167' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='320' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='169' column='1' id='e7f43f8b'>
+      <class-decl name='__anonymous_struct__' size-in-bits='320' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='169' column='1' id='e7f43f8c'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='mqdes' type-id='a4bb20dd' visibility='default' filepath='include/../kernel/audit.h' line='170' column='1'/>
         </data-member>
@@ -104541,7 +104545,7 @@
           <var-decl name='abs_timeout' type-id='40a816ad' visibility='default' filepath='include/../kernel/audit.h' line='173' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='576' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='175' column='1' id='e7f43f8c'>
+      <class-decl name='__anonymous_struct__' size-in-bits='576' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='175' column='1' id='e7f43f8d'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='oflag' type-id='95e97e5e' visibility='default' filepath='include/../kernel/audit.h' line='176' column='1'/>
         </data-member>
@@ -104552,7 +104556,7 @@
           <var-decl name='attr' type-id='7e411fe7' visibility='default' filepath='include/../kernel/audit.h' line='178' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='320' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='180' column='1' id='e7f43f8d'>
+      <class-decl name='__anonymous_struct__' size-in-bits='320' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='180' column='1' id='e7f43f8e'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='pid' type-id='587f89d2' visibility='default' filepath='include/../kernel/audit.h' line='181' column='1'/>
         </data-member>
@@ -104560,7 +104564,7 @@
           <var-decl name='cap' type-id='fe20adfc' visibility='default' filepath='include/../kernel/audit.h' line='182' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='184' column='1' id='e7f43f8e'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='184' column='1' id='e7f43f8f'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='fd' type-id='95e97e5e' visibility='default' filepath='include/../kernel/audit.h' line='185' column='1'/>
         </data-member>
@@ -104568,17 +104572,17 @@
           <var-decl name='flags' type-id='95e97e5e' visibility='default' filepath='include/../kernel/audit.h' line='186' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='188' column='1' id='e7f43f8f'>
+      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='188' column='1' id='e7f43f90'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='argc' type-id='95e97e5e' visibility='default' filepath='include/../kernel/audit.h' line='189' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='191' column='1' id='e7f43f90'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/../kernel/audit.h' line='191' column='1' id='e7f43f91'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='name' type-id='26a90f95' visibility='default' filepath='include/../kernel/audit.h' line='192' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4715' column='1' id='e7f43f91'>
+      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4715' column='1' id='e7f43f92'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='preambles' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='4716' column='1'/>
         </data-member>
@@ -104613,7 +104617,7 @@
           <var-decl name='non_trigger_based' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='4726' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='192' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='5068' column='1' id='e7f43f92'>
+      <class-decl name='__anonymous_struct__' size-in-bits='192' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='5068' column='1' id='e7f43f93'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='peer' type-id='91ce1af9' visibility='default' filepath='include/net/cfg80211.h' line='5069' column='1'/>
         </data-member>
@@ -104624,7 +104628,7 @@
           <var-decl name='max_retry' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='5070' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/macsec.h' line='24' column='1' id='e7f43f93'>
+      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/macsec.h' line='24' column='1' id='e7f43f94'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ssci' type-id='19c2251e' visibility='default' filepath='include/net/macsec.h' line='25' column='1'/>
         </data-member>
@@ -104632,7 +104636,7 @@
           <var-decl name='pn' type-id='91ce1af9' visibility='default' filepath='include/net/macsec.h' line='26' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/macsec.h' line='32' column='1' id='e7f43f94'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/macsec.h' line='32' column='1' id='e7f43f95'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='lower' type-id='19c2251e' visibility='default' filepath='include/net/macsec.h' line='34' column='1'/>
         </data-member>
@@ -104640,7 +104644,7 @@
           <var-decl name='upper' type-id='19c2251e' visibility='default' filepath='include/net/macsec.h' line='35' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='1152' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/macsec.h' line='242' column='1' id='e7f43f95'>
+      <class-decl name='__anonymous_struct__' size-in-bits='1152' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/macsec.h' line='242' column='1' id='e7f43f96'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='assoc_num' type-id='002ac4a6' visibility='default' filepath='include/net/macsec.h' line='243' column='1'/>
         </data-member>
@@ -104651,7 +104655,7 @@
           <var-decl name='' type-id='ac5ab5c0' visibility='default' filepath='include/net/macsec.h' line='245' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/netfilter/nf_log.h' line='23' column='1' id='e7f43f96'>
+      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/netfilter/nf_log.h' line='23' column='1' id='e7f43f97'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='copy_len' type-id='9586cc7b' visibility='default' filepath='include/net/netfilter/nf_log.h' line='27' column='1'/>
         </data-member>
@@ -104665,7 +104669,7 @@
           <var-decl name='flags' type-id='ea2e3595' visibility='default' filepath='include/net/netfilter/nf_log.h' line='30' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='16' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/netfilter/nf_log.h' line='32' column='1' id='e7f43f97'>
+      <class-decl name='__anonymous_struct__' size-in-bits='16' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/netfilter/nf_log.h' line='32' column='1' id='e7f43f98'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='level' type-id='892641a4' visibility='default' filepath='include/net/netfilter/nf_log.h' line='33' column='1'/>
         </data-member>
@@ -104673,7 +104677,7 @@
           <var-decl name='logflags' type-id='892641a4' visibility='default' filepath='include/net/netfilter/nf_log.h' line='34' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='192' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='30' column='1' id='e7f43f98'>
+      <class-decl name='__anonymous_struct__' size-in-bits='192' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='30' column='1' id='e7f43f99'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='len' type-id='f0981eeb' visibility='default' filepath='include/net/netns/generic.h' line='31' column='1'/>
         </data-member>
@@ -104681,7 +104685,7 @@
           <var-decl name='rcu' type-id='e3d8ce29' visibility='default' filepath='include/net/netns/generic.h' line='32' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='1024' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/socket.h' line='18' column='1' id='e7f43f99'>
+      <class-decl name='__anonymous_struct__' size-in-bits='1024' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/socket.h' line='18' column='1' id='e7f43f9a'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ss_family' type-id='93d679c6' visibility='default' filepath='include/uapi/linux/socket.h' line='19' column='1'/>
         </data-member>
@@ -104689,7 +104693,7 @@
           <var-decl name='__data' type-id='1f1c2468' visibility='default' filepath='include/uapi/linux/socket.h' line='21' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/pm_domain.h' line='157' column='1' id='e7f43f9a'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/pm_domain.h' line='157' column='1' id='e7f43f9b'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='slock' type-id='fb4018a0' visibility='default' filepath='include/linux/pm_domain.h' line='158' column='1'/>
         </data-member>
@@ -104697,7 +104701,7 @@
           <var-decl name='lock_flags' type-id='7359adad' visibility='default' filepath='include/linux/pm_domain.h' line='159' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/base/regmap/internal.h' line='52' column='1' id='e7f43f9b'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/base/regmap/internal.h' line='52' column='1' id='e7f43f9c'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='spinlock' type-id='fb4018a0' visibility='default' filepath='drivers/base/regmap/internal.h' line='53' column='1'/>
         </data-member>
@@ -104705,7 +104709,7 @@
           <var-decl name='spinlock_flags' type-id='7359adad' visibility='default' filepath='drivers/base/regmap/internal.h' line='54' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='1088' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/efi.h' line='271' column='1' id='e7f43fa4'>
+      <class-decl name='__anonymous_struct__' size-in-bits='1088' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/efi.h' line='271' column='1' id='e7f43fa5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='hdr' type-id='2285a0d7' visibility='default' filepath='include/linux/efi.h' line='272' column='1'/>
         </data-member>
@@ -104752,7 +104756,7 @@
           <var-decl name='query_variable_info' type-id='25269d6f' visibility='default' filepath='include/linux/efi.h' line='286' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='256' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/drm/drm_device.h' line='76' column='1' id='e7f43fa6'>
+      <class-decl name='__anonymous_struct__' size-in-bits='256' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/drm/drm_device.h' line='76' column='1' id='e7f43fa7'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='resources' type-id='72f469ec' visibility='default' filepath='include/drm/drm_device.h' line='78' column='1'/>
         </data-member>
@@ -104763,7 +104767,7 @@
           <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='include/drm/drm_device.h' line='82' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='56' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='107' column='1' id='e7f43fa7'>
+      <class-decl name='__anonymous_struct__' size-in-bits='56' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='107' column='1' id='e7f43fa8'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='reserved' type-id='f9b06939' visibility='default' filepath='include/drm/drm_edid.h' line='108' column='1'/>
         </data-member>
@@ -104783,7 +104787,7 @@
           <var-decl name='j' type-id='f9b06939' visibility='default' filepath='include/drm/drm_edid.h' line='113' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='56' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='115' column='1' id='e7f43fa8'>
+      <class-decl name='__anonymous_struct__' size-in-bits='56' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='115' column='1' id='e7f43fa9'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='version' type-id='f9b06939' visibility='default' filepath='include/drm/drm_edid.h' line='116' column='1'/>
         </data-member>
@@ -104806,7 +104810,7 @@
           <var-decl name='preferred_refresh' type-id='f9b06939' visibility='default' filepath='include/drm/drm_edid.h' line='122' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/iio/iio.h' line='242' column='1' id='e7f43fa9'>
+      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/iio/iio.h' line='242' column='1' id='e7f43faa'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='sign' type-id='a84c031d' visibility='default' filepath='include/linux/iio/iio.h' line='243' column='1'/>
         </data-member>
@@ -104826,26 +104830,26 @@
           <var-decl name='endianness' type-id='b8c1dcff' visibility='default' filepath='include/linux/iio/iio.h' line='248' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='192' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='97' column='1' id='e7f43faa'>
+      <class-decl name='__anonymous_struct__' size-in-bits='192' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='97' column='1' id='e7f43fab'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ttbr' type-id='91ce1af9' visibility='default' filepath='include/linux/io-pgtable.h' line='98' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='tcr' type-id='e7f43fae' visibility='default' filepath='include/linux/io-pgtable.h' line='106' column='1'/>
+          <var-decl name='tcr' type-id='e7f43faf' visibility='default' filepath='include/linux/io-pgtable.h' line='106' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
           <var-decl name='mair' type-id='91ce1af9' visibility='default' filepath='include/linux/io-pgtable.h' line='107' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='110' column='1' id='e7f43fab'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='110' column='1' id='e7f43fac'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='vttbr' type-id='91ce1af9' visibility='default' filepath='include/linux/io-pgtable.h' line='111' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='vtcr' type-id='e7f43faf' visibility='default' filepath='include/linux/io-pgtable.h' line='120' column='1'/>
+          <var-decl name='vtcr' type-id='e7f43fb0' visibility='default' filepath='include/linux/io-pgtable.h' line='120' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='123' column='1' id='e7f43fac'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='123' column='1' id='e7f43fad'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ttbr' type-id='19c2251e' visibility='default' filepath='include/linux/io-pgtable.h' line='124' column='1'/>
         </data-member>
@@ -104859,7 +104863,7 @@
           <var-decl name='prrr' type-id='19c2251e' visibility='default' filepath='include/linux/io-pgtable.h' line='127' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='130' column='1' id='e7f43fad'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='130' column='1' id='e7f43fae'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='transtab' type-id='91ce1af9' visibility='default' filepath='include/linux/io-pgtable.h' line='131' column='1'/>
         </data-member>
@@ -104867,7 +104871,7 @@
           <var-decl name='memattr' type-id='91ce1af9' visibility='default' filepath='include/linux/io-pgtable.h' line='132' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='99' column='1' id='e7f43fae'>
+      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='99' column='1' id='e7f43faf'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ips' type-id='19c2251e' visibility='default' filepath='include/linux/io-pgtable.h' line='100' column='1'/>
         </data-member>
@@ -104887,7 +104891,7 @@
           <var-decl name='tsz' type-id='19c2251e' visibility='default' filepath='include/linux/io-pgtable.h' line='105' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='112' column='1' id='e7f43faf'>
+      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/io-pgtable.h' line='112' column='1' id='e7f43fb0'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ps' type-id='19c2251e' visibility='default' filepath='include/linux/io-pgtable.h' line='113' column='1'/>
         </data-member>
@@ -104910,7 +104914,7 @@
           <var-decl name='tsz' type-id='19c2251e' visibility='default' filepath='include/linux/io-pgtable.h' line='119' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='32960' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/media/rc/rc-core-priv.h' line='52' column='1' id='e7f43fb0'>
+      <class-decl name='__anonymous_struct__' size-in-bits='32960' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/media/rc/rc-core-priv.h' line='52' column='1' id='e7f43fb1'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='' type-id='ac5ab5dd' visibility='default' filepath='drivers/media/rc/rc-core-priv.h' line='52' column='1'/>
         </data-member>
@@ -104918,7 +104922,7 @@
           <var-decl name='buf' type-id='55a95556' visibility='default' filepath='drivers/media/rc/rc-core-priv.h' line='52' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/media-entity.h' line='90' column='1' id='e7f43fb1'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/media-entity.h' line='90' column='1' id='e7f43fb2'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='entity' type-id='19e05b5f' visibility='default' filepath='include/media/media-entity.h' line='91' column='1'/>
         </data-member>
@@ -104926,7 +104930,7 @@
           <var-decl name='link' type-id='e84b031a' visibility='default' filepath='include/media/media-entity.h' line='92' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/media-entity.h' line='315' column='1' id='e7f43fb2'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/media-entity.h' line='315' column='1' id='e7f43fb3'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='major' type-id='19c2251e' visibility='default' filepath='include/media/media-entity.h' line='316' column='1'/>
         </data-member>
@@ -104934,7 +104938,7 @@
           <var-decl name='minor' type-id='19c2251e' visibility='default' filepath='include/media/media-entity.h' line='317' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-async.h' line='84' column='1' id='e7f43fb3'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-async.h' line='84' column='1' id='e7f43fb4'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='adapter_id' type-id='95e97e5e' visibility='default' filepath='include/media/v4l2-async.h' line='85' column='1'/>
         </data-member>
@@ -104942,7 +104946,7 @@
           <var-decl name='address' type-id='8efea9e5' visibility='default' filepath='include/media/v4l2-async.h' line='86' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-async.h' line='88' column='1' id='e7f43fb4'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-async.h' line='88' column='1' id='e7f43fb5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='match' type-id='5c6f8956' visibility='default' filepath='include/media/v4l2-async.h' line='89' column='1'/>
         </data-member>
@@ -104950,7 +104954,7 @@
           <var-decl name='priv' type-id='eaa32e2f' visibility='default' filepath='include/media/v4l2-async.h' line='91' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='256' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1153' column='1' id='e7f43fb5'>
+      <class-decl name='__anonymous_struct__' size-in-bits='256' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1153' column='1' id='e7f43fb6'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='width' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1154' column='1'/>
         </data-member>
@@ -104976,17 +104980,17 @@
           <var-decl name='priv' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1161' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='256' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2038' column='1' id='e7f43fb6'>
+      <class-decl name='__anonymous_struct__' size-in-bits='256' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2038' column='1' id='e7f43fb7'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='data' type-id='7f84eb57' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2039' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2074' column='1' id='e7f43fb7'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2074' column='1' id='e7f43fb8'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='pts' type-id='d3130597' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2075' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2078' column='1' id='e7f43fb8'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2078' column='1' id='e7f43fb9'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='speed' type-id='3158a266' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2084' column='1'/>
         </data-member>
@@ -104994,17 +104998,17 @@
           <var-decl name='format' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2085' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='512' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2088' column='1' id='e7f43fb9'>
+      <class-decl name='__anonymous_struct__' size-in-bits='512' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2088' column='1' id='e7f43fba'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='data' type-id='9d2cf33e' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2089' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-ctrls.h' line='294' column='1' id='e7f43fba'>
+      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-ctrls.h' line='294' column='1' id='e7f43fbb'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='val' type-id='a7832498' visibility='default' filepath='include/media/v4l2-ctrls.h' line='295' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='16' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1' id='e7f43fbb'>
+      <class-decl name='__anonymous_struct__' size-in-bits='16' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1' id='e7f43fbc'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='drv_type' type-id='f9b06939' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1'/>
         </data-member>
@@ -105012,12 +105016,12 @@
           <var-decl name='reinit_uhs' type-id='b50a4934' visibility='default' filepath='drivers/mmc/host/sdhci.h' line='612' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/sched.h' line='1384' column='1' id='e7f43fbc'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/sched.h' line='1384' column='1' id='e7f43fbd'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/linux/sched.h' line='1384' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='320' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/nvdimm/nd-core.h' line='40' column='1' id='e7f43fbd'>
+      <class-decl name='__anonymous_struct__' size-in-bits='320' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/nvdimm/nd-core.h' line='40' column='1' id='e7f43fbe'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ops' type-id='5f889637' visibility='default' filepath='drivers/nvdimm/nd-core.h' line='41' column='1'/>
         </data-member>
@@ -105032,17 +105036,6 @@
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
           <var-decl name='overwrite_state' type-id='150efd3f' visibility='default' filepath='drivers/nvdimm/nd-core.h' line='45' column='1'/>
-        </data-member>
-      </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='512' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/blk-mq.h' line='17' column='1' id='e7f43fbe'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='include/linux/blk-mq.h' line='19' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='dispatch' type-id='72f469ec' visibility='default' filepath='include/linux/blk-mq.h' line='27' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='state' type-id='7359adad' visibility='default' filepath='include/linux/blk-mq.h' line='32' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/scsi/ufs/ufshci.h' line='305' column='1' id='e7f43fbf'>
@@ -108178,7 +108171,7 @@
           <var-decl name='dev' type-id='fa0b179b' visibility='default' filepath='include/drm/drm_device.h' line='68' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='managed' type-id='e7f43fa6' visibility='default' filepath='include/drm/drm_device.h' line='83' column='1'/>
+          <var-decl name='managed' type-id='e7f43fa7' visibility='default' filepath='include/drm/drm_device.h' line='83' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='512'>
           <var-decl name='driver' type-id='1d52bc4d' visibility='default' filepath='include/drm/drm_device.h' line='86' column='1'/>
@@ -108355,7 +108348,7 @@
           <var-decl name='randomize_mac_addr' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='4713' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='ftm' type-id='e7f43f91' visibility='default' filepath='include/net/cfg80211.h' line='4727' column='1'/>
+          <var-decl name='ftm' type-id='e7f43f92' visibility='default' filepath='include/net/cfg80211.h' line='4727' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='clk_rate_request' size-in-bits='320' is-struct='yes' visibility='default' filepath='include/linux/clk-provider.h' line='56' column='1' id='e9bea70c'>
@@ -117729,6 +117722,12 @@
         <parameter type-id='95e97e5e' name='len' filepath='lib/bitmap.c' line='372' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='__bitmap_complement' mangled-name='__bitmap_complement' filepath='lib/bitmap.c' line='84' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__bitmap_complement'>
+        <parameter type-id='1d2c2b85' name='dst' filepath='lib/bitmap.c' line='84' column='1'/>
+        <parameter type-id='f9b37274' name='src' filepath='lib/bitmap.c' line='84' column='1'/>
+        <parameter type-id='f0981eeb' name='bits' filepath='lib/bitmap.c' line='84' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='__bitmap_equal' mangled-name='__bitmap_equal' filepath='lib/bitmap.c' line='48' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__bitmap_equal'>
         <parameter type-id='f9b37274' name='bitmap1' filepath='lib/bitmap.c' line='48' column='1'/>
         <parameter type-id='f9b37274' name='bitmap2' filepath='lib/bitmap.c' line='49' column='1'/>
@@ -119516,6 +119515,15 @@
         <parameter type-id='1b0e1d00' name='dev' filepath='include/trace/hooks/cpuidle.h' line='17' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_android_vh_dmabuf_heap_flags_validation' mangled-name='__traceiter_android_vh_dmabuf_heap_flags_validation' filepath='include/trace/hooks/dmabuf.h' line='16' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_dmabuf_heap_flags_validation'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/dmabuf.h' line='16' column='1'/>
+        <parameter type-id='ea1bdaf6' name='heap' filepath='include/trace/hooks/dmabuf.h' line='16' column='1'/>
+        <parameter type-id='b59d7dce' name='len' filepath='include/trace/hooks/dmabuf.h' line='16' column='1'/>
+        <parameter type-id='f0981eeb' name='fd_flags' filepath='include/trace/hooks/dmabuf.h' line='16' column='1'/>
+        <parameter type-id='f0981eeb' name='heap_flags' filepath='include/trace/hooks/dmabuf.h' line='16' column='1'/>
+        <parameter type-id='d8e6b335' name='skip' filepath='include/trace/hooks/dmabuf.h' line='16' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_android_vh_do_madvise_blk_plug' mangled-name='__traceiter_android_vh_do_madvise_blk_plug' filepath='include/trace/hooks/mm.h' line='103' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_do_madvise_blk_plug'>
         <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/mm.h' line='103' column='1'/>
         <parameter type-id='95e97e5e' name='behavior' filepath='include/trace/hooks/mm.h' line='103' column='1'/>
@@ -120257,6 +120265,7 @@
       <var-decl name='__tracepoint_android_vh_cma_alloc_start' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cma_alloc_start' visibility='default' filepath='include/trace/hooks/mm.h' line='38' column='1' elf-symbol-id='__tracepoint_android_vh_cma_alloc_start'/>
       <var-decl name='__tracepoint_android_vh_cpu_idle_enter' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpu_idle_enter' visibility='default' filepath='include/trace/hooks/cpuidle.h' line='14' column='1' elf-symbol-id='__tracepoint_android_vh_cpu_idle_enter'/>
       <var-decl name='__tracepoint_android_vh_cpu_idle_exit' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpu_idle_exit' visibility='default' filepath='include/trace/hooks/cpuidle.h' line='17' column='1' elf-symbol-id='__tracepoint_android_vh_cpu_idle_exit'/>
+      <var-decl name='__tracepoint_android_vh_dmabuf_heap_flags_validation' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dmabuf_heap_flags_validation' visibility='default' filepath='include/trace/hooks/dmabuf.h' line='16' column='1' elf-symbol-id='__tracepoint_android_vh_dmabuf_heap_flags_validation'/>
       <var-decl name='__tracepoint_android_vh_do_madvise_blk_plug' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_do_madvise_blk_plug' visibility='default' filepath='include/trace/hooks/mm.h' line='103' column='1' elf-symbol-id='__tracepoint_android_vh_do_madvise_blk_plug'/>
       <var-decl name='__tracepoint_android_vh_dump_throttled_rt_tasks' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dump_throttled_rt_tasks' visibility='default' filepath='include/trace/hooks/sched.h' line='84' column='1' elf-symbol-id='__tracepoint_android_vh_dump_throttled_rt_tasks'/>
       <var-decl name='__tracepoint_android_vh_dup_task_struct' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dup_task_struct' visibility='default' filepath='include/trace/hooks/sched.h' line='352' column='1' elf-symbol-id='__tracepoint_android_vh_dup_task_struct'/>
@@ -125717,39 +125726,39 @@
         <parameter type-id='27f3f5d8' name='chan' filepath='drivers/dma/dmaengine.c' line='697' column='1'/>
         <return type-id='27f3f5d8'/>
       </function-decl>
-      <function-decl name='dma_heap_add' mangled-name='dma_heap_add' filepath='drivers/dma-buf/dma-heap.c' line='298' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_add'>
-        <parameter type-id='dbe60995' name='exp_info' filepath='drivers/dma-buf/dma-heap.c' line='298' column='1'/>
+      <function-decl name='dma_heap_add' mangled-name='dma_heap_add' filepath='drivers/dma-buf/dma-heap.c' line='305' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_add'>
+        <parameter type-id='dbe60995' name='exp_info' filepath='drivers/dma-buf/dma-heap.c' line='305' column='1'/>
         <return type-id='ea1bdaf6'/>
       </function-decl>
-      <function-decl name='dma_heap_buffer_alloc' mangled-name='dma_heap_buffer_alloc' filepath='drivers/dma-buf/dma-heap.c' line='79' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_buffer_alloc'>
-        <parameter type-id='ea1bdaf6' name='heap' filepath='drivers/dma-buf/dma-heap.c' line='79' column='1'/>
-        <parameter type-id='b59d7dce' name='len' filepath='drivers/dma-buf/dma-heap.c' line='79' column='1'/>
-        <parameter type-id='f0981eeb' name='fd_flags' filepath='drivers/dma-buf/dma-heap.c' line='80' column='1'/>
-        <parameter type-id='f0981eeb' name='heap_flags' filepath='drivers/dma-buf/dma-heap.c' line='81' column='1'/>
+      <function-decl name='dma_heap_buffer_alloc' mangled-name='dma_heap_buffer_alloc' filepath='drivers/dma-buf/dma-heap.c' line='81' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_buffer_alloc'>
+        <parameter type-id='ea1bdaf6' name='heap' filepath='drivers/dma-buf/dma-heap.c' line='81' column='1'/>
+        <parameter type-id='b59d7dce' name='len' filepath='drivers/dma-buf/dma-heap.c' line='81' column='1'/>
+        <parameter type-id='f0981eeb' name='fd_flags' filepath='drivers/dma-buf/dma-heap.c' line='82' column='1'/>
+        <parameter type-id='f0981eeb' name='heap_flags' filepath='drivers/dma-buf/dma-heap.c' line='83' column='1'/>
         <return type-id='5e4f599b'/>
       </function-decl>
-      <function-decl name='dma_heap_buffer_free' mangled-name='dma_heap_buffer_free' filepath='drivers/dma-buf/dma-heap.c' line='73' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_buffer_free'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-heap.c' line='73' column='1'/>
+      <function-decl name='dma_heap_buffer_free' mangled-name='dma_heap_buffer_free' filepath='drivers/dma-buf/dma-heap.c' line='75' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_buffer_free'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-heap.c' line='75' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='dma_heap_find' mangled-name='dma_heap_find' filepath='drivers/dma-buf/dma-heap.c' line='55' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_find'>
-        <parameter type-id='80f4b756' name='name' filepath='drivers/dma-buf/dma-heap.c' line='55' column='1'/>
+      <function-decl name='dma_heap_find' mangled-name='dma_heap_find' filepath='drivers/dma-buf/dma-heap.c' line='57' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_find'>
+        <parameter type-id='80f4b756' name='name' filepath='drivers/dma-buf/dma-heap.c' line='57' column='1'/>
         <return type-id='ea1bdaf6'/>
       </function-decl>
-      <function-decl name='dma_heap_get_dev' mangled-name='dma_heap_get_dev' filepath='drivers/dma-buf/dma-heap.c' line='279' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_get_dev'>
-        <parameter type-id='ea1bdaf6' name='heap' filepath='drivers/dma-buf/dma-heap.c' line='279' column='1'/>
+      <function-decl name='dma_heap_get_dev' mangled-name='dma_heap_get_dev' filepath='drivers/dma-buf/dma-heap.c' line='286' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_get_dev'>
+        <parameter type-id='ea1bdaf6' name='heap' filepath='drivers/dma-buf/dma-heap.c' line='286' column='1'/>
         <return type-id='fa0b179b'/>
       </function-decl>
-      <function-decl name='dma_heap_get_drvdata' mangled-name='dma_heap_get_drvdata' filepath='drivers/dma-buf/dma-heap.c' line='239' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_get_drvdata'>
-        <parameter type-id='ea1bdaf6' name='heap' filepath='drivers/dma-buf/dma-heap.c' line='239' column='1'/>
+      <function-decl name='dma_heap_get_drvdata' mangled-name='dma_heap_get_drvdata' filepath='drivers/dma-buf/dma-heap.c' line='246' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_get_drvdata'>
+        <parameter type-id='ea1bdaf6' name='heap' filepath='drivers/dma-buf/dma-heap.c' line='246' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
-      <function-decl name='dma_heap_get_name' mangled-name='dma_heap_get_name' filepath='drivers/dma-buf/dma-heap.c' line='292' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_get_name'>
-        <parameter type-id='ea1bdaf6' name='heap' filepath='drivers/dma-buf/dma-heap.c' line='292' column='1'/>
+      <function-decl name='dma_heap_get_name' mangled-name='dma_heap_get_name' filepath='drivers/dma-buf/dma-heap.c' line='299' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_get_name'>
+        <parameter type-id='ea1bdaf6' name='heap' filepath='drivers/dma-buf/dma-heap.c' line='299' column='1'/>
         <return type-id='80f4b756'/>
       </function-decl>
-      <function-decl name='dma_heap_put' mangled-name='dma_heap_put' filepath='drivers/dma-buf/dma-heap.c' line='260' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_put'>
-        <parameter type-id='ea1bdaf6' name='h' filepath='drivers/dma-buf/dma-heap.c' line='260' column='1'/>
+      <function-decl name='dma_heap_put' mangled-name='dma_heap_put' filepath='drivers/dma-buf/dma-heap.c' line='267' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_heap_put'>
+        <parameter type-id='ea1bdaf6' name='h' filepath='drivers/dma-buf/dma-heap.c' line='267' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='dma_map_page_attrs' mangled-name='dma_map_page_attrs' filepath='kernel/dma/mapping.c' line='140' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_map_page_attrs'>
@@ -128101,10 +128110,10 @@
         <parameter type-id='f9841541' name='params' filepath='drivers/usb/dwc3/gadget.c' line='273' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='dwc3_stop_active_transfer' mangled-name='dwc3_stop_active_transfer' filepath='drivers/usb/dwc3/gadget.c' line='3606' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dwc3_stop_active_transfer'>
-        <parameter type-id='b31af340' name='dep' filepath='drivers/usb/dwc3/gadget.c' line='3606' column='1'/>
-        <parameter type-id='b50a4934' name='force' filepath='drivers/usb/dwc3/gadget.c' line='3606' column='1'/>
-        <parameter type-id='b50a4934' name='interrupt' filepath='drivers/usb/dwc3/gadget.c' line='3607' column='1'/>
+      <function-decl name='dwc3_stop_active_transfer' mangled-name='dwc3_stop_active_transfer' filepath='drivers/usb/dwc3/gadget.c' line='3653' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dwc3_stop_active_transfer'>
+        <parameter type-id='b31af340' name='dep' filepath='drivers/usb/dwc3/gadget.c' line='3653' column='1'/>
+        <parameter type-id='b50a4934' name='force' filepath='drivers/usb/dwc3/gadget.c' line='3653' column='1'/>
+        <parameter type-id='b50a4934' name='interrupt' filepath='drivers/usb/dwc3/gadget.c' line='3654' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <var-decl name='efi' type-id='f7bdefe9' mangled-name='efi' visibility='default' filepath='drivers/firmware/efi/efi.c' line='37' column='1' elf-symbol-id='efi'/>
@@ -139418,8 +139427,8 @@
         <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='6067' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='tcpm_unregister_port' mangled-name='tcpm_unregister_port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='6625' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_unregister_port'>
-        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='6625' column='1'/>
+      <function-decl name='tcpm_unregister_port' mangled-name='tcpm_unregister_port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='6629' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_unregister_port'>
+        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='6629' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='tcpm_update_sink_capabilities' mangled-name='tcpm_update_sink_capabilities' filepath='drivers/usb/typec/tcpm/tcpm.c' line='6224' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_update_sink_capabilities'>
@@ -139839,9 +139848,9 @@
         <parameter type-id='a5263fbd' name='desc' filepath='drivers/usb/typec/class.c' line='858' column='1'/>
         <return type-id='33ca4bbb'/>
       </function-decl>
-      <function-decl name='typec_register_port' mangled-name='typec_register_port' filepath='drivers/usb/typec/class.c' line='1996' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_register_port'>
-        <parameter type-id='fa0b179b' name='parent' filepath='drivers/usb/typec/class.c' line='1996' column='1'/>
-        <parameter type-id='287e28ea' name='cap' filepath='drivers/usb/typec/class.c' line='1997' column='1'/>
+      <function-decl name='typec_register_port' mangled-name='typec_register_port' filepath='drivers/usb/typec/class.c' line='2050' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_register_port'>
+        <parameter type-id='fa0b179b' name='parent' filepath='drivers/usb/typec/class.c' line='2050' column='1'/>
+        <parameter type-id='287e28ea' name='cap' filepath='drivers/usb/typec/class.c' line='2051' column='1'/>
         <return type-id='b977ca56'/>
       </function-decl>
       <function-decl name='typec_set_data_role' mangled-name='typec_set_data_role' filepath='drivers/usb/typec/class.c' line='1690' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_set_data_role'>
@@ -139876,8 +139885,8 @@
         <parameter type-id='33ca4bbb' name='partner' filepath='drivers/usb/typec/class.c' line='905' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='typec_unregister_port' mangled-name='typec_unregister_port' filepath='drivers/usb/typec/class.c' line='2098' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_unregister_port'>
-        <parameter type-id='b977ca56' name='port' filepath='drivers/usb/typec/class.c' line='2098' column='1'/>
+      <function-decl name='typec_unregister_port' mangled-name='typec_unregister_port' filepath='drivers/usb/typec/class.c' line='2152' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_unregister_port'>
+        <parameter type-id='b977ca56' name='port' filepath='drivers/usb/typec/class.c' line='2152' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='uart_add_one_port' mangled-name='uart_add_one_port' filepath='drivers/tty/serial/serial_core.c' line='2927' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='uart_add_one_port'>
