@@ -52,6 +52,42 @@
       "parentUuid": "ee75fe12_e21bac84",
       "revId": "24f5035c054b6e44096f855da93c0e0368b37b03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b158af5_8761235e",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 2000110
+      },
+      "writtenOn": "2023-04-21T04:49:22Z",
+      "side": 1,
+      "message": "Recently, is_dma_buf is exported",
+      "parentUuid": "63b2acfa_7b4767ff",
+      "revId": "24f5035c054b6e44096f855da93c0e0368b37b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75814d32_d14537da",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 2000110
+      },
+      "writtenOn": "2023-04-21T04:49:22Z",
+      "side": 1,
+      "message": "Recently, is_dma_buf is exported",
+      "parentUuid": "63b2acfa_7b4767ff",
+      "revId": "24f5035c054b6e44096f855da93c0e0368b37b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
