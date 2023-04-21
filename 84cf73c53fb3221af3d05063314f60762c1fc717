@@ -16,6 +16,24 @@
       "message": "The IOMMU layer relies on a straightforward `unmap` combined with a range check on the fault path to ensure that its MMIO regions are inaccessible to the host. I think if we\u0027re going to allow these regions to change state then we probably need an annotation instead of the `unmap`. What do you think?",
       "revId": "84cf73c53fb3221af3d05063314f60762c1fc717",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e6e9c9_f025cbc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-04-21T15:04:41Z",
+      "side": 1,
+      "message": "Aha, yes, very good point. I presume we should now donate these regions to the hypervisor properly ...",
+      "parentUuid": "0cf4ad7a_6f9dcf3e",
+      "revId": "84cf73c53fb3221af3d05063314f60762c1fc717",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
