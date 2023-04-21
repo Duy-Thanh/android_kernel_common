@@ -34,6 +34,24 @@
       "parentUuid": "ec70016c_8f2d1a81",
       "revId": "6307d43d153a8c066d0c50b86cf9263e77571e47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33361169_629d4b35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-04-21T09:54:09Z",
+      "side": 1,
+      "message": "this is the presubmit result. https://android-build.googleplex.com/builds/pending/P54729470/kernel_abi_aarch64/latest/ has a download link\n\nThis is the abi generation including this change.",
+      "parentUuid": "6909c448_a4e2962f",
+      "revId": "6307d43d153a8c066d0c50b86cf9263e77571e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
