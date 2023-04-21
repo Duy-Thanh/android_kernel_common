@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b63d2f0b_1bd32e5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-04-21T07:01:49Z",
+      "side": 1,
+      "message": "cherrypick from android13-5.15([aosp/2133068](https://android-review.googlesource.com/c/kernel/common/+/2133068))",
+      "revId": "391f4f80e525c3ee429db8ab706690ac7c5a2b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
