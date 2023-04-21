@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0306cb77_a6b1920e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1867620
+      },
+      "writtenOn": "2023-04-21T07:47:14Z",
+      "side": 1,
+      "message": "Split https://android-review.googlesource.com/c/kernel/common/+/2542953 to binder hooks change and signal hooks change.\nThis is about signal hook, please help to review.",
+      "revId": "cd9970d1466d0847c26853f096a6be75ce67d534",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
