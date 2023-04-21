@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e9afece_f60874c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2023-04-21T02:12:37Z",
+      "side": 1,
+      "message": "now is_dma_buf is exported.\nhttps://android-review.googlesource.com/c/kernel/common/+/2411393\n\nI\u0027ll re-upload w/ is_dma_buf",
+      "revId": "28973d880a4bf1cff9ec7425fc1ddfdc28f36b01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
