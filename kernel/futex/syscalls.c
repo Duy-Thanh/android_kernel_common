@@ -3,6 +3,7 @@
 #include <linux/compat.h>
 #include <linux/syscalls.h>
 #include <linux/time_namespace.h>
+#include <trace/hooks/futex.h>
 
 #include "futex.h"
 
@@ -98,6 +99,7 @@ long do_futex(u32 __user *uaddr, int op, u32 val, ktime_t *timeout,
 			return -ENOSYS;
 	}
 
+	trace_android_vh_do_futex(cmd, &flags, uaddr2);
 	switch (cmd) {
 	case FUTEX_WAIT:
 		val3 = FUTEX_BITSET_MATCH_ANY;
