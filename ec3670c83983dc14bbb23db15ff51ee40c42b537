@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de56d4fd_6ff51035",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1206463
+      },
+      "writtenOn": "2023-04-23T02:30:28Z",
+      "side": 1,
+      "message": "update the commit message to contain bug id. A ticket is raised here: https://issuetracker.google.com/issues/279270023",
+      "revId": "ec3670c83983dc14bbb23db15ff51ee40c42b537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
