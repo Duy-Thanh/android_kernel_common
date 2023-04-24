@@ -279977,6 +279977,14 @@ function {
   parameter_id: 0x1d19a9d5
 }
 function {
+  id: 0x84ba5d97
+  return_type_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x3fa672fd
+  parameter_id: 0x3e10b518
+  parameter_id: 0xe5e56f65
+}
+function {
   id: 0x84bb5eaa
   return_type_id: 0x6720d32f
   parameter_id: 0x6720d32f
@@ -312767,6 +312775,15 @@ elf_symbol {
   crc: 0x7b867484
   type_id: 0x1cfb41e9
   full_name: "dev_uc_unsync"
+}
+elf_symbol {
+  id: 0xfc7749bc
+  name: "dev_vprintk_emit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x13da0b79
+  type_id: 0x84ba5d97
+  full_name: "dev_vprintk_emit"
 }
 elf_symbol {
   id: 0x55a1ee95
@@ -349111,6 +349128,10 @@ symbols {
   symbol {
     key: "dev_uc_unsync"
     value: 0x1938c508
+  }
+  symbol {
+    key: "dev_vprintk_emit"
+    value: 0xfc7749bc
   }
   symbol {
     key: "devfreq_add_device"
