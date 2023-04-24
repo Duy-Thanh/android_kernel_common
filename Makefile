@@ -1320,9 +1320,13 @@ endif
 # make sure no implicit rule kicks in
 $(sort $(KBUILD_LDS) $(KBUILD_VMLINUX_OBJS) $(KBUILD_VMLINUX_LIBS)): . ;
 
+<<<<<<< HEAD   (2f021a Merge 75280bdf49b2 ("setlocalversion: make indentation shall)
 filechk_kernel.release = \
 	echo "$(KERNELVERSION)$$($(CONFIG_SHELL) $(srctree)/scripts/setlocalversion \
 		$(srctree) $(BRANCH) $(KMI_GENERATION))"
+=======
+filechk_kernel.release = $(srctree)/scripts/setlocalversion $(srctree)
+>>>>>>> BRANCH (ec31f8 setlocalversion: absorb $(KERNELVERSION))
 
 # Store (new) KERNELRELEASE string in include/config/kernel.release
 include/config/kernel.release: FORCE
@@ -2174,8 +2178,12 @@ checkstack:
 	$(PERL) $(srctree)/scripts/checkstack.pl $(CHECKSTACK_ARCH)
 
 kernelrelease:
+<<<<<<< HEAD   (2f021a Merge 75280bdf49b2 ("setlocalversion: make indentation shall)
 	@echo "$(KERNELVERSION)$$($(CONFIG_SHELL) $(srctree)/scripts/setlocalversion \
 		$(srctree) $(BRANCH) $(KMI_GENERATION))"
+=======
+	@$(srctree)/scripts/setlocalversion $(srctree)
+>>>>>>> BRANCH (ec31f8 setlocalversion: absorb $(KERNELVERSION))
 
 kernelversion:
 	@echo $(KERNELVERSION)

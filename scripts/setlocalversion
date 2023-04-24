@@ -126,6 +126,11 @@ if ! test -e include/config/auto.conf; then
 	exit 1
 fi
 
+if [ -z "${KERNELVERSION}" ]; then
+	echo "KERNELVERSION is not set" >&2
+	exit 1
+fi
+
 # localversion* files in the build and source directory
 res="$(collect_files localversion*)"
 if test ! "$srctree" -ef .; then
@@ -151,9 +156,13 @@ elif [ "${LOCALVERSION+set}" != "set" ]; then
 	res="$res$(scm_version --short)"
 fi
 
+<<<<<<< HEAD   (2f021a Merge 75280bdf49b2 ("setlocalversion: make indentation shall)
 # finally, add the abXXX number if BUILD_NUMBER is set
 if test -n "${BUILD_NUMBER}"; then
 	res="$res-ab${BUILD_NUMBER}"
 fi
 
 echo "$res"
+=======
+echo "${KERNELVERSION}${res}"
+>>>>>>> BRANCH (ec31f8 setlocalversion: absorb $(KERNELVERSION))
