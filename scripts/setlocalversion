@@ -11,18 +11,24 @@
 #
 
 usage() {
+<<<<<<< HEAD   (0cf2f1 Merge c9f9cf2560e4 ("builddeb: clean generated package conte)
 	echo "Usage: $0 [--save-scmversion] [srctree] [branch] [kmi-generation]" >&2
+=======
+	echo "Usage: $0 [srctree]" >&2
+>>>>>>> BRANCH (f6e09b kbuild: do not put .scmversion into the source tarball)
 	exit 1
 }
 
-scm_only=false
 srctree=.
+<<<<<<< HEAD   (0cf2f1 Merge c9f9cf2560e4 ("builddeb: clean generated package conte)
 android_release=
 kmi_generation=
 if test "$1" = "--save-scmversion"; then
 	scm_only=true
 	shift
 fi
+=======
+>>>>>>> BRANCH (f6e09b kbuild: do not put .scmversion into the source tarball)
 if test $# -gt 0; then
 	srctree=$1
 	shift
@@ -53,10 +59,6 @@ scm_version()
 	short=false
 
 	cd "$srctree"
-	if test -e .scmversion; then
-		cat .scmversion
-		return
-	fi
 	if test "$1" = "--short"; then
 		short=true
 	fi
@@ -125,14 +127,6 @@ collect_files()
 	done
 	echo "$res"
 }
-
-if $scm_only; then
-	if test ! -e .scmversion; then
-		res=$(scm_version)
-		echo "$res" >.scmversion
-	fi
-	exit
-fi
 
 if ! test -e include/config/auto.conf; then
 	echo "Error: kernelrelease not valid - run 'make prepare' to update it" >&2
