@@ -499,16 +499,21 @@ EXPORT_SYMBOL_GPL(thread_group_cputime_adjusted);
 void account_process_tick(struct task_struct *p, int user_tick)
 {
 	u64 cputime, steal;
+	int ticks = 1;
+
+	trace_android_vh_account_process_tick_granularity(user_tick, &ticks);
+	if (!ticks)
+		return;
 
 	if (vtime_accounting_enabled_this_cpu())
 		return;
 
 	if (sched_clock_irqtime) {
-		irqtime_account_process_tick(p, user_tick, 1);
+		irqtime_account_process_tick(p, user_tick, ticks);
 		return;
 	}
 
-	cputime = TICK_NSEC;
+	cputime = TICK_NSEC * ticks;
 	steal = steal_account_process_time(ULONG_MAX);
 
 	if (steal >= cputime)
