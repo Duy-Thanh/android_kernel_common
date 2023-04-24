@@ -113,7 +113,7 @@ static inline void account_process_tick(struct task_struct *tsk, int user)
 	vtime_flush(tsk);
 }
 #else
-extern void account_process_tick(struct task_struct *, int user);
+extern void account_process_tick(struct task_struct *, int user, int ticks);
 #endif
 
 extern void account_idle_ticks(unsigned long ticks);

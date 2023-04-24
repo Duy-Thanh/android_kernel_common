@@ -1838,9 +1838,13 @@ static void run_local_timers(void)
 void update_process_times(int user_tick)
 {
 	struct task_struct *p = current;
+	bool should_account = true;
+	int ticks = 1;
 
+	trace_android_vh_prune_account(user_tick, &should_account, &ticks);
 	/* Note: this timer irq context must be accounted for as well. */
-	account_process_tick(p, user_tick);
+	if (should_account)
+		account_process_tick(p, user_tick, ticks);
 	run_local_timers();
 	rcu_sched_clock_irq(user_tick);
 #ifdef CONFIG_IRQ_WORK

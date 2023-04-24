@@ -496,7 +496,7 @@ EXPORT_SYMBOL_GPL(thread_group_cputime_adjusted);
  * @p: the process that the CPU time gets accounted to
  * @user_tick: indicates if the tick is a user or a system tick
  */
-void account_process_tick(struct task_struct *p, int user_tick)
+void account_process_tick(struct task_struct *p, int user_tick, int ticks)
 {
 	u64 cputime, steal;
 
@@ -504,11 +504,11 @@ void account_process_tick(struct task_struct *p, int user_tick)
 		return;
 
 	if (sched_clock_irqtime) {
-		irqtime_account_process_tick(p, user_tick, 1);
+		irqtime_account_process_tick(p, user_tick, ticks);
 		return;
 	}
 
-	cputime = TICK_NSEC;
+	cputime = TICK_NSEC * ticks;
 	steal = steal_account_process_time(ULONG_MAX);
 
 	if (steal >= cputime)
