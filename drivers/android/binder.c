@@ -2994,6 +2994,9 @@ static int binder_proc_transaction(struct binder_transaction *t,
 		binder_enqueue_work_ilocked(&t->work, &node->async_todo);
 	}
 
+	trace_android_vh_binder_proc_transaction_finish(proc, t,
+		thread ? thread->task : NULL, pending_async, !oneway);
+
 	if (!pending_async)
 		binder_wakeup_thread_ilocked(proc, thread, !oneway /* sync */);
 
@@ -3224,6 +3227,8 @@ static void binder_transaction(struct binder_proc *proc,
 			return_error_line = __LINE__;
 			goto err_invalid_target_handle;
 		}
+		trace_android_vh_binder_trans(target_proc, proc, thread, tr);
+
 		if (security_binder_transaction(proc->cred,
 						target_proc->cred) < 0) {
 			return_error = BR_FAILED_REPLY;
@@ -5812,6 +5817,7 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	}
 	hlist_add_head(&proc->proc_node, &binder_procs);
 	mutex_unlock(&binder_procs_lock);
+	trace_android_vh_binder_preset(&binder_procs, &binder_procs_lock);
 
 	if (binder_debugfs_dir_entry_proc && !existing_pid) {
 		char strbuf[11];
