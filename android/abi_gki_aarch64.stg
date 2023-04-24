@@ -289833,6 +289833,15 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9a2b6ade
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x1d19a9d5
+}
+function {
   id: 0x9a2fc16a
   return_type_id: 0x6720d32f
   parameter_id: 0x1dc3d428
@@ -289873,6 +289882,14 @@ function {
   parameter_id: 0x18bd6530
   parameter_id: 0x6720d32f
   parameter_id: 0x1d19a9d5
+}
+function {
+  id: 0x9a35263f
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
+  parameter_id: 0x1bf16028
+  parameter_id: 0x38d23361
 }
 function {
   id: 0x9a35acc8
@@ -290161,6 +290178,13 @@ function {
   id: 0x9a8b3be7
   return_type_id: 0x6720d32f
   parameter_id: 0x1c2f6323
+}
+function {
+  id: 0x9a8bedf1
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x4585663f
+  parameter_id: 0xc9082b19
 }
 function {
   id: 0x9a8dcf13
@@ -290859,6 +290883,15 @@ function {
   parameter_id: 0x18ea6ae3
   parameter_id: 0x4585663f
   parameter_id: 0x1253769c
+}
+function {
+  id: 0x9b2f1182
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x2115ac15
+  parameter_id: 0x13580d6c
+  parameter_id: 0x06440279
+  parameter_id: 0xc9082b19
 }
 function {
   id: 0x9b2ff6e6
@@ -304443,6 +304476,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_cpufreq_target"
 }
 elf_symbol {
+  id: 0xd593b3ef
+  name: "__traceiter_android_vh_do_futex"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0dee6d8f
+  type_id: 0x9a35263f
+  full_name: "__traceiter_android_vh_do_futex"
+}
+elf_symbol {
   id: 0x1cc3aec5
   name: "__traceiter_android_vh_do_send_sig_info"
   is_defined: true
@@ -304504,6 +304546,60 @@ elf_symbol {
   crc: 0x01d3a4ab
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_vh_free_task"
+}
+elf_symbol {
+  id: 0x494c2e7a
+  name: "__traceiter_android_vh_futex_sleep_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf7aa54d1
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_android_vh_futex_sleep_start"
+}
+elf_symbol {
+  id: 0x79670e34
+  name: "__traceiter_android_vh_futex_wait_end"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x28d3c668
+  type_id: 0x9a8bedf1
+  full_name: "__traceiter_android_vh_futex_wait_end"
+}
+elf_symbol {
+  id: 0x4f81fc38
+  name: "__traceiter_android_vh_futex_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5c2035d3
+  type_id: 0x9a8bedf1
+  full_name: "__traceiter_android_vh_futex_wait_start"
+}
+elf_symbol {
+  id: 0xff623c2f
+  name: "__traceiter_android_vh_futex_wake_this"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3347c342
+  type_id: 0x9a2b6ade
+  full_name: "__traceiter_android_vh_futex_wake_this"
+}
+elf_symbol {
+  id: 0x7fef736f
+  name: "__traceiter_android_vh_futex_wake_traverse_plist"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x82b46945
+  type_id: 0x9b2f1182
+  full_name: "__traceiter_android_vh_futex_wake_traverse_plist"
+}
+elf_symbol {
+  id: 0x9fe60f0c
+  name: "__traceiter_android_vh_futex_wake_up_q_finish"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0ba80ee0
+  type_id: 0x9a2af11b
+  full_name: "__traceiter_android_vh_futex_wake_up_q_finish"
 }
 elf_symbol {
   id: 0xdbe4202a
@@ -306009,6 +306105,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_cpufreq_target"
 }
 elf_symbol {
+  id: 0x9fe99d05
+  name: "__tracepoint_android_vh_do_futex"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x2c256c39
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_do_futex"
+}
+elf_symbol {
   id: 0x82ce823f
   name: "__tracepoint_android_vh_do_send_sig_info"
   is_defined: true
@@ -306070,6 +306175,60 @@ elf_symbol {
   crc: 0x25db8da7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_free_task"
+}
+elf_symbol {
+  id: 0xef0379f8
+  name: "__tracepoint_android_vh_futex_sleep_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1508b3bb
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_futex_sleep_start"
+}
+elf_symbol {
+  id: 0x08e2cf92
+  name: "__tracepoint_android_vh_futex_wait_end"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x43c8f269
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_futex_wait_end"
+}
+elf_symbol {
+  id: 0x6d73379a
+  name: "__tracepoint_android_vh_futex_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xd4f69147
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_futex_wait_start"
+}
+elf_symbol {
+  id: 0x0c310ebd
+  name: "__tracepoint_android_vh_futex_wake_this"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xaad61dcc
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_futex_wake_this"
+}
+elf_symbol {
+  id: 0x9b384a49
+  name: "__tracepoint_android_vh_futex_wake_traverse_plist"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57b2dce5
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_futex_wake_traverse_plist"
+}
+elf_symbol {
+  id: 0x828646be
+  name: "__tracepoint_android_vh_futex_wake_up_q_finish"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xbe6ff02e
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_futex_wake_up_q_finish"
 }
 elf_symbol {
   id: 0x60a121b4
@@ -345374,6 +345533,10 @@ symbols {
     value: 0xca50936b
   }
   symbol {
+    key: "__traceiter_android_vh_do_futex"
+    value: 0xd593b3ef
+  }
+  symbol {
     key: "__traceiter_android_vh_do_send_sig_info"
     value: 0x1cc3aec5
   }
@@ -345400,6 +345563,30 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_free_task"
     value: 0x5ecff02f
+  }
+  symbol {
+    key: "__traceiter_android_vh_futex_sleep_start"
+    value: 0x494c2e7a
+  }
+  symbol {
+    key: "__traceiter_android_vh_futex_wait_end"
+    value: 0x79670e34
+  }
+  symbol {
+    key: "__traceiter_android_vh_futex_wait_start"
+    value: 0x4f81fc38
+  }
+  symbol {
+    key: "__traceiter_android_vh_futex_wake_this"
+    value: 0xff623c2f
+  }
+  symbol {
+    key: "__traceiter_android_vh_futex_wake_traverse_plist"
+    value: 0x7fef736f
+  }
+  symbol {
+    key: "__traceiter_android_vh_futex_wake_up_q_finish"
+    value: 0x9fe60f0c
   }
   symbol {
     key: "__traceiter_android_vh_gic_set_affinity"
@@ -346070,6 +346257,10 @@ symbols {
     value: 0x750e1421
   }
   symbol {
+    key: "__tracepoint_android_vh_do_futex"
+    value: 0x9fe99d05
+  }
+  symbol {
     key: "__tracepoint_android_vh_do_send_sig_info"
     value: 0x82ce823f
   }
@@ -346096,6 +346287,30 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_free_task"
     value: 0xe6918e09
+  }
+  symbol {
+    key: "__tracepoint_android_vh_futex_sleep_start"
+    value: 0xef0379f8
+  }
+  symbol {
+    key: "__tracepoint_android_vh_futex_wait_end"
+    value: 0x08e2cf92
+  }
+  symbol {
+    key: "__tracepoint_android_vh_futex_wait_start"
+    value: 0x6d73379a
+  }
+  symbol {
+    key: "__tracepoint_android_vh_futex_wake_this"
+    value: 0x0c310ebd
+  }
+  symbol {
+    key: "__tracepoint_android_vh_futex_wake_traverse_plist"
+    value: 0x9b384a49
+  }
+  symbol {
+    key: "__tracepoint_android_vh_futex_wake_up_q_finish"
+    value: 0x828646be
   }
   symbol {
     key: "__tracepoint_android_vh_gic_set_affinity"
