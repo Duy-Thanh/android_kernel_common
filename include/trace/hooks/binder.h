@@ -46,6 +46,17 @@ DECLARE_HOOK(android_vh_binder_print_transaction_info,
 	TP_PROTO(struct seq_file *m, struct binder_proc *proc,
 		 const char *prefix, struct binder_transaction *t),
 	TP_ARGS(m, proc, prefix, t));
+DECLARE_HOOK(android_vh_binder_proc_transaction_finish,
+	TP_PROTO(struct binder_proc *proc, struct binder_transaction *t,
+		struct task_struct *binder_th_task, bool pending_async, bool sync),
+	TP_ARGS(proc, t, binder_th_task, pending_async, sync));
+DECLARE_HOOK(android_vh_binder_preset,
+	TP_PROTO(struct hlist_head *hhead, struct mutex *lock),
+	TP_ARGS(hhead, lock));
+DECLARE_HOOK(android_vh_binder_trans,
+	TP_PROTO(struct binder_proc *target_proc, struct binder_proc *proc,
+		struct binder_thread *thread, struct binder_transaction_data *tr),
+	TP_ARGS(target_proc, proc, thread, tr));
 
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */
