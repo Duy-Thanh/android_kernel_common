@@ -400,6 +400,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_load_avg_cfs_rq,
 DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg_internal,
 	TP_PROTO(u64 now, struct rq *rq, int running, int *ret),
 	TP_ARGS(now, rq, running, ret), 1);
+
+DECLARE_HOOK(android_vh_account_process_tick_gran,
+	TP_PROTO(struct task_struct *p, struct rq *rq, int user_tick, int *ticks),
+	TP_ARGS(p, rq, user_tick, ticks));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
