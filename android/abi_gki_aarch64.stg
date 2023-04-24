@@ -290007,6 +290007,11 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x043864e3
+  return_type_id: 0x181ee594
+  parameter_id: 0xe90b32b7
+}
+function {
   id: 0x044f79a4
   return_type_id: 0xbdd18903
   parameter_id: 0x14abdd00
@@ -294853,6 +294858,11 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x1c34b0f2
   parameter_id: 0x42ebe6bd
+}
+function {
+  id: 0x169fe8f6
+  return_type_id: 0x48b5725f
+  parameter_id: 0x181ee594
 }
 function {
   id: 0x16a18560
@@ -320436,6 +320446,12 @@ function {
   parameter_id: 0x370ed8aa
 }
 function {
+  id: 0x9bcfc1f5
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x181ee594
+}
+function {
   id: 0x9bcfcbd0
   return_type_id: 0x6720d32f
   parameter_id: 0x1b2ca025
@@ -334360,6 +334376,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_wake_up_new_task"
 }
 elf_symbol {
+  id: 0x9c240ef1
+  name: "__traceiter_android_vh_alloc_uid"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfb239018
+  type_id: 0x9bcfc1f5
+  full_name: "__traceiter_android_vh_alloc_uid"
+}
+elf_symbol {
   id: 0x528da532
   name: "__traceiter_android_vh_audio_usb_offload_connect"
   is_defined: true
@@ -334565,6 +334590,15 @@ elf_symbol {
   crc: 0xc65dc862
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_vh_free_task"
+}
+elf_symbol {
+  id: 0xe3ce1f52
+  name: "__traceiter_android_vh_free_user"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x974622dd
+  type_id: 0x9bcfc1f5
+  full_name: "__traceiter_android_vh_free_user"
 }
 elf_symbol {
   id: 0xe172d11a
@@ -336043,6 +336077,15 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_wake_up_new_task"
 }
 elf_symbol {
+  id: 0xea695d5b
+  name: "__tracepoint_android_vh_alloc_uid"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x94c1683a
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_alloc_uid"
+}
+elf_symbol {
   id: 0xfb7cdd24
   name: "__tracepoint_android_vh_audio_usb_offload_connect"
   is_defined: true
@@ -336248,6 +336291,15 @@ elf_symbol {
   crc: 0x25db8da7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_free_task"
+}
+elf_symbol {
+  id: 0x4d4fd1cc
+  name: "__tracepoint_android_vh_free_user"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x61004dd9
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_free_user"
 }
 elf_symbol {
   id: 0xbacc3060
@@ -351691,6 +351743,15 @@ elf_symbol {
   full_name: "find_task_by_vpid"
 }
 elf_symbol {
+  id: 0x5b7736f5
+  name: "find_user"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3c6b22da
+  type_id: 0x043864e3
+  full_name: "find_user"
+}
+elf_symbol {
   id: 0x69beea41
   name: "find_vma"
   is_defined: true
@@ -351995,6 +352056,15 @@ elf_symbol {
   crc: 0x7a6b169c
   type_id: 0x019bfd88
   full_name: "free_percpu_irq"
+}
+elf_symbol {
+  id: 0x0f402ef5
+  name: "free_uid"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0081897d
+  type_id: 0x169fe8f6
+  full_name: "free_uid"
 }
 elf_symbol {
   id: 0x2ed5588c
@@ -357242,7 +357312,7 @@ elf_symbol {
   name: "init_user_ns"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0xe0dd4790
+  crc: 0x6e18059d
   type_id: 0x14ee5a71
   full_name: "init_user_ns"
 }
@@ -385581,6 +385651,10 @@ symbols {
     value: 0xebcd0234
   }
   symbol {
+    key: "__traceiter_android_vh_alloc_uid"
+    value: 0x9c240ef1
+  }
+  symbol {
     key: "__traceiter_android_vh_audio_usb_offload_connect"
     value: 0x528da532
   }
@@ -385671,6 +385745,10 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_free_task"
     value: 0x5ecff02f
+  }
+  symbol {
+    key: "__traceiter_android_vh_free_user"
+    value: 0xe3ce1f52
   }
   symbol {
     key: "__traceiter_android_vh_ftrace_dump_buffer"
@@ -386329,6 +386407,10 @@ symbols {
     value: 0xdcf22716
   }
   symbol {
+    key: "__tracepoint_android_vh_alloc_uid"
+    value: 0xea695d5b
+  }
+  symbol {
     key: "__tracepoint_android_vh_audio_usb_offload_connect"
     value: 0xfb7cdd24
   }
@@ -386419,6 +386501,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_free_task"
     value: 0xe6918e09
+  }
+  symbol {
+    key: "__tracepoint_android_vh_free_user"
+    value: 0x4d4fd1cc
   }
   symbol {
     key: "__tracepoint_android_vh_ftrace_dump_buffer"
@@ -393281,6 +393367,10 @@ symbols {
     value: 0xdc16d76a
   }
   symbol {
+    key: "find_user"
+    value: 0x5b7736f5
+  }
+  symbol {
     key: "find_vma"
     value: 0x69beea41
   }
@@ -393415,6 +393505,10 @@ symbols {
   symbol {
     key: "free_percpu_irq"
     value: 0x31dfc6e3
+  }
+  symbol {
+    key: "free_uid"
+    value: 0x0f402ef5
   }
   symbol {
     key: "freezer_active"
