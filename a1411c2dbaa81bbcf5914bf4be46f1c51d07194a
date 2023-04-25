@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7aef259_cd3dfa3e",
+        "filename": "include/linux/gunyah_vm_mgr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-25T16:54:16Z",
+      "side": 1,
+      "message": "checkpatch error:\n```\nERROR:MULTISTATEMENT_MACRO_USE_DO_WHILE: Macros with multiple statements should be enclosed in a do - while loop\n#293: FILE: include/linux/gunyah_vm_mgr.h:80:\n```",
+      "revId": "a1411c2dbaa81bbcf5914bf4be46f1c51d07194a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
