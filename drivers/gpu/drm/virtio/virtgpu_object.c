@@ -168,9 +168,14 @@ static int virtio_gpu_object_shmem_init(struct virtio_gpu_device *vgdev,
 	 */
 	shmem->pages = drm_gem_shmem_get_sg_table(&bo->base.base);
 	if (IS_ERR(shmem->pages)) {
+<<<<<<< HEAD   (4f5249 Merge 5.15.99 into android13-5.15-lts)
 		drm_gem_shmem_unpin(&bo->base.base);
+=======
+		drm_gem_shmem_unpin(&bo->base);
+		ret = PTR_ERR(shmem->pages);
+>>>>>>> BRANCH (d214f2 Linux 5.15.100)
 		shmem->pages = NULL;
-		return PTR_ERR(shmem->pages);
+		return ret;
 	}
 
 	if (use_dma_api) {

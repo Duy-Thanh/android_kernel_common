@@ -1103,7 +1103,11 @@ struct dwc3_scratchpad_array {
  *		     address.
  * @num_ep_resized: carries the current number endpoints which have had its tx
  *		    fifo resized.
+<<<<<<< HEAD   (4f5249 Merge 5.15.99 into android13-5.15-lts)
  * @clear_stall_protocol: endpoint number that requires a delayed status phase.
+=======
+ * @debug_root: root debugfs directory for this device to put its files in.
+>>>>>>> BRANCH (d214f2 Linux 5.15.100)
  */
 struct dwc3 {
 	struct work_struct	drd_work;
@@ -1314,6 +1318,7 @@ struct dwc3 {
 	int			max_cfg_eps;
 	int			last_fifo_depth;
 	int			num_ep_resized;
+<<<<<<< HEAD   (4f5249 Merge 5.15.99 into android13-5.15-lts)
 
 	ANDROID_KABI_USE(1, struct{ u8 clear_stall_protocol; u8 padding1;
 				u8 padding2; u8 padding3; u8 padding4; u8 padding5;
@@ -1321,6 +1326,9 @@ struct dwc3 {
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+	struct dentry		*debug_root;
+>>>>>>> BRANCH (d214f2 Linux 5.15.100)
 };
 
 #define INCRX_BURST_MODE 0
