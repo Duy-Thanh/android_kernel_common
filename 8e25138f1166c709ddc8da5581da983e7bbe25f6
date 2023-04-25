@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "405e2f9e_cdd2995d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-25T06:55:48Z",
+      "side": 1,
+      "message": "please place this right below where this symbol is defined.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 49
+      },
+      "revId": "8e25138f1166c709ddc8da5581da983e7bbe25f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
