@@ -64,6 +64,9 @@ struct slabinfo;
 DECLARE_HOOK(android_vh_cache_show,
 	TP_PROTO(struct seq_file *m, struct slabinfo *sinfo, struct kmem_cache *s),
 	TP_ARGS(m, sinfo, s));
+DECLARE_HOOK(android_vh_madvise_cold_pageout_skip,
+	TP_PROTO(struct vm_area_struct *vma, struct page *page, bool pageout, bool *need_skip),
+	TP_ARGS(vma, page, pageout, need_skip));
 
 #endif /* _TRACE_HOOK_MM_H */
 
