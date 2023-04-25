@@ -16,6 +16,24 @@
       "message": "Please add a patch to update the symbol list.",
       "revId": "225385d7004959293e4efb7a4afcf8f149a0d331",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d85c953_01cc9b1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-25T12:25:59Z",
+      "side": 1,
+      "message": "The symbol list can be found at the following patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/2560512",
+      "parentUuid": "dade15b7_ea23dad9",
+      "revId": "225385d7004959293e4efb7a4afcf8f149a0d331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
