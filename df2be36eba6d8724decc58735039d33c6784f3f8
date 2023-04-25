@@ -135,6 +135,30 @@
       },
       "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "829595a8_70cd8142",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2023-04-25T05:48:22Z",
+      "side": 1,
+      "message": "If using uclamp_eff_value() here, we store uclamp_eff_value instead of previous uclamp value and then we cannot restore to previous value anymore.",
+      "parentUuid": "bbcf1c97_04fdaef5",
+      "range": {
+        "startLine": 668,
+        "startChar": 29,
+        "endLine": 668,
+        "endChar": 63
+      },
+      "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
