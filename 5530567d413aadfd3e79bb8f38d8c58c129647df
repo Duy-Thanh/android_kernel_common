@@ -16,6 +16,24 @@
       "message": "Needs testing on real hardware.",
       "revId": "5530567d413aadfd3e79bb8f38d8c58c129647df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7f74c7f_de31abe9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-04-25T13:37:41Z",
+      "side": 1,
+      "message": "Done now.",
+      "parentUuid": "b7fc0c2a_d7e733e9",
+      "revId": "5530567d413aadfd3e79bb8f38d8c58c129647df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
