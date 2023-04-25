@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a19ba45_7242b278",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-04-25T06:55:35Z",
+      "side": 1,
+      "message": "FYI. I hit a merge conflict when trying to apply the ABI fix. Retrying the ABI build following a rebase.",
+      "revId": "b5d7a54d1cdd82b9abf31382412571d414a3402b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
