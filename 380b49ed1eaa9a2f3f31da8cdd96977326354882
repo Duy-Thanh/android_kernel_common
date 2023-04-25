@@ -16,6 +16,24 @@
       "message": "Please review the new patch, Thks. If OK, i will make the same changes in branch 5.15.",
       "revId": "380b49ed1eaa9a2f3f31da8cdd96977326354882",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2722ac1d_c112f9d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-25T12:11:37Z",
+      "side": 1,
+      "message": "Looks fine. Go ahead and make the same changes. Please rebase the symbol list patch.",
+      "parentUuid": "049ed3ca_480089d2",
+      "revId": "380b49ed1eaa9a2f3f31da8cdd96977326354882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
