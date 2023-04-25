@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b2613e_2c26ae8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-04-25T15:34:12Z",
+      "side": 1,
+      "message": "Removing the `default_priority` requires more thought. So let\u0027s go ahead with this band-aid instead.",
+      "parentUuid": "2b267353_e95a44d5",
+      "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5f46574_b5779e82",
