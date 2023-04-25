@@ -140,6 +140,126 @@
       },
       "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d695318_3b4ab493",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2023-04-25T08:11:22Z",
+      "side": 1,
+      "message": "blk_crypto_profile_init removed.",
+      "parentUuid": "c9ada0bf_d029e949",
+      "range": {
+        "startLine": 686,
+        "startChar": 2,
+        "endLine": 686,
+        "endChar": 25
+      },
+      "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c29031_71a76125",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2023-04-25T08:11:22Z",
+      "side": 1,
+      "message": "blk_crypto_profile_init removed.",
+      "parentUuid": "c9ada0bf_d029e949",
+      "range": {
+        "startLine": 686,
+        "startChar": 2,
+        "endLine": 686,
+        "endChar": 25
+      },
+      "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94c6c93e_6ccdaeef",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2023-04-25T08:11:22Z",
+      "side": 1,
+      "message": "blk_crypto_profile_init removed.",
+      "parentUuid": "c9ada0bf_d029e949",
+      "range": {
+        "startLine": 686,
+        "startChar": 2,
+        "endLine": 686,
+        "endChar": 25
+      },
+      "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d3d5d0_969f47d4",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2023-04-25T08:11:22Z",
+      "side": 1,
+      "message": "blk_crypto_profile_init removed.",
+      "parentUuid": "c9ada0bf_d029e949",
+      "range": {
+        "startLine": 686,
+        "startChar": 2,
+        "endLine": 686,
+        "endChar": 25
+      },
+      "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94316723_f5ab2f6a",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2023-04-25T08:11:22Z",
+      "side": 1,
+      "message": "blk_crypto_profile_init removed.\npatchset#2 rebased.",
+      "parentUuid": "c9ada0bf_d029e949",
+      "range": {
+        "startLine": 686,
+        "startChar": 2,
+        "endLine": 686,
+        "endChar": 25
+      },
+      "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
