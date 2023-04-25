@@ -34,6 +34,24 @@
       "parentUuid": "dade15b7_ea23dad9",
       "revId": "225385d7004959293e4efb7a4afcf8f149a0d331",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b579a0a1_caa9a92b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-25T12:33:41Z",
+      "side": 1,
+      "message": "The symbol list needs to be in the same series. Please submit them together with this patch as a parent to the symbol list patch.",
+      "parentUuid": "7d85c953_01cc9b1e",
+      "revId": "225385d7004959293e4efb7a4afcf8f149a0d331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
