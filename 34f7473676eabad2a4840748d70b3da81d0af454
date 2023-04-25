@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2053156c_9d418b96",
+        "filename": "include/linux/gunyah_rsc_mgr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-25T16:58:37Z",
+      "side": 1,
+      "message": "KMI break:\n```\ntype \u0027struct gh_rm_mem_entry\u0027 changed\nmember \u0027__le64 phys_addr\u0027 was added\nmember \u0027__le64 ipa_base\u0027 was removed\n```\n\nThis will have to wait until the next KMI update (May 10)",
+      "revId": "34f7473676eabad2a4840748d70b3da81d0af454",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
