@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "966f4640_d94f5d59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1871035
+      },
+      "writtenOn": "2023-04-25T06:15:02Z",
+      "side": 1,
+      "message": "I\u0027m checking this now.",
+      "parentUuid": "5773d03b_534e3a62",
+      "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dc97776_6b0e35e6",
@@ -66,6 +84,30 @@
       "writtenOn": "2023-04-24T19:55:49Z",
       "side": 1,
       "message": "This looks wrong; why would you need `blk_crypto_profile_init()` without `blk_crypto_profile_destroy()`?\n\nYou almost certainly should be using the resource-managed variant `devm_blk_crypto_profile_init()` instead.",
+      "range": {
+        "startLine": 686,
+        "startChar": 2,
+        "endLine": 686,
+        "endChar": 25
+      },
+      "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d35f3608_b659e738",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1871035
+      },
+      "writtenOn": "2023-04-25T06:15:02Z",
+      "side": 1,
+      "message": "I see. Thnak you for your comment.",
+      "parentUuid": "8dc97776_6b0e35e6",
       "range": {
         "startLine": 686,
         "startChar": 2,
