@@ -4,7 +4,7 @@
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels", "define_db845c")
 load("//build/kernel/kleaf:kernel.bzl", "ddk_headers", "kernel_build", "kernel_images", "kernel_modules_install")
-load(":modules.bzl", "COMMON_GKI_MODULES_LIST")
+load(":modules.bzl", "AARCH64_GKI_MODULES_LIST", "COMMON_GKI_MODULES_LIST")
 
 package(
     default_visibility = [
@@ -34,7 +34,7 @@ filegroup(
 define_common_kernels(target_configs = {
     "kernel_aarch64": {
         "kmi_symbol_list_strict_mode": True,
-        "module_implicit_outs": COMMON_GKI_MODULES_LIST,
+        "module_implicit_outs": AARCH64_GKI_MODULES_LIST,
         "kmi_symbol_list": "android/abi_gki_aarch64",
         "additional_kmi_symbol_lists": [":aarch64_additional_kmi_symbol_lists"],
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",
@@ -42,11 +42,11 @@ define_common_kernels(target_configs = {
     },
     "kernel_aarch64_16k": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": COMMON_GKI_MODULES_LIST,
+        "module_implicit_outs": AARCH64_GKI_MODULES_LIST,
     },
     "kernel_aarch64_debug": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": COMMON_GKI_MODULES_LIST,
+        "module_implicit_outs": AARCH64_GKI_MODULES_LIST,
         "kmi_symbol_list": "android/abi_gki_aarch64",
         "additional_kmi_symbol_lists": [":aarch64_additional_kmi_symbol_lists"],
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",

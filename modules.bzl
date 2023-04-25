@@ -68,3 +68,10 @@ COMMON_GKI_MODULES_LIST = [
     "net/tipc/tipc.ko",
     "net/wireless/cfg80211.ko",
 ]
+
+AARCH64_GKI_MODULES_LIST = COMMON_GKI_MODULES_LIST + [
+    # keep sorted
+    "drivers/virt/gunyah/gunyah_ioeventfd.ko",
+    "drivers/virt/gunyah/gunyah_irqfd.ko",
+    "drivers/virt/gunyah/gunyah_vcpu.ko",
+]
