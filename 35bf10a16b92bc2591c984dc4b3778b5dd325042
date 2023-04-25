@@ -16,6 +16,24 @@
       "message": "drop the \"BACKPORT\" since this is not a backported patch, but more of a sync with the upstream version. Make it \"ANDROID:\"\n\nAlso, you are syncing this with the latest version of \"virt: gunyah: Add resource tickets\" - include this in the title so we don\u0027t have to follow the link to know what the content is. \n\nHow about \u0027ANDROID: gunyah: sync with latest \"virt: gunyah: Add resource tickets\"\u0027\n\n(same with all of the patches in this series).",
       "revId": "35bf10a16b92bc2591c984dc4b3778b5dd325042",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4de0350_99028921",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-04-25T16:35:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa317dc9_6d4cf408",
+      "revId": "35bf10a16b92bc2591c984dc4b3778b5dd325042",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
