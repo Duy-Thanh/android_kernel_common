@@ -116,6 +116,30 @@
       },
       "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ada0bf_d029e949",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-04-25T07:27:22Z",
+      "side": 1,
+      "message": "Please rebase (and regenerate the ABI representation) before pushing the next version of this commit to Gerrit. Thank you.",
+      "parentUuid": "d35f3608_b659e738",
+      "range": {
+        "startLine": 686,
+        "startChar": 2,
+        "endLine": 686,
+        "endChar": 25
+      },
+      "revId": "a49051aaae6de7372fe369eeba43888efcc688ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
