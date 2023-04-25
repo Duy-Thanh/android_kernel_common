@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0474c17b_7aa105bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-25T10:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9419044_6838a30b",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "ffe7bff2f1f9d7de693008da9ca1e560120c3ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2160af0a_fd023450",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-04-24T15:21:28Z",
       "side": 1,
       "message": "Needs \"Bug:\" line",
+      "revId": "ffe7bff2f1f9d7de693008da9ca1e560120c3ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43008e9d_c097c405",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-25T10:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2160af0a_fd023450",
       "revId": "ffe7bff2f1f9d7de693008da9ca1e560120c3ba5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4059c864_40bcaef9",
+        "filename": "include/trace/hooks/futex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-25T10:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fadeb53_a3d4394f",
+      "revId": "ffe7bff2f1f9d7de693008da9ca1e560120c3ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efdebbfd_6625b601",
@@ -75,6 +135,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b667eaf1_fba46786",
+        "filename": "include/trace/hooks/futex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-25T10:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efdebbfd_6625b601",
+      "revId": "ffe7bff2f1f9d7de693008da9ca1e560120c3ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf220595_3f97c7ae",
@@ -88,6 +166,30 @@
       "writtenOn": "2023-04-24T15:21:28Z",
       "side": 1,
       "message": "get rid of this #if...#else...#endif (eliminate the else side)",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 6
+      },
+      "revId": "ffe7bff2f1f9d7de693008da9ca1e560120c3ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b7e022_8e1e434d",
+        "filename": "include/trace/hooks/futex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-25T10:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf220595_3f97c7ae",
       "range": {
         "startLine": 51,
         "startChar": 0,
