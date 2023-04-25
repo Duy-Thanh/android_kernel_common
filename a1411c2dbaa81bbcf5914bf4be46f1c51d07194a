@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f123f0c_acfca1aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-25T17:01:37Z",
+      "side": 1,
+      "message": "Breaks KMI:\n```\nINFO: ABI DIFFERENCES HAVE BEEN DETECTED!\nINFO: function symbol changed from \u0027int gh_rm_call(struct gh_rm*, u32, void*, size_t, void**, size_t*)\u0027 to \u0027int gh_rm_call(struct gh_rm*, u32, const void*, size_t, void**, size_t*)\u0027\nCRC changed from 0xfef4ce1d to 0xe73a01d\ntype changed from \u0027int(struct gh_rm*, u32, void*, size_t, void**, size_t*)\u0027 to \u0027int(struct gh_rm*, u32, const void*, size_t, void**, size_t*)\u0027\nparameter 3 type changed from \u0027void*\u0027 to \u0027const void*\u0027\npointed-to type changed from \u0027void\u0027 to \u0027const void\u0027\n```",
+      "revId": "a1411c2dbaa81bbcf5914bf4be46f1c51d07194a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7aef259_cd3dfa3e",
