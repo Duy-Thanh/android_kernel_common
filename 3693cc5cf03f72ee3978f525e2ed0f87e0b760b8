@@ -16,6 +16,23 @@
       "message": "The symbol list change was lost with the last update. Please repush.",
       "revId": "3693cc5cf03f72ee3978f525e2ed0f87e0b760b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd734759_13479733",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-25T16:12:18Z",
+      "side": 1,
+      "message": "something went wrong, there is only a .stg file update here, not any real symbols being added.",
+      "revId": "3693cc5cf03f72ee3978f525e2ed0f87e0b760b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
