@@ -31,6 +31,7 @@
 #include <linux/swapops.h>
 #include <linux/shmem_fs.h>
 #include <linux/mmu_notifier.h>
+#include <trace/hooks/mm.h>
 
 #include <asm/tlb.h>
 
@@ -435,6 +436,8 @@ regular_page:
 	flush_tlb_batched_pending(mm);
 	arch_enter_lazy_mmu_mode();
 	for (; addr < end; pte++, addr += PAGE_SIZE) {
+		bool need_skip = false;
+
 		ptent = *pte;
 
 		if (pte_none(ptent))
@@ -445,6 +448,12 @@ regular_page:
 
 		page = vm_normal_page(vma, addr, ptent);
 		if (!page || is_zone_device_page(page))
+			continue;
+
+		trace_android_vh_madvise_cold_pageout_skip(vma, page, pageout,
+			&need_skip);
+
+		if (need_skip)
 			continue;
 
 		/*
