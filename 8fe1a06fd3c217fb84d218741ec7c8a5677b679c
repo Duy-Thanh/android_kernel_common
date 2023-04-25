@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "488824c4_24bf6d0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-25T07:18:42Z",
+      "side": 1,
+      "message": "please rebase this whole series. The parent patches are not in-sync with this one.",
+      "revId": "8fe1a06fd3c217fb84d218741ec7c8a5677b679c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
