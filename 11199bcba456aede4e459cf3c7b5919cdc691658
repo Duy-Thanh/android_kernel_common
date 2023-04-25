@@ -16,6 +16,23 @@
       "message": "Cherry-picked from Android 12 to add the OEM field directly to struct user.\n\nThe commit messages in this series have been updated. Please help me review. Thank you.",
       "revId": "11199bcba456aede4e459cf3c7b5919cdc691658",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47547025_a9bf8fb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-25T13:03:55Z",
+      "side": 1,
+      "message": "s is a KMI change so it needs to wait for the KMI update on May 10.",
+      "revId": "11199bcba456aede4e459cf3c7b5919cdc691658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
