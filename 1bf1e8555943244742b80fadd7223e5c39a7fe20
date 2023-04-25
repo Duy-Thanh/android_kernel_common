@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000043483840",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2560630?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "42d6d211_3660505e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-04-25T02:00:51Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/c25da5b7baf1d243e6612ba2b97e2a2c4a1376f6) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dc25da5b7baf1d243e6612ba2b97e2a2c4a1376f6)\n\n```\n      ## drivers/md/dm-verity-target.c ##\n    -@@ drivers/md/dm-verity-target.c: static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)\n    - \tstruct dm_verity_sig_opts verify_args \u003d {0};\n    - \tstruct dm_arg_set as;\n    - \tunsigned int num;\n    --\tunsigned int wq_flags;\n    - \tunsigned long long num_ll;\n    - \tint r;\n    - \tint i;\n     @@ drivers/md/dm-verity-target.c: static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)\n      \t\tgoto bad;\n      \t}\n      \n    --\t/* WQ_UNBOUND greatly improves performance when running on ramdisk */\n    --\twq_flags \u003d WQ_MEM_RECLAIM | WQ_UNBOUND;\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (7513f3 UPSTREAM: usb: typec: tcpm: Add support for altmodes)\n    + \t/* WQ_UNBOUND greatly improves performance when running on ramdisk */\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c PATCH SET (2ae280 UPSTREAM: dm verity: stop using WQ_UNBOUND for verify_wq)\n    ++\tv-\u003everify_wq \u003d alloc_workqueue(\"kverityd\", WQ_CPU_INTENSIVE | WQ_MEM_RECLAIM | WQ_UNBOUND, num_online_cpus());\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\t/*\n    ++\t * Using WQ_HIGHPRI improves throughput and completion latency by\n    ++\t * reducing wait times when reading from a dm-verity device.\n    ++\t *\n    ++\t * Also as required for the \"try_verify_in_tasklet\" feature: WQ_HIGHPRI\n    ++\t * allows verify_wq to preempt softirq since verification in tasklet\n    ++\t * will fall-back to using it for error handling (or if the bufio cache\n    ++\t * doesn\u0027t have required hashes).\n    ++\t */\n    ++\tv-\u003everify_wq \u003d alloc_workqueue(\"kverityd\", WQ_MEM_RECLAIM | WQ_HIGHPRI, 0);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (4966ae UPSTREAM: dm verity: stop using WQ_UNBOUND for verify_wq)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    + \twq_flags \u003d WQ_MEM_RECLAIM | WQ_UNBOUND;\n      \t/*\n      \t * Using WQ_HIGHPRI improves throughput and completion latency by\n    - \t * reducing wait times when reading from a dm-verity device.\n     @@ drivers/md/dm-verity-target.c: static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)\n    - \t * will fall-back to using it for error handling (or if the bufio cache\n    - \t * doesn\u0027t have required hashes).\n      \t */\n    --\twq_flags |\u003d WQ_HIGHPRI;\n    --\tv-\u003everify_wq \u003d alloc_workqueue(\"kverityd\", wq_flags, num_online_cpus());\n    -+\tv-\u003everify_wq \u003d alloc_workqueue(\"kverityd\", WQ_MEM_RECLAIM | WQ_HIGHPRI, 0);\n    + \twq_flags |\u003d WQ_HIGHPRI;\n    + \tv-\u003everify_wq \u003d alloc_workqueue(\"kverityd\", wq_flags, num_online_cpus());\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e BASE      (7a3927 BACKPORT: dm verity: enable WQ_HIGHPRI on verify_wq)\n      \tif (!v-\u003everify_wq) {\n      \t\tti-\u003eerror \u003d \"Cannot allocate workqueue\";\n      \t\tr \u003d -ENOMEM;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 526642571 android-build.ayeaye-python-dispatcher_20230424.05_p0",
+      "revId": "1bf1e8555943244742b80fadd7223e5c39a7fe20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
