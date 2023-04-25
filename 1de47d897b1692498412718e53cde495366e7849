@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6987ad6e_4f5c990b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-25T06:54:28Z",
+      "side": 1,
+      "message": "there are 2 different hooks in here, please break this out into logical changes for different subsystems.",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 107
+      },
+      "revId": "1de47d897b1692498412718e53cde495366e7849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d4c5e7_f0fe61e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-25T06:54:28Z",
+      "side": 1,
+      "message": "what is \"DLKM\"?",
+      "range": {
+        "startLine": 9,
+        "startChar": 213,
+        "endLine": 9,
+        "endChar": 217
+      },
+      "revId": "1de47d897b1692498412718e53cde495366e7849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04210f5c_e1c68595",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-25T06:54:28Z",
+      "side": 1,
+      "message": "please wrap your text properly at 72 columns.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 218
+      },
+      "revId": "1de47d897b1692498412718e53cde495366e7849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
