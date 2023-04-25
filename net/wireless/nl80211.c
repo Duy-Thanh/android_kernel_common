@@ -13882,9 +13882,13 @@ static int nl80211_set_rekey_data(struct sk_buff *skb, struct genl_info *info)
 		return -ERANGE;
 	if (nla_len(tb[NL80211_REKEY_DATA_KCK]) != NL80211_KCK_LEN &&
 	    !(rdev->wiphy.flags & WIPHY_FLAG_SUPPORTS_EXT_KEK_KCK &&
+<<<<<<< HEAD   (7364b7 Merge branch 'android13-5.15' into android13-5.15-lts)
 	      nla_len(tb[NL80211_REKEY_DATA_KCK]) == NL80211_KCK_EXT_LEN) &&
 	     !(rdev->wiphy.flags & WIPHY_FLAG_SUPPORTS_EXT_KCK_32 &&
 	       nla_len(tb[NL80211_REKEY_DATA_KCK]) == NL80211_KCK_EXT_LEN_32))
+=======
+	      nla_len(tb[NL80211_REKEY_DATA_KCK]) == NL80211_KCK_EXT_LEN))
+>>>>>>> BRANCH (abddfc Linux 5.15.99)
 		return -ERANGE;
 
 	rekey_data.kek = nla_data(tb[NL80211_REKEY_DATA_KEK]);

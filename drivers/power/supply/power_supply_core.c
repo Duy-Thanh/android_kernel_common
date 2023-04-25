@@ -1096,6 +1096,7 @@ static void psy_unregister_thermal(struct power_supply *psy)
 	thermal_zone_device_unregister(psy->tzd);
 }
 
+<<<<<<< HEAD   (7364b7 Merge branch 'android13-5.15' into android13-5.15-lts)
 /* thermal cooling device callbacks */
 static int ps_get_max_charge_cntl_limit(struct thermal_cooling_device *tcd,
 					unsigned long *state)
@@ -1183,6 +1184,8 @@ static void psy_unregister_cooler(struct power_supply *psy)
 		return;
 	thermal_cooling_device_unregister(psy->tcd);
 }
+=======
+>>>>>>> BRANCH (abddfc Linux 5.15.99)
 #else
 static int psy_register_thermal(struct power_supply *psy)
 {
@@ -1190,15 +1193,6 @@ static int psy_register_thermal(struct power_supply *psy)
 }
 
 static void psy_unregister_thermal(struct power_supply *psy)
-{
-}
-
-static int psy_register_cooler(struct power_supply *psy)
-{
-	return 0;
-}
-
-static void psy_unregister_cooler(struct power_supply *psy)
 {
 }
 #endif
@@ -1456,7 +1450,6 @@ void power_supply_unregister(struct power_supply *psy)
 	sysfs_remove_link(&psy->dev.kobj, "powers");
 	power_supply_remove_hwmon_sysfs(psy);
 	power_supply_remove_triggers(psy);
-	psy_unregister_cooler(psy);
 	psy_unregister_thermal(psy);
 	device_init_wakeup(&psy->dev, false);
 	device_unregister(&psy->dev);
