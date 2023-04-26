@@ -16,6 +16,23 @@
       "message": "This patch is used to replace the following one because after solved the stg file conflicts, git pushing generates a new commit:\nhttps://android-review.googlesource.com/c/kernel/common/+/2554240",
       "revId": "ee26c566ce5c14de35b6e954581af4672647b9ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "185d21cb_fe9ce6ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-26T09:01:19Z",
+      "side": 1,
+      "message": "For android14-6.1, here is the patch list for the 8 patches that marked as oem-binder-mutex-rwsem-from-android13:\nhttps://android-review.googlesource.com/c/kernel/common/+/2554240\nhttps://android-review.googlesource.com/c/kernel/common/+/2550430\nhttps://android-review.googlesource.com/c/kernel/common/+/2550134\nhttps://android-review.googlesource.com/c/kernel/common/+/2550491\nhttps://android-review.googlesource.com/c/kernel/common/+/2550472\nhttps://android-review.googlesource.com/c/kernel/common/+/2550142\nhttps://android-review.googlesource.com/c/kernel/common/+/2548292\nhttps://android-review.googlesource.com/c/kernel/common/+/2550397",
+      "revId": "ee26c566ce5c14de35b6e954581af4672647b9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
