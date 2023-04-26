@@ -294699,6 +294699,11 @@ function {
   parameter_id: 0x1e820193
 }
 function {
+  id: 0x12bd0b6f
+  return_type_id: 0x48b5725f
+  parameter_id: 0x08956bf0
+}
+function {
   id: 0x12c0cb4c
   return_type_id: 0x48b5725f
   parameter_id: 0x09626b7f
@@ -329507,6 +329512,12 @@ function {
   parameter_id: 0xc9082b19
 }
 function {
+  id: 0xa017504e
+  return_type_id: 0x257d12af
+  parameter_id: 0x1997473c
+  parameter_id: 0x92233392
+}
+function {
   id: 0xa02dcb2f
   return_type_id: 0x0258f96e
   parameter_id: 0x340bec45
@@ -333809,6 +333820,12 @@ function {
   parameter_id: 0x086cc0f7
 }
 function {
+  id: 0xfe2116bd
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x064d6086
+  parameter_id: 0x4585663f
+}
+function {
   id: 0xfe25e2a0
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x0206e690
@@ -336423,6 +336440,15 @@ elf_symbol {
   crc: 0xa95b5330
   type_id: 0xa355db3b
   full_name: "__scsi_add_device"
+}
+elf_symbol {
+  id: 0x6e3bb1cf
+  name: "__scsi_device_lookup_by_target"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8a5d37cb
+  type_id: 0xa017504e
+  full_name: "__scsi_device_lookup_by_target"
 }
 elf_symbol {
   id: 0x0166be18
@@ -342343,6 +342369,15 @@ elf_symbol {
   full_name: "blk_abort_request"
 }
 elf_symbol {
+  id: 0x528ef002
+  name: "blk_crypto_reprogram_all_keys"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4a0cbd72
+  type_id: 0x12bd0b6f
+  full_name: "blk_crypto_reprogram_all_keys"
+}
+elf_symbol {
   id: 0x90bf9007
   name: "blk_execute_rq"
   is_defined: true
@@ -346558,6 +346593,15 @@ elf_symbol {
   crc: 0x7bf5e5ef
   type_id: 0x11fe33ba
   full_name: "cpufreq_unregister_governor"
+}
+elf_symbol {
+  id: 0xbbbf4eda
+  name: "cpufreq_unregister_notifier"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6214aef2
+  type_id: 0x9a7b5fab
+  full_name: "cpufreq_unregister_notifier"
 }
 elf_symbol {
   id: 0xb6965ce8
@@ -359398,6 +359442,15 @@ elf_symbol {
   full_name: "i3c_master_add_i3c_dev_locked"
 }
 elf_symbol {
+  id: 0xf694daf8
+  name: "i3c_master_defslvs_locked"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x93dc40d6
+  type_id: 0x9d3ba2fa
+  full_name: "i3c_master_defslvs_locked"
+}
+elf_symbol {
   id: 0x4b80a5fd
   name: "i3c_master_disec_locked"
   is_defined: true
@@ -363194,6 +363247,16 @@ elf_symbol {
   crc: 0x944a564d
   type_id: 0x9d80e32f
   full_name: "is_console_locked"
+}
+elf_symbol {
+  id: 0x73ffe9a9
+  name: "is_dma_buf_file"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0a4dbe7d
+  namespace: "DMA_BUF"
+  type_id: 0x9bba7997
+  full_name: "is_dma_buf_file"
 }
 elf_symbol {
   id: 0x03de6dc5
@@ -372904,6 +372967,15 @@ elf_symbol {
   crc: 0x167c5967
   type_id: 0x1ffc73a6
   full_name: "print_hex_dump"
+}
+elf_symbol {
+  id: 0x85643cba
+  name: "printk_timed_ratelimit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x07cc4a5d
+  type_id: 0xfe2116bd
+  full_name: "printk_timed_ratelimit"
 }
 elf_symbol {
   id: 0x10599707
@@ -391182,6 +391254,10 @@ symbols {
     value: 0xe68925b8
   }
   symbol {
+    key: "__scsi_device_lookup_by_target"
+    value: 0x6e3bb1cf
+  }
+  symbol {
     key: "__scsi_iterate_devices"
     value: 0x0166be18
   }
@@ -393814,6 +393890,10 @@ symbols {
     value: 0x0b5d5f1c
   }
   symbol {
+    key: "blk_crypto_reprogram_all_keys"
+    value: 0x528ef002
+  }
+  symbol {
     key: "blk_execute_rq"
     value: 0x90bf9007
   }
@@ -395688,6 +395768,10 @@ symbols {
   symbol {
     key: "cpufreq_unregister_governor"
     value: 0x131ff67b
+  }
+  symbol {
+    key: "cpufreq_unregister_notifier"
+    value: 0xbbbf4eda
   }
   symbol {
     key: "cpufreq_update_limits"
@@ -401390,6 +401474,10 @@ symbols {
     value: 0x9187fbcc
   }
   symbol {
+    key: "i3c_master_defslvs_locked"
+    value: 0xf694daf8
+  }
+  symbol {
     key: "i3c_master_disec_locked"
     value: 0x4b80a5fd
   }
@@ -403076,6 +403164,10 @@ symbols {
   symbol {
     key: "is_console_locked"
     value: 0x064a6e13
+  }
+  symbol {
+    key: "is_dma_buf_file"
+    value: 0x73ffe9a9
   }
   symbol {
     key: "is_virtio_device"
@@ -407392,6 +407484,10 @@ symbols {
   symbol {
     key: "print_hex_dump"
     value: 0xda3d90c9
+  }
+  symbol {
+    key: "printk_timed_ratelimit"
+    value: 0x85643cba
   }
   symbol {
     key: "proc_create"
