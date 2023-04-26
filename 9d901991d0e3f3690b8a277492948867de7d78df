@@ -16,6 +16,41 @@
       "message": "This needs to be in the same series as the patches that introduce the new symbols",
       "revId": "9d901991d0e3f3690b8a277492948867de7d78df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e48a7673_06015d92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-26T11:14:36Z",
+      "side": 1,
+      "message": "This patch will be replace by https://android-review.googlesource.com/c/kernel/common/+/2564454 after a new push for solving conflicts.",
+      "revId": "9d901991d0e3f3690b8a277492948867de7d78df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c84bc8e_f24a313b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-26T11:14:36Z",
+      "side": 1,
+      "message": "OK. I placed a topic named oem-binder-mutex-rwsem-from-android13 to hold these patches. There are 6 patches for android14-5.15 and 8 patches for andriod14-6.1 including the symbol list patch.\nFor android14-5.15, here is the patch list of the 6 patches:\nhttps://android-review.googlesource.com/c/kernel/common/+/2560512\nhttps://android-review.googlesource.com/c/kernel/common/+/2550133\nhttps://android-review.googlesource.com/c/kernel/common/+/2550492\nhttps://android-review.googlesource.com/c/kernel/common/+/2550630\nhttps://android-review.googlesource.com/c/kernel/common/+/2550496\nhttps://android-review.googlesource.com/c/kernel/common/+/2548293\n\nThanks for the help",
+      "parentUuid": "abba3533_023df9ba",
+      "revId": "9d901991d0e3f3690b8a277492948867de7d78df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
