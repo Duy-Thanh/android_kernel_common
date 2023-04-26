@@ -522,6 +522,10 @@ static long dma_buf_ioctl(struct file *file,
 		return dma_buf_import_sync_file(dmabuf, (const void __user *)arg);
 #endif
 
+	case DMA_BUF_IOCTL_SYNC_PARTIAL:
+		trace_android_vh_dma_buf_sync_partial(dmabuf, (const void __user *)arg, &ret);
+		return ret;
+
 	default:
 		return -ENOTTY;
 	}

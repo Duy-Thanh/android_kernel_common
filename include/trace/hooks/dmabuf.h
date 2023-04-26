@@ -14,6 +14,9 @@ struct dma_buf;
 DECLARE_HOOK(android_vh_ignore_dmabuf_vmap_bounds,
 	     TP_PROTO(struct dma_buf *dma_buf, bool *ignore_bounds),
 	     TP_ARGS(dma_buf, ignore_bounds));
+DECLARE_HOOK(android_vh_dma_buf_sync_partial,
+	     TP_PROTO(struct dma_buf *dma_buf, const void __user *buf, int *ret),
+	     TP_ARGS(dma_buf, buf, ret));
 
 #endif /* _TRACE_HOOK_DMA_BUF_H */
 
