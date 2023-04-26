@@ -133,3 +133,6 @@
   __tracepoint_android_rvh_after_enqueue_task
   __tracepoint_android_rvh_after_dequeue_task
   __tracepoint_android_vh_map_util_freq
+
+#required by touch module
+  power_supply_is_system_supplied
