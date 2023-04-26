@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5302980_1300c0b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2023-04-26T04:20:21Z",
+      "side": 1,
+      "message": "I think we cannot use uclamp_eff_value when storing previous uclamp into saved_priority. otherwise task cannot restore its original uclamp_req values.",
+      "revId": "26265ecbab9a46665859cd49cfd06fa2a3316598",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
