@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e90cba_44c5aceb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-26T11:16:58Z",
+      "side": 1,
+      "message": "I placed a topic named oem-binder-mutex-rwsem-from-android13 to hold these patches. There are 6 patches for android14-5.15 and 8 patches for andriod14-6.1 including the symbol list patch.\nFor android14-5.15, here is the patch list of the 6 patches:\nhttps://android-review.googlesource.com/c/kernel/common/+/2564454\nhttps://android-review.googlesource.com/c/kernel/common/+/2550133\nhttps://android-review.googlesource.com/c/kernel/common/+/2550492\nhttps://android-review.googlesource.com/c/kernel/common/+/2550630\nhttps://android-review.googlesource.com/c/kernel/common/+/2550496\nhttps://android-review.googlesource.com/c/kernel/common/+/2548293",
+      "revId": "7e461cefaa8dde35f1f7f023b0542d2e515a2662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
