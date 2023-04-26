@@ -24566,6 +24566,11 @@ pointer_reference {
   pointee_type_id: 0xf8453f2e
 }
 pointer_reference {
+  id: 0x3486508f
+  kind: POINTER
+  pointee_type_id: 0xf859a4a2
+}
+pointer_reference {
   id: 0x3486f55a
   kind: POINTER
   pointee_type_id: 0xf85b33f6
@@ -34419,6 +34424,11 @@ qualified {
   id: 0xf8428255
   qualifier: CONST
   qualified_type_id: 0x914dbfdc
+}
+qualified {
+  id: 0xf859a4a2
+  qualifier: CONST
+  qualified_type_id: 0x91212402
 }
 qualified {
   id: 0xf8606d4e
@@ -313283,6 +313293,11 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x92f0cfba
+  return_type_id: 0x11c404ba
+  parameter_id: 0x3486508f
+}
+function {
   id: 0x92f2a156
   return_type_id: 0x6720d32f
   parameter_id: 0x39915f84
@@ -341433,6 +341448,15 @@ elf_symbol {
   crc: 0xfdea2d04
   type_id: 0x9636ff06
   full_name: "alarm_cancel"
+}
+elf_symbol {
+  id: 0xe4af6f7e
+  name: "alarm_expires_remaining"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9a23ea6b
+  type_id: 0x92f0cfba
+  full_name: "alarm_expires_remaining"
 }
 elf_symbol {
   id: 0x49029965
@@ -393437,6 +393461,10 @@ symbols {
   symbol {
     key: "alarm_cancel"
     value: 0x510c7445
+  }
+  symbol {
+    key: "alarm_expires_remaining"
+    value: 0xe4af6f7e
   }
   symbol {
     key: "alarm_init"
