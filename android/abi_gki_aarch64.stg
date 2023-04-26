@@ -367425,6 +367425,15 @@ elf_symbol {
   full_name: "power_supply_get_property"
 }
 elf_symbol {
+  id: 0xd28bb85a
+  name: "power_supply_is_system_supplied"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2c208607
+  type_id: 0x9d80e32f
+  full_name: "power_supply_is_system_supplied"
+}
+elf_symbol {
   id: 0x26c5a1b9
   name: "power_supply_put"
   is_defined: true
@@ -400271,6 +400280,10 @@ symbols {
   symbol {
     key: "power_supply_get_property"
     value: 0x842fc505
+  }
+  symbol {
+    key: "power_supply_is_system_supplied"
+    value: 0xd28bb85a
   }
   symbol {
     key: "power_supply_put"

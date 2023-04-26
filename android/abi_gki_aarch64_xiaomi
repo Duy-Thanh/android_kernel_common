@@ -129,3 +129,7 @@
   wakeup_sources_read_unlock
   wakeup_sources_walk_start
   wakeup_sources_walk_next
+
+  #required by touch synaptics_tcm_spi.ko
+  power_supply_is_system_supplied
+  send_sig_info
