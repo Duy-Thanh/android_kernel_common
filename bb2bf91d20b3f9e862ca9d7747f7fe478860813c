@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d6849ef_b2dd1b25",
+        "filename": "scripts/setlocalversion",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-26T17:14:56Z",
+      "side": 1,
+      "message": "This should be \n\n```\n\tbuild_num\u003d\"-ab${BUILD_NUMBER}\"\n```\n\nto get around the presubmit error",
+      "revId": "bb2bf91d20b3f9e862ca9d7747f7fe478860813c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
