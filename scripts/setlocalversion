@@ -132,19 +132,18 @@ if [ -z "${KERNELVERSION}" ]; then
 fi
 
 # localversion* files in the build and source directory
-res="$(collect_files localversion*)"
+file_localversion="$(collect_files localversion*)"
 if test ! "$srctree" -ef .; then
-	res="$res$(collect_files "$srctree"/localversion*)"
+	file_localversion="${file_localversion}$(collect_files "$srctree"/localversion*)"
 fi
 
-# CONFIG_LOCALVERSION and LOCALVERSION (if set)
+# version string from CONFIG_LOCALVERSION
 config_localversion=$(sed -n 's/^CONFIG_LOCALVERSION=\(.*\)$/\1/p' include/config/auto.conf)
-res="${res}${config_localversion}${LOCALVERSION}"
 
 # scm version string if not at a tagged commit
 if grep -q "^CONFIG_LOCALVERSION_AUTO=y$" include/config/auto.conf; then
 	# full scm version string
-	res="$res$(scm_version)"
+	scm_version="$(scm_version)"
 elif [ "${LOCALVERSION+set}" != "set" ]; then
 	# If the variable LOCALVERSION is not set, append a plus
 	# sign if the repository is not in a clean annotated or
@@ -153,9 +152,10 @@ elif [ "${LOCALVERSION+set}" != "set" ]; then
 	#
 	# If the variable LOCALVERSION is set (including being set
 	# to an empty string), we don't want to append a plus sign.
-	res="$res$(scm_version --short)"
+	scm_version="$(scm_version --short)"
 fi
 
+<<<<<<< HEAD   (b6e3fc Merge 534066a983df (".gitignore: ignore *.cover and *.mbx") )
 # ANDROID: add the abXXX number if BUILD_NUMBER is set
 build_num=""
 if test -n "${BUILD_NUMBER}"; then
@@ -163,3 +163,6 @@ if test -n "${BUILD_NUMBER}"; then
 fi
 
 echo "${KERNELVERSION}${res}${build_num}"
+=======
+echo "${KERNELVERSION}${file_localversion}${config_localversion}${LOCALVERSION}${scm_version}"
+>>>>>>> BRANCH (eed36d setlocalversion: clean up the construction of version output)
