@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "440b1871_abe6893c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-04-26T13:14:18Z",
+      "side": 1,
+      "message": "This breaks KMI so it needs to wait for the next KMI Update on May 10",
+      "revId": "ea8ce842cbf55aef67c1ecdcb7e94b0f5cae7ea1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
