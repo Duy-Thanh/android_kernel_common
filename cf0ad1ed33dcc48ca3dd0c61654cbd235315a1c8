@@ -1,6 +1,60 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5ad7f22_44101e2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-04-26T11:46:04Z",
+      "side": 1,
+      "message": "\u003e Original change \u0027aosp/2564577\u0027 for this cherry pick, on base branch \u0027android12-5.10\u0027 is NOT MERGED.\n\u003e Please merge the original change.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 526975332 android-build.ayeaye-python-dispatcher_20230425.05_p0\n\nPlease fix.",
+      "parentUuid": "c3b0ec5f_f5705e71",
+      "revId": "cf0ad1ed33dcc48ca3dd0c61654cbd235315a1c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9b00b0_4fdbad8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-04-26T11:46:04Z",
+      "side": 1,
+      "message": "\u003e Please **attach an open respin request bug** to this change. Refer the following link for more information:\n\u003e https://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 526975332 android-build.ayeaye-python-dispatcher_20230425.05_p0\n\nPlease fix.",
+      "parentUuid": "c4f41b8d_962fc75b",
+      "revId": "cf0ad1ed33dcc48ca3dd0c61654cbd235315a1c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a81030a3_2aeea2da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-04-26T11:46:04Z",
+      "side": 1,
+      "message": "\u003e Commit does not refer to the upstream commit.\n\u003e Please add a line like \u0027(cherry picked from commit \u003csha1\u003e)\u0027.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 526975332 android-build.ayeaye-python-dispatcher_20230425.05_p0\n\nPlease fix.",
+      "parentUuid": "3770e171_b376efb7",
+      "revId": "cf0ad1ed33dcc48ca3dd0c61654cbd235315a1c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a1daaae_9dc4abfc",
