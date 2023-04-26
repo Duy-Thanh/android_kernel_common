@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5251ebe8_e90dc057",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-04-26T15:50:50Z",
+      "side": 1,
+      "message": "Hit a merge conflict. Rebased to generate fresh ABI representation.",
+      "revId": "4a35b19285f08ade46f2b1d29107334bed4ca84f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
