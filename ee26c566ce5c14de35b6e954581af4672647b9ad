@@ -33,6 +33,24 @@
       "message": "For android14-6.1, here is the patch list for the 8 patches that marked as oem-binder-mutex-rwsem-from-android13:\nhttps://android-review.googlesource.com/c/kernel/common/+/2554240\nhttps://android-review.googlesource.com/c/kernel/common/+/2550430\nhttps://android-review.googlesource.com/c/kernel/common/+/2550134\nhttps://android-review.googlesource.com/c/kernel/common/+/2550491\nhttps://android-review.googlesource.com/c/kernel/common/+/2550472\nhttps://android-review.googlesource.com/c/kernel/common/+/2550142\nhttps://android-review.googlesource.com/c/kernel/common/+/2548292\nhttps://android-review.googlesource.com/c/kernel/common/+/2550397",
       "revId": "ee26c566ce5c14de35b6e954581af4672647b9ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a77daf62_139c11f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-26T11:18:47Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/2554240 should be modified to this patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/2564475",
+      "parentUuid": "185d21cb_fe9ce6ab",
+      "revId": "ee26c566ce5c14de35b6e954581af4672647b9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
