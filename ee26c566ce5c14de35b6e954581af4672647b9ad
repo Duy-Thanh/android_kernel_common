@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd48b65_b0d25004",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-04-26T09:00:34Z",
+      "side": 1,
+      "message": "This patch is used to replace the following one because after solved the stg file conflicts, git pushing generates a new commit:\nhttps://android-review.googlesource.com/c/kernel/common/+/2554240",
+      "revId": "ee26c566ce5c14de35b6e954581af4672647b9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
