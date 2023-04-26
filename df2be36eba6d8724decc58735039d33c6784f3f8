@@ -177,6 +177,30 @@
       },
       "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f31e30_edfd1ccf",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-04-26T13:43:39Z",
+      "side": 1,
+      "message": "Oh, yes. If this is only used for saving, then the requested value is correct to use. Could you create a new function and call it save_binder_prio_uclamp() so that it\u0027s obvious what it\u0027s doing with some comment please?\n\nNot something you introduced, but it seems saving/restoring of priority/uclamp can be racy if the task tries to modify its priority/uclamp between saving/restoring operations.",
+      "parentUuid": "829595a8_70cd8142",
+      "range": {
+        "startLine": 668,
+        "startChar": 29,
+        "endLine": 668,
+        "endChar": 63
+      },
+      "revId": "df2be36eba6d8724decc58735039d33c6784f3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
