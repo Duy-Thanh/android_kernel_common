@@ -33,6 +33,24 @@
       "message": "something went wrong, there is only a .stg file update here, not any real symbols being added.",
       "revId": "3693cc5cf03f72ee3978f525e2ed0f87e0b760b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a128670_d8ced22f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962616
+      },
+      "writtenOn": "2023-04-26T00:27:00Z",
+      "side": 1,
+      "message": "Sorry for my mistake again...:(",
+      "parentUuid": "cd734759_13479733",
+      "revId": "3693cc5cf03f72ee3978f525e2ed0f87e0b760b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
