@@ -43,6 +43,8 @@ struct net;
 #define SOCK_PASSCRED		3
 #define SOCK_PASSSEC		4
 
+#define PROTO_CMSG_DATA_ONLY	0x0001
+
 #ifndef ARCH_HAS_SOCKET_TYPES
 /**
  * enum sock_type - Socket types
@@ -137,8 +139,7 @@ typedef int (*sk_read_actor_t)(read_descriptor_t *, struct sk_buff *,
 
 struct proto_ops {
 	int		family;
-	unsigned int	flags;	// ANDROID - removed in 5.10.162, but remains to
-				// preserve ABI.  It is not used anywhere.
+	unsigned int	flags;
 	struct module	*owner;
 	int		(*release)   (struct socket *sock);
 	int		(*bind)	     (struct socket *sock,
