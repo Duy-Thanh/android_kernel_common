@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44e0c7db_52c35c41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-04-27T13:10:37Z",
+      "side": 1,
+      "message": "```\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n- of_mdiobus_register\n```",
+      "revId": "8b73c742ef86a3325e7b3a512a3e3ad17709fa48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
