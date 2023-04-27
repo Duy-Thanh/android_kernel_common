@@ -278,6 +278,11 @@ static inline struct task_struct *rwsem_owner(struct rw_semaphore *sem)
 		(atomic_long_read(&sem->owner) & ~RWSEM_OWNER_FLAGS_MASK);
 }
 
+struct task_struct *__trace_contended_rwsem_owner(struct rw_semaphore *sem)
+{
+	return rwsem_owner(sem);
+}
+
 /*
  * Return the real task structure pointer of the owner and the embedded
  * flags in the owner. pflags must be non-NULL.
