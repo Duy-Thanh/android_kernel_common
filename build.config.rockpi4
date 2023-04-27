@@ -10,8 +10,17 @@ FRAGMENT_CONFIG=${KERNEL_DIR}/arch/arm64/configs/rockpi4_gki.fragment
 PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig ${ROOT_DIR}/${FRAGMENT_CONFIG}"
 POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
 
+<<<<<<< HEAD   (9e9e15 ANDROID: fuse-bpf: Simplify and fix setting bpf program)
 MAKE_GOALS="${MAKE_GOALS}
 rockchip/rk3399-rock-pi-4b.dtb
+=======
+DTS_EXT_DIR=common-modules/virtual-device
+DTC_INCLUDE=${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/boot/dts/rockchip
+MAKE_GOALS="
+Image
+modules
+rk3399-rock-pi-4b.dtb
+>>>>>>> CHANGE (ccc4fb ANDROID: Unnest MAKE_GOALS from build configs)
 "
 
 FILES="${FILES}
