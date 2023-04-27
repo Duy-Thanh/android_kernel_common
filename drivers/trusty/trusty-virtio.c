@@ -9,9 +9,9 @@
 #include <linux/kernel.h>
 
 #include <linux/dma-map-ops.h>
+#include <linux/hrtimer.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
-#include <linux/notifier.h>
 #include <linux/workqueue.h>
 #include <linux/remoteproc.h>
 #include <linux/slab.h>
@@ -34,6 +34,8 @@ struct trusty_vdev;
 static bool use_high_wq;
 module_param(use_high_wq, bool, 0660);
 
+static const u64 virtio_ms_delay = 10;
+
 struct trusty_ctx {
 	struct device		*dev;
 	void			*shared_va;
@@ -42,11 +44,11 @@ struct trusty_ctx {
 	size_t			shared_sz;
 	struct work_struct	check_vqs;
 	struct work_struct	kick_vqs;
-	struct notifier_block	call_notifier;
 	struct list_head	vdev_list;
 	struct mutex		mlock; /* protects vdev_list */
 	struct workqueue_struct	*kick_wq;
 	struct workqueue_struct	*check_wq;
+	struct hrtimer check_vqs_timer;
 };
 
 struct trusty_vring {
@@ -92,19 +94,17 @@ static void check_all_vqs(struct work_struct *work)
 	}
 }
 
-static int trusty_call_notify(struct notifier_block *nb,
-			      unsigned long action, void *data)
+static enum hrtimer_restart enqueue_check_vqs(struct hrtimer *timer)
 {
-	struct trusty_ctx *tctx;
+	struct trusty_ctx *tctx = container_of(timer, struct trusty_ctx, check_vqs_timer);
 
-	if (action != TRUSTY_CALL_RETURNED)
-		return NOTIFY_DONE;
-
-	tctx = container_of(nb, struct trusty_ctx, call_notifier);
 	queue_work(tctx->check_wq, &tctx->check_vqs);
 
-	return NOTIFY_OK;
+	hrtimer_forward_now(timer, ms_to_ktime(virtio_ms_delay));
+
+	return HRTIMER_RESTART;
 }
+
 
 static void kick_vq(struct trusty_ctx *tctx,
 		    struct trusty_vdev *tvdev,
@@ -652,14 +652,8 @@ static int trusty_virtio_add_devices(struct trusty_ctx *tctx)
 		goto err_parse_descr;
 	}
 
-	/* register call notifier */
-	ret = trusty_call_notifier_register(tctx->dev->parent,
-					    &tctx->call_notifier);
-	if (ret) {
-		dev_err(tctx->dev, "%s: failed (%d) to register notifier\n",
-			__func__, ret);
-		goto err_register_notifier;
-	}
+	/* start workqueue timer */
+	hrtimer_start(&tctx->check_vqs_timer, ms_to_ktime(virtio_ms_delay), HRTIMER_MODE_REL);
 
 	/* start virtio */
 	ret = trusty_virtio_start(tctx, descr_id, descr_sz);
@@ -678,10 +672,8 @@ static int trusty_virtio_add_devices(struct trusty_ctx *tctx)
 	return 0;
 
 err_start_virtio:
-	trusty_call_notifier_unregister(tctx->dev->parent,
-					&tctx->call_notifier);
+	hrtimer_cancel(&tctx->check_vqs_timer);
 	cancel_work_sync(&tctx->check_vqs);
-err_register_notifier:
 err_parse_descr:
 	_remove_devices_locked(tctx);
 	mutex_unlock(&tctx->mlock);
@@ -729,7 +721,8 @@ static int trusty_virtio_probe(struct platform_device *pdev)
 		return -ENOMEM;
 
 	tctx->dev = &pdev->dev;
-	tctx->call_notifier.notifier_call = trusty_call_notify;
+	hrtimer_init(&tctx->check_vqs_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
+	tctx->check_vqs_timer.function = enqueue_check_vqs;
 	mutex_init(&tctx->mlock);
 	INIT_LIST_HEAD(&tctx->vdev_list);
 	INIT_WORK(&tctx->check_vqs, check_all_vqs);
@@ -777,9 +770,8 @@ static int trusty_virtio_remove(struct platform_device *pdev)
 	struct trusty_ctx *tctx = platform_get_drvdata(pdev);
 	int ret;
 
-	/* unregister call notifier and wait until workqueue is done */
-	trusty_call_notifier_unregister(tctx->dev->parent,
-					&tctx->call_notifier);
+	/* cancel workqueue timer and wait until workqueue is done */
+	hrtimer_cancel(&tctx->check_vqs_timer);
 	cancel_work_sync(&tctx->check_vqs);
 
 	/* remove virtio devices */
