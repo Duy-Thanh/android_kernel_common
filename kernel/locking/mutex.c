@@ -79,7 +79,7 @@ EXPORT_SYMBOL(__mutex_init);
  *
  * DO NOT USE (outside of mutex code).
  */
-static inline struct task_struct *__mutex_owner(struct mutex *lock)
+struct task_struct *__mutex_owner(struct mutex *lock)
 {
 	return (struct task_struct *)(atomic_long_read(&lock->owner) & ~MUTEX_FLAGS);
 }
