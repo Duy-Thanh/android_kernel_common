@@ -6,6 +6,8 @@
 #define _TRACE_LOCK_H
 
 #include <linux/sched.h>
+#include <linux/mutex.h>
+#include <linux/rwsem.h>
 #include <linux/tracepoint.h>
 
 /* flags for lock:contention_begin */
@@ -92,6 +94,21 @@ DEFINE_EVENT(lock, lock_acquired,
 #endif /* CONFIG_LOCK_STAT */
 #endif /* CONFIG_LOCKDEP */
 
+#ifndef __CONTENDED_LOCK_OWNER
+static inline pid_t __contended_lock_owner(void *lock, unsigned int flags)
+{
+	struct task_struct *owner = NULL;
+
+	if (flags & LCB_F_MUTEX)
+		owner = __mutex_owner(lock);
+	else if (flags == LCB_F_READ || flags == LCB_F_WRITE)
+		owner = rwsem_owner(lock);
+
+	return owner ? owner->pid : -1U;
+}
+#define __CONTENDED_LOCK_OWNER
+#endif
+
 TRACE_EVENT(contention_begin,
 
 	TP_PROTO(void *lock, unsigned int flags),
@@ -101,14 +118,16 @@ TRACE_EVENT(contention_begin,
 	TP_STRUCT__entry(
 		__field(void *, lock_addr)
 		__field(unsigned int, flags)
+		__field(pid_t, owner)
 	),
 
 	TP_fast_assign(
 		__entry->lock_addr = lock;
 		__entry->flags = flags;
+		__entry->owner = __contended_lock_owner(lock, flags);
 	),
 
-	TP_printk("%p (flags=%s)", __entry->lock_addr,
+	TP_printk("%p (flags=%s) owner=%d", __entry->lock_addr,
 		  __print_flags(__entry->flags, "|",
 				{ LCB_F_SPIN,		"SPIN" },
 				{ LCB_F_READ,		"READ" },
@@ -116,7 +135,8 @@ TRACE_EVENT(contention_begin,
 				{ LCB_F_RT,		"RT" },
 				{ LCB_F_PERCPU,		"PERCPU" },
 				{ LCB_F_MUTEX,		"MUTEX" }
-			  ))
+			  ),
+		  __entry->owner)
 );
 
 TRACE_EVENT(contention_end,
