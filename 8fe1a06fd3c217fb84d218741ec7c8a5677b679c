@@ -16,6 +16,24 @@
       "message": "please rebase this whole series. The parent patches are not in-sync with this one.",
       "revId": "8fe1a06fd3c217fb84d218741ec7c8a5677b679c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d9d0118_ebae9415",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2004207
+      },
+      "writtenOn": "2023-04-27T08:17:48Z",
+      "side": 1,
+      "message": "is there any other issues about this patch？",
+      "parentUuid": "488824c4_24bf6d0c",
+      "revId": "8fe1a06fd3c217fb84d218741ec7c8a5677b679c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
