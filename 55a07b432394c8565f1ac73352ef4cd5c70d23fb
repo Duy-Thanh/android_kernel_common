@@ -22,6 +22,30 @@
       },
       "revId": "55a07b432394c8565f1ac73352ef4cd5c70d23fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c50b2309_57d7df31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2004207
+      },
+      "writtenOn": "2023-04-27T07:27:09Z",
+      "side": 1,
+      "message": "it is the time when rt group update load in vendor module. cal menas trigger？",
+      "parentUuid": "75f3d50e_ccf2a277",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 10,
+        "endChar": 17
+      },
+      "revId": "55a07b432394c8565f1ac73352ef4cd5c70d23fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
