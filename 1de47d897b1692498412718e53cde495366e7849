@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8532eba3_cdbc4420",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2004207
+      },
+      "writtenOn": "2023-04-27T07:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6987ad6e_4f5c990b",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 107
+      },
+      "revId": "1de47d897b1692498412718e53cde495366e7849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2d4c5e7_f0fe61e7",
@@ -60,6 +84,54 @@
       "writtenOn": "2023-04-25T06:54:28Z",
       "side": 1,
       "message": "please wrap your text properly at 72 columns.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 218
+      },
+      "revId": "1de47d897b1692498412718e53cde495366e7849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff7a1b2e_ac229eb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2004207
+      },
+      "writtenOn": "2023-04-27T07:25:40Z",
+      "side": 1,
+      "message": "dynamical loadable kernel modules, just our xxx.ko",
+      "parentUuid": "c2d4c5e7_f0fe61e7",
+      "range": {
+        "startLine": 9,
+        "startChar": 213,
+        "endLine": 9,
+        "endChar": 217
+      },
+      "revId": "1de47d897b1692498412718e53cde495366e7849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d394dd7_e7942a24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2004207
+      },
+      "writtenOn": "2023-04-27T07:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04210f5c_e1c68595",
       "range": {
         "startLine": 9,
         "startChar": 0,
