@@ -996,7 +996,8 @@ static bool xhci_pending_portevent(struct xhci_hcd *xhci)
 	while (port_index--) {
 		portsc = readl(ports[port_index]->addr);
 		if (portsc & PORT_CHANGE_MASK ||
-		    (portsc & PORT_PLS_MASK) == XDEV_RESUME)
+		    (portsc & PORT_PLS_MASK) == XDEV_RESUME ||
+		    !(portsc & PORT_CONNECT))
 			return true;
 	}
 	return false;
@@ -1282,6 +1283,9 @@ int xhci_resume(struct xhci_hcd *xhci, bool hibernated)
 		 * Resume roothubs only if there are pending events.
 		 * USB 3 devices resend U3 LFPS wake after a 100ms delay if
 		 * the first wake signalling failed, give it that chance.
+		 * Avoid this check if there are no devices connected to
+		 * the SS root hub (i.e. HS device connected or no device
+		 * connected)
 		 */
 		pending_portevent = xhci_pending_portevent(xhci);
 		if (!pending_portevent) {
