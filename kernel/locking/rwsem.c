@@ -34,38 +34,6 @@
 #include <trace/hooks/dtask.h>
 #include <trace/hooks/rwsem.h>
 
-/*
- * The least significant 2 bits of the owner value has the following
- * meanings when set.
- *  - Bit 0: RWSEM_READER_OWNED - The rwsem is owned by readers
- *  - Bit 1: RWSEM_NONSPINNABLE - Cannot spin on a reader-owned lock
- *
- * When the rwsem is reader-owned and a spinning writer has timed out,
- * the nonspinnable bit will be set to disable optimistic spinning.
-
- * When a writer acquires a rwsem, it puts its task_struct pointer
- * into the owner field. It is cleared after an unlock.
- *
- * When a reader acquires a rwsem, it will also puts its task_struct
- * pointer into the owner field with the RWSEM_READER_OWNED bit set.
- * On unlock, the owner field will largely be left untouched. So
- * for a free or reader-owned rwsem, the owner value may contain
- * information about the last reader that acquires the rwsem.
- *
- * That information may be helpful in debugging cases where the system
- * seems to hang on a reader owned rwsem especially if only one reader
- * is involved. Ideally we would like to track all the readers that own
- * a rwsem, but the overhead is simply too big.
- *
- * A fast path reader optimistic lock stealing is supported when the rwsem
- * is previously owned by a writer and the following conditions are met:
- *  - rwsem is not currently writer owned
- *  - the handoff isn't set.
- */
-#define RWSEM_READER_OWNED	(1UL << 0)
-#define RWSEM_NONSPINNABLE	(1UL << 1)
-#define RWSEM_OWNER_FLAGS_MASK	(RWSEM_READER_OWNED | RWSEM_NONSPINNABLE)
-
 #ifdef CONFIG_DEBUG_RWSEMS
 # define DEBUG_RWSEMS_WARN_ON(c, sem)	do {			\
 	if (!debug_locks_silent &&				\
@@ -268,15 +236,6 @@ static inline bool rwsem_write_trylock(struct rw_semaphore *sem)
 
 	preempt_enable();
 	return ret;
-}
-
-/*
- * Return just the real task structure pointer of the owner
- */
-static inline struct task_struct *rwsem_owner(struct rw_semaphore *sem)
-{
-	return (struct task_struct *)
-		(atomic_long_read(&sem->owner) & ~RWSEM_OWNER_FLAGS_MASK);
 }
 
 /*
