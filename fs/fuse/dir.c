@@ -245,6 +245,7 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 	inode = d_inode_rcu(entry);
 	if (inode && fuse_is_bad(inode))
 		goto invalid;
+<<<<<<< HEAD   (f88080 ANDROID: fuse-bpf: Make fuse_test compile and pass)
 
 #ifdef CONFIG_FUSE_BPF
 	/* TODO: Do we need bpf support for revalidate?
@@ -260,6 +261,10 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 #endif
 	if (time_before64(fuse_dentry_time(entry), get_jiffies_64()) ||
 		 (flags & (LOOKUP_EXCL | LOOKUP_REVAL))) {
+=======
+	else if (time_before64(fuse_dentry_time(entry), get_jiffies_64()) ||
+		 (flags & (LOOKUP_EXCL | LOOKUP_REVAL | LOOKUP_RENAME_TARGET))) {
+>>>>>>> BRANCH (ca1c90 Linux 6.1.26)
 		struct fuse_entry_out outarg;
 		struct fuse_entry_bpf bpf_arg;
 		FUSE_ARGS(args);
