@@ -16,6 +16,23 @@
       "message": "Why is LTO needed again?\n\nThe subject line does not make sense as this has nothing to do with CFI anymore.",
       "revId": "0afe054cc770ac127ee3449a54f9f3dc425700e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b987cde_1280e622",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2023-04-28T18:28:30Z",
+      "side": 1,
+      "message": "Abandoned, see the ocmments in aosp/2571831",
+      "revId": "0afe054cc770ac127ee3449a54f9f3dc425700e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
