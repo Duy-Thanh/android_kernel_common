@@ -16,6 +16,24 @@
       "message": "Please add the corresponding symbols.\n\nMissing tracepoint symbols for the following traceiter symbols:\n__traceiter_android_vh_try_to_freeze_todo_unfrozen\n__traceiter_hrtimer_expire_entry\n__traceiter_irq_handler_entry\n__traceiter_android_vh_rtmutex_wait_finish\n__traceiter_android_vh_wq_lockup_pool\n__traceiter_workqueue_execute_start\n__traceiter_android_rvh_do_sea\n__traceiter_irq_handler_exit\n__traceiter_android_vh_rwsem_write_wait_finish\n__traceiter_android_vh_try_to_freeze_todo\n__traceiter_android_vh_sched_show_task\n__traceiter_android_rvh_do_ptrauth_fault\n__traceiter_android_rvh_panic_unhandled\n__traceiter_android_vh_watchdog_timer_softlockup\n__traceiter_android_vh_ptype_head\n__traceiter_hrtimer_expire_exit\n__traceiter_android_rvh_arm64_serror_panic\n__traceiter_android_vh_rtmutex_wait_start\n__traceiter_kfree_skb\n__traceiter_android_vh_rwsem_read_wait_finish",
       "revId": "5879376a0a82d692b87d37e41a4a5a9f34c8673d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04034e86_328bd815",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889770
+      },
+      "writtenOn": "2023-04-28T23:56:50Z",
+      "side": 1,
+      "message": "These are missing \u0027traceiter\u0027 symbols in previous commits. So, they are already included.",
+      "parentUuid": "889ba044_2c4c4c8d",
+      "revId": "5879376a0a82d692b87d37e41a4a5a9f34c8673d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
