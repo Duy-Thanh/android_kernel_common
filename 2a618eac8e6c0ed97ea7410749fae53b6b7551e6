@@ -33,6 +33,23 @@
       "message": "There is no LTO code in this kernel, so why are you trying to enable it?\n\nCFI is very different here, it\u0027s not the same anymore.",
       "revId": "2a618eac8e6c0ed97ea7410749fae53b6b7551e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043da759_64125329",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-28T17:13:29Z",
+      "side": 1,
+      "message": "Also, this has nothing to do with CFI anymore, so LTO being enabled has to have a real, documented, justification, for it to be enabled again.",
+      "revId": "2a618eac8e6c0ed97ea7410749fae53b6b7551e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
