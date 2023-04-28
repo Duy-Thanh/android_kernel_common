@@ -6,6 +6,9 @@
 
 #include <linux/kvm_host.h>
 
+/* Did all IOMMU register correctly. */
+static bool finalised;
+
 static unsigned long dev_to_id(struct device *dev)
 {
 	/* Use the struct device pointer as a unique identifier. */
@@ -59,6 +62,13 @@ EXPORT_SYMBOL_GPL(pkvm_iommu_resume);
 
 int pkvm_iommu_finalize(int err)
 {
+	finalised = !err;
 	return kvm_call_hyp_nvhe(__pkvm_iommu_finalize, err);
 }
+
+bool pkvm_iommu_finalized(void)
+{
+	return finalised;
+}
+
 EXPORT_SYMBOL_GPL(pkvm_iommu_finalize);

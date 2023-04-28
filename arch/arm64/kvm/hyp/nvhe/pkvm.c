@@ -1576,8 +1576,7 @@ bool kvm_hyp_handle_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code)
  */
 void pkvm_handle_system_misconfiguration(enum pkvm_system_misconfiguration event)
 {
-	if (event == NO_DMA_ISOLATION)
-		pkvm_poison_pvmfw_pages();
-	else
+	/* DMA isolation handled by the kernel before deprivilege. */
+	if (event != NO_DMA_ISOLATION)
 		BUG();
 }
