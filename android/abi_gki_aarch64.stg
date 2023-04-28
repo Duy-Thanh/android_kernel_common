@@ -304641,6 +304641,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_free_task"
 }
 elf_symbol {
+  id: 0x494c2e7a
+  name: "__traceiter_android_vh_futex_sleep_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf7aa54d1
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_android_vh_futex_sleep_start"
+}
+elf_symbol {
   id: 0xdbe4202a
   name: "__traceiter_android_vh_gic_set_affinity"
   is_defined: true
@@ -306268,6 +306277,15 @@ elf_symbol {
   crc: 0x25db8da7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_free_task"
+}
+elf_symbol {
+  id: 0xef0379f8
+  name: "__tracepoint_android_vh_futex_sleep_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1508b3bb
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_futex_sleep_start"
 }
 elf_symbol {
   id: 0x60a121b4
@@ -345802,6 +345820,10 @@ symbols {
     value: 0x5ecff02f
   }
   symbol {
+    key: "__traceiter_android_vh_futex_sleep_start"
+    value: 0x494c2e7a
+  }
+  symbol {
     key: "__traceiter_android_vh_gic_set_affinity"
     value: 0xdbe4202a
   }
@@ -346524,6 +346546,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_free_task"
     value: 0xe6918e09
+  }
+  symbol {
+    key: "__tracepoint_android_vh_futex_sleep_start"
+    value: 0xef0379f8
   }
   symbol {
     key: "__tracepoint_android_vh_gic_set_affinity"
