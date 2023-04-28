@@ -50,6 +50,42 @@
       "message": "Also, this has nothing to do with CFI anymore, so LTO being enabled has to have a real, documented, justification, for it to be enabled again.",
       "revId": "2a618eac8e6c0ed97ea7410749fae53b6b7551e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6f6b59c_ea92d87a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2023-04-28T18:25:31Z",
+      "side": 1,
+      "message": "It\u0027s in Makefile (LTO_CLANG_FULL implies LTO_CLANG).",
+      "parentUuid": "ac17ff49_09731f7c",
+      "revId": "2a618eac8e6c0ed97ea7410749fae53b6b7551e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1cfcbdc_d02fe337",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2023-04-28T18:25:31Z",
+      "side": 1,
+      "message": "I\u0027m handling some build issues of extra modules cross 5.15 and 6.1.\nAnd from commit 56d33a1ce175339e7357806c9bdc2fcae86b7459 it looks like LTO is just temporary removed until the CFI issue being resolved, so I was trying to put it back.\nSeems that LTO_CLANG used to be a dependency of CFI_CLANG but not anymore, so it\u0027s no longer needed.",
+      "parentUuid": "043da759_64125329",
+      "revId": "2a618eac8e6c0ed97ea7410749fae53b6b7551e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
