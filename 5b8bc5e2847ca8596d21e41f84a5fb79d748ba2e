@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88fae4bc_140a3a5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2023-04-28T06:17:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a490d9f_45db203d",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 110
+      },
+      "revId": "5b8bc5e2847ca8596d21e41f84a5fb79d748ba2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c69a018c_2f5a3e0c",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-04-27T13:57:05Z",
       "side": 1,
       "message": "Please remove this line.",
+      "revId": "5b8bc5e2847ca8596d21e41f84a5fb79d748ba2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2887e960_311b9472",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2023-04-28T06:17:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c69a018c_2f5a3e0c",
       "revId": "5b8bc5e2847ca8596d21e41f84a5fb79d748ba2e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +113,24 @@
       "writtenOn": "2023-04-27T13:57:05Z",
       "side": 1,
       "message": "My comments apply to all changes in this series. Please fix those commit messages as well. Thank you!",
+      "revId": "5b8bc5e2847ca8596d21e41f84a5fb79d748ba2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3b6a0e5_e2de009b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2023-04-28T06:17:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56f0dbda_a195cb8a",
       "revId": "5b8bc5e2847ca8596d21e41f84a5fb79d748ba2e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
