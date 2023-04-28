@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3f2419_891d8c0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-28T17:12:00Z",
+      "side": 1,
+      "message": "you need to say why.",
+      "revId": "2a618eac8e6c0ed97ea7410749fae53b6b7551e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac17ff49_09731f7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-28T17:12:00Z",
+      "side": 1,
+      "message": "There is no LTO code in this kernel, so why are you trying to enable it?\n\nCFI is very different here, it\u0027s not the same anymore.",
+      "revId": "2a618eac8e6c0ed97ea7410749fae53b6b7551e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
