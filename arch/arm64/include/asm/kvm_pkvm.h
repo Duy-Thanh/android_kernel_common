@@ -41,6 +41,7 @@ int pkvm_init_host_vm(struct kvm *kvm, unsigned long type);
 int pkvm_create_hyp_vm(struct kvm *kvm);
 void pkvm_destroy_hyp_vm(struct kvm *kvm);
 void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa);
+int pkvm_report_misconfig(void);
 
 /*
  * Definitions for features to be allowed or restricted for guest virtual

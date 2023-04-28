@@ -5,6 +5,7 @@
  */
 
 #include <linux/kvm_host.h>
+#include <asm/kvm_pkvm.h>
 
 static unsigned long dev_to_id(struct device *dev)
 {
@@ -60,6 +61,13 @@ EXPORT_SYMBOL_GPL(pkvm_iommu_resume);
 
 int pkvm_iommu_finalize(int err)
 {
+	/*
+	 * If we can handle misconfig in EL1 (before privilege), we can
+	 * skip reporting to EL2, otherwise let EL2 drop the hammer.
+	 */
+	if (err)
+		err = pkvm_report_misconfig() ? err : 0;
+
 	return kvm_call_hyp_nvhe(__pkvm_iommu_finalize, err);
 }
 EXPORT_SYMBOL_GPL(pkvm_iommu_finalize);
