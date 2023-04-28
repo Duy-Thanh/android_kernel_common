@@ -304848,6 +304848,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_sched_show_task"
 }
 elf_symbol {
+  id: 0xedb34a44
+  name: "__traceiter_android_vh_sched_stat_runtime_rt"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x75656e3b
+  type_id: 0x9bff5408
+  full_name: "__traceiter_android_vh_sched_stat_runtime_rt"
+}
+elf_symbol {
   id: 0xb841c45e
   name: "__traceiter_android_vh_scheduler_tick"
   is_defined: true
@@ -306475,6 +306484,15 @@ elf_symbol {
   crc: 0x66f7b6a4
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_sched_show_task"
+}
+elf_symbol {
+  id: 0xaaf6a826
+  name: "__tracepoint_android_vh_sched_stat_runtime_rt"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xdb1b2fe1
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_sched_stat_runtime_rt"
 }
 elf_symbol {
   id: 0xff2bccb8
@@ -345894,6 +345912,10 @@ symbols {
     value: 0xb5ed74f6
   }
   symbol {
+    key: "__traceiter_android_vh_sched_stat_runtime_rt"
+    value: 0xedb34a44
+  }
+  symbol {
     key: "__traceiter_android_vh_scheduler_tick"
     value: 0xb841c45e
   }
@@ -346616,6 +346638,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_sched_show_task"
     value: 0x931fa088
+  }
+  symbol {
+    key: "__tracepoint_android_vh_sched_stat_runtime_rt"
+    value: 0xaaf6a826
   }
   symbol {
     key: "__tracepoint_android_vh_scheduler_tick"
