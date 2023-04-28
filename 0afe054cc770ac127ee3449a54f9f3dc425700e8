@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030dd8df_c26dbb26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-28T17:12:46Z",
+      "side": 1,
+      "message": "Why is LTO needed again?\n\nThe subject line does not make sense as this has nothing to do with CFI anymore.",
+      "revId": "0afe054cc770ac127ee3449a54f9f3dc425700e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
