@@ -16,6 +16,24 @@
       "message": "```\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n- of_mdiobus_register\n```",
       "revId": "8b73c742ef86a3325e7b3a512a3e3ad17709fa48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "380d0b47_44230c90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-28T12:05:51Z",
+      "side": 1,
+      "message": "Fixed in follow-up commit.",
+      "parentUuid": "44e0c7db_52c35c41",
+      "revId": "8b73c742ef86a3325e7b3a512a3e3ad17709fa48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
