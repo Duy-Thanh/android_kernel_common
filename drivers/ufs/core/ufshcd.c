@@ -7470,11 +7470,15 @@ static int ufshcd_abort(struct scsi_cmnd *cmd)
 	int tag = scsi_cmd_to_rq(cmd)->tag;
 	struct ufshcd_lrb *lrbp = &hba->lrb[tag];
 	unsigned long flags;
-	int err = FAILED;
+	int err = 0;
 	bool outstanding;
 	u32 reg;
 
 	WARN_ONCE(tag < 0, "Invalid tag %d\n", tag);
+
+	trace_android_vh_ufs_mcq_abort(hba, cmd, &err);
+	if (err)
+		return err;
 
 	ufshcd_hold(hba, false);
 	reg = ufshcd_readl(hba, REG_UTP_TRANSFER_REQ_DOOR_BELL);
