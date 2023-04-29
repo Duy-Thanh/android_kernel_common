@@ -9331,6 +9331,11 @@ pointer_reference {
   pointee_type_id: 0x5a8780f1
 }
 pointer_reference {
+  id: 0x1c331d1a
+  kind: POINTER
+  pointee_type_id: 0x5a8c92f7
+}
+pointer_reference {
   id: 0x1c34b0f2
   kind: POINTER
   pointee_type_id: 0x5a922555
@@ -41464,13 +41469,13 @@ member {
   id: 0x2d08133a
   name: "android_kabi_reserved1"
   type_id: 0x92233392
-  offset: 3008
+  offset: 8960
 }
 member {
   id: 0x2d08133b
   name: "android_kabi_reserved1"
   type_id: 0x92233392
-  offset: 8960
+  offset: 3008
 }
 member {
   id: 0x2d081341
@@ -236689,7 +236694,7 @@ struct_union {
     member_id: 0x4624a2cb
     member_id: 0x9f00bba4
     member_id: 0xed700cf7
-    member_id: 0x2d08133a
+    member_id: 0x2d08133b
   }
 }
 struct_union {
@@ -241776,7 +241781,7 @@ struct_union {
     member_id: 0xcd687a69
     member_id: 0xa54b2087
     member_id: 0xbcbb0a8f
-    member_id: 0x2d08133b
+    member_id: 0x2d08133a
   }
 }
 struct_union {
@@ -264832,6 +264837,28 @@ enumeration {
     enumerator {
       name: "TYPEC_SOURCE"
       value: 1
+    }
+  }
+}
+enumeration {
+  id: 0x1c6cd3c0
+  name: "typec_timer"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "SINK_WAIT_CAP"
+    }
+    enumerator {
+      name: "SOURCE_OFF"
+      value: 1
+    }
+    enumerator {
+      name: "CC_DEBOUNCE"
+      value: 2
+    }
+    enumerator {
+      name: "SINK_DISCOVERY_BC12"
+      value: 3
     }
   }
 }
@@ -291203,6 +291230,14 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x9b508c46
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3e10b518
+  parameter_id: 0x1c6cd3c0
+  parameter_id: 0x1bf16028
+}
+function {
   id: 0x9b50addb
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -291242,6 +291277,13 @@ function {
   parameter_id: 0x1aeeade4
   parameter_id: 0x1a5d0549
   parameter_id: 0x052fac00
+}
+function {
+  id: 0x9b538b4c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3e10b518
+  parameter_id: 0x11cfee5a
 }
 function {
   id: 0x9b54b215
@@ -291847,6 +291889,14 @@ function {
   parameter_id: 0x18a2fb63
   parameter_id: 0x0e5eb556
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x9b89721d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x08113aaf
+  parameter_id: 0x1bf16028
+  parameter_id: 0x1c331d1a
 }
 function {
   id: 0x9b89da18
@@ -293232,6 +293282,23 @@ function {
   parameter_id: 0x1b3398cc
   parameter_id: 0x2e037cf1
   parameter_id: 0x0b27dc43
+}
+function {
+  id: 0x9bf779ba
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x14528516
+  parameter_id: 0x2712b6f9
+  parameter_id: 0x13580d6c
+}
+function {
+  id: 0x9bf77d6c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x14528516
+  parameter_id: 0x2712b6f9
+  parameter_id: 0x13580d6c
+  parameter_id: 0x13580d6c
 }
 function {
   id: 0x9bf82255
@@ -304292,6 +304359,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_try_to_wake_up"
 }
 elf_symbol {
+  id: 0xe3ee70ae
+  name: "__traceiter_android_rvh_typec_tcpci_get_vbus"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x37614c90
+  type_id: 0x9bf77d6c
+  full_name: "__traceiter_android_rvh_typec_tcpci_get_vbus"
+}
+elf_symbol {
   id: 0xcce6f612
   name: "__traceiter_android_rvh_uclamp_eff_get"
   is_defined: true
@@ -304947,6 +305023,42 @@ elf_symbol {
   crc: 0x40207816
   type_id: 0x9bcd4ff7
   full_name: "__traceiter_android_vh_sysrq_crash"
+}
+elf_symbol {
+  id: 0x8a773cc3
+  name: "__traceiter_android_vh_typec_store_partner_src_caps"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x03707443
+  type_id: 0x9b89721d
+  full_name: "__traceiter_android_vh_typec_store_partner_src_caps"
+}
+elf_symbol {
+  id: 0x9545623c
+  name: "__traceiter_android_vh_typec_tcpci_override_toggling"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcd3fc09b
+  type_id: 0x9bf779ba
+  full_name: "__traceiter_android_vh_typec_tcpci_override_toggling"
+}
+elf_symbol {
+  id: 0x558490b1
+  name: "__traceiter_android_vh_typec_tcpm_get_timer"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa264e589
+  type_id: 0x9b508c46
+  full_name: "__traceiter_android_vh_typec_tcpm_get_timer"
+}
+elf_symbol {
+  id: 0x8af2b51e
+  name: "__traceiter_android_vh_typec_tcpm_log"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd8a5e0bf
+  type_id: 0x9b538b4c
+  full_name: "__traceiter_android_vh_typec_tcpm_log"
 }
 elf_symbol {
   id: 0xe31bb308
@@ -305948,6 +306060,15 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_try_to_wake_up"
 }
 elf_symbol {
+  id: 0xe445d254
+  name: "__tracepoint_android_rvh_typec_tcpci_get_vbus"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x853bba97
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_typec_tcpci_get_vbus"
+}
+elf_symbol {
   id: 0x64e2c288
   name: "__tracepoint_android_rvh_uclamp_eff_get"
   is_defined: true
@@ -306603,6 +306724,42 @@ elf_symbol {
   crc: 0x1ce924b5
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_sysrq_crash"
+}
+elf_symbol {
+  id: 0x18e67da1
+  name: "__tracepoint_android_vh_typec_store_partner_src_caps"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x6c665c32
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_typec_store_partner_src_caps"
+}
+elf_symbol {
+  id: 0x75a2f39e
+  name: "__tracepoint_android_vh_typec_tcpci_override_toggling"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x66c6dbb4
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_typec_tcpci_override_toggling"
+}
+elf_symbol {
+  id: 0x7b5c377f
+  name: "__tracepoint_android_vh_typec_tcpm_get_timer"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xfc5b7094
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_typec_tcpm_get_timer"
+}
+elf_symbol {
+  id: 0x6436c788
+  name: "__tracepoint_android_vh_typec_tcpm_log"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x2b257da2
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_typec_tcpm_log"
 }
 elf_symbol {
   id: 0x609a86da
@@ -345707,6 +345864,10 @@ symbols {
     value: 0x968833a5
   }
   symbol {
+    key: "__traceiter_android_rvh_typec_tcpci_get_vbus"
+    value: 0xe3ee70ae
+  }
+  symbol {
     key: "__traceiter_android_rvh_uclamp_eff_get"
     value: 0xcce6f612
   }
@@ -345997,6 +346158,22 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_sysrq_crash"
     value: 0x34a01a22
+  }
+  symbol {
+    key: "__traceiter_android_vh_typec_store_partner_src_caps"
+    value: 0x8a773cc3
+  }
+  symbol {
+    key: "__traceiter_android_vh_typec_tcpci_override_toggling"
+    value: 0x9545623c
+  }
+  symbol {
+    key: "__traceiter_android_vh_typec_tcpm_get_timer"
+    value: 0x558490b1
+  }
+  symbol {
+    key: "__traceiter_android_vh_typec_tcpm_log"
+    value: 0x8af2b51e
   }
   symbol {
     key: "__traceiter_android_vh_ufs_check_int_errors"
@@ -346443,6 +346620,10 @@ symbols {
     value: 0xe9c87fab
   }
   symbol {
+    key: "__tracepoint_android_rvh_typec_tcpci_get_vbus"
+    value: 0xe445d254
+  }
+  symbol {
     key: "__tracepoint_android_rvh_uclamp_eff_get"
     value: 0x64e2c288
   }
@@ -346733,6 +346914,22 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_sysrq_crash"
     value: 0x3fe0157c
+  }
+  symbol {
+    key: "__tracepoint_android_vh_typec_store_partner_src_caps"
+    value: 0x18e67da1
+  }
+  symbol {
+    key: "__tracepoint_android_vh_typec_tcpci_override_toggling"
+    value: 0x75a2f39e
+  }
+  symbol {
+    key: "__tracepoint_android_vh_typec_tcpm_get_timer"
+    value: 0x7b5c377f
+  }
+  symbol {
+    key: "__tracepoint_android_vh_typec_tcpm_log"
+    value: 0x6436c788
   }
   symbol {
     key: "__tracepoint_android_vh_ufs_check_int_errors"
