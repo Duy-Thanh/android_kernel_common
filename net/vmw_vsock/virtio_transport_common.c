@@ -98,6 +98,11 @@ virtio_transport_alloc_skb(struct virtio_vsock_pkt_info *info,
 					 info->op,
 					 info->flags);
 
+	if (info->vsk && !skb_set_owner_sk_safe(skb, sk_vsock(info->vsk))) {
+		WARN_ONCE(1, "failed to allocate skb on vsock socket with sk_refcnt == 0\n");
+		goto out;
+	}
+
 	return skb;
 
 out:
@@ -367,6 +372,13 @@ virtio_transport_stream_do_dequeue(struct vsock_sock *vsk,
 	u32 free_space;
 
 	spin_lock_bh(&vvs->rx_lock);
+
+	if (WARN_ONCE(skb_queue_empty(&vvs->rx_queue) && vvs->rx_bytes,
+		      "rx_queue is empty, but rx_bytes is non-zero\n")) {
+		spin_unlock_bh(&vvs->rx_lock);
+		return err;
+	}
+
 	while (total < len && !skb_queue_empty(&vvs->rx_queue)) {
 		skb = skb_peek(&vvs->rx_queue);
 
@@ -1072,7 +1084,7 @@ virtio_transport_recv_enqueue(struct vsock_sock *vsk,
 			memcpy(skb_put(last_skb, skb->len), skb->data, skb->len);
 			free_pkt = true;
 			last_hdr->flags |= hdr->flags;
-			last_hdr->len = cpu_to_le32(last_skb->len);
+			le32_add_cpu(&last_hdr->len, len);
 			goto out;
 		}
 	}
@@ -1297,6 +1309,11 @@ void virtio_transport_recv_pkt(struct virtio_transport *t,
 	if (virtio_transport_get_type(sk) != le16_to_cpu(hdr->type)) {
 		(void)virtio_transport_reset_no_sock(t, skb);
 		sock_put(sk);
+		goto free_pkt;
+	}
+
+	if (!skb_set_owner_sk_safe(skb, sk)) {
+		WARN_ONCE(1, "receiving vsock socket has sk_refcnt == 0\n");
 		goto free_pkt;
 	}
 
