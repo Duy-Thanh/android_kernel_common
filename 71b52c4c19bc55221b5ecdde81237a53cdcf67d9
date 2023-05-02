@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c2ce9ca_2788e45b",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-05-02T10:57:11Z",
+      "side": 1,
+      "message": "nit: I think this function name is a misnomer, given that it wipes the pvmfw in the early case.\n\nBut that aside, why not have `finalize_pkvm()` detect that the IOMMUs failed to initialise and then clear the memory in that case? I think this would be cleaner, since the IOMMU code just needs to export a `bool iommus_finalized(void)` function rather than the pkvm code at EL1 expose this slightly confusing helper.",
+      "range": {
+        "startLine": 580,
+        "startChar": 4,
+        "endLine": 580,
+        "endChar": 25
+      },
+      "revId": "71b52c4c19bc55221b5ecdde81237a53cdcf67d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
