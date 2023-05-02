@@ -742,9 +742,9 @@
   flow_rule_match_vlan
   flush_dcache_page
   flush_delayed_work
+  flush_signals
   flush_work
   flush_workqueue
-  flush_signals
   fpsimd_context_busy
   fput
   free_irq
@@ -1744,9 +1744,9 @@
   skb_trim
   skb_tstamp_tx
   skip_spaces
+  smpboot_register_percpu_thread
   smp_call_function
   smp_call_function_single
-  smpboot_register_percpu_thread
   snd_ctl_add
   snd_ctl_boolean_mono_info
   snd_ctl_enum_info

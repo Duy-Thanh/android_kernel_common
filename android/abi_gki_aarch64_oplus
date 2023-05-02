@@ -175,12 +175,12 @@
   __tracepoint_android_vh_shrink_slab_bypass
   __tracepoint_android_vh_sync_txn_recvd
   __tracepoint_cpu_frequency_limits
-  __trace_puts
   __tracepoint_sched_stat_blocked
   __tracepoint_sched_stat_iowait
   __tracepoint_sched_stat_sleep
   __tracepoint_sched_stat_wait
   __tracepoint_sched_waking
+  __trace_puts
   try_to_free_mem_cgroup_pages
   unregister_kprobe
   unregister_kretprobe

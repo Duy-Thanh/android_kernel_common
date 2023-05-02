@@ -59,10 +59,10 @@
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
-  bpf_trace_run1
   bpf_trace_run10
   bpf_trace_run11
   bpf_trace_run12
+  bpf_trace_run1
   bpf_trace_run2
   bpf_trace_run3
   bpf_trace_run4
@@ -945,9 +945,9 @@
   is_dma_buf_file
   is_vmalloc_addr
   iterate_fd
-  jiffies
   jiffies_64_to_clock_t
   jiffies64_to_msecs
+  jiffies
   jiffies_to_msecs
   jiffies_to_usecs
   kasan_flag_enabled
@@ -1031,8 +1031,8 @@
   memmove
   memory_read_from_buffer
   memparse
-  memset
   memset64
+  memset
   __memset_io
   memstart_addr
   mfd_add_devices
@@ -1663,6 +1663,7 @@
   __traceiter_android_rvh_enqueue_task
   __traceiter_android_rvh_find_lowest_rq
   __traceiter_android_rvh_find_new_ilb
+  __traceiter_android_rvh_gic_v3_set_affinity
   __traceiter_android_rvh_post_init_entity_util_avg
   __traceiter_android_rvh_replace_next_task_fair
   __traceiter_android_rvh_sched_fork_init
@@ -1677,7 +1678,6 @@
   __traceiter_android_vh_cpu_idle_enter
   __traceiter_android_vh_cpu_idle_exit
   __traceiter_android_vh_gic_set_affinity
-  __traceiter_android_rvh_gic_v3_set_affinity
   __traceiter_android_vh_ipi_stop
   __traceiter_android_vh_logbuf
   __traceiter_android_vh_logbuf_pr_cont
@@ -1714,6 +1714,7 @@
   __tracepoint_android_rvh_enqueue_task
   __tracepoint_android_rvh_find_lowest_rq
   __tracepoint_android_rvh_find_new_ilb
+  __tracepoint_android_rvh_gic_v3_set_affinity
   __tracepoint_android_rvh_post_init_entity_util_avg
   __tracepoint_android_rvh_replace_next_task_fair
   __tracepoint_android_rvh_sched_fork_init
@@ -1728,7 +1729,6 @@
   __tracepoint_android_vh_cpu_idle_enter
   __tracepoint_android_vh_cpu_idle_exit
   __tracepoint_android_vh_gic_set_affinity
-  __tracepoint_android_rvh_gic_v3_set_affinity
   __tracepoint_android_vh_ipi_stop
   __tracepoint_android_vh_logbuf
   __tracepoint_android_vh_logbuf_pr_cont
