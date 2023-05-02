@@ -34,6 +34,24 @@
       "parentUuid": "835cefab_6ef8a946",
       "revId": "08aa37995941d1ed3fdab41dca67ea4ef1ad8769",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48fe1e8c_d03c0fa7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-05-02T16:29:19Z",
+      "side": 1,
+      "message": "Done. This was added by the cherry picker tool.",
+      "parentUuid": "290c1872_2129cd69",
+      "revId": "08aa37995941d1ed3fdab41dca67ea4ef1ad8769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
