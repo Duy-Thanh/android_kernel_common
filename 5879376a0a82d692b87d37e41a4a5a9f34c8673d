@@ -69,6 +69,24 @@
       "parentUuid": "04034e86_328bd815",
       "revId": "5879376a0a82d692b87d37e41a4a5a9f34c8673d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bff5d49_5a56e211",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-05-02T15:02:20Z",
+      "side": 1,
+      "message": "Oops. My mistake. We should review the checker / existing symbol lists.",
+      "parentUuid": "4cffd313_4217115c",
+      "revId": "5879376a0a82d692b87d37e41a4a5a9f34c8673d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
