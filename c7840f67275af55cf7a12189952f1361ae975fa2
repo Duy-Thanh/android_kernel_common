@@ -16,6 +16,23 @@
       "message": "Missing cherry pick tag \u0027(cherry picked from commit ...)\u0027. Please see documentation here: https://android.googlesource.com/kernel/common/+/android-mainline/README.md",
       "revId": "c7840f67275af55cf7a12189952f1361ae975fa2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55bf584c_7117e9fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-05-02T17:55:30Z",
+      "side": 1,
+      "message": "Please ignore previous comment regarding cherry-pick tag. Not required for ANDROID: changes.",
+      "revId": "c7840f67275af55cf7a12189952f1361ae975fa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
