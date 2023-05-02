@@ -22,6 +22,30 @@
       },
       "revId": "71b52c4c19bc55221b5ecdde81237a53cdcf67d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69717f9e_2e2ef735",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-05-02T14:24:36Z",
+      "side": 1,
+      "message": "The current way assumes that iommu might be finalised after de-privilege(if early loading changed for any reason).\n\nIt calls `pkvm_report_misconfig` from EL1 iommu finalize to erase pvmfw cleanly, otherwise we force it from EL2(ex:`-EACESS` in EL1).\n\nWe can change this to make the EL1 IOMMU implement `iommus_finalized()` but if finalise is called after de-privilege we should detect this in EL2 and force the clearing of pvmwfw",
+      "parentUuid": "8c2ce9ca_2788e45b",
+      "range": {
+        "startLine": 580,
+        "startChar": 4,
+        "endLine": 580,
+        "endChar": 25
+      },
+      "revId": "71b52c4c19bc55221b5ecdde81237a53cdcf67d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
