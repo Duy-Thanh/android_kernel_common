@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6219472_9f7243bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-02T21:54:56Z",
+      "side": 1,
+      "message": "I have not reviewed all the logic here, but I have some comments and questions that would be good to start addressing.",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3faeea8a_38826dd9",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-02T21:54:56Z",
+      "side": 1,
+      "message": "Is this needed? It seems to be a debug feature. Could we add a more comprehensive stats debugfs entry instead (as a separate CL).",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "507b565e_1dce8d7b",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-02T21:54:56Z",
+      "side": 1,
+      "message": "these two seem to be from a different patch.",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c192d6_ec61534b",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-02T21:54:56Z",
+      "side": 1,
+      "message": "It would be good to add a kerneldoc comment to this struct. It is not clear what these two messages do and how backwards compatibility is handled.",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e72efef3_6055deff",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2033,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-02T21:54:56Z",
+      "side": 1,
+      "message": "What does state \u003d 1 mean? What do other values do?",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9bdd938_a9334bdd",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-02T21:54:56Z",
+      "side": 1,
+      "message": "Are you expecting trusty to respond to these out of order? If not should we print a warning if we don\u0027t find this as the head?",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd94bc46_46c6b986",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2517,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-02T21:54:56Z",
+      "side": 1,
+      "message": "Don\u0027t assign this to a global. There can be multiple instances of this device.",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e9e04aa_8894566f",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2641,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-02T21:54:56Z",
+      "side": 1,
+      "message": "is there any benefit in registering a single shrinker for the whole driver instead of one per device?",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
