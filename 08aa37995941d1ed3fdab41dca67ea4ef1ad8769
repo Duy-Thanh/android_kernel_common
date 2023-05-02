@@ -16,6 +16,24 @@
       "message": "Please remove the odd metadata. The cherry picked line is wrongly formatted and the Merged-In line does not contribute any additional value.",
       "revId": "08aa37995941d1ed3fdab41dca67ea4ef1ad8769",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "290c1872_2129cd69",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-02T15:37:21Z",
+      "side": 1,
+      "message": "https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "835cefab_6ef8a946",
+      "revId": "08aa37995941d1ed3fdab41dca67ea4ef1ad8769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
