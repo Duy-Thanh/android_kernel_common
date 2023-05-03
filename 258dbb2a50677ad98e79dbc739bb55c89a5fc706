@@ -16,6 +16,24 @@
       "message": "Same as https://r.android.com/2308821",
       "revId": "258dbb2a50677ad98e79dbc739bb55c89a5fc706",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eaefb2e_34a2631d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-05-03T18:06:10Z",
+      "side": 1,
+      "message": "Good spot, thanks Eric.\n\nThe fact that this came up again is a tooling error.  Will fix.",
+      "parentUuid": "dd7ace91_f51a4c18",
+      "revId": "258dbb2a50677ad98e79dbc739bb55c89a5fc706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
