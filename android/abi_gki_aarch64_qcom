@@ -2482,6 +2482,9 @@
   trace_event_raw_init
   trace_event_reg
   trace_handle_return
+  __traceiter_dma_fence_emit
+  __traceiter_gpu_mem_total
+  __traceiter_xdp_exception
   __tracepoint_dma_fence_emit
   __tracepoint_gpu_mem_total
   __tracepoint_xdp_exception

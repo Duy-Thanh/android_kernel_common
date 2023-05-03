@@ -635,6 +635,10 @@
   sched_show_task
   smp_call_function
   touch_softlockup_watchdog
+  __traceiter_android_vh_ipi_stop
+  __traceiter_device_pm_callback_end
+  __traceiter_device_pm_callback_start
+  __traceiter_suspend_resume
   __tracepoint_android_vh_ipi_stop
   __tracepoint_device_pm_callback_end
   __tracepoint_device_pm_callback_start
@@ -1054,6 +1058,7 @@
   sysfs_remove_file_ns
   sysfs_streq
   system_highpri_wq
+  __traceiter_gpu_mem_total
   trace_output_call
   __tracepoint_gpu_mem_total
   trace_print_array_seq

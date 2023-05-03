@@ -698,6 +698,7 @@
   sg_next
   sync_file_create
   sync_file_get_fence
+  __traceiter_dma_fence_emit
   __tracepoint_dma_fence_emit
   ttm_bo_add_to_lru
   ttm_bo_del_sub_from_lru
@@ -874,6 +875,7 @@
   skb_to_sgvec
   skb_tstamp_tx
   softnet_data
+  __traceiter_xdp_exception
   __tracepoint_xdp_exception
   virtqueue_add_inbuf_ctx
   virtqueue_enable_cb_delayed

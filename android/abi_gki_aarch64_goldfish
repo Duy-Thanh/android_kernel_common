@@ -919,6 +919,7 @@
   __sg_alloc_table_from_pages
   sg_free_table
   sync_file_get_fence
+  __traceiter_dma_fence_emit
   __tracepoint_dma_fence_emit
   ttm_bo_add_to_lru
   ttm_bo_del_sub_from_lru
@@ -1059,6 +1060,7 @@
   skb_partial_csum_set
   skb_tstamp_tx
   synchronize_net
+  __traceiter_xdp_exception
   __tracepoint_xdp_exception
   virtqueue_add_inbuf_ctx
   virtqueue_enable_cb_delayed

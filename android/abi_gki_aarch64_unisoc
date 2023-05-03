@@ -2539,6 +2539,7 @@
   ktime_get_raw
   of_machine_is_compatible
   _totalram_pages
+  __traceiter_gpu_mem_total
   trace_output_call
   __tracepoint_gpu_mem_total
   trace_print_array_seq
