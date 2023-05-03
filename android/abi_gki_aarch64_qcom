@@ -1105,6 +1105,10 @@
   pci_request_acs
   regulator_disable_deferred
   report_iommu_fault
+  __traceiter_smmu_init
+  __traceiter_tlbi_end
+  __traceiter_tlbi_start
+  __traceiter_tlbsync_timeout
   __tracepoint_smmu_init
   __tracepoint_tlbi_end
   __tracepoint_tlbi_start
@@ -1622,6 +1626,7 @@
   sg_alloc_table_from_pages
   shmem_read_mapping_page_gfp
   sysfs_remove_files
+  __traceiter_gpu_mem_total
   __tracepoint_gpu_mem_total
   unmapped_area_topdown
   unregister_shrinker
@@ -1945,6 +1950,7 @@
 # required by msm_lmh_dcvs.ko
   cpufreq_cpu_get
   cpufreq_platform_cooling_register
+  __traceiter_clock_set_rate
   __tracepoint_clock_set_rate
 
 # required by msm_minidump.ko
