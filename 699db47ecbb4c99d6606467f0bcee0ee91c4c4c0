@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a50fe81d_a21489f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-05-03T09:17:25Z",
+      "side": 1,
+      "message": "Hi Samsung.\n\nI\u0027ve added missing symbols everywhere for 13.5-15 (other 13 and 14 branches were OK).\n\nRebasing this commit, I see that there was just one hook addition (2 symbols). I\u0027ve adjusted the commit message.\n\nSorry for the inconvenience.",
+      "revId": "699db47ecbb4c99d6606467f0bcee0ee91c4c4c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
