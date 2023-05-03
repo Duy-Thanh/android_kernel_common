@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df9380f6_805808f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-05-03T08:52:48Z",
+      "side": 1,
+      "message": "I\u0027m running a build in case I LTO\u003dfull makes any difference to type fidelity.",
+      "revId": "11122190d44f42201e12a121383ec0d1f9f7c87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
