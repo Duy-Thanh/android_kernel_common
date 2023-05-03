@@ -824,6 +824,8 @@
   sg_alloc_table_from_pages
   sync_file_create
   sync_file_get_fence
+  __traceiter_dma_fence_emit
+  __traceiter_gpu_mem_total
   __tracepoint_dma_fence_emit
   __tracepoint_gpu_mem_total
   ttm_bo_add_to_lru
@@ -988,6 +990,7 @@
   skb_to_sgvec
   skb_tstamp_tx
   __sw_hweight64
+  __traceiter_xdp_exception
   __tracepoint_xdp_exception
   virtqueue_add_inbuf_ctx
   virtqueue_enable_cb_delayed
