@@ -761,6 +761,7 @@
   sync_file_create
   sync_file_get_fence
   __task_pid_nr_ns
+  __traceiter_gpu_mem_total
   __tracepoint_gpu_mem_total
   trace_print_symbols_seq
   trace_set_clr_event

@@ -1461,6 +1461,11 @@
   strcspn
   system_highpri_wq
   _totalram_pages
+  __traceiter_android_vh_ion_buffer_release
+  __traceiter_android_vh_psci_cpu_suspend
+  __traceiter_android_vh_psci_tos_resident_on
+  __traceiter_clock_set_rate
+  __traceiter_gpu_mem_total
   trace_output_call
   __tracepoint_android_vh_ion_buffer_release
   __tracepoint_android_vh_psci_cpu_suspend
@@ -2664,6 +2669,7 @@
   match_string
 
 # required by ufs-sprd.ko
+  __traceiter_android_vh_ufs_prepare_command
   __tracepoint_android_vh_ufs_prepare_command
   ufshcd_auto_hibern8_update
   ufshcd_config_pwr_mode
