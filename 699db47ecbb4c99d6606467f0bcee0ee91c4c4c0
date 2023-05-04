@@ -16,6 +16,23 @@
       "message": "Hi Samsung.\n\nI\u0027ve added missing symbols everywhere for 13.5-15 (other 13 and 14 branches were OK).\n\nRebasing this commit, I see that there was just one hook addition (2 symbols). I\u0027ve adjusted the commit message.\n\nSorry for the inconvenience.",
       "revId": "699db47ecbb4c99d6606467f0bcee0ee91c4c4c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eb71db8_1269ad39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1877705
+      },
+      "writtenOn": "2023-05-04T03:10:02Z",
+      "side": 1,
+      "message": "TreeHugger finished with: 43 passed, 1 warning.\nStatus: https://android-review.git.corp.google.com/c/kernel/common/+/2570031/6?tab\u003dchecks\u0026checksPatchset\u003d6\n\u003d\u003e we can\u0027t check warning from our side.\n\n@google team,\ncould you please check why warning happend and failed to auto-submit ?",
+      "revId": "699db47ecbb4c99d6606467f0bcee0ee91c4c4c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
