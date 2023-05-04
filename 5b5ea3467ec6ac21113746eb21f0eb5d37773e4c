@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1e30e57_814ed2fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2004207
+      },
+      "writtenOn": "2023-05-04T01:32:40Z",
+      "side": 1,
+      "message": "OK, could it merged？",
+      "parentUuid": "e886ef24_841dde5b",
+      "revId": "5b5ea3467ec6ac21113746eb21f0eb5d37773e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d29ba1dc_efd17cbb",
