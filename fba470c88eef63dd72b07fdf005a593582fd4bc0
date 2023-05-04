@@ -16,6 +16,24 @@
       "message": "`error: implicit declaration of function \u0027dwc3_ep0_reset_state\u0027`",
       "revId": "fba470c88eef63dd72b07fdf005a593582fd4bc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90d8188_e74de465",
+        "filename": "drivers/usb/dwc3/gadget.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2550,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2023-05-04T21:00:36Z",
+      "side": 1,
+      "message": "@quic_ugoswami@quicinc.com can you make sure to pull in the v6 of this patch and the following one?  I rebased the dwc3_ep0_reset_state() to come at the end of the series, so if we needed to backport we could do w/o the cleanup change to separate out the EP0 reset sequences.\n\nhttps://lore.kernel.org/linux-usb/20230420212759.29429-1-quic_wcheng@quicinc.com/",
+      "parentUuid": "4889a71b_169e2381",
+      "revId": "fba470c88eef63dd72b07fdf005a593582fd4bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
