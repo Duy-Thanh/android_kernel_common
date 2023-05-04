@@ -16,6 +16,23 @@
       "message": "is there any other issues about this patch？",
       "revId": "42e9f1bc886101ed353b17d8a03e9ccb2d993604",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f942e71_6cd555aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2004207
+      },
+      "writtenOn": "2023-05-04T01:20:34Z",
+      "side": 1,
+      "message": "could it mergerd?",
+      "revId": "42e9f1bc886101ed353b17d8a03e9ccb2d993604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
