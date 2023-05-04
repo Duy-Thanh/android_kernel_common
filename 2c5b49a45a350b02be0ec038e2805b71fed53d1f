@@ -16,6 +16,40 @@
       "message": "This needs more detail as to why it is needed and how it can be utilized without introducing bugs. See bug for specific questions.",
       "revId": "2c5b49a45a350b02be0ec038e2805b71fed53d1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92619c45_a2a9c4cc",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-05-04T03:36:55Z",
+      "side": 1,
+      "message": "android_vh_prune_account is a little confusing of a name here.\n\nWould android_vh_account_process_tick_granularity(int user_tick, int *ticks) be more clear as to the intent of this hook (as well as to what function it applies)?",
+      "revId": "2c5b49a45a350b02be0ec038e2805b71fed53d1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d781bf9_b2c4194b",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-05-04T03:36:55Z",
+      "side": 1,
+      "message": "It seems like ticks \u0026 should_account are a little duplicative. \n\nIf ticks was set to zero by the hook that would indicate an early return.",
+      "revId": "2c5b49a45a350b02be0ec038e2805b71fed53d1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
