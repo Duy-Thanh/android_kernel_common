@@ -793,6 +793,7 @@ pmd_t *mm_find_pmd(struct mm_struct *mm, unsigned long address)
 out:
 	return pmd;
 }
+EXPORT_SYMBOL_GPL(mm_find_pmd);
 
 struct folio_referenced_arg {
 	int mapcount;
@@ -938,6 +939,7 @@ int folio_referenced(struct folio *folio, int is_locked,
 
 	return rwc.contended ? -1 : pra.referenced;
 }
+EXPORT_SYMBOL_GPL(folio_referenced);
 
 static int page_vma_mkclean_one(struct page_vma_mapped_walk *pvmw)
 {
@@ -1239,6 +1241,7 @@ void page_add_anon_rmap(struct page *page,
 
 	mlock_vma_page(page, vma, compound);
 }
+EXPORT_SYMBOL_GPL(page_add_anon_rmap);
 
 /**
  * page_add_new_anon_rmap - add mapping to a new anonymous page
@@ -1275,6 +1278,7 @@ void page_add_new_anon_rmap(struct page *page,
 	__mod_lruvec_page_state(page, NR_ANON_MAPPED, nr);
 	__page_set_anon_rmap(page, vma, address, 1);
 }
+EXPORT_SYMBOL_GPL(page_add_new_anon_rmap);
 
 /**
  * page_add_file_rmap - add pte mapping to a file page
@@ -1332,6 +1336,7 @@ out:
 
 	mlock_vma_page(page, vma, compound);
 }
+EXPORT_SYMBOL_GPL(page_add_file_rmap);
 
 static void page_remove_file_rmap(struct page *page, bool compound)
 {
@@ -1463,6 +1468,7 @@ out:
 
 	munlock_vma_page(page, vma, compound);
 }
+EXPORT_SYMBOL_GPL(page_remove_rmap);
 
 /*
  * @arg: enum ttu_flags will be passed to this argument

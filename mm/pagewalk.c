@@ -481,6 +481,7 @@ int walk_page_range(struct mm_struct *mm, unsigned long start,
 	} while (start = next, start < end);
 	return err;
 }
+EXPORT_SYMBOL_GPL(walk_page_range);
 
 /**
  * walk_page_range_novma - walk a range of pagetables not backed by a vma
@@ -516,6 +517,7 @@ int walk_page_range_novma(struct mm_struct *mm, unsigned long start,
 
 	return walk_pgd_range(start, end, &walk);
 }
+EXPORT_SYMBOL_GPL(walk_page_range_novma);
 
 int walk_page_vma(struct vm_area_struct *vma, const struct mm_walk_ops *ops,
 		void *private)
@@ -540,6 +542,7 @@ int walk_page_vma(struct vm_area_struct *vma, const struct mm_walk_ops *ops,
 		return err;
 	return __walk_page_range(vma->vm_start, vma->vm_end, &walk);
 }
+EXPORT_SYMBOL_GPL(walk_page_vma);
 
 /**
  * walk_page_mapping - walk all memory areas mapped into a struct address_space.
@@ -617,3 +620,4 @@ int walk_page_mapping(struct address_space *mapping, pgoff_t first_index,
 
 	return err;
 }
+EXPORT_SYMBOL_GPL(walk_page_mapping);

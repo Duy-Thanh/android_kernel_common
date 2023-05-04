@@ -1329,6 +1329,7 @@ void swap_free(swp_entry_t entry)
 	if (p)
 		__swap_entry_free(p, entry);
 }
+EXPORT_SYMBOL_GPL(swap_free);
 
 /*
  * Called after dropping swapcache to decrease refcnt to swap entries.
@@ -1610,6 +1611,7 @@ bool folio_free_swap(struct folio *folio)
 	folio_set_dirty(folio);
 	return true;
 }
+EXPORT_SYMBOL_GPL(folio_free_swap);
 
 /*
  * Free the swap entry like above, but also try to
