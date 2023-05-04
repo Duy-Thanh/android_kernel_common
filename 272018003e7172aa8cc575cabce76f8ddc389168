@@ -33,6 +33,24 @@
       "message": "Please upload a patch to add this symbol to your symbol list as part of the same series.",
       "revId": "272018003e7172aa8cc575cabce76f8ddc389168",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7bd2cee_f38c96cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-05-04T09:36:38Z",
+      "side": 1,
+      "message": "New patches have been uploaded. Please help me review this series. Thanks.",
+      "parentUuid": "f46c9dcc_368c0529",
+      "revId": "272018003e7172aa8cc575cabce76f8ddc389168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
