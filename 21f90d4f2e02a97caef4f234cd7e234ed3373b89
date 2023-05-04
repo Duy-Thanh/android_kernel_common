@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "331ec35d_a0dcce11",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5107,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2023-05-04T23:32:51Z",
+      "side": 1,
+      "message": "If we just need to disable fua by default, how about adding this line here for Android kernel only instead of adding a vendor hook?\n\nsdev-\u003ebroken_fua \u003d 1;",
+      "range": {
+        "startLine": 5107,
+        "startChar": 1,
+        "endLine": 5107,
+        "endChar": 40
+      },
+      "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
