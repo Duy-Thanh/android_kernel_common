@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4889a71b_169e2381",
+        "filename": "drivers/usb/dwc3/gadget.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2550,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-04T14:51:15Z",
+      "side": 1,
+      "message": "`error: implicit declaration of function \u0027dwc3_ep0_reset_state\u0027`",
+      "revId": "fba470c88eef63dd72b07fdf005a593582fd4bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
