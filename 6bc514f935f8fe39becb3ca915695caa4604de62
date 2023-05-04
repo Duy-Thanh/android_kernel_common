@@ -16,6 +16,23 @@
       "message": "came via LTS",
       "revId": "6bc514f935f8fe39becb3ca915695caa4604de62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf4937e_fec82858",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-04T17:40:48Z",
+      "side": 1,
+      "message": "commit sha is valid upstream.",
+      "revId": "6bc514f935f8fe39becb3ca915695caa4604de62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
