@@ -1,4 +1,4 @@
-root_id: 0x84ea5130
+root_id: 0x25a8b173
 void {
   id: 0x48b5725f
 }
@@ -26101,6 +26101,11 @@ pointer_reference {
   pointee_type_id: 0xf43ed6df
 }
 pointer_reference {
+  id: 0x37a5cb14
+  kind: POINTER
+  pointee_type_id: 0xf4d7cace
+}
+pointer_reference {
   id: 0x37a89a4a
   kind: POINTER
   pointee_type_id: 0xf4e28fb7
@@ -34224,6 +34229,11 @@ qualified {
   id: 0xf4a306a1
   qualifier: CONST
   qualified_type_id: 0xa2cbac0e
+}
+qualified {
+  id: 0xf4d7cace
+  qualifier: CONST
+  qualified_type_id: 0xa3189db3
 }
 qualified {
   id: 0xf4e28fb7
@@ -294521,6 +294531,12 @@ function {
   parameter_id: 0x054f691a
 }
 function {
+  id: 0x12c1ad66
+  return_type_id: 0x48b5725f
+  parameter_id: 0x09427c40
+  parameter_id: 0x0258f96e
+}
+function {
   id: 0x12c494e3
   return_type_id: 0x48b5725f
   parameter_id: 0x097315c2
@@ -330965,6 +330981,11 @@ function {
   parameter_id: 0x31fa879c
 }
 function {
+  id: 0xc3320c3e
+  return_type_id: 0x4585663f
+  parameter_id: 0x37a5cb14
+}
+function {
   id: 0xc33e01cf
   return_type_id: 0x4585663f
   parameter_id: 0x347303b4
@@ -331453,6 +331474,11 @@ function {
   parameter_id: 0x3360dff4
   parameter_id: 0x33756485
   parameter_id: 0x33756485
+}
+function {
+  id: 0xce3c45e2
+  return_type_id: 0x4585663f
+  parameter_id: 0x039cec64
 }
 function {
   id: 0xce4d40a0
@@ -333630,6 +333656,12 @@ function {
   id: 0xfca015af
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x08113aaf
+}
+function {
+  id: 0xfca40809
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x08956bf0
+  parameter_id: 0x09427c40
 }
 function {
   id: 0xfcb3294d
@@ -342506,6 +342538,24 @@ elf_symbol {
   full_name: "blk_abort_request"
 }
 elf_symbol {
+  id: 0x4ffac461
+  name: "blk_crypto_keyslot_index"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5ba9c87f
+  type_id: 0xce3c45e2
+  full_name: "blk_crypto_keyslot_index"
+}
+elf_symbol {
+  id: 0xad8bab96
+  name: "blk_crypto_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3d60bddd
+  type_id: 0xfca40809
+  full_name: "blk_crypto_register"
+}
+elf_symbol {
   id: 0x528ef002
   name: "blk_crypto_reprogram_all_keys"
   is_defined: true
@@ -342567,6 +342617,15 @@ elf_symbol {
   crc: 0x5c3607c6
   type_id: 0x1738d1f7
   full_name: "blk_mq_complete_request"
+}
+elf_symbol {
+  id: 0x6458d26a
+  name: "blk_mq_destroy_queue"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x85b3e041
+  type_id: 0x12c8ce83
+  full_name: "blk_mq_destroy_queue"
 }
 elf_symbol {
   id: 0x2e876bee
@@ -342756,6 +342815,24 @@ elf_symbol {
   crc: 0x19c42957
   type_id: 0xb0abc898
   full_name: "blk_op_str"
+}
+elf_symbol {
+  id: 0x76783663
+  name: "blk_pm_runtime_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8177f39a
+  type_id: 0x12c1ad66
+  full_name: "blk_pm_runtime_init"
+}
+elf_symbol {
+  id: 0xeae629ca
+  name: "blk_put_queue"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf5738b5b
+  type_id: 0x12c8ce83
+  full_name: "blk_put_queue"
 }
 elf_symbol {
   id: 0x012046d8
@@ -376751,6 +376828,15 @@ elf_symbol {
   full_name: "sb800_prefetch"
 }
 elf_symbol {
+  id: 0x56cb7a36
+  name: "sbitmap_weight"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf2de9307
+  type_id: 0xc3320c3e
+  full_name: "sbitmap_weight"
+}
+elf_symbol {
   id: 0xe8c754b0
   name: "scatterwalk_ffwd"
   is_defined: true
@@ -377208,6 +377294,15 @@ elf_symbol {
   crc: 0xaf5dcedf
   type_id: 0x9d725f0c
   full_name: "scsi_register_interface"
+}
+elf_symbol {
+  id: 0x42390c70
+  name: "scsi_remove_device"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xac2135aa
+  type_id: 0x19c71538
+  full_name: "scsi_remove_device"
 }
 elf_symbol {
   id: 0x8deacb1d
@@ -390489,7 +390584,7 @@ elf_symbol {
   full_name: "zs_unmap_object"
 }
 symbols {
-  id: 0x84ea5130
+  id: 0x25a8b173
   symbol {
     key: "I_BDEV"
     value: 0x2dddbe52
@@ -394291,6 +394386,14 @@ symbols {
     value: 0x0b5d5f1c
   }
   symbol {
+    key: "blk_crypto_keyslot_index"
+    value: 0x4ffac461
+  }
+  symbol {
+    key: "blk_crypto_register"
+    value: 0xad8bab96
+  }
+  symbol {
     key: "blk_crypto_reprogram_all_keys"
     value: 0x528ef002
   }
@@ -394317,6 +394420,10 @@ symbols {
   symbol {
     key: "blk_mq_complete_request"
     value: 0x51c471d6
+  }
+  symbol {
+    key: "blk_mq_destroy_queue"
+    value: 0x6458d26a
   }
   symbol {
     key: "blk_mq_end_request"
@@ -394401,6 +394508,14 @@ symbols {
   symbol {
     key: "blk_op_str"
     value: 0x1fa93c73
+  }
+  symbol {
+    key: "blk_pm_runtime_init"
+    value: 0x76783663
+  }
+  symbol {
+    key: "blk_put_queue"
+    value: 0xeae629ca
   }
   symbol {
     key: "blk_queue_alignment_offset"
@@ -409507,6 +409622,10 @@ symbols {
     value: 0x84f045c2
   }
   symbol {
+    key: "sbitmap_weight"
+    value: 0x56cb7a36
+  }
+  symbol {
     key: "scatterwalk_ffwd"
     value: 0xe8c754b0
   }
@@ -409709,6 +409828,10 @@ symbols {
   symbol {
     key: "scsi_register_interface"
     value: 0x5286bfd6
+  }
+  symbol {
+    key: "scsi_remove_device"
+    value: 0x42390c70
   }
   symbol {
     key: "scsi_remove_host"
