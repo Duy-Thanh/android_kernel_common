@@ -310523,6 +310523,12 @@ function {
   parameter_id: 0x914dbfdc
 }
 function {
+  id: 0x8808e1d8
+  return_type_id: 0x120540d1
+  parameter_id: 0x120540d1
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x8817e7ae
   return_type_id: 0x120540d1
   parameter_id: 0x120540d1
@@ -310609,6 +310615,11 @@ function {
   return_type_id: 0x1e2533ab
   parameter_id: 0xf1a6dfed
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x8a909712
+  return_type_id: 0x120540d1
+  parameter_id: 0x1b8590a8
 }
 function {
   id: 0x8a993822
@@ -312267,6 +312278,11 @@ function {
   parameter_id: 0x32a623d7
   parameter_id: 0x05042b1f
   parameter_id: 0x18bd6530
+}
+function {
+  id: 0x913be113
+  return_type_id: 0x6720d32f
+  parameter_id: 0x32ec08f2
 }
 function {
   id: 0x913c567e
@@ -316844,6 +316860,12 @@ function {
   parameter_id: 0x3bfc68fb
 }
 function {
+  id: 0x958486f6
+  return_type_id: 0x6720d32f
+  parameter_id: 0x23f09c34
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x95854407
   return_type_id: 0x6720d32f
   parameter_id: 0x23f09c34
@@ -317920,6 +317942,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x2e8d5f05
   parameter_id: 0x32da4522
+}
+function {
+  id: 0x96e9d652
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2f5fce77
+  parameter_id: 0x2fb1b820
 }
 function {
   id: 0x96ea327a
@@ -324897,6 +324925,12 @@ function {
   id: 0x9bba7997
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
+}
+function {
+  id: 0x9bbb9163
+  return_type_id: 0x6720d32f
+  parameter_id: 0x11cffa09
+  parameter_id: 0x92233392
 }
 function {
   id: 0x9bbcaaf0
@@ -332299,6 +332333,11 @@ function {
   return_type_id: 0x067c4b9a
   parameter_id: 0x3b04bead
   parameter_id: 0x358ff5b7
+}
+function {
+  id: 0xb166862a
+  return_type_id: 0x399c459b
+  parameter_id: 0x1b8590a8
 }
 function {
   id: 0xb1b78fab
@@ -349519,6 +349558,42 @@ elf_symbol {
   full_name: "ct_idle_exit"
 }
 elf_symbol {
+  id: 0xde96cb2f
+  name: "current_time"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x105d7196
+  type_id: 0xb166862a
+  full_name: "current_time"
+}
+elf_symbol {
+  id: 0x171eca8a
+  name: "d_add"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2baeb431
+  type_id: 0x147717e5
+  full_name: "d_add"
+}
+elf_symbol {
+  id: 0x79187969
+  name: "d_alloc_name"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x804bc1e0
+  type_id: 0x8808e1d8
+  full_name: "d_alloc_name"
+}
+elf_symbol {
+  id: 0x52864a7e
+  name: "d_make_root"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc30b80cd
+  type_id: 0x8a909712
+  full_name: "d_make_root"
+}
+elf_symbol {
   id: 0xccc25fc1
   name: "d_path"
   is_defined: true
@@ -359005,6 +359080,15 @@ elf_symbol {
   full_name: "fs_bio_set"
 }
 elf_symbol {
+  id: 0x9a2423a0
+  name: "fs_kobj"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb35ae678
+  type_id: 0x23f09c34
+  full_name: "fs_kobj"
+}
+elf_symbol {
   id: 0x196ad62a
   name: "fsg_common_create_luns"
   is_defined: true
@@ -359960,6 +360044,15 @@ elf_symbol {
   full_name: "get_net_ns_by_pid"
 }
 elf_symbol {
+  id: 0xae723651
+  name: "get_next_ino"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe953b21f
+  type_id: 0xcedb7efb
+  full_name: "get_next_ino"
+}
+elf_symbol {
   id: 0xb222bb33
   name: "get_option"
   is_defined: true
@@ -360122,6 +360215,15 @@ elf_symbol {
   crc: 0xff533427
   type_id: 0xb913af05
   full_name: "get_thermal_instance"
+}
+elf_symbol {
+  id: 0x90eb0a27
+  name: "get_tree_single"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb3957d62
+  type_id: 0x96e9d652
+  full_name: "get_tree_single"
 }
 elf_symbol {
   id: 0x511aa4c3
@@ -366353,6 +366455,15 @@ elf_symbol {
   full_name: "kill_fasync"
 }
 elf_symbol {
+  id: 0xd6a8ff16
+  name: "kill_litter_super"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x15c05704
+  type_id: 0x1923cb99
+  full_name: "kill_litter_super"
+}
+elf_symbol {
   id: 0x053e25cb
   name: "kimage_vaddr"
   is_defined: true
@@ -370307,6 +370418,15 @@ elf_symbol {
   crc: 0xdf54a8f7
   type_id: 0x9b6d4a33
   full_name: "netlink_unregister_notifier"
+}
+elf_symbol {
+  id: 0x57abe80f
+  name: "new_inode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaf3f3d3e
+  type_id: 0x12d6b73d
+  full_name: "new_inode"
 }
 elf_symbol {
   id: 0xc8ea3547
@@ -377224,6 +377344,15 @@ elf_symbol {
   full_name: "register_die_notifier"
 }
 elf_symbol {
+  id: 0x0695a248
+  name: "register_filesystem"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf4615a11
+  type_id: 0x913be113
+  full_name: "register_filesystem"
+}
+elf_symbol {
   id: 0x7165409e
   name: "register_ftrace_export"
   is_defined: true
@@ -381022,6 +381151,15 @@ elf_symbol {
   full_name: "sg_nents"
 }
 elf_symbol {
+  id: 0x80197b32
+  name: "sg_nents_for_len"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4230a8d7
+  type_id: 0x9bbb9163
+  full_name: "sg_nents_for_len"
+}
+elf_symbol {
   id: 0x55c5bdf3
   name: "sg_next"
   is_defined: true
@@ -381185,6 +381323,24 @@ elf_symbol {
   full_name: "simple_attr_write"
 }
 elf_symbol {
+  id: 0x40c45272
+  name: "simple_dir_inode_operations"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x0e838c83
+  type_id: 0xd4846363
+  full_name: "simple_dir_inode_operations"
+}
+elf_symbol {
+  id: 0xbdcb1d7d
+  name: "simple_dir_operations"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x6ad8dd18
+  type_id: 0xf10425d9
+  full_name: "simple_dir_operations"
+}
+elf_symbol {
   id: 0x341fb250
   name: "simple_open"
   is_defined: true
@@ -381201,6 +381357,15 @@ elf_symbol {
   crc: 0x9c81ceff
   type_id: 0x110e6a6f
   full_name: "simple_read_from_buffer"
+}
+elf_symbol {
+  id: 0x7a099f60
+  name: "simple_statfs"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x412917ff
+  type_id: 0x99ed1149
+  full_name: "simple_statfs"
 }
 elf_symbol {
   id: 0xa63a57d8
@@ -385130,6 +385295,15 @@ elf_symbol {
   full_name: "sysfs_create_link"
 }
 elf_symbol {
+  id: 0xae8fd9b8
+  name: "sysfs_create_mount_point"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbe731229
+  type_id: 0x958486f6
+  full_name: "sysfs_create_mount_point"
+}
+elf_symbol {
   id: 0x8e57aec2
   name: "sysfs_emit"
   is_defined: true
@@ -385236,6 +385410,15 @@ elf_symbol {
   crc: 0x641f6660
   type_id: 0x1893b067
   full_name: "sysfs_remove_link_from_group"
+}
+elf_symbol {
+  id: 0x7d99e76c
+  name: "sysfs_remove_mount_point"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7190a2f1
+  type_id: 0x189c344a
+  full_name: "sysfs_remove_mount_point"
 }
 elf_symbol {
   id: 0x389ac279
@@ -388044,6 +388227,15 @@ elf_symbol {
   crc: 0x121d958a
   type_id: 0x9b6d4a33
   full_name: "unregister_die_notifier"
+}
+elf_symbol {
+  id: 0xe1be38c3
+  name: "unregister_filesystem"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5291158d
+  type_id: 0x913be113
+  full_name: "unregister_filesystem"
 }
 elf_symbol {
   id: 0x6e1b5152
@@ -399754,6 +399946,22 @@ symbols {
     value: 0x823aeba5
   }
   symbol {
+    key: "current_time"
+    value: 0xde96cb2f
+  }
+  symbol {
+    key: "d_add"
+    value: 0x171eca8a
+  }
+  symbol {
+    key: "d_alloc_name"
+    value: 0x79187969
+  }
+  symbol {
+    key: "d_make_root"
+    value: 0x52864a7e
+  }
+  symbol {
     key: "d_path"
     value: 0xccc25fc1
   }
@@ -403962,6 +404170,10 @@ symbols {
     value: 0xec31d371
   }
   symbol {
+    key: "fs_kobj"
+    value: 0x9a2423a0
+  }
+  symbol {
     key: "fsg_common_create_luns"
     value: 0x196ad62a
   }
@@ -404386,6 +404598,10 @@ symbols {
     value: 0x519dce2c
   }
   symbol {
+    key: "get_next_ino"
+    value: 0xae723651
+  }
+  symbol {
     key: "get_option"
     value: 0xb222bb33
   }
@@ -404456,6 +404672,10 @@ symbols {
   symbol {
     key: "get_thermal_instance"
     value: 0xc5f5aefd
+  }
+  symbol {
+    key: "get_tree_single"
+    value: 0x90eb0a27
   }
   symbol {
     key: "get_unmapped_area"
@@ -407226,6 +407446,10 @@ symbols {
     value: 0x661955d6
   }
   symbol {
+    key: "kill_litter_super"
+    value: 0xd6a8ff16
+  }
+  symbol {
     key: "kimage_vaddr"
     value: 0x053e25cb
   }
@@ -408984,6 +409208,10 @@ symbols {
   symbol {
     key: "netlink_unregister_notifier"
     value: 0xbbd2a0ab
+  }
+  symbol {
+    key: "new_inode"
+    value: 0x57abe80f
   }
   symbol {
     key: "nf_conntrack_destroy"
@@ -412058,6 +412286,10 @@ symbols {
     value: 0x0748dfdb
   }
   symbol {
+    key: "register_filesystem"
+    value: 0x0695a248
+  }
+  symbol {
     key: "register_ftrace_export"
     value: 0x7165409e
   }
@@ -413746,6 +413978,10 @@ symbols {
     value: 0x005702f9
   }
   symbol {
+    key: "sg_nents_for_len"
+    value: 0x80197b32
+  }
+  symbol {
     key: "sg_next"
     value: 0x55c5bdf3
   }
@@ -413818,12 +414054,24 @@ symbols {
     value: 0xa07fb91d
   }
   symbol {
+    key: "simple_dir_inode_operations"
+    value: 0x40c45272
+  }
+  symbol {
+    key: "simple_dir_operations"
+    value: 0xbdcb1d7d
+  }
+  symbol {
     key: "simple_open"
     value: 0x341fb250
   }
   symbol {
     key: "simple_read_from_buffer"
     value: 0x2deba225
+  }
+  symbol {
+    key: "simple_statfs"
+    value: 0x7a099f60
   }
   symbol {
     key: "simple_strtol"
@@ -415574,6 +415822,10 @@ symbols {
     value: 0xd284bafa
   }
   symbol {
+    key: "sysfs_create_mount_point"
+    value: 0xae8fd9b8
+  }
+  symbol {
     key: "sysfs_emit"
     value: 0x8e57aec2
   }
@@ -415620,6 +415872,10 @@ symbols {
   symbol {
     key: "sysfs_remove_link_from_group"
     value: 0xddd9e037
+  }
+  symbol {
+    key: "sysfs_remove_mount_point"
+    value: 0x7d99e76c
   }
   symbol {
     key: "sysfs_streq"
@@ -416868,6 +417124,10 @@ symbols {
   symbol {
     key: "unregister_die_notifier"
     value: 0x3c5dbd60
+  }
+  symbol {
+    key: "unregister_filesystem"
+    value: 0xe1be38c3
   }
   symbol {
     key: "unregister_ftrace_export"
