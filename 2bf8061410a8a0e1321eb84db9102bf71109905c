@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1264f18_b4d64443",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-04T20:35:39Z",
+      "side": 1,
+      "message": "As I asked before in https://b.corp.google.com/issues/279161171#comment2, this needs to be proposed in upstream Linux before it can be accepted in Android.",
+      "revId": "2bf8061410a8a0e1321eb84db9102bf71109905c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
