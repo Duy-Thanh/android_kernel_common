@@ -16,6 +16,23 @@
       "message": "The patch is came from kernel.org\n\n*   6d280a3d95c9f Merge \"Merge tag \u0027android13-5.10.168_r00\u0027 into android13-5.10\" into android13-5.10\n|\\  \n| *   b28a5779a8958 Merge tag \u0027android13-5.10.168_r00\u0027 into android13-5.10\n| |\\  \n| | * | 39026c8dfcb3f Merge 5.10.166 into android13-5.10-lts\n| | | * 20fd4598762e2 HID: check empty report_list in bigben_probe()",
       "revId": "f061e91210ed85e134b69e31c48aa333f1c2b8ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4317fa8_bdddc7e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982581
+      },
+      "writtenOn": "2023-05-04T10:20:42Z",
+      "side": 1,
+      "message": "Respin Bug: b/280751063",
+      "revId": "f061e91210ed85e134b69e31c48aa333f1c2b8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
