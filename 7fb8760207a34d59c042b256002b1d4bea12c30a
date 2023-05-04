@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f912977f_fdf89e06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-04T20:29:50Z",
+      "side": 1,
+      "message": "Please do not mix several cherry-picks into one patch. Looks like this one is a mix of https://android-review.git.corp.google.com/c/kernel/common/+/2282008 and https://android-review.git.corp.google.com/c/kernel/common/+/2474584. And keep the Change-Id\u0027s the same so that we can easily see where they came from.\n\nYou also never answered my question in https://b.corp.google.com/issues/278602292#comment4 about why these cherry-picks are needed. Do you really see a problem occurring in 5.10 kernel? The patches were designed to fix a problem in 5.15 kernel which has completely different SPF implementation.\n\n-2 until these clarifications are provided.",
+      "revId": "7fb8760207a34d59c042b256002b1d4bea12c30a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
