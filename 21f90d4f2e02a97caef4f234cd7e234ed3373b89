@@ -46,6 +46,30 @@
       },
       "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "154d85f3_9d3c3d03",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5107,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2023-05-05T18:44:18Z",
+      "side": 1,
+      "message": "I don\u0027t know who else tho, QC [1] agreed in upstream and IIRC, some others asked to add this hook to declare it as well. Doesn\u0027t it make sense to keep android-mainline (at least) having minimal vendor hooks? Bart, do we need to consider upstream again [2]?\n\n[1] https://lore.kernel.org/linux-scsi/20220607164555.GA30890@asutoshd-linux1.qualcomm.com/\n[2] https://lore.kernel.org/linux-scsi/20230202220041.560919-1-bvanassche@acm.org/",
+      "parentUuid": "d99f659d_284092eb",
+      "range": {
+        "startLine": 5107,
+        "startChar": 1,
+        "endLine": 5107,
+        "endChar": 40
+      },
+      "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
