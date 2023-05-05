@@ -94,6 +94,30 @@
       },
       "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6057ef_e7c31093",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5107,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2023-05-05T20:11:49Z",
+      "side": 1,
+      "message": "I was thinking about the last comment by Martin:\n\n\"Yeah, I agree. Let\u0027s not make assumptions about implementation\ndeficiencies based on transport. If there are specific devices that\nperform better with SYNCHRONIZE CACHE, then we should quirk them.\"",
+      "parentUuid": "7acf4b6e_6c7a44d2",
+      "range": {
+        "startLine": 5107,
+        "startChar": 1,
+        "endLine": 5107,
+        "endChar": 40
+      },
+      "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
