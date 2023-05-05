@@ -33,6 +33,24 @@
       "message": "Please follow the contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nThere should be a patch that adds this symbol to your symbol list as a child of this patch (same series).",
       "revId": "2e26bc52368c5cc5b65148a9726cbdd9b235ef04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d25f457_6598bd40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-05-05T16:15:40Z",
+      "side": 1,
+      "message": "I\u0027ve rebased to make the series.",
+      "parentUuid": "744f4f25_00eda5bb",
+      "revId": "2e26bc52368c5cc5b65148a9726cbdd9b235ef04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
