@@ -85,9 +85,11 @@
   __bitmap_or
   bitmap_print_to_pagebuf
   bitmap_release_region
+  __bitmap_replace
   __bitmap_set
   __bitmap_subset
   __bitmap_weight
+  __bitmap_xor
   bitmap_zalloc
   bit_wait
   bit_wait_timeout
@@ -1062,8 +1064,11 @@
   ether_setup
   eth_header_parse
   eth_mac_addr
+  ethnl_cable_test_amplitude
   ethnl_cable_test_fault_length
+  ethnl_cable_test_pulse
   ethnl_cable_test_result
+  ethnl_cable_test_step
   eth_platform_get_mac_address
   eth_prepare_mac_addr_change
   ethtool_convert_legacy_u32_to_link_mode
@@ -1176,13 +1181,18 @@
   genl_register_family
   genl_unregister_family
   __genphy_config_aneg
+  genphy_check_and_restart_aneg
   genphy_read_abilities
+  genphy_read_lpa
   genphy_read_mmd_unsupported
   genphy_read_status
+  genphy_read_status_fixed
   genphy_restart_aneg
   genphy_resume
+  genphy_setup_forced
   genphy_soft_reset
   genphy_suspend
+  genphy_update_link
   genphy_write_mmd_unsupported
   gen_pool_add_owner
   gen_pool_alloc_algo_owner
@@ -1542,6 +1552,7 @@
   iommu_map_sg
   iommu_present
   iommu_put_resv_regions
+  iommu_set_default_translated
   iommu_set_fault_handler
   iommu_set_pgtable_quirks
   iommu_unmap
@@ -2284,13 +2295,16 @@
   perf_trace_run_bpf_submit
   phy_attached_info
   phy_calibrate
+  phy_config_aneg
   phy_do_ioctl_running
   phy_drivers_register
   phy_drivers_unregister
   phy_error
+  phy_ethtool_get_eee
   phy_ethtool_get_wol
   phy_ethtool_set_wol
   phy_exit
+  phy_gbit_fibre_features
   phy_init
   phy_init_eee
   phy_init_hw
@@ -2323,15 +2337,28 @@
   phylink_stop
   phylink_suspend
   phy_mac_interrupt
+  __phy_modify
   phy_modify
+  phy_modify_changed
   phy_modify_mmd
+  phy_modify_paged
+  phy_modify_paged_changed
   phy_power_off
   phy_power_on
   phy_read_mmd
+  phy_read_paged
+  phy_resolve_aneg_pause
+  phy_restore_page
+  phy_save_page
+  phy_select_page
   phy_set_mode_ext
+  phy_sfp_attach
+  phy_sfp_detach
+  phy_sfp_probe
   phy_suspend
   phy_trigger_machine
   phy_write_mmd
+  phy_write_paged
   pick_highest_pushable_task
   pick_migrate_task
   pid_nr_ns
@@ -3675,6 +3702,7 @@
   up_write
   usb_add_phy_dev
   usb_alloc_coherent
+  usb_alloc_dev
   usb_alloc_urb
   usb_altnum_to_altsetting
   usb_anchor_urb
@@ -3738,6 +3766,7 @@
   usb_role_switch_register
   usb_role_switch_set_role
   usb_role_switch_unregister
+  usb_set_device_state
   usb_serial_claim_interface
   usb_serial_deregister_drivers
   usb_serial_generic_chars_in_buffer
