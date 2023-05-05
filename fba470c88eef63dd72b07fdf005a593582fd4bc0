@@ -34,6 +34,24 @@
       "parentUuid": "4889a71b_169e2381",
       "revId": "fba470c88eef63dd72b07fdf005a593582fd4bc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e66570_cd15eb61",
+        "filename": "drivers/usb/dwc3/gadget.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2550,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-05-05T18:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f90d8188_e74de465",
+      "revId": "fba470c88eef63dd72b07fdf005a593582fd4bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
