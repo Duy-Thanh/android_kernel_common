@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e90b9b0b_b86d60cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T20:50:45Z",
+      "side": 1,
+      "message": "Looks good, but we don\u0027t take FROMLIST into android-mainline. I assume we\u0027ll wait for this to come from upstream via merge.",
+      "revId": "98e866354d11f3ccd6a37976d70b9c2ebde34684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
