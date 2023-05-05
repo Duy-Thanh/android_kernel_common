@@ -118,6 +118,30 @@
       },
       "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f29fd6ce_294f339a",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5107,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-05-05T20:30:14Z",
+      "side": 1,
+      "message": "The recommended approach for SCSI devices that have nonstandard behavior is as follows:\n* Introduce a BLIST flag (see also https://lore.kernel.org/linux-scsi/20230202220041.560919-2-bvanassche@acm.org/).\n* Set that flag for the devices that need it from inside a udev rule by writing into /proc/scsi/device_info. From drivers/scsi/scsi_devinfo.c:\n\n```\n/*\n * proc_scsi_dev_info_write - allow additions to scsi_dev_info_list via /proc.\n *\n * Description: Adds a black/white list entry for vendor and model with an\n * integer value of flag to the scsi device info list.\n * To use, echo \"vendor:model:flag\" \u003e /proc/scsi/device_info\n */\n```\n\nThe BLIST_BROKEN_FUA flag should be added in the upstream kernel before we implement this approach to prevent that the upstream kernel and the Android kernel use the same numeric value for different BLIST flags.",
+      "parentUuid": "7c6057ef_e7c31093",
+      "range": {
+        "startLine": 5107,
+        "startChar": 1,
+        "endLine": 5107,
+        "endChar": 40
+      },
+      "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
