@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08a3d052_ff294be1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T20:25:03Z",
+      "side": 1,
+      "message": "What feature does this enable? Why do you need to access this tracepoint from a module?\n\nPlease add a patch to the series to modify your symbol list.",
+      "revId": "fcb1d0b5569a5bca24f263d40ee111a3f8bd66dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
