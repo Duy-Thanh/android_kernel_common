@@ -16,6 +16,24 @@
       "message": "is this in the v2 posted upstream?",
       "revId": "b06bd95b536fc6978688312f3deed4d4e14a3a4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65508ad1_97275bc9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3977,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-05-05T21:56:15Z",
+      "side": 1,
+      "message": "yes, this includes the updated link to the v2 with your feedback.",
+      "parentUuid": "8f27330e_3776bfb5",
+      "revId": "b06bd95b536fc6978688312f3deed4d4e14a3a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
