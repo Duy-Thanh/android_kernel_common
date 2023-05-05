@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bcecec4_a98a1fe0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2115,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T17:37:56Z",
+      "side": 1,
+      "message": "Should the name be changed since this is now an end offset that doesn\u0027t have anything to do with whether it was a failure?",
+      "range": {
+        "startLine": 2115,
+        "startChar": 25,
+        "endLine": 2115,
+        "endChar": 34
+      },
+      "revId": "8066d9da91edd77be8b66249612c2fe79aa69138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d384f86_5b9e4186",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2302,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T17:37:56Z",
+      "side": 1,
+      "message": "This comment was necessary because of the \"failed_at\" name - but if it named something like end_offset, then this comment might not be needed.",
+      "revId": "8066d9da91edd77be8b66249612c2fe79aa69138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
