@@ -22,6 +22,30 @@
       },
       "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d99f659d_284092eb",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5107,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-05-05T18:31:49Z",
+      "side": 1,
+      "message": "Won\u0027t that break downstream partners that don\u0027t have a broken FUA UFS device?",
+      "parentUuid": "331ec35d_a0dcce11",
+      "range": {
+        "startLine": 5107,
+        "startChar": 1,
+        "endLine": 5107,
+        "endChar": 40
+      },
+      "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
