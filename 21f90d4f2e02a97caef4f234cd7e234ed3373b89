@@ -142,6 +142,30 @@
       },
       "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c36db48_c9f8f7e5",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5107,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-05-05T23:00:15Z",
+      "side": 1,
+      "message": "Okay, thanks for the explanation. I\u0027ll update this patch to just set `broken_fua \u003d 1`",
+      "parentUuid": "f29fd6ce_294f339a",
+      "range": {
+        "startLine": 5107,
+        "startChar": 1,
+        "endLine": 5107,
+        "endChar": 40
+      },
+      "revId": "21f90d4f2e02a97caef4f234cd7e234ed3373b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
