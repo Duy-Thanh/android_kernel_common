@@ -1046,6 +1046,7 @@
   iommu_map_sg
   iommu_present
   iommu_put_dma_cookie
+  iommu_set_default_translated
   iommu_unmap
   __ioread32_copy
   __ioremap
