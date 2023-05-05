@@ -5104,6 +5104,12 @@ static int ufshcd_slave_alloc(struct scsi_device *sdev)
 
 	ufshcd_setup_links(hba, sdev);
 
+	/* ANDROID: This fixes UFS devices that have a broken FUA. It causes
+	 * the SCSI disk driver to submit a SYNCHRONIZE CACHE command if the
+	 * filesystem sets REQ_FUA instead of setting the FUA bit in WRITE
+	 * commands. */
+	sdev->broken_fua = 1;
+
 	return 0;
 }
 
