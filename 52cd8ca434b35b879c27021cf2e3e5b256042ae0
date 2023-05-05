@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89efa841_07004b2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T20:20:36Z",
+      "side": 1,
+      "message": "Please provide more context on why you need to intercept the signal path for power tuning.",
+      "revId": "52cd8ca434b35b879c27021cf2e3e5b256042ae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b2c7255_df6be1bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T20:20:36Z",
+      "side": 1,
+      "message": "what does this mean?",
+      "revId": "52cd8ca434b35b879c27021cf2e3e5b256042ae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9234070e_34d17948",
+        "filename": "include/trace/hooks/signal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T20:20:36Z",
+      "side": 1,
+      "message": "please remove this needless inclusion",
+      "revId": "52cd8ca434b35b879c27021cf2e3e5b256042ae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
