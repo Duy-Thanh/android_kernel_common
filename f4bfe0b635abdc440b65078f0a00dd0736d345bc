@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0281b061_92e12207",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 8288,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T20:39:03Z",
+      "side": 1,
+      "message": "retval is not used",
+      "revId": "f4bfe0b635abdc440b65078f0a00dd0736d345bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
