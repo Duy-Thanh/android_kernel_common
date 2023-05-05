@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f3826d8_791635c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T19:39:30Z",
+      "side": 1,
+      "message": "what does \"boost\" mean in this context? Boot in scheduler priority?",
+      "revId": "75633f8bc921f87dbca0cc809c5e0ee4eed9faed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8cd88174_6e0d5808",
@@ -14,6 +31,23 @@
       "writtenOn": "2023-05-05T01:26:45Z",
       "side": 1,
       "message": "can it be merged？",
+      "revId": "75633f8bc921f87dbca0cc809c5e0ee4eed9faed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab2ee79_504363f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-05T19:39:30Z",
+      "side": 1,
+      "message": "The parent of this patch has been abandoned. Please rebase the remaining patches in the series on top of the android14-5.15 branch.",
       "revId": "75633f8bc921f87dbca0cc809c5e0ee4eed9faed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
