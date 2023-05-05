@@ -2886,6 +2886,7 @@ void iommu_set_default_translated(bool cmd_line)
 		iommu_cmd_line |= IOMMU_CMD_LINE_DMA_API;
 	iommu_def_domain_type = IOMMU_DOMAIN_DMA;
 }
+EXPORT_SYMBOL_GPL(iommu_set_default_translated);
 
 bool iommu_default_passthrough(void)
 {
