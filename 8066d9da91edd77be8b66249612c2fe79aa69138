@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b3ffc5_4edc167a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2115,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-05-05T18:15:55Z",
+      "side": 1,
+      "message": "agreed, will sync this with a v2 upstream.",
+      "parentUuid": "6bcecec4_a98a1fe0",
+      "range": {
+        "startLine": 2115,
+        "startChar": 25,
+        "endLine": 2115,
+        "endChar": 34
+      },
+      "revId": "8066d9da91edd77be8b66249612c2fe79aa69138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d384f86_5b9e4186",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-05-05T17:37:56Z",
       "side": 1,
       "message": "This comment was necessary because of the \"failed_at\" name - but if it named something like end_offset, then this comment might not be needed.",
+      "revId": "8066d9da91edd77be8b66249612c2fe79aa69138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8791ac40_382162e9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2302,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-05-05T18:15:55Z",
+      "side": 1,
+      "message": "agreed, will sync this with a v2 upstream.",
+      "parentUuid": "6d384f86_5b9e4186",
       "revId": "8066d9da91edd77be8b66249612c2fe79aa69138",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
