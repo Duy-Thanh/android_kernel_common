@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f616484_41c348a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-05-05T19:01:05Z",
+      "side": 1,
+      "message": "Oh, this patchset is using the same topic here as in the other branch. Please don\u0027t do this as the infrastructure is trying to pull all these changes into the same build.",
+      "revId": "6164489ebcc16d0074f51f16f0b24ce467c509f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
