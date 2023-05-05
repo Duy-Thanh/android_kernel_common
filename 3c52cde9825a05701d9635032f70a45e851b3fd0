@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae30269e_07a532d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-05-05T19:18:18Z",
+      "side": 1,
+      "message": "huh? why wasn\u0027t https://android-review.git.corp.google.com/c/kernel/common/+/2550430 used instead?\n\nthis doesn\u0027t use the original Change-Id?",
+      "revId": "3c52cde9825a05701d9635032f70a45e851b3fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
