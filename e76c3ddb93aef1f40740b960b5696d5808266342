@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5288cb50_430fa719",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-05-05T18:47:22Z",
+      "side": 1,
+      "message": "? it seems this wasn\u0027t built locally?\n\nI\u0027ll rebase and remove this.",
+      "range": {
+        "startLine": 52,
+        "startChar": 37,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "e76c3ddb93aef1f40740b960b5696d5808266342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
