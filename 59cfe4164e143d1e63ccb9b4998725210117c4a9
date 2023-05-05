@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ddc6e9_ce2531c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-05-05T07:19:13Z",
+      "side": 1,
+      "message": "Note on the ABI passive monitoring. This appears to be vs LKGB at the time.\n\nThe commit message here says 78+3 symbols, the passive monitoring says 92+3 symbols. However, the parent commit had 14+0 symbols.\n\nThis change looks OK to me, but still needs and OWNER to approve.",
+      "revId": "59cfe4164e143d1e63ccb9b4998725210117c4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
