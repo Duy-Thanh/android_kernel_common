@@ -275363,6 +275363,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x14de88f3
+  return_type_id: 0xd5cc9c9a
+  parameter_id: 0x0483e6f8
+  parameter_id: 0x4585663f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x14dea3e9
   return_type_id: 0x48b5725f
   parameter_id: 0x1769c4d8
@@ -292017,6 +292025,14 @@ function {
   parameter_id: 0x051414e1
 }
 function {
+  id: 0x939cd646
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3e10b518
+  parameter_id: 0x6720d32f
+  parameter_id: 0x13580d6c
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x939d4211
   return_type_id: 0x6720d32f
   parameter_id: 0x3b04bead
@@ -299834,6 +299850,11 @@ function {
   parameter_id: 0x2351f077
 }
 function {
+  id: 0x9b85a048
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18150d9f
+}
+function {
   id: 0x9b85c36d
   return_type_id: 0x6720d32f
   parameter_id: 0x1b55a8f2
@@ -300657,6 +300678,11 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x6720d32f
   parameter_id: 0x13580d6c
+}
+function {
+  id: 0x9bc482f2
+  return_type_id: 0x6720d32f
+  parameter_id: 0x19118777
 }
 function {
   id: 0x9bc4d75d
@@ -309777,6 +309803,13 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0xeb2ed334
+  return_type_id: 0x32c156ea
+  parameter_id: 0x32c156ea
+  parameter_id: 0x3e10b518
+  parameter_id: 0x3ab47ff9
+}
+function {
   id: 0xeb7d4b96
   return_type_id: 0x3ada60b4
   parameter_id: 0x315b7e01
@@ -312751,6 +312784,15 @@ elf_symbol {
   crc: 0x41c6d68d
   type_id: 0x9b8e9bfe
   full_name: "__iio_device_register"
+}
+elf_symbol {
+  id: 0x335e7054
+  name: "__iio_trigger_alloc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf9bcf30b
+  type_id: 0x7aef59ca
+  full_name: "__iio_trigger_alloc"
 }
 elf_symbol {
   id: 0x64c84a6a
@@ -323402,6 +323444,15 @@ elf_symbol {
   full_name: "config_item_set_name"
 }
 elf_symbol {
+  id: 0x79d8f672
+  name: "configfs_register_default_group"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdd21ad5b
+  type_id: 0xeb2ed334
+  full_name: "configfs_register_default_group"
+}
+elf_symbol {
   id: 0x197789dd
   name: "configfs_register_group"
   is_defined: true
@@ -323418,6 +323469,15 @@ elf_symbol {
   crc: 0x7fb9744d
   type_id: 0x9db97a4e
   full_name: "configfs_register_subsystem"
+}
+elf_symbol {
+  id: 0x76381968
+  name: "configfs_unregister_default_group"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa46e29b2
+  type_id: 0x1c280429
+  full_name: "configfs_unregister_default_group"
 }
 elf_symbol {
   id: 0xf5bd4fae
@@ -337873,6 +337933,15 @@ elf_symbol {
   full_name: "iio_buffer_put"
 }
 elf_symbol {
+  id: 0xd941beb8
+  name: "iio_bus_type"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x5f4a700f
+  type_id: 0x257935aa
+  full_name: "iio_bus_type"
+}
+elf_symbol {
   id: 0xe4653a75
   name: "iio_channel_get"
   is_defined: true
@@ -337961,6 +338030,15 @@ elf_symbol {
   crc: 0x715d0a16
   type_id: 0x16bab633
   full_name: "iio_device_unregister"
+}
+elf_symbol {
+  id: 0xef661661
+  name: "iio_format_value"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4dce7dd4
+  type_id: 0x14de88f3
+  full_name: "iio_format_value"
 }
 elf_symbol {
   id: 0x83815ff1
@@ -338053,6 +338131,24 @@ elf_symbol {
   full_name: "iio_show_mount_matrix"
 }
 elf_symbol {
+  id: 0x7ae28990
+  name: "iio_str_to_fixpoint"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x26f6b499
+  type_id: 0x939cd646
+  full_name: "iio_str_to_fixpoint"
+}
+elf_symbol {
+  id: 0xcc1f3656
+  name: "iio_trigger_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb4621811
+  type_id: 0x16dc304e
+  full_name: "iio_trigger_free"
+}
+elf_symbol {
   id: 0x613f6d1f
   name: "iio_trigger_notify_done"
   is_defined: true
@@ -338062,6 +338158,15 @@ elf_symbol {
   full_name: "iio_trigger_notify_done"
 }
 elf_symbol {
+  id: 0x83c94241
+  name: "iio_trigger_poll"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9dd09e4b
+  type_id: 0x16dc304e
+  full_name: "iio_trigger_poll"
+}
+elf_symbol {
   id: 0x7551a60b
   name: "iio_trigger_poll_chained"
   is_defined: true
@@ -338069,6 +338174,24 @@ elf_symbol {
   crc: 0x6134408f
   type_id: 0x16dc304e
   full_name: "iio_trigger_poll_chained"
+}
+elf_symbol {
+  id: 0x08fd4b84
+  name: "iio_trigger_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe8cfa278
+  type_id: 0x9bc482f2
+  full_name: "iio_trigger_register"
+}
+elf_symbol {
+  id: 0xc6d8f246
+  name: "iio_trigger_unregister"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6b8cbaf6
+  type_id: 0x16dc304e
+  full_name: "iio_trigger_unregister"
 }
 elf_symbol {
   id: 0x6f2f4bd1
@@ -349528,6 +349651,15 @@ elf_symbol {
   full_name: "poll_state_synchronize_srcu"
 }
 elf_symbol {
+  id: 0xd612789c
+  name: "power_supply_am_i_supplied"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5f434264
+  type_id: 0x9b85a048
+  full_name: "power_supply_am_i_supplied"
+}
+elf_symbol {
   id: 0x561323f1
   name: "power_supply_changed"
   is_defined: true
@@ -352919,6 +353051,15 @@ elf_symbol {
   crc: 0xbf9ff167
   type_id: 0x1ae9d1bd
   full_name: "rproc_coredump_using_sections"
+}
+elf_symbol {
+  id: 0x79536269
+  name: "rproc_da_to_va"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9cbee534
+  type_id: 0x5e92f774
+  full_name: "rproc_da_to_va"
 }
 elf_symbol {
   id: 0xb55db035
@@ -368262,6 +368403,10 @@ symbols {
     value: 0xf9e10bbf
   }
   symbol {
+    key: "__iio_trigger_alloc"
+    value: 0x335e7054
+  }
+  symbol {
     key: "__inet6_lookup_established"
     value: 0x64c84a6a
   }
@@ -372998,12 +373143,20 @@ symbols {
     value: 0x20349fb1
   }
   symbol {
+    key: "configfs_register_default_group"
+    value: 0x79d8f672
+  }
+  symbol {
     key: "configfs_register_group"
     value: 0x197789dd
   }
   symbol {
     key: "configfs_register_subsystem"
     value: 0xc5fc7c45
+  }
+  symbol {
+    key: "configfs_unregister_default_group"
+    value: 0x76381968
   }
   symbol {
     key: "configfs_unregister_group"
@@ -379422,6 +379575,10 @@ symbols {
     value: 0x76041d7e
   }
   symbol {
+    key: "iio_bus_type"
+    value: 0xd941beb8
+  }
+  symbol {
     key: "iio_channel_get"
     value: 0xe4653a75
   }
@@ -379460,6 +379617,10 @@ symbols {
   symbol {
     key: "iio_device_unregister"
     value: 0xe0909072
+  }
+  symbol {
+    key: "iio_format_value"
+    value: 0xef661661
   }
   symbol {
     key: "iio_get_channel_type"
@@ -379502,12 +379663,32 @@ symbols {
     value: 0xfc17cb5d
   }
   symbol {
+    key: "iio_str_to_fixpoint"
+    value: 0x7ae28990
+  }
+  symbol {
+    key: "iio_trigger_free"
+    value: 0xcc1f3656
+  }
+  symbol {
     key: "iio_trigger_notify_done"
     value: 0x613f6d1f
   }
   symbol {
+    key: "iio_trigger_poll"
+    value: 0x83c94241
+  }
+  symbol {
     key: "iio_trigger_poll_chained"
     value: 0x7551a60b
+  }
+  symbol {
+    key: "iio_trigger_register"
+    value: 0x08fd4b84
+  }
+  symbol {
+    key: "iio_trigger_unregister"
+    value: 0xc6d8f246
   }
   symbol {
     key: "iio_write_channel_raw"
@@ -384602,6 +384783,10 @@ symbols {
     value: 0x324d8228
   }
   symbol {
+    key: "power_supply_am_i_supplied"
+    value: 0xd612789c
+  }
+  symbol {
     key: "power_supply_changed"
     value: 0x561323f1
   }
@@ -386108,6 +386293,10 @@ symbols {
   symbol {
     key: "rproc_coredump_using_sections"
     value: 0x4f384161
+  }
+  symbol {
+    key: "rproc_da_to_va"
+    value: 0x79536269
   }
   symbol {
     key: "rproc_del"
