@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0ae1bfb_13e56613",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-05-06T20:40:22Z",
+      "side": 1,
+      "message": "I think this CL introduced a \"sleeping in atomic context\" regression (https://b.corp.google.com/issues/281144729). Is that sufficient to revert this CL?",
+      "revId": "08a2bdeaad7a0bb654313965dee7b829653178e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
