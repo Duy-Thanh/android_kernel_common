@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce873ef5_7ff70475",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-05-06T09:17:31Z",
+      "side": 1,
+      "message": "Commit message has been updated. Thank you.",
+      "parentUuid": "89efa841_07004b2e",
+      "revId": "52cd8ca434b35b879c27021cf2e3e5b256042ae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b2c7255_df6be1bf",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-05T20:20:36Z",
       "side": 1,
       "message": "what does this mean?",
+      "revId": "52cd8ca434b35b879c27021cf2e3e5b256042ae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4320248c_e71e35a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-05-06T09:17:31Z",
+      "side": 1,
+      "message": "This is from a cherry-picked one and I have removed it, thanks.",
+      "parentUuid": "5b2c7255_df6be1bf",
       "revId": "52cd8ca434b35b879c27021cf2e3e5b256042ae0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2023-05-05T20:20:36Z",
       "side": 1,
       "message": "please remove this needless inclusion",
+      "revId": "52cd8ca434b35b879c27021cf2e3e5b256042ae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb0d196a_b255c463",
+        "filename": "include/trace/hooks/signal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-05-06T09:17:31Z",
+      "side": 1,
+      "message": "Removed, thanks.",
+      "parentUuid": "9234070e_34d17948",
       "revId": "52cd8ca434b35b879c27021cf2e3e5b256042ae0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
