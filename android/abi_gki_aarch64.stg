@@ -300123,6 +300123,15 @@ function {
   parameter_id: 0x030b9acf
 }
 function {
+  id: 0x9ba3940a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x054f691a
+  parameter_id: 0x6720d32f
+  parameter_id: 0x32a623d7
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x9ba399e4
   return_type_id: 0x6720d32f
   parameter_id: 0x1b084782
@@ -300468,6 +300477,12 @@ function {
   id: 0x9bba7997
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
+}
+function {
+  id: 0x9bba87c7
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x054f691a
 }
 function {
   id: 0x9bbb9163
@@ -316445,6 +316460,42 @@ elf_symbol {
   full_name: "__traceiter_mmap_lock_start_locking"
 }
 elf_symbol {
+  id: 0x16d7641f
+  name: "__traceiter_net_dev_queue"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x96ea4af8
+  type_id: 0x9bba87c7
+  full_name: "__traceiter_net_dev_queue"
+}
+elf_symbol {
+  id: 0xc8ec671c
+  name: "__traceiter_net_dev_xmit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x07f09e70
+  type_id: 0x9ba3940a
+  full_name: "__traceiter_net_dev_xmit"
+}
+elf_symbol {
+  id: 0x60c24c4f
+  name: "__traceiter_netif_receive_skb"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbdd7beb8
+  type_id: 0x9bba87c7
+  full_name: "__traceiter_netif_receive_skb"
+}
+elf_symbol {
+  id: 0xa7548418
+  name: "__traceiter_netif_rx"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xececa6f9
+  type_id: 0x9bba87c7
+  full_name: "__traceiter_netif_rx"
+}
+elf_symbol {
   id: 0x3e69b303
   name: "__traceiter_pelt_rt_tp"
   is_defined: true
@@ -318747,6 +318798,42 @@ elf_symbol {
   crc: 0xbd628752
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_mmap_lock_start_locking"
+}
+elf_symbol {
+  id: 0xd21276a5
+  name: "__tracepoint_net_dev_queue"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x0f304d20
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_net_dev_queue"
+}
+elf_symbol {
+  id: 0x4a43bdfe
+  name: "__tracepoint_net_dev_xmit"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb1d40474
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_net_dev_xmit"
+}
+elf_symbol {
+  id: 0xd224caa5
+  name: "__tracepoint_netif_receive_skb"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8ee83e85
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_netif_receive_skb"
+}
+elf_symbol {
+  id: 0xcbc5fd52
+  name: "__tracepoint_netif_rx"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8aa12be4
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_netif_rx"
 }
 elf_symbol {
   id: 0xf3cb5921
@@ -369990,6 +370077,22 @@ symbols {
     value: 0xc630c439
   }
   symbol {
+    key: "__traceiter_net_dev_queue"
+    value: 0x16d7641f
+  }
+  symbol {
+    key: "__traceiter_net_dev_xmit"
+    value: 0xc8ec671c
+  }
+  symbol {
+    key: "__traceiter_netif_receive_skb"
+    value: 0x60c24c4f
+  }
+  symbol {
+    key: "__traceiter_netif_rx"
+    value: 0xa7548418
+  }
+  symbol {
     key: "__traceiter_pelt_rt_tp"
     value: 0x3e69b303
   }
@@ -371012,6 +371115,22 @@ symbols {
   symbol {
     key: "__tracepoint_mmap_lock_start_locking"
     value: 0xdffbb8bf
+  }
+  symbol {
+    key: "__tracepoint_net_dev_queue"
+    value: 0xd21276a5
+  }
+  symbol {
+    key: "__tracepoint_net_dev_xmit"
+    value: 0x4a43bdfe
+  }
+  symbol {
+    key: "__tracepoint_netif_receive_skb"
+    value: 0xd224caa5
+  }
+  symbol {
+    key: "__tracepoint_netif_rx"
+    value: 0xcbc5fd52
   }
   symbol {
     key: "__tracepoint_pelt_rt_tp"
