@@ -16,6 +16,24 @@
       "message": "retval is not used",
       "revId": "f4bfe0b635abdc440b65078f0a00dd0736d345bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e04a4f52_8bc194c0",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 8288,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-05-06T12:42:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0281b061_92e12207",
+      "revId": "f4bfe0b635abdc440b65078f0a00dd0736d345bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
