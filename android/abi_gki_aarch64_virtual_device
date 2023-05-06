@@ -19,7 +19,6 @@
   build_skb
   cancel_delayed_work_sync
   cancel_work_sync
-  cfg80211_chandef_valid
   __check_object_size
   __class_create
   class_destroy
@@ -173,26 +172,6 @@
   ida_free
   idr_destroy
   idr_remove
-  ieee80211_alloc_hw_nm
-  ieee80211_beacon_cntdwn_is_complete
-  ieee80211_beacon_get_tim
-  ieee80211_csa_finish
-  ieee80211_free_hw
-  ieee80211_free_txskb
-  ieee80211_get_buffered_bc
-  ieee80211_get_hdrlen_from_skb
-  ieee80211_get_tx_rates
-  ieee80211_iterate_active_interfaces_atomic
-  ieee80211_queue_delayed_work
-  ieee80211_radar_detected
-  ieee80211_register_hw
-  ieee80211_send_bar
-  ieee80211_sta_register_airtime
-  ieee80211_stop_queues
-  ieee80211_stop_tx_ba_cb_irqsafe
-  ieee80211_tx_status_ext
-  ieee80211_unregister_hw
-  ieee80211_wake_queues
   __init_swait_queue_head
   init_timer_key
   init_wait_entry
@@ -665,10 +644,6 @@
 
 # required by mac80211_hwsim.ko
   alloc_netdev_mqs
-  __cfg80211_alloc_event_skb
-  __cfg80211_alloc_reply_skb
-  __cfg80211_send_event_skb
-  cfg80211_vendor_cmd_reply
   dev_alloc_name
   device_bind_driver
   device_release_driver
@@ -678,17 +653,6 @@
   genl_notify
   genl_register_family
   genl_unregister_family
-  ieee80211_find_sta_by_link_addrs
-  ieee80211_get_channel_khz
-  ieee80211_nullfunc_get
-  ieee80211_probereq_get
-  ieee80211_ready_on_channel
-  ieee80211_remain_on_channel_expired
-  ieee80211_rx_irqsafe
-  ieee80211_scan_completed
-  ieee80211_set_active_links_async
-  ieee80211_tx_prepare_skb
-  ieee80211_tx_status_irqsafe
   init_net
   jiffies_to_msecs
   __netdev_alloc_skb
@@ -699,7 +663,6 @@
   net_namespace_list
   nla_memcpy
   register_pernet_device
-  regulatory_hint
   rhashtable_destroy
   rhashtable_init
   rhashtable_insert_slow
@@ -713,7 +676,6 @@
   skb_trim
   __sw_hweight16
   unregister_pernet_device
-  wiphy_apply_custom_regulatory
 
 # required by mt76-usb.ko
   usb_init_urb
@@ -722,7 +684,6 @@
   usb_unpoison_urb
 
 # required by mt76.ko
-  cfg80211_reg_can_beacon
   debugfs_create_blob
   debugfs_create_file_unsafe
   dev_driver_string
@@ -733,19 +694,6 @@
   dma_unmap_page_attrs
   idr_alloc
   idr_get_next
-  ieee80211_calc_rx_airtime
-  ieee80211_channel_to_freq_khz
-  ieee80211_find_sta_by_ifaddr
-  ieee80211_get_key_rx_seq
-  ieee80211_next_txq
-  ieee80211_rx_list
-  __ieee80211_schedule_txq
-  ieee80211_sta_eosp
-  ieee80211_sta_pspoll
-  ieee80211_sta_ps_transition
-  ieee80211_sta_uapsd_trigger
-  ieee80211_tx_dequeue
-  ieee80211_txq_schedule_start
   init_dummy_netdev
   __ioread32_copy
   __iowrite32_copy
@@ -763,26 +711,18 @@
   pcie_capability_clear_and_set_word
   pcie_capability_read_word
   radix_tree_tagged
-  rfc1042_header
   __skb_pad
-  wiphy_read_of_freq_limits
 
 # required by mt76x02-lib.ko
   bpf_trace_run1
   debugfs_create_bool
-  ieee80211_calc_tx_airtime
-  ieee80211_hdrlen
-  ieee80211_iter_keys_rcu
-  ieee80211_restart_hw
   __kfifo_init
   ___pskb_trim
   __tasklet_schedule
   tasklet_setup
-  wiphy_to_ieee80211_hw
 
 # required by mt76x02-usb.ko
   hrtimer_active
-  ieee80211_iterate_interfaces
   system_highpri_wq
 
 # required by nd_virtio.ko
@@ -950,11 +890,6 @@
   usb_speed_string
 
 # required by virt_wifi.ko
-  cfg80211_connect_done
-  cfg80211_disconnected
-  cfg80211_inform_bss_data
-  cfg80211_put_bss
-  cfg80211_scan_done
   __dev_get_by_index
   _dev_printk
   __module_get
@@ -965,10 +900,6 @@
   rtnl_link_unregister
   skb_clone
   unregister_netdevice_many
-  wiphy_free
-  wiphy_new_nm
-  wiphy_register
-  wiphy_unregister
 
 # required by virtio-gpu.ko
   __devm_request_region
