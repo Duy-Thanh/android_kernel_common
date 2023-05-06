@@ -53,6 +53,7 @@
   param_get_int
   param_set_bool
   pick_highest_pushable_task
+  reclaim_pages
   register_kprobe
   register_kretprobe
   register_memory_notifier
@@ -116,17 +117,25 @@
   __traceiter_android_vh_cpufreq_fast_switch
   __traceiter_android_vh_cpufreq_resolve_freq
   __traceiter_android_vh_cpufreq_target
+<<<<<<< PATCH SET (6fa6fe ANDROID: GKI2.0: Update symbols to symbol list)
+  __traceiter_android_vh_do_page_trylock
+=======
   __traceiter_android_vh_do_futex
+>>>>>>> BASE      (d9fd4e ANDROID: export reclaim_pages)
   __traceiter_android_vh_do_send_sig_info
   __traceiter_android_vh_drain_all_pages_bypass
   __traceiter_android_vh_exit_signal
   __traceiter_android_vh_free_task
   __traceiter_android_vh_futex_sleep_start
+<<<<<<< PATCH SET (6fa6fe ANDROID: GKI2.0: Update symbols to symbol list)
+  __traceiter_android_vh_handle_failed_page_trylock
+=======
   __traceiter_android_vh_futex_wait_end
   __traceiter_android_vh_futex_wait_start
   __traceiter_android_vh_futex_wake_this
   __traceiter_android_vh_futex_wake_traverse_plist
   __traceiter_android_vh_futex_wake_up_q_finish
+>>>>>>> BASE      (d9fd4e ANDROID: export reclaim_pages)
   __traceiter_android_vh_irqtime_account_process_tick
   __traceiter_android_vh_map_util_freq_new
   __traceiter_android_vh_mem_cgroup_alloc
@@ -141,6 +150,9 @@
   __traceiter_android_vh_mutex_wait_finish
   __traceiter_android_vh_mutex_wait_start
   __traceiter_android_vh_page_referenced_check_bypass
+  __traceiter_android_vh_page_trylock_set
+  __traceiter_android_vh_page_trylock_clear
+  __traceiter_android_vh_page_trylock_get_result
   __traceiter_android_vh_record_mutex_lock_starttime
   __traceiter_android_vh_record_pcpu_rwsem_starttime
   __traceiter_android_vh_record_rtmutex_lock_starttime
@@ -192,17 +204,25 @@
   __tracepoint_android_vh_cpufreq_fast_switch
   __tracepoint_android_vh_cpufreq_resolve_freq
   __tracepoint_android_vh_cpufreq_target
+<<<<<<< PATCH SET (6fa6fe ANDROID: GKI2.0: Update symbols to symbol list)
+  __tracepoint_android_vh_do_page_trylock
+=======
   __tracepoint_android_vh_do_futex
+>>>>>>> BASE      (d9fd4e ANDROID: export reclaim_pages)
   __tracepoint_android_vh_do_send_sig_info
   __tracepoint_android_vh_drain_all_pages_bypass
   __tracepoint_android_vh_exit_signal
   __tracepoint_android_vh_free_task
   __tracepoint_android_vh_futex_sleep_start
+<<<<<<< PATCH SET (6fa6fe ANDROID: GKI2.0: Update symbols to symbol list)
+  __tracepoint_android_vh_handle_failed_page_trylock
+=======
   __tracepoint_android_vh_futex_wait_end
   __tracepoint_android_vh_futex_wait_start
   __tracepoint_android_vh_futex_wake_this
   __tracepoint_android_vh_futex_wake_traverse_plist
   __tracepoint_android_vh_futex_wake_up_q_finish
+>>>>>>> BASE      (d9fd4e ANDROID: export reclaim_pages)
   __tracepoint_android_vh_irqtime_account_process_tick
   __tracepoint_android_vh_map_util_freq_new
   __tracepoint_android_vh_mem_cgroup_alloc
@@ -217,6 +237,9 @@
   __tracepoint_android_vh_mutex_wait_finish
   __tracepoint_android_vh_mutex_wait_start
   __tracepoint_android_vh_page_referenced_check_bypass
+  __tracepoint_android_vh_page_trylock_set
+  __tracepoint_android_vh_page_trylock_clear
+  __tracepoint_android_vh_page_trylock_get_result
   __tracepoint_android_vh_record_mutex_lock_starttime
   __tracepoint_android_vh_record_pcpu_rwsem_starttime
   __tracepoint_android_vh_record_rtmutex_lock_starttime
