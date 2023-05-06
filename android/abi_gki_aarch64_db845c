@@ -2,6 +2,7 @@
 # commonly used symbols
   add_uevent_var
   alloc_io_pgtable_ops
+  __alloc_skb
   alloc_workqueue
   __arch_copy_from_user
   __arch_copy_to_user
@@ -16,8 +17,11 @@
   bpf_trace_run3
   bpf_trace_run4
   bpf_trace_run5
+  bpf_trace_run6
+  bpf_trace_run8
   bus_register
   bus_unregister
+  call_rcu
   cancel_delayed_work
   cancel_delayed_work_sync
   cancel_work_sync
@@ -25,6 +29,7 @@
   cdev_device_add
   cdev_device_del
   cdev_init
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   __cfg80211_alloc_event_skb
   __cfg80211_alloc_reply_skb
   cfg80211_find_elem_match
@@ -34,7 +39,11 @@
   __cfg80211_send_event_skb
   cfg80211_vendor_cmd_reply
   __cfi_slowpath_diag
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   __check_object_size
+  __class_register
+  class_unregister
   clk_bulk_disable
   clk_bulk_enable
   clk_bulk_prepare
@@ -66,6 +75,14 @@
   cpumask_next
   cpu_number
   __cpu_online_mask
+  __cpu_possible_mask
+  crc32_le
+  crypto_alloc_shash
+  crypto_destroy_tfm
+  crypto_shash_setkey
+  crypto_shash_update
+  csum_partial
+  _ctype
   debugfs_create_dir
   debugfs_create_file
   debugfs_create_u32
@@ -73,14 +90,21 @@
   debugfs_remove
   default_llseek
   delayed_work_timer_fn
+  del_timer
   del_timer_sync
   destroy_workqueue
+  dev_close
   dev_coredumpv
   dev_driver_string
   _dev_err
   dev_err_probe
   dev_get_regmap
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   device_find_child
+=======
+  device_add
+  device_del
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   device_for_each_child
   device_get_match_data
   device_get_named_child_node
@@ -158,10 +182,15 @@
   dev_pm_opp_put
   dev_pm_opp_set_opp
   dev_pm_opp_set_rate
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   devres_add
   __devres_alloc_node
   devres_free
   devres_release
+=======
+  dev_pm_set_wake_irq
+  _dev_printk
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   dev_set_name
   _dev_warn
   disable_irq
@@ -211,16 +240,34 @@
   drm_kms_helper_hotplug_event
   drm_mode_vrefresh
   enable_irq
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   event_triggers_call
+=======
+  eth_type_trans
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   _find_first_bit
   _find_first_zero_bit
   _find_next_bit
   finish_wait
   firmware_request_nowarn
+  flush_delayed_work
   flush_work
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   flush_workqueue
+=======
+  __flush_workqueue
+  fortify_panic
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   free_io_pgtable_ops
   free_irq
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
+=======
+  fwnode_handle_put
+  fwnode_property_present
+  fwnode_property_read_string
+  fwnode_property_read_u32_array
+  gcd
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   generic_handle_domain_irq
   generic_handle_irq
   geni_icc_disable
@@ -282,6 +329,7 @@
   idr_for_each
   idr_get_next
   idr_remove
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   ieee80211_alloc_hw_nm
   ieee80211_beacon_get_template
   ieee80211_beacon_loss
@@ -311,11 +359,14 @@
   ieee80211_tx_status_irqsafe
   ieee80211_unregister_hw
   ieee80211_wake_queues
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   iio_read_channel_processed
   init_dummy_netdev
   init_net
   __init_swait_queue_head
   init_timer_key
+  init_uts_ns
   init_wait_entry
   __init_waitqueue_head
   iomem_resource
@@ -366,6 +417,7 @@
   kernel_sendmsg
   kfree
   kfree_const
+  kfree_sensitive
   kfree_skb_reason
   __kmalloc
   kmalloc_caches
@@ -383,6 +435,9 @@
   ktime_get_mono_fast_ns
   ktime_get_real_ts64
   ktime_get_with_offset
+  kvfree
+  kvfree_call_rcu
+  kvmalloc_node
   __list_add_valid
   __list_del_entry_valid
   __local_bh_enable_ip
@@ -420,8 +475,17 @@
   __napi_schedule
   napi_schedule_prep
   __netdev_alloc_skb
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   netif_napi_add
+=======
+  netdev_err
+  netdev_info
+  netif_napi_add_weight
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   __netif_napi_del
+  netif_rx
+  netif_tx_wake_queue
+  net_ratelimit
   __nla_parse
   nla_put
   no_llseek
@@ -472,8 +536,14 @@
   of_property_read_u32_index
   of_property_read_variable_u32_array
   of_property_read_variable_u8_array
+  of_prop_next_u32
   of_reserved_mem_lookup
   param_ops_bool
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
+=======
+  param_ops_charp
+  param_ops_int
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   param_ops_uint
   pci_clear_master
   pci_disable_device
@@ -548,6 +618,11 @@
   _raw_spin_unlock_irqrestore
   _raw_write_lock_bh
   _raw_write_unlock_bh
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
+=======
+  _raw_write_unlock_irq
+  rcu_barrier
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   __rcu_read_lock
   __rcu_read_unlock
   rdev_get_drvdata
@@ -555,6 +630,7 @@
   regcache_cache_only
   regcache_mark_dirty
   regcache_sync
+  register_netdevice_notifier
   register_reboot_notifier
   __register_rpmsg_driver
   regmap_bulk_read
@@ -590,6 +666,11 @@
   reset_control_deassert
   reset_control_put
   reset_control_reset
+  rhashtable_insert_slow
+  __rht_bucket_nested
+  rht_bucket_nested
+  rht_bucket_nested_insert
+  round_jiffies_up
   rpmsg_register_device
   rpmsg_send
   rpmsg_unregister_device
@@ -601,6 +682,9 @@
   rproc_del
   rproc_free
   rproc_remove_subdev
+  rtnl_is_locked
+  rtnl_lock
+  rtnl_unlock
   sched_set_fifo_low
   schedule
   schedule_timeout
@@ -617,10 +701,15 @@
   simple_read_from_buffer
   single_open
   single_release
+  skb_clone
+  skb_copy
+  skb_copy_bits
   skb_dequeue
+  __skb_get_hash
   skb_pull
   skb_push
   skb_put
+  skb_queue_head
   skb_queue_purge
   skb_queue_tail
   skb_trim
@@ -687,11 +776,13 @@
   sysfs_create_link
   sysfs_emit
   sysfs_remove_link
+  system_power_efficient_wq
   system_wq
   tasklet_init
   tasklet_kill
   __tasklet_schedule
   tasklet_setup
+  tasklet_unlock_wait
   thermal_cooling_device_register
   thermal_cooling_device_unregister
   thermal_zone_device_update
@@ -706,9 +797,12 @@
   __ubsan_handle_cfi_check_fail_abort
   __udelay
   unregister_chrdev_region
+  unregister_netdevice_notifier
+  unregister_netdevice_queue
   unregister_reboot_notifier
   unregister_rpmsg_driver
   usb_disabled
+  __usecs_to_jiffies
   usleep_range_state
   vabits_actual
   vfree
@@ -722,7 +816,11 @@
   wake_up_process
   __warn_printk
   watchdog_init_timeout
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   wiphy_to_ieee80211_hw
+=======
+  __xa_alloc
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   xa_erase
   xa_find
   xa_find_after
@@ -754,19 +852,17 @@
   pci_device_group
   report_iommu_fault
 
-# required by ath.ko
-  freq_reg_info
-  reg_initiator_name
-  wiphy_apply_custom_regulatory
-
 # required by ath10k_core.ko
-  cfg80211_calculate_bitrate
   cpu_latency_qos_add_request
   cpu_latency_qos_remove_request
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   crc32_le
   device_get_mac_address
   device_set_wakeup_enable
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   guid_gen
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   ieee80211_beacon_cntdwn_is_complete
   ieee80211_beacon_get_tim
   ieee80211_beacon_update_cntdwn
@@ -786,18 +882,19 @@
   ieee80211_tx_rate_update
   ieee80211_wake_queue
   init_uts_ns
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   __kfifo_alloc
   __kfifo_free
   param_ops_ulong
-  regulatory_hint
-  rfc1042_header
-  skb_copy
   skb_dequeue_tail
-  skb_queue_head
   skb_realloc_headroom
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   strlcat
   wiphy_read_of_freq_limits
   wiphy_rfkill_set_hw_state_reason
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
 
 # required by ath10k_pci.ko
   pci_disable_msi
@@ -809,17 +906,24 @@
   iommu_map
 
 # required by ath11k.ko
-  crypto_alloc_shash
-  crypto_destroy_tfm
   crypto_shash_final
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   crypto_shash_setkey
   crypto_shash_update
   ieee80211_freq_khz_to_channel
   ieee80211_get_fils_discovery_tmpl
   ieee80211_get_hdrlen_from_skb
   ieee80211_get_unsol_bcast_probe_resp_tmpl
+=======
+  __ipv6_addr_type
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   memcpy_and_pad
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   regulatory_set_wiphy_regd
+=======
+  rhashtable_destroy
+  rhashtable_init
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
 
 # required by ath11k_ahb.ko
   rproc_boot
@@ -847,6 +951,57 @@
   vchan_tx_desc_free
   vchan_tx_submit
 
+# required by cfg80211.ko
+  bpf_trace_run10
+  bpf_trace_run7
+  debugfs_rename
+  __dev_change_net_namespace
+  __dev_get_by_index
+  dev_get_by_index
+  device_rename
+  do_trace_netlink_extack
+  genlmsg_multicast_allns
+  genlmsg_put
+  genl_register_family
+  genl_unregister_family
+  get_net_ns_by_fd
+  get_net_ns_by_pid
+  inet_csk_get_port
+  key_create_or_update
+  key_put
+  keyring_alloc
+  ktime_get_coarse_with_offset
+  memcmp
+  netlink_broadcast
+  netlink_register_notifier
+  netlink_unicast
+  netlink_unregister_notifier
+  net_ns_type_operations
+  nla_find
+  nla_memcpy
+  nla_put_64bit
+  nla_reserve
+  __nla_validate
+  __put_net
+  rb_erase
+  rb_insert_color
+  register_netdevice
+  register_pernet_device
+  request_firmware_nowait
+  rfkill_alloc
+  rfkill_blocked
+  rfkill_destroy
+  rfkill_register
+  rfkill_resume_polling
+  rfkill_set_hw_state_reason
+  rfkill_unregister
+  skb_add_rx_frag
+  __sock_create
+  trace_print_array_seq
+  unregister_pernet_device
+  verify_pkcs7_signature
+  wireless_nlevent_flush
+
 # required by clk-qcom.ko
   __clk_determine_rate
   clk_fixed_factor_ops
@@ -859,7 +1014,6 @@
   __clk_mux_determine_rate_closest
   divider_ro_round_rate_parent
   of_find_node_opts_by_path
-  of_prop_next_u32
   pm_genpd_remove_subdomain
 
 # required by clk-rpmh.ko
@@ -885,12 +1039,38 @@
   drm_probe_ddc
   of_get_i2c_adapter_by_node
 
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
+=======
+# required by drm_display_helper.ko
+  devm_backlight_device_register
+  drm_atomic_get_connector_state
+  drm_atomic_get_crtc_state
+  drm_atomic_get_new_private_obj_state
+  drm_atomic_get_old_private_obj_state
+  drm_connector_register
+  drm_connector_unregister
+  __drm_crtc_commit_free
+  drm_crtc_commit_wait
+  drm_crtc_wait_one_vblank
+  drm_display_mode_from_cea_vic
+  drm_edid_duplicate
+  drm_edid_get_monitor_name
+  drm_modeset_lock_single_interruptible
+  drm_object_property_set_value
+  __drm_printfn_debug
+  memchr_inv
+  mutex_trylock
+  system_long_wq
+
+# required by drm_dp_aux_bus.ko
+  device_for_each_child_reverse
+
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
 # required by extcon-usb-gpio.ko
   devm_extcon_dev_allocate
   devm_extcon_dev_register
   extcon_set_state_sync
   gpiod_set_debounce
-  system_power_efficient_wq
 
 # required by fastrpc.ko
   dma_buf_attach
@@ -922,7 +1102,6 @@
   gpiod_get_optional
 
 # required by gpu-sched.ko
-  call_rcu
   dma_fence_add_callback
   dma_fence_remove_callback
   kmem_cache_alloc
@@ -932,9 +1111,12 @@
   kthread_park
   kthread_parkme
   kthread_should_park
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   kthread_unpark
   preempt_schedule
   rcu_barrier
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   wait_for_completion
 
 # required by i2c-designware-core.ko
@@ -981,9 +1163,6 @@
   i2c_get_dma_safe_msg_buf
   i2c_put_dma_safe_msg_buf
 
-# required by i2c-qup.ko
-  __usecs_to_jiffies
-
 # required by i2c-rk3x.ko
   clk_notifier_register
   clk_notifier_unregister
@@ -1020,6 +1199,71 @@
   pm_clk_resume
   pm_clk_suspend
 
+# required by mac80211.ko
+  alloc_netdev_mqs
+  __alloc_percpu_gfp
+  arc4_crypt
+  arc4_setkey
+  bitmap_free
+  bitmap_zalloc
+  crc32_be
+  crypto_aead_decrypt
+  crypto_aead_encrypt
+  crypto_aead_setauthsize
+  crypto_aead_setkey
+  crypto_alloc_aead
+  crypto_alloc_skcipher
+  __crypto_memneq
+  crypto_shash_digest
+  crypto_shash_finup
+  crypto_skcipher_decrypt
+  crypto_skcipher_encrypt
+  crypto_skcipher_setkey
+  __crypto_xor
+  dev_addr_mod
+  dev_alloc_name
+  dev_fetch_sw_netstats
+  __dev_queue_xmit
+  ether_setup
+  eth_mac_addr
+  ethtool_op_get_link
+  free_netdev
+  free_percpu
+  get_random_u16
+  __hw_addr_init
+  __hw_addr_sync
+  __hw_addr_unsync
+  kernel_param_lock
+  kernel_param_unlock
+  kfree_skb_list_reason
+  ktime_get_seconds
+  napi_gro_receive
+  netdev_set_default_ethtool_ops
+  netif_carrier_off
+  netif_carrier_on
+  netif_receive_skb
+  netif_receive_skb_list
+  netif_tx_stop_all_queues
+  __per_cpu_offset
+  ___pskb_trim
+  register_inet6addr_notifier
+  register_inetaddr_notifier
+  rhashtable_free_and_destroy
+  rhltable_init
+  round_jiffies
+  round_jiffies_relative
+  sg_init_one
+  skb_checksum_help
+  skb_clone_sk
+  skb_complete_wifi_ack
+  skb_copy_expand
+  skb_ensure_writable
+  __skb_gso_segment
+  system_freezable_wq
+  unregister_inet6addr_notifier
+  unregister_inetaddr_notifier
+  unregister_netdevice_many
+
 # required by mcp251xfd.ko
   alloc_candev_mqs
   alloc_can_err_skb
@@ -1043,12 +1287,13 @@
   dql_completed
   dql_reset
   free_candev
-  netdev_err
-  netdev_info
   netdev_notice
   netdev_warn
   netif_schedule_queue
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   netif_tx_wake_queue
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   open_candev
   register_candev
   regmap_get_val_bytes
@@ -1066,8 +1311,12 @@
   __vmalloc
 
 # required by mhi.ko
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   device_add
   device_del
+=======
+  get_random_u32
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   pm_wakeup_dev_event
   prandom_u32
   _raw_read_lock_bh
@@ -1087,9 +1336,12 @@
 
 # required by msm.ko
   __bitmap_andnot
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   __bitmap_weight
   bpf_trace_run6
   bpf_trace_run8
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   clk_get_parent
   clk_set_parent
   component_add
@@ -1098,10 +1350,19 @@
   component_master_add_with_match
   component_master_del
   component_unbind_all
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   _ctype
+=======
+  debugfs_attr_read
+  debugfs_attr_write
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   debugfs_create_bool
   debugfs_create_u64
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   del_timer
+=======
+  debugfs_create_x64
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   dev_coredumpm
   devfreq_cooling_unregister
   devfreq_recommended_opp
@@ -1303,7 +1564,10 @@
   drm_universal_plane_init
   drm_vblank_init
   fd_install
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   generic_file_llseek
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   get_pid_task
   get_unused_fd_flags
   gpiod_get_value
@@ -1320,8 +1584,6 @@
   kthread_create_worker
   kthread_destroy_worker
   kthread_queue_work
-  kvfree
-  kvmalloc_node
   memdup_user_nul
   memparse
   mipi_dsi_create_packet
@@ -1344,7 +1606,11 @@
   of_graph_get_next_endpoint
   of_graph_get_remote_port_parent
   of_icc_get
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   param_ops_charp
+=======
+  param_ops_ullong
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   phy_calibrate
   phy_configure
   pid_task
@@ -1358,7 +1624,6 @@
   register_shrinker
   register_vmap_purge_notifier
   reservation_ww_class
-  round_jiffies_up
   sched_set_fifo
   schedule_timeout_interruptible
   __sg_page_iter_dma_next
@@ -1521,8 +1786,11 @@
   cpufreq_get_driver_data
   cpufreq_register_driver
   cpufreq_unregister_driver
+<<<<<<< HEAD   (30e7b5 ANDROID: GKI: cfg/mac 80211 as vendor modules)
   __cpu_possible_mask
   cpu_scale
+=======
+>>>>>>> CHANGE (a0d677 ANDROID: GKI: DB845C: cfg/mac 80211 as vendor modules)
   dev_pm_opp_adjust_voltage
   dev_pm_opp_disable
   dev_pm_opp_enable
@@ -1642,7 +1910,6 @@
   _copy_to_iter
 
 # required by qrtr.ko
-  __alloc_skb
   autoremove_wake_function
   datagram_poll
   do_wait_intr_irq
@@ -1655,8 +1922,6 @@
   refcount_dec_and_mutex_lock
   release_sock
   sk_alloc
-  skb_clone
-  skb_copy_bits
   skb_copy_datagram_iter
   skb_free_datagram
   __skb_pad
@@ -1681,8 +1946,6 @@
 
 # required by rmtfs_mem.ko
   alloc_chrdev_region
-  __class_register
-  class_unregister
 
 # required by rpmsg_ns.ko
   rpmsg_create_channel
@@ -1754,9 +2017,6 @@
   snd_soc_of_parse_aux_devs
   snd_soc_of_parse_card_name
 
-# required by snd-soc-rl6231.ko
-  gcd
-
 # required by snd-soc-rt5663.ko
   regcache_cache_bypass
   snd_soc_dapm_disable_pin
@@ -1811,7 +2071,6 @@
   spi_delay_exec
   spi_finalize_current_message
   spi_get_next_queued_message
-  tasklet_unlock_wait
 
 # required by spi-qcom-qspi.ko
   icc_disable
