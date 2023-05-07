@@ -16,6 +16,23 @@
       "message": "Please work to solve this properly, module parameters are a new user/kernel api that we can not accept if it is not also accepted upstream.",
       "revId": "49237a09546df31c7704a2602cfd68f8e1f372f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9863de0_8924fca2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-07T07:13:37Z",
+      "side": 1,
+      "message": "Also this does not work for multiple sound devices in the same system at all.",
+      "revId": "49237a09546df31c7704a2602cfd68f8e1f372f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
