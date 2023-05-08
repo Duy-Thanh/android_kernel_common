@@ -50,6 +50,9 @@
 #define TIPC_IOC32_CONNECT	_IOW(TIPC_IOC_MAGIC, 0x80, compat_uptr_t)
 #endif
 
+static int total_msg_buf_cnt;
+module_param(total_msg_buf_cnt, int, 0440);
+
 struct tipc_virtio_dev;
 
 struct tipc_dev_config {
@@ -345,6 +348,50 @@ static unsigned long vds_reduce_buf_cnt(struct tipc_virtio_dev *vds,
 	return shrink_cnt;
 }
 
+static int reduce_free_buf_cnt(const char *val, const struct kernel_param *kp)
+{
+	int reduce_cnt = 0, ret;
+	struct tipc_virtio_dev *vds;
+
+	if (!default_vdev)
+		return -ENOTCONN;
+
+	vds = default_vdev->priv;
+
+	ret = kstrtoint(val, 10, &reduce_cnt);
+	if (ret != 0 || reduce_cnt < 1 ||
+			reduce_cnt > (vds->free_msg_buf_cnt + vds->free_rx_cnt))
+		return -EINVAL;
+
+	vds_reduce_buf_cnt(vds, reduce_cnt);
+	/* return value ignored; it will be reflected in new param value */
+
+	return 0;
+}
+
+static int get_free_buf_cnt(char *buffer, const struct kernel_param *kp)
+{
+	struct tipc_virtio_dev *vds;
+
+	if (!default_vdev)
+		return -ENOTCONN;
+
+	vds = default_vdev->priv;
+
+	scnprintf(buffer, 4096, "tx: %lu\nrx: %lu\n",
+			vds->free_msg_buf_cnt, vds->free_rx_cnt);
+
+	return strlen(buffer);
+}
+
+static const struct kernel_param_ops buf_cnt_param_ops = {
+	.set	= reduce_free_buf_cnt,
+	.get	= get_free_buf_cnt,
+};
+
+static int free_msg_buf_cnt;
+module_param_cb(free_msg_buf_cnt, &buf_cnt_param_ops, &free_msg_buf_cnt, 0664);
+
 static int _match_any(int id, void *p, void *data)
 {
 	return id;
@@ -391,6 +438,8 @@ static struct tipc_msg_buf *vds_alloc_msg_buf(struct tipc_virtio_dev *vds,
 			ret);
 		goto err_share;
 	}
+
+	total_msg_buf_cnt++;
 
 	mb->buf_sz = sz;
 	mb->shm_cnt = 0;
@@ -2135,6 +2184,7 @@ static void _handle_unmap_rsp(struct tipc_virtio_dev *vds,
 
 	/* memory cleanup */
 	kfree(mb);
+	total_msg_buf_cnt--;
 }
 
 static void _handle_disc_req(struct tipc_virtio_dev *vds,
