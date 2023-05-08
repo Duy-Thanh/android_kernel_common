@@ -299309,6 +299309,13 @@ function {
   parameter_id: 0x3323a6aa
 }
 function {
+  id: 0x9bd458e9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x9bd45e4e
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
@@ -313331,6 +313338,15 @@ elf_symbol {
   full_name: "__traceiter_suspend_resume"
 }
 elf_symbol {
+  id: 0x2dc83a86
+  name: "__traceiter_task_rename"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0c4fccde
+  type_id: 0x9bd458e9
+  full_name: "__traceiter_task_rename"
+}
+elf_symbol {
   id: 0xa6c20508
   name: "__traceiter_wbc_writepage"
   is_defined: true
@@ -315318,6 +315334,15 @@ elf_symbol {
   crc: 0xfede9222
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_suspend_resume"
+}
+elf_symbol {
+  id: 0x4f1ffabc
+  name: "__tracepoint_task_rename"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x990f1219
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_task_rename"
 }
 elf_symbol {
   id: 0x4656d5c6
@@ -358810,6 +358835,10 @@ symbols {
     value: 0x863777a0
   }
   symbol {
+    key: "__traceiter_task_rename"
+    value: 0x2dc83a86
+  }
+  symbol {
     key: "__traceiter_wbc_writepage"
     value: 0xa6c20508
   }
@@ -359692,6 +359721,10 @@ symbols {
   symbol {
     key: "__tracepoint_suspend_resume"
     value: 0x5b327cd6
+  }
+  symbol {
+    key: "__tracepoint_task_rename"
+    value: 0x4f1ffabc
   }
   symbol {
     key: "__tracepoint_wbc_writepage"
