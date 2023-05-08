@@ -339191,6 +339191,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_cpu_overutilized"
 }
 elf_symbol {
+  id: 0x1baec33d
+  name: "__traceiter_android_rvh_cpufreq_transition"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x170ecaa7
+  type_id: 0x9ba9c2f7
+  full_name: "__traceiter_android_rvh_cpufreq_transition"
+}
+elf_symbol {
   id: 0x8f1b1c1e
   name: "__traceiter_android_rvh_dequeue_entity"
   is_defined: true
@@ -341349,6 +341358,15 @@ elf_symbol {
   crc: 0x29b33046
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_cpu_overutilized"
+}
+elf_symbol {
+  id: 0x9f779ef7
+  name: "__tracepoint_android_rvh_cpufreq_transition"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xda623954
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_cpufreq_transition"
 }
 elf_symbol {
   id: 0x3eb0f084
@@ -395854,6 +395872,10 @@ symbols {
     value: 0x4053abff
   }
   symbol {
+    key: "__traceiter_android_rvh_cpufreq_transition"
+    value: 0x1baec33d
+  }
+  symbol {
     key: "__traceiter_android_rvh_dequeue_entity"
     value: 0x8f1b1c1e
   }
@@ -396812,6 +396834,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_rvh_cpu_overutilized"
     value: 0x05576f29
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_cpufreq_transition"
+    value: 0x9f779ef7
   }
   symbol {
     key: "__tracepoint_android_rvh_dequeue_entity"
