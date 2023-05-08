@@ -33,6 +33,23 @@
       "message": "Exynos USB driver has TPMON(ThroughPut Monitor) module for USB performance. It control System resource(Ex. Clock) for performance tuning.\nSo, We need previous transferred size for delta calculation.\n\nvoid usb_tpmon_check_tp(void *data, int data_size)                                \u003c\u003d data_size is dwc3 request length\n{\n        ktime_t current_time;\n        u64 time_delta_us;\n        u64 val;\n\n        current_time \u003d ktime_get();\n        time_delta_us \u003d ktime_us_delta(current_time, tpmon.last_time);\n        if (time_delta_us \u003e IGNORE_DELTA) {\n                tpmon.last_time \u003d current_time;\n                tpmon.accumulated_time \u003d 0;\n                tpmon.accumulated_data \u003d 0;\n                tpmon.gathered_data \u003d 0;\n\n                return;\n        }\n        tpmon.accumulated_time +\u003d time_delta_us;\n        tpmon.accumulated_data +\u003d data_size;\n        tpmon.last_time \u003d current_time;\n        tpmon.gathered_data++;\n\n        if (tpmon.accumulated_time \u003c\u003d ACCUMULATING_TIME)\n                return;\n\n        val \u003d tpmon.accumulated_data / tpmon.accumulated_time *\n                1000000 /* usec -\u003e sec */;\n\n        val /\u003d SZ_1M;\n\n        if (val \u003e\u003d 40) { /* 1Gb */\n                queue_work(tpmon.tpmon_wq, \u0026tpmon.tpmon_work);\n        }\n\n        tpmon.accumulated_time \u003d 0;\n        tpmon.accumulated_data \u003d 0;\n        tpmon.gathered_data \u003d 0;\n\n        return;\n}",
       "revId": "fcb1d0b5569a5bca24f263d40ee111a3f8bd66dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f712b981_72b242e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-08T11:40:18Z",
+      "side": 1,
+      "message": "Please use the proper place in your dwc3 driver for this type of logic, no hook should be needed at all.",
+      "revId": "fcb1d0b5569a5bca24f263d40ee111a3f8bd66dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
