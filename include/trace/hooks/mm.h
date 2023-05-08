@@ -162,6 +162,14 @@ DECLARE_HOOK(android_vh_alloc_pages_entry,
 DECLARE_HOOK(android_vh_watermark_fast_ok,
 	TP_PROTO(unsigned int order, gfp_t gfp_mask, bool *is_watermark_ok),
 	TP_ARGS(order, gfp_mask, is_watermark_ok));
+DECLARE_HOOK(android_vh_dm_bufio_shrink_scan_bypass,
+	TP_PROTO(unsigned long dm_bufio_current_allocated, bool *bypass),
+	TP_ARGS(dm_bufio_current_allocated, bypass));
+DECLARE_HOOK(android_vh_cleanup_old_buffers_bypass,
+	TP_PROTO(unsigned long dm_bufio_current_allocated,
+		unsigned long *max_age_hz,
+		bool *bypass),
+	TP_ARGS(dm_bufio_current_allocated, max_age_hz, bypass));
 
 DECLARE_HOOK(android_vh_free_unref_folios_to_pcp_bypass,
 	TP_PROTO(struct folio_batch *folios, bool *bypass),
