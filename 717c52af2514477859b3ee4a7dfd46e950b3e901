@@ -16,6 +16,24 @@
       "message": "Please let this get accepted and reviewed upstream first.",
       "revId": "717c52af2514477859b3ee4a7dfd46e950b3e901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b99120d_57fe9262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-05-08T03:31:14Z",
+      "side": 1,
+      "message": "merged in upstream, will update the commit accordingly.\nhttps://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git/commit/drivers/usb/dwc3?h\u003dusb-next\u0026id\u003d02435a739b81ae24aff5d6e930efef9458e2af3c",
+      "parentUuid": "88cb18b5_5c8fe677",
+      "revId": "717c52af2514477859b3ee4a7dfd46e950b3e901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
