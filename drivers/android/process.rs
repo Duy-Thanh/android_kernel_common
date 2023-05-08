@@ -770,7 +770,10 @@ impl Process {
     ) -> BinderResult<Allocation<'_>> {
         let mut inner = self.inner.lock();
         let mut mapping = inner.mapping.as_mut().ok_or_else(BinderError::new_dead)?;
-        let offset = match mapping.alloc.reserve_new_noalloc(size, is_oneway)? {
+        let offset = match mapping
+            .alloc
+            .reserve_new_noalloc(size, is_oneway, self.task.pid())?
+        {
             Some(offset) => offset,
             None => {
                 drop(mapping);
@@ -778,7 +781,9 @@ impl Process {
                 let alloc = crate::range_alloc::ReserveNewBox::try_new()?;
                 inner = self.inner.lock();
                 mapping = inner.mapping.as_mut().ok_or_else(BinderError::new_dead)?;
-                mapping.alloc.reserve_new(size, is_oneway, alloc)?
+                mapping
+                    .alloc
+                    .reserve_new(size, is_oneway, self.task.pid(), alloc)?
             }
         };
         Ok(Allocation::new(
