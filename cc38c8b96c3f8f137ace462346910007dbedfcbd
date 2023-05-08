@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc58b570_ce01ad26",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-08T22:00:52Z",
+      "side": 1,
+      "message": "I separated this out into a different CL that can be further refined.",
+      "parentUuid": "3faeea8a_38826dd9",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "507b565e_1dce8d7b",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-02T21:54:56Z",
       "side": 1,
       "message": "these two seem to be from a different patch.",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e97f9a7_2e9eac71",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-08T22:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "507b565e_1dce8d7b",
       "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "558d8aff_2248298e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-08T22:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16c192d6_ec61534b",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e72efef3_6055deff",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-05-02T21:54:56Z",
       "side": 1,
       "message": "What does state \u003d 1 mean? What do other values do?",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90a4e1f5_69115179",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2033,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-08T22:00:52Z",
+      "side": 1,
+      "message": "Removed this field as there is no reason to do anything other than turn on the feature. This simplification removes the need to document the unnecessary state field.",
+      "parentUuid": "e72efef3_6055deff",
       "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c74d766_7039595a",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-08T22:00:52Z",
+      "side": 1,
+      "message": "I made this generic so that it could handle out of order in case it happened. For testing purposes I added the warning you suggested; in limited testing it isn\u0027t hit. There is already an error print if it isn\u0027t found; do you still think we need to highlight out of order with a separate message?",
+      "parentUuid": "d9bdd938_a9334bdd",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd94bc46_46c6b986",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 4
@@ -116,6 +206,24 @@
       "writtenOn": "2023-05-02T21:54:56Z",
       "side": 1,
       "message": "Don\u0027t assign this to a global. There can be multiple instances of this device.",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aaf1b3a_b41dd55d",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2517,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-08T22:00:52Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean by having multiple instances or how that could help here. The shrinker interface doesn\u0027t have a way to pass in private data, so I need to use some sort of global to find the lists of message buffers ... but I have now reworked this to use already available default_vdev instead of adding another global.",
+      "parentUuid": "cd94bc46_46c6b986",
       "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -133,6 +241,24 @@
       "writtenOn": "2023-05-02T21:54:56Z",
       "side": 1,
       "message": "is there any benefit in registering a single shrinker for the whole driver instead of one per device?",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "946a4253_853f9516",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2641,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-08T22:00:52Z",
+      "side": 1,
+      "message": "I don\u0027t think so, as this is the only location of dynamic buffers that can be freed ... unless I\u0027m misunderstanding where else it could be.",
+      "parentUuid": "3e9e04aa_8894566f",
       "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
