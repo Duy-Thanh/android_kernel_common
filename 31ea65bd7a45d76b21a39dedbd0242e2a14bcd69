@@ -16,6 +16,24 @@
       "message": "The failures so far are just ABI since symbols are being added. The new stg file will be generated as part of the builds and I\u0027ll attach it. Then it should build cleanly. No action needed on your part if these are the only failures.",
       "revId": "31ea65bd7a45d76b21a39dedbd0242e2a14bcd69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb1167c_70867061",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-05-09T08:54:19Z",
+      "side": 1,
+      "message": "Thank you for your explanation.\n\nMay I know the status of aosp/2578321? I\u0027m concerned that this series may not be accepted after May 15th, as only launching blocking changes are acceptable after that date.",
+      "parentUuid": "b30364ce_71b70018",
+      "revId": "31ea65bd7a45d76b21a39dedbd0242e2a14bcd69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
