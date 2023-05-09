@@ -34,6 +34,24 @@
       "parentUuid": "05262324_480fe0df",
       "revId": "bcf92b38a606aef7ef36c5edf9e7e791ef2cb591",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f290a0_0b33056c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-09T03:19:48Z",
+      "side": 1,
+      "message": "Then please resend it upstream to get it merged properly first.",
+      "parentUuid": "08a19452_9a18a485",
+      "revId": "bcf92b38a606aef7ef36c5edf9e7e791ef2cb591",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
