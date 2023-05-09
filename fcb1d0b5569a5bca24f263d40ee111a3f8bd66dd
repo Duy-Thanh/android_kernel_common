@@ -68,6 +68,24 @@
       "parentUuid": "f712b981_72b242e1",
       "revId": "fcb1d0b5569a5bca24f263d40ee111a3f8bd66dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e76ad826_88b458ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-09T03:20:36Z",
+      "side": 1,
+      "message": "Again, please do not use a tracepoint for this, do this properly in your dwc3 platform driver instead.",
+      "parentUuid": "79ce867c_634a53ca",
+      "revId": "fcb1d0b5569a5bca24f263d40ee111a3f8bd66dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
