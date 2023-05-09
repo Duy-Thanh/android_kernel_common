@@ -33,6 +33,24 @@
       "message": "Please rebase the series",
       "revId": "a33422c6095af100968d972ad7829df7853ca313",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbab1fa3_708f6657",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-05-09T07:02:59Z",
+      "side": 1,
+      "message": "The series has been rebased, thank you.",
+      "parentUuid": "a70f1659_7e08af78",
+      "revId": "a33422c6095af100968d972ad7829df7853ca313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
