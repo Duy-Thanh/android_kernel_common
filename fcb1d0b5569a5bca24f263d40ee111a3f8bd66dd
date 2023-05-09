@@ -50,6 +50,24 @@
       "message": "Please use the proper place in your dwc3 driver for this type of logic, no hook should be needed at all.",
       "revId": "fcb1d0b5569a5bca24f263d40ee111a3f8bd66dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79ce867c_634a53ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865570
+      },
+      "writtenOn": "2023-05-09T02:22:01Z",
+      "side": 1,
+      "message": "As I mentioned in issuetracker, I have implemented usb module to monitor the usb throughput, and it need dwc3 request length of __dwc3_gadget_ep_queue function. And there is already a tracepoint here.\n\n* 1927 static int __dwc3_gadget_ep_queue(struct dwc3_ep *dep, struct dwc3_request *req)\n1950\n1951         trace_dwc3_ep_queue(req);\n1952\n\nSo to register trace function to dwc3_ep_queue tracepoint and to get dwc3 request length, we need to access this tracepoint.\n\nmodule function is like below.\n\n* 62 void usb_tpmon_check_tp(void *data, struct dwc3_request *req)\n 63 {\n 64         ktime_t current_time;\n 65         u64 time_delta_us;\n 66         u64 val;\n 67         int data_size;\n 68\n 69         data_size \u003d req-\u003erequest.length;\n 70         current_time \u003d ktime_get();\n 71         time_delta_us \u003d ktime_us_delta(current_time, tpmon.last_time);\n 72\n 73         if (time_delta_us \u003e IGNORE_DELTA) {\n 74                 tpmon.last_time \u003d current_time;\n 75                 tpmon.accumulated_time \u003d 0;\n 76                 tpmon.accumulated_data \u003d 0;\n 77                 tpmon.gathered_data \u003d 0;\n 78\n 79                 return;\n 80         }\n 81         tpmon.accumulated_time +\u003d time_delta_us;\n 82         tpmon.accumulated_data +\u003d data_size;\n 83         tpmon.last_time \u003d current_time;\n 84         tpmon.gathered_data++;\n 85\n 86         if (tpmon.accumulated_time \u003c\u003d ACCUMULATING_TIME)\n 87                 return;\n ~~",
+      "parentUuid": "f712b981_72b242e1",
+      "revId": "fcb1d0b5569a5bca24f263d40ee111a3f8bd66dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
