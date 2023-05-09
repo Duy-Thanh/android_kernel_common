@@ -281466,6 +281466,11 @@ function {
   parameter_id: 0x15b54c6f
 }
 function {
+  id: 0x1f07d2c7
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3e7e0d52
+}
+function {
   id: 0x1f0d7714
   return_type_id: 0x48b5725f
   parameter_id: 0x38342a1b
@@ -290403,6 +290408,11 @@ function {
   parameter_id: 0xf435685e
   parameter_id: 0xf435685e
   parameter_id: 0x0efc9002
+}
+function {
+  id: 0x921f607b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3e7e0d52
 }
 function {
   id: 0x9220b9bd
@@ -335624,6 +335634,24 @@ elf_symbol {
   full_name: "gh_rm_notifier_unregister"
 }
 elf_symbol {
+  id: 0x62906068
+  name: "gh_rm_register_platform_ops"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa577ae43
+  type_id: 0x921f607b
+  full_name: "gh_rm_register_platform_ops"
+}
+elf_symbol {
+  id: 0x35ffaad3
+  name: "gh_rm_unregister_platform_ops"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5759f053
+  type_id: 0x1f07d2c7
+  full_name: "gh_rm_unregister_platform_ops"
+}
+elf_symbol {
   id: 0x5a582da8
   name: "gic_nonsecure_priorities"
   is_defined: true
@@ -378508,6 +378536,14 @@ symbols {
   symbol {
     key: "gh_rm_notifier_unregister"
     value: 0x3049a5e5
+  }
+  symbol {
+    key: "gh_rm_register_platform_ops"
+    value: 0x62906068
+  }
+  symbol {
+    key: "gh_rm_unregister_platform_ops"
+    value: 0x35ffaad3
   }
   symbol {
     key: "gic_nonsecure_priorities"
