@@ -52,6 +52,24 @@
       "parentUuid": "08a19452_9a18a485",
       "revId": "bcf92b38a606aef7ef36c5edf9e7e791ef2cb591",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a82de55_dfaf8c9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-05-09T10:22:33Z",
+      "side": 1,
+      "message": "The patch seems to be in Mathias\u0027s for-usb-next branch :\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/mnyman/xhci.git/commit/?h\u003dfor-usb-next\u0026id\u003dacd4b4af99d70451293a8d43585619337b4ac70d",
+      "parentUuid": "c4f290a0_0b33056c",
+      "revId": "bcf92b38a606aef7ef36c5edf9e7e791ef2cb591",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
