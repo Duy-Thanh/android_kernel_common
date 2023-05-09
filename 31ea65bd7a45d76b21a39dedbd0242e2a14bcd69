@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b30364ce_71b70018",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-09T08:18:03Z",
+      "side": 1,
+      "message": "The failures so far are just ABI since symbols are being added. The new stg file will be generated as part of the builds and I\u0027ll attach it. Then it should build cleanly. No action needed on your part if these are the only failures.",
+      "revId": "31ea65bd7a45d76b21a39dedbd0242e2a14bcd69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
