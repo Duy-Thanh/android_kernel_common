@@ -693,7 +693,6 @@
   devm_fwnode_iio_channel_get_by_name
   devm_fwnode_pwm_get
   devm_gen_pool_create
-  devm_gh_rm_register_platform_ops
   devm_gpiochip_add_data_with_key
   devm_gpiod_get
   devm_gpiod_get_optional
@@ -1324,6 +1323,8 @@
   gh_rm_call
   gh_rm_notifier_register
   gh_rm_notifier_unregister
+  gh_rm_register_platform_ops
+  gh_rm_unregister_platform_ops
   gic_nonsecure_priorities
   gov_attr_set_init
   gov_attr_set_put
