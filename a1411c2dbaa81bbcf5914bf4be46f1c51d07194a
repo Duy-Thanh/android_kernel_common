@@ -33,6 +33,24 @@
       "message": "checkpatch error:\n```\nERROR:MULTISTATEMENT_MACRO_USE_DO_WHILE: Macros with multiple statements should be enclosed in a do - while loop\n#293: FILE: include/linux/gunyah_vm_mgr.h:80:\n```",
       "revId": "a1411c2dbaa81bbcf5914bf4be46f1c51d07194a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "127f7679_30a29d92",
+        "filename": "include/linux/gunyah_vm_mgr.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-05-09T23:38:12Z",
+      "side": 1,
+      "message": "I think this is correct as it follows other DELCARE/ALIAS macros. I think checkpatch override here is valid.",
+      "parentUuid": "d7aef259_cd3dfa3e",
+      "revId": "a1411c2dbaa81bbcf5914bf4be46f1c51d07194a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
