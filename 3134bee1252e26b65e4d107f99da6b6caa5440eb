@@ -16,6 +16,24 @@
       "message": "always test-build your patches 😞",
       "revId": "3134bee1252e26b65e4d107f99da6b6caa5440eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b522e0_ff13c679",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-05-09T17:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a58ff9d6_8dbe9bbe",
+      "revId": "3134bee1252e26b65e4d107f99da6b6caa5440eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
