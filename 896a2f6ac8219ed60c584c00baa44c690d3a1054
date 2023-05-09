@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "896a2f6ac8219ed60c584c00baa44c690d3a1054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c6c6846_de2e4fb3",
+        "filename": "android/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-09T12:06:08Z",
+      "side": 1,
+      "message": "`gki_*_protected_modules` ? The next architecture surely comes :-)",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 67
+      },
+      "revId": "896a2f6ac8219ed60c584c00baa44c690d3a1054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
