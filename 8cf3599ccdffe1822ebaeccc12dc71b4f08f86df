@@ -16,6 +16,24 @@
       "message": "Why is this patch different from the equivalent one for android14-5.15? Why weren\u0027t\u0027 the original commits cherry-picked and amended instead? All this is creating a very messy history of the changes and it\u0027s hard to keep track of.",
       "revId": "8cf3599ccdffe1822ebaeccc12dc71b4f08f86df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5836c0_1593e692",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-05-09T19:18:22Z",
+      "side": 1,
+      "message": "The second change was also squashed into this new commit. Why not keep it separate such as in https://android-review.git.corp.google.com/c/kernel/common/+/2564452?",
+      "parentUuid": "ba961c3c_115efbca",
+      "revId": "8cf3599ccdffe1822ebaeccc12dc71b4f08f86df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
