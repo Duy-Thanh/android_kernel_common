@@ -1,4 +1,4 @@
-root_id: 0x25a8b173
+root_id: 0x84ea5130
 void {
   id: 0x48b5725f
 }
@@ -8799,11 +8799,6 @@ pointer_reference {
   id: 0x13f50292
   kind: POINTER
   pointee_type_id: 0x6594ecd4
-}
-pointer_reference {
-  id: 0x13f857e5
-  kind: POINTER
-  pointee_type_id: 0x65a1b90a
 }
 pointer_reference {
   id: 0x13f8b706
@@ -24581,11 +24576,6 @@ pointer_reference {
   pointee_type_id: 0xfa81db81
 }
 pointer_reference {
-  id: 0x343261d5
-  kind: POINTER
-  pointee_type_id: 0xfa8961c9
-}
-pointer_reference {
   id: 0x34329ff8
   kind: POINTER
   pointee_type_id: 0xfa8a997e
@@ -24639,11 +24629,6 @@ pointer_reference {
   id: 0x3443caef
   kind: POINTER
   pointee_type_id: 0xfb4fcd23
-}
-pointer_reference {
-  id: 0x34471315
-  kind: POINTER
-  pointee_type_id: 0xfb5caac9
 }
 pointer_reference {
   id: 0x344a8f68
@@ -34894,11 +34879,6 @@ qualified {
   id: 0xfb4fcd23
   qualifier: CONST
   qualified_type_id: 0x9d788207
-}
-qualified {
-  id: 0xfb5caac9
-  qualifier: CONST
-  qualified_type_id: 0x9d351dae
 }
 qualified {
   id: 0xfb6adb3d
@@ -72071,12 +72051,6 @@ member {
   offset: 288
 }
 member {
-  id: 0xf1ade02e
-  name: "deferred_item"
-  type_id: 0x49a73111
-  offset: 512
-}
-member {
   id: 0xb9227601
   name: "deferred_list"
   type_id: 0xd3c80119
@@ -108722,11 +108696,6 @@ member {
   offset: 1536
 }
 member {
-  id: 0x497f1ff5
-  name: "interval_tree"
-  type_id: 0x98a855cd
-}
-member {
   id: 0x02e2818d
   name: "interval_us"
   type_id: 0xfc0e1dbd
@@ -108971,11 +108940,6 @@ member {
   offset: 192
 }
 member {
-  id: 0xf24f09cc
-  name: "invalidate"
-  type_id: 0x343261d5
-}
-member {
   id: 0xfe5a1eea
   name: "invalidate_folio"
   type_id: 0x0c5a56fb
@@ -109016,12 +108980,6 @@ member {
   name: "invalidate_seq"
   type_id: 0x33756485
   offset: 128
-}
-member {
-  id: 0xa4356acd
-  name: "invalidate_seq"
-  type_id: 0x33756485
-  offset: 640
 }
 member {
   id: 0x720365d0
@@ -128143,12 +128101,6 @@ member {
   offset: 320
 }
 member {
-  id: 0x3025d29c
-  name: "mm"
-  type_id: 0x1b36c7a2
-  offset: 448
-}
-member {
   id: 0x3025d5eb
   name: "mm"
   type_id: 0x1b36c7a2
@@ -142962,12 +142914,6 @@ member {
   name: "ops"
   type_id: 0x34363f4c
   offset: 6208
-}
-member {
-  id: 0xafbf4622
-  name: "ops"
-  type_id: 0x34471315
-  offset: 384
 }
 member {
   id: 0xafbf4c24
@@ -246250,28 +246196,6 @@ struct_union {
   }
 }
 struct_union {
-  id: 0x65a1b90a
-  kind: STRUCT
-  name: "mmu_interval_notifier"
-  definition {
-    bytesize: 88
-    member_id: 0x497f1ff5
-    member_id: 0xafbf4622
-    member_id: 0x3025d29c
-    member_id: 0xf1ade02e
-    member_id: 0xa4356acd
-  }
-}
-struct_union {
-  id: 0x9d351dae
-  kind: STRUCT
-  name: "mmu_interval_notifier_ops"
-  definition {
-    bytesize: 8
-    member_id: 0xf24f09cc
-  }
-}
-struct_union {
   id: 0x846ab93f
   kind: STRUCT
   name: "mmu_notifier"
@@ -297146,11 +297070,6 @@ function {
   parameter_id: 0x1582ab06
 }
 function {
-  id: 0x1466446a
-  return_type_id: 0x48b5725f
-  parameter_id: 0x13f857e5
-}
-function {
   id: 0x14667c52
   return_type_id: 0x48b5725f
   parameter_id: 0x13f8b706
@@ -306327,11 +306246,6 @@ function {
   id: 0x34c40d5b
   return_type_id: 0x33756485
   parameter_id: 0x15a30023
-}
-function {
-  id: 0x3552d8aa
-  return_type_id: 0x33756485
-  parameter_id: 0x13f857e5
 }
 function {
   id: 0x35757b7f
@@ -320274,15 +320188,6 @@ function {
   parameter_id: 0x39c6a784
   parameter_id: 0x4585663f
   parameter_id: 0x2a65af3d
-}
-function {
-  id: 0x991e3055
-  return_type_id: 0x6720d32f
-  parameter_id: 0x13f857e5
-  parameter_id: 0x1b36c7a2
-  parameter_id: 0x33756485
-  parameter_id: 0x33756485
-  parameter_id: 0x34471315
 }
 function {
   id: 0x99203782
@@ -335684,13 +335589,6 @@ function {
   parameter_id: 0x11b32828
   parameter_id: 0x2a65af3d
   parameter_id: 0x6287f13b
-}
-function {
-  id: 0xfa8961c9
-  return_type_id: 0x6d7f5ff6
-  parameter_id: 0x13f857e5
-  parameter_id: 0x37fc9b61
-  parameter_id: 0x33756485
 }
 function {
   id: 0xfaa21496
@@ -370288,33 +370186,6 @@ elf_symbol {
   full_name: "mmput"
 }
 elf_symbol {
-  id: 0x58f7cd70
-  name: "mmu_interval_notifier_insert"
-  is_defined: true
-  symbol_type: FUNCTION
-  crc: 0x80c31281
-  type_id: 0x991e3055
-  full_name: "mmu_interval_notifier_insert"
-}
-elf_symbol {
-  id: 0xb68663e8
-  name: "mmu_interval_notifier_remove"
-  is_defined: true
-  symbol_type: FUNCTION
-  crc: 0x9e5e2af6
-  type_id: 0x1466446a
-  full_name: "mmu_interval_notifier_remove"
-}
-elf_symbol {
-  id: 0x325416a5
-  name: "mmu_interval_read_begin"
-  is_defined: true
-  symbol_type: FUNCTION
-  crc: 0x0b7a2d88
-  type_id: 0x3552d8aa
-  full_name: "mmu_interval_read_begin"
-}
-elf_symbol {
   id: 0xa062fd64
   name: "mmu_notifier_synchronize"
   is_defined: true
@@ -394613,7 +394484,7 @@ elf_symbol {
   full_name: "zs_unmap_object"
 }
 symbols {
-  id: 0x25a8b173
+  id: 0x84ea5130
   symbol {
     key: "I_BDEV"
     value: 0x2dddbe52
@@ -409769,18 +409640,6 @@ symbols {
   symbol {
     key: "mmput"
     value: 0x236a1277
-  }
-  symbol {
-    key: "mmu_interval_notifier_insert"
-    value: 0x58f7cd70
-  }
-  symbol {
-    key: "mmu_interval_notifier_remove"
-    value: 0xb68663e8
-  }
-  symbol {
-    key: "mmu_interval_read_begin"
-    value: 0x325416a5
   }
   symbol {
     key: "mmu_notifier_synchronize"
