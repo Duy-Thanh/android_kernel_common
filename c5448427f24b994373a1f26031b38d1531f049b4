@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a183f3b_b757893d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-09T07:39:17Z",
+      "side": 1,
+      "message": "Please fix the build-break",
+      "revId": "c5448427f24b994373a1f26031b38d1531f049b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29a20c39_6784ea61",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 8320,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-09T07:39:17Z",
+      "side": 1,
+      "message": "build-break:\n```\nsandbox/12/execroot/__main__/common/kernel/sched/core.c:8319:6: error: variable \u0027retval\u0027 is used uninitialized whenever \u0027if\u0027 condition is true [-Werror,-Wsometimes-uninitialized]\n        if (skip)\n            ^~~~\n/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/12/execroot/__main__/common/kernel/sched/core.c:8330:9: note: uninitialized use occurs here\n        return retval;\n               ^~~~~~\n/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/12/execroot/__main__/common/kernel/sched/core.c:8319:2: note: remove the \u0027if\u0027 if its condition is always false\n        if (skip)\n        ^~~~~~~~~\n/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/12/execroot/__main__/common/kernel/sched/core.c:8288:12: note: initialize the variable \u0027retval\u0027 to silence this warning\n        int retval;\n                  ^\n                   \u003d 0\n1 error generated.\n```",
+      "revId": "c5448427f24b994373a1f26031b38d1531f049b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
