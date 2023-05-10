@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0662b180_12cb4a51",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-05-10T11:50:12Z",
+      "side": 1,
+      "message": "I would probably name this `EXTENDED_ERROR_ID`.",
+      "revId": "935d7a0b7ee5fe2a5003ea38f77f454c15207162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c625a1c_2020ef80",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-05-10T11:50:12Z",
+      "side": 1,
+      "message": "This keeps the lock alive while writing. If you remove the ampersand, then the lock is released before writing, which is better.",
+      "revId": "935d7a0b7ee5fe2a5003ea38f77f454c15207162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
