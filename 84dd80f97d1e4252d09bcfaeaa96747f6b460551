@@ -46,6 +46,30 @@
       },
       "revId": "84dd80f97d1e4252d09bcfaeaa96747f6b460551",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "309f1374_daee044b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2023-05-10T22:58:32Z",
+      "side": 1,
+      "message": "It looks like \"ANDROID:\" then?\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md?pli\u003d1\n\nIt looked odd to me to give two tags at the same time.",
+      "parentUuid": "b11ba15b_ff1ec338",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "84dd80f97d1e4252d09bcfaeaa96747f6b460551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
