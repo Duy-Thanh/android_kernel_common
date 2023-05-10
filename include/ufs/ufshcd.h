@@ -27,6 +27,7 @@
 #include <ufs/ufs.h>
 #include <ufs/ufs_quirks.h>
 #include <ufs/ufshci.h>
+#include <linux/android_vendor.h>
 
 #define UFSHCD "ufshcd"
 
@@ -1118,12 +1119,18 @@ struct ufs_hba {
 	struct delayed_work ufs_rtc_update_work;
 	struct pm_qos_request pm_qos_req;
 	bool pm_qos_enabled;
+<<<<<<< HEAD   (d014070de77f2e1770b4b08659ad4ba0b3c6f5f6 Merge branch 'android-mainline' into android17-6.18)
 	/* synchronizes PM QoS request and status updates */
 	struct mutex pm_qos_mutex;
 
 	int critical_health_count;
 	atomic_t dev_lvl_exception_count;
 	u64 dev_lvl_exception_id;
+||||||| BASE   (f736ca9f8c138b95fc45ac2a5eec54e11f3a1cf5 ANDROID: Add the pixel symbols from Linux 6.*)
+=======
+
+	ANDROID_OEM_DATA(1);
+>>>>>>> CHANGE (7bac2bddbe696df027fa2b30132fde96cd559748 ANDROID: GKI: Add ANDROID_OEM_DATA() in struct ufs_hba)
 };
 
 /**
