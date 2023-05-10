@@ -27,6 +27,8 @@
 #include <ufs/ufs.h>
 #include <ufs/ufs_quirks.h>
 #include <ufs/ufshci.h>
+#include <linux/android_kabi.h>
+#include <linux/android_vendor.h>
 
 #define UFSHCD "ufshcd"
 
@@ -1127,6 +1129,7 @@ struct ufs_hba {
 	struct delayed_work ufs_rtc_update_work;
 	struct pm_qos_request pm_qos_req;
 	bool pm_qos_enabled;
+	ANDROID_OEM_DATA(1);
 };
 
 /**
