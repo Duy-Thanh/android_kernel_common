@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b4b9be8_81222f3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-10T08:58:52Z",
+      "side": 1,
+      "message": "\u003e Can not find the original change in base branch for this change.\n\u003e Please ensure that the Change-Id of this change is same as the original change on the base branch.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 530618591 android-build.ayeaye-python-dispatcher_20230509.05_p0\n\nThe base branch change and this change have to change the same Change-Id. Please re-upload once the base branch change landed. I will abandon this change now.",
+      "parentUuid": "6868b8be_e56c806d",
+      "revId": "91ee925fad084017c145f302b1cfc359f9ed5e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "45310b04_c6b558a8",
