@@ -167,6 +167,12 @@
   __tracepoint_android_rvh_dequeue_task_fair
   __tracepoint_android_rvh_entity_tick
 
+<<<<<<< PATCH SET (95f6e9 ANDROID: GKI: update the ABI symbol list)
+#required by millet.ko
+  __traceiter_android_rvh_refrigerator
+  __tracepoint_android_rvh_refrigerator
+  freezer_cgrp_subsys
+=======
 #required by metis.ko module
   __traceiter_android_vh_rwsem_read_wait_start
   __traceiter_android_vh_rwsem_write_wait_start
@@ -185,3 +191,4 @@
   __tracepoint_android_rvh_set_cpus_allowed_comm
   __tracepoint_android_rvh_dequeue_task
   cpuset_cpus_allowed
+>>>>>>> BASE      (5a6314 ANDROID: freezer: Add vendor hook to freezer for GKI purpose)
