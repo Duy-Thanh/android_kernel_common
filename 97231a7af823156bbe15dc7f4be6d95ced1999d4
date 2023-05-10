@@ -87,6 +87,24 @@
       "parentUuid": "ab42c280_fa51ddec",
       "revId": "97231a7af823156bbe15dc7f4be6d95ced1999d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b61ca969_fe0dcaa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1508485
+      },
+      "writtenOn": "2023-05-10T10:03:30Z",
+      "side": 1,
+      "message": "Thanks for your feedback.\n\nDo I still have a chance to merge this change even if the abi is frozen ? If yes, is there any guideline ? If no, does that mean I need to wait until Android V kernel 5.10 ?\n\nIs there any document about the abi schedule I can refer to ?",
+      "parentUuid": "b07c21ea_c851b2f6",
+      "revId": "97231a7af823156bbe15dc7f4be6d95ced1999d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
