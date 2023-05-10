@@ -4509,6 +4509,7 @@ static vm_fault_t do_fault_around(struct vm_fault *vmf)
 	int off;
 
 	nr_pages = READ_ONCE(fault_around_bytes) >> PAGE_SHIFT;
+	trace_android_rvh_do_fault_around(&nr_pages);
 	mask = ~(nr_pages * PAGE_SIZE - 1) & PAGE_MASK;
 
 	address = max(address & mask, vmf->vma->vm_start);

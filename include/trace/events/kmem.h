@@ -174,6 +174,27 @@ TRACE_EVENT(mm_page_free_batched,
 			__entry->pfn)
 );
 
+TRACE_EVENT(mm_page_alloc_entry,
+
+	TP_PROTO(gfp_t gfp_mask, unsigned int order),
+
+	TP_ARGS(gfp_mask, order),
+
+	TP_STRUCT__entry(
+		__field(gfp_t,		gfp_mask)
+		__field(int,		order)
+	),
+
+	TP_fast_assign(
+		__entry->gfp_mask	= gfp_mask;
+		__entry->order		= order;
+	),
+
+	TP_printk("order=%d gfp_mask=%s",
+		__entry->order,
+		show_gfp_flags(__entry->gfp_mask))
+);
+
 TRACE_EVENT(mm_page_alloc,
 
 	TP_PROTO(struct page *page, unsigned int order,

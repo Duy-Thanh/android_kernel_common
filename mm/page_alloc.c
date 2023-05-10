@@ -3578,6 +3578,10 @@ void free_unref_page(struct page *page, unsigned int order)
 		migratetype = MIGRATE_MOVABLE;
 	}
 
+	trace_android_rvh_free_pages(&page, order, pfn, migratetype, false);
+	if (page == NULL)
+		return;
+
 	zone = page_zone(page);
 	pcp_trylock_prepare(UP_flags);
 	pcp = pcp_spin_trylock_irqsave(zone->per_cpu_pageset, flags);
@@ -3609,6 +3613,10 @@ void free_unref_page_list(struct list_head *list)
 			list_del(&page->lru);
 			continue;
 		}
+
+		trace_android_rvh_free_pages(&page, 0, pfn, migratetype, true);
+		if (page == NULL)
+			continue;
 
 		/*
 		 * Free isolated pages directly to the allocator, see
@@ -3903,6 +3911,7 @@ struct page *rmqueue(struct zone *preferred_zone,
 			int migratetype)
 {
 	struct page *page;
+	bool pcp_bypass = false;
 
 	/*
 	 * We most definitely don't want callers attempting to
@@ -3910,7 +3919,8 @@ struct page *rmqueue(struct zone *preferred_zone,
 	 */
 	WARN_ON_ONCE((gfp_flags & __GFP_NOFAIL) && (order > 1));
 
-	if (likely(pcp_allowed_order(order))) {
+	trace_android_rvh_buddy_rmqueue(order, gfp_flags, &pcp_bypass);
+	if (likely(!pcp_bypass && pcp_allowed_order(order))) {
 		page = rmqueue_pcplist(preferred_zone, zone, order,
 				migratetype, alloc_flags);
 		goto out;
@@ -4898,6 +4908,7 @@ static inline unsigned int
 gfp_to_alloc_flags(gfp_t gfp_mask)
 {
 	unsigned int alloc_flags = ALLOC_WMARK_MIN | ALLOC_CPUSET;
+	int should_alloc_harder = -1;
 
 	/*
 	 * __GFP_HIGH is assumed to be the same as ALLOC_HIGH
@@ -4907,6 +4918,7 @@ gfp_to_alloc_flags(gfp_t gfp_mask)
 	BUILD_BUG_ON(__GFP_HIGH != (__force gfp_t) ALLOC_HIGH);
 	BUILD_BUG_ON(__GFP_KSWAPD_RECLAIM != (__force gfp_t) ALLOC_KSWAPD);
 
+	trace_android_rvh_gfp_to_alloc_flags(gfp_mask, &should_alloc_harder);
 	/*
 	 * The caller may dip into page reserves a bit more if the caller
 	 * cannot run direct reclaim, or if the caller has realtime scheduling
@@ -4930,6 +4942,8 @@ gfp_to_alloc_flags(gfp_t gfp_mask)
 		alloc_flags &= ~ALLOC_CPUSET;
 	} else if (unlikely(rt_task(current)) && in_task())
 		alloc_flags |= ALLOC_HARDER;
+	else if (should_alloc_harder >= 0)
+		alloc_flags |= should_alloc_harder ? ALLOC_HARDER : 0;
 
 	alloc_flags = gfp_to_alloc_flags_cma(gfp_mask, alloc_flags);
 
@@ -5599,6 +5613,7 @@ struct page *__alloc_pages(gfp_t gfp, unsigned int order, int preferred_nid,
 	gfp_t alloc_gfp; /* The gfp_t that was actually used for allocation */
 	struct alloc_context ac = { };
 
+	trace_mm_page_alloc_entry(gfp, order);
 	/*
 	 * There are several places where we assume that the order value is sane
 	 * so bail out early if the request is out of bound.
@@ -5626,10 +5641,22 @@ struct page *__alloc_pages(gfp_t gfp, unsigned int order, int preferred_nid,
 	 */
 	alloc_flags |= alloc_flags_nofragment(ac.preferred_zoneref->zone, gfp);
 
+	trace_android_rvh_alloc_pages(alloc_gfp, order, alloc_flags, 0, &page);
+	if (likely(page)) {
+		prep_new_page(page, order, alloc_gfp, alloc_flags);
+		goto out;
+	}
+
 	/* First allocation attempt */
 	page = get_page_from_freelist(alloc_gfp, order, alloc_flags, &ac);
 	if (likely(page))
 		goto out;
+
+	trace_android_rvh_alloc_pages(alloc_gfp, order, alloc_flags, 1, &page);
+	if (likely(page)) {
+		prep_new_page(page, order, alloc_gfp, alloc_flags);
+		goto out;
+	}
 
 	alloc_gfp = gfp;
 	ac.spread_dirty_pages = false;
@@ -6045,6 +6072,7 @@ long si_mem_available(void)
 		global_node_page_state(NR_KERNEL_MISC_RECLAIMABLE);
 	available += reclaimable - min(reclaimable / 2, wmark_low);
 
+	trace_android_rvh_si_mem_available(&available);
 	if (available < 0)
 		available = 0;
 	return available;
