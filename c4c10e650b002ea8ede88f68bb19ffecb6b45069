@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "933fb9fe_4bcd1ba8",
+        "filename": "arch/riscv/include/uapi/asm/unistd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-10T09:57:10Z",
+      "side": 1,
+      "message": "Why is this smaller than the above syscall?  Doesn\u0027t that mean it conflicts?",
+      "range": {
+        "startLine": 52,
+        "startChar": 57,
+        "endLine": 52,
+        "endChar": 59
+      },
+      "revId": "c4c10e650b002ea8ede88f68bb19ffecb6b45069",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
