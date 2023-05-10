@@ -51,6 +51,24 @@
       "message": "Dear Sir,\n\nMay I know when this series will be merged?",
       "revId": "31ea65bd7a45d76b21a39dedbd0242e2a14bcd69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f510151_62e4a5bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-10T21:52:27Z",
+      "side": 1,
+      "message": "It just needs an stg attached (we\u0027ll take care of that).\n\nYou will generally have better response times if you have open bugs associated with the patches since someone will be assigned to help move your bugs along and allows you to express priority and when the fix is needed.",
+      "parentUuid": "a93ab9eb_cfcaaed2",
+      "revId": "31ea65bd7a45d76b21a39dedbd0242e2a14bcd69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
