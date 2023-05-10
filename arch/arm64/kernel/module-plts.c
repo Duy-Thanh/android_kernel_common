@@ -8,6 +8,7 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/sort.h>
+#include <linux/rhashtable.h>
 
 static struct plt_entry __get_adrp_add_pair(u64 dst, u64 pc,
 					    enum aarch64_insn_register reg)
@@ -132,7 +133,12 @@ u64 module_emit_veneer_for_adrp(struct module *mod, Elf64_Shdr *sechdrs,
 }
 #endif
 
-#define cmp_3way(a, b)	((a) < (b) ? -1 : (a) > (b))
+struct Elf64_Rela_rht_node {
+	struct rhash_head rhnode;
+	Elf64_Rela *key;
+};
+
+#define cmp_3way(a, b)  ((a) < (b) ? -1 : (a) > (b))
 
 static int cmp_rela(const void *a, const void *b)
 {
@@ -148,22 +154,83 @@ static int cmp_rela(const void *a, const void *b)
 	return i;
 }
 
-static bool duplicate_rel(const Elf64_Rela *rela, int num)
+static int rela_rht_cmpfn(struct rhashtable_compare_arg *arg, const void *ptr)
 {
-	/*
-	 * Entries are sorted by type, symbol index and addend. That means
-	 * that, if a duplicate entry exists, it must be in the preceding
-	 * slot.
-	 */
-	return num > 0 && cmp_rela(rela + num, rela + num - 1) == 0;
+	const struct Elf64_Rela_rht_node *node = ptr;
+	const Elf64_Rela *rela = *((const Elf64_Rela **)arg->key);
+
+	return cmp_rela(node->key, rela);
 }
 
-static unsigned int count_plts(Elf64_Sym *syms, Elf64_Rela *rela, int num,
+static u32 rela_rht_key_hashfn(const void *data, u32 len, u32 seed)
+{
+	const Elf64_Rela *rela = *((const Elf64_Rela **) data);
+	u64 data_to_hash;
+
+	data_to_hash = ELF64_R_TYPE(rela->r_info) + ELF64_R_SYM(rela->r_info)
+		+ rela->r_addend;
+	return jhash2((u32 *) &data_to_hash, sizeof(u64) / sizeof(u32), seed);
+}
+
+static u32 rela_rht_obj_hashfn(const void *data, u32 len, u32 seed)
+{
+	const struct Elf64_Rela_rht_node *node = data;
+
+	return rela_rht_key_hashfn(&node->key, len, seed);
+}
+
+static void rela_rht_node_free(void *ptr, void *arg)
+{
+	kfree(ptr);
+}
+
+static const struct rhashtable_params elf64_rela_rht_params = {
+	.head_offset = offsetof(struct Elf64_Rela_rht_node, rhnode),
+	.key_offset = offsetof(struct Elf64_Rela_rht_node, key),
+	.key_len = sizeof(struct Elf64_Rela *),
+	.obj_cmpfn = rela_rht_cmpfn,
+	.hashfn = rela_rht_key_hashfn,
+	.obj_hashfn = rela_rht_obj_hashfn,
+};
+
+static int update_rht_and_plt_count(Elf64_Rela *rela,
+		struct rhashtable *elf64_rela_rht, int *plt_count)
+{
+	struct Elf64_Rela_rht_node *lookup_result;
+	struct Elf64_Rela_rht_node *insert_node;
+
+	/*
+	 * Dedupe PLT allocations for multiple branch relocations to the same
+	 * symbol by comparing the symbol index, type and addend.
+	 */
+	lookup_result = rhashtable_lookup(elf64_rela_rht, &rela,
+					      elf64_rela_rht_params);
+
+	if (lookup_result == NULL) {
+		(*plt_count)++;
+		insert_node = kzalloc(sizeof(struct Elf64_Rela_rht_node),
+				GFP_KERNEL);
+		if (!insert_node)
+			return -ENOMEM;
+
+		insert_node->key = rela;
+		return rhashtable_insert_fast(elf64_rela_rht,
+				&insert_node->rhnode, elf64_rela_rht_params);
+	}
+
+	return 0;
+}
+
+static int count_plts(Elf64_Sym *syms, Elf64_Rela *rela, int num,
 			       Elf64_Word dstidx, Elf_Shdr *dstsec)
 {
-	unsigned int ret = 0;
+	struct rhashtable elf64_rela_rht;
+	unsigned int plt_count = 0;
 	Elf64_Sym *s;
 	int i;
+	int err = 0;
+
+	rhashtable_init(&elf64_rela_rht, &elf64_rela_rht_params);
 
 	for (i = 0; i < num; i++) {
 		u64 min_align;
@@ -202,8 +269,15 @@ static unsigned int count_plts(Elf64_Sym *syms, Elf64_Rela *rela, int num,
 			 * having to search the list for duplicates each time we
 			 * emit one.
 			 */
-			if (rela[i].r_addend != 0 || !duplicate_rel(rela, i))
-				ret++;
+			if (rela[i].r_addend != 0) {
+				plt_count++;
+				break;
+			}
+
+			err = update_rht_and_plt_count(rela, &elf64_rela_rht,
+					&plt_count);
+			if (err < 0)
+				goto free_and_destroy_rht;
 			break;
 		case R_AARCH64_ADR_PREL_PG_HI21_NC:
 		case R_AARCH64_ADR_PREL_PG_HI21:
@@ -235,7 +309,7 @@ static unsigned int count_plts(Elf64_Sym *syms, Elf64_Rela *rela, int num,
 			 * instead.
 			 */
 			if (min_align > SZ_4K)
-				ret++;
+				plt_count++;
 			else
 				dstsec->sh_addralign = max(dstsec->sh_addralign,
 							   min_align);
@@ -249,43 +323,11 @@ static unsigned int count_plts(Elf64_Sym *syms, Elf64_Rela *rela, int num,
 		 * Add some slack so we can skip PLT slots that may trigger
 		 * the erratum due to the placement of the ADRP instruction.
 		 */
-		ret += DIV_ROUND_UP(ret, (SZ_4K / sizeof(struct plt_entry)));
+		plt_count += DIV_ROUND_UP(plt_count, (SZ_4K / sizeof(struct plt_entry)));
 
-	return ret;
-}
-
-static bool branch_rela_needs_plt(Elf64_Sym *syms, Elf64_Rela *rela,
-				  Elf64_Word dstidx)
-{
-
-	Elf64_Sym *s = syms + ELF64_R_SYM(rela->r_info);
-
-	if (s->st_shndx == dstidx)
-		return false;
-
-	return ELF64_R_TYPE(rela->r_info) == R_AARCH64_JUMP26 ||
-	       ELF64_R_TYPE(rela->r_info) == R_AARCH64_CALL26;
-}
-
-/* Group branch PLT relas at the front end of the array. */
-static int partition_branch_plt_relas(Elf64_Sym *syms, Elf64_Rela *rela,
-				      int numrels, Elf64_Word dstidx)
-{
-	int i = 0, j = numrels - 1;
-
-	if (!IS_ENABLED(CONFIG_RANDOMIZE_BASE))
-		return 0;
-
-	while (i < j) {
-		if (branch_rela_needs_plt(syms, &rela[i], dstidx))
-			i++;
-		else if (branch_rela_needs_plt(syms, &rela[j], dstidx))
-			swap(rela[i], rela[j]);
-		else
-			j--;
-	}
-
-	return i;
+free_and_destroy_rht:
+	rhashtable_free_and_destroy(&elf64_rela_rht, rela_rht_node_free, NULL);
+	return (err < 0) ? err : plt_count;
 }
 
 int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
@@ -295,7 +337,7 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 	unsigned long init_plts = 0;
 	Elf64_Sym *syms = NULL;
 	Elf_Shdr *pltsec, *tramp = NULL;
-	int i;
+	int i, plt_count_delta;
 
 	/*
 	 * Find the empty .plt section so we can expand it to store the PLT
@@ -324,7 +366,7 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 
 	for (i = 0; i < ehdr->e_shnum; i++) {
 		Elf64_Rela *rels = (void *)ehdr + sechdrs[i].sh_offset;
-		int nents, numrels = sechdrs[i].sh_size / sizeof(Elf64_Rela);
+		int numrels = sechdrs[i].sh_size / sizeof(Elf64_Rela);
 		Elf64_Shdr *dstsec = sechdrs + sechdrs[i].sh_info;
 
 		if (sechdrs[i].sh_type != SHT_RELA)
@@ -334,21 +376,15 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 		if (!(dstsec->sh_flags & SHF_EXECINSTR))
 			continue;
 
-		/*
-		 * sort branch relocations requiring a PLT by type, symbol index
-		 * and addend
-		 */
-		nents = partition_branch_plt_relas(syms, rels, numrels,
-						   sechdrs[i].sh_info);
-		if (nents)
-			sort(rels, nents, sizeof(Elf64_Rela), cmp_rela, NULL);
+		plt_count_delta = count_plts(syms, rels, numrels,
+						 sechdrs[i].sh_info, dstsec);
+		if (plt_count_delta < 0)
+			return plt_count_delta;
 
 		if (!str_has_prefix(secstrings + dstsec->sh_name, ".init"))
-			core_plts += count_plts(syms, rels, numrels,
-						sechdrs[i].sh_info, dstsec);
+			core_plts += plt_count_delta;
 		else
-			init_plts += count_plts(syms, rels, numrels,
-						sechdrs[i].sh_info, dstsec);
+			init_plts += plt_count_delta;
 	}
 
 	pltsec = sechdrs + mod->arch.core.plt_shndx;

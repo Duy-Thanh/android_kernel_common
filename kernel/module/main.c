@@ -2784,12 +2784,14 @@ static int load_module(struct load_info *info, const char __user *uargs,
 		goto free_copy;
 	}
 
+	pr_info("VILAS: Module %s started loading", info->name);
 	/* Figure out module layout, and allocate all the memory. */
 	mod = layout_and_allocate(info, flags);
 	if (IS_ERR(mod)) {
 		err = PTR_ERR(mod);
 		goto free_copy;
 	}
+	pr_info("VILAS: Module %s finished loading", info->name);
 
 	audit_log_kern_module(mod->name);
 
