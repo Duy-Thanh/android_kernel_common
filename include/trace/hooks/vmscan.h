@@ -12,9 +12,38 @@
 DECLARE_RESTRICTED_HOOK(android_rvh_set_balance_anon_file_reclaim,
 			TP_PROTO(bool *balance_anon_file_reclaim),
 			TP_ARGS(balance_anon_file_reclaim), 1);
+
+DECLARE_HOOK(android_vh_dr_path,
+	TP_PROTO(u64 *ext),
+	TP_ARGS(ext));
+
+DECLARE_HOOK(android_vh_reclaim_sc,
+	TP_PROTO(u64 *ext, unsigned long *nr_to_reclaim,
+	struct mem_cgroup *target_mem_cgroup,
+	bool *file_is_tiny, bool *may_writepage),
+	TP_ARGS(ext, nr_to_reclaim, target_mem_cgroup, file_is_tiny, may_writepage));
+
+DECLARE_HOOK(android_vh_continue_reclaim,
+	TP_PROTO(u64 *ext, unsigned long *nr_to_reclaim,
+	unsigned long *nr_reclaimed, bool *continue_reclaim),
+	TP_ARGS(ext, nr_to_reclaim, nr_reclaimed, continue_reclaim));
+
+DECLARE_HOOK(android_vh_do_shrink_slab,
+	TP_PROTO(struct shrinker *shrinker, long *freeable),
+	TP_ARGS(shrinker, freeable));
+
+DECLARE_HOOK(android_vh_psc_bypass,
+	TP_PROTO(bool file_is_tiny, bool *bypass),
+	TP_ARGS(file_is_tiny, bypass));
+
+DECLARE_HOOK(android_vh_shrink_slab_bypass,
+	TP_PROTO(gfp_t gfp_mask, int nid, struct mem_cgroup *memcg, int priority, bool *bypass),
+	TP_ARGS(gfp_mask, nid, memcg, priority, bypass));
+
 DECLARE_HOOK(android_vh_kswapd_per_node,
 	TP_PROTO(int nid, bool *skip, bool run),
 	TP_ARGS(nid, skip, run));
+
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
