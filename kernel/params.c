@@ -940,6 +940,7 @@ static const struct kset_uevent_ops module_uevent_ops = {
 };
 
 struct kset *module_kset;
+EXPORT_SYMBOL(module_kset);
 int module_sysfs_initialized;
 
 static void module_kobj_release(struct kobject *kobj)

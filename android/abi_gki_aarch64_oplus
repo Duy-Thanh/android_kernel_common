@@ -33,6 +33,7 @@
   memory_cgrp_subsys_enabled_key
   mipi_dsi_generic_write
   mmc_wait_for_cmd
+  module_kset
   nf_ct_attach
   nf_ct_delete
   nf_register_net_hooks

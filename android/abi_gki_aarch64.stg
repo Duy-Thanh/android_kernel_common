@@ -370265,6 +370265,15 @@ elf_symbol {
   full_name: "mod_timer_pending"
 }
 elf_symbol {
+  id: 0xdd686c2c
+  name: "module_kset"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x796c1f1b
+  type_id: 0x1457cd38
+  full_name: "module_kset"
+}
+elf_symbol {
   id: 0x7eaf76f6
   name: "module_layout"
   is_defined: true
@@ -409660,6 +409669,10 @@ symbols {
   symbol {
     key: "mod_timer_pending"
     value: 0xe4008a83
+  }
+  symbol {
+    key: "module_kset"
+    value: 0xdd686c2c
   }
   symbol {
     key: "module_layout"
