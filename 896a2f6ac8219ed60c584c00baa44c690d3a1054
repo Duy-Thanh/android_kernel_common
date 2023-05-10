@@ -87,6 +87,30 @@
       },
       "revId": "896a2f6ac8219ed60c584c00baa44c690d3a1054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "902175c9_3abd396b",
+        "filename": "android/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-05-10T21:10:27Z",
+      "side": 1,
+      "message": "Thanks. Sgtm.\n\nhttp://aosp/2585590 \u0026 http://aosp/2585709",
+      "parentUuid": "c374543d_b15ef290",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 67
+      },
+      "revId": "896a2f6ac8219ed60c584c00baa44c690d3a1054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
