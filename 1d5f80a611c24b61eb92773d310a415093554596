@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47bb1777_29a63b31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876910
+      },
+      "writtenOn": "2023-05-10T18:22:19Z",
+      "side": 1,
+      "message": "The ack_platform_integration presubmitfailures are unrelated flakes:\n\n- CtsWebkitTestCases b/259374280 (intermittent)\n- CtsCameraTestCases is a known but hard-to-reproduce flaky test, b/240736770",
+      "revId": "1d5f80a611c24b61eb92773d310a415093554596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
