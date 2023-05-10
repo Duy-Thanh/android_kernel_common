@@ -16,6 +16,24 @@
       "message": "This patch has not been reviewed by anyone from outside MediaTek and is not yet in Martin Petersen\u0027s tree. Shouldn\u0027t the \"upstream first\" policy be followed?",
       "revId": "db5203859ba82e5afb74f43583b1de9dc06cb14d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4e8d200_56a26a15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2023-05-10T08:27:24Z",
+      "side": 1,
+      "message": "The similar change is present on \nkernel 6.1 with commit id - 8e834ca551add86fd549b0830f36ec2f26d08667\nkernel 5.15 with commit id -8e834ca551add86fd549b0830f36ec2f26d08667\nand need this change on 5.10, which is applicable.\n\nWithout this change we will see issue, When a write lock is downgraded to a read lock, if other write locks occur during the downgrade, it can cause a deadlock problem.",
+      "parentUuid": "d463736c_3e5f42bd",
+      "revId": "db5203859ba82e5afb74f43583b1de9dc06cb14d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
