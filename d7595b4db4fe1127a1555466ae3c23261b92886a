@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a7d5021_6aef38f2",
+        "filename": "fs/open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-05-10T04:46:35Z",
+      "side": 1,
+      "message": "Please use blkdev_get_by_path() instead of filp_open() for opening block devices from the kernel. See also commit d4d77629953e (\"block: clean up blkdev_get() wrappers and their users\") in kernel v2.6.38.",
+      "range": {
+        "startLine": 1284,
+        "startChar": 0,
+        "endLine": 1303,
+        "endChar": 35
+      },
+      "revId": "d7595b4db4fe1127a1555466ae3c23261b92886a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
