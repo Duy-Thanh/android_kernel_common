@@ -844,6 +844,8 @@ config SPECULATIVE_PAGE_FAULT
        default y
        depends on ARCH_SUPPORTS_SPECULATIVE_PAGE_FAULT
        depends on MMU && SMP && !NUMA
+       # split ptl lock can result in PTL destruction under RCU
+       depends on !ALLOC_SPLIT_PTLOCKS
        help
          Try to handle user space page faults without holding the mmap_sem.
 
