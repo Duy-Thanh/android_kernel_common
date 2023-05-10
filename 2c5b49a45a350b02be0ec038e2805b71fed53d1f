@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7950b0d_94127c04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-05-10T08:36:54Z",
+      "side": 1,
+      "message": "I have replied on bug. Thanks.",
+      "parentUuid": "fa02f35c_f3fdf6e4",
+      "revId": "2c5b49a45a350b02be0ec038e2805b71fed53d1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92619c45_a2a9c4cc",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b73b29_ee4a9193",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-05-10T08:36:54Z",
+      "side": 1,
+      "message": "Very good suggestion. I will modify as you said. Thanks.",
+      "parentUuid": "92619c45_a2a9c4cc",
+      "revId": "2c5b49a45a350b02be0ec038e2805b71fed53d1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d781bf9_b2c4194b",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-05-04T03:36:55Z",
       "side": 1,
       "message": "It seems like ticks \u0026 should_account are a little duplicative. \n\nIf ticks was set to zero by the hook that would indicate an early return.",
+      "revId": "2c5b49a45a350b02be0ec038e2805b71fed53d1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46c1dab8_d824aa3d",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-05-10T08:36:54Z",
+      "side": 1,
+      "message": "Yes, your are right. Should_account can be removed to keep the functionality.",
+      "parentUuid": "0d781bf9_b2c4194b",
       "revId": "2c5b49a45a350b02be0ec038e2805b71fed53d1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
