@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61bf5bb3_1345ab96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-05-10T15:05:15Z",
+      "side": 1,
+      "message": "Yes, these patches were verified on a Pixel device (arm64), but a lot has changed since 4.x kernels, so you probably need additional changes on newer kernels. The patches in Kees\u0027 old PGO branch above are a better starting point.",
+      "parentUuid": "ddfa00bd_650688fc",
+      "revId": "18cc9fdfb47852720b3cb1e3e6f204593094eeca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49c25aa4_49a406ea",
