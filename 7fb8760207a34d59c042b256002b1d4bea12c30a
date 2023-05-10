@@ -16,6 +16,24 @@
       "message": "Please do not mix several cherry-picks into one patch. Looks like this one is a mix of https://android-review.git.corp.google.com/c/kernel/common/+/2282008 and https://android-review.git.corp.google.com/c/kernel/common/+/2474584. And keep the Change-Id\u0027s the same so that we can easily see where they came from.\n\nYou also never answered my question in https://b.corp.google.com/issues/278602292#comment4 about why these cherry-picks are needed. Do you really see a problem occurring in 5.10 kernel? The patches were designed to fix a problem in 5.15 kernel which has completely different SPF implementation.\n\n-2 until these clarifications are provided.",
       "revId": "7fb8760207a34d59c042b256002b1d4bea12c30a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "700b9454_94583594",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2023-05-10T09:37:23Z",
+      "side": 1,
+      "message": "We were unable to access the two patches you mentioned:\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2282008 \nhttps://android-review.git.corp.google.com/c/kernel/common/+/2474584\n\nTherefore, we have resubmitted the corresponding modifications based on the 5.15 patch, with the same Change-Id:\n5.15 patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/2330194\nOur resubmitted patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/2585394\n\nAs we mentioned in https://b.corp.google.com/issues/278602292, the reason for submitting this change is that when we were running the mmap1 VTS test, we found that repeating the mmap1 test would generally cause a crash within 10 times. The crash stack trace has been attached in commit #1. However, after implementing this change and repeating the mmap1 test multiple times, the system still runs normally.\n\nAdditionally, we only enabled the DEBUG_SPINLOCK macro during debugging, and it is disabled in production use. We have removed the corresponding modification in the latest patch.",
+      "parentUuid": "f912977f_fdf89e06",
+      "revId": "7fb8760207a34d59c042b256002b1d4bea12c30a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
