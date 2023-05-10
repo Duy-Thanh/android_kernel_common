@@ -34,6 +34,24 @@
       "parentUuid": "d463736c_3e5f42bd",
       "revId": "db5203859ba82e5afb74f43583b1de9dc06cb14d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d92ab63d_863b4ebe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-05-10T14:59:41Z",
+      "side": 1,
+      "message": "Please follow the \"upstream first\" policy.",
+      "parentUuid": "e4e8d200_56a26a15",
+      "revId": "db5203859ba82e5afb74f43583b1de9dc06cb14d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
