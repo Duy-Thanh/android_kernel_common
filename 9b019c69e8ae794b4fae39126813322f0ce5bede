@@ -33,6 +33,42 @@
       "message": "Also, why are you compiling this without CONFIG_PM?",
       "revId": "9b019c69e8ae794b4fae39126813322f0ce5bede",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "235340a5_29f280fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896910
+      },
+      "writtenOn": "2023-05-10T01:26:14Z",
+      "side": 1,
+      "message": "We have a common kernel between different product lines: Set-top-box, Cable Modem, DSL/PON SoCs which use android13-5.15 as their upstream. The residential gateway products typically build with CONFIG_PM disabled, not that they necessarily should, but they currently do.\n\nAnother way would be for you within android to catch such build failures/warnings, tinyconfig would have shown it.",
+      "parentUuid": "0756cbf2_e3e53e62",
+      "revId": "9b019c69e8ae794b4fae39126813322f0ce5bede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d545303a_e9fe0765",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896910
+      },
+      "writtenOn": "2023-05-10T01:26:14Z",
+      "side": 1,
+      "message": "The patch in the Fixes: tag is specific to Android. I will resubmit against android13-5.15 then, though the issue exists in both branches.",
+      "parentUuid": "45db8afa_14d45fc1",
+      "revId": "9b019c69e8ae794b4fae39126813322f0ce5bede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
