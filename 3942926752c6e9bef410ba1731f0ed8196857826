@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe61c24_c8608db8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-10T10:06:28Z",
+      "side": 1,
+      "message": "This breaks the kernel API, sorry, that is not allowed for released branches like this.\n\nIf you build the branch locally yourself, you will see the breakages, please read the GKI kernel api documentation for how to do this, and if needed, how to resolve the issue.",
+      "revId": "3942926752c6e9bef410ba1731f0ed8196857826",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
