@@ -16,6 +16,23 @@
       "message": "We don\u0027t take changes into this branch. If this is really android tree specific you want to push it to android13-5.15.\n\nIs this not an issue upstream?",
       "revId": "9b019c69e8ae794b4fae39126813322f0ce5bede",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0756cbf2_e3e53e62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-05-10T01:19:10Z",
+      "side": 1,
+      "message": "Also, why are you compiling this without CONFIG_PM?",
+      "revId": "9b019c69e8ae794b4fae39126813322f0ce5bede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
