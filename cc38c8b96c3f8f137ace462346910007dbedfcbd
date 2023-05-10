@@ -248,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cb85d58_61adc458",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2517,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-10T21:19:34Z",
+      "side": 1,
+      "message": "Understand how global won\u0027t work after discussion. Need to refactor this somehow to use per device vds \u0026 queues",
+      "parentUuid": "2aaf1b3a_b41dd55d",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e9e04aa_8894566f",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 4
