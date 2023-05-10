@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddfa00bd_650688fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2007336
+      },
+      "writtenOn": "2023-05-10T06:09:23Z",
+      "side": 1,
+      "message": "Hi Sami, have you ever verified PGO on arm/arm64 platform or have someone else tried this? We tried in arm64 (kernel 5.15) and it didn\u0027t work because of some unknown reasons. It seems that the code of lds does not fit.",
+      "parentUuid": "9f6abdb3_c47e053d",
+      "revId": "18cc9fdfb47852720b3cb1e3e6f204593094eeca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49c25aa4_49a406ea",
