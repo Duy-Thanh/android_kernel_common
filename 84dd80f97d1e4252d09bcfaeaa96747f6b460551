@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "316a24a7_d63dcc81",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2023-05-10T21:52:13Z",
+      "side": 1,
+      "message": "Needing only \"FROMLIST:\"?",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "84dd80f97d1e4252d09bcfaeaa96747f6b460551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
