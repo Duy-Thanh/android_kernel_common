@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e6af872_fd79aea8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-05-10T13:27:08Z",
+      "side": 1,
+      "message": "Dear Sir,\n\nThis series has been split since commits related to the freezer (aosp/2564612) may take time to be accepted. Could you please review the patches in the current series separately? Thank you.",
+      "revId": "05a389c6bacd6abdaf6351316b4300affa11fcc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
