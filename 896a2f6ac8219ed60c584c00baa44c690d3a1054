@@ -63,6 +63,30 @@
       },
       "revId": "896a2f6ac8219ed60c584c00baa44c690d3a1054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c374543d_b15ef290",
+        "filename": "android/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-10T13:19:54Z",
+      "side": 1,
+      "message": "According to the documentation, `\u0027*\u0027 matches any string that does not include slashes`. So, I would say that should work. But I am afraid testing in production is the only option. But any change would be easy to revert.\n\nhttps://android-review.googlesource.com/plugins/code-owners/Documentation/backend-find-owners.html#perFile\n\nhttps://android-review.googlesource.com/plugins/code-owners/Documentation/path-expressions.html#globs",
+      "parentUuid": "084b25d9_3eeb5933",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 67
+      },
+      "revId": "896a2f6ac8219ed60c584c00baa44c690d3a1054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
