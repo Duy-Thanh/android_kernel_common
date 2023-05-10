@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d845164_e44e90cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876910
+      },
+      "writtenOn": "2023-05-10T15:45:38Z",
+      "side": 1,
+      "message": "All of the ack_platform_integration \"Oxygen ran out of capacity to lease virtual device\" presubmit failures are infrastructure problems, b/281830939 and b/281727095.",
+      "revId": "801755536713395671144a804e524509e5b7106d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
