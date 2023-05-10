@@ -16,6 +16,24 @@
       "message": "As I asked before in https://b.corp.google.com/issues/279161171#comment2, this needs to be proposed in upstream Linux before it can be accepted in Android.",
       "revId": "2bf8061410a8a0e1321eb84db9102bf71109905c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cff0ad8_c8e6b9cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2023-05-10T09:38:55Z",
+      "side": 1,
+      "message": "The patch is send to upstream Linux, please help to review, thanks.\nhttps://lore.kernel.org/linux-iommu/18448ae569e24dfd84e811081ede376f@hihonor.com/T/",
+      "parentUuid": "e1264f18_b4d64443",
+      "revId": "2bf8061410a8a0e1321eb84db9102bf71109905c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
