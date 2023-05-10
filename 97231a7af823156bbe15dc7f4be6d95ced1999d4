@@ -105,6 +105,24 @@
       "parentUuid": "b07c21ea_c851b2f6",
       "revId": "97231a7af823156bbe15dc7f4be6d95ced1999d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a97dc1fd_55249317",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-10T10:08:59Z",
+      "side": 1,
+      "message": "If you create the patches in a way so that the ABI is not broken, yes, we will be glad to review it.  Please read the GKI kernel documentation for how to do this.\n\nAnd there is not going to be any more 5.10 kernel branches, sorry.  As for the ABI schedule, please see the documentation for that too.",
+      "parentUuid": "b61ca969_fe0dcaa4",
+      "revId": "97231a7af823156bbe15dc7f4be6d95ced1999d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
