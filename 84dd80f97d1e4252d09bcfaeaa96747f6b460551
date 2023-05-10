@@ -22,6 +22,30 @@
       },
       "revId": "84dd80f97d1e4252d09bcfaeaa96747f6b460551",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b11ba15b_ff1ec338",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-05-10T22:45:10Z",
+      "side": 1,
+      "message": "This patch makes a big difference for users of UFS devices. Unfortunately it seems like Jens is not interested in this patch. I posted this patch on the linux-block mailing list but I haven\u0027t seen any feedback from Jens on this patch.",
+      "parentUuid": "316a24a7_d63dcc81",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "84dd80f97d1e4252d09bcfaeaa96747f6b460551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
