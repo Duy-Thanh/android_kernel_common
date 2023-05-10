@@ -546,6 +546,7 @@ struct request_queue {
 	struct mutex		debugfs_mutex;
 
 	bool			mq_sysfs_init_done;
+	ANDROID_OEM_DATA(1);
 
 	/**
 	 * @srcu: Sleepable RCU. Use as lock when type of the request queue
