@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fd2c2b3_413ec404",
+        "filename": "drivers/android/context.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-11T21:20:48Z",
+      "side": 1,
+      "message": "Documentation here would be helpful. What does this manage?",
+      "revId": "33a9a8957722dc05c5826f362ec3410f6e3b4b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e415861a_d78b30d2",
+        "filename": "drivers/android/defs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-11T21:20:48Z",
+      "side": 1,
+      "message": "Documenting these would be helpful. Other places in the kernel put a quick sentence for each enum/flag.",
+      "revId": "33a9a8957722dc05c5826f362ec3410f6e3b4b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd4ac00e_a373ed38",
+        "filename": "drivers/android/node.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-11T21:20:48Z",
+      "side": 1,
+      "message": "A top level comment about what a node is and how it works would be helpful.",
+      "revId": "33a9a8957722dc05c5826f362ec3410f6e3b4b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db664fb5_6a3fde73",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-11T21:20:48Z",
+      "side": 1,
+      "message": "A top level comment about how this file interacts with processes would be helpful.",
+      "revId": "33a9a8957722dc05c5826f362ec3410f6e3b4b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ec1a32_cf68cd19",
+        "filename": "drivers/android/rust_binder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-11T21:20:48Z",
+      "side": 1,
+      "message": "Documentation about this trait would be helpful. What is the purpose of the trait and when should a struct implement it?",
+      "revId": "33a9a8957722dc05c5826f362ec3410f6e3b4b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "507bd7a9_5e89409e",
+        "filename": "drivers/android/rust_binder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-11T21:20:48Z",
+      "side": 1,
+      "message": "Documentation about `thread` and `writer` would be helpful.",
+      "revId": "33a9a8957722dc05c5826f362ec3410f6e3b4b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fd03dd8_6acba14e",
+        "filename": "drivers/android/rust_binder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-11T21:20:48Z",
+      "side": 1,
+      "message": "Some comments about the use case of this struct would be helpful. Does this deliver return codes?",
+      "revId": "33a9a8957722dc05c5826f362ec3410f6e3b4b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4883c62_75342ac8",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-11T21:20:48Z",
+      "side": 1,
+      "message": "A top level comment about how this file interacts with threads would be helpful.",
+      "revId": "33a9a8957722dc05c5826f362ec3410f6e3b4b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
