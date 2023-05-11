@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdf6fd77_3f87b143",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-11T12:21:17Z",
+      "side": 1,
+      "message": "removing symbols is an ABI breakage and as such this needs to wait until the next ABI break in ~2 weeks. If you need the symbols that got added here earlier, please submit a separate patch.",
+      "revId": "758e7a2b55f503602aee6150b8359d7840aa57a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
