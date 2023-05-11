@@ -52,6 +52,24 @@
       "parentUuid": "bb5c2999_af53f615",
       "revId": "4e3d7dced7e48761a2659c1dde533eca75c86417",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c4d4154_3ac0354c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1668107
+      },
+      "writtenOn": "2023-05-11T00:29:23Z",
+      "side": 1,
+      "message": "I can not see this patches. Because, It\u0027s blocked by permission.\nIt need to google account.\nLook\u0027s like this. \"Username*: jh0801.jung@google.com\"\nSo, We could not know progress of the other vendor\u0027s AOSP patches status.",
+      "parentUuid": "4e722519_7e055cc6",
+      "revId": "4e3d7dced7e48761a2659c1dde533eca75c86417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
