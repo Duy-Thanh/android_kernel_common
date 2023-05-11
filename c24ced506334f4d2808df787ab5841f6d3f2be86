@@ -16,6 +16,24 @@
       "message": "The patch description doesn\u0027t look correct to me. There can\u0027t be a race condition since the slave_alloc and slave_configure callback invocations are serialized. Can the issue that has been observed by modifying the code that is invoked by the callback function invoked by the tracepoint?",
       "revId": "c24ced506334f4d2808df787ab5841f6d3f2be86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d6761c_76f61605",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1989961
+      },
+      "writtenOn": "2023-05-11T03:31:10Z",
+      "side": 1,
+      "message": "This isn\u0027t racing issue, but it will call trace_android_vh_ufs_update_sdev(sdev) twice in ufs init flow. So we want to remove redundant function call.",
+      "parentUuid": "45b2acd2_158ccf75",
+      "revId": "c24ced506334f4d2808df787ab5841f6d3f2be86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
