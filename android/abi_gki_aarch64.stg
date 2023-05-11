@@ -24726,6 +24726,11 @@ pointer_reference {
   pointee_type_id: 0xf7842e25
 }
 pointer_reference {
+  id: 0x3771eb5c
+  kind: POINTER
+  pointee_type_id: 0xf7874bee
+}
+pointer_reference {
   id: 0x37765a7c
   kind: POINTER
   pointee_type_id: 0xf7998f6d
@@ -32984,6 +32989,11 @@ qualified {
   id: 0xf784797b
   qualifier: CONST
   qualified_type_id: 0xae565365
+}
+qualified {
+  id: 0xf7874bee
+  qualifier: CONST
+  qualified_type_id: 0xae5a9933
 }
 qualified {
   id: 0xf824f490
@@ -290183,6 +290193,11 @@ function {
   parameter_id: 0xf1a6dfed
 }
 function {
+  id: 0x658bb664
+  return_type_id: 0x0130219f
+  parameter_id: 0x0130219f
+}
+function {
   id: 0x65d68df5
   return_type_id: 0x1977e57b
   parameter_id: 0x0c2e195c
@@ -291701,6 +291716,12 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x89207050
+  return_type_id: 0x01ace255
+  parameter_id: 0x3771eb5c
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x892fc913
   return_type_id: 0x3a433e0e
   parameter_id: 0x2e8d5f05
@@ -292908,6 +292929,12 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x4585663f
   parameter_id: 0x0b30ee00
+}
+function {
+  id: 0x90d9386e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x35d510c3
+  parameter_id: 0x0b27dc43
 }
 function {
   id: 0x90d96c90
@@ -307560,6 +307587,12 @@ function {
   parameter_id: 0x00dd92af
 }
 function {
+  id: 0x9d15c1e0
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x00c72527
+}
+function {
   id: 0x9d15cbb3
   return_type_id: 0x6720d32f
   parameter_id: 0x060cf413
@@ -310611,6 +310644,14 @@ function {
   parameter_id: 0x07f2af49
   parameter_id: 0xc9082b19
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x9f41a9bc
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0d7ce7cc
+  parameter_id: 0x6720d32f
+  parameter_id: 0x0483e6f8
+  parameter_id: 0xf435685e
 }
 function {
   id: 0x9f431aa6
@@ -317750,6 +317791,15 @@ elf_symbol {
   crc: 0xad9087eb
   type_id: 0x915b6659
   full_name: "__mdiobus_read"
+}
+elf_symbol {
+  id: 0xa5f70021
+  name: "__mdiobus_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd5f22d34
+  type_id: 0x90d9386e
+  full_name: "__mdiobus_register"
 }
 elf_symbol {
   id: 0xc8acd38c
@@ -330250,6 +330300,15 @@ elf_symbol {
   full_name: "dev_get_stats"
 }
 elf_symbol {
+  id: 0x34feac51
+  name: "dev_get_tstats64"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe779a330
+  type_id: 0x1c378d7a
+  full_name: "dev_get_tstats64"
+}
+elf_symbol {
   id: 0x87df61b4
   name: "dev_getbyhwaddr_rcu"
   is_defined: true
@@ -338422,6 +338481,15 @@ elf_symbol {
   full_name: "eth_mac_addr"
 }
 elf_symbol {
+  id: 0xdef4bdce
+  name: "eth_platform_get_mac_address"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2a068293
+  type_id: 0x9d15c1e0
+  full_name: "eth_platform_get_mac_address"
+}
+elf_symbol {
   id: 0xeeed0fcd
   name: "eth_prepare_mac_addr_change"
   is_defined: true
@@ -345392,6 +345460,15 @@ elf_symbol {
   full_name: "kmalloc_large"
 }
 elf_symbol {
+  id: 0x158dfa03
+  name: "kmalloc_large_node"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x48d3fa27
+  type_id: 0x6844b8ad
+  full_name: "kmalloc_large_node"
+}
+elf_symbol {
   id: 0xa64fdec4
   name: "kmalloc_node_trace"
   is_defined: true
@@ -349204,6 +349281,15 @@ elf_symbol {
   full_name: "netif_set_tso_max_segs"
 }
 elf_symbol {
+  id: 0x1d1d3e9f
+  name: "netif_set_tso_max_size"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe2bbffb8
+  type_id: 0x1d27ccfe
+  full_name: "netif_set_tso_max_size"
+}
+elf_symbol {
   id: 0x5f6243cf
   name: "netif_stacked_transfer_operstate"
   is_defined: true
@@ -352825,6 +352911,15 @@ elf_symbol {
   full_name: "phy_disconnect"
 }
 elf_symbol {
+  id: 0xb39736f6
+  name: "phy_do_ioctl_running"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf2648d7b
+  type_id: 0x91e86e2c
+  full_name: "phy_do_ioctl_running"
+}
+elf_symbol {
   id: 0x9d35d830
   name: "phy_drivers_register"
   is_defined: true
@@ -353264,6 +353359,15 @@ elf_symbol {
   crc: 0x227734e0
   type_id: 0x1cc5f9b2
   full_name: "phy_support_sym_pause"
+}
+elf_symbol {
+  id: 0x2c0117f0
+  name: "phy_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4867185a
+  type_id: 0x91dd4b0e
+  full_name: "phy_suspend"
 }
 elf_symbol {
   id: 0xa3314c5c
@@ -367517,6 +367621,15 @@ elf_symbol {
   full_name: "usb_alloc_urb"
 }
 elf_symbol {
+  id: 0xd95773fe
+  name: "usb_altnum_to_altsetting"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8c5d99d6
+  type_id: 0x89207050
+  full_name: "usb_altnum_to_altsetting"
+}
+elf_symbol {
   id: 0x805677f0
   name: "usb_amd_dev_put"
   is_defined: true
@@ -367832,6 +367945,15 @@ elf_symbol {
   full_name: "usb_driver_release_interface"
 }
 elf_symbol {
+  id: 0xd0fc1c2a
+  name: "usb_driver_set_configuration"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x59e49128
+  type_id: 0x9f435990
+  full_name: "usb_driver_set_configuration"
+}
+elf_symbol {
   id: 0x79e3481b
   name: "usb_enable_autosuspend"
   is_defined: true
@@ -367839,6 +367961,15 @@ elf_symbol {
   crc: 0xe58824ae
   type_id: 0x13c76860
   full_name: "usb_enable_autosuspend"
+}
+elf_symbol {
+  id: 0x5eaa090d
+  name: "usb_enable_lpm"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x20f0e672
+  type_id: 0x13c76860
+  full_name: "usb_enable_lpm"
 }
 elf_symbol {
   id: 0x3fdad193
@@ -368217,6 +368348,15 @@ elf_symbol {
   crc: 0x4acbb603
   type_id: 0x6a442bfd
   full_name: "usb_get_role_switch_default_mode"
+}
+elf_symbol {
+  id: 0x0fbcda2f
+  name: "usb_get_urb"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x63719f4b
+  type_id: 0x658bb664
+  full_name: "usb_get_urb"
 }
 elf_symbol {
   id: 0xf4436b91
@@ -368642,6 +368782,15 @@ elf_symbol {
   full_name: "usb_remove_phy"
 }
 elf_symbol {
+  id: 0xe3f9d54d
+  name: "usb_reset_configuration"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb9374456
+  type_id: 0x9edfdadc
+  full_name: "usb_reset_configuration"
+}
+elf_symbol {
   id: 0xd80a0cec
   name: "usb_reset_device"
   is_defined: true
@@ -368984,6 +369133,15 @@ elf_symbol {
   full_name: "usb_store_new_id"
 }
 elf_symbol {
+  id: 0xecf36ba9
+  name: "usb_string"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x76201be1
+  type_id: 0x9f41a9bc
+  full_name: "usb_string"
+}
+elf_symbol {
   id: 0x9299d069
   name: "usb_string_id"
   is_defined: true
@@ -369018,6 +369176,15 @@ elf_symbol {
   crc: 0xec9ca726
   type_id: 0x10d459f4
   full_name: "usb_unanchor_urb"
+}
+elf_symbol {
+  id: 0x0741c87d
+  name: "usb_unlink_urb"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb52f224e
+  type_id: 0x9dcceb48
+  full_name: "usb_unlink_urb"
 }
 elf_symbol {
   id: 0x3bf4fac5
@@ -373494,6 +373661,10 @@ symbols {
   symbol {
     key: "__mdiobus_read"
     value: 0x040ec563
+  }
+  symbol {
+    key: "__mdiobus_register"
+    value: 0xa5f70021
   }
   symbol {
     key: "__mdiobus_write"
@@ -379056,6 +379227,10 @@ symbols {
     value: 0x0b0c0190
   }
   symbol {
+    key: "dev_get_tstats64"
+    value: 0x34feac51
+  }
+  symbol {
     key: "dev_getbyhwaddr_rcu"
     value: 0x87df61b4
   }
@@ -382680,6 +382855,10 @@ symbols {
     value: 0x3179c651
   }
   symbol {
+    key: "eth_platform_get_mac_address"
+    value: 0xdef4bdce
+  }
+  symbol {
     key: "eth_prepare_mac_addr_change"
     value: 0xeeed0fcd
   }
@@ -385776,6 +385955,10 @@ symbols {
     value: 0x98b2ed59
   }
   symbol {
+    key: "kmalloc_large_node"
+    value: 0x158dfa03
+  }
+  symbol {
     key: "kmalloc_node_trace"
     value: 0xa64fdec4
   }
@@ -387472,6 +387655,10 @@ symbols {
     value: 0xdbff81b0
   }
   symbol {
+    key: "netif_set_tso_max_size"
+    value: 0x1d1d3e9f
+  }
+  symbol {
     key: "netif_stacked_transfer_operstate"
     value: 0x5f6243cf
   }
@@ -389080,6 +389267,10 @@ symbols {
     value: 0x5ebc16d0
   }
   symbol {
+    key: "phy_do_ioctl_running"
+    value: 0xb39736f6
+  }
+  symbol {
     key: "phy_drivers_register"
     value: 0x9d35d830
   }
@@ -389274,6 +389465,10 @@ symbols {
   symbol {
     key: "phy_support_sym_pause"
     value: 0xf1503ace
+  }
+  symbol {
+    key: "phy_suspend"
+    value: 0x2c0117f0
   }
   symbol {
     key: "phy_trigger_machine"
@@ -395612,6 +395807,10 @@ symbols {
     value: 0xaf52d437
   }
   symbol {
+    key: "usb_altnum_to_altsetting"
+    value: 0xd95773fe
+  }
+  symbol {
     key: "usb_amd_dev_put"
     value: 0x805677f0
   }
@@ -395752,8 +395951,16 @@ symbols {
     value: 0x8483fc3d
   }
   symbol {
+    key: "usb_driver_set_configuration"
+    value: 0xd0fc1c2a
+  }
+  symbol {
     key: "usb_enable_autosuspend"
     value: 0x79e3481b
+  }
+  symbol {
+    key: "usb_enable_lpm"
+    value: 0x5eaa090d
   }
   symbol {
     key: "usb_ep_alloc_request"
@@ -395922,6 +396129,10 @@ symbols {
   symbol {
     key: "usb_get_role_switch_default_mode"
     value: 0xaaff2220
+  }
+  symbol {
+    key: "usb_get_urb"
+    value: 0x0fbcda2f
   }
   symbol {
     key: "usb_gstrings_attach"
@@ -396112,6 +396323,10 @@ symbols {
     value: 0x58937c87
   }
   symbol {
+    key: "usb_reset_configuration"
+    value: 0xe3f9d54d
+  }
+  symbol {
     key: "usb_reset_device"
     value: 0xd80a0cec
   }
@@ -396264,6 +396479,10 @@ symbols {
     value: 0x087c6f6c
   }
   symbol {
+    key: "usb_string"
+    value: 0xecf36ba9
+  }
+  symbol {
     key: "usb_string_id"
     value: 0x9299d069
   }
@@ -396278,6 +396497,10 @@ symbols {
   symbol {
     key: "usb_unanchor_urb"
     value: 0x4eea2829
+  }
+  symbol {
+    key: "usb_unlink_urb"
+    value: 0x0741c87d
   }
   symbol {
     key: "usb_unpoison_urb"
