@@ -16,6 +16,23 @@
       "message": "Hi Todd, could you please help merge this backport patch to fix the racing issue that occurred on Vivo?",
       "revId": "1c68b52e12ebc53b323eb0bd4cf240b75f954a4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26b391ca_a5820f58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885655
+      },
+      "writtenOn": "2023-05-11T13:47:48Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nFor fix vivo phones\u0027 bug in suspend/resume test, we want to sync the following patchs:\nhttps://android.googlesource.com/kernel/common/+/f5c2976e0cb0f6236013bfb479868531b04f61d4",
+      "revId": "1c68b52e12ebc53b323eb0bd4cf240b75f954a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
