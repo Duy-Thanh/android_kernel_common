@@ -118,6 +118,30 @@
       },
       "revId": "84dd80f97d1e4252d09bcfaeaa96747f6b460551",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7bf1833_1f00e1d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-05-11T03:07:27Z",
+      "side": 1,
+      "message": "There are two links in the patch description. The first link refers to a patch that led to this patch. The second link shows that this patch has been posted upstream in January.\n\nSo far no feedback has been received from the block layer maintainer. I sent Jens a reminder earlier today as one can see here: https://lore.kernel.org/linux-block/8947b1be-3dfb-4c9f-469f-d1c31d1ec994@acm.org/",
+      "parentUuid": "fc254ff6_922c4c58",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "84dd80f97d1e4252d09bcfaeaa96747f6b460551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
