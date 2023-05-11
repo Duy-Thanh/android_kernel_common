@@ -52,6 +52,24 @@
       "parentUuid": "b6d6761c_76f61605",
       "revId": "c24ced506334f4d2808df787ab5841f6d3f2be86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1d1f63a_161d70fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1989961
+      },
+      "writtenOn": "2023-05-11T14:28:00Z",
+      "side": 1,
+      "message": "For both Android12-5.10 and Android13-5.15 call trace_android_vh_ufs_update_sdev(sdev) in ufshcd_slave_configure().\nhttps://android-review.googlesource.com/q/I09bf9cba33412c81e4da83292772c0e95cf32022\n\nAnd this patch add it in ufshcd_slave_alloc()\n2431352: ANDROID: vendor_hooks: Add hooks for ufs scheduler | https://android-review.googlesource.com/c/kernel/common/+/2431352\n\nI will ask Qcom whether it can be removed for Andorid14-6.1",
+      "parentUuid": "29c16117_b44243a9",
+      "revId": "c24ced506334f4d2808df787ab5841f6d3f2be86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
