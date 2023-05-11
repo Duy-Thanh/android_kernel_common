@@ -34,6 +34,24 @@
       "parentUuid": "45b2acd2_158ccf75",
       "revId": "c24ced506334f4d2808df787ab5841f6d3f2be86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c16117_b44243a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-05-11T13:36:30Z",
+      "side": 1,
+      "message": "Is anyone else using the ufs_update_sdev tracepoint? Will this CL break other users that depend on the tracepoint being called twice?",
+      "parentUuid": "b6d6761c_76f61605",
+      "revId": "c24ced506334f4d2808df787ab5841f6d3f2be86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
