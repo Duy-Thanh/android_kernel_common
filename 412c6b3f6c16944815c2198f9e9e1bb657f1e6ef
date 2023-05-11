@@ -33,6 +33,24 @@
       "message": "When I prepare to rebase this commit, \u0027CRC changed\u0027 is found in log.\n\nINFO: function symbol \u0027int snd_usb_power_domain_set(struct snd_usb_audio*, struct snd_usb_power_domain*, unsigned char)\u0027 changed\n  CRC changed from 0xf4ff4ee5 to 0xb29e40d5\n\nIf this is a desired (or expected) change, I\u0027ll push with this CRC change, or if not, I\u0027ll wait until next chance.",
       "revId": "412c6b3f6c16944815c2198f9e9e1bb657f1e6ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bebc1ec_39b90e06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-11T14:10:38Z",
+      "side": 1,
+      "message": "Yeah, we had a collision with the recent KMI update, please rebase onto aosp/2584291 which has the fix.",
+      "parentUuid": "345743fc_d717f991",
+      "revId": "412c6b3f6c16944815c2198f9e9e1bb657f1e6ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
