@@ -86,6 +86,24 @@
       "message": "Is there a reason why this was changed from dev_dbg() to dev_err() which may cause log spam for every timedout req?",
       "revId": "1c68b52e12ebc53b323eb0bd4cf240b75f954a4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36282794_a65028dc",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2898,
+      "author": {
+        "id": 1885655
+      },
+      "writtenOn": "2023-05-12T01:58:53Z",
+      "side": 1,
+      "message": "Hi Sandeep,\n\nThank you for your reply! I think dev_err helps the dump analysis tool to quickly locate this issue through keywords.Anyway, let me change back to dev_dbg.",
+      "parentUuid": "e4892902_f1fa421c",
+      "revId": "1c68b52e12ebc53b323eb0bd4cf240b75f954a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
