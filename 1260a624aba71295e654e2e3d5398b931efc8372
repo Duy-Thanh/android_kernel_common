@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86e50431_97b9a135",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1949775
+      },
+      "writtenOn": "2023-05-12T06:35:33Z",
+      "side": 1,
+      "message": "Android14 introduce a new MICRO:CREATE_TRACE_POINTS. direct cherry-pick operarion would cause compile error.",
+      "parentUuid": "404f0b35_d2f1c1bf",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "1260a624aba71295e654e2e3d5398b931efc8372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae02bab2_204719f6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
