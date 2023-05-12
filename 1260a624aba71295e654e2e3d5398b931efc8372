@@ -86,6 +86,24 @@
       "message": "Create a patch for the symbol list update for these new symbols on top of this patch. The symbol list update must be in the same series.",
       "revId": "1260a624aba71295e654e2e3d5398b931efc8372",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "088f05ce_1d8ada51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1949775
+      },
+      "writtenOn": "2023-05-12T06:40:42Z",
+      "side": 1,
+      "message": "The vendor abi file for our company(honor) has not been created yet, the new abi file in this patch would introduce a merge conflict.\nas far as I know, vendor hooks mush be merged to Android14-5.15 before May 15. \nWe want to upload these vendor hook patches for review firstly.",
+      "parentUuid": "6ccaf786_6dc14687",
+      "revId": "1260a624aba71295e654e2e3d5398b931efc8372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
