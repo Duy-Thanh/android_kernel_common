@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cbe2e40_3dbd3536",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-12T20:09:31Z",
+      "side": 1,
+      "message": "Elf64_Rela_rht_[entry/node]?",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123aad51_6d75db21",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-12T20:09:31Z",
+      "side": 1,
+      "message": "I don\u0027t think you need to allocate a separate rela entry and copy the information from the rela array into it. A pointer to the data you\u0027re currently copying should be sufficient.",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a079776_ff7ee0c4",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-12T20:09:31Z",
+      "side": 1,
+      "message": "s/* arg/*arg",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a73ae1f_eee70de7",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-12T20:09:31Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right. cmp_rela is meant to compare two relocation entries, but here you\u0027re passing a pointer to a `struct Elf64_entry`, not the relocation entry.",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0f28cc_09658e7d",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-12T20:09:31Z",
+      "side": 1,
+      "message": "nit: elf64_rela_rht instead of entries?",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a240729_a406e1ce",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-12T20:09:31Z",
+      "side": 1,
+      "message": "You need to free the previous entries (if any) and destroy the hashtable as well. You\u0027ll also have to do that at the end of the function before returning, so it might be useful to write this as:\n\n```\nif (!e) {\n        ret \u003d -ENOMEM;\n        goto free_rht;\n}\n\n...\n\nfree_rht:\n       rhashtable_free_and_destroy(...);\n       return ret; \n```\n\nAnd keep in mind that this changes the behavior of `count_plts()`; IOW it can now return a negative value.",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b3169c_f0ec9a65",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-12T20:09:31Z",
+      "side": 1,
+      "message": "It\u0027s probably best if you modify the implementation of `duplicate_rel()` to take in and operate on the hash table instead?",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13048ba5_e28bfd5f",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-12T20:09:31Z",
+      "side": 1,
+      "message": "remove newline?",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
