@@ -128,6 +128,24 @@
       "parentUuid": "6ccaf786_6dc14687",
       "revId": "1260a624aba71295e654e2e3d5398b931efc8372",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05c12a5_98d3baec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-12T12:56:36Z",
+      "side": 1,
+      "message": "There is no deadline to add new vendor hooks, they can be added at any point in time as they do not change the abi except add to it (which can be done at any time.)\n\nSo there is no rush here, please get it correct, and add the honor abi file so we can review it properly.  If hooks are unused and not in the symbol tables, they will be automatically removed when we sweep the tree every few weeks.",
+      "parentUuid": "088f05ce_1d8ada51",
+      "revId": "1260a624aba71295e654e2e3d5398b931efc8372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
