@@ -80,6 +80,8 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/tlb.h>
 #include <trace/events/migrate.h>
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
 
 #include "internal.h"
 
@@ -1268,6 +1270,7 @@ void page_add_new_anon_rmap(struct page *page,
 	}
 	__mod_lruvec_page_state(page, NR_ANON_MAPPED, nr);
 	__page_set_anon_rmap(page, vma, address, 1);
+	trace_android_vh_page_add_new_anon_rmap(page, vma, address);
 }
 
 /**
