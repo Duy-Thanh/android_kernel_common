@@ -104,6 +104,24 @@
       "parentUuid": "e4892902_f1fa421c",
       "revId": "1c68b52e12ebc53b323eb0bd4cf240b75f954a4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43960d2a_b1202773",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2898,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-05-12T17:34:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36282794_a65028dc",
+      "revId": "1c68b52e12ebc53b323eb0bd4cf240b75f954a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
