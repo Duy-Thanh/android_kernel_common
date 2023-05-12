@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e13792ea_8f6c91d7",
+        "filename": "mm/rmap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-12T23:44:23Z",
+      "side": 1,
+      "message": "You don\u0027t need to explain all the details. Just say that you need these helpers to avoid including \u003ctrace/hooks/mm.h\u003e into mm_inline.h\n\nFormat the lines not to exceed 80 chars.",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 3
+      },
+      "revId": "268b37714c2c1ce36fba0eede5264dfab31fb32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
