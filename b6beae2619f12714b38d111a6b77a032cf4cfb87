@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6acbb6a5_19526fc3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-05-12T03:53:11Z",
+      "side": 1,
+      "message": "It makes the explanation more clear. Thanks for the suggestion and I will modify like this.",
+      "parentUuid": "5fa654fd_db7f2bdd",
+      "revId": "b6beae2619f12714b38d111a6b77a032cf4cfb87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9389d964_eb31ef3a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
