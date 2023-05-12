@@ -16,6 +16,23 @@
       "message": "Notes based on this afternoon\u0027s sync call.",
       "revId": "fd038706498948a82d2848305824a4b93d214740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4eb26ca_d1b442d8",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-12T20:40:36Z",
+      "side": 1,
+      "message": "I don\u0027t see how your code handles this. There is only a dev_info message in your code that processes the TIPC_CTRL_MSGTYPE_REUSE_MSGBUF_RSP message.",
+      "revId": "fd038706498948a82d2848305824a4b93d214740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
