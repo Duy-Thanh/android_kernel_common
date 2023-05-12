@@ -16,6 +16,29 @@
       "message": "How will the offset and size arguments for the partial sync function call be provided from this path?",
       "revId": "a78030ea19d30c384a86c751e3ee79dcc129b0ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4631c194_6af4e552",
+        "filename": "include/trace/hooks/dmabuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-12T16:27:52Z",
+      "side": 1,
+      "message": "Please also fix the long lines.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 97
+      },
+      "revId": "a78030ea19d30c384a86c751e3ee79dcc129b0ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
