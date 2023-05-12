@@ -33,6 +33,24 @@
       "message": "I don\u0027t see how your code handles this. There is only a dev_info message in your code that processes the TIPC_CTRL_MSGTYPE_REUSE_MSGBUF_RSP message.",
       "revId": "fd038706498948a82d2848305824a4b93d214740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd7bac09_ded3b95c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-12T21:05:39Z",
+      "side": 1,
+      "message": "The behavior on Linux is the same whether or not Trusty is unmapping each message buffer. It just needs to signal to Trusty that it has the capability of reusing mappings and will not reclaim every time. This is why it\u0027s just an info message if Trusty does support. Additional changed behavior on Linux side is reusing rx buffers instead of allocating one each time it is submitted to the virtqueue for a incoming message.",
+      "parentUuid": "e4eb26ca_d1b442d8",
+      "revId": "fd038706498948a82d2848305824a4b93d214740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
