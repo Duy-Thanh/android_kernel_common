@@ -51,6 +51,24 @@
       "parentUuid": "e4eb26ca_d1b442d8",
       "revId": "fd038706498948a82d2848305824a4b93d214740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74dc676f_f8bffd29",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-12T21:30:12Z",
+      "side": 1,
+      "message": "The Linux behavior might be the same on that code path, but once you get the code that sends TIPC_CTRL_MSGTYPE_UNMAP_REQ, I don\u0027t see how this would work correctly with an old trusty image.",
+      "parentUuid": "fd7bac09_ded3b95c",
+      "revId": "fd038706498948a82d2848305824a4b93d214740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
