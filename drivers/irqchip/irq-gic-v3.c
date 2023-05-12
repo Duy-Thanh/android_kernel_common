@@ -137,6 +137,16 @@ enum gic_intid_range {
 	__INVALID_RANGE__
 };
 
+int __read_mostly gic_aff_quirk;
+static int __init gic_aff_quirk_setup(char *str)
+{
+	get_option(&str, &gic_aff_quirk);
+	return 1;
+}
+__setup("gic500_aff_shift=", gic_aff_quirk_setup);
+
+#define AFF_SHIFT(aff)		(aff >> gic_aff_quirk)
+
 static enum gic_intid_range __get_intid_range(irq_hw_number_t hwirq)
 {
 	switch (hwirq) {
@@ -613,6 +623,7 @@ static u64 gic_mpidr_to_affinity(unsigned long mpidr)
 {
 	u64 aff;
 
+	mpidr = AFF_SHIFT(mpidr);
 	aff = ((u64)MPIDR_AFFINITY_LEVEL(mpidr, 3) << 32 |
 	       MPIDR_AFFINITY_LEVEL(mpidr, 2) << 16 |
 	       MPIDR_AFFINITY_LEVEL(mpidr, 1) << 8  |
@@ -872,6 +883,8 @@ static int __gic_populate_rdist(struct redist_region *region, void __iomem *ptr)
 	 * Convert affinity to a 32bit value that can be matched to
 	 * GICR_TYPER bits [63:32].
 	 */
+	mpidr = AFF_SHIFT(mpidr);
+
 	aff = (MPIDR_AFFINITY_LEVEL(mpidr, 3) << 24 |
 	       MPIDR_AFFINITY_LEVEL(mpidr, 2) << 16 |
 	       MPIDR_AFFINITY_LEVEL(mpidr, 1) << 8 |
@@ -1153,6 +1166,8 @@ static u16 gic_compute_target_list(int *base_cpu, const struct cpumask *mask,
 	unsigned long mpidr = cpu_logical_map(cpu);
 	u16 tlist = 0;
 
+	mpidr = AFF_SHIFT(mpidr);
+
 	while (cpu < nr_cpu_ids) {
 		tlist |= 1 << (mpidr & 0xf);
 
@@ -1161,7 +1176,7 @@ static u16 gic_compute_target_list(int *base_cpu, const struct cpumask *mask,
 			goto out;
 		cpu = next_cpu;
 
-		mpidr = cpu_logical_map(cpu);
+		mpidr = AFF_SHIFT(cpu_logical_map(cpu));
 
 		if (cluster_id != MPIDR_TO_SGI_CLUSTER_ID(mpidr)) {
 			cpu--;
@@ -1206,7 +1221,7 @@ static void gic_ipi_send_mask(struct irq_data *d, const struct cpumask *mask)
 	wmb();
 
 	for_each_cpu(cpu, mask) {
-		u64 cluster_id = MPIDR_TO_SGI_CLUSTER_ID(cpu_logical_map(cpu));
+		u64 cluster_id = MPIDR_TO_SGI_CLUSTER_ID(AFF_SHIFT(cpu_logical_map(cpu)));
 		u16 tlist;
 
 		tlist = gic_compute_target_list(&cpu, mask, cluster_id);
