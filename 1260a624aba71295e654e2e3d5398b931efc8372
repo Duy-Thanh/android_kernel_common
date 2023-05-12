@@ -45,6 +45,23 @@
       },
       "revId": "1260a624aba71295e654e2e3d5398b931efc8372",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ccaf786_6dc14687",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-12T06:29:18Z",
+      "side": 1,
+      "message": "Create a patch for the symbol list update for these new symbols on top of this patch. The symbol list update must be in the same series.",
+      "revId": "1260a624aba71295e654e2e3d5398b931efc8372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
