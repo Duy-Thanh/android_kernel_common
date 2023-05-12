@@ -35,6 +35,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_attach,
 DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_online,
 	TP_PROTO(struct cgroup_subsys_state *css),
 	TP_ARGS(css), 1);
+
+DECLARE_HOOK(android_vh_blk_throtl_bypass,
+	TP_PROTO(bool *bypass),
+	TP_ARGS(bypass));
 #endif
 
 #include <trace/define_trace.h>
