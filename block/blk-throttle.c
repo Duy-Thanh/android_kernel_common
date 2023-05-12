@@ -15,6 +15,8 @@
 #include "blk-stat.h"
 #include "blk-throttle.h"
 
+#include <trace/hooks/cgroup.h>
+
 /* Max dispatch from a group in 1 round */
 #define THROTL_GRP_QUANTUM 8
 
@@ -2164,6 +2166,11 @@ bool __blk_throtl_bio(struct bio *bio)
 	bool rw = bio_data_dir(bio);
 	bool throttled = false;
 	struct throtl_data *td = tg->td;
+	bool bypass = false;
+
+	trace_android_vh_blk_throtl_bypass(&bypass);
+	if (bypass)
+		return false;
 
 	rcu_read_lock();
 
