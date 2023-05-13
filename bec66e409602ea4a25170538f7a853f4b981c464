@@ -33,6 +33,23 @@
       "message": "LGTM! it breaks the KMI though, so it should probably be added to `kmi-changes-for-2023-05-24`",
       "revId": "bec66e409602ea4a25170538f7a853f4b981c464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f2125e4_1d8e90f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-13T18:25:35Z",
+      "side": 1,
+      "message": "Added to May 24 KMI update",
+      "revId": "bec66e409602ea4a25170538f7a853f4b981c464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
