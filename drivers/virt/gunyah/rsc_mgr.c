@@ -121,6 +121,7 @@ struct gh_rm_connection {
 	};
 };
 
+#ifndef __GENKSYMS__
 /**
  * struct gh_rm - private data for communicating w/Gunyah resource manager
  * @dev: pointer to device
@@ -158,6 +159,7 @@ struct gh_rm {
 	struct miscdevice miscdev;
 	struct irq_domain *irq_domain;
 };
+#endif
 
 /**
  * gh_rm_remap_error() - Remap Gunyah resource manager errors into a Linux error code
