@@ -1,5 +1,10 @@
+<<<<<<< HEAD   (367564 ANDROID: db845c: Remove MAKE_GOALS from build.config)
 BRANCH=android14-5.15
 CLANG_VERSION=r487747
+=======
+BRANCH=android14-6.1
+CLANG_VERSION=r487747c
+>>>>>>> CHANGE (68231b ANDROID: clang: update to 17.0.2)
 AARCH64_NDK_TRIPLE=aarch64-linux-android31
 X86_64_NDK_TRIPLE=x86_64-linux-android31
 ARM_NDK_TRIPLE=arm-linux-androideabi31
