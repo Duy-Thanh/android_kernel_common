@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6294851_5d8fd388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-05-15T08:51:39Z",
+      "side": 1,
+      "message": "Yes, I also upload the previous hook point here and add a parameter \n\u0027ticks\u0027 to adapt my changes. \nhttps://android-review.googlesource.com/c/kernel/common/+/2588568",
+      "parentUuid": "982fbe70_016348ec",
+      "revId": "526178fb92c662c9b95d29c559402ef56460243d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f18676b5_a60a9f54",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-05-12T20:50:39Z",
       "side": 1,
       "message": "You are changing this, don\u0027t you?",
+      "range": {
+        "startLine": 495,
+        "startChar": 13,
+        "endLine": 495,
+        "endChar": 24
+      },
+      "revId": "526178fb92c662c9b95d29c559402ef56460243d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adbc6e99_65ed7860",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-05-15T08:51:39Z",
+      "side": 1,
+      "message": "Yes, I will modify this to reflect my change. Thanks for the remind.",
+      "parentUuid": "f18676b5_a60a9f54",
       "range": {
         "startLine": 495,
         "startChar": 13,
