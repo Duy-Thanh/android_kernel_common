@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "987e4f00_7e699dbd",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-05-15T16:07:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0662b180_12cb4a51",
+      "revId": "935d7a0b7ee5fe2a5003ea38f77f454c15207162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c625a1c_2020ef80",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-10T11:50:12Z",
       "side": 1,
       "message": "This keeps the lock alive while writing. If you remove the ampersand, then the lock is released before writing, which is better.",
+      "revId": "935d7a0b7ee5fe2a5003ea38f77f454c15207162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b467fe3_bfc363ec",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-05-15T16:07:13Z",
+      "side": 1,
+      "message": "Ah, this is an interesting nuance...since `writer.write` wants a reference, I see 3 options that compile here...\na. `let ee \u003d \u0026self...; writer.write(ee);`\nb. `let ee \u003d self...; writer.write(\u0026ee);`\nc. `let ref ee \u003d self...; writer.write(ee);`\n\nAnd that leaves me with these questions...\n1. If `a` keeps the lock alive while writing, does `b` *not* do that? \n2. Are `b` and `c` equivalent? If so, is one more idiomatic?",
+      "parentUuid": "2c625a1c_2020ef80",
       "revId": "935d7a0b7ee5fe2a5003ea38f77f454c15207162",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
