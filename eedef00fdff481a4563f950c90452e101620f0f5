@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c208e0f9_0dbfba73",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-15T16:08:02Z",
+      "side": 1,
+      "message": "Please remove this inclusion. If type definitions are needed, forward declare them as was done at line 15.",
+      "revId": "eedef00fdff481a4563f950c90452e101620f0f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d19333_9c454fa9",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-15T16:08:02Z",
+      "side": 1,
+      "message": "Remove inclusion. Use forward declarations instead.",
+      "revId": "eedef00fdff481a4563f950c90452e101620f0f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
