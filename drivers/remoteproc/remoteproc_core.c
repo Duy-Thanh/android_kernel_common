@@ -2820,6 +2820,11 @@ static int rproc_panic_handler(struct notifier_block *nb, unsigned long event,
 		    rproc->state != RPROC_ATTACHED)
 			continue;
 
+		if (panic_timeout == 0 && rproc->keep_alive) {
+			dev_warn(&rproc->dev, "keeping %s alive\n", rproc->name);
+			continue;
+		}
+
 		d = rproc->ops->panic(rproc);
 		longest = max(longest, d);
 	}

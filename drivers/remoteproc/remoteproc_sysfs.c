@@ -233,12 +233,41 @@ static ssize_t name_show(struct device *dev, struct device_attribute *attr,
 }
 static DEVICE_ATTR_RO(name);
 
+/* Expose the keep_alive of the remote processor via sysfs */
+static ssize_t keep_alive_show(struct device *dev,
+				struct device_attribute *attr, char *buf)
+{
+	struct rproc *rproc = to_rproc(dev);
+
+	return sprintf(buf, "%d\n", rproc->keep_alive);
+}
+
+/* Change remote processor keep_alive via sysfs */
+static ssize_t keep_alive_store(struct device *dev,
+				struct device_attribute *attr, const char *buf,
+				size_t count)
+{
+	struct rproc *rproc = to_rproc(dev);
+	unsigned long value;
+
+	if (kstrtoul(buf, 0, &value) != 0)
+		return -EINVAL;
+	if (value > 1)
+		return -EINVAL;
+
+	rproc->keep_alive = (bool)value;
+
+	return count;
+}
+static DEVICE_ATTR_RW(keep_alive);
+
 static struct attribute *rproc_attrs[] = {
 	&dev_attr_coredump.attr,
 	&dev_attr_recovery.attr,
 	&dev_attr_firmware.attr,
 	&dev_attr_state.attr,
 	&dev_attr_name.attr,
+	&dev_attr_keep_alive.attr,
 	NULL
 };
 
