@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9356131c_b8ded964",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-15T16:01:30Z",
+      "side": 1,
+      "message": "There are conflict markers in drivers/android/vendor_hooks.c which means you didn\u0027t even bother to build (let alone test these changes). Please don\u0027t upload completely untested and unbuilt code!",
+      "revId": "a5fa027ff0e5f69489b877dde1c01c6e2338ca66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
