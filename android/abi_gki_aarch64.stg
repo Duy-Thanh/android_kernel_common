@@ -277993,6 +277993,13 @@ function {
   parameter_id: 0xc9082b19
 }
 function {
+  id: 0x126f3be6
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0483e6f8
+  parameter_id: 0xf435685e
+  parameter_id: 0x1d19a9d5
+}
+function {
   id: 0x12725ea0
   return_type_id: 0x48b5725f
   parameter_id: 0x087ad34b
@@ -287361,6 +287368,11 @@ function {
   id: 0x36e39310
   return_type_id: 0x0490bb4a
   parameter_id: 0x3e146274
+}
+function {
+  id: 0x36eaa726
+  return_type_id: 0x33756485
+  parameter_id: 0x1d19a9d5
 }
 function {
   id: 0x36f1d1fd
@@ -305756,6 +305768,13 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9bff5408
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x92233392
+}
+function {
   id: 0x9c00c8ec
   return_type_id: 0x6720d32f
   parameter_id: 0x0258f96e
@@ -320739,6 +320758,42 @@ elf_symbol {
   full_name: "__traceiter_sched_overutilized_tp"
 }
 elf_symbol {
+  id: 0x2de60b3e
+  name: "__traceiter_sched_stat_blocked"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x555bfe74
+  type_id: 0x9bff5408
+  full_name: "__traceiter_sched_stat_blocked"
+}
+elf_symbol {
+  id: 0x9cf075c5
+  name: "__traceiter_sched_stat_iowait"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf933c73c
+  type_id: 0x9bff5408
+  full_name: "__traceiter_sched_stat_iowait"
+}
+elf_symbol {
+  id: 0xa785ee77
+  name: "__traceiter_sched_stat_sleep"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5bd3966f
+  type_id: 0x9bff5408
+  full_name: "__traceiter_sched_stat_sleep"
+}
+elf_symbol {
+  id: 0x41fdc249
+  name: "__traceiter_sched_stat_wait"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd469207b
+  type_id: 0x9bff5408
+  full_name: "__traceiter_sched_stat_wait"
+}
+elf_symbol {
   id: 0x570f3032
   name: "__traceiter_sched_switch"
   is_defined: true
@@ -320755,6 +320810,15 @@ elf_symbol {
   crc: 0xb206f540
   type_id: 0x9b0e782a
   full_name: "__traceiter_sched_update_nr_running_tp"
+}
+elf_symbol {
+  id: 0x20097074
+  name: "__traceiter_sched_waking"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x28dae5ba
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_sched_waking"
 }
 elf_symbol {
   id: 0x863777a0
@@ -323043,6 +323107,42 @@ elf_symbol {
   full_name: "__tracepoint_sched_overutilized_tp"
 }
 elf_symbol {
+  id: 0x37548d14
+  name: "__tracepoint_sched_stat_blocked"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xcc6130e1
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_sched_stat_blocked"
+}
+elf_symbol {
+  id: 0x6aa1a617
+  name: "__tracepoint_sched_stat_iowait"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x3dcb44d9
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_sched_stat_iowait"
+}
+elf_symbol {
+  id: 0xbc210559
+  name: "__tracepoint_sched_stat_sleep"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xf3492e73
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_sched_stat_sleep"
+}
+elf_symbol {
+  id: 0x7d5529d3
+  name: "__tracepoint_sched_stat_wait"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xc977be89
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_sched_stat_wait"
+}
+elf_symbol {
   id: 0xe10cee18
   name: "__tracepoint_sched_switch"
   is_defined: true
@@ -323059,6 +323159,15 @@ elf_symbol {
   crc: 0x365b45d1
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_sched_update_nr_running_tp"
+}
+elf_symbol {
+  id: 0xa70e8cd2
+  name: "__tracepoint_sched_waking"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x36772c03
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_sched_waking"
 }
 elf_symbol {
   id: 0x5b327cd6
@@ -339826,6 +339935,15 @@ elf_symbol {
   crc: 0xc2d9e090
   type_id: 0x904bd3e9
   full_name: "get_vaddr_frames"
+}
+elf_symbol {
+  id: 0x4ba4e06f
+  name: "get_wchan"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x470d5699
+  type_id: 0x36eaa726
+  full_name: "get_wchan"
 }
 elf_symbol {
   id: 0xbac82e84
@@ -371377,6 +371495,15 @@ elf_symbol {
   full_name: "wpan_phy_unregister"
 }
 elf_symbol {
+  id: 0x180eeaeb
+  name: "wq_worker_comm"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6aede2ad
+  type_id: 0x126f3be6
+  full_name: "wq_worker_comm"
+}
+elf_symbol {
   id: 0x61731bd0
   name: "ww_mutex_lock"
   is_defined: true
@@ -374357,12 +374484,32 @@ symbols {
     value: 0xb614ca1f
   }
   symbol {
+    key: "__traceiter_sched_stat_blocked"
+    value: 0x2de60b3e
+  }
+  symbol {
+    key: "__traceiter_sched_stat_iowait"
+    value: 0x9cf075c5
+  }
+  symbol {
+    key: "__traceiter_sched_stat_sleep"
+    value: 0xa785ee77
+  }
+  symbol {
+    key: "__traceiter_sched_stat_wait"
+    value: 0x41fdc249
+  }
+  symbol {
     key: "__traceiter_sched_switch"
     value: 0x570f3032
   }
   symbol {
     key: "__traceiter_sched_update_nr_running_tp"
     value: 0xc42d0053
+  }
+  symbol {
+    key: "__traceiter_sched_waking"
+    value: 0x20097074
   }
   symbol {
     key: "__traceiter_suspend_resume"
@@ -375381,12 +375528,32 @@ symbols {
     value: 0x2497fb4d
   }
   symbol {
+    key: "__tracepoint_sched_stat_blocked"
+    value: 0x37548d14
+  }
+  symbol {
+    key: "__tracepoint_sched_stat_iowait"
+    value: 0x6aa1a617
+  }
+  symbol {
+    key: "__tracepoint_sched_stat_sleep"
+    value: 0xbc210559
+  }
+  symbol {
+    key: "__tracepoint_sched_stat_wait"
+    value: 0x7d5529d3
+  }
+  symbol {
     key: "__tracepoint_sched_switch"
     value: 0xe10cee18
   }
   symbol {
     key: "__tracepoint_sched_update_nr_running_tp"
     value: 0x477e3555
+  }
+  symbol {
+    key: "__tracepoint_sched_waking"
+    value: 0xa70e8cd2
   }
   symbol {
     key: "__tracepoint_suspend_resume"
@@ -382835,6 +383002,10 @@ symbols {
   symbol {
     key: "get_vaddr_frames"
     value: 0xce04fca2
+  }
+  symbol {
+    key: "get_wchan"
+    value: 0x4ba4e06f
   }
   symbol {
     key: "get_zeroed_page"
@@ -396859,6 +397030,10 @@ symbols {
   symbol {
     key: "wpan_phy_unregister"
     value: 0x887e1dde
+  }
+  symbol {
+    key: "wq_worker_comm"
+    value: 0x180eeaeb
   }
   symbol {
     key: "ww_mutex_lock"
