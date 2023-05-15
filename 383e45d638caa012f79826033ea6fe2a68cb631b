@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8bb8ab_2796f804",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-15T23:52:53Z",
+      "side": 1,
+      "message": "You can drop the stg update from this patch since it is updated again in aosp/2588574 (same series).\n\nPlease rebase the series.",
+      "revId": "383e45d638caa012f79826033ea6fe2a68cb631b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
