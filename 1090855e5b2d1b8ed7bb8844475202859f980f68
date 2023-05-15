@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7eb21c_9557b2eb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-05-15T15:27:56Z",
+      "side": 1,
+      "message": "Hmm, I guess we should just rip out the misconfiguration stuff now. It doesn\u0027t really serve any purpose after this change.",
+      "range": {
+        "startLine": 1577,
+        "startChar": 5,
+        "endLine": 1577,
+        "endChar": 40
+      },
+      "revId": "1090855e5b2d1b8ed7bb8844475202859f980f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84e814d3_5ee3a87a",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-05-15T15:27:56Z",
+      "side": 1,
+      "message": "Why do we need to call this if `err` is non-zero?\n\nI suppose we could drop `err` altogether now, but it\u0027s a bit late for KMI changes at this point.",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 47
+      },
+      "revId": "1090855e5b2d1b8ed7bb8844475202859f980f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
