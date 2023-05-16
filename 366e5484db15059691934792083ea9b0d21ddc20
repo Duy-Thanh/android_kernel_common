@@ -87,6 +87,24 @@
       "parentUuid": "91389d22_ca880c4b",
       "revId": "366e5484db15059691934792083ea9b0d21ddc20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106af9b8_98d72f21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-16T07:14:29Z",
+      "side": 1,
+      "message": "Please do a simple \u0027allmodconfig\u0027 build, or use the gki_defconfig file which is what your devices should be using.  It will show that you changed an exported symbol yet did not rename it in the `EXPORT_SYMBOL_GPL()` section.\n\nAlso note that you are changing an exported symbol, why?  This will probably break the api signatures, right?  Why is the name change required here?\n\nAnd if this is an important fix, why not submit it upstream for inclusion in the kernel.org LTS releases?  The kernel documentation `stable_kernel_rules.rst` will show you how to do that properly.",
+      "parentUuid": "452db123_440abc0c",
+      "revId": "366e5484db15059691934792083ea9b0d21ddc20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
