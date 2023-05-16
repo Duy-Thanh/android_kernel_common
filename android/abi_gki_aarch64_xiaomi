@@ -185,3 +185,9 @@
   __tracepoint_android_rvh_set_cpus_allowed_comm
   __tracepoint_android_rvh_dequeue_task
   cpuset_cpus_allowed
+
+#required by io_limit.ko
+  __traceiter_android_vh_psi_event
+  __traceiter_android_vh_psi_group
+  __tracepoint_android_vh_psi_event
+  __tracepoint_android_vh_psi_group
