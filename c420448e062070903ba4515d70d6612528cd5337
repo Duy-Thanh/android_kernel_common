@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caef71bd_0cbb9345",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-16T11:38:50Z",
+      "side": 1,
+      "message": "you forgot to remove this from the `gki_defconfig` file.  Cherry-pick the relevant change that I did in the -lts branch.",
+      "revId": "c420448e062070903ba4515d70d6612528cd5337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
