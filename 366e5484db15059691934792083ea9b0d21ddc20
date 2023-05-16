@@ -33,6 +33,24 @@
       "message": "This is not tested at all as it does not even build.",
       "revId": "366e5484db15059691934792083ea9b0d21ddc20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81623f0c_37b4cb81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2008320
+      },
+      "writtenOn": "2023-05-16T02:08:30Z",
+      "side": 1,
+      "message": "For this problem, we have passed the verification with mtk reference mobile phone and customer mobile phone, thanks!",
+      "parentUuid": "9ba20f99_fa69a6fe",
+      "revId": "366e5484db15059691934792083ea9b0d21ddc20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
