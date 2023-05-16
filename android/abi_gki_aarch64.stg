@@ -305043,6 +305043,15 @@ function {
   parameter_id: 0x1f8dbf97
 }
 function {
+  id: 0x9bd1d928
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x2e029f76
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9bd21a8b
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
@@ -319425,6 +319434,24 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_wake_up_new_task"
 }
 elf_symbol {
+  id: 0xa3af7947
+  name: "__traceiter_android_vh_account_process_tick_gran"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4f47bbac
+  type_id: 0x9a37ef2c
+  full_name: "__traceiter_android_vh_account_process_tick_gran"
+}
+elf_symbol {
+  id: 0x86527a4e
+  name: "__traceiter_android_vh_account_task_time"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb934f96a
+  type_id: 0x9bd1d928
+  full_name: "__traceiter_android_vh_account_task_time"
+}
+elf_symbol {
   id: 0x9c240ef1
   name: "__traceiter_android_vh_alloc_uid"
   is_defined: true
@@ -321727,6 +321754,24 @@ elf_symbol {
   crc: 0x6b60d8f1
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_wake_up_new_task"
+}
+elf_symbol {
+  id: 0x4f980315
+  name: "__tracepoint_android_vh_account_process_tick_gran"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x15212a6d
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_account_process_tick_gran"
+}
+elf_symbol {
+  id: 0xe1489e0c
+  name: "__tracepoint_android_vh_account_task_time"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xf1afbf0d
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_account_task_time"
 }
 elf_symbol {
   id: 0xea695d5b
@@ -373773,6 +373818,14 @@ symbols {
     value: 0xebcd0234
   }
   symbol {
+    key: "__traceiter_android_vh_account_process_tick_gran"
+    value: 0xa3af7947
+  }
+  symbol {
+    key: "__traceiter_android_vh_account_task_time"
+    value: 0x86527a4e
+  }
+  symbol {
     key: "__traceiter_android_vh_alloc_uid"
     value: 0x9c240ef1
   }
@@ -374795,6 +374848,14 @@ symbols {
   symbol {
     key: "__tracepoint_android_rvh_wake_up_new_task"
     value: 0xdcf22716
+  }
+  symbol {
+    key: "__tracepoint_android_vh_account_process_tick_gran"
+    value: 0x4f980315
+  }
+  symbol {
+    key: "__tracepoint_android_vh_account_task_time"
+    value: 0xe1489e0c
   }
   symbol {
     key: "__tracepoint_android_vh_alloc_uid"
