@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e48163e9_6d54db3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-05-16T18:02:40Z",
+      "side": 1,
+      "message": "This patch is not necessary on 5.10- see below comment. Abandoning.",
+      "revId": "31489f373700ef95c4ed33327c0433dabbc730ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9824df93_6a2f7159",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1553,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-05-16T18:02:40Z",
+      "side": 1,
+      "message": "This patch is not necessary on 5.10- the lock is taken on line 1553 and not released until after composite setup at line 1588.",
+      "revId": "31489f373700ef95c4ed33327c0433dabbc730ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
