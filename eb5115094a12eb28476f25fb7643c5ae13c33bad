@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "319099d4_433f302b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-16T22:48:29Z",
+      "side": 1,
+      "message": "This patch should be split at least into 2 patches:\n\nOne for:\ntrace_android_vh_reclaim_sc\ntrace_android_vh_continue_reclaim\ntrace_android_vh_psc_bypass\n\nSecond one for:\ntrace_android_vh_do_shrink_slab\ntrace_android_vh_shrink_slab_bypass",
+      "revId": "eb5115094a12eb28476f25fb7643c5ae13c33bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b739e94_afc80d69",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-16T22:48:29Z",
+      "side": 1,
+      "message": "You don\u0027t need to store whether do_try_to_free_pages() is used for direct reclaim. Just use current_is_kswapd() to distinguish between direct reclaim and kswapd.",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 24
+      },
+      "revId": "eb5115094a12eb28476f25fb7643c5ae13c33bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12bcdf20_9a0a3d3a",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-16T22:48:29Z",
+      "side": 1,
+      "message": "If you want to change the amount of objects reclaimed from a specific shrinker, why not change the implementation of count_objects() handler of that shrinker? Why do you need to modify core mm for that?",
+      "range": {
+        "startLine": 804,
+        "startChar": 1,
+        "endLine": 804,
+        "endChar": 54
+      },
+      "revId": "eb5115094a12eb28476f25fb7643c5ae13c33bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6d8d46_b1afdf3e",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2880,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-16T22:48:29Z",
+      "side": 1,
+      "message": "IIUC you are bypassing only sc-\u003efile_is_tiny calculation, not the whole prepare_scan_count, so the name is not appropriate. \n\nMaybe something like:\n\n```\ntrace_android_vh_file_is_tiny_bypass(sc-\u003efile_is_tiny, \u0026bypass);\nif (bypass)\n    return;\n```",
+      "range": {
+        "startLine": 2880,
+        "startChar": 1,
+        "endLine": 2880,
+        "endChar": 60
+      },
+      "revId": "eb5115094a12eb28476f25fb7643c5ae13c33bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "206da3f2_cca4fe0b",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6540,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-16T22:48:29Z",
+      "side": 1,
+      "message": "It would be cleaner if you add this tracepoint inside `should_continue_reclaim()` function itself.\n\nUse current_is_kswapd() instead of sc-\u003eandroid_vendor_data1 to identify direct reclaim.",
+      "range": {
+        "startLine": 6539,
+        "startChar": 0,
+        "endLine": 6540,
+        "endChar": 60
+      },
+      "revId": "eb5115094a12eb28476f25fb7643c5ae13c33bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8bb872d_34c16504",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6763,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-16T22:48:29Z",
+      "side": 1,
+      "message": "Uhh. This is quite invasive. Are you sure you need to modify the default behavior of kernel reclaim mechanism?\n\nIf this is absolutely needed then please place this into a separate function like this:\n\n```\nstatic void modify_scan_control(struct scan_control *sc)\n{\n\tbool file_is_tiny \u003d false, may_writepage \u003d true;\n\n\ttrace_android_vh_reclaim_sc(!current_is_kswapd(),\n\t\t\u0026sc-\u003enr_to_reclaim, sc-\u003etarget_mem_cgroup, \u0026file_is_tiny,\n\t\t\u0026may_writepage);\n\n\tif (file_is_tiny)\n\t\tsc-\u003efile_is_tiny \u003d true;\n\tif (!may_writepage)\n\t\tsc-\u003emay_writepage \u003d false;\n}\t\n\n```",
+      "range": {
+        "startLine": 6755,
+        "startChar": 1,
+        "endLine": 6763,
+        "endChar": 28
+      },
+      "revId": "eb5115094a12eb28476f25fb7643c5ae13c33bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ac1f83d_9d055d0e",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7008,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-16T22:48:29Z",
+      "side": 1,
+      "message": "not needed. See current_is_kswapd() usage in the comment above.",
+      "range": {
+        "startLine": 7008,
+        "startChar": 1,
+        "endLine": 7008,
+        "endChar": 52
+      },
+      "revId": "eb5115094a12eb28476f25fb7643c5ae13c33bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
