@@ -69,6 +69,24 @@
       "parentUuid": "81623f0c_37b4cb81",
       "revId": "366e5484db15059691934792083ea9b0d21ddc20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "452db123_440abc0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2008320
+      },
+      "writtenOn": "2023-05-16T05:40:13Z",
+      "side": 1,
+      "message": "We compiled the kernel bootimg locally and then burned it to the phone for testing, rather than using the GKI image directly;\nWe can\u0027t see the error of your build now, we don\u0027t know where there is an exception, could you please tell us what is the ERROR you encountered, thanks!",
+      "parentUuid": "91389d22_ca880c4b",
+      "revId": "366e5484db15059691934792083ea9b0d21ddc20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
