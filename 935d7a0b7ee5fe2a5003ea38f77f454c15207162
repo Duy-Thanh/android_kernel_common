@@ -69,6 +69,24 @@
       "parentUuid": "2c625a1c_2020ef80",
       "revId": "935d7a0b7ee5fe2a5003ea38f77f454c15207162",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "970d7424_cf2eed31",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-05-16T09:56:58Z",
+      "side": 1,
+      "message": "The return value of `self.inner.lock()` is a temporary value in the expression that gets assigned to `ee`. Under normal circumstances, this temporary would be dropped at the end of the expression (that is, before the call to `writer.write`), but due to [temporary lifetime extension](https://doc.rust-lang.org/reference/destructors.html#temporary-lifetime-extension), the temporary values in this particular expression are kept alive until the end of the scope instead. (If this didn\u0027t happen, then expressions of the form `let foo \u003d \u0026value_expression` would never be usable since the referent would be dropped before you could use `foo`.)\n\nSo the fix is to, instead of holding a reference to the value inside the lock, make a copy of it, and then write the copy after releasing the lock. That would be your option b (assuming that the type is Copy), and option b does not trigger temporary lifetime extension, so the lock is dropped before the write.",
+      "parentUuid": "7b467fe3_bfc363ec",
+      "revId": "935d7a0b7ee5fe2a5003ea38f77f454c15207162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
