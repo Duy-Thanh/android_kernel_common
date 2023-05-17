@@ -116,6 +116,7 @@
   __traceiter_android_vh_cgroup_set_task
   __traceiter_android_vh_check_uninterruptible_tasks
   __traceiter_android_vh_check_uninterruptible_tasks_dn
+  __traceiter_android_vh_cpufreq_acct_update_power
   __traceiter_android_vh_cpufreq_fast_switch
   __traceiter_android_vh_cpufreq_resolve_freq
   __traceiter_android_vh_cpufreq_target
@@ -195,6 +196,7 @@
   __tracepoint_android_vh_cgroup_set_task
   __tracepoint_android_vh_check_uninterruptible_tasks
   __tracepoint_android_vh_check_uninterruptible_tasks_dn
+  __tracepoint_android_vh_cpufreq_acct_update_power
   __tracepoint_android_vh_cpufreq_fast_switch
   __tracepoint_android_vh_cpufreq_resolve_freq
   __tracepoint_android_vh_cpufreq_target
