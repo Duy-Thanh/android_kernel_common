@@ -34,6 +34,24 @@
       "parentUuid": "d66ebff5_b502b64e",
       "revId": "694997316e4975329755ed6d3b56baecb223b962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ce3c0c_8ce52e0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-17T11:46:30Z",
+      "side": 1,
+      "message": "Please handle that in your block driver please, you should not need to modify the core request field at all.",
+      "parentUuid": "f01a53b1_0a9ba767",
+      "revId": "694997316e4975329755ed6d3b56baecb223b962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
