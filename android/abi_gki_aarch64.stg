@@ -303286,6 +303286,16 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
+  id: 0x9b2837bd
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x2170d06d
+  parameter_id: 0x0a134144
+  parameter_id: 0x33756485
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x9b2899c2
   return_type_id: 0x6720d32f
   parameter_id: 0x1aee9939
@@ -304480,6 +304490,13 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x1a8d1bcb
   parameter_id: 0x2a5a21f9
+}
+function {
+  id: 0x9b8b2a3f
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0a134144
+  parameter_id: 0x33756485
 }
 function {
   id: 0x9b8bfa37
@@ -320467,6 +320484,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_map_util_freq"
 }
 elf_symbol {
+  id: 0xe44dacb1
+  name: "__traceiter_android_vh_mmap_region"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x11c65acd
+  type_id: 0x9b8b2a3f
+  full_name: "__traceiter_android_vh_mmap_region"
+}
+elf_symbol {
   id: 0xb1c564a3
   name: "__traceiter_android_vh_mutex_can_spin_on_owner"
   is_defined: true
@@ -320816,6 +320842,15 @@ elf_symbol {
   crc: 0x30451bfb
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_vh_try_to_freeze_todo_unfrozen"
+}
+elf_symbol {
+  id: 0xd9f43028
+  name: "__traceiter_android_vh_try_to_unmap_one"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb11cf261
+  type_id: 0x9b2837bd
+  full_name: "__traceiter_android_vh_try_to_unmap_one"
 }
 elf_symbol {
   id: 0x8a773cc3
@@ -322825,6 +322860,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_map_util_freq"
 }
 elf_symbol {
+  id: 0xb6da564f
+  name: "__tracepoint_android_vh_mmap_region"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x3771778e
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mmap_region"
+}
+elf_symbol {
   id: 0xd5097f8d
   name: "__tracepoint_android_vh_mutex_can_spin_on_owner"
   is_defined: true
@@ -323174,6 +323218,15 @@ elf_symbol {
   crc: 0x420e27e1
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_try_to_freeze_todo_unfrozen"
+}
+elf_symbol {
+  id: 0xf9580976
+  name: "__tracepoint_android_vh_try_to_unmap_one"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1ddd7db7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_try_to_unmap_one"
 }
 elf_symbol {
   id: 0x18e67da1
@@ -374970,6 +375023,10 @@ symbols {
     value: 0x61ea12b8
   }
   symbol {
+    key: "__traceiter_android_vh_mmap_region"
+    value: 0xe44dacb1
+  }
+  symbol {
     key: "__traceiter_android_vh_mutex_can_spin_on_owner"
     value: 0xb1c564a3
   }
@@ -375124,6 +375181,10 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_try_to_freeze_todo_unfrozen"
     value: 0x0119fc41
+  }
+  symbol {
+    key: "__traceiter_android_vh_try_to_unmap_one"
+    value: 0xd9f43028
   }
   symbol {
     key: "__traceiter_android_vh_typec_store_partner_src_caps"
@@ -376018,6 +376079,10 @@ symbols {
     value: 0x00a5fe5e
   }
   symbol {
+    key: "__tracepoint_android_vh_mmap_region"
+    value: 0xb6da564f
+  }
+  symbol {
     key: "__tracepoint_android_vh_mutex_can_spin_on_owner"
     value: 0xd5097f8d
   }
@@ -376172,6 +376237,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_try_to_freeze_todo_unfrozen"
     value: 0x09ba106b
+  }
+  symbol {
+    key: "__tracepoint_android_vh_try_to_unmap_one"
+    value: 0xf9580976
   }
   symbol {
     key: "__tracepoint_android_vh_typec_store_partner_src_caps"
