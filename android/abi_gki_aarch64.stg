@@ -329335,6 +329335,15 @@ elf_symbol {
   full_name: "cpufreq_update_limits"
 }
 elf_symbol {
+  id: 0x0c67e2fe
+  name: "cpufreq_update_util_data"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x68071e79
+  type_id: 0x21d7b2e4
+  full_name: "cpufreq_update_util_data"
+}
+elf_symbol {
   id: 0xc6155c06
   name: "cpuhp_tasks_frozen"
   is_defined: true
@@ -379180,6 +379189,10 @@ symbols {
   symbol {
     key: "cpufreq_update_limits"
     value: 0xb6965ce8
+  }
+  symbol {
+    key: "cpufreq_update_util_data"
+    value: 0x0c67e2fe
   }
   symbol {
     key: "cpuhp_tasks_frozen"
