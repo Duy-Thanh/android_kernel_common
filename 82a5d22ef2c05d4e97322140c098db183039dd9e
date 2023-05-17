@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b3e1830_01321cc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-17T07:01:34Z",
+      "side": 1,
+      "message": "Please work with upstream first to get the needed functionality instead of relying on out-of-tree logic and random hooks like this.\n\nEspecially with the increased stack space, that is very worrying.  How was this tested, and what userspace code is going to rely on it?",
+      "revId": "82a5d22ef2c05d4e97322140c098db183039dd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aad90b97_20c9a38e",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-17T07:01:34Z",
+      "side": 1,
+      "message": "are you sure there is enough stack space for this?  Why not dynamically create it?",
+      "range": {
+        "startLine": 1371,
+        "startChar": 1,
+        "endLine": 1371,
+        "endChar": 18
+      },
+      "revId": "82a5d22ef2c05d4e97322140c098db183039dd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb155320_9b3d14dd",
+        "filename": "fs/timerfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-17T07:01:34Z",
+      "side": 1,
+      "message": "again, that\u0027s a lot of stack space for a vendor hook, please don\u0027t do this on a fast path like this.",
+      "range": {
+        "startLine": 412,
+        "startChar": 1,
+        "endLine": 412,
+        "endChar": 24
+      },
+      "revId": "82a5d22ef2c05d4e97322140c098db183039dd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
