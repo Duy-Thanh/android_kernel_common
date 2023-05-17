@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000045060847",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2594450?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f8f09695_08b5dbda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-17T11:33:10Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/b94335f899542a0da5fafc38af8edcaf90195843) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003db94335f899542a0da5fafc38af8edcaf90195843)\n\n```\n      ## drivers/hid/hid-bigbenff.c ##\n     @@ drivers/hid/hid-bigbenff.c: static int bigben_probe(struct hid_device *hid,\n    @@ drivers/hid/hid-bigbenff.c: static int bigben_probe(struct hid_device *hid,\n      \t}\n      \n     -\treport_list \u003d \u0026hid-\u003ereport_enum[HID_OUTPUT_REPORT].report_list;\n    --\tif (list_empty(report_list)) {\n    -+\tbigben-\u003ereport \u003d hid_validate_values(hid, HID_OUTPUT_REPORT, 0, 0, 8);\n    -+\tif (!bigben-\u003ereport) {\n    - \t\thid_err(hid, \"no output report found\\n\");\n    - \t\terror \u003d -ENODEV;\n    - \t\tgoto error_hw_stop;\n    - \t}\n     -\tbigben-\u003ereport \u003d list_entry(report_list-\u003enext,\n     -\t\tstruct hid_report, list);\n    ++\tbigben-\u003ereport \u003d hid_validate_values(hid, HID_OUTPUT_REPORT, 0, 0, 8);\n    ++\tif (!bigben-\u003ereport) {\n    ++\t\thid_err(hid, \"no output report found\\n\");\n    ++\t\terror \u003d -ENODEV;\n    ++\t\tgoto error_hw_stop;\n    ++\t}\n      \n      \tif (list_empty(\u0026hid-\u003einputs)) {\n      \t\thid_err(hid, \"no inputs found\\n\");\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 532475974 android-build.ayeaye-python-dispatcher_20230516.05_p0",
+      "revId": "cfedb6b4f191b4603509bcf84bc7a2d9683f815c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
