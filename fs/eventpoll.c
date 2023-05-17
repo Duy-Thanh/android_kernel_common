@@ -39,6 +39,7 @@
 #include <linux/compat.h>
 #include <linux/rculist.h>
 #include <net/busy_poll.h>
+#include <trace/hooks/fs.h>
 
 /*
  * LOCKING:
@@ -1367,16 +1368,25 @@ static int ep_create_wakeup_source(struct epitem *epi)
 {
 	struct name_snapshot n;
 	struct wakeup_source *ws;
+	size_t max_len = 64;
+	char *ws_name = kmalloc(max_len, GFP_KERNEL);
 
+	strscpy(ws_name, "eventpoll", max_len);
+	trace_android_vh_ep_create_wakeup_source(ws_name, max_len);
 	if (!epi->ep->ws) {
-		epi->ep->ws = wakeup_source_register(NULL, "eventpoll");
-		if (!epi->ep->ws)
+		epi->ep->ws = wakeup_source_register(NULL, ws_name);
+		if (!epi->ep->ws) {
+			kfree(ws_name);
 			return -ENOMEM;
+		}
 	}
 
 	take_dentry_name_snapshot(&n, epi->ffd.file->f_path.dentry);
-	ws = wakeup_source_register(NULL, n.name.name);
+	strscpy(ws_name, n.name.name, max_len);
+	trace_android_vh_ep_create_wakeup_source(ws_name, max_len);
+	ws = wakeup_source_register(NULL, ws_name);
 	release_dentry_name_snapshot(&n);
+	kfree(ws_name);
 
 	if (!ws)
 		return -ENOMEM;
