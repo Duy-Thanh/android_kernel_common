@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c4926e1_ac5cbfd2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-05-17T13:27:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e7eb21c_9557b2eb",
+      "range": {
+        "startLine": 1577,
+        "startChar": 5,
+        "endLine": 1577,
+        "endChar": 40
+      },
+      "revId": "1090855e5b2d1b8ed7bb8844475202859f980f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84e814d3_5ee3a87a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-15T15:27:56Z",
       "side": 1,
       "message": "Why do we need to call this if `err` is non-zero?\n\nI suppose we could drop `err` altogether now, but it\u0027s a bit late for KMI changes at this point.",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 47
+      },
+      "revId": "1090855e5b2d1b8ed7bb8844475202859f980f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e909c3_a64a4f68",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-05-17T13:27:04Z",
+      "side": 1,
+      "message": "Yes, I kept it for KMI.",
+      "parentUuid": "84e814d3_5ee3a87a",
       "range": {
         "startLine": 66,
         "startChar": 26,
