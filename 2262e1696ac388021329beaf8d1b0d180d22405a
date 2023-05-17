@@ -16,6 +16,24 @@
       "message": "Let\u0027s add:\n```\nFixes: a033dd393f15 (\"ANDROID: mm: shmem: add vendor data in \u0027shmem_inode_info\u0027\")\n```",
       "revId": "2262e1696ac388021329beaf8d1b0d180d22405a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9812e416_ae9b6366",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2023-05-17T05:16:44Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "3c9cc749_466e9c95",
+      "revId": "2262e1696ac388021329beaf8d1b0d180d22405a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
