@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4932722_f82bce6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-05-17T10:22:52Z",
+      "side": 1,
+      "message": "Given the last comment on bug 281177702, can we abandon this series of 3 commits?",
+      "revId": "4680a1d8965ca056effed621f620af7f510de28e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
