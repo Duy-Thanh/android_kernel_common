@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13bf9f54_2002b8d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "Why do you need additional pooling in front of the buddy allocator?   Could you please provide the reasoning and performance numbers in the bug?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c534db2_d8afe201",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "In the description you don\u0027t need to explain what you do (we can see that from the code) but why you are doing it.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 24
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6256faa_6fd348c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "I don\u0027t understand this explanation. Please clarify and reword. In general, replacing your memory stats with something that does not represent the reality is not a good idea.",
+      "range": {
+        "startLine": 36,
+        "startChar": 20,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eef86d0_4b36f330",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "Again, looks very invasive into the default kernel\u0027s memory management. Please post reasons and performance benefits in the bug.\n\nThe patch should be split into smaller logical pieces each with its own description and reasoning.\nFor page pooling:\nandroid_rvh_alloc_pages\nandroid_rvh_free_pages\nandroid_rvh_si_mem_available\n\nFor pcp bypass:\nandroid_rvh_buddy_rmqueue\n\nFor ALLOC_HARDER:\nandroid_rvh_gfp_to_alloc_flags\n\nFor fault_around:\nandroid_rvh_do_fault_around",
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2eb1405_05213daa",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "This is not debugging code. What does `step` mean? Please use more descriptive parameter names.",
+      "range": {
+        "startLine": 30,
+        "startChar": 42,
+        "endLine": 30,
+        "endChar": 46
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b2d1cc5_adcc4af9",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4512,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "This should be posted as a separate patch.",
+      "range": {
+        "startLine": 4512,
+        "startChar": 1,
+        "endLine": 4512,
+        "endChar": 34
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9adecb29_de14ee5c",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3581,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "`trace_android_rvh_free_pages` assumes an operation of multiple pages, which is not the case here. `trace_android_rvh_free_unref_page()` seems more appropriate.",
+      "range": {
+        "startLine": 3581,
+        "startChar": 1,
+        "endLine": 3581,
+        "endChar": 29
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf906467_0cd057c2",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3922,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "`trace_android_rvh_rmqueue_bypass_pcp()` seems more appropriate.",
+      "range": {
+        "startLine": 3922,
+        "startChar": 1,
+        "endLine": 3922,
+        "endChar": 32
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65a74ba6_2516ae44",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4946,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "Why not just:\n```\nelse\n    trace_android_rvh_should_alloc_harder(gfp_mask, \u0026alloc_flags);\n```\n\nand in that hook you can do `alloc_flags |\u003d ALLOC_HARDER;`\n\nThat way you don\u0027t need `should_alloc_harder` at all.",
+      "range": {
+        "startLine": 4945,
+        "startChar": 1,
+        "endLine": 4946,
+        "endChar": 56
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ed795d_544bd857",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5616,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "why do you need this if you have `trace_android_rvh_alloc_pages` later?",
+      "range": {
+        "startLine": 5616,
+        "startChar": 1,
+        "endLine": 5616,
+        "endChar": 39
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24aee4f8_c3dfb128",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5645,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-17T00:25:23Z",
+      "side": 1,
+      "message": "you have to initialize page to NULL in the beginning, otherwise we will have issues if the vendor hook is not attached.",
+      "range": {
+        "startLine": 5645,
+        "startChar": 5,
+        "endLine": 5645,
+        "endChar": 17
+      },
+      "revId": "9ae9ab017d9d7805bf3e5b994dc8d4825cb569ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
