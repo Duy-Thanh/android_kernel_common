@@ -306281,6 +306281,14 @@ function {
   parameter_id: 0x1c898f28
 }
 function {
+  id: 0x9bfd1c84
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x92233392
+  parameter_id: 0x92233392
+}
+function {
   id: 0x9bfe0b50
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -320505,6 +320513,24 @@ elf_symbol {
   full_name: "__traceiter_android_vh_dump_throttled_rt_tasks"
 }
 elf_symbol {
+  id: 0xf432d1c9
+  name: "__traceiter_android_vh_dup_task_struct"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc9ebbef1
+  type_id: 0x9bdc9aae
+  full_name: "__traceiter_android_vh_dup_task_struct"
+}
+elf_symbol {
+  id: 0x1f554c2a
+  name: "__traceiter_android_vh_exit_signal"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6060f1fa
+  type_id: 0x9bdbdcc4
+  full_name: "__traceiter_android_vh_exit_signal"
+}
+elf_symbol {
   id: 0x5ecff02f
   name: "__traceiter_android_vh_free_task"
   is_defined: true
@@ -320683,6 +320709,15 @@ elf_symbol {
   crc: 0x08c5d140
   type_id: 0x9bab32de
   full_name: "__traceiter_android_vh_ipi_stop"
+}
+elf_symbol {
+  id: 0x0bf41403
+  name: "__traceiter_android_vh_irqtime_account_process_tick"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1e10df34
+  type_id: 0x9bd1d928
+  full_name: "__traceiter_android_vh_irqtime_account_process_tick"
 }
 elf_symbol {
   id: 0x4dca46cc
@@ -320980,6 +321015,15 @@ elf_symbol {
   crc: 0x9076af5e
   type_id: 0x9bdbdcc4
   full_name: "__traceiter_android_vh_sched_show_task"
+}
+elf_symbol {
+  id: 0xedb34a44
+  name: "__traceiter_android_vh_sched_stat_runtime_rt"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x968c8b00
+  type_id: 0x9bff5408
+  full_name: "__traceiter_android_vh_sched_stat_runtime_rt"
 }
 elf_symbol {
   id: 0xb841c45e
@@ -321475,6 +321519,15 @@ elf_symbol {
   crc: 0xf933c73c
   type_id: 0x9bff5408
   full_name: "__traceiter_sched_stat_iowait"
+}
+elf_symbol {
+  id: 0xf29865b1
+  name: "__traceiter_sched_stat_runtime"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x70c2f998
+  type_id: 0x9bfd1c84
+  full_name: "__traceiter_sched_stat_runtime"
 }
 elf_symbol {
   id: 0xa785ee77
@@ -322926,6 +322979,24 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_dump_throttled_rt_tasks"
 }
 elf_symbol {
+  id: 0x732a182b
+  name: "__tracepoint_android_vh_dup_task_struct"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x14fff0cf
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_dup_task_struct"
+}
+elf_symbol {
+  id: 0x0d418d38
+  name: "__tracepoint_android_vh_exit_signal"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xe653ddaf
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_exit_signal"
+}
+elf_symbol {
   id: 0xe6918e09
   name: "__tracepoint_android_vh_free_task"
   is_defined: true
@@ -323104,6 +323175,15 @@ elf_symbol {
   crc: 0x9e6c28b2
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_ipi_stop"
+}
+elf_symbol {
+  id: 0x31457bed
+  name: "__tracepoint_android_vh_irqtime_account_process_tick"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x61bb9d22
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_irqtime_account_process_tick"
 }
 elf_symbol {
   id: 0x62c13726
@@ -323401,6 +323481,15 @@ elf_symbol {
   crc: 0x66f7b6a4
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_sched_show_task"
+}
+elf_symbol {
+  id: 0xaaf6a826
+  name: "__tracepoint_android_vh_sched_stat_runtime_rt"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xdb1b2fe1
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_sched_stat_runtime_rt"
 }
 elf_symbol {
   id: 0xff2bccb8
@@ -323896,6 +323985,15 @@ elf_symbol {
   crc: 0x3dcb44d9
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_sched_stat_iowait"
+}
+elf_symbol {
+  id: 0xeac9b507
+  name: "__tracepoint_sched_stat_runtime"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xe601e892
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_sched_stat_runtime"
 }
 elf_symbol {
   id: 0xbc210559
@@ -375295,6 +375393,14 @@ symbols {
     value: 0x42312ccc
   }
   symbol {
+    key: "__traceiter_android_vh_dup_task_struct"
+    value: 0xf432d1c9
+  }
+  symbol {
+    key: "__traceiter_android_vh_exit_signal"
+    value: 0x1f554c2a
+  }
+  symbol {
     key: "__traceiter_android_vh_free_task"
     value: 0x5ecff02f
   }
@@ -375373,6 +375479,10 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_ipi_stop"
     value: 0x7ee652cd
+  }
+  symbol {
+    key: "__traceiter_android_vh_irqtime_account_process_tick"
+    value: 0x0bf41403
   }
   symbol {
     key: "__traceiter_android_vh_is_fpsimd_save"
@@ -375505,6 +375615,10 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_sched_show_task"
     value: 0xb5ed74f6
+  }
+  symbol {
+    key: "__traceiter_android_vh_sched_stat_runtime_rt"
+    value: 0xedb34a44
   }
   symbol {
     key: "__traceiter_android_vh_scheduler_tick"
@@ -375725,6 +375839,10 @@ symbols {
   symbol {
     key: "__traceiter_sched_stat_iowait"
     value: 0x9cf075c5
+  }
+  symbol {
+    key: "__traceiter_sched_stat_runtime"
+    value: 0xf29865b1
   }
   symbol {
     key: "__traceiter_sched_stat_sleep"
@@ -376371,6 +376489,14 @@ symbols {
     value: 0x988719fa
   }
   symbol {
+    key: "__tracepoint_android_vh_dup_task_struct"
+    value: 0x732a182b
+  }
+  symbol {
+    key: "__tracepoint_android_vh_exit_signal"
+    value: 0x0d418d38
+  }
+  symbol {
     key: "__tracepoint_android_vh_free_task"
     value: 0xe6918e09
   }
@@ -376449,6 +376575,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_ipi_stop"
     value: 0x1d442b97
+  }
+  symbol {
+    key: "__tracepoint_android_vh_irqtime_account_process_tick"
+    value: 0x31457bed
   }
   symbol {
     key: "__tracepoint_android_vh_is_fpsimd_save"
@@ -376581,6 +376711,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_sched_show_task"
     value: 0x931fa088
+  }
+  symbol {
+    key: "__tracepoint_android_vh_sched_stat_runtime_rt"
+    value: 0xaaf6a826
   }
   symbol {
     key: "__tracepoint_android_vh_scheduler_tick"
@@ -376801,6 +376935,10 @@ symbols {
   symbol {
     key: "__tracepoint_sched_stat_iowait"
     value: 0x6aa1a617
+  }
+  symbol {
+    key: "__tracepoint_sched_stat_runtime"
+    value: 0xeac9b507
   }
   symbol {
     key: "__tracepoint_sched_stat_sleep"
