@@ -53,6 +53,7 @@
 #include <trace/hooks/bug.h>
 #include <trace/hooks/softlockup.h>
 #include <trace/hooks/power.h>
+#include <trace/hooks/fs.h>
 #include <trace/hooks/fault.h>
 #include <trace/hooks/traps.h>
 #include <trace/hooks/fips140.h>
@@ -226,6 +227,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_report_bug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watchdog_timer_softlockup);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo_unfrozen);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ep_create_wakeup_source);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timerfd_create);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_die_kernel_fault);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sea);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_mem_abort);
