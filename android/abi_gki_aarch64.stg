@@ -278688,6 +278688,14 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x99e166d2
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x92233392
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x99e4a009
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -295023,6 +295031,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_cpu_idle_exit"
 }
 elf_symbol {
+  id: 0xa124d3e0
+  name: "__traceiter_android_vh_cpufreq_acct_update_power"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc9117299
+  type_id: 0x99e166d2
+  full_name: "__traceiter_android_vh_cpufreq_acct_update_power"
+}
+elf_symbol {
   id: 0x9c5d1bdd
   name: "__traceiter_android_vh_cpufreq_fast_switch"
   is_defined: true
@@ -297127,6 +297144,15 @@ elf_symbol {
   crc: 0x51b29892
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_cpu_idle_exit"
+}
+elf_symbol {
+  id: 0x704b9aae
+  name: "__tracepoint_android_vh_cpufreq_acct_update_power"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xba474b4f
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_cpufreq_acct_update_power"
 }
 elf_symbol {
   id: 0x4a3c01db
@@ -340208,6 +340234,10 @@ symbols {
     value: 0xfd04e27a
   }
   symbol {
+    key: "__traceiter_android_vh_cpufreq_acct_update_power"
+    value: 0xa124d3e0
+  }
+  symbol {
     key: "__traceiter_android_vh_cpufreq_fast_switch"
     value: 0x9c5d1bdd
   }
@@ -341142,6 +341172,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_cpu_idle_exit"
     value: 0x4ade2774
+  }
+  symbol {
+    key: "__tracepoint_android_vh_cpufreq_acct_update_power"
+    value: 0x704b9aae
   }
   symbol {
     key: "__tracepoint_android_vh_cpufreq_fast_switch"
