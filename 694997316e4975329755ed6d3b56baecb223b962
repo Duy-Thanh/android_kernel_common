@@ -16,6 +16,24 @@
       "message": "The block driver can create the needed fields dynamically if required, please do not add extra space for all systems as this would be a waste.",
       "revId": "694997316e4975329755ed6d3b56baecb223b962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01a53b1_0a9ba767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2023-05-17T09:41:26Z",
+      "side": 1,
+      "message": "```c\n\t/*\n\t * Three pointers are available for the IO schedulers, if they need\n\t * more they have to dynamically allocate it.  Flush requests are\n\t * never put on the IO scheduler. So let the flush fields share\n\t * space with the elevator data.\n\t */\n\tunion {\n\t\tstruct {\n\t\t\tstruct io_cq\t\t*icq;\n\t\t\tvoid\t\t\t*priv[2];\n\t\t} elv;\n\n\t\tstruct {\n\t\t\tunsigned int\t\tseq;\n\t\t\tstruct list_head\tlist;\n\t\t\trq_end_io_fn\t\t*saved_end_io;\n\t\t} flush;\n\t};\n```\nIs this waht you have mentioned?\n\nOur design needs to add an additional message to all requests.  It seems that this code can only use priv pointers for non-flush requests requests",
+      "parentUuid": "d66ebff5_b502b64e",
+      "revId": "694997316e4975329755ed6d3b56baecb223b962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
