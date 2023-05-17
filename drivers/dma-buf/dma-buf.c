@@ -479,6 +479,7 @@ static long dma_buf_ioctl(struct file *file,
 	struct dma_buf_sync sync;
 	enum dma_data_direction direction;
 	int ret;
+	bool is_partial_sync = false;
 
 	dmabuf = file->private_data;
 
@@ -523,6 +524,12 @@ static long dma_buf_ioctl(struct file *file,
 #endif
 
 	default:
+		trace_android_vh_dma_buf_sync_partial(dmabuf, cmd,
+			 (const void __user *)arg, &is_partial_sync, &ret);
+
+		if (is_partial_sync)
+			return ret;
+
 		return -ENOTTY;
 	}
 }
