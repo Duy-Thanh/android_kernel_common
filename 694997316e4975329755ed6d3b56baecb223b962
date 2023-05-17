@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d66ebff5_b502b64e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-17T07:31:47Z",
+      "side": 1,
+      "message": "The block driver can create the needed fields dynamically if required, please do not add extra space for all systems as this would be a waste.",
+      "revId": "694997316e4975329755ed6d3b56baecb223b962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
