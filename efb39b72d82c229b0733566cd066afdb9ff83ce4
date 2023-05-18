@@ -51,6 +51,41 @@
       "parentUuid": "880f0f7d_60785d92",
       "revId": "efb39b72d82c229b0733566cd066afdb9ff83ce4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ca06ae0_a55742c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-18T18:04:52Z",
+      "side": 1,
+      "message": "Yes, the XML should be a separate patch on top of this one. The commit message should contain the output of the ABI generation (listing the added symbols). See the commit logs of other changes to the XML file for examples.",
+      "parentUuid": "5991e57d_f3b773b3",
+      "revId": "efb39b72d82c229b0733566cd066afdb9ff83ce4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f31f6485_15f84835",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-18T18:04:52Z",
+      "side": 1,
+      "message": "Greg, are you ok with using KABI for a non-LTS use-case?",
+      "revId": "efb39b72d82c229b0733566cd066afdb9ff83ce4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
