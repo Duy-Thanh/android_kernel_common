@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f0a081_4417db21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-18T23:48:02Z",
+      "side": 1,
+      "message": "Please move android/abi_gki_aarch64_honor and android/abi_gki_aarch64.stg changes into a separate patch on top of this one. See the bug for more details.",
+      "revId": "de06387c7a5f097701ddd1cf412517c16ed0e3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
