@@ -1096,6 +1096,7 @@ struct dwc3_scratchpad_array {
  *	3	- Reserved
  * @dis_metastability_quirk: set to disable metastability quirk.
  * @dis_split_quirk: set to disable split boundary.
+ * @suspended: set to track suspend event due to U3/L2.
  * @imod_interval: set the interrupt moderation interval in 250ns
  *			increments or 0 to disable.
  * @max_cfg_eps: current max number of IN eps used across all USB configs.
@@ -1315,7 +1316,7 @@ struct dwc3 {
 	int			last_fifo_depth;
 	int			num_ep_resized;
 
-	ANDROID_KABI_USE(1, struct{ u8 clear_stall_protocol; u8 padding1;
+	ANDROID_KABI_USE(1, struct{ u8 clear_stall_protocol; u8 suspended:1;
 				u8 padding2; u8 padding3; u8 padding4; u8 padding5;
 				u8 padding6; u8 padding7; });
 	ANDROID_KABI_RESERVE(2);

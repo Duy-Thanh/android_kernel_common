@@ -60615,390 +60615,390 @@
           <var-decl name='control_mode' type-id='f9b06939' visibility='default' filepath='drivers/scsi/ufs/ufshcd.h' line='748' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='dwc3' size-in-bits='10368' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1108' column='1' id='80824a72'>
+      <class-decl name='dwc3' size-in-bits='10368' is-struct='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1109' column='1' id='80824a72'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='drd_work' type-id='ef9025d0' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1109' column='1'/>
+          <var-decl name='drd_work' type-id='ef9025d0' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1110' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='384'>
-          <var-decl name='ep0_trb' type-id='0d6a59e1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1110' column='1'/>
+          <var-decl name='ep0_trb' type-id='0d6a59e1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1111' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='448'>
-          <var-decl name='bounce' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1111' column='1'/>
+          <var-decl name='bounce' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1112' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='512'>
-          <var-decl name='scratchbuf' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1112' column='1'/>
+          <var-decl name='scratchbuf' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1113' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='576'>
-          <var-decl name='setup_buf' type-id='8bff8096' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1113' column='1'/>
+          <var-decl name='setup_buf' type-id='8bff8096' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1114' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='640'>
-          <var-decl name='ep0_trb_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1114' column='1'/>
+          <var-decl name='ep0_trb_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1115' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='704'>
-          <var-decl name='bounce_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1115' column='1'/>
+          <var-decl name='bounce_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1116' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='768'>
-          <var-decl name='scratch_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1116' column='1'/>
+          <var-decl name='scratch_addr' type-id='cf29c9b3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1117' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='832'>
-          <var-decl name='ep0_usb_req' type-id='48288128' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1117' column='1'/>
+          <var-decl name='ep0_usb_req' type-id='48288128' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1118' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2496'>
-          <var-decl name='ep0_in_setup' type-id='f9fef04f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1118' column='1'/>
+          <var-decl name='ep0_in_setup' type-id='f9fef04f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1119' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2752'>
-          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1121' column='1'/>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1122' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2816'>
-          <var-decl name='mutex' type-id='925167dc' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1124' column='1'/>
+          <var-decl name='mutex' type-id='925167dc' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1125' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='3200'>
-          <var-decl name='dev' type-id='fa0b179b' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1126' column='1'/>
+          <var-decl name='dev' type-id='fa0b179b' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1127' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='3264'>
-          <var-decl name='sysdev' type-id='fa0b179b' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1127' column='1'/>
+          <var-decl name='sysdev' type-id='fa0b179b' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1128' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='3328'>
-          <var-decl name='xhci' type-id='db362995' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1129' column='1'/>
+          <var-decl name='xhci' type-id='db362995' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1130' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='3392'>
-          <var-decl name='xhci_resources' type-id='05e8efcf' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1130' column='1'/>
+          <var-decl name='xhci_resources' type-id='05e8efcf' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1131' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='4928'>
-          <var-decl name='ev_buf' type-id='c4c1659e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1132' column='1'/>
+          <var-decl name='ev_buf' type-id='c4c1659e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1133' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='4992'>
-          <var-decl name='eps' type-id='21edd5c3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1133' column='1'/>
+          <var-decl name='eps' type-id='21edd5c3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1134' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7040'>
-          <var-decl name='gadget' type-id='49a58c0c' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1135' column='1'/>
+          <var-decl name='gadget' type-id='49a58c0c' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1136' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7104'>
-          <var-decl name='gadget_driver' type-id='9762ede1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1136' column='1'/>
+          <var-decl name='gadget_driver' type-id='9762ede1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1137' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7168'>
-          <var-decl name='clks' type-id='2942e355' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1138' column='1'/>
+          <var-decl name='clks' type-id='2942e355' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1139' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7232'>
-          <var-decl name='num_clks' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1139' column='1'/>
+          <var-decl name='num_clks' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1140' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7296'>
-          <var-decl name='reset' type-id='9f9b8114' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1141' column='1'/>
+          <var-decl name='reset' type-id='9f9b8114' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1142' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7360'>
-          <var-decl name='usb2_phy' type-id='ca9354d1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1143' column='1'/>
+          <var-decl name='usb2_phy' type-id='ca9354d1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1144' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7424'>
-          <var-decl name='usb3_phy' type-id='ca9354d1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1144' column='1'/>
+          <var-decl name='usb3_phy' type-id='ca9354d1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1145' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7488'>
-          <var-decl name='usb2_generic_phy' type-id='503ff1ba' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1146' column='1'/>
+          <var-decl name='usb2_generic_phy' type-id='503ff1ba' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1147' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7552'>
-          <var-decl name='usb3_generic_phy' type-id='503ff1ba' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1147' column='1'/>
+          <var-decl name='usb3_generic_phy' type-id='503ff1ba' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1148' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7616'>
-          <var-decl name='phys_ready' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1149' column='1'/>
+          <var-decl name='phys_ready' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1150' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7680'>
-          <var-decl name='ulpi' type-id='144a094f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1151' column='1'/>
+          <var-decl name='ulpi' type-id='144a094f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1152' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7744'>
-          <var-decl name='ulpi_ready' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1152' column='1'/>
+          <var-decl name='ulpi_ready' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1153' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7808'>
-          <var-decl name='regs' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1154' column='1'/>
+          <var-decl name='regs' type-id='eaa32e2f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1155' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7872'>
-          <var-decl name='regs_size' type-id='b59d7dce' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1155' column='1'/>
+          <var-decl name='regs_size' type-id='b59d7dce' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1156' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7936'>
-          <var-decl name='dr_mode' type-id='d291aaf1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1157' column='1'/>
+          <var-decl name='dr_mode' type-id='d291aaf1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1158' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7968'>
-          <var-decl name='current_dr_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1158' column='1'/>
+          <var-decl name='current_dr_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1159' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8000'>
-          <var-decl name='desired_dr_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1159' column='1'/>
+          <var-decl name='desired_dr_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1160' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8064'>
-          <var-decl name='edev' type-id='c0d6fada' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1160' column='1'/>
+          <var-decl name='edev' type-id='c0d6fada' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1161' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8128'>
-          <var-decl name='edev_nb' type-id='9b08f7cd' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1161' column='1'/>
+          <var-decl name='edev_nb' type-id='9b08f7cd' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1162' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8320'>
-          <var-decl name='hsphy_mode' type-id='46b5771e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1162' column='1'/>
+          <var-decl name='hsphy_mode' type-id='46b5771e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1163' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8384'>
-          <var-decl name='role_sw' type-id='3e3cd44f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1163' column='1'/>
+          <var-decl name='role_sw' type-id='3e3cd44f' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1164' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8448'>
-          <var-decl name='role_switch_default_mode' type-id='d291aaf1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1164' column='1'/>
+          <var-decl name='role_switch_default_mode' type-id='d291aaf1' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1165' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8512'>
-          <var-decl name='usb_psy' type-id='c0c93c9e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1166' column='1'/>
+          <var-decl name='usb_psy' type-id='c0c93c9e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1167' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8576'>
-          <var-decl name='fladj' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1168' column='1'/>
+          <var-decl name='fladj' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1169' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8608'>
-          <var-decl name='irq_gadget' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1169' column='1'/>
+          <var-decl name='irq_gadget' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1170' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8640'>
-          <var-decl name='otg_irq' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1170' column='1'/>
+          <var-decl name='otg_irq' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1171' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8672'>
-          <var-decl name='current_otg_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1171' column='1'/>
+          <var-decl name='current_otg_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1172' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8704'>
-          <var-decl name='desired_otg_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1172' column='1'/>
+          <var-decl name='desired_otg_role' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1173' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8736'>
-          <var-decl name='otg_restart_host' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1173' column='1'/>
+          <var-decl name='otg_restart_host' type-id='b50a4934' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1174' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8768'>
-          <var-decl name='nr_scratch' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1174' column='1'/>
+          <var-decl name='nr_scratch' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1175' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8800'>
-          <var-decl name='u1u2' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1175' column='1'/>
+          <var-decl name='u1u2' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1176' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8832'>
-          <var-decl name='maximum_speed' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1176' column='1'/>
+          <var-decl name='maximum_speed' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1177' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8864'>
-          <var-decl name='gadget_max_speed' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1177' column='1'/>
+          <var-decl name='gadget_max_speed' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1178' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8896'>
-          <var-decl name='max_ssp_rate' type-id='a9ea967a' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1178' column='1'/>
+          <var-decl name='max_ssp_rate' type-id='a9ea967a' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1179' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8928'>
-          <var-decl name='gadget_ssp_rate' type-id='a9ea967a' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1179' column='1'/>
+          <var-decl name='gadget_ssp_rate' type-id='a9ea967a' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1180' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8960'>
-          <var-decl name='ip' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1181' column='1'/>
+          <var-decl name='ip' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1182' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8992'>
-          <var-decl name='revision' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1187' column='1'/>
+          <var-decl name='revision' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1188' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9024'>
-          <var-decl name='version_type' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1225' column='1'/>
+          <var-decl name='version_type' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1226' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9056'>
-          <var-decl name='ep0_next_event' type-id='56e3bcb9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1235' column='1'/>
+          <var-decl name='ep0_next_event' type-id='56e3bcb9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1236' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9088'>
-          <var-decl name='ep0state' type-id='045093ad' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1236' column='1'/>
+          <var-decl name='ep0state' type-id='045093ad' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1237' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9120'>
-          <var-decl name='link_state' type-id='9775e40e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1237' column='1'/>
+          <var-decl name='link_state' type-id='9775e40e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1238' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9152'>
-          <var-decl name='u2sel' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1239' column='1'/>
+          <var-decl name='u2sel' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1240' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9168'>
-          <var-decl name='u2pel' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1240' column='1'/>
+          <var-decl name='u2pel' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1241' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9184'>
-          <var-decl name='u1sel' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1241' column='1'/>
+          <var-decl name='u1sel' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1242' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9192'>
-          <var-decl name='u1pel' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1242' column='1'/>
+          <var-decl name='u1pel' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1243' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9200'>
-          <var-decl name='speed' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1244' column='1'/>
+          <var-decl name='speed' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1245' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9208'>
-          <var-decl name='num_eps' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1246' column='1'/>
+          <var-decl name='num_eps' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1247' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9216'>
-          <var-decl name='hwparams' type-id='2d79d174' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1248' column='1'/>
+          <var-decl name='hwparams' type-id='2d79d174' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1249' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9664'>
-          <var-decl name='regset' type-id='62fa2ea7' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1249' column='1'/>
+          <var-decl name='regset' type-id='62fa2ea7' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1250' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9728'>
-          <var-decl name='dbg_lsp_select' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1251' column='1'/>
+          <var-decl name='dbg_lsp_select' type-id='19c2251e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1252' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9760'>
-          <var-decl name='test_mode' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1253' column='1'/>
+          <var-decl name='test_mode' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1254' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9768'>
-          <var-decl name='test_mode_nr' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1254' column='1'/>
+          <var-decl name='test_mode_nr' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1255' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9776'>
-          <var-decl name='lpm_nyet_threshold' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1255' column='1'/>
+          <var-decl name='lpm_nyet_threshold' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1256' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9784'>
-          <var-decl name='hird_threshold' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1256' column='1'/>
+          <var-decl name='hird_threshold' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1257' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9792'>
-          <var-decl name='rx_thr_num_pkt_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1257' column='1'/>
+          <var-decl name='rx_thr_num_pkt_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1258' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9800'>
-          <var-decl name='rx_max_burst_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1258' column='1'/>
+          <var-decl name='rx_max_burst_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1259' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9808'>
-          <var-decl name='tx_thr_num_pkt_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1259' column='1'/>
+          <var-decl name='tx_thr_num_pkt_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1260' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9816'>
-          <var-decl name='tx_max_burst_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1260' column='1'/>
+          <var-decl name='tx_max_burst_prd' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1261' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9824'>
-          <var-decl name='tx_fifo_resize_max_num' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1261' column='1'/>
+          <var-decl name='tx_fifo_resize_max_num' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1262' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9856'>
-          <var-decl name='hsphy_interface' type-id='80f4b756' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1263' column='1'/>
+          <var-decl name='hsphy_interface' type-id='80f4b756' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1264' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9920'>
-          <var-decl name='connected' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1265' column='1'/>
+          <var-decl name='connected' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1266' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9921'>
-          <var-decl name='softconnect' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1266' column='1'/>
+          <var-decl name='softconnect' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1267' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9922'>
-          <var-decl name='delayed_status' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1267' column='1'/>
+          <var-decl name='delayed_status' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1268' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9923'>
-          <var-decl name='ep0_bounced' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1268' column='1'/>
+          <var-decl name='ep0_bounced' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1269' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9924'>
-          <var-decl name='ep0_expect_in' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1269' column='1'/>
+          <var-decl name='ep0_expect_in' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1270' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9925'>
-          <var-decl name='has_hibernation' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1270' column='1'/>
+          <var-decl name='has_hibernation' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1271' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9926'>
-          <var-decl name='sysdev_is_parent' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1271' column='1'/>
+          <var-decl name='sysdev_is_parent' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1272' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9927'>
-          <var-decl name='has_lpm_erratum' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1272' column='1'/>
+          <var-decl name='has_lpm_erratum' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1273' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9928'>
-          <var-decl name='is_utmi_l1_suspend' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1273' column='1'/>
+          <var-decl name='is_utmi_l1_suspend' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1274' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9929'>
-          <var-decl name='is_fpga' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1274' column='1'/>
+          <var-decl name='is_fpga' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1275' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9930'>
-          <var-decl name='pending_events' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1275' column='1'/>
+          <var-decl name='pending_events' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1276' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9931'>
-          <var-decl name='do_fifo_resize' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1276' column='1'/>
+          <var-decl name='do_fifo_resize' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1277' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9932'>
-          <var-decl name='pullups_connected' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1277' column='1'/>
+          <var-decl name='pullups_connected' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1278' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9933'>
-          <var-decl name='setup_packet_pending' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1278' column='1'/>
+          <var-decl name='setup_packet_pending' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1279' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9934'>
-          <var-decl name='three_stage_setup' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1279' column='1'/>
+          <var-decl name='three_stage_setup' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1280' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9935'>
-          <var-decl name='dis_start_transfer_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1280' column='1'/>
+          <var-decl name='dis_start_transfer_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1281' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9936'>
-          <var-decl name='usb3_lpm_capable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1281' column='1'/>
+          <var-decl name='usb3_lpm_capable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1282' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9937'>
-          <var-decl name='usb2_lpm_disable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1282' column='1'/>
+          <var-decl name='usb2_lpm_disable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1283' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9938'>
-          <var-decl name='usb2_gadget_lpm_disable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1283' column='1'/>
+          <var-decl name='usb2_gadget_lpm_disable' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1284' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9939'>
-          <var-decl name='disable_scramble_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1285' column='1'/>
+          <var-decl name='disable_scramble_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1286' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9940'>
-          <var-decl name='u2exit_lfps_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1286' column='1'/>
+          <var-decl name='u2exit_lfps_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1287' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9941'>
-          <var-decl name='u2ss_inp3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1287' column='1'/>
+          <var-decl name='u2ss_inp3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1288' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9942'>
-          <var-decl name='req_p1p2p3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1288' column='1'/>
+          <var-decl name='req_p1p2p3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1289' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9943'>
-          <var-decl name='del_p1p2p3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1289' column='1'/>
+          <var-decl name='del_p1p2p3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1290' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9944'>
-          <var-decl name='del_phy_power_chg_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1290' column='1'/>
+          <var-decl name='del_phy_power_chg_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1291' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9945'>
-          <var-decl name='lfps_filter_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1291' column='1'/>
+          <var-decl name='lfps_filter_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1292' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9946'>
-          <var-decl name='rx_detect_poll_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1292' column='1'/>
+          <var-decl name='rx_detect_poll_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1293' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9947'>
-          <var-decl name='dis_u3_susphy_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1293' column='1'/>
+          <var-decl name='dis_u3_susphy_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1294' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9948'>
-          <var-decl name='dis_u2_susphy_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1294' column='1'/>
+          <var-decl name='dis_u2_susphy_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1295' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9949'>
-          <var-decl name='dis_enblslpm_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1295' column='1'/>
+          <var-decl name='dis_enblslpm_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1296' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9950'>
-          <var-decl name='dis_u1_entry_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1296' column='1'/>
+          <var-decl name='dis_u1_entry_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1297' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9951'>
-          <var-decl name='dis_u2_entry_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1297' column='1'/>
+          <var-decl name='dis_u2_entry_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1298' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9952'>
-          <var-decl name='dis_rxdet_inp3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1298' column='1'/>
+          <var-decl name='dis_rxdet_inp3_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1299' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9953'>
-          <var-decl name='dis_u2_freeclk_exists_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1299' column='1'/>
+          <var-decl name='dis_u2_freeclk_exists_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1300' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9954'>
-          <var-decl name='dis_del_phy_power_chg_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1300' column='1'/>
+          <var-decl name='dis_del_phy_power_chg_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1301' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9955'>
-          <var-decl name='dis_tx_ipgap_linecheck_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1301' column='1'/>
+          <var-decl name='dis_tx_ipgap_linecheck_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1302' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9956'>
-          <var-decl name='parkmode_disable_ss_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1302' column='1'/>
+          <var-decl name='parkmode_disable_ss_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1303' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9957'>
-          <var-decl name='tx_de_emphasis_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1304' column='1'/>
+          <var-decl name='tx_de_emphasis_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1305' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9958'>
-          <var-decl name='tx_de_emphasis' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1305' column='1'/>
+          <var-decl name='tx_de_emphasis' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1306' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9960'>
-          <var-decl name='dis_metastability_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1307' column='1'/>
+          <var-decl name='dis_metastability_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1308' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9961'>
-          <var-decl name='dis_split_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1309' column='1'/>
+          <var-decl name='dis_split_quirk' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1310' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9962'>
-          <var-decl name='async_callbacks' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1310' column='1'/>
+          <var-decl name='async_callbacks' type-id='f0981eeb' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1311' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9968'>
-          <var-decl name='imod_interval' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1312' column='1'/>
+          <var-decl name='imod_interval' type-id='1dc6a898' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1313' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9984'>
-          <var-decl name='max_cfg_eps' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1314' column='1'/>
+          <var-decl name='max_cfg_eps' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1315' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10016'>
-          <var-decl name='last_fifo_depth' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1315' column='1'/>
+          <var-decl name='last_fifo_depth' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1316' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10048'>
-          <var-decl name='num_ep_resized' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1316' column='1'/>
+          <var-decl name='num_ep_resized' type-id='95e97e5e' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1317' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10112'>
-          <var-decl name='' type-id='ac5ab616' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='' type-id='ac5ab616' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10176'>
-          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1321' column='1'/>
+          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1322' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10240'>
-          <var-decl name='android_kabi_reserved3' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1322' column='1'/>
+          <var-decl name='android_kabi_reserved3' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1323' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10304'>
-          <var-decl name='android_kabi_reserved4' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1323' column='1'/>
+          <var-decl name='android_kabi_reserved4' type-id='91ce1af9' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1324' column='1'/>
         </data-member>
       </class-decl>
       <enum-decl name='irqreturn' filepath='include/linux/irqreturn.h' line='11' column='1' id='8086ea38'>
@@ -81667,15 +81667,15 @@
           <var-decl name='uc' type-id='5fc79e81' visibility='default' filepath='include/uapi/scsi/scsi_bsg_ufs.h' line='78' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1' id='ac5ab616'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1' id='ac5ab616'>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fd3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='' type-id='e7f43fd3' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='e7f43fc4' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='' type-id='e7f43fc4' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='' type-id='ac5ab606' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='' type-id='ac5ab606' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/sound/control.h' line='77' column='1' id='ac5ab617'>
@@ -113236,30 +113236,30 @@
           <var-decl name='buf' type-id='ac5ab5e1' visibility='default' filepath='include/linux/spi/spi-mem.h' line='127' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1' id='e7f43fd3'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1' id='e7f43fd3'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='clear_stall_protocol' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='clear_stall_protocol' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8'>
-          <var-decl name='padding1' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='suspended' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='16'>
-          <var-decl name='padding2' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='padding2' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='24'>
-          <var-decl name='padding3' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='padding3' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='padding4' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='padding4' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='40'>
-          <var-decl name='padding5' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='padding5' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='48'>
-          <var-decl name='padding6' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='padding6' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='56'>
-          <var-decl name='padding7' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1318' column='1'/>
+          <var-decl name='padding7' type-id='f9b06939' visibility='default' filepath='drivers/usb/dwc3/core.h' line='1319' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='__anonymous_struct__' size-in-bits='192' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/sound/asound.h' line='1054' column='1' id='e7f43fd4'>
