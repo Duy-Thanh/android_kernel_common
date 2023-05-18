@@ -33,6 +33,23 @@
       "message": "Please separate the symbol file update to a separate patch on top of this one (stg and abi_gki_aarch64_honor)",
       "revId": "7d4ff91fd9579465d33b9b218483e393bb1f3ca3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401ca4fc_f0b891ac",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6729,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-18T17:20:54Z",
+      "side": 1,
+      "message": "Use tab for indentation (also line 6731)",
+      "revId": "7d4ff91fd9579465d33b9b218483e393bb1f3ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
