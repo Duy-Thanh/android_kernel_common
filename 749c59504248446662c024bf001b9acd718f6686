@@ -16,6 +16,24 @@
       "message": "Please open a new bug for this series of updates.\n\nThe linked bug is from 2 years ago.",
       "revId": "749c59504248446662c024bf001b9acd718f6686",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e69cd18_e2d73d65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-05-18T08:51:04Z",
+      "side": 1,
+      "message": "I\u0027ve update the message.Please review one more time, thanks~",
+      "parentUuid": "67a4cc6c_3025166e",
+      "revId": "749c59504248446662c024bf001b9acd718f6686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
