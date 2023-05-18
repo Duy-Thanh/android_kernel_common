@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fe86d17_f0d2f452",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-05-18T18:54:45Z",
+      "side": 1,
+      "message": "Corresponding ABI snapshot has been pushed separately using - https://android-review.googlesource.com/c/kernel/common/+/2596947",
+      "parentUuid": "70b86721_a2c7471e",
+      "revId": "efb39b72d82c229b0733566cd066afdb9ff83ce4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f31f6485_15f84835",
