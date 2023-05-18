@@ -50,6 +50,24 @@
       "message": "Hi , Please help to add \"Bug: 283193970\" in the commit message.",
       "revId": "52f728744aa073852abc2dedff76675300b37234",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4925edc2_d4b78dff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885655
+      },
+      "writtenOn": "2023-05-18T06:28:49Z",
+      "side": 1,
+      "message": "Hi,\n\nWe can\u0027t find this bug number 283193970. Did Google create it itself? The bug number we applied for respin is 281961970.",
+      "parentUuid": "a262d05a_2e8f8041",
+      "revId": "52f728744aa073852abc2dedff76675300b37234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
