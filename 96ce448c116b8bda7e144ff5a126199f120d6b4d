@@ -16,6 +16,24 @@
       "message": "This change should be linked to a newly opened bug, not an old closed one.",
       "revId": "96ce448c116b8bda7e144ff5a126199f120d6b4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45262afb_81f6f4b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-05-18T03:48:31Z",
+      "side": 1,
+      "message": "I\u0027ve update the message.Please review one more time, thanks~",
+      "parentUuid": "a130cf92_2a3efba5",
+      "revId": "96ce448c116b8bda7e144ff5a126199f120d6b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
