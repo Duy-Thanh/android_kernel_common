@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e1f3b84_aeb6cbea",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-18T20:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cbe2e40_3dbd3536",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "123aad51_6d75db21",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-12T20:09:31Z",
       "side": 1,
       "message": "I don\u0027t think you need to allocate a separate rela entry and copy the information from the rela array into it. A pointer to the data you\u0027re currently copying should be sufficient.",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f988f32_bcb93110",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-18T20:02:23Z",
+      "side": 1,
+      "message": "I wanted to avoid dealing with double pointers initially, but I guess it makes sense if I handle them cleanly.",
+      "parentUuid": "123aad51_6d75db21",
       "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08ab1d6a_cd5183a4",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-18T20:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a079776_ff7ee0c4",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a73ae1f_eee70de7",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-05-12T20:09:31Z",
       "side": 1,
       "message": "This doesn\u0027t seem right. cmp_rela is meant to compare two relocation entries, but here you\u0027re passing a pointer to a `struct Elf64_entry`, not the relocation entry.",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3c1306f_01f84761",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-18T20:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a73ae1f_eee70de7",
       "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "478324d8_6e994e80",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-18T20:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0f28cc_09658e7d",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a240729_a406e1ce",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-05-12T20:09:31Z",
       "side": 1,
       "message": "You need to free the previous entries (if any) and destroy the hashtable as well. You\u0027ll also have to do that at the end of the function before returning, so it might be useful to write this as:\n\n```\nif (!e) {\n        ret \u003d -ENOMEM;\n        goto free_rht;\n}\n\n...\n\nfree_rht:\n       rhashtable_free_and_destroy(...);\n       return ret; \n```\n\nAnd keep in mind that this changes the behavior of `count_plts()`; IOW it can now return a negative value.",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "264bb6d7_78f87a07",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-18T20:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a240729_a406e1ce",
       "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +228,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "254c9bee_e96f8342",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-18T20:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77b3169c_f0ec9a65",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13048ba5_e28bfd5f",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-05-12T20:09:31Z",
       "side": 1,
       "message": "remove newline?",
+      "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bf92d48_8bd30f8e",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-18T20:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13048ba5_e28bfd5f",
       "revId": "4d39554b7882b142cdfd2acb1ba255f0504938b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
