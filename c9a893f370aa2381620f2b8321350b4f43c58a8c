@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2139a6f0_f2ce277c",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "nit: maybe just `Elf64_Rela_key`?",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d9720a_e0543912",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "Is it necessary to split this up? My understanding is that before this patch, we compared the entire contents of r_info separately, and now we\u0027re still comparing it all together with the addend, so what\u0027s the rationale for splitting it up as such?",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e707eaf5_b0aeff6a",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "I don\u0027t think you need to have a function for this. Consider the approach outlined below.",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ac2e08_4e8eda8d",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "What are your thoughts on implementing this function as an `is_duplicate` fn as it was before, where instead of returning a bool, we return an int and the signature is something like:\n\n```\n/**\n * duplicate - Checks to see if the relocation entry has already been seen.\n *             If the entry hasn\u0027t been seen, it will be added to the relocation\n *             entries hashtable.\n * @elf64_rela_rht: The relocation entries hashtable\n * @rela: The relocation entry under test\n *\n * Return values:\n * 1: Indicates that the entry is a duplicate\n * 0: Indicates that the entry is not a duplicate\n * \u003c 0: Indicates that an error was encountered\n */\n static int duplicate(...)\n ```\n \n Note: You wouldn\u0027t actually add a comment to explain how the function works for a static function, but I did that for clarity.",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1be49f3d_0a84b9b5",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "`plt_count` was defined as an `unsigned int` before, but here you\u0027re referring to it as an int?",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cc4a1f4_bd297ed4",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "I think you can unroll `extract_rht_key()` into here",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078be8bd_0dfb9d76",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "You can eliminate the `lookup_result` variable by changing the `if` statement below to\n\n```\nif (!rhashtable_lookup(...)) {\n}\n```",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2970594f_27b35fa1",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "s/sizeof(struct Elf64_Rela_rht_node)/sizeof(*insert_node).\n\nUsing `sizeof(*insert_node)` is preferable, since it\u0027ll be one place less that you\u0027d have to update if the type of `insert_node` changes.",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b00f7a2_fd4d684d",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "and then replace this with `memcpy(\u0026insert_node-\u003ekey, \u0026lookup_key, sizeof(insert_node-\u003ekey));`",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "739bde36_46b39ff6",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "If we change update_rht_and_plt_count() to `duplicate()` then we don\u0027t have to pass `plt_count` around; we can ensure it is only updated in this function, which is cleaner IMO.",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e48b49a9_ab917641",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-18T20:32:41Z",
+      "side": 1,
+      "message": "nit: I think `plt_count` might be a better variable name here. I don\u0027t really see why this should be considered a delta.",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
