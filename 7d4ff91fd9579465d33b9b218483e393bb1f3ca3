@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971cb5ea_b855a810",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-18T17:18:19Z",
+      "side": 1,
+      "message": "add a space after `ANDROID:`",
+      "revId": "7d4ff91fd9579465d33b9b218483e393bb1f3ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f3a4a9e_dad6f179",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-18T17:18:19Z",
+      "side": 1,
+      "message": "Please separate the symbol file update to a separate patch on top of this one (stg and abi_gki_aarch64_honor)",
+      "revId": "7d4ff91fd9579465d33b9b218483e393bb1f3ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
