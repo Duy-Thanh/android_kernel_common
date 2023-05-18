@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70b86721_a2c7471e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-05-18T18:10:19Z",
+      "side": 1,
+      "message": "Thanks Todd for the suggestion, will fix it in next patchset",
+      "parentUuid": "5ca06ae0_a55742c9",
+      "revId": "efb39b72d82c229b0733566cd066afdb9ff83ce4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f31f6485_15f84835",
         "filename": "drivers/usb/dwc3/core.h",
         "patchSetId": 3
