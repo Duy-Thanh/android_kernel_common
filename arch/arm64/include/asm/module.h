@@ -6,12 +6,21 @@
 #define __ASM_MODULE_H
 
 #include <asm-generic/module.h>
+#include <linux/rhashtable.h>
 
 #ifdef CONFIG_ARM64_MODULE_PLTS
 struct mod_plt_sec {
 	int			plt_shndx;
 	int			plt_num_entries;
 	int			plt_max_entries;
+	/*
+	 * struct mod_plt_sec is copied after being initialized in module_frob_arch_sections().
+	 * Resizable hashtables cannot be copied, because the kernel references their internal
+	 * fields by addresses.
+	 *
+	 * Dynamically allocate the hashtables to maintain the same data structure across copies.
+	 */
+	struct rhashtable      *elf64_rela_rht;
 };
 
 #define ARM64_MODULE_PLTS_ARCHDATA					\
