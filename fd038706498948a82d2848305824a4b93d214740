@@ -69,6 +69,24 @@
       "parentUuid": "fd7bac09_ded3b95c",
       "revId": "fd038706498948a82d2848305824a4b93d214740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b007328_6ad6c8f8",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-18T18:23:56Z",
+      "side": 1,
+      "message": "Thanks for catching this. I\u0027ve added a bool to the vds struct; when Trusty doesn\u0027t have the new functionality, the Linux driver will immediately reclaim instead of sending an unmap request to Trusty.",
+      "parentUuid": "74dc676f_f8bffd29",
+      "revId": "fd038706498948a82d2848305824a4b93d214740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

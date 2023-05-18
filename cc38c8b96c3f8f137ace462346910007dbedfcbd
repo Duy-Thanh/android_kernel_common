@@ -211,6 +211,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66a6227b_f85e5cfd",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-18T18:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc64ddd6_89ec7c27",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd94bc46_46c6b986",
@@ -264,6 +282,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "994377e2_c817917a",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2517,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-18T18:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cb85d58_61adc458",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e9e04aa_8894566f",
@@ -313,6 +349,24 @@
       "side": 1,
       "message": "Based on discussion, need to register in device probe instead.",
       "parentUuid": "946a4253_853f9516",
+      "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9ce275_bc5765c4",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2641,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-18T18:23:56Z",
+      "side": 1,
+      "message": "shrinker object is now a part of vds struct, so that container_of can be used to get the correct vds when shrinker calls into tipc driver. Each vds (device) will operate on it\u0027s own free buffer lists.",
+      "parentUuid": "0cc67837_15bc2083",
       "revId": "cc38c8b96c3f8f137ace462346910007dbedfcbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
