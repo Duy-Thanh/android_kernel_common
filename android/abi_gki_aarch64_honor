@@ -1,1 +1,9 @@
 [abi_symbol_list]
+  __tracepoint_android_vh_continue_reclaim
+  __tracepoint_android_vh_dr_path
+  __tracepoint_android_vh_file_is_tiny_bypass
+  __tracepoint_android_vh_reclaim_sc
+  __traceiter_android_vh_continue_reclaim
+  __traceiter_android_vh_dr_path
+  __traceiter_android_vh_file_is_tiny_bypass
+  __traceiter_android_vh_reclaim_sc

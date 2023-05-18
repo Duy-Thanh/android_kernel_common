@@ -238,3 +238,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_reply);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_trans);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dr_path);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reclaim_sc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_continue_reclaim);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_file_is_tiny_bypass);
