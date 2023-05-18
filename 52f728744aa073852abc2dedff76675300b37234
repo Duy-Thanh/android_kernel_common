@@ -104,6 +104,24 @@
       "parentUuid": "90843f13_0ac5c793",
       "revId": "52f728744aa073852abc2dedff76675300b37234",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba12661f_95f0da68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885655
+      },
+      "writtenOn": "2023-05-18T06:53:55Z",
+      "side": 1,
+      "message": "Hi，When we created a respin request by the form, we filled in a bug number of 281961970. not 283193970",
+      "parentUuid": "3da45f7a_a6a934a5",
+      "revId": "52f728744aa073852abc2dedff76675300b37234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
