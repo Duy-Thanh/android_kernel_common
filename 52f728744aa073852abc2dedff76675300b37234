@@ -16,6 +16,23 @@
       "message": "Hi Todd,could you help merge this patch? Vivo needs to apply for respin",
       "revId": "52f728744aa073852abc2dedff76675300b37234",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f35b6545_9b4c0b65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982581
+      },
+      "writtenOn": "2023-05-18T06:20:27Z",
+      "side": 1,
+      "message": "Respin Bug : b/283193970",
+      "revId": "52f728744aa073852abc2dedff76675300b37234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
