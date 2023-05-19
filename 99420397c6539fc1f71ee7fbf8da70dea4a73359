@@ -16,6 +16,24 @@
       "message": "to do what? Please provide more details on the feature this enables",
       "revId": "99420397c6539fc1f71ee7fbf8da70dea4a73359",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0086f5c_49d6e560",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1872346
+      },
+      "writtenOn": "2023-05-19T02:15:18Z",
+      "side": 1,
+      "message": "please see issue:https://partnerissuetracker.corp.google.com/issues/282874982\nBut, this branch no need  do cherry-pick.so i will abondon it.",
+      "parentUuid": "0d349ecc_7d303b6e",
+      "revId": "99420397c6539fc1f71ee7fbf8da70dea4a73359",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
