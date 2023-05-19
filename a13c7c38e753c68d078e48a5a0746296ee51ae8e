@@ -16,6 +16,24 @@
       "message": "Please create a patch to add these new symbols to your symbol list. It should be in the same series as this patch",
       "revId": "a13c7c38e753c68d078e48a5a0746296ee51ae8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a4aa1a_47f6bf22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-05-19T06:25:16Z",
+      "side": 1,
+      "message": "\u003e Please create a patch to add these new symbols to your symbol list. It should be in the same series as this patch\nHi Sir：\nthe patch as follows:\nhttps://android-review.googlesource.com/c/kernel/common/+/2597528",
+      "parentUuid": "cdea1f52_1f2adba6",
+      "revId": "a13c7c38e753c68d078e48a5a0746296ee51ae8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
