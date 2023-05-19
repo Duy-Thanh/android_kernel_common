@@ -39,6 +39,26 @@
       "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/6fd1d51cfa253b5ee7dae18d7cf1df830e9b6137) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d6fd1d51cfa253b5ee7dae18d7cf1df830e9b6137)\n\n```\n      ## arch/alpha/include/uapi/asm/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH\t\t74\n    + #define SO_BUF_LOCK\t\t72\n      \n     +#define SO_RCVMARK\t\t75\n     +\n    @@ arch/alpha/include/uapi/asm/socket.h\n      ## arch/mips/include/uapi/asm/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH\t\t74\n    + #define SO_BUF_LOCK\t\t72\n      \n     +#define SO_RCVMARK\t\t75\n     +\n    @@ arch/mips/include/uapi/asm/socket.h\n      ## arch/parisc/include/uapi/asm/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH\t\t0x4048\n    + #define SO_BUF_LOCK\t\t0x4046\n      \n     +#define SO_RCVMARK\t\t0x4049\n     +\n    @@ arch/parisc/include/uapi/asm/socket.h\n      ## arch/sparc/include/uapi/asm/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH              0x0053\n    + #define SO_BUF_LOCK              0x0051\n      \n     +#define SO_RCVMARK               0x0054\n    - \n    ++\n      #if !defined(__KERNEL__)\n      \n    + \n     \n      ## include/net/sock.h ##\n     @@ include/net/sock.h: enum sock_flags {\n    @@ include/net/sock.h: sock_recv_timestamp(struct msghdr *msg, struct sock *sk, str\n      ## include/uapi/asm-generic/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH\t\t74\n    + #define SO_BUF_LOCK\t\t72\n      \n     +#define SO_RCVMARK\t\t75\n     +\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 533154186 android-build.ayeaye-python-dispatcher_20230518.05_p0",
       "revId": "6a8fefd80a5360ce173e66ccf359096bb8e7b7e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000045253614",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2597090?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5c7371ca_177c9af7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-19T22:00:06Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/6fd1d51cfa253b5ee7dae18d7cf1df830e9b6137) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d6fd1d51cfa253b5ee7dae18d7cf1df830e9b6137)\n\n```\n      ## arch/alpha/include/uapi/asm/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH\t\t74\n    + #define SO_BUF_LOCK\t\t72\n      \n     +#define SO_RCVMARK\t\t75\n     +\n    @@ arch/alpha/include/uapi/asm/socket.h\n      ## arch/mips/include/uapi/asm/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH\t\t74\n    + #define SO_BUF_LOCK\t\t72\n      \n     +#define SO_RCVMARK\t\t75\n     +\n    @@ arch/mips/include/uapi/asm/socket.h\n      ## arch/parisc/include/uapi/asm/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH\t\t0x4048\n    + #define SO_BUF_LOCK\t\t0x4046\n      \n     +#define SO_RCVMARK\t\t0x4049\n     +\n    @@ arch/parisc/include/uapi/asm/socket.h\n      ## arch/sparc/include/uapi/asm/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH              0x0053\n    + #define SO_BUF_LOCK              0x0051\n      \n     +#define SO_RCVMARK               0x0054\n    - \n    ++\n      #if !defined(__KERNEL__)\n      \n    + \n     \n      ## include/net/sock.h ##\n     @@ include/net/sock.h: enum sock_flags {\n    @@ include/net/sock.h: sock_recv_timestamp(struct msghdr *msg, struct sock *sk, str\n      ## include/uapi/asm-generic/socket.h ##\n     @@\n      \n    - #define SO_TXREHASH\t\t74\n    + #define SO_BUF_LOCK\t\t72\n      \n     +#define SO_RCVMARK\t\t75\n     +\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 533154186 android-build.ayeaye-python-dispatcher_20230518.05_p0",
+      "revId": "6a8fefd80a5360ce173e66ccf359096bb8e7b7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
