@@ -60,6 +60,19 @@
 #include "shuffle.h"
 #include "page_reporting.h"
 
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
+||||||| BASE   (552efa3fafd3660806014ae2efb50dc8b8b15905 ANDROID: add oem_data to mark signal normal or critical)
+EXPORT_TRACEPOINT_SYMBOL_GPL(mm_page_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(mm_page_free);
+
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(mm_page_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(mm_page_free);
+
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
+
+>>>>>>> CHANGE (3b58573735e1d2f2c3eff856ed4c596f4d52a61d ANDROID: mm: create vendor hooks for page alloc)
 /* Free Page Internal flags: for internal, non-pcp variants of free_pages(). */
 typedef int __bitwise fpi_t;
 
@@ -3829,6 +3842,7 @@ retry:
 
 check_alloc_wmark:
 		mark = wmark_pages(zone, alloc_flags & ALLOC_WMARK_MASK);
+		trace_android_vh_get_page_wmark(alloc_flags, &mark);
 		if (!zone_watermark_fast(zone, order, mark,
 				       ac->highest_zoneidx, alloc_flags,
 				       gfp_mask)) {
