@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ce996d_cbd56390",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "Are you sure? You seem to hold on to the buffers and delay the reclaim event if trusty does not support this new protocol. The only step skipped is asking trusty to unmap before the reclaim.",
+      "range": {
+        "startLine": 16,
+        "startChar": 46,
+        "endLine": 17,
+        "endChar": 65
+      },
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd3cbb82_aee9ce04",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "Should these be renamed? Is there any difference between free_buf_list and free_rx_queue other than free_buf_list containing buffers that have only been shared for read access.",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da4e46de_f8eea65e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "this is not a valid kerneldoc comment. Please run scripts/kernel-doc to validate",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dde2530_31be2ebb",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "I\u0027m not sure why you need to construct a temporary list at all, but if you do, you don\u0027t have to move the entries one by one. There are list_cut functions that will unlink multiple entries in one shot.",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e47b81f_ce3359c1",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "should we add a lru timestamp to the entries instead and free the oldest entry from either list until we have reached our count? Are we expecting both lists to need a similar number of entries?",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "661c5bf9_edfbe65c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "why did this change? Did you add any cases free_buf_list is empty when free_msg_buf_cnt is not 0",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3b7ce78_b72582d0",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "Should this go on the tail? This makes it operate as a fifo queue? Would a stack not be more efficient?",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aede547_2166d08e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2489,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "kzalloc already guarantees that free_msg_buf_cnt is 0",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23893623_276ccdf1",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2495,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "kzalloc already guarantees that these are 0",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e105125b_f15568f5",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2586,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-19T00:30:37Z",
+      "side": 1,
+      "message": "what about reclaim_in_progress? Did vds_free_msg_buf_list not jsut add a lot of entries there that you need to process?",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
