@@ -3,6 +3,7 @@
   alloc_etherdev_mqs
   alloc_netdev_mqs
   __alloc_pages
+  alloc_pages
   __alloc_skb
   alloc_workqueue
   alt_cb_patch_nops
@@ -1138,6 +1139,7 @@
   __ClearPageMovable
   init_on_free
   mutex_trylock
+  node_data
   page_relinquish
   page_reporting_register
   page_reporting_unregister
