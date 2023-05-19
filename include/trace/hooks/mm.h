@@ -135,6 +135,13 @@ DECLARE_HOOK(android_vh_mmap_region,
 DECLARE_HOOK(android_vh_try_to_unmap_one,
 	TP_PROTO(struct vm_area_struct *vma, struct page *page, unsigned long addr, bool ret),
 	TP_ARGS(vma, page, addr, ret));
+DECLARE_HOOK(android_vh_get_page_wmark,
+	TP_PROTO(unsigned int alloc_flags, unsigned long *page_wmark),
+	TP_ARGS(alloc_flags, page_wmark));
+DECLARE_HOOK(android_vh_page_add_new_anon_rmap,
+	TP_PROTO(struct page *page, struct vm_area_struct *vma,
+		unsigned long address),
+	TP_ARGS(page, vma, address));
 DECLARE_HOOK(android_vh_cma_alloc_retry,
 	TP_PROTO(char *name, int *retry),
 	TP_ARGS(name, retry));
