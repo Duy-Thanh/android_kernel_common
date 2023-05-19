@@ -1467,6 +1467,7 @@ void folio_add_new_anon_rmap(struct folio *folio, struct vm_area_struct *vma,
 		nr_pmdmapped = nr;
 	}
 
+<<<<<<< HEAD   (9f1495 ANDROID: mm: create vendor hooks for memory reclaim)
 	__folio_mod_stat(folio, nr, nr_pmdmapped);
 	mod_mthp_stat(folio_order(folio), MTHP_STAT_NR_ANON, 1);
 }
@@ -1485,6 +1486,14 @@ static __always_inline void __folio_add_file_rmap(struct folio *folio,
 	/* See comments in folio_add_anon_rmap_*() */
 	if (!folio_test_large(folio))
 		mlock_vma_folio(folio, vma);
+||||||| BASE
+	__lruvec_stat_mod_folio(folio, NR_ANON_MAPPED, nr);
+	__page_set_anon_rmap(folio, &folio->page, vma, address, 1);
+=======
+	__lruvec_stat_mod_folio(folio, NR_ANON_MAPPED, nr);
+	__page_set_anon_rmap(folio, &folio->page, vma, address, 1);
+	trace_android_vh_page_add_new_anon_rmap(&folio->page, vma, address);
+>>>>>>> CHANGE (49fa9c ANDROID: mm: create vendor hooks for page alloc)
 }
 
 /**
