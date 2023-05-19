@@ -16,6 +16,24 @@
       "message": "It would introduce less churn with a change like this:\n\n```\n+\tif (cc-\u003enr_migrate_file_pages)\n+\t\treturn get_pageblock_migratetype(page) \u003d\u003d MIGRATE_MOVABLE;\n\n\t/* If the block is MIGRATE_MOVABLE or MIGRATE_CMA, allow migration */\n\tif (is_migrate_movable(get_pageblock_migratetype(page)))\n\t\treturn true;\n```",
       "revId": "4d8c2d84cbd51aa0ef6e1ec096a760ab8124092d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca56a42_9f1249f1",
+        "filename": "mm/compaction.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1212,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-05-19T16:24:47Z",
+      "side": 0,
+      "message": "+1",
+      "parentUuid": "f9dc956e_d81dfb6c",
+      "revId": "4d8c2d84cbd51aa0ef6e1ec096a760ab8124092d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
