@@ -46,7 +46,6 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_online,
 DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 	TP_PROTO(struct cgroup_subsys_state *css, struct mem_cgroup *memcg),
 	TP_ARGS(css, memcg));
-
 DECLARE_HOOK(android_vh_meminfo_proc_show,
 	TP_PROTO(struct seq_file *m),
 	TP_ARGS(m));
@@ -111,6 +110,13 @@ DECLARE_HOOK(android_vh_page_should_be_protected,
 DECLARE_HOOK(android_vh_slab_folio_alloced,
 	TP_PROTO(unsigned int order, gfp_t flags),
 	TP_ARGS(order, flags));
+DECLARE_HOOK(android_vh_get_page_wmark,
+	TP_PROTO(unsigned int alloc_flags, unsigned long *page_wmark),
+	TP_ARGS(alloc_flags, page_wmark));
+DECLARE_HOOK(android_vh_page_add_new_anon_rmap,
+	TP_PROTO(struct page *page, struct vm_area_struct *vma,
+		unsigned long address),
+	TP_ARGS(page, vma, address));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
