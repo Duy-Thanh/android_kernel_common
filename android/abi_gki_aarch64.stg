@@ -80722,9 +80722,9 @@ member {
   offset: 8000
 }
 member {
-  id: 0xd321b6e2
+  id: 0xd3fd6f49
   name: "ext_features"
-  type_id: 0xa164938f
+  type_id: 0x7dbd382e
   offset: 768
 }
 member {
@@ -258189,7 +258189,7 @@ struct_union {
     member_id: 0x2da18b34
     member_id: 0x73ce8a34
     member_id: 0xc5d17628
-    member_id: 0xd321b6e2
+    member_id: 0xd3fd6f49
     member_id: 0x6892ce7c
     member_id: 0x7eb642a4
     member_id: 0x4142d6eb
@@ -269226,6 +269226,26 @@ enumeration {
     enumerator {
       name: "NL80211_BSS_CHAN_WIDTH_2"
       value: 4
+    }
+    enumerator {
+      name: "NL80211_BSS_CHAN_WIDTH_RESERVED_DO_NOT_USE_1"
+      value: 5
+    }
+    enumerator {
+      name: "NL80211_BSS_CHAN_WIDTH_RESERVED_DO_NOT_USE_2"
+      value: 6
+    }
+    enumerator {
+      name: "NL80211_BSS_CHAN_WIDTH_RESERVED_DO_NOT_USE_3"
+      value: 7
+    }
+    enumerator {
+      name: "NL80211_BSS_CHAN_WIDTH_RESERVED_DO_NOT_USE_4"
+      value: 8
+    }
+    enumerator {
+      name: "NL80211_BSS_CHAN_WIDTH_RESERVED_DO_NOT_USE_5"
+      value: 9
     }
   }
 }
