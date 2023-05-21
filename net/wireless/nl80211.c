@@ -396,7 +396,7 @@ static const struct nla_policy nl80211_txattr_policy[NL80211_TXRATE_MAX + 1] = {
 };
 
 static const struct nla_policy
-nl80211_tid_config_attr_policy[NL80211_TID_CONFIG_ATTR_MAX + 1] = {
+nl80211_tid_config_attr_policy[NL80211_TID_CONFIG_ATTR_TX_RATE + 1] = {
 	[NL80211_TID_CONFIG_ATTR_VIF_SUPP] = { .type = NLA_U64 },
 	[NL80211_TID_CONFIG_ATTR_PEER_SUPP] = { .type = NLA_U64 },
 	[NL80211_TID_CONFIG_ATTR_OVERRIDE] = { .type = NLA_FLAG },
@@ -12599,7 +12599,7 @@ static int nl80211_get_power_save(struct sk_buff *skb, struct genl_info *info)
 }
 
 static const struct nla_policy
-nl80211_attr_cqm_policy[NL80211_ATTR_CQM_MAX + 1] = {
+nl80211_attr_cqm_policy[NL80211_ATTR_CQM_RSSI_LEVEL + 1] = {
 	[NL80211_ATTR_CQM_RSSI_THOLD] = { .type = NLA_BINARY },
 	[NL80211_ATTR_CQM_RSSI_HYST] = { .type = NLA_U32 },
 	[NL80211_ATTR_CQM_RSSI_THRESHOLD_EVENT] = { .type = NLA_U32 },
@@ -17303,7 +17303,7 @@ static struct genl_family nl80211_fam __ro_after_init = {
 	.name = NL80211_GENL_NAME,	/* have users key off the name instead */
 	.hdrsize = 0,			/* no private header */
 	.version = 1,			/* no particular meaning now */
-	.maxattr = NL80211_ATTR_MAX,
+	.maxattr = NL80211_ATTR_PUNCT_BITMAP,
 	.policy = nl80211_policy,
 	.netnsok = true,
 	.pre_doit = nl80211_pre_doit,
