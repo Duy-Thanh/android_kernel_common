@@ -16,6 +16,24 @@
       "message": "Can this change be squashed with the previous? They modify the same files.",
       "revId": "91dae0fb652c4d37f91ad034c63d51946464d4d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e418572b_edd05155",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-22T23:18:34Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "84d6dad8_d7df7c12",
+      "revId": "91dae0fb652c4d37f91ad034c63d51946464d4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
