@@ -303054,6 +303054,13 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x9ab24357
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x4585663f
+  parameter_id: 0x2fb2b385
+}
+function {
   id: 0x9ab34327
   return_type_id: 0x6720d32f
   parameter_id: 0x1cce8023
@@ -321408,6 +321415,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_setscheduler_uclamp"
 }
 elf_symbol {
+  id: 0x4d31a413
+  name: "__traceiter_android_vh_show_mem"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1d424b7d
+  type_id: 0x9ab24357
+  full_name: "__traceiter_android_vh_show_mem"
+}
+elf_symbol {
   id: 0xe7f6f975
   name: "__traceiter_android_vh_show_resume_epoch_val"
   is_defined: true
@@ -323917,6 +323933,15 @@ elf_symbol {
   crc: 0x7ae79b81
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_setscheduler_uclamp"
+}
+elf_symbol {
+  id: 0x823654f5
+  name: "__tracepoint_android_vh_show_mem"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x5d877102
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_show_mem"
 }
 elf_symbol {
   id: 0x42ad45a3
@@ -374484,6 +374509,7 @@ interface {
   symbol_id: 0xb841c45e
   symbol_id: 0xaa3f6a65
   symbol_id: 0xa2fe718f
+  symbol_id: 0x4d31a413
   symbol_id: 0xe7f6f975
   symbol_id: 0x6d9f8b13
   symbol_id: 0x2ecf85e9
@@ -374763,6 +374789,7 @@ interface {
   symbol_id: 0xff2bccb8
   symbol_id: 0xd7ceb15f
   symbol_id: 0x923147c1
+  symbol_id: 0x823654f5
   symbol_id: 0x42ad45a3
   symbol_id: 0x8712dd01
   symbol_id: 0xefb9e5a3
