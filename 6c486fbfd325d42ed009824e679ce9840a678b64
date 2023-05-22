@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f1e2462_eca07db1",
+        "filename": "rust/kernel/security.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-22T23:08:52Z",
+      "side": 1,
+      "message": "Could an `Option\u003c\u0026[u8]\u003e` work here?",
+      "revId": "6c486fbfd325d42ed009824e679ce9840a678b64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
