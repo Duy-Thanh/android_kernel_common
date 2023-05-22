@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85bfbf0a_031623f8",
+        "filename": "rust/kernel/workqueue.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-22T23:16:05Z",
+      "side": 1,
+      "message": "Passing `flags` and `num_active` here would be nice. Those parameters can greatly affect driver performance.",
+      "revId": "522082f449aacd5683a22fe811bd48b1ac7a3699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
