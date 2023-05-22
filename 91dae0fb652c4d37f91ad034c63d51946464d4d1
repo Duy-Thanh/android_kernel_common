@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d6dad8_d7df7c12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2023-05-22T23:16:46Z",
+      "side": 1,
+      "message": "Can this change be squashed with the previous? They modify the same files.",
+      "revId": "91dae0fb652c4d37f91ad034c63d51946464d4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
