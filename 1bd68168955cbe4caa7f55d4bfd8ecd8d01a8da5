@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85c0c9b_0c322cad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-22T18:48:51Z",
+      "side": 1,
+      "message": "There should be a space after `ANDROID:` tag.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "1bd68168955cbe4caa7f55d4bfd8ecd8d01a8da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bcfb23b_6d7acdb3",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-22T18:48:51Z",
+      "side": 1,
+      "message": "Please split this change into a separate patch. There is another patch for bypassing shrink_slab (https://android-review.googlesource.com/c/kernel/common/+/2578039), so keeping them separate will help us treat these features separately.",
+      "range": {
+        "startLine": 803,
+        "startChar": 1,
+        "endLine": 803,
+        "endChar": 54
+      },
+      "revId": "1bd68168955cbe4caa7f55d4bfd8ecd8d01a8da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
