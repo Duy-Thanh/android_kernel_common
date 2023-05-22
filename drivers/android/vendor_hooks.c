@@ -241,4 +241,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_event);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_scan_control);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_continue_reclaim);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_file_is_tiny_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal);
