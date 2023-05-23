@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db94b64a_d60d30fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-23T16:33:22Z",
+      "side": 1,
+      "message": "for all of these \"BACKPORT\" patches, please add an annotation of what was changed.\n\n```\n[ changed xyz because abc ]\n```",
+      "revId": "c259f7f2bd2abc0ecb3b44642136f498fd4dd59d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
