@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c21374d7_97b45072",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-23T12:34:26Z",
+      "side": 1,
+      "message": "\u003e Commit does not refer to the upstream commit.\n\u003e Please add a line like \u0027(cherry picked from commit \u003csha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 534069704 android-build.ayeaye-python-dispatcher_20230522.05_p0\n\nThis change is tagged as `FROMGIT:`, but does not refer to a git commit in any maintainer\u0027s tree. Instead it refers to the `FROMLIST` commit aosp/2542391. Please just keep the `FROMLIST` tagging in this case as the commit is not referring to either upstream commit or maintainer tree commit.",
+      "parentUuid": "f61277e9_2a514851",
+      "revId": "60d8cac2e6fe0fa9e1e298077fce354588bc4ba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
