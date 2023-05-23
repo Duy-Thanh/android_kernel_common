@@ -23,6 +23,8 @@
 #include <linux/rust_binder.h>
 #include <uapi/linux/android/binder.h>
 #include <uapi/linux/android/binderfs.h>
+#include <linux/uidgid.h>
+#include <linux/pid_namespace.h>
 
 /* `bindgen` gets confused at certain things. */
 const gfp_t BINDINGS_GFP_KERNEL = GFP_KERNEL;

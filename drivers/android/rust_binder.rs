@@ -16,7 +16,9 @@ use core::mem::ManuallyDrop;
 
 mod context;
 mod defs;
+mod error;
 mod process;
+mod thread;
 
 module! {
     type: BinderModule,
