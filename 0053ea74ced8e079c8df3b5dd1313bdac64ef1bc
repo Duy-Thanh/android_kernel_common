@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ebd0a0_eeafa877",
+        "filename": "drivers/virt/geniezone/gzvm_vcpu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-23T16:36:39Z",
+      "side": 1,
+      "message": "fix this in original patch. This is not about ioeventfd.",
+      "revId": "0053ea74ced8e079c8df3b5dd1313bdac64ef1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
