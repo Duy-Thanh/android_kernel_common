@@ -16,6 +16,23 @@
       "message": "Blocking until 5/24 for KMI update.",
       "revId": "97f1ffaa0f791375b822f7dfeab2bb9fd537d15e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e505d7_c45bfb6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-23T19:45:53Z",
+      "side": 1,
+      "message": "Removing from 5/24 KMI update. Sami is backporting SCS from upstream that will allow PAC to stay enabled. That will be ready for the June 7 KMI update",
+      "revId": "97f1ffaa0f791375b822f7dfeab2bb9fd537d15e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
