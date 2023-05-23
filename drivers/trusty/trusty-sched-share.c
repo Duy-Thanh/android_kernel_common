@@ -22,6 +22,13 @@
  * @mem_size: size of trusty shared-memory block in bytes
  * @buf_size: page-aligned size of trusty shared-memory buffer in bytes
  * @num_pages: number of pages containing the allocated shared-memory buffer
+ * @is_registered: flag set to true when this driver has successfully registered
+ *                 the sched share memory with Trusty (and must be unregistered
+ *                 during cleanup). If Trusty image doesn't support sched
+ *                 share, this will remain false (and the memory can be reclaimed).
+ * @vm_is_shared:  flag set to true when this driver has shared the sched memory
+ *                 with Trusty via FF-A (and must be reclaimed during cleanup
+ *                 after it has been unmapped by Trusty due to an unregister)
  */
 struct trusty_sched_share_state {
 	struct device *dev;
