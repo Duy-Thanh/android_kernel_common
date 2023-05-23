@@ -16,6 +16,24 @@
       "message": "Passing `flags` and `num_active` here would be nice. Those parameters can greatly affect driver performance.",
       "revId": "522082f449aacd5683a22fe811bd48b1ac7a3699",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "424a9f2c_70de14a1",
+        "filename": "rust/kernel/workqueue.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-05-23T06:54:52Z",
+      "side": 1,
+      "message": "Perhaps you could post that comment on the LKML patch series, because that\u0027s the new home for this particular change.",
+      "parentUuid": "85bfbf0a_031623f8",
+      "revId": "522082f449aacd5683a22fe811bd48b1ac7a3699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
