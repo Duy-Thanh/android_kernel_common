@@ -242,3 +242,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_event);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_request_freq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_target_freq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_cpu_get_power);
