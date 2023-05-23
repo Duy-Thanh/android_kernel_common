@@ -16,6 +16,24 @@
       "message": "Could an `Option\u003c\u0026[u8]\u003e` work here?",
       "revId": "6c486fbfd325d42ed009824e679ce9840a678b64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ea4c883_90030ff4",
+        "filename": "rust/kernel/security.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-05-23T07:01:23Z",
+      "side": 1,
+      "message": "Perhaps, but that raises the question: Does this API distinguish between \"empty secctx string\" or \"missing secctx string\", because what the Option gives us is the ability to distinguish between those two things.\n\nI don\u0027t even know if this API can return null pointers at all. This kind of check is merely good practice when interfacing with C apis that might use a null pointer when the length of something is zero.",
+      "parentUuid": "8f1e2462_eca07db1",
+      "revId": "6c486fbfd325d42ed009824e679ce9840a678b64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
