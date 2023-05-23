@@ -140,6 +140,24 @@
       "message": "Greg, are you ok with using KABI for a non-LTS use-case?",
       "revId": "efb39b72d82c229b0733566cd066afdb9ff83ce4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "756cb275_24f36b45",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-05-23T05:24:45Z",
+      "side": 1,
+      "message": "Pushed a new patch without using KABI reserves",
+      "parentUuid": "f31f6485_15f84835",
+      "revId": "efb39b72d82c229b0733566cd066afdb9ff83ce4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
