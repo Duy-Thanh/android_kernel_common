@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b01dafb_e26a21c8",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-23T18:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9a39c8f_4210d872",
+      "range": {
+        "startLine": 54,
+        "startChar": 11,
+        "endLine": 54,
+        "endChar": 13
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1181d69d_1634e330",
@@ -93,6 +117,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ebd3f04_0fb19b84",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-23T18:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f23d2fd0_cf9e60e9",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a891133_66c8e201",
@@ -106,6 +154,30 @@
       "writtenOn": "2022-08-16T09:33:37Z",
       "side": 1,
       "message": "again, use ftrace, and never use __func__ in a dev_dbg() call.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 41
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b620b30_96139954",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-23T18:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a891133_66c8e201",
       "range": {
         "startLine": 112,
         "startChar": 0,

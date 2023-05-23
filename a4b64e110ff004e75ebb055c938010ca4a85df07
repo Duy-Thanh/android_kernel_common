@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c23f44_8a253d79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-05-23T18:27:22Z",
+      "side": 1,
+      "message": "These were addressed as part of the rebase/merge, which required checkpatch to pass.",
+      "revId": "a4b64e110ff004e75ebb055c938010ca4a85df07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
