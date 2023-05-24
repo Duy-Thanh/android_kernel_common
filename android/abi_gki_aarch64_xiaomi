@@ -210,3 +210,9 @@
   __traceiter_android_vh_psi_group
   __tracepoint_android_vh_psi_event
   __tracepoint_android_vh_psi_group
+
+#required by mi_mempool.ko
+  __traceiter_android_vh_alloc_pages_reclaim_bypass
+  __traceiter_android_vh_alloc_pages_failure_bypass
+  __tracepoint_android_vh_alloc_pages_reclaim_bypass
+  __tracepoint_android_vh_alloc_pages_failure_bypass
