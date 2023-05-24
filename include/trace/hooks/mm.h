@@ -46,6 +46,9 @@ DECLARE_HOOK(android_vh_madvise_swapin_walk_pmd_entry,
 DECLARE_HOOK(android_vh_process_madvise_end,
 	TP_PROTO(int behavior, ssize_t *ret),
 	TP_ARGS(behavior, ret));
+DECLARE_HOOK(android_vh_smaps_pte_entry,
+	TP_PROTO(swp_entry_t entry, int *type),
+	TP_ARGS(entry, type));
 
 #endif /* _TRACE_HOOK_MM_H */
 

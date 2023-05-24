@@ -541,6 +541,7 @@ static void smaps_pte_entry(pte_t *pte, unsigned long addr,
 
 		if (!non_swap_entry(swpent)) {
 			int mapcount;
+			int type = 0;
 
 			mss->swap += PAGE_SIZE;
 			mapcount = swp_swapcount(swpent);
@@ -552,6 +553,7 @@ static void smaps_pte_entry(pte_t *pte, unsigned long addr,
 			} else {
 				mss->swap_pss += (u64)PAGE_SIZE << PSS_SHIFT;
 			}
+			trace_android_vh_smaps_pte_entry(swpent, &type);
 		} else if (is_pfn_swap_entry(swpent)) {
 			if (is_migration_entry(swpent))
 				migration = true;
