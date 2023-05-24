@@ -16,6 +16,24 @@
       "message": "Symbols list change should be split into a separate patch on top of the series.",
       "revId": "29a0ed67ad20d23e8a50e31680a1d3fc81bfa7b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b503e20b_643b7eec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-24T18:00:27Z",
+      "side": 1,
+      "message": "Oh, never mind. I was looking at the earlier version of the patch.",
+      "parentUuid": "b62828ee_6217f3dd",
+      "revId": "29a0ed67ad20d23e8a50e31680a1d3fc81bfa7b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
