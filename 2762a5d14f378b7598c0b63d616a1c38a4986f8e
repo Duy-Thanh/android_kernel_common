@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "209cdfbd_442a0b44",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-24T17:32:38Z",
+      "side": 1,
+      "message": "This look unrelated.",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 50
+      },
+      "revId": "2762a5d14f378b7598c0b63d616a1c38a4986f8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
