@@ -321141,6 +321141,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_mutex_can_spin_on_owner"
 }
 elf_symbol {
+  id: 0xacfcb454
+  name: "__traceiter_android_vh_mutex_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x69762761
+  type_id: 0x9b2239e7
+  full_name: "__traceiter_android_vh_mutex_init"
+}
+elf_symbol {
   id: 0x17b175ff
   name: "__traceiter_android_vh_mutex_opt_spin_finish"
   is_defined: true
@@ -323677,6 +323686,15 @@ elf_symbol {
   crc: 0x80558a5f
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_mutex_can_spin_on_owner"
+}
+elf_symbol {
+  id: 0x6d3764d2
+  name: "__tracepoint_android_vh_mutex_init"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57f88efe
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mutex_init"
 }
 elf_symbol {
   id: 0xecc3ea35
@@ -374536,6 +374554,7 @@ interface {
   symbol_id: 0x61ea12b8
   symbol_id: 0xe44dacb1
   symbol_id: 0xb1c564a3
+  symbol_id: 0xacfcb454
   symbol_id: 0x17b175ff
   symbol_id: 0x2a856841
   symbol_id: 0x0b2ba11b
@@ -374818,6 +374837,7 @@ interface {
   symbol_id: 0x00a5fe5e
   symbol_id: 0xb6da564f
   symbol_id: 0xd5097f8d
+  symbol_id: 0x6d3764d2
   symbol_id: 0xecc3ea35
   symbol_id: 0x2122908b
   symbol_id: 0x68d68809
