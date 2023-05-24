@@ -16,6 +16,24 @@
       "message": "you forgot to remove this from the `gki_defconfig` file.  Cherry-pick the relevant change that I did in the -lts branch.",
       "revId": "c420448e062070903ba4515d70d6612528cd5337",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b744c07_c2bf28cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-05-24T13:49:24Z",
+      "side": 1,
+      "message": "Thanks.  Looking.",
+      "parentUuid": "caef71bd_0cbb9345",
+      "revId": "c420448e062070903ba4515d70d6612528cd5337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
