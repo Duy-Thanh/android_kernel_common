@@ -294,6 +294,7 @@ unsigned long sched_cpu_util(int cpu, unsigned long max)
 	return schedutil_cpu_util(cpu, cpu_util_cfs(cpu_rq(cpu)), max,
 				  ENERGY_UTIL, NULL);
 }
+EXPORT_SYMBOL_GPL(sched_cpu_util);
 
 static unsigned long sugov_get_util(struct sugov_cpu *sg_cpu)
 {
