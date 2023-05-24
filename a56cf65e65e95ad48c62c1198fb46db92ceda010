@@ -34,6 +34,24 @@
       "parentUuid": "55a653c1_ac31d1ce",
       "revId": "a56cf65e65e95ad48c62c1198fb46db92ceda010",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42e51c57_029a8019",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-24T18:00:33Z",
+      "side": 1,
+      "message": "Yes... if it isn\u0027t EXACTLY the same (a clean cherry-pick) then it shouldn\u0027t be marked as UPSTREAM. Instead use BACKPORT and add an annotation for what you changed. Please conform to the contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "c16b2d2b_9cda94f2",
+      "revId": "a56cf65e65e95ad48c62c1198fb46db92ceda010",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
