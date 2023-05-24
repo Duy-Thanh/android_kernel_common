@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000045472010",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2602125?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2515958d_b055c331",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-24T06:00:12Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/4e8ef34e36f2839ef8c8da521ab7035956436818) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d4e8ef34e36f2839ef8c8da521ab7035956436818)\n\n```\n      ## drivers/usb/dwc3/core.h ##\n     @@ drivers/usb/dwc3/core.h: struct dwc3_scratchpad_array {\n    +  *\t3\t- Reserved\n       * @dis_metastability_quirk: set to disable metastability quirk.\n       * @dis_split_quirk: set to disable split boundary.\n    -  * @wakeup_configured: set if the device is configured for remote wakeup.\n     + * @suspended: set to track suspend event due to U3/L2.\n       * @imod_interval: set the interrupt moderation interval in 250ns\n       *\t\t\tincrements or 0 to disable.\n       * @max_cfg_eps: current max number of IN eps used across all USB configs.\n     @@ drivers/usb/dwc3/core.h: struct dwc3 {\n    + \n      \tunsigned\t\tdis_split_quirk:1;\n      \tunsigned\t\tasync_callbacks:1;\n    - \tunsigned\t\twakeup_configured:1;\n     +\tunsigned\t\tsuspended:1;\n      \n      \tu16\t\t\timod_interval;\n      \n     \n      ## drivers/usb/dwc3/gadget.c ##\n    -@@ drivers/usb/dwc3/gadget.c: static int dwc3_gadget_func_wakeup(struct usb_gadget *g, int intf_id)\n    - \t\t\treturn -EINVAL;\n    - \t\t}\n    - \t\tdwc3_resume_gadget(dwc);\n    -+\t\tdwc-\u003esuspended \u003d false;\n    - \t\tdwc-\u003elink_state \u003d DWC3_LINK_STATE_U0;\n    - \t}\n    - \n     @@ drivers/usb/dwc3/gadget.c: static void dwc3_gadget_disconnect_interrupt(struct dwc3 *dwc)\n      {\n      \tint\t\t\treg;\n    @@ drivers/usb/dwc3/gadget.c: static void dwc3_gadget_reset_interrupt(struct dwc3 *\n      \t * drivers to stop any active transfers through ep disable.\n     @@ drivers/usb/dwc3/gadget.c: static void dwc3_gadget_conndone_interrupt(struct dwc3 *dwc)\n      \n    - static void dwc3_gadget_wakeup_interrupt(struct dwc3 *dwc, unsigned int evtinfo)\n    + static void dwc3_gadget_wakeup_interrupt(struct dwc3 *dwc)\n      {\n    ++\n     +\tdwc-\u003esuspended \u003d false;\n     +\n      \t/*\n      \t * TODO take core out of low power mode when that\u0027s\n      \t * implemented.\n    -@@ drivers/usb/dwc3/gadget.c: static void dwc3_gadget_linksts_change_interrupt(struct dwc3 *dwc,\n    - \t\tif (dwc-\u003egadget-\u003ewakeup_armed) {\n    - \t\t\tdwc3_gadget_enable_linksts_evts(dwc, false);\n    - \t\t\tdwc3_resume_gadget(dwc);\n    -+\t\t\tdwc-\u003esuspended \u003d false;\n    - \t\t}\n    - \t\tbreak;\n    - \tcase DWC3_LINK_STATE_U1:\n     @@ drivers/usb/dwc3/gadget.c: static void dwc3_gadget_suspend_interrupt(struct dwc3 *dwc,\n      {\n      \tenum dwc3_link_state next \u003d evtinfo \u0026 DWC3_LINK_STATE_MASK;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 534431837 android-build.ayeaye-python-dispatcher_20230523.05_p0",
+      "revId": "a56cf65e65e95ad48c62c1198fb46db92ceda010",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
