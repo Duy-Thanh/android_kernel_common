@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b62828ee_6217f3dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-24T17:59:28Z",
+      "side": 1,
+      "message": "Symbols list change should be split into a separate patch on top of the series.",
+      "revId": "29a0ed67ad20d23e8a50e31680a1d3fc81bfa7b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
