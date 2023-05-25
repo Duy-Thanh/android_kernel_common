@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "180f3ded_22856039",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-25T13:34:28Z",
+      "side": 1,
+      "message": "Generally, I would prefer those commit messages to be a little bit more helpful. _This_ is the commit message that will come up in blame and as it stands it has 2 indirections to get to the full commit message of the original change (ignoring the `Link`). As a suggestion, take the original commit message and add to it that this is relanding \u003coriginal\u003e, which was reverted in \u003crevert\u003e to fix \u003creason\u003e.",
+      "revId": "73caec1e29ebba00622079d4df33d81927389522",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
