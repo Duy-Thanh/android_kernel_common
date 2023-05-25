@@ -16,6 +16,7 @@
 #ifdef CONFIG_CMA
 #include <linux/cma.h>
 #endif
+#include <trace/hooks/mm.h>
 #include <asm/page.h>
 #include "internal.h"
 #include <trace/hooks/mm.h>
@@ -38,14 +39,16 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
 	long available;
 	unsigned long pages[NR_LRU_LISTS];
 	unsigned long sreclaimable, sunreclaim;
+	unsigned long extra_cache = 0;
 	int lru;
 
 	si_meminfo(&i);
 	si_swapinfo(&i);
 	committed = vm_memory_committed();
 
+	trace_android_vh_meminfo_cache(&extra_cache);
 	cached = global_node_page_state(NR_FILE_PAGES) -
-			total_swapcache_pages() - i.bufferram;
+			total_swapcache_pages() - i.bufferram + extra_cache;
 	if (cached < 0)
 		cached = 0;
 

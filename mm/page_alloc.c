@@ -77,7 +77,6 @@
 #include <linux/buffer_head.h>
 #include <linux/delayacct.h>
 #include <trace/hooks/mm.h>
-
 #include <asm/sections.h>
 #include <asm/tlbflush.h>
 #include <asm/div64.h>
@@ -6024,6 +6023,7 @@ long si_mem_available(void)
 	unsigned long reclaimable;
 	struct zone *zone;
 	int lru;
+	unsigned long extra_avail = 0;
 
 	for (lru = LRU_BASE; lru < NR_LRU_LISTS; lru++)
 		pages[lru] = global_node_page_state(NR_LRU_BASE + lru);
@@ -6055,6 +6055,9 @@ long si_mem_available(void)
 		global_node_page_state(NR_KERNEL_MISC_RECLAIMABLE);
 	available += reclaimable - min(reclaimable / 2, wmark_low);
 
+	trace_android_vh_si_mem_available(&extra_avail);
+	available += extra_avail;
+
 	if (available < 0)
 		available = 0;
 	return available;
@@ -6063,9 +6066,14 @@ EXPORT_SYMBOL_GPL(si_mem_available);
 
 void si_meminfo(struct sysinfo *val)
 {
-	val->totalram = totalram_pages();
+	unsigned long extra_total = 0;
+	unsigned long extra_free = 0;
+
+	trace_android_vh_si_meminfo(&extra_total, &extra_free);
+
+	val->totalram = totalram_pages() + extra_total;
 	val->sharedram = global_node_page_state(NR_SHMEM);
-	val->freeram = global_zone_page_state(NR_FREE_PAGES);
+	val->freeram = global_zone_page_state(NR_FREE_PAGES) + extra_free;
 	val->bufferram = nr_blockdev_pages();
 	val->totalhigh = totalhigh_pages();
 	val->freehigh = nr_free_highpages();

@@ -64,6 +64,15 @@ struct slabinfo;
 DECLARE_HOOK(android_vh_cache_show,
 	TP_PROTO(struct seq_file *m, struct slabinfo *sinfo, struct kmem_cache *s),
 	TP_ARGS(m, sinfo, s));
+DECLARE_HOOK(android_vh_meminfo_cache,
+	TP_PROTO(unsigned long *cache),
+	TP_ARGS(cache));
+DECLARE_HOOK(android_vh_si_mem_available,
+	TP_PROTO(unsigned long *available),
+	TP_ARGS(available));
+DECLARE_HOOK(android_vh_si_meminfo,
+	TP_PROTO(unsigned long *total, unsigned long *free),
+	TP_ARGS(total, free));
 
 #endif /* _TRACE_HOOK_MM_H */
 
