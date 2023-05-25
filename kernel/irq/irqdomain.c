@@ -240,6 +240,7 @@ static void __irq_domain_publish(struct irq_domain *domain)
  * Allocates and initializes an irq_domain structure.
  * Returns pointer to IRQ domain, or NULL on failure.
  */
+<<<<<<< HEAD   (e7141b ANDROID: remove CONFIG_NET_CLS_TCINDEX from gki_defconfig)
 struct irq_domain *__irq_domain_add(struct fwnode_handle *fwnode, int size,
 				    irq_hw_number_t hwirq_max, int direct_max,
 				    const struct irq_domain_ops *ops,
@@ -248,6 +249,16 @@ struct irq_domain *__irq_domain_add(struct fwnode_handle *fwnode, int size,
 	struct irq_domain *domain;
 
 	domain = __irq_domain_create(fwnode, (unsigned int)size, hwirq_max, direct_max,
+=======
+struct irq_domain *__irq_domain_add(struct fwnode_handle *fwnode, unsigned int size,
+				    irq_hw_number_t hwirq_max, int direct_max,
+				    const struct irq_domain_ops *ops,
+				    void *host_data)
+{
+	struct irq_domain *domain;
+
+	domain = __irq_domain_create(fwnode, size, hwirq_max, direct_max,
+>>>>>>> BRANCH (db91e4 Merge 5.4.242 into android12-5.4-lts)
 				     ops, host_data);
 	if (domain)
 		__irq_domain_publish(domain);
