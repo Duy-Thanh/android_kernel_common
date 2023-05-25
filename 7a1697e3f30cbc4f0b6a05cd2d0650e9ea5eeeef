@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "587d23d4_5208841c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-05-25T15:45:11Z",
+      "side": 1,
+      "message": "Please cherry-pick the original commit. This has a different `Change-Id` and the metadata (e.g. author) is also incorrect. You should be able to do this cleanly: `git cherry-pick e26e363102c8 e488f8ecf71c` and upload that instead. Also, this will break KMI so it will need to wait for the next KMI update. I\u0027ll abandon these commits.",
+      "revId": "7a1697e3f30cbc4f0b6a05cd2d0650e9ea5eeeef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
