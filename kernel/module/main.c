@@ -6,6 +6,7 @@
 
 #define INCLUDE_VERMAGIC
 
+#include <linux/time64.h>
 #include <linux/export.h>
 #include <linux/extable.h>
 #include <linux/moduleloader.h>
@@ -2731,7 +2732,12 @@ static int load_module(struct load_info *info, const char __user *uargs,
 	struct module *mod;
 	long err = 0;
 	char *after_dashes;
-
+	bool is_wlan = false;
+	struct timespec64 tv1, tv2;
+  	long long int diff;
+	
+	//pr_info("VILAS: Module started loading\n");
+	ktime_get_ts64(&tv1);
 	/*
 	 * Do the signature check (if any) first. All that
 	 * the signature check needs is info->len, it does
@@ -2899,14 +2905,27 @@ static int load_module(struct load_info *info, const char __user *uargs,
 			goto sysfs_cleanup;
 	}
 
+	if (!strcmp(info->name, "bcmdhd4389")) {
+		is_wlan = true;
+	}
+
 	/* Get rid of temporary copy. */
 	free_copy(info, flags);
 
 	/* Done! */
 	trace_module_load(mod);
 
-	return do_init_module(mod);
+	ktime_get_ts64(&tv2);
 
+	diff = (tv2.tv_sec - tv1.tv_sec) * 1000000000 + tv2.tv_nsec - tv1.tv_nsec;
+
+	pr_info("VILAS: Module %s finished loading, time = %lld ns\n", mod->name, diff);
+
+	if (!is_wlan) {	
+		return do_init_module(mod);
+	} else {
+		return 0;
+	}
  sysfs_cleanup:
 	mod_sysfs_teardown(mod);
  coming_cleanup:
