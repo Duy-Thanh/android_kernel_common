@@ -46,6 +46,30 @@
       },
       "revId": "801b317b1cc5b211b26252bf411b1bf2301d179a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de7cc17e_4f69180d",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-25T15:18:51Z",
+      "side": 1,
+      "message": "I still don\u0027t see how `type` parameter can be used here.",
+      "parentUuid": "426160b2_7119884f",
+      "range": {
+        "startLine": 556,
+        "startChar": 44,
+        "endLine": 556,
+        "endChar": 49
+      },
+      "revId": "801b317b1cc5b211b26252bf411b1bf2301d179a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
