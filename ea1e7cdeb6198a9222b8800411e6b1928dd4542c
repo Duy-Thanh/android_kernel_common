@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aed95f79_89903783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-25T19:59:10Z",
+      "side": 1,
+      "message": "please move these to the patches that introduce each hook and abandon this patch.",
+      "revId": "ea1e7cdeb6198a9222b8800411e6b1928dd4542c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
