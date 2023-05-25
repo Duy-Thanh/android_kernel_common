@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53a6e576_133bb82d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-25T20:00:28Z",
+      "side": 1,
+      "message": "This breaks the KMI so it needs to wait for the June 7 KMI update.",
+      "revId": "476d826ef30373dd0e0e451def1383b6d32478e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
