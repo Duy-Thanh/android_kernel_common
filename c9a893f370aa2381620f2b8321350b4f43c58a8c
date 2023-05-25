@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da8a5b58_19261252",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2139a6f0_f2ce277c",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67d9720a_e0543912",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-18T20:32:41Z",
       "side": 1,
       "message": "Is it necessary to split this up? My understanding is that before this patch, we compared the entire contents of r_info separately, and now we\u0027re still comparing it all together with the addend, so what\u0027s the rationale for splitting it up as such?",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08984606_d256d430",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "You\u0027re right. I forgot that r_info contains only the symbol index and type, so we can directly compare it.",
+      "parentUuid": "67d9720a_e0543912",
       "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e799128_25f9ab24",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e707eaf5_b0aeff6a",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63ac2e08_4e8eda8d",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-05-18T20:32:41Z",
       "side": 1,
       "message": "What are your thoughts on implementing this function as an `is_duplicate` fn as it was before, where instead of returning a bool, we return an int and the signature is something like:\n\n```\n/**\n * duplicate - Checks to see if the relocation entry has already been seen.\n *             If the entry hasn\u0027t been seen, it will be added to the relocation\n *             entries hashtable.\n * @elf64_rela_rht: The relocation entries hashtable\n * @rela: The relocation entry under test\n *\n * Return values:\n * 1: Indicates that the entry is a duplicate\n * 0: Indicates that the entry is not a duplicate\n * \u003c 0: Indicates that an error was encountered\n */\n static int duplicate(...)\n ```\n \n Note: You wouldn\u0027t actually add a comment to explain how the function works for a static function, but I did that for clarity.",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c5834e3_a360f5ff",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "I was seeing this: https://www.kernel.org/doc/html/v4.10/process/coding-style.html#function-return-values-and-names\n\n```\nMixing up these two sorts of representations is a fertile source of difficult-to-find bugs.\n```\n\nSo didn\u0027t want to structure my return values that way. Refactored the code according to our offline discussion.\n\nThis makes me wonder if I should refactor the `count_plts` code somehow though. Because even that function is following the anti-pattern.",
+      "parentUuid": "63ac2e08_4e8eda8d",
       "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59e0bdae_3ed6ea4f",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1be49f3d_0a84b9b5",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cc4a1f4_bd297ed4",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-05-18T20:32:41Z",
       "side": 1,
       "message": "I think you can unroll `extract_rht_key()` into here",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7f150f8_8f959342",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cc4a1f4_bd297ed4",
       "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +228,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddd1498e_a30d7c6c",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "078be8bd_0dfb9d76",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2970594f_27b35fa1",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-05-18T20:32:41Z",
       "side": 1,
       "message": "s/sizeof(struct Elf64_Rela_rht_node)/sizeof(*insert_node).\n\nUsing `sizeof(*insert_node)` is preferable, since it\u0027ll be one place less that you\u0027d have to update if the type of `insert_node` changes.",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17f4a5b0_d9b82cbb",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2970594f_27b35fa1",
       "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -154,6 +298,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d95a354_270c607f",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "Refactoring the code into `duplicate_rel` and `insert_rela_to_rht`, this cant be done anymore as lookup_key is not in the scope for the latter function.",
+      "parentUuid": "0b00f7a2_fd4d684d",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "739bde36_46b39ff6",
@@ -171,6 +333,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd7a19ea_b4a56b32",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "739bde36_46b39ff6",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e48b49a9_ab917641",
@@ -184,6 +364,24 @@
       "writtenOn": "2023-05-18T20:32:41Z",
       "side": 1,
       "message": "nit: I think `plt_count` might be a better variable name here. I don\u0027t really see why this should be considered a delta.",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "743be036_e5c8a427",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-25T19:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e48b49a9_ab917641",
       "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
