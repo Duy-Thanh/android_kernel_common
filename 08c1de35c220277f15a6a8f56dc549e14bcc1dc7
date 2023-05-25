@@ -16,6 +16,23 @@
       "message": "Sorry I somehow forgot about this CL. Can we please re-trigger this.",
       "revId": "08c1de35c220277f15a6a8f56dc549e14bcc1dc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c6528a_f1e00ae2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-25T08:12:59Z",
+      "side": 1,
+      "message": "new bug id needed",
+      "revId": "08c1de35c220277f15a6a8f56dc549e14bcc1dc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
