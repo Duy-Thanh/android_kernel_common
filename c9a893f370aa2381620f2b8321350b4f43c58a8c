@@ -159,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "259058bd_e7aea0c9",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-05-25T23:16:18Z",
+      "side": 1,
+      "message": "I think what you have now is fine.",
+      "parentUuid": "18d3c208_358a6499",
+      "revId": "c9a893f370aa2381620f2b8321350b4f43c58a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1be49f3d_0a84b9b5",
