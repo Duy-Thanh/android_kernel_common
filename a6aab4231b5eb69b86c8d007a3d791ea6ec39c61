@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fabc107_d60778b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-05-26T17:13:10Z",
+      "side": 1,
+      "message": "If we want to merge this, someone other than me needs to mark it with a code review +2. Even though I\u0027m not the author of this patch, since I cherry-picked it, gerrit does not count my vote as an approval.",
+      "revId": "a6aab4231b5eb69b86c8d007a3d791ea6ec39c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
