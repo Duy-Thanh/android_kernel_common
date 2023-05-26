@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49bb56d8_b50ce9a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-26T16:39:15Z",
+      "side": 1,
+      "message": "KMI_GENERATION needs to be reset to 0 in build.config.common. Might as well do it in this patch",
+      "revId": "664c58bc7f98668c2d65c2f445160fd63052ca07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
