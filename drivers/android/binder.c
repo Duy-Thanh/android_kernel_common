@@ -4440,6 +4440,8 @@ static int binder_thread_read(struct binder_proc *proc,
 	int ret = 0;
 	int wait_for_proc_work;
 
+	struct binder_priority proc_priority;
+
 	if (*consumed == 0) {
 		if (put_user(BR_NOOP, (uint32_t __user *)ptr))
 			return -EFAULT;
@@ -4464,8 +4466,15 @@ retry:
 			wait_event_interruptible(binder_user_error_wait,
 						 binder_stop_on_user_error < 2);
 		}
+		if (binder_supported_policy(proc->tsk->policy)) {
+			proc_priority.sched_policy = proc->tsk->policy;
+			proc_priority.prio = proc->tsk->normal_prio;
+		} else {
+			proc_priority.sched_policy = SCHED_NORMAL;
+			proc_priority.prio = NICE_TO_PRIO(0);
+		}
 		trace_android_vh_binder_restore_priority(NULL, current);
-		binder_restore_priority(current, proc->default_priority);
+		binder_restore_priority(current, proc_priority);
 	}
 
 	if (non_block) {
