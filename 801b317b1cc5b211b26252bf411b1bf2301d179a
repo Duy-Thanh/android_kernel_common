@@ -70,6 +70,30 @@
       },
       "revId": "801b317b1cc5b211b26252bf411b1bf2301d179a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c01f6de_c648e4e1",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2023-05-26T00:35:17Z",
+      "side": 1,
+      "message": "I\u0027ve updated how the type would be used.\nBased on the characteristics of a swap entry, such as written-back, same-filled or huge, I\u0027d like to show more information about memory status of a process.",
+      "parentUuid": "de7cc17e_4f69180d",
+      "range": {
+        "startLine": 556,
+        "startChar": 44,
+        "endLine": 556,
+        "endChar": 49
+      },
+      "revId": "801b317b1cc5b211b26252bf411b1bf2301d179a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
