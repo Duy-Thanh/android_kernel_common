@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40b5f761_22a5fbd4",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-26T18:29:02Z",
+      "side": 1,
+      "message": "Instead do something like this:\n```\ntrace_android_vh_smaps_pte_entry_adjust(swpent, \u0026mss-\u003ewriteback,\n                                        \u0026mss-\u003esame, \u0026mss-\u003ehuge);\n```",
+      "range": {
+        "startLine": 559,
+        "startChar": 3,
+        "endLine": 565,
+        "endChar": 27
+      },
+      "revId": "c4413e68a6b04bbac5ca1a29c14828ab6fe24a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbdb7cfa_f6b0a6b3",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-26T18:29:02Z",
+      "side": 1,
+      "message": "Can these printouts be done from inside a vendor hook? `seq_puts` and `seq_putc` are exported functions.\n\n```\ntrace_android_vh_smaps_show_smap(mss-\u003ewriteback, mss-\u003esame, mss-\u003ehuge);\n```",
+      "range": {
+        "startLine": 855,
+        "startChar": 0,
+        "endLine": 857,
+        "endChar": 49
+      },
+      "revId": "c4413e68a6b04bbac5ca1a29c14828ab6fe24a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
