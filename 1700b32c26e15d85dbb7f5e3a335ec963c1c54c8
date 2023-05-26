@@ -16,6 +16,23 @@
       "message": "This patch has been previously accepted by the community.\nhttps://lore.kernel.org/lkml/20201223021813.2791612-104-sashal@kernel.org/\n\nStephan Gerhold encountered an issue and reverted it, but this patch is not the actual problem. We still need it, so I add a vendor hook.\nhttps://lore.kernel.org/all/X%2FycQpu7NIGI969v@gerhold.net/",
       "revId": "1700b32c26e15d85dbb7f5e3a335ec963c1c54c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4acef64_abda3d44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-26T16:08:45Z",
+      "side": 1,
+      "message": "Sorry, but no, this is not ok, it will cause problems, fix the root cause here first, the driver core is not a place for any such hooks.",
+      "revId": "1700b32c26e15d85dbb7f5e3a335ec963c1c54c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
