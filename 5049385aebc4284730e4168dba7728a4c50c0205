@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de88d438_de6d950e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-26T22:02:12Z",
+      "side": 1,
+      "message": "Use \"[\" instead of \"(\" for backport annotations",
+      "revId": "5049385aebc4284730e4168dba7728a4c50c0205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e918a8_8b8afe10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-26T22:02:12Z",
+      "side": 1,
+      "message": "\"TEST\u003dCQ\" doesn\u0027t mean anything in Android. Use \"Test: \" and expand CQ to whatever it stands for.",
+      "revId": "5049385aebc4284730e4168dba7728a4c50c0205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
