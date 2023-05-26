@@ -16,6 +16,23 @@
       "message": "Hi Todd,\nPlease review this commit which cp from android13-5.15",
       "revId": "87db78ddd399af594699e45915a16c896117f21f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5ef29d4_913e41f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-26T16:57:52Z",
+      "side": 1,
+      "message": "Added to June 7 KMI update",
+      "revId": "87db78ddd399af594699e45915a16c896117f21f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
