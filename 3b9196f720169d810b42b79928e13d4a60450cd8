@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc6e9ec6_84c02355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-26T08:06:04Z",
+      "side": 1,
+      "message": "The ABI representation drops quite some type information, LTO vs non-LTO?",
+      "revId": "3b9196f720169d810b42b79928e13d4a60450cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
