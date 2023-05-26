@@ -16,6 +16,23 @@
       "message": "KMI_GENERATION needs to be reset to 0 in build.config.common. Might as well do it in this patch",
       "revId": "664c58bc7f98668c2d65c2f445160fd63052ca07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e78a70eb_c1b6dc58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-26T16:44:57Z",
+      "side": 1,
+      "message": "Probably in a separate patch, need to drop symbol files and stg file since no KMI enforcement on this branch yet. I think the android/ directory should only contain the GKI modules files (not completely sure about that, and Ramji is away, but probably just leave them as they are and make sure the builds all work).",
+      "revId": "664c58bc7f98668c2d65c2f445160fd63052ca07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
