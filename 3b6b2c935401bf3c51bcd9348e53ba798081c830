@@ -50,6 +50,47 @@
       "message": "1. Shouldn\u0027t this be `!duplicate_rel(...)`?\n\n2. I think this might look cleaner if you structured this as:\n\n```\nif (rela[i].r_addend !\u003d0) {\n        plt_count++;\n} else if (!duplicate_rel(...)) {\n        ...\n}\nbreak;\n```",
       "revId": "3b6b2c935401bf3c51bcd9348e53ba798081c830",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f5c2ad0_40c84990",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-05-26T00:25:37Z",
+      "side": 1,
+      "message": "I think it\u0027d be even simpler if insert_rela_to_rht(() just returns true/false depending on if it was a new key or not.",
+      "parentUuid": "f6e4e7d9_843760fa",
+      "revId": "3b6b2c935401bf3c51bcd9348e53ba798081c830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036420b9_b2d62609",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-05-26T00:25:37Z",
+      "side": 1,
+      "message": "Seems like unnecessary code churn to pull out the plt_count like this. All you\u0027d need to do is delete the sorting, right?",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 26
+      },
+      "revId": "3b6b2c935401bf3c51bcd9348e53ba798081c830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
