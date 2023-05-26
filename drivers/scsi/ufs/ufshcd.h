@@ -1499,5 +1499,5 @@ void ufshcd_clk_scaling_start_busy(struct ufs_hba *hba);
 void ufshcd_clk_scaling_update_busy(struct ufs_hba *hba);
 void ufshcd_add_command_trace(struct ufs_hba *hba, unsigned int tag,
 				     enum ufs_trace_str_t str_t);
-
+int ufshcd_try_to_abort_task(struct ufs_hba *hba, int tag);
 #endif /* End of Header */
