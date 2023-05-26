@@ -16,6 +16,24 @@
       "message": "The ABI representation drops quite some type information, LTO vs non-LTO?",
       "revId": "3b9196f720169d810b42b79928e13d4a60450cd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e8004ff_3bd63372",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-26T08:09:10Z",
+      "side": 1,
+      "message": "I used `LTO\u003dfull`, perhaps the previous commit on this branch that added symbols did not?",
+      "parentUuid": "dc6e9ec6_84c02355",
+      "revId": "3b9196f720169d810b42b79928e13d4a60450cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
