@@ -16,6 +16,24 @@
       "message": "symbols list update is missing.",
       "revId": "d92de9d5eef79e52dc124dcfaca484e348618ab9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8446d5f2_86bff888",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2009905
+      },
+      "writtenOn": "2023-05-26T08:47:28Z",
+      "side": 1,
+      "message": "We have resolved the merge conflict and resubmitted this patch. Additionally, we have also submitted an updated symbols list patch (https://android-review.googlesource.com/c/kernel/common/+/2606825).",
+      "parentUuid": "8c66c0c3_8bd2dbb0",
+      "revId": "d92de9d5eef79e52dc124dcfaca484e348618ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
