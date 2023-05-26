@@ -16,6 +16,23 @@
       "message": "This will need to wait until the KMI update on June 7 since it removes a KMI symbol (__sock_recv_ts_and_drops)",
       "revId": "6a8fefd80a5360ce173e66ccf359096bb8e7b7e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "828aee25_808ceabd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-26T20:02:08Z",
+      "side": 1,
+      "message": "Breaks KMI. Queue for June 7 KMI update",
+      "revId": "6a8fefd80a5360ce173e66ccf359096bb8e7b7e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
