@@ -2127,7 +2127,7 @@ static void binder_transaction_buffer_release(struct binder_proc *proc,
 	if (buffer->target_node)
 		binder_dec_node(buffer->target_node, 1, 0);
 
-	off_start_offset = ALIGN(buffer->data_size, sizeof(void *));
+	off_start_offset = ALIGN(buffer->data_size, sizeof(u64));
 
 	for (buffer_offset = off_start_offset; buffer_offset < off_end_offset;
 	     buffer_offset += sizeof(binder_size_t)) {
@@ -2296,7 +2296,7 @@ static inline void binder_release_entire_buffer(struct binder_proc *proc,
 {
 	binder_size_t off_end_offset;
 
-	off_end_offset = ALIGN(buffer->data_size, sizeof(void *));
+	off_end_offset = ALIGN(buffer->data_size, sizeof(u64));
 	off_end_offset += buffer->offsets_size;
 
 	binder_transaction_buffer_release(proc, thread, buffer,
@@ -3431,9 +3431,9 @@ static void binder_transaction(struct binder_proc *proc,
 	}
 	if (secctx) {
 		int err;
-		size_t buf_offset = ALIGN(tr->data_size, sizeof(void *)) +
-				    ALIGN(tr->offsets_size, sizeof(void *)) +
-				    ALIGN(extra_buffers_size, sizeof(void *)) -
+		size_t buf_offset = ALIGN(tr->data_size, sizeof(u64)) +
+				    ALIGN(tr->offsets_size, sizeof(u64)) +
+				    ALIGN(extra_buffers_size, sizeof(u64)) -
 				    ALIGN(secctx_sz, sizeof(u64));
 
 		t->security_ctx = (uintptr_t)t->buffer->user_data + buf_offset;
@@ -3456,7 +3456,7 @@ static void binder_transaction(struct binder_proc *proc,
 	if (binder_alloc_copy_user_to_buffer(
 				&target_proc->alloc,
 				t->buffer,
-				ALIGN(tr->data_size, sizeof(void *)),
+				ALIGN(tr->data_size, sizeof(u64)),
 				(const void __user *)
 					(uintptr_t)tr->data.ptr.offsets,
 				tr->offsets_size)) {
@@ -3484,10 +3484,10 @@ static void binder_transaction(struct binder_proc *proc,
 		return_error_line = __LINE__;
 		goto err_bad_offset;
 	}
-	off_start_offset = ALIGN(tr->data_size, sizeof(void *));
+	off_start_offset = ALIGN(tr->data_size, sizeof(u64));
 	buffer_offset = off_start_offset;
 	off_end_offset = off_start_offset + tr->offsets_size;
-	sg_buf_offset = ALIGN(off_end_offset, sizeof(void *));
+	sg_buf_offset = ALIGN(off_end_offset, sizeof(u64));
 	sg_buf_end_offset = sg_buf_offset + extra_buffers_size -
 		ALIGN(secctx_sz, sizeof(u64));
 	off_min = 0;

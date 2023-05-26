@@ -390,8 +390,8 @@ static struct binder_buffer *binder_alloc_new_buf_locked(
 	}
 	mmap_read_unlock(alloc->mm);
 
-	data_offsets_size = ALIGN(data_size, sizeof(void *)) +
-		ALIGN(offsets_size, sizeof(void *));
+	data_offsets_size = ALIGN(data_size, sizeof(u64)) +
+		ALIGN(offsets_size, sizeof(u64));
 
 	if (data_offsets_size < data_size || data_offsets_size < offsets_size) {
 		binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,
@@ -399,7 +399,7 @@ static struct binder_buffer *binder_alloc_new_buf_locked(
 				alloc->pid, data_size, offsets_size);
 		return ERR_PTR(-EINVAL);
 	}
-	size = data_offsets_size + ALIGN(extra_buffers_size, sizeof(void *));
+	size = data_offsets_size + ALIGN(extra_buffers_size, sizeof(u64));
 	if (size < data_offsets_size || size < extra_buffers_size) {
 		binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,
 				"%d: got transaction with invalid extra_buffers_size %zd\n",
@@ -641,9 +641,9 @@ static void binder_free_buf_locked(struct binder_alloc *alloc,
 
 	buffer_size = binder_alloc_buffer_size(alloc, buffer);
 
-	size = ALIGN(buffer->data_size, sizeof(void *)) +
-		ALIGN(buffer->offsets_size, sizeof(void *)) +
-		ALIGN(buffer->extra_buffers_size, sizeof(void *));
+	size = ALIGN(buffer->data_size, sizeof(u64)) +
+		ALIGN(buffer->offsets_size, sizeof(u64)) +
+		ALIGN(buffer->extra_buffers_size, sizeof(u64));
 
 	binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,
 		     "%d: binder_free_buf %pK size %zd buffer_size %zd\n",
