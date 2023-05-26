@@ -34,6 +34,24 @@
       "parentUuid": "9df36672_2c1b2c14",
       "revId": "45affc717651a23fbd844084f9ead68c90848c01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d0bc915_a33b5ffa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-26T15:27:47Z",
+      "side": 1,
+      "message": "If you want to do that, then submit all of those patches as part of the same series with the symbol list change on top. The symbol list change allows us to understand the impact on the KMI as part of the review.",
+      "parentUuid": "1240f803_1efdc126",
+      "revId": "45affc717651a23fbd844084f9ead68c90848c01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
