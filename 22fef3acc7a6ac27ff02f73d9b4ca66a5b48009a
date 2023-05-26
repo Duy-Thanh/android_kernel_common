@@ -16,6 +16,24 @@
       "message": "Build-break:\n```\n/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/25/execroot/__main__/common/kernel/sched/core.c:7379:54: error: variable \u0027max\u0027 is uninitialized when used here [-Werror,-Wuninitialized]\n        trace_android_rvh_effective_cpu_util(cpu, util_cfs, max, type, p, \u0026new_util);\n                                                            ^~~\n/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/25/execroot/__main__/common/kernel/sched/core.c:7375:39: note: initialize the variable \u0027max\u0027 to silence this warning\n        unsigned long dl_util, util, irq, max;\n                                             ^\n                                              \u003d 0\n1 error generated.\n```\n\nPlease fix",
       "revId": "22fef3acc7a6ac27ff02f73d9b4ca66a5b48009a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c1c2d61_b2a7a28b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7379,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2023-05-26T08:17:10Z",
+      "side": 1,
+      "message": "Hi Todd\n\nThe bug has been fixed, please review.\n\nThanks！",
+      "parentUuid": "8b5626d6_14547cfe",
+      "revId": "22fef3acc7a6ac27ff02f73d9b4ca66a5b48009a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
