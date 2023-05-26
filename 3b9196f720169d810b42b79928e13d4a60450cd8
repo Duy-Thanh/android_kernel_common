@@ -105,6 +105,24 @@
       "parentUuid": "4b001e33_b0aa666b",
       "revId": "3b9196f720169d810b42b79928e13d4a60450cd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ae8dcc_bb9a885f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-05-26T15:34:15Z",
+      "side": 1,
+      "message": "I\u0027ve checked. The previous commit has identical generated and committed XML.\n\nThis commit does not.\n\nThe diff and fidelity diffs look good (matching expectations and empty, respectively) for the generated XML.\n\nThe fidelity diff is bad for the committed XML as you know.\n\nPlease just copy the generated XML from /google/data/ro/projects/android/fetch_artifact --bid P57332742 --target kernel_abi_aarch64 \u0027abi-generated.xml\u0027 and call it a day.",
+      "parentUuid": "943b1841_a20a8a2a",
+      "revId": "3b9196f720169d810b42b79928e13d4a60450cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
