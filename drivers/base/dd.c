@@ -29,6 +29,8 @@
 #include <linux/pinctrl/devinfo.h>
 #include <linux/slab.h>
 
+#include <trace/hooks/pm_domain.h>
+
 #include "base.h"
 #include "power/power.h"
 
@@ -392,6 +394,8 @@ bool device_is_bound(struct device *dev)
 
 static void driver_bound(struct device *dev)
 {
+	bool pm_move = false;
+
 	if (device_is_bound(dev)) {
 		pr_warn("%s: device %s already bound\n",
 			__func__, kobject_name(&dev->kobj));
@@ -405,6 +409,10 @@ static void driver_bound(struct device *dev)
 	device_links_driver_bound(dev);
 
 	device_pm_check_callbacks(dev);
+
+	trace_android_rvh_pm_move(&pm_move);
+	if (pm_move)
+		device_pm_move_to_tail(dev);
 
 	/*
 	 * Make sure the device is no longer in one of the deferred lists and

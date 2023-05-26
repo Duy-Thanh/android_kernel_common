@@ -15,6 +15,10 @@ DECLARE_HOOK(android_vh_allow_domain_state,
 	TP_PROTO(struct generic_pm_domain *genpd, uint32_t idx, bool *allow),
 	TP_ARGS(genpd, idx, allow))
 
+DECLARE_RESTRICTED_HOOK(android_rvh_pm_move,
+	TP_PROTO(bool *pm_move),
+	TP_ARGS(pm_move), 1);
+
 #endif /* _TRACE_HOOK_PM_DOMAIN_H */
 
 #include <trace/define_trace.h>
