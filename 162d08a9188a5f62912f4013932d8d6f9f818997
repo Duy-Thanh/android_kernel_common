@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c7dc782_ed4693d5",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6385,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-05-26T17:12:46Z",
+      "side": 1,
+      "message": "Again, why is this needed? IIRC you used to store here whether you are in direct reclaim or not but I think we discussed using `current_is_kswapd()` for that. Any other state you need to store here?",
+      "range": {
+        "startLine": 6385,
+        "startChar": 42,
+        "endLine": 6385,
+        "endChar": 67
+      },
+      "revId": "162d08a9188a5f62912f4013932d8d6f9f818997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
