@@ -16,6 +16,24 @@
       "message": "Please create a patch on top of this one to add these new symbols to you symbol list.",
       "revId": "45affc717651a23fbd844084f9ead68c90848c01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1240f803_1efdc126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2023-05-26T03:35:33Z",
+      "side": 1,
+      "message": "I have other new vendor hooks to push, and I would like to get these new symbols together to add to symbol list. So could I create later?",
+      "parentUuid": "9df36672_2c1b2c14",
+      "revId": "45affc717651a23fbd844084f9ead68c90848c01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
