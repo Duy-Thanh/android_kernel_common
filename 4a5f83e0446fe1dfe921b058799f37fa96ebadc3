@@ -16,6 +16,23 @@
       "message": "Are there some specific upstream changes you expect to land soon? Please enumerate them here.",
       "revId": "4a5f83e0446fe1dfe921b058799f37fa96ebadc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be65ac8_0c762528",
+        "filename": "net/wireless/nl80211.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-26T23:25:08Z",
+      "side": 1,
+      "message": "Add comment to explain why this is needed as part of reserving UAPI attributes? (here and the other changes in this file)",
+      "revId": "4a5f83e0446fe1dfe921b058799f37fa96ebadc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
