@@ -56,6 +56,30 @@
       },
       "revId": "1700b32c26e15d85dbb7f5e3a335ec963c1c54c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d2ae216_b733fc9d",
+        "filename": "include/trace/hooks/pm_domain.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2023-05-27T12:03:59Z",
+      "side": 1,
+      "message": "Hi,\nThank you for bringing this up. I am also puzzled by this, as I have reviewed many vendor hook patches and official documentation, but I haven\u0027t found a clear pattern. I\u0027m not sure if I should place it in include/trace/hooks/**.h or if I need to create a new *.h file. I thought pm_domain.h was the closest match to the problem I\u0027m addressing, so I added it there. How can I determine which .h file to use? If there are any guidelines or rules, please let me know. I will greatly appreciate your assistance.",
+      "parentUuid": "65fe0d2d_17b02ab2",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 44
+      },
+      "revId": "1700b32c26e15d85dbb7f5e3a335ec963c1c54c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
