@@ -61,6 +61,8 @@ struct gzvm_userspace_memory_region {
 #define GZVM_SET_USER_MEMORY_REGION _IOW(GZVM_IOC_MAGIC, 0x46, \
 					 struct gzvm_userspace_memory_region)
 
+#define GZVM_VTIMER_IRQ			27
+
 /* for GZVM_IRQ_LINE, irq field index values */
 #define GZVM_IRQ_VCPU2_SHIFT		28
 #define GZVM_IRQ_VCPU2_MASK		0xf
