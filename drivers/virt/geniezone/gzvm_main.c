@@ -105,6 +105,10 @@ static int gzvm_drv_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 
+	ret = gzvm_arch_drv_init();
+	if (ret)
+		return ret;
+
 	ret = misc_register(&gzvm_dev);
 	if (ret)
 		return ret;
@@ -117,6 +121,7 @@ static int gzvm_drv_remove(struct platform_device *pdev)
 	gzvm_drv_irqfd_exit();
 	gzvm_destroy_all_vms();
 	misc_deregister(&gzvm_dev);
+	gzvm_arch_drv_exit();
 	return 0;
 }
 

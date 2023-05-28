@@ -6,6 +6,7 @@
 #ifndef __GZVM_DRV_H__
 #define __GZVM_DRV_H__
 
+#include <asm/arch_timer.h>
 #include <linux/eventfd.h>
 #include <linux/list.h>
 #include <linux/mutex.h>
@@ -72,6 +73,7 @@ struct gzvm_vcpu {
 	struct mutex lock;
 	struct gzvm_vcpu_run *run;
 	struct gzvm_vcpu_hwstate *hwstate;
+	struct hrtimer gzvm_mtimer;
 };
 
 struct gzvm {
@@ -126,10 +128,12 @@ u64 gzvm_hva_to_pa_arch(u64 hva);
 int gzvm_vm_ioctl_create_vcpu(struct gzvm *gzvm, u32 cpuid);
 int gzvm_arch_vcpu_update_one_reg(struct gzvm_vcpu *vcpu, __u64 reg_id,
 				  bool is_write, __u64 *data);
-int gzvm_arch_create_vcpu(u16 vm_id, int vcpuid, void *run);
+int gzvm_arch_create_vcpu(struct gzvm_vcpu *vcpu);
 int gzvm_arch_vcpu_run(struct gzvm_vcpu *vcpu, __u64 *exit_reason);
-int gzvm_arch_destroy_vcpu(u16 vm_id, int vcpuid);
+int gzvm_arch_destroy_vcpu(struct gzvm_vcpu *vcpu);
 int gzvm_arch_inform_exit(u16 vm_id);
+int gzvm_arch_drv_init(void);
+void gzvm_arch_drv_exit(void);
 
 int gzvm_arch_create_device(u16 vm_id, struct gzvm_create_device *gzvm_dev);
 int gzvm_arch_inject_irq(struct gzvm *gzvm, unsigned int vcpu_idx,

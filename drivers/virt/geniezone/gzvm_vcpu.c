@@ -188,7 +188,7 @@ static void gzvm_destroy_vcpu(struct gzvm_vcpu *vcpu)
 	if (!vcpu)
 		return;
 
-	gzvm_arch_destroy_vcpu(vcpu->gzvm->vm_id, vcpu->vcpuid);
+	gzvm_arch_destroy_vcpu(vcpu);
 	/* clean guest's data */
 	memset(vcpu->run, 0, GZVM_VCPU_RUN_MAP_SIZE);
 	free_pages_exact(vcpu->run, GZVM_VCPU_RUN_MAP_SIZE);
@@ -257,7 +257,7 @@ int gzvm_vm_ioctl_create_vcpu(struct gzvm *gzvm, u32 cpuid)
 	vcpu->gzvm = gzvm;
 	mutex_init(&vcpu->lock);
 
-	ret = gzvm_arch_create_vcpu(gzvm->vm_id, vcpu->vcpuid, vcpu->run);
+	ret = gzvm_arch_create_vcpu(vcpu);
 	if (ret < 0)
 		goto free_vcpu_run;
 

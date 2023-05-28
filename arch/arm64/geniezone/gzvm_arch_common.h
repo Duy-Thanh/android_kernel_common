@@ -51,6 +51,13 @@ enum {
 
 #define GIC_V3_NR_LRS			16
 
+struct timecycle {
+	u32 mult;
+	u32 shift;
+};
+
+extern struct timecycle clock_scale_factor;
+
 /**
  * gzvm_hypcall_wrapper() - the wrapper for hvc calls
  * @a0-a7: arguments passed in registers 0 to 7
@@ -84,14 +91,22 @@ static inline u16 get_vcpuid_from_tuple(unsigned int tuple)
  * @__pad: add an explicit '__u32 __pad;' in the middle to make it clear
  *         what the actual layout is.
  * @lr: The array of LRs(list registers).
+ * @vtimer_delay: The remaining time until the next tick of guest VM.
+ * @vtimer_migrate: The switch flag used for guest VM to do vtimer migration or not.
+ * @vtimer_irq_num: vtimer irq number.
  *
  * - Keep the same layout of hypervisor data struct.
  * - Sync list registers back for acking virtual device interrupt status.
+ * - Sync timer registers back for migrating timer to host's hwtimer to keep
+ *   timer working in background.
  */
 struct gzvm_vcpu_hwstate {
 	__le32 nr_lrs;
 	__le32 __pad;
 	__le64 lr[GIC_V3_NR_LRS];
+	__le64 vtimer_delay;
+	__le32 vtimer_migrate;
+	__le32 vtimer_irq_num;
 };
 
 static inline unsigned int
@@ -106,5 +121,8 @@ disassemble_vm_vcpu_tuple(unsigned int tuple, u16 *vmid, u16 *vcpuid)
 	*vmid = get_vmid_from_tuple(tuple);
 	*vcpuid = get_vcpuid_from_tuple(tuple);
 }
+
+int gzvm_vgic_inject_ppi(struct gzvm *gzvm, unsigned int vcpu_idx,
+			 u32 irq, bool level);
 
 #endif /* __GZVM_ARCH_COMMON_H__ */
