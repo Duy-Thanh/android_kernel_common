@@ -289351,6 +289351,13 @@ function {
   parameter_id: 0x0660b958
 }
 function {
+  id: 0x55d07307
+  return_type_id: 0x18bd6530
+  parameter_id: 0x0258f96e
+  parameter_id: 0xf435685e
+  parameter_id: 0x00a43052
+}
+function {
   id: 0x55d4825e
   return_type_id: 0x18bd6530
   parameter_id: 0x0ca27481
@@ -334547,6 +334554,15 @@ elf_symbol {
   full_name: "dma_alloc_attrs"
 }
 elf_symbol {
+  id: 0x12eaf956
+  name: "dma_alloc_noncontiguous"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8a2ab4a6
+  type_id: 0x420a20df
+  full_name: "dma_alloc_noncontiguous"
+}
+elf_symbol {
   id: 0xac4ecea5
   name: "dma_alloc_pages"
   is_defined: true
@@ -334997,6 +335013,15 @@ elf_symbol {
   full_name: "dma_free_attrs"
 }
 elf_symbol {
+  id: 0x1d7e2299
+  name: "dma_free_noncontiguous"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf2140e70
+  type_id: 0x13dda576
+  full_name: "dma_free_noncontiguous"
+}
+elf_symbol {
   id: 0x23e816b8
   name: "dma_free_pages"
   is_defined: true
@@ -335436,6 +335461,24 @@ elf_symbol {
   crc: 0xca19b716
   type_id: 0x1053a2da
   full_name: "dma_unmap_sg_attrs"
+}
+elf_symbol {
+  id: 0xc4a6e691
+  name: "dma_vmap_noncontiguous"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaeb50586
+  type_id: 0x55d07307
+  full_name: "dma_vmap_noncontiguous"
+}
+elf_symbol {
+  id: 0xcb48db3d
+  name: "dma_vunmap_noncontiguous"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa2512f41
+  type_id: 0x106c9a5c
+  full_name: "dma_vunmap_noncontiguous"
 }
 elf_symbol {
   id: 0xfc6b4a0f
@@ -376521,6 +376564,7 @@ interface {
   symbol_id: 0x840989b2
   symbol_id: 0x57325158
   symbol_id: 0x6cb15207
+  symbol_id: 0x12eaf956
   symbol_id: 0xac4ecea5
   symbol_id: 0xf907b0c3
   symbol_id: 0x3492f7a1
@@ -376569,6 +376613,7 @@ interface {
   symbol_id: 0xf18ac584
   symbol_id: 0x7ffe50b7
   symbol_id: 0x3b69b427
+  symbol_id: 0x1d7e2299
   symbol_id: 0x23e816b8
   symbol_id: 0xd0e88c9a
   symbol_id: 0x28fa142c
@@ -376618,6 +376663,8 @@ interface {
   symbol_id: 0x45690ea2
   symbol_id: 0x0134874d
   symbol_id: 0xe5a171eb
+  symbol_id: 0xc4a6e691
+  symbol_id: 0xcb48db3d
   symbol_id: 0xfc6b4a0f
   symbol_id: 0xf7f45910
   symbol_id: 0x2b250c73
