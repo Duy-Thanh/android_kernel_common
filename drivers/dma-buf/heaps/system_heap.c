@@ -519,5 +519,8 @@ static int system_heap_create(void)
 	return 0;
 }
 module_init(system_heap_create);
+<<<<<<< HEAD   (f6bfcb Revert "ANDROID: module: Add vendor hooks")
 MODULE_LICENSE("GPL v2");
 MODULE_IMPORT_NS(DMA_BUF);
+=======
+>>>>>>> BRANCH (b6a782 Merge tag 'modules-6.4-rc1' of git://git.kernel.org/pub/scm/)

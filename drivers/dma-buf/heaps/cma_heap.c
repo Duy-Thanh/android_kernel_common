@@ -409,5 +409,8 @@ static int add_default_cma_heap(void)
 }
 module_init(add_default_cma_heap);
 MODULE_DESCRIPTION("DMA-BUF CMA Heap");
+<<<<<<< HEAD   (f6bfcb Revert "ANDROID: module: Add vendor hooks")
 MODULE_LICENSE("GPL v2");
 MODULE_IMPORT_NS(DMA_BUF);
+=======
+>>>>>>> BRANCH (b6a782 Merge tag 'modules-6.4-rc1' of git://git.kernel.org/pub/scm/)

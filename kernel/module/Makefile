@@ -7,7 +7,10 @@
 # and produce insane amounts of uninteresting coverage.
 KCOV_INSTRUMENT_module.o := n
 
-obj-y += main.o strict_rwx.o
+obj-y += main.o
+obj-y += strict_rwx.o
+obj-y += kmod.o
+obj-$(CONFIG_MODULE_DEBUG_AUTOLOAD_DUPS) += dups.o
 obj-$(CONFIG_MODULE_DECOMPRESS) += decompress.o
 obj-$(CONFIG_MODULE_SIG) += signing.o
 obj-$(CONFIG_MODULE_SIG_PROTECT) += gki_module.o
@@ -20,6 +23,7 @@ obj-$(CONFIG_SYSFS) += sysfs.o
 obj-$(CONFIG_KGDB_KDB) += kdb.o
 obj-$(CONFIG_MODVERSIONS) += version.o
 obj-$(CONFIG_MODULE_UNLOAD_TAINT_TRACKING) += tracking.o
+<<<<<<< HEAD   (f6bfcb Revert "ANDROID: module: Add vendor hooks")
 
 #
 # ANDROID: GKI: Generate headerfiles required for gki_module.o
@@ -53,3 +57,6 @@ $(obj)/gki_module_protected_exports.h: $(ABI_PROTECTED_EXPORTS_FILE) \
 	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/gen_gki_modules_headers.sh $@ \
 	"$(srctree)" \
 	$(ABI_PROTECTED_EXPORTS_FILE)
+=======
+obj-$(CONFIG_MODULE_STATS) += stats.o
+>>>>>>> BRANCH (b6a782 Merge tag 'modules-6.4-rc1' of git://git.kernel.org/pub/scm/)
