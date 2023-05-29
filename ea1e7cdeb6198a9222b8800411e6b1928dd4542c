@@ -16,6 +16,24 @@
       "message": "please move these to the patches that introduce each hook and abandon this patch.",
       "revId": "ea1e7cdeb6198a9222b8800411e6b1928dd4542c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a92c65_52e42f3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969321
+      },
+      "writtenOn": "2023-05-29T09:57:50Z",
+      "side": 1,
+      "message": "OK,thanks\nI move this patch to aosp/2599910",
+      "parentUuid": "aed95f79_89903783",
+      "revId": "ea1e7cdeb6198a9222b8800411e6b1928dd4542c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
