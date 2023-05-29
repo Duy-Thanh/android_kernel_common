@@ -13,6 +13,8 @@
 
 #include "highmem-internal.h"
 
+#include <trace/hooks/fault.h>
+
 /**
  * kmap - Map a page for long term usage
  * @page:	Pointer to the page to be mapped
@@ -166,7 +168,11 @@ static inline struct page *
 alloc_zeroed_user_highpage_movable(struct vm_area_struct *vma,
 				   unsigned long vaddr)
 {
-	struct page *page = alloc_page_vma(GFP_HIGHUSER_MOVABLE | __GFP_CMA, vma, vaddr);
+	struct page *page;
+	gfp_t gfp_mask = GFP_HIGHUSER_MOVABLE | __GFP_CMA;
+
+	trace_android_rvh_alloc_highpage_movable_gfp_adjust(&gfp_mask);
+	page = alloc_page_vma(gfp_mask, vma, vaddr);
 
 	if (page)
 		clear_user_highpage(page, vaddr);
