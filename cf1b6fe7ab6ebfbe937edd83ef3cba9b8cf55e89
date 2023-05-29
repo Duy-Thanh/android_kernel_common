@@ -16,6 +16,24 @@
       "message": "There are no abi issues on this branch, so that should not be a problem.\n\nWhy do you need this option enabled?  Please create a bug for it first.",
       "revId": "cf1b6fe7ab6ebfbe937edd83ef3cba9b8cf55e89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "606d537d_81d020f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-05-29T10:14:55Z",
+      "side": 1,
+      "message": "This request is based on below PIT discussion.\nhttps://partnerissuetracker.corp.google.com/issues/278043288\nThe reason why we need this option enabled is because we would like to use this feature in vendor kernel module with GKI. Is this incorrect to request branch:android-mainline?",
+      "parentUuid": "292ecef7_092f09b0",
+      "revId": "cf1b6fe7ab6ebfbe937edd83ef3cba9b8cf55e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
