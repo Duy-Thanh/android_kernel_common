@@ -16,6 +16,24 @@
       "message": "breaks the abi.",
       "revId": "e27a0cb9ad279605b912a0e80d71028ded1ab27f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ee896e_2295d583",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-05-29T10:49:58Z",
+      "side": 1,
+      "message": "Yes, seems we still have chance to update KMI before June 2.\n\nINFO: ABI DIFFERENCES HAVE BEEN DETECTED!\nINFO: variable symbol \u0027unsigned long cpu_hwcaps[2]\u0027 changed\n  CRC changed from 0xb77b80d5 to 0x5034618e",
+      "parentUuid": "ac54f09b_e4f089d6",
+      "revId": "e27a0cb9ad279605b912a0e80d71028ded1ab27f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
