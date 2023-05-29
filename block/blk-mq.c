@@ -44,6 +44,8 @@
 #include "blk-rq-qos.h"
 #include "blk-ioprio.h"
 
+#include <trace/hooks/block.h>
+
 static DEFINE_PER_CPU(struct llist_head, blk_cpu_done);
 
 static void blk_mq_poll_stats_start(struct request_queue *q);
@@ -3354,6 +3356,7 @@ static int blk_mq_alloc_rqs(struct blk_mq_tag_set *set,
 	 */
 	rq_size = round_up(sizeof(struct request) + set->cmd_size,
 				cache_line_size());
+	trace_android_vh_blk_alloc_rqs(&rq_size, set, tags, hctx_idx);
 	left = rq_size * depth;
 
 	for (i = 0; i < depth; ) {

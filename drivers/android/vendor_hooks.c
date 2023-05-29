@@ -30,6 +30,7 @@
 #include <trace/hooks/ftrace_dump.h>
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/mmc.h>
+#include <trace/hooks/block.h>
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/sys.h>
 #include <trace/hooks/iommu.h>
@@ -289,3 +290,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_swapin_walk_pmd_entry);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_process_madvise_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_smaps_pte_entry);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_smap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_alloc_rqs);
