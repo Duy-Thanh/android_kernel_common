@@ -17,6 +17,7 @@
 #include <linux/slab.h>
 #include <linux/mutex.h>
 #include <linux/input/elan-i2c-ids.h>
+#include <linux/module.h>
 
 #include "hid-ids.h"
 
@@ -936,6 +937,64 @@ static const struct hid_device_id hid_mouse_ignore_list[] = {
 	{ }
 };
 
+static bool use_whitelist;
+module_param(use_whitelist, bool, 0644);
+MODULE_PARM_DESC(use_whitelist, "Use whitelist for usbhids (default = false)");
+
+static const struct hid_whitelist {
+	__u16 idVendor;
+	__u16 idProduct;
+	__u16 idRange;
+} hid_whitelist[] = {
+	{ USB_VENDOR_ID_APPLE, 0x1200, 0x100 },
+
+	{ 0, 0 }
+};
+
+/**
+ * hid_exists_whitelist: check if a USB HID device is white-listed.
+ * @hdev: the HID device to look for
+ *
+ * Description:
+ *     Given a USB vendor ID and product ID, return a pointer to
+ *     the hid_whitelist entry associated with that device.
+ *
+ * Returns: true if device is found, otherwise false.
+ */
+static bool hid_exists_whitelist(const struct hid_device *hdev)
+{
+	const struct hid_whitelist *wl_entry = NULL;
+	int n = 0;
+	__u16 id_s, id_e;
+
+	if (hdev->bus != BUS_USB)
+		return true;
+
+#ifdef CONFIG_UHID
+	/* skip to check whitelist for uhid devices */
+	if (hdev->ll_driver == &uhid_hid_driver)
+		return true;
+#endif /* CONFIG_UHID */
+	for (; hid_whitelist[n].idVendor; n++) {
+		id_s = hid_whitelist[n].idProduct;
+		id_e = id_s + (hid_whitelist[n].idRange - 1);
+		if ((hdev->vendor == hid_whitelist[n].idVendor) &&
+			(id_s <= hdev->product) && (hdev->product <= id_e)) {
+			wl_entry = &hid_whitelist[n];
+			break;
+		}
+	}
+
+	if (wl_entry != NULL)
+		dbg_hid("Found in whitelist HID vendor 0x%hx prod 0x%hx(0x%hx-0x%hx)\n",
+			hdev->vendor, hdev->product, id_s, id_e);
+	else
+		dbg_hid("Not Found in whitelist HID vendor 0x%hx prod 0x%hx\n",
+			hdev->vendor, hdev->product);
+
+	return wl_entry ? true : false;
+}
+
 bool hid_ignore(struct hid_device *hdev)
 {
 	int i;
@@ -1248,6 +1307,9 @@ unsigned long hid_lookup_quirk(const struct hid_device *hdev)
 	unsigned long quirks = 0;
 	const struct hid_device_id *quirk_entry = NULL;
 
+	/* Ignore if whitelist is used and not in listed */
+	if (use_whitelist && !hid_exists_whitelist(hdev))
+		return HID_QUIRK_IGNORE;
 	/* NCR devices must not be queried for reports */
 	if (hdev->bus == BUS_USB &&
 	    hdev->vendor == USB_VENDOR_ID_NCR &&
