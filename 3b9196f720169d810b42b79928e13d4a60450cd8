@@ -195,6 +195,24 @@
       "parentUuid": "e1d5c0b3_0d84df32",
       "revId": "3b9196f720169d810b42b79928e13d4a60450cd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82b4bbc8_3efdbda9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-29T10:26:26Z",
+      "side": 1,
+      "message": "Now done here:\n https://android-review.googlesource.com/c/kernel/common/+/2608725\n \nbut that change is so tiny that I think I did this correctly the first time 😊",
+      "parentUuid": "aceeeff6_d0726120",
+      "revId": "3b9196f720169d810b42b79928e13d4a60450cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
