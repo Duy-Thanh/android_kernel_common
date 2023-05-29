@@ -96,7 +96,11 @@
 #include <linux/time_namespace.h>
 #include <linux/resctrl.h>
 #include <linux/cn_proc.h>
+<<<<<<< HEAD   (58c41d Revert "Revert "mm/mmap: regression fix for unmapped_area{_t)
 #include <linux/cpufreq_times.h>
+=======
+#include <linux/ksm.h>
+>>>>>>> BRANCH (7fa8a8 Merge tag 'mm-stable-2023-04-27-15-30' of git://git.kernel.o)
 #include <trace/events/oom.h>
 #include "internal.h"
 #include "fd.h"
@@ -3208,6 +3212,8 @@ static int proc_pid_ksm_stat(struct seq_file *m, struct pid_namespace *ns,
 	mm = get_task_mm(task);
 	if (mm) {
 		seq_printf(m, "ksm_rmap_items %lu\n", mm->ksm_rmap_items);
+		seq_printf(m, "ksm_merging_pages %lu\n", mm->ksm_merging_pages);
+		seq_printf(m, "ksm_process_profit %ld\n", ksm_process_profit(mm));
 		mmput(mm);
 	}
 
