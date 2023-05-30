@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32e657b3_3b031cf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-30T22:18:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e3cab34_3c4e0960",
+      "revId": "5049385aebc4284730e4168dba7728a4c50c0205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11e918a8_8b8afe10",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "I don\u0027t know what that is either. I picked up the series from chromeos 5.15 tree.\n\nHappy to reword it as you see fit. But some details like this I might not be able to fill out. I can either omit, or just add my own annotation that this patch was picked up from chromeos-5.15 tree.",
       "parentUuid": "11e918a8_8b8afe10",
+      "revId": "5049385aebc4284730e4168dba7728a4c50c0205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "404f55ca_f62070e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-30T22:18:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8875e5a_7909a668",
       "revId": "5049385aebc4284730e4168dba7728a4c50c0205",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
