@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2614dc5b_38f238de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-30T15:58:09Z",
+      "side": 1,
+      "message": "Please don\u0027t fix grammar as part of a backport. The backport should be an _exact match_ except for resolution of conflicts or changes required due to feature mismatches between the kernels.",
+      "revId": "48fc34508107c6be2ac3755612930fc556d75586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
