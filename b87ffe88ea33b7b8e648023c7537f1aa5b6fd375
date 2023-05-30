@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac3db114_ac7f97ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-30T16:07:39Z",
+      "side": 1,
+      "message": "don\u0027t add new functionality as part of a BACKPORT. Please submit the new version upstream. If this new macro is only for android, then it should be a separate ANDROID patch",
+      "revId": "b87ffe88ea33b7b8e648023c7537f1aa5b6fd375",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
