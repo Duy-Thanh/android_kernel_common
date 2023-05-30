@@ -16,6 +16,24 @@
       "message": "for all of these \"BACKPORT\" patches, please add an annotation of what was changed.\n\n```\n[ changed xyz because abc ]\n```",
       "revId": "c259f7f2bd2abc0ecb3b44642136f498fd4dd59d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7af7e338_5eda347a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-05-30T04:00:24Z",
+      "side": 1,
+      "message": "We briefly describe what have been changed based on v3 patches we submitted to mainline. Please refer to the commit message from commits with \"BACKPORT\" in title: `https://r.android.com/257417{3,5,6,7}`.",
+      "parentUuid": "db94b64a_d60d30fb",
+      "revId": "c259f7f2bd2abc0ecb3b44642136f498fd4dd59d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
