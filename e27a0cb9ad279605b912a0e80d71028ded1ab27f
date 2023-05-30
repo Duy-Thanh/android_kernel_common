@@ -51,6 +51,24 @@
       "message": "build-break for allmodconfig builds:\n```\n/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/6/execroot/__main__/common/drivers/iommu/arm/arm-smmu/arm-smmu.c:1687:6: error: call to undeclared function \u0027cpus_have_final_cap\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n        if (cpus_have_final_cap(ARM64_WORKAROUND_NXP_ERR050104))\n            ^\n/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/6/execroot/__main__/common/drivers/iommu/arm/arm-smmu/arm-smmu.c:1687:26: error: use of undeclared identifier \u0027ARM64_WORKAROUND_NXP_ERR050104\u0027\n        if (cpus_have_final_cap(ARM64_WORKAROUND_NXP_ERR050104))\n                                ^\n2 errors generated.\n\n```\n\nPlease fix.",
       "revId": "e27a0cb9ad279605b912a0e80d71028ded1ab27f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3358469d_67349928",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-05-30T05:24:11Z",
+      "side": 1,
+      "message": "Thanks, fixed now.",
+      "parentUuid": "116c9ccc_61eac082",
+      "revId": "e27a0cb9ad279605b912a0e80d71028ded1ab27f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
