@@ -62,7 +62,9 @@ if_changed_except = $(if $(call newer_prereqs_except,$(2))$(cmd-check),      \
 %.ko: %.o %.mod.o scripts/module.lds $(and $(CONFIG_DEBUG_INFO_BTF_MODULES),$(KBUILD_BUILTIN),$(mixed-build-prefix)vmlinux) FORCE
 	+$(call if_changed_except,ld_ko_o,$(mixed-build-prefix)vmlinux)
 ifdef CONFIG_DEBUG_INFO_BTF_MODULES
+ifeq ($(or $(GENERATE_BTF),1),1)
 	+$(if $(newer-prereqs),$(call cmd,btf_ko))
+endif
 endif
 
 targets += $(modules:%.o=%.ko) $(modules:%.o=%.mod.o)
