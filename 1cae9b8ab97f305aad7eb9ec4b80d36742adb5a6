@@ -16,6 +16,24 @@
       "message": "When I looked at the committed and generated XML for the merge (and its presubmit build) and its parent 1 (and its presubmit build), it seemed like there was an obvious regression in XML quality (the committed XML for the merge had fewer types than the other 3).\n\nThis change here hardly changes anything (and it\u0027s not worth submitting).\n\nWhen I look at the presubmit build XML, it is a horrible mixture of better and worse. Versus the committed version you pushed:\n\n```\n10 type(s) changed from FULLY_DEFINED to ABSENT:\n  enum nvdimm_passphrase_type\n  struct badrange\n  struct nd_cmd_get_config_size\n  struct nd_mapping\n  struct nd_percpu_lane\n  struct nvdimm_drvdata\n  struct nvdimm_key_data\n  struct nvdimm_security_ops\n  struct robust_list\n  struct simple_xattrs\n\n13 type(s) changed from FULLY_DEFINED to DECLARATION_ONLY:\n  struct eth_dev\n  struct gs_port\n  struct kernfs_iattrs\n  struct kernfs_open_node\n  struct mctrl_gpios\n  struct nd_region\n  struct nvdimm\n  struct nvdimm_bus\n  struct psample_group\n  struct robust_list_head\n  struct rt_mutex_waiter\n  struct rtattr\n  struct simd_skcipher_alg\n\n2 symbol(s) changed from TYPED to UNTYPED:\n  drm_debug\n  fb_mode_option\n\n1 type(s) changed from ABSENT to DECLARATION_ONLY:\n  struct v4l2_m2m_dev\n\n9 type(s) changed from DECLARATION_ONLY to FULLY_DEFINED:\n  struct capture_control\n  struct hd_geometry\n  struct internal_state\n  struct nf_conntrack_helper\n  struct pcpu_dstats\n  struct pr_ops\n  struct tcf_walker\n  struct uprobe\n  struct v4l2_m2m_ctx\n\n9 type(s) changed from ABSENT to FULLY_DEFINED:\n  enum ip_conntrack_info\n  enum pr_type\n  enum uprobe_filter_ctx\n  struct arch_probe_insn\n  struct arch_uprobe\n  struct compact_control\n  struct nf_conntrack_expect_policy\n  struct uprobe_consumer\n  struct v4l2_m2m_queue_ctx\n```\n\n* two symbols lose their type information",
       "revId": "1cae9b8ab97f305aad7eb9ec4b80d36742adb5a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "184d3481_9823610a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-30T17:47:09Z",
+      "side": 1,
+      "message": "churn like that is to be expected with LTS merges especially for symbols that we do not care about.\n\nSo all is good here, I\u0027ll just abandon this one.",
+      "parentUuid": "dc613189_a1ca848f",
+      "revId": "1cae9b8ab97f305aad7eb9ec4b80d36742adb5a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
