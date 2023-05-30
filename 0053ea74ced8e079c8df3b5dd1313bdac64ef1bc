@@ -16,6 +16,24 @@
       "message": "fix this in original patch. This is not about ioeventfd.",
       "revId": "0053ea74ced8e079c8df3b5dd1313bdac64ef1bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd91589_9b59717d",
+        "filename": "drivers/virt/geniezone/gzvm_vcpu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-05-30T04:12:43Z",
+      "side": 1,
+      "message": "Fix here: `https://android-review.googlesource.com/c/kernel/common/+/2574176/4/drivers/virt/geniezone/gzvm_vcpu.c#55`",
+      "parentUuid": "22ebd0a0_eeafa877",
+      "revId": "0053ea74ced8e079c8df3b5dd1313bdac64ef1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
