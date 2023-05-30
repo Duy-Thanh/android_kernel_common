@@ -324964,6 +324964,24 @@ elf_symbol {
   full_name: "printk_timed_ratelimit"
 }
 elf_symbol {
+  id: 0xdbdeadd8
+  name: "probe_irq_off"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xab600421
+  type_id: 0x915dba0e
+  full_name: "probe_irq_off"
+}
+elf_symbol {
+  id: 0xae2575d4
+  name: "probe_irq_on"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb121390a
+  type_id: 0x31accd53
+  full_name: "probe_irq_on"
+}
+elf_symbol {
   id: 0x10599707
   name: "proc_create"
   is_defined: true
@@ -342995,6 +343013,8 @@ interface {
   symbol_id: 0xd780999c
   symbol_id: 0xda3d90c9
   symbol_id: 0x85643cba
+  symbol_id: 0xdbdeadd8
+  symbol_id: 0xae2575d4
   symbol_id: 0x10599707
   symbol_id: 0x49314bbb
   symbol_id: 0x0df14cdd
