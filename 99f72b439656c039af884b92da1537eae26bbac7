@@ -16,6 +16,24 @@
       "message": "Build break - don\u0027t you try builds before submitting?\n\n```\nERROR: Missing symbols:  [\u0027__traceiter_android_vh_save_hib_resume_bdev\u0027, \u0027__traceiter_android_vh_save_cpu_resume\u0027, \u0027__traceiter_android_vh_check_hibernation_swap\u0027] in  abi_gki_aarch64_qcom\n```\n\nI suspect these symbol changes should be part of another series that defines the symbols.",
       "revId": "99f72b439656c039af884b92da1537eae26bbac7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72bd0900_12cbf623",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2023-05-30T08:33:00Z",
+      "side": 1,
+      "message": "Now built with ack kernel android14-6.1 and submitted along with dependency gerrit.",
+      "parentUuid": "83ac93f9_4c0f0f70",
+      "revId": "99f72b439656c039af884b92da1537eae26bbac7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
