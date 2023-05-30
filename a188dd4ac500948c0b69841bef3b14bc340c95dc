@@ -19,6 +19,26 @@
       "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/443c2accd1b6679a1320167f8f56eed6536b806e) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d443c2accd1b6679a1320167f8f56eed6536b806e)\n\n```\n      ## mm/page_alloc.c ##\n     @@ mm/page_alloc.c: DEFINE_PER_CPU(int, _numa_mem_);\t\t/* Kernel \"local memory\" node */\n      EXPORT_PER_CPU_SYMBOL(_numa_mem_);\n    @@ mm/page_alloc.c: DEFINE_PER_CPU(int, _numa_mem_);\t\t/* Kernel \"local memory\" node\n      \n      #ifdef CONFIG_GCC_PLUGIN_LATENT_ENTROPY\n      volatile unsigned long latent_entropy __latent_entropy;\n    -@@ mm/page_alloc.c: static int rmqueue_bulk(struct zone *zone, unsigned int order,\n    +@@ mm/page_alloc.c: static struct list_head *get_populated_pcp_list(struct zone *zone,\n       * Called from the vmstat counter updater to drain pagesets of this\n       * currently executing processor on remote nodes after they have\n       * expired.\n    @@ mm/page_alloc.c: void drain_local_pages(struct zone *zone)\n     -\t * cpu which is alright but we also have to make sure to not move to\n     -\t * a different one.\n     -\t */\n    --\tmigrate_disable();\n    +-\tpreempt_disable();\n     -\tdrain_local_pages(drain-\u003ezone);\n    --\tmigrate_enable();\n    +-\tpreempt_enable();\n     -}\n     -\n      /*\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 535005262 android-build.ayeaye-python-dispatcher_20230524.08_p0",
       "revId": "a188dd4ac500948c0b69841bef3b14bc340c95dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000045626690",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2379754?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "52bfaf65_9736d488",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-30T17:34:57Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/443c2accd1b6679a1320167f8f56eed6536b806e) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d443c2accd1b6679a1320167f8f56eed6536b806e)\n\n```\n      ## mm/page_alloc.c ##\n     @@ mm/page_alloc.c: DEFINE_PER_CPU(int, _numa_mem_);\t\t/* Kernel \"local memory\" node */\n      EXPORT_PER_CPU_SYMBOL(_numa_mem_);\n    @@ mm/page_alloc.c: DEFINE_PER_CPU(int, _numa_mem_);\t\t/* Kernel \"local memory\" node\n      \n      #ifdef CONFIG_GCC_PLUGIN_LATENT_ENTROPY\n      volatile unsigned long latent_entropy __latent_entropy;\n    -@@ mm/page_alloc.c: static int rmqueue_bulk(struct zone *zone, unsigned int order,\n    +@@ mm/page_alloc.c: static struct list_head *get_populated_pcp_list(struct zone *zone,\n       * Called from the vmstat counter updater to drain pagesets of this\n       * currently executing processor on remote nodes after they have\n       * expired.\n    @@ mm/page_alloc.c: void drain_local_pages(struct zone *zone)\n     -\t * cpu which is alright but we also have to make sure to not move to\n     -\t * a different one.\n     -\t */\n    --\tmigrate_disable();\n    +-\tpreempt_disable();\n     -\tdrain_local_pages(drain-\u003ezone);\n    --\tmigrate_enable();\n    +-\tpreempt_enable();\n     -}\n     -\n      /*\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 535005262 android-build.ayeaye-python-dispatcher_20230524.08_p0",
+      "revId": "a188dd4ac500948c0b69841bef3b14bc340c95dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
