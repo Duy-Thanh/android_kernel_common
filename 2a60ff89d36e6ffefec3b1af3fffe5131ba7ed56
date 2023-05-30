@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94c2cafd_612c76e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-30T19:59:24Z",
+      "side": 1,
+      "message": "This can all be handled in userspace, there\u0027s no need for any kernel changes at all.  It was solved back in the 2.6 days with persistent device naming done by userspace based on the information exported in sysfs.",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e763a5_09ae0eb0",
         "filename": "drivers/usb/host/xhci-plat.c",
         "patchSetId": 2
