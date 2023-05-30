@@ -16,6 +16,24 @@
       "message": "must have a \"Bug: \" tag referring to a buganizer issue.",
       "revId": "152d298c3d65226a537d413fac69a20834fdb628",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bda204f8_3216a871",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-30T18:25:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "296128a1_2292cacd",
+      "revId": "152d298c3d65226a537d413fac69a20834fdb628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
