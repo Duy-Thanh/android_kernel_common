@@ -34,6 +34,24 @@
       "parentUuid": "c1095fed_972f24ea",
       "revId": "340166e40b7e3ef2f9086b86a665172e3c632cf5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6113397_e4049d38",
+        "filename": "net/wireless/nl80211.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-31T03:46:51Z",
+      "side": 1,
+      "message": "Yes, that would be fine (in the same way that renaming the DO_NOT_USE_X values to the \"real\" ones is fine. __NL80211_TXRATE_MAX_IMPLEMENTED would only be used to size the arrays so as long as those arrays themselves don\u0027t become KMI, we should be fine.",
+      "parentUuid": "66118ecc_b617a185",
+      "revId": "340166e40b7e3ef2f9086b86a665172e3c632cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
