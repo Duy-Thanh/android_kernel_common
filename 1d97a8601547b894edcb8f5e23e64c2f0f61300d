@@ -16,6 +16,24 @@
       "message": "this should be in kernel/sched/vendor_hooks.c instead. This is what causes the build break.",
       "revId": "1d97a8601547b894edcb8f5e23e64c2f0f61300d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2336c57e_bdb0aa85",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2023-05-31T08:50:26Z",
+      "side": 1,
+      "message": "Hi Todd\nthanks for explaining, and I have change the hook to kernel/sched/vendor_hooks.c\n\nThanks!",
+      "parentUuid": "2405a3d6_86411a0f",
+      "revId": "1d97a8601547b894edcb8f5e23e64c2f0f61300d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
