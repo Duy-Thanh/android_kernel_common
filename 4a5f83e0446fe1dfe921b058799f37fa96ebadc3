@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5a1c333_fb53f42b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2023-05-31T00:25:50Z",
+      "side": 1,
+      "message": "Most of the UAPI changes still under review in the patchwork. There can be significant changes (Name, attribute values, Enum to modify, etc.) in final versions.\n\nCurrently, below are the pending patchwork patches which have UAPI changes.\n\n- https://patchwork.kernel.org/project/linux-wireless/patch/20230317142153.237900-1-quic_vjakkam@quicinc.com/\n- https://patchwork.kernel.org/project/linux-wireless/patch/20230328093105.3640436-1-quic_vjakkam@quicinc.com/\n- https://patchwork.kernel.org/project/linux-wireless/patch/20230301090242.1613672-2-quic_xinyling@quicinc.com/\n- https://patchwork.kernel.org/project/linux-wireless/patch/20230329000902.17992-1-quic_alokad@quicinc.com/\n- https://patchwork.kernel.org/project/linux-wireless/patch/1682960363-15452-1-git-send-email-quic_msinada@quicinc.com/\n- https://patchwork.kernel.org/project/linux-wireless/patch/20220920100518.19705-5-quic_vthiagar@quicinc.com/\n- https://patchwork.kernel.org/project/linux-wireless/patch/20220920100518.19705-3-quic_vthiagar@quicinc.com/",
+      "parentUuid": "7b593661_a7554227",
+      "revId": "4a5f83e0446fe1dfe921b058799f37fa96ebadc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9be65ac8_0c762528",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-26T23:25:08Z",
       "side": 1,
       "message": "Add comment to explain why this is needed as part of reserving UAPI attributes? (here and the other changes in this file)",
+      "revId": "4a5f83e0446fe1dfe921b058799f37fa96ebadc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b1fb176_77c784e5",
+        "filename": "net/wireless/nl80211.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2023-05-31T00:25:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9be65ac8_0c762528",
       "revId": "4a5f83e0446fe1dfe921b058799f37fa96ebadc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
