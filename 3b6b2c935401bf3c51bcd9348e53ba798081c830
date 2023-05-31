@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e75fe4dc_9b1f8f90",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-31T21:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47b31b42_b567dd55",
+      "revId": "3b6b2c935401bf3c51bcd9348e53ba798081c830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17bdb16e_3d9a429d",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-25T23:16:18Z",
       "side": 1,
       "message": "Nit: please write this as:\n\n`return !!rhashtable_lookup(elf64_rela_rht, \u0026lookup_key, el64_rela_rht_params);`\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android14-6.1/Documentation/dev-tools/checkpatch.rst#643",
+      "revId": "3b6b2c935401bf3c51bcd9348e53ba798081c830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ed82c3_301d9f4c",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-31T21:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17bdb16e_3d9a429d",
       "revId": "3b6b2c935401bf3c51bcd9348e53ba798081c830",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -70,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "530b9814_3d167647",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-31T21:51:11Z",
+      "side": 1,
+      "message": "`insert_rela_to_rht` returns the error propagated up from the `rhashtable_insert_fast` function, which can be values like `-EEXIST`, `-ENOMEM`, `-E2BIG` etc. So if we change that to a bool, it would be hard to detect and propagate  an error up the calling stack.",
+      "parentUuid": "1f5c2ad0_40c84990",
+      "revId": "3b6b2c935401bf3c51bcd9348e53ba798081c830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "036420b9_b2d62609",
@@ -83,6 +137,30 @@
       "writtenOn": "2023-05-26T00:25:37Z",
       "side": 1,
       "message": "Seems like unnecessary code churn to pull out the plt_count like this. All you\u0027d need to do is delete the sorting, right?",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 26
+      },
+      "revId": "3b6b2c935401bf3c51bcd9348e53ba798081c830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a41c19_391f7404",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-05-31T21:51:11Z",
+      "side": 1,
+      "message": "As discussed offline, `plt_count` is pulled out like this to capture the return value from `count_plts` and check for errors before using it. Previously, `count_plts` did not return an error.",
+      "parentUuid": "036420b9_b2d62609",
       "range": {
         "startLine": 343,
         "startChar": 0,
