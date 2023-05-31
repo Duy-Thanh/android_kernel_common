@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "552efc9a_352a6e98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-31T15:06:42Z",
+      "side": 1,
+      "message": "USB device ids and bus numbers should NEVER expect to be the same across boots, or even over time on the same machine without rebooting (devices can come and go).\n\nWhat matters is how userspace accesses these devices, and it does so using names picked by userspace depending on lots of different things (topology, serial numbers, partition names, etc.)  Use that in userspace, the kernel does not care here at all.\n\nThis was 1/2 of the reason that Linux adopted a unified driver/device model 18+ years ago.  This isn\u0027t new at all 😊\n\nFor more details, you can always look up the old papers published about `udev` for one example of how to do this.  Also look at your desktop system in /dev/disk/ for examples of how your Linux desktop system handles this today.",
+      "parentUuid": "83288324_94053023",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e763a5_09ae0eb0",
         "filename": "drivers/usb/host/xhci-plat.c",
         "patchSetId": 2
