@@ -52,6 +52,24 @@
       "parentUuid": "1240f803_1efdc126",
       "revId": "45affc717651a23fbd844084f9ead68c90848c01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f89d6986_a37f2b4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2023-05-31T07:30:04Z",
+      "side": 1,
+      "message": "Hi Todd, thank you for your explanation. I have updated the patch of symbols in one series. Please review, thank you.",
+      "parentUuid": "3d0bc915_a33b5ffa",
+      "revId": "45affc717651a23fbd844084f9ead68c90848c01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
