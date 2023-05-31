@@ -33,6 +33,24 @@
       "message": "could this be done up at line 347?",
       "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e41480b9_bc6ec1f0",
+        "filename": "drivers/usb/host/xhci-plat.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-05-31T01:02:38Z",
+      "side": 1,
+      "message": "No,\nIn case of xchi, 2 bus instances are populated for SS and LS/HS, so this is for 2nd instance.",
+      "parentUuid": "74e763a5_09ae0eb0",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
