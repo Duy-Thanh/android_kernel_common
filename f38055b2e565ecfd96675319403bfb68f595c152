@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000045847104",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2608652?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "8337e1b9_087c87aa",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Amir Goldstein \u003camir73il@gmail.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "fbec0a2f_2d361d75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-31T13:02:41Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Amir Goldstein \u003camir73il@gmail.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 536416042 android-build.ayeaye-python-dispatcher_20230530.05_p0",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "f38055b2e565ecfd96675319403bfb68f595c152",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
