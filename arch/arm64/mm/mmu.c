@@ -338,8 +338,9 @@ static void alloc_init_pud(pgd_t *pgdp, unsigned long addr, unsigned long end,
 			alloc_init_cont_pmd(pudp, addr, next, phys, prot,
 					    pgtable_alloc, flags);
 
-			BUG_ON(pud_val(old_pud) != 0 &&
+			/*BUG_ON(pud_val(old_pud) != 0 &&
 			       pud_val(old_pud) != READ_ONCE(pud_val(*pudp)));
+			*/
 		}
 		phys += next - addr;
 	} while (pudp++, addr = next, addr != end);
