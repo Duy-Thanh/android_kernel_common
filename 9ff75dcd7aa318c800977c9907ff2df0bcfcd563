@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f335c3_33a80b50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-31T09:39:55Z",
+      "side": 1,
+      "message": "\u003e [Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\n\u003e Checked against [change 2558712](https://android-review.googlesource.com/c/2558712)\n\u003e \n\u003e ```\n\u003e       ## drivers/android/binder_alloc.c ##\n\u003e      @@ drivers/android/binder_alloc.c: err_no_vma:\n\u003e       static inline void binder_alloc_set_vma(struct binder_alloc *alloc,\n\u003e       \t\tstruct vm_area_struct *vma)\n\u003e       {\n\u003e     +-\tif (vma)\n\u003e     +-\t\talloc-\u003evma_vm_mm \u003d vma-\u003evm_mm;\n\u003e      -\t/*\n\u003e      -\t * If we see alloc-\u003evma is not NULL, buffer data structures set up\n\u003e      -\t * completely. Look at smp_rmb side binder_alloc_get_vma.\n\u003e     @@ drivers/android/binder_alloc.c: static struct binder_buffer *binder_alloc_new_bu\n\u003e       \tsize_t size, data_offsets_size;\n\u003e       \tint ret;\n\u003e       \n\u003e     +-\tmmap_read_lock(alloc-\u003evma_vm_mm);\n\u003e      +\t/* Check binder_alloc is fully initialized */\n\u003e       \tif (!binder_alloc_get_vma(alloc)) {\n\u003e     + \t\tmmap_read_unlock(alloc-\u003evma_vm_mm);\n\u003e       \t\tbinder_alloc_debug(BINDER_DEBUG_USER_ERROR,\n\u003e     - \t\t\t\t   \"%d: binder_alloc_buf, no vma\\n\",\n\u003e      @@ drivers/android/binder_alloc.c: int binder_alloc_mmap_handler(struct binder_alloc *alloc,\n\u003e       \tbuffer-\u003efree \u003d 1;\n\u003e       \tbinder_insert_free_buffer(alloc, buffer);\n\u003e ```\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 536416042 android-build.ayeaye-python-dispatcher_20230530.05_p0\n\nThis is not a clean cherry-pick. Is there a prerequisite patch missing? @cmllamas@google.com, can you please take a look?",
+      "parentUuid": "2ca0847c_8b601433",
+      "revId": "9ff75dcd7aa318c800977c9907ff2df0bcfcd563",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f9c9afe_4a901986",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-31T09:39:55Z",
+      "side": 1,
+      "message": "This cherry-pick is not the",
+      "revId": "9ff75dcd7aa318c800977c9907ff2df0bcfcd563",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
