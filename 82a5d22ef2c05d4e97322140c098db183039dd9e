@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ef64c61_c19c60c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2023-05-31T15:49:55Z",
+      "side": 1,
+      "message": "Thanks for the context, Greg.\n\n@krossmo@google.com, Do you know if we sent a patch to upstream ever for this power observability improvement?",
+      "parentUuid": "793cd813_548f1b2e",
+      "revId": "82a5d22ef2c05d4e97322140c098db183039dd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aad90b97_20c9a38e",
         "filename": "fs/eventpoll.c",
         "patchSetId": 2
