@@ -63,6 +63,7 @@
 #include <trace/hooks/user.h>
 #include <trace/hooks/signal.h>
 #include <trace/hooks/psi.h>
+#include <trace/hooks/mmc.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -268,3 +269,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_target_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_new_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_check_status);
