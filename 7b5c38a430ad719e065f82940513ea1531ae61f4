@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000045816175",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2606680?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3f5b259d_2398aa96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-31T02:02:20Z",
+      "side": 1,
+      "message": "Can not find the original change in base branch for this change.\nPlease ensure that the Change-Id of this change is same as the original change on the base branch.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 536416042 android-build.ayeaye-python-dispatcher_20230530.05_p0",
+      "revId": "7b5c38a430ad719e065f82940513ea1531ae61f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000045816175",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2606680?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0b7a6946_1ccaf840",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-31T02:02:20Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/d4ab9bc5f56ec8db0902d335af7bc69f19fbf1ff) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dd4ab9bc5f56ec8db0902d335af7bc69f19fbf1ff)\n\n```\n      ## kernel/trace/ring_buffer.c ##\n     @@ kernel/trace/ring_buffer.c: rb_reset_tail(struct ring_buffer_per_cpu *cpu_buffer,\n    @@ kernel/trace/ring_buffer.c: rb_get_reader_page(struct ring_buffer_per_cpu *cpu_b\n     +\t * The writer has preempt disable, wait for it. But not forever\n     +\t * Although, 1 second is pretty much \"forever\"\n     +\t */\n    -+#define USECS_WAIT\t1000000\n    -+        for (nr_loops \u003d 0; nr_loops \u003c USECS_WAIT; nr_loops++) {\n    ++#define USECS_WAIT 1000000\n    ++\t\t for (nr_loops \u003d 0; nr_loops \u003c USECS_WAIT; nr_loops++) {\n     +\t\t/* If the write is past the end of page, a writer is still updating it */\n     +\t\tif (likely(!reader || rb_page_write(reader) \u003c\u003d BUF_PAGE_SIZE))\n     +\t\t\tbreak;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 536416042 android-build.ayeaye-python-dispatcher_20230530.05_p0",
+      "revId": "7b5c38a430ad719e065f82940513ea1531ae61f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
