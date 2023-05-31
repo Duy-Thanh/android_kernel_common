@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "235cddf1_4125028d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-31T15:09:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d831e86f_f62d5cc4",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "a1384cfde07d4122fde4b37921729e556fa63d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cf0a9f3_f17b7a84",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e44ce4e_4d11f10e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-31T15:09:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03e701ab_6bf46142",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 56
+      },
+      "revId": "a1384cfde07d4122fde4b37921729e556fa63d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c34477d7_3b90ea06",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "I see, will remove this comment.",
       "parentUuid": "c34477d7_3b90ea06",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 39
+      },
+      "revId": "a1384cfde07d4122fde4b37921729e556fa63d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ef37dae_8c9bb1cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-05-31T15:09:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93f6e517_95682c4b",
       "range": {
         "startLine": 12,
         "startChar": 1,
