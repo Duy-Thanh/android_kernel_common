@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e31afeb_12520326",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-05-31T09:41:03Z",
+      "side": 0,
+      "message": "This removal looks like aosp/2601985 should rather be ported first.",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 32
+      },
+      "revId": "db6d03d8fbf14a911a88c453afa2dee851757e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
