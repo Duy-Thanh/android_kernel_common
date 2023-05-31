@@ -16,6 +16,24 @@
       "message": "wouldn\u0027t it be better to define a constant that represents the MAX so you don\u0027t need to update so many sites in the code if a new attribute is enabled?\n\nDo this in the header file:\n```\nnum nl80211_tx_rate_attributes {\n\t__NL80211_TXRATE_INVALID,\n\tNL80211_TXRATE_LEGACY,\n\tNL80211_TXRATE_HT,\n\tNL80211_TXRATE_VHT,\n\tNL80211_TXRATE_GI,\n\tNL80211_TXRATE_HE,\n\tNL80211_TXRATE_HE_GI,\n\tNL80211_TXRATE_HE_LTF,\n\tNL80211_TXRATE_RESERVED_DO_NOT_USE_1,\n\tNL80211_TXRATE_RESERVED_DO_NOT_USE_2,\n\tNL80211_TXRATE_RESERVED_DO_NOT_USE_3,\n\tNL80211_TXRATE_RESERVED_DO_NOT_USE_4,\n\tNL80211_TXRATE_RESERVED_DO_NOT_USE_5,\n\t\n\t/* For new attributes */\n\t__NL80211_TXRATE_MAX_IMPLEMENTED \u003d NL80211_TXRATE_HE_LTF,\n\n\t/* keep last */\n\t__NL80211_TXRATE_AFTER_LAST,\n\tNL80211_TXRATE_MAX \u003d __NL80211_TXRATE_AFTER_LAST - 1\n};\n```\n\nThen you\u0027d use `__NL80211_TXRATE_MAX_IMPLEMENTED + 1` to size the array",
       "revId": "340166e40b7e3ef2f9086b86a665172e3c632cf5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66118ecc_b617a185",
+        "filename": "net/wireless/nl80211.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2023-05-31T01:17:08Z",
+      "side": 1,
+      "message": "We thought of this approach but  __NL80211_TXRATE_MAX_IMPLEMENTED value needs to be changed when we enable a new reserved attribute. Is that allowed after KMI freeze?",
+      "parentUuid": "c1095fed_972f24ea",
+      "revId": "340166e40b7e3ef2f9086b86a665172e3c632cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
