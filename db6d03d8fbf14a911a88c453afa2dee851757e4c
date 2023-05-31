@@ -46,6 +46,30 @@
       },
       "revId": "db6d03d8fbf14a911a88c453afa2dee851757e4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb3237cc_bfaff2f9",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-05-31T15:53:26Z",
+      "side": 0,
+      "message": "Yes, that change hasn\u0027t been merged yet though. So the patches need to be stacked together. This cherry-pick should apply clean here.",
+      "parentUuid": "b94d47e5_75550338",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 32
+      },
+      "revId": "db6d03d8fbf14a911a88c453afa2dee851757e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
