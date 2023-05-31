@@ -433,7 +433,7 @@ static int __init pkvm_firmware_rmem_init(struct reserved_mem *rmem)
 RESERVEDMEM_OF_DECLARE(pkvm_firmware, "linux,pkvm-guest-firmware-memory",
 		       pkvm_firmware_rmem_init);
 
-static int __init pkvm_firmware_rmem_clear(void)
+static int __pkvm_firmware_rmem_clear(void)
 {
 	void *addr;
 	phys_addr_t size;
@@ -451,6 +451,15 @@ static int __init pkvm_firmware_rmem_clear(void)
 	dcache_clean_poc((unsigned long)addr, (unsigned long)addr + size);
 	memunmap(addr);
 	return 0;
+
+}
+
+static int __init pkvm_firmware_rmem_clear(void)
+{
+	if (is_protected_kvm_enabled())
+		return 0;
+
+	return __pkvm_firmware_rmem_clear();
 }
 
 static void _kvm_host_prot_finalize(void *arg)
@@ -571,6 +580,58 @@ int pkvm_vm_ioctl_enable_cap(struct kvm *kvm, struct kvm_enable_cap *cap)
 	default:
 		return -EINVAL;
 	}
+
+	return 0;
+}
+
+int pkvm_check_sw_reqs(void)
+{
+	struct arm_smccc_res res;
+	int nr_missing = 0;
+
+	if (!is_protected_kvm_enabled())
+		return 0;
+
+	kvm_info("Checking pKVM requirements");
+
+	if (!psci_ops.cpu_on || !psci_ops.cpu_off || !psci_ops.cpu_suspend) {
+		kvm_err("pKVM requires PSCI for CPU on/off/suspend, aborting init\n");
+		__pkvm_firmware_rmem_clear();
+
+		return -EINVAL;
+	}
+
+	if (psci_ops.get_version() < ARM_SMCCC_VERSION_1_1) {
+		kvm_err(" - FF-A requires SMCCC v1.1 or later\n");
+		nr_missing++;
+	} else {
+		arm_smccc_1_1_smc(FFA_VERSION, FFA_VERSION_1_0, 0, 0, 0, 0, 0, 0, &res);
+		if (res.a0 == FFA_RET_NOT_SUPPORTED) {
+			kvm_err(" - FF-A not supported\n");
+			nr_missing++;
+		} else if (res.a0 != FFA_VERSION_1_0) {
+			kvm_err(" - Unsupported FF-A version\n");
+			nr_missing++;
+		}
+	}
+
+	if (!pkvm_firmware_mem) {
+		kvm_err(" - No Protected VM firmware found\n");
+		nr_missing++;
+	}
+
+	if (!smccc_trng_available) {
+		kvm_err(" - SMCCC TRNG not supported\n");
+		nr_missing++;
+	}
+
+	if (!psci_mem_protect_supported()) {
+		kvm_err(" - PSCI_MEM_PROTECT not supported\n");
+		nr_missing++;
+	}
+
+	if (nr_missing)
+		kvm_err("pKVM requirements not met, Protected guests may not be secure!\n");
 
 	return 0;
 }

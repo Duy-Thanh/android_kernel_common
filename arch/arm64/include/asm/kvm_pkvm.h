@@ -420,4 +420,6 @@ static inline unsigned long hyp_host_fp_pages(unsigned long nr_cpus)
 		PAGE_SHIFT;
 }
 
+int pkvm_check_sw_reqs(void);
+
 #endif	/* __ARM64_KVM_PKVM_H__ */
