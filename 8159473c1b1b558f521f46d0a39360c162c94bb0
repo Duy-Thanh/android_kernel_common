@@ -16,6 +16,24 @@
       "message": "Regarding the TreeHugger results \"finished with: 36 passed, 2 failed.\", excepts KMI breaking, is there any other failures?\nThanks",
       "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad0794b5_d6fffcae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-31T22:42:03Z",
+      "side": 1,
+      "message": "Correct. The failures are only ABI issues.",
+      "parentUuid": "57902bc9_9d921af6",
+      "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
