@@ -325,10 +325,13 @@ int ioremap_page_range(unsigned long addr, unsigned long end,
 	if (!err)
 		err = kmsan_ioremap_page_range(addr, end, phys_addr, prot,
 					       ioremap_max_page_shift);
+<<<<<<< HEAD   (8035e5 UPSTREAM: mm/page_alloc: fix potential deadlock on zonelist_)
 
 	if (IS_ENABLED(CONFIG_ARCH_HAS_IOREMAP_PHYS_HOOKS) && !err)
 		ioremap_phys_range_hook(phys_addr, end - addr, prot);
 
+=======
+>>>>>>> BRANCH (ca1c90 Linux 6.1.26)
 	return err;
 }
 
