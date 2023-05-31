@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d831e86f_f62d5cc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-05-31T01:17:17Z",
+      "side": 1,
+      "message": "I don\u0027t think so.\nThis is just as description in Kconfig for CONFIG_LED_TRIGGER_PHY.",
+      "parentUuid": "51d194d1_ed751c13",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "a1384cfde07d4122fde4b37921729e556fa63d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3cf0a9f3_f17b7a84",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03e701ab_6bf46142",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-05-31T01:17:17Z",
+      "side": 1,
+      "message": "I see, will remove this comment.",
+      "parentUuid": "3cf0a9f3_f17b7a84",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 56
+      },
+      "revId": "a1384cfde07d4122fde4b37921729e556fa63d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c34477d7_3b90ea06",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-30T17:20:51Z",
       "side": 1,
       "message": "this is not an issue in the android-mainline branch at all.",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 39
+      },
+      "revId": "a1384cfde07d4122fde4b37921729e556fa63d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93f6e517_95682c4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-05-31T01:17:17Z",
+      "side": 1,
+      "message": "I see, will remove this comment.",
+      "parentUuid": "c34477d7_3b90ea06",
       "range": {
         "startLine": 12,
         "startChar": 1,
