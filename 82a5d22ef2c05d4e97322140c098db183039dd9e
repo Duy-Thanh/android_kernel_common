@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c14f46e3_46300184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2023-05-31T13:04:43Z",
+      "side": 1,
+      "message": "Thanks for your review. I\u0027ll also cherry-pick to android-mainline and android14-6.1. The increased stack spaces have been removed in the patch set 5. I verified it on my device by running the command `adb shell dumpsys suspend_control_internal` to get the eventpoll wakeup sources.",
+      "parentUuid": "0b3e1830_01321cc2",
+      "revId": "82a5d22ef2c05d4e97322140c098db183039dd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aad90b97_20c9a38e",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58fe513e_2fc082d7",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2023-05-31T13:04:43Z",
+      "side": 1,
+      "message": "Fixed in the patch set 5. Thank you.",
+      "parentUuid": "aad90b97_20c9a38e",
+      "range": {
+        "startLine": 1371,
+        "startChar": 1,
+        "endLine": 1371,
+        "endChar": 18
+      },
+      "revId": "82a5d22ef2c05d4e97322140c098db183039dd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb155320_9b3d14dd",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-05-17T07:01:34Z",
       "side": 1,
       "message": "again, that\u0027s a lot of stack space for a vendor hook, please don\u0027t do this on a fast path like this.",
+      "range": {
+        "startLine": 412,
+        "startChar": 1,
+        "endLine": 412,
+        "endChar": 24
+      },
+      "revId": "82a5d22ef2c05d4e97322140c098db183039dd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3b9af73_f593f8e1",
+        "filename": "fs/timerfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2023-05-31T13:04:43Z",
+      "side": 1,
+      "message": "Fixed in the patch set 5. Thank you.",
+      "parentUuid": "bb155320_9b3d14dd",
       "range": {
         "startLine": 412,
         "startChar": 1,
