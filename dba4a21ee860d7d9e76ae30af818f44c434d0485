@@ -16,6 +16,24 @@
       "message": "How is this used given there is no change to nl80211.c? Is it ok that the array size includes the ANDROID_KABI_RESERVED values? If so, it seems like this \"IMPLEMENTED\" value is not needed.",
       "revId": "dba4a21ee860d7d9e76ae30af818f44c434d0485",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a18786_cf75bcda",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 5513,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2023-06-01T21:19:53Z",
+      "side": 1,
+      "message": "ANDROID_KABI_RESERVED won\u0027t be included in array size since \"ATTR_MAX\" value will be same as \"IMPLEMENTED\".\n\n\nEx:\n\nHere __NL80211_TID_CONFIG_ATTR_MAX_IMPLEMENTED assigned with NL80211_TID_CONFIG_ATTR_TX_RATE\n\nSo, __NL80211_TID_CONFIG_ATTR_AFTER_LAST value will be NL80211_TID_CONFIG_ATTR_TX_RATE + 1 and\n\nNL80211_TID_CONFIG_ATTR_MAX value will be NL80211_TID_CONFIG_ATTR_TX_RATE",
+      "parentUuid": "92d6b3f6_b111bd70",
+      "revId": "dba4a21ee860d7d9e76ae30af818f44c434d0485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
