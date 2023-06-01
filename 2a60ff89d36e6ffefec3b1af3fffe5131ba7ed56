@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81eaff67_90b7ea83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-01T11:27:42Z",
+      "side": 1,
+      "message": "But alias is not a valid option for USB busses, sorry.\n\nTo make this more explicit, should we just make the bus id random at every boot?  That should reinforce that this is never a value that userspace can use.",
+      "parentUuid": "43bc3c82_6746339e",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e763a5_09ae0eb0",
         "filename": "drivers/usb/host/xhci-plat.c",
         "patchSetId": 2
