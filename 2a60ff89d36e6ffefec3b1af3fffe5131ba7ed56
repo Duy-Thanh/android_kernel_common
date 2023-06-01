@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a6b1d78_21377c92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-06-01T04:46:30Z",
+      "side": 1,
+      "message": "I don\u0027t expect it for USB device ids. That could be checked by lots of different things as you said. But for bus number, if it\u0027s changed, this means the change of topology for USB bus.\nAnd regarding to any other serial bus supported by Linux (e.g. i2c,spi,serial,etc.), these driver support fixed bus number by alias id.\nSo I think that it\u0027s applicable to usb.\n\nI have experienced same issue for long time in IVI system that is based on udev.\nIt\u0027s difficult to solve it by using udev.\nRegarding to /dev/disk, it\u0027s slightly different from bus id\u0027s case.",
+      "parentUuid": "552efc9a_352a6e98",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e763a5_09ae0eb0",
         "filename": "drivers/usb/host/xhci-plat.c",
         "patchSetId": 2
