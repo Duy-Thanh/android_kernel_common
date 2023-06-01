@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d6b3f6_b111bd70",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 5513,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T21:05:44Z",
+      "side": 1,
+      "message": "How is this used given there is no change to nl80211.c? Is it ok that the array size includes the ANDROID_KABI_RESERVED values? If so, it seems like this \"IMPLEMENTED\" value is not needed.",
+      "revId": "dba4a21ee860d7d9e76ae30af818f44c434d0485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
