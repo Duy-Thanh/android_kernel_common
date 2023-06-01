@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d49cae9_489092d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 27,
+        "startChar": 31,
+        "endLine": 27,
+        "endChar": 38
+      },
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e47a27_415840e2",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -31,6 +54,308 @@
       "writtenOn": "2023-05-30T18:01:29Z",
       "side": 1,
       "message": "Please submit upstream first.",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef984d7_a0646a19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "Greg is right. These features need to be submitted upstream. This patch should be refactored to avoid special code for a particular device but add support for the overcurrent and special port behavior. Presumably there is some quirk mechanisms that can be used. There should be separate patches for the overcurrent change and port behavior change.\n\nThis will take some time, so in the meantime, this patch can be refactored to use vendor hooks instead of changing the behavior. I\u0027ve added comments to suggest how to do this... but please pursue the upstream changes so that next year it is done properly.\n\nDocumentation on vendor hooks and ANDROID_OEM_DATA(): https://preview.source.android.com/docs/core/architecture/kernel/kernel-code#vendor-hooks",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "822fedd5_dd9d66be",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "All of this new code should be moved to a vendor module that implements vendor hook handlers.",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66157b9e_d6346591",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2086,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "Replace with a vendor hook",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51463fa0_b45f8e81",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "Replace with a vendor hook",
+      "range": {
+        "startLine": 2275,
+        "startChar": 0,
+        "endLine": 2276,
+        "endChar": 27
+      },
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7bbe3dc_02140e6c",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "replace with a vendor hook",
+      "range": {
+        "startLine": 2279,
+        "startChar": 0,
+        "endLine": 2288,
+        "endChar": 3
+      },
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b55758d_d5375cf1",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2638,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "Why does your device end up in this state of no kobj.sd at disconnect? Can you fix the underlying issue?\n\nIf really needed replace with a vendor hook:\n```\nbool is_null \u003d false;\n...\ntrace_android_vh_check_kobj(\u0026is_null); // does the dev_info if needed\nif (!is_null) {\n  sysfs_remove_link(\u0026udev-\u003edev.kobj, \"port\");\n  sysfs_remove_link(\u0026port_dev-\u003edev.kobj, \"device\");\n}\n```",
+      "range": {
+        "startLine": 2633,
+        "startChar": 0,
+        "endLine": 2638,
+        "endChar": 48
+      },
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e274476_a0735454",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2651,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "same question as above...this seems like a state that should never happen.",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f66509_24ee1a54",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2662,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "not needed. Even if sd can be NULL, put this in the \"if\" and your exception case in the \"else\". The goto is just skipping one line of code and makes the code harder to read.",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a5fbb1b_5a5656a7",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3451,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "use a vendor hook if this is really needed, but like the above, this seems like a state we should never be in. Can the underlying issue be fixed?\n```\nbool skip_fast_enum \u003d false;\n...\ntrace_android_vh_check_quirk_xxx(\u0026skip_fast_enum,...)\nif (skipfast_enum \u0026\u0026 port_dev-\u003equirks \u0026 USB_PORT_QUIRK_FAST_ENUM)\n...\n```",
+      "range": {
+        "startLine": 3446,
+        "startChar": 0,
+        "endLine": 3451,
+        "endChar": 55
+      },
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a21fae0_e6fc626a",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5674,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "replace with vendor hook",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38109c5_44aa3555",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5716,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "replace with vendor hook using pattern similar to above suggestions",
+      "range": {
+        "startLine": 5711,
+        "startChar": 0,
+        "endLine": 5716,
+        "endChar": 43
+      },
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fad72d0a_a6387cf8",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5840,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db404fa_c6e1fcdd",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6089,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "replace with vendor hook",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9357a2e3_2a756906",
+        "filename": "drivers/usb/core/hub.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "This needs to be restructured such that the features are supported generically without special device support embedded in the core driver.",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f46bcf78_b648338a",
+        "filename": "drivers/usb/core/hub.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "Get rid of these fields and instead use `ANDROID_OEM_DATA(...)` to allocate a field for use by your vendor module.",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84929027_2080ac41",
+        "filename": "drivers/usb/core/hub.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T20:50:37Z",
+      "side": 1,
+      "message": "this should be private to your vendor module.",
       "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
