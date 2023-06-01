@@ -228,3 +228,7 @@
 
 #required by touch module
   power_supply_is_system_supplied
+
+#required by mi_mempool.ko
+  __traceiter_android_vh_mmput
+  __tracepoint_android_vh_mmput
