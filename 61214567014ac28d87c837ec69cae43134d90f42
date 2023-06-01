@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fd4f9ec_e2ce10a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-01T13:54:33Z",
+      "side": 1,
+      "message": "I want to clarify an important thing which is missed in my previous replying.\n\nMy main task is to port Android\u0027s car target (lunch aosp_cf_arm64_auto-userdebug) on Xen virtual machine, this patch might impact other Android targets (e.g. mobile targets), but Xen will introduce only several modules and share most virtio device drivers with KVM.",
+      "parentUuid": "8d358a7b_874f7e2b",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
