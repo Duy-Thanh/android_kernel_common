@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e3b4bec_7c5d6d8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-06-01T09:40:15Z",
+      "side": 1,
+      "message": "I understand you.\nI\u0027d like to back to first point.\nUSB bus ids are random, I know it caused some issue in IVI system for long time.\nIt\u0027s difficult to avoid by userspace.\nTo prevent from being random ids, I\u0027ve submit this patch so that we can fix and consist bus ids by device alias. If no alias specified, it\u0027s compatible.\nWe have fixed the issue like that for long time. we don\u0027t have any other solution now.",
+      "parentUuid": "5eb36e31_e5c23f0e",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e763a5_09ae0eb0",
         "filename": "drivers/usb/host/xhci-plat.c",
         "patchSetId": 2
