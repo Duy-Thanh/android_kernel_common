@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91181194_b462fe64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-01T06:44:01Z",
+      "side": 1,
+      "message": "The checkpatch warning can be ignored, this is just a clean revert so the code is being put back \"as is\".",
+      "revId": "6a60be8857843515efc8353f75cbbd9a2b9070bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
