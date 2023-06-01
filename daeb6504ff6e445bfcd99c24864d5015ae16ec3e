@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d91e8c9f_df7a85f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-01T11:15:37Z",
+      "side": 1,
+      "message": "coming in the next LTS release, but add it now as it breaks the abi.",
+      "revId": "daeb6504ff6e445bfcd99c24864d5015ae16ec3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
