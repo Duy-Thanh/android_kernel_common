@@ -245,6 +245,13 @@
   __traceiter_android_vh_madvise_cold_pageout_skip
   __tracepoint_android_vh_madvise_cold_pageout_skip
 
+<<<<<<< PATCH SET (3fbb0a ANDROID: GKI: Update symbol list for xiaomi)
+#required by reclaim module
+   __traceiter_android_vh_tune_scan_type
+   __tracepoint_android_vh_tune_scan_type
+   __traceiter_android_vh_tune_swappiness
+   __tracepoint_android_vh_tune_swappiness
+=======
 #required by n_gsm.ko
   tty_write_room
   tty_port_tty_set
@@ -255,3 +262,4 @@
   tty_port_close_start
   tty_port_lower_dtr_rts
   tty_port_close_end
+>>>>>>> BASE      (0a859e ANDROID: GKI: Include kheaders in gki_system_dlkm_modules)
