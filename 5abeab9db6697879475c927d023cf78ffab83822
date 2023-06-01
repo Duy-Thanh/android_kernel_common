@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb17c966_8bd74fd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T18:57:52Z",
+      "side": 1,
+      "message": "Not reviewing since you added a CR-1 to the child patch (aosp/2583951). Change it to CR+1 to indicate that the series is ready for review.",
+      "revId": "5abeab9db6697879475c927d023cf78ffab83822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
