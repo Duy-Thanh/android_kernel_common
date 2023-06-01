@@ -228,3 +228,9 @@
 
 #required by touch module
   power_supply_is_system_supplied
+
+#required by reclaim module
+   __traceiter_android_vh_tune_scan_type
+   __tracepoint_android_vh_tune_scan_type
+   __traceiter_android_vh_tune_swappiness
+   __tracepoint_android_vh_tune_swappiness
