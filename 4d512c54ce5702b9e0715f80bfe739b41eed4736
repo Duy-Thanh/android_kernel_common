@@ -17,6 +17,23 @@
       "parentUuid": "1f34d378_277cfadf",
       "revId": "4d512c54ce5702b9e0715f80bfe739b41eed4736",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff4ff97c_20c452f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010404
+      },
+      "writtenOn": "2023-06-01T01:59:05Z",
+      "side": 1,
+      "message": "https://issuetracker.google.com/issues/285093688",
+      "revId": "4d512c54ce5702b9e0715f80bfe739b41eed4736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
