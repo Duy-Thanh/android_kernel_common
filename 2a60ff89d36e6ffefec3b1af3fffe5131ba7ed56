@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdedd3eb_54506e9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-01T11:14:03Z",
+      "side": 1,
+      "message": "What userspace code care about USB bus ids?  Please fix that as it is broken and will break at unsuspecting times.  This is a userspace issue and no kernel change is needed at all.",
+      "parentUuid": "3e3b4bec_7c5d6d8b",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e763a5_09ae0eb0",
         "filename": "drivers/usb/host/xhci-plat.c",
         "patchSetId": 2
