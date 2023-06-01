@@ -33,6 +33,24 @@
       "message": "new bug id needed",
       "revId": "08c1de35c220277f15a6a8f56dc549e14bcc1dc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7a9b267_f284634b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2023-06-01T06:13:40Z",
+      "side": 1,
+      "message": "Hi Greg. The bug is reopened now. Please do the needful.",
+      "parentUuid": "18c6528a_f1e00ae2",
+      "revId": "08c1de35c220277f15a6a8f56dc549e14bcc1dc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
