@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d358a7b_874f7e2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-01T13:45:59Z",
+      "side": 1,
+      "message": "For the automotive software, Xen is widely used as type-1 hypervisor.  For example, the SOAFEE [1] defines the standard for automotive software in the community and EWAOL is an implementation for the standard [2] which deploys Xen virtulisation.\n\nThough I have no concrete performance data, I think a main reason for using Xen virtulisation is because it can give lower latency rather than other KVM.  And the low latency and realtime performance is critical for automotive software.\n\nHere I am not quite agree that Xen is \"legacy virtualization\", if you look at Xen mailing list [3], you could see Xen is an active project.  And as I know, there have many ongoing development for it (e.g. support virtio devices for Xen).\n\n[1] https://www.soafee.io/\n[2] https://ewaol.docs.arm.com/en/kirkstone-dev/introduction.html#high-level-overview\n[3] https://lore.kernel.org/xen-devel/",
+      "parentUuid": "fdb02333_416bf820",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2023-06-01T11:17:48Z",
       "side": 1,
       "message": "what about the x86 gki_defconfig?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 12
+      },
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d25bf57_b36fae33",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-01T13:45:59Z",
+      "side": 1,
+      "message": "As the first step, I enabled Xen on aarch64 and verified Android on my aarch64 machine (ADLink AVA platform [1]).\n\nIf you think is needed, I can apply the same change on x86 gki_defconfig, but so far I have no testing envoironment for Android on Xen / x86.\n\n[1] https://www.adlinktech.com/Products/Computer_on_Modules/COM-HPC-Server-Carrier-and-Starter-Kit/AVA_Developer_Platform",
+      "parentUuid": "96838a61_d322ead6",
       "range": {
         "startLine": 51,
         "startChar": 0,
