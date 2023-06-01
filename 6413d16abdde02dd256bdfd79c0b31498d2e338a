@@ -16,6 +16,24 @@
       "message": "Wait, this needs a new bug, that one is old and closed, please fix.",
       "revId": "6413d16abdde02dd256bdfd79c0b31498d2e338a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "265abde8_e12e0041",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2023-06-01T06:13:09Z",
+      "side": 1,
+      "message": "Hi Greg. The bug is reopened now. Please do the needful.",
+      "parentUuid": "24d83cd0_1a288e45",
+      "revId": "6413d16abdde02dd256bdfd79c0b31498d2e338a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
