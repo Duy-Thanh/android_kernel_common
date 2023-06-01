@@ -146,6 +146,7 @@ void gzvm_sync_hwstate(struct gzvm_vcpu *vcpu);
 extern struct miscdevice *gzvm_debug_dev;
 
 int gzvm_arch_memregion_purpose(struct gzvm *gzvm, struct gzvm_userspace_memory_region *mem);
+int gzvm_arch_set_dtb_config(struct gzvm *gzvm, struct gzvm_dtb_config *args);
 
 int gzvm_init_ioeventfd(struct gzvm *gzvm);
 int gzvm_ioeventfd(struct gzvm *gzvm, struct gzvm_ioeventfd *args);
