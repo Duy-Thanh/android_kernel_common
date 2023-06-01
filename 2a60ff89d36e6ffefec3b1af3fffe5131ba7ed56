@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43bc3c82_6746339e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-06-01T11:25:01Z",
+      "side": 1,
+      "message": "I don\u0027t think so. /aliases node is documented in\nhttps://devicetree-specification.readthedocs.io/en/latest/chapter3-devicenodes.html#aliases-node",
+      "parentUuid": "482d7b81_71685a28",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e763a5_09ae0eb0",
         "filename": "drivers/usb/host/xhci-plat.c",
         "patchSetId": 2
