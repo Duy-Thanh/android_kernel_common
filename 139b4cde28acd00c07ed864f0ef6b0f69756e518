@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f713c605_dcfd53b0",
+        "filename": "arch/arm64/include/asm/module.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "Consider making this just `struct rhashtable elf64_rela_rht`?",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef5901de_33480ece",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "What\u0027s the rationale for repeating the forbidden offset check and reinitializing another plt entry?",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "637b3b91_14377cc4",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "You don\u0027t need to initialize this anymore since it will always be initialized to something in the path you\u0027d return it in.",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e36e406_6f069474",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "I think if you follow what I wrote below, we can get rid of these.",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b61b78b_a054ba70",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "What do you think about adding this here:\n\n```\nmod-\u003earch.core.plt_num_entries \u003d 0;\nmod-\u003earch.core.plt_max_entries \u003d 0;\n```",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b97d1a8_5825c8e5",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "And here:\n\n```\nmod-\u003earch.init.plt_num_entries \u003d 0;\nmod-\u003earch.init.plt_max_entries \u003d 0;\n```",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a89b9318_d74cc5a9",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "You should always check the return value of `kmalloc()` to see if it returned NULL. However, I think it might actually be cleaner to embed these structures inside of the `mod_plt_sec` structure. That\u0027ll save having to allocate the memory for those structures here, as well as having to deallocate it later.",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8e4785_14c64c8b",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "Given what I suggested above, you can simplify this as:\n\n```\nstruct mod_plt_sec *mod_plt;\n\n...\n\nmod_plt \u003d !str_has_prefix(secstrings + dstsec-\u003esh_name, \".init\") ? \u0026mod-\u003earch.core : \u0026mod-\u003earch.init;\n\nplt_count \u003d count_plts(syms, rels, numrels, sechds[i].sh_info, dstsec, \u0026mod_plt-\u003eelf64_rela_rht);\nif (plt_count \u003c 0)\n        goto free_and_destroy_rht;\n        \nmod_plt-\u003eplt_max_entries +\u003d plt_count;\n```\n\nWhat do you think?",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43a83446_8afbc0d8",
+        "filename": "arch/arm64/kernel/module.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "I checked and this seems to be called when the module is unloaded or as part of error handling while loading the module, but not in the case that the module is loaded successfully, so the hashtables will still be allocated and populated after the module loads, despite not needing them.\n\nI believe `module_arch_freeing_init` does get called in case we successfully load the module though, along with the case where the module is unloaded or in case of an error when loading the module. Maybe we should define that here instead?",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65c7fa29_adcc2317",
+        "filename": "arch/arm64/kernel/module.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "What do you think about putting this in `arch/arm64/kernel/module-plts.c`? If it\u0027s in that file, you can omit this check, since that file is only ever compiled if `CONFIG_ARM64_MODULE_PLTS` is enabled. I think it\u0027d also makes sense since this is only dealing with plt logic.",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155c845d_2476ec6c",
+        "filename": "arch/arm64/kernel/module.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-06-01T18:03:27Z",
+      "side": 1,
+      "message": "If these are part of the structures, then this if check is no longer needed.",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
