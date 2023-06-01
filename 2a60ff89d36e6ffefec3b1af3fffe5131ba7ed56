@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5eb36e31_e5c23f0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-01T06:34:48Z",
+      "side": 1,
+      "message": "USB bus ids are even more random than device ids, as you have found out.  They are not deterministic at all, and in fact, can change at any time, as you have found out.\n\nYou should NEVER rely on them to be the same.\n\nLook at the device attributes instead, to determine what you need to communicate with, USB bus numbers are only guaranteed to be unique at a specific point in time (i.e. no two busses have the same number), but the actual number is never guaranteed to be a specific value.",
+      "parentUuid": "5a6b1d78_21377c92",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e763a5_09ae0eb0",
         "filename": "drivers/usb/host/xhci-plat.c",
         "patchSetId": 2
