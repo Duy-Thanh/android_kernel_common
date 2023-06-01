@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcfab3ff_d26279de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-01T14:50:02Z",
+      "side": 1,
+      "message": "needs a more descriptive title that indicate what this patch does",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e47a27_415840e2",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
