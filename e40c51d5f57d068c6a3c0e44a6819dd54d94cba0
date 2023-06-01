@@ -16,6 +16,23 @@
       "message": "queued for June 7 KMI update",
       "revId": "e40c51d5f57d068c6a3c0e44a6819dd54d94cba0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "493ff621_82f0ec14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-01T06:39:42Z",
+      "side": 1,
+      "message": "Please use a `ANDROID_KABI_RESERVED` prefix here, otherwise in a few years we will not remember why they say \"DO NOT USE\" and so we will not use them 😊",
+      "revId": "e40c51d5f57d068c6a3c0e44a6819dd54d94cba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
