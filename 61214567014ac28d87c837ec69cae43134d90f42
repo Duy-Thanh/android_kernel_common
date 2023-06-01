@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c74d7380_71513304",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-01T18:18:10Z",
+      "side": 1,
+      "message": "I know the project is \"active\", but it really is only going into \"legacy\" products, like automotive 😊\n\nAlso, KVM can do real-time, if you really want that (note realtime does not mean lower latency at all, it means deterministic latency.)\n\nIf this is enabled, it opens up a whole new part of the kernel that needs to be maintained and made stable for abi issues for a release.  It also introduces a whole new attack surface.  And it needs a maintainer to be able to manage it all over the next 5-10 years.\n\nSo, as with all new kernel features that want to be added, please fill out the proper documentation for it (there\u0027s a web form somewhere), and also get the security team to buy into this, as they will also need to be aware that they will now need to audit, and track, all future Xen issues when it comes to Android kernels.",
+      "parentUuid": "3fd4f9ec_e2ce10a2",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -91,6 +109,30 @@
       "side": 1,
       "message": "As the first step, I enabled Xen on aarch64 and verified Android on my aarch64 machine (ADLink AVA platform [1]).\n\nIf you think is needed, I can apply the same change on x86 gki_defconfig, but so far I have no testing envoironment for Android on Xen / x86.\n\n[1] https://www.adlinktech.com/Products/Computer_on_Modules/COM-HPC-Server-Carrier-and-Starter-Kit/AVA_Developer_Platform",
       "parentUuid": "96838a61_d322ead6",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 12
+      },
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ba2563_4b362a1e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-01T18:18:10Z",
+      "side": 1,
+      "message": "We always keep the configs, for non-arch-specific-options, in sync for testing and code coverage ease.",
+      "parentUuid": "7d25bf57_b36fae33",
       "range": {
         "startLine": 51,
         "startChar": 0,
