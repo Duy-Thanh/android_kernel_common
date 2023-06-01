@@ -128,6 +128,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "482d7b81_71685a28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-01T11:14:43Z",
+      "side": 1,
+      "message": "Also note that I think you are using an undocumented device tree attribute, right?  That is not allowed either as you are adding a new api that is not upstream.",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e763a5_09ae0eb0",
         "filename": "drivers/usb/host/xhci-plat.c",
         "patchSetId": 2
