@@ -90,12 +90,14 @@
   __stack_chk_fail
   strcmp
   __traceiter_android_vh_get_thermal_zone_device
+  __traceiter_android_vh_mmc_check_status
   __traceiter_android_vh_modify_thermal_request_freq
   __traceiter_android_vh_modify_thermal_target_freq
   __traceiter_android_vh_thermal_power_cap
   __traceiter_android_vh_thermal_register
   __traceiter_android_vh_thermal_unregister
   __tracepoint_android_vh_get_thermal_zone_device
+  __tracepoint_android_vh_mmc_check_status
   __tracepoint_android_vh_modify_thermal_request_freq
   __tracepoint_android_vh_modify_thermal_target_freq
   __tracepoint_android_vh_thermal_power_cap
