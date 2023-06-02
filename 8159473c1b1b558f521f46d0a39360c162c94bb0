@@ -103,6 +103,24 @@
       "parentUuid": "d5c902e8_4d328e2d",
       "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6214dc_fbe9a93d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-02T16:18:27Z",
+      "side": 1,
+      "message": "There will be 1 more opportunity to update the KMI on June 16 (KMI freeze). Go ahead and submit the patch you need as soon as you can.",
+      "parentUuid": "52f939a4_4e7473d4",
+      "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
