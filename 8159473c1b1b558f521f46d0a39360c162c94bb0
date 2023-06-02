@@ -51,6 +51,23 @@
       "message": "Gentle ping...\nI see this is the last KMI update for android14-6.1: \"June 7, 2023 KMI Update (cut-off Friday, June 2)\", could you help review this patch again, it is essential to enable GKI on i.MX8QM SoC. Hope it can catch the KMI freeze date.\nThanks",
       "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5c902e8_4d328e2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-06-02T10:44:55Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/linux-arm-kernel/20230602103436.GA16785@willie-the-truck/",
+      "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
