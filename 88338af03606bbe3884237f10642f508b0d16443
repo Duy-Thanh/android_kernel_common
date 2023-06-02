@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb9b9b1_e8db3c9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-06-02T12:33:27Z",
+      "side": 1,
+      "message": "This patch is part of \"FROMLIST: arm64: errata: Add NXP iMX8QM workaround for A53 Cache coherency issue\"\nhttps://android-review.googlesource.com/c/kernel/common/+/2606628\nIt is used to update KMI before freeze.",
+      "revId": "88338af03606bbe3884237f10642f508b0d16443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
