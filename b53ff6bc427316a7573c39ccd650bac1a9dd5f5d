@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/285499270",
       "revId": "b53ff6bc427316a7573c39ccd650bac1a9dd5f5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15fd3817_d563557d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-06-02T10:12:51Z",
+      "side": 1,
+      "message": "This branch is no longer eligible for respins",
+      "revId": "b53ff6bc427316a7573c39ccd650bac1a9dd5f5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
