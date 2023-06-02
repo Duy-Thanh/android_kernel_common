@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e30fa2b1_f2af34ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-02T18:12:53Z",
+      "side": 1,
+      "message": "meaningful title please.",
+      "range": {
+        "startLine": 7,
+        "startChar": 30,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "6065a09c79598b675f7ec5f7f5ee5d1d8a77b677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9761082c_b33ce068",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-02T18:12:53Z",
+      "side": 1,
+      "message": "Sign off needs to match \"Author\"",
+      "revId": "6065a09c79598b675f7ec5f7f5ee5d1d8a77b677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "921be926_c7e8f6c0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
