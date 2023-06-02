@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8301d126_d435fdcf",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-06-02T20:35:42Z",
+      "side": 1,
+      "message": "If it\u0027s already there, don\u0027t you need to free up the duplicate allocated one?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 48
+      },
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef5901de_33480ece",
         "filename": "arch/arm64/kernel/module-plts.c",
         "patchSetId": 8
