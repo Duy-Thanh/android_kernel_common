@@ -68,6 +68,41 @@
       "message": "https://lore.kernel.org/linux-arm-kernel/20230602103436.GA16785@willie-the-truck/",
       "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f939a4_4e7473d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-06-02T12:14:40Z",
+      "side": 1,
+      "message": "The formal patch to fix this issue is not able to catch KMI freeze.\nConsidering the KMI breaking is only caused by following change, is it possible to only add this change at this time? As a result, after KMI freeze, I can still have chance to submit formal patch in 6.1 GKI.\nI will submit one such change for your review. Thanks\n\nChanges that breaking KMI:\n+++ b/arch/arm64/tools/cpucaps\n@@ -82,6 +82,7 @@ WORKAROUND_CAVIUM_TX2_219_TVM\n WORKAROUND_CLEAN_CACHE\n WORKAROUND_DEVICE_LOAD_ACQUIRE\n WORKAROUND_NVIDIA_CARMEL_CNP\n+WORKAROUND_NXP_ERR050104\n WORKAROUND_QCOM_FALKOR_E1003\n WORKAROUND_REPEAT_TLBI\n WORKAROUND_SPECULATIVE_AT",
+      "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "300b40e5_687ac9c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-06-02T12:14:40Z",
+      "side": 1,
+      "message": "Hi Will,\nThanks for your comments in upstream, so this patch still needs some work to do, I will abandon it now.",
+      "parentUuid": "d5c902e8_4d328e2d",
+      "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
