@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e016e611_104ce0ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-02T04:18:59Z",
+      "side": 1,
+      "message": "I understood the potential maintenance effort for enabling Xen feature.\n\nTo be honest, I am an engineer without good communication skills ;) But I am glad to write documentation and advertise my current work for Google security team, it\u0027s good for me to do anything if it is helpful for proceeding.\n\nSo I need a bit more detailed info for how to proceed, e.g. where is the web form I should fill and in which form I should engage with Google security team, like present slides or conference meeting?\n\nGreg, Alistair, I am appreciate if you could sheild some lights on these questions; or let me know who is the right person to reach out.\n\nAt mean time, I will check Linaro internally if anything we can do for logistics.\n\n\nI might have another option: we can create a new build config in Android common kernel, say build.config.aarch64.xen, this configuration doesn\u0027t impact any other common gki stuffs, and we only use it for building a GKI kernel with enabling Xen features.  At the end, it works in a way like production builidng, like build.config.rockpi4 or build.config.db845c.  So we can dismiss the concern for big maintenance effort at the beginning and it can us an chance to build kernel with support Xen easily.  Please let me know if this feasible for you.",
+      "parentUuid": "c74d7380_71513304",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -133,6 +151,30 @@
       "side": 1,
       "message": "We always keep the configs, for non-arch-specific-options, in sync for testing and code coverage ease.",
       "parentUuid": "7d25bf57_b36fae33",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 12
+      },
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1652348f_498702f8",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-02T04:18:59Z",
+      "side": 1,
+      "message": "If we agree on enabling Xen feature in ACK, I will populate Xen features into different archs (x86, riscv, etc).",
+      "parentUuid": "15ba2563_4b362a1e",
       "range": {
         "startLine": 51,
         "startChar": 0,
