@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000046030133",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2612971?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "7226264b_395a7c39",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 15,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Sachin Gupta \u003csachgupt@qti.qualcomm.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "a03867b1_0a33f3a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-02T14:03:59Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Sachin Gupta \u003csachgupt@qti.qualcomm.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 537031437 android-build.ayeaye-python-dispatcher_20230601.04_p0",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "6065a09c79598b675f7ec5f7f5ee5d1d8a77b677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
