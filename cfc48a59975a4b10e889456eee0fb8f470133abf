@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e01204_816a3152",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-02T18:03:00Z",
+      "side": 1,
+      "message": "No upstream sha1 is cited.",
+      "revId": "cfc48a59975a4b10e889456eee0fb8f470133abf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "babf32ff_44d322a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-02T18:03:00Z",
+      "side": 1,
+      "message": "Is this in an upstream maintainer tree? Should it be FROMGIT?\n\nPlease comply to the contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "cfc48a59975a4b10e889456eee0fb8f470133abf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
