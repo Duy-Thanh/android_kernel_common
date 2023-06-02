@@ -124,6 +124,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b18f3ae1_08dedfea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2023-06-02T16:45:12Z",
+      "side": 1,
+      "message": "Do you really need these options?\n\nXEN_BALLOON\nXEN_BALLOON_MEMORY_HOTPLUG\nXEN_SCRUB_PAGES_DEFAULT\nXEN_DEV_EVTCHN\nXENFS\nXEN_COMPAT_XENFS \u003c-- definitely no\nXEN_SYS_HYPERVISOR \u003c-- only if other hypervisor feature are using this\nXEN_SYMS (x86)",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96838a61_d322ead6",
