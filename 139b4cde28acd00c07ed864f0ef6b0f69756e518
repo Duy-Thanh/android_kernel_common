@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf0761f_cff89f63",
+        "filename": "arch/arm64/include/asm/module.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f713c605_dcfd53b0",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8301d126_d435fdcf",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-06-02T20:35:42Z",
       "side": 1,
       "message": "If it\u0027s already there, don\u0027t you need to free up the duplicate allocated one?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 48
+      },
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61815c6a_94c15d52",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Duplicate wont be allocated in the hashtable if the key already exists.\nOn line 218, I check if the element exists and only then insert into the table.\n```\n} else if (!lookup_rela(\u0026rela[i], elf64_rela_rht)) {\n\t\t\t\tplt_count++;\n\t\t\t\terr \u003d insert_rela_to_rht(\u0026rela[i], elf64_rela_rht);\n\t\t\t\tif (err \u003c 0)\n\t\t\t\t\treturn err;\n```\n\nBut do you want me to consider this corner case either way?",
+      "parentUuid": "8301d126_d435fdcf",
       "range": {
         "startLine": 93,
         "startChar": 0,
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d87af22_946d4238",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Done\nMy mistake, I think I messed up something while copying things around.",
+      "parentUuid": "ef5901de_33480ece",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "637b3b91_14377cc4",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-06-01T18:03:27Z",
       "side": 1,
       "message": "You don\u0027t need to initialize this anymore since it will always be initialized to something in the path you\u0027d return it in.",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fca7a84_f5db4647",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "637b3b91_14377cc4",
       "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +170,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95d6456d_d2d868df",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e36e406_6f069474",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b61b78b_a054ba70",
@@ -105,6 +201,24 @@
       "writtenOn": "2023-06-01T18:03:27Z",
       "side": 1,
       "message": "What do you think about adding this here:\n\n```\nmod-\u003earch.core.plt_num_entries \u003d 0;\nmod-\u003earch.core.plt_max_entries \u003d 0;\n```",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d3fd28_640c235d",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b61b78b_a054ba70",
       "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -126,6 +240,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "120e51de_c47f609a",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b97d1a8_5825c8e5",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a89b9318_d74cc5a9",
@@ -139,6 +271,24 @@
       "writtenOn": "2023-06-01T18:03:27Z",
       "side": 1,
       "message": "You should always check the return value of `kmalloc()` to see if it returned NULL. However, I think it might actually be cleaner to embed these structures inside of the `mod_plt_sec` structure. That\u0027ll save having to allocate the memory for those structures here, as well as having to deallocate it later.",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00a34f26_2db91cd9",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a89b9318_d74cc5a9",
       "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -160,6 +310,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "861c3899_d793f1ac",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "That\u0027s an awesome suggestion! Done",
+      "parentUuid": "5c8e4785_14c64c8b",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43a83446_8afbc0d8",
@@ -173,6 +341,24 @@
       "writtenOn": "2023-06-01T18:03:27Z",
       "side": 1,
       "message": "I checked and this seems to be called when the module is unloaded or as part of error handling while loading the module, but not in the case that the module is loaded successfully, so the hashtables will still be allocated and populated after the module loads, despite not needing them.\n\nI believe `module_arch_freeing_init` does get called in case we successfully load the module though, along with the case where the module is unloaded or in case of an error when loading the module. Maybe we should define that here instead?",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc95bbd5_5bd5cdaa",
+        "filename": "arch/arm64/kernel/module.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Good catch! Yep, that function checks out for this use case.",
+      "parentUuid": "43a83446_8afbc0d8",
       "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -194,6 +380,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a056bfd9_4ebf4f96",
+        "filename": "arch/arm64/kernel/module.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Makes sense! Original thought was to keep the placement of the function consistent with other architectures. But as discussed offline, its better to move it as it removes this check and the duplicate definition for rht_node_free().",
+      "parentUuid": "65c7fa29_adcc2317",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "155c845d_2476ec6c",
@@ -207,6 +411,24 @@
       "writtenOn": "2023-06-01T18:03:27Z",
       "side": 1,
       "message": "If these are part of the structures, then this if check is no longer needed.",
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42afc8fb_18f38fe8",
+        "filename": "arch/arm64/kernel/module.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-02T21:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "155c845d_2476ec6c",
       "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
