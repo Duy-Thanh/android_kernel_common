@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a6788f2_0187c4cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-02T18:38:14Z",
+      "side": 1,
+      "message": "the commit message needs to explain clearly why a \"placeholder\" is needed. Also, give a summary of what WORKAROUND_NXP_ERR050104 is (you can refer to the upstream link for details)",
+      "revId": "88338af03606bbe3884237f10642f508b0d16443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ecb9b9b1_e8db3c9d",
