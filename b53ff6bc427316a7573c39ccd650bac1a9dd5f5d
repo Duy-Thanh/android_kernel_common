@@ -33,6 +33,24 @@
       "message": "This branch is no longer eligible for respins",
       "revId": "b53ff6bc427316a7573c39ccd650bac1a9dd5f5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83a39e1e_c2c0f9bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-02T17:55:57Z",
+      "side": 1,
+      "message": "see https://preview.source.android.com/docs/core/architecture/kernel/gki-android12-5_10-release-builds#october-2022-releases",
+      "parentUuid": "15fd3817_d563557d",
+      "revId": "b53ff6bc427316a7573c39ccd650bac1a9dd5f5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
