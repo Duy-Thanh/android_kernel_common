@@ -92,6 +92,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d8200ff_fdc99205",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-02T14:58:08Z",
+      "side": 1,
+      "message": "what other configs are enabled when setting XEN\u003dy? What is the impact on kernel memory size?",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
