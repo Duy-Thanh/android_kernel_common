@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ead5b99_ea995926",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-02T16:37:15Z",
+      "side": 1,
+      "message": "Alternately, it might be easier to drop the STG file changes here and let the kmi update handle it. Otherwise you\u0027ll risk hitting more merge conflicts.",
+      "revId": "1ca2d8cac4163dbdbe7db138a1447e8c5f172865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
