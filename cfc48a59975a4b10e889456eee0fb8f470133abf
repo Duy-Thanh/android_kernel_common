@@ -51,6 +51,24 @@
       "message": "Is this in an upstream maintainer tree? Should it be FROMGIT?\n\nPlease comply to the contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "cfc48a59975a4b10e889456eee0fb8f470133abf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c3884a8_6fe960df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-06-03T13:14:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "babf32ff_44d322a0",
+      "revId": "cfc48a59975a4b10e889456eee0fb8f470133abf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
