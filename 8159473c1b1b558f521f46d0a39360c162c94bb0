@@ -121,6 +121,24 @@
       "parentUuid": "52f939a4_4e7473d4",
       "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea69076_211f2442",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-06-03T04:43:29Z",
+      "side": 1,
+      "message": "Thanks for your info, I will follow up the upstream process.",
+      "parentUuid": "0a6214dc_fbe9a93d",
+      "revId": "8159473c1b1b558f521f46d0a39360c162c94bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
