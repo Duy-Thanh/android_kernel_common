@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "01104e4e_a5131c39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-06-03T04:42:50Z",
+      "side": 1,
+      "message": "Thanks Todd, I just updated the commit message.",
+      "parentUuid": "9a6788f2_0187c4cc",
+      "revId": "88338af03606bbe3884237f10642f508b0d16443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ecb9b9b1_e8db3c9d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
