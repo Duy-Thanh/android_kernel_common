@@ -16,6 +16,24 @@
       "message": "PTAL, dropped the STG file changes. These will be included via KMI update.",
       "revId": "c1135e165863868255f4f1108329308008b5e49b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de8fb82_e26ec9fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-04T16:15:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "parentUuid": "b8a6f9b1_b821049b",
+      "revId": "c1135e165863868255f4f1108329308008b5e49b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
