@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8a6f9b1_b821049b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-04T01:47:30Z",
+      "side": 1,
+      "message": "PTAL, dropped the STG file changes. These will be included via KMI update.",
+      "revId": "c1135e165863868255f4f1108329308008b5e49b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
