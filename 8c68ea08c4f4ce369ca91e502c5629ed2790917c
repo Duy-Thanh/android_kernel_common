@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8df7c840_f0283ee1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2023-06-05T07:08:40Z",
+      "side": 1,
+      "message": "\u003e Commit does not link to an upstream reference at lore.\n\u003e Please add a line like \u0027Link: https://lore.kernel.org/...\u0027.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 537031437 android-build.ayeaye-python-dispatcher_20230601.04_p0\n\nPlease fix.",
+      "parentUuid": "013b42a6_6cb8755a",
+      "revId": "8c68ea08c4f4ce369ca91e502c5629ed2790917c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
