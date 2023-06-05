@@ -164,6 +164,30 @@
       },
       "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2dd249c_ecd744c3",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-05T23:23:32Z",
+      "side": 1,
+      "message": "No. The \"upper bound\" is not used to allocate PLTs. PLTs are allocated ONLY if necessary. Never exceeds. \nThis upper bound is stored in `mod-\u003earch.init.plt_max_entries` and `mod-\u003earch.core.plt_max_entries`\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android14-6.1/arch/arm64/kernel/module-plts.c#360\n\nWhich is then only used at 2 places for warning checks\n1. https://android.googlesource.com/kernel/common/+/refs/heads/android14-6.1/arch/arm64/kernel/module-plts.c#98\n2. https://android.googlesource.com/kernel/common/+/refs/heads/android14-6.1/arch/arm64/kernel/module-plts.c#115",
+      "parentUuid": "8fdb33f8_ec473c9b",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 16
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
