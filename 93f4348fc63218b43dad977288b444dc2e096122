@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5cc66171_4ea7b6cb",
+        "filename": "drivers/virtio/virtio_wl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-05T18:44:49Z",
+      "side": 1,
+      "message": "spdx line please.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "93f4348fc63218b43dad977288b444dc2e096122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f6ab698_cad207b2",
+        "filename": "drivers/virtio/virtio_wl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-05T18:44:49Z",
+      "side": 1,
+      "message": "are you sure about \"any later version\"?",
+      "range": {
+        "startLine": 7,
+        "startChar": 41,
+        "endLine": 8,
+        "endChar": 39
+      },
+      "revId": "93f4348fc63218b43dad977288b444dc2e096122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bec3320_10179592",
         "filename": "include/uapi/linux/virtio_ids.h",
         "patchSetId": 1
