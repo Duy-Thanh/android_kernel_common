@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58c803f_08361e6f",
+        "filename": "mm/mmap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2400,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-06-05T20:52:14Z",
+      "side": 1,
+      "message": "Should we update this to `vma_next()` as in upstream? There is warning that `mas_next()` could miss the first entry",
+      "range": {
+        "startLine": 2400,
+        "startChar": 9,
+        "endLine": 2400,
+        "endChar": 17
+      },
+      "revId": "8b8b8a4a56acae8ad503940acee8366ad4c669a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
