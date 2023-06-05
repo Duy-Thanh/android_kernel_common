@@ -140,6 +140,30 @@
       },
       "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fdb33f8_ec473c9b",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-06-05T23:05:50Z",
+      "side": 1,
+      "message": "The \"upper bound\" is what is used to allocate PLTs, right?\n\nIf the necessary PLT count never exceeds the allocated PLT count, is it really an error that needs to be caught? Are you saying we\u0027d often allocate more PLTs than necessary? That\u0027s a bit surprising to me.",
+      "parentUuid": "d0eea926_155c35c3",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 16
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
