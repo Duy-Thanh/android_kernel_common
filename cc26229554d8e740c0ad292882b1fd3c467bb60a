@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41ed53bb_14a563a7",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-05T22:57:00Z",
+      "side": 1,
+      "message": "I changed plt_count back to ret.",
+      "parentUuid": "0c3e1baf_bd818a9c",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 4
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f396c3f1_ca9ce3ab",
         "filename": "arch/arm64/kernel/module-plts.c",
         "patchSetId": 9
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73197576_0d6c0f21",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-05T22:57:00Z",
+      "side": 1,
+      "message": "ret/err would both be needed at the same time, wouldn\u0027t it? \nerr would hold the return value of `insert_rela_to_rht` and then inspected. When this happens, the value held by ret needs to persist between lines 220 and 222\n\n```\nerr \u003d insert_rela_to_rht(\u0026rela[i], elf64_rela_rht);\nif (err \u003c 0)\n    return err;\n```",
+      "parentUuid": "f396c3f1_ca9ce3ab",
+      "range": {
+        "startLine": 177,
+        "startChar": 5,
+        "endLine": 177,
+        "endChar": 8
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43f968a0_71d960c8",
         "filename": "arch/arm64/kernel/module-plts.c",
         "patchSetId": 9
@@ -60,6 +108,30 @@
       "writtenOn": "2023-06-05T21:21:08Z",
       "side": 1,
       "message": "Also, if you ignore the error here and simply not increment the count when there\u0027s an error, would the lack of sufficient plt entries cause a module load failure elsewhere? This error path seems unlikely enough that it might be clear to just let the other error patch catch the -ENOMEM issue.\n\nThat would also avoid a bunch of churn in other areas of this change.",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 16
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0eea926_155c35c3",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-05T22:57:00Z",
+      "side": 1,
+      "message": "`count_plts` is simply used to find an upper bound on the number of PLTs that could be generated later on, doesnt need to be the exact number.\nSo if we ignore the kmalloc error here and not increment the count, there is a scenario where this would never be caught elsewhere and the kernel would function just fine. This happens when the actual number of PLTs generated is lower than the calculated upper bound.\nThat\u0027s why IMO, we shouldn\u0027t get rid of this check.",
+      "parentUuid": "43f968a0_71d960c8",
       "range": {
         "startLine": 221,
         "startChar": 4,

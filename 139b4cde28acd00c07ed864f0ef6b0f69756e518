@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fbe7c0c_7ba66812",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-06-05T22:57:00Z",
+      "side": 1,
+      "message": "In an earlier patchset, I implemented a single function to combine both `lookup_rela` and `insert_rela_to_rht`, but after isaacmanjarres@\u0027s comment, changed it to be implemented this way, \n\n\nWhen we combine the logic to a single function (say `check_and_update`), that would mean we have to either\n1. Update plt_count (now called ret) via a pointer passed to `check_and_update`\n\u003d\u003e This would be messy since the update logic is now partly abstracted away from the `count_plts` function.\n2. Rely on the return value of `check_and_update` to update `plt_count` i.e., it could return 3 types of return values - An error (\u003c0), no update (0) or increment by 1 (1). \n\u003d\u003e This goes against the kernel coding style guide\nhttps://www.kernel.org/doc/html/v4.10/process/coding-style.html#function-return-values-and-names\n```\nMixing up these two sorts of representations is a fertile source of difficult-to-find bugs.\n```",
+      "parentUuid": "28179735_bde8e07f",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 48
+      },
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef5901de_33480ece",
         "filename": "arch/arm64/kernel/module-plts.c",
         "patchSetId": 8
