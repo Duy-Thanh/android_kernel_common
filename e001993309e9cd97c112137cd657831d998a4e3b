@@ -94,6 +94,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7b899a3_9af0ad12",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-06-05T10:48:45Z",
+      "side": 1,
+      "message": "Thank you for feedback.\nBasically I understand but it\u0027s difficult to implement all as vendor hook because it calls static function in hub.c hub_power_on() that is not accessed by vendor module.",
+      "parentUuid": "822fedd5_dd9d66be",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66157b9e_d6346591",
         "filename": "drivers/usb/core/hub.c",
         "patchSetId": 1
@@ -305,6 +323,24 @@
       "writtenOn": "2023-06-01T20:50:37Z",
       "side": 1,
       "message": "replace with vendor hook",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb29ff8_8fa0202f",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6089,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-06-05T10:48:45Z",
+      "side": 1,
+      "message": "This is also difficult to implement as vendor hook because it calls static function in hub.c hub_port_disable() that is not accessed by vendor module.",
+      "parentUuid": "1db404fa_c6e1fcdd",
       "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
