@@ -16,6 +16,23 @@
       "message": "Blocking merge until 6/7 KMI update.",
       "revId": "3ee655ebe14ac55dfb853e4bafe031a90d3acef6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd85c51c_bc49c1f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-06-05T07:50:48Z",
+      "side": 1,
+      "message": "Also needs:\n\ncommit 2558b8039d059342197610498c8749ad294adee5\nAuthor: Eric Dumazet \u003cedumazet@google.com\u003e\nDate:   Mon Feb 13 16:00:59 2023 +0000\n\n    net: use a bounce buffer for copying skb-\u003emark\n    \n    syzbot found arm64 builds would crash in sock_recv_mark()\n    when CONFIG_HARDENED_USERCOPY\u003dy\n    \n    x86 and powerpc are not detecting the issue because",
+      "revId": "3ee655ebe14ac55dfb853e4bafe031a90d3acef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
