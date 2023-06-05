@@ -52,6 +52,23 @@
       "parentUuid": "839afd51_cd5a8701",
       "revId": "ee8815e2096818aa9b41fa922da28c014cffd1e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a5a084_c6165e39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964658
+      },
+      "writtenOn": "2023-06-05T06:17:46Z",
+      "side": 1,
+      "message": "@ramjiyani@google.com,\n\nI have a question, this patch remove the mac80211.ko into unprotected ko.\nThe android/abi_gki_protected_exports_aarch64 list arc4_crypt as proteced symbol, but the mac80211.ko will reference the arc4_crypt symbol.\n\n# required by mac80211.ko\n  alloc_netdev_mqs\n  __alloc_percpu_gfp\n  arc4_crypt\n  arc4_setkey\n\nShould the arc4_crypt remove from the proteced symbol list ?",
+      "revId": "ee8815e2096818aa9b41fa922da28c014cffd1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
