@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c3ab5f_b0aabfac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-06-05T13:12:32Z",
+      "side": 1,
+      "message": "Does this mean the host can donate MMIO regions via e.g. `__pkvm_load_tracing()` for the trace buffers? If so, I think we should restrict `__pkvm_host_donate_hyp()` to memory regions and add a separate helper which accepts MMIO.",
+      "revId": "053c33d04772512323dd934e8f98829a98380203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
