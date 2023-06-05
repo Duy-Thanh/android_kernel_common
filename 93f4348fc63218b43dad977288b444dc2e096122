@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a939404_f2429199",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-05T19:10:46Z",
+      "side": 1,
+      "message": "It\u0027s not for WIP stuff either, as nothing gets merged from here EXCEPT LTS merges.\n\nWhy not just use `android12-5.10` instead?",
+      "parentUuid": "17be5b1a_0962d068",
+      "revId": "93f4348fc63218b43dad977288b444dc2e096122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cc66171_4ea7b6cb",
         "filename": "drivers/virtio/virtio_wl.c",
         "patchSetId": 1
