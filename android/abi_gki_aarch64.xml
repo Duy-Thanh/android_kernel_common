@@ -125972,7 +125972,7 @@
       <pointer-type-def type-id='46f53066' size-in-bits='64' id='fffb07a4'/>
       <qualified-type-def type-id='55efd1a3' const='yes' id='fffdaf52'/>
       <var-decl name='GKI_struct_blk_mq_alloc_data' type-id='17c43c95' mangled-name='GKI_struct_blk_mq_alloc_data' visibility='default' filepath='block/vendor_hooks.c' line='22' column='1' elf-symbol-id='GKI_struct_blk_mq_alloc_data'/>
-      <var-decl name='GKI_struct_readahead_control' type-id='9ec8ec17' mangled-name='GKI_struct_readahead_control' visibility='default' filepath='drivers/android/vendor_hooks.c' line='434' column='1' elf-symbol-id='GKI_struct_readahead_control'/>
+      <var-decl name='GKI_struct_readahead_control' type-id='9ec8ec17' mangled-name='GKI_struct_readahead_control' visibility='default' filepath='drivers/android/vendor_hooks.c' line='435' column='1' elf-symbol-id='GKI_struct_readahead_control'/>
       <var-decl name='GKI_struct_selinux_state' type-id='4ae52763' mangled-name='GKI_struct_selinux_state' visibility='default' filepath='security/selinux/vendor_hooks.c' line='21' column='1' elf-symbol-id='GKI_struct_selinux_state'/>
       <function-decl name='I_BDEV' mangled-name='I_BDEV' filepath='block/bdev.c' line='42' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='I_BDEV'>
         <parameter type-id='7e666abe' name='inode' filepath='block/bdev.c' line='42' column='1'/>
@@ -146532,8 +146532,8 @@
         <parameter type-id='a0c47697' name='res' filepath='lib/kstrtox.c' line='406' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='kswapd' mangled-name='kswapd' filepath='mm/vmscan.c' line='7029' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kswapd'>
-        <parameter type-id='eaa32e2f' name='p' filepath='mm/vmscan.c' line='7029' column='1'/>
+      <function-decl name='kswapd' mangled-name='kswapd' filepath='mm/vmscan.c' line='7058' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kswapd'>
+        <parameter type-id='eaa32e2f' name='p' filepath='mm/vmscan.c' line='7058' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='ksys_sync_helper' mangled-name='ksys_sync_helper' filepath='kernel/power/main.c' line='54' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ksys_sync_helper'>
@@ -158508,11 +158508,11 @@
         <parameter type-id='9248e67f' name='timer' filepath='kernel/time/timer.c' line='1229' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='try_to_free_mem_cgroup_pages' mangled-name='try_to_free_mem_cgroup_pages' filepath='mm/vmscan.c' line='6446' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='try_to_free_mem_cgroup_pages'>
-        <parameter type-id='223696fb' name='memcg' filepath='mm/vmscan.c' line='6446' column='1'/>
-        <parameter type-id='7359adad' name='nr_pages' filepath='mm/vmscan.c' line='6447' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfp_mask' filepath='mm/vmscan.c' line='6448' column='1'/>
-        <parameter type-id='b50a4934' name='may_swap' filepath='mm/vmscan.c' line='6449' column='1'/>
+      <function-decl name='try_to_free_mem_cgroup_pages' mangled-name='try_to_free_mem_cgroup_pages' filepath='mm/vmscan.c' line='6475' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='try_to_free_mem_cgroup_pages'>
+        <parameter type-id='223696fb' name='memcg' filepath='mm/vmscan.c' line='6475' column='1'/>
+        <parameter type-id='7359adad' name='nr_pages' filepath='mm/vmscan.c' line='6476' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp_mask' filepath='mm/vmscan.c' line='6477' column='1'/>
+        <parameter type-id='b50a4934' name='may_swap' filepath='mm/vmscan.c' line='6478' column='1'/>
         <return type-id='7359adad'/>
       </function-decl>
       <function-decl name='try_to_release_page' mangled-name='try_to_release_page' filepath='mm/filemap.c' line='4016' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='try_to_release_page'>
