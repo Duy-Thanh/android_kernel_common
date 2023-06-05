@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4357422a_77222d0b",
+        "filename": "drivers/virtio/virtio_wl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-05T18:46:17Z",
+      "side": 1,
+      "message": "android doesn\u0027t use wayland, so why is this needed in the android kernel tree?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 25
+      },
+      "revId": "93f4348fc63218b43dad977288b444dc2e096122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f6ab698_cad207b2",
         "filename": "drivers/virtio/virtio_wl.c",
         "patchSetId": 1
