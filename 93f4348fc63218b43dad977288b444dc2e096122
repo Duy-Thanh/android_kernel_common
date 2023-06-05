@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d0f7762_9f8549c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2023-06-05T19:25:12Z",
+      "side": 1,
+      "message": "I\u0027ll take note to use android12-5.10 for actual development, but this is for a prototype and our existing tree is forked from android12-5.10-lts. I figured using android12-5.10-lts would make it more likely for cherry picks to apply cleanly.\n\nI marked this as WIP to try to signal this shouldn\u0027t be reviewed; it\u0027s not an unfinished patch. I think we\u0027ll end up converting virtio_wl as an out of tree module for the \"real\" thing.",
+      "parentUuid": "6a939404_f2429199",
+      "revId": "93f4348fc63218b43dad977288b444dc2e096122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cc66171_4ea7b6cb",
         "filename": "drivers/virtio/virtio_wl.c",
         "patchSetId": 1
