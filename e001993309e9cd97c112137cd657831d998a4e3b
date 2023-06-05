@@ -347,6 +347,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44b41e89_63d5a250",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6089,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-05T11:07:51Z",
+      "side": 1,
+      "message": "If this is a broken hub, the quirk handling for hubs should be able to handle this just fine.  If not, then just extend that to do so, or write a custom hub driver just for this device, but try to stay out of the core hub logic if at all possible.\n\nAgain, please submit your changes upstream and the linux-usb developers there can  help you out with this.",
+      "parentUuid": "ecb29ff8_8fa0202f",
+      "revId": "e001993309e9cd97c112137cd657831d998a4e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9357a2e3_2a756906",
         "filename": "drivers/usb/core/hub.h",
         "patchSetId": 1
