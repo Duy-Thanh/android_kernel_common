@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28179735_bde8e07f",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-06-05T21:21:08Z",
+      "side": 1,
+      "message": "Why not pull that into this function? When would you ever want to not check? It\u0027s cleaner IMO.",
+      "parentUuid": "61815c6a_94c15d52",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 48
+      },
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef5901de_33480ece",
         "filename": "arch/arm64/kernel/module-plts.c",
         "patchSetId": 8

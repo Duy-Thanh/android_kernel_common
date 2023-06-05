@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c3e1baf_bd818a9c",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-06-05T21:21:08Z",
+      "side": 1,
+      "message": "This feels like a bit of unnecessary change to variable names to do in this patch.",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 4
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f396c3f1_ca9ce3ab",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-06-05T21:21:08Z",
+      "side": 1,
+      "message": "You never use err/ret at the same time. Might as well stick to how it was before and just use ret.\n\nAlso... see below.",
+      "range": {
+        "startLine": 177,
+        "startChar": 5,
+        "endLine": 177,
+        "endChar": 8
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f968a0_71d960c8",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-06-05T21:21:08Z",
+      "side": 1,
+      "message": "Also, if you ignore the error here and simply not increment the count when there\u0027s an error, would the lack of sufficient plt entries cause a module load failure elsewhere? This error path seems unlikely enough that it might be clear to just let the other error patch catch the -ENOMEM issue.\n\nThat would also avoid a bunch of churn in other areas of this change.",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 16
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
