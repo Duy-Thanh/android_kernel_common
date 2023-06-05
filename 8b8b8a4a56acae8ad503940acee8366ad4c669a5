@@ -22,6 +22,30 @@
       },
       "revId": "8b8b8a4a56acae8ad503940acee8366ad4c669a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46741e3d_085998f4",
+        "filename": "mm/mmap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2400,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-05T21:32:03Z",
+      "side": 1,
+      "message": "That change (183654ce26a5d5bd7bc11bcb02e8086f02f66d7d upstream) is part of the vma_iterators change and if we do that we would have to pull the whole patchset, which I\u0027m trying to avoid.",
+      "parentUuid": "b58c803f_08361e6f",
+      "range": {
+        "startLine": 2400,
+        "startChar": 9,
+        "endLine": 2400,
+        "endChar": 17
+      },
+      "revId": "8b8b8a4a56acae8ad503940acee8366ad4c669a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
