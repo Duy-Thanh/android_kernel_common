@@ -69,6 +69,24 @@
       "parentUuid": "847fcf2d_8fef9f56",
       "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b745b336_4af1b126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-05T14:06:02Z",
+      "side": 1,
+      "message": "Why not submit it upstream for stable inclusion so that everyone gets the fix automatically?",
+      "parentUuid": "7bb20259_84f52e76",
+      "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
