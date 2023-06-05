@@ -98,6 +98,24 @@
       "message": "Please fix the commit message.",
       "revId": "6065a09c79598b675f7ec5f7f5ee5d1d8a77b677",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f93710ad_342e5696",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-05T18:19:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "921be926_c7e8f6c0",
+      "revId": "6065a09c79598b675f7ec5f7f5ee5d1d8a77b677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
