@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42a34fc_223d3c3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-05T18:37:50Z",
+      "side": 1,
+      "message": "FIXUP and CHROMIUM are not valid prefixes for android kernel branches. See go/ack-contribution-guidelines",
+      "revId": "de37a01432967900f9deb2746c6db0e1286c1d7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f457af8_91fae754",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-05T18:37:50Z",
+      "side": 1,
+      "message": "The -lts branches are not open for general contributions. They are only for staging the next LTS release from upstream.\n\nIf this fixes an issue in `android12-5.10`, then please submit there and it will merge into this branch.",
+      "revId": "de37a01432967900f9deb2746c6db0e1286c1d7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
