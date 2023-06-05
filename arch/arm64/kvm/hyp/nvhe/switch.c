@@ -16,6 +16,7 @@
 
 #include <asm/barrier.h>
 #include <asm/cpufeature.h>
+#include <asm/esr.h>
 #include <asm/kprobes.h>
 #include <asm/kvm_asm.h>
 #include <asm/kvm_emulate.h>
@@ -416,10 +417,24 @@ int __pkvm_register_hyp_panic_notifier(void (*cb)(struct user_pt_regs *regs))
 	return cmpxchg(&hyp_panic_notifier, NULL, cb) ? -EBUSY : 0;
 }
 
+DEFINE_PER_CPU(u64, kvm_cfi_err_target);
+DEFINE_PER_CPU(u32, kvm_cfi_err_type);
+
+static void record_cfi_error(const struct user_pt_regs *regs, u64 r_target,
+		u32 r_type)
+{
+	BUG_ON(r_target >= ARRAY_SIZE(regs->regs));
+	BUG_ON(r_type >= ARRAY_SIZE(regs->regs));
+
+	*this_cpu_ptr(&kvm_cfi_err_target) = regs->regs[r_target];
+	*this_cpu_ptr(&kvm_cfi_err_type) = (u32)regs->regs[r_type];
+}
+
 asmlinkage void __noreturn hyp_panic(void)
 {
 	u64 spsr = read_sysreg_el2(SYS_SPSR);
 	u64 elr = read_sysreg_el2(SYS_ELR);
+	u64 esr = read_sysreg_el2(SYS_ESR);
 	u64 par = read_sysreg_par();
 	struct kvm_cpu_context *host_ctxt;
 	struct kvm_vcpu *vcpu;
@@ -440,6 +455,12 @@ asmlinkage void __noreturn hyp_panic(void)
 	/* Prepare to dump kvm nvhe hyp stacktrace */
 	kvm_nvhe_prepare_backtrace((unsigned long)__builtin_frame_address(0),
 				   _THIS_IP_);
+
+	if (IS_ENABLED(CONFIG_CFI_CLANG) && esr_is_cfi_brk(esr)) {
+		record_cfi_error(&this_cpu_ptr(&kvm_hyp_ctxt)->regs,
+				 FIELD_GET(CFI_BRK_IMM_TARGET, esr),
+				 FIELD_GET(CFI_BRK_IMM_TYPE, esr));
+	}
 
 	__hyp_do_panic(host_ctxt, spsr, elr, par);
 	unreachable();

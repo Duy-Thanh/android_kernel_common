@@ -450,10 +450,22 @@ void handle_exit_early(struct kvm_vcpu *vcpu, int exception_index)
 		kvm_handle_guest_serror(vcpu, kvm_vcpu_get_esr(vcpu));
 }
 
-static void report_nvhe_hyp_cfi_failure(u64 panic_addr)
+DECLARE_KVM_NVHE_PER_CPU(u64, kvm_cfi_err_target);
+DECLARE_KVM_NVHE_PER_CPU(u32, kvm_cfi_err_type);
+
+static void report_nvhe_hyp_cfi_failure(u64 panic_addr, u64 hyp_offset)
 {
+	u32 expected_type = *this_cpu_ptr_nvhe_sym(kvm_cfi_err_type);
+	u64 va_mask = GENMASK_ULL(vabits_actual - 1, 0);
+	u64 target_virt = *this_cpu_ptr_nvhe_sym(kvm_cfi_err_target);
+	u64 target_addr = (target_virt & va_mask) + hyp_offset;
+
 	kvm_err("nVHE hyp CFI failure at: [<%016llx>] %pB!\n",
 		panic_addr, (void *)(panic_addr + kaslr_offset()));
+
+	kvm_err(" (target: [<%016llx>] %ps, expected type: 0x%08x)\n",
+		target_addr, (void *)(target_addr + kaslr_offset()),
+		expected_type);
 
 	if (IS_ENABLED(CONFIG_CFI_PERMISSIVE))
 		kvm_err(" (CONFIG_CFI_PERMISSIVE ignored by hyp failures)\n");
@@ -490,7 +502,7 @@ void __noreturn __cold nvhe_hyp_panic_handler(u64 esr, u64 spsr,
 			kvm_err("nVHE hyp BUG at: [<%016llx>] %pB!\n", panic_addr,
 					(void *)(panic_addr + kaslr_offset()));
 	} else if (IS_ENABLED(CONFIG_CFI_CLANG) && esr_is_cfi_brk(esr)) {
-		report_nvhe_hyp_cfi_failure(panic_addr);
+		report_nvhe_hyp_cfi_failure(panic_addr, hyp_offset);
 	} else {
 		kvm_err("nVHE hyp panic at: [<%016llx>] %pB!\n", panic_addr,
 				(void *)(panic_addr + kaslr_offset()));
