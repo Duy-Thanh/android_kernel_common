@@ -16,6 +16,75 @@
       "message": "This is not a valid branch for any development, sorry.  Please abandon them and work on the `android12-5.10` branch instead.",
       "revId": "93f4348fc63218b43dad977288b444dc2e096122",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bec3320_10179592",
+        "filename": "include/uapi/linux/virtio_ids.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-05T18:44:14Z",
+      "side": 1,
+      "message": "are these ids reserved properly upstream?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 54
+      },
+      "revId": "93f4348fc63218b43dad977288b444dc2e096122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7e143fa_ec866614",
+        "filename": "include/uapi/linux/virtio_ids.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-05T18:44:14Z",
+      "side": 1,
+      "message": "not relevant to this patch.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 50
+      },
+      "revId": "93f4348fc63218b43dad977288b444dc2e096122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f411a8be_9f71ff7e",
+        "filename": "include/uapi/linux/virtio_wl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-05T18:44:14Z",
+      "side": 1,
+      "message": "please use a valid SPDX license header.  This is not a valid one by any stretch of the imagination (hint, there is no \"BSD license\"...)",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 77
+      },
+      "revId": "93f4348fc63218b43dad977288b444dc2e096122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
