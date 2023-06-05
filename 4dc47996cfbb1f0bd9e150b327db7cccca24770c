@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca92403_1cdcf737",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-06-05T12:30:15Z",
+      "side": 1,
+      "message": "I rebased this older change that was uploaded and resolved conflicts.\n\nIt\u0027s possible it\u0027s no longer needed anyway.",
+      "revId": "4dc47996cfbb1f0bd9e150b327db7cccca24770c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
