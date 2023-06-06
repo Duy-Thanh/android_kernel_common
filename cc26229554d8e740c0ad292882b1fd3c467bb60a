@@ -188,6 +188,30 @@
       },
       "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ca39fa1_23398dd5",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-06-06T00:11:14Z",
+      "side": 1,
+      "message": "That doesn\u0027t make a lot of sense. PLTs need to be allocated. And I\u0027m sure the max count is to make sure we don\u0027t overflow the allocation. So, look around again and you\u0027ll find out.\n\nSo, once you confirm that, my point is that you can treat \"error\" as \"duplicate\" and the max_entries check will catch and fail it later and that\u0027ll make all this code a lot simpler.",
+      "parentUuid": "c2dd249c_ecd744c3",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 16
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
