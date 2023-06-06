@@ -34,6 +34,24 @@
       "parentUuid": "057d5e83_6eef1003",
       "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3931f2fb_cb4b4b1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-06T13:21:06Z",
+      "side": 1,
+      "message": "The KMI freeze has already passed (was last week), so I don\u0027t understand why you would want this in now?\n\nJust work on the final version and then we can go from there.",
+      "parentUuid": "73c169dc_5222176b",
+      "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
