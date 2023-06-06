@@ -33,6 +33,24 @@
       "message": "Hi liuyu@ , Please help to add \"Bug: 285998584\" in the commit message.",
       "revId": "1d6ca3d81146dd9c3d579caf6d8b26ac8fbe7930",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe95e17_c41ae201",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-06T12:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b181d37a_1bcd3a17",
+      "revId": "1d6ca3d81146dd9c3d579caf6d8b26ac8fbe7930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
