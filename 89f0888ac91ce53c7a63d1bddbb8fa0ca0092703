@@ -16,6 +16,24 @@
       "message": "For older kernels, this should be changed to\n\np \u003d __vmalloc_node_range(THREAD_SIZE, THREAD_ALIGN, VMALLOC_START, VMALLOC_END,\n                                GFP_KERNEL, PAGE_KERNEL, 0, NUMA_NO_NODE, \u0026\u0026l);",
       "revId": "89f0888ac91ce53c7a63d1bddbb8fa0ca0092703",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a5543ae_4cf17c55",
+        "filename": "arch/arm64/kernel/efi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-06-06T07:26:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7b96340_758ff923",
+      "revId": "89f0888ac91ce53c7a63d1bddbb8fa0ca0092703",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
