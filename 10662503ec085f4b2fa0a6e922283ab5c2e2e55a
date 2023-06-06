@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d53e0be_2d0e3e3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-06T13:26:36Z",
+      "side": 1,
+      "message": "f2fs should not need vendor hooks at all, please submit your needed changes upstream.",
+      "revId": "10662503ec085f4b2fa0a6e922283ab5c2e2e55a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
