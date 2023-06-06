@@ -5895,6 +5895,7 @@
       <elf-symbol name='tcpm_register_port' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb28dc3bd'/>
       <elf-symbol name='tcpm_sink_frs' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x10ec6d2d'/>
       <elf-symbol name='tcpm_sourcing_vbus' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeb779665'/>
+      <elf-symbol name='tcpm_tcpc_reset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xea220941'/>
       <elf-symbol name='tcpm_unregister_port' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x76eeda4b'/>
       <elf-symbol name='tcpm_update_sink_capabilities' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x622a422a'/>
       <elf-symbol name='tcpm_vbus_change' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xceb50012'/>
@@ -51660,7 +51661,7 @@
       </class-decl>
       <pointer-type-def type-id='3e1d184a' size-in-bits='64' id='6aee814c'/>
       <pointer-type-def type-id='74e7a035' size-in-bits='64' id='6af64a09'/>
-      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv4/route.c' line='1505' column='1' id='6b1203e5'>
+      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv6/route.c' line='130' column='1' id='6b1203e5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='net/ipv4/route.c' line='1506' column='1'/>
         </data-member>
@@ -137931,8 +137932,8 @@
         <parameter type-id='f0981eeb' name='order' filepath='drivers/dma-buf/heaps/page_pool.c' line='127' column='1'/>
         <return type-id='586a9713'/>
       </function-decl>
-      <function-decl name='dmabuf_page_pool_destroy' mangled-name='dmabuf_page_pool_destroy' filepath='drivers/dma-buf/heaps/page_pool.c' line='156' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dmabuf_page_pool_destroy'>
-        <parameter type-id='586a9713' name='pool' filepath='drivers/dma-buf/heaps/page_pool.c' line='156' column='1'/>
+      <function-decl name='dmabuf_page_pool_destroy' mangled-name='dmabuf_page_pool_destroy' filepath='drivers/dma-buf/heaps/page_pool.c' line='157' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dmabuf_page_pool_destroy'>
+        <parameter type-id='586a9713' name='pool' filepath='drivers/dma-buf/heaps/page_pool.c' line='157' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='dmabuf_page_pool_free' mangled-name='dmabuf_page_pool_free' filepath='drivers/dma-buf/heaps/page_pool.c' line='108' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dmabuf_page_pool_free'>
@@ -146233,8 +146234,8 @@
         <parameter type-id='a0c47697' name='res' filepath='lib/kstrtox.c' line='406' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='kswapd' mangled-name='kswapd' filepath='mm/vmscan.c' line='7062' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kswapd'>
-        <parameter type-id='eaa32e2f' name='p' filepath='mm/vmscan.c' line='7062' column='1'/>
+      <function-decl name='kswapd' mangled-name='kswapd' filepath='mm/vmscan.c' line='7046' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kswapd'>
+        <parameter type-id='eaa32e2f' name='p' filepath='mm/vmscan.c' line='7046' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='ksys_sync_helper' mangled-name='ksys_sync_helper' filepath='kernel/power/main.c' line='54' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ksys_sync_helper'>
@@ -152459,8 +152460,8 @@
         <parameter type-id='19c2251e' name='d' filepath='lib/math/reciprocal_div.c' line='17' column='1'/>
         <return type-id='80ebe7f7'/>
       </function-decl>
-      <function-decl name='reclaim_pages' mangled-name='reclaim_pages' filepath='mm/vmscan.c' line='2451' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='reclaim_pages'>
-        <parameter type-id='e84b031a' name='page_list' filepath='mm/vmscan.c' line='2451' column='1'/>
+      <function-decl name='reclaim_pages' mangled-name='reclaim_pages' filepath='mm/vmscan.c' line='2435' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='reclaim_pages'>
+        <parameter type-id='e84b031a' name='page_list' filepath='mm/vmscan.c' line='2435' column='1'/>
         <return type-id='7359adad'/>
       </function-decl>
       <function-decl name='reclaim_shmem_address_space' mangled-name='reclaim_shmem_address_space' filepath='mm/shmem.c' line='4253' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='reclaim_shmem_address_space'>
@@ -157801,6 +157802,10 @@
         <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='5451' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='tcpm_tcpc_reset' mangled-name='tcpm_tcpc_reset' filepath='drivers/usb/typec/tcpm/tcpm.c' line='5965' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_tcpc_reset'>
+        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='5965' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='tcpm_unregister_port' mangled-name='tcpm_unregister_port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='6509' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_unregister_port'>
         <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='6509' column='1'/>
         <return type-id='48b5725f'/>
@@ -158201,11 +158206,11 @@
         <parameter type-id='9248e67f' name='timer' filepath='kernel/time/timer.c' line='1229' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='try_to_free_mem_cgroup_pages' mangled-name='try_to_free_mem_cgroup_pages' filepath='mm/vmscan.c' line='6479' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='try_to_free_mem_cgroup_pages'>
-        <parameter type-id='223696fb' name='memcg' filepath='mm/vmscan.c' line='6479' column='1'/>
-        <parameter type-id='7359adad' name='nr_pages' filepath='mm/vmscan.c' line='6480' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfp_mask' filepath='mm/vmscan.c' line='6481' column='1'/>
-        <parameter type-id='b50a4934' name='may_swap' filepath='mm/vmscan.c' line='6482' column='1'/>
+      <function-decl name='try_to_free_mem_cgroup_pages' mangled-name='try_to_free_mem_cgroup_pages' filepath='mm/vmscan.c' line='6463' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='try_to_free_mem_cgroup_pages'>
+        <parameter type-id='223696fb' name='memcg' filepath='mm/vmscan.c' line='6463' column='1'/>
+        <parameter type-id='7359adad' name='nr_pages' filepath='mm/vmscan.c' line='6464' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp_mask' filepath='mm/vmscan.c' line='6465' column='1'/>
+        <parameter type-id='b50a4934' name='may_swap' filepath='mm/vmscan.c' line='6466' column='1'/>
         <return type-id='7359adad'/>
       </function-decl>
       <function-decl name='try_to_release_page' mangled-name='try_to_release_page' filepath='mm/filemap.c' line='4015' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='try_to_release_page'>
@@ -162916,6 +162921,7 @@
     </abi-instr>
   </abi-corpus>
 </abi-corpus-group>
+
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
