@@ -129,6 +129,8 @@ static bool is_ignored_symbol(const char *name, char type)
 	/* Symbol names that begin with the following are ignored.*/
 	static const char * const ignored_prefixes[] = {
 		"__efistub_",		/* arm64 EFI stub namespace */
+		"__pi_$",
+		"__pi_.L",
 		"__kvm_nvhe_$",		/* arm64 local symbols in non-VHE KVM namespace */
 		"__kvm_nvhe_.L",	/* arm64 local symbols in non-VHE KVM namespace */
 		"__AArch64ADRPThunk_",	/* arm64 lld */
