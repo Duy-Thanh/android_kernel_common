@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c124da2_76792b95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-06T13:22:26Z",
+      "side": 1,
+      "message": "The `-lts` branch is always abi-identical to the `non-lts` branch, so this should not make any difference.\n\nPlease move these all to the `android12-5.10` branch now.",
+      "parentUuid": "1d0f7762_9f8549c7",
+      "revId": "93f4348fc63218b43dad977288b444dc2e096122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cc66171_4ea7b6cb",
         "filename": "drivers/virtio/virtio_wl.c",
         "patchSetId": 1
