@@ -72,6 +72,7 @@
   bin2hex
   bio_endio
   bio_end_io_acct_remapped
+  bio_poll
   bio_start_io_acct
   bitmap_allocate_region
   __bitmap_and
@@ -92,27 +93,42 @@
   bit_wait
   bit_wait_timeout
   __blk_alloc_disk
+  blkdev_compat_ptr_ioctl
   blkdev_get_by_dev
   blk_execute_rq
   blk_execute_rq_nowait
+  blk_freeze_queue_start
+  blk_get_queue
+  blk_mark_disk_dead
   __blk_mq_alloc_disk
   blk_mq_alloc_request
+  blk_mq_alloc_request_hctx
   blk_mq_alloc_tag_set
   blk_mq_complete_request
+  blk_mq_complete_request_remote
+  blk_mq_delay_kick_requeue_list
+  blk_mq_destroy_queue
   blk_mq_end_request
   blk_mq_end_request_batch
   blk_mq_free_request
   blk_mq_free_tag_set
+  blk_mq_freeze_queue_wait
+  blk_mq_freeze_queue_wait_timeout
   blk_mq_map_queues
+  blk_mq_pci_map_queues
   blk_mq_quiesce_queue
   blk_mq_requeue_request
   blk_mq_rq_cpu
   blk_mq_start_request
   blk_mq_start_stopped_hw_queues
   blk_mq_stop_hw_queue
+  blk_mq_tagset_wait_completed_request
   blk_mq_unquiesce_queue
   blk_mq_virtio_map_queues
+  blk_mq_wait_quiesce_done
+  blk_put_queue
   blk_queue_alignment_offset
+  blk_queue_dma_alignment
   blk_queue_flag_clear
   blk_queue_flag_set
   blk_queue_io_min
@@ -127,11 +143,13 @@
   blk_queue_max_write_zeroes_sectors
   blk_queue_physical_block_size
   blk_queue_write_cache
+  blk_rq_is_poll
   blk_rq_map_kern
   __blk_rq_map_sg
   blk_rq_map_user_io
   blk_rq_unmap_user
   blk_status_to_errno
+  blk_sync_queue
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
@@ -141,10 +159,10 @@
   bpf_prog_put
   bpf_prog_sub
   bpf_stats_enabled_key
-  bpf_trace_run1
   bpf_trace_run10
   bpf_trace_run11
   bpf_trace_run12
+  bpf_trace_run1
   bpf_trace_run2
   bpf_trace_run3
   bpf_trace_run4
@@ -558,6 +576,7 @@
   device_property_read_u8_array
   device_register
   device_remove_file
+  device_remove_file_self
   device_rename
   device_set_wakeup_capable
   device_set_wakeup_enable
@@ -702,9 +721,12 @@
   dev_pm_opp_set_sharing_cpus
   dev_pm_qos_add_notifier
   dev_pm_qos_add_request
+  dev_pm_qos_expose_latency_tolerance
+  dev_pm_qos_hide_latency_tolerance
   dev_pm_qos_remove_notifier
   dev_pm_qos_remove_request
   dev_pm_qos_update_request
+  dev_pm_qos_update_user_latency_tolerance
   dev_pm_set_wake_irq
   _dev_printk
   __dev_queue_xmit
@@ -787,8 +809,10 @@
   dma_map_resource
   dma_map_sg_attrs
   dma_map_sgtable
+  dma_max_mapping_size
   dmam_free_coherent
   dma_mmap_attrs
+  dma_pci_p2pdma_supported
   dma_release_channel
   dma_request_chan
   dma_resv_fini
@@ -808,6 +832,8 @@
   dma_unmap_sg_attrs
   dma_vmap_noncontiguous
   dma_vunmap_noncontiguous
+  __do_once_done
+  __do_once_start
   do_trace_netlink_extack
   do_trace_rcu_torture_read
   double_rq_lock
@@ -1232,10 +1258,10 @@
   gh_rm_notifier_unregister
   gh_rm_register_platform_ops
   gh_rm_unregister_platform_ops
+  gic_nonsecure_priorities
   gic_v3_cpu_init
   gic_v3_dist_init
   gic_v3_dist_wait_for_rwp
-  gic_nonsecure_priorities
   gov_attr_set_init
   gov_attr_set_put
   governor_sysfs_ops
@@ -1548,6 +1574,9 @@
   __ioread32_copy
   ioremap_prot
   iounmap
+  io_uring_cmd_complete_in_task
+  io_uring_cmd_done
+  io_uring_cmd_import_fixed
   iov_iter_init
   iov_iter_kvec
   iov_iter_revert
@@ -1874,15 +1903,18 @@
   mempool_alloc
   mempool_alloc_slab
   mempool_create
+  mempool_create_node
   mempool_destroy
   mempool_free
   mempool_free_slab
+  mempool_kfree
+  mempool_kmalloc
   memremap
   memremap_pages
   memscan
   mem_section
-  memset
   memset64
+  memset
   __memset_io
   memstart_addr
   memunmap
@@ -1919,8 +1951,8 @@
   mmc_retune_release
   mmc_select_bus_width
   mmc_select_card
-  mmc_select_hs
   mmc_select_hs400
+  mmc_select_hs
   mmc_select_hs_ddr
   mmc_select_timing
   mmc_send_status
@@ -2050,10 +2082,10 @@
   nla_find
   nla_memcpy
   __nla_parse
-  nla_put
   nla_put_64bit
-  nla_reserve
+  nla_put
   nla_reserve_64bit
+  nla_reserve
   nla_strscpy
   __nla_validate
   __nlmsg_put
@@ -2217,10 +2249,12 @@
   param_set_bool
   param_set_copystring
   param_set_int
+  param_set_uint_minmax
   passthru_features_check
   pci_aer_clear_nonfatal_status
   pci_alloc_irq_vectors_affinity
   pci_assign_resource
+  pcibios_resource_to_bus
   pci_bus_type
   pci_clear_master
   pci_dev_get
@@ -2230,11 +2264,15 @@
   pci_dev_put
   pci_disable_device
   pci_disable_msi
+  pci_disable_pcie_error_reporting
+  pcie_aspm_enabled
   pcie_capability_clear_and_set_word
   pcie_capability_read_word
   pci_enable_device
+  pci_enable_device_mem
   pci_enable_pcie_error_reporting
   pci_find_ext_capability
+  pci_free_irq
   pci_free_irq_vectors
   pci_get_device
   pci_get_domain_bus_and_slot
@@ -2251,11 +2289,14 @@
   pci_read_config_word
   __pci_register_driver
   pci_release_region
+  pci_request_irq
   pci_request_region
   pci_restore_state
   pci_save_state
+  pci_select_bars
   pci_set_master
   pci_set_power_state
+  pci_sriov_configure_simple
   pci_store_saved_state
   pci_unregister_driver
   pci_walk_bus
@@ -2403,6 +2444,7 @@
   __pm_runtime_use_autosuspend
   __pm_stay_awake
   pm_stay_awake
+  pm_suspend_global_flags
   pm_system_wakeup
   pm_wakeup_dev_event
   pm_wakeup_ws_event
@@ -3350,8 +3392,8 @@
   __traceiter_android_vh_ftrace_oops_enter
   __traceiter_android_vh_ftrace_oops_exit
   __traceiter_android_vh_ftrace_size_check
-  __traceiter_android_vh_ignore_dmabuf_vmap_bounds
   __traceiter_android_vh_gic_v3_suspend
+  __traceiter_android_vh_ignore_dmabuf_vmap_bounds
   __traceiter_android_vh_ipi_stop
   __traceiter_android_vh_jiffies_update
   __traceiter_android_vh_kswapd_per_node
@@ -3485,8 +3527,8 @@
   __tracepoint_android_vh_ftrace_oops_enter
   __tracepoint_android_vh_ftrace_oops_exit
   __tracepoint_android_vh_ftrace_size_check
-  __tracepoint_android_vh_ignore_dmabuf_vmap_bounds
   __tracepoint_android_vh_gic_v3_suspend
+  __tracepoint_android_vh_ignore_dmabuf_vmap_bounds
   __tracepoint_android_vh_ipi_stop
   __tracepoint_android_vh_jiffies_update
   __tracepoint_android_vh_kswapd_per_node
