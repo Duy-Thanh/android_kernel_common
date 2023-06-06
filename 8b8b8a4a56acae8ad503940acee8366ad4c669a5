@@ -46,6 +46,30 @@
       },
       "revId": "8b8b8a4a56acae8ad503940acee8366ad4c669a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8a767ef_ccf9701f",
+        "filename": "mm/mmap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2400,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-06-06T00:27:51Z",
+      "side": 1,
+      "message": "Ack, lets keep it as it.\n\nI think it\u0027s a matter of using `find` instead of `next` so that we don\u0027t miss the first entry.\n\nmm-unstable: `vma_next() -\u003e mas_find()`\n14-6.1: `vma_next() -\u003e vma_find() -\u003e mas_find()`",
+      "parentUuid": "46741e3d_085998f4",
+      "range": {
+        "startLine": 2400,
+        "startChar": 9,
+        "endLine": 2400,
+        "endChar": 17
+      },
+      "revId": "8b8b8a4a56acae8ad503940acee8366ad4c669a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
