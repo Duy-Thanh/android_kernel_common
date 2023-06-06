@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d779c196_b679a738",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-06T17:30:11Z",
+      "side": 1,
+      "message": "Since we revived cleancache in our 6.1 kernel, we need to allow F2FS to use it as well.",
+      "revId": "bda80efc807f5bbb9132f0f16d5fbc531478b95c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
