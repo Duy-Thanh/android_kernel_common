@@ -327678,6 +327678,15 @@ elf_symbol {
   full_name: "reboot_mode"
 }
 elf_symbol {
+  id: 0x590d247f
+  name: "rebuild_sched_domains"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa65ab83d
+  type_id: 0x10985193
+  full_name: "rebuild_sched_domains"
+}
+elf_symbol {
   id: 0x91579542
   name: "reciprocal_value"
   is_defined: true
@@ -345282,6 +345291,7 @@ interface {
   symbol_id: 0x5b227eda
   symbol_id: 0xfdbe6bc0
   symbol_id: 0x46082c90
+  symbol_id: 0x590d247f
   symbol_id: 0x91579542
   symbol_id: 0xeeb1ddf9
   symbol_id: 0x54bb98b3
