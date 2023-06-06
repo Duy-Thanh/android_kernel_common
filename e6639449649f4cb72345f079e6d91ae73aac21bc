@@ -45,6 +45,54 @@
       },
       "revId": "e6639449649f4cb72345f079e6d91ae73aac21bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcce4501_90653f44",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2023-06-06T13:31:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d942686_7928cd15",
+      "range": {
+        "startLine": 1372,
+        "startChar": 1,
+        "endLine": 1372,
+        "endChar": 46
+      },
+      "revId": "e6639449649f4cb72345f079e6d91ae73aac21bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593f38d0_0e61fc06",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1859295
+      },
+      "writtenOn": "2023-06-06T13:31:42Z",
+      "side": 1,
+      "message": "I have no idea why GFP_KERNEL is unsafe. I would appreciate it if you could give me some advice.\n\nAllocation is updated in patchset 7. Thanks for the catch.",
+      "parentUuid": "191aebfa_bad56006",
+      "range": {
+        "startLine": 1372,
+        "startChar": 34,
+        "endLine": 1372,
+        "endChar": 44
+      },
+      "revId": "e6639449649f4cb72345f079e6d91ae73aac21bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
