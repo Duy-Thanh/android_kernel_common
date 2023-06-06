@@ -42,6 +42,49 @@
       },
       "revId": "d7f1443efd8dc80735a6ca897c5f3924c0d769db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000046027377",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2608652?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "b7b756a4_d01abbe6",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Zhihao Cheng \u003cchengzhihao1@huawei.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "4f0dea08_d5d16c9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-06T22:32:22Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Zhihao Cheng \u003cchengzhihao1@huawei.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 537031437 android-build.ayeaye-python-dispatcher_20230601.04_p0",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "d7f1443efd8dc80735a6ca897c5f3924c0d769db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
