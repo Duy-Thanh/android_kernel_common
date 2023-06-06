@@ -16,6 +16,24 @@
       "message": "rejected upstream.",
       "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73c169dc_5222176b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-06-06T02:13:08Z",
+      "side": 1,
+      "message": "Hi Greg,\nI know the complete patch is under review in upstream, and it still needs some work according to Will\u0027s comments. \nThis patch only adds one cpucap to make the KMI compatible with the final solution, so that I can submit the final patch to GKI even after KMI freeze.\nIs this not acceptable by GKI?\nThanks",
+      "parentUuid": "057d5e83_6eef1003",
+      "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
