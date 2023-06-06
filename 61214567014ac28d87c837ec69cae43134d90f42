@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cdc6c880_a4fcebc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-06T17:59:16Z",
+      "side": 1,
+      "message": "That is definitely better than adding it to the main build. Does it really need to be in the android-mainline tree? Couldn\u0027t that be added downstream of android-mainline?",
+      "parentUuid": "e016e611_104ce0ca",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
