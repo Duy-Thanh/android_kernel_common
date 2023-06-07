@@ -52,6 +52,24 @@
       "parentUuid": "73c169dc_5222176b",
       "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e64e49bc_3bce5359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-06-07T01:39:17Z",
+      "side": 1,
+      "message": "I thought the KMI is not freeze.\nOkay, I will abandon these patches and work on the final version.\nThanks for your review.",
+      "parentUuid": "3931f2fb_cb4b4b1e",
+      "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
