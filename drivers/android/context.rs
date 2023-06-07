@@ -2,12 +2,14 @@
 
 use kernel::{
     linked_list::{GetLinks, Links, List},
+    security,
     prelude::*,
+    task::Kuid,
     str::{CStr, CString},
     sync::{Arc, Mutex},
 };
 
-use crate::process::Process;
+use crate::{process::Process, error::BinderError, node::NodeRef};
 
 // This module defines the global variable containing the list of contexts. Since the
 // `kernel::sync` bindings currently don't support mutexes in globals, we use a temporary
@@ -69,6 +71,8 @@ pub(crate) struct ContextList {
 /// This struct keeps track of the processes using this context, and which process is the context
 /// manager.
 struct Manager {
+    node: Option<NodeRef>,
+    uid: Option<Kuid>,
     all_procs: List<Arc<Process>>,
 }
 
@@ -96,6 +100,8 @@ impl Context {
             links: Links::new(),
             manager <- kernel::new_mutex!(Manager {
                 all_procs: List::new(),
+                node: None,
+                uid: None,
             }, "Context::manager"),
         }))?;
 
@@ -132,5 +138,41 @@ impl Context {
         unsafe {
             self.manager.lock().all_procs.remove(proc);
         }
+    }
+
+    pub(crate) fn set_manager_node(&self, node_ref: NodeRef) -> Result {
+        let mut manager = self.manager.lock();
+        if manager.node.is_some() {
+            pr_warn!("BINDER_SET_CONTEXT_MGR already set");
+            return Err(EBUSY);
+        }
+        security::binder_set_context_mgr(&node_ref.node.owner.cred)?;
+
+        // If the context manager has been set before, ensure that we use the same euid.
+        let caller_uid = Kuid::current_euid();
+        if let Some(ref uid) = manager.uid {
+            if *uid != caller_uid {
+                return Err(EPERM);
+            }
+        }
+
+        manager.node = Some(node_ref);
+        manager.uid = Some(caller_uid);
+        Ok(())
+    }
+
+    pub(crate) fn unset_manager_node(&self) {
+        let node_ref = self.manager.lock().node.take();
+        drop(node_ref);
+    }
+
+    pub(crate) fn get_manager_node(&self, strong: bool) -> Result<NodeRef, BinderError> {
+        self.manager
+            .lock()
+            .node
+            .as_ref()
+            .ok_or_else(BinderError::new_dead)?
+            .clone(strong)
+            .map_err(BinderError::from)
     }
 }
