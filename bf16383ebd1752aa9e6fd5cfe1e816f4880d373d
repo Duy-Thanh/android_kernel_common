@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000046322970",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2454788?revision\u003d10",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "69fb1563_538099af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-07T14:44:40Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/e430a95a04efc557bc4ff9b3035c7c85aee5d63f) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003de430a95a04efc557bc4ff9b3035c7c85aee5d63f)\n\n```\n      ## include/linux/mm.h ##\n     @@ include/linux/mm.h: extern unsigned int kobjsize(const void *objp);\n      /* This mask defines which mm-\u003edef_flags a process can inherit its parent */\n    @@ mm/hugetlb.c: static unsigned long page_table_shareable(struct vm_area_struct *s\n     \n      ## mm/mlock.c ##\n     @@ mm/mlock.c: static int apply_vma_lock_flags(unsigned long start, size_t len,\n    - \t\tif (vma-\u003evm_start !\u003d tmp)\n    - \t\t\treturn -ENOMEM;\n    + \t\tprev \u003d mas_prev(\u0026mas, 0);\n    + \n    + \tfor (nstart \u003d start ; ; ) {\n    +-\t\tvm_flags_t newflags \u003d vma-\u003evm_flags \u0026 VM_LOCKED_CLEAR_MASK;\n    ++\t\tvm_flags_t newflags \u003d vma-\u003evm_flags \u0026 ~VM_LOCKED_MASK;\n      \n    --\t\tnewflags \u003d vma-\u003evm_flags \u0026 VM_LOCKED_CLEAR_MASK;\n    -+\t\tnewflags \u003d vma-\u003evm_flags \u0026 ~VM_LOCKED_MASK;\n      \t\tnewflags |\u003d flags;\n    - \t\t/* Here we know that  vma-\u003evm_start \u003c\u003d nstart \u003c vma-\u003evm_end. */\n    - \t\ttmp \u003d vma-\u003evm_end;\n    + \n     @@ mm/mlock.c: static int apply_mlockall_flags(int flags)\n      \tstruct vm_area_struct *vma, *prev \u003d NULL;\n      \tvm_flags_t to_add \u003d 0;\n    @@ mm/mlock.c: static int apply_mlockall_flags(int flags)\n      \t\tcurrent-\u003emm-\u003edef_flags |\u003d VM_LOCKED;\n      \n     @@ mm/mlock.c: static int apply_mlockall_flags(int flags)\n    - \tfor_each_vma(vmi, vma) {\n    + \tmas_for_each(\u0026mas, vma, ULONG_MAX) {\n      \t\tvm_flags_t newflags;\n      \n     -\t\tnewflags \u003d vma-\u003evm_flags \u0026 VM_LOCKED_CLEAR_MASK;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 538163655 android-build.ayeaye-python-dispatcher_20230606.02_p0",
+      "revId": "bf16383ebd1752aa9e6fd5cfe1e816f4880d373d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
