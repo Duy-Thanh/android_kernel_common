@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27d144fa_3cf77838",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-07T01:04:33Z",
+      "side": 1,
+      "message": "Needs bug tag `Bug: \u003cbug#\u003e`",
+      "revId": "a36320538e60d12b284658301fe912b6896950df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f24bd93_19f03c90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-07T01:04:33Z",
+      "side": 1,
+      "message": "If this is FROMGIT then you should provide the git tree link from where you took the patch. see https://android-review.googlesource.com/2579089 for example.",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 134
+      },
+      "revId": "a36320538e60d12b284658301fe912b6896950df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
