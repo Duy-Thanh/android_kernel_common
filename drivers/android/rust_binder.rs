@@ -5,12 +5,14 @@
 use kernel::{
     bindings::{self, seq_file},
     file::{File, Operations, PollTable},
+    linked_list::{GetLinks, GetLinksWrapped, Links},
     prelude::*,
     sync::Arc,
     types::ForeignOwnable,
+    user_ptr::UserSlicePtrWriter,
 };
 
-use crate::{context::Context, process::Process};
+use crate::{context::Context, process::Process, thread::Thread};
 
 use core::mem::ManuallyDrop;
 
@@ -26,6 +28,50 @@ module! {
     author: "Wedson Almeida Filho, Alice Ryhl",
     description: "Android Binder",
     license: "GPL",
+}
+
+/// Specifies how a type should be delivered to the read part of a BINDER_WRITE_READ ioctl.
+///
+/// When a value is pushed to the todo list for a process or thread, it is stored as a trait object
+/// with the type `Arc<dyn DeliverToRead>`. Trait objects are a Rust feature that lets you
+/// implement dynamic dispatch over many different types. This lets us store many different types
+/// in the todo list.
+trait DeliverToRead {
+    /// Performs work. Returns true if remaining work items in the queue should be processed
+    /// immediately, or false if it should return to caller before processing additional work
+    /// items.
+    fn do_work(self: Arc<Self>, thread: &Thread, writer: &mut UserSlicePtrWriter) -> Result<bool>;
+
+    /// Cancels the given work item. This is called instead of [`DeliverToRead::do_work`] when work
+    /// won't be delivered.
+    fn cancel(self: Arc<Self>) {}
+
+    /// Returns the linked list links for the work item.
+    fn get_links(&self) -> &Links<dyn DeliverToRead>;
+
+    /// Should we use `wake_up_interruptible_sync` or `wake_up_interruptible` when scheduling this
+    /// work item?
+    ///
+    /// Generally only set to true for non-oneway transactions.
+    fn should_sync_wakeup(&self) -> bool;
+
+    /// Get the debug name of this type.
+    fn debug_name(&self) -> &'static str {
+        core::any::type_name::<Self>()
+    }
+}
+
+struct DeliverToReadListAdapter {}
+
+impl GetLinks for DeliverToReadListAdapter {
+    type EntryType = dyn DeliverToRead;
+    fn get_links(data: &Self::EntryType) -> &Links<Self::EntryType> {
+        data.get_links()
+    }
+}
+
+impl GetLinksWrapped for DeliverToReadListAdapter {
+    type Wrapped = Arc<dyn DeliverToRead>;
 }
 
 struct BinderModule {}

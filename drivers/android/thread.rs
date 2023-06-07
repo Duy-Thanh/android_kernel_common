@@ -8,12 +8,14 @@
 use kernel::{
     bindings,
     io_buffer::{IoBufferReader, IoBufferWriter},
+    linked_list::{GetLinks, Links, List},
     prelude::*,
-    sync::{Arc, SpinLock},
+    sync::{Arc, CondVar, SpinLock},
+    types::Either,
     user_ptr::UserSlicePtr,
 };
 
-use crate::{defs::*, process::Process};
+use crate::{defs::*, process::Process, DeliverToRead, DeliverToReadListAdapter};
 
 use core::mem::size_of;
 
@@ -23,8 +25,17 @@ struct InnerThread {
     /// prefixed with `LOOPER_`.
     looper_flags: u32,
 
+    /// Determines whether the looper should return.
+    looper_need_return: bool,
+
     /// Determines if thread is dead.
     is_dead: bool,
+
+    /// Determines whether the work list below should be processed. When set to false, `work_list`
+    /// is treated as if it were empty.
+    process_work_list: bool,
+    /// List of work items to deliver to userspace.
+    work_list: List<DeliverToReadListAdapter>,
 
     /// Extended error information for this thread.
     extended_error: ExtendedError,
@@ -34,6 +45,8 @@ const LOOPER_REGISTERED: u32 = 0x01;
 const LOOPER_ENTERED: u32 = 0x02;
 const LOOPER_EXITED: u32 = 0x04;
 const LOOPER_INVALID: u32 = 0x08;
+const LOOPER_WAITING: u32 = 0x10;
+const LOOPER_WAITING_PROC: u32 = 0x20;
 
 impl InnerThread {
     fn new() -> Self {
@@ -46,9 +59,36 @@ impl InnerThread {
 
         Self {
             looper_flags: 0,
+            looper_need_return: false,
             is_dead: false,
+            process_work_list: false,
+            work_list: List::new(),
             extended_error: ExtendedError::new(next_err_id(), BR_OK, 0),
         }
+    }
+
+    fn pop_work(&mut self) -> Option<Arc<dyn DeliverToRead>> {
+        if !self.process_work_list {
+            return None;
+        }
+
+        let ret = self.work_list.pop_front();
+        self.process_work_list = !self.work_list.is_empty();
+        ret
+    }
+
+    #[allow(dead_code)]
+    fn push_work(&mut self, work: Arc<dyn DeliverToRead>) -> bool {
+        let success = self.work_list.push_back(work);
+        self.process_work_list |= success;
+        success
+    }
+
+    /// Used to push work items that do not need to be processed immediately and can wait until the
+    /// thread gets another work item.
+    #[allow(dead_code)]
+    fn push_work_deferred(&mut self, work: Arc<dyn DeliverToRead>) {
+        self.work_list.push_back(work);
     }
 
     fn looper_enter(&mut self) {
@@ -73,6 +113,13 @@ impl InnerThread {
     fn is_looper(&self) -> bool {
         self.looper_flags & (LOOPER_ENTERED | LOOPER_REGISTERED) != 0
     }
+
+    /// Determines whether the thread should attempt to fetch work items from the process queue
+    /// (when its own queue is empty). This is case when the thread is not part of a transaction
+    /// stack and it is registered as a looper.
+    fn should_use_process_work_queue(&self) -> bool {
+        self.is_looper()
+    }
 }
 
 /// This represents a thread that's used with binder.
@@ -82,6 +129,12 @@ pub(crate) struct Thread {
     pub(crate) process: Arc<Process>,
     #[pin]
     inner: SpinLock<InnerThread>,
+    #[pin]
+    work_condvar: CondVar,
+    /// Used to insert this thread into the process' `ready_threads` list.
+    ///
+    /// INVARIANT: May never be used for any other list than the `self.process.ready_threads`.
+    links: Links<Thread>,
 }
 
 impl Thread {
@@ -90,6 +143,8 @@ impl Thread {
             id,
             process,
             inner <- kernel::new_spinlock!(InnerThread::new(), "Thread::inner"),
+            work_condvar <- kernel::new_condvar!("Thread::work_condvar"),
+            links: Links::new(),
         }))?)
     }
 
@@ -98,6 +153,115 @@ impl Thread {
         let ee = self.inner.lock().extended_error;
         writer.write(&ee)?;
         Ok(())
+    }
+
+    /// Attempts to fetch a work item from the thread-local queue. The behaviour if the queue is
+    /// empty depends on `wait`: if it is true, the function waits for some work to be queued (or a
+    /// signal); otherwise it returns indicating that none is available.
+    fn get_work_local(self: &Arc<Self>, wait: bool) -> Result<Option<Arc<dyn DeliverToRead>>> {
+        // Try once if the caller does not want to wait.
+        if !wait {
+            return self.inner.lock().pop_work().ok_or(EAGAIN).map(Some);
+        }
+
+        // Loop waiting only on the local queue (i.e., not registering with the process queue).
+        let mut inner = self.inner.lock();
+        loop {
+            if let Some(work) = inner.pop_work() {
+                return Ok(Some(work));
+            }
+
+            inner.looper_flags |= LOOPER_WAITING;
+            inner.looper_need_return = false;
+            let signal_pending = self.work_condvar.wait(&mut inner);
+            inner.looper_flags &= !LOOPER_WAITING;
+
+            if signal_pending {
+                return Err(ERESTARTSYS);
+            }
+            if inner.looper_need_return {
+                return Ok(None);
+            }
+        }
+    }
+
+    /// Attempts to fetch a work item from the thread-local queue, falling back to the process-wide
+    /// queue if none is available locally.
+    ///
+    /// This must only be called when the thread is not participating in a transaction chain. If it
+    /// is, the local version (`get_work_local`) should be used instead.
+    fn get_work(self: &Arc<Self>, wait: bool) -> Result<Option<Arc<dyn DeliverToRead>>> {
+        // Try to get work from the thread's work queue, using only a local lock.
+        {
+            let mut inner = self.inner.lock();
+            if let Some(work) = inner.pop_work() {
+                return Ok(Some(work));
+            }
+        }
+
+        // If the caller doesn't want to wait, try to grab work from the process queue.
+        //
+        // We know nothing will have been queued directly to the thread queue because it is not in
+        // a transaction and it is not in the process' ready list.
+        if !wait {
+            return self.process.get_work().ok_or(EAGAIN).map(Some);
+        }
+
+        // Get work from the process queue. If none is available, atomically register as ready.
+        let reg = match self.process.get_work_or_register(self) {
+            Either::Left(work) => return Ok(Some(work)),
+            Either::Right(reg) => reg,
+        };
+
+        let mut inner = self.inner.lock();
+        loop {
+            if let Some(work) = inner.pop_work() {
+                return Ok(Some(work));
+            }
+
+            inner.looper_flags |= LOOPER_WAITING | LOOPER_WAITING_PROC;
+            inner.looper_need_return = false;
+            let signal_pending = self.work_condvar.wait(&mut inner);
+            inner.looper_flags &= !(LOOPER_WAITING | LOOPER_WAITING_PROC);
+
+            if signal_pending || inner.looper_need_return {
+                // We need to return now. We need to pull the thread off the list of ready threads
+                // (by dropping `reg`), then check the state again after it's off the list to
+                // ensure that something was not queued in the meantime. If something has been
+                // queued, we just return it (instead of the error).
+                drop(inner);
+                drop(reg);
+
+                let res = match self.inner.lock().pop_work() {
+                    Some(work) => Ok(Some(work)),
+                    None if signal_pending => Err(ERESTARTSYS),
+                    None => Ok(None),
+                };
+                return res;
+            }
+        }
+    }
+
+    /// Push the provided work item to be delivered to user space via this thread.
+    ///
+    /// Returns whether the item was successfully pushed. This can only fail if the work item is
+    /// already in a work list.
+    #[allow(dead_code)]
+    pub(crate) fn push_work(&self, work: Arc<dyn DeliverToRead>) -> bool {
+        let sync = work.should_sync_wakeup();
+        {
+            let mut inner = self.inner.lock();
+            if !inner.push_work(work) {
+                // This work item is already in a list somewhere.
+                return false;
+            }
+        }
+        if sync {
+            self.work_condvar.notify_sync();
+        } else {
+            self.work_condvar.notify_one();
+        }
+        true
     }
 
     fn write(self: &Arc<Self>, req: &mut BinderWriteRead) -> Result {
@@ -127,11 +291,21 @@ impl Thread {
         Ok(())
     }
 
-    fn read(self: &Arc<Self>, req: &mut BinderWriteRead, _wait: bool) -> Result {
+    fn read(self: &Arc<Self>, req: &mut BinderWriteRead, wait: bool) -> Result {
         let read_start = req.read_buffer.wrapping_add(req.read_consumed);
         let read_len = req.read_size - req.read_consumed;
         let mut writer = unsafe { UserSlicePtr::new(read_start as _, read_len as _) }.writer();
-        let in_pool = self.inner.lock().is_looper();
+        let (in_pool, getter) = {
+            let inner = self.inner.lock();
+            (
+                inner.is_looper(),
+                if inner.should_use_process_work_queue() {
+                    Self::get_work
+                } else {
+                    Self::get_work_local
+                },
+            )
+        };
 
         // Reserve some room at the beginning of the read buffer so that we can send a
         // BR_SPAWN_LOOPER if we need to.
@@ -145,13 +319,35 @@ impl Thread {
         }
 
         // Loop doing work while there is room in the buffer.
-        #[allow(clippy::never_loop)]
+        let initial_len = writer.len();
         while writer.len() >= size_of::<bindings::binder_transaction_data_secctx>() + 4 {
-            // There is enough space in the output buffer to process another work item.
-            //
-            // However, we have not yet added work items to the driver, so we immediately break
-            // from the loop.
-            break;
+            match getter(self, wait && initial_len == writer.len()) {
+                Ok(Some(work)) => {
+                    let work_ty = work.debug_name();
+                    match work.do_work(self, &mut writer) {
+                        Ok(true) => {}
+                        Ok(false) => break,
+                        Err(err) => {
+                            pr_warn!("Failure inside do_work of type {}.", work_ty);
+                            return Err(err);
+                        }
+                    }
+                }
+                Ok(None) => {
+                    break;
+                }
+                Err(err) => {
+                    // Propagate the error if we haven't written anything else.
+                    if err != ERESTARTSYS && err != EAGAIN {
+                        pr_warn!("Failure in work getter: {:?}", err);
+                    }
+                    if initial_len == writer.len() {
+                        return Err(err);
+                    } else {
+                        break;
+                    }
+                }
+            }
         }
 
         req.read_consumed += read_len - writer.len() as u64;
@@ -201,7 +397,49 @@ impl Thread {
         ret
     }
 
+    /// Make the call to `get_work` or `get_work_local` return immediately, if any.
+    pub(crate) fn exit_looper(&self) {
+        let mut inner = self.inner.lock();
+        let should_notify = inner.looper_flags & LOOPER_WAITING != 0;
+        if should_notify {
+            inner.looper_need_return = true;
+        }
+        drop(inner);
+
+        if should_notify {
+            self.work_condvar.notify_one();
+        }
+    }
+
+    pub(crate) fn notify_if_poll_ready(&self, sync: bool) {
+        // Determine if we need to notify. This requires the lock.
+        let inner = self.inner.lock();
+        let notify = inner.should_use_process_work_queue() && inner.process_work_list;
+        drop(inner);
+
+        // Now that the lock is no longer held, notify the waiters if we have to.
+        if notify {
+            if sync {
+                self.work_condvar.notify_sync();
+            } else {
+                self.work_condvar.notify_one();
+            }
+        }
+    }
+
     pub(crate) fn release(self: &Arc<Self>) {
         self.inner.lock().is_dead = true;
+
+        // Cancel all pending work items.
+        while let Ok(Some(work)) = self.get_work_local(false) {
+            work.cancel();
+        }
+    }
+}
+
+impl GetLinks for Thread {
+    type EntryType = Thread;
+    fn get_links(data: &Thread) -> &Links<Thread> {
+        &data.links
     }
 }
