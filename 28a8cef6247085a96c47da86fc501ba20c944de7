@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "093d491e_f369dcb4",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-07T18:47:19Z",
+      "side": 1,
+      "message": "why is this needed? Can\u0027t it be completely inside your vendor hook implementation?",
+      "revId": "28a8cef6247085a96c47da86fc501ba20c944de7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3a2aa98_b39cdd70",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-07T18:47:19Z",
+      "side": 1,
+      "message": "why can\u0027t all of this be inside your vendor hook implementation?",
+      "range": {
+        "startLine": 1374,
+        "startChar": 0,
+        "endLine": 1381,
+        "endChar": 40
+      },
+      "revId": "28a8cef6247085a96c47da86fc501ba20c944de7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edb045be_f9016c7e",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-07T18:47:19Z",
+      "side": 1,
+      "message": "if ws_name is global, then why is \"eventpoll\" not a reasonable name? Why is this needed?",
+      "range": {
+        "startLine": 1384,
+        "startChar": 45,
+        "endLine": 1384,
+        "endChar": 52
+      },
+      "revId": "28a8cef6247085a96c47da86fc501ba20c944de7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e9cd974_6ed71a03",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-07T18:47:19Z",
+      "side": 1,
+      "message": "move into the vendor hook.",
+      "range": {
+        "startLine": 1390,
+        "startChar": 0,
+        "endLine": 1393,
+        "endChar": 0
+      },
+      "revId": "28a8cef6247085a96c47da86fc501ba20c944de7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f00a3590_09900d87",
+        "filename": "fs/timerfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-07T18:47:19Z",
+      "side": 1,
+      "message": "move as much of the logic as possible into the vendor hook.",
+      "revId": "28a8cef6247085a96c47da86fc501ba20c944de7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
