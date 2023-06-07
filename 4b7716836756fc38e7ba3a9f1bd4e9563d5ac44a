@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7fb3d36_b7abcca2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-07T14:39:23Z",
+      "side": 1,
+      "message": "has this landed upstream? In that case it needs to be either \"BACKPORT: \" or \"UPSTREAM:\" depending on the modifications to the original patch. If this never landed, then this would be \"FROMLIST\" or \"FROMGIT\" with possible \"BACKPORT: \" prefix. For sure, \"ANDROID\" seems to not be the correct one.",
+      "revId": "4b7716836756fc38e7ba3a9f1bd4e9563d5ac44a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
