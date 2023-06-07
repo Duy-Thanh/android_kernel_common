@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5faedd39_fd7eb8a7",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4899,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-06-07T00:45:22Z",
+      "side": 1,
+      "message": "Hi Yu, this `unsigned long` is a bug ? It\u0027s same in upstream.",
+      "range": {
+        "startLine": 4899,
+        "startChar": 6,
+        "endLine": 4899,
+        "endChar": 20
+      },
+      "revId": "a3eb65166f27cb3a73195c8bfaafcba20a7d8742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
