@@ -16,6 +16,24 @@
       "message": "Does this mean the host can donate MMIO regions via e.g. `__pkvm_load_tracing()` for the trace buffers? If so, I think we should restrict `__pkvm_host_donate_hyp()` to memory regions and add a separate helper which accepts MMIO.",
       "revId": "053c33d04772512323dd934e8f98829a98380203",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65eed5d1_eacf4ae1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-06-07T14:15:01Z",
+      "side": 1,
+      "message": "Goog point, now done in a separate patch: aosp/2619511",
+      "parentUuid": "a3c3ab5f_b0aabfac",
+      "revId": "053c33d04772512323dd934e8f98829a98380203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
