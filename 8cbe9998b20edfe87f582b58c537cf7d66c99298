@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17d436fb_fa90b2c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-06-07T19:56:26Z",
+      "side": 1,
+      "message": "I\u0027ll hopefully route these via LTS for 5.10, 5.15 and 6.1 once they land in 6.5. But we need them now on this branch.",
+      "revId": "8cbe9998b20edfe87f582b58c537cf7d66c99298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
