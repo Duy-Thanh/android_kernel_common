@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3554fd0a_2a6919b6",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1210,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-06-07T11:28:33Z",
+      "side": 1,
+      "message": "This makes a copy of `extended_error`, then writes to the copy. The value inside `inner` is not changed.",
+      "revId": "b80ca266dd5ad66576dda4bd39cc98a6c661d5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
