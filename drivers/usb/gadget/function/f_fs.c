@@ -3302,6 +3302,7 @@ static int ffs_func_set_alt(struct usb_function *f,
 	struct ffs_data *ffs = func->ffs;
 	int ret = 0, intf;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	if (alt != (unsigned)-1) {
 		intf = ffs_func_revmap_intf(func, interface);
 		if (unlikely(intf < 0))
@@ -3313,17 +3314,21 @@ static int ffs_func_set_alt(struct usb_function *f,
 
 	if (ffs->state == FFS_DEACTIVATED) {
 		ffs->state = FFS_CLOSING;
+		pr_err("[Ray] %s: FFS_CLOSING\n", __func__);
 		INIT_WORK(&ffs->reset_work, ffs_reset_work);
 		schedule_work(&ffs->reset_work);
 		return -ENODEV;
 	}
 
-	if (ffs->state != FFS_ACTIVE)
+	if (ffs->state != FFS_ACTIVE) {
+		pr_err("[Ray] %s: no dev\n", __func__);
 		return -ENODEV;
+	}
 
 	if (alt == (unsigned)-1) {
 		ffs->func = NULL;
 		ffs_event_add(ffs, FUNCTIONFS_DISABLE);
+		pr_err("[Ray] %s: FUNCTIONFS_DISABLE\n", __func__);
 		return 0;
 	}
 
@@ -3331,6 +3336,7 @@ static int ffs_func_set_alt(struct usb_function *f,
 	ret = ffs_func_eps_enable(func);
 	if (likely(ret >= 0))
 		ffs_event_add(ffs, FUNCTIONFS_ENABLE);
+	pr_err("[Ray] %s --\n", __func__);
 	return ret;
 }
 
@@ -3838,8 +3844,10 @@ static void ffs_closed(struct ffs_data *ffs)
 	ci = opts->func_inst.group.cg_item.ci_parent->ci_parent;
 	ffs_dev_unlock();
 
-	if (test_bit(FFS_FL_BOUND, &ffs->flags))
+	if (test_bit(FFS_FL_BOUND, &ffs->flags)) {
+		pr_err("[Ray] %s: unregister\n", __func__);
 		unregister_gadget_item(ci);
+	}
 	return;
 done:
 	ffs_dev_unlock();

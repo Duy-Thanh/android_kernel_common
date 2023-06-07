@@ -295,9 +295,10 @@ int dwc3_core_soft_reset(struct dwc3 *dwc)
 		if (!(reg & DWC3_DCTL_CSFTRST))
 			goto done;
 
-		if (DWC3_VER_IS_WITHIN(DWC31, 190A, ANY) || DWC3_IP_IS(DWC32))
+		if (DWC3_VER_IS_WITHIN(DWC31, 190A, ANY) || DWC3_IP_IS(DWC32)) {
+			pr_err("[Ray] %s: after 190a so that add 20ms \n", __func__);
 			msleep(20);
-		else
+		} else
 			udelay(1);
 	} while (--retries);
 
@@ -312,6 +313,7 @@ done:
 	if (DWC3_VER_IS_WITHIN(DWC31, ANY, 180A))
 		msleep(50);
 
+	pr_err("[Ray] %s soft reset done\n", __func__);
 	return 0;
 }
 
@@ -1775,6 +1777,7 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
 		spin_unlock_irqrestore(&dwc->lock, flags);
 		synchronize_irq(dwc->irq_gadget);
 		dwc3_core_exit(dwc);
+		pr_err("[Ray] %s: device suspend\n", __func__);
 		break;
 	case DWC3_GCTL_PRTCAP_HOST:
 		if (!PMSG_IS_AUTO(msg)) {
@@ -1836,6 +1839,7 @@ static int dwc3_resume_common(struct dwc3 *dwc, pm_message_t msg)
 		spin_lock_irqsave(&dwc->lock, flags);
 		dwc3_gadget_resume(dwc);
 		spin_unlock_irqrestore(&dwc->lock, flags);
+		pr_err("[Ray] %s: device mode\n", __func__);
 		break;
 	case DWC3_GCTL_PRTCAP_HOST:
 		if (!PMSG_IS_AUTO(msg)) {
@@ -1891,8 +1895,11 @@ static int dwc3_runtime_checks(struct dwc3 *dwc)
 {
 	switch (dwc->current_dr_role) {
 	case DWC3_GCTL_PRTCAP_DEVICE:
-		if (dwc->connected)
+		if (dwc->connected) {
+			pr_err("[Ray] %s: busy!\n", __func__);
 			return -EBUSY;
+		}
+		pr_err("[Ray] %s: idle\n", __func__);
 		break;
 	case DWC3_GCTL_PRTCAP_HOST:
 	default:

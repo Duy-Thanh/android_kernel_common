@@ -275,14 +275,18 @@ static int unregister_gadget(struct gadget_info *gi)
 {
 	int ret;
 
-	if (!gi->composite.gadget_driver.udc_name)
+	if (!gi->composite.gadget_driver.udc_name) {
+		pr_err("[Ray] %s: no dev\n", __func__);
 		return -ENODEV;
+	}
 
+	pr_err("[Ray] %s ++\n", __func__);
 	ret = usb_gadget_unregister_driver(&gi->composite.gadget_driver);
 	if (ret)
 		return ret;
 	kfree(gi->composite.gadget_driver.udc_name);
 	gi->composite.gadget_driver.udc_name = NULL;
+	pr_err("[Ray] %s --\n", __func__);
 	return 0;
 }
 
@@ -305,6 +309,7 @@ static ssize_t gadget_dev_desc_UDC_store(struct config_item *item,
 	mutex_lock(&gi->lock);
 
 	if (!strlen(name) || strcmp(name, "none") == 0) {
+		pr_err("[Ray] %s: set none\n", __func__);
 		ret = unregister_gadget(gi);
 		if (ret)
 			goto err;
@@ -315,6 +320,7 @@ static ssize_t gadget_dev_desc_UDC_store(struct config_item *item,
 			goto err;
 		}
 		gi->composite.gadget_driver.udc_name = name;
+		pr_err("[Ray] %s: set UDC:%s\n", __func__, name);
 		ret = usb_gadget_probe_driver(&gi->composite.gadget_driver);
 		if (ret) {
 			gi->composite.gadget_driver.udc_name = NULL;
@@ -322,6 +328,7 @@ static ssize_t gadget_dev_desc_UDC_store(struct config_item *item,
 		}
 	}
 	mutex_unlock(&gi->lock);
+	pr_err("[Ray] %s --\n", __func__);
 	return len;
 err:
 	kfree(name);
@@ -510,6 +517,7 @@ static void config_usb_cfg_unlink(
 	 * force an unbind, the function is available here and then we can
 	 * remove the function.
 	 */
+	pr_err("[Ray] %s ++\n", __func__);
 	mutex_lock(&gi->lock);
 	if (gi->composite.gadget_driver.udc_name)
 		unregister_gadget(gi);
@@ -959,11 +967,14 @@ static void os_desc_unlink(struct config_item *os_desc_ci,
 	struct usb_composite_dev *cdev = &gi->cdev;
 
 	mutex_lock(&gi->lock);
-	if (gi->composite.gadget_driver.udc_name)
+	if (gi->composite.gadget_driver.udc_name) {
+		pr_err("[Ray] %s ++\n", __func__);
 		unregister_gadget(gi);
+	}
 	cdev->os_desc_config = NULL;
 	WARN_ON(gi->composite.gadget_driver.udc_name);
 	mutex_unlock(&gi->lock);
+	pr_err("[Ray] %s --\n", __func__);
 }
 
 static struct configfs_item_operations os_desc_ops = {
@@ -1334,6 +1345,7 @@ static int configfs_composite_bind(struct usb_gadget *gadget,
 	/* and now the gadget bind */
 	ret = -EINVAL;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	if (list_empty(&gi->cdev.configs)) {
 		pr_err("Need at least one configuration in %s.\n",
 				gi->composite.name);
@@ -1449,6 +1461,7 @@ static int configfs_composite_bind(struct usb_gadget *gadget,
 	}
 
 	usb_ep_autoconfig_reset(cdev->gadget);
+	pr_err("[Ray] %s --\n", __func__);
 	return 0;
 
 err_purge_funcs:
@@ -1534,6 +1547,7 @@ static void configfs_composite_unbind(struct usb_gadget *gadget)
 	gadget->deactivated = false;
 	set_gadget_data(gadget, NULL);
 	spin_unlock_irqrestore(&gi->spinlock, flags);
+	pr_err("[Ray] %s \n", __func__);
 }
 
 #ifdef CONFIG_USB_CONFIGFS_UEVENT
@@ -1648,6 +1662,7 @@ static void configfs_composite_disconnect(struct usb_gadget *gadget)
 #endif
 	composite_disconnect(gadget);
 	spin_unlock_irqrestore(&gi->spinlock, flags);
+	pr_err("[Ray] %s\n", __func__);
 }
 
 static void configfs_composite_reset(struct usb_gadget *gadget)
@@ -1918,9 +1933,11 @@ void unregister_gadget_item(struct config_item *item)
 {
 	struct gadget_info *gi = to_gadget_info(item);
 
+	pr_err("[Ray] %s ++\n", __func__);
 	mutex_lock(&gi->lock);
 	unregister_gadget(gi);
 	mutex_unlock(&gi->lock);
+	pr_err("[Ray] %s --\n", __func__);
 }
 EXPORT_SYMBOL_GPL(unregister_gadget_item);
 

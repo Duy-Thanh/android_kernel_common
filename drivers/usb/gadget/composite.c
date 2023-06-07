@@ -967,6 +967,7 @@ done:
 	usb_gadget_vbus_draw(gadget, power);
 	if (result >= 0 && cdev->delayed_status)
 		result = USB_GADGET_DELAYED_STATUS;
+	pr_err("[Ray] %s: complete\n", __func__);
 	return result;
 }
 
@@ -2113,6 +2114,7 @@ static void __composite_disconnect(struct usb_gadget *gadget)
 	/* REVISIT:  should we have config and device level
 	 * disconnect callbacks?
 	 */
+	pr_err("[Ray] %s ++\n", __func__);
 	spin_lock_irqsave(&cdev->lock, flags);
 	cdev->suspended = 0;
 	if (cdev->config)
@@ -2120,6 +2122,7 @@ static void __composite_disconnect(struct usb_gadget *gadget)
 	if (cdev->driver->disconnect)
 		cdev->driver->disconnect(cdev);
 	spin_unlock_irqrestore(&cdev->lock, flags);
+	pr_err("[Ray] %s --\n", __func__);
 }
 
 void composite_disconnect(struct usb_gadget *gadget)

@@ -681,9 +681,11 @@ static int usb_gadget_connect_locked(struct usb_gadget *gadget)
 		 * udc first needs to be started before gadget can be pulled up.
 		 */
 		gadget->connected = true;
+		pr_err("[Ray] %s: pending!!, deactivated:%d, gadget->udc->started:%d\n", __func__, gadget->deactivated, gadget->udc->started);
 		goto out;
 	}
 
+	pr_err("[Ray] %s: pull up!\n", __func__);
 	ret = gadget->ops->pullup(gadget, 1);
 	if (!ret)
 		gadget->connected = 1;
@@ -691,6 +693,7 @@ static int usb_gadget_connect_locked(struct usb_gadget *gadget)
 out:
 	trace_usb_gadget_connect(gadget, ret);
 
+	pr_err("[Ray] %s: complete\n", __func__);
 	return ret;
 }
 
@@ -708,9 +711,11 @@ int usb_gadget_connect(struct usb_gadget *gadget)
 {
 	int ret;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	mutex_lock(&connect_lock);
 	ret = usb_gadget_connect_locked(gadget);
 	mutex_unlock(&connect_lock);
+	pr_err("[Ray] %s --\n", __func__);
 
 	return ret;
 }
@@ -727,8 +732,10 @@ static int usb_gadget_disconnect_locked(struct usb_gadget *gadget)
 		goto out;
 	}
 
-	if (!gadget->connected)
+	if (!gadget->connected) {
+		pr_err("[Ray] %s: not connected\n", __func__);
 		goto out;
+	}
 
 	if (gadget->deactivated || !gadget->udc->started) {
 		/*
@@ -737,10 +744,12 @@ static int usb_gadget_disconnect_locked(struct usb_gadget *gadget)
 		 *
 		 * udc should have been started before gadget being pulled down.
 		 */
+		pr_err("[Ray] %s: clear connect, gadget->deactivated:%d, gadget->udc->started:%d\n", __func__, gadget->deactivated, gadget->udc->started);
 		gadget->connected = false;
 		goto out;
 	}
 
+	pr_err("[Ray] %s: pull down\n", __func__);
 	ret = gadget->ops->pullup(gadget, 0);
 	if (!ret)
 		gadget->connected = 0;
@@ -751,6 +760,7 @@ static int usb_gadget_disconnect_locked(struct usb_gadget *gadget)
 out:
 	trace_usb_gadget_disconnect(gadget, ret);
 
+	pr_err("[Ray] %s: complete\n", __func__);
 	return ret;
 }
 
@@ -771,9 +781,11 @@ int usb_gadget_disconnect(struct usb_gadget *gadget)
 {
 	int ret;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	mutex_lock(&connect_lock);
 	ret = usb_gadget_disconnect_locked(gadget);
 	mutex_unlock(&connect_lock);
+	pr_err("[Ray] %s --\n", __func__);
 
 	return ret;
 }
@@ -797,6 +809,7 @@ int usb_gadget_deactivate(struct usb_gadget *gadget)
 	if (gadget->deactivated)
 		goto out;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	mutex_lock(&connect_lock);
 	if (gadget->connected) {
 		ret = usb_gadget_disconnect_locked(gadget);
@@ -813,6 +826,7 @@ int usb_gadget_deactivate(struct usb_gadget *gadget)
 
 unlock:
 	mutex_unlock(&connect_lock);
+	pr_err("[Ray] %s --\n", __func__);
 out:
 	trace_usb_gadget_deactivate(gadget, ret);
 
@@ -836,6 +850,7 @@ int usb_gadget_activate(struct usb_gadget *gadget)
 	if (!gadget->deactivated)
 		goto out;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	mutex_lock(&connect_lock);
 	gadget->deactivated = false;
 
@@ -846,6 +861,7 @@ int usb_gadget_activate(struct usb_gadget *gadget)
 	if (gadget->connected)
 		ret = usb_gadget_connect_locked(gadget);
 	mutex_unlock(&connect_lock);
+	pr_err("[Ray] %s --\n", __func__);
 
 out:
 	trace_usb_gadget_activate(gadget, ret);
@@ -1091,10 +1107,12 @@ EXPORT_SYMBOL_GPL(usb_gadget_set_state);
 /* Acquire connect_lock before calling this function. */
 static void usb_udc_connect_control_locked(struct usb_udc *udc) __must_hold(&connect_lock)
 {
+	pr_err("[Ray] %s: vbus:%d started:%d\n", __func__, udc->vbus, udc->started);
 	if (udc->vbus && udc->started)
 		usb_gadget_connect_locked(udc->gadget);
 	else
 		usb_gadget_disconnect_locked(udc->gadget);
+	pr_err("[Ray] %s --\n", __func__);
 }
 
 /**
@@ -1110,12 +1128,14 @@ void usb_udc_vbus_handler(struct usb_gadget *gadget, bool status)
 {
 	struct usb_udc *udc = gadget->udc;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	mutex_lock(&connect_lock);
 	if (udc) {
 		udc->vbus = status;
 		usb_udc_connect_control_locked(udc);
 	}
 	mutex_unlock(&connect_lock);
+	pr_err("[Ray] %s --\n", __func__);
 }
 EXPORT_SYMBOL_GPL(usb_udc_vbus_handler);
 
@@ -1131,6 +1151,7 @@ EXPORT_SYMBOL_GPL(usb_udc_vbus_handler);
 void usb_gadget_udc_reset(struct usb_gadget *gadget,
 		struct usb_gadget_driver *driver)
 {
+	pr_err("[Ray] %s ++\n", __func__);
 	driver->reset(gadget);
 	usb_gadget_set_state(gadget, USB_STATE_DEFAULT);
 }
@@ -1157,14 +1178,16 @@ static inline int usb_gadget_udc_start_locked(struct usb_udc *udc)
 	int ret;
 
 	if (udc->started) {
-		dev_err(&udc->dev, "UDC had already started\n");
+		dev_err(&udc->dev, "[Ray] UDC had already started\n");
 		return -EBUSY;
 	}
 
+	pr_err("[Ray] %s ++\n", __func__);
 	ret = udc->gadget->ops->udc_start(udc->gadget, udc->driver);
 	if (!ret)
 		udc->started = true;
 
+	pr_err("[Ray] %s --\n", __func__);
 	return ret;
 }
 
@@ -1185,12 +1208,14 @@ static inline void usb_gadget_udc_stop_locked(struct usb_udc *udc)
 	__must_hold(&connect_lock)
 {
 	if (!udc->started) {
-		dev_err(&udc->dev, "UDC had already stopped\n");
+		dev_err(&udc->dev, "[Ray] UDC had already stopped\n");
 		return;
 	}
 
+	pr_err("[Ray] %s ++\n", __func__);
 	udc->gadget->ops->udc_stop(udc->gadget);
 	udc->started = false;
+	pr_err("[Ray] %s --\n", __func__);
 }
 
 /**
@@ -1379,6 +1404,7 @@ int usb_add_gadget(struct usb_gadget *gadget)
 	usb_gadget_set_state(gadget, USB_STATE_NOTATTACHED);
 	udc->vbus = true;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	/* pick up one of pending gadget drivers */
 	ret = check_pending_gadget_drivers(udc);
 	if (ret)
@@ -1386,6 +1412,7 @@ int usb_add_gadget(struct usb_gadget *gadget)
 
 	mutex_unlock(&udc_lock);
 
+	pr_err("[Ray] %s --\n", __func__);
 	return 0;
 
  err_del_udc:
@@ -1475,7 +1502,7 @@ EXPORT_SYMBOL_GPL(usb_add_gadget_udc);
 
 static void usb_gadget_remove_driver(struct usb_udc *udc)
 {
-	dev_dbg(&udc->dev, "unregistering UDC driver [%s]\n",
+	dev_err(&udc->dev, "[Ray] unregistering UDC driver [%s]\n",
 			udc->driver->function);
 
 	kobject_uevent(&udc->dev.kobj, KOBJ_CHANGE);
@@ -1491,6 +1518,7 @@ static void usb_gadget_remove_driver(struct usb_udc *udc)
 
 	udc->driver = NULL;
 	udc->gadget->dev.driver = NULL;
+	pr_err("[Ray] %s --\n", __func__);
 }
 
 /**
@@ -1508,7 +1536,7 @@ void usb_del_gadget(struct usb_gadget *gadget)
 	if (!udc)
 		return;
 
-	dev_vdbg(gadget->dev.parent, "unregistering gadget\n");
+	dev_err(gadget->dev.parent, "[Ray] unregistering gadget\n");
 
 	mutex_lock(&udc_lock);
 	list_del(&udc->list);
@@ -1521,6 +1549,7 @@ void usb_del_gadget(struct usb_gadget *gadget)
 	}
 	mutex_unlock(&udc_lock);
 
+	pr_err("[Ray] %s --\n", __func__);
 	kobject_uevent(&udc->dev.kobj, KOBJ_REMOVE);
 	flush_work(&gadget->work);
 	device_unregister(&udc->dev);
@@ -1547,7 +1576,7 @@ static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *dri
 {
 	int ret;
 
-	dev_dbg(&udc->dev, "registering UDC driver [%s]\n",
+	dev_err(&udc->dev, "[Ray] registering UDC driver [%s]\n",
 			driver->function);
 
 	udc->driver = driver;
@@ -1568,6 +1597,7 @@ static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *dri
 	usb_gadget_enable_async_callbacks(udc);
 	usb_udc_connect_control_locked(udc);
 	mutex_unlock(&connect_lock);
+	pr_err("[Ray] %s --\n", __func__);
 
 	kobject_uevent(&udc->dev.kobj, KOBJ_CHANGE);
 	return 0;
@@ -1588,6 +1618,7 @@ int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
 	if (!driver || !driver->bind || !driver->setup)
 		return -EINVAL;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	mutex_lock(&udc_lock);
 	if (driver->udc_name) {
 		list_for_each_entry(udc, &udc_list, list) {
@@ -1611,18 +1642,19 @@ int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
 
 	if (!driver->match_existing_only) {
 		list_add_tail(&driver->pending, &gadget_driver_pending_list);
-		pr_info("udc-core: couldn't find an available UDC - added [%s] to list of pending drivers\n",
+		pr_info("[Ray] udc-core: couldn't find an available UDC - added [%s] to list of pending drivers\n",
 			driver->function);
 		ret = 0;
 	}
 
 	mutex_unlock(&udc_lock);
 	if (ret)
-		pr_warn("udc-core: couldn't find an available UDC or it's busy\n");
+		pr_warn("[Ray] udc-core: couldn't find an available UDC or it's busy\n");
 	return ret;
 found:
 	ret = udc_bind_to_driver(udc, driver);
 	mutex_unlock(&udc_lock);
+	pr_err("[Ray] %s --\n", __func__);
 	return ret;
 }
 EXPORT_SYMBOL_GPL(usb_gadget_probe_driver);
@@ -1635,6 +1667,7 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
 	if (!driver || !driver->unbind)
 		return -EINVAL;
 
+	pr_err("[Ray] %s ++\n", __func__);
 	mutex_lock(&udc_lock);
 	list_for_each_entry(udc, &udc_list, list) {
 		if (udc->driver == driver) {
@@ -1658,6 +1691,7 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
 		ret = 0;
 	}
 	mutex_unlock(&udc_lock);
+	pr_err("[Ray] %s --\n", __func__);
 	return ret;
 }
 EXPORT_SYMBOL_GPL(usb_gadget_unregister_driver);

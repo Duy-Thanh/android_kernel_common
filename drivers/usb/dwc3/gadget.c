@@ -2466,6 +2466,7 @@ static int dwc3_gadget_run_stop(struct dwc3 *dwc, int is_on, int suspend)
 	if (!timeout)
 		return -ETIMEDOUT;
 
+	pr_err("[Ray] %s: complete\n", __func__);
 	return 0;
 }
 
@@ -2541,16 +2542,19 @@ static int dwc3_gadget_pullup(struct usb_gadget *g, int is_on)
 	 */
 	ret = pm_runtime_get_sync(dwc->dev);
 	if (!ret || ret < 0) {
+		pr_err("[Ray] %s: no resume, just put first\n", __func__);
 		pm_runtime_put(dwc->dev);
 		return 0;
 	}
 
 	if (dwc->pullups_connected == is_on) {
+		pr_err("[Ray] %s: duplicate operation\n", __func__);
 		pm_runtime_put(dwc->dev);
 		return 0;
 	}
 
 	if (!is_on) {
+		pr_err("[Ray] %s: pull down\n", __func__);
 		ret = dwc3_gadget_soft_disconnect(dwc);
 	} else {
 		/*
@@ -2561,9 +2565,11 @@ static int dwc3_gadget_pullup(struct usb_gadget *g, int is_on)
 		 */
 		dwc3_core_soft_reset(dwc);
 
+		pr_err("[Ray] %s: pull up\n", __func__);
 		dwc3_event_buffers_setup(dwc);
 		__dwc3_gadget_start(dwc);
 		ret = dwc3_gadget_run_stop(dwc, true, false);
+		pr_err("[Ray] %s: run_stop\n", __func__);
 	}
 
 	pm_runtime_put(dwc->dev);
@@ -2714,6 +2720,7 @@ static int __dwc3_gadget_start(struct dwc3 *dwc)
 
 	dwc3_gadget_enable_irq(dwc);
 
+	pr_err("[Ray] %s\n", __func__);
 	return 0;
 
 err1:
@@ -3607,11 +3614,15 @@ static void dwc3_endpoint_interrupt(struct dwc3 *dwc,
 		break;
 	case DWC3_DEPEVT_RXTXFIFOEVT:
 		break;
+	default:
+		dev_err(dwc->dev, "unknown endpoint event %d\n", event->endpoint_event);
+		break;
 	}
 }
 
 static void dwc3_disconnect_gadget(struct dwc3 *dwc)
 {
+	pr_err("[Ray] %s\n", __func__);
 	if (dwc->async_callbacks && dwc->gadget_driver->disconnect) {
 		spin_unlock(&dwc->lock);
 		dwc->gadget_driver->disconnect(dwc->gadget);
@@ -3621,6 +3632,7 @@ static void dwc3_disconnect_gadget(struct dwc3 *dwc)
 
 static void dwc3_suspend_gadget(struct dwc3 *dwc)
 {
+	pr_err("[Ray] %s\n", __func__);
 	if (dwc->async_callbacks && dwc->gadget_driver->suspend) {
 		spin_unlock(&dwc->lock);
 		dwc->gadget_driver->suspend(dwc->gadget);
@@ -3630,6 +3642,7 @@ static void dwc3_suspend_gadget(struct dwc3 *dwc)
 
 static void dwc3_resume_gadget(struct dwc3 *dwc)
 {
+	pr_err("[Ray] %s\n", __func__);
 	if (dwc->async_callbacks && dwc->gadget_driver->resume) {
 		spin_unlock(&dwc->lock);
 		dwc->gadget_driver->resume(dwc->gadget);
@@ -3642,6 +3655,7 @@ static void dwc3_reset_gadget(struct dwc3 *dwc)
 	if (!dwc->gadget_driver)
 		return;
 
+	pr_err("[Ray] %s\n", __func__);
 	if (dwc->async_callbacks && dwc->gadget->speed != USB_SPEED_UNKNOWN) {
 		spin_unlock(&dwc->lock);
 		usb_gadget_udc_reset(dwc->gadget, dwc->gadget_driver);
@@ -3748,6 +3762,7 @@ static void dwc3_gadget_disconnect_interrupt(struct dwc3 *dwc)
 
 	dwc3_disconnect_gadget(dwc);
 
+	pr_err("[Ray] %s\n", __func__);
 	dwc->gadget->speed = USB_SPEED_UNKNOWN;
 	dwc->setup_packet_pending = false;
 	usb_gadget_set_state(dwc->gadget, USB_STATE_NOTATTACHED);
@@ -3809,6 +3824,7 @@ static void dwc3_gadget_reset_interrupt(struct dwc3 *dwc)
 	dwc3_stop_active_transfers(dwc);
 	dwc->connected = true;
 
+	pr_err("[Ray] %s\n", __func__);
 	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
 	reg &= ~DWC3_DCTL_TSTCTRL_MASK;
 	dwc3_gadget_dctl_write_safe(dwc, reg);
@@ -3838,6 +3854,7 @@ static void dwc3_gadget_conndone_interrupt(struct dwc3 *dwc)
 
 	dwc->gadget->ssp_rate = USB_SSP_GEN_UNKNOWN;
 
+	pr_err("[Ray] %s\n", __func__);
 	/*
 	 * RAMClkSel is reset to 0 after USB reset, so it must be reprogrammed
 	 * each time on Connect Done.
@@ -4437,6 +4454,7 @@ int dwc3_gadget_init(struct dwc3 *dwc)
 	else
 		dwc3_gadget_set_speed(dwc->gadget, dwc->maximum_speed);
 
+	pr_err("[Ray] %s\n", __func__);
 	return 0;
 
 err5:
@@ -4481,6 +4499,7 @@ int dwc3_gadget_suspend(struct dwc3 *dwc)
 	if (!dwc->gadget_driver)
 		return 0;
 
+	pr_err("[Ray] %s\n", __func__);
 	dwc3_gadget_run_stop(dwc, false, false);
 	dwc3_disconnect_gadget(dwc);
 	__dwc3_gadget_stop(dwc);
@@ -4496,6 +4515,7 @@ int dwc3_gadget_resume(struct dwc3 *dwc)
 	if (!dwc->gadget_driver || !vdwc->softconnect)
 		return 0;
 
+	pr_err("[Ray] %s\n", __func__);
 	ret = __dwc3_gadget_start(dwc);
 	if (ret < 0)
 		goto err0;
