@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2bf36dd_e6671177",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3827,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-07T17:26:28Z",
+      "side": 0,
+      "message": "This condition is modified in Android kernels compared to the upstream, so I\u0027m worried that this change in behavior would affect other partners. Could you please add a vendor hook which by default would use the existing behavior and would switch to this new one only when vendor requests it? Like this:\n\n```\nif (!page) {\n\tif (alloc_flags \u0026 ALLOC_CMA) {\n\t\tbool use_cma_first_check \u003d false;\n\t\tbool try_cma;\n\n\t\ttrace_android_vh_use_cma_first_check(\u0026use_cma_first_check);\n\t\ttry_cma \u003d use_cma_first_check ?\n\t\t\tuse_cma_first(zone, order, alloc_flags) :\n\t\t\tmigratetype \u003d\u003d MIGRATE_MOVABLE;\n\t\tif (try_cma)\n\t\t\tpage \u003d __rmqueue_cma(zone, order, migratetype,\n\t\t\t\t\t     alloc_flags);\n\t}\n\tif (!page)\n\t\tpage \u003d __rmqueue(zone, order, migratetype,\n\t\t\t\t alloc_flags);\n}\n...\n```",
+      "range": {
+        "startLine": 3827,
+        "startChar": 3,
+        "endLine": 3827,
+        "endChar": 65
+      },
+      "revId": "b805b2f70564984dae11084a994405cda84a2747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

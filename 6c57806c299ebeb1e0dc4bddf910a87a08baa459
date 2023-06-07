@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "389c4042_06bdcdf5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-07T17:26:28Z",
+      "side": 1,
+      "message": "The lengths of the lines seem to differ from what\u0027s in mm-unstable. When backporting please use the patch from maintainer\u0027s tree as the source and please fix the formatting.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "6c57806c299ebeb1e0dc4bddf910a87a08baa459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b44cee_8ca0dee6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-07T17:26:28Z",
+      "side": 1,
+      "message": "According to https://lore.kernel.org/all/20230512034122.CF7A1C433EF@smtp.kernel.org/ the patch is in https://lore.kernel.org/all/20230512034122.CF7A1C433EF@smtp.kernel.org mm-unstable branch. That\u0027s what this should indicate:\n```\ncherry picked from commit 82c2bc35f3dca0bb47b21866922cfd3e596c0975\ngit://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-unstable)\n```",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 135
+      },
+      "revId": "6c57806c299ebeb1e0dc4bddf910a87a08baa459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
