@@ -212,6 +212,24 @@
       "parentUuid": "74e763a5_09ae0eb0",
       "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1faaf20_c4a53aed",
+        "filename": "drivers/usb/host/xhci-plat.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1101616
+      },
+      "writtenOn": "2023-06-07T17:32:59Z",
+      "side": 1,
+      "message": "I think what Todd suggests is doing this in L345-347:\n```\n\tbusnum \u003d of_alias_get_id(sysdev-\u003eof_node, \"usb\");\n\tif (busnum \u003e 0) {\n\t\thcd-\u003eself.busnum \u003d busnum;\n\t\txhci-\u003eshared_hcd-\u003eself.busnum \u003d busnum + 1;\n\t}\n```\n\n...Will it cause problems?",
+      "parentUuid": "e41480b9_bc6ec1f0",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
