@@ -77,7 +77,6 @@ impl InnerThread {
         ret
     }
 
-    #[allow(dead_code)]
     fn push_work(&mut self, work: Arc<dyn DeliverToRead>) -> bool {
         let success = self.work_list.push_back(work);
         self.process_work_list |= success;
@@ -86,7 +85,6 @@ impl InnerThread {
 
     /// Used to push work items that do not need to be processed immediately and can wait until the
     /// thread gets another work item.
-    #[allow(dead_code)]
     fn push_work_deferred(&mut self, work: Arc<dyn DeliverToRead>) {
         self.work_list.push_back(work);
     }
@@ -246,7 +244,6 @@ impl Thread {
     ///
     /// Returns whether the item was successfully pushed. This can only fail if the work item is
     /// already in a work list.
-    #[allow(dead_code)]
     pub(crate) fn push_work(&self, work: Arc<dyn DeliverToRead>) -> bool {
         let sync = work.should_sync_wakeup();
         {
@@ -264,6 +261,10 @@ impl Thread {
         true
     }
 
+    pub(crate) fn push_work_deferred(&self, work: Arc<dyn DeliverToRead>) {
+        self.inner.lock().push_work_deferred(work);
+    }
+
     fn write(self: &Arc<Self>, req: &mut BinderWriteRead) -> Result {
         let write_start = req.write_buffer.wrapping_add(req.write_consumed);
         let write_len = req.write_size - req.write_consumed;
@@ -273,6 +274,12 @@ impl Thread {
             let before = reader.len();
             let cmd = reader.read::<u32>()?;
             match cmd {
+                BC_INCREFS => self.process.update_ref(reader.read()?, true, false)?,
+                BC_ACQUIRE => self.process.update_ref(reader.read()?, true, true)?,
+                BC_RELEASE => self.process.update_ref(reader.read()?, false, true)?,
+                BC_DECREFS => self.process.update_ref(reader.read()?, false, false)?,
+                BC_INCREFS_DONE => self.process.inc_ref_done(&mut reader, false)?,
+                BC_ACQUIRE_DONE => self.process.inc_ref_done(&mut reader, true)?,
                 BC_REGISTER_LOOPER => {
                     let valid = self.process.register_thread();
                     self.inner.lock().looper_register(valid);

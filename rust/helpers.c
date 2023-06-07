@@ -28,6 +28,7 @@
 #include <linux/mutex.h>
 #include <linux/miscdevice.h>
 #include <linux/fs.h>
+#include <linux/security.h>
 #include <linux/spinlock.h>
 #include <linux/sched/signal.h>
 #include <linux/wait.h>
@@ -262,6 +263,18 @@ bool rust_helper_uid_eq(kuid_t left, kuid_t right)
 	return uid_eq(left, right);
 }
 EXPORT_SYMBOL_GPL(rust_helper_uid_eq);
+
+kuid_t rust_helper_current_euid(void)
+{
+	return current_euid();
+}
+EXPORT_SYMBOL_GPL(rust_helper_current_euid);
+
+int rust_helper_security_binder_set_context_mgr(const struct cred *mgr)
+{
+	return security_binder_set_context_mgr(mgr);
+}
+EXPORT_SYMBOL_GPL(rust_helper_security_binder_set_context_mgr);
 
 /*
  * We use `bindgen`'s `--size_t-is-usize` option to bind the C `size_t` type

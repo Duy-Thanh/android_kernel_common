@@ -6,9 +6,9 @@
 
 use crate::{bindings, types::Opaque};
 use core::{
+    cmp::{Eq, PartialEq},
     marker::PhantomData,
     ops::Deref,
-    cmp::{Eq, PartialEq},
     ptr,
 };
 
@@ -198,6 +198,14 @@ unsafe impl crate::types::AlwaysRefCounted for Task {
 }
 
 impl Kuid {
+    /// Get the current euid.
+    pub fn current_euid() -> Self {
+        // SAFETY: Just an FFI call.
+        Self {
+            kuid: unsafe { bindings::current_euid() },
+        }
+    }
+
     /// Converts this kernel UID into a UID that userspace understands. Uses the namespace of the
     /// current task.
     pub fn into_uid_in_current_ns(self) -> bindings::uid_t {
