@@ -242,6 +242,15 @@
   cdev_device_add
   cdev_device_del
   cdev_init
+  __cfg80211_alloc_event_skb
+  __cfg80211_alloc_reply_skb
+  cfg80211_external_auth_request
+  cfg80211_gtk_rekey_notify
+  cfg80211_michael_mic_failure
+  cfg80211_rx_unprot_mlme_mgmt
+  __cfg80211_send_event_skb
+  cfg80211_update_owe_info_event
+  cfg80211_vendor_cmd_reply
   cgroup_path_ns
   cgroup_taskset_first
   cgroup_taskset_next
@@ -1232,10 +1241,10 @@
   gh_rm_notifier_unregister
   gh_rm_register_platform_ops
   gh_rm_unregister_platform_ops
+  gic_nonsecure_priorities
   gic_v3_cpu_init
   gic_v3_dist_init
   gic_v3_dist_wait_for_rwp
-  gic_nonsecure_priorities
   gov_attr_set_init
   gov_attr_set_put
   governor_sysfs_ops
@@ -3350,8 +3359,8 @@
   __traceiter_android_vh_ftrace_oops_enter
   __traceiter_android_vh_ftrace_oops_exit
   __traceiter_android_vh_ftrace_size_check
-  __traceiter_android_vh_ignore_dmabuf_vmap_bounds
   __traceiter_android_vh_gic_v3_suspend
+  __traceiter_android_vh_ignore_dmabuf_vmap_bounds
   __traceiter_android_vh_ipi_stop
   __traceiter_android_vh_jiffies_update
   __traceiter_android_vh_kswapd_per_node
@@ -3486,8 +3495,8 @@
   __tracepoint_android_vh_ftrace_oops_enter
   __tracepoint_android_vh_ftrace_oops_exit
   __tracepoint_android_vh_ftrace_size_check
-  __tracepoint_android_vh_ignore_dmabuf_vmap_bounds
   __tracepoint_android_vh_gic_v3_suspend
+  __tracepoint_android_vh_ignore_dmabuf_vmap_bounds
   __tracepoint_android_vh_ipi_stop
   __tracepoint_android_vh_jiffies_update
   __tracepoint_android_vh_kswapd_per_node
@@ -3949,6 +3958,7 @@
   wakeup_source_unregister
   __wake_up_sync_key
   __warn_printk
+  wiphy_register
   wireless_nlevent_flush
   wireless_send_event
   woken_wake_function
