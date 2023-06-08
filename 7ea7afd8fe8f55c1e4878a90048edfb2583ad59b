@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2abc372_d843604a",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-06-08T16:16:42Z",
+      "side": 1,
+      "message": "This is duplicating the checks in hyp_ffa_init() -- can we stick \u0027em in a header?",
+      "range": {
+        "startLine": 604,
+        "startChar": 30,
+        "endLine": 604,
+        "endChar": 51
+      },
+      "revId": "7ea7afd8fe8f55c1e4878a90048edfb2583ad59b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
