@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1c35d29_6134cfeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-06-08T13:43:02Z",
+      "side": 1,
+      "message": "-1 because reverting a CL that modifies code that is not triggered on Android devices (CPU unplugging) cannot solve a BFQ crash.",
+      "revId": "35c684232d93056cca8271e7df816afa5bd52868",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
