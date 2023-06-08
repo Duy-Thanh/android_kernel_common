@@ -123,6 +123,24 @@
       "parentUuid": "38497aa7_0e97f714",
       "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5ef4bba_17cb637e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-06-08T12:07:33Z",
+      "side": 1,
+      "message": "Thanks for restoring this patch.\nI think no need add it for android14-5.15, we don\u0027t use that branch.",
+      "parentUuid": "41f3020e_507383a2",
+      "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
