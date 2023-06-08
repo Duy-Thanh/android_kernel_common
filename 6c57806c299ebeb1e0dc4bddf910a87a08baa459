@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c712d676_31981938",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2023-06-08T05:57:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "389c4042_06bdcdf5",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "6c57806c299ebeb1e0dc4bddf910a87a08baa459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57b44cee_8ca0dee6",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-07T17:26:28Z",
       "side": 1,
       "message": "According to https://lore.kernel.org/all/20230512034122.CF7A1C433EF@smtp.kernel.org/ the patch is in https://lore.kernel.org/all/20230512034122.CF7A1C433EF@smtp.kernel.org mm-unstable branch. That\u0027s what this should indicate:\n```\ncherry picked from commit 82c2bc35f3dca0bb47b21866922cfd3e596c0975\ngit://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-unstable)\n```",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 135
+      },
+      "revId": "6c57806c299ebeb1e0dc4bddf910a87a08baa459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b783b75_12020b1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2023-06-08T05:57:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "57b44cee_8ca0dee6",
       "range": {
         "startLine": 35,
         "startChar": 0,
