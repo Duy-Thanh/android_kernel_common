@@ -245,13 +245,25 @@ blk_status_t __blk_crypto_rq_get_keyslot(struct request *rq)
 }
 
 void __blk_crypto_rq_put_keyslot(struct request *rq)
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
 {
 	blk_crypto_put_keyslot(rq->crypt_keyslot);
 	rq->crypt_keyslot = NULL;
 }
 
 void __blk_crypto_free_request(struct request *rq)
+=======
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 {
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
+=======
+	blk_ksm_put_slot(rq->crypt_keyslot);
+	rq->crypt_keyslot = NULL;
+}
+
+void __blk_crypto_free_request(struct request *rq)
+{
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 	/* The keyslot, if one was needed, should have been released earlier. */
 	if (WARN_ON_ONCE(rq->crypt_keyslot))
 		__blk_crypto_rq_put_keyslot(rq);
@@ -435,28 +447,57 @@ int blk_crypto_start_using_key(struct block_device *bdev,
 EXPORT_SYMBOL_GPL(blk_crypto_start_using_key);
 
 /**
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
  * blk_crypto_evict_key() - Evict a blk_crypto_key from a block_device
  * @bdev: a block_device on which I/O using the key may have been done
+=======
+ * blk_crypto_evict_key() - Evict a blk_crypto_key from a request_queue
+ * @q: a request_queue on which I/O using the key may have been done
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
  * @key: the key to evict
  *
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
  * For a given block_device, this function removes the given blk_crypto_key from
  * the keyslot management structures and evicts it from any underlying hardware
  * keyslot(s) or blk-crypto-fallback keyslot it may have been programmed into.
+=======
+ * For a given request_queue, this function removes the given blk_crypto_key
+ * from the keyslot management structures and evicts it from any underlying
+ * hardware keyslot(s) or blk-crypto-fallback keyslot it may have been
+ * programmed into.
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
  *
  * Upper layers must call this before freeing the blk_crypto_key.  It must be
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
  * called for every block_device the key may have been used on.  The key must no
  * longer be in use by any I/O when this function is called.
+=======
+ * called for every request_queue the key may have been used on.  The key must
+ * no longer be in use by any I/O when this function is called.
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
  *
  * Context: May sleep.
  */
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
 void blk_crypto_evict_key(struct block_device *bdev,
+=======
+void blk_crypto_evict_key(struct request_queue *q,
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 			  const struct blk_crypto_key *key)
 {
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
 	struct request_queue *q = bdev_get_queue(bdev);
+=======
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 	int err;
 
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
 	if (blk_crypto_config_supported_natively(bdev, &key->crypto_cfg))
 		err = __blk_crypto_evict_key(q->crypto_profile, key);
+=======
+	if (blk_ksm_crypto_cfg_supported(q->ksm, &key->crypto_cfg))
+		err = blk_ksm_evict_key(q->ksm, key);
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 	else
 		err = blk_crypto_fallback_evict_key(key);
 	/*
@@ -468,6 +509,10 @@ void blk_crypto_evict_key(struct block_device *bdev,
 	 * callers can do to handle errors, so just log them and return void.
 	 */
 	if (err)
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
 		pr_warn_ratelimited("%pg: error %d evicting key\n", bdev, err);
+=======
+		pr_warn_ratelimited("error %d evicting key\n", err);
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 }
 EXPORT_SYMBOL_GPL(blk_crypto_evict_key);

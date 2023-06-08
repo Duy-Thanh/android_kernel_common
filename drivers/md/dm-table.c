@@ -1196,7 +1196,11 @@ static int dm_keyslot_evict_callback(struct dm_target *ti, struct dm_dev *dev,
 {
 	const struct blk_crypto_key *key = data;
 
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
 	blk_crypto_evict_key(dev->bdev, key);
+=======
+	blk_crypto_evict_key(bdev_get_queue(dev->bdev), key);
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 	return 0;
 }
 
@@ -1207,8 +1211,15 @@ static int dm_keyslot_evict_callback(struct dm_target *ti, struct dm_dev *dev,
 static int dm_keyslot_evict(struct blk_crypto_profile *profile,
 			    const struct blk_crypto_key *key, unsigned int slot)
 {
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
 	struct mapped_device *md =
 		container_of(profile, struct dm_crypto_profile, profile)->md;
+=======
+	struct dm_keyslot_manager *dksm = container_of(ksm,
+						       struct dm_keyslot_manager,
+						       ksm);
+	struct mapped_device *md = dksm->md;
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 	struct dm_table *t;
 	int srcu_idx;
 	int i;
@@ -1223,6 +1234,7 @@ static int dm_keyslot_evict(struct blk_crypto_profile *profile,
 			continue;
 		ti->type->iterate_devices(ti, dm_keyslot_evict_callback,
 					  (void *)key);
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
 	}
 	dm_put_live_table(md, srcu_idx);
 	return 0;
@@ -1285,9 +1297,11 @@ static int dm_derive_sw_secret(struct blk_crypto_profile *profile,
 					  &args);
 		if (!args.err)
 			break;
+=======
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 	}
 	dm_put_live_table(md, srcu_idx);
-	return args.err;
+	return 0;
 }
 
 static int

@@ -71,6 +71,7 @@ static inline bool blk_crypto_rq_has_keyslot(struct request *rq)
 	return rq->crypt_keyslot;
 }
 
+<<<<<<< HEAD   (547398 ANDROID: add more gki_module headers to .gitignore file)
 blk_status_t blk_crypto_get_keyslot(struct blk_crypto_profile *profile,
 				    const struct blk_crypto_key *key,
 				    struct blk_crypto_keyslot **slot_ptr);
@@ -83,6 +84,8 @@ int __blk_crypto_evict_key(struct blk_crypto_profile *profile,
 bool __blk_crypto_cfg_supported(struct blk_crypto_profile *profile,
 				const struct blk_crypto_config *cfg);
 
+=======
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 #else /* CONFIG_BLK_INLINE_ENCRYPTION */
 
 static inline int blk_crypto_sysfs_register(struct request_queue *q)
