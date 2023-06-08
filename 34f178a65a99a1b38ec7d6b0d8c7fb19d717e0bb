@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b646fd9a_88435467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-06-08T13:41:38Z",
+      "side": 1,
+      "message": "-2 because the CL being reverted is unrelated to the issue that should be resolved, namely a BFQ crash.",
+      "revId": "34f178a65a99a1b38ec7d6b0d8c7fb19d717e0bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
