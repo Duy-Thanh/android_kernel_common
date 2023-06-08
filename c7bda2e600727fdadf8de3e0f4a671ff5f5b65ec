@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64447e7a_84cad27d",
+        "filename": "kernel/exit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 2012155
+      },
+      "writtenOn": "2023-06-08T15:35:48Z",
+      "side": 1,
+      "message": "This tracepoint is not export and can not be used in kernel modules. that is why we add another trace point in do_exit function.",
+      "parentUuid": "d8a13220_29ff6d3b",
+      "range": {
+        "startLine": 866,
+        "startChar": 1,
+        "endLine": 866,
+        "endChar": 25
+      },
+      "revId": "c7bda2e600727fdadf8de3e0f4a671ff5f5b65ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2245d672_438eda81",
         "filename": "kernel/fork.c",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-08T13:07:05Z",
       "side": 1,
       "message": "use the existing trace point here instead please.",
+      "range": {
+        "startLine": 2775,
+        "startChar": 1,
+        "endLine": 2775,
+        "endChar": 25
+      },
+      "revId": "c7bda2e600727fdadf8de3e0f4a671ff5f5b65ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50613bfa_11094ec3",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2775,
+      "author": {
+        "id": 2012155
+      },
+      "writtenOn": "2023-06-08T15:35:48Z",
+      "side": 1,
+      "message": "same reason as do_exit case.",
+      "parentUuid": "2245d672_438eda81",
       "range": {
         "startLine": 2775,
         "startChar": 1,
