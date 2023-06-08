@@ -16,6 +16,29 @@
       "message": "Could you help to review my symbolist patch? Thanks",
       "revId": "73d09c7e3e7b9b25fadf0a4e4ea8e1f92cad3f78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589da9d6_2f8e0e8e",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1354,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-08T16:43:01Z",
+      "side": 1,
+      "message": "no driver should be needing this, what code require it?  Same for the other memory page symbols, why are they needed?",
+      "range": {
+        "startLine": 1354,
+        "startChar": 2,
+        "endLine": 1354,
+        "endChar": 20
+      },
+      "revId": "73d09c7e3e7b9b25fadf0a4e4ea8e1f92cad3f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
