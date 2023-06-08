@@ -170,6 +170,9 @@ DECLARE_HOOK(android_vh_madvise_cold_or_pageout,
 DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused), 1);
+DECLARE_HOOK(android_vh_use_cma_first_check,
+	TP_PROTO(bool *use_cma_first_check),
+	TP_ARGS(use_cma_first_check));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
