@@ -291123,6 +291123,11 @@ function {
   parameter_id: 0x310ec01d
 }
 function {
+  id: 0x2864f998
+  return_type_id: 0x33756485
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x288802b1
   return_type_id: 0x1457cd38
   parameter_id: 0x3e10b518
@@ -306497,6 +306502,17 @@ function {
   parameter_id: 0x3370a453
   parameter_id: 0x4585663f
   parameter_id: 0x33756485
+}
+function {
+  id: 0x9a3f301e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+  parameter_id: 0x6720d32f
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x064d6086
 }
 function {
   id: 0x9a3f491c
@@ -324092,6 +324108,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_do_undefinstr"
 }
 elf_symbol {
+  id: 0x123e41ea
+  name: "__traceiter_android_rvh_effective_cpu_util"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa3184ab3
+  type_id: 0x9a3f301e
+  full_name: "__traceiter_android_rvh_effective_cpu_util"
+}
+elf_symbol {
   id: 0x6682daab
   name: "__traceiter_android_rvh_enqueue_entity"
   is_defined: true
@@ -327177,6 +327202,15 @@ elf_symbol {
   crc: 0x048a1e8c
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_do_undefinstr"
+}
+elf_symbol {
+  id: 0x82c6c454
+  name: "__tracepoint_android_rvh_effective_cpu_util"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xed9d580e
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_effective_cpu_util"
 }
 elf_symbol {
   id: 0xf9b36d15
@@ -332672,6 +332706,15 @@ elf_symbol {
   crc: 0xc0224ca1
   type_id: 0x104d4296
   full_name: "blkg_rwstat_recursive_sum"
+}
+elf_symbol {
+  id: 0x427cedc9
+  name: "blockdev_superblock"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xf9dfe5f1
+  type_id: 0x26ee682a
+  full_name: "blockdev_superblock"
 }
 elf_symbol {
   id: 0x11fbb9ce
@@ -372093,6 +372136,15 @@ elf_symbol {
   full_name: "thread_group_cputime_adjusted"
 }
 elf_symbol {
+  id: 0x1cf36c3c
+  name: "tick_nohz_get_idle_calls_cpu"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2943498b
+  type_id: 0x2864f998
+  full_name: "tick_nohz_get_idle_calls_cpu"
+}
+elf_symbol {
   id: 0x9fc8421c
   name: "tick_nohz_get_sleep_length"
   is_defined: true
@@ -378753,6 +378805,15 @@ elf_symbol {
   full_name: "vm_map_ram"
 }
 elf_symbol {
+  id: 0x5d5d315a
+  name: "vm_memory_committed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x26520970
+  type_id: 0x31accd53
+  full_name: "vm_memory_committed"
+}
+elf_symbol {
   id: 0xdc09fb10
   name: "vm_mmap"
   is_defined: true
@@ -380463,6 +380524,7 @@ interface {
   symbol_id: 0x611114e0
   symbol_id: 0x76eb11ee
   symbol_id: 0x1fb410b2
+  symbol_id: 0x123e41ea
   symbol_id: 0x6682daab
   symbol_id: 0x24dfaeb0
   symbol_id: 0xd5b05c65
@@ -380806,6 +380868,7 @@ interface {
   symbol_id: 0xcfcbb846
   symbol_id: 0x1d7748c4
   symbol_id: 0x7d9f4fa4
+  symbol_id: 0x82c6c454
   symbol_id: 0xf9b36d15
   symbol_id: 0xbade8646
   symbol_id: 0x395b2a73
@@ -381417,6 +381480,7 @@ interface {
   symbol_id: 0xabd39b51
   symbol_id: 0x6dfac71b
   symbol_id: 0xb0184730
+  symbol_id: 0x427cedc9
   symbol_id: 0x11fbb9ce
   symbol_id: 0xd4a0f991
   symbol_id: 0x864cb6b1
@@ -385796,6 +385860,7 @@ interface {
   symbol_id: 0x66782435
   symbol_id: 0x793a755b
   symbol_id: 0x68e98442
+  symbol_id: 0x1cf36c3c
   symbol_id: 0x9fc8421c
   symbol_id: 0xd79bc23e
   symbol_id: 0x2179a4e4
@@ -386536,6 +386601,7 @@ interface {
   symbol_id: 0x8899dfb4
   symbol_id: 0x1c065008
   symbol_id: 0xee1009c9
+  symbol_id: 0x5d5d315a
   symbol_id: 0xdc09fb10
   symbol_id: 0x5849ff8e
   symbol_id: 0xaf85c216
