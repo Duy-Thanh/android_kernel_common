@@ -141,6 +141,24 @@
       "parentUuid": "41f3020e_507383a2",
       "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df8da3fe_6bc64df4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-08T12:49:41Z",
+      "side": 1,
+      "message": "Great, this will go in at the next ABI break next week.",
+      "parentUuid": "a5ef4bba_17cb637e",
+      "revId": "5284b4e9ca861b49fe08d2df92bc10bcb450852f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
