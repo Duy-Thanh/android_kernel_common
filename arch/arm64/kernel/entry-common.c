@@ -848,6 +848,7 @@ asmlinkage void noinstr handle_bad_stack(struct pt_regs *regs)
 	unsigned long esr = read_sysreg(esr_el1);
 	unsigned long far = read_sysreg(far_el1);
 
+	trace_android_rvh_handle_bad_stack(regs, esr, far);
 	arm64_enter_nmi(regs);
 	panic_bad_stack(regs, esr, far);
 }
