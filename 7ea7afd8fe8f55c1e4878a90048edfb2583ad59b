@@ -22,6 +22,29 @@
       },
       "revId": "7ea7afd8fe8f55c1e4878a90048edfb2583ad59b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24d267dd_d09dd160",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-06-08T21:51:43Z",
+      "side": 1,
+      "message": "It occurs to me that having the trng call missing is probably fine if the CPU supports the RNDRRS instruction, so we may want to relax this check.",
+      "range": {
+        "startLine": 623,
+        "startChar": 6,
+        "endLine": 623,
+        "endChar": 26
+      },
+      "revId": "7ea7afd8fe8f55c1e4878a90048edfb2583ad59b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
