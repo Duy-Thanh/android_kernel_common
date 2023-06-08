@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "408546dc_9ee8db64",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1241955
+      },
+      "writtenOn": "2023-06-08T22:59:27Z",
+      "side": 1,
+      "message": "I don\u0027t think having ws_name global is going to be part of the final solution, so that might be distracting things a bit.\n\nDo you have any recommendations about how to manager buffer space for the constructed alternative names when the bulk of the implementation here is moved into the hook?  We can\u0027t just use a static buffer inside the hook and return a pointer to it (not without preventing concurrent execution of this code, which seems ill-advised).  But if the buffer is dynamically allocated inside the hook, we\u0027ll need to either:\n* release the allocated memory here in the main implementation after the wakeup_source_register() call, _or_\n* use a second hook to release the memory\n\nOr... I guess we could actually make the entire wakeup_source_register() call inside the hook and bypass the normal call entirely when the hook runs, which just occurred to me but might be the cleanest solution?\n\nBut I\u0027m probably overlooking a much better solution.  Is there a best practice for this kind of situation?",
+      "parentUuid": "edb045be_f9016c7e",
+      "range": {
+        "startLine": 1384,
+        "startChar": 45,
+        "endLine": 1384,
+        "endChar": 52
+      },
+      "revId": "28a8cef6247085a96c47da86fc501ba20c944de7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e9cd974_6ed71a03",
         "filename": "fs/eventpoll.c",
         "patchSetId": 7
