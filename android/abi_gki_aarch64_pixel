@@ -32,6 +32,8 @@
   __arch_copy_from_user
   __arch_copy_to_user
   arch_freq_scale
+  arch_sync_dma_for_cpu
+  arch_sync_dma_for_device
   arch_timer_read_counter
   argv_free
   argv_split
@@ -62,12 +64,14 @@
   __bitmap_andnot
   __bitmap_clear
   __bitmap_equal
+  bitmap_find_free_region
   bitmap_find_next_zero_area_off
   bitmap_from_arr32
   __bitmap_or
   bitmap_parse
   bitmap_parselist
   bitmap_print_to_pagebuf
+  bitmap_release_region
   __bitmap_set
   bitmap_to_arr32
   __bitmap_weight
@@ -486,6 +490,8 @@
   dma_buf_unmap_attachment
   dma_buf_vmap
   dma_buf_vunmap
+  dma_direct_map_sg
+  dma_direct_unmap_sg
   dmaengine_unmap_put
   dma_fence_add_callback
   dma_fence_context_alloc
@@ -1983,6 +1989,10 @@
   __sw_hweight32
   __sw_hweight64
   __sw_hweight8
+  swiotlb_force
+  swiotlb_map
+  swiotlb_sync_single_for_cpu
+  swiotlb_tbl_unmap_single
   sync_file_create
   sync_file_get_fence
   synchronize_irq
@@ -2070,6 +2080,7 @@
   __traceiter_android_rvh_arm64_serror_panic
   __traceiter_android_rvh_attach_entity_load_avg
   __traceiter_android_rvh_audio_usb_offload_disconnect
+  __traceiter_android_rvh_can_migrate_task
   __traceiter_android_rvh_cgroup_force_kthread_migration
   __traceiter_android_rvh_check_preempt_wakeup
   __traceiter_android_rvh_cpu_cgroup_online
@@ -2192,6 +2203,7 @@
   __tracepoint_android_rvh_arm64_serror_panic
   __tracepoint_android_rvh_attach_entity_load_avg
   __tracepoint_android_rvh_audio_usb_offload_disconnect
+  __tracepoint_android_rvh_can_migrate_task
   __tracepoint_android_rvh_cgroup_force_kthread_migration
   __tracepoint_android_rvh_check_preempt_wakeup
   __tracepoint_android_rvh_cpu_cgroup_online
