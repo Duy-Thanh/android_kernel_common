@@ -85,10 +85,15 @@ bool f2fs_available_free_memory(struct f2fs_sb_info *sbi, int type)
 						sizeof(struct ino_entry);
 		mem_size >>= PAGE_SHIFT;
 		res = mem_size < ((avail_ram * nm_i->ram_thresh / 100) >> 1);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	} else if (type == READ_EXTENT_CACHE || type == AGE_EXTENT_CACHE) {
 		enum extent_type etype = type == READ_EXTENT_CACHE ?
 						EX_READ : EX_BLOCK_AGE;
 		struct extent_tree_info *eti = &sbi->extent_tree[etype];
+=======
+	} else if (type == READ_EXTENT_CACHE) {
+		struct extent_tree_info *eti = &sbi->extent_tree[EX_READ];
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
 		mem_size = (atomic_read(&eti->total_ext_tree) *
 				sizeof(struct extent_tree) +

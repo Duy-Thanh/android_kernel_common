@@ -88,9 +88,12 @@ static void update_general_status(struct f2fs_sb_info *sbi)
 	si->hit_largest = atomic64_read(&sbi->read_hit_largest);
 	si->hit_total[EX_READ] += si->hit_largest;
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	/* block age extent_cache only */
 	si->allocated_data_blocks = atomic64_read(&sbi->allocated_data_blocks);
 
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	/* validation check of the segment numbers */
 	si->ndirty_node = get_pages(sbi, F2FS_DIRTY_NODES);
 	si->ndirty_dent = get_pages(sbi, F2FS_DIRTY_DENTS);
@@ -547,6 +550,7 @@ static int stat_show(struct seq_file *s, void *v)
 		seq_printf(s, "  - Inner Struct Count: tree: %d(%d), node: %d\n",
 				si->ext_tree[EX_READ], si->zombie_tree[EX_READ],
 				si->ext_node[EX_READ]);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 		seq_puts(s, "\nExtent Cache (Block Age):\n");
 		seq_printf(s, "  - Allocated Data Blocks: %llu\n",
 				si->allocated_data_blocks);
@@ -563,6 +567,8 @@ static int stat_show(struct seq_file *s, void *v)
 				si->ext_tree[EX_BLOCK_AGE],
 				si->zombie_tree[EX_BLOCK_AGE],
 				si->ext_node[EX_BLOCK_AGE]);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 		seq_puts(s, "\nBalancing F2FS Async:\n");
 		seq_printf(s, "  - DIO (R: %4d, W: %4d)\n",
 			   si->nr_dio_read, si->nr_dio_write);
@@ -633,8 +639,11 @@ static int stat_show(struct seq_file *s, void *v)
 				si->cache_mem >> 10);
 		seq_printf(s, "  - read extent cache: %llu KB\n",
 				si->ext_mem[EX_READ] >> 10);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 		seq_printf(s, "  - block age extent cache: %llu KB\n",
 				si->ext_mem[EX_BLOCK_AGE] >> 10);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 		seq_printf(s, "  - paged : %llu KB\n",
 				si->page_mem >> 10);
 	}

@@ -58,9 +58,12 @@ unsigned long f2fs_shrink_count(struct shrinker *shrink,
 
 		/* count read extent cache entries */
 		count += __count_extent_cache(sbi, EX_READ);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 
 		/* count block age extent cache entries */
 		count += __count_extent_cache(sbi, EX_BLOCK_AGE);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
 		/* count clean nat cache entries */
 		count += __count_nat_entries(sbi);
@@ -105,11 +108,16 @@ unsigned long f2fs_shrink_scan(struct shrinker *shrink,
 
 		sbi->shrinker_run_no = run_no;
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 		/* shrink extent cache entries */
 		freed += f2fs_shrink_age_extent_tree(sbi, nr >> 2);
 
 		/* shrink read extent cache entries */
 		freed += f2fs_shrink_read_extent_tree(sbi, nr >> 2);
+=======
+		/* shrink read extent cache entries */
+		freed += f2fs_shrink_read_extent_tree(sbi, nr >> 1);
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
 		/* shrink clean nat cache entries */
 		if (freed < nr)
@@ -140,8 +148,11 @@ void f2fs_join_shrinker(struct f2fs_sb_info *sbi)
 void f2fs_leave_shrinker(struct f2fs_sb_info *sbi)
 {
 	f2fs_shrink_read_extent_tree(sbi, __count_extent_cache(sbi, EX_READ));
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	f2fs_shrink_age_extent_tree(sbi,
 				__count_extent_cache(sbi, EX_BLOCK_AGE));
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
 	spin_lock(&f2fs_list_lock);
 	list_del_init(&sbi->s_list);

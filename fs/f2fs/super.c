@@ -2230,7 +2230,10 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
 	bool need_restart_flush = false, need_stop_flush = false;
 	bool need_restart_discard = false, need_stop_discard = false;
 	bool no_read_extent_cache = !test_opt(sbi, READ_EXTENT_CACHE);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	bool no_age_extent_cache = !test_opt(sbi, AGE_EXTENT_CACHE);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	bool enable_checkpoint = !test_opt(sbi, DISABLE_CHECKPOINT);
 	bool no_io_align = !F2FS_IO_ALIGNED(sbi);
 	bool no_atgc = !test_opt(sbi, ATGC);

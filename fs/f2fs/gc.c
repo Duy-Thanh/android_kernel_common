@@ -1175,6 +1175,10 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
 	struct address_space *mapping = inode->i_mapping;
 	struct dnode_of_data dn;
 	struct page *page;
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
+=======
+	struct extent_info ei = {0, };
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	struct f2fs_io_info fio = {
 		.sbi = sbi,
 		.ino = inode->i_ino,
@@ -1192,8 +1196,13 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
 	if (!page)
 		return -ENOMEM;
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	if (f2fs_lookup_read_extent_cache_block(inode, index,
 						&dn.data_blkaddr)) {
+=======
+	if (f2fs_lookup_read_extent_cache(inode, index, &ei)) {
+		dn.data_blkaddr = ei.blk + index - ei.fofs;
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 		if (unlikely(!f2fs_is_valid_blkaddr(sbi, dn.data_blkaddr,
 						DATA_GENERIC_ENHANCE_READ))) {
 			err = -EFSCORRUPTED;

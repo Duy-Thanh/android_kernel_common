@@ -20,6 +20,126 @@
 #include <trace/events/f2fs.h>
 
 bool sanity_check_extent_cache(struct inode *inode)
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
+=======
+{
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	struct f2fs_inode_info *fi = F2FS_I(inode);
+	struct extent_info *ei;
+
+	if (!fi->extent_tree[EX_READ])
+		return true;
+
+	ei = &fi->extent_tree[EX_READ]->largest;
+
+	if (ei->len &&
+		(!f2fs_is_valid_blkaddr(sbi, ei->blk,
+					DATA_GENERIC_ENHANCE) ||
+		!f2fs_is_valid_blkaddr(sbi, ei->blk + ei->len - 1,
+					DATA_GENERIC_ENHANCE))) {
+		set_sbi_flag(sbi, SBI_NEED_FSCK);
+		f2fs_warn(sbi, "%s: inode (ino=%lx) extent info [%u, %u, %u] is incorrect, run fsck to fix",
+			  __func__, inode->i_ino,
+			  ei->blk, ei->fofs, ei->len);
+		return false;
+	}
+	return true;
+}
+
+static void __set_extent_info(struct extent_info *ei,
+				unsigned int fofs, unsigned int len,
+				block_t blk, bool keep_clen,
+				enum extent_type type)
+{
+	ei->fofs = fofs;
+	ei->len = len;
+
+	if (type == EX_READ) {
+		ei->blk = blk;
+		if (keep_clen)
+			return;
+#ifdef CONFIG_F2FS_FS_COMPRESSION
+		ei->c_len = 0;
+#endif
+	}
+}
+
+static bool __may_read_extent_tree(struct inode *inode)
+{
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+
+	if (!test_opt(sbi, READ_EXTENT_CACHE))
+		return false;
+	if (is_inode_flag_set(inode, FI_NO_EXTENT))
+		return false;
+	if (is_inode_flag_set(inode, FI_COMPRESSED_FILE) &&
+			 !f2fs_sb_has_readonly(sbi))
+		return false;
+	return S_ISREG(inode->i_mode);
+}
+
+static bool __init_may_extent_tree(struct inode *inode, enum extent_type type)
+{
+	if (type == EX_READ)
+		return __may_read_extent_tree(inode);
+	return false;
+}
+
+static bool __may_extent_tree(struct inode *inode, enum extent_type type)
+{
+	/*
+	 * for recovered files during mount do not create extents
+	 * if shrinker is not registered.
+	 */
+	if (list_empty(&F2FS_I_SB(inode)->s_list))
+		return false;
+
+	return __init_may_extent_tree(inode, type);
+}
+
+static void __try_update_largest_extent(struct extent_tree *et,
+						struct extent_node *en)
+{
+	if (et->type != EX_READ)
+		return;
+	if (en->ei.len <= et->largest.len)
+		return;
+
+	et->largest = en->ei;
+	et->largest_updated = true;
+}
+
+static bool __is_extent_mergeable(struct extent_info *back,
+		struct extent_info *front, enum extent_type type)
+{
+	if (type == EX_READ) {
+#ifdef CONFIG_F2FS_FS_COMPRESSION
+		if (back->c_len && back->len != back->c_len)
+			return false;
+		if (front->c_len && front->len != front->c_len)
+			return false;
+#endif
+		return (back->fofs + back->len == front->fofs &&
+				back->blk + back->len == front->blk);
+	}
+	return false;
+}
+
+static bool __is_back_mergeable(struct extent_info *cur,
+		struct extent_info *back, enum extent_type type)
+{
+	return __is_extent_mergeable(back, cur, type);
+}
+
+static bool __is_front_mergeable(struct extent_info *cur,
+		struct extent_info *front, enum extent_type type)
+{
+	return __is_extent_mergeable(cur, front, type);
+}
+
+static struct rb_entry *__lookup_rb_tree_fast(struct rb_entry *cached_re,
+							unsigned int ofs)
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct f2fs_inode_info *fi = F2FS_I(inode);
@@ -193,6 +313,46 @@ static struct extent_node *__lookup_extent_node(struct rb_root_cached *root,
 	return NULL;
 }
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
+=======
+struct rb_entry *f2fs_lookup_rb_tree(struct rb_root_cached *root,
+				struct rb_entry *cached_re, unsigned int ofs)
+{
+	struct rb_entry *re;
+
+	re = __lookup_rb_tree_fast(cached_re, ofs);
+	if (!re)
+		return __lookup_rb_tree_slow(root, ofs);
+
+	return re;
+}
+
+struct rb_node **f2fs_lookup_rb_tree_for_insert(struct f2fs_sb_info *sbi,
+				struct rb_root_cached *root,
+				struct rb_node **parent,
+				unsigned int ofs, bool *leftmost)
+{
+	struct rb_node **p = &root->rb_root.rb_node;
+	struct rb_entry *re;
+
+	while (*p) {
+		*parent = *p;
+		re = rb_entry(*parent, struct rb_entry, rb_node);
+
+		if (ofs < re->ofs) {
+			p = &(*p)->rb_left;
+		} else if (ofs >= re->ofs + re->len) {
+			p = &(*p)->rb_right;
+			*leftmost = false;
+		} else {
+			f2fs_bug_on(sbi, 1);
+		}
+	}
+
+	return p;
+}
+
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 /*
  * lookup rb entry in position of @fofs in rb-tree,
  * if hit, return the entry, otherwise, return NULL
@@ -270,7 +430,41 @@ lookup_neighbors:
 		*next_entry = rb_entry_safe(tmp_node,
 					struct extent_node, rb_node);
 	}
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	return en;
+=======
+	return re;
+}
+
+bool f2fs_check_rb_tree_consistence(struct f2fs_sb_info *sbi,
+				struct rb_root_cached *root)
+{
+#ifdef CONFIG_F2FS_CHECK_FS
+	struct rb_node *cur = rb_first_cached(root), *next;
+	struct rb_entry *cur_re, *next_re;
+
+	if (!cur)
+		return true;
+
+	while (cur) {
+		next = rb_next(cur);
+		if (!next)
+			return true;
+
+		cur_re = rb_entry(cur, struct rb_entry, rb_node);
+		next_re = rb_entry(next, struct rb_entry, rb_node);
+
+		if (cur_re->ofs + cur_re->len > next_re->ofs) {
+			f2fs_info(sbi, "inconsistent rbtree, cur(%u, %u) next(%u, %u)",
+				  cur_re->ofs, cur_re->len,
+				  next_re->ofs, next_re->len);
+			return false;
+		}
+		cur = next;
+	}
+#endif
+	return true;
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 }
 
 static struct kmem_cache *extent_tree_slab;
@@ -442,6 +636,7 @@ out:
 		set_inode_flag(inode, FI_NO_EXTENT);
 }
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 void f2fs_init_age_extent_tree(struct inode *inode)
 {
 	if (!__init_may_extent_tree(inode, EX_BLOCK_AGE))
@@ -458,6 +653,13 @@ void f2fs_init_extent_tree(struct inode *inode)
 	/* initialize block age cache */
 	if (__init_may_extent_tree(inode, EX_BLOCK_AGE))
 		__grab_extent_tree(inode, EX_BLOCK_AGE);
+=======
+void f2fs_init_extent_tree(struct inode *inode)
+{
+	/* initialize read cache */
+	if (__init_may_extent_tree(inode, EX_READ))
+		__grab_extent_tree(inode, EX_READ);
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 }
 
 static bool __lookup_extent_tree(struct inode *inode, pgoff_t pgofs,
@@ -508,8 +710,11 @@ out:
 
 	if (type == EX_READ)
 		trace_f2fs_lookup_read_extent_tree_end(inode, pgofs, ei);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	else if (type == EX_BLOCK_AGE)
 		trace_f2fs_lookup_age_extent_tree_end(inode, pgofs, ei);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	return ret;
 }
 
@@ -559,7 +764,11 @@ static struct extent_node *__insert_extent_tree(struct f2fs_sb_info *sbi,
 				bool leftmost)
 {
 	struct extent_tree_info *eti = &sbi->extent_tree[et->type];
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	struct rb_node **p = &et->root.rb_root.rb_node;
+=======
+	struct rb_node **p;
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	struct rb_node *parent = NULL;
 	struct extent_node *en = NULL;
 
@@ -621,10 +830,13 @@ static void __update_extent_tree_range(struct inode *inode,
 	if (type == EX_READ)
 		trace_f2fs_update_read_extent_tree_range(inode, fofs, len,
 						tei->blk, 0);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	else if (type == EX_BLOCK_AGE)
 		trace_f2fs_update_age_extent_tree_range(inode, fofs, len,
 						tei->age, tei->last_blocks);
 
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	write_lock(&et->lock);
 
 	if (type == EX_READ) {
@@ -676,7 +888,10 @@ static void __update_extent_tree_range(struct inode *inode,
 				__set_extent_info(&ei,
 					end, org_end - end,
 					end - dei.fofs + dei.blk, false,
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 					dei.age, dei.last_blocks,
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 					type);
 				en1 = __insert_extent_tree(sbi, et, &ei,
 							NULL, NULL, true);
@@ -685,7 +900,10 @@ static void __update_extent_tree_range(struct inode *inode,
 				__set_extent_info(&en->ei,
 					end, en->ei.len - (end - dei.fofs),
 					en->ei.blk + (end - dei.fofs), true,
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 					dei.age, dei.last_blocks,
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 					type);
 				next_en = en;
 			}
@@ -716,15 +934,25 @@ static void __update_extent_tree_range(struct inode *inode,
 		en = next_en;
 	}
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	if (type == EX_BLOCK_AGE)
 		goto update_age_extent_cache;
+=======
+	/* 3. update extent in read extent cache */
+	BUG_ON(type != EX_READ);
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	/* 3. update extent in read extent cache */
 	BUG_ON(type != EX_READ);
 
 	if (tei->blk) {
 		__set_extent_info(&ei, fofs, len, tei->blk, false,
 				  0, 0, EX_READ);
+=======
+	if (tei->blk) {
+		__set_extent_info(&ei, fofs, len, tei->blk, false, EX_READ);
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 		if (!__try_merge_extent_node(sbi, et, &ei, prev_en, next_en))
 			__insert_extent_tree(sbi, et, &ei,
 					insert_p, insert_parent, leftmost);
@@ -793,7 +1021,11 @@ void f2fs_update_read_extent_tree_range_compressed(struct inode *inode,
 	if (en)
 		goto unlock_out;
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	__set_extent_info(&ei, fofs, llen, blkaddr, true, 0, 0, EX_READ);
+=======
+	__set_extent_info(&ei, fofs, llen, blkaddr, true, EX_READ);
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	ei.c_len = c_len;
 
 	if (!__try_merge_extent_node(sbi, et, &ei, prev_en, next_en))
@@ -804,10 +1036,15 @@ unlock_out:
 }
 #endif
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 static unsigned long long __calculate_block_age(struct f2fs_sb_info *sbi,
 						unsigned long long new,
 						unsigned long long old)
+=======
+static void __update_extent_cache(struct dnode_of_data *dn, enum extent_type type)
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 {
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	unsigned int rem_old, rem_new;
 	unsigned long long res;
 	unsigned int weight = sbi->last_age_weight;
@@ -900,6 +1137,22 @@ static void __update_extent_cache(struct dnode_of_data *dn, enum extent_type typ
 	} else if (type == EX_BLOCK_AGE) {
 		if (__get_new_block_age(dn->inode, &ei, dn->data_blkaddr))
 			return;
+=======
+	struct extent_info ei;
+
+	if (!__may_extent_tree(dn->inode, type))
+		return;
+
+	ei.fofs = f2fs_start_bidx_of_node(ofs_of_node(dn->node_page), dn->inode) +
+								dn->ofs_in_node;
+	ei.len = 1;
+
+	if (type == EX_READ) {
+		if (dn->data_blkaddr == NEW_ADDR)
+			ei.blk = NULL_ADDR;
+		else
+			ei.blk = dn->data_blkaddr;
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	}
 	__update_extent_tree_range(dn->inode, &ei, type);
 }
@@ -989,6 +1242,7 @@ bool f2fs_lookup_read_extent_cache(struct inode *inode, pgoff_t pgofs,
 	return __lookup_extent_tree(inode, pgofs, ei, EX_READ);
 }
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 bool f2fs_lookup_read_extent_cache_block(struct inode *inode, pgoff_t index,
 				block_t *blkaddr)
 {
@@ -1063,6 +1317,34 @@ unsigned int f2fs_shrink_age_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink
 		return 0;
 
 	return __shrink_extent_tree(sbi, nr_shrink, EX_BLOCK_AGE);
+=======
+void f2fs_update_read_extent_cache(struct dnode_of_data *dn)
+{
+	return __update_extent_cache(dn, EX_READ);
+}
+
+void f2fs_update_read_extent_cache_range(struct dnode_of_data *dn,
+				pgoff_t fofs, block_t blkaddr, unsigned int len)
+{
+	struct extent_info ei = {
+		.fofs = fofs,
+		.len = len,
+		.blk = blkaddr,
+	};
+
+	if (!__may_extent_tree(dn->inode, EX_READ))
+		return;
+
+	__update_extent_tree_range(dn->inode, &ei, EX_READ);
+}
+
+unsigned int f2fs_shrink_read_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink)
+{
+	if (!test_opt(sbi, READ_EXTENT_CACHE))
+		return 0;
+
+	return __shrink_extent_tree(sbi, nr_shrink, EX_READ);
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 }
 
 static unsigned int __destroy_extent_node(struct inode *inode,
@@ -1085,7 +1367,10 @@ static unsigned int __destroy_extent_node(struct inode *inode,
 void f2fs_destroy_extent_node(struct inode *inode)
 {
 	__destroy_extent_node(inode, EX_READ);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	__destroy_extent_node(inode, EX_BLOCK_AGE);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 }
 
 static void __drop_extent_tree(struct inode *inode, enum extent_type type)
@@ -1114,7 +1399,10 @@ static void __drop_extent_tree(struct inode *inode, enum extent_type type)
 void f2fs_drop_extent_tree(struct inode *inode)
 {
 	__drop_extent_tree(inode, EX_READ);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	__drop_extent_tree(inode, EX_BLOCK_AGE);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 }
 
 static void __destroy_extent_tree(struct inode *inode, enum extent_type type)
@@ -1155,7 +1443,10 @@ static void __destroy_extent_tree(struct inode *inode, enum extent_type type)
 void f2fs_destroy_extent_tree(struct inode *inode)
 {
 	__destroy_extent_tree(inode, EX_READ);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	__destroy_extent_tree(inode, EX_BLOCK_AGE);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 }
 
 static void __init_extent_tree_info(struct extent_tree_info *eti)
@@ -1173,6 +1464,7 @@ static void __init_extent_tree_info(struct extent_tree_info *eti)
 void f2fs_init_extent_cache_info(struct f2fs_sb_info *sbi)
 {
 	__init_extent_tree_info(&sbi->extent_tree[EX_READ]);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	__init_extent_tree_info(&sbi->extent_tree[EX_BLOCK_AGE]);
 
 	/* initialize for block age extents */
@@ -1180,6 +1472,8 @@ void f2fs_init_extent_cache_info(struct f2fs_sb_info *sbi)
 	sbi->hot_data_age_threshold = DEF_HOT_DATA_AGE_THRESHOLD;
 	sbi->warm_data_age_threshold = DEF_WARM_DATA_AGE_THRESHOLD;
 	sbi->last_age_weight = LAST_AGE_WEIGHT;
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 }
 
 int __init f2fs_create_extent_cache(void)

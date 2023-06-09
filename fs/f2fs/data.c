@@ -1219,6 +1219,22 @@ int f2fs_reserve_block(struct dnode_of_data *dn, pgoff_t index)
 	return err;
 }
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
+=======
+int f2fs_get_block(struct dnode_of_data *dn, pgoff_t index)
+{
+	struct extent_info ei = {0, };
+	struct inode *inode = dn->inode;
+
+	if (f2fs_lookup_read_extent_cache(inode, index, &ei)) {
+		dn->data_blkaddr = ei.blk + index - ei.fofs;
+		return 0;
+	}
+
+	return f2fs_reserve_block(dn, index);
+}
+
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
 				     blk_opf_t op_flags, bool for_write,
 				     pgoff_t *next_pgofs)
@@ -1232,8 +1248,13 @@ struct page *f2fs_get_read_data_page(struct inode *inode, pgoff_t index,
 	if (!page)
 		return ERR_PTR(-ENOMEM);
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	if (f2fs_lookup_read_extent_cache_block(inode, index,
 						&dn.data_blkaddr)) {
+=======
+	if (f2fs_lookup_read_extent_cache(inode, index, &ei)) {
+		dn.data_blkaddr = ei.blk + index - ei.fofs;
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 		if (!f2fs_is_valid_blkaddr(F2FS_I_SB(inode), dn.data_blkaddr,
 						DATA_GENERIC_ENHANCE_READ)) {
 			err = -EFSCORRUPTED;
@@ -1573,6 +1594,42 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
 	pgofs =	(pgoff_t)map->m_lblk;
 	end = pgofs + maxblocks;
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
+=======
+	if (!create && f2fs_lookup_read_extent_cache(inode, pgofs, &ei)) {
+		if (f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO &&
+							map->m_may_create)
+			goto next_dnode;
+
+		map->m_pblk = ei.blk + pgofs - ei.fofs;
+		map->m_len = min((pgoff_t)maxblocks, ei.fofs + ei.len - pgofs);
+		map->m_flags = F2FS_MAP_MAPPED;
+		if (map->m_next_extent)
+			*map->m_next_extent = pgofs + map->m_len;
+
+		/* for hardware encryption, but to avoid potential issue in future */
+		if (flag == F2FS_GET_BLOCK_DIO)
+			f2fs_wait_on_block_writeback_range(inode,
+						map->m_pblk, map->m_len);
+
+		if (map->m_multidev_dio) {
+			block_t blk_addr = map->m_pblk;
+
+			bidx = f2fs_target_device_index(sbi, map->m_pblk);
+
+			map->m_bdev = FDEV(bidx).bdev;
+			map->m_pblk -= FDEV(bidx).start_blk;
+			map->m_len = min(map->m_len,
+				FDEV(bidx).end_blk + 1 - map->m_pblk);
+
+			if (map->m_may_create)
+				f2fs_update_device_state(sbi, inode->i_ino,
+							blk_addr, map->m_len);
+		}
+		goto out;
+	}
+
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 next_dnode:
 	if (map->m_may_create)
 		f2fs_map_lock(sbi, flag);
@@ -2672,8 +2729,14 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
 		set_new_dnode(&dn, inode, NULL, NULL, 0);
 
 	if (need_inplace_update(fio) &&
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	    f2fs_lookup_read_extent_cache_block(inode, page->index,
 						&fio->old_blkaddr)) {
+=======
+	    f2fs_lookup_read_extent_cache(inode, page->index, &ei)) {
+		fio->old_blkaddr = ei.blk + page->index - ei.fofs;
+
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 		if (!f2fs_is_valid_blkaddr(fio->sbi, fio->old_blkaddr,
 						DATA_GENERIC_ENHANCE)) {
 			f2fs_handle_error(fio->sbi,
@@ -3383,9 +3446,29 @@ restart:
 				set_page_private_inline(ipage);
 			goto out;
 		}
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 		err = f2fs_convert_inline_page(&dn, page);
 		if (err || dn.data_blkaddr != NULL_ADDR)
 			goto out;
+=======
+	} else if (locked) {
+		err = f2fs_get_block(&dn, index);
+	} else {
+		if (f2fs_lookup_read_extent_cache(inode, index, &ei)) {
+			dn.data_blkaddr = ei.blk + index - ei.fofs;
+		} else {
+			/* hole case */
+			err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
+			if (err || dn.data_blkaddr == NULL_ADDR) {
+				f2fs_put_dnode(&dn);
+				f2fs_do_map_lock(sbi, F2FS_GET_BLOCK_PRE_AIO,
+								true);
+				WARN_ON(flag != F2FS_GET_BLOCK_PRE_AIO);
+				locked = true;
+				goto restart;
+			}
+		}
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	}
 
 	if (!f2fs_lookup_read_extent_cache_block(inode, index,
@@ -3431,8 +3514,14 @@ static int __find_data_block(struct inode *inode, pgoff_t index,
 
 	set_new_dnode(&dn, inode, ipage, ipage, 0);
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	if (!f2fs_lookup_read_extent_cache_block(inode, index,
 						 &dn.data_blkaddr)) {
+=======
+	if (f2fs_lookup_read_extent_cache(inode, index, &ei)) {
+		dn.data_blkaddr = ei.blk + index - ei.fofs;
+	} else {
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 		/* hole case */
 		err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
 		if (err) {

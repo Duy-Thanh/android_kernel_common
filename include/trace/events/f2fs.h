@@ -49,7 +49,10 @@ TRACE_DEFINE_ENUM(CP_TRIMMED);
 TRACE_DEFINE_ENUM(CP_PAUSE);
 TRACE_DEFINE_ENUM(CP_RESIZE);
 TRACE_DEFINE_ENUM(EX_READ);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 TRACE_DEFINE_ENUM(EX_BLOCK_AGE);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
 #define show_block_type(type)						\
 	__print_symbolic(type,						\
@@ -1584,7 +1587,11 @@ TRACE_EVENT(f2fs_lookup_extent_tree_start,
 	TP_printk("dev = (%d,%d), ino = %lu, pgofs = %u, type = %s",
 		show_dev_ino(__entry),
 		__entry->pgofs,
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 		show_extent_type(__entry->type))
+=======
+		__entry->type == EX_READ ? "Read" : "N/A")
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 );
 
 TRACE_EVENT_CONDITION(f2fs_lookup_read_extent_tree_end,
@@ -1623,8 +1630,13 @@ TRACE_EVENT_CONDITION(f2fs_lookup_read_extent_tree_end,
 		__entry->blk)
 );
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 TRACE_EVENT_CONDITION(f2fs_lookup_age_extent_tree_end,
+=======
+TRACE_EVENT(f2fs_update_read_extent_tree_range,
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	TP_PROTO(struct inode *inode, unsigned int pgofs,
 						struct extent_info *ei),
 
@@ -1664,6 +1676,8 @@ TRACE_EVENT_CONDITION(f2fs_lookup_age_extent_tree_end,
 
 TRACE_EVENT(f2fs_update_read_extent_tree_range,
 
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	TP_PROTO(struct inode *inode, unsigned int pgofs, unsigned int len,
 						block_t blkaddr,
 						unsigned int c_len),
@@ -1757,7 +1771,11 @@ TRACE_EVENT(f2fs_shrink_extent_tree,
 		show_dev(__entry->dev),
 		__entry->node_cnt,
 		__entry->tree_cnt,
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 		show_extent_type(__entry->type))
+=======
+		__entry->type == EX_READ ? "Read" : "N/A")
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 );
 
 TRACE_EVENT(f2fs_destroy_extent_tree,
@@ -1784,7 +1802,11 @@ TRACE_EVENT(f2fs_destroy_extent_tree,
 	TP_printk("dev = (%d,%d), ino = %lu, destroyed: node_cnt = %u, type = %s",
 		show_dev_ino(__entry),
 		__entry->node_cnt,
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 		show_extent_type(__entry->type))
+=======
+		__entry->type == EX_READ ? "Read" : "N/A")
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 );
 
 DECLARE_EVENT_CLASS(f2fs_sync_dirty_inodes,

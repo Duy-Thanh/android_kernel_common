@@ -601,6 +601,7 @@ enum {
 /* number of extent info in extent cache we try to shrink */
 #define READ_EXTENT_CACHE_SHRINK_NUMBER	128
 
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 /* number of age extent info in extent cache we try to shrink */
 #define AGE_EXTENT_CACHE_SHRINK_NUMBER	128
 #define LAST_AGE_WEIGHT			30
@@ -618,6 +619,18 @@ enum extent_type {
 	EX_READ,
 	EX_BLOCK_AGE,
 	NR_EXTENT_CACHES,
+=======
+/* extent cache type */
+enum extent_type {
+	EX_READ,
+	NR_EXTENT_CACHES,
+};
+
+struct rb_entry {
+	struct rb_node rb_node;		/* rb node located in rb-tree */
+	unsigned int ofs;		/* start offset of the entry */
+	unsigned int len;		/* length of the entry */
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 };
 
 struct extent_info {
@@ -633,6 +646,7 @@ struct extent_info {
 			unsigned int c_len;
 #endif
 		};
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 		/* block age extent_cache */
 		struct {
 			/* block age of the extent */
@@ -640,6 +654,8 @@ struct extent_info {
 			/* last total blocks allocated */
 			unsigned long long last_blocks;
 		};
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	};
 };
 
@@ -1571,12 +1587,15 @@ struct f2fs_sb_info {
 
 	/* for extent tree cache */
 	struct extent_tree_info extent_tree[NR_EXTENT_CACHES];
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	atomic64_t allocated_data_blocks;	/* for block age extent_cache */
 
 	/* The threshold used for hot and warm data seperation*/
 	unsigned int hot_data_age_threshold;
 	unsigned int warm_data_age_threshold;
 	unsigned int last_age_weight;
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
 	/* basic filesystem units */
 	unsigned int log_sectors_per_block;	/* log2 sectors per block */
@@ -3851,8 +3870,11 @@ struct f2fs_stat_info {
 	unsigned long long ext_mem[NR_EXTENT_CACHES];
 	/* for read extent cache */
 	unsigned long long hit_largest;
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	/* for block age extent cache */
 	unsigned long long allocated_data_blocks;
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	int ndirty_node, ndirty_dent, ndirty_meta, ndirty_imeta;
 	int ndirty_data, ndirty_qdata;
 	unsigned int ndirty_dirs, ndirty_files, nquota_files, ndirty_all;
@@ -4130,6 +4152,22 @@ void f2fs_leave_shrinker(struct f2fs_sb_info *sbi);
  * extent_cache.c
  */
 bool sanity_check_extent_cache(struct inode *inode);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
+=======
+struct rb_entry *f2fs_lookup_rb_tree(struct rb_root_cached *root,
+				struct rb_entry *cached_re, unsigned int ofs);
+struct rb_node **f2fs_lookup_rb_tree_for_insert(struct f2fs_sb_info *sbi,
+				struct rb_root_cached *root,
+				struct rb_node **parent,
+				unsigned int ofs, bool *leftmost);
+struct rb_entry *f2fs_lookup_rb_tree_ret(struct rb_root_cached *root,
+		struct rb_entry *cached_re, unsigned int ofs,
+		struct rb_entry **prev_entry, struct rb_entry **next_entry,
+		struct rb_node ***insert_p, struct rb_node **insert_parent,
+		bool force, bool *leftmost);
+bool f2fs_check_rb_tree_consistence(struct f2fs_sb_info *sbi,
+				struct rb_root_cached *root);
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 void f2fs_init_extent_tree(struct inode *inode);
 void f2fs_drop_extent_tree(struct inode *inode);
 void f2fs_destroy_extent_node(struct inode *inode);
@@ -4142,6 +4180,7 @@ void f2fs_destroy_extent_cache(void);
 void f2fs_init_read_extent_tree(struct inode *inode, struct page *ipage);
 bool f2fs_lookup_read_extent_cache(struct inode *inode, pgoff_t pgofs,
 			struct extent_info *ei);
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 bool f2fs_lookup_read_extent_cache_block(struct inode *inode, pgoff_t index,
 			block_t *blkaddr);
 void f2fs_update_read_extent_cache(struct dnode_of_data *dn);
@@ -4158,6 +4197,12 @@ void f2fs_update_age_extent_cache(struct dnode_of_data *dn);
 void f2fs_update_age_extent_cache_range(struct dnode_of_data *dn,
 			pgoff_t fofs, unsigned int len);
 unsigned int f2fs_shrink_age_extent_tree(struct f2fs_sb_info *sbi,
+=======
+void f2fs_update_read_extent_cache(struct dnode_of_data *dn);
+void f2fs_update_read_extent_cache_range(struct dnode_of_data *dn,
+			pgoff_t fofs, block_t blkaddr, unsigned int len);
+unsigned int f2fs_shrink_read_extent_tree(struct f2fs_sb_info *sbi,
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 			int nr_shrink);
 
 /*

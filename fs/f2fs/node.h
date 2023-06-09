@@ -145,7 +145,10 @@ enum mem_type {
 	DIRTY_DENTS,	/* indicates dirty dentry pages */
 	INO_ENTRIES,	/* indicates inode entries */
 	READ_EXTENT_CACHE,	/* indicates read extent cache */
+<<<<<<< HEAD   (efe85b ANDROID: add Android KABI build files to root .gitignore fil)
 	AGE_EXTENT_CACHE,	/* indicates age extent cache */
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 	DISCARD_CACHE,	/* indicates memory of cached discard cmds */
 	COMPRESS_PAGE,	/* indicates memory of cached compressed pages */
 	BASE_CHECK,	/* check kernel status */
