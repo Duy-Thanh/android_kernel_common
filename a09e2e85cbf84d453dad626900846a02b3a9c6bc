@@ -16,6 +16,23 @@
       "message": "need to fix the abi...",
       "revId": "a09e2e85cbf84d453dad626900846a02b3a9c6bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da981c10_4ee2752d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-09T13:15:22Z",
+      "side": 1,
+      "message": "bad merge, will fix",
+      "revId": "a09e2e85cbf84d453dad626900846a02b3a9c6bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
