@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd49aba5_5cb7d8e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-09T23:24:04Z",
+      "side": 1,
+      "message": "Upstream conversation just started and does not look promising. I don\u0027t think exporting arch functions will be considered acceptable, so -1 for now.",
+      "revId": "91e98e3ab9aa8100edc0fc7bba356a984cde5ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
