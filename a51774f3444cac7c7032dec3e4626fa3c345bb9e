@@ -16,6 +16,23 @@
       "message": "no driver or module should be attempting to implement dma_map_ops, that\u0027s just not allowed at all, sorry.",
       "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f82f8f_af75f1f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-09T10:51:44Z",
+      "side": 1,
+      "message": "Note, these symbols are NOT in a publicly available location (i.e. an external module can not see them), so even if they are exported, they will never be able to be used.\n\nSorry, this is not going to work.",
+      "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
