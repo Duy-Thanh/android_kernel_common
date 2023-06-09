@@ -230,6 +230,24 @@
       "parentUuid": "e41480b9_bc6ec1f0",
       "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09682116_8c263536",
+        "filename": "drivers/usb/host/xhci-plat.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-06-09T09:22:49Z",
+      "side": 1,
+      "message": "I\u0027m sorry for late response and I have a misunderstanding.\nI think that the suggested code is no problem.",
+      "parentUuid": "e1faaf20_c4a53aed",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
