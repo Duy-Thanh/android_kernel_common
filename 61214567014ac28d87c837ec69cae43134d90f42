@@ -215,6 +215,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d157314_adff248b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2023-06-09T17:54:56Z",
+      "side": 1,
+      "message": "I\u0027m supportive of expanding the auto virtualization use cases to XEN for GKI, but it depends on what Todd is working on and wants to support.\n\nI agree with the \"legacy virtualization\" and \"code coverage\" questions, but I\u0027d argue we accepted many gki_defconfig changes with similar problems, and this is really no different (so long as it\u0027s done for x86 \u0026 arm for testing purposes, and as minimally as possible..).\n\nThe main point is, if we don\u0027t land this change, these automotive devices using Xen can\u0027t ship GKI. They can only ship a non-GKI ACK based kernel, because XEN support must be built-in.",
+      "parentUuid": "5f979c69_d0c696e7",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
