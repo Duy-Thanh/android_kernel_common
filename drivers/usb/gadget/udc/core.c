@@ -676,6 +676,12 @@ static int usb_gadget_connect_locked(struct usb_gadget *gadget)
 		goto out;
 	}
 
+<<<<<<< HEAD   (9fcc80 Merge 6.1.27 into android14-6.1-lts)
+=======
+	if (gadget->connected)
+		goto out;
+
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 	if (gadget->deactivated || !gadget->udc->started) {
 		/*
 		 * If gadget is deactivated we only save new state.

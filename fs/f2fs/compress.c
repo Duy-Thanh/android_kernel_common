@@ -743,7 +743,11 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_task)
 		ret = -EFSCORRUPTED;
 
 		/* Avoid f2fs_commit_super in irq context */
+<<<<<<< HEAD   (9fcc80 Merge 6.1.27 into android14-6.1-lts)
 		if (!in_task)
+=======
+		if (in_task)
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 			f2fs_save_errors(sbi, ERROR_FAIL_DECOMPRESSION);
 		else
 			f2fs_handle_error(sbi, ERROR_FAIL_DECOMPRESSION);

@@ -1239,6 +1239,7 @@ static int dm_keyslot_evict(struct blk_crypto_profile *profile,
 
 	dm_put_live_table(md, srcu_idx);
 	return 0;
+<<<<<<< HEAD   (9fcc80 Merge 6.1.27 into android14-6.1-lts)
 }
 
 struct dm_derive_sw_secret_args {
@@ -1301,6 +1302,8 @@ static int dm_derive_sw_secret(struct blk_crypto_profile *profile,
 	}
 	dm_put_live_table(md, srcu_idx);
 	return args.err;
+=======
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 }
 
 static int
