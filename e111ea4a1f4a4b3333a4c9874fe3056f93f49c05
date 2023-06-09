@@ -19,6 +19,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b3e44ef_cebd4010",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2008320
+      },
+      "writtenOn": "2023-06-09T03:25:11Z",
+      "side": 1,
+      "message": "hi Matthias,\nBecause the previous modification will bring in the following problem, \nso we just change the function name of cherry-pick change,\nactually there is no difference with cherry-pick change, thanks!\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nPlease do a simple \u0027allmodconfig\u0027 build, or use the gki_defconfig file which is what your devices should be using. It will show that you changed an exported symbol yet did not rename it in the EXPORT_SYMBOL_GPL() section.\n\nAlso note that you are changing an exported symbol, why? This will probably break the api signatures, right? Why is the name change required here?",
+      "parentUuid": "8df1ca0c_da7b2842",
+      "revId": "e111ea4a1f4a4b3333a4c9874fe3056f93f49c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e9236d8_02168c2c",
