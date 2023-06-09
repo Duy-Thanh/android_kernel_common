@@ -39,6 +39,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d6a286a_d8dfc84f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-09T09:02:58Z",
+      "side": 1,
+      "message": "See the first message of the thread pointing out the intra-diff. This is not a clean cherry-pick of the change that is referenced here (ff878b408a03bef5d610b7e2302702e16a53636e). If the cherry-pick is not clean and requires modification, it needs to be tagged `BACKPORT` (not `UPSTREAM`) and a note about the conflict resolution needs to be added as well. In particular, the difference here appears to come from the function rename that happened upstream but is not applied as part of the backport.\n\nI do not understand how the remainder of the comment is related to what I asked for. Possibly unrelated copy-paste noise.",
+      "parentUuid": "4b3e44ef_cebd4010",
+      "revId": "e111ea4a1f4a4b3333a4c9874fe3056f93f49c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e9236d8_02168c2c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
