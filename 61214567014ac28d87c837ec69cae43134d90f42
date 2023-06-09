@@ -251,6 +251,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10c5280b_0325806d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-09T19:16:36Z",
+      "side": 1,
+      "message": "And we still need a bug id for it 😊",
+      "parentUuid": "274c61ac_f476592c",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
