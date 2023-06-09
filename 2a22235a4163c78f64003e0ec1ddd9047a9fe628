@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d81ad6ce_96ef12c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-09T16:43:05Z",
+      "side": 1,
+      "message": "It seems like you are pooling the pages instead of freeing/allocating. Why not just spell that out?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 50
+      },
+      "revId": "2a22235a4163c78f64003e0ec1ddd9047a9fe628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d18686_69697865",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-09T16:43:05Z",
+      "side": 1,
+      "message": "still long lines. you can use kernel_dir/scripts/checkpatch.pl script to check before posting.",
+      "range": {
+        "startLine": 177,
+        "startChar": 1,
+        "endLine": 177,
+        "endChar": 105
+      },
+      "revId": "2a22235a4163c78f64003e0ec1ddd9047a9fe628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
