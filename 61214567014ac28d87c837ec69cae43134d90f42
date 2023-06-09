@@ -159,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a113f921_fbc47318",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-09T04:07:59Z",
+      "side": 1,
+      "message": "Good question.  I did testing for these options, below options can be disabled on aarch64 and Android doesn\u0027t rely on them:\n\nCONFIG_XEN_BALLOON\nCONFIG_XEN_BALLOON_MEMORY_HOTPLUG\nCONFIG_XEN_SCRUB_PAGES_DEFAULT\nCONFIG_XEN_DEV_EVTCHN\nCONFIG_XEN_BACKEND\nCONFIG_XENFS\nCONFIG_XEN_SYS_HYPERVISOR\n\nBut I see below configurations are enabled by default for aarch64 / Xen:\n\nCONFIG_SWIOTLB_XEN\u003dy\nCONFIG_XEN_EFI\u003dy\nCONFIG_XEN_AUTO_XLATE\u003dy\n\nHave uploaded the patch for the minimal Xen configurations.",
+      "parentUuid": "b18f3ae1_08dedfea",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96838a61_d322ead6",
