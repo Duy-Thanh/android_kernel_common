@@ -33,6 +33,24 @@
       "message": "If this is for performance tuning, why is it needed in production kernels? It seems like you can add these as you please for tuning/debugging. Please add more to the commit message regarding how these are used and why it is important in production",
       "revId": "10662503ec085f4b2fa0a6e922283ab5c2e2e55a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13fd7538_bcfdc288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2008822
+      },
+      "writtenOn": "2023-06-09T07:59:16Z",
+      "side": 1,
+      "message": "Do you mean to send patches to upstream mailing list ,or android-mainline？",
+      "parentUuid": "1d53e0be_2d0e3e3f",
+      "revId": "10662503ec085f4b2fa0a6e922283ab5c2e2e55a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
