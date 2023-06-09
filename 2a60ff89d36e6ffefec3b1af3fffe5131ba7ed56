@@ -248,6 +248,24 @@
       "parentUuid": "e1faaf20_c4a53aed",
       "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f423d1de_c283368c",
+        "filename": "drivers/usb/host/xhci-plat.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-09T10:49:29Z",
+      "side": 1,
+      "message": "This whole thing is broken as you can not \"know\" that the +1 value is not already used by another bus in the system.\n\nAgain, the root problem is that USB bus numbers are never deterministic and should never be treated as such.",
+      "parentUuid": "09682116_8c263536",
+      "revId": "2a60ff89d36e6ffefec3b1af3fffe5131ba7ed56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
