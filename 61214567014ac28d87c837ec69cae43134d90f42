@@ -233,6 +233,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "274c61ac_f476592c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-09T18:54:11Z",
+      "side": 1,
+      "message": "Leo, are there any auto OEMs actually planning to use XEN in a product (or are doing so already)? Do you know when this would be needed for products? Can you get one of the OEMs to CR+1 this patch?",
+      "parentUuid": "7d157314_adff248b",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
