@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17beaf8c_0b1b637c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-09T13:36:58Z",
+      "side": 1,
+      "message": "We should really not write into the sources ... let me open a bug for that.",
+      "revId": "efe85b7965d92f4a76625b797c0733032031dad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
