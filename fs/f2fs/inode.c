@@ -463,7 +463,10 @@ static int do_read_inode(struct inode *inode)
 
 	/* Need all the flag bits */
 	f2fs_init_read_extent_tree(inode, node_page);
+<<<<<<< HEAD   (ef75a8 Merge 6.1.28 into android14-6.1-lts)
 	f2fs_init_age_extent_tree(inode);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
 	if (!sanity_check_inode(inode, node_page)) {
 		f2fs_put_page(node_page, 1);
