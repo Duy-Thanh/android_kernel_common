@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86c8535c_533c698a",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-09T18:48:23Z",
+      "side": 1,
+      "message": "Yes, I think making the call to `wakeup_source_register()` makes this much cleaner for now (until the real implementation is upstream).\n\n`wakeup_source_register()` is already in the KMI.",
+      "parentUuid": "408546dc_9ee8db64",
+      "range": {
+        "startLine": 1384,
+        "startChar": 45,
+        "endLine": 1384,
+        "endChar": 52
+      },
+      "revId": "28a8cef6247085a96c47da86fc501ba20c944de7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e9cd974_6ed71a03",
         "filename": "fs/eventpoll.c",
         "patchSetId": 7
