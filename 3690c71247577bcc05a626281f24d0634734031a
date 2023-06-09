@@ -33,6 +33,24 @@
       "message": "Hi todd\n\nCould you please help to merge the patch.\n\nThanks!",
       "revId": "3690c71247577bcc05a626281f24d0634734031a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50492cd1_4bb0a180",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-06-09T18:21:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "77da3705_24e476e3",
+      "revId": "3690c71247577bcc05a626281f24d0634734031a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
