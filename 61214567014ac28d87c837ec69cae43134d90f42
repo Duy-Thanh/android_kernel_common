@@ -179,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1211871f_87931eaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-09T09:15:54Z",
+      "side": 1,
+      "message": "\u003e what other configs are enabled when setting XEN\u003dy?\n\nWith the latest patch, below configs are enabled:\n\nCONFIG_XEN_DOM0\u003dy\nCONFIG_XEN\u003dy\nCONFIG_XEN_BLKDEV_FRONTEND\u003dy\nCONFIG_XEN_NETDEV_FRONTEND\u003dy\nCONFIG_HVC_XEN\u003dy\nCONFIG_HVC_XEN_FRONTEND\u003dy\nCONFIG_XEN_XENBUS_FRONTEND\u003dy\nCONFIG_SWIOTLB_XEN\u003dy\nCONFIG_XEN_EFI\u003dy\nCONFIG_XEN_AUTO_XLATE\u003dy\n\n\u003e What is the impact on kernel memory size?\n\nFor the kernel\u0027s static size, below are detailed increasing number for some sections.\n\n.text section: +0x20000\n.rodata: +0x8520\n.BTF: +0xC570\n.data.percpu: +0x3c0\n.data: +0x14C0\n.bss: +0x1E40\n\n\nThe ELF section log with disabling XEN: https://termbin.com/3iwh\nThe ELF section log with enabling XEN: https://termbin.com/3opw\n\n\nI think you might have concern for using extra memory after enabling Xen config, especially when we run Android on Cuttlefish VM (QEMU based), blow is the log for /proc/meminfo.\n\nWithout Xen config:\n\n```\nvsoc_arm64_only:/ # cat /proc/meminfo                                          \nMemTotal:        4015684 kB\nMemFree:         1020600 kB\nMemAvailable:    2471468 kB\nBuffers:            4148 kB\nCached:          1712252 kB\nSwapCached:            0 kB\nActive:          1573032 kB\nInactive:         926468 kB\nActive(anon):     824056 kB\nInactive(anon):      928 kB\nActive(file):     748976 kB\nInactive(file):   925540 kB\nUnevictable:       42904 kB\nMlocked:           10392 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:               880 kB\nWriteback:             0 kB\nAnonPages:        826012 kB\nMapped:           638124 kB\nShmem:             38156 kB\nKReclaimable:     101224 kB\nSlab:             227344 kB\nSReclaimable:     101224 kB\nSUnreclaim:       126120 kB\nKernelStack:       29376 kB\nShadowCallStack:    7352 kB\nPageTables:        94300 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     2007840 kB\nCommitted_AS:   90088832 kB\nVmallocTotal:   259653632 kB\nVmallocUsed:       49472 kB\nVmallocChunk:          0 kB\nPercpu:             2152 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:               0 kB\n```\n\n\nWith Xen config:\n\n```\nvsoc_arm64_only:/ # cat /proc/meminfo                                          \nMemTotal:        4015488 kB\nMemFree:          984232 kB\nMemAvailable:    2453184 kB\nBuffers:            4148 kB\nCached:          1734316 kB\nSwapCached:            0 kB\nActive:          1590748 kB\nInactive:         943828 kB\nActive(anon):     841716 kB\nInactive(anon):      940 kB\nActive(file):     749032 kB\nInactive(file):   942888 kB\nUnevictable:       47776 kB\nMlocked:           10384 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:              2176 kB\nWriteback:             0 kB\nAnonPages:        843908 kB\nMapped:           655056 kB\nShmem:             42940 kB\nKReclaimable:     102560 kB\nSlab:             229528 kB\nSReclaimable:     102560 kB\nSUnreclaim:       126968 kB\nKernelStack:       29840 kB\nShadowCallStack:    7468 kB\nPageTables:        95504 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     2007744 kB\nCommitted_AS:   90157164 kB\nVmallocTotal:   259653632 kB\nVmallocUsed:       50116 kB\nVmallocChunk:          0 kB\nPercpu:             2168 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:               0 kB\n```",
+      "parentUuid": "5d8200ff_fdc99205",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
