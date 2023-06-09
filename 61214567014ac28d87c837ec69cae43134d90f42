@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f979c69_d0c696e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-09T09:32:30Z",
+      "side": 1,
+      "message": "\u003e Does it really need to be in the android-mainline tree? \n\nI think the question could be converted to: does Google want to support Xen virtualization for Android Car building?  If this is in Google\u0027s longterm plan, then android-mainline tree is the best place to land this patch.\n\nI would like to leave this question to @Alistair Delva, essentially, it would be best if what I am doing can match with Google\u0027s strategy.\n\n\u003e Couldn\u0027t that be added downstream of android-mainline?\n\nGood point.  Though my ambition is to add change to the android-mainline tree 😊, I hope the community can directly download the latest code base for building Android and kernel images with support Xen.\n\nIf finally we veto the solution either adding change to gki_defconfig or adding a new Xen build config in android-mainline, then downstream would be a good option for adding patch.  At least, we have a public repository to tell developers they can try it.\n\nTo be clear, here \"downstream\" means a stable kernel branch (e.g. aosp/android15-6.1), right?",
+      "parentUuid": "cdc6c880_a4fcebc6",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
