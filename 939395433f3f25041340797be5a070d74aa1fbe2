@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a687b39f_d561ed6f",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-10T08:12:15Z",
+      "side": 1,
+      "message": "no driver should ever directly call this function, please use the proper one provided by the driver core instead.",
+      "range": {
+        "startLine": 1914,
+        "startChar": 2,
+        "endLine": 1914,
+        "endChar": 20
+      },
+      "revId": "939395433f3f25041340797be5a070d74aa1fbe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
