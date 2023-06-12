@@ -57,6 +57,8 @@
 #include <linux/rculist_nulls.h>
 #include <linux/random.h>
 
+#include <linux/log2.h>
+
 #include <asm/tlbflush.h>
 #include <asm/div64.h>
 
@@ -7310,6 +7312,7 @@ clear_reclaim_active(pg_data_t *pgdat, int highest_zoneidx)
  */
 static int balance_pgdat(pg_data_t *pgdat, int order, int highest_zoneidx)
 {
+	int kswapd_order;
 	int i;
 	unsigned long nr_soft_reclaimed;
 	unsigned long nr_soft_scanned;
@@ -7480,6 +7483,10 @@ restart:
 		pgdat->kswapd_failures++;
 
 out:
+	/* Create reclaim order histogram */
+	kswapd_order = min_t(int, ilog2(sc.nr_reclaimed), 22);
+	count_vm_event(NR_KSWAPD_RECLAIM_ORDER_0 + kswapd_order);
+
 	clear_reclaim_active(pgdat, highest_zoneidx);
 
 	/* If reclaim was boosted, account for the reclaim done in this pass */
