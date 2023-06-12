@@ -269,6 +269,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "268de5dd_307221e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-12T13:04:29Z",
+      "side": 1,
+      "message": "Hi @Todd,\n\n\u003e are there any auto OEMs actually planning to use XEN in a product (or are doing so already)?  Do you know when this would be needed for products? Can you get one of the OEMs to CR+1 this patch?\n\nTo be honest, I have no info for the timeline for deployment Android on automotive products.  I would be cautious for discussing this publicly, please give me a bit time to discuss internally and I will seek possible helping for providing concrete info and get CR+1 from some partners.\n\n\nHi @Todd, @Alistair,\n\n\u003e And we still need a bug id for it 😊\n\nCould you help to create a bug ID?",
+      "parentUuid": "10c5280b_0325806d",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
