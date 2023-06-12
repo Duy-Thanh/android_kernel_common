@@ -287,6 +287,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ffdc51d_993847aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-12T16:53:24Z",
+      "side": 1,
+      "message": "\u003e To be honest, I have no info for the timeline for deployment Android on automotive products\n\nThen it seems like this config can be enabled for testing downstream\n\n\u003e I would be cautious for discussing this publicly\n\nIt\u0027s totally fine to take the conversation to a bug or email instead. Or have the OEM file a bug for discussion.\n\n\u003e Could you help to create a bug ID\n\nYou can file a bug at https://issuetracker.google.com/. There is a Linaro component: Android\u003ePartner\u003eExternal\u003eLinaro (componentid: 1162188).",
+      "parentUuid": "268de5dd_307221e8",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
