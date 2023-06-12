@@ -168762,6 +168762,12 @@ member {
   offset: 1088
 }
 member {
+  id: 0x4c1b044f
+  name: "sub_page_limits"
+  type_id: 0x6d7f5ff6
+  offset: 840
+}
+member {
   id: 0xedd64f59
   name: "sub_reg_offsets"
   type_id: 0x2db8f717
@@ -227098,6 +227104,7 @@ struct_union {
     member_id: 0x06473753
     member_id: 0x1bdd5453
     member_id: 0x26582f94
+    member_id: 0x4c1b044f
     member_id: 0xaf3e33dd
     member_id: 0x2d081f94
     member_id: 0xd671ce1e

@@ -328,12 +328,18 @@ struct queue_limits {
 	unsigned char		misaligned;
 	unsigned char		discard_misaligned;
 	unsigned char		raid_partial_stripes_expensive;
+
+#ifndef __GENKSYMS__
+	bool			sub_page_limits;
+#endif
+
 	enum blk_zoned_model	zoned;
 
 	ANDROID_KABI_RESERVE(1);
 
 	ANDROID_OEM_DATA(1);
 };
+static_assert(sizeof(struct queue_limits) == 128);
 
 typedef int (*report_zones_cb)(struct blk_zone *zone, unsigned int idx,
 			       void *data);
