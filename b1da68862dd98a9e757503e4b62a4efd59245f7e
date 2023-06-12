@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "241e8812_5b2d6754",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013969
+      },
+      "writtenOn": "2023-06-12T20:51:47Z",
+      "side": 1,
+      "message": "Removed use of sysfs_change_owner().",
+      "revId": "b1da68862dd98a9e757503e4b62a4efd59245f7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

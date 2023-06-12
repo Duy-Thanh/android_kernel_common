@@ -22,6 +22,30 @@
       },
       "revId": "939395433f3f25041340797be5a070d74aa1fbe2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "912c930f_7906bb36",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1013969
+      },
+      "writtenOn": "2023-06-12T20:51:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a687b39f_d561ed6f",
+      "range": {
+        "startLine": 1914,
+        "startChar": 2,
+        "endLine": 1914,
+        "endChar": 20
+      },
+      "revId": "939395433f3f25041340797be5a070d74aa1fbe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
