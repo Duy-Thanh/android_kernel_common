@@ -68,6 +68,10 @@ static inline bool blk_queue_sub_page_limits(const struct queue_limits *lim)
 		lim->sub_page_limits;
 }
 
+#ifdef CONFIG_ARM64_16K_PAGES
+int blk_sub_page_limit_queues_get(void *data, u64 *val);
+#endif
+
 void blk_disable_sub_page_limits(struct queue_limits *q);
 
 void blk_freeze_queue(struct request_queue *q);

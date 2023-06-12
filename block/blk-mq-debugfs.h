@@ -2,6 +2,10 @@
 #ifndef INT_BLK_MQ_DEBUGFS_H
 #define INT_BLK_MQ_DEBUGFS_H
 
+#ifdef CONFIG_ARM64_16K_PAGES
+void blk_mq_debugfs_init(void);
+#endif
+
 #ifdef CONFIG_BLK_DEBUG_FS
 
 #include <linux/seq_file.h>
@@ -14,6 +18,8 @@ struct blk_mq_debugfs_attr {
 	/* Set either .show or .seq_ops. */
 	const struct seq_operations *seq_ops;
 };
+
+
 
 int __blk_mq_debugfs_rq_show(struct seq_file *m, struct request *rq);
 int blk_mq_debugfs_rq_show(struct seq_file *m, void *v);

@@ -47,6 +47,9 @@
 
 #include "blk.h"
 #include "blk-mq.h"
+#ifdef CONFIG_ARM64_16K_PAGES
+#include "blk-mq-debugfs.h"
+#endif
 #include "blk-mq-sched.h"
 #include "blk-pm.h"
 #ifndef __GENKSYMS__
@@ -1786,6 +1789,10 @@ int __init blk_dev_init(void)
 		sizeof(struct internal_request_queue), 0, SLAB_PANIC, NULL);
 
 	blk_debugfs_root = debugfs_create_dir("block", NULL);
+
+#ifdef CONFIG_ARM64_16K_PAGES
+	blk_mq_debugfs_init();
+#endif
 
 	return 0;
 }
