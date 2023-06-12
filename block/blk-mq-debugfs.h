@@ -2,6 +2,10 @@
 #ifndef INT_BLK_MQ_DEBUGFS_H
 #define INT_BLK_MQ_DEBUGFS_H
 
+#ifdef CONFIG_ARM64_16K_PAGES
+void blk_mq_debugfs_init(void);
+#endif
+
 #ifdef CONFIG_BLK_DEBUG_FS
 
 #include <linux/seq_file.h>
