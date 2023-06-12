@@ -46,8 +46,13 @@ static inline void snd_soc_dpcm_stream_lock_irq(struct snd_soc_pcm_runtime *rtd,
 	snd_pcm_stream_lock_irq(snd_soc_dpcm_get_substream(rtd, stream));
 }
 
+<<<<<<< HEAD   (bc77a1 Revert "uapi/linux/const.h: prefer ISO-friendly __typeof__")
 #define snd_soc_dpcm_stream_lock_irqsave(rtd, stream, flags) \
 	snd_pcm_stream_lock_irqsave(snd_soc_dpcm_get_substream(rtd, stream), flags)
+=======
+#define snd_soc_dpcm_stream_lock_irqsave_nested(rtd, stream, flags) \
+	snd_pcm_stream_lock_irqsave_nested(snd_soc_dpcm_get_substream(rtd, stream), flags)
+>>>>>>> BRANCH (9d6bde Linux 5.15.112)
 
 static inline void snd_soc_dpcm_stream_unlock_irq(struct snd_soc_pcm_runtime *rtd,
 						  int stream)
@@ -723,7 +728,11 @@ static int soc_pcm_close(struct snd_pcm_substream *substream)
 	struct snd_soc_pcm_runtime *rtd = asoc_substream_to_rtd(substream);
 
 	snd_soc_dpcm_mutex_lock(rtd);
+<<<<<<< HEAD   (bc77a1 Revert "uapi/linux/const.h: prefer ISO-friendly __typeof__")
 	soc_pcm_clean(rtd, substream, 0);
+=======
+	__soc_pcm_close(rtd, substream);
+>>>>>>> BRANCH (9d6bde Linux 5.15.112)
 	snd_soc_dpcm_mutex_unlock(rtd);
 	return 0;
 }
@@ -1289,6 +1298,10 @@ static void dpcm_be_reparent(struct snd_soc_pcm_runtime *fe,
 void dpcm_be_disconnect(struct snd_soc_pcm_runtime *fe, int stream)
 {
 	struct snd_soc_dpcm *dpcm, *d;
+<<<<<<< HEAD   (bc77a1 Revert "uapi/linux/const.h: prefer ISO-friendly __typeof__")
+=======
+	LIST_HEAD(deleted_dpcms);
+>>>>>>> BRANCH (9d6bde Linux 5.15.112)
 
 	snd_soc_dpcm_mutex_assert_held(fe);
 
@@ -1308,10 +1321,24 @@ void dpcm_be_disconnect(struct snd_soc_pcm_runtime *fe, int stream)
 		/* BEs still alive need new FE */
 		dpcm_be_reparent(fe, dpcm->be, stream);
 
+<<<<<<< HEAD   (bc77a1 Revert "uapi/linux/const.h: prefer ISO-friendly __typeof__")
 		dpcm_remove_debugfs_state(dpcm);
 
+=======
+>>>>>>> BRANCH (9d6bde Linux 5.15.112)
 		list_del(&dpcm->list_be);
+		list_move(&dpcm->list_fe, &deleted_dpcms);
+	}
+	snd_soc_dpcm_stream_unlock_irq(fe, stream);
+
+	while (!list_empty(&deleted_dpcms)) {
+		dpcm = list_first_entry(&deleted_dpcms, struct snd_soc_dpcm,
+					list_fe);
 		list_del(&dpcm->list_fe);
+<<<<<<< HEAD   (bc77a1 Revert "uapi/linux/const.h: prefer ISO-friendly __typeof__")
+=======
+		dpcm_remove_debugfs_state(dpcm);
+>>>>>>> BRANCH (9d6bde Linux 5.15.112)
 		kfree(dpcm);
 	}
 	snd_soc_dpcm_stream_unlock_irq(fe, stream);
@@ -1331,6 +1358,9 @@ static struct snd_soc_pcm_runtime *dpcm_get_be(struct snd_soc_card *card,
 	for_each_card_rtds(card, be) {
 
 		if (!be->dai_link->no_pcm)
+			continue;
+
+		if (!snd_soc_dpcm_get_substream(be, stream))
 			continue;
 
 		for_each_rtd_dais(be, i, dai) {
@@ -2109,7 +2139,11 @@ int dpcm_be_dai_trigger(struct snd_soc_pcm_runtime *fe, int stream,
 		be = dpcm->be;
 		be_substream = snd_soc_dpcm_get_substream(be, stream);
 
+<<<<<<< HEAD   (bc77a1 Revert "uapi/linux/const.h: prefer ISO-friendly __typeof__")
 		snd_soc_dpcm_stream_lock_irqsave(be, stream, flags);
+=======
+		snd_soc_dpcm_stream_lock_irqsave_nested(be, stream, flags);
+>>>>>>> BRANCH (9d6bde Linux 5.15.112)
 
 		/* is this op for this BE ? */
 		if (!snd_soc_dpcm_be_can_update(fe, be, stream))
