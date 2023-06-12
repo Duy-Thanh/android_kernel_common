@@ -34,6 +34,41 @@
       "parentUuid": "731a70e7_5ed1ad1d",
       "revId": "16916c79759d277ace7f89f3b898182a38543c03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52ceafd7_5be52ea1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-06-12T15:03:37Z",
+      "side": 1,
+      "message": "Our modification involves cma allocation. In cma allocation, the page pinner information will be changed through the page_pinner_failure_detect() function. If we do not use this function, the page pinner function will be destroyed.",
+      "revId": "16916c79759d277ace7f89f3b898182a38543c03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84747c46_d2f86194",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-06-12T15:03:37Z",
+      "side": 1,
+      "message": "Our modification involves cma allocation. In cma allocation, the page pinner information will be changed through the page_pinner_failure_detect() function. If we do not use this function, the page pinner function will be destroyed.",
+      "parentUuid": "9ba1bada_6f074e57",
+      "revId": "16916c79759d277ace7f89f3b898182a38543c03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

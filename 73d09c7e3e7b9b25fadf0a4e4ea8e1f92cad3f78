@@ -39,6 +39,30 @@
       },
       "revId": "73d09c7e3e7b9b25fadf0a4e4ea8e1f92cad3f78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15842d0_92f5ebe0",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 1354,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-06-12T15:03:37Z",
+      "side": 1,
+      "message": "Thanks very much, i have removed pfn_to_online_page and upload the patch. Could you help to review again?",
+      "parentUuid": "589da9d6_2f8e0e8e",
+      "range": {
+        "startLine": 1354,
+        "startChar": 2,
+        "endLine": 1354,
+        "endChar": 20
+      },
+      "revId": "73d09c7e3e7b9b25fadf0a4e4ea8e1f92cad3f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
