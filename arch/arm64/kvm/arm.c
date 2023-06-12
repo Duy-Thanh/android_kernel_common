@@ -40,6 +40,7 @@
 #include <asm/kvm_mmu.h>
 #include <asm/kvm_pkvm.h>
 #include <asm/kvm_emulate.h>
+#include <asm/memory_metadata.h>
 #include <asm/sections.h>
 
 #include <kvm/arm_hypercalls.h>
@@ -101,7 +102,7 @@ int kvm_vm_ioctl_enable_cap(struct kvm *kvm,
 		break;
 	case KVM_CAP_ARM_MTE:
 		mutex_lock(&kvm->lock);
-		if (!system_supports_mte() ||
+		if (!system_supports_mte() || metadata_storage_enabled() ||
 		    kvm_vm_is_protected(kvm) ||
 		    kvm->created_vcpus) {
 			r = -EINVAL;
@@ -296,7 +297,7 @@ static int kvm_check_extension(struct kvm *kvm, long ext)
 		r = 1;
 		break;
 	case KVM_CAP_ARM_MTE:
-		r = system_supports_mte();
+		r = system_supports_mte() && !metadata_storage_enabled();
 		break;
 	case KVM_CAP_STEAL_TIME:
 		r = kvm_arm_pvtime_supported();
