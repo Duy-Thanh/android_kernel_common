@@ -2169,6 +2169,9 @@ blk_qc_t blk_mq_submit_bio(struct bio *bio)
 	__blk_queue_split(&bio, &nr_segs);
 	if (!bio)
 		goto queue_exit;
+	else if (bio->bi_vcnt == 1) {
+		nr_segs = blk_segments(&q->limits, bio->bi_io_vec[0].bv_len);
+	}
 
 	if (!bio_integrity_prep(bio))
 		goto queue_exit;

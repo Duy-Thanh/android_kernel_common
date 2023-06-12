@@ -265,7 +265,8 @@ static struct bio *blk_bio_segment_split(struct request_queue *q,
 		if (nsegs < max_segs &&
 		    sectors + (bv.bv_len >> 9) <= max_sectors &&
 		    bv.bv_offset + bv.bv_len <= PAGE_SIZE) {
-			nsegs++;
+			/* single-page bvec optimization */
+			nsegs += blk_segments(&q->limits, bv.bv_len);
 			sectors += bv.bv_len >> 9;
 		} else if (bvec_split_segs(q, &bv, &nsegs, &sectors, max_segs,
 					 max_sectors)) {
@@ -332,6 +333,14 @@ void __blk_queue_split(struct bio **bio, unsigned int *nr_segs)
 				nr_segs);
 		break;
 	default:
+		/*
+		 * Check whether bio splitting should be performed. This check may
+		 * trigger the bio splitting code even if splitting is not necessary.
+		 */
+		if (blk_queue_sub_page_limits(&q->limits) && (*bio)->bi_io_vec &&
+		    (*bio)->bi_io_vec[0].bv_len > q->limits.max_segment_size)
+			break;
+
 		/*
 		 * All drivers must accept single-segments bios that are <=
 		 * PAGE_SIZE.  This is a quick and dirty check that relies on
@@ -519,7 +528,10 @@ static int __blk_bios_map_sg(struct request_queue *q, struct bio *bio,
 			    __blk_segment_map_sg_merge(q, &bvec, &bvprv, sg))
 				goto next_bvec;
 
-			if (bvec.bv_offset + bvec.bv_len <= PAGE_SIZE)
+			if (bvec.bv_offset + bvec.bv_len <= PAGE_SIZE &&
+			    (!blk_queue_sub_page_limits(&q->limits) ||
+			     bvec.bv_len <= q->limits.max_segment_size))
+				/* single-segment bvec optimization */
 				nsegs += __blk_bvec_map_sg(bvec, sglist, sg);
 			else
 				nsegs += blk_bvec_map_sg(q, &bvec, sglist, sg);
