@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41c07599_0708816f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-12T18:32:46Z",
+      "side": 1,
+      "message": "The original should not have been merged, there is already an API for this, exported to userspace, that should be used instead.",
+      "revId": "089080156755a38724fbbfa03f79468acc6ee743",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
