@@ -330,7 +330,7 @@ struct queue_limits {
 	unsigned char		raid_partial_stripes_expensive;
 	enum blk_zoned_model	zoned;
 
-	ANDROID_KABI_RESERVE(1);
+	u64			sub_page_limits;
 
 	ANDROID_OEM_DATA(1);
 };
