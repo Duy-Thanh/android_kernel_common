@@ -51,6 +51,24 @@
       "parentUuid": "44f10d5f_ec7740ac",
       "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fc4fdac_c845b892",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-13T07:14:09Z",
+      "side": 1,
+      "message": "You could try it, but be aware that this probably will not work, as it\u0027s up to the bus the driver is on to set that, right?  But try it and see.\n\nSo, why not just fix the bus code for the devices you are concerned about?  Or better yet, submit the real fix upstream so that no exports are needed at all.",
+      "parentUuid": "71e5863b_f0c53e42",
+      "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
