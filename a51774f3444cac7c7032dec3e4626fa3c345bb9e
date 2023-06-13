@@ -87,6 +87,24 @@
       "parentUuid": "5fc4fdac_c845b892",
       "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a70c3eeb_5442766c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-13T08:34:16Z",
+      "side": 1,
+      "message": "The KMI freeze has nothing to do with adding new symbols.  Fix the problem properly first, and if that causes ABI breaks, we can work around them in a myriad of different ways.",
+      "parentUuid": "17f553ea_8ee938fd",
+      "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
