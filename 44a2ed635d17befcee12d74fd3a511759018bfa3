@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b19dac_80bcc022",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-13T07:22:17Z",
+      "side": 1,
+      "message": "No hook should be needed, please submit the correct fix for this upstream instead.",
+      "revId": "44a2ed635d17befcee12d74fd3a511759018bfa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbb9976_ee7a967b",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-13T07:22:17Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "range": {
+        "startLine": 618,
+        "startChar": 0,
+        "endLine": 618,
+        "endChar": 71
+      },
+      "revId": "44a2ed635d17befcee12d74fd3a511759018bfa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
