@@ -21,10 +21,25 @@ void copy_highpage(struct page *to, struct page *from)
 
 	copy_page(kto, kfrom);
 
+<<<<<<< HEAD   (4c5606 Revert "tipc: add tipc_bearer_min_mtu to calculate min mtu")
 	if (kasan_hw_tags_enabled())
 		page_kasan_tag_reset(to);
 
 	if (system_supports_mte() && page_mte_tagged(from)) {
+=======
+	page_kasan_tag_reset(to);
+
+	if (system_supports_mte() && test_bit(PG_mte_tagged, &from->flags)) {
+		set_bit(PG_mte_tagged, &to->flags);
+		/*
+		 * We need smp_wmb() in between setting the flags and clearing the
+		 * tags because if another thread reads page->flags and builds a
+		 * tagged address out of it, there is an actual dependency to the
+		 * memory access, but on the current thread we do not guarantee that
+		 * the new page->flags are visible before the tags were updated.
+		 */
+		smp_wmb();
+>>>>>>> BRANCH (0ab064 Linux 5.15.114)
 		mte_copy_page_tags(kto, kfrom);
 		set_page_mte_tagged(to);
 	}
