@@ -33,6 +33,24 @@
       "message": "Note, these symbols are NOT in a publicly available location (i.e. an external module can not see them), so even if they are exported, they will never be able to be used.\n\nSorry, this is not going to work.",
       "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71e5863b_f0c53e42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1350392
+      },
+      "writtenOn": "2023-06-13T07:11:15Z",
+      "side": 1,
+      "message": "I saw there is dma_map_ops in struct device {}, could the device driver implement the dma_map_ops to have its own dma to match device\u0027s requirement?",
+      "parentUuid": "44f10d5f_ec7740ac",
+      "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
