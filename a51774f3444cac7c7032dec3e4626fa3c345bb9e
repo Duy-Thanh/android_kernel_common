@@ -69,6 +69,24 @@
       "parentUuid": "71e5863b_f0c53e42",
       "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17f553ea_8ee938fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1350392
+      },
+      "writtenOn": "2023-06-13T08:32:48Z",
+      "side": 1,
+      "message": "Thanks for reply.\n\nYes, you\u0027re right, it\u0027s USB bus. I\u0027ve tried w/ these symbols and it worked.\n\nI agree that upstream is long term solution as well, but It\u0027s very close to Android14 KMI freeze now, a little bit late to change the design for Android14..",
+      "parentUuid": "5fc4fdac_c845b892",
+      "revId": "a51774f3444cac7c7032dec3e4626fa3c345bb9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
