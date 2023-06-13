@@ -341,6 +341,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7db8dd9b_98b889ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-06-13T03:15:48Z",
+      "side": 1,
+      "message": "\u003e Could you suggest which testing downstream I should apply change on?\n\nWell, I\u0027m really thinking that you set up your own (or perhaps host it in CodeLinaro or Github). You can have a branch downstream of android-mainline where this config is added where your co-developers can pick it up. The ACK kernels are really for product deployments and we don\u0027t generally accept experimental patches.",
+      "parentUuid": "6928a50c_55a18c1a",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
