@@ -16,6 +16,24 @@
       "message": "x86 config as well?",
       "revId": "dcd41b986e5ada027fac0f54e39fba0f8bd6b4d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cb7565a_36a8d581",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-06-13T07:30:05Z",
+      "side": 1,
+      "message": "I’m not sure if x86 requires it, but if RPMSG is used on the x86 platform, this configuration may be needed.",
+      "parentUuid": "bd150f58_c96c7907",
+      "revId": "dcd41b986e5ada027fac0f54e39fba0f8bd6b4d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
