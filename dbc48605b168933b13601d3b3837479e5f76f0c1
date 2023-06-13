@@ -22,6 +22,30 @@
       },
       "revId": "dbc48605b168933b13601d3b3837479e5f76f0c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c0c297a_526bcf4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2023-06-13T08:10:21Z",
+      "side": 1,
+      "message": "I would like to refer to the approach taken in commit cdcdf1d9aff8 \"Revert \u0027FROMGIT: usb: gadget: udc: core: Prevent redundant calls to pullup\u0027\", which is part of a series of patches. Now, following your suggestion, I will cherry-pick these patches from the Linux mainline. Please assist with the review. Thank you.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2624091",
+      "parentUuid": "0baa9b9c_d254e5e6",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 61
+      },
+      "revId": "dbc48605b168933b13601d3b3837479e5f76f0c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
