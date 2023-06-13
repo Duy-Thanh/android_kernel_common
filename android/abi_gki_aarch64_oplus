@@ -581,6 +581,8 @@
   up
   up_read
   up_write
+  uprobe_register
+  uprobe_unregister
   vfree
   vmalloc
   vmalloc_nr_pages
