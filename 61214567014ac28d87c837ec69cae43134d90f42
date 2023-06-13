@@ -359,6 +359,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23f8a276_d511ba45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-13T06:30:57Z",
+      "side": 1,
+      "message": "Note, for virtio, people can develop them on KVM just as easily, right?\n\nAnd again, Xen is \"legacy\" technology, no new devices should really be using it, and especially on ARM64 platforms, where Xen really isn\u0027t a solidly supported platform upstream (i.e. there have not been any upstream arm64 xen changes in the kernel in years).  Are you sure it even works?  😊",
+      "parentUuid": "7db8dd9b_98b889ea",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
