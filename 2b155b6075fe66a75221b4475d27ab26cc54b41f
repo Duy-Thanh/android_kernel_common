@@ -16,6 +16,24 @@
       "message": "please wrap the changlog properly like it is upstream.",
       "revId": "2b155b6075fe66a75221b4475d27ab26cc54b41f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61be7661_f697a0ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 27
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1348430
+      },
+      "writtenOn": "2023-06-13T07:02:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d49af068_9f9d7417",
+      "revId": "2b155b6075fe66a75221b4475d27ab26cc54b41f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
