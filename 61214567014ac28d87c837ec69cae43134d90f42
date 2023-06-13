@@ -305,6 +305,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5389259_7175e590",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-13T02:48:08Z",
+      "side": 1,
+      "message": "@Todd, to answer the question for \"why we enable Android OS on Xen virtualization\", we conclude:\n\n- Xen serves as a model on how to deploy Android on a type 1 hypervisor.\n- Xen provides a foundation to develop virtIO interfaces that people want to standardise. \n\n\u003e Then it seems like this config can be enabled for testing downstream\n\nCould you suggest which testing downstream I should apply change on?  If this is find for you (@Todd and @Alistair), I will spin the patch on the downstream branch.  \n\n\u003e You can file a bug at https://issuetracker.google.com/. There is a Linaro component: Android\u003ePartner\u003eExternal\u003eLinaro (componentid: 1162188).\n\nSeems I don\u0027t have permission to see Linaro component, and with searching componentid, it reports \"no component found\".  I will work with @Amit to see we can make it.\n\nThanks for suggestions!",
+      "parentUuid": "7ffdc51d_993847aa",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
