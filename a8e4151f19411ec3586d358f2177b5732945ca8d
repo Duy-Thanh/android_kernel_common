@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2594a0d5_4e8002dd",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-13T21:46:02Z",
+      "side": 1,
+      "message": "These symbols seem to be unrelated to the vendor hooks added in the previous patch.\nIf you need them for the same feature please add explanation why they are needed in the patch description.",
+      "range": {
+        "startLine": 554,
+        "startChar": 2,
+        "endLine": 556,
+        "endChar": 11
+      },
+      "revId": "a8e4151f19411ec3586d358f2177b5732945ca8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
