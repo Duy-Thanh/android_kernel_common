@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a68c060b_0945698a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1999541
+      },
+      "writtenOn": "2023-06-13T09:38:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b827b50c_1af07d4b",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 13
+      },
+      "revId": "4a3129ee1ef5bccd8f4055a19a5333d6fa0618b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8541fd41_b316782f",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-06-13T09:24:03Z",
       "side": 1,
       "message": "What is the status of the requested changes from upstream from the review that happened last week on this?",
+      "revId": "4a3129ee1ef5bccd8f4055a19a5333d6fa0618b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "089d85e6_456d8e3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1999541
+      },
+      "writtenOn": "2023-06-13T09:38:23Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nIn these series upstream patches, the PHY drivers must be revised.\nNow I revised the PHY driver and dt_binding to remove the non hardware and parameter properties from DTS and add them to drivers.\nWhen I test that it is fine, I will resubmit.",
+      "parentUuid": "8541fd41_b316782f",
       "revId": "4a3129ee1ef5bccd8f4055a19a5333d6fa0618b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
