@@ -323,6 +323,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6928a50c_55a18c1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-13T02:50:06Z",
+      "side": 1,
+      "message": "Sorry for a typo inn above replying, to fix: s/If this is find.../If this fine.../",
+      "parentUuid": "c5389259_7175e590",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
