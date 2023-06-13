@@ -105,6 +105,24 @@
       "parentUuid": "b745b336_4af1b126",
       "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61fdfb6f_fc2dd3f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-13T07:15:38Z",
+      "side": 1,
+      "message": "If this is really a bugfix that is needed in this branch, then it should be sent upstream for inclusion in the stable kernel branches so that we do not have to maintain it over time for the next 10+ years.  This also resolves merge issues and bugfixes.  Please do so.",
+      "parentUuid": "48dbf645_4b3562e0",
+      "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
