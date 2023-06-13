@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4083657e_7b1093dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1999541
+      },
+      "writtenOn": "2023-06-13T08:09:22Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nThe upstream patch is under review.\nCan I patch it to ACK?",
+      "parentUuid": "f7b19dac_80bcc022",
+      "revId": "44a2ed635d17befcee12d74fd3a511759018bfa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bbb9976_ee7a967b",
         "filename": "drivers/usb/core/hub.c",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2023-06-13T07:22:17Z",
       "side": 1,
       "message": "why is this needed?",
+      "range": {
+        "startLine": 618,
+        "startChar": 0,
+        "endLine": 618,
+        "endChar": 71
+      },
+      "revId": "44a2ed635d17befcee12d74fd3a511759018bfa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58cb53d_e9ef2247",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1999541
+      },
+      "writtenOn": "2023-06-13T08:09:22Z",
+      "side": 1,
+      "message": "I have checked the definition of vendor hook again (include/trace/hooks/vendor_hooks.h).\nIt is not needed.",
+      "parentUuid": "9bbb9976_ee7a967b",
       "range": {
         "startLine": 618,
         "startChar": 0,
