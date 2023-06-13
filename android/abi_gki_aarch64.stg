@@ -20627,6 +20627,11 @@ pointer_reference {
   pointee_type_id: 0x97d84511
 }
 pointer_reference {
+  id: 0x2f67350a
+  kind: POINTER
+  pointee_type_id: 0x97dc32b4
+}
+pointer_reference {
   id: 0x2f6a769c
   kind: POINTER
   pointee_type_id: 0x97e93cee
@@ -21907,6 +21912,11 @@ pointer_reference {
   pointee_type_id: 0xee532b56
 }
 pointer_reference {
+  id: 0x31066a10
+  kind: POINTER
+  pointee_type_id: 0xee594edc
+}
+pointer_reference {
   id: 0x3107960e
   kind: POINTER
   pointee_type_id: 0xee5ebea5
@@ -22695,6 +22705,11 @@ pointer_reference {
   id: 0x32f2aeac
   kind: POINTER
   pointee_type_id: 0xe18a5c2e
+}
+pointer_reference {
+  id: 0x32f690bf
+  kind: POINTER
+  pointee_type_id: 0xe19aa462
 }
 pointer_reference {
   id: 0x32f8fd7b
@@ -32057,6 +32072,11 @@ qualified {
   qualified_type_id: 0xf66ec631
 }
 qualified {
+  id: 0xe19aa462
+  qualifier: CONST
+  qualified_type_id: 0xf62d2702
+}
+qualified {
   id: 0xe1c8dd66
   qualifier: CONST
   qualified_type_id: 0xf764c311
@@ -32715,6 +32735,11 @@ qualified {
   id: 0xee53e764
   qualifier: CONST
   qualified_type_id: 0xc9082b19
+}
+qualified {
+  id: 0xee594edc
+  qualifier: CONST
+  qualified_type_id: 0xc9228df8
 }
 qualified {
   id: 0xee5e6dfc
@@ -33914,6 +33939,11 @@ array {
   id: 0x18e7b37e
   number_of_elements: 20
   element_type_id: 0x3cebb086
+}
+array {
+  id: 0x191c3876
+  number_of_elements: 3
+  element_type_id: 0x2f67350a
 }
 array {
   id: 0x19252310
@@ -43355,6 +43385,12 @@ member {
   offset: 544
 }
 member {
+  id: 0x5a1dac3a
+  name: "algo"
+  type_id: 0x09f65231
+  offset: 96
+}
+member {
   id: 0x5a21819e
   name: "algo"
   type_id: 0x35dbb7d3
@@ -48964,6 +49000,11 @@ member {
   id: 0xaa694b5b
   name: "autask"
   type_id: 0x3aeecf43
+}
+member {
+  id: 0xf4dca130
+  name: "auth_ids"
+  type_id: 0x191c3876
 }
 member {
   id: 0x68e4e565
@@ -68143,6 +68184,12 @@ member {
   offset: 160
 }
 member {
+  id: 0xff417309
+  name: "data"
+  type_id: 0xd359db99
+  offset: 16
+}
+member {
   id: 0xff417475
   name: "data"
   type_id: 0xd359db99
@@ -68513,6 +68560,12 @@ member {
   name: "data"
   type_id: 0x391f15ea
   offset: 1536
+}
+member {
+  id: 0xffab320b
+  name: "data"
+  type_id: 0x391f15ea
+  offset: 576
 }
 member {
   id: 0xffab33b0
@@ -68973,6 +69026,12 @@ member {
   name: "data_shift"
   type_id: 0x5d8155a5
   offset: 40
+}
+member {
+  id: 0x564ca083
+  name: "data_size"
+  type_id: 0x4585663f
+  offset: 640
 }
 member {
   id: 0x569ccc07
@@ -74181,6 +74240,18 @@ member {
   name: "digest"
   type_id: 0x2d7c4ebb
   offset: 256
+}
+member {
+  id: 0x5faf1f1c
+  name: "digest"
+  type_id: 0x00c72527
+  offset: 256
+}
+member {
+  id: 0x191c0c1c
+  name: "digest_size"
+  type_id: 0xc9082b19
+  offset: 352
 }
 member {
   id: 0x19908cca
@@ -80140,6 +80211,12 @@ member {
   name: "encoding"
   type_id: 0x3e10b518
   offset: 64
+}
+member {
+  id: 0x6a8cfc68
+  name: "encoding"
+  type_id: 0x3e10b518
+  offset: 512
 }
 member {
   id: 0x6a9bb431
@@ -96347,6 +96424,12 @@ member {
   offset: 128
 }
 member {
+  id: 0x637c4dd8
+  name: "hash_algo"
+  type_id: 0x3e10b518
+  offset: 448
+}
+member {
   id: 0xf67f55a9
   name: "hash_bits"
   type_id: 0x4585663f
@@ -101457,6 +101540,12 @@ member {
   name: "id_table"
   type_id: 0x3c24585d
   offset: 1600
+}
+member {
+  id: 0xdf043932
+  name: "id_type"
+  type_id: 0x3e10b518
+  offset: 256
 }
 member {
   id: 0x6a77f134
@@ -109871,6 +109960,12 @@ member {
   bitsize: 2
 }
 member {
+  id: 0x16578008
+  name: "key_is_private"
+  type_id: 0x6d7f5ff6
+  offset: 224
+}
+member {
   id: 0x043870df
   name: "key_len"
   type_id: 0x914dbfdc
@@ -109989,6 +110084,12 @@ member {
   name: "keycodesize"
   type_id: 0x4585663f
   offset: 1728
+}
+member {
+  id: 0x153981eb
+  name: "keylen"
+  type_id: 0xc9082b19
+  offset: 64
 }
 member {
   id: 0x67a32b63
@@ -112861,6 +112962,11 @@ member {
   name: "len"
   type_id: 0xc9082b19
   offset: 320
+}
+member {
+  id: 0xb8cceb57
+  name: "len"
+  type_id: 0xc93e017b
 }
 member {
   id: 0xb8e3f22b
@@ -141089,6 +141195,12 @@ member {
   offset: 192
 }
 member {
+  id: 0x1e5d0663
+  name: "paramlen"
+  type_id: 0xc9082b19
+  offset: 192
+}
+member {
   id: 0x4b34b9aa
   name: "params"
   type_id: 0x9addce46
@@ -141111,6 +141223,12 @@ member {
   name: "params"
   type_id: 0x35d0c5ee
   offset: 512
+}
+member {
+  id: 0x4bb6d80a
+  name: "params"
+  type_id: 0x18bd6530
+  offset: 128
 }
 member {
   id: 0x4bf9b0b2
@@ -145376,6 +145494,18 @@ member {
   name: "pixmap"
   type_id: 0x9a93ffb7
   offset: 3968
+}
+member {
+  id: 0xec6d1882
+  name: "pkey_algo"
+  type_id: 0x3e10b518
+  offset: 320
+}
+member {
+  id: 0xec6d1ed7
+  name: "pkey_algo"
+  type_id: 0x3e10b518
+  offset: 384
 }
 member {
   id: 0x799e6a47
@@ -165544,6 +165674,12 @@ member {
   offset: 64
 }
 member {
+  id: 0x67f2783e
+  name: "s"
+  type_id: 0x00c72527
+  offset: 192
+}
+member {
   id: 0x5d861b13
   name: "s1g"
   type_id: 0x6d7f5ff6
@@ -166059,6 +166195,12 @@ member {
   name: "s_shrink"
   type_id: 0xb4975242
   offset: 9152
+}
+member {
+  id: 0x51ed5557
+  name: "s_size"
+  type_id: 0xc9082b19
+  offset: 320
 }
 member {
   id: 0xce6743a2
@@ -211382,6 +211524,16 @@ struct_union {
   name: "assoc_array_ptr"
 }
 struct_union {
+  id: 0x97dc32b4
+  kind: STRUCT
+  name: "asymmetric_key_id"
+  definition {
+    bytesize: 2
+    member_id: 0xb8cceb57
+    member_id: 0xff417309
+  }
+}
+struct_union {
   id: 0xaa94b7f2
   kind: STRUCT
   name: "async_domain"
@@ -242755,6 +242907,40 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xc9228df8
+  kind: STRUCT
+  name: "public_key"
+  definition {
+    bytesize: 48
+    member_id: 0x204eb7cb
+    member_id: 0x153981eb
+    member_id: 0x5a1dac3a
+    member_id: 0x4bb6d80a
+    member_id: 0x1e5d0663
+    member_id: 0x16578008
+    member_id: 0xdf043932
+    member_id: 0xec6d1882
+  }
+}
+struct_union {
+  id: 0xf62d2702
+  kind: STRUCT
+  name: "public_key_signature"
+  definition {
+    bytesize: 88
+    member_id: 0xf4dca130
+    member_id: 0x67f2783e
+    member_id: 0x5faf1f1c
+    member_id: 0x51ed5557
+    member_id: 0x191c0c1c
+    member_id: 0xec6d1ed7
+    member_id: 0x637c4dd8
+    member_id: 0x6a8cfc68
+    member_id: 0xffab320b
+    member_id: 0x564ca083
+  }
+}
+struct_union {
   id: 0x3ea9cea9
   kind: STRUCT
   name: "pwm_args"
@@ -264323,6 +264509,408 @@ enumeration {
     enumerator {
       name: "FP_STATE_GUEST_OWNED"
       value: 2
+    }
+  }
+}
+enumeration {
+  id: 0x09f65231
+  name: "OID"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "OID_id_dsa_with_sha1"
+    }
+    enumerator {
+      name: "OID_id_dsa"
+      value: 1
+    }
+    enumerator {
+      name: "OID_id_ecPublicKey"
+      value: 2
+    }
+    enumerator {
+      name: "OID_id_prime192v1"
+      value: 3
+    }
+    enumerator {
+      name: "OID_id_prime256v1"
+      value: 4
+    }
+    enumerator {
+      name: "OID_id_ecdsa_with_sha1"
+      value: 5
+    }
+    enumerator {
+      name: "OID_id_ecdsa_with_sha224"
+      value: 6
+    }
+    enumerator {
+      name: "OID_id_ecdsa_with_sha256"
+      value: 7
+    }
+    enumerator {
+      name: "OID_id_ecdsa_with_sha384"
+      value: 8
+    }
+    enumerator {
+      name: "OID_id_ecdsa_with_sha512"
+      value: 9
+    }
+    enumerator {
+      name: "OID_rsaEncryption"
+      value: 10
+    }
+    enumerator {
+      name: "OID_md2WithRSAEncryption"
+      value: 11
+    }
+    enumerator {
+      name: "OID_md3WithRSAEncryption"
+      value: 12
+    }
+    enumerator {
+      name: "OID_md4WithRSAEncryption"
+      value: 13
+    }
+    enumerator {
+      name: "OID_sha1WithRSAEncryption"
+      value: 14
+    }
+    enumerator {
+      name: "OID_sha256WithRSAEncryption"
+      value: 15
+    }
+    enumerator {
+      name: "OID_sha384WithRSAEncryption"
+      value: 16
+    }
+    enumerator {
+      name: "OID_sha512WithRSAEncryption"
+      value: 17
+    }
+    enumerator {
+      name: "OID_sha224WithRSAEncryption"
+      value: 18
+    }
+    enumerator {
+      name: "OID_data"
+      value: 19
+    }
+    enumerator {
+      name: "OID_signed_data"
+      value: 20
+    }
+    enumerator {
+      name: "OID_email_address"
+      value: 21
+    }
+    enumerator {
+      name: "OID_contentType"
+      value: 22
+    }
+    enumerator {
+      name: "OID_messageDigest"
+      value: 23
+    }
+    enumerator {
+      name: "OID_signingTime"
+      value: 24
+    }
+    enumerator {
+      name: "OID_smimeCapabilites"
+      value: 25
+    }
+    enumerator {
+      name: "OID_smimeAuthenticatedAttrs"
+      value: 26
+    }
+    enumerator {
+      name: "OID_md2"
+      value: 27
+    }
+    enumerator {
+      name: "OID_md4"
+      value: 28
+    }
+    enumerator {
+      name: "OID_md5"
+      value: 29
+    }
+    enumerator {
+      name: "OID_mskrb5"
+      value: 30
+    }
+    enumerator {
+      name: "OID_krb5"
+      value: 31
+    }
+    enumerator {
+      name: "OID_krb5u2u"
+      value: 32
+    }
+    enumerator {
+      name: "OID_msIndirectData"
+      value: 33
+    }
+    enumerator {
+      name: "OID_msStatementType"
+      value: 34
+    }
+    enumerator {
+      name: "OID_msSpOpusInfo"
+      value: 35
+    }
+    enumerator {
+      name: "OID_msPeImageDataObjId"
+      value: 36
+    }
+    enumerator {
+      name: "OID_msIndividualSPKeyPurpose"
+      value: 37
+    }
+    enumerator {
+      name: "OID_msOutlookExpress"
+      value: 38
+    }
+    enumerator {
+      name: "OID_ntlmssp"
+      value: 39
+    }
+    enumerator {
+      name: "OID_spnego"
+      value: 40
+    }
+    enumerator {
+      name: "OID_IAKerb"
+      value: 41
+    }
+    enumerator {
+      name: "OID_PKU2U"
+      value: 42
+    }
+    enumerator {
+      name: "OID_Scram"
+      value: 43
+    }
+    enumerator {
+      name: "OID_certAuthInfoAccess"
+      value: 44
+    }
+    enumerator {
+      name: "OID_sha1"
+      value: 45
+    }
+    enumerator {
+      name: "OID_id_ansip384r1"
+      value: 46
+    }
+    enumerator {
+      name: "OID_sha256"
+      value: 47
+    }
+    enumerator {
+      name: "OID_sha384"
+      value: 48
+    }
+    enumerator {
+      name: "OID_sha512"
+      value: 49
+    }
+    enumerator {
+      name: "OID_sha224"
+      value: 50
+    }
+    enumerator {
+      name: "OID_commonName"
+      value: 51
+    }
+    enumerator {
+      name: "OID_surname"
+      value: 52
+    }
+    enumerator {
+      name: "OID_countryName"
+      value: 53
+    }
+    enumerator {
+      name: "OID_locality"
+      value: 54
+    }
+    enumerator {
+      name: "OID_stateOrProvinceName"
+      value: 55
+    }
+    enumerator {
+      name: "OID_organizationName"
+      value: 56
+    }
+    enumerator {
+      name: "OID_organizationUnitName"
+      value: 57
+    }
+    enumerator {
+      name: "OID_title"
+      value: 58
+    }
+    enumerator {
+      name: "OID_description"
+      value: 59
+    }
+    enumerator {
+      name: "OID_name"
+      value: 60
+    }
+    enumerator {
+      name: "OID_givenName"
+      value: 61
+    }
+    enumerator {
+      name: "OID_initials"
+      value: 62
+    }
+    enumerator {
+      name: "OID_generationalQualifier"
+      value: 63
+    }
+    enumerator {
+      name: "OID_subjectKeyIdentifier"
+      value: 64
+    }
+    enumerator {
+      name: "OID_keyUsage"
+      value: 65
+    }
+    enumerator {
+      name: "OID_subjectAltName"
+      value: 66
+    }
+    enumerator {
+      name: "OID_issuerAltName"
+      value: 67
+    }
+    enumerator {
+      name: "OID_basicConstraints"
+      value: 68
+    }
+    enumerator {
+      name: "OID_crlDistributionPoints"
+      value: 69
+    }
+    enumerator {
+      name: "OID_certPolicies"
+      value: 70
+    }
+    enumerator {
+      name: "OID_authorityKeyIdentifier"
+      value: 71
+    }
+    enumerator {
+      name: "OID_extKeyUsage"
+      value: 72
+    }
+    enumerator {
+      name: "OID_NetlogonMechanism"
+      value: 73
+    }
+    enumerator {
+      name: "OID_appleLocalKdcSupported"
+      value: 74
+    }
+    enumerator {
+      name: "OID_gostCPSignA"
+      value: 75
+    }
+    enumerator {
+      name: "OID_gostCPSignB"
+      value: 76
+    }
+    enumerator {
+      name: "OID_gostCPSignC"
+      value: 77
+    }
+    enumerator {
+      name: "OID_gost2012PKey256"
+      value: 78
+    }
+    enumerator {
+      name: "OID_gost2012PKey512"
+      value: 79
+    }
+    enumerator {
+      name: "OID_gost2012Digest256"
+      value: 80
+    }
+    enumerator {
+      name: "OID_gost2012Digest512"
+      value: 81
+    }
+    enumerator {
+      name: "OID_gost2012Signature256"
+      value: 82
+    }
+    enumerator {
+      name: "OID_gost2012Signature512"
+      value: 83
+    }
+    enumerator {
+      name: "OID_gostTC26Sign256A"
+      value: 84
+    }
+    enumerator {
+      name: "OID_gostTC26Sign256B"
+      value: 85
+    }
+    enumerator {
+      name: "OID_gostTC26Sign256C"
+      value: 86
+    }
+    enumerator {
+      name: "OID_gostTC26Sign256D"
+      value: 87
+    }
+    enumerator {
+      name: "OID_gostTC26Sign512A"
+      value: 88
+    }
+    enumerator {
+      name: "OID_gostTC26Sign512B"
+      value: 89
+    }
+    enumerator {
+      name: "OID_gostTC26Sign512C"
+      value: 90
+    }
+    enumerator {
+      name: "OID_sm2"
+      value: 91
+    }
+    enumerator {
+      name: "OID_sm3"
+      value: 92
+    }
+    enumerator {
+      name: "OID_SM2_with_SM3"
+      value: 93
+    }
+    enumerator {
+      name: "OID_sm3WithRSAEncryption"
+      value: 94
+    }
+    enumerator {
+      name: "OID_TPMLoadableKey"
+      value: 95
+    }
+    enumerator {
+      name: "OID_TPMImportableKey"
+      value: 96
+    }
+    enumerator {
+      name: "OID_TPMSealedData"
+      value: 97
+    }
+    enumerator {
+      name: "OID__NR"
+      value: 98
     }
   }
 }
@@ -297449,6 +298037,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x3176a085
   parameter_id: 0x3521907a
+}
+function {
+  id: 0x910aa3e9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x31066a10
+  parameter_id: 0x32f690bf
 }
 function {
   id: 0x910c3195
@@ -362587,6 +363181,15 @@ elf_symbol {
   full_name: "ptp_parse_header"
 }
 elf_symbol {
+  id: 0x177fa0e0
+  name: "public_key_verify_signature"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x32836981
+  type_id: 0x910aa3e9
+  full_name: "public_key_verify_signature"
+}
+elf_symbol {
   id: 0x11d4227b
   name: "put_cmsg"
   is_defined: true
@@ -384889,6 +385492,7 @@ interface {
   symbol_id: 0x42a88d96
   symbol_id: 0xb36e22d3
   symbol_id: 0x683db5bf
+  symbol_id: 0x177fa0e0
   symbol_id: 0x11d4227b
   symbol_id: 0x71551ba9
   symbol_id: 0x435b99c6
