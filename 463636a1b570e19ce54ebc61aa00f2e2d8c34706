@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96e3b391_6585f3f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-13T16:48:11Z",
+      "side": 1,
+      "message": "breaks the build as a module is now built into the tree, you need to remove it from the BUILD.bazel file as well.",
+      "revId": "463636a1b570e19ce54ebc61aa00f2e2d8c34706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
