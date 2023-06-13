@@ -377,6 +377,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a7271b7_029be945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2023-06-13T06:49:28Z",
+      "side": 1,
+      "message": "\u003e And again, Xen is \"legacy\" technology, no new devices should really\n\u003e be using it, and especially on ARM64 platforms, where Xen really\n\u003e isn\u0027t a solidly supported platform upstream (i.e. there have not\n\u003e been any upstream arm64 xen changes in the kernel in years).\n\u003e Are you sure it even works? 😊\n\nA challenge question 😜.  So, yes, I can confirm Xen works on aarch64 and can boot up successfully with the latest Linux kernel.  In Linaro we have a distro named \"Trusted substract reference\" (TRS) which supports Xen by default and we do CI/CD testing daily for it [1].\n\nI will deliver a session for updating current status for porting Android automotive on Xen in next week (20th, June), and in the session we will show a demo for booting Android automotive OS on Xen virtual machine (with enabling virtio-gpu!).  I will make sure all of you will receive the invitation and share the slides with you.\n\n[1] https://trs.readthedocs.io/en/latest/manual/feature.html#virtualization",
+      "parentUuid": "23f8a276_d511ba45",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
