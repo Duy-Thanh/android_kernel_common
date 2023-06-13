@@ -87,6 +87,24 @@
       "parentUuid": "7bb20259_84f52e76",
       "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48dbf645_4b3562e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935538
+      },
+      "writtenOn": "2023-06-13T05:17:45Z",
+      "side": 1,
+      "message": "expect us (who is using android14-6.1 kernel),so far no one reported this to upstream. Now, what is stopping us to apply this change ? This change is already merged in the maintainer tree. Do, you mean the change with tags \"FROMGIT\", \"BACKPORT\", shouldn\u0027t be picked/applied unless it first merged in upstream kernel ?",
+      "parentUuid": "b745b336_4af1b126",
+      "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
