@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb203001_e125b96e",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 3
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-14T08:03:46Z",
+      "side": 1,
+      "message": "this is not allowed to be used by any external drivers as it is a user/kernel API, sorry.",
+      "range": {
+        "startLine": 555,
+        "startChar": 2,
+        "endLine": 555,
+        "endChar": 11
+      },
+      "revId": "a68a926a4a1166b2fa2330a4fcd1d76f77648a54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
