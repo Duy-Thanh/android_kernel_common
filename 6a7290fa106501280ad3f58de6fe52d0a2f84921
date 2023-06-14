@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5abba53_e6bdfbe6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-14T12:39:20Z",
+      "side": 1,
+      "message": "Please rebase and rebuild as the .stg file needs to be regenerated at this point in time.",
+      "revId": "6a7290fa106501280ad3f58de6fe52d0a2f84921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
