@@ -377,6 +377,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_effective_cpu_util,
 		 struct task_struct *p, unsigned long *new_util),
 	TP_ARGS(cpu, util_cfs, max, type, p, new_util), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_sched_waking,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
 DECLARE_HOOK(android_vh_mmput,
 	TP_PROTO(struct mm_struct *mm),
 	TP_ARGS(mm));

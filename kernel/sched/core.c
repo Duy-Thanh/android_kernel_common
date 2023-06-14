@@ -4195,6 +4195,7 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 	if (!ttwu_state_match(p, state, &success))
 		goto unlock;
 
+	trace_android_rvh_sched_waking(p);
 	trace_sched_waking(p);
 
 	/*
