@@ -103,6 +103,23 @@
       "message": "Thanks, now could you help to merge this patch?",
       "revId": "16916c79759d277ace7f89f3b898182a38543c03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2eea5e3_c4b91a56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-14T12:40:02Z",
+      "side": 1,
+      "message": "Please rebase and rebuild as the .stg file needs to be regenerated at this point in time.",
+      "revId": "16916c79759d277ace7f89f3b898182a38543c03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
