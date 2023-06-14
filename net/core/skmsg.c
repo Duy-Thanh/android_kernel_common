@@ -1212,7 +1212,20 @@ static void sk_psock_verdict_data_ready(struct sock *sk)
 
 	if (unlikely(!sock || !sock->ops || !sock->ops->read_skb))
 		return;
+<<<<<<< HEAD   (4c7794 Merge 6.1.33 into android14-6.1-lts)
 	sock->ops->read_skb(sk, sk_psock_verdict_recv);
+=======
+	copied = sock->ops->read_skb(sk, sk_psock_verdict_recv);
+	if (copied >= 0) {
+		struct sk_psock *psock;
+
+		rcu_read_lock();
+		psock = sk_psock(sk);
+		if (psock)
+			psock->saved_data_ready(sk);
+		rcu_read_unlock();
+	}
+>>>>>>> BRANCH (ca87e7 Linux 6.1.34)
 }
 
 void sk_psock_start_verdict(struct sock *sk, struct sk_psock *psock)
