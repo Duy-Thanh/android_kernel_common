@@ -22137,11 +22137,6 @@ pointer_reference {
   pointee_type_id: 0xe2cebd77
 }
 pointer_reference {
-  id: 0x322509a0
-  kind: POINTER
-  pointee_type_id: 0xe2d4c01c
-}
-pointer_reference {
   id: 0x3225ac75
   kind: POINTER
   pointee_type_id: 0xe2d6574a
@@ -287864,6 +287859,12 @@ function {
   parameter_id: 0x3f54a013
 }
 function {
+  id: 0x45846d91
+  return_type_id: 0xc9082b19
+  parameter_id: 0x078316ff
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x45a8a3c4
   return_type_id: 0x00c83ba6
   parameter_id: 0x3860f3c0
@@ -369700,6 +369701,15 @@ elf_symbol {
   full_name: "ufshcd_mcq_config_esi"
 }
 elf_symbol {
+  id: 0x71dad1b2
+  name: "ufshcd_mcq_config_mac"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd1787215
+  type_id: 0x125cb480
+  full_name: "ufshcd_mcq_config_mac"
+}
+elf_symbol {
   id: 0x051c0489
   name: "ufshcd_mcq_enable_esi"
   is_defined: true
@@ -369707,6 +369717,15 @@ elf_symbol {
   crc: 0x7bb8ccaa
   type_id: 0x1178942c
   full_name: "ufshcd_mcq_enable_esi"
+}
+elf_symbol {
+  id: 0x562c9a11
+  name: "ufshcd_mcq_make_queues_operational"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1d22bd73
+  type_id: 0x1178942c
+  full_name: "ufshcd_mcq_make_queues_operational"
 }
 elf_symbol {
   id: 0x56d1da85
@@ -369725,6 +369744,15 @@ elf_symbol {
   crc: 0xa7db621e
   type_id: 0x30f8e5d3
   full_name: "ufshcd_mcq_poll_cqe_nolock"
+}
+elf_symbol {
+  id: 0xaefd3622
+  name: "ufshcd_mcq_read_cqis"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xeafc7b98
+  type_id: 0x45846d91
+  full_name: "ufshcd_mcq_read_cqis"
 }
 elf_symbol {
   id: 0x3ecd46f0
@@ -381809,9 +381837,12 @@ interface {
   symbol_id: 0xcd6f9634
   symbol_id: 0xba7435fd
   symbol_id: 0xb59c5eaf
+  symbol_id: 0x71dad1b2
   symbol_id: 0x051c0489
+  symbol_id: 0x562c9a11
   symbol_id: 0x56d1da85
   symbol_id: 0xe74af45a
+  symbol_id: 0xaefd3622
   symbol_id: 0x3ecd46f0
   symbol_id: 0xde541a7b
   symbol_id: 0xe6e08555
