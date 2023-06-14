@@ -34,6 +34,24 @@
       "parentUuid": "92462ad9_4acf24a2",
       "revId": "1d37a0c31881152ce33f34b90f53add70d15f92f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a3860fa_87a73249",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1668107
+      },
+      "writtenOn": "2023-06-14T11:54:58Z",
+      "side": 1,
+      "message": "e0897b7b0e72 ANDROID: sound: usb: Add vendor\u0027s hooking interface  \u003c\u003c This is modified. Some function\u0027s are deleted compared to the old patch(5.15).\n4ea01d2404e5 ANDROID: usb: host: add address_device to xhci overrides \u003c\u003c Modified. Including under 1 patches. Into one patch.\n\t\u003c\u003c 187308f3b5bd ANDROID: usb: host: add bus_suspend/bus_resume to xhci overrides\n667501e10d6c FROMLIST: usb: xhci-plat: add xhci_plat_priv_overwrite  \u003c\u003c Not modified(This is has original Change-ID.)\nbed24b39f8fc FROMLIST: usb: host: export symbols for xhci hooks usage \u003c\u003c Modified. Including under 2 patches. Into one patch.\n\t\u003c\u003c e884aabca42c ANDROID: usb: host: export xhci symbols for ring management\n\t\u003c\u003c 0fe1561a961e ANDROID: usb: host: xhci: provide function prototype for xhci_address_device\n31f36c521577 FROMLIST: usb: host: add xhci hooks for USB offload \u003c\u003c Modified. Including under 4 patches. Into one patch.\n\t\u003c\u003c b29da2056e92 ANDROID: usb: host: add max packet parameter on alloc_transfer_ring hook\n\t\u003c\u003c 0f02a2482128 ANDROID: usb: host: Use old init scheme when hook unavailable\n\t\u003c\u003c 6645129f8807 ANDROID: usb: host: free the offload TR by vendor hook",
+      "parentUuid": "a69ebd88_9b4ff8f8",
+      "revId": "1d37a0c31881152ce33f34b90f53add70d15f92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
