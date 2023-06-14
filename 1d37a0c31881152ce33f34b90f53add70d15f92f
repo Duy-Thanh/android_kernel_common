@@ -16,6 +16,24 @@
       "message": "Are these the same patches as before?  Are they the same as what was in older branches?  If so, can you use the same commitid so that we can track it in gerrit?\n\nAlso, please add a last commit that adds the needed symbols you are going to require to be in the abi, to the symbol lists as we need to see what symbols are going to be required to be stable over time to ensure that you have the proper padding set up to handle that.",
       "revId": "1d37a0c31881152ce33f34b90f53add70d15f92f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a69ebd88_9b4ff8f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1668107
+      },
+      "writtenOn": "2023-06-14T11:53:55Z",
+      "side": 1,
+      "message": "It was old(5.15) branch patches. But, Some patches make to one patch. So, I add new change id.\n\nI think that these patches are make a new commit because some parts have deleted codes differently from the previous (5.15).\nIf i wrong. Let me know. I will fix it.\n\nSome patches have assigned new change IDs while deleting the parts that are combined or unnecessary from the existing patch, should I keep the existing change ID?\n\nOk, I will add new symbols to \"android/abi_gki_aarch64_exynos\".",
+      "parentUuid": "92462ad9_4acf24a2",
+      "revId": "1d37a0c31881152ce33f34b90f53add70d15f92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
