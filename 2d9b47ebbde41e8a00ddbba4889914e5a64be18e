@@ -69,6 +69,42 @@
       "parentUuid": "fb8d92b6_f346eead",
       "revId": "2d9b47ebbde41e8a00ddbba4889914e5a64be18e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd425412_fdc9f690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-15T07:36:29Z",
+      "side": 1,
+      "message": "I see no in-kernel, or submitted, drivers that need it.  It is a early-boot-time thing only for busses, not drivers, to be calling.",
+      "parentUuid": "35d2ffd7_df076f90",
+      "revId": "2d9b47ebbde41e8a00ddbba4889914e5a64be18e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d69b2a5_a659ecd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-15T07:36:29Z",
+      "side": 1,
+      "message": "That is early boot for the PCI subsystem, and is a documented x86 user/kernel api configuration, which is why it is called there.\n\nNo individual driver calls it, so unless you are making the x86 PCI subsystem as a module, I don\u0027t think you need this 😊",
+      "parentUuid": "dec37a6b_8f6c5a21",
+      "revId": "2d9b47ebbde41e8a00ddbba4889914e5a64be18e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
