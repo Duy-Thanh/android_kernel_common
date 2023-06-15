@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9140bd4_0926cc8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118753
+      },
+      "writtenOn": "2023-06-15T18:10:36Z",
+      "side": 1,
+      "message": "For what it\u0027s worth, this breaks the build when CONFIG_UHID is not enabled, such as with ARCH\u003darm defconfig:\n\n$ make -skj\"$(nproc)\" ARCH\u003darm LLVM\u003d1 mrproper defconfig vmlinux\n...\nld.lld: error: undefined symbol: uhid_hid_driver\n\u003e\u003e\u003e referenced by hid-core.c\n\u003e\u003e\u003e               drivers/hid/hid-core.o:(hid_report_raw_event) in archive vmlinux.a\n\u003e\u003e\u003e referenced by hid-core.c\n\u003e\u003e\u003e               drivers/hid/hid-core.o:(hid_report_raw_event) in archive vmlinux.a\n\u003e\u003e\u003e referenced by hid-core.c\n\u003e\u003e\u003e               drivers/hid/hid-core.o:(hid_hw_raw_request) in archive vmlinux.a\n\u003e\u003e\u003e referenced 5 more times\n\nThis was noticed by our CI: https://github.com/ClangBuiltLinux/continuous-integration2/actions/runs/5275500948/jobs/9543244046",
+      "revId": "71761b36c37ae15a09fdd4d4adcc98bb939c426c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
