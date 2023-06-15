@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6afb7f08_c7af4d83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-15T20:39:22Z",
+      "side": 1,
+      "message": "This breaks the abi, and the ABI freeze is tomorrow, so that\u0027s not good.\n\nAs it does not look like the \"real\" fix is going to be done yet, should I make some space free in this structure to handle future ABI changes in case this is going to be needed?",
+      "revId": "b0f78a4092e2e70728b8842d8d76932ffdcc28c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
