@@ -78,6 +78,10 @@ for f in $dir_list;
 	do find "$f" -name "*.h";
 done | cpio --quiet -pdu $cpio_dir >/dev/null 2>&1
 
+# ANDROID: dereference symlink tree in Bazel sandbox
+find $cpio_dir -type l -exec \
+  /bin/sh -c 'real=$(readlink -e "$0"); rm "$0"; cp "$real" "$0"' {} \;
+
 # Remove comments except SDPX lines
 find $cpio_dir -type f -print0 |
 	xargs -0 -P8 -n1 perl -pi -e 'BEGIN {undef $/;}; s/\/\*((?!SPDX).)*?\*\///smg;'
