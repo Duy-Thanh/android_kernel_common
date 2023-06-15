@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "61d8814f_14dd1295",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1965775
+      },
+      "writtenOn": "2023-06-15T07:15:44Z",
+      "side": 1,
+      "message": "Corrected commit message as per guidelines.  Sorry for delayed response.",
+      "parentUuid": "33255a77_b4f4a0d6",
+      "revId": "2e26bc52368c5cc5b65148a9726cbdd9b235ef04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "744f4f25_00eda5bb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
