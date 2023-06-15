@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3010fa35_8ae349c6",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-15T07:34:52Z",
+      "side": 1,
+      "message": "this is NOT allowed to be used as you could turn off a security feature with it, which is not anything a vendor module should be able to do.",
+      "range": {
+        "startLine": 554,
+        "startChar": 2,
+        "endLine": 554,
+        "endChar": 15
+      },
+      "revId": "6408cf0f58c4f9b7c268654a6a806a50e7771dd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a198bac_b17c3106",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 4
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-15T07:34:52Z",
+      "side": 1,
+      "message": "this should not needed as it is a debugging feature only, and can expose lots of internal data to userspace, what code requires it?",
+      "range": {
+        "startLine": 555,
+        "startChar": 2,
+        "endLine": 555,
+        "endChar": 11
+      },
+      "revId": "6408cf0f58c4f9b7c268654a6a806a50e7771dd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
