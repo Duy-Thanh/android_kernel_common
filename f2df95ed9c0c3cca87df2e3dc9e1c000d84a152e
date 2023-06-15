@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dab1530_5d6eea49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-06-15T09:45:01Z",
+      "side": 1,
+      "message": "I\u0027m fine with this, but\n\n(a) I think this is ANDROID: not UPSTREAM: as this is not a cherrypick from Linus\u0027 tree\n\n(b) I believe the config files are meant to be alphabetically sorted, and thus CONNBYTES is inserted some dozen lines too low.",
+      "revId": "f2df95ed9c0c3cca87df2e3dc9e1c000d84a152e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
