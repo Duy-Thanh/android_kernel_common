@@ -16,6 +16,24 @@
       "message": "Upstream conversation just started and does not look promising. I don\u0027t think exporting arch functions will be considered acceptable, so -1 for now.",
       "revId": "91e98e3ab9aa8100edc0fc7bba356a984cde5ea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d5fee70_1d6ff042",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2012155
+      },
+      "writtenOn": "2023-06-15T12:46:29Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/all/ZIn0rMjYESJHuzyg@casper.infradead.org/\nya.. you are right, but finally I do not think we need to export arch_vma_name.\nIs it possible export symbols for smap_gather_stats in fs/proc/task_mmu.c?",
+      "parentUuid": "cd49aba5_5cb7d8e9",
+      "revId": "91e98e3ab9aa8100edc0fc7bba356a984cde5ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
