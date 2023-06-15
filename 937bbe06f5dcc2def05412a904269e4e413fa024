@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c18a25a_41b1ca0c",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-15T07:53:30Z",
+      "side": 1,
+      "message": "no driver should need this, it\u0027s only if something went really wrong, and if that happens, the core kernel should be calling this.  Why does a power button key driver require changing the kernel logging levels?",
+      "range": {
+        "startLine": 249,
+        "startChar": 2,
+        "endLine": 249,
+        "endChar": 17
+      },
+      "revId": "937bbe06f5dcc2def05412a904269e4e413fa024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
