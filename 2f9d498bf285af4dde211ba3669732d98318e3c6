@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcabf947_c7d55a21",
+        "filename": "android/abi_gki_aarch64_asr",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-15T08:59:56Z",
+      "side": 1,
+      "message": "Missing traceiter symbols for the following tracepoint symbols:\n  __tracepoint_android_vh_map_util_freq",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "2f9d498bf285af4dde211ba3669732d98318e3c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
