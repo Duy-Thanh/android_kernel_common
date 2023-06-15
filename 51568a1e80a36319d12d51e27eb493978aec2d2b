@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99f56c97_cb9238f9",
+        "filename": "arch/arm64/geniezone/vgic.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2023-06-15T23:50:22Z",
+      "side": 1,
+      "message": "I think there was a comment about this on the list: https://lore.kernel.org/lkml/af02f7c3-4832-c23b-4454-29db8e519b8d@collabora.com/",
+      "revId": "51568a1e80a36319d12d51e27eb493978aec2d2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
