@@ -12,6 +12,7 @@ struct blk_mq_queue_data;
 struct mmc_host;
 struct mmc_card;
 struct sdhci_host;
+struct cqhci_host;
 
 /*
  * Following tracepoints are not exported in tracefs and provide a
@@ -50,6 +51,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_mmc_cache_card_properties,
 DECLARE_RESTRICTED_HOOK(android_rvh_partial_init,
 	TP_PROTO(struct mmc_host *host, bool *partial_init),
 	TP_ARGS(host, partial_init), 1);
+DECLARE_HOOK(android_vh_mmc_cqhci_setup_tran_desc,
+	TP_PROTO(struct mmc_data *data, struct cqhci_host *cq_host, u8 *desc, int sg_count, bool *bypass),
+	TP_ARGS(data, cq_host, desc, sg_count, bypass));
 
 #endif /* _TRACE_HOOK_MMC_H */
 /* This part must be outside protection */
