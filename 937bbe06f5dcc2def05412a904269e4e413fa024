@@ -46,6 +46,30 @@
       },
       "revId": "937bbe06f5dcc2def05412a904269e4e413fa024",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e50bcff_21884b91",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-15T12:14:20Z",
+      "side": 1,
+      "message": "For this type of work, use the pstore code, that\u0027s the correct api, not manipulating the console level as the console buffer can easily be overrun this way.",
+      "parentUuid": "756c11fe_e709ab37",
+      "range": {
+        "startLine": 249,
+        "startChar": 2,
+        "endLine": 249,
+        "endChar": 17
+      },
+      "revId": "937bbe06f5dcc2def05412a904269e4e413fa024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
