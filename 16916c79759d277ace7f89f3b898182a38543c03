@@ -138,6 +138,24 @@
       "parentUuid": "a2eea5e3_c4b91a56",
       "revId": "16916c79759d277ace7f89f3b898182a38543c03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e95b2ee0_14cec750",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-06-15T16:40:18Z",
+      "side": 1,
+      "message": "I habe rebase and rebuild as the .stg file, could you help to review again. Thanks!",
+      "parentUuid": "234e6d39_0ca1049b",
+      "revId": "16916c79759d277ace7f89f3b898182a38543c03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
