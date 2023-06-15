@@ -16,6 +16,23 @@
       "message": "No driver should ever be calling this directly, please fix the code to use the proper apis instead.",
       "revId": "2d9b47ebbde41e8a00ddbba4889914e5a64be18e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "055e5f74_f9b83a0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-15T07:26:27Z",
+      "side": 1,
+      "message": "This is also an x86-specific issue, and should not be relevant for your platform, right?  If so, you are adding a new user/kernel api that is not upstream, which is not wise.",
+      "revId": "2d9b47ebbde41e8a00ddbba4889914e5a64be18e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
