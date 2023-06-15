@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0304835c_e02c822a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-15T23:55:16Z",
+      "side": 1,
+      "message": "I see that __up_read already has a vendor hook. Can you reuse it? Adding extra hooks in such a generic path slows it down for everyone even when they don\u0027t use it.",
+      "revId": "16d8beff9b348270bbbfc28f27441a332074c15e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
