@@ -39,6 +39,30 @@
       },
       "revId": "f2df95ed9c0c3cca87df2e3dc9e1c000d84a152e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff124e67_1f36f1cd",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-06-15T09:46:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c346eda_9d6e6eff",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 35
+      },
+      "revId": "f2df95ed9c0c3cca87df2e3dc9e1c000d84a152e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
