@@ -33,6 +33,42 @@
       "message": "This is also an x86-specific issue, and should not be relevant for your platform, right?  If so, you are adding a new user/kernel api that is not upstream, which is not wise.",
       "revId": "2d9b47ebbde41e8a00ddbba4889914e5a64be18e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec37a6b_8f6c5a21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965775
+      },
+      "writtenOn": "2023-06-15T07:32:30Z",
+      "side": 1,
+      "message": "Thanks. We are starting the upstreaming process for it. As this is already a NON Static function, some drivers are using this by including header iommu.h (arch/x86/kernel/pci-dma.c)",
+      "parentUuid": "055e5f74_f9b83a0f",
+      "revId": "2d9b47ebbde41e8a00ddbba4889914e5a64be18e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35d2ffd7_df076f90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965775
+      },
+      "writtenOn": "2023-06-15T07:32:30Z",
+      "side": 1,
+      "message": "This is not static function and some other drivers also using this API. We are starting the process upstream this change. To unblock us, we need it quickly, Hence reaching out before upstreaming.",
+      "parentUuid": "fb8d92b6_f346eead",
+      "revId": "2d9b47ebbde41e8a00ddbba4889914e5a64be18e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
