@@ -22,6 +22,30 @@
       },
       "revId": "937bbe06f5dcc2def05412a904269e4e413fa024",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "756c11fe_e709ab37",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1933031
+      },
+      "writtenOn": "2023-06-15T11:00:15Z",
+      "side": 1,
+      "message": "When the phone hangs, users usually choose to long press the Pwr key to trigger PMIC Hard Reset, we want to collect as many logs as possible for user feedback analysis when the user long presses the key, but most of the logs will be intercepted by the log level mechanism, we need to temporarily increase the log level, log capture will be restored after the end of the level will be set before",
+      "parentUuid": "4c18a25a_41b1ca0c",
+      "range": {
+        "startLine": 249,
+        "startChar": 2,
+        "endLine": 249,
+        "endChar": 17
+      },
+      "revId": "937bbe06f5dcc2def05412a904269e4e413fa024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
