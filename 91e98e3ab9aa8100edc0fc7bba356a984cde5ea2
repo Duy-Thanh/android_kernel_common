@@ -34,6 +34,24 @@
       "parentUuid": "cd49aba5_5cb7d8e9",
       "revId": "91e98e3ab9aa8100edc0fc7bba356a984cde5ea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b85c0029_04a15769",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-15T23:06:15Z",
+      "side": 1,
+      "message": "Nope, this information is available in the userspace and that\u0027s where it should be consumed (as Matthew indicated upstream).",
+      "parentUuid": "1d5fee70_1d6ff042",
+      "revId": "91e98e3ab9aa8100edc0fc7bba356a984cde5ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
