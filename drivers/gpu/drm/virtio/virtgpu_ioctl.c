@@ -131,6 +131,8 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
 	uint64_t fence_ctx;
 	uint32_t ring_idx;
 
+	DRM_ERROR("jasonjason virtio_gpu_execbuffer_ioctl()\n");
+
 	fence_ctx = vgdev->fence_drv.context;
 	ring_idx = 0;
 
@@ -267,6 +269,8 @@ static int virtio_gpu_getparam_ioctl(struct drm_device *dev, void *data,
 	struct drm_virtgpu_getparam *param = data;
 	int value;
 
+	DRM_ERROR("jasonjason virtio_gpu_getparam_ioctl()\n");
+
 	switch (param->param) {
 	case VIRTGPU_PARAM_3D_FEATURES:
 		value = vgdev->has_virgl_3d ? 1 : 0;
@@ -309,6 +313,8 @@ static int virtio_gpu_resource_create_ioctl(struct drm_device *dev, void *data,
 	struct drm_gem_object *obj;
 	uint32_t handle = 0;
 	struct virtio_gpu_object_params params = { 0 };
+
+	DRM_ERROR("jasonjason virtio_gpu_resource_create_ioctl()\n");
 
 	if (vgdev->has_virgl_3d) {
 		virtio_gpu_create_context(dev, file);
@@ -376,6 +382,8 @@ static int virtio_gpu_resource_info_ioctl(struct drm_device *dev, void *data,
 	struct drm_virtgpu_resource_info *ri = data;
 	struct drm_gem_object *gobj = NULL;
 	struct virtio_gpu_object *qobj = NULL;
+
+	DRM_ERROR("jasonjason virtio_gpu_resource_info_ioctl()\n");
 
 	gobj = drm_gem_object_lookup(file, ri->bo_handle);
 	if (gobj == NULL)
@@ -549,6 +557,8 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
 	struct virtio_gpu_drv_cap_cache *cache_ent;
 	void *ptr;
 
+	DRM_ERROR("jasonjason virtio_gpu_get_caps_ioctl()\n");
+
 	if (vgdev->num_capsets == 0)
 		return -ENOSYS;
 
@@ -679,6 +689,8 @@ static int virtio_gpu_resource_create_blob_ioctl(struct drm_device *dev,
 	struct virtio_gpu_fpriv *vfpriv = file->driver_priv;
 	struct drm_virtgpu_resource_create_blob *rc_blob = data;
 
+	DRM_ERROR("jasonjason virtio_gpu_resource_create_blob_ioctl()\n");
+
 	if (verify_blob(vgdev, vfpriv, &params, rc_blob,
 			&guest_blob, &host3d_blob))
 		return -EINVAL;
@@ -754,6 +766,8 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 	struct virtio_gpu_device *vgdev = dev->dev_private;
 	struct virtio_gpu_fpriv *vfpriv = file->driver_priv;
 	struct drm_virtgpu_context_init *args = data;
+
+	DRM_ERROR("jasonjason virtio_gpu_context_init_ioctl()\n");
 
 	num_params = args->num_params;
 	len = num_params * sizeof(struct drm_virtgpu_context_set_param);

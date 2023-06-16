@@ -77,8 +77,11 @@ static void virtio_gpu_get_capsets(struct virtio_gpu_device *vgdev,
 		return;
 	}
 	for (i = 0; i < num_capsets; i++) {
+		DRM_ERROR("jasonjason doing virtio_gpu_cmd_get_capset_info(i:%d)\n", i);
 		virtio_gpu_cmd_get_capset_info(vgdev, i);
+		DRM_ERROR("jasonjason doing virtio_gpu_notify()\n");
 		virtio_gpu_notify(vgdev);
+		DRM_ERROR("jasonjason doing wait_event_timeout()\n");
 		ret = wait_event_timeout(vgdev->resp_wq,
 					 vgdev->capsets[i].id > 0, 5 * HZ);
 		/*

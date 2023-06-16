@@ -676,7 +676,11 @@ static void virtio_gpu_cmd_get_capset_info_cb(struct virtio_gpu_device *vgdev,
 		(struct virtio_gpu_resp_capset_info *)vbuf->resp_buf;
 	int i = le32_to_cpu(cmd->capset_index);
 
+	DRM_ERROR("jasonjason virtio_gpu_cmd_get_capset_info_cb() for capset i:%d, about to wait on display lock\n", i);
+
 	spin_lock(&vgdev->display_info_lock);
+
+	DRM_ERROR("jasonjason virtio_gpu_cmd_get_capset_info_cb() for capset i:%d, locked display lock\n", i);
 	if (vgdev->capsets) {
 		vgdev->capsets[i].id = le32_to_cpu(resp->capset_id);
 		vgdev->capsets[i].max_version = le32_to_cpu(resp->capset_max_version);
