@@ -34,6 +34,29 @@
       "parentUuid": "196ea82f_6751338a",
       "revId": "52e709a88ce1b0ddb1671b68a63bf9070024cfb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3199afa8_7f2066fc",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1244,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2023-06-16T12:44:10Z",
+      "side": 1,
+      "message": "Hi Greg,\nufshcd_wb_toggle won\u0027t happen for vendors who have not enabled ufshcd_enable_wb_if_scaling_up.\n\nHow about if we make it like \n\n       up_write(\u0026hba-\u003eclk_scaling_lock);\n       \n       /* Enable Write Booster if we have scaled up else disable it */\n        if (ufshcd_enable_wb_if_scaling_up(hba) \u0026\u0026 !err)\n                ufshcd_wb_toggle(hba, scale_up);\n\n        mutex_unlock(\u0026hba-\u003ewb_mutex);\n  \n  This way, it will not toggle write booster for vendors, who do not want to toggle write booster during clk scaling.",
+      "range": {
+        "startLine": 1244,
+        "startChar": 2,
+        "endLine": 1244,
+        "endChar": 18
+      },
+      "revId": "52e709a88ce1b0ddb1671b68a63bf9070024cfb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
