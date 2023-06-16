@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b6702a3_8788ad99",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-16T00:18:52Z",
+      "side": 1,
+      "message": "Looks like it\u0027s removed now.",
+      "parentUuid": "3010fa35_8ae349c6",
+      "range": {
+        "startLine": 554,
+        "startChar": 2,
+        "endLine": 554,
+        "endChar": 15
+      },
+      "revId": "6408cf0f58c4f9b7c268654a6a806a50e7771dd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a198bac_b17c3106",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-15T07:34:52Z",
       "side": 1,
       "message": "this should not needed as it is a debugging feature only, and can expose lots of internal data to userspace, what code requires it?",
+      "range": {
+        "startLine": 555,
+        "startChar": 2,
+        "endLine": 555,
+        "endChar": 11
+      },
+      "revId": "6408cf0f58c4f9b7c268654a6a806a50e7771dd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da49a324_b5a487f1",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 4
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-16T00:18:52Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "3a198bac_b17c3106",
       "range": {
         "startLine": 555,
         "startChar": 2,
