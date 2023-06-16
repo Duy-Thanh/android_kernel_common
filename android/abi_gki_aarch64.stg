@@ -329537,6 +329537,15 @@ elf_symbol {
   full_name: "ptp_clock_unregister"
 }
 elf_symbol {
+  id: 0xd38a2f2a
+  name: "push_cpu_stop"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x99bd5133
+  type_id: 0x9bafba63
+  full_name: "push_cpu_stop"
+}
+elf_symbol {
   id: 0x11d4227b
   name: "put_cmsg"
   is_defined: true
@@ -348202,6 +348211,7 @@ interface {
   symbol_id: 0x8becb370
   symbol_id: 0x42a88d96
   symbol_id: 0xb36e22d3
+  symbol_id: 0xd38a2f2a
   symbol_id: 0x11d4227b
   symbol_id: 0x71551ba9
   symbol_id: 0x435b99c6
