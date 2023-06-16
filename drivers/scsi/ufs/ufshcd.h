@@ -997,6 +997,11 @@ struct ufs_hba {
 	ANDROID_KABI_RESERVE(4);
 };
 
+struct ufs_hba_android {
+	struct ufs_hba hba;
+	struct mutex wb_mutex;
+};
+
 /* Returns true if clocks can be gated. Otherwise false */
 static inline bool ufshcd_is_clkgating_allowed(struct ufs_hba *hba)
 {
