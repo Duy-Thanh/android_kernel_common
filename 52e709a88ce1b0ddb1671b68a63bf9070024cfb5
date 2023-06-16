@@ -16,6 +16,24 @@
       "message": "Manish, please let me know if this passes your testing.",
       "revId": "52e709a88ce1b0ddb1671b68a63bf9070024cfb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a220716a_d38aa576",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961360
+      },
+      "writtenOn": "2023-06-16T12:04:23Z",
+      "side": 1,
+      "message": "I am testing the patch now.. will update soon.",
+      "parentUuid": "196ea82f_6751338a",
+      "revId": "52e709a88ce1b0ddb1671b68a63bf9070024cfb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
