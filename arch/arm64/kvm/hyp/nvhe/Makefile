@@ -6,6 +6,7 @@
 asflags-y := -D__KVM_NVHE_HYPERVISOR__ -D__DISABLE_EXPORTS
 ccflags-y := -D__KVM_NVHE_HYPERVISOR__ -D__DISABLE_EXPORTS -D__DISABLE_TRACE_MMIO__
 
+<<<<<<< HEAD   (5ed379 Merge 5.10.180 into android13-5.10-lts)
 hostprogs := gen-hyprel
 HOST_EXTRACFLAGS += -I$(objtree)/include
 
@@ -15,11 +16,22 @@ lib-objs := $(addprefix ../../../lib/, $(lib-objs))
 obj-y := timer-sr.o sysreg-sr.o debug-sr.o switch.o tlb.o hyp-init.o host.o \
 	 hyp-main.o hyp-smp.o psci-relay.o early_alloc.o stub.o page_alloc.o \
 	 cache.o ffa.o setup.o mm.o mem_protect.o sys_regs.o pkvm.o iommu.o
+=======
+lib-objs := clear_page.o copy_page.o memcpy.o memset.o
+lib-objs := $(addprefix ../../../lib/, $(lib-objs))
+
+obj-y := timer-sr.o sysreg-sr.o debug-sr.o switch.o tlb.o hyp-init.o host.o hyp-main.o
+>>>>>>> BRANCH (272d4b Linux 5.10.181)
 obj-y += ../vgic-v3-sr.o ../aarch32.o ../vgic-v2-cpuif-proxy.o ../entry.o \
+<<<<<<< HEAD   (5ed379 Merge 5.10.180 into android13-5.10-lts)
 	 ../fpsimd.o ../hyp-entry.o ../exception.o ../pgtable.o
 obj-y += $(lib-objs)
 
 obj-$(CONFIG_KVM_S2MPU) += iommu/s2mpu.o
+=======
+	 ../fpsimd.o ../hyp-entry.o
+obj-y += $(lib-objs)
+>>>>>>> BRANCH (272d4b Linux 5.10.181)
 
 ##
 ## Build rules for compiling nVHE hyp code
