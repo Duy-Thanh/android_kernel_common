@@ -1833,8 +1833,13 @@ static int bq24190_remove(struct i2c_client *client)
 	int error;
 
 	cancel_delayed_work_sync(&bdi->input_current_limit_work);
+<<<<<<< HEAD   (19c0ed Merge 5.15.106 into android13-5.15-lts)
 	error = pm_runtime_resume_and_get(bdi->dev);
 	if (error < 0)
+=======
+	error = pm_runtime_get_sync(bdi->dev);
+	if (error < 0) {
+>>>>>>> BRANCH (ebdcd1 ANDROID: ABI: Update symbols to unisoc whitelist)
 		dev_warn(bdi->dev, "pm_runtime_get failed: %i\n", error);
 
 	bq24190_register_reset(bdi);
