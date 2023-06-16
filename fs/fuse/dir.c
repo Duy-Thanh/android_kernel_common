@@ -236,6 +236,7 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 	inode = d_inode_rcu(entry);
 	if (inode && fuse_is_bad(inode))
 		goto invalid;
+<<<<<<< HEAD   (8a30c9 Merge branch 'android13-5.10' into android13-5.10-lts)
 #ifdef CONFIG_FUSE_BPF
 	/* TODO: Do we need bpf support for revalidate?
 	 * If the lower filesystem says the entry is invalid, FUSE probably shouldn't
@@ -250,6 +251,10 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 #endif
 	if (time_before64(fuse_dentry_time(entry), get_jiffies_64()) ||
 		 (flags & (LOOKUP_EXCL | LOOKUP_REVAL))) {
+=======
+	else if (time_before64(fuse_dentry_time(entry), get_jiffies_64()) ||
+		 (flags & (LOOKUP_EXCL | LOOKUP_REVAL | LOOKUP_RENAME_TARGET))) {
+>>>>>>> BRANCH (f1b32f Linux 5.10.179)
 		struct fuse_entry_out outarg;
 		struct fuse_entry_bpf bpf_arg;
 		FUSE_ARGS(args);
@@ -724,6 +729,7 @@ static int fuse_create_open(struct inode *dir, struct dentry *entry,
 	struct fuse_entry_out outentry;
 	struct fuse_inode *fi;
 	struct fuse_file *ff;
+	bool trunc = flags & O_TRUNC;
 
 	/* Userspace expects S_IFREG in create mode */
 	BUG_ON((mode & S_IFMT) != S_IFREG);
@@ -806,6 +812,10 @@ static int fuse_create_open(struct inode *dir, struct dentry *entry,
 	} else {
 		file->private_data = ff;
 		fuse_finish_open(inode, file);
+		if (fm->fc->atomic_o_trunc && trunc)
+			truncate_pagecache(inode, 0);
+		else if (!(ff->open_flags & FOPEN_KEEP_CACHE))
+			invalidate_inode_pages2(inode->i_mapping);
 	}
 	return err;
 
