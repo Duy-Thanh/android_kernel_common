@@ -490,6 +490,7 @@
   dma_unmap_page_attrs
   dma_unmap_resource
   dma_unmap_sg_attrs
+  d_obtain_alias
   do_exit
   down_read
   down_write
@@ -554,6 +555,15 @@
   freq_qos_remove_request
   freq_qos_update_request
   freq_scale
+  fsnotify_add_mark
+  fsnotify_alloc_group
+  fsnotify_destroy_mark
+  fsnotify_find_mark
+  fsnotify_init_mark
+  __fsnotify_inode_delete
+  fsnotify_put_group
+  fsnotify_put_mark
+  fsnotify_wait_marks_destroyed
   fsync_bdev
   fwnode_find_reference
   fwnode_get_next_child_node
@@ -2034,6 +2044,8 @@
   vchan_init
   vchan_tx_desc_free
   vchan_tx_submit
+  __vfs_getxattr
+  __vfs_setxattr
   vfree
   video_devdata
   video_device_release_empty
