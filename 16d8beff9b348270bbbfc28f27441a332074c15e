@@ -16,6 +16,24 @@
       "message": "I see that __up_read already has a vendor hook. Can you reuse it? Adding extra hooks in such a generic path slows it down for everyone even when they don\u0027t use it.",
       "revId": "16d8beff9b348270bbbfc28f27441a332074c15e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6859cab5_be6f0183",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2023-06-16T03:06:59Z",
+      "side": 1,
+      "message": "the vendor hook in __up_read is trace_android_vh_record_rwsem_lock_starttime. This hook is also added in other functions such as write\\read slowpath，__up_write, so I can\u0027t reuse it to identify whether a reader is releasing the lock. For this purpose, the new vendor hook should be added like trace_android_vh_rwsem_write_finished added in up_write \u0026 downgrade_write.",
+      "parentUuid": "0304835c_e02c822a",
+      "revId": "16d8beff9b348270bbbfc28f27441a332074c15e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
