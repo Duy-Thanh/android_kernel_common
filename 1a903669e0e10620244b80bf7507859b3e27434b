@@ -33,6 +33,29 @@
       "message": "Please rebase https://android-review.googlesource.com/2609071 on top of this one",
       "revId": "1a903669e0e10620244b80bf7507859b3e27434b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad4dc334_0feb03f8",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3019,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-16T23:24:24Z",
+      "side": 1,
+      "message": "Why is this `enum scan_balance` being cast to a `char *`?\n\nCan you explain why this isn\u0027t passed directly and the enum forward-declared? I would expect something like this:\n```\nenum scan_balance;\nDECLARE_HOOK(android_vh_tune_scan_type,\n       TP_PROTO(enum scan_balance *scan_type),\n```",
+      "range": {
+        "startLine": 3019,
+        "startChar": 33,
+        "endLine": 3019,
+        "endChar": 41
+      },
+      "revId": "1a903669e0e10620244b80bf7507859b3e27434b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
