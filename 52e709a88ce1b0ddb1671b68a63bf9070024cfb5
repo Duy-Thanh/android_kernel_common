@@ -57,6 +57,30 @@
       },
       "revId": "52e709a88ce1b0ddb1671b68a63bf9070024cfb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d001137_4fa868b8",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1244,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-16T14:27:39Z",
+      "side": 1,
+      "message": "That\u0027s on purpose, see the other commit in our tree that added that.  It\u0027s been like that for a while in this branch, so I do NOT want to change the functionality here, but rather just handle the locking issue that you have seen.",
+      "parentUuid": "3199afa8_7f2066fc",
+      "range": {
+        "startLine": 1244,
+        "startChar": 2,
+        "endLine": 1244,
+        "endChar": 18
+      },
+      "revId": "52e709a88ce1b0ddb1671b68a63bf9070024cfb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
