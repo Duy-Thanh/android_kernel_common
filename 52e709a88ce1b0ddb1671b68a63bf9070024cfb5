@@ -54,6 +54,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1174349_8a500025",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885545
+      },
+      "writtenOn": "2023-06-17T05:19:45Z",
+      "side": 1,
+      "message": "Greg , we see some issue with your patch....clock_scaling_unprepare should be as below:\n\nstatic void ufshcd_clock_scaling_unprepare(struct ufs_hba *hba, int err, bool scale_up)\n{\n\tup_write(\u0026hba-\u003eclk_scaling_lock);\n\n\t/* Enable Write Booster if we have scaled up else disable it */\n\tif (ufshcd_enable_wb_if_scaling_up(hba) \u0026\u0026 !err)\n\t\tufshcd_wb_toggle(hba, scale_up);\n\n\tmutex_unlock(\u0026hba-\u003ewb_mutex);\n\t\n\tufshcd_scsi_unblock_requests(hba);\n \tufshcd_release(hba);",
+      "revId": "52e709a88ce1b0ddb1671b68a63bf9070024cfb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3199afa8_7f2066fc",
