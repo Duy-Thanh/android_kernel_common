@@ -33,6 +33,24 @@
       "message": "Hi Qi Feng, Please help to add \"Bug: 287594033\" in the commit message.",
       "revId": "5eb02a81f4513a1cd5f0caeee9720e0dddc69122",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffef922f_a53133bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933031
+      },
+      "writtenOn": "2023-06-19T01:33:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dfa7d94_0c6ccad7",
+      "revId": "5eb02a81f4513a1cd5f0caeee9720e0dddc69122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
