@@ -104,6 +104,30 @@
       },
       "revId": "1a903669e0e10620244b80bf7507859b3e27434b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "676c96c1_995c6560",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3019,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-19T14:51:21Z",
+      "side": 1,
+      "message": "This is not an exported type, so casting it like this is a guaranteed way for the ABI to break over time.  This hook will not work properly because of this, sorry.",
+      "parentUuid": "b23c5c9a_a9e51fe0",
+      "range": {
+        "startLine": 3019,
+        "startChar": 33,
+        "endLine": 3019,
+        "endChar": 41
+      },
+      "revId": "1a903669e0e10620244b80bf7507859b3e27434b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
