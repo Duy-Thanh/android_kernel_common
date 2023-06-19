@@ -335896,6 +335896,24 @@ elf_symbol {
   full_name: "cpu_bit_bitmap"
 }
 elf_symbol {
+  id: 0x57b16747
+  name: "cpu_cluster_pm_enter"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x01c6cb0c
+  type_id: 0x9d80e32f
+  full_name: "cpu_cluster_pm_enter"
+}
+elf_symbol {
+  id: 0x4cf4fff6
+  name: "cpu_cluster_pm_exit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe85a9fd3
+  type_id: 0x9d80e32f
+  full_name: "cpu_cluster_pm_exit"
+}
+elf_symbol {
   id: 0x33bbeca6
   name: "cpu_hotplug_disable"
   is_defined: true
@@ -382664,6 +382682,8 @@ interface {
   symbol_id: 0x610edc84
   symbol_id: 0xd89255c2
   symbol_id: 0x962b6a68
+  symbol_id: 0x57b16747
+  symbol_id: 0x4cf4fff6
   symbol_id: 0x33bbeca6
   symbol_id: 0x4e0ae383
   symbol_id: 0x81619b01

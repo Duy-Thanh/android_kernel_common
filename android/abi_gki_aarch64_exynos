@@ -1467,6 +1467,8 @@
   pm_power_off
 
 # required by exynos-s2i.ko
+  cpu_cluster_pm_enter
+  cpu_cluster_pm_exit
   smp_call_function_many
 
 # required by exynos-ssld.ko
