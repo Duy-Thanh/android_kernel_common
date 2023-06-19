@@ -80,6 +80,30 @@
       },
       "revId": "1a903669e0e10620244b80bf7507859b3e27434b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b23c5c9a_a9e51fe0",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3019,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-19T14:44:29Z",
+      "side": 1,
+      "message": "Why can\u0027t it meet the goal? It seems that it\u0027s easier and safer to pass the enum pointer to modify it on your end.",
+      "parentUuid": "f75ccb5a_79d64d00",
+      "range": {
+        "startLine": 3019,
+        "startChar": 33,
+        "endLine": 3019,
+        "endChar": 41
+      },
+      "revId": "1a903669e0e10620244b80bf7507859b3e27434b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
