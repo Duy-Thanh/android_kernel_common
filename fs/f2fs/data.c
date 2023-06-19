@@ -450,6 +450,17 @@ static unsigned int f2fs_io_flags(struct f2fs_io_info *fio)
 	return op_flags;
 }
 
+static enum rw_hint f2fs_io_type_to_rw_hint(enum page_type type,
+					    enum temp_type temp)
+{
+	if (type == DATA)
+		return CURSEG_HOT_DATA + temp + 1;
+	else if (type == NODE)
+		return CURSEG_HOT_NODE + temp + 1;
+	else
+		return WRITE_LIFE_NOT_SET;
+}
+
 static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
 {
 	struct f2fs_sb_info *sbi = fio->sbi;
@@ -468,6 +479,8 @@ static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
 	} else {
 		bio->bi_end_io = f2fs_write_end_io;
 		bio->bi_private = sbi;
+		bio->bi_write_hint = f2fs_io_type_to_rw_hint(fio->type,
+							     fio->temp);
 	}
 	iostat_alloc_and_bind_ctx(sbi, bio, NULL);
 
