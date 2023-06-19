@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29922a11_51f59ca6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-19T09:29:17Z",
+      "side": 1,
+      "message": "The upstream series had 6 patches in total and this one is 2/6. Are we sure that the remaining patches are not needed?",
+      "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
