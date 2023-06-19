@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61dc0b88_c6f8967f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2023-06-19T12:06:49Z",
+      "side": 1,
+      "message": "nitpick: Bug, Change-Id and your S-o-b tag shall be one after the other at the end of the commit message so that we don\u0027t mix the commit message with internal info. No need to resubmit probably, just something to keep in mind in the future.",
+      "revId": "8575e3b36f72a3812fe6bd62e86abc733396dc21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
