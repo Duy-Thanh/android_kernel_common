@@ -16,6 +16,23 @@
       "message": "Does this version look better?",
       "revId": "c6d386b8a6c4b9cfaee609fb1a0f291ba70e99f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e265218b_61345eb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2023-06-19T17:06:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c6d386b8a6c4b9cfaee609fb1a0f291ba70e99f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
