@@ -16,6 +16,24 @@
       "message": "doesn\u0027t this break the abi?",
       "revId": "38ba850d18ecf39e35b927124798e32c601b22ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39094163_f57e8401",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-19T14:11:30Z",
+      "side": 1,
+      "message": "nevermind, it doesn\u0027t, but you need to fix the signed-off-by line please.",
+      "parentUuid": "b97da04e_43da98f0",
+      "revId": "38ba850d18ecf39e35b927124798e32c601b22ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
