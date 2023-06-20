@@ -52,6 +52,24 @@
       "parentUuid": "1d5fee70_1d6ff042",
       "revId": "91e98e3ab9aa8100edc0fc7bba356a984cde5ea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac94f3d_7c50e50d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2012155
+      },
+      "writtenOn": "2023-06-20T13:18:53Z",
+      "side": 1,
+      "message": "Hi Suren,\n\nCurrently, we would like to get process memory information from usersapce.\nHowever, we encountered a problem that selinux will deny our access to those smaps sysfs as follows.\n\n06-16 03:04:14.472  1151  1151 W Delegate_Memory: type\u003d1400 audit(0.0:826): avc:  denied  { sys_ptrace } for  capability\u003d19  scontext\u003du:r:mtk_hal_mbrain:s0 tcontext\u003du:r:mtk_hal_mbrain:s0 tclass\u003dcapability permissive\u003d0\n\nwhen we tried to modify the selinux\nallow mtk_hal_mbrain self:capability sys_ptrace;\nunder device/mediatek/sepolicy/base/vendor/xxx.te\n\nIt will compiler error because it is placed to neverallowed list?\n\nDid I miss something or is there any way to open(/proc/{$pid}/smaps) without any selinux modifications?  Thanks.",
+      "parentUuid": "b85c0029_04a15769",
+      "revId": "91e98e3ab9aa8100edc0fc7bba356a984cde5ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
