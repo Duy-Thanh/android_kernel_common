@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/288060701",
       "revId": "d72740e2fea22d6d7121ff1dee84ccce0467fbbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d0b74d_2b07e44e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982581
+      },
+      "writtenOn": "2023-06-20T10:51:55Z",
+      "side": 1,
+      "message": "Hi, Please help to add \"Bug: 288060701\" in the commit message.",
+      "revId": "d72740e2fea22d6d7121ff1dee84ccce0467fbbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
