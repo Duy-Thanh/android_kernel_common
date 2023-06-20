@@ -33,6 +33,42 @@
       "message": "Why isn\u0027t this in an upstream stable release for 5.15.y?",
       "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b98c3c7_be40202f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2023-06-20T02:40:58Z",
+      "side": 1,
+      "message": "I asked the owner before whether it can be transplanted to the stable branch, and the owner did not give a definite answer, and Qais also said that he could help with the backport and testing for 5.15 and 5.10.\nhttps://lore.kernel.org/lkml/20230428112216.cftofdixwbl4hufm@airbuntu/\n\nI was also waiting to see if this patch can be ported to the stable branch, but it will be a long period. But now we find that due to this cpuset_rwsem, the performance of some scenes on Android 14 will have some performance regression compared to Android 13, so I porting this patch to 5.15 at now.",
+      "parentUuid": "019430ef_aa671114",
+      "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63fad334_60a0592b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2023-06-20T02:40:58Z",
+      "side": 1,
+      "message": "The other upstream 5 patches are all about deadline sched class and set_scheduler, and in kernel5.15, the cpuset has little to do with these.",
+      "parentUuid": "29922a11_51f59ca6",
+      "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
