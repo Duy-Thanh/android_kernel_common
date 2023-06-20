@@ -2914,6 +2914,7 @@
       <elf-symbol name='genphy_c45_pma_setup_forced' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa3c6c386'/>
       <elf-symbol name='genphy_c45_read_link' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x62efc471'/>
       <elf-symbol name='genphy_c45_read_lpa' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x16f3df01'/>
+      <elf-symbol name='genphy_c45_read_status' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xefb8b074'/>
       <elf-symbol name='genphy_check_and_restart_aneg' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x643dc3b7'/>
       <elf-symbol name='genphy_handle_interrupt_no_ack' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x89f6e9fb'/>
       <elf-symbol name='genphy_read_abilities' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc30cafca'/>
@@ -51661,7 +51662,7 @@
       </class-decl>
       <pointer-type-def type-id='3e1d184a' size-in-bits='64' id='6aee814c'/>
       <pointer-type-def type-id='74e7a035' size-in-bits='64' id='6af64a09'/>
-      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv6/route.c' line='130' column='1' id='6b1203e5'>
+      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv4/route.c' line='1505' column='1' id='6b1203e5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='net/ipv4/route.c' line='1506' column='1'/>
         </data-member>
@@ -142496,6 +142497,10 @@
         <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy-c45.c' line='320' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='genphy_c45_read_status' mangled-name='genphy_c45_read_status' filepath='drivers/net/phy/phy-c45.c' line='545' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='genphy_c45_read_status'>
+        <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy-c45.c' line='545' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='genphy_check_and_restart_aneg' mangled-name='genphy_check_and_restart_aneg' filepath='drivers/net/phy/phy_device.c' line='2135' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='genphy_check_and_restart_aneg'>
         <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy_device.c' line='2135' column='1'/>
         <parameter type-id='b50a4934' name='restart' filepath='drivers/net/phy/phy_device.c' line='2135' column='1'/>
@@ -162921,7 +162926,6 @@
     </abi-instr>
   </abi-corpus>
 </abi-corpus-group>
-
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
