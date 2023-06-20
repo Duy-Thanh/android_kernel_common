@@ -87,6 +87,23 @@
       "parentUuid": "2b98c3c7_be40202f",
       "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22b642ed_b6435e82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-06-20T16:58:58Z",
+      "side": 1,
+      "message": "It looks like this patch (along with the rest of the series) was backported to android14-5.15 here: https://android-review.git.corp.google.com/c/kernel/common/+/2619412\n\nProbably need that chain to be cherry-picked over to android13-5.15\n\nQais: Just to make sure, you don\u0027t have this in progress, do you?",
+      "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
