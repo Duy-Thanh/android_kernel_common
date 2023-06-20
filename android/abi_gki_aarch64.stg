@@ -298994,6 +298994,12 @@ function {
   parameter_id: 0xc9082b19
 }
 function {
+  id: 0x91a5f8da
+  return_type_id: 0x6720d32f
+  parameter_id: 0x33756485
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x91a610ef
   return_type_id: 0x6720d32f
   parameter_id: 0x33b77109
@@ -324616,6 +324622,15 @@ elf_symbol {
   crc: 0xa20d01ba
   type_id: 0x918cb258
   full_name: "__trace_bprintk"
+}
+elf_symbol {
+  id: 0x46adfea4
+  name: "__trace_bputs"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb1e25684
+  type_id: 0x91a5f8da
+  full_name: "__trace_bputs"
 }
 elf_symbol {
   id: 0x233d8b34
@@ -381410,6 +381425,7 @@ interface {
   symbol_id: 0xdb99fd00
   symbol_id: 0xf7de9a97
   symbol_id: 0x6356c7e1
+  symbol_id: 0x46adfea4
   symbol_id: 0x233d8b34
   symbol_id: 0xa5905957
   symbol_id: 0x17dfc6db
