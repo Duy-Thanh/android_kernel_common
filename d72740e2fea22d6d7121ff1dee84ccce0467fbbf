@@ -33,6 +33,24 @@
       "message": "Hi, Please help to add \"Bug: 288060701\" in the commit message.",
       "revId": "d72740e2fea22d6d7121ff1dee84ccce0467fbbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba76119e_4b08394b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965775
+      },
+      "writtenOn": "2023-06-20T11:03:26Z",
+      "side": 1,
+      "message": "Bug: 288027217 --\u003e This is new bug for propagation, what is this new Bug?",
+      "parentUuid": "d5d0b74d_2b07e44e",
+      "revId": "d72740e2fea22d6d7121ff1dee84ccce0467fbbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
