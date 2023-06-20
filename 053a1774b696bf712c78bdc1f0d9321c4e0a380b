@@ -69,6 +69,24 @@
       "parentUuid": "29922a11_51f59ca6",
       "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed9f0d47_a5287e6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-20T08:07:40Z",
+      "side": 1,
+      "message": "As that thread says, this can NOT be decoupled from the other patches, so this is not correct as-is, sorry. \n\nPlease work and submit the full patch set upstream for review first before submitting it here.",
+      "parentUuid": "2b98c3c7_be40202f",
+      "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
