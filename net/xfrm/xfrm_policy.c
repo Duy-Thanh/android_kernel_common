@@ -3673,6 +3673,10 @@ int __xfrm_policy_check(struct sock *sk, int dir, struct sk_buff *skb,
 				tpp[ti++] = &pols[pi]->xfrm_vec[i];
 		}
 		xfrm_nr = ti;
+<<<<<<< HEAD   (9399ce Revert "uapi/linux/const.h: prefer ISO-friendly __typeof__")
+=======
+
+>>>>>>> BRANCH (272d4b Linux 5.10.181)
 		if (npols > 1) {
 			xfrm_tmpl_sort(stp, tpp, xfrm_nr, family);
 			tpp = stp;
@@ -3702,9 +3706,6 @@ int __xfrm_policy_check(struct sock *sk, int dir, struct sk_buff *skb,
 			XFRM_INC_STATS(net, LINUX_MIB_XFRMINTMPLMISMATCH);
 			goto reject;
 		}
-
-		if (if_id)
-			secpath_reset(skb);
 
 		xfrm_pols_put(pols, npols);
 		sp->verified_cnt = k;

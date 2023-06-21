@@ -221,8 +221,12 @@ mipi_dsi_device_register_full(struct mipi_dsi_host *host,
 		return dsi;
 	}
 
+<<<<<<< HEAD   (9399ce Revert "uapi/linux/const.h: prefer ISO-friendly __typeof__")
 	dsi->dev.of_node = info->node;
 	dsi->dev.fwnode = of_fwnode_handle(info->node);
+=======
+	device_set_node(&dsi->dev, of_fwnode_handle(info->node));
+>>>>>>> BRANCH (272d4b Linux 5.10.181)
 	dsi->channel = info->channel;
 	strlcpy(dsi->name, info->type, sizeof(dsi->name));
 
