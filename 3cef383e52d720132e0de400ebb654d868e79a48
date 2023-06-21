@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a13ef63c_4c7ef08b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-21T11:52:22Z",
+      "side": 1,
+      "message": "FROMLIST",
+      "parentUuid": "6a10b595_27364b1e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "3cef383e52d720132e0de400ebb654d868e79a48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "de078113_cb424240",
@@ -73,6 +97,29 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "f59f4db6_687c3ed3",
+      "revId": "3cef383e52d720132e0de400ebb654d868e79a48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df1f936_17c01a80",
+        "filename": "kernel/gen_kheaders.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-21T11:52:22Z",
+      "side": 1,
+      "message": "`--dereference`",
+      "range": {
+        "startLine": 71,
+        "startChar": 23,
+        "endLine": 71,
+        "endChar": 24
+      },
       "revId": "3cef383e52d720132e0de400ebb654d868e79a48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
