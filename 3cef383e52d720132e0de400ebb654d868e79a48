@@ -103,6 +103,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b480af9_1959a87e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-21T12:06:14Z",
+      "side": 1,
+      "message": "I guess this is somewhat expected:\n\n```\nkernel_aarch64 on aosp_kernel-common-android-mainline: File with significant size growth: kheaders.ko : 139 KiB -\u003e 4 MiB (+4 MiB)\n```",
+      "revId": "3cef383e52d720132e0de400ebb654d868e79a48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0df1f936_17c01a80",
         "filename": "kernel/gen_kheaders.sh",
         "patchSetId": 8
