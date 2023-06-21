@@ -44,6 +44,26 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000047232439",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2630822?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "cc163a5c_0b8535ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-21T01:04:13Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 541918165 android-build.ayeaye-python-dispatcher_20230620.01_p0",
+      "revId": "4eeb52734bcf57c4f2f145218459c85fbfce248e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000047232439",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2630822?revision\u003d1",
       "fixSuggestions": [
         {
           "fixId": "9701ad12_3f5cba0d",
@@ -115,6 +135,49 @@
         "id": 1757831
       },
       "writtenOn": "2023-06-20T23:33:49Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Kalesh Singh \u003ckaleshsingh@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 541918165 android-build.ayeaye-python-dispatcher_20230620.01_p0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 0
+      },
+      "revId": "4eeb52734bcf57c4f2f145218459c85fbfce248e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000047232439",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2630822?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "501b96db_b9f934a3",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 13,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Kalesh Singh \u003ckaleshsingh@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "6d330eed_49789035",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-21T01:04:13Z",
       "side": 1,
       "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Kalesh Singh \u003ckaleshsingh@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 541918165 android-build.ayeaye-python-dispatcher_20230620.01_p0",
       "range": {
