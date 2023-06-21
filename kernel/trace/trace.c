@@ -9539,7 +9539,11 @@ init_tracer_tracefs(struct trace_array *tr, struct dentry *d_tracer)
 
 	tr->buffer_percent = 50;
 
+<<<<<<< HEAD   (565c3a Merge 5.15.110 into android13-5.15-lts)
 	trace_create_file("buffer_percent", 0444, d_tracer,
+=======
+	trace_create_file("buffer_percent", TRACE_MODE_WRITE, d_tracer,
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 			tr, &buffer_percent_fops);
 
 	create_trace_options_dir(tr);

@@ -1225,6 +1225,7 @@ static int dm_keyslot_evict(struct blk_keyslot_manager *ksm,
 			continue;
 		ti->type->iterate_devices(ti, dm_keyslot_evict_callback,
 					  (void *)key);
+<<<<<<< HEAD   (565c3a Merge 5.15.110 into android13-5.15-lts)
 	}
 	dm_put_live_table(md, srcu_idx);
 	return 0;
@@ -1298,9 +1299,11 @@ static int dm_derive_raw_secret(struct blk_keyslot_manager *ksm,
 					  &args);
 		if (!args.err)
 			break;
+=======
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 	}
 	dm_put_live_table(md, srcu_idx);
-	return args.err;
+	return 0;
 }
 
 
