@@ -234,9 +234,8 @@ static int __init fdt_init_tag_storage(unsigned long node, const char *uname,
 	}
 	memblock_reserve(PFN_PHYS(tag_range->start), PFN_PHYS(range_len(tag_range)));
 
-	pr_info("Found MTE tag storage region 0x%llx@0x%llx, block size 0x%llx",
-		PFN_PHYS(range_len(tag_range)), PFN_PHYS(tag_range->start),
-		PFN_PHYS(region->block_size));
+	pr_info("Found MTE tag storage region 0x%llx@0x%llx, block size %u pages",
+		PFN_PHYS(range_len(tag_range)), PFN_PHYS(tag_range->start), region->block_size);
 
 	num_tag_regions++;
 
@@ -427,7 +426,7 @@ bool page_tag_storage_reserved(struct page *page)
 	return !!test_bit(PG_tag_storage_reserved, &page->flags);
 }
 
-static int tag_storage_reserve_block(unsigned long block, unsigned long block_size)
+static int tag_storage_reserve_block(unsigned long block, unsigned long block_size, int refcount)
 {
 	unsigned long block_va;
 	int ret;
@@ -438,7 +437,7 @@ static int tag_storage_reserve_block(unsigned long block, unsigned long block_si
 
 	ret = xa_err(xa_store(&tag_blocks_reserved, block, pfn_to_page(block), GFP_KERNEL));
 	if (!ret)
-		page_ref_inc(pfn_to_page(block));
+		page_ref_add(pfn_to_page(block), refcount);
 
 	return ret;
 }
@@ -491,7 +490,7 @@ int reserve_tag_storage(struct page *page, int order, gfp_t gfp)
 	xa_lock_irqsave(&tag_blocks_reserved, flags);
 	for (block = start_block; block < end_block; block += region->block_size) {
 		if (tag_storage_block_is_reserved(block))
-			page_ref_inc(pfn_to_page(block));
+			page_ref_add(pfn_to_page(block), 1 << order);
 	}
 	xa_unlock_irqrestore(&tag_blocks_reserved, flags);
 
@@ -511,7 +510,7 @@ int reserve_tag_storage(struct page *page, int order, gfp_t gfp)
 		if (ret)
 			goto out_error;
 
-		ret = tag_storage_reserve_block(block, region->block_size);
+		ret = tag_storage_reserve_block(block, region->block_size, 1 << order);
 		if (ret) {
 			free_contig_range(block, region->block_size);
 			goto out_error;
@@ -532,7 +531,7 @@ out_error:
 	xa_lock_irqsave(&tag_blocks_reserved, flags);
 	for (block = start_block; block < end_block; block += region->block_size) {
 		if (tag_storage_block_is_reserved(block) &&
-		    page_ref_dec_return(pfn_to_page(block)) == 1) {
+		    page_ref_sub_return(pfn_to_page(block), 1 << order) == 1) {
 			__xa_erase(&tag_blocks_reserved, block);
 			free_contig_range(block, region->block_size);
 		}
@@ -575,7 +574,7 @@ void free_tag_storage(struct page *page, int order)
 		if (WARN_ON_ONCE(!tag_storage_block_is_reserved(block)))
 			continue;
 
-		if (page_ref_dec_return(pfn_to_page(block)) == 1) {
+		if (page_ref_sub_return(pfn_to_page(block), 1 << order) == 1) {
 			__xa_erase(&tag_blocks_reserved, block);
 			free_contig_range(block, region->block_size);
 			count_vm_events(METADATA_RESERVE_FREE, region->block_size);
