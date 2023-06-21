@@ -122,6 +122,24 @@
       "parentUuid": "22b642ed_b6435e82",
       "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b37601_88bb9f23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2023-06-21T01:51:26Z",
+      "side": 1,
+      "message": "Thanks John!",
+      "parentUuid": "75d753d6_d6d82ec1",
+      "revId": "053a1774b696bf712c78bdc1f0d9321c4e0a380b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
