@@ -16,6 +16,23 @@
       "message": "Hi, Todd, could you please merge this change? There is a respin request for this.",
       "revId": "58354bea7eaf33ef78e251f04bf4a65cfc3f4523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5be6b9_3ee1e9ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2023-06-21T05:45:14Z",
+      "side": 1,
+      "message": "The cherry-pick is OK, but please file a re-spin bug according to the form described in bug 287876337 and reference that re-spin bug in this patch",
+      "revId": "58354bea7eaf33ef78e251f04bf4a65cfc3f4523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
