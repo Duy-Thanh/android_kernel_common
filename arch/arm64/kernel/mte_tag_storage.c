@@ -276,11 +276,7 @@ static int __init mte_tag_storage_check_zone(void)
 	unsigned long pfn;
 	int i, j;
 
-	/*
-	 * The maximum allocation order is 10, which corresponds to 2^10 >> 5
-	 * contiguous tag blocks.
-	 */
-	 max_num_blocks = (1ul << (MAX_ORDER - 1)) >> 5;
+	 max_num_blocks = (1 << MAX_ORDER) >> 5;
 
 	 for (i = 0; i < num_tag_regions; i++) {
 		 tag_range = &tag_regions[i].tag_range;
