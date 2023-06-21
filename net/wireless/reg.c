@@ -2466,6 +2466,24 @@ static bool reg_wdev_chan_valid(struct wiphy *wiphy, struct wireless_dev *wdev)
 
 	wdev_unlock(wdev);
 
+<<<<<<< HEAD   (0d96a2 Merge 5.15.117 into android13-5.15-lts)
+=======
+	switch (iftype) {
+	case NL80211_IFTYPE_AP:
+	case NL80211_IFTYPE_P2P_GO:
+	case NL80211_IFTYPE_ADHOC:
+		ret = cfg80211_reg_can_beacon_relax(wiphy, &chandef, iftype);
+
+		return ret;
+	case NL80211_IFTYPE_STATION:
+	case NL80211_IFTYPE_P2P_CLIENT:
+		return cfg80211_chandef_usable(wiphy, &chandef,
+					       IEEE80211_CHAN_DISABLED);
+	default:
+		break;
+	}
+
+>>>>>>> BRANCH (f67653 Linux 5.15.118)
 	return true;
 
 wdev_inactive_unlock:
@@ -2478,11 +2496,11 @@ static void reg_leave_invalid_chans(struct wiphy *wiphy)
 	struct wireless_dev *wdev;
 	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wiphy);
 
-	ASSERT_RTNL();
-
+	wiphy_lock(wiphy);
 	list_for_each_entry(wdev, &rdev->wiphy.wdev_list, list)
 		if (!reg_wdev_chan_valid(wiphy, wdev))
 			cfg80211_leave(rdev, wdev);
+	wiphy_unlock(wiphy);
 }
 
 static void reg_check_chans_work(struct work_struct *work)
