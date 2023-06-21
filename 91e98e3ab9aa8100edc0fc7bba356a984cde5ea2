@@ -70,6 +70,24 @@
       "parentUuid": "b85c0029_04a15769",
       "revId": "91e98e3ab9aa8100edc0fc7bba356a984cde5ea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "039b828e_19acbca7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-21T00:22:53Z",
+      "side": 1,
+      "message": "Please file a bug for these selinux policy denials and we can try fixing them by maybe relaxing the neverallow rules (I\u0027m not a security expert, so this might not be the right fix).\nIn any case, that\u0027s not a valid reason to implement alternative smaps reading capabilities in the kernel.",
+      "parentUuid": "9ac94f3d_7c50e50d",
+      "revId": "91e98e3ab9aa8100edc0fc7bba356a984cde5ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
