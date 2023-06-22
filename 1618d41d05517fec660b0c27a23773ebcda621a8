@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ce6097_0153e2f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2009035
+      },
+      "writtenOn": "2023-06-22T20:40:18Z",
+      "side": 1,
+      "message": "Changes v1 -\u003e v2:\n - Re-ran the process with CC\u003dclang-r487747c/bin/clang, which drops CONFIG_UAPI_HEADER_TEST and adds CONFIG_UBSAN_LOCAL_BOUNDS.\n - CONFIG_PINCTRL_SUN20I_D1 selects CONFIG_GPIOLIB",
+      "revId": "1618d41d05517fec660b0c27a23773ebcda621a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
