@@ -788,8 +788,8 @@ static void __poke_reader(struct work_struct *work)
 static int hyp_trace_pipe_open(struct inode *inode, struct file *file)
 {
 	int cpu = (s64)inode->i_private;
-	struct ht_iterator *iter;
-	int ret;
+	struct ht_iterator *iter = NULL;
+	int ret = 0;
 
 	mutex_lock(&hyp_trace_lock);
 
