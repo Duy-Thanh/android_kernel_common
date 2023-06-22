@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b39ffe18_fe9f7c9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-22T12:06:42Z",
+      "side": 1,
+      "message": "checkpatch warning can be ignored as this is just a revert.",
+      "revId": "fe598ae9ca5b183d66dffb98e5bb027a5f06add0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
