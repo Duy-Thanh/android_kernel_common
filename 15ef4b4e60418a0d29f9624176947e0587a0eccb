@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560b4719_8167926b",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-22T15:02:44Z",
+      "side": 1,
+      "message": "Use relative labels: `:db845c`. This project might not be checked out at `//common`, technically.",
+      "range": {
+        "startLine": 291,
+        "startChar": 20,
+        "endLine": 291,
+        "endChar": 28
+      },
+      "revId": "15ef4b4e60418a0d29f9624176947e0587a0eccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
