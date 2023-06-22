@@ -46,6 +46,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4714743_9bc4ebb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-22T08:23:39Z",
+      "side": 1,
+      "message": "As the text says, this should NOT be backported to ANY older kernels, or there will be a regression.  If you disagree with this, please work with the authors of the patch to get this clarified.",
+      "parentUuid": "371e4857_f1a8fa97",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
