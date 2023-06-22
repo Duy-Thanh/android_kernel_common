@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aaa7f1c_ef8eb4e0",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-22T15:45:19Z",
+      "side": 1,
+      "message": "`//visibility:private`\n\nsame with `rockpi4_no_kgdb` below. These are implementation details so we don\u0027t want to expose them.",
+      "revId": "b9e2415f9245f125072da771fdf35e7e3422ea19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
