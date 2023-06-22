@@ -215,11 +215,6 @@ static int __init fdt_init_tag_storage(unsigned long node, const char *uname,
 		pr_err("Tag storage region size is not a multiple of allocation block size");
 		return -EINVAL;
 	}
-	// TODO: support block sizes larger than PAGE_SIZE.
-	if (block_size != 1) {
-		pr_err("Unsupported block size %u", block_size);
-		return -EINVAL;
-	}
 	region->block_size = block_size;
 
 	ret = tag_storage_of_flat_read_u32(mem_node, "numa-node-id", &nid);
@@ -266,6 +261,8 @@ out_err:
 	num_tag_regions = 0;
 }
 
+static int order_to_num_blocks(int order);
+
 /* alloc_contig_range() requires all pages to be in the same zone. */
 static int __init mte_tag_storage_check_zone(void)
 {
@@ -275,7 +272,7 @@ static int __init mte_tag_storage_check_zone(void)
 	unsigned long pfn;
 	int i, j;
 
-	 max_num_blocks = (1 << MAX_ORDER) >> 5;
+	max_num_blocks = order_to_num_blocks(MAX_ORDER);
 
 	 for (i = 0; i < num_tag_regions; i++) {
 		 tag_range = &tag_regions[i].tag_range;
@@ -387,8 +384,9 @@ static int tag_storage_find_block_in_region(struct page *page, unsigned long *bl
 	if (!(mem_range->start <= page_pfn && page_pfn <= mem_range->end))
 		return -ERANGE;
 
-	block_offset = (page_pfn - mem_range->start) >> 5;
-	block = tag_range->start + block_offset;
+	block_offset = (page_pfn - mem_range->start) / 32;
+	block = tag_range->start + rounddown(block_offset, region->block_size);
+
 	if (block + region->block_size - 1 > tag_range->end) {
 		pr_err("Block 0x%llx-0x%llx is outside tag region 0x%llx-0x%llx\n",
 			PFN_PHYS(block), PFN_PHYS(block + region->block_size),
@@ -452,9 +450,9 @@ bool alloc_requires_tag_storage(gfp_t gfp_mask)
 	return gfp_mask & __GFP_TAGGED;
 }
 
-static int order_to_blocks(int order)
+static int order_to_num_blocks(int order)
 {
-	return max((1 << order) >> 5, 1);
+	return max((1 << order) / 32, 1);
 }
 
 int reserve_tag_storage(struct page *page, int order, gfp_t gfp)
@@ -482,7 +480,7 @@ int reserve_tag_storage(struct page *page, int order, gfp_t gfp)
 	if (WARN_ON_ONCE(ret))
 		return 0;
 
-	end_block = start_block + order_to_blocks(order) * region->block_size;
+	end_block = start_block + order_to_num_blocks(order) * region->block_size;
 
 	mutex_lock(&tag_blocks_lock);
 
@@ -560,7 +558,7 @@ void free_tag_storage(struct page *page, int order)
 	ret = tag_storage_find_block(page, &start_block, &region);
 	if (WARN_ON_ONCE(ret))
 		return;
-	end_block = start_block + order_to_blocks(order) * region->block_size;
+	end_block = start_block + order_to_num_blocks(order) * region->block_size;
 
 	page_va = (unsigned long)page_to_virt(page);
 	/*
