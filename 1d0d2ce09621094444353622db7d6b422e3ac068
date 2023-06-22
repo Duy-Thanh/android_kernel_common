@@ -51,6 +51,24 @@
       "message": "There seems to be infra relying on the naming defined in the `common_kernels.bzl` for `db845c` targets, so aliasing them doesn\u0027t work as expected. I need to think about some clean way to fix this.",
       "revId": "1d0d2ce09621094444353622db7d6b422e3ac068",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c39170_c677a63f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-06-22T12:12:29Z",
+      "side": 1,
+      "message": "Let\u0027s fix rockpi4 for now, `db845c` will need some unrolling of the macro, so I\u0027m planning to do it in follow-up CLs.",
+      "parentUuid": "6dff049e_d40cb524",
+      "revId": "1d0d2ce09621094444353622db7d6b422e3ac068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
