@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed3a806e_211f00ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-06-22T09:22:28Z",
+      "side": 1,
+      "message": "The kernel sve-test selftest passes simultaneously on host and protected guest on device. Also, the following tests pass:\n\nMicrodroidHostTestCases\nMicrodroidTestApp\napex/com.android.compos/bin/composd_cmd test-compile",
+      "revId": "6328ae09a5d720c654723bc04585bea8ea820441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
