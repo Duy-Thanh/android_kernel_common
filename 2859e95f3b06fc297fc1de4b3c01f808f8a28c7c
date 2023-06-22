@@ -22,6 +22,30 @@
       },
       "revId": "2859e95f3b06fc297fc1de4b3c01f808f8a28c7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5215ab83_3c4343fa",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-06-22T12:59:54Z",
+      "side": 1,
+      "message": "Unfortunately no; (short answer) `select` does not work in macros [0].\n\n[0] https://bazel.build/docs/configurable-attributes#faq-select-macro",
+      "parentUuid": "be33ef8d_1a3cfc28",
+      "range": {
+        "startLine": 347,
+        "startChar": 4,
+        "endLine": 347,
+        "endChar": 15
+      },
+      "revId": "2859e95f3b06fc297fc1de4b3c01f808f8a28c7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
