@@ -16,6 +16,24 @@
       "message": "`//visibility:private`\n\nsame with `rockpi4_no_kgdb` below. These are implementation details so we don\u0027t want to expose them.",
       "revId": "b9e2415f9245f125072da771fdf35e7e3422ea19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f5c917_c6bf8dbb",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-06-22T15:46:47Z",
+      "side": 1,
+      "message": "Acknowledged. Ok I\u0027ll add them in the `db845c` refactor.",
+      "parentUuid": "8aaa7f1c_ef8eb4e0",
+      "revId": "b9e2415f9245f125072da771fdf35e7e3422ea19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
