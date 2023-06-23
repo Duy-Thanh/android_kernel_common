@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98ee6bab_5899631b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1306227
+      },
+      "writtenOn": "2023-06-23T15:52:39Z",
+      "side": 1,
+      "message": "Hi all. Git bisecting shows that current upstream backport is causing \"/bin/sh: Argument list too long\" in AOSP as described in https://lore.kernel.org/linux-kbuild/20230623144544.GA24871@lxhi-065/ . In case anybody experienced similar symptoms, I would appreciate your feedback. TIA.",
+      "revId": "bc6d3d83539512dbbd5e2fe8beca2ef614eb9336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
