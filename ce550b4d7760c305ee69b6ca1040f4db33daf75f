@@ -33,6 +33,24 @@
       "message": "@amit.pundir@linaro.org\nHi Amit\nI don\u0027t know why when I update ABI locally on the android-13-2012-12 branch, the build system will automatically delete what you added into abi_gki_aarch64.\n\n```bash\nLTO\u003dfull BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update\n\ndiff --git a/android/abi_gki_aarch64 b/android/abi_gki_aarch64\nindex 908036738584..90bf4ede4711 100644\n--- a/android/abi_gki_aarch64\n+++ b/android/abi_gki_aarch64\n@@ -142,6 +142,3 @@\n   unregister_shrinker\n   wait_on_page_bit\n   __wake_up\n-\n-# preserved by --additions-only\n-  __sysfs_match_string\n\n```",
       "revId": "ce550b4d7760c305ee69b6ca1040f4db33daf75f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc993c13_b418bd51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2023-06-26T01:29:58Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/2637909",
+      "parentUuid": "9078ecde_11ce4161",
+      "revId": "ce550b4d7760c305ee69b6ca1040f4db33daf75f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
