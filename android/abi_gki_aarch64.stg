@@ -7557,6 +7557,11 @@ pointer_reference {
   pointee_type_id: 0x666a7a1b
 }
 pointer_reference {
+  id: 0x130da253
+  kind: POINTER
+  pointee_type_id: 0x66766fd1
+}
+pointer_reference {
   id: 0x13185ce8
   kind: POINTER
   pointee_type_id: 0x6621953c
@@ -74187,6 +74192,12 @@ member {
   name: "entry_work"
   type_id: 0xf1159c31
   offset: 64
+}
+member {
+  id: 0x7181cdcb
+  name: "ents"
+  type_id: 0xf67b8436
+  offset: 512
 }
 member {
   id: 0x8ef9a4f4
@@ -226228,6 +226239,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x66766fd1
+  kind: STRUCT
+  name: "rps_sock_flow_table"
+  definition {
+    bytesize: 64
+    member_id: 0xa8fa6106
+    member_id: 0x7181cdcb
+  }
+}
+struct_union {
   id: 0x924a9b47
   kind: STRUCT
   name: "rq"
@@ -274040,6 +274061,13 @@ function {
   parameter_id: 0x32a623d7
   parameter_id: 0x3e10b518
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x91c903b5
+  return_type_id: 0x6720d32f
+  parameter_id: 0x32a623d7
+  parameter_id: 0x310ec01d
+  parameter_id: 0x914dbfdc
 }
 function {
   id: 0x91ca11c2
@@ -324452,6 +324480,15 @@ elf_symbol {
   full_name: "netif_set_real_num_tx_queues"
 }
 elf_symbol {
+  id: 0x90914be9
+  name: "netif_set_xps_queue"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa8aacd3c
+  type_id: 0x91c903b5
+  full_name: "netif_set_xps_queue"
+}
+elf_symbol {
   id: 0x5f6243cf
   name: "netif_stacked_transfer_operstate"
   is_defined: true
@@ -331355,6 +331392,15 @@ elf_symbol {
   full_name: "rfkill_unregister"
 }
 elf_symbol {
+  id: 0xfac46ac5
+  name: "rfs_needed"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xadd139d4
+  type_id: 0x8e47c273
+  full_name: "rfs_needed"
+}
+elf_symbol {
   id: 0xefa494ef
   name: "rhashtable_destroy"
   is_defined: true
@@ -331814,6 +331860,15 @@ elf_symbol {
   full_name: "rproc_vq_interrupt"
 }
 elf_symbol {
+  id: 0x3ea3f3d7
+  name: "rps_cpu_mask"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x56802ae8
+  type_id: 0xc9082b19
+  full_name: "rps_cpu_mask"
+}
+elf_symbol {
   id: 0x7b7d72dc
   name: "rps_may_expire_flow"
   is_defined: true
@@ -331830,6 +331885,15 @@ elf_symbol {
   crc: 0x8761c87b
   type_id: 0x8e47c273
   full_name: "rps_needed"
+}
+elf_symbol {
+  id: 0xa0695eba
+  name: "rps_sock_flow_table"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xd62ecd49
+  type_id: 0x130da253
+  full_name: "rps_sock_flow_table"
 }
 elf_symbol {
   id: 0x264c5308
@@ -347646,6 +347710,7 @@ interface {
   symbol_id: 0xac772e2b
   symbol_id: 0x4c1d5834
   symbol_id: 0xf16a1d9f
+  symbol_id: 0x90914be9
   symbol_id: 0x5f6243cf
   symbol_id: 0xcad08fbc
   symbol_id: 0x8cb67134
@@ -348413,6 +348478,7 @@ interface {
   symbol_id: 0x7802cb99
   symbol_id: 0x8be50e45
   symbol_id: 0x46449fce
+  symbol_id: 0xfac46ac5
   symbol_id: 0xefa494ef
   symbol_id: 0x74fbd45c
   symbol_id: 0x139e6573
@@ -348464,8 +348530,10 @@ interface {
   symbol_id: 0x74844b2a
   symbol_id: 0x74c27ecd
   symbol_id: 0x80913de9
+  symbol_id: 0x3ea3f3d7
   symbol_id: 0x7b7d72dc
   symbol_id: 0xbffd1c46
+  symbol_id: 0xa0695eba
   symbol_id: 0x264c5308
   symbol_id: 0x205145e9
   symbol_id: 0x0eff96d9
