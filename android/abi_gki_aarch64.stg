@@ -358341,6 +358341,15 @@ elf_symbol {
   full_name: "of_drm_get_panel_orientation"
 }
 elf_symbol {
+  id: 0x33b9622b
+  name: "of_find_all_nodes"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x65267db7
+  type_id: 0x7bef1e3b
+  full_name: "of_find_all_nodes"
+}
+elf_symbol {
   id: 0x985c43d8
   name: "of_find_backlight_by_node"
   is_defined: true
@@ -385376,6 +385385,7 @@ interface {
   symbol_id: 0xd37bdc53
   symbol_id: 0x1d42003f
   symbol_id: 0xf3b2b115
+  symbol_id: 0x33b9622b
   symbol_id: 0x985c43d8
   symbol_id: 0xd5545a99
   symbol_id: 0x9f89ff97
