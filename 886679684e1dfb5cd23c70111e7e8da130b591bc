@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a06635e_42aa4b54",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-26T06:38:31Z",
+      "side": 0,
+      "message": "why have you disabled this functionality?",
+      "range": {
+        "startLine": 595,
+        "startChar": 0,
+        "endLine": 595,
+        "endChar": 13
+      },
+      "revId": "886679684e1dfb5cd23c70111e7e8da130b591bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
