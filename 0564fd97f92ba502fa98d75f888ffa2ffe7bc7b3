@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a2adac_ab1cea17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-26T06:36:21Z",
+      "side": 1,
+      "message": "You need a lot of description of what is going on here please.  And why all of these new symbols only for arm64 and not also x86?",
+      "revId": "0564fd97f92ba502fa98d75f888ffa2ffe7bc7b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
