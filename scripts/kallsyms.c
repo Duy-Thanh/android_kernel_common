@@ -140,6 +140,8 @@ static bool is_ignored_symbol(const char *name, char type)
 		"__LA25Thunk_",		/* mips lld */
 		"__microLA25Thunk_",
 		"__kcfi_typeid_",	/* CFI type identifiers */
+		"__kvm_nvhe___kcfi_typeid_",
+		"__pi___kcfi_typeid_",
 		NULL
 	};
 
