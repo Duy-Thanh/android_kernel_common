@@ -33,6 +33,23 @@
       "message": "The cherry-pick is OK, but please file a re-spin bug according to the form described in bug 287876337 and reference that re-spin bug in this patch",
       "revId": "58354bea7eaf33ef78e251f04bf4a65cfc3f4523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71a0fdfd_de5eede2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2023-06-27T06:36:25Z",
+      "side": 1,
+      "message": "Respin bug: b/288995615",
+      "revId": "58354bea7eaf33ef78e251f04bf4a65cfc3f4523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
