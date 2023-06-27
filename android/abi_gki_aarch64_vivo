@@ -3870,6 +3870,7 @@
   scsi_device_put
   scsi_dma_map
   scsi_dma_unmap
+  scsi_execute_cmd
   scsi_host_alloc
   scsi_host_lookup
   scsi_host_put
@@ -4325,6 +4326,7 @@
   submit_bio
   subsys_system_register
   suspend_set_ops
+  swapcache_mapping
   sync_blockdev
   sync_file_create
   sync_file_get_fence
