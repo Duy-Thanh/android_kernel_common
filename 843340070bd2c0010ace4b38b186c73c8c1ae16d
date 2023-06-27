@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b7837bf_f6b36d88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-06-27T19:36:02Z",
+      "side": 1,
+      "message": "No need to apply patches to any -lts branch, we can just pull it in from the non-lts branch with a merge instead.",
+      "revId": "843340070bd2c0010ace4b38b186c73c8c1ae16d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
