@@ -19,6 +19,26 @@
       "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/848aedfdc6ba25ad5652797db9266007773e44dd) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d848aedfdc6ba25ad5652797db9266007773e44dd)\n\n```\n    - ## include/sound/soc-dpcm.h ##\n    -@@ include/sound/soc-dpcm.h: struct snd_soc_dpcm_runtime {\n    - \tenum snd_soc_dpcm_state state;\n    - \n    - \tint trigger_pending; /* trigger cmd + 1 if pending, 0 if not */\n    -+\n    -+\tint be_start; /* refcount protected by BE stream pcm lock */\n    - };\n    - \n    - #define for_each_dpcm_fe(be, stream, _dpcm)\t\t\t\t\\\n    +    Bug: 287928097\n    +    Bug: 277241308\n    +    Link: https://lore.kernel.org/all/20230511120841.2096524-6-yixuanjiang@google.com\n    +    Change-Id: I294e1f1b55cb1819e0510bff67db41b01c809210\n    +    Signed-off-by: Yixuan Jiang \u003cyixuanjiang@google.com\u003e\n     \n      ## sound/soc/soc-pcm.c ##\n     @@ sound/soc/soc-pcm.c: int dpcm_be_dai_startup(struct snd_soc_pcm_runtime *fe, int stream)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 542564694 android-build.ayeaye-python-dispatcher_20230622.04_p0",
       "revId": "6787ac154a60caca1947b7a22ead0affc73cd4bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000047634348",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2639516?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0810c1c9_2974b74b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-27T03:40:59Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/848aedfdc6ba25ad5652797db9266007773e44dd) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d848aedfdc6ba25ad5652797db9266007773e44dd)\n\n```\n    - ## include/sound/soc-dpcm.h ##\n    -@@ include/sound/soc-dpcm.h: struct snd_soc_dpcm_runtime {\n    - \tenum snd_soc_dpcm_state state;\n    - \n    - \tint trigger_pending; /* trigger cmd + 1 if pending, 0 if not */\n    -+\n    -+\tint be_start; /* refcount protected by BE stream pcm lock */\n    - };\n    - \n    - #define for_each_dpcm_fe(be, stream, _dpcm)\t\t\t\t\\\n    +    Bug: 287928097\n    +    Bug: 277241308\n    +    Link: https://lore.kernel.org/all/20230511120841.2096524-6-yixuanjiang@google.com\n    +    Change-Id: I294e1f1b55cb1819e0510bff67db41b01c809210\n    +    Signed-off-by: Yixuan Jiang \u003cyixuanjiang@google.com\u003e\n     \n      ## sound/soc/soc-pcm.c ##\n     @@ sound/soc/soc-pcm.c: int dpcm_be_dai_startup(struct snd_soc_pcm_runtime *fe, int stream)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 542564694 android-build.ayeaye-python-dispatcher_20230622.04_p0",
+      "revId": "6787ac154a60caca1947b7a22ead0affc73cd4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
