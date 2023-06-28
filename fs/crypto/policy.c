@@ -120,10 +120,10 @@ static bool supported_direct_key_modes(const struct inode *inode,
 static bool supported_iv_ino_lblk_policy(const struct fscrypt_policy_v2 *policy,
 					 const struct inode *inode,
 					 const char *type,
-					 int max_ino_bits, int max_lblk_bits)
+					 int max_ino_bits, int max_dubits)
 {
 	struct super_block *sb = inode->i_sb;
-	int ino_bits = 64, lblk_bits = 64;
+	int ino_bits = 64, dubits = 64;
 
 	/*
 	 * IV_INO_LBLK_* exist only because of hardware limitations, and
@@ -150,17 +150,28 @@ static bool supported_iv_ino_lblk_policy(const struct fscrypt_policy_v2 *policy,
 			     type, sb->s_id);
 		return false;
 	}
+	/*
+	 * FIXME: now that data_unit_size < fs_block_size is allowed, checking
+	 * lblk_bits is no longer sufficient and we need to rely on s_maxbytes
+	 * instead.  If s_maxbytes works and we have to rely on that anyway,
+	 * there is no need to query lblk_bits from the filesystem.
+	 */
 	if (sb->s_cop->get_ino_and_lblk_bits)
-		sb->s_cop->get_ino_and_lblk_bits(sb, &ino_bits, &lblk_bits);
+		sb->s_cop->get_ino_and_lblk_bits(sb, &ino_bits, &dubits);
 	if (ino_bits > max_ino_bits) {
 		fscrypt_warn(inode,
 			     "Can't use %s policy on filesystem '%s' because its inode numbers are too long",
 			     type, sb->s_id);
 		return false;
 	}
-	if (lblk_bits > max_lblk_bits) {
+	dubits = max_t(int, dubits,
+		       (ilog2(sb->s_maxbytes) +
+			!is_power_of_2(sb->s_maxbytes)) -
+		       fscrypt_select_data_unit_bits(inode,
+					(const union fscrypt_policy *)policy));
+	if (dubits > max_dubits) {
 		fscrypt_warn(inode,
-			     "Can't use %s policy on filesystem '%s' because its block numbers are too long",
+			     "Can't use %s policy on filesystem '%s' because its maximum file size is too large",
 			     type, sb->s_id);
 		return false;
 	}

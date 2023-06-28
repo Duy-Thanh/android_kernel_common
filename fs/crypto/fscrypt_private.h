@@ -268,6 +268,9 @@ struct fscrypt_info {
 	siphash_key_t ci_dirhash_key;
 	bool ci_dirhash_key_initialized;
 
+	/* log2 of the data unit size used by this file */
+	u8 ci_data_unit_bits;
+
 	/* The encryption policy used by this inode */
 	union fscrypt_policy ci_policy;
 
@@ -304,8 +307,8 @@ fscrypt_msg(const struct inode *inode, const char *level, const char *fmt, ...);
 
 union fscrypt_iv {
 	struct {
-		/* logical block number within the file */
-		__le64 lblk_num;
+		/* index of data unit within the file */
+		__le64 index;
 
 		/* per-file nonce; only set in DIRECT_KEY mode */
 		u8 nonce[FSCRYPT_FILE_NONCE_SIZE];
@@ -314,8 +317,38 @@ union fscrypt_iv {
 	__le64 dun[FSCRYPT_MAX_IV_SIZE / sizeof(__le64)];
 };
 
-void fscrypt_generate_iv(union fscrypt_iv *iv, u64 lblk_num,
+void fscrypt_generate_iv(union fscrypt_iv *iv, u64 index,
 			 const struct fscrypt_info *ci);
+
+static inline unsigned int
+fscrypt_select_data_unit_bits(const struct inode *inode,
+			      const union fscrypt_policy *policy)
+{
+	/*
+	 * FIXME: This is an experimental hack that is needed for testing 16K
+	 * page support with f2fs on systems where the inline encryption
+	 * hardware only supports a crypto data unit size of 4K.
+	 */
+	return min_t(u8, inode->i_blkbits, 12);
+}
+
+static inline unsigned int
+fscrypt_data_unit_size(const struct fscrypt_info *ci)
+{
+	return 1U << ci->ci_data_unit_bits;
+}
+
+static inline bool
+fscrypt_using_subblock_data_units(const struct fscrypt_info *ci)
+{
+	return ci->ci_data_unit_bits < ci->ci_inode->i_blkbits;
+}
+
+static inline u64
+fscrypt_lblk_num_to_du_idx(const struct fscrypt_info *ci, u64 lblk_num)
+{
+	return lblk_num << (ci->ci_inode->i_blkbits - ci->ci_data_unit_bits);
+}
 
 /* fname.c */
 bool __fscrypt_fname_encrypted_size(const union fscrypt_policy *policy,

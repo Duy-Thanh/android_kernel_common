@@ -618,6 +618,8 @@ fscrypt_setup_encryption_info(struct inode *inode,
 	crypt_info->ci_inode = inode;
 	crypt_info->ci_policy = *policy;
 	memcpy(crypt_info->ci_nonce, nonce, FSCRYPT_FILE_NONCE_SIZE);
+	crypt_info->ci_data_unit_bits =
+		fscrypt_select_data_unit_bits(inode, policy);
 
 	mode = select_encryption_mode(&crypt_info->ci_policy, inode);
 	if (IS_ERR(mode)) {

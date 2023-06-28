@@ -130,7 +130,7 @@ int fscrypt_select_encryption_impl(struct fscrypt_info *ci,
 	 * crypto configuration that the file would use.
 	 */
 	crypto_cfg.crypto_mode = ci->ci_mode->blk_crypto_mode;
-	crypto_cfg.data_unit_size = sb->s_blocksize;
+	crypto_cfg.data_unit_size = fscrypt_data_unit_size(ci);
 	crypto_cfg.dun_bytes = fscrypt_get_dun_bytes(ci);
 	crypto_cfg.key_type =
 		is_hw_wrapped_key ? BLK_CRYPTO_KEY_TYPE_HW_WRAPPED :
@@ -176,7 +176,7 @@ int fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
 
 	err = blk_crypto_init_key(blk_key, raw_key, raw_key_size, key_type,
 				  crypto_mode, fscrypt_get_dun_bytes(ci),
-				  sb->s_blocksize);
+				  fscrypt_data_unit_size(ci));
 	if (err) {
 		fscrypt_err(inode, "error %d initializing blk-crypto key", err);
 		goto fail;
@@ -271,10 +271,11 @@ EXPORT_SYMBOL_GPL(__fscrypt_inode_uses_inline_crypto);
 static void fscrypt_generate_dun(const struct fscrypt_info *ci, u64 lblk_num,
 				 u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE])
 {
+	u64 index = fscrypt_lblk_num_to_du_idx(ci, lblk_num);
 	union fscrypt_iv iv;
 	int i;
 
-	fscrypt_generate_iv(&iv, lblk_num, ci);
+	fscrypt_generate_iv(&iv, index, ci);
 
 	BUILD_BUG_ON(FSCRYPT_MAX_IV_SIZE > BLK_CRYPTO_MAX_IV_SIZE);
 	memset(dun, 0, BLK_CRYPTO_MAX_IV_SIZE);
