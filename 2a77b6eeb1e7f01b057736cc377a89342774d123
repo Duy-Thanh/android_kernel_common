@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecbcc011_2cbd8234",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-29T15:28:48Z",
+      "side": 1,
+      "message": "For posterity, those are the (intentional) changes to the ABI:\n```\n74 type(s) changed from FULLY_DEFINED to ABSENT:\n  enum iodev_type\n  enum kvm_pgtable_stage2_flags\n  enum kvm_stat_kind\n  enum mmu_notifier_event\n  enum vgic_irq_config\n  struct _kvm_stats_desc\n  struct arch_timer_context\n  struct arch_timer_cpu\n  struct arm_pmu\n  struct irq_ops\n  struct its_vm\n  struct its_vpe\n  struct kvm\n  struct kvm_arch\n  struct kvm_coalesced_mmio\n  struct kvm_coalesced_mmio_ring\n  struct kvm_debug_exit_arch\n  struct kvm_device\n  struct kvm_device_attr\n  struct kvm_device_ops\n  struct kvm_dirty_gfn\n  struct kvm_dirty_ring\n  struct kvm_guest_debug_arch\n  struct kvm_hyp_memcache\n  struct kvm_hyperv_exit\n  struct kvm_io_bus\n  struct kvm_io_device\n  struct kvm_io_device_ops\n  struct kvm_io_range\n  struct kvm_irq_level\n  struct kvm_irq_routing_table\n  struct kvm_memslots\n  struct kvm_mmio_fragment\n  struct kvm_mmu_memory_cache\n  struct kvm_mp_state\n  struct kvm_pgtable\n  struct kvm_pgtable_mm_ops\n  struct kvm_pgtable_pte_ops\n  struct kvm_pmc\n  struct kvm_pmu\n  struct kvm_pmu_events\n  struct kvm_protected_vm\n  struct kvm_run\n  struct kvm_s2_mmu\n  struct kvm_smccc_features\n  struct kvm_stat_data\n  struct kvm_stats_desc\n  struct kvm_sync_regs\n  struct kvm_vcpu\n  struct kvm_vcpu_arch\n  struct kvm_vcpu_fault_info\n  struct kvm_vcpu_stat\n  struct kvm_vcpu_stat_generic\n  struct kvm_vm_stat\n  struct kvm_vm_stat_generic\n  struct kvm_vmid\n  struct kvm_xen_exit\n  struct mmu_notifier\n  struct mmu_notifier_ops\n  struct mmu_notifier_range\n  struct pmu_hw_events\n  struct preempt_notifier\n  struct preempt_ops\n  struct vcpu_reset_state\n  struct vgic_cpu\n  struct vgic_dist\n  struct vgic_io_device\n  struct vgic_irq\n  struct vgic_its\n  struct vgic_redist_region\n  struct vgic_register_region\n  struct vgic_state_iter\n  struct vgic_v2_cpu_if\n  struct vgic_v3_cpu_if\n```",
+      "revId": "2a77b6eeb1e7f01b057736cc377a89342774d123",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
