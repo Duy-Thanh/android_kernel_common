@@ -24,6 +24,26 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000029076616",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2208138?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "207df175_0cd61900",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-29T19:04:22Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 473995752 android-build.ayeaye-python-dispatcher_20220913.04_p0",
+      "revId": "6c948d90be70f8c832acaae5571ac6b1791ce111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000029076616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2208138?revision\u003d2",
       "fixSuggestions": [
         {
           "fixId": "c3284b24_8a9e69ae",
@@ -52,6 +72,49 @@
         "id": 1757831
       },
       "writtenOn": "2022-09-14T21:26:31Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Brandon Anderson \u003cbander9289@gmail.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 473995752 android-build.ayeaye-python-dispatcher_20220913.04_p0",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "6c948d90be70f8c832acaae5571ac6b1791ce111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000029076616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2208138?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "c332ebf1_ee24f9c1",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Brandon Anderson \u003cbander9289@gmail.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "5101b905_2b87a0b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-29T19:04:22Z",
       "side": 1,
       "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Brandon Anderson \u003cbander9289@gmail.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 473995752 android-build.ayeaye-python-dispatcher_20220913.04_p0",
       "range": {
