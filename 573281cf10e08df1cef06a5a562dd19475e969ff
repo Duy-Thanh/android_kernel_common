@@ -34,6 +34,24 @@
       "parentUuid": "4a980820_669f3685",
       "revId": "573281cf10e08df1cef06a5a562dd19475e969ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6284a6a_c503946f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885698
+      },
+      "writtenOn": "2023-06-30T16:10:22Z",
+      "side": 1,
+      "message": "Hi Carlos,\n\nI just send v4 earlier here\nhttps://lore.kernel.org/all/20230630140624.21739-1-powen.kao@mediatek.com/\n\nbut seems that u have done some update on patchset\nshould I leave it untouched or update it to v4?",
+      "parentUuid": "71026d2f_d98e5bb1",
+      "revId": "573281cf10e08df1cef06a5a562dd19475e969ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
