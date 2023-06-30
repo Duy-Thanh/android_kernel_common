@@ -136,8 +136,19 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_txn_recvd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_balance_anon_file_reclaim);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_show_max_freq);
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_alloc_node);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_free);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_slab_bypass);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_slab_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_unref_page_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kvmalloc_node_use_vmalloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_alloc_pages_retry);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_unreserve_highatomic_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_bulk_bypass);
+>>>>>>> CHANGE (a87991 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_hw_protection_shutdown);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_insert);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_delete);

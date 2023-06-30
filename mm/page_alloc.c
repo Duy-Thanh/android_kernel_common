@@ -1314,6 +1314,40 @@ static void free_one_page(struct zone *zone, struct page *page,
 			  fpi_t fpi_flags)
 {
 	unsigned long flags;
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
+||||||| BASE
+	int migratetype;
+	unsigned long pfn = page_to_pfn(page);
+	struct zone *zone = page_zone(page);
+
+	if (!free_pages_prepare(page, order, fpi_flags))
+		return;
+
+	/*
+	 * Calling get_pfnblock_migratetype() without spin_lock_irqsave() here
+	 * is used to avoid calling get_pfnblock_migratetype() under the lock.
+	 * This will reduce the lock holding time.
+	 */
+	migratetype = get_pfnblock_migratetype(page, pfn);
+=======
+	int migratetype;
+	unsigned long pfn = page_to_pfn(page);
+	struct zone *zone = page_zone(page);
+	bool skip_free_unref_page = false;
+
+	if (!free_pages_prepare(page, order, fpi_flags))
+		return;
+
+	/*
+	 * Calling get_pfnblock_migratetype() without spin_lock_irqsave() here
+	 * is used to avoid calling get_pfnblock_migratetype() under the lock.
+	 * This will reduce the lock holding time.
+	 */
+	migratetype = get_pfnblock_migratetype(page, pfn);
+	trace_android_vh_free_unref_page_bypass(page, order, migratetype, &skip_free_unref_page);
+	if (skip_free_unref_page)
+		return;
+>>>>>>> CHANGE (a87991 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 
 	spin_lock_irqsave(&zone->lock, flags);
 	split_large_buddy(zone, page, pfn, order, fpi_flags);
@@ -2153,7 +2187,14 @@ static bool unreserve_highatomic_pageblock(const struct alloc_context *ac,
 	struct zone *zone;
 	struct page *page;
 	int order;
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
 	int ret;
+||||||| BASE
+	bool ret;
+=======
+	bool ret;
+	bool skip_unreserve_highatomic = false;
+>>>>>>> CHANGE (a87991 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 
 	for_each_zone_zonelist_nodemask(zone, z, zonelist, ac->highest_zoneidx,
 								ac->nodemask) {
@@ -2163,6 +2204,11 @@ static bool unreserve_highatomic_pageblock(const struct alloc_context *ac,
 		 */
 		if (!force && zone->nr_reserved_highatomic <=
 					pageblock_nr_pages)
+			continue;
+
+		trace_android_vh_unreserve_highatomic_bypass(force, zone,
+				&skip_unreserve_highatomic);
+		if (skip_unreserve_highatomic)
 			continue;
 
 		spin_lock_irqsave(&zone->lock, flags);
@@ -2724,7 +2770,14 @@ void free_unref_page(struct page *page, unsigned int order)
 	struct per_cpu_pages *pcp;
 	struct zone *zone;
 	unsigned long pfn = page_to_pfn(page);
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
 	int migratetype;
+||||||| BASE
+	int migratetype, pcpmigratetype;
+=======
+	int migratetype, pcpmigratetype;
+	bool skip_free_unref_page = false;
+>>>>>>> CHANGE (a87991 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 
 	if (!pcp_allowed_order(order)) {
 		__free_pages_ok(page, order, FPI_NONE);
@@ -2742,7 +2795,16 @@ void free_unref_page(struct page *page, unsigned int order)
 	 * get those areas back if necessary. Otherwise, we may have to free
 	 * excessively into the page allocator
 	 */
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
 	migratetype = get_pfnblock_migratetype(page, pfn);
+||||||| BASE
+	migratetype = pcpmigratetype = get_pcppage_migratetype(page);
+=======
+	migratetype = pcpmigratetype = get_pcppage_migratetype(page);
+	trace_android_vh_free_unref_page_bypass(page, order, migratetype, &skip_free_unref_page);
+	if (skip_free_unref_page)
+		return;
+>>>>>>> CHANGE (a87991 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 	if (unlikely(migratetype > MIGRATE_RECLAIMABLE)) {
 		if (unlikely(is_migrate_isolate(migratetype))) {
 			free_one_page(page_zone(page), page, pfn, order, FPI_NONE);
@@ -3094,6 +3156,31 @@ struct page *___rmqueue_pcplist(struct zone *zone, unsigned int order,
 			int batch = nr_pcp_alloc(pcp, zone, order);
 			int alloced;
 
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
+||||||| BASE
+			/*
+			 * Scale batch relative to order if batch implies
+			 * free pages can be stored on the PCP. Batch can
+			 * be 1 for small zones or for boot pagesets which
+			 * should never store free pages as the pages may
+			 * belong to arbitrary zones.
+			 */
+			if (batch > 1)
+				batch = max(batch >> order, 2);
+=======
+			trace_android_vh_rmqueue_bulk_bypass(order, pcp, migratetype, list);
+			if (!list_empty(list))
+				goto get_list;
+			/*
+			 * Scale batch relative to order if batch implies
+			 * free pages can be stored on the PCP. Batch can
+			 * be 1 for small zones or for boot pagesets which
+			 * should never store free pages as the pages may
+			 * belong to arbitrary zones.
+			 */
+			if (batch > 1)
+				batch = max(batch >> order, 2);
+>>>>>>> CHANGE (a87991 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 			alloced = rmqueue_bulk(zone, order,
 					batch, list,
 					migratetype, alloc_flags);
@@ -3103,6 +3190,7 @@ struct page *___rmqueue_pcplist(struct zone *zone, unsigned int order,
 				return NULL;
 		}
 
+get_list:
 		page = list_first_entry(list, struct page, pcp_list);
 		list_del(&page->pcp_list);
 		pcp->count -= 1 << order;
@@ -4358,6 +4446,7 @@ __alloc_pages_slowpath(gfp_t gfp_mask, unsigned int order,
 	unsigned int cpuset_mems_cookie;
 	unsigned int zonelist_iter_cookie;
 	int reserve_flags;
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
 
 	if (unlikely(nofail)) {
 		/*
@@ -4377,6 +4466,12 @@ __alloc_pages_slowpath(gfp_t gfp_mask, unsigned int order,
 		 */
 		WARN_ON_ONCE(current->flags & PF_MEMALLOC);
 	}
+||||||| BASE
+	unsigned long alloc_start = jiffies;
+=======
+	unsigned long alloc_start = jiffies;
+	bool should_alloc_retry = false;
+>>>>>>> CHANGE (a87991 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 
 restart:
 	compaction_retries = 0;
@@ -4515,6 +4610,11 @@ retry:
 	/* Avoid recursion of direct reclaim */
 	if (current->flags & PF_MEMALLOC)
 		goto nopage;
+
+	trace_android_vh_should_alloc_pages_retry(gfp_mask, order, &alloc_flags,
+		ac->migratetype, ac->preferred_zoneref->zone, &page, &should_alloc_retry);
+	if (should_alloc_retry)
+		goto retry;
 
 	/* Try direct reclaim and then allocating */
 	page = __alloc_pages_direct_reclaim(gfp_mask, order, alloc_flags, ac,
