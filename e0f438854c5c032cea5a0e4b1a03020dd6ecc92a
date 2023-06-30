@@ -16,6 +16,75 @@
       "message": "V4 updated",
       "revId": "e0f438854c5c032cea5a0e4b1a03020dd6ecc92a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1deed81f_9846aa80",
+        "filename": "drivers/ufs/host/ufs-mediatek.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-30T17:49:38Z",
+      "side": 1,
+      "message": "This is not the same behavior you previously had and it also doesn\u0027t quite implement what Angelo suggested. You are only invalidating a single -\u003eirq and leaving the rest as is. Are you sure this is ok?",
+      "range": {
+        "startLine": 866,
+        "startChar": 3,
+        "endLine": 866,
+        "endChar": 52
+      },
+      "revId": "e0f438854c5c032cea5a0e4b1a03020dd6ecc92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a0f2c4c_0872f9de",
+        "filename": "drivers/ufs/host/ufs-mediatek.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-30T17:49:38Z",
+      "side": 1,
+      "message": "what about Angelo\u0027s feedback on this \"chatty\" log?",
+      "range": {
+        "startLine": 1624,
+        "startChar": 2,
+        "endLine": 1624,
+        "endChar": 10
+      },
+      "revId": "e0f438854c5c032cea5a0e4b1a03020dd6ecc92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f0d033_660556ec",
+        "filename": "drivers/ufs/host/ufs-mediatek.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-30T17:49:38Z",
+      "side": 1,
+      "message": "what is this bonus addition? this doesn\u0027t seem to have been included in v3 and is unused here correct?",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 14
+      },
+      "revId": "e0f438854c5c032cea5a0e4b1a03020dd6ecc92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
