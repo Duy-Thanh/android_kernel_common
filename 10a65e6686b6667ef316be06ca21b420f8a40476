@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f48bb462_55e6c21d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-06-30T11:43:47Z",
+      "side": 1,
+      "message": "Facing issues that change crc of some irrelevant symbols again. Not even working if we add trace header inclusions under \"#ifndef __GENSYMS__\". Can you give some advice?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "10a65e6686b6667ef316be06ca21b420f8a40476",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
