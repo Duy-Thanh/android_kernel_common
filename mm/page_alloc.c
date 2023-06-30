@@ -1564,11 +1564,62 @@ static void free_one_page(struct zone *zone, struct page *page,
 static void __free_pages_ok(struct page *page, unsigned int order,
 			    fpi_t fpi_flags)
 {
+	int migratetype;
 	unsigned long pfn = page_to_pfn(page);
 	struct zone *zone = page_zone(page);
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
+||||||| BASE   (cc40b85c50d6d82cc75f7e71757b8f1e4ca5df0f ANDROID: ARM64: GKI: Enable CONFIG_ARM_SCMI_TRANSPORT_VIRTIO)
+	bool skip_free_pages_prepare = false;
+	bool skip_free_pages_ok = false;
+=======
+	bool skip_free_pages_prepare = false;
+	bool skip_free_pages_ok = false;
+	bool skip_free_unref_page = false;
+>>>>>>> CHANGE (1de7425d75a65ab0d10387c92eb9cd97fd3de7e6 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
 	if (free_pages_prepare(page, order))
 		free_one_page(zone, page, pfn, order, fpi_flags);
+||||||| BASE   (cc40b85c50d6d82cc75f7e71757b8f1e4ca5df0f ANDROID: ARM64: GKI: Enable CONFIG_ARM_SCMI_TRANSPORT_VIRTIO)
+	trace_android_vh_free_pages_prepare_bypass(page, order,
+			fpi_flags, &skip_free_pages_prepare);
+	if (skip_free_pages_prepare)
+		goto skip_prepare;
+
+	if (!free_pages_prepare(page, order))
+		return;
+skip_prepare:
+	trace_android_vh_free_pages_ok_bypass(page, order,
+			fpi_flags, &skip_free_pages_ok);
+	if (skip_free_pages_ok)
+		return;
+
+	free_one_page(zone, page, pfn, order, fpi_flags);
+=======
+	trace_android_vh_free_pages_prepare_bypass(page, order,
+			fpi_flags, &skip_free_pages_prepare);
+	if (skip_free_pages_prepare)
+		goto skip_prepare;
+
+	if (!free_pages_prepare(page, order))
+		return;
+skip_prepare:
+	trace_android_vh_free_pages_ok_bypass(page, order,
+			fpi_flags, &skip_free_pages_ok);
+	if (skip_free_pages_ok)
+		return;
+	/*
+	 * Calling get_pfnblock_migratetype() without spin_lock_irqsave() here
+	 * is used to avoid calling get_pfnblock_migratetype() under the lock.
+	 * This will reduce the lock holding time.
+	 */
+	migratetype = get_pfnblock_migratetype(page, pfn);
+	trace_android_vh_free_unref_page_bypass(page, order, migratetype, &skip_free_unref_page);
+	if (skip_free_unref_page)
+		return;
+
+	free_one_page(zone, page, pfn, order, fpi_flags);
+>>>>>>> CHANGE (1de7425d75a65ab0d10387c92eb9cd97fd3de7e6 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 }
 
 void __meminit __free_pages_core(struct page *page, unsigned int order,
@@ -2343,8 +2394,390 @@ try_to_claim_block(struct zone *zone, struct page *page,
 }
 
 /*
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
  * Try to allocate from some fallback migratetype by claiming the entire block,
  * i.e. converting it to the allocation's start migratetype.
+||||||| BASE   (cc40b85c50d6d82cc75f7e71757b8f1e4ca5df0f ANDROID: ARM64: GKI: Enable CONFIG_ARM_SCMI_TRANSPORT_VIRTIO)
+ * Check whether there is a suitable fallback freepage with requested order.
+ * If only_stealable is true, this function returns fallback_mt only if
+ * we can steal other freepages all together. This would help to reduce
+ * fragmentation due to mixed migratetype pages in one pageblock.
+ */
+int find_suitable_fallback(struct free_area *area, unsigned int order,
+			int migratetype, bool only_stealable, bool *can_steal)
+{
+	int i;
+	int fallback_mt;
+
+	if (area->nr_free == 0)
+		return -1;
+
+	*can_steal = false;
+	for (i = 0; i < MIGRATE_FALLBACKS - 1 ; i++) {
+		fallback_mt = fallbacks[migratetype][i];
+		if (free_area_empty(area, fallback_mt))
+			continue;
+
+		if (can_steal_fallback(order, migratetype))
+			*can_steal = true;
+
+		if (!only_stealable)
+			return fallback_mt;
+
+		if (*can_steal)
+			return fallback_mt;
+	}
+
+	return -1;
+}
+
+/*
+ * Reserve the pageblock(s) surrounding an allocation request for
+ * exclusive use of high-order atomic allocations if there are no
+ * empty page blocks that contain a page with a suitable order
+ */
+static void reserve_highatomic_pageblock(struct page *page, int order,
+					 struct zone *zone)
+{
+	int mt;
+	unsigned long max_managed, flags;
+	bool bypass = false;
+
+	/*
+	 * The number reserved as: minimum is 1 pageblock, maximum is
+	 * roughly 1% of a zone. But if 1% of a zone falls below a
+	 * pageblock size, then don't reserve any pageblocks.
+	 * Check is race-prone but harmless.
+	 */
+	if ((zone_managed_pages(zone) / 100) < pageblock_nr_pages)
+		return;
+	max_managed = ALIGN((zone_managed_pages(zone) / 100), pageblock_nr_pages);
+	if (zone->nr_reserved_highatomic >= max_managed)
+		return;
+	trace_android_vh_reserve_highatomic_bypass(page, &bypass);
+	if (bypass)
+		return;
+
+	spin_lock_irqsave(&zone->lock, flags);
+
+	/* Recheck the nr_reserved_highatomic limit under the lock */
+	if (zone->nr_reserved_highatomic >= max_managed)
+		goto out_unlock;
+
+	/* Yoink! */
+	mt = get_pageblock_migratetype(page);
+	/* Only reserve normal pageblocks (i.e., they can merge with others) */
+	if (!migratetype_is_mergeable(mt))
+		goto out_unlock;
+
+	if (order < pageblock_order) {
+		if (move_freepages_block(zone, page, mt, MIGRATE_HIGHATOMIC) == -1)
+			goto out_unlock;
+		zone->nr_reserved_highatomic += pageblock_nr_pages;
+	} else {
+		change_pageblock_range(page, order, MIGRATE_HIGHATOMIC);
+		zone->nr_reserved_highatomic += 1 << order;
+	}
+
+out_unlock:
+	spin_unlock_irqrestore(&zone->lock, flags);
+}
+
+/*
+ * Used when an allocation is about to fail under memory pressure. This
+ * potentially hurts the reliability of high-order allocations when under
+ * intense memory pressure but failed atomic allocations should be easier
+ * to recover from than an OOM.
+ *
+ * If @force is true, try to unreserve pageblocks even though highatomic
+ * pageblock is exhausted.
+ */
+static bool unreserve_highatomic_pageblock(const struct alloc_context *ac,
+						bool force)
+{
+	struct zonelist *zonelist = ac->zonelist;
+	unsigned long flags;
+	struct zoneref *z;
+	struct zone *zone;
+	struct page *page;
+	int order;
+	int ret;
+
+	for_each_zone_zonelist_nodemask(zone, z, zonelist, ac->highest_zoneidx,
+								ac->nodemask) {
+		/*
+		 * Preserve at least one pageblock unless memory pressure
+		 * is really high.
+		 */
+		if (!force && zone->nr_reserved_highatomic <=
+					pageblock_nr_pages)
+			continue;
+
+		spin_lock_irqsave(&zone->lock, flags);
+		for (order = 0; order < NR_PAGE_ORDERS; order++) {
+			struct free_area *area = &(zone->free_area[order]);
+			int mt;
+
+			page = get_page_from_free_area(area, MIGRATE_HIGHATOMIC);
+			if (!page)
+				continue;
+
+			mt = get_pageblock_migratetype(page);
+			/*
+			 * In page freeing path, migratetype change is racy so
+			 * we can counter several free pages in a pageblock
+			 * in this loop although we changed the pageblock type
+			 * from highatomic to ac->migratetype. So we should
+			 * adjust the count once.
+			 */
+			if (is_migrate_highatomic(mt)) {
+				unsigned long size;
+				/*
+				 * It should never happen but changes to
+				 * locking could inadvertently allow a per-cpu
+				 * drain to add pages to MIGRATE_HIGHATOMIC
+				 * while unreserving so be safe and watch for
+				 * underflows.
+				 */
+				size = max(pageblock_nr_pages, 1UL << order);
+				size = min(size, zone->nr_reserved_highatomic);
+				zone->nr_reserved_highatomic -= size;
+			}
+
+			/*
+			 * Convert to ac->migratetype and avoid the normal
+			 * pageblock stealing heuristics. Minimally, the caller
+			 * is doing the work and needs the pages. More
+			 * importantly, if the block was always converted to
+			 * MIGRATE_UNMOVABLE or another type then the number
+			 * of pageblocks that cannot be completely freed
+			 * may increase.
+			 */
+			if (order < pageblock_order)
+				ret = move_freepages_block(zone, page, mt,
+							   ac->migratetype);
+			else {
+				move_to_free_list(page, zone, order, mt,
+						  ac->migratetype);
+				change_pageblock_range(page, order,
+						       ac->migratetype);
+				ret = 1;
+			}
+			/*
+			 * Reserving the block(s) already succeeded,
+			 * so this should not fail on zone boundaries.
+			 */
+			WARN_ON_ONCE(ret == -1);
+			if (ret > 0) {
+				spin_unlock_irqrestore(&zone->lock, flags);
+				return ret;
+			}
+		}
+		spin_unlock_irqrestore(&zone->lock, flags);
+	}
+
+	return false;
+}
+
+/*
+ * Try finding a free buddy page on the fallback list and put it on the free
+ * list of requested migratetype, possibly along with other pages from the same
+ * block, depending on fragmentation avoidance heuristics. Returns true if
+ * fallback was found so that __rmqueue_smallest() can grab it.
+=======
+ * Check whether there is a suitable fallback freepage with requested order.
+ * If only_stealable is true, this function returns fallback_mt only if
+ * we can steal other freepages all together. This would help to reduce
+ * fragmentation due to mixed migratetype pages in one pageblock.
+ */
+int find_suitable_fallback(struct free_area *area, unsigned int order,
+			int migratetype, bool only_stealable, bool *can_steal)
+{
+	int i;
+	int fallback_mt;
+
+	if (area->nr_free == 0)
+		return -1;
+
+	*can_steal = false;
+	for (i = 0; i < MIGRATE_FALLBACKS - 1 ; i++) {
+		fallback_mt = fallbacks[migratetype][i];
+		if (free_area_empty(area, fallback_mt))
+			continue;
+
+		if (can_steal_fallback(order, migratetype))
+			*can_steal = true;
+
+		if (!only_stealable)
+			return fallback_mt;
+
+		if (*can_steal)
+			return fallback_mt;
+	}
+
+	return -1;
+}
+
+/*
+ * Reserve the pageblock(s) surrounding an allocation request for
+ * exclusive use of high-order atomic allocations if there are no
+ * empty page blocks that contain a page with a suitable order
+ */
+static void reserve_highatomic_pageblock(struct page *page, int order,
+					 struct zone *zone)
+{
+	int mt;
+	unsigned long max_managed, flags;
+	bool bypass = false;
+
+	/*
+	 * The number reserved as: minimum is 1 pageblock, maximum is
+	 * roughly 1% of a zone. But if 1% of a zone falls below a
+	 * pageblock size, then don't reserve any pageblocks.
+	 * Check is race-prone but harmless.
+	 */
+	if ((zone_managed_pages(zone) / 100) < pageblock_nr_pages)
+		return;
+	max_managed = ALIGN((zone_managed_pages(zone) / 100), pageblock_nr_pages);
+	if (zone->nr_reserved_highatomic >= max_managed)
+		return;
+	trace_android_vh_reserve_highatomic_bypass(page, &bypass);
+	if (bypass)
+		return;
+
+	spin_lock_irqsave(&zone->lock, flags);
+
+	/* Recheck the nr_reserved_highatomic limit under the lock */
+	if (zone->nr_reserved_highatomic >= max_managed)
+		goto out_unlock;
+
+	/* Yoink! */
+	mt = get_pageblock_migratetype(page);
+	/* Only reserve normal pageblocks (i.e., they can merge with others) */
+	if (!migratetype_is_mergeable(mt))
+		goto out_unlock;
+
+	if (order < pageblock_order) {
+		if (move_freepages_block(zone, page, mt, MIGRATE_HIGHATOMIC) == -1)
+			goto out_unlock;
+		zone->nr_reserved_highatomic += pageblock_nr_pages;
+	} else {
+		change_pageblock_range(page, order, MIGRATE_HIGHATOMIC);
+		zone->nr_reserved_highatomic += 1 << order;
+	}
+
+out_unlock:
+	spin_unlock_irqrestore(&zone->lock, flags);
+}
+
+/*
+ * Used when an allocation is about to fail under memory pressure. This
+ * potentially hurts the reliability of high-order allocations when under
+ * intense memory pressure but failed atomic allocations should be easier
+ * to recover from than an OOM.
+ *
+ * If @force is true, try to unreserve pageblocks even though highatomic
+ * pageblock is exhausted.
+ */
+static bool unreserve_highatomic_pageblock(const struct alloc_context *ac,
+						bool force)
+{
+	struct zonelist *zonelist = ac->zonelist;
+	unsigned long flags;
+	struct zoneref *z;
+	struct zone *zone;
+	struct page *page;
+	int order;
+	int ret;
+	bool skip_unreserve_highatomic = false;
+
+	for_each_zone_zonelist_nodemask(zone, z, zonelist, ac->highest_zoneidx,
+								ac->nodemask) {
+		/*
+		 * Preserve at least one pageblock unless memory pressure
+		 * is really high.
+		 */
+		if (!force && zone->nr_reserved_highatomic <=
+					pageblock_nr_pages)
+			continue;
+
+		trace_android_vh_unreserve_highatomic_bypass(force, zone,
+				&skip_unreserve_highatomic);
+		if (skip_unreserve_highatomic)
+			continue;
+
+		spin_lock_irqsave(&zone->lock, flags);
+		for (order = 0; order < NR_PAGE_ORDERS; order++) {
+			struct free_area *area = &(zone->free_area[order]);
+			int mt;
+
+			page = get_page_from_free_area(area, MIGRATE_HIGHATOMIC);
+			if (!page)
+				continue;
+
+			mt = get_pageblock_migratetype(page);
+			/*
+			 * In page freeing path, migratetype change is racy so
+			 * we can counter several free pages in a pageblock
+			 * in this loop although we changed the pageblock type
+			 * from highatomic to ac->migratetype. So we should
+			 * adjust the count once.
+			 */
+			if (is_migrate_highatomic(mt)) {
+				unsigned long size;
+				/*
+				 * It should never happen but changes to
+				 * locking could inadvertently allow a per-cpu
+				 * drain to add pages to MIGRATE_HIGHATOMIC
+				 * while unreserving so be safe and watch for
+				 * underflows.
+				 */
+				size = max(pageblock_nr_pages, 1UL << order);
+				size = min(size, zone->nr_reserved_highatomic);
+				zone->nr_reserved_highatomic -= size;
+			}
+
+			/*
+			 * Convert to ac->migratetype and avoid the normal
+			 * pageblock stealing heuristics. Minimally, the caller
+			 * is doing the work and needs the pages. More
+			 * importantly, if the block was always converted to
+			 * MIGRATE_UNMOVABLE or another type then the number
+			 * of pageblocks that cannot be completely freed
+			 * may increase.
+			 */
+			if (order < pageblock_order)
+				ret = move_freepages_block(zone, page, mt,
+							   ac->migratetype);
+			else {
+				move_to_free_list(page, zone, order, mt,
+						  ac->migratetype);
+				change_pageblock_range(page, order,
+						       ac->migratetype);
+				ret = 1;
+			}
+			/*
+			 * Reserving the block(s) already succeeded,
+			 * so this should not fail on zone boundaries.
+			 */
+			WARN_ON_ONCE(ret == -1);
+			if (ret > 0) {
+				spin_unlock_irqrestore(&zone->lock, flags);
+				return ret;
+			}
+		}
+		spin_unlock_irqrestore(&zone->lock, flags);
+	}
+
+	return false;
+}
+
+/*
+ * Try finding a free buddy page on the fallback list and put it on the free
+ * list of requested migratetype, possibly along with other pages from the same
+ * block, depending on fragmentation avoidance heuristics. Returns true if
+ * fallback was found so that __rmqueue_smallest() can grab it.
+>>>>>>> CHANGE (1de7425d75a65ab0d10387c92eb9cd97fd3de7e6 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
  *
  * The use of signed ints for order and current_order is a deliberate
  * deviation from the rest of this file, to make the for loop
@@ -2892,6 +3325,7 @@ static void __free_frozen_pages(struct page *page, unsigned int order,
 	struct zone *zone;
 	unsigned long pfn = page_to_pfn(page);
 	int migratetype;
+	bool skip_free_unref_page = false;
 
 	if (!pcp_allowed_order(order)) {
 		__free_pages_ok(page, order, fpi_flags);
@@ -2910,7 +3344,16 @@ static void __free_frozen_pages(struct page *page, unsigned int order,
 	 */
 	zone = page_zone(page);
 	migratetype = get_pfnblock_migratetype(page, pfn);
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
 	if (unlikely(migratetype >= MIGRATE_PCPTYPES)) {
+||||||| BASE   (cc40b85c50d6d82cc75f7e71757b8f1e4ca5df0f ANDROID: ARM64: GKI: Enable CONFIG_ARM_SCMI_TRANSPORT_VIRTIO)
+	if (unlikely(migratetype > MIGRATE_RECLAIMABLE)) {
+=======
+	trace_android_vh_free_unref_page_bypass(page, order, migratetype, &skip_free_unref_page);
+	if (skip_free_unref_page)
+		return;
+	if (unlikely(migratetype > MIGRATE_RECLAIMABLE)) {
+>>>>>>> CHANGE (1de7425d75a65ab0d10387c92eb9cd97fd3de7e6 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 		if (unlikely(is_migrate_isolate(migratetype))) {
 			free_one_page(zone, page, pfn, order, fpi_flags);
 			return;
@@ -3259,6 +3702,9 @@ struct page *__rmqueue_pcplist(struct zone *zone, unsigned int order,
 			int batch = nr_pcp_alloc(pcp, zone, order);
 			int alloced;
 
+			trace_android_vh_rmqueue_bulk_bypass(order, pcp, migratetype, list);
+			if (!list_empty(list))
+				goto get_list;
 			alloced = rmqueue_bulk(zone, order,
 					batch, list,
 					migratetype, alloc_flags);
@@ -3268,6 +3714,7 @@ struct page *__rmqueue_pcplist(struct zone *zone, unsigned int order,
 				return NULL;
 		}
 
+get_list:
 		page = list_first_entry(list, struct page, pcp_list);
 		list_del(&page->pcp_list);
 		pcp->count -= 1 << order;
@@ -4640,6 +5087,19 @@ __alloc_pages_slowpath(gfp_t gfp_mask, unsigned int order,
 	unsigned int cpuset_mems_cookie;
 	unsigned int zonelist_iter_cookie;
 	int reserve_flags;
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
+||||||| BASE   (cc40b85c50d6d82cc75f7e71757b8f1e4ca5df0f ANDROID: ARM64: GKI: Enable CONFIG_ARM_SCMI_TRANSPORT_VIRTIO)
+	unsigned long alloc_start = jiffies;
+	unsigned long pages_reclaimed = 0;
+	int retry_loop_count = 0;
+	u64 stime = 0;
+=======
+	unsigned long alloc_start = jiffies;
+	unsigned long pages_reclaimed = 0;
+	int retry_loop_count = 0;
+	u64 stime = 0;
+	bool should_alloc_retry = false;
+>>>>>>> CHANGE (1de7425d75a65ab0d10387c92eb9cd97fd3de7e6 ANDROID: vendor_hooks: Add hooks to avoid key threads stalle)
 
 	if (unlikely(nofail)) {
 		/*
@@ -4806,6 +5266,11 @@ retry:
 	/* Avoid recursion of direct reclaim */
 	if (current->flags & PF_MEMALLOC)
 		goto nopage;
+
+	trace_android_vh_should_alloc_pages_retry(gfp_mask, order, &alloc_flags,
+		ac->migratetype, ac->preferred_zoneref->zone, &page, &should_alloc_retry);
+	if (should_alloc_retry)
+		goto retry;
 
 	/* Try direct reclaim and then allocating */
 	page = __alloc_pages_direct_reclaim(gfp_mask, order, alloc_flags, ac,
