@@ -16,6 +16,24 @@
       "message": "\"ANDROID\"",
       "revId": "5274b568318a34dda7c90e3d7719bbca64e10075",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d6130d3_55586e75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-07-01T10:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4e83f70_c8d2232d",
+      "revId": "5274b568318a34dda7c90e3d7719bbca64e10075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
