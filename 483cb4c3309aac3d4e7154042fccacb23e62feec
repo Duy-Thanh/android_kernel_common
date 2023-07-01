@@ -110,6 +110,30 @@
       },
       "revId": "483cb4c3309aac3d4e7154042fccacb23e62feec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "137534d4_6f693d68",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-01T10:12:12Z",
+      "side": 1,
+      "message": "Great, please fix that up, as the CRCs can not change.",
+      "parentUuid": "8405d3e0_60a44836",
+      "range": {
+        "startLine": 261,
+        "startChar": 137,
+        "endLine": 261,
+        "endChar": 147
+      },
+      "revId": "483cb4c3309aac3d4e7154042fccacb23e62feec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
