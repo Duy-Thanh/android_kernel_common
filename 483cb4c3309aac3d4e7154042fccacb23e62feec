@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bd431961_9b1b9ff2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-07-01T09:12:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b84a688_16502f58",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 16
+      },
+      "revId": "483cb4c3309aac3d4e7154042fccacb23e62feec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9f216ca2_81c6ceb3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2023-07-01T08:58:29Z",
       "side": 1,
       "message": "We need to get to the bottom of this first.  Can you tell which of the changes introduced this?",
+      "range": {
+        "startLine": 261,
+        "startChar": 137,
+        "endLine": 261,
+        "endChar": 147
+      },
+      "revId": "483cb4c3309aac3d4e7154042fccacb23e62feec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8405d3e0_60a44836",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-07-01T09:12:57Z",
+      "side": 1,
+      "message": "I think it is introduced by https://android-review.googlesource.com/c/kernel/common/+/2646563/4/mm/util.c. I added a vendor_hook in mm/util.c and then crc of some irrelevant symbols exported in this file changed.",
+      "parentUuid": "7e359d20_6aecb0ee",
       "range": {
         "startLine": 261,
         "startChar": 137,
