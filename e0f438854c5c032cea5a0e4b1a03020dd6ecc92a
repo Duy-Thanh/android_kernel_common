@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "354d46c4_1c351dae",
+        "filename": "drivers/ufs/host/ufs-mediatek.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1885698
+      },
+      "writtenOn": "2023-07-01T13:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1deed81f_9846aa80",
+      "range": {
+        "startLine": 866,
+        "startChar": 3,
+        "endLine": 866,
+        "endChar": 52
+      },
+      "revId": "e0f438854c5c032cea5a0e4b1a03020dd6ecc92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a0f2c4c_0872f9de",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f301260_2cb3b856",
+        "filename": "drivers/ufs/host/ufs-mediatek.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1885698
+      },
+      "writtenOn": "2023-07-01T13:53:42Z",
+      "side": 1,
+      "message": "call dev_dbg() instead",
+      "parentUuid": "1a0f2c4c_0872f9de",
+      "range": {
+        "startLine": 1624,
+        "startChar": 2,
+        "endLine": 1624,
+        "endChar": 10
+      },
+      "revId": "e0f438854c5c032cea5a0e4b1a03020dd6ecc92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55f0d033_660556ec",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-06-30T17:49:38Z",
       "side": 1,
       "message": "what is this bonus addition? this doesn\u0027t seem to have been included in v3 and is unused here correct?",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 14
+      },
+      "revId": "e0f438854c5c032cea5a0e4b1a03020dd6ecc92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6fedead_8cb84048",
+        "filename": "drivers/ufs/host/ufs-mediatek.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1885698
+      },
+      "writtenOn": "2023-07-01T13:53:42Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "55f0d033_660556ec",
       "range": {
         "startLine": 25,
         "startChar": 8,
