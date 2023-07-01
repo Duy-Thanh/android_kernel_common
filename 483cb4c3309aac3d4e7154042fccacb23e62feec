@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f216ca2_81c6ceb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-01T08:58:29Z",
+      "side": 1,
+      "message": "This can obviously not be merged as it breaks ABI.",
+      "revId": "483cb4c3309aac3d4e7154042fccacb23e62feec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e359d20_6aecb0ee",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-01T08:58:29Z",
+      "side": 1,
+      "message": "We need to get to the bottom of this first.  Can you tell which of the changes introduced this?",
+      "range": {
+        "startLine": 261,
+        "startChar": 137,
+        "endLine": 261,
+        "endChar": 147
+      },
+      "revId": "483cb4c3309aac3d4e7154042fccacb23e62feec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
