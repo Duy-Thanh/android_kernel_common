@@ -34,6 +34,29 @@
       "parentUuid": "c4e83f70_c8d2232d",
       "revId": "5274b568318a34dda7c90e3d7719bbca64e10075",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc47c07_b74ab56d",
+        "filename": "mm/util.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-02T21:34:24Z",
+      "side": 1,
+      "message": "the correct value to check for is `__GENKSYMS__`",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 19
+      },
+      "revId": "5274b568318a34dda7c90e3d7719bbca64e10075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
