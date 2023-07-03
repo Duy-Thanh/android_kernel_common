@@ -57,6 +57,30 @@
       },
       "revId": "5274b568318a34dda7c90e3d7719bbca64e10075",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbb4e994_96c56163",
+        "filename": "mm/util.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-07-03T09:01:40Z",
+      "side": 1,
+      "message": "Yes, that is the point. After fixing it, CRCs change issue is resolved.",
+      "parentUuid": "8fc47c07_b74ab56d",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 19
+      },
+      "revId": "5274b568318a34dda7c90e3d7719bbca64e10075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
