@@ -158,6 +158,30 @@
       },
       "revId": "483cb4c3309aac3d4e7154042fccacb23e62feec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "403b3354_79704d23",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-07-03T09:01:25Z",
+      "side": 1,
+      "message": "Thanks for your help. The issue is solved after fixing spelling. And it doesn\u0027t introduce any more CRCs change. I think now these patches are ready for merge.",
+      "parentUuid": "420dc616_be32aa42",
+      "range": {
+        "startLine": 261,
+        "startChar": 137,
+        "endLine": 261,
+        "endChar": 147
+      },
+      "revId": "483cb4c3309aac3d4e7154042fccacb23e62feec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
