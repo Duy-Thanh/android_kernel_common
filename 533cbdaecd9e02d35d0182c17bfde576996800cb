@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "788a2edb_96062df2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-03T19:34:24Z",
+      "side": 1,
+      "message": "No, we are not allowed to change the kernel abi, as this is something that you all insisted that we support, sorry.",
+      "parentUuid": "8e12f6ae_0162dd0d",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a9a1aae_682035e6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
