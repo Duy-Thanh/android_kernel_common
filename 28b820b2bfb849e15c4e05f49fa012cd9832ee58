@@ -16,6 +16,24 @@
       "message": "what about the upstream review comments that were made on this patch series last week?  Will they be addressed?",
       "revId": "28b820b2bfb849e15c4e05f49fa012cd9832ee58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a334946_6eef35b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-03T11:36:53Z",
+      "side": 1,
+      "message": "Yes. The v4 comments were mostly from Krzysztof, Angelo and Arnd, and we\u0027ve modified our patches accordingly. There\u0027re still some discussion being talked whether to use dt or not, that\u0027s why we submit our v5 to AOSP first. We\u0027ll patch to mainline later on. Please refer to the following changelog for v5.\n\n- Bring back dt solution for device initialization from v3\n- Fix LKML v4 comments except for topics on discussion.\n- Fix AOSP comments.\n- Fix coding style to meet single line length limit (80 columns)\n- Remove unused enum members  (GZVM_FUNC_GET_REGS and GZVM_FUNC_SET_REGS)\n- Add GZVM_EXIT_GZ reason for gzvm_vcpu_run()\n- Add an explicit \u0027__le32 __pad  for struct gzvm_vcpu_hwstate  to make it portable",
+      "parentUuid": "4e9acaac_38e3ead9",
+      "revId": "28b820b2bfb849e15c4e05f49fa012cd9832ee58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
