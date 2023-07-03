@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e12f6ae_0162dd0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1871516
+      },
+      "writtenOn": "2023-07-03T10:28:16Z",
+      "side": 1,
+      "message": "Hi Greg, \\\nThese structure/symbol abl xml changes come from UPSTREAM patches.\nDoes it not allow? \nhttps://android-review.git.corp.google.com/q/topic:%22deadlock_13_5.15%22\n\nIn this case, if I need to pick UPSTREAM patch from Linux common kernel to fix stability issue, how to do the next?",
+      "parentUuid": "28a4c108_8017a525",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a9a1aae_682035e6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
