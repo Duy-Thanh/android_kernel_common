@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b96a632c_4b17abcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1871516
+      },
+      "writtenOn": "2023-07-04T03:56:39Z",
+      "side": 1,
+      "message": "Hi Greg,\n1. These alsa patch set has merged to 14-5.15.\n2. If we do not allow pick these alsa patches set to fix the issue due to these patches will cause API change, how about just revert the root cause patch?\n(aa9ff6a4955f (\"ASoC: soc-compress: Reposition and add pcm_mutex\") \nDetail: \n https://lore.kernel.org/all/20230511120841.2096524-1-yixuanjiang@google.com/",
+      "parentUuid": "788a2edb_96062df2",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a9a1aae_682035e6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
