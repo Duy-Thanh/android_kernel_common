@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07670e52_9f99f92c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-04T09:55:29Z",
+      "side": 1,
+      "message": "There was no abi freeze at the time for 14-5.15.\n\nThese need to be brought into the tree in an abi-safe way.  Why can\u0027t you rework them to do that?",
+      "parentUuid": "b96a632c_4b17abcc",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a9a1aae_682035e6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
