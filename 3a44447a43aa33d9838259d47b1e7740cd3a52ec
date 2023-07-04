@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e1a027_3c5fad8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2023-07-04T13:16:30Z",
+      "side": 1,
+      "message": "Should the upstream fix also be submitted at the same time, as we are doing for android13-5.15?",
+      "revId": "3a44447a43aa33d9838259d47b1e7740cd3a52ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
