@@ -7,6 +7,7 @@
 
 use kernel::{
     bindings,
+    file::{File, PollTable},
     io_buffer::{IoBufferReader, IoBufferWriter},
     linked_list::{GetLinks, Links, List},
     prelude::*,
@@ -58,6 +59,7 @@ const LOOPER_EXITED: u32 = 0x04;
 const LOOPER_INVALID: u32 = 0x08;
 const LOOPER_WAITING: u32 = 0x10;
 const LOOPER_WAITING_PROC: u32 = 0x20;
+const LOOPER_POLL: u32 = 0x40;
 
 impl InnerThread {
     fn new() -> Result<Self> {
@@ -133,6 +135,15 @@ impl InnerThread {
     /// stack and it is registered as a looper.
     fn should_use_process_work_queue(&self) -> bool {
         self.is_looper()
+    }
+
+    fn poll(&mut self) -> u32 {
+        self.looper_flags |= LOOPER_POLL;
+        if self.process_work_list {
+            bindings::POLLIN
+        } else {
+            0
+        }
     }
 }
 
@@ -532,6 +543,13 @@ impl Thread {
         ret
     }
 
+    pub(crate) fn poll(&self, file: &File, table: &PollTable) -> (bool, u32) {
+        // SAFETY: `free_waiters` is called on release.
+        unsafe { table.register_wait(file, &self.work_condvar) };
+        let mut inner = self.inner.lock();
+        (inner.should_use_process_work_queue(), inner.poll())
+    }
+
     /// Make the call to `get_work` or `get_work_local` return immediately, if any.
     pub(crate) fn exit_looper(&self) {
         let mut inner = self.inner.lock();
@@ -546,12 +564,37 @@ impl Thread {
         }
     }
 
+    pub(crate) fn notify_if_poll_ready(&self, sync: bool) {
+        // Determine if we need to notify. This requires the lock.
+        let inner = self.inner.lock();
+        let notify = inner.looper_flags & LOOPER_POLL != 0
+            && inner.should_use_process_work_queue()
+            && inner.process_work_list;
+        drop(inner);
+
+        // Now that the lock is no longer held, notify the waiters if we have to.
+        if notify {
+            if sync {
+                self.work_condvar.notify_sync();
+            } else {
+                self.work_condvar.notify_one();
+            }
+        }
+    }
+
     pub(crate) fn release(self: &Arc<Self>) {
         self.inner.lock().is_dead = true;
 
         // Cancel all pending work items.
         while let Ok(Some(work)) = self.get_work_local(false) {
             work.cancel();
+        }
+
+        // Remove epoll items if polling was ever used on this thread.
+        let poller = self.inner.lock().looper_flags & LOOPER_POLL != 0;
+        if poller {
+            self.work_condvar.free_waiters();
+            unsafe { bindings::synchronize_rcu() };
         }
     }
 }
