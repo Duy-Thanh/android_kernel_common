@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73722599_b3888c78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-05T09:33:05Z",
+      "side": 1,
+      "message": "A revert is not ok (and that revert is only partial, not correct.)\n\nFix this in an abi-safe way please.  Read the GKI documentation for how to do this properly.",
+      "parentUuid": "f62f30b7_c9e106b4",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a9a1aae_682035e6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
