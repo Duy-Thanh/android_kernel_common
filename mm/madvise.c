@@ -369,13 +369,21 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,
 	struct vm_area_struct *vma = walk->vma;
 	pte_t *start_pte, *pte, ptent;
 	spinlock_t *ptl;
+<<<<<<< HEAD   (0218a9 Merge 6.6.43 into android15-6.6-lts)
 	struct folio *folio = NULL;
 	LIST_HEAD(folio_list);
 	bool pageout_anon_only_filter;
 	int nr;
 	swp_entry_t entry;
+=======
+	struct page *page = NULL;
+	LIST_HEAD(page_list);
+	bool allow_shared = false;
+	bool abort_madvise = false;
+>>>>>>> CHANGE (024628 ANDROID: vendor_hook: Add hook to abort reclaim and compacti)
 
-	if (fatal_signal_pending(current))
+	trace_android_vh_madvise_cold_or_pageout_abort(vma, &abort_madvise);
+	if (fatal_signal_pending(current) || abort_madvise)
 		return -EINTR;
 
 	pageout_anon_only_filter = pageout && !vma_is_anonymous(vma) &&
