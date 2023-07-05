@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e814e1f0_a821be11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-05T19:56:47Z",
+      "side": 1,
+      "message": "Changing a vendor hook name would cause ABI breakage.",
+      "revId": "504767714bff5a20579a599f8a4ef296b54d2b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
