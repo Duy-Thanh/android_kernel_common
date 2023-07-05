@@ -1986,6 +1986,7 @@
   trace_event_raw_init
   trace_event_reg
   trace_handle_return
+  __traceiter_android_rvh_clean_tag_page
   __traceiter_android_rvh_typec_tcpci_get_vbus
   __traceiter_android_vh_cpu_idle_enter
   __traceiter_android_vh_cpu_idle_exit
@@ -2022,6 +2023,7 @@
   __traceiter_workqueue_execute_end
   __traceiter_workqueue_execute_start
   trace_output_call
+  __tracepoint_android_rvh_clean_tag_page
   __tracepoint_android_rvh_typec_tcpci_get_vbus
   __tracepoint_android_vh_cpu_idle_enter
   __tracepoint_android_vh_cpu_idle_exit

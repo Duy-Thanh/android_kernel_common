@@ -21,6 +21,7 @@
 #include <linux/xarray.h>
 
 #include <asm/cacheflush.h>
+#include <trace/hooks/mm.h>
 
 __ro_after_init DEFINE_STATIC_KEY_FALSE(mte_tag_storage_enabled_key);
 
@@ -442,6 +443,8 @@ static int tag_storage_reserve_block(unsigned long block, unsigned long block_si
 
 	/* Avoid writeback of dirty data cache lines corrupting tags. */
 	dcache_inval_poc(block_va, block_va + block_size * PAGE_SIZE);
+	for (int i = 0; i != block_size; ++i)
+		trace_android_rvh_clean_tag_page(pfn_to_page(block + i));
 
 	block_pte.pte &= ~PTE_VALID;
 	set_pte(block_ptep, block_pte);
