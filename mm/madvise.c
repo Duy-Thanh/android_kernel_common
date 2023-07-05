@@ -353,8 +353,10 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,
 	LIST_HEAD(page_list);
 	bool pageout_anon_only_filter;
 	swp_entry_t entry;
+	bool abort_madvise = false;
 
-	if (fatal_signal_pending(current))
+	trace_android_vh_madvise_cold_or_pageout_abort(vma, &abort_madvise);
+	if (fatal_signal_pending(current) || abort_madvise)
 		return -EINTR;
 
 	pageout_anon_only_filter = pageout && !vma_is_anonymous(vma) &&
