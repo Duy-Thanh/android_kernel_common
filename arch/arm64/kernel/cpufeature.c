@@ -128,6 +128,13 @@ static bool __read_mostly allow_mismatched_32bit_el0;
 DEFINE_STATIC_KEY_FALSE(arm64_mismatched_32bit_el0);
 
 /*
+ * Disable lse atomic even if CPU support it. Since the DDRSS bus may
+ * not support it. And current cpu feature only bit cannot garantee
+ * the whole system support LSE ATOMIC.
+ */
+static bool __read_mostly disable_lse_atomic;
+
+/*
  * Mask of CPUs supporting 32-bit EL0.
  * Only valid if arm64_mismatched_32bit_el0 is enabled.
  */
@@ -1624,6 +1631,21 @@ bool kaslr_requires_kpti(void)
 	return kaslr_offset() > 0;
 }
 
+static int __init parse_disable_lse_atomic_param(char *str)
+{
+	disable_lse_atomic = true;
+	return 0;
+}
+early_param("disable_lse_atomic", parse_disable_lse_atomic_param);
+
+static bool has_lse_atomic(const struct arm64_cpu_capabilities *entry, int scope)
+{
+	if (disable_lse_atomic)
+		return false;
+
+	return has_cpuid_feature(entry, scope);
+}
+
 static bool __meltdown_safe = true;
 static int __kpti_forced; /* 0: not forced, >0: forced on, <0: forced off */
 
@@ -2188,7 +2210,7 @@ static const struct arm64_cpu_capabilities arm64_features[] = {
 		.desc = "LSE atomic instructions",
 		.capability = ARM64_HAS_LSE_ATOMICS,
 		.type = ARM64_CPUCAP_SYSTEM_FEATURE,
-		.matches = has_cpuid_feature,
+		.matches = has_lse_atomic,
 		.sys_reg = SYS_ID_AA64ISAR0_EL1,
 		.field_pos = ID_AA64ISAR0_EL1_ATOMIC_SHIFT,
 		.field_width = 4,
