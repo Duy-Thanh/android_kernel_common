@@ -16,6 +16,8 @@ struct page_vma_mapped_walk;
 DECLARE_RESTRICTED_HOOK(android_rvh_shmem_get_folio,
 			TP_PROTO(struct shmem_inode_info *info, struct folio **folio),
 			TP_ARGS(info, folio), 2);
+DECLARE_RESTRICTED_HOOK(android_rvh_clean_tag_page, TP_PROTO(struct page *page),
+			TP_ARGS(page), 1);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_set_gfp_zone_flags,
 			TP_PROTO(unsigned int *flags),	/* gfp_t *flags */

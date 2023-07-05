@@ -22,6 +22,7 @@
 #include <asm/cacheflush.h>
 #include <asm/memory_metadata.h>
 #include <asm/mte_tag_storage.h>
+#include <trace/hooks/mm.h>
 
 __ro_after_init DEFINE_STATIC_KEY_FALSE(metadata_storage_enabled_key);
 
@@ -495,6 +496,8 @@ static int tag_storage_reserve_block(unsigned long block, struct tag_region *reg
 
 	/* Avoid writeback of dirty data cache lines corrupting tags. */
 	dcache_inval_poc(block_va, block_va + region->block_size * PAGE_SIZE);
+	for (int i = 0; i != region->block_size; ++i)
+		trace_android_rvh_clean_tag_page(pfn_to_page(block + i));
 
 	block_pte.pte &= ~PTE_VALID;
 	set_pte(block_ptep, block_pte);
