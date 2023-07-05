@@ -55,6 +55,10 @@ struct InnerThread {
     /// Determines if thread is dead.
     is_dead: bool,
 
+    /// Work item used to deliver error codes to the thread that started a transaction. Stored here
+    /// so that it can be reused.
+    reply_work: Arc<ThreadError>,
+
     /// Work item used to deliver error codes to the current thread. Stored here so that it can be
     /// reused.
     return_work: Arc<ThreadError>,
@@ -64,6 +68,7 @@ struct InnerThread {
     process_work_list: bool,
     /// List of work items to deliver to userspace.
     work_list: List<DeliverToReadListAdapter>,
+    current_transaction: Option<Arc<Transaction>>,
 
     /// Extended error information for this thread.
     extended_error: ExtendedError,
@@ -89,8 +94,10 @@ impl InnerThread {
             looper_need_return: false,
             is_dead: false,
             process_work_list: false,
+            reply_work: Arc::try_new(ThreadError::new())?,
             return_work: Arc::try_new(ThreadError::new())?,
             work_list: List::new(),
+            current_transaction: None,
             extended_error: ExtendedError::new(next_err_id(), BR_OK, 0),
         })
     }
@@ -119,6 +126,12 @@ impl InnerThread {
         }
     }
 
+    fn push_reply_work(&mut self, code: u32) {
+        let work = self.reply_work.clone();
+        work.set_error_code(code);
+        self.push_work(work);
+    }
+
     fn push_return_work(&mut self, reply: u32) {
         let work = self.return_work.clone();
         work.set_error_code(reply);
@@ -129,6 +142,36 @@ impl InnerThread {
     /// thread gets another work item.
     fn push_work_deferred(&mut self, work: Arc<dyn DeliverToRead>) {
         self.work_list.push_back(work);
+    }
+
+    /// Fetches the transaction this thread can reply to. If the thread has a pending transaction
+    /// (that it could respond to) but it has also issued a transaction, it must first wait for the
+    /// previously-issued transaction to complete.
+    ///
+    /// The `thread` parameter should be the thread containing this `ThreadInner`.
+    fn pop_transaction_to_reply(&mut self, thread: &Thread) -> Result<Arc<Transaction>> {
+        let transaction = self.current_transaction.take().ok_or(EINVAL)?;
+        if core::ptr::eq(thread, transaction.from.as_ref()) {
+            self.current_transaction = Some(transaction);
+            return Err(EINVAL);
+        }
+        // Find a new current transaction for this thread.
+        self.current_transaction = transaction.find_from(thread);
+        Ok(transaction)
+    }
+
+    fn pop_transaction_replied(&mut self, transaction: &Arc<Transaction>) -> bool {
+        match self.current_transaction.take() {
+            None => false,
+            Some(old) => {
+                if !Arc::ptr_eq(transaction, &old) {
+                    self.current_transaction = Some(old);
+                    return false;
+                }
+                self.current_transaction = old.clone_next();
+                true
+            }
+        }
     }
 
     fn looper_enter(&mut self) {
@@ -204,6 +247,10 @@ impl Thread {
         let ee = self.inner.lock().extended_error;
         writer.write(&ee)?;
         Ok(())
+    }
+
+    pub(crate) fn set_current_transaction(&self, transaction: Arc<Transaction>) {
+        self.inner.lock().current_transaction = Some(transaction);
     }
 
     /// Attempts to fetch a work item from the thread-local queue. The behaviour if the queue is
@@ -379,6 +426,89 @@ impl Thread {
         Ok(alloc)
     }
 
+    fn unwind_transaction_stack(self: &Arc<Self>) {
+        let mut thread = self.clone();
+        while let Ok(transaction) = {
+            let mut inner = thread.inner.lock();
+            inner.pop_transaction_to_reply(thread.as_ref())
+        } {
+            let reply = Either::Right(BR_DEAD_REPLY);
+            if !transaction.from.deliver_single_reply(reply, &transaction) {
+                break;
+            }
+
+            thread = transaction.from.clone();
+        }
+    }
+
+    pub(crate) fn deliver_reply(
+        &self,
+        reply: Either<Arc<Transaction>, u32>,
+        transaction: &Arc<Transaction>,
+    ) {
+        if self.deliver_single_reply(reply, transaction) {
+            transaction.from.unwind_transaction_stack();
+        }
+    }
+
+    /// Delivers a reply to the thread that started a transaction. The reply can either be a
+    /// reply-transaction or an error code to be delivered instead.
+    ///
+    /// Returns whether the thread is dead. If it is, the caller is expected to unwind the
+    /// transaction stack by completing transactions for threads that are dead.
+    fn deliver_single_reply(
+        &self,
+        reply: Either<Arc<Transaction>, u32>,
+        transaction: &Arc<Transaction>,
+    ) -> bool {
+        {
+            let mut inner = self.inner.lock();
+            if !inner.pop_transaction_replied(transaction) {
+                return false;
+            }
+
+            if inner.is_dead {
+                return true;
+            }
+
+            match reply {
+                Either::Left(work) => {
+                    inner.push_work(work);
+                }
+                Either::Right(code) => inner.push_reply_work(code),
+            }
+        }
+
+        // Notify the thread now that we've released the inner lock.
+        self.work_condvar.notify_sync();
+        false
+    }
+
+    /// Determines if the given transaction is the current transaction for this thread.
+    fn is_current_transaction(&self, transaction: &Arc<Transaction>) -> bool {
+        let inner = self.inner.lock();
+        match &inner.current_transaction {
+            None => false,
+            Some(current) => Arc::ptr_eq(current, transaction),
+        }
+    }
+
+    /// Determines the current top of the transaction stack. It fails if the top is in another
+    /// thread (i.e., this thread belongs to a stack but it has called another thread). The top is
+    /// [`None`] if the thread is not currently participating in a transaction stack.
+    fn top_of_transaction_stack(&self) -> Result<Option<Arc<Transaction>>> {
+        let inner = self.inner.lock();
+        if let Some(cur) = &inner.current_transaction {
+            if core::ptr::eq(self, cur.from.as_ref()) {
+                pr_warn!("got new transaction with bad transaction stack");
+                return Err(EINVAL);
+            }
+            Ok(Some(cur.clone()))
+        } else {
+            Ok(None)
+        }
+    }
+
     fn transaction<T>(self: &Arc<Self>, tr: &BinderTransactionDataSg, inner: T)
     where
         T: FnOnce(&Arc<Self>, &BinderTransactionDataSg) -> BinderResult,
@@ -399,12 +529,76 @@ impl Thread {
         }
     }
 
+    fn transaction_inner(self: &Arc<Self>, tr: &BinderTransactionDataSg) -> BinderResult {
+        let handle = unsafe { tr.transaction_data.target.handle };
+        let node_ref = self.process.get_transaction_node(handle)?;
+        security::binder_transaction(&self.process.cred, &node_ref.node.owner.cred)?;
+        // TODO: We need to ensure that there isn't a pending transaction in the work queue. How
+        // could this happen?
+        let top = self.top_of_transaction_stack()?;
+        let completion = Arc::try_new(DeliverCode::new(BR_TRANSACTION_COMPLETE))?;
+        let transaction = Transaction::new(node_ref, top, self, tr)?;
+
+        // Check that the transaction stack hasn't changed while the lock was released, then update
+        // it with the new transaction.
+        {
+            let mut inner = self.inner.lock();
+            if !transaction.is_stacked_on(&inner.current_transaction) {
+                pr_warn!("Transaction stack changed during transaction!");
+                return Err(EINVAL.into());
+            }
+            inner.current_transaction = Some(transaction.clone());
+            // We push the completion as a deferred work so that we wait for the reply before returning
+            // to userland.
+            inner.push_work_deferred(completion.clone());
+        }
+
+        if let Err(e) = transaction.submit() {
+            completion.skip();
+            let mut inner = self.inner.lock();
+            let transaction = inner.current_transaction.take().unwrap();
+            inner.current_transaction = transaction.clone_next();
+            Err(e)
+        } else {
+            Ok(())
+        }
+    }
+
+    fn reply_inner(self: &Arc<Self>, tr: &BinderTransactionDataSg) -> BinderResult {
+        let orig = self.inner.lock().pop_transaction_to_reply(self)?;
+        if !orig.from.is_current_transaction(&orig) {
+            return Err(EINVAL.into());
+        }
+
+        // We need to complete the transaction even if we cannot complete building the reply.
+        (|| -> BinderResult<_> {
+            let completion = Arc::try_new(DeliverCode::new(BR_TRANSACTION_COMPLETE))?;
+            let process = orig.from.process.clone();
+            let reply = Transaction::new_reply(self, process, tr)?;
+            self.inner.lock().push_work(completion);
+            orig.from.deliver_reply(Either::Left(reply), &orig);
+            Ok(())
+        })()
+        .map_err(|mut err| {
+            // At this point we only return `BR_TRANSACTION_COMPLETE` to the caller, and we must let
+            // the sender know that the transaction has completed (with an error in this case).
+            pr_warn!(
+                "Failure {:?} during reply - delivering BR_FAILED_REPLY to sender.",
+                err
+            );
+            let reply = Either::Right(BR_FAILED_REPLY);
+            orig.from.deliver_reply(reply, &orig);
+            err.reply = BR_TRANSACTION_COMPLETE;
+            err
+        })
+    }
+
     fn oneway_transaction_inner(self: &Arc<Self>, tr: &BinderTransactionDataSg) -> BinderResult {
         let handle = unsafe { tr.transaction_data.target.handle };
         let node_ref = self.process.get_transaction_node(handle)?;
         security::binder_transaction(&self.process.cred, &node_ref.node.owner.cred)?;
         let completion = Arc::try_new(DeliverCode::new(BR_TRANSACTION_COMPLETE))?;
-        let transaction = Transaction::new(node_ref, self, tr)?;
+        let transaction = Transaction::new(node_ref, None, self, tr)?;
         self.inner.lock().push_work(completion);
         // TODO: Remove the completion on error?
         transaction.submit()?;
@@ -425,16 +619,24 @@ impl Thread {
                     if tr.transaction_data.flags & TF_ONE_WAY != 0 {
                         self.transaction(&tr, Self::oneway_transaction_inner);
                     } else {
-                        return Err(EINVAL);
+                        self.transaction(&tr, Self::transaction_inner);
                     }
                 }
                 BC_TRANSACTION_SG => {
                     let tr = reader.read::<BinderTransactionDataSg>()?;
                     if tr.transaction_data.flags & TF_ONE_WAY != 0 {
-                        self.transaction(&tr, Self::oneway_transaction_inner);
+                        self.transaction(&tr, Self::transaction_inner);
                     } else {
                         return Err(EINVAL);
                     }
+                }
+                BC_REPLY => {
+                    let tr = reader.read::<BinderTransactionData>()?.with_buffers_size(0);
+                    self.transaction(&tr, Self::reply_inner)
+                }
+                BC_REPLY_SG => {
+                    let tr = reader.read::<BinderTransactionDataSg>()?;
+                    self.transaction(&tr, Self::reply_inner)
                 }
                 BC_INCREFS => self.process.update_ref(reader.read()?, true, false)?,
                 BC_ACQUIRE => self.process.update_ref(reader.read()?, true, true)?,

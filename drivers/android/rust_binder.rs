@@ -15,6 +15,8 @@ use kernel::{
 
 use crate::{context::Context, process::Process, thread::Thread};
 
+use core::sync::atomic::{AtomicBool, Ordering};
+
 mod allocation;
 mod context;
 mod defs;
@@ -79,6 +81,7 @@ impl GetLinksWrapped for DeliverToReadListAdapter {
 
 struct DeliverCode {
     code: u32,
+    skip: AtomicBool,
     links: Links<dyn DeliverToRead>,
 }
 
@@ -86,14 +89,25 @@ impl DeliverCode {
     fn new(code: u32) -> Self {
         Self {
             code,
+            skip: AtomicBool::new(false),
             links: Links::new(),
         }
+    }
+
+    /// Disable this DeliverCode and make it do nothing.
+    ///
+    /// This is used instead of removing it from the work list, since `LinkedList::remove` is
+    /// unsafe, whereas this method is not.
+    fn skip(&self) {
+        self.skip.store(true, Ordering::Relaxed);
     }
 }
 
 impl DeliverToRead for DeliverCode {
     fn do_work(self: Arc<Self>, _thread: &Thread, writer: &mut UserSlicePtrWriter) -> Result<bool> {
-        writer.write(&self.code)?;
+        if !self.skip.load(Ordering::Relaxed) {
+            writer.write(&self.code)?;
+        }
         Ok(true)
     }
     fn get_links(&self) -> &Links<dyn DeliverToRead> {
