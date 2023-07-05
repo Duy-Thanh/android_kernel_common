@@ -51,6 +51,24 @@
       "message": "Respin Bug: b/289898374",
       "revId": "3a44447a43aa33d9838259d47b1e7740cd3a52ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da923cc9_84f4d623",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-07-05T07:45:47Z",
+      "side": 1,
+      "message": "Agreed, if we only take the revert on the release branch, won\u0027t this mean we have a functional regression over prior releases?",
+      "parentUuid": "d53eafc7_e13cd920",
+      "revId": "3a44447a43aa33d9838259d47b1e7740cd3a52ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
