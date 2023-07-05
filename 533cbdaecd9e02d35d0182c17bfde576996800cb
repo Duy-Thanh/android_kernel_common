@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f62f30b7_c9e106b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1871516
+      },
+      "writtenOn": "2023-07-05T02:30:14Z",
+      "side": 1,
+      "message": "Due to 13-5.15 could not change ABI,\nso I create revert patch for solve deadlock issue.\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2648899\nrevert patch aa9ff6a4955f (\"ASoC: soc-compress: Reposition and add pcm_mutex\" )",
+      "parentUuid": "07670e52_9f99f92c",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a9a1aae_682035e6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
