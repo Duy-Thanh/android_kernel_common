@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b028035_145babf9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-07-05T17:20:48Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean by an \"abi change\" here.\n\nAnyway, this patch is needed for now, so looks okay.\n\nAndroid 14 actually stopped using the fsverity builtin signatures, so I think we can actually disable CONFIG_FS_VERITY_BUILTIN_SIGNATURES and drop the out-of-tree patch to fs/verity/signature.c now.  I\u0027ll upload a topic that does that, but no need to wait to submit this if it\u0027s blocking you.",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "6e0d346f0e2fae199233996745f8dfc03364841b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
