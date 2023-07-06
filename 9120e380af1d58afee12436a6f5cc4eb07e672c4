@@ -22,6 +22,30 @@
       },
       "revId": "9120e380af1d58afee12436a6f5cc4eb07e672c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0402054a_1280b275",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1878708
+      },
+      "writtenOn": "2023-07-06T10:02:09Z",
+      "side": 1,
+      "message": "In order to optimize interrupt balancing and system scheduling, it is essential for us to have visibility into the status of interrupts.",
+      "parentUuid": "434dcaf7_61a56d9f",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "9120e380af1d58afee12436a6f5cc4eb07e672c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
