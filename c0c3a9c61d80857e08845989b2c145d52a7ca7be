@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048278239",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2651019?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f06f3238_bb1e4c7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-06T22:03:09Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/3fdc0cb59d97f87e2cc708d424f1538e31744286) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d3fdc0cb59d97f87e2cc708d424f1538e31744286)\n\n```\n      ## arch/arm64/kernel/asm-offsets.c ##\n     @@ arch/arm64/kernel/asm-offsets.c: int main(void)\n    +   DEFINE(ARM_SMCCC_RES_X0_OFFS,\t\toffsetof(struct arm_smccc_res, a0));\n        DEFINE(ARM_SMCCC_RES_X2_OFFS,\t\toffsetof(struct arm_smccc_res, a2));\n        DEFINE(ARM_SMCCC_QUIRK_ID_OFFS,\toffsetof(struct arm_smccc_quirk, id));\n    -   DEFINE(ARM_SMCCC_QUIRK_STATE_OFFS,\toffsetof(struct arm_smccc_quirk, state));\n    -+  DEFINE(ARM_SMCCC_1_2_REGS_X0_OFFS,\toffsetof(struct arm_smccc_1_2_regs, a0));\n    -+  DEFINE(ARM_SMCCC_1_2_REGS_X2_OFFS,\toffsetof(struct arm_smccc_1_2_regs, a2));\n    -+  DEFINE(ARM_SMCCC_1_2_REGS_X4_OFFS,\toffsetof(struct arm_smccc_1_2_regs, a4));\n    -+  DEFINE(ARM_SMCCC_1_2_REGS_X6_OFFS,\toffsetof(struct arm_smccc_1_2_regs, a6));\n    -+  DEFINE(ARM_SMCCC_1_2_REGS_X8_OFFS,\toffsetof(struct arm_smccc_1_2_regs, a8));\n    -+  DEFINE(ARM_SMCCC_1_2_REGS_X10_OFFS,\toffsetof(struct arm_smccc_1_2_regs, a10));\n    -+  DEFINE(ARM_SMCCC_1_2_REGS_X12_OFFS,\toffsetof(struct arm_smccc_1_2_regs, a12));\n    -+  DEFINE(ARM_SMCCC_1_2_REGS_X14_OFFS,\toffsetof(struct arm_smccc_1_2_regs, a14));\n    -+  DEFINE(ARM_SMCCC_1_2_REGS_X16_OFFS,\toffsetof(struct arm_smccc_1_2_regs, a16));\n    +-  DEFINE(ARM_SMCCC_QUIRK_STATE_OFFS,\toffsetof(struct arm_smccc_quirk, state));\n    ++DEFINE(ARM_SMCCC_QUIRK_STATE_OFFS, offsetof(struct arm_smccc_quirk, state));\n    ++DEFINE(ARM_SMCCC_1_2_REGS_X0_OFFS, offsetof(struct arm_smccc_1_2_regs, a0));\n    ++DEFINE(ARM_SMCCC_1_2_REGS_X2_OFFS, offsetof(struct arm_smccc_1_2_regs, a2));\n    ++DEFINE(ARM_SMCCC_1_2_REGS_X4_OFFS, offsetof(struct arm_smccc_1_2_regs, a4));\n    ++DEFINE(ARM_SMCCC_1_2_REGS_X6_OFFS, offsetof(struct arm_smccc_1_2_regs, a6));\n    ++DEFINE(ARM_SMCCC_1_2_REGS_X8_OFFS, offsetof(struct arm_smccc_1_2_regs, a8));\n    ++DEFINE(ARM_SMCCC_1_2_REGS_X10_OFFS, offsetof(struct arm_smccc_1_2_regs, a10));\n    ++DEFINE(ARM_SMCCC_1_2_REGS_X12_OFFS, offsetof(struct arm_smccc_1_2_regs, a12));\n    ++DEFINE(ARM_SMCCC_1_2_REGS_X14_OFFS, offsetof(struct arm_smccc_1_2_regs, a14));\n    ++DEFINE(ARM_SMCCC_1_2_REGS_X16_OFFS, offsetof(struct arm_smccc_1_2_regs, a16));\n        BLANK();\n        DEFINE(HIBERN_PBE_ORIG,\toffsetof(struct pbe, orig_address));\n        DEFINE(HIBERN_PBE_ADDR,\toffsetof(struct pbe, address));\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 544328428 android-build.ayeaye-python-dispatcher_20230629.03_p0",
+      "revId": "c0c3a9c61d80857e08845989b2c145d52a7ca7be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
