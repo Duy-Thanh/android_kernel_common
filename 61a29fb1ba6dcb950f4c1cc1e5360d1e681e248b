@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048221288",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2649342?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "852ef2b1_89a14531",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-06T09:13:53Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/cd136706b4f925aa5d316642543babac90d45910) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dcd136706b4f925aa5d316642543babac90d45910)\n\n```\n    - ## drivers/usb/host/bcma-hcd.c ##\n    -@@ drivers/usb/host/bcma-hcd.c: static void bcma_hci_platform_power_gpio(struct bcma_device *dev, bool val)\n    - {\n    - \tstruct bcma_hcd_device *usb_dev \u003d bcma_get_drvdata(dev);\n    - \n    --\tif (IS_ERR_OR_NULL(usb_dev-\u003egpio_desc))\n    -+\tif (!usb_dev-\u003egpio_desc)\n    - \t\treturn;\n    - \n    - \tgpiod_set_value(usb_dev-\u003egpio_desc, val);\n    -@@ drivers/usb/host/bcma-hcd.c: static int bcma_hcd_probe(struct bcma_device *core)\n    - \t\treturn -ENOMEM;\n    - \tusb_dev-\u003ecore \u003d core;\n    + ## drivers/usb/dwc3/gadget.c ##\n    +@@ drivers/usb/dwc3/gadget.c: static int __dwc3_gadget_ep_disable(struct dwc3_ep *dep)\n    + \treg \u0026\u003d ~DWC3_DALEPENA_EP(dep-\u003enumber);\n    + \tdwc3_writel(dwc-\u003eregs, DWC3_DALEPENA, reg);\n      \n    --\tif (core-\u003edev.of_node)\n    --\t\tusb_dev-\u003egpio_desc \u003d devm_gpiod_get(\u0026core-\u003edev, \"vcc\",\n    --\t\t\t\t\t\t    GPIOD_OUT_HIGH);\n    -+\tusb_dev-\u003egpio_desc \u003d devm_gpiod_get_optional(\u0026core-\u003edev, \"vcc\",\n    -+\t\t\t\t\t\t     GPIOD_OUT_HIGH);\n    -+\tif (IS_ERR(usb_dev-\u003egpio_desc))\n    -+\t\treturn dev_err_probe(\u0026core-\u003edev, PTR_ERR(usb_dev-\u003egpio_desc),\n    -+\t\t\t\t     \"error obtaining VCC GPIO\");\n    +-\tdwc3_remove_requests(dwc, dep, -ECONNRESET);\n    ++\tdwc3_remove_requests(dwc, dep, -ESHUTDOWN);\n      \n    - \tswitch (core-\u003eid.id) {\n    - \tcase BCMA_CORE_USB20_HOST:\n    + \tdep-\u003estream_capable \u003d false;\n    + \tdep-\u003etype \u003d 0;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 544328428 android-build.ayeaye-python-dispatcher_20230629.03_p0",
+      "revId": "61a29fb1ba6dcb950f4c1cc1e5360d1e681e248b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
