@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8219cd8a_c15ae94c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-06T22:31:40Z",
+      "side": 1,
+      "message": "You should also post a follow-up patch to update symbols list and ABI.",
+      "revId": "d8b2c0a38013dd8fdda9485df90cee6084458799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dab3439f_5fb7af6e",
