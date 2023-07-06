@@ -69,6 +69,24 @@
       "parentUuid": "d53eafc7_e13cd920",
       "revId": "3a44447a43aa33d9838259d47b1e7740cd3a52ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d4f30a_eebe7a04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878708
+      },
+      "writtenOn": "2023-07-06T10:04:10Z",
+      "side": 1,
+      "message": "Yes, we will cherry-pick android13-5.15-2023-06 after they are cherry-picked the changes from LTS to android13-5.15",
+      "parentUuid": "b8e1a027_3c5fad8d",
+      "revId": "3a44447a43aa33d9838259d47b1e7740cd3a52ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
