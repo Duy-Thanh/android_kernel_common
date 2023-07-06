@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35aadbb3_bab90fca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-07-06T23:48:36Z",
+      "side": 1,
+      "message": "Maybe, it might help if could you put a concrete example of a problem the existing behavior causes?\n\nRCU is terribly subtle so folks may glaze over here if you don\u0027t provide some sense of what goes wrong.",
+      "revId": "c674c6968cfa40ad4db32c89cc1eb742288fc7b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e03b75dc_01385809",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-07-06T23:48:36Z",
+      "side": 1,
+      "message": "I\u0027d write out \"Two\" here, to avoid confusing folks who might think you\u0027re enumerating something or referring to a reference.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 1
+      },
+      "revId": "c674c6968cfa40ad4db32c89cc1eb742288fc7b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0e4a62_c761108b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-07-06T23:48:36Z",
+      "side": 1,
+      "message": "Might want to consider adding Joel Fernandes as he\u0027s picking up some of the RCU maintainership?",
+      "revId": "c674c6968cfa40ad4db32c89cc1eb742288fc7b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca86b95_864866e6",
+        "filename": "include/linux/rcupdate.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-07-06T23:48:36Z",
+      "side": 1,
+      "message": "My only worry is that this is used heavily and switching from a constant to function may have performance impacts in the !CONFIG_DEBUG_LOCK_ALLOC case(as usually the WARN_ONs its used with would be entirely optimized out with the previous code).\n\nSo you might want to be ready for folks to raise this concern.",
+      "revId": "c674c6968cfa40ad4db32c89cc1eb742288fc7b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfddb3b6_feb3f01f",
+        "filename": "kernel/rcu/update.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-07-06T23:48:36Z",
+      "side": 1,
+      "message": "Depending on if folks care about this going into a function, you might be able to special case the function case only for CONFIG_PREEMPT_RCU? Though having a bunch of implementation of the same function isn\u0027t great either. Maybe something to keep in your back pocket.",
+      "revId": "c674c6968cfa40ad4db32c89cc1eb742288fc7b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
