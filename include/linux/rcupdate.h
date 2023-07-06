@@ -322,14 +322,11 @@ int rcu_read_lock_any_held(void);
 # define rcu_lock_acquire(a)		do { } while (0)
 # define rcu_lock_release(a)		do { } while (0)
 
-static inline int rcu_read_lock_held(void)
-{
-	return 1;
-}
+int rcu_read_lock_held(void);
 
 static inline int rcu_read_lock_bh_held(void)
 {
-	return 1;
+	return !preemptible() || in_softirq();
 }
 
 static inline int rcu_read_lock_sched_held(void)
@@ -337,10 +334,7 @@ static inline int rcu_read_lock_sched_held(void)
 	return !preemptible();
 }
 
-static inline int rcu_read_lock_any_held(void)
-{
-	return !preemptible();
-}
+int rcu_read_lock_any_held(void);
 
 #endif /* #else #ifdef CONFIG_DEBUG_LOCK_ALLOC */
 
