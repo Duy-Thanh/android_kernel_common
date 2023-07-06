@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dab3439f_5fb7af6e",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2987,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-06T20:05:12Z",
+      "side": 1,
+      "message": "which parts of `struct readahead_control` do you change? If it\u0027s one of the fields, please pass a reference to it instead of exposing the whole structure which might change in the future.",
+      "range": {
+        "startLine": 2987,
+        "startChar": 49,
+        "endLine": 2987,
+        "endChar": 54
+      },
+      "revId": "d8b2c0a38013dd8fdda9485df90cee6084458799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
