@@ -20,7 +20,7 @@ use kernel::{
     pages::Pages,
     prelude::*,
     rbtree::RBTree,
-    sync::{Arc, ArcBorrow, Guard, Mutex, SpinLock},
+    sync::{Arc, ArcBorrow, Guard, Mutex, SpinLock, UniqueArc},
     task::Task,
     types::{ARef, Either},
     user_ptr::{UserSlicePtr, UserSlicePtrReader},
@@ -32,7 +32,7 @@ use crate::{
     context::Context,
     defs::*,
     error::{BinderError, BinderResult},
-    node::{Node, NodeRef},
+    node::{DeliveredNodeDeath, Node, NodeDeath, NodeRef},
     range_alloc::{self, RangeAllocator},
     thread::{PushWorkRes, Thread},
     DeliverToRead, DeliverToReadListAdapter,
@@ -69,6 +69,7 @@ pub(crate) struct ProcessInner {
     work: List<DeliverToReadListAdapter>,
     mapping: Option<Mapping>,
     nodes: RBTree<usize, Arc<Node>>,
+    delivered_deaths: List<DeliveredNodeDeath>,
 
     /// The number of requested threads that haven't registered yet.
     requested_thread_count: u32,
@@ -90,6 +91,7 @@ impl ProcessInner {
             ready_threads: List::new(),
             mapping: None,
             nodes: RBTree::new(),
+            delivered_deaths: List::new(),
             work: List::new(),
             requested_thread_count: 0,
             max_threads: 0,
@@ -236,15 +238,36 @@ impl ProcessInner {
         self.started_thread_count += 1;
         true
     }
+
+    /// Finds a delivered death notification with the given cookie, removes it from the thread's
+    /// delivered list, and returns it.
+    fn pull_delivered_death(&mut self, cookie: usize) -> Option<Arc<NodeDeath>> {
+        let mut cursor = self.delivered_deaths.cursor_front_mut();
+        while let Some(death) = cursor.current() {
+            if death.cookie == cookie {
+                return cursor.remove_current();
+            }
+            cursor.move_next();
+        }
+        None
+    }
+
+    pub(crate) fn death_delivered(&mut self, death: Arc<NodeDeath>) {
+        self.delivered_deaths.push_back(death);
+    }
 }
 
 struct NodeRefInfo {
     node_ref: NodeRef,
+    death: Option<Arc<NodeDeath>>,
 }
 
 impl NodeRefInfo {
     fn new(node_ref: NodeRef) -> Self {
-        Self { node_ref }
+        Self {
+            node_ref,
+            death: None,
+        }
     }
 }
 
@@ -389,6 +412,18 @@ impl Process {
         Ok(ta)
     }
 
+    pub(crate) fn push_work(&self, work: Arc<dyn DeliverToRead>) -> BinderResult {
+        // If push_work fails, drop the work item outside the lock.
+        let res = self.inner.lock().push_work(work);
+        match res {
+            Ok(()) => Ok(()),
+            Err((err, work)) => {
+                drop(work);
+                Err(err)
+            }
+        }
+    }
+
     fn set_as_manager(
         self: ArcBorrow<'_, Self>,
         info: Option<FlatBinderObject>,
@@ -517,6 +552,13 @@ impl Process {
             .clone(strong)
     }
 
+    pub(crate) fn remove_from_delivered_deaths(&self, death: &Arc<NodeDeath>) {
+        let mut inner = self.inner.lock();
+        let removed = unsafe { inner.delivered_deaths.remove(death) };
+        drop(inner);
+        drop(removed);
+    }
+
     pub(crate) fn update_ref(&self, handle: u32, inc: bool, strong: bool) -> Result {
         if inc && handle == 0 {
             if let Ok(node_ref) = self.ctx.get_manager_node(strong) {
@@ -533,6 +575,12 @@ impl Process {
         let mut refs = self.node_refs.lock();
         if let Some(info) = refs.by_handle.get_mut(&handle) {
             if info.node_ref.update(inc, strong) {
+                // Clean up death if there is one attached to this node reference.
+                if let Some(death) = info.death.take() {
+                    death.set_cleared(true);
+                    self.remove_from_delivered_deaths(&death);
+                }
+
                 // Remove reference from process tables.
                 let id = info.node_ref.node.global_id;
                 refs.by_handle.remove(&handle);
@@ -722,6 +770,83 @@ impl Process {
         ret
     }
 
+    pub(crate) fn request_death(
+        self: &Arc<Self>,
+        reader: &mut UserSlicePtrReader,
+        thread: &Thread,
+    ) -> Result {
+        let handle: u32 = reader.read()?;
+        let cookie: usize = reader.read()?;
+
+        // TODO: First two should result in error, but not the others.
+
+        // TODO: Do we care about the context manager dying?
+
+        // Queue BR_ERROR if we can't allocate memory for the death notification.
+        let death = UniqueArc::try_new_uninit().map_err(|err| {
+            thread.push_return_work(BR_ERROR);
+            err
+        })?;
+        let mut refs = self.node_refs.lock();
+        let info = refs.by_handle.get_mut(&handle).ok_or(EINVAL)?;
+
+        // Nothing to do if there is already a death notification request for this handle.
+        if info.death.is_some() {
+            return Ok(());
+        }
+
+        let death = {
+            let death_init = NodeDeath::new(info.node_ref.node.clone(), self.clone(), cookie);
+            match death.pin_init_with(death_init) {
+                Ok(death) => Arc::from(death),
+                // error is infallible
+                Err(err) => match err {},
+            }
+        };
+
+        info.death = Some(death.clone());
+
+        // Register the death notification.
+        {
+            let mut owner_inner = info.node_ref.node.owner.inner.lock();
+            if owner_inner.is_dead {
+                drop(owner_inner);
+                let _ = self.push_work(death);
+            } else {
+                info.node_ref.node.add_death(death, &mut owner_inner);
+            }
+        }
+        Ok(())
+    }
+
+    pub(crate) fn clear_death(&self, reader: &mut UserSlicePtrReader, thread: &Thread) -> Result {
+        let handle: u32 = reader.read()?;
+        let cookie: usize = reader.read()?;
+
+        let mut refs = self.node_refs.lock();
+        let info = refs.by_handle.get_mut(&handle).ok_or(EINVAL)?;
+
+        let death = info.death.take().ok_or(EINVAL)?;
+        if death.cookie != cookie {
+            info.death = Some(death);
+            return Err(EINVAL);
+        }
+
+        // Update state and determine if we need to queue a work item. We only need to do it when
+        // the node is not dead or if the user already completed the death notification.
+        if death.set_cleared(false) {
+            let _ = thread.push_work_if_looper(death);
+        }
+
+        Ok(())
+    }
+
+    pub(crate) fn dead_binder_done(&self, cookie: usize, thread: &Thread) {
+        if let Some(death) = self.inner.lock().pull_delivered_death(cookie) {
+            death.set_notification_done(thread);
+        }
+    }
+
     fn deferred_flush(&self) {
         let inner = self.inner.lock();
         for thread in inner.threads.values() {
@@ -757,17 +882,6 @@ impl Process {
             work.cancel();
         }
 
-        // Move the threads out of `inner` so that we can iterate over them without holding the
-        // lock.
-        let mut inner = self.inner.lock();
-        let threads = take(&mut inner.threads);
-        drop(inner);
-
-        // Release all threads.
-        for thread in threads.values() {
-            thread.release();
-        }
-
         // Free any resources kept alive by allocated buffers.
         let omapping = self.inner.lock().mapping.take();
         if let Some(mut mapping) = omapping {
@@ -781,6 +895,48 @@ impl Process {
                 }
                 drop(alloc)
             });
+        }
+
+        // Drop all references. We do this dance with `swap` to avoid destroying the references
+        // while holding the lock.
+        let mut refs = self.node_refs.lock();
+        let mut node_refs = take(&mut refs.by_handle);
+        drop(refs);
+
+        // Remove all death notifications from the nodes (that belong to a different process).
+        for info in node_refs.values_mut() {
+            let death = if let Some(existing) = info.death.take() {
+                existing
+            } else {
+                continue;
+            };
+            death.set_cleared(false);
+        }
+
+        // Do similar dance for the state lock.
+        let mut inner = self.inner.lock();
+        let threads = take(&mut inner.threads);
+        let nodes = take(&mut inner.nodes);
+        drop(inner);
+
+        // Release all threads.
+        for thread in threads.values() {
+            thread.release();
+        }
+
+        // Deliver death notifications.
+        for node in nodes.values() {
+            loop {
+                let death = {
+                    let mut inner = self.inner.lock();
+                    if let Some(death) = node.next_death(&mut inner) {
+                        death
+                    } else {
+                        break;
+                    }
+                };
+                death.set_dead();
+            }
         }
     }
 

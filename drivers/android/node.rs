@@ -2,9 +2,9 @@
 
 use kernel::{
     io_buffer::IoBufferWriter,
-    linked_list::{Links, List},
+    linked_list::{GetLinks, GetLinksWrapped, Links, List},
     prelude::*,
-    sync::{Arc, Guard, LockedBy, SpinLockBackend},
+    sync::{Arc, Guard, LockedBy, SpinLock, SpinLockBackend},
     user_ptr::UserSlicePtrWriter,
 };
 
@@ -37,6 +37,7 @@ impl CountState {
 struct NodeInner {
     strong: CountState,
     weak: CountState,
+    death_list: List<Arc<NodeDeath>>,
     oneway_todo: List<DeliverToReadListAdapter>,
     has_pending_oneway_todo: bool,
     /// The number of active BR_INCREFS or BR_ACQUIRE operations. (should be maximum two)
@@ -70,6 +71,7 @@ impl Node {
                 NodeInner {
                     strong: CountState::new(),
                     weak: CountState::new(),
+                    death_list: List::new(),
                     oneway_todo: List::new(),
                     has_pending_oneway_todo: false,
                     active_inc_refs: 0,
@@ -85,6 +87,21 @@ impl Node {
 
     pub(crate) fn get_id(&self) -> (usize, usize) {
         (self.ptr, self.cookie)
+    }
+
+    pub(crate) fn next_death(
+        &self,
+        guard: &mut Guard<'_, ProcessInner, SpinLockBackend>,
+    ) -> Option<Arc<NodeDeath>> {
+        self.inner.access_mut(guard).death_list.pop_front()
+    }
+
+    pub(crate) fn add_death(
+        &self,
+        death: Arc<NodeDeath>,
+        guard: &mut Guard<'_, ProcessInner, SpinLockBackend>,
+    ) {
+        self.inner.access_mut(guard).death_list.push_back(death);
     }
 
     pub(crate) fn inc_ref_done_locked(
@@ -424,5 +441,210 @@ impl Drop for NodeRef {
             self.node
                 .update_refcount(false, self.weak_node_count, false);
         }
+    }
+}
+
+struct NodeDeathInner {
+    dead: bool,
+    cleared: bool,
+    notification_done: bool,
+    /// Indicates whether the normal flow was interrupted by removing the handle. In this case, we
+    /// need behave as if the death notification didn't exist (i.e., we don't deliver anything to
+    /// the user.
+    aborted: bool,
+}
+
+/// Used to deliver notifications when a process dies.
+///
+/// A process can request to be notified when a process dies using `BC_REQUEST_DEATH_NOTIFICATION`.
+/// This will make the driver send a `BR_DEAD_BINDER` to userspace when the process dies (or
+/// immediately if it is already dead). Userspace is supposed to respond with `BC_DEAD_BINDER_DONE`
+/// once it has processed the notification.
+///
+/// Userspace can unregister from death notifications using the `BC_CLEAR_DEATH_NOTIFICATION`
+/// command. In this case, the kernel will respond with `BR_CLEAR_DEATH_NOTIFICATION_DONE` once the
+/// notification has been removed. Note that if the remote process dies before the kernel has
+/// responded with `BR_CLEAR_DEATH_NOTIFICATION_DONE`, then the kernel will still send a
+/// `BR_DEAD_BINDER`, which userspace must be able to process. In this case, the kernel will wait
+/// for the `BC_DEAD_BINDER_DONE` command before it sends `BR_CLEAR_DEATH_NOTIFICATION_DONE`.
+///
+/// Note that even if the kernel sends a `BR_DEAD_BINDER`, this does not remove the death
+/// notification. Userspace must still remove it manually using `BC_CLEAR_DEATH_NOTIFICATION`.
+///
+/// If a process uses `BC_RELEASE` to destroy its last refcount on a node that has an active death
+/// registration, then the death registration is immediately deleted (we implement this using the
+/// `aborted` field). However, userspace is not supposed to delete a `NodeRef` without first
+/// deregistering death notifications, so this codepath is not executed under normal circumstances.
+#[pin_data]
+pub(crate) struct NodeDeath {
+    node: Arc<Node>,
+    process: Arc<Process>,
+    pub(crate) cookie: usize,
+    /// Used to enqueue this to a process or thread worklist, when notifications need to be
+    /// delivered to userspaace.
+    work_links: Links<dyn DeliverToRead>,
+    /// Used by the owner `Node` to store a list of registered death notifications.
+    ///
+    /// # Invariants
+    ///
+    /// Only ever used with the `death_list` list of `self.node`.
+    death_links: Links<NodeDeath>,
+    /// Used by the process to keep track of the death notifications for which we have sent a
+    /// `BR_DEAD_BINDER` but not yet received a `BC_DEAD_BINDER_DONE`.
+    ///
+    /// # Invariants
+    ///
+    /// Only ever used with the `delivered_deaths` list of `self.process`.
+    delivered_links: Links<NodeDeath>,
+    #[pin]
+    inner: SpinLock<NodeDeathInner>,
+}
+
+pub(crate) struct DeliveredNodeDeath;
+
+impl NodeDeath {
+    /// Constructs a new node death notification object.
+    pub(crate) fn new(node: Arc<Node>, process: Arc<Process>, cookie: usize) -> impl PinInit<Self> {
+        pin_init!(
+            Self {
+                node,
+                process,
+                cookie,
+                work_links: Links::new(),
+                death_links: Links::new(),
+                delivered_links: Links::new(),
+                inner <- kernel::new_spinlock!(NodeDeathInner {
+                    dead: false,
+                    cleared: false,
+                    notification_done: false,
+                    aborted: false,
+                }, "NodeDeath::inner"),
+            }
+        )
+    }
+
+    /// Sets the cleared flag to `true`.
+    ///
+    /// It removes `self` from the node's death notification list if needed.
+    ///
+    /// Returns whether it needs to be queued.
+    pub(crate) fn set_cleared(self: &Arc<Self>, abort: bool) -> bool {
+        let (needs_removal, needs_queueing) = {
+            // Update state and determine if we need to queue a work item. We only need to do it
+            // when the node is not dead or if the user already completed the death notification.
+            let mut inner = self.inner.lock();
+            if abort {
+                inner.aborted = true;
+            }
+            if inner.cleared {
+                // Already cleared.
+                return false;
+            }
+            inner.cleared = true;
+            (!inner.dead, !inner.dead || inner.notification_done)
+        };
+
+        // Remove death notification from node.
+        if needs_removal {
+            let mut owner_inner = self.node.owner.inner.lock();
+            let node_inner = self.node.inner.access_mut(&mut owner_inner);
+            // SAFETY: A `NodeDeath` is never inserted into the death list of any node other than
+            // its owner, so it is either in this death list or in no death list.
+            unsafe { node_inner.death_list.remove(self) };
+        }
+        needs_queueing
+    }
+
+    /// Sets the 'notification done' flag to `true`.
+    ///
+    /// Returns whether it needs to be queued.
+    pub(crate) fn set_notification_done(self: Arc<Self>, thread: &Thread) {
+        let needs_queueing = {
+            let mut inner = self.inner.lock();
+            inner.notification_done = true;
+            inner.cleared
+        };
+        if needs_queueing {
+            let _ = thread.push_work_if_looper(self);
+        }
+    }
+
+    /// Sets the 'dead' flag to `true` and queues work item if needed.
+    pub(crate) fn set_dead(self: Arc<Self>) {
+        let needs_queueing = {
+            let mut inner = self.inner.lock();
+            if inner.cleared {
+                false
+            } else {
+                inner.dead = true;
+                true
+            }
+        };
+        if needs_queueing {
+            // Push the death notification to the target process. There is nothing else to do if
+            // it's already dead.
+            let process = self.process.clone();
+            let _ = process.push_work(self);
+        }
+    }
+}
+
+impl GetLinks for NodeDeath {
+    type EntryType = NodeDeath;
+    fn get_links(data: &NodeDeath) -> &Links<NodeDeath> {
+        &data.death_links
+    }
+}
+
+impl GetLinks for DeliveredNodeDeath {
+    type EntryType = NodeDeath;
+    fn get_links(data: &NodeDeath) -> &Links<NodeDeath> {
+        &data.delivered_links
+    }
+}
+
+impl GetLinksWrapped for DeliveredNodeDeath {
+    type Wrapped = Arc<NodeDeath>;
+}
+
+impl DeliverToRead for NodeDeath {
+    fn do_work(self: Arc<Self>, _thread: &Thread, writer: &mut UserSlicePtrWriter) -> Result<bool> {
+        let done = {
+            let inner = self.inner.lock();
+            if inner.aborted {
+                return Ok(true);
+            }
+            inner.cleared && (!inner.dead || inner.notification_done)
+        };
+
+        let cookie = self.cookie;
+        let cmd = if done {
+            BR_CLEAR_DEATH_NOTIFICATION_DONE
+        } else {
+            let process = self.process.clone();
+            let mut process_inner = process.inner.lock();
+            let inner = self.inner.lock();
+            if inner.aborted {
+                return Ok(true);
+            }
+            // We're still holding the inner lock, so it cannot be aborted while we insert it into
+            // the delivered list.
+            process_inner.death_delivered(self.clone());
+            BR_DEAD_BINDER
+        };
+
+        writer.write(&cmd)?;
+        writer.write(&cookie)?;
+        // Mimic the original code: we stop processing work items when we get to a death
+        // notification.
+        Ok(cmd != BR_DEAD_BINDER)
+    }
+
+    fn get_links(&self) -> &Links<dyn DeliverToRead> {
+        &self.work_links
+    }
+
+    fn should_sync_wakeup(&self) -> bool {
+        false
     }
 }
