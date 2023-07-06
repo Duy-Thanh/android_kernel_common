@@ -22,6 +22,30 @@
       },
       "revId": "6e0d346f0e2fae199233996745f8dfc03364841b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ec055df_14ae7b84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-06T07:21:03Z",
+      "side": 1,
+      "message": "Sorry, it\u0027s not an ABI change, but rather a API change.  Been stuck doing too many ABI changes recently...\n\nAnd yes, dropping all of that would be great, but can you wait until 6.5-rc1 is merged?",
+      "parentUuid": "4b028035_145babf9",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "6e0d346f0e2fae199233996745f8dfc03364841b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
