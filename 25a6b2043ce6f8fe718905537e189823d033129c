@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c07f1f26_7da15da0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-06T23:11:23Z",
+      "side": 1,
+      "message": "I think this is based on aosp/1953640. If so, please cherry-pick it so the Change-Id is preserved. Explain in the bug why this is needed for android-mainline.",
+      "revId": "25a6b2043ce6f8fe718905537e189823d033129c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
