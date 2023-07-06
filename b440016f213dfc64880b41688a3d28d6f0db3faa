@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8369114_7a9b35b6",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-07-06T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03dcb0ac_a402029b",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9a39c8f_4210d872",
@@ -84,6 +108,30 @@
       "writtenOn": "2022-08-16T09:33:37Z",
       "side": 1,
       "message": "logic is backwards, check for error and handle that, don\u0027t have the \"normal\" path\nbe an error.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 12
+      },
+      "revId": "b440016f213dfc64880b41688a3d28d6f0db3faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88cd8ff_c4c8b88b",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-07-06T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1181d69d_1634e330",
       "range": {
         "startLine": 62,
         "startChar": 0,
