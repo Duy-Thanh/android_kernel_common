@@ -34,6 +34,24 @@
       "parentUuid": "4e9acaac_38e3ead9",
       "revId": "28b820b2bfb849e15c4e05f49fa012cd9832ee58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5cb88c_c0c587c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-07T16:38:47Z",
+      "side": 1,
+      "message": "Are there any differences between this series and your v5? We\u0027ll want the v5 posted upstream before we accept the patches in ACK with any deviations called out clearly in the commit messages.",
+      "parentUuid": "3a334946_6eef35b1",
+      "revId": "28b820b2bfb849e15c4e05f49fa012cd9832ee58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
