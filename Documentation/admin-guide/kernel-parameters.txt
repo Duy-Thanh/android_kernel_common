@@ -408,6 +408,8 @@
 	arm64.nosme	[ARM64] Unconditionally disable Scalable Matrix
 			Extension support
 
+	arm64.nolse_atomic [ARM64] Unconditionally disable LSE Atomic support
+
 	ataflop=	[HW,M68k]
 
 	atarimouse=	[HW,MOUSE] Atari Mouse

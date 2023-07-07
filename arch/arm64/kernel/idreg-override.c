@@ -105,6 +105,15 @@ static const struct ftr_set_desc pfr1 __initconst = {
 	},
 };
 
+static const struct ftr_set_desc isar0 __initconst = {
+	.name		= "id_aa64isar0",
+	.override	= &id_aa64isar0_override,
+	.fields		= {
+	        FIELD("atomic", ID_AA64ISAR0_EL1_ATOMIC_SHIFT, NULL),
+		{}
+	},
+};
+
 static const struct ftr_set_desc isar1 __initconst = {
 	.name		= "id_aa64isar1",
 	.override	= &id_aa64isar1_override,
@@ -154,6 +163,7 @@ static const struct ftr_set_desc * const regs[] __initconst = {
 	&mmfr1,
 	&pfr0,
 	&pfr1,
+	&isar0,
 	&isar1,
 	&isar2,
 	&smfr0,
@@ -175,6 +185,7 @@ static const struct {
 	  "id_aa64isar2.gpa3=0 id_aa64isar2.apa3=0"	   },
 	{ "arm64.nomte",		"id_aa64pfr1.mte=0" },
 	{ "nokaslr",			"kaslr.disabled=1" },
+	{ "arm64.nolse_atomic",		"id_aa64isar0.atomic=0" },
 };
 
 static int __init find_field(const char *cmdline,
