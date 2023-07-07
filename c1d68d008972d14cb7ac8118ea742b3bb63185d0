@@ -46,6 +46,30 @@
       },
       "revId": "c1d68d008972d14cb7ac8118ea742b3bb63185d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91bc5218_b2e5a306",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-07-07T16:34:22Z",
+      "side": 1,
+      "message": "`git cherry-pick -x` will do this for you.",
+      "parentUuid": "c959af7a_2d67e258",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 142
+      },
+      "revId": "c1d68d008972d14cb7ac8118ea742b3bb63185d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
