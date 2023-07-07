@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f569e6_f8a5e729",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-07-07T03:05:15Z",
+      "side": 1,
+      "message": "This appears to be the wrong commit hash. This hash is \"USB: bcma: Make GPIO explicitly optional\" in usb-next.",
+      "range": {
+        "startLine": 20,
+        "startChar": 27,
+        "endLine": 20,
+        "endChar": 67
+      },
+      "revId": "e0c28ce1be93a20f40929dbbbf7b35d5a2234dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
