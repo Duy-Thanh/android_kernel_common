@@ -16,6 +16,24 @@
       "message": "I think this is based on aosp/1953640. If so, please cherry-pick it so the Change-Id is preserved. Explain in the bug why this is needed for android-mainline.",
       "revId": "25a6b2043ce6f8fe718905537e189823d033129c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb3e4c1_5422e6d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1931330
+      },
+      "writtenOn": "2023-07-07T21:01:02Z",
+      "side": 1,
+      "message": "Hey Todd,\nthis change was reverted from the android-mainline branch \nhttps://android-review.googlesource.com/c/kernel/common/+/2166383,\nFor this reason, when i try to cherry-pick and push with again with the same change-id, the remote is rejecting-complaining that the change is closed.",
+      "parentUuid": "c07f1f26_7da15da0",
+      "revId": "25a6b2043ce6f8fe718905537e189823d033129c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
