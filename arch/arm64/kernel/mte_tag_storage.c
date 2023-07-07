@@ -428,10 +428,24 @@ static int tag_storage_reserve_block(unsigned long block, unsigned long block_si
 {
 	unsigned long block_va;
 	int ret;
+	pte_t *block_ptep;
+	pte_t block_pte;
 
 	block_va = (unsigned long)page_to_virt(pfn_to_page(block));
+	block_ptep = virt_to_kpte(block_va);
+	block_pte = *block_ptep;
+
+	block_pte.pte &= ~PTE_ATTRINDX_MASK;
+	block_pte.pte |= PTE_ATTRINDX(MT_DEVICE_nGnRnE);
+	set_pte(block_ptep, block_pte);
+	__flush_tlb_kernel_pgtable(block_va);
+
 	/* Avoid writeback of dirty data cache lines corrupting tags. */
 	dcache_inval_poc(block_va, block_va + block_size * PAGE_SIZE);
+
+	block_pte.pte &= ~PTE_VALID;
+	set_pte(block_ptep, block_pte);
+	__flush_tlb_kernel_pgtable(block_va);
 
 	ret = xa_err(xa_store(&tag_blocks_reserved, block, pfn_to_page(block), GFP_KERNEL));
 	if (!ret)
@@ -573,7 +587,22 @@ void free_tag_storage(struct page *page, int order)
 			continue;
 
 		if (page_ref_sub_return(pfn_to_page(block), 1 << order) == 1) {
+			unsigned long block_va;
+			pte_t *block_ptep;
+			pte_t block_pte;
+
 			__xa_erase(&tag_blocks_reserved, block);
+
+			block_va = (unsigned long)page_to_virt(pfn_to_page(block));
+			block_ptep = virt_to_kpte(block_va);
+			block_pte = *block_ptep;
+
+			block_pte.pte &= ~PTE_ATTRINDX_MASK;
+			block_pte.pte |= PTE_ATTRINDX(MT_NORMAL_TAGGED);
+			block_pte.pte |= PTE_VALID;
+			set_pte(block_ptep, block_pte);
+			__flush_tlb_kernel_pgtable(block_va);
+
 			free_contig_range(block, region->block_size);
 			count_vm_events(METADATA_RESERVE_FREE, region->block_size);
 		}
