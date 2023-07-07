@@ -34,6 +34,24 @@
       "parentUuid": "c07f1f26_7da15da0",
       "revId": "25a6b2043ce6f8fe718905537e189823d033129c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d83da79_cc9a75ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-07T21:59:28Z",
+      "side": 1,
+      "message": "Ok, in that case, please add a link to the cherry-pick source in the commit message",
+      "parentUuid": "1bb3e4c1_5422e6d8",
+      "revId": "25a6b2043ce6f8fe718905537e189823d033129c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
