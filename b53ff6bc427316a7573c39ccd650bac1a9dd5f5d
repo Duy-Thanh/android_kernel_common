@@ -51,6 +51,24 @@
       "parentUuid": "15fd3817_d563557d",
       "revId": "b53ff6bc427316a7573c39ccd650bac1a9dd5f5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c38e66cc_397764ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-07T19:12:35Z",
+      "side": 1,
+      "message": "Granting a one-time exception per Kunal.",
+      "parentUuid": "83a39e1e_c2c0f9bd",
+      "revId": "b53ff6bc427316a7573c39ccd650bac1a9dd5f5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
