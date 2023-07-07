@@ -22,6 +22,30 @@
       },
       "revId": "e0c28ce1be93a20f40929dbbbf7b35d5a2234dcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e30d63f_139ec9e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-07-07T03:50:48Z",
+      "side": 1,
+      "message": "aah my bad, wrote the parent\u0027s sha fixing it, thanks for pointing out.",
+      "parentUuid": "88f569e6_f8a5e729",
+      "range": {
+        "startLine": 20,
+        "startChar": 27,
+        "endLine": 20,
+        "endChar": 67
+      },
+      "revId": "e0c28ce1be93a20f40929dbbbf7b35d5a2234dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
