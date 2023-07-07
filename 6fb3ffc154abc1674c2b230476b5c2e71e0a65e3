@@ -16,6 +16,23 @@
       "message": "Please post a follow-up patch updating the symbols list and ABI.",
       "revId": "6fb3ffc154abc1674c2b230476b5c2e71e0a65e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec5211d_9c76447f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-07T01:07:42Z",
+      "side": 1,
+      "message": "Please add a patch on top of this one that adds the symbol to your symbol list and updates the XML ABI description.",
+      "revId": "6fb3ffc154abc1674c2b230476b5c2e71e0a65e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
