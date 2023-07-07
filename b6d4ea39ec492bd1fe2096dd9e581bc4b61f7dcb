@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b475627d_4691caf1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-07T07:20:29Z",
+      "side": 1,
+      "message": "This is not correct.",
+      "range": {
+        "startLine": 20,
+        "startChar": 72,
+        "endLine": 20,
+        "endChar": 77
+      },
+      "revId": "b6d4ea39ec492bd1fe2096dd9e581bc4b61f7dcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
