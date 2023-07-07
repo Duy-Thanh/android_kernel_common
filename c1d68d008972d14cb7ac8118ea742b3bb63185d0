@@ -22,6 +22,30 @@
       },
       "revId": "c1d68d008972d14cb7ac8118ea742b3bb63185d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c959af7a_2d67e258",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1864156
+      },
+      "writtenOn": "2023-07-07T13:31:26Z",
+      "side": 1,
+      "message": "@udipto:\nJust use\n(cherry picked from commit ffb9da4a04c69567bad717707b6fdfbc4c216ef4)",
+      "parentUuid": "3412055d_c74207ff",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 142
+      },
+      "revId": "c1d68d008972d14cb7ac8118ea742b3bb63185d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
