@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "046adfe2_f18eff43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-10T15:57:20Z",
+      "side": 1,
+      "message": "Please add some text explaining why these symbols are needed? What feature do they enable? If they are called from a vendor hook handler, which one is it?",
+      "revId": "bcf8906c89a43cc0fa9a10d8c88d5ab9366edcac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
