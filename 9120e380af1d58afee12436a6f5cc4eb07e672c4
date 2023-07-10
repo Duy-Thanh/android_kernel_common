@@ -70,6 +70,30 @@
       },
       "revId": "9120e380af1d58afee12436a6f5cc4eb07e672c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "458c2f33_16cec950",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1878708
+      },
+      "writtenOn": "2023-07-10T12:01:01Z",
+      "side": 1,
+      "message": "We have removed this variable symbol in the latest commit. Please review it again.",
+      "parentUuid": "4f8a38fc_3015e629",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "9120e380af1d58afee12436a6f5cc4eb07e672c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
