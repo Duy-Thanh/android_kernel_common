@@ -185,6 +185,7 @@
   cgroup_taskset_first
   cgroup_taskset_next
   __check_object_size
+  check_move_unevictable_pages
   check_preempt_curr
   check_zeroed_user
   __class_create
