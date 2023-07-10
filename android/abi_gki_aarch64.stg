@@ -22137,11 +22137,6 @@ pointer_reference {
   pointee_type_id: 0xe2cebd77
 }
 pointer_reference {
-  id: 0x322509a0
-  kind: POINTER
-  pointee_type_id: 0xe2d4c01c
-}
-pointer_reference {
   id: 0x3225ac75
   kind: POINTER
   pointee_type_id: 0xe2d6574a
@@ -35169,6 +35164,11 @@ array {
   id: 0x83f3a37a
   number_of_elements: 31
   element_type_id: 0x3fcbf304
+}
+array {
+  id: 0x8483d98a
+  number_of_elements: 6
+  element_type_id: 0x948a2888
 }
 array {
   id: 0x84f80ecf
@@ -352188,6 +352188,15 @@ elf_symbol {
   full_name: "nla_strscpy"
 }
 elf_symbol {
+  id: 0x39787440
+  name: "node_states"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xe7b7da04
+  type_id: 0x8483d98a
+  full_name: "node_states"
+}
+elf_symbol {
   id: 0x7f258c4e
   name: "nonseekable_open"
   is_defined: true
@@ -379863,6 +379872,7 @@ interface {
   symbol_id: 0x49027247
   symbol_id: 0x85e07b67
   symbol_id: 0x6359420c
+  symbol_id: 0x39787440
   symbol_id: 0x7f258c4e
   symbol_id: 0x64e6aa0b
   symbol_id: 0x1560f116
