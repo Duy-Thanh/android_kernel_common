@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dcd73a4_03cf2c85",
+        "filename": "mm/compaction.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-10T16:20:41Z",
+      "side": 1,
+      "message": "I think replacing this with:\n```\n#ifndef __GENKSYMS__\n#include \u003ctrace/hooks/mm.h\u003e\n#endif\n```\nshould fix the issue with CRCs.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 27
+      },
+      "revId": "cf082abb643f3b3a81c9ad5482328562e801d9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
