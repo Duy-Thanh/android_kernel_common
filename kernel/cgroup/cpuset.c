@@ -2315,6 +2315,7 @@ static void cpuset_cancel_attach(struct cgroup_taskset *tset)
 	cgroup_taskset_first(tset, &css);
 	cs = css_cs(css);
 
+<<<<<<< HEAD   (692292 ANDROID: GKI: Update symbol list for sunxi)
 	mutex_lock(&cpuset_mutex);
 	cs->attach_in_progress--;
 	if (!cs->attach_in_progress)
@@ -2328,6 +2329,13 @@ static void cpuset_cancel_attach(struct cgroup_taskset *tset)
 	}
 
 	mutex_unlock(&cpuset_mutex);
+=======
+	percpu_down_write(&cpuset_rwsem);
+	cs->attach_in_progress--;
+	if (!cs->attach_in_progress)
+		wake_up(&cpuset_attach_wq);
+	percpu_up_write(&cpuset_rwsem);
+>>>>>>> BRANCH (879959 Revert "gpio: Allow per-parent interrupt data")
 }
 
 /*

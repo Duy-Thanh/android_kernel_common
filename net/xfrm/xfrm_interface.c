@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (692292 ANDROID: GKI: Update symbol list for sunxi)
 // SPDX-License-Identifier: GPL-2.0
 /*
  *	XFRM virtual interface
@@ -1030,3 +1031,5 @@ MODULE_ALIAS_RTNL_LINK("xfrm");
 MODULE_ALIAS_NETDEV("xfrm0");
 MODULE_AUTHOR("Steffen Klassert");
 MODULE_DESCRIPTION("XFRM virtual interface");
+=======
+>>>>>>> BRANCH (879959 Revert "gpio: Allow per-parent interrupt data")
