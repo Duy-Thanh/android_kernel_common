@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8611bbcb_521a89d7",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-11T18:24:41Z",
+      "side": 1,
+      "message": "needs more copyright lines.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 30
+      },
+      "revId": "69c564a918b65234bcbf9a0bfd406b8de16d5da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee38a7de_1ad0d255",
+        "filename": "drivers/trusty/trusty-ffa.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-11T18:24:41Z",
+      "side": 1,
+      "message": "obviously not correct as the only valid copyright line here 😞",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 30
+      },
+      "revId": "69c564a918b65234bcbf9a0bfd406b8de16d5da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d515c6c4_e3cf4d92",
+        "filename": "drivers/trusty/trusty-ffa.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-11T18:24:41Z",
+      "side": 1,
+      "message": "nit, please use proper kernel multi-line comment format.",
+      "range": {
+        "startLine": 13,
+        "startChar": 2,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "69c564a918b65234bcbf9a0bfd406b8de16d5da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
