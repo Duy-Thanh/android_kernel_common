@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c60023f4_7c797825",
+        "filename": "drivers/trusty/trusty-ffa.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-07-11T20:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8611bbcb_521a89d7",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 30
+      },
+      "revId": "69c564a918b65234bcbf9a0bfd406b8de16d5da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee38a7de_1ad0d255",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "750c9ff0_9faa7c5d",
+        "filename": "drivers/trusty/trusty-ffa.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-07-11T20:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee38a7de_1ad0d255",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 30
+      },
+      "revId": "69c564a918b65234bcbf9a0bfd406b8de16d5da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d515c6c4_e3cf4d92",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-07-11T18:24:41Z",
       "side": 1,
       "message": "nit, please use proper kernel multi-line comment format.",
+      "range": {
+        "startLine": 13,
+        "startChar": 2,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "69c564a918b65234bcbf9a0bfd406b8de16d5da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bd15ff8_36e710c4",
+        "filename": "drivers/trusty/trusty-ffa.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-07-11T20:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d515c6c4_e3cf4d92",
       "range": {
         "startLine": 13,
         "startChar": 2,
