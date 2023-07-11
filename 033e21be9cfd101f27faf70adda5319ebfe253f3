@@ -33,6 +33,24 @@
       "message": "One thing missing here is the rcu_is_watching() functionality which is in the. If RCU is not watching, then there cannot be any active reader, so read lock is not held.",
       "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "242c3182_94e235c8",
+        "filename": "kernel/rcu/update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2023-07-11T03:24:04Z",
+      "side": 1,
+      "message": "s/which is in the/which is in the alternate CONFIG_DEBUG_LOCK_ALLOC definitions/",
+      "parentUuid": "9370561c_ff86805c",
+      "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
