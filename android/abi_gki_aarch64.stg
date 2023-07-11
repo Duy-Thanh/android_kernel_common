@@ -312141,6 +312141,12 @@ function {
   parameter_id: 0xe5e56f65
 }
 function {
+  id: 0x9c639284
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0665e6b6
+  parameter_id: 0x1e820193
+}
+function {
   id: 0x9c660c95
   return_type_id: 0x6720d32f
   parameter_id: 0x0483e6f8
@@ -322032,6 +322038,15 @@ elf_symbol {
   crc: 0x353b81ea
   type_id: 0x475eeec2
   full_name: "__blk_mq_alloc_disk"
+}
+elf_symbol {
+  id: 0xcc33f78c
+  name: "__blk_mq_debugfs_rq_show"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe3d3f445
+  type_id: 0x9c639284
+  full_name: "__blk_mq_debugfs_rq_show"
 }
 elf_symbol {
   id: 0x01badff0
@@ -381454,6 +381469,7 @@ interface {
   symbol_id: 0xbceb9c07
   symbol_id: 0xe70766b6
   symbol_id: 0xb339c336
+  symbol_id: 0xcc33f78c
   symbol_id: 0x01badff0
   symbol_id: 0x4df0b385
   symbol_id: 0x35aa1afd
