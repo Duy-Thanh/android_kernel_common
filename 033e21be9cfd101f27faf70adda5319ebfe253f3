@@ -140,6 +140,24 @@
       "parentUuid": "242c3182_94e235c8",
       "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "477eceef_c635de46",
+        "filename": "kernel/rcu/update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-07-11T22:02:48Z",
+      "side": 1,
+      "message": "Hi Joel,\nReading code a bit more, specifically this comment for `rcu_read_lock_held_common()`\n\n```\n * Note that if the CPU is in the idle loop from an RCU point of view (ie:\n * that we are in the section between ct_idle_enter() and ct_idle_exit())\n * then rcu_read_lock_held() sets ``*ret`` to false even if the CPU did an\n * rcu_read_lock().  The reason for this is that RCU ignores CPUs that are\n * in such a section, considering these as in extended quiescent state,\n * so such a CPU is effectively never in an RCU read-side critical section\n * regardless of what RCU primitives it invokes.\n```\n\nI understand the reasons however the check in kernel/sched/core.c does not consult this and directly checks for rcu_preempt_depth(). \nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/kernel/sched/core.c#10244\n\nI think as long as there are two ways of checking the same thing, the check for \"sleeping function called from invalid context\" will get triggered.",
+      "parentUuid": "98be69fb_1d869f2b",
+      "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
