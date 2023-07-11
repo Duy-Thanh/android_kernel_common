@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0f4bce1_0857631b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2023-07-11T03:22:18Z",
+      "side": 1,
+      "message": "The patch looks correct to me, however I am a bit concerned about the usage of the `rcu_read_lock_any_held()` API from the `fs/` code. This API was originally intended for lockdep checks and not as a reliable way for checking for existence of RCU readers.\n\nIIRC, we `return 1;` from those `rcu*held*` functions simply because without lockdep enabled, those checks are unused anyway and perhaps (IIRC) there is a reason like the warnings need to be silenced always even if the rcu*held functions disagree.\n\nWe should discuss this more upstream. In particular, the `fs/` code checking for \"atomicity\" using `rcu_read_lock_any_held()` does not fully make sense to me, because preemptible RCU\u0027s read-side critical sections are not atomic.\n\nFor posting upstream, you could CC `rcu@vger.kernel.org` which will go out to the others in the RCU team and me.",
+      "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9370561c_ff86805c",
+        "filename": "kernel/rcu/update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2023-07-11T03:22:18Z",
+      "side": 1,
+      "message": "One thing missing here is the rcu_is_watching() functionality which is in the. If RCU is not watching, then there cannot be any active reader, so read lock is not held.",
+      "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
