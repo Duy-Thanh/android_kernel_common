@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed2fcb2_f2a963bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-07-11T17:57:00Z",
+      "side": 1,
+      "message": "Thank you Joel for the review!\n\nRegarding atomicity if preemptible RCU\u0027s read side critical section, the code comment for `rcu_read_lock()` says\n```\nIn preemptible RCU implementations (PREEMPT_RCU) in CONFIG_PREEMPTION\nkernel builds, RCU read-side critical sections may be preempted,\nbut explicit blocking is illegal.  Finally, in preemptible RCU\nimplementations in real-time (with -rt patchset) kernel builds, RCU\nread-side critical sections may be preempted and they may also block, but\nonly when acquiring spinlocks that are subject to priority inheritance.\n```\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/include/linux/rcupdate.h#762\n\nAnd IIUC that\u0027s why there is a check in kernel/sched/core.c for RCU nest depth (rcu_preempt_depth()). I will send the improved patch upstream (after fixing this version with `rcu_is_watching()`)",
+      "parentUuid": "c0f4bce1_0857631b",
+      "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9370561c_ff86805c",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "s/which is in the/which is in the alternate CONFIG_DEBUG_LOCK_ALLOC definitions/",
       "parentUuid": "9370561c_ff86805c",
+      "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98be69fb_1d869f2b",
+        "filename": "kernel/rcu/update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-07-11T17:57:00Z",
+      "side": 1,
+      "message": "Thank you, I will update this to use `rcu_is_watching()` in the next version.",
+      "parentUuid": "242c3182_94e235c8",
       "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
