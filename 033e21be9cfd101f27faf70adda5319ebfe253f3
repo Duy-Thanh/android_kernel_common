@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef0aab6_f1af3f29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-07-11T18:25:04Z",
+      "side": 1,
+      "message": "Hi Greg, inviting comments on this work in progress patch before I send this upstream as some of the APIs are not changed in a long time.\n\nYes, this will be sent upstream first before requesting in ACK.",
+      "parentUuid": "88cf6600_2f743cf0",
+      "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9370561c_ff86805c",
