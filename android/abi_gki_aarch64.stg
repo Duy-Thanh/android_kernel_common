@@ -306819,6 +306819,12 @@ function {
   parameter_id: 0xe5e56f65
 }
 function {
+  id: 0x9c639284
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0665e6b6
+  parameter_id: 0x1e820193
+}
+function {
   id: 0x9c660c95
   return_type_id: 0x6720d32f
   parameter_id: 0x0483e6f8
@@ -315144,6 +315150,12 @@ function {
   parameter_id: 0x3c2755a3
 }
 function {
+  id: 0xf1ae1eac
+  return_type_id: 0x3e6239e1
+  parameter_id: 0x3e6239e1
+  parameter_id: 0x27a7c613
+}
+function {
   id: 0xf1b060ff
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x3f59ee8d
@@ -315866,6 +315878,13 @@ function {
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x188b9e81
   parameter_id: 0x3ea31487
+}
+function {
+  id: 0xf87e0015
+  return_type_id: 0x3e6239e1
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3e6239e1
+  parameter_id: 0x0379c823
 }
 function {
   id: 0xf87eb23d
@@ -316790,6 +316809,15 @@ elf_symbol {
   crc: 0x353b81ea
   type_id: 0x475eeec2
   full_name: "__blk_mq_alloc_disk"
+}
+elf_symbol {
+  id: 0xcc33f78c
+  name: "__blk_mq_debugfs_rq_show"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe3d3f445
+  type_id: 0x9c639284
+  full_name: "__blk_mq_debugfs_rq_show"
 }
 elf_symbol {
   id: 0x01badff0
@@ -327760,6 +327788,15 @@ elf_symbol {
   crc: 0x1dc2c5ad
   type_id: 0x1738d1f7
   full_name: "blk_mq_complete_request"
+}
+elf_symbol {
+  id: 0x0467bac1
+  name: "blk_mq_debugfs_rq_show"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xec127399
+  type_id: 0x9c7b6f16
+  full_name: "blk_mq_debugfs_rq_show"
 }
 elf_symbol {
   id: 0x6458d26a
@@ -362785,6 +362822,24 @@ elf_symbol {
   full_name: "seq_hlist_start_head"
 }
 elf_symbol {
+  id: 0xe5f1a4c5
+  name: "seq_list_next"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe7d4daac
+  type_id: 0xf87e0015
+  full_name: "seq_list_next"
+}
+elf_symbol {
+  id: 0x1405c2fb
+  name: "seq_list_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xff1e9dd8
+  type_id: 0xf1ae1eac
+  full_name: "seq_list_start"
+}
+elf_symbol {
   id: 0xe0349007
   name: "seq_lseek"
   is_defined: true
@@ -376628,6 +376683,7 @@ interface {
   symbol_id: 0xbceb9c07
   symbol_id: 0xe70766b6
   symbol_id: 0xb339c336
+  symbol_id: 0xcc33f78c
   symbol_id: 0x01badff0
   symbol_id: 0x4df0b385
   symbol_id: 0x35aa1afd
@@ -377847,6 +377903,7 @@ interface {
   symbol_id: 0x0d1fc920
   symbol_id: 0xd34c6466
   symbol_id: 0x51c471d6
+  symbol_id: 0x0467bac1
   symbol_id: 0x6458d26a
   symbol_id: 0x2e876bee
   symbol_id: 0x1996f188
@@ -381737,6 +381794,8 @@ interface {
   symbol_id: 0xb2b0c8fa
   symbol_id: 0xfb710d3e
   symbol_id: 0x0af60b8b
+  symbol_id: 0xe5f1a4c5
+  symbol_id: 0x1405c2fb
   symbol_id: 0xe0349007
   symbol_id: 0xfae0b182
   symbol_id: 0x9ef87854
