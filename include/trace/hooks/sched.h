@@ -403,7 +403,21 @@ DECLARE_HOOK(android_vh_sched_pelt_multiplier,
 DECLARE_RESTRICTED_HOOK(android_rvh_post_init_entity_util_avg,
 	TP_PROTO(struct sched_entity *se),
 	TP_ARGS(se), 1);
-/* macro versions of hooks are no longer required */
+
+DECLARE_HOOK(android_vh_tick_nohz_idle_stop_tick,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused));
+DECLARE_HOOK(android_vh_mmput,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+
+DECLARE_HOOK(android_vh_prio_inheritance,
+	TP_PROTO(struct task_struct *p, int *saved_prio, bool *prio_inherited),
+	TP_ARGS(p, saved_prio, prio_inherited));
+
+DECLARE_HOOK(android_vh_prio_restore,
+	TP_PROTO(int saved_prio),
+	TP_ARGS(saved_prio));
 
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
