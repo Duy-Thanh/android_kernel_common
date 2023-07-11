@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "713854e7_33cb8693",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3104,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-11T05:45:35Z",
+      "side": 0,
+      "message": "I think this removal will break ABI since abi_gki_aarch64_pixel and abi_gki_aarch64_vivo list this symbol.",
+      "range": {
+        "startLine": 3104,
+        "startChar": 23,
+        "endLine": 3104,
+        "endChar": 38
+      },
+      "revId": "f4b2e739e263f994104852906974f209c5f3d7ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
