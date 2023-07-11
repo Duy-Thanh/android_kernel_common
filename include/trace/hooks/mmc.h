@@ -7,6 +7,7 @@
 #define _TRACE_HOOK_MMC_H
 #include <trace/hooks/vendor_hooks.h>
 struct mmc_host;
+struct mmc_card;
 
 /*
  * Following tracepoints are not exported in tracefs and provide a
@@ -19,6 +20,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_mmc_suspend,
 DECLARE_RESTRICTED_HOOK(android_rvh_mmc_resume,
 	TP_PROTO(struct mmc_host *host, bool *resume_success),
 	TP_ARGS(host, resume_success), 1);
+
+DECLARE_HOOK(android_vh_mmc_ffu_update_cid,
+	TP_PROTO(struct mmc_host *host, struct mmc_card *card, u32 *cid),
+	TP_ARGS(host, card, cid));
 
 #endif /* _TRACE_HOOK_MMC_H */
 /* This part must be outside protection */
