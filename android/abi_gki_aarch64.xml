@@ -2798,6 +2798,7 @@
       <elf-symbol name='get_each_dmabuf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd4a0a2a0'/>
       <elf-symbol name='get_each_object_track' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x882f614f'/>
       <elf-symbol name='get_freelist_nr_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x618b006f'/>
+      <elf-symbol name='get_fs_type' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd960956f'/>
       <elf-symbol name='get_governor_parent_kobj' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb8da8552'/>
       <elf-symbol name='get_kernel_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3b413908'/>
       <elf-symbol name='get_mem_cgroup_from_mm' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2cf77b2d'/>
@@ -3300,6 +3301,7 @@
       <elf-symbol name='isolate_anon_lru_page' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1b395e30'/>
       <elf-symbol name='iter_file_splice_write' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xad12a621'/>
       <elf-symbol name='iterate_fd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7371390e'/>
+      <elf-symbol name='iterate_supers_type' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x58403213'/>
       <elf-symbol name='iunique' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd8cc9361'/>
       <elf-symbol name='iw_handler_get_spy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x762c33d7'/>
       <elf-symbol name='iw_handler_get_thrspy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbaccc24'/>
@@ -132456,6 +132458,10 @@
       <function-decl name='get_freelist_nr_pages' mangled-name='get_freelist_nr_pages' filepath='drivers/dma-buf/heaps/deferred-free-helper.c' line='65' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_freelist_nr_pages'>
         <return type-id='7359adad'/>
       </function-decl>
+      <function-decl name='get_fs_type' mangled-name='get_fs_type' filepath='fs/filesystems.c' line='266' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_fs_type'>
+        <parameter type-id='80f4b756' name='name' filepath='fs/filesystems.c' line='266' column='1'/>
+        <return type-id='21e53d44'/>
+      </function-decl>
       <function-decl name='get_governor_parent_kobj' mangled-name='get_governor_parent_kobj' filepath='drivers/cpufreq/cpufreq.c' line='118' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_governor_parent_kobj'>
         <parameter type-id='343c3ae4' name='policy' filepath='drivers/cpufreq/cpufreq.c' line='118' column='1'/>
         <return type-id='d30bdc51'/>
@@ -135020,6 +135026,12 @@
         <parameter type-id='d092647b' name='f' filepath='fs/file.c' line='1265' column='1'/>
         <parameter type-id='eaa32e2f' name='p' filepath='fs/file.c' line='1266' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='iterate_supers_type' mangled-name='iterate_supers_type' filepath='fs/super.c' line='717' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iterate_supers_type'>
+        <parameter type-id='21e53d44' name='type' filepath='fs/super.c' line='717' column='1'/>
+        <parameter type-id='46530b39' name='f' filepath='fs/super.c' line='718' column='1'/>
+        <parameter type-id='eaa32e2f' name='arg' filepath='fs/super.c' line='718' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='iunique' mangled-name='iunique' filepath='fs/inode.c' line='1269' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iunique'>
         <parameter type-id='42c8f564' name='sb' filepath='fs/inode.c' line='1269' column='1'/>
