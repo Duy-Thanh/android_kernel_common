@@ -331385,6 +331385,15 @@ elf_symbol {
   full_name: "cpufreq_update_limits"
 }
 elf_symbol {
+  id: 0x4b049d5c
+  name: "cpufreq_update_policy"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc37f9c6e
+  type_id: 0x01f9081c
+  full_name: "cpufreq_update_policy"
+}
+elf_symbol {
   id: 0x0c67e2fe
   name: "cpufreq_update_util_data"
   is_defined: true
@@ -378250,6 +378259,7 @@ interface {
   symbol_id: 0x131ff67b
   symbol_id: 0xbbbf4eda
   symbol_id: 0xb6965ce8
+  symbol_id: 0x4b049d5c
   symbol_id: 0x0c67e2fe
   symbol_id: 0xc6155c06
   symbol_id: 0xce563c27
