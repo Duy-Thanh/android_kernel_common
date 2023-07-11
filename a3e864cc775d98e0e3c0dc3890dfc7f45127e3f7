@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef215a6_fc662aad",
+        "filename": "drivers/trusty/trusty-ffa.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-07-11T17:53:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bb51d24_7a7346eb",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "a3e864cc775d98e0e3c0dc3890dfc7f45127e3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17310759_5546f839",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-07T13:04:42Z",
       "side": 1,
       "message": "when drivers are working properly, they are quiet.  This is a proper path for the code to take so please do not spam the kernel log.",
+      "range": {
+        "startLine": 724,
+        "startChar": 3,
+        "endLine": 724,
+        "endChar": 13
+      },
+      "revId": "a3e864cc775d98e0e3c0dc3890dfc7f45127e3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cabc3c44_b002ddcc",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-07-11T17:53:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17310759_5546f839",
       "range": {
         "startLine": 724,
         "startChar": 3,
