@@ -158,6 +158,24 @@
       "parentUuid": "98be69fb_1d869f2b",
       "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0be224_e1fb73f8",
+        "filename": "kernel/rcu/update.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2023-07-11T23:53:04Z",
+      "side": 1,
+      "message": "If you are seeing a false positive warning due to sleeping in an atomic section, that is RCU related, we should discuss on RCU list and fix it ;-). Want to start a thread on the rcu@vger mailing list with the details/report? Thanks.",
+      "parentUuid": "477eceef_c635de46",
+      "revId": "033e21be9cfd101f27faf70adda5319ebfe253f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
