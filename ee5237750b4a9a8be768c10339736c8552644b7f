@@ -22,6 +22,30 @@
       },
       "revId": "ee5237750b4a9a8be768c10339736c8552644b7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14df211d_14c0d568",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1947925
+      },
+      "writtenOn": "2023-07-12T07:55:51Z",
+      "side": 1,
+      "message": "Refer to the kernel link: https://lore.kernel.org/linux-mmc/1460586824-40688-2-git-send-email-gwendal@chromium.org/",
+      "parentUuid": "65eac80a_1d080dc1",
+      "range": {
+        "startLine": 1650,
+        "startChar": 2,
+        "endLine": 1650,
+        "endChar": 58
+      },
+      "revId": "ee5237750b4a9a8be768c10339736c8552644b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
