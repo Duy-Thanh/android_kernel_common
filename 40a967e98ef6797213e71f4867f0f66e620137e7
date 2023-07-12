@@ -16,6 +16,24 @@
       "message": "Please rebase the seriew. Otherwise looks good.",
       "revId": "40a967e98ef6797213e71f4867f0f66e620137e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f98e8d08_bee8f5ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885698
+      },
+      "writtenOn": "2023-07-12T14:45:10Z",
+      "side": 1,
+      "message": "Rebased. Thanks",
+      "parentUuid": "86f8d890_c6ef1596",
+      "revId": "40a967e98ef6797213e71f4867f0f66e620137e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
