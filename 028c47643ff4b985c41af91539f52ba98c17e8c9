@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fed12572_499b7be0",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1947925
+      },
+      "writtenOn": "2023-07-12T08:02:24Z",
+      "side": 1,
+      "message": "CID are defined in different formats in the SPEC evolution process. For example, when SPEC_VERS is greater than or equal to 2, the [55:48] bits ranges represent PRV, but other lower versions have other meanings. We can currently confirm that the PRV will change when the e.MMC device of version 5.1 are upgraded on our hardware platform.\nBut limited by hardware resources, we don\u0027t know what the upgrade of e,MMC devices of low version is.\nTherefore, it is temporarily impossible to submit a complete solution to the kernel public code. We expect to workaround this problem through vendor hooks and allow the project to be continue.\n\nRefer to the kernel link: https://lore.kernel.org/linux-mmc/1460586824-40688-2-git-send-email-gwendal@chromium.org/",
+      "range": {
+        "startLine": 1650,
+        "startChar": 2,
+        "endLine": 1650,
+        "endChar": 58
+      },
+      "revId": "028c47643ff4b985c41af91539f52ba98c17e8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
