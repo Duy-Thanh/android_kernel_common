@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c6a49b_95073d43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-12T18:38:40Z",
+      "side": 1,
+      "message": "Should not be needed at all, just submit your quirk handling upstream and we will gladly backport it.",
+      "revId": "028c47643ff4b985c41af91539f52ba98c17e8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fed12572_499b7be0",
