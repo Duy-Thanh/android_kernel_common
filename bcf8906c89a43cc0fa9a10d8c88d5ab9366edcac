@@ -34,6 +34,24 @@
       "parentUuid": "046adfe2_f18eff43",
       "revId": "bcf8906c89a43cc0fa9a10d8c88d5ab9366edcac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4863f3f2_2b94853d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-12T18:34:56Z",
+      "side": 1,
+      "message": "If `add_wait_queue_priority`, `get_user_pages_fast_only` and `get_user_pages_unlocked` are only used by gzvm, then please add these symbols as part of that patchset (on top of aosp/2608865) instead of here.\n\nTrim this patch down to just `sk_capable` and mention in the commit message that it is needed by bluetooth.ko.",
+      "parentUuid": "8064aaf0_f61a3903",
+      "revId": "bcf8906c89a43cc0fa9a10d8c88d5ab9366edcac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
