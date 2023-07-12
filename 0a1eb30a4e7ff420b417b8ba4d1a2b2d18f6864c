@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c932ae2b_ce672e74",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-12T17:01:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9654a25b_7969c7ab",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 33
+      },
+      "revId": "0a1eb30a4e7ff420b417b8ba4d1a2b2d18f6864c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c262f84_62b3cb7b",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-03T19:28:13Z",
       "side": 1,
       "message": "where are these described?",
+      "range": {
+        "startLine": 105,
+        "startChar": 11,
+        "endLine": 105,
+        "endChar": 19
+      },
+      "revId": "0a1eb30a4e7ff420b417b8ba4d1a2b2d18f6864c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d581f4df_4ce5dec3",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-12T17:01:48Z",
+      "side": 1,
+      "message": "It\u0027s stated along with the comments above. These are the flags needed by virtual device and handled by hypervisor.",
+      "parentUuid": "2c262f84_62b3cb7b",
       "range": {
         "startLine": 105,
         "startChar": 11,
