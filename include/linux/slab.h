@@ -396,9 +396,6 @@ static __always_inline unsigned int __kmalloc_index(size_t size,
 	if (!size)
 		return 0;
 
-	if (android_kmalloc_64_create && size <= 64)
-		return 6;
-
 	if (size <= KMALLOC_MIN_SIZE)
 		return KMALLOC_SHIFT_LOW;
 

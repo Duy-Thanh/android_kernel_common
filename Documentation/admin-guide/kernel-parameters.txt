@@ -342,6 +342,10 @@
 			Creates all kmalloc variants of the 64-byte slab cache,
 			if the hardware supports it.
 
+			This feature breaks assumptions about the pointers
+			that kmalloc() and friends return, and has thus been
+			deprecated.
+
 	apc=		[HW,SPARC]
 			Power management functions (SPARCstation-4/5 + deriv.)
 			Format: noidle
