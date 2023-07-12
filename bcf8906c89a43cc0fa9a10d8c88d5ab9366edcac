@@ -16,6 +16,24 @@
       "message": "Please add some text explaining why these symbols are needed? What feature do they enable? If they are called from a vendor hook handler, which one is it?",
       "revId": "bcf8906c89a43cc0fa9a10d8c88d5ab9366edcac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8064aaf0_f61a3903",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2023-07-12T12:06:16Z",
+      "side": 1,
+      "message": "Use by mtk gzvm.ko (genizone virtual machine)\n  \u0027void add_wait_queue_priority(struct wait_queue_head*, struct wait_queue_entry*)\u0027\n  \u0027int get_user_pages_fast_only(unsigned long, int, unsigned int, struct page**)\u0027\n  \u0027long get_user_pages_unlocked(unsigned long, unsigned long, struct page**, unsigned int)\u0027\n\nUse by bluetooth.ko\n   \u0027bool sk_capable(const struct sock*, int)\u0027",
+      "parentUuid": "046adfe2_f18eff43",
+      "revId": "bcf8906c89a43cc0fa9a10d8c88d5ab9366edcac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
