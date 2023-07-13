@@ -1212,6 +1212,21 @@ static struct binder_ref *binder_get_ref_olocked(struct binder_proc *proc,
 	return NULL;
 }
 
+static inline void dump_ref_info(char *name, struct binder_ref *ref)
+{
+	if (!ref) {
+		pr_info("%s[%s] is NULL\n", __func__, name);
+		return;
+	}
+
+	pr_info("%s[%s] ref %d: desc %d node %d proc %d\n",
+		__func__, name,
+		ref->data.debug_id,
+		ref->data.desc,
+		ref->node->debug_id,
+		ref->proc ? ref->proc->pid : -1);
+}
+
 /**
  * binder_get_ref_for_node_olocked() - get the ref associated with given node
  * @proc:	binder_proc that owns the ref
@@ -1238,7 +1253,7 @@ static struct binder_ref *binder_get_ref_for_node_olocked(
 	struct binder_context *context = proc->context;
 	struct rb_node **p = &proc->refs_by_node.rb_node;
 	struct rb_node *parent = NULL;
-	struct binder_ref *ref;
+	struct binder_ref *ref, *next, *prev = NULL;
 	struct rb_node *n;
 
 	while (*p) {
@@ -1268,6 +1283,7 @@ static struct binder_ref *binder_get_ref_for_node_olocked(
 		if (ref->data.desc > new_ref->data.desc)
 			break;
 		new_ref->data.desc = ref->data.desc + 1;
+		prev = ref;
 	}
 
 	p = &proc->refs_by_desc.rb_node;
@@ -1279,8 +1295,14 @@ static struct binder_ref *binder_get_ref_for_node_olocked(
 			p = &(*p)->rb_left;
 		else if (new_ref->data.desc > ref->data.desc)
 			p = &(*p)->rb_right;
-		else
+		else {
+			next = n ? rb_entry(n, struct binder_ref, rb_node_desc) : NULL;
+			dump_ref_info("prev", prev);
+			dump_ref_info("curr", new_ref);
+			dump_ref_info("dupl", ref);
+			dump_ref_info("next", next);
 			BUG();
+		}
 	}
 	rb_link_node(&new_ref->rb_node_desc, parent, p);
 	rb_insert_color(&new_ref->rb_node_desc, &proc->refs_by_desc);
