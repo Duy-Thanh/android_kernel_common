@@ -369250,6 +369250,15 @@ elf_symbol {
   full_name: "ttm_tt_fini"
 }
 elf_symbol {
+  id: 0xcbabaff3
+  name: "ttm_tt_unpopulate"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa5cacfb1
+  type_id: 0x14b4088f
+  full_name: "ttm_tt_unpopulate"
+}
+elf_symbol {
   id: 0x0b4dd20d
   name: "tty_chars_in_buffer"
   is_defined: true
@@ -382594,6 +382603,7 @@ interface {
   symbol_id: 0x677985f3
   symbol_id: 0x6c2259cd
   symbol_id: 0xacf009d6
+  symbol_id: 0xcbabaff3
   symbol_id: 0x0b4dd20d
   symbol_id: 0xae3ac3f6
   symbol_id: 0xa7c71d5a
