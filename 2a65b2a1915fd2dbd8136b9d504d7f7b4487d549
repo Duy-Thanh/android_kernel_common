@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61f902ce_a0f88a7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-07-13T01:53:39Z",
+      "side": 1,
+      "message": "Dear Greg Kroah-Hartman,\nAs you mentioned, I have removed abi_gki_aarch64.xml file, only update abi_gki_aarch64_amlogic. Could you help me review the code again? Thank you!",
+      "revId": "2a65b2a1915fd2dbd8136b9d504d7f7b4487d549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
