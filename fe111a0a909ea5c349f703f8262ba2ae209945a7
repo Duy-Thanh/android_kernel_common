@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25274f53_f0245826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-13T08:57:42Z",
+      "side": 1,
+      "message": "I don\u0027t think I am qualified as a kernel code reviewer. Demoting myself to CC.",
+      "revId": "fe111a0a909ea5c349f703f8262ba2ae209945a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a95dbe1_012a743e",
+        "filename": "drivers/firmware/smccc/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-13T08:57:42Z",
+      "side": 1,
+      "message": "why does this have to be repeated?",
+      "range": {
+        "startLine": 4,
+        "startChar": 42,
+        "endLine": 4,
+        "endChar": 49
+      },
+      "revId": "fe111a0a909ea5c349f703f8262ba2ae209945a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "535c1c95_74740d70",
+        "filename": "include/linux/arm-smccc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-13T08:57:42Z",
+      "side": 1,
+      "message": "unnecessary change",
+      "revId": "fe111a0a909ea5c349f703f8262ba2ae209945a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
