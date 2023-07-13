@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "acfc40c1_d4f41735",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1947925
+      },
+      "writtenOn": "2023-07-13T07:35:47Z",
+      "side": 1,
+      "message": "Yes, it is sounds good. We keep going. Thanks.",
+      "parentUuid": "20c6a49b_95073d43",
+      "revId": "028c47643ff4b985c41af91539f52ba98c17e8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fed12572_499b7be0",
         "filename": "drivers/mmc/core/mmc.c",
         "patchSetId": 2
