@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c127d9a_e4f2271a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-07-13T09:34:04Z",
+      "side": 1,
+      "message": "Please move this into its own file so that it\u0027s less likely to conflict with changes from others and/or consider introducing vendor hooks to do what you need from within your own module.",
+      "revId": "fe111a0a909ea5c349f703f8262ba2ae209945a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a95dbe1_012a743e",
         "filename": "drivers/firmware/smccc/Makefile",
         "patchSetId": 1
