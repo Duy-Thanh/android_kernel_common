@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf7e064_47885d5b",
+        "filename": "drivers/virt/geniezone/gzvm_irqchip.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-13T17:45:24Z",
+      "side": 1,
+      "message": "why do you need a whole file for a single one line function?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 69
+      },
+      "revId": "06d95ada22df4947535b962720a6136afe77263a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "969f8064_d8b7f4e6",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-13T17:45:24Z",
+      "side": 1,
+      "message": "size in what?  bytes?  u64?  something else?",
+      "range": {
+        "startLine": 111,
+        "startChar": 19,
+        "endLine": 111,
+        "endChar": 23
+      },
+      "revId": "06d95ada22df4947535b962720a6136afe77263a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
