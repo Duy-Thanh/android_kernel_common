@@ -219,8 +219,7 @@ static void process_delayed_work(struct work_struct *work)
 	 */
 	list_del(&msg->to_user);
 	pr_err("I/O error: sector %llu: no user-space daemon for %s target\n",
-	       msg->bio->bi_iter.bi_sector,
-	       t->miscdev.name);
+	       msg->bio->bi_iter.bi_sector, t->miscdev.name);
 	message_kill(msg, &t->message_pool);
 	mutex_unlock(&t->lock);
 }
@@ -298,7 +297,7 @@ static inline size_t bio_size(struct bio *bio)
 	struct bvec_iter iter;
 	size_t out = 0;
 
-	bio_for_each_segment (bvec, bio, iter)
+	bio_for_each_segment(bvec, bio, iter)
 		out += bio_iter_len(bio, iter);
 	return out;
 }
@@ -472,7 +471,7 @@ static ssize_t bio_copy_from_iter(struct bio *bio, struct iov_iter *iter)
 	struct bvec_iter biter;
 	ssize_t out = 0;
 
-	bio_for_each_segment (bvec, bio, biter) {
+	bio_for_each_segment(bvec, bio, biter) {
 		ssize_t ret;
 
 		ret = copy_page_from_iter(bvec.bv_page, bvec.bv_offset,
@@ -503,7 +502,7 @@ static ssize_t bio_copy_to_iter(struct bio *bio, struct iov_iter *iter)
 	struct bvec_iter biter;
 	ssize_t out = 0;
 
-	bio_for_each_segment (bvec, bio, biter) {
+	bio_for_each_segment(bvec, bio, biter) {
 		ssize_t ret;
 
 		ret = copy_page_to_iter(bvec.bv_page, bvec.bv_offset,
@@ -622,7 +621,7 @@ static struct message *msg_get_from_user(struct channel *c, u64 seq)
 
 	lockdep_assert_held(&c->lock);
 
-	list_for_each_safe (cur, tmp, &c->from_user) {
+	list_for_each_safe(cur, tmp, &c->from_user) {
 		m = list_entry(cur, struct message, from_user);
 		if (m->msg.seq == seq) {
 			list_del(&m->from_user);
@@ -654,7 +653,7 @@ static void target_release(struct kref *ref)
 	 * userspace.  At this point there's nothing we can do about them, as
 	 * there are and will never be any channels.
 	 */
-	list_for_each_safe (cur, tmp, &t->to_user) {
+	list_for_each_safe(cur, tmp, &t->to_user) {
 		struct message *m = list_entry(cur, struct message, to_user);
 
 		if (unlikely(m->delayed)) {
@@ -696,9 +695,8 @@ static void target_put(struct target *t)
 			struct list_head *cur, *tmp;
 
 			list_for_each_safe(cur, tmp, &t->to_user) {
-				struct message *m = list_entry(cur,
-							       struct message,
-							       to_user);
+				struct message *m = list_entry(
+					cur, struct message, to_user);
 				if (!m->delayed)
 					enqueue_delayed_work(m, false);
 			}
@@ -752,7 +750,7 @@ static void channel_free(struct channel *c)
 		message_kill(c->cur_to_user, &c->target->message_pool);
 	if (c->cur_from_user != &c->scratch_message_from_user)
 		message_kill(c->cur_from_user, &c->target->message_pool);
-	list_for_each_safe (cur, tmp, &c->from_user)
+	list_for_each_safe(cur, tmp, &c->from_user)
 		message_kill(list_entry(cur, struct message, from_user),
 			     &c->target->message_pool);
 
@@ -970,6 +968,11 @@ static ssize_t dev_write(struct kiocb *iocb, struct iov_iter *from)
 	 * BIO.
 	 */
 	processed = msg_copy_from_iov(c->cur_from_user, from);
+	if (processed <= 0) {
+		pr_warn("userspace IO error detected \n");
+		c->cur_from_user->bio->bi_status = BLK_STS_IOERR;
+		goto finish_bio;
+	}
 	total_processed += processed;
 
 	if (c->cur_from_user->posn_from_user <
