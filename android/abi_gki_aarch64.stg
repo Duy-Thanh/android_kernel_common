@@ -334623,6 +334623,15 @@ elf_symbol {
   full_name: "devm_gpiod_get_index"
 }
 elf_symbol {
+  id: 0x241e9d4d
+  name: "devm_gpiod_get_index_optional"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf71fb74b
+  type_id: 0x5f3cfa16
+  full_name: "devm_gpiod_get_index_optional"
+}
+elf_symbol {
   id: 0xf6b9516e
   name: "devm_gpiod_get_optional"
   is_defined: true
@@ -378839,6 +378848,7 @@ interface {
   symbol_id: 0x097ab520
   symbol_id: 0xccb2ecff
   symbol_id: 0xd0f2d980
+  symbol_id: 0x241e9d4d
   symbol_id: 0xf6b9516e
   symbol_id: 0xa2b20c15
   symbol_id: 0x0ea63f59
