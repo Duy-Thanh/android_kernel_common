@@ -19,6 +19,26 @@
       "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 547772451 android-build.ayeaye-python-dispatcher_20230713.03_p0",
       "revId": "7367bcf2bcb65a99c2d9cd3136c6eca38ed34e92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048860283",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2584950?revision\u003d5",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "075c5577_4a2312fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-14T19:58:56Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 547772451 android-build.ayeaye-python-dispatcher_20230713.03_p0",
+      "revId": "7367bcf2bcb65a99c2d9cd3136c6eca38ed34e92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
