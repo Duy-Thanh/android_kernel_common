@@ -127,6 +127,26 @@ impl IoBufferReader for UserSlicePtrReader {
     }
 }
 
+impl UserSlicePtrReader {
+    /// Create a new reader with the same address and length.
+    ///
+    /// This can be used to read data without advancing the location of the original reader. The
+    /// user should be careful to avoid TOCTOU bugs when using this function.
+    pub fn clone_reader(&self) -> Self {
+        UserSlicePtrReader(self.0, self.1)
+    }
+
+    /// Advance the reader by the given number of bytes.
+    pub fn skip(&mut self, len: usize) -> Result {
+        if len > self.1 || len > u32::MAX as usize {
+            return Err(EFAULT);
+        }
+        self.0 = self.0.wrapping_add(len);
+        self.1 -= len;
+        Ok(())
+    }
+}
+
 /// A writer for [`UserSlicePtr`].
 ///
 /// Used to incrementally write into the user slice.
