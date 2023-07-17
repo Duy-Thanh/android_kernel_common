@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5b52f48_6c8c5498",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-17T18:46:18Z",
+      "side": 1,
+      "message": "build still broken. Please actually do the `allmodconfig` build before uploading again!",
+      "revId": "ef17f8f0e85a9cc61875019f7ae3641b43fc5e08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
