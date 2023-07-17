@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2a5cc39_49e2ec9c",
+        "filename": "drivers/virt/geniezone/gzvm_irqchip.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-17T08:32:43Z",
+      "side": 1,
+      "message": "Our intention was to map each component(e.g. irqchip) of the virtual machine to single file(e.g `gzvm_irqchip.c`) in order to have better abstraction that reflect our design architecture.",
+      "parentUuid": "bcf7e064_47885d5b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 69
+      },
+      "revId": "06d95ada22df4947535b962720a6136afe77263a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "969f8064_d8b7f4e6",
         "filename": "include/uapi/linux/gzvm.h",
         "patchSetId": 8
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-13T17:45:24Z",
       "side": 1,
       "message": "size in what?  bytes?  u64?  something else?",
+      "range": {
+        "startLine": 111,
+        "startChar": 19,
+        "endLine": 111,
+        "endChar": 23
+      },
+      "revId": "06d95ada22df4947535b962720a6136afe77263a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf25a581_863936e1",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-17T08:32:43Z",
+      "side": 1,
+      "message": "This `attr_size` is the buffer size in bytes of each attribute needed from various devices.\n\nThe attribute here refers to the additional data passed from VMM(e.g. Crosvm) to GenieZone hypervisor when virtual devices were to be created. Thus, we need `attr_addr` and `attr_size` in the `gzvm_create_device`  structure to keep track of the attribute mentioned.",
+      "parentUuid": "969f8064_d8b7f4e6",
       "range": {
         "startLine": 111,
         "startChar": 19,
