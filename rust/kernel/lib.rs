@@ -56,6 +56,7 @@ pub mod str;
 pub mod sync;
 pub mod task;
 pub mod types;
+pub mod xarray;
 pub mod user_ptr;
 
 pub mod linked_list;
