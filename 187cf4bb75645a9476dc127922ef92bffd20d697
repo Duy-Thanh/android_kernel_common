@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef166ccf_155b5e6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-17T15:12:12Z",
+      "side": 1,
+      "message": "Build break for `allmodconfig` builds:\n```\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/block.c:85:23: error: unused variable \u0027bdev\u0027 [-Werror,-Wunused-variable]\nstruct block_device *bdev \u003d fullbio-\u003ebi_bdev;\n^\n1 error generated.\n```",
+      "revId": "187cf4bb75645a9476dc127922ef92bffd20d697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
