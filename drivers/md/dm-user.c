@@ -988,7 +988,7 @@ finish_bio:
 	/*
 	 * We don't actually need to take the target lock here, as all
 	 * we're doing is freeing the message and mempools have their
-	 * own lock.  Each channel has its ows scratch message.
+	 * own lock.  Each channel has its own scratch message.
 	 */
 	WARN_ON(c->cur_from_user == &c->scratch_message_from_user);
 	mempool_free(c->cur_from_user, &c->target->message_pool);
