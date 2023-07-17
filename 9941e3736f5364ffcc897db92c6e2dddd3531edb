@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff44f701_e5f72cc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954368
+      },
+      "writtenOn": "2023-07-17T13:20:44Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/2578071/5/android/abi_gki_aarch64_oplus\nhttps://android-review.googlesource.com/c/kernel/common/+/2599627\nhttps://android-review.googlesource.com/c/kernel/common/+/2627939\nhttps://android-review.googlesource.com/c/kernel/common/+/2632271\n\nbecause of cherry-pick conflict\nwe add this 4 patchs as 1 commit",
+      "revId": "9941e3736f5364ffcc897db92c6e2dddd3531edb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
