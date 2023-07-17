@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe6a358_d85e4118",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-17T18:44:34Z",
+      "side": 1,
+      "message": "\u0027allmodconfig\u0027 builds are still broken. Please actually do the build before uploading again!\n```\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/file.c:592:11: error: implicit declaration of function \u0027squashfs_page_actor_init_special\u0027 [-Werror,-Wimplicit-function-declaration]\n                actor \u003d squashfs_page_actor_init_special(msblk, pages, nr_pages,\n                        ^\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/file.c:592:11: note: did you mean \u0027squashfs_page_actor_init\u0027?\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/page_actor.h:17:43: note: \u0027squashfs_page_actor_init\u0027 declared here\nstatic inline struct squashfs_page_actor *squashfs_page_actor_init(void **page,\n                                          ^\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/file.c:592:9: error: incompatible integer to pointer conversion assigning to \u0027struct squashfs_page_actor *\u0027 from \u0027int\u0027 [-Wint-conversion]\n                actor \u003d squashfs_page_actor_init_special(msblk, pages, nr_pages,\n                      ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/file.c:599:15: error: implicit declaration of function \u0027squashfs_page_actor_free\u0027 [-Werror,-Wimplicit-function-declaration]\n                last_page \u003d squashfs_page_actor_free(actor);\n                            ^\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/file.c:599:15: note: did you mean \u0027squashfs_page_actor_init\u0027?\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/page_actor.h:17:43: note: \u0027squashfs_page_actor_init\u0027 declared here\nstatic inline struct squashfs_page_actor *squashfs_page_actor_init(void **page,\n                                          ^\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/file.c:599:13: error: incompatible integer to pointer conversion assigning to \u0027struct page *\u0027 from \u0027int\u0027 [-Wint-conversion]\n                last_page \u003d squashfs_page_actor_free(actor);\n                          ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/9/execroot/__main__/common/fs/squashfs/file.c:635:2: error: member reference base type \u0027int (struct file *, struct page *)\u0027 is not a structure or union\n        .readahead \u003d squashfs_readahead\n        ^~~~~~~~~~\n5 errors generated.\n\n```",
+      "revId": "1f7799b2fb876c8dd6f60f985ffdb93e3043c959",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
