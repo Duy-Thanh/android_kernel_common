@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f9c3a1_15912da8",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-17T17:39:48Z",
+      "side": 0,
+      "message": "This change looks unrelated to the original patch.",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 27
+      },
+      "revId": "2e41b23829653c9a18a7283814610636eab8329e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
