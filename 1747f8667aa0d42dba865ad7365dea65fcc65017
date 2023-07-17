@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00d4449e_20c5fcf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954368
+      },
+      "writtenOn": "2023-07-17T13:52:16Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/2651556\nhttps://android-review.googlesource.com/c/kernel/common/+/2646566\nhttps://android-review.googlesource.com/c/kernel/common/+/2627936\nhttps://android-review.googlesource.com/c/kernel/common/+/2627938\nhttps://android-review.googlesource.com/c/kernel/common/+/2606590\nhttps://android-review.googlesource.com/c/kernel/common/+/2597528\nhttps://android-review.googlesource.com/c/kernel/common/+/2574677/8/android/abi_gki_aarch64_oplus\n\nbecause of cherry-pick conflict we add 7 patchs together",
+      "revId": "1747f8667aa0d42dba865ad7365dea65fcc65017",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
