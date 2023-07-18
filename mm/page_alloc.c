@@ -2256,10 +2256,28 @@ retry:
 		if (!cma_redirect_restricted() && alloc_flags & ALLOC_CMA)
 			page = __rmqueue_cma_fallback(zone, order);
 
+<<<<<<< HEAD   (75c715 UPSTREAM: usb: dwc3: re-enable runtime PM after failed resum)
 		if (!page && __rmqueue_fallback(zone, order, migratetype,
 								alloc_flags))
 			goto retry;
 	}
+||||||| BASE
+	if (unlikely(!page) && __rmqueue_fallback(zone, order, migratetype,
+						  alloc_flags))
+		goto retry;
+
+=======
+	/*
+	 * let normal GFP_MOVABLE has chance to try MIGRATE_CMA
+	 */
+	if (unlikely(!page) && (migratetype == MIGRATE_MOVABLE))
+		trace_android_vh_rmqueue_cma_fallback(zone, order, &page);
+
+	if (unlikely(!page) && __rmqueue_fallback(zone, order, migratetype,
+						  alloc_flags))
+		goto retry;
+
+>>>>>>> CHANGE (b1e75d ANDROID: Add vendor hook for cma adjusting)
 	return page;
 }
 
@@ -3263,6 +3281,7 @@ static inline unsigned int gfp_to_alloc_flags_cma(gfp_t gfp_mask,
 	if ((!cma_redirect_restricted() || gfp_mask & __GFP_CMA) &&
 	    gfp_migratetype(gfp_mask) == MIGRATE_MOVABLE)
 		alloc_flags |= ALLOC_CMA;
+	trace_android_vh_alloc_flags_cma_adjust(gfp_mask, &alloc_flags);
 #endif
 	return alloc_flags;
 }

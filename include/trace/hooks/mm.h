@@ -363,6 +363,7 @@ DECLARE_HOOK(android_vh_filemap_map_pages,
 	TP_PROTO(struct file *file, pgoff_t first_pgoff,
 		pgoff_t last_pgoff, vm_fault_t ret),
 	TP_ARGS(file, first_pgoff, last_pgoff, ret));
+<<<<<<< HEAD   (75c715 UPSTREAM: usb: dwc3: re-enable runtime PM after failed resum)
 DECLARE_HOOK(android_vh_page_cache_readahead_start,
 	TP_PROTO(struct file *file, pgoff_t pgoff,
 		unsigned int size, bool sync),
@@ -413,6 +414,15 @@ DECLARE_HOOK(android_vh_suitable_migration_target_bypass,
 DECLARE_HOOK(android_vh_swap_writepage,
 	TP_PROTO(unsigned long *sis_flags, struct page *page),
 	TP_ARGS(sis_flags, page));
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_alloc_flags_cma_adjust,
+	TP_PROTO(gfp_t gfp_mask, unsigned int *alloc_flags),
+	TP_ARGS(gfp_mask, alloc_flags));
+DECLARE_HOOK(android_vh_rmqueue_cma_fallback,
+	TP_PROTO(struct zone *zone, unsigned int order, struct page **page),
+	TP_ARGS(zone, order, page));
+>>>>>>> CHANGE (b1e75d ANDROID: Add vendor hook for cma adjusting)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
