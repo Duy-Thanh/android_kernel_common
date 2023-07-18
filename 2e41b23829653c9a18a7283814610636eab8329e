@@ -22,6 +22,30 @@
       },
       "revId": "2e41b23829653c9a18a7283814610636eab8329e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cc7faad_b8584169",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2023-07-18T02:56:46Z",
+      "side": 0,
+      "message": "This change comes from the result of BUILD..., which remains there even if I fetch and rebase to the latest code",
+      "parentUuid": "42f9c3a1_15912da8",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 27
+      },
+      "revId": "2e41b23829653c9a18a7283814610636eab8329e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
