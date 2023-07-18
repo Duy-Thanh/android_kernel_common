@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5e14ca4_9b48e19a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-18T16:02:54Z",
+      "side": 1,
+      "message": "This changes the current default CMA behavior. If you need change in behavior please implement it as a vendor hook with the current behavior being the default.",
+      "revId": "fa5b0cbb4a8cba6ff00a30a2061e2bfb5eddda7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
