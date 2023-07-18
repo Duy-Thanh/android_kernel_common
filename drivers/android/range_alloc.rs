@@ -5,6 +5,7 @@ use core::ptr::NonNull;
 use kernel::{
     linked_list::{CursorMut, GetLinks, Links, List},
     prelude::*,
+    task::Pid,
 };
 
 /// Keeps track of allocations in a process' mmap.
@@ -13,8 +14,10 @@ use kernel::{
 /// keeps track of allocations made in the mmap. For each allocation, we store a descriptor that
 /// has metadata related to the allocation. We also keep track of available free space.
 pub(crate) struct RangeAllocator<T> {
+    size: usize,
     list: List<Box<Descriptor<T>>>,
     free_oneway_space: usize,
+    pub(crate) oneway_spam_detected: bool,
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -23,10 +26,10 @@ enum DescriptorState {
     Free,
     /// This region of the mmap is allocated to a transaction. This allocation currently has an
     /// active `Allocation` object, and the metadata is in the `Allocation` object.
-    Reserved { is_oneway: bool },
+    Reserved { is_oneway: bool, pid: Pid },
     /// This region of the mmap is allocated to a transaction. This allocation currently does not
     /// have an active `Allocation` object, and the metadata is stored in the `data` field.
-    Allocated { is_oneway: bool },
+    Allocated { is_oneway: bool, pid: Pid },
 }
 
 impl DescriptorState {
@@ -45,6 +48,8 @@ impl<T> RangeAllocator<T> {
         list.push_back(desc);
         Ok(Self {
             free_oneway_space: size / 2,
+            oneway_spam_detected: false,
+            size,
             list,
         })
     }
@@ -74,6 +79,7 @@ impl<T> RangeAllocator<T> {
         &mut self,
         size: usize,
         is_oneway: bool,
+        pid: Pid,
         alloc: ReserveNewBox<T>,
     ) -> Result<usize> {
         // Compute new value of free_oneway_space, which is set only on success.
@@ -92,9 +98,18 @@ impl<T> RangeAllocator<T> {
         };
         self.free_oneway_space = new_oneway_space;
 
+        // Start detecting spammers once we have less than 20%
+        // of async space left (which is less than 10% of total
+        // buffer size).
+        //
+        // (This will short-circut, so `low_oneway_space` is
+        // only called when necessary.)
+        self.oneway_spam_detected =
+            is_oneway && new_oneway_space < self.size / 10 && self.low_oneway_space(pid);
+
         // SAFETY: We hold the only mutable reference to list, so it cannot have changed.
         let desc = unsafe { &mut *desc_ptr.as_ptr() };
-        desc.state = DescriptorState::Reserved { is_oneway };
+        desc.state = DescriptorState::Reserved { is_oneway, pid };
 
         if desc.size != size {
             // We need to break up the descriptor.
@@ -120,7 +135,7 @@ impl<T> RangeAllocator<T> {
                 let is_oneway = match entry.state {
                     DescriptorState::Free => return Err(EINVAL),
                     DescriptorState::Allocated { .. } => return Err(EPERM),
-                    DescriptorState::Reserved { is_oneway } => is_oneway,
+                    DescriptorState::Reserved { is_oneway, .. } => is_oneway,
                 };
                 entry.state = DescriptorState::Free;
                 (entry.size, is_oneway)
@@ -170,11 +185,11 @@ impl<T> RangeAllocator<T> {
     pub(crate) fn reservation_commit(&mut self, offset: usize, data: Option<T>) -> Result {
         let mut cursor = self.find_at_offset(offset).ok_or(ENOENT)?;
         let desc = cursor.current().unwrap();
-        let is_oneway = match desc.state {
-            DescriptorState::Reserved { is_oneway } => is_oneway,
+        let (is_oneway, pid) = match desc.state {
+            DescriptorState::Reserved { is_oneway, pid } => (is_oneway, pid),
             _ => return Err(ENOENT),
         };
-        desc.state = DescriptorState::Allocated { is_oneway };
+        desc.state = DescriptorState::Allocated { is_oneway, pid };
         desc.data = data;
         Ok(())
     }
@@ -186,11 +201,11 @@ impl<T> RangeAllocator<T> {
     pub(crate) fn reserve_existing(&mut self, offset: usize) -> Result<(usize, Option<T>)> {
         let mut cursor = self.find_at_offset(offset).ok_or(ENOENT)?;
         let desc = cursor.current().unwrap();
-        let is_oneway = match desc.state {
-            DescriptorState::Allocated { is_oneway } => is_oneway,
+        let (is_oneway, pid) = match desc.state {
+            DescriptorState::Allocated { is_oneway, pid } => (is_oneway, pid),
             _ => return Err(ENOENT),
         };
-        desc.state = DescriptorState::Reserved { is_oneway };
+        desc.state = DescriptorState::Reserved { is_oneway, pid };
         Ok((desc.size, desc.data.take()))
     }
 
@@ -205,6 +220,36 @@ impl<T> RangeAllocator<T> {
             }
             cursor.move_next();
         }
+    }
+
+    /// Find the amount and size of buffers allocated by the current caller.
+    ///
+    /// The idea is that once we cross the threshold, whoever is responsible
+    /// for the low async space is likely to try to send another async transaction,
+    /// and at some point we'll catch them in the act.  This is more efficient
+    /// than keeping a map per pid.
+    fn low_oneway_space(&self, calling_pid: Pid) -> bool {
+        let mut cursor = self.list.cursor_front();
+        let mut total_alloc_size = 0;
+        let mut num_buffers = 0;
+        while let Some(desc) = cursor.current() {
+            match desc.state {
+                DescriptorState::Reserved { is_oneway, pid }
+                | DescriptorState::Allocated { is_oneway, pid } => {
+                    if is_oneway && pid == calling_pid {
+                        total_alloc_size = total_alloc_size + desc.size;
+                        num_buffers += 1;
+                    }
+                }
+                _ => {}
+            }
+            cursor.move_next();
+        }
+
+        // Warn if this pid has more than 50 transactions, or more than 50% of
+        // async space (which is 25% of total buffer size). Oneway spam is only
+        // detected when the threshold is exceeded.
+        num_buffers > 50 || total_alloc_size > self.size / 4
     }
 }
 
