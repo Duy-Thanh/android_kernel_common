@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0adfab3_ad73bc71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-18T16:24:12Z",
+      "side": 1,
+      "message": "please reverse the order of the patches so the symbol list refers to symbols that exist in the kernel",
+      "revId": "ebe7464d1ff25c867fb2a49b53fd6036314a27e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
