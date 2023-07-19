@@ -2748,6 +2748,9 @@ void addrconf_prefix_rcv(struct net_device *dev, u8 *opt, int len, bool sllao)
 		return;
 	}
 
+	if (valid_lft != 0 && valid_lft < get_accept_ra_min_lft(&in6_dev->cnf))
+		goto put;
+
 	/*
 	 *	Two things going on here:
 	 *	1) Add routes for on-link prefixes
@@ -6639,9 +6642,11 @@ static int addrconf_sysctl_disable_policy(struct ctl_table *ctl, int write,
 	return ret;
 }
 
+static const int zero = 0;
 static int minus_one = -1;
 static const int two_five_five = 255;
 static u32 ioam6_if_id_max = U16_MAX;
+static const int u16_max = U16_MAX;
 
 static const struct ctl_table addrconf_sysctl[] = {
 	{
@@ -6810,6 +6815,15 @@ static const struct ctl_table addrconf_sysctl[] = {
 		.maxlen		= sizeof(int),
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec,
+	},
+	{
+		.procname	= "accept_ra_min_lft",
+		.data		= &ipv6_devconf.ndisc_evict_nocarrier + 1,
+		.maxlen		= sizeof(u8),
+		.mode		= 0644,
+		.proc_handler	= proc_dou8vec_minmax,
+		.extra1		= (void *) SYSCTL_ZERO,
+		.extra2		= (void *) &two_five_five,
 	},
 	{
 		.procname	= "accept_ra_pinfo",
@@ -7306,6 +7320,10 @@ int __init addrconf_init(void)
 {
 	struct inet6_dev *idev;
 	int err;
+
+	/* 0 initialize slot for accept_ra_min_lft */
+	set_accept_ra_min_lft(&ipv6_devconf, 0);
+	set_accept_ra_min_lft(&ipv6_devconf_dflt, 0);
 
 	err = ipv6_addr_label_init();
 	if (err < 0) {

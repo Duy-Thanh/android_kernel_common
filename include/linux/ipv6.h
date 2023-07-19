@@ -83,6 +83,7 @@ struct ipv6_devconf {
 	__u32		ioam6_id_wide;
 	__u8		ioam6_enabled;
 	__u8		ndisc_evict_nocarrier;
+	/* ANDROID HACK: slot used for __u8 accept_ra_min_lft */
 
 	struct ctl_table_header *sysctl_header;
 
@@ -91,6 +92,14 @@ struct ipv6_devconf {
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 };
+
+static inline __u8 get_accept_ra_min_lft(struct ipv6_devconf *cfg) {
+	return *(&cfg->ndisc_evict_nocarrier + 1);
+}
+
+static inline void set_accept_ra_min_lft(struct ipv6_devconf *cfg, __u8 val) {
+	*(&cfg->ndisc_evict_nocarrier + 1) = val;
+}
 
 struct ipv6_params {
 	__s32 disable_ipv6;
