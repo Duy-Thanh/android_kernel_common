@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c538722_302f4a39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-07-19T19:40:23Z",
+      "side": 1,
+      "message": "Do you mind if we go with this instead: aosp/2665279?\n\nSo, I can cherry pick it with linkage to original issue.",
+      "revId": "1b459d06b5b686a7f08c59b2bead2073ff650394",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
