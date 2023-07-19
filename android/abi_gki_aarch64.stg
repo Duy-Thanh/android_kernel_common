@@ -269651,6 +269651,13 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x92c44c32
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3b49ed35
+  parameter_id: 0x6720d32f
+  parameter_id: 0x295c7202
+}
+function {
   id: 0x92c5abfb
   return_type_id: 0x6720d32f
   parameter_id: 0x3b49ed35
@@ -322105,6 +322112,15 @@ elf_symbol {
   full_name: "pci_walk_bus"
 }
 elf_symbol {
+  id: 0x35548641
+  name: "pci_write_config_byte"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x17878150
+  type_id: 0x92c44c32
+  full_name: "pci_write_config_byte"
+}
+elf_symbol {
   id: 0x6d6403f6
   name: "pci_write_config_dword"
   is_defined: true
@@ -342739,6 +342755,7 @@ interface {
   symbol_id: 0xefcbff90
   symbol_id: 0x46d93e48
   symbol_id: 0x0bb33843
+  symbol_id: 0x35548641
   symbol_id: 0x6d6403f6
   symbol_id: 0x52200b18
   symbol_id: 0xfda7b705
