@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a66854e8_640525c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-07-19T20:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feca52bc_3b14481a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 72
+      },
+      "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28a4c108_8017a525",
@@ -191,6 +215,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d29f524c_7c8d13c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-07-19T20:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73722599_b3888c78",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a9a1aae_682035e6",
@@ -204,6 +252,24 @@
       "writtenOn": "2023-06-29T09:55:38Z",
       "side": 1,
       "message": "the ABI is still broken, you can not just update the .xml file to fix it, sorry.  Please read the GKI documentation for how to deal with the kernel abi and when it breaks and how to fix it to resolve this properly.",
+      "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "078fe552_9db13e88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-07-19T20:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a9a1aae_682035e6",
       "revId": "533cbdaecd9e02d35d0182c17bfde576996800cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
