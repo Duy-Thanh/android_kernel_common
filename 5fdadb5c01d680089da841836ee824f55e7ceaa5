@@ -94,6 +94,30 @@
       },
       "revId": "5fdadb5c01d680089da841836ee824f55e7ceaa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be2969a_c4afbb2a",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1372253
+      },
+      "writtenOn": "2023-07-19T03:17:33Z",
+      "side": 0,
+      "message": "anyway, I removed it mannually",
+      "parentUuid": "bafe81c7_6d15dad0",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 27
+      },
+      "revId": "5fdadb5c01d680089da841836ee824f55e7ceaa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
