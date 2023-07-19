@@ -16,6 +16,24 @@
       "message": "please add a statement about the change to `android/abi_gki_protected_exports_aarch64` to the commit message. It\u0027s not obvious why these symbols need to be deleted as part of Pixel support.",
       "revId": "38d7e0721a1fe9bc8b7b0cc3378e02f5e02d48ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3219e43_2fe879e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-07-19T19:00:14Z",
+      "side": 1,
+      "message": "I believe that is a side-effect from a previous change. I split that out into a separate patch.",
+      "parentUuid": "88c0aaa2_3b51ff53",
+      "revId": "38d7e0721a1fe9bc8b7b0cc3378e02f5e02d48ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
