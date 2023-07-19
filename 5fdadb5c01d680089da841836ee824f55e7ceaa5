@@ -46,6 +46,30 @@
       },
       "revId": "5fdadb5c01d680089da841836ee824f55e7ceaa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10f4ea2_115ccf32",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-19T00:54:38Z",
+      "side": 0,
+      "message": "Wait, this file is not generated, it\u0027s a symbols list which is changed manually. What do you mean it\u0027s the result of BUILD\u003d... ?",
+      "parentUuid": "87465e0e_738e08dc",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 27
+      },
+      "revId": "5fdadb5c01d680089da841836ee824f55e7ceaa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
