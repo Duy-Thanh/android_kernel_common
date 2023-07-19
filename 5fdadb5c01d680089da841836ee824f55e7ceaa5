@@ -22,6 +22,30 @@
       },
       "revId": "5fdadb5c01d680089da841836ee824f55e7ceaa5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87465e0e_738e08dc",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1372253
+      },
+      "writtenOn": "2023-07-19T00:39:41Z",
+      "side": 0,
+      "message": "ok, but it is the result of BUILD\u003d...  may i remove it directly?",
+      "parentUuid": "2a81ffb6_206fed7b",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 27
+      },
+      "revId": "5fdadb5c01d680089da841836ee824f55e7ceaa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
