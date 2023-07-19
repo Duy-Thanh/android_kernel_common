@@ -4,6 +4,7 @@
 
 #include <uapi/linux/ipv6.h>
 #include <linux/android_kabi.h>
+#include <linux/build_bug.h>
 
 #define ipv6_optlen(p)  (((p)->hdrlen+1) << 3)
 #define ipv6_authlen(p) (((p)->hdrlen+2) << 2)
@@ -83,6 +84,7 @@ struct ipv6_devconf {
 	__u32		ioam6_id_wide;
 	__u8		ioam6_enabled;
 	__u8		ndisc_evict_nocarrier;
+	/* ANDROID HACK: 1 byte padding used for __u8 accept_ra_min_lft */
 
 	struct ctl_table_header *sysctl_header;
 
@@ -91,6 +93,13 @@ struct ipv6_devconf {
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 };
+
+/* Assert that there is actually padding where accept_ra_min_lft is put */
+static_assert(offsetof(struct ipv6_devconf, sysctl_header) -
+	      offsetof(struct ipv6_devconf, ndisc_evict_nocarrier) >= 1);
+
+#define accept_ra_min_lft(cfg) \
+	(&(cfg).ndisc_evict_nocarrier + 1)
 
 struct ipv6_params {
 	__s32 disable_ipv6;

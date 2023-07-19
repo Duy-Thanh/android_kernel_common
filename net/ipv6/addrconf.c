@@ -2748,6 +2748,9 @@ void addrconf_prefix_rcv(struct net_device *dev, u8 *opt, int len, bool sllao)
 		return;
 	}
 
+	if (valid_lft != 0 && valid_lft < *accept_ra_min_lft(in6_dev->cnf))
+		goto put;
+
 	/*
 	 *	Two things going on here:
 	 *	1) Add routes for on-link prefixes
@@ -6812,6 +6815,15 @@ static const struct ctl_table addrconf_sysctl[] = {
 		.proc_handler	= proc_dointvec,
 	},
 	{
+		.procname	= "accept_ra_min_lft",
+		.data		= accept_ra_min_lft(ipv6_devconf),
+		.maxlen		= sizeof(u8),
+		.mode		= 0644,
+		.proc_handler	= proc_dou8vec_minmax,
+		.extra1		= (void *) SYSCTL_ZERO,
+		.extra2		= (void *) &two_five_five,
+	},
+	{
 		.procname	= "accept_ra_pinfo",
 		.data		= &ipv6_devconf.accept_ra_pinfo,
 		.maxlen		= sizeof(int),
@@ -7306,6 +7318,10 @@ int __init addrconf_init(void)
 {
 	struct inet6_dev *idev;
 	int err;
+
+	/* 0 initialize slot for accept_ra_min_lft */
+	*accept_ra_min_lft(ipv6_devconf) = 0;
+	*accept_ra_min_lft(ipv6_devconf_dflt) = 0;
 
 	err = ipv6_addr_label_init();
 	if (err < 0) {
