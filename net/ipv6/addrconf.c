@@ -2748,6 +2748,9 @@ void addrconf_prefix_rcv(struct net_device *dev, u8 *opt, int len, bool sllao)
 		return;
 	}
 
+	if (valid_lft != 0 && valid_lft < in6_dev->cnf.accept_ra_pinfo)
+		goto put;
+
 	/*
 	 *	Two things going on here:
 	 *	1) Add routes for on-link prefixes
@@ -6639,9 +6642,11 @@ static int addrconf_sysctl_disable_policy(struct ctl_table *ctl, int write,
 	return ret;
 }
 
+static const int zero = 0;
 static int minus_one = -1;
 static const int two_five_five = 255;
 static u32 ioam6_if_id_max = U16_MAX;
+static const int u16_max = U16_MAX;
 
 static const struct ctl_table addrconf_sysctl[] = {
 	{
@@ -6807,6 +6812,13 @@ static const struct ctl_table addrconf_sysctl[] = {
 	{
 		.procname	= "accept_ra_min_hop_limit",
 		.data		= &ipv6_devconf.accept_ra_min_hop_limit,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= proc_dointvec,
+	},
+	{
+		.procname	= "accept_ra_min_lft",
+		.data		= &ipv6_devconf.accept_ra_pinfo,
 		.maxlen		= sizeof(int),
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec,

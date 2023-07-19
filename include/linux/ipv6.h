@@ -83,6 +83,7 @@ struct ipv6_devconf {
 	__u32		ioam6_id_wide;
 	__u8		ioam6_enabled;
 	__u8		ndisc_evict_nocarrier;
+	__u16		accept_ra_min_lft;
 
 	struct ctl_table_header *sysctl_header;
 
