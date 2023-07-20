@@ -529,7 +529,7 @@ static int __init finalize_pkvm(void)
 
 	return ret;
 }
-device_initcall_sync(finalize_pkvm);
+late_initcall_sync(finalize_pkvm);
 
 static int pkvm_vm_ioctl_set_fw_ipa(struct kvm *kvm, u64 ipa)
 {
