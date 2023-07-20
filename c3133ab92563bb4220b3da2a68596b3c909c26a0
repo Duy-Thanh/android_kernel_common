@@ -16,6 +16,24 @@
       "message": "no need to change the symbol list.",
       "revId": "c3133ab92563bb4220b3da2a68596b3c909c26a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2059e54_b05eba0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-07-20T18:46:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32a871d1_1d34913d",
+      "revId": "c3133ab92563bb4220b3da2a68596b3c909c26a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
