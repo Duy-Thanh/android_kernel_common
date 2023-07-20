@@ -75,6 +75,7 @@ static void kcmp_unlock(struct rw_semaphore *l1, struct rw_semaphore *l2)
 	if (likely(l2 != l1))
 		up_read(l2);
 	up_read(l1);
+	(void)kcmp_unlock;
 }
 
 static int kcmp_lock(struct rw_semaphore *l1, struct rw_semaphore *l2)
@@ -90,7 +91,7 @@ static int kcmp_lock(struct rw_semaphore *l1, struct rw_semaphore *l2)
 		if (err)
 			up_read(l1);
 	}
-
+	(void)kcmp_lock;
 	return err;
 }
 
@@ -119,7 +120,7 @@ static int kcmp_epoll_target(struct task_struct *task1,
 
 	if (IS_ERR(filp_tgt))
 		return PTR_ERR(filp_tgt);
-
+	(void)kcmp_epoll_target;
 	return kcmp_ptr(filp, filp_tgt, KCMP_FILE);
 }
 #else
@@ -128,6 +129,7 @@ static int kcmp_epoll_target(struct task_struct *task1,
 			     unsigned long idx1,
 			     struct kcmp_epoll_slot __user *uslot)
 {
+	(void)kcmp_epoll_target;
 	return -EOPNOTSUPP;
 }
 #endif
@@ -135,94 +137,7 @@ static int kcmp_epoll_target(struct task_struct *task1,
 SYSCALL_DEFINE5(kcmp, pid_t, pid1, pid_t, pid2, int, type,
 		unsigned long, idx1, unsigned long, idx2)
 {
-	struct task_struct *task1, *task2;
-	int ret;
-
-	rcu_read_lock();
-
-	/*
-	 * Tasks are looked up in caller's PID namespace only.
-	 */
-	task1 = find_task_by_vpid(pid1);
-	task2 = find_task_by_vpid(pid2);
-	if (!task1 || !task2)
-		goto err_no_task;
-
-	get_task_struct(task1);
-	get_task_struct(task2);
-
-	rcu_read_unlock();
-
-	/*
-	 * One should have enough rights to inspect task details.
-	 */
-	ret = kcmp_lock(&task1->signal->exec_update_lock,
-			&task2->signal->exec_update_lock);
-	if (ret)
-		goto err;
-	if (!ptrace_may_access(task1, PTRACE_MODE_READ_REALCREDS) ||
-	    !ptrace_may_access(task2, PTRACE_MODE_READ_REALCREDS)) {
-		ret = -EPERM;
-		goto err_unlock;
-	}
-
-	switch (type) {
-	case KCMP_FILE: {
-		struct file *filp1, *filp2;
-
-		filp1 = get_file_raw_ptr(task1, idx1);
-		filp2 = get_file_raw_ptr(task2, idx2);
-
-		if (filp1 && filp2)
-			ret = kcmp_ptr(filp1, filp2, KCMP_FILE);
-		else
-			ret = -EBADF;
-		break;
-	}
-	case KCMP_VM:
-		ret = kcmp_ptr(task1->mm, task2->mm, KCMP_VM);
-		break;
-	case KCMP_FILES:
-		ret = kcmp_ptr(task1->files, task2->files, KCMP_FILES);
-		break;
-	case KCMP_FS:
-		ret = kcmp_ptr(task1->fs, task2->fs, KCMP_FS);
-		break;
-	case KCMP_SIGHAND:
-		ret = kcmp_ptr(task1->sighand, task2->sighand, KCMP_SIGHAND);
-		break;
-	case KCMP_IO:
-		ret = kcmp_ptr(task1->io_context, task2->io_context, KCMP_IO);
-		break;
-	case KCMP_SYSVSEM:
-#ifdef CONFIG_SYSVIPC
-		ret = kcmp_ptr(task1->sysvsem.undo_list,
-			       task2->sysvsem.undo_list,
-			       KCMP_SYSVSEM);
-#else
-		ret = -EOPNOTSUPP;
-#endif
-		break;
-	case KCMP_EPOLL_TFD:
-		ret = kcmp_epoll_target(task1, task2, idx1, (void *)idx2);
-		break;
-	default:
-		ret = -EINVAL;
-		break;
-	}
-
-err_unlock:
-	kcmp_unlock(&task1->signal->exec_update_lock,
-		    &task2->signal->exec_update_lock);
-err:
-	put_task_struct(task1);
-	put_task_struct(task2);
-
-	return ret;
-
-err_no_task:
-	rcu_read_unlock();
-	return -ESRCH;
+	return -EINVAL;
 }
 
 static __init int kcmp_cookies_init(void)
