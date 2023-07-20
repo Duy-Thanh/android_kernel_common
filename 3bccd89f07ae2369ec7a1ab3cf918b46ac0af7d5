@@ -33,6 +33,23 @@
       "message": "No respin needed, but QC needs it on the branch for their downstream testing (the respin will come later when needed).",
       "revId": "3bccd89f07ae2369ec7a1ab3cf918b46ac0af7d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf7ac5d_b43e3d01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2020955
+      },
+      "writtenOn": "2023-07-20T22:49:56Z",
+      "side": 1,
+      "message": "Respin Bug: b/292147263",
+      "revId": "3bccd89f07ae2369ec7a1ab3cf918b46ac0af7d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
