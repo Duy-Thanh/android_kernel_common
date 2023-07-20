@@ -67,6 +67,24 @@
       "message": "Hi, please help to add \"Bug: 292147263\" in the commit message.",
       "revId": "3bccd89f07ae2369ec7a1ab3cf918b46ac0af7d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "074b4d84_c3005d80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-07-20T23:12:05Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s possible once it\u0027s been merged, unfortunately",
+      "parentUuid": "8f8ad3c4_75469784",
+      "revId": "3bccd89f07ae2369ec7a1ab3cf918b46ac0af7d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
