@@ -283,9 +283,28 @@ impl DeliverToRead for Transaction {
             writer.write(&*tr)?;
         }
 
-        // Dismiss the completion of transaction with a failure. No failure paths are allowed from
-        // here on out.
-        send_failed_reply.dismiss();
+        // Scope to make borrow-checker see `alloc_for_close_on_free` go out of scope at the right
+        // time.
+        {
+            let alloc_for_close_on_free = if files.needs_close_on_free() {
+                Some(self.to.buffer_get(self.data_address).ok_or(ESRCH)?)
+            } else {
+                None
+            };
+
+            // Dismiss the completion of transaction with a failure. No failure paths are allowed from
+            // here on out.
+            send_failed_reply.dismiss();
+
+            // Commit files, and set FDs in FDA to be closed on buffer free.
+            let close_on_free = files.commit();
+            if let Some(mut alloc) = alloc_for_close_on_free {
+                alloc.set_info_close_on_free(close_on_free);
+                alloc.keep_alive();
+            } else if !close_on_free.is_empty() {
+                pr_warn!("Failed to attach close_on_free fds.");
+            }
+        }
 
         // When `drop` is called, we don't want the allocation to be freed because it is now the
         // user's reponsibility to free it.
@@ -293,8 +312,6 @@ impl DeliverToRead for Transaction {
         // `drop` is guaranteed to see this relaxed store because `Arc` guarantess that everything
         // that happens when an object is referenced happens-before the eventual `drop`.
         self.free_allocation.store(false, Ordering::Relaxed);
-
-        files.commit();
 
         // When this is not a reply and not a oneway transaction, update `current_transaction`. If
         // it's a reply, `current_transaction` has already been updated appropriately.
