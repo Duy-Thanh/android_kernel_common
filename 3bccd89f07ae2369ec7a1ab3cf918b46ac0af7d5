@@ -16,6 +16,23 @@
       "message": "Todd - can you help me land this change?",
       "revId": "3bccd89f07ae2369ec7a1ab3cf918b46ac0af7d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87011fe0_0a723367",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-20T16:52:24Z",
+      "side": 1,
+      "message": "No respin needed, but QC needs it on the branch for their downstream testing (the respin will come later when needed).",
+      "revId": "3bccd89f07ae2369ec7a1ab3cf918b46ac0af7d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
