@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "808eb15c_5cf9ea04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-07-21T08:32:26Z",
+      "side": 1,
+      "message": "Do we really need this in android14? The kernel\u0027s pretty much done now, and the linked bug is an untriaged P2.",
+      "revId": "227a0327067308dc5af76a8e907320a2357e8bdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
