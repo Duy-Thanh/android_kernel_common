@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b8e129b_2ec1f8ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-07-21T16:28:08Z",
+      "side": 1,
+      "message": "Maybe we need to do the same for the PSCI notifier and the smc handler?\n\nthe abort and fault handler shouldn\u0027t happen as we register drivers _before_ the stage-2 is in place?",
+      "revId": "6dc224e57f811df0bcc75b08f12564731d8efd0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
