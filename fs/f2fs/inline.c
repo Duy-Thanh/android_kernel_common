@@ -119,6 +119,9 @@ int f2fs_read_inline_data(struct inode *inode, struct page *page)
 
 	if (!PageUptodate(page))
 		SetPageUptodate(page);
+
+	if (is_inode_flag_set(inode, FI_PIN_MEM))
+		set_page_private_pinned(page);
 	f2fs_put_page(ipage, 1);
 	unlock_page(page);
 	return 0;

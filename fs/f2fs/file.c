@@ -3204,6 +3204,35 @@ out:
 	return ret;
 }
 
+static int f2fs_ioc_set_pin_mem(struct file *filp, unsigned long arg)
+{
+	struct inode *inode = file_inode(filp);
+	__u32 pin;
+	int ret = 0;
+
+	if (get_user(pin, (__u32 __user *)arg))
+		return -EFAULT;
+
+	if (!S_ISREG(inode->i_mode))
+		return -EINVAL;
+
+	if (pin && !capable(CAP_SYS_ADMIN))
+		return -EPERM;
+
+	inode_lock(inode);
+	if (pin && !is_inode_flag_set(inode, FI_PIN_MEM)) {
+		set_inode_flag(inode, FI_PIN_MEM);
+		ihold(inode);
+	}
+	if (!pin && is_inode_flag_set(inode, FI_PIN_MEM)) {
+		clear_inode_flag(inode, FI_PIN_MEM);
+		iput(inode);
+	}
+	f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
+	inode_unlock(inode);
+	return ret;
+}
+
 static int f2fs_ioc_get_pin_file(struct file *filp, unsigned long arg)
 {
 	struct inode *inode = file_inode(filp);
@@ -4212,6 +4241,8 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		return f2fs_ioc_get_pin_file(filp, arg);
 	case F2FS_IOC_SET_PIN_FILE:
 		return f2fs_ioc_set_pin_file(filp, arg);
+	case F2FS_IOC_SET_PIN_MEM:
+		return f2fs_ioc_set_pin_mem(filp, arg);
 	case F2FS_IOC_PRECACHE_EXTENTS:
 		return f2fs_ioc_precache_extents(filp);
 	case F2FS_IOC_RESIZE_FS:
@@ -4869,6 +4900,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	case F2FS_IOC_GET_FEATURES:
 	case F2FS_IOC_GET_PIN_FILE:
 	case F2FS_IOC_SET_PIN_FILE:
+	case F2FS_IOC_SET_PIN_MEM:
 	case F2FS_IOC_PRECACHE_EXTENTS:
 	case F2FS_IOC_RESIZE_FS:
 	case FS_IOC_ENABLE_VERITY:

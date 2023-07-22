@@ -2406,6 +2406,9 @@ static int f2fs_mpage_readpages(struct inode *inode,
 			prefetchw(&page->flags);
 		}
 
+		if (is_inode_flag_set(inode, FI_PIN_MEM))
+			set_page_private_pinned(page);
+
 #ifdef CONFIG_F2FS_FS_COMPRESSION
 		if (f2fs_compressed_file(inode)) {
 			/* there are remained compressed pages, submit them */
@@ -3727,8 +3730,13 @@ void f2fs_invalidate_page(struct page *page, unsigned int offset,
 
 int f2fs_release_page(struct page *page, gfp_t wait)
 {
+	struct inode *inode = page_file_mapping(page)->host;
+
 	/* If this is dirty page, keep PagePrivate */
 	if (PageDirty(page))
+		return 0;
+
+	if (is_inode_flag_set(inode, FI_PIN_MEM))
 		return 0;
 
 	clear_page_private_all(page);
