@@ -22,6 +22,30 @@
       },
       "revId": "2187c921c78b11ed69915db02bae2e5edaaab5c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a593610b_8a6cdbf2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-07-24T13:10:01Z",
+      "side": 1,
+      "message": "Huuuuuuum, true the load_acquire is only on-way. I have no idea if we can endup in the situation where we can read twice this value with a different result.\n\nBut happy to put on belt and braces and refactor this a little!",
+      "parentUuid": "ade01ddf_252ae922",
+      "range": {
+        "startLine": 1384,
+        "startChar": 17,
+        "endLine": 1384,
+        "endChar": 33
+      },
+      "revId": "2187c921c78b11ed69915db02bae2e5edaaab5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
