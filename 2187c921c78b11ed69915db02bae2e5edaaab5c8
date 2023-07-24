@@ -46,6 +46,30 @@
       },
       "revId": "2187c921c78b11ed69915db02bae2e5edaaab5c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cceb471_97c31978",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-07-24T15:11:22Z",
+      "side": 1,
+      "message": "I think it\u0027s fine as you have it here; same address ordering is all you need (aka read-after-read hazarding).",
+      "parentUuid": "a593610b_8a6cdbf2",
+      "range": {
+        "startLine": 1384,
+        "startChar": 17,
+        "endLine": 1384,
+        "endChar": 33
+      },
+      "revId": "2187c921c78b11ed69915db02bae2e5edaaab5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
