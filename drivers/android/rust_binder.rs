@@ -13,7 +13,7 @@ use kernel::{
     user_ptr::UserSlicePtrWriter,
 };
 
-use crate::{context::Context, process::Process, thread::Thread};
+use crate::{context::Context, process::Process, thread::Thread, transaction::Transaction};
 
 use core::sync::atomic::{AtomicBool, Ordering};
 
@@ -63,6 +63,11 @@ trait DeliverToRead {
     /// Get the debug name of this type.
     fn debug_name(&self) -> &'static str {
         core::any::type_name::<Self>()
+    }
+
+    /// Downcast this type a transaction.
+    fn downcast_transaction(&self) -> Option<&Transaction> {
+        None
     }
 }
 

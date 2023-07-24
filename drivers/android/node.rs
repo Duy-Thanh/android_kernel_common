@@ -272,6 +272,27 @@ impl Node {
             }
         }
     }
+
+    /// Finds an outdated transaction that the given transaction can replace.
+    ///
+    /// If one is found, it is removed from the list and returned.
+    pub(crate) fn take_outdated_transaction(
+        &self,
+        new: &Transaction,
+        guard: &mut Guard<'_, ProcessInner, SpinLockBackend>,
+    ) -> Option<Arc<dyn DeliverToRead>> {
+        let inner = self.inner.access_mut(guard);
+        let mut cursor = inner.oneway_todo.cursor_front_mut();
+        while let Some(old) = cursor.current() {
+            if let Some(old) = old.downcast_transaction() {
+                if new.can_replace(old) {
+                    return cursor.remove_current();
+                }
+            }
+            cursor.move_next();
+        }
+        None
+    }
 }
 
 impl DeliverToRead for Node {
