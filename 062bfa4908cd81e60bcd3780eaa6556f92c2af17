@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b3e272_8eb4cd78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-24T09:28:26Z",
+      "side": 1,
+      "message": "see comment in the other change: https://android-review.git.corp.google.com/c/kernel/common/+/2670000/comments/6ff6e44b_16fe82f5\n\nthe `.gitignore` file changes can be reverted as well.",
+      "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
