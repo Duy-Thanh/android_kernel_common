@@ -16,6 +16,24 @@
       "message": "No need to apply patches to any -lts branch, we can just pull it in from the non-lts branch with a merge instead.",
       "revId": "843340070bd2c0010ace4b38b186c73c8c1ae16d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b42e572b_a7c8c46a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-24T13:45:11Z",
+      "side": 1,
+      "message": "This needs to be picked a little earlier. Otherwise the allmodconfig build breaks. Despite being downstream/upstream of android14-6.1, this still uses the `main` build tools.",
+      "parentUuid": "1b7837bf_f6b36d88",
+      "revId": "843340070bd2c0010ace4b38b186c73c8c1ae16d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
