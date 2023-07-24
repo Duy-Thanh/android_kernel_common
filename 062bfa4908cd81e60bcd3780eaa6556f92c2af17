@@ -16,6 +16,23 @@
       "message": "see comment in the other change: https://android-review.git.corp.google.com/c/kernel/common/+/2670000/comments/6ff6e44b_16fe82f5\n\nthe `.gitignore` file changes can be reverted as well.",
       "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef8f8394_ea761850",
+        "filename": "scripts/gen_gki_modules_headers.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-24T09:38:54Z",
+      "side": 1,
+      "message": "Can we not generate this file into the OBJ tree instead? With the current implementation the file will\n - not be available for inspection (for debugging) in the obj tree\n - remain in the source tree if any prior operation fails such (this script sets `-e`)\n - not be able to be reused across builds, and hence needs to be generated unconditionally.",
+      "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
