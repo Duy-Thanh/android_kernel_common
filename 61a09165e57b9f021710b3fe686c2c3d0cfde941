@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc26bcc7_6eea3620",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-24T09:28:17Z",
+      "side": 1,
+      "message": "Please just do this in userspace, no need to do it from within the kernel.",
+      "parentUuid": "755e2f89_b550b219",
+      "range": {
+        "startLine": 545,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 32
+      },
+      "revId": "61a09165e57b9f021710b3fe686c2c3d0cfde941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "425e91e6_39c0c2f6",
         "filename": "android/abi_gki_aarch64_rtkstb",
         "patchSetId": 2
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "In the driver, I want to monitor the dwc3 gadget state. So, I use this API to read /sys/class/udc/98020000.dwc3/state.\nSince the driver can\u0027t get udc gadget status from other suitable API.\n\nThanks,\nStanley",
       "parentUuid": "425e91e6_39c0c2f6",
+      "range": {
+        "startLine": 757,
+        "startChar": 2,
+        "endLine": 757,
+        "endChar": 28
+      },
+      "revId": "61a09165e57b9f021710b3fe686c2c3d0cfde941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c1b2c6_8d49eda4",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-24T09:28:17Z",
+      "side": 1,
+      "message": "Reading from sysfs files is something that the kernel should NEVER be doing.  That is to be done in userspace, please do it all there instead.",
+      "parentUuid": "db47469e_c48305b0",
       "range": {
         "startLine": 757,
         "startChar": 2,
