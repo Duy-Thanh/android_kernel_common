@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000049462003",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2673795?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1823b187_ba3c8204",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-24T17:37:04Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2655900](https://r.android.com/c/2655900) on branch android12-5.10.\n\n```\n      ## drivers/android/vendor_hooks.c ##\n     @@\n    @@ drivers/android/vendor_hooks.c\n      \n      /*\n       * Export tracepoints that act as a bare tracehook (ie: have no trace event\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_page);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout_abort);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (81e741 FROMGIT: pstore: Revert pmsg_lock back to a normal mutex)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout_abort);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wakeup_bypass);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (b4b7d2 ANDROID: wakeupbypass: Add vendor hook for batteryswap)\n      /*\n       * For type visibility\n       */\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 549566100 android-build.ayeaye-python-dispatcher_20230720.02_p0",
+      "revId": "fd0fbd60a88eb86e6b8a9eb5451ce7ee72109736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000049462003",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2673795?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "29b01795_6183b4c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-24T17:37:04Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 549566100 android-build.ayeaye-python-dispatcher_20230720.02_p0",
+      "revId": "fd0fbd60a88eb86e6b8a9eb5451ce7ee72109736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
