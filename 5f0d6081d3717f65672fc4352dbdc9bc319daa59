@@ -39,6 +39,23 @@
       },
       "revId": "5f0d6081d3717f65672fc4352dbdc9bc319daa59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd208ed1_ed238a3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-24T19:42:53Z",
+      "side": 1,
+      "message": "Please add a followup patch to update symbols list and ABI definition",
+      "revId": "5f0d6081d3717f65672fc4352dbdc9bc319daa59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
