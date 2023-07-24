@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "755e2f89_b550b219",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1999541
+      },
+      "writtenOn": "2023-07-24T09:21:07Z",
+      "side": 1,
+      "message": "Monitor-usbport is a simple inspection driver. Check if the device is still alive. If the device becomes unresponsive, the driver will send a command to reset the device.\nIt is developed based on ledtrig-usbport. If the associated symbols cannot be exported. I\u0027ll look into other ways to do this.\n\nThanks,\nstanley",
+      "parentUuid": "0535d896_1ee1c25c",
+      "range": {
+        "startLine": 545,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 32
+      },
+      "revId": "61a09165e57b9f021710b3fe686c2c3d0cfde941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "425e91e6_39c0c2f6",
         "filename": "android/abi_gki_aarch64_rtkstb",
         "patchSetId": 2
@@ -72,6 +96,30 @@
       "writtenOn": "2023-07-24T08:45:42Z",
       "side": 1,
       "message": "for obvious reasons, this is not allowed.  Drivers can never read files from the filesystem directly.",
+      "range": {
+        "startLine": 757,
+        "startChar": 2,
+        "endLine": 757,
+        "endChar": 28
+      },
+      "revId": "61a09165e57b9f021710b3fe686c2c3d0cfde941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db47469e_c48305b0",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1999541
+      },
+      "writtenOn": "2023-07-24T09:21:07Z",
+      "side": 1,
+      "message": "In the driver, I want to monitor the dwc3 gadget state. So, I use this API to read /sys/class/udc/98020000.dwc3/state.\nSince the driver can\u0027t get udc gadget status from other suitable API.\n\nThanks,\nStanley",
+      "parentUuid": "425e91e6_39c0c2f6",
       "range": {
         "startLine": 757,
         "startChar": 2,
