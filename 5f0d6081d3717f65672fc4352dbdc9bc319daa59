@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "945538fd_d9d095c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-24T19:42:25Z",
+      "side": 1,
+      "message": "Add a note here:\n```\nFixes from aosp/2217901 were folded into this change.\n```",
+      "revId": "5f0d6081d3717f65672fc4352dbdc9bc319daa59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da37aef_db77f780",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-24T19:42:25Z",
+      "side": 1,
+      "message": "Should be:\n```\nChange-Id: I9a606ae71d2f1303df3b02403b30bc8fdc9d06dd\n```",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 0
+      },
+      "revId": "5f0d6081d3717f65672fc4352dbdc9bc319daa59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
