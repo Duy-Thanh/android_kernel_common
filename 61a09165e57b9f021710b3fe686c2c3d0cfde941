@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad5e9a35_1abe5757",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-24T08:45:42Z",
+      "side": 1,
+      "message": "You can not remove symbols from the list, how do you know if someone else isn\u0027t using them also now?",
+      "revId": "61a09165e57b9f021710b3fe686c2c3d0cfde941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0535d896_1ee1c25c",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-24T08:45:42Z",
+      "side": 1,
+      "message": "what is this module?  The usb_for_each_dev function is not allowed to be exported, and neither are a few others here.",
+      "range": {
+        "startLine": 545,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 32
+      },
+      "revId": "61a09165e57b9f021710b3fe686c2c3d0cfde941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "425e91e6_39c0c2f6",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-24T08:45:42Z",
+      "side": 1,
+      "message": "for obvious reasons, this is not allowed.  Drivers can never read files from the filesystem directly.",
+      "range": {
+        "startLine": 757,
+        "startChar": 2,
+        "endLine": 757,
+        "endChar": 28
+      },
+      "revId": "61a09165e57b9f021710b3fe686c2c3d0cfde941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
