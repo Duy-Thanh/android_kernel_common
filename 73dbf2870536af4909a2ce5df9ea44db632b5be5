@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1da17b_90a21f83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-24T07:00:55Z",
+      "side": 1,
+      "message": "Why not submit the needed fix upstream instead of having this out-of-tree hook?  This should be relevant for all DRM drivers, right?",
+      "revId": "73dbf2870536af4909a2ce5df9ea44db632b5be5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
