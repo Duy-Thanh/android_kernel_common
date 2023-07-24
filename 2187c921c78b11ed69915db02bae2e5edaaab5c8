@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade01ddf_252ae922",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-07-24T12:46:04Z",
+      "side": 1,
+      "message": "Actually, do we need to dereference the pointer resulting from this smp_load_acquire() directly? Is the second load below guaranteed to be ordered correctly?",
+      "range": {
+        "startLine": 1384,
+        "startChar": 17,
+        "endLine": 1384,
+        "endChar": 33
+      },
+      "revId": "2187c921c78b11ed69915db02bae2e5edaaab5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
