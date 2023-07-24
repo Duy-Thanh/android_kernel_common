@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "574cec11_9092c7bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-24T07:01:32Z",
+      "side": 1,
+      "message": "Why is a hook needed here, why can\u0027t your drm driver handle this instead?",
+      "revId": "b27f2edc24e5495c5752ef4aab1baa2915aa8fdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
