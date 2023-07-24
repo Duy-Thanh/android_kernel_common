@@ -33,6 +33,24 @@
       "message": "Can we not generate this file into the OBJ tree instead? With the current implementation the file will\n - not be available for inspection (for debugging) in the obj tree\n - remain in the source tree if any prior operation fails such (this script sets `-e`)\n - not be able to be reused across builds, and hence needs to be generated unconditionally.",
       "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d9b717_8bcb5855",
+        "filename": "scripts/gen_gki_modules_headers.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-07-24T17:34:04Z",
+      "side": 1,
+      "message": "In that case where it should be generated?\n\n- objtree was chosen to support wider use-case in the past: http://aosp/2441882\n\n- debugging inspection was my argument when you asked me to remove it in the past :), but I think it\u0027s mostly for dev purposes and source list is enough to debug unless working on the script when you can temporary disable this.\n\n- Line#118 generates it unconditionally; and it stays in the objtree if prior operation fails even without this removal, and force copy will make sure it is current on the next build.",
+      "parentUuid": "ef8f8394_ea761850",
+      "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
