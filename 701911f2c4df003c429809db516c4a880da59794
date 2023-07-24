@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c694692_082bc0d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-07-24T09:00:40Z",
+      "side": 1,
+      "message": "The code change needs to be split into a separate commit. Please (rebase), split and repush as a 2-commit series. Thank you.",
+      "revId": "701911f2c4df003c429809db516c4a880da59794",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
