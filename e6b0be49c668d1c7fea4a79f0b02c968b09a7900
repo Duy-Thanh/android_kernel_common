@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a346af54_0fae49d1",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-25T08:13:51Z",
+      "side": 1,
+      "message": "what is \"ipa\"?",
+      "range": {
+        "startLine": 106,
+        "startChar": 21,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "e6b0be49c668d1c7fea4a79f0b02c968b09a7900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a27372_d8c18d5d",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-25T08:13:51Z",
+      "side": 1,
+      "message": "what is \"ipa\"?",
+      "range": {
+        "startLine": 110,
+        "startChar": 23,
+        "endLine": 110,
+        "endChar": 26
+      },
+      "revId": "e6b0be49c668d1c7fea4a79f0b02c968b09a7900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
