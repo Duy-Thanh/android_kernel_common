@@ -252031,6 +252031,12 @@ function {
   parameter_id: 0x31596a61
 }
 function {
+  id: 0x099db0ca
+  return_type_id: 0x48b5725f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x33756485
+}
+function {
   id: 0x09b7dbae
   return_type_id: 0x48b5725f
   parameter_id: 0x603895d5
@@ -332769,6 +332775,24 @@ elf_symbol {
   full_name: "tcpm_vbus_change"
 }
 elf_symbol {
+  id: 0x7cfd9233
+  name: "teo_cpu_get_util_threshold"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0482d3ad
+  type_id: 0x2864f998
+  full_name: "teo_cpu_get_util_threshold"
+}
+elf_symbol {
+  id: 0xbd25c7d0
+  name: "teo_cpu_set_util_threshold"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xba6e00b6
+  type_id: 0x099db0ca
+  full_name: "teo_cpu_set_util_threshold"
+}
+elf_symbol {
   id: 0x5bbd3545
   name: "thermal_cdev_update"
   is_defined: true
@@ -344103,6 +344127,8 @@ interface {
   symbol_id: 0xae3ea97c
   symbol_id: 0xe083e91b
   symbol_id: 0x6869c83d
+  symbol_id: 0x7cfd9233
+  symbol_id: 0xbd25c7d0
   symbol_id: 0x5bbd3545
   symbol_id: 0xf4017fdd
   symbol_id: 0x2d1f2cdd
