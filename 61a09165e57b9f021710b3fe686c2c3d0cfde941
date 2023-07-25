@@ -36,6 +36,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68628d98_b69f763e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-07-25T01:53:43Z",
+      "side": 1,
+      "message": "We will find an alternative method for the \"monitor-usbport\" driver, and as a result, we are abandoning this commit.",
+      "revId": "61a09165e57b9f021710b3fe686c2c3d0cfde941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0535d896_1ee1c25c",
