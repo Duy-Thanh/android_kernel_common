@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0be5ee77_16465f0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-07-26T07:56:07Z",
+      "side": 1,
+      "message": "I\u0027d prefer to submit them together, once we know they\u0027re both passing presubmit.",
+      "parentUuid": "df56093e_3fb6c529",
+      "revId": "2187c921c78b11ed69915db02bae2e5edaaab5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ade01ddf_252ae922",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 2
