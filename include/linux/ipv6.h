@@ -86,7 +86,7 @@ struct ipv6_devconf {
 
 	struct ctl_table_header *sysctl_header;
 
-	ANDROID_KABI_USE(1, __s32 accept_ra_min_rtr_lft);
+	ANDROID_KABI_USE(1, __s32 accept_ra_min_lft);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
