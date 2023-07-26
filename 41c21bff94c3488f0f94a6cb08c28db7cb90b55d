@@ -16,6 +16,24 @@
       "message": "Why not submit the whole patchset including the driver?",
       "revId": "41c21bff94c3488f0f94a6cb08c28db7cb90b55d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "546c8d58_fb49c437",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1999541
+      },
+      "writtenOn": "2023-07-26T06:37:14Z",
+      "side": 1,
+      "message": "Okay. I have submitted whole patchset.\nhttps://android-review.googlesource.com/c/kernel/common/+/2676915 FROMLIST: phy: realtek: usb: Add driver for the Realtek SoC USB 2.0 PHY\nhttps://android-review.googlesource.com/c/kernel/common/+/2676916 FROMLIST: phy: realtek: usb: Add driver for the Realtek SoC USB 3.0 PHY\nhttps://android-review.googlesource.com/c/kernel/common/+/2676917 FROMLIST: dt-bindings: phy: realtek: Add Realtek DHC RTD SoC USB 2.0 PHY\nhttps://android-review.googlesource.com/c/kernel/common/+/2676918 FROMLIST: dt-bindings: phy: realtek: Add Realtek DHC RTD SoC USB 3.0 PHY\n\nThanks,\nStanley",
+      "parentUuid": "59282644_db506364",
+      "revId": "41c21bff94c3488f0f94a6cb08c28db7cb90b55d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
