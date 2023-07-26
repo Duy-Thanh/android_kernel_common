@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/293242517",
       "revId": "2c1a749906bfd658308414e2d59c183d3640cb68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0194d84f_85046b53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2023-07-26T08:58:21Z",
+      "side": 1,
+      "message": "Hi, please help to add \"Bug: 293242517\" in the commit message.",
+      "revId": "2c1a749906bfd658308414e2d59c183d3640cb68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
