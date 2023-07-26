@@ -51,6 +51,24 @@
       "parentUuid": "ef8f8394_ea761850",
       "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3683a32f_79fca5e6",
+        "filename": "scripts/gen_gki_modules_headers.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-26T10:11:03Z",
+      "side": 1,
+      "message": "Is it an option to generate it to the same location as other generated headers? `include/generated/` is commonly used and already in the include path.\n\nBut now I am also confused. The code says the file is generated into the objtree. How is it that it ends up in the src tree if not removed?",
+      "parentUuid": "77d9b717_8bcb5855",
+      "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
