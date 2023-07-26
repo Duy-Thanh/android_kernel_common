@@ -69,6 +69,24 @@
       "parentUuid": "77d9b717_8bcb5855",
       "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18aa9741_8824aea9",
+        "filename": "scripts/gen_gki_modules_headers.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-07-26T18:05:10Z",
+      "side": 1,
+      "message": "\u003e Is it an option to generate it to the same location as other generated headers? include/generated/ is commonly used and already in the include path.\n\nWe can do that; but it technically is not a header file and one may argue that it is contaminating the headers. Specially there are targets to just build headers in the kernel. Don\u0027t think there is a clear right or wrong answer here.\n\n\u003e But now I am also confused. The code says the file is generated into the objtree. How is it that it ends up in the src tree if not removed?\n\nIt does not end up in the source tree. http://b/286529877#comment3 : it\u0027s when the objtree is not set and kernel is being built in place and I don\u0027t think there is any protection against it.\n\nAlso, cherry pick of this CL has landed everywhere else; so I am expecting this to land as well. If we decide to do something different then it should be a CL on top of this. If you agree then please push forward this CL and we can continue the discussion on http://b/286529877.",
+      "parentUuid": "3683a32f_79fca5e6",
+      "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
