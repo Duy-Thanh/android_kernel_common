@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "548fb983_65bec0c7",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-26T07:33:56Z",
+      "side": 1,
+      "message": "The ipa refers to Intermediate Physical Address in ARMv8 architecture.\n\nreference: https://developer.arm.com/documentation/102142/0100/Secure-virtualization",
+      "parentUuid": "a346af54_0fae49d1",
+      "range": {
+        "startLine": 106,
+        "startChar": 21,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "e6b0be49c668d1c7fea4a79f0b02c968b09a7900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18a27372_d8c18d5d",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-25T08:13:51Z",
       "side": 1,
       "message": "what is \"ipa\"?",
+      "range": {
+        "startLine": 110,
+        "startChar": 23,
+        "endLine": 110,
+        "endChar": 26
+      },
+      "revId": "e6b0be49c668d1c7fea4a79f0b02c968b09a7900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7142ac7e_0e9b417c",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-26T07:33:56Z",
+      "side": 1,
+      "message": "The ipa refers to Intermediate Physical Address in ARMv8 architecture.\n\nreference: https://developer.arm.com/documentation/102142/0100/Secure-virtualization",
+      "parentUuid": "18a27372_d8c18d5d",
       "range": {
         "startLine": 110,
         "startChar": 23,
