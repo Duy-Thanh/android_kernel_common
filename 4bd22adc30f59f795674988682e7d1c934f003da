@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc09087_6ae821ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-07-27T23:13:02Z",
+      "side": 1,
+      "message": "Not sure, creating files under `include/config` is going to break anything or not; as that directory contains empty file for each kernel config item.",
+      "revId": "4bd22adc30f59f795674988682e7d1c934f003da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
