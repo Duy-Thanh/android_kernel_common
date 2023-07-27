@@ -147,8 +147,12 @@ struct usb_phy {
 	int	(*set_wakeup)(struct usb_phy *x, bool enabled);
 
 	/* notify phy port status change */
-	int	(*notify_port_status)(struct usb_phy *x, int port,
-				      u16 portstatus, u16 portchange);
+	/*
+	 * Move this API to ANDROID_KABI_RESERVE(0) for ABI freeze
+	 *
+	 * int	(*notify_port_status)(struct usb_phy *x, int port,
+	 * 			      u16 portstatus, u16 portchange);
+	 */
 
 	/* notify phy connect status change */
 	int	(*notify_connect)(struct usb_phy *x,
@@ -170,7 +174,8 @@ struct usb_phy {
 	 * https://lore.kernel.org/linux-usb/20230607062500.24669-1-stanley_chang@realtek.com/
 	 * for details.  All other slots are for "normal" future ABI breaks in LTS updates
 	 */
-	ANDROID_KABI_RESERVE(0);
+	ANDROID_KABI_USE(0, int (*notify_port_status)(struct usb_phy *x, int port,
+						      u16 portstatus, u16 portchange));
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
