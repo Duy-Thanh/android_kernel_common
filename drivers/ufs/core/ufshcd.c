@@ -10298,6 +10298,8 @@ int ufshcd_alloc_host(struct device *dev, struct ufs_hba **hba_handle)
 		goto out_error;
 	}
 
+	trace_android_vh_ufs_alloc_host(&ufshcd_driver_template);
+
 	host = scsi_host_alloc(&ufshcd_driver_template,
 				sizeof(struct ufs_hba));
 	if (!host) {

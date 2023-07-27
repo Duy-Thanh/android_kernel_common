@@ -144,6 +144,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sdev);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_clock_scaling);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_use_mcq_hooks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_mcq_abort);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_alloc_host);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_alloc_insert_iova);

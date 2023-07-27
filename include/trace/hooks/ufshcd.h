@@ -66,6 +66,11 @@ struct scsi_cmnd;
 DECLARE_HOOK(android_vh_ufs_mcq_abort,
 	TP_PROTO(struct ufs_hba *hba, struct scsi_cmnd *cmd, int *ret),
 	TP_ARGS(hba, cmd, ret));
+
+struct scsi_host_template;
+DECLARE_HOOK(android_vh_ufs_alloc_host,
+	TP_PROTO(struct scsi_host_template *sht),
+	TP_ARGS(sht));
 #endif /* _TRACE_HOOK_UFSHCD_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
