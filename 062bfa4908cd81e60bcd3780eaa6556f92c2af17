@@ -105,6 +105,24 @@
       "parentUuid": "3683a32f_79fca5e6",
       "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0d0986_fc231990",
+        "filename": "scripts/gen_gki_modules_headers.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-27T14:38:28Z",
+      "side": 1,
+      "message": "It turns out that I cannot read. 😐 I was under the assumption that this affects _all_ builds because the file is generated into the source tree. But I was wrong. This is affects only local builds. Now, we should not delete intermediate artifacts in order to inspect them and for incremental builds. As such _this_ change should not be done. Sorry for the confusion.\n\nHaving said that; in order to be a bit more in line what upstream does, we should generate files into directories that are known to be ignored already. The toplevel .gitignore file lists several locations that are already ignored for new files:\n\n```\n#\n# Generated include files\n#\n/include/config/\n/include/generated/\n/include/ksym/\n/arch/*/include/generated/\n```\n\nHow about one of the first two options?",
+      "parentUuid": "18aa9741_8824aea9",
+      "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
