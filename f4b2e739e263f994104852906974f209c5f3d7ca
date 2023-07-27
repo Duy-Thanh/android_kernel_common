@@ -22,6 +22,30 @@
       },
       "revId": "f4b2e739e263f994104852906974f209c5f3d7ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd130eed_0be63709",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3104,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-27T09:53:03Z",
+      "side": 0,
+      "message": "Fixed in the commit after this in the series.",
+      "parentUuid": "713854e7_33cb8693",
+      "range": {
+        "startLine": 3104,
+        "startChar": 23,
+        "endLine": 3104,
+        "endChar": 38
+      },
+      "revId": "f4b2e739e263f994104852906974f209c5f3d7ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
