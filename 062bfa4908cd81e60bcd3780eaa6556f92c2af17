@@ -123,6 +123,24 @@
       "parentUuid": "18aa9741_8824aea9",
       "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2493dbe_9b131b01",
+        "filename": "scripts/gen_gki_modules_headers.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-07-27T17:46:07Z",
+      "side": 1,
+      "message": "I am OK with the `/include/config/` as these files can be categorized as config files to generate the header files. I\u0027ll do the change; and reverts.\n\nThanks.",
+      "parentUuid": "ff0d0986_fc231990",
+      "revId": "062bfa4908cd81e60bcd3780eaa6556f92c2af17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
