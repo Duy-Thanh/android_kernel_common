@@ -52,6 +52,24 @@
       "parentUuid": "546c8d58_fb49c437",
       "revId": "41c21bff94c3488f0f94a6cb08c28db7cb90b55d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16faf2a1_3d9edd95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1999541
+      },
+      "writtenOn": "2023-07-27T07:24:15Z",
+      "side": 1,
+      "message": "The patch is added for abi.\nhttps://android-review.googlesource.com/c/kernel/common/+/2677279 ANDROID: GKI: usb: phy: use ANDROID_KABI_USE for api notify_port_status\n\nThanks.",
+      "parentUuid": "373130ab_c38af7d6",
+      "revId": "41c21bff94c3488f0f94a6cb08c28db7cb90b55d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
