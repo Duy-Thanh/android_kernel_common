@@ -3029,6 +3029,27 @@ __call_rcu_common(struct rcu_head *head, rcu_callback_t func, bool lazy_in)
 	}
 }
 
+/* Enable lazy rcu at boot time */
+int param_set_rcu_lazy(const char *val, const struct kernel_param *kp)
+{
+#ifdef CONFIG_RCU_LAZY
+	int ret = param_set_bool(val, kp);
+	rcu_barrier();
+	pr_info("enable_rcu_lazy=%s\n", val ? val : "Y");
+	return ret;
+#else
+	pr_info("Ignoring enable_rcu_lazy=%s, CONFIG_RCU_LAZY is not set.\n", val ? val : "Y");
+	return 0;
+#endif
+}
+static const struct kernel_param_ops rcu_lazy_ops = {
+	.flags = KERNEL_PARAM_OPS_FL_NOARG,
+	.set = param_set_rcu_lazy,
+	.get = param_get_bool,
+};
+static bool enable_rcu_lazy;
+module_param_cb(enable_rcu_lazy, &rcu_lazy_ops, &enable_rcu_lazy, 0444);
+
 #ifdef CONFIG_RCU_LAZY
 /**
  * call_rcu_hurry() - Queue RCU callback for invocation after grace period, and
@@ -3052,7 +3073,7 @@ __call_rcu_common(struct rcu_head *head, rcu_callback_t func, bool lazy_in)
  */
 void call_rcu_hurry(struct rcu_head *head, rcu_callback_t func)
 {
-	return __call_rcu_common(head, func, false);
+	return __call_rcu_common(head, func, !READ_ONCE(enable_rcu_lazy));
 }
 EXPORT_SYMBOL_GPL(call_rcu_hurry);
 #endif
@@ -3103,7 +3124,7 @@ EXPORT_SYMBOL_GPL(call_rcu_hurry);
  */
 void call_rcu(struct rcu_head *head, rcu_callback_t func)
 {
-	return __call_rcu_common(head, func, IS_ENABLED(CONFIG_RCU_LAZY));
+	return __call_rcu_common(head, func, IS_ENABLED(CONFIG_RCU_LAZY) && READ_ONCE(enable_rcu_lazy));
 }
 EXPORT_SYMBOL_GPL(call_rcu);
 
