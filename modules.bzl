@@ -6,6 +6,18 @@ This module contains a full list of kernel modules
  compiled by GKI.
 """
 
+AARCH64_GKI_MODULES_LIST = [
+    # keep sorted
+]
+
+RISCV64_GKI_MODULES_LIST = [
+    # keep sorted
+]
+
+X86_64_GKI_MODULES_LIST = [
+    # keep sorted
+]
+
 COMMON_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/block/zram/zram.ko",
