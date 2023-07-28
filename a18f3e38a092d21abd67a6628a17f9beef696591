@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bbacfaf_fb22856d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-28T19:48:45Z",
+      "side": 1,
+      "message": "Are you working on a version of this to submit upstream? The described issue doesn\u0027t seem android-specific. We would strongly prefer that this be fixed upstream instead of maintaining a hook in android-mainline. If there has been an attempt to upstream the feature, please point to it with a \"Link:\" tag in the commit message.",
+      "revId": "a18f3e38a092d21abd67a6628a17f9beef696591",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
