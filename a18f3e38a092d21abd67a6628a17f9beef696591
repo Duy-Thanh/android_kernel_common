@@ -16,6 +16,24 @@
       "message": "Are you working on a version of this to submit upstream? The described issue doesn\u0027t seem android-specific. We would strongly prefer that this be fixed upstream instead of maintaining a hook in android-mainline. If there has been an attempt to upstream the feature, please point to it with a \"Link:\" tag in the commit message.",
       "revId": "a18f3e38a092d21abd67a6628a17f9beef696591",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5c5f84_33cb93b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022258
+      },
+      "writtenOn": "2023-07-28T23:52:03Z",
+      "side": 1,
+      "message": "Currently, I haven\u0027t started working on upstreaming this feature. Upstreaming is a larger effort involving more resources, so we want to push these changes to android mainline to unblock future releases based on legacy design, as we don\u0027t have a well-defined timeline yet for upstreaming this feature and can\u0027t risk release timelines since this is a very critical feature in our products.",
+      "parentUuid": "0bbacfaf_fb22856d",
+      "revId": "a18f3e38a092d21abd67a6628a17f9beef696591",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
