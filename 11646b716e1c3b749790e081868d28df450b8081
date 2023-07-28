@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22d634d2_e586402c",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-07-28T20:09:23Z",
+      "side": 1,
+      "message": "My suggestion:\n\n- Add `get_gki_modules_list` function\n- Announce removal of `COMMON_GKI_MODULES_LIST` on GKI newsletter\n- After a few weeks, delete `COMMON_GKI_MODULES_LIST` from mainline and android15\n- Start adding arch specific modules",
+      "parentUuid": "e8efaa57_84f1f9c7",
+      "range": {
+        "startLine": 53,
+        "startChar": 32,
+        "endLine": 53,
+        "endChar": 82
+      },
+      "revId": "11646b716e1c3b749790e081868d28df450b8081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cc2c3dd_c85d9e70",
         "filename": "BUILD.bazel",
         "patchSetId": 2
