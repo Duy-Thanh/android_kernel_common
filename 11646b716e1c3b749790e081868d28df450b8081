@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc2c3dd_c85d9e70",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-28T11:52:03Z",
+      "side": 1,
+      "message": "there are likely more users here for the additional arrays.",
+      "range": {
+        "startLine": 413,
+        "startChar": 18,
+        "endLine": 413,
+        "endChar": 41
+      },
+      "revId": "11646b716e1c3b749790e081868d28df450b8081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
