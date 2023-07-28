@@ -95,6 +95,9 @@ struct clk_core {
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/clk.h>
+#undef CREATE_TRACE_POINTS
+
+#include <trace/hooks/clk.h>
 
 struct clk {
 	struct clk_core	*core;
@@ -2762,13 +2765,15 @@ static int clk_core_set_parent_nolock(struct clk_core *core,
 	int ret = 0;
 	int p_index = 0;
 	unsigned long p_rate = 0;
+	bool bypass = false;
 
 	lockdep_assert_held(&prepare_lock);
 
 	if (!core)
 		return 0;
 
-	if (core->parent == parent)
+	trace_android_vh_allow_clk_reparent(core->flags, &bypass);
+	if ((core->parent == parent) && !bypass)
 		return 0;
 
 	/* verify ops for multi-parent clks */
