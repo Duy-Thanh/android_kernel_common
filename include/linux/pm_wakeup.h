@@ -14,6 +14,7 @@
 #endif
 
 #include <linux/types.h>
+#include <linux/android_vendor.h>
 
 struct wake_irq;
 
@@ -61,6 +62,7 @@ struct wakeup_source {
 	struct device		*dev;
 	bool			active:1;
 	bool			autosleep_enabled:1;
+	ANDROID_OEM_DATA(1);
 };
 
 #define for_each_wakeup_source(ws) \
