@@ -229,6 +229,9 @@ DECLARE_HOOK(android_vh_alloc_flags_cma_adjust,
 DECLARE_HOOK(android_vh_rmqueue_cma_fallback,
 	TP_PROTO(struct zone *zone, unsigned int order, struct page **page),
 	TP_ARGS(zone, order, page));
+DECLARE_HOOK(android_vh_if_try_cma_fallback,
+	TP_PROTO(bool *try_cma),
+	TP_ARGS(try_cma));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
