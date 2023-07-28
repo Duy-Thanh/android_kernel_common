@@ -109,6 +109,18 @@ struct swap_info_struct *swap_type_to_swap_info(int type)
 }
 EXPORT_SYMBOL_GPL(swap_type_to_swap_info);
 
+void get_swap_avail_lock(void)
+{
+	spin_lock(&swap_avail_lock);
+}
+EXPORT_SYMBOL_GPL(get_swap_avail_lock);
+
+void put_swap_avail_lock(void)
+{
+	spin_unlock(&swap_avail_lock);
+}
+EXPORT_SYMBOL_GPL(put_swap_avail_lock);
+
 static inline unsigned char swap_count(unsigned char ent)
 {
 	return ent & ~SWAP_HAS_CACHE;	/* may include COUNT_CONTINUED flag */

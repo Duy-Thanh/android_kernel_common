@@ -9,6 +9,8 @@
   swap_alloc_cluster
   swapcache_free_entries
   swap_type_to_swap_info
+  get_swap_avail_lock
+  put_swap_avail_lock
   __traceiter_android_rvh_alloc_si
   __traceiter_android_rvh_alloc_swap_slot_cache
   __traceiter_android_rvh_drain_slots_cache_cpu
