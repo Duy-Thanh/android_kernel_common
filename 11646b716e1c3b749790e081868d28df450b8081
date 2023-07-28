@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f77439fd_5cefeb0e",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-07-28T20:06:59Z",
+      "side": 1,
+      "message": "nit: please break into multiple lines",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 130
+      },
+      "revId": "11646b716e1c3b749790e081868d28df450b8081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8efaa57_84f1f9c7",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-07-28T20:06:59Z",
+      "side": 1,
+      "message": "I think partners rely on the fact that COMMON_GKI_MODULES_LIST is the aarch64 GKI list.\n\nPerhaps we should actively break it by deleting `COMMON_GKI_MODULES_LIST` variable completely? Of course, announce it in GKI newsletter first.\n\n---\n\nAlso, there\u0027s no good way to \"deprecate\" variables in Bazel, but functions can be deprecated properly (by adding the \"Deprecated:\" section in doc). Perhaps this should be a function instead? e.g. `get_gki_modules_list(\"arm64\")`\n\nThis way if we need to deprecate more things in the future, we have more control.",
+      "range": {
+        "startLine": 53,
+        "startChar": 32,
+        "endLine": 53,
+        "endChar": 82
+      },
+      "revId": "11646b716e1c3b749790e081868d28df450b8081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cc2c3dd_c85d9e70",
         "filename": "BUILD.bazel",
         "patchSetId": 2
