@@ -16,6 +16,24 @@
       "message": "Not sure, creating files under `include/config` is going to break anything or not; as that directory contains empty file for each kernel config item.",
       "revId": "4bd22adc30f59f795674988682e7d1c934f003da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9bcf9a_65c535f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-07-28T06:02:21Z",
+      "side": 1,
+      "message": "May not be an issue as `include/config` also contains other files as well like `auto.conf`.",
+      "parentUuid": "bfc09087_6ae821ac",
+      "revId": "4bd22adc30f59f795674988682e7d1c934f003da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
