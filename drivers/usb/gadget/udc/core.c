@@ -752,6 +752,9 @@ EXPORT_SYMBOL_GPL(usb_gadget_disconnect);
  * usb_gadget_activate() is called.  For example, user mode components may
  * need to be activated before the system can talk to hosts.
  *
+ * This routine may sleep; it must not be called in interrupt context
+ * (such as from within a gadget driver's disconnect() callback).
+ *
  * Returns zero on success, else negative errno.
  */
 int usb_gadget_deactivate(struct usb_gadget *gadget)
@@ -787,6 +790,8 @@ EXPORT_SYMBOL_GPL(usb_gadget_deactivate);
  *
  * This routine activates gadget which was previously deactivated with
  * usb_gadget_deactivate() call. It calls usb_gadget_connect() if needed.
+ *
+ * This routine may sleep; it must not be called in interrupt context.
  *
  * Returns zero on success, else negative errno.
  */
@@ -1434,8 +1439,17 @@ static void usb_gadget_remove_driver(struct usb_udc *udc)
 	usb_gadget_disable_async_callbacks(udc);
 	if (udc->gadget->irq)
 		synchronize_irq(udc->gadget->irq);
+	mutex_unlock(&connect_lock);
+
 	udc->driver->unbind(udc->gadget);
+<<<<<<< HEAD   (0e5dcb ANDROID: KVM: arm64: Move addr_is_allowed_memory() check int)
 	usb_gadget_udc_stop(udc);
+=======
+
+	mutex_lock(&connect_lock);
+	usb_gadget_udc_stop_locked(udc);
+	mutex_unlock(&connect_lock);
+>>>>>>> CHANGE (5faa18 BACKPORT: USB: Gadget: core: Help prevent panic during UVC u)
 
 	udc->driver = NULL;
 	udc->gadget->dev.driver = NULL;
