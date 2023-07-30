@@ -34,6 +34,24 @@
       "parentUuid": "0bbacfaf_fb22856d",
       "revId": "a18f3e38a092d21abd67a6628a17f9beef696591",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a5bfb3_3dc3cb36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-30T17:08:09Z",
+      "side": 1,
+      "message": "We can\u0027t take hooks without any plans for getting the real fix upstream for obvious reasons.  Please submit the needed upstream changes and then we can just take those changes instead.",
+      "parentUuid": "aa5c5f84_33cb93b0",
+      "revId": "a18f3e38a092d21abd67a6628a17f9beef696591",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
