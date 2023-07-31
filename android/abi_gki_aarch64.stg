@@ -308678,6 +308678,14 @@ function {
   parameter_id: 0x1c3dbe5a
 }
 function {
+  id: 0x9bdcd7ce
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9bdcf60d
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -308784,6 +308792,13 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9bdf0ac7
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9bdfa419
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
@@ -308876,6 +308891,16 @@ function {
   parameter_id: 0x1b2ca025
   parameter_id: 0x2a670b41
   parameter_id: 0x1c898f28
+}
+function {
+  id: 0x9be67f35
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1013df15
+  parameter_id: 0x27d4bd81
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x2c32dd96
+  parameter_id: 0x1bf16028
 }
 function {
   id: 0x9be6a9ad
@@ -323117,6 +323142,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_revert_creds"
 }
 elf_symbol {
+  id: 0xf0ffb4d4
+  name: "__traceiter_android_rvh_rtmutex_force_update"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe3eba434
+  type_id: 0x9bdcd7ce
+  full_name: "__traceiter_android_rvh_rtmutex_force_update"
+}
+elf_symbol {
   id: 0xd90a9a58
   name: "__traceiter_android_rvh_rtmutex_prepare_setprio"
   is_defined: true
@@ -324755,6 +324789,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_rtmutex_wait_start"
 }
 elf_symbol {
+  id: 0xc56d7179
+  name: "__traceiter_android_vh_rtmutex_waiter_prio"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x40a0002c
+  type_id: 0x9bdf0ac7
+  full_name: "__traceiter_android_vh_rtmutex_waiter_prio"
+}
+elf_symbol {
   id: 0x5858f827
   name: "__traceiter_android_vh_rwsem_can_spin_on_owner"
   is_defined: true
@@ -325059,6 +325102,15 @@ elf_symbol {
   crc: 0x40207816
   type_id: 0x9bcd4ff7
   full_name: "__traceiter_android_vh_sysrq_crash"
+}
+elf_symbol {
+  id: 0xdd9dd67b
+  name: "__traceiter_android_vh_task_blocks_on_rtmutex"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x698af67b
+  type_id: 0x9be67f35
+  full_name: "__traceiter_android_vh_task_blocks_on_rtmutex"
 }
 elf_symbol {
   id: 0x6befbf23
@@ -326292,6 +326344,15 @@ elf_symbol {
   crc: 0x031591c5
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_revert_creds"
+}
+elf_symbol {
+  id: 0xf2fd13ea
+  name: "__tracepoint_android_rvh_rtmutex_force_update"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xa86a5262
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_rtmutex_force_update"
 }
 elf_symbol {
   id: 0x69e37d02
@@ -327932,6 +327993,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_rtmutex_wait_start"
 }
 elf_symbol {
+  id: 0xeaebbadf
+  name: "__tracepoint_android_vh_rtmutex_waiter_prio"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x0fbb21e2
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rtmutex_waiter_prio"
+}
+elf_symbol {
   id: 0xe471b8d5
   name: "__tracepoint_android_vh_rwsem_can_spin_on_owner"
   is_defined: true
@@ -328236,6 +328306,15 @@ elf_symbol {
   crc: 0x1ce924b5
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_sysrq_crash"
+}
+elf_symbol {
+  id: 0xe5bf742d
+  name: "__tracepoint_android_vh_task_blocks_on_rtmutex"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x5494b8bf
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_task_blocks_on_rtmutex"
 }
 elf_symbol {
   id: 0x6f25dd05
@@ -380735,6 +380814,7 @@ interface {
   symbol_id: 0xe3e24295
   symbol_id: 0xaedef3a2
   symbol_id: 0xde725472
+  symbol_id: 0xf0ffb4d4
   symbol_id: 0xd90a9a58
   symbol_id: 0xbf64b0b6
   symbol_id: 0xb25ca194
@@ -380917,6 +380997,7 @@ interface {
   symbol_id: 0x91384eff
   symbol_id: 0x3ef508a2
   symbol_id: 0xfb1b8d64
+  symbol_id: 0xc56d7179
   symbol_id: 0x5858f827
   symbol_id: 0xb1847a6f
   symbol_id: 0x958d8cdb
@@ -380951,6 +381032,7 @@ interface {
   symbol_id: 0x58e7556b
   symbol_id: 0x2ecf85e9
   symbol_id: 0x34a01a22
+  symbol_id: 0xdd9dd67b
   symbol_id: 0x6befbf23
   symbol_id: 0x226cc38b
   symbol_id: 0xeecc1529
@@ -381088,6 +381170,7 @@ interface {
   symbol_id: 0x18bac297
   symbol_id: 0x1a849f34
   symbol_id: 0x3f328d3c
+  symbol_id: 0xf2fd13ea
   symbol_id: 0x69e37d02
   symbol_id: 0xeda5c5b0
   symbol_id: 0x3cd58ada
@@ -381270,6 +381353,7 @@ interface {
   symbol_id: 0x3fc5ffc9
   symbol_id: 0xa3915d70
   symbol_id: 0xf01f02ea
+  symbol_id: 0xeaebbadf
   symbol_id: 0xe471b8d5
   symbol_id: 0x84628825
   symbol_id: 0x8d0ce77d
@@ -381304,6 +381388,7 @@ interface {
   symbol_id: 0x39e68fed
   symbol_id: 0xefb9e5a3
   symbol_id: 0x3fe0157c
+  symbol_id: 0xe5bf742d
   symbol_id: 0x6f25dd05
   symbol_id: 0xa5c71571
   symbol_id: 0xfa3284c7
