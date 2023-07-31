@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c2d6947_dfa16556",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-07-31T13:03:33Z",
+      "side": 1,
+      "message": "\u003e Please **attach the following Buganizer ID(s)** to the commit message: 263189538.\n\u003e These IDs were found in the original change with number \u00272366747\u0027 but not in this cherry pick.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 551532102 android-build.ayeaye-python-dispatcher_20230727.05_p0\n\nPlease fix.",
+      "parentUuid": "3b82d13d_8e198e70",
+      "revId": "2b498e3f5849e76924a79e2882f9c15ae3567527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
