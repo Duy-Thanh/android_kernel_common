@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
 
-use core::{mem::take, ops::Range};
+use core::{mem::take, ops::Range, sync::atomic::{AtomicU32, Ordering}};
 use kernel::{
     bindings,
     cred::Credential,
@@ -775,7 +775,10 @@ impl Process {
         let alloc = crate::range_alloc::ReserveNewBox::try_new()?;
         inner = self.inner.lock();
         mapping = inner.mapping.as_mut().ok_or_else(BinderError::new_dead)?;
-        let offset = mapping.alloc.reserve_new(size, is_oneway, alloc)?;
+        let perf_log = NaivePerfLog::before("reserve_new");
+        let reservation = mapping.alloc.reserve_new(size, is_oneway, alloc);
+        perf_log.after();
+        let offset = reservation?;
         Ok(Allocation::new(
             self,
             offset,
@@ -790,7 +793,10 @@ impl Process {
         let mut inner = self.inner.lock();
         let mapping = inner.mapping.as_mut()?;
         let offset = ptr.checked_sub(mapping.address)?;
-        let (size, odata) = mapping.alloc.reserve_existing(offset).ok()?;
+        let perf_log = NaivePerfLog::before("reserve_existing");
+        let reservation = mapping.alloc.reserve_existing(offset);
+        perf_log.after();
+        let (size, odata) = reservation.ok()?;
         let mut alloc = Allocation::new(self, offset, size, ptr, mapping.pages.clone());
         if let Some(data) = odata {
             alloc.set_info(data);
@@ -801,17 +807,19 @@ impl Process {
     pub(crate) fn buffer_raw_free(&self, ptr: usize) {
         let mut inner = self.inner.lock();
         if let Some(ref mut mapping) = &mut inner.mapping {
-            if ptr < mapping.address
-                || mapping
+            if ptr < mapping.address {
+                let perf_log = NaivePerfLog::before("reservation_abort");
+                let abort = mapping
                     .alloc
-                    .reservation_abort(ptr - mapping.address)
-                    .is_err()
-            {
-                pr_warn!(
-                    "Pointer {:x} failed to free, base = {:x}\n",
-                    ptr,
-                    mapping.address
-                );
+                    .reservation_abort(ptr - mapping.address);
+                perf_log.after();
+                if abort.is_err() {
+                    pr_warn!(
+                        "Pointer {:x} failed to free, base = {:x}\n",
+                        ptr,
+                        mapping.address
+                    );
+                }
             }
         }
     }
@@ -819,7 +827,10 @@ impl Process {
     pub(crate) fn buffer_make_freeable(&self, offset: usize, data: Option<AllocationInfo>) {
         let mut inner = self.inner.lock();
         if let Some(ref mut mapping) = &mut inner.mapping {
-            if mapping.alloc.reservation_commit(offset, data).is_err() {
+            let perf_log = NaivePerfLog::before("reservation_commit");
+            let commit = mapping.alloc.reservation_commit(offset, data);
+            perf_log.after();
+            if commit.is_err() {
                 pr_warn!("Offset {} failed to be marked freeable\n", offset);
             }
         }
@@ -1382,5 +1393,24 @@ impl Drop for Registration<'_> {
     fn drop(&mut self) {
         let mut inner = self.process.inner.lock();
         unsafe { inner.ready_threads.remove(self.thread) };
+    }
+}
+
+static PERF_LOG_ID: AtomicU32 = AtomicU32::new(1);
+
+struct NaivePerfLog<'a> {
+    id: u32,
+    operation: &'a str,
+}
+
+impl<'a> NaivePerfLog<'a> {
+    fn before(operation: &'a str) -> Self {
+        let id = PERF_LOG_ID.fetch_add(1, Ordering::Relaxed);
+        pr_warn!("PERF_LOG_ID: {}, {}: before", id, operation);
+        Self { id, operation }
+    }
+
+    fn after(self) {
+        pr_warn!("PERF_LOG_ID: {}, {}: after", self.id, self.operation);
     }
 }
