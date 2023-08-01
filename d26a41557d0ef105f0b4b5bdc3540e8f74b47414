@@ -16,6 +16,23 @@
       "message": "Hi Feng Xiao, please help to add \"Bug: 293964464\" in the commit message.",
       "revId": "d26a41557d0ef105f0b4b5bdc3540e8f74b47414",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcf8af81_c366f835",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2023-08-01T02:48:28Z",
+      "side": 1,
+      "message": "Respin Bug: b/293964464",
+      "revId": "d26a41557d0ef105f0b4b5bdc3540e8f74b47414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
