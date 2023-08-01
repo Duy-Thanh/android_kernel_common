@@ -33,6 +33,23 @@
       "message": "Bug: 263189538\nBug: 293380009",
       "revId": "e2f397abeb95298c0bc1665830bdfb2ecc040e86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d8a3c6_3cb95e65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-01T09:45:47Z",
+      "side": 1,
+      "message": "same issues as on earlier commits in this series.",
+      "revId": "e2f397abeb95298c0bc1665830bdfb2ecc040e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
