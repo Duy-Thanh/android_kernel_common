@@ -97,6 +97,24 @@
       "message": "the signed-off-by from the original commit is gone, please restore.",
       "revId": "204c0bcc95da0e1f536bde6d63c0b0daaebfa0b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a20e04e0_b58dca7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2023-08-01T12:29:18Z",
+      "side": 1,
+      "message": "Signed-off-by: Krishna Kurapati \u003cquic_kriskura@quicinc.com\u003e",
+      "parentUuid": "83b40e95_2f82fb68",
+      "revId": "204c0bcc95da0e1f536bde6d63c0b0daaebfa0b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
