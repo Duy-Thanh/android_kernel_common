@@ -6016,6 +6016,15 @@ void scheduler_tick(void)
 	rq_lock(rq, &rf);
 	curr = rq_selected(rq);
 
+#ifdef CONFIG_PROXY_EXEC
+	if (task_cpu(curr) != cpu) {
+		BUG_ON(!test_preempt_need_resched() &&
+		       !tif_need_resched());
+		rq_unlock(rq, &rf);
+		return;
+	}
+#endif
+
 	update_rq_clock(rq);
 
 	thermal_pressure = arch_scale_thermal_pressure(cpu_of(rq));
