@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "931c492b_38620525",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-01T09:44:31Z",
+      "side": 1,
+      "message": "use your name, not your email alias.",
+      "range": {
+        "startLine": 23,
+        "startChar": 15,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "204c0bcc95da0e1f536bde6d63c0b0daaebfa0b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "01f18e9d_487267cb",
@@ -31,6 +54,23 @@
       "writtenOn": "2023-08-01T09:34:48Z",
       "side": 1,
       "message": "had modify",
+      "revId": "204c0bcc95da0e1f536bde6d63c0b0daaebfa0b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b40e95_2f82fb68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-01T09:44:31Z",
+      "side": 1,
+      "message": "the signed-off-by from the original commit is gone, please restore.",
       "revId": "204c0bcc95da0e1f536bde6d63c0b0daaebfa0b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
