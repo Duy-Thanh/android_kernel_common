@@ -16,6 +16,23 @@
       "message": "Sorry, it seems I have missed some patches causing build errors.\nI am correcting them now.",
       "revId": "7dec28703c731d8a62d88e7d5d00db3739e42e02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b4c5182_73050a7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-08-01T06:09:26Z",
+      "side": 1,
+      "message": "This patch depends on another one, please also review it:\nhttps://android-review.googlesource.com/c/kernel/common/+/2685786",
+      "revId": "7dec28703c731d8a62d88e7d5d00db3739e42e02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
