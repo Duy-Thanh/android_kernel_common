@@ -3339,3 +3339,5 @@
   set_blocksize
   submit_bio_wait
 
+# required by random_fast.ko
+  add_interrupt_randomness
