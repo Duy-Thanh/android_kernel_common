@@ -33,6 +33,24 @@
       "message": "The 2022-12 branch is no longer eligible for respins: https://preview.source.android.com/docs/core/architecture/kernel/gki-android12-5_10-release-builds#december-2022-releases",
       "revId": "532a0ce1a3d953a4d939067a6cfb98b9f6c45504",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd039109_6cb5259b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010921
+      },
+      "writtenOn": "2023-08-01T11:15:36Z",
+      "side": 1,
+      "message": "Hi, google team\n\nWe are the memory team of vivo mobile phone. After upgrading the LTS major version of Qualcomm and MTK platforms,\nthere were many complaints from the market that the system was stuck due to memory not being reclaimed.\n\nWe have internally investigated the reason and found that it was caused by a bug in SPF that was introduced\nwhen upgrading the LTS to the following TAG line: branch: android12-5.10-2022-12, tag: android12-5.10-2022-12_r3.\nThe bug has been fixed in the tag: android12-5.10-2023-01_r4 tag line.\nHowever, since this tag line is one month later than our current tag: android12-5.10-2022-12_r3,\nwe cannot directly upgrade to 2023-01_r4 for fear of introducing other problems.\n\nBased on the above reasons, we have applied for a respin and cherry-picked the fix to tag: android12-5.10-2022-12_r3.\nYour response is that tag: android12-5.10-2022-12_r3 is not currently supported for upgrade.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2679279\n\nWhat is the reason for not upgrading and how will you handle such issues in the future?\n\nThanks",
+      "parentUuid": "ffb8f131_466d4504",
+      "revId": "532a0ce1a3d953a4d939067a6cfb98b9f6c45504",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
