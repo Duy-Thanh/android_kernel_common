@@ -50,6 +50,24 @@
       "message": "same issues as on earlier commits in this series.",
       "revId": "e2f397abeb95298c0bc1665830bdfb2ecc040e86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5293b547_14454cc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2023-08-01T10:08:22Z",
+      "side": 1,
+      "message": "Signed-off-by: Lianqin Hu \u003chulianqin@vivo.com\u003e",
+      "parentUuid": "15d8a3c6_3cb95e65",
+      "revId": "e2f397abeb95298c0bc1665830bdfb2ecc040e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
