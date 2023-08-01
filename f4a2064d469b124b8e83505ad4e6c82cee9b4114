@@ -42,6 +42,49 @@
       },
       "revId": "f4a2064d469b124b8e83505ad4e6c82cee9b4114",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000050045260",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2686266?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "6bc2a890_a358ca1f",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 15,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: wangyongqiang \u003cwangyongqiang1@oppo.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "cdbc55a7_7312c403",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-01T18:40:23Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: wangyongqiang \u003cwangyongqiang1@oppo.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 552476944 android-build.ayeaye-python-dispatcher_20230731.05_p0",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "f4a2064d469b124b8e83505ad4e6c82cee9b4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
