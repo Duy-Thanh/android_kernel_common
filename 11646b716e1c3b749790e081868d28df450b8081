@@ -116,6 +116,30 @@
       },
       "revId": "11646b716e1c3b749790e081868d28df450b8081",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60a2f57b_c2fb586b",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-08-02T21:01:29Z",
+      "side": 1,
+      "message": "+1. You can do that by hiding the list by renaming it to `_COMMON_GKI_MODULES_LIST`.",
+      "parentUuid": "8c4d58a5_5a74cc99",
+      "range": {
+        "startLine": 413,
+        "startChar": 18,
+        "endLine": 413,
+        "endChar": 41
+      },
+      "revId": "11646b716e1c3b749790e081868d28df450b8081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
