@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7693276a_0a839288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973061
+      },
+      "writtenOn": "2023-08-02T16:05:24Z",
+      "side": 1,
+      "message": "what is ths  reasons ? please remind me ，thanks.",
+      "parentUuid": "2f5ce128_1bb40211",
+      "revId": "717e4e19051281fa8ba985596ecbfaeab0c0bd21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f42c338d_c2d00831",
         "filename": "android/abi_gki_aarch64_unisoc",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2023-08-02T11:41:56Z",
       "side": 1,
       "message": "where is the source for this kernel module at?",
+      "range": {
+        "startLine": 3342,
+        "startChar": 0,
+        "endLine": 3342,
+        "endChar": 28
+      },
+      "revId": "717e4e19051281fa8ba985596ecbfaeab0c0bd21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae00883_9679a417",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3342,
+      "author": {
+        "id": 1973061
+      },
+      "writtenOn": "2023-08-02T16:05:24Z",
+      "side": 1,
+      "message": "Hi Greg, My code is following:\n\nstatic int __init random_fast_init(void)\n{\n      int i \u003d 1024*16;\n      int j \u003d 0;\n      \n      whiel(rng_is_initialized() \u003d\u003d falset \u0026\u0026 i--){\n             add_device_randomness(NULL, 0);\n             add_interrupt_randomness(ktime_get()%10000)\n             \n             j++;\n             if(j/1024){\n                 j\u003d0;\n                 msleep(1);\n             }\n      }\n}\n\nthe reason is folowing:\n   if have not this ko, kernel prints the log \"crng init done\" after about 7 seconds of bootup。\n   if have this ko,kernel prints the log \"crng init done\" after about 0.7 seconds of bootup。",
+      "parentUuid": "f42c338d_c2d00831",
       "range": {
         "startLine": 3342,
         "startChar": 0,
