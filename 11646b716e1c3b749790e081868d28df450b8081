@@ -92,6 +92,30 @@
       },
       "revId": "11646b716e1c3b749790e081868d28df450b8081",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c4d58a5_5a74cc99",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-08-02T18:05:02Z",
+      "side": 1,
+      "message": "If `COMMON_GKI_MODULES_LIST` is being consumed by partners; is it a good idea to make it as an internal; and expose `{ARCH}_GKI_MODULES_LIST` as a public interface?\n\nIn `modules.bzl`:\n\n```\nAARCH64_GKI_MODULES_LIST \u003d COMMON_GKI_MODULES_LIST + \n[\n    # keep sorted\n]\n```",
+      "parentUuid": "0cc2c3dd_c85d9e70",
+      "range": {
+        "startLine": 413,
+        "startChar": 18,
+        "endLine": 413,
+        "endChar": 41
+      },
+      "revId": "11646b716e1c3b749790e081868d28df450b8081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
