@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf60bcf5_700f5e64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-08-02T11:40:15Z",
+      "side": 1,
+      "message": "The original revert had the following motivation:\n\n\"This reverts commit 8ecd88d9d38f849d5aac59596ebc7a8679405f5b as it is broken with regards to upstream changes made in 6.1.12\"\n\nCould you please explain what has changed since that makes this patch applicable again?",
+      "revId": "23da9648f3016d8a6d6fdeb3c4d0dad6cbc701be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
