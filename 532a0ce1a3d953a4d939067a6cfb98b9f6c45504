@@ -51,6 +51,23 @@
       "parentUuid": "ffb8f131_466d4504",
       "revId": "532a0ce1a3d953a4d939067a6cfb98b9f6c45504",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb30f33_f2c87323",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010921
+      },
+      "writtenOn": "2023-08-02T07:47:50Z",
+      "side": 1,
+      "message": "Hello! \nCurrently, due to this bug, there have been significant complaints from the market for our export project. We need to apply for a respin as soon as possible to address this issue. Please help us to resolve this issue as soon as possible. \nThank you!",
+      "revId": "532a0ce1a3d953a4d939067a6cfb98b9f6c45504",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
