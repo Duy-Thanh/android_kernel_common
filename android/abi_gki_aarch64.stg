@@ -1,10 +1,12 @@
-version: 0x00000001
+version: 0x00000002
 root_id: 0x84ea5130
-void {
+special {
   id: 0x48b5725f
+  kind: VOID
 }
-variadic {
+special {
   id: 0xa52a0930
+  kind: VARIADIC
 }
 pointer_reference {
   id: 0x0006db1d
