@@ -16,6 +16,29 @@
       "message": "For obvious reasons, exporting this symbol is not a good idea.",
       "revId": "717e4e19051281fa8ba985596ecbfaeab0c0bd21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f42c338d_c2d00831",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3342,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-02T11:41:56Z",
+      "side": 1,
+      "message": "where is the source for this kernel module at?",
+      "range": {
+        "startLine": 3342,
+        "startChar": 0,
+        "endLine": 3342,
+        "endChar": 28
+      },
+      "revId": "717e4e19051281fa8ba985596ecbfaeab0c0bd21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
