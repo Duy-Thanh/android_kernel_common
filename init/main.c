@@ -1566,3 +1566,4 @@ static noinline void __init kernel_init_freeable(void)
 
 	integrity_load_keys();
 }
+
