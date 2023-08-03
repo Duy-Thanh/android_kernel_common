@@ -825,7 +825,7 @@ hitted:
 	tight &= (clt->mode >= COLLECT_PRIMARY_HOOKED &&
 		  clt->mode != COLLECT_PRIMARY_FOLLOWED_NOINPLACE);
 
-	cur = end - min_t(unsigned int, offset + end - map->m_la, end);
+	cur = end - min_t(erofs_off_t, offset + end - map->m_la, end);
 	if (!(map->m_flags & EROFS_MAP_MAPPED)) {
 		zero_user_segment(page, cur, end);
 		goto next_part;
@@ -929,7 +929,10 @@ static void z_erofs_decompress_kickoff(struct z_erofs_decompressqueue *io,
 		rcu_read_unlock();
 #else
 		queue_work(z_erofs_workqueue, &io->u.work);
+<<<<<<< HEAD   (ab7625 ANDROID: ABI: Update STG ABI to format version 2)
 #endif
+=======
+>>>>>>> BRANCH (cdd3cd Linux 5.15.121)
 		sbi->opt.readahead_sync_decompress = true;
 		return;
 	}
@@ -1616,6 +1619,13 @@ static void z_erofs_readahead(struct readahead_control *rac)
 {
 	struct inode *const inode = rac->mapping->host;
 	struct erofs_sb_info *const sbi = EROFS_I_SB(inode);
+<<<<<<< HEAD   (ab7625 ANDROID: ABI: Update STG ABI to format version 2)
+=======
+
+	unsigned int nr_pages = readahead_count(rac);
+	bool sync = (sbi->opt.readahead_sync_decompress &&
+			nr_pages <= sbi->opt.max_sync_decompress_pages);
+>>>>>>> BRANCH (cdd3cd Linux 5.15.121)
 	struct z_erofs_decompress_frontend f = DECOMPRESS_FRONTEND_INIT(inode);
 	struct page *pagepool = NULL, *head = NULL, *page;
 	unsigned int nr_pages;

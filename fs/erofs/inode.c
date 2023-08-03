@@ -193,7 +193,12 @@ static struct page *erofs_read_inode(struct inode *inode,
 
 	inode->i_flags &= ~S_DAX;
 	if (test_opt(&sbi->opt, DAX_ALWAYS) && S_ISREG(inode->i_mode) &&
+<<<<<<< HEAD   (ab7625 ANDROID: ABI: Update STG ABI to format version 2)
 	    vi->datalayout == EROFS_INODE_FLAT_PLAIN)
+=======
+	    (vi->datalayout == EROFS_INODE_FLAT_PLAIN ||
+	     vi->datalayout == EROFS_INODE_CHUNK_BASED))
+>>>>>>> BRANCH (cdd3cd Linux 5.15.121)
 		inode->i_flags |= S_DAX;
 	if (!nblks)
 		/* measure inode.i_blocks as generic filesystems */

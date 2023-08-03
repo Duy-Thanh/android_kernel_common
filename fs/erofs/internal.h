@@ -47,6 +47,7 @@ typedef u64 erofs_off_t;
 /* data type for filesystem-wide blocks number */
 typedef u32 erofs_blk_t;
 
+<<<<<<< HEAD   (ab7625 ANDROID: ABI: Update STG ABI to format version 2)
 struct erofs_device_info {
 	char *path;
 	struct block_device *bdev;
@@ -56,6 +57,8 @@ struct erofs_device_info {
 	u32 mapped_blkaddr;
 };
 
+=======
+>>>>>>> BRANCH (cdd3cd Linux 5.15.121)
 struct erofs_mount_opts {
 #ifdef CONFIG_EROFS_FS_ZIP
 	/* current strategy of how to use managed cache */
@@ -69,6 +72,7 @@ struct erofs_mount_opts {
 	unsigned int mount_opt;
 };
 
+<<<<<<< HEAD   (ab7625 ANDROID: ABI: Update STG ABI to format version 2)
 struct erofs_dev_context {
 	struct idr tree;
 	struct rw_semaphore rwsem;
@@ -79,6 +83,10 @@ struct erofs_dev_context {
 struct erofs_fs_context {
 	struct erofs_mount_opts opt;
 	struct erofs_dev_context *devs;
+=======
+struct erofs_fs_context {
+	struct erofs_mount_opts opt;
+>>>>>>> BRANCH (cdd3cd Linux 5.15.121)
 };
 
 /* all filesystem-wide lz4 configurations */
@@ -91,6 +99,10 @@ struct erofs_sb_lz4_info {
 
 struct erofs_sb_info {
 	struct erofs_mount_opts opt;	/* options */
+<<<<<<< HEAD   (ab7625 ANDROID: ABI: Update STG ABI to format version 2)
+=======
+
+>>>>>>> BRANCH (cdd3cd Linux 5.15.121)
 #ifdef CONFIG_EROFS_FS_ZIP
 	/* list for all registered superblocks, mainly for shrinker */
 	struct list_head list;
@@ -134,10 +146,13 @@ struct erofs_sb_info {
 	u8 volume_name[16];             /* volume name */
 	u32 feature_compat;
 	u32 feature_incompat;
+<<<<<<< HEAD   (ab7625 ANDROID: ABI: Update STG ABI to format version 2)
 
 	/* sysfs support */
 	struct kobject s_kobj;		/* /sys/fs/erofs/<devname> */
 	struct completion s_kobj_unregister;
+=======
+>>>>>>> BRANCH (cdd3cd Linux 5.15.121)
 };
 
 #define EROFS_SB(sb) ((struct erofs_sb_info *)(sb)->s_fs_info)
