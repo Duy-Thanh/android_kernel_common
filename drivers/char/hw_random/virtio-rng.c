@@ -4,6 +4,7 @@
  *  Copyright (C) 2007, 2008 Rusty Russell IBM Corporation
  */
 
+#include <asm/barrier.h>
 #include <linux/err.h>
 #include <linux/hw_random.h>
 #include <linux/scatterlist.h>
@@ -20,12 +21,15 @@ struct virtrng_info {
 	struct virtqueue *vq;
 	char name[25];
 	int index;
-	bool busy;
 	bool hwrng_register_done;
 	bool hwrng_removed;
 	/* data transfer */
 	struct completion have_data;
 	unsigned int data_avail;
+<<<<<<< HEAD   (629a01 Merge 3786416e1fa2 ("powerpc: update ppc_save_regs to save c)
+=======
+	unsigned int data_idx;
+>>>>>>> BRANCH (fb3488 io_uring: ensure IOPOLL locks around deferred work)
 	/* minimal size returned by rng_buffer_size() */
 #if SMP_CACHE_BYTES < 32
 	u8 data[32];
@@ -37,25 +41,49 @@ struct virtrng_info {
 static void random_recv_done(struct virtqueue *vq)
 {
 	struct virtrng_info *vi = vq->vdev->priv;
+	unsigned int len;
 
 	/* We can get spurious callbacks, e.g. shared IRQs + virtio_pci. */
-	if (!virtqueue_get_buf(vi->vq, &vi->data_avail))
+	if (!virtqueue_get_buf(vi->vq, &len))
 		return;
 
+	smp_store_release(&vi->data_avail, len);
 	complete(&vi->have_data);
 }
 
+<<<<<<< HEAD   (629a01 Merge 3786416e1fa2 ("powerpc: update ppc_save_regs to save c)
 /* The host will fill any buffer we give it with sweet, sweet randomness. */
 static void register_buffer(struct virtrng_info *vi)
+=======
+static void request_entropy(struct virtrng_info *vi)
+>>>>>>> BRANCH (fb3488 io_uring: ensure IOPOLL locks around deferred work)
 {
 	struct scatterlist sg;
 
+<<<<<<< HEAD   (629a01 Merge 3786416e1fa2 ("powerpc: update ppc_save_regs to save c)
+=======
+	reinit_completion(&vi->have_data);
+	vi->data_idx = 0;
+
+>>>>>>> BRANCH (fb3488 io_uring: ensure IOPOLL locks around deferred work)
 	sg_init_one(&sg, vi->data, sizeof(vi->data));
 
 	/* There should always be room for one buffer. */
 	virtqueue_add_inbuf(vi->vq, &sg, 1, vi->data, GFP_KERNEL);
 
 	virtqueue_kick(vi->vq);
+}
+
+static unsigned int copy_data(struct virtrng_info *vi, void *buf,
+			      unsigned int size)
+{
+	size = min_t(unsigned int, size, vi->data_avail);
+	memcpy(buf, vi->data + vi->data_idx, size);
+	vi->data_idx += size;
+	vi->data_avail -= size;
+	if (vi->data_avail == 0)
+		request_entropy(vi);
+	return size;
 }
 
 static int virtio_read(struct hwrng *rng, void *buf, size_t size, bool wait)
@@ -68,15 +96,26 @@ static int virtio_read(struct hwrng *rng, void *buf, size_t size, bool wait)
 	if (vi->hwrng_removed)
 		return -ENODEV;
 
+<<<<<<< HEAD   (629a01 Merge 3786416e1fa2 ("powerpc: update ppc_save_regs to save c)
 	if (!vi->busy) {
 		vi->busy = true;
 		reinit_completion(&vi->have_data);
 		register_buffer(vi);
+=======
+	read = 0;
+
+	/* copy available data */
+	if (smp_load_acquire(&vi->data_avail)) {
+		chunk = copy_data(vi, buf, size);
+		size -= chunk;
+		read += chunk;
+>>>>>>> BRANCH (fb3488 io_uring: ensure IOPOLL locks around deferred work)
 	}
 
 	if (!wait)
-		return 0;
+		return read;
 
+<<<<<<< HEAD   (629a01 Merge 3786416e1fa2 ("powerpc: update ppc_save_regs to save c)
 	read = 0;
 	while (size != 0) {
 		ret = wait_for_completion_killable(&vi->have_data);
@@ -94,8 +133,26 @@ static int virtio_read(struct hwrng *rng, void *buf, size_t size, bool wait)
 			register_buffer(vi);
 		}
 	}
+=======
+	/* We have already copied available entropy,
+	 * so either size is 0 or data_avail is 0
+	 */
+	while (size != 0) {
+		/* data_avail is 0 but a request is pending */
+		ret = wait_for_completion_killable(&vi->have_data);
+		if (ret < 0)
+			return ret;
+		/* if vi->data_avail is 0, we have been interrupted
+		 * by a cleanup, but buffer stays in the queue
+		 */
+		if (vi->data_avail == 0)
+			return read;
+>>>>>>> BRANCH (fb3488 io_uring: ensure IOPOLL locks around deferred work)
 
-	vi->busy = false;
+		chunk = copy_data(vi, buf + read, size);
+		size -= chunk;
+		read += chunk;
+	}
 
 	return read;
 }
@@ -104,8 +161,7 @@ static void virtio_cleanup(struct hwrng *rng)
 {
 	struct virtrng_info *vi = (struct virtrng_info *)rng->priv;
 
-	if (vi->busy)
-		wait_for_completion(&vi->have_data);
+	complete(&vi->have_data);
 }
 
 static int probe_common(struct virtio_device *vdev)
@@ -141,6 +197,9 @@ static int probe_common(struct virtio_device *vdev)
 		goto err_find;
 	}
 
+	/* we always have a pending entropy request */
+	request_entropy(vi);
+
 	return 0;
 
 err_find:
@@ -156,9 +215,9 @@ static void remove_common(struct virtio_device *vdev)
 
 	vi->hwrng_removed = true;
 	vi->data_avail = 0;
+	vi->data_idx = 0;
 	complete(&vi->have_data);
 	vdev->config->reset(vdev);
-	vi->busy = false;
 	if (vi->hwrng_register_done)
 		hwrng_unregister(&vi->hwrng);
 	vdev->config->del_vqs(vdev);
