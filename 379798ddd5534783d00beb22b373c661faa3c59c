@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeba1234_2c7c61d8",
+        "filename": "android/abi_gki_aarch64_mtktv",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2023-08-03T15:12:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f49c63ce_c9fe1be9",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 13
+      },
+      "revId": "379798ddd5534783d00beb22b373c661faa3c59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b43be83e_8f25c403",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "145d50d9_3cd1ba91",
+        "filename": "android/abi_gki_aarch64_mtktv",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2023-08-03T15:12:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b43be83e_8f25c403",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 16
+      },
+      "revId": "379798ddd5534783d00beb22b373c661faa3c59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe913031_7cbad94c",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-08-03T11:50:25Z",
       "side": 1,
       "message": "no driver should need this.",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 17
+      },
+      "revId": "379798ddd5534783d00beb22b373c661faa3c59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd608f7_7c072f7d",
+        "filename": "android/abi_gki_aarch64_mtktv",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2023-08-03T15:12:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe913031_7cbad94c",
       "range": {
         "startLine": 31,
         "startChar": 2,
