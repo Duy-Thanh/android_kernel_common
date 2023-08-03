@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82b06615_5e9cc320",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-08-03T10:40:38Z",
+      "side": 1,
+      "message": "Please fix (space after \u0027:\u0027 and make sure name matches `Owner` name and email)\n\n```\nSigned-off-by: wengle \u003cwengle@oppo.com\u003e\n```",
+      "revId": "df129ad3075828a37d71c69833001ffa15097990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beee2286_e905179c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-08-03T10:40:38Z",
+      "side": 1,
+      "message": "Please create a patch on top of this one to add the symbols to your symbol-list",
+      "revId": "df129ad3075828a37d71c69833001ffa15097990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
