@@ -16,6 +16,24 @@
       "message": "The original revert had the following motivation:\n\n\"This reverts commit 8ecd88d9d38f849d5aac59596ebc7a8679405f5b as it is broken with regards to upstream changes made in 6.1.12\"\n\nCould you please explain what has changed since that makes this patch applicable again?",
       "revId": "23da9648f3016d8a6d6fdeb3c4d0dad6cbc701be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cdde766_82c2c99a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905498
+      },
+      "writtenOn": "2023-08-03T09:28:09Z",
+      "side": 1,
+      "message": "It\u0027s related with this changes(cgroup/cpuset: Make cpuset_fork() handle CLONE_INTO_CGROUP properly) on upstream.\n \nThe current cpuset_fork() method does not properly handle the\nCLONE_INTO_CGROUP case where the cpuset of the child may be different\nfrom that of its parent.  Update the cpuset_fork() method to treat the\nCLONE_INTO_CGROUP case similar to cpuset_attach()\n\nFor this purpose,moving attach task function to a new cpuset_attach_task() from cpuset_attach(), the original functionality has not changed, it does not affect this patch.",
+      "parentUuid": "bf60bcf5_700f5e64",
+      "revId": "23da9648f3016d8a6d6fdeb3c4d0dad6cbc701be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
