@@ -16,6 +16,29 @@
       "message": "hi\nwe want to update oplus symbol list ashmem: is_ashmem_file\nplease review",
       "revId": "ef093e1ece6401020ac4009159a776d2dabe70fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9eda97c_8457fec1",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 2
+      },
+      "lineNbr": 3699,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-03T08:07:24Z",
+      "side": 1,
+      "message": "please keep this sorted like the tools that generated it expect it to be in.",
+      "range": {
+        "startLine": 3699,
+        "startChar": 2,
+        "endLine": 3699,
+        "endChar": 16
+      },
+      "revId": "ef093e1ece6401020ac4009159a776d2dabe70fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
