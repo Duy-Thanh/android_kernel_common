@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a2277e_ed6eddd2",
+        "filename": "android/abi_gki_aarch64_mtktv",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-03T11:55:31Z",
+      "side": 1,
+      "message": "should not be called by any driver, it should be marked static upstream.  Please use the proper `kthread_should_park()` function instead.",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "8cd9d084e141369298baebd16fcaa3954e925a5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b52dbfb3_a1577efa",
+        "filename": "android/abi_gki_aarch64_mtktv",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-03T11:55:31Z",
+      "side": 1,
+      "message": "should never be called by any driver.",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 13
+      },
+      "revId": "8cd9d084e141369298baebd16fcaa3954e925a5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "982cfedc_220aad59",
+        "filename": "android/abi_gki_aarch64_mtktv",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-03T11:55:31Z",
+      "side": 1,
+      "message": "should never be called by any driver.",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 12
+      },
+      "revId": "8cd9d084e141369298baebd16fcaa3954e925a5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
