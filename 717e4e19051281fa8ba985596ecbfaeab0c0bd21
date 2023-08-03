@@ -81,6 +81,30 @@
       },
       "revId": "717e4e19051281fa8ba985596ecbfaeab0c0bd21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abbae2ae_f9b927b9",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3342,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-03T08:04:12Z",
+      "side": 1,
+      "message": "This all is not ok, you are adding fake random data to the system, creating a much more insecure system.\n\nIf your systems need this in order to boot properly, please fix the root problem of not having enough hardware entropy correctly, not like this.",
+      "parentUuid": "7ae00883_9679a417",
+      "range": {
+        "startLine": 3342,
+        "startChar": 0,
+        "endLine": 3342,
+        "endChar": 28
+      },
+      "revId": "717e4e19051281fa8ba985596ecbfaeab0c0bd21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
