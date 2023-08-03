@@ -130,9 +130,16 @@ struct netns_ipv4 {
 	int sysctl_tcp_keepalive_probes;
 	int sysctl_tcp_keepalive_intvl;
 
+<<<<<<< HEAD   (8a4272 Merge branch 'android13-5.10' into branch 'android13-5.10-lt)
 	int sysctl_tcp_syn_retries;
 	int sysctl_tcp_synack_retries;
 	int sysctl_tcp_syncookies;
+=======
+	u8 sysctl_tcp_syn_retries;
+	u8 sysctl_tcp_synack_retries;
+	u8 sysctl_tcp_syncookies;
+	u8 sysctl_tcp_migrate_req;
+>>>>>>> BRANCH (3602db Linux 5.10.188)
 	int sysctl_tcp_reordering;
 	int sysctl_tcp_retries1;
 	int sysctl_tcp_retries2;

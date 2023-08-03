@@ -6,16 +6,13 @@
 #include <linux/android_kabi.h>
 
 struct netns_nftables {
-	struct list_head	tables;
-	struct list_head	commit_list;
-	struct list_head	module_list;
-	struct list_head	notify_list;
-	struct mutex		commit_mutex;
-	unsigned int		base_seq;
 	u8			gencursor;
+<<<<<<< HEAD   (8a4272 Merge branch 'android13-5.10' into branch 'android13-5.10-lt)
 	u8			validate_state;
 
 	ANDROID_KABI_RESERVE(1);
+=======
+>>>>>>> BRANCH (3602db Linux 5.10.188)
 };
 
 #endif
