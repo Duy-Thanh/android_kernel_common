@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8b5ff6_4b97580a",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1859255
+      },
+      "writtenOn": "2023-08-04T03:28:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2e4cfdc_2d2225d7",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 157,
+        "endChar": 28
+      },
+      "revId": "e8c3a135871f4dc55734065e346b9a774d3b2db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af126c96_6b2afc11",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-08-03T18:12:27Z",
       "side": 1,
       "message": "not allowed to be used, please fix your user/kernel api.",
+      "revId": "e8c3a135871f4dc55734065e346b9a774d3b2db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04c10b9b_1f5e7ef0",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1859255
+      },
+      "writtenOn": "2023-08-04T03:28:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af126c96_6b2afc11",
       "revId": "e8c3a135871f4dc55734065e346b9a774d3b2db6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
