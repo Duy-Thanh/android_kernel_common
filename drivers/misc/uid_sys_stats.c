@@ -622,6 +622,58 @@ static const struct proc_ops uid_procstat_fops = {
 	.proc_write	= uid_procstat_write,
 };
 
+<<<<<<< HEAD   (778383 ANDROID: arm64: dts: qcom: sdm845-db845c: Do not point MDSS )
+=======
+struct update_stats_work {
+	uid_t uid;
+#ifdef CONFIG_UID_SYS_STATS_DEBUG
+	struct task_struct *task;
+#endif
+	struct task_io_accounting ioac;
+	u64 utime;
+	u64 stime;
+	struct update_stats_work *next;
+};
+
+static atomic_long_t work_usw;
+
+static void update_stats_workfn(struct work_struct *work)
+{
+	struct update_stats_work *usw;
+	struct uid_entry *uid_entry;
+	struct task_entry *task_entry __maybe_unused;
+
+	rt_mutex_lock(&uid_lock);
+	while ((usw = (struct update_stats_work *)atomic_long_read(&work_usw))) {
+		if (atomic_long_cmpxchg(&work_usw, (long)usw, (long)(usw->next)) != (long)usw)
+			continue;
+
+		uid_entry = find_uid_entry(usw->uid);
+		if (!uid_entry)
+			goto next;
+
+		uid_entry->utime += usw->utime;
+		uid_entry->stime += usw->stime;
+
+#ifdef CONFIG_UID_SYS_STATS_DEBUG
+		task_entry = find_task_entry(uid_entry, usw->task);
+		if (!task_entry)
+			goto next;
+		add_uid_tasks_io_stats(task_entry, &usw->ioac,
+				UID_STATE_DEAD_TASKS);
+#endif
+		__add_uid_io_stats(uid_entry, &usw->ioac, UID_STATE_DEAD_TASKS);
+next:
+#ifdef CONFIG_UID_SYS_STATS_DEBUG
+		put_task_struct(usw->task);
+#endif
+		kfree(usw);
+	}
+	rt_mutex_unlock(&uid_lock);
+}
+static DECLARE_WORK(update_stats_work, update_stats_workfn);
+
+>>>>>>> CHANGE (8e8682 ANDROID: uid_sys_stats: Use a single work for deferred updat)
 static int process_notifier(struct notifier_block *self,
 			unsigned long cmd, void *v)
 {
@@ -635,6 +687,31 @@ static int process_notifier(struct notifier_block *self,
 
 	rt_mutex_lock(&uid_lock);
 	uid = from_kuid_munged(current_user_ns(), task_uid(task));
+<<<<<<< HEAD   (778383 ANDROID: arm64: dts: qcom: sdm845-db845c: Do not point MDSS )
+=======
+	if (!rt_mutex_trylock(&uid_lock)) {
+		struct update_stats_work *usw;
+
+		usw = kmalloc(sizeof(struct update_stats_work), GFP_KERNEL);
+		if (usw) {
+			usw->uid = uid;
+#ifdef CONFIG_UID_SYS_STATS_DEBUG
+			usw->task = get_task_struct(task);
+#endif
+			/*
+			 * Copy task->ioac since task might be destroyed before
+			 * the work is later performed.
+			 */
+			usw->ioac = task->ioac;
+			task_cputime_adjusted(task, &usw->utime, &usw->stime);
+			usw->next = (struct update_stats_work *)atomic_long_xchg(&work_usw,
+										 (long)usw);
+			schedule_work(&update_stats_work);
+		}
+		return NOTIFY_OK;
+	}
+
+>>>>>>> CHANGE (8e8682 ANDROID: uid_sys_stats: Use a single work for deferred updat)
 	uid_entry = find_or_register_uid(uid);
 	if (!uid_entry) {
 		pr_err("%s: failed to find uid %d\n", __func__, uid);
