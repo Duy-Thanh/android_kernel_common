@@ -33,6 +33,24 @@
       "message": "Hi Jindong, please help to add \"Bug: 294459321\" in the commit message.",
       "revId": "dfb89e73c1604882f8269be2b176620fdf0a649b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f64b628_0c5dc382",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2023-08-04T05:10:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28443e33_8f2cab28",
+      "revId": "dfb89e73c1604882f8269be2b176620fdf0a649b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
