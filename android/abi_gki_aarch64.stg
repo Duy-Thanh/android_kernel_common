@@ -321088,6 +321088,15 @@ elf_symbol {
   full_name: "__fdget"
 }
 elf_symbol {
+  id: 0xaf8ee687
+  name: "__find_nth_bit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3eccbe2c
+  type_id: 0x3ec500b9
+  full_name: "__find_nth_bit"
+}
+elf_symbol {
   id: 0x746a66fc
   name: "__flush_workqueue"
   is_defined: true
@@ -380972,6 +380981,7 @@ interface {
   symbol_id: 0x80f1cf36
   symbol_id: 0x3e32c80e
   symbol_id: 0x5298aa39
+  symbol_id: 0xaf8ee687
   symbol_id: 0x746a66fc
   symbol_id: 0x47a334c4
   symbol_id: 0xebf4b11f
