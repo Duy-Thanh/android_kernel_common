@@ -512,6 +512,9 @@
   disable_irq_nosync
   disable_percpu_irq
   disk_end_io_acct
+  disk_part_iter_exit
+  disk_part_iter_init
+  disk_part_iter_next
   disk_start_io_acct
   dma_alloc_attrs
   dma_async_device_register
