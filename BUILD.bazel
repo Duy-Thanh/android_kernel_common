@@ -11,7 +11,7 @@ load(
     "kernel_modules_install",
     "kernel_unstripped_modules_archive",
 )
-load(":modules.bzl", "COMMON_GKI_MODULES_LIST")
+load(":modules.bzl", "get_gki_modules_list")
 
 package(
     default_visibility = [
@@ -31,6 +31,51 @@ _GKI_X86_64_MAKE_GOALS = [
     "modules",
 ]
 
+<<<<<<< HEAD   (6426de ANDROID: fuse-bpf: Add partial flock support)
+=======
+checkpatch(
+    name = "checkpatch",
+    checkpatch_pl = "scripts/checkpatch.pl",
+)
+
+# Deprecated - Use arch specific files from below.
+write_file(
+    name = "gki_system_dlkm_modules",
+    out = "android/gki_system_dlkm_modules",
+    content = get_gki_modules_list("arm64") + [
+        # Ensure new line at the end.
+        "",
+    ],
+)
+
+write_file(
+    name = "gki_system_dlkm_modules_arm64",
+    out = "android/gki_system_dlkm_modules_arm64",
+    content = get_gki_modules_list("arm64") + [
+        # Ensure new line at the end.
+        "",
+    ],
+)
+
+write_file(
+    name = "gki_system_dlkm_modules_x86_64",
+    out = "android/gki_system_dlkm_modules_x86_64",
+    content = get_gki_modules_list("x86_64") + [
+        # Ensure new line at the end.
+        "",
+    ],
+)
+
+write_file(
+    name = "gki_system_dlkm_modules_risc64",
+    out = "android/gki_system_dlkm_modules_riscv64",
+    content = get_gki_modules_list("riscv64") + [
+        # Ensure new line at the end.
+        "",
+    ],
+)
+
+>>>>>>> CHANGE (2c7641 ANDROID: Add arch specific gki module list targets)
 filegroup(
     name = "aarch64_additional_kmi_symbol_lists",
     srcs = [
@@ -54,39 +99,39 @@ filegroup(
 define_common_kernels(target_configs = {
     "kernel_aarch64": {
         "kmi_symbol_list_strict_mode": True,
-        "module_implicit_outs": COMMON_GKI_MODULES_LIST,
         "kmi_symbol_list": "android/abi_gki_aarch64",
         "additional_kmi_symbol_lists": [":aarch64_additional_kmi_symbol_lists"],
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",
         "protected_modules_list": "android/gki_aarch64_protected_modules",
+        "module_implicit_outs": get_gki_modules_list("arm64"),
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
     },
     "kernel_aarch64_16k": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": COMMON_GKI_MODULES_LIST,
+        "module_implicit_outs": get_gki_modules_list("arm64"),
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
     },
     "kernel_aarch64_debug": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": COMMON_GKI_MODULES_LIST,
         "kmi_symbol_list": "android/abi_gki_aarch64",
         "additional_kmi_symbol_lists": [":aarch64_additional_kmi_symbol_lists"],
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",
         "protected_modules_list": "android/gki_aarch64_protected_modules",
+        "module_implicit_outs": get_gki_modules_list("arm64"),
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
     },
     "kernel_x86_64": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": COMMON_GKI_MODULES_LIST,
         "protected_exports_list": "android/abi_gki_protected_exports_x86_64",
         "protected_modules_list": "android/gki_x86_64_protected_modules",
+        "module_implicit_outs": get_gki_modules_list("x86_64"),
         "make_goals": _GKI_X86_64_MAKE_GOALS,
     },
     "kernel_x86_64_debug": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": COMMON_GKI_MODULES_LIST,
         "protected_exports_list": "android/abi_gki_protected_exports_x86_64",
         "protected_modules_list": "android/gki_x86_64_protected_modules",
+        "module_implicit_outs": get_gki_modules_list("x86_64"),
         "make_goals": _GKI_X86_64_MAKE_GOALS,
     },
 })
@@ -105,6 +150,7 @@ define_db845c(
         "qcom/sdm845-db845c.dtb",
         "qcom/qrb5165-rb5.dtb",
     ],
+<<<<<<< HEAD   (6426de ANDROID: fuse-bpf: Add partial flock support)
     module_outs = [
         # keep sorted
         "crypto/michael_mic.ko",
@@ -269,6 +315,10 @@ define_db845c(
         "sound/soc/qcom/snd-soc-sdm845.ko",
         "sound/soc/qcom/snd-soc-sm8250.ko",
     ],
+=======
+    module_outs = get_gki_modules_list("arm64") + _ROCKPI4_MODULE_OUTS + _ROCKPI4_WATCHDOG_MODULE_OUTS,
+    visibility = ["//visibility:private"],
+>>>>>>> CHANGE (2c7641 ANDROID: Add arch specific gki module list targets)
 )
 
 # TODO(b/258259749): Convert rockpi4 to mixed build
@@ -291,6 +341,7 @@ kernel_build(
         "modules",
         "rockchip/rk3399-rock-pi-4b.dtb",
     ],
+<<<<<<< HEAD   (6426de ANDROID: fuse-bpf: Add partial flock support)
     module_outs = COMMON_GKI_MODULES_LIST + [
         # keep sorted
         "drivers/block/virtio_blk.ko",
@@ -339,6 +390,18 @@ kernel_build(
         "drivers/watchdog/dw_wdt.ko",
         "net/core/failover.ko",
     ],
+=======
+    module_outs = get_gki_modules_list("arm64") + _ROCKPI4_MODULE_OUTS,
+    visibility = ["//visibility:private"],
+)
+
+alias(
+    name = "rockpi4",
+    actual = select({
+        "//build/kernel/kleaf:kgdb_is_true": "rockpi4_with_kgdb",
+        "//conditions:default": "rockpi4_no_kgdb",
+    }),
+>>>>>>> CHANGE (2c7641 ANDROID: Add arch specific gki module list targets)
 )
 
 kernel_abi(
