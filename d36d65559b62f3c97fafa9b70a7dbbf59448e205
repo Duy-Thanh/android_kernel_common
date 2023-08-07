@@ -16,6 +16,24 @@
       "message": "Hi Jaskaran Singh\n\ncould you please add the bug id b/294338783 in the commit message.",
       "revId": "d36d65559b62f3c97fafa9b70a7dbbf59448e205",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca912ab_dde1d2e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945302
+      },
+      "writtenOn": "2023-08-07T13:20:55Z",
+      "side": 1,
+      "message": "Hey Omkar\n\nThe patch is already merged so I don\u0027t think I can\u0027t edit the commit message. Could you clarify more on what\u0027s required here?",
+      "parentUuid": "a75a4481_b5b266d2",
+      "revId": "d36d65559b62f3c97fafa9b70a7dbbf59448e205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
