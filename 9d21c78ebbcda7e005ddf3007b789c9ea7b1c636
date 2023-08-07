@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c20fb8_3756c6f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928585
+      },
+      "writtenOn": "2023-08-07T04:13:47Z",
+      "side": 1,
+      "message": "Hi, This change modified the CONFIG_CMDLINE only in gki_defconfig, but when building consolidate kernel, the CONFIG_CMDLINE config will be overwritten by consolidate.fragment, this makes \u0027ioremap_guard\u0027 missing in consolidate kernel.\n\nIs this a problem?",
+      "revId": "9d21c78ebbcda7e005ddf3007b789c9ea7b1c636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
