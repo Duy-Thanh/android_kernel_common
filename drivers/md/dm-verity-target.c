@@ -18,6 +18,7 @@
 #include "dm-verity-verify-sig.h"
 #include <linux/module.h>
 #include <linux/reboot.h>
+#include <trace/hooks/dtask.h>
 
 #define DM_MSG_PREFIX			"verity"
 
@@ -581,6 +582,7 @@ static void verity_work(struct work_struct *w)
 static void verity_end_io(struct bio *bio)
 {
 	struct dm_verity_io *io = bio->bi_private;
+	bool work_done = false;
 
 	if (bio->bi_status &&
 	    (!verity_fec_is_enabled(io->v) || verity_is_system_shutting_down())) {
@@ -589,7 +591,9 @@ static void verity_end_io(struct bio *bio)
 	}
 
 	INIT_WORK(&io->work, verity_work);
-	queue_work(io->v->verify_wq, &io->work);
+	trace_android_vh_verity_end_io(bio, &io->work, &work_done);
+	if (!work_done)
+		queue_work(io->v->verify_wq, &io->work);
 }
 
 /*
@@ -696,6 +700,7 @@ static int verity_map(struct dm_target *ti, struct bio *bio)
 	io->block = bio->bi_iter.bi_sector >> (v->data_dev_block_bits - SECTOR_SHIFT);
 	io->n_blocks = bio->bi_iter.bi_size >> v->data_dev_block_bits;
 
+	trace_android_vh_blk_mq_submit_bio(current, bio);
 	bio->bi_end_io = verity_end_io;
 	bio->bi_private = io;
 	io->iter = bio->bi_iter;
