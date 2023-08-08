@@ -39,6 +39,9 @@ COMMON_GKI_MODULES_LIST = [
     "drivers/usb/class/cdc-acm.ko",
     "drivers/usb/serial/ftdi_sio.ko",
     "drivers/usb/serial/usbserial.ko",
+    "drivers/vhost/vhost.ko",
+    "drivers/vhost/vhost_iotlb.ko",
+    "drivers/vhost/vhost_vsock.ko",
     "kernel/kheaders.ko",
     "lib/crypto/libarc4.ko",
     "mm/zsmalloc.ko",
@@ -69,5 +72,7 @@ COMMON_GKI_MODULES_LIST = [
     "net/rfkill/rfkill.ko",
     "net/tipc/diag.ko",
     "net/tipc/tipc.ko",
+    "net/vmw_vsock/vsock.ko",
+    "net/vmw_vsock/vmw_vsock_virtio_transport_common.ko",
     "net/wireless/cfg80211.ko",
 ]
