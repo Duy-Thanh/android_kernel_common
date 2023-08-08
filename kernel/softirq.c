@@ -33,6 +33,7 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/irq.h>
 
+extern void do_blk_mq_softirq(u32 *pending, struct softirq_action *softirq_vec, unsigned long end, int max_restart);
 EXPORT_TRACEPOINT_SYMBOL_GPL(irq_handler_entry);
 EXPORT_TRACEPOINT_SYMBOL_GPL(irq_handler_exit);
 
@@ -630,6 +631,8 @@ restart:
 	local_irq_disable();
 
 	pending = local_softirq_pending();
+	do_blk_mq_softirq(&pending, softirq_vec, end, max_restart);
+
 	deferred = softirq_deferred_for_rt(&pending);
 
 	if (pending) {

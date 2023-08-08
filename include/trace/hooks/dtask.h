@@ -15,6 +15,10 @@ struct mutex;
 struct rt_mutex_base;
 struct rw_semaphore;
 struct task_struct;
+struct workqueue_attrs;
+struct softirq_action;
+struct bio;
+struct request;
 
 DECLARE_HOOK(android_vh_mutex_wait_start,
 	TP_PROTO(struct mutex *lock),
@@ -101,6 +105,24 @@ DECLARE_HOOK(android_vh_task_blocks_on_rtmutex,
 DECLARE_HOOK(android_vh_rtmutex_waiter_prio,
 	TP_PROTO(struct task_struct *task, int *waiter_prio),
 	TP_ARGS(task, waiter_prio));
+DECLARE_HOOK(android_vh_create_worker,
+	TP_PROTO(struct task_struct *task, int nice, bool *should_skip_set_nice),
+	TP_ARGS(task, nice, should_skip_set_nice));
+DECLARE_HOOK(android_vh_apply_wqattrs_prepare,
+	TP_PROTO(char *name, struct workqueue_attrs *new_attrs),
+	TP_ARGS(name, new_attrs));
+DECLARE_HOOK(android_vh_blk_mq_raise_softirq,
+	TP_PROTO(struct request *rq),
+	TP_ARGS(rq));
+DECLARE_HOOK(android_vh_blk_mq_submit_bio,
+	TP_PROTO(struct task_struct *task, struct bio *bio),
+	TP_ARGS(task, bio));
+DECLARE_HOOK(android_vh_verity_end_io,
+	TP_PROTO(struct bio* bio, struct work_struct *work, bool *should_queue_work),
+	TP_ARGS(bio, work, should_queue_work));
+DECLARE_HOOK(android_vh___do_softirq,
+	TP_PROTO(u32 *pending, struct softirq_action *softirq_vec, unsigned long end, int max_restart),
+	TP_ARGS(pending, softirq_vec, end, max_restart));
 #endif /* _TRACE_HOOK_DTASK_H */
 
 /* This part must be outside protection */

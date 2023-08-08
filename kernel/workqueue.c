@@ -55,6 +55,7 @@
 #include "workqueue_internal.h"
 
 #include <trace/hooks/wqlockup.h>
+#include <trace/hooks/dtask.h>
 /* events/workqueue.h uses default TRACE_INCLUDE_PATH */
 #undef TRACE_INCLUDE_PATH
 
@@ -1935,6 +1936,7 @@ static struct worker *create_worker(struct worker_pool *pool)
 	struct worker *worker;
 	int id;
 	char id_buf[16];
+	bool should_skip_set_nice = false;
 
 	/* ID is needed to determine kthread name */
 	id = ida_alloc(&pool->worker_ida, GFP_KERNEL);
@@ -1958,7 +1960,9 @@ static struct worker *create_worker(struct worker_pool *pool)
 	if (IS_ERR(worker->task))
 		goto fail;
 
-	set_user_nice(worker->task, pool->attrs->nice);
+	trace_android_vh_create_worker(worker->task, pool->attrs->nice, &should_skip_set_nice);
+	if (!should_skip_set_nice)
+		set_user_nice(worker->task, pool->attrs->nice);
 	kthread_bind_mask(worker->task, pool->attrs->cpumask);
 
 	/* successful, attach the worker to the pool */
@@ -1970,6 +1974,7 @@ static struct worker *create_worker(struct worker_pool *pool)
 	worker_enter_idle(worker);
 	wake_up_process(worker->task);
 	raw_spin_unlock_irq(&pool->lock);
+
 
 	return worker;
 
@@ -3998,6 +4003,8 @@ apply_wqattrs_prepare(struct workqueue_struct *wq,
 	 * the default pwq covering whole @attrs->cpumask.  Always create
 	 * it even if we don't use it immediately.
 	 */
+	trace_android_vh_apply_wqattrs_prepare(wq->name, new_attrs);
+
 	ctx->dfl_pwq = alloc_unbound_pwq(wq, new_attrs);
 	if (!ctx->dfl_pwq)
 		goto out_free;

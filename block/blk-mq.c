@@ -29,7 +29,7 @@
 #include <linux/prefetch.h>
 #include <linux/blk-crypto.h>
 #include <linux/part_stat.h>
-
+#include <trace/hooks/dtask.h>
 #include <trace/events/block.h>
 
 #include <linux/blk-mq.h>
@@ -45,6 +45,14 @@
 #include "blk-ioprio.h"
 
 static DEFINE_PER_CPU(struct llist_head, blk_cpu_done);
+
+struct softirq_action;
+void do_blk_mq_softirq(u32 *pending, struct softirq_action *softirq_vec,
+					unsigned long end, int max_restart)
+{
+	trace_android_vh___do_softirq(pending, softirq_vec,
+						end, max_restart);
+}
 
 static void blk_mq_poll_stats_start(struct request_queue *q);
 static void blk_mq_poll_stats_fn(struct blk_stat_callback *cb);
@@ -1174,8 +1182,10 @@ static void blk_mq_raise_softirq(struct request *rq)
 
 	preempt_disable();
 	list = this_cpu_ptr(&blk_cpu_done);
-	if (llist_add(&rq->ipi_list, list))
+	if (llist_add(&rq->ipi_list, list)) {
+		trace_android_vh_blk_mq_raise_softirq(rq);
 		raise_softirq(BLOCK_SOFTIRQ);
+	}
 	preempt_enable();
 }
 
@@ -2940,6 +2950,7 @@ void blk_mq_submit_bio(struct bio *bio)
 	blk_status_t ret;
 
 	bio = blk_queue_bounce(bio, q);
+	trace_android_vh_blk_mq_submit_bio(current, bio);
 	if (bio_may_exceed_limits(bio, &q->limits)) {
 		bio = __bio_split_to_limits(bio, &q->limits, &nr_segs);
 		if (!bio)
