@@ -16,6 +16,24 @@
       "message": "Hmmm... why is `fscrypt_blk_crypto_key` being added to the XML when it\u0027s not in the symbol list? Let me figure that out before I +2.",
       "revId": "26e4292d27d75830b09ba24d8c456d9d2eddec8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fafb950_ad842d03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2023-08-08T10:22:02Z",
+      "side": 1,
+      "message": "This looks like the known issue with libabigail where type information is sometimes lost due to small churns in DWARF information when new symbols are added. `fscrypt_blk_crypto_key` has probably gone from fully defined to a declaration only type due to the same.",
+      "parentUuid": "1aa79d1b_de7cef79",
+      "revId": "26e4292d27d75830b09ba24d8c456d9d2eddec8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
