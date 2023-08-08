@@ -16,6 +16,24 @@
       "message": "What driver needs these symbols?  They are not even present in newer kernel releases, so you can not rely on them being around anymore at all.",
       "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1237ff0f_449c3c52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1886360
+      },
+      "writtenOn": "2023-08-08T01:50:30Z",
+      "side": 1,
+      "message": "For kernel 5.15+, we can use xa_for_each() following the change: \n\n\"a33df75c63 block: use an xarray for disk-\u003epart_tbl\" , which modify structure as:\n-\t/* Array of pointers to partitions indexed by partno.\n-\t * Protected with matching bdev lock but stat and other\n-\t * non-critical accesses use RCU.  Always access through\n-\t * helpers.\n-\t */\n-\tstruct disk_part_tbl __rcu *part_tbl;\n+\tstruct xarray part_tbl;\n \tstruct block_device *part0;\n\nBut our driver(eMMC/UFS write protect) can use disk_part_iter_xxx symbol instead of xa_for_each() to iterate partitions in one disk for kernel 5.10.",
+      "parentUuid": "0efbb5f4_06e1ec64",
+      "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
