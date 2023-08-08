@@ -16,6 +16,8 @@
 #include "debug.h"
 #include "direct.h"
 
+#include <trace/hooks/dma_mapping.h>
+
 bool dma_default_coherent;
 
 /*
@@ -496,6 +498,7 @@ void *dma_alloc_attrs(struct device *dev, size_t size, dma_addr_t *dma_handle,
 
 	WARN_ON_ONCE(!dev->coherent_dma_mask);
 
+	trace_android_vh_dma_alloc_attrs(dev, &attrs);
 	if (dma_alloc_from_dev_coherent(dev, size, dma_handle, &cpu_addr))
 		return cpu_addr;
 

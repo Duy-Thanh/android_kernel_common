@@ -20,6 +20,8 @@
 
 #include <asm/barrier.h>
 
+#include <trace/hooks/io_pgtable_arm.h>
+
 #include "io-pgtable-arm.h"
 
 #define ARM_LPAE_MAX_ADDR_BITS		52
@@ -485,6 +487,7 @@ static arm_lpae_iopte arm_lpae_prot_to_pte(struct arm_lpae_io_pgtable *data,
 	if (data->iop.fmt != ARM_MALI_LPAE)
 		pte |= ARM_LPAE_PTE_AF;
 
+	trace_android_vh_arm_lpae_prot_to_pte(data, prot, &pte);
 	return pte;
 }
 
