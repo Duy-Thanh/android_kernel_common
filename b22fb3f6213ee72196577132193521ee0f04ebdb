@@ -34,6 +34,24 @@
       "parentUuid": "0efbb5f4_06e1ec64",
       "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "742492c3_dbd3e8f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-08T04:47:47Z",
+      "side": 1,
+      "message": "Why would a driver need to ever iterate the partitions?  No in-kernel driver does this, so it seems very odd that this would ever be a normal operation.",
+      "parentUuid": "1237ff0f_449c3c52",
+      "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
