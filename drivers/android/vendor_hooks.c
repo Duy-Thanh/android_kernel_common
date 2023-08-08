@@ -67,6 +67,8 @@
 #include <trace/hooks/psci.h>
 #include <trace/hooks/usb.h>
 #include <trace/hooks/regmap.h>
+#include <trace/hooks/dma_mapping.h>
+#include <trace/hooks/io_pgtable_arm.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/mmc.h>
 #include <trace/hooks/evdev.h>
@@ -276,6 +278,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_alloc_attrs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arm_lpae_prot_to_pte);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmabuf_heap_flags_validation);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pass_input_event);
