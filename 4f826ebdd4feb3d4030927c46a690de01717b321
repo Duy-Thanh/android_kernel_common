@@ -16,6 +16,41 @@
       "message": "Not sure why revert is submitted, hoping \"Test\" means testing some CI infra",
       "revId": "4f826ebdd4feb3d4030927c46a690de01717b321",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdb4d708_f9f8aba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-08-09T17:52:26Z",
+      "side": 1,
+      "message": "Howard, can we abandon this now?",
+      "revId": "4f826ebdd4feb3d4030927c46a690de01717b321",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86a8c3cb_16d8b016",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-08-09T17:52:26Z",
+      "side": 1,
+      "message": "We are _not_ submitting this revert. We are only trying to bisect an internal issue.",
+      "parentUuid": "c0b38cc8_fe68b9c9",
+      "revId": "4f826ebdd4feb3d4030927c46a690de01717b321",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
