@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e798c23_d4b6f810",
+        "filename": "include/linux/ipv6.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1594463
+      },
+      "writtenOn": "2023-08-09T15:11:11Z",
+      "side": 1,
+      "message": "per ABI linter:\n```\ntype \u0027struct ipv6_devconf\u0027 changed\n  member \u0027__s32 accept_ra_min_rtr_lft\u0027 was added\n  35 members (\u0027__s32 accept_ra_pinfo\u0027 .. \u0027__u8 ndisc_evict_nocarrier\u0027) changed\n    offset changed by 32\n```\n\nthis should move to the end of the struct.",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 29
+      },
+      "revId": "d4ebd47fbfa5091bf6ff0b6ba8b21bb2c1aee835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
