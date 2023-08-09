@@ -57,6 +57,9 @@
 
 #include <asm/mman.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
+
 /*
  * Shared mappings implemented 30.11.1994. It's not fully working yet,
  * though.
@@ -1272,8 +1275,13 @@ repeat:
 	 */
 	spin_lock_irq(&q->lock);
 	folio_set_waiters(folio);
-	if (!folio_trylock_flag(folio, bit_nr, wait))
-		__add_wait_queue_entry_tail(q, wait);
+	if (!folio_trylock_flag(folio, bit_nr, wait)) {
+		bool queued = false;
+
+		trace_android_vh_sort_wait_q(q, wait, &queued);
+		if (!queued)
+			__add_wait_queue_entry_tail(q, wait);
+	}
 	spin_unlock_irq(&q->lock);
 
 	/*
