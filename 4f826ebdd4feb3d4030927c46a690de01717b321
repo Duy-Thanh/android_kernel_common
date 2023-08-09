@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b38cc8_fe68b9c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-08-09T15:39:19Z",
+      "side": 1,
+      "message": "Not sure why revert is submitted, hoping \"Test\" means testing some CI infra",
+      "revId": "4f826ebdd4feb3d4030927c46a690de01717b321",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
