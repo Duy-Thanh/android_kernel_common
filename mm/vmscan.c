@@ -4536,7 +4536,13 @@ static bool sort_folio(struct lruvec *lruvec, struct folio *folio, struct scan_c
 	}
 
 	/* ineligible */
+<<<<<<< HEAD   (0779e367d3895a0f5375e049d364f729f25d7b3b ANDROID: iommu/arm-smmu-v3-kvm: Fix pointer location error)
 	if (!folio_test_lru(folio) || zone > sc->reclaim_idx) {
+||||||| BASE   (77adffd5f517aad107c4baf4aa1aa8bc1c435b08 UPSTREAM: mm: skip CMA pages when they are not available)
+	if (zone > sc->reclaim_idx) {
+=======
+	if (zone > sc->reclaim_idx || skip_cma(folio, sc)) {
+>>>>>>> CHANGE (ff3aef0a4bd3cf0a144510e1a7cac4ed1154e5e6 FROMGIT: Multi-gen LRU: skip CMA pages when they are not eli)
 		gen = folio_inc_gen(lruvec, folio, false);
 		list_move_tail(&folio->lru, &lrugen->folios[gen][type][zone]);
 		return true;
