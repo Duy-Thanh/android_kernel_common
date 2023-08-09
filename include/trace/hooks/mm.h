@@ -346,6 +346,10 @@ DECLARE_HOOK(android_vh_madvise_cold_or_pageout_abort,
 	TP_ARGS(vma, abort_madvise));
 /* macro versions of hooks are no longer required */
 
+DECLARE_HOOK(android_vh_sort_wait_q,
+        TP_PROTO(struct wait_queue_head *wq_head,
+                struct wait_queue_entry *wq_entry, bool *queued),
+        TP_ARGS(wq_head, wq_entry, queued));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
