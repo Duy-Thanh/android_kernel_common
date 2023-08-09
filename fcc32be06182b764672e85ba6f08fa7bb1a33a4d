@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab35a74_cfb04d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2033701
+      },
+      "writtenOn": "2023-08-09T15:57:34Z",
+      "side": 1,
+      "message": "Jl. Nabire Koya Bar.",
+      "revId": "fcc32be06182b764672e85ba6f08fa7bb1a33a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
