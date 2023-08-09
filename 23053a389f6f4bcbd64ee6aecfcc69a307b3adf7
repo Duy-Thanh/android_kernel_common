@@ -16,6 +16,24 @@
       "message": "The failure may be related with this patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/2700437",
       "revId": "23053a389f6f4bcbd64ee6aecfcc69a307b3adf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "add0a40c_e6921649",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-08-09T07:41:37Z",
+      "side": 1,
+      "message": "The failure is a boot failure which I think is due to an infrastructure issue. I\u0027ll try again, and then bypass if it still fails.",
+      "parentUuid": "fc88d223_53ad1565",
+      "revId": "23053a389f6f4bcbd64ee6aecfcc69a307b3adf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
