@@ -249,6 +249,9 @@ DECLARE_HOOK(android_vh_set_page_migrating,
 DECLARE_HOOK(android_vh_clear_page_migrating,
 	TP_PROTO(struct page *page),
 	TP_ARGS(page));
+DECLARE_HOOK(android_vh_sort_wait_q,
+	TP_PROTO(struct wait_queue_head *wq_head, struct wait_queue_entry *wq_entry, bool *queued),
+	TP_ARGS(wq_head, wq_entry, queued));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
