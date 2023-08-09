@@ -16,6 +16,24 @@
       "message": "This patch is unused and not needed in 5.10? rcu_async_should_hurry() is unused.",
       "revId": "ec0be4dc428b0ee30ae2cc8e93feafbcb899ca07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1bf3e3c_8079bf60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2023-08-09T18:15:44Z",
+      "side": 1,
+      "message": "For some background, the upstream version of call_rcu() calls rcu_async_should_hurry(). But by the time that went upstream, we already merged the version which used rcu_gp_is_expedited() into ChromeOS 5.10.",
+      "parentUuid": "ba78c74b_d5d1068d",
+      "revId": "ec0be4dc428b0ee30ae2cc8e93feafbcb899ca07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
