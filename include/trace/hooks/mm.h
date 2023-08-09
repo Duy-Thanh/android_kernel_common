@@ -243,6 +243,10 @@ DECLARE_HOOK(android_vh_look_around,
 DECLARE_HOOK(android_vh_try_cma_fallback,
 	TP_PROTO(struct zone *zone, unsigned int order, bool *try_cma),
 	TP_ARGS(zone, order, try_cma));
+DECLARE_HOOK(android_vh_sort_wait_q,
+        TP_PROTO(struct wait_queue_head *wq_head,
+                struct wait_queue_entry *wq_entry, bool *ret),
+        TP_ARGS(wq_head, wq_entry, ret));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

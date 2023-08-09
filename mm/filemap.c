@@ -1321,8 +1321,13 @@ repeat:
 	 */
 	spin_lock_irq(&q->lock);
 	SetPageWaiters(page);
-	if (!trylock_page_bit_common(page, bit_nr, wait))
-		__add_wait_queue_entry_tail(q, wait);
+	if (!trylock_page_bit_common(page, bit_nr, wait)) {
+		bool queued = false;
+
+		trace_android_vh_sort_wait_q(q, wait, &queued);
+		if (!queued)
+			__add_wait_queue_entry_tail(q, wait);
+	}
 	spin_unlock_irq(&q->lock);
 
 	/*
