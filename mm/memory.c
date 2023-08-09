@@ -1131,7 +1131,7 @@ copy_present_page(struct mm_struct *dst_mm, struct mm_struct *src_mm,
 	 * These are the "normally we can just copy by reference"
 	 * checks.
 	 */
-	if (likely(!atomic_read(&src_mm->has_pinned)))
+	if (likely(!has_pinned(src_mm)))
 		return 1;
 
 	/*
