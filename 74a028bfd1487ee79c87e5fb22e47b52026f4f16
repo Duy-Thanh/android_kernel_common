@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10307abc_440e1554",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-09T06:42:04Z",
+      "side": 1,
+      "message": "abi file also must be updated at the same time, or in a follow-on patch.",
+      "revId": "74a028bfd1487ee79c87e5fb22e47b52026f4f16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
