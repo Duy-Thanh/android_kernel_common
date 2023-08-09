@@ -16,6 +16,24 @@
       "message": "abi file also must be updated at the same time, or in a follow-on patch.",
       "revId": "74a028bfd1487ee79c87e5fb22e47b52026f4f16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee82acee_efa953e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-08-09T18:19:41Z",
+      "side": 1,
+      "message": "Thanks. Submitted a follow-on patch http://aosp/2700139 as this patch may require to cherry pick in the future wherever `90ab8e7f988d (\"ANDROID: usb: host: add xhci hooks for USB offload\")` lands.",
+      "parentUuid": "10307abc_440e1554",
+      "revId": "74a028bfd1487ee79c87e5fb22e47b52026f4f16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
