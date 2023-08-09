@@ -16,6 +16,24 @@
       "message": "Hi André\n\nCould you please add the Respin Bug: b/295178116 in the commit message.",
       "revId": "ec30bd092547dd807619f7fc594b461a35caf1aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b806f921_a446237e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2023-08-09T16:55:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4bedd76_59c64856",
+      "revId": "ec30bd092547dd807619f7fc594b461a35caf1aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
