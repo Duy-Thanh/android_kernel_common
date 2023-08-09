@@ -141,6 +141,10 @@ DECLARE_HOOK(android_vh_look_around,
 		struct vm_area_struct *vma, int *referenced),
 	TP_ARGS(pvmw, folio, vma, referenced));
 
+DECLARE_HOOK(android_vh_sort_wait_q,
+        TP_PROTO(struct wait_queue_head *wq_head,
+                struct wait_queue_entry *wq_entry, bool *ret),
+        TP_ARGS(wq_head, wq_entry, ret));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
