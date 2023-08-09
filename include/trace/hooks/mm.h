@@ -134,6 +134,10 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 DECLARE_HOOK(android_vh_si_meminfo,
 	TP_PROTO(struct sysinfo *val),
 	TP_ARGS(val));
+DECLARE_HOOK(android_vh_sort_wait_q,
+        TP_PROTO(struct wait_queue_head *wq_head,
+                struct wait_queue_entry *wq_entry, bool *ret),
+        TP_ARGS(wq_head, wq_entry, ret));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
