@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4b200386_03059586",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-08-10T04:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e768a68_7b9d06f8",
+      "revId": "9ae39a05eb377ef50cff6ec42d7fea2f5dc4afb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fbf635e3_eddd4264",
         "filename": "drivers/usb/common/usb-conn-gpio.c",
         "patchSetId": 1
@@ -90,6 +108,24 @@
       "side": 1,
       "message": "Oops, I see them - confused by the fact that this is nothing like its upstream counterpart.\n\nIf this is the upstream patch with modifications for KMI, then it should either be the upstream patch + a separate patch to fix it up, OR it should be a \"BACKPORT: FROMGIT:\" patch with an annotation for what was changed and why.",
       "parentUuid": "1af996f5_beaa5f23",
+      "revId": "9ae39a05eb377ef50cff6ec42d7fea2f5dc4afb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c67e06_2e2e19f5",
+        "filename": "drivers/usb/common/usb-conn-gpio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-08-10T04:43:10Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, I was also confused whether to add BACKPORT or FROMLIST",
+      "parentUuid": "c8034e6d_5f35facd",
       "revId": "9ae39a05eb377ef50cff6ec42d7fea2f5dc4afb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
