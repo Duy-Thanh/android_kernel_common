@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1d0fbc6_988b5132",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T01:38:05Z",
+      "side": 1,
+      "message": "Indeed this statement is incorrect. Reclaim will be called as before, but the Linux-side buffer will remain in the free list.",
+      "parentUuid": "c9ce996d_cbd56390",
+      "range": {
+        "startLine": 16,
+        "startChar": 46,
+        "endLine": 17,
+        "endChar": 65
+      },
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd3cbb82_aee9ce04",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 7
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5d03a84_50722b6e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T01:38:05Z",
+      "side": 1,
+      "message": "I hadn\u0027t renamed the existing list to keep the patch concise, but I absolutely agree that it is not very clear. Yes, two lists because share permissions are different. Another reply suggests having one list instead of two.",
+      "parentUuid": "cd3cbb82_aee9ce04",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da4e46de_f8eea65e",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 7
@@ -54,6 +96,24 @@
       "writtenOn": "2023-05-19T00:30:37Z",
       "side": 1,
       "message": "this is not a valid kerneldoc comment. Please run scripts/kernel-doc to validate",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42fe93bb_8aef095a",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T01:38:05Z",
+      "side": 1,
+      "message": "Yes, sorry. I\u0027ve update this one and added kerneldoc comments to several other functions.",
+      "parentUuid": "da4e46de_f8eea65e",
       "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -77,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad76cf05_c15b171d",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T01:38:05Z",
+      "side": 1,
+      "message": "The temporary list is used so that the lock doesn\u0027t have to be held while queuing/sending unmap request control messages to Trusty. Once the request has been sent, it goes on the reclaim_in_progress list.",
+      "parentUuid": "2dde2530_31be2ebb",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e47b81f_ce3359c1",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 7
@@ -94,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9572dc07_fec86665",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T01:38:05Z",
+      "side": 1,
+      "message": "The count of entries in each list is constantly changing during traffic; there are typically more free tx buffers during an echo test. Really, we only expect shrink to have a positive effect after an atypical period where there is a lot of traffic that allocates a lot of extra buffers. So it\u0027s possible that applying a simple ratio like this is the way to go.\n\nIs it possible to share all buffers with read/write access so we could have a single list of free buffers? This would make it more straightforward to shrink.\n\nI don\u0027t believe LRU matters here, as all buffers are in the same memory region, they are all equally usable, and the use algorithm takes from the head and adds to the tail (as the existing tx algorithm worked). But there is another comment that suggests a stack algorithm for efficient.is useful here as we could always shrink from the beginning of the list and use/ buffers from the end",
+      "parentUuid": "0e47b81f_ce3359c1",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "661c5bf9_edfbe65c",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 7
@@ -105,6 +201,24 @@
       "writtenOn": "2023-05-19T00:30:37Z",
       "side": 1,
       "message": "why did this change? Did you add any cases free_buf_list is empty when free_msg_buf_cnt is not 0",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd7ba5bf_3e4df910",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T01:38:05Z",
+      "side": 1,
+      "message": "This was not intentional or necessary. IIRC, it was a part of the development process that I never backed out.",
+      "parentUuid": "661c5bf9_edfbe65c",
       "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -128,6 +242,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ca2b3bc_1045651b",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T01:38:05Z",
+      "side": 1,
+      "message": "This mirrors the existing algorithm used for txbuf. Yes FIFO. Should we change one or both to a stack?",
+      "parentUuid": "d3b7ce78_b72582d0",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5aede547_2166d08e",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 7
@@ -139,6 +271,24 @@
       "writtenOn": "2023-05-19T00:30:37Z",
       "side": 1,
       "message": "kzalloc already guarantees that free_msg_buf_cnt is 0",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f48dc36c_8fcf9216",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2489,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T01:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aede547_2166d08e",
       "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -156,6 +306,24 @@
       "writtenOn": "2023-05-19T00:30:37Z",
       "side": 1,
       "message": "kzalloc already guarantees that these are 0",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "231819d7_6f49f2a0",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2495,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T01:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23893623_276ccdf1",
       "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
