@@ -34,6 +34,24 @@
       "parentUuid": "03ef007d_2fb5048e",
       "revId": "132859c91c98932a083bf697825e5f59beedfdb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08b03779_eab7a7cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-08-11T02:43:55Z",
+      "side": 1,
+      "message": "Neither of those are valid reasons for not upstreaming your changes. If it is useful for you, it would be useful for many other Linux kernel users too.",
+      "parentUuid": "57832e8e_ca2daa35",
+      "revId": "132859c91c98932a083bf697825e5f59beedfdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
