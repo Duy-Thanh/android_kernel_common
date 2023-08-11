@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dc634d8_1699921f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-08-11T15:52:48Z",
+      "side": 1,
+      "message": "A respin request bug is needed for each release branch you want this patch applied to - do you really need this patch for all of those release branches?",
+      "revId": "0d7c3fb4212429b1746bced663d2b556714bf373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
