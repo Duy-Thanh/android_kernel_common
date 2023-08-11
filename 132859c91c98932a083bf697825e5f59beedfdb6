@@ -16,6 +16,24 @@
       "message": "Please propose a solution for this upstream.",
       "revId": "132859c91c98932a083bf697825e5f59beedfdb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57832e8e_ca2daa35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-08-11T02:37:56Z",
+      "side": 1,
+      "message": "Hi Sir：\n\nThere is a new cpu-scheduler in our system for the performance-related thread, such as Ui-thread、Render-thread and so on.\nBut this cpu-scheduler only work in our owner product which is fixed our software configuration, it can not be upstream in recent years, the reason as follows:\n1. Two much code must be modified in kernel;\n2. It would not do well in other products maybe.\n\nso, pls help to merge the hooks if no problems, thank you very much.",
+      "parentUuid": "03ef007d_2fb5048e",
+      "revId": "132859c91c98932a083bf697825e5f59beedfdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
