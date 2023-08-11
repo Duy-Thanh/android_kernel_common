@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c1b066_6fd47419",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2033901
+      },
+      "writtenOn": "2023-08-11T07:54:53Z",
+      "side": 1,
+      "message": "Dear Google:\n\tI want to apply for GKI emergency respin base on android13-5.15-2023-05.\n\tThe change are as follows:\n\thttps://android-review.googlesource.com/c/kernel/common/+/2702514\n\thttps://android-review.googlesource.com/c/kernel/common/+/2702515\n\thttps://android-review.googlesource.com/c/kernel/common/+/2702516\n\t\n\tAnd the above change are already included in the mainline branch.",
+      "revId": "f57702aff99f7f0b9c9d6b14afbf6d5cfb633712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
