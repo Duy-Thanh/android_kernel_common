@@ -16,6 +16,24 @@
       "message": "A respin request bug is needed for each release branch you want this patch applied to - do you really need this patch for all of those release branches?",
       "revId": "0d7c3fb4212429b1746bced663d2b556714bf373",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01992dc6_3990d25b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1900056
+      },
+      "writtenOn": "2023-08-11T23:04:56Z",
+      "side": 1,
+      "message": "Talked offline (summarizing here for completeness): The patch should be included for all release branches that have the regression, but we\u0027re not requesting respins for all branches. Vendors can request respin if they need it, or pick up the patch with the next security build.",
+      "parentUuid": "7dc634d8_1699921f",
+      "revId": "0d7c3fb4212429b1746bced663d2b556714bf373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
