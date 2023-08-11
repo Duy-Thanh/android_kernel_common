@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99157bbe_e3aa9127",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-11T18:48:23Z",
+      "side": 1,
+      "message": "I\u0027ve corrected the commit message. Note that my comment above is incorrect. Reclaim won\u0027t be called until shrink request or driver unload (latter is untested at this time).",
+      "parentUuid": "b1d0fbc6_988b5132",
+      "range": {
+        "startLine": 16,
+        "startChar": 46,
+        "endLine": 17,
+        "endChar": 65
+      },
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd3cbb82_aee9ce04",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 7
