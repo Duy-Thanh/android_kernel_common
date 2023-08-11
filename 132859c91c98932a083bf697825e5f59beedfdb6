@@ -70,6 +70,24 @@
       "parentUuid": "08b03779_eab7a7cb",
       "revId": "132859c91c98932a083bf697825e5f59beedfdb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b058b975_70009a63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-08-11T17:46:39Z",
+      "side": 1,
+      "message": "I do not think these hooks are acceptable due to their sensitive nature (e.g. the dm-verity one) and the fact that there is no genuine issue, such as a dependency on hardware not supported by the upstream kernel, that is blocking the upstreaming of your fix. This problem needs to be solved upstream first.\n\nYou should also consider using the `try_verify_in_tasklet option` for dm-verity, as well as making sure you have the commit `dm verity: enable WQ_HIGHPRI on verify_wq` which enabled the HIGHPRI flag on the dm-verity workqueue. These may have already solved your problem.",
+      "parentUuid": "d9300b7f_c1744508",
+      "revId": "132859c91c98932a083bf697825e5f59beedfdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
