@@ -70,6 +70,24 @@
       "parentUuid": "742492c3_dbd3e8f8",
       "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "344b5060_46583877",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1886360
+      },
+      "writtenOn": "2023-08-12T00:52:56Z",
+      "side": 1,
+      "message": "MTK has newly developed a general method for setting read-only partitions. \n\nWhen the kernel starts, the cmdline parameter contains information about the address and length of the read-only partition\n(For example: mtk_wp.wp_user\u003d0x7c000,0xbc000,\nblock address \u003d 0x7c000, length \u003d 0xbc000),\n\nAnd mtk-wp.ko will parse these read-only block information\n(Traverse all partitions of the block device to set the partition as read only if it is in the protected range).",
+      "parentUuid": "6c4780bd_9a08af9c",
+      "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
