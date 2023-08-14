@@ -612,6 +612,26 @@ out_free:
 	return ret;
 }
 
+static void dump_pkvm_devices(void)
+{
+	int i, j;
+
+	for (i = 0 ; i < kvm_nvhe_sym(registered_devices_nr) ; ++i) {
+		kvm_info("Device[%d]:", i);
+		for (j = 0 ; j < kvm_nvhe_sym(registered_devices)[i].nr_resources ; ++j) {
+			kvm_info("Resource[%d] 0x%llx - 0x%llx", j,
+				 kvm_nvhe_sym(registered_devices)[i].resources[j].base,
+				 kvm_nvhe_sym(registered_devices)[i].resources[j].size);
+		}
+
+		for (j = 0 ; j < kvm_nvhe_sym(registered_devices)[i].nr_iommus ; ++j) {
+			kvm_info("IOMMU[%d] %lld - %lld", j,
+				 kvm_nvhe_sym(registered_devices)[i].iommus[j].id,
+				 kvm_nvhe_sym(registered_devices)[i].iommus[j].endpoint);
+		}
+	}
+}
+
 static void __init _kvm_host_prot_finalize(void *arg)
 {
 	int *err = arg;
@@ -662,6 +682,8 @@ static int __init finalize_pkvm(void)
 		pr_err("Failed to init kvm devices %d\n", ret);
 		pkvm_firmware_rmem_clear();
 	}
+
+	dump_pkvm_devices();
 
 	ret = kvm_call_hyp_nvhe(__pkvm_devices_init);
 	if (ret)
