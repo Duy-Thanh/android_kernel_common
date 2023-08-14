@@ -16,6 +16,24 @@
       "message": "Waiting on CL:2706013",
       "revId": "60877c1cb3d31d65cfbf16f46e25333e3044327f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48e21d92_9f18cb93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-08-14T23:01:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73e08c81_b6c47572",
+      "revId": "60877c1cb3d31d65cfbf16f46e25333e3044327f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
