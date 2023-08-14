@@ -17,6 +17,24 @@
       "parentUuid": "98f5a5b0_13954d0f",
       "revId": "338b1dfa01c3315b71391858430952389707ae57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568f8334_862480f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1742255
+      },
+      "writtenOn": "2023-08-14T03:42:14Z",
+      "side": 1,
+      "message": "Change to UPSTREAM format",
+      "parentUuid": "8f557b68_5839ebb5",
+      "revId": "338b1dfa01c3315b71391858430952389707ae57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
