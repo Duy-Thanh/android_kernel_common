@@ -16,6 +16,24 @@
       "message": "Hi Chunhui\n  Can you cherry pick to android13-5.15?",
       "revId": "37dcd22f87cb7623f7ff4c58fe7e9052ed7000a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f67bae52_3dee014b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2023-08-14T09:52:18Z",
+      "side": 1,
+      "message": "OK, I will prepare patch for 5.15",
+      "parentUuid": "44474094_e6cca0e5",
+      "revId": "37dcd22f87cb7623f7ff4c58fe7e9052ed7000a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
