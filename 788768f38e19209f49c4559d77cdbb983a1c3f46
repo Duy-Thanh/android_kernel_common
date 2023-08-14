@@ -1,0 +1,51 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000051026255",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2707393?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "ea1e58a7_b6822a36",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 75,
+                "endChar": 0
+              },
+              "replacement": "    \"net/vmw_vsock/vmw_vsock_virtio_transport_common.ko\",\n"
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "b575640e_2d42f2d2",
+        "filename": "modules.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-14T18:41:40Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier modules.bzl` to format the file, or apply the suggested fix.",
+      "revId": "788768f38e19209f49c4559d77cdbb983a1c3f46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
