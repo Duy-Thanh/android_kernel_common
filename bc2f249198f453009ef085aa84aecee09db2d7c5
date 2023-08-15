@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64af52d2_9683c94b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-08-15T18:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f17ce96d_e9ce5ba3",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "bc2f249198f453009ef085aa84aecee09db2d7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc1671cc_9d86019e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-15T02:13:59Z",
       "side": 1,
       "message": "should be `Change-Id: Ief8de1f82885abeddbb6c0b625f7deca9fd74f6b`",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "bc2f249198f453009ef085aa84aecee09db2d7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e61fd5c_5d9e6aab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-08-15T18:13:02Z",
+      "side": 1,
+      "message": "Already merged in other branches under different Change-Ids: fca6ddffc8d03f12d5f4564de3564b315914b942 and Ief8de1f82885abeddbb6c0b625f7deca9fd74f6b",
+      "parentUuid": "cc1671cc_9d86019e",
       "range": {
         "startLine": 14,
         "startChar": 0,
