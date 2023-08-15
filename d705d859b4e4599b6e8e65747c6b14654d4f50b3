@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e90bf02_2ce5edfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2023-08-15T13:06:38Z",
+      "side": 1,
+      "message": "Pixel has pending patches at pa/2574317 and pa/2574318. But first one has to solve the following error:\nERROR: Unable to find drivers/ufs/host/ufs_qcom.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/db845c_no_kgdb/staging/lib/modules/6.4.0-mainline-g072810682bc2-abP61086458/kernel",
+      "revId": "d705d859b4e4599b6e8e65747c6b14654d4f50b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
