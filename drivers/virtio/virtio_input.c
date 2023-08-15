@@ -5,6 +5,8 @@
 #include <linux/input.h>
 #include <linux/slab.h>
 #include <linux/input/mt.h>
+#include <linux/kernel.h>
+//#include <stdio.h>
 
 #include <uapi/linux/virtio_ids.h>
 #include <uapi/linux/virtio_input.h>
@@ -209,12 +211,60 @@ static void virtinput_fill_evt(struct virtio_input *vi)
 	spin_unlock_irqrestore(&vi->lock, flags);
 }
 
+static int virtinput_ff_upload(struct input_dev *dev, struct ff_effect *effect, struct ff_effect *old) {
+  struct virtio_input *vi;
+  u16 kiwi_rumble_effect_upload;
+  s32 value;
+  printk(KERN_INFO "RIZHANG UPLOAD effect->type %d, effect_id: %d", effect->type, effect->id);
+
+  if (effect->type == FF_RUMBLE) {
+    vi = input_get_drvdata(dev);
+    kiwi_rumble_effect_upload = EV_MAX + 1;
+    printk(KERN_INFO "RIZHANG strong: %d, weak: %d", effect->u.rumble.strong_magnitude, effect->u.rumble.weak_magnitude);
+
+    value = effect->u.rumble.strong_magnitude << 16 | effect->u.rumble.weak_magnitude;
+    return virtinput_send_status(vi, kiwi_rumble_effect_upload, effect->id, value);
+  } else {
+    // WTF
+    printk(KERN_WARNING "RIZHANG effect type: %d is not supported", effect->type);
+  }
+  return 0;
+}
+
+static int virtinput_ff_erase(struct input_dev *dev, int effect_id) {
+  printk(KERN_INFO "RIZHANG ERASE effectId: %d", effect_id);
+  return 0;
+}
+
+static int virtinput_ff_playback(struct input_dev *dev, int effect_id, int value) {
+  struct virtio_input *vi;
+  printk(KERN_INFO "RIZHANG PLAYBACK effectId: %d, value: %d", effect_id, value);
+  vi = input_get_drvdata(dev);
+
+  return virtinput_send_status(vi, EV_FF, effect_id, value);
+}
+
+static void virtinput_ff_set_gain(struct input_dev *dev, u16 gain) {
+  printk(KERN_INFO "RIZHANG SET_GAIN gain: %d, value: %d", gain);
+}
+
+static void virtinput_ff_set_autocenter(struct input_dev *dev, u16 magnitude) {
+  printk(KERN_INFO "RIZHANG SET_AUTOCENTER gain: %d", magnitude);
+}
+
+static void virtinput_ff_destroy(struct ff_device *ff) {
+  printk(KERN_INFO "RIZHANG DESTROY gain");
+
+}
+
 static int virtinput_probe(struct virtio_device *vdev)
 {
 	struct virtio_input *vi;
 	unsigned long flags;
 	size_t size;
 	int abs, err;
+        int error;
+        struct ff_device *ff;
 
 	if (!virtio_has_feature(vdev, VIRTIO_F_VERSION_1))
 		return -ENODEV;
@@ -292,6 +342,8 @@ static int virtinput_probe(struct virtio_device *vdev)
 			   vi->idev->ledbit, LED_CNT);
 	virtinput_cfg_bits(vi, VIRTIO_INPUT_CFG_EV_BITS, EV_SND,
 			   vi->idev->sndbit, SND_CNT);
+	virtinput_cfg_bits(vi, VIRTIO_INPUT_CFG_EV_BITS, EV_FF,
+			   vi->idev->ffbit, FF_CNT);
 
 	if (test_bit(EV_ABS, vi->idev->evbit)) {
 		for (abs = 0; abs < ABS_CNT; abs++) {
@@ -300,6 +352,25 @@ static int virtinput_probe(struct virtio_device *vdev)
 			virtinput_cfg_abs(vi, abs);
 		}
 	}
+
+        if (sizeof(vi->idev->ffbit) > 0) {
+
+          printk(KERN_INFO "RIZHANG creating ff device");
+          error = input_ff_create(vi->idev, 50);
+
+          printk(KERN_INFO "RIZHANG error: %d", error);
+          ff = vi->idev->ff;
+
+          ff->upload = virtinput_ff_upload;
+          ff->erase = virtinput_ff_erase;
+          ff->playback = virtinput_ff_playback;
+          ff->set_gain = virtinput_ff_set_gain;
+          ff->set_autocenter = virtinput_ff_set_autocenter;
+          ff->destroy = virtinput_ff_destroy;
+        } else {
+          printk(KERN_INFO "RIZHANG not creating ff device");
+        }
+
 
 	virtio_device_ready(vdev);
 	vi->ready = true;
