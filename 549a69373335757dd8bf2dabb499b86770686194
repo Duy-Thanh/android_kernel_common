@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6396c089_018ec9cf",
+        "filename": "mm/mmap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3212,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-15T18:22:38Z",
+      "side": 1,
+      "message": "similar to here, do we also need to add it explicitly in `vma_expand()`? `__vma_adjust()` does not cover this as the `vma_prepare()` in upstream",
+      "range": {
+        "startLine": 3212,
+        "startChar": 1,
+        "endLine": 3212,
+        "endChar": 16
+      },
+      "revId": "549a69373335757dd8bf2dabb499b86770686194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
