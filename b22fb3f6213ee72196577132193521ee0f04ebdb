@@ -88,6 +88,24 @@
       "parentUuid": "6c4780bd_9a08af9c",
       "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92d1607_dc60c06d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-15T16:11:48Z",
+      "side": 1,
+      "message": "Parsing all of this should be done in userspace, not in the kernel, have your init process scripts handle this, the kernel should NOT be doing this for obvious reasons (i.e. this is a new user/kernel API you are creating that is not upstream.)",
+      "parentUuid": "344b5060_46583877",
+      "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
