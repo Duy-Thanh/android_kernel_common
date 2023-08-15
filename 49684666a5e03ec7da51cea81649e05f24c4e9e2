@@ -33,6 +33,24 @@
       "message": "This is not a clean re-revert. Please add a `[qyousef: ...]` note explaining the difference (guessing one of these previous patches changed the implementation of the functions you skipped).",
       "revId": "49684666a5e03ec7da51cea81649e05f24c4e9e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e13872c_b9329ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-08-15T11:58:53Z",
+      "side": 1,
+      "message": "Thanks Suren. I just reviewed the change again and I think I missed including a hunk. I included a description of the resolution to hopefully make review easier now.",
+      "parentUuid": "607578ea_0cb47fa9",
+      "revId": "49684666a5e03ec7da51cea81649e05f24c4e9e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
