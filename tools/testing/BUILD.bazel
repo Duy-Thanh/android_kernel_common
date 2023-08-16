@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2021 The Android Open Source Project
+
+load("//build/bazel_common_rules/zip:zip.bzl", "zip_archive")
+
+package(
+    default_visibility = [
+        "//visibility:public",
+    ],
+)
+
+zip_archive(
+  name = "tests_zip_x86_64",
+  out = "tests.zip",
+  srcs = ["//common/tools/testing/selftests:kselftest_tests_x86_64"],
+)
+
+zip_archive(
+  name = "tests_zip_arm64",
+  out = "tests.zip",
+  srcs = ["//common/tools/testing/selftests:kselftest_tests_arm64"],
+)
