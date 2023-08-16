@@ -588,8 +588,8 @@ kernel_build(
     base_kernel = ":kernel_aarch64",
     build_config = "build.config.kunit.aarch64",
     defconfig_fragments = [
-        "tools/testing/kunit/configs/android/kunit_defconfig",
-        "tools/testing/kunit/configs/android/kunit_clk_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_clk_defconfig",
     ],
     make_goals = ["modules"],
     module_outs = _KUNIT_COMMON_MODULES + _KUNIT_CLK_MODULES,
@@ -610,7 +610,7 @@ kernel_build(
     base_kernel = ":kernel_x86_64",
     build_config = "build.config.kunit.x86_64",
     defconfig_fragments = [
-        "tools/testing/kunit/configs/android/kunit_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_defconfig",
         # x86_64 does not set CONFIG_COMMON_CLK
     ],
     make_goals = ["modules"],
@@ -632,8 +632,8 @@ kernel_build(
     base_kernel = ":kernel_riscv64",
     build_config = "build.config.kunit.riscv64",
     defconfig_fragments = [
-        "tools/testing/kunit/configs/android/kunit_defconfig",
-        "tools/testing/kunit/configs/android/kunit_clk_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_clk_defconfig",
     ],
     make_goals = ["modules"],
     module_outs = _KUNIT_COMMON_MODULES + _KUNIT_CLK_MODULES,

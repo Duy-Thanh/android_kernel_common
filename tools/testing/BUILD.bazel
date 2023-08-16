@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2021 The Android Open Source Project
+
+package(
+    default_visibility = [
+        "//visibility:public",
+    ],
+)
+
+genrule(
+    name = "test_files_x86_64",
+    srcs = ["//common/tools/testing/selftests:kselftest_tests_x86_64"],
+    outs = ["test_files_x86_64.txt"],
+    cmd = "echo $(locations //common/tools/testing/selftests:kselftest_tests_x86_64) > $(OUTS)",
+)
+
+genrule(
+    name = "test_files_aarch64",
+    srcs = ["//common/tools/testing/selftests:kselftest_tests_arm64"],
+    outs = ["test_files_arm64.txt"],
+    cmd = "echo $(locations //common/tools/testing/selftests:kselftest_tests_arm64) > $(OUTS)",
+)
