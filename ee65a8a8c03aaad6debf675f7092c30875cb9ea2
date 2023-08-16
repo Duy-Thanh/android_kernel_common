@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b63f1303_655da2bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-08-16T16:19:43Z",
+      "side": 1,
+      "message": "Missing Bug ID. Cherry pick, android change ID, and cherry pick signoff should appear at end.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 71
+      },
+      "revId": "ee65a8a8c03aaad6debf675f7092c30875cb9ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
