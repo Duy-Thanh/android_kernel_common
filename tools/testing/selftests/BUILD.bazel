@@ -1,0 +1,79 @@
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2021 The Android Open Source Project
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "android_filegroup",
+)
+load("//common/tools/testing:abi.bzl", "cc_binary_with_abi")
+
+package(
+    default_visibility = [
+        "//visibility:private",
+    ],
+)
+
+cc_library(
+    name = "kselftest_headers_lib",
+    hdrs = glob(["*.h"]),
+)
+
+cc_binary_with_abi(
+  name = "kselftest_binderfs_test",
+  srcs = ["filesystems/binderfs/binderfs_test.c"],
+  target_compatible_with = ["@platforms//os:android"],
+  deps = [":kselftest_headers_lib"],
+)
+
+cc_binary_with_abi(
+    name = "kselftest_breakpoints_tests_step_after_suspend_test",
+    srcs = ["breakpoints/step_after_suspend_test.c"],
+    target_compatible_with = ["@platforms//os:android"],
+    deps = [":kselftest_headers_lib"],
+)
+
+cc_binary_with_abi(
+    name = "kselftest_breakpoints_tests_breakpoint_test_x86_64",
+    srcs = ["breakpoints/breakpoint_test.c"],
+    target_compatible_with = ["@platforms//os:android"],
+    deps = [":kselftest_headers_lib"],
+    abis = ["x86_64"],
+)
+
+cc_binary_with_abi(
+    name = "kselftest_breakpoints_tests_breakpoint_test_arm64",
+    srcs = ["breakpoints/breakpoint_test_arm64.c"],
+    target_compatible_with = ["@platforms//os:android"],
+    deps = [":kselftest_headers_lib"],
+    abis = ["arm64"],
+)
+
+copy_file(
+    name = "kselftest_gen_config",
+    src = ":config.xml",
+    out = "kselftest.config",
+)
+
+android_filegroup(
+    name = "kselftest_tests_x86_64",
+    srcs = [
+        ":kselftest_binderfs_test_x86_64",
+        ":kselftest_breakpoints_tests_breakpoint_test_x86_64_x86_64",
+        ":kselftest_breakpoints_tests_step_after_suspend_test_x86_64",
+        ":kselftest_gen_config",
+    ],
+    cpu = "x86_64",
+    visibility = ["//visibility:public"],
+)
+
+android_filegroup(
+    name = "kselftest_tests_arm64",
+    srcs = [
+        ":kselftest_binderfs_test_arm64",
+        ":kselftest_breakpoints_tests_breakpoint_test_arm64_arm64",
+        ":kselftest_breakpoints_tests_step_after_suspend_test_arm64",
+        ":kselftest_gen_config",
+    ],
+    cpu = "arm64",
+    visibility = ["//visibility:public"],
+)

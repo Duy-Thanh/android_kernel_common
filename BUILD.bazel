@@ -1,11 +1,14 @@
 # SPDX-License-Identifier: GPL-2.0
 # Copyright (C) 2021 The Android Open Source Project
 
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//build/bazel_common_rules/zip:zip.bzl", "zip_archive")
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels")
 load(
     "//build/kernel/kleaf:kernel.bzl",
+    "android_filegroup",
     "checkpatch",
     "ddk_headers",
     "kernel_build",
@@ -588,8 +591,8 @@ kernel_build(
     base_kernel = ":kernel_aarch64",
     build_config = "build.config.kunit.aarch64",
     defconfig_fragments = [
-        "tools/testing/kunit/configs/android/kunit_defconfig",
-        "tools/testing/kunit/configs/android/kunit_clk_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_clk_defconfig",
     ],
     make_goals = ["modules"],
     module_outs = _KUNIT_COMMON_MODULES + _KUNIT_CLK_MODULES,
@@ -610,7 +613,7 @@ kernel_build(
     base_kernel = ":kernel_x86_64",
     build_config = "build.config.kunit.x86_64",
     defconfig_fragments = [
-        "tools/testing/kunit/configs/android/kunit_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_defconfig",
         # x86_64 does not set CONFIG_COMMON_CLK
     ],
     make_goals = ["modules"],
@@ -632,8 +635,8 @@ kernel_build(
     base_kernel = ":kernel_riscv64",
     build_config = "build.config.kunit.riscv64",
     defconfig_fragments = [
-        "tools/testing/kunit/configs/android/kunit_defconfig",
-        "tools/testing/kunit/configs/android/kunit_clk_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_defconfig",
+        "//common/tools/testing:kunit/configs/android/kunit_clk_defconfig",
     ],
     make_goals = ["modules"],
     module_outs = _KUNIT_COMMON_MODULES + _KUNIT_CLK_MODULES,
@@ -826,3 +829,87 @@ ddk_headers(
     includes = [],
     visibility = ["//visibility:private"],
 )
+
+# # Selftests
+# cc_library(
+#     name = "kselftest_headers_lib",
+#     hdrs = glob(["tools/testing/selftests/*.h"]),
+#     visibility = ["//visibility:private"],
+# )
+
+# cc_binary(
+#     name = "kselftest_binderfs_test",
+#     srcs = ["tools/testing/selftests/filesystems/binderfs/binderfs_test.c"],
+#     target_compatible_with = ["@platforms//os:android"],
+#     deps = [":kselftest_headers_lib"],
+#     visibility = ["//visibility:private"],
+# )
+
+# cc_binary(
+#     name = "kselftest_breakpoints_tests_step_after_suspend_test",
+#     srcs = ["tools/testing/selftests/breakpoints/step_after_suspend_test.c"],
+#     target_compatible_with = ["@platforms//os:android"],
+#     deps = [":kselftest_headers_lib"],
+#     visibility = ["//visibility:private"],
+# )
+
+# cc_binary(
+#     name = "kselftest_breakpoints_tests_breakpoint_test_x86_64",
+#     srcs = ["tools/testing/selftests/breakpoints/breakpoint_test.c"],
+#     target_compatible_with = ["@platforms//os:android"],
+#     deps = [":kselftest_headers_lib"],
+#     visibility = ["//visibility:private"],
+# )
+
+# cc_binary(
+#     name = "kselftest_breakpoints_tests_breakpoint_test_arm64",
+#     srcs = ["tools/testing/selftests/breakpoints/breakpoint_test_arm64.c"],
+#     target_compatible_with = ["@platforms//os:android"],
+#     deps = [":kselftest_headers_lib"],
+#     visibility = ["//visibility:private"],
+# )
+
+# copy_file(
+#     name = "kselftest_gen_config",
+#     src = "tools/testing/selftests/config.xml",
+#     out = "kselftest.config",
+# )
+
+# common_selftest_targets = [
+#         ":kselftest_binderfs_test",
+#         ":kselftest_breakpoints_tests_step_after_suspend_test",
+#         ":kselftest_gen_config",
+#     ]
+
+# android_filegroup(
+#     name = "kselftest_tests_x86_64",
+#     srcs = common_selftest_targets + [
+#         ":kselftest_breakpoints_tests_breakpoint_test_x86_64",
+#     ],
+#     cpu = "x86_64",
+#     visibility = ["//visibility:private"],
+# )
+
+# android_filegroup(
+#     name = "kselftest_tests_arm64",
+#     srcs = common_selftest_targets + [
+#         ":kselftest_breakpoints_tests_breakpoint_test_arm64",
+#     ],
+#     cpu = "arm64",
+#     visibility = ["//visibility:private"],
+# )
+
+# zip_archive(
+#     name = "tests_x86_64",
+#     srcs = [":kselftest_tests_x86_64"],
+#     out = "tests_x86_64.zip",
+# )
+
+# copy_to_dist_dir(
+#     name = "tests_x86_64_dist",
+#     data = [
+#         ":tests_x86_64",
+#     ],
+#     dist_dir = "out/tests/dist",
+#     flat = True,
+# )
