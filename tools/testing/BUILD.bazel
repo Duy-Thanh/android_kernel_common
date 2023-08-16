@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2021 The Android Open Source Project
+
+load("//build/kernel/kleaf:zip.bzl", "zip_archive")
+
+package(
+    default_visibility = [
+        "//visibility:public",
+    ],
+)
+
+zip_archive(
+  name = "tests_zip",
+  zip_file = "tests.zip",
+  srcs = ["//common/tools/testing/selftests:kselftest_tests_x86_64"],
+)
