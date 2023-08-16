@@ -2,6 +2,26 @@
   "comments": [
     {
       "robotId": "ayeaye",
+      "robotRunId": "AR00000000000051266513",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5e2b3303_d84ff1a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-16T22:58:17Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 557485584 android-build.ayeaye-python-dispatcher_20230816.05_p0",
+      "revId": "0ab158725fc014b20a5d3c97bbbcaed2c8fa2d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
       "robotRunId": "AR00000000000051266509",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d2",
       "fixSuggestions": [
@@ -52,6 +72,63 @@
         "id": 1757831
       },
       "writtenOn": "2023-08-16T22:58:12Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "0ab158725fc014b20a5d3c97bbbcaed2c8fa2d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000051266509",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "4fa472b5_6cdb9d87",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 715,
+                "startChar": 0,
+                "endLine": 724,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 755,
+                "startChar": 0,
+                "endLine": 755,
+                "endChar": 0
+              },
+              "replacement": "    includes \u003d [\n        \"include/bionic\",\n        \"include/uapi\",\n    ],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 762,
+                "startChar": 0,
+                "endLine": 766,
+                "endChar": 0
+              },
+              "replacement": "        \"@platforms//os:linux\",\n        \"@platforms//cpu:x86_64\",\n    ],\n    deps \u003d [\n        \":kselftest_headers_lib\",\n        \":libc_bionic\",\n        \":uapi_headers_lib\",\n    ],\n)\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "019dda68_27417ce9",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-16T22:58:17Z",
       "side": 1,
       "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "0ab158725fc014b20a5d3c97bbbcaed2c8fa2d8b",
