@@ -1,0 +1,65 @@
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2021 The Android Open Source Project
+
+load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "android_filegroup",
+)
+
+package(
+    default_visibility = [
+        "//visibility:public",
+    ],
+)
+
+cc_library(
+    name = "kselftest_headers_lib",
+    hdrs = glob(["*.h"]),
+    visibility = ["//visibility:public"],
+)
+
+cc_binary(
+    name = "kselftest_binderfs_tests",
+    srcs = ["filesystems/binderfs/binderfs_test.c"],
+    target_compatible_with = ["@platforms//os:android"],
+    deps = [":kselftest_headers_lib"],
+)
+
+cc_binary(
+    name = "kselftest_breakpoints_tests_step_after_suspend_test",
+    srcs = ["breakpoints/step_after_suspend_test.c"],
+    target_compatible_with = ["@platforms//os:android"],
+    deps = [":kselftest_headers_lib"],
+)
+
+cc_binary(
+    name = "kselftest_breakpoints_tests_breakpoint_test",
+    srcs = ["breakpoints/breakpoint_test.c"],
+    target_compatible_with = ["@platforms//os:android"],
+    deps = [":kselftest_headers_lib"],
+)
+
+cc_binary(
+    name = "kselftest_capabilities_test_test_execve",
+    srcs = ["capabilities/test_execve.c"],
+    target_compatible_with = ["@platforms//os:android"],
+    deps = [":kselftest_headers_lib"],
+)
+
+android_filegroup(
+    name = "kselftest_tests_x86_64",
+    srcs = [
+        "kselftest_breakpoints_tests_breakpoint_test",
+        ":kselftest_binderfs_tests",
+        ":kselftest_breakpoints_tests_step_after_suspend_test",
+    ],
+    cpu = "x86_64",
+)
+
+genrule(
+    name = "test_files",
+    outs = ["test_files.txt"],
+    srcs = [":kselftest_tests_x86_64"],
+    cmd = "echo $(locations :kselftest_tests_x86_64) > $(OUTS)"
+)
