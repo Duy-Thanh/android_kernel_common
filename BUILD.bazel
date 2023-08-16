@@ -13,6 +13,7 @@ load(
     "merged_kernel_uapi_headers",
 )
 load(":modules.bzl", "COMMON_GKI_MODULES_LIST")
+load("//common-modules/virtual-device/kleaf_test:kleaf_test.bzl", "kleaf_test")
 
 package(
     default_visibility = [
@@ -685,4 +686,80 @@ ddk_headers(
     # Unsafe include directories are appended to ccflags-y.
     includes = [],
     visibility = ["//visibility:private"],
+)
+
+cc_library(
+    name = "uapi_headers_lib",
+    hdrs = glob(["include/**/*.h"]),
+    includes = ["include"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "kselftest_headers_lib",
+    hdrs = glob(["tools/testing/selftests/*.h"]),
+    includes = ["include"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "libc_bionic",
+    srcs = ["libc.so"],
+    hdrs = glob(["include/bionic/**/*.h"]),
+    visibility = ["//visibility:public"],
+)
+
+cc_test(
+    name = "kselftest_getsize_tests",
+    srcs = ["tools/testing/selftests/size/get_size.c"],
+    deps = [
+      ":uapi_headers_lib",
+      ":kselftest_headers_lib",
+      ":libc_bionic",
+    ],
+    includes = [
+      "include/uapi",
+      "include/bionic",
+    ],
+    copts = [
+        "-c",
+        "-Iinclude/uapi",
+        "-Wall",
+        "-Wno-deprecated",
+        "-Wno-format",
+        "-Wno-gnu-designator",
+        "-Wno-macro-redefined",
+        "-Wno-missing-field-initializers",
+        "-Wno-parentheses-equality",
+        "-Wno-pointer-arith",
+        "-Wno-sign-compare",
+        "-Wno-shift-negative-value",
+        "-Wno-switch",
+        "-Wno-absolute-value",
+        "-Wno-non-literal-null-conversion",
+        "-Wno-unused-value",
+        "-Wno-unused-variable",
+        "-Wno-unused-parameter",
+        "-Wno-empty-body",
+        "-Wno-literal-conversion",
+        "-Werror",
+        "-fPIE",
+        "-DANDROID",
+        "-D__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__",
+        "-D__LIBC_API__=10000",
+        "-D__LIBM_API__=10000",
+        "-D__LIBDL_API__=10000",
+        "-mstackrealign",
+        "-D__EXPORTED_HEADERS__",
+    ],
+    linkopts = [
+        "-nostartfiles",
+        "-pie",
+        "-Wl,--dynamic-linker=/system/bin/linker64",
+        "-nostdlib",
+    ],
+    target_compatible_with = [
+      "@platforms//os:linux",
+      "@platforms//cpu:x86_64",
+    ]
 )
