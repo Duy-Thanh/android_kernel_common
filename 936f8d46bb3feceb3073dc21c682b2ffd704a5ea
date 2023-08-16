@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000051269878",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "a99cd3ce_774c4644",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 715,
+                "startChar": 0,
+                "endLine": 724,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 755,
+                "startChar": 0,
+                "endLine": 755,
+                "endChar": 0
+              },
+              "replacement": "    includes \u003d [\n        \"include/bionic\",\n        \"include/uapi\",\n    ],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 762,
+                "startChar": 0,
+                "endLine": 765,
+                "endChar": 0
+              },
+              "replacement": "        \"@platforms//os:linux\",\n        \"@platforms//cpu:x86_64\",\n    ],\n    deps \u003d [\n        \":kselftest_headers_lib\",\n        \":libc_bionic\",\n        \":uapi_headers_lib\",\n    ],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 770,
+                "startChar": 0,
+                "endLine": 770,
+                "endChar": 0
+              },
+              "replacement": "    target_compatible_with \u003d [\"@platforms//os:android\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 771,
+                "startChar": 0,
+                "endLine": 772,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 777,
+                "startChar": 0,
+                "endLine": 778,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_binderfs_tests\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "8f8e5d21_7dedebc6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-16T23:37:07Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "936f8d46bb3feceb3073dc21c682b2ffd704a5ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
