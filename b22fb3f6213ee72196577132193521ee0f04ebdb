@@ -106,6 +106,24 @@
       "parentUuid": "344b5060_46583877",
       "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "516bd2b8_9f7842b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290919
+      },
+      "writtenOn": "2023-08-17T09:41:30Z",
+      "side": 1,
+      "message": "We think these 3 symbols are not new, May I know your concern about we use these symbols.\nFile: kernel-5.10/block/genhd.c\ndisk_part_iter_init\ndisk_part_iter_next\ndisk_part_iter_exit\n2)\nIf it is processed in user space, the time to set the read-only partition is late (later than the time to set the read-only partition in the kernel).",
+      "parentUuid": "a92d1607_dc60c06d",
+      "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
