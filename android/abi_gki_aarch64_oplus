@@ -254,6 +254,8 @@
   proc_create_data
   proc_mkdir
   proc_remove
+  profile_event_register
+  profile_event_unregister
   public_key_verify_signature
   put_disk
   __put_page
