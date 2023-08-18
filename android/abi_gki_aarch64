@@ -1,4 +1,5 @@
 [abi_symbol_list]
 # commonly used symbols
+  is_prime_number
   module_layout
   __put_task_struct
