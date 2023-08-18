@@ -1,5 +1,6 @@
 [abi_symbol_list]
 # commonly used symbols
+<<<<<<< HEAD   (a89c7b UPSTREAM: net/sched: cls_fw: Fix improper refcount update le)
   __cfi_slowpath
   __const_udelay
   _dev_err
@@ -18,6 +19,9 @@
   __list_add_valid
   __ll_sc_atomic64_andnot
   __ll_sc_atomic_add_return
+=======
+  is_prime_number
+>>>>>>> CHANGE (8e9119 ANDROID: GKI: Testing passive ABI monitoring)
   module_layout
   __mutex_init
   mutex_lock
