@@ -367,6 +367,24 @@
       "message": "what about reclaim_in_progress? Did vds_free_msg_buf_list not jsut add a lot of entries there that you need to process?",
       "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0506bff9_67f63bc8",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2586,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-08-18T17:28:46Z",
+      "side": 1,
+      "message": "Once the entries are in reclaim_in_progress, this driver is waiting on Trusty to do the unmap and then send a response to the unmap request. I think the best we can do is wait until the list is empty. Now that you point it out, I realize that this now needs to be in a different order, since IPC is required cleaning up buffers. I\u0027ve reworked, but it is untested because the driver cannot be unloaded in qemu. Shelving this CL for now.",
+      "parentUuid": "e105125b_f15568f5",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
