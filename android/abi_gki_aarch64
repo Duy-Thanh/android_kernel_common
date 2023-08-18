@@ -31,6 +31,7 @@
   ___ratelimit
   _raw_spin_lock_irqsave
   _raw_spin_unlock_irqrestore
+  reciprocal_value
   snprintf
   __stack_chk_fail
   __stack_chk_guard
