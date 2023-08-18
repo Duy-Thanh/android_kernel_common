@@ -10,6 +10,7 @@
   dummy_dma_ops
   find_next_bit
   find_next_zero_bit
+  is_prime_number
   kfree
   __kmalloc
   kmalloc_caches
