@@ -124,6 +124,19 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_util_est_se_tp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_update_nr_running_tp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_compute_energy_tp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_switch);
+<<<<<<< HEAD   (f62607aa89509bcda2fc90a13a027fa9da9e017e ANDROID: ABI: update symbol list for mtk)
+||||||| BASE   (f3f369cdfaa9f81bf60bf3a13cc604abe3d0b2c7 UPSTREAM: wifi: cfg80211: skip regulatory for punctured subc)
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_waking);
+#if defined(CONFIG_SCHEDSTATS)
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_sleep);
+#endif
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_waking);
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_wakeup);
+#if defined(CONFIG_SCHEDSTATS)
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_sleep);
+#endif
+>>>>>>> CHANGE (46bfbfed3408cd538a9d5eccf63681d454daa46f ANDROID: sched: Add EXPORT_SYMBOL_GPL for sched_wakeup)
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
 EXPORT_SYMBOL_GPL(runqueues);
