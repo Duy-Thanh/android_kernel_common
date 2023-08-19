@@ -120,7 +120,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_util_est_se_tp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_update_nr_running_tp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_switch);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_waking);
+<<<<<<< HEAD   (acad3c ANDROID: android: Create and enable debug_symbols driver)
 #if defined(CONFIG_SCHEDSTATS)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_wakeup);
+#ifdef CONFIG_SCHEDSTATS
+>>>>>>> CHANGE (7e1cb3 ANDROID: sched: Add EXPORT_SYMBOL_GPL for sched_wakeup)
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_sleep);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_wait);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_iowait);
