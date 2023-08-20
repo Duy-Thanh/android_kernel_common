@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc00017_787813c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2023-08-20T04:15:42Z",
+      "side": 1,
+      "message": "Bypassing presubmit: Verified that presubmit failures observed on two tests not related to this change. Tests have been failing on the latest good build without this patch.",
+      "revId": "98740656f54c6a67ee285bc0580447211da7dd0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
