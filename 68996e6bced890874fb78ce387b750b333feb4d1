@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97c6a05b_94479e04",
+        "filename": "drivers/virtio/virtio_input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1583282
+      },
+      "writtenOn": "2023-08-21T20:51:15Z",
+      "side": 1,
+      "message": "Yeah, that makes sense (e.g. why clutter the rest of the code with it if it\u0027s just this driver).\n\nThe part I was thinking about is what might happen when we merge in upstream kernel changes, or migrate kernel versions. If there\u0027s a new EV code, we\u0027ll have to update the value on the CrosVM side too (and because this is a calculated macro, we can\u0027t see that value directly in the code).",
+      "parentUuid": "73080d8b_09eb58f4",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69e258f6_782fb57a",
         "filename": "drivers/virtio/virtio_input.c",
         "patchSetId": 7
