@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24205dd_1cf72e90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2023-08-21T01:25:42Z",
+      "side": 1,
+      "message": "\u003e \u0027linux-next\u0027 is not an acceptable maintainer tree as commit hashes are not stable there.\n\u003e Please refer to a different maintainer tree or use FROMLIST instead.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 556790241 android-build.ayeaye-python-dispatcher_20230814.05_p0\n\nPlease fix.",
+      "parentUuid": "52498beb_8a488709",
+      "revId": "e512b7b62ff198556df436fe8b8ca5b258ca48a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
