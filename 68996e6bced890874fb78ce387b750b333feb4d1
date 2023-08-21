@@ -228,6 +228,30 @@
       },
       "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f4330f6_63a8c24b",
+        "filename": "drivers/virtio/virtio_input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1583282
+      },
+      "writtenOn": "2023-08-21T20:54:46Z",
+      "side": 1,
+      "message": "Ah gotcha, yeah that\u0027d be `virtinput_ff_erase` then.\n\nIt sounds like we wouldn\u0027t need to implement it at the moment, at least for what inputflinger does. It might be worth doing anyway for future proofing \u0026 completeness so we don\u0027t have to make more kernel changes later.",
+      "parentUuid": "d966cbf3_4d3ee809",
+      "range": {
+        "startLine": 266,
+        "startChar": 12,
+        "endLine": 266,
+        "endChar": 32
+      },
+      "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
