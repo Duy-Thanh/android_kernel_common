@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67e9fcba_32bb2bad",
+        "filename": "drivers/virtio/virtio_input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1683635
+      },
+      "writtenOn": "2023-08-21T19:25:02Z",
+      "side": 1,
+      "message": "Forgot to delete.",
+      "parentUuid": "b4120023_092d35af",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 27
+      },
+      "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90e7fcef_8e8a75c0",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-19T00:15:29Z",
       "side": 1,
       "message": "Would it make sense to just define this formally with the other `EV_` codes? That way if more `EV_` codes are added, `RUMBLE_EFFECT_TYPE` won\u0027t change values.",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73080d8b_09eb58f4",
+        "filename": "drivers/virtio/virtio_input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1683635
+      },
+      "writtenOn": "2023-08-21T19:25:02Z",
+      "side": 1,
+      "message": "I didn\u0027t move this with other EV codes because this feels like a hack (effects aren\u0027t supposed to be passed to the device through input events). This EV code is only relevant from this driver to CrosVm.",
+      "parentUuid": "90e7fcef_8e8a75c0",
       "range": {
         "startLine": 13,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83da9fd6_751c993e",
+        "filename": "drivers/virtio/virtio_input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1683635
+      },
+      "writtenOn": "2023-08-21T19:25:02Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "69e258f6_782fb57a",
+      "range": {
+        "startLine": 234,
+        "startChar": 71,
+        "endLine": 234,
+        "endChar": 72
+      },
+      "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44811c65_3df8dd2f",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-08-19T00:15:29Z",
       "side": 1,
       "message": "Should we implement to let the device clean up effects / rumble settings that won\u0027t be used? (Presumably we have to store them on the device side since the kernel could write a dozen types of rumble settings before playing one of them.)",
+      "range": {
+        "startLine": 266,
+        "startChar": 12,
+        "endLine": 266,
+        "endChar": 32
+      },
+      "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d966cbf3_4d3ee809",
+        "filename": "drivers/virtio/virtio_input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1683635
+      },
+      "writtenOn": "2023-08-21T19:25:02Z",
+      "side": 1,
+      "message": "That sounds like what `virtinput_ff_erase` is supposed to do. `destroy`, from what I\u0027ve seen, is for drivers to deallocate memory they own, such as the `private` field in `ff_device`.\n\nSome drivers won\u0027t event implement `destroy` since they won\u0027t need it. I\u0027m logging callbacks that we won\u0027t necessarily need for debugging purposes.\n\nAlso when a vibration event takes place, [InputFlinger will upload to effect and then play it right after](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/native/services/inputflinger/reader/EventHub.cpp;l\u003d1634), so I don\u0027t think we need to save effects.",
+      "parentUuid": "44811c65_3df8dd2f",
       "range": {
         "startLine": 266,
         "startChar": 12,
