@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "690f88c4_b7f4500b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-08-21T18:29:46Z",
+      "side": 1,
+      "message": "Looks like this is getting merge conflict errors, can you rebase (and regenerate the symbols) for this series against the current branch HEAD?",
+      "revId": "bbefc8086c64149eec3bf15bc302307b97daa8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
