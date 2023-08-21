@@ -16,6 +16,23 @@
       "message": "The failed test \"TestFileContentsRandomness\" does not seem to be relevant to the patch at all ! Re-attempting presubmit.",
       "revId": "a176ad5755bd261d7355c2762eddb8a06ecc26a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "964e9a02_589821a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-08-21T20:36:09Z",
+      "side": 1,
+      "message": "Hi vmartensson@, Can you owner+1 given that tkjos@ is out ?",
+      "revId": "a176ad5755bd261d7355c2762eddb8a06ecc26a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
