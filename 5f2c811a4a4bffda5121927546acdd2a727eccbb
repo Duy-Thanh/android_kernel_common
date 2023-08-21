@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c139db38_508c4007",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2023-08-21T15:07:28Z",
+      "side": 1,
+      "message": "Fixes a boot regression on DB845c running android13-5.10 in Linaro\u0027s LKFT lab.",
+      "revId": "5f2c811a4a4bffda5121927546acdd2a727eccbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
