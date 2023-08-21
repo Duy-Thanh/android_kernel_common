@@ -22,6 +22,30 @@
       },
       "revId": "711db4ffd0d07d754f9dbf398514c409dec0dc01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0eabae2_6107d515",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-08-21T18:28:18Z",
+      "side": 1,
+      "message": "Looks like that\u0027s been dropped. Any further objections on this, Greg?",
+      "parentUuid": "c2749a60_93a92f32",
+      "range": {
+        "startLine": 321,
+        "startChar": 2,
+        "endLine": 321,
+        "endChar": 26
+      },
+      "revId": "711db4ffd0d07d754f9dbf398514c409dec0dc01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
