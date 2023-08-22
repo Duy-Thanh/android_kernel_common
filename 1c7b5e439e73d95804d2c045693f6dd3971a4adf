@@ -16,6 +16,23 @@
       "message": "Adding Saravana and Lee for owner +1",
       "revId": "1c7b5e439e73d95804d2c045693f6dd3971a4adf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42f59c0a_5dd50dad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2023-08-22T23:56:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1c7b5e439e73d95804d2c045693f6dd3971a4adf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
