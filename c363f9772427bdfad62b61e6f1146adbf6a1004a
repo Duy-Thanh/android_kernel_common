@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d1fec5a_b582db87",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-22T16:36:29Z",
+      "side": 1,
+      "message": "must be EXPORT_SYMBOL_GPL()",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "c363f9772427bdfad62b61e6f1146adbf6a1004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
