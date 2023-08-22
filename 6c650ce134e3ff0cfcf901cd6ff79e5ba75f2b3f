@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0da8875_926d1fb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1301696
+      },
+      "writtenOn": "2023-08-22T01:58:49Z",
+      "side": 1,
+      "message": "```ERROR: no such package \u0027prebuilts/clang/host/linux-x86/clang-r487747c\u0027: BUILD file not found in any of the following directories.```\nThe build break is not related to this patch.",
+      "revId": "6c650ce134e3ff0cfcf901cd6ff79e5ba75f2b3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
