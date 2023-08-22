@@ -124,6 +124,24 @@
       "parentUuid": "a92d1607_dc60c06d",
       "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194b2319_3373de82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-22T07:16:20Z",
+      "side": 1,
+      "message": "See my comments in the bug please.",
+      "parentUuid": "516bd2b8_9f7842b3",
+      "revId": "b22fb3f6213ee72196577132193521ee0f04ebdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
