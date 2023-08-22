@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "324ae4cb_ef8b8834",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-08-22T02:50:13Z",
+      "side": 1,
+      "message": "Presubmit is failing with:\n```\nINFO: From [stg] Comparing Kernel ABI @//common:kernel_aarch64_abi_diff:\nINFO: ABI DIFFERENCES HAVE BEEN DETECTED!\nINFO: 1 function symbol(s) added\n  \u0027int __traceiter_android_vh_record_pcpu_rwsem_time_early(void*, unsigned long, struct percpu_rw_semaphore*)\u0027\n\n1 variable symbol(s) added\n  \u0027struct tracepoint __tracepoint_android_vh_record_pcpu_rwsem_time_early\u0027\nTarget //common:kernel_aarch64_abi_dist up-to-date:\n  bazel-bin/common/kernel_aarch64_abi_dist\nINFO: Elapsed time: 261.364s, Critical Path: 237.17s\nINFO: 429 processes: 398 internal, 30 linux-sandbox, 1 local.\nINFO: Build completed successfully, 429 total actions\nINFO: Running command line: bazel-bin/common/kernel_aarch64_abi_dist \u0027--dist_dir\u003d/buildbot/dist_dirs/aosp_kernel-common-android14-6.1-linux-kernel_abi_aarch64/P61491952\u0027 --flat\n[dist] INFO: Copying to /buildbot/dist_dirs/aosp_kernel-common-android14-6.1-linux-kernel_abi_aarch64/P61491952\nINFO: ABI DIFFERENCES HAVE BEEN DETECTED!\nINFO: 1 function symbol(s) added\n  \u0027int __traceiter_android_vh_record_pcpu_rwsem_time_early(void*, unsigned long, struct percpu_rw_semaphore*)\u0027\n\n1 variable symbol(s) added\n  \u0027struct tracepoint __tracepoint_android_vh_record_pcpu_rwsem_time_early\u0027\n  ```",
+      "revId": "a9ab3a7d3e9b38c584c3e6625bc31f77d301b51d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
