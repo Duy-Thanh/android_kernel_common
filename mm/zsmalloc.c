@@ -759,7 +759,10 @@ static enum fullness_group fix_fullness_group(struct size_class *class,
 
 	remove_zspage(class, zspage, currfg);
 	insert_zspage(class, zspage, newfg);
+
+	migrate_write_lock(zspage);
 	set_zspage_mapping(zspage, class_idx, newfg);
+	migrate_write_unlock(zspage);
 out:
 	return newfg;
 }
@@ -1438,7 +1441,10 @@ unsigned long zs_malloc(struct zs_pool *pool, size_t size, gfp_t gfp)
 	obj = obj_malloc(pool, zspage, handle);
 	newfg = get_fullness_group(class, zspage);
 	insert_zspage(class, zspage, newfg);
+
+	migrate_write_lock(zspage);
 	set_zspage_mapping(zspage, class->index, newfg);
+	migrate_write_unlock(zspage);
 	record_obj(handle, obj);
 	atomic_long_add(class->pages_per_zspage,
 				&pool->pages_allocated);
