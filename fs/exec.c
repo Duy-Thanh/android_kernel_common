@@ -72,6 +72,7 @@
 #include <trace/events/task.h>
 #include "internal.h"
 
+#include <trace/events/fs.h>
 #include <trace/events/sched.h>
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(task_rename);
@@ -156,6 +157,10 @@ SYSCALL_DEFINE1(uselib, const char __user *, library)
 		goto exit;
 
 	fsnotify_open(file);
+
+	tmp = getname(library);
+	trace_uselib(tmp->name);
+	putname(tmp);
 
 	error = -ENOEXEC;
 
@@ -934,6 +939,9 @@ static struct file *do_open_execat(int fd, struct filename *name, int flags)
 	err = deny_write_access(file);
 	if (err)
 		goto exit;
+
+	if (name->name[0] != '\0')
+		trace_open_exec(name->name);
 
 	if (name->name[0] != '\0')
 		fsnotify_open(file);
