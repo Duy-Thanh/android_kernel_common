@@ -25,6 +25,8 @@
 #include <linux/smp.h>
 #include <linux/delay.h>
 
+#include <trace/hooks/cpuinfo.h>
+
 /*
  * In case the boot CPU is hotpluggable, we record its initial state and
  * current state separately. Certain system registers may contain different
@@ -159,6 +161,7 @@ static int c_show(struct seq_file *m, void *v)
 {
 	int i, j;
 	bool compat = personality(current->personality) == PER_LINUX32;
+	const char *hwinfo = NULL;
 
 	for_each_online_cpu(i) {
 		struct cpuinfo_arm64 *cpuinfo = &per_cpu(cpu_data, i);
@@ -219,6 +222,10 @@ static int c_show(struct seq_file *m, void *v)
 		seq_printf(m, "CPU revision\t: %d\n\n", MIDR_REVISION(midr));
 	}
 
+	trace_android_vh_cpuinfo_get_hwinfo(&hwinfo);
+	if (hwinfo) {
+		seq_printf(m, "Hardware\t: %s\n", hwinfo);
+	}
 	return 0;
 }
 

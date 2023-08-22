@@ -67,6 +67,7 @@
 #include <trace/hooks/psi.h>
 #include <trace/hooks/bl_hib.h>
 #include <trace/hooks/regmap.h>
+#include <trace/hooks/cpuinfo.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -320,3 +321,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpuinfo_get_hwinfo);
