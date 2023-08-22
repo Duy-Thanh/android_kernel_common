@@ -277887,6 +277887,14 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x9aaabb4a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9aacb204
   return_type_id: 0x6720d32f
   parameter_id: 0x1d44326e
@@ -320714,6 +320722,15 @@ elf_symbol {
   full_name: "migrate_pages"
 }
 elf_symbol {
+  id: 0xbad16ab3
+  name: "migrate_swap"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x001abd4f
+  type_id: 0x9aaabb4a
+  full_name: "migrate_swap"
+}
+elf_symbol {
   id: 0x399512e2
   name: "mii_ethtool_get_link_ksettings"
   is_defined: true
@@ -346409,6 +346426,7 @@ interface {
   symbol_id: 0xa208d2dc
   symbol_id: 0x1c9ded63
   symbol_id: 0x89c6398f
+  symbol_id: 0xbad16ab3
   symbol_id: 0x399512e2
   symbol_id: 0xbc90165b
   symbol_id: 0x69f7fc4b
