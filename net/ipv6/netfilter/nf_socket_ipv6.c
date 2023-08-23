@@ -102,8 +102,12 @@ nf_socket_get_sock_v6(struct net *net, struct sk_buff *skb, int doff,
 struct sock *nf_sk_lookup_slow_v6(struct net *net, const struct sk_buff *skb,
 				  const struct net_device *indev)
 {
+<<<<<<< HEAD   (5a7805 UPSTREAM: Bluetooth: L2CAP: Fix use-after-free in l2cap_sock)
 	struct sock *sk = skb->sk;
 	__be16 uninitialized_var(dport), uninitialized_var(sport);
+=======
+	__be16 dport, sport;
+>>>>>>> BRANCH (4dbbc9 Linux 4.14.322)
 	const struct in6_addr *daddr = NULL, *saddr = NULL;
 	struct ipv6hdr *iph = ipv6_hdr(skb), ipv6_var;
 	struct sk_buff *data_skb = NULL;

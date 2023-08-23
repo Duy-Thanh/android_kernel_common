@@ -96,12 +96,16 @@ nf_socket_get_sock_v4(struct net *net, struct sk_buff *skb, const int doff,
 struct sock *nf_sk_lookup_slow_v4(struct net *net, const struct sk_buff *skb,
 				  const struct net_device *indev)
 {
-	__be32 uninitialized_var(daddr), uninitialized_var(saddr);
-	__be16 uninitialized_var(dport), uninitialized_var(sport);
+	__be32 daddr, saddr;
+	__be16 dport, sport;
 	const struct iphdr *iph = ip_hdr(skb);
 	struct sk_buff *data_skb = NULL;
+<<<<<<< HEAD   (5a7805 UPSTREAM: Bluetooth: L2CAP: Fix use-after-free in l2cap_sock)
 	struct sock *sk = skb->sk;
 	u8 uninitialized_var(protocol);
+=======
+	u8 protocol;
+>>>>>>> BRANCH (4dbbc9 Linux 4.14.322)
 #if IS_ENABLED(CONFIG_NF_CONNTRACK)
 	enum ip_conntrack_info ctinfo;
 	struct nf_conn const *ct;
