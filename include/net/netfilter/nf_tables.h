@@ -1093,7 +1093,10 @@ int nft_setelem_validate(const struct nft_ctx *ctx, struct nft_set *set,
 			 struct nft_set_elem *elem);
 int nft_set_catchall_validate(const struct nft_ctx *ctx, struct nft_set *set);
 int nf_tables_bind_chain(const struct nft_ctx *ctx, struct nft_chain *chain);
+<<<<<<< HEAD   (16e509 ANDROID: ABI: Update STG ABI to format version 2)
 void nf_tables_unbind_chain(const struct nft_ctx *ctx, struct nft_chain *chain);
+=======
+>>>>>>> BRANCH (9fd41a ANDROID: Delete build.config.gki.aarch64.16k.)
 
 enum nft_chain_types {
 	NFT_CHAIN_T_DEFAULT = 0,

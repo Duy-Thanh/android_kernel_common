@@ -203,6 +203,7 @@ static void __nft_set_trans_bind(const struct nft_ctx *ctx, struct nft_set *set,
 	}
 }
 
+<<<<<<< HEAD   (16e509 ANDROID: ABI: Update STG ABI to format version 2)
 static void nft_set_trans_bind(const struct nft_ctx *ctx, struct nft_set *set)
 {
 	return __nft_set_trans_bind(ctx, set, true);
@@ -265,6 +266,48 @@ int nf_tables_bind_chain(const struct nft_ctx *ctx, struct nft_chain *chain)
 void nf_tables_unbind_chain(const struct nft_ctx *ctx, struct nft_chain *chain)
 {
 	__nft_chain_trans_bind(ctx, chain, false);
+=======
+static void nft_chain_trans_bind(const struct nft_ctx *ctx, struct nft_chain *chain)
+{
+	struct nftables_pernet *nft_net;
+	struct net *net = ctx->net;
+	struct nft_trans *trans;
+
+	if (!nft_chain_binding(chain))
+		return;
+
+	nft_net = nft_pernet(net);
+	list_for_each_entry_reverse(trans, &nft_net->commit_list, list) {
+		switch (trans->msg_type) {
+		case NFT_MSG_NEWCHAIN:
+			if (nft_trans_chain(trans) == chain)
+				nft_trans_chain_bound(trans) = true;
+			break;
+		case NFT_MSG_NEWRULE:
+			if (trans->ctx.chain == chain)
+				nft_trans_rule_bound(trans) = true;
+			break;
+		}
+	}
+}
+
+int nf_tables_bind_chain(const struct nft_ctx *ctx, struct nft_chain *chain)
+{
+	if (!nft_chain_binding(chain))
+		return 0;
+
+	if (nft_chain_binding(ctx->chain))
+		return -EOPNOTSUPP;
+
+	if (chain->bound)
+		return -EBUSY;
+
+	chain->bound = true;
+	chain->use++;
+	nft_chain_trans_bind(ctx, chain);
+
+	return 0;
+>>>>>>> BRANCH (9fd41a ANDROID: Delete build.config.gki.aarch64.16k.)
 }
 
 static int nft_netdev_register_hooks(struct net *net,
@@ -3889,6 +3932,8 @@ static int nf_tables_delrule(struct sk_buff *skb, const struct nfnl_info *info,
 	} else {
 		list_for_each_entry(chain, &table->chains, list) {
 			if (!nft_is_active_next(net, chain))
+				continue;
+			if (nft_chain_is_bound(chain))
 				continue;
 
 			ctx.chain = chain;

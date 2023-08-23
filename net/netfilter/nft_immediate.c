@@ -150,9 +150,12 @@ static void nft_immediate_deactivate(const struct nft_ctx *ctx,
 				nft_rule_expr_deactivate(&chain_ctx, rule, phase);
 
 			switch (phase) {
+<<<<<<< HEAD   (16e509 ANDROID: ABI: Update STG ABI to format version 2)
 			case NFT_TRANS_PREPARE_ERROR:
 				nf_tables_unbind_chain(ctx, chain);
 				fallthrough;
+=======
+>>>>>>> BRANCH (9fd41a ANDROID: Delete build.config.gki.aarch64.16k.)
 			case NFT_TRANS_PREPARE:
 				nft_deactivate_next(ctx->net, chain);
 				break;
