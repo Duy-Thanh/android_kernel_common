@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "569c4c6f_fb616c3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-23T09:20:24Z",
+      "side": 1,
+      "message": "Sorry, but modifying cpuinfo like this is not allowed, you are creating a new user/kernel ABI that Android can not support.\n\nThis type of change has been rejected numerous times in the past.",
+      "revId": "0a7671031a50cfd2e07ea0331e48bd06139a8fa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
