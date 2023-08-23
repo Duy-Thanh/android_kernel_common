@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b016d3_cb668e25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-23T09:18:52Z",
+      "side": 1,
+      "message": "Breaks the kernel api, needs to be resolved in an abi-safe way.",
+      "revId": "42de6108073fd7fe6ea9d20f1c8f608e3168dcbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
