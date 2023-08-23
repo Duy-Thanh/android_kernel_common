@@ -22,6 +22,30 @@
       },
       "revId": "c363f9772427bdfad62b61e6f1146adbf6a1004a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7475d666_951a805a",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2038100
+      },
+      "writtenOn": "2023-08-23T04:24:15Z",
+      "side": 1,
+      "message": "A correction patchset is pushed, please review again.\nThank you for your time!",
+      "parentUuid": "5d1fec5a_b582db87",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "c363f9772427bdfad62b61e6f1146adbf6a1004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
