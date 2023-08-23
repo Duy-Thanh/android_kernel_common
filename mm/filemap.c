@@ -57,6 +57,8 @@
 
 #include <asm/mman.h>
 
+#undef CREATE_TRACE_POINTS                                                 
+#include <trace/hooks/mm.h>  
 /*
  * Shared mappings implemented 30.11.1994. It's not fully working yet,
  * though.
