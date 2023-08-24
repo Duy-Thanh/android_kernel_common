@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3b8710e_89ea9cc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-08-24T23:34:16Z",
+      "side": 1,
+      "message": "Concern was",
+      "revId": "266382c539852087e9568decfd3016c646bc428b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff6779d4_48f41c88",
+        "filename": "mm/zsmalloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-08-24T23:34:16Z",
+      "side": 1,
+      "message": "Here, size_class was not yet instantiated.",
+      "range": {
+        "startLine": 2200,
+        "startChar": 16,
+        "endLine": 2200,
+        "endChar": 25
+      },
+      "revId": "266382c539852087e9568decfd3016c646bc428b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

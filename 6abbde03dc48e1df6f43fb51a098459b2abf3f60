@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "437d8766_0c34b29d",
+        "filename": "mm/zsmalloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-08-24T23:34:16Z",
+      "side": 0,
+      "message": "The popular way we(at least, Suren and me 😊) are using to keep KMI is using ext version.\n\nYou can refer\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2084548",
+      "range": {
+        "startLine": 248,
+        "startChar": 12,
+        "endLine": 248,
+        "endChar": 16
+      },
+      "revId": "6abbde03dc48e1df6f43fb51a098459b2abf3f60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
