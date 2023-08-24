@@ -22,6 +22,47 @@
       },
       "revId": "38982c0455774f46bcef66ba37490215cfed2832",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bd652ba_766ceb5b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2023-08-24T20:35:15Z",
+      "side": 1,
+      "message": "The sort obviously captured this (copy_page) and made the move correcting the previous, incorrect order.  The tool we\u0027re using must not have seen that as an add. Let me examine what other people write in their commit text, when something simply oves.",
+      "parentUuid": "7d3a8f67_9b984e80",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "38982c0455774f46bcef66ba37490215cfed2832",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6d838f_0fc646b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2023-08-24T20:35:15Z",
+      "side": 1,
+      "message": "Thanks Greg, I will look to see if I should update the text, or if in fact I should even be including all of these items.  Everything here was found and printed with an automated tool.",
+      "revId": "38982c0455774f46bcef66ba37490215cfed2832",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
