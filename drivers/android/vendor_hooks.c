@@ -77,6 +77,7 @@
 #include <trace/hooks/pci.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/wakeupbypass.h>
+#include <trace/hooks/inputeventspacket.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -492,6 +493,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout_abort);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wakeup_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inputevents_packet);
 /*
  * For type visibility
  */

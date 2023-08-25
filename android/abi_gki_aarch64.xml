@@ -6613,6 +6613,7 @@
       <elf-symbol name='__tracepoint_android_vh_inactive_is_low' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9da95945'/>
       <elf-symbol name='__tracepoint_android_vh_include_reserved_zone' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdf6b3544'/>
       <elf-symbol name='__tracepoint_android_vh_init_swap_info_struct' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1264c599'/>
+      <elf-symbol name='__tracepoint_android_vh_inputevents_packet' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3550ae7b'/>
       <elf-symbol name='__tracepoint_android_vh_iommu_alloc_iova' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x456fc48'/>
       <elf-symbol name='__tracepoint_android_vh_iommu_free_iova' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd04c533c'/>
       <elf-symbol name='__tracepoint_android_vh_iommu_iovad_alloc_iova' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7907ef49'/>
@@ -15458,6 +15459,89 @@
       <array-type-def dimensions='1' type-id='8f048e17' size-in-bits='infinite' id='167619f6'>
         <subrange length='infinite' type-id='7ff19f0f' id='031f2035'/>
       </array-type-def>
+      <class-decl name='compact_control' size-in-bits='1024' is-struct='yes' visibility='default' filepath='mm/internal.h' line='237' column='1' id='16773614'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='freepages' type-id='72f469ec' visibility='default' filepath='mm/internal.h' line='238' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='migratepages' type-id='72f469ec' visibility='default' filepath='mm/internal.h' line='239' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='nr_freepages' type-id='f0981eeb' visibility='default' filepath='mm/internal.h' line='240' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='288'>
+          <var-decl name='nr_migratepages' type-id='f0981eeb' visibility='default' filepath='mm/internal.h' line='241' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='free_pfn' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='242' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='384'>
+          <var-decl name='migrate_pfn' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='243' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='448'>
+          <var-decl name='fast_start_pfn' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='244' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='512'>
+          <var-decl name='zone' type-id='0a0aff97' visibility='default' filepath='mm/internal.h' line='245' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='576'>
+          <var-decl name='total_migrate_scanned' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='246' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='640'>
+          <var-decl name='total_free_scanned' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='247' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='704'>
+          <var-decl name='fast_search_fail' type-id='8efea9e5' visibility='default' filepath='mm/internal.h' line='248' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='720'>
+          <var-decl name='search_order' type-id='a2185560' visibility='default' filepath='mm/internal.h' line='249' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='736'>
+          <var-decl name='gfp_mask' type-id='96d7cfec' visibility='default' filepath='mm/internal.h' line='250' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='768'>
+          <var-decl name='order' type-id='95e97e5e' visibility='default' filepath='mm/internal.h' line='251' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='800'>
+          <var-decl name='migratetype' type-id='95e97e5e' visibility='default' filepath='mm/internal.h' line='252' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='832'>
+          <var-decl name='alloc_flags' type-id='20f5f452' visibility='default' filepath='mm/internal.h' line='253' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='864'>
+          <var-decl name='highest_zoneidx' type-id='2448a865' visibility='default' filepath='mm/internal.h' line='254' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='896'>
+          <var-decl name='mode' type-id='157252dd' visibility='default' filepath='mm/internal.h' line='255' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='928'>
+          <var-decl name='ignore_skip_hint' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='256' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='936'>
+          <var-decl name='no_set_skip_hint' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='257' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='944'>
+          <var-decl name='ignore_block_suitable' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='258' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='952'>
+          <var-decl name='direct_compaction' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='259' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='960'>
+          <var-decl name='proactive_compaction' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='260' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='968'>
+          <var-decl name='whole_zone' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='261' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='976'>
+          <var-decl name='contended' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='262' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='984'>
+          <var-decl name='rescan' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='263' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='992'>
+          <var-decl name='alloc_contig' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='264' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='59a625dc' size-in-bits='64' id='168dc242'/>
       <function-type size-in-bits='64' id='1697786f'>
         <parameter type-id='91d0de51' name='_vq'/>
@@ -45411,9 +45495,6 @@
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='c46c1f27' size-in-bits='64' id='60a257ef'/>
-      <array-type-def dimensions='1' type-id='e7d2a5fc' size-in-bits='infinite' id='60a540a8'>
-        <subrange length='infinite' type-id='7ff19f0f' id='031f2035'/>
-      </array-type-def>
       <class-decl name='snd_dec_flac' size-in-bits='96' is-struct='yes' visibility='default' filepath='include/uapi/sound/compress_params.h' line='325' column='1' id='60b3851a'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='sample_size' type-id='d315442e' visibility='default' filepath='include/uapi/sound/compress_params.h' line='326' column='1'/>
@@ -68615,7 +68696,14 @@
       <pointer-type-def type-id='bcb69272' size-in-bits='64' id='9778250c'/>
       <pointer-type-def type-id='d4984c46' size-in-bits='64' id='97786120'/>
       <pointer-type-def type-id='2e6f3990' size-in-bits='64' id='97851996'/>
-      <class-decl name='capture_control' is-struct='yes' visibility='default' is-declaration-only='yes' id='978e8e27'/>
+      <class-decl name='capture_control' size-in-bits='128' is-struct='yes' visibility='default' filepath='mm/internal.h' line='271' column='1' id='978e8e27'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='cc' type-id='cdea3372' visibility='default' filepath='mm/internal.h' line='272' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='page' type-id='02f11ed4' visibility='default' filepath='mm/internal.h' line='273' column='1'/>
+        </data-member>
+      </class-decl>
       <array-type-def dimensions='1' type-id='8f048e17' size-in-bits='80' id='979253d9'>
         <subrange length='10' type-id='7ff19f0f' id='487da03a'/>
       </array-type-def>
@@ -93926,6 +94014,7 @@
           <var-decl name='android_oem_data1' type-id='24a375b2' visibility='default' filepath='block/blk-mq.h' line='39' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='16773614' size-in-bits='64' id='cdea3372'/>
       <pointer-type-def type-id='23f90633' size-in-bits='64' id='cdea97c3'/>
       <function-type size-in-bits='64' id='cdead692'>
         <parameter type-id='77e79a4b'/>
@@ -96735,17 +96824,7 @@
       </array-type-def>
       <pointer-type-def type-id='9b08f7cd' size-in-bits='64' id='d504f73d'/>
       <pointer-type-def type-id='8edc59cf' size-in-bits='64' id='d507826b'/>
-      <class-decl name='fscrypt_blk_crypto_key' size-in-bits='1280' is-struct='yes' visibility='default' filepath='fs/crypto/inline_crypt.c' line='25' column='1' id='d509ab32'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='base' type-id='7b61b7b4' visibility='default' filepath='fs/crypto/inline_crypt.c' line='26' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1216'>
-          <var-decl name='num_devs' type-id='95e97e5e' visibility='default' filepath='fs/crypto/inline_crypt.c' line='27' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1280'>
-          <var-decl name='devs' type-id='60a540a8' visibility='default' filepath='fs/crypto/inline_crypt.c' line='28' column='1'/>
-        </data-member>
-      </class-decl>
+      <class-decl name='fscrypt_blk_crypto_key' is-struct='yes' visibility='default' is-declaration-only='yes' id='d509ab32'/>
       <class-decl name='kmsg_dumper' size-in-bits='448' is-struct='yes' visibility='default' filepath='include/linux/kmsg_dump.h' line='40' column='1' id='d50d3459'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='list' type-id='72f469ec' visibility='default' filepath='include/linux/kmsg_dump.h' line='41' column='1'/>
@@ -116501,9 +116580,9 @@
       </function-type>
       <pointer-type-def type-id='46f53066' size-in-bits='64' id='fffb07a4'/>
       <qualified-type-def type-id='55efd1a3' const='yes' id='fffdaf52'/>
-      <var-decl name='GKI_struct_gic_chip_data' type-id='d3100295' mangled-name='GKI_struct_gic_chip_data' visibility='default' filepath='drivers/android/vendor_hooks.c' line='500' column='1' elf-symbol-id='GKI_struct_gic_chip_data'/>
+      <var-decl name='GKI_struct_gic_chip_data' type-id='d3100295' mangled-name='GKI_struct_gic_chip_data' visibility='default' filepath='drivers/android/vendor_hooks.c' line='502' column='1' elf-symbol-id='GKI_struct_gic_chip_data'/>
       <var-decl name='GKI_struct_selinux_state' type-id='4ae52763' mangled-name='GKI_struct_selinux_state' visibility='default' filepath='security/selinux/vendor_hooks.c' line='21' column='1' elf-symbol-id='GKI_struct_selinux_state'/>
-      <var-decl name='GKI_struct_swap_slots_cache' type-id='30eaa112' mangled-name='GKI_struct_swap_slots_cache' visibility='default' filepath='drivers/android/vendor_hooks.c' line='505' column='1' elf-symbol-id='GKI_struct_swap_slots_cache'/>
+      <var-decl name='GKI_struct_swap_slots_cache' type-id='30eaa112' mangled-name='GKI_struct_swap_slots_cache' visibility='default' filepath='drivers/android/vendor_hooks.c' line='507' column='1' elf-symbol-id='GKI_struct_swap_slots_cache'/>
       <function-decl name='PDE_DATA' mangled-name='PDE_DATA' filepath='fs/proc/generic.c' line='802' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='PDE_DATA'>
         <parameter type-id='c5a4eb7f' name='inode' filepath='fs/proc/generic.c' line='802' column='1'/>
         <return type-id='eaa32e2f'/>
@@ -121533,6 +121612,7 @@
       <var-decl name='__tracepoint_android_vh_inactive_is_low' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_inactive_is_low' visibility='default' filepath='include/trace/hooks/vmscan.h' line='46' column='1' elf-symbol-id='__tracepoint_android_vh_inactive_is_low'/>
       <var-decl name='__tracepoint_android_vh_include_reserved_zone' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_include_reserved_zone' visibility='default' filepath='include/trace/hooks/mm.h' line='94' column='1' elf-symbol-id='__tracepoint_android_vh_include_reserved_zone'/>
       <var-decl name='__tracepoint_android_vh_init_swap_info_struct' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_init_swap_info_struct' visibility='default' filepath='include/trace/hooks/mm.h' line='302' column='1' elf-symbol-id='__tracepoint_android_vh_init_swap_info_struct'/>
+      <var-decl name='__tracepoint_android_vh_inputevents_packet' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_inputevents_packet' visibility='default' filepath='include/trace/hooks/inputeventspacket.h' line='14' column='1' elf-symbol-id='__tracepoint_android_vh_inputevents_packet'/>
       <var-decl name='__tracepoint_android_vh_iommu_alloc_iova' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_iommu_alloc_iova' visibility='default' filepath='include/trace/hooks/iommu.h' line='29' column='1' elf-symbol-id='__tracepoint_android_vh_iommu_alloc_iova'/>
       <var-decl name='__tracepoint_android_vh_iommu_free_iova' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_iommu_free_iova' visibility='default' filepath='include/trace/hooks/iommu.h' line='38' column='1' elf-symbol-id='__tracepoint_android_vh_iommu_free_iova'/>
       <var-decl name='__tracepoint_android_vh_iommu_iovad_alloc_iova' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_iommu_iovad_alloc_iova' visibility='default' filepath='include/trace/hooks/iommu.h' line='34' column='1' elf-symbol-id='__tracepoint_android_vh_iommu_iovad_alloc_iova'/>

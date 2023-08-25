@@ -19,6 +19,7 @@
 
 #include <linux/hid.h>
 #include <linux/hid-debug.h>
+#include <trace/hooks/inputeventspacket.h>
 
 #include "hid-ids.h"
 
@@ -1763,6 +1764,8 @@ static struct hid_input *hidinput_allocate(struct hid_device *hid,
 	input_dev->close = hidinput_close;
 	input_dev->setkeycode = hidinput_setkeycode;
 	input_dev->getkeycode = hidinput_getkeycode;
+	//vendor hooks
+	trace_android_vh_inputevents_packet(input_dev);
 
 	input_dev->name = hidinput->name ? hidinput->name : hid->name;
 	input_dev->phys = hid->phys;
