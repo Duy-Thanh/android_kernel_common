@@ -123,6 +123,24 @@
       "parentUuid": "65cc3b93_1cc15e0e",
       "revId": "17fa8a9962d85cf0bd27bc2afac6499c71c5c49c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6b5710a_31efc039",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-25T16:51:58Z",
+      "side": 1,
+      "message": "it should be an anonymous pointer for the ABI surface. I\u0027ve commented on the bug, this change is not needed, the first two patches in this series are fine to take.",
+      "parentUuid": "ecada071_b5f0265d",
+      "revId": "17fa8a9962d85cf0bd27bc2afac6499c71c5c49c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
