@@ -35,6 +35,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c09a3a1b_4847db21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-08-25T12:03:20Z",
+      "side": 1,
+      "message": "Bug #297467338\nDescription: When scanner is connected to device through USB in HID mode and scanning a large barcode (atleast 20 digits) causes buffer overrun and due to this few events are missed and a digit had been repeated continuously.\nIt is hid-input core driver.",
+      "parentUuid": "9438699f_e33b8757",
+      "revId": "85edef83178885ebfc2f1e1199830e4eca513cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50a2a970_2b1d1ac1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-08-25T12:03:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7d170cd1_4f403e14",
+      "revId": "85edef83178885ebfc2f1e1199830e4eca513cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6439f7a_1b2032b7",
@@ -48,6 +84,30 @@
       "writtenOn": "2023-08-25T11:04:40Z",
       "side": 1,
       "message": "comment is obviously not needed 😊",
+      "range": {
+        "startLine": 1767,
+        "startChar": 1,
+        "endLine": 1767,
+        "endChar": 15
+      },
+      "revId": "85edef83178885ebfc2f1e1199830e4eca513cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c2f2db_53beedaf",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-08-25T12:03:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f6439f7a_1b2032b7",
       "range": {
         "startLine": 1767,
         "startChar": 1,
