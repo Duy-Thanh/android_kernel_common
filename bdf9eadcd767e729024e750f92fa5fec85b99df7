@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000052056235",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2728293?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "414414e9_4f99e98a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-25T18:58:17Z",
+      "side": 1,
+      "message": "Please **attach the following Buganizer ID(s)** to the commit message: 293815374.\nThese IDs were found in the original change with number \u00272715848\u0027 but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 559754129 android-build.ayeaye-python-dispatcher_20230824.05_p0",
+      "revId": "bdf9eadcd767e729024e750f92fa5fec85b99df7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000052056235",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2728293?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "209d6504_f5fca60a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-25T18:58:17Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 559754129 android-build.ayeaye-python-dispatcher_20230824.05_p0",
+      "revId": "bdf9eadcd767e729024e750f92fa5fec85b99df7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000052056235",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2728293?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ab5f95cd_d800b23d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-25T18:58:17Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 559754129 android-build.ayeaye-python-dispatcher_20230824.05_p0",
+      "revId": "bdf9eadcd767e729024e750f92fa5fec85b99df7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
