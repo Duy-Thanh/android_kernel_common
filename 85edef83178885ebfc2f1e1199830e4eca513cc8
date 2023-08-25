@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d0cf106_db9eb57d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-08-25T13:14:09Z",
+      "side": 1,
+      "message": "It seems to be OEM specific use-case and we are adding in the vendor modules driver to update the hint_events_per_packet value with 80. I believe this change cannot be mainlined, hence vendor hooks was preferred.",
+      "parentUuid": "241c262b_a4fc12f6",
+      "revId": "85edef83178885ebfc2f1e1199830e4eca513cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6439f7a_1b2032b7",
         "filename": "drivers/hid/hid-input.c",
         "patchSetId": 1
