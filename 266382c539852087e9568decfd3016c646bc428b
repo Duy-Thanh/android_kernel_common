@@ -39,6 +39,30 @@
       },
       "revId": "266382c539852087e9568decfd3016c646bc428b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "564d4f34_dce5bf84",
+        "filename": "mm/zsmalloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-25T00:40:26Z",
+      "side": 1,
+      "message": "Thanks Minchan, good catch.\n\nI went with your suggestion of _ext pattern instead of moving `spin_lock_init` down. so we don\u0027t have to worry about lock lifetime issues.",
+      "parentUuid": "ff6779d4_48f41c88",
+      "range": {
+        "startLine": 2200,
+        "startChar": 16,
+        "endLine": 2200,
+        "endChar": 25
+      },
+      "revId": "266382c539852087e9568decfd3016c646bc428b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

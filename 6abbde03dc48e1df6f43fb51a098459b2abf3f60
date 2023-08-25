@@ -22,6 +22,30 @@
       },
       "revId": "6abbde03dc48e1df6f43fb51a098459b2abf3f60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "980ab4f9_8ab3bee8",
+        "filename": "mm/zsmalloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-25T00:40:26Z",
+      "side": 0,
+      "message": "Cool tip 😊",
+      "parentUuid": "437d8766_0c34b29d",
+      "range": {
+        "startLine": 248,
+        "startChar": 12,
+        "endLine": 248,
+        "endChar": 16
+      },
+      "revId": "6abbde03dc48e1df6f43fb51a098459b2abf3f60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
