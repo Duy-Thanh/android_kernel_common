@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c2ac50e_dd8757ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-25T16:40:22Z",
+      "side": 1,
+      "message": "I do not understand.  Normal hid drivers shouldn\u0027t be messing around with that field.  Can you point me at the driver that is having problems?  A hook like this, on the input data stream, is obviously, not something anyone really wants to see happen.",
+      "parentUuid": "5d0cf106_db9eb57d",
+      "revId": "85edef83178885ebfc2f1e1199830e4eca513cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6439f7a_1b2032b7",
         "filename": "drivers/hid/hid-input.c",
         "patchSetId": 1
