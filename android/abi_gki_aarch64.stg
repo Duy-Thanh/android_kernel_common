@@ -91538,10 +91538,9 @@ member {
   offset: 712
 }
 member {
-  id: 0xf667d80f
+  id: 0xf667dcee
   name: "fullness_list"
   type_id: 0xb8bf135c
-  offset: 64
 }
 member {
   id: 0xfeb50ea0
@@ -103390,12 +103389,6 @@ member {
   offset: 320
 }
 member {
-  id: 0xad7c8a98
-  name: "index"
-  type_id: 0x4585663f
-  offset: 672
-}
-member {
   id: 0xad7c8ba4
   name: "index"
   type_id: 0x4585663f
@@ -103406,6 +103399,12 @@ member {
   name: "index"
   type_id: 0x4585663f
   offset: 480
+}
+member {
+  id: 0xad7c8d2b
+  name: "index"
+  type_id: 0x4585663f
+  offset: 608
 }
 member {
   id: 0xad7c8d72
@@ -115247,6 +115246,12 @@ member {
   offset: 768
 }
 member {
+  id: 0x2d1fe43b
+  name: "lock"
+  type_id: 0xf313e71a
+  offset: 17536
+}
+member {
   id: 0x2d1fe44c
   name: "lock"
   type_id: 0xf313e71a
@@ -123020,12 +123025,6 @@ member {
   name: "migrate_folio"
   type_id: 0x2c8b0a9f
   offset: 768
-}
-member {
-  id: 0xdb33fcdf
-  name: "migrate_lock"
-  type_id: 0xf4933b90
-  offset: 17536
 }
 member {
   id: 0x8edaa968
@@ -136133,10 +136132,10 @@ member {
   type_id: 0xad7c0a89
 }
 member {
-  id: 0x7a226550
+  id: 0x7a226b7d
   name: "objs_per_zspage"
   type_id: 0x6720d32f
-  offset: 608
+  offset: 544
 }
 member {
   id: 0x33953b25
@@ -141031,10 +141030,10 @@ member {
   bitsize: 1
 }
 member {
-  id: 0x338646f2
+  id: 0x338649f9
   name: "pages_per_zspage"
   type_id: 0x6720d32f
-  offset: 640
+  offset: 576
 }
 member {
   id: 0xf9521fd2
@@ -173208,16 +173207,16 @@ member {
   offset: 96
 }
 member {
-  id: 0xd91935d3
-  name: "size"
-  type_id: 0x6720d32f
-  offset: 576
-}
-member {
   id: 0xd9193607
   name: "size"
   type_id: 0x6720d32f
   offset: 896
+}
+member {
+  id: 0xd91937b9
+  name: "size"
+  type_id: 0x6720d32f
+  offset: 512
 }
 member {
   id: 0xd9193b66
@@ -179004,10 +179003,10 @@ member {
   offset: 896
 }
 member {
-  id: 0xb91e0d04
+  id: 0xb91e0940
   name: "stats"
   type_id: 0x6b61371d
-  offset: 704
+  offset: 640
 }
 member {
   id: 0xb920e0d3
@@ -248342,14 +248341,13 @@ struct_union {
   kind: STRUCT
   name: "size_class"
   definition {
-    bytesize: 136
-    member_id: 0x2d1fec85
-    member_id: 0xf667d80f
-    member_id: 0xd91935d3
-    member_id: 0x7a226550
-    member_id: 0x338646f2
-    member_id: 0xad7c8a98
-    member_id: 0xb91e0d04
+    bytesize: 128
+    member_id: 0xf667dcee
+    member_id: 0xd91937b9
+    member_id: 0x7a226b7d
+    member_id: 0x338649f9
+    member_id: 0xad7c8d2b
+    member_id: 0xb91e0940
   }
 }
 struct_union {
@@ -264233,7 +264231,7 @@ struct_union {
     member_id: 0xb9089225
     member_id: 0x868caa9e
     member_id: 0x8a67a9e5
-    member_id: 0xdb33fcdf
+    member_id: 0x2d1fe43b
   }
 }
 struct_union {
