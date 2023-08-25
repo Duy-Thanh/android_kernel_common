@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9ec887d_522e512d",
+        "filename": "mm/zsmalloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-08-25T05:46:35Z",
+      "side": 1,
+      "message": "Let\u0027s say \"dummy\" so no one need to spend time to think.",
+      "range": {
+        "startLine": 249,
+        "startChar": 10,
+        "endLine": 249,
+        "endChar": 22
+      },
+      "revId": "b7d544064512f12f6f22d58322d21e5817220d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4227e14a_ce83bbac",
+        "filename": "mm/zsmalloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-08-25T05:46:35Z",
+      "side": 1,
+      "message": "Let\u0027s shorten.\n\nParameter is already zs_pool so how about \"to_zs_pool_ext\"?\n(e.g., to_config_group)\nFeel free to suggest better name if you don\u0027t like it.",
+      "range": {
+        "startLine": 257,
+        "startChar": 34,
+        "endLine": 257,
+        "endChar": 56
+      },
+      "revId": "b7d544064512f12f6f22d58322d21e5817220d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
