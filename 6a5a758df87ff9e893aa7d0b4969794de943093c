@@ -2,6 +2,46 @@
   "comments": [
     {
       "robotId": "ayeaye",
+      "robotRunId": "AR00000000000052034311",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2726958?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1bcc8c5a_fd0ff4b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-25T14:37:34Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 559754129 android-build.ayeaye-python-dispatcher_20230824.05_p0",
+      "revId": "6a5a758df87ff9e893aa7d0b4969794de943093c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000052034311",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2726958?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a6357731_d5dbcfdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-25T14:37:34Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2727014](https://r.android.com/c/2727014) on branch android14-5.15.\n\n```\n      ## BUILD.bazel ##\n     @@ BUILD.bazel: load(\n    +     \"kernel_modules_install\",\n          \"kernel_unstripped_modules_archive\",\n    -     \"merged_kernel_uapi_headers\",\n      )\n     -load(\":modules.bzl\", \"COMMON_GKI_MODULES_LIST\")\n     +load(\":modules.bzl\", \"get_gki_modules_list\")\n      \n      package(\n          default_visibility \u003d [\n    -@@ BUILD.bazel: checkpatch(\n    -     checkpatch_pl \u003d \"scripts/checkpatch.pl\",\n    - )\n    +@@ BUILD.bazel: _GKI_X86_64_MAKE_GOALS \u003d [\n    +     \"modules\",\n    + ]\n      \n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (ab62e8 ANDROID: fuse-bpf: Add partial flock support)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++checkpatch(\n    ++    name \u003d \"checkpatch\",\n    ++    checkpatch_pl \u003d \"scripts/checkpatch.pl\",\n    ++)\n    ++\n     +# Deprecated - Use arch specific files from below.\n    - write_file(\n    -     name \u003d \"gki_system_dlkm_modules\",\n    -     out \u003d \"android/gki_system_dlkm_modules\",\n    --    content \u003d COMMON_GKI_MODULES_LIST + [\n    ++write_file(\n    ++    name \u003d \"gki_system_dlkm_modules\",\n    ++    out \u003d \"android/gki_system_dlkm_modules\",\n     +    content \u003d get_gki_modules_list(\"arm64\") + [\n     +        # Ensure new line at the end.\n     +        \"\",\n    @@ BUILD.bazel: checkpatch(\n     +    name \u003d \"gki_system_dlkm_modules_risc64\",\n     +    out \u003d \"android/gki_system_dlkm_modules_riscv64\",\n     +    content \u003d get_gki_modules_list(\"riscv64\") + [\n    -         # Ensure new line at the end.\n    -         \"\",\n    -     ],\n    ++        # Ensure new line at the end.\n    ++        \"\",\n    ++    ],\n    ++)\n    ++\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (2c7641 ANDROID: Add arch specific gki module list targets)\n    + filegroup(\n    +     name \u003d \"aarch64_additional_kmi_symbol_lists\",\n    +     srcs \u003d [\n     @@ BUILD.bazel: filegroup(\n      define_common_kernels(target_configs \u003d {\n          \"kernel_aarch64\": {\n              \"kmi_symbol_list_strict_mode\": True,\n     -        \"module_implicit_outs\": COMMON_GKI_MODULES_LIST,\n              \"kmi_symbol_list\": \"android/abi_gki_aarch64\",\n    -         \"kmi_symbol_list_add_only\": True,\n              \"additional_kmi_symbol_lists\": [\":aarch64_additional_kmi_symbol_lists\"],\n              \"protected_exports_list\": \"android/abi_gki_protected_exports_aarch64\",\n              \"protected_modules_list\": \"android/gki_aarch64_protected_modules\",\n    @@ BUILD.bazel: filegroup(\n              \"kmi_symbol_list_strict_mode\": False,\n     -        \"module_implicit_outs\": COMMON_GKI_MODULES_LIST,\n              \"kmi_symbol_list\": \"android/abi_gki_aarch64\",\n    -         \"kmi_symbol_list_add_only\": True,\n              \"additional_kmi_symbol_lists\": [\":aarch64_additional_kmi_symbol_lists\"],\n              \"protected_exports_list\": \"android/abi_gki_protected_exports_aarch64\",\n              \"protected_modules_list\": \"android/gki_aarch64_protected_modules\",\n    @@ BUILD.bazel: filegroup(\n              \"make_goals\": _GKI_X86_64_MAKE_GOALS,\n          },\n      })\n    -@@ BUILD.bazel: kernel_build(\n    -         \"modules\",\n    -         \"rockchip/rk3399-rock-pi-4b.dtb\",\n    +@@ BUILD.bazel: define_db845c(\n    +         \"qcom/sdm845-db845c.dtb\",\n    +         \"qcom/qrb5165-rb5.dtb\",\n    +     ],\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (ab62e8 ANDROID: fuse-bpf: Add partial flock support)\n    +     module_outs \u003d [\n    +         # keep sorted\n    +         \"crypto/michael_mic.ko\",\n    +@@ BUILD.bazel: define_db845c(\n    +         \"sound/soc/qcom/snd-soc-sdm845.ko\",\n    +         \"sound/soc/qcom/snd-soc-sm8250.ko\",\n          ],\n    --    module_outs \u003d COMMON_GKI_MODULES_LIST + _ROCKPI4_MODULE_OUTS + _ROCKPI4_WATCHDOG_MODULE_OUTS,\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +    module_outs \u003d get_gki_modules_list(\"arm64\") + _ROCKPI4_MODULE_OUTS + _ROCKPI4_WATCHDOG_MODULE_OUTS,\n    -     visibility \u003d [\"//visibility:private\"],\n    ++    visibility \u003d [\"//visibility:private\"],\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (2c7641 ANDROID: Add arch specific gki module list targets)\n      )\n      \n    + # TODO(b/258259749): Convert rockpi4 to mixed build\n     @@ BUILD.bazel: kernel_build(\n              \"modules\",\n              \"rockchip/rk3399-rock-pi-4b.dtb\",\n          ],\n    --    module_outs \u003d COMMON_GKI_MODULES_LIST + _ROCKPI4_MODULE_OUTS,\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (ab62e8 ANDROID: fuse-bpf: Add partial flock support)\n    +     module_outs \u003d COMMON_GKI_MODULES_LIST + [\n    +         # keep sorted\n    +         \"drivers/block/virtio_blk.ko\",\n    +@@ BUILD.bazel: kernel_build(\n    +         \"drivers/watchdog/dw_wdt.ko\",\n    +         \"net/core/failover.ko\",\n    +     ],\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +    module_outs \u003d get_gki_modules_list(\"arm64\") + _ROCKPI4_MODULE_OUTS,\n    -     visibility \u003d [\"//visibility:private\"],\n    ++    visibility \u003d [\"//visibility:private\"],\n    ++)\n    ++\n    ++alias(\n    ++    name \u003d \"rockpi4\",\n    ++    actual \u003d select({\n    ++        \"//build/kernel/kleaf:kgdb_is_true\": \"rockpi4_with_kgdb\",\n    ++        \"//conditions:default\": \"rockpi4_no_kgdb\",\n    ++    }),\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (2c7641 ANDROID: Add arch specific gki module list targets)\n      )\n      \n    + kernel_abi(\n     \n      ## modules.bzl ##\n     @@ modules.bzl: This module contains a full list of kernel modules\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 559754129 android-build.ayeaye-python-dispatcher_20230824.05_p0",
+      "revId": "6a5a758df87ff9e893aa7d0b4969794de943093c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
       "robotRunId": "AR00000000000052034265",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2726958?revision\u003d1",
       "fixSuggestions": [],
@@ -15,6 +55,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-08-25T14:36:39Z",
+      "side": 1,
+      "message": "syntax error near \u003c\u003c",
+      "range": {
+        "startLine": 34,
+        "startChar": 3,
+        "endLine": 34,
+        "endChar": 3
+      },
+      "revId": "6a5a758df87ff9e893aa7d0b4969794de943093c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000052034265",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2726958?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "252d6983_ab2fff20",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-25T14:37:34Z",
       "side": 1,
       "message": "syntax error near \u003c\u003c",
       "range": {
