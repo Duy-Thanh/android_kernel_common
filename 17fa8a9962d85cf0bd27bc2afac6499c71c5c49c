@@ -16,6 +16,23 @@
       "message": "What commit is causing the breakage upstream?  And why would zsmalloc have abi-specific issues here?",
       "revId": "17fa8a9962d85cf0bd27bc2afac6499c71c5c49c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc07416_764c5319",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-25T10:12:06Z",
+      "side": 1,
+      "message": "And shouldn\u0027t this just be a BACKPORT of the upstream commit, in an abi-safe way?\nOr backport the original, and then add another patch on top of that that fixes up the abi?  As-is, this is hard to review, and even harder to track over the long-term.",
+      "revId": "17fa8a9962d85cf0bd27bc2afac6499c71c5c49c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
