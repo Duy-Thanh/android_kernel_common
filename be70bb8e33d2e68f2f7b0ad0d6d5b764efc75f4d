@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56193496_095c234c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-08-25T21:17:14Z",
+      "side": 1,
+      "message": "side node: the conflicts are due to missing patchset https://lore.kernel.org/all/20220302195519.3479274-1-kafai@fb.com/",
+      "revId": "be70bb8e33d2e68f2f7b0ad0d6d5b764efc75f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
