@@ -33,6 +33,42 @@
       "message": "And shouldn\u0027t this just be a BACKPORT of the upstream commit, in an abi-safe way?\nOr backport the original, and then add another patch on top of that that fixes up the abi?  As-is, this is hard to review, and even harder to track over the long-term.",
       "revId": "17fa8a9962d85cf0bd27bc2afac6499c71c5c49c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51d24725_ed8d60a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2023-08-25T15:23:22Z",
+      "side": 1,
+      "message": "zsmalloc exports a function using zs_pool as an argument: https://cs.android.com/android/kernel/superproject/+/common-android14-6.1:common/mm/zsmalloc.c;l\u003d1208-1212\n\nThis patch earlier in the series changes a member of zs_pool: https://android-review.googlesource.com/c/kernel/common/+/2726496/2",
+      "parentUuid": "2e29050b_880206d7",
+      "revId": "17fa8a9962d85cf0bd27bc2afac6499c71c5c49c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ff64ed0_7c379707",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2023-08-25T15:23:22Z",
+      "side": 1,
+      "message": "\u003e Or backport the original, and then add another patch on top of that that fixes up the abi? As-is, this is hard to review, and even harder to track over the long-term.\n\nThe original is the parent patch of this one: https://android-review.googlesource.com/c/kernel/common/+/2726497/2\n\nThis patch fixes up the ABI.",
+      "parentUuid": "8fc07416_764c5319",
+      "revId": "17fa8a9962d85cf0bd27bc2afac6499c71c5c49c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
