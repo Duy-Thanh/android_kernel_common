@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc0b8cc_872a6c44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-08-25T12:54:32Z",
+      "side": 1,
+      "message": "I fixed the author metadata in patchset 5 to make checkpatch and the git history happy.",
+      "revId": "1c810bd04f159a166860c92b56305099275b6ec5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
