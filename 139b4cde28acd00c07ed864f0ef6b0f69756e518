@@ -131,6 +131,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79bf8282_11b506df",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-08-26T03:15:31Z",
+      "side": 1,
+      "message": "Restructured the code as we discussed. In an effort to make the patch have minimal code change, I re-used the `duplicate_rel` function for our purpose.",
+      "parentUuid": "2fbe7c0c_7ba66812",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 48
+      },
+      "revId": "139b4cde28acd00c07ed864f0ef6b0f69756e518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef5901de_33480ece",

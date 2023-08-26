@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49af7a4e_77b384aa",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-08-26T03:15:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41ed53bb_14a563a7",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 4
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f396c3f1_ca9ce3ab",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "ret/err would both be needed at the same time, wouldn\u0027t it? \nerr would hold the return value of `insert_rela_to_rht` and then inspected. When this happens, the value held by ret needs to persist between lines 220 and 222\n\n```\nerr \u003d insert_rela_to_rht(\u0026rela[i], elf64_rela_rht);\nif (err \u003c 0)\n    return err;\n```",
       "parentUuid": "f396c3f1_ca9ce3ab",
+      "range": {
+        "startLine": 177,
+        "startChar": 5,
+        "endLine": 177,
+        "endChar": 8
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0097599_1d2da5da",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-08-26T03:15:31Z",
+      "side": 1,
+      "message": "With the restructured code and modified error handling, err is no longer required and removed.",
+      "parentUuid": "73197576_0d6c0f21",
       "range": {
         "startLine": 177,
         "startChar": 5,
@@ -204,6 +252,30 @@
       "side": 1,
       "message": "That doesn\u0027t make a lot of sense. PLTs need to be allocated. And I\u0027m sure the max count is to make sure we don\u0027t overflow the allocation. So, look around again and you\u0027ll find out.\n\nSo, once you confirm that, my point is that you can treat \"error\" as \"duplicate\" and the max_entries check will catch and fail it later and that\u0027ll make all this code a lot simpler.",
       "parentUuid": "c2dd249c_ecd744c3",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 16
+      },
+      "revId": "cc26229554d8e740c0ad292882b1fd3c467bb60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b2dbe7_45cb6224",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-08-26T03:15:31Z",
+      "side": 1,
+      "message": "I take back one of my previous comments (\"The \"upper bound\" is not used to allocate PLTs\"). The upper bound is used for `pltsec-\u003esh_size` in addition to `plt_max_entries` (I didnt notice this earlier), the former is indeed used in allocating memory for the PLT section.\n\nModified the error handling as discussed. The malloc error is ignored and treated as a \"duplicate\". However, I still have some reservations about this. Will discuss this you next week.",
+      "parentUuid": "8ca39fa1_23398dd5",
       "range": {
         "startLine": 221,
         "startChar": 4,
