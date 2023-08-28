@@ -16,6 +16,24 @@
       "message": "HI Pindar\n\nCould you please add the respin bug b/297839626 in the commit message.",
       "revId": "8ac5b07bb7fcb89a6df9313fc53cc73e16191301",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50273556_796b0421",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1997539
+      },
+      "writtenOn": "2023-08-28T18:46:27Z",
+      "side": 1,
+      "message": "Yes, commit message updated. Thanks!",
+      "parentUuid": "915364ad_827bf406",
+      "revId": "8ac5b07bb7fcb89a6df9313fc53cc73e16191301",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
