@@ -639,6 +639,11 @@ struct fuse_conn {
 	/** The group id for this mount */
 	kgid_t group_id;
 
+#ifdef CONFIG_FUSE_BPF
+	/** The cred for daemon context*/
+	struct cred *backing_cred;
+#endif
+
 	/** The pid namespace for this mount */
 	struct pid_namespace *pid_ns;
 
@@ -1933,6 +1938,23 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 	return ret;
 }
 
+static inline const struct cred *fuse_override_creds(struct fuse_mount *fm)
+{
+	const struct cred *old_cred = NULL;
+
+	if (!fm->fc->backing_cred)
+        	return NULL;
+	old_cred = override_creds(fm->fc->backing_cred);
+	return old_cred;
+}
+
+static inline void fuse_revert_creds(const struct cred *old_cred)
+{
+	if (!old_cred)
+		return;
+	revert_creds(old_cred);
+}
+
 /*
  * expression statement to wrap the backing filter logic
  * struct inode *inode: inode with bpf and backing inode
@@ -2023,10 +2045,14 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 			};						\
 		fa.out_numargs = fa_backup.out_numargs;			\
 									\
+		const struct cred *old_cred = NULL;			\
+		if (ext_flags & FUSE_BPF_BACKING_EXT)			\
+                	old_cred = fuse_override_creds(fm);  		\
 		fer = (struct fuse_err_ret) {				\
 			ERR_PTR(backing(&fa, args)),			\
 			true,						\
 		};							\
+		fuse_revert_creds(old_cred); 				\
 		if (IS_ERR(fer.result))					\
 			fa.error_in = PTR_ERR(fer.result);		\
 		if (!(ext_flags & FUSE_BPF_POST_FILTER))		\
