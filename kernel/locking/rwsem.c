@@ -27,6 +27,7 @@
 #include <linux/export.h>
 #include <linux/rwsem.h>
 #include <linux/atomic.h>
+#include <linux/android_vendor.h>
 #include <trace/events/lock.h>
 
 #ifndef CONFIG_PREEMPT_RT
@@ -341,6 +342,8 @@ struct rwsem_waiter {
 	enum rwsem_waiter_type type;
 	unsigned long timeout;
 	bool handoff_set;
+
+	ANDROID_VENDOR_DATA(1);
 };
 #define rwsem_first_waiter(sem) \
 	list_first_entry(&sem->wait_list, struct rwsem_waiter, list)
