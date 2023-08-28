@@ -337,11 +337,14 @@ struct usb_gadget_ops {
 			struct usb_endpoint_descriptor *,
 			struct usb_ss_ep_comp_descriptor *);
 	int	(*check_config)(struct usb_gadget *gadget);
+<<<<<<< HEAD   (114623 Merge 5.10.191 into android12-5.10-lts)
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+>>>>>>> BRANCH (1599cb Linux 5.10.192)
 };
 
 /**
