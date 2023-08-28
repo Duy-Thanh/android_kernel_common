@@ -82,6 +82,9 @@ struct fuse_dentry {
 
 	/* bpf program *only* set for negative dentries */
 	struct bpf_prog *bpf;
+
+	/* override_creds *only* set for negative dentries */
+	u64 override_creds;
 #endif
 };
 
@@ -124,6 +127,11 @@ struct fuse_inode {
 	 * or handle in place
 	 */
 	struct bpf_prog *bpf;
+
+	/**
+	* Determine whether to use user's cred or daemon's cred
+	*/
+	u64 override_creds;
 #endif
 
 	/** Unique ID, which identifies the inode between userspace
@@ -638,6 +646,11 @@ struct fuse_conn {
 
 	/** The group id for this mount */
 	kgid_t group_id;
+
+#ifdef CONFIG_FUSE_BPF
+	/** The cred for daemon context*/
+	const struct cred *backing_cred;
+#endif
 
 	/** The pid namespace for this mount */
 	struct pid_namespace *pid_ns;
@@ -1692,6 +1705,8 @@ int fuse_handle_backing(struct fuse_entry_bpf *feb, struct inode **backing_inode
 			struct path *backing_path);
 int fuse_handle_bpf_prog(struct fuse_entry_bpf *feb, struct inode *parent,
 			 struct bpf_prog **bpf);
+int fuse_handle_override_creds(struct fuse_entry_bpf *feb, struct inode *parent,
+				u64 *override_creds, bool bpf);
 
 int fuse_lookup_initialize(struct fuse_bpf_args *fa, struct fuse_lookup_io *feo,
 	       struct inode *dir, struct dentry *entry, unsigned int flags);
@@ -1913,6 +1928,9 @@ static inline void convert_fuse_statfs(struct kstatfs *stbuf, struct fuse_kstatf
 }
 
 #ifdef CONFIG_FUSE_BPF
+
+#define FUSE_USE_USER_CREDENTIALS_IF_NO_BPF 1
+
 struct fuse_err_ret {
 	void *result;
 	bool ret;
@@ -1931,6 +1949,27 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 	ret = bpf_prog_run(prog, fba);
 	migrate_enable();
 	return ret;
+}
+
+static inline const struct cred *fuse_override_creds(struct fuse_mount *fm, struct fuse_inode* fi)
+{
+	const struct cred *old_cred = NULL;
+
+	if (fi->override_creds == FUSE_USE_USER_CREDENTIALS_IF_NO_BPF)
+		return NULL;
+
+	if (!fm->fc->backing_cred)
+		return NULL;
+
+	old_cred = override_creds(fm->fc->backing_cred);
+	return old_cred;
+}
+
+static inline void fuse_revert_creds(const struct cred *old_cred)
+{
+	if (!old_cred)
+		return;
+	revert_creds(old_cred);
 }
 
 /*
@@ -1952,6 +1991,7 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 	int ext_flags;							\
 	struct fuse_inode *fuse_inode = get_fuse_inode(inode);		\
 	struct fuse_mount *fm = get_fuse_mount(inode);			\
+	const struct cred *old_cred = NULL;				\
 	io feo = {0};							\
 	struct fuse_bpf_args fa = {0}, fa_backup = {0};			\
 	bool locked;							\
@@ -2023,10 +2063,12 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 			};						\
 		fa.out_numargs = fa_backup.out_numargs;			\
 									\
+		old_cred = fuse_override_creds(fm, fuse_inode); 	\
 		fer = (struct fuse_err_ret) {				\
 			ERR_PTR(backing(&fa, args)),			\
 			true,						\
 		};							\
+		fuse_revert_creds(old_cred); 				\
 		if (IS_ERR(fer.result))					\
 			fa.error_in = PTR_ERR(fer.result);		\
 		if (!(ext_flags & FUSE_BPF_POST_FILTER))		\

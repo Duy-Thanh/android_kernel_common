@@ -1021,6 +1021,11 @@ void fuse_conn_put(struct fuse_conn *fc)
 			WARN_ON(atomic_read(&bucket->count) != 1);
 			kfree(bucket);
 		}
+#ifdef CONFIG_FUSE_BPF
+		if (fc->backing_cred) {
+			put_cred(fc->backing_cred);
+		}
+#endif
 		fc->release(fc);
 	}
 }
@@ -1402,6 +1407,11 @@ static void process_init_reply(struct fuse_mount *fm, struct fuse_args *args,
 		fc->conn_init = 0;
 		fc->conn_error = 1;
 	}
+#ifdef CONFIG_FUSE_BPF
+	else {
+		fc->backing_cred = prepare_creds();
+	}
+#endif
 
 	fuse_set_initialized(fc);
 	wake_up_all(&fc->blocked_waitq);
@@ -1860,6 +1870,12 @@ static int fuse_get_tree(struct fs_context *fsc)
 
 	fuse_conn_init(fc, fm, fsc->user_ns, &fuse_dev_fiq_ops, NULL);
 	fc->release = fuse_free_conn;
+
+#ifdef CONFIG_FUSE_BPF
+	if (ctx->no_daemon && fsc->cred) {
+		fc->backing_cred = get_cred(fsc->cred);
+	}
+#endif
 
 	fsc->s_fs_info = fm;
 
