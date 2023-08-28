@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f05a0d0c_5e544d37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-28T23:23:36Z",
+      "side": 1,
+      "message": "Hi Stephen, Can you rerun the ABI update please. it seems to have some duplicate changes that were merged earlier today in aosp/2726498",
+      "revId": "7f4f268034aa747455516921612b7a05a5fdd427",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
