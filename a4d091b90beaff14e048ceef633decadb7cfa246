@@ -81,6 +81,24 @@
       "parentUuid": "66072df0_e903b2ce",
       "revId": "a4d091b90beaff14e048ceef633decadb7cfa246",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74fba8b8_3c49c85c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-28T15:18:22Z",
+      "side": 1,
+      "message": "Ah, ok, then say what commit this Fixes: with a proper `Fixes:` tag please.  That way we can know what trees need it applied to.",
+      "parentUuid": "1f178154_2941fbfb",
+      "revId": "a4d091b90beaff14e048ceef633decadb7cfa246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
