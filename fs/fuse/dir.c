@@ -189,6 +189,7 @@ static bool backing_data_changed(struct fuse_inode *fi, struct dentry *entry,
 	struct path new_backing_path;
 	struct inode *new_backing_inode;
 	struct bpf_prog *bpf = NULL;
+	u64 override_creds = 0xffff;
 	int err;
 	bool ret = true;
 
@@ -210,7 +211,12 @@ static bool backing_data_changed(struct fuse_inode *fi, struct dentry *entry,
 	if (err)
 		goto put_bpf;
 
+	err = fuse_handle_override_creds(bpf_arg, entry->d_parent->d_inode, &override_creds);
+	if (err)
+		goto put_bpf;
+
 	ret = (bpf != fi->bpf || fi->backing_inode != new_backing_inode ||
+			override_creds != fi->override_creds ||
 			!path_equal(&get_fuse_dentry(entry)->backing_path, &new_backing_path));
 put_bpf:
 	if (bpf)
@@ -550,6 +556,9 @@ int fuse_lookup_name(struct super_block *sb, u64 nodeid, const struct qstr *name
 		if (!err)
 			err = fuse_handle_bpf_prog(&bpf_arg, NULL,
 					   &get_fuse_inode(*inode)->bpf);
+		if (!err)
+			err = fuse_handle_override_creds(&bpf_arg, NULL,
+					   &get_fuse_inode(*inode)->override_creds);
 		if (err) {
 			iput(*inode);
 			*inode = NULL;

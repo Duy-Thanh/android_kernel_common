@@ -263,6 +263,8 @@ int fuse_create_open_backing(
 	get_fuse_inode(inode)->bpf = fuse_entry->bpf;
 	fuse_entry->bpf = NULL;
 
+	get_fuse_inode(inode)->override_creds = fuse_entry->override_creds;
+
 	newent = d_splice_alias(inode, entry);
 	if (IS_ERR(newent)) {
 		err = PTR_ERR(newent);
@@ -1237,6 +1239,26 @@ int fuse_handle_bpf_prog(struct fuse_entry_bpf *feb, struct inode *parent,
 	return 0;
 }
 
+int fuse_handle_override_creds(struct fuse_entry_bpf *feb, struct inode *parent,
+				u64 *override_creds) {
+	switch (feb->out.bpf_action) {
+        case FUSE_ACTION_REMOVE: {
+		*override_creds = FUSE_USE_USER_CREDENTIALS_IF_NO_BPF;
+		break;
+        }
+
+	default: {
+		if (!parent) {
+			return 0;
+		}
+		*override_creds = get_fuse_inode(parent)->override_creds;
+		break;
+	}
+        }
+
+	return 0;
+}
+
 struct dentry *fuse_lookup_finalize(struct fuse_bpf_args *fa, struct inode *dir,
 			   struct dentry *entry, unsigned int flags)
 {
@@ -1279,6 +1301,10 @@ struct dentry *fuse_lookup_finalize(struct fuse_bpf_args *fa, struct inode *dir,
 		ret = ERR_PTR(error);
 		goto out;
 	}
+
+	error = inode ?
+		fuse_handle_override_creds(feb, dir, &get_fuse_inode(inode)->override_creds) :
+		fuse_handle_override_creds(feb, dir, &fuse_entry->override_creds);
 
 	if (inode) {
 		error = fuse_handle_backing(feb,
