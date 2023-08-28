@@ -2321,6 +2321,16 @@ static long fuse_dev_ioctl(struct file *file, unsigned int cmd,
 				res = fuse_passthrough_open(fud, oldfd);
 		}
 		break;
+#ifdef CONFIG_FUSE_BPF
+        case FUSE_DEV_IOC_FUSE_BPF_CRED_SET:
+                res = -EFAULT;
+                fud = fuse_get_dev(file);
+                if (fud) {
+                    res = 0;
+                    fud->fc->backing_cred = prepare_creds();
+                }
+                break;
+#endif
 	default:
 		res = -ENOTTY;
 		break;

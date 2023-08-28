@@ -102,6 +102,7 @@ struct fuse_bpf_args {
 #define FUSE_BPF_USER_FILTER	1
 #define FUSE_BPF_BACKING	2
 #define FUSE_BPF_POST_FILTER	4
+#define FUSE_BPF_BACKING_EXT	8
 
 #define FUSE_OPCODE_FILTER	0x0ffff
 #define FUSE_PREFILTER		0x10000
