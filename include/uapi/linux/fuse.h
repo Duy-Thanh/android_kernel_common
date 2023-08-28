@@ -974,6 +974,8 @@ struct fuse_notify_retrieve_in {
 /* 126 is reserved for the V2 interface implementation in Android */
 #define FUSE_DEV_IOC_PASSTHROUGH_OPEN	_IOW(FUSE_DEV_IOC_MAGIC, 126, uint32_t)
 
+#define FUSE_DEV_IOC_FUSE_BPF_CRED_SET _IO(FUSE_DEV_IOC_MAGIC, 63)
+
 struct fuse_lseek_in {
 	uint64_t	fh;
 	uint64_t	offset;
