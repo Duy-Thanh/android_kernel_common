@@ -1,0 +1,172 @@
+[abi_symbol_list]
+# commonly used symbols
+  kfree
+  kmalloc_caches
+  kmalloc_trace
+  krealloc
+  kunit_binary_assert_format
+  kunit_binary_ptr_assert_format
+  kunit_binary_str_assert_format
+  kunit_do_failed_assertion
+  kunit_fail_assert_format
+  kunit_kmalloc_array
+  kunit_log_append
+  kunit_ptr_not_err_assert_format
+  kunit_try_catch_throw
+  kunit_unary_assert_format
+  memcpy
+  memset
+  module_layout
+  _printk
+  __put_task_struct
+  _raw_spin_lock_irqsave
+  _raw_spin_unlock_irqrestore
+  scnprintf
+  __stack_chk_fail
+  strcmp
+  strscpy
+  strstr
+
+# required by clk-gate_test.ko
+  clk_disable
+  clk_enable
+  clk_hw_get_flags
+  clk_hw_get_name
+  clk_hw_get_parent
+  clk_hw_get_rate
+  clk_hw_is_enabled
+  clk_hw_is_prepared
+  __clk_hw_register_fixed_rate
+  __clk_hw_register_gate
+  clk_hw_unregister_fixed_rate
+  clk_hw_unregister_gate
+  clk_prepare
+  clk_unprepare
+  platform_device_put
+  platform_device_register_full
+
+# required by clk_test.ko
+  __clk_determine_rate
+  clk_get_parent
+  clk_get_rate
+  clk_has_parent
+  clk_hw_get_clk
+  clk_hw_get_num_parents
+  clk_hw_init_rate_request
+  clk_hw_register
+  clk_hw_unregister
+  clk_is_match
+  __clk_mux_determine_rate_closest
+  clk_notifier_register
+  clk_notifier_unregister
+  clk_put
+  clk_round_rate
+  clk_set_parent
+  clk_set_rate
+  clk_set_rate_range
+  finish_wait
+  init_wait_entry
+  __init_waitqueue_head
+  prepare_to_wait_event
+  schedule_timeout
+  __wake_up
+
+# required by dev_addr_lists_test.ko
+  alloc_etherdev_mqs
+  dev_addr_add
+  dev_addr_del
+  dev_addr_mod
+  dev_uc_add_excl
+  dev_uc_del
+  free_netdev
+  __hw_addr_sync_dev
+  memchr_inv
+  register_netdev
+  rtnl_lock
+  rtnl_unlock
+  unregister_netdev
+
+# required by fat_test.ko
+  fat_time_fat2unix
+  fat_time_unix2fat
+
+# required by hid-uclogic-test.ko
+  _dev_err
+  _dev_warn
+  kmemdup
+  memcmp
+  snprintf
+  strncmp
+  usb_control_msg
+  usb_hid_driver
+  usb_interrupt_msg
+  usb_string
+
+# required by iio-test-format.ko
+  iio_format_value
+  strlen
+
+# required by kfence_test.ko
+  for_each_kernel_tracepoint
+  fortify_panic
+  get_random_u16
+  jiffies
+  __kfence_pool
+  kfence_sample_interval
+  __kmalloc
+  kmem_cache_alloc
+  kmem_cache_alloc_bulk
+  kmem_cache_create
+  kmem_cache_destroy
+  kmem_cache_free
+  kmem_cache_free_bulk
+  kmem_cache_shrink
+  ksize
+  kthread_should_stop
+  __msecs_to_jiffies
+  rcu_barrier
+  __rcu_read_lock
+  __rcu_read_unlock
+  strchr
+  strnlen
+  strnstr
+  synchronize_rcu
+  synchronize_srcu
+  tracepoint_probe_register
+  tracepoint_probe_unregister
+  tracepoint_srcu
+
+# required by kunit-test.ko
+  alt_cb_patch_nops
+  __kunit_add_resource
+  kunit_cleanup
+  kunit_destroy_resource
+  kunit_init_test
+  kunit_remove_resource
+  kunit_try_catch_run
+  refcount_warn_saturate
+
+# required by lib_test.ko
+  rtc_month_days
+  rtc_time64_to_tm
+
+# required by soc-topology-test.ko
+  get_device
+  put_device
+  __root_device_register
+  root_device_unregister
+  snd_soc_add_component
+  snd_soc_component_initialize
+  snd_soc_register_card
+  snd_soc_tplg_component_load
+  snd_soc_tplg_component_remove
+  snd_soc_unregister_card
+  snd_soc_unregister_component
+
+# required by soc-utils-test.ko
+  _snd_pcm_hw_params_any
+  snd_soc_params_to_bclk
+  snd_soc_tdm_params_to_bclk
+
+# required by time_test.ko
+  time64_to_tm
