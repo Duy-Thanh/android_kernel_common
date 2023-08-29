@@ -545,6 +545,7 @@ const struct arm64_cpu_capabilities arm64_errata[] = {
 		CAP_MIDR_RANGE_LIST(trbe_write_out_of_range_cpus),
 	},
 #endif
+<<<<<<< HEAD   (481c18 Merge 5.15.125 into android13-5.15-lts)
 #ifdef CONFIG_ARM64_ERRATUM_2457168
 	{
 		.desc = "ARM erratum 2457168",
@@ -554,6 +555,8 @@ const struct arm64_cpu_capabilities arm64_errata[] = {
 		CAP_MIDR_RANGE(MIDR_CORTEX_A510, 0, 0, 1, 1)
 	},
 #endif
+=======
+>>>>>>> BRANCH (24c4de Linux 5.15.126)
 	{
 	}
 };
