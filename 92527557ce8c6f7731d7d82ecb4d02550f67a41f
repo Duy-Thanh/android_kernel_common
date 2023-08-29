@@ -16,6 +16,23 @@
       "message": "This change will need an x86_64 and riscv64 counterpart",
       "revId": "92527557ce8c6f7731d7d82ecb4d02550f67a41f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4b80cb2_a6d8cf14",
+        "filename": "modules.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-08-29T23:17:13Z",
+      "side": 1,
+      "message": "I also prefer this one. May define a separate module list so the intention is clear.",
+      "revId": "92527557ce8c6f7731d7d82ecb4d02550f67a41f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
