@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a006ff_c6e12d23",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 1
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-29T07:58:40Z",
+      "side": 1,
+      "message": "no driver should be calling this as it implies the driver is resetting the whole system.  Please never do this.",
+      "range": {
+        "startLine": 779,
+        "startChar": 2,
+        "endLine": 779,
+        "endChar": 18
+      },
+      "revId": "656d7130d14e3952ce9169fdbd9895117fbe0fd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
