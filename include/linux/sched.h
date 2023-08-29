@@ -1548,7 +1548,7 @@ struct task_struct {
 	 */
 	union rv_task_monitor		rv[RV_PER_TASK_MONITORS];
 #endif
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, unsigned int android_saved_state);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
