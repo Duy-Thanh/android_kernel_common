@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35bc69af_eb09274d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956236
+      },
+      "writtenOn": "2023-08-29T08:29:01Z",
+      "side": 1,
+      "message": "We\u0027re not going to reboot the system, but want to unpin the CMA page that filesystem pinned.\n\nThere are some reasons from @surenb@google.com about this filesystem sync\nhttps://android-review.googlesource.com/c/kernel/common/+/2206022/comments/ce7835a0_49763f9b\n\nAnd this ksys_sync_helper API won\u0027t cause the system broken and won\u0027t hurt the system, but only more stable.\n\nBecause the filesystem is synchronized by the driver. Data is synchronized into device part.\nAnd this API is almost like user space enters \"sync\" command, the \"sync\" command is allowed to normal user who is not admin.\n\nCould you reconsider about it? If I can provide more detail information for you, please tell me. Thank you!",
+      "parentUuid": "59a24457_6c4f41ab",
+      "revId": "656d7130d14e3952ce9169fdbd9895117fbe0fd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88a006ff_c6e12d23",
         "filename": "android/abi_gki_aarch64_rtkstb",
         "patchSetId": 1
