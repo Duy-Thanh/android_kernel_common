@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd7b5405_80ba6e1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-08-29T17:32:14Z",
+      "side": 1,
+      "message": "There was already such issue in the hid-input driver for certain devices. One example is:\n\t\t/* use a larger default input buffer for MT devices */\n\t\tif (usage-\u003ecode \u003d\u003d ABS_MT_POSITION_X \u0026\u0026 input-\u003ehint_events_per_packet \u003d\u003d 0)\n\t\t\tinput_set_events_per_packet(input, 60);\n\t\t\t\nWe have seen that enterprise devices (usb 2D barcode scanners) that use the standard hid-input driver also need to increase the size as well ( similar to the MT devices that set it to 60 ) and therefore providing the hook to set the (hint_events_per_packet) will provide a standard way to send the needed buffer hint to the input driver.",
+      "parentUuid": "0c2ac50e_dd8757ea",
+      "revId": "85edef83178885ebfc2f1e1199830e4eca513cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6439f7a_1b2032b7",
         "filename": "drivers/hid/hid-input.c",
         "patchSetId": 1
