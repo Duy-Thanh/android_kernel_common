@@ -32,6 +32,7 @@ use kernel::{
 use crate::{
     allocation::{Allocation, AllocationInfo},
     context::Context,
+    prio::{self, BinderPriority},
     defs::*,
     error::{BinderError, BinderResult},
     node::{DeliveredNodeDeath, Node, NodeDeath, NodeRef},
@@ -134,6 +135,8 @@ impl ProcessInner {
     ) -> Result<(), (BinderError, Arc<dyn DeliverToRead>)> {
         // Try to find a ready thread to which to push the work.
         if let Some(thread) = self.ready_threads.pop_front() {
+            work.on_thread_selected(&thread);
+
             //pr_info!("pushing work to thread {} for pid {}", thread.id, thread.process.task.pid());
             // Push to thread while holding state lock. This prevents the thread from giving up
             // (for example, because of a signal) when we're about to deliver work.
@@ -339,6 +342,8 @@ pub(crate) struct Process {
     #[pin]
     pub(crate) inner: SpinLock<ProcessInner>,
 
+    pub(crate) default_priority: BinderPriority,
+
     // Waitqueue of processes waiting for all outstanding transactions to be
     // processed.
     #[pin]
@@ -390,13 +395,15 @@ impl workqueue::WorkItem for Process {
 
 impl Process {
     fn new(ctx: Arc<Context>, cred: ARef<Credential>) -> Result<Arc<Self>> {
+        let current = kernel::current!();
         let process = Arc::pin_init(pin_init!(Process {
             ctx,
             cred,
+            default_priority: prio::get_default_prio_from_task(current),
             inner <- kernel::new_spinlock!(ProcessInner::new(), "Process::inner"),
             node_refs <- kernel::new_mutex!(ProcessNodeRefs::new(), "Process::node_refs"),
             freeze_wait <- kernel::new_condvar!("Process::freeze_wait"),
-            task: kernel::current!().group_leader().into(),
+            task: current.group_leader().into(),
             defer_work <- Work::new(),
             links: Links::new(),
         }))?;

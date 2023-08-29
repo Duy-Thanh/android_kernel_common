@@ -6,10 +6,12 @@
  * Sorted alphabetically.
  */
 
+#include <linux/capability.h>
 #include <linux/slab.h>
 #include <linux/refcount.h>
 #include <linux/wait.h>
 #include <linux/sched.h>
+#include <uapi/linux/sched/types.h>
 #include <linux/fs.h>
 #include <linux/file.h>
 #include <linux/fdtable.h>

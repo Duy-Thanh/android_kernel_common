@@ -24,6 +24,7 @@ mod context;
 mod defs;
 mod error;
 mod node;
+mod prio;
 mod process;
 mod range_alloc;
 mod thread;
@@ -52,6 +53,10 @@ trait DeliverToRead {
     /// Cancels the given work item. This is called instead of [`DeliverToRead::do_work`] when work
     /// won't be delivered.
     fn cancel(self: Arc<Self>) {}
+
+    /// Called when a work item is delivered directly to a specific thread, rather than to the
+    /// process work list.
+    fn on_thread_selected(&self, _thread: &thread::Thread) {}
 
     /// Returns the linked list links for the work item.
     fn get_links(&self) -> &Links<dyn DeliverToRead>;

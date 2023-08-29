@@ -10,12 +10,13 @@ use kernel::{
     file::{File, PollTable},
     io_buffer::{IoBufferReader, IoBufferWriter},
     linked_list::{GetLinks, Links, List},
+    task::Task,
     prelude::*,
     security,
     seq_file::SeqFile,
     seq_print,
     sync::{Arc, CondVar, SpinLock},
-    types::Either,
+    types::{ARef, Either},
     user_ptr::{UserSlicePtr, UserSlicePtrWriter},
 };
 
@@ -23,6 +24,7 @@ use crate::{
     allocation::{Allocation, AllocationView, BinderObject, BinderObjectRef},
     defs::*,
     error::BinderResult,
+    prio::{self, BinderPriority, PriorityState},
     process::Process,
     ptr_align,
     transaction::Transaction,
@@ -400,13 +402,21 @@ impl InnerThread {
     }
 }
 
+pub(crate) struct ThreadPrioState {
+    pub(crate) state: PriorityState,
+    pub(crate) next: BinderPriority,
+}
+
 /// This represents a thread that's used with binder.
 #[pin_data]
 pub(crate) struct Thread {
     pub(crate) id: i32,
     pub(crate) process: Arc<Process>,
+    pub(crate) task: ARef<Task>,
     #[pin]
     inner: SpinLock<InnerThread>,
+    #[pin]
+    pub(crate) prio_lock: SpinLock<ThreadPrioState>,
     #[pin]
     work_condvar: CondVar,
     /// Used to insert this thread into the process' `ready_threads` list.
@@ -419,10 +429,17 @@ impl Thread {
     pub(crate) fn new(id: i32, process: Arc<Process>) -> Result<Arc<Self>> {
         let inner = InnerThread::new()?;
 
+        let prio = ThreadPrioState {
+            state: PriorityState::Set,
+            next: BinderPriority::default(),
+        };
+
         Ok(Arc::pin_init(pin_init!(Thread {
             id,
             process,
+            task: ARef::from(kernel::current!()),
             inner <- kernel::new_spinlock!(inner, "Thread::inner"),
+            prio_lock <- kernel::new_spinlock!(prio, "Thread::prio_lock"),
             work_condvar <- kernel::new_condvar!("Thread::work_condvar"),
             links: Links::new(),
         }))?)
@@ -583,6 +600,8 @@ impl Thread {
                 return Ok(Some(work));
             }
 
+            self.restore_priority(&self.process.default_priority);
+
             inner.looper_flags |= LOOPER_WAITING | LOOPER_WAITING_PROC;
             let signal_pending = self.work_condvar.wait(&mut inner);
             inner.looper_flags &= !(LOOPER_WAITING | LOOPER_WAITING_PROC);
@@ -644,6 +663,85 @@ impl Thread {
 
     pub(crate) fn push_return_work(&self, reply: u32) {
         self.inner.lock().push_return_work(reply);
+    }
+
+    fn do_set_priority(&self, desired: &BinderPriority, verify: bool) {
+        let task = &*self.task;
+        let mut policy = desired.sched_policy;
+        let mut priority;
+
+        if task.policy() == policy && task.normal_prio() == desired.prio {
+            let mut prio_state = self.prio_lock.lock();
+            if prio_state.state == PriorityState::Pending {
+                prio_state.state = PriorityState::Set;
+            }
+            return;
+        }
+
+        let has_cap_nice = task.has_capability_noaudit(bindings::CAP_SYS_NICE as _);
+        priority = prio::to_userspace_prio(policy, desired.prio);
+
+        if verify && prio::is_rt_policy(policy) && !has_cap_nice {
+            // For rt_policy, we store the rt priority as a nice. (See to_userspace_prio and
+            // to_kernel_prio impls.)
+            let max_rtprio: prio::Nice = task.rlimit_rtprio();
+            if max_rtprio == 0 {
+                policy = prio::SCHED_NORMAL;
+                priority = prio::MIN_NICE;
+            } else if priority > max_rtprio {
+                priority = max_rtprio;
+            }
+        }
+
+        if verify && prio::is_fair_policy(policy) && !has_cap_nice {
+            let min_nice = task.rlimit_nice();
+
+            if min_nice > prio::MAX_NICE {
+                pr_err!("{} RLIMIT_NICE not set", task.pid());
+                return;
+            } else if priority < min_nice {
+                priority = min_nice;
+            }
+        }
+
+        if policy != desired.sched_policy || prio::to_kernel_prio(policy, priority) != desired.prio {
+            pr_debug!(
+                "{}: priority {} not allowed, using {} instead",
+                task.pid(),
+                desired.prio,
+                prio::to_kernel_prio(policy, priority),
+            );
+        }
+
+        let mut prio_state = self.prio_lock.lock();
+        if !verify && prio_state.state == PriorityState::Abort {
+            // A new priority has been set by an incoming nested
+            // transaction. Abort this priority restore and allow
+            // the transaction to run at the new desired priority.
+            drop(prio_state);
+            pr_debug!("{}: aborting priority restore", task.pid());
+            return;
+        }
+
+        // Set the actual priority.
+        if task.policy() != policy || prio::is_rt_policy(policy) {
+            let prio = if prio::is_rt_policy(policy) { priority } else { 0 };
+            task.sched_setscheduler_nocheck(policy as i32, prio, true);
+        }
+
+        if prio::is_fair_policy(policy) {
+            task.set_user_nice(priority);
+        }
+
+        prio_state.state = PriorityState::Set;
+    }
+
+    pub(crate) fn set_priority(&self, desired: &BinderPriority) {
+        self.do_set_priority(desired, true);
+    }
+
+    pub(crate) fn restore_priority(&self, desired: &BinderPriority) {
+        self.do_set_priority(desired, false);
     }
 
     fn translate_object(
@@ -1207,7 +1305,7 @@ impl Thread {
         }
 
         // We need to complete the transaction even if we cannot complete building the reply.
-        (|| -> BinderResult<_> {
+        let out = (|| -> BinderResult<_> {
             let completion = Arc::try_new(DeliverCode::new(BR_TRANSACTION_COMPLETE))?;
             let process = orig.from.process.clone();
             let allow_fds = orig.flags & TF_ACCEPT_FDS != 0;
@@ -1227,7 +1325,11 @@ impl Thread {
             orig.from.deliver_reply(reply, &orig);
             err.reply = BR_TRANSACTION_COMPLETE;
             err
-        })
+        });
+
+        // Restore the priority even on failure.
+        self.restore_priority(&orig.saved_priority());
+        out
     }
 
     fn oneway_transaction_inner(self: &Arc<Self>, tr: &BinderTransactionDataSg) -> BinderResult {

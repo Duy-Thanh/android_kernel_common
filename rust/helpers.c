@@ -283,6 +283,12 @@ void rust_helper_init_task_work(struct callback_head *twork, task_work_func_t fu
 }
 EXPORT_SYMBOL_GPL(rust_helper_init_task_work);
 
+unsigned long rust_helper_task_rlimit(const struct task_struct *task, unsigned int limit)
+{
+	return task_rlimit(task, limit);
+}
+EXPORT_SYMBOL_GPL(rust_helper_task_rlimit);
+
 /*
  * We use `bindgen`'s `--size_t-is-usize` option to bind the C `size_t` type
  * as the Rust `usize` type, so we can use it in contexts where Rust
