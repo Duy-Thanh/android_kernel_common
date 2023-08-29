@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2c08015_0f002723",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-08-29T19:28:45Z",
+      "side": 1,
+      "message": "I think we should follow the documentation for `rhashtable_lookup()` and guard this with RCU read locks. Alternatively, since we know the entries won\u0027t be manipulated concurrently, we could use `rhashtable_lookup_fast()`?",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b356f8c_be46b495",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-08-29T19:28:45Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s clear why you do this at a glance. I think you should add a comment explaining why we\u0027re treating the memory allocation failure here as a duplicate.",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a4322f5_50756ada",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-08-29T19:28:45Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we free the node we tried to insert in case of any error? Not just if it already exists?",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b00f4bf_39770be9",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-08-29T19:28:45Z",
+      "side": 1,
+      "message": "This could potentially be called twice in the following sequence:\n\n1. Load module (results in one call to `module_arch_freeing_init()` from `do_init_module()`)\n2. Unload module (results in one call to `module_arch_freeing_init()` from `free_module()`)\n\nSince `mod-\u003earch.[core|init].elf64_rela_rht` isn\u0027t cleared in step #1, they are left as dangling pointers. This means during step 2, you will do a double free.\n\nYou can avoid this by NULL\u0027ing out the `elf64_rela_rht` pointers after freeing them the first time.",
+      "range": {
+        "startLine": 106,
+        "startChar": 23,
+        "endLine": 106,
+        "endChar": 37
+      },
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbdd7323_eae61a7e",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-08-29T19:28:45Z",
+      "side": 1,
+      "message": "You have to free `mod-\u003earch.core.elf64_rela_rht` before returning to avoid a memory leak.",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39bf4954_e99682dd",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-08-29T19:28:45Z",
+      "side": 1,
+      "message": "Do you think it would be overkill to have a function that handles allocating and initializing these data structures?",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
