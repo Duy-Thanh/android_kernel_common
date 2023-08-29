@@ -17,6 +17,7 @@ use kernel::{
 use crate::{
     defs::*,
     error::BinderError,
+    prio::{self, BinderPriority},
     process::{Process, ProcessInner},
     thread::Thread,
     transaction::Transaction,
@@ -111,6 +112,22 @@ impl Node {
             owner,
             links_track <- AtomicListArcTracker::new(),
         })
+    }
+
+    pub(crate) fn node_prio(&self) -> prio::BinderPriority {
+        let flags = self.flags;
+        let priority = (flags & FLAT_BINDER_FLAG_PRIORITY_MASK) as prio::Nice;
+        let sched_policy =
+            (flags & FLAT_BINDER_FLAG_SCHED_POLICY_MASK) >> FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT;
+
+        BinderPriority {
+            sched_policy,
+            prio: prio::to_kernel_prio(sched_policy, priority),
+        }
+    }
+
+    pub(crate) fn inherit_rt(&self) -> bool {
+        (self.flags & FLAT_BINDER_FLAG_INHERIT_RT) != 0
     }
 
     #[inline(never)]
