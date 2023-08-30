@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "543a3fd4_ebf5e55e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-30T09:10:12Z",
+      "side": 1,
+      "message": "Ok, again, let\u0027s fix this upstream so that no hook is needed at all.  Can you propose a patch for this?  It should be fixed properly, that way we can propagate it to all supported kernel versions, and you will not need any out-of-tree code for the device at all.",
+      "parentUuid": "bd7b5405_80ba6e1a",
+      "revId": "85edef83178885ebfc2f1e1199830e4eca513cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6439f7a_1b2032b7",
         "filename": "drivers/hid/hid-input.c",
         "patchSetId": 1
