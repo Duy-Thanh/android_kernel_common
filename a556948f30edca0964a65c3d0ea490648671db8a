@@ -33,6 +33,23 @@
       "message": "Bug: b/298150234",
       "revId": "a556948f30edca0964a65c3d0ea490648671db8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd668db_655b1a21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-08-30T15:17:06Z",
+      "side": 1,
+      "message": "All those changes should be send as a stack of changes. Just as the original stack.\n\nhttps://r.android.com/q/project:kernel/common+branch:android14-6.1-2023-08+status:open+o:+sunshijie",
+      "revId": "a556948f30edca0964a65c3d0ea490648671db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
