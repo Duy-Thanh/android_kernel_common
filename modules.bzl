@@ -77,7 +77,14 @@ COMMON_GKI_MODULES_LIST = _COMMON_GKI_MODULES_LIST
 
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
+    "arch/arm64/gunyah/gunyah_hypercall.ko",
+    "drivers/mailbox/gunyah-msgq.ko",
     "drivers/ptp/ptp_kvm.ko",
+    "drivers/virt/gunyah/gunyah.ko",
+    "drivers/virt/gunyah/gunyah_ioeventfd.ko",
+    "drivers/virt/gunyah/gunyah_irqfd.ko",
+    "drivers/virt/gunyah/gunyah_platform_hooks.ko",
+    "drivers/virt/gunyah/gunyah_vcpu.ko",
 ]
 
 _RISCV64_GKI_MODULES_LIST = [

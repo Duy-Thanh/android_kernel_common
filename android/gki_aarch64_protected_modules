@@ -1,7 +1,9 @@
+arch/arm64/gunyah/gunyah_hypercall.ko
 drivers/bluetooth/btbcm.ko
 drivers/bluetooth/btqca.ko
 drivers/bluetooth/btsdio.ko
 drivers/bluetooth/hci_uart.ko
+drivers/mailbox/gunyah-msgq.ko
 drivers/net/can/dev/can-dev.ko
 drivers/net/can/slcan/slcan.ko
 drivers/net/can/vcan.ko
@@ -31,6 +33,11 @@ drivers/ptp/ptp_kvm.ko
 drivers/usb/class/cdc-acm.ko
 drivers/usb/serial/ftdi_sio.ko
 drivers/usb/serial/usbserial.ko
+drivers/virt/gunyah/gunyah.ko
+drivers/virt/gunyah/gunyah_ioeventfd.ko
+drivers/virt/gunyah/gunyah_irqfd.ko
+drivers/virt/gunyah/gunyah_platform_hooks.ko
+drivers/virt/gunyah/gunyah_vcpu.ko
 lib/crypto/libarc4.ko
 net/6lowpan/6lowpan.ko
 net/6lowpan/nhc_dest.ko
