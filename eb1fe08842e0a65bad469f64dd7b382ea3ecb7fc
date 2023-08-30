@@ -16,6 +16,23 @@
       "message": "Hi, please help to add \"Bug: 298150234\" in the commit message.",
       "revId": "eb1fe08842e0a65bad469f64dd7b382ea3ecb7fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56793937_2639461e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2023-08-30T09:20:15Z",
+      "side": 1,
+      "message": "Bug: b/298150234",
+      "revId": "eb1fe08842e0a65bad469f64dd7b382ea3ecb7fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
