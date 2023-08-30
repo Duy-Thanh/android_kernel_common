@@ -34,6 +34,24 @@
       "parentUuid": "e59c043d_a8748fea",
       "revId": "2e0baffda883850dbb09ac78a4c2360fe64fc46a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b5b4767_423983ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-08-30T16:07:11Z",
+      "side": 1,
+      "message": "Then please cite the original patch in the commit message (see bug).",
+      "parentUuid": "1af30a7f_00a4fd44",
+      "revId": "2e0baffda883850dbb09ac78a4c2360fe64fc46a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
