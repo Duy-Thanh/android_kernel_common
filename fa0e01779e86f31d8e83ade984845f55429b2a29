@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b8a39f_7b1e051b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-08-30T23:51:48Z",
+      "side": 1,
+      "message": "Bypassing Lint, as the error that it cited was not introduced by this patch.",
+      "revId": "fa0e01779e86f31d8e83ade984845f55429b2a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
