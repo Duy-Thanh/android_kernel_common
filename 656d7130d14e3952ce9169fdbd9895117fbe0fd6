@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6f012c2_e087d338",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956236
+      },
+      "writtenOn": "2023-08-30T23:30:46Z",
+      "side": 1,
+      "message": "Hi @gregkh@google.com @surenb@google.com,\n\nPlease reconsider about it.\n\nSo far, no one can solve file-backed that pinned CMA memory, even Linux upstream community.\n\nSo Google have to change kernel CMA\u0027s behavior that don\u0027t borrow CMA to file-backed memory\ncommit 7ff00a49a2329ec3339da5059b36c6c1cbe6a3cc \"ANDROID: cma: redirect page allocation to CMA\"\nhttps://android-review.googlesource.com/c/kernel/common/+/1493978\n\nAnd this commit was not accepted by Linux upstream community, but unfortunately Linux upstream\ncommunity has no solution about file-backed pinned CMA for Google still.\n\nSo Google keeps this commit even the new kernel version 5.15.\n\nHowever, if you don\u0027t borrow CMA to file-backed, there are some side-effects will happen,\nespecially high CMA total size but low available memory (ex: TV, STB use 1G/1.5G/2G DDR)\nThis change causes TVTS some benchmark downgrade, and also bad CMA utilization.\nDuring page thrashing, file-backed memory keeps thrashing, if we can allow file-backed to borrow CMA,\nthen page thrashing level can be decreased.\n\nFor the performance problem, we change CMA\u0027s behavior back to Linux upstream\u0027s instead of ACK\u0027s.\nAnd we deal with file-backed pinned CMA memory problem by ksys_sync().\nksys_sync_helper() is exported symbol even in newest kernel version, and same code as ksys_sync().\n\nLike I said before, if ksys_sync_helper() is dangerous, then Linux should ban \"sync\" command that normal user can use.\nksys_sync_helper() is just like user space \"sync\" command. And yes, maybe we can use \"sync\" command from user space\nwhen we want to do cma_alloc(), however it don\u0027t have to do it every cma_alloc(), just needs to do it once when the CMA EBUSY happened\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android14-5.15/mm/cma.c#538\nSo it\u0027s really better to do it in driver.\n\nIf I still explain not enough, please give me more chances to discuss about it.",
+      "parentUuid": "35bc69af_eb09274d",
+      "revId": "656d7130d14e3952ce9169fdbd9895117fbe0fd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88a006ff_c6e12d23",
         "filename": "android/abi_gki_aarch64_rtkstb",
         "patchSetId": 1
