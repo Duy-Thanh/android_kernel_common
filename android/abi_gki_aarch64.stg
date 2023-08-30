@@ -329791,6 +329791,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_tune_scan_type"
 }
 elf_symbol {
+  id: 0x3947ecb4
+  name: "__traceiter_android_vh_tune_swappiness"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd2ac8d57
+  type_id: 0x9be2da56
+  full_name: "__traceiter_android_vh_tune_swappiness"
+}
+elf_symbol {
   id: 0x8a773cc3
   name: "__traceiter_android_vh_typec_store_partner_src_caps"
   is_defined: true
@@ -333092,6 +333101,15 @@ elf_symbol {
   crc: 0x45da6384
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_tune_scan_type"
+}
+elf_symbol {
+  id: 0xfe6b6962
+  name: "__tracepoint_android_vh_tune_swappiness"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x88fcdb6c
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_tune_swappiness"
 }
 elf_symbol {
   id: 0x18e67da1
@@ -386145,6 +386163,7 @@ interface {
   symbol_id: 0x0119fc41
   symbol_id: 0xd9f43028
   symbol_id: 0x39155e73
+  symbol_id: 0x3947ecb4
   symbol_id: 0x8a773cc3
   symbol_id: 0x9545623c
   symbol_id: 0x558490b1
@@ -386512,6 +386531,7 @@ interface {
   symbol_id: 0x09ba106b
   symbol_id: 0xf9580976
   symbol_id: 0x49b955bd
+  symbol_id: 0xfe6b6962
   symbol_id: 0x18e67da1
   symbol_id: 0x75a2f39e
   symbol_id: 0x7b5c377f
