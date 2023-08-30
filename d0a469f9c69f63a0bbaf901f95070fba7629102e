@@ -16,6 +16,23 @@
       "message": "Hi, please help to add these symbols for vivo. 😊",
       "revId": "d0a469f9c69f63a0bbaf901f95070fba7629102e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb1c7ce1_2a838e5c",
+        "filename": "android/abi_gki_aarch64.stg",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-08-30T13:47:28Z",
+      "side": 1,
+      "message": "Please do not change the file mode of `android/abi_gki_aarch64.stg`. This change makes the file executable.",
+      "revId": "d0a469f9c69f63a0bbaf901f95070fba7629102e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
