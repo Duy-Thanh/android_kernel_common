@@ -618,6 +618,8 @@ static int dma_info_to_prot(enum dma_data_direction dir, bool coherent,
 	if (attrs & DMA_ATTR_SYS_CACHE_NWA)
 		prot |= IOMMU_SYS_CACHE_NWA;
 
+	trace_android_vh_dma_info_to_prot(&prot, attrs);
+
 	switch (dir) {
 	case DMA_BIDIRECTIONAL:
 		return prot | IOMMU_READ | IOMMU_WRITE;

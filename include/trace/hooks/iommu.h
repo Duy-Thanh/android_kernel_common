@@ -40,6 +40,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_iommu_limit_align_shift,
 		unsigned long *shift),
 	TP_ARGS(iovad, size, shift), 1);
 
+DECLARE_HOOK(android_vh_dma_info_to_prot,
+        TP_PROTO(int *prot, unsigned long attrs),
+        TP_ARGS(prot, attrs));
+
 #endif /* _TRACE_HOOK_IOMMU_H */
 
 /* This part must be outside protection */
