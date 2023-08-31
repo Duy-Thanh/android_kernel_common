@@ -62,6 +62,52 @@
       "message": "The `task-\u003eprio` holds a _temporary_ PI boosted priority of a task so things can get messy when we involve this priority in binder PI. I\u0027ll have a look at the bug to understand the scenario you are trying to fix as there is no information here.",
       "revId": "0c56f902d2e9d9e5e5a8e3a698873e1d0317890d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fec958f_f4e8f55c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-08-31T18:19:42Z",
+      "side": 1,
+      "message": "Isn\u0027t there a chance of this \"bosted\" task-\u003eprio leaking? e.g. what if we restore the saved_priority _after_ the boosting has been concluded?",
+      "range": {
+        "startLine": 889,
+        "startChar": 5,
+        "endLine": 889,
+        "endChar": 19
+      },
+      "revId": "0c56f902d2e9d9e5e5a8e3a698873e1d0317890d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31694759_0d8d73ae",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5825,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-08-31T18:19:42Z",
+      "side": 1,
+      "message": "I don\u0027t think you want to store a boosted priority in `proc-\u003edefault_priority` and then restore this value all the time?",
+      "range": {
+        "startLine": 5825,
+        "startChar": 41,
+        "endLine": 5825,
+        "endChar": 45
+      },
+      "revId": "0c56f902d2e9d9e5e5a8e3a698873e1d0317890d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
