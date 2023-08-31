@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40962de1_0a1f29d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-08-31T09:01:46Z",
+      "side": 1,
+      "message": "Please also adjust author and committer. Odds are your local git settings contain those values. Please amend the commit with the guidance given at https://git-scm.com/docs/git-config#Documentation/git-config.txt-committeremail.",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "revId": "23c0590addabd6a67d7daf0acb401affd9d4109d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
