@@ -34,6 +34,24 @@
       "parentUuid": "df7710e3_730303da",
       "revId": "cf667150f01dd65a47be9c7d7af2d2f666f2548b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae2cb22a_801e3cba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-08-31T17:47:04Z",
+      "side": 1,
+      "message": "BTW, if you only add --dereference for tar but not dereference it at the cpio step, then the comments won\u0027t be stripped properly (because the comments are only stripped on `find -type f`)",
+      "parentUuid": "70fdb85a_bbd35071",
+      "revId": "cf667150f01dd65a47be9c7d7af2d2f666f2548b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
