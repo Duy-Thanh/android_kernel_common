@@ -57,6 +57,13 @@ extern void cpuset_force_rebuild(void);
 extern void cpuset_update_active_cpus(void);
 extern void cpuset_update_active_cpus_affine(int cpu);
 extern void cpuset_wait_for_hotplug(void);
+<<<<<<< HEAD   (4d68de UPSTREAM: mhi: pci_generic: Fix implicit conversion warning)
+=======
+extern void inc_dl_tasks_cs(struct task_struct *task);
+extern void dec_dl_tasks_cs(struct task_struct *task);
+extern void cpuset_lock(void);
+extern void cpuset_unlock(void);
+>>>>>>> BRANCH (456660 Linux 5.10.193)
 extern void cpuset_cpus_allowed(struct task_struct *p, struct cpumask *mask);
 extern void cpuset_cpus_allowed_fallback(struct task_struct *p);
 extern nodemask_t cpuset_mems_allowed(struct task_struct *p);
@@ -182,6 +189,14 @@ static inline void cpuset_update_active_cpus(void)
 
 static inline void cpuset_wait_for_hotplug(void) { }
 
+<<<<<<< HEAD   (4d68de UPSTREAM: mhi: pci_generic: Fix implicit conversion warning)
+=======
+static inline void inc_dl_tasks_cs(struct task_struct *task) { }
+static inline void dec_dl_tasks_cs(struct task_struct *task) { }
+static inline void cpuset_lock(void) { }
+static inline void cpuset_unlock(void) { }
+
+>>>>>>> BRANCH (456660 Linux 5.10.193)
 static inline void cpuset_cpus_allowed(struct task_struct *p,
 				       struct cpumask *mask)
 {
