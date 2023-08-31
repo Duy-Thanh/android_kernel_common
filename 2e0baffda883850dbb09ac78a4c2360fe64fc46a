@@ -52,6 +52,24 @@
       "parentUuid": "1af30a7f_00a4fd44",
       "revId": "2e0baffda883850dbb09ac78a4c2360fe64fc46a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb26f115_00b45e50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2041020
+      },
+      "writtenOn": "2023-08-31T06:24:49Z",
+      "side": 1,
+      "message": "I have already cited the source of this hook ”Partial cherry-pick of aosp/2119426“",
+      "parentUuid": "5b5b4767_423983ea",
+      "revId": "2e0baffda883850dbb09ac78a4c2360fe64fc46a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
