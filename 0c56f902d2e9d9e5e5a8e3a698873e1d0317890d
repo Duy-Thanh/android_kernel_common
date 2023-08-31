@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92c3bcd3_3900cca7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-08-31T17:44:36Z",
+      "side": 1,
+      "message": "This `Fixes:` is incorrect. It should be the commit that introduced the issue and it is not this one. It should probably be:\n```\nFixes: e00eb41c0c7b (\"ANDROID: binder: add support for RT prio inheritance.\")\n```",
+      "range": {
+        "startLine": 13,
+        "startChar": 7,
+        "endLine": 13,
+        "endChar": 16
+      },
+      "revId": "0c56f902d2e9d9e5e5a8e3a698873e1d0317890d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a1ea28_a5101895",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-08-31T17:44:36Z",
+      "side": 1,
+      "message": "What is this tag doing here?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 5
+      },
+      "revId": "0c56f902d2e9d9e5e5a8e3a698873e1d0317890d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa327c32_d316999f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-08-31T17:44:36Z",
+      "side": 1,
+      "message": "The `task-\u003eprio` holds a _temporary_ PI boosted priority of a task so things can get messy when we involve this priority in binder PI. I\u0027ll have a look at the bug to understand the scenario you are trying to fix as there is no information here.",
+      "revId": "0c56f902d2e9d9e5e5a8e3a698873e1d0317890d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
