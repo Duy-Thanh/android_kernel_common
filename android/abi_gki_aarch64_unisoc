@@ -597,6 +597,8 @@
   kvfree_call_rcu
   __list_add_valid
   __list_del_entry_valid
+  log_buf_addr_get
+  log_buf_len_get
   LZ4_decompress_safe_partial
   lzo1x_1_compress
   lzo1x_decompress_safe
