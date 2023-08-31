@@ -16,6 +16,24 @@
       "message": "Needs to be submitted as part of the whole series.",
       "revId": "187d78160491902fdfe918546f0ba96dbc317cc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8851a685_ce1514e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-08-31T14:14:19Z",
+      "side": 1,
+      "message": "unresolving",
+      "parentUuid": "60f6ddb2_21c0822d",
+      "revId": "187d78160491902fdfe918546f0ba96dbc317cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
