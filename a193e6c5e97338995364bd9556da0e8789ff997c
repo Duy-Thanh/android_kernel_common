@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "448dc54b_784b951d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-08-31T19:53:00Z",
+      "side": 1,
+      "message": "This patch cannot be merged to this branch, as it changes the ABI, and this branch\u0027s ABI is frozen.",
+      "revId": "a193e6c5e97338995364bd9556da0e8789ff997c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
