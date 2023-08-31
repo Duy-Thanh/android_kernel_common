@@ -16,6 +16,24 @@
       "message": "Is that possibly another case of aosp/2635309? Do you have that patch already in your tree?",
       "revId": "cf667150f01dd65a47be9c7d7af2d2f666f2548b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70fdb85a_bbd35071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952369
+      },
+      "writtenOn": "2023-08-31T13:49:44Z",
+      "side": 1,
+      "message": "yes, aosp/2635309 already fix it. maybe our tree is not up-to-date",
+      "parentUuid": "df7710e3_730303da",
+      "revId": "cf667150f01dd65a47be9c7d7af2d2f666f2548b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
