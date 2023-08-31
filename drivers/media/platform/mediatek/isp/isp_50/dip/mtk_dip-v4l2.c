@@ -2135,6 +2135,8 @@ static int mtk_dip_probe(struct platform_device *pdev)
 	pm_runtime_use_autosuspend(&pdev->dev);
 	pm_runtime_enable(&pdev->dev);
 
+	dma_set_max_seg_size(&pdev->dev, UINT_MAX);
+
 	return 0;
 
 err_release_deinit_v4l2:
