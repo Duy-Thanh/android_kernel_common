@@ -16,6 +16,24 @@
       "message": "Hi eric\n\nI have a same issue with you where use bpftrace. I found Google have fix this by \n\nhttps://lore.kernel.org/lkml/20230420010029.2702543-1-elsk@google.com/ and merged with https://android-review.googlesource.com/c/kernel/common/+/2635289, \n\nbut it doesn\u0027t fix the issue. I don\u0027t know why not fix tar 😂\n\nBrs,\nHailong.",
       "revId": "26eeef8a2d3ac93ff36695cf8d5f4414238ba85e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a22aaf_c3709f4a",
+        "filename": "kernel/gen_kheaders.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1952369
+      },
+      "writtenOn": "2023-08-31T09:17:06Z",
+      "side": 1,
+      "message": "\u003e Hi eric\n\u003e \n\u003e I have a same issue with you where use bpftrace. I found Google have fix this by \n\u003e \n\u003e https://lore.kernel.org/lkml/20230420010029.2702543-1-elsk@google.com/ and merged with https://android-review.googlesource.com/c/kernel/common/+/2635289, \n\u003e \n\u003e but it doesn\u0027t fix the issue. I don\u0027t know why not fix tar 😂\n\u003e \n\u003e Brs,\n\u003e Hailong.\n\noh, same fix :), but not ported on android-14 kernel-6.1:\nhttps://lore.kernel.org/lkml/20230420010029.2702543-1-elsk@google.com\n\nThere\u0027s no need to add #include \u003cxx.h\u003e in .bt when using bpftrace if kernel supports BTF(CONFIG_DEBUG_INFO_BTF\u003dy), also, headers can be wrapped by BPFTRACE_HAVE_BTF, e.g.:\n\n#ifndef BPFTRACE_HAVE_BTF\n#include \u003clinux/xxx.h\u003e\n#endif",
+      "parentUuid": "8fa3d6e4_97fe65fb",
+      "revId": "26eeef8a2d3ac93ff36695cf8d5f4414238ba85e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
