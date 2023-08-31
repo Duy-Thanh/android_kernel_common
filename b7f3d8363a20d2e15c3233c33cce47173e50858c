@@ -16,6 +16,23 @@
       "message": "My last FROMGIT patch introduced a boot regression on DB845c. I only smoke tested the \"reserved-memory\" region part, on android-5.10, from the earlier revisions of this upstream patch. It was an oversight on my part, I should have tested the new changes before submitting that patch on android-5.10.",
       "revId": "b7f3d8363a20d2e15c3233c33cce47173e50858c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f0a845b_0757fac1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-08-31T18:16:40Z",
+      "side": 1,
+      "message": "Viktor: for owners +1",
+      "revId": "b7f3d8363a20d2e15c3233c33cce47173e50858c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
