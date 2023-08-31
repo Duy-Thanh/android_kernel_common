@@ -34,6 +34,24 @@
       "parentUuid": "8fa3d6e4_97fe65fb",
       "revId": "26eeef8a2d3ac93ff36695cf8d5f4414238ba85e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19dab958_cfe94a0d",
+        "filename": "kernel/gen_kheaders.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2023-08-31T09:34:23Z",
+      "side": 1,
+      "message": "😄 Got it, thanks for  letting me know.",
+      "parentUuid": "42a22aaf_c3709f4a",
+      "revId": "26eeef8a2d3ac93ff36695cf8d5f4414238ba85e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
