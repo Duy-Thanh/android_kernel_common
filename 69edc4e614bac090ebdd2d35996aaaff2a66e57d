@@ -50,6 +50,42 @@
       "message": "All those changes should be send as a stack of changes. Just as the original stack.\n\nhttps://r.android.com/q/project:kernel/common+branch:android14-6.1-2023-08+status:open+o:+sunshijie",
       "revId": "69edc4e614bac090ebdd2d35996aaaff2a66e57d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dfc0817_d7e04835",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-01T09:02:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e2a2782_f53bca13",
+      "revId": "69edc4e614bac090ebdd2d35996aaaff2a66e57d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c855abb0_12b47b3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-01T09:02:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe18a046_4302fdcf",
+      "revId": "69edc4e614bac090ebdd2d35996aaaff2a66e57d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
