@@ -17,7 +17,10 @@
  */
 #include "sched.h"
 #include "pelt.h"
+<<<<<<< HEAD   (ac0587 Revert "macsec: Fix traffic counters/statistics")
 #include <trace/hooks/sched.h>
+=======
+>>>>>>> BRANCH (9e4336 Linux 5.15.129)
 #include <linux/cpuset.h>
 
 struct dl_bandwidth def_dl_bandwidth;
