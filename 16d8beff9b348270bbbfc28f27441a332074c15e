@@ -34,6 +34,23 @@
       "parentUuid": "0304835c_e02c822a",
       "revId": "16d8beff9b348270bbbfc28f27441a332074c15e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46532951_37405671",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-09-01T17:57:16Z",
+      "side": 1,
+      "message": "What is the status of this patch? The bug it links to is marked resolved. Should this be abandoned, or should the bug be reopened?",
+      "revId": "16d8beff9b348270bbbfc28f27441a332074c15e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
