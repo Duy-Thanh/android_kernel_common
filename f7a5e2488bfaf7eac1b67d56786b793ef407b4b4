@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6b73d87_34b29130",
+        "filename": "block/blk-cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1797,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-01T18:04:11Z",
+      "side": 1,
+      "message": "why is this change needed? It doesn\u0027t seem to be related in any way to the rest of this patch. Please describe in the commit message.",
+      "revId": "f7a5e2488bfaf7eac1b67d56786b793ef407b4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194622bc_adfcbe72",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-01T18:04:11Z",
+      "side": 1,
+      "message": "The commit message needs to say why these need to be restricted",
+      "revId": "f7a5e2488bfaf7eac1b67d56786b793ef407b4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4508caf8_49e6602a",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-01T18:04:11Z",
+      "side": 1,
+      "message": "please don\u0027t change whitespace that isn\u0027t part of your change",
+      "revId": "f7a5e2488bfaf7eac1b67d56786b793ef407b4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3277f50_f7ab6cb1",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3413,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-01T18:04:11Z",
+      "side": 1,
+      "message": "this breaks the KMI",
+      "revId": "f7a5e2488bfaf7eac1b67d56786b793ef407b4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
