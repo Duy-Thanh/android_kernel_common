@@ -1,0 +1,40 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60a1b694_b9a67df0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-01T10:06:17Z",
+      "side": 1,
+      "message": "\u003e Original change \u0027aosp/2737333\u0027 for this cherry pick, on base branch \u0027android14-6.1\u0027 is NOT MERGED.\n\u003e Please merge the original change.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 561648837 android-build.ayeaye-python-dispatcher_20230831.05_p0\n\nThis needs to wait until the base branch change landed.",
+      "parentUuid": "9a35cb19_279d9132",
+      "revId": "c875c737b4a4bed27305233496ab0b74c90b90cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21adeb60_1be958ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-01T10:06:17Z",
+      "side": 1,
+      "message": "\u003e Please **attach an open respin request bug** to this change. Refer the following link for more information:\n\u003e https://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 561648837 android-build.ayeaye-python-dispatcher_20230831.05_p0\n\nPlease fix.",
+      "parentUuid": "364031c5_10669441",
+      "revId": "c875c737b4a4bed27305233496ab0b74c90b90cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
