@@ -309,7 +309,11 @@ static void force_user_fault(unsigned long address, int write)
 
 	code = SEGV_MAPERR;
 
+<<<<<<< HEAD   (8b02e8 Merge branch 'android14-6.1' into 'android14-6.1-lts')
 	vma = lock_mm_and_find_vma(mm, address, regs);
+=======
+	vma = lock_mm_and_find_vma(mm, address, NULL);
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 	if (!vma)
 		goto bad_area_nosemaphore;
 	code = SEGV_ACCERR;

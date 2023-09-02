@@ -682,6 +682,20 @@ struct vm_area_struct *find_vma(struct mm_struct *mm, unsigned long addr)
 EXPORT_SYMBOL(find_vma);
 
 /*
+<<<<<<< HEAD   (8b02e8 Merge branch 'android14-6.1' into 'android14-6.1-lts')
+=======
+ * At least xtensa ends up having protection faults even with no
+ * MMU.. No stack expansion, at least.
+ */
+struct vm_area_struct *lock_mm_and_find_vma(struct mm_struct *mm,
+			unsigned long addr, struct pt_regs *regs)
+{
+	mmap_read_lock(mm);
+	return vma_lookup(mm, addr);
+}
+
+/*
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
  * expand a stack to a given address
  * - not supported under NOMMU conditions
  */

@@ -237,7 +237,11 @@ asmlinkage void do_page_fault(struct pt_regs *regs)
 	if (is_write(regs))
 		flags |= FAULT_FLAG_WRITE;
 retry:
+<<<<<<< HEAD   (8b02e8 Merge branch 'android14-6.1' into 'android14-6.1-lts')
 	vma = lock_mm_and_find_vma(mm, address, regs);
+=======
+	vma = lock_mm_and_find_vma(mm, addr, regs);
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 	if (unlikely(!vma)) {
 		bad_area_nosemaphore(regs, mm, code, addr);
 		return;

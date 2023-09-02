@@ -590,13 +590,24 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 					 addr, esr, regs);
 	}
 
+<<<<<<< HEAD   (8b02e8 Merge branch 'android14-6.1' into 'android14-6.1-lts')
 	if (is_pkvm_stage2_abort(esr)) {
 		if (!user_mode(regs))
 			goto no_context;
 		arm64_force_sig_fault(SIGSEGV, SEGV_ACCERR, far, "stage-2 fault");
 		return 0;
+=======
+	perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS, 1, regs, addr);
+
+retry:
+	vma = lock_mm_and_find_vma(mm, addr, regs);
+	if (unlikely(!vma)) {
+		fault = VM_FAULT_BADMAP;
+		goto done;
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 	}
 
+<<<<<<< HEAD   (8b02e8 Merge branch 'android14-6.1' into 'android14-6.1-lts')
 	perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS, 1, regs, addr);
 
 	if (!(mm_flags & FAULT_FLAG_USER))
@@ -635,6 +646,8 @@ retry:
 		goto done;
 	}
 
+=======
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 	fault = __do_page_fault(mm, vma, addr, mm_flags, vm_flags, regs);
 
 	/* Quick path to respond to signals */

@@ -1349,6 +1349,7 @@ void do_user_addr_fault(struct pt_regs *regs,
 	}
 #endif
 
+<<<<<<< HEAD   (8b02e8 Merge branch 'android14-6.1' into 'android14-6.1-lts')
 	if (!(flags & FAULT_FLAG_USER))
 		goto lock_mmap;
 
@@ -1380,6 +1381,8 @@ void do_user_addr_fault(struct pt_regs *regs,
 	}
 lock_mmap:
 
+=======
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 retry:
 	vma = lock_mm_and_find_vma(mm, address, regs);
 	if (unlikely(!vma)) {

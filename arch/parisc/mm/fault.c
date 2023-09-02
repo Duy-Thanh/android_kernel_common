@@ -289,7 +289,11 @@ retry:
 	mmap_read_lock(mm);
 	vma = find_vma_prev(mm, address, &prev_vma);
 	if (!vma || address < vma->vm_start) {
+<<<<<<< HEAD   (8b02e8 Merge branch 'android14-6.1' into 'android14-6.1-lts')
 		if (!prev || !(prev->vm_flags & VM_GROWSUP))
+=======
+		if (!prev_vma || !(prev_vma->vm_flags & VM_GROWSUP))
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 			goto bad_area;
 		vma = expand_stack(mm, address);
 		if (!vma)

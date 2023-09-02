@@ -1184,6 +1184,7 @@ config LRU_GEN_STATS
 	  This option has a per-memcg and per-node memory overhead.
 # }
 
+<<<<<<< HEAD   (8b02e8 Merge branch 'android14-6.1' into 'android14-6.1-lts')
 config ARCH_SUPPORTS_PER_VMA_LOCK
        def_bool n
 
@@ -1196,6 +1197,8 @@ config PER_VMA_LOCK
 	  This feature allows locking each virtual memory area separately when
 	  handling page faults instead of taking mmap_lock.
 
+=======
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 config LOCK_MM_AND_FIND_VMA
 	bool
 	depends on !STACK_GROWSUP
