@@ -323,7 +323,10 @@ int ioremap_page_range(unsigned long addr, unsigned long end,
 	if (!err)
 		err = kmsan_ioremap_page_range(addr, end, phys_addr, prot,
 					       ioremap_max_page_shift);
+<<<<<<< HEAD   (2a9967 ANDROID: kleaf: get_gki_modules_list add i386 option)
 
+=======
+>>>>>>> BRANCH (ca1c90 Linux 6.1.26)
 	return err;
 }
 

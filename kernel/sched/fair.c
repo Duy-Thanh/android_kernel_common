@@ -8976,7 +8976,10 @@ static void update_cpu_capacity(struct sched_domain *sd, int cpu)
 	if (!capacity)
 		capacity = 1;
 
+<<<<<<< HEAD   (2a9967 ANDROID: kleaf: get_gki_modules_list add i386 option)
 	trace_android_rvh_update_cpu_capacity(cpu, &capacity);
+=======
+>>>>>>> BRANCH (ca1c90 Linux 6.1.26)
 	rq->cpu_capacity = capacity;
 
 	/*
