@@ -323,7 +323,10 @@ int ioremap_page_range(unsigned long addr, unsigned long end,
 	if (!err)
 		err = kmsan_ioremap_page_range(addr, end, phys_addr, prot,
 					       ioremap_max_page_shift);
+<<<<<<< HEAD   (1cd299 Merge e8a7bdb6f76c ("mm/huge_memory.c: warn with pr_warn_rat)
 
+=======
+>>>>>>> BRANCH (7e6631 mm/mmap: regression fix for unmapped_area{_topdown})
 	return err;
 }
 
