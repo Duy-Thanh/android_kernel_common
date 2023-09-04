@@ -123,6 +123,24 @@
       "parentUuid": "48dbf645_4b3562e0",
       "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3785628_a9e873e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935538
+      },
+      "writtenOn": "2023-09-04T09:20:23Z",
+      "side": 1,
+      "message": "This is mainlined on 6.5 kernel. Please do consider now and apply it on andoriod14-6.1 branch.",
+      "parentUuid": "b9bec0b0_4efe79e1",
+      "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
