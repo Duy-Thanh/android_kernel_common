@@ -93,6 +93,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b509d37f_c1285227",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-09-04T04:54:46Z",
+      "side": 1,
+      "message": "Attached the re-spin bug",
+      "parentUuid": "99a044da_5d6c8db8",
+      "revId": "c875c737b4a4bed27305233496ab0b74c90b90cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32f8aa85_2cbfc3a0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -104,6 +122,24 @@
       "writtenOn": "2023-09-04T01:47:37Z",
       "side": 1,
       "message": "Respin Bug: b/298817745",
+      "revId": "c875c737b4a4bed27305233496ab0b74c90b90cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2663e20_908e9386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-09-04T04:54:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "32f8aa85_2cbfc3a0",
       "revId": "c875c737b4a4bed27305233496ab0b74c90b90cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
