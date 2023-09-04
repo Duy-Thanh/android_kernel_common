@@ -16,6 +16,23 @@
       "message": "Bug: b/298894071",
       "revId": "6472a588e0243a138cc9c14d4e04de17eeda7f32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eeaf3db_e5c20fb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2023-09-04T06:36:46Z",
+      "side": 1,
+      "message": "Hi, please help to add \"Bug: 298894071\" in the commit message.",
+      "revId": "6472a588e0243a138cc9c14d4e04de17eeda7f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
