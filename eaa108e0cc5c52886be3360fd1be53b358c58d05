@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e8893b7_b36ef389",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1872346
+      },
+      "writtenOn": "2023-09-04T02:11:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ebe54d5_d0c6553d",
+      "revId": "eaa108e0cc5c52886be3360fd1be53b358c58d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c99b9bc_b44e0d1f",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "744445ca_8c627f9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1872346
+      },
+      "writtenOn": "2023-09-04T02:11:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c99b9bc_b44e0d1f",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 14
+      },
+      "revId": "eaa108e0cc5c52886be3360fd1be53b358c58d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea081e23_d829950d",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-08-28T16:46:03Z",
       "side": 1,
       "message": "no driver should ever call this function, for obvious reasons (prints network data in the system log.)",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 10
+      },
+      "revId": "eaa108e0cc5c52886be3360fd1be53b358c58d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c6cd81_839a99ab",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1872346
+      },
+      "writtenOn": "2023-09-04T02:11:06Z",
+      "side": 1,
+      "message": "ok， i will remove it",
+      "parentUuid": "ea081e23_d829950d",
       "range": {
         "startLine": 81,
         "startChar": 2,
