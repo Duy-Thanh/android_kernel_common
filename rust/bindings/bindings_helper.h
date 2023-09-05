@@ -13,6 +13,7 @@
 #include <linux/fdtable.h>
 #include <linux/file.h>
 #include <linux/fs.h>
+#include <linux/list_lru.h>
 #include <linux/pid_namespace.h>
 #include <linux/poll.h>
 #include <linux/security.h>
@@ -22,6 +23,7 @@
 #include <linux/rust_binder.h>
 #include <linux/wait.h>
 #include <linux/sched.h>
+#include <linux/shrinker.h>
 #include <linux/task_work.h>
 #include <linux/workqueue.h>
 #include <uapi/linux/android/binder.h>
