@@ -162,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94ceeae3_6c821208",
+        "filename": "drivers/virtio/virtio_input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1583282
+      },
+      "writtenOn": "2023-09-05T18:31:22Z",
+      "side": 1,
+      "message": "+1 to `0xFFFF` (figuratively; literally would cause overflow).\n\nI suspect upstreaming will be pretty involved. We\u0027d have to add new input codes in the mainline kernel, modify the virtio spec, etc. So probably not something we should plan on near term.",
+      "parentUuid": "124f13c3_39631979",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69e258f6_782fb57a",
         "filename": "drivers/virtio/virtio_input.c",
         "patchSetId": 7
@@ -292,6 +316,30 @@
       "side": 1,
       "message": "Without a plan on how KiwiVm will handle a `erase` request, it doesn\u0027t make sense to implement `virtinput_ff_erase`. One way to impl is by sending another input event type/code to the device, but we don\u0027t want to keep going down that path.",
       "parentUuid": "4f4330f6_63a8c24b",
+      "range": {
+        "startLine": 266,
+        "startChar": 12,
+        "endLine": 266,
+        "endChar": 32
+      },
+      "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46a8dba9_94f72d47",
+        "filename": "drivers/virtio/virtio_input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1583282
+      },
+      "writtenOn": "2023-09-05T18:31:22Z",
+      "side": 1,
+      "message": "\u003e One way to impl is by sending another input event type/code to the device, but we don\u0027t want to keep going down that path.\n\nHmm. Why would we want to avoid that path? Guest -\u003e device events are pretty rare, so we should have a lot of options?",
+      "parentUuid": "e162e7e3_615da46c",
       "range": {
         "startLine": 266,
         "startChar": 12,
