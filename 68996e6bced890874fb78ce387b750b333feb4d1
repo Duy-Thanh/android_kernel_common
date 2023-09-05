@@ -348,6 +348,30 @@
       },
       "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d7d5ddf_6ba51e60",
+        "filename": "drivers/virtio/virtio_input.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1683635
+      },
+      "writtenOn": "2023-09-05T20:23:56Z",
+      "side": 1,
+      "message": "I only said because that will continue to hack virtio_input_event to be used for our specific purposes (ie. handling connection events). Then we need to create more custom event codes.\n\nI guess there isn\u0027t wrong with doing that, but that might be difficult to upstream, if we eventually want to.",
+      "parentUuid": "46a8dba9_94f72d47",
+      "range": {
+        "startLine": 266,
+        "startChar": 12,
+        "endLine": 266,
+        "endChar": 32
+      },
+      "revId": "68996e6bced890874fb78ce387b750b333feb4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
