@@ -10,6 +10,7 @@ use kernel::{
     list::{
         HasListLinks, ListArc, ListArcSafe, ListItem, ListLinks, ListLinksSelfPtr, TryNewListArc,
     },
+    page_range::Shrinker,
     prelude::*,
     seq_file::SeqFile,
     seq_print,
@@ -180,6 +181,9 @@ const fn ptr_align(value: usize) -> usize {
     (value + size) & !size
 }
 
+// SAFETY: We call register in `init`.
+static BINDER_SHRINKER: Shrinker = unsafe { Shrinker::new() };
+
 struct BinderModule {}
 
 impl kernel::Module for BinderModule {
@@ -188,6 +192,8 @@ impl kernel::Module for BinderModule {
         // called `init` yet. Furthermore, we cannot move a value in a global, so the `Contexts`
         // will not be moved after this call.
         unsafe { crate::context::CONTEXTS.init() };
+
+        BINDER_SHRINKER.register(kernel::c_str!("android-binder"))?;
 
         // SAFETY: The module is being loaded, so we can initialize binderfs.
         #[cfg(CONFIG_ANDROID_BINDERFS_RUST)]
