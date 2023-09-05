@@ -141,6 +141,24 @@
       "parentUuid": "b9bec0b0_4efe79e1",
       "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b693047_96a36b70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-05T09:17:41Z",
+      "side": 1,
+      "message": "Great, please fix up the changelog comments, as it is no longer part of the block branch, it is UPSTREAM",
+      "parentUuid": "f3785628_a9e873e1",
+      "revId": "6060a02edf612489a1d6580ff8fa970a666dd688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
