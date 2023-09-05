@@ -2881,10 +2881,13 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
 		 */
 		if (S_ISDIR(inode->i_mode) &&
 				!is_sbi_flag_set(sbi, SBI_IS_CLOSE))
+<<<<<<< HEAD   (100885 Merge 6.1.29 into android15-6.1)
 			goto redirty_out;
 
 		/* keep data pages in remount-ro mode */
 		if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_READONLY)
+=======
+>>>>>>> BRANCH (a343b0 Linux 6.1.30)
 			goto redirty_out;
 		goto out;
 	}

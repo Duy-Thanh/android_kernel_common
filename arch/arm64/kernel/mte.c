@@ -41,12 +41,19 @@ void mte_sync_tags(pte_t pte)
 	long i, nr_pages = compound_nr(page);
 
 	/* if PG_mte_tagged is set, tags have already been initialised */
+<<<<<<< HEAD   (100885 Merge 6.1.29 into android15-6.1)
 	for (i = 0; i < nr_pages; i++, page++) {
 		if (!page_mte_tagged(page)) {
 			mte_clear_page_tags(page_address(page));
 			set_page_mte_tagged(page);
 		}
 	}
+=======
+	for (i = 0; i < nr_pages; i++, page++)
+		if (!page_mte_tagged(page))
+			mte_sync_page_tags(page, old_pte, check_swap,
+					   pte_is_tagged);
+>>>>>>> BRANCH (a343b0 Linux 6.1.30)
 
 	/* ensure the tags are visible before the PTE is set */
 	smp_wmb();

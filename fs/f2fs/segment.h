@@ -641,12 +641,15 @@ static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
 	else if (free_secs <= lower_secs)
 		return true;
 	return !curseg_space;
+<<<<<<< HEAD   (100885 Merge 6.1.29 into android15-6.1)
 }
 
 static inline bool has_enough_free_secs(struct f2fs_sb_info *sbi,
 					int freed, int needed)
 {
 	return !has_not_enough_free_secs(sbi, freed, needed);
+=======
+>>>>>>> BRANCH (a343b0 Linux 6.1.30)
 }
 
 static inline bool f2fs_is_checkpoint_ready(struct f2fs_sb_info *sbi)
