@@ -8976,7 +8976,10 @@ static void update_cpu_capacity(struct sched_domain *sd, int cpu)
 	if (!capacity)
 		capacity = 1;
 
+<<<<<<< HEAD   (9af3d6 Revert "mm/mmap: regression fix for unmapped_area{_topdown}")
 	trace_android_rvh_update_cpu_capacity(cpu, &capacity);
+=======
+>>>>>>> BRANCH (ca1c90 Linux 6.1.26)
 	rq->cpu_capacity = capacity;
 
 	/*
