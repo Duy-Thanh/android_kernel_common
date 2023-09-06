@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000052982747",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2744853?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5fbaba3b_6738af9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-06T23:02:02Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/cb440cecb223364ebc2739dcede3ca748b418f3a) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dcb440cecb223364ebc2739dcede3ca748b418f3a)\n\n```\n      ## mm/zsmalloc.c ##\n    -@@ mm/zsmalloc.c: static void replace_sub_page(struct size_class *class, struct zspage *zspage,\n    - \n    - static bool zs_page_isolate(struct page *page, isolate_mode_t mode)\n    - {\n    -+\tstruct zs_pool *pool;\n    - \tstruct zspage *zspage;\n    +@@ mm/zsmalloc.c: struct zs_pool {\n    + \tstruct work_struct free_work;\n    + #endif\n    + \tspinlock_t lock;\n    ++\tatomic_t compaction_in_progress;\n    + };\n      \n    - \t/*\n    -@@ mm/zsmalloc.c: static bool zs_page_isolate(struct page *page, isolate_mode_t mode)\n    - \tVM_BUG_ON_PAGE(PageIsolated(page), page);\n    + struct zspage {\n    +@@ mm/zsmalloc.c: unsigned long zs_compact(struct zs_pool *pool)\n    + \tstruct size_class *class;\n    + \tunsigned long pages_freed \u003d 0;\n      \n    - \tzspage \u003d get_zspage(page);\n    --\tmigrate_write_lock(zspage);\n    -+\tpool \u003d zspage-\u003epool;\n    -+\tspin_lock(\u0026pool-\u003elock);\n    - \tinc_zspage_isolation(zspage);\n    --\tmigrate_write_unlock(zspage);\n    -+\tspin_unlock(\u0026pool-\u003elock);\n    ++\t/*\n    ++\t * Pool compaction is performed under pool-\u003elock so it is basically\n    ++\t * single-threaded. Having more than one thread in __zs_compact()\n    ++\t * will increase pool-\u003elock contention, which will impact other\n    ++\t * zsmalloc operations that need pool-\u003elock.\n    ++\t */\n    ++\tif (atomic_xchg(\u0026pool-\u003ecompaction_in_progress, 1))\n    ++\t\treturn 0;\n    ++\n    + \tfor (i \u003d ZS_SIZE_CLASSES - 1; i \u003e\u003d 0; i--) {\n    + \t\tclass \u003d pool-\u003esize_class[i];\n    + \t\tif (class-\u003eindex !\u003d i)\n    +@@ mm/zsmalloc.c: unsigned long zs_compact(struct zs_pool *pool)\n    + \t\tpages_freed +\u003d __zs_compact(pool, class);\n    + \t}\n    + \tatomic_long_add(pages_freed, \u0026pool-\u003estats.pages_compacted);\n    ++\tatomic_set(\u0026pool-\u003ecompaction_in_progress, 0);\n      \n    - \treturn true;\n    + \treturn pages_freed;\n      }\n    -@@ mm/zsmalloc.c: static int zs_page_migrate(struct page *newpage, struct page *page,\n    - \tkunmap_atomic(s_addr);\n    +@@ mm/zsmalloc.c: struct zs_pool *zs_create_pool(const char *name)\n      \n    - \treplace_sub_page(class, zspage, newpage, page);\n    -+\tdec_zspage_isolation(zspage);\n    - \t/*\n    - \t * Since we complete the data copy and set up new zspage structure,\n    - \t * it\u0027s okay to release the pool\u0027s lock.\n    - \t */\n    - \tspin_unlock(\u0026pool-\u003elock);\n    --\tdec_zspage_isolation(zspage);\n    - \tmigrate_write_unlock(zspage);\n    - \n    - \tget_page(newpage);\n    -@@ mm/zsmalloc.c: static int zs_page_migrate(struct page *newpage, struct page *page,\n    - static void zs_page_putback(struct page *page)\n    - {\n    - \tstruct zspage *zspage;\n    -+\tstruct zs_pool *pool;\n    - \n    - \tVM_BUG_ON_PAGE(!PageMovable(page), page);\n    - \tVM_BUG_ON_PAGE(!PageIsolated(page), page);\n    - \n    - \tzspage \u003d get_zspage(page);\n    --\tmigrate_write_lock(zspage);\n    -+\tpool \u003d zspage-\u003epool;\n    -+\tspin_lock(\u0026pool-\u003elock);\n    - \tdec_zspage_isolation(zspage);\n    --\tmigrate_write_unlock(zspage);\n    -+\tspin_unlock(\u0026pool-\u003elock);\n    - }\n    + \tinit_deferred_free(pool);\n    + \tspin_lock_init(\u0026pool-\u003elock);\n    ++\tatomic_set(\u0026pool-\u003ecompaction_in_progress, 0);\n      \n    - static const struct movable_operations zsmalloc_mops \u003d {\n    + \tpool-\u003ename \u003d kstrdup(name, GFP_KERNEL);\n    + \tif (!pool-\u003ename)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 563074952 android-build.ayeaye-python-dispatcher_20230906.04_p0",
+      "revId": "d7bb849a10c3432080d2b774644db70e3a0f0dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
