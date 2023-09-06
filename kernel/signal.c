@@ -47,7 +47,12 @@
 #include <linux/cgroup.h>
 #include <linux/audit.h>
 #include <linux/sysctl.h>
+<<<<<<< HEAD   (efec34 ANDROID: yukawa drops build_config.)
 #include <uapi/linux/pidfd.h>
+||||||| BASE
+=======
+#include <linux/oom.h>
+>>>>>>> CHANGE (d21d65 ANDROID: signal: Add vendor hook for memory reap)
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/signal.h>
@@ -1450,8 +1455,16 @@ int group_send_sig_info(int sig, struct kernel_siginfo *info,
 	ret = check_kill_permission(sig, info, p);
 	rcu_read_unlock();
 
-	if (!ret && sig)
+	if (!ret && sig) {
 		ret = do_send_sig_info(sig, info, p, type);
+		if (!ret && sig == SIGKILL) {
+			bool reap = false;
+
+			trace_android_vh_killed_process(current, p, &reap);
+			if (reap)
+				add_to_oom_reaper(p);
+		}
+	}
 
 	return ret;
 }

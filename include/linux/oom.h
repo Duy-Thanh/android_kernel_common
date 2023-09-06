@@ -114,4 +114,6 @@ extern void dump_tasks(struct oom_control *oc);
 
 extern struct task_struct *find_lock_task_mm(struct task_struct *p);
 
+/* call for adding killed process to reaper. */
+extern void add_to_oom_reaper(struct task_struct *p);
 #endif /* _INCLUDE_LINUX_OOM_H */
