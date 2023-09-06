@@ -22,6 +22,7 @@
 #include <linux/export.h>
 #include <linux/cpu.h>
 #include <linux/debugfs.h>
+#include <trace/hooks/pm_domain.h>
 
 #include "power.h"
 
@@ -543,6 +544,8 @@ static int _genpd_power_off(struct generic_pm_domain *genpd, bool timed)
 	ktime_t time_start;
 	s64 elapsed_ns;
 	int ret;
+
+	trace_android_vh_genpd_power_off(genpd);
 
 	/* Notify consumers that we are about to power off. */
 	ret = raw_notifier_call_chain_robust(&genpd->power_notifiers,
