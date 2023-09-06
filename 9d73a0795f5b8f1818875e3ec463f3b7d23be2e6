@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12ca3020_b64ba501",
+        "filename": "mm/filemap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2669,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-06T22:49:32Z",
+      "side": 1,
+      "message": "I think this should also be changed to the `last_pos`. In the original patch that change was done to the parameter of `pos_same_folio` call.",
+      "range": {
+        "startLine": 2669,
+        "startChar": 6,
+        "endLine": 2669,
+        "endChar": 18
+      },
+      "revId": "9d73a0795f5b8f1818875e3ec463f3b7d23be2e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
