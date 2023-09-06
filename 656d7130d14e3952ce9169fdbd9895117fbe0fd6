@@ -107,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a781568d_2d6ca881",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-09-06T05:49:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b6f012c2_e087d338",
+      "revId": "656d7130d14e3952ce9169fdbd9895117fbe0fd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88a006ff_c6e12d23",
@@ -120,6 +138,30 @@
       "writtenOn": "2023-08-29T07:58:40Z",
       "side": 1,
       "message": "no driver should be calling this as it implies the driver is resetting the whole system.  Please never do this.",
+      "range": {
+        "startLine": 779,
+        "startChar": 2,
+        "endLine": 779,
+        "endChar": 18
+      },
+      "revId": "656d7130d14e3952ce9169fdbd9895117fbe0fd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3aa1123_4654bd0b",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 1
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-09-06T05:49:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88a006ff_c6e12d23",
       "range": {
         "startLine": 779,
         "startChar": 2,
