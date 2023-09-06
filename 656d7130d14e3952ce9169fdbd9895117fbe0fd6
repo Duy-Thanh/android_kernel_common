@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b159155_debbd79e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956236
+      },
+      "writtenOn": "2023-09-06T05:13:26Z",
+      "side": 1,
+      "message": "Hi @gregkh@google.com,\n\nWe replace ksys_sync_helper() with fsync_bdev() which symbol was added by another vendor\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android14-5.15/android/abi_gki_aarch64_amlogic#741\n\nAlthough ksys_sync_helper() is more safer than fsync_bdev(), and the effect of ksys_sync_helper() is better than fsync_bdev().\nBut fsync_bdev() is working fine to unpin the CMA page after our testing. It\u0027s acceptable.\n\nAnd @surenb@google.com prefer fsync_bdev() than ksys_sync_helper().\n\nSo @james.tai@realtek.com will update next patchset for you.\n\nThank you!",
+      "parentUuid": "e0f1c84c_2ddb0f16",
+      "revId": "656d7130d14e3952ce9169fdbd9895117fbe0fd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88a006ff_c6e12d23",
