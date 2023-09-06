@@ -22,6 +22,30 @@
       },
       "revId": "66638b0abaa3a41ca21d9e73e316d92b69461f58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d633800a_e42c2c62",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1956236
+      },
+      "writtenOn": "2023-09-06T22:55:12Z",
+      "side": 1,
+      "message": "Yes, we need fsync_bdev, but @james.tai@realtek.com said\nthere is fsync_bdev() in abi_gki_aarch64.stg already\nSo we don\u0027t have to add it into android/abi_gki_aarch64_rtkstb\n\n@surenb@google.com @james.tai@realtek.com\nCould you confirm it?\n\nThanks",
+      "parentUuid": "9a02956b_8ed9afc0",
+      "range": {
+        "startLine": 810,
+        "startChar": 2,
+        "endLine": 810,
+        "endChar": 22
+      },
+      "revId": "66638b0abaa3a41ca21d9e73e316d92b69461f58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
