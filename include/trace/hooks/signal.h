@@ -11,6 +11,19 @@ struct task_struct;
 DECLARE_HOOK(android_vh_do_send_sig_info,
 	TP_PROTO(int sig, struct task_struct *killer, struct task_struct *dst),
 	TP_ARGS(sig, killer, dst));
+<<<<<<< HEAD   (efec34 ANDROID: yukawa drops build_config.)
+||||||| BASE
+DECLARE_HOOK(android_vh_exit_signal,
+	TP_PROTO(struct task_struct *task),
+	TP_ARGS(task));
+=======
+DECLARE_HOOK(android_vh_exit_signal,
+	TP_PROTO(struct task_struct *task),
+	TP_ARGS(task));
+DECLARE_HOOK(android_vh_killed_process,
+	TP_PROTO(struct task_struct *killer, struct task_struct *dst, bool *reap),
+	TP_ARGS(killer, dst, reap));
+>>>>>>> CHANGE (d21d65 ANDROID: signal: Add vendor hook for memory reap)
 #endif /* _TRACE_HOOK_SIGNAL_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
