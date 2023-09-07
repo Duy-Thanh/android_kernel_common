@@ -62523,6 +62523,12 @@ member {
   offset: 11712
 }
 member {
+  id: 0x9ad71760
+  name: "compaction_in_progress"
+  type_id: 0x74d29cf1
+  offset: 17568
+}
+member {
   id: 0x583d51cc
   name: "companion_ports"
   type_id: 0x33756485
@@ -265100,6 +265106,7 @@ struct_union {
     member_id: 0x868caa9e
     member_id: 0x8a67a9e5
     member_id: 0x2d1fe43b
+    member_id: 0x9ad71760
   }
 }
 struct_union {
