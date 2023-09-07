@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c537c934_977ee4d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-07T21:19:53Z",
+      "side": 1,
+      "message": "```\nThese symbols are missing from the symbol list and are not available at runtime for unsigned modules:\nskb_pull_data required by [\u0027btrtl.ko\u0027]\n```\n\nThe virt symbol list needs an update I suppose.\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android15-6.1:common/android/abi_gki_aarch64_virtual_device",
+      "revId": "eff8c1f90329ab43dc02b4287ce99bf5cbb9b446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
