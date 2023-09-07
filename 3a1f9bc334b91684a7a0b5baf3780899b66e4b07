@@ -16,6 +16,23 @@
       "message": "This is not needed, the abi is not broken, the structure is not public, but the abi checking tools think it is (it\u0027s a false positive.)\n\nSo no need for this change at all.",
       "revId": "3a1f9bc334b91684a7a0b5baf3780899b66e4b07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b321d874_b17e52f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-07T16:59:19Z",
+      "side": 1,
+      "message": "Ah, doh! I need some coffee. You are right, I\u0027ll simply rebuild the ABI.",
+      "revId": "3a1f9bc334b91684a7a0b5baf3780899b66e4b07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
