@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53ab918_94ab6a69",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-09-07T01:53:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2c08015_0f002723",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b356f8c_be46b495",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "806bc203_18be1131",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-09-07T01:53:13Z",
+      "side": 1,
+      "message": "I need some guidance with this one. So I believe the current logic in doing so is the following (please correct me if I am wrong @saravanak@google.com):\n\nTreat a failure as a duplicate \u003d\u003e Lesser memory allocated for the PLT section\nWe have 2 possible scenarios:\n1. Not enough memory to hold all the PLTs generated. The module is not initialized due to an error is returned from `module_emit_plt_entry` (Ref: https://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/arch/arm64/kernel/module-plts.c;l\u003d94), hence the error is not ignored (IF it does cause a problem) - we simply kick the can down the road.\n2. The memory allocated is sufficient enough to hold all the PLTs generated. In which case, its OK to not handle the kmalloc error.\n\nDoes this explanation make sense? If yes, I can write a comment capturing this info.",
+      "parentUuid": "3b356f8c_be46b495",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a4322f5_50756ada",
         "filename": "arch/arm64/kernel/module-plts.c",
         "patchSetId": 13
@@ -48,6 +84,24 @@
       "writtenOn": "2023-08-29T19:28:45Z",
       "side": 1,
       "message": "Shouldn\u0027t we free the node we tried to insert in case of any error? Not just if it already exists?",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22b87f01_e23e85bf",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-09-07T01:53:13Z",
+      "side": 1,
+      "message": "Good catch! For other errors, we definitely need to free the node. But do we still return true? This is yet another place where I am not entirely convinced of considering as a duplicate. I am not sure if its norm in the kernel to ignore errors which are highly unlikely.\n\nIn this case, on inspecting the rhashtable_lookup_insert_fast function, it seems to have quite a lot of different possible return values. E2BIG, EEXIST, EAGAIN, ENOMEM to name some. So before I change this, I need some guidance on \n1. Would returning true be alright in case of an error?\n2. If a comment is needed here, and if yes, what explanation would be needed.",
+      "parentUuid": "0a4322f5_50756ada",
       "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +129,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f70c9c2a_3557d787",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-09-07T01:53:13Z",
+      "side": 1,
+      "message": "freeing a pointer does not NULL it out. TIL👌 Done.",
+      "parentUuid": "7b00f4bf_39770be9",
+      "range": {
+        "startLine": 106,
+        "startChar": 23,
+        "endLine": 106,
+        "endChar": 37
+      },
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbdd7323_eae61a7e",
@@ -92,6 +170,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40ff4ffa_de9672d0",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-09-07T01:53:13Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "fbdd7323_eae61a7e",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39bf4954_e99682dd",
@@ -105,6 +201,24 @@
       "writtenOn": "2023-08-29T19:28:45Z",
       "side": 1,
       "message": "Do you think it would be overkill to have a function that handles allocating and initializing these data structures?",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd6e688f_d918bac0",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-09-07T01:53:13Z",
+      "side": 1,
+      "message": "Normally, I would agree 100% on having a separate function to make the code modular. But in this case, do we prioritize for a patch with minimal lines of change?",
+      "parentUuid": "39bf4954_e99682dd",
       "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
