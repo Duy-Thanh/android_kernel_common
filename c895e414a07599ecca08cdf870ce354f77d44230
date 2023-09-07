@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053009566",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2739433?revision\u003d8",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "671e4115_8dc18ea5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-07T05:17:02Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/4f1731df60f9033669f024d06ae26a6301260b55) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d4f1731df60f9033669f024d06ae26a6301260b55)\n\n```\n      ## block/blk-mq-debugfs.c ##\n     @@ block/blk-mq-debugfs.c: static void blk_mq_debugfs_tags_show(struct seq_file *m,\n      \tseq_printf(m, \"nr_tags\u003d%u\\n\", tags-\u003enr_tags);\n      \tseq_printf(m, \"nr_reserved_tags\u003d%u\\n\", tags-\u003enr_reserved_tags);\n      \tseq_printf(m, \"active_queues\u003d%d\\n\",\n     -\t\t   atomic_read(\u0026tags-\u003eactive_queues));\n    -+\t\t   READ_ONCE(tags-\u003eactive_queues));\n    ++\t\t   READ_ONCE(tags-\u003eactive_queues.counter));\n      \n      \tseq_puts(m, \"\\nbitmap_tags:\\n\");\n      \tsbitmap_queue_show(\u0026tags-\u003ebitmap_tags, m);\n    @@ block/blk-mq-tag.c: void __blk_mq_tag_busy(struct blk_mq_hw_ctx *hctx)\n     -\n     -\tblk_mq_update_wake_batch(hctx-\u003etags, users);\n     +\tspin_lock_irq(\u0026tags-\u003elock);\n    -+\tusers \u003d tags-\u003eactive_queues + 1;\n    -+\tWRITE_ONCE(tags-\u003eactive_queues, users);\n    ++\tusers \u003d tags-\u003eactive_queues.counter + 1;\n    ++\tWRITE_ONCE(tags-\u003eactive_queues.counter, users);\n     +\tblk_mq_update_wake_batch(tags, users);\n     +\tspin_unlock_irq(\u0026tags-\u003elock);\n      }\n    @@ block/blk-mq-tag.c: void __blk_mq_tag_idle(struct blk_mq_hw_ctx *hctx)\n     -\tusers \u003d atomic_dec_return(\u0026tags-\u003eactive_queues);\n     -\n     +\tspin_lock_irq(\u0026tags-\u003elock);\n    -+\tusers \u003d tags-\u003eactive_queues - 1;\n    -+\tWRITE_ONCE(tags-\u003eactive_queues, users);\n    ++\tusers \u003d tags-\u003eactive_queues.counter - 1;\n    ++\tWRITE_ONCE(tags-\u003eactive_queues.counter, users);\n      \tblk_mq_update_wake_batch(tags, users);\n     +\tspin_unlock_irq(\u0026tags-\u003elock);\n      \n      \tblk_mq_tag_wakeup_all(tags, false);\n      }\n    -\n    - ## block/blk-mq.h ##\n    -@@ block/blk-mq.h: static inline bool hctx_may_queue(struct blk_mq_hw_ctx *hctx,\n    - \t\t\treturn true;\n    - \t}\n    - \n    --\tusers \u003d atomic_read(\u0026hctx-\u003etags-\u003eactive_queues);\n    --\n    -+\tusers \u003d READ_ONCE(hctx-\u003etags-\u003eactive_queues);\n    - \tif (!users)\n    - \t\treturn true;\n    - \n    -\n    - ## include/linux/blk-mq.h ##\n    -@@ include/linux/blk-mq.h: struct request *blk_mq_alloc_request_hctx(struct request_queue *q,\n    - struct blk_mq_tags {\n    - \tunsigned int nr_tags;\n    - \tunsigned int nr_reserved_tags;\n    --\n    --\tatomic_t active_queues;\n    -+\tunsigned int active_queues;\n    - \n    - \tstruct sbitmap_queue bitmap_tags;\n    - \tstruct sbitmap_queue breserved_tags;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 563074952 android-build.ayeaye-python-dispatcher_20230906.04_p0",
+      "revId": "c895e414a07599ecca08cdf870ce354f77d44230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
