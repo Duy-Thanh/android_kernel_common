@@ -2211,6 +2211,10 @@ extern const u32		sched_prio_to_wmult[40];
 #define ENQUEUE_MIGRATED	0x00
 #endif
 
+#ifdef CONFIG_UCLAMP_TASK
+#define ENQUEUE_UCLAMPED	0x100
+#endif
+
 #define RETRY_TASK		((void *)-1UL)
 
 struct affinity_context {

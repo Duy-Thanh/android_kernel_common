@@ -7912,6 +7912,11 @@ change:
 		if (oldprio < p->prio)
 			queue_flags |= ENQUEUE_HEAD;
 
+#ifdef CONFIG_UCLAMP_TASK
+		if (attr->sched_flags & SCHED_FLAG_UTIL_CLAMP)
+			queue_flags |= ENQUEUE_UCLAMPED;
+#endif
+
 		enqueue_task(rq, p, queue_flags);
 	}
 	if (running)

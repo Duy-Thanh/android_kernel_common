@@ -6347,6 +6347,16 @@ enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 	 */
 	util_est_enqueue(&rq->cfs, p);
 
+#ifdef CONFIG_UCLAMP_TASK
+	/*
+	 * Guarantee a cpufreq utilization update when the uclamp of a task is
+	 * applied. This is useful for ensuring a faster frequency response when
+	 * uclamp is updated on a more frequent basis.
+	 */
+	if (flags & ENQUEUE_UCLAMPED)
+		cpufreq_update_util(rq, 0);
+#endif
+
 	/*
 	 * If in_iowait is set, the code below may not trigger any cpufreq
 	 * utilization updates, so do it here explicitly with the IOWAIT flag
