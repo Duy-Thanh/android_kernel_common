@@ -291100,6 +291100,17 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9be2c2bd
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1023f4f6
+  parameter_id: 0x33756485
+  parameter_id: 0x4585663f
+  parameter_id: 0xf1a6dfed
+  parameter_id: 0x0b30ee00
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9be2da56
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -305150,6 +305161,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_cma_alloc_busy_info"
 }
 elf_symbol {
+  id: 0x672f593f
+  name: "__traceiter_android_vh_cma_alloc_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x105993d8
+  type_id: 0x9be2c2bd
+  full_name: "__traceiter_android_vh_cma_alloc_bypass"
+}
+elf_symbol {
   id: 0x606360ad
   name: "__traceiter_android_vh_cma_alloc_finish"
   is_defined: true
@@ -308028,6 +308048,15 @@ elf_symbol {
   crc: 0x892cd11a
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_cma_alloc_busy_info"
+}
+elf_symbol {
+  id: 0xfbbf2da1
+  name: "__tracepoint_android_vh_cma_alloc_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xe9d8eb22
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_cma_alloc_bypass"
 }
 elf_symbol {
   id: 0x02efcc97
@@ -359906,6 +359935,7 @@ interface {
   symbol_id: 0xa2224fa6
   symbol_id: 0xd37cc550
   symbol_id: 0xcad7fba0
+  symbol_id: 0x672f593f
   symbol_id: 0x606360ad
   symbol_id: 0x1104ae4c
   symbol_id: 0x6bb36fb1
@@ -360226,6 +360256,7 @@ interface {
   symbol_id: 0x2cf5984c
   symbol_id: 0x62b6878e
   symbol_id: 0x9036cb5a
+  symbol_id: 0xfbbf2da1
   symbol_id: 0x02efcc97
   symbol_id: 0x62c56ae6
   symbol_id: 0x606ee087
