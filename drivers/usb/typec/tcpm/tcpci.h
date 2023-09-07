@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (5879d7 Merge 5.15.130 into android14-5.15-lts)
 /* SPDX-License-Identifier: GPL-2.0+ */
 /*
  * Copyright 2015-2017 Google, Inc
@@ -214,3 +215,5 @@ irqreturn_t tcpci_irq(struct tcpci *tcpci);
 struct tcpm_port;
 struct tcpm_port *tcpci_get_tcpm_port(struct tcpci *tcpci);
 #endif /* __LINUX_USB_TCPCI_H */
+=======
+>>>>>>> BRANCH (aff033 Linux 5.15.131)
