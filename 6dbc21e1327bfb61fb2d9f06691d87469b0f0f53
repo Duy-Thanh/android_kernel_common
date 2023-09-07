@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb63c9f_757a5ed4",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1543,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-09-07T23:18:16Z",
+      "side": 1,
+      "message": "the next supported SVID",
+      "range": {
+        "startLine": 1543,
+        "startChar": 39,
+        "endLine": 1543,
+        "endChar": 47
+      },
+      "revId": "6dbc21e1327bfb61fb2d9f06691d87469b0f0f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8bcc94c_489f8e05",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-09-07T23:18:16Z",
+      "side": 1,
+      "message": "svdm_get_next_supported_svid  ?",
+      "range": {
+        "startLine": 1547,
+        "startChar": 11,
+        "endLine": 1547,
+        "endChar": 34
+      },
+      "revId": "6dbc21e1327bfb61fb2d9f06691d87469b0f0f53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
