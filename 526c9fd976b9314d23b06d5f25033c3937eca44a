@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ff3ee59_32dbff26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-09-07T12:32:13Z",
+      "side": 1,
+      "message": "Dear Todd,\n\nCould you help my vendor hook patch, add a vendor hook so that we can reimplement function cma_alloc(). Thanks",
+      "revId": "526c9fd976b9314d23b06d5f25033c3937eca44a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
