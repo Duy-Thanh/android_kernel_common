@@ -16,6 +16,24 @@
       "message": "\u003e That change is potentially invasive as a\nbackport. As a miminal fix, pass CFLAGS (which contains HOSTCFLAGS via\nKBUILD_HOSTCFLAGS) to the libsubcmd build via EXTRA_CFLAGS, which really\nshould have been done upstream in\ncommit 0e3a1c902ffb (\"tools/resolve_btfids: Build with host flags\")\n\nThen does it make sense to send this to stable linux-6.1.y as\n\nFixes: 0e3a1c902ffb (\"tools/resolve_btfids: Build with host flags\")",
       "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e304978_b26ee65c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118753
+      },
+      "writtenOn": "2023-09-07T21:49:01Z",
+      "side": 1,
+      "message": "We could, although I don\u0027t know who else besides Android would really hit this, since this is firmly related to the hermetic toolchain stuff that _setup_env.sh does. The context of the issue is relevant when applied here but not as much when applied to stable, which makes me feel like the stable maintainers will just tell me to put this in Android anyways but I\u0027ll do whatever you feel is best!",
+      "parentUuid": "66cfeacf_3b1df27b",
+      "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
