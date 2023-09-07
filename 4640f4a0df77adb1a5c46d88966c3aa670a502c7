@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66cfeacf_3b1df27b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2023-09-07T21:44:15Z",
+      "side": 1,
+      "message": "\u003e That change is potentially invasive as a\nbackport. As a miminal fix, pass CFLAGS (which contains HOSTCFLAGS via\nKBUILD_HOSTCFLAGS) to the libsubcmd build via EXTRA_CFLAGS, which really\nshould have been done upstream in\ncommit 0e3a1c902ffb (\"tools/resolve_btfids: Build with host flags\")\n\nThen does it make sense to send this to stable linux-6.1.y as\n\nFixes: 0e3a1c902ffb (\"tools/resolve_btfids: Build with host flags\")",
+      "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
