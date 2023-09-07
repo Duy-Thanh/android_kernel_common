@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba3220b_d58974b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-07T16:23:07Z",
+      "side": 1,
+      "message": "This is not needed, the abi is not broken, the structure is not public, but the abi checking tools think it is (it\u0027s a false positive.)\n\nSo no need for this change at all.",
+      "revId": "3a1f9bc334b91684a7a0b5baf3780899b66e4b07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
