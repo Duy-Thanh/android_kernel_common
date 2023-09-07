@@ -1,5 +1,10 @@
+<<<<<<< HEAD   (5d3578 ANDROID: cpuidle: teo: Export a function that allows modifyi)
 BRANCH=android15-6.1
 CLANG_VERSION=r498229
+=======
+BRANCH=android-mainline
+CLANG_VERSION=r498229b
+>>>>>>> CHANGE (f41b0b ANDROID: clang: update to 17.0.4)
 AARCH64_NDK_TRIPLE=aarch64-linux-android31
 X86_64_NDK_TRIPLE=x86_64-linux-android31
 ARM_NDK_TRIPLE=arm-linux-androideabi31
