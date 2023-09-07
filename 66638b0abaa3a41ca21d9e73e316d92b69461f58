@@ -46,6 +46,30 @@
       },
       "revId": "66638b0abaa3a41ca21d9e73e316d92b69461f58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80de709d_af4c65b0",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-09-07T02:27:46Z",
+      "side": 1,
+      "message": "Hi @surenb@google.com\n\nDo I need to update the abi_gki_aarch64_rtkstb in this case?",
+      "parentUuid": "d633800a_e42c2c62",
+      "range": {
+        "startLine": 810,
+        "startChar": 2,
+        "endLine": 810,
+        "endChar": 22
+      },
+      "revId": "66638b0abaa3a41ca21d9e73e316d92b69461f58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
