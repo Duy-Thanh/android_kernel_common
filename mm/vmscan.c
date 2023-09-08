@@ -5069,8 +5069,10 @@ static int isolate_folios(struct lruvec *lruvec, struct scan_control *sc, int sw
 		type = LRU_GEN_FILE;
 	else if (swappiness == 200)
 		type = LRU_GEN_ANON;
-	else
+	else {
+		trace_android_vh_tune_swappiness(&swappiness);
 		type = get_type_to_scan(lruvec, swappiness, &tier);
+	}
 
 	for (i = !swappiness; i < ANON_AND_FILE; i++) {
 		if (tier < 0)
