@@ -33,6 +33,24 @@
       "message": "Respin Bug: b/299568310",
       "revId": "eb739ed4cf12407543b02fb484eda2a546fcecff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "953de8a4_818de13e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-08T09:46:42Z",
+      "side": 1,
+      "message": "wrong bug. 298914157 is the correct one and already present.",
+      "parentUuid": "9d210d48_8663b3ca",
+      "revId": "eb739ed4cf12407543b02fb484eda2a546fcecff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
