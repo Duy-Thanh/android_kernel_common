@@ -94,6 +94,30 @@
       },
       "revId": "66638b0abaa3a41ca21d9e73e316d92b69461f58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8d85de3_a6c35a95",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-09-08T02:08:46Z",
+      "side": 1,
+      "message": "Yes, this symbol is for the Realtek DRM driver.\n\nI\u0027ve added \u0027fsync_bdev\u0027 to \u0027abi_gki_aarch64_rtkstb\u0027 for review.\n\nThank you.",
+      "parentUuid": "240e8dee_eab225a9",
+      "range": {
+        "startLine": 810,
+        "startChar": 2,
+        "endLine": 810,
+        "endChar": 22
+      },
+      "revId": "66638b0abaa3a41ca21d9e73e316d92b69461f58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
