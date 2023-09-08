@@ -111,6 +111,41 @@
       "parentUuid": "d05df567_06470871",
       "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac5dc87_1b960628",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1781212
+      },
+      "writtenOn": "2023-09-08T23:52:44Z",
+      "side": 1,
+      "message": "\u003e After looking into Ian\u0027s suggestion, I have proposed taking the upstream solution into 6.1: https://lore.kernel.org/20230908161526.GA3344687@dev-arch.thelio-3990X/",
+      "parentUuid": "44a5dd53_e657ba59",
+      "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edff1907_c56b8cfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1781212
+      },
+      "writtenOn": "2023-09-08T23:52:44Z",
+      "side": 1,
+      "message": "This issue is also present in kernel android13-5.10 branch.\n\nI tested this commit it\u0027s return error : \n\nparse-options.c:643:8: error: GCC does not allow variable declarations in for loop initializers before C99 [-Werror,-Wgcc-compat]\n  643 |                 for (int i \u003d 0; subcommands[i]; i++) {\n      |                      ^\nparse-options.c:669:9: error: GCC does not allow variable declarations in for loop initializers before C99 [-Werror,-Wgcc-compat]\n  669 |                         for (int i \u003d 0; subcommands[i]; i++)\n      |                              ^\n2 errors generated.\n  HOSTCC  scripts/genksyms/lex.lex.o",
+      "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
