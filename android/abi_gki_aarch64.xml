@@ -576,6 +576,7 @@
       <elf-symbol name='__traceiter_android_vh_drm_atomic_check_modeset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfda832c1'/>
       <elf-symbol name='__traceiter_android_vh_dump_throttled_rt_tasks' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1a34d1a3'/>
       <elf-symbol name='__traceiter_android_vh_dup_task_struct' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd1d3561a'/>
+      <elf-symbol name='__traceiter_android_vh_enable_thermal_genl_check' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc39a1e16'/>
       <elf-symbol name='__traceiter_android_vh_enable_thermal_power_throttle' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5e711538'/>
       <elf-symbol name='__traceiter_android_vh_encrypt_page' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x472c69c4'/>
       <elf-symbol name='__traceiter_android_vh_exit_check' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x67c11a40'/>
@@ -7234,6 +7235,7 @@
       <elf-symbol name='__tracepoint_android_vh_drm_atomic_check_modeset' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7ae4711b'/>
       <elf-symbol name='__tracepoint_android_vh_dump_throttled_rt_tasks' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd29bebac'/>
       <elf-symbol name='__tracepoint_android_vh_dup_task_struct' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x14fff0cf'/>
+      <elf-symbol name='__tracepoint_android_vh_enable_thermal_genl_check' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x29cc54bf'/>
       <elf-symbol name='__tracepoint_android_vh_enable_thermal_power_throttle' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x13db5a5d'/>
       <elf-symbol name='__tracepoint_android_vh_encrypt_page' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa94f7016'/>
       <elf-symbol name='__tracepoint_android_vh_exit_check' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x49c49792'/>
@@ -42540,19 +42542,19 @@
           <var-decl name='ioam6_enabled' type-id='8f048e17' visibility='default' filepath='include/linux/ipv6.h' line='84' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1920'>
-          <var-decl name='sysctl_header' type-id='11b101bb' visibility='default' filepath='include/linux/ipv6.h' line='87' column='1'/>
+          <var-decl name='sysctl_header' type-id='11b101bb' visibility='default' filepath='include/linux/ipv6.h' line='88' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1984'>
-          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/linux/ipv6.h' line='89' column='1'/>
+          <var-decl name='android_kabi_reserved1' type-id='91ce1af9' visibility='default' filepath='include/linux/ipv6.h' line='90' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2048'>
-          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='include/linux/ipv6.h' line='90' column='1'/>
+          <var-decl name='android_kabi_reserved2' type-id='91ce1af9' visibility='default' filepath='include/linux/ipv6.h' line='91' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2112'>
-          <var-decl name='android_kabi_reserved3' type-id='91ce1af9' visibility='default' filepath='include/linux/ipv6.h' line='91' column='1'/>
+          <var-decl name='android_kabi_reserved3' type-id='91ce1af9' visibility='default' filepath='include/linux/ipv6.h' line='92' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2176'>
-          <var-decl name='android_kabi_reserved4' type-id='91ce1af9' visibility='default' filepath='include/linux/ipv6.h' line='92' column='1'/>
+          <var-decl name='android_kabi_reserved4' type-id='91ce1af9' visibility='default' filepath='include/linux/ipv6.h' line='93' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='blkg_policy_data' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/linux/blk-cgroup.h' line='91' column='1' id='55eaf925'>
@@ -58202,15 +58204,15 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <pointer-type-def type-id='d800b1bf' size-in-bits='64' id='79dbccfb'/>
-      <class-decl name='inet6_cork' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/linux/ipv6.h' line='213' column='1' id='79e3d9fd'>
+      <class-decl name='inet6_cork' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/linux/ipv6.h' line='214' column='1' id='79e3d9fd'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='opt' type-id='d4145729' visibility='default' filepath='include/linux/ipv6.h' line='214' column='1'/>
+          <var-decl name='opt' type-id='d4145729' visibility='default' filepath='include/linux/ipv6.h' line='215' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='hop_limit' type-id='f9b06939' visibility='default' filepath='include/linux/ipv6.h' line='215' column='1'/>
+          <var-decl name='hop_limit' type-id='f9b06939' visibility='default' filepath='include/linux/ipv6.h' line='216' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='72'>
-          <var-decl name='tclass' type-id='f9b06939' visibility='default' filepath='include/linux/ipv6.h' line='216' column='1'/>
+          <var-decl name='tclass' type-id='f9b06939' visibility='default' filepath='include/linux/ipv6.h' line='217' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='9bea5a22' size-in-bits='64' id='79ebba98'/>
@@ -84141,12 +84143,12 @@
           <var-decl name='pppoe' type-id='e7f44066' visibility='default' filepath='include/net/flow_offload.h' line='280' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='16' is-anonymous='yes' visibility='default' filepath='include/linux/ipv6.h' line='264' column='1' id='ac5ab6a1'>
+      <union-decl name='__anonymous_union__' size-in-bits='16' is-anonymous='yes' visibility='default' filepath='include/linux/ipv6.h' line='265' column='1' id='ac5ab6a1'>
         <data-member access='public'>
-          <var-decl name='bits' type-id='e7f44067' visibility='default' filepath='include/linux/ipv6.h' line='282' column='1'/>
+          <var-decl name='bits' type-id='e7f44067' visibility='default' filepath='include/linux/ipv6.h' line='283' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='all' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='283' column='1'/>
+          <var-decl name='all' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='284' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='513' column='1' id='ac5ab6a2'>
@@ -92836,114 +92838,114 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <qualified-type-def type-id='6739dd09' const='yes' id='bca91994'/>
-      <class-decl name='ipv6_pinfo' size-in-bits='1216' is-struct='yes' visibility='default' filepath='include/linux/ipv6.h' line='227' column='1' id='bcad3f73'>
+      <class-decl name='ipv6_pinfo' size-in-bits='1216' is-struct='yes' visibility='default' filepath='include/linux/ipv6.h' line='228' column='1' id='bcad3f73'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='saddr' type-id='f6ed712a' visibility='default' filepath='include/linux/ipv6.h' line='228' column='1'/>
+          <var-decl name='saddr' type-id='f6ed712a' visibility='default' filepath='include/linux/ipv6.h' line='229' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='sticky_pktinfo' type-id='91b426fc' visibility='default' filepath='include/linux/ipv6.h' line='229' column='1'/>
+          <var-decl name='sticky_pktinfo' type-id='91b426fc' visibility='default' filepath='include/linux/ipv6.h' line='230' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='320'>
-          <var-decl name='daddr_cache' type-id='fea9c20b' visibility='default' filepath='include/linux/ipv6.h' line='230' column='1'/>
+          <var-decl name='daddr_cache' type-id='fea9c20b' visibility='default' filepath='include/linux/ipv6.h' line='231' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='384'>
-          <var-decl name='flow_label' type-id='78a133c2' visibility='default' filepath='include/linux/ipv6.h' line='235' column='1'/>
+          <var-decl name='flow_label' type-id='78a133c2' visibility='default' filepath='include/linux/ipv6.h' line='236' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='416'>
-          <var-decl name='frag_size' type-id='3f1a6b60' visibility='default' filepath='include/linux/ipv6.h' line='236' column='1'/>
+          <var-decl name='frag_size' type-id='3f1a6b60' visibility='default' filepath='include/linux/ipv6.h' line='237' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='448'>
-          <var-decl name='__unused_1' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='246' column='1'/>
+          <var-decl name='__unused_1' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='247' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='455'>
-          <var-decl name='hop_limit' type-id='b55def60' visibility='default' filepath='include/linux/ipv6.h' line='247' column='1'/>
+          <var-decl name='hop_limit' type-id='b55def60' visibility='default' filepath='include/linux/ipv6.h' line='248' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='464'>
-          <var-decl name='mc_loop' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='256' column='1'/>
+          <var-decl name='mc_loop' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='257' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='465'>
-          <var-decl name='__unused_2' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='257' column='1'/>
+          <var-decl name='__unused_2' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='258' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='471'>
-          <var-decl name='mcast_hops' type-id='b55def60' visibility='default' filepath='include/linux/ipv6.h' line='258' column='1'/>
+          <var-decl name='mcast_hops' type-id='b55def60' visibility='default' filepath='include/linux/ipv6.h' line='259' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='480'>
-          <var-decl name='ucast_oif' type-id='95e97e5e' visibility='default' filepath='include/linux/ipv6.h' line='260' column='1'/>
+          <var-decl name='ucast_oif' type-id='95e97e5e' visibility='default' filepath='include/linux/ipv6.h' line='261' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='512'>
-          <var-decl name='mcast_oif' type-id='95e97e5e' visibility='default' filepath='include/linux/ipv6.h' line='261' column='1'/>
+          <var-decl name='mcast_oif' type-id='95e97e5e' visibility='default' filepath='include/linux/ipv6.h' line='262' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='544'>
-          <var-decl name='rxopt' type-id='ac5ab6a1' visibility='default' filepath='include/linux/ipv6.h' line='284' column='1'/>
+          <var-decl name='rxopt' type-id='ac5ab6a1' visibility='default' filepath='include/linux/ipv6.h' line='285' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='560'>
-          <var-decl name='recverr' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='287' column='1'/>
+          <var-decl name='recverr' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='288' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='561'>
-          <var-decl name='sndflow' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='288' column='1'/>
+          <var-decl name='sndflow' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='289' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='562'>
-          <var-decl name='repflow' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='289' column='1'/>
+          <var-decl name='repflow' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='290' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='563'>
-          <var-decl name='pmtudisc' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='290' column='1'/>
+          <var-decl name='pmtudisc' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='291' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='566'>
-          <var-decl name='padding' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='291' column='1'/>
+          <var-decl name='padding' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='292' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='567'>
-          <var-decl name='srcprefs' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='292' column='1'/>
+          <var-decl name='srcprefs' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='293' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='570'>
-          <var-decl name='dontfrag' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='296' column='1'/>
+          <var-decl name='dontfrag' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='297' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='571'>
-          <var-decl name='autoflowlabel' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='297' column='1'/>
+          <var-decl name='autoflowlabel' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='298' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='572'>
-          <var-decl name='autoflowlabel_set' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='298' column='1'/>
+          <var-decl name='autoflowlabel_set' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='299' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='573'>
-          <var-decl name='mc_all' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='299' column='1'/>
+          <var-decl name='mc_all' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='300' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='574'>
-          <var-decl name='recverr_rfc4884' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='300' column='1'/>
+          <var-decl name='recverr_rfc4884' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='301' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='575'>
-          <var-decl name='rtalert_isolate' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='301' column='1'/>
+          <var-decl name='rtalert_isolate' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='302' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='576'>
-          <var-decl name='min_hopcount' type-id='8f048e17' visibility='default' filepath='include/linux/ipv6.h' line='302' column='1'/>
+          <var-decl name='min_hopcount' type-id='8f048e17' visibility='default' filepath='include/linux/ipv6.h' line='303' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='584'>
-          <var-decl name='tclass' type-id='8f048e17' visibility='default' filepath='include/linux/ipv6.h' line='303' column='1'/>
+          <var-decl name='tclass' type-id='8f048e17' visibility='default' filepath='include/linux/ipv6.h' line='304' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='608'>
-          <var-decl name='rcv_flowinfo' type-id='78a133c2' visibility='default' filepath='include/linux/ipv6.h' line='304' column='1'/>
+          <var-decl name='rcv_flowinfo' type-id='78a133c2' visibility='default' filepath='include/linux/ipv6.h' line='305' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='640'>
-          <var-decl name='dst_cookie' type-id='3f1a6b60' visibility='default' filepath='include/linux/ipv6.h' line='306' column='1'/>
+          <var-decl name='dst_cookie' type-id='3f1a6b60' visibility='default' filepath='include/linux/ipv6.h' line='307' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='704'>
-          <var-decl name='ipv6_mc_list' type-id='3d802c7c' visibility='default' filepath='include/linux/ipv6.h' line='308' column='1'/>
+          <var-decl name='ipv6_mc_list' type-id='3d802c7c' visibility='default' filepath='include/linux/ipv6.h' line='309' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='768'>
-          <var-decl name='ipv6_ac_list' type-id='0d2afef8' visibility='default' filepath='include/linux/ipv6.h' line='309' column='1'/>
+          <var-decl name='ipv6_ac_list' type-id='0d2afef8' visibility='default' filepath='include/linux/ipv6.h' line='310' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='832'>
-          <var-decl name='ipv6_fl_list' type-id='3a14a5ee' visibility='default' filepath='include/linux/ipv6.h' line='310' column='1'/>
+          <var-decl name='ipv6_fl_list' type-id='3a14a5ee' visibility='default' filepath='include/linux/ipv6.h' line='311' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='896'>
-          <var-decl name='opt' type-id='d4145729' visibility='default' filepath='include/linux/ipv6.h' line='312' column='1'/>
+          <var-decl name='opt' type-id='d4145729' visibility='default' filepath='include/linux/ipv6.h' line='313' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='960'>
-          <var-decl name='pktoptions' type-id='0fbf3cfd' visibility='default' filepath='include/linux/ipv6.h' line='313' column='1'/>
+          <var-decl name='pktoptions' type-id='0fbf3cfd' visibility='default' filepath='include/linux/ipv6.h' line='314' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1024'>
-          <var-decl name='rxpmtu' type-id='0fbf3cfd' visibility='default' filepath='include/linux/ipv6.h' line='314' column='1'/>
+          <var-decl name='rxpmtu' type-id='0fbf3cfd' visibility='default' filepath='include/linux/ipv6.h' line='315' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1088'>
-          <var-decl name='cork' type-id='79e3d9fd' visibility='default' filepath='include/linux/ipv6.h' line='315' column='1'/>
+          <var-decl name='cork' type-id='79e3d9fd' visibility='default' filepath='include/linux/ipv6.h' line='316' column='1'/>
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='bcb69272'>
@@ -96558,39 +96560,39 @@
           <var-decl name='u' type-id='ac5ab6a5' visibility='default' filepath='include/net/netfilter/nf_log.h' line='36' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='inet6_skb_parm' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/linux/ipv6.h' line='142' column='1' id='c4d0818f'>
+      <class-decl name='inet6_skb_parm' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/linux/ipv6.h' line='143' column='1' id='c4d0818f'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='iif' type-id='95e97e5e' visibility='default' filepath='include/linux/ipv6.h' line='143' column='1'/>
+          <var-decl name='iif' type-id='95e97e5e' visibility='default' filepath='include/linux/ipv6.h' line='144' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='ra' type-id='84a5c3d4' visibility='default' filepath='include/linux/ipv6.h' line='144' column='1'/>
+          <var-decl name='ra' type-id='84a5c3d4' visibility='default' filepath='include/linux/ipv6.h' line='145' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='48'>
-          <var-decl name='dst0' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='145' column='1'/>
+          <var-decl name='dst0' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='146' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='srcrt' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='146' column='1'/>
+          <var-decl name='srcrt' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='147' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='80'>
-          <var-decl name='dst1' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='147' column='1'/>
+          <var-decl name='dst1' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='148' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='96'>
-          <var-decl name='lastopt' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='148' column='1'/>
+          <var-decl name='lastopt' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='149' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='112'>
-          <var-decl name='nhoff' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='149' column='1'/>
+          <var-decl name='nhoff' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='150' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='flags' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='150' column='1'/>
+          <var-decl name='flags' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='151' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='144'>
-          <var-decl name='dsthao' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='152' column='1'/>
+          <var-decl name='dsthao' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='153' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='160'>
-          <var-decl name='frag_max_size' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='154' column='1'/>
+          <var-decl name='frag_max_size' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='155' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='176'>
-          <var-decl name='srhoff' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='155' column='1'/>
+          <var-decl name='srhoff' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='156' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='snd_jack' size-in-bits='1600' is-struct='yes' visibility='default' filepath='include/sound/jack.h' line='60' column='1' id='c4d4ddea'>
@@ -108091,14 +108093,7 @@
         <parameter type-id='95e97e5e'/>
         <return type-id='95e97e5e'/>
       </function-type>
-      <class-decl name='fscrypt_keyring' size-in-bits='8256' is-struct='yes' visibility='default' filepath='fs/crypto/keyring.c' line='30' column='1' id='dd510bd0'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='fs/crypto/keyring.c' line='35' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='key_hashtable' type-id='64f4baeb' visibility='default' filepath='fs/crypto/keyring.c' line='38' column='1'/>
-        </data-member>
-      </class-decl>
+      <class-decl name='fscrypt_keyring' is-struct='yes' visibility='default' is-declaration-only='yes' id='dd510bd0'/>
       <pointer-type-def type-id='a7d74313' size-in-bits='64' id='dd575c43'/>
       <class-decl name='cstate' size-in-bits='1536' is-struct='yes' visibility='default' filepath='include/net/slhc_vj.h' line='128' column='1' id='dd60e4df'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -116606,51 +116601,51 @@
           <var-decl name='sid' type-id='1dc6a898' visibility='default' filepath='include/net/flow_offload.h' line='279' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='16' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/ipv6.h' line='265' column='1' id='e7f44067'>
+      <class-decl name='__anonymous_struct__' size-in-bits='16' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/ipv6.h' line='266' column='1' id='e7f44067'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='srcrt' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='266' column='1'/>
+          <var-decl name='srcrt' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='267' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1'>
-          <var-decl name='osrcrt' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='267' column='1'/>
+          <var-decl name='osrcrt' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='268' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='2'>
-          <var-decl name='rxinfo' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='268' column='1'/>
+          <var-decl name='rxinfo' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='269' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='3'>
-          <var-decl name='rxoinfo' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='269' column='1'/>
+          <var-decl name='rxoinfo' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='270' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='4'>
-          <var-decl name='rxhlim' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='270' column='1'/>
+          <var-decl name='rxhlim' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='271' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='5'>
-          <var-decl name='rxohlim' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='271' column='1'/>
+          <var-decl name='rxohlim' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='272' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='6'>
-          <var-decl name='hopopts' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='272' column='1'/>
+          <var-decl name='hopopts' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='273' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7'>
-          <var-decl name='ohopopts' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='273' column='1'/>
+          <var-decl name='ohopopts' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='274' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='8'>
-          <var-decl name='dstopts' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='274' column='1'/>
+          <var-decl name='dstopts' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='275' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='9'>
-          <var-decl name='odstopts' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='275' column='1'/>
+          <var-decl name='odstopts' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='276' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='10'>
-          <var-decl name='rxflow' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='276' column='1'/>
+          <var-decl name='rxflow' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='277' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='11'>
-          <var-decl name='rxtclass' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='277' column='1'/>
+          <var-decl name='rxtclass' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='278' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='12'>
-          <var-decl name='rxpmtu' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='278' column='1'/>
+          <var-decl name='rxpmtu' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='279' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='13'>
-          <var-decl name='rxorigdstaddr' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='279' column='1'/>
+          <var-decl name='rxorigdstaddr' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='280' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='14'>
-          <var-decl name='recvfragsize' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='280' column='1'/>
+          <var-decl name='recvfragsize' type-id='d315442e' visibility='default' filepath='include/linux/ipv6.h' line='281' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='514' column='1' id='e7f44068'>
@@ -127497,7 +127492,7 @@
       <pointer-type-def type-id='46f53066' size-in-bits='64' id='fffb07a4'/>
       <qualified-type-def type-id='55efd1a3' const='yes' id='fffdaf52'/>
       <var-decl name='GKI_struct_blk_mq_alloc_data' type-id='17c43c95' mangled-name='GKI_struct_blk_mq_alloc_data' visibility='default' filepath='block/vendor_hooks.c' line='23' column='1' elf-symbol-id='GKI_struct_blk_mq_alloc_data'/>
-      <var-decl name='GKI_struct_readahead_control' type-id='9ec8ec17' mangled-name='GKI_struct_readahead_control' visibility='default' filepath='drivers/android/vendor_hooks.c' line='461' column='1' elf-symbol-id='GKI_struct_readahead_control'/>
+      <var-decl name='GKI_struct_readahead_control' type-id='9ec8ec17' mangled-name='GKI_struct_readahead_control' visibility='default' filepath='drivers/android/vendor_hooks.c' line='462' column='1' elf-symbol-id='GKI_struct_readahead_control'/>
       <var-decl name='GKI_struct_selinux_state' type-id='4ae52763' mangled-name='GKI_struct_selinux_state' visibility='default' filepath='security/selinux/vendor_hooks.c' line='21' column='1' elf-symbol-id='GKI_struct_selinux_state'/>
       <function-decl name='I_BDEV' mangled-name='I_BDEV' filepath='block/bdev.c' line='42' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='I_BDEV'>
         <parameter type-id='7e666abe' name='inode' filepath='block/bdev.c' line='42' column='1'/>
@@ -128482,10 +128477,10 @@
         <parameter type-id='f0981eeb' name='order' filepath='mm/page_alloc.c' line='5806' column='1'/>
         <return type-id='7359adad'/>
       </function-decl>
-      <function-decl name='__get_task_comm' mangled-name='__get_task_comm' filepath='fs/exec.c' line='1220' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__get_task_comm'>
-        <parameter type-id='26a90f95' name='buf' filepath='fs/exec.c' line='1220' column='1'/>
-        <parameter type-id='b59d7dce' name='buf_size' filepath='fs/exec.c' line='1220' column='1'/>
-        <parameter type-id='f23e2572' name='tsk' filepath='fs/exec.c' line='1220' column='1'/>
+      <function-decl name='__get_task_comm' mangled-name='__get_task_comm' filepath='fs/exec.c' line='1224' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__get_task_comm'>
+        <parameter type-id='26a90f95' name='buf' filepath='fs/exec.c' line='1224' column='1'/>
+        <parameter type-id='b59d7dce' name='buf_size' filepath='fs/exec.c' line='1224' column='1'/>
+        <parameter type-id='f23e2572' name='tsk' filepath='fs/exec.c' line='1224' column='1'/>
         <return type-id='26a90f95'/>
       </function-decl>
       <function-decl name='__getblk_gfp' mangled-name='__getblk_gfp' filepath='fs/buffer.c' line='1329' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__getblk_gfp'>
@@ -131060,6 +131055,13 @@
         <parameter type-id='f23e2572' name='orig' filepath='include/trace/hooks/sched.h' line='415' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_android_vh_enable_thermal_genl_check' mangled-name='__traceiter_android_vh_enable_thermal_genl_check' filepath='include/trace/hooks/thermal.h' line='61' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_enable_thermal_genl_check'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/thermal.h' line='61' column='1'/>
+        <parameter type-id='95e97e5e' name='event' filepath='include/trace/hooks/thermal.h' line='61' column='1'/>
+        <parameter type-id='95e97e5e' name='tz_id' filepath='include/trace/hooks/thermal.h' line='61' column='1'/>
+        <parameter type-id='7292109c' name='enable_thermal_genl' filepath='include/trace/hooks/thermal.h' line='61' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_android_vh_enable_thermal_power_throttle' mangled-name='__traceiter_android_vh_enable_thermal_power_throttle' filepath='include/trace/hooks/thermal.h' line='37' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_enable_thermal_power_throttle'>
         <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/thermal.h' line='37' column='1'/>
         <parameter type-id='d8e6b335' name='enable' filepath='include/trace/hooks/thermal.h' line='37' column='1'/>
@@ -132961,6 +132963,7 @@
       <var-decl name='__tracepoint_android_vh_drm_atomic_check_modeset' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_drm_atomic_check_modeset' visibility='default' filepath='include/trace/hooks/drm_atomic.h' line='22' column='1' elf-symbol-id='__tracepoint_android_vh_drm_atomic_check_modeset'/>
       <var-decl name='__tracepoint_android_vh_dump_throttled_rt_tasks' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dump_throttled_rt_tasks' visibility='default' filepath='include/trace/hooks/sched.h' line='96' column='1' elf-symbol-id='__tracepoint_android_vh_dump_throttled_rt_tasks'/>
       <var-decl name='__tracepoint_android_vh_dup_task_struct' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dup_task_struct' visibility='default' filepath='include/trace/hooks/sched.h' line='415' column='1' elf-symbol-id='__tracepoint_android_vh_dup_task_struct'/>
+      <var-decl name='__tracepoint_android_vh_enable_thermal_genl_check' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_enable_thermal_genl_check' visibility='default' filepath='include/trace/hooks/thermal.h' line='61' column='1' elf-symbol-id='__tracepoint_android_vh_enable_thermal_genl_check'/>
       <var-decl name='__tracepoint_android_vh_enable_thermal_power_throttle' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_enable_thermal_power_throttle' visibility='default' filepath='include/trace/hooks/thermal.h' line='37' column='1' elf-symbol-id='__tracepoint_android_vh_enable_thermal_power_throttle'/>
       <var-decl name='__tracepoint_android_vh_encrypt_page' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_encrypt_page' visibility='default' filepath='include/trace/hooks/bl_hib.h' line='26' column='1' elf-symbol-id='__tracepoint_android_vh_encrypt_page'/>
       <var-decl name='__tracepoint_android_vh_exit_check' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_exit_check' visibility='default' filepath='include/trace/hooks/dtask.h' line='116' column='1' elf-symbol-id='__tracepoint_android_vh_exit_check'/>
@@ -165317,7 +165320,6 @@
     </abi-instr>
   </abi-corpus>
 </abi-corpus-group>
-
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
