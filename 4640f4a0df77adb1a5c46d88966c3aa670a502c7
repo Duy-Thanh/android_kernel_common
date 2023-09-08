@@ -93,6 +93,24 @@
       "parentUuid": "8328667a_d5e3a432",
       "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44a5dd53_e657ba59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118753
+      },
+      "writtenOn": "2023-09-08T16:19:28Z",
+      "side": 1,
+      "message": "After looking into Ian\u0027s suggestion, I have proposed taking the upstream solution into 6.1: https://lore.kernel.org/20230908161526.GA3344687@dev-arch.thelio-3990X/",
+      "parentUuid": "d05df567_06470871",
+      "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
