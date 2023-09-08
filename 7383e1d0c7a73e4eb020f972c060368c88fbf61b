@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10016d8b_a628d107",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-09-08T17:14:59Z",
+      "side": 1,
+      "message": "So we enabled this in GKI on `android13-5.10` here: https://r.android.com/1990852, but on `android12-5.10` some partners actually build this driver as a module. So we can\u0027t add it to GKI on this branch. Instead you should compile it as a module in your build for this kernel branch.",
+      "revId": "7383e1d0c7a73e4eb020f972c060368c88fbf61b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
