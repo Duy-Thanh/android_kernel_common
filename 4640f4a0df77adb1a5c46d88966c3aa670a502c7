@@ -146,6 +146,24 @@
       "message": "This issue is also present in kernel android13-5.10 branch.\n\nI tested this commit it\u0027s return error : \n\nparse-options.c:643:8: error: GCC does not allow variable declarations in for loop initializers before C99 [-Werror,-Wgcc-compat]\n  643 |                 for (int i \u003d 0; subcommands[i]; i++) {\n      |                      ^\nparse-options.c:669:9: error: GCC does not allow variable declarations in for loop initializers before C99 [-Werror,-Wgcc-compat]\n  669 |                         for (int i \u003d 0; subcommands[i]; i++)\n      |                              ^\n2 errors generated.\n  HOSTCC  scripts/genksyms/lex.lex.o",
       "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d07b899_8466c4c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010118
+      },
+      "writtenOn": "2023-09-09T02:56:47Z",
+      "side": 1,
+      "message": "On Fri, Sep 8, 2023 at 4:52 PM Louis Cockx (Gerrit)\n\u003cnoreply-gerritcodereview-8P-Frpu_pOJI9ynN-TFkmQ\u003d\u003d@google.com\u003e wrote:\n\nThe C standard for 5.18 and later was switched to gnu11 where this is\nthe preferred style:\nhttps://github.com/torvalds/linux/commit/50560ce6a0bdab2fc37384c52aa02c7043909d2c\n\nThanks,\nIan",
+      "tag": "mailMessageId\u003d\u003cCAP-5\u003dfWi6g4SqYBH-gVnjz7OpZnYGm0ffGw-8LWaxCXWXqZs2g@mail.gmail.com\u003e",
+      "revId": "4640f4a0df77adb1a5c46d88966c3aa670a502c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
