@@ -42,6 +42,7 @@
 #include <drm/drm_ioctl.h>
 #include <drm/drm_probe_helper.h>
 #include <drm/virtgpu_drm.h>
+#include <linux/hrtimer.h>
 
 #define DRIVER_NAME "virtio_gpu"
 #define DRIVER_DESC "virtio GPU"
@@ -184,6 +185,8 @@ struct virtio_gpu_output {
 	int cur_x;
 	int cur_y;
 	bool needs_modeset;
+	struct hrtimer vblank_hrtimer;
+	time_t period_ns;
 };
 #define drm_crtc_to_virtio_gpu_output(x) \
 	container_of(x, struct virtio_gpu_output, crtc)
