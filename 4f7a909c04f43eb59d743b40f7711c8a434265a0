@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49f5234b_b3695a4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-09-11T17:20:04Z",
+      "side": 1,
+      "message": "Please follow the directions at https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md. This is not the correct tag; it should be `ANDROID`\n\nAlso, can you please explain in the commit message *why* this needs to be enabled?",
+      "revId": "4f7a909c04f43eb59d743b40f7711c8a434265a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fdad202_16117fa8",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
