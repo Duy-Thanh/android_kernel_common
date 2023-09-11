@@ -23,6 +23,53 @@ DECLARE_HOOK(android_vh_save_hib_resume_bdev,
 	TP_PROTO(struct file *hib_resume_bdev_file),
 	TP_ARGS(hib_resume_bdev_file));
 
+<<<<<<< HEAD   (b0150b ANDROID: KVM: arm64: Fix pKVM module handler registration)
 #endif /* _TRACE_HOOK_S2D_H */
+||||||| BASE
+DECLARE_HOOK(android_vh_encrypt_page,
+	TP_PROTO(void *buf),
+	TP_ARGS(buf));
+
+DECLARE_HOOK(android_vh_init_aes_encrypt,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused));
+
+DECLARE_HOOK(android_vh_skip_swap_map_write,
+	TP_PROTO(bool *skip),
+	TP_ARGS(skip));
+
+DECLARE_HOOK(android_vh_post_image_save,
+	TP_PROTO(unsigned short root_swap),
+	TP_ARGS(root_swap));
+
+#endif /* _TRACE_HOOK_BL_HIB_H */
+=======
+DECLARE_HOOK(android_vh_encrypt_page,
+	TP_PROTO(void *buf),
+	TP_ARGS(buf));
+
+DECLARE_HOOK(android_vh_init_aes_encrypt,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused));
+
+DECLARE_HOOK(android_vh_skip_swap_map_write,
+	TP_PROTO(bool *skip),
+	TP_ARGS(skip));
+
+DECLARE_HOOK(android_vh_post_image_save,
+	TP_PROTO(unsigned short root_swap),
+	TP_ARGS(root_swap));
+
+DECLARE_HOOK(android_vh_hibernated_do_mem_alloc,
+        TP_PROTO(unsigned long nr_pages, unsigned int swsusp_header_flags,
+		 int *ret),
+        TP_ARGS(nr_pages, swsusp_header_flags, ret));
+
+DECLARE_HOOK(android_vh_hibernate_save_cmp_len,
+        TP_PROTO(size_t cmp_len),
+        TP_ARGS(cmp_len));
+
+#endif /* _TRACE_HOOK_BL_HIB_H */
+>>>>>>> CHANGE (8f08ea ANDROID: vendor_hooks: Add hooks to support hibernation)
 /* This part must be outside protection */
 #include <trace/define_trace.h>
