@@ -305779,6 +305779,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_pagecache_get_page"
 }
 elf_symbol {
+  id: 0x74dc6ea6
+  name: "__traceiter_android_vh_pcplist_add_cma_pages_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1e223464
+  type_id: 0x9a374ad4
+  full_name: "__traceiter_android_vh_pcplist_add_cma_pages_bypass"
+}
+elf_symbol {
   id: 0x7d499dab
   name: "__traceiter_android_vh_printk_hotplug"
   is_defined: true
@@ -308675,6 +308684,15 @@ elf_symbol {
   crc: 0x34e76b3a
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_pagecache_get_page"
+}
+elf_symbol {
+  id: 0x00ae5bd8
+  name: "__tracepoint_android_vh_pcplist_add_cma_pages_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x00d10514
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_pcplist_add_cma_pages_bypass"
 }
 elf_symbol {
   id: 0x49b95a49
@@ -360019,6 +360037,7 @@ interface {
   symbol_id: 0x594fa05d
   symbol_id: 0x3246acbb
   symbol_id: 0x879734da
+  symbol_id: 0x74dc6ea6
   symbol_id: 0x7d499dab
   symbol_id: 0xeba1d6c7
   symbol_id: 0x204c04f7
@@ -360341,6 +360360,7 @@ interface {
   symbol_id: 0x0c86f8fb
   symbol_id: 0x4a5e6e41
   symbol_id: 0x42b54834
+  symbol_id: 0x00ae5bd8
   symbol_id: 0x49b95a49
   symbol_id: 0x2bfccca9
   symbol_id: 0x2a85f575
