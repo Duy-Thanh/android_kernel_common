@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99e773e_7bf3e526",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-11T18:48:22Z",
+      "side": 1,
+      "message": "The patch adds both `fsync_bdev` and `devm_extcon_dev_free`, so please update the description. The associated bug also requests only `fsync_bdev`, so why are you exporting `devm_extcon_dev_free` too here? If that\u0027s for the same feature, please specify that in the bug and explain why it\u0027s needed. If that\u0027s for an unrelated feature please file a different bug and post a separate patch adding that symbol.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "0f3a3d83edb6d96f0792cdfc5a2e2d126f8e330e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
