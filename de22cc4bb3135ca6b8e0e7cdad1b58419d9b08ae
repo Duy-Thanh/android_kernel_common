@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6403d19_cbe377f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-12T08:43:33Z",
+      "side": 1,
+      "message": "should be a space after the \u0027:\u0027",
+      "revId": "de22cc4bb3135ca6b8e0e7cdad1b58419d9b08ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "147d9353_2cbb6b7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-12T08:43:33Z",
+      "side": 1,
+      "message": "Please create a patch on top of this one to add the new symbol to your symbol list",
+      "revId": "de22cc4bb3135ca6b8e0e7cdad1b58419d9b08ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
