@@ -22,6 +22,47 @@
       },
       "revId": "0f3a3d83edb6d96f0792cdfc5a2e2d126f8e330e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43dc364b_0b007e29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-09-12T02:21:31Z",
+      "side": 1,
+      "message": "The",
+      "parentUuid": "c99e773e_7bf3e526",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "0f3a3d83edb6d96f0792cdfc5a2e2d126f8e330e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "536ac2a2_c0729337",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-09-12T02:21:31Z",
+      "side": 1,
+      "message": "These two functions serve different purposes. I would like to export the \u0027devm_extcon_dev_free\u0027 symbol in this commit. As for the \u0027fsync_bdev\u0027, I will create a separate bug tracker and patches to update it.",
+      "revId": "0f3a3d83edb6d96f0792cdfc5a2e2d126f8e330e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
