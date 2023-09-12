@@ -87,6 +87,24 @@
       "parentUuid": "e95bf0a2_bf3e8775",
       "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e09ae5_b8091a92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-12T15:01:14Z",
+      "side": 1,
+      "message": "It is not backported to any stable tree, which is what you want if you think it is relevant for this 5.15 branch, right?  So please get it accepted there, for some reason upstream did NOT backport this, so be sure it really is relevant.",
+      "parentUuid": "8d99bd20_f2be71c6",
+      "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
