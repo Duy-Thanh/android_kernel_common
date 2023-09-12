@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7f31efea_8cf59086",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-09-12T02:23:42Z",
+      "side": 1,
+      "message": "These two functions serve different purposes. I would like to export the \"devm_extcon_dev_free\" symbol in this commit. As for the fsync_bdev, I will create a separate bug tracker and patches to update it.",
+      "parentUuid": "43dc364b_0b007e29",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "0f3a3d83edb6d96f0792cdfc5a2e2d126f8e330e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "536ac2a2_c0729337",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
