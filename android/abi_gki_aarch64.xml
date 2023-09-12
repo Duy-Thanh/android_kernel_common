@@ -6589,6 +6589,7 @@
       <elf-symbol name='v4l2_device_set_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x828a67dc'/>
       <elf-symbol name='v4l2_device_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdfccd4a7'/>
       <elf-symbol name='v4l2_device_unregister_subdev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb3aeb041'/>
+      <elf-symbol name='v4l2_enum_dv_timings_cap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x922ecd29'/>
       <elf-symbol name='v4l2_event_dequeue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7063d1d'/>
       <elf-symbol name='v4l2_event_pending' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x41fd06d6'/>
       <elf-symbol name='v4l2_event_queue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7f8a7d44'/>
@@ -6650,10 +6651,13 @@
       <elf-symbol name='v4l2_s_parm_cap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x76d887ab'/>
       <elf-symbol name='v4l2_spi_new_subdev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc412a8ae'/>
       <elf-symbol name='v4l2_spi_subdev_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x163bafd2'/>
+      <elf-symbol name='v4l2_src_change_event_subdev_subscribe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9ff57b78'/>
       <elf-symbol name='v4l2_src_change_event_subscribe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc2cfa33d'/>
       <elf-symbol name='v4l2_subdev_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1203a42f'/>
       <elf-symbol name='v4l2_subdev_link_validate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x96b6b5cd'/>
       <elf-symbol name='v4l2_subdev_link_validate_default' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc802323'/>
+      <elf-symbol name='v4l2_subdev_notify_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb9f1687a'/>
+      <elf-symbol name='v4l2_valid_dv_timings' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaf3d134'/>
       <elf-symbol name='v4l_bound_align_image' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf5ef842e'/>
       <elf-symbol name='vb2_buffer_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe0621179'/>
       <elf-symbol name='vb2_core_dqbuf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8c531b90'/>
@@ -33600,6 +33604,11 @@
       <array-type-def dimensions='1' type-id='3f1a6b60' size-in-bits='128' id='3fa29bab'>
         <subrange length='4' type-id='7ff19f0f' id='16fe7105'/>
       </array-type-def>
+      <function-type size-in-bits='64' id='3fa5d435'>
+        <parameter type-id='4e30d787'/>
+        <parameter type-id='eaa32e2f'/>
+        <return type-id='b50a4934'/>
+      </function-type>
       <function-type size-in-bits='64' id='3fa9acd9'>
         <parameter type-id='b64ad7cb'/>
         <parameter type-id='e3dd029e'/>
@@ -44987,6 +44996,7 @@
           <var-decl name='cells' type-id='69646708' visibility='default' filepath='include/net/gro_cells.h' line='12' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='bf213e50' size-in-bits='64' id='5b555a0e'/>
       <pointer-type-def type-id='479d017a' size-in-bits='64' id='5b559658'/>
       <pointer-type-def type-id='80c8acde' size-in-bits='64' id='5b57b9a4'/>
       <pointer-type-def type-id='3c7ea80a' size-in-bits='64' id='5b62aa60'/>
@@ -56403,6 +56413,7 @@
           <var-decl name='reserved' type-id='3f1a6b60' visibility='default' filepath='include/uapi/sound/compress_params.h' line='338' column='1'/>
         </data-member>
       </class-decl>
+      <typedef-decl name='v4l2_check_dv_timings_fnc' type-id='3fa5d435' filepath='include/media/v4l2-dv-timings.h' line='37' column='1' id='74e90810'/>
       <function-type size-in-bits='64' id='74edcdba'>
         <parameter type-id='ec77b5b8'/>
         <parameter type-id='95e97e5e'/>
@@ -94201,6 +94212,7 @@
       </class-decl>
       <pointer-type-def type-id='75685cad' size-in-bits='64' id='bf17d761'/>
       <qualified-type-def type-id='5a81cef0' const='yes' id='bf1e016b'/>
+      <qualified-type-def type-id='cdb274e3' const='yes' id='bf213e50'/>
       <pointer-type-def type-id='4edc4180' size-in-bits='64' id='bf237056'/>
       <class-decl name='freelist_head' size-in-bits='64' is-struct='yes' visibility='default' filepath='include/linux/freelist.h' line='23' column='1' id='bf2e063e'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -118648,6 +118660,7 @@
       <pointer-type-def type-id='f2207a6d' size-in-bits='64' id='eb8aa2f1'/>
       <pointer-type-def type-id='3a68020f' size-in-bits='64' id='eb8bb0cb'/>
       <pointer-type-def type-id='9b8dc95a' size-in-bits='64' id='eb90c228'/>
+      <pointer-type-def type-id='74e90810' size-in-bits='64' id='eb920ed7'/>
       <function-type size-in-bits='64' id='eb940a3b'>
         <parameter type-id='7544e824'/>
         <parameter type-id='f0981eeb'/>
@@ -135228,11 +135241,11 @@
         <parameter type-id='9ad862e7' name='hdev' filepath='drivers/bluetooth/btbcm.c' line='652' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='buffer_migrate_page' mangled-name='buffer_migrate_page' filepath='mm/migrate.c' line='786' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='buffer_migrate_page'>
-        <parameter type-id='f57039f0' name='mapping' filepath='mm/migrate.c' line='786' column='1'/>
-        <parameter type-id='02f11ed4' name='newpage' filepath='mm/migrate.c' line='787' column='1'/>
-        <parameter type-id='02f11ed4' name='page' filepath='mm/migrate.c' line='787' column='1'/>
-        <parameter type-id='157252dd' name='mode' filepath='mm/migrate.c' line='787' column='1'/>
+      <function-decl name='buffer_migrate_page' mangled-name='buffer_migrate_page' filepath='mm/migrate.c' line='788' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='buffer_migrate_page'>
+        <parameter type-id='f57039f0' name='mapping' filepath='mm/migrate.c' line='788' column='1'/>
+        <parameter type-id='02f11ed4' name='newpage' filepath='mm/migrate.c' line='789' column='1'/>
+        <parameter type-id='02f11ed4' name='page' filepath='mm/migrate.c' line='789' column='1'/>
+        <parameter type-id='157252dd' name='mode' filepath='mm/migrate.c' line='789' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='build_skb' mangled-name='build_skb' filepath='net/core/skbuff.c' line='257' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='build_skb'>
@@ -136273,8 +136286,8 @@
       </function-decl>
       <var-decl name='cpu_all_bits' type-id='afe549fd' mangled-name='cpu_all_bits' visibility='default' filepath='kernel/cpu.c' line='2672' column='1' elf-symbol-id='cpu_all_bits'/>
       <var-decl name='cpu_bit_bitmap' type-id='f959706c' mangled-name='cpu_bit_bitmap' visibility='default' filepath='kernel/cpu.c' line='2661' column='1' elf-symbol-id='cpu_bit_bitmap'/>
-      <function-decl name='cpu_have_feature' mangled-name='cpu_have_feature' filepath='arch/arm64/kernel/cpufeature.c' line='2865' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpu_have_feature'>
-        <parameter type-id='f0981eeb' name='num' filepath='arch/arm64/kernel/cpufeature.c' line='2865' column='1'/>
+      <function-decl name='cpu_have_feature' mangled-name='cpu_have_feature' filepath='arch/arm64/kernel/cpufeature.c' line='2868' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpu_have_feature'>
+        <parameter type-id='f0981eeb' name='num' filepath='arch/arm64/kernel/cpufeature.c' line='2868' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='cpu_hotplug_disable' mangled-name='cpu_hotplug_disable' filepath='kernel/cpu.c' line='374' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='cpu_hotplug_disable'>
@@ -149343,31 +149356,31 @@
         <parameter type-id='fa0b179b' name='parent' filepath='drivers/mfd/mfd-core.c' line='383' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='migrate_page_copy' mangled-name='migrate_page_copy' filepath='mm/migrate.c' line='621' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_page_copy'>
-        <parameter type-id='02f11ed4' name='newpage' filepath='mm/migrate.c' line='621' column='1'/>
-        <parameter type-id='02f11ed4' name='page' filepath='mm/migrate.c' line='621' column='1'/>
+      <function-decl name='migrate_page_copy' mangled-name='migrate_page_copy' filepath='mm/migrate.c' line='623' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_page_copy'>
+        <parameter type-id='02f11ed4' name='newpage' filepath='mm/migrate.c' line='623' column='1'/>
+        <parameter type-id='02f11ed4' name='page' filepath='mm/migrate.c' line='623' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='migrate_page_move_mapping' mangled-name='migrate_page_move_mapping' filepath='mm/migrate.c' line='384' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_page_move_mapping'>
-        <parameter type-id='f57039f0' name='mapping' filepath='mm/migrate.c' line='384' column='1'/>
-        <parameter type-id='02f11ed4' name='newpage' filepath='mm/migrate.c' line='385' column='1'/>
-        <parameter type-id='02f11ed4' name='page' filepath='mm/migrate.c' line='385' column='1'/>
-        <parameter type-id='95e97e5e' name='extra_count' filepath='mm/migrate.c' line='385' column='1'/>
+      <function-decl name='migrate_page_move_mapping' mangled-name='migrate_page_move_mapping' filepath='mm/migrate.c' line='386' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_page_move_mapping'>
+        <parameter type-id='f57039f0' name='mapping' filepath='mm/migrate.c' line='386' column='1'/>
+        <parameter type-id='02f11ed4' name='newpage' filepath='mm/migrate.c' line='387' column='1'/>
+        <parameter type-id='02f11ed4' name='page' filepath='mm/migrate.c' line='387' column='1'/>
+        <parameter type-id='95e97e5e' name='extra_count' filepath='mm/migrate.c' line='387' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='migrate_page_states' mangled-name='migrate_page_states' filepath='mm/migrate.c' line='547' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_page_states'>
-        <parameter type-id='02f11ed4' name='newpage' filepath='mm/migrate.c' line='547' column='1'/>
-        <parameter type-id='02f11ed4' name='page' filepath='mm/migrate.c' line='547' column='1'/>
+      <function-decl name='migrate_page_states' mangled-name='migrate_page_states' filepath='mm/migrate.c' line='549' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_page_states'>
+        <parameter type-id='02f11ed4' name='newpage' filepath='mm/migrate.c' line='549' column='1'/>
+        <parameter type-id='02f11ed4' name='page' filepath='mm/migrate.c' line='549' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='migrate_pages' mangled-name='migrate_pages' filepath='mm/migrate.c' line='1450' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_pages'>
-        <parameter type-id='e84b031a' name='from' filepath='mm/migrate.c' line='1450' column='1'/>
-        <parameter type-id='355404d0' name='get_new_page' filepath='mm/migrate.c' line='1450' column='1'/>
-        <parameter type-id='7d2f2ada' name='put_new_page' filepath='mm/migrate.c' line='1451' column='1'/>
-        <parameter type-id='7359adad' name='private' filepath='mm/migrate.c' line='1451' column='1'/>
-        <parameter type-id='157252dd' name='mode' filepath='mm/migrate.c' line='1452' column='1'/>
-        <parameter type-id='95e97e5e' name='reason' filepath='mm/migrate.c' line='1452' column='1'/>
-        <parameter type-id='807869d3' name='ret_succeeded' filepath='mm/migrate.c' line='1452' column='1'/>
+      <function-decl name='migrate_pages' mangled-name='migrate_pages' filepath='mm/migrate.c' line='1452' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_pages'>
+        <parameter type-id='e84b031a' name='from' filepath='mm/migrate.c' line='1452' column='1'/>
+        <parameter type-id='355404d0' name='get_new_page' filepath='mm/migrate.c' line='1452' column='1'/>
+        <parameter type-id='7d2f2ada' name='put_new_page' filepath='mm/migrate.c' line='1453' column='1'/>
+        <parameter type-id='7359adad' name='private' filepath='mm/migrate.c' line='1453' column='1'/>
+        <parameter type-id='157252dd' name='mode' filepath='mm/migrate.c' line='1454' column='1'/>
+        <parameter type-id='95e97e5e' name='reason' filepath='mm/migrate.c' line='1454' column='1'/>
+        <parameter type-id='807869d3' name='ret_succeeded' filepath='mm/migrate.c' line='1454' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='migrate_swap' mangled-name='migrate_swap' filepath='kernel/sched/core.c' line='3231' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='migrate_swap'>
@@ -154196,8 +154209,8 @@
         <parameter type-id='d9fbdc06' name='vec' filepath='drivers/media/common/videobuf2/frame_vector.c' line='74' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='putback_movable_pages' mangled-name='putback_movable_pages' filepath='mm/migrate.c' line='142' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='putback_movable_pages'>
-        <parameter type-id='e84b031a' name='l' filepath='mm/migrate.c' line='142' column='1'/>
+      <function-decl name='putback_movable_pages' mangled-name='putback_movable_pages' filepath='mm/migrate.c' line='144' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='putback_movable_pages'>
+        <parameter type-id='e84b031a' name='l' filepath='mm/migrate.c' line='144' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='pwm_adjust_config' mangled-name='pwm_adjust_config' filepath='drivers/pwm/core.c' line='652' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pwm_adjust_config'>
@@ -163022,6 +163035,13 @@
         <parameter type-id='f5438ac7' name='sd' filepath='drivers/media/v4l2-core/v4l2-device.c' line='261' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='v4l2_enum_dv_timings_cap' mangled-name='v4l2_enum_dv_timings_cap' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='190' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='v4l2_enum_dv_timings_cap'>
+        <parameter type-id='c28fe484' name='t' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='190' column='1'/>
+        <parameter type-id='5b555a0e' name='cap' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='191' column='1'/>
+        <parameter type-id='eb920ed7' name='fnc' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='192' column='1'/>
+        <parameter type-id='eaa32e2f' name='fnc_handle' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='193' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='v4l2_event_dequeue' mangled-name='v4l2_event_dequeue' filepath='drivers/media/v4l2-core/v4l2-event.c' line='59' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='v4l2_event_dequeue'>
         <parameter type-id='b7db9582' name='fh' filepath='drivers/media/v4l2-core/v4l2-event.c' line='59' column='1'/>
         <parameter type-id='a5c94ccc' name='event' filepath='drivers/media/v4l2-core/v4l2-event.c' line='59' column='1'/>
@@ -163344,6 +163364,12 @@
         <parameter type-id='040770fb' name='ops' filepath='drivers/media/v4l2-core/v4l2-spi.c' line='20' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='v4l2_src_change_event_subdev_subscribe' mangled-name='v4l2_src_change_event_subdev_subscribe' filepath='drivers/media/v4l2-core/v4l2-event.c' line='368' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='v4l2_src_change_event_subdev_subscribe'>
+        <parameter type-id='f5438ac7' name='sd' filepath='drivers/media/v4l2-core/v4l2-event.c' line='368' column='1'/>
+        <parameter type-id='b7db9582' name='fh' filepath='drivers/media/v4l2-core/v4l2-event.c' line='369' column='1'/>
+        <parameter type-id='8edac644' name='sub' filepath='drivers/media/v4l2-core/v4l2-event.c' line='369' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='v4l2_src_change_event_subscribe' mangled-name='v4l2_src_change_event_subscribe' filepath='drivers/media/v4l2-core/v4l2-event.c' line='359' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='v4l2_src_change_event_subscribe'>
         <parameter type-id='b7db9582' name='fh' filepath='drivers/media/v4l2-core/v4l2-event.c' line='359' column='1'/>
         <parameter type-id='d8c85275' name='sub' filepath='drivers/media/v4l2-core/v4l2-event.c' line='360' column='1'/>
@@ -163365,6 +163391,18 @@
         <parameter type-id='cdea97c3' name='source_fmt' filepath='drivers/media/v4l2-core/v4l2-subdev.c' line='770' column='1'/>
         <parameter type-id='cdea97c3' name='sink_fmt' filepath='drivers/media/v4l2-core/v4l2-subdev.c' line='771' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='v4l2_subdev_notify_event' mangled-name='v4l2_subdev_notify_event' filepath='drivers/media/v4l2-core/v4l2-subdev.c' line='939' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='v4l2_subdev_notify_event'>
+        <parameter type-id='f5438ac7' name='sd' filepath='drivers/media/v4l2-core/v4l2-subdev.c' line='939' column='1'/>
+        <parameter type-id='52009e4b' name='ev' filepath='drivers/media/v4l2-core/v4l2-subdev.c' line='940' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='v4l2_valid_dv_timings' mangled-name='v4l2_valid_dv_timings' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='140' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='v4l2_valid_dv_timings'>
+        <parameter type-id='4e30d787' name='t' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='140' column='1'/>
+        <parameter type-id='5b555a0e' name='dvcap' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='141' column='1'/>
+        <parameter type-id='eb920ed7' name='fnc' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='142' column='1'/>
+        <parameter type-id='eaa32e2f' name='fnc_handle' filepath='drivers/media/v4l2-core/v4l2-dv-timings.c' line='143' column='1'/>
+        <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='v4l_bound_align_image' mangled-name='v4l_bound_align_image' filepath='drivers/media/v4l2-core/v4l2-common.c' line='119' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='v4l_bound_align_image'>
         <parameter type-id='f9409001' name='w' filepath='drivers/media/v4l2-core/v4l2-common.c' line='119' column='1'/>
@@ -165148,6 +165186,7 @@
     </abi-instr>
   </abi-corpus>
 </abi-corpus-group>
+
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
