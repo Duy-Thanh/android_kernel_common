@@ -16,6 +16,23 @@
       "message": "Do you have the real fix for hid-input for this?",
       "revId": "726193ff6bb8ca6734acc6379318cb74eff998fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f25994c9_47fb086a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-09-12T17:22:56Z",
+      "side": 1,
+      "message": "Okay, addressed the patch in an upstream way:\nhttps://android-review.googlesource.com/c/kernel/common/+/2748813\nThis commit shall be abandoned.",
+      "revId": "726193ff6bb8ca6734acc6379318cb74eff998fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
