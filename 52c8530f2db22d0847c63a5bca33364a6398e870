@@ -16,6 +16,23 @@
       "message": "Why isn\u0027t this submitted upstream for stable tree inclusion?",
       "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "681aeb78_2958f976",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-12T13:39:10Z",
+      "side": 1,
+      "message": "And this looks to be a BACKPORT, not UPSTREAM",
+      "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
