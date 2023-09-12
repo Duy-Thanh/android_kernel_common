@@ -33,6 +33,42 @@
       "message": "And this looks to be a BACKPORT, not UPSTREAM",
       "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45418d47_168ef0c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-09-12T14:04:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "681aeb78_2958f976",
+      "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95bf0a2_bf3e8775",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-09-12T14:04:22Z",
+      "side": 1,
+      "message": "Its included in linus tree (commit a808925075fb750804a60ff0710614466c396db4)",
+      "parentUuid": "23f44a9c_31e88daa",
+      "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
