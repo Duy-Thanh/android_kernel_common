@@ -1220,6 +1220,13 @@ mapped:
 			input_set_events_per_packet(input, 60);
 	}
 
+	/*
+	 * Use a larger default input buffer for KEYBOARD devices for cases
+	 * when there is stream of keyevents
+	 */
+	if (field->application == HID_GD_KEYBOARD && input->hint_events_per_packet == 0)
+		input_set_events_per_packet(input, 64);
+
 	if (usage->type == EV_ABS &&
 	    (usage->hat_min < usage->hat_max || usage->hat_dir)) {
 		int i;
