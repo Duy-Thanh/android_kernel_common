@@ -50,6 +50,24 @@
       "message": "Sorry, but this hook is not needed at all.  It comes up every few years, the processor information is already present in all dynamic print messages, just enable it automatically and it will show up for you.",
       "revId": "de22cc4bb3135ca6b8e0e7cdad1b58419d9b08ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd6357b_39fed089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-12T12:35:20Z",
+      "side": 1,
+      "message": "Or, even better, just use the existing console trace functionality, which will give you task and pid information, and cpu numbers, and all sorts of other stuff as well.  This should not be needed within the printk functionality itself, which is why this type of change was rejected by upstream numerous times (i.e. the data is already there for you to use.)",
+      "parentUuid": "8e69f410_b922f414",
+      "revId": "de22cc4bb3135ca6b8e0e7cdad1b58419d9b08ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
