@@ -951,6 +951,7 @@
       <elf-symbol name='add_memory_subsection' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x690b988e'/>
       <elf-symbol name='add_random_ready_callback' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x74f6e308'/>
       <elf-symbol name='add_swap_extent' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe6183201'/>
+      <elf-symbol name='add_taint' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeb6eb87'/>
       <elf-symbol name='add_timer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x65744673'/>
       <elf-symbol name='add_timer_on' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa83a512'/>
       <elf-symbol name='add_to_page_cache_locked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xccb3987f'/>
@@ -1368,6 +1369,7 @@
       <elf-symbol name='clk_restore_context' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6259d291'/>
       <elf-symbol name='clk_round_rate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x43f81957'/>
       <elf-symbol name='clk_save_context' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa531471e'/>
+      <elf-symbol name='clk_set_max_rate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe0b1c103'/>
       <elf-symbol name='clk_set_min_rate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x25379e73'/>
       <elf-symbol name='clk_set_parent' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2396c7f0'/>
       <elf-symbol name='clk_set_rate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x76d9b876'/>
@@ -46062,6 +46064,11 @@
         </data-member>
       </class-decl>
       <pointer-type-def type-id='4a19d21e' size-in-bits='64' id='5da77304'/>
+      <enum-decl name='lockdep_ok' filepath='include/linux/panic.h' line='83' column='1' id='5da9c47b'>
+        <underlying-type type-id='9cac1fee'/>
+        <enumerator name='LOCKDEP_STILL_OK' value='0'/>
+        <enumerator name='LOCKDEP_NOW_UNRELIABLE' value='1'/>
+      </enum-decl>
       <pointer-type-def type-id='62313820' size-in-bits='64' id='5db8f742'/>
       <pointer-type-def type-id='3e115181' size-in-bits='64' id='5db9bd89'/>
       <pointer-type-def type-id='e8d98129' size-in-bits='64' id='5dbae9d1'/>
@@ -108105,7 +108112,14 @@
         <parameter type-id='95e97e5e'/>
         <return type-id='95e97e5e'/>
       </function-type>
-      <class-decl name='fscrypt_keyring' is-struct='yes' visibility='default' is-declaration-only='yes' id='dd510bd0'/>
+      <class-decl name='fscrypt_keyring' size-in-bits='8256' is-struct='yes' visibility='default' filepath='fs/crypto/keyring.c' line='30' column='1' id='dd510bd0'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='fs/crypto/keyring.c' line='35' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='key_hashtable' type-id='64f4baeb' visibility='default' filepath='fs/crypto/keyring.c' line='38' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='a7d74313' size-in-bits='64' id='dd575c43'/>
       <class-decl name='cstate' size-in-bits='1536' is-struct='yes' visibility='default' filepath='include/net/slhc_vj.h' line='128' column='1' id='dd60e4df'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -133795,6 +133809,11 @@
         <parameter type-id='a42536cd' name='start_block' filepath='mm/swapfile.c' line='2319' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='add_taint' mangled-name='add_taint' filepath='kernel/panic.c' line='516' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='add_taint'>
+        <parameter type-id='f0981eeb' name='flag' filepath='kernel/panic.c' line='516' column='1'/>
+        <parameter type-id='5da9c47b' name='lockdep_ok' filepath='kernel/panic.c' line='516' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='add_timer' mangled-name='add_timer' filepath='kernel/time/timer.c' line='1147' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='add_timer'>
         <parameter type-id='9248e67f' name='timer' filepath='kernel/time/timer.c' line='1147' column='1'/>
         <return type-id='48b5725f'/>
@@ -136087,6 +136106,11 @@
         <return type-id='bd54fe1a'/>
       </function-decl>
       <function-decl name='clk_save_context' mangled-name='clk_save_context' filepath='drivers/clk/clk.c' line='1125' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='clk_save_context'>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='clk_set_max_rate' mangled-name='clk_set_max_rate' filepath='drivers/clk/clk.c' line='2514' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='clk_set_max_rate'>
+        <parameter type-id='7d0bc0eb' name='clk' filepath='drivers/clk/clk.c' line='2514' column='1'/>
+        <parameter type-id='7359adad' name='rate' filepath='drivers/clk/clk.c' line='2514' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='clk_set_min_rate' mangled-name='clk_set_min_rate' filepath='drivers/clk/clk.c' line='2496' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='clk_set_min_rate'>
