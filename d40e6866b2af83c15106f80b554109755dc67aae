@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46c45b9a_61883682",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-09-13T20:31:54Z",
+      "side": 1,
+      "message": "Please use the same change-id from https://r.android.com/2116234 in order to keep the changes linked across branches.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 52
+      },
+      "revId": "d40e6866b2af83c15106f80b554109755dc67aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f773ffe_73a0f47c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -14,6 +37,29 @@
       "writtenOn": "2023-09-11T13:05:07Z",
       "side": 1,
       "message": "does this break the abi?",
+      "revId": "d40e6866b2af83c15106f80b554109755dc67aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9f416b_b0796726",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-09-13T20:31:54Z",
+      "side": 1,
+      "message": "You\u0027ll need to use the ANDROID_KABI_RESERVE(1) field to avoid breaking the KMI. Refer to https://r.android.com/c/2677279/4 as an example.",
+      "range": {
+        "startLine": 486,
+        "startChar": 8,
+        "endLine": 486,
+        "endChar": 33
+      },
       "revId": "d40e6866b2af83c15106f80b554109755dc67aae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
