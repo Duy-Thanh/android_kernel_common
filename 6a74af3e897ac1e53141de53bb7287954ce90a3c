@@ -16,6 +16,24 @@
       "message": "documentation for all of these is needed as to why you want to enable them, as well as a bug id, AND it needs to happen for all arches, not just arm64.",
       "revId": "6a74af3e897ac1e53141de53bb7287954ce90a3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f2a467c_efdd231b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2044103
+      },
+      "writtenOn": "2023-09-13T09:00:48Z",
+      "side": 1,
+      "message": "Hi Gerg ,\n\nCGROUP_DEVICE CGROUP_PIDS CONFIG_USER_NS POSIX_MQUEUE SYSVIPC enable for runc support , runc require those config.\n\nBRs\nChaochen Liang",
+      "parentUuid": "8d93339f_1bf223b6",
+      "revId": "6a74af3e897ac1e53141de53bb7287954ce90a3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
