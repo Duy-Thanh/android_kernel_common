@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e82bd2e_b58e8f50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-09-13T13:31:11Z",
+      "side": 1,
+      "message": "As mentioned in the bug, can you please follow the documentation for enabling defconfig options, and also enable this for x86? \n\nhttps://source.android.com/docs/core/architecture/kernel/kernel-code#changes-to-gki-defconfig",
+      "revId": "d7545b670a90ce2d92f61cc5de3e01af42c6a2b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
