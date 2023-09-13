@@ -271398,6 +271398,24 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x63bb62a2
+  name: "error_detector"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "ERROR_DETECTOR_KFENCE"
+    }
+    enumerator {
+      name: "ERROR_DETECTOR_KASAN"
+      value: 1
+    }
+    enumerator {
+      name: "ERROR_DETECTOR_WARN"
+      value: 2
+    }
+  }
+}
+enumeration {
   id: 0xcd568da6
   name: "ethtool_link_ext_state"
   definition {
@@ -309323,6 +309341,13 @@ function {
   parameter_id: 0x1d19a9d5
 }
 function {
+  id: 0x9a2d8ab0
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x63bb62a2
+  parameter_id: 0x33756485
+}
+function {
   id: 0x9a2dc3fa
   return_type_id: 0x6720d32f
   parameter_id: 0x18a2fb63
@@ -331009,6 +331034,15 @@ elf_symbol {
   full_name: "__traceiter_dma_fence_emit"
 }
 elf_symbol {
+  id: 0x5e5d9a70
+  name: "__traceiter_error_report_end"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd29c1f10
+  type_id: 0x9a2d8ab0
+  full_name: "__traceiter_error_report_end"
+}
+elf_symbol {
   id: 0x104ffeec
   name: "__traceiter_gpu_mem_total"
   is_defined: true
@@ -334400,6 +334434,15 @@ elf_symbol {
   crc: 0xc5a3367a
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_dma_fence_emit"
+}
+elf_symbol {
+  id: 0x3b13741e
+  name: "__tracepoint_error_report_end"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x0a463293
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_error_report_end"
 }
 elf_symbol {
   id: 0xd8f3ca82
@@ -388239,6 +388282,7 @@ interface {
   symbol_id: 0x7e705ab7
   symbol_id: 0x7b03aae7
   symbol_id: 0x92373f85
+  symbol_id: 0x5e5d9a70
   symbol_id: 0x104ffeec
   symbol_id: 0x6d4f31c4
   symbol_id: 0xcf61fd25
@@ -388616,6 +388660,7 @@ interface {
   symbol_id: 0xbf086359
   symbol_id: 0xef6e6795
   symbol_id: 0xb2d6f207
+  symbol_id: 0x3b13741e
   symbol_id: 0xd8f3ca82
   symbol_id: 0xff315556
   symbol_id: 0x6d72699f
