@@ -271800,6 +271800,37 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x87463428
+  name: "hid_class_request"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "HID_REQ_GET_REPORT"
+      value: 1
+    }
+    enumerator {
+      name: "HID_REQ_GET_IDLE"
+      value: 2
+    }
+    enumerator {
+      name: "HID_REQ_GET_PROTOCOL"
+      value: 3
+    }
+    enumerator {
+      name: "HID_REQ_SET_REPORT"
+      value: 9
+    }
+    enumerator {
+      name: "HID_REQ_SET_IDLE"
+      value: 10
+    }
+    enumerator {
+      name: "HID_REQ_SET_PROTOCOL"
+      value: 11
+    }
+  }
+}
+enumeration {
   id: 0xfa5f37bb
   name: "hid_report_type"
   definition {
@@ -281463,6 +281494,11 @@ function {
   parameter_id: 0x0e7d50ff
   parameter_id: 0x6720d32f
   parameter_id: 0x115a10f4
+}
+function {
+  id: 0x104da524
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0357d2dd
 }
 function {
   id: 0x104de9a9
@@ -313868,6 +313904,13 @@ function {
   parameter_id: 0x368ec5cb
 }
 function {
+  id: 0x9d760cc4
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0357d2dd
+  parameter_id: 0x0b27dc43
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x9d763af9
   return_type_id: 0x6720d32f
   parameter_id: 0x0258f96e
@@ -316536,6 +316579,16 @@ function {
   parameter_id: 0xf435685e
   parameter_id: 0x5d8155a5
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x9f85a1ff
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0de4c6b1
+  parameter_id: 0x5d8155a5
+  parameter_id: 0x2669d715
+  parameter_id: 0xf435685e
+  parameter_id: 0xfa5f37bb
+  parameter_id: 0x87463428
 }
 function {
   id: 0x9f87b817
@@ -323018,6 +323071,15 @@ elf_symbol {
   crc: 0xb243b785
   type_id: 0x98878fd8
   full_name: "__hci_cmd_sync_status_sk"
+}
+elf_symbol {
+  id: 0xb3d97fa3
+  name: "__hid_register_driver"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe11057d9
+  type_id: 0x9d760cc4
+  full_name: "__hid_register_driver"
 }
 elf_symbol {
   id: 0xf245d4a3
@@ -349283,6 +349345,33 @@ elf_symbol {
   full_name: "hid_destroy_device"
 }
 elf_symbol {
+  id: 0x6c303862
+  name: "hid_hw_raw_request"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1754ea42
+  type_id: 0x9f85a1ff
+  full_name: "hid_hw_raw_request"
+}
+elf_symbol {
+  id: 0xfba34655
+  name: "hid_hw_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x80c181b3
+  type_id: 0x9fefc71b
+  full_name: "hid_hw_start"
+}
+elf_symbol {
+  id: 0x52d444b1
+  name: "hid_hw_stop"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x109cf170
+  type_id: 0x13e1603f
+  full_name: "hid_hw_stop"
+}
+elf_symbol {
   id: 0x7d0e44ca
   name: "hid_ignore"
   is_defined: true
@@ -349301,6 +349390,15 @@ elf_symbol {
   full_name: "hid_input_report"
 }
 elf_symbol {
+  id: 0x0eb11e95
+  name: "hid_open_report"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x99072c9a
+  type_id: 0x9ef9d283
+  full_name: "hid_open_report"
+}
+elf_symbol {
   id: 0x6ca4d0ed
   name: "hid_parse_report"
   is_defined: true
@@ -349308,6 +349406,15 @@ elf_symbol {
   crc: 0x4a8dd239
   type_id: 0x9e711486
   full_name: "hid_parse_report"
+}
+elf_symbol {
+  id: 0x6e37f09d
+  name: "hid_unregister_driver"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe1767c20
+  type_id: 0x104da524
+  full_name: "hid_unregister_driver"
 }
 elf_symbol {
   id: 0x21d35235
@@ -381335,6 +381442,7 @@ interface {
   symbol_id: 0x010ff5f2
   symbol_id: 0xe3bb3be3
   symbol_id: 0xdf924e64
+  symbol_id: 0xb3d97fa3
   symbol_id: 0xf245d4a3
   symbol_id: 0x74b9825e
   symbol_id: 0xd672e937
@@ -384252,9 +384360,14 @@ interface {
   symbol_id: 0xccc593d6
   symbol_id: 0x97a02af0
   symbol_id: 0x2ffc7c7e
+  symbol_id: 0x6c303862
+  symbol_id: 0xfba34655
+  symbol_id: 0x52d444b1
   symbol_id: 0x7d0e44ca
   symbol_id: 0x10de460f
+  symbol_id: 0x0eb11e95
   symbol_id: 0x6ca4d0ed
+  symbol_id: 0x6e37f09d
   symbol_id: 0x21d35235
   symbol_id: 0x334ff68f
   symbol_id: 0xd7ecf501
