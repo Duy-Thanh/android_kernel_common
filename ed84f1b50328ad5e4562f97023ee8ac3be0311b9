@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52072225_a2bbb8ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-13T18:44:50Z",
+      "side": 1,
+      "message": "Submit it to the upstream kernel.org community first please.  Once it is accepted by them, we can easily take a backport to all relevant android kernels.",
+      "parentUuid": "dc3f8dea_8a8eff6c",
+      "revId": "ed84f1b50328ad5e4562f97023ee8ac3be0311b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1529ecba_f20a6a48",
         "filename": "drivers/hid/hid-input.c",
         "patchSetId": 2
