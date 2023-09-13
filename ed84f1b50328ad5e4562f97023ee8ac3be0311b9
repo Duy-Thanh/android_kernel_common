@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "196b67f3_6447c09b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-13T05:12:24Z",
+      "side": 1,
+      "message": "properly wrap your changelog text at 72 columns like the editor asked you to.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 4
+      },
+      "revId": "ed84f1b50328ad5e4562f97023ee8ac3be0311b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65a90e7a_ad50aba7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -14,6 +37,52 @@
       "writtenOn": "2023-09-13T05:10:46Z",
       "side": 1,
       "message": "Why isn\u0027t this submitted upstream first?",
+      "revId": "ed84f1b50328ad5e4562f97023ee8ac3be0311b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1529ecba_f20a6a48",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-13T05:12:24Z",
+      "side": 1,
+      "message": "always use checkpatch on your changes, this is the incorrect comment style.",
+      "range": {
+        "startLine": 1223,
+        "startChar": 1,
+        "endLine": 1223,
+        "endChar": 68
+      },
+      "revId": "ed84f1b50328ad5e4562f97023ee8ac3be0311b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dd77436_161a7d51",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1227,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-13T05:12:24Z",
+      "side": 1,
+      "message": "what does this magic 64 mean?",
+      "range": {
+        "startLine": 1227,
+        "startChar": 37,
+        "endLine": 1227,
+        "endChar": 39
+      },
       "revId": "ed84f1b50328ad5e4562f97023ee8ac3be0311b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
