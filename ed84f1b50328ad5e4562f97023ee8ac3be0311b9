@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc3f8dea_8a8eff6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-09-13T09:40:10Z",
+      "side": 1,
+      "message": "To android-mainline ?\nAs we are mainly working on Android 12 releases, I had submitted the patch first to android12-5.10 kernel. Please suggest should I do android-mainline submit first ?",
+      "parentUuid": "65a90e7a_ad50aba7",
+      "revId": "ed84f1b50328ad5e4562f97023ee8ac3be0311b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1529ecba_f20a6a48",
         "filename": "drivers/hid/hid-input.c",
         "patchSetId": 2
