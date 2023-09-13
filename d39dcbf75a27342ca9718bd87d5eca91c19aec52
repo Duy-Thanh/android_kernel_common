@@ -39,6 +39,30 @@
       },
       "revId": "d39dcbf75a27342ca9718bd87d5eca91c19aec52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fad9e62_9c929d5e",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2046220
+      },
+      "writtenOn": "2023-09-13T15:10:16Z",
+      "side": 1,
+      "message": "In ARM64, the flow of functions \u0027do_undefinstr\u0027 is not friendly, we only want to run function \u0027arm64_notify_die\u0027, and do not want to run function \u0027BUG_ON\u0027, so we implemented \u0027arm64_notify_die\u0027 code flow through vendor hooks.\nIn the vendor hook function, the hook function is called function \u0027show_regs\u0027 to print the register information and the call stack information, but the call stack is reprinted when panic, which we think is redundant and the call stack information is inaccurate.\nCalling function \u0027add_taint\u0027 before panic can make panic not print the call stack information.",
+      "parentUuid": "54b0df85_cfe8e8ee",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 11
+      },
+      "revId": "d39dcbf75a27342ca9718bd87d5eca91c19aec52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
