@@ -87,6 +87,23 @@
       "message": "These two functions serve different purposes. I would like to export the \u0027devm_extcon_dev_free\u0027 symbol in this commit. As for the \u0027fsync_bdev\u0027, I will create a separate bug tracker and patches to update it.",
       "revId": "0f3a3d83edb6d96f0792cdfc5a2e2d126f8e330e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbb61ec9_001e2330",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-09-13T02:52:41Z",
+      "side": 1,
+      "message": "@surenb@google.com suggested splitting different functions into two patches, so I have decided to abandon this patch.",
+      "revId": "0f3a3d83edb6d96f0792cdfc5a2e2d126f8e330e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
