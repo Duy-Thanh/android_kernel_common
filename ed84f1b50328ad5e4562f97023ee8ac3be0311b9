@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "423412da_a1929a4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-09-13T15:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "196b67f3_6447c09b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 4
+      },
+      "revId": "ed84f1b50328ad5e4562f97023ee8ac3be0311b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65a90e7a_ad50aba7",
@@ -82,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc6d115_64c96168",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-09-13T15:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1529ecba_f20a6a48",
+      "range": {
+        "startLine": 1223,
+        "startChar": 1,
+        "endLine": 1223,
+        "endChar": 68
+      },
+      "revId": "ed84f1b50328ad5e4562f97023ee8ac3be0311b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dd77436_161a7d51",
@@ -95,6 +143,30 @@
       "writtenOn": "2023-09-13T05:12:24Z",
       "side": 1,
       "message": "what does this magic 64 mean?",
+      "range": {
+        "startLine": 1227,
+        "startChar": 37,
+        "endLine": 1227,
+        "endChar": 39
+      },
+      "revId": "ed84f1b50328ad5e4562f97023ee8ac3be0311b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44e1fdd4_ba48923e",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1227,
+      "author": {
+        "id": 2039727
+      },
+      "writtenOn": "2023-09-13T15:15:57Z",
+      "side": 1,
+      "message": "This is the optimal value with our usecases confirmed that the stream of keyevents(HID_GD_KEYBOARD) for large barcodes from USB scanners injected, would not suffer any key event loss.",
+      "parentUuid": "8dd77436_161a7d51",
       "range": {
         "startLine": 1227,
         "startChar": 37,
