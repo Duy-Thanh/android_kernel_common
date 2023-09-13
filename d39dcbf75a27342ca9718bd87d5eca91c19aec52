@@ -87,6 +87,30 @@
       },
       "revId": "d39dcbf75a27342ca9718bd87d5eca91c19aec52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385b67ce_a39114e1",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-13T18:46:52Z",
+      "side": 1,
+      "message": "Sorry, but no, this is not allowed.",
+      "parentUuid": "05216e2a_ba12e824",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 11
+      },
+      "revId": "d39dcbf75a27342ca9718bd87d5eca91c19aec52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
