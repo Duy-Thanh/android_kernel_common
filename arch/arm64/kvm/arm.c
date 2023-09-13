@@ -817,14 +817,25 @@ void kvm_vcpu_wfi(struct kvm_vcpu *vcpu)
 	 * doorbells to be signalled, should an interrupt become pending.
 	 */
 	preempt_disable();
+<<<<<<< HEAD   (094c28 Merge 6.1.46 into android14-6.1-lts)
 	kvm_vgic_put(vcpu, true);
+=======
+	kvm_vgic_vmcr_sync(vcpu);
+	vcpu_set_flag(vcpu, IN_WFI);
+	vgic_v4_put(vcpu);
+>>>>>>> BRANCH (802aac Linux 6.1.47)
 	preempt_enable();
 
 	kvm_vcpu_halt(vcpu);
 	vcpu_clear_flag(vcpu, IN_WFIT);
 
 	preempt_disable();
+<<<<<<< HEAD   (094c28 Merge 6.1.46 into android14-6.1-lts)
 	kvm_vgic_load(vcpu);
+=======
+	vcpu_clear_flag(vcpu, IN_WFI);
+	vgic_v4_load(vcpu);
+>>>>>>> BRANCH (802aac Linux 6.1.47)
 	preempt_enable();
 }
 
@@ -891,7 +902,7 @@ static int check_vcpu_requests(struct kvm_vcpu *vcpu)
 		if (kvm_check_request(KVM_REQ_RELOAD_GICv4, vcpu)) {
 			/* The distributor enable bits were changed */
 			preempt_disable();
-			vgic_v4_put(vcpu, false);
+			vgic_v4_put(vcpu);
 			vgic_v4_load(vcpu);
 			preempt_enable();
 		}
