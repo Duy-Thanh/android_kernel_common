@@ -105,6 +105,24 @@
       "parentUuid": "8d99bd20_f2be71c6",
       "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385f3444_999196de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-09-13T06:02:53Z",
+      "side": 1,
+      "message": "Im not really sure why it was not backported in upstream even if \"Cc: stable@kernel.org\" was added, I have just replied to the original thread with Cc: \u003cstable@vger.kernel.org\u003e # 5.15\", is that fine? or is there any other way to do this.. I wasn\u0027t able find any document related to this",
+      "parentUuid": "83e09ae5_b8091a92",
+      "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
