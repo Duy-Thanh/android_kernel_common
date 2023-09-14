@@ -111,6 +111,30 @@
       },
       "revId": "d39dcbf75a27342ca9718bd87d5eca91c19aec52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e16fd76b_760a8a8e",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-09-14T04:25:31Z",
+      "side": 1,
+      "message": "Dear gregkh,\n\nThanks very much, I have removed the symbol add_taint. Could you help review again? Thanks!",
+      "parentUuid": "385b67ce_a39114e1",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 11
+      },
+      "revId": "d39dcbf75a27342ca9718bd87d5eca91c19aec52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
