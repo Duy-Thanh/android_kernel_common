@@ -287994,6 +287994,12 @@ function {
   parameter_id: 0x0bb0c019
 }
 function {
+  id: 0x1276a8bd
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0dc9e98b
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x1277c151
   return_type_id: 0x48b5725f
   parameter_id: 0x0beab59b
@@ -288729,6 +288735,13 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x137a1cdc
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0de4c6b1
+  parameter_id: 0x2eab5b8a
+  parameter_id: 0x87463428
+}
+function {
   id: 0x137d1ffc
   return_type_id: 0x48b5725f
   parameter_id: 0x09451098
@@ -289059,6 +289072,12 @@ function {
   id: 0x13fabadb
   return_type_id: 0x48b5725f
   parameter_id: 0x0d8bad22
+}
+function {
+  id: 0x13ff1655
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0dc9e98b
+  parameter_id: 0x054f691a
 }
 function {
   id: 0x1401698f
@@ -290774,6 +290793,12 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x1a6ea392
   parameter_id: 0x24706e28
+}
+function {
+  id: 0x16949287
+  return_type_id: 0x08113aaf
+  parameter_id: 0x0258f96e
+  parameter_id: 0x396fe4f8
 }
 function {
   id: 0x16983453
@@ -297807,6 +297832,12 @@ function {
   id: 0x34109d77
   return_type_id: 0x48b5725f
   parameter_id: 0x92233392
+}
+function {
+  id: 0x34270f0c
+  return_type_id: 0x0490bb4a
+  parameter_id: 0x36e75420
+  parameter_id: 0x3e146274
 }
 function {
   id: 0x345f1809
@@ -322002,6 +322033,28 @@ function {
   parameter_id: 0x0f78474f
 }
 function {
+  id: 0x9e5fde3c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0dc9e98b
+  parameter_id: 0x295c7202
+  parameter_id: 0x295c7202
+  parameter_id: 0x914dbfdc
+  parameter_id: 0x914dbfdc
+  parameter_id: 0x391f15ea
+  parameter_id: 0x914dbfdc
+}
+function {
+  id: 0x9e5fdeba
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0dc9e98b
+  parameter_id: 0x295c7202
+  parameter_id: 0x295c7202
+  parameter_id: 0x914dbfdc
+  parameter_id: 0x914dbfdc
+  parameter_id: 0x18bd6530
+  parameter_id: 0x914dbfdc
+}
+function {
   id: 0x9e609ac2
   return_type_id: 0x6720d32f
   parameter_id: 0x0f4dcd61
@@ -326761,6 +326814,15 @@ function {
   id: 0xe0b805a9
   return_type_id: 0x3ad81610
   parameter_id: 0x18a2fb63
+  parameter_id: 0x4585663f
+}
+function {
+  id: 0xe10f9802
+  return_type_id: 0x2eab5b8a
+  parameter_id: 0x0de4c6b1
+  parameter_id: 0xfa5f37bb
+  parameter_id: 0x4585663f
+  parameter_id: 0x4585663f
   parameter_id: 0x4585663f
 }
 function {
@@ -356578,6 +356640,15 @@ elf_symbol {
   full_name: "full_name_hash"
 }
 elf_symbol {
+  id: 0xc35e482b
+  name: "fwnode_create_software_node"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf7a29e9c
+  type_id: 0x34270f0c
+  full_name: "fwnode_create_software_node"
+}
+elf_symbol {
   id: 0x53816b02
   name: "fwnode_device_is_available"
   is_defined: true
@@ -359020,6 +359091,15 @@ elf_symbol {
   full_name: "hid_allocate_device"
 }
 elf_symbol {
+  id: 0xa832c6f3
+  name: "hid_debug"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x05495392
+  type_id: 0x6720d32f
+  full_name: "hid_debug"
+}
+elf_symbol {
   id: 0x2ffc7c7e
   name: "hid_destroy_device"
   is_defined: true
@@ -359029,6 +359109,51 @@ elf_symbol {
   full_name: "hid_destroy_device"
 }
 elf_symbol {
+  id: 0x1706be22
+  name: "hid_driver_reset_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x38266a07
+  type_id: 0x9ef9d283
+  full_name: "hid_driver_reset_resume"
+}
+elf_symbol {
+  id: 0x4c3911f0
+  name: "hid_driver_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x63c99127
+  type_id: 0x9d398c85
+  full_name: "hid_driver_suspend"
+}
+elf_symbol {
+  id: 0x8717f26f
+  name: "hid_hw_close"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xffa28586
+  type_id: 0x13e1603f
+  full_name: "hid_hw_close"
+}
+elf_symbol {
+  id: 0x361004c8
+  name: "hid_hw_open"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x83abbb03
+  type_id: 0x9ef9d283
+  full_name: "hid_hw_open"
+}
+elf_symbol {
+  id: 0xcf5ea9a2
+  name: "hid_hw_output_report"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8f5731d2
+  type_id: 0x9e5d7885
+  full_name: "hid_hw_output_report"
+}
+elf_symbol {
   id: 0x6c303862
   name: "hid_hw_raw_request"
   is_defined: true
@@ -359036,6 +359161,15 @@ elf_symbol {
   crc: 0x1754ea42
   type_id: 0x9f85a1ff
   full_name: "hid_hw_raw_request"
+}
+elf_symbol {
+  id: 0x553bc5f3
+  name: "hid_hw_request"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe88265d4
+  type_id: 0x137a1cdc
+  full_name: "hid_hw_request"
 }
 elf_symbol {
   id: 0xfba34655
@@ -359092,6 +359226,15 @@ elf_symbol {
   full_name: "hid_parse_report"
 }
 elf_symbol {
+  id: 0x741d5af7
+  name: "hid_report_raw_event"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x358ef5ff
+  type_id: 0x9d13a27c
+  full_name: "hid_report_raw_event"
+}
+elf_symbol {
   id: 0x6e37f09d
   name: "hid_unregister_driver"
   is_defined: true
@@ -359099,6 +359242,15 @@ elf_symbol {
   crc: 0xe1767c20
   type_id: 0x104da524
   full_name: "hid_unregister_driver"
+}
+elf_symbol {
+  id: 0x29d6d842
+  name: "hid_validate_values"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x67c1cd41
+  type_id: 0xe10f9802
+  full_name: "hid_validate_values"
 }
 elf_symbol {
   id: 0x21d35235
@@ -384314,6 +384466,15 @@ elf_symbol {
   full_name: "tcpm_port_is_toggling"
 }
 elf_symbol {
+  id: 0xd2070626
+  name: "tcpm_register_port"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd95cde3e
+  type_id: 0x16949287
+  full_name: "tcpm_register_port"
+}
+elf_symbol {
   id: 0xdebe76ba
   name: "tcpm_sink_frs"
   is_defined: true
@@ -384339,6 +384500,15 @@ elf_symbol {
   crc: 0xea220941
   type_id: 0x129c1f38
   full_name: "tcpm_tcpc_reset"
+}
+elf_symbol {
+  id: 0x591431f1
+  name: "tcpm_unregister_port"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x76eeda4b
+  type_id: 0x129c1f38
+  full_name: "tcpm_unregister_port"
 }
 elf_symbol {
   id: 0x6869c83d
@@ -388526,6 +388696,15 @@ elf_symbol {
   full_name: "usb_hcds_loaded"
 }
 elf_symbol {
+  id: 0x00a14c5c
+  name: "usb_hid_driver"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x06332c5c
+  type_id: 0x2def15e8
+  full_name: "usb_hid_driver"
+}
+elf_symbol {
   id: 0x868c5f6e
   name: "usb_hub_clear_tt_buffer"
   is_defined: true
@@ -388578,6 +388757,15 @@ elf_symbol {
   crc: 0x2d78741b
   type_id: 0x9ebe912b
   full_name: "usb_interface_id"
+}
+elf_symbol {
+  id: 0x83676405
+  name: "usb_interrupt_msg"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc5e153c9
+  type_id: 0x9fce79d4
+  full_name: "usb_interrupt_msg"
 }
 elf_symbol {
   id: 0x89c78ea4
@@ -389255,6 +389443,42 @@ elf_symbol {
   full_name: "usb_wakeup_notification"
 }
 elf_symbol {
+  id: 0xbbf007f4
+  name: "usbnet_change_mtu"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdf1db1f5
+  type_id: 0x90b5e896
+  full_name: "usbnet_change_mtu"
+}
+elf_symbol {
+  id: 0xd28057f3
+  name: "usbnet_defer_kevent"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6e3c218b
+  type_id: 0x1276a8bd
+  full_name: "usbnet_defer_kevent"
+}
+elf_symbol {
+  id: 0x580c56b8
+  name: "usbnet_disconnect"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfe1e5ee6
+  type_id: 0x18d9f669
+  full_name: "usbnet_disconnect"
+}
+elf_symbol {
+  id: 0x8f0c866d
+  name: "usbnet_get_drvinfo"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa5701874
+  type_id: 0x1cc68e0f
+  full_name: "usbnet_get_drvinfo"
+}
+elf_symbol {
   id: 0x52816b1c
   name: "usbnet_get_endpoints"
   is_defined: true
@@ -389264,6 +389488,33 @@ elf_symbol {
   full_name: "usbnet_get_endpoints"
 }
 elf_symbol {
+  id: 0x4f4e9353
+  name: "usbnet_get_link"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa8e792b0
+  type_id: 0x4951a397
+  full_name: "usbnet_get_link"
+}
+elf_symbol {
+  id: 0x3f51a906
+  name: "usbnet_get_link_ksettings_mii"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2d9393b2
+  type_id: 0x914dbe16
+  full_name: "usbnet_get_link_ksettings_mii"
+}
+elf_symbol {
+  id: 0x6515c416
+  name: "usbnet_get_msglevel"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaa53e6df
+  type_id: 0x4951a397
+  full_name: "usbnet_get_msglevel"
+}
+elf_symbol {
   id: 0x19d80976
   name: "usbnet_link_change"
   is_defined: true
@@ -389271,6 +389522,150 @@ elf_symbol {
   crc: 0x8a855afb
   type_id: 0x12448959
   full_name: "usbnet_link_change"
+}
+elf_symbol {
+  id: 0x6c854cb3
+  name: "usbnet_nway_reset"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x44c1d620
+  type_id: 0x91296bda
+  full_name: "usbnet_nway_reset"
+}
+elf_symbol {
+  id: 0xcd021e80
+  name: "usbnet_open"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x37e3dac8
+  type_id: 0x91296bda
+  full_name: "usbnet_open"
+}
+elf_symbol {
+  id: 0x147e4ad2
+  name: "usbnet_probe"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa6db5d48
+  type_id: 0x952154fc
+  full_name: "usbnet_probe"
+}
+elf_symbol {
+  id: 0x167360fc
+  name: "usbnet_read_cmd"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa46394ea
+  type_id: 0x9e5fdeba
+  full_name: "usbnet_read_cmd"
+}
+elf_symbol {
+  id: 0x69b1070f
+  name: "usbnet_read_cmd_nopm"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x721f340d
+  type_id: 0x9e5fdeba
+  full_name: "usbnet_read_cmd_nopm"
+}
+elf_symbol {
+  id: 0x3be16591
+  name: "usbnet_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb279d24c
+  type_id: 0x95c144d5
+  full_name: "usbnet_resume"
+}
+elf_symbol {
+  id: 0x6e3c0f91
+  name: "usbnet_set_link_ksettings_mii"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3f50bb22
+  type_id: 0x91cc9f9b
+  full_name: "usbnet_set_link_ksettings_mii"
+}
+elf_symbol {
+  id: 0x99cb2edf
+  name: "usbnet_set_msglevel"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcbf61848
+  type_id: 0x1f15f9ca
+  full_name: "usbnet_set_msglevel"
+}
+elf_symbol {
+  id: 0x2325cd65
+  name: "usbnet_skb_return"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7602f70e
+  type_id: 0x13ff1655
+  full_name: "usbnet_skb_return"
+}
+elf_symbol {
+  id: 0x9cf79f8d
+  name: "usbnet_start_xmit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x64b56e3d
+  type_id: 0x5515f11d
+  full_name: "usbnet_start_xmit"
+}
+elf_symbol {
+  id: 0x2f365f93
+  name: "usbnet_stop"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1328858d
+  type_id: 0x91296bda
+  full_name: "usbnet_stop"
+}
+elf_symbol {
+  id: 0x6229bd38
+  name: "usbnet_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf5d2649e
+  type_id: 0x96011ad3
+  full_name: "usbnet_suspend"
+}
+elf_symbol {
+  id: 0x90b81315
+  name: "usbnet_tx_timeout"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x93fad802
+  type_id: 0x1d27ccfe
+  full_name: "usbnet_tx_timeout"
+}
+elf_symbol {
+  id: 0xb011e423
+  name: "usbnet_write_cmd"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf6bbc53f
+  type_id: 0x9e5fde3c
+  full_name: "usbnet_write_cmd"
+}
+elf_symbol {
+  id: 0x27363bb6
+  name: "usbnet_write_cmd_async"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x54bea6a3
+  type_id: 0x9e5fde3c
+  full_name: "usbnet_write_cmd_async"
+}
+elf_symbol {
+  id: 0x10932377
+  name: "usbnet_write_cmd_nopm"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xee57cfe4
+  type_id: 0x9e5fde3c
+  full_name: "usbnet_write_cmd_nopm"
 }
 elf_symbol {
   id: 0xb5437ef4
@@ -396182,6 +396577,7 @@ interface {
   symbol_id: 0xee139066
   symbol_id: 0x613adcb1
   symbol_id: 0x370e6f08
+  symbol_id: 0xc35e482b
   symbol_id: 0x53816b02
   symbol_id: 0xc9ddb79e
   symbol_id: 0x11780300
@@ -396453,15 +396849,24 @@ interface {
   symbol_id: 0x88f82161
   symbol_id: 0xccc593d6
   symbol_id: 0x97a02af0
+  symbol_id: 0xa832c6f3
   symbol_id: 0x2ffc7c7e
+  symbol_id: 0x1706be22
+  symbol_id: 0x4c3911f0
+  symbol_id: 0x8717f26f
+  symbol_id: 0x361004c8
+  symbol_id: 0xcf5ea9a2
   symbol_id: 0x6c303862
+  symbol_id: 0x553bc5f3
   symbol_id: 0xfba34655
   symbol_id: 0x52d444b1
   symbol_id: 0x7d0e44ca
   symbol_id: 0x10de460f
   symbol_id: 0x0eb11e95
   symbol_id: 0x6ca4d0ed
+  symbol_id: 0x741d5af7
   symbol_id: 0x6e37f09d
+  symbol_id: 0x29d6d842
   symbol_id: 0x21d35235
   symbol_id: 0x334ff68f
   symbol_id: 0xd7ecf501
@@ -399264,9 +399669,11 @@ interface {
   symbol_id: 0xbabc4102
   symbol_id: 0x4c16a6b4
   symbol_id: 0xc8ad19b6
+  symbol_id: 0xd2070626
   symbol_id: 0xdebe76ba
   symbol_id: 0xae3ea97c
   symbol_id: 0xfccd15d1
+  symbol_id: 0x591431f1
   symbol_id: 0x6869c83d
   symbol_id: 0x5bbd3545
   symbol_id: 0xf4017fdd
@@ -399732,12 +400139,14 @@ interface {
   symbol_id: 0x700d3d6b
   symbol_id: 0xbdfbbc33
   symbol_id: 0x1b3f668e
+  symbol_id: 0x00a14c5c
   symbol_id: 0x868c5f6e
   symbol_id: 0xb89dad0b
   symbol_id: 0x110008ad
   symbol_id: 0x5df193f7
   symbol_id: 0x9b635032
   symbol_id: 0x4048e514
+  symbol_id: 0x83676405
   symbol_id: 0x89c78ea4
   symbol_id: 0x37cf2035
   symbol_id: 0x2db08c33
@@ -399813,8 +400222,31 @@ interface {
   symbol_id: 0xcac8f190
   symbol_id: 0x9ea1c58f
   symbol_id: 0x140d9164
+  symbol_id: 0xbbf007f4
+  symbol_id: 0xd28057f3
+  symbol_id: 0x580c56b8
+  symbol_id: 0x8f0c866d
   symbol_id: 0x52816b1c
+  symbol_id: 0x4f4e9353
+  symbol_id: 0x3f51a906
+  symbol_id: 0x6515c416
   symbol_id: 0x19d80976
+  symbol_id: 0x6c854cb3
+  symbol_id: 0xcd021e80
+  symbol_id: 0x147e4ad2
+  symbol_id: 0x167360fc
+  symbol_id: 0x69b1070f
+  symbol_id: 0x3be16591
+  symbol_id: 0x6e3c0f91
+  symbol_id: 0x99cb2edf
+  symbol_id: 0x2325cd65
+  symbol_id: 0x9cf79f8d
+  symbol_id: 0x2f365f93
+  symbol_id: 0x6229bd38
+  symbol_id: 0x90b81315
+  symbol_id: 0xb011e423
+  symbol_id: 0x27363bb6
+  symbol_id: 0x10932377
   symbol_id: 0xb5437ef4
   symbol_id: 0x1473720a
   symbol_id: 0xa459c02b
