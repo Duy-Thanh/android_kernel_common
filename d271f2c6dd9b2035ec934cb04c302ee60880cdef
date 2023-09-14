@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f565c6_15a272c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-14T06:36:02Z",
+      "side": 1,
+      "message": "Please add a respin bug.",
+      "revId": "d271f2c6dd9b2035ec934cb04c302ee60880cdef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4ce0be2_e52fd785",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-14T06:36:02Z",
+      "side": 1,
+      "message": "Please resolve conflicts in this file.",
+      "revId": "d271f2c6dd9b2035ec934cb04c302ee60880cdef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
