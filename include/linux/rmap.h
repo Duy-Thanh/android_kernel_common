@@ -13,6 +13,10 @@
 #include <linux/highmem.h>
 #include <linux/pagemap.h>
 #include <linux/memremap.h>
+#ifndef __GENKSYMS__
+#define PROTECT_TRACE_INCLUDE_PATH
+#include <trace/hooks/mm.h>
+#endif
 
 /*
  * The anon_vma heads a list of private "related" vmas, to scan if
@@ -206,7 +210,12 @@ void hugepage_add_new_anon_rmap(struct page *, struct vm_area_struct *,
 
 static inline void __page_dup_rmap(struct page *page, bool compound)
 {
-	atomic_inc(compound ? compound_mapcount_ptr(page) : &page->_mapcount);
+	bool success = false;
+
+	if (!compound)
+		trace_android_vh_update_page_mapcount(page, true, compound, NULL, &success);
+	if (!success)
+		atomic_inc(compound ? compound_mapcount_ptr(page) : &page->_mapcount);
 }
 
 static inline void page_dup_file_rmap(struct page *page, bool compound)
