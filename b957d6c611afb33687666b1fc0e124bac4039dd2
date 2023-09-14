@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c4ee69_d4978980",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-09-14T14:29:27Z",
+      "side": 0,
+      "message": "you need to remove this reference to the file too.",
+      "range": {
+        "startLine": 101,
+        "startChar": 8,
+        "endLine": 101,
+        "endChar": 40
+      },
+      "revId": "b957d6c611afb33687666b1fc0e124bac4039dd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
