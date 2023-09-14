@@ -16,6 +16,23 @@
       "message": "Hi, please help to add \"Bug: 300356599\" in the commit message.",
       "revId": "e5e47d73b35f7efdca650980b46e363caeec013d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8abb04b9_e5d31253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2023-09-14T05:36:14Z",
+      "side": 1,
+      "message": "Respin Bug: b/300356599",
+      "revId": "e5e47d73b35f7efdca650980b46e363caeec013d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
