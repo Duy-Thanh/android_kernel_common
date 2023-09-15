@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053733014",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2753309?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "d8a7f658_4a2470e6",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 11,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Carlos Galo \u003ccarlosgalo@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "5ff02139_e7296b60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-15T01:07:13Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Carlos Galo \u003ccarlosgalo@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 565252184 android-build.ayeaye-python-dispatcher_20230914.00_p0",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 0
+      },
+      "revId": "3a6cb55576f2f3badd51b5238dceea5dbe383e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
