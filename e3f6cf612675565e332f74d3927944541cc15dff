@@ -37,6 +37,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "385534c5_bf775bbc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2023-09-15T16:19:40Z",
+      "side": 1,
+      "message": "Had uploaded https://android-review.git.corp.google.com/c/kernel/common/+/2753307 while uploading this change. Waiting for owners approval.",
+      "parentUuid": "ba8c6326_81d06587",
+      "revId": "e3f6cf612675565e332f74d3927944541cc15dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "180bf3e3_2cb87254",
