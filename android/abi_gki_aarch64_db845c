@@ -24,6 +24,7 @@
   bpf_trace_run8
   bus_register
   bus_unregister
+  cache_line_size
   call_rcu
   cancel_delayed_work
   cancel_delayed_work_sync
