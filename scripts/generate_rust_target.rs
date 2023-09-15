@@ -161,6 +161,17 @@ fn main() {
         ts.push("features", features);
         ts.push("llvm-target", "x86_64-linux-gnu");
         ts.push("target-pointer-width", "64");
+    } else if cfg.has("ARM64") {
+        ts.push("arch", "aarch64");
+        ts.push(
+            "data-layout",
+            "e-m:e-i8:8:32-i16:16:32-i64:64-i128:128-n32:64-S128",
+        );
+        ts.push("disable-redzone", true);
+        ts.push("features", "+strict-align,-neon,-fp-armv8");
+        ts.push("llvm-target", "aarch64-linux-gnu");
+        ts.push("max-atomic-width", 128);
+        ts.push("target-pointer-width", "64");
     } else {
         panic!("Unsupported architecture");
     }
