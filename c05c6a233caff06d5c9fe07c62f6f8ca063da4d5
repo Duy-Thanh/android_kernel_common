@@ -51,6 +51,23 @@
       "message": "Please in future use a known identity for author and sign-off, not a corporate username.",
       "revId": "c05c6a233caff06d5c9fe07c62f6f8ca063da4d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd81ef50_58250d98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2023-09-15T18:15:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c05c6a233caff06d5c9fe07c62f6f8ca063da4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
