@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b289b9b4_3424bb9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-09-15T21:11:40Z",
+      "side": 1,
+      "message": "I think this should be separated into two changes, one deleting symbols and the other enabling strict mode",
+      "revId": "faa6986dea1577a9035197ac27d8429b8f6ad5c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
