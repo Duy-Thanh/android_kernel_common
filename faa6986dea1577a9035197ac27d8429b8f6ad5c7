@@ -16,6 +16,24 @@
       "message": "I think this should be separated into two changes, one deleting symbols and the other enabling strict mode",
       "revId": "faa6986dea1577a9035197ac27d8429b8f6ad5c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49887367_39db3ee7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-09-15T21:15:04Z",
+      "side": 1,
+      "message": "I think they should be together to show why I\u0027m removing those symbols.",
+      "parentUuid": "b289b9b4_3424bb9c",
+      "revId": "faa6986dea1577a9035197ac27d8429b8f6ad5c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
