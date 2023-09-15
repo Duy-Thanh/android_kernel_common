@@ -92,7 +92,7 @@ struct mm_walk {
 	void *private;
 };
 
-int walk_page_range(struct mm_struct *mm, unsigned long start,
+extern int walk_page_range(struct mm_struct *mm, unsigned long start,
 		unsigned long end, const struct mm_walk_ops *ops,
 		void *private);
 int walk_page_range_novma(struct mm_struct *mm, unsigned long start,

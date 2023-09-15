@@ -1245,6 +1245,7 @@ void putback_lru_page(struct page *page)
 	lru_cache_add(page);
 	put_page(page);		/* drop ref from isolate */
 }
+EXPORT_SYMBOL(putback_lru_page);
 
 enum page_references {
 	PAGEREF_RECLAIM,
@@ -2130,6 +2131,7 @@ int isolate_lru_page(struct page *page)
 
 	return ret;
 }
+EXPORT_SYMBOL(isolate_lru_page);
 
 /*
  * A direct reclaimer may isolate SWAP_CLUSTER_MAX pages from the LRU list and

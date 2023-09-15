@@ -249,7 +249,7 @@ static inline void page_vma_mapped_walk_done(struct page_vma_mapped_walk *pvmw)
 		spin_unlock(pvmw->ptl);
 }
 
-bool page_vma_mapped_walk(struct page_vma_mapped_walk *pvmw);
+extern bool page_vma_mapped_walk(struct page_vma_mapped_walk *pvmw);
 
 /*
  * Used by swapoff to help locate where page is expected in vma.
@@ -301,13 +301,13 @@ struct rmap_walk_control {
 	bool (*invalid_vma)(struct vm_area_struct *vma, void *arg);
 };
 
-void rmap_walk(struct page *page, struct rmap_walk_control *rwc);
+extern void rmap_walk(struct page *page, struct rmap_walk_control *rwc);
 void rmap_walk_locked(struct page *page, struct rmap_walk_control *rwc);
 
 /*
  * Called by memory-failure.c to kill processes.
  */
-struct anon_vma *page_lock_anon_vma_read(struct page *page,
+extern struct anon_vma *page_lock_anon_vma_read(struct page *page,
 					 struct rmap_walk_control *rwc);
 void page_unlock_anon_vma_read(struct anon_vma *anon_vma);
 

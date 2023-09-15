@@ -17,7 +17,7 @@ struct resource;
 struct vmem_altmap;
 
 #ifdef CONFIG_MEMORY_HOTPLUG
-struct page *pfn_to_online_page(unsigned long pfn);
+extern struct page *pfn_to_online_page(unsigned long pfn);
 
 /* Types for control the zone type of onlined and offlined memory */
 enum {

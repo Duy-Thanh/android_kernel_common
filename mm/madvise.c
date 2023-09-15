@@ -1394,6 +1394,7 @@ int do_madvise(struct mm_struct *mm, unsigned long start, size_t len_in, int beh
 
 	return error;
 }
+EXPORT_SYMBOL(do_madvise);
 
 SYSCALL_DEFINE3(madvise, unsigned long, start, size_t, len_in, int, behavior)
 {

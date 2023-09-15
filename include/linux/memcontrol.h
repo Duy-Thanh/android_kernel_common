@@ -835,7 +835,7 @@ static inline void mem_cgroup_put(struct mem_cgroup *memcg)
 #define mem_cgroup_from_counter(counter, member)	\
 	container_of(counter, struct mem_cgroup, member)
 
-struct mem_cgroup *mem_cgroup_iter(struct mem_cgroup *,
+extern struct mem_cgroup *mem_cgroup_iter(struct mem_cgroup *,
 				   struct mem_cgroup *,
 				   struct mem_cgroup_reclaim_cookie *);
 void mem_cgroup_iter_break(struct mem_cgroup *, struct mem_cgroup *);
@@ -1329,7 +1329,7 @@ static inline struct lruvec *lock_page_lruvec_irqsave(struct page *page,
 	return &pgdat->__lruvec;
 }
 
-static inline struct mem_cgroup *
+extern static inline struct mem_cgroup *
 mem_cgroup_iter(struct mem_cgroup *root,
 		struct mem_cgroup *prev,
 		struct mem_cgroup_reclaim_cookie *reclaim)

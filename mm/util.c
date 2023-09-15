@@ -764,6 +764,7 @@ void *page_rmapping(struct page *page)
 	page = compound_head(page);
 	return __page_rmapping(page);
 }
+EXPORT_SYMBOL(page_rmapping);
 
 /*
  * Return true if this page is mapped into pagetables.
