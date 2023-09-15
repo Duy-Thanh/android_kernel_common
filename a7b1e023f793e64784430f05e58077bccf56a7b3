@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2b8cb9a_da6c4e22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-15T18:43:25Z",
+      "side": 1,
+      "message": "Needs a `Bug: \u003cbug number\u003e` tag.",
+      "revId": "a7b1e023f793e64784430f05e58077bccf56a7b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4a24eecf_f66182c2",
@@ -14,6 +31,23 @@
       "writtenOn": "2023-09-15T12:45:22Z",
       "side": 1,
       "message": "Hi Suren,\nPlease help to review this code\n\nThanks",
+      "revId": "a7b1e023f793e64784430f05e58077bccf56a7b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef8b5bd7_b8ed29f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-15T18:43:25Z",
+      "side": 1,
+      "message": "Please post a follow-up patch adding the new vendor hook into symbols list and updating the ABI definition.",
       "revId": "a7b1e023f793e64784430f05e58077bccf56a7b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
