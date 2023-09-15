@@ -16,6 +16,41 @@
       "message": "Respin bug:b/300614317",
       "revId": "c05c6a233caff06d5c9fe07c62f6f8ca063da4d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "755c983e_c29c183f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-15T15:30:09Z",
+      "side": 1,
+      "message": "That is already there.",
+      "parentUuid": "3c018f8f_a1d9feed",
+      "revId": "c05c6a233caff06d5c9fe07c62f6f8ca063da4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85a15549_b393fb0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-15T15:30:09Z",
+      "side": 1,
+      "message": "Please in future use a known identity for author and sign-off, not a corporate username.",
+      "revId": "c05c6a233caff06d5c9fe07c62f6f8ca063da4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
