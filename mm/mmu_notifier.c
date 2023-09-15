@@ -401,6 +401,7 @@ int __mmu_notifier_clear_young(struct mm_struct *mm,
 
 	return young;
 }
+EXPORT_SYMBOL(__mmu_notifier_clear_young);
 
 int __mmu_notifier_test_young(struct mm_struct *mm,
 			      unsigned long address)
@@ -423,6 +424,7 @@ int __mmu_notifier_test_young(struct mm_struct *mm,
 
 	return young;
 }
+EXPORT_SYMBOL(__mmu_notifier_test_young);
 
 void __mmu_notifier_change_pte(struct mm_struct *mm, unsigned long address,
 			       pte_t pte)
