@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053825583",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2753931?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "872ebab7_5bddf57d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-15T22:19:16Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/79636caad3618e2b38457f6e298c9b31ba82b489) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d79636caad3618e2b38457f6e298c9b31ba82b489)\n\n```\n      ## include/linux/device.h ##\n     @@ include/linux/device.h: struct device_physical_location {\n    @@ include/linux/swiotlb.h: static inline bool is_swiotlb_buffer(struct device *dev\n      static inline bool is_swiotlb_force_bounce(struct device *dev)\n     \n      ## kernel/dma/direct.c ##\n    -@@ kernel/dma/direct.c: static gfp_t dma_direct_optimal_gfp_mask(struct device *dev, u64 *phys_limit)\n    +@@ kernel/dma/direct.c: static gfp_t dma_direct_optimal_gfp_mask(struct device *dev, u64 dma_mask,\n      \treturn 0;\n      }\n      \n    @@ kernel/dma/swiotlb.c: static int swiotlb_pool_find_slots(struct device *dev, str\n     -\t\tsize_t alloc_size, unsigned int alloc_align_mask)\n     +\t\tsize_t alloc_size, unsigned int alloc_align_mask,\n     +\t\tstruct io_tlb_pool **retpool)\n    - {\n    --\treturn swiotlb_pool_find_slots(dev, \u0026dev-\u003edma_io_tlb_mem-\u003edefpool,\n    ++{\n     +\tstruct io_tlb_mem *mem \u003d dev-\u003edma_io_tlb_mem;\n     +\tstruct io_tlb_pool *pool;\n     +\tunsigned long nslabs;\n    @@ kernel/dma/swiotlb.c: static int swiotlb_pool_find_slots(struct device *dev, str\n     +static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,\n     +\t\tsize_t alloc_size, unsigned int alloc_align_mask,\n     +\t\tstruct io_tlb_pool **retpool)\n    -+{\n    + {\n    +-\treturn swiotlb_pool_find_slots(dev, \u0026dev-\u003edma_io_tlb_mem-\u003edefpool,\n     +\t*retpool \u003d \u0026dev-\u003edma_io_tlb_mem-\u003edefpool;\n     +\treturn swiotlb_pool_find_slots(dev, *retpool,\n      \t\t\t\t       orig_addr, alloc_size, alloc_align_mask);\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 565696072 android-build.ayeaye-python-dispatcher_20230914.00_p1",
+      "revId": "d17c5cf9e9eea85116de83f80acaa92303b3f6af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
