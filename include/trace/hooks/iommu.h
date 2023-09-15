@@ -31,6 +31,7 @@ DECLARE_HOOK(android_vh_iommu_iovad_free_iova,
 	TP_PROTO(struct iova_domain *iovad, dma_addr_t iova, size_t size),
 	TP_ARGS(iovad, iova, size));
 
+<<<<<<< HEAD   (f4812c ANDROID: KVM: arm64: Store hyp address in the host fp state )
 DECLARE_RESTRICTED_HOOK(android_rvh_iommu_iovad_init_alloc_algo,
 	TP_PROTO(struct device *dev, struct iova_domain *iovad),
 	TP_ARGS(dev, iovad), 1);
@@ -39,6 +40,11 @@ DECLARE_RESTRICTED_HOOK(android_rvh_iommu_limit_align_shift,
 	TP_PROTO(struct iova_domain *iovad, unsigned long size,
 		unsigned long *shift),
 	TP_ARGS(iovad, size, shift), 1);
+=======
+DECLARE_HOOK(android_vh_adjust_alloc_flags,
+	TP_PROTO(unsigned int order, gfp_t *alloc_flags),
+	TP_ARGS(order, alloc_flags));
+>>>>>>> CHANGE (d6c24c ANDROID: vendor_hooks: Add hooks for adjusting alloc_flags)
 
 #endif /* _TRACE_HOOK_IOMMU_H */
 
