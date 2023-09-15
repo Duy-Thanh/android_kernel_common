@@ -369068,6 +369068,15 @@ elf_symbol {
   full_name: "putback_movable_pages"
 }
 elf_symbol {
+  id: 0x8dafa617
+  name: "pvclock_gtod_register_notifier"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb4b97c90
+  type_id: 0x9b6d4a33
+  full_name: "pvclock_gtod_register_notifier"
+}
+elf_symbol {
   id: 0x53ee2234
   name: "pwm_apply_state"
   is_defined: true
@@ -392507,6 +392516,7 @@ interface {
   symbol_id: 0x15848de9
   symbol_id: 0xde695e5a
   symbol_id: 0x4e730977
+  symbol_id: 0x8dafa617
   symbol_id: 0x53ee2234
   symbol_id: 0x227e051f
   symbol_id: 0x9a5fd229
