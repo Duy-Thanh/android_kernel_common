@@ -826,3 +826,11 @@ ddk_headers(
     includes = [],
     visibility = ["//visibility:private"],
 )
+
+kernel_build(
+    name = "my-kernel",
+    outs = ["vmlinux"] + ["test.dtb"],
+    build_config = "//common:build.config.gki.aarch64",
+    dtstree = "//mydt:mydt",
+    srcs = glob(["**"]) + ["//mydt:mydt_srcs"],
+)
