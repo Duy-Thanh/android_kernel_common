@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb7157a6_2809e238",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-09-15T16:27:56Z",
+      "side": 1,
+      "message": "Dear gregkh,\n\nFollowing your request, I have modified the patch by removing the symbol \"add_taint\". Could you help to review these patches again? Thank you very much!",
+      "revId": "677fabda1d21cb0b685e3f5edf05d51749325c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
