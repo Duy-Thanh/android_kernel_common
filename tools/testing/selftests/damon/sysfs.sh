@@ -135,6 +135,7 @@ test_scheme()
 	ensure_dir "$scheme_dir" "exist"
 	ensure_file "$scheme_dir/action" "exist" "600"
 	test_access_pattern "$scheme_dir/access_pattern"
+	ensure_file "$scheme_dir/apply_interval_us" "exist" "600"
 	test_quotas "$scheme_dir/quotas"
 	test_watermarks "$scheme_dir/watermarks"
 	test_stats "$scheme_dir/stats"
