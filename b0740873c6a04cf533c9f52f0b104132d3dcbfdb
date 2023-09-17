@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ba4c01_d67a6763",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-09-17T07:57:23Z",
+      "side": 1,
+      "message": "Hi, Andre\n\nIt seems this change causes db845c/rb5 build failed with crash on keystore2 like reported here: https://bugs.linaro.org/show_bug.cgi?id\u003d6011\nas the last build with the commit(3267c13ea902) just before it could boot without this problem.\n\nWe haven\u0027t investigated too much yet, just from this commit, it seems the db845c symbol list needs to be updated, but if you have any suggestions, please let us know.\n\nThanks,\nYongqin Liu",
+      "revId": "b0740873c6a04cf533c9f52f0b104132d3dcbfdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
