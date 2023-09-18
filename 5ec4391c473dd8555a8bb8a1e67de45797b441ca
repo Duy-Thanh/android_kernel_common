@@ -39,6 +39,46 @@
       "message": "Please **attach the following Buganizer ID(s)** to the commit message: 290783303.\nThese IDs were found in the original change with number \u00272709774\u0027 but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 565696072 android-build.ayeaye-python-dispatcher_20230914.00_p1",
       "revId": "5ec4391c473dd8555a8bb8a1e67de45797b441ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053890615",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2752393?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "876d7349_871124a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-18T08:35:52Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 565696072 android-build.ayeaye-python-dispatcher_20230914.00_p1",
+      "revId": "5ec4391c473dd8555a8bb8a1e67de45797b441ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053890615",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2752393?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "01b65d52_4635868e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-18T08:35:52Z",
+      "side": 1,
+      "message": "Please **attach the following Buganizer ID(s)** to the commit message: 290783303.\nThese IDs were found in the original change with number \u00272709774\u0027 but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 565696072 android-build.ayeaye-python-dispatcher_20230914.00_p1",
+      "revId": "5ec4391c473dd8555a8bb8a1e67de45797b441ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
