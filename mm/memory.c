@@ -5406,6 +5406,7 @@ fail:
 }
 #endif
 
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
 #ifdef CONFIG_PER_VMA_LOCK
 /*
  * Lookup and lock a VMA under RCU protection. Returned VMA is guaranteed to be
@@ -5471,6 +5472,8 @@ inval:
 }
 #endif /* CONFIG_PER_VMA_LOCK */
 
+=======
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 #ifndef __PAGETABLE_P4D_FOLDED
 /*
  * Allocate p4d page table.

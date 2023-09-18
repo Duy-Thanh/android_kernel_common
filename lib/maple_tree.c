@@ -4284,6 +4284,21 @@ done:
 	return true;
 }
 
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
+=======
+static inline void mas_wr_end_piv(struct ma_wr_state *wr_mas)
+{
+	while ((wr_mas->offset_end < wr_mas->node_end) &&
+	       (wr_mas->mas->last > wr_mas->pivots[wr_mas->offset_end]))
+		wr_mas->offset_end++;
+
+	if (wr_mas->offset_end < wr_mas->node_end)
+		wr_mas->end_piv = wr_mas->pivots[wr_mas->offset_end];
+	else
+		wr_mas->end_piv = wr_mas->mas->max;
+}
+
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 static inline void mas_wr_extend_null(struct ma_wr_state *wr_mas)
 {
 	struct ma_state *mas = wr_mas->mas;

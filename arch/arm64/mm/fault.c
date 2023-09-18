@@ -577,6 +577,7 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 
 	perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS, 1, regs, addr);
 
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
 #ifdef CONFIG_PER_VMA_LOCK
 	if (!(mm_flags & FAULT_FLAG_USER))
 		goto lock_mmap;
@@ -607,6 +608,8 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 lock_mmap:
 #endif /* CONFIG_PER_VMA_LOCK */
 
+=======
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 retry:
 	vma = lock_mm_and_find_vma(mm, addr, regs);
 	if (unlikely(!vma)) {

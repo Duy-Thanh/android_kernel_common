@@ -1172,6 +1172,7 @@ config LRU_GEN_STATS
 	  This option has a per-memcg and per-node memory overhead.
 # }
 
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
 config ARCH_SUPPORTS_PER_VMA_LOCK
        def_bool n
 
@@ -1184,6 +1185,8 @@ config PER_VMA_LOCK
 	  This feature allows locking each virtual memory area separately when
 	  handling page faults instead of taking mmap_lock.
 
+=======
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 config LOCK_MM_AND_FIND_VMA
 	bool
 	depends on !STACK_GROWSUP

@@ -1349,6 +1349,7 @@ void do_user_addr_fault(struct pt_regs *regs,
 	}
 #endif
 
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
 #ifdef CONFIG_PER_VMA_LOCK
 	if (!(flags & FAULT_FLAG_USER))
 		goto lock_mmap;
@@ -1381,6 +1382,8 @@ void do_user_addr_fault(struct pt_regs *regs,
 lock_mmap:
 #endif /* CONFIG_PER_VMA_LOCK */
 
+=======
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 retry:
 	vma = lock_mm_and_find_vma(mm, address, regs);
 	if (unlikely(!vma)) {

@@ -2529,13 +2529,21 @@ do_mas_align_munmap(struct ma_state *mas, struct vm_area_struct *vma,
 
 			mas_set(mas, end);
 			split = mas_prev(mas, 0);
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
 			vma_start_write(split);
 			mas_set(&mas_detach, count);
+=======
+			mas_set_range(&mas_detach, split->vm_start, split->vm_end - 1);
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 			error = mas_store_gfp(&mas_detach, split, GFP_KERNEL);
 			if (error)
 				goto munmap_gather_failed;
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
 			vma_mark_detached(split, true);
 			if (split->vm_flags & VM_LOCKED)
+=======
+			if (next->vm_flags & VM_LOCKED)
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 				locked_vm += vma_pages(split);
 
 			count++;
@@ -2543,12 +2551,19 @@ do_mas_align_munmap(struct ma_state *mas, struct vm_area_struct *vma,
 				vma = split;
 			break;
 		}
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
 		vma_start_write(next);
 		mas_set(&mas_detach, count);
+=======
+		mas_set_range(&mas_detach, next->vm_start, next->vm_end - 1);
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 		error = mas_store_gfp(&mas_detach, next, GFP_KERNEL);
 		if (error)
 			goto munmap_gather_failed;
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
 		vma_mark_detached(next, true);
+=======
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 		if (next->vm_flags & VM_LOCKED)
 			locked_vm += vma_pages(next);
 
@@ -2604,9 +2619,13 @@ do_mas_align_munmap(struct ma_state *mas, struct vm_area_struct *vma,
 	}
 #endif
 	/* Point of no return */
+<<<<<<< HEAD   (b35a03 UPSTREAM: xtensa: fix NOMMU build with lock_mm_and_find_vma()
 	mas_set_range(mas, start, end - 1);
 	if (mas_store_gfp(mas, NULL, GFP_KERNEL))
 		return -ENOMEM;
+=======
+	mas_store_prealloc(mas, NULL);
+>>>>>>> BRANCH (0f4ac6 Linux 6.1.37)
 
 	mm->locked_vm -= locked_vm;
 	mm->map_count -= count;
