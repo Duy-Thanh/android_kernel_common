@@ -49,6 +49,12 @@ DECLARE_HOOK(android_vh_tune_swappiness,
 DECLARE_HOOK(android_vh_scan_abort_check_wmarks,
 	TP_PROTO(bool *check_wmarks),
 	TP_ARGS(check_wmarks));
+DECLARE_HOOK(android_vh_vmscan_enter,
+	TP_PROTO(int pid),
+	TP_ARGS(pid));
+DECLARE_HOOK(android_vh_vmscan_exit,
+	TP_PROTO(int pid, int reclaim_order),
+	TP_ARGS(pid, reclaim_order));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

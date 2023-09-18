@@ -141,6 +141,16 @@ DECLARE_HOOK(android_vh_look_around,
 		struct vm_area_struct *vma, int *referenced),
 	TP_ARGS(pvmw, folio, vma, referenced));
 
+DECLARE_HOOK(android_vh_mm_enter,
+	TP_PROTO(const char *func_name, int pid),
+	TP_ARGS(func_name, pid));
+DECLARE_HOOK(android_vh_mm_exit,
+	TP_PROTO(const char *func_name, long result, int retry_times, int pid),
+	TP_ARGS(func_name, result, retry_times, pid));
+struct oom_control;
+DECLARE_HOOK(android_vh_mm_oom_exit,
+	TP_PROTO(struct oom_control *oc, unsigned long did_some_progress, int pid),
+	TP_ARGS(oc, did_some_progress, pid));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

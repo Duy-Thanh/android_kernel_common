@@ -67,7 +67,7 @@
 #include <trace/hooks/psi.h>
 #include <trace/hooks/bl_hib.h>
 #include <trace/hooks/regmap.h>
-
+#include <trace/hooks/compaction.h>
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
@@ -329,3 +329,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scan_abort_check_wmarks);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_oom_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compaction_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compaction_exit);
