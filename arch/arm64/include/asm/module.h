@@ -21,11 +21,14 @@ struct pkvm_el2_module {
 	struct pkvm_module_section bss;
 	struct pkvm_module_section rodata;
 	struct pkvm_module_section data;
+	struct pkvm_module_section sections;
 	struct hyp_event *hyp_events;
 	unsigned int nr_hyp_events;
 	struct hyp_event_id *hyp_event_ids;
 	unsigned int nr_hyp_event_ids;
 	kvm_nvhe_reloc_t *relocs;
+	struct list_head node;
+	unsigned long token;
 	unsigned int nr_relocs;
 	int (*init)(const struct pkvm_module_ops *ops);
 };
