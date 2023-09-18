@@ -7782,8 +7782,10 @@ kswapd_try_sleep:
 		 */
 		trace_mm_vmscan_kswapd_wake(pgdat->node_id, highest_zoneidx,
 						alloc_order);
+		trace_android_vh_vmscan_enter(current->pid);
 		reclaim_order = balance_pgdat(pgdat, alloc_order,
 						highest_zoneidx);
+		trace_android_vh_vmscan_exit(current->pid, reclaim_order);
 		if (reclaim_order < alloc_order)
 			goto kswapd_try_sleep;
 	}
