@@ -69,6 +69,24 @@
       "message": "The `--debug` build has to say:\n\n```\nSymbols missing from the ksymtab:\n  mutex_lock\n  mutex_lock_interruptible\n  rt_mutex_lock\n```",
       "revId": "faa6986dea1577a9035197ac27d8429b8f6ad5c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18212c3a_4dbccbfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-09-18T12:01:22Z",
+      "side": 1,
+      "message": "I think b/300686512 is relevant (blocking) here.",
+      "parentUuid": "6a178e0b_ec97efcf",
+      "revId": "faa6986dea1577a9035197ac27d8429b8f6ad5c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
