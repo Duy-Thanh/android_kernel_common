@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000054021691",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2756233?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "622b2513_cc3926a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-19T12:43:07Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 566296150 android-build.ayeaye-python-dispatcher_20230918.04_p0",
+      "revId": "1d6ff14668d8eb7bcfa82b86187d4b83f3bf531f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000054021691",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2756233?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f44f30e0_7bc92d3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-19T12:43:07Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2661683](https://r.android.com/c/2661683) on branch android14-6.1.\n\n```\n      ## android/abi_gki_aarch64_xiaomi ##\n     @@\n    -   __tracepoint_android_vh_rmqueue_smallest_bypass\n    -   __traceiter_android_vh_free_one_page_bypass\n    -   __tracepoint_android_vh_free_one_page_bypass\n    + #required by debug_ext.ko\n    +   of_find_all_nodes\n    + \n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (25685e ANDROID: GKI: update the ABI symbol list)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++# required by mi_mem_center.ko\n    ++  __traceiter_android_vh_rmqueue_smallest_bypass\n    ++  __tracepoint_android_vh_rmqueue_smallest_bypass\n    ++  __traceiter_android_vh_free_one_page_bypass\n    ++  __tracepoint_android_vh_free_one_page_bypass\n     +\n     +# required by SAGT module\n     +  __traceiter_android_rvh_before_do_sched_yield\n     +  __tracepoint_android_rvh_before_do_sched_yield\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (25a119 ANDROID: GKI: add ABI symbol for xiaomi)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 566296150 android-build.ayeaye-python-dispatcher_20230918.04_p0",
+      "revId": "1d6ff14668d8eb7bcfa82b86187d4b83f3bf531f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
