@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "32ec7843_9ed2d699",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-19T15:35:50Z",
+      "side": 1,
+      "message": "Please add much more description of this feature. What is a \"special task\"?\n\nAlso, please use a more descriptive title.",
+      "revId": "863f3ca3a721ee6b7eeccecdbd582102e6bf67bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "23edc92b_6eb64609",
@@ -14,6 +31,29 @@
       "writtenOn": "2023-09-19T11:21:14Z",
       "side": 1,
       "message": "Why can\u0027t the existing hooks be used here instead?",
+      "revId": "863f3ca3a721ee6b7eeccecdbd582102e6bf67bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a272c67a_c5775a1d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4017,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-19T15:35:50Z",
+      "side": 1,
+      "message": "Can\u0027t all of this just be done during `trace_android_vh_binder_special_task()` so this becomes:\n\n```\ntrace_android_vh_binder_special_task(NULL, proc, thread,\n\t\t\t\t\tw, false, \u0026special_task);\nif (!special_task)\n    binder_enqueue_work_ilocked(w, \u0026proc-\u003etodo);\nbinder_wakeup_proc_ilocked(proc);\n```\n\nOr, even better put the `if (special_task)` logic into `binder_enqueue_work_ilocked()` so you can simplify lines 2990 and 3006 too.",
+      "range": {
+        "startLine": 4015,
+        "startChar": 3,
+        "endLine": 4017,
+        "endChar": 7
+      },
       "revId": "863f3ca3a721ee6b7eeccecdbd582102e6bf67bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
