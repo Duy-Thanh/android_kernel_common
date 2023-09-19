@@ -16,6 +16,23 @@
       "message": "Dear Todd,\n\nCould you help my vendor hook patch, add a vendor hook so that we can reimplement function xhci_urb_suitable_for_idt(). Thanks",
       "revId": "04233eb5beaf9da069637deac51ba2bec986ff68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "113ed7a0_be78d7d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-19T17:55:24Z",
+      "side": 1,
+      "message": "See comment on the android13-5.15 version of the patch",
+      "revId": "04233eb5beaf9da069637deac51ba2bec986ff68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
