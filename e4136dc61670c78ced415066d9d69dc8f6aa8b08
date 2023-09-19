@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dda454f_c8a0262d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046220
+      },
+      "writtenOn": "2023-09-19T13:26:54Z",
+      "side": 1,
+      "message": "Dear Todd,\n\nCould you help my vendor hook patch, add a vendor hook so that we can reimplement function xhci_urb_suitable_for_idt(). Thanks",
+      "revId": "e4136dc61670c78ced415066d9d69dc8f6aa8b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
