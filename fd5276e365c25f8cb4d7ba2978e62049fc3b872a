@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "019ee9b5_12f97659",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-19T20:17:04Z",
+      "side": 1,
+      "message": "Please file a bug and describe why this is needed. If these hooks are needed for several features please file separate bugs and split the patch to introduce hooks for each feature separately.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 47
+      },
+      "revId": "fd5276e365c25f8cb4d7ba2978e62049fc3b872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1831c5a_cc5f4a18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-19T20:17:04Z",
+      "side": 1,
+      "message": "Needs a `Bug: \u003cbug number\u003e`",
+      "revId": "fd5276e365c25f8cb4d7ba2978e62049fc3b872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96ba1ce_debecf43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-19T20:17:04Z",
+      "side": 1,
+      "message": "The change in android/abi_gki_aarch64_mtk should be in a separate patch along with updated ABI definition.",
+      "revId": "fd5276e365c25f8cb4d7ba2978e62049fc3b872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "007b2f16_9ae54ad9",
+        "filename": "mm/compaction.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2860,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-19T20:17:04Z",
+      "side": 1,
+      "message": "Why can\u0027t you use the trace_mm_compaction_kcompactd_wake() just above?",
+      "range": {
+        "startLine": 2860,
+        "startChar": 1,
+        "endLine": 2860,
+        "endChar": 34
+      },
+      "revId": "fd5276e365c25f8cb4d7ba2978e62049fc3b872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfe4781d_475b9f4d",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 4592,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-19T20:17:04Z",
+      "side": 1,
+      "message": "there is already trace_mm_compaction_try_to_compact_pages() inside try_to_compact_pages()",
+      "range": {
+        "startLine": 4592,
+        "startChar": 1,
+        "endLine": 4592,
+        "endChar": 26
+      },
+      "revId": "fd5276e365c25f8cb4d7ba2978e62049fc3b872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d4de289_67edb4df",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 7785,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-19T20:17:04Z",
+      "side": 1,
+      "message": "Why do you need the PID if this is run by kswapd (a kernel thread)?\nThere is already trace_mm_vmscan_kswapd_wake() tracepoint here. Why can\u0027t you use it?",
+      "range": {
+        "startLine": 7785,
+        "startChar": 32,
+        "endLine": 7785,
+        "endChar": 44
+      },
+      "revId": "fd5276e365c25f8cb4d7ba2978e62049fc3b872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
