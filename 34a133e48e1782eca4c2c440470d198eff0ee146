@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000054022808",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2756236?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4739bbc2_6091d636",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-19T13:02:18Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 566296150 android-build.ayeaye-python-dispatcher_20230918.04_p0",
+      "revId": "34a133e48e1782eca4c2c440470d198eff0ee146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000054022808",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2756236?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "dd081522_e76b2f1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-19T13:02:18Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2694467](https://r.android.com/c/2694467) on branch android14-6.1.\n\n```\n      ## android/abi_gki_aarch64_xiaomi ##\n     @@\n    - #required by xm_ispv4_pcie.ko\n    -   pci_ioremap_bar\n    -   pci_disable_pcie_error_reporting\n    +   __traceiter_android_rvh_before_do_sched_yield\n    +   __tracepoint_android_rvh_before_do_sched_yield\n    + \n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (eda68f ANDROID: GKI: update xiaomi symbol list)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++#required by minetwork.ko\n    ++  sock_wake_async\n    ++  bpf_map_put\n    ++  bpf_map_inc\n    ++  __dev_direct_xmit\n    ++  napi_busy_loop\n    ++  int_active_memcg\n    ++  bpf_redirect_info\n    ++  dma_need_sync\n    ++  page_pool_put_page_bulk\n    ++  build_skb_around\n    ++\n    ++#required by xm_ispv4_pcie.ko\n    ++  pci_ioremap_bar\n    ++  pci_disable_pcie_error_reporting\n     +\n     +#required by lock_optimization module\n     +  __traceiter_android_vh_record_pcpu_rwsem_time_early\n     +  __tracepoint_android_vh_record_pcpu_rwsem_time_early\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (9ca476 ANDROID: GKI: Update symbol list for xiaomi)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 566296150 android-build.ayeaye-python-dispatcher_20230918.04_p0",
+      "revId": "34a133e48e1782eca4c2c440470d198eff0ee146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
