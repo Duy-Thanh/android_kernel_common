@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e991de4e_2d86dc9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-09-19T17:28:52Z",
+      "side": 1,
+      "message": "Need to follow the instructions here: \n  https://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n  \nAnd file a new respin request. Then attach that bug number to this submission.",
+      "revId": "07ceed4717caf18a45ccf89e63deba46fdc72aa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
