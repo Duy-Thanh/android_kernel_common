@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971561cb_77c07b80",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-19T21:53:18Z",
+      "side": 1,
+      "message": "This function does not exist in 6.1 kernel, right?\nInstead you could squash aosp/2755766 into this patch with a comment that you merged those two patches.",
+      "range": {
+        "startLine": 67,
+        "startChar": 19,
+        "endLine": 67,
+        "endChar": 35
+      },
+      "revId": "6ca05ea2f3077b03e9d9619e5d8efa0e230147cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
