@@ -16,6 +16,24 @@
       "message": "why not submit this upstream first?",
       "revId": "86f6496f8e6999f72c2ed6ea10ab5668bd1bbf50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebe945dc_ea63596d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2025961
+      },
+      "writtenOn": "2023-09-19T02:52:45Z",
+      "side": 1,
+      "message": "I think the driver \"debug_kinfo\" is in google ACK not in upstream, so it is suitable to add documentation in ACK.",
+      "parentUuid": "3bad7543_c5ab9bf5",
+      "revId": "86f6496f8e6999f72c2ed6ea10ab5668bd1bbf50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
