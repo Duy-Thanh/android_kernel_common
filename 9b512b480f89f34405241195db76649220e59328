@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd8ce249_24780061",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-19T16:53:12Z",
+      "side": 1,
+      "message": "This config is required by Android since Android framework uses this functionality, It can\u0027t be disabled without changing Android framework.",
+      "revId": "9b512b480f89f34405241195db76649220e59328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
