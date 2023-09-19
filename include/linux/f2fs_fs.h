@@ -433,8 +433,12 @@ struct f2fs_nat_entry {
 	__le32 block_addr;	/* block address */
 } __packed;
 
+/*
+ * On disk layout is:
+ * struct f2fs_nat_entry entries[NAT_ENTRY_PER_BLOCK];
+ */
 struct f2fs_nat_block {
-	struct f2fs_nat_entry entries[NAT_ENTRY_PER_BLOCK];
+	struct f2fs_nat_entry entries[0];
 } __packed;
 
 /*
@@ -473,8 +477,12 @@ struct f2fs_sit_entry {
 	__le64 mtime;				/* segment age for cleaning */
 } __packed;
 
+/*
+ * On disk layout is:
+ * struct f2fs_sit_entry entries[SIT_ENTRY_PER_BLOCK];
+ */
 struct f2fs_sit_block {
-	struct f2fs_sit_entry entries[SIT_ENTRY_PER_BLOCK];
+	struct f2fs_sit_entry entries[0];
 } __packed;
 
 /*
