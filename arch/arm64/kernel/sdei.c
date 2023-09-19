@@ -39,6 +39,7 @@ DEFINE_PER_CPU(unsigned long *, sdei_stack_normal_ptr);
 DEFINE_PER_CPU(unsigned long *, sdei_stack_critical_ptr);
 #endif
 
+<<<<<<< HEAD   (397f70 Merge 5.10.194 into android12-5.10-lts)
 DECLARE_PER_CPU(unsigned long *, sdei_shadow_call_stack_normal_ptr);
 DECLARE_PER_CPU(unsigned long *, sdei_shadow_call_stack_critical_ptr);
 
@@ -46,6 +47,10 @@ DECLARE_PER_CPU(unsigned long *, sdei_shadow_call_stack_critical_ptr);
 DEFINE_PER_CPU(unsigned long *, sdei_shadow_call_stack_normal_ptr);
 DEFINE_PER_CPU(unsigned long *, sdei_shadow_call_stack_critical_ptr);
 #endif
+=======
+DEFINE_PER_CPU(struct sdei_registered_event *, sdei_active_normal_event);
+DEFINE_PER_CPU(struct sdei_registered_event *, sdei_active_critical_event);
+>>>>>>> BRANCH (5452d1 Linux 5.10.195)
 
 static void _free_sdei_stack(unsigned long * __percpu *ptr, int cpu)
 {

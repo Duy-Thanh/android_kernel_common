@@ -57,6 +57,11 @@ struct inet_skb_parm {
 #define IPSKB_DOREDIRECT	BIT(5)
 #define IPSKB_FRAG_PMTU		BIT(6)
 #define IPSKB_L3SLAVE		BIT(7)
+<<<<<<< HEAD   (397f70 Merge 5.10.194 into android12-5.10-lts)
+=======
+#define IPSKB_NOPOLICY		BIT(8)
+#define IPSKB_MULTIPATH		BIT(9)
+>>>>>>> BRANCH (5452d1 Linux 5.10.195)
 
 	u16			frag_max_size;
 };
