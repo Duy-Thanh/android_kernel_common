@@ -1160,18 +1160,18 @@ int f2fs_truncate_inode_blocks(struct inode *inode, pgoff_t from)
 skip_partial:
 	while (cont) {
 		dn.nid = le32_to_cpu(F2FS_INODE_I_NID(ri, offset[0] - NODE_DIR1_BLOCK));
-		switch (offset[0]) {
-		case NODE_DIR1_BLOCK:
-		case NODE_DIR2_BLOCK:
+		switch (offset[0] - DEF_ADDRS_PER_INODE) {
+		case NODE_DIR1_OFFSET:
+		case NODE_DIR2_OFFSET:
 			err = truncate_dnode(&dn);
 			break;
 
-		case NODE_IND1_BLOCK:
-		case NODE_IND2_BLOCK:
+		case NODE_IND1_OFFSET:
+		case NODE_IND2_OFFSET:
 			err = truncate_nodes(&dn, nofs, offset[1], 2);
 			break;
 
-		case NODE_DIND_BLOCK:
+		case NODE_DIND_OFFSET:
 			err = truncate_nodes(&dn, nofs, offset[1], 3);
 			cont = 0;
 			break;
