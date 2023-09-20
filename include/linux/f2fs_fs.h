@@ -219,10 +219,10 @@ struct f2fs_checkpoint {
 /*
  * For orphan inode management
  */
-#define F2FS_ORPHANS_PER_BLOCK	((F2FS_BLKSIZE - 4 * sizeof(__le32)) / sizeof(__le32))
+#define F2FS_ORPHANS_PER_BLOCK(sbi)	((F2FS_BLKSIZE - 4 * sizeof(__le32)) / sizeof(__le32))
 
-#define GET_ORPHAN_BLOCKS(n)	(((n) + F2FS_ORPHANS_PER_BLOCK - 1) / \
-					F2FS_ORPHANS_PER_BLOCK)
+#define GET_ORPHAN_BLOCKS(sbi, n)	(((n) + F2FS_ORPHANS_PER_BLOCK(sbi) - 1) / \
+					F2FS_ORPHANS_PER_BLOCK(sbi))
 
 /*
  * On disk layout is:
@@ -234,7 +234,7 @@ struct f2fs_checkpoint {
 struct f2fs_orphan_block {
 	__le32 ino[0];	/* F2FS_ORPHANS_PER_BLOCK inode numbers */
 };
-#define F2FS_ORPHAN_BLOCK_FOOTER(blk) ((struct orphan_block_footer *)&(blk)->ino[F2FS_ORPHANS_PER_BLOCK])
+#define F2FS_ORPHAN_BLOCK_FOOTER(sbi, blk) ((struct orphan_block_footer *)&(blk)->ino[F2FS_ORPHANS_PER_BLOCK(sbi)])
 
 struct orphan_block_footer {
 	__le32 reserved;	/* reserved */
