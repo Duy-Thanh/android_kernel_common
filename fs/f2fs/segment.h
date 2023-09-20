@@ -119,8 +119,8 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
 #define GET_SUM_BLOCK(sbi, segno)				\
 	((sbi)->sm_info->ssa_blkaddr + (segno))
 
-#define GET_SUM_TYPE(footer) ((footer)->entry_type)
-#define SET_SUM_TYPE(footer, type) ((footer)->entry_type = (type))
+#define GET_SUM_TYPE(sum_blk) (F2FS_SUMMARY_BLOCK_FOOTER((sum_blk))->entry_type)
+#define SET_SUM_TYPE(sum_blk, type) (F2FS_SUMMARY_BLOCK_FOOTER((sum_blk))->entry_type = (type))
 
 #define SIT_ENTRY_OFFSET(sit_i, segno)					\
 	((segno) % (sit_i)->sents_per_block)

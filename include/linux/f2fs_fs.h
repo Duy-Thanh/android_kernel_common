@@ -556,9 +556,13 @@ struct nat_journal_entry {
 	struct f2fs_nat_entry ne;
 } __packed;
 
+/*
+ * Layout is as follows:
+ * struct nat_journal_entry entries[NAT_JOURNAL_ENTRIES];
+ * __u8 reserved[NAT_JOURNAL_RESERVED];
+ */
 struct nat_journal {
-	struct nat_journal_entry entries[NAT_JOURNAL_ENTRIES];
-	__u8 reserved[NAT_JOURNAL_RESERVED];
+	struct nat_journal_entry entries[0];
 } __packed;
 
 struct sit_journal_entry {
@@ -566,16 +570,28 @@ struct sit_journal_entry {
 	struct f2fs_sit_entry se;
 } __packed;
 
+/*
+ * Layout is as follows:
+ * struct sit_journal_entry entries[SIT_JOURNAL_ENTRIES];
+ * __u8 reserved[SIT_JOURNAL_RESERVED];
+ */
 struct sit_journal {
-	struct sit_journal_entry entries[SIT_JOURNAL_ENTRIES];
-	__u8 reserved[SIT_JOURNAL_RESERVED];
+	struct sit_journal_entry entries[0];
 } __packed;
 
+/*
+ * Layout is as follows:
+ * __le64 kbytes_written;
+ * __u8 reserved[EXTRA_INFO_RESERVED];
+ */
 struct f2fs_extra_info {
 	__le64 kbytes_written;
-	__u8 reserved[EXTRA_INFO_RESERVED];
+	__u8 reserved[0];
 } __packed;
 
+/*
+ * This struct's used size depends on F2FS_BLKSIZE. DO NOT use sizeof
+ */
 struct f2fs_journal {
 	union {
 		__le16 n_nats;
@@ -589,12 +605,30 @@ struct f2fs_journal {
 	};
 } __packed;
 
-/* Block-sized summary block structure */
+/*
+ * Block-sized summary block structure
+ * Layout of f2fs_summary block is
+ * struct f2fs_summary entries[ENTRIES_IN_SUM];
+ * struct f2fs_journal journal;
+ * struct summary_footer footer;
+ *
+ * Do NOT use sizeof, use F2FS_BLKSIZE
+ *
+ */
 struct f2fs_summary_block {
-	struct f2fs_summary entries[ENTRIES_IN_SUM];
-	struct f2fs_journal journal;
-	struct summary_footer footer;
+	DECLARE_FLEX_ARRAY(struct f2fs_summary, entries);
 } __packed;
+
+static inline struct f2fs_journal *F2FS_SUMMARY_BLOCK_JOURNAL(struct f2fs_summary_block *blk)
+{
+	return ((struct f2fs_journal *)(&(blk)->entries[ENTRIES_IN_SUM]));
+}
+
+static inline struct summary_footer *F2FS_SUMMARY_BLOCK_FOOTER(struct f2fs_summary_block *blk)
+{
+	return ((struct summary_footer *)&((char *)\
+			(&(blk)->entries[0]))[F2FS_BLKSIZE - SUM_FOOTER_SIZE]);
+}
 
 /*
  * For directory operations
