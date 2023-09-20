@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ebfb02_fb8928f3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2992,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T17:15:24Z",
+      "side": 1,
+      "message": "for all of these changes, \"special_task\" is gating whether the work is enqueued, so lets change the name of the hook to reflect this more generic use. Please change to the below (everywhere in this file):\n```\nbool enqueue_task \u003d true;\n...\ntrace_android_vh_binder_check_enqueue(t, proc, thread,\n\t\t\t\u0026t-\u003ework, \u0026proc-\u003etodo, !oneway, \u0026enqueue_task);\n\t\tif (enqueue_task)\n\t\t\tbinder_enqueue_work_ilocked(\u0026t-\u003ework, \u0026proc-\u003etodo);\n...\n```",
+      "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f764ec6e_25830998",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3485,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T17:15:24Z",
+      "side": 1,
+      "message": "what fields are you using out of \"tr\"? Can they be passed individually instead of adding this type to the KMI?\n\nI presume this is allocating some OEM memory to the transaction. Should it be called `trace_android_vh_alloc_oem_binder_struct()` to be symmetric with `trace_android_vh_free_oem_binder_struct()` at line 1764?",
+      "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09aa34eb_211aa1b8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3992,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T17:15:24Z",
+      "side": 1,
+      "message": "what is this for? Please add description to commit message",
+      "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64d890b5_75a59ea5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4957,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T17:15:24Z",
+      "side": 1,
+      "message": "Is this just for logging/tracing? Please mention purpose for this in the commit message.",
+      "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
