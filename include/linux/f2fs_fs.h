@@ -17,7 +17,11 @@
 #define F2FS_MIN_LOG_BLKSIZE		12
 #define F2FS_MAX_LOG_BLKSIZE		14
 #define F2FS_LOG_SECTORS_PER_BLOCK	(PAGE_SHIFT - 9) /* log number for sector/blk */
-#define F2FS_BLKSIZE			PAGE_SIZE /* support only block == page */
+#define F2FS_BLKSIZE			PAGE_SIZE//f2fs_blksize_func() /* support only block == page */
+static inline unsigned long f2fs_blksize_func(void) {
+	return PAGE_SIZE;
+}
+#define F2FS_BLKSIZE2(sbi)		((sbi)->blocksize)
 #define F2FS_BLKSIZE_BITS		PAGE_SHIFT /* bits for F2FS_BLKSIZE */
 #define F2FS_MAX_EXTENSION		64	/* # of extension entries */
 #define F2FS_EXTENSION_LEN		8	/* max size of extension */
@@ -509,6 +513,7 @@ struct f2fs_sit_block {
  * ex) data_blkaddr = (block_t)(nodepage_start_address + ofs_in_node)
  */
 #define ENTRIES_IN_SUM		(F2FS_BLKSIZE / 8)
+#define ENTRIES_IN_SUM2(sbi)	(F2FS_BLKSIZE2(sbi) / 8)
 #define	SUMMARY_SIZE		(7)	/* sizeof(struct summary) */
 #define	SUM_FOOTER_SIZE		(5)	/* sizeof(struct summary_footer) */
 #define SUM_ENTRY_SIZE		(SUMMARY_SIZE * ENTRIES_IN_SUM)
@@ -629,13 +634,13 @@ struct f2fs_summary_block {
 
 static inline struct f2fs_journal *F2FS_SUMMARY_BLOCK_JOURNAL(struct f2fs_sb_info *sbi, struct f2fs_summary_block *blk)
 {
-	return ((struct f2fs_journal *)(&(blk)->entries[ENTRIES_IN_SUM]));
+	return ((struct f2fs_journal *)(&(blk)->entries[ENTRIES_IN_SUM2(sbi)]));
 }
 
 static inline struct summary_footer *F2FS_SUMMARY_BLOCK_FOOTER(struct f2fs_sb_info *sbi, struct f2fs_summary_block *blk)
 {
 	return ((struct summary_footer *)&((char *)\
-			(&(blk)->entries[0]))[F2FS_BLKSIZE - SUM_FOOTER_SIZE]);
+			(&(blk)->entries[0]))[F2FS_BLKSIZE2(sbi) - SUM_FOOTER_SIZE]);
 }
 
 /*
