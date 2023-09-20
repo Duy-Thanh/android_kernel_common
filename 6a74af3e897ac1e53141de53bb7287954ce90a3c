@@ -70,6 +70,24 @@
       "parentUuid": "c8b7cf13_1cadaf9c",
       "revId": "6a74af3e897ac1e53141de53bb7287954ce90a3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b98c4fd_36ca96fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-20T08:33:07Z",
+      "side": 1,
+      "message": "The KMI on this branch is frozen. Any change to the branch needs to be done in a compatible way. By the looks of the effect of the proposed config option changes, this might be quite some effort. Have you considered a more recent kernel version (where KMI is not yet frozen)?",
+      "parentUuid": "4a602faa_d807c837",
+      "revId": "6a74af3e897ac1e53141de53bb7287954ce90a3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
