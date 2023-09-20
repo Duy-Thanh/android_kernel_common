@@ -2589,11 +2589,11 @@ static void write_current_sum_page(struct f2fs_sb_info *sbi,
 	mutex_lock(&curseg->curseg_mutex);
 
 	down_read(&curseg->journal_rwsem);
-	memcpy(F2FS_SUMMARY_BLOCK_JOURNAL(dst), curseg->journal, SUM_JOURNAL_SIZE);
+	memcpy(F2FS_SUMMARY_BLOCK_JOURNAL(sbi, dst), curseg->journal, SUM_JOURNAL_SIZE);
 	up_read(&curseg->journal_rwsem);
 
 	memcpy(dst->entries, src->entries, SUM_ENTRY_SIZE);
-	memcpy(F2FS_SUMMARY_BLOCK_FOOTER(dst), F2FS_SUMMARY_BLOCK_FOOTER(src), SUM_FOOTER_SIZE);
+	memcpy(F2FS_SUMMARY_BLOCK_FOOTER(sbi, dst), F2FS_SUMMARY_BLOCK_FOOTER(sbi, src), SUM_FOOTER_SIZE);
 
 	mutex_unlock(&curseg->curseg_mutex);
 
@@ -2715,7 +2715,7 @@ static void reset_curseg(struct f2fs_sb_info *sbi, int type, int modified)
 	curseg->next_blkoff = 0;
 	curseg->next_segno = NULL_SEGNO;
 
-	sum_footer = F2FS_SUMMARY_BLOCK_FOOTER(curseg->sum_blk);
+	sum_footer = F2FS_SUMMARY_BLOCK_FOOTER(sbi, curseg->sum_blk);
 	memset(sum_footer, 0, sizeof(struct summary_footer));
 
 	sanity_check_seg_type(sbi, seg_type);
@@ -3954,11 +3954,11 @@ static int read_normal_summaries(struct f2fs_sb_info *sbi, int type)
 
 	/* update journal info */
 	down_write(&curseg->journal_rwsem);
-	memcpy(curseg->journal, F2FS_SUMMARY_BLOCK_JOURNAL(sum), SUM_JOURNAL_SIZE);
+	memcpy(curseg->journal, F2FS_SUMMARY_BLOCK_JOURNAL(sbi, sum), SUM_JOURNAL_SIZE);
 	up_write(&curseg->journal_rwsem);
 
 	memcpy(curseg->sum_blk->entries, sum->entries, SUM_ENTRY_SIZE);
-	memcpy(F2FS_SUMMARY_BLOCK_FOOTER(curseg->sum_blk), F2FS_SUMMARY_BLOCK_FOOTER(sum), SUM_FOOTER_SIZE);
+	memcpy(F2FS_SUMMARY_BLOCK_FOOTER(sbi, curseg->sum_blk), F2FS_SUMMARY_BLOCK_FOOTER(sbi, sum), SUM_FOOTER_SIZE);
 	curseg->next_segno = segno;
 	reset_curseg(sbi, type, 0);
 	curseg->alloc_type = ckpt->alloc_type[type];

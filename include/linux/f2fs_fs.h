@@ -627,12 +627,12 @@ struct f2fs_summary_block {
 	DECLARE_FLEX_ARRAY(struct f2fs_summary, entries);
 } __packed;
 
-static inline struct f2fs_journal *F2FS_SUMMARY_BLOCK_JOURNAL(struct f2fs_summary_block *blk)
+static inline struct f2fs_journal *F2FS_SUMMARY_BLOCK_JOURNAL(struct f2fs_sb_info *sbi, struct f2fs_summary_block *blk)
 {
 	return ((struct f2fs_journal *)(&(blk)->entries[ENTRIES_IN_SUM]));
 }
 
-static inline struct summary_footer *F2FS_SUMMARY_BLOCK_FOOTER(struct f2fs_summary_block *blk)
+static inline struct summary_footer *F2FS_SUMMARY_BLOCK_FOOTER(struct f2fs_sb_info *sbi, struct f2fs_summary_block *blk)
 {
 	return ((struct summary_footer *)&((char *)\
 			(&(blk)->entries[0]))[F2FS_BLKSIZE - SUM_FOOTER_SIZE]);
