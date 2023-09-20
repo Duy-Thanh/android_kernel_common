@@ -750,7 +750,7 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
 		}
 
 		orphan_blk = (struct f2fs_orphan_block *)page_address(page);
-		for (j = 0; j < le32_to_cpu(orphan_blk->entry_count); j++) {
+		for (j = 0; j < le32_to_cpu(F2FS_ORPHAN_BLOCK_FOOTER(orphan_blk)->entry_count); j++) {
 			nid_t ino = le32_to_cpu(orphan_blk->ino[j]);
 
 			err = recover_orphan_inode(sbi, ino);
@@ -795,7 +795,7 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 			page = f2fs_grab_meta_page(sbi, start_blk++);
 			orphan_blk =
 				(struct f2fs_orphan_block *)page_address(page);
-			memset(orphan_blk, 0, sizeof(*orphan_blk));
+			memset(orphan_blk, 0, F2FS_BLKSIZE);
 		}
 
 		orphan_blk->ino[nentries++] = cpu_to_le32(orphan->ino);
@@ -806,9 +806,9 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 			 * then we need to flush current orphan blocks
 			 * and bring another one in memory
 			 */
-			orphan_blk->blk_addr = cpu_to_le16(index);
-			orphan_blk->blk_count = cpu_to_le16(orphan_blocks);
-			orphan_blk->entry_count = cpu_to_le32(nentries);
+			F2FS_ORPHAN_BLOCK_FOOTER(orphan_blk)->blk_addr = cpu_to_le16(index);
+			F2FS_ORPHAN_BLOCK_FOOTER(orphan_blk)->blk_count = cpu_to_le16(orphan_blocks);
+			F2FS_ORPHAN_BLOCK_FOOTER(orphan_blk)->entry_count = cpu_to_le32(nentries);
 			set_page_dirty(page);
 			f2fs_put_page(page, 1);
 			index++;
@@ -818,9 +818,9 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 	}
 
 	if (page) {
-		orphan_blk->blk_addr = cpu_to_le16(index);
-		orphan_blk->blk_count = cpu_to_le16(orphan_blocks);
-		orphan_blk->entry_count = cpu_to_le32(nentries);
+		F2FS_ORPHAN_BLOCK_FOOTER(orphan_blk)->blk_addr = cpu_to_le16(index);
+		F2FS_ORPHAN_BLOCK_FOOTER(orphan_blk)->blk_count = cpu_to_le16(orphan_blocks);
+		F2FS_ORPHAN_BLOCK_FOOTER(orphan_blk)->entry_count = cpu_to_le32(nentries);
 		set_page_dirty(page);
 		f2fs_put_page(page, 1);
 	}

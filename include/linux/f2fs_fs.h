@@ -222,14 +222,25 @@ struct f2fs_checkpoint {
 #define GET_ORPHAN_BLOCKS(n)	(((n) + F2FS_ORPHANS_PER_BLOCK - 1) / \
 					F2FS_ORPHANS_PER_BLOCK)
 
+/*
+ * On disk layout is:
+ * __le32 ino[F2FS_ORPHANS_PER_BLOCK];
+ * struct f2fs_ophan_block_footer
+ *
+ * Do NOT use sizeof, use F2FS_BLKSIZE instead
+ */
 struct f2fs_orphan_block {
-	__le32 ino[F2FS_ORPHANS_PER_BLOCK];	/* inode numbers */
+	__le32 ino[0];	/* F2FS_ORPHANS_PER_BLOCK inode numbers */
+};
+#define F2FS_ORPHAN_BLOCK_FOOTER(blk) ((struct orphan_block_footer *)&(blk)->ino[F2FS_ORPHANS_PER_BLOCK])
+
+struct orphan_block_footer {
 	__le32 reserved;	/* reserved */
 	__le16 blk_addr;	/* block index in current CP */
 	__le16 blk_count;	/* Number of orphan inode blocks in CP */
 	__le32 entry_count;	/* Total number of orphan nodes in current CP */
 	__le32 check_sum;	/* CRC32 for orphan inode block */
-} __packed;
+}__packed;
 
 /*
  * For NODE structure
