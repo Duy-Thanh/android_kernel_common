@@ -16,6 +16,24 @@
       "message": "Please add\n\nBug: 300979279\n\nto the commit message and resolve the merge conflict. For now you can remove the .xml file update. We can add this back later.",
       "revId": "d2948d19a499d21488b1d60dea7fe0cdbb7bb16a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1837b3dd_c4becfb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2044103
+      },
+      "writtenOn": "2023-09-20T02:12:16Z",
+      "side": 1,
+      "message": "I update the latest patch to update the xml file conflict now",
+      "parentUuid": "2eefaf63_60b7a1eb",
+      "revId": "d2948d19a499d21488b1d60dea7fe0cdbb7bb16a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
