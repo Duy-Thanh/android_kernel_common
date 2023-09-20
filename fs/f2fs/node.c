@@ -1048,7 +1048,7 @@ static int truncate_partial_nodes(struct dnode_of_data *dn,
 	int i;
 	int idx = depth - 2;
 
-	nid[0] = le32_to_cpu(F2FS_INODE_I_NID(ri, offset[0] - NODE_DIR1_BLOCK));
+	nid[0] = le32_to_cpu(F2FS_INODE_I_NID(sbi, ri, offset[0] - NODE_DIR1_BLOCK));
 	if (!nid[0])
 		return 0;
 
@@ -1159,7 +1159,7 @@ int f2fs_truncate_inode_blocks(struct inode *inode, pgoff_t from)
 
 skip_partial:
 	while (cont) {
-		dn.nid = le32_to_cpu(F2FS_INODE_I_NID(ri, offset[0] - NODE_DIR1_BLOCK));
+		dn.nid = le32_to_cpu(F2FS_INODE_I_NID(sbi, ri, offset[0] - NODE_DIR1_BLOCK));
 		switch (offset[0] - DEF_ADDRS_PER_INODE) {
 		case NODE_DIR1_OFFSET:
 		case NODE_DIR2_OFFSET:
@@ -1182,11 +1182,11 @@ skip_partial:
 		if (err < 0 && err != -ENOENT)
 			goto fail;
 		if (offset[1] == 0 &&
-				F2FS_INODE_I_NID(ri, offset[0] - NODE_DIR1_BLOCK)) {
+				F2FS_INODE_I_NID(sbi, ri, offset[0] - NODE_DIR1_BLOCK)) {
 			lock_page(page);
 			BUG_ON(page->mapping != NODE_MAPPING(sbi));
 			f2fs_wait_on_page_writeback(page, NODE, true, true);
-			F2FS_INODE_I_NID(ri, offset[0] - NODE_DIR1_BLOCK) = 0;
+			F2FS_INODE_I_NID(sbi, ri, offset[0] - NODE_DIR1_BLOCK) = 0;
 			set_page_dirty(page);
 			unlock_page(page);
 		}
@@ -2848,7 +2848,7 @@ int f2fs_restore_node_summary(struct f2fs_sb_info *sbi,
 				return PTR_ERR(page);
 
 			rn = F2FS_NODE(page);
-			sum_entry->nid = F2FS_NODE_FOOTER(rn)->nid;
+			sum_entry->nid = F2FS_NODE_FOOTER(sbi, rn)->nid;
 			sum_entry->version = 0;
 			sum_entry->ofs_in_node = 0;
 			sum_entry++;

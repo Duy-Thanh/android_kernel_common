@@ -241,64 +241,72 @@ static inline void set_to_next_nat(struct f2fs_nm_info *nm_i, nid_t start_nid)
 
 static inline nid_t ino_of_node(struct page *node_page)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(node_page);
 	struct f2fs_node *rn = F2FS_NODE(node_page);
-	return le32_to_cpu(F2FS_NODE_FOOTER(rn)->ino);
+	return le32_to_cpu(F2FS_NODE_FOOTER(sbi, rn)->ino);
 }
 
 static inline nid_t nid_of_node(struct page *node_page)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(node_page);
 	struct f2fs_node *rn = F2FS_NODE(node_page);
-	return le32_to_cpu(F2FS_NODE_FOOTER(rn)->nid);
+	return le32_to_cpu(F2FS_NODE_FOOTER(sbi, rn)->nid);
 }
 
 static inline unsigned int ofs_of_node(struct page *node_page)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(node_page);
 	struct f2fs_node *rn = F2FS_NODE(node_page);
-	unsigned flag = le32_to_cpu(F2FS_NODE_FOOTER(rn)->flag);
+	unsigned flag = le32_to_cpu(F2FS_NODE_FOOTER(sbi, rn)->flag);
 	return flag >> OFFSET_BIT_SHIFT;
 }
 
 static inline __u64 cpver_of_node(struct page *node_page)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(node_page);
 	struct f2fs_node *rn = F2FS_NODE(node_page);
-	return le64_to_cpu(F2FS_NODE_FOOTER(rn)->cp_ver);
+	return le64_to_cpu(F2FS_NODE_FOOTER(sbi, rn)->cp_ver);
 }
 
 static inline block_t next_blkaddr_of_node(struct page *node_page)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(node_page);
 	struct f2fs_node *rn = F2FS_NODE(node_page);
-	return le32_to_cpu(F2FS_NODE_FOOTER(rn)->next_blkaddr);
+	return le32_to_cpu(F2FS_NODE_FOOTER(sbi, rn)->next_blkaddr);
 }
 
 static inline void fill_node_footer(struct page *page, nid_t nid,
 				nid_t ino, unsigned int ofs, bool reset)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(page);
 	struct f2fs_node *rn = F2FS_NODE(page);
 	unsigned int old_flag = 0;
 
 	if (reset)
 		memset(rn, 0, sizeof(*rn));
 	else
-		old_flag = le32_to_cpu(F2FS_NODE_FOOTER(rn)->flag);
+		old_flag = le32_to_cpu(F2FS_NODE_FOOTER(sbi, rn)->flag);
 
-	F2FS_NODE_FOOTER(rn)->nid = cpu_to_le32(nid);
-	F2FS_NODE_FOOTER(rn)->ino = cpu_to_le32(ino);
+	F2FS_NODE_FOOTER(sbi, rn)->nid = cpu_to_le32(nid);
+	F2FS_NODE_FOOTER(sbi, rn)->ino = cpu_to_le32(ino);
 
 	/* should remain old flag bits such as COLD_BIT_SHIFT */
-	F2FS_NODE_FOOTER(rn)->flag = cpu_to_le32((ofs << OFFSET_BIT_SHIFT) |
+	F2FS_NODE_FOOTER(sbi, rn)->flag = cpu_to_le32((ofs << OFFSET_BIT_SHIFT) |
 					(old_flag & OFFSET_BIT_MASK));
 }
 
 static inline void copy_node_footer(struct page *dst, struct page *src)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(src);
 	struct f2fs_node *src_rn = F2FS_NODE(src);
 	struct f2fs_node *dst_rn = F2FS_NODE(dst);
 
-	memcpy(F2FS_NODE_FOOTER(dst_rn), F2FS_NODE_FOOTER(src_rn), sizeof(struct node_footer));
+	memcpy(F2FS_NODE_FOOTER(sbi, dst_rn), F2FS_NODE_FOOTER(sbi,src_rn), sizeof(struct node_footer));
 }
 
 static inline void fill_node_footer_blkaddr(struct page *page, block_t blkaddr)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(page);
 	struct f2fs_checkpoint *ckpt = F2FS_CKPT(F2FS_P_SB(page));
 	struct f2fs_node *rn = F2FS_NODE(page);
 	__u64 cp_ver = cur_cp_version(ckpt);
@@ -306,8 +314,8 @@ static inline void fill_node_footer_blkaddr(struct page *page, block_t blkaddr)
 	if (__is_set_ckpt_flags(ckpt, CP_CRC_RECOVERY_FLAG))
 		cp_ver |= (cur_cp_crc(ckpt) << 32);
 
-	F2FS_NODE_FOOTER(rn)->cp_ver = cpu_to_le64(cp_ver);
-	F2FS_NODE_FOOTER(rn)->next_blkaddr = cpu_to_le32(blkaddr);
+	F2FS_NODE_FOOTER(sbi, rn)->cp_ver = cpu_to_le64(cp_ver);
+	F2FS_NODE_FOOTER(sbi, rn)->next_blkaddr = cpu_to_le32(blkaddr);
 }
 
 static inline bool is_recoverable_dnode(struct page *page)
@@ -366,12 +374,13 @@ static inline bool IS_DNODE(struct page *node_page)
 
 static inline int set_nid(struct page *p, int off, nid_t nid, bool i)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(p);
 	struct f2fs_node *rn = F2FS_NODE(p);
 
 	f2fs_wait_on_page_writeback(p, NODE, true, true);
 
 	if (i)
-		F2FS_INODE_I_NID(&rn->i, off - NODE_DIR1_BLOCK) = cpu_to_le32(nid);
+		F2FS_INODE_I_NID(sbi, &rn->i, off - NODE_DIR1_BLOCK) = cpu_to_le32(nid);
 	else
 		rn->in.nid[off] = cpu_to_le32(nid);
 	return set_page_dirty(p);
@@ -379,10 +388,11 @@ static inline int set_nid(struct page *p, int off, nid_t nid, bool i)
 
 static inline nid_t get_nid(struct page *p, int off, bool i)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(p);
 	struct f2fs_node *rn = F2FS_NODE(p);
 
 	if (i)
-		return le32_to_cpu(F2FS_INODE_I_NID(&rn->i, off - NODE_DIR1_BLOCK));
+		return le32_to_cpu(F2FS_INODE_I_NID(sbi, &rn->i, off - NODE_DIR1_BLOCK));
 	return le32_to_cpu(rn->in.nid[off]);
 }
 
@@ -395,8 +405,9 @@ static inline nid_t get_nid(struct page *p, int off, bool i)
 
 static inline int is_node(struct page *page, int type)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(page);
 	struct f2fs_node *rn = F2FS_NODE(page);
-	return le32_to_cpu(F2FS_NODE_FOOTER(rn)->flag) & BIT(type);
+	return le32_to_cpu(F2FS_NODE_FOOTER(sbi, rn)->flag) & BIT(type);
 }
 
 #define is_cold_node(page)	is_node(page, COLD_BIT_SHIFT)
@@ -405,25 +416,27 @@ static inline int is_node(struct page *page, int type)
 
 static inline void set_cold_node(struct page *page, bool is_dir)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(page);
 	struct f2fs_node *rn = F2FS_NODE(page);
-	unsigned int flag = le32_to_cpu(F2FS_NODE_FOOTER(rn)->flag);
+	unsigned int flag = le32_to_cpu(F2FS_NODE_FOOTER(sbi, rn)->flag);
 
 	if (is_dir)
 		flag &= ~BIT(COLD_BIT_SHIFT);
 	else
 		flag |= BIT(COLD_BIT_SHIFT);
-	F2FS_NODE_FOOTER(rn)->flag = cpu_to_le32(flag);
+	F2FS_NODE_FOOTER(sbi, rn)->flag = cpu_to_le32(flag);
 }
 
 static inline void set_mark(struct page *page, int mark, int type)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(page);
 	struct f2fs_node *rn = F2FS_NODE(page);
-	unsigned int flag = le32_to_cpu(F2FS_NODE_FOOTER(rn)->flag);
+	unsigned int flag = le32_to_cpu(F2FS_NODE_FOOTER(sbi, rn)->flag);
 	if (mark)
 		flag |= BIT(type);
 	else
 		flag &= ~BIT(type);
-	F2FS_NODE_FOOTER(rn)->flag = cpu_to_le32(flag);
+	F2FS_NODE_FOOTER(sbi, rn)->flag = cpu_to_le32(flag);
 
 #ifdef CONFIG_F2FS_CHECK_FS
 	f2fs_inode_chksum_set(F2FS_P_SB(page), page);

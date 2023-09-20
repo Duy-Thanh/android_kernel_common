@@ -2839,13 +2839,14 @@ static inline void f2fs_radix_tree_insert(struct radix_tree_root *root,
 		cond_resched();
 }
 
-#define RAW_IS_INODE(p)	(F2FS_NODE_FOOTER((p))->nid == F2FS_NODE_FOOTER((p))->ino)
+#define RAW_IS_INODE(sbi, p)	(F2FS_NODE_FOOTER(sbi,(p))->nid == F2FS_NODE_FOOTER(sbi, (p))->ino)
 
 static inline bool IS_INODE(struct page *page)
 {
 	struct f2fs_node *p = F2FS_NODE(page);
+	struct f2fs_sb_info *sbi = F2FS_P_SB(page);
 
-	return RAW_IS_INODE(p);
+	return RAW_IS_INODE(sbi, p);
 }
 
 static inline int offset_in_addr(struct f2fs_inode *i)
@@ -2854,15 +2855,16 @@ static inline int offset_in_addr(struct f2fs_inode *i)
 			(le16_to_cpu(i->i_extra_isize) / sizeof(__le32)) : 0;
 }
 
-static inline __le32 *blkaddr_in_node(struct f2fs_node *node)
+static inline __le32 *blkaddr_in_node(struct f2fs_sb_info *sbi, struct f2fs_node *node)
 {
-	return RAW_IS_INODE(node) ? node->i.i_addr : node->dn.addr;
+	return RAW_IS_INODE(sbi, node) ? node->i.i_addr : node->dn.addr;
 }
 
 static inline int f2fs_has_extra_attr(struct inode *inode);
 static inline block_t data_blkaddr(struct inode *inode,
 			struct page *node_page, unsigned int offset)
 {
+	struct f2fs_sb_info *sbi = F2FS_P_SB(node_page);
 	struct f2fs_node *raw_node;
 	__le32 *addr_array;
 	int base = 0;
@@ -2878,7 +2880,7 @@ static inline block_t data_blkaddr(struct inode *inode,
 			base = get_extra_isize(inode);
 	}
 
-	addr_array = blkaddr_in_node(raw_node);
+	addr_array = blkaddr_in_node(sbi, raw_node);
 	return le32_to_cpu(addr_array[base + offset]);
 }
 

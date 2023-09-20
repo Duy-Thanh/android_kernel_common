@@ -566,7 +566,7 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
 		base = get_extra_isize(dn->inode);
 
 	raw_node = F2FS_NODE(dn->node_page);
-	addr = blkaddr_in_node(raw_node) + base + ofs;
+	addr = blkaddr_in_node(sbi, raw_node) + base + ofs;
 
 	/* Assumption: truncation starts with cluster */
 	for (; count > 0; count--, addr++, dn->ofs_in_node++, cluster_index++) {

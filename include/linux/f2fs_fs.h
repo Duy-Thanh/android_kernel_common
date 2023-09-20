@@ -372,8 +372,8 @@ struct f2fs_inode_nids {
 						double_indirect(1) node id */
 } __packed;
 
-#define F2FS_INODE_NIDS(inode) ((struct f2fs_inode_nids *)(&(inode)->i_addr[DEF_ADDRS_PER_INODE]))
-#define F2FS_INODE_I_NID(inode, i) (F2FS_INODE_NIDS((inode))->i_nid[(i)])
+#define F2FS_INODE_NIDS(sbi, inode) ((struct f2fs_inode_nids *)(&(inode)->i_addr[DEF_ADDRS_PER_INODE]))
+#define F2FS_INODE_I_NID(sbi, inode, i) (F2FS_INODE_NIDS(sbi, (inode))->i_nid[(i)])
 
 /*
  * On disk layout is:
