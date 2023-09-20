@@ -684,14 +684,29 @@ struct f2fs_dir_entry {
 	__u8 file_type;		/* file type */
 } __packed;
 
-/* Block-sized directory entry block */
+/*
+ * Block-sized directory entry block
+ * On disk structure:
+ * struct f2fs_dentry_block;
+ * __u8 reserved[SIZE_OF_RESERVED];
+ * struct f2fs_dir_entry dentry[NR_DENTRY_IN_BLOCK];
+ * __u8 filename[NR_DENTRY_IN_BLOCK][F2FS_SLOT_LEN];
+ *
+ * Do NOT use sizeof. Use F2FS_BLKSIZE instead
+ */
 struct f2fs_dentry_block {
 	/* validity bitmap for directory entries in each block */
-	__u8 dentry_bitmap[SIZE_OF_DENTRY_BITMAP];
-	__u8 reserved[SIZE_OF_RESERVED];
-	struct f2fs_dir_entry dentry[NR_DENTRY_IN_BLOCK];
-	__u8 filename[NR_DENTRY_IN_BLOCK][F2FS_SLOT_LEN];
+	DECLARE_FLEX_ARRAY(__u8, dentry_bitmap);
 } __packed;
+
+#define F2FS_DENTRY_BLOCK_DENTRIES(blk) ((struct f2fs_dir_entry *)\
+			&((blk)->dentry_bitmap[SIZE_OF_DENTRY_BITMAP + SIZE_OF_RESERVED]))
+#define F2FS_DENTRY_BLOCK_DENTRY(blk, i) (F2FS_DENTRY_BLOCK_DENTRIES((blk))[(i)])
+
+#define F2FS_DENTRY_BLOCK_FILENAMES(blk) ((__u8(*)[F2FS_SLOT_LEN])&F2FS_DENTRY_BLOCK_DENTRY(blk,\
+							NR_DENTRY_IN_BLOCK))
+#define F2FS_DENTRY_BLOCK_FILENAME(blk, i) (&((__u8 *)&F2FS_DENTRY_BLOCK_DENTRY(blk,\
+							NR_DENTRY_IN_BLOCK))[(i) * F2FS_SLOT_LEN])
 
 #define	F2FS_DEF_PROJID		0	/* default project ID */
 

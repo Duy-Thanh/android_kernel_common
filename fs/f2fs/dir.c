@@ -897,7 +897,7 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
 	f2fs_wait_on_page_writeback(page, DATA, true, true);
 
 	dentry_blk = page_address(page);
-	bit_pos = dentry - dentry_blk->dentry;
+	bit_pos = dentry - F2FS_DENTRY_BLOCK_DENTRIES(dentry_blk);
 	for (i = 0; i < slots; i++)
 		__clear_bit_le(bit_pos + i, &dentry_blk->dentry_bitmap);
 
