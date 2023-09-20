@@ -16,6 +16,24 @@
       "message": "This needs to be rebased on top of aosp/2742495 so the symbols are defined in the kernel. Please submit them together. Also, add the respin bug to the commit message with a \"Bug:\" tag.",
       "revId": "53e3a8791249b7edb5a0bf374e5368aa8d43913a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c4d3aff_723c9fb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T18:59:23Z",
+      "side": 1,
+      "message": "build break:\n```\nto @//common:kernel_aarch64_additional_tests_device_modules_test_use_device_module_kernel_build kernel.\nSymbols missing from the ksymtab:\nERROR: /buildbot/src/android/common-android14-6.1-2023-08/common/BUILD.bazel:80:22: Checking for kmi_symbol_list_strict_mode (lto\u003ddefault;trim) @//common:kernel_aarch64 failed: (Exit 1): bash failed: error executing KernelBuildKmiSymbolListStrictMode command (from target //common:kernel_aarch64) /bin/bash -c ... (remaining 1 argument skipped)\n  __traceiter_android_rvh_cgroup_force_kthread_migration\n  __tracepoint_android_rvh_cgroup_force_kthread_migration\n```",
+      "parentUuid": "863d40be_62b27363",
+      "revId": "53e3a8791249b7edb5a0bf374e5368aa8d43913a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
