@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "947f4eee_41fc0803",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T22:33:01Z",
+      "side": 1,
+      "message": "Merged patches so the merge down to keystone can proceed, but needs a valid respin request if a respin is really needed.",
+      "revId": "d96859ba8012783ffcc0a1e60c04d073a9c4ed3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
