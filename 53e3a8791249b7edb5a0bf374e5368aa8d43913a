@@ -34,6 +34,24 @@
       "parentUuid": "863d40be_62b27363",
       "revId": "53e3a8791249b7edb5a0bf374e5368aa8d43913a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cd2d731_cda92233",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2023-09-20T20:53:58Z",
+      "side": 1,
+      "message": "part of this is done.  however, I am not sure what the phrase \"Also, add the respin bug to the commit message with a \"Bug:\" tag\" means?  Currently there are two bugs associated with this, one is recent but I couldn\u0027t find it in the db:\n\n301241967\n\nSo I created a new one, and deleted 301241967 from the commit text: here\u0027s the new one:\n\nhttps://partnerissuetracker.corp.google.com/u/1/issues/301261126",
+      "parentUuid": "3c4d3aff_723c9fb6",
+      "revId": "53e3a8791249b7edb5a0bf374e5368aa8d43913a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
