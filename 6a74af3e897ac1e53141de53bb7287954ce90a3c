@@ -34,6 +34,24 @@
       "parentUuid": "8d93339f_1bf223b6",
       "revId": "6a74af3e897ac1e53141de53bb7287954ce90a3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b7cf13_1cadaf9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-09-20T06:28:49Z",
+      "side": 1,
+      "message": "https://source.android.com/docs/core/architecture/kernel/kernel-code#changes-to-gki-defconfig\n\nPlease put the justification in the linked bug.\n\nHowever, the changes here significantly affect the KMI and will be rejected.\n\n* 5301 symbols have only CRC changes\n* 4 types have changed\n   * `struct task_struct` (this one due to `CONFIG_SYSVIPC`)\n   * `struct cgroup`\n   * `struct css_set`\n   * `struct cgroup_root`",
+      "parentUuid": "2f2a467c_efdd231b",
+      "revId": "6a74af3e897ac1e53141de53bb7287954ce90a3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
