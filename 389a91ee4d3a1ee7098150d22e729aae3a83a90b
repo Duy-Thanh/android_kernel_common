@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e764e435_0fbc453a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-09-20T06:30:39Z",
+      "side": 1,
+      "message": "```\nvariable symbol \u0027const struct blk_mq_alloc_data* GKI_struct_blk_mq_alloc_data\u0027 changed\n  CRC changed from 0xed3c0f0a to 0x5aa1c654\n\nvariable symbol \u0027const struct readahead_control* GKI_struct_readahead_control\u0027 changed\n  CRC changed from 0x5bf5bc68 to 0x498327ee\n\nfunction symbol \u0027struct block_device* I_BDEV(struct inode*)\u0027 changed\n  CRC changed from 0xb8163ad5 to 0xe3cfa208\n\n... 5298 omitted; 5301 symbols have only CRC changes\n\ntype \u0027struct task_struct\u0027 changed\n  byte size changed from 4608 to 4672\n  member \u0027struct sysv_sem sysvsem\u0027 was added\n  member \u0027struct sysv_shm sysvshm\u0027 was added\n  98 members (\u0027unsigned long int last_switch_count\u0027 .. \u0027u64 android_kabi_reserved8\u0027) changed\n    offset changed by 192\n  member \u0027struct thread_struct thread\u0027 changed\n    offset changed by 128\n\ntype \u0027struct cgroup\u0027 changed\n  byte size changed from 2400 to 2448\n  member changed from \u0027struct cgroup_subsys_state* subsys[7]\u0027 to \u0027struct cgroup_subsys_state* subsys[9]\u0027\n    type changed from \u0027struct cgroup_subsys_state*[7]\u0027 to \u0027struct cgroup_subsys_state*[9]\u0027\n      number of elements changed from 7 to 9\n  2 members (\u0027struct cgroup_root* root\u0027 .. \u0027struct list_head cset_links\u0027) changed\n    offset changed by 128\n  member changed from \u0027struct list_head e_csets[7]\u0027 to \u0027struct list_head e_csets[9]\u0027\n    offset changed from 4160 to 4288\n    type changed from \u0027struct list_head[7]\u0027 to \u0027struct list_head[9]\u0027\n      number of elements changed from 7 to 9\n  16 members (\u0027struct cgroup* dom_cgrp\u0027 .. \u0027u64 ancestor_ids[0]\u0027) changed\n    offset changed by 384\n\ntype \u0027struct css_set\u0027 changed\n  byte size changed from 424 to 472\n  member changed from \u0027struct cgroup_subsys_state* subsys[7]\u0027 to \u0027struct cgroup_subsys_state* subsys[9]\u0027\n    type changed from \u0027struct cgroup_subsys_state*[7]\u0027 to \u0027struct cgroup_subsys_state*[9]\u0027\n      number of elements changed from 7 to 9\n  8 members (\u0027refcount_t refcount\u0027 .. \u0027struct list_head task_iters\u0027) changed\n    offset changed by 128\n  member changed from \u0027struct list_head e_cset_node[7]\u0027 to \u0027struct list_head e_cset_node[9]\u0027\n    offset changed from 1216 to 1344\n    type changed from \u0027struct list_head[7]\u0027 to \u0027struct list_head[9]\u0027\n      number of elements changed from 7 to 9\n  12 members (\u0027struct list_head threaded_csets\u0027 .. \u0027struct callback_head callback_head\u0027) changed\n    offset changed by 384\n\ntype \u0027struct cgroup_root\u0027 changed\n  byte size changed from 6616 to 6664\n  6 members (\u0027u64 cgrp_ancestor_id_storage\u0027 .. \u0027char name[64]\u0027) changed\n    offset changed by 384\n\n```",
+      "revId": "389a91ee4d3a1ee7098150d22e729aae3a83a90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
