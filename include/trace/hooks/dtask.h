@@ -97,6 +97,15 @@ DECLARE_HOOK(android_vh_record_rwsem_lock_starttime,
 DECLARE_HOOK(android_vh_record_pcpu_rwsem_starttime,
 	TP_PROTO(struct task_struct *tsk, unsigned long settime_jiffies),
 	TP_ARGS(tsk, settime_jiffies));
+<<<<<<< HEAD   (0007da ANDROID: Update abi_gki_aarch64_qcom for usb typec orientati)
+=======
+DECLARE_HOOK(android_vh_record_pcpu_rwsem_time_early,
+	TP_PROTO(unsigned long settime_jiffies, struct percpu_rw_semaphore *sem),
+	TP_ARGS(settime_jiffies, sem));
+DECLARE_HOOK(android_vh_percpu_rwsem_wq_add,
+	TP_PROTO(struct percpu_rw_semaphore *sem, bool reader),
+	TP_ARGS(sem, reader));
+>>>>>>> CHANGE (f451f4 ANDROID: vendor_hooks: Add hooks for oem percpu-rwsem optima)
 
 struct rt_mutex_waiter;
 struct ww_acquire_ctx;
