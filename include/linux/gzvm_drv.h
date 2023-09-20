@@ -8,19 +8,25 @@
 
 #include <linux/eventfd.h>
 #include <linux/list.h>
+#include <linux/mm.h>
 #include <linux/mutex.h>
-#include <linux/miscdevice.h>
 #include <linux/gzvm.h>
 #include <linux/srcu.h>
 #include <linux/rbtree.h>
 #include <linux/mm.h>
 
+/*
+ * For the normal physical address, the highest 12 bits should be zero, so we
+ * can mask bit 62 ~ bit 52 to indicate the error physical address
+ */
+#define GZVM_PA_ERR_BAD (0x7ffULL << 52)
+
 #define GZVM_VCPU_MMAP_SIZE  PAGE_SIZE
 #define INVALID_VM_ID   0xffff
 
 /*
- * These are the efinitions of APIs between GenieZone hypervisor and driver,
- * there's no need to be visible to uapi. Furthermore, We need GenieZone
+ * These are the definitions of APIs between GenieZone hypervisor and driver,
+ * there's no need to be visible to uapi. Furthermore, we need GenieZone
  * specific error code in order to map to Linux errno
  */
 #define NO_ERROR                (0)
@@ -152,6 +158,11 @@ int gzvm_vm_ioctl_arch_enable_cap(struct gzvm *gzvm,
 				  void __user *argp);
 
 u64 gzvm_hva_to_pa_arch(u64 hva);
+u64 hva_to_pa_fast(u64 hva);
+u64 hva_to_pa_slow(u64 hva);
+int gzvm_gfn_to_pfn_memslot(struct gzvm_memslot *memslot, u64 gfn, u64 *pfn);
+u64 gzvm_gfn_to_hva_memslot(struct gzvm_memslot *memslot, u64 gfn);
+
 int gzvm_vm_ioctl_create_vcpu(struct gzvm *gzvm, u32 cpuid);
 int gzvm_arch_vcpu_update_one_reg(struct gzvm_vcpu *vcpu, __u64 reg_id,
 				  bool is_write, __u64 *data);
@@ -161,14 +172,10 @@ int gzvm_arch_destroy_vcpu(u16 vm_id, int vcpuid);
 int gzvm_arch_inform_exit(u16 vm_id);
 
 int gzvm_find_memslot(struct gzvm *vm, u64 gpa);
-int gzvm_gfn_to_pfn_memslot(struct gzvm_memslot *memslot, u64 gfn, u64 *pfn);
-u64 gzvm_gfn_to_hva_memslot(struct gzvm_memslot *memslot, u64 gfn);
-u64 hva_to_pa_fast(u64 hva);
-u64 hva_to_pa_slow(u64 hva);
 int gzvm_handle_page_fault(struct gzvm_vcpu *vcpu);
-int gzvm_handle_relinquish(struct gzvm_vcpu *vcpu, phys_addr_t ipa);
 bool gzvm_handle_guest_exception(struct gzvm_vcpu *vcpu);
 bool gzvm_handle_guest_hvc(struct gzvm_vcpu *vcpu);
+int gzvm_handle_relinquish(struct gzvm_vcpu *vcpu, phys_addr_t ipa);
 
 int gzvm_arch_create_device(u16 vm_id, struct gzvm_create_device *gzvm_dev);
 int gzvm_arch_inject_irq(struct gzvm *gzvm, unsigned int vcpu_idx,

@@ -48,15 +48,20 @@ int gzvm_find_memslot(struct gzvm *vm, u64 gfn)
 	return -EFAULT;
 }
 
-/* register_memslot_addr_range() - Register memory region to GZ */
+/**
+ * register_memslot_addr_range() - Register memory region to GenieZone
+ * @gzvm: Pointer to struct gzvm
+ * @memslot: Pointer to struct gzvm_memslot
+ *
+ * Return: 0 for success, negative number for error
+ */
 static int
 register_memslot_addr_range(struct gzvm *gzvm, struct gzvm_memslot *memslot)
 {
 	struct gzvm_memory_region_ranges *region;
-	u32 buf_size;
+	u32 buf_size = PAGE_SIZE * 2;
 	u64 gfn;
 
-	buf_size = PAGE_SIZE * 2;
 	region = alloc_pages_exact(buf_size, GFP_KERNEL);
 	if (!region)
 		return -ENOMEM;
@@ -82,10 +87,11 @@ register_memslot_addr_range(struct gzvm *gzvm, struct gzvm_memslot *memslot)
  * @gzvm: Pointer to struct gzvm.
  * @mem: Input memory region from user.
  *
- * Return:
- * * -EXIO		- memslot is out-of-range
- * * -EFAULT		- Cannot find corresponding vma
- * * -EINVAL		- region size and vma size does not match
+ * Return: 0 for success, negative number for error
+ *
+ * -EXIO		- The memslot is out-of-range
+ * -EFAULT		- Cannot find corresponding vma
+ * -EINVAL		- Region size and VMA size mismatch
  */
 static int
 gzvm_vm_ioctl_set_memory_region(struct gzvm *gzvm,
@@ -202,7 +208,7 @@ static int gzvm_vm_ioctl_enable_cap(struct gzvm *gzvm,
 static long gzvm_vm_ioctl(struct file *filp, unsigned int ioctl,
 			  unsigned long arg)
 {
-	long ret = -ENOTTY;
+	long ret;
 	void __user *argp = (void __user *)arg;
 	struct gzvm *gzvm = filp->private_data;
 
