@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "863d40be_62b27363",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T18:35:33Z",
+      "side": 1,
+      "message": "This needs to be rebased on top of aosp/2742495 so the symbols are defined in the kernel. Please submit them together. Also, add the respin bug to the commit message with a \"Bug:\" tag.",
+      "revId": "53e3a8791249b7edb5a0bf374e5368aa8d43913a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
