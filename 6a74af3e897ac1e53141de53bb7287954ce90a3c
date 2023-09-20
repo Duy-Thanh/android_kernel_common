@@ -52,6 +52,24 @@
       "parentUuid": "2f2a467c_efdd231b",
       "revId": "6a74af3e897ac1e53141de53bb7287954ce90a3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a602faa_d807c837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2044103
+      },
+      "writtenOn": "2023-09-20T07:53:12Z",
+      "side": 1,
+      "message": "Thanks for you update , but those config is needed by our feature.\n\nCould we have any others way to enable it ?",
+      "parentUuid": "c8b7cf13_1cadaf9c",
+      "revId": "6a74af3e897ac1e53141de53bb7287954ce90a3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
