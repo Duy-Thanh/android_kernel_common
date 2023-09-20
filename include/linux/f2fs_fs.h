@@ -298,6 +298,14 @@ struct node_footer {
 #define F2FS_PIN_FILE		0x40	/* file should not be gced */
 #define F2FS_COMPRESS_RELEASED	0x80	/* file released compressed blocks */
 
+/*
+ * On disk layout is
+ * struct f2fs_inode
+ * struct f2fs_inode_nids
+ *
+ * where the size of f2fs_inode depends on block size.
+ * Do NOT use sizeof
+ */
 struct f2fs_inode {
 	__le16 i_mode;			/* file mode */
 	__u8 i_advise;			/* file hints */
@@ -345,20 +353,42 @@ struct f2fs_inode {
 						/* 0 bit: chksum flag
 						 * [8,15] bits: compress level
 						 */
-			__le32 i_extra_end[0];	/* for attribute size calculation */
+			DECLARE_FLEX_ARRAY(__le32, i_extra_end);	/* for attribute size calculation */
 		} __packed;
-		__le32 i_addr[DEF_ADDRS_PER_INODE];	/* Pointers to data blocks */
+		DECLARE_FLEX_ARRAY(__le32, i_addr); /* Pointers to data blocks */
 	};
+} __packed;
+
+struct f2fs_inode_nids {
 	__le32 i_nid[DEF_NIDS_PER_INODE];	/* direct(2), indirect(2),
 						double_indirect(1) node id */
 } __packed;
 
+#define F2FS_INODE_NIDS(inode) ((struct f2fs_inode_nids *)(&(inode)->i_addr[DEF_ADDRS_PER_INODE]))
+#define F2FS_INODE_I_NID(inode, i) (F2FS_INODE_NIDS((inode))->i_nid[(i)])
+
+/*
+ * On disk layout is:
+ * __le32 addr[DEF_ADDRS_PER_BLOCK];
+ *
+ * where the value of DEF_ADDRS_PER_BLOCK depends on block size
+ *
+ * Do NOT use sizeof
+ */
 struct direct_node {
-	__le32 addr[DEF_ADDRS_PER_BLOCK];	/* array of data block address */
+	__le32 addr[0];	/* array of data block address */
 } __packed;
 
+/*
+ * On disk layout is:
+ * __le32 nid[NIDS_PER_BLOCK];
+ *
+ * where the value of NIDS_PER_BLOCK depends on block size
+ *
+ * Do NOT use sizeof
+ */
 struct indirect_node {
-	__le32 nid[NIDS_PER_BLOCK];	/* array of data block address */
+	__le32 nid[0];	/* array of data block address */
 } __packed;
 
 enum {
@@ -370,6 +400,14 @@ enum {
 
 #define OFFSET_BIT_MASK		GENMASK(OFFSET_BIT_SHIFT - 1, 0)
 
+/*
+ * On disk format is:
+ * struct f2fs_node
+ * struct node_footer
+ *
+ * where the size of f2fs_node depends on Block Size.
+ * Do NOT use sizeof. Use F2FS_BLKSIZE instead.
+ */
 struct f2fs_node {
 	/* can be one of three types: inode, direct, and indirect types */
 	union {
@@ -377,8 +415,10 @@ struct f2fs_node {
 		struct direct_node dn;
 		struct indirect_node in;
 	};
-	struct node_footer footer;
 } __packed;
+
+#define F2FS_NODE_FOOTER(blk) ((struct node_footer *)\
+				&(((char *)(&(blk)->i))[F2FS_BLKSIZE - sizeof(struct node_footer)]))
 
 /*
  * For NAT entries

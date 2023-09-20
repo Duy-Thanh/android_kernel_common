@@ -2839,7 +2839,7 @@ static inline void f2fs_radix_tree_insert(struct radix_tree_root *root,
 		cond_resched();
 }
 
-#define RAW_IS_INODE(p)	((p)->footer.nid == (p)->footer.ino)
+#define RAW_IS_INODE(p)	(F2FS_NODE_FOOTER((p))->nid == F2FS_NODE_FOOTER((p))->ino)
 
 static inline bool IS_INODE(struct page *page)
 {
