@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000054241188",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2756236?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "249f2a37_fe0bd6e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-21T08:02:05Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 567113042 android-build.ayeaye-python-dispatcher_20230920.05_p1",
+      "revId": "93a6f72331f565d4ee28a0710b2c79341bb669fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000054241188",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2756236?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b7c7949e_00c51e3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-21T08:02:05Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2694467](https://r.android.com/c/2694467) on branch android14-6.1.\n\n```\n      ## android/abi_gki_aarch64_xiaomi ##\n     @@\n    - #required by xm_ispv4_pcie.ko\n    -   pci_ioremap_bar\n    -   pci_disable_pcie_error_reporting\n    -+\n    +   __traceiter_android_rvh_before_do_sched_yield\n    +   __tracepoint_android_rvh_before_do_sched_yield\n    + \n     +#required by lock_optimization module\n     +  __traceiter_android_vh_record_pcpu_rwsem_time_early\n     +  __tracepoint_android_vh_record_pcpu_rwsem_time_early\n    ++\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 567113042 android-build.ayeaye-python-dispatcher_20230920.05_p1",
+      "revId": "93a6f72331f565d4ee28a0710b2c79341bb669fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
