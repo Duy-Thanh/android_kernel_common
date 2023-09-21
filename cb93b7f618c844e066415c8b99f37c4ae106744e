@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b69797a5_6fe09381",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-09-21T20:28:08Z",
+      "side": 1,
+      "message": "Yes, this makes sense to me.",
+      "parentUuid": "806bc203_18be1131",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a4322f5_50756ada",
         "filename": "arch/arm64/kernel/module-plts.c",
         "patchSetId": 13
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Good catch! For other errors, we definitely need to free the node. But do we still return true? This is yet another place where I am not entirely convinced of considering as a duplicate. I am not sure if its norm in the kernel to ignore errors which are highly unlikely.\n\nIn this case, on inspecting the rhashtable_lookup_insert_fast function, it seems to have quite a lot of different possible return values. E2BIG, EEXIST, EAGAIN, ENOMEM to name some. So before I change this, I need some guidance on \n1. Would returning true be alright in case of an error?\n2. If a comment is needed here, and if yes, what explanation would be needed.",
       "parentUuid": "0a4322f5_50756ada",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "890f3904_2cb68cdb",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-09-21T20:28:08Z",
+      "side": 1,
+      "message": "Following the idea of letting the error handling kick in later, counting any error as a duplicate would make sense. I do think a comment is needed here, but you\u0027re already going to have a comment explaining why we treat a memory allocation failure as a duplicate, so perhaps it makes more sense to add a comment to the function itself (i.e. add a comment above the function signature) explaining why it handles failures the way it does.",
+      "parentUuid": "22b87f01_e23e85bf",
       "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -219,6 +255,24 @@
       "side": 1,
       "message": "Normally, I would agree 100% on having a separate function to make the code modular. But in this case, do we prioritize for a patch with minimal lines of change?",
       "parentUuid": "39bf4954_e99682dd",
+      "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0396b76_93821fbb",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-09-21T20:28:08Z",
+      "side": 1,
+      "message": "I think if we were allocating and initializing at least 3 similar data structures or the initialization was a lot of code, then it would make sense to write a helper to take care of it. However, we\u0027re not running into either scenario here, so it\u0027s fine to not add a helper.",
+      "parentUuid": "fd6e688f_d918bac0",
       "revId": "cb93b7f618c844e066415c8b99f37c4ae106744e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

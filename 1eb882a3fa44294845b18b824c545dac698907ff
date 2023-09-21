@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "743edaca_6c9f4d8d",
+        "filename": "arch/arm64/include/asm/module.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-09-21T20:28:08Z",
+      "side": 1,
+      "message": "Since we ended up using a pointer, I don\u0027t think you need to include this anymore.",
+      "revId": "1eb882a3fa44294845b18b824c545dac698907ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
