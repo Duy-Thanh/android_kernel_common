@@ -42,6 +42,49 @@
       },
       "revId": "42fbe12cbdb222ce1736b870dda0c06b4bd2e4e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000054255696",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2756242?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "52a7ba9e_540e79fd",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: qinglin.li \u003cqinglin.li@amlogic.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "78c144f1_8e41ac40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-21T22:49:41Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: qinglin.li \u003cqinglin.li@amlogic.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 567113042 android-build.ayeaye-python-dispatcher_20230920.05_p1",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "42fbe12cbdb222ce1736b870dda0c06b4bd2e4e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
