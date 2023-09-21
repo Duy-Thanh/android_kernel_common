@@ -70,6 +70,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c5d912_243d7523",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2023-09-21T00:27:56Z",
+      "side": 1,
+      "message": "The commit explicitly mentions \"this could be seen as a regression\". The author meant that care should be applied if backporting.\n\nSince this is removing a control point, the impact of this change is linked to the SELinux policy in use. On Android, the policy for these access vectors was added in aosp/1642199. It is unspecific and mostly duplicating the fine-grain policy Android already has for its components (see also b/285443587#comment1).\n\nBy not backporting this, we have to carry on the policy which may not apply depending on the device kernel.\n\nGreg, could you please consider the backporting of this patch, because we have reviewed the impact on the Android policy it is associated with? Thanks.",
+      "parentUuid": "a4714743_9bc4ebb6",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
