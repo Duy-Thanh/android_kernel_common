@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c952c523_bc7ebfd5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2992,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-21T21:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4ebfb02_fb8928f3",
+      "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f764ec6e_25830998",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-20T17:15:24Z",
       "side": 1,
       "message": "what fields are you using out of \"tr\"? Can they be passed individually instead of adding this type to the KMI?\n\nI presume this is allocating some OEM memory to the transaction. Should it be called `trace_android_vh_alloc_oem_binder_struct()` to be symmetric with `trace_android_vh_free_oem_binder_struct()` at line 1764?",
+      "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6b51f6_152cf1c0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3485,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-21T21:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f764ec6e_25830998",
       "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e6c08e_e153c20c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3992,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-21T21:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09aa34eb_211aa1b8",
+      "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64d890b5_75a59ea5",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-09-20T17:15:24Z",
       "side": 1,
       "message": "Is this just for logging/tracing? Please mention purpose for this in the commit message.",
+      "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03088b4e_7068b065",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4957,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-21T21:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64d890b5_75a59ea5",
       "revId": "a3a66f866c49ecb2a7f4548072b703a9a660eda8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
