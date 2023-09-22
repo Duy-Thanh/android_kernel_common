@@ -16,6 +16,41 @@
       "message": "Respin bug:301581631",
       "revId": "ff4fc77ece704d83aa5f25a603589aa8546813a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "939e85f4_8bbdcf93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-22T13:52:05Z",
+      "side": 1,
+      "message": "This ABI representation likely was generated with a different LTO setting. regenerating ...",
+      "revId": "ff4fc77ece704d83aa5f25a603589aa8546813a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30c7b173_fb865b60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-22T13:52:05Z",
+      "side": 1,
+      "message": "resolving",
+      "parentUuid": "47babe51_32e09e8b",
+      "revId": "ff4fc77ece704d83aa5f25a603589aa8546813a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
