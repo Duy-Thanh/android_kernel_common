@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "6a035c30d6270d8c273f68b1b454381657083740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d45f423_974e9039",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2023-09-22T04:21:07Z",
+      "side": 1,
+      "message": "Respin Bug: b/301378679",
+      "revId": "6a035c30d6270d8c273f68b1b454381657083740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
