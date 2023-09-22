@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d272599e_8299b46b",
+        "filename": "rust/alloc/alloc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-09-22T15:07:00Z",
+      "side": 0,
+      "message": "You need to add this:\n```\ndiff --git a/rust/alloc/boxed.rs b/rust/alloc/boxed.rs\nindex c8173cea8317..1bfce0f31a40 100644\n--- a/rust/alloc/boxed.rs\n+++ b/rust/alloc/boxed.rs\n@@ -1215,9 +1215,17 @@ pub const fn into_pin(boxed: Self) -\u003e Pin\u003cSelf\u003e\n \n #[stable(feature \u003d \"rust1\", since \u003d \"1.0.0\")]\n unsafe impl\u003c#[may_dangle] T: ?Sized, A: Allocator\u003e Drop for Box\u003cT, A\u003e {\n-    fn drop(\u0026mut self) {\n-        // FIXME: Do nothing, drop is currently performed by compiler.\n-    }\n+    #[inline]\n+     fn drop(\u0026mut self) {\n+        // the T in the Box is dropped by the compiler before the destructor is run\n+\n+        let ptr \u003d self.0;\n+\n+        unsafe {\n+            let layout \u003d Layout::for_value_raw(ptr.as_ptr());\n+            self.1.deallocate(From::from(ptr.cast()), layout)\n+        }\n+     }\n }\n \n #[cfg(not(no_global_oom_handling))]\n```",
+      "revId": "b3a6bfb95d91e88e55361183f0498470bf1e4e1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
