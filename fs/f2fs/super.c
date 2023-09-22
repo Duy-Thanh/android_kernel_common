@@ -3424,6 +3424,7 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 					(bh->b_data + F2FS_SUPER_OFFSET);
 	size_t crc_offset = 0;
 	__u32 crc = 0;
+	__u32 f2fs_max_log_sectorsize;
 
 	if (le32_to_cpu(raw_super->magic) != F2FS_SUPER_MAGIC) {
 		f2fs_info(sbi, "Magic Mismatch, valid(0x%x) - read(0x%x)",
@@ -3447,13 +3448,15 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 		}
 	}
 
-	/* Currently, support only 4KB block size */
-	if (le32_to_cpu(raw_super->log_blocksize) != F2FS_BLKSIZE_BITS) {
-		f2fs_info(sbi, "Invalid log_blocksize (%u), supports only %u",
+	/* Currently, support 4KB-16KB block size */
+	if (le32_to_cpu(raw_super->log_blocksize) < F2FS_MIN_LOG_BLKSIZE ||
+			le32_to_cpu(raw_super->log_blocksize) > F2FS_MAX_LOG_BLKSIZE) {
+		f2fs_info(sbi, "Invalid log_blocksize (%u), supports %u-%u",
 			  le32_to_cpu(raw_super->log_blocksize),
-			  F2FS_BLKSIZE_BITS);
+			  F2FS_MIN_LOG_BLKSIZE, F2FS_MAX_LOG_BLKSIZE);
 		return -EFSCORRUPTED;
 	}
+	f2fs_max_log_sectorsize = le32_to_cpu(raw_super->log_blocksize);
 
 	/* check log blocks per segment */
 	if (le32_to_cpu(raw_super->log_blocks_per_seg) != 9) {
@@ -3462,9 +3465,9 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 		return -EFSCORRUPTED;
 	}
 
-	/* Currently, support 512/1024/2048/4096/16K bytes sector size */
+	/* Currently, support powers of 2 from 512 to BLOCK SIZE bytes sector size */
 	if (le32_to_cpu(raw_super->log_sectorsize) >
-				F2FS_MAX_LOG_SECTOR_SIZE ||
+				f2fs_max_log_sectorsize ||
 		le32_to_cpu(raw_super->log_sectorsize) <
 				F2FS_MIN_LOG_SECTOR_SIZE) {
 		f2fs_info(sbi, "Invalid log sectorsize (%u)",
@@ -3473,7 +3476,7 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 	}
 	if (le32_to_cpu(raw_super->log_sectors_per_block) +
 		le32_to_cpu(raw_super->log_sectorsize) !=
-			F2FS_MAX_LOG_SECTOR_SIZE) {
+			f2fs_max_log_sectorsize) {
 		f2fs_info(sbi, "Invalid log sectors per block(%u) log sectorsize(%u)",
 			  le32_to_cpu(raw_super->log_sectors_per_block),
 			  le32_to_cpu(raw_super->log_sectorsize));
@@ -3921,6 +3924,13 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
 	struct buffer_head *bh;
 	struct f2fs_super_block *super;
 	int err = 0;
+	__u32 log_blocksize_guess = F2FS_MIN_LOG_BLKSIZE;
+
+	/* guess a block size */
+	if (unlikely(!sb_set_blocksize(sb, 1 << log_blocksize_guess))) {
+		f2fs_err(sbi, "unable to set blocksize");
+		return -EINVAL;
+	}
 
 	super = kzalloc(sizeof(struct f2fs_super_block), GFP_KERNEL);
 	if (!super)
@@ -3939,16 +3949,45 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
 		/* sanity checking of raw super */
 		err = sanity_check_raw_super(sbi, bh);
 		if (err) {
-			f2fs_err(sbi, "Can't find valid F2FS filesystem in %dth superblock",
-				 block + 1);
+			/* The second super block might just be in a different location */
+			if (*raw_super || block == 0 || log_blocksize_guess >= F2FS_MAX_LOG_BLKSIZE) {
+				f2fs_err(sbi, "Can't find valid F2FS filesystem in %dth superblock",
+					 block + 1);
+				*recovery = 1;
+			} else {
+				/* We're on the second superblock, and the first was invalid
+				 * Adjust our block size guess and try again
+				 */
+				log_blocksize_guess++;
+				if (unlikely(!sb_set_blocksize(sb,
+						1 << le32_to_cpu(super->log_blocksize)))) {
+					f2fs_err(sbi, "Can't find valid F2FS filesystem in %dth superblock",
+										block + 1);
+					*recovery = 1;
+					/* This likely means that our guess is larger than page size */
+					log_blocksize_guess = F2FS_MAX_LOG_BLKSIZE;
+
+					err = -EINVAL;
+				} else {
+					f2fs_err(sbi, "Looking for F2FS filesystem in %dth superblock with blocksize %d",
+									block + 1, 1 << log_blocksize_guess);
+					block--;
+				}
+			}
+
 			brelse(bh);
-			*recovery = 1;
 			continue;
 		}
 
 		if (!*raw_super) {
 			memcpy(super, bh->b_data + F2FS_SUPER_OFFSET,
 							sizeof(*super));
+			if (unlikely(!sb_set_blocksize(sb,
+					1 << le32_to_cpu(super->log_blocksize)))) {
+				f2fs_err(sbi, "unable to update blocksize");
+				err = -EINVAL;
+				break;
+			}
 			*valid_super_block = block;
 			*raw_super = super;
 		}
@@ -4374,12 +4413,6 @@ try_onemore:
 		f2fs_err(sbi, "Cannot load crc32 driver.");
 		err = PTR_ERR(sbi->s_chksum_driver);
 		sbi->s_chksum_driver = NULL;
-		goto free_sbi;
-	}
-
-	/* set a block size */
-	if (unlikely(!sb_set_blocksize(sb, F2FS_BLKSIZE))) {
-		f2fs_err(sbi, "unable to set blocksize");
 		goto free_sbi;
 	}
 
