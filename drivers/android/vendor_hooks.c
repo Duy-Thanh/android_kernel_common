@@ -211,4 +211,20 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_trans);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
+<<<<<<< HEAD   (a7e37f ANDROID: 16K: Remove unescessary err log in randomize_page())
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_wq_add);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scan_abort_check_wmarks);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_oem_binder_struct);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compaction_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compaction_try_to_compact_pages_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_alloc_pages_direct_reclaim_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_alloc_pages_direct_reclaim_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_alloc_pages_may_oom_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_kswapd_done);
+>>>>>>> CHANGE (30d86f ANDROID: mm: Add vendor hooks for recording when kswapd fini)
