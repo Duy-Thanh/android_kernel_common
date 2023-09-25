@@ -41,6 +41,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1ae82f5_c72383a3",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-25T12:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28202d81_71ec69d4",
+      "revId": "ddf286487f59913e7564e36d59449aaa21aa3020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0234f4fd_d5e3b9b1",
@@ -54,6 +72,30 @@
       "writtenOn": "2023-09-25T09:17:31Z",
       "side": 1,
       "message": "For consistency, we could name the target `kernel_aarch64_microdroid`. Aliases here in place would help transitioning. We have not been consistent in the past, but have the aspiration to fix it over time (see go/kleaf-naming-convention (internal doc, is this is not yet final)).",
+      "range": {
+        "startLine": 604,
+        "startChar": 12,
+        "endLine": 604,
+        "endChar": 30
+      },
+      "revId": "ddf286487f59913e7564e36d59449aaa21aa3020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c52d1091_3e33ab86",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-25T12:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0234f4fd_d5e3b9b1",
       "range": {
         "startLine": 604,
         "startChar": 12,
