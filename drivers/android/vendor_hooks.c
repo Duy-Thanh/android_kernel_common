@@ -515,6 +515,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_print_ctrl);
 /*
  * For type visibility
  */
+<<<<<<< HEAD   (75c057 ANDROID: GKI: Update symbol list for mtk)
 #ifdef CONFIG_ARM64
 #include <linux/irqchip/arm-gic-v3.h>
 const struct gic_chip_data *GKI_struct_gic_chip_data;
@@ -524,3 +525,11 @@ EXPORT_SYMBOL_GPL(GKI_struct_gic_chip_data);
 #include <linux/swap_slots.h>
 const struct swap_slots_cache *GKI_struct_swap_slots_cache;
 EXPORT_SYMBOL_GPL(GKI_struct_swap_slots_cache);
+=======
+const struct readahead_control *GKI_struct_readahead_control;
+EXPORT_SYMBOL_GPL(GKI_struct_readahead_control);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_kswapd_done);
+>>>>>>> CHANGE (6c3dd2 ANDROID: mm: Add vendor hooks for recording when kswapd fini)
