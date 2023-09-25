@@ -4,6 +4,7 @@
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels")
+load("//build/kernel/kleaf:constants.bzl", "X86_64_OUTS")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "checkpatch",
@@ -595,6 +596,101 @@ copy_to_dist_dir(
     ],
     dist_dir = "out/fips140/dist",
     flat = True,
+)
+
+# Microdroid is not a real device. The kernel image is built with special
+#  configs to reduce the size. Hence, not using mixed build.
+kernel_build(
+    name = "microdroid_aarch64",
+    srcs = ["//common:kernel_aarch64_sources"],
+    outs = [
+        "Image",
+        "System.map",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    build_config = "build.config.microdroid.aarch64",
+    make_goals = [
+        "Image",
+    ],
+)
+
+copy_to_dist_dir(
+    name = "microdroid_aarch64_dist",
+    data = [
+        ":microdroid_aarch64",
+    ],
+    dist_dir = "out/microdroid_aarch64/dist",
+    flat = True,
+    log = "info",
+)
+
+# Microdroid is not a real device. The kernel image is built with special
+#  configs to reduce the size. Hence, not using mixed build.
+kernel_build(
+    name = "microdroid_x86_64",
+    srcs = ["//common:kernel_x86_64_sources"],
+    outs = X86_64_OUTS,
+    arch = "x86_64",
+    build_config = "build.config.microdroid.x86_64",
+    make_goals = [
+        "bzImage",
+    ],
+)
+
+copy_to_dist_dir(
+    name = "microdroid_x86_64_dist",
+    data = [
+        ":microdroid_x86_64",
+    ],
+    dist_dir = "out/microdroid_x86_64/dist",
+    flat = True,
+    log = "info",
+)
+
+kernel_build(
+    name = "crashdump_aarch64",
+    srcs = ["//common:kernel_aarch64_sources"],
+    outs = [
+        "Image",
+    ],
+    build_config = "build.config.crashdump.aarch64",
+    make_goals = [
+        "Image",
+    ],
+)
+
+copy_to_dist_dir(
+    name = "crashdump_aarch64_dist",
+    data = [
+        ":crashdump_aarch64",
+    ],
+    dist_dir = "out/crashdump_aarch64/dist",
+    flat = True,
+    log = "info",
+)
+
+kernel_build(
+    name = "crashdump_x86_64",
+    srcs = ["//common:kernel_x86_64_sources"],
+    outs = X86_64_OUTS,
+    arch = "x86_64",
+    build_config = "build.config.crashdump.x86_64",
+    make_goals = [
+        "bzImage",
+    ],
+)
+
+copy_to_dist_dir(
+    name = "crashdump_x86_64_dist",
+    data = [
+        ":crashdump_x86_64",
+    ],
+    dist_dir = "out/crashdump_x86_64/dist",
+    flat = True,
+    log = "info",
 )
 
 # allmodconfig build tests.
