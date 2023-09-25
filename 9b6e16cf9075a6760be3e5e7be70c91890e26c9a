@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95721d9b_27b980b6",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4506,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-25T16:18:28Z",
+      "side": 1,
+      "message": "The names of the hooks in this patch do not seem appropriate. They should have some relation to the function they are called from or at least to the logic of that function. Here something like `trace_android_vh_alloc_may_oom_exit` perhaps.",
+      "range": {
+        "startLine": 4506,
+        "startChar": 2,
+        "endLine": 4506,
+        "endChar": 30
+      },
+      "revId": "9b6e16cf9075a6760be3e5e7be70c91890e26c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcdb822c_a244affe",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4569,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-25T16:18:28Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 4569,
+        "startChar": 1,
+        "endLine": 4569,
+        "endChar": 29
+      },
+      "revId": "9b6e16cf9075a6760be3e5e7be70c91890e26c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61c5cfb7_13187b9a",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4602,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-25T16:18:28Z",
+      "side": 1,
+      "message": "This should be inside `try_to_compact_pages` function, should be called `trace_mm_compaction_try_to_compact_pages_exit` to mirror already existing `trace_mm_compaction_try_to_compact_pages`.",
+      "range": {
+        "startLine": 4602,
+        "startChar": 1,
+        "endLine": 4602,
+        "endChar": 25
+      },
+      "revId": "9b6e16cf9075a6760be3e5e7be70c91890e26c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96238e7b_cf6d35b3",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4879,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-25T16:18:28Z",
+      "side": 1,
+      "message": "Should be named `alloc_pages_direct_reclaim_enter`.",
+      "range": {
+        "startLine": 4879,
+        "startChar": 1,
+        "endLine": 4879,
+        "endChar": 26
+      },
+      "revId": "9b6e16cf9075a6760be3e5e7be70c91890e26c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38663634_3644df71",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4902,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-25T16:18:28Z",
+      "side": 1,
+      "message": "Should be named `alloc_pages_direct_reclaim_exit`.",
+      "range": {
+        "startLine": 4902,
+        "startChar": 1,
+        "endLine": 4902,
+        "endChar": 69
+      },
+      "revId": "9b6e16cf9075a6760be3e5e7be70c91890e26c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
