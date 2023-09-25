@@ -442,7 +442,7 @@ int host_stage2_unmap_reg_locked(phys_addr_t start, u64 size)
 	return 0;
 }
 
-static int host_stage2_unmap_unmoveable_regs(void)
+int host_stage2_unmap_unmoveable_regs(void)
 {
 	struct kvm_pgtable *pgt = &host_mmu.pgt;
 	struct pkvm_moveable_reg *reg;
