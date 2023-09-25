@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b935530_c40aabd2",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-25T13:30:16Z",
+      "side": 1,
+      "message": "Is this label defined? Perhaps `kernel_aarch64_sources` is sufficient?",
+      "range": {
+        "startLine": 225,
+        "startChar": 22,
+        "endLine": 225,
+        "endChar": 54
+      },
+      "revId": "3403420fa2752533e0f851750e055e6e91c05087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
