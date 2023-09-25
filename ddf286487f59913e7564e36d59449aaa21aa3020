@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28202d81_71ec69d4",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-25T09:14:42Z",
+      "side": 1,
+      "message": "I would move this up before the device specific kernels. I.e. before db845c is defined.",
+      "revId": "ddf286487f59913e7564e36d59449aaa21aa3020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
