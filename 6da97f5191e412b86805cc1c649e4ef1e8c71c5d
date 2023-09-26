@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000054617133",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2761707?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "75948f30_0afd7acb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-26T01:42:19Z",
+      "side": 1,
+      "message": "Can not find the original change on base branch (android13-5.15) for this change.\nPlease ensure that the Change-Id of this change is same as the original change on the base branch.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 568192728 android-build.ayeaye-python-dispatcher_20230925.04_p0",
+      "revId": "6da97f5191e412b86805cc1c649e4ef1e8c71c5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000054617133",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2761707?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "6ba23cc6_3b4bcf12",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Zhihao Cheng \u003cchengzhihao1@huawei.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "f1e7d4fb_17501e75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-26T01:42:19Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Zhihao Cheng \u003cchengzhihao1@huawei.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 568192728 android-build.ayeaye-python-dispatcher_20230925.04_p0",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 0
+      },
+      "revId": "6da97f5191e412b86805cc1c649e4ef1e8c71c5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
