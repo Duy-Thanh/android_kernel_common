@@ -464,7 +464,7 @@ between them is that the name is expected to be more concise, while the
 description may be longer and it may contain white space or special characters.
 The other files listed above contain integer numbers.
 
-The :file:`disable` attribute is the only writeable one.  If it contains 1, the
+The :file:`disable` attribute is a writeable attribute.  If it contains 1, the
 given idle state is disabled for this particular CPU, which means that the
 governor will never select it for this particular CPU and the ``CPUIdle``
 driver will never ask the hardware to enter it for that CPU as a result.
@@ -481,6 +481,11 @@ be disabled for this particular CPU and writing 0 to it allows the governor to
 take it into consideration for the given CPU and the driver to ask for it,
 unless that state was disabled globally in the driver (in which case it cannot
 be used at all).
+
+The :file:`residency` attribute is also a writeable attribute. It will return
+the target residency of the idle state in microseconds if read. The target
+residency of a state can be changed by writing the desired target residency in
+microseconds to this attribute.
 
 The :file:`power` attribute is not defined very well, especially for idle state
 objects representing combinations of idle states at different levels of the
