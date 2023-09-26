@@ -94,6 +94,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35430941_fdcdd2e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-09-26T06:21:01Z",
+      "side": 1,
+      "message": "Changing a user-visible thing like this (i.e. a user/kernel abi) in a released kernel series should almost never be done.  Please work with the proper people and security teams to ensure that this really is needed for this already-released kernel tree, AND to ensure that it will not break any of the existing systems out there in the wild.\n\nHow are you ensuring that this will not be considered a regression on any device currently being used?",
+      "parentUuid": "48c5d912_243d7523",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
