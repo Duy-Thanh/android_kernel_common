@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed3acad6_46ee6030",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-09-26T18:30:14Z",
+      "side": 1,
+      "message": "Yes for now. We need this variable to be exported to common-modules/virtual-device; otherwise this would have been under impl:constants.bzl",
+      "parentUuid": "6394fa5d_5983a914",
+      "range": {
+        "startLine": 7,
+        "startChar": 44,
+        "endLine": 7,
+        "endChar": 55
+      },
+      "revId": "ddf286487f59913e7564e36d59449aaa21aa3020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28202d81_71ec69d4",
