@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d08ab19_707e4205",
+        "filename": "include/trace/hooks/dtask.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-26T16:43:50Z",
+      "side": 1,
+      "message": "Please remove. This can cause CRC changes to frozen interfaces. If a declaration is needed, move the forward decl of percpu_rw_semaphore outside the `#ifdef __GENKSYMS__`",
+      "revId": "2710b3c462e37d6871e213533e8a69747b8f2585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
