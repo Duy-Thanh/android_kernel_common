@@ -37852,6 +37852,11 @@ member {
   offset: 192
 }
 member {
+  id: 0x3024ec51
+  type_id: 0x4fbdc803
+  offset: 28800
+}
+member {
   id: 0x302f914f
   type_id: 0x4f903dda
   offset: 704
@@ -44878,12 +44883,6 @@ member {
   name: "android_kabi_reserved1"
   type_id: 0x92233392
   offset: 704
-}
-member {
-  id: 0x2d081767
-  name: "android_kabi_reserved1"
-  type_id: 0x92233392
-  offset: 28800
 }
 member {
   id: 0x2d0817b6
@@ -167113,6 +167112,11 @@ member {
   offset: 64
 }
 member {
+  id: 0x653b6170
+  name: "saved_state"
+  type_id: 0x4585663f
+}
+member {
   id: 0x72f4c281
   name: "saved_syn"
   type_id: 0x10c6675a
@@ -208153,6 +208157,16 @@ struct_union {
     bytesize: 8
     member_id: 0x6561e08e
     member_id: 0xca60e328
+  }
+}
+struct_union {
+  id: 0x4fbdc803
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x653b6170
+    member_id: 0x27000c61
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -252735,7 +252749,7 @@ struct_union {
     member_id: 0xedf50137
     member_id: 0xd666cd53
     member_id: 0x9a3ad7bf
-    member_id: 0x2d081767
+    member_id: 0x3024ec51
     member_id: 0x63760531
     member_id: 0xac894e97
     member_id: 0xe0f63fac
