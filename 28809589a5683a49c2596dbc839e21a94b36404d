@@ -16,6 +16,23 @@
       "message": "duplicate of aosp/2762509",
       "revId": "28809589a5683a49c2596dbc839e21a94b36404d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cb0d7e2_b7176f91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-09-27T13:02:15Z",
+      "side": 1,
+      "message": "Proceeding with this version, abandoning the other.",
+      "revId": "28809589a5683a49c2596dbc839e21a94b36404d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
