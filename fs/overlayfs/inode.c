@@ -459,8 +459,11 @@ struct posix_acl *ovl_get_acl(struct inode *inode, int type, bool rcu)
 	if (!IS_ENABLED(CONFIG_FS_POSIX_ACL))
 		return NULL;
 
+<<<<<<< HEAD   (4655b1 UPSTREAM: net: sched: sch_qfq: Fix UAF in qfq_dequeue())
 	/* Careful in RCU walk mode */
 	realinode = ovl_i_path_real(inode, &realpath);
+=======
+>>>>>>> BRANCH (83c56f Merge 5.15.123 into android13-5.15-lts)
 	if (!realinode) {
 		WARN_ON(!rcu);
 		return ERR_PTR(-ECHILD);
