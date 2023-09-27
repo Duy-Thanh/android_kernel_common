@@ -142,6 +142,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2452995_dee85532",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2023-09-27T05:30:04Z",
+      "side": 1,
+      "message": "\u003e Does this change break loading existing SELinux policies, or does it only relax the way in which existing SELinux policies are enforced?\n\nIt relaxes the way in which existing SELinux policies are enforced. That is, the LSM hook still exists, but SELinux does not implement it anymore. It means that SELinux will not consult the policy anymore for an access related to lockdown and consider the access as granted.\n\nBecause we granted the \"confidentiality\" access vector to domain on Android, this change is a no-op for that access vector.\n\nAndroid has a global neverallow rule on the \"integrity\" access vector, it means OEMs were not able to grant this permission to any domain.",
+      "parentUuid": "15fc09fb_b511fafc",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
