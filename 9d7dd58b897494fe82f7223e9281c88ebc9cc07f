@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "013554d4_3e1dd328",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7331,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-09-27T03:53:40Z",
+      "side": 1,
+      "message": "These lines being added are not present in the upstream commit.\n\nBTW, if you have to resolve conflicts, use BACKPORT instead of UPSTREAM.",
+      "revId": "9d7dd58b897494fe82f7223e9281c88ebc9cc07f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
