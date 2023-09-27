@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b282f0e9_acb6c5dc",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-09-27T18:30:15Z",
+      "side": 1,
+      "message": "This should be split into a separate follow-up patch which should also include the updated ABI definition xml file.",
+      "range": {
+        "startLine": 560,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 21
+      },
+      "revId": "487ac191c21835e683d662e1ac54696b4c210abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
