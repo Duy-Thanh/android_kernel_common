@@ -16,6 +16,23 @@
       "message": "Hi Chris\n\nCould you please ad the respin bug b/302224919 in the commit message.",
       "revId": "fa45409684d9ff133af484c95d744936ff347e41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ea9b549_07644f5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2023-09-27T02:40:48Z",
+      "side": 1,
+      "message": "Please help to add \"Bug: 302224919\" in the commit message.",
+      "revId": "fa45409684d9ff133af484c95d744936ff347e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
