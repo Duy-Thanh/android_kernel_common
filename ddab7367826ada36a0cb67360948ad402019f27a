@@ -166,6 +166,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1d9443_b9287f1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-09-28T00:06:40Z",
+      "side": 1,
+      "message": "If it is safe for Android (including for devices that are running an older Android version), then backporting this is fine.  The reasons why that is true, as well as *why* it\u0027s important that this be backported, need to be made super clear though --- in the linked bug and/or in a note at the end of the commit message.  It shouldn\u0027t be necessary to have this long discussion thread in order to get an explanation.",
+      "parentUuid": "f2452995_dee85532",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
