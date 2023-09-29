@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "104c4b69_6fcb2169",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-29T22:23:49Z",
+      "side": 1,
+      "message": "This seems odd since it is the only case here that is not used at all by the GKI build - it is for vendor builds.\n\nWould it make more sense to go ahead and add `GKI_HIDDEN_DRM_MODULE_CONFIGS\u003dm` to gki_defconfig to build as a GKI module? If partners are modifying, we can make it an unprotected GKI module.",
+      "revId": "ece222967c4fbde897f557f33fefbfe844ecc70d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
