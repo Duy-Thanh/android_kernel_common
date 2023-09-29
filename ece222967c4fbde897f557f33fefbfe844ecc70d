@@ -34,6 +34,24 @@
       "parentUuid": "104c4b69_6fcb2169",
       "revId": "ece222967c4fbde897f557f33fefbfe844ecc70d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0aa970c_2e18d6e5",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-29T22:44:39Z",
+      "side": 1,
+      "message": "How are partners using these today? If they have a vendor module that depends on it, it seems like they can add a `select DRM_DISPLAY_DP_HELPER` to cause them to be built. Can you add more detail to \"partners can\u0027t build them as modules without modifying the GKI source code\"?",
+      "parentUuid": "f1769fb3_15d57f93",
+      "revId": "ece222967c4fbde897f557f33fefbfe844ecc70d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
