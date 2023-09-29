@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baff8586_070c6d68",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-09-29T21:15:06Z",
+      "side": 1,
+      "message": "Based on the symbol lists, it looks like some partners are using these as modules. So we can\u0027t add them to GKI for this kernel.",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "29324f6aabc34c99d96cd58e39b5b6e03d58923f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
