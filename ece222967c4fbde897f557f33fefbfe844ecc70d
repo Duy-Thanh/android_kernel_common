@@ -52,6 +52,24 @@
       "parentUuid": "f1769fb3_15d57f93",
       "revId": "ece222967c4fbde897f557f33fefbfe844ecc70d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4879d08c_090ba2ed",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-09-30T00:24:34Z",
+      "side": 1,
+      "message": "Normally vendors don\u0027t use Kconfigs for their OOT drivers. They just set the configs using KBUILD_OPTIONS which doesn\u0027t allow you to build drivers outside of your OOT repo. Fortunately we actually do support external Kconfig files using KCONFIG_EXT_PREFIX. So I went ahead and tested this out by adding a Kconfig file to the OOT DRM driver with:\n```\nselect DRM_DISPLAY_DP_HELPER\nselect DRM_DISPLAY_HELPER\n```\nand it\u0027s working now. So I\u0027ll abandon this change for now and push for that solution.",
+      "parentUuid": "d0aa970c_2e18d6e5",
+      "revId": "ece222967c4fbde897f557f33fefbfe844ecc70d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
