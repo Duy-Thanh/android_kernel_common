@@ -765,7 +765,11 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_task)
 
 		/* Avoid f2fs_commit_super in irq context */
 		if (!in_task)
+<<<<<<< HEAD   (cb5ba6 Merge 6.1.39 into android15-6.1)
 			f2fs_handle_error_async(sbi, ERROR_FAIL_DECOMPRESSION);
+=======
+			f2fs_save_errors(sbi, ERROR_FAIL_DECOMPRESSION);
+>>>>>>> BRANCH (753891 Linux 6.1.40)
 		else
 			f2fs_handle_error(sbi, ERROR_FAIL_DECOMPRESSION);
 		goto out_release;

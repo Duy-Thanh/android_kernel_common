@@ -285,7 +285,11 @@ struct inode *ovl_i_path_real(struct inode *inode, struct path *path)
 		path->mnt = ovl_upper_mnt(OVL_FS(inode->i_sb));
 	}
 
+<<<<<<< HEAD   (cb5ba6 Merge 6.1.39 into android15-6.1)
 	return  path->dentry ? d_inode(path->dentry) : NULL;
+=======
+	return path->dentry ? d_inode_rcu(path->dentry) : NULL;
+>>>>>>> BRANCH (753891 Linux 6.1.40)
 }
 
 struct inode *ovl_inode_upper(struct inode *inode)
