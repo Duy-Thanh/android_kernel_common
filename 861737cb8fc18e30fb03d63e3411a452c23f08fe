@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd4a1a5_eae7e06e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1053408
+      },
+      "writtenOn": "2023-10-02T02:20:58Z",
+      "side": 1,
+      "message": "Please note that the change id was not preserved for the propagation of https://android-review.googlesource.com/c/kernel/common/+/2371209 as a change was raised earlier on android-mainline but was reverted.",
+      "revId": "861737cb8fc18e30fb03d63e3411a452c23f08fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
