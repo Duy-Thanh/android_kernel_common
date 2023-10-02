@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "855571d6_4e741fb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-02T18:00:28Z",
+      "side": 1,
+      "message": "\"CHROMIUM\" is not recognized as a valid tag for Android kernels. If this is a GKI/Android related branch, then it needs to conform to the contribution guidelines at go/ack-contribution-guidelines. If it isn\u0027t, then the GKI AyeAye checkers should be disabled.",
+      "revId": "f1c2e6d5789fec63309fef7e0f8030be0dc35183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
