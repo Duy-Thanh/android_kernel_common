@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "477d9d8a_33b2d22c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-02T16:08:54Z",
+      "side": 1,
+      "message": "If this was cherry-picked, then why does the Change-Id not match the source? (I972e2469c3f139373d21f1e8c85974763388a693).\n\nPlease abandon this version and cherry-pick properly, preserving the Change-Id.",
+      "revId": "861737cb8fc18e30fb03d63e3411a452c23f08fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ebd4a1a5_eae7e06e",
