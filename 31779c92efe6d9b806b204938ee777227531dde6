@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f257fc29_d16f4f5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2023-10-02T16:39:13Z",
+      "side": 1,
+      "message": "Symbol presence status for new symbols in related branches is as follows (❌ - Absent, ✅ - Present, ❔ - To be decided, ➖ - Unknown):\n\n|Symbols|12-5.4 (Older)|12-5.10 (Older)|13-5.10 (Older)|13-5.15 (Older)|14-5.15 (Sibling)|14-6.1 (This)|15-6.1 (Newer)|\n|:---------------------------------------------------|:----------------:|:-----------------:|:-----------------:|:-----------------:|:-------------------:|:---------------:|:----------------:|\n|cpumask_local_spread|❌|❌|❌|❌|✅|❔|❌|\n|devm_memunmap|❌|❌|✅|✅|✅|❔|❌|\n|dma_buf_set_name|❌|❌|❌|✅|✅|❔|❌|\n|gether_cleanup|❌|❌|✅|✅|✅|❔|❌|\n|gether_connect|❌|❌|✅|✅|✅|❔|❌|\n|gether_disconnect|❌|❌|✅|✅|✅|❔|❌|\n|gether_get_dev_addr|❌|❌|✅|✅|✅|❔|❌|\n|gether_get_host_addr|❌|❌|✅|✅|✅|❔|❌|\n|gether_get_host_addr_u8|❌|❌|✅|✅|✅|❔|❌|\n|gether_get_ifname|❌|❌|✅|✅|✅|❔|❌|\n|gether_get_qmult|❌|❌|✅|✅|✅|❔|❌|\n|gether_register_netdev|❌|❌|✅|✅|✅|❔|❌|\n|gether_set_dev_addr|❌|❌|✅|✅|✅|❔|❌|\n|gether_set_gadget|❌|❌|✅|✅|✅|❔|❌|\n|gether_set_host_addr|❌|❌|✅|✅|✅|❔|❌|\n|gether_set_ifname|❌|❌|✅|✅|✅|❔|❌|\n|gether_set_qmult|❌|❌|✅|✅|✅|❔|❌|\n|gether_setup_name_default|❌|❌|✅|✅|✅|❔|❌|\n|__traceiter_android_vh_typec_tcpm_modify_src_caps|❌|❌|✅|❌|✅|❔|❌|\n|__tracepoint_android_vh_typec_tcpm_modify_src_caps|❌|❌|✅|❌|✅|❔|❌|\n|__xa_erase|❌|❌|❌|✅|✅|❔|❌|\n|xas_find|❌|❌|❌|❌|✅|❔|❌|\n|xas_pause|❌|❌|❌|❌|✅|❔|❌|\n|__xa_store|❌|❌|❌|✅|✅|❔|❌|",
+      "revId": "31779c92efe6d9b806b204938ee777227531dde6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
