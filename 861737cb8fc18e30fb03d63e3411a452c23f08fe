@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f4fa3948_ad2caba7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1053408
+      },
+      "writtenOn": "2023-10-02T19:05:29Z",
+      "side": 1,
+      "message": "There is already a merged change https://android-review.googlesource.com/c/kernel/common/+/2371209 but it has been reverted, so i can\u0027t use the same change ID.",
+      "parentUuid": "477d9d8a_33b2d22c",
+      "revId": "861737cb8fc18e30fb03d63e3411a452c23f08fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ebd4a1a5_eae7e06e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
