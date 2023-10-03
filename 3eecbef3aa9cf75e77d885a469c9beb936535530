@@ -16,6 +16,24 @@
       "message": "why can\u0027t this be \"\u003dm\" in your config fragment (deliver this a vendor module)?",
       "revId": "3eecbef3aa9cf75e77d885a469c9beb936535530",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb1825ec_af7f2b07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2049965
+      },
+      "writtenOn": "2023-10-03T10:59:34Z",
+      "side": 1,
+      "message": "Thanks for your advice, we will deliver this as a vendor module.",
+      "parentUuid": "7fbdecf2_04e0c464",
+      "revId": "3eecbef3aa9cf75e77d885a469c9beb936535530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
