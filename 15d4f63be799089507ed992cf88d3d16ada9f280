@@ -1,0 +1,51 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055227125",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d5",
+      "fixSuggestions": [
+        {
+          "fixId": "02106e2f_5e54153f",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "    srcs \u003d [\":kselftest_tests_x86_64\"],\n"
+            },
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "    cmd \u003d \"echo $(locations :kselftest_tests_x86_64) \u003e $(OUTS)\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c3fb7cbd_7c9bb461",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-03T21:20:10Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "15d4f63be799089507ed992cf88d3d16ada9f280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
