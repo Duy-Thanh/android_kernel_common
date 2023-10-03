@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a32ad6e_ea367fea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1759937
+      },
+      "writtenOn": "2023-10-03T22:15:51Z",
+      "side": 1,
+      "message": "Can you please explain Bug: 302977161 briefly? I cannot access this bug.",
+      "revId": "19919fb4e58ce5c7484c1d70c523ac82891078e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
