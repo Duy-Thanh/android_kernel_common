@@ -2,6 +2,26 @@
   "comments": [
     {
       "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055227130",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d5",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ff276dc4_3a72146c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-03T21:20:18Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 570377490 android-build.ayeaye-python-dispatcher_20231003.04_p0",
+      "revId": "15d4f63be799089507ed992cf88d3d16ada9f280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
       "robotRunId": "AR00000000000055227125",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d5",
       "fixSuggestions": [
@@ -42,6 +62,53 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-03T21:20:10Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "15d4f63be799089507ed992cf88d3d16ada9f280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055227125",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d5",
+      "fixSuggestions": [
+        {
+          "fixId": "50839732_c634fdf4",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "    srcs \u003d [\":kselftest_tests_x86_64\"],\n"
+            },
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "    cmd \u003d \"echo $(locations :kselftest_tests_x86_64) \u003e $(OUTS)\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "7a37ac21_d58966fe",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-03T21:20:18Z",
       "side": 1,
       "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "15d4f63be799089507ed992cf88d3d16ada9f280",
