@@ -17,6 +17,8 @@
 #include <linux/mmc/host.h>
 #include <linux/mmc/card.h>
 
+#include <trace/hooks/mmc.h>
+
 #include "cqhci.h"
 #include "cqhci-crypto.h"
 
@@ -515,6 +517,8 @@ static int cqhci_prep_tran_desc(struct mmc_request *mrq,
 	}
 
 	desc = get_trans_desc(cq_host, tag);
+
+	trace_android_vh_mmc_cqhci_setup_tran_desc(data, cq_host, desc, sg_count);
 
 	for_each_sg(data->sg, sg, sg_count, i) {
 		addr = sg_dma_address(sg);
