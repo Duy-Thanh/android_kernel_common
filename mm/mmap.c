@@ -1284,10 +1284,11 @@ static inline bool file_mmap_ok(struct file *file, struct inode *inode,
 /*
  * The caller must write-lock current->mm->mmap_lock.
  */
-unsigned long do_mmap(struct file *file, unsigned long addr,
+unsigned long __do_mmap(struct file *file, unsigned long addr,
 			unsigned long len, unsigned long prot,
 			unsigned long flags, unsigned long pgoff,
-			unsigned long *populate, struct list_head *uf)
+			unsigned long *populate, struct list_head *uf,
+			bool is_16k)
 {
 	struct mm_struct *mm = current->mm;
 	vm_flags_t vm_flags;
@@ -1316,8 +1317,13 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 	if (!(flags & MAP_FIXED))
 		addr = round_hint_to_min(addr);
 
+	if ((flags & MAP_FIXED) && is_16k && !PAGE_ALIGNED_16K(addr)) {
+		pr_err("DEBUG: mmap: MAP_FIXED addr is not 16k aligned");
+		return -EINVAL;
+	}
+
 	/* Careful about overflows.. */
-	len = PAGE_ALIGN(len);
+	len = is_16k ? PAGE_ALIGN_16K(len) : PAGE_ALIGN(len);
 	if (!len)
 		return -ENOMEM;
 
@@ -1462,6 +1468,14 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 	     (flags & (MAP_POPULATE | MAP_NONBLOCK)) == MAP_POPULATE))
 		*populate = len;
 	return addr;
+}
+
+unsigned long do_mmap(struct file *file, unsigned long addr,
+			unsigned long len, unsigned long prot,
+			unsigned long flags, unsigned long pgoff,
+			unsigned long *populate, struct list_head *uf)
+{
+	return __do_mmap(file, addr, len, prot, flags, pgoff, populate, uf, true);
 }
 
 unsigned long ksys_mmap_pgoff(unsigned long addr, unsigned long len,

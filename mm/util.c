@@ -508,6 +508,69 @@ int account_locked_vm(struct mm_struct *mm, unsigned long pages, bool inc)
 }
 EXPORT_SYMBOL_GPL(account_locked_vm);
 
+static inline unsigned long __vm_mmap_pgoff(struct file *file, unsigned long addr,
+	unsigned long len, unsigned long prot,
+	unsigned long flag, unsigned long pgoff)
+{
+	unsigned long ret;
+	struct mm_struct *mm = current->mm;
+	unsigned long populate;
+	LIST_HEAD(uf);
+
+	ret = security_mmap_file(file, prot, flag);
+	if (!ret) {
+		// We are being called from the fault handler
+		// Release the read lock so we can take the write lock
+		mmap_read_unlock(mm);
+		mmap_write_lock(mm);
+		ret = __do_mmap(file, addr, len, prot, flag, pgoff, &populate,
+			      &uf, false);
+		mmap_write_unlock(mm);
+		userfaultfd_unmap_complete(mm, &uf);
+		if (populate)
+			mm_populate(ret, populate);
+		// Retake the read lock
+		mmap_read_lock(mm);
+	}
+	trace_android_vh_check_mmap_file(file, prot, flag, ret);
+	return ret;
+}
+
+static inline unsigned long __vm_mmap(struct file *file, unsigned long addr,
+	unsigned long len, unsigned long prot,
+	unsigned long flag, unsigned long offset)
+{
+	if (unlikely(offset + PAGE_ALIGN(len) < offset))
+		return -EINVAL;
+	if (unlikely(offset_in_page(offset)))
+		return -EINVAL;
+
+	return __vm_mmap_pgoff(file, addr, len, prot, flag, offset >> PAGE_SHIFT);
+}
+
+
+unsigned long filemap_insert_vma_partial(struct vm_fault *vmf)
+{
+	struct vm_area_struct *vma = vmf->vma;
+	struct file *file = vmf->vma->vm_file;
+	struct address_space *mapping = file->f_mapping;
+	struct inode *inode = mapping->host;
+	pgoff_t total_pgoff = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
+	pgoff_t pgoff_in_vma = total_pgoff - vma->vm_pgoff;
+	unsigned long addr = vma->vm_start + (pgoff_in_vma << PAGE_SHIFT);
+	unsigned long len = PAGE_ALIGN_16K(addr) - addr;
+	unsigned long prot = 0;
+
+	if (vma->vm_flags & VM_READ)
+		prot |= PROT_READ;
+	if (vma->vm_flags & VM_WRITE)
+		prot |= PROT_WRITE;
+	// This should never be executable?
+
+	return __vm_mmap(NULL, addr, len, prot,
+				  MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED, 0);
+}
+
 unsigned long vm_mmap_pgoff(struct file *file, unsigned long addr,
 	unsigned long len, unsigned long prot,
 	unsigned long flag, unsigned long pgoff)

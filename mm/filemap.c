@@ -3117,13 +3117,30 @@ vm_fault_t filemap_fault(struct vm_fault *vmf)
 	struct address_space *mapping = file->f_mapping;
 	struct inode *inode = mapping->host;
 	pgoff_t max_idx, index = vmf->pgoff;
+	pgoff_t max_idx_16k, index_16k = vmf->pgoff >> 2;
+	unsigned long fixup_vma;
 	struct folio *folio;
 	vm_fault_t ret = 0;
 	bool mapping_locked = false;
 
 	max_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
-	if (unlikely(index >= max_idx))
-		return VM_FAULT_SIGBUS;
+	if (unlikely(index >= max_idx)) {
+		pr_err("DEBUG: Attempting to fix up filemap for 16k kernel");
+		max_idx_16k = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE_16K);
+		if (unlikely(index_16k >= max_idx_16k)) {
+			pr_err("DEBUG: Oops, we are past even the next 16k boundary, die!");
+			return VM_FAULT_SIGBUS;
+		}
+
+		// Attempt to map in an anon vma to cover the region.
+		fixup_vma =  filemap_insert_vma_partial(vmf);
+
+		if (IS_ERR((void *)fixup_vma))  {
+			pr_err("DEBUG: failed to fixup vma: Send SIGBUS :( ");
+			return VM_FAULT_SIGBUS;
+		}
+		pr_err("DEBUG: Yay! Fixed filemap for 16k kernel");
+	}
 
 	/*
 	 * Do we have something in the page cache already?
