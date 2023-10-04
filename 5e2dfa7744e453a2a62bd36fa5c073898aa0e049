@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ce17f72_7edfda47",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-10-04T00:32:22Z",
+      "side": 1,
+      "message": "where is this lock initialized with spin_lock_init()?",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "5e2dfa7744e453a2a62bd36fa5c073898aa0e049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
