@@ -16,6 +16,24 @@
       "message": "No, please use the latest submitted upstream patchset instead.",
       "revId": "32b46a834eade32525c1ac75ab98bc5ce5a74ef3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99461399_1d81ed10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2023-10-04T01:41:18Z",
+      "side": 1,
+      "message": "Can you point me out which upstream patchset is? Thanks.",
+      "parentUuid": "ab4e8e70_10014075",
+      "revId": "32b46a834eade32525c1ac75ab98bc5ce5a74ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
