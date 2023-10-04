@@ -34,6 +34,24 @@
       "parentUuid": "3a32ad6e_ea367fea",
       "revId": "19919fb4e58ce5c7484c1d70c523ac82891078e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05fc0c17_c152928b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1759937
+      },
+      "writtenOn": "2023-10-04T03:44:41Z",
+      "side": 1,
+      "message": "I know this is propagation. I did not expect that other vendors need this patch too when I pushed it.\nIs this cherry-pick just for maintaining code? or other requirement?",
+      "parentUuid": "05a03704_706762b1",
+      "revId": "19919fb4e58ce5c7484c1d70c523ac82891078e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
