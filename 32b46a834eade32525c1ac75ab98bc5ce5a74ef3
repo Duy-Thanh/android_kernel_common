@@ -34,6 +34,24 @@
       "parentUuid": "ab4e8e70_10014075",
       "revId": "32b46a834eade32525c1ac75ab98bc5ce5a74ef3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ef067c_a9651128",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-04T13:18:49Z",
+      "side": 1,
+      "message": "It\u0027s in the normal place on the linux-usb mailing list, search lore.kernel.org if you are not subscribed to it.",
+      "parentUuid": "99461399_1d81ed10",
+      "revId": "32b46a834eade32525c1ac75ab98bc5ce5a74ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
