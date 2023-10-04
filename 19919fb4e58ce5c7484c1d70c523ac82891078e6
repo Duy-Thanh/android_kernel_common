@@ -16,6 +16,24 @@
       "message": "Can you please explain Bug: 302977161 briefly? I cannot access this bug.",
       "revId": "19919fb4e58ce5c7484c1d70c523ac82891078e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a03704_706762b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1053408
+      },
+      "writtenOn": "2023-10-04T03:37:37Z",
+      "side": 1,
+      "message": "It\u0027s propagation of the existing change to android-mainline",
+      "parentUuid": "3a32ad6e_ea367fea",
+      "revId": "19919fb4e58ce5c7484c1d70c523ac82891078e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
