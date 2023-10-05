@@ -40,6 +40,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_iommu_limit_align_shift,
 		unsigned long *shift),
 	TP_ARGS(iovad, size, shift), 1);
 
+DECLARE_HOOK(android_vh_iommu_device_register,
+	TP_PROTO(bool *version),
+	TP_ARGS(version));
+
 #endif /* _TRACE_HOOK_IOMMU_H */
 
 /* This part must be outside protection */
