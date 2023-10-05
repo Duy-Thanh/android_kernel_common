@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055368672",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d9",
+      "fixSuggestions": [
+        {
+          "fixId": "e2cb8113_d4a9b0b3",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": "    srcs \u003d [\"//common/tools/testing/selftests:kselftest_tests_x86_64\"],\n"
+            },
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": "    cmd \u003d \"echo $(locations //common/tools/testing/selftests:kselftest_tests_x86_64) \u003e $(OUTS)\",\n"
+            },
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "    srcs \u003d [\"//common/tools/testing/selftests:kselftest_tests_arm64\"],\n"
+            },
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "    cmd \u003d \"echo $(locations //common/tools/testing/selftests:kselftest_tests_arm64) \u003e $(OUTS)\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "8edfc30d_02598349",
+        "filename": "tools/testing/BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-05T00:44:23Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "b8c9f66268160f6514aedb14cd9066c464c36ef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055368672",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d9",
+      "fixSuggestions": [
+        {
+          "fixId": "6e75ad7f_a62849d5",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_binderfs_test\",\n"
+            },
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "1ba8e5a8_320d8be1",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-05T00:44:23Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "b8c9f66268160f6514aedb14cd9066c464c36ef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
