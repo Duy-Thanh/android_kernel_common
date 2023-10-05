@@ -71,7 +71,7 @@ static unsigned long arch_rnd(unsigned int rndbits)
 {
 	if (!(current->flags & PF_RANDOMIZE))
 		return 0;
-	return (get_random_long() & ((1UL << rndbits) - 1)) << PAGE_SHIFT;
+	return (get_random_long() & ((1UL << rndbits) - 1)) << PAGE_SHIFT_16K;
 }
 
 unsigned long arch_mmap_rnd(void)
