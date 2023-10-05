@@ -2,6 +2,26 @@
   "comments": [
     {
       "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055367931",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d8",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2cb76a4e_d112e5c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-05T00:36:00Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 570674827 android-build.ayeaye-python-dispatcher_20231004.04_p0",
+      "revId": "5fbe0a3cdbac465f2a5c6527a177ba26997587e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
       "robotRunId": "AR00000000000055367914",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d8",
       "fixSuggestions": [
@@ -73,6 +93,73 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d8",
       "fixSuggestions": [
         {
+          "fixId": "7f40d507_687cc598",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": "    srcs \u003d [\"//common/tools/testing/selftests:kselftest_tests_x86_64\"],\n"
+            },
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": "    cmd \u003d \"echo $(locations //common/tools/testing/selftests:kselftest_tests_x86_64) \u003e $(OUTS)\",\n"
+            },
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "    srcs \u003d [\"//common/tools/testing/selftests:kselftest_tests_arm64\"],\n"
+            },
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "    cmd \u003d \"echo $(locations //common/tools/testing/selftests:kselftest_tests_arm64) \u003e $(OUTS)\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "2aab5282_410a6dc7",
+        "filename": "tools/testing/BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-05T00:36:00Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "5fbe0a3cdbac465f2a5c6527a177ba26997587e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055367914",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d8",
+      "fixSuggestions": [
+        {
           "fixId": "2a32b439_71b47231",
           "description": "Buildifier Suggestion",
           "replacements": [
@@ -109,6 +196,53 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-05T00:35:53Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "5fbe0a3cdbac465f2a5c6527a177ba26997587e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055367914",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d8",
+      "fixSuggestions": [
+        {
+          "fixId": "def8d584_4cfeea09",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_binderfs_test\",\n"
+            },
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "6d1a2317_3e0588f3",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-05T00:36:00Z",
       "side": 1,
       "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "5fbe0a3cdbac465f2a5c6527a177ba26997587e0",
