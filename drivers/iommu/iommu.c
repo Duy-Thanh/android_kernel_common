@@ -30,6 +30,7 @@
 #include <linux/cc_platform.h>
 #include <trace/events/iommu.h>
 #include <linux/sched/mm.h>
+#include <trace/hooks/iommu.h>
 
 #include "dma-iommu.h"
 
@@ -202,6 +203,24 @@ static int remove_iommu_group(struct device *dev, void *data)
 	return 0;
 }
 
+static int bus_set_iommu(struct iommu_device *iommu,
+			const struct iommu_ops *ops,struct device *hwdev, int index)
+{
+	int err=0;
+	iommu->ops = ops;
+
+	if (hwdev)
+		iommu->fwnode = dev_fwnode(hwdev);
+	spin_lock(&iommu_device_lock);
+	list_add_tail(&iommu->list, &iommu_device_list);
+	spin_unlock(&iommu_device_lock);
+	iommu_buses[index]->iommu_ops = ops;
+	err = bus_iommu_probe(iommu_buses[index]);
+	if (err)
+		iommu_device_unregister(iommu);
+	return err;
+}
+
 /**
  * iommu_device_register() - Register an IOMMU hardware instance
  * @iommu: IOMMU handle for the instance
@@ -214,10 +233,29 @@ int iommu_device_register(struct iommu_device *iommu,
 			  const struct iommu_ops *ops, struct device *hwdev)
 {
 	int err = 0;
+	struct bus_type *bus;
+	static uint8_t mask=0x0;
+	int index=0;
 
 	/* We need to be able to take module references appropriately */
 	if (WARN_ON(is_module_address((unsigned long)ops) && !ops->owner))
 		return -EINVAL;
+
+	bus =  kzalloc(sizeof(struct bus_type), GFP_KERNEL);
+	trace_android_vh_iommu_device_register(bus);
+	if (bus->name!=NULL)
+	{
+		for (int i = 0; i < ARRAY_SIZE(iommu_buses); i++) {
+			if(strncmp(bus->name, iommu_buses[i]->name, strlen(bus->name)) == 0)
+			{
+				mask |= (1<<i);
+				index=i;
+				break;
+			}
+		}
+		return bus_set_iommu(iommu, ops, hwdev, index);
+	}
+
 	/*
 	 * Temporarily enforce global restriction to a single driver. This was
 	 * already the de-facto behaviour, since any possible combination of
@@ -235,8 +273,10 @@ int iommu_device_register(struct iommu_device *iommu,
 	spin_unlock(&iommu_device_lock);
 
 	for (int i = 0; i < ARRAY_SIZE(iommu_buses) && !err; i++) {
-		iommu_buses[i]->iommu_ops = ops;
-		err = bus_iommu_probe(iommu_buses[i]);
+		if(!((1<<i)& mask)) {
+			iommu_buses[i]->iommu_ops = ops;
+			err = bus_iommu_probe(iommu_buses[i]);
+		}
 	}
 	if (err)
 		iommu_device_unregister(iommu);
