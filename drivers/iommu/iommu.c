@@ -30,6 +30,7 @@
 #include <linux/cc_platform.h>
 #include <trace/events/iommu.h>
 #include <linux/sched/mm.h>
+#include <trace/hooks/iommu.h>
 
 #include "dma-iommu.h"
 
@@ -214,6 +215,7 @@ int iommu_device_register(struct iommu_device *iommu,
 			  const struct iommu_ops *ops, struct device *hwdev)
 {
 	int err = 0;
+	bool version_3 = false;
 
 	/* We need to be able to take module references appropriately */
 	if (WARN_ON(is_module_address((unsigned long)ops) && !ops->owner))
@@ -224,7 +226,11 @@ int iommu_device_register(struct iommu_device *iommu,
 	 * existing drivers would compete for at least the PCI or platform bus.
 	 */
 	if (iommu_buses[0]->iommu_ops && iommu_buses[0]->iommu_ops != ops)
-		return -EBUSY;
+	{
+		trace_android_vh_iommu_device_register(&version_3);
+		if (version_3 == false)
+			return -EBUSY;
+	}
 
 	iommu->ops = ops;
 	if (hwdev)
@@ -235,6 +241,14 @@ int iommu_device_register(struct iommu_device *iommu,
 	spin_unlock(&iommu_device_lock);
 
 	for (int i = 0; i < ARRAY_SIZE(iommu_buses) && !err; i++) {
+		if (version_3 == true) {
+			if (iommu_buses[i] != &pci_bus_type)
+				continue;
+		} else if (version_3 == false) {
+			if (iommu_buses[i] == &pci_bus_type)
+				continue;
+		}
+
 		iommu_buses[i]->iommu_ops = ops;
 		err = bus_iommu_probe(iommu_buses[i]);
 	}
