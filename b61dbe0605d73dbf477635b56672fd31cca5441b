@@ -39,6 +39,30 @@
       },
       "revId": "b61dbe0605d73dbf477635b56672fd31cca5441b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a975a18_90973ee7",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8250,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-10-06T17:42:23Z",
+      "side": 0,
+      "message": "The deal with vendor_hooks on mainline is that they are allowed to be dropped and the owner is responsible for re-adding it.",
+      "parentUuid": "cba410ce_cfe82b56",
+      "range": {
+        "startLine": 8244,
+        "startChar": 1,
+        "endLine": 8250,
+        "endChar": 0
+      },
+      "revId": "b61dbe0605d73dbf477635b56672fd31cca5441b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
