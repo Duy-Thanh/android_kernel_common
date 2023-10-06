@@ -33,6 +33,24 @@
       "message": "Please do not change the file mode. This is now executable (755)",
       "revId": "72f99ffe6f1ee4632231b4d3ca051fc831420688",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28d7bd50_27f1422e",
+        "filename": "android/abi_gki_aarch64.stg",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1929712
+      },
+      "writtenOn": "2023-10-06T01:43:43Z",
+      "side": 1,
+      "message": "change abi_gki_aarch64.stg file mode to 664",
+      "parentUuid": "a18e5169_2c12d6b7",
+      "revId": "72f99ffe6f1ee4632231b4d3ca051fc831420688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
