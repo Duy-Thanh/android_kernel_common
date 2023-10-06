@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055484284",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2773746?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "cdd3cac5_809ef6b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-06T00:27:41Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 570997971 android-build.ayeaye-python-dispatcher_20231005.04_p0",
+      "revId": "564af4936a5bb1eae0bd6c8a0efc3b94857f0e43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055484284",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2773746?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "0efb7ddc_f6504b1a",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 10,
+                "startChar": 0,
+                "endLine": 10,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Kalesh Singh \u003ckaleshsingh@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "dc7c8469_bd0e2c81",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-06T00:27:41Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Kalesh Singh \u003ckaleshsingh@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 570997971 android-build.ayeaye-python-dispatcher_20231005.04_p0",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 0
+      },
+      "revId": "564af4936a5bb1eae0bd6c8a0efc3b94857f0e43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
