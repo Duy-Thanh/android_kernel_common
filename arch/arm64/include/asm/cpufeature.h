@@ -759,8 +759,14 @@ static inline bool system_uses_ttbr0_pan(void)
 
 static __always_inline bool system_supports_sve(void)
 {
+	if (system_capabilities_finalized()) {
+		return IS_ENABLED(CONFIG_ARM64_SVE) &&
+			cpus_have_const_cap(ARM64_SVE);
+	}
+
+	/* This function can be called very early at boot before init_cpu_features()*/
 	return IS_ENABLED(CONFIG_ARM64_SVE) &&
-		cpus_have_const_cap(ARM64_SVE);
+		id_aa64pfr0_sve(read_sysreg_s(SYS_ID_AA64PFR0_EL1));
 }
 
 static __always_inline bool system_supports_sme(void)

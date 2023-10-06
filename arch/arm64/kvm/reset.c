@@ -33,7 +33,8 @@
 static u32 kvm_ipa_limit;
 
 unsigned int kvm_sve_max_vl;
-unsigned int kvm_host_sve_max_vl;
+/* Init with worst case size */
+unsigned int kvm_host_sve_max_vl = sve_vl_from_vq(16);
 
 int kvm_arm_init_sve(void)
 {
