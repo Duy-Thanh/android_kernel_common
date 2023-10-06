@@ -317271,6 +317271,12 @@ function {
   parameter_id: 0x02a8d0c9
 }
 function {
+  id: 0x9ba62ef4
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x026525e9
+}
+function {
   id: 0x9ba6ac88
   return_type_id: 0x6720d32f
   parameter_id: 0x19118777
@@ -335347,6 +335353,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_mmap_region"
 }
 elf_symbol {
+  id: 0x0c9da1aa
+  name: "__traceiter_android_vh_mmc_blk_mq_rw_recovery"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9a666675
+  type_id: 0x9ba62ef4
+  full_name: "__traceiter_android_vh_mmc_blk_mq_rw_recovery"
+}
+elf_symbol {
   id: 0x5612c9d1
   name: "__traceiter_android_vh_mmput"
   is_defined: true
@@ -335804,6 +335819,15 @@ elf_symbol {
   crc: 0xb4afabfc
   type_id: 0x9b17b01e
   full_name: "__traceiter_android_vh_scheduler_tick"
+}
+elf_symbol {
+  id: 0xe4ec133d
+  name: "__traceiter_android_vh_sd_update_bus_speed_mode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd12257ab
+  type_id: 0x9ba62ef4
+  full_name: "__traceiter_android_vh_sd_update_bus_speed_mode"
 }
 elf_symbol {
   id: 0xaa3f6a65
@@ -339037,6 +339061,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_mmap_region"
 }
 elf_symbol {
+  id: 0x1daf6454
+  name: "__tracepoint_android_vh_mmc_blk_mq_rw_recovery"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xc7751460
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mmc_blk_mq_rw_recovery"
+}
+elf_symbol {
   id: 0x41c8d09b
   name: "__tracepoint_android_vh_mmput"
   is_defined: true
@@ -339494,6 +339527,15 @@ elf_symbol {
   crc: 0xa3e74b24
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_scheduler_tick"
+}
+elf_symbol {
+  id: 0xcfab6e83
+  name: "__tracepoint_android_vh_sd_update_bus_speed_mode"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x6a78e6b4
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_sd_update_bus_speed_mode"
 }
 elf_symbol {
   id: 0xd7ceb15f
@@ -396021,6 +396063,7 @@ interface {
   symbol_id: 0x10e93e46
   symbol_id: 0x49cebcae
   symbol_id: 0xe44dacb1
+  symbol_id: 0x0c9da1aa
   symbol_id: 0x5612c9d1
   symbol_id: 0xa77effd1
   symbol_id: 0xb7624cbd
@@ -396072,6 +396115,7 @@ interface {
   symbol_id: 0xb5ed74f6
   symbol_id: 0xedb34a44
   symbol_id: 0xb841c45e
+  symbol_id: 0xe4ec133d
   symbol_id: 0xaa3f6a65
   symbol_id: 0xa2fe718f
   symbol_id: 0xe828d15b
@@ -396431,6 +396475,7 @@ interface {
   symbol_id: 0x1a1d0854
   symbol_id: 0xf2890610
   symbol_id: 0xb6da564f
+  symbol_id: 0x1daf6454
   symbol_id: 0x41c8d09b
   symbol_id: 0xe2ad11db
   symbol_id: 0xcac93aff
@@ -396482,6 +396527,7 @@ interface {
   symbol_id: 0x931fa088
   symbol_id: 0xaaf6a826
   symbol_id: 0xff2bccb8
+  symbol_id: 0xcfab6e83
   symbol_id: 0xd7ceb15f
   symbol_id: 0x923147c1
   symbol_id: 0x5b6bc3a9
