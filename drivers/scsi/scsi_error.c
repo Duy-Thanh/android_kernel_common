@@ -528,6 +528,7 @@ static void scsi_report_sense(struct scsi_device *sdev,
  */
 enum scsi_disposition scsi_check_sense(struct scsi_cmnd *scmd)
 {
+	struct request *req = scsi_cmd_to_rq(scmd);
 	struct scsi_device *sdev = scmd->device;
 	struct scsi_sense_hdr sshdr;
 
@@ -679,8 +680,15 @@ enum scsi_disposition scsi_check_sense(struct scsi_cmnd *scmd)
 		 * have completed.
 		 */
 		if (sshdr.asc == 0x21 && sshdr.ascq == 0x04 &&
-		    blk_queue_no_zone_write_lock(scsi_cmd_to_rq(scmd)->q))
-			return NEEDS_DELAYED_RETRY;
+		    blk_queue_no_zone_write_lock(req->q) &&
+		    blk_rq_is_seq_zoned_write(req)) {
+			sdev_printk(KERN_INFO, scmd->device,
+				    "Retrying unaligned write at LBA %#llx; retries = %d; allowed = %d.\n",
+				    scsi_get_lba(scmd), scmd->retries,
+				    scmd->allowed);
+			if (scmd->retries < scmd->allowed)
+				return NEEDS_DELAYED_RETRY;
+		}
 
 		if (sshdr.asc == 0x20 || /* Invalid command operation code */
 		    sshdr.asc == 0x21 || /* Logical block address out of range */
