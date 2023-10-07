@@ -39,6 +39,46 @@
       "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 570997971 android-build.ayeaye-python-dispatcher_20231005.04_p0",
       "revId": "e2c53203d6082cf4c2574b7d3a2dbbdea31f1272",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055568569",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2754765?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "80bbd500_37405655",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-07T00:02:52Z",
+      "side": 1,
+      "message": "Commit does not link to an upstream reference at lore.\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 570997971 android-build.ayeaye-python-dispatcher_20231005.04_p0",
+      "revId": "e2c53203d6082cf4c2574b7d3a2dbbdea31f1272",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055568569",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2754765?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b0d7b8cc_d1409e85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-07T00:02:52Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 570997971 android-build.ayeaye-python-dispatcher_20231005.04_p0",
+      "revId": "e2c53203d6082cf4c2574b7d3a2dbbdea31f1272",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
