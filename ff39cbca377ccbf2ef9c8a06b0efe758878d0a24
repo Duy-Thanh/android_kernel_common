@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf7aa5d_6d76617d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-08T12:53:00Z",
+      "side": 1,
+      "message": "hi,Todd Kjos\nWe have a project need add vendor hooks in function  regmap_mmio_read and regmap_mmio_write,please view it.",
+      "revId": "ff39cbca377ccbf2ef9c8a06b0efe758878d0a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
