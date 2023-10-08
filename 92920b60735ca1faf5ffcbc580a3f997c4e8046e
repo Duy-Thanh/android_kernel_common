@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efeb5149_e48c976c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-08T12:47:11Z",
+      "side": 1,
+      "message": "hi,Todd Kjos\n\nWe have a project need add vendor hooks in function __show_regs(), so need to add symbols, please view it.",
+      "revId": "92920b60735ca1faf5ffcbc580a3f997c4e8046e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
