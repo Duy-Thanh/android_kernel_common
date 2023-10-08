@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "522ed5ff_a6f32bf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-08T12:55:09Z",
+      "side": 1,
+      "message": "hi,Todd Kjos\nWe have a project need add vendor hooks in function regmap_mmio_read and regmap_mmio_write, so need to add symbols, please view it.",
+      "revId": "96ab57e43a6dadadafc1baf0405be909d31cb082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
