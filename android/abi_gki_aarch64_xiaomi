@@ -557,3 +557,19 @@
   __tracepoint_android_vh_rmqueue_smallest_bypass
   __traceiter_android_vh_free_one_page_bypass
   __tracepoint_android_vh_free_one_page_bypass
+
+# required by mi_damon.ko
+  mem_cgroup_iter
+  putback_lru_page
+  isolate_lru_page
+  page_vma_mapped_walk
+  rmap_walk
+  page_rmapping
+  page_lock_anon_vma_read
+  do_madvise
+  __mmu_notifier_test_young
+  walk_page_range
+  pfn_to_online_page
+  schedule_timeout_idle
+  __mmu_notifier_clear_young
+  walk_system_ram_res
