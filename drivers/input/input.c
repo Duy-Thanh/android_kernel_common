@@ -50,6 +50,8 @@ static DEFINE_MUTEX(input_mutex);
 
 static const struct input_value input_value_sync = { EV_SYN, SYN_REPORT, 1 };
 
+
+
 static const unsigned int input_max_code[EV_CNT] = {
 	[EV_KEY] = KEY_MAX,
 	[EV_REL] = REL_MAX,
