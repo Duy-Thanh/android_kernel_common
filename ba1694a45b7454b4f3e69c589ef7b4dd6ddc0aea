@@ -16,6 +16,24 @@
       "message": "Please add more details. What are the hooks and what features do they support?",
       "revId": "ba1694a45b7454b4f3e69c589ef7b4dd6ddc0aea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40dfdf96_b1c62982",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1970009
+      },
+      "writtenOn": "2023-10-09T03:25:21Z",
+      "side": 1,
+      "message": "Updated the commit message, please have a look.",
+      "parentUuid": "45acfd96_8f45d297",
+      "revId": "ba1694a45b7454b4f3e69c589ef7b4dd6ddc0aea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
