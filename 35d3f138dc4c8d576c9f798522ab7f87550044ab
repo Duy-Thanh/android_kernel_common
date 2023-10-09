@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04275225_5bff638b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2023-10-09T18:00:34Z",
+      "side": 1,
+      "message": "Symbol presence status for new symbols in related branches is as follows (❌ - Absent, ✅ - Present, ❔ - To be decided, ➖ - Unknown):\n\n|Symbols|12-5.4 (Older)|12-5.10 (Older)|13-5.10 (Sibling)|13-5.15 (This)|14-5.15 (Newer)|14-6.1 (Newer)|15-6.1 (Newer)|\n|:------------------------------------------------|:----------------:|:-----------------:|:-------------------:|:----------------:|:-----------------:|:----------------:|:----------------:|\n|__traceiter_android_vh_free_pages_ok|❌|❌|❌|❔|❌|❌|❌|\n|__traceiter_android_vh_free_unref_page_prepare|❌|❌|❌|❔|❌|❌|❌|\n|__tracepoint_android_vh_free_pages_ok|❌|❌|❌|❔|❌|❌|❌|\n|__tracepoint_android_vh_free_unref_page_prepare|❌|❌|❌|❔|❌|❌|❌|",
+      "revId": "35d3f138dc4c8d576c9f798522ab7f87550044ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
