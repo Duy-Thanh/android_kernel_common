@@ -16,6 +16,24 @@
       "message": "Hi fengqi,Please help to add bug id \"304161948\"in the commit message.",
       "revId": "31e661d4a5ffa23be628684df1c3af6569d0a8a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d94757_68fa5e85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933031
+      },
+      "writtenOn": "2023-10-09T02:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f686dca_358dee04",
+      "revId": "31e661d4a5ffa23be628684df1c3af6569d0a8a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
