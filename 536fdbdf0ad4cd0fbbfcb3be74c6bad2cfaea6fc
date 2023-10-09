@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66ba7a1_c7a7372d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-09T18:25:50Z",
+      "side": 1,
+      "message": "This title is not valid. You are exporting symbols to use DAMON as a external driver, so that\u0027s what it should say. The description should be updated as well.",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "536fdbdf0ad4cd0fbbfcb3be74c6bad2cfaea6fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
