@@ -1472,10 +1472,15 @@ static enum folio_references folio_check_references(struct folio *folio,
 	int referenced_ptes, referenced_folio;
 	unsigned long vm_flags;
 	int ret = 0;
+	bool should_protect = false;
 
 	trace_android_vh_check_folio_look_around_ref(folio, &ret);
 	if (ret)
 		return ret;
+
+	trace_android_vh_page_should_be_protected(folio, &should_protect);
+	if (unlikely(should_protect))
+		return FOLIOREF_ACTIVATE;
 
 	referenced_ptes = folio_referenced(folio, 1, sc->target_mem_cgroup,
 					   &vm_flags);
@@ -2625,6 +2630,7 @@ static void shrink_active_list(unsigned long nr_to_scan,
 	int file = is_file_lru(lru);
 	struct pglist_data *pgdat = lruvec_pgdat(lruvec);
 	bool bypass = false;
+	bool should_protect = false;
 
 	lru_add_drain();
 
@@ -2659,6 +2665,13 @@ static void shrink_active_list(unsigned long nr_to_scan,
 					filemap_release_folio(folio, 0);
 				folio_unlock(folio);
 			}
+		}
+
+		trace_android_vh_page_should_be_protected(folio, &should_protect);
+		if (unlikely(should_protect)) {
+			nr_rotated += folio_nr_pages(folio);
+			list_add(&folio->lru, &l_active);
+			continue;
 		}
 
 		trace_android_vh_page_referenced_check_bypass(folio, nr_to_scan, lru, &bypass);
