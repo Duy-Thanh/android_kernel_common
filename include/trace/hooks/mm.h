@@ -140,6 +140,22 @@ DECLARE_HOOK(android_vh_look_around,
 	TP_PROTO(struct page_vma_mapped_walk *pvmw, struct folio *folio,
 		struct vm_area_struct *vma, int *referenced),
 	TP_ARGS(pvmw, folio, vma, referenced));
+DECLARE_HOOK(android_vh_update_page_mapcount,
+	TP_PROTO(struct page *page, bool inc_size, bool compound,
+			bool *first_mapping, bool *success),
+	TP_ARGS(page, inc_size, compound, first_mapping, success));
+DECLARE_HOOK(android_vh_add_page_to_lrulist,
+	TP_PROTO(struct folio *folio, bool compound, enum lru_list lru),
+	TP_ARGS(folio, compound, lru));
+DECLARE_HOOK(android_vh_del_page_from_lrulist,
+	TP_PROTO(struct folio *folio, bool compound, enum lru_list lru),
+	TP_ARGS(folio, compound, lru));
+DECLARE_HOOK(android_vh_show_mapcount_pages,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused));
+DECLARE_HOOK(android_vh_do_traversal_lruvec,
+	TP_PROTO(struct lruvec *lruvec),
+	TP_ARGS(lruvec));
 
 DECLARE_HOOK(android_vh_mm_alloc_pages_direct_reclaim_enter,
 	TP_PROTO(unsigned int order),
