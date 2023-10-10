@@ -30,8 +30,13 @@
 #define __LOCK(lock) \
   do { preempt_disable(); ___LOCK(lock); } while (0)
 
+#ifdef CONFIG_CBMC
+	#define __LOCK_BH(lock) \
+    __CPROVER_assert(0, "Shouldn't reach here");
+#else
 #define __LOCK_BH(lock) \
   do { __local_bh_disable_ip(_THIS_IP_, SOFTIRQ_LOCK_OFFSET); ___LOCK(lock); } while (0)
+#endif
 
 #define __LOCK_IRQ(lock) \
   do { local_irq_disable(); __LOCK(lock); } while (0)
@@ -45,9 +50,14 @@
 #define __UNLOCK(lock) \
   do { preempt_enable(); ___UNLOCK(lock); } while (0)
 
+#ifdef CONFIG_CBMC
+	#define __UNLOCK_BH(lock) \
+    __CPROVER_assert(0, "Shouldn't reach here");
+#else
 #define __UNLOCK_BH(lock) \
   do { __local_bh_enable_ip(_THIS_IP_, SOFTIRQ_LOCK_OFFSET); \
        ___UNLOCK(lock); } while (0)
+#endif
 
 #define __UNLOCK_IRQ(lock) \
   do { local_irq_enable(); __UNLOCK(lock); } while (0)

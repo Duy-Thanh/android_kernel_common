@@ -131,9 +131,13 @@ static inline void __raw_spin_lock_irq(raw_spinlock_t *lock)
 
 static inline void __raw_spin_lock_bh(raw_spinlock_t *lock)
 {
+#ifdef CONFIG_CBMC
+	__CPROVER_assert(0, "Shouldn't reach here");
+#else
 	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 	spin_acquire(&lock->dep_map, 0, 0, _RET_IP_);
 	LOCK_CONTENDED(lock, do_raw_spin_trylock, do_raw_spin_lock);
+#endif
 }
 
 static inline void __raw_spin_lock(raw_spinlock_t *lock)
@@ -171,13 +175,20 @@ static inline void __raw_spin_unlock_irq(raw_spinlock_t *lock)
 
 static inline void __raw_spin_unlock_bh(raw_spinlock_t *lock)
 {
+#ifdef CONFIG_CBMC
+	__CPROVER_assert(0, "Shouldn't reach here");
+#else
 	spin_release(&lock->dep_map, _RET_IP_);
 	do_raw_spin_unlock(lock);
 	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
+#endif
 }
 
 static inline int __raw_spin_trylock_bh(raw_spinlock_t *lock)
 {
+#ifdef CONFIG_CBMC
+	__CPROVER_assert(0, "Shouldn't reach here");
+#else
 	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 	if (do_raw_spin_trylock(lock)) {
 		spin_acquire(&lock->dep_map, 0, 1, _RET_IP_);
@@ -185,6 +196,7 @@ static inline int __raw_spin_trylock_bh(raw_spinlock_t *lock)
 	}
 	__local_bh_enable_ip(_RET_IP_, SOFTIRQ_LOCK_OFFSET);
 	return 0;
+#endif
 }
 
 /* PREEMPT_RT has its own rwlock implementation */
