@@ -94,6 +94,30 @@
       },
       "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3560a99_bec072c1",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-10T14:26:27Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t mean to submit hooks upstream, but rather submit your needed error handling code upstream as I am sure that they would like it and it would make your maintenance life easier as well.",
+      "parentUuid": "44b5d221_5fe3ecb0",
+      "range": {
+        "startLine": 1872,
+        "startChar": 2,
+        "endLine": 1872,
+        "endChar": 41
+      },
+      "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
