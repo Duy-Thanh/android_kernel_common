@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055732429",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2750085?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1a1be6ab_c8a8966d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-10T02:54:54Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 571913249 android-build.ayeaye-python-dispatcher_20231009.04_p0",
+      "revId": "b3c669b2de963600380ef3c9cf5a2c7dc31651f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055732429",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2750085?revision\u003d6",
+      "fixSuggestions": [
+        {
+          "fixId": "9cfa0081_47b47b23",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: 80389617 \u003cwangyongqiang1@oppo.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "e0798476_faa21d4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-10T02:54:54Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: 80389617 \u003cwangyongqiang1@oppo.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 571913249 android-build.ayeaye-python-dispatcher_20231009.04_p0",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "b3c669b2de963600380ef3c9cf5a2c7dc31651f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
