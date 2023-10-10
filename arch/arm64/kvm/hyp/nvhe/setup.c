@@ -34,7 +34,6 @@ static void *vm_table_base;
 static void *hyp_pgt_base;
 static void *host_s2_pgt_base;
 static void *ffa_proxy_pages;
-static void *hyp_host_fp_base;
 static struct kvm_pgtable_mm_ops pkvm_pgtable_mm_ops;
 static struct hyp_pool hpool;
 
@@ -69,16 +68,28 @@ static int divide_memory_pool(void *virt, unsigned long size)
 	if (!ffa_proxy_pages)
 		return -ENOMEM;
 
-	nr_pages = hyp_host_fp_pages(hyp_nr_cpus);
-	hyp_host_fp_base = hyp_early_alloc_contig(nr_pages);
-	if (!hyp_host_fp_base)
-		return -ENOMEM;
+	return 0;
+}
+
+static int create_hyp_host_fp_mappings(unsigned long *host_fp_state)
+{
+	void *start, *end;
+	int ret, i;
+
+	for (i = 0; i < hyp_nr_cpus; i++) {
+		start = (void *)kern_hyp_va(host_fp_state[i]);
+		end = start + PAGE_ALIGN(pkvm_host_fp_state_size());
+		ret = pkvm_create_mappings(start, end, PAGE_HYP);
+		if (ret)
+			return ret;
+	}
 
 	return 0;
 }
 
 static int recreate_hyp_mappings(phys_addr_t phys, unsigned long size,
 				 unsigned long *per_cpu_base,
+				 unsigned long *host_fp_state,
 				 u32 hyp_va_bits)
 {
 	void *start, *end, *virt = hyp_phys_to_virt(phys);
@@ -163,6 +174,8 @@ static int recreate_hyp_mappings(phys_addr_t phys, unsigned long size,
 		/* Update stack_hyp_va to end of the stack's private VA range */
 		params->stack_hyp_va = hyp_addr + (2 * PAGE_SIZE);
 	}
+
+	create_hyp_host_fp_mappings(host_fp_state);
 
 	/*
 	 * Map the host sections RO in the hypervisor, but transfer the
@@ -405,7 +418,6 @@ void __noreturn __pkvm_init_finalise(void)
 		goto out;
 
 	pkvm_hyp_vm_table_init(vm_table_base);
-	pkvm_hyp_host_fp_init(hyp_host_fp_base);
 out:
 	/*
 	 * We tail-called to here from handle___pkvm_init() and will not return,
@@ -417,7 +429,8 @@ out:
 }
 
 int __pkvm_init(phys_addr_t phys, unsigned long size, unsigned long nr_cpus,
-		unsigned long *per_cpu_base, u32 hyp_va_bits)
+		unsigned long *per_cpu_base, unsigned long *host_fp_state,
+		u32 hyp_va_bits)
 {
 	struct kvm_nvhe_init_params *params;
 	void *virt = hyp_phys_to_virt(phys);
@@ -436,7 +449,7 @@ int __pkvm_init(phys_addr_t phys, unsigned long size, unsigned long nr_cpus,
 	if (ret)
 		return ret;
 
-	ret = recreate_hyp_mappings(phys, size, per_cpu_base, hyp_va_bits);
+	ret = recreate_hyp_mappings(phys, size, per_cpu_base, host_fp_state, hyp_va_bits);
 	if (ret)
 		return ret;
 
