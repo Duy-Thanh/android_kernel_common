@@ -68,6 +68,24 @@
       "parentUuid": "787d98a6_47886403",
       "revId": "ef3e98b988420f74e48fcfe25f46b06364928be2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0e3b646_7032d798",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-10-10T08:36:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6aed3e3b_9730d567",
+      "revId": "ef3e98b988420f74e48fcfe25f46b06364928be2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
