@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d38a58_c57febf4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-10-10T08:30:48Z",
+      "side": 1,
+      "message": "Should be \"hyp event\" not trace points.",
+      "revId": "ef3e98b988420f74e48fcfe25f46b06364928be2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cffdc87e_e7eb0cf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-10-10T08:30:48Z",
+      "side": 1,
+      "message": "Thanks for that fix!",
+      "revId": "ef3e98b988420f74e48fcfe25f46b06364928be2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "787d98a6_47886403",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-10-10T08:30:48Z",
+      "side": 1,
+      "message": "Should probably be moved just above, to line 1386",
+      "revId": "ef3e98b988420f74e48fcfe25f46b06364928be2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
