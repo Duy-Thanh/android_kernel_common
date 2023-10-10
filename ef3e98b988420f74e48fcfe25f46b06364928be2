@@ -50,6 +50,24 @@
       "message": "Should probably be moved just above, to line 1386",
       "revId": "ef3e98b988420f74e48fcfe25f46b06364928be2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aed3e3b_9730d567",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-10-10T08:32:06Z",
+      "side": 1,
+      "message": "Yes, otherwise we get enter/without clear reason",
+      "parentUuid": "787d98a6_47886403",
+      "revId": "ef3e98b988420f74e48fcfe25f46b06364928be2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
