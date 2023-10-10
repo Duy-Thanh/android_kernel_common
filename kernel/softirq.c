@@ -393,7 +393,11 @@ EXPORT_SYMBOL(__local_bh_enable_ip);
 
 static inline void softirq_handle_begin(void)
 {
+#ifdef CONFIG_CBMC
+	__CPROVER_assert(0, "Shouldn't reach here");
+#else
 	__local_bh_disable_ip(_RET_IP_, SOFTIRQ_OFFSET);
+#endif
 }
 
 static inline void softirq_handle_end(void)

@@ -20,7 +20,14 @@
 	((ptr & BIT_ULL(55)) ? (ptr | ptrauth_kernel_pac_mask()) :	\
 			       (ptr & ~ptrauth_user_pac_mask()))
 
+#ifdef CONFIG_CBMC
+	unsigned long __builtin_return_address(val) {
+		__CPROVER_assert(0, "Shouldn't reach here");
+		return 0;
+	}
+#else
 #define __builtin_return_address(val)					\
 	(void *)(ptrauth_clear_pac((unsigned long)__builtin_return_address(val)))
+#endif
 
 #endif /* __ASM_COMPILER_H */

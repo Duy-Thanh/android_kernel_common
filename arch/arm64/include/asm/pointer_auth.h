@@ -99,7 +99,12 @@ extern int ptrauth_get_enabled_keys(struct task_struct *tsk);
 
 static inline unsigned long ptrauth_strip_insn_pac(unsigned long ptr)
 {
+#ifdef CONFIG_CBMC
+	__CPROVER_assert(0, "Shouldn't reach here");
+	return 0;
+#else
 	return ptrauth_clear_pac(ptr);
+#endif
 }
 
 static __always_inline void ptrauth_enable(void)

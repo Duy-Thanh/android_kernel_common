@@ -29,7 +29,12 @@ unsigned long find_next_bit(const unsigned long *addr, unsigned long size,
 		if (unlikely(offset >= size))
 			return size;
 
+#ifdef CONFIG_CBMC
+		__CPROVER_assert(0, "Shouldn't reach here");
+		val = 0;
+#else
 		val = *addr & GENMASK(size - 1, offset);
+#endif
 		return val ? __ffs(val) : size;
 	}
 
@@ -59,7 +64,12 @@ unsigned long find_next_and_bit(const unsigned long *addr1,
 		if (unlikely(offset >= size))
 			return size;
 
+#ifdef CONFIG_CBMC
+		__CPROVER_assert(0, "Shouldn't reach here");
+		val = 0;
+#else
 		val = *addr1 & *addr2 & GENMASK(size - 1, offset);
+#endif
 		return val ? __ffs(val) : size;
 	}
 
@@ -86,8 +96,12 @@ unsigned long find_next_zero_bit(const unsigned long *addr, unsigned long size,
 
 		if (unlikely(offset >= size))
 			return size;
-
+#ifdef CONFIG_CBMC
+		__CPROVER_assert(0, "Shouldn't reach here");
+		val = 0;
+#else
 		val = *addr | ~GENMASK(size - 1, offset);
+#endif
 		return val == ~0UL ? size : ffz(val);
 	}
 
@@ -109,13 +123,21 @@ unsigned long find_next_zero_bit(const unsigned long *addr, unsigned long size,
 static inline
 unsigned long find_first_bit(const unsigned long *addr, unsigned long size)
 {
+#ifndef CONFIG_CBMC
 	if (small_const_nbits(size)) {
 		unsigned long val = *addr & GENMASK(size - 1, 0);
-
 		return val ? __ffs(val) : size;
 	}
 
 	return _find_first_bit(addr, size);
+#else
+	int n;
+	if (n >= 0 && n < size) {
+		return n;
+	} else {
+		return 0;
+	}
+#endif
 }
 #endif
 
@@ -132,7 +154,12 @@ static inline
 unsigned long find_first_zero_bit(const unsigned long *addr, unsigned long size)
 {
 	if (small_const_nbits(size)) {
+#ifdef CONFIG_CBMC
+		__CPROVER_assert(0, "Shouldn't reach here");
+		unsigned long val = 0;
+#else
 		unsigned long val = *addr | ~GENMASK(size - 1, 0);
+#endif
 
 		return val == ~0UL ? size : ffz(val);
 	}
@@ -164,7 +191,12 @@ static inline
 unsigned long find_last_bit(const unsigned long *addr, unsigned long size)
 {
 	if (small_const_nbits(size)) {
+#ifdef CONFIG_CMBC
+		__CPROVER_assert(0, "Shouldn't reach here");
+		unsigned long val = 0;
+#else
 		unsigned long val = *addr & GENMASK(size - 1, 0);
+#endif
 
 		return val ? __fls(val) : size;
 	}

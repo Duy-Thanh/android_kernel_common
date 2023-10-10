@@ -140,7 +140,12 @@ static inline void __nocfi cpu_replace_ttbr1(pgd_t *pgdp)
 		ttbr1 |= TTBR_CNP_BIT;
 	}
 
+#ifdef CONFIG_CBMC
+	replace_phys = 0;
+	__CPROVER_assert(0, "Shouldn't reach here");
+#else
 	replace_phys = (void *)__pa_symbol(function_nocfi(idmap_cpu_replace_ttbr1));
+#endif
 
 	cpu_install_idmap();
 	replace_phys(ttbr1);

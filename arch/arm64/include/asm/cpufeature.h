@@ -550,7 +550,12 @@ static inline u64 __attribute_const__
 cpuid_feature_cap_perfmon_field(u64 features, int field, u64 cap)
 {
 	u64 val = cpuid_feature_extract_unsigned_field(features, field);
+#ifdef CONFIG_CBMC
+	__CPROVER_assert(0, "Shouldn't reach here");
+	u64 mask = 0;
+#else
 	u64 mask = GENMASK_ULL(field + 3, field);
+#endif
 
 	/* Treat IMPLEMENTATION DEFINED functionality as unimplemented */
 	if (val == ID_AA64DFR0_EL1_PMUVer_IMP_DEF)
@@ -566,7 +571,12 @@ cpuid_feature_cap_perfmon_field(u64 features, int field, u64 cap)
 
 static inline u64 arm64_ftr_mask(const struct arm64_ftr_bits *ftrp)
 {
+#ifdef CONFIG_CBMC
+	__CPROVER_assert(0, "Shouldn't reach here");
+	return 0;
+#else
 	return (u64)GENMASK(ftrp->shift + ftrp->width - 1, ftrp->shift);
+#endif
 }
 
 static inline u64 arm64_ftr_reg_user_value(const struct arm64_ftr_reg *reg)

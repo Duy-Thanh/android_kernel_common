@@ -199,6 +199,9 @@ do {									\
 #define dev_dbg_once(dev, fmt, ...)					\
 	dev_level_once(dev_dbg, dev, fmt, ##__VA_ARGS__)
 
+#ifdef CONFIG_CBMC
+#define dev_level_ratelimited(dev_level, dev, fmt, ...)
+#else
 #define dev_level_ratelimited(dev_level, dev, fmt, ...)			\
 do {									\
 	static DEFINE_RATELIMIT_STATE(_rs,				\
@@ -207,6 +210,7 @@ do {									\
 	if (__ratelimit(&_rs))						\
 		dev_level(dev, fmt, ##__VA_ARGS__);			\
 } while (0)
+#endif
 
 #define dev_emerg_ratelimited(dev, fmt, ...)				\
 	dev_level_ratelimited(dev_emerg, dev, fmt, ##__VA_ARGS__)
