@@ -70,6 +70,30 @@
       },
       "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44b5d221_5fe3ecb0",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1970009
+      },
+      "writtenOn": "2023-10-10T11:20:19Z",
+      "side": 1,
+      "message": "In my understanding, vendor hooks (drivers/android/vendor_hooks.c) is a specific feature to ACK.\n\nTo submit vendor hooks upstream, we have to convert vendor hooks into equivalent tracepoints and it must be useful for any kernel users.\n\nAs you said, we can try to contribute them but the motivation of the vendor hooks in this patch is specific to android products and we think there\u0027s no guarantee it will be accepted.\n\nTherefore, we would like to add vendor hooks to this kernel at this time and try to contribute to upstream kernel in parallel.",
+      "parentUuid": "ac1d2222_6459e7b7",
+      "range": {
+        "startLine": 1872,
+        "startChar": 2,
+        "endLine": 1872,
+        "endChar": 41
+      },
+      "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
