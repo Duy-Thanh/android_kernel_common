@@ -22,6 +22,30 @@
       },
       "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8ec14f1_89482748",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1970009
+      },
+      "writtenOn": "2023-10-10T03:37:39Z",
+      "side": 1,
+      "message": "Hi Greg Kroah-Hartman,\nWe just started to consider contributions. It will take some time so we would like to use these vendor hooks for this kernel at this time.",
+      "parentUuid": "3b76e99c_baa7f5fe",
+      "range": {
+        "startLine": 1872,
+        "startChar": 2,
+        "endLine": 1872,
+        "endChar": 41
+      },
+      "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
