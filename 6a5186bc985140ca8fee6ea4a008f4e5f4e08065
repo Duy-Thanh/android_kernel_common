@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0775f7a5_f515a54d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-10T14:23:44Z",
+      "side": 1,
+      "message": "wrong subject line, this needs to match the upstream submission exactly.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 65
+      },
+      "revId": "6a5186bc985140ca8fee6ea4a008f4e5f4e08065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "598bef31_f37916ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-10T14:23:44Z",
+      "side": 1,
+      "message": "Please work to get this upstream first.  I see a v2 has been asked for, please submit that, and then after it is taken upstream, update this version and we will be glad to take the backport.",
+      "revId": "6a5186bc985140ca8fee6ea4a008f4e5f4e08065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
