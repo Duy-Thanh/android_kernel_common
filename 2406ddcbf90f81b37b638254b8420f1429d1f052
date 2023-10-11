@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055834902",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d13",
+      "fixSuggestions": [
+        {
+          "fixId": "bfa00fd2_3071dbbc",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 844,
+                "startChar": 0,
+                "endLine": 844,
+                "endChar": 0
+              },
+              "replacement": "    visibility \u003d [\"//visibility:private\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 845,
+                "startChar": 0,
+                "endLine": 846,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 852,
+                "startChar": 0,
+                "endLine": 852,
+                "endChar": 0
+              },
+              "replacement": "    visibility \u003d [\"//visibility:private\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 853,
+                "startChar": 0,
+                "endLine": 854,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 860,
+                "startChar": 0,
+                "endLine": 860,
+                "endChar": 0
+              },
+              "replacement": "    visibility \u003d [\"//visibility:private\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 861,
+                "startChar": 0,
+                "endLine": 862,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 868,
+                "startChar": 0,
+                "endLine": 868,
+                "endChar": 0
+              },
+              "replacement": "    visibility \u003d [\"//visibility:private\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 869,
+                "startChar": 0,
+                "endLine": 870,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 879,
+                "startChar": 0,
+                "endLine": 883,
+                "endChar": 0
+              },
+              "replacement": "    \":kselftest_binderfs_test\",\n    \":kselftest_breakpoints_tests_step_after_suspend_test\",\n    \":kselftest_gen_config\",\n]\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "0c8f6884_b0081d10",
+        "filename": "BUILD.bazel",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T00:49:08Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "2406ddcbf90f81b37b638254b8420f1429d1f052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055834902",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d13",
+      "fixSuggestions": [
+        {
+          "fixId": "818a962e_ce7590df",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 16,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"tests_zip\",\n    srcs \u003d [\"//common/tools/testing/selftests:kselftest_tests_x86_64\"],\n    zip_file \u003d \"tests.zip\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "a205cfad_b2d9afa7",
+        "filename": "tools/testing/BUILD.bazel",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T00:49:08Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "2406ddcbf90f81b37b638254b8420f1429d1f052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
