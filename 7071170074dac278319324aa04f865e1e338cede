@@ -58,6 +58,32 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d14",
       "fixSuggestions": [],
       "key": {
+        "uuid": "d137dafe_e66e9cf6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T04:10:54Z",
+      "side": 1,
+      "message": "Loaded symbol \"copy_file\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 4,
+        "startChar": 44,
+        "endLine": 4,
+        "endChar": 53
+      },
+      "revId": "7071170074dac278319324aa04f865e1e338cede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055836890",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d14",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "b6631df5_72464b31",
         "filename": "BUILD.bazel",
         "patchSetId": 14
@@ -110,6 +136,32 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d14",
       "fixSuggestions": [],
       "key": {
+        "uuid": "e93ed1d2_d18acbdd",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T04:10:54Z",
+      "side": 1,
+      "message": "Loaded symbol \"zip_archive\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 7,
+        "startChar": 48,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "7071170074dac278319324aa04f865e1e338cede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055836890",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d14",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "c99bc264_67fa0f7a",
         "filename": "BUILD.bazel",
         "patchSetId": 14
@@ -145,6 +197,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-11T01:15:14Z",
+      "side": 1,
+      "message": "Loaded symbol \"android_filegroup\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 22
+      },
+      "revId": "7071170074dac278319324aa04f865e1e338cede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055836890",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d14",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "429ad6b0_f3950d40",
+        "filename": "BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T04:10:54Z",
       "side": 1,
       "message": "Loaded symbol \"android_filegroup\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
       "range": {
@@ -225,6 +303,43 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-11T01:15:14Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "7071170074dac278319324aa04f865e1e338cede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055836890",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d14",
+      "fixSuggestions": [
+        {
+          "fixId": "049f44fa_298e5d3a",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 16,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"tests_zip_x86_64\",\n    srcs \u003d [\"//common/tools/testing/selftests:kselftest_tests_x86_64\"],\n    zip_file \u003d \"tests.zip\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "a4799e50_8d2781b9",
+        "filename": "tools/testing/BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T04:10:54Z",
       "side": 1,
       "message": "File is not formatted. Run `buildifier tools/testing/BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "7071170074dac278319324aa04f865e1e338cede",
@@ -319,6 +434,53 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-11T01:15:14Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "7071170074dac278319324aa04f865e1e338cede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055836890",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d14",
+      "fixSuggestions": [
+        {
+          "fixId": "d7548178_539a1ed7",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 4,
+                "startChar": 0,
+                "endLine": 5,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 56,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "    \":kselftest_binderfs_test\",\n    \":kselftest_breakpoints_tests_step_after_suspend_test\",\n    \":kselftest_gen_config\",\n]\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "4c355eb1_47a52eb1",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T04:10:54Z",
       "side": 1,
       "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "7071170074dac278319324aa04f865e1e338cede",
