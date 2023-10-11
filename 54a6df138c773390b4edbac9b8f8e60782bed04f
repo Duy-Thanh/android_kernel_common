@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d5c2da_9077fdec",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-11T23:48:44Z",
+      "side": 1,
+      "message": "This is the only thing we are exposing in the new node. Not sure what information would be useful to know about the state of direct reclaim.\n\nShould we add a timestamp of when this event occurred? If so, when the driver is initialized, should the timestamp me equal to `0` and in `OUT_OF_RECLAIM` status?",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 31
+      },
+      "revId": "54a6df138c773390b4edbac9b8f8e60782bed04f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9faebf72_e89c99e8",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-11T23:48:44Z",
+      "side": 1,
+      "message": "Need to change to `unregister` instead of `register`",
+      "range": {
+        "startLine": 434,
+        "startChar": 5,
+        "endLine": 434,
+        "endChar": 48
+      },
+      "revId": "54a6df138c773390b4edbac9b8f8e60782bed04f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
