@@ -231,6 +231,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_cpu_capacity,
 	TP_PROTO(int cpu, unsigned long *capacity),
 	TP_ARGS(cpu, capacity), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_task_fits_cpu,
+	TP_PROTO(struct task_struct *p, int cpu, bool *ret),
+	TP_ARGS(p, cpu, ret), 1);
+
 DECLARE_RESTRICTED_HOOK(android_rvh_update_misfit_status,
 	TP_PROTO(struct task_struct *p, struct rq *rq, bool *need_update),
 	TP_ARGS(p, rq, need_update), 1);
