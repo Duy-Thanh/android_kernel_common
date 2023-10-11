@@ -50,6 +50,24 @@
       "message": "Please add an STG file to update the KMI",
       "revId": "6ddf1d3b99089b09da8e28492158da854372b210",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "124a6bf0_3afd9c59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-11T20:54:48Z",
+      "side": 1,
+      "message": "nm, added",
+      "parentUuid": "20e2970d_a0f3f0b2",
+      "revId": "6ddf1d3b99089b09da8e28492158da854372b210",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
