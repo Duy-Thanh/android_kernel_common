@@ -1,0 +1,87 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055846215",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2781349?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "03801283_650c9570",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T03:54:16Z",
+      "side": 1,
+      "message": "Please **attach the following Buganizer ID(s)** to the commit message: 301554909.\nThese IDs were found in the original change with number \u00272758689\u0027 but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 572220614 android-build.ayeaye-python-dispatcher_20231010.04_p0",
+      "revId": "8e519ad5e12ec4a418c9de115794747c9c07e90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055846215",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2781349?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a609d685_d7fcf6c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T03:54:16Z",
+      "side": 1,
+      "message": "Original change \u0027aosp/2758689\u0027 for this cherry pick, on base branch \u0027android13-5.15\u0027 is NOT MERGED.\nPlease merge the original change.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 572220614 android-build.ayeaye-python-dispatcher_20231010.04_p0",
+      "revId": "8e519ad5e12ec4a418c9de115794747c9c07e90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055846215",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2781349?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "36b0bedf_5df6ef8a",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Chunhai Guo \u003cguochunhai@vivo.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "bf1e711e_acd31754",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-11T03:54:16Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Chunhai Guo \u003cguochunhai@vivo.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 572220614 android-build.ayeaye-python-dispatcher_20231010.04_p0",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 0
+      },
+      "revId": "8e519ad5e12ec4a418c9de115794747c9c07e90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
