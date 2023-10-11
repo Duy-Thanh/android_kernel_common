@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33abb68d_9a9accb5",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2029,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-10-11T11:17:33Z",
+      "side": 1,
+      "message": "Why is this needed as an argument, `kvm_arm_hyp_host_fp_state` is already part of the nvhe image and is accessed in `__get_host_fpsimd_bytes`, this seems redundant?",
+      "range": {
+        "startLine": 2029,
+        "startChar": 4,
+        "endLine": 2029,
+        "endChar": 30
+      },
+      "revId": "7f350925007eb680cdb178a39af0f38f0f1158a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b344ff35_7a959c1e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-10-11T11:17:33Z",
+      "side": 1,
+      "message": "The original size might be larger, as it is in order of the size and not just page aligned, this should be fine as the hypervisor won\u0027t touch the extra pages, but those pages wouldn\u0027t be in a clear state, as they are not owned by the kernel but it has access to them, may be just move it all to hyp? (I don\u0027t have a strong opinion)",
+      "range": {
+        "startLine": 81,
+        "startChar": 16,
+        "endLine": 81,
+        "endChar": 53
+      },
+      "revId": "7f350925007eb680cdb178a39af0f38f0f1158a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
