@@ -359255,6 +359255,15 @@ elf_symbol {
   full_name: "vmalloc"
 }
 elf_symbol {
+  id: 0x8ffd0533
+  name: "vmalloc_array"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2aabcdc8
+  type_id: 0x684b3e47
+  full_name: "vmalloc_array"
+}
+elf_symbol {
   id: 0x3f9de086
   name: "vmalloc_nr_pages"
   is_defined: true
@@ -366951,6 +366960,7 @@ interface {
   symbol_id: 0xef2c49d1
   symbol_id: 0xca7f93d5
   symbol_id: 0x3c915fdb
+  symbol_id: 0x8ffd0533
   symbol_id: 0x3f9de086
   symbol_id: 0x6d8b459f
   symbol_id: 0xa1a341df
