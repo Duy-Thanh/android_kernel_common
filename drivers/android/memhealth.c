@@ -18,9 +18,11 @@
 #include <linux/workqueue.h>
 
 #include <trace/events/oom.h>
+#include <trace/events/vmscan.h>
 
 #define MEMHEALTH_DIRECTORY "memhealth"
 #define OOM_VICTIM_LIST_ENTRY "oom_victim_list"
+#define DIRECT_RECLAIM_STATE_ENTRY "direct_reclaim_state"
 
 static wait_queue_head_t memhealth_wq;
 static struct proc_dir_entry *proc_memhealth_dir;
@@ -37,7 +39,7 @@ static DEFINE_MUTEX(memhealth_mutex);
 /* List of new oom victims not yet added into oom_victim_list */
 static struct list_head new_oom_victims_list;
 static size_t new_oom_victims_count;
-/* Lock protecting new_oom_victims_list and  new_oom_victims_count */
+/* Lock protecting new_oom_victims_list, direct_reclaim_state and  new_oom_victims_count */
 static DEFINE_SPINLOCK(memhealth_spin_lock);
 
 struct oom_victim {
@@ -51,6 +53,107 @@ struct oom_victim {
 
 #define OOM_VICTIM_LIST_MAX_SIZE ((PAGE_SIZE/sizeof(struct oom_victim)))
 
+static int direct_reclaim_state;
+
+enum reclaim_states {
+	OUT_OF_RECLAIM = 0,
+	IN_RECLAIM
+};
+
+/* Direct Reclaim */
+static ssize_t read_direct_reclaim_state(struct file *file, char __user *buf, size_t count, loff_t *offset)
+{
+	char message[10];
+	int current_direct_reclaim_state, len;
+
+	spin_lock(&memhealth_spin_lock);
+	current_direct_reclaim_state = direct_reclaim_state;
+	spin_unlock(&memhealth_spin_lock);
+
+	len = snprintf(message, 10, "%d\n", current_direct_reclaim_state);
+	if (len < 0) {
+		pr_err("memhealth failed to copy direct reclaim state\n");
+		return len;
+	}
+
+	return simple_read_from_buffer(buf, count, offset, message, len);
+}
+
+static __poll_t poll_direct_reclaim_state(struct file *file, poll_table *wait)
+{
+	int last_seen_reclaim_state;
+	__poll_t mask = DEFAULT_POLLMASK;
+
+	poll_wait(file, &memhealth_wq, wait);
+
+	// Check if there was a change of state
+	last_seen_reclaim_state = *(int *) file->private_data;
+	spin_lock(&memhealth_spin_lock);
+	if (last_seen_reclaim_state != direct_reclaim_state) {
+		last_seen_reclaim_state = direct_reclaim_state;
+		mask |= EPOLLPRI;
+	}
+	spin_unlock(&memhealth_spin_lock);
+
+	return mask;
+}
+
+static int open_direct_reclaim_state(struct inode *inode, struct file *file)
+{
+	int *current_state;
+
+	if (!capable(CAP_SYS_PTRACE))
+		return -EPERM;
+
+	current_state = kmalloc(sizeof(int), GFP_KERNEL_ACCOUNT);
+	if (!current_state)
+		return -ENOMEM;
+
+	spin_lock(&memhealth_spin_lock);
+	*current_state = direct_reclaim_state;
+	spin_unlock(&memhealth_spin_lock);
+
+	file->private_data = current_state;
+
+	return 0;
+}
+
+static int release_direct_reclaim_state(struct inode *inode, struct file *file)
+{
+	kfree(file->private_data);
+	return 0;
+}
+
+static const struct proc_ops direct_reclaim_state_proc_ops = {
+	.proc_read = read_direct_reclaim_state,
+	.proc_poll = poll_direct_reclaim_state,
+	.proc_open = open_direct_reclaim_state,
+	.proc_release = release_direct_reclaim_state,
+};
+
+static void mm_vmscan_direct_reclaim_begin_probe(void *data, int order, gfp_t gfp_flags)
+{
+	const enum reclaim_states begin_reclaim_state = IN_RECLAIM;
+
+	spin_lock(&memhealth_spin_lock);
+	direct_reclaim_state = (int) begin_reclaim_state;
+	spin_unlock(&memhealth_spin_lock);
+
+	wake_up_interruptible(&memhealth_wq);
+}
+
+static void mm_vmscan_direct_reclaim_end_probe(void *data, unsigned long nr_reclaimed)
+{
+	const enum reclaim_states end_reclaim_state = OUT_OF_RECLAIM;
+
+	spin_lock(&memhealth_spin_lock);
+	direct_reclaim_state = (int) end_reclaim_state;
+	spin_lock(&memhealth_spin_lock);
+
+	wake_up_interruptible(&memhealth_wq);
+}
+
+/* OOM */
 static void oom_list_move_victims(struct work_struct *work)
 {
 	struct oom_victim *head;
@@ -255,6 +358,7 @@ static const struct proc_ops oom_victims_list_proc_ops = {
 
 static int __init memhealthmod_start(void)
 {
+	const enum reclaim_states reclaim_init_state = OUT_OF_RECLAIM;
 	struct proc_dir_entry *entry;
 	int ret = -ENOMEM;
 
@@ -271,23 +375,45 @@ static int __init memhealthmod_start(void)
 			OOM_VICTIM_LIST_ENTRY);
 		goto err_create_oom_entry;
 	}
+	entry = proc_create(DIRECT_RECLAIM_STATE_ENTRY, 0444,
+		proc_memhealth_dir, &direct_reclaim_state_proc_ops);
+	if (!entry) {
+		pr_err("memhealth failed to create proc entry: %s\n",
+			DIRECT_RECLAIM_STATE_ENTRY);
+		goto err_create_direct_reclaim_entry;
+	}
 
+	init_waitqueue_head(&memhealth_wq);
+	/* OOM */
 	INIT_LIST_HEAD(&oom_victim_list);
 	INIT_LIST_HEAD(&new_oom_victims_list);
-	init_waitqueue_head(&memhealth_wq);
 	oom_victim_count = 0;
 	oom_victim_removed_count = 0;
 	new_oom_victims_count = 0;
+	/* Direct reclaim */
+	direct_reclaim_state = (int) reclaim_init_state;
 
 	ret = register_trace_mark_victim(mark_victim_probe, NULL);
 	if (ret) {
 		pr_err("memhealth failed to hook a probe to the mark_victim tracepoint\n");
-		goto err_register_victim;
+		goto err_register_probe;
+	}
+	ret = register_trace_mm_vmscan_direct_reclaim_begin(mm_vmscan_direct_reclaim_begin_probe, NULL);
+	if (ret) {
+		pr_err("memhealth failed to hook probe to the mm_vmscan_direct_reclaim_begin tracepoint\n");
+		goto err_register_probe;
+	}
+	ret = register_trace_mm_vmscan_direct_reclaim_end(mm_vmscan_direct_reclaim_end_probe, NULL);
+	if (ret) {
+		pr_err("memhealth failed to hook probe to the mm_vmscan_direct_reclaim_end tracepoint\n");
+		goto err_register_probe;
 	}
 
 	return 0;
 
-err_register_victim:
+err_register_probe:
+	remove_proc_entry(DIRECT_RECLAIM_STATE_ENTRY, proc_memhealth_dir);
+err_create_direct_reclaim_entry:
 	remove_proc_entry(OOM_VICTIM_LIST_ENTRY, proc_memhealth_dir);
 err_create_oom_entry:
 	remove_proc_entry(MEMHEALTH_DIRECTORY, NULL);
@@ -307,6 +433,12 @@ static void __exit memhealthmod_end(void)
 		kfree(entry);
 	}
 
+	if (unregister_trace_mm_vmscan_direct_reclaim_begin(mm_vmscan_direct_reclaim_begin_probe, NULL))
+		pr_warn("memhealth failed to unhook a probe from the mm_vmscan_direct_reclaim_begin tracepoint\n");
+	if (register_trace_mm_vmscan_direct_reclaim_end(mm_vmscan_direct_reclaim_end_probe, NULL))
+		pr_warn("memhealth failed to unhook a probe from the mm_vmscan_direct_reclaim_end tracepoint\n");
+
+	remove_proc_entry(DIRECT_RECLAIM_STATE_ENTRY, proc_memhealth_dir);
 	remove_proc_entry(OOM_VICTIM_LIST_ENTRY, proc_memhealth_dir);
 	remove_proc_entry(MEMHEALTH_DIRECTORY, NULL);
 }
