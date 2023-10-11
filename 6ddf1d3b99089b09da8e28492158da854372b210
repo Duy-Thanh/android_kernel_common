@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dd49f13_8678af99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1990307
+      },
+      "writtenOn": "2023-10-11T20:12:07Z",
+      "side": 1,
+      "message": "Hi,\n\nI had previously gotten approval for https://android-review.git.corp.google.com/c/kernel/common/+/2724516, and this CL is to respin it for the android14-5.15-2023-08 branch. Thanks!",
+      "revId": "6ddf1d3b99089b09da8e28492158da854372b210",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
