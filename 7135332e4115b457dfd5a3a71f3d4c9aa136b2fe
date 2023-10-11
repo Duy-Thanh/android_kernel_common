@@ -20,6 +20,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdce86a0_80700991",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-11T02:11:49Z",
+      "side": 1,
+      "message": "Many times the bus hang due to accessing registers of peripherals that clk, power, etc. may not be configured correctly or are not allowed to be accessed. Therefore, we need to log entry and exit of register accesses to solve such problems.",
+      "parentUuid": "d2892bf2_b9c66608",
+      "revId": "7135332e4115b457dfd5a3a71f3d4c9aa136b2fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53b52d8b_18d33a85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-11T02:11:49Z",
+      "side": 1,
+      "message": "hi，",
+      "revId": "7135332e4115b457dfd5a3a71f3d4c9aa136b2fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "909d5aa8_280ce53d",
         "filename": "drivers/base/regmap/regmap-mmio.c",
         "patchSetId": 2
@@ -31,6 +66,24 @@
       "writtenOn": "2023-10-10T02:50:50Z",
       "side": 1,
       "message": "why is this called \"flag\"? Should it be a bool?",
+      "revId": "7135332e4115b457dfd5a3a71f3d4c9aa136b2fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6994ca54_f5e30ce5",
+        "filename": "drivers/base/regmap/regmap-mmio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-11T02:11:49Z",
+      "side": 1,
+      "message": "This is a temporary data, we need to save a temporary data on entry to use on exit.",
+      "parentUuid": "909d5aa8_280ce53d",
       "revId": "7135332e4115b457dfd5a3a71f3d4c9aa136b2fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
