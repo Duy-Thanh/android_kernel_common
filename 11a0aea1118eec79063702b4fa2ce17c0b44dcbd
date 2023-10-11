@@ -16,6 +16,41 @@
       "message": "Why not submit your binder changes upstream if you need additional functionality that is currently not present?",
       "revId": "11a0aea1118eec79063702b4fa2ce17c0b44dcbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22baa2f8_eff46ebc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-11T18:16:14Z",
+      "side": 1,
+      "message": "Please cherry-pick the `android14-6.1` version of this - see aosp/2745073. The Change-Id needs to be preserved.",
+      "revId": "11a0aea1118eec79063702b4fa2ce17c0b44dcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b599a47_0de43fc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-11T18:16:14Z",
+      "side": 1,
+      "message": "It relies on out-of-tree binder priority inheritance so this can\u0027t go upstream.",
+      "parentUuid": "28072bf7_9c732ae1",
+      "revId": "11a0aea1118eec79063702b4fa2ce17c0b44dcbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
