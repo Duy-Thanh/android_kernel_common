@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b6dc3a8_5e73feee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2023-10-11T17:44:41Z",
+      "side": 1,
+      "message": "Bypass presubmit due to unrelated issues- b/299714657 and b/295672559",
+      "revId": "99d2841c81a763168b0a0bda36c03a032058038c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
