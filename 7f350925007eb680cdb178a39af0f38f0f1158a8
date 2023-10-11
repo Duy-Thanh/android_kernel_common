@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65862e0e_15baeede",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2029,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-10-11T11:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33abb68d_9a9accb5",
+      "range": {
+        "startLine": 2029,
+        "startChar": 4,
+        "endLine": 2029,
+        "endChar": 30
+      },
+      "revId": "7f350925007eb680cdb178a39af0f38f0f1158a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b344ff35_7a959c1e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-11T11:17:33Z",
       "side": 1,
       "message": "The original size might be larger, as it is in order of the size and not just page aligned, this should be fine as the hypervisor won\u0027t touch the extra pages, but those pages wouldn\u0027t be in a clear state, as they are not owned by the kernel but it has access to them, may be just move it all to hyp? (I don\u0027t have a strong opinion)",
+      "range": {
+        "startLine": 81,
+        "startChar": 16,
+        "endLine": 81,
+        "endChar": 53
+      },
+      "revId": "7f350925007eb680cdb178a39af0f38f0f1158a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca5a4509_0cce84d1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-10-11T11:38:29Z",
+      "side": 1,
+      "message": "Doing it this way for consistency with the other mappings in recreate_hyp_mappings(), e.g., per_cpu_base. Also, it might be good to ensure that a hyp bug doesn\u0027t go over.",
+      "parentUuid": "b344ff35_7a959c1e",
       "range": {
         "startLine": 81,
         "startChar": 16,
