@@ -53,6 +53,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "427438e2_474b8e1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-11T16:23:17Z",
+      "side": 1,
+      "message": "Resolve comments on aosp/2777542 (13-5.15 version of this patch) and then make the same changes on this patch",
+      "revId": "7135332e4115b457dfd5a3a71f3d4c9aa136b2fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "909d5aa8_280ce53d",
