@@ -16,6 +16,41 @@
       "message": "Cherry picked from 6.10",
       "revId": "5dd2902c6a8bae8f66c8102bedcab6f226a1db91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "973f6855_729b63db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-11T18:20:55Z",
+      "side": 1,
+      "message": "There is no \"6.10\" kernel.",
+      "parentUuid": "4335b139_4ba026c6",
+      "revId": "5dd2902c6a8bae8f66c8102bedcab6f226a1db91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd451d0_4c867ba0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-11T18:20:55Z",
+      "side": 1,
+      "message": "No bug id?  Why is this needed here only for this one branch/version?",
+      "revId": "5dd2902c6a8bae8f66c8102bedcab6f226a1db91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
