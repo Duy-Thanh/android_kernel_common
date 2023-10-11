@@ -118,6 +118,30 @@
       },
       "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "737e4a1a_201ba7b7",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1970009
+      },
+      "writtenOn": "2023-10-11T00:39:43Z",
+      "side": 1,
+      "message": "I see. Thank you for your clarification.\nThese hooks are required to monitor bus speed change and reset failures in the request recovery handling for our sdcard failure diagnostics mechanism.\nThe hooked codes are neither error handling code nor driver extension feature so it can not be submitted upstream.",
+      "parentUuid": "e3560a99_bec072c1",
+      "range": {
+        "startLine": 1872,
+        "startChar": 2,
+        "endLine": 1872,
+        "endChar": 41
+      },
+      "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
