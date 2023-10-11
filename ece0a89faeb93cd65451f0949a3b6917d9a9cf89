@@ -33,6 +33,24 @@
       "message": "This failing ABI analysis with:\n\n```\nERROR: undefined node: \u003c42587\u003e\n```\n\nI suspect you need to regenerate the .stg file:\n\nhttps://source.android.com/docs/core/architecture/kernel/howto-abi-monitor\n\nand then upload a new patch, although using the same Change-Id so that it\u0027s correctly identified as a cherry-pick from the main branch.",
       "revId": "ece0a89faeb93cd65451f0949a3b6917d9a9cf89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d0c50f_dbc4006c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933031
+      },
+      "writtenOn": "2023-10-11T03:17:59Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "1a9f73f3_9263a708",
+      "revId": "ece0a89faeb93cd65451f0949a3b6917d9a9cf89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
