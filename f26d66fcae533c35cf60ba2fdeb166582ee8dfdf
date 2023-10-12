@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f71512_b454b5bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055919
+      },
+      "writtenOn": "2023-10-12T07:52:09Z",
+      "side": 1,
+      "message": "Hi，Todd Kjos\n\nthis is cherry picked from commit aa47cc7c206a8e159a735e6f1513ece6dac1e0ba (android13-5.15), please review it.\n\nmy \"Signed-off-by:\" tag in the commit message has been added",
+      "revId": "f26d66fcae533c35cf60ba2fdeb166582ee8dfdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
