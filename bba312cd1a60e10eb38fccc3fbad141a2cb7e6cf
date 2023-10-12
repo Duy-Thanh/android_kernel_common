@@ -16,6 +16,24 @@
       "message": "new exports MUST be done with EXPORT_SYMBOL_GPL()\n\nAnd why not just use the in-kernel version of DAMON?  Why are these exports needed at all?",
       "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00b86594_5f93389d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944249
+      },
+      "writtenOn": "2023-10-12T09:16:43Z",
+      "side": 1,
+      "message": "1.new exports MUST be done with EXPORT_SYMBOL_GPL()\nRe: updated patch has modified with EXPORT_SYMBOL_GPL().\n\n2.why not just use the in-kernel version of DAMON? \nRe: Damon is debugfs in kernel 5.15. The user version is not supported debugfs. What\u0027s more, debugfs will be removed in latest kernel verison is released, so we should move to the sysfs interface. We alse have tried backporting the required functionality from the latest Damon to 5.15. There are a lot of modifications. Please see the Bug: 300502883 attachment for details. Whether these modifications are appropriate if other OEM use 5.15 damon.\n\n3.Why are these exports needed at all?\nRe: We implement damon as a ko module not as a built-in module.\n\nCombined with the above reasons, we implement damon as a ko module that is the most appropriate method from the terms of workload and modification. It only needs export 14 numbers functions.\n\nThanks.",
+      "parentUuid": "05f19b0e_1f050bb3",
+      "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
