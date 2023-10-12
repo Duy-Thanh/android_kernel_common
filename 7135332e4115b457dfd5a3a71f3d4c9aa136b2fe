@@ -70,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fed3acfb_1f3bcb8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-12T12:00:48Z",
+      "side": 1,
+      "message": "The patch comments have been updated and the variables have been renamed, could you please re-review them, thanks!",
+      "parentUuid": "427438e2_474b8e1e",
+      "revId": "7135332e4115b457dfd5a3a71f3d4c9aa136b2fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "909d5aa8_280ce53d",
