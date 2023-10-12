@@ -121,6 +121,24 @@
       "parentUuid": "909d5aa8_280ce53d",
       "revId": "7135332e4115b457dfd5a3a71f3d4c9aa136b2fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9623b85_36eabb69",
+        "filename": "drivers/base/regmap/regmap-mmio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-12T17:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6994ca54_f5e30ce5",
+      "revId": "7135332e4115b457dfd5a3a71f3d4c9aa136b2fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
