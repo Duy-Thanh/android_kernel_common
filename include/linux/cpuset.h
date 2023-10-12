@@ -71,6 +71,13 @@ extern void cpuset_init_smp(void);
 extern void cpuset_force_rebuild(void);
 extern void cpuset_update_active_cpus(void);
 extern void cpuset_wait_for_hotplug(void);
+<<<<<<< HEAD   (b53ee2 Merge 6.1.49 into android15-6.1)
+=======
+extern void inc_dl_tasks_cs(struct task_struct *task);
+extern void dec_dl_tasks_cs(struct task_struct *task);
+extern void cpuset_lock(void);
+extern void cpuset_unlock(void);
+>>>>>>> BRANCH (a2943d Linux 6.1.50)
 extern void cpuset_cpus_allowed(struct task_struct *p, struct cpumask *mask);
 extern bool cpuset_cpus_allowed_fallback(struct task_struct *p);
 extern nodemask_t cpuset_mems_allowed(struct task_struct *p);
@@ -194,6 +201,14 @@ static inline void cpuset_update_active_cpus(void)
 
 static inline void cpuset_wait_for_hotplug(void) { }
 
+<<<<<<< HEAD   (b53ee2 Merge 6.1.49 into android15-6.1)
+=======
+static inline void inc_dl_tasks_cs(struct task_struct *task) { }
+static inline void dec_dl_tasks_cs(struct task_struct *task) { }
+static inline void cpuset_lock(void) { }
+static inline void cpuset_unlock(void) { }
+
+>>>>>>> BRANCH (a2943d Linux 6.1.50)
 static inline void cpuset_cpus_allowed(struct task_struct *p,
 				       struct cpumask *mask)
 {
