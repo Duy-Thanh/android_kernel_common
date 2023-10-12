@@ -1617,6 +1617,63 @@ static inline void swiotlb_create_debugfs_files(struct io_tlb_mem *mem,
 
 #endif	/* CONFIG_DEBUG_FS */
 
+#ifdef CONFIG_SWIOTLB_DYNAMIC
+struct dma_test_struct {
+	struct device dev;
+	struct work_struct work;
+};
+
+#define TEST_BUF_SIZE 32
+#define EXTRA_DMA_HANDLES 8
+#define NR_DMA_HANDLES ((SZ_2M / IO_TLB_SIZE) + EXTRA_DMA_HANDLES)
+
+static void map_dma_buffers(struct devicedma_addr_t *dma_handles, void *buf)
+{
+	unsigned int i;
+
+	for (i = 0; i < NR_DMA_HANDLES; i++) {
+		dma_handles[i] = dma_map_single(d);
+	}
+}
+
+static void dma_test_work_fn(struct work_struct *work)
+{
+	struct dma_test *test_struct = container_of(work, struct dma_test_struct, work);
+	void *buf;
+	dma_addr_t *dma_handles;
+
+	buf = kzalloc(TEST_BUF_SIZE, GFP_KERNEL);
+	if (!buf)
+		goto out;
+
+	dma_handles = kcalloc(NR_DMA_HANDLES, sizeof(*dma_handles), GFP_KERNEL);
+	if (!dma_handles)
+		goto free_test_buf;
+
+	map_dma_buffers(dma_handles, buf);
+
+free_test_buf:
+	kfree(buf);
+out:
+	kfree(test_struct);
+}
+
+static int dma_test_init(void)
+{
+	struct dma_test_struct *test_struct = kzalloc(sizeof(*test_struct), GFP_KERNEL);
+	if (!test_struct)
+		return -ENOMEM;
+
+	device_initialize(&test_struct->dev);
+	INIT_WORK(&test_struct, dma_test_work_fn);
+
+	schedule_work(&test_struct->work);
+
+	return 0;
+}
+late_initcall(dma_test_init);
+#endif
+
 #ifdef CONFIG_DMA_RESTRICTED_POOL
 
 struct page *swiotlb_alloc(struct device *dev, size_t size)
