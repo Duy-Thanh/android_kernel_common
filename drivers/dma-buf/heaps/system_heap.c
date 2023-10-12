@@ -13,7 +13,6 @@
 #include <linux/dma-buf.h>
 #include <linux/dma-mapping.h>
 #include <linux/dma-heap.h>
-#include <linux/dma-resv.h>
 #include <linux/err.h>
 #include <linux/highmem.h>
 #include <linux/mm.h>
@@ -217,11 +216,14 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
 	struct sg_page_iter piter;
 	int ret;
 
+<<<<<<< HEAD   (af141d Merge 6c1b980a7e79 ("Merge tag 'dma-mapping-6.6-2023-08-29' )
 	dma_resv_assert_held(dmabuf->resv);
 
 	if (buffer->uncached)
 		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
 
+=======
+>>>>>>> BRANCH (e7e942 Merge tag 'v6.6-vfs.super.fixes.2' of git://git.kernel.org/p)
 	for_each_sgtable_page(table, &piter, vma->vm_pgoff) {
 		struct page *page = sg_page_iter_page(&piter);
 
