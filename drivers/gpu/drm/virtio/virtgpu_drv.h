@@ -59,6 +59,8 @@
 #define MAX_CAPSET_ID 63
 #define MAX_RINGS 64
 
+#define DEBUG_NAME_MAX_LEN 64
+
 struct virtio_gpu_object_params {
 	unsigned long size;
 	bool dumb;
@@ -272,6 +274,8 @@ struct virtio_gpu_fpriv {
 	uint64_t base_fence_ctx;
 	uint64_t ring_idx_mask;
 	struct mutex context_lock;
+	char debug_name[DEBUG_NAME_MAX_LEN];
+	char explicit_debug_name;
 };
 
 /* virtgpu_ioctl.c */
