@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2b68e9d_06abc208",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-12T07:57:03Z",
+      "side": 1,
+      "message": "I cherry-picked https://android-review.googlesource.com/c/kernel/common/+/2646563 from android13-5.15 branch and submitted the information for the symbols together, can you help to review it ?",
+      "revId": "6152a10d47177580cbc76a8e4394c5b95ed2afca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
