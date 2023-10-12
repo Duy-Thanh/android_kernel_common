@@ -34,6 +34,24 @@
       "parentUuid": "05f19b0e_1f050bb3",
       "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bb52ec4_96955e0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-12T09:24:26Z",
+      "side": 1,
+      "message": "I would much rather take the upstream commits here, as they are self-contained in the DAMON tool, if you are going to be wanting to use this tool, instead of having to rely on an external module and have a lot of unneeded exports that cause us more maintenance burden over time.\n\nPlease submit the needed upstream commits as a patch series, properly backported to this tree and we will be glad to review them.",
+      "parentUuid": "00b86594_5f93389d",
+      "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
