@@ -9415,7 +9415,12 @@ static int ufshcd_set_dev_pwr_mode(struct ufs_hba *hba,
 	 * already suspended childs.
 	 */
 	for (retries = 3; retries > 0; --retries) {
+<<<<<<< HEAD   (9328ee Merge 6.1.52 into android15-6.1)
 		ret = ufshcd_execute_start_stop(sdp, pwr_mode, &sshdr);
+=======
+		ret = scsi_execute(sdp, cmd, DMA_NONE, NULL, 0, NULL, &sshdr,
+				   HZ, 0, 0, RQF_PM, NULL);
+>>>>>>> BRANCH (09045d Linux 6.1.53)
 		/*
 		 * scsi_execute() only returns a negative value if the request
 		 * queue is dying.

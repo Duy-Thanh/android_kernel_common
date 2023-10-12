@@ -461,7 +461,10 @@ static int do_read_inode(struct inode *inode)
 
 	if (!sanity_check_inode(inode, node_page)) {
 		f2fs_put_page(node_page, 1);
+<<<<<<< HEAD   (9328ee Merge 6.1.52 into android15-6.1)
 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+=======
+>>>>>>> BRANCH (09045d Linux 6.1.53)
 		f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
 		return -EFSCORRUPTED;
 	}
@@ -533,7 +536,10 @@ static int do_read_inode(struct inode *inode)
 
 	/* Need all the flag bits */
 	f2fs_init_read_extent_tree(inode, node_page);
+<<<<<<< HEAD   (9328ee Merge 6.1.52 into android15-6.1)
 	f2fs_init_age_extent_tree(inode);
+=======
+>>>>>>> BRANCH (09045d Linux 6.1.53)
 
 	if (!sanity_check_extent_cache(inode)) {
 		f2fs_put_page(node_page, 1);
