@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c348604_a1c469a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-12T03:37:11Z",
+      "side": 1,
+      "message": "I recherry-picked it from android13-5.15 branch and submitted the information for the symbols together, can you help to review it ?",
+      "revId": "8ae898e5574ded03b2b509a3450bfe05588d2940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
