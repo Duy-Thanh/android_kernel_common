@@ -51,6 +51,42 @@
       "message": "No bug id?  Why is this needed here only for this one branch/version?",
       "revId": "5dd2902c6a8bae8f66c8102bedcab6f226a1db91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294d2cce_dd234162",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2037920
+      },
+      "writtenOn": "2023-10-12T03:43:07Z",
+      "side": 1,
+      "message": "is android14-6.1",
+      "parentUuid": "973f6855_729b63db",
+      "revId": "5dd2902c6a8bae8f66c8102bedcab6f226a1db91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35e03761_4a1243df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2037920
+      },
+      "writtenOn": "2023-10-12T03:43:07Z",
+      "side": 1,
+      "message": "All branch need this commit.\nNeither branch kernel-5.10 nor kernel-5.15 contains this commit.",
+      "parentUuid": "dbd451d0_4c867ba0",
+      "revId": "5dd2902c6a8bae8f66c8102bedcab6f226a1db91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
