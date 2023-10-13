@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ba55fc8_a89e9e92",
+        "filename": "android/abi_gki_aarch64_kunit",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-13T21:55:37Z",
+      "side": 1,
+      "message": "The symbol list is not complete.\n\nLet\u0027s revise the approach on mainline before revisiting this change.",
+      "revId": "7bcbc19be7da94bd30193c69eb6b4703fbb9de0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
