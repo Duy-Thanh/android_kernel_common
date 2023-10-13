@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "653ac9cb_70043b0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-10-13T13:37:14Z",
+      "side": 1,
+      "message": "Are these symbols actually exported (`EXPORT_SYMBOL*`)?\n\n```\nSymbols missing from ksymtab:\n- relay_close\n- relay_file_operations\n- relay_flush\n- relay_open\n- relay_reset\n- relay_subbufs_consumed\n- relay_switch_subbuf\n```",
+      "revId": "55c1bc8f84073dfd2e1cc1ecf78b4bc31665b2fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
