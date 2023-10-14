@@ -52,6 +52,24 @@
       "parentUuid": "49d48820_dd24afd8",
       "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da86d37f_bab1fab1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-10-14T09:14:43Z",
+      "side": 1,
+      "message": "Sure, it is aosp/2143952. This change is just a cherry-pick of it.",
+      "parentUuid": "652321a7_bcc5980c",
+      "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
