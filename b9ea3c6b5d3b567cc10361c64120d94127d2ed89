@@ -42,6 +42,26 @@
     },
     {
       "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056245488",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2469450?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c517b09c_d186579c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-16T13:58:20Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 572888213 android-build.ayeaye-python-dispatcher_20231012.04_p0",
+      "revId": "b9ea3c6b5d3b567cc10361c64120d94127d2ed89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
       "robotRunId": "AR00000000000039911511",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2469450?revision\u003d3",
       "fixSuggestions": [
@@ -117,6 +137,49 @@
       "writtenOn": "2023-10-16T13:58:12Z",
       "side": 1,
       "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Sid Nayyar \u003csidnayyar@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 514399328 android-build.ayeaye-python-dispatcher_20230306.04_p0",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 0
+      },
+      "revId": "b9ea3c6b5d3b567cc10361c64120d94127d2ed89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056245488",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2469450?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "5930705c_98f20a89",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 10,
+                "startChar": 0,
+                "endLine": 10,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Sid Nayyar \u003csidnayyar@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "01105f42_68157dcf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-16T13:58:20Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Sid Nayyar \u003csidnayyar@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 572888213 android-build.ayeaye-python-dispatcher_20231012.04_p0",
       "range": {
         "startLine": 4,
         "startChar": 0,
