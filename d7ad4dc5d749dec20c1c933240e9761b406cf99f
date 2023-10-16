@@ -32,6 +32,32 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d21",
       "fixSuggestions": [],
       "key": {
+        "uuid": "24d97153_331b6fa6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 21
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-16T23:37:52Z",
+      "side": 1,
+      "message": "Loaded symbol \"copy_file\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 4,
+        "startChar": 44,
+        "endLine": 4,
+        "endChar": 53
+      },
+      "revId": "d7ad4dc5d749dec20c1c933240e9761b406cf99f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056303918",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d21",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "ff7f6e83_e8bc6d66",
         "filename": "BUILD.bazel",
         "patchSetId": 21
@@ -58,6 +84,32 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d21",
       "fixSuggestions": [],
       "key": {
+        "uuid": "3415e820_e9b6f1fb",
+        "filename": "BUILD.bazel",
+        "patchSetId": 21
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-16T23:37:52Z",
+      "side": 1,
+      "message": "Loaded symbol \"zip_archive\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 7,
+        "startChar": 48,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "d7ad4dc5d749dec20c1c933240e9761b406cf99f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056303918",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d21",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "a3b35f00_eff1d52e",
         "filename": "BUILD.bazel",
         "patchSetId": 21
@@ -67,6 +119,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-16T23:37:48Z",
+      "side": 1,
+      "message": "Loaded symbol \"android_filegroup\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 22
+      },
+      "revId": "d7ad4dc5d749dec20c1c933240e9761b406cf99f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056303918",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d21",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2cfcbdaa_553c65fe",
+        "filename": "BUILD.bazel",
+        "patchSetId": 21
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-16T23:37:52Z",
       "side": 1,
       "message": "Loaded symbol \"android_filegroup\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
       "range": {
@@ -129,6 +207,53 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000056303918",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d21",
+      "fixSuggestions": [
+        {
+          "fixId": "038256ea_07ca0520",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 16,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"tests_zip_x86_64\",\n    srcs \u003d [\"//common/tools/testing/selftests:kselftest_tests_x86_64\"],\n    out \u003d \"tests.zip\",\n"
+            },
+            {
+              "path": "tools/testing/BUILD.bazel",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"tests_zip_arm64\",\n    srcs \u003d [\"//common/tools/testing/selftests:kselftest_tests_arm64\"],\n    out \u003d \"tests.zip\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "652e0f26_60aa2fbe",
+        "filename": "tools/testing/BUILD.bazel",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-16T23:37:52Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "d7ad4dc5d749dec20c1c933240e9761b406cf99f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056303918",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d21",
       "fixSuggestions": [],
       "key": {
         "uuid": "a3bf794c_37a49591",
@@ -140,6 +265,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-16T23:37:48Z",
+      "side": 1,
+      "message": "The file has no module docstring.\nA module docstring is a string literal (not a comment) which should be the first statement of a file (it may follow comment lines). http://go/buildifier-warnings#module-docstring",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "d7ad4dc5d749dec20c1c933240e9761b406cf99f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056303918",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d21",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "371873ad_bfdc28b2",
+        "filename": "tools/testing/abi.bzl",
+        "patchSetId": 21
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-16T23:37:52Z",
       "side": 1,
       "message": "The file has no module docstring.\nA module docstring is a string literal (not a comment) which should be the first statement of a file (it may follow comment lines). http://go/buildifier-warnings#module-docstring",
       "range": {
@@ -223,6 +374,83 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-16T23:37:48Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "d7ad4dc5d749dec20c1c933240e9761b406cf99f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056303918",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d21",
+      "fixSuggestions": [
+        {
+          "fixId": "5017ba84_705130f9",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"kselftest_binderfs_test\",\n    srcs \u003d [\"filesystems/binderfs/binderfs_test.c\"],\n    target_compatible_with \u003d [\"@platforms//os:android\"],\n    deps \u003d [\":kselftest_headers_lib\"],\n"
+            },
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "    abis \u003d [\"x86_64\"],\n"
+            },
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 41,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "    abis \u003d [\"arm64\"],\n"
+            },
+            {
+              "path": "tools/testing/selftests/BUILD.bazel",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "ebfce53b_47895308",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-16T23:37:52Z",
       "side": 1,
       "message": "File is not formatted. Run `buildifier tools/testing/selftests/BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "d7ad4dc5d749dec20c1c933240e9761b406cf99f",
