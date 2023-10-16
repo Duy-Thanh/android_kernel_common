@@ -3089,6 +3089,11 @@ pointer_reference {
   pointee_type_id: 0x07b1db01
 }
 pointer_reference {
+  id: 0x0b7ddaf1
+  kind: POINTER
+  pointee_type_id: 0x07b78d59
+}
+pointer_reference {
   id: 0x0b85846c
   kind: POINTER
   pointee_type_id: 0x0456f72c
@@ -62259,10 +62264,22 @@ member {
   offset: 256
 }
 member {
+  id: 0x5edf26f2
+  name: "cma"
+  type_id: 0x1023f4f6
+  offset: 768
+}
+member {
   id: 0x38bc9c37
   name: "cma_area"
   type_id: 0x1023f4f6
   offset: 5824
+}
+member {
+  id: 0x5e83e435
+  name: "cma_kobj"
+  type_id: 0x0b7ddaf1
+  offset: 1152
 }
 member {
   id: 0xd226c8d1
@@ -135623,6 +135640,18 @@ member {
   offset: 192
 }
 member {
+  id: 0x799b31fa
+  name: "nr_pages_failed"
+  type_id: 0x1f4573ef
+  offset: 1088
+}
+member {
+  id: 0x29943d4f
+  name: "nr_pages_succeeded"
+  type_id: 0x1f4573ef
+  offset: 1024
+}
+member {
   id: 0x26b96116
   name: "nr_pages_to_update"
   type_id: 0xfc0e1dbd
@@ -163342,10 +163371,10 @@ member {
   offset: 128
 }
 member {
-  id: 0x348aae90
+  id: 0x348aab4b
   name: "reserve_pages_on_error"
   type_id: 0x6d7f5ff6
-  offset: 1024
+  offset: 1216
 }
 member {
   id: 0x688b9047
@@ -220113,7 +220142,7 @@ struct_union {
   kind: STRUCT
   name: "cma"
   definition {
-    bytesize: 136
+    bytesize: 160
     member_id: 0x2d6eaa34
     member_id: 0x65162e41
     member_id: 0x8941be6f
@@ -220123,7 +220152,20 @@ struct_union {
     member_id: 0xd0936a4e
     member_id: 0x07451d80
     member_id: 0x0de6df9d
-    member_id: 0x348aae90
+    member_id: 0x29943d4f
+    member_id: 0x799b31fa
+    member_id: 0x5e83e435
+    member_id: 0x348aab4b
+  }
+}
+struct_union {
+  id: 0x07b78d59
+  kind: STRUCT
+  name: "cma_kobject"
+  definition {
+    bytesize: 104
+    member_id: 0x452b206c
+    member_id: 0x5edf26f2
   }
 }
 struct_union {
@@ -326345,12 +326387,12 @@ function {
   parameter_id: 0x310ec01d
 }
 function {
-  id: 0xb94d0c8b
+  id: 0xb94f7fed
   return_type_id: 0x06835e9c
   parameter_id: 0x1023f4f6
   parameter_id: 0x33756485
   parameter_id: 0x4585663f
-  parameter_id: 0x6d7f5ff6
+  parameter_id: 0xf1a6dfed
 }
 function {
   id: 0xb957d705
@@ -346079,8 +346121,8 @@ elf_symbol {
   name: "cma_alloc"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x72b32442
-  type_id: 0xb94d0c8b
+  crc: 0xd7229683
+  type_id: 0xb94f7fed
   full_name: "cma_alloc"
 }
 elf_symbol {
@@ -346088,7 +346130,7 @@ elf_symbol {
   name: "cma_for_each_area"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa773aa40
+  crc: 0x56e73a73
   type_id: 0x96d8b66a
   full_name: "cma_for_each_area"
 }
@@ -346097,7 +346139,7 @@ elf_symbol {
   name: "cma_get_name"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe71d2220
+  crc: 0x83ff5530
   type_id: 0x9c8a3bc5
   full_name: "cma_get_name"
 }
@@ -346106,7 +346148,7 @@ elf_symbol {
   name: "cma_release"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbcc61de4
+  crc: 0xb60c92d3
   type_id: 0xfa5a390c
   full_name: "cma_release"
 }
