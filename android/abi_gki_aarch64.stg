@@ -4154,6 +4154,11 @@ pointer_reference {
   pointee_type_id: 0x19d93429
 }
 pointer_reference {
+  id: 0x0ce80834
+  kind: POINTER
+  pointee_type_id: 0x19e0c64c
+}
+pointer_reference {
   id: 0x0ce9a2bb
   kind: POINTER
   pointee_type_id: 0x19e66c71
@@ -22344,6 +22349,11 @@ pointer_reference {
   pointee_type_id: 0xebd0e7ee
 }
 pointer_reference {
+  id: 0x3064f970
+  kind: POINTER
+  pointee_type_id: 0xebd3035e
+}
+pointer_reference {
   id: 0x30650ba6
   kind: POINTER
   pointee_type_id: 0xebd4c806
@@ -28037,6 +28047,11 @@ pointer_reference {
   id: 0x3d4c764a
   kind: POINTER
   pointee_type_id: 0xdf713fb7
+}
+pointer_reference {
+  id: 0x3d52d75b
+  kind: POINTER
+  pointee_type_id: 0xdf0bbbf0
 }
 pointer_reference {
   id: 0x3d551c03
@@ -33737,6 +33752,11 @@ qualified {
   id: 0xebd0e7ee
   qualifier: CONST
   qualified_type_id: 0xdf042930
+}
+qualified {
+  id: 0xebd3035e
+  qualifier: CONST
+  qualified_type_id: 0xdf0bbbf0
 }
 qualified {
   id: 0xebd4c806
@@ -130705,6 +130725,12 @@ member {
   bitsize: 1
 }
 member {
+  id: 0xf79a533a
+  name: "native_mode"
+  type_id: 0x4585663f
+  offset: 32
+}
+member {
   id: 0x24fa7507
   name: "native_pcie_hotplug"
   type_id: 0x4585663f
@@ -137964,6 +137990,11 @@ member {
   type_id: 0x295c7202
   offset: 1177
   bitsize: 7
+}
+member {
+  id: 0x349420c4
+  name: "num_timings"
+  type_id: 0x4585663f
 }
 member {
   id: 0x8026d50a
@@ -190277,6 +190308,12 @@ member {
   offset: 128
 }
 member {
+  id: 0x1f55657f
+  name: "timings"
+  type_id: 0x0ce80834
+  offset: 64
+}
+member {
   id: 0x1f6734de
   name: "timings"
   type_id: 0x3ebb35fd
@@ -222952,6 +222989,17 @@ struct_union {
     member_id: 0x0306d4bf
     member_id: 0xb2ad9e5f
     member_id: 0x2d0ec9dd
+  }
+}
+struct_union {
+  id: 0xdf0bbbf0
+  kind: STRUCT
+  name: "display_timings"
+  definition {
+    bytesize: 16
+    member_id: 0x349420c4
+    member_id: 0xf79a533a
+    member_id: 0x1f55657f
   }
 }
 struct_union {
@@ -297497,6 +297545,11 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x1fcce445
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3d52d75b
+}
+function {
   id: 0x1fcd1693
   return_type_id: 0x48b5725f
   parameter_id: 0x3d551c03
@@ -299758,6 +299811,11 @@ function {
   return_type_id: 0x21069feb
   parameter_id: 0x3c9a9fb2
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x4d744842
+  return_type_id: 0x3d52d75b
+  parameter_id: 0x322c8c4b
 }
 function {
   id: 0x4d878509
@@ -305250,6 +305308,13 @@ function {
   parameter_id: 0x3399c453
   parameter_id: 0x3de3f5a1
   parameter_id: 0x268136e5
+}
+function {
+  id: 0x919a2688
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3064f970
+  parameter_id: 0x04a6a89c
+  parameter_id: 0x4585663f
 }
 function {
   id: 0x919a7322
@@ -351208,6 +351273,15 @@ elf_symbol {
   full_name: "disk_set_zoned"
 }
 elf_symbol {
+  id: 0x80814925
+  name: "display_timings_release"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3b4c240a
+  type_id: 0x1fcce445
+  full_name: "display_timings_release"
+}
+elf_symbol {
   id: 0x9c5fb17e
   name: "divider_get_val"
   is_defined: true
@@ -370898,6 +370972,15 @@ elf_symbol {
   crc: 0xc59ab1dd
   type_id: 0x91f5fad8
   full_name: "of_get_display_timing"
+}
+elf_symbol {
+  id: 0x824695bc
+  name: "of_get_display_timings"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x98a67fd3
+  type_id: 0x4d744842
+  full_name: "of_get_display_timings"
 }
 elf_symbol {
   id: 0x05a46d27
@@ -393254,6 +393337,15 @@ elf_symbol {
   full_name: "videomode_from_timing"
 }
 elf_symbol {
+  id: 0x6d215713
+  name: "videomode_from_timings"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x414d119a
+  type_id: 0x919a2688
+  full_name: "videomode_from_timings"
+}
+elf_symbol {
   id: 0x1bf9e9e5
   name: "virtio_break_device"
   is_defined: true
@@ -397846,6 +397938,7 @@ interface {
   symbol_id: 0xe5bfa8c8
   symbol_id: 0xd48a6769
   symbol_id: 0xdd957eaf
+  symbol_id: 0x80814925
   symbol_id: 0x9c5fb17e
   symbol_id: 0xedd83590
   symbol_id: 0x840989b2
@@ -400032,6 +400125,7 @@ interface {
   symbol_id: 0xe2b0e5a5
   symbol_id: 0xb8036e9c
   symbol_id: 0xe36e392a
+  symbol_id: 0x824695bc
   symbol_id: 0x05a46d27
   symbol_id: 0xe3de7018
   symbol_id: 0x26fb2401
@@ -402516,6 +402610,7 @@ interface {
   symbol_id: 0xbd9fe5b6
   symbol_id: 0x76ec943c
   symbol_id: 0x1a4e4142
+  symbol_id: 0x6d215713
   symbol_id: 0x1bf9e9e5
   symbol_id: 0xec6b2b3d
   symbol_id: 0x4b519cf9
