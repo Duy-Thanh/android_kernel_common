@@ -2,6 +2,9 @@
 /*
  * Arch specific extensions to struct device
  */
+
+#error BREAK
+
 #ifndef ASMARM_DEVICE_H
 #define ASMARM_DEVICE_H
 
@@ -19,6 +22,7 @@ struct pdev_archdata {
 	struct omap_device *od;
 #endif
 };
+
 
 #ifdef CONFIG_ARM_DMA_USE_IOMMU
 #define to_dma_iommu_mapping(dev) ((dev)->archdata.mapping)
