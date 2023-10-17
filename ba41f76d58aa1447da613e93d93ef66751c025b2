@@ -16,6 +16,24 @@
       "message": "Since CONFIG_CMA_SYSFS is part of upstream, can we carry the config into gki_defconfig **by default** instead of keep carry on by vendor?",
       "revId": "ba41f76d58aa1447da613e93d93ef66751c025b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47f247e9_77b53d2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2023-10-17T07:31:33Z",
+      "side": 1,
+      "message": "SGTM. How can I achieve it?",
+      "parentUuid": "23bf292c_8e3b8b68",
+      "revId": "ba41f76d58aa1447da613e93d93ef66751c025b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
