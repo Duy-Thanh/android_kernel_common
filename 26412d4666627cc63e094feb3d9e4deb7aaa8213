@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "850cf9da_c09e951d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-10-17T06:37:56Z",
+      "side": 1,
+      "message": "Apologies, Lint is apparently grumpy about the \u0027BUG: \u0027 entry being capitalized. Please switch it to use \u0027Bug: \u0027",
+      "range": {
+        "startLine": 16,
+        "startChar": 5,
+        "endLine": 16,
+        "endChar": 14
+      },
+      "revId": "26412d4666627cc63e094feb3d9e4deb7aaa8213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
