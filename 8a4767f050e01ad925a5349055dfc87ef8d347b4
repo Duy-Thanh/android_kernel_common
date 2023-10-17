@@ -225,6 +225,30 @@
       },
       "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8504c208_3111ecf7",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-17T17:35:50Z",
+      "side": 1,
+      "message": "You should be able to hook that tracepoint any time you like, try it and see!",
+      "parentUuid": "273f9fbc_f4c61bdd",
+      "range": {
+        "startLine": 464,
+        "startChar": 3,
+        "endLine": 464,
+        "endChar": 38
+      },
+      "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
