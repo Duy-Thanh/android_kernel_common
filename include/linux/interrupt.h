@@ -580,13 +580,21 @@ enum
  * 	2) rcu_report_dead() reports the final quiescent states.
  *
  * _ IRQ_POLL: irq_poll_cpu_dead() migrates the queue
+ *
+ * _ (HR)TIMER_SOFTIRQ: (hr)timers_dead_cpu() migrates the queue
  */
+<<<<<<< HEAD   (c64979 Merge 6.1.55 into android14-6.1-lts)
 #define SOFTIRQ_HOTPLUG_SAFE_MASK (BIT(RCU_SOFTIRQ) | BIT(IRQ_POLL_SOFTIRQ))
 /* Softirq's where the handling might be long: */
 #define LONG_SOFTIRQ_MASK (BIT(NET_TX_SOFTIRQ)    | \
 			   BIT(NET_RX_SOFTIRQ)    | \
 			   BIT(BLOCK_SOFTIRQ)     | \
 			   BIT(IRQ_POLL_SOFTIRQ))
+=======
+#define SOFTIRQ_HOTPLUG_SAFE_MASK (BIT(TIMER_SOFTIRQ) | BIT(IRQ_POLL_SOFTIRQ) |\
+				   BIT(HRTIMER_SOFTIRQ) | BIT(RCU_SOFTIRQ))
+
+>>>>>>> BRANCH (ecda77 Linux 6.1.56)
 
 /* map softirq index to softirq name. update 'softirq_to_name' in
  * kernel/softirq.c when adding a new softirq.
