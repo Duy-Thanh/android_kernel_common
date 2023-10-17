@@ -97,6 +97,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6dc90912_4421f929",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-10-17T17:34:45Z",
+      "side": 1,
+      "message": "Thanks for the info :)",
+      "parentUuid": "23cce51c_52367705",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 70
+      },
+      "revId": "04596e06dc7e76db529b31ed620939bbdbcd6df0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "35844ebe_96bc3690",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
