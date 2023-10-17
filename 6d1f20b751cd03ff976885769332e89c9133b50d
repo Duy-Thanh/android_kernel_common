@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca80d22_af5d6a66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-17T18:11:54Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry pick the individual patches from 13-5.15 (preserving the Change-Id).",
+      "revId": "6d1f20b751cd03ff976885769332e89c9133b50d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
