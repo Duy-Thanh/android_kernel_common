@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "23cce51c_52367705",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-17T16:35:55Z",
+      "side": 1,
+      "message": "Yes, the original patch should go here, as either UPSTREAM, or BACKPORT, depending on what needs to be done with it.",
+      "parentUuid": "933fcc40_ed8cd3d0",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 70
+      },
+      "revId": "04596e06dc7e76db529b31ed620939bbdbcd6df0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "35844ebe_96bc3690",
