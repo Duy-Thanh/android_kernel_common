@@ -123,6 +123,24 @@
       "parentUuid": "83e09ae5_b8091a92",
       "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9deb39d_c6539a7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-10-17T11:37:53Z",
+      "side": 1,
+      "message": "https://git.kernel.org/pub/scm/linux/kernel/git/stable/stable-queue.git/commit/?id\u003df744ba421d0e8d2f4a6d5a7b5781ca3467a060f2",
+      "parentUuid": "385f3444_999196de",
+      "revId": "52c8530f2db22d0847c63a5bca33364a6398e870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
