@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "933fcc40_ed8cd3d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1937107
+      },
+      "writtenOn": "2023-10-17T15:13:19Z",
+      "side": 1,
+      "message": "Sorry, Im little confused now. Linus tree only has master and 5.15 is a tag on it. Is there any specific repo that I should check?\nOR is it fine if I simply push the original patch here (BACKPORT)?",
+      "parentUuid": "5fb5d5ad_7e52c9d3",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 70
+      },
+      "revId": "04596e06dc7e76db529b31ed620939bbdbcd6df0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "35844ebe_96bc3690",
