@@ -153,6 +153,30 @@
       },
       "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "badc627f_2e706ec4",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-17T12:08:42Z",
+      "side": 1,
+      "message": "You have the identical information at the earlier tracepoint, and are not passing anything else in, so I do not understand why you are saying you need this for \"more metrics\"  Please explain in detail, in the changelog, why the existing hook will not work properly for you.",
+      "parentUuid": "6744b30d_db1ea4a8",
+      "range": {
+        "startLine": 464,
+        "startChar": 3,
+        "endLine": 464,
+        "endChar": 38
+      },
+      "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
