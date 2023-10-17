@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056348070",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2792756?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "34f55af1_5daa238e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-17T10:12:17Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/08569c92f7f339de21b7a68d43d6795fc0aa24f2) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d08569c92f7f339de21b7a68d43d6795fc0aa24f2)\n\n```\n      ## net/sched/Kconfig ##\n     @@ net/sched/Kconfig: config CLS_U32_MARK\n    @@ net/sched/cls_rsvp.h (deleted)\n     -\n     -/*\n     -   Comparing to general packet classification problem,\n    --   RSVP needs only several relatively simple rules:\n    +-   RSVP needs only sevaral relatively simple rules:\n     -\n     -   * (dst, protocol) are always specified,\n     -     so that we are able to hash them.\n    @@ net/sched/cls_rsvp.h (deleted)\n     -\t\t}\n     -\t}\n     -\n    --\t/* Something went wrong if we are trying to replace a non-existent\n    +-\t/* Something went wrong if we are trying to replace a non-existant\n     -\t * node. Mind as well halt instead of silently failing.\n     -\t */\n     -\tBUG_ON(1);\n    @@ net/sched/cls_rsvp.h (deleted)\n     -\n     -static int rsvp_change(struct net *net, struct sk_buff *in_skb,\n     -\t\t       struct tcf_proto *tp, unsigned long base,\n    --\t\t       u32 handle, struct nlattr **tca,\n    --\t\t       void **arg, u32 flags,\n    +-\t\t       u32 handle,\n    +-\t\t       struct nlattr **tca,\n    +-\t\t       void **arg, bool ovr, bool rtnl_held,\n     -\t\t       struct netlink_ext_ack *extack)\n     -{\n     -\tstruct rsvp_head *data \u003d rtnl_dereference(tp-\u003eroot);\n    @@ net/sched/cls_rsvp.h (deleted)\n     -\terr \u003d tcf_exts_init(\u0026e, net, TCA_RSVP_ACT, TCA_RSVP_POLICE);\n     -\tif (err \u003c 0)\n     -\t\treturn err;\n    --\terr \u003d tcf_exts_validate(net, tp, tb, tca[TCA_RATE], \u0026e, flags,\n    +-\terr \u003d tcf_exts_validate(net, tp, tb, tca[TCA_RATE], \u0026e, ovr, true,\n     -\t\t\t\textack);\n     -\tif (err \u003c 0)\n     -\t\tgoto errout2;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 573794017 android-build.ayeaye-python-dispatcher_20231016.04_p0",
+      "revId": "c31ecabc0adb3e7eeb5e410f66e486a05ca4fea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
