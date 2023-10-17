@@ -201,6 +201,30 @@
       },
       "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "273f9fbc_f4c61bdd",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1963266
+      },
+      "writtenOn": "2023-10-17T17:20:11Z",
+      "side": 1,
+      "message": "our new tracepoint is added as field metrics for monitoring purpose and we want to enable them all the time\n\n`trace_suspend_resume` is the collection of tracepoints for different phase of suspend/resume, and in default it\u0027s disabled, I am not sure if we can individually configure this specific one as enabled in default?",
+      "parentUuid": "d55ca466_05f1f466",
+      "range": {
+        "startLine": 464,
+        "startChar": 3,
+        "endLine": 464,
+        "endChar": 38
+      },
+      "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
