@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e35b1f2c_f2ba2ba6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-10-17T01:23:37Z",
+      "side": 1,
+      "message": "will upload a new change after the questions here are clarified. Thanks.",
+      "parentUuid": "816ae500_33690b5c",
+      "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04c3a1ac_661b977c",
         "filename": "kernel/power/suspend.c",
         "patchSetId": 1
@@ -103,6 +121,30 @@
       "writtenOn": "2023-10-16T19:23:07Z",
       "side": 1,
       "message": "why can you not use the `trace_suspend_resume` hook right above this line?",
+      "range": {
+        "startLine": 464,
+        "startChar": 3,
+        "endLine": 464,
+        "endChar": 38
+      },
+      "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6744b30d_db1ea4a8",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-10-17T01:23:37Z",
+      "side": 1,
+      "message": "IIUC, we want use vendor hook to collect more metrics, which could not be done by trace_suspend_resume. However, maybe we could consider the usage of trace_android_vh_resume_begin.\n\nHi Sophia, what do you think?",
+      "parentUuid": "04c3a1ac_661b977c",
       "range": {
         "startLine": 464,
         "startChar": 3,
