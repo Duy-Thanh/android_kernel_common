@@ -249,6 +249,30 @@
       },
       "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0f43617_caee6c08",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1963266
+      },
+      "writtenOn": "2023-10-17T21:19:58Z",
+      "side": 1,
+      "message": "qq: if we hook `trace_suspend_resume`, then every time `trace_suspend_resume`get called, the linked handler also get called, is that correct?\n\n`trace_suspend_resume` is called 30+ times in different phases of suspend/resume, but we only interest in this specific one",
+      "parentUuid": "8504c208_3111ecf7",
+      "range": {
+        "startLine": 464,
+        "startChar": 3,
+        "endLine": 464,
+        "endChar": 38
+      },
+      "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
