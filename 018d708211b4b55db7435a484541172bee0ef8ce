@@ -17,6 +17,24 @@
       "parentUuid": "bdd52837_1155989b",
       "revId": "018d708211b4b55db7435a484541172bee0ef8ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4b1aaf0_8a86e787",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-18T12:29:37Z",
+      "side": 1,
+      "message": "Doesn\u0027t look resolved 😞",
+      "parentUuid": "d4e7333a_d09c4e8c",
+      "revId": "018d708211b4b55db7435a484541172bee0ef8ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
