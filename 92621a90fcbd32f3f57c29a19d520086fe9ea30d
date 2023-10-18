@@ -16,6 +16,23 @@
       "message": "aurora:/sys/class/power_supply/hid-3605AB70E213C19B27E4487668DB984D-battery #\naurora:/sys/class/power_supply/hid-3605AB70E213C19B27E4487668DB984D-battery #\naurora:/sys/class/power_supply/hid-3605AB70E213C19B27E4487668DB984D-battery #\naurora:/sys/class/power_supply/hid-3605AB70E213C19B27E4487668DB984D-battery # cat uevent\nPOWER_SUPPLY_NAME\u003dhid-3605AB70E213C19B27E4487668DB984D-battery\nPOWER_SUPPLY_TYPE\u003dBattery\nPOWER_SUPPLY_PRESENT\u003d1\nPOWER_SUPPLY_ONLINE\u003d1\nPOWER_SUPPLY_CAPACITY\u003d53\nPOWER_SUPPLY_MODEL_NAME\u003dWOTLOTUS HOTLOTUS\nPOWER_SUPPLY_STATUS\u003dCharging\nPOWER_SUPPLY_SCOPE\u003dDevice\naurora:/sys/class/power_supply/hid-3605AB70E213C19B27E4487668DB984D-battery #\naurora:/sys/class/power_supply/hid-3605AB70E213C19B27E4487668DB984D-battery #\naurora:/sys/class/power_supply/hid-3605AB70E213C19B27E4487668DB984D-battery #",
       "revId": "92621a90fcbd32f3f57c29a19d520086fe9ea30d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fa47e16_acb1de8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-18T13:34:20Z",
+      "side": 1,
+      "message": "Hi Greg!\nThis patch is a cherry-pick from Linux mainline with no changes at all.Please help to confirm again, thank you！",
+      "revId": "92621a90fcbd32f3f57c29a19d520086fe9ea30d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
