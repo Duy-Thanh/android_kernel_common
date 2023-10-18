@@ -16,6 +16,24 @@
       "message": "Are these symbols actually exported (`EXPORT_SYMBOL*`)?\n\n```\nSymbols missing from ksymtab:\n- relay_close\n- relay_file_operations\n- relay_flush\n- relay_open\n- relay_reset\n- relay_subbufs_consumed\n- relay_switch_subbuf\n```",
       "revId": "55c1bc8f84073dfd2e1cc1ecf78b4bc31665b2fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea88756_be5f0efa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2027721
+      },
+      "writtenOn": "2023-10-18T08:41:40Z",
+      "side": 1,
+      "message": "yes,these symbols are all exported by EXPORT_SYMBOL_GPL:\n#grep EXPORT  kernel/relay.c \nEXPORT_SYMBOL_GPL(relay_buf_full);\nEXPORT_SYMBOL_GPL(relay_reset);\nEXPORT_SYMBOL_GPL(relay_open);\nEXPORT_SYMBOL_GPL(relay_late_setup_files);\nEXPORT_SYMBOL_GPL(relay_switch_subbuf);\nEXPORT_SYMBOL_GPL(relay_subbufs_consumed);\nEXPORT_SYMBOL_GPL(relay_close);\nEXPORT_SYMBOL_GPL(relay_flush);\nEXPORT_SYMBOL_GPL(relay_file_operations);",
+      "parentUuid": "653ac9cb_70043b0f",
+      "revId": "55c1bc8f84073dfd2e1cc1ecf78b4bc31665b2fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
