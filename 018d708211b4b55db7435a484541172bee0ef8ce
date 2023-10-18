@@ -35,6 +35,24 @@
       "parentUuid": "d4e7333a_d09c4e8c",
       "revId": "018d708211b4b55db7435a484541172bee0ef8ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f6dd0e_717077aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-18T13:25:03Z",
+      "side": 1,
+      "message": "I have tested it on our product and it can indeed report the charging status.",
+      "parentUuid": "e4b1aaf0_8a86e787",
+      "revId": "018d708211b4b55db7435a484541172bee0ef8ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
