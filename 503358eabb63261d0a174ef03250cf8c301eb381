@@ -1,0 +1,121 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056532205",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d26",
+      "fixSuggestions": [
+        {
+          "fixId": "f158754f_2cadeee6",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 834,
+                "startChar": 0,
+                "endLine": 835,
+                "endChar": 0
+              },
+              "replacement": "_KSELFTEST_DIR \u003d \"testcases/selftests\"\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 850,
+                "startChar": 0,
+                "endLine": 850,
+                "endChar": 0
+              },
+              "replacement": "    path_prefix \u003d _KSELFTEST_DIR,\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 852,
+                "startChar": 0,
+                "endLine": 853,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 858,
+                "startChar": 0,
+                "endLine": 858,
+                "endChar": 0
+              },
+              "replacement": "    path_prefix \u003d _KSELFTEST_DIR,\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 860,
+                "startChar": 0,
+                "endLine": 861,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 867,
+                "startChar": 0,
+                "endLine": 867,
+                "endChar": 0
+              },
+              "replacement": "    path_prefix \u003d _KSELFTEST_DIR,\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 872,
+                "startChar": 0,
+                "endLine": 873,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 879,
+                "startChar": 0,
+                "endLine": 879,
+                "endChar": 0
+              },
+              "replacement": "    path_prefix \u003d _KSELFTEST_DIR,\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 884,
+                "startChar": 0,
+                "endLine": 885,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "44858930_fb45e732",
+        "filename": "BUILD.bazel",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-18T22:18:42Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "503358eabb63261d0a174ef03250cf8c301eb381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
