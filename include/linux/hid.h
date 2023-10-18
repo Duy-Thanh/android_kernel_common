@@ -314,6 +314,10 @@ struct hid_item {
 #define HID_DG_LATENCYMODE	0x000d0060
 
 #define HID_BAT_ABSOLUTESTATEOFCHARGE	0x00850065
+#define HID_BAT_CHARGING		0x00850044
+
+#define HID_BAT_CHARGING_MASK		0xc0000000
+#define HID_LL_OPEN_COUNT_MASK		0x3fffffff
 
 #define HID_VD_ASUS_CUSTOM_MEDIA_KEYS	0xff310076
 
@@ -615,6 +619,7 @@ struct hid_device {							/* device report descriptor */
 	__s32 battery_max;
 	__s32 battery_report_type;
 	__s32 battery_report_id;
+	__s32 battery_charge_status;
 	enum hid_battery_status battery_status;
 	bool battery_avoid_query;
 	ktime_t battery_ratelimit_time;
@@ -1232,5 +1237,46 @@ do {									\
 	dev_info_once(&(hid)->dev, fmt, ##__VA_ARGS__)
 #define hid_dbg_once(hid, fmt, ...)			\
 	dev_dbg_once(&(hid)->dev, fmt, ##__VA_ARGS__)
+
+#ifdef CONFIG_HID_BATTERY_STRENGTH
+static inline int hdev_get_battery_charge_status(struct hid_device *dev)
+{
+	int ret =0;
+
+	ret = (dev->ll_open_count & HID_BAT_CHARGING_MASK)>>30;
+	
+	return ret;
+}
+
+static inline void hdev_set_battery_charge_status(struct hid_device *dev, int val)
+{
+	dev->ll_open_count &= ~HID_BAT_CHARGING_MASK;
+	dev->ll_open_count |= ((val&0x3)<<30);
+}
+#else  /* !CONFIG_HID_BATTERY_STRENGTH */
+static inline int hdev_get_battery_charge_status(struct hid_device *dev)
+{
+	return 0;
+}
+
+static inline void hdev_set_battery_charge_status(struct hid_device *dev, int val)
+{
+	
+}
+#endif	/* CONFIG_HID_BATTERY_STRENGTH */
+
+static inline unsigned int hdev_inc_ll_open_count(struct hid_device *hdev)
+{
+	hdev->ll_open_count &= HID_LL_OPEN_COUNT_MASK;
+		
+	return hdev->ll_open_count++;
+}
+
+static inline unsigned int hdev_dec_ll_open_count(struct hid_device *hdev)
+{
+	hdev->ll_open_count &= HID_LL_OPEN_COUNT_MASK;
+	
+	return --hdev->ll_open_count;
+}
 
 #endif
