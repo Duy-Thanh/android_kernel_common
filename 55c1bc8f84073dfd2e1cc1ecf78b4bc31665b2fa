@@ -34,6 +34,23 @@
       "parentUuid": "653ac9cb_70043b0f",
       "revId": "55c1bc8f84073dfd2e1cc1ecf78b4bc31665b2fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81253e2e_c4ab4183",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-10-18T14:18:10Z",
+      "side": 1,
+      "message": "I assume `CONFIG_RELAY` is not enabled in this release branch. How did you build/test this?\n\n[ANDROID: gki_config: enable CONFIG_RELAY (2624974)](http://aosp/2624974)",
+      "revId": "55c1bc8f84073dfd2e1cc1ecf78b4bc31665b2fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
