@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056427347",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2777892?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "991ead98_9186594d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-18T00:00:45Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2777894](https://r.android.com/c/2777894) on branch android14-5.15.\n\n```\n      ## block/blk-mq.c ##\n    -@@ block/blk-mq.c: static void blk_mq_requeue_work(struct work_struct *work)\n    - \t\tif (rq-\u003erq_flags \u0026 RQF_DONTPREP)\n    - \t\t\tblk_mq_request_bypass_insert(rq, false, false);\n    - \t\telse\n    --\t\t\tblk_mq_sched_insert_request(rq, true, false, false);\n    -+\t\t\tblk_mq_sched_insert_request(rq, /*at_head\u003d*/\n    -+\t\t\t\t!blk_rq_is_seq_zoned_write(rq), false, false);\n    - \t}\n    +@@ block/blk-mq.c: static void blk_mq_process_requeue_list(struct blk_mq_hw_ctx *hctx)\n    + \tspin_unlock_irq(\u0026q-\u003erequeue_lock);\n      \n    - \twhile (!list_empty(\u0026rq_list)) {\n    + \tlist_for_each_entry_safe(rq, next, \u0026at_head, queuelist)\n    +-\t\tblk_mq_sched_insert_request(rq, /*at_head\u003d*/true, false, false);\n    ++\t\tblk_mq_sched_insert_request(rq, /*at_head\u003d*/\n    ++\t\t\t!blk_rq_is_seq_zoned_write(rq), false, false);\n    + \n    + \tlist_for_each_entry_safe(rq, next, \u0026at_tail, queuelist)\n    + \t\tblk_mq_sched_insert_request(rq, false, false, false);\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 574135466 android-build.ayeaye-python-dispatcher_20231017.04_p0",
+      "revId": "e2b48751dab8fa5550f006c6544e703b2af9d83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056427347",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2777892?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b0879c25_c69d2233",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-18T00:00:45Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 574135466 android-build.ayeaye-python-dispatcher_20231017.04_p0",
+      "revId": "e2b48751dab8fa5550f006c6544e703b2af9d83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
