@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e7333a_d09c4e8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-18T07:06:03Z",
+      "side": 1,
+      "message": "\u003e [Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\n\u003e Checked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/a608dc1c06397dc50ab773498433432fb5938f92) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003da608dc1c06397dc50ab773498433432fb5938f92)\n\u003e \n\u003e ```\n\u003e       ## drivers/hid/.kunitconfig ##\n\u003e      @@\n\u003e       CONFIG_KUNIT\u003dy\n\u003e     @@ drivers/hid/hid-input.c: static void hidinput_configure_usage(struct hid_input *\n\u003e      +\t\t\treturn;\n\u003e       \t\t}\n\u003e       \t\tgoto unknown;\n\u003e     - \n\u003e     + \tcase HID_UP_CAMERA:\n\u003e      @@ drivers/hid/hid-input.c: void hidinput_hid_event(struct hid_device *hid, struct hid_field *field, struct\n\u003e     + \tstruct input_dev *input;\n\u003e     + \tstruct hid_report *report \u003d field-\u003ereport;\n\u003e     + \tunsigned *quirks \u003d \u0026hid-\u003equirks;\n\u003e     + \n\u003e     + \tif (!usage-\u003etype)\n\u003e       \t\treturn;\n\u003e       \n\u003e       \tif (usage-\u003etype \u003d\u003d EV_PWR) {\n\u003e      -\t\thidinput_update_battery(hid, value);\n\u003e     -+\t\tbool handled \u003d hidinput_set_battery_charge_status(hid, usage-\u003ehid, value);\n\n\u003e      +\n\u003e      +\t\tif (!handled)\n\u003e      +\t\t\thidinput_update_battery(hid, value);\n\u003e ```\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 574135466 android-build.ayeaye-python-dispatcher_20231017.04_p0\n\nPlease fix.",
+      "parentUuid": "bdd52837_1155989b",
+      "revId": "018d708211b4b55db7435a484541172bee0ef8ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
