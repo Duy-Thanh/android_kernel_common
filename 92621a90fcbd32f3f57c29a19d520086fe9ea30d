@@ -51,6 +51,23 @@
       "parentUuid": "5fa47e16_acb1de8f",
       "revId": "92621a90fcbd32f3f57c29a19d520086fe9ea30d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ffdf922_07854050",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-18T14:14:52Z",
+      "side": 1,
+      "message": "Oh! You mean this problem reported by lint, right? Then let me solve the problem reported by lint first! Thanks!",
+      "revId": "92621a90fcbd32f3f57c29a19d520086fe9ea30d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
