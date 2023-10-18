@@ -16,6 +16,24 @@
       "message": "are you sure this is correctly resolved?",
       "revId": "9d21d21d211115d75b34ce96f075a8d7e7098f31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f07ab5a_9f86e8bb",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-10-18T10:28:28Z",
+      "side": 1,
+      "message": "No, seems like it was not a clean cherrypick. Resolved it in latest patch.",
+      "parentUuid": "95fce6f5_3b08416b",
+      "revId": "9d21d21d211115d75b34ce96f075a8d7e7098f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
