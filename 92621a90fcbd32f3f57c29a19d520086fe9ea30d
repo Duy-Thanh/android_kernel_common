@@ -33,6 +33,24 @@
       "message": "Hi Greg!\nThis patch is a cherry-pick from Linux mainline with no changes at all.Please help to confirm again, thank you！",
       "revId": "92621a90fcbd32f3f57c29a19d520086fe9ea30d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e90cf5ae_10c19c55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-18T13:58:18Z",
+      "side": 1,
+      "message": "The Lint tool is correct, your cherry-pick does NOT match identically to the original commit.  Please fix this up.",
+      "parentUuid": "5fa47e16_acb1de8f",
+      "revId": "92621a90fcbd32f3f57c29a19d520086fe9ea30d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
