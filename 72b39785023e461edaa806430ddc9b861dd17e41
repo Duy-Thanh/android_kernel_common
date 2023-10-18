@@ -16,6 +16,24 @@
       "message": "must be enabled for all arches.",
       "revId": "72b39785023e461edaa806430ddc9b861dd17e41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "192578de_d6b69da9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-10-18T13:34:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f0e2e4af_7ffdb7d9",
+      "revId": "72b39785023e461edaa806430ddc9b861dd17e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
