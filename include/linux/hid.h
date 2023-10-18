@@ -314,6 +314,10 @@ struct hid_item {
 #define HID_DG_LATENCYMODE	0x000d0060
 
 #define HID_BAT_ABSOLUTESTATEOFCHARGE	0x00850065
+#define HID_BAT_CHARGING		0x00850044
+
+#define HID_BAT_CHARGING_MASK		0xc0000000
+#define HID_LL_OPEN_COUNT_MASK		0x3fffffff
 
 #define HID_VD_ASUS_CUSTOM_MEDIA_KEYS	0xff310076
 
@@ -601,7 +605,7 @@ struct hid_device {							/* device report descriptor */
 
 	struct hid_ll_driver *ll_driver;
 	struct mutex ll_open_lock;
-	unsigned int ll_open_count;
+	unsigned int ll_open_count; /* The upper 2 bits of this field are used for the charging status of the HID device */
 
 #ifdef CONFIG_HID_BATTERY_STRENGTH
 	/*
@@ -1232,5 +1236,66 @@ do {									\
 	dev_info_once(&(hid)->dev, fmt, ##__VA_ARGS__)
 #define hid_dbg_once(hid, fmt, ...)			\
 	dev_dbg_once(&(hid)->dev, fmt, ##__VA_ARGS__)
+
+#ifdef CONFIG_HID_BATTERY_STRENGTH
+/**
+ * hdev_get_battery_charge_status - Get the charging status of HID device
+ *
+ * @dev: the device we want to get the charging status
+ */
+static inline int hdev_get_battery_charge_status(struct hid_device *dev)
+{
+	int ret =0;
+
+	ret = (dev->ll_open_count & HID_BAT_CHARGING_MASK)>>30;
+	
+	return ret;
+}
+
+/**
+ * hdev_set_battery_charge_status - Set the charging status of HID device
+ *
+ * @dev: the device we want to set the charging status
+ */
+static inline void hdev_set_battery_charge_status(struct hid_device *dev, int val)
+{
+	dev->ll_open_count &= ~HID_BAT_CHARGING_MASK;
+	dev->ll_open_count |= ((val&0x3)<<30);
+}
+#else  /* !CONFIG_HID_BATTERY_STRENGTH */
+static inline int hdev_get_battery_charge_status(struct hid_device *dev)
+{
+	return 0;
+}
+
+static inline void hdev_set_battery_charge_status(struct hid_device *dev, int val)
+{
+	
+}
+#endif	/* CONFIG_HID_BATTERY_STRENGTH */
+
+/**
+ * hdev_inc_ll_open_count - Increase the ll_open_count of HID device
+ *
+ * @dev: the device we want to increase the ll_open_count
+ */
+static inline unsigned int hdev_inc_ll_open_count(struct hid_device *hdev)
+{
+	hdev->ll_open_count &= HID_LL_OPEN_COUNT_MASK;
+		
+	return hdev->ll_open_count++;
+}
+
+/**
+ * hdev_dec_ll_open_count - Decrease the ll_open_count of HID device
+ *
+ * @dev: the device we want to decrease the ll_open_count
+ */
+static inline unsigned int hdev_dec_ll_open_count(struct hid_device *hdev)
+{
+	hdev->ll_open_count &= HID_LL_OPEN_COUNT_MASK;
+	
+	return --hdev->ll_open_count;
+}
 
 #endif
