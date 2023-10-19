@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "696e6a4e_21a66e42",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-10-19T18:11:03Z",
+      "side": 1,
+      "message": "Can you try:\n\n```\nssize_t count \u003d simple_read_from_buffer(buf, count, offset, message, len);\n*offset -\u003d count;\n\nreturn count;\n```",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 66
+      },
+      "revId": "f054854939f6702d1bd077a42c0e7f42341f7815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
