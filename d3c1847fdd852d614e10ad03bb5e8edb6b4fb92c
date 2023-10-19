@@ -33,6 +33,24 @@
       "message": "Why are we taking an UPSTREAM patch instead of merging mainline? Please put the rationale into the commit message",
       "revId": "d3c1847fdd852d614e10ad03bb5e8edb6b4fb92c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a803357d_560650e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-10-19T21:26:37Z",
+      "side": 1,
+      "message": "Ah, Apologies. TH merged this already (oddly without a SPR? I guess that rule hasn\u0027t taken effect yet). I\u0027d be happy about merging mainline but the tree still at 6.6-rc1 I wasn\u0027t sure how likely it was for the merge with the fix to land in the next day or so. This is impacting PCMark results, so it would be good to address soon.\n\nNext time I\u0027ll add more context to the commit message.",
+      "parentUuid": "59e2f2d2_66158d7d",
+      "revId": "d3c1847fdd852d614e10ad03bb5e8edb6b4fb92c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
