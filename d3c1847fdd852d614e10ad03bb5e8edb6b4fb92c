@@ -16,6 +16,23 @@
       "message": "This fixes PCMark test failures caused by the video decoder hardware failing to come up (due to changes that landed in 6.6-rc merge window). \n\nThe change is already upstream, but hasn\u0027t been merged into android-mainline yet.",
       "revId": "d3c1847fdd852d614e10ad03bb5e8edb6b4fb92c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59e2f2d2_66158d7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-19T19:17:05Z",
+      "side": 1,
+      "message": "Why are we taking an UPSTREAM patch instead of merging mainline? Please put the rationale into the commit message",
+      "revId": "d3c1847fdd852d614e10ad03bb5e8edb6b4fb92c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
