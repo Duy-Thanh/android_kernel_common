@@ -50,6 +50,23 @@
       "message": "Hi, Todd! \nCan you help see where the problem is? This patch was originally a very simple patch, and many Android phones now need this feature. Can you help me find out what\u0027s wrong with this submission? Thanks!",
       "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c6b3521_8103965c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-19T15:58:57Z",
+      "side": 1,
+      "message": "Our product now requires this functionality。",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
