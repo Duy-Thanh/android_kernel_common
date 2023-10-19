@@ -139,7 +139,7 @@
 #include <linux/sched/clock.h>
 #include <linux/sched/topology.h>
 #include <linux/tick.h>
-
+ggggggg
 /*
  * The number of bits to shift the CPU's capacity by in order to determine
  * the utilized threshold.
@@ -165,6 +165,87 @@
  * the detection of recent early wakeup patterns.
  */
 #define NR_RECENT	9
+
+
+
+static struct kobject *pwr_idle_kobj;
+
+
+unsigned long long cpu_min_res[9] = {0}; 
+unsigned long long orig_min_res[9] = {0}; 
+unsigned long long orig_min_res2[9] = {0}; 
+unsigned int update_flag[9] = {0};
+static ssize_t minres_store(struct kobject *kobj, struct kobj_attribute *attr, const char *buf,
+			    size_t count)
+{
+	int ret, idx;
+        
+        //unsigned long long cpu_dhry[NUM_CLU + 1] = {0}; 
+
+        ret  = sscanf(buf, "%llu %llu %llu %llu %llu %llu %llu %llu %llu", &cpu_min_res[0],
+                      &cpu_min_res[1], &cpu_min_res[2], &cpu_min_res[3],
+                      &cpu_min_res[4], &cpu_min_res[5], &cpu_min_res[6],
+                      &cpu_min_res[7], &cpu_min_res[8]);
+
+
+	for (idx = 0; idx < nr_cpu_ids; idx++) {
+                cpu_min_res[idx] *= 1000;
+                update_flag[idx] = 1;
+        
+        }
+
+	return count;
+}
+
+static ssize_t minres_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
+{
+
+	return scnprintf(buf, PAGE_SIZE,
+                         "cpu_min_res %llu %llu %llu %llu %llu %llu %llu %llu %llu\n orig C1 %llu %llu %llu\norig C2 %llu %llu %llu\n",
+                         cpu_min_res[0], cpu_min_res[1],
+                         cpu_min_res[2], cpu_min_res[3],
+                         cpu_min_res[4], cpu_min_res[5],
+                         cpu_min_res[6], cpu_min_res[7],
+                         cpu_min_res[8], orig_min_res[0],
+                         orig_min_res[4], orig_min_res[8], orig_min_res2[0],
+                         orig_min_res2[4], orig_min_res2[8]);
+}
+
+
+static struct kobj_attribute cpuidle_pwrgov_attr_minres = __ATTR_RW_MODE(minres, 0660);
+
+
+
+
+
+static struct attribute *cpuidle_pwr_gov_attrs[] = {
+	&cpuidle_pwrgov_attr_minres.attr,
+	NULL
+};
+
+static const struct attribute_group cpuidle_pwr_gov_attr_group = {
+	.attrs = cpuidle_pwr_gov_attrs,
+	.name = "power_aware"
+};
+
+static int init_procfs(void)
+{
+
+	pwr_idle_kobj = kobject_create_and_add("cpuidle_min_res", kernel_kobj);
+	if (!pwr_idle_kobj) {
+		pr_err("cannot create kobj for cpuidle!");
+		goto error;
+	}
+        if (sysfs_create_group(pwr_idle_kobj, &cpuidle_pwr_gov_attr_group)) {
+		pr_err("cannot create files in ../cpuidle_min_res/power_aware\n");
+		kobject_put(pwr_idle_kobj);
+		return -EINVAL;
+	}
+	pr_info("initialized!");
+	return 0;
+error:
+	return -ENOMEM;
+}
 
 /**
  * struct teo_bin - Metrics used by the TEO cpuidle governor.
@@ -381,6 +462,14 @@ static int teo_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
 	ktime_t delta_tick;
 	s64 duration_ns;
 	int i;
+
+
+        orig_min_res[dev->cpu] = drv->states[0].target_residency_ns;
+        orig_min_res2[dev->cpu] = drv->states[1].target_residency_ns;
+        if (update_flag[dev->cpu]) {
+                drv->states[1].target_residency_ns = cpu_min_res[dev->cpu];
+                update_flag[dev->cpu] = 0;
+        }
 
 	if (dev->last_state_idx >= 0) {
 		teo_update(drv, dev);
@@ -635,6 +724,8 @@ static struct cpuidle_governor teo_governor = {
 
 static int __init teo_governor_init(void)
 {
+
+	init_procfs();
 	return cpuidle_register_governor(&teo_governor);
 }
 
