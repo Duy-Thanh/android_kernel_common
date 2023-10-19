@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "912e7150_c76c2943",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-10-19T19:09:08Z",
+      "side": 1,
+      "message": "This fixes PCMark test failures caused by the video decoder hardware failing to come up (due to changes that landed in 6.6-rc merge window). \n\nThe change is already upstream, but hasn\u0027t been merged into android-mainline yet.",
+      "revId": "d3c1847fdd852d614e10ad03bb5e8edb6b4fb92c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
