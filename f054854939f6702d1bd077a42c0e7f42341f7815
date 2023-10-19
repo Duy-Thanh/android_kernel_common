@@ -46,6 +46,53 @@
       },
       "revId": "f054854939f6702d1bd077a42c0e7f42341f7815",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "553c224c_f30c62d4",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-19T21:14:00Z",
+      "side": 1,
+      "message": "If we return `count` we get the infinite loop, and if we `return 0` we don\u0027t see any output from `cat proc/memhealth/direct_reclaim_state` (we expect to get 0/1)",
+      "parentUuid": "ab20e90c_d41f7882",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 66
+      },
+      "revId": "f054854939f6702d1bd077a42c0e7f42341f7815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc33801_ae367f18",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-19T21:14:00Z",
+      "side": 1,
+      "message": "spin_unlock",
+      "range": {
+        "startLine": 151,
+        "startChar": 1,
+        "endLine": 151,
+        "endChar": 10
+      },
+      "revId": "f054854939f6702d1bd077a42c0e7f42341f7815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
