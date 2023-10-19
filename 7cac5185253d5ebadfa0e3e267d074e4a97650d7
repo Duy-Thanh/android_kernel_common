@@ -84,6 +84,23 @@
       "message": "Hi Todd, thank you very much！",
       "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56365e00_d81a13a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-19T16:53:20Z",
+      "side": 1,
+      "message": "Breaks KMI. Needs to be refactored to avoid changing `struct hid_device` which is part of the KMI which is frozen.\n```\ntype \u0027struct hid_device\u0027 changed\n  member \u0027__s32 battery_charge_status\u0027 was added\n  2 members (\u0027enum hid_battery_status battery_status\u0027 .. \u0027bool battery_avoid_query\u0027) changed\n    offset changed by 32\n```",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
