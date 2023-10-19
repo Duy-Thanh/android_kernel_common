@@ -13,6 +13,10 @@
  */
 #define MODULE_OWNED_PAGE		BIT(0)
 
+/* hacktown: Host only!. */
+#define PAGE_SHARED_FLAG		BIT(1)
+#define PAGE_BORROWED_FLAG		BIT(2)
+
 struct hyp_page {
 	unsigned short refcount;
 	u8 order;

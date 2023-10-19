@@ -1045,63 +1045,82 @@ static int __host_check_page_state_range(u64 addr, u64 size,
 	return check_page_state_range(&host_mmu.pgt, addr, size, &d);
 }
 
-static int __host_set_page_state_range(u64 addr, u64 size,
-				       enum pkvm_page_state state)
-{
-	bool update_iommu = true;
-	enum kvm_pgtable_prot prot = pkvm_mkstate(PKVM_HOST_MEM_PROT, state);
-
-	/*
-	 * Sharing and unsharing host pages shouldn't change the IOMMU page tables,
-	 * so avoid extra page tables walks for the IOMMU.
-	 * HOWEVER THIS WILL NOT WORK WHEN DEVICE ASSIGNMENT IS SUPPORTED AS THE GUEST
-	 * MIGHT HAVE ACCESS TO DMA.
-	 * but as Android-14 doesn't support device assignment this should be fine.
-	 */
-	if ((state == PKVM_PAGE_OWNED) || (state == PKVM_PAGE_SHARED_OWNED))
-		update_iommu = false;
-
-	return host_stage2_idmap_locked(addr, size, prot, update_iommu);
-}
-
 static int host_request_owned_transition(u64 *completer_addr,
 					 const struct pkvm_mem_transition *tx)
 {
 	u64 size = tx->nr_pages * PAGE_SIZE;
 	u64 addr = tx->initiator.addr;
+	struct hyp_page *p;
+	int i;
 
+	/*
+	 * SHARED/BORROWED not in host SW bits anymore.
+	 * This is a gift, it comes with a price...
+	 */
 	*completer_addr = tx->initiator.host.completer_addr;
+
+	for (i = 0 ; i < tx->nr_pages ; ++i) {
+		addr = tx->initiator.addr + i * PAGE_SIZE;
+		if (!addr_is_memory(addr))
+			goto check_mmio_range;
+
+		p  = hyp_phys_to_page(addr);
+		BUG_ON(p->flags & (PAGE_SHARED_FLAG | PAGE_BORROWED_FLAG));
+	}
+
+	return 0;
+check_mmio_range:
 	return __host_check_page_state_range(addr, size, PKVM_PAGE_OWNED);
 }
 
 static int host_request_unshare(u64 *completer_addr,
 				const struct pkvm_mem_transition *tx)
 {
-	u64 size = tx->nr_pages * PAGE_SIZE;
 	u64 addr = tx->initiator.addr;
+	struct hyp_page *p;
+	int i;
+
+	for (i = 0 ; i < tx->nr_pages ; ++i) {
+		p = hyp_phys_to_page(addr + i * PAGE_SIZE);
+		BUG_ON(!(p->flags & PAGE_SHARED_FLAG));
+	}
 
 	*completer_addr = tx->initiator.host.completer_addr;
-	return __host_check_page_state_range(addr, size, PKVM_PAGE_SHARED_OWNED);
+
+	return 0;
 }
 
 static int host_initiate_share(u64 *completer_addr,
 			       const struct pkvm_mem_transition *tx)
 {
-	u64 size = tx->nr_pages * PAGE_SIZE;
 	u64 addr = tx->initiator.addr;
+	struct hyp_page *p;
+	int i;
 
 	*completer_addr = tx->initiator.host.completer_addr;
-	return __host_set_page_state_range(addr, size, PKVM_PAGE_SHARED_OWNED);
+
+	for (i = 0 ; i < tx->nr_pages ; ++i) {
+		p = hyp_phys_to_page(addr + i * PAGE_SIZE);
+		p->flags |= PAGE_SHARED_FLAG;
+	}
+
+	return 0;
 }
 
 static int host_initiate_unshare(u64 *completer_addr,
 				 const struct pkvm_mem_transition *tx)
 {
-	u64 size = tx->nr_pages * PAGE_SIZE;
 	u64 addr = tx->initiator.addr;
+	struct hyp_page *p;
+	int i;
+
+	for (i = 0 ; i < tx->nr_pages ; ++i) {
+		p = hyp_phys_to_page(addr + i * PAGE_SIZE);
+		p->flags &= ~PAGE_SHARED_FLAG;
+	}
 
 	*completer_addr = tx->initiator.host.completer_addr;
-	return __host_set_page_state_range(addr, size, PKVM_PAGE_OWNED);
+	return 0;
 }
 
 static int host_initiate_donation(u64 *completer_addr,
@@ -1134,10 +1153,18 @@ static int __host_ack_transition(u64 addr, const struct pkvm_mem_transition *tx,
 static int host_ack_share(u64 addr, const struct pkvm_mem_transition *tx,
 			  enum kvm_pgtable_prot perms)
 {
+	struct hyp_page *p;
+	int i;
+
 	if (perms != PKVM_HOST_MEM_PROT)
 		return -EPERM;
 
-	return __host_ack_transition(addr, tx, PKVM_NOPAGE);
+	for (i = 0 ; i < tx->nr_pages ; ++i) {
+		p  = hyp_phys_to_page(addr + i * PAGE_SIZE);
+		BUG_ON(p->flags & (PAGE_SHARED_FLAG | PAGE_BORROWED_FLAG));
+	}
+
+	return 0;
 }
 
 static int host_ack_donation(u64 addr, const struct pkvm_mem_transition *tx)
@@ -1147,18 +1174,26 @@ static int host_ack_donation(u64 addr, const struct pkvm_mem_transition *tx)
 
 static int host_ack_unshare(u64 addr, const struct pkvm_mem_transition *tx)
 {
-	return __host_ack_transition(addr, tx, PKVM_PAGE_SHARED_BORROWED);
+	int i;
+	struct hyp_page *p;
+
+	for (i = 0 ; i < tx->nr_pages; ++i) {
+		p = hyp_phys_to_page(addr + i * PAGE_SIZE);
+		BUG_ON(!(p->flags & PAGE_BORROWED_FLAG));
+	}
+	return 0;
 }
 
 static int host_complete_share(u64 addr, const struct pkvm_mem_transition *tx,
 			       enum kvm_pgtable_prot perms)
 {
-	u64 size = tx->nr_pages * PAGE_SIZE;
-	int err;
+	struct hyp_page *p;
+	int i;
 
-	err = __host_set_page_state_range(addr, size, PKVM_PAGE_SHARED_BORROWED);
-	if (err)
-		return err;
+	for (i = 0 ; i < tx->nr_pages; ++i) {
+		p = hyp_phys_to_page(addr + i * PAGE_SIZE);
+		p->flags |= PAGE_BORROWED_FLAG;
+	}
 
 	if (tx->initiator.id == PKVM_ID_GUEST)
 		psci_mem_protect_dec(tx->nr_pages);
@@ -1168,13 +1203,17 @@ static int host_complete_share(u64 addr, const struct pkvm_mem_transition *tx,
 
 static int host_complete_unshare(u64 addr, const struct pkvm_mem_transition *tx)
 {
-	enum pkvm_component_id owner_id = tx->initiator.id;
-	u64 size = tx->nr_pages * PAGE_SIZE;
+	struct hyp_page *p;
+	int i;
 
 	if (tx->initiator.id == PKVM_ID_GUEST)
 		psci_mem_protect_inc(tx->nr_pages);
 
-	return host_stage2_set_owner_locked(addr, size, owner_id);
+	for (i = 0 ; i < tx->nr_pages; ++i) {
+		p = hyp_phys_to_page(addr + i * PAGE_SIZE);
+		p->flags &= ~PAGE_BORROWED_FLAG;
+	}
+	return 0;
 }
 
 static int host_complete_donation(u64 addr, const struct pkvm_mem_transition *tx)
@@ -2119,14 +2158,16 @@ int hyp_pin_shared_mem(void *from, void *to)
 	u64 end = PAGE_ALIGN((u64)to);
 	u64 size = end - start;
 	int ret;
+	u64 i;
+	struct hyp_page *p;
 
 	host_lock_component();
 	hyp_lock_component();
 
-	ret = __host_check_page_state_range(__hyp_pa(start), size,
-					    PKVM_PAGE_SHARED_OWNED);
-	if (ret)
-		goto unlock;
+	for(i = 0; i < size ; i += PAGE_SIZE) {
+		p = hyp_virt_to_page(start + i);
+		BUG_ON(!(p->flags & PAGE_SHARED_FLAG));
+	}
 
 	ret = __hyp_check_page_state_range(start, size,
 					   PKVM_PAGE_SHARED_BORROWED);
