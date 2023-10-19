@@ -16,6 +16,24 @@
       "message": "Please work to get this accepted upstream first please.",
       "revId": "9db664ab64376dfe8d47cf8f0964df9a653aaa06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c9048dc_3c195ec6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-10-19T04:20:33Z",
+      "side": 1,
+      "message": "Hi Greg, \nI see for-usb-next has the patch :\nhttps://git.kernel.org/pub/scm/linux/kernel/git/mnyman/xhci.git/commit/?h\u003dfor-usb-next\u0026id\u003d66952af08d94c0c26ea59d367aa4dc0691847f65\n\ncan i raise a FROMGIT ? or i should wait for it to include in mainline ?",
+      "parentUuid": "0ddbd358_94f09159",
+      "revId": "9db664ab64376dfe8d47cf8f0964df9a653aaa06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
