@@ -93,6 +93,93 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d32",
       "fixSuggestions": [
         {
+          "fixId": "bb20a76b_7cb5130f",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 859,
+                "startChar": 0,
+                "endLine": 859,
+                "endChar": 0
+              },
+              "replacement": "    visibility \u003d [\"//visibility:private\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 860,
+                "startChar": 0,
+                "endLine": 861,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 868,
+                "startChar": 0,
+                "endLine": 868,
+                "endChar": 0
+              },
+              "replacement": "    visibility \u003d [\"//visibility:private\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 869,
+                "startChar": 0,
+                "endLine": 870,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 880,
+                "startChar": 0,
+                "endLine": 880,
+                "endChar": 0
+              },
+              "replacement": "    visibility \u003d [\"//visibility:private\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 881,
+                "startChar": 0,
+                "endLine": 882,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "568558f8_c35fe961",
+        "filename": "BUILD.bazel",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-19T23:08:20Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "ded99c128ad491b794c357ce62b729b5f5e29106",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056652797",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d32",
+      "fixSuggestions": [
+        {
           "fixId": "ef45ca0f_f3a7da17",
           "description": "Buildifier Suggestion",
           "replacements": [
@@ -139,6 +226,63 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-19T23:08:12Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier abi.bzl` to format the file, or apply the suggested fix.",
+      "revId": "ded99c128ad491b794c357ce62b729b5f5e29106",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056652797",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2713533?revision\u003d32",
+      "fixSuggestions": [
+        {
+          "fixId": "e6c2d8d6_43e3da96",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "abi.bzl",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            },
+            {
+              "path": "abi.bzl",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            },
+            {
+              "path": "abi.bzl",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 59,
+                "endChar": 0
+              },
+              "replacement": "    if not path_prefix:\n        path_prefix \u003d \"\"\n    if not abis:\n        abis \u003d _ALL_ABIS\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "1f18208d_3216cbc3",
+        "filename": "abi.bzl",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-19T23:08:20Z",
       "side": 1,
       "message": "File is not formatted. Run `buildifier abi.bzl` to format the file, or apply the suggested fix.",
       "revId": "ded99c128ad491b794c357ce62b729b5f5e29106",
