@@ -101,6 +101,91 @@
       "message": "Breaks KMI. Needs to be refactored to avoid changing `struct hid_device` which is part of the KMI which is frozen.\n```\ntype \u0027struct hid_device\u0027 changed\n  member \u0027__s32 battery_charge_status\u0027 was added\n  2 members (\u0027enum hid_battery_status battery_status\u0027 .. \u0027bool battery_avoid_query\u0027) changed\n    offset changed by 32\n```",
       "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a47e368b_f2866b5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-19T18:08:47Z",
+      "side": 1,
+      "message": "This breaks KMI due to the addition of `battery_charge_status` to `struct hid_device` which is frozen. You cannot use the KMI fields at the end since they are reserved for LTS updates, so sadly we need to restort to some hackery to make this work. See one idea to make this work in my comments. Maybe you can think of something less hacky. I think we only need to find 1 unused bit in `struct hid_device` to make this work.\n\nIf you go with my suggestion or something like it, the patch becomes \"BACKPORT\" which should be well commented both in the commit message and in the code.",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "995410c4_5b489d01",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-19T18:08:47Z",
+      "side": 1,
+      "message": "This would use `hdev_get_battery_charge_status()` to convert the bit back to the constant",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63dce7fa_51afcf34",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-19T18:08:47Z",
+      "side": 1,
+      "message": "this would use `hdev_set_battery_charge_status(POWER_SUPPLY_STATUS_DISCHARGING)` to set the appropriate bit.",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6516ea7b_3c7727eb",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-19T18:08:47Z",
+      "side": 1,
+      "message": "this would change to:\n```\n  ...\n  case HID_BAT_CHARGING:\n    hdev_set_battery_change_status(value ? \n                                   POWER_SUPPLY_STATUS_CHARGING : \n                                   POWER_SUPPLY_STATUS_DISCHARGING);\n```",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2058e76_2cd27880",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-19T18:08:47Z",
+      "side": 1,
+      "message": "This breaks the KMI. It seems like we only need to find 1 bit in this struct to do this in a KMI compliant way (you can\u0027t use the KABI fields at the end since they are reserved for LTS updates). Maybe take the MSB of `ll_open_count`? and then have get/set inline functions:\n```\nvoid hdev_set_battery_charge_status(hdev)\n__s32 hdev_get_battery_charge_status(hdev)\n\n\n```\n\nIf you use a bit in ll_open_count, you need to either use accessor functions like below for the inc/decs of `hdev-\u003ell_open_count`:\n```\nunsigned int hdev_inc_ll_open_count(hdev)\nunsigned int hdev_dev_ll_open_count(hdev)\n```\nor you could do some declaration magic to cleanly differentiate the battery bit from the open_count.",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
