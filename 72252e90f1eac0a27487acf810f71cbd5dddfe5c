@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "647ba1b5_d5a84d7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-20T21:00:13Z",
+      "side": 1,
+      "message": "UPSTREAM: maple_tree: change mas_adopt_children() parent usage",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 52
+      },
+      "revId": "72252e90f1eac0a27487acf810f71cbd5dddfe5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d94d0aed_3dd6d1f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-20T21:00:13Z",
+      "side": 1,
+      "message": "(cherry picked from commit 068bafcac0b89ee5b1616793231eb4b3dd41e3f0)",
+      "revId": "72252e90f1eac0a27487acf810f71cbd5dddfe5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
