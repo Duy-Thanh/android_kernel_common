@@ -316968,6 +316968,17 @@ function {
   parameter_id: 0x038de60c
 }
 function {
+  id: 0x9b858538
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0a63398f
+  parameter_id: 0x0a63398f
+  parameter_id: 0x4585663f
+  parameter_id: 0xf1a6dfed
+  parameter_id: 0x4585663f
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9b859556
   return_type_id: 0x6720d32f
   parameter_id: 0x156a41de
@@ -335722,6 +335733,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_regmap_update"
 }
 elf_symbol {
+  id: 0xa8cef421
+  name: "__traceiter_android_vh_rmqueue"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa924452c
+  type_id: 0x9b858538
+  full_name: "__traceiter_android_vh_rmqueue"
+}
+elf_symbol {
   id: 0x8d62858f
   name: "__traceiter_android_vh_rmqueue_smallest_bypass"
   is_defined: true
@@ -339419,6 +339439,15 @@ elf_symbol {
   crc: 0xcf37e88a
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_regmap_update"
+}
+elf_symbol {
+  id: 0xcad24ea3
+  name: "__tracepoint_android_vh_rmqueue"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb8168d02
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rmqueue"
 }
 elf_symbol {
   id: 0x04365139
@@ -396243,6 +396272,7 @@ interface {
   symbol_id: 0x92518ec5
   symbol_id: 0x9792c22e
   symbol_id: 0xe2d75052
+  symbol_id: 0xa8cef421
   symbol_id: 0x8d62858f
   symbol_id: 0xcef5d79f
   symbol_id: 0x91384eff
@@ -396654,6 +396684,7 @@ interface {
   symbol_id: 0x4568ff8f
   symbol_id: 0xe918e2ec
   symbol_id: 0x13b2fb38
+  symbol_id: 0xcad24ea3
   symbol_id: 0x04365139
   symbol_id: 0xd94bc301
   symbol_id: 0x3fc5ffc9
