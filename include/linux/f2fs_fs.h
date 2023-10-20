@@ -417,8 +417,10 @@ struct f2fs_node {
 	};
 } __packed;
 
-#define F2FS_NODE_FOOTER(blk) ((struct node_footer *)\
-				&(((char *)(&(blk)->i))[F2FS_BLKSIZE - sizeof(struct node_footer)]))
+static inline struct node_footer *F2FS_NODE_FOOTER(struct f2fs_node *blk)
+{
+	return (struct node_footer *)&(((char *)(&(blk)->i))[F2FS_BLKSIZE - sizeof(struct node_footer)]);
+}
 
 /*
  * For NAT entries
