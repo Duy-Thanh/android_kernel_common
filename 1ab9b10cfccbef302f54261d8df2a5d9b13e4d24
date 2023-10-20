@@ -105,6 +105,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e83c9c41_c3cf9d4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T22:00:56Z",
+      "side": 1,
+      "message": "I agree with splitting into 2 patches as Greg suggests.\n\nGreg- given this struct is allocated in a bunch of places so we can\u0027t do our normal trick of creating a containing struct with the new type, what do you suggest for storing the new per hid_device data?",
+      "parentUuid": "3a21dea0_ca45ceb1",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3cce0299_5c709e3d",
         "filename": "drivers/hid/hid-input.c",
         "patchSetId": 19
