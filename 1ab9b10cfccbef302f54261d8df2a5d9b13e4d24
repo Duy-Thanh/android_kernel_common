@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a29a40cc_8f0d3112",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "please single-space the commit message (needs to exactly match the upstream commit message)",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "138bd650_f6363c5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "BACKPORT requires a comment on what needed to change from the upstream version:\n```\n[Worked around KMI freeze of struct hid_device by overloading\nthe ll_open_count to include battery charging state]\n```",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b02d1808_3b518b75",
@@ -31,6 +65,199 @@
       "writtenOn": "2023-10-20T15:06:36Z",
       "side": 1,
       "message": "Hi, Todd! I have verified this change on our mobile phone, which can report the charging status of HID devices.",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "108e6349_a34769fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "Needs a little more work. See comments. Running presubmit to make sure the KMI",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cce0299_5c709e3d",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "remove trailing whitespace",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fc3436_1e32d227",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "add a comment here about working around KMI freeze by overloading ll_open_count and how these constants are used. So that you don\u0027t need naked constants below (like \"30\"), how about these constants:\n```\n#define HID_BAT_CHARGING_SHIFT 30\n#define HID_BAT_CHARGING_MASK (0x3 \u003c\u003c HID_BAT_CHARGING_SHIFT)\n#define HID_LL_OPEN_COUNT_MASK (~HID_BAT_CHARGING_MASK)\n```",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "903546e6_774a6184",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1250,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "please define as a constant above with the mask",
+      "range": {
+        "startLine": 1250,
+        "startChar": 53,
+        "endLine": 1250,
+        "endChar": 55
+      },
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e9e15f2_105a76ff",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "715a9a23_8d361aeb",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "need spaces around operators. Also, please use defined constants.",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bba42f2e_dbf57f19",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f12b1020_f51e820e",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "This wipes out the open count so the increment will always yield 1 no matter how many opens there are. How about something like:\n```\n   int open_count \u003d (hdev-\u003ell_open_count \u0026 HID_LL_OPEN_COUNT_MASK);\n   \n   hdev-\u003ell_open_count \u0026\u003d HID_LL_OPEN_COUNT_MASK;\n   hdev-\u003ell_open_count |\u003d open_count + 1;\n```",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da97cc0f_b0d8669d",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401ef834_77faf8cb",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "This also wipes out the ll_open_count so the result will always be 0xffffffff. Do something simiilar to the inc case.",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49793f61_06f780d4",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1297,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-20T18:43:55Z",
+      "side": 1,
+      "message": "whitespace",
       "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
