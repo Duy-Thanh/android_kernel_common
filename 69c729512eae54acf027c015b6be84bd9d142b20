@@ -33,6 +33,23 @@
       "message": "mark as unresolved",
       "revId": "69c729512eae54acf027c015b6be84bd9d142b20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "966d9dff_2a96b93a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2006584
+      },
+      "writtenOn": "2023-10-20T08:42:18Z",
+      "side": 1,
+      "message": "hi, Suren\n\nPlease help to review. thanks.",
+      "revId": "69c729512eae54acf027c015b6be84bd9d142b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
