@@ -315,6 +315,30 @@
       },
       "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85042272_bd4aee93",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1963266
+      },
+      "writtenOn": "2023-10-20T18:50:24Z",
+      "side": 1,
+      "message": "`trace_android_vh_early_resume_begin` is introduced in in android13-5.10(aosp/2143952) and android14-5.15(aosp/2423526). I think we had similar discussions in the past.\n\nI agree that we could potentially reuse `trace_suspend_resume`, but this tracepoints is get called very frequently and suspend/resume is a very hot path. If our handler link to `trace_suspend_resume` there would be an overhead coming from redundant code for testing the parameters.\n\nPlease let me know if there is further concerns.",
+      "parentUuid": "5baaaf16_91d92624",
+      "range": {
+        "startLine": 464,
+        "startChar": 3,
+        "endLine": 464,
+        "endChar": 38
+      },
+      "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
