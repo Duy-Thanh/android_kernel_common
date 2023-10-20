@@ -137,6 +137,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24fee8c4_d120e1c3",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-20T08:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "995410c4_5b489d01",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63dce7fa_51afcf34",
@@ -150,6 +168,24 @@
       "writtenOn": "2023-10-19T18:08:47Z",
       "side": 1,
       "message": "this would use `hdev_set_battery_charge_status(POWER_SUPPLY_STATUS_DISCHARGING)` to set the appropriate bit.",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5e5505d_722ec7ea",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-20T08:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dce7fa_51afcf34",
       "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -171,6 +207,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10ad6497_672404e7",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-20T08:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6516ea7b_3c7727eb",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2058e76_2cd27880",
@@ -184,6 +238,24 @@
       "writtenOn": "2023-10-19T18:08:47Z",
       "side": 1,
       "message": "This breaks the KMI. It seems like we only need to find 1 bit in this struct to do this in a KMI compliant way (you can\u0027t use the KABI fields at the end since they are reserved for LTS updates). Maybe take the MSB of `ll_open_count`? and then have get/set inline functions:\n```\nvoid hdev_set_battery_charge_status(hdev)\n__s32 hdev_get_battery_charge_status(hdev)\n\n\n```\n\nIf you use a bit in ll_open_count, you need to either use accessor functions like below for the inc/decs of `hdev-\u003ell_open_count`:\n```\nunsigned int hdev_inc_ll_open_count(hdev)\nunsigned int hdev_dev_ll_open_count(hdev)\n```\nor you could do some declaration magic to cleanly differentiate the battery bit from the open_count.",
+      "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a6a1a20_626d8b64",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-20T08:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2058e76_2cd27880",
       "revId": "7cac5185253d5ebadfa0e3e267d074e4a97650d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
