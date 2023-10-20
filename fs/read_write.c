@@ -21,6 +21,8 @@
 #include <linux/mount.h>
 #include <linux/fs.h>
 #include "internal.h"
+#include <linux/dma-buf.h>
+#include <linux/bvec.h>
 
 #include <linux/uaccess.h>
 #include <asm/unistd.h>
@@ -380,17 +382,44 @@ static ssize_t new_sync_read(struct file *filp, char __user *buf, size_t len, lo
 {
 	struct kiocb kiocb;
 	struct iov_iter iter;
-	ssize_t ret;
+	ssize_t sret;
+	struct vm_area_struct *vma;
 
 	init_sync_kiocb(&kiocb, filp);
 	kiocb.ki_pos = (ppos ? *ppos : 0);
+
+	vma = find_vma(current->mm, untagged_addr((unsigned long)buf) & PAGE_MASK);
+	if(vma && vma->vm_file && is_dma_buf_file(vma->vm_file)) {
+		struct iosys_map map;
+		struct dma_buf *dmabuf = vma->vm_file->private_data;
+		int ret;
+		struct bio_vec bvec;
+
+		pr_warn("TJM VMA is dmabuf\n");
+		ret = dma_buf_vmap(dmabuf, &map);
+		if (!ret) pr_warn("TJM vmapped dmabuf\n");
+		WARN_ON(map.is_iomem); // HACK!
+
+		bvec_set_virt(&bvec, map.vaddr, len); // HACK!
+		iov_iter_bvec(&iter, ITER_DEST, &bvec, 1, len);
+		// iter.nofault = true;
+
+		sret = call_read_iter(filp, &kiocb, &iter);
+		BUG_ON(sret == -EIOCBQUEUED);
+		if (ppos)
+			*ppos = kiocb.ki_pos;
+		//iosys_map_memcpy_to(&map, 0, "foobar", 6);
+		dma_buf_vunmap(dmabuf, &map);
+		return sret;
+	}
+
 	iov_iter_ubuf(&iter, ITER_DEST, buf, len);
 
-	ret = call_read_iter(filp, &kiocb, &iter);
-	BUG_ON(ret == -EIOCBQUEUED);
+	sret = call_read_iter(filp, &kiocb, &iter);
+	BUG_ON(sret == -EIOCBQUEUED);
 	if (ppos)
 		*ppos = kiocb.ki_pos;
-	return ret;
+	return sret;
 }
 
 static int warn_unsupported(struct file *file, const char *op)
