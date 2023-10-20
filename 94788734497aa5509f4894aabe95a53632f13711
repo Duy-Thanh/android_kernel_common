@@ -39,6 +39,46 @@
       "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/d70cd8813c04958af53efda1f78d845177823f53) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dd70cd8813c04958af53efda1f78d845177823f53)\n\n```\n    - ## drivers/base/regmap/regmap-spi-avmm.c ##\n    -@@ drivers/base/regmap/regmap-spi-avmm.c: static const struct regmap_bus regmap_spi_avmm_bus \u003d {\n    - \t.reg_format_endian_default \u003d REGMAP_ENDIAN_NATIVE,\n    - \t.val_format_endian_default \u003d REGMAP_ENDIAN_NATIVE,\n    - \t.max_raw_read \u003d SPI_AVMM_VAL_SIZE * MAX_READ_CNT,\n    --\t.max_raw_write \u003d SPI_AVMM_REG_SIZE + SPI_AVMM_VAL_SIZE * MAX_WRITE_CNT,\n    -+\t.max_raw_write \u003d SPI_AVMM_VAL_SIZE * MAX_WRITE_CNT,\n    - \t.free_context \u003d spi_avmm_bridge_ctx_free,\n    - };\n    - \n    +    (cherry picked from commit d70cd8813c04958af53efda1f78d845177823f53)\n     \n      ## drivers/base/regmap/regmap.c ##\n     @@ drivers/base/regmap/regmap.c: int _regmap_raw_write(struct regmap *map, unsigned int reg,\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 574844081 android-build.ayeaye-python-dispatcher_20231019.04_p0",
       "revId": "94788734497aa5509f4894aabe95a53632f13711",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056678062",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2798354?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f1362a3f_c02c5e6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-20T09:17:12Z",
+      "side": 1,
+      "message": "Can not find the original change on base branch (android12-5.10) for this change.\nPlease ensure that the Change-Id of this change is same as the original change on the base branch.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 574844081 android-build.ayeaye-python-dispatcher_20231019.04_p0",
+      "revId": "94788734497aa5509f4894aabe95a53632f13711",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056678062",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2798354?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "dd7c6c7b_7ee58527",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-20T09:17:12Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/d70cd8813c04958af53efda1f78d845177823f53) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dd70cd8813c04958af53efda1f78d845177823f53)\n\n```\n    - ## drivers/base/regmap/regmap-spi-avmm.c ##\n    -@@ drivers/base/regmap/regmap-spi-avmm.c: static const struct regmap_bus regmap_spi_avmm_bus \u003d {\n    - \t.reg_format_endian_default \u003d REGMAP_ENDIAN_NATIVE,\n    - \t.val_format_endian_default \u003d REGMAP_ENDIAN_NATIVE,\n    - \t.max_raw_read \u003d SPI_AVMM_VAL_SIZE * MAX_READ_CNT,\n    --\t.max_raw_write \u003d SPI_AVMM_REG_SIZE + SPI_AVMM_VAL_SIZE * MAX_WRITE_CNT,\n    -+\t.max_raw_write \u003d SPI_AVMM_VAL_SIZE * MAX_WRITE_CNT,\n    - \t.free_context \u003d spi_avmm_bridge_ctx_free,\n    - };\n    - \n    +    (cherry picked from commit d70cd8813c04958af53efda1f78d845177823f53)\n     \n      ## drivers/base/regmap/regmap.c ##\n     @@ drivers/base/regmap/regmap.c: int _regmap_raw_write(struct regmap *map, unsigned int reg,\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 574844081 android-build.ayeaye-python-dispatcher_20231019.04_p0",
+      "revId": "94788734497aa5509f4894aabe95a53632f13711",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
