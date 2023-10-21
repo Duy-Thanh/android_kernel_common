@@ -141,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a54d60d7_f45679a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-21T03:01:44Z",
+      "side": 1,
+      "message": "Greg is suggesting splitting this into two patches:\n1) the cherry-pick from upstream with no changes (back to the earlier UPSTREAM version of this patch)\n2) a patch that implements the KMI preservation (using a bit of ll_open_count or something better)",
+      "parentUuid": "891b232e_c94f03cc",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3cce0299_5c709e3d",
         "filename": "drivers/hid/hid-input.c",
         "patchSetId": 19
