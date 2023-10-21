@@ -503,6 +503,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08b68c42_53018eb1",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-21T04:42:57Z",
+      "side": 1,
+      "message": "Ok! Do it your way！",
+      "parentUuid": "f12b1020_f51e820e",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da97cc0f_b0d8669d",
@@ -516,6 +534,24 @@
       "writtenOn": "2023-10-20T18:43:55Z",
       "side": 1,
       "message": "whitespace",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e10718a9_118b67d7",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-21T04:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da97cc0f_b0d8669d",
       "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -537,6 +573,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "775000d3_4c166ae8",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-21T04:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "401ef834_77faf8cb",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49793f61_06f780d4",
@@ -550,6 +604,24 @@
       "writtenOn": "2023-10-20T18:43:55Z",
       "side": 1,
       "message": "whitespace",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55a7edf0_00f63c25",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1297,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-21T04:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49793f61_06f780d4",
       "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
