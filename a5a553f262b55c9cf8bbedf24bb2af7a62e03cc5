@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51682894_e2e5a2cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-21T12:18:50Z",
+      "side": 1,
+      "message": "I will submit the cherry-pick from upstream with no changes first. Then submit this change.",
+      "revId": "a5a553f262b55c9cf8bbedf24bb2af7a62e03cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
