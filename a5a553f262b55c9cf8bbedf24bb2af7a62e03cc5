@@ -16,6 +16,41 @@
       "message": "I will submit the cherry-pick from upstream with no changes first. Then submit this change.",
       "revId": "a5a553f262b55c9cf8bbedf24bb2af7a62e03cc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72a1f97f_9ba6d27b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-21T19:08:25Z",
+      "side": 1,
+      "message": "I have taken the original commit upstream for the next 6.1.y LTS release, so we can use the ABI-reserved field for the abi-break, making this much easier to backport in an ABI-safe way.\n\nIf you need help doing that, please let me know.",
+      "revId": "a5a553f262b55c9cf8bbedf24bb2af7a62e03cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e00d5b89_6de3fbb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-21T19:08:25Z",
+      "side": 1,
+      "message": "Make this a patch series please, one after the other, so we can review them correctly together.",
+      "parentUuid": "51682894_e2e5a2cc",
+      "revId": "a5a553f262b55c9cf8bbedf24bb2af7a62e03cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
