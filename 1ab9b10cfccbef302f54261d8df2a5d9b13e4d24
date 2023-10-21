@@ -433,6 +433,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b039c9_fa200401",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-21T04:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "715a9a23_8d361aeb",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bba42f2e_dbf57f19",
@@ -446,6 +464,24 @@
       "writtenOn": "2023-10-20T18:43:55Z",
       "side": 1,
       "message": "Please remove the trailing whitespace",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7e4c786_47e9ae54",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-21T04:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bba42f2e_dbf57f19",
       "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
