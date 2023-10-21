@@ -173,6 +173,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac6691c3_2551d81f",
+        "filename": "drivers/hid/hid-input.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-21T02:55:38Z",
+      "side": 1,
+      "message": "enum {\n\tPOWER_SUPPLY_STATUS_UNKNOWN \u003d 0,\n\tPOWER_SUPPLY_STATUS_CHARGING,\n\tPOWER_SUPPLY_STATUS_DISCHARGING,\n\tPOWER_SUPPLY_STATUS_NOT_CHARGING,\n\tPOWER_SUPPLY_STATUS_FULL,\n};\n\nAt first I saw that the value of the enumeration variable POWER_SUPPLY_STATUS_DISCHARGING was 2, so......",
+      "parentUuid": "026371a4_755255ae",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5fc3436_1e32d227",
