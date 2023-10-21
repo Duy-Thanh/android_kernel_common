@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8211a4d_02258526",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-21T09:06:12Z",
+      "side": 1,
+      "message": "Simplified by utilizing only `simple_read_from_buffer`, and adding a `lseek` function in order to reset the `offset` back to 0.",
+      "parentUuid": "553c224c_f30c62d4",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 66
+      },
+      "revId": "f054854939f6702d1bd077a42c0e7f42341f7815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3dc33801_ae367f18",
@@ -85,6 +109,30 @@
       "writtenOn": "2023-10-19T21:14:00Z",
       "side": 1,
       "message": "spin_unlock",
+      "range": {
+        "startLine": 151,
+        "startChar": 1,
+        "endLine": 151,
+        "endChar": 10
+      },
+      "revId": "f054854939f6702d1bd077a42c0e7f42341f7815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62dd5fac_d97d5bbe",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-21T09:06:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dc33801_ae367f18",
       "range": {
         "startLine": 151,
         "startChar": 1,

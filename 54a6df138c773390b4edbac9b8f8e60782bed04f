@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2269ab1_d250e60c",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-21T09:06:12Z",
+      "side": 1,
+      "message": "Refactored this into a simple `bool` variable, and removed the `enum reclaim_states`. We always initiate the value to `false`, meaning that we are not in direct reclaim until `mm_vmscan_direct_reclaim_begin_probe()` is called.",
+      "parentUuid": "57d5c2da_9077fdec",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 31
+      },
+      "revId": "54a6df138c773390b4edbac9b8f8e60782bed04f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9faebf72_e89c99e8",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-11T23:48:44Z",
       "side": 1,
       "message": "Need to change to `unregister` instead of `register`",
+      "range": {
+        "startLine": 434,
+        "startChar": 5,
+        "endLine": 434,
+        "endChar": 48
+      },
+      "revId": "54a6df138c773390b4edbac9b8f8e60782bed04f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be143cfe_41a22ac7",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-21T09:06:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9faebf72_e89c99e8",
       "range": {
         "startLine": 434,
         "startChar": 5,
