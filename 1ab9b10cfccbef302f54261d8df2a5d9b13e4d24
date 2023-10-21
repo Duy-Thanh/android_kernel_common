@@ -316,6 +316,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f0388cb_10012301",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-21T03:30:24Z",
+      "side": 1,
+      "message": "Ok! Just do it your way!",
+      "parentUuid": "a5fc3436_1e32d227",
+      "revId": "1ab9b10cfccbef302f54261d8df2a5d9b13e4d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "903546e6_774a6184",
