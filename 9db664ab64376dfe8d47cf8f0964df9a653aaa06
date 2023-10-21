@@ -34,6 +34,24 @@
       "parentUuid": "0ddbd358_94f09159",
       "revId": "9db664ab64376dfe8d47cf8f0964df9a653aaa06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1d033dc_c2d6d3d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-21T19:11:02Z",
+      "side": 1,
+      "message": "This should be in the usb.git tree now, so do FROMGIT for that please.\n\nBut if this is a bugfix, why is it not marked as such upstream?",
+      "parentUuid": "9c9048dc_3c195ec6",
+      "revId": "9db664ab64376dfe8d47cf8f0964df9a653aaa06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
