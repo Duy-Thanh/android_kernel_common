@@ -51,6 +51,42 @@
       "parentUuid": "51682894_e2e5a2cc",
       "revId": "a5a553f262b55c9cf8bbedf24bb2af7a62e03cc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dccce9ce_08483bd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-22T09:44:30Z",
+      "side": 1,
+      "message": "I\u0027ve already done this. See patches 2795997 and 2795998.",
+      "parentUuid": "e00d5b89_6de3fbb1",
+      "revId": "a5a553f262b55c9cf8bbedf24bb2af7a62e03cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25df58a1_6476105e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2058565
+      },
+      "writtenOn": "2023-10-22T09:44:30Z",
+      "side": 1,
+      "message": "In this case, when will Google sm8650 common kernel be synchronized to linux 6.1.y LTS release?\nIn addition, my patches 2795997 and 2795998 must be submitted to Google common kernel first, right? Because we need this feature as soon as possible, the product is waiting for this feature.",
+      "parentUuid": "72a1f97f_9ba6d27b",
+      "revId": "a5a553f262b55c9cf8bbedf24bb2af7a62e03cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
