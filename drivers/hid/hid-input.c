@@ -490,7 +490,7 @@ static int hidinput_get_battery_property(struct power_supply *psy,
 		if (dev->battery_status == HID_BATTERY_UNKNOWN)
 			val->intval = POWER_SUPPLY_STATUS_UNKNOWN;
 		else
-			val->intval = dev->battery_charge_status;
+			val->intval = hdev_get_battery_charge_status(dev); /* Set the charging status attribute value of HID device */
 		break;
 
 	case POWER_SUPPLY_PROP_SCOPE:
@@ -558,7 +558,8 @@ static int hidinput_setup_battery(struct hid_device *dev, unsigned report_type,
 	dev->battery_max = max;
 	dev->battery_report_type = report_type;
 	dev->battery_report_id = field->report->id;
-	dev->battery_charge_status = POWER_SUPPLY_STATUS_DISCHARGING;
+	/* Initialize the charging state of the HID device to the non-charging state */
+	hdev_set_battery_charge_status(dev, POWER_SUPPLY_STATUS_DISCHARGING);
 
 	/*
 	 * Stylus is normally not connected to the device and thus we
@@ -631,9 +632,10 @@ static bool hidinput_set_battery_charge_status(struct hid_device *dev,
 {
 	switch (usage) {
 	case HID_BAT_CHARGING:
-		dev->battery_charge_status = value ?
+		/* Set the charging status of HID devices */
+		hdev_set_battery_charge_status(dev, (value ?
 					     POWER_SUPPLY_STATUS_CHARGING :
-					     POWER_SUPPLY_STATUS_DISCHARGING;
+					     POWER_SUPPLY_STATUS_DISCHARGING));
 		return true;
 	}
 
@@ -1503,12 +1505,15 @@ void hidinput_hid_event(struct hid_device *hid, struct hid_field *field, struct 
 	struct input_dev *input;
 	struct hid_report *report = field->report;
 	unsigned *quirks = &hid->quirks;
+	bool handled;
 
 	if (!usage->type)
 		return;
 
 	if (usage->type == EV_PWR) {
-		bool handled = hidinput_set_battery_charge_status(hid, usage->hid, value);
+
+		/* Set the charging status of HID devices */
+		handled = hidinput_set_battery_charge_status(hid, usage->hid, value);
 
 		if (!handled)
 			hidinput_update_battery(hid, value);

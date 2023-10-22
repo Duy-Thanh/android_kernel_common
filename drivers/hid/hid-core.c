@@ -2332,10 +2332,10 @@ int hid_hw_open(struct hid_device *hdev)
 	if (ret)
 		return ret;
 
-	if (!hdev->ll_open_count++) {
+	if (!hdev_inc_ll_open_count(hdev)) {
 		ret = hdev->ll_driver->open(hdev);
 		if (ret)
-			hdev->ll_open_count--;
+			hdev_dec_ll_open_count(hdev);
 	}
 
 	mutex_unlock(&hdev->ll_open_lock);
@@ -2355,7 +2355,7 @@ EXPORT_SYMBOL_GPL(hid_hw_open);
 void hid_hw_close(struct hid_device *hdev)
 {
 	mutex_lock(&hdev->ll_open_lock);
-	if (!--hdev->ll_open_count)
+	if (!hdev_dec_ll_open_count(hdev))
 		hdev->ll_driver->close(hdev);
 	mutex_unlock(&hdev->ll_open_lock);
 }
