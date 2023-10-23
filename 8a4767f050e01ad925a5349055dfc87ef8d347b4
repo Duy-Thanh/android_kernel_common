@@ -339,6 +339,30 @@
       },
       "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb07a973_f7ae17a0",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-23T11:48:59Z",
+      "side": 1,
+      "message": "suspend/resume is NOT a hot-path for most devices I would be amazed if you can measure the overhead here.  Please do so, adding additional hooks should not be needed here.",
+      "parentUuid": "85042272_bd4aee93",
+      "range": {
+        "startLine": 464,
+        "startChar": 3,
+        "endLine": 464,
+        "endChar": 38
+      },
+      "revId": "8a4767f050e01ad925a5349055dfc87ef8d347b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
