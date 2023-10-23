@@ -52,6 +52,24 @@
       "parentUuid": "9c9048dc_3c195ec6",
       "revId": "9db664ab64376dfe8d47cf8f0964df9a653aaa06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92aed4cf_f4cd0a13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-10-23T11:24:23Z",
+      "side": 1,
+      "message": "It\u0027s actually not a bug fix. I\u0027m adding a new API to this to avoid long waits.\nin general it\u0027s not a problem, this will just help exit early whichis an improvement.",
+      "parentUuid": "f1d033dc_c2d6d3d2",
+      "revId": "9db664ab64376dfe8d47cf8f0964df9a653aaa06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
