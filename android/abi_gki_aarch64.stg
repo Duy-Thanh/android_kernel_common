@@ -37961,6 +37961,10 @@ member {
   offset: 4608
 }
 member {
+  id: 0x297a76bf
+  type_id: 0x2ac7aaed
+}
+member {
   id: 0x2a406106
   type_id: 0x262ff409
 }
@@ -38641,6 +38645,11 @@ member {
   id: 0x34e08151
   type_id: 0x5cac5fcc
   offset: 896
+}
+member {
+  id: 0x34e0ff3c
+  type_id: 0x5cad8df0
+  offset: 62784
 }
 member {
   id: 0x34fb349d
@@ -45097,12 +45106,6 @@ member {
   offset: 14976
 }
 member {
-  id: 0x2d081576
-  name: "android_kabi_reserved1"
-  type_id: 0x92233392
-  offset: 62784
-}
-member {
   id: 0x2d081599
   name: "android_kabi_reserved1"
   type_id: 0x92233392
@@ -51222,6 +51225,11 @@ member {
   name: "battery_capacity"
   type_id: 0x0faae5b1
   offset: 58880
+}
+member {
+  id: 0xcacb97d2
+  name: "battery_charge_status"
+  type_id: 0x0faae5b1
 }
 member {
   id: 0x68976a7a
@@ -140853,6 +140861,12 @@ member {
   offset: 80
 }
 member {
+  id: 0x642f0821
+  name: "padding"
+  type_id: 0xc9082b19
+  offset: 32
+}
+member {
   id: 0x64367ab0
   name: "padding"
   type_id: 0xd0778170
@@ -206916,6 +206930,15 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x2ac7aaed
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0xcacb97d2
+    member_id: 0x642f0821
+  }
+}
+struct_union {
   id: 0x2b189f72
   kind: STRUCT
   definition {
@@ -209307,6 +209330,16 @@ struct_union {
     bytesize: 4
     member_id: 0x2939f808
     member_id: 0x63f03d1c
+  }
+}
+struct_union {
+  id: 0x5cad8df0
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x297a76bf
+    member_id: 0x27000c61
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -228001,7 +228034,7 @@ struct_union {
     member_id: 0xaf4362fa
     member_id: 0xff66bcf9
     member_id: 0xcc6aaeab
-    member_id: 0x2d081576
+    member_id: 0x34e0ff3c
     member_id: 0x637601c1
   }
 }
