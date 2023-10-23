@@ -142,6 +142,30 @@
       },
       "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b1af32_55858a1b",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-23T11:50:02Z",
+      "side": 1,
+      "message": "it\u0027s a feature, and you are doing it in the kernel, so of course it should be sent upstream.  Please do so and get review comments there first.",
+      "parentUuid": "737e4a1a_201ba7b7",
+      "range": {
+        "startLine": 1872,
+        "startChar": 2,
+        "endLine": 1872,
+        "endChar": 41
+      },
+      "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
