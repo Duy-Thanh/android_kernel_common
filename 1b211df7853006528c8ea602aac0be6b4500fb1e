@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f12f2f_a77a4312",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-23T18:09:43Z",
+      "side": 1,
+      "message": "long line",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 107
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc4d7afc_6bbb4389",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-23T18:09:43Z",
+      "side": 1,
+      "message": "what\u0027s the reason you are protecting direct_reclaim_state with memhealth_spin_lock? It\u0027s `bool`, which is equivalent to `int` and therefore an atomic type. You don\u0027t need any additional synchronization AFAIKT.",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 35
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31396260_3112d0ec",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-23T18:09:43Z",
+      "side": 1,
+      "message": "why do we need this? userspace can read the file anyway they like. If they make a mistake positioning somewhere in the middle, that\u0027s on them.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 1
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "223e0322_d08964d6",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-23T18:09:43Z",
+      "side": 1,
+      "message": "I don\u0027t think you can rely on only one process to be in direct reclaim. So, direct_reclaim_state should be an `int` not a `bool` and maybe rename it into `procs_in_direct_reclaim`. In mm_vmscan_direct_reclaim_begin_probe you increment it and in mm_vmscan_direct_reclaim_end_probe you decrement it. The system is in direct reclaim if (procs_in_direct_reclaim \u003e 0).",
+      "range": {
+        "startLine": 144,
+        "startChar": 1,
+        "endLine": 144,
+        "endChar": 21
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4be174e3_4bd1dd9f",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-23T18:09:43Z",
+      "side": 1,
+      "message": "long lines",
+      "range": {
+        "startLine": 403,
+        "startChar": 1,
+        "endLine": 411,
+        "endChar": 26
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be338576_c6b97e39",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-23T18:09:43Z",
+      "side": 1,
+      "message": "long lines",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 99
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
