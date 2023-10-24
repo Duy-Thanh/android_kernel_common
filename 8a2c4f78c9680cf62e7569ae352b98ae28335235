@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0799f7dc_d95c7866",
+        "filename": "Documentation/ABI/testing/procfs-driver-memhealth",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-24T19:53:56Z",
+      "side": 1,
+      "message": "Update description. We now track the total number of processes in direct reclaim, instead of whether or not we have a process in direct reclaim.",
+      "revId": "8a2c4f78c9680cf62e7569ae352b98ae28335235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
