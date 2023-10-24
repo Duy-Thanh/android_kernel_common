@@ -31,6 +31,7 @@
 #include <linux/usb/gadget.h>
 #include <linux/usb/of.h>
 #include <linux/usb/otg.h>
+#include <trace/hooks/usb.h>
 
 #include "core.h"
 #include "gadget.h"
@@ -271,6 +272,12 @@ int dwc3_core_soft_reset(struct dwc3 *dwc)
 {
 	u32		reg;
 	int		retries = 1000;
+	int 		ret = 0;
+	bool 		bypass = false;
+
+	trace_android_vh_dwc3_core_soft_reset(dwc, &bypass, &ret);
+	if (bypass)
+		return ret;
 
 	/*
 	 * We're resetting only the device side because, if we're in host mode,

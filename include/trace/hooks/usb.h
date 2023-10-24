@@ -12,6 +12,7 @@
  */
 struct usb_device;
 struct urb;
+struct dwc3;
 
 DECLARE_HOOK(android_vh_usb_new_device_added,
 	TP_PROTO(struct usb_device *udev, int *err),
@@ -28,6 +29,10 @@ DECLARE_HOOK(android_vh_usb_dev_resume,
 DECLARE_HOOK(android_vh_xhci_urb_suitable_bypass,
 	TP_PROTO(struct urb *urb, int *ret),
 	TP_ARGS(urb, ret));
+
+DECLARE_HOOK(android_vh_dwc3_core_soft_reset,
+	TP_PROTO(struct dwc3 *dwc, bool *bypass, int *ret),
+	TP_ARGS(dwc, bypass, ret));
 
 #endif /* _TRACE_HOOK_USB_H */
 /* This part must be outside protection */
