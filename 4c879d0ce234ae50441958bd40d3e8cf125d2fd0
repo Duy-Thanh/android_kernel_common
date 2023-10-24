@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "302d3b15_0c97d9f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-24T12:02:48Z",
+      "side": 1,
+      "message": "Hi，tkjos\n\nwe need to update symbol list for Amlogic about mm_page_alloc hooks and some drm symbol, please view it,thanks!",
+      "revId": "4c879d0ce234ae50441958bd40d3e8cf125d2fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
