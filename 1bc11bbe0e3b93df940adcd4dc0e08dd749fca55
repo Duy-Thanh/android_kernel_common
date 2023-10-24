@@ -16,6 +16,24 @@
       "message": "What commit id does this fix?",
       "revId": "1bc11bbe0e3b93df940adcd4dc0e08dd749fca55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e4c63e_8bcb432e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2023-10-24T06:27:56Z",
+      "side": 1,
+      "message": "Fixes: 57f3ff964899 (\"ANDROID: fuse-bpf v1.1\")",
+      "parentUuid": "aadb9fe8_a76f4b80",
+      "revId": "1bc11bbe0e3b93df940adcd4dc0e08dd749fca55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
