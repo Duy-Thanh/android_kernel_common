@@ -50,6 +50,24 @@
       "message": "hi, Suren\n\nPlease help to review. thanks.",
       "revId": "69c729512eae54acf027c015b6be84bd9d142b20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cadfc4a_b1c5f4f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-24T19:34:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a045355_798059ba",
+      "revId": "69c729512eae54acf027c015b6be84bd9d142b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
