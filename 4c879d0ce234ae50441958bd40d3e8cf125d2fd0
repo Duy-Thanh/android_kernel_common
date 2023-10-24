@@ -16,6 +16,29 @@
       "message": "Hi，tkjos\n\nwe need to update symbol list for Amlogic about mm_page_alloc hooks and some drm symbol, please view it,thanks!",
       "revId": "4c879d0ce234ae50441958bd40d3e8cf125d2fd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "376b0ded_c3fed365",
+        "filename": "android/abi_gki_aarch64_amlogic",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-24T16:00:40Z",
+      "side": 1,
+      "message": "All these symbols seem unrelated to the tracepoint you are exporting.",
+      "range": {
+        "startLine": 539,
+        "startChar": 2,
+        "endLine": 668,
+        "endChar": 16
+      },
+      "revId": "4c879d0ce234ae50441958bd40d3e8cf125d2fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
