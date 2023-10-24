@@ -1975,6 +1975,7 @@
   __traceiter_android_vh_cpu_idle_enter
   __traceiter_android_vh_cpu_idle_exit
   __traceiter_android_vh_dump_throttled_rt_tasks
+  __traceiter_android_vh_dwc3_core_soft_reset
   __traceiter_android_vh_free_unref_page_bypass
   __traceiter_android_vh_ftrace_format_check
   __traceiter_android_vh_iommu_iovad_free_iova
@@ -2023,6 +2024,7 @@
   __tracepoint_android_vh_cpu_idle_enter
   __tracepoint_android_vh_cpu_idle_exit
   __tracepoint_android_vh_dump_throttled_rt_tasks
+  __tracepoint_android_vh_dwc3_core_soft_reset
   __tracepoint_android_vh_free_unref_page_bypass
   __tracepoint_android_vh_ftrace_format_check
   __tracepoint_android_vh_iommu_iovad_free_iova
