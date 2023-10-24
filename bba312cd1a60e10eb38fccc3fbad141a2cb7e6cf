@@ -52,6 +52,125 @@
       "parentUuid": "00b86594_5f93389d",
       "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3761e94b_f6627f9e",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-24T23:53:19Z",
+      "side": 1,
+      "message": "`extern` not needed for function declaration",
+      "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17c56989_885cbf36",
+        "filename": "include/linux/memcontrol.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-24T23:53:19Z",
+      "side": 1,
+      "message": "`extern` is meaningless for static inline functions.",
+      "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba3506e0_936ee444",
+        "filename": "include/linux/memory_hotplug.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-24T23:53:19Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7205677_61cf55ba",
+        "filename": "include/linux/pagewalk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-24T23:53:19Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1accc74_de068d09",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-24T23:53:19Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8516ca1_b9d148b1",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-24T23:53:19Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b2c672_d497fa15",
+        "filename": "include/linux/rmap.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-24T23:53:19Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "bba312cd1a60e10eb38fccc3fbad141a2cb7e6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
