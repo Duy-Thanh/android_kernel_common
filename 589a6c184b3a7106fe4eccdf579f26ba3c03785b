@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0bb8708_ee956c53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-10-24T11:59:49Z",
+      "side": 1,
+      "message": "Hi，tkjos\n\nWe need to register mm_page_alloc hooks in __alloc_pages function.\nso we export it and add symbol.\nplease review it, thanks!",
+      "revId": "589a6c184b3a7106fe4eccdf579f26ba3c03785b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
