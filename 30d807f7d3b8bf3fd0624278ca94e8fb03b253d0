@@ -190,6 +190,30 @@
       },
       "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b6273d1_a5b58d77",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-24T12:18:23Z",
+      "side": 1,
+      "message": "\"tightly coupled\" does not mean you can not submit it upstream, all kernel changes should be submitted upstream, right?\n\nEspecially code that handles error collection and handling.  But why not just use the existing error handling logic and infrastructure, what is lacking in it to require a custom one just for mmc cards?",
+      "parentUuid": "f49ecb1a_7387fbe1",
+      "range": {
+        "startLine": 1872,
+        "startChar": 2,
+        "endLine": 1872,
+        "endChar": 41
+      },
+      "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
