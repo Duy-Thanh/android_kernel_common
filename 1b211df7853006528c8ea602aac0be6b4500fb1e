@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b36dc0_d2183f7f",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-24T19:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37f12f2f_a77a4312",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 107
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc4d7afc_6bbb4389",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-23T18:09:43Z",
       "side": 1,
       "message": "what\u0027s the reason you are protecting direct_reclaim_state with memhealth_spin_lock? It\u0027s `bool`, which is equivalent to `int` and therefore an atomic type. You don\u0027t need any additional synchronization AFAIKT.",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 35
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e19f8821_6c54444f",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-24T19:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc4d7afc_6bbb4389",
       "range": {
         "startLine": 70,
         "startChar": 1,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68855c6a_e407b3b0",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-24T19:52:47Z",
+      "side": 1,
+      "message": "I thought we would want to enforce only allowing lseek to the start. Removed `direct_reclaim_state_lseek()` and we now use [default_llseek](https://elixir.bootlin.com/linux/latest/source/fs/read_write.c#L230)",
+      "parentUuid": "31396260_3112d0ec",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 1
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "223e0322_d08964d6",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-23T18:09:43Z",
       "side": 1,
       "message": "I don\u0027t think you can rely on only one process to be in direct reclaim. So, direct_reclaim_state should be an `int` not a `bool` and maybe rename it into `procs_in_direct_reclaim`. In mm_vmscan_direct_reclaim_begin_probe you increment it and in mm_vmscan_direct_reclaim_end_probe you decrement it. The system is in direct reclaim if (procs_in_direct_reclaim \u003e 0).",
+      "range": {
+        "startLine": 144,
+        "startChar": 1,
+        "endLine": 144,
+        "endChar": 21
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fd1f76e_2e2699f4",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-24T19:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "223e0322_d08964d6",
       "range": {
         "startLine": 144,
         "startChar": 1,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6cf25ad_06cc6c03",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-24T19:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4be174e3_4bd1dd9f",
+      "range": {
+        "startLine": 403,
+        "startChar": 1,
+        "endLine": 411,
+        "endChar": 26
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be338576_c6b97e39",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-10-23T18:09:43Z",
       "side": 1,
       "message": "long lines",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 99
+      },
+      "revId": "1b211df7853006528c8ea602aac0be6b4500fb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8968d728_3b65f721",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-24T19:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be338576_c6b97e39",
       "range": {
         "startLine": 438,
         "startChar": 0,
