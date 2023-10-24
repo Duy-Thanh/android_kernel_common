@@ -69,6 +69,17 @@ config PROTECTED_NVHE_STACKTRACE
 
 	  If unsure, or not using protected nVHE (pKVM), say N.
 
+config NVHE_SERROR
+	bool "Route SErrors to the nVHE hypervisor"
+	depends on NVHE_EL2_DEBUG
+	help
+	  Say Y if you want to debug SErrors triggered by the EL2 code.
+
+	  By default, SErrors are not taken at EL2 and are only handled by the
+	  host. This make SError debugging difficult when triggered by the EL2
+	  code. By the time an SError is raised, we are far from the root cause
+	  and the stacktrace doesn't make sense.
+
 config PKVM_MODULE_PATH
 	string "Path to pKVM modules"
 	default ""

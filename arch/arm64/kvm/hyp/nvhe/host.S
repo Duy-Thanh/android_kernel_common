@@ -141,6 +141,9 @@ SYM_FUNC_END(__host_hvc)
 	mrs	x0, esr_el2
 	ubfx	x0, x0, #ESR_ELx_EC_SHIFT, #ESR_ELx_EC_WIDTH
 	cmp	x0, #ESR_ELx_EC_HVC64
+#ifdef CONFIG_NVHE_SERROR
+	msr	daifclr, #4			// Unmask SError
+#endif
 	b.eq	__host_hvc
 	b	__host_exit
 .L__vect_end\@:

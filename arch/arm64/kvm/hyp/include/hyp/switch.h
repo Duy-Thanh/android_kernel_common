@@ -467,6 +467,9 @@ static inline bool fixup_guest_exit(struct kvm_vcpu *vcpu, u64 *exit_code)
 		goto guest;
 exit:
 	/* Return to the host kernel and handle the exit */
+#ifdef CONFIG_NVHE_SERROR
+	asm volatile("msr daifclr, #4");
+#endif
 	return false;
 
 guest:
