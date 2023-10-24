@@ -34,6 +34,24 @@
       "parentUuid": "aadb9fe8_a76f4b80",
       "revId": "1bc11bbe0e3b93df940adcd4dc0e08dd749fca55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91331c80_90fea56d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2023-10-24T08:14:48Z",
+      "side": 1,
+      "message": "We found the commit 57f3ff964899 (\"ANDROID: fuse-bpf v1.1\") will cause kernel to panic.",
+      "parentUuid": "73e4c63e_8bcb432e",
+      "revId": "1bc11bbe0e3b93df940adcd4dc0e08dd749fca55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
