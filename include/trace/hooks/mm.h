@@ -262,6 +262,9 @@ DECLARE_HOOK(android_vh_alloc_pages_entry,
 DECLARE_HOOK(android_vh_isolate_freepages,
 	TP_PROTO(struct compact_control *cc, struct page *page, bool *bypass),
 	TP_ARGS(cc, page, bypass));
+DECLARE_HOOK(android_vh_adjust_kvmalloc_flags,
+	TP_PROTO(unsigned int order, gfp_t *alloc_flags),
+	TP_ARGS(order, alloc_flags));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

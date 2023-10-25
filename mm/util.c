@@ -25,7 +25,7 @@
 #include <linux/compat.h>
 
 #include <linux/uaccess.h>
-
+#include <trace/hooks/mm.h>
 #include "internal.h"
 #ifndef __GENKSYMS__
 #include <trace/hooks/syscall_check.h>
@@ -624,6 +624,7 @@ void *kvmalloc_node(size_t size, gfp_t flags, int node)
 		if (!(kmalloc_flags & __GFP_RETRY_MAYFAIL))
 			kmalloc_flags |= __GFP_NORETRY;
 	}
+	trace_android_vh_adjust_kvmalloc_flags(get_order(size), &kmalloc_flags);
 
 	ret = kmalloc_node(size, kmalloc_flags, node);
 
