@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0c4734f_461c778e",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd0c798e_7671ab04",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 43
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb4306ac_caac2108",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-25T21:54:56Z",
       "side": 1,
       "message": "direct_reclaim_state_poll",
+      "range": {
+        "startLine": 70,
+        "startChar": 16,
+        "endLine": 70,
+        "endChar": 44
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8849504b_3db23d09",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb4306ac_caac2108",
       "range": {
         "startLine": 70,
         "startChar": 16,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bee050fb_4865679e",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd61d4b1_3bf32dfc",
+      "range": {
+        "startLine": 87,
+        "startChar": 11,
+        "endLine": 87,
+        "endChar": 39
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df35d7bb_98d5df89",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-25T22:06:52Z",
       "side": 1,
       "message": "Don\u0027t think this cast should be needed?",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 36
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7eff53_4355411c",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Yes, without it we were getting the following: `error: cast to \u0027void *\u0027 from smaller integer type \u0027int\u0027 [-Werror,-Wint-to-void-pointer-cast]`.\n\nUpdated `direct_reclaim_state_open()` for a more readable logic.",
+      "parentUuid": "df35d7bb_98d5df89",
       "range": {
         "startLine": 92,
         "startChar": 30,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fe8b455_7c17b643",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04b25697_8989752a",
+      "range": {
+        "startLine": 97,
+        "startChar": 11,
+        "endLine": 97,
+        "endChar": 42
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36ce66dd_9a5873f8",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-10-25T21:54:56Z",
       "side": 1,
       "message": "direct_reclaim_state_proc_ops",
+      "range": {
+        "startLine": 103,
+        "startChar": 29,
+        "endLine": 103,
+        "endChar": 61
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e59acbc2_9a4f7cdb",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36ce66dd_9a5873f8",
       "range": {
         "startLine": 103,
         "startChar": 29,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e83e060_de8860ff",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "603295bc_c0b5fc88",
+      "range": {
+        "startLine": 108,
+        "startChar": 14,
+        "endLine": 108,
+        "endChar": 15
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "521d681d_ba8d0d60",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-10-25T21:52:03Z",
       "side": 1,
       "message": "How about `atomic_inc_return_relaxed` inside the if statement to avoid the separate call to `atomic_read`? (Same with the decrement)",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 11
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "129281e3_a9444e2b",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "521d681d_ba8d0d60",
       "range": {
         "startLine": 113,
         "startChar": 1,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a6c2ba1_505a49b2",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a8b4f98_38b9bbbb",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 116,
+        "endChar": 39
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9134675b_90efca19",
@@ -221,6 +437,30 @@
       "writtenOn": "2023-10-25T21:54:56Z",
       "side": 1,
       "message": "```\nif (atomic_dec_return(\u0026procs_in_direct_reclaim) \u003d\u003d 0)\n    wake_up_interruptible(\u0026memhealth_wq);\n```",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 39
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77986b6f_d589d83f",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9134675b_90efca19",
       "range": {
         "startLine": 121,
         "startChar": 0,
@@ -254,6 +494,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67ecb438_b8618299",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b6674fc_fa6a529d",
+      "range": {
+        "startLine": 379,
+        "startChar": 48,
+        "endLine": 379,
+        "endChar": 50
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3208912_6a42751f",
@@ -267,6 +531,24 @@
       "writtenOn": "2023-10-25T22:06:52Z",
       "side": 1,
       "message": "If `memhealthmod_end` is also calling these removes unconditionally, do we really need this stack of them here with all the `goto`s?",
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3ddf92_82f10a5d",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T22:55:24Z",
+      "side": 1,
+      "message": "If `module_init()` fails, the module will not be loaded and `module_exit()` will not be called. Some modules can offer degraded functionalities if failure is encountered during the init process, but the `memhealth` is not designed that way, therefore we close any successfully created entries.",
+      "parentUuid": "a3208912_6a42751f",
       "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
