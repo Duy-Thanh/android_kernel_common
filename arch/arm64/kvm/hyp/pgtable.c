@@ -775,6 +775,21 @@ static int stage2_map_walk_table_pre(u64 addr, u64 end, u32 level,
 	return 0;
 }
 
+static void stage2_map_prefault_idmap(u64 addr, u32 level, kvm_pte_t *ptep,
+				      kvm_pte_t attr)
+{
+	u64 granule = kvm_granule_size(level);
+	int i;
+
+	if (!kvm_pte_valid(attr))
+		return;
+
+	for (i = 0; i < PTRS_PER_PTE; ++i, ++ptep, addr += granule) {
+		kvm_pte_t pte = kvm_init_valid_leaf_pte(addr, attr, level);
+		WRITE_ONCE(*ptep, pte);
+	}
+}
+
 static int stage2_map_walk_leaf(u64 addr, u64 end, u32 level, kvm_pte_t *ptep,
 				struct stage2_map_data *data)
 {
@@ -822,6 +837,12 @@ static int stage2_map_walk_leaf(u64 addr, u64 end, u32 level, kvm_pte_t *ptep,
 
 	kvm_set_table_pte(ptep, childp, mm_ops);
 	mm_ops->get_page(ptep);
+
+	if (pgt->flags & KVM_PGTABLE_S2_IDMAP) {
+		WARN_ON(pte_ops->pte_is_counted_cb(pte, level));
+		addr = ALIGN_DOWN(addr, kvm_granule_size(level));
+		stage2_map_prefault_idmap(addr, level + 1, childp, pte);
+	}
 
 	return 0;
 }
