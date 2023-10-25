@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6503c7_23d50959",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-25T09:28:15Z",
+      "side": 1,
+      "message": "No driver should need this.  Why are the out-of-tree code that requires this not upstream since the last time this was requested?  What uses this that has been rejected from upstream?",
+      "revId": "b59c4ffcd4e692eceaa6ed3a1562412f91640f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
