@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18998f7a_3cadb8aa",
+        "filename": "Documentation/ABI/testing/procfs-driver-memhealth",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T06:54:06Z",
+      "side": 1,
+      "message": "We reverted back to only output 1 or 0 to declare the direct reclaim state, per [comment thread](https://android-review.git.corp.google.com/c/kernel/common/+/2784528/comment/dff01d2e_e4681799/)",
+      "parentUuid": "0799f7dc_d95c7866",
+      "revId": "8a2c4f78c9680cf62e7569ae352b98ae28335235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dff01d2e_e4681799",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-10-24T21:35:41Z",
       "side": 1,
       "message": "I think reporting the number of processes in direct reclaim would be too much unnecessary information for the userspace and it causes unnecessary wakeups. Let\u0027s keep the previous `direct_reclaim_state` interface where report \"1\" when procs_in_direct_reclaim\u003e0 and \"0\" when procs_in_direct_reclaim\u003d\u003d0. We should also wake up the userspace only when direct_reclaim_state transition happens from 0 to 1 or 1 to 0 happens, not on each procs_in_direct_reclaim increment/decrement.",
+      "range": {
+        "startLine": 78,
+        "startChar": 1,
+        "endLine": 78,
+        "endChar": 34
+      },
+      "revId": "8a2c4f78c9680cf62e7569ae352b98ae28335235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2359bdc8_ea487d6b",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T06:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dff01d2e_e4681799",
       "range": {
         "startLine": 78,
         "startChar": 1,
