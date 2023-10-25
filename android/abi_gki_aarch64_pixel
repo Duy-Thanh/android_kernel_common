@@ -279,6 +279,7 @@
   debugfs_attr_write
   debugfs_create_atomic_t
   debugfs_create_bool
+  debugfs_create_devm_seqfile
   debugfs_create_dir
   debugfs_create_file
   debugfs_create_file_unsafe
@@ -365,6 +366,7 @@
   devm_clk_get
   devm_clk_get_optional
   devm_clk_put
+  devm_device_add_group
   devm_device_add_groups
   __devm_drm_dev_alloc
   devm_drm_panel_bridge_add_typed
@@ -2114,6 +2116,7 @@
   __traceiter_android_rvh_rtmutex_prepare_setprio
   __traceiter_android_rvh_sched_fork
   __traceiter_android_rvh_sched_newidle_balance
+  __traceiter_android_rvh_sched_setaffinity
   __traceiter_android_rvh_schedule
   __traceiter_android_rvh_select_task_rq_fair
   __traceiter_android_rvh_select_task_rq_rt
@@ -2133,6 +2136,7 @@
   __traceiter_android_rvh_update_rt_rq_load_avg
   __traceiter_android_rvh_usb_dev_suspend
   __traceiter_android_rvh_util_est_update
+  __traceiter_android_rvh_util_fits_cpu
   __traceiter_android_vh_arch_set_freq_scale
   __traceiter_android_vh_audio_usb_offload_connect
   __traceiter_android_vh_binder_restore_priority
@@ -2249,6 +2253,7 @@
   __tracepoint_android_rvh_rtmutex_prepare_setprio
   __tracepoint_android_rvh_sched_fork
   __tracepoint_android_rvh_sched_newidle_balance
+  __tracepoint_android_rvh_sched_setaffinity
   __tracepoint_android_rvh_schedule
   __tracepoint_android_rvh_select_task_rq_fair
   __tracepoint_android_rvh_select_task_rq_rt
@@ -2268,6 +2273,7 @@
   __tracepoint_android_rvh_update_rt_rq_load_avg
   __tracepoint_android_rvh_usb_dev_suspend
   __tracepoint_android_rvh_util_est_update
+  __tracepoint_android_rvh_util_fits_cpu
   __tracepoint_android_vh_arch_set_freq_scale
   __tracepoint_android_vh_audio_usb_offload_connect
   __tracepoint_android_vh_binder_restore_priority
