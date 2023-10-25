@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "521d681d_ba8d0d60",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-10-25T21:52:03Z",
+      "side": 1,
+      "message": "How about `atomic_inc_return_relaxed` inside the if statement to avoid the separate call to `atomic_read`? (Same with the decrement)",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 11
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
