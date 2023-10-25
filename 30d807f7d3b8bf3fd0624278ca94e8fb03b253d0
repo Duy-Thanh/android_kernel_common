@@ -238,6 +238,30 @@
       },
       "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a77b1a0_a13e0588",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-25T06:53:18Z",
+      "side": 1,
+      "message": "Thank you for the information, but adding a general \"report the errors to userspace\" functionality would be good for everyone, don\u0027t you think?\n\nI\u0027ll defer to Todd here, but you need to have a plan to get this upstream, we can not take hooks for forever.",
+      "parentUuid": "cfb51b76_28767b48",
+      "range": {
+        "startLine": 1872,
+        "startChar": 2,
+        "endLine": 1872,
+        "endChar": 41
+      },
+      "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
