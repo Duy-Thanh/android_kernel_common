@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000057160768",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2803417?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1cc7b628_e2e8b6d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-25T06:56:48Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 576126622 android-build.ayeaye-python-dispatcher_20231024.04_p0",
+      "revId": "e31e70909d7d9b84519bdb943b9ea2e3223375f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000057160768",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2803417?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1215e412_4c656e9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-25T06:56:48Z",
+      "side": 1,
+      "message": "Original change \u0027aosp/2803418\u0027 for this cherry pick, on base branch \u0027android14-5.15\u0027 is NOT MERGED.\nPlease merge the original change.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 576126622 android-build.ayeaye-python-dispatcher_20231024.04_p0",
+      "revId": "e31e70909d7d9b84519bdb943b9ea2e3223375f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000057160768",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2803417?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "def0306c_f6f827c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-25T06:56:48Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2803418](https://r.android.com/c/2803418) on branch android14-5.15.\n\n```\n      ## android/abi_gki_aarch64_pixel ##\n    +@@\n    +   debugfs_attr_write\n    +   debugfs_create_atomic_t\n    +   debugfs_create_bool\n    ++  debugfs_create_devm_seqfile\n    +   debugfs_create_dir\n    +   debugfs_create_file\n    +   debugfs_create_file_unsafe\n    +@@\n    +   devm_clk_get\n    +   devm_clk_get_optional\n    +   devm_clk_put\n    ++  devm_device_add_group\n    +   devm_device_add_groups\n    +   __devm_drm_dev_alloc\n    +   devm_drm_panel_bridge_add_typed\n    +@@\n    +   __traceiter_android_rvh_rtmutex_prepare_setprio\n    +   __traceiter_android_rvh_sched_fork\n    +   __traceiter_android_rvh_sched_newidle_balance\n    ++  __traceiter_android_rvh_sched_setaffinity\n    +   __traceiter_android_rvh_schedule\n    +   __traceiter_android_rvh_select_task_rq_fair\n    +   __traceiter_android_rvh_select_task_rq_rt\n     @@\n        __traceiter_android_rvh_update_rt_rq_load_avg\n        __traceiter_android_rvh_usb_dev_suspend\n    @@ android/abi_gki_aarch64_pixel\n        __traceiter_android_vh_arch_set_freq_scale\n        __traceiter_android_vh_audio_usb_offload_connect\n        __traceiter_android_vh_binder_restore_priority\n    +@@\n    +   __tracepoint_android_rvh_rtmutex_prepare_setprio\n    +   __tracepoint_android_rvh_sched_fork\n    +   __tracepoint_android_rvh_sched_newidle_balance\n    ++  __tracepoint_android_rvh_sched_setaffinity\n    +   __tracepoint_android_rvh_schedule\n    +   __tracepoint_android_rvh_select_task_rq_fair\n    +   __tracepoint_android_rvh_select_task_rq_rt\n     @@\n        __tracepoint_android_rvh_update_rt_rq_load_avg\n        __tracepoint_android_rvh_usb_dev_suspend\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 576126622 android-build.ayeaye-python-dispatcher_20231024.04_p0",
+      "revId": "e31e70909d7d9b84519bdb943b9ea2e3223375f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
