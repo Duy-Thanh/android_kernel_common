@@ -531,6 +531,7 @@ int reserve_metadata_storage(struct page *page, int order, gfp_t gfp)
 	unsigned long flags, cflags;
 	struct tag_region *region;
 	unsigned long block;
+	bool success;
 	int i, tries;
 	int ret = 0;
 
@@ -572,6 +573,25 @@ int reserve_metadata_storage(struct page *page, int order, gfp_t gfp)
 		if (tag_storage_block_is_reserved(block))
 			continue;
 
+		if (region->block_size == 1 && is_free_buddy_page(pfn_to_page(block))) {
+			success = take_page_off_buddy_nopoison(pfn_to_page(block));
+			if (success) {
+				ret = tag_storage_reserve_block(block, region, order);
+				if (ret) {
+					put_page_back_buddy_nopoison(pfn_to_page(block));
+					goto out_error;
+				}
+				/*
+				 * When all associated tagged pages are freed,
+				 * the refcount will drop to 1 in
+				 * free_metadata_storage() and the block will be
+				 * freed.
+				 */
+				page_ref_inc(pfn_to_page(block));
+				goto success_next;
+			}
+		}
+
 		tries = 5;
 		while (tries--) {
 			ret = alloc_contig_range(block, block + region->block_size, MIGRATE_METADATA, gfp);
@@ -605,6 +625,7 @@ int reserve_metadata_storage(struct page *page, int order, gfp_t gfp)
 			goto out_error;
 		}
 
+success_next:
 		count_vm_events(METADATA_RESERVE_SUCCESS, region->block_size);
 	}
 

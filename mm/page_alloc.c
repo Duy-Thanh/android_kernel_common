@@ -9855,7 +9855,7 @@ bool is_free_buddy_page(struct page *page)
 }
 EXPORT_SYMBOL(is_free_buddy_page);
 
-#ifdef CONFIG_MEMORY_FAILURE
+#if defined(CONFIG_MEMORY_FAILURE) || defined(CONFIG_MEMORY_METADATA)
 /*
  * Break down a higher-order page in sub-pages, and keep our target out of
  * buddy allocator.
@@ -9889,7 +9889,9 @@ static void break_down_buddy_pages(struct zone *zone, struct page *page,
 		}
 	}
 }
+#endif
 
+#ifdef CONFIG_MEMORY_FAILURE
 /*
  * Take a page that will be marked as poisoned off the buddy allocator.
  */
@@ -9948,6 +9950,59 @@ bool put_page_back_buddy(struct page *page)
 	}
 	spin_unlock_irqrestore(&zone->lock, flags);
 
+	return ret;
+}
+#endif
+
+#ifdef CONFIG_MEMORY_METADATA
+bool put_page_back_buddy_nopoison(struct page *page)
+{
+	struct zone *zone = page_zone(page);
+	unsigned long pfn = page_to_pfn(page);
+	unsigned long flags;
+	int migratetype = get_pfnblock_migratetype(page, pfn);
+	bool ret = false;
+
+	spin_lock_irqsave(&zone->lock, flags);
+	if (put_page_testzero(page)) {
+		__free_one_page(page, pfn, zone, 0, migratetype, FPI_NONE);
+		ret = true;
+	}
+	spin_unlock_irqrestore(&zone->lock, flags);
+
+	return ret;
+}
+
+bool take_page_off_buddy_nopoison(struct page *page)
+{
+	struct zone *zone = page_zone(page);
+	unsigned long pfn = page_to_pfn(page);
+	unsigned long flags;
+	unsigned int order;
+	bool ret = false;
+
+	spin_lock_irqsave(&zone->lock, flags);
+	for (order = 0; order <= MAX_ORDER; order++) {
+		struct page *page_head = page - (pfn & ((1 << order) - 1));
+		int page_order = buddy_order(page_head);
+
+		if (PageBuddy(page_head) && page_order >= order) {
+			unsigned long pfn_head = page_to_pfn(page_head);
+			int migratetype = get_pfnblock_migratetype(page_head,
+								   pfn_head);
+
+			del_page_from_free_list(page_head, zone, page_order);
+			break_down_buddy_pages(zone, page_head, page, 0,
+						page_order, migratetype);
+			if (!is_migrate_isolate(migratetype))
+				__mod_zone_freepage_state(zone, -1, migratetype);
+			ret = true;
+			break;
+		}
+		if (page_count(page_head) > 0)
+			break;
+	}
+	spin_unlock_irqrestore(&zone->lock, flags);
 	return ret;
 }
 #endif

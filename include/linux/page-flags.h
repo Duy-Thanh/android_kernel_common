@@ -590,6 +590,11 @@ PAGEFLAG_FALSE(HWPoison, hwpoison)
 #define __PG_HWPOISON 0
 #endif
 
+#ifdef CONFIG_MEMORY_METADATA
+extern bool take_page_off_buddy_nopoison(struct page *page);
+extern bool put_page_back_buddy_nopoison(struct page *page);
+#endif
+
 #if defined(CONFIG_PAGE_IDLE_FLAG) && defined(CONFIG_64BIT)
 TESTPAGEFLAG(Young, young, PF_ANY)
 SETPAGEFLAG(Young, young, PF_ANY)
