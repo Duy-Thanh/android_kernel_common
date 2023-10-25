@@ -47,6 +47,12 @@
   autoremove_wake_function
   available_idle_cpu
   backlight_device_set_brightness
+  badblocks_check
+  badblocks_clear
+  badblocks_exit
+  badblocks_init
+  badblocks_set
+  badblocks_show
   balance_push_callback
   bcmp
   bin2hex
@@ -76,22 +82,42 @@
   blk_check_plugged
   blk_cleanup_disk
   blkdev_get_by_dev
+  blkdev_nr_zones
   blkdev_put
   blk_execute_rq_nowait
   blk_get_request
+  __blk_mq_alloc_disk
+  blk_mq_alloc_tag_set
+  blk_mq_complete_request
+  blk_mq_end_request
+  blk_mq_free_tag_set
+  blk_mq_start_request
+  blk_mq_start_stopped_hw_queues
+  blk_mq_stop_hw_queues
+  blk_mq_update_nr_hw_queues
+  blk_op_str
   blk_put_request
+  blk_queue_chunk_sectors
   blk_queue_flag_clear
   blk_queue_flag_set
   blk_queue_io_min
   blk_queue_io_opt
   blk_queue_logical_block_size
   blk_queue_max_discard_sectors
+  blk_queue_max_hw_sectors
   blk_queue_max_write_zeroes_sectors
+  blk_queue_max_zone_append_sectors
   blk_queue_physical_block_size
+  blk_queue_required_elevator_features
+  blk_queue_set_zoned
+  blk_queue_virt_boundary
+  blk_queue_write_cache
+  blk_revalidate_disk_zones
   blk_rq_map_user
   blk_rq_map_user_iov
   blk_rq_unmap_user
   blk_status_to_errno
+  blk_zone_cond_str
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
@@ -178,7 +204,12 @@
   component_match_add_release
   component_unbind_all
   config_ep_by_speed
+  configfs_register_subsystem
+  configfs_unregister_subsystem
+  config_group_init
   config_group_init_type_name
+  config_item_init_type_name
+  config_item_put
   console_set_on_cmdline
   console_suspend_enabled
   console_trylock
@@ -776,6 +807,7 @@
   emergency_restart
   enable_irq
   enable_percpu_irq
+  errno_to_blk_status
   ether_setup
   eth_mac_addr
   ethtool_op_get_link
@@ -1085,6 +1117,7 @@
   iommu_unmap
   iommu_unregister_device_fault_handler
   __ioremap
+  io_schedule
   io_schedule_timeout
   iounmap
   iov_iter_bvec
@@ -1607,6 +1640,11 @@
   put_vaddr_frames
   queue_delayed_work_on
   queue_work_on
+  radix_tree_delete_item
+  radix_tree_gang_lookup
+  radix_tree_insert
+  radix_tree_lookup
+  radix_tree_preload
   ___ratelimit
   raw_notifier_call_chain
   raw_notifier_chain_register
@@ -2140,6 +2178,7 @@
   __traceiter_android_rvh_update_rt_rq_load_avg
   __traceiter_android_rvh_usb_dev_suspend
   __traceiter_android_rvh_util_est_update
+  __traceiter_android_rvh_util_fits_cpu
   __traceiter_android_vh_arch_set_freq_scale
   __traceiter_android_vh_audio_usb_offload_connect
   __traceiter_android_vh_binder_restore_priority
@@ -2276,6 +2315,7 @@
   __tracepoint_android_rvh_update_rt_rq_load_avg
   __tracepoint_android_rvh_usb_dev_suspend
   __tracepoint_android_rvh_util_est_update
+  __tracepoint_android_rvh_util_fits_cpu
   __tracepoint_android_vh_arch_set_freq_scale
   __tracepoint_android_vh_audio_usb_offload_connect
   __tracepoint_android_vh_binder_restore_priority
@@ -2366,6 +2406,8 @@
   trace_print_hex_seq
   trace_print_symbols_seq
   trace_raw_output_prep
+  trace_seq_printf
+  trace_seq_putc
   try_module_get
   try_to_del_timer_sync
   tty_flip_buffer_push
