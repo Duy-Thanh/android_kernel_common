@@ -28,6 +28,7 @@
 
 #include <kunit/visibility.h>
 
+#include <trace/hooks/mm.h>
 #include "internal.h"
 #include "swap.h"
 
@@ -631,6 +632,7 @@ static gfp_t kmalloc_gfp_adjust(gfp_t flags, size_t size)
 		/* nofail semantic is implemented by the vmalloc fallback */
 		flags &= ~__GFP_NOFAIL;
 	}
+	trace_android_vh_adjust_kvmalloc_flags(get_order(size), &kmalloc_flags);
 
 	return flags;
 }

@@ -212,6 +212,9 @@ DECLARE_HOOK(android_vh_drain_all_pages_bypass,
 		bool *bypass),
 	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, did_some_progress, bypass));
 
+DECLARE_HOOK(android_vh_adjust_kvmalloc_flags,
+	TP_PROTO(unsigned int order, gfp_t *alloc_flags),
+	TP_ARGS(order, alloc_flags));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
