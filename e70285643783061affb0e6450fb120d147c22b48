@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa4faf7c_7add80c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-10-25T23:17:15Z",
+      "side": 1,
+      "message": "more precisely, \"at least one process\"",
+      "range": {
+        "startLine": 12,
+        "startChar": 17,
+        "endLine": 12,
+        "endChar": 27
+      },
+      "revId": "e70285643783061affb0e6450fb120d147c22b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc1931a_86db04ea",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-10-25T23:17:15Z",
+      "side": 1,
+      "message": "Now that the allocation is gone, this should go too.",
+      "revId": "e70285643783061affb0e6450fb120d147c22b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
