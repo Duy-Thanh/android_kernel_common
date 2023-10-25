@@ -16,6 +16,24 @@
       "message": "Something in this series breaks KMI.",
       "revId": "2fb5786e97d734b17f008b178f79fe05206b350e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9981720c_751df56a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-10-25T07:50:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "016d3ed9_414351b3",
+      "revId": "2fb5786e97d734b17f008b178f79fe05206b350e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
