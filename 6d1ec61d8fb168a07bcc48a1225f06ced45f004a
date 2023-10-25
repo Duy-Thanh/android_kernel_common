@@ -72,6 +72,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df35d7bb_98d5df89",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-10-25T22:06:52Z",
+      "side": 1,
+      "message": "Don\u0027t think this cast should be needed?",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 36
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04b25697_8989752a",
         "filename": "drivers/android/memhealth.c",
         "patchSetId": 8
@@ -111,6 +134,29 @@
         "startChar": 29,
         "endLine": 103,
         "endChar": 61
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603295bc_c0b5fc88",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-10-25T22:06:52Z",
+      "side": 1,
+      "message": "Spacing",
+      "range": {
+        "startLine": 108,
+        "startChar": 14,
+        "endLine": 108,
+        "endChar": 15
       },
       "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -181,6 +227,46 @@
         "endLine": 124,
         "endChar": 39
       },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b6674fc_fa6a529d",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-10-25T22:06:52Z",
+      "side": 1,
+      "message": "No need for this `%s` specifier for a constant string. (Same below for the unregister)",
+      "range": {
+        "startLine": 379,
+        "startChar": 48,
+        "endLine": 379,
+        "endChar": 50
+      },
+      "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3208912_6a42751f",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-10-25T22:06:52Z",
+      "side": 1,
+      "message": "If `memhealthmod_end` is also calling these removes unconditionally, do we really need this stack of them here with all the `goto`s?",
       "revId": "6d1ec61d8fb168a07bcc48a1225f06ced45f004a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
