@@ -305,6 +305,9 @@ DECLARE_HOOK(android_vh_zs_shrinker_adjust,
 DECLARE_HOOK(android_vh_zs_shrinker_bypass,
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
+DECLARE_HOOK(android_vh_adjust_kvmalloc_flags,
+	TP_PROTO(unsigned int order, gfp_t *alloc_flags),
+	TP_ARGS(order, alloc_flags));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
