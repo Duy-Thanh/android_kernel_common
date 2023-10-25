@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e66261_69adb57c",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T21:48:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "327525d0_d28dc1e2",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 74
+      },
+      "revId": "b89b48cb20b76e419ce1ddb83b874fd5aa071800",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "561f848b_9a7d02d7",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c471813f_a7a02dee",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T21:48:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "561f848b_9a7d02d7",
+      "range": {
+        "startLine": 92,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 64
+      },
+      "revId": "b89b48cb20b76e419ce1ddb83b874fd5aa071800",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17dce617_49109d18",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-10-25T14:32:11Z",
       "side": 1,
       "message": "No need to wake up every time procs_in_direct_reclaim increments or decrements, only on transitions from 0 to 1 (started direct reclaim) and from 1 to 0 (direct reclaim stopped).",
+      "range": {
+        "startLine": 119,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 38
+      },
+      "revId": "b89b48cb20b76e419ce1ddb83b874fd5aa071800",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0af64f7b_78b410f3",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-25T21:48:31Z",
+      "side": 1,
+      "message": "Done. Adjusted `mm_vmscan_direct_reclaim_end_probe` to only wake up when we hit `0` as well.",
+      "parentUuid": "17dce617_49109d18",
       "range": {
         "startLine": 119,
         "startChar": 1,
