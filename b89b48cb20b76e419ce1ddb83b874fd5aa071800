@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "327525d0_d28dc1e2",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-25T14:32:11Z",
+      "side": 1,
+      "message": "```\ncurrent_state \u003d atomic_read(\u0026procs_in_direct_reclaim) \u003e 0;\n```\ninstead of `current_state` more informative name would be `in_direct_reclaim`. Instead of `last_seen_state` maybe `last_in_direct_reclaim`.",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 74
+      },
+      "revId": "b89b48cb20b76e419ce1ddb83b874fd5aa071800",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "561f848b_9a7d02d7",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-25T14:32:11Z",
+      "side": 1,
+      "message": "You don\u0027t need to allocate a space for `bool`. `file-\u003eprivate_data` is a pointer, so has enough space to hold a bool. Just use it directly to store the last state:\n```\nfile-\u003eprivate_data \u003d (void*)(atomic_read(\u0026procs_in_direct_reclaim) \u003e 0);\n\nand later:\n\nlast_state \u003d (bool)file-\u003eprivate_data;\n\n```",
+      "range": {
+        "startLine": 92,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 64
+      },
+      "revId": "b89b48cb20b76e419ce1ddb83b874fd5aa071800",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17dce617_49109d18",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-10-25T14:32:11Z",
+      "side": 1,
+      "message": "No need to wake up every time procs_in_direct_reclaim increments or decrements, only on transitions from 0 to 1 (started direct reclaim) and from 1 to 0 (direct reclaim stopped).",
+      "range": {
+        "startLine": 119,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 38
+      },
+      "revId": "b89b48cb20b76e419ce1ddb83b874fd5aa071800",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
