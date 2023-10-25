@@ -88,6 +88,24 @@
       "parentUuid": "92aed4cf_f4cd0a13",
       "revId": "9db664ab64376dfe8d47cf8f0964df9a653aaa06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6638bd4e_2f8fb536",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2023-10-25T03:22:38Z",
+      "side": 1,
+      "message": "understood, i\u0027ll submit the series for better context, thanks",
+      "parentUuid": "ec833dd4_ab32dd69",
+      "revId": "9db664ab64376dfe8d47cf8f0964df9a653aaa06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
