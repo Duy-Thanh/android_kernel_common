@@ -26,6 +26,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3b085fd_96a66ed2",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-10-25T23:24:20Z",
+      "side": 1,
+      "message": "This comment is dated now, since the value is just 1 or 0.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 39
+      },
+      "revId": "e70285643783061affb0e6450fb120d147c22b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b78ea609_c74b36a9",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-10-25T23:24:20Z",
+      "side": 1,
+      "message": "I think it\u0027d be more correct to put this immediately before the `poll_wait`, since we may mask out the poll event depending on what the value of `procs_in_direct_reclaim` happens to be when the file is first opened (vs when the poll is started). But I guess either way there is a window of time where the value can change before we start the `poll_wait`, resulting in the same situation.",
+      "revId": "e70285643783061affb0e6450fb120d147c22b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bfc1931a_86db04ea",
         "filename": "drivers/android/memhealth.c",
         "patchSetId": 11
