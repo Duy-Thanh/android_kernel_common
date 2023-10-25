@@ -28,6 +28,7 @@
 
 #include <kunit/visibility.h>
 
+#include <trace/hooks/mm.h>
 #include "internal.h"
 #include "swap.h"
 
@@ -656,6 +657,7 @@ void *__kvmalloc_node_noprof(DECL_BUCKET_PARAMS(size, b), gfp_t flags, int node)
 {
 	void *ret;
 
+	trace_android_vh_adjust_kvmalloc_flags(get_order(size), &flags);
 	/*
 	 * It doesn't really make sense to fallback to vmalloc for sub page
 	 * requests
