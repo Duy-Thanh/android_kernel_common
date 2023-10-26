@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "522a07c1_cd65e600",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-26T21:58:48Z",
+      "side": 1,
+      "message": "This change needs CL:2766267.\n\nDon\u0027t forget to include this change in ABTD runs!",
+      "revId": "0b95130c5a90e6240dd1aef5e354fccb85a6d6d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
