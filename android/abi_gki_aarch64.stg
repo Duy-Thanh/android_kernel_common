@@ -286854,6 +286854,11 @@ function {
   parameter_id: 0x02862e14
 }
 function {
+  id: 0x103cff8e
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0292b875
+}
+function {
   id: 0x103ff2f5
   return_type_id: 0x48b5725f
   parameter_id: 0x06835e9c
@@ -319303,6 +319308,14 @@ function {
   parameter_id: 0x06835e9c
 }
 function {
+  id: 0x9c22a570
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0292b875
+  parameter_id: 0x4585663f
+  parameter_id: 0x4585663f
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9c24e4e1
   return_type_id: 0x6720d32f
   parameter_id: 0x06901f39
@@ -342525,6 +342538,24 @@ elf_symbol {
   crc: 0xf9eebc5c
   type_id: 0x34c40d5b
   full_name: "bio_start_io_acct"
+}
+elf_symbol {
+  id: 0x5cce4e68
+  name: "bioset_exit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8065b338
+  type_id: 0x103cff8e
+  full_name: "bioset_exit"
+}
+elf_symbol {
+  id: 0x5c0b88b2
+  name: "bioset_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x60fece91
+  type_id: 0x9c22a570
+  full_name: "bioset_init"
 }
 elf_symbol {
   id: 0xe0e9f920
@@ -397046,6 +397077,8 @@ interface {
   symbol_id: 0x1d853176
   symbol_id: 0xa8878d9e
   symbol_id: 0x1cb0de6c
+  symbol_id: 0x5cce4e68
+  symbol_id: 0x5c0b88b2
   symbol_id: 0xe0e9f920
   symbol_id: 0xfba0da8c
   symbol_id: 0x00f38540
