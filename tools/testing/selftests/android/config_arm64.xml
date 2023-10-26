@@ -19,6 +19,7 @@
         <option name="cleanup" value="true" />
         <option name="push-file" key="selftests" value="/data/selftests" />
         <option name="skip-abi-filtering" value="true" />
+        <option name="post-push" value='chmod -R 755 /data/selftests; find /data/selftests; -type f | xargs grep -l -e "bin/sh" -e "bin/bash" | xargs sed -i -e "s?/bin/echo?echo?" -i -e "s?#!/bin/sh?#!/system/bin/sh?" -i -e "s?#!/bin/bash?#!/system/bin/sh?" || echo "There were no files to process"' />
     </target_preparer>
 
     <test class="com.android.tradefed.testtype.binary.ExecutableTargetTest" >
