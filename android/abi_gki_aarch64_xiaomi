@@ -337,3 +337,6 @@
   __traceiter_android_vh_record_pcpu_rwsem_time_early
   __tracepoint_android_vh_record_pcpu_rwsem_time_early
   cgroup_threadgroup_rwsem
+
+#required by perf_helper.ko
+  memcg_page_state

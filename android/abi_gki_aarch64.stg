@@ -298815,6 +298815,12 @@ function {
   parameter_id: 0x9fe5c5a6
 }
 function {
+  id: 0x3766a595
+  return_type_id: 0x33756485
+  parameter_id: 0x1d5bae2a
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x37677261
   return_type_id: 0x33756485
   parameter_id: 0x14abdd00
@@ -367955,6 +367961,15 @@ elf_symbol {
   full_name: "memblock_free"
 }
 elf_symbol {
+  id: 0x79d24533
+  name: "memcg_page_state"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x21166d13
+  type_id: 0x3766a595
+  full_name: "memcg_page_state"
+}
+elf_symbol {
   id: 0xaa97e158
   name: "memchr"
   is_defined: true
@@ -400102,6 +400117,7 @@ interface {
   symbol_id: 0x01e78001
   symbol_id: 0x746374fa
   symbol_id: 0x4fb91c54
+  symbol_id: 0x79d24533
   symbol_id: 0xaa97e158
   symbol_id: 0x0b518e04
   symbol_id: 0xad94cee2
