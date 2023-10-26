@@ -343820,6 +343820,16 @@ elf_symbol {
   full_name: "dma_buf_map_attachment"
 }
 elf_symbol {
+  id: 0x25104c49
+  name: "dma_buf_map_attachment_unlocked"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xedb9c6b4
+  namespace: "DMA_BUF"
+  type_id: 0x451c3ee7
+  full_name: "dma_buf_map_attachment_unlocked"
+}
+elf_symbol {
   id: 0xc99a7edf
   name: "dma_buf_mmap"
   is_defined: true
@@ -343868,6 +343878,16 @@ elf_symbol {
   namespace: "DMA_BUF"
   type_id: 0x17ffed59
   full_name: "dma_buf_unmap_attachment"
+}
+elf_symbol {
+  id: 0x68016e57
+  name: "dma_buf_unmap_attachment_unlocked"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xffe8aa2b
+  namespace: "DMA_BUF"
+  type_id: 0x17ffed59
+  full_name: "dma_buf_unmap_attachment_unlocked"
 }
 elf_symbol {
   id: 0xe8233473
@@ -387500,11 +387520,13 @@ interface {
   symbol_id: 0xe6ad1d16
   symbol_id: 0xda3a8347
   symbol_id: 0xb3e02cd2
+  symbol_id: 0x25104c49
   symbol_id: 0xc99a7edf
   symbol_id: 0xdcb8ed3c
   symbol_id: 0x4ec1de19
   symbol_id: 0xe5cfd7ac
   symbol_id: 0xd0deb542
+  symbol_id: 0x68016e57
   symbol_id: 0xe8233473
   symbol_id: 0x710f1fc2
   symbol_id: 0xaa54a71f
