@@ -759,7 +759,11 @@ restart:
 			INCR(ehci->stats.normal);
 		} else {
 			/* Force to check port status */
+<<<<<<< HEAD   (9f7988 UPSTREAM: lib/test_meminit: fix off-by-one error in test_pag)
 			if (ehci->has_fsl_port_bug)
+=======
+			if (ehci->has_ci_pec_bug)
+>>>>>>> BRANCH (d23900 Linux 6.1.55)
 				status |= STS_PCD;
 			INCR(ehci->stats.error);
 		}
