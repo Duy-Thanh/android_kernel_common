@@ -16,6 +16,23 @@
       "message": "checkpatch for a revert of an upstream commit can be ignored.",
       "revId": "0ccab4b8e62bc34eedbd43a49defb86478ff2521",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f4e733e_535288ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-26T11:26:14Z",
+      "side": 1,
+      "message": "checkpatch can be ignored for upstream reverts.",
+      "revId": "0ccab4b8e62bc34eedbd43a49defb86478ff2521",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
