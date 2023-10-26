@@ -92,7 +92,14 @@ static inline struct fw_priv *to_fw_priv(struct kref *ref)
  * guarding for corner cases a global lock should be OK */
 DEFINE_MUTEX(fw_lock);
 
+<<<<<<< HEAD   (0e8b65 ANDROID: sched: Make uclamp changes depend on CAP_SYS_NICE)
 struct firmware_cache fw_cache;
+||||||| BASE
+static struct firmware_cache fw_cache;
+=======
+static struct firmware_cache fw_cache;
+bool fw_load_abort_all;
+>>>>>>> CHANGE (e3eb2b BACKPORT: firmware_loader: Abort all upcoming firmware load )
 
 void fw_state_init(struct fw_priv *fw_priv)
 {

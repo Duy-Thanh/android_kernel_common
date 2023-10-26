@@ -85,7 +85,12 @@ struct fw_priv {
 };
 
 extern struct mutex fw_lock;
+<<<<<<< HEAD   (0e8b65 ANDROID: sched: Make uclamp changes depend on CAP_SYS_NICE)
 extern struct firmware_cache fw_cache;
+||||||| BASE
+=======
+extern bool fw_load_abort_all;
+>>>>>>> CHANGE (e3eb2b BACKPORT: firmware_loader: Abort all upcoming firmware load )
 
 static inline bool __fw_state_check(struct fw_priv *fw_priv,
 				    enum fw_status status)
