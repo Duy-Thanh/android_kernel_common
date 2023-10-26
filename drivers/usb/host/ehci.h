@@ -207,6 +207,7 @@ struct ehci_hcd {			/* one per controller */
 	unsigned		has_fsl_port_bug:1; /* FreeScale */
 	unsigned		has_fsl_hs_errata:1;	/* Freescale HS quirk */
 	unsigned		has_fsl_susp_errata:1;	/* NXP SUSP quirk */
+	unsigned		has_ci_pec_bug:1;	/* ChipIdea PEC bug */
 	unsigned		big_endian_mmio:1;
 	unsigned		big_endian_desc:1;
 	unsigned		big_endian_capbase:1;
@@ -713,7 +714,11 @@ ehci_port_speed(struct ehci_hcd *ehci, unsigned int portsc)
  * when frame babble is detected.
  */
 #define ehci_has_ci_pec_bug(e, portsc) \
+<<<<<<< HEAD   (9f7988 UPSTREAM: lib/test_meminit: fix off-by-one error in test_pag)
 	((e)->has_fsl_port_bug && ((e)->command & CMD_PSE) \
+=======
+	((e)->has_ci_pec_bug && ((e)->command & CMD_PSE) \
+>>>>>>> BRANCH (d23900 Linux 6.1.55)
 	 && !(portsc & PORT_PEC) && !(portsc & PORT_PE))
 
 /*
