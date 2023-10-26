@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9fc5c40_79072372",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-10-26T13:29:40Z",
+      "side": 1,
+      "message": "May need to run \"bazel run //common:kernel_aarch64_abi_update\" to update .stg file.",
+      "revId": "9d51fabb36578d92506f8ed90dfdd4fc849b43ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
