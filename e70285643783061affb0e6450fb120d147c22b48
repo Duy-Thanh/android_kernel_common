@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "617c0ba1_44ee94f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-26T16:22:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa4faf7c_7add80c0",
+      "range": {
+        "startLine": 12,
+        "startChar": 17,
+        "endLine": 12,
+        "endChar": 27
+      },
+      "revId": "e70285643783061affb0e6450fb120d147c22b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3b085fd_96a66ed2",
@@ -88,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb5363f_2b38d5b8",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-26T16:22:58Z",
+      "side": 1,
+      "message": "The pattern to fetch the latest value after `poll_wait` is the standard pattern in all the drivers I could find. Meaning that we want to get the `procs_in_direct_reclaim` value after the `poll_wait()`.",
+      "parentUuid": "b78ea609_c74b36a9",
+      "revId": "e70285643783061affb0e6450fb120d147c22b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfc1931a_86db04ea",
@@ -101,6 +143,24 @@
       "writtenOn": "2023-10-25T23:17:15Z",
       "side": 1,
       "message": "Now that the allocation is gone, this should go too.",
+      "revId": "e70285643783061affb0e6450fb120d147c22b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0774936f_de423d6d",
+        "filename": "drivers/android/memhealth.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1956645
+      },
+      "writtenOn": "2023-10-26T16:22:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfc1931a_86db04ea",
       "revId": "e70285643783061affb0e6450fb120d147c22b48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
