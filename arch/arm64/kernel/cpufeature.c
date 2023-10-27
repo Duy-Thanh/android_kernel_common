@@ -3085,9 +3085,12 @@ int do_emulate_mrs(struct pt_regs *regs, u32 sys_reg, u32 rt)
 	return rc;
 }
 
-static int emulate_mrs(struct pt_regs *regs, u32 insn)
+bool try_emulate_mrs(struct pt_regs *regs, u32 insn)
 {
 	u32 sys_reg, rt;
+
+	if (compat_user_mode(regs) || !aarch64_insn_is_mrs(insn))
+		return false;
 
 	/*
 	 * sys_reg values are defined as used in mrs/msr instruction.
@@ -3095,9 +3098,10 @@ static int emulate_mrs(struct pt_regs *regs, u32 insn)
 	 */
 	sys_reg = (u32)aarch64_insn_decode_immediate(AARCH64_INSN_IMM_16, insn) << 5;
 	rt = aarch64_insn_decode_register(AARCH64_INSN_REGTYPE_RT, insn);
-	return do_emulate_mrs(regs, sys_reg, rt);
+	return do_emulate_mrs(regs, sys_reg, rt) == 0;
 }
 
+<<<<<<< HEAD   (9db823 Revert "netfilter: handle the connecting collision properly )
 static struct undef_hook mrs_hook = {
 	.instr_mask = 0xfff00000,
 	.instr_val  = 0xd5300000,
@@ -3125,6 +3129,8 @@ enum mitigation_state arm64_get_meltdown_state(void)
 	return SPECTRE_VULNERABLE;
 }
 
+=======
+>>>>>>> BRANCH (cb49f0 Linux 5.10.199)
 ssize_t cpu_show_meltdown(struct device *dev, struct device_attribute *attr,
 			  char *buf)
 {
