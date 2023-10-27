@@ -4620,7 +4620,9 @@ static int hub_set_address(struct usb_device *udev, int devnum)
 		return 0;
 	if (udev->state != USB_STATE_DEFAULT)
 		return -EINVAL;
-	if (hcd->driver->address_device)
+	if (hcd->driver->address_device_timeout)
+		retval = hcd->driver->address_device_timeout(hcd, udev, USB_CTRL_SET_TIMEOUT);
+	else if (hcd->driver->address_device)
 		retval = hcd->driver->address_device(hcd, udev);
 	else
 		retval = usb_control_msg(udev, usb_sndaddr0pipe(),

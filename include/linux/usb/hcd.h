@@ -390,7 +390,7 @@ struct hc_driver {
 		 * or bandwidth constraints.
 		 */
 	void	(*reset_bandwidth)(struct usb_hcd *, struct usb_device *);
-		/* Returns the hardware-chosen device address */
+		/* Set the hardware-chosen device address */
 	int	(*address_device)(struct usb_hcd *, struct usb_device *udev);
 		/* prepares the hardware to send commands to the device */
 	int	(*enable_device)(struct usb_hcd *, struct usb_device *udev);
@@ -418,7 +418,9 @@ struct hc_driver {
 	/* Call for power on/off the port if necessary */
 	int	(*port_power)(struct usb_hcd *hcd, int portnum, bool enable);
 
-	ANDROID_KABI_RESERVE(1);
+	/* Set the hardware-chosen device address with a timeout */
+	ANDROID_KABI_USE(1, int (*address_device_timeout)(struct usb_hcd *,
+				struct usb_device *udev, unsigned int timeout_ms));
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
