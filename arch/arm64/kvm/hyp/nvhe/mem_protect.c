@@ -184,10 +184,25 @@ static int prepopulate_host_stage2(void)
 		ret = host_stage2_idmap_locked(addr, reg->base - addr, PKVM_HOST_MMIO_PROT, false);
 		if (ret)
 			return ret;
-		ret = host_stage2_idmap_locked(reg->base, reg->size, PKVM_HOST_MEM_PROT, false);
+
+		addr = reg->base;
+		size = reg->size;
+
+		while ((i + 1 < hyp_memblock_nr)) {
+			reg = &hyp_memory[i + 1];
+
+			if (reg->base != (addr + size))
+				break;
+
+			size += reg->size;
+			i++;
+		}
+
+		ret = host_stage2_idmap_locked(addr, size, PKVM_HOST_MEM_PROT, false);
 		if (ret)
 			return ret;
-		addr = reg->base + reg->size;
+
+		addr += size;
 	}
 
 	return host_stage2_idmap_locked(addr, BIT(host_mmu.pgt.ia_bits) - addr, PKVM_HOST_MMIO_PROT,
