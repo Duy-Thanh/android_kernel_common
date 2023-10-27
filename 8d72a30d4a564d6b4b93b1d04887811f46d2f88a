@@ -16,6 +16,24 @@
       "message": "we can\u0027t take patches without any changelog text 😞",
       "revId": "8d72a30d4a564d6b4b93b1d04887811f46d2f88a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26e6d883_891d69c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-10-27T17:16:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8738d55d_aea26812",
+      "revId": "8d72a30d4a564d6b4b93b1d04887811f46d2f88a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
