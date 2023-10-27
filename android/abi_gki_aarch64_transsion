@@ -81,3 +81,4 @@
   __tracepoint_android_vh_unuse_swap_page
   __tracepoint_android_vh_waiting_for_page_migration
   zero_pfn
+  __tracepoint_android_vh_should_end_madvise
