@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "210353c1_0113d895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-30T15:32:06Z",
+      "side": 1,
+      "message": "Please fix the missing traceiter symbol and break this into 2 patches. 1 that defines the hook and a 2nd that adds the symbol to your list. Separating them allows for the the patch to cherry-picked easily to future branches",
+      "revId": "1a8873241d26c0fc2c69f5c02c492f4072d9041e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e06b6fac_dd284fec",
+        "filename": "android/abi_gki_aarch64_transsion",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-30T15:32:06Z",
+      "side": 1,
+      "message": "Needs the corresponding traceiter symbol",
+      "revId": "1a8873241d26c0fc2c69f5c02c492f4072d9041e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
