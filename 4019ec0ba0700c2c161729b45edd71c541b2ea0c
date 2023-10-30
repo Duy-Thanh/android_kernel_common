@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/308451475",
       "revId": "4019ec0ba0700c2c161729b45edd71c541b2ea0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813b5cfc_fb700d98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2001171
+      },
+      "writtenOn": "2023-10-30T18:39:48Z",
+      "side": 1,
+      "message": "Presubmit failed due to ABI check, which should be intended due to the additional symbols. Did I miss any step? Could someone suggest the next steps?",
+      "revId": "4019ec0ba0700c2c161729b45edd71c541b2ea0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
