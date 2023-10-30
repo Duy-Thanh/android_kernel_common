@@ -176,7 +176,7 @@ static void prepare_host_vtcr(void)
 static int prepopulate_host_stage2(void)
 {
 	struct memblock_region *reg;
-	u64 addr = 0;
+	u64 addr = 0, size;
 	int i, ret;
 
 	for (i = 0; i < hyp_memblock_nr; i++) {
@@ -184,10 +184,25 @@ static int prepopulate_host_stage2(void)
 		ret = host_stage2_idmap_locked(addr, reg->base - addr, PKVM_HOST_MMIO_PROT, false);
 		if (ret)
 			return ret;
-		ret = host_stage2_idmap_locked(reg->base, reg->size, PKVM_HOST_MEM_PROT, false);
+
+		addr = reg->base;
+		size = reg->size;
+
+		while ((i + 1) < hyp_memblock_nr) {
+			reg = &hyp_memory[i + 1];
+
+			if (reg->base != (addr + size))
+				break;
+
+			size += reg->size;
+			i++;
+		}
+
+		ret = host_stage2_idmap_locked(addr, size, PKVM_HOST_MEM_PROT, false);
 		if (ret)
 			return ret;
-		addr = reg->base + reg->size;
+
+		addr += size;
 	}
 
 	return host_stage2_idmap_locked(addr, BIT(host_mmu.pgt.ia_bits) - addr, PKVM_HOST_MMIO_PROT,
@@ -479,14 +494,11 @@ struct kvm_mem_range {
 	u64 end;
 };
 
-static struct memblock_region *find_mem_range(phys_addr_t addr, struct kvm_mem_range *range)
+static struct memblock_region *find_memblock(phys_addr_t addr, int *idx)
 {
 	int cur, left = 0, right = hyp_memblock_nr;
 	struct memblock_region *reg;
 	phys_addr_t end;
-
-	range->start = 0;
-	range->end = ULONG_MAX;
 
 	/* The list of memblock regions is sorted, binary search it */
 	while (left < right) {
@@ -495,18 +507,53 @@ static struct memblock_region *find_mem_range(phys_addr_t addr, struct kvm_mem_r
 		end = reg->base + reg->size;
 		if (addr < reg->base) {
 			right = cur;
-			range->end = reg->base;
 		} else if (addr >= end) {
 			left = cur + 1;
-			range->start = end;
 		} else {
-			range->start = reg->base;
-			range->end = end;
+			if (idx)
+				*idx = cur;
 			return reg;
 		}
 	}
 
 	return NULL;
+}
+
+static bool find_mem_range(phys_addr_t addr, struct kvm_mem_range *range)
+{
+	struct memblock_region *reg;
+	int idx, i;
+
+	reg = find_memblock(addr, &idx);
+	if (!reg)
+		return false;
+
+	range->start = reg->base;
+	range->end = reg->base + reg->size;
+
+	i = idx + 1;
+	while (i < hyp_memblock_nr) {
+		reg = &hyp_memory[i];
+
+		if (reg->base != range->end)
+			break;
+
+		range->end += reg->size;
+		i++;
+	}
+
+	i = idx - 1;
+	while (i >= 0) {
+		reg = &hyp_memory[i];
+
+		if (reg->base + reg->size != range->start)
+			break;
+
+		range->start = reg->base;
+		i--;
+	}
+
+	return true;
 }
 
 static enum kvm_pgtable_prot default_host_prot(bool is_memory)
@@ -521,17 +568,14 @@ static enum kvm_pgtable_prot default_hyp_prot(phys_addr_t phys)
 
 bool addr_is_memory(phys_addr_t phys)
 {
-	struct kvm_mem_range range;
-
-	return !!find_mem_range(phys, &range);
+	return !!find_memblock(phys, NULL);
 }
 
 static bool addr_is_allowed_memory(phys_addr_t phys)
 {
 	struct memblock_region *reg;
-	struct kvm_mem_range range;
 
-	reg = find_mem_range(phys, &range);
+	reg = find_memblock(phys, NULL);
 
 	return reg && !(reg->flags & MEMBLOCK_NOMAP);
 }
