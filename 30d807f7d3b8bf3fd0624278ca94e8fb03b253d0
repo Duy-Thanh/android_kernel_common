@@ -262,6 +262,30 @@
       },
       "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abec4033_59a70d49",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1970009
+      },
+      "writtenOn": "2023-10-30T00:12:43Z",
+      "side": 1,
+      "message": "Thank you for your understanding. We would like to start considering contributions for the next project.",
+      "parentUuid": "3a77b1a0_a13e0588",
+      "range": {
+        "startLine": 1872,
+        "startChar": 2,
+        "endLine": 1872,
+        "endChar": 41
+      },
+      "revId": "30d807f7d3b8bf3fd0624278ca94e8fb03b253d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
