@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000057547718",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2808836?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c05a4836_a330d20b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-30T01:21:49Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/02e34fff195d3a5f67cbb553795dc109a37d1dcf) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d02e34fff195d3a5f67cbb553795dc109a37d1dcf)\n\n```\n    - ## mm/damon/ops-common.c ##\n    -@@ mm/damon/ops-common.c: void damon_pmdp_mkold(pmd_t *pmd, struct mm_struct *mm, unsigned long addr)\n    - \t}\n    - \n    - #ifdef CONFIG_MMU_NOTIFIER\n    --\tif (mmu_notifier_clear_young(mm, addr,\n    --\t\t\t\taddr + ((1UL) \u003c\u003c HPAGE_PMD_SHIFT)))\n    -+\tif (mmu_notifier_clear_young(mm, addr, addr + HPAGE_PMD_SIZE))\n    - \t\treferenced \u003d true;\n    - #endif /* CONFIG_MMU_NOTIFIER */\n    - \n    -\n      ## mm/damon/paddr.c ##\n    -@@ mm/damon/paddr.c: static bool __damon_pa_young(struct folio *folio, struct vm_area_struct *vma,\n    +@@ mm/damon/paddr.c: static bool __damon_pa_young(struct page *page, struct vm_area_struct *vma,\n      \t\t\tresult-\u003eaccessed \u003d pmd_young(*pvmw.pmd) ||\n    - \t\t\t\t!folio_test_idle(folio) ||\n    + \t\t\t\t!page_is_idle(page) ||\n      \t\t\t\tmmu_notifier_test_young(vma-\u003evm_mm, addr);\n     -\t\t\tresult-\u003epage_sz \u003d ((1UL) \u003c\u003c HPAGE_PMD_SHIFT);\n     +\t\t\tresult-\u003epage_sz \u003d HPAGE_PMD_SIZE;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 576840079 android-build.ayeaye-python-dispatcher_20231026.04_p0",
+      "revId": "3d1f2fb9248810b242b645dd12f726d33312c64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
