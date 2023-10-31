@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3503f1d_2a9b5194",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2023-10-31T21:35:14Z",
+      "side": 1,
+      "message": "This is more of a Kconfig change IMO.  I\u0027d title it:\n\nKconfig: distinguish rust modules so they can be disabled if modversions is required\n\nor something to the effect.  My initial impression was that this change is going to  \"disable modules if using rust,\" but that\u0027s not what this change is doing. Other kernels devs may share my initial confusion.",
+      "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccdf5dde_13c968d0",
+        "filename": "init/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1906,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2023-10-31T21:35:14Z",
+      "side": 1,
+      "message": "seems fine; not often we have to hack up and add new things to kconfig itself, so IDK what the kconfig maintainer will say when they see this.  If there\u0027s a better way, they might have better feedback.  I don\u0027t have any experience modifying kconfig itself as I\u0027ve never had a reason to; I\u0027m glad you were able to!",
+      "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2025742_a5ee43a6",
+        "filename": "scripts/kconfig/symbol.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2023-10-31T21:35:14Z",
+      "side": 1,
+      "message": "should this be `if (!sym)`? Otherwise `rust_sym` is undefined here; the current usage of it is explicitly UB.  How did -Wuninitialized not catch this?",
+      "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
