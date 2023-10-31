@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cf76ed8_c3dfb9bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-31T14:43:35Z",
+      "side": 1,
+      "message": "no driver should need this symbol, it is not available for any modules, sorry.",
+      "revId": "c218b3f55dfc30332efedd8f5db3ec23bb684c3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
