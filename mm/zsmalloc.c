@@ -1922,6 +1922,7 @@ static void zs_page_putback(struct page *page)
 {
 	struct zs_pool *pool;
 	struct zspage *zspage;
+	struct zs_pool *pool;
 
 	VM_BUG_ON_PAGE(!PageMovable(page), page);
 	VM_BUG_ON_PAGE(!PageIsolated(page), page);
