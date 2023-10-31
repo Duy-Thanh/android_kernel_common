@@ -16,6 +16,40 @@
       "message": "Please submit the needed driver changes upstream first.",
       "revId": "8ee515679e548259f844b38fdaba25ea47731619",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb90c34_f6e873c4",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-31T19:51:14Z",
+      "side": 1,
+      "message": "Please remove these unneeded inclusions. Use forward declarations instead.",
+      "revId": "8ee515679e548259f844b38fdaba25ea47731619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44c8ad8c_96068698",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-31T19:51:14Z",
+      "side": 1,
+      "message": "Please remove these unneeded inclusions. Use forward declarations instead.",
+      "revId": "8ee515679e548259f844b38fdaba25ea47731619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
