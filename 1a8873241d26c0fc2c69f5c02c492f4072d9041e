@@ -33,6 +33,24 @@
       "message": "Needs the corresponding traceiter symbol",
       "revId": "1a8873241d26c0fc2c69f5c02c492f4072d9041e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d8439d_e8e2e491",
+        "filename": "android/abi_gki_aarch64_transsion",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2059001
+      },
+      "writtenOn": "2023-10-31T10:51:18Z",
+      "side": 1,
+      "message": "done, symbol and xml has been update to another patch\nhttps://android-review.googlesource.com/c/kernel/common/+/2812233",
+      "parentUuid": "e06b6fac_dd284fec",
+      "revId": "1a8873241d26c0fc2c69f5c02c492f4072d9041e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
