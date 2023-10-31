@@ -103,7 +103,7 @@ static bool __damon_pa_young(struct page *page, struct vm_area_struct *vma,
 	while (page_vma_mapped_walk(&pvmw)) {
 		addr = pvmw.address;
 		if (pvmw.pte) {
-			result->accessed = pte_young(*pvmw.pte) ||
+			result->accessed = pte_young(ptep_get(pvmw.pte)) ||
 				!page_is_idle(page) ||
 				mmu_notifier_test_young(vma->vm_mm, addr);
 		} else {

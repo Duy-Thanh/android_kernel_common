@@ -431,6 +431,7 @@ static int damon_young_pmd_entry(pmd_t *pmd, unsigned long addr,
 		unsigned long next, struct mm_walk *walk)
 {
 	pte_t *pte;
+	pte_t ptent;
 	spinlock_t *ptl;
 	struct page *page;
 	struct damon_young_walk_private *priv = walk->private;
@@ -470,12 +471,13 @@ regular_page:
 		walk->action = ACTION_AGAIN;
 		return 0;
 	}
-	if (!pte_present(*pte))
+	ptent = ptep_get(pte);
+	if (!pte_present(ptent))
 		goto out;
-	page = damon_get_page(pte_pfn(*pte));
+	page = damon_get_page(pte_pfn(ptent));
 	if (!page)
 		goto out;
-	if (pte_young(*pte) || !page_is_idle(page) ||
+	if (pte_young(ptent) || !page_is_idle(page) ||
 			mmu_notifier_test_young(walk->mm, addr)) {
 		*priv->page_sz = PAGE_SIZE;
 		priv->young = true;
