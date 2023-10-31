@@ -34,6 +34,24 @@
       "parentUuid": "a60e6f3e_66608549",
       "revId": "b6ffb685da00e30b94c3fcab4eb5616c8211861e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26bcd19_aa15f253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-10-31T10:41:57Z",
+      "side": 1,
+      "message": "You can not just \"update\" the abi for breaking changes here, sorry, that is not how a stable API works.  You can not introduce any changes that break the abi.",
+      "parentUuid": "7f1eb9db_7d1b5dc1",
+      "revId": "b6ffb685da00e30b94c3fcab4eb5616c8211861e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
