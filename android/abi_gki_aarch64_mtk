@@ -1913,6 +1913,7 @@
   __sg_page_iter_next
   __sg_page_iter_start
   shmem_file_setup
+  shmem_zero_setup
   si_mem_available
   si_meminfo
   simple_attr_open
