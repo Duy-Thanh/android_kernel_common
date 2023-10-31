@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87b275e7_acb984ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-10-31T21:39:17Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ll reword it.",
+      "parentUuid": "b3503f1d_2a9b5194",
+      "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccdf5dde_13c968d0",
         "filename": "init/Kconfig",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-31T21:35:14Z",
       "side": 1,
       "message": "seems fine; not often we have to hack up and add new things to kconfig itself, so IDK what the kconfig maintainer will say when they see this.  If there\u0027s a better way, they might have better feedback.  I don\u0027t have any experience modifying kconfig itself as I\u0027ve never had a reason to; I\u0027m glad you were able to!",
+      "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6830ff10_bef9bf9f",
+        "filename": "init/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1906,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-10-31T21:39:17Z",
+      "side": 1,
+      "message": "Thanks for the pre-check. I know I\u0027ll need a real review from the owner of kconfig upstream, but wanted to avoid ruffling too many feathers.",
+      "parentUuid": "ccdf5dde_13c968d0",
       "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2023-10-31T21:35:14Z",
       "side": 1,
       "message": "should this be `if (!sym)`? Otherwise `rust_sym` is undefined here; the current usage of it is explicitly UB.  How did -Wuninitialized not catch this?",
+      "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7d063c0_ddc5214c",
+        "filename": "scripts/kconfig/symbol.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-10-31T21:39:17Z",
+      "side": 1,
+      "message": "No, this is rust_sym. `static` variables and globals are explicitly initialized to zeroes by standard. checkpatch.pl will even yell at you if you give an explicit initialization (I had one before the tool asked me to remove it.)",
+      "parentUuid": "a2025742_a5ee43a6",
       "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
