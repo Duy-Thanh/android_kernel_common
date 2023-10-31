@@ -16,6 +16,24 @@
       "message": "breaks the abi 😞",
       "revId": "b6ffb685da00e30b94c3fcab4eb5616c8211861e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1eb9db_7d1b5dc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2023-10-31T10:39:26Z",
+      "side": 1,
+      "message": "I updated in the other commit aosp/2788074.\nDid I miss something?\n\nCommands:\ntools/bazel run //common:kernel_aarch64_abi_update_symbol_list\ntools/bazel build //common:kernel_aarch64_abi\ntools/bazel run //common:kernel_aarch64_abi_update",
+      "parentUuid": "a60e6f3e_66608549",
+      "revId": "b6ffb685da00e30b94c3fcab4eb5616c8211861e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
