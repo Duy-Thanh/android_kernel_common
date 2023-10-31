@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c6a08f_6edee66e",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-31T19:59:29Z",
+      "side": 1,
+      "message": "where is the tracepoint version of this symbol? Please always add them as a pair.",
+      "revId": "a66c3f2d967d5d96be8c41745bfe3dbad58a33c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
