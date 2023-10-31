@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000057757209",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2812842?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "cded42a9_e0872675",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-31T21:38:11Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 578153399 android-build.ayeaye-python-dispatcher_20231031.04_p0",
+      "revId": "e38d7bdc5827c8546e08439e53f08d78161fea1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000057757209",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2812842?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bdf64bb4_eaf8efd3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-31T21:38:11Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/5ae8a35459e77fd9ddb1844baa8c736fc0223847) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d5ae8a35459e77fd9ddb1844baa8c736fc0223847)\n\n```\n      ## drivers/usb/gadget/function/uvc_video.c ##\n     @@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work_struct *work)\n      {\n    @@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work\n      \tunsigned long flags;\n     +\tbool buf_done;\n      \tint ret;\n    --\tbool buf_int;\n    --\t/* video-\u003emax_payload_size is only set when using bulk transfer */\n    --\tbool is_bulk \u003d video-\u003emax_payload_size;\n      \n      \twhile (video-\u003eep-\u003eenabled) {\n    - \t\t/*\n     @@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work_struct *work)\n    - \n    - \t\tif (buf !\u003d NULL) {\n    - \t\t\tvideo-\u003eencode(req, video, buf);\n    --\t\t\t/* Always interrupt for the last request of a video buffer */\n    --\t\t\tbuf_int \u003d buf-\u003estate \u003d\u003d UVC_BUF_STATE_DONE;\n    + \t\t */\n    + \t\tspin_lock_irqsave(\u0026queue-\u003eirqlock, flags);\n    + \t\tbuf \u003d uvcg_queue_head(queue);\n    +-\t\tif (buf \u003d\u003d NULL) {\n    ++\n    ++\t\tif (buf !\u003d NULL) {\n    ++\t\t\tvideo-\u003eencode(req, video, buf);\n     +\t\t\tbuf_done \u003d buf-\u003estate \u003d\u003d UVC_BUF_STATE_DONE;\n    - \t\t} else if (!(queue-\u003eflags \u0026 UVC_QUEUE_DISCONNECTED) \u0026\u0026 !is_bulk) {\n    - \t\t\t/*\n    - \t\t\t * No video buffer available; the queue is still connected and\n    --\t\t\t * we\u0027re traferring over ISOC. Queue a 0 length request to\n    ++\t\t} else if (!(queue-\u003eflags \u0026 UVC_QUEUE_DISCONNECTED) \u0026\u0026 !is_bulk) {\n    ++\t\t\t/*\n    ++\t\t\t * No video buffer available; the queue is still connected and\n     +\t\t\t * we\u0027re transferring over ISOC. Queue a 0 length request to\n    - \t\t\t * prevent missed ISOC transfers.\n    - \t\t\t */\n    - \t\t\treq-\u003elength \u003d 0;\n    --\t\t\tbuf_int \u003d false;\n    ++\t\t\t * prevent missed ISOC transfers.\n    ++\t\t\t */\n    ++\t\t\treq-\u003elength \u003d 0;\n     +\t\t\tbuf_done \u003d false;\n    - \t\t} else {\n    - \t\t\t/*\n    --\t\t\t * Either queue has been disconnected or no video buffer\n    --\t\t\t * available to bulk transfer. Either way, stop processing\n    ++\t\t} else {\n    ++\t\t\t/*\n     +\t\t\t * Either the queue has been disconnected or no video buffer\n     +\t\t\t * available for bulk transfer. Either way, stop processing\n    - \t\t\t * further.\n    - \t\t\t */\n    ++\t\t\t * further.\n    ++\t\t\t */\n      \t\t\tspin_unlock_irqrestore(\u0026queue-\u003eirqlock, flags);\n    -@@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work_struct *work)\n    + \t\t\tbreak;\n      \t\t}\n    +@@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work_struct *work)\n    + \t\tvideo-\u003eencode(req, video, buf);\n      \n      \t\t/*\n     -\t\t * With usb3 we have more requests. This will decrease the\n    @@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work\n     +\t\t *   indicated by video-\u003euvc_num_requests), as a trade-off\n     +\t\t *   between latency and interrupt load.\n      \t\t */\n    --\t\tif (list_empty(\u0026video-\u003ereq_free) || buf_int ||\n    +-\t\tif (list_empty(\u0026video-\u003ereq_free) ||\n    +-\t\t    buf-\u003estate \u003d\u003d UVC_BUF_STATE_DONE ||\n     +\t\tif (list_empty(\u0026video-\u003ereq_free) || buf_done ||\n      \t\t    !(video-\u003ereq_int_count %\n      \t\t       DIV_ROUND_UP(video-\u003euvc_num_requests, 4))) {\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 578153399 android-build.ayeaye-python-dispatcher_20231031.04_p0",
+      "revId": "e38d7bdc5827c8546e08439e53f08d78161fea1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000057757209",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2812842?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f7a64183_8b465d3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-31T21:38:11Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2811166](https://r.android.com/c/2811166) on branch android13-5.10.\n\n```\n      ## drivers/usb/gadget/function/uvc_video.c ##\n     @@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work_struct *work)\n    @@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work\n      \tunsigned long flags;\n     +\tbool buf_done;\n      \tint ret;\n    --\tbool buf_int;\n    --\t/* video-\u003emax_payload_size is only set when using bulk transfer */\n    --\tbool is_bulk \u003d video-\u003emax_payload_size;\n      \n      \twhile (video-\u003eep-\u003eenabled) {\n    - \t\t/*\n     @@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work_struct *work)\n    - \n    - \t\tif (buf !\u003d NULL) {\n    - \t\t\tvideo-\u003eencode(req, video, buf);\n    --\t\t\t/* Always interrupt for the last request of a video buffer */\n    --\t\t\tbuf_int \u003d buf-\u003estate \u003d\u003d UVC_BUF_STATE_DONE;\n    + \t\t */\n    + \t\tspin_lock_irqsave(\u0026queue-\u003eirqlock, flags);\n    + \t\tbuf \u003d uvcg_queue_head(queue);\n    +-\t\tif (buf \u003d\u003d NULL) {\n    ++\n    ++\t\tif (buf !\u003d NULL) {\n    ++\t\t\tvideo-\u003eencode(req, video, buf);\n     +\t\t\tbuf_done \u003d buf-\u003estate \u003d\u003d UVC_BUF_STATE_DONE;\n    - \t\t} else if (!(queue-\u003eflags \u0026 UVC_QUEUE_DISCONNECTED) \u0026\u0026 !is_bulk) {\n    - \t\t\t/*\n    - \t\t\t * No video buffer available; the queue is still connected and\n    --\t\t\t * we\u0027re traferring over ISOC. Queue a 0 length request to\n    ++\t\t} else if (!(queue-\u003eflags \u0026 UVC_QUEUE_DISCONNECTED) \u0026\u0026 !is_bulk) {\n    ++\t\t\t/*\n    ++\t\t\t * No video buffer available; the queue is still connected and\n     +\t\t\t * we\u0027re transferring over ISOC. Queue a 0 length request to\n    - \t\t\t * prevent missed ISOC transfers.\n    - \t\t\t */\n    - \t\t\treq-\u003elength \u003d 0;\n    --\t\t\tbuf_int \u003d false;\n    ++\t\t\t * prevent missed ISOC transfers.\n    ++\t\t\t */\n    ++\t\t\treq-\u003elength \u003d 0;\n     +\t\t\tbuf_done \u003d false;\n    - \t\t} else {\n    - \t\t\t/*\n    --\t\t\t * Either queue has been disconnected or no video buffer\n    --\t\t\t * available to bulk transfer. Either way, stop processing\n    ++\t\t} else {\n    ++\t\t\t/*\n     +\t\t\t * Either the queue has been disconnected or no video buffer\n     +\t\t\t * available for bulk transfer. Either way, stop processing\n    - \t\t\t * further.\n    - \t\t\t */\n    ++\t\t\t * further.\n    ++\t\t\t */\n      \t\t\tspin_unlock_irqrestore(\u0026queue-\u003eirqlock, flags);\n    -@@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work_struct *work)\n    + \t\t\tbreak;\n      \t\t}\n    +@@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work_struct *work)\n    + \t\tvideo-\u003eencode(req, video, buf);\n      \n      \t\t/*\n     -\t\t * With usb3 we have more requests. This will decrease the\n    @@ drivers/usb/gadget/function/uvc_video.c: static void uvcg_video_pump(struct work\n     +\t\t *   indicated by video-\u003euvc_num_requests), as a trade-off\n     +\t\t *   between latency and interrupt load.\n      \t\t */\n    --\t\tif (list_empty(\u0026video-\u003ereq_free) || buf_int ||\n    +-\t\tif (list_empty(\u0026video-\u003ereq_free) ||\n    +-\t\t    buf-\u003estate \u003d\u003d UVC_BUF_STATE_DONE ||\n     +\t\tif (list_empty(\u0026video-\u003ereq_free) || buf_done ||\n      \t\t    !(video-\u003ereq_int_count %\n      \t\t       DIV_ROUND_UP(video-\u003euvc_num_requests, 4))) {\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 578153399 android-build.ayeaye-python-dispatcher_20231031.04_p0",
+      "revId": "e38d7bdc5827c8546e08439e53f08d78161fea1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
