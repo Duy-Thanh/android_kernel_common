@@ -16,6 +16,29 @@
       "message": "Wei or Qais, can you CR+1 this if it is needed.",
       "revId": "eb86f71189ce57a5c76b43edf1fb776add9f40d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92fc2e5e_bbdf970d",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-10-31T12:54:20Z",
+      "side": 1,
+      "message": "I\u0027m not sure about the rules for rvh vs just vh here.",
+      "range": {
+        "startLine": 192,
+        "startChar": 37,
+        "endLine": 192,
+        "endChar": 40
+      },
+      "revId": "eb86f71189ce57a5c76b43edf1fb776add9f40d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
