@@ -104,6 +104,24 @@
       "parentUuid": "a2025742_a5ee43a6",
       "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cec4eb3d_22de0dc8",
+        "filename": "scripts/kconfig/symbol.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2023-10-31T21:40:28Z",
+      "side": 1,
+      "message": "ah, missed the `static`, sorry!",
+      "parentUuid": "c7d063c0_ddc5214c",
+      "revId": "75d3aeec00f3dadce7ccfdd81509571cef3e8819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
