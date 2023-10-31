@@ -459,18 +459,7 @@ void devfreq_monitor_start(struct devfreq *devfreq)
 	if (devfreq->governor->interrupt_driven)
 		return;
 
-	switch (devfreq->profile->timer) {
-	case DEVFREQ_TIMER_DEFERRABLE:
-		INIT_DEFERRABLE_WORK(&devfreq->work, devfreq_monitor);
-		break;
-	case DEVFREQ_TIMER_DELAYED:
-		INIT_DELAYED_WORK(&devfreq->work, devfreq_monitor);
-		break;
-	default:
-		return;
-	}
-
-	if (devfreq->profile->polling_ms)
+	if (devfreq->profile->polling_ms && !delayed_work_pending(&devfreq->work))
 		queue_delayed_work(devfreq_wq, &devfreq->work,
 			msecs_to_jiffies(devfreq->profile->polling_ms));
 }
@@ -791,6 +780,18 @@ struct devfreq *devfreq_add_device(struct device *dev,
 		mutex_unlock(&devfreq->lock);
 		err = -EINVAL;
 		goto err_dev;
+	}
+
+	switch (devfreq->profile->timer) {
+	case DEVFREQ_TIMER_DEFERRABLE:
+		INIT_DEFERRABLE_WORK(&devfreq->work, devfreq_monitor);
+		break;
+	case DEVFREQ_TIMER_DELAYED:
+		INIT_DELAYED_WORK(&devfreq->work, devfreq_monitor);
+		break;
+	default:
+		dev_err(dev, "%s: Target devfreq(%s)'s profile timer has no settings \n", devfreq->governor_name,
+			__func__);
 	}
 
 	if (!devfreq->profile->max_state && !devfreq->profile->freq_table) {
@@ -1746,6 +1747,18 @@ static ssize_t timer_store(struct device *dev, struct device_attribute *attr,
 	mutex_lock(&df->lock);
 	df->profile->timer = timer;
 	mutex_unlock(&df->lock);
+
+	switch (df->profile->timer) {
+	case DEVFREQ_TIMER_DEFERRABLE:
+		INIT_DEFERRABLE_WORK(&df->work, devfreq_monitor);
+		break;
+	case DEVFREQ_TIMER_DELAYED:
+		INIT_DELAYED_WORK(&df->work, devfreq_monitor);
+		break;
+	default:
+		dev_err(dev, "%s: Target devfreq(%s)'s profile timer has no settings \n", df->governor_name,
+			__func__);
+	}
 
 	ret = df->governor->event_handler(df, DEVFREQ_GOV_STOP, NULL);
 	if (ret) {
