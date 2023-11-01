@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abff260f_09a79ef8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-01T14:49:09Z",
+      "side": 1,
+      "message": "This will break android builds, we require this for GKI build images, sorry.",
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
