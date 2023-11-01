@@ -74,6 +74,43 @@ const int mmap_rnd_compat_bits_max = CONFIG_ARCH_MMAP_RND_COMPAT_BITS_MAX;
 int mmap_rnd_compat_bits __read_mostly = CONFIG_ARCH_MMAP_RND_COMPAT_BITS;
 #endif
 
+#define FIXUP_16K_VMA_NAME 		"filemap_fixup_16k"
+
+bool special_fixup_16k_vma(unsigned long start)
+{
+	struct mm_struct *mm = current->mm;
+	struct vm_area_struct *vma = NULL;
+	struct anon_vma_name *anon_name = NULL;
+	bool is_fixup = false;
+	bool need_lock = !rwsem_is_locked(&mm->mmap_lock);
+
+	if (need_lock && mmap_read_lock_killable(mm))
+		goto out;
+
+	vma = find_vma(mm, start);
+	if (!vma)
+		goto out;
+
+	anon_name = anon_vma_name(vma);
+	if (!anon_name)
+		goto out;
+
+	is_fixup = !strcmp(anon_name->name, FIXUP_16K_VMA_NAME);
+
+out:
+	if (need_lock)
+		mmap_read_unlock(mm);
+
+	return is_fixup;
+}
+
+bool offset_in_page_16k(unsigned long p)
+{
+	if (special_fixup_16k_vma(p))
+		return p & ~PAGE_MASK;
+	return  p & ~PAGE_MASK_16K;
+}
+
 static bool ignore_rlimit_data;
 core_param(ignore_rlimit_data, ignore_rlimit_data, bool, 0644);
 
@@ -1564,7 +1601,7 @@ static unsigned long __do_mmap(struct file *file, unsigned long addr,
 								   NULL, NULL);
 
 	if (!IS_ERR_VALUE(anon_vma_addr)) {
-		anon_name = anon_vma_name_alloc("filemap_fixup_16k");
+		anon_name = anon_vma_name_alloc(FIXUP_16K_VMA_NAME);
 		if (!anon_name)
 			return -ENOMEM;
 

@@ -2104,7 +2104,8 @@ extern void pagefault_out_of_memory(void);
 #define offset_in_thp(page, p)	((unsigned long)(p) & (thp_size(page) - 1))
 #define offset_in_folio(folio, p) ((unsigned long)(p) & (folio_size(folio) - 1))
 
-#define offset_in_page_16k(p)	((unsigned long)(p) & ~PAGE_MASK_16K)
+extern bool special_fixup_vma_16k(unsigned long start, unsigned long len);
+extern bool offset_in_page_16k(unsigned long p);
 /*
  * Flags passed to show_mem() and show_free_areas() to suppress output in
  * various contexts.
