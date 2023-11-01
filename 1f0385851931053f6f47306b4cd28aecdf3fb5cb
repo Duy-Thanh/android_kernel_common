@@ -16,6 +16,29 @@
       "message": "This will break android builds, we require this for GKI build images, sorry.",
       "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d65e58f_f54c14ae",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-01T14:50:31Z",
+      "side": 1,
+      "message": "This isn\u0027t going to be ok for Android builds 😞",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 161,
+        "endChar": 25
+      },
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
