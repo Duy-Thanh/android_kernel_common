@@ -419,7 +419,7 @@ static inline void cma_debug_show_areas(struct cma *cma) { }
 #endif
 
 /**
- * cma_alloc() - allocate pages from contiguous area
+ * __cma_alloc() - allocate pages from contiguous area
  * @cma:   Contiguous memory region for which the allocation is performed.
  * @count: Requested number of pages.
  * @align: Requested alignment of pages (in PAGE_SIZE order).
@@ -428,7 +428,7 @@ static inline void cma_debug_show_areas(struct cma *cma) { }
  * This function allocates part of contiguous memory on specific
  * contiguous memory area.
  */
-struct page *cma_alloc(struct cma *cma, unsigned long count,
+static struct page *__cma_alloc(struct cma *cma, unsigned long count,
 		       unsigned int align, gfp_t gfp_mask)
 {
 	unsigned long mask, offset;
@@ -577,6 +577,20 @@ out:
 	}
 
 	return page;
+}
+
+struct page *cma_alloc_ext(struct cma *cma, unsigned long count,
+		       unsigned int align, gfp_t gfp_mask)
+{
+	return __cma_alloc(cma, count, align, gfp_mask);
+}
+EXPORT_SYMBOL_GPL(cma_alloc_ext);
+
+struct page *cma_alloc(struct cma *cma, unsigned long count,
+		       unsigned int align, bool no_warn)
+{
+	return __cma_alloc(cma, count, align, GFP_KERNEL |
+				(no_warn ? __GFP_NOWARN : 0));
 }
 EXPORT_SYMBOL_GPL(cma_alloc);
 
