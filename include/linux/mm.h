@@ -295,6 +295,7 @@ extern unsigned int kobjsize(const void *objp);
 #define VM_GROWSDOWN	0x00000100	/* general info on the segment */
 #define VM_UFFD_MISSING	0x00000200	/* missing pages tracking */
 #define VM_PFNMAP	0x00000400	/* Page-ranges managed without "struct page", just pure PFN */
+#define VM_SPECIAL_16K	0x00000800	/* Page-ranges managed without "struct page", just pure PFN */
 #define VM_UFFD_WP	0x00001000	/* wrprotect pages tracking */
 
 #define VM_LOCKED	0x00002000
@@ -2105,7 +2106,8 @@ extern void pagefault_out_of_memory(void);
 #define offset_in_folio(folio, p) ((unsigned long)(p) & (folio_size(folio) - 1))
 
 extern bool special_fixup_vma_16k(unsigned long start, unsigned long len);
-extern bool offset_in_page_16k(unsigned long p);
+extern bool offset_in_page_16k(unsigned long p, const char *func);
+extern unsigned long align_len_16k(unsigned long addr, unsigned long length);
 /*
  * Flags passed to show_mem() and show_free_areas() to suppress output in
  * various contexts.

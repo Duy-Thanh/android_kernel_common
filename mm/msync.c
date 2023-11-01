@@ -41,14 +41,12 @@ SYSCALL_DEFINE3(msync, unsigned long, start, size_t, len, int, flags)
 
 	if (flags & ~(MS_ASYNC | MS_INVALIDATE | MS_SYNC))
 		goto out;
-	if (offset_in_page_16k(start)) {
-		pr_err("DEBUG: 16K: msync: addr is not page aligned: start = 0x%016lx", start);
+	if (offset_in_page_16k(start, __func__))
 		goto out;
-	}
 	if ((flags & MS_ASYNC) && (flags & MS_SYNC))
 		goto out;
 	error = -ENOMEM;
-	len = (len + ~PAGE_MASK_16K) & PAGE_MASK_16K;
+	len = align_len_16k(start, len);
 	end = start + len;
 	if (end < start)
 		goto out;

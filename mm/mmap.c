@@ -75,12 +75,12 @@ int mmap_rnd_compat_bits __read_mostly = CONFIG_ARCH_MMAP_RND_COMPAT_BITS;
 #endif
 
 #define FIXUP_16K_VMA_NAME 		"filemap_fixup_16k"
+#define LOG_TAG_16K				"DEBUG 16K: "
 
 bool special_fixup_16k_vma(unsigned long start)
 {
 	struct mm_struct *mm = current->mm;
 	struct vm_area_struct *vma = NULL;
-	struct anon_vma_name *anon_name = NULL;
 	bool is_fixup = false;
 	bool need_lock = !rwsem_is_locked(&mm->mmap_lock);
 
@@ -91,12 +91,7 @@ bool special_fixup_16k_vma(unsigned long start)
 	if (!vma)
 		goto out;
 
-	anon_name = anon_vma_name(vma);
-	if (!anon_name)
-		goto out;
-
-	is_fixup = !strcmp(anon_name->name, FIXUP_16K_VMA_NAME);
-
+	is_fixup = vma->vm_flags & VM_SPECIAL_16K;
 out:
 	if (need_lock)
 		mmap_read_unlock(mm);
@@ -104,11 +99,32 @@ out:
 	return is_fixup;
 }
 
-bool offset_in_page_16k(unsigned long p)
+bool offset_in_page_16k(unsigned long p, const char *func)
 {
+	bool in_page = false;
+
 	if (special_fixup_16k_vma(p))
-		return p & ~PAGE_MASK;
-	return  p & ~PAGE_MASK_16K;
+		in_page = p & ~PAGE_MASK;
+	else
+		in_page = p & ~PAGE_MASK_16K;
+
+	if (in_page) {
+		pr_err(LOG_TAG_16K "%s: addr (0x%016lx) is not page-aligned", func, p);
+	}
+
+	return in_page;
+}
+
+unsigned long align_len_16k(unsigned long addr, unsigned long length)
+{
+	unsigned len;
+
+	if (special_fixup_16k_vma(addr))
+		len = PAGE_ALIGN(addr);
+	else
+		len = PAGE_ALIGN_16K(addr);
+
+	return len;
 }
 
 static bool ignore_rlimit_data;
@@ -1467,6 +1483,10 @@ static unsigned long __do_mmap(struct file *file, unsigned long addr,
 	vm_flags = calc_vm_prot_bits(prot, pkey) | calc_vm_flag_bits(flags) |
 			mm->def_flags | VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC;
 
+	if (flags & MAP_SPECIAL_16K) {
+		vm_flags |= VM_SPECIAL_16K;
+	}
+
 	if (flags & MAP_LOCKED)
 		if (!can_do_mlock())
 			return -EPERM;
@@ -1589,7 +1609,6 @@ static unsigned long __do_mmap(struct file *file, unsigned long addr,
 		return addr;
 
 	vma = find_vma(mm, addr);
-
 	BUG_ON(!vma);
 
 	if (vma->vm_ops->fault != filemap_fault)
@@ -1597,7 +1616,7 @@ static unsigned long __do_mmap(struct file *file, unsigned long addr,
 
 	// Before we return fix up 16k file map.
 	anon_vma_addr = do_mmap_unaligned(NULL, anon_vma_addr, anon_vma_len, prot,
-								   MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, 0,
+								   MAP_SPECIAL_16K|MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, 0,
 								   NULL, NULL);
 
 	if (!IS_ERR_VALUE(anon_vma_addr)) {
@@ -3183,10 +3202,11 @@ EXPORT_SYMBOL(vm_munmap);
 SYSCALL_DEFINE2(munmap, unsigned long, addr, size_t, len)
 {
 	addr = untagged_addr(addr);
-	BUG_ON(!PAGE_ALIGNED_16K(addr));
 
-	// Round up the length
-	len = PAGE_ALIGN_16K(len);
+	if (offset_in_page_16k(addr, "munmap"))
+		return -EINVAL;
+
+	len = align_len_16k(addr, len);
 	profile_munmap(addr);
 	return __vm_munmap(addr, len, true);
 }
