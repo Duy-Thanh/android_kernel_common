@@ -63,6 +63,30 @@
       },
       "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d175ceb_145ecec0",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-01T17:39:21Z",
+      "side": 1,
+      "message": "Ah, ok, I think I understand the big `ANDROID` as a prefix threw me off.\n\nYou want this change upstream, it\u0027s not Android specific at all, sorry for the confusion, my fault.",
+      "parentUuid": "791ebd04_e4d180ad",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 161,
+        "endChar": 25
+      },
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
