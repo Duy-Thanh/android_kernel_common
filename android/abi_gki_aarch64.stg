@@ -324633,6 +324633,15 @@ elf_symbol {
   full_name: "__netif_napi_del"
 }
 elf_symbol {
+  id: 0xe6b5218e
+  name: "__netif_rx"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfe0edf2f
+  type_id: 0x9cd33969
+  full_name: "__netif_rx"
+}
+elf_symbol {
   id: 0x6337b091
   name: "__netif_set_xps_queue"
   is_defined: true
@@ -383604,6 +383613,7 @@ interface {
   symbol_id: 0x9d90da6e
   symbol_id: 0x6793e03f
   symbol_id: 0x17112d4d
+  symbol_id: 0xe6b5218e
   symbol_id: 0x6337b091
   symbol_id: 0x4fc5d8fb
   symbol_id: 0x45dc2e90
