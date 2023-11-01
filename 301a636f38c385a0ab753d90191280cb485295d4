@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe1a9868_aa9af901",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-11-01T15:43:49Z",
+      "side": 1,
+      "message": "Richard, could you merge this patch into first patch in this patchset? \n\nSo that, it would have less churn and no KMB broken.",
+      "revId": "301a636f38c385a0ab753d90191280cb485295d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
