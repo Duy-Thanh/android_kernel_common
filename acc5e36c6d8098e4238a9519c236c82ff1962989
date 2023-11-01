@@ -46,6 +46,30 @@
       },
       "revId": "acc5e36c6d8098e4238a9519c236c82ff1962989",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d1ec9bd_6dd1345f",
+        "filename": "android/abi_gki_aarch64_transsion",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-01T16:50:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b5a44911_aa21d460",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 44
+      },
+      "revId": "acc5e36c6d8098e4238a9519c236c82ff1962989",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
