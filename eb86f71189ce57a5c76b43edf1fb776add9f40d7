@@ -39,6 +39,30 @@
       },
       "revId": "eb86f71189ce57a5c76b43edf1fb776add9f40d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9732ccb0_607aa579",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-01T17:11:39Z",
+      "side": 1,
+      "message": "see https://source.android.com/docs/core/architecture/kernel/kernel-code#vendor-hooks",
+      "parentUuid": "92fc2e5e_bbdf970d",
+      "range": {
+        "startLine": 192,
+        "startChar": 37,
+        "endLine": 192,
+        "endChar": 40
+      },
+      "revId": "eb86f71189ce57a5c76b43edf1fb776add9f40d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
