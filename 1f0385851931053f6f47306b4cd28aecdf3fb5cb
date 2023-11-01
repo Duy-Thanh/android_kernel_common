@@ -39,6 +39,30 @@
       },
       "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "791ebd04_e4d180ad",
+        "filename": "kernel/module/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-11-01T14:59:40Z",
+      "side": 1,
+      "message": "This is to allow MODVERSIONS to be *on* with rust support on.\n\nWith this change, RUST support will be enabled, but RUST_MODULES will not be, which is sufficient for the new binder driver to be deployed. This will mean that Rust code can be built-in, but cannot (yet) be modules.\n\nIs there some other reason this doesn\u0027t work, or did you think this was going to turn off MODVERSIONS?",
+      "parentUuid": "8d65e58f_f54c14ae",
+      "range": {
+        "startLine": 161,
+        "startChar": 1,
+        "endLine": 161,
+        "endChar": 25
+      },
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
