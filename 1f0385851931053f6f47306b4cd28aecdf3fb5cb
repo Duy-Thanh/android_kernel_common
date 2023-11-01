@@ -18,6 +18,46 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3330524_87c8a925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-01T17:45:36Z",
+      "side": 1,
+      "message": "This needs to be broken up into smaller parts, mixing the kbuild stuff with the Kconfig stuff is messy.\n\nWhy do you need a special \"Rust\" symbol table anyway?  Especially if your goal here is to disable the use of rust modules, not enable them.  It looks like you are enabling them, are you sure that\u0027s correct?",
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba27245_99be0748",
+        "filename": "init/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 1918,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-01T17:45:36Z",
+      "side": 1,
+      "message": "does not below at the bottom here, goes up above the help.\n\nBut this should not even be here, only put `default y` if the machine will not boot without it.  That\u0027s not the case here so it should be dropped and explicitly opt-in for people.",
+      "range": {
+        "startLine": 1918,
+        "startChar": 1,
+        "endLine": 1918,
+        "endChar": 10
+      },
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d65e58f_f54c14ae",
@@ -84,6 +124,29 @@
         "startChar": 1,
         "endLine": 161,
         "endChar": 25
+      },
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f608f4ae_b1a61647",
+        "filename": "rust/exports.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-01T17:45:36Z",
+      "side": 1,
+      "message": "are you sure an empty-definition like this is going to work?  That\u0027s not how normal EXPORT_SYMBOL() macros work.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 35
       },
       "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
