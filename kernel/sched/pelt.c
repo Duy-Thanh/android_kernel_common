@@ -24,6 +24,7 @@
  *  Author: Vincent Guittot <vincent.guittot@linaro.org>
  */
 
+<<<<<<< HEAD   (829338 ANDROID: GKI: db845c: Update symbols list and ABI on rpmsg_r)
 #include <linux/sched.h>
 #include "sched.h"
 #include "pelt.h"
@@ -64,6 +65,9 @@ static int __init set_pelt(char *str)
 }
 
 early_param("pelt", set_pelt);
+=======
+#include <trace/hooks/sched.h>
+>>>>>>> CHANGE (0d97bc ANDROID: sched: Add vendor hook for update_load_sum)
 
 /*
  * Approximate:
@@ -241,6 +245,8 @@ int ___update_load_sum(u64 now, struct sched_avg *sa,
 		return 0;
 
 	sa->last_update_time += delta << 10;
+
+	trace_android_rvh_update_load_sum(sa, &delta, &sched_pelt_lshift);
 
 	/*
 	 * running is a subset of runnable (weight) so running can't be set if
