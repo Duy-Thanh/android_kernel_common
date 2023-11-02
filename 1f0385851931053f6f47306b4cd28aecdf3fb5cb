@@ -240,6 +240,30 @@
       },
       "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb968f7_d4d035f4",
+        "filename": "rust/exports.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-11-02T20:15:45Z",
+      "side": 1,
+      "message": "There is a special `EXPORT_SYMBOL_RUST_GPL` because the `typeof` used in the EXPORT_SYMBOL won\u0027t work for Rust - the vast majority of these symbols do not have C-compatible types. That\u0027s why there\u0027s an explicit `extern int sym;` instead.\n\nI agree that the EXPORT_SYMBOL_GPL does not resolve down to an empty macro. This macro is restricted to this file (it\u0027s a c file, not a header), and is used with auto-generated exports scraped off the `nm` of the in-kernel Rust code.\n\nIf you think it would be cleaner, I can leave this definition as is and use `CONFIG_RUST_MODULES` over in `rust/Makefile` to generate empty files for the `exports_.*\\.h` files instead.",
+      "parentUuid": "daf3455a_ec675a24",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 35
+      },
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
