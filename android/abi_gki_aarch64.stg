@@ -12284,6 +12284,11 @@ pointer_reference {
   pointee_type_id: 0xb94739b9
 }
 pointer_reference {
+  id: 0x24c218d7
+  kind: POINTER
+  pointee_type_id: 0xb94885c2
+}
+pointer_reference {
   id: 0x24c6c7eb
   kind: POINTER
   pointee_type_id: 0xb95bf932
@@ -40286,6 +40291,11 @@ member {
   id: 0x3d958b01
   type_id: 0x797868f8
   offset: 32
+}
+member {
+  id: 0x3dbb0f88
+  type_id: 0x79c25039
+  offset: 2048
 }
 member {
   id: 0x3dbd80ff
@@ -100847,6 +100857,11 @@ member {
   name: "host_stage2_mod_prot"
   type_id: 0x24cb3ae4
   offset: 896
+}
+member {
+  id: 0xbcc50199
+  name: "host_stage2_mod_prot_range"
+  type_id: 0x24c218d7
 }
 member {
   id: 0xedc7b540
@@ -215153,6 +215168,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x79c25039
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0xbcc50199
+    member_id: 0x27000c61
+    member_id: 0x36752b74
+  }
+}
+struct_union {
   id: 0x79d85976
   kind: UNION
   definition {
@@ -247063,7 +247088,7 @@ struct_union {
     member_id: 0x636da10f
     member_id: 0x6f066e7f
     member_id: 0x3afd0925
-    member_id: 0x2d0812b0
+    member_id: 0x3dbb0f88
     member_id: 0x637607e0
     member_id: 0xac894cc9
     member_id: 0xe0f63db8
@@ -327593,6 +327618,13 @@ function {
   parameter_id: 0x92b210b3
   parameter_id: 0x18bd6530
   parameter_id: 0x310ec01d
+}
+function {
+  id: 0xb94885c2
+  return_type_id: 0x6720d32f
+  parameter_id: 0x92233392
+  parameter_id: 0x1908b154
+  parameter_id: 0x92233392
 }
 function {
   id: 0xb94d0c8b
