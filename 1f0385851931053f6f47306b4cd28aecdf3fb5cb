@@ -216,6 +216,30 @@
       },
       "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf3455a_ec675a24",
+        "filename": "rust/exports.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-02T06:38:40Z",
+      "side": 1,
+      "message": "That is not what I mean, look at how EXPORT_SYMBOL_GPL() works and if it resolves down to an \"empty\" macro like this or not.\n\nAnd also, why do you need a special `EXPORT_SYMBOL_RUST_GPL()` macro at all anyway?  Why not use the exiting ones, and worst case, just use the RUST module namespace instead?",
+      "parentUuid": "61574b24_bf817f12",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 35
+      },
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
