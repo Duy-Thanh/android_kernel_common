@@ -63,6 +63,30 @@
       },
       "revId": "eb86f71189ce57a5c76b43edf1fb776add9f40d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0551e627_be043c08",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-11-02T16:46:15Z",
+      "side": 1,
+      "message": "Thanks. Leaving it as rvh is appropriate then.",
+      "parentUuid": "9732ccb0_607aa579",
+      "range": {
+        "startLine": 192,
+        "startChar": 37,
+        "endLine": 192,
+        "endChar": 40
+      },
+      "revId": "eb86f71189ce57a5c76b43edf1fb776add9f40d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
