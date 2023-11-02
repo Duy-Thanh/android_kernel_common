@@ -52,6 +52,24 @@
       "parentUuid": "28259aae_e7d31c83",
       "revId": "258f1d23d6d3a97f50608d3c15abfc9b462cbb0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd97a149_aca86b6a",
+        "filename": "drivers/android/binder_alloc_selftest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-11-02T17:26:11Z",
+      "side": 1,
+      "message": "Yes, I\u0027ll open up a follow up bug to figure out what is going on. Maybe I just haven\u0027t waited long enough. (b/308967399).",
+      "parentUuid": "09825f6e_22dbf0f9",
+      "revId": "258f1d23d6d3a97f50608d3c15abfc9b462cbb0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
