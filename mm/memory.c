@@ -5798,16 +5798,23 @@ int __access_remote_vm(struct mm_struct *mm, unsigned long addr, void *buf,
 	struct vm_area_struct *vma;
 	void *old_buf = buf;
 	int write = gup_flags & FOLL_WRITE;
+	bool use_vma_lock;
 
-	if (mmap_read_lock_killable(mm))
-		return 0;
+	vma = lock_vma_under_rcu(mm, addr);
+	use_vma_lock = !!vma;
 
-	/* We might need to expand the stack to access it */
-	vma = vma_lookup(mm, addr);
-	if (!vma) {
-		vma = expand_stack(mm, addr);
-		if (!vma)
+retry:
+	if (!use_vma_lock) {
+		if (mmap_read_lock_killable(mm))
 			return 0;
+
+		/* We might need to expand the stack to access it */
+		vma = vma_lookup(mm, addr);
+		if (!vma) {
+			vma = expand_stack(mm, addr);
+			if (!vma)
+				return 0;
+		}
 	}
 
 	/* ignore errors, just check how much was successfully transferred */
@@ -5816,9 +5823,15 @@ int __access_remote_vm(struct mm_struct *mm, unsigned long addr, void *buf,
 		void *maddr;
 		struct page *page = NULL;
 
-		ret = get_user_pages_remote(mm, addr, 1,
-				gup_flags, &page, &vma, NULL);
+		ret = use_vma_lock ?
+			get_user_pages_fast_only_remote(mm, addr, 1, gup_flags, &page) :
+			get_user_pages_remote(mm, addr, 1, gup_flags, &page, &vma, NULL);
 		if (ret <= 0) {
+			if (use_vma_lock) {
+				vma_end_read(vma);
+				use_vma_lock = false;
+				goto retry;
+			}
 #ifndef CONFIG_HAVE_IOREMAP_PROT
 			break;
 #else
@@ -5858,7 +5871,10 @@ int __access_remote_vm(struct mm_struct *mm, unsigned long addr, void *buf,
 		buf += bytes;
 		addr += bytes;
 	}
-	mmap_read_unlock(mm);
+	if (use_vma_lock)
+		vma_end_read(vma);
+	else
+		mmap_read_unlock(mm);
 
 	return buf - old_buf;
 }
