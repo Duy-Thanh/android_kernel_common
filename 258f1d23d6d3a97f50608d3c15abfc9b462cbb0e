@@ -16,6 +16,24 @@
       "message": "have you run this selftest with your changes? I haven\u0027t run it for a long time - would probably be worth trying as a test for your changes.",
       "revId": "258f1d23d6d3a97f50608d3c15abfc9b462cbb0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28259aae_e7d31c83",
+        "filename": "drivers/android/binder_alloc_selftest.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-11-02T16:36:55Z",
+      "side": 1,
+      "message": "Yes and no errors are reported unless I manually reclaim pages (which the test doesn\u0027t expect).\n\nHowever, I\u0027m not entirely sure how the test is supposed to \"end\". It seems to loop forever. Some bug or change in behavior was probably introduced at some point without updating the test.\n\nThe best I can firmly say as of now is that the behavior of the test is the same with or without this patchset.",
+      "parentUuid": "f993b18c_b0ba71be",
+      "revId": "258f1d23d6d3a97f50608d3c15abfc9b462cbb0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
