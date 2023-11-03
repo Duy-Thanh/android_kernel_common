@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf843318_42dbd599",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2006584
+      },
+      "writtenOn": "2023-11-03T06:32:42Z",
+      "side": 1,
+      "message": "hi, sir\n\nwe need to cherry-pick this to android14-6.1-2023-10, so the next android14-6.1-2023-10_r3, it can be used in our product.",
+      "revId": "4cbf15ccff90b87cc7cf9a46efe2d77233a2754b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
