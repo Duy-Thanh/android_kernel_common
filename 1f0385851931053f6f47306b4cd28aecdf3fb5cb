@@ -264,6 +264,30 @@
       },
       "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f22144_448998c5",
+        "filename": "rust/exports.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-03T09:47:15Z",
+      "side": 1,
+      "message": "I think leaving it as-is for now, without your change, is best, that way you have better control over the whole process.\n\nBut hey, let\u0027s see a split up patch to make it more obvious what is happening, and then submit it upstream and we can do proper review in public on the mailing list like all kernel patches should get, instead of buried in a vendor-specific gerrit instance 😊",
+      "parentUuid": "ccb968f7_d4d035f4",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 35
+      },
+      "revId": "1f0385851931053f6f47306b4cd28aecdf3fb5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
