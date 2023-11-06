@@ -39,6 +39,30 @@
       },
       "revId": "c387c4e84ce53050fa03907c9af4c9b0bf1c86d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c16500a1_238afd18",
+        "filename": "tools/testing/android/bin/kselftest.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-06T18:45:32Z",
+      "side": 1,
+      "message": "+1. And the `bazel build $targets` should happen at L48. Then L51 will skip the build part and just do the distribution part",
+      "parentUuid": "d9092bb1_5d736d34",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 44
+      },
+      "revId": "c387c4e84ce53050fa03907c9af4c9b0bf1c86d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
