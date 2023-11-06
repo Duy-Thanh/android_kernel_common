@@ -16,6 +16,24 @@
       "message": "Again, why is this needed now and not usptream already?  What are the plans on getting it submitted upstream properly?",
       "revId": "c3d2f2f3827645a5ba93fd7d36c6c5f7fcde9330",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d292e7_7696e6fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-11-06T14:08:27Z",
+      "side": 1,
+      "message": "Adding to that. android14-6.1 is a branch that releases are cut from. We can\u0027t take new features that did not have the chance to \"soak\" at least in upstream.\n\nAt this point in time, this branch is open for fixes and minor backports.",
+      "parentUuid": "24653faf_5930be6f",
+      "revId": "c3d2f2f3827645a5ba93fd7d36c6c5f7fcde9330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
