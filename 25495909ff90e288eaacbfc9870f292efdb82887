@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f47df98_c9f60ffd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-11-06T08:37:22Z",
+      "side": 1,
+      "message": "hi，tkjos\n\nWe need add vendor hooks to skip the page in isolate_freepages() function, so need to update abi list.\nPlease review it,thanks!",
+      "revId": "25495909ff90e288eaacbfc9870f292efdb82887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
