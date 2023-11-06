@@ -1,5 +1,46 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e82add0_2d4ccdb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-11-06T12:04:32Z",
+      "side": 1,
+      "message": "Would be nice to have this _not_ in the kernel tree, but rather in a tools repository to make it available to many more trees, such as release branches, LTS, etc.\n\n\nIs it possible to express the test launch with\n\n```\n$ bazel test //common:kselftest_x86_64\n```\n\nCc: @elsk@google.com",
+      "revId": "c387c4e84ce53050fa03907c9af4c9b0bf1c86d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9092bb1_5d736d34",
+        "filename": "tools/testing/android/bin/kselftest.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-11-06T12:04:32Z",
+      "side": 1,
+      "message": "This can be built concurrently to the kernel. So, something like this (pseudo):\n\n```\ntargets\u003d//common:kselftest_tests_x86_64\n\nif $BUILD_KERNEL\n  targets +\u003d //common-modules/virtual-device:virtual_device_x86_64_dist\nfi\n\nbazel build $targets\n```\n...",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 44
+      },
+      "revId": "c387c4e84ce53050fa03907c9af4c9b0bf1c86d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
