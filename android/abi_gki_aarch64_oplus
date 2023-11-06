@@ -184,6 +184,7 @@
   __traceiter_task_rename
   __traceiter_android_vh_test_clear_look_around_ref
   __traceiter_android_vh_tune_swappiness
+  __traceiter_android_vh_kswapd_load_stat
   __traceiter_android_vh_alloc_oem_binder_struct
   __traceiter_android_vh_binder_transaction_received
   __traceiter_android_vh_free_oem_binder_struct
@@ -256,6 +257,7 @@
   __tracepoint_android_vh_task_blocks_on_rtmutex
   __tracepoint_android_vh_test_clear_look_around_ref
   __tracepoint_android_vh_tune_swappiness
+  __tracepoint_android_vh_kswapd_load_stat
   __tracepoint_block_bio_queue
   __tracepoint_block_getrq
   __tracepoint_block_rq_complete
