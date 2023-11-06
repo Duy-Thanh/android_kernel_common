@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0ebf6d7_5c04dcff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-06T18:47:38Z",
+      "side": 1,
+      "message": "+1 to adding something like `bazel test //common:kselftest_x86_64` (or with a different name). It can be in a separate rule.\n\nUsing `bazel test` is more `bazellic` than a shell script. Please contact me if you hit an issue when writing bazel tests.",
+      "parentUuid": "7e82add0_2d4ccdb8",
+      "revId": "c387c4e84ce53050fa03907c9af4c9b0bf1c86d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9092bb1_5d736d34",
         "filename": "tools/testing/android/bin/kselftest.sh",
         "patchSetId": 4
