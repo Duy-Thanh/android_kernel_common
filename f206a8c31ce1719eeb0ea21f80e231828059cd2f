@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a27a96e2_6bafdb64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-11-06T07:10:35Z",
+      "side": 1,
+      "message": "Hi,Todd Kjos\n\nDue to our usb and drm driver changes，we need to update symbol list for Amlogic, olease review it. thanks!",
+      "revId": "f206a8c31ce1719eeb0ea21f80e231828059cd2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
