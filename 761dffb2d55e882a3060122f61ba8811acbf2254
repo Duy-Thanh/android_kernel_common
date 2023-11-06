@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb46c9b_72b3a0bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2023-11-06T08:36:16Z",
+      "side": 1,
+      "message": "hi，tkjos\n\nWe need add vendor hooks to skip the page in isolate_freepages() function, \nif this page needs to be treated specially, like as cma. \nPlease review it,thanks!",
+      "revId": "761dffb2d55e882a3060122f61ba8811acbf2254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
