@@ -603,7 +603,75 @@ early_param("kvm-arm.protected_modules", early_pkvm_modules_cfg);
 
 static void free_modprobe_argv(struct subprocess_info *info)
 {
+	unsigned long argc = 0, nr_module_args = (unsigned long)info->data;
+	char **argv = info->argv;
+
+	while (*argv) {
+		argv++;
+		argc++;
+	}
+
+	argv = info->argv + (argc - nr_module_args);
+	while (*argv) {
+		kfree(*argv);
+		argv++;
+	}
+
 	kfree(info->argv);
+}
+
+static int __pkvm_module_nr_args(const char *module_name, const char *str)
+{
+	size_t module_name_len = strlen(module_name);
+	const char *p = str;
+	int nr_args = 0;
+
+	while (p) {
+		p = strstr(p, module_name);
+		if (!p)
+			break;
+
+		p += module_name_len;
+		if (*p == '.')
+			nr_args++;
+
+		/* Fast-forward to the next argument */
+		p = strpbrk(p, " ");
+	}
+
+	return nr_args;
+}
+
+static char *__pkvm_module_arg(const char *module_name, const char **str)
+{
+	size_t module_name_len = strlen(module_name);
+	const char *p1 = *str, *p2 = NULL;
+	char *module_arg = NULL;
+	size_t len;
+
+	while (p1) {
+		p2 = strstr(p1, module_name);
+		if (!p2)
+			return NULL;
+
+		p2 += module_name_len;
+		if (*p2 == '.')
+			break;
+
+		p1 = strpbrk(p2, " ");
+	}
+
+	if (!p1)
+		return NULL;
+
+	p2++; /* skip '.' */
+	len = strcspn(p2, " ") + 1;
+	module_arg = kmalloc_array(len, sizeof(*module_arg), GFP_KERNEL);
+	strscpy(module_arg, p2, len);
+
+	*str = p2 + len;
+
+	return module_arg;
 }
 
 /*
@@ -615,7 +683,9 @@ static void free_modprobe_argv(struct subprocess_info *info)
 static int __init __pkvm_request_early_module(char *module_name,
 					      char *module_path)
 {
-	char *modprobe_path = CONFIG_MODPROBE_PATH;
+	char **argv, *modprobe_path = CONFIG_MODPROBE_PATH;
+	unsigned long nr_module_args, __nr_module_args;
+	const char *cmdline = boot_command_line;
 	struct subprocess_info *info;
 	static char *envp[] = {
 		"HOME=/",
@@ -623,7 +693,6 @@ static int __init __pkvm_request_early_module(char *module_name,
 		"PATH=/sbin:/usr/sbin:/bin:/usr/bin",
 		NULL
 	};
-	char **argv;
 	int idx = 0;
 
 	if (!is_protected_kvm_enabled())
@@ -632,7 +701,9 @@ static int __init __pkvm_request_early_module(char *module_name,
 	if (static_branch_likely(&kvm_protected_mode_initialized))
 		return -EACCES;
 
-	argv = kmalloc(sizeof(char *) * 7, GFP_KERNEL);
+	__nr_module_args = nr_module_args = __pkvm_module_nr_args(module_name,
+								  cmdline);
+	argv = kmalloc_array(7 + nr_module_args, sizeof(*argv), GFP_KERNEL);
 	if (!argv)
 		return -ENOMEM;
 
@@ -644,10 +715,13 @@ static int __init __pkvm_request_early_module(char *module_name,
 	}
 	argv[idx++] = "--";
 	argv[idx++] = module_name;
+	while (__nr_module_args-- > 0)
+		argv[idx++] = __pkvm_module_arg(module_name, &cmdline);
 	argv[idx++] = NULL;
 
 	info = call_usermodehelper_setup(modprobe_path, argv, envp, GFP_KERNEL,
-					 NULL, free_modprobe_argv, NULL);
+					 NULL, free_modprobe_argv,
+					 (void *)nr_module_args);
 	if (!info)
 		goto err;
 
