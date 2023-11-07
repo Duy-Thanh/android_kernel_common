@@ -1335,6 +1335,7 @@
 			earlyprintk=dbgp[debugController#]
 			earlyprintk=pciserial[,force],bus:device.function[,baudrate]
 			earlyprintk=xdbc[xhciController#]
+			earlyprintk=bios
 
 			earlyprintk is useful when the kernel crashes before
 			the normal console is initialized. It is not enabled by
@@ -1364,6 +1365,8 @@
 			The xen option can only be used in Xen domains.
 
 			The sclp output can only be used on s390.
+
+			The bios output can only be used on SuperH.
 
 			The optional "force" to "pciserial" enables use of a
 			PCI device even when its classcode is not of the
@@ -1453,7 +1456,7 @@
 			See comment before function elanfreq_setup() in
 			arch/x86/kernel/cpu/cpufreq/elanfreq.c.
 
-	elfcorehdr=[size[KMG]@]offset[KMG] [IA64,PPC,SH,X86,S390]
+	elfcorehdr=[size[KMG]@]offset[KMG] [PPC,SH,X86,S390]
 			Specifies physical address of start of kernel core
 			image elf header and optionally the size. Generally
 			kexec loader will pass this option to capture kernel.
@@ -1515,12 +1518,6 @@
 
 	floppy=		[HW]
 			See Documentation/admin-guide/blockdev/floppy.rst.
-
-	force_pal_cache_flush
-			[IA-64] Avoid check_sal_cache_flush which may hang on
-			buggy SAL_CACHE_FLUSH implementations. Using this
-			parameter will force ia64_sal_cache_flush to call
-			ia64_pal_cache_flush instead of SAL_CACHE_FLUSH.
 
 	forcepae	[X86-32]
 			Forcefully enable Physical Address Extension (PAE).
