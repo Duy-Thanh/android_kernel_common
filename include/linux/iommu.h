@@ -686,6 +686,14 @@ static inline void *dev_iommu_priv_get(struct device *dev)
 
 static inline void dev_iommu_priv_set(struct device *dev, void *priv)
 {
+	struct dev_iommu *dev_iommu = dev->iommu;
+	if (!dev_iommu) {
+		dev_iommu = kzalloc(sizeof(*dev_iommu), GFP_KERNEL);
+		if (WARN_ON(!dev_iommu))
+			return;
+		mutex_init(&dev_iommu->lock);
+		dev->iommu = dev_iommu;
+	}
 	dev->iommu->priv = priv;
 }
 
