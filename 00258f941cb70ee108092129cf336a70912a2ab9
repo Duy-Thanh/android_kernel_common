@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5b2d203_2bee377d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-07T11:29:48Z",
+      "side": 1,
+      "message": "Please submit upstream first.\n\nAlso, your changelog text got reformatted oddly, you might want to fix that up to be readable.",
+      "revId": "00258f941cb70ee108092129cf336a70912a2ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
