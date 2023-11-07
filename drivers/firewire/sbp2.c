@@ -1517,8 +1517,16 @@ static int sbp2_scsi_slave_configure(struct scsi_device *sdev)
 
 	sdev->use_10_for_rw = 1;
 
+<<<<<<< HEAD   (a5623b ANDROID: GKI: add system_unbound_wq to some symbol lists.)
 	if (sbp2_param_exclusive_login)
 		sdev->manage_start_stop = 1;
+=======
+	if (sbp2_param_exclusive_login) {
+		sdev->manage_system_start_stop = true;
+		sdev->manage_runtime_start_stop = true;
+		sdev->manage_shutdown = true;
+	}
+>>>>>>> BRANCH (4a6183 Linux 6.1.61)
 
 	if (sdev->type == TYPE_ROM)
 		sdev->use_10_for_ms = 1;

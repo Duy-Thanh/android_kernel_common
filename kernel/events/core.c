@@ -13253,6 +13253,11 @@ static int inherit_group(struct perf_event *parent_event,
 		    !perf_get_aux_event(child_ctr, leader))
 			return -EINVAL;
 	}
+<<<<<<< HEAD   (a5623b ANDROID: GKI: add system_unbound_wq to some symbol lists.)
+=======
+	if (leader)
+		leader->group_generation = parent_event->group_generation;
+>>>>>>> BRANCH (4a6183 Linux 6.1.61)
 	return 0;
 }
 
