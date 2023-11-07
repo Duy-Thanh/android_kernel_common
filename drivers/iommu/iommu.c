@@ -312,6 +312,7 @@ static int __iommu_probe_device(struct device *dev, struct list_head *group_list
 {
 	const struct iommu_ops *ops = dev->bus->iommu_ops;
 	struct iommu_device *iommu_dev;
+	struct dev_iommu *dev_iommu;
 	struct iommu_group *group;
 	static DEFINE_MUTEX(iommu_probe_device_lock);
 	int ret;
@@ -326,15 +327,8 @@ static int __iommu_probe_device(struct device *dev, struct list_head *group_list
 	 * but for now enforcing a simple global ordering is fine.
 	 */
 	mutex_lock(&iommu_probe_device_lock);
-	if (!dev_iommu_get(dev)) {
-		ret = -ENOMEM;
-		goto err_unlock;
-	}
-
-	if (!try_module_get(ops->owner)) {
-		ret = -EINVAL;
-		goto err_free;
-	}
+	if (!try_module_get(ops->owner))
+		return -EINVAL;
 
 	iommu_dev = ops->probe_device(dev);
 	if (IS_ERR(iommu_dev)) {
@@ -342,8 +336,14 @@ static int __iommu_probe_device(struct device *dev, struct list_head *group_list
 		goto out_module_put;
 	}
 
-	dev->iommu->iommu_dev = iommu_dev;
-	dev->iommu->max_pasids = dev_iommu_get_max_pasids(dev);
+	dev_iommu = dev_iommu_get(dev);
+	if (WARN_ON(!dev_iommu)) {
+		ret = -ENOMEM;
+		goto out_release;
+	}
+
+	dev_iommu->iommu_dev = iommu_dev;
+	dev_iommu->max_pasids = dev_iommu_get_max_pasids(dev);
 
 	group = iommu_group_get_for_dev(dev);
 	if (IS_ERR(group)) {
@@ -368,11 +368,6 @@ out_release:
 
 out_module_put:
 	module_put(ops->owner);
-
-err_free:
-	dev_iommu_free(dev);
-
-err_unlock:
 	mutex_unlock(&iommu_probe_device_lock);
 
 	return ret;
