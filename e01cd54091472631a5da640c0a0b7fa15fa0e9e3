@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b1ee22_1ce77ec2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-11-07T23:54:19Z",
+      "side": 1,
+      "message": "Please fix the formatting. Should be less than but close to 75 chars per line.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 77
+      },
+      "revId": "e01cd54091472631a5da640c0a0b7fa15fa0e9e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01709e78_69329236",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-11-07T23:54:19Z",
+      "side": 1,
+      "message": "Seems like this vendor hook is used to implement a feature similar to https://android-review.googlesource.com/c/kernel/common/+/2383914. Since that patch was not merged in 5.15 kernels I think it\u0027s reasonable to replace it with this vendor hook.",
+      "revId": "e01cd54091472631a5da640c0a0b7fa15fa0e9e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
