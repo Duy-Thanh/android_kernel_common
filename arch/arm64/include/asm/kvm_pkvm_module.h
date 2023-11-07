@@ -16,6 +16,101 @@ enum pkvm_psci_notification {
 };
 
 #ifdef CONFIG_MODULES
+/**
+ * struct pkvm_module_ops - pKVM modules callbacks
+ * @create_private_mapping:	Map a memory region into the hypervisor private
+ *				range. @haddr returns the virtual address where
+ *				the mapping starts. It can't be unmapped. The
+ *				memory stays accessible from the host.
+ * @alloc_module_va:		Reserve a range of VA space in the hypervisor
+ *				private range. This is handy for modules who
+ *				need to map plugin code in a similar fashion to
+ *				how pKVM maps module code. That space could also
+ *				be used to map memory temporarily, when the
+ *				fixmap granularity (PAGE_SIZE) is too small.
+ * @map_module_page:		Used in conjunction with @alloc_module_va. When
+ *				@is_protected is not set, the page is also
+ *				unmapped from the host stage-2.
+ * @register_serial_driver:	Register a driver for a serial interface. The
+ *				framework only needs a single callback
+ *				@hyp_putc_cb which is expected to print a single
+ *				character.
+ * @puts:			When a serial interface is registered, print a
+ *				string.
+ * @putx64:			When a serial interface is registered, print a
+ *				64-bits number.
+ * @fixmap_map:			Map a page in the per-CPU hypervisor fixmap.
+ *				This intends to be used for temporary mappings
+ *				in the hypervisor VA space.
+ * @fixmap_unmap:		Unmap a page from the hypervisor fixmap.
+ * @linear_map_early:		Map a large portion of memory into the
+ *				hypervisor linear VA space. This intends to be
+ *				used only for module bootstrap and must be
+ *				unmapped before the host is deprivilged.
+ * @linear_unmap_early:		See @linear_map_early.
+ * @flush_dcache_to_poc:	Allow modules to perform CMOs. This is not a
+ *				requirement for any other of the pkvm_module_ops
+ *				callbacks.
+ * @update_hcr_el2:		If a module wants to enable additional traps, on
+ *				top of what pKVM already provides. This is
+ *				persistent across power management cycles.
+ * @update_hfgwtr_el2:		If a module wants to enable fine grain traps.
+ * @register_host_perm_fault_handler:
+ *				@cb is called whenever the host generates an
+ *				abort with the fault status code Permission
+ *				Fault. Returning -EPERM let pKVM handle the
+ *				abort. This is handy when a module changes the
+ *				host stage-2 permissions for certain pages.
+ * @host_stage2_mod_prot:	Apply @prot to the page @pfn. This requires a
+ *				permission fault handler (see
+ *				@register_host_perm_fault_handler). If none is
+ *				registered, pKVM will be unable to handle this
+ *				fault and the CPU will be stuck in an infinite
+ *				loop.
+ * @host_stage2_get_leaf:	Query a page-table entry for the page @phys.
+ * @register_host_smc_handler:	@cb is called whenever the host issues an SMC
+ *				pKVM couldn't handle. If @cb returns false, the
+ *				SMC will be forwarded to EL3.
+ * @register_default_trap_handler:
+ *				@cb is called whenever EL2 traps EL1 and pKVM
+ *				has not handled it. If @cb returns false, the
+ *				hypervisor will panic. This trap handler must be
+ *				registered whenever changes are made to HCR
+ *				(@update_hcr_el2) or HFGWTR
+ *				(@update_hfgwtr_el2).
+ * @register_illegal_abt_notifier:
+ *				@cb is called whenever an illegal abort from the
+ *				host happens. In any case, the abort will be
+ *				injected back into the host.
+ * @register_psci_notifier:	@cb is called whenever a PSCI events occurs.
+ *				This intends to let the module knows about
+ *				suspend/resume.
+ * @register_hyp_panic_notifier:
+ *				@cb is called whenever the hypervisor will
+ *				panic. This is simply a polite notification.
+ *				Nothing from now on can prevent the hypervisor
+ *				to die.
+ * @host_donate_hyp:		The page @pfn is unmapped from the host and
+ *				full control is given to the hypervisor. Only
+ *				@hyp_donate_host can revert the spell.
+ * @hyp_donate_host:		See @host_donate_hyp.
+ * @host_share_hyp:		The page @pfn will be shared between the host
+ *				and the hypervisor. The caller must imediately
+ *				call @pin_shared_mem to protect that page.
+ * @host_unshare_hyp:		The page @pfn will be unshared and unmapped from
+ *				the hypervisor. This can only succeed if
+ *				@unpin_shared_mem has been called.
+ * @pin_shared_mem:		See @host_share_hyp.
+ * @unpin_shared_mem:		See @host_unshare_hyp.
+ * @memcpy:			Same as kernel memcpy.
+ * @memset:			Same as kernel memset.
+ * @hyp_pa:			Convert an hypervisor virtual address into a
+ *				physical one. Does not work with addresses from
+ *				the private range.
+ * @hyp_va:			Convert a physical address into a virtual one.
+ * @kern_hyp_va:		Convert a kernel virtual address into an
+ *				hypervisor virtual one.
+ */
 struct pkvm_module_ops {
 	int (*create_private_mapping)(phys_addr_t phys, size_t size,
 				      enum kvm_pgtable_prot prot,
