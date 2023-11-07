@@ -16,6 +16,29 @@
       "message": "Please submit upstream first.\n\nAlso, your changelog text got reformatted oddly, you might want to fix that up to be readable.",
       "revId": "00258f941cb70ee108092129cf336a70912a2ab9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "145980e6_32b4a249",
+        "filename": "include/linux/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-07T11:30:36Z",
+      "side": 1,
+      "message": "You just rebooted the machine if this triggers, NEVER do that, especially for a memory allocation failure.  How was this tested?",
+      "range": {
+        "startLine": 692,
+        "startChar": 6,
+        "endLine": 692,
+        "endChar": 13
+      },
+      "revId": "00258f941cb70ee108092129cf336a70912a2ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
