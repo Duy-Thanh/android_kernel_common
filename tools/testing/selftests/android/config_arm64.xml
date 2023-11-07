@@ -23,8 +23,42 @@
     </target_preparer>
 
     <test class="com.android.tradefed.testtype.binary.ExecutableTargetTest" >
-        <option name="test-command-line" key="kselftest_binderfs_test" value="/data/selftests/arm64/kselftest_binderfs_test" />
-        <option name="test-command-line" key="kselftest_breakpoints_tests_breakpoint_test" value="/data/selftests/arm64/kselftest_breakpoints_tests_breakpoint_test" />
-        <option name="test-command-line" key="kselftest_breakpoints_tests_step_after_suspend_test" value="/data/selftests/arm64/kselftest_breakpoints_tests_step_after_suspend_test" />
+        <option name="test-command-line" key="kselftest_binderfs_binderfs_test" value="/data/selftests/x86_64/kselftest_binderfs_binderfs_test" />
+        <option name="test-command-line" key="kselftest_breakpoints_breakpoint_test" value="/data/selftests/x86_64/kselftest_breakpoints_breakpoint_test" />
+        <option name="test-command-line" key="kselftest_breakpoints_step_after_suspend_test" value="/data/selftests/x86_64/kselftest_breakpoints_step_after_suspend_test" />
+        <option name="test-command-line" key="kselftest_capabilities_test_execve" value="/data/selftests/x86_64/kselftest_capabilities_test_execve" />
+        <option name="test-command-line" key="kselftest_kcmp_kcmp_test" value="/data/selftests/x86_64/kselftest_kcmp_kcmp_test" />
+        <option name="test-command-line" key="kselftest_net_socket" value="/data/selftests/x86_64/kselftest_net_socket" />
+        <option name="test-command-line" key="kselftest_net_psock_fanout" value="/data/selftests/x86_64/kselftest_net_psock_fanout" />
+        <option name="test-command-line" key="kselftest_net_reuseaddr_conflict" value="/data/selftests/x86_64/kselftest_net_reuseaddr_conflict" />
+        <option name="test-command-line" key="kselftest_ptrace_peeksiginfo" value="/data/selftests/x86_64/kselftest_ptrace_peeksiginfo" />
+        <option name="test-command-line" key="kselftest_rtc_rtctest" value="/data/selftests/x86_64/kselftest_rtc_rtctest" />
+        <option name="test-command-line" key="kselftest_seccomp_seccomp_bpf" value="/data/selftests/x86_64/kselftest_seccomp_seccomp_bpf" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_abi" value="/data/selftests/x86_64/kselftest_vdso_vdso_test_abi" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_clock_getres" value="/data/selftests/x86_64/kselftest_vdso_vdso_test_clock_getres" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_getcpu" value="/data/selftests/x86_64/kselftest_vdso_vdso_test_getcpu" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_gettimeofday" value="/data/selftests/x86_64/kselftest_vdso_vdso_test_gettimeofday" />
+        <option name="test-command-line" key="kselftest_mm_mremap_dontunmap" value="/data/selftests/x86_64/kselftest_mm_mremap_dontunmap" />
+        <option name="test-command-line" key="kselftest_mm_mremap_test" value="/data/selftests/x86_64/kselftest_mm_mremap_test" />
+        <option name="test-command-line" key="kselftest_size_test_get_size" value="/data/selftests/x86_64/kselftest_size_test_get_size" />
+        <option name="test-command-line" key="kselftest_timers_adjtick" value="/data/selftests/x86_64/kselftest_timers_adjtick" />
+        <option name="test-command-line" key="kselftest_timers_alarmtimer_suspend" value="/data/selftests/x86_64/kselftest_timers_alarmtimer_suspend" />
+        <option name="test-command-line" key="kselftest_timers_change_skew" value="/data/selftests/x86_64/kselftest_timers_change_skew" />
+        <option name="test-command-line" key="kselftest_timers_clocksource_switch" value="/data/selftests/x86_64/kselftest_timers_clocksource_switch" />
+        <option name="test-command-line" key="kselftest_timers_freq_step" value="/data/selftests/x86_64/kselftest_timers_freq_step" />
+        <option name="test-command-line" key="kselftest_timers_inconsistency_check" value="/data/selftests/x86_64/kselftest_timers_inconsistency_check" />
+        <option name="test-command-line" key="kselftest_timers_leap_a_day" value="/data/selftests/x86_64/kselftest_timers_leap_a_day" />
+        <option name="test-command-line" key="kselftest_timers_leapcrash" value="/data/selftests/x86_64/kselftest_timers_leapcrash" />
+        <option name="test-command-line" key="kselftest_timers_nanosleep" value="/data/selftests/x86_64/kselftest_timers_nanosleep" />
+        <option name="test-command-line" key="kselftest_timers_nsleep_lat" value="/data/selftests/x86_64/kselftest_timers_nsleep_lat" />
+        <option name="test-command-line" key="kselftest_timers_posix_timers" value="/data/selftests/x86_64/kselftest_timers_posix_timers" />
+        <option name="test-command-line" key="kselftest_timers_set_2038" value="/data/selftests/x86_64/kselftest_timers_set_2038" />
+        <option name="test-command-line" key="kselftest_timers_set_tai" value="/data/selftests/x86_64/kselftest_timers_set_tai" />
+        <option name="test-command-line" key="kselftest_timers_set_timer_lat" value="/data/selftests/x86_64/kselftest_timers_set_timer_lat" />
+        <option name="test-command-line" key="kselftest_timers_set_tz" value="/data/selftests/x86_64/kselftest_timers_set_tz" />
+        <option name="test-command-line" key="kselftest_timers_skew_consistency" value="/data/selftests/x86_64/kselftest_timers_skew_consistency" />
+        <option name="test-command-line" key="kselftest_timers_tests_raw_skew" value="/data/selftests/x86_64/kselftest_timers_tests_raw_skew" />
+        <option name="test-command-line" key="kselftest_timers_threadtest" value="/data/selftests/x86_64/kselftest_timers_threadtest" />
+        <option name="test-command-line" key="kselftest_timers_valid_adjtimex" value="/data/selftests/x86_64/kselftest_timers_valid_adjtimex" />
     </test>
 </configuration>
