@@ -16,6 +16,24 @@
       "message": "This should have been __tracepoint_android_vh_mmc_update_mmc_queue. Also by the looks of it it seems you are manually updating this file. Please use tool to generate the symbol list for your target, eg \"tools/bazel run //path/to/package:{name}_abi_update_symbol_list\"",
       "revId": "2341f76141f1a91414e521a4928c20cf776f6f27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4201595_b6ddde95",
+        "filename": "android/abi_gki_aarch64_mtk",
+        "patchSetId": 6
+      },
+      "lineNbr": 2761,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-11-07T20:49:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd0ed17a_6cc10005",
+      "revId": "2341f76141f1a91414e521a4928c20cf776f6f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
