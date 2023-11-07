@@ -11,8 +11,7 @@ struct pt_regs;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_do_undefinstr,
 	TP_PROTO(struct pt_regs *regs),
-	TP_ARGS(regs),
-	TP_CONDITION(!user_mode(regs)));
+	TP_ARGS(regs), 1);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_do_ptrauth_fault,
 	TP_PROTO(struct pt_regs *regs, unsigned int esr),
