@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b02f1e2_d1213745",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-11-08T23:56:42Z",
+      "side": 1,
+      "message": "Upstream change is much larger. If you are trimming it you can\u0027t call it `UPSTREAM`, instead use `BACKPORT` and list changes you made to the original in the description of the patch in a format [\u003cname\u003e: \u003cdescription of the changes\u003e]",
+      "revId": "9427d0aa10ab04c61401aab87a11871938394e4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
