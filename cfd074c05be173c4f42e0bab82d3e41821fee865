@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "803ee86d_861feb67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-11-08T22:54:41Z",
+      "side": 1,
+      "message": "This SHA is wrong. Should be 78049e94a171837e5a882814ca5bc4f14f265603",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 67
+      },
+      "revId": "cfd074c05be173c4f42e0bab82d3e41821fee865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
