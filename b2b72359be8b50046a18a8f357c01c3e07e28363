@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a89785_d1ceb7c1",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 6525,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-08T09:38:07Z",
+      "side": 1,
+      "message": "use these fields instead of adding your own, IFF this feature is allowed to be backported, that is the correct way to handle the ABI break here.\n\nBut first the feature must be allowed, that\u0027s to be discussed elsewhere.",
+      "range": {
+        "startLine": 6525,
+        "startChar": 1,
+        "endLine": 6525,
+        "endChar": 45
+      },
+      "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
