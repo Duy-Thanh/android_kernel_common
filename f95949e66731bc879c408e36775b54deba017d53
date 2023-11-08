@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8adfceb_b2e497ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-08T09:47:54Z",
+      "side": 1,
+      "message": "This change is obviously not correct, how was it tested?\n\nAgain, work with upstream on this.",
+      "revId": "f95949e66731bc879c408e36775b54deba017d53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e65d52e_b19526cb",
+        "filename": "include/linux/iommu.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-08T09:47:54Z",
+      "side": 1,
+      "message": "you have to handle the memory failure cleanly, not like this.  And are you sure you are able to sleep in this call?",
+      "range": {
+        "startLine": 693,
+        "startChar": 3,
+        "endLine": 693,
+        "endChar": 9
+      },
+      "revId": "f95949e66731bc879c408e36775b54deba017d53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
