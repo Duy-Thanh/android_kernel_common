@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000058517067",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2819679?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "ea51e332_bf881087",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1353,
+                "startChar": 0,
+                "endLine": 1353,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_capabilities_validate_cap_arm64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1356,
+                "startChar": 0,
+                "endLine": 1356,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_futex_futex_requeue_arm64\",\n        \":kselftest_futex_futex_requeue_pi_arm64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1358,
+                "startChar": 0,
+                "endLine": 1360,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_futex_futex_wait_arm64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1361,
+                "startChar": 0,
+                "endLine": 1362,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1363,
+                "startChar": 0,
+                "endLine": 1364,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1366,
+                "startChar": 0,
+                "endLine": 1366,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_net_psock_fanout_arm64\",\n        \":kselftest_net_reuseaddr_conflict_arm64\",\n        \":kselftest_net_reuseport_dualstack_arm64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1367,
+                "startChar": 0,
+                "endLine": 1370,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c0c9e283_b8887b9f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-08T23:53:51Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "5beeb0a843d99193dc2384bdd5c900f8de3f14ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
