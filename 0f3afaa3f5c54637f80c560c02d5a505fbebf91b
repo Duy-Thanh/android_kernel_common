@@ -24,6 +24,26 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000058416778",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2821184?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8076ab89_c940bc3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-08T04:42:16Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 580161988 android-build.ayeaye-python-dispatcher_20231107.04_p0",
+      "revId": "0f3afaa3f5c54637f80c560c02d5a505fbebf91b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000058416778",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2821184?revision\u003d1",
       "fixSuggestions": [
         {
           "fixId": "d2ebe3b9_4e803826",
@@ -52,6 +72,49 @@
         "id": 1757831
       },
       "writtenOn": "2023-11-08T03:41:51Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: John Stultz \u003cjstultz@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 580161988 android-build.ayeaye-python-dispatcher_20231107.04_p0",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 0
+      },
+      "revId": "0f3afaa3f5c54637f80c560c02d5a505fbebf91b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000058416778",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2821184?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "c1c9f59c_069898ae",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 10,
+                "startChar": 0,
+                "endLine": 10,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: John Stultz \u003cjstultz@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "9b54e4be_12056551",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-08T04:42:16Z",
       "side": 1,
       "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: John Stultz \u003cjstultz@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 580161988 android-build.ayeaye-python-dispatcher_20231107.04_p0",
       "range": {
