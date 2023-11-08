@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "731ba891_72e32f4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-08T09:48:49Z",
+      "side": 1,
+      "message": "how can a device probe fail?  Why not fix that issue?\n\nAnd when does it fail, at boot time or triggered by a user somehow?  If by a user, how?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "f95949e66731bc879c408e36775b54deba017d53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8adfceb_b2e497ce",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
