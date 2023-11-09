@@ -51,6 +51,7 @@ struct pkvm_module_ops {
 	phys_addr_t (*hyp_pa)(void *x);
 	void* (*hyp_va)(phys_addr_t phys);
 	unsigned long (*kern_hyp_va)(unsigned long x);
+	int (*register_enter_exit_notifier)(void (*entry)(void), void (*exit)(void));
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
@@ -83,7 +84,6 @@ struct pkvm_module_ops {
 	ANDROID_KABI_RESERVE(29);
 	ANDROID_KABI_RESERVE(30);
 	ANDROID_KABI_RESERVE(31);
-	ANDROID_KABI_RESERVE(32);
 };
 
 int __pkvm_load_el2_module(struct module *this, unsigned long *token);
