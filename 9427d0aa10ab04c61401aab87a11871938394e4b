@@ -16,6 +16,24 @@
       "message": "Upstream change is much larger. If you are trimming it you can\u0027t call it `UPSTREAM`, instead use `BACKPORT` and list changes you made to the original in the description of the patch in a format [\u003cname\u003e: \u003cdescription of the changes\u003e]",
       "revId": "9427d0aa10ab04c61401aab87a11871938394e4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08be4a5d_909c2fb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-11-09T17:11:16Z",
+      "side": 1,
+      "message": "You only changed `UPSTREAM` to `BACKPORT` but did not explain the changes you made to the original patch. Should be something like this:\n\n```\nBACKPORT: mm: ptep_get() conversion\n\nConvert all instances of direct pte_t* dereferencing to instead use\n...\n\nLink: https://lkml.kernel.org/r/20230612151545.3317766-4-ryan.roberts@arm.com\nReported-by: kernel test robot \u003clkp@intel.com\u003e\nLink: https://lore.kernel.org/oe-kbuild-all/202305120142.yXsNEo6H-lkp@intel.com/\n\nSigned-off-by: Ryan Roberts \u003cryan.roberts@arm.com\u003e\nCc: Adrian Hunter \u003cadrian.hunter@intel.com\u003e\nCc: Alexander Potapenko \u003cglider@google.com\u003e\nCc: Alexander Shishkin \u003calexander.shishkin@linux.intel.com\u003e\nCc: Alex Williamson \u003calex.williamson@redhat.com\u003e\nCc: Al Viro \u003cviro@zeniv.linux.org.uk\u003e\nCc: Andrey Konovalov \u003candreyknvl@gmail.com\u003e\nCc: Andrey Ryabinin \u003cryabinin.a.a@gmail.com\u003e\nCc: Christian Brauner \u003cbrauner@kernel.org\u003e\nCc: Christoph Hellwig \u003chch@infradead.org\u003e\nCc: Daniel Vetter \u003cdaniel@ffwll.ch\u003e\nCc: Dave Airlie \u003cairlied@gmail.com\u003e\nCc: Dimitri Sivanich \u003cdimitri.sivanich@hpe.com\u003e\nCc: Dmitry Vyukov \u003cdvyukov@google.com\u003e\nCc: Ian Rogers \u003cirogers@google.com\u003e\nCc: Jason Gunthorpe \u003cjgg@ziepe.ca\u003e\nCc: Jérôme Glisse \u003cjglisse@redhat.com\u003e\nCc: Jiri Olsa \u003cjolsa@kernel.org\u003e\nCc: Johannes Weiner \u003channes@cmpxchg.org\u003e\nCc: Kirill A. Shutemov \u003ckirill.shutemov@linux.intel.com\u003e\nCc: Lorenzo Stoakes \u003clstoakes@gmail.com\u003e\nCc: Mark Rutland \u003cmark.rutland@arm.com\u003e\nCc: Matthew Wilcox \u003cwilly@infradead.org\u003e\nCc: Miaohe Lin \u003clinmiaohe@huawei.com\u003e\nCc: Michal Hocko \u003cmhocko@kernel.org\u003e\nCc: Mike Kravetz \u003cmike.kravetz@oracle.com\u003e\nCc: Mike Rapoport (IBM) \u003crppt@kernel.org\u003e\nCc: Muchun Song \u003cmuchun.song@linux.dev\u003e\nCc: Namhyung Kim \u003cnamhyung@kernel.org\u003e\nCc: Naoya Horiguchi \u003cnaoya.horiguchi@nec.com\u003e\nCc: Oleksandr Tyshchenko \u003coleksandr_tyshchenko@epam.com\u003e\nCc: Pavel Tatashin \u003cpasha.tatashin@soleen.com\u003e\nCc: Roman Gushchin \u003croman.gushchin@linux.dev\u003e\nCc: SeongJae Park \u003csj@kernel.org\u003e\nCc: Shakeel Butt \u003cshakeelb@google.com\u003e\nCc: Uladzislau Rezki (Sony) \u003curezki@gmail.com\u003e\nCc: Vincenzo Frascino \u003cvincenzo.frascino@arm.com\u003e\nCc: Yu Zhao \u003cyuzhao@google.com\u003e\nSigned-off-by: Andrew Morton \u003cakpm@linux-foundation.org\u003e\n\nBug: 300502883\n(cherry picked from commit c33c794828f21217f72ce6fc140e0d34e0d56bff)\n[cuiyangpei: dropped most of the changes unrelated to damon]\nChange-Id: Idcbd9b518b15e84aa86b6f57fbbb5eb1141e036a\nSigned-off-by: cui yangpei \u003ccuiyangpei@xiaomi.com\u003e\n```\n\nI\u0027m also not quite sure why you need this big change for DAMON. It seems unrelated even though it does touch some DAMON code.",
+      "parentUuid": "4b02f1e2_d1213745",
+      "revId": "9427d0aa10ab04c61401aab87a11871938394e4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
