@@ -70,6 +70,30 @@
       },
       "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4f2831e_3d71fd57",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 6525,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-09T23:58:52Z",
+      "side": 1,
+      "message": "The patch is merged in Linus\u0027 tree:\n```\ncommit 5482c0a28b2634e7a7d8ddaca7feac183e74b528\nAuthor: Vinayak Yadawad \u003cvinayak.yadawad@broadcom.com\u003e\nDate:   Fri Sep 22 14:55:51 2023 +0530\n\n    wifi: cfg80211: OWE DH IE handling offload\n    \n    Introduce new feature flags for OWE offload that driver can\n    advertise to indicate kernel/application space to avoid DH IE\n    handling. When this flag is advertised, the driver/device will\n    take care of DH IE inclusion and processing of peer DH IE to\n    generate PMK.\n    \n    Signed-off-by: Vinayak Yadawad \u003cvinayak.yadawad@broadcom.com\u003e\n    Link: https://lore.kernel.org/r/f891cce4b52c939dfc6b71bb2f73e560e8cad287.1695374530.git.vinayak.yadawad@broadcom.com\n    Signed-off-by: Johannes Berg \u003cjohannes.berg@intel.com\u003e\n\n```",
+      "parentUuid": "90b12777_050a7adc",
+      "range": {
+        "startLine": 6525,
+        "startChar": 1,
+        "endLine": 6525,
+        "endChar": 45
+      },
+      "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
