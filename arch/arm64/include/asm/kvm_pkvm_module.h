@@ -93,6 +93,10 @@ enum pkvm_psci_notification {
  * @register_hyp_panic_notifier:
  *				To notify the module of a pending hypervisor
  *				panic. On return from @cb, the panic will occur.
+ * @register_enter_exit_notifier:
+ * 				Low-level notifier for hypervisor early entry
+ * 				and late exit. To be used when no other handler
+ * 				covers the use-case.
  * @host_donate_hyp:		The page @pfn is unmapped from the host and
  *				full control is given to the hypervisor.
  * @hyp_donate_host:		The page @pfn whom control has previously been
@@ -143,6 +147,7 @@ struct pkvm_module_ops {
 	int (*register_illegal_abt_notifier)(void (*cb)(struct user_pt_regs *));
 	int (*register_psci_notifier)(void (*cb)(enum pkvm_psci_notification, struct user_pt_regs *));
 	int (*register_hyp_panic_notifier)(void (*cb)(struct user_pt_regs *));
+	int (*register_enter_exit_notifier)(void (*entry)(void), void (*exit)(void));
 	int (*host_donate_hyp)(u64 pfn, u64 nr_pages);
 	int (*hyp_donate_host)(u64 pfn, u64 nr_pages);
 	int (*host_share_hyp)(u64 pfn);
