@@ -52,6 +52,24 @@
       "parentUuid": "7ded7aa0_69f3b6d0",
       "revId": "ee3ca8d059564967d0a0371e0ee90fcef83a8f69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8092b9b6_dec05d93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1406854
+      },
+      "writtenOn": "2023-11-09T14:01:11Z",
+      "side": 1,
+      "message": "Additional information:  This CL is a part of the open source kernel, is this the upstream you mean?   \n\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next.git/commit/?h\u003dfor-next\u0026id\u003d5482c0a28b2634e7a7d8ddaca7feac183e74b528",
+      "parentUuid": "64eaf423_c139a6cf",
+      "revId": "ee3ca8d059564967d0a0371e0ee90fcef83a8f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
