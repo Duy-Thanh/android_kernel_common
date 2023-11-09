@@ -16,6 +16,42 @@
       "message": "Please submit new features to `android15-6.1` not this branch, as these changes break the ABI.",
       "revId": "ee3ca8d059564967d0a0371e0ee90fcef83a8f69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64eaf423_c139a6cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1406854
+      },
+      "writtenOn": "2023-11-09T13:32:36Z",
+      "side": 1,
+      "message": "Hi Greg, thanks for your comment and I have some questions that need your help.  \n\nRegarding your comment, I need to use these fields instead of adding my own feature enum.  \nAlso, I can only be used the reserved enum if the upstream community accepts this new api,   \n\nIt looks like I have to commit these changes to \"upstream community\" and pick them into ACK (android14-6.1) if they accept? is it the specific branch or I have to fill out some form for this?   \n\nThanks for your help, \nPaul",
+      "parentUuid": "7ded7aa0_69f3b6d0",
+      "revId": "ee3ca8d059564967d0a0371e0ee90fcef83a8f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1caabd53_c15d2bd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1406854
+      },
+      "writtenOn": "2023-11-09T13:32:36Z",
+      "side": 1,
+      "message": "Thanks Greg,",
+      "parentUuid": "7ded7aa0_69f3b6d0",
+      "revId": "ee3ca8d059564967d0a0371e0ee90fcef83a8f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
