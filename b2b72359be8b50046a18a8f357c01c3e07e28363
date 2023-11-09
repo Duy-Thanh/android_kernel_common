@@ -22,6 +22,30 @@
       },
       "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f703f04_e313a17d",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 6525,
+      "author": {
+        "id": 1406854
+      },
+      "writtenOn": "2023-11-09T12:15:39Z",
+      "side": 1,
+      "message": "New patchset use NL80211_EXT_FEATURE_ANDROID_KABI_RESERVED_1 / NL80211_EXT_FEATURE_ANDROID_KABI_RESERVED_2 to add the idx for this change. thanks for your information",
+      "parentUuid": "01a89785_d1ceb7c1",
+      "range": {
+        "startLine": 6525,
+        "startChar": 1,
+        "endLine": 6525,
+        "endChar": 45
+      },
+      "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
