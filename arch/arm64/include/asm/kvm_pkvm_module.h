@@ -97,6 +97,10 @@ enum pkvm_psci_notification {
  * @register_hyp_panic_notifier:
  *				To notify the module of a pending hypervisor
  *				panic. On return from @cb, the panic will occur.
+ * @register_enter_exit_notifier:
+ * 				Low-level notifier for hypervisor early entry
+ * 				and late exit. To be used when no other handler
+ * 				covers the use-case.
  * @host_donate_hyp:		The page @pfn is unmapped from the host and
  *				full control is given to the hypervisor.
  * @hyp_donate_host:		The page @pfn whom control has previously been
@@ -159,8 +163,8 @@ struct pkvm_module_ops {
 	unsigned long (*kern_hyp_va)(unsigned long x);
 
 	ANDROID_KABI_USE(1, int (*host_stage2_mod_prot_range)(u64 pfn, enum kvm_pgtable_prot prot, u64 nr_pages));
+	ANDROID_KABI_USE(2,  int (*register_enter_exit_notifier)(void (*entry)(void), void (*exit)(void)));
 
-	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 	ANDROID_KABI_RESERVE(5);

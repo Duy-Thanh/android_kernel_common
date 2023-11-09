@@ -16619,6 +16619,11 @@ pointer_reference {
   pointee_type_id: 0x9e15f25c
 }
 pointer_reference {
+  id: 0x2d15d59d
+  kind: POINTER
+  pointee_type_id: 0x9e17b0e8
+}
+pointer_reference {
   id: 0x2d161d5c
   kind: POINTER
   pointee_type_id: 0x9e1893ee
@@ -38787,6 +38792,10 @@ member {
   type_id: 0x00bf9506
 }
 member {
+  id: 0x23e7eda8
+  type_id: 0x00b1c6b3
+}
+member {
   id: 0x23eda52b
   type_id: 0x0098e4bc
 }
@@ -40215,6 +40224,11 @@ member {
   id: 0x3c66e6e0
   type_id: 0x7eb5f266
   offset: 1280
+}
+member {
+  id: 0x3c729ebc
+  type_id: 0x7ee433e9
+  offset: 2112
 }
 member {
   id: 0x3c73293a
@@ -161475,6 +161489,11 @@ member {
   offset: 1600
 }
 member {
+  id: 0xa058693a
+  name: "register_enter_exit_notifier"
+  type_id: 0x2d15d59d
+}
+member {
   id: 0xa7bbdea7
   name: "register_host_perm_fault_handler"
   type_id: 0x2f36a854
@@ -208427,6 +208446,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x00b1c6b3
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x637609a2
+  }
+}
+struct_union {
   id: 0x00bf9506
   kind: STRUCT
   definition {
@@ -215509,6 +215536,16 @@ struct_union {
     member_id: 0xa036e912
     member_id: 0x56a7265c
     member_id: 0x24ca61cb
+  }
+}
+struct_union {
+  id: 0x7ee433e9
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0xa058693a
+    member_id: 0x23e7eda8
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -247154,7 +247191,7 @@ struct_union {
     member_id: 0x6f066e7f
     member_id: 0x3afd0925
     member_id: 0x3dbb0f88
-    member_id: 0x637607e0
+    member_id: 0x3c729ebc
     member_id: 0xac894cc9
     member_id: 0xe0f63db8
     member_id: 0x223693d6
@@ -324239,6 +324276,12 @@ function {
   parameter_id: 0x18bd6530
   parameter_id: 0x92233392
   parameter_id: 0x07dcdbe1
+}
+function {
+  id: 0x9e17b0e8
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0eb62dc3
+  parameter_id: 0x0eb62dc3
 }
 function {
   id: 0x9e1893ee

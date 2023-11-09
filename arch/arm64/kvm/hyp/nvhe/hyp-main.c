@@ -36,6 +36,8 @@ void __kvm_hyp_host_forward_smc(struct kvm_cpu_context *host_ctxt);
 
 static bool (*default_host_smc_handler)(struct kvm_cpu_context *host_ctxt);
 static bool (*default_trap_handler)(struct kvm_cpu_context *host_ctxt);
+static void (*hyp_entry_notif_cb)(void);
+static void (*hyp_exit_notif_cb)(void);
 
 int __pkvm_register_host_smc_handler(bool (*cb)(struct kvm_cpu_context *))
 {
@@ -50,6 +52,35 @@ int __pkvm_register_host_smc_handler(bool (*cb)(struct kvm_cpu_context *))
 int __pkvm_register_default_trap_handler(bool (*cb)(struct kvm_cpu_context *))
 {
 	return cmpxchg(&default_trap_handler, NULL, cb) ? -EBUSY : 0;
+}
+
+int __pkvm_register_enter_exit_notifier(void (*entry)(void), void (*exit)(void))
+{
+	static bool registered;
+
+	if (cmpxchg(&registered, false, true))
+		return -EBUSY;
+
+	if (entry)
+		WARN_ON(cmpxchg(&hyp_entry_notif_cb, NULL, entry));
+	if (exit)
+		WARN_ON(cmpxchg(&hyp_exit_notif_cb, NULL, exit));
+
+	return 0;
+}
+
+void __hyp_enter(void)
+{
+	trace_hyp_enter();
+	if (READ_ONCE(hyp_entry_notif_cb))
+		hyp_entry_notif_cb();
+}
+
+void __hyp_exit(void)
+{
+	if (READ_ONCE(hyp_exit_notif_cb))
+		hyp_exit_notif_cb();
+	trace_hyp_exit();
 }
 
 static int pkvm_refill_memcache(struct pkvm_hyp_vcpu *hyp_vcpu)
@@ -1387,9 +1418,9 @@ static void handle_host_smc(struct kvm_cpu_context *host_ctxt)
 	trace_host_smc(func_id, !handled);
 
 	if (!handled) {
-		trace_hyp_exit();
+		__hyp_exit();
 		__kvm_hyp_host_forward_smc(host_ctxt);
-		trace_hyp_enter();
+		__hyp_enter();
 	}
 
 	/* SMC was trapped, move ELR past the current PC. */
@@ -1400,7 +1431,7 @@ void handle_trap(struct kvm_cpu_context *host_ctxt)
 {
 	u64 esr = read_sysreg_el2(SYS_ESR);
 
-	trace_hyp_enter();
+	__hyp_enter();
 
 	switch (ESR_ELx_EC(esr)) {
 	case ESR_ELx_EC_HVC64:
@@ -1421,5 +1452,5 @@ void handle_trap(struct kvm_cpu_context *host_ctxt)
 		BUG_ON(!READ_ONCE(default_trap_handler) || !default_trap_handler(host_ctxt));
 	}
 
-	trace_hyp_exit();
+	__hyp_exit();
 }
