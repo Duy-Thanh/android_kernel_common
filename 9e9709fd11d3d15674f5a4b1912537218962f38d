@@ -34,6 +34,24 @@
       "parentUuid": "1692e74e_dc3767da",
       "revId": "9e9709fd11d3d15674f5a4b1912537218962f38d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed05d469_340e6937",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-11-09T18:18:43Z",
+      "side": 1,
+      "message": "That sounds good. As per b/307805059#comment21, I thought Sebastian was still debugging the issue.",
+      "parentUuid": "24dca7a1_008cdb2b",
+      "revId": "9e9709fd11d3d15674f5a4b1912537218962f38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
