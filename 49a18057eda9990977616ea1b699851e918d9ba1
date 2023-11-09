@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e57778_598a588c",
+        "filename": "drivers/cpuidle/sysfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2023-11-09T05:56:21Z",
+      "side": 1,
+      "message": "tab",
+      "range": {
+        "startLine": 295,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 3
+      },
+      "revId": "49a18057eda9990977616ea1b699851e918d9ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d6142d9_8ab81e88",
+        "filename": "drivers/cpuidle/sysfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2023-11-09T05:56:21Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 2
+      },
+      "revId": "49a18057eda9990977616ea1b699851e918d9ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
