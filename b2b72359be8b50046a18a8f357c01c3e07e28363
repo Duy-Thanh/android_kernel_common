@@ -46,6 +46,30 @@
       },
       "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b12777_050a7adc",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 6525,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-09T13:13:06Z",
+      "side": 1,
+      "message": "Again, this can only be used IF the upstream community accepts this new api, you can not use these fields in any other way.",
+      "parentUuid": "6f703f04_e313a17d",
+      "range": {
+        "startLine": 6525,
+        "startChar": 1,
+        "endLine": 6525,
+        "endChar": 45
+      },
+      "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

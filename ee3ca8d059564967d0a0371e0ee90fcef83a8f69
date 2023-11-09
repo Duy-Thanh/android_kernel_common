@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ded7aa0_69f3b6d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-09T13:13:06Z",
+      "side": 1,
+      "message": "Please submit new features to `android15-6.1` not this branch, as these changes break the ABI.",
+      "revId": "ee3ca8d059564967d0a0371e0ee90fcef83a8f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
