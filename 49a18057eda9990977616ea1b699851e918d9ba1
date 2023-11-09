@@ -79,6 +79,29 @@
       },
       "revId": "49a18057eda9990977616ea1b699851e918d9ba1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49693c90_1313f857",
+        "filename": "drivers/cpuidle/sysfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-09T07:06:38Z",
+      "side": 1,
+      "message": "Where is you documentation for this new user/kernel API you just created?",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 90
+      },
+      "revId": "49a18057eda9990977616ea1b699851e918d9ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
