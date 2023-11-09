@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9969bf_92b0b9be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-09T07:06:06Z",
+      "side": 1,
+      "message": "MUST be accepted on the \"real\" branch first (`android14-5.15`) before it can be even considered on a release branch like this.  Please read the kernel documentation for how to do this properly.",
+      "revId": "49a18057eda9990977616ea1b699851e918d9ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65e57778_598a588c",
