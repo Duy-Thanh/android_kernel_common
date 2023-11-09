@@ -16,6 +16,24 @@
       "message": "Needs testing w/ 4k pages and AVF tests",
       "revId": "26b467a5514d6a5274908d5d4872bb3f37913af2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0886612a_ca6cb0ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-11-09T17:02:06Z",
+      "side": 1,
+      "message": "I verified it with latest aosp master and 6.1 kernel.",
+      "parentUuid": "48281864_3052ae5c",
+      "revId": "26b467a5514d6a5274908d5d4872bb3f37913af2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
