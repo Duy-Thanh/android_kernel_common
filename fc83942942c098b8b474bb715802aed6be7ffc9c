@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1d46736_e6938a23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2023-11-10T13:58:47Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/linux-arm-kernel/0-v1-5f734af130a3+34f-iommu_fwspec_jgg@nvidia.com/ is the upstream RFC patch for the issue. We\u0027re planning to back-port this to 6.1 once it\u0027s in mainline (unless done by upstream)",
+      "revId": "fc83942942c098b8b474bb715802aed6be7ffc9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
