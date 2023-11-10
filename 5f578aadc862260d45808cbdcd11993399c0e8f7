@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cde57ca_977e06a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2023-11-10T07:54:12Z",
+      "side": 1,
+      "message": "Per discussion, we may use eBPF (go/bpf-tracing-tools) funclatency tool to replace this.",
+      "revId": "5f578aadc862260d45808cbdcd11993399c0e8f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
