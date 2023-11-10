@@ -94,6 +94,30 @@
       },
       "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c915e21_a176fe3e",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 6525,
+      "author": {
+        "id": 1406854
+      },
+      "writtenOn": "2023-11-10T01:05:44Z",
+      "side": 1,
+      "message": "Thanks William and Greg, I revise the commit message because this is from open source kernel / Linus\u0027 tree now, and I upload the new patchset about this, could you help to take a look at the new one? thanks for your information!",
+      "parentUuid": "b4f2831e_3d71fd57",
+      "range": {
+        "startLine": 6525,
+        "startChar": 1,
+        "endLine": 6525,
+        "endChar": 45
+      },
+      "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
