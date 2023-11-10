@@ -52,6 +52,24 @@
       "parentUuid": "24dca7a1_008cdb2b",
       "revId": "9e9709fd11d3d15674f5a4b1912537218962f38d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39a1a841_f6a0d533",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-11-10T10:32:46Z",
+      "side": 1,
+      "message": "I will also push the changes for ABL - as the bootloader seems to patch the device tree and it adds some nodes that are unaligned to 16Kb.",
+      "parentUuid": "ed05d469_340e6937",
+      "revId": "9e9709fd11d3d15674f5a4b1912537218962f38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
