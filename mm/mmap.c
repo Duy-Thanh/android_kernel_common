@@ -3039,6 +3039,14 @@ EXPORT_SYMBOL(vm_munmap);
 SYSCALL_DEFINE2(munmap, unsigned long, addr, size_t, len)
 {
 	addr = untagged_addr(addr);
+
+	if (__offset_in_page(addr)) {
+		LOG_16K("munmap unaligned addr 0x%016lx", addr);
+		return -EINVAL;
+	}
+
+	len = __PAGE_ALIGN(len);
+
 	profile_munmap(addr);
 	return __vm_munmap(addr, len, true);
 }
