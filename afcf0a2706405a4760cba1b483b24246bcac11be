@@ -22,6 +22,30 @@
       },
       "revId": "afcf0a2706405a4760cba1b483b24246bcac11be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aa2886c_6e670816",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1406854
+      },
+      "writtenOn": "2023-11-13T16:01:30Z",
+      "side": 1,
+      "message": "Thanke Greg, I upload the new patchset with change-id, bug: and signed-off-by lines.",
+      "parentUuid": "c98f0f38_a71b48e1",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 61
+      },
+      "revId": "afcf0a2706405a4760cba1b483b24246bcac11be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
