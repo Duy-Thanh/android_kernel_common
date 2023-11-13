@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/310543513",
       "revId": "8cf5cf8b918de8faf794b80f93bccd4c073abccf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1821baf_8ff11331",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-11-13T10:10:43Z",
+      "side": 1,
+      "message": "This CL does exist on the base branch (ed84618f8da2) but it came in via a -stable merge and so doesn\u0027t have a Change-Id.",
+      "revId": "8cf5cf8b918de8faf794b80f93bccd4c073abccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
