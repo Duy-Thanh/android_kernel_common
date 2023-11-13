@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c98f0f38_a71b48e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-13T12:38:29Z",
+      "side": 1,
+      "message": "you are missing the upstream signed-off-by lines properly here.\n\nDuplicate exactly what is upstream first, and then add your change-id and bug: line below them.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 61
+      },
+      "revId": "afcf0a2706405a4760cba1b483b24246bcac11be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
