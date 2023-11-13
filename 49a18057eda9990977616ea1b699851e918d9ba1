@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bff6e80_1b509ec6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933580
+      },
+      "writtenOn": "2023-11-13T22:40:22Z",
+      "side": 1,
+      "message": "Thanks, re-uploaded with fixes on the `android14-5.15`: https://android-review.git.corp.google.com/c/kernel/common/+/2828690",
+      "parentUuid": "ba9969bf_92b0b9be",
+      "revId": "49a18057eda9990977616ea1b699851e918d9ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65e57778_598a588c",
