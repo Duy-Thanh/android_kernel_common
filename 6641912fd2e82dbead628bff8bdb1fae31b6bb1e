@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e4f9a23_820397c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068522
+      },
+      "writtenOn": "2023-11-13T19:21:51Z",
+      "side": 1,
+      "message": "Replying to clarify that Xen is not legacy. Xen is widely used today in new embedded and automotive deployments. We have new customers deploying Android on Xen as we speak.",
+      "revId": "6641912fd2e82dbead628bff8bdb1fae31b6bb1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {

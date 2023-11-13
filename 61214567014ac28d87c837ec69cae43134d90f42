@@ -395,6 +395,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1526db39_f51891ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068522
+      },
+      "writtenOn": "2023-11-13T19:21:51Z",
+      "side": 1,
+      "message": "Greg: Xen is not legacy. Xen is widely used today in *new* embedded and automotive deployments. At AMD/Xilinx alone we have several new Xen deployments both ARM and x86, both embedded (5G antennas, industrial grade screwdrivers, robots, etc.) and automotive (IVI, ADAS). The automotive customers typically run Android on top of Xen. My Xen team at AMD/Xilinx has grown from just me to 6 people in the last 3 years and our team\u0027s purpose is only to support Xen for embedded/automotive.",
+      "parentUuid": "0a7271b7_029be945",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
