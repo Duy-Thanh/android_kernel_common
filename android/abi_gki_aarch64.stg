@@ -375723,6 +375723,15 @@ elf_symbol {
   full_name: "nfc_vendor_cmd_reply"
 }
 elf_symbol {
+  id: 0x6aeef72a
+  name: "nla_append"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9bfa08c1
+  type_id: 0x9d41fde0
+  full_name: "nla_append"
+}
+elf_symbol {
   id: 0x915620e9
   name: "nla_find"
   is_defined: true
@@ -381333,6 +381342,8 @@ elf_symbol {
   full_name: "poll_state_synchronize_srcu"
 }
 elf_symbol {
+<<<<<<< PATCH SET (137300 ANDROID: GKI: add allowed list file for xiaomi)
+=======
   id: 0x3e0dea4e
   name: "posix_acl_chmod"
   is_defined: true
@@ -381342,6 +381353,7 @@ elf_symbol {
   full_name: "posix_acl_chmod"
 }
 elf_symbol {
+>>>>>>> BASE      (c622e9 ANDROID: ABI: Update symbol list for Nothing)
   id: 0x7bf7b7b1
   name: "post_page_relinquish_tlb_inv"
   is_defined: true
@@ -407043,6 +407055,7 @@ interface {
   symbol_id: 0x22e68369
   symbol_id: 0xefd6be85
   symbol_id: 0x53dde8dc
+  symbol_id: 0x6aeef72a
   symbol_id: 0x915620e9
   symbol_id: 0x1570bf50
   symbol_id: 0xfb9ee5c5
@@ -407666,7 +407679,10 @@ interface {
   symbol_id: 0x3020cd17
   symbol_id: 0x25c6452e
   symbol_id: 0x324d8228
+<<<<<<< PATCH SET (137300 ANDROID: GKI: add allowed list file for xiaomi)
+=======
   symbol_id: 0x3e0dea4e
+>>>>>>> BASE      (c622e9 ANDROID: ABI: Update symbol list for Nothing)
   symbol_id: 0x7bf7b7b1
   symbol_id: 0xd612789c
   symbol_id: 0x561323f1
