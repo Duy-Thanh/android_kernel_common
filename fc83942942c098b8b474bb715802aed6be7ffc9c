@@ -16,6 +16,23 @@
       "message": "https://lore.kernel.org/linux-arm-kernel/0-v1-5f734af130a3+34f-iommu_fwspec_jgg@nvidia.com/ is the upstream RFC patch for the issue. We\u0027re planning to back-port this to 6.1 once it\u0027s in mainline (unless done by upstream)",
       "revId": "fc83942942c098b8b474bb715802aed6be7ffc9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02bfff73_31ead20e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-13T12:31:09Z",
+      "side": 1,
+      "message": "This patch, as is, is obviously very broken and can not be taken at all.\n\nPlease work with the upstream community do resolve this properly, and then we can take a backport of their fix at that point in time.  But not this change at all, sorry, this will break everyone\u0027s devices and I do not know how it has even been successfully tested.",
+      "revId": "fc83942942c098b8b474bb715802aed6be7ffc9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
