@@ -413,6 +413,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fea32164_5cd3c321",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-13T19:55:58Z",
+      "side": 1,
+      "message": "We have had no requests for Xen by actual OEMs who plan to ship an Android product that require it. Until there is a partner request, Xen builds of ACK kernels can be done by anyone who wants to do it, but there is no need for an officially signed GKI with Xen (no need to add it to gki_defconfig). If there is something about an ACK kernel that breaks your local Xen-enabled build, we would want to fix that.\n\nIf you want Xen enabled in certified GKI, then please request it in a buganizer issue that provides a product roadmap for deployment of a Xen-based GKI kernel.",
+      "parentUuid": "1526db39_f51891ab",
+      "revId": "61214567014ac28d87c837ec69cae43134d90f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96838a61_d322ead6",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
