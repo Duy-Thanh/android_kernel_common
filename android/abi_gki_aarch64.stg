@@ -41076,15 +41076,15 @@ member {
   offset: 4160
 }
 member {
+  id: 0x5e4e4c08
+  name: "__reserved"
+  type_id: 0x3e3c1b86
+  offset: 40
+}
+member {
   id: 0x5e9651c5
   name: "__reserved"
   type_id: 0xe62ebf07
-  offset: 32
-}
-member {
-  id: 0x5ed0cb87
-  name: "__reserved"
-  type_id: 0xa0b4fda8
   offset: 32
 }
 member {
@@ -60735,6 +60735,18 @@ member {
   name: "chunksize"
   type_id: 0x4585663f
   offset: 416
+}
+member {
+  id: 0xb757dfb6
+  name: "ci_data_unit_bits"
+  type_id: 0x295c7202
+  offset: 144
+}
+member {
+  id: 0x059182f5
+  name: "ci_data_units_per_block_bits"
+  type_id: 0x295c7202
+  offset: 152
 }
 member {
   id: 0x5173269c
@@ -118171,6 +118183,12 @@ member {
   name: "log"
   type_id: 0x97f9278b
   offset: 896
+}
+member {
+  id: 0x87fb0c15
+  name: "log2_data_unit_size"
+  type_id: 0xb3e7bac9
+  offset: 32
 }
 member {
   id: 0xa0fdc6e2
@@ -229543,6 +229561,8 @@ struct_union {
     member_id: 0x0534711c
     member_id: 0x81f8c824
     member_id: 0x796f533e
+    member_id: 0xb757dfb6
+    member_id: 0x059182f5
     member_id: 0x5e6a6d58
     member_id: 0x4025e474
     member_id: 0xee6c5106
@@ -229684,7 +229704,8 @@ struct_union {
     member_id: 0x4bfa9ecc
     member_id: 0x3ff8b433
     member_id: 0x2ddb6585
-    member_id: 0x5ed0cb87
+    member_id: 0x87fb0c15
+    member_id: 0x5e4e4c08
     member_id: 0xcf7375db
   }
 }
