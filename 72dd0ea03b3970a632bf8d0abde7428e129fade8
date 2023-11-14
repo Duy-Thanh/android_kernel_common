@@ -86,6 +86,93 @@
       "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "72dd0ea03b3970a632bf8d0abde7428e129fade8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059026227",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2819679?revision\u003d5",
+      "fixSuggestions": [
+        {
+          "fixId": "719aa7d4_e23ee1da",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1461,
+                "startChar": 0,
+                "endLine": 1462,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1464,
+                "startChar": 0,
+                "endLine": 1466,
+                "endChar": 0
+              },
+              "replacement": "        \"-D_GNU_SOURCE\",\n    ],\n    visibility \u003d [\"//visibility:private\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1477,
+                "startChar": 0,
+                "endLine": 1477,
+                "endChar": 0
+              },
+              "replacement": "    copts \u003d [\n        \"-D_GNU_SOURCE\",\n    ],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1481,
+                "startChar": 0,
+                "endLine": 1484,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1497,
+                "startChar": 0,
+                "endLine": 1497,
+                "endChar": 0
+              },
+              "replacement": "    copts \u003d [\n        \"-D_GNU_SOURCE\",\n    ],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1500,
+                "startChar": 0,
+                "endLine": 1503,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "a99af83e_aaebe87e",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-14T18:50:06Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "72dd0ea03b3970a632bf8d0abde7428e129fade8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
