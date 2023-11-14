@@ -3750,4 +3750,11 @@ madvise_set_anon_name(struct mm_struct *mm, unsigned long start,
 }
 #endif
 
+/* mm/vmsacn.c
+ * shrink_slab - shrink slab caches
+ */
+unsigned long shrink_slab(gfp_t gfp_mask, int nid,
+                          struct mem_cgroup *memcg,
+                          int priority);
+
 #endif /* _LINUX_MM_H */

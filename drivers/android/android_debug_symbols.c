@@ -46,6 +46,7 @@ static const struct ads_entry ads_entries[ADS_END] = {
 	ADS_ENTRY(ADS_TOTAL_CMA, &totalcma_pages),
 	ADS_ENTRY(ADS_SLAB_CACHES, &slab_caches),
 	ADS_ENTRY(ADS_SLAB_MUTEX, &slab_mutex),
+	ADS_ENTRY(ADS_SHRINK_SLAB, shrink_slab),
 };
 
 /*

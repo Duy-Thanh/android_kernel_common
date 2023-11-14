@@ -18,6 +18,7 @@ enum android_debug_symbol {
 	ADS_TOTAL_CMA,
 	ADS_SLAB_CACHES,
 	ADS_SLAB_MUTEX,
+	ADS_SHRINK_SLAB,
 	ADS_END
 };
 
