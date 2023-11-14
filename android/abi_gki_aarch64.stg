@@ -2679,6 +2679,11 @@ pointer_reference {
   pointee_type_id: 0x0258f96e
 }
 pointer_reference {
+  id: 0x0a126667
+  kind: POINTER
+  pointee_type_id: 0x02097f03
+}
+pointer_reference {
   id: 0x0a134144
   kind: POINTER
   pointee_type_id: 0x020de38d
@@ -302466,6 +302471,10 @@ function {
   return_type_id: 0x24e24923
 }
 function {
+  id: 0x7e9e1bfa
+  return_type_id: 0x0d5f1839
+}
+function {
   id: 0x7eb670a7
   return_type_id: 0x097315c2
 }
@@ -302800,6 +302809,13 @@ function {
   id: 0x8448d7e4
   return_type_id: 0x6720d32f
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x84621ae4
+  return_type_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x0a126667
+  parameter_id: 0x0a126667
 }
 function {
   id: 0x84710953
@@ -328737,6 +328753,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0xf1d30ddc
+  return_type_id: 0x26e55184
+  parameter_id: 0x347303b4
+  parameter_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x351da44b
+}
+function {
   id: 0xf1d7e113
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x3dcee85d
@@ -348258,6 +348282,15 @@ elf_symbol {
   crc: 0x5e95b1cd
   type_id: 0x9d80e32f
   full_name: "current_umask"
+}
+elf_symbol {
+  id: 0xedff0bea
+  name: "current_work"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd75ee543
+  type_id: 0x7e9e1bfa
+  full_name: "current_work"
 }
 elf_symbol {
   id: 0x171eca8a
@@ -382410,6 +382443,15 @@ elf_symbol {
   full_name: "si_swapinfo"
 }
 elf_symbol {
+  id: 0x3878f32b
+  name: "sigprocmask"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6a5fa363
+  type_id: 0x84621ae4
+  full_name: "sigprocmask"
+}
+elf_symbol {
   id: 0xfc18945f
   name: "simple_attr_open"
   is_defined: true
@@ -387343,6 +387385,15 @@ elf_symbol {
   crc: 0xaaba57f7
   type_id: 0x4552a7f2
   full_name: "thermal_of_cooling_device_register"
+}
+elf_symbol {
+  id: 0xab314de1
+  name: "thermal_of_zone_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x21c89698
+  type_id: 0xf1d30ddc
+  full_name: "thermal_of_zone_register"
 }
 elf_symbol {
   id: 0x4da66281
@@ -398426,6 +398477,7 @@ interface {
   symbol_id: 0x823aeba5
   symbol_id: 0xde96cb2f
   symbol_id: 0x4c090f07
+  symbol_id: 0xedff0bea
   symbol_id: 0x171eca8a
   symbol_id: 0x82537a82
   symbol_id: 0x79187969
@@ -402218,6 +402270,7 @@ interface {
   symbol_id: 0xaba9754d
   symbol_id: 0x6a9fad39
   symbol_id: 0x99c66454
+  symbol_id: 0x3878f32b
   symbol_id: 0xfc18945f
   symbol_id: 0xcbc81720
   symbol_id: 0xda8bd5f1
@@ -402767,6 +402820,7 @@ interface {
   symbol_id: 0xf4017fdd
   symbol_id: 0x2d1f2cdd
   symbol_id: 0xdfc3c1f5
+  symbol_id: 0xab314de1
   symbol_id: 0x4da66281
   symbol_id: 0x8c0c76a2
   symbol_id: 0x91df6de8
