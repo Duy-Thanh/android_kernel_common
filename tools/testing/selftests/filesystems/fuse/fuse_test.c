@@ -2079,6 +2079,41 @@ out:
 	return result;
 }
 
+static int bpf_test_readahead(const char *mount_dir)
+{
+	const char *file_name = "file";
+
+	int result = TEST_FAILURE;
+	int file_fd = -1;
+	int src_fd = -1;
+	int fuse_dev = -1;
+
+	TEST(file_fd = s_creat(s_path(s(ft_src), s(file_name)), 0777),
+	     file_fd != -1);
+	TESTSYSCALL(fallocate(file_fd, 0, 0, 4096));
+	TESTSYSCALL(close(file_fd));
+	file_fd = -1;
+
+	TEST(src_fd = open(ft_src, O_DIRECTORY | O_RDONLY | O_CLOEXEC),
+	     src_fd != -1);
+	TEST(fuse_dev = open("/dev/fuse", O_RDWR | O_CLOEXEC), fuse_dev != -1);
+	TESTEQUAL(mount_fuse(mount_dir, -1, src_fd, &fuse_dev), 0);
+
+	TEST(file_fd = s_open(s_path(s(mount_dir), s(file_name)), O_RDONLY),
+	     file_fd != -1);
+	TESTSYSCALL(posix_fadvise(file_fd, 0, 4096, POSIX_FADV_WILLNEED));
+	usleep(1000);
+	TESTSYSCALL(close(file_fd));
+	file_fd = -1;
+	result = TEST_SUCCESS;
+out:
+	umount(mount_dir);
+	close(fuse_dev);
+	close(src_fd);
+	close(file_fd);
+	return result;
+}
+
 /**
  * Test that fuse passthrough correctly traverses a mount point on the lower fs
  */
@@ -2120,7 +2155,6 @@ out:
 	close(src_fd);
 	s_umount(s_path(s(ft_src), s(bind_dst)));
 	close(fd);
-	return result;
 }
 
 static void parse_range(const char *ranges, bool *run_test, size_t tests)
@@ -2253,6 +2287,7 @@ int main(int argc, char *argv[])
 		MAKE_TEST(bpf_test_create_and_remove_bpf),
 		MAKE_TEST(bpf_test_mkdir_and_remove_bpf),
 		MAKE_TEST(bpf_test_follow_mounts),
+		MAKE_TEST(bpf_test_readahead),
 	};
 #undef MAKE_TEST
 
