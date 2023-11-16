@@ -7392,6 +7392,7 @@ unsigned long sched_cpu_util(int cpu, unsigned long max)
 	return effective_cpu_util(cpu, cpu_util_cfs(cpu_rq(cpu)), max,
 				  ENERGY_UTIL, NULL);
 }
+EXPORT_SYMBOL_GPL(sched_cpu_util);
 #endif /* CONFIG_SMP */
 
 /**

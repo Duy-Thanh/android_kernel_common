@@ -226,6 +226,10 @@
   cpuhp_tasks_frozen
   cpu_hwcap_keys
   cpu_hwcaps
+  cpuidle_driver_state_disabled
+  cpuidle_get_driver
+  cpuidle_governor_latency_req
+  cpuidle_register_governor
   cpu_latency_qos_add_request
   cpu_latency_qos_remove_request
   cpu_latency_qos_update_request
@@ -1745,6 +1749,7 @@
   rtnl_unlock
   runqueues
   sched_clock
+  sched_cpu_util
   sched_feat_keys
   sched_setattr_nocheck
   sched_set_fifo
@@ -2062,6 +2067,9 @@
   thermal_zone_of_sensor_unregister
   thread_group_cputime_adjusted
   tick_nohz_get_idle_calls_cpu
+  tick_nohz_get_sleep_length
+  tick_nohz_idle_got_tick
+  tick_nohz_tick_stopped
   time64_to_tm
   topology_set_thermal_pressure
   _totalram_pages

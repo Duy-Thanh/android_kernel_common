@@ -616,11 +616,16 @@ static int teo_enable_device(struct cpuidle_driver *drv,
 	unsigned long max_capacity = arch_scale_cpu_capacity(dev->cpu);
 	int i;
 
+       
 	memset(cpu_data, 0, sizeof(*cpu_data));
 	cpu_data->util_threshold = max_capacity >> UTIL_THRESHOLD_SHIFT;
 
 	for (i = 0; i < NR_RECENT; i++)
 		cpu_data->recent_idx[i] = -1;
+
+        pr_err("teo cpu %d residency C1 %d C2 %d\n", dev->cpu, drv->states[0].target_residency_ns, drv->states[1].target_residency_ns);
+        pr_err("teo cpu %d max cap %d util_threshold %lu\n", dev->cpu, max_capacity,
+               cpu_data->util_threshold);
 
 	return 0;
 }

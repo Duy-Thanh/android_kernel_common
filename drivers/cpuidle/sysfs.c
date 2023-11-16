@@ -84,7 +84,10 @@ static ssize_t store_current_governor(struct device *dev,
 	ret = sscanf(buf, "%" __stringify(CPUIDLE_NAME_LEN) "s", gov_name);
 	if (ret != 1)
 		return -EINVAL;
-
+        if (!strncmp("teo",gov_name,CPUIDLE_NAME_LEN))
+                return -EINVAL;
+        if (!strncmp("teo_start",gov_name,CPUIDLE_NAME_LEN))
+                strcpy(gov_name,"teo");
 	mutex_lock(&cpuidle_lock);
 	ret = -EINVAL;
 	list_for_each_entry(gov, &cpuidle_governors, governor_list) {

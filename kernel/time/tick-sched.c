@@ -592,6 +592,7 @@ bool tick_nohz_tick_stopped(void)
 
 	return ts->tick_stopped;
 }
+EXPORT_SYMBOL_GPL(tick_nohz_tick_stopped);
 
 bool tick_nohz_tick_stopped_cpu(int cpu)
 {
@@ -1149,6 +1150,7 @@ bool tick_nohz_idle_got_tick(void)
 	}
 	return false;
 }
+EXPORT_SYMBOL_GPL(tick_nohz_idle_got_tick);
 
 /**
  * tick_nohz_get_next_hrtimer - return the next expiration time for the hrtimer
