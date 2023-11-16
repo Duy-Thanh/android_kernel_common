@@ -33,6 +33,57 @@
       "message": "This patch, as is, is obviously very broken and can not be taken at all.\n\nPlease work with the upstream community do resolve this properly, and then we can take a backport of their fix at that point in time.  But not this change at all, sorry, this will break everyone\u0027s devices and I do not know how it has even been successfully tested.",
       "revId": "fc83942942c098b8b474bb715802aed6be7ffc9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3114a840_fa2259be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-16T19:40:46Z",
+      "side": 1,
+      "message": "Can this be implemented via vendor hooks? Some suggestions in comments.",
+      "revId": "fc83942942c098b8b474bb715802aed6be7ffc9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a842ce4_f0c161fe",
+        "filename": "drivers/iommu/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-16T19:40:46Z",
+      "side": 1,
+      "message": "You could do this with a vendor hook that implements the changes between line 330 and line 346:\n```\nret \u003d 0;\niommu_dev \u003d NULL;\ntrace_android_iommu_probe_fix(\u0026ret, ops, \u0026iommu_dev, \u0026dev_iommu);\nif (ret)\n  goto err_unlock;\n\nif (!iommu_dev) {\n  // existing code from here to line 344\n}\n```",
+      "revId": "fc83942942c098b8b474bb715802aed6be7ffc9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3938b2_62770bee",
+        "filename": "include/linux/iommu.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-16T19:40:46Z",
+      "side": 1,
+      "message": "This could all be implemented in a vendor hook.",
+      "revId": "fc83942942c098b8b474bb715802aed6be7ffc9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
