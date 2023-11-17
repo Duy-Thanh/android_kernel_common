@@ -87,6 +87,24 @@
       "parentUuid": "e3b843a4_26bf085c",
       "revId": "a455f2920b1184f4f0433f73df68d5f9b0eae9fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d4cea97_247dc5dc",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-11-17T00:26:08Z",
+      "side": 1,
+      "message": "Yes you\u0027re right. But we do it in stages, first co-exist with android15 not depending on Android.bp here.",
+      "parentUuid": "94263344_cd640b81",
+      "revId": "a455f2920b1184f4f0433f73df68d5f9b0eae9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
