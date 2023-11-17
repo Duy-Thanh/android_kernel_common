@@ -270087,8 +270087,12 @@ enumeration {
       value: 9
     }
     enumerator {
-      name: "ADS_END"
+      name: "ADS_SHRINK_SLAB"
       value: 10
+    }
+    enumerator {
+      name: "ADS_END"
+      value: 11
     }
   }
 }
@@ -342661,7 +342665,7 @@ elf_symbol {
   name: "android_debug_symbol"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1d505a43
+  crc: 0xe2d88679
   namespace: "MINIDUMP"
   type_id: 0x4a818b9c
   full_name: "android_debug_symbol"
