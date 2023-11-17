@@ -105,6 +105,24 @@
       "parentUuid": "94263344_cd640b81",
       "revId": "a455f2920b1184f4f0433f73df68d5f9b0eae9fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c46a7979_d351917c",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-17T00:48:44Z",
+      "side": 1,
+      "message": "sgtm.",
+      "parentUuid": "3d4cea97_247dc5dc",
+      "revId": "a455f2920b1184f4f0433f73df68d5f9b0eae9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
