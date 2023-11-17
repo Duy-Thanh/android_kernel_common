@@ -69,6 +69,24 @@
       "parentUuid": "166e67d9_049786d6",
       "revId": "a455f2920b1184f4f0433f73df68d5f9b0eae9fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94263344_cd640b81",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-17T00:16:12Z",
+      "side": 1,
+      "message": "Does that mean these Android.bp files will be there for e.g. aosp/android14-release, but not for aosp/android15-release ?",
+      "parentUuid": "e3b843a4_26bf085c",
+      "revId": "a455f2920b1184f4f0433f73df68d5f9b0eae9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
