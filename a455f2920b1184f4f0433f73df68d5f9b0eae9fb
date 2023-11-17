@@ -33,6 +33,24 @@
       "message": "See https://cs.android.com/android/platform/superproject/main/+/main:external/linux-kselftest/Android.bp;l\u003d1206?q\u003dandroid.bp%20filepath:selftest",
       "revId": "a455f2920b1184f4f0433f73df68d5f9b0eae9fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "166e67d9_049786d6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-17T00:12:20Z",
+      "side": 1,
+      "message": "once we migrate over, those Android.bp files will no longer be used, right?",
+      "parentUuid": "d2dccba8_3b46fef8",
+      "revId": "a455f2920b1184f4f0433f73df68d5f9b0eae9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
