@@ -17,12 +17,18 @@ ABI aware build rules.
 
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+load("@bazel_skylib//rules:native_binary.bzl", "native_binary")
 
 visibility("private")
 
 _ALL_ABIS = ["arm64", "x86_64"]
 
-def _build_with_abi(name, build_rule, path_prefix, abis, visibility, **kwargs):
+def _build_with_abi(name, build_rule, visibility, path_prefix = None, abis = None, **kwargs):
+    if not path_prefix:
+        path_prefix = ""
+    if not abis:
+        abis = _ALL_ABIS
+
     build_rule(name = name, visibility = visibility, **kwargs)
 
     for abi in abis:
@@ -59,14 +65,43 @@ def cc_binary_with_abi(name, path_prefix = None, abis = None, visibility = None,
           The visibility attribute on a target controls whether the target can be used in other packages.
         **kwargs: the rest args that cc_binary uses.
     """
-    if not path_prefix:
-        path_prefix = ""
-    if not abis:
-        abis = _ALL_ABIS
-
     _build_with_abi(
         name = name,
         build_rule = native.cc_binary,
+        path_prefix = path_prefix,
+        abis = abis,
+        visibility = visibility,
+        **kwargs
+    )
+
+def native_binary_with_abi(name, path_prefix = None, abis = None, visibility = None, **kwargs):
+    """A native_binary replacement that generates output in each subdirectory named by abi.
+
+    For example:
+    ```
+      native_binary_with_abi(
+        name = "a_binary",
+        abis = ["x86_64", "arm64"],
+        path_prefix = "my/path",
+      )
+    ```
+    generates 2 rules:
+    * Rule a_binary_x86_64: Copies a_binary and put output in my/path/x86_64/a_binary.
+    * Rule a_binary_arm64: Copies a_binary and put output in my/path/arm64/a_binary.
+
+    Args:
+        name: the name of the build rule.
+        path_prefix: [Nonconfigurable](https://bazel.build/reference/be/common-definitions#configurable-attributes).
+          The path prefix to attach to output.
+        abis: [Nonconfigurable](https://bazel.build/reference/be/common-definitions#configurable-attributes).
+          The intended abis to generate.
+        visibility: [Nonconfigurable](https://bazel.build/reference/be/common-definitions#configurable-attributes).
+          The visibility attribute on a target controls whether the target can be used in other packages.
+        **kwargs: the rest args that native_binary uses.
+    """
+    _build_with_abi(
+        name = name,
+        build_rule = native_binary,
         path_prefix = path_prefix,
         abis = abis,
         visibility = visibility,

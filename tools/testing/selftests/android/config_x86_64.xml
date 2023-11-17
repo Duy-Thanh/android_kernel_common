@@ -27,6 +27,7 @@
         <option name="test-command-line" key="kselftest_breakpoints_breakpoint_test" value="/data/selftests/x86_64/kselftest_breakpoints_breakpoint_test" />
         <option name="test-command-line" key="kselftest_breakpoints_step_after_suspend_test" value="/data/selftests/x86_64/kselftest_breakpoints_step_after_suspend_test" />
         <option name="test-command-line" key="kselftest_capabilities_test_execve" value="/data/selftests/x86_64/kselftest_capabilities_test_execve" />
+        <option name="test-command-line" key="kselftest_futex_run" value="/data/selftests/x86_64/kselftest_futex_run" />
         <option name="test-command-line" key="kselftest_kcmp_kcmp_test" value="/data/selftests/x86_64/kselftest_kcmp_kcmp_test" />
         <option name="test-command-line" key="kselftest_ptrace_peeksiginfo" value="/data/selftests/x86_64/kselftest_ptrace_peeksiginfo" />
         <option name="test-command-line" key="kselftest_rtc_rtctest" value="/data/selftests/x86_64/kselftest_rtc_rtctest" />
@@ -35,4 +36,5 @@
         <option name="test-command-line" key="kselftest_vdso_vdso_test_getcpu" value="/data/selftests/x86_64/kselftest_vdso_vdso_test_getcpu" />
         <option name="test-command-line" key="kselftest_vdso_vdso_test_gettimeofday" value="/data/selftests/x86_64/kselftest_vdso_vdso_test_gettimeofday" />
         <option name="test-command-line" key="kselftest_size_test_get_size" value="/data/selftests/x86_64/kselftest_size_test_get_size" />
+    </test>
 </configuration>
