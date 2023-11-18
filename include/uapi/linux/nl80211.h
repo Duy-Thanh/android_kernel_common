@@ -205,6 +205,10 @@
  * preshared key material is provided, for example when that driver does
  * not support setting the temporal keys through %NL80211_CMD_NEW_KEY.
  *
+ * NL80211_CMD_START_AP can optionally carry %NL80211_ATTR_GTK_REKEY_INTERVAL
+ * and %NL80211_ATTR_PTK_REKEY_INTERVAL to pass down user configured values to
+ * the driver.
+ *
  * For 802.1X the PMK or PMK-R0 are set by providing %NL80211_ATTR_PMK
  * using %NL80211_CMD_SET_PMK. For offloaded FT support also
  * %NL80211_ATTR_PMKR0_NAME must be provided.
@@ -2784,6 +2788,12 @@ enum nl80211_commands {
  *	indicates that the sub-channel is punctured. Higher 16 bits are
  *	reserved.
  *
+ * @NL80211_ATTR_PTK_REKEY_INTERVAL: PTK refresh interval in seconds for drivers
+ *	supporting NL80211_EXT_FEATURE_4WAY_HANDSHAKE_AP_PSK.
+ *
+ * @NL80211_ATTR_GTK_REKEY_INTERVAL: GTK refresh interval in seconds for drivers
+ *	supporting NL80211_EXT_FEATURE_4WAY_HANDSHAKE_AP_PSK.
+ *
  * @NUM_NL80211_ATTR: total number of nl80211_attrs available
  * @NL80211_ATTR_MAX: highest attribute number currently defined
  * @__NL80211_ATTR_AFTER_LAST: internal use
@@ -3318,8 +3328,8 @@ enum nl80211_attrs {
 
 	NL80211_ATTR_PUNCT_BITMAP,
 
-	NL80211_ATTR_ANDROID_KABI_RESERVED_1,
-	NL80211_ATTR_ANDROID_KABI_RESERVED_2,
+	NL80211_ATTR_PTK_REKEY_INTERVAL,
+	NL80211_ATTR_GTK_REKEY_INTERVAL,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_3,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_4,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_5,
