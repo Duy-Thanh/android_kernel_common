@@ -17,6 +17,8 @@ DECLARE_HOOK(android_vh_ptype_head,
 	TP_ARGS(pt, vendor_pt));
 DECLARE_HOOK(android_vh_kfree_skb,
 	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+DECLARE_HOOK(android_vh_skb_recv_udp,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
 
 struct nf_conn;
 struct sock;

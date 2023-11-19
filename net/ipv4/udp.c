@@ -117,6 +117,7 @@
 #include <net/ipv6_stubs.h>
 #endif
 #include <trace/hooks/ipv4.h>
+#include <trace/hooks/net.h>
 
 struct udp_table udp_table __read_mostly;
 EXPORT_SYMBOL(udp_table);
@@ -1770,6 +1771,7 @@ struct sk_buff *__skb_recv_udp(struct sock *sk, unsigned int flags,
 				if (!(flags & MSG_PEEK))
 					udp_skb_destructor(sk, skb);
 				spin_unlock_bh(&queue->lock);
+				trace_android_vh_skb_recv_udp(skb);
 				return skb;
 			}
 
@@ -1792,8 +1794,10 @@ struct sk_buff *__skb_recv_udp(struct sock *sk, unsigned int flags,
 				udp_skb_dtor_locked(sk, skb);
 			spin_unlock(&sk_queue->lock);
 			spin_unlock_bh(&queue->lock);
-			if (skb)
+			if (skb) {
+				trace_android_vh_skb_recv_udp(skb);
 				return skb;
+			}
 
 busy_check:
 			if (!sk_can_busy_loop(sk))

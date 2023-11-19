@@ -373,6 +373,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);
+<<<<<<< PATCH SET (a702d4 ANDROID: vendor_hooks: Add hooks for socket queue receive sk)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skb_recv_udp);
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_thermal_stats);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptep_clear_flush_young);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_set_flag);
@@ -389,3 +392,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_end);
+>>>>>>> BASE      (597362 ANDROID: KVM: arm64: Don't prepopulate MMIO regions for host)
