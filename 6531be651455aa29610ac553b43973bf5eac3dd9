@@ -87,6 +87,24 @@
       "parentUuid": "fda2bf94_54570d77",
       "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bfa7c2d_6e7dc65e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2023-11-20T19:09:24Z",
+      "side": 1,
+      "message": "Unfortunately there are two Link: lines in this commit, one from the original author (which points to the old discussion) and the 2nd Link: is mine which points to this \n\nI\u0027ve tested this over the weekend with a boot loop on Pixel, without any issues. Normally there\u0027d be a couple OOPSes per day in that test. I have also reported that result back",
+      "parentUuid": "26085b11_e2288467",
+      "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
