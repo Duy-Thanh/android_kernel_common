@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure where you\u0027ve cherry-picked this from, but it\u0027s not Linus\u0027 tree and kernel.org cgit says it refers to an unreachable object:\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d7c4cce57",
       "revId": "b244c9aa380b588afbd62886fbb73e92912b744d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba367e3_daf2c2bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-11-20T10:42:16Z",
+      "side": 1,
+      "message": "Ah, this is coming from the -stable tree (linux-5.15.y) but for some reason the commit message (and SoB chain) don\u0027t match up.\n\nIt looks like this landed as 7c4cce5700b9 in 5.15.132.",
+      "parentUuid": "d36da35c_a51c718a",
+      "revId": "b244c9aa380b588afbd62886fbb73e92912b744d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
