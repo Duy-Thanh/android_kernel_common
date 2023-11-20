@@ -69,6 +69,24 @@
       "parentUuid": "b7195217_7c9d2e67",
       "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26085b11_e2288467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-20T17:51:28Z",
+      "side": 1,
+      "message": "If the one here is 1 week old, your link in the changelog text is old 😊\n\nAnd yes, this is under heavy development, please let\u0027s wait until we get some verification that it is all working properly as the many different versions that are floating around are vastly different, with some actually adding deadlocks instead of removing them.  They need to be tested properly and validated by the vendor before we can take any of them.",
+      "parentUuid": "fda2bf94_54570d77",
+      "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
