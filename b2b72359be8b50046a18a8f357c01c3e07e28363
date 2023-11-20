@@ -118,6 +118,30 @@
       },
       "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9baacee8_00f442a8",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 6525,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-20T08:27:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c915e21_a176fe3e",
+      "range": {
+        "startLine": 6525,
+        "startChar": 1,
+        "endLine": 6525,
+        "endChar": 45
+      },
+      "revId": "b2b72359be8b50046a18a8f357c01c3e07e28363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
