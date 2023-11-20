@@ -51,6 +51,24 @@
       "parentUuid": "67e08cbd_f3471340",
       "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fda2bf94_54570d77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2023-11-20T17:27:21Z",
+      "side": 1,
+      "message": "Your link is a patch from October, the proposed one here is less than a week old :-)\n\nIt seems a lot of partners are seeing this issue on 6.1, but I don\u0027t know if it\u0027s OK to wait until upstream settles on the final solution or not.\n\nAnd btw, b/308940593 has more information about the issue (and is also older than b/309592396). I can add both bug numbers if you want",
+      "parentUuid": "b7195217_7c9d2e67",
+      "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
