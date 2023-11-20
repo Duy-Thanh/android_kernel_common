@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7958d27_d24d3a63",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6483,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-11-20T15:56:41Z",
+      "side": 1,
+      "message": "Please make the scope in which these variables are visible smaller. I think these declarations can be moved into the only if-statement in which these are used.",
+      "range": {
+        "startLine": 6482,
+        "startChar": 0,
+        "endLine": 6483,
+        "endChar": 21
+      },
+      "revId": "5a1850ffb5fe43663114047ef1dc18503c885e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
