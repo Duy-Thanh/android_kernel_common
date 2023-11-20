@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36da35c_a51c718a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-11-20T10:23:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure where you\u0027ve cherry-picked this from, but it\u0027s not Linus\u0027 tree and kernel.org cgit says it refers to an unreachable object:\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d7c4cce57",
+      "revId": "b244c9aa380b588afbd62886fbb73e92912b744d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
