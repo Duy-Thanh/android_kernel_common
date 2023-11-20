@@ -16,6 +16,23 @@
       "message": "upstream is still working on this, see the thread, there\u0027s a new version embedded in it already.",
       "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67e08cbd_f3471340",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2023-11-20T16:11:16Z",
+      "side": 1,
+      "message": "I believe I submitted the latest version here (I can\u0027t see anything more recent on lore.kernel.org than what I picked). I\u0027m aware of an alternative proposal which includes a _massive_ refactor and depends on many other patches that aren\u0027t in 6.1 either.",
+      "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
