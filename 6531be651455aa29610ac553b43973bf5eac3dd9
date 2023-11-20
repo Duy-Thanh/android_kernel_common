@@ -33,6 +33,24 @@
       "message": "I believe I submitted the latest version here (I can\u0027t see anything more recent on lore.kernel.org than what I picked). I\u0027m aware of an alternative proposal which includes a _massive_ refactor and depends on many other patches that aren\u0027t in 6.1 either.",
       "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7195217_7c9d2e67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-20T16:22:06Z",
+      "side": 1,
+      "message": "see https://lore.kernel.org/linux-iommu/0d6b490d-83df-76fb-f5ad-e9730fc57660@quicinc.com/ for a newer one.\n\nAlso there is a bug tracking this already, b/309592396",
+      "parentUuid": "67e08cbd_f3471340",
+      "revId": "6531be651455aa29610ac553b43973bf5eac3dd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
