@@ -321334,6 +321334,15 @@ elf_symbol {
   full_name: "devm_phy_get"
 }
 elf_symbol {
+  id: 0xcf6046cf
+  name: "devm_phy_optional_get"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3a41731d
+  type_id: 0x1154b37f
+  full_name: "devm_phy_optional_get"
+}
+elf_symbol {
   id: 0x3856a7af
   name: "devm_phy_put"
   is_defined: true
@@ -341454,6 +341463,15 @@ elf_symbol {
   full_name: "pci_generic_config_read"
 }
 elf_symbol {
+  id: 0x133a7a3e
+  name: "pci_generic_config_read32"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x376cb475
+  type_id: 0x944cc77b
+  full_name: "pci_generic_config_read32"
+}
+elf_symbol {
   id: 0xdeaa9b25
   name: "pci_generic_config_write"
   is_defined: true
@@ -341461,6 +341479,15 @@ elf_symbol {
   crc: 0xe354818f
   type_id: 0x944cfb0d
   full_name: "pci_generic_config_write"
+}
+elf_symbol {
+  id: 0x6f7d4414
+  name: "pci_generic_config_write32"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x74d5bdcf
+  type_id: 0x944cfb0d
+  full_name: "pci_generic_config_write32"
 }
 elf_symbol {
   id: 0x37d02bbe
@@ -364537,6 +364564,7 @@ interface {
   symbol_id: 0x6676bb1c
   symbol_id: 0xd6e5f7c7
   symbol_id: 0x7695d1dd
+  symbol_id: 0xcf6046cf
   symbol_id: 0x3856a7af
   symbol_id: 0x8a8e86c7
   symbol_id: 0x69272f95
@@ -366768,7 +366796,9 @@ interface {
   symbol_id: 0x8ffabaa9
   symbol_id: 0x10f42cee
   symbol_id: 0x50bce06e
+  symbol_id: 0x133a7a3e
   symbol_id: 0xdeaa9b25
+  symbol_id: 0x6f7d4414
   symbol_id: 0x37d02bbe
   symbol_id: 0x9ac8ef20
   symbol_id: 0x35c96922
