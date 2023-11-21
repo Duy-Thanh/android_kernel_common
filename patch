@@ -1,0 +1,141 @@
+From mboxrd@z Thu Jan  1 00:00:00 1970
+Return-Path: <owner-linux-mm@kvack.org>
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	aws-us-west-2-korg-lkml-1.web.codeaurora.org
+Received: from kanga.kvack.org (kanga.kvack.org [205.233.56.17])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94A4DC61D90
+	for <linux-mm@archiver.kernel.org>; Tue, 21 Nov 2023 16:13:52 +0000 (UTC)
+Received: by kanga.kvack.org (Postfix)
+	id 1CD0D6B04A7; Tue, 21 Nov 2023 11:13:52 -0500 (EST)
+Received: by kanga.kvack.org (Postfix, from userid 40)
+	id 17C646B04A9; Tue, 21 Nov 2023 11:13:52 -0500 (EST)
+X-Delivered-To: int-list-linux-mm@kvack.org
+Received: by kanga.kvack.org (Postfix, from userid 63042)
+	id 06BB26B04AA; Tue, 21 Nov 2023 11:13:52 -0500 (EST)
+X-Delivered-To: linux-mm@kvack.org
+Received: from relay.hostedemail.com (smtprelay0011.hostedemail.com [216.40.44.11])
+	by kanga.kvack.org (Postfix) with ESMTP id EB9E56B04A7
+	for <linux-mm@kvack.org>; Tue, 21 Nov 2023 11:13:51 -0500 (EST)
+Received: from smtpin22.hostedemail.com (a10.router.float.18 [10.200.18.1])
+	by unirelay06.hostedemail.com (Postfix) with ESMTP id BF052B5C2C
+	for <linux-mm@kvack.org>; Tue, 21 Nov 2023 16:13:51 +0000 (UTC)
+X-FDA: 81482457462.22.3D362A6
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+	by imf26.hostedemail.com (Postfix) with ESMTP id BC884140029
+	for <linux-mm@kvack.org>; Tue, 21 Nov 2023 16:13:49 +0000 (UTC)
+Authentication-Results: imf26.hostedemail.com;
+	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=Hmo7ZZJe;
+	dmarc=none;
+	spf=none (imf26.hostedemail.com: domain of willy@infradead.org has no SPF policy when checking 90.155.50.34) smtp.mailfrom=willy@infradead.org
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=hostedemail.com;
+	s=arc-20220608; t=1700583230;
+	h=from:from:sender:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+	 content-type:content-type:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=pc0r5D23rBHNJck1Tzl0Wknay+soa9dLyPzStnk2UGk=;
+	b=25SVpveF2LCN3SnjD9WJEcJwGzbgBQGFLwemsB1jzN95NTYnL6aC8sEv6E5y/tQxFVWoqB
+	bU+jkehwFiMXFILsADzpF+PHZBrmcz8q+5pUyRcjBj8ciy5w7H1KAfEAZgskMuh/WsKDDa
+	12zLBu2nVzVpZfidkBt9HPUNuKg7/hQ=
+ARC-Authentication-Results: i=1;
+	imf26.hostedemail.com;
+	dkim=pass header.d=infradead.org header.s=casper.20170209 header.b=Hmo7ZZJe;
+	dmarc=none;
+	spf=none (imf26.hostedemail.com: domain of willy@infradead.org has no SPF policy when checking 90.155.50.34) smtp.mailfrom=willy@infradead.org
+ARC-Seal: i=1; s=arc-20220608; d=hostedemail.com; t=1700583230; a=rsa-sha256;
+	cv=none;
+	b=l2imaDUeFqL8DYB/10BsKZ9ZMJ7uFWmHF4ZPXRSf0bKoQVJguZpDhbwSVYwfmceU6I0NRX
+	hxVy044BMYacVRDJuaP+2V6S6k5r/5WXGtCqFnh/fPw53ExsJMpWXI1ptwFsujs0Mj7tYI
+	S9Sy9C2VawKswDb5A/rMmlavn7C3/es=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=pc0r5D23rBHNJck1Tzl0Wknay+soa9dLyPzStnk2UGk=; b=Hmo7ZZJet9t9EVZ40clQ8jIh5I
+	vCPgjMkGKPqgmKeeHEVXc6MUtJn7O01BAiuxhcbiJQZd10B2SpJ+QX0tQ6ESuJZMfwipLAWz8i226
+	3KWPaDgoQ2YyqB09obL43Su3MIbIG/gHbXXIZycsXj79xuueL3XKwr7pGu+3Onl1Z1WwTMHWy//TA
+	Z1bGZLpCQoh4sQbeuMvPp9IxS/wCMVZCVInWxO22lOw8REqEv/dyVVPVutYojVsc3WsZgx8H/gEWi
+	NqNtWEkR+lzQRVduZ52IWIm0G80Ocrr5LtWFMOXPEHpro3xFmlGUj8CYOdi2u9dz7WGCuKP5YEXT7
+	CGyk1sfw==;
+Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
+	id 1r5TNW-005jSi-VU; Tue, 21 Nov 2023 16:13:35 +0000
+Date: Tue, 21 Nov 2023 16:13:34 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Charan Teja Kalla <quic_charante@quicinc.com>
+Cc: akpm@linux-foundation.org, david@redhat.com, hannes@cmpxchg.org,
+	kirill.shutemov@linux.intel.com, shakeelb@google.com,
+	n-horiguchi@ah.jp.nec.com, linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] [RFC] mm: migrate: rcu stalls because of invalid swap
+ cache entries
+Message-ID: <ZVzXLu4Ds+3aQtGm@casper.infradead.org>
+References: <1700569840-17327-1-git-send-email-quic_charante@quicinc.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1700569840-17327-1-git-send-email-quic_charante@quicinc.com>
+X-Rspam-User: 
+X-Stat-Signature: d7iuc4xexztwy8cf87ohsc6c6ct4bndx
+X-Rspamd-Server: rspam07
+X-Rspamd-Queue-Id: BC884140029
+X-HE-Tag: 1700583229-591593
+X-HE-Meta: U2FsdGVkX18Im0hl516ZCs4LrFpM2ntjFdY4SbqqxvNX17Gv1N7+FK1NZIufTVVtbTfgd0FNZSLm+4P02HuuXrm6rlN7+jk8WD9t+x4KE9Py7RR7lj89Cem+EMNbfvZj2ZRBj0ZgTHh7Dqre5f2NfE6bXp+I61Uam/1ikdqL/CrDDu7RPnzNrST26EMlBspSptO+y83x78UVZJ7u80njbC1JgM4YTr+yVSO/Y9BviMszOkCHDv7cLB0Pbsrl53cNS6GBB6/lGdLIWuKfTLhS45jAUj5MV/2imN8KieI3hnUkF/2inq7osp7fHfQxDQA+6XZf60Xii+QFP3ObbXALsWsVbx11HbP3AVRhojsZykfj3dTOLCXhOO17kwDPxaqvJ6fPgbgYzBNBXhisPTHUHPzwy5ECGWNbV9IFkzAQecWQMV3J0l1LfkWsd1aEB2JpB4g2hJZUVHYvpVBqiW0yajbl7Fo5o8UtuKRJ9pRrgMlKLKV8cQlSAiyBQzn3s+iftrTbHVGGaZ/DYSt9ocT4ZwJJz30OjDiQetpyWznvR3OxLq9cZWLNpVXuQB913rLM9JYSY3/Qnxz1IgjaqWiCBud+EsDfrNqaDlGnfdB6V3JwdA0P2IozX5g4NjtYkSSFoHqMt6m6SPYxiB7eDYZuRgm9nhisSvjs9XHv/pbWR3d6S81lQp0JIy1WbVEBhxtHUZkQyrXPKxU4DpRy0hfKrQaSWeLATfBq4MpR9826vr5knQmESGgkU9tviaJd2zEEAWbkUZ3J+JhXNqL3WwkPm4YqYx6O9BMThBcoICVL+++XUn6v7ZEpTsVUeWxH+pA6QBPD5X8Veej5qGOX3CD3m3y/2uQZj1ekeHMQpvR8D0YCOThiJjQ6j9jvHFpo1pZtK9HrQWMzucWzdiibCKdZlyx2W5+QcTBiSR+OwbUPjkcSfU5GHWZ7dlxMhvBdcWW2BwfA2zl4aUOXvmn6AHu
+ 6Ua4hZJ5
+ mnpvf9hzzxu4/VpIhUog4BZ8MkvfvRnalLjZoDnbBkzOIaeM5M2a4ps9M3UvXKbAieR+4Tcv9cjrQasV8SMpDPUiaI6y0OvS9xv+Vx3qyXKq6pB+pklDWm/JVQMSm3K2Mda8PHmOhRzLBHcw=
+X-Bogosity: Ham, tests=bogofilter, spamicity=0.000000, version=1.2.4
+Sender: owner-linux-mm@kvack.org
+Precedence: bulk
+X-Loop: owner-majordomo@kvack.org
+List-ID: <linux-mm.kvack.org>
+List-Subscribe: <mailto:majordomo@kvack.org>
+List-Unsubscribe: <mailto:majordomo@kvack.org>
+
+On Tue, Nov 21, 2023 at 06:00:40PM +0530, Charan Teja Kalla wrote:
+> The below race on a folio between reclaim and migration exposed a bug
+> of not populating the swap cache with proper folio resulting into the
+> rcu stalls:
+
+Thank you for figuring out this race and describing it so well.
+It explains a few things I've seen, at least potentially.
+
+What would you think to this?  I think a better fix would be to
+fix the swap cache to user multi-order entries, but I would like to
+see this backportable!
+
+diff --git a/mm/migrate.c b/mm/migrate.c
+index d9d2b9432e81..2d67ca47d2e2 100644
+--- a/mm/migrate.c
++++ b/mm/migrate.c
+@@ -405,6 +405,7 @@ int folio_migrate_mapping(struct address_space *mapping,
+ 	int dirty;
+ 	int expected_count = folio_expected_refs(mapping, folio) + extra_count;
+ 	long nr = folio_nr_pages(folio);
++	long entries, i;
+ 
+ 	if (!mapping) {
+ 		/* Anonymous page without mapping */
+@@ -442,8 +443,10 @@ int folio_migrate_mapping(struct address_space *mapping,
+ 			folio_set_swapcache(newfolio);
+ 			newfolio->private = folio_get_private(folio);
+ 		}
++		entries = nr;
+ 	} else {
+ 		VM_BUG_ON_FOLIO(folio_test_swapcache(folio), folio);
++		entries = 1;
+ 	}
+ 
+ 	/* Move dirty while page refs frozen and newpage not yet exposed */
+@@ -453,7 +456,11 @@ int folio_migrate_mapping(struct address_space *mapping,
+ 		folio_set_dirty(newfolio);
+ 	}
+ 
+-	xas_store(&xas, newfolio);
++	/* Swap cache still stores N entries instead of a high-order entry */
++	for (i = 0; i < entries; i++) {
++		xas_store(&xas, newfolio);
++		xas_next(&xas);
++	}
+ 
+ 	/*
+ 	 * Drop cache reference from old page by unfreezing
+
