@@ -1707,7 +1707,8 @@ static int probe_iommu_group(struct device *dev, void *data)
 {
 	struct list_head *group_list = data;
 	struct iommu_group *group;
-	int ret;
+	int ret = -EBUSY;
+	int ret_pre = 0;
 
 	/* Device is probed already if in a group */
 	group = iommu_group_get(dev);
@@ -1716,9 +1717,16 @@ static int probe_iommu_group(struct device *dev, void *data)
 		return 0;
 	}
 
+	trace_android_vh_iommu_probe_device_pre(&ret, dev);
+	ret_pre = ret;
+	if (!ret)
+		return ret;
+
 	ret = __iommu_probe_device(dev, group_list);
 	if (ret == -ENODEV)
 		ret = 0;
+
+	trace_android_vh_iommu_probe_device_post(&ret_pre, dev);
 
 	return ret;
 }

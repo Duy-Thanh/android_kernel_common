@@ -48,6 +48,14 @@ DECLARE_HOOK(android_vh_adjust_alloc_flags,
 	TP_PROTO(unsigned int order, gfp_t *alloc_flags),
 	TP_ARGS(order, alloc_flags));
 
+DECLARE_HOOK(android_vh_iommu_probe_device_pre,
+	TP_PROTO(int *ret, struct device *dev),
+	TP_ARGS(ret, dev));
+
+DECLARE_HOOK(android_vh_iommu_probe_device_post,
+	TP_PROTO(int *ret, struct device *dev),
+	TP_ARGS(ret, dev));
+
 #endif /* _TRACE_HOOK_IOMMU_H */
 
 /* This part must be outside protection */
