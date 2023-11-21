@@ -22,6 +22,30 @@
       },
       "revId": "5a1850ffb5fe43663114047ef1dc18503c885e40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a0baa3_ec1ee0f7",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6483,
+      "author": {
+        "id": 1878960
+      },
+      "writtenOn": "2023-11-21T12:51:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7958d27_d24d3a63",
+      "range": {
+        "startLine": 6482,
+        "startChar": 0,
+        "endLine": 6483,
+        "endChar": 21
+      },
+      "revId": "5a1850ffb5fe43663114047ef1dc18503c885e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
