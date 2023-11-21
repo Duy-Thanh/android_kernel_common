@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2464fa3f_cb9eaf20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-21T17:42:05Z",
+      "side": 1,
+      "message": "Please add more description about why this hook is needed. Why can\u0027t the feature be submitted upstream?",
+      "revId": "c31f90c7ad3ab6a910a42144a04ca6c88cd5d0b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d63bca8a_96d27228",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-21T17:42:05Z",
+      "side": 1,
+      "message": "Please create a patch on top of this one to add the new symbols to your symbol list.",
+      "revId": "c31f90c7ad3ab6a910a42144a04ca6c88cd5d0b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
