@@ -16,6 +16,29 @@
       "message": "I\u0027ve removed libcap references. Please take another look.",
       "revId": "d86db500cfeca82b3020dddd525cd2d8402089c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cc6ba46_c7b80b9b",
+        "filename": "tools/testing/selftests/android/config_arm64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-21T18:43:31Z",
+      "side": 1,
+      "message": "unrelated, but I think files in common/ needs to carry a different license?\n\n@maennich@google.com do you know if this file should be of a different license?",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 55
+      },
+      "revId": "d86db500cfeca82b3020dddd525cd2d8402089c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
