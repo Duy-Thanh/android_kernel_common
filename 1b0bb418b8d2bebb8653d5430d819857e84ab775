@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "271dd171_2b4cc327",
+        "filename": "abi.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-11-21T21:42:04Z",
+      "side": 1,
+      "message": "has to use native_binary instead of sh_binary because sh_binary is not compatible with copy_file (sh_binary generates more than 1 outs)",
+      "range": {
+        "startLine": 78,
+        "startChar": 9,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "1b0bb418b8d2bebb8653d5430d819857e84ab775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
