@@ -319069,6 +319069,13 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9be24c68
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x13580d6c
+  parameter_id: 0x0258f96e
+}
+function {
   id: 0x9be2da56
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -335618,6 +335625,24 @@ elf_symbol {
   full_name: "__traceiter_android_vh_iommu_iovad_free_iova"
 }
 elf_symbol {
+  id: 0x2bf9689a
+  name: "__traceiter_android_vh_iommu_probe_device_post"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x417554a8
+  type_id: 0x9be24c68
+  full_name: "__traceiter_android_vh_iommu_probe_device_post"
+}
+elf_symbol {
+  id: 0x1113948c
+  name: "__traceiter_android_vh_iommu_probe_device_pre"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3e61a77d
+  type_id: 0x9be24c68
+  full_name: "__traceiter_android_vh_iommu_probe_device_pre"
+}
+elf_symbol {
   id: 0x7ee652cd
   name: "__traceiter_android_vh_ipi_stop"
   is_defined: true
@@ -339558,6 +339583,24 @@ elf_symbol {
   crc: 0x6c2a9494
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_iommu_iovad_free_iova"
+}
+elf_symbol {
+  id: 0xd4db4d54
+  name: "__tracepoint_android_vh_iommu_probe_device_post"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7b02d82d
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_iommu_probe_device_post"
+}
+elf_symbol {
+  id: 0xaad9fe2a
+  name: "__tracepoint_android_vh_iommu_probe_device_pre"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x576b2584
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_iommu_probe_device_pre"
 }
 elf_symbol {
   id: 0x1d442b97
@@ -397159,6 +397202,8 @@ interface {
   symbol_id: 0x64c2fe7a
   symbol_id: 0x4b67a5dc
   symbol_id: 0x3684a257
+  symbol_id: 0x2bf9689a
+  symbol_id: 0x1113948c
   symbol_id: 0x7ee652cd
   symbol_id: 0x0bf41403
   symbol_id: 0x4dca46cc
@@ -397597,6 +397642,8 @@ interface {
   symbol_id: 0xb6603d58
   symbol_id: 0xbbfc3b7e
   symbol_id: 0xdb161c79
+  symbol_id: 0xd4db4d54
+  symbol_id: 0xaad9fe2a
   symbol_id: 0x1d442b97
   symbol_id: 0x31457bed
   symbol_id: 0x62c13726
