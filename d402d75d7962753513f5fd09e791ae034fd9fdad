@@ -39,6 +39,26 @@
       "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/43c1ff8b75011bc3e3e923adf31ba815864a2494) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d43c1ff8b75011bc3e3e923adf31ba815864a2494)\n\n```\n      ## arch/arm64/kvm/hyp/nvhe/mem_protect.c ##\n     @@ arch/arm64/kvm/hyp/nvhe/mem_protect.c: struct kvm_mem_range {\n    @@ arch/arm64/kvm/hyp/nvhe/mem_protect.c: static bool host_stage2_force_pte_cb(u64\n      \tenum kvm_pgtable_prot prot;\n      \tint ret;\n      \n    -@@ arch/arm64/kvm/hyp/nvhe/mem_protect.c: static int __check_page_state_visitor(u64 addr, u64 end, u32 level,\n    - \tstruct check_walk_data *d \u003d arg;\n    - \tkvm_pte_t pte \u003d *ptep;\n    +@@ arch/arm64/kvm/hyp/nvhe/mem_protect.c: static int __check_page_state_visitor(const struct kvm_pgtable_visit_ctx *ctx,\n    + {\n    + \tstruct check_walk_data *d \u003d ctx-\u003earg;\n      \n    --\tif (kvm_pte_valid(pte) \u0026\u0026 !addr_is_memory(kvm_pte_to_phys(pte)))\n    -+\tif (kvm_pte_valid(pte) \u0026\u0026 !addr_is_allowed_memory(kvm_pte_to_phys(pte)))\n    +-\tif (kvm_pte_valid(ctx-\u003eold) \u0026\u0026 !addr_is_memory(kvm_pte_to_phys(ctx-\u003eold)))\n    ++\tif (kvm_pte_valid(ctx-\u003eold) \u0026\u0026 !addr_is_allowed_memory(kvm_pte_to_phys(ctx-\u003eold)))\n      \t\treturn -EINVAL;\n      \n    - \treturn d-\u003eget_page_state(pte) \u003d\u003d d-\u003edesired ? 0 : -EPERM;\n    + \treturn d-\u003eget_page_state(ctx-\u003eold) \u003d\u003d d-\u003edesired ? 0 : -EPERM;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 583022920 android-build.ayeaye-python-dispatcher_20231116.04_p0",
       "revId": "d402d75d7962753513f5fd09e791ae034fd9fdad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059660691",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2840861?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c91d458a_da6cb81b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-21T20:28:20Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/43c1ff8b75011bc3e3e923adf31ba815864a2494) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d43c1ff8b75011bc3e3e923adf31ba815864a2494)\n\n```\n      ## arch/arm64/kvm/hyp/nvhe/mem_protect.c ##\n     @@ arch/arm64/kvm/hyp/nvhe/mem_protect.c: struct kvm_mem_range {\n    @@ arch/arm64/kvm/hyp/nvhe/mem_protect.c: static bool host_stage2_force_pte_cb(u64\n      \tenum kvm_pgtable_prot prot;\n      \tint ret;\n      \n    -@@ arch/arm64/kvm/hyp/nvhe/mem_protect.c: static int __check_page_state_visitor(u64 addr, u64 end, u32 level,\n    - \tstruct check_walk_data *d \u003d arg;\n    - \tkvm_pte_t pte \u003d *ptep;\n    +@@ arch/arm64/kvm/hyp/nvhe/mem_protect.c: static int __check_page_state_visitor(const struct kvm_pgtable_visit_ctx *ctx,\n    + {\n    + \tstruct check_walk_data *d \u003d ctx-\u003earg;\n      \n    --\tif (kvm_pte_valid(pte) \u0026\u0026 !addr_is_memory(kvm_pte_to_phys(pte)))\n    -+\tif (kvm_pte_valid(pte) \u0026\u0026 !addr_is_allowed_memory(kvm_pte_to_phys(pte)))\n    +-\tif (kvm_pte_valid(ctx-\u003eold) \u0026\u0026 !addr_is_memory(kvm_pte_to_phys(ctx-\u003eold)))\n    ++\tif (kvm_pte_valid(ctx-\u003eold) \u0026\u0026 !addr_is_allowed_memory(kvm_pte_to_phys(ctx-\u003eold)))\n      \t\treturn -EINVAL;\n      \n    - \treturn d-\u003eget_page_state(pte) \u003d\u003d d-\u003edesired ? 0 : -EPERM;\n    + \treturn d-\u003eget_page_state(ctx-\u003eold) \u003d\u003d d-\u003edesired ? 0 : -EPERM;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 583022920 android-build.ayeaye-python-dispatcher_20231116.04_p0",
+      "revId": "d402d75d7962753513f5fd09e791ae034fd9fdad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
