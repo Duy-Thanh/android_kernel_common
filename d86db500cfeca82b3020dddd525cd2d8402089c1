@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db1a284d_40798fbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-11-21T18:40:37Z",
+      "side": 1,
+      "message": "I\u0027ve removed libcap references. Please take another look.",
+      "revId": "d86db500cfeca82b3020dddd525cd2d8402089c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
