@@ -478,6 +478,32 @@ out:
 		return count;
 	}
 
+<<<<<<< HEAD   (4b0be6 ANDROID: fuse: Skip canonical path logic if ENOSYS)
+=======
+	if (!strcmp(a->attr.name, "max_ordered_discard")) {
+		if (t == 0 || t > MAX_PLIST_NUM)
+			return -EINVAL;
+		if (!f2fs_block_unit_discard(sbi))
+			return -EINVAL;
+		*ui = t;
+		return count;
+	}
+
+	if (!strcmp(a->attr.name, "discard_urgent_util")) {
+		if (t > 100)
+			return -EINVAL;
+		*ui = t;
+		return count;
+	}
+
+	if (!strcmp(a->attr.name, "discard_io_aware")) {
+		if (t >= DPOLICY_IO_AWARE_MAX)
+			return -EINVAL;
+		*ui = t;
+		return count;
+	}
+
+>>>>>>> CHANGE (ab87c1 BACKPORT: f2fs: sysfs: support discard_io_aware)
 	if (!strcmp(a->attr.name, "migration_granularity")) {
 		if (t == 0 || t > sbi->segs_per_sec)
 			return -EINVAL;
@@ -784,6 +810,11 @@ F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, min_discard_issue_time, min_discard_
 F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, mid_discard_issue_time, mid_discard_issue_time);
 F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_discard_issue_time, max_discard_issue_time);
 F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_granularity, discard_granularity);
+<<<<<<< HEAD   (4b0be6 ANDROID: fuse: Skip canonical path logic if ENOSYS)
+=======
+F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, max_ordered_discard, max_ordered_discard);
+F2FS_RW_ATTR(DCC_INFO, discard_cmd_control, discard_io_aware, discard_io_aware);
+>>>>>>> CHANGE (ab87c1 BACKPORT: f2fs: sysfs: support discard_io_aware)
 F2FS_RW_ATTR(RESERVED_BLOCKS, f2fs_sb_info, reserved_blocks, reserved_blocks);
 F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, batched_trim_sections, trim_sections);
 F2FS_RW_ATTR(SM_INFO, f2fs_sm_info, ipu_policy, ipu_policy);
@@ -913,6 +944,11 @@ static struct attribute *f2fs_attrs[] = {
 	ATTR_LIST(mid_discard_issue_time),
 	ATTR_LIST(max_discard_issue_time),
 	ATTR_LIST(discard_granularity),
+<<<<<<< HEAD   (4b0be6 ANDROID: fuse: Skip canonical path logic if ENOSYS)
+=======
+	ATTR_LIST(max_ordered_discard),
+	ATTR_LIST(discard_io_aware),
+>>>>>>> CHANGE (ab87c1 BACKPORT: f2fs: sysfs: support discard_io_aware)
 	ATTR_LIST(pending_discard),
 	ATTR_LIST(batched_trim_sections),
 	ATTR_LIST(ipu_policy),

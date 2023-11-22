@@ -378,6 +378,12 @@ enum {
 	MAX_DPOLICY,
 };
 
+enum {
+	DPOLICY_IO_AWARE_DISABLE,	/* force to not be aware of IO */
+	DPOLICY_IO_AWARE_ENABLE,	/* force to be aware of IO */
+	DPOLICY_IO_AWARE_MAX,
+};
+
 struct discard_policy {
 	int type;			/* type of discard */
 	unsigned int min_interval;	/* used for candidates exist */
@@ -408,6 +414,11 @@ struct discard_cmd_control {
 	unsigned int mid_discard_issue_time;	/* mid. interval between discard issue */
 	unsigned int max_discard_issue_time;	/* max. interval between discard issue */
 	unsigned int discard_granularity;	/* discard granularity */
+<<<<<<< HEAD   (4b0be6 ANDROID: fuse: Skip canonical path logic if ENOSYS)
+=======
+	unsigned int max_ordered_discard;	/* maximum discard granularity issued by lba order */
+	unsigned int discard_io_aware;		/* io_aware policy */
+>>>>>>> CHANGE (ab87c1 BACKPORT: f2fs: sysfs: support discard_io_aware)
 	unsigned int undiscard_blks;		/* # of undiscard blocks */
 	unsigned int next_pos;			/* next discard position */
 	atomic_t issued_discard;		/* # of issued discard */
