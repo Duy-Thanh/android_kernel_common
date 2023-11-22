@@ -34,6 +34,23 @@
       "parentUuid": "d36da35c_a51c718a",
       "revId": "b244c9aa380b588afbd62886fbb73e92912b744d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "207f150b_62a91c14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-22T15:17:52Z",
+      "side": 1,
+      "message": "Will be merged automatically into this branch next week as part of the LTS sync, so this should not be needed as an individual commit, right?",
+      "revId": "b244c9aa380b588afbd62886fbb73e92912b744d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
