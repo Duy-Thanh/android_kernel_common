@@ -304640,6 +304640,11 @@ function {
   parameter_id: 0x32f690bf
 }
 function {
+  id: 0x910bc03d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x322c8c4b
+}
+function {
   id: 0x910c3195
   return_type_id: 0x6720d32f
   parameter_id: 0x396fe4f8
@@ -304711,6 +304716,12 @@ function {
   parameter_id: 0x32a623d7
   parameter_id: 0x0c0dfa25
   parameter_id: 0x3382a638
+}
+function {
+  id: 0x9115c860
+  return_type_id: 0x6720d32f
+  parameter_id: 0x31b5a66f
+  parameter_id: 0x3e10b518
 }
 function {
   id: 0x9115faa6
@@ -354714,6 +354725,15 @@ elf_symbol {
   full_name: "drm_connector_set_panel_orientation"
 }
 elf_symbol {
+  id: 0xcf3c9405
+  name: "drm_connector_set_path_property"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x68f96c58
+  type_id: 0x9115c860
+  full_name: "drm_connector_set_path_property"
+}
+elf_symbol {
   id: 0xe4a41c47
   name: "drm_connector_unregister"
   is_defined: true
@@ -356026,6 +356046,15 @@ elf_symbol {
   crc: 0x2d6b3864
   type_id: 0x1e597e38
   full_name: "drm_helper_move_panel_connectors_to_head"
+}
+elf_symbol {
+  id: 0x06afbf8f
+  name: "drm_helper_probe_detect"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfbd3d75f
+  type_id: 0x91f8e2fb
+  full_name: "drm_helper_probe_detect"
 }
 elf_symbol {
   id: 0x25989156
@@ -371974,6 +372003,15 @@ elf_symbol {
   crc: 0x87b8de8f
   type_id: 0x7bfdb6bc
   full_name: "of_graph_get_endpoint_by_regs"
+}
+elf_symbol {
+  id: 0xc5a4cedf
+  name: "of_graph_get_endpoint_count"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1396a5ec
+  type_id: 0x910bc03d
+  full_name: "of_graph_get_endpoint_count"
 }
 elf_symbol {
   id: 0x377ef2e6
@@ -399280,6 +399318,7 @@ interface {
   symbol_id: 0x8069ccc3
   symbol_id: 0xbe9b3f22
   symbol_id: 0xb9cc9c24
+  symbol_id: 0xcf3c9405
   symbol_id: 0xe4a41c47
   symbol_id: 0x33f2cc93
   symbol_id: 0x1773ebf6
@@ -399426,6 +399465,7 @@ interface {
   symbol_id: 0x213004ed
   symbol_id: 0xc62eba2d
   symbol_id: 0x0869dd10
+  symbol_id: 0x06afbf8f
   symbol_id: 0x25989156
   symbol_id: 0x3a6e27e9
   symbol_id: 0xec79cf1c
@@ -401198,6 +401238,7 @@ interface {
   symbol_id: 0xcbfc5627
   symbol_id: 0xee3e4c4b
   symbol_id: 0x083944d7
+  symbol_id: 0xc5a4cedf
   symbol_id: 0x377ef2e6
   symbol_id: 0xd87751ae
   symbol_id: 0xd3bfa538
