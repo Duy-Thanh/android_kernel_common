@@ -4456,9 +4456,9 @@ try_onemore:
 	err = parse_options(sb, options, false);
 	if (err)
 		goto free_options;
-
-	sb->s_maxbytes = max_file_blocks(NULL) <<
-				le32_to_cpu(raw_super->log_blocksize);
+	sb->s_maxbytes = min(max_file_blocks(NULL) <<
+				le32_to_cpu(raw_super->log_blocksize),
+				(long long)(U32_MAX * 4096));
 	sb->s_max_links = F2FS_LINK_MAX;
 
 	err = f2fs_setup_casefold(sbi);
