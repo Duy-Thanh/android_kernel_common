@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "978745d6_13c6a0b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-11-22T11:21:05Z",
+      "side": 1,
+      "message": "Needs to wait for aosp/2837537 to land.",
+      "revId": "691f51dde23c963f69c469e5d8e7941f7c48aa95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
