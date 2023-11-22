@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e876bca_dc2280bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-22T15:00:55Z",
+      "side": 1,
+      "message": "Please take the fixes I did in the LTS branches, as they are done in an abi-safe way.",
+      "revId": "38d09679aad5d925d57a7e8fe29a5bd48cd645a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
