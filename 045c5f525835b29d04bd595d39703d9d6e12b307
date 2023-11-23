@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d534408c_795d786a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-11-23T10:37:55Z",
+      "side": 1,
+      "message": "Hi Greg, we discussed this internally and have removed all the bootloader based vendor hooks and only keeping the one required for gic. These remain to be same as supported in android13-5.15 and android14-6.1 and have not been planned upstream",
+      "parentUuid": "46e3fa1d_4543765f",
+      "revId": "045c5f525835b29d04bd595d39703d9d6e12b307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77b2cec1_cb237737",
         "filename": "drivers/irqchip/irq-gic-v3.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-31T19:59:08Z",
       "side": 1,
       "message": "These should be exported as \"gic3_\" to avoid namespace collisions with other gic symbols.",
+      "revId": "045c5f525835b29d04bd595d39703d9d6e12b307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4c2b4c7_d667df98",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-11-23T10:37:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "77b2cec1_cb237737",
       "revId": "045c5f525835b29d04bd595d39703d9d6e12b307",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
