@@ -18,6 +18,7 @@
 #include "dm-verity-verify-sig.h"
 #include <linux/module.h>
 #include <linux/reboot.h>
+#include <linux/ioprio.h>
 
 #define DM_MSG_PREFIX			"verity"
 
@@ -574,6 +575,9 @@ static void verity_finish_io(struct dm_verity_io *io, blk_status_t status)
 static void verity_work(struct work_struct *w)
 {
 	struct dm_verity_io *io = container_of(w, struct dm_verity_io, work);
+
+	struct bio *bio = dm_bio_from_per_bio_data(io, io->v->ti->per_io_data_size);
+	set_task_ioprio(current, bio->bi_ioprio);
 
 	verity_finish_io(io, errno_to_blk_status(verity_verify_io(io)));
 }
