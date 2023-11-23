@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ad8e5a9_194ac96b",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T02:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71c1e7fd_b83b1a7d",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 35
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a73867a_669159c5",
@@ -61,6 +85,30 @@
       "writtenOn": "2023-11-23T00:59:42Z",
       "side": 1,
       "message": "Before you use for-loops, please keep in mind that we prefer DAMP vs. DRY BUILD files:\n\nhttps://android.googlesource.com/kernel/build/+/refs/heads/main/kleaf/docs/kleaf_development.md#damp.",
+      "range": {
+        "startLine": 683,
+        "startChar": 0,
+        "endLine": 683,
+        "endChar": 1
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "418bf733_678244f0",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T02:14:15Z",
+      "side": 1,
+      "message": "I updated the label name to indicate it\u0027s internal. Unfortunately, there isn\u0027t a way I\u0027m aware to accomplish this task without this for-loop. Once the feature request, b/312798837, is done we can switch over.",
+      "parentUuid": "7a73867a_669159c5",
       "range": {
         "startLine": 683,
         "startChar": 0,
@@ -118,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74c3ad70_1d2466e8",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T02:14:15Z",
+      "side": 1,
+      "message": "Let\u0027s wait for b/312798837 instead.",
+      "parentUuid": "d00ce962_9950490a",
+      "range": {
+        "startLine": 687,
+        "startChar": 0,
+        "endLine": 690,
+        "endChar": 11
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95104609_5b31eec8",
@@ -131,6 +203,30 @@
       "writtenOn": "2023-11-23T00:59:42Z",
       "side": 1,
       "message": "delete this. Reasons:\n\ncopy_file.out expects a path not a label:\n\nhttps://github.com/bazelbuild/bazel-skylib/blob/main/docs/copy_file_doc.md\n\nSo you should have `_KUNIT_DIR + \"/\" + m` here.\n\nnit: also consider using paths.join:\n\nhttps://github.com/bazelbuild/bazel-skylib/blob/main/docs/paths_doc.md\n\nEven if you need a label, this package is not necessarily named //common. Using relative labels helps relocation in the future.",
+      "range": {
+        "startLine": 691,
+        "startChar": 15,
+        "endLine": 691,
+        "endChar": 24
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0659575_e92209de",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T02:14:15Z",
+      "side": 1,
+      "message": "Thanks, I had meant to remove //common. `paths.join` makes sense, I didn\u0027t know it was something available.\n\nIf this wasn\u0027t a path situation, is there a reason to prefer `_KUNIT_DIR + \"/\" + m` over `\"{}/{}\".format(_KUNIT_DIR, m)`?",
+      "parentUuid": "95104609_5b31eec8",
       "range": {
         "startLine": 691,
         "startChar": 15,
@@ -158,6 +254,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65d23644_4625c908",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T02:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f38d0637_83296c92",
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a5867eb_c113825e",
@@ -181,6 +295,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af35fec7_253b0bec",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T02:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5867eb_c113825e",
+      "range": {
+        "startLine": 703,
+        "startChar": 15,
+        "endLine": 703,
+        "endChar": 23
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ed1aa58_4e7c14bc",
@@ -194,6 +332,24 @@
       "writtenOn": "2023-11-23T00:59:42Z",
       "side": 1,
       "message": "visibility private",
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d171f76_54d511b3",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T02:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ed1aa58_4e7c14bc",
       "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
