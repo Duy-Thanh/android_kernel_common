@@ -34,6 +34,24 @@
       "parentUuid": "3b0725f8_4796d035",
       "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df45ae82_bb8c262d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-11-23T23:28:35Z",
+      "side": 1,
+      "message": "I would not want to ask you to do a (possibly lengthy) refactoring as part of this change or even as a prerequisite for it to land. I just saw the opportunity and would appreciate if you could consider it for (near) future changes.",
+      "parentUuid": "fb3e1a1a_b4bb7d2b",
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
