@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71c1e7fd_b83b1a7d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T01:45:46Z",
+      "side": 1,
+      "message": "\u003e You don\u0027t have to worry about syncing\n\nTechnically, the developer still needs to keep it in sync at L720/728. I\u0027ll remove the list and move the sync comment down to L720/728.",
+      "parentUuid": "783a6503_e2ce38aa",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 35
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a73867a_669159c5",
         "filename": "BUILD.bazel",
         "patchSetId": 8
@@ -60,6 +84,30 @@
       "writtenOn": "2023-11-23T00:59:42Z",
       "side": 1,
       "message": "This seems somewhat related to the macro in abi.bzl?",
+      "range": {
+        "startLine": 687,
+        "startChar": 0,
+        "endLine": 690,
+        "endChar": 11
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d00ce962_9950490a",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T01:45:46Z",
+      "side": 1,
+      "message": "It\u0027s similar to `_build_with_abi` and also the same as that used by the kselftests rules at the bottom of this file. I could create a `copy_file_with_abi` in abi.bzl if that\u0027s what you\u0027re suggesting.",
+      "parentUuid": "e42cdaed_25fc417f",
       "range": {
         "startLine": 687,
         "startChar": 0,
