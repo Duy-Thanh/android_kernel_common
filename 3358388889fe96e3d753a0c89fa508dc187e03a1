@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "783a6503_e2ce38aa",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-23T00:59:42Z",
+      "side": 1,
+      "message": "nit: I would suggest:\n\n- Deleting the list\n- Deleting L685 (so one doesn\u0027t need to remember to keep things in sync)\n- Expand the list in L720 / 728.\n\nYou don\u0027t have to worry about syncing. If L720 / 728 refers to a non-existent label, build will fail.",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 35
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a73867a_669159c5",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-23T00:59:42Z",
+      "side": 1,
+      "message": "Before you use for-loops, please keep in mind that we prefer DAMP vs. DRY BUILD files:\n\nhttps://android.googlesource.com/kernel/build/+/refs/heads/main/kleaf/docs/kleaf_development.md#damp.",
+      "range": {
+        "startLine": 683,
+        "startChar": 0,
+        "endLine": 683,
+        "endChar": 1
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42cdaed_25fc417f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-23T00:59:42Z",
+      "side": 1,
+      "message": "This seems somewhat related to the macro in abi.bzl?",
+      "range": {
+        "startLine": 687,
+        "startChar": 0,
+        "endLine": 690,
+        "endChar": 11
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95104609_5b31eec8",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-23T00:59:42Z",
+      "side": 1,
+      "message": "delete this. Reasons:\n\ncopy_file.out expects a path not a label:\n\nhttps://github.com/bazelbuild/bazel-skylib/blob/main/docs/copy_file_doc.md\n\nSo you should have `_KUNIT_DIR + \"/\" + m` here.\n\nnit: also consider using paths.join:\n\nhttps://github.com/bazelbuild/bazel-skylib/blob/main/docs/paths_doc.md\n\nEven if you need a label, this package is not necessarily named //common. Using relative labels helps relocation in the future.",
+      "range": {
+        "startLine": 691,
+        "startChar": 15,
+        "endLine": 691,
+        "endChar": 24
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f38d0637_83296c92",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-23T00:59:42Z",
+      "side": 1,
+      "message": "add visibility private",
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a5867eb_c113825e",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-23T00:59:42Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 703,
+        "startChar": 15,
+        "endLine": 703,
+        "endChar": 23
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ed1aa58_4e7c14bc",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-23T00:59:42Z",
+      "side": 1,
+      "message": "visibility private",
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
