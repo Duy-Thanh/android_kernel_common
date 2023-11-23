@@ -16,6 +16,24 @@
       "message": "The toplevel `BUILD.bazel` gets quite busy. I would appreciate any way to move the description to somewhere within `tools/testing/`.\n\nHow do we make sure to align with other branches like a15-6.1 and a15-6.6?",
       "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb3e1a1a_b4bb7d2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-23T15:45:40Z",
+      "side": 1,
+      "message": "Ok, I can look into that. Are you referring to just the changes in this CL or all KUnit/kselftest additions to `BUILD.bazel`?",
+      "parentUuid": "3b0725f8_4796d035",
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
