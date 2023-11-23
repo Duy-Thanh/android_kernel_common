@@ -334484,6 +334484,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_set_user_nice"
 }
 elf_symbol {
+  id: 0x559e0725
+  name: "__traceiter_android_rvh_set_user_nice_locked"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x53ea7aef
+  type_id: 0x9bd6ff14
+  full_name: "__traceiter_android_rvh_set_user_nice_locked"
+}
+elf_symbol {
   id: 0xa01b20ce
   name: "__traceiter_android_rvh_setscheduler"
   is_defined: true
@@ -338424,6 +338433,15 @@ elf_symbol {
   crc: 0x4529c9f1
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_set_user_nice"
+}
+elf_symbol {
+  id: 0x74f29f73
+  name: "__tracepoint_android_rvh_set_user_nice_locked"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8f0ba608
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_set_user_nice_locked"
 }
 elf_symbol {
   id: 0xe48123a4
@@ -397033,6 +397051,7 @@ interface {
   symbol_id: 0x615c3dcf
   symbol_id: 0xc6a28b4a
   symbol_id: 0x9b0cc890
+  symbol_id: 0x559e0725
   symbol_id: 0xa01b20ce
   symbol_id: 0x73c83ef4
   symbol_id: 0x46515de8
@@ -397471,6 +397490,7 @@ interface {
   symbol_id: 0xde470f79
   symbol_id: 0xc5049f7c
   symbol_id: 0x42fff08e
+  symbol_id: 0x74f29f73
   symbol_id: 0xe48123a4
   symbol_id: 0x00b7ed82
   symbol_id: 0xe8cacf26
