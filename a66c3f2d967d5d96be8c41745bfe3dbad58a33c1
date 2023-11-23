@@ -16,6 +16,24 @@
       "message": "where is the tracepoint version of this symbol? Please always add them as a pair.",
       "revId": "a66c3f2d967d5d96be8c41745bfe3dbad58a33c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2328c017_3390ebba",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-11-23T10:37:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "57c6a08f_6edee66e",
+      "revId": "a66c3f2d967d5d96be8c41745bfe3dbad58a33c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
