@@ -12024,6 +12024,11 @@ static int inherit_group(struct perf_event *parent_event,
 		    !perf_get_aux_event(child_ctr, leader))
 			return -EINVAL;
 	}
+<<<<<<< HEAD   (7e0378 ANDROID: GKI: db845c: Update symbols list and ABI on pcie_ca)
+=======
+	if (leader)
+		leader->group_generation = parent_event->group_generation;
+>>>>>>> BRANCH (87e8e7 Linux 5.4.260)
 	return 0;
 }
 
