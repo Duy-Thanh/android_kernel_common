@@ -13161,6 +13161,11 @@ static int inherit_group(struct perf_event *parent_event,
 		    !perf_get_aux_event(child_ctr, leader))
 			return -EINVAL;
 	}
+<<<<<<< HEAD   (61cfd2 Revert "ipv4/fib: send notify when delete source address rou)
+=======
+	if (leader)
+		leader->group_generation = parent_event->group_generation;
+>>>>>>> BRANCH (80529b Linux 5.15.138)
 	return 0;
 }
 
