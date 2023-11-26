@@ -5007,4 +5007,13 @@ do {								\
 
 extern struct net_device *blackhole_netdev;
 
+<<<<<<< HEAD   (0fd796 Merge 5.4.260 into android12-5.4-lts)
+=======
+/* Note: Avoid these macros in fast path, prefer per-cpu or per-queue counters. */
+#define DEV_STATS_INC(DEV, FIELD) atomic_long_inc(&(DEV)->stats.__##FIELD)
+#define DEV_STATS_ADD(DEV, FIELD, VAL) 	\
+		atomic_long_add((VAL), &(DEV)->stats.__##FIELD)
+#define DEV_STATS_READ(DEV, FIELD) atomic_long_read(&(DEV)->stats.__##FIELD)
+
+>>>>>>> BRANCH (ef3797 Linux 5.4.261)
 #endif	/* _LINUX_NETDEVICE_H */
