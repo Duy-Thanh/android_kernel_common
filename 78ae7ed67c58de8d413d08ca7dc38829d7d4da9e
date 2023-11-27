@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ffcbb0e_3c51dd27",
+        "filename": "BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-27T15:39:29Z",
+      "side": 1,
+      "message": "Thanks, removing usage of `select` looks better (seems more DAMP than DRY). I\u0027d be inclined to also change the existing kselftest rule this was based off of at L962.",
+      "parentUuid": "6641cf0b_7b55ae1b",
+      "range": {
+        "startLine": 685,
+        "startChar": 14,
+        "endLine": 685,
+        "endChar": 20
+      },
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ad0d641_29ea4d23",
         "filename": "BUILD.bazel",
         "patchSetId": 9
@@ -126,6 +150,30 @@
       "writtenOn": "2023-11-27T11:00:00Z",
       "side": 1,
       "message": "nit: if this constant is used in the context of x86\u003c\u003earm64, it should rather be named `_KUNIT_ARM64_MODULES` to make this a little more clear.",
+      "range": {
+        "startLine": 702,
+        "startChar": 13,
+        "endLine": 702,
+        "endChar": 31
+      },
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae2f1d7_999fc538",
+        "filename": "BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-27T15:39:29Z",
+      "side": 1,
+      "message": "`_KUNIT_CLK_MODULES` could be applicable to other archs once we get there, and a full `_KUNIT_ARM64_MODULES` would also need to include `_KUNIT_COMMON_MODULES` (which happens to be the full x86_64 kunit module list). An easy middle ground could be something like:\n```\n_KUNIT_x86_64_MODULES \u003d _KUNIT_COMMON_MODULES\n_KUNIT_ARM64_MODULES \u003d _KUNIT_COMMON_MODULES + _KUNIT_CLK_MODULES\n```",
+      "parentUuid": "1ad0d641_29ea4d23",
       "range": {
         "startLine": 702,
         "startChar": 13,
