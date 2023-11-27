@@ -16,6 +16,23 @@
       "message": "Could you help to review my patch? Thanks",
       "revId": "f566dbbb798c53084958ab60caeb396d2affa3d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4f9c3e2_63ced92a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-27T16:37:57Z",
+      "side": 1,
+      "message": "No, these exports have been removed, they should no longer be needed anymore.\n\nWhat out-of-tree code requires this?  Odds are it is doing something wrong as upstream removed these exports for a reason.",
+      "revId": "f566dbbb798c53084958ab60caeb396d2affa3d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
