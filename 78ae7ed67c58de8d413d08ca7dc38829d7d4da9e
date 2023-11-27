@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "297ec64d_d47dc2cd",
+        "filename": "BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-11-27T17:34:27Z",
+      "side": 1,
+      "message": "From [0], there seems to be a `no_match_error` argument (which I\u0027ve not used before), does that work?\n\n[0] https://bazel.build/reference/be/functions#select",
+      "parentUuid": "152fc7af_0db7e3ef",
+      "range": {
+        "startLine": 685,
+        "startChar": 14,
+        "endLine": 685,
+        "endChar": 20
+      },
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ad0d641_29ea4d23",
         "filename": "BUILD.bazel",
         "patchSetId": 9
