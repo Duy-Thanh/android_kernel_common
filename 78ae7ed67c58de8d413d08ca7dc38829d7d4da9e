@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "152fc7af_0db7e3ef",
+        "filename": "BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-27T17:20:58Z",
+      "side": 1,
+      "message": "I was unable to split `kunit_gen_config` into two separate rules based off of arch because of a naming collision with the output file. I was able to get around this for the other rule, `_{}_copy`, by inserting an arch directory in the output path, but we can\u0027t do this for the `kunit_gen_config` config file because we want it sitting in the same place in the parent directory regardless of arch. \n\nGoing back to the `//conditions/default` discussion, if it\u0027s neither of the defined archs, I would like it to fail. I can\u0027t find any clear documentation on this in regards to the `select()`. I tried the following:\n```\n    src \u003d select({\n        \":x86_64\": \"tools/testing/kunit/android/config_x86_64.xml\",\n        \":arm64\": \"tools/testing/kunit/android/config_arm64.xml\",\n        \"//conditions:default\": fail(\"unsupported arch for kunit_gen_config\"),\n    }),\n```\n\nbut the fail error always get\u0027s evaluated. Is there a way to force an error in this situation?",
+      "parentUuid": "1ffcbb0e_3c51dd27",
+      "range": {
+        "startLine": 685,
+        "startChar": 14,
+        "endLine": 685,
+        "endChar": 20
+      },
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ad0d641_29ea4d23",
         "filename": "BUILD.bazel",
         "patchSetId": 9
@@ -198,6 +222,30 @@
       "side": 1,
       "message": "that makes sense, assuming you meant `_KUNIT_X86_64_MODULES`",
       "parentUuid": "4ae2f1d7_999fc538",
+      "range": {
+        "startLine": 702,
+        "startChar": 13,
+        "endLine": 702,
+        "endChar": 31
+      },
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61890e5_87127782",
+        "filename": "BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-27T17:20:58Z",
+      "side": 1,
+      "message": "Thanks, regarding the lower case `x` in my comment, that was a typo I meant upper.",
+      "parentUuid": "c753344b_383cda4a",
       "range": {
         "startLine": 702,
         "startChar": 13,
