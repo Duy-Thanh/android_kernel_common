@@ -52,6 +52,24 @@
       "parentUuid": "fb3e1a1a_b4bb7d2b",
       "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e05524c9_4b7b1cda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-11-27T04:39:35Z",
+      "side": 1,
+      "message": "Agreed. By having a separate BUILD.bazel in tools/testing, they become separate modules. This is a nontrivial refactoring, but worth doing.",
+      "parentUuid": "df45ae82_bb8c262d",
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
