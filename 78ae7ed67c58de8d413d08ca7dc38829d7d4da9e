@@ -70,6 +70,47 @@
       "parentUuid": "df45ae82_bb8c262d",
       "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa9894c9_0f2a584d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-11-27T11:00:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e05524c9_4b7b1cda",
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ad0d641_29ea4d23",
+        "filename": "BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-11-27T11:00:00Z",
+      "side": 1,
+      "message": "nit: if this constant is used in the context of x86\u003c\u003earm64, it should rather be named `_KUNIT_ARM64_MODULES` to make this a little more clear.",
+      "range": {
+        "startLine": 702,
+        "startChar": 13,
+        "endLine": 702,
+        "endChar": 31
+      },
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
