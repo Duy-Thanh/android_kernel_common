@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "208c5d8d_011ddb22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-27T17:11:38Z",
+      "side": 1,
+      "message": "I assume that the version without the lock is no longer needed. Please submit this change/fix to android-mainline and android15-6.1 too.",
+      "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
