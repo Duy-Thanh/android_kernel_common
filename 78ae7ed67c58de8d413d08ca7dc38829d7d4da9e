@@ -92,6 +92,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6641cf0b_7b55ae1b",
+        "filename": "BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-11-27T12:47:16Z",
+      "side": 1,
+      "message": "Here an below (L707), note that it\u0027s possible to have combinations other than `android_x86_64` or `android_arm64` in which case this `select` might produce an error [0], a good practice is to use the special pseudo-label `//conditions:default` to indicate what to do in these cases.\n\nBut more generally, I\u0027m not sure if the select is really needed, at the end the zip packages are differentiated with the arch in their names, so it should be OK (IMO) to have `kunit_\u003carch\u003e_gen_config` targets.\n\n[0] https://bazel.build/reference/be/functions#select",
+      "range": {
+        "startLine": 685,
+        "startChar": 14,
+        "endLine": 685,
+        "endChar": 20
+      },
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ad0d641_29ea4d23",
         "filename": "BUILD.bazel",
         "patchSetId": 9
