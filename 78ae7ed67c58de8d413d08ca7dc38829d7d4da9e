@@ -185,6 +185,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aecf97f2_8804e07c",
+        "filename": "BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-11-27T17:55:03Z",
+      "side": 1,
+      "message": "Thank you, that does work.",
+      "parentUuid": "297ec64d_d47dc2cd",
+      "range": {
+        "startLine": 685,
+        "startChar": 14,
+        "endLine": 685,
+        "endChar": 20
+      },
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ad0d641_29ea4d23",
