@@ -81,10 +81,13 @@ static void hyp_unlock_component(void)
 
 static void assert_host_can_alloc(void)
 {
+	u64 esr;
+
 	/* We can always get back to the host from guest context */
 	if (read_sysreg(vttbr_el2) != kvm_get_vttbr(&host_mmu.arch.mmu))
 		return;
 
+	esr = read_sysreg(esr_el2);
 	/*
 	 * An error code must be returned to EL1 to handle memory allocation
 	 * failures cleanly. That's doable for explicit calls into higher
@@ -92,7 +95,17 @@ static void assert_host_can_alloc(void)
 	 * Thankfully we don't need memory allocation in these cases by
 	 * construction, so let's enforce the invariant.
 	 */
-	switch (ESR_ELx_EC(read_sysreg(esr_el2))) {
+	switch (ESR_ELx_EC(esr)) {
+	case ESR_ELx_EC_DABT_LOW:
+		/*
+		 * Permission faults are always caused and handled by modules
+		 * which may need to allocate form the abort path.
+		 */
+		WARN_ON((esr & ESR_ELx_FSC_TYPE) != FSC_PERM);
+		fallthrough;
+	case ESR_ELx_EC_SYS64:
+		/* Handled by modules as well. */
+		break;
 	case ESR_ELx_EC_HVC64:
 	case ESR_ELx_EC_SMC64:
 		break;
