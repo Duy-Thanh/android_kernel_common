@@ -88,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39787cf1_e97c3b7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-11-27T15:59:05Z",
+      "side": 1,
+      "message": "The problem is that you cannot know how much memory you will consume for MMIO mappings at the time of reserving the memory for the stage2 pagetables. You can only calculate based on the worst case scenario. For 4KB PAGE_SIZE, reserving 1GB of IPA space works just fine because you have to reserve enough space to be able to address 262144 pages, which is 514 pages for MMIO mappings.",
+      "parentUuid": "44995190_6a658b80",
+      "revId": "26b467a5514d6a5274908d5d4872bb3f37913af2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7652380b_38b6053a",
@@ -101,6 +119,30 @@
       "writtenOn": "2023-11-27T15:10:15Z",
       "side": 1,
       "message": "What is this used for now?",
+      "range": {
+        "startLine": 188,
+        "startChar": 2,
+        "endLine": 188,
+        "endChar": 31
+      },
+      "revId": "26b467a5514d6a5274908d5d4872bb3f37913af2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1236b4c0_b27de0c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-11-27T15:59:05Z",
+      "side": 1,
+      "message": "We can drop this, it doesn\u0027t seem to be used.",
+      "parentUuid": "7652380b_38b6053a",
       "range": {
         "startLine": 188,
         "startChar": 2,
