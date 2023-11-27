@@ -173,7 +173,10 @@ static int dp_altmode_configured(struct dp_altmode *dp)
 	 * configuration is complete to signal HPD.
 	 */
 	if (dp->pending_hpd) {
+<<<<<<< HEAD   (a2eefd Revert "kasan: print the original fault addr when access inv)
 		drm_connector_oob_hotplug_event(dp->connector_fwnode);
+=======
+>>>>>>> BRANCH (d2c0f4 FROMLIST: devcoredump: Send uevent once devcd is ready)
 		sysfs_notify(&dp->alt->dev.kobj, "displayport", "hpd");
 		dp->pending_hpd = false;
 	}
