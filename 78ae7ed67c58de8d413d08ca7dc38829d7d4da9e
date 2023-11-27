@@ -182,6 +182,30 @@
       },
       "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c753344b_383cda4a",
+        "filename": "BUILD.bazel",
+        "patchSetId": 9
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-11-27T16:18:23Z",
+      "side": 1,
+      "message": "that makes sense, assuming you meant `_KUNIT_X86_64_MODULES`",
+      "parentUuid": "4ae2f1d7_999fc538",
+      "range": {
+        "startLine": 702,
+        "startChar": 13,
+        "endLine": 702,
+        "endChar": 31
+      },
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
