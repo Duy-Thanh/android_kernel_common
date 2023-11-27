@@ -69,6 +69,46 @@
       "parentUuid": "cf4bcedc_877d4ef4",
       "revId": "26b467a5514d6a5274908d5d4872bb3f37913af2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44995190_6a658b80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-11-27T15:10:15Z",
+      "side": 1,
+      "message": "So the real problem is that we end up using more memory for MMIO page tables than what we had reserved for it (enough to map 1GiB with page granularity), which means we don\u0027t really have a choice and need to bring back the page recycling logic that aosp/2519852 and parents removed ... The CL as is might very well be addressing the symptoms rather than the root cause :/",
+      "revId": "26b467a5514d6a5274908d5d4872bb3f37913af2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7652380b_38b6053a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-11-27T15:10:15Z",
+      "side": 1,
+      "message": "What is this used for now?",
+      "range": {
+        "startLine": 188,
+        "startChar": 2,
+        "endLine": 188,
+        "endChar": 31
+      },
+      "revId": "26b467a5514d6a5274908d5d4872bb3f37913af2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
