@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a61faf2a_04b3dc41",
+        "filename": "Documentation/devicetree/bindings/android/google,debug-kinfo.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-27T18:57:07Z",
+      "side": 1,
+      "message": "yaml",
+      "range": {
+        "startLine": 4,
+        "startChar": 63,
+        "endLine": 4,
+        "endChar": 67
+      },
+      "revId": "b128868ea7cb5ebef700d9a27bfc221e6e701f7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35d7063a_3402a4d2",
+        "filename": "Documentation/devicetree/bindings/android/google,debug-kinfo.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-27T18:57:07Z",
+      "side": 1,
+      "message": "spelling: stored",
+      "range": {
+        "startLine": 7,
+        "startChar": 52,
+        "endLine": 7,
+        "endChar": 58
+      },
+      "revId": "b128868ea7cb5ebef700d9a27bfc221e6e701f7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7f2111d_3f0084c4",
+        "filename": "Documentation/devicetree/bindings/android/google,debug-kinfo.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-27T18:57:07Z",
+      "side": 1,
+      "message": "Please use 2 spaces for compatible and memory-region",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 1
+      },
+      "revId": "b128868ea7cb5ebef700d9a27bfc221e6e701f7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7991dd30_3eec8305",
+        "filename": "Documentation/devicetree/bindings/android/google,debug-kinfo.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-27T18:57:07Z",
+      "side": 1,
+      "message": "Please use 2 spaces here.",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 2
+      },
+      "revId": "b128868ea7cb5ebef700d9a27bfc221e6e701f7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a72d23d6_00403b77",
+        "filename": "Documentation/devicetree/bindings/android/google,debug-kinfo.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-27T18:57:07Z",
+      "side": 1,
+      "message": "spelling: reserved",
+      "range": {
+        "startLine": 23,
+        "startChar": 22,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "b128868ea7cb5ebef700d9a27bfc221e6e701f7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e41de8ce_bb1d6515",
+        "filename": "Documentation/devicetree/bindings/android/google,debug-kinfo.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-27T18:57:07Z",
+      "side": 1,
+      "message": "Please use 2 spaces instead of 3",
+      "range": {
+        "startLine": 23,
+        "startChar": 3,
+        "endLine": 23,
+        "endChar": 6
+      },
+      "revId": "b128868ea7cb5ebef700d9a27bfc221e6e701f7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91dd403_787d2a04",
+        "filename": "Documentation/devicetree/bindings/android/google,debug-kinfo.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-27T18:57:07Z",
+      "side": 1,
+      "message": "Line this up with the |",
+      "range": {
+        "startLine": 31,
+        "startChar": 5,
+        "endLine": 31,
+        "endChar": 8
+      },
+      "revId": "b128868ea7cb5ebef700d9a27bfc221e6e701f7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af733d39_01d84054",
+        "filename": "Documentation/devicetree/bindings/android/google,debug-kinfo.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-27T18:57:07Z",
+      "side": 1,
+      "message": "Underscores are not allowed in the upstream DT. Please use dashes instead.",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "b128868ea7cb5ebef700d9a27bfc221e6e701f7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
