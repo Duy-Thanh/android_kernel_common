@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57510be5_cce7327d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-11-27T16:04:24Z",
+      "side": 1,
+      "message": "Yup, which is why we had the whole recycling logic, so that when we run out of pages, we unmap MMIO ranges from one side to map it the other side. It\u0027s not pretty and should hopefully not hit in practice, but I feel pretty bad not having that logic as without it we cannot guarantee forward progress ...",
+      "parentUuid": "39787cf1_e97c3b7b",
+      "revId": "26b467a5514d6a5274908d5d4872bb3f37913af2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7652380b_38b6053a",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
