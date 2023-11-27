@@ -16,6 +16,23 @@
       "message": "I assume that the version without the lock is no longer needed. Please submit this change/fix to android-mainline and android15-6.1 too.",
       "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9cecd99_c651a3f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-27T17:22:44Z",
+      "side": 1,
+      "message": "please submit to 15-6.1 and android-mainline too (replacing the unlock version)",
+      "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
