@@ -16,6 +16,24 @@
       "message": "That likely needs an update to the ABI representation. And we usually split code change from symbol list update. Can you please do that here as well?",
       "revId": "d70a2cb762b7cef4daa5d57a74028780bfbd17e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d205ab02_9367fdf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2003836
+      },
+      "writtenOn": "2023-11-28T05:48:42Z",
+      "side": 1,
+      "message": "Will separate code and ABI changes from this gerrit. Also, ABI update is causing error. Also have checked android13-5.15 gerrit (https://android-review.googlesource.com/c/kernel/common/+/2176062) where ABI is not updated for this symbol.",
+      "parentUuid": "abf6a112_67600815",
+      "revId": "d70a2cb762b7cef4daa5d57a74028780bfbd17e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
