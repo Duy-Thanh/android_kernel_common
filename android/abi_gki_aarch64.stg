@@ -283430,6 +283430,12 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x94156e91
+  return_type_id: 0x6720d32f
+  parameter_id: 0x25b73daa
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x941967cc
   return_type_id: 0x6720d32f
   parameter_id: 0x22561ecb
@@ -347627,6 +347633,15 @@ elf_symbol {
   full_name: "rpmsg_register_device"
 }
 elf_symbol {
+  id: 0x7c2a2a37
+  name: "rpmsg_register_device_override"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7228b10e
+  type_id: 0x94156e91
+  full_name: "rpmsg_register_device_override"
+}
+elf_symbol {
   id: 0x882375b2
   name: "rpmsg_release_channel"
   is_defined: true
@@ -367691,6 +367706,7 @@ interface {
   symbol_id: 0xbd42a7e4
   symbol_id: 0x1bdc5aa0
   symbol_id: 0x8b5859cf
+  symbol_id: 0x7c2a2a37
   symbol_id: 0x882375b2
   symbol_id: 0x5d71330c
   symbol_id: 0xa4ceb82a
