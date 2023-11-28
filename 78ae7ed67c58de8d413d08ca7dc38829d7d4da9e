@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f479d56_5d8359a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-28T00:29:06Z",
+      "side": 1,
+      "message": "As long as there are no sources under this `tools/testing` directory, the refactoring is somehow trivial.\n\nThe issue gets messy when there are sources under the directory, in which case we have to re-export the sources under that package and feed it into `//common:kernel_common_sources`.",
+      "parentUuid": "aa9894c9_0f2a584d",
+      "revId": "78ae7ed67c58de8d413d08ca7dc38829d7d4da9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6641cf0b_7b55ae1b",
