@@ -190,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70224ea6_280e6301",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-28T00:26:23Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "74c3ad70_1d2466e8",
+      "range": {
+        "startLine": 687,
+        "startChar": 0,
+        "endLine": 690,
+        "endChar": 11
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95104609_5b31eec8",
@@ -227,6 +251,30 @@
       "side": 1,
       "message": "Thanks, I had meant to remove //common. `paths.join` makes sense, I didn\u0027t know it was something available.\n\nIf this wasn\u0027t a path situation, is there a reason to prefer `_KUNIT_DIR + \"/\" + m` over `\"{}/{}\".format(_KUNIT_DIR, m)`?",
       "parentUuid": "95104609_5b31eec8",
+      "range": {
+        "startLine": 691,
+        "startChar": 15,
+        "endLine": 691,
+        "endChar": 24
+      },
+      "revId": "3358388889fe96e3d753a0c89fa508dc187e03a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "314729c2_134d7aa1",
+        "filename": "BUILD.bazel",
+        "patchSetId": 8
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-28T00:26:23Z",
+      "side": 1,
+      "message": "No, both look fine to me. In fact in Kleaf\u0027s code, you\u0027ll see many instances of `\"{}/{}\".format(...)` but hardly any `a + \"/\" + b`.",
+      "parentUuid": "e0659575_e92209de",
       "range": {
         "startLine": 691,
         "startChar": 15,
