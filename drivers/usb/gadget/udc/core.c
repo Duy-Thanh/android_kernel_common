@@ -1591,8 +1591,46 @@ err1:
 
 int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
 {
+<<<<<<< HEAD   (88a8a2 ANDROID: GKI: Enable CONFIG_USB_EHCI_ROOT_HUB_TT)
 	struct usb_udc		*udc = NULL;
 	int			ret = -ENODEV;
+=======
+	struct usb_gadget *gadget = dev_to_usb_gadget(dev);
+	struct usb_udc *udc = gadget->udc;
+	struct usb_gadget_driver *driver = udc->driver;
+
+	dev_dbg(&udc->dev, "unbinding gadget driver [%s]\n", driver->function);
+
+	udc->allow_connect = false;
+	cancel_work_sync(&udc->vbus_work);
+	mutex_lock(&udc->connect_lock);
+	usb_gadget_disconnect_locked(gadget);
+	usb_gadget_disable_async_callbacks(udc);
+	if (gadget->irq)
+		synchronize_irq(gadget->irq);
+	mutex_unlock(&udc->connect_lock);
+
+	udc->driver->unbind(gadget);
+
+	mutex_lock(&udc->connect_lock);
+	usb_gadget_udc_stop_locked(udc);
+	mutex_unlock(&udc->connect_lock);
+
+	mutex_lock(&udc_lock);
+	driver->is_bound = false;
+	udc->driver = NULL;
+	mutex_unlock(&udc_lock);
+
+	kobject_uevent(&udc->dev.kobj, KOBJ_CHANGE);
+}
+
+/* ------------------------------------------------------------------------- */
+
+int usb_gadget_register_driver_owner(struct usb_gadget_driver *driver,
+		struct module *owner, const char *mod_name)
+{
+	int ret;
+>>>>>>> CHANGE (0c2fb3 UPSTREAM: USB: gadget: core: adjust uevent timing on gadget )
 
 	if (!driver || !driver->bind || !driver->setup)
 		return -EINVAL;
