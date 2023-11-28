@@ -51,6 +51,23 @@
       "parentUuid": "208c5d8d_011ddb22",
       "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39517e6_a696e858",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7238,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-28T16:52:28Z",
+      "side": 1,
+      "message": "Do we really need the bounds checks here giving it is also done at 7228? The hook handler can do this if it changes the value for `nice`. How about\n```\nif (!allowed)\n  goto out_unlock;\n```",
+      "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
