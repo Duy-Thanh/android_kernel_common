@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c159f1bd_f8773e03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-11-28T23:52:31Z",
+      "side": 1,
+      "message": "d",
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "079e36b1_4fab92b5",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-11-28T23:52:31Z",
+      "side": 1,
+      "message": "nit: is it necessary to store the process in this registration if it can be obtained via the thread object?",
+      "range": {
+        "startLine": 434,
+        "startChar": 16,
+        "endLine": 434,
+        "endChar": 57
+      },
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1514160d_44f3caa3",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-11-28T23:52:31Z",
+      "side": 1,
+      "message": "It looks like a warning is issues for this case, but the Registration is still returned. In this case, it will remove the registration from the ready_threads list as soon as the first registration associated with the thread completes. Is this the intended behavior?",
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf776a8c_1a4a3b58",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-11-28T23:52:31Z",
+      "side": 1,
+      "message": "Could some unrelated code have added the thread to the ready_threads list of a different process? It looks like (from the fact that `new` is safe) it would be a safe operation to do so.",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 59
+      },
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
