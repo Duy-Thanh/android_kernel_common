@@ -33,6 +33,24 @@
       "message": "please submit to 15-6.1 and android-mainline too (replacing the unlock version)",
       "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c18f58_7e2be54a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-11-28T01:07:18Z",
+      "side": 1,
+      "message": "Sure, will submit to android-mainline and android15-6.1 too. However, the unlocked version is submitted by other vendor (aosp/1555273), maybe we have to keep both versions.",
+      "parentUuid": "208c5d8d_011ddb22",
+      "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
