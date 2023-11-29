@@ -52,6 +52,24 @@
       "parentUuid": "165b90bc_e2325e22",
       "revId": "a0b3132337f9c3ba2463049a61df87e341adeb81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e07c4a_63520adb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-29T18:05:43Z",
+      "side": 1,
+      "message": "As Greg, said, this is now an `ANDROID` patch, but please do keep the \"Link:\" tags citing the upstream interactions.\n\nWe can land this for now. Please submit patches to AOSP to fix the userspace issues, we can help get those landed once they are submitted.",
+      "parentUuid": "55ac7e92_5d52976a",
+      "revId": "a0b3132337f9c3ba2463049a61df87e341adeb81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
