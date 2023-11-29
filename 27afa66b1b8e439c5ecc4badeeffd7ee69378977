@@ -68,6 +68,24 @@
       "message": "Do we really need the bounds checks here giving it is also done at 7228? The hook handler can do this if it changes the value for `nice`. How about\n```\nif (!allowed)\n  goto out_unlock;\n```",
       "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc0045d_12fa8a24",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7238,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-11-29T08:53:10Z",
+      "side": 1,
+      "message": "Since this is 6.1 kernel, I suppose we could sync the change as android15-6.1. However, for older kernel (5.15/5.10), the tricky part is the default value of \"allowed\". To make it work in 7228 if trace_android_rvh_set_user_nice is not registered, it has to be default false, but if we change it to \"if (!allowed)\" here, it will bail out if trace_android_rvh_set_user_nice_locked is not registered. In our current vendor hook, we just change the task prio but updates the task nice without touching allowed, so \"task_nice(p) \u003d\u003d nice\" will be true and the code will bailed out, that\u0027s why I kept the whole thing originally, but we don\u0027t need to check \"nice \u003c MIN_NICE || nice \u003e MAX_NICE\" again for sure. I think setting the default value of allowed to true and modify 7228 to \"if ((task_nice(p) \u003d\u003d nice || nice \u003c MIN_NICE || nice \u003e MAX_NICE) \u0026\u0026 allowed)\" is better, but I\u0027m not sure if it will break other vendor\u0027s code, or we could change it to \"if (allowed)\" here, including android15-6.1 and keep allowed default false.",
+      "parentUuid": "e39517e6_a696e858",
+      "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
