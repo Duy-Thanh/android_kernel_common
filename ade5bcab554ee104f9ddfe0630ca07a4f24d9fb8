@@ -60,6 +60,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14debe1d_d82c975e",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-11-29T09:39:49Z",
+      "side": 1,
+      "message": "The intended behavior is that this branch is unreachable.",
+      "parentUuid": "1514160d_44f3caa3",
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf776a8c_1a4a3b58",
         "filename": "drivers/android/process.rs",
         "patchSetId": 1
@@ -71,6 +89,30 @@
       "writtenOn": "2023-11-28T23:52:31Z",
       "side": 1,
       "message": "Could some unrelated code have added the thread to the ready_threads list of a different process? It looks like (from the fact that `new` is safe) it would be a safe operation to do so.",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 59
+      },
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c9025e_fb638356",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-11-29T09:39:49Z",
+      "side": 1,
+      "message": "The assert in `new` was intended to prevent that possibility, though I guess I don\u0027t check that the guard is really associated with the provided process.",
+      "parentUuid": "cf776a8c_1a4a3b58",
       "range": {
         "startLine": 448,
         "startChar": 0,
