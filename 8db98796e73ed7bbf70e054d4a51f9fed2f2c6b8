@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a2dc2de_26b09618",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-29T17:29:33Z",
+      "side": 1,
+      "message": "It seems like this should be upstream if there is FP state that needs to be save/restored. Why not send this feature upstream instead of implementing as a hook here?",
+      "revId": "8db98796e73ed7bbf70e054d4a51f9fed2f2c6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7958e27e_efc04ea5",
+        "filename": "arch/arm64/include/asm/processor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-29T17:29:33Z",
+      "side": 1,
+      "message": "We normally add vendor data to the end of the struct, why does it need to be here?",
+      "revId": "8db98796e73ed7bbf70e054d4a51f9fed2f2c6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "372e9dd9_c0a1ce5b",
+        "filename": "include/trace/hooks/fpsimd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-29T17:29:33Z",
+      "side": 1,
+      "message": "please remove this unneeded #include",
+      "revId": "8db98796e73ed7bbf70e054d4a51f9fed2f2c6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca2bb63_cdbf03c3",
+        "filename": "include/trace/hooks/fpsimd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-29T17:29:33Z",
+      "side": 1,
+      "message": "remove this obsolete pattern along with the #if at line 13",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 6
+      },
+      "revId": "8db98796e73ed7bbf70e054d4a51f9fed2f2c6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
