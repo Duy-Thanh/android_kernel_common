@@ -121,6 +121,30 @@
       },
       "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d059ecd5_6e21ceb4",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-11-29T17:09:20Z",
+      "side": 1,
+      "message": "My point is that the code in `new` is all safe code, and could be written by someone else outside of this module.",
+      "parentUuid": "79c9025e_fb638356",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 59
+      },
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
