@@ -52,6 +52,24 @@
       "parentUuid": "d205ab02_9367fdf9",
       "revId": "d70a2cb762b7cef4daa5d57a74028780bfbd17e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e77589e_aa3adc0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2003836
+      },
+      "writtenOn": "2023-11-29T12:25:02Z",
+      "side": 1,
+      "message": "Thanks for the pointers. Have raised diff Gerrit with updated symbol list. https://android-review.googlesource.com/c/kernel/common/+/2849654",
+      "parentUuid": "5890fc35_57cc042d",
+      "revId": "d70a2cb762b7cef4daa5d57a74028780bfbd17e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
