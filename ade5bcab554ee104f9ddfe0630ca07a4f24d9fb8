@@ -145,6 +145,30 @@
       },
       "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db0e91c_ab610b17",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-11-29T17:47:18Z",
+      "side": 1,
+      "message": "The `ready_threads` field is private, so someone outside this module can\u0027t do that. See [the scope of unsafe](https://www.ralfj.de/blog/2016/01/09/the-scope-of-unsafe.html) by Ralf Jung for a more general treatment of this kind of problem.",
+      "parentUuid": "d059ecd5_6e21ceb4",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 59
+      },
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
