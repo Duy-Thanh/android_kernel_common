@@ -88,6 +88,24 @@
       "parentUuid": "39a1a841_f6a0d533",
       "revId": "9e9709fd11d3d15674f5a4b1912537218962f38d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eee7bd2_8924f7af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-11-29T10:04:32Z",
+      "side": 1,
+      "message": "Right, we also need to patch the ABL which is adding an unaligned node to the flattened device tree.",
+      "parentUuid": "97477ab8_1cbe3d6f",
+      "revId": "9e9709fd11d3d15674f5a4b1912537218962f38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
