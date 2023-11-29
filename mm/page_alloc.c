@@ -6716,6 +6716,9 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
 	if (cc->gfp_mask & __GFP_NORETRY)
 		max_tries = 1;
 
+	if (cc->gfp_mask & __GFP_NORETRY)
+		max_tries = 1;
+
 	lru_cache_disable();
 
 	while (pfn < end || !list_empty(&cc->migratepages)) {
@@ -6892,7 +6895,13 @@ int alloc_contig_range_noprof(unsigned long start, unsigned long end,
 	 * allocated.  So, if we fall through be sure to clear ret so that
 	 * -EBUSY is not accidentally used or returned to caller.
 	 */
+<<<<<<< HEAD   (f01c2f ANDROID: GKI: Add mm_filemap_* symbols for unisoc)
 	ret = __alloc_contig_migrate_range(&cc, start, end, migratetype);
+||||||| BASE
+	ret = __alloc_contig_migrate_range(&cc, start, end);
+=======
+	ret = __alloc_contig_migrate_range(&cc, start, end);
+>>>>>>> CHANGE (9e69c3 ANDROID: mm: cma: introduce __cma_alloc API)
 	if (ret && (ret != -EBUSY || (gfp_mask & __GFP_NORETRY)))
 		goto done;
 	ret = 0;
