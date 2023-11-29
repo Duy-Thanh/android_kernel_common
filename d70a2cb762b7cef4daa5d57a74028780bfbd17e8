@@ -34,6 +34,24 @@
       "parentUuid": "abf6a112_67600815",
       "revId": "d70a2cb762b7cef4daa5d57a74028780bfbd17e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5890fc35_57cc042d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-11-29T10:21:18Z",
+      "side": 1,
+      "message": "Acknowledged, FWIW there was an update on android13-5.15 as well: aosp/2174507\n\nI swapped the commits such that the export comes first and the symbol list update second.",
+      "parentUuid": "d205ab02_9367fdf9",
+      "revId": "d70a2cb762b7cef4daa5d57a74028780bfbd17e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
