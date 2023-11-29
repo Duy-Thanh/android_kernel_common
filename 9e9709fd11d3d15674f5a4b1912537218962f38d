@@ -70,6 +70,24 @@
       "parentUuid": "ed05d469_340e6937",
       "revId": "9e9709fd11d3d15674f5a4b1912537218962f38d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97477ab8_1cbe3d6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-11-29T00:50:31Z",
+      "side": 1,
+      "message": "Hi Sebastian, in order for your PKVM patches to work, do we need to fix the dts before? b/307805059#comment21",
+      "parentUuid": "39a1a841_f6a0d533",
+      "revId": "9e9709fd11d3d15674f5a4b1912537218962f38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
