@@ -86,6 +86,24 @@
       "parentUuid": "e39517e6_a696e858",
       "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b976d3_1ab5324d",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7238,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-29T16:54:27Z",
+      "side": 1,
+      "message": "Ok, I agree that in this context, what `allowed` actually means is a bit confusing.\n\nhow about:\n```\n    trace_android_rvh_set_user_nice_locked(p, \u0026nice);\n    if (nice \u003c MIN_NICE)\n        goto out_unlock;\n```\nand the hook handler sets nice to MIN_NICE-1 or something like that to force a bail-out?",
+      "parentUuid": "afc0045d_12fa8a24",
+      "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
