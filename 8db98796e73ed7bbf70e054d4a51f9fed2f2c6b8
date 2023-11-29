@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08a293e4_d30e9f1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-29T17:37:04Z",
+      "side": 1,
+      "message": "Also, this used to be in android-mainline (aosp/1359202). Please mention this in the commit message. Add something like:\n```\nThis patch was previously in android-mainline, but was reverted due to conflicts in the 6.2-rc1 merge (aosp/2365029). Adding back.\n```",
+      "revId": "8db98796e73ed7bbf70e054d4a51f9fed2f2c6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7958e27e_efc04ea5",
