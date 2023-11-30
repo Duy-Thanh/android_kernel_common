@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "895d2173_26a13ffe",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-11-30T00:45:38Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right. Aren\u0027t you using `gic_v3_resume()` as well? If not, then why was it exported in the previous patch?",
+      "revId": "fc5f35064f25ddf34f30c23f0e58d5b623ee93eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
