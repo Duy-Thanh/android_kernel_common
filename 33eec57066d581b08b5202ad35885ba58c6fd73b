@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d23f6aff_f326548d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-30T18:36:24Z",
+      "side": 1,
+      "message": "I think I already took care of this in a different commit: http://aosp/2852354",
+      "revId": "33eec57066d581b08b5202ad35885ba58c6fd73b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
