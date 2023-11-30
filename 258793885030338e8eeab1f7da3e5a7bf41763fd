@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15108727_902f5b27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-11-30T18:11:26Z",
+      "side": 1,
+      "message": "it seems with this change, when I run\n```\ntools/bazel run //common:kernel_aarch64_abi_update -- --commit\n```\nI got the following error:\n```\nERROR: /home/liuyq/data/android/lkft/common/BUILD.bazel:116:22: Checking for kmi_symbol_list_strict_mode (kbuild_symtypes;lto\u003ddefault;trim;with_vmlinux) @//common:kernel_aarch64 failed: (Exit 1): bash failed: error executing KernelBuildKmiSymbolListStrictMode command (from target //common:kernel_aarch64) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nSymbols missing from the ksymtab:\n  work_on_cpu_safe\nTarget //common:kernel_aarch64_abi_update failed to build\nUse --verbose_failures to see the command lines of failed build steps.\n\n```\n\nAny idea about it?",
+      "revId": "258793885030338e8eeab1f7da3e5a7bf41763fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
