@@ -16,6 +16,23 @@
       "message": "Hi Greg\nSorry for the late response, I will test it tomorrow and update results here.",
       "revId": "02ca2ae2af2ca6dc8fd2873526a5f7599929a7bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e318d6d_6cf8c6f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-11-30T16:48:01Z",
+      "side": 1,
+      "message": "ok, tested with the db845c build,and it could boot to the homescreen.\nBut please note, it\u0027s without the 5.15.139 and 5.15.140 merges.\nIf with the 5.15.139 and 5.15.140, other changes are necessary.",
+      "revId": "02ca2ae2af2ca6dc8fd2873526a5f7599929a7bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
