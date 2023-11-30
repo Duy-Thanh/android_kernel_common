@@ -140,6 +140,24 @@
       "parentUuid": "edde42a0_6b741aeb",
       "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "278f8877_9a1ef5ba",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7238,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-11-30T12:37:40Z",
+      "side": 1,
+      "message": "I forgot pixel-kernel-6.1 is using android14-6.1 and already registered trace_android_rvh_set_user_nice, so we need to keep it first.",
+      "parentUuid": "716514e8_d059f52f",
+      "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
