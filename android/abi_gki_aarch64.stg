@@ -302977,6 +302977,15 @@ elf_symbol {
   crc: 0x3d93c7c2
 }
 elf_symbol {
+  id: 0xd97b055a
+  name: "__balance_callbacks"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x356db60d
+  type_id: 0x1b18f64e
+  full_name: "__balance_callbacks"
+}
+elf_symbol {
   id: 0xac51df48
   name: "__bforget"
   is_defined: true
@@ -307785,6 +307794,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_prio_restore"
 }
 elf_symbol {
+  id: 0x5ead6f44
+  name: "__traceiter_android_vh_ptep_clear_flush_young"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x56b63d36
+  type_id: 0x9be885da
+  full_name: "__traceiter_android_vh_ptep_clear_flush_young"
+}
+elf_symbol {
   id: 0x00ba0a8b
   name: "__traceiter_android_vh_reclaim_pages_plug"
   is_defined: true
@@ -310897,6 +310915,15 @@ elf_symbol {
   crc: 0xd2f66239
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_prio_restore"
+}
+elf_symbol {
+  id: 0x9099f79a
+  name: "__tracepoint_android_vh_ptep_clear_flush_young"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xffab8764
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_ptep_clear_flush_young"
 }
 elf_symbol {
   id: 0x3dc1ddf5
@@ -362621,6 +362648,7 @@ interface {
   symbol_id: 0xc77348b3
   symbol_id: 0x21c9fe20
   symbol_id: 0xeaf0b860
+  symbol_id: 0xd97b055a
   symbol_id: 0xac51df48
   symbol_id: 0x8920b575
   symbol_id: 0x149a28b5
@@ -363154,6 +363182,7 @@ interface {
   symbol_id: 0x7d499dab
   symbol_id: 0xeba1d6c7
   symbol_id: 0x204c04f7
+  symbol_id: 0x5ead6f44
   symbol_id: 0x00ba0a8b
   symbol_id: 0x7d069e91
   symbol_id: 0x0fa39b81
@@ -363500,6 +363529,7 @@ interface {
   symbol_id: 0x49b95a49
   symbol_id: 0x2bfccca9
   symbol_id: 0x2a85f575
+  symbol_id: 0x9099f79a
   symbol_id: 0x3dc1ddf5
   symbol_id: 0x761f292f
   symbol_id: 0xef7ad117
