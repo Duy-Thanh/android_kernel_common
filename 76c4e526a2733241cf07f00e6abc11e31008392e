@@ -16,6 +16,23 @@
       "message": "Resolved by patchset 2.",
       "revId": "76c4e526a2733241cf07f00e6abc11e31008392e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e86dd0d_0d477d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-30T08:51:49Z",
+      "side": 1,
+      "message": "please wait until 6.7-rc1 is merged into this branch to prevent merge conflicts again.",
+      "revId": "76c4e526a2733241cf07f00e6abc11e31008392e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
