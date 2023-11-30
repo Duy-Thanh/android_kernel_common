@@ -104,6 +104,24 @@
       "parentUuid": "afc0045d_12fa8a24",
       "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edde42a0_6b741aeb",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7238,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-11-30T08:32:26Z",
+      "side": 1,
+      "message": "Yeah, it works for me. I will change it for 5.10/5.15 kernel, and sync this one to android15-6.1 kernel. Thanks.",
+      "parentUuid": "42b976d3_1ab5324d",
+      "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
