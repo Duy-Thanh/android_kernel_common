@@ -1452,3 +1452,4 @@
   up_read
   up_write
   vzalloc
+  work_on_cpu

@@ -1,4 +1,5 @@
 [abi_symbol_list]
 # commonly used symbols
   module_layout
+  work_on_cpu
   __put_task_struct
