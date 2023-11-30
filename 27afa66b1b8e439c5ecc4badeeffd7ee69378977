@@ -122,6 +122,24 @@
       "parentUuid": "42b976d3_1ab5324d",
       "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "716514e8_d059f52f",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7238,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-11-30T08:47:50Z",
+      "side": 1,
+      "message": "Actually maybe this way is better, which matches what we do in our vendor hook.\n \nif (task_nice(p) \u003d\u003d nice)\n        goto out_unlock;",
+      "parentUuid": "edde42a0_6b741aeb",
+      "revId": "27afa66b1b8e439c5ecc4badeeffd7ee69378977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
