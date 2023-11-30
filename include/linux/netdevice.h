@@ -5535,4 +5535,13 @@ extern struct list_head ptype_base[PTYPE_HASH_SIZE] __read_mostly;
 
 extern struct net_device *blackhole_netdev;
 
+<<<<<<< HEAD   (eb99a6 Merge branch 'android13-5.15' into branch 'android13-5.15-lt)
+=======
+/* Note: Avoid these macros in fast path, prefer per-cpu or per-queue counters. */
+#define DEV_STATS_INC(DEV, FIELD) atomic_long_inc(&(DEV)->stats.__##FIELD)
+#define DEV_STATS_ADD(DEV, FIELD, VAL) 	\
+		atomic_long_add((VAL), &(DEV)->stats.__##FIELD)
+#define DEV_STATS_READ(DEV, FIELD) atomic_long_read(&(DEV)->stats.__##FIELD)
+
+>>>>>>> BRANCH (2a910f Linux 5.15.139)
 #endif	/* _LINUX_NETDEVICE_H */

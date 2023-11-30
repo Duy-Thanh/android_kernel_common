@@ -2234,8 +2234,15 @@ skip_reading_dnode:
 		f2fs_wait_on_block_writeback(inode, blkaddr);
 
 		if (f2fs_load_compressed_page(sbi, page, blkaddr)) {
+<<<<<<< HEAD   (eb99a6 Merge branch 'android13-5.15' into branch 'android13-5.15-lt)
 			if (atomic_dec_and_test(&dic->remaining_pages))
 				f2fs_decompress_cluster(dic, true);
+=======
+			if (atomic_dec_and_test(&dic->remaining_pages)) {
+				f2fs_decompress_cluster(dic);
+				break;
+			}
+>>>>>>> BRANCH (2a910f Linux 5.15.139)
 			continue;
 		}
 
