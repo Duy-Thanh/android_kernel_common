@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b274491_2c087e6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-30T08:45:34Z",
+      "side": 1,
+      "message": "breaks the abi.\n\nalso, why not submit upstream first?",
+      "revId": "3c6c8a10f053d3a229db5baf24d9e65f732fc85a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
