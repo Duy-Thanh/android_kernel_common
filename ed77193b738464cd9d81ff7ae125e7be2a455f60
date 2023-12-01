@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7a5a35a_3e22fd50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-01T20:55:00Z",
+      "side": 1,
+      "message": "Are the files you are adding here all binder specific? drivers/android/ does not only contain the binder driver. There are some unrelated code there. The C binder driver has many files in this directory, but they all have a binder_ prefix that makes it clear that it is only used by the binder driver. I think you should either do the same here, or add a binder subdir",
+      "revId": "ed77193b738464cd9d81ff7ae125e7be2a455f60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fbe34fa_d8df8404",
         "filename": "drivers/android/Kconfig",
         "patchSetId": 1
