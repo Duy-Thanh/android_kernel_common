@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3d3010c_da9ce898",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-01T20:16:52Z",
+      "side": 1,
+      "message": "This description looks identical to the description of ANDROID_BINDER_IPC. This patch only adds stub that does nothing so it can technically be an independent option, but at some point in the patch stack (have not not looked that far yet) I expect it will create a user-space interface that will identical to ANDROID_BINDER_IPC. At that point are these going to be mutually exclusive build options or will both of them coexist in the same image? I think either way it would be good to update this description to make it clear if it is a modifier to ANDROID_BINDER_IPC (not currently the case) or as a standalone option how it differs from ANDROID_BINDER_IPC.\n\nThere are also config options below that depend on ANDROID_BINDER_IPC. Are those supposed to eventually also work with ANDROID_BINDER_IPC_RUST?",
+      "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eea7a6e_b249bec1",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-01T20:16:52Z",
+      "side": 1,
+      "message": "Can this be a separate patch? It seems self contained and also affects the C version.",
+      "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
