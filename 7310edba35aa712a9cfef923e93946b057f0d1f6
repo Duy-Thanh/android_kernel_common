@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c209ceff_3c549a84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-01T19:24:50Z",
+      "side": 1,
+      "message": "Please use the same bug and change-Id as the fix for `android12-5.4-lts` so we can easily track what branches have already been patched.\n\n```\nBug: 313495196\nChange-Id: I3a3504b6d2061bfce0abe9801e2ecb210c337b9f\n```",
+      "revId": "7310edba35aa712a9cfef923e93946b057f0d1f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
