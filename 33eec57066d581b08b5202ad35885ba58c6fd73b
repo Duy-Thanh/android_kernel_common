@@ -16,6 +16,24 @@
       "message": "I think I already took care of this in a different commit: http://aosp/2852354",
       "revId": "33eec57066d581b08b5202ad35885ba58c6fd73b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a2e7f6d_4510e8cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-12-01T01:22:10Z",
+      "side": 1,
+      "message": "I think that one is only to add support for rpmsg_register_device_override, and this one is to add the support for devm_mipi_dsi_attach and devm_mipi_dsi_device_register_full, which is needed for the 5.15.139 merge.\notherwise it would failed to build with error like reported here:\nhttps://issuetracker.google.com/issues/313960184",
+      "parentUuid": "d23f6aff_f326548d",
+      "revId": "33eec57066d581b08b5202ad35885ba58c6fd73b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
