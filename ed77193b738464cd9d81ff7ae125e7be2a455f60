@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3d619dc_a59b5dbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-01T20:28:46Z",
+      "side": 1,
+      "message": "I only looked at the Makefile/Kconfig changes here since I\u0027m not very familiar with the C binderfs code. Will look at the rest of this later if needed.",
+      "revId": "ed77193b738464cd9d81ff7ae125e7be2a455f60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fbe34fa_d8df8404",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-01T20:28:46Z",
+      "side": 1,
+      "message": "Do we need these config options to be duplicated for rust? Are there any use-cases for using different configurations for the Rust and C version. I think it would be simpler to test the Rust version if there was only one config option to change. Related to my comment on the previous patch, if the selection of which one to use is a build time (I still don\u0027t know the answer to that question) then it would probably be easier if there is a single option for the C/Rust selection and have both versions depend on ANDROID_BINDER_IPC. If we remove the C version in the future, then the _RUST option would have no effect and ANDROID_BINDER_IPC by itself would enable the rust version.",
+      "revId": "ed77193b738464cd9d81ff7ae125e7be2a455f60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
