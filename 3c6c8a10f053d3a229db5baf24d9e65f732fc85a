@@ -33,6 +33,24 @@
       "message": "nevermind about the upstream portion, sorry.",
       "revId": "3c6c8a10f053d3a229db5baf24d9e65f732fc85a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a53441ed_30318d5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1888377
+      },
+      "writtenOn": "2023-12-01T03:06:33Z",
+      "side": 1,
+      "message": "Is android14-6.1 frozen to change abi?",
+      "parentUuid": "6b274491_2c087e6b",
+      "revId": "3c6c8a10f053d3a229db5baf24d9e65f732fc85a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
