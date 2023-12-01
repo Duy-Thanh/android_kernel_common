@@ -34,6 +34,24 @@
       "parentUuid": "15108727_902f5b27",
       "revId": "258793885030338e8eeab1f7da3e5a7bf41763fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "612d82e1_a65a1e93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-12-01T01:28:25Z",
+      "side": 1,
+      "message": "sure, thanks for the information, and we could recheck 2853059[1] again when 5.15.139[2] is going to be merged.\n\n[1]: https://android-review.googlesource.com/c/kernel/common/+/2853059\n[2]: https://android-review.googlesource.com/c/kernel/common/+/2846619/1",
+      "parentUuid": "7fcf7a03_1739419f",
+      "revId": "258793885030338e8eeab1f7da3e5a7bf41763fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
