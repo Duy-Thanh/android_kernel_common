@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d3e23b_bb1506e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-12-03T02:29:53Z",
+      "side": 1,
+      "message": "tested with db845c build, and it could boot to the homescree again",
+      "revId": "b9061ba01d468707f4e4866c857e1a2126df7fc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f872c66_12707819",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-12-03T02:29:53Z",
+      "side": 1,
+      "message": "tested with db845c build, and it could boot to the homescreen again",
+      "revId": "b9061ba01d468707f4e4866c857e1a2126df7fc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
