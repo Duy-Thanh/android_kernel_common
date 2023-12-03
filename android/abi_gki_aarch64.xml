@@ -2785,6 +2785,7 @@
       <elf-symbol name='pci_write_config_word' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x242ff980'/>
       <elf-symbol name='pcie_aspm_enabled' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd7c885a4'/>
       <elf-symbol name='pcie_bus_configure_settings' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4fc680c9'/>
+      <elf-symbol name='pcie_capability_clear_and_set_word' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb884a291'/>
       <elf-symbol name='pcie_capability_read_dword' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xed8c2321'/>
       <elf-symbol name='pcie_capability_read_word' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3a00d372'/>
       <elf-symbol name='pcie_capability_write_word' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbf2276b0'/>
@@ -98774,6 +98775,13 @@
         <parameter type-id='f9409001' name='val' filepath='drivers/pci/access.c' line='437' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='pcie_capability_clear_and_set_word' mangled-name='pcie_capability_clear_and_set_word' filepath='drivers/pci/access.c' line='489' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pcie_capability_clear_and_set_word'>
+        <parameter type-id='85196e3f' name='dev' filepath='drivers/pci/access.c' line='489' column='1'/>
+        <parameter type-id='95e97e5e' name='pos' filepath='drivers/pci/access.c' line='489' column='1'/>
+        <parameter type-id='1dc6a898' name='clear' filepath='drivers/pci/access.c' line='490' column='1'/>
+        <parameter type-id='1dc6a898' name='set' filepath='drivers/pci/access.c' line='490' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='pci_write_config_word' mangled-name='pci_write_config_word' filepath='drivers/pci/access.c' line='562' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pci_write_config_word'>
         <parameter type-id='947f31e6' name='dev' filepath='drivers/pci/access.c' line='562' column='1'/>
         <parameter type-id='95e97e5e' name='where' filepath='drivers/pci/access.c' line='562' column='1'/>
@@ -166334,7 +166342,7 @@
           <var-decl name='' type-id='eb542e10' visibility='default' filepath='include/net/mac80211.h' line='1796' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__3' size-in-bits='160' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1796' column='1' id='eb542e10'>
+      <union-decl name='__anonymous_union__26' size-in-bits='160' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1796' column='1' id='eb542e10'>
         <data-member access='public'>
           <var-decl name='tkip' type-id='5a0ae575' visibility='default' filepath='include/net/mac80211.h' line='1800' column='1'/>
         </data-member>
@@ -166354,7 +166362,7 @@
           <var-decl name='hw' type-id='ea135534' visibility='default' filepath='include/net/mac80211.h' line='1816' column='1'/>
         </data-member>
       </union-decl>
-      <class-decl name='__anonymous_struct__2' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1797' column='1' id='5a0ae575'>
+      <class-decl name='__anonymous_struct__3' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1797' column='1' id='5a0ae575'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='iv32' type-id='19c2251e' visibility='default' filepath='include/net/mac80211.h' line='1798' column='1'/>
         </data-member>
@@ -166362,12 +166370,12 @@
           <var-decl name='iv16' type-id='1dc6a898' visibility='default' filepath='include/net/mac80211.h' line='1799' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__3' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1801' column='1' id='71c656e5'>
+      <class-decl name='__anonymous_struct__4' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1801' column='1' id='71c656e5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='pn' type-id='cf1a4160' visibility='default' filepath='include/net/mac80211.h' line='1802' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__7' size-in-bits='136' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1813' column='1' id='ea135534'>
+      <class-decl name='__anonymous_struct__8' size-in-bits='136' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1813' column='1' id='ea135534'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='seq' type-id='0d8415b5' visibility='default' filepath='include/net/mac80211.h' line='1814' column='1'/>
         </data-member>
@@ -166498,7 +166506,7 @@
         <enumerator name='BAR_RX_EVENT' value='2'/>
         <enumerator name='BA_FRAME_TIMEOUT' value='3'/>
       </enum-decl>
-      <union-decl name='__anonymous_union__4' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='457' column='1' id='2a1a3e21'>
+      <union-decl name='__anonymous_union__27' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='457' column='1' id='2a1a3e21'>
         <data-member access='public'>
           <var-decl name='rssi' type-id='1569e170' visibility='default' filepath='include/net/mac80211.h' line='458' column='1'/>
         </data-member>
