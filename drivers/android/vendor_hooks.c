@@ -32,12 +32,14 @@
 #include <trace/hooks/gic.h>
 #include <trace/hooks/gic_v3.h>
 #include <trace/hooks/remoteproc.h>
+#include <trace/hooks/topology.h>
 #include <trace/hooks/timer.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
  */
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mpam_set);
