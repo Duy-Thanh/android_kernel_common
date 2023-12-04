@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000060684614",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2853076?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0aeef94c_30ab2891",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-04T07:11:16Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 586659506 android-build.ayeaye-python-dispatcher_20231130.04_p0",
+      "revId": "4c86f38465f1e750ba0370844c2defe05e2d423e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000060684614",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2853076?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5d886009_74e7d8e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-04T07:11:16Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2689407](https://r.android.com/c/2689407) on branch android14-6.1.\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_folio_look_around_ref);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_smallest_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_one_page_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (64534c FROMLIST: iommu: Avoid more races around device probe)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_folio_look_around_ref);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (dbb090 ANDROID: vendor_hooks: Add tune scan type hook in get_scan_c)\n     \n      ## include/trace/hooks/vmscan.h ##\n    -@@ include/trace/hooks/vmscan.h: DECLARE_HOOK(android_vh_file_is_tiny_bypass,\n    - DECLARE_HOOK(android_vh_check_folio_look_around_ref,\n    - \tTP_PROTO(struct folio *folio, int *skip),\n    - \tTP_ARGS(folio, skip));\n    +@@ include/trace/hooks/vmscan.h: DECLARE_HOOK(android_vh_should_continue_reclaim,\n    + DECLARE_HOOK(android_vh_file_is_tiny_bypass,\n    + \tTP_PROTO(bool file_is_tiny, bool *bypass),\n    + \tTP_ARGS(file_is_tiny, bypass));\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (64534c FROMLIST: iommu: Avoid more races around device probe)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++DECLARE_HOOK(android_vh_check_folio_look_around_ref,\n    ++\tTP_PROTO(struct folio *folio, int *skip),\n    ++\tTP_ARGS(folio, skip));\n     +enum scan_balance;\n     +DECLARE_HOOK(android_vh_tune_scan_type,\n     +\tTP_PROTO(enum scan_balance *scan_type),\n     +\tTP_ARGS(scan_type));\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (dbb090 ANDROID: vendor_hooks: Add tune scan type hook in get_scan_c)\n      #endif /* _TRACE_HOOK_VMSCAN_H */\n      /* This part must be outside protection */\n      #include \u003ctrace/define_trace.h\u003e\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 586659506 android-build.ayeaye-python-dispatcher_20231130.04_p0",
+      "revId": "4c86f38465f1e750ba0370844c2defe05e2d423e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
