@@ -16,6 +16,23 @@
       "message": "Removing the CR+2 while we enable CI tests on the android15-6.6 branch, please bear with us while this is being done, we can merge shortly after, thanks!",
       "revId": "46bbc8081716d908475aba905c63fd772adfef9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d277c4f_7c8ee7cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-12-04T09:55:56Z",
+      "side": 1,
+      "message": "Branch not yet available.\n\nKeep an eye on the GKI What\u0027s New page for the announcement.",
+      "revId": "46bbc8081716d908475aba905c63fd772adfef9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
