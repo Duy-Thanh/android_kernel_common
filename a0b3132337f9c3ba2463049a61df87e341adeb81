@@ -70,6 +70,24 @@
       "parentUuid": "55ac7e92_5d52976a",
       "revId": "a0b3132337f9c3ba2463049a61df87e341adeb81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b35e47eb_7f6e51b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1536828
+      },
+      "writtenOn": "2023-12-04T06:33:34Z",
+      "side": 1,
+      "message": "Dear Greg and Todd, I\u0027ve fixed to \"ANDROID\".\nThanks",
+      "parentUuid": "b8e07c4a_63520adb",
+      "revId": "a0b3132337f9c3ba2463049a61df87e341adeb81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
