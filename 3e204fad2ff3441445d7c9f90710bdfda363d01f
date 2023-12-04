@@ -22,6 +22,30 @@
       },
       "revId": "3e204fad2ff3441445d7c9f90710bdfda363d01f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f70217ea_296a9ca1",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-12-04T11:05:47Z",
+      "side": 1,
+      "message": "Yes, that\u0027s not a bad idea at all. It also means that the store-release in `kvm_set_table_pte()` will publish the prefaulted entries to the PTW.",
+      "parentUuid": "e961cc8e_28f0eb28",
+      "range": {
+        "startLine": 841,
+        "startChar": 1,
+        "endLine": 845,
+        "endChar": 2
+      },
+      "revId": "3e204fad2ff3441445d7c9f90710bdfda363d01f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
