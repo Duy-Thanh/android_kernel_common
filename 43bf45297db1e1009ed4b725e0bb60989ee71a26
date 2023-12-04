@@ -16,6 +16,23 @@
       "message": "Rebased and fixed merge.",
       "revId": "43bf45297db1e1009ed4b725e0bb60989ee71a26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f50f38d5_feee9a70",
+        "filename": "abi.bzl",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2023-12-04T23:25:56Z",
+      "side": 1,
+      "message": "Does this need logic to handle the case when `out \u003d None`?",
+      "revId": "43bf45297db1e1009ed4b725e0bb60989ee71a26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
