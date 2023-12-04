@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1029de6_1a11d878",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-04T09:07:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0467402a_04086a84",
+      "revId": "4918acfd13dae9e46dc1c80e5720191868a976fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dc25b27_1b762e70",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Ack, unintentional update while cherry picking from android14-6.1",
       "parentUuid": "2dc25b27_1b762e70",
+      "revId": "4918acfd13dae9e46dc1c80e5720191868a976fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26c9f470_579127d0",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-04T09:07:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "98f3e672_a9098a7e",
       "revId": "4918acfd13dae9e46dc1c80e5720191868a976fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
