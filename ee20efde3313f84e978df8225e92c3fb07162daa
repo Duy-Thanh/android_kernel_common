@@ -34,6 +34,24 @@
       "parentUuid": "350804f7_ab5d6600",
       "revId": "ee20efde3313f84e978df8225e92c3fb07162daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea76c372_aefa5da1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-04T17:36:01Z",
+      "side": 1,
+      "message": "No, the KMI is frozen. You need to refactor the patch so that it doesn\u0027t break the KMI (no addition of a field into that KMI-frozen type).",
+      "parentUuid": "a554eaba_c3ff3687",
+      "revId": "ee20efde3313f84e978df8225e92c3fb07162daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
