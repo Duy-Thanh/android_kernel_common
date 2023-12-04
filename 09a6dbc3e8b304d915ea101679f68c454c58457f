@@ -16,6 +16,24 @@
       "message": "What is the status of the upstream patch? It doesn\u0027t look like it was rejected, the conversation just ended.",
       "revId": "09a6dbc3e8b304d915ea101679f68c454c58457f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85ca7231_561de7b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-04T20:03:19Z",
+      "side": 1,
+      "message": "I followed up over the email on this discussion. TLDR: we tried upstreaming it but due to the lack of the upstream user we failed. Don\u0027t expect the situation to change anytime soon.",
+      "parentUuid": "9f0461aa_5ce43ea2",
+      "revId": "09a6dbc3e8b304d915ea101679f68c454c58457f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
