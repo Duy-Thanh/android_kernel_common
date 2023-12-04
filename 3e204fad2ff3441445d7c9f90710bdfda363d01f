@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e961cc8e_28f0eb28",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-12-04T09:48:14Z",
+      "side": 1,
+      "message": "Should we do that _before_ clearing the block entry above? That might shorten slightly the time window with invalid mappings.",
+      "range": {
+        "startLine": 841,
+        "startChar": 1,
+        "endLine": 845,
+        "endChar": 2
+      },
+      "revId": "3e204fad2ff3441445d7c9f90710bdfda363d01f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
