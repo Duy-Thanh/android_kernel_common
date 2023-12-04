@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e35adc53_34262222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-12-04T04:37:10Z",
+      "side": 1,
+      "message": "sorry, let me close this one, and let\u0027s use https://android-review.googlesource.com/c/kernel/common/+/2856829, which uses the same bug id and change id as the one for android12-5.4-lts here: https://android-review.googlesource.com/c/kernel/common/+/2811973",
+      "revId": "39a9ce418d83fd23066affdaa453b850a80eb3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
