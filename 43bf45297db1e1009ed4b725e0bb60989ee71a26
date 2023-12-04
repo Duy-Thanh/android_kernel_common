@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4a191f1_600f3bb5",
+        "filename": "abi.bzl",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2023-12-04T23:47:54Z",
+      "side": 1,
+      "message": "Maybe move the defaults here?\n\n```suggestion\n    if not path_prefix:\n        path_prefix \u003d \"\"\n    if not abis:\n        abis \u003d _ALL_ABIS\n    if not out:\n        out \u003d name \n    for abi in abis:\n```",
+      "revId": "43bf45297db1e1009ed4b725e0bb60989ee71a26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f50f38d5_feee9a70",
         "filename": "abi.bzl",
         "patchSetId": 10
