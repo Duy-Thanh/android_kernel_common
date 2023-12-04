@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2dac669_28a72c1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1897228
+      },
+      "writtenOn": "2023-12-04T23:09:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a303b150_8243ed55",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "a4a6fa4dc76b27e8203c48c1b07c9965cbe69c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0ee6db0_4f8d052c",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a85b7c54_140bf74a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1897228
+      },
+      "writtenOn": "2023-12-04T23:09:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0ee6db0_4f8d052c",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 69
+      },
+      "revId": "a4a6fa4dc76b27e8203c48c1b07c9965cbe69c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c92ef73_c4ed235d",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-04T15:27:26Z",
       "side": 1,
       "message": "Please remove this line. \"cherry picked from commit\" lines should refer to upstream commit IDs and not to Android git commit IDs.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 68
+      },
+      "revId": "a4a6fa4dc76b27e8203c48c1b07c9965cbe69c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79201922_c2bfff1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1897228
+      },
+      "writtenOn": "2023-12-04T23:09:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c92ef73_c4ed235d",
       "range": {
         "startLine": 76,
         "startChar": 0,
