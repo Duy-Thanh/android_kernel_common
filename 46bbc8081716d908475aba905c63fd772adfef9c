@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e93baa_84f85e76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-12-04T09:55:44Z",
+      "side": 1,
+      "message": "Removing the CR+2 while we enable CI tests on the android15-6.6 branch, please bear with us while this is being done, we can merge shortly after, thanks!",
+      "revId": "46bbc8081716d908475aba905c63fd772adfef9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
