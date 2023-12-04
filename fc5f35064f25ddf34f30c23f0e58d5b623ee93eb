@@ -16,6 +16,24 @@
       "message": "This doesn\u0027t seem right. Aren\u0027t you using `gic_v3_resume()` as well? If not, then why was it exported in the previous patch?",
       "revId": "fc5f35064f25ddf34f30c23f0e58d5b623ee93eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "627c3898_d459c9ac",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-04T09:05:40Z",
+      "side": 1,
+      "message": "ACK, the patchset to convert the symbol gic_resume to gic_v3_resume is dropped now. Adding only the symbols being used.",
+      "parentUuid": "895d2173_26a13ffe",
+      "revId": "fc5f35064f25ddf34f30c23f0e58d5b623ee93eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
