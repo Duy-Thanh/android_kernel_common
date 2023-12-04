@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96cc6c04_638f21ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-04T22:49:07Z",
+      "side": 1,
+      "message": "Can you please explain in the commit message why this functionality cannot be upstreamed? If you\u0027ve already discussed this with someone upstream, it would be great to include a link to the discussion here as well.",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec654e7_ed3e0727",
+        "filename": "include/linux/irqchip/arm-gic-v3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-04T22:49:07Z",
+      "side": 1,
+      "message": "can we please namespace this to `gic_v3_chip_data` to avoid collisions with the other definition of `gic_chip_data`?",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdfccc3a_1c3bb153",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-04T22:49:07Z",
+      "side": 1,
+      "message": "This would then change to `struct gic_v3_chip_data`.",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02be7305_9f68216e",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-04T22:49:07Z",
+      "side": 1,
+      "message": "Likewise here.",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
