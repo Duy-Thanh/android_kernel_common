@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8383975f_b3137a26",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-12-05T16:54:37Z",
+      "side": 1,
+      "message": "I think @qperret@google.com was suggesting to move this slightly earlier still, so that we prefault the page _before_ we clear the block entry (so as to minimise the window during which other CPUs would fault and spin on the host lock)",
+      "range": {
+        "startLine": 841,
+        "startChar": 2,
+        "endLine": 841,
+        "endChar": 27
+      },
+      "revId": "2d91e6eeec9d4638ba79a5bc949bff23c31d1ffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
