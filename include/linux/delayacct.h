@@ -8,7 +8,10 @@
 #define _LINUX_DELAYACCT_H
 
 #include <uapi/linux/taskstats.h>
-
+#ifndef __GENKSYMS__
+#define PROTECT_TRACE_INCLUDE_PATH
+#include <trace/hooks/delayacct.h>
+#endif
 /*
  * Per-task flags relevant to delay accounting
  * maintained privately to avoid exhausting similar flags in sched.h:PF_*
@@ -171,34 +174,69 @@ static inline void delayacct_thrashing_end(void)
 
 #else
 static inline void delayacct_set_flag(struct task_struct *p, int flag)
-{}
+{
+	trace_android_vh_delayacct_set_flag(p, flag);
+}
 static inline void delayacct_clear_flag(struct task_struct *p, int flag)
-{}
+{
+	trace_android_vh_delayacct_clear_flag(p, flag);
+}
+
 static inline void delayacct_init(void)
-{}
+{
+	trace_android_rvh_delayacct_init(NULL);
+}
 static inline void delayacct_tsk_init(struct task_struct *tsk)
-{}
+{
+	trace_android_rvh_delayacct_tsk_init(tsk);
+}
 static inline void delayacct_tsk_free(struct task_struct *tsk)
-{}
+{
+	trace_android_rvh_delayacct_tsk_free(tsk);
+}
 static inline void delayacct_blkio_start(void)
-{}
+{
+	trace_android_vh_delayacct_blkio_start(NULL);
+}
 static inline void delayacct_blkio_end(struct task_struct *p)
-{}
+{
+	trace_android_vh_delayacct_blkio_end(p);
+}
 static inline int delayacct_add_tsk(struct taskstats *d,
 					struct task_struct *tsk)
-{ return 0; }
+{
+	int ret = 0;
+	trace_android_vh_delayacct_add_tsk(d, tsk, &ret);
+	return ret;
+}
 static inline __u64 delayacct_blkio_ticks(struct task_struct *tsk)
-{ return 0; }
+{
+	__u64 ret = 0;
+	trace_android_vh_delayacct_blkio_ticks(tsk, &ret);
+	return ret;
+}
 static inline int delayacct_is_task_waiting_on_io(struct task_struct *p)
-{ return 0; }
+{
+	int ret = 0;
+	trace_android_vh_delayacct_is_task_waiting_on_io(p, &ret);
+	return ret;
+}
 static inline void delayacct_freepages_start(void)
-{}
+{
+	trace_android_vh_delayacct_freepages_start(NULL);
+}
 static inline void delayacct_freepages_end(void)
-{}
+{
+	trace_android_vh_delayacct_freepages_end(NULL);
+}
 static inline void delayacct_thrashing_start(void)
-{}
+{
+	trace_android_vh_delayacct_thrashing_start(NULL);
+}
 static inline void delayacct_thrashing_end(void)
-{}
+{
+	trace_android_vh_delayacct_thrashing_end(NULL);
+}
 
 #endif /* CONFIG_TASK_DELAY_ACCT */
 
