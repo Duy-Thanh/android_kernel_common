@@ -18,6 +18,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "378149da_4b339ed8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-05T18:26:47Z",
+      "side": 1,
+      "message": "gic suspend for deepsleep and hibernation is not being used in upstream, an attempt towards upstream was made with this RFC patch https://lore.kernel.org/lkml/1652860121-24092-4-git-send-email-quic_vivekuma@quicinc.com/T/#m19c0bed8c0321fb690be10c2567820850c7511c5 . I have discussed with @quic_nannem@quicinc.com and will be trying to evaluate internally and submit patch again upstream for this.",
+      "parentUuid": "96cc6c04_638f21ff",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f202a34d_a7c934ca",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1366,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-05T18:26:47Z",
+      "side": 1,
+      "message": "This will change now as gic_data is now struct gic_v3_chip_data, hence making changes in xml as well in dependent patch",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ec654e7_ed3e0727",
@@ -31,6 +66,24 @@
       "writtenOn": "2023-12-04T22:49:07Z",
       "side": 1,
       "message": "can we please namespace this to `gic_v3_chip_data` to avoid collisions with the other definition of `gic_chip_data`?",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b03cb286_e1091dcd",
+        "filename": "include/linux/irqchip/arm-gic-v3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-05T18:26:47Z",
+      "side": 1,
+      "message": "ACK, done.",
+      "parentUuid": "8ec654e7_ed3e0727",
       "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd23ae62_f247b5f2",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-05T18:26:47Z",
+      "side": 1,
+      "message": "ACk, done",
+      "parentUuid": "cdfccc3a_1c3bb153",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02be7305_9f68216e",
@@ -65,6 +136,41 @@
       "writtenOn": "2023-12-04T22:49:07Z",
       "side": 1,
       "message": "Likewise here.",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe5c5ea_76c13ca6",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-05T18:26:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "02be7305_9f68216e",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aad83a7a_bb850ba6",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-05T18:26:47Z",
+      "side": 1,
+      "message": "Need to add android_vh_gic_v3_resume as well here since the vh is using gic_chip_data",
       "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
