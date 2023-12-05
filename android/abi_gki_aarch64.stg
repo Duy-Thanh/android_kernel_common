@@ -317618,6 +317618,13 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x9ba4d640
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x06835e9c
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x9ba4eebd
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -335731,6 +335738,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_kmalloc_large_alloced"
 }
 elf_symbol {
+  id: 0xd4951344
+  name: "__traceiter_android_vh_kmalloc_large_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x61e5bb93
+  type_id: 0x9ba4d640
+  full_name: "__traceiter_android_vh_kmalloc_large_free"
+}
+elf_symbol {
   id: 0x18fde973
   name: "__traceiter_android_vh_kswapd_per_node"
   is_defined: true
@@ -336584,6 +336600,15 @@ elf_symbol {
   crc: 0x7735df78
   type_id: 0x9a85c64c
   full_name: "__traceiter_android_vh_slab_folio_alloced"
+}
+elf_symbol {
+  id: 0xfa17dd9c
+  name: "__traceiter_android_vh_slab_folio_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9a62ccca
+  type_id: 0x9ba4d640
+  full_name: "__traceiter_android_vh_slab_folio_free"
 }
 elf_symbol {
   id: 0x08f4cbb0
@@ -339700,6 +339725,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_kmalloc_large_alloced"
 }
 elf_symbol {
+  id: 0xf9d86f6e
+  name: "__tracepoint_android_vh_kmalloc_large_free"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xa544f405
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_kmalloc_large_free"
+}
+elf_symbol {
   id: 0x586a06d1
   name: "__tracepoint_android_vh_kswapd_per_node"
   is_defined: true
@@ -340553,6 +340587,15 @@ elf_symbol {
   crc: 0x9ccb5403
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_slab_folio_alloced"
+}
+elf_symbol {
+  id: 0x8829b986
+  name: "__tracepoint_android_vh_slab_folio_free"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xd4fa0fb5
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_slab_folio_free"
 }
 elf_symbol {
   id: 0x547e3912
@@ -397309,6 +397352,7 @@ interface {
   symbol_id: 0xf83fbd26
   symbol_id: 0xe261e8cc
   symbol_id: 0x19426a78
+  symbol_id: 0xd4951344
   symbol_id: 0x18fde973
   symbol_id: 0x0992491b
   symbol_id: 0xe19d2bf8
@@ -397404,6 +397448,7 @@ interface {
   symbol_id: 0x3d0fc76c
   symbol_id: 0x8f7ad177
   symbol_id: 0x0562cb47
+  symbol_id: 0xfa17dd9c
   symbol_id: 0x08f4cbb0
   symbol_id: 0x58e7556b
   symbol_id: 0x2ecf85e9
@@ -397750,6 +397795,7 @@ interface {
   symbol_id: 0xafbca760
   symbol_id: 0xa48390ca
   symbol_id: 0xb1f4423e
+  symbol_id: 0xf9d86f6e
   symbol_id: 0x586a06d1
   symbol_id: 0x8bd577fd
   symbol_id: 0xda2d53f2
@@ -397845,6 +397891,7 @@ interface {
   symbol_id: 0x5ef059ce
   symbol_id: 0x3204c8e5
   symbol_id: 0x4a999b29
+  symbol_id: 0x8829b986
   symbol_id: 0x547e3912
   symbol_id: 0x39e68fed
   symbol_id: 0xefb9e5a3
