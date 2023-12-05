@@ -46,6 +46,30 @@
       },
       "revId": "1b0bb418b8d2bebb8653d5430d819857e84ab775",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c212dbb4_f79997f6",
+        "filename": "abi.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2023-12-05T22:52:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72f26bec_4a4726b0",
+      "range": {
+        "startLine": 78,
+        "startChar": 9,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "1b0bb418b8d2bebb8653d5430d819857e84ab775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
