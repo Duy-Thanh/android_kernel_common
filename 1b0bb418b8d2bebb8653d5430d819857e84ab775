@@ -22,6 +22,30 @@
       },
       "revId": "1b0bb418b8d2bebb8653d5430d819857e84ab775",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f26bec_4a4726b0",
+        "filename": "abi.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-05T01:02:01Z",
+      "side": 1,
+      "message": "Please document this in the BUILD.bazel file (where you use native_binary for sh_binary)\n\nOr name this `sh_binary_with_abi` then in the implementation, use native_binary() and document this",
+      "parentUuid": "271dd171_2b4cc327",
+      "range": {
+        "startLine": 78,
+        "startChar": 9,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "1b0bb418b8d2bebb8653d5430d819857e84ab775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
