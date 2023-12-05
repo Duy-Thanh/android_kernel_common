@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be789ab_41cdad5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-05T17:47:34Z",
+      "side": 1,
+      "message": "Don\u0027t you need to update symbols list and ABI definition in a follow-up patch?",
+      "revId": "e2d24573c11adc283fa4504f071f8d09a4d6fe34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
