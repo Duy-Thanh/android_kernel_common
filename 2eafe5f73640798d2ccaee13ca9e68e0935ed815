@@ -33,6 +33,24 @@
       "message": "Does this need anything more to ensure the module is built?\n\nI\u0027m seeing from the presubmit checks:\n```\nERROR: /mnt/disks/build-disk/src/android/common-android-mainline/common/BUILD.bazel:308:13: Building kernel (lto\u003ddefault;notrim) @//common:db845c_no_kgdb failed: (Exit 1): bash failed: error executing KernelBuild command (from target //common:db845c_no_kgdb) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nERROR: Unable to find drivers/usb/typec/mux/nb7vpq904m.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/db845c_no_kgdb/staging/lib/modules/6.6.0-mainline-g2926dc1db90f-abP66343083/kernel\nTarget //common:db845c_dist failed to build\n```",
       "revId": "2eafe5f73640798d2ccaee13ca9e68e0935ed815",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0e7d571_783dae8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-12-05T07:14:42Z",
+      "side": 1,
+      "message": "Just marking this as unresolved.",
+      "parentUuid": "65d6c376_f8752399",
+      "revId": "2eafe5f73640798d2ccaee13ca9e68e0935ed815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
