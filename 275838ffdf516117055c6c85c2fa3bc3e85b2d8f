@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "222a7a1b_cc60c79d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-05T23:33:39Z",
+      "side": 1,
+      "message": "Thanks for including the link to the discussion and the additional context.\n\nHowever, my question still remains: why can\u0027t this be sent upstream? Why is this needed? Yes, `gic_suspend()` is not used upstream for hibernation, so why is it needed in this scenario?",
+      "revId": "275838ffdf516117055c6c85c2fa3bc3e85b2d8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
