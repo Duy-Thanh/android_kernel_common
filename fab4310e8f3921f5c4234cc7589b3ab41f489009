@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d91a8d0a_b4ad623f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-05T17:49:18Z",
+      "side": 1,
+      "message": "Could you rebase https://android-review.git.corp.google.com/c/kernel/common/+/2858847 over this one like in android-mainline?",
+      "revId": "fab4310e8f3921f5c4234cc7589b3ab41f489009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
