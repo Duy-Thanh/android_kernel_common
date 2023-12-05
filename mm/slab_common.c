@@ -932,6 +932,8 @@ void free_large_kmalloc(struct folio *folio, void *object)
 	mod_lruvec_page_state(folio_page(folio, 0), NR_SLAB_UNRECLAIMABLE_B,
 			      -(PAGE_SIZE << order));
 	__free_pages(folio_page(folio, 0), order);
+
+	trace_android_vh_kmalloc_large_free(folio_page(folio, 0), order);
 }
 
 static void *__kmalloc_large_node(size_t size, gfp_t flags, int node);

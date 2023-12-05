@@ -2037,6 +2037,8 @@ static void __free_slab(struct kmem_cache *s, struct slab *slab)
 		current->reclaim_state->reclaimed_slab += pages;
 	unaccount_slab(slab, order, s);
 	__free_pages(folio_page(folio, 0), order);
+
+	trace_android_vh_slab_folio_free(folio_page(folio, 0), order);
 }
 
 static void rcu_free_slab(struct rcu_head *h)
