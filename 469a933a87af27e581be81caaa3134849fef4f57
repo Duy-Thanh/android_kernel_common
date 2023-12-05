@@ -3,6 +3,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "88ec4c0a_a6ff6683",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-12-05T10:26:30Z",
+      "side": 1,
+      "message": "\u003e Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\n\u003e Checked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/971237b900c38f50e7865289a2aecb77dc7f09f3) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d971237b900c38f50e7865289a2aecb77dc7f09f3)\n\u003e \n\u003e ```\n\u003e     - ## drivers/ufs/core/ufshcd.c ##\n\u003e     -@@ drivers/ufs/core/ufshcd.c: static int ufshcd_eh_host_reset_handler(struct scsi_cmnd *cmd)\n\u003e     + ## drivers/scsi/ufs/ufshcd.c ##\n\u003e     +@@ drivers/scsi/ufs/ufshcd.c: static int ufshcd_eh_host_reset_handler(struct scsi_cmnd *cmd)\n\u003e       \n\u003e       \thba \u003d shost_priv(cmd-\u003edevice-\u003ehost);\n\u003e       \n\u003e      +\t/*\n\u003e     -+\t * If runtime PM sent SSU and got a timeout, scsi_error_handler is\n\u003e     -+\t * stuck in this function waiting for flush_work(\u0026hba-\u003eeh_work). And\n\u003e     -+\t * ufshcd_err_handler(eh_work) is stuck waiting for runtime PM. Do\n\u003e     -+\t * ufshcd_link_recovery instead of eh_work to prevent deadlock.\n\u003e     ++\t * If runtime pm send SSU and got timeout, scsi_error_handler\n\u003e     ++\t * stuck at this function to wait for flush_work(\u0026hba-\u003eeh_work).\n\u003e     ++\t * And ufshcd_err_handler(eh_work) stuck at wait for runtime pm active.\n\u003e     ++\t * Do ufshcd_link_recovery instead schedule eh_work can prevent\n\u003e     ++\t * dead lock to happen.\n\u003e      +\t */\n\u003e      +\tif (hba-\u003epm_op_in_progress) {\n\u003e      +\t\tif (ufshcd_link_recovery(hba))\n\u003e ```\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 587701610 android-build.ayeaye-python-dispatcher_20231204.04_p0\n\nFTR, the linter is correct. The UPSTREAM change has different line breaks in the comment block. The version applied here is the FROMGIT or FROMLIST version.",
+      "parentUuid": "8104c624_a318c342",
+      "revId": "469a933a87af27e581be81caaa3134849fef4f57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9ac0c603_496b9bd3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
