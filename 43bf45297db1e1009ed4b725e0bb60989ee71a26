@@ -50,6 +50,24 @@
       "message": "Does this need logic to handle the case when `out \u003d None`?",
       "revId": "43bf45297db1e1009ed4b725e0bb60989ee71a26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5faec6d_db63c90a",
+        "filename": "abi.bzl",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-05T01:02:42Z",
+      "side": 1,
+      "message": "definitely, yes :)",
+      "parentUuid": "f50f38d5_feee9a70",
+      "revId": "43bf45297db1e1009ed4b725e0bb60989ee71a26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
