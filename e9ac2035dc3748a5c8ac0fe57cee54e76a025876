@@ -16,6 +16,23 @@
       "message": "For the context, the reasons we could not migrate to cpuset v2 are described in https://buganizer.corp.google.com/issues/314872579#comment5",
       "revId": "e9ac2035dc3748a5c8ac0fe57cee54e76a025876",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5849143_6214713d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-06T20:51:55Z",
+      "side": 1,
+      "message": "`android15-6.6` is not yet open for submittals.",
+      "revId": "e9ac2035dc3748a5c8ac0fe57cee54e76a025876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
