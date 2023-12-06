@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e906edd9_eafbd032",
+        "filename": "abi.bzl",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-06T01:16:36Z",
+      "side": 1,
+      "message": "Unrelated, but this should add \"Default is arm64 \u0026 x86_64\".",
+      "revId": "712f0324de5ac0dc2cb00978cba101dce3bb5e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7772c626_1c8faf2e",
+        "filename": "abi.bzl",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-06T01:16:36Z",
+      "side": 1,
+      "message": "Add: \"Default is `name`\"",
+      "revId": "712f0324de5ac0dc2cb00978cba101dce3bb5e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36aa27d2_9a990345",
+        "filename": "abi.bzl",
+        "patchSetId": 11
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-06T01:16:36Z",
+      "side": 1,
+      "message": "Line is too long!",
+      "revId": "712f0324de5ac0dc2cb00978cba101dce3bb5e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
