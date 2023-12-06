@@ -2349,9 +2349,15 @@ pointer_reference {
   pointee_type_id: 0x0c50d752
 }
 pointer_reference {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x099726dc
   kind: POINTER
   pointee_type_id: 0x0c1c7dee
+=======
+  id: 0x098a183d
+  kind: POINTER
+  pointee_type_id: 0x0c688668
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 pointer_reference {
   id: 0x099bbff0
@@ -3199,6 +3205,11 @@ pointer_reference {
   pointee_type_id: 0x1b573ecd
 }
 pointer_reference {
+  id: 0x0c461eae
+  kind: POINTER
+  pointee_type_id: 0x1b589c24
+}
+pointer_reference {
   id: 0x0c467c34
   kind: POINTER
   pointee_type_id: 0x1b59164d
@@ -3899,6 +3910,11 @@ pointer_reference {
   pointee_type_id: 0x1e7452a1
 }
 pointer_reference {
+  id: 0x0d0d381b
+  kind: POINTER
+  pointee_type_id: 0x1e7406f0
+}
+pointer_reference {
   id: 0x0d0ed0eb
   kind: POINTER
   pointee_type_id: 0x1e7ba530
@@ -4309,6 +4325,19 @@ pointer_reference {
   pointee_type_id: 0x1f202bf3
 }
 pointer_reference {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x0d5919cc
+  kind: POINTER
+  pointee_type_id: 0x1f2481af
+}
+pointer_reference {
+  id: 0x0d599e4a
+  kind: POINTER
+  pointee_type_id: 0x1f269fb6
+}
+pointer_reference {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x0d5a6860
   kind: POINTER
   pointee_type_id: 0x1f29471f
@@ -7599,6 +7628,11 @@ pointer_reference {
   pointee_type_id: 0x60a1bb39
 }
 pointer_reference {
+  id: 0x12bb09bf
+  kind: POINTER
+  pointee_type_id: 0x60acc062
+}
+pointer_reference {
   id: 0x12bb35ff
   kind: POINTER
   pointee_type_id: 0x60ac3160
@@ -8364,6 +8398,11 @@ pointer_reference {
   pointee_type_id: 0x7091586a
 }
 pointer_reference {
+  id: 0x16c24c4b
+  kind: POINTER
+  pointee_type_id: 0x7149d7b2
+}
+pointer_reference {
   id: 0x16c47ce6
   kind: POINTER
   pointee_type_id: 0x71511504
@@ -8689,6 +8728,11 @@ pointer_reference {
   pointee_type_id: 0x4a83930e
 }
 pointer_reference {
+  id: 0x18332140
+  kind: POINTER
+  pointee_type_id: 0x4a8c639c
+}
+pointer_reference {
   id: 0x18374f23
   kind: POINTER
   pointee_type_id: 0x4a9dda12
@@ -8937,6 +8981,11 @@ pointer_reference {
   id: 0x196e7066
   kind: POINTER
   pointee_type_id: 0x4ff92706
+}
+pointer_reference {
+  id: 0x19775fd3
+  kind: POINTER
+  pointee_type_id: 0x4f9d99d2
 }
 pointer_reference {
   id: 0x1977e57b
@@ -9494,6 +9543,11 @@ pointer_reference {
   pointee_type_id: 0x5a93fcf2
 }
 pointer_reference {
+  id: 0x1c3d637d
+  kind: POINTER
+  pointee_type_id: 0x5ab56b69
+}
+pointer_reference {
   id: 0x1c4f6f14
   kind: POINTER
   pointee_type_id: 0x5b7d5acf
@@ -9614,6 +9668,19 @@ pointer_reference {
   pointee_type_id: 0x5934cfbb
 }
 pointer_reference {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x1cde2620
+  kind: POINTER
+  pointee_type_id: 0x59387e1c
+}
+pointer_reference {
+  id: 0x1ce0cd04
+  kind: POINTER
+  pointee_type_id: 0x59c3d28f
+}
+pointer_reference {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x1ce3e83b
   kind: POINTER
   pointee_type_id: 0x59cf4672
@@ -10022,6 +10089,11 @@ pointer_reference {
   id: 0x1e773dd8
   kind: POINTER
   pointee_type_id: 0x539c11fe
+}
+pointer_reference {
+  id: 0x1e7406f0
+  kind: POINTER
+  pointee_type_id: 0x5390fd5f
 }
 pointer_reference {
   id: 0x1e7a7830
@@ -10497,6 +10569,11 @@ pointer_reference {
   id: 0x20d23755
   kind: POINTER
   pointee_type_id: 0xa9083bc9
+}
+pointer_reference {
+  id: 0x20d5467c
+  kind: POINTER
+  pointee_type_id: 0xa915ff6e
 }
 pointer_reference {
   id: 0x20e2ed71
@@ -11059,6 +11136,11 @@ pointer_reference {
   pointee_type_id: 0xa5348d85
 }
 pointer_reference {
+  id: 0x23e1331e
+  kind: POINTER
+  pointee_type_id: 0xa5c42ae6
+}
+pointer_reference {
   id: 0x23e765f6
   kind: POINTER
   pointee_type_id: 0xa5dd7147
@@ -11087,6 +11169,11 @@ pointer_reference {
   id: 0x23f93cc0
   kind: POINTER
   pointee_type_id: 0xa5a4159e
+}
+pointer_reference {
+  id: 0x2404a5b9
+  kind: POINTER
+  pointee_type_id: 0xba52707a
 }
 pointer_reference {
   id: 0x24159bc9
@@ -11769,6 +11856,11 @@ pointer_reference {
   pointee_type_id: 0xb52b1ec7
 }
 pointer_reference {
+  id: 0x27e94f78
+  kind: POINTER
+  pointee_type_id: 0xb5e5db7c
+}
+pointer_reference {
   id: 0x27f7746a
   kind: POINTER
   pointee_type_id: 0xb59d3734
@@ -12359,6 +12451,11 @@ pointer_reference {
   pointee_type_id: 0x863aeeaf
 }
 pointer_reference {
+  id: 0x2b1e9432
+  kind: POINTER
+  pointee_type_id: 0x863ab655
+}
+pointer_reference {
   id: 0x2b1ef221
   kind: POINTER
   pointee_type_id: 0x863b2e1a
@@ -12437,6 +12534,11 @@ pointer_reference {
   id: 0x2b7ccd9e
   kind: POINTER
   pointee_type_id: 0x87b3d0e4
+}
+pointer_reference {
+  id: 0x2b7f9bcf
+  kind: POINTER
+  pointee_type_id: 0x87be89a0
 }
 pointer_reference {
   id: 0x2b820c5e
@@ -12552,6 +12654,11 @@ pointer_reference {
   id: 0x2be568af
   kind: POINTER
   pointee_type_id: 0x85d54423
+}
+pointer_reference {
+  id: 0x2be72e40
+  kind: POINTER
+  pointee_type_id: 0x85dc5f9c
 }
 pointer_reference {
   id: 0x2bf214c5
@@ -21704,9 +21811,15 @@ pointer_reference {
   pointee_type_id: 0xe6a4c2b9
 }
 pointer_reference {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x3339a058
   kind: POINTER
   pointee_type_id: 0xe6a667fd
+=======
+  id: 0x3339abb1
+  kind: POINTER
+  pointee_type_id: 0xe6a6485a
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 pointer_reference {
   id: 0x333a16a5
@@ -22929,6 +23042,24 @@ pointer_reference {
   pointee_type_id: 0xfda3dc09
 }
 pointer_reference {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x35f9166d
+  kind: POINTER
+  pointee_type_id: 0xfda4bf28
+}
+pointer_reference {
+  id: 0x35fa9cee
+  kind: POINTER
+  pointee_type_id: 0xfdaa9525
+}
+pointer_reference {
+  id: 0x35feb7e2
+  kind: POINTER
+  pointee_type_id: 0xfdba3915
+}
+pointer_reference {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x36042134
   kind: POINTER
   pointee_type_id: 0xf250624e
@@ -23884,6 +24015,11 @@ pointer_reference {
   pointee_type_id: 0xca9a982e
 }
 pointer_reference {
+  id: 0x38397349
+  kind: POINTER
+  pointee_type_id: 0xcaa52bbb
+}
+pointer_reference {
   id: 0x383b946e
   kind: POINTER
   pointee_type_id: 0xcaaeb726
@@ -24574,6 +24710,19 @@ pointer_reference {
   pointee_type_id: 0xcd30372f
 }
 pointer_reference {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x39e2de2e
+  kind: POINTER
+  pointee_type_id: 0xcdcb9e25
+}
+pointer_reference {
+  id: 0x39e76e0a
+  kind: POINTER
+  pointee_type_id: 0xcddd5eb6
+}
+pointer_reference {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x39e9ff6b
   kind: POINTER
   pointee_type_id: 0xcde71b33
@@ -27454,6 +27603,134 @@ typedef {
   referred_type_id: 0x4585663f
 }
 typedef {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x79c50b39
+  name: "drmres_release_t"
+  referred_type_id: 0x0d1edb4c
+}
+typedef {
+  id: 0x60acc062
+  name: "efi_bool_t"
+  referred_type_id: 0x295c7202
+}
+typedef {
+  id: 0x5390fd5f
+  name: "efi_capsule_header_t"
+  referred_type_id: 0x176e427f
+}
+typedef {
+  id: 0x87be89a0
+  name: "efi_char16_t"
+  referred_type_id: 0x914dbfdc
+}
+typedef {
+  id: 0xba52707a
+  name: "efi_get_next_high_mono_count_t"
+  referred_type_id: 0x7a9510d5
+}
+typedef {
+  id: 0xa915ff6e
+  name: "efi_get_next_variable_t"
+  referred_type_id: 0x75996794
+}
+typedef {
+  id: 0x1f2481af
+  name: "efi_get_time_t"
+  referred_type_id: 0x7c02d9fb
+}
+typedef {
+  id: 0x5ab56b69
+  name: "efi_get_variable_t"
+  referred_type_id: 0x7e158c17
+}
+typedef {
+  id: 0xcdcb9e25
+  name: "efi_get_wakeup_time_t"
+  referred_type_id: 0x704d4a08
+}
+typedef {
+  id: 0x4f9d99d2
+  name: "efi_guid_t"
+  referred_type_id: 0xbb354ed2
+}
+typedef {
+  id: 0xcaa52bbb
+  name: "efi_memory_desc_t"
+  referred_type_id: 0x0f515b9c
+}
+typedef {
+  id: 0x59387e1c
+  name: "efi_query_capsule_caps_t"
+  referred_type_id: 0x7724ccc4
+}
+typedef {
+  id: 0x85dc5f9c
+  name: "efi_query_variable_info_t"
+  referred_type_id: 0x4650cb40
+}
+typedef {
+  id: 0x863ab655
+  name: "efi_reset_system_t"
+  referred_type_id: 0x0bd54e18
+}
+typedef {
+  id: 0x637b0d47
+  name: "efi_runtime_services_32_t"
+  referred_type_id: 0x1290e0da
+}
+typedef {
+  id: 0xeade97e2
+  name: "efi_runtime_services_t"
+  referred_type_id: 0x5f35183b
+}
+typedef {
+  id: 0x4a8c639c
+  name: "efi_set_time_t"
+  referred_type_id: 0x7c59d0ca
+}
+typedef {
+  id: 0x0c688668
+  name: "efi_set_variable_t"
+  referred_type_id: 0x7e292e71
+}
+typedef {
+  id: 0xfdaa9525
+  name: "efi_set_virtual_address_map_t"
+  referred_type_id: 0x7883b251
+}
+typedef {
+  id: 0x1b589c24
+  name: "efi_set_wakeup_time_t"
+  referred_type_id: 0x6c0528d9
+}
+typedef {
+  id: 0xa256f9e0
+  name: "efi_status_t"
+  referred_type_id: 0x33756485
+}
+typedef {
+  id: 0x18c2371d
+  name: "efi_table_hdr_t"
+  referred_type_id: 0x13b9015a
+}
+typedef {
+  id: 0x7149d7b2
+  name: "efi_time_cap_t"
+  referred_type_id: 0x07bac27a
+}
+typedef {
+  id: 0xa5c42ae6
+  name: "efi_time_t"
+  referred_type_id: 0x0e61f205
+}
+typedef {
+  id: 0xb5e5db7c
+  name: "efi_update_capsule_t"
+  referred_type_id: 0x7723dac0
+}
+typedef {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x160ba102
   name: "errseq_t"
   referred_type_id: 0xc9082b19
@@ -30677,6 +30954,11 @@ qualified {
   id: 0xe6863fdc
   qualifier: CONST
   qualified_type_id: 0xea5f49fa
+}
+qualified {
+  id: 0xe6a6485a
+  qualifier: CONST
+  qualified_type_id: 0xeade97e2
 }
 qualified {
   id: 0xe6b1c981
@@ -35288,6 +35570,10 @@ member {
   type_id: 0x12af4722
 }
 member {
+  id: 0x276fa87a
+  type_id: 0x1290d1fa
+}
+member {
   id: 0x277f4bd0
   type_id: 0x12d35f52
 }
@@ -38964,6 +39250,18 @@ member {
   name: "acl_tx"
   type_id: 0xe62ebf07
   offset: 128
+}
+member {
+  id: 0xa5dcc6e6
+  name: "acpi"
+  type_id: 0x33756485
+  offset: 128
+}
+member {
+  id: 0x143bea26
+  name: "acpi20"
+  type_id: 0x33756485
+  offset: 192
 }
 member {
   id: 0x4ff7664a
@@ -45826,6 +46124,27 @@ member {
   offset: 320
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x7efaba55
+  name: "attribs"
+  type_id: 0x079ced0e
+  offset: 2880
+}
+member {
+  id: 0xa926c7e0
+  name: "attribute"
+  type_id: 0x5d8155a5
+  offset: 72
+}
+member {
+  id: 0xa9e9695c
+  name: "attribute"
+  type_id: 0x92233392
+  offset: 256
+}
+member {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x031bf6f0
   name: "attributes"
   type_id: 0x5d8155a5
@@ -57517,6 +57836,12 @@ member {
   offset: 10880
 }
 member {
+  id: 0xce011157
+  name: "coco_secret"
+  type_id: 0x33756485
+  offset: 640
+}
+member {
   id: 0x5406c379
   name: "code"
   type_id: 0xe62ebf07
@@ -59848,6 +60173,18 @@ member {
   offset: 256
 }
 member {
+  id: 0x3164d396
+  name: "convert_pointer"
+  type_id: 0xc9082b19
+  offset: 352
+}
+member {
+  id: 0x31b56999
+  name: "convert_pointer"
+  type_id: 0x18bd6530
+  offset: 512
+}
+member {
   id: 0x3c519ec3
   name: "convert_rgb"
   type_id: 0x6d7f5ff6
@@ -61498,6 +61835,7 @@ member {
   offset: 12288
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x93bdb50a
   name: "crc_count"
   type_id: 0x295c7202
@@ -61508,6 +61846,12 @@ member {
   name: "crc_work"
   type_id: 0x1f3c8679
   offset: 10368
+=======
+  id: 0xc3af16b1
+  name: "crc32"
+  type_id: 0xc9082b19
+  offset: 128
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 member {
   id: 0xeff5afc8
@@ -64885,6 +65229,27 @@ member {
   offset: 64
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0xc7158a13
+  name: "dax_zero_page_range"
+  type_id: 0xc272516a
+  offset: 1600
+}
+member {
+  id: 0x9d61f5a9
+  name: "day"
+  type_id: 0x295c7202
+  offset: 24
+}
+member {
+  id: 0x2b8c4071
+  name: "daylight"
+  type_id: 0x295c7202
+  offset: 112
+}
+member {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0xf540eeb1
   name: "db_off"
   type_id: 0x0baa70a7
@@ -66823,9 +67188,16 @@ member {
   offset: 640
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0xeb024848
   name: "desc_ring"
   type_id: 0x2017f508
+=======
+  id: 0xa99ce2eb
+  name: "desc_size"
+  type_id: 0x33756485
+  offset: 320
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 member {
   id: 0xbf901141
@@ -66850,6 +67222,12 @@ member {
   name: "desc_type"
   type_id: 0x295c7202
   offset: 176
+}
+member {
+  id: 0x6a37229f
+  name: "desc_version"
+  type_id: 0x33756485
+  offset: 256
 }
 member {
   id: 0x703132a7
@@ -76421,6 +76799,12 @@ member {
   type_id: 0x6df98672
 }
 member {
+  id: 0x3185ff82
+  name: "esrt"
+  type_id: 0x33756485
+  offset: 384
+}
+member {
   id: 0x951f933e
   name: "essid"
   type_id: 0xb76debc5
@@ -82775,6 +83159,12 @@ member {
   offset: 32
 }
 member {
+  id: 0x2da18195
+  name: "flags"
+  type_id: 0xc9082b19
+  offset: 160
+}
+member {
   id: 0x2da18312
   name: "flags"
   type_id: 0xc9082b19
@@ -87798,6 +88188,24 @@ member {
   offset: 640
 }
 member {
+  id: 0x496161cd
+  name: "get_next_high_mono_count"
+  type_id: 0x2404a5b9
+  offset: 768
+}
+member {
+  id: 0x49616e33
+  name: "get_next_high_mono_count"
+  type_id: 0x2404a5b9
+  offset: 1472
+}
+member {
+  id: 0x498c645d
+  name: "get_next_high_mono_count"
+  type_id: 0xc9082b19
+  offset: 480
+}
+member {
   id: 0x09a37e30
   name: "get_next_id"
   type_id: 0x2f805571
@@ -87808,6 +88216,24 @@ member {
   name: "get_next_id"
   type_id: 0x2f805571
   offset: 448
+}
+member {
+  id: 0x1674d2aa
+  name: "get_next_variable"
+  type_id: 0x20d5467c
+  offset: 640
+}
+member {
+  id: 0x1674d3cc
+  name: "get_next_variable"
+  type_id: 0x20d5467c
+  offset: 1024
+}
+member {
+  id: 0x169d0bde
+  name: "get_next_variable"
+  type_id: 0xc9082b19
+  offset: 416
 }
 member {
   id: 0x7bcf7568
@@ -88276,15 +88702,34 @@ member {
   offset: 128
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0xe51e3c64
   name: "get_temp"
   type_id: 0x2c688f32
+=======
+  id: 0xce251045
+  name: "get_time"
+  type_id: 0xc9082b19
+  offset: 192
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 member {
   id: 0xcec1755a
   name: "get_time"
   type_id: 0x2d646f41
   offset: 384
+}
+member {
+  id: 0xcee14177
+  name: "get_time"
+  type_id: 0x0d5919cc
+  offset: 192
+}
+member {
+  id: 0xcee14b83
+  name: "get_time"
+  type_id: 0x0d5919cc
+  offset: 704
 }
 member {
   id: 0x8899228d
@@ -88425,6 +88870,24 @@ member {
   offset: 384
 }
 member {
+  id: 0xf823afc2
+  name: "get_variable"
+  type_id: 0xc9082b19
+  offset: 384
+}
+member {
+  id: 0xf8f6926a
+  name: "get_variable"
+  type_id: 0x1c3d637d
+  offset: 576
+}
+member {
+  id: 0xf8f693eb
+  name: "get_variable"
+  type_id: 0x1c3d637d
+  offset: 960
+}
+member {
   id: 0xf2712792
   name: "get_vblank_counter"
   type_id: 0x18fb849f
@@ -88465,6 +88928,24 @@ member {
   name: "get_vq_affinity"
   type_id: 0x1e0272bf
   offset: 832
+}
+member {
+  id: 0xeb0dd87f
+  name: "get_wakeup_time"
+  type_id: 0x39e2de2e
+  offset: 320
+}
+member {
+  id: 0xeb0ddc02
+  name: "get_wakeup_time"
+  type_id: 0x39e2de2e
+  offset: 832
+}
+member {
+  id: 0xebfd35e6
+  name: "get_wakeup_time"
+  type_id: 0xc9082b19
+  offset: 256
 }
 member {
   id: 0xd6627db5
@@ -89554,10 +90035,16 @@ member {
   bitsize: 1
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x3c06cf5b
   name: "guid"
   type_id: 0x4664de11
   offset: 584
+=======
+  id: 0x3c0f35cf
+  name: "guid"
+  type_id: 0x4f9d99d2
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 member {
   id: 0x3cad5ec0
@@ -90810,6 +91297,11 @@ member {
   type_id: 0x34544a3f
 }
 member {
+  id: 0x2b3cdf2c
+  name: "hdr"
+  type_id: 0x18c2371d
+}
+member {
   id: 0x2b9cf3b8
   name: "hdr"
   type_id: 0xb8eea35a
@@ -91304,6 +91796,7 @@ member {
   offset: 64
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0xcf74ca05
   name: "headers_end"
   type_id: 0xfdb22131
@@ -91314,6 +91807,18 @@ member {
   name: "headers_start"
   type_id: 0xfdb22131
   offset: 1024
+=======
+  id: 0x07022d2e
+  name: "headersize"
+  type_id: 0xc9082b19
+  offset: 128
+}
+member {
+  id: 0x07022d6f
+  name: "headersize"
+  type_id: 0xc9082b19
+  offset: 96
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 member {
   id: 0x3e17b5ef
@@ -92378,6 +92883,12 @@ member {
   name: "hotplug_wait"
   type_id: 0xdba44af3
   offset: 26944
+}
+member {
+  id: 0x354661e5
+  name: "hour"
+  type_id: 0x295c7202
+  offset: 32
 }
 member {
   id: 0x386f84a8
@@ -96227,6 +96738,21 @@ member {
   offset: 192
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0xd085c3bb
+  name: "imagesize"
+  type_id: 0xc9082b19
+  offset: 192
+}
+member {
+  id: 0x29fda9b7
+  name: "imb_numa_nr"
+  type_id: 0x4585663f
+  offset: 416
+}
+member {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x5e8c1465
   name: "imbalance"
   type_id: 0x6720d32f
@@ -109831,6 +110357,21 @@ member {
   offset: 1664
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x8deec674
+  name: "map"
+  type_id: 0x18bd6530
+  offset: 896
+}
+member {
+  id: 0x8deec833
+  name: "map"
+  type_id: 0x18bd6530
+  offset: 64
+}
+member {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x8df0341e
   name: "map"
   type_id: 0x064d6086
@@ -109977,6 +110518,27 @@ member {
   offset: 576
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0xffcfe84d
+  name: "map_end"
+  type_id: 0x18bd6530
+  offset: 128
+}
+member {
+  id: 0x3d93c0fb
+  name: "map_extra"
+  type_id: 0x92233392
+  offset: 320
+}
+member {
+  id: 0x3dec1d60
+  name: "map_extra"
+  type_id: 0xedf277ba
+  offset: 512
+}
+member {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x5a6010b6
   name: "map_fd"
   type_id: 0xe62ebf07
@@ -114493,6 +115055,12 @@ member {
   type_id: 0x33756485
 }
 member {
+  id: 0x61add198
+  name: "memmap"
+  type_id: 0x6d3133ff
+  offset: 1600
+}
+member {
   id: 0x1f4a9078
   name: "memory"
   type_id: 0xe62ebf07
@@ -115740,6 +116308,22 @@ member {
   offset: 64
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x4d99c9ee
+  name: "minors_reserved"
+  type_id: 0x5d8155a5
+  offset: 290
+  bitsize: 1
+}
+member {
+  id: 0x5e451a8d
+  name: "minute"
+  type_id: 0x295c7202
+  offset: 40
+}
+member {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x096ecb61
   name: "minutes"
   type_id: 0xb3e7bac9
@@ -115824,7 +116408,16 @@ member {
   offset: 128
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x207998f5
+=======
+  id: 0x50bf919b
+  name: "mixed_mode"
+  type_id: 0x637b0d47
+}
+member {
+  id: 0x20799ec4
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   name: "mixer_list"
   type_id: 0xd3c80119
   offset: 2816
@@ -117351,6 +117944,7 @@ member {
   offset: 32
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x61aaac4b
   name: "mon_bus"
   type_id: 0x04e085f9
@@ -117358,6 +117952,15 @@ member {
 }
 member {
   id: 0xf30fc694
+=======
+  id: 0xb24eefd4
+  name: "mokvar_table"
+  type_id: 0x33756485
+  offset: 576
+}
+member {
+  id: 0xf30fcad7
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   name: "monitor"
   type_id: 0x8026b687
   offset: 36928
@@ -117432,6 +118035,12 @@ member {
   name: "month"
   type_id: 0x5d8155a5
   offset: 208
+}
+member {
+  id: 0x646c9078
+  name: "month"
+  type_id: 0x295c7202
+  offset: 16
 }
 member {
   id: 0x90205d1d
@@ -119951,6 +120560,12 @@ member {
   name: "nan_supported_bands"
   type_id: 0x295c7202
   offset: 11200
+}
+member {
+  id: 0x82684d30
+  name: "nanosecond"
+  type_id: 0xc9082b19
+  offset: 64
 }
 member {
   id: 0x0db69ff9
@@ -124454,6 +125069,12 @@ member {
   type_id: 0x33756485
 }
 member {
+  id: 0xd5423e30
+  name: "nr_map"
+  type_id: 0x6720d32f
+  offset: 192
+}
+member {
   id: 0x183eb746
   name: "nr_maps"
   type_id: 0x4585663f
@@ -126163,6 +126784,12 @@ member {
   name: "num_pads"
   type_id: 0x914dbfdc
   offset: 448
+}
+member {
+  id: 0x9636a0da
+  name: "num_pages"
+  type_id: 0x92233392
+  offset: 192
 }
 member {
   id: 0x9697faa5
@@ -131213,6 +131840,12 @@ member {
   offset: 44640
 }
 member {
+  id: 0x6b1d84ac
+  name: "pad"
+  type_id: 0xc9082b19
+  offset: 32
+}
+member {
   id: 0x6b32a238
   name: "pad"
   type_id: 0xe62ebf07
@@ -131271,6 +131904,12 @@ member {
   offset: 512
 }
 member {
+  id: 0x66ddb2cc
+  name: "pad1"
+  type_id: 0x295c7202
+  offset: 56
+}
+member {
   id: 0x66ddb3c1
   name: "pad1"
   type_id: 0x295c7202
@@ -131280,6 +131919,12 @@ member {
   name: "pad2"
   type_id: 0x295c7202
   offset: 16
+}
+member {
+  id: 0xba1fb973
+  name: "pad2"
+  type_id: 0x295c7202
+  offset: 120
 }
 member {
   id: 0xbaffe3eb
@@ -134937,7 +135582,17 @@ member {
   type_id: 0xe02e14d6
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0xbdd9dc06
+=======
+  id: 0xbdd9d264
+  name: "phys_addr"
+  type_id: 0x92233392
+  offset: 64
+}
+member {
+  id: 0xbdd9d476
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   name: "phys_addr"
   type_id: 0x92233392
   offset: 1344
@@ -134993,6 +135648,11 @@ member {
   id: 0xf35b99e7
   name: "phys_id"
   type_id: 0x295c7202
+}
+member {
+  id: 0xb865a736
+  name: "phys_map"
+  type_id: 0xbdd18903
 }
 member {
   id: 0xda31db2e
@@ -142960,6 +143620,24 @@ member {
   type_id: 0x2d07e8c3
 }
 member {
+  id: 0x2030d39d
+  name: "query_capsule_caps"
+  type_id: 0xc9082b19
+  offset: 576
+}
+member {
+  id: 0x20e50411
+  name: "query_capsule_caps"
+  type_id: 0x1cde2620
+  offset: 960
+}
+member {
+  id: 0x20e50e11
+  name: "query_capsule_caps"
+  type_id: 0x1cde2620
+  offset: 1408
+}
+member {
   id: 0xb20e9921
   name: "query_dv_timings"
   type_id: 0x2dd9a3d6
@@ -142981,6 +143659,30 @@ member {
   name: "query_overwrite"
   type_id: 0x2fbd64da
   offset: 448
+}
+member {
+  id: 0xdf4e61c6
+  name: "query_variable_info"
+  type_id: 0xc9082b19
+  offset: 608
+}
+member {
+  id: 0xdfac892e
+  name: "query_variable_info"
+  type_id: 0x2be72e40
+  offset: 1024
+}
+member {
+  id: 0xdfac8cf5
+  name: "query_variable_info"
+  type_id: 0x2be72e40
+  offset: 1216
+}
+member {
+  id: 0xcda14674
+  name: "query_variable_info_nonblocking"
+  type_id: 0x2be72e40
+  offset: 1280
 }
 member {
   id: 0xb2749bb6
@@ -150163,6 +150865,12 @@ member {
   offset: 32
 }
 member {
+  id: 0xd4aaa9b1
+  name: "reserved"
+  type_id: 0xc9082b19
+  offset: 160
+}
+member {
   id: 0xd4acfe44
   name: "reserved"
   type_id: 0xcf55352b
@@ -150729,6 +151437,24 @@ member {
   offset: 512
 }
 member {
+  id: 0xf24ab676
+  name: "reset_system"
+  type_id: 0x2b1e9432
+  offset: 832
+}
+member {
+  id: 0xf24abf2b
+  name: "reset_system"
+  type_id: 0x2b1e9432
+  offset: 1536
+}
+member {
+  id: 0xf2a8a86b
+  name: "reset_system"
+  type_id: 0xc9082b19
+  offset: 512
+}
+member {
   id: 0xa4c83369
   name: "reset_time"
   type_id: 0xd5df6730
@@ -150847,6 +151573,11 @@ member {
   name: "resolution"
   type_id: 0xc9082b19
   offset: 320
+}
+member {
+  id: 0x7f319ce7
+  name: "resolution"
+  type_id: 0xc9082b19
 }
 member {
   id: 0x7fcbe549
@@ -151701,6 +152432,12 @@ member {
   id: 0x943995c5
   name: "revision"
   type_id: 0x914dbfdc
+  offset: 64
+}
+member {
+  id: 0x9461d051
+  name: "revision"
+  type_id: 0xc9082b19
   offset: 64
 }
 member {
@@ -153668,6 +154405,11 @@ member {
   offset: 512
 }
 member {
+  id: 0x2909be74
+  name: "runtime"
+  type_id: 0x3339abb1
+}
+member {
   id: 0x29148356
   name: "runtime"
   type_id: 0x2e0f9112
@@ -153743,6 +154485,12 @@ member {
   offset: 2080
 }
 member {
+  id: 0x660fc4ac
+  name: "runtime_supported_mask"
+  type_id: 0x4585663f
+  offset: 96
+}
+member {
   id: 0x9615b712
   name: "runtime_suspend"
   type_id: 0x2dd58efa
@@ -153765,6 +154513,12 @@ member {
   name: "runtime_update"
   type_id: 0x071b6d64
   offset: 5248
+}
+member {
+  id: 0x4bd4c3ca
+  name: "runtime_version"
+  type_id: 0x4585663f
+  offset: 64
 }
 member {
   id: 0xb1650641
@@ -157253,6 +158007,12 @@ member {
   offset: 1440
 }
 member {
+  id: 0x7d99a861
+  name: "second"
+  type_id: 0x295c7202
+  offset: 48
+}
+member {
   id: 0xcae5ab59
   name: "second_chroma_qp_index_offset"
   type_id: 0x901eaf6a
@@ -159786,16 +160546,35 @@ member {
   offset: 768
 }
 member {
+  id: 0x6a0000ef
+  name: "set_time"
+  type_id: 0x18332140
+  offset: 768
+}
+member {
+  id: 0x6a0008ea
+  name: "set_time"
+  type_id: 0x18332140
+  offset: 256
+}
+member {
   id: 0x6a35d0ba
   name: "set_time"
   type_id: 0x2de218bf
   offset: 128
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x462303e7
   name: "set_time_window_us"
   type_id: 0x2f5de562
   offset: 128
+=======
+  id: 0x6ad1306f
+  name: "set_time"
+  type_id: 0xc9082b19
+  offset: 224
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 member {
   id: 0x05571fa2
@@ -159899,6 +160678,30 @@ member {
   offset: 2560
 }
 member {
+  id: 0x0f6b33b0
+  name: "set_variable"
+  type_id: 0x098a183d
+  offset: 1088
+}
+member {
+  id: 0x0f6b3cfb
+  name: "set_variable"
+  type_id: 0x098a183d
+  offset: 704
+}
+member {
+  id: 0x0fabbb82
+  name: "set_variable"
+  type_id: 0xc9082b19
+  offset: 448
+}
+member {
+  id: 0x6b538354
+  name: "set_variable_nonblocking"
+  type_id: 0x098a183d
+  offset: 1152
+}
+member {
   id: 0xfef444a6
   name: "set_vbus"
   type_id: 0x2e0d5789
@@ -159933,6 +160736,18 @@ member {
   name: "set_vconn"
   type_id: 0x2e0b807c
   offset: 512
+}
+member {
+  id: 0x22096f18
+  name: "set_virtual_address_map"
+  type_id: 0x35fa9cee
+  offset: 448
+}
+member {
+  id: 0x22f59d1f
+  name: "set_virtual_address_map"
+  type_id: 0xc9082b19
+  offset: 320
 }
 member {
   id: 0xde8621f7
@@ -159976,6 +160791,24 @@ member {
   name: "set_wakeup"
   type_id: 0x2dc1540f
   offset: 2560
+}
+member {
+  id: 0xc76f0215
+  name: "set_wakeup_time"
+  type_id: 0x0c461eae
+  offset: 896
+}
+member {
+  id: 0xc76f0921
+  name: "set_wakeup_time"
+  type_id: 0x0c461eae
+  offset: 384
+}
+member {
+  id: 0xc7aa425f
+  name: "set_wakeup_time"
+  type_id: 0xc9082b19
+  offset: 288
 }
 member {
   id: 0xf4be2934
@@ -160048,6 +160881,20 @@ member {
   offset: 384
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0xc109eca1
+  name: "sets"
+  type_id: 0xea789c46
+}
+member {
+  id: 0x3bedbbf9
+  name: "sets_to_zero"
+  type_id: 0x295c7202
+  offset: 64
+}
+member {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x85254c52
   name: "setsockopt"
   type_id: 0x2c97b369
@@ -161606,10 +162453,16 @@ member {
   offset: 2640
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x9b2882d5
   name: "signals"
   type_id: 0x2fbf9659
   offset: 1664
+=======
+  id: 0x2fc17015
+  name: "signature"
+  type_id: 0x92233392
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 member {
   id: 0x58d2d9eb
@@ -163767,6 +164620,18 @@ member {
   name: "smax_value"
   type_id: 0x2e0f9112
   offset: 448
+}
+member {
+  id: 0x0628a254
+  name: "smbios"
+  type_id: 0x33756485
+  offset: 256
+}
+member {
+  id: 0xb4183bf1
+  name: "smbios3"
+  type_id: 0x33756485
+  offset: 320
 }
 member {
   id: 0x20b3b280
@@ -174627,6 +175492,12 @@ member {
   offset: 192
 }
 member {
+  id: 0x9fcea18f
+  name: "timezone"
+  type_id: 0x29bf06ba
+  offset: 96
+}
+member {
   id: 0xe1406108
   name: "timing"
   type_id: 0x4585663f
@@ -175550,6 +176421,27 @@ member {
   bitsize: 1
 }
 member {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x3b4ba6b3
+  name: "tpm_final_log"
+  type_id: 0x33756485
+  offset: 512
+}
+member {
+  id: 0x1dc560eb
+  name: "tpm_log"
+  type_id: 0x33756485
+  offset: 448
+}
+member {
+  id: 0x14f2c5a7
+  name: "tq"
+  type_id: 0xe62ebf07
+  offset: 64
+}
+member {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0xd4597863
   name: "tqhead"
   type_id: 0x55314bfb
@@ -181274,6 +182166,24 @@ member {
   type_id: 0x2cbe4f96
 }
 member {
+  id: 0x3e3992db
+  name: "update_capsule"
+  type_id: 0x27e94f78
+  offset: 1344
+}
+member {
+  id: 0x3e3992fe
+  name: "update_capsule"
+  type_id: 0x27e94f78
+  offset: 896
+}
+member {
+  id: 0x3ed777e3
+  name: "update_capsule"
+  type_id: 0xc9082b19
+  offset: 544
+}
+member {
   id: 0x56b05005
   name: "update_curr"
   type_id: 0x0c560434
@@ -185460,6 +186370,12 @@ member {
   id: 0xde7997b9
   name: "virt"
   type_id: 0x14e40ca3
+}
+member {
+  id: 0x14aa07f5
+  name: "virt_addr"
+  type_id: 0x92233392
+  offset: 128
 }
 member {
   id: 0xc21c7538
@@ -190116,6 +191032,11 @@ member {
   offset: 800
 }
 member {
+  id: 0x58522abd
+  name: "year"
+  type_id: 0x914dbfdc
+}
+member {
   id: 0xd01d6076
   name: "yes_ranges"
   type_id: 0x3a54c5e0
@@ -190671,6 +191592,28 @@ struct_union {
   }
 }
 struct_union {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x07bac27a
+  kind: STRUCT
+  definition {
+    bytesize: 12
+    member_id: 0x7f319ce7
+    member_id: 0x6bbd8f78
+    member_id: 0x3bedbbf9
+  }
+}
+struct_union {
+  id: 0x07d0e9f2
+  kind: STRUCT
+  definition {
+    bytesize: 64
+    member_id: 0x7e283ffd
+    member_id: 0xda8b58b6
+  }
+}
+struct_union {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x0803e9c5
   kind: STRUCT
   definition {
@@ -191112,6 +192055,24 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x0e61f205
+  kind: STRUCT
+  definition {
+    bytesize: 16
+    member_id: 0x58522abd
+    member_id: 0x646c9078
+    member_id: 0x9d61f5a9
+    member_id: 0x354661e5
+    member_id: 0x5e451a8d
+    member_id: 0x7d99a861
+    member_id: 0x66ddb2cc
+    member_id: 0x82684d30
+    member_id: 0x9fcea18f
+    member_id: 0x2b8c4071
+    member_id: 0xba1fb973
+  }
+}
+struct_union {
   id: 0x0e7661fa
   kind: STRUCT
   definition {
@@ -191169,6 +192130,31 @@ struct_union {
   }
 }
 struct_union {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x0f4ad8d3
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x5cfa478b
+    member_id: 0x6037a967
+  }
+}
+struct_union {
+  id: 0x0f515b9c
+  kind: STRUCT
+  definition {
+    bytesize: 40
+    member_id: 0x5c9fdd55
+    member_id: 0x6b1d84ac
+    member_id: 0xbdd9d264
+    member_id: 0x14aa07f5
+    member_id: 0x9636a0da
+    member_id: 0xa9e9695c
+  }
+}
+struct_union {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x0f55086a
   kind: STRUCT
   definition {
@@ -191357,6 +192343,50 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x1290d1fa
+  kind: STRUCT
+  definition {
+    bytesize: 136
+    member_id: 0x2b3cdf2c
+    member_id: 0xcee14177
+    member_id: 0x6a0008ea
+    member_id: 0xeb0dd87f
+    member_id: 0xc76f0921
+    member_id: 0x22096f18
+    member_id: 0x31b56999
+    member_id: 0xf8f6926a
+    member_id: 0x1674d2aa
+    member_id: 0x0f6b3cfb
+    member_id: 0x496161cd
+    member_id: 0xf24ab676
+    member_id: 0x3e3992fe
+    member_id: 0x20e50411
+    member_id: 0xdfac892e
+  }
+}
+struct_union {
+  id: 0x1290e0da
+  kind: STRUCT
+  definition {
+    bytesize: 80
+    member_id: 0x2b3cdf2c
+    member_id: 0xce251045
+    member_id: 0x6ad1306f
+    member_id: 0xebfd35e6
+    member_id: 0xc7aa425f
+    member_id: 0x22f59d1f
+    member_id: 0x3164d396
+    member_id: 0xf823afc2
+    member_id: 0x169d0bde
+    member_id: 0x0fabbb82
+    member_id: 0x498c645d
+    member_id: 0xf2a8a86b
+    member_id: 0x3ed777e3
+    member_id: 0x2030d39d
+    member_id: 0xdf4e61c6
+  }
+}
+struct_union {
   id: 0x12af4722
   kind: STRUCT
   definition {
@@ -191488,6 +192518,30 @@ struct_union {
   }
 }
 struct_union {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x13b9015a
+  kind: STRUCT
+  definition {
+    bytesize: 24
+    member_id: 0x2fc17015
+    member_id: 0x9461d051
+    member_id: 0x07022d6f
+    member_id: 0xc3af16b1
+    member_id: 0xd4aaa9b1
+  }
+}
+struct_union {
+  id: 0x13be4e13
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x2f8c4634
+    member_id: 0xc46d15c4
+  }
+}
+struct_union {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x13c65297
   kind: STRUCT
   definition {
@@ -191672,6 +192726,17 @@ struct_union {
     member_id: 0x031127db
     member_id: 0xf00071c5
     member_id: 0x34b3f3ac
+  }
+}
+struct_union {
+  id: 0x176e427f
+  kind: STRUCT
+  definition {
+    bytesize: 28
+    member_id: 0x3c0f35cf
+    member_id: 0x07022d2e
+    member_id: 0x2da18195
+    member_id: 0xd085c3bb
   }
 }
 struct_union {
@@ -195012,7 +196077,37 @@ struct_union {
   }
 }
 struct_union {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x5f48f0f5
+=======
+  id: 0x5f35183b
+  kind: UNION
+  definition {
+    bytesize: 136
+    member_id: 0x276fa87a
+    member_id: 0x50bf919b
+  }
+}
+struct_union {
+  id: 0x5f360cda
+  kind: UNION
+  definition {
+    member_id: 0x27104b59
+    member_id: 0x230f36dc
+  }
+}
+struct_union {
+  id: 0x5f37d1b0
+  kind: UNION
+  definition {
+    bytesize: 64
+    member_id: 0x27060459
+    member_id: 0x32359e3d
+  }
+}
+struct_union {
+  id: 0x5f48d381
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   kind: UNION
   definition {
     bytesize: 40
@@ -207241,6 +208336,85 @@ struct_union {
   }
 }
 struct_union {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x33fc912b
+  kind: STRUCT
+  name: "efi"
+  definition {
+    bytesize: 264
+    member_id: 0x2909be74
+    member_id: 0x4bd4c3ca
+    member_id: 0x660fc4ac
+    member_id: 0xa5dcc6e6
+    member_id: 0x143bea26
+    member_id: 0x0628a254
+    member_id: 0xb4183bf1
+    member_id: 0x3185ff82
+    member_id: 0x1dc560eb
+    member_id: 0x3b4ba6b3
+    member_id: 0xb24eefd4
+    member_id: 0xce011157
+    member_id: 0xcee14b83
+    member_id: 0x6a0000ef
+    member_id: 0xeb0ddc02
+    member_id: 0xc76f0215
+    member_id: 0xf8f693eb
+    member_id: 0x1674d3cc
+    member_id: 0x0f6b33b0
+    member_id: 0x6b538354
+    member_id: 0xdfac8cf5
+    member_id: 0xcda14674
+    member_id: 0x3e3992db
+    member_id: 0x20e50e11
+    member_id: 0x49616e33
+    member_id: 0xf24abf2b
+    member_id: 0x61add198
+    member_id: 0x2d5bf6b8
+  }
+}
+struct_union {
+  id: 0x6d3133ff
+  kind: STRUCT
+  name: "efi_memory_map"
+  definition {
+    bytesize: 56
+    member_id: 0xb865a736
+    member_id: 0x8deec833
+    member_id: 0xffcfe84d
+    member_id: 0xd5423e30
+    member_id: 0x6a37229f
+    member_id: 0xa99ce2eb
+    member_id: 0x2d5bf0a8
+  }
+}
+struct_union {
+  id: 0x498e9c84
+  kind: STRUCT
+  name: "ehci_caps"
+  definition {
+    bytesize: 20
+    member_id: 0x1f0c7c43
+    member_id: 0xd3b43f0a
+    member_id: 0x4f2f813c
+    member_id: 0x01b32aa7
+  }
+}
+struct_union {
+  id: 0xd766dade
+  kind: STRUCT
+  name: "ehci_dbg_port"
+  definition {
+    bytesize: 20
+    member_id: 0xfcf56dc8
+    member_id: 0x762ad441
+    member_id: 0x9e14f48e
+    member_id: 0xcd6a080a
+    member_id: 0x30181c04
+  }
+}
+struct_union {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x87b6c259
   kind: STRUCT
   name: "ehci_driver_overrides"
@@ -261661,6 +262835,14 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x0bd54e18
+  return_type_id: 0x48b5725f
+  parameter_id: 0x6720d32f
+  parameter_id: 0xa256f9e0
+  parameter_id: 0x33756485
+  parameter_id: 0x2b7f9bcf
+}
+function {
   id: 0x0bdc9e9d
   return_type_id: 0x48b5725f
   parameter_id: 0x6d7f5ff6
@@ -273714,6 +274896,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x4650cb40
+  return_type_id: 0xa256f9e0
+  parameter_id: 0xc9082b19
+  parameter_id: 0x2e18f543
+  parameter_id: 0x2e18f543
+  parameter_id: 0x2e18f543
+}
+function {
   id: 0x4677b893
   return_type_id: 0x00a43052
   parameter_id: 0x1c2f6323
@@ -275734,6 +276924,29 @@ function {
   return_type_id: 0x7b6559c5
 }
 function {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x6bc51750
+  return_type_id: 0x054f691a
+  parameter_id: 0x0dc9e98b
+  parameter_id: 0x054f691a
+  parameter_id: 0xf1a6dfed
+}
+function {
+  id: 0x6bfb947b
+  return_type_id: 0x054f691a
+  parameter_id: 0x0dc9e98b
+  parameter_id: 0x054f691a
+  parameter_id: 0x0baa70a7
+}
+function {
+  id: 0x6c0528d9
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x60acc062
+  parameter_id: 0x23e1331e
+}
+function {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x6c109ae9
   return_type_id: 0x249959de
   parameter_id: 0x0258f96e
@@ -275966,6 +277179,13 @@ function {
   parameter_id: 0xa52a0930
 }
 function {
+  id: 0x704d4a08
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x12bb09bf
+  parameter_id: 0x12bb09bf
+  parameter_id: 0x23e1331e
+}
+function {
   id: 0x706a01e7
   return_type_id: 0x150d4db0
   parameter_id: 0x117a8adb
@@ -276132,6 +277352,13 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x75996794
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x064d6086
+  parameter_id: 0x2b7f9bcf
+  parameter_id: 0x19775fd3
+}
+function {
   id: 0x75b5d4f6
   return_type_id: 0x34990483
   parameter_id: 0x34990483
@@ -276156,16 +277383,43 @@ function {
   parameter_id: 0x20054a7b
 }
 function {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x7720a2bd
   return_type_id: 0x96c0c5e1
   parameter_id: 0x3d92f9c7
 }
 function {
   id: 0x77661da0
+=======
+  id: 0x7723dac0
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x0d0d381b
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+}
+function {
+  id: 0x7724ccc4
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x0d0d381b
+  parameter_id: 0x33756485
+  parameter_id: 0x2e18f543
+  parameter_id: 0x13580d6c
+}
+function {
+  id: 0x77ba21a4
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   return_type_id: 0xc9082b19
   parameter_id: 0xc9082b19
   parameter_id: 0x384c5795
   parameter_id: 0xf435685e
+}
+function {
+  id: 0x7883b251
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+  parameter_id: 0xc9082b19
+  parameter_id: 0x38397349
 }
 function {
   id: 0x7885d99e
@@ -276253,11 +277507,17 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x7a997724
   return_type_id: 0x347303b4
   parameter_id: 0x322c8c4b
   parameter_id: 0x3e10b518
   parameter_id: 0x6720d32f
+=======
+  id: 0x7a9510d5
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x38d23361
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 function {
   id: 0x7aa931ca
@@ -276310,6 +277570,17 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x7c02d9fb
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x23e1331e
+  parameter_id: 0x16c24c4b
+}
+function {
+  id: 0x7c59d0ca
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x23e1331e
+}
+function {
   id: 0x7c92c1e0
   return_type_id: 0x20e8fc5a
   parameter_id: 0x1b8590a8
@@ -276337,6 +277608,15 @@ function {
   parameter_id: 0x32a623d7
 }
 function {
+  id: 0x7e158c17
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x2b7f9bcf
+  parameter_id: 0x19775fd3
+  parameter_id: 0x38d23361
+  parameter_id: 0x064d6086
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x7e1a7d05
   return_type_id: 0x24e24923
   parameter_id: 0x0258f96e
@@ -276345,6 +277625,15 @@ function {
   id: 0x7e204efc
   return_type_id: 0x097315c2
   parameter_id: 0x0258f96e
+}
+function {
+  id: 0x7e292e71
+  return_type_id: 0xa256f9e0
+  parameter_id: 0x2b7f9bcf
+  parameter_id: 0x19775fd3
+  parameter_id: 0xc9082b19
+  parameter_id: 0x33756485
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0x7e8c435e
@@ -284839,11 +286128,19 @@ function {
   parameter_id: 0x1a2c7f0e
 }
 function {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x979e2eaa
   return_type_id: 0x6720d32f
   parameter_id: 0x2b1ef221
   parameter_id: 0x391f15ea
   parameter_id: 0xf435685e
+=======
+  id: 0x979ed47c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2ba06eea
+  parameter_id: 0x39d36c32
+  parameter_id: 0x4585663f
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
 }
 function {
   id: 0x979f6a1e
@@ -284864,6 +286161,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x2efe8065
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x97a52d07
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2ba06eea
+  parameter_id: 0x33756485
 }
 function {
   id: 0x97a9f709
@@ -298773,6 +300076,13 @@ function {
   parameter_id: 0x3e10b518
   parameter_id: 0x0d9c4ffe
   parameter_id: 0xeeed68e6
+}
+function {
+  id: 0xbfa57bbb
+  return_type_id: 0x3176a085
+  parameter_id: 0x32a623d7
+  parameter_id: 0x347303b4
+  parameter_id: 0x0d9c4ffe
 }
 function {
   id: 0xbfa66420
@@ -320536,7 +321846,11 @@ elf_symbol {
   name: "devm_mdiobus_alloc_size"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   crc: 0xb60d612a
+=======
+  crc: 0x9fa63a80
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   type_id: 0xaf8309b1
   full_name: "devm_mdiobus_alloc_size"
 }
@@ -326725,6 +328039,36 @@ elf_symbol {
   full_name: "edac_device_handle_ue_count"
 }
 elf_symbol {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x7a956b27
+  name: "efi"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1dfaa4dd
+  type_id: 0x33fc912b
+  full_name: "efi"
+}
+elf_symbol {
+  id: 0x03c26bf9
+  name: "ehci_handshake"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1ed43990
+  type_id: 0x9ab89acf
+  full_name: "ehci_handshake"
+}
+elf_symbol {
+  id: 0x5d5a2134
+  name: "ehci_hub_control"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe3d27c64
+  type_id: 0x96bdc834
+  full_name: "ehci_hub_control"
+}
+elf_symbol {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x53a8b40e
   name: "ehci_init_driver"
   is_defined: true
@@ -339426,6 +340770,45 @@ elf_symbol {
   full_name: "of_phy_connect"
 }
 elf_symbol {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0x76fed243
+  name: "of_phy_deregister_fixed_link"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x66292e86
+  type_id: 0x1d84917e
+  full_name: "of_phy_deregister_fixed_link"
+}
+elf_symbol {
+  id: 0x3ea82fd1
+  name: "of_phy_find_device"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc0e75a06
+  type_id: 0xbec298be
+  full_name: "of_phy_find_device"
+}
+elf_symbol {
+  id: 0xb8340e79
+  name: "of_phy_get"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x141f940b
+  type_id: 0x1cde4dc9
+  full_name: "of_phy_get"
+}
+elf_symbol {
+  id: 0x763a65a9
+  name: "of_phy_get_and_connect"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x354c8fe6
+  type_id: 0xbfa57bbb
+  full_name: "of_phy_get_and_connect"
+}
+elf_symbol {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0x783e3f26
   name: "of_phy_is_fixed_link"
   is_defined: true
@@ -340611,7 +341994,11 @@ elf_symbol {
   name: "pci_enable_device_mem"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   crc: 0xe23b349a
+=======
+  crc: 0x768edbe7
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   type_id: 0x99f942bc
   full_name: "pci_enable_device_mem"
 }
@@ -340949,6 +342336,15 @@ elf_symbol {
   full_name: "pci_pio_to_address"
 }
 elf_symbol {
+  id: 0x4d0b5a53
+  name: "pci_prepare_to_sleep"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x48ca07a1
+  type_id: 0x99f942bc
+  full_name: "pci_prepare_to_sleep"
+}
+elf_symbol {
   id: 0x162de729
   name: "pci_read_config_byte"
   is_defined: true
@@ -341120,6 +342516,7 @@ elf_symbol {
   full_name: "pci_save_state"
 }
 elf_symbol {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   id: 0x18af963b
   name: "pci_scan_root_bus_bridge"
   is_defined: true
@@ -341134,6 +342531,13 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0xe1204a33
+=======
+  id: 0xc62d75dd
+  name: "pci_select_bars"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x158de67a
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   type_id: 0x9934972e
   full_name: "pci_select_bars"
 }
@@ -342220,6 +343624,18 @@ elf_symbol {
 elf_symbol {
   id: 0x6d95635a
   name: "phy_support_asym_pause"
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x44c22a15
+  type_id: 0x1cc5f9b2
+  full_name: "phy_support_asym_pause"
+}
+elf_symbol {
+  id: 0xf1503ace
+  name: "phy_support_sym_pause"
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   is_defined: true
   symbol_type: FUNCTION
   crc: 0xd7f15d5b
@@ -344180,6 +345596,45 @@ elf_symbol {
   full_name: "ptp_clock_unregister"
 }
 elf_symbol {
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  id: 0xa07a6e08
+  name: "ptp_find_pin"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x68ec234a
+  type_id: 0x979ed47c
+  full_name: "ptp_find_pin"
+}
+elf_symbol {
+  id: 0x683db5bf
+  name: "ptp_parse_header"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6c082b04
+  type_id: 0x9587d027
+  full_name: "ptp_parse_header"
+}
+elf_symbol {
+  id: 0x496c5195
+  name: "ptp_schedule_worker"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa2d0a911
+  type_id: 0x97a52d07
+  full_name: "ptp_schedule_worker"
+}
+elf_symbol {
+  id: 0x177fa0e0
+  name: "public_key_verify_signature"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x32836981
+  type_id: 0x910aa3e9
+  full_name: "public_key_verify_signature"
+}
+elf_symbol {
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   id: 0xd38a2f2a
   name: "push_cpu_stop"
   is_defined: true
@@ -364650,6 +366105,12 @@ interface {
   symbol_id: 0x20ac879e
   symbol_id: 0xd85f1ace
   symbol_id: 0x1b003d7c
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  symbol_id: 0x7a956b27
+  symbol_id: 0x03c26bf9
+  symbol_id: 0x5d5a2134
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   symbol_id: 0x53a8b40e
   symbol_id: 0xbb8dbeda
   symbol_id: 0xc670de95
@@ -366057,6 +367518,13 @@ interface {
   symbol_id: 0x2d5d9d4f
   symbol_id: 0x99aacdb6
   symbol_id: 0xf330039e
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  symbol_id: 0x76fed243
+  symbol_id: 0x3ea82fd1
+  symbol_id: 0xb8340e79
+  symbol_id: 0x763a65a9
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   symbol_id: 0x783e3f26
   symbol_id: 0x5516ad40
   symbol_id: 0x840bde05
@@ -366226,6 +367694,7 @@ interface {
   symbol_id: 0xcb617d2b
   symbol_id: 0x9d3ae050
   symbol_id: 0x180e6903
+  symbol_id: 0x4d0b5a53
   symbol_id: 0x162de729
   symbol_id: 0x5983afac
   symbol_id: 0x8c3e2fab
@@ -366245,7 +367714,10 @@ interface {
   symbol_id: 0xd2a1df18
   symbol_id: 0x18bfee32
   symbol_id: 0x53d0da35
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
   symbol_id: 0x18af963b
+=======
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   symbol_id: 0xc62d75dd
   symbol_id: 0x9595d229
   symbol_id: 0xfc86cde9
@@ -366368,6 +367840,10 @@ interface {
   symbol_id: 0x6e315775
   symbol_id: 0x7a9c49cb
   symbol_id: 0x6d95635a
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  symbol_id: 0xf1503ace
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   symbol_id: 0x2c0117f0
   symbol_id: 0xa3314c5c
   symbol_id: 0x32988703
@@ -366585,6 +368061,13 @@ interface {
   symbol_id: 0x8becb370
   symbol_id: 0x42a88d96
   symbol_id: 0xb36e22d3
+<<<<<<< HEAD   (dece49 ANDROID: Initialize android14-5.15-2024-01)
+=======
+  symbol_id: 0xa07a6e08
+  symbol_id: 0x683db5bf
+  symbol_id: 0x496c5195
+  symbol_id: 0x177fa0e0
+>>>>>>> CHANGE (3c9cb9 ANDROID: GKI: Update symbol list for mtk)
   symbol_id: 0xd38a2f2a
   symbol_id: 0x11d4227b
   symbol_id: 0x71551ba9
