@@ -16,6 +16,24 @@
       "message": "Don\u0027t you need to update symbols list and ABI definition in a follow-up patch?",
       "revId": "e2d24573c11adc283fa4504f071f8d09a4d6fe34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e40c48ff_d928c1c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2023-12-06T04:01:45Z",
+      "side": 1,
+      "message": "I ran the following commands but no symbol updates.\n\n`tools/bazel run //common:kernel_aarch64_abi_update_symbol_list \u0026\u0026 tools/bazel build //common:kernel_aarch64_abi \u0026\u0026 tools/bazel run //common:kernel_aarch64_abi_update`\n\nIs there any recommended command to update symbol list?",
+      "parentUuid": "6be789ab_41cdad5d",
+      "revId": "e2d24573c11adc283fa4504f071f8d09a4d6fe34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
