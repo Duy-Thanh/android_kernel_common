@@ -10,6 +10,7 @@
 #include <linux/mm.h>
 #include <linux/dma-mapping.h>
 #include <linux/dma-map-ops.h>
+#include <linux/dma-direct.h>
 #include <linux/genalloc.h>
 #include <linux/highmem.h>
 #include <linux/vmalloc.h>
@@ -292,7 +293,8 @@ static void *do_alloc_pages(struct device *dev, size_t size, dma_addr_t *addr,
 	if (!dev)
 		return p;
 	if ((*addr + size - 1) & ~dev->coherent_dma_mask) {
-		if (IS_ENABLED(CONFIG_ZONE_DMA32) && !(gfp & GFP_DMA32)) {
+		if (IS_ENABLED(CONFIG_ZONE_DMA32) && !zone_dma32_are_empty() &&
+		    !(gfp & GFP_DMA32)) {
 			gfp |= GFP_DMA32;
 			goto again;
 		}
