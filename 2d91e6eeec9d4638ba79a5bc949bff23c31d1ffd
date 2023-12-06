@@ -22,6 +22,30 @@
       },
       "revId": "2d91e6eeec9d4638ba79a5bc949bff23c31d1ffd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b838bd8a_441ef89e",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2023-12-06T09:54:57Z",
+      "side": 1,
+      "message": "Duh. Yes.",
+      "parentUuid": "8383975f_b3137a26",
+      "range": {
+        "startLine": 841,
+        "startChar": 2,
+        "endLine": 841,
+        "endChar": 27
+      },
+      "revId": "2d91e6eeec9d4638ba79a5bc949bff23c31d1ffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
