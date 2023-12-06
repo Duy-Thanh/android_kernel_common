@@ -34,6 +34,24 @@
       "parentUuid": "6be789ab_41cdad5d",
       "revId": "e2d24573c11adc283fa4504f071f8d09a4d6fe34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7994cd65_155d26c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-06T18:52:28Z",
+      "side": 1,
+      "message": "I think you will need to add it manually when you start using these symbols from your driver, otherwise you will get errors. But ok, that can be done later when you start using them.",
+      "parentUuid": "e40c48ff_d928c1c3",
+      "revId": "e2d24573c11adc283fa4504f071f8d09a4d6fe34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
