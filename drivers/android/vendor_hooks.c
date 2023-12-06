@@ -63,6 +63,7 @@
 #include <trace/hooks/audio_usboffload.h>
 #include <trace/hooks/typec.h>
 #include <trace/hooks/user.h>
+<<<<<<< HEAD   (92432f ANDROID: GKI: Update the ABI symbol list)
 #include <trace/hooks/signal.h>
 #include <trace/hooks/psci.h>
 #include <trace/hooks/psi.h>
@@ -70,6 +71,9 @@
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/compaction.h>
 #include <trace/hooks/suspend.h>
+=======
+#include <trace/hooks/delayacct.h>
+>>>>>>> CHANGE (896cff ANDROID: Add vendor_hooks to workaround CONFIG_TASK_DELAY_AC)
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
@@ -351,6 +355,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);
+<<<<<<< HEAD   (92432f ANDROID: GKI: Update the ABI symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compaction_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compaction_try_to_compact_pages_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_alloc_pages_direct_reclaim_enter);
@@ -377,3 +382,22 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_looper_exited);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_spawn_new_thread);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_special_work_ilocked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_detect_low_async_space_locked);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_thermal_stats);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptep_clear_flush_young);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_set_flag);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_clear_flag);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_tsk_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_tsk_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_add_tsk);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_ticks);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_is_task_waiting_on_io);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_end);
+>>>>>>> CHANGE (896cff ANDROID: Add vendor_hooks to workaround CONFIG_TASK_DELAY_AC)
