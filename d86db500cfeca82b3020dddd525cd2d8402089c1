@@ -39,6 +39,30 @@
       },
       "revId": "d86db500cfeca82b3020dddd525cd2d8402089c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "301d9b94_d602b2f3",
+        "filename": "tools/testing/selftests/android/config_arm64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-12-06T23:50:29Z",
+      "side": 1,
+      "message": "That is indeed correct. dual licensing is an option to still allow the Apache2, but GPLv2 would be more appropriate and using the corresponding SPDX identifier would make documentation easier (and shorter).\n\n_Aside from that, individual files can be provided under a dual license, e.g. one of the compatible GPL variants and alternatively under a permissive license like BSD, MIT etc._\n\nhttps://www.kernel.org/doc/html/latest/process/license-rules.html#linux-kernel-licensing-rules",
+      "parentUuid": "4cc6ba46_c7b80b9b",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 55
+      },
+      "revId": "d86db500cfeca82b3020dddd525cd2d8402089c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
