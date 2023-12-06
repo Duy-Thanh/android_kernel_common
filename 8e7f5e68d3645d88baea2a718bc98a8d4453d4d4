@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000060953834",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2860763?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "53706e21_e8954afd",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-06T15:42:17Z",
+      "side": 1,
+      "message": "Loaded symbol \"zip_archive\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 15,
+        "startChar": 48,
+        "endLine": 15,
+        "endChar": 59
+      },
+      "revId": "8e7f5e68d3645d88baea2a718bc98a8d4453d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
