@@ -1822,8 +1822,10 @@ int mmc_attach_sd(struct mmc_host *host)
 	WARN_ON(!host->claimed);
 
 	err = mmc_send_app_op_cond(host, 0, &ocr);
-	if (err)
+	if (err) {
+		trace_android_vh_mmc_attach_sd(host, ocr, err);
 		return err;
+	}
 
 	mmc_attach_bus(host, &mmc_sd_ops);
 	if (host->ocr_avail_sd)
@@ -1869,6 +1871,8 @@ int mmc_attach_sd(struct mmc_host *host)
 		goto remove_card;
 
 	mmc_claim_host(host);
+
+	trace_android_vh_mmc_attach_sd(host, ocr, 0);
 	return 0;
 
 remove_card:
@@ -1881,5 +1885,6 @@ err:
 	pr_err("%s: error %d whilst initialising SD card\n",
 		mmc_hostname(host), err);
 
+	trace_android_vh_mmc_attach_sd(host, ocr, err);
 	return err;
 }
