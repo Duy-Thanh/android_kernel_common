@@ -16,6 +16,24 @@
       "message": "Thanks for including the link to the discussion and the additional context.\n\nHowever, my question still remains: why can\u0027t this be sent upstream? Why is this needed? Yes, `gic_suspend()` is not used upstream for hibernation, so why is it needed in this scenario?",
       "revId": "275838ffdf516117055c6c85c2fa3bc3e85b2d8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dd587ed_6b41ee1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2038130
+      },
+      "writtenOn": "2023-12-07T16:51:24Z",
+      "side": 1,
+      "message": "We are adding vh for gic_suspend here only for deep sleep scenario which is still not used for upstream. Here our requirement to include gic_suspend vh is only for deep sleep, we already abandoned propagation of hibernation related vh on android14-5.15.",
+      "parentUuid": "222a7a1b_cc60c79d",
+      "revId": "275838ffdf516117055c6c85c2fa3bc3e85b2d8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
