@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0cc492_58ea24ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-12-07T19:21:43Z",
+      "side": 1,
+      "message": "This patch actually got dropped from the maintainer\u0027s tree before making it into Linus\u0027 tree. So this needs to be updated to `ANDROID:`. `FROMLIST` doesn\u0027t apply either since it was rejected in it\u0027s current state.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 18
+      },
+      "revId": "1a3a00586f2b5bf14ad51f02997728364b1c38b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
