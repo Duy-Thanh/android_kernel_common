@@ -10,6 +10,9 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<!DOCTYPE configuration [
+<!ENTITY ktest_dir "/data/selftests/arm64">
+]>
 <configuration description="kselftest">
     <option name="test-suite-tag" value="kernel-test" />
     <target_preparer class="com.android.tradefed.targetprep.RootTargetPreparer" />
@@ -19,49 +22,49 @@
         <option name="cleanup" value="true" />
         <option name="push-file" key="selftests" value="/data/selftests" />
         <option name="skip-abi-filtering" value="true" />
-        <option name="post-push" value='chmod -R 755 /data/selftests; find /data/selftests; -type f | xargs grep -l -e "bin/sh" -e "bin/bash" | xargs sed -i -e "s?/bin/echo?echo?" -i -e "s?#!/bin/sh?#!/system/bin/sh?" -i -e "s?#!/bin/bash?#!/system/bin/sh?" || echo "There were no files to process"' />
+        <option name="post-push" value='chmod -R 755 /data/selftests; find /data/selftests -type f | xargs grep -l -e "bin/sh" -e "bin/bash" | xargs sed -i -e "s?/bin/echo?echo?" -i -e "s?#!/bin/sh?#!/system/bin/sh?" -i -e "s?#!/bin/bash?#!/system/bin/sh?" || echo "There were no files to process"' />
     </target_preparer>
 
     <test class="com.android.tradefed.testtype.binary.KernelTargetTest" >
         <option name="exit-code-skip" value="4" />
         <option name="skip-binary-check" value="true" />
-        <option name="test-command-line" key="kselftest_binderfs_binderfs_test" value="/data/selftests/arm64/kselftest_binderfs_binderfs_test" />
-        <option name="test-command-line" key="kselftest_breakpoints_breakpoint_test" value="/data/selftests/arm64/kselftest_breakpoints_breakpoint_test" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi" value="/data/selftests/arm64/futex_requeue_pi" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_b" value="/data/selftests/arm64/futex_requeue_pi -b" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_bl" value="/data/selftests/arm64/futex_requeue_pi -b -l" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_bo" value="/data/selftests/arm64/futex_requeue_pi -b -o" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_l" value="/data/selftests/arm64/futex_requeue_pi -l" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_o" value="/data/selftests/arm64/futex_requeue_pi -o" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_5k" value="/data/selftests/arm64/futex_requeue_pi -t 5000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_b_5k" value="/data/selftests/arm64/futex_requeue_pi -b -t 5000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_bl_5k" value="/data/selftests/arm64/futex_requeue_pi -b -l -t 5000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_bo_5k" value="/data/selftests/arm64/futex_requeue_pi -b -o -t 5000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_l_5k" value="/data/selftests/arm64/futex_requeue_pi -l -t 5000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_o_5k" value="/data/selftests/arm64/futex_requeue_pi -o -t 5000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_500k" value="/data/selftests/arm64/futex_requeue_pi -t 500000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_b_500k" value="/data/selftests/arm64/futex_requeue_pi -b -t 500000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_bl_500k" value="/data/selftests/arm64/futex_requeue_pi -b -l -t 500000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_bo_500k" value="/data/selftests/arm64/futex_requeue_pi -b -o -t 500000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_l_500k" value="/data/selftests/arm64/futex_requeue_pi -l -t 500000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_o_500k" value="/data/selftests/arm64/futex_requeue_pi -o -t 500000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_bl_2G" value="/data/selftests/arm64/futex_requeue_pi -b -l -t 2000000000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_l_2G" value="/data/selftests/arm64/futex_requeue_pi -l -t 2000000000" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_mismatched_ops" value="/data/selftests/arm64/futex_requeue_pi_mismatched_ops" />
-        <option name="test-command-line" key="kselftest_futex_requeue_pi_signal_restart" value="/data/selftests/arm64/futex_requeue_pi_signal_restart" />
-        <option name="test-command-line" key="kselftest_futex_wait_timeout" value="/data/selftests/arm64/futex_wait_timeout" />
-        <option name="test-command-line" key="kselftest_futex_wait_wouldblock" value="/data/selftests/arm64/futex_wait_wouldblock" />
-        <option name="test-command-line" key="kselftest_futex_wait_uninitialized_heap" value="/data/selftests/arm64/futex_wait_uninitialized_heap" />
-        <option name="test-command-line" key="kselftest_futex_wait_private_mapped_file" value="/data/selftests/arm64/futex_wait_private_mapped_file" />
-        <option name="test-command-line" key="kselftest_futex_wait" value="/data/selftests/arm64/futex_wait" />
-        <option name="test-command-line" key="kselftest_futex_requeue" value="/data/selftests/arm64/futex_requeue" />
-        <option name="test-command-line" key="kselftest_kcmp_kcmp_test" value="/data/selftests/arm64/kselftest_kcmp_kcmp_test" />
-        <option name="test-command-line" key="kselftest_ptrace_peeksiginfo" value="/data/selftests/arm64/kselftest_ptrace_peeksiginfo" />
-        <option name="test-command-line" key="kselftest_rtc_rtctest" value="/data/selftests/arm64/kselftest_rtc_rtctest" />
-        <option name="test-command-line" key="kselftest_vdso_vdso_test_abi" value="/data/selftests/arm64/kselftest_vdso_vdso_test_abi" />
-        <option name="test-command-line" key="kselftest_vdso_vdso_test_clock_getres" value="/data/selftests/arm64/kselftest_vdso_vdso_test_clock_getres" />
-        <option name="test-command-line" key="kselftest_vdso_vdso_test_getcpu" value="/data/selftests/arm64/kselftest_vdso_vdso_test_getcpu" />
-        <option name="test-command-line" key="kselftest_vdso_vdso_test_gettimeofday" value="/data/selftests/arm64/kselftest_vdso_vdso_test_gettimeofday" />
-        <option name="test-command-line" key="kselftest_size_test_get_size" value="/data/selftests/arm64/kselftest_size_test_get_size" />
+        <option name="test-command-line" key="kselftest_binderfs_binderfs_test" value="cd &ktest_dir;; ./kselftest_binderfs_binderfs_test" />
+        <option name="test-command-line" key="kselftest_breakpoints_breakpoint_test" value="cd &ktest_dir;; ./kselftest_breakpoints_breakpoint_test" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi" value="cd &ktest_dir;; ./futex_requeue_pi" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_b" value="cd &ktest_dir;; ./futex_requeue_pi -b" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_bl" value="cd &ktest_dir;; ./futex_requeue_pi -b -l" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_bo" value="cd &ktest_dir;; ./futex_requeue_pi -b -o" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_l" value="cd &ktest_dir;; ./futex_requeue_pi -l" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_o" value="cd &ktest_dir;; ./futex_requeue_pi -o" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_5k" value="cd &ktest_dir;; ./futex_requeue_pi -t 5000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_b_5k" value="cd &ktest_dir;; ./futex_requeue_pi -b -t 5000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_bl_5k" value="cd &ktest_dir;; ./futex_requeue_pi -b -l -t 5000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_bo_5k" value="cd &ktest_dir;; ./futex_requeue_pi -b -o -t 5000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_l_5k" value="cd &ktest_dir;; ./futex_requeue_pi -l -t 5000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_o_5k" value="cd &ktest_dir;; ./futex_requeue_pi -o -t 5000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_500k" value="cd &ktest_dir;; ./futex_requeue_pi -t 500000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_b_500k" value="cd &ktest_dir;; ./futex_requeue_pi -b -t 500000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_bl_500k" value="cd &ktest_dir;; ./futex_requeue_pi -b -l -t 500000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_bo_500k" value="cd &ktest_dir;; ./futex_requeue_pi -b -o -t 500000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_l_500k" value="cd &ktest_dir;; ./futex_requeue_pi -l -t 500000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_o_500k" value="cd &ktest_dir;; ./futex_requeue_pi -o -t 500000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_bl_2G" value="cd &ktest_dir;; ./futex_requeue_pi -b -l -t 2000000000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_l_2G" value="cd &ktest_dir;; ./futex_requeue_pi -l -t 2000000000" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_mismatched_ops" value="cd &ktest_dir;; ./futex_requeue_pi_mismatched_ops" />
+        <option name="test-command-line" key="kselftest_futex_requeue_pi_signal_restart" value="cd &ktest_dir;; ./futex_requeue_pi_signal_restart" />
+        <option name="test-command-line" key="kselftest_futex_wait_timeout" value="cd &ktest_dir;; ./futex_wait_timeout" />
+        <option name="test-command-line" key="kselftest_futex_wait_wouldblock" value="cd &ktest_dir;; ./futex_wait_wouldblock" />
+        <option name="test-command-line" key="kselftest_futex_wait_uninitialized_heap" value="cd &ktest_dir;; ./futex_wait_uninitialized_heap" />
+        <option name="test-command-line" key="kselftest_futex_wait_private_mapped_file" value="cd &ktest_dir;; ./futex_wait_private_mapped_file" />
+        <option name="test-command-line" key="kselftest_futex_wait" value="cd &ktest_dir;; ./futex_wait" />
+        <option name="test-command-line" key="kselftest_futex_requeue" value="cd &ktest_dir;; ./futex_requeue" />
+        <option name="test-command-line" key="kselftest_kcmp_kcmp_test" value="cd &ktest_dir;; ./kselftest_kcmp_kcmp_test" />
+        <option name="test-command-line" key="kselftest_ptrace_peeksiginfo" value="cd &ktest_dir;; ./kselftest_ptrace_peeksiginfo" />
+        <option name="test-command-line" key="kselftest_rtc_rtctest" value="cd &ktest_dir;; ./kselftest_rtc_rtctest" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_abi" value="cd &ktest_dir;; ./kselftest_vdso_vdso_test_abi" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_clock_getres" value="cd &ktest_dir;; ./kselftest_vdso_vdso_test_clock_getres" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_getcpu" value="cd &ktest_dir;; ./kselftest_vdso_vdso_test_getcpu" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_gettimeofday" value="cd &ktest_dir;; ./kselftest_vdso_vdso_test_gettimeofday" />
+        <option name="test-command-line" key="kselftest_size_test_get_size" value="cd &ktest_dir;; ./kselftest_size_test_get_size" />
     </test>
 </configuration>
