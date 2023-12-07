@@ -96,6 +96,11 @@ int main(int argc, char *argv[])
 	/* Testing an anon page shared memory */
 	shm_id = shmget(IPC_PRIVATE, 4096, IPC_CREAT | 0666);
 	if (shm_id < 0) {
+		if (errno == ENOSYS) {
+			ksft_test_result_skip("shmget returned: %d %s",
+					      errno, strerror(errno));
+			exit(KSFT_SKIP);
+		}
 		perror("shmget");
 		exit(1);
 	}
