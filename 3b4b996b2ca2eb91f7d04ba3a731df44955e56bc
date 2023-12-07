@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98be7d3b_fb53c3c1",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-07T12:57:25Z",
+      "side": 1,
+      "message": "Right now, they are exclusive because both define a file system of the same name. (If they used different names, then they would be independent.) I\u0027ll update this soon.\n\nHowever, I\u0027m going to update this so that both can be enabled with a boot-time switch such as a kernel cmd-line parameter.\n\nWe don\u0027t have an IPC selftest or vendorhooks right now",
+      "parentUuid": "a3d3010c_da9ce898",
+      "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4eea7a6e_b249bec1",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-12-01T20:16:52Z",
       "side": 1,
       "message": "Can this be a separate patch? It seems self contained and also affects the C version.",
+      "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499c70f6_c50675cb",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-07T12:57:25Z",
+      "side": 1,
+      "message": "I discussed this with Carlos at plumbers, and I will probably send it upstream separately from this.",
+      "parentUuid": "4eea7a6e_b249bec1",
       "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
