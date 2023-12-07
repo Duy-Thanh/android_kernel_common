@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16ca1ceb_9a9683da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-07T12:58:05Z",
+      "side": 1,
+      "message": "Thanks for bringing this up, I will look into it before this is merged.",
+      "parentUuid": "f7a5a35a_3e22fd50",
+      "revId": "ed77193b738464cd9d81ff7ae125e7be2a455f60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fbe34fa_d8df8404",
         "filename": "drivers/android/Kconfig",
         "patchSetId": 1
