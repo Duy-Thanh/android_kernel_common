@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ad9866a_8839cbc0",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-07T11:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "079e36b1_4fab92b5",
+      "range": {
+        "startLine": 434,
+        "startChar": 16,
+        "endLine": 434,
+        "endChar": 57
+      },
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1514160d_44f3caa3",
@@ -185,6 +209,30 @@
       "side": 1,
       "message": "I see-- I missed that this was an invariant placed on the `ready_threads` field of the `Process` object. Could you add documentation of this invariant to that field above?",
       "parentUuid": "2db0e91c_ab610b17",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 59
+      },
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23128663_c6adf89a",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-07T11:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7af69b75_a23f4db0",
       "range": {
         "startLine": 448,
         "startChar": 0,
