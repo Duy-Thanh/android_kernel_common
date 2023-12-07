@@ -63,6 +63,30 @@
       },
       "revId": "d86db500cfeca82b3020dddd525cd2d8402089c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb44b79d_ca305746",
+        "filename": "tools/testing/selftests/android/config_arm64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-12-07T03:29:58Z",
+      "side": 1,
+      "message": "Thanks for the clarifications. Sent aosp/2863866",
+      "parentUuid": "301d9b94_d602b2f3",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 55
+      },
+      "revId": "d86db500cfeca82b3020dddd525cd2d8402089c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
