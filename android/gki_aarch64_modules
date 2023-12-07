@@ -1,2 +1,4 @@
 mm/zsmalloc.ko
 drivers/block/zram/zram.ko
+drivers/usb/serial/usbserial.ko
+drivers/usb/serial/xr_serial.ko

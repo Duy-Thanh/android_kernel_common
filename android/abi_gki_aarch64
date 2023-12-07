@@ -1,21 +1,134 @@
 [abi_symbol_list]
 # commonly used symbols
   arm64_const_caps_ready
+  __cfi_slowpath_diag
   __cpuhp_remove_state
   __cpuhp_setup_state
   cpu_hwcap_keys
+  _dev_err
+  finish_wait
+  idr_alloc
+  idr_destroy
+  idr_find
+  idr_remove
+  init_wait_entry
   kasan_flag_enabled
   kfree
+  __kmalloc
   kmalloc_caches
   kmem_cache_alloc_trace
+  __list_add_valid
+  __list_del_entry_valid
   memcpy
   module_layout
+  mutex_lock
+  mutex_unlock
   __per_cpu_offset
   preempt_schedule
+  prepare_to_wait_event
   _printk
   __put_task_struct
+  queue_work_on
+  _raw_spin_lock
+  _raw_spin_unlock
+  schedule
+  snprintf
   __stack_chk_fail
+  system_wq
   __ubsan_handle_cfi_check_fail_abort
+  __wake_up
+
+# required by usbserial.ko
+  bus_register
+  bus_unregister
+  cancel_work_sync
+  capable
+  device_add
+  device_del
+  device_initialize
+  _dev_info
+  dev_set_name
+  _dev_warn
+  driver_attach
+  driver_register
+  driver_unregister
+  jiffies
+  jiffies_to_msecs
+  __kfifo_alloc
+  __kfifo_free
+  __kfifo_in
+  __kfifo_out
+  module_put
+  __msecs_to_jiffies
+  __mutex_init
+  put_device
+  _raw_spin_lock_irqsave
+  _raw_spin_unlock_irqrestore
+  refcount_warn_saturate
+  schedule_timeout_interruptible
+  seq_printf
+  seq_putc
+  seq_puts
+  sprintf
+  try_module_get
+  __tty_alloc_driver
+  tty_driver_kref_put
+  tty_flip_buffer_push
+  tty_hangup
+  __tty_insert_flip_char
+  tty_insert_flip_string_fixed_flag
+  tty_kref_put
+  tty_ldisc_deref
+  tty_ldisc_ref
+  tty_port_close
+  tty_port_destroy
+  tty_port_hangup
+  tty_port_init
+  tty_port_open
+  tty_port_register_device
+  tty_port_tty_get
+  tty_port_tty_wakeup
+  tty_register_driver
+  tty_standard_install
+  tty_std_termios
+  tty_termios_baud_rate
+  tty_termios_copy_hw
+  tty_unregister_device
+  tty_unregister_driver
+  tty_vhangup
+  usb_alloc_urb
+  usb_autopm_get_interface
+  usb_autopm_put_interface
+  usb_deregister
+  usb_disabled
+  usb_driver_claim_interface
+  usb_driver_release_interface
+  usb_free_urb
+  usb_get_dev
+  usb_get_intf
+  usb_kill_urb
+  usb_match_id
+  usb_match_one_id
+  usb_poison_urb
+  usb_put_dev
+  usb_put_intf
+  usb_register_driver
+  usb_show_dynids
+  usb_store_new_id
+  usb_submit_urb
+  usb_unpoison_urb
+  __warn_printk
+
+# required by xr_serial.ko
+  cdc_parse_cdc_header
+  tty_encode_baud_rate
+  usb_control_msg
+  usb_ifnum_to_if
+  usb_serial_claim_interface
+  usb_serial_deregister_drivers
+  usb_serial_generic_close
+  usb_serial_generic_open
+  usb_serial_register_drivers
 
 # required by zram.ko
   __alloc_percpu
@@ -54,11 +167,7 @@
   free_percpu
   fsync_bdev
   __get_free_pages
-  idr_alloc
-  idr_destroy
-  idr_find
   idr_for_each
-  idr_remove
   __init_rwsem
   kstrtoint
   kstrtou16
@@ -66,8 +175,6 @@
   memparse
   memset64
   mutex_is_locked
-  mutex_lock
-  mutex_unlock
   nr_cpu_ids
   __num_online_cpus
   page_endio
@@ -76,7 +183,6 @@
   scnprintf
   set_capacity
   set_capacity_and_notify
-  snprintf
   strcmp
   strcpy
   strlcpy
@@ -104,12 +210,10 @@
   __ClearPageMovable
   contig_page_data
   dec_zone_page_state
-  finish_wait
   flush_work
   __free_pages
   inc_zone_page_state
   init_pseudo
-  init_wait_entry
   __init_waitqueue_head
   iput
   kern_mount
@@ -120,27 +224,18 @@
   kmem_cache_destroy
   kmem_cache_free
   kstrdup
-  __list_add_valid
-  __list_del_entry_valid
   memstart_addr
   page_mapping
-  prepare_to_wait_event
   __put_page
-  queue_work_on
   _raw_read_lock
   _raw_read_unlock
-  _raw_spin_lock
-  _raw_spin_unlock
   _raw_write_lock
   _raw_write_unlock
   register_shrinker
-  schedule
   __SetPageMovable
-  system_wq
   unlock_page
   unregister_shrinker
   wait_on_page_bit
-  __wake_up
 
 # preserved by --additions-only
   android_kmalloc_64_create

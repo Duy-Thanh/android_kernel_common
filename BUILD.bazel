@@ -51,6 +51,8 @@ define_common_kernels(target_configs = {
     "kernel_aarch64": {
         "module_implicit_outs": [
             "drivers/block/zram/zram.ko",
+            "drivers/usb/serial/usbserial.ko",
+            "drivers/usb/serial/xr_usbserial.ko",
             "mm/zsmalloc.ko",
         ],
         "kmi_symbol_list": "android/abi_gki_aarch64",
@@ -61,6 +63,8 @@ define_common_kernels(target_configs = {
     "kernel_aarch64_debug": {
         "module_implicit_outs": [
             "drivers/block/zram/zram.ko",
+            "drivers/usb/serial/usbserial.ko",
+            "drivers/usb/serial/xr_usbserial.ko",
             "mm/zsmalloc.ko",
         ],
         "kmi_symbol_list": "android/abi_gki_aarch64",
