@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26e09120_0e90dba3",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1366,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-07T17:07:04Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "f202a34d_a7c934ca",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ec654e7_ed3e0727",
@@ -171,6 +189,24 @@
       "writtenOn": "2023-12-05T18:26:47Z",
       "side": 1,
       "message": "Need to add android_vh_gic_v3_resume as well here since the vh is using gic_chip_data",
+      "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "332ef8dd_1f404422",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-07T17:07:04Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "aad83a7a_bb850ba6",
       "revId": "3a37fc1a5f01b03872d50fe1b3fb2e9d7663de32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

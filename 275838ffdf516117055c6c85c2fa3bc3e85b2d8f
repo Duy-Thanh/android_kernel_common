@@ -34,6 +34,24 @@
       "parentUuid": "222a7a1b_cc60c79d",
       "revId": "275838ffdf516117055c6c85c2fa3bc3e85b2d8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f7e74d0_4fc8816b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-07T17:07:04Z",
+      "side": 1,
+      "message": "Thank you, but can you please comment as to what calling this vendor hook does that allows your deepsleep feature to work? It would be great if you could add that to the commit message so that it can be understood what this is used for. If that is sensitive information, then you can share it on the bug that you have open for this instead.",
+      "parentUuid": "2dd587ed_6b41ee1e",
+      "revId": "275838ffdf516117055c6c85c2fa3bc3e85b2d8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
