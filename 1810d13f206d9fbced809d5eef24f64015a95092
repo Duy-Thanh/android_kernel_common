@@ -16,6 +16,24 @@
       "message": "can you use `SPDX-License-Identifier: GPL-2.0 OR Apache-2.0`, please?",
       "revId": "1810d13f206d9fbced809d5eef24f64015a95092",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39f5930f_f9d18bfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-07T20:14:13Z",
+      "side": 1,
+      "message": "unresolving for viz",
+      "parentUuid": "352342c5_99a97539",
+      "revId": "1810d13f206d9fbced809d5eef24f64015a95092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
