@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "725743cb_a440d006",
+        "filename": "BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-12-08T16:28:09Z",
+      "side": 0,
+      "message": "please remember to remove `//build/bazel_common_rules/zip.bzl` now that the last user is gone.",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "9a034cb996202d13ff2bdf6d90539fdf47fe2eb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
