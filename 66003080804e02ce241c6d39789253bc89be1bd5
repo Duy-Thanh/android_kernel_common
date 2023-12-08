@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc163a9_203d7a50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-12-08T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99157bbe_e3aa9127",
+      "range": {
+        "startLine": 16,
+        "startChar": 46,
+        "endLine": 17,
+        "endChar": 65
+      },
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd3cbb82_aee9ce04",
@@ -103,6 +127,24 @@
       "side": 1,
       "message": "I hadn\u0027t renamed the existing list to keep the patch concise, but I absolutely agree that it is not very clear. Yes, two lists because share permissions are different. Another reply suggests having one list instead of two.",
       "parentUuid": "cd3cbb82_aee9ce04",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bcf267a_faa4f028",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-12-08T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5d03a84_50722b6e",
       "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -177,6 +219,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d9fd6b_70689665",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-12-08T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad76cf05_c15b171d",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e47b81f_ce3359c1",
@@ -208,6 +268,24 @@
       "side": 1,
       "message": "The count of entries in each list is constantly changing during traffic; there are typically more free tx buffers during an echo test. Really, we only expect shrink to have a positive effect after an atypical period where there is a lot of traffic that allocates a lot of extra buffers. So it\u0027s possible that applying a simple ratio like this is the way to go.\n\nIs it possible to share all buffers with read/write access so we could have a single list of free buffers? This would make it more straightforward to shrink.\n\nI don\u0027t believe LRU matters here, as all buffers are in the same memory region, they are all equally usable, and the use algorithm takes from the head and adds to the tail (as the existing tx algorithm worked). But there is another comment that suggests a stack algorithm for efficient.is useful here as we could always shrink from the beginning of the list and use/ buffers from the end",
       "parentUuid": "0e47b81f_ce3359c1",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3499debd_a7a91b0d",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-12-08T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9572dc07_fec86665",
       "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -278,6 +356,24 @@
       "side": 1,
       "message": "This mirrors the existing algorithm used for txbuf. Yes FIFO. Should we change one or both to a stack?",
       "parentUuid": "d3b7ce78_b72582d0",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9215040_3546ce21",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-12-08T17:57:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ca2b3bc_1045651b",
       "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -383,6 +479,24 @@
       "side": 1,
       "message": "Once the entries are in reclaim_in_progress, this driver is waiting on Trusty to do the unmap and then send a response to the unmap request. I think the best we can do is wait until the list is empty. Now that you point it out, I realize that this now needs to be in a different order, since IPC is required cleaning up buffers. I\u0027ve reworked, but it is untested because the driver cannot be unloaded in qemu. Shelving this CL for now.",
       "parentUuid": "e105125b_f15568f5",
+      "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a277bb_d692f2cc",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2586,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2023-12-08T17:57:29Z",
+      "side": 1,
+      "message": "No further rework will be done. This should be acceptable given that there is interest in merging this patch after much testing and desired performance improvements without putting additional development effort into it.",
+      "parentUuid": "0506bff9_67f63bc8",
       "revId": "66003080804e02ce241c6d39789253bc89be1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
