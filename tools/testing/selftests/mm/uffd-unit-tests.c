@@ -191,6 +191,11 @@ uffd_setup_environment(uffd_test_args_t *args, uffd_test_case_t *test,
 	else
 		page_size = psize();
 
+	if (!page_size) {
+		*errmsg = "page size is 0";
+		return 1;
+	}
+
 	nr_pages = UFFD_TEST_MEM_SIZE / page_size;
 	/* TODO: remove this global var.. it's so ugly */
 	nr_cpus = 1;
