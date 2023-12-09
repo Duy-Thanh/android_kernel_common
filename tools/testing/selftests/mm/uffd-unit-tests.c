@@ -50,6 +50,7 @@ mem_type_t mem_types[] = {
 		.mem_ops = &shmem_uffd_test_ops,
 		.shared = false,
 	},
+#ifndef __ANDROID__
 	{
 		.name = "hugetlb",
 		.mem_flag = MEM_HUGETLB,
@@ -62,6 +63,7 @@ mem_type_t mem_types[] = {
 		.mem_ops = &hugetlb_uffd_test_ops,
 		.shared = false,
 	},
+#endif
 };
 
 /* Arguments to be passed over to each uffd unit test */
