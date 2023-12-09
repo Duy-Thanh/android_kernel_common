@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be73e00a_7ceb63fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2023-12-09T00:08:41Z",
+      "side": 1,
+      "message": "Fixed checkpatch error: Added void parameter.",
+      "revId": "5cbe976ee77739815aca9b733d7c13b77cf1a022",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
