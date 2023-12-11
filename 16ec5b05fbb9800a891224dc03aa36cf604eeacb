@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea746a1e_e89d997d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-11T16:22:24Z",
+      "side": 1,
+      "message": ".stg file was incorrectly created, should now be good.",
+      "revId": "16ec5b05fbb9800a891224dc03aa36cf604eeacb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
