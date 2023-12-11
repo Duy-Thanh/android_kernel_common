@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6f783f5_6111ee42",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 1627,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2023-12-11T21:06:31Z",
+      "side": 1,
+      "message": "Could you add a comment like \"nanosleep will be called by x\" before this line? Some to other changes.",
+      "range": {
+        "startLine": 1627,
+        "startChar": 4,
+        "endLine": 1627,
+        "endChar": 21
+      },
+      "revId": "95de078d09d33361e0c429d7f7076817c6fe8f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
