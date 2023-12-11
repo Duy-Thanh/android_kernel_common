@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "463d93ed_629d61ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2023-12-11T21:47:49Z",
+      "side": 1,
+      "message": "Can be written instead as:\n```\nBug: 291147200\nBug: 311187098\n```",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "4f4d55b94bebac30c6f096d58acb38eb52bcb840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
