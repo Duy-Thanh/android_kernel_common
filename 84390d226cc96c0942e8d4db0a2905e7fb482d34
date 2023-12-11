@@ -33,6 +33,24 @@
       "message": "changelog is not in proper format for an UPSTREAM commit, please read the documentation for what to do here.",
       "revId": "84390d226cc96c0942e8d4db0a2905e7fb482d34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d59d01b_53030b8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-11T12:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "673cc037_b4133b53",
+      "revId": "84390d226cc96c0942e8d4db0a2905e7fb482d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
