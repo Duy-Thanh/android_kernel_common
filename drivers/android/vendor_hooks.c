@@ -499,6 +499,22 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout_abort);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wakeup_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_swapcache);
+<<<<<<< HEAD   (226a96 BACKPORT: firmware_loader: Abort all upcoming firmware load )
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_oem_binder_struct);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_perf_huristic_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command_post_change);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_abort_success_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_compl_rsp_check_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_handler);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_check_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_print_ctrl);
+>>>>>>> CHANGE (85d8fb ANDROID: Add vendor hook for ufs perf heuristic and error re)
 /*
  * For type visibility
  */
