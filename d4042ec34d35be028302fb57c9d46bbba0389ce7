@@ -33,6 +33,23 @@
       "message": "Respin Bug: b/304294320",
       "revId": "d4042ec34d35be028302fb57c9d46bbba0389ce7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac6f338_96fd0ea8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-11T19:58:31Z",
+      "side": 1,
+      "message": "This patch appears to have caused warnings from `__might_sleep()` (b/314837355):\n```\n[13669.861636] [T103699] perfetto_hprof_: [name:panic\u0026]------------[ cut here ]------------\n[13669.861650] [T103699] perfetto_hprof_: do not call blocking ops when !TASK_RUNNING; state\u003d2001 set at [\u003cffffffd13946ed4c\u003e] prepare_to_wait_event+0x2c8/0x380\n[13669.861674] [T103699] perfetto_hprof_: [name:panic\u0026]WARNING: CPU: 1 PID: 3699 at kernel/sched/core.c:10281 __might_sleep+0xbc/0xe0\n[13669.862689] [T103699] perfetto_hprof_: CPU: 1 PID: 3699 Comm: perfetto_hprof_ Tainted: G        W  OE      6.1.25-android14-11-g5983a02dacfa #1\n[13669.862697] [T103699] perfetto_hprof_: Hardware name: MT6989(ENG) (DT)\n[13669.862702] [T103699] perfetto_hprof_: pstate: 02400005 (nzcv daif +PAN -UAO +TCO -DIT -SSBS BTYPE\u003d--)\n[13669.862709] [T103699] perfetto_hprof_: pc : __might_sleep+0xbc/0xe0\n[13669.862718] [T103699] perfetto_hprof_: lr : __might_sleep+0xbc/0xe0\n[13669.862725] [T103699] perfetto_hprof_: sp : ffffffc02c5f7a50\n[13669.862730] [T103699] perfetto_hprof_: x29: ffffffc02c5f7a50 x28: 00000000fffffe00 x27: ffffff80112ea880\n[13669.862741] [T103699] perfetto_hprof_: x26: dfffffc000000000 x25: 00000072410c0948 x24: ffffffc02c5f7d90\n[13669.862751] [T103699] perfetto_hprof_: x23: 1ffffff8058bef68 x22: ffffff80112eb450 x21: 0000000000002001\n[13669.862761] [T103699] perfetto_hprof_: x20: ffffffd13bc35180 x19: 0000000000000035 x18: ffffffc023acd028\n[13669.862771] [T103699] perfetto_hprof_: x17: ffffffffffffffff x16: ffffffffffffffff x15: 0000000000000001\n[13669.862781] [T103699] perfetto_hprof_: x14: 000000000000000e x13: 0000000001380088 x12: 0000000000000001\n[13669.862790] [T103699] perfetto_hprof_: x11: 0000000000000002 x10: 0000000000000000 x9 : 0000000100000001\n[13669.862800] [T103699] perfetto_hprof_: x8 : 0000000045e0360e x7 : 0000000001380088 x6 : 0000000001380010\n[13669.862810] [T103699] perfetto_hprof_: x5 : ffffffc02c5f73f8 x4 : ffffff8352e2ae70 x3 : ffffffd1394bad80\n[13669.862820] [T103699] perfetto_hprof_: x2 : 0000000000000001 x1 : 0000000000000008 x0 : 0000000000000086\n[13669.862830] [T103699] perfetto_hprof_: Call trace:\n[13669.862834] [T103699] perfetto_hprof_:  __might_sleep+0xbc/0xe0\n[13669.862841] [T103699] perfetto_hprof_:  get_signal+0x128/0x12d8\n[13669.862848] [T103699] perfetto_hprof_:  do_notify_resume+0x298/0xfd8\n[13669.862855] [T103699] perfetto_hprof_:  el0_svc+0x60/0x84\n[13669.862867] [T103699] perfetto_hprof_:  el0t_64_sync_handler+0x68/0xb4\n[13669.862875] [T103699] perfetto_hprof_:  el0t_64_sync+0x180/0x184\n[13669.862881] [T103699] perfetto_hprof_: [name:panic\u0026]---[ end trace 0000000000000000 ]---\n[13669.862901] [T103699] perfetto_hprof_: __warn: 39 callbacks suppressed\n[13669.863121] [T726190] done.\n```\nWith this patch reverted, this issue does not reproduce.",
+      "revId": "d4042ec34d35be028302fb57c9d46bbba0389ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
