@@ -33,6 +33,24 @@
       "message": "No bug id?",
       "revId": "8109ab8e9ac07c875602533e6bcd47e012311c22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e802a297_2f83c1b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294047
+      },
+      "writtenOn": "2023-12-11T09:35:47Z",
+      "side": 1,
+      "message": "Hi Greg, thanks for your reply. pls check:\nb/315748642, I believe the fix will be merged into ACK, but considering you guys may be on vacation, is it possible to merge it into android13-5.10 first? Because customers encountered this issue in android13-5.10.",
+      "parentUuid": "99f39100_dba3a85e",
+      "revId": "8109ab8e9ac07c875602533e6bcd47e012311c22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
