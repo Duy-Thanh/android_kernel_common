@@ -16,6 +16,23 @@
       "message": "Why only this one branch?  Why not all others that are needed?  And doesn\u0027t this get automatically merged soon through the LTS releases?  Why is this needed now?",
       "revId": "8109ab8e9ac07c875602533e6bcd47e012311c22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99f39100_dba3a85e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-11T09:10:13Z",
+      "side": 1,
+      "message": "No bug id?",
+      "revId": "8109ab8e9ac07c875602533e6bcd47e012311c22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
