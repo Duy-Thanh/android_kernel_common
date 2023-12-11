@@ -623,10 +623,18 @@ struct hid_device {							/* device report descriptor */
 	struct list_head debug_list;
 	spinlock_t  debug_list_lock;
 	wait_queue_head_t debug_wait;
+<<<<<<< HEAD   (a0f28e ANDROID: GKI: db845c: Update symbols list and ABI on rpmsg_r)
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
+=======
+	struct kref			ref;
+
+	unsigned int id;						/* system unique id */
+>>>>>>> BRANCH (34244e Linux 5.4.263)
 };
+
+void hiddev_free(struct kref *ref);
 
 #define to_hid_device(pdev) \
 	container_of(pdev, struct hid_device, dev)
