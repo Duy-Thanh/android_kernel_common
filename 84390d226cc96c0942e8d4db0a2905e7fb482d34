@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f196b929_db40dc4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-11T08:55:55Z",
+      "side": 1,
+      "message": "changelog is not in proper format for an UPSTREAM commit, please read the documentation for what to do here.",
+      "revId": "84390d226cc96c0942e8d4db0a2905e7fb482d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "673cc037_b4133b53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-11T08:55:55Z",
+      "side": 1,
+      "message": "changelog is not in proper format for an UPSTREAM commit, please read the documentation for what to do here.",
+      "revId": "84390d226cc96c0942e8d4db0a2905e7fb482d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
