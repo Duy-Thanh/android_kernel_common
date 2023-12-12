@@ -53,6 +53,7 @@
 #include <linux/khugepaged.h>
 #include <linux/delayacct.h>
 #include <linux/cacheinfo.h>
+#include <linux/cma.h>
 #include <asm/div64.h>
 #include "internal.h"
 #include "shuffle.h"
@@ -6221,8 +6222,9 @@ static void alloc_contig_dump_pages(struct list_head *page_list)
 }
 
 /* [start, end) must belong to a single zone. */
-int __alloc_contig_migrate_range(struct compact_control *cc,
-					unsigned long start, unsigned long end)
+static int __alloc_contig_migrate_range_ext(struct compact_control *cc,
+					unsigned long start, unsigned long end,
+					struct acr_info *info)
 {
 	/* This function is based on compact_zone() from compaction.c. */
 	unsigned int nr_reclaimed;
@@ -6262,8 +6264,18 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
 							&cc->migratepages);
 		cc->nr_migratepages -= nr_reclaimed;
 
+		if (info) {
+			struct page *page;
+			info->nr_reclaimed += nr_reclaimed;
+			list_for_each_entry(page, &cc->migratepages, lru)
+				info->nr_mapped += page_mapcount(page);
+		}
+
 		ret = migrate_pages(&cc->migratepages, alloc_migration_target,
 			NULL, (unsigned long)&mtc, cc->mode, MR_CONTIG_RANGE, NULL);
+
+		if (!ret && info)
+			info->nr_migrated += cc->nr_migratepages;
 
 		/*
 		 * On -ENOMEM, migrate_pages() bails out right away. It is pointless
@@ -6278,13 +6290,21 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
 		if (!(cc->gfp_mask & __GFP_NOWARN) && ret == -EBUSY)
 			alloc_contig_dump_pages(&cc->migratepages);
 		putback_movable_pages(&cc->migratepages);
-		return ret;
+		if (info)
+			info->err |= ACR_ERR_MIGRATE;
 	}
-	return 0;
+	return (ret < 0) ? ret : 0;
+}
+
+/* [start, end) must belong to a single zone. */
+int __alloc_contig_migrate_range(struct compact_control *cc,
+					unsigned long start, unsigned long end)
+{
+	return __alloc_contig_migrate_range_ext(cc, start, end, NULL);
 }
 
 /**
- * alloc_contig_range() -- tries to allocate given range of pages
+ * alloc_contig_range_ext() -- tries to allocate given range of pages
  * @start:	start PFN to allocate
  * @end:	one-past-the-last PFN to allocate
  * @migratetype:	migratetype of the underlying pageblocks (either
@@ -6292,6 +6312,7 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
  *			in range must have the same migratetype and it must
  *			be either of the two.
  * @gfp_mask:	GFP mask to use during compaction
+ * @info:	collect the allocation information, or NULL
  *
  * The PFN range does not have to be pageblock aligned. The PFN range must
  * belong to a single zone.
@@ -6304,8 +6325,9 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
  * pages which PFN is in [start, end) are allocated for the caller and
  * need to be freed with free_contig_range().
  */
-int alloc_contig_range(unsigned long start, unsigned long end,
-		       unsigned migratetype, gfp_t gfp_mask)
+int alloc_contig_range_ext(unsigned long start, unsigned long end,
+				unsigned migratetype, gfp_t gfp_mask,
+				struct acr_info *info)
 {
 	unsigned long outer_start, outer_end;
 	int order;
@@ -6349,8 +6371,11 @@ int alloc_contig_range(unsigned long start, unsigned long end,
 	 */
 
 	ret = start_isolate_page_range(start, end, migratetype, 0, gfp_mask);
-	if (ret)
+	if (ret) {
+		if (info)
+			info->err |= ACR_ERR_ISOLATE;
 		goto done;
+	}
 
 	drain_all_pages(cc.zone);
 
@@ -6364,7 +6389,7 @@ int alloc_contig_range(unsigned long start, unsigned long end,
 	 * allocated.  So, if we fall through be sure to clear ret so that
 	 * -EBUSY is not accidentally used or returned to caller.
 	 */
-	ret = __alloc_contig_migrate_range(&cc, start, end);
+	ret = __alloc_contig_migrate_range_ext(&cc, start, end, info);
 	if (ret && (ret != -EBUSY || (gfp_mask & __GFP_NORETRY)))
 		goto done;
 	ret = 0;
@@ -6412,6 +6437,8 @@ int alloc_contig_range(unsigned long start, unsigned long end,
 	/* Make sure the range is really isolated. */
 	if (test_pages_isolated(outer_start, end, 0)) {
 		ret = -EBUSY;
+		if (info)
+			info->err |= ACR_ERR_TEST;
 		goto done;
 	}
 
@@ -6431,6 +6458,34 @@ int alloc_contig_range(unsigned long start, unsigned long end,
 done:
 	undo_isolate_page_range(start, end, migratetype);
 	return ret;
+}
+EXPORT_SYMBOL(alloc_contig_range_ext);
+
+/**
+ * alloc_contig_range() -- tries to allocate given range of pages
+ * @start:	start PFN to allocate
+ * @end:	one-past-the-last PFN to allocate
+ * @migratetype:	migratetype of the underlying pageblocks (either
+ *			#MIGRATE_MOVABLE or #MIGRATE_CMA).  All pageblocks
+ *			in range must have the same migratetype and it must
+ *			be either of the two.
+ * @gfp_mask:	GFP mask to use during compaction
+ *
+ * The PFN range does not have to be pageblock aligned. The PFN range must
+ * belong to a single zone.
+ *
+ * The first thing this routine does is attempt to MIGRATE_ISOLATE all
+ * pageblocks in the range.  Once isolated, the pageblocks should not
+ * be modified by others.
+ *
+ * Return: zero on success or negative error code.  On success all
+ * pages which PFN is in [start, end) are allocated for the caller and
+ * need to be freed with free_contig_range().
+ */
+int alloc_contig_range(unsigned long start, unsigned long end,
+		       unsigned migratetype, gfp_t gfp_mask)
+{
+	return alloc_contig_range_ext(start, end, migratetype, gfp_mask, NULL);
 }
 EXPORT_SYMBOL(alloc_contig_range);
 

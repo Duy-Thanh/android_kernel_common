@@ -26,6 +26,32 @@
 
 struct cma;
 
+#ifdef CONFIG_CONTIG_ALLOC
+#define ACR_ERR_ISOLATE	BIT(0)
+#define ACR_ERR_MIGRATE	BIT(1)
+#define ACR_ERR_TEST	BIT(2)
+
+struct acr_info {
+	unsigned long nr_mapped;
+	unsigned long nr_migrated;
+	unsigned long nr_reclaimed;
+	unsigned int err;
+};
+/* The below functions must be run on a range from a single zone. */
+extern int alloc_contig_range_ext(unsigned long start, unsigned long end,
+				unsigned migratetype, gfp_t gfp_mask,
+				struct acr_info *info);
+#endif
+
+struct cma_alloc_info {
+	unsigned long nr_migrated;
+	unsigned long nr_reclaimed;
+	unsigned long nr_mapped;
+	unsigned int nr_isolate_fail;
+	unsigned int nr_migrate_fail;
+	unsigned int nr_test_fail;
+};
+
 extern unsigned long totalcma_pages;
 extern phys_addr_t cma_get_base(const struct cma *cma);
 extern unsigned long cma_get_size(const struct cma *cma);

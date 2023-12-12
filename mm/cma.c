@@ -443,6 +443,7 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 	int ret = -ENOMEM;
 	int num_attempts = 0;
 	int max_retries = 5;
+	struct cma_alloc_info cma_info = {0};
 
 	if (WARN_ON_ONCE((gfp_mask & GFP_KERNEL) == 0 ||
 		(gfp_mask & ~(GFP_KERNEL|__GFP_NOWARN|__GFP_NORETRY)) != 0))
@@ -468,6 +469,8 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 		goto out;
 
 	for (;;) {
+		struct acr_info info = {0};
+
 		spin_lock_irq(&cma->lock);
 		bitmap_no = bitmap_find_next_zero_area_off(cma->bitmap,
 				bitmap_maxno, start, bitmap_count, mask,
@@ -507,7 +510,19 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 
 		pfn = cma->base_pfn + (bitmap_no << cma->order_per_bit);
 		mutex_lock(&cma_mutex);
-		ret = alloc_contig_range(pfn, pfn + count, MIGRATE_CMA, gfp_mask);
+		ret = alloc_contig_range_ext(pfn, pfn + count, MIGRATE_CMA,
+						gfp_mask, &info);
+		cma_info.nr_migrated += info.nr_migrated;
+		cma_info.nr_reclaimed += info.nr_reclaimed;
+		cma_info.nr_mapped += info.nr_mapped;
+		if (info.err) {
+			if (info.err & ACR_ERR_ISOLATE)
+				cma_info.nr_isolate_fail++;
+			if (info.err & ACR_ERR_MIGRATE)
+				cma_info.nr_migrate_fail++;
+			if (info.err & ACR_ERR_TEST)
+				cma_info.nr_test_fail++;
+		}
 		mutex_unlock(&cma_mutex);
 		if (ret == 0) {
 			page = pfn_to_page(pfn);
@@ -528,6 +543,7 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 	}
 
 	trace_cma_alloc_finish(cma->name, pfn, page, count, align, ret);
+	trace_cma_alloc_info(cma->name, page, count, align, &cma_info);
 
 	/*
 	 * CMA can allocate multiple page blocks, which results in different
