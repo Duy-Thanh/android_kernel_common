@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04176ce1_8f457d7f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2023-12-12T18:00:38Z",
+      "side": 1,
+      "message": "In line 1585 inconsistency-check will be called by skew_consistency, should it be part of deps here?",
+      "range": {
+        "startLine": 1744,
+        "startChar": 12,
+        "endLine": 1744,
+        "endChar": 36
+      },
+      "revId": "3851c83bf23ba191c577bbaee20f6cca40c8c201",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
