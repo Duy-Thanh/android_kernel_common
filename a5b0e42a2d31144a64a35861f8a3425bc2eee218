@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061406725",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2849338?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "26b71fee_50edd7b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-12T00:52:33Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 589808554 android-build.ayeaye-python-dispatcher_20231211.04_p0",
+      "revId": "a5b0e42a2d31144a64a35861f8a3425bc2eee218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061406725",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2849338?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "d2afead9_746b1186",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Alexandru Elisei \u003calexandru.elisei@arm.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "2e715894_89d7233d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-12T00:52:33Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Alexandru Elisei \u003calexandru.elisei@arm.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 589808554 android-build.ayeaye-python-dispatcher_20231211.04_p0",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 0
+      },
+      "revId": "a5b0e42a2d31144a64a35861f8a3425bc2eee218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
