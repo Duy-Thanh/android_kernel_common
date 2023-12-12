@@ -51,6 +51,24 @@
       "parentUuid": "6b274491_2c087e6b",
       "revId": "3c6c8a10f053d3a229db5baf24d9e65f732fc85a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bf192e1_fb334753",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-12-12T19:08:57Z",
+      "side": 1,
+      "message": "Yes KMI is FROZEN for android14-5.15 and android14-6.1 since June, 2023.",
+      "parentUuid": "a53441ed_30318d5b",
+      "revId": "3c6c8a10f053d3a229db5baf24d9e65f732fc85a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
