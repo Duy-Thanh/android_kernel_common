@@ -22,6 +22,30 @@
       },
       "revId": "3851c83bf23ba191c577bbaee20f6cca40c8c201",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2447248_cd94ccc5",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2023-12-12T18:25:54Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re right.  I updated this in aosp/2871097.",
+      "parentUuid": "04176ce1_8f457d7f",
+      "range": {
+        "startLine": 1744,
+        "startChar": 12,
+        "endLine": 1744,
+        "endChar": 36
+      },
+      "revId": "3851c83bf23ba191c577bbaee20f6cca40c8c201",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
