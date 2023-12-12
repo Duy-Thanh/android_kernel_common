@@ -341,3 +341,12 @@
 #required by zram.ko
   bioset_init
   bioset_exit
+
+#required by mi_asap.ko
+  __traceiter_android_vh_record_read_pages_early
+  __traceiter_android_vh_record_do_page_fault_done
+  __tracepoint_android_vh_record_read_pages_early
+  __tracepoint_android_vh_record_do_page_fault_done
+  page_cache_sync_ra
+  page_cache_async_ra
+  proc_doulongvec_minmax
