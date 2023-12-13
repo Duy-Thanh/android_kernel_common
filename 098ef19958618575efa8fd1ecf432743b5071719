@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061579241",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2873455?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6072f1c6_7b853c2d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-13T05:55:36Z",
+      "side": 1,
+      "message": "Can not find the original change on base branch (android12-5.10) for this change.\nPlease ensure that the Change-Id of this change is same as the original change on the base branch.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 589808554 android-build.ayeaye-python-dispatcher_20231211.04_p0",
+      "revId": "098ef19958618575efa8fd1ecf432743b5071719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061579241",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2873455?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c4b53953_6f5b19a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-13T05:55:36Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 589808554 android-build.ayeaye-python-dispatcher_20231211.04_p0",
+      "revId": "098ef19958618575efa8fd1ecf432743b5071719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061579241",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2873455?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e6d549d0_d97069a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-13T05:55:36Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 589808554 android-build.ayeaye-python-dispatcher_20231211.04_p0",
+      "revId": "098ef19958618575efa8fd1ecf432743b5071719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
