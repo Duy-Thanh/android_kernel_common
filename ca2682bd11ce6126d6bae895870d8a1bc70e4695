@@ -34,6 +34,24 @@
       "parentUuid": "bc8b2607_ad4550b5",
       "revId": "ca2682bd11ce6126d6bae895870d8a1bc70e4695",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dff1bcc8_545ec12c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-12-13T03:07:51Z",
+      "side": 1,
+      "message": "I\u0027ve resolved the open comments for the original change. Let\u0027s move forward.",
+      "parentUuid": "bd190ca4_36c5c464",
+      "revId": "ca2682bd11ce6126d6bae895870d8a1bc70e4695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
