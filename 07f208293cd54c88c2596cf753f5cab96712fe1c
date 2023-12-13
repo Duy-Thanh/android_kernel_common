@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157046b9_a91701b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-13T02:22:45Z",
+      "side": 1,
+      "message": "There should be exceptions to this. For instance, if a transaction is sent from a thread that is already part of a transaction stack to a process that is already part of that transaction stack, that work item needs to be queued on the thread that is part of the transaction stack, not on the process work list. Also async transactions gets queued on the node if there is already an async transaction active on that node.",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e579d866_25577fe9",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-13T02:22:45Z",
+      "side": 1,
+      "message": "Why do you need this variable? It seems to be an alias for !self.work_list.is_empty().",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb129c8_33eb1703",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-13T02:22:45Z",
+      "side": 1,
+      "message": "The transaction stack part seems to be unsupported in this patch. A TODO: comment might make that clearer",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
