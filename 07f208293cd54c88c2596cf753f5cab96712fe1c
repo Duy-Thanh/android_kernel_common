@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f1956b4_1d16a8a3",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-13T19:13:08Z",
+      "side": 1,
+      "message": "OK, but you are using this in should_use_process_work_queue where the C version will select the thread worklist over the process worklist even if the work items queued on the thread worklist were queued as deferred work. It is possible this does not make a practical difference, but I need to look at it more to be sure.",
+      "parentUuid": "69a3a23f_0a45abfe",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb129c8_33eb1703",
         "filename": "drivers/android/thread.rs",
         "patchSetId": 3
