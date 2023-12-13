@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "feac6a79_ff6d74c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-13T09:45:24Z",
+      "side": 1,
+      "message": "Right. When you deliver a transaction to a process that\u0027s already part of the transaction stack, it doesn\u0027t use the \"ready threads\" functionality at all. And async transactions get queued on the node before using the \"ready threads\" functionality in \"rust_binder: serialize oneway transactions\".\n\nI will update the commit message.",
+      "parentUuid": "157046b9_a91701b2",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e579d866_25577fe9",
         "filename": "drivers/android/thread.rs",
         "patchSetId": 3
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69a3a23f_0a45abfe",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-13T09:45:24Z",
+      "side": 1,
+      "message": "It\u0027s not an alias due to `push_work_deferred`. When that method is used, the work list becomes non-empty, but `process_work_list` remains false.",
+      "parentUuid": "e579d866_25577fe9",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb129c8_33eb1703",
         "filename": "drivers/android/thread.rs",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2023-12-13T02:22:45Z",
       "side": 1,
       "message": "The transaction stack part seems to be unsupported in this patch. A TODO: comment might make that clearer",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3f43584_0616af24",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-13T09:45:24Z",
+      "side": 1,
+      "message": "Yeah, I should probably update this comment.",
+      "parentUuid": "fbb129c8_33eb1703",
       "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
