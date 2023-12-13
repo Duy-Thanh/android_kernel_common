@@ -1756,6 +1756,9 @@ static int mmc_init_card(struct mmc_host *host, u32 ocr,
 			goto free_card;
 	}
 
+	trace_android_vh_mmc_update_partition_status(card);
+	trace_android_rvh_mmc_partition_status(card);
+
 	/*
 	 * Enable power_off_notification byte in the ext_csd register
 	 */

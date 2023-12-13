@@ -45,6 +45,13 @@ DECLARE_HOOK(android_vh_sdhci_get_cd,
 DECLARE_HOOK(android_vh_mmc_gpio_cd_irqt,
 	     TP_PROTO(struct mmc_host *host, bool *allow),
 	     TP_ARGS(host, allow));
+DECLARE_HOOK(adnroid_vh_mmc_update_partition_status,
+		TP_PROTO(struct mmc_card *card),
+		TP_ARGS(card));
+
+DECLARE_RESTRICTED_HOOK(android_rvh_mmc_partition_status,
+		TP_PROTO(struct mmc_card *card),
+		TP_ARGS(card),1);
 
 /* macro versions of hooks are no longer required */
 
