@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ac236cd_40a6bdfb",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-13T20:21:48Z",
+      "side": 1,
+      "message": "In the patch that introduces non-oneway transactions, that method is updated to the following:\n```\nfn should_use_process_work_queue(\u0026self) -\u003e bool {\n    self.current_transaction.is_none() \u0026\u0026 !self.process_work_list \u0026\u0026 self.is_looper()\n}\n```",
+      "parentUuid": "6f1956b4_1d16a8a3",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb129c8_33eb1703",
         "filename": "drivers/android/thread.rs",
         "patchSetId": 3
