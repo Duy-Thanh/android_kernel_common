@@ -16,6 +16,24 @@
       "message": "the original change has some open comments (that were added after submission)",
       "revId": "ca2682bd11ce6126d6bae895870d8a1bc70e4695",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd190ca4_36c5c464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2023-12-13T01:00:18Z",
+      "side": 1,
+      "message": "Can we move forward with this change as it is blocking other changes to be merged in android15-6.1",
+      "parentUuid": "bc8b2607_ad4550b5",
+      "revId": "ca2682bd11ce6126d6bae895870d8a1bc70e4695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
