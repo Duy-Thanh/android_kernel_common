@@ -104,6 +104,23 @@
       "parentUuid": "fbb129c8_33eb1703",
       "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752cd65a_1f685b84",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-13T09:52:51Z",
+      "side": 1,
+      "message": "This isn\u0027t true anymore. It can only fail if the thread is dead.",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
