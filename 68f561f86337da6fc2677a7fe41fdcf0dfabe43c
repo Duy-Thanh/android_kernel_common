@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d6f243_7384bce5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-12-13T20:35:04Z",
+      "side": 1,
+      "message": "Without defining `kmi_symbol_list`, bazel targets `//common:kernel_aarch64_abi_*` aren\u0027t available which is required to generate the protected exports list and defining it is triggering the trimming which we are not ready to do yet. This change should stay dormant until we are ready.",
+      "revId": "68f561f86337da6fc2677a7fe41fdcf0dfabe43c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
