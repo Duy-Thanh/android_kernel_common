@@ -99,6 +99,30 @@
       },
       "revId": "c387c4e84ce53050fa03907c9af4c9b0bf1c86d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5bfa1b9_8f1f0d9f",
+        "filename": "tools/testing/android/bin/kselftest.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-12-13T03:07:19Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. Will do it in follow up cl.",
+      "parentUuid": "c16500a1_238afd18",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 44
+      },
+      "revId": "c387c4e84ce53050fa03907c9af4c9b0bf1c86d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
