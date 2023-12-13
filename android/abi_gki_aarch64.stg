@@ -3099,6 +3099,11 @@ pointer_reference {
   pointee_type_id: 0x07b1db01
 }
 pointer_reference {
+  id: 0x0b7d7682
+  kind: POINTER
+  pointee_type_id: 0x07b53c95
+}
+pointer_reference {
   id: 0x0b85846c
   kind: POINTER
   pointee_type_id: 0x0456f72c
@@ -49115,6 +49120,12 @@ member {
   type_id: 0x38d23361
 }
 member {
+  id: 0xdfa4a7f6
+  name: "array"
+  type_id: 0x030b9acf
+  offset: 64
+}
+member {
   id: 0xdfcad7c4
   name: "array"
   type_id: 0x6d7f5ff6
@@ -59741,6 +59752,11 @@ member {
   name: "chain"
   type_id: 0x1a8b04e5
   offset: 384
+}
+member {
+  id: 0x15741053
+  name: "chain"
+  type_id: 0x030b9acf
 }
 member {
   id: 0x15798222
@@ -224601,6 +224617,17 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x07b53c95
+  kind: STRUCT
+  name: "dma_fence_unwrap"
+  definition {
+    bytesize: 24
+    member_id: 0x15741053
+    member_id: 0xdfa4a7f6
+    member_id: 0xad7c841b
+  }
+}
+struct_union {
   id: 0x7f49bdff
   kind: STRUCT
   name: "dma_filter"
@@ -328593,6 +328620,13 @@ function {
   parameter_id: 0xc9082b19
 }
 function {
+  id: 0xce0d9e89
+  return_type_id: 0x030b9acf
+  parameter_id: 0x4585663f
+  parameter_id: 0x0a52df14
+  parameter_id: 0x0b7d7682
+}
+function {
   id: 0xce0dc24b
   return_type_id: 0x4585663f
   parameter_id: 0x00b7947f
@@ -329015,6 +329049,11 @@ function {
   parameter_id: 0x1e9745d3
 }
 function {
+  id: 0xdd980e87
+  return_type_id: 0x030b9acf
+  parameter_id: 0x0b7d7682
+}
+function {
   id: 0xddb49ff7
   return_type_id: 0x3ae3ff84
   parameter_id: 0x1e9745d3
@@ -329172,6 +329211,12 @@ function {
   id: 0xdf85b594
   return_type_id: 0x030b9acf
   parameter_id: 0x030b9acf
+}
+function {
+  id: 0xdfa8404e
+  return_type_id: 0x030b9acf
+  parameter_id: 0x030b9acf
+  parameter_id: 0x0b7d7682
 }
 function {
   id: 0xdfba2774
@@ -332339,6 +332384,15 @@ elf_symbol {
   crc: 0xb77e7bf8
   type_id: 0x4058e56a
   full_name: "__devres_alloc_node"
+}
+elf_symbol {
+  id: 0xfa3b077f
+  name: "__dma_fence_unwrap_merge"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd88defca
+  type_id: 0xce0d9e89
+  full_name: "__dma_fence_unwrap_merge"
 }
 elf_symbol {
   id: 0x0a6e3e89
@@ -353994,6 +354048,24 @@ elf_symbol {
   crc: 0x8455e3a7
   type_id: 0x9d05158e
   full_name: "dma_fence_signal_timestamp_locked"
+}
+elf_symbol {
+  id: 0x2012ba51
+  name: "dma_fence_unwrap_first"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc3cd6929
+  type_id: 0xdfa8404e
+  full_name: "dma_fence_unwrap_first"
+}
+elf_symbol {
+  id: 0xf5f318e9
+  name: "dma_fence_unwrap_next"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd13e4af8
+  type_id: 0xdd980e87
+  full_name: "dma_fence_unwrap_next"
 }
 elf_symbol {
   id: 0xf18ac584
@@ -398039,6 +398111,7 @@ interface {
   symbol_id: 0x279e51a3
   symbol_id: 0xe78c29b1
   symbol_id: 0x95c24824
+  symbol_id: 0xfa3b077f
   symbol_id: 0x0a6e3e89
   symbol_id: 0x347a699c
   symbol_id: 0x27ce6aa1
@@ -400444,6 +400517,8 @@ interface {
   symbol_id: 0xe2a2feec
   symbol_id: 0x904cad71
   symbol_id: 0x2b7d2f8e
+  symbol_id: 0x2012ba51
+  symbol_id: 0xf5f318e9
   symbol_id: 0xf18ac584
   symbol_id: 0x7ffe50b7
   symbol_id: 0x3b69b427
