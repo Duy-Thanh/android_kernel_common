@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "054b06d0_4512307a",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-12-13T22:19:44Z",
+      "side": 1,
+      "message": "Please use another mechanism than a request queue flag to mark queues that need sub-page segment support. It is almost certain that someone will allocate this flag for another purpose, the number of request queue flags is almost exhausted and it is very difficult to extend the number of request queue flags.",
+      "range": {
+        "startLine": 578,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 75
+      },
+      "revId": "f6784328cf3fcf2847baf6167e3d49f2e657a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
