@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73a50545_88fea1c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-13T17:42:14Z",
+      "side": 1,
+      "message": "All patches need description.",
+      "revId": "5ff90cad19eaa69cbcbf186d1ee07aab1ed7bece",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c58d36c_f58fe858",
         "filename": "arch/arm64/mm/fault.c",
         "patchSetId": 1
