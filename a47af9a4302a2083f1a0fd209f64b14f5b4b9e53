@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4d5a055_991fb45c",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-12-13T10:31:08Z",
+      "side": 1,
+      "message": "I\u0027m probably getting myself confused again with memory ordering, but we could probably just remove this WRITE_ONCE given that we\u0027re modifying a table that\u0027s not yet visible to the hardware?",
+      "range": {
+        "startLine": 789,
+        "startChar": 2,
+        "endLine": 789,
+        "endChar": 12
+      },
+      "revId": "a47af9a4302a2083f1a0fd209f64b14f5b4b9e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
