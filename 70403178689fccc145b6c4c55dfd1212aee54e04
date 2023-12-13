@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dcc4b30_16858f94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-12-13T23:32:33Z",
+      "side": 1,
+      "message": "Please use static i2c aliases to get deterministic i2c bus numbers. Refer to http://b/294925755 for more details.",
+      "revId": "70403178689fccc145b6c4c55dfd1212aee54e04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
