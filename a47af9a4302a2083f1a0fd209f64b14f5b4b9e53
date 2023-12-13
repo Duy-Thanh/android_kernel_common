@@ -46,6 +46,30 @@
       },
       "revId": "a47af9a4302a2083f1a0fd209f64b14f5b4b9e53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2450e3a4_f195148c",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-12-13T11:02:52Z",
+      "side": 1,
+      "message": "If so the existing code would need a similar barrier to ensure the 0s written to the newly installed table in the zalloc_page() path are visible prior to kvm_set_table_pte()::smp_store_release() ?",
+      "parentUuid": "18741a32_3144189c",
+      "range": {
+        "startLine": 789,
+        "startChar": 2,
+        "endLine": 789,
+        "endChar": 12
+      },
+      "revId": "a47af9a4302a2083f1a0fd209f64b14f5b4b9e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
