@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa39e009_d804a581",
+        "filename": "drivers/pci/controller/dwc/pcie-designware-host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-12-13T19:17:38Z",
+      "side": 1,
+      "message": "Maybe we should just add a vendor hook here instead of adding the PCI_MSI_FLAGS_64BIT while we work to get an upstream solution?",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 56
+      },
+      "revId": "5f358e097217e9fec057e197f46fad5db7b48cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
