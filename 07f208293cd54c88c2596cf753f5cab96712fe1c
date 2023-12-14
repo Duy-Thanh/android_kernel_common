@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0a66229_688f463b",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-14T00:03:13Z",
+      "side": 1,
+      "message": "The c version\n```\nstatic bool binder_available_for_proc_work_ilocked(struct binder_thread *thread)\n{\n\treturn !thread-\u003etransaction_stack \u0026\u0026\n\t\tbinder_worklist_empty_ilocked(\u0026thread-\u003etodo) \u0026\u0026\n\t\t(thread-\u003elooper \u0026 (BINDER_LOOPER_STATE_ENTERED |\n\t\t\t\t   BINDER_LOOPER_STATE_REGISTERED));\n}\n```\nlooks like it should translate to:\n```\nfn should_use_process_work_queue(\u0026self) -\u003e bool {\n    self.current_transaction.is_none() \u0026\u0026 self.work_list.is_empty() \u0026\u0026 self.is_looper()\n}\n```\nthough. As long as the thread works is always processed before the proc work even if should_use_process_work_queue returns true, that might still be OK, but I think it will result in the rust driver behaving differently from the C version. Is this an intentional change? Of so it would be good to explain that in a comment, and document the additional requirements this put on the caller.",
+      "parentUuid": "2ac236cd_40a6bdfb",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb129c8_33eb1703",
         "filename": "drivers/android/thread.rs",
         "patchSetId": 3
