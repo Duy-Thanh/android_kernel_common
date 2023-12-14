@@ -16,6 +16,23 @@
       "message": "Please break these up into a set of logical patches that add symbols based on functionality, or kernel modules, that you are using.  As it is, this is a mix of a lot of different things, some acceptable, some I have questions about, and some, not even present at all in newer kernels so you probably shouldn\u0027t be using them now and should be using more modern interfaces instead.",
       "revId": "bb59cc7024ee217f40155745a5cabdbdc4c2b693",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bac5243_82d4dbaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-14T08:54:52Z",
+      "side": 1,
+      "message": "Also, I\u0027m guessing that many of these symbols are needed for a specific netfilter module?  Any reason we can\u0027t just add that to our configuration instead of having to support these exported symbols (I worry about the audit stuff.)",
+      "revId": "bb59cc7024ee217f40155745a5cabdbdc4c2b693",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
