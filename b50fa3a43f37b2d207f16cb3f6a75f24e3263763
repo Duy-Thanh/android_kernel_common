@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30cef86f_6d746bcf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-12-14T17:31:51Z",
+      "side": 1,
+      "message": "This patch has been modified compared to what has been posted on the mailing list so it should be documented what has been modified and the Reviewed-by and Tested-by tags should be left out.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 47
+      },
+      "revId": "b50fa3a43f37b2d207f16cb3f6a75f24e3263763",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
