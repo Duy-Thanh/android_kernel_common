@@ -16,6 +16,261 @@
       "message": "I assume there are several commits squashed into this one?",
       "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "430787a8_592b2dbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "This looks like it can be reworked using vendor hooks to be KMI compliant. See comments.",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "654918c7_d05a64a6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "move all of this to a vendor hook handler?",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026e23e4_ac37eb41",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "Since the !task case is for setting the proc-\u003edefault_priority, it seems like this isn\u0027t needed - it is constant. Your hook handler just needs to know that it is operating on the default_priority.",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea65f174_f76aeadb",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "`binder_do_set_priority()` is not in the KMI, so you could pass the uclamp info as a separate parameter (or NULL if using the default priority)",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8716bb6_aab772cb",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "This check in vendor hook handler.",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e2aeb50_a3dfc7ed",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "move all of this to vendor hook handler",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56650a3f_18fe7712",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "add parameter to pass desired_uclamp and handle it with a vendor hook.",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc18815_bd5d9103",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "to vendor hook. Saved uclamp priority comes from the binder_transaction vendor data.",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a5990a_ea7f9307",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "add desired_uclamp parameter?",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b19ef289_dcd2a0b5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3442,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "to vendor hook",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6f07ab_dfcb6ed1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3865,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "hook can get uclamp state from vendor data in `in_reply_to`",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e3c483b_f8751fca",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3989,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "uclamp state from `in_reply_to`",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bd88f5e_a0b28978",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4668,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "uclamp state is the default hardcoded values",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a51c496_5d7fd078",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5914,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "to vendor hook. Since the uclamp part of the default_priority is hardcoded at line 699, it can be inferred without having to store it in \u0026proc-\u003edefault_priority.",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d601e37_75483242",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-14T19:06:00Z",
+      "side": 1,
+      "message": "breaks KMI, need to remove. Can you use the vendor data in `binder_transaction`? Do you need the uclamp field in proc-\u003edefault_priority given it appears to be set to a constant value?",
+      "revId": "e0d095b9771526b6f3059df5787b0d3b6c3121ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
