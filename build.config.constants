@@ -1,5 +1,10 @@
+<<<<<<< HEAD   (7dfee8 ANDROID: android: Export symbols for invoking cpufreq_update)
 BRANCH=android15-6.6
 CLANG_VERSION=r498229b
+=======
+BRANCH=android15-6.1
+CLANG_VERSION=r510928
+>>>>>>> CHANGE (cf3864 ANDROID: Kleaf: Switch to Clang 18.0.0 (r510928))
 AARCH64_NDK_TRIPLE=aarch64-linux-android31
 X86_64_NDK_TRIPLE=x86_64-linux-android31
 ARM_NDK_TRIPLE=arm-linux-androideabi31
