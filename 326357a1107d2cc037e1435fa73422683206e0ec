@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fbbc91a_b799f168",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-12-14T00:06:57Z",
+      "side": 1,
+      "message": "Todd, could you bypass-presubmit +2? There is a bogus checkpatch error blocking the merge.",
+      "revId": "326357a1107d2cc037e1435fa73422683206e0ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
