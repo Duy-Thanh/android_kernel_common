@@ -1517,8 +1517,16 @@ static int sbp2_scsi_slave_configure(struct scsi_device *sdev)
 
 	sdev->use_10_for_rw = 1;
 
+<<<<<<< HEAD   (157836 Merge 6.1.65 into android14-6.1-lts)
 	if (sbp2_param_exclusive_login)
 		sdev->manage_start_stop = 1;
+=======
+	if (sbp2_param_exclusive_login) {
+		sdev->manage_system_start_stop = 1;
+		sdev->manage_runtime_start_stop = 1;
+		sdev->manage_shutdown = 1;
+	}
+>>>>>>> BRANCH (6c6a6c Linux 6.1.66)
 
 	if (sdev->type == TYPE_ROM)
 		sdev->use_10_for_ms = 1;

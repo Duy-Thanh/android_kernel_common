@@ -297,6 +297,11 @@ struct cfg80211_beacon_registration {
 struct cfg80211_cqm_config {
 	u32 rssi_hyst;
 	s32 last_rssi_event_value;
+<<<<<<< HEAD   (157836 Merge 6.1.65 into android14-6.1-lts)
+=======
+	enum nl80211_cqm_rssi_threshold_event last_rssi_event_type;
+	bool use_range_api;
+>>>>>>> BRANCH (6c6a6c Linux 6.1.66)
 	int n_rssi_thresholds;
 	s32 rssi_thresholds[];
 };
