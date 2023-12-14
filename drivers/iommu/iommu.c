@@ -290,6 +290,7 @@ static void dev_iommu_free(struct device *dev)
 	kfree(param);
 }
 
+<<<<<<< HEAD   (a8493f Merge 6.1.67 into android14-6.1-lts)
 static u32 dev_iommu_get_max_pasids(struct device *dev)
 {
 	u32 max_pasids = 0, bits = 0;
@@ -308,6 +309,8 @@ static u32 dev_iommu_get_max_pasids(struct device *dev)
 	return min_t(u32, max_pasids, dev->iommu->iommu_dev->max_pasids);
 }
 
+=======
+>>>>>>> BRANCH (ba6f5f Linux 6.1.68)
 DEFINE_MUTEX(iommu_probe_device_lock);
 
 static int __iommu_probe_device(struct device *dev, struct list_head *group_list)
@@ -327,10 +330,15 @@ static int __iommu_probe_device(struct device *dev, struct list_head *group_list
 	 * but for now enforcing a simple global ordering is fine.
 	 */
 	lockdep_assert_held(&iommu_probe_device_lock);
+<<<<<<< HEAD   (a8493f Merge 6.1.67 into android14-6.1-lts)
 	if (!dev_iommu_get(dev)) {
 		ret = -ENOMEM;
 		goto err_out;
 	}
+=======
+	if (!dev_iommu_get(dev))
+		return -ENOMEM;
+>>>>>>> BRANCH (ba6f5f Linux 6.1.68)
 
 	if (!try_module_get(ops->owner)) {
 		ret = -EINVAL;
@@ -372,7 +380,10 @@ out_module_put:
 err_free:
 	dev_iommu_free(dev);
 
+<<<<<<< HEAD   (a8493f Merge 6.1.67 into android14-6.1-lts)
 err_out:
+=======
+>>>>>>> BRANCH (ba6f5f Linux 6.1.68)
 	return ret;
 }
 
