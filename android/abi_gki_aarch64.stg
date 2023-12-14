@@ -329142,6 +329142,11 @@ function {
   parameter_id: 0x3654c061
 }
 function {
+  id: 0xde58152a
+  return_type_id: 0x0ee13889
+  parameter_id: 0x1042c9d1
+}
+function {
   id: 0xdeac32ec
   return_type_id: 0x4585663f
   parameter_id: 0x4585663f
@@ -365292,6 +365297,15 @@ elf_symbol {
   crc: 0x58fd3714
   type_id: 0x1488e3e7
   full_name: "input_free_device"
+}
+elf_symbol {
+  id: 0xec2cffc5
+  name: "input_get_timestamp"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2c574010
+  type_id: 0xde58152a
+  full_name: "input_get_timestamp"
 }
 elf_symbol {
   id: 0x8d472246
@@ -401699,6 +401713,7 @@ interface {
   symbol_id: 0xc802de31
   symbol_id: 0x6f29f28e
   symbol_id: 0xcd4b17c4
+  symbol_id: 0xec2cffc5
   symbol_id: 0x8d472246
   symbol_id: 0x29087f7f
   symbol_id: 0xa4d70a3f
