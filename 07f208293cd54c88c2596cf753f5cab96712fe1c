@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "669db4e7_3ec7bf91",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-14T10:00:14Z",
+      "side": 1,
+      "message": "No, this isn\u0027t intentional. I wanted to say that it didn\u0027t make a difference because deferred work is only used for completions of transactions, but it looks like it is also sometimes used in `new_node_ref`. I\u0027ll have to think about the consequences of this...",
+      "parentUuid": "f0a66229_688f463b",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb129c8_33eb1703",
         "filename": "drivers/android/thread.rs",
         "patchSetId": 3
