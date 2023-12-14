@@ -16,6 +16,24 @@
       "message": "Todd, could you bypass-presubmit +2? There is a bogus checkpatch error blocking the merge.",
       "revId": "326357a1107d2cc037e1435fa73422683206e0ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "888f01b0_4f2da840",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-12-14T17:03:56Z",
+      "side": 1,
+      "message": "maybe let me track down the checkpatch fix for this issue and possibly backport it.",
+      "parentUuid": "8fbbc91a_b799f168",
+      "revId": "326357a1107d2cc037e1435fa73422683206e0ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
