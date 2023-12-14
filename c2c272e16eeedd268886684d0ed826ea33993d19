@@ -34,6 +34,24 @@
       "parentUuid": "c38aa12c_060b5c9b",
       "revId": "c2c272e16eeedd268886684d0ed826ea33993d19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c7096af_a2f43766",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-12-14T18:19:47Z",
+      "side": 1,
+      "message": "We don\u0027t need to force the sleep, there are some proxy APIs that futex uses to manipulate the -\u003eowner and -\u003ewaiters without blocking. Regardless, we do sleep here for sync transactions until we get a reply.\n\nI wonder why rt_mutex doesn\u0027t implement uclamp inheritance and binder does?",
+      "parentUuid": "906169e4_726c43cc",
+      "revId": "c2c272e16eeedd268886684d0ed826ea33993d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
