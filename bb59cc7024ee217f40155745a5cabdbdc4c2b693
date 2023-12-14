@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38160199_f1a3ede7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-14T08:47:59Z",
+      "side": 1,
+      "message": "Please break these up into a set of logical patches that add symbols based on functionality, or kernel modules, that you are using.  As it is, this is a mix of a lot of different things, some acceptable, some I have questions about, and some, not even present at all in newer kernels so you probably shouldn\u0027t be using them now and should be using more modern interfaces instead.",
+      "revId": "bb59cc7024ee217f40155745a5cabdbdc4c2b693",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
