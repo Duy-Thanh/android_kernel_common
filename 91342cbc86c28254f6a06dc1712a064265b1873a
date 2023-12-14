@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46980b1_a5de64bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-14T17:19:55Z",
+      "side": 1,
+      "message": "You are only really adding a subset of new symbols to the list to be tracked, please only list the new ones in the changelog text.",
+      "revId": "91342cbc86c28254f6a06dc1712a064265b1873a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
