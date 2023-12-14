@@ -16,6 +16,24 @@
       "message": "you need to list the new symbols you are enabling here.",
       "revId": "5c247dc5975b2d833a874e7c0de0066b6b0ab59a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f11ec74_11694c25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1409782
+      },
+      "writtenOn": "2023-12-14T17:09:39Z",
+      "side": 1,
+      "message": "Okay I added the added symbols to the commit message.",
+      "parentUuid": "d657323e_a5012242",
+      "revId": "5c247dc5975b2d833a874e7c0de0066b6b0ab59a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
