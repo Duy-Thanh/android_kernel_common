@@ -34,6 +34,24 @@
       "parentUuid": "8fbbc91a_b799f168",
       "revId": "326357a1107d2cc037e1435fa73422683206e0ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dba6c7a_844c6d16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-12-14T17:43:07Z",
+      "side": 1,
+      "message": "The issue goes back to the introduction of this \"repeated words\" test: `1a3dcf2e6b35 (\"checkpatch: add test for repeated words\")`.\n\nThe commits fixing this are:\n```\nb7907b4ce949 (\"checkpatch: add new exception to repeated word check\")\n8d0325cc74a3 (\"checkpatch: fix false positives in REPEATED_WORD warning\")\n```\n\nI\u0027ll circle back with next steps (e.g. bypass, backport fixes to ack, backport fixes to lts).",
+      "parentUuid": "888f01b0_4f2da840",
+      "revId": "326357a1107d2cc037e1435fa73422683206e0ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
