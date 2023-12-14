@@ -16,6 +16,24 @@
       "message": "We are likely removing the PI done in the OOT driver in favor of a different solution upstream (e.g. rt_mutex). Can this ulcamp inheritance be worked out in one of these upstream facilities instead?",
       "revId": "c2c272e16eeedd268886684d0ed826ea33993d19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "906169e4_726c43cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-12-14T17:57:33Z",
+      "side": 1,
+      "message": "upstream doesn\u0027t have uclamp inheritance in rt_mutex. And holding the rt_mutex indicates we have to force someone to go to sleep to force the waiter to be boosted. is binder a blocking operation?",
+      "parentUuid": "c38aa12c_060b5c9b",
+      "revId": "c2c272e16eeedd268886684d0ed826ea33993d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
