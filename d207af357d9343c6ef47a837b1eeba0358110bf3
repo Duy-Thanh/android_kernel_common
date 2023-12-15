@@ -22,6 +22,30 @@
       },
       "revId": "d207af357d9343c6ef47a837b1eeba0358110bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a9ded6c_9bcf13e8",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 11770,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2023-12-15T09:40:50Z",
+      "side": 1,
+      "message": "We just use one path to registered this hook, so use restricted hook at here.\nIt is OK to use not restricted hook.",
+      "parentUuid": "7dd60878_22e47e97",
+      "range": {
+        "startLine": 11770,
+        "startChar": 1,
+        "endLine": 11770,
+        "endChar": 31
+      },
+      "revId": "d207af357d9343c6ef47a837b1eeba0358110bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
