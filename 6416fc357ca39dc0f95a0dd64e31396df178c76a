@@ -33,6 +33,23 @@
       "message": "You just removed a bunch of valid debugging code, please don\u0027t do that.  List of module names, which will show us what is a vendor module, and what is an external module, is very important in debugging.",
       "revId": "6416fc357ca39dc0f95a0dd64e31396df178c76a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6eaba0a_d4695523",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-15T11:45:10Z",
+      "side": 1,
+      "message": "If you really want to reduce log spam, please fix up the pixel drivers that log things when all is working properly, and only have them log stuff when things go wrong.  The kernel should be silent when all is working properly, unlike many of the out-of-tree drivers today.",
+      "revId": "6416fc357ca39dc0f95a0dd64e31396df178c76a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
