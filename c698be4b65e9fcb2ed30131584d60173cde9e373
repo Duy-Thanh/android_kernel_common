@@ -34,6 +34,24 @@
       "parentUuid": "f27f5a7a_a053dce2",
       "revId": "c698be4b65e9fcb2ed30131584d60173cde9e373",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99eab695_dc008402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-12-15T09:21:45Z",
+      "side": 1,
+      "message": "I think that it\u0027s possible to check diff between patchset N-1 and patchset N which kernel modules requires additional symbols.\nIs this NOK?",
+      "parentUuid": "9cb1969e_40739c73",
+      "revId": "c698be4b65e9fcb2ed30131584d60173cde9e373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
