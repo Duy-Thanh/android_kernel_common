@@ -196,7 +196,7 @@ static int __die(const char *str, int err, struct pt_regs *regs)
 	if (ret == NOTIFY_STOP)
 		return ret;
 
-	print_modules();
+	//print_modules();
 	show_regs(regs);
 
 	dump_kernel_instr(KERN_EMERG, regs);

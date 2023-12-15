@@ -664,7 +664,7 @@ void __warn(const char *file, int line, void *caller, unsigned taint,
 	if (args)
 		vprintk(args->fmt, args->args);
 
-	print_modules();
+	//print_modules();
 
 	if (regs)
 		show_regs(regs);

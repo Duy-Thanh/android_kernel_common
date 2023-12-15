@@ -137,7 +137,7 @@ static void watchdog_overflow_callback(struct perf_event *event,
 
 		pr_emerg("Watchdog detected hard LOCKUP on cpu %d\n",
 			 this_cpu);
-		print_modules();
+		//print_modules();
 		print_irqtrace_events(current);
 		if (regs)
 			show_regs(regs);
