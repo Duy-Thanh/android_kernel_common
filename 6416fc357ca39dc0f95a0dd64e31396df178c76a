@@ -50,6 +50,23 @@
       "message": "If you really want to reduce log spam, please fix up the pixel drivers that log things when all is working properly, and only have them log stuff when things go wrong.  The kernel should be silent when all is working properly, unlike many of the out-of-tree drivers today.",
       "revId": "6416fc357ca39dc0f95a0dd64e31396df178c76a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b09e25a_df64da67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-12-15T21:34:36Z",
+      "side": 1,
+      "message": "It definitely has helped me debug issues.",
+      "revId": "6416fc357ca39dc0f95a0dd64e31396df178c76a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
