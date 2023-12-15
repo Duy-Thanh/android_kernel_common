@@ -16,6 +16,23 @@
       "message": "Has this been proposed upstream? Also note, while those log lines might not be useful for you, they might be useful for others.",
       "revId": "6416fc357ca39dc0f95a0dd64e31396df178c76a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83ffa76d_f423a8d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-15T11:44:13Z",
+      "side": 1,
+      "message": "You just removed a bunch of valid debugging code, please don\u0027t do that.  List of module names, which will show us what is a vendor module, and what is an external module, is very important in debugging.",
+      "revId": "6416fc357ca39dc0f95a0dd64e31396df178c76a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
