@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd60878_22e47e97",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 11770,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-15T09:15:01Z",
+      "side": 1,
+      "message": "why is this a restricted hook?",
+      "range": {
+        "startLine": 11770,
+        "startChar": 1,
+        "endLine": 11770,
+        "endChar": 31
+      },
+      "revId": "d207af357d9343c6ef47a837b1eeba0358110bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
