@@ -22,6 +22,30 @@
       },
       "revId": "5f358e097217e9fec057e197f46fad5db7b48cce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bc3f4a3_1e2dad32",
+        "filename": "drivers/pci/controller/dwc/pcie-designware-host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1967749
+      },
+      "writtenOn": "2023-12-15T10:59:17Z",
+      "side": 1,
+      "message": "Hi @sdalvi@google.com, as we discussed offline, can you take a look at the possibility of using vendor hook for the fix? Thanks.",
+      "parentUuid": "fa39e009_d804a581",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 56
+      },
+      "revId": "5f358e097217e9fec057e197f46fad5db7b48cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
