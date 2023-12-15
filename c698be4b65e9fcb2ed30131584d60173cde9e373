@@ -16,6 +16,24 @@
       "message": "I have broken down into some logical patchset 2 to 8 for additional symbols based on kernel module or functionality.\nPlease review them.",
       "revId": "c698be4b65e9fcb2ed30131584d60173cde9e373",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cb1969e_40739c73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-15T09:08:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be multiple patches, not just the breakdown in the changelog text?",
+      "parentUuid": "f27f5a7a_a053dce2",
+      "revId": "c698be4b65e9fcb2ed30131584d60173cde9e373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
