@@ -538,6 +538,8 @@
   dma_buf_unmap_attachment
   dma_buf_vmap
   dma_buf_vunmap
+  dma_direct_alloc
+  dma_direct_free
   dmaengine_unmap_put
   dma_fence_add_callback
   dma_fence_array_create
@@ -1381,6 +1383,7 @@
   nr_cpu_ids
   nr_irqs
   ns_capable
+  ns_capable_noaudit
   nsec_to_clock_t
   ns_to_timespec64
   __num_online_cpus
