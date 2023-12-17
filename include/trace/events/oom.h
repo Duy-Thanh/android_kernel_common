@@ -72,19 +72,27 @@ TRACE_EVENT(reclaim_retry_zone,
 );
 
 TRACE_EVENT(mark_victim,
-	TP_PROTO(int pid),
+	TP_PROTO(struct task_struct *task),
 
-	TP_ARGS(pid),
+	TP_ARGS(task),
 
 	TP_STRUCT__entry(
 		__field(int, pid)
+		__array(char, process_name, TASK_COMM_LEN)
+		__field(short, oom_score_adj)
 	),
 
 	TP_fast_assign(
-		__entry->pid = pid;
+		__entry->pid = task->pid;
+		memcpy(__entry->process_name, task->comm, TASK_COMM_LEN);
+		__entry->oom_score_adj = task->signal->oom_score_adj;
 	),
 
-	TP_printk("pid=%d", __entry->pid)
+	TP_printk("pid=%d process_name=%s oom_score_adj=%hd",
+		__entry->pid,
+		__entry->process_name,
+		__entry->oom_score_adj
+	)
 );
 
 TRACE_EVENT(wake_reaper,
