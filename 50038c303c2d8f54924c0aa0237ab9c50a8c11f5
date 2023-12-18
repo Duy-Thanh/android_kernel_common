@@ -16,6 +16,24 @@
       "message": "Please add an ANDROID_VENDOR_DATA() field here so it can be extended in the future if necessary.",
       "revId": "50038c303c2d8f54924c0aa0237ab9c50a8c11f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8239b749_1c858e77",
+        "filename": "include/net/net_namespace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-12-18T01:19:31Z",
+      "side": 1,
+      "message": "As your suggestion, Added ANDROID_VENDOR_DATA()",
+      "parentUuid": "beb862fc_0045107b",
+      "revId": "50038c303c2d8f54924c0aa0237ab9c50a8c11f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
