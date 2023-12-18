@@ -70,6 +70,23 @@
       "parentUuid": "99eab695_dc008402",
       "revId": "c698be4b65e9fcb2ed30131584d60173cde9e373",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98b7ff2c_a208c587",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-12-18T08:07:05Z",
+      "side": 1,
+      "message": "I\u0027ve created another ChangeSets below as suggested.\nPlease review on them and will abondon this change id.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2879946\nhttps://android-review.googlesource.com/c/kernel/common/+/2879967\nhttps://android-review.googlesource.com/c/kernel/common/+/2879968\nhttps://android-review.googlesource.com/c/kernel/common/+/2879970\nhttps://android-review.googlesource.com/c/kernel/common/+/2879971",
+      "revId": "c698be4b65e9fcb2ed30131584d60173cde9e373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
