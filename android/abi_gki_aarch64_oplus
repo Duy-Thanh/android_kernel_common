@@ -28,3 +28,25 @@
   ip_route_me_harder
   ipv6_find_hdr
   jiffies_64_to_clock_t
+  ktime_get_coarse_real_ts64
+  memory_cgrp_subsys
+  memory_cgrp_subsys_enabled_key
+  mipi_dsi_generic_write
+  mmc_wait_for_cmd
+  nf_ct_attach
+  nf_ct_delete
+  nf_register_net_hooks
+  nf_unregister_net_hooks
+  of_css
+  __page_mapcount
+  pm_get_active_wakeup_sources
+  __printk_ratelimit
+  public_key_verify_signature
+  proc_symlink
+  _raw_write_trylock
+  reciprocal_value
+  register_tcf_proto_ops
+  regulator_map_voltage_linear_range
+  remove_proc_subtree
+  rtc_read_alarm
+  rtc_set_alarm
