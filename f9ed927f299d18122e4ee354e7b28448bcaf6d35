@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7a96117_97569c05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-19T18:19:31Z",
+      "side": 1,
+      "message": "Please file 2 warnings:\n```\nErrors were reported from checkpatch.pl.\n\nSummary:\n\nWARNING:BAD_FIXES_TAG: Please use correct Fixes: style \u0027Fixes: \u003c12 chars of sha1\u003e (\"\u003ctitle line\u003e\")\u0027 - ie: \u0027Fixes: 3417013e0d18 (\"mm/migrate: Add folio_migrate_mapping()\")\u0027\n#21: \n--\nWARNING:BAD_REPORTED_BY_LINK: Reported-by: should be immediately followed by Closes: with a URL to the report\n#26: \n```",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "f9ed927f299d18122e4ee354e7b28448bcaf6d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
