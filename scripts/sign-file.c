@@ -288,7 +288,7 @@ int main(int argc, char **argv)
 		replace_orig = true;
 	}
 
-#ifdef USE_PKCS7
+#if OPENSSL_VERSION_NUMBER < 0x10000000L && defined(USE_PKCS7)
 	if (strcmp(hash_algo, "sha1") != 0) {
 		fprintf(stderr, "sign-file: %s only supports SHA1 signing\n",
 			OPENSSL_VERSION_TEXT);
