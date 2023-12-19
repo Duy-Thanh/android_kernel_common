@@ -288,14 +288,6 @@ int main(int argc, char **argv)
 		replace_orig = true;
 	}
 
-#ifdef USE_PKCS7
-	if (strcmp(hash_algo, "sha1") != 0) {
-		fprintf(stderr, "sign-file: %s only supports SHA1 signing\n",
-			OPENSSL_VERSION_TEXT);
-		exit(3);
-	}
-#endif
-
 	/* Open the module file */
 	bm = BIO_new_file(module_name, "rb");
 	ERR(!bm, "%s", module_name);
