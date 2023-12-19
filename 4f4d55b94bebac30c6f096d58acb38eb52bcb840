@@ -22,6 +22,30 @@
       },
       "revId": "4f4d55b94bebac30c6f096d58acb38eb52bcb840",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254f9fd8_ceee1b88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-19T21:03:11Z",
+      "side": 1,
+      "message": "Also, bug numbers usually goes before change id",
+      "parentUuid": "463d93ed_629d61ff",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "4f4d55b94bebac30c6f096d58acb38eb52bcb840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
