@@ -632,10 +632,18 @@ struct hid_device {							/* device report descriptor */
 	struct list_head debug_list;
 	spinlock_t  debug_list_lock;
 	wait_queue_head_t debug_wait;
+<<<<<<< HEAD   (8ab21f Revert "ASoC: soc-card: Add storage for PCI SSID")
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
+=======
+	struct kref			ref;
+
+	unsigned int id;						/* system unique id */
+>>>>>>> BRANCH (9b91d3 Linux 5.15.141)
 };
+
+void hiddev_free(struct kref *ref);
 
 #define to_hid_device(pdev) \
 	container_of(pdev, struct hid_device, dev)
