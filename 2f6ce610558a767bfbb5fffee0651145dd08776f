@@ -34,6 +34,23 @@
       "parentUuid": "d077e10c_5a8dd2c7",
       "revId": "2f6ce610558a767bfbb5fffee0651145dd08776f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36398312_1d2a9c18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-19T18:18:21Z",
+      "side": 1,
+      "message": "Please abandon this patch and instead cherry-pick aosp/2390172 so the Change-Id is preserved. Same with the WIP android-mainline version of this patch.",
+      "revId": "2f6ce610558a767bfbb5fffee0651145dd08776f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
