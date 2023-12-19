@@ -960,7 +960,18 @@ NOKPROBE_SYMBOL(do_debug_exception);
 struct page *alloc_zeroed_user_highpage_movable(struct vm_area_struct *vma,
 						unsigned long vaddr)
 {
-	return alloc_page_vma(GFP_HIGHUSER_MOVABLE | __GFP_ZERO | __GFP_CMA, vma, vaddr);
+	gfp_t gfp = GFP_HIGHUSER_MOVABLE | __GFP_ZERO;
+
+	/*
+	 * With dynamic tag storage, 1 in 32 MTE page allocations will trigger
+	 * an allocation of a specific CMA page. With high CMA utilization,
+	 * this will usually also trigger a page migration, which hurts
+	 * performance. Therefore, we should reduce our CMA allocations
+	 * when dynamic tag storage is enabled.
+	 */
+	if (!tag_storage_enabled())
+  		gfp |= __GFP_CMA;
+	return alloc_page_vma(gfp, vma, vaddr);
 }
 
 /*
