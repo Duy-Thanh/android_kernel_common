@@ -363,6 +363,10 @@ void dev_coredumpm(struct device *dev, struct module *owner,
 	devcd->devcd_dev.class = &devcd_class;
 
 	mutex_lock(&devcd->mutex);
+<<<<<<< HEAD   (85771d Revert "mmc: core: add helpers mmc_regulator_enable/disable_)
+=======
+	dev_set_uevent_suppress(&devcd->devcd_dev, true);
+>>>>>>> BRANCH (d0fc08 Linux 5.15.143)
 	if (device_add(&devcd->devcd_dev))
 		goto put_device;
 
@@ -377,6 +381,8 @@ void dev_coredumpm(struct device *dev, struct module *owner,
 		              "devcoredump"))
 		dev_warn(dev, "devcoredump create_link failed\n");
 
+	dev_set_uevent_suppress(&devcd->devcd_dev, false);
+	kobject_uevent(&devcd->devcd_dev.kobj, KOBJ_ADD);
 	INIT_DELAYED_WORK(&devcd->del_wk, devcd_del);
 	schedule_delayed_work(&devcd->del_wk, DEVCD_TIMEOUT);
 	mutex_unlock(&devcd->mutex);
