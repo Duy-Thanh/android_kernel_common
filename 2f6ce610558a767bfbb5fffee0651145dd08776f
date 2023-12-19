@@ -16,6 +16,24 @@
       "message": "Please resolve the comments on aosp/2856605 first.",
       "revId": "2f6ce610558a767bfbb5fffee0651145dd08776f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be857fbf_17ccf811",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965130
+      },
+      "writtenOn": "2023-12-19T08:02:51Z",
+      "side": 1,
+      "message": "As my comment in Bug: 314452030. I will consult with my team members about the feasibility of upstreaming our feature to the mainline. In the meantime, I have marked patch 2856605 as \u0027work in progress\u0027 until we reach a decision.",
+      "parentUuid": "d077e10c_5a8dd2c7",
+      "revId": "2f6ce610558a767bfbb5fffee0651145dd08776f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
