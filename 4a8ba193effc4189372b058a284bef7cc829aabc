@@ -16,6 +16,29 @@
       "message": "Resolve the comments on aosp/2879786 then cherry-pick that version to android-mainline once aosp/2879786 merges.",
       "revId": "4a8ba193effc4189372b058a284bef7cc829aabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c393bc8f_915228ef",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-19T08:21:25Z",
+      "side": 1,
+      "message": "an array of 1 item?  Why not just use `ANDROID_VENDOR_DATA()` instead?",
+      "range": {
+        "startLine": 886,
+        "startChar": 1,
+        "endLine": 886,
+        "endChar": 26
+      },
+      "revId": "4a8ba193effc4189372b058a284bef7cc829aabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
