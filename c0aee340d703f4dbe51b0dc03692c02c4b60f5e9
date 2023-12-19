@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf8582f_a014ea17",
+        "filename": "scripts/sign-file.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-19T21:06:26Z",
+      "side": 1,
+      "message": "In boringssl we have `OPENSSL_NO_CMS` defined, so this is still going to set USE_PKCS7. Right?\n\nAnd it is correct to set `USE_PKCS7` here, because boringssl does not support CMS anyways (see bug). The problem is L291.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 24
+      },
+      "revId": "c0aee340d703f4dbe51b0dc03692c02c4b60f5e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
