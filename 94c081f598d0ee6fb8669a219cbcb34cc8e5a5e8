@@ -16,6 +16,24 @@
       "message": "Please submit upstream first.",
       "revId": "94c081f598d0ee6fb8669a219cbcb34cc8e5a5e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ba6bff_2f8e64e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966380
+      },
+      "writtenOn": "2023-12-20T16:56:51Z",
+      "side": 1,
+      "message": "This issue in already fixed in upstream patch series [1]. However, pulling in these changes are very intrusive hence resorted to this change.\n\n[1] https://lore.kernel.org/linux-iommu/0-v4-79d0c229580a+650-iommu_err_unwind_jgg@nvidia.com/",
+      "parentUuid": "bb4bb993_8967e84a",
+      "revId": "94c081f598d0ee6fb8669a219cbcb34cc8e5a5e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
