@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a002ecc8_a0870f8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-20T17:30:24Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry-pick aosp/a2877634 so the Change-Id is preserved.",
+      "revId": "596554f2d5112787416866fe0180a3f383ee99d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
