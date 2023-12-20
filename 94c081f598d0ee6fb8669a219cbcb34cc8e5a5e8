@@ -34,6 +34,24 @@
       "parentUuid": "bb4bb993_8967e84a",
       "revId": "94c081f598d0ee6fb8669a219cbcb34cc8e5a5e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf32b4c6_b6d8e5fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-20T21:47:28Z",
+      "side": 1,
+      "message": "So, I assume the issue still exists in upstream 6.1 stable kernels then? If so I think it\u0027s worth raising the question of how it has to be fixed there on the mailing list and if this simple alternative fix is accepted by upstream we will take it as part of LTS.",
+      "parentUuid": "c9ba6bff_2f8e64e6",
+      "revId": "94c081f598d0ee6fb8669a219cbcb34cc8e5a5e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
