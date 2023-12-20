@@ -1,5 +1,57 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d61998_b5d8319a",
+        "filename": "drivers/virt/gunyah/gunyah_vcpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1897817
+      },
+      "writtenOn": "2023-12-20T02:47:05Z",
+      "side": 1,
+      "message": "Why state_data was cleared disregard of the result?",
+      "revId": "cc653d701f72a92103ae30b7573129258d34e5e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "177cfd9e_3c8ebb3e",
+        "filename": "drivers/virt/gunyah/gunyah_vcpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1897817
+      },
+      "writtenOn": "2023-12-20T02:47:05Z",
+      "side": 1,
+      "message": "will state_data still needed if GH_ERROR_RETRY needed here?",
+      "revId": "cc653d701f72a92103ae30b7573129258d34e5e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc57ab1_c1bb4c67",
+        "filename": "drivers/virt/gunyah/gunyah_vcpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1897817
+      },
+      "writtenOn": "2023-12-20T02:47:05Z",
+      "side": 1,
+      "message": "In this case, we don\u0027t need to do state_date clearing, right?",
+      "revId": "cc653d701f72a92103ae30b7573129258d34e5e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
