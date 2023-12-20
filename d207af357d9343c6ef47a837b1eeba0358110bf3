@@ -94,6 +94,30 @@
       },
       "revId": "d207af357d9343c6ef47a837b1eeba0358110bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d48dd55_04d4b630",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 11770,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2023-12-20T14:21:17Z",
+      "side": 1,
+      "message": "Because we just use one path to registered this hook, so I think use restricted hook is better.\nIf you have concern for restricted hook, we can use unrestricted hook at here.",
+      "parentUuid": "7c57ace4_f59e7297",
+      "range": {
+        "startLine": 11770,
+        "startChar": 1,
+        "endLine": 11770,
+        "endChar": 31
+      },
+      "revId": "d207af357d9343c6ef47a837b1eeba0358110bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
