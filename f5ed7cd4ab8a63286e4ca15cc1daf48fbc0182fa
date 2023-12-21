@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df09b20_06f16a9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-21T17:15:51Z",
+      "side": 1,
+      "message": "Why is this needed in android-mainline? Why can\u0027t the underlying patch be sent upstream?",
+      "revId": "f5ed7cd4ab8a63286e4ca15cc1daf48fbc0182fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
