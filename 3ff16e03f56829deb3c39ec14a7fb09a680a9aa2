@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d467ae29_268bb5e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2023-12-21T09:29:05Z",
+      "side": 1,
+      "message": "Naughty me. Thanks for the patch!",
+      "revId": "3ff16e03f56829deb3c39ec14a7fb09a680a9aa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c49e392_9370a485",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2023-12-21T09:29:05Z",
+      "side": 1,
+      "message": "\"speeds up\" ?",
+      "range": {
+        "startLine": 77,
+        "startChar": 19,
+        "endLine": 77,
+        "endChar": 27
+      },
+      "revId": "3ff16e03f56829deb3c39ec14a7fb09a680a9aa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
