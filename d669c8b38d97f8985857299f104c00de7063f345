@@ -34,6 +34,24 @@
       "parentUuid": "332a91bd_a18501c6",
       "revId": "d669c8b38d97f8985857299f104c00de7063f345",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66093b01_916420ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-12-21T17:41:44Z",
+      "side": 1,
+      "message": "Thanks, once we fix the drop_caches issue, then we can submit the pixel driver fixes and re-run presubmit. That should update both this change and the ashmen child change.",
+      "parentUuid": "1e4ca275_5a3c3a10",
+      "revId": "d669c8b38d97f8985857299f104c00de7063f345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
