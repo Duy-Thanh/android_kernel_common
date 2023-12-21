@@ -24,9 +24,9 @@ DECLARE_HOOK(android_vh_modify_thermal_target_freq,
 	TP_PROTO(struct cpufreq_policy *policy, unsigned int *target_freq),
 	TP_ARGS(policy, target_freq));
 
-DECLARE_HOOK(android_vh_thermal_power_cap,
-	TP_PROTO(u32 *power_range),
-	TP_ARGS(power_range));
+DECLARE_HOOK(android_vh_enable_thermal_power_throttle,
+	TP_PROTO(bool *enable),
+	TP_ARGS(enable));
 
 #endif /* _TRACE_HOOK_THERMAL_H */
 /* This part must be outside protection */

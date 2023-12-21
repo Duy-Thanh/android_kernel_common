@@ -462,7 +462,6 @@ static int allocate_power(struct thermal_zone_device *tz,
 	}
 
 	power_range = pid_controller(tz, control_temp, max_allocatable_power);
-	trace_android_vh_thermal_power_cap(&power_range);
 
 	divvy_up_power(weighted_req_power, max_power, num_actors,
 		       total_weighted_req_power, power_range, granted_power,
@@ -701,6 +700,7 @@ static int power_allocator_throttle(struct thermal_zone_device *tz, int trip_id)
 	struct thermal_trip trip;
 	int ret;
 	bool update;
+	bool enable = true;
 
 	lockdep_assert_held(&tz->lock);
 
@@ -711,8 +711,10 @@ static int power_allocator_throttle(struct thermal_zone_device *tz, int trip_id)
 	if (trip_id != params->trip_max_desired_temperature)
 		return 0;
 
+	trace_android_vh_enable_thermal_power_throttle(&enable);
+
 	ret = __thermal_zone_get_trip(tz, params->trip_switch_on, &trip);
-	if (!ret && (tz->temperature < trip.temperature)) {
+	if ((!ret && (tz->temperature < trip.temperature)) || !enable) {
 		update = (tz->last_temperature >= trip.temperature);
 		tz->passive = 0;
 		reset_pid_controller(params);
