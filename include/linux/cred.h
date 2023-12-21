@@ -114,7 +114,12 @@ static inline int groups_search(const struct group_info *group_info, kgid_t grp)
  * same context as task->real_cred.
  */
 struct cred {
-	atomic_long_t	usage;
+/* ANDROID bug #317347552 covers what is going on here, don't touch these fields. */
+#ifdef __GENKSYMS__
+	atomic_t	usage;
+#else
+	atomic_t	android_bug_317347552_do_not_touch;
+#endif
 #ifdef CONFIG_DEBUG_CREDENTIALS
 	atomic_t	subscribers;	/* number of processes subscribed */
 	void		*put_addr;
@@ -155,6 +160,13 @@ struct cred {
 		int non_rcu;			/* Can we skip RCU deletion? */
 		struct rcu_head	rcu;		/* RCU deletion hook */
 	};
+/*
+ * ANDROID bug #317347552 covers what is going on here,
+ * moved to the bottom to preserve the ABI
+ */
+#ifndef __GENKSYMS__
+	atomic_long_t	usage;		/* ANDROID, moved to bottom of the function to preserve ABI */
+#endif
 } __randomize_layout;
 
 extern void __put_cred(struct cred *);
