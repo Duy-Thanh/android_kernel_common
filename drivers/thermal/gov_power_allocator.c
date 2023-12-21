@@ -13,6 +13,8 @@
 
 #define CREATE_TRACE_POINTS
 #include "thermal_trace_ipa.h"
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/thermal.h>
 
 #include "thermal_core.h"
 
@@ -460,6 +462,7 @@ static int allocate_power(struct thermal_zone_device *tz,
 	}
 
 	power_range = pid_controller(tz, control_temp, max_allocatable_power);
+	trace_android_vh_thermal_power_cap(&power_range);
 
 	divvy_up_power(weighted_req_power, max_power, num_actors,
 		       total_weighted_req_power, power_range, granted_power,
