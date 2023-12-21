@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "332a91bd_a18501c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-12-21T17:34:29Z",
+      "side": 1,
+      "message": "Please don\u0027t bypass presubmit on this one. So many things are broken in presubmit",
+      "revId": "d669c8b38d97f8985857299f104c00de7063f345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
