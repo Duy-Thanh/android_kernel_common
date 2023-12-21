@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c391a4_1f243116",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2023-12-21T08:31:02Z",
+      "side": 1,
+      "message": "This has a different Commit-Id to the same patch in different branches.\n\nPlease Abandon this one and cherry-pick one of the others.",
+      "revId": "66aae868c156e177b9df185e1fb15b4ecad8119c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
