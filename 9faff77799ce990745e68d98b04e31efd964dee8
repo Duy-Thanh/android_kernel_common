@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f6dc69_87bc6b43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-21T17:27:57Z",
+      "side": 1,
+      "message": "Need to hold off since the 6.113-5.15 version looks like it may have caused an issue (aosp/2877634).",
+      "revId": "9faff77799ce990745e68d98b04e31efd964dee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
