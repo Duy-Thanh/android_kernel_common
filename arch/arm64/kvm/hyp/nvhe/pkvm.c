@@ -1274,6 +1274,34 @@ err_unlock:
 	return err;
 }
 
+int __pkvm_lookup_vm_partid(pkvm_handle_t handle)
+{
+	struct pkvm_hyp_vm *hyp_vm;
+	struct kvm_s2_mmu *mmu;
+	struct kvm_vmid *kvm_vmid;
+	u64 vmid;
+	u16 partid = 0;
+
+	hyp_read_lock(&vm_table_lock);
+
+	hyp_vm = get_vm_by_handle(handle);
+	if (!hyp_vm)
+		goto err_unlock;
+
+	mmu = &hyp_vm->kvm.arch.mmu;
+	kvm_vmid = &mmu->vmid;
+	vmid = atomic64_read(&kvm_vmid->id);
+	partid = vmid;
+
+	hyp_read_unlock(&vm_table_lock);
+	return partid;
+
+err_unlock:
+	hyp_read_unlock(&vm_table_lock);
+	return -EINVAL;
+}
+
+
 int pkvm_load_pvmfw_pages(struct pkvm_hyp_vm *vm, u64 ipa, phys_addr_t phys,
 			  u64 size)
 {

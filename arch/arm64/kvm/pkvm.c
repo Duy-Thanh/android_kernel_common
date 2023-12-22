@@ -629,6 +629,15 @@ int pkvm_create_hyp_vcpu(struct kvm_vcpu *vcpu)
 	return ret;
 }
 
+int pkvm_lookup_hyp_vm_partid(struct kvm *host_kvm)
+{
+	if (!host_kvm->arch.pkvm.handle)
+		return -EINVAL;
+
+	return kvm_call_hyp_nvhe(__pkvm_lookup_vm_partid,
+					host_kvm->arch.pkvm.handle);
+}
+
 void pkvm_finalize_destroy_hyp_vm(struct kvm *kvm)
 {
 	mutex_lock(&kvm->arch.config_lock);

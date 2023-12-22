@@ -143,6 +143,7 @@ int __pkvm_start_teardown_vm(pkvm_handle_t handle);
 int __pkvm_finalize_teardown_vm(pkvm_handle_t handle);
 int __pkvm_reclaim_dying_guest_ffa_resources(pkvm_handle_t handle);
 int __pkvm_notify_guest_vm_avail(pkvm_handle_t handle);
+int __pkvm_lookup_vm_partid(pkvm_handle_t handle);
 
 struct pkvm_hyp_vcpu *pkvm_load_hyp_vcpu(pkvm_handle_t handle,
 					 unsigned int vcpu_idx);
