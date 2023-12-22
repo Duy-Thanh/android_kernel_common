@@ -16,6 +16,24 @@
       "message": "This is not a valid SHA1 in the upstream kernel. I don\u0027t see this patch there, so this is not an UPSTREAM patch. Please fix the label and cite a valid patch.",
       "revId": "d10275cdb01db6aedfd2006f89aee4e34f601914",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1e5a4d_0fcc6573",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-22T20:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9ede1f7_f3f35125",
+      "revId": "d10275cdb01db6aedfd2006f89aee4e34f601914",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
