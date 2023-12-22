@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78fb1e46_4a5d0c1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876910
+      },
+      "writtenOn": "2023-12-22T18:14:38Z",
+      "side": 1,
+      "message": "Why is checkpatch failing on this revert?\n\nDid checkpatch fail on the original patch?",
+      "revId": "04b1fcfabe7f88c631093df774be9f97bbe78377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
