@@ -12,6 +12,7 @@
 
 #include <trace/hooks/cpuidle.h>
 #include <trace/hooks/mpam.h>
+#include <trace/hooks/mm.h>
 #include <trace/hooks/wqlockup.h>
 #include <trace/hooks/debug.h>
 #include <trace/hooks/sysrqcrash.h>
@@ -85,3 +86,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ctl_dirty_rate);
