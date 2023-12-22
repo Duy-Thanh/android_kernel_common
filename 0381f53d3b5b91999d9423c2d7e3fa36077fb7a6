@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/317318329",
       "revId": "0381f53d3b5b91999d9423c2d7e3fa36077fb7a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fcaf802_3b96c72f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2023-12-22T19:42:51Z",
+      "side": 1,
+      "message": "Please use \"Bug\" instead of \"BUG\"",
+      "revId": "0381f53d3b5b91999d9423c2d7e3fa36077fb7a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
