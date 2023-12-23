@@ -27,6 +27,9 @@ DECLARE_HOOK(android_vh_slab_folio_alloced,
 DECLARE_HOOK(android_vh_kmalloc_large_alloced,
 	TP_PROTO(struct page *page, unsigned int order, gfp_t flags),
 	TP_ARGS(page, order, flags));
+DECLARE_HOOK(android_vh_show_mem,
+	TP_PROTO(unsigned int filter, nodemask_t *nodemask),
+	TP_ARGS(filter, nodemask));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
