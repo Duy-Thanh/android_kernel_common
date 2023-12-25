@@ -37,7 +37,12 @@
 #include <trace/hooks/gic_v3.h>
 #include <trace/hooks/psi.h>
 #include <trace/hooks/remoteproc.h>
+<<<<<<< HEAD   (8835ecee98e5e6cc49238cd60e5df8243864ed02 ANDROID: GKI: Add initial empty desktop symbol list)
 #include <trace/hooks/reboot.h>
+||||||| BASE   (de5f5746bbd05c2ecdb9e5bf4c53d522b47f9ae5 ANDROID: GKI: enable CONFIG_SPI_SLAVE=y)
+=======
+#include <trace/hooks/psci.h>
+>>>>>>> CHANGE (c0e8e35576d508e4e73c25a13df7c4c3679c8e9f ANDROID: vendor_hooks: psci: add hook to check if cpu is all)
 #include <trace/hooks/timer.h>
 #include <trace/hooks/fpsimd.h>
 #include <trace/hooks/signal.h>
@@ -110,6 +115,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_iovad_alloc_iova);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_iovad_free_iova);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_psci_tos_resident_on);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_psci_cpu_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptype_head);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_allow_domain_state);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpuidle_psci_enter);
