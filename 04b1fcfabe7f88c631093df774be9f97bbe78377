@@ -16,6 +16,24 @@
       "message": "Why is checkpatch failing on this revert?\n\nDid checkpatch fail on the original patch?",
       "revId": "04b1fcfabe7f88c631093df774be9f97bbe78377",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cf2fea1_8f8ae467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-12-25T01:44:01Z",
+      "side": 1,
+      "message": "No, checkpatch succeeded on the original patch.",
+      "parentUuid": "78fb1e46_4a5d0c1e",
+      "revId": "04b1fcfabe7f88c631093df774be9f97bbe78377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
