@@ -13,6 +13,16 @@
 
 #if defined(CONFIG_TRACEPOINTS) && defined(CONFIG_ANDROID_VENDOR_HOOKS)
 
+/* also used in bpf probe */
+#define DECLARE_BPF_HOOK DECLARE_TRACE
+
+/* bpf probe use rcu for alloc/read/assign funcs */
+#define DECLARE_RESTRICTED_BPF_HOOK(name, proto, args, cond) \
+	DECLARE_BPF_HOOK(name, PARAMS(proto), PARAMS(args))
+
+#if !defined(TRACE_HEADER_BPF_PROBE)
+
+#undef DECLARE_HOOK
 #define DECLARE_HOOK DECLARE_TRACE
 
 int android_rvh_probe_register(struct tracepoint *tp, void *probe, void *data);
@@ -113,6 +123,18 @@ int android_rvh_probe_register(struct tracepoint *tp, void *probe, void *data);
 			PARAMS(void *__data, proto))
 
 #endif /* TRACE_HEADER_MULTI_READ */
+
+#else /* TRACE_HEADER_BPF_PROBE */
+
+/* ignore DECLARE_HOOK in bpf probe */
+#undef DECLARE_HOOK
+#define DECLARE_HOOK(name, proto, args)
+
+/* ignore DECLARE_RESTRICTED_HOOK in bpf probe */
+#undef DECLARE_RESTRICTED_HOOK
+#define DECLARE_RESTRICTED_HOOK(name, proto, args, cond)
+
+#endif /* TRACE_HEADER_BPF_PROBE */
 
 #else /* !CONFIG_TRACEPOINTS || !CONFIG_ANDROID_VENDOR_HOOKS */
 /* suppress trace hooks */

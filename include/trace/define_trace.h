@@ -101,7 +101,10 @@
 #ifdef TRACEPOINTS_ENABLED
 #include <trace/trace_events.h>
 #include <trace/perf.h>
+#define TRACE_HEADER_MULTI_READ
+#define TRACE_HEADER_BPF_PROBE
 #include <trace/bpf_probe.h>
+#undef TRACE_HEADER_BPF_PROBE
 #endif
 
 #undef TRACE_EVENT
