@@ -16,6 +16,23 @@
       "message": "This has a different Commit-Id to the same patch in different branches.\n\nPlease Abandon this one and cherry-pick one of the others.",
       "revId": "66aae868c156e177b9df185e1fb15b4ecad8119c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1164a64e_b4894276",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2023-12-25T08:53:03Z",
+      "side": 1,
+      "message": "123",
+      "revId": "66aae868c156e177b9df185e1fb15b4ecad8119c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
