@@ -16,6 +16,24 @@
       "message": "Why is the real fix not sent upstream already?  WHy is a hook still required here?",
       "revId": "ee9a4b69d70d26206d928f71c43153356c7e5d10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "446f11cc_dd40461d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2023-12-25T04:12:12Z",
+      "side": 1,
+      "message": "We want to change ilb cpu by this vendor hook, it is use for power tuning by customer.\nBecause this vendor hook only use for customer tuning, so we not sent upstream.",
+      "parentUuid": "8dd06b49_fce16dc1",
+      "revId": "ee9a4b69d70d26206d928f71c43153356c7e5d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
