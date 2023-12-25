@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000063497930",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2890993?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "06cf9a8a_c099dd7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-25T11:34:19Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/2e2b547950bc09e75afe912f9683be39c2195d9d) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d2e2b547950bc09e75afe912f9683be39c2195d9d)\n\n```\n      ## drivers/mmc/core/queue.c ##\n     @@ drivers/mmc/core/queue.c: static blk_status_t mmc_mq_queue_rq(struct blk_mq_hw_ctx *hctx,\n    @@ drivers/mmc/host/mmc_hsq.h\n      struct hsq_slot {\n      \tstruct mmc_request *mrq;\n      };\n    -\n    - ## include/linux/mmc/host.h ##\n    -@@ include/linux/mmc/host.h: struct mmc_host {\n    - \n    - \t/* Host Software Queue support */\n    - \tbool\t\t\thsq_enabled;\n    -+\tint\t\t\thsq_depth;\n    - \n    - \tu32\t\t\terr_stats[MMC_ERR_MAX];\n    - \tunsigned long\t\tprivate[] ____cacheline_aligned;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 592839223 android-build.ayeaye-python-dispatcher_20231221.04_p0",
+      "revId": "563b740a404c1722f73679775762627312097297",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
