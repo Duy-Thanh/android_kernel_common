@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ae3077_bc8e1f23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-26T22:24:58Z",
+      "side": 1,
+      "message": "Nope, we are not backporting folios to 6.1. That would be extremely intrusive to the whole mm code. If that\u0027s needed please use 6.6 kernel.",
+      "revId": "1352d23698b347d79e71728ebf88a8d740731efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
