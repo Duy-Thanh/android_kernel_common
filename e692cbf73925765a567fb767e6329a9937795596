@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a09aac01_f401db6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-26T20:29:36Z",
+      "side": 1,
+      "message": "This seems to be a partial cherry-pick of https://android-review.googlesource.com/c/kernel/common/+/2539896. If that\u0027s the only part you need from that original patch then please re-use the same Change-Id and add in the description that the original patch was trimmed.",
+      "revId": "e692cbf73925765a567fb767e6329a9937795596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
