@@ -184,18 +184,18 @@ static int check_timer_create(int which)
 	return 0;
 }
 
-int remain;
-__thread int got_signal;
+static int remain;
+static __thread int got_signal;
 
 static void *distribution_thread(void *arg)
 {
-	while (__atomic_load_n(&remain, __ATOMIC_RELAXED));
+	while (__atomic_load_n(&remain, __ATOMIC_RELAXED) && !done);
 	return NULL;
 }
 
 static void distribution_handler(int nr)
 {
-	if (!__atomic_exchange_n(&got_signal, 1, __ATOMIC_RELAXED))
+	if (++got_signal == 1)
 		__atomic_fetch_sub(&remain, 1, __ATOMIC_RELAXED);
 }
 
@@ -205,17 +205,19 @@ static void distribution_handler(int nr)
  */
 static int check_timer_distribution(void)
 {
-	int err, i;
-	timer_t id;
 	const int nthreads = 10;
 	pthread_t threads[nthreads];
 	struct itimerspec val = {
 		.it_value.tv_sec = 0,
-		.it_value.tv_nsec = 1000 * 1000,
+		.it_value.tv_nsec = 20 * 1000 * 1000,
 		.it_interval.tv_sec = 0,
-		.it_interval.tv_nsec = 1000 * 1000,
+		.it_interval.tv_nsec = 20 * 1000 * 1000,
 	};
+	time_t start, now;
+	int err, i;
+	timer_t id;
 
+	done = 0;
 	remain = nthreads + 1;  /* worker threads + this thread */
 	signal(SIGALRM, distribution_handler);
 	err = timer_create(CLOCK_PROCESS_CPUTIME_ID, NULL, &id);
@@ -240,7 +242,18 @@ static int check_timer_distribution(void)
 	}
 
 	/* Wait for all threads to receive the signal. */
-	while (__atomic_load_n(&remain, __ATOMIC_RELAXED));
+	now = start = time(NULL);
+	while (__atomic_load_n(&remain, __ATOMIC_RELAXED)) {
+		now = time(NULL);
+		if (now - start > 5)
+			break;
+	}
+	done = 1;
+
+	if (timer_delete(id)) {
+		ksft_perror("Can't delete timer\n");
+		return -1;
+	}
 
 	for (i = 0; i < nthreads; i++) {
 		err = pthread_join(threads[i], NULL);
@@ -251,12 +264,8 @@ static int check_timer_distribution(void)
 		}
 	}
 
-	if (timer_delete(id)) {
-		ksft_perror("Can't delete timer");
-		return -1;
-	}
+	ksft_test_result((now - start <= 5), "check_timer_distribution\n");
 
-	ksft_test_result_pass("check_timer_distribution\n");
 	return 0;
 }
 
