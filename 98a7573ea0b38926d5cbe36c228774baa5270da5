@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000063535486",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2891113?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8314f346_8fffeba7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-26T11:40:03Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 592839223 android-build.ayeaye-python-dispatcher_20231221.04_p0",
+      "revId": "98a7573ea0b38926d5cbe36c228774baa5270da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000063535486",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2891113?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "68f13edf_fb77350f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-26T11:40:03Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2868114](https://r.android.com/c/2868114) on branch android12-5.10.\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout_abort);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wakeup_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_swapcache);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (226a96 BACKPORT: firmware_loader: Abort all upcoming firmware load )\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction_finish);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_oem_binder_struct);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_perf_huristic_ctrl);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command_post_change);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_abort_success_ctrl);\n    @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_t\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_handler);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_check_ctrl);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_print_ctrl);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (85d8fb ANDROID: Add vendor hook for ufs perf heuristic and error re)\n      /*\n       * For type visibility\n       */\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 592839223 android-build.ayeaye-python-dispatcher_20231221.04_p0",
+      "revId": "98a7573ea0b38926d5cbe36c228774baa5270da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
