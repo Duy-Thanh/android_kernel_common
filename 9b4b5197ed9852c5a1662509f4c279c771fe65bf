@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4285196_1535d19c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-12-27T09:21:21Z",
+      "side": 1,
+      "message": "This is a forward-port of an existing hook. See b/284797902, for example. It still needs a proper GKI review.\n\nOtherwise my review comment would have been to flip the boolean to a positive \"allow\".",
+      "revId": "9b4b5197ed9852c5a1662509f4c279c771fe65bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
