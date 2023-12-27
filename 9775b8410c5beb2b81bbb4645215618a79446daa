@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000063565218",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2890733?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "18221abc_e266680e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-27T01:46:50Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/73ea73affe8622bdf292de898da869d441da6a9d) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d73ea73affe8622bdf292de898da869d441da6a9d)\n\n```\n      ## drivers/usb/gadget/udc/core.c ##\n    -@@ drivers/usb/gadget/udc/core.c: static void gadget_unbind_driver(struct device *dev)\n    - \n    - \tdev_dbg(\u0026udc-\u003edev, \"unbinding gadget driver [%s]\\n\", driver-\u003efunction);\n    +@@ drivers/usb/gadget/udc/core.c: err1:\n      \n    --\tkobject_uevent(\u0026udc-\u003edev.kobj, KOBJ_CHANGE);\n    --\n    - \tudc-\u003eallow_connect \u003d false;\n    - \tcancel_work_sync(\u0026udc-\u003evbus_work);\n    - \tmutex_lock(\u0026udc-\u003econnect_lock);\n    -@@ drivers/usb/gadget/udc/core.c: static void gadget_unbind_driver(struct device *dev)\n    - \tdriver-\u003eis_bound \u003d false;\n    - \tudc-\u003edriver \u003d NULL;\n    - \tmutex_unlock(\u0026udc_lock);\n    + int usb_gadget_probe_driver(struct usb_gadget_driver *driver)\n    + {\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (55f6a9 UPSTREAM: dm verity: don\u0027t perform FEC for failed readahead )\n    + \tstruct usb_udc\t\t*udc \u003d NULL;\n    + \tint\t\t\tret \u003d -ENODEV;\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\tstruct usb_gadget *gadget \u003d dev_to_usb_gadget(dev);\n    ++\tstruct usb_udc *udc \u003d gadget-\u003eudc;\n    ++\tstruct usb_gadget_driver *driver \u003d udc-\u003edriver;\n    ++\n    ++\tdev_dbg(\u0026udc-\u003edev, \"unbinding gadget driver [%s]\\n\", driver-\u003efunction);\n    ++\n    ++\tudc-\u003eallow_connect \u003d false;\n    ++\tcancel_work_sync(\u0026udc-\u003evbus_work);\n    ++\tmutex_lock(\u0026udc-\u003econnect_lock);\n    ++\tusb_gadget_disconnect_locked(gadget);\n    ++\tusb_gadget_disable_async_callbacks(udc);\n    ++\tif (gadget-\u003eirq)\n    ++\t\tsynchronize_irq(gadget-\u003eirq);\n    ++\tmutex_unlock(\u0026udc-\u003econnect_lock);\n    ++\n    ++\tudc-\u003edriver-\u003eunbind(gadget);\n    ++\n    ++\tmutex_lock(\u0026udc-\u003econnect_lock);\n    ++\tusb_gadget_udc_stop_locked(udc);\n    ++\tmutex_unlock(\u0026udc-\u003econnect_lock);\n    ++\n    ++\tmutex_lock(\u0026udc_lock);\n    ++\tdriver-\u003eis_bound \u003d false;\n    ++\tudc-\u003edriver \u003d NULL;\n    ++\tmutex_unlock(\u0026udc_lock);\n     +\n     +\tkobject_uevent(\u0026udc-\u003edev.kobj, KOBJ_CHANGE);\n    - }\n    ++}\n    ++\n    ++/* ------------------------------------------------------------------------- */\n    ++\n    ++int usb_gadget_register_driver_owner(struct usb_gadget_driver *driver,\n    ++\t\tstruct module *owner, const char *mod_name)\n    ++{\n    ++\tint ret;\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (0c2fb3 UPSTREAM: USB: gadget: core: adjust uevent timing on gadget )\n      \n    - /* ------------------------------------------------------------------------- */\n    + \tif (!driver || !driver-\u003ebind || !driver-\u003esetup)\n    + \t\treturn -EINVAL;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 592839223 android-build.ayeaye-python-dispatcher_20231221.04_p0",
+      "revId": "9775b8410c5beb2b81bbb4645215618a79446daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
