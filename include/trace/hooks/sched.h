@@ -437,6 +437,16 @@ DECLARE_RESTRICTED_HOOK(android_rvh_remove_entity_load_avg,
 DECLARE_RESTRICTED_HOOK(android_rvh_update_blocked_fair,
 	TP_PROTO(struct rq *rq),
 	TP_ARGS(rq), 1);
+<<<<<<< HEAD   (9c8fb18c9387eb441d9b34f0d4e1f8c94d801e0b ANDROID: GKI: Update symbols list for exynos)
+||||||| BASE   (58f9c9a064edfc4562cac598668f7ab306ed9632 ANDROID: futex: Add vendor hook for wait queue)
+
+=======
+
+DECLARE_RESTRICTED_HOOK(android_rvh_set_task_comm,
+	TP_PROTO(struct task_struct *tsk, bool exec),
+	TP_ARGS(tsk, exec), 1);
+
+>>>>>>> CHANGE (d187ea03ec3940253b18730314634bc1d3681c38 ANDROID: vendor_hooks: Add a hook for set_task_comm)
 /* macro versions of hooks are no longer required */
 
 DECLARE_HOOK(android_vh_task_cmdline_prio_restore,
