@@ -117,4 +117,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_detach_entity_load_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_remove_entity_load_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_blocked_fair);
+<<<<<<< PATCH SET (8d9e664bcbb910abbfa7c8d2b5f916ecc8132033 ANDROID: vendor_hooks: Add a hook for set_task_comm)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_task_comm);
+||||||| BASE      (9c8fb18c9387eb441d9b34f0d4e1f8c94d801e0b ANDROID: GKI: Update symbols list for exynos)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_util_fits_cpu);
+>>>>>>> BASE      (97ab6a61a3560a665a0de58578fc2254245dfe4a ANDROID: power: Add vendor hook for suspend)
