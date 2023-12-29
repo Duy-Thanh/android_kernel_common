@@ -117,6 +117,7 @@ int __init set_handle_fiq(void (*handle_fiq)(struct pt_regs *))
 	pr_info("Root FIQ handler: %ps\n", handle_fiq);
 	return 0;
 }
+EXPORT_SYMBOL(set_handle_fiq);
 
 void __init init_IRQ(void)
 {
