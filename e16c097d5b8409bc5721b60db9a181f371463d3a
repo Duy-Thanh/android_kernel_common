@@ -16,6 +16,23 @@
       "message": "The Change-Id should be the same as the commit this came from.",
       "revId": "e16c097d5b8409bc5721b60db9a181f371463d3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f7e302_9d4f0017",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-12-29T12:30:40Z",
+      "side": 1,
+      "message": "A change to add the hook symbols to your symbol list should be uploaded as part of the same series.",
+      "revId": "e16c097d5b8409bc5721b60db9a181f371463d3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
