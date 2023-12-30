@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60f7b2d0_6191e11c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2023-12-30T03:47:37Z",
+      "side": 1,
+      "message": "LGTM not sure why this was not individually picked to 14-6.1 as its cousins in this topic, but the change made it in with the latest LTS update, so it should be considered safe to cherry to -10 release. It is on the -11 release",
+      "revId": "77106eb02b3cb8801ade1ff7ca489c4c904374f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
