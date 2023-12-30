@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a289c392_dc8d01fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-12-30T14:39:08Z",
+      "side": 1,
+      "message": "why was the original Author changed? Perhpas the commit log was copied instead of using `git cherry-pick -xs`?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 6
+      },
+      "revId": "c4e5f15948783505cad3a9d585e1294c335ed510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0481ec_b540e910",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-12-30T14:39:08Z",
+      "side": 1,
+      "message": "who is dhavale? I don\u0027t see a corresponding signature.",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "c4e5f15948783505cad3a9d585e1294c335ed510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c9f91aa_21fefc9f",
+        "filename": "include/trace/hooks/preemptirq.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-12-30T14:39:08Z",
+      "side": 1,
+      "message": "Some logic was removed here. I assume this came from a fix? There is no information about this besides `resolved few conflicts`",
+      "revId": "c4e5f15948783505cad3a9d585e1294c335ed510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
