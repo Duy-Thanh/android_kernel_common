@@ -34,6 +34,23 @@
       "parentUuid": "78fb1e46_4a5d0c1e",
       "revId": "04b1fcfabe7f88c631093df774be9f97bbe78377",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9084c88_bbb2cbd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-31T00:01:53Z",
+      "side": 1,
+      "message": "Fix is posted: aosp/2889874",
+      "revId": "04b1fcfabe7f88c631093df774be9f97bbe78377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
