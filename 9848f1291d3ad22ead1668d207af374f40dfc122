@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc3a628_db74c78b",
+        "filename": "include/trace/hooks/dtask.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-02T17:10:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0b954215_55dafe66",
+      "revId": "9848f1291d3ad22ead1668d207af374f40dfc122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d66eac98_1a8442fc",
@@ -66,6 +84,30 @@
       "writtenOn": "2023-12-30T22:40:10Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 6
+      },
+      "revId": "9848f1291d3ad22ead1668d207af374f40dfc122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a54595f_3602592b",
+        "filename": "include/trace/hooks/dtask.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-02T17:10:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d66eac98_1a8442fc",
       "range": {
         "startLine": 19,
         "startChar": 0,
