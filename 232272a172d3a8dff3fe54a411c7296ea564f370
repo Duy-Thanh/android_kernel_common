@@ -33,6 +33,40 @@
       "message": "I have removed this unneeded include, could you help review again? Thanks",
       "revId": "232272a172d3a8dff3fe54a411c7296ea564f370",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61daa2f8_bbe6b784",
+        "filename": "kernel/trace/trace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10156,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-02T17:13:00Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "232272a172d3a8dff3fe54a411c7296ea564f370",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbbc2c08_48c4184a",
+        "filename": "kernel/trace/trace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10218,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-02T17:13:00Z",
+      "side": 1,
+      "message": "declare in this scope:\n```\nbool ftrace_check \u003d true;\n```",
+      "revId": "232272a172d3a8dff3fe54a411c7296ea564f370",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
