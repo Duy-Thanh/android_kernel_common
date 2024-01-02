@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a64d4ae2_49d88325",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-01-02T23:03:13Z",
+      "side": 1,
+      "message": "Hmm this link is broken, but it\u0027s also broken upstream.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 69
+      },
+      "revId": "0d2c4fe0c8054d49c6f43b4af874d3b0db9a46e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
