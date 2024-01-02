@@ -16,6 +16,24 @@
       "message": "remove",
       "revId": "46266c34fadf422bcb0d448363d457ebef09806c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5d4effb_78e443f5",
+        "filename": "include/trace/hooks/traps.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2024-01-02T14:05:50Z",
+      "side": 1,
+      "message": "I have removed this unneeded include, could you help review again? Thanks",
+      "parentUuid": "80274476_33f3c03f",
+      "revId": "46266c34fadf422bcb0d448363d457ebef09806c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
