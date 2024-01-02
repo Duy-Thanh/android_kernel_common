@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a96ccb6_cc3bd6d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2024-01-02T14:06:58Z",
+      "side": 1,
+      "message": "I have removed this unneeded include, could you help review again? Thanks",
+      "revId": "e1bc7df0960e008f281d4fab434773ab918cb802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
