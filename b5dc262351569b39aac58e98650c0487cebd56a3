@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "841f4b06_c0f7e50e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-02T20:00:44Z",
+      "side": 1,
+      "message": "should be `(cherry picked from commit \u003csha1\u003e)`",
+      "revId": "b5dc262351569b39aac58e98650c0487cebd56a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
