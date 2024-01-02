@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83e0d43_d4832fd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-02T10:23:46Z",
+      "side": 1,
+      "message": "Why not submit the needed changes upstream first?\n\nWe can not continue to always accept hooks that are not ever sent for merging properly.",
+      "revId": "99965910b6f69ff429ecdfb7f5f34a4a5b8309f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
