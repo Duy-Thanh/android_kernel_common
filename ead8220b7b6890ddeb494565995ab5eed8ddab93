@@ -16,6 +16,23 @@
       "message": "Please include a rationale for why this feature cannot be upstreamed or include a Link tag for a failed attempt at upstreaming.",
       "revId": "ead8220b7b6890ddeb494565995ab5eed8ddab93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bac5dde_6edce160",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-01-02T09:59:26Z",
+      "side": 1,
+      "message": "A change to add the hook symbols to your symbol list should be uploaded as part of the same series.",
+      "revId": "ead8220b7b6890ddeb494565995ab5eed8ddab93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
