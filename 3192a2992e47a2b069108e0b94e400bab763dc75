@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd8fc526_4719a1ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-03T11:18:02Z",
+      "side": 1,
+      "message": "riscv gki_defconfig file has symlink to arm64/configs/gki_defconfig file. That\u0027s why we shouldn\u0027t need to update it.",
+      "parentUuid": "ce986266_24b1da1a",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "795e296a_c5956394",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 3
