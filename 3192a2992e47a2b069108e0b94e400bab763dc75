@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "820c5f02_cf3c2958",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:20:12Z",
+      "side": 1,
+      "message": "you forgot to enable it in the riscv gki_defconfig file as well.",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "795e296a_c5956394",
