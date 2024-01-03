@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd33415_41c899d0",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-01-03T17:45:56Z",
+      "side": 1,
+      "message": "The dmabuf initialization here has been reworked upstream since the original version of this change. So this error handling is now incorrect on this branch since the dmabuf will get `kfree`d before the `fput` on the file. We\u0027ll have an invalid dereference in `dma_buf_file_release`. I\u0027m hesitant to move away from the upstream initialization code here, but I don\u0027t see a way around it.\n\nWe need a `list_del` and `file-\u003eprivate_data \u003d NULL` in the error handling code here before the `fput` when `dma_buf_stats_setup` fails.\n\nhttps://lore.kernel.org/all/20221209071535.933698-1-christian.koenig@amd.com/",
+      "revId": "93110d4188dc7cf3cf90d6bab750cbdea706ef9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
