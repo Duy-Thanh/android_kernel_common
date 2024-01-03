@@ -20,6 +20,155 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "795e296a_c5956394",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:19:22Z",
+      "side": 1,
+      "message": "#ifdefs are not a good thing for .c files, please fix up the logic here to not require them at all.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad5735b_037aa507",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1487,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:19:22Z",
+      "side": 1,
+      "message": "when drivers work properly, they are quiet.\n\nAlso, no driver should be calling pr_*() functions, use the proper dev_*() calls instead.",
+      "range": {
+        "startLine": 1487,
+        "startChar": 2,
+        "endLine": 1487,
+        "endChar": 9
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a20c3e5_a58366f2",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:19:22Z",
+      "side": 1,
+      "message": "obviously not an info message, right?\n\nAnd if this failed, why is the function not propagating the error upward properly?",
+      "range": {
+        "startLine": 1504,
+        "startChar": 2,
+        "endLine": 1504,
+        "endChar": 9
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c944f51b_508e0041",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1785,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:19:22Z",
+      "side": 1,
+      "message": "you just raced with userspace and lost 😞\n\nNever manually add sysfs files to a device like this, do it correctly with a default group.\n\nBut step back, why are you creating a \"bare\" struct device anyway?  What is going to use this?  Where is the documentation in Documentation/ABI/ for the items you are creating and the sysfs files / userspace api you are adding and using?",
+      "range": {
+        "startLine": 1785,
+        "startChar": 8,
+        "endLine": 1785,
+        "endChar": 26
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea13c5a_2fc4c2a4",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1803,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:19:22Z",
+      "side": 1,
+      "message": "not needed.",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94fcdd9c_6d591f53",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1809,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:19:22Z",
+      "side": 1,
+      "message": "this should all be in a .h file, right?",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fb2c577_060f8141",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1934,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:19:22Z",
+      "side": 1,
+      "message": "this function is going away, as per the upstream work to remove it.  Please use class_register/class_deregister() instead, it\u0027s safer and simpler.",
+      "range": {
+        "startLine": 1934,
+        "startChar": 17,
+        "endLine": 1934,
+        "endChar": 29
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "281e7cb2_37dab5d1",
         "filename": "drivers/usb/gadget/function/f_accessory.c",
         "patchSetId": 3
@@ -59,6 +208,46 @@
         "startChar": 1,
         "endLine": 16,
         "endChar": 2
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48d090dd_a73c5302",
+        "filename": "include/linux/usb/f_accessory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:19:22Z",
+      "side": 1,
+      "message": "why is this file needed at all?",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4f92afb_6dfd8b7f",
+        "filename": "include/uapi/linux/usb/f_accessory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:19:22Z",
+      "side": 1,
+      "message": "why this magic number?",
+      "range": {
+        "startLine": 135,
+        "startChar": 62,
+        "endLine": 135,
+        "endChar": 65
       },
       "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
