@@ -388592,6 +388592,15 @@ elf_symbol {
   full_name: "sysctl_sched_features"
 }
 elf_symbol {
+  id: 0xe6ea21b1
+  name: "sysctl_sched_idle_min_granularity"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x69545cfa
+  type_id: 0x4585663f
+  full_name: "sysctl_sched_idle_min_granularity"
+}
+elf_symbol {
   id: 0x87812861
   name: "sysctl_sched_latency"
   is_defined: true
@@ -388599,6 +388608,15 @@ elf_symbol {
   crc: 0xceee0cb7
   type_id: 0x4585663f
   full_name: "sysctl_sched_latency"
+}
+elf_symbol {
+  id: 0x34555a8a
+  name: "sysctl_sched_min_granularity"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x04390257
+  type_id: 0x4585663f
+  full_name: "sysctl_sched_min_granularity"
 }
 elf_symbol {
   id: 0x18d0dd21
@@ -404819,7 +404837,9 @@ interface {
   symbol_id: 0x2f857527
   symbol_id: 0x3e5f4f82
   symbol_id: 0xbf1515af
+  symbol_id: 0xe6ea21b1
   symbol_id: 0x87812861
+  symbol_id: 0x34555a8a
   symbol_id: 0x18d0dd21
   symbol_id: 0x92705587
   symbol_id: 0xdbe66171
