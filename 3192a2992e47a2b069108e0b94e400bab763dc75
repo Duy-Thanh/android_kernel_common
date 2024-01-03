@@ -16,6 +16,52 @@
       "message": "Please fix all checkpatch.pl issues, that\u0027s the first thing that needs to be done.  I\u0027ll review the contents after all of those are resolved.",
       "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281e7cb2_37dab5d1",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:12:25Z",
+      "side": 1,
+      "message": "obviously not correct anymore.",
+      "range": {
+        "startLine": 5,
+        "startChar": 17,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d80f2a29_a736600c",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T09:12:25Z",
+      "side": 1,
+      "message": "no license boilerplate please.",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 2
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
