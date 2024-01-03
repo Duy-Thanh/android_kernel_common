@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c89f8a34_6590015e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-03T10:13:29Z",
+      "side": 1,
+      "message": "checkpatch.pl issues are not fixed up, you can run that locally, please do so.",
+      "revId": "0a83a96187b352343511f68fdb12504e9e8f2088",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
