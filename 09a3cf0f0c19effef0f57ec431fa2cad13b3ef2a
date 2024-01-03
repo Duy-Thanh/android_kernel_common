@@ -16,6 +16,23 @@
       "message": "I have modified, could you help review again? Thanks",
       "revId": "09a3cf0f0c19effef0f57ec431fa2cad13b3ef2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ab0bea5_cfdd7b67",
+        "filename": "kernel/trace/trace.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 10227,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-01-03T02:55:52Z",
+      "side": 1,
+      "message": "This bit conditionally setting the iter_flags bit feels a bit more subtle than most vendor hooks (as you\u0027re not really replacing the function with an early return, nor are you passively hooking it). Could you add a comment here clarifying what is expected of the vendorhook if returns false for ftrace_check?",
+      "revId": "09a3cf0f0c19effef0f57ec431fa2cad13b3ef2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
