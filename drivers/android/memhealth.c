@@ -151,12 +151,10 @@ static void oom_list_move_victims(struct work_struct *work)
 }
 static DECLARE_WORK(memhealth_oom_work, oom_list_move_victims);
 
-static int add_oom_victim_to_list(pid_t pid, ktime_t timestamp)
+static int add_oom_victim_to_list(pid_t pid, const char *process_name,
+	short oom_score_adj, uid_t uid, ktime_t timestamp)
 {
 	struct oom_victim *new_node;
-	struct task_struct *task;
-	const struct cred *cred;
-	struct pid *pid_struct;
 	int ret = -EINVAL;
 
 	/*
@@ -170,45 +168,16 @@ static int add_oom_victim_to_list(pid_t pid, ktime_t timestamp)
 		goto err_create_oom_node;
 	}
 
-	pid_struct = find_get_pid(pid);
-	if (!pid_struct) {
-		pr_err("memhealth failed to find pid %d\n", pid);
-		goto err_get_pid;
-	}
-
-	task = get_pid_task(pid_struct, PIDTYPE_PID);
-	put_pid(pid_struct);
-	if (!task) {
-		pr_err("memhealth failed to find task with pid %d\n", pid);
-		goto err_get_task;
-	}
-
-	cred = get_task_cred(task);
-	if (!cred) {
-		pr_err("memhealth failed to find credentials\n");
-		goto err_get_cred;
-	}
-
-	if (!task->signal) {
-		pr_err("memhealth failed to find signal in task\n");
-		goto err_no_task_signal;
-	}
-	new_node->oom_score_adj = task->signal->oom_score_adj;
-
-	ret = strscpy_pad(new_node->process_name,
-		task->comm, TASK_COMM_LEN);
-
+	ret = strscpy_pad(new_node->process_name, process_name, TASK_COMM_LEN);
 	if (ret < 0) {
 		pr_err("memhealth failed to copy process name to new oom victim node\n");
 		goto err_write_process_name;
 	}
-	put_task_struct(task);
 
 	new_node->pid = pid;
 	new_node->timestamp = timestamp;
-	new_node->uid = cred->uid.val;
-
-	put_cred(cred);
+	new_node->uid = uid;
+	new_node->oom_score_adj = oom_score_adj;
 
 	spin_lock(&memhealth_spin_lock);
 	/*
@@ -223,24 +192,19 @@ static int add_oom_victim_to_list(pid_t pid, ktime_t timestamp)
 	return 0;
 
 err_write_process_name:
-err_no_task_signal:
-	put_cred(cred);
-err_get_cred:
-	put_task_struct(task);
-err_get_task:
-err_get_pid:
 	kfree(new_node);
 err_create_oom_node:
 	return ret;
 }
 
-static void mark_victim_probe(void *data, pid_t pid)
+static void mark_victim_probe(void *data, struct task_struct *task, uid_t uid)
 {
 	ktime_t timestamp;
 
 	timestamp = ktime_get();
-	if (add_oom_victim_to_list(pid, timestamp) < 0) {
-		pr_err("memhealth failed to add pid(%d) as new OOM killer victim\n", pid);
+	if (add_oom_victim_to_list(task->pid, task->comm, task->signal->oom_score_adj,
+		uid, timestamp) < 0) {
+		pr_err("memhealth failed to add pid(%d) as new OOM killer victim\n", task->pid);
 		return;
 	}
 	wake_up_interruptible(&memhealth_wq);
