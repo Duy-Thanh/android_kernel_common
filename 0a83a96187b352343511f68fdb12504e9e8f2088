@@ -16,6 +16,23 @@
       "message": "checkpatch.pl issues are not fixed up, you can run that locally, please do so.",
       "revId": "0a83a96187b352343511f68fdb12504e9e8f2088",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dea68eb9_c870fe42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3232200
+      },
+      "writtenOn": "2024-01-03T10:17:58Z",
+      "side": 1,
+      "message": "Update",
+      "revId": "0a83a96187b352343511f68fdb12504e9e8f2088",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
