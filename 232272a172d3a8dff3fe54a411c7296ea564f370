@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a591044_b6f1bccc",
+        "filename": "kernel/trace/trace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10156,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2024-01-03T02:40:40Z",
+      "side": 1,
+      "message": "I have modified, could you help review again? Thanks",
+      "parentUuid": "61daa2f8_bbe6b784",
+      "revId": "232272a172d3a8dff3fe54a411c7296ea564f370",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbbc2c08_48c4184a",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-01-02T17:13:00Z",
       "side": 1,
       "message": "declare in this scope:\n```\nbool ftrace_check \u003d true;\n```",
+      "revId": "232272a172d3a8dff3fe54a411c7296ea564f370",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43981aad_a7a02e98",
+        "filename": "kernel/trace/trace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10218,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2024-01-03T02:40:40Z",
+      "side": 1,
+      "message": "I have modified, could you help review again? Thanks",
+      "parentUuid": "bbbc2c08_48c4184a",
       "revId": "232272a172d3a8dff3fe54a411c7296ea564f370",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
