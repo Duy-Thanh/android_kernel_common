@@ -33,6 +33,24 @@
       "message": "This bit conditionally setting the iter_flags bit feels a bit more subtle than most vendor hooks (as you\u0027re not really replacing the function with an early return, nor are you passively hooking it). Could you add a comment here clarifying what is expected of the vendorhook if returns false for ftrace_check?",
       "revId": "09a3cf0f0c19effef0f57ec431fa2cad13b3ef2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91164b1d_e40eb94f",
+        "filename": "kernel/trace/trace.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 10227,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2024-01-04T14:38:51Z",
+      "side": 1,
+      "message": "Dear John Stultz,\n\nTrace timestamp outputs format support two types:\n1. Latency format means timestamp starts from 0 (relative to a specific time), usallay used in latency tracers, eg: irqsoff tracer.\n2. The other format represent absolute kernel timestamp, which are used by default.\nFor ftrace dump we preferred the second format and it\u0027s consistent with the kernel log time.",
+      "parentUuid": "4ab0bea5_cfdd7b67",
+      "revId": "09a3cf0f0c19effef0f57ec431fa2cad13b3ef2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
