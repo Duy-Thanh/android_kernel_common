@@ -22,6 +22,30 @@
       },
       "revId": "b202a2a396a3efd13f325990954485b1f52264a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc6bf03a_d1e8a55f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2024-01-04T19:44:45Z",
+      "side": 1,
+      "message": "yep, thanks for pulling this in.  will change it",
+      "parentUuid": "bcf44022_dbc0abf8",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "b202a2a396a3efd13f325990954485b1f52264a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
