@@ -22,6 +22,30 @@
       },
       "revId": "774ccd785d9b1ab1a346331b74b45b124d54e8d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58ee163a_1112482b",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-01-04T00:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "198cce23_bae8871c",
+      "range": {
+        "startLine": 231,
+        "startChar": 3,
+        "endLine": 232,
+        "endChar": 48
+      },
+      "revId": "774ccd785d9b1ab1a346331b74b45b124d54e8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
