@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "198cce23_bae8871c",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-01-04T00:03:19Z",
+      "side": 1,
+      "message": "nit: Technically this is the earliest place you are using  kobj as a work_struct, so I think _Static_assert() should be here instead of in the sysfs_add_workfn(). In practice this probably does not matter since static_assert should be evaluated at compile time.",
+      "range": {
+        "startLine": 231,
+        "startChar": 3,
+        "endLine": 232,
+        "endChar": 48
+      },
+      "revId": "774ccd785d9b1ab1a346331b74b45b124d54e8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
