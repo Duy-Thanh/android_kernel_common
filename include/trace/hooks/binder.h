@@ -118,6 +118,23 @@ DECLARE_HOOK(android_vh_binder_free_buf,
 		struct binder_buffer *buffer),
 	TP_ARGS(proc, thread, buffer));
 
+DECLARE_HOOK(android_vh_binder_ioctl_end,
+	TP_PROTO(struct task_struct *caller_task,
+		unsigned int cmd,
+		unsigned long arg,
+		struct binder_thread *thread,
+		struct binder_proc *proc,
+		int *ret),
+	TP_ARGS(caller_task, cmd, arg, thread, proc, ret));
+DECLARE_HOOK(android_vh_binder_looper_exited,
+	TP_PROTO(struct binder_thread *thread, struct binder_proc *proc),
+	TP_ARGS(thread, proc));
+DECLARE_HOOK(android_vh_binder_spawn_new_thread,
+	TP_PROTO(struct binder_thread *thread, struct binder_proc *proc, bool *skip),
+	TP_ARGS(thread, proc, skip));
+DECLARE_HOOK(android_vh_binder_has_special_work_ilocked,
+	TP_PROTO(struct binder_thread *thread, bool do_proc_work, bool *has_work),
+	TP_ARGS(thread, do_proc_work, has_work));
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
