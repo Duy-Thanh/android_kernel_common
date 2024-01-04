@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df332a25_e2cc1959",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-01-04T09:48:26Z",
+      "side": 1,
+      "message": "Please cherry-pick to android14-5.15 and make sure this lands on the android15- branches too",
+      "revId": "73aa65c91fb64d1c3b9338377f963c66167226a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
