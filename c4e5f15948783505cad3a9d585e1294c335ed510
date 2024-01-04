@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60a86bce_258e3938",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-01-04T14:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0949d14_4668ad25",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 6
+      },
+      "revId": "c4e5f15948783505cad3a9d585e1294c335ed510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a0481ec_b540e910",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c63b2b8f_85d6b996",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-01-04T14:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aed705e5_60bd92a8",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "c4e5f15948783505cad3a9d585e1294c335ed510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c9f91aa_21fefc9f",
@@ -126,6 +174,24 @@
       "side": 1,
       "message": "done",
       "parentUuid": "6c9f91aa_21fefc9f",
+      "revId": "c4e5f15948783505cad3a9d585e1294c335ed510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a69b931_e0814156",
+        "filename": "include/trace/hooks/preemptirq.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-01-04T14:59:49Z",
+      "side": 1,
+      "message": "I don\u0027t understand why the original change is modified here. Can you explain?",
+      "parentUuid": "0634ca0b_54954d0e",
       "revId": "c4e5f15948783505cad3a9d585e1294c335ed510",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
