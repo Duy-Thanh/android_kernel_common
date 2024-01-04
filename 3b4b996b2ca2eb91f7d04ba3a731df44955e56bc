@@ -69,6 +69,24 @@
       "parentUuid": "4eea7a6e_b249bec1",
       "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7b9cdcc_4f2fadea",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-04T10:40:14Z",
+      "side": 1,
+      "message": "Sent upstream as https://lore.kernel.org/all/20231208152801.3425772-1-aliceryhl@google.com/, and Greg has taken it.",
+      "parentUuid": "499c70f6_c50675cb",
+      "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
