@@ -12645,7 +12645,11 @@ static int cfg80211_cqm_rssi_update(struct cfg80211_registered_device *rdev,
 	int err;
 
 	/* RSSI reporting disabled? */
+<<<<<<< HEAD   (c53945 Revert "mmc: core: add helpers mmc_regulator_enable/disable_)
 	if (!wdev->cqm_config)
+=======
+	if (!cqm_config)
+>>>>>>> BRANCH (e7cddb Linux 6.1.67)
 		return rdev_set_cqm_rssi_range_config(rdev, dev, 0, 0);
 
 	/*
@@ -12721,10 +12725,13 @@ static int nl80211_set_cqm_rssi(struct genl_info *info,
 	    wdev->iftype != NL80211_IFTYPE_P2P_CLIENT)
 		return -EOPNOTSUPP;
 
+<<<<<<< HEAD   (c53945 Revert "mmc: core: add helpers mmc_regulator_enable/disable_)
 	wdev_lock(wdev);
 	cfg80211_cqm_config_free(wdev);
 	wdev_unlock(wdev);
 
+=======
+>>>>>>> BRANCH (e7cddb Linux 6.1.67)
 	if (n_thresholds <= 1 && rdev->ops->set_cqm_rssi_config) {
 		if (n_thresholds == 0 || thresholds[0] == 0) /* Disabling */
 			return rdev_set_cqm_rssi_config(rdev, dev, 0, 0);
@@ -12741,6 +12748,12 @@ static int nl80211_set_cqm_rssi(struct genl_info *info,
 		n_thresholds = 0;
 
 	wdev_lock(wdev);
+<<<<<<< HEAD   (c53945 Revert "mmc: core: add helpers mmc_regulator_enable/disable_)
+=======
+	old = rcu_dereference_protected(wdev->cqm_config,
+					lockdep_is_held(&wdev->mtx));
+
+>>>>>>> BRANCH (e7cddb Linux 6.1.67)
 	if (n_thresholds) {
 		struct cfg80211_cqm_config *cqm_config;
 
@@ -12758,11 +12771,27 @@ static int nl80211_set_cqm_rssi(struct genl_info *info,
 		       flex_array_size(cqm_config, rssi_thresholds,
 				       n_thresholds));
 
+<<<<<<< HEAD   (c53945 Revert "mmc: core: add helpers mmc_regulator_enable/disable_)
 		wdev->cqm_config = cqm_config;
+=======
+		rcu_assign_pointer(wdev->cqm_config, cqm_config);
+	} else {
+		RCU_INIT_POINTER(wdev->cqm_config, NULL);
+>>>>>>> BRANCH (e7cddb Linux 6.1.67)
 	}
 
+<<<<<<< HEAD   (c53945 Revert "mmc: core: add helpers mmc_regulator_enable/disable_)
 	err = cfg80211_cqm_rssi_update(rdev, dev);
 
+=======
+	err = cfg80211_cqm_rssi_update(rdev, dev, cqm_config);
+	if (err) {
+		rcu_assign_pointer(wdev->cqm_config, old);
+		kfree_rcu(cqm_config, rcu_head);
+	} else {
+		kfree_rcu(old, rcu_head);
+	}
+>>>>>>> BRANCH (e7cddb Linux 6.1.67)
 unlock:
 	wdev_unlock(wdev);
 
@@ -18826,7 +18855,32 @@ void cfg80211_cqm_rssi_notify(struct net_device *dev,
 			rssi_level = wdev->cqm_config->last_rssi_event_value;
 	}
 
+<<<<<<< HEAD   (c53945 Revert "mmc: core: add helpers mmc_regulator_enable/disable_)
 	msg = cfg80211_prepare_cqm(dev, NULL, gfp);
+=======
+void cfg80211_cqm_rssi_notify_work(struct wiphy *wiphy, struct wiphy_work *work)
+{
+	struct wireless_dev *wdev = container_of(work, struct wireless_dev,
+						 cqm_rssi_work);
+	struct cfg80211_registered_device *rdev = wiphy_to_rdev(wiphy);
+	enum nl80211_cqm_rssi_threshold_event rssi_event;
+	struct cfg80211_cqm_config *cqm_config;
+	struct sk_buff *msg;
+	s32 rssi_level;
+
+	wdev_lock(wdev);
+	cqm_config = rcu_dereference_protected(wdev->cqm_config,
+					       lockdep_is_held(&wdev->mtx));
+	if (!wdev->cqm_config)
+		goto unlock;
+
+	cfg80211_cqm_rssi_update(rdev, wdev->netdev, cqm_config);
+
+	rssi_level = cqm_config->last_rssi_event_value;
+	rssi_event = cqm_config->last_rssi_event_type;
+
+	msg = cfg80211_prepare_cqm(wdev->netdev, NULL, GFP_KERNEL);
+>>>>>>> BRANCH (e7cddb Linux 6.1.67)
 	if (!msg)
 		return;
 
