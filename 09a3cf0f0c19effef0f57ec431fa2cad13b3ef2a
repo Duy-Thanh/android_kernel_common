@@ -51,6 +51,24 @@
       "parentUuid": "4ab0bea5_cfdd7b67",
       "revId": "09a3cf0f0c19effef0f57ec431fa2cad13b3ef2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c6bad02_7f85969c",
+        "filename": "kernel/trace/trace.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 10227,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-04T17:51:46Z",
+      "side": 1,
+      "message": "Please add an inline comment in the code or in the commit message",
+      "parentUuid": "91164b1d_e40eb94f",
+      "revId": "09a3cf0f0c19effef0f57ec431fa2cad13b3ef2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
