@@ -1882,6 +1882,7 @@
   set_freezable
   set_page_dirty
   set_page_dirty_lock
+  __set_page_dirty_nobuffers
   __SetPageMovable
   set_task_cpu
   set_user_nice
