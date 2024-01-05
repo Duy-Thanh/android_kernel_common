@@ -16,6 +16,23 @@
       "message": "Cherry pick a patch from android13-5.15 to android15-6.6. Please help review, thank you!",
       "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b43b9a2f_ecb02d66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-05T18:34:00Z",
+      "side": 1,
+      "message": "Is there a reason we can\u0027t wait for this to land upstream first (or at least in a maintainer tree)?",
+      "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
