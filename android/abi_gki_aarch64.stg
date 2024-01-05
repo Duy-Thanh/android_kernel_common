@@ -365299,6 +365299,15 @@ elf_symbol {
   full_name: "iio_trigger_unregister"
 }
 elf_symbol {
+  id: 0xfb09b362
+  name: "iio_trigger_using_own"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe2c1359e
+  type_id: 0xf886bca4
+  full_name: "iio_trigger_using_own"
+}
+elf_symbol {
   id: 0xdf3e8655
   name: "iio_update_buffers"
   is_defined: true
@@ -402471,6 +402480,7 @@ interface {
   symbol_id: 0x7551a60b
   symbol_id: 0x08fd4b84
   symbol_id: 0xc6d8f246
+  symbol_id: 0xfb09b362
   symbol_id: 0xdf3e8655
   symbol_id: 0x6f2f4bd1
   symbol_id: 0xf87ecda4
