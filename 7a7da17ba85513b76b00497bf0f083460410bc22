@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe6fb20_40f447a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-05T11:15:45Z",
+      "side": 1,
+      "message": "two cherry-picks?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 68
+      },
+      "revId": "7a7da17ba85513b76b00497bf0f083460410bc22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cadcfd21_c7bd478e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-05T11:15:45Z",
+      "side": 1,
+      "message": "Why not wait for the rest of the 6.7-rc merges to get into here?  Why merge it now?\n\nIf you need it now, help doing the rest of the 6.7-rc merges is always appreciated 😊",
+      "revId": "7a7da17ba85513b76b00497bf0f083460410bc22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
