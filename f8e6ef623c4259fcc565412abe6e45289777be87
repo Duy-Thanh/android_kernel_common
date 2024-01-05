@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b38d39_0aaf0714",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-01-05T10:14:15Z",
+      "side": 0,
+      "message": "Hmm, this definition `KVM_PTE_LEAF_ATTR_LO_S1_AP_RO` is slightly different then what I moved in the header file. The header file lacks the `{ cpus_have_final_cap(ARM64_KVM_HVHE) ? 2 : 3; })`. The same for `KVM_PTE_LEAF_ATTR_LO_S1_AP_RW`.",
+      "revId": "f8e6ef623c4259fcc565412abe6e45289777be87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
