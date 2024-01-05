@@ -16,6 +16,24 @@
       "message": "can you give some examples of static functions that that have been copied? Are these globals used as read-only, or does the vendor module modify them?\n\nPlease answer in the commit message.",
       "revId": "074bf3c273a954b5d8df8fc7906b5dac028787a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d75891_30205b61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2024-01-05T03:35:34Z",
+      "side": 1,
+      "message": "modified, thanks.",
+      "parentUuid": "e9798a34_9a0e2cd5",
+      "revId": "074bf3c273a954b5d8df8fc7906b5dac028787a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
