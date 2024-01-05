@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca666e51_3f961a95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2024-01-05T14:24:16Z",
+      "side": 1,
+      "message": "I added aosp/2899410 as a fixup or squash for this.\nOtherwise should I can tag it as ANDROID?",
+      "revId": "81285c104e228c1af465d480ae0930628884baad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
