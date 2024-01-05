@@ -39,6 +39,24 @@
       "message": "Why not wait for the rest of the 6.7-rc merges to get into here?  Why merge it now?\n\nIf you need it now, help doing the rest of the 6.7-rc merges is always appreciated 😊",
       "revId": "7a7da17ba85513b76b00497bf0f083460410bc22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f599e6a_b4cd7131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2001171
+      },
+      "writtenOn": "2024-01-05T12:59:25Z",
+      "side": 1,
+      "message": "I can absolutely wait. Sorry for the trouble",
+      "parentUuid": "cadcfd21_c7bd478e",
+      "revId": "7a7da17ba85513b76b00497bf0f083460410bc22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
