@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa72562e_5eb35193",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2024-01-05T08:54:08Z",
+      "side": 1,
+      "message": "Cherry pick a patch from android13-5.15 to android15-6.6. Please help review, thank you!",
+      "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
