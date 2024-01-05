@@ -34,6 +34,24 @@
       "parentUuid": "97b38d39_0aaf0714",
       "revId": "f8e6ef623c4259fcc565412abe6e45289777be87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "222f8ca2_be1de92f",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-01-05T10:42:33Z",
+      "side": 0,
+      "message": "Right, https://android-kvm.googlesource.com/linux/+/da0470f941a3df0f25f999b403ab1400b84fd1d7%5E%21/#F0 has to be patched as well. I will update that branch.",
+      "parentUuid": "deae3840_e15af55d",
+      "revId": "f8e6ef623c4259fcc565412abe6e45289777be87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
