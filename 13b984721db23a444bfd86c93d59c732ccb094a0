@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0b970c0_2c599fa7",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-05T09:06:38Z",
+      "side": 1,
+      "message": "pr_debug() already automatically includes the function name, no need to add it again.\n\nAlso, this should be dev_dbg(), no driver should be calling pr_*() functions.",
+      "range": {
+        "startLine": 395,
+        "startChar": 2,
+        "endLine": 395,
+        "endChar": 10
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80b35770_344d3985",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-05T09:06:38Z",
+      "side": 1,
+      "message": "no returning an error?",
+      "range": {
+        "startLine": 430,
+        "startChar": 2,
+        "endLine": 430,
+        "endChar": 8
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3650423_f304f89a",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-05T09:06:38Z",
+      "side": 1,
+      "message": "no returning an error?",
+      "range": {
+        "startLine": 479,
+        "startChar": 2,
+        "endLine": 479,
+        "endChar": 8
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022e97a4_08ac973b",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-05T09:06:38Z",
+      "side": 1,
+      "message": "ftrace is your friend, lines like this are never needed.",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 1
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f51d0ab_a9682120",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-05T09:06:38Z",
+      "side": 1,
+      "message": "wrong error code, right?",
+      "range": {
+        "startLine": 644,
+        "startChar": 10,
+        "endLine": 644,
+        "endChar": 16
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
