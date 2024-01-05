@@ -16,6 +16,24 @@
       "message": "should be `(cherry picked from commit \u003csha1\u003e)`",
       "revId": "b5dc262351569b39aac58e98650c0487cebd56a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48ff80d9_8bee7ee0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2024-01-05T00:02:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "841f4b06_c0f7e50e",
+      "revId": "b5dc262351569b39aac58e98650c0487cebd56a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
