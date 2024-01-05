@@ -16,6 +16,24 @@
       "message": "Hmm, this definition `KVM_PTE_LEAF_ATTR_LO_S1_AP_RO` is slightly different then what I moved in the header file. The header file lacks the `{ cpus_have_final_cap(ARM64_KVM_HVHE) ? 2 : 3; })`. The same for `KVM_PTE_LEAF_ATTR_LO_S1_AP_RW`.",
       "revId": "f8e6ef623c4259fcc565412abe6e45289777be87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deae3840_e15af55d",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-01-05T10:39:08Z",
+      "side": 0,
+      "message": "Does this match what\u0027s on for-upstream/pkvm-coalescing ? I just used that branch. If we need to fix it, we should fix for-upstream/pkvm-coalescing and then apply it here.",
+      "parentUuid": "97b38d39_0aaf0714",
+      "revId": "f8e6ef623c4259fcc565412abe6e45289777be87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
