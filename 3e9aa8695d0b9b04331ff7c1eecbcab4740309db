@@ -70,6 +70,24 @@
       "parentUuid": "315e2143_25769dde",
       "revId": "3e9aa8695d0b9b04331ff7c1eecbcab4740309db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ff38965_d3badcbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2024-01-05T09:18:24Z",
+      "side": 1,
+      "message": "These 2 symbols exported.",
+      "parentUuid": "bb0bd01b_21229880",
+      "revId": "3e9aa8695d0b9b04331ff7c1eecbcab4740309db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
