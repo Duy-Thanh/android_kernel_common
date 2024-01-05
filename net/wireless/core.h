@@ -297,6 +297,11 @@ struct cfg80211_beacon_registration {
 struct cfg80211_cqm_config {
 	u32 rssi_hyst;
 	s32 last_rssi_event_value;
+<<<<<<< HEAD   (ea1b86 Reapply "kasan: print the original fault addr when access in)
+=======
+	enum nl80211_cqm_rssi_threshold_event last_rssi_event_type;
+	bool use_range_api;
+>>>>>>> BRANCH (a507f1 Linux 6.1.70)
 	int n_rssi_thresholds;
 	s32 rssi_thresholds[];
 };
