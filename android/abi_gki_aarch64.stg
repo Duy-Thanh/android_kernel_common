@@ -184,6 +184,11 @@ pointer_reference {
   pointee_type_id: 0x28e34a3d
 }
 pointer_reference {
+  id: 0x00b27c00
+  kind: POINTER
+  pointee_type_id: 0x2889169c
+}
+pointer_reference {
   id: 0x00b7947f
   kind: POINTER
   pointee_type_id: 0x289eb761
@@ -27019,6 +27024,11 @@ pointer_reference {
   pointee_type_id: 0xcd0cdcf7
 }
 pointer_reference {
+  id: 0x39d477a1
+  kind: POINTER
+  pointee_type_id: 0xcd113819
+}
+pointer_reference {
   id: 0x39d60e4a
   kind: POINTER
   pointee_type_id: 0xcd18dfb6
@@ -38003,6 +38013,11 @@ array {
 array {
   id: 0xc227cae4
   element_type_id: 0x18791053
+}
+array {
+  id: 0xc2477f5b
+  number_of_elements: 1020
+  element_type_id: 0x384f7d7c
 }
 array {
   id: 0xc28f8f19
@@ -55865,6 +55880,12 @@ member {
   id: 0x9ad307bc
   name: "buf"
   type_id: 0xc8c766a0
+}
+member {
+  id: 0x9ad98a9e
+  name: "buf"
+  type_id: 0xc2477f5b
+  offset: 32
 }
 member {
   id: 0x9aeff0bf
@@ -244555,6 +244576,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xcd113819
+  kind: STRUCT
+  name: "nf_log_buf"
+  definition {
+    bytesize: 1024
+    member_id: 0x6560daa2
+    member_id: 0x9ad98a9e
+  }
+}
+struct_union {
   id: 0x2889169c
   kind: STRUCT
   name: "nf_logger"
@@ -288401,6 +288432,12 @@ function {
   parameter_id: 0x384c5795
 }
 function {
+  id: 0x09028dcc
+  return_type_id: 0x48b5725f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x14ba251a
+}
+function {
   id: 0x091a93fa
   return_type_id: 0xa98dedee
   parameter_id: 0x18019702
@@ -289457,6 +289494,11 @@ function {
   id: 0x10b15d87
   return_type_id: 0x48b5725f
   parameter_id: 0x00a43052
+}
+function {
+  id: 0x10b4ce93
+  return_type_id: 0x48b5725f
+  parameter_id: 0x00b27c00
 }
 function {
   id: 0x10b5b48c
@@ -291406,6 +291448,12 @@ function {
   parameter_id: 0x0de4c6b1
   parameter_id: 0x293f2663
   parameter_id: 0x3da0a8e3
+}
+function {
+  id: 0x134cbffd
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0ca27481
+  parameter_id: 0x3f1cd3a6
 }
 function {
   id: 0x135157d2
@@ -299106,6 +299154,11 @@ function {
   parameter_id: 0x295c7202
 }
 function {
+  id: 0x1eed4c7b
+  return_type_id: 0x48b5725f
+  parameter_id: 0x39d477a1
+}
+function {
   id: 0x1eedbe86
   return_type_id: 0x48b5725f
   parameter_id: 0x3c5f865b
@@ -305149,6 +305202,12 @@ function {
   parameter_id: 0x120540d1
 }
 function {
+  id: 0x841a3f70
+  return_type_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x14ba251a
+}
+function {
   id: 0x84257977
   return_type_id: 0x6720d32f
   parameter_id: 0x6720d32f
@@ -310400,6 +310459,13 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x3806390a
   parameter_id: 0x295c7202
+}
+function {
+  id: 0x9324f691
+  return_type_id: 0x6720d32f
+  parameter_id: 0x39d477a1
+  parameter_id: 0x3e10b518
+  parameter_id: 0xa52a0930
 }
 function {
   id: 0x9326478c
@@ -326282,6 +326348,13 @@ function {
   parameter_id: 0x0c2e195c
 }
 function {
+  id: 0x9e8d4344
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0ca27481
+  parameter_id: 0x0abe9fd1
+  parameter_id: 0x3f1cd3a6
+}
+function {
   id: 0x9e8d7e1b
   return_type_id: 0x6720d32f
   parameter_id: 0x0ca27481
@@ -326994,6 +327067,12 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x0e8833d6
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x9f2d8d2b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0abe9fd1
+  parameter_id: 0x00b27c00
 }
 function {
   id: 0x9f2dbdb4
@@ -328315,6 +328394,10 @@ function {
   parameter_id: 0x6d7f5ff6
   parameter_id: 0xfc0e1dbd
   parameter_id: 0x0d9f5631
+}
+function {
+  id: 0xa5e2423c
+  return_type_id: 0x39d477a1
 }
 function {
   id: 0xa641688a
@@ -373834,6 +373917,33 @@ elf_symbol {
   full_name: "nf_ct_invert_tuple"
 }
 elf_symbol {
+  id: 0x38b1d9e3
+  name: "nf_log_buf_add"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcd6f2dc9
+  type_id: 0x9324f691
+  full_name: "nf_log_buf_add"
+}
+elf_symbol {
+  id: 0xeacec26b
+  name: "nf_log_buf_close"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x80c68137
+  type_id: 0x1eed4c7b
+  full_name: "nf_log_buf_close"
+}
+elf_symbol {
+  id: 0xfde35a24
+  name: "nf_log_buf_open"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0d4961de
+  type_id: 0xa5e2423c
+  full_name: "nf_log_buf_open"
+}
+elf_symbol {
   id: 0x05283614
   name: "nf_log_packet"
   is_defined: true
@@ -373841,6 +373951,60 @@ elf_symbol {
   crc: 0xdaa07447
   type_id: 0x138ba240
   full_name: "nf_log_packet"
+}
+elf_symbol {
+  id: 0x8ecf8aa9
+  name: "nf_log_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x76eb5be6
+  type_id: 0x9f2d8d2b
+  full_name: "nf_log_register"
+}
+elf_symbol {
+  id: 0x55dea4c4
+  name: "nf_log_set"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x939a54bd
+  type_id: 0x9e8d4344
+  full_name: "nf_log_set"
+}
+elf_symbol {
+  id: 0x8ca42486
+  name: "nf_log_unregister"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x616b7349
+  type_id: 0x10b4ce93
+  full_name: "nf_log_unregister"
+}
+elf_symbol {
+  id: 0xdd9bb11b
+  name: "nf_log_unset"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x134619c3
+  type_id: 0x134cbffd
+  full_name: "nf_log_unset"
+}
+elf_symbol {
+  id: 0x5eaca033
+  name: "nf_logger_find_get"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd1f2eee2
+  type_id: 0x841a3f70
+  full_name: "nf_logger_find_get"
+}
+elf_symbol {
+  id: 0x7a73c649
+  name: "nf_logger_put"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb8cd3a7f
+  type_id: 0x09028dcc
+  full_name: "nf_logger_put"
 }
 elf_symbol {
   id: 0x8b1dfb41
@@ -405100,7 +405264,16 @@ interface {
   symbol_id: 0xb4e99805
   symbol_id: 0x471faa17
   symbol_id: 0x82e37620
+  symbol_id: 0x38b1d9e3
+  symbol_id: 0xeacec26b
+  symbol_id: 0xfde35a24
   symbol_id: 0x05283614
+  symbol_id: 0x8ecf8aa9
+  symbol_id: 0x55dea4c4
+  symbol_id: 0x8ca42486
+  symbol_id: 0xdd9bb11b
+  symbol_id: 0x5eaca033
+  symbol_id: 0x7a73c649
   symbol_id: 0x8b1dfb41
   symbol_id: 0x43078d96
   symbol_id: 0xaf6b3cf1
