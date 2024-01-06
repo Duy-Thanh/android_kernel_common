@@ -16,6 +16,24 @@
       "message": "Please squash aosp/2898201 into this patch",
       "revId": "c31a319cfd9608bed10f873c4aa1c5bf2932918c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9eb475_bf548eb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2024-01-06T01:34:28Z",
+      "side": 1,
+      "message": "squashed aosp/2898201.\nplease review it.",
+      "parentUuid": "17f013ed_8b0481f9",
+      "revId": "c31a319cfd9608bed10f873c4aa1c5bf2932918c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
