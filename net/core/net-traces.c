@@ -60,9 +60,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(napi_poll);
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(tcp_send_reset);
 EXPORT_TRACEPOINT_SYMBOL_GPL(tcp_bad_csum);
+<<<<<<< HEAD   (6b4c81 FROMGIT: BACKPORT: mm: update mark_victim tracepoints fields)
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(net_dev_queue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(net_dev_xmit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(netif_receive_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(netif_rx);
 
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(net_dev_start_xmit);
+>>>>>>> CHANGE (2c8542 ANDROID: GKI: Update symbol list)

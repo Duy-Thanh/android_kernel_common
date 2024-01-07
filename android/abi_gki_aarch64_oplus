@@ -325,4 +325,11 @@
   wakeup_source_remove
   wake_up_state
   wq_worker_comm
+<<<<<<< HEAD   (6b4c81 FROMGIT: BACKPORT: mm: update mark_victim tracepoints fields)
   zero_pfn
+=======
+  __tracepoint_android_vh_udp_recvmsg
+  __traceiter_android_vh_udp_recvmsg
+  __tracepoint_net_dev_start_xmit
+  __traceiter_net_dev_start_xmit
+>>>>>>> CHANGE (2c8542 ANDROID: GKI: Update symbol list)
