@@ -32,10 +32,6 @@ int ovl_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 	if (err)
 		return err;
 
-	err = ovl_want_write(dentry);
-	if (err)
-		goto out;
-
 	if (attr->ia_valid & ATTR_SIZE) {
 		/* Truncate should trigger data copy up as well */
 		full_copy_up = true;
@@ -54,7 +50,7 @@ int ovl_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 			winode = d_inode(upperdentry);
 			err = get_write_access(winode);
 			if (err)
-				goto out_drop_write;
+				goto out;
 		}
 
 		if (attr->ia_valid & (ATTR_KILL_SUID|ATTR_KILL_SGID))
@@ -78,6 +74,10 @@ int ovl_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 		 */
 		attr->ia_valid &= ~ATTR_OPEN;
 
+		err = ovl_want_write(dentry);
+		if (err)
+			goto out_put_write;
+
 		inode_lock(upperdentry->d_inode);
 		old_cred = ovl_override_creds(dentry->d_sb);
 		err = ovl_do_notify_change(ofs, upperdentry, attr);
@@ -85,12 +85,12 @@ int ovl_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 		if (!err)
 			ovl_copyattr(dentry->d_inode);
 		inode_unlock(upperdentry->d_inode);
+		ovl_drop_write(dentry);
 
+out_put_write:
 		if (winode)
 			put_write_access(winode);
 	}
-out_drop_write:
-	ovl_drop_write(dentry);
 out:
 	return err;
 }
@@ -339,6 +339,7 @@ static const char *ovl_get_link(struct dentry *dentry,
 	return p;
 }
 
+<<<<<<< HEAD   (9c09af ANDROID: fs: Move iocb_to_rw_flags to fuse/passthrough)
 bool ovl_is_private_xattr(struct super_block *sb, const char *name)
 {
 	struct ovl_fs *ofs = OVL_FS(sb);
@@ -463,6 +464,8 @@ ssize_t ovl_listxattr(struct dentry *dentry, char *list, size_t size)
 	return res;
 }
 
+=======
+>>>>>>> BRANCH (7f8519 Merge tag 'ovl-update-6.7' of git://git.kernel.org/pub/scm/l)
 #ifdef CONFIG_FS_POSIX_ACL
 /*
  * Apply the idmapping of the layer to POSIX ACLs. The caller must pass a clone
@@ -611,10 +614,6 @@ static int ovl_set_or_remove_acl(struct dentry *dentry, struct inode *inode,
 	struct dentry *upperdentry = ovl_dentry_upper(dentry);
 	struct dentry *realdentry = upperdentry ?: ovl_dentry_lower(dentry);
 
-	err = ovl_want_write(dentry);
-	if (err)
-		return err;
-
 	/*
 	 * If ACL is to be removed from a lower file, check if it exists in
 	 * the first place before copying it up.
@@ -630,7 +629,7 @@ static int ovl_set_or_remove_acl(struct dentry *dentry, struct inode *inode,
 		ovl_revert_creds(dentry->d_sb, old_cred);
 		if (IS_ERR(real_acl)) {
 			err = PTR_ERR(real_acl);
-			goto out_drop_write;
+			goto out;
 		}
 		posix_acl_release(real_acl);
 	}
@@ -638,23 +637,30 @@ static int ovl_set_or_remove_acl(struct dentry *dentry, struct inode *inode,
 	if (!upperdentry) {
 		err = ovl_copy_up(dentry);
 		if (err)
-			goto out_drop_write;
+			goto out;
 
 		realdentry = ovl_dentry_upper(dentry);
 	}
+
+	err = ovl_want_write(dentry);
+	if (err)
+		goto out;
 
 	old_cred = ovl_override_creds(dentry->d_sb);
 	if (acl)
 		err = ovl_do_set_acl(ofs, realdentry, acl_name, acl);
 	else
 		err = ovl_do_remove_acl(ofs, realdentry, acl_name);
+<<<<<<< HEAD   (9c09af ANDROID: fs: Move iocb_to_rw_flags to fuse/passthrough)
 	ovl_revert_creds(dentry->d_sb, old_cred);
+=======
+	revert_creds(old_cred);
+	ovl_drop_write(dentry);
+>>>>>>> BRANCH (7f8519 Merge tag 'ovl-update-6.7' of git://git.kernel.org/pub/scm/l)
 
 	/* copy c/mtime */
 	ovl_copyattr(inode);
-
-out_drop_write:
-	ovl_drop_write(dentry);
+out:
 	return err;
 }
 
@@ -778,13 +784,13 @@ int ovl_fileattr_set(struct mnt_idmap *idmap,
 	unsigned int flags;
 	int err;
 
-	err = ovl_want_write(dentry);
-	if (err)
-		goto out;
-
 	err = ovl_copy_up(dentry);
 	if (!err) {
 		ovl_path_real(dentry, &upperpath);
+
+		err = ovl_want_write(dentry);
+		if (err)
+			goto out;
 
 		old_cred = ovl_override_creds(inode->i_sb);
 		/*
@@ -797,7 +803,12 @@ int ovl_fileattr_set(struct mnt_idmap *idmap,
 		err = ovl_set_protattr(inode, upperpath.dentry, fa);
 		if (!err)
 			err = ovl_real_fileattr_set(&upperpath, fa);
+<<<<<<< HEAD   (9c09af ANDROID: fs: Move iocb_to_rw_flags to fuse/passthrough)
 		ovl_revert_creds(inode->i_sb, old_cred);
+=======
+		revert_creds(old_cred);
+		ovl_drop_write(dentry);
+>>>>>>> BRANCH (7f8519 Merge tag 'ovl-update-6.7' of git://git.kernel.org/pub/scm/l)
 
 		/*
 		 * Merge real inode flags with inode flags read from
@@ -812,7 +823,6 @@ int ovl_fileattr_set(struct mnt_idmap *idmap,
 		/* Update ctime */
 		ovl_copyattr(inode);
 	}
-	ovl_drop_write(dentry);
 out:
 	return err;
 }
