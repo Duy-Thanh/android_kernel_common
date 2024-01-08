@@ -68,6 +68,23 @@
       "message": "the fix makes sense to me",
       "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "417abf0e_0e3294c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2024-01-08T19:31:47Z",
+      "side": 1,
+      "message": "daniel.lezcano@linaro.org",
+      "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
