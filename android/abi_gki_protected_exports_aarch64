@@ -91,6 +91,7 @@ cdc_ncm_select_altsetting
 cdc_ncm_tx_fixup
 cdc_ncm_unbind
 close_candev
+dev_fwnode
 free_candev
 generic_mii_ioctl
 h4_recv_buf
