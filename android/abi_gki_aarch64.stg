@@ -274227,6 +274227,13 @@ function {
   parameter_id: 0x136a7f2f
 }
 function {
+  id: 0x5274946d
+  return_type_id: 0x1c898f28
+  parameter_id: 0x356691bc
+  parameter_id: 0x6720d32f
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x5281433c
   return_type_id: 0x92233392
   parameter_id: 0x156a41de
@@ -322644,6 +322651,15 @@ elf_symbol {
   full_name: "drm_atomic_get_new_connector_for_encoder"
 }
 elf_symbol {
+  id: 0xd6791c20
+  name: "drm_atomic_get_new_private_obj_state"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x459894e2
+  type_id: 0x8715e05e
+  full_name: "drm_atomic_get_new_private_obj_state"
+}
+elf_symbol {
   id: 0xf53e2c51
   name: "drm_atomic_get_old_connector_for_encoder"
   is_defined: true
@@ -324478,6 +324494,15 @@ elf_symbol {
   crc: 0x6ef2f78e
   type_id: 0x7885d99e
   full_name: "drm_format_info"
+}
+elf_symbol {
+  id: 0x4b9e6227
+  name: "drm_format_info_min_pitch"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb22dfd68
+  type_id: 0x5274946d
+  full_name: "drm_format_info_min_pitch"
 }
 elf_symbol {
   id: 0x9c6b68f2
@@ -364141,6 +364166,7 @@ interface {
   symbol_id: 0xd5466b6c
   symbol_id: 0x1d9e3d52
   symbol_id: 0xec51c2ad
+  symbol_id: 0xd6791c20
   symbol_id: 0xf53e2c51
   symbol_id: 0x0a479d68
   symbol_id: 0xcb9062ec
@@ -364345,6 +364371,7 @@ interface {
   symbol_id: 0x4b6be7d2
   symbol_id: 0x02f0a645
   symbol_id: 0xaad93a6e
+  symbol_id: 0x4b9e6227
   symbol_id: 0x9c6b68f2
   symbol_id: 0x8ab89d74
   symbol_id: 0x717f2784
