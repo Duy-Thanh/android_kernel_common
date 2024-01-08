@@ -393,7 +393,7 @@ int fuse_lseek_initialize(struct fuse_bpf_args *fa, struct fuse_lseek_io *flio,
 	return 0;
 }
 
-int fuse_lseek_backing(struct fuse_bpf_args *fa, struct file *file, loff_t offset, int whence)
+loff_t fuse_lseek_backing(struct fuse_bpf_args *fa, struct file *file, loff_t offset, int whence)
 {
 	const struct fuse_lseek_in *fli = fa->in_args[0].value;
 	struct fuse_lseek_out *flo = fa->out_args[0].value;

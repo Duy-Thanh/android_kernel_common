@@ -1561,7 +1561,7 @@ struct fuse_lseek_io {
 
 int fuse_lseek_initialize(struct fuse_bpf_args *fa, struct fuse_lseek_io *fli,
 			  struct file *file, loff_t offset, int whence);
-int fuse_lseek_backing(struct fuse_bpf_args *fa, struct file *file, loff_t offset, int whence);
+loff_t fuse_lseek_backing(struct fuse_bpf_args *fa, struct file *file, loff_t offset, int whence);
 void *fuse_lseek_finalize(struct fuse_bpf_args *fa, struct file *file, loff_t offset, int whence);
 
 struct fuse_copy_file_range_io {
