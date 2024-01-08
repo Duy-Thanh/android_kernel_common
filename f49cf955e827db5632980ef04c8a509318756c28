@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b3110ba_903a8949",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-08T23:46:16Z",
+      "side": 1,
+      "message": "All of the FROMGIT patches should flow to android-mainline when they land upstream. Presumably they are all in the 6.8 merge window...",
+      "revId": "f49cf955e827db5632980ef04c8a509318756c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
