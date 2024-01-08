@@ -69,6 +69,24 @@
       "parentUuid": "91164b1d_e40eb94f",
       "revId": "09a3cf0f0c19effef0f57ec431fa2cad13b3ef2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a47f516_6db4db61",
+        "filename": "kernel/trace/trace.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 10227,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2024-01-08T05:56:07Z",
+      "side": 1,
+      "message": "Dear Kjos,\n\nThank you very much for your suggestion, I have commented in the code.",
+      "parentUuid": "3c6bad02_7f85969c",
+      "revId": "09a3cf0f0c19effef0f57ec431fa2cad13b3ef2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
