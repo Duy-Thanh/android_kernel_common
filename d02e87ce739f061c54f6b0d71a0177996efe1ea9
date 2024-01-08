@@ -33,6 +33,24 @@
       "message": "Is there a reason we can\u0027t wait for this to land upstream first (or at least in a maintainer tree)?",
       "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "093316ab_efb98934",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2024-01-08T06:40:39Z",
+      "side": 1,
+      "message": "Hi Todd,\nThis patch version has been reviewed by maintainer, and he suggested that it could be ported to Android if needed.\n\nThe issue is about IPA, so the original solution(this patch) was inside power allocator governor, but the community wanted a common fix in thermal core. I\u0027m still communicating with the maintainer for a more suitable solution.\n\nHowever, I\u0027m not sure when it would be accepted(that is why I didn\u0027t submit to android-mainline at first). Now we are going to use Android15-6.6 on our platform, in order not to affect the progress of the project, we consider porting to Android15-6.6 first, and revert it after the latest patch version is accepted by community.\n\nThanks.",
+      "parentUuid": "b43b9a2f_ecb02d66",
+      "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
