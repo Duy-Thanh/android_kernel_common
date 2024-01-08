@@ -51,6 +51,23 @@
       "parentUuid": "b43b9a2f_ecb02d66",
       "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be334e8a_8611cda3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2024-01-08T19:29:09Z",
+      "side": 1,
+      "message": "the fix makes sense to me",
+      "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
