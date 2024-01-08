@@ -33,6 +33,24 @@
       "message": "Does this flag get cleared on every iteration? If not, should this be moved before line 10217 so it is called once instead of for each iteration?",
       "revId": "bc434502ecf98ed9bb624fca9a88b5ad3eed67b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba97a75_ac11ec6b",
+        "filename": "kernel/trace/trace.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 10227,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2024-01-08T05:52:34Z",
+      "side": 1,
+      "message": "Dear Kjos,\nThank you very much for your suggestion, it can greatly improve efficiency.",
+      "parentUuid": "233613f3_65f3f75b",
+      "revId": "bc434502ecf98ed9bb624fca9a88b5ad3eed67b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
