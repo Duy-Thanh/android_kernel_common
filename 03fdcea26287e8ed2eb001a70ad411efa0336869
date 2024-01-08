@@ -16,6 +16,23 @@
       "message": "Looks ok to me.",
       "revId": "03fdcea26287e8ed2eb001a70ad411efa0336869",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e76a8c96_e48a5526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-01-08T21:03:39Z",
+      "side": 1,
+      "message": "Need to hold on this change due to problems it causes elsewhere (b/298027429)\n\nHopefully we can sort those issues soon so this can go in.",
+      "revId": "03fdcea26287e8ed2eb001a70ad411efa0336869",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
