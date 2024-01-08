@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b5de50_bb08b27f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-08T18:12:52Z",
+      "side": 1,
+      "message": "\"Bug: 319064658\" should be on its own line. Add a newline so \"(cherry picked...\" is at the beginning of its own line.",
+      "revId": "f5b5ae55e614fd935691e7dbda1ab1d727ecdf42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2982307c_935058ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-08T18:12:52Z",
+      "side": 1,
+      "message": "The cherry-pick is not clean. You must not make any changes to the upstream patch if it is labeled as \"UPSTREAM\". If the changes are due to backport conflicts, then label the patch as \"BACKPORT\" and explain the changes in a note in the commit message. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nIf the changes are for some other reason, then do a clean cherry-pick and add a separate patch to make those changes.\n\nHere are the differences:\n```\n      ## drivers/phy/qualcomm/Kconfig ##\n     @@ drivers/phy/qualcomm/Kconfig: config PHY_QCOM_PCIE2\n    @@ drivers/phy/qualcomm/Kconfig: config PHY_QCOM_PCIE2\n     +config PHY_QCOM_QMP_COMBO\n     +    tristate \"Qualcomm QMP Combo PHY Driver\"\n     +    default PHY_QCOM_QMP\n    -     select GENERIC_PHY\n    -     select MFD_SYSCON\n    -     help\n    --      Enable this to support the QMP PHY transceiver that is used\n    --      with controllers such as PCIe, UFS, and USB on Qualcomm chips.\n    ++    select GENERIC_PHY\n    ++    help\n     +      Enable this to support the QMP Combo PHY transceiver that is used\n     +      with USB3 and DisplayPort controllers on Qualcomm chips.\n     +\n    @@ drivers/phy/qualcomm/Kconfig: config PHY_QCOM_PCIE2\n     +config PHY_QCOM_QMP_PCIE_8996\n     +    tristate \"Qualcomm QMP PCIe 8996 PHY Driver\"\n     +    depends on PCI || COMPILE_TEST\n    -+    select GENERIC_PHY\n    +     select GENERIC_PHY\n     +    default PHY_QCOM_QMP\n    -+    help\n    +     help\n    +-      Enable this to support the QMP PHY transceiver that is used\n    +-      with controllers such as PCIe, UFS, and USB on Qualcomm chips.\n     +      Enable this to support the QMP PCIe PHY transceiver that is used\n     +      with PCIe controllers on Qualcomm msm8996 chips.\n     +\n```",
+      "revId": "f5b5ae55e614fd935691e7dbda1ab1d727ecdf42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
