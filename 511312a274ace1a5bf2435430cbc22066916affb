@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "091d9cdd_805c1a71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-09T20:31:21Z",
+      "side": 1,
+      "message": "Everything removed in this patch is added back in aosp/2900932. No changes to parameter list. Why is this needed?",
+      "revId": "511312a274ace1a5bf2435430cbc22066916affb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
