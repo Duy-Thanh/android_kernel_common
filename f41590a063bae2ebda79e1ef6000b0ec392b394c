@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24e2079d_ee54504e",
+        "filename": "drivers/android/node.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-09T09:05:53Z",
+      "side": 1,
+      "message": "Makes sense, I\u0027ll rename it. And sure, I can add documentation to them.",
+      "parentUuid": "afa5c24b_0bd8b989",
+      "revId": "f41590a063bae2ebda79e1ef6000b0ec392b394c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "676129d1_cf8ed433",
         "filename": "drivers/android/node.rs",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-09T01:10:31Z",
       "side": 1,
       "message": "Work in what way? Does it enable some list operations?",
+      "revId": "f41590a063bae2ebda79e1ef6000b0ec392b394c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce34a43_55fe9711",
+        "filename": "drivers/android/node.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-09T09:05:53Z",
+      "side": 1,
+      "message": "Yeah, it implements the `HasListLinks` trait for `DTRWrap\u003cTransaction\u003e` in a way such that `DTRWrap\u003cTransaction\u003e` can be pushed to the `oneway_todo` linked list.",
+      "parentUuid": "676129d1_cf8ed433",
       "revId": "f41590a063bae2ebda79e1ef6000b0ec392b394c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
