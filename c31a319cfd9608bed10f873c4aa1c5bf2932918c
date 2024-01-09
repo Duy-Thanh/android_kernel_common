@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c10e2fd0_66a6d8c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-09T00:54:08Z",
+      "side": 1,
+      "message": "When aosp/2898201 is actually squashed into this patch, please put an annotation here that the bug was fixed and cite aosp/2898201",
+      "revId": "c31a319cfd9608bed10f873c4aa1c5bf2932918c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "17f013ed_8b0481f9",
@@ -67,6 +84,24 @@
       "side": 1,
       "message": "I\u0027ve pushed it as PatchSet3 that is final version.",
       "parentUuid": "7976b1ba_b5337303",
+      "revId": "c31a319cfd9608bed10f873c4aa1c5bf2932918c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f37fa1b1_ba2bf3c9",
+        "filename": "include/net/net_namespace.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-09T00:54:08Z",
+      "side": 1,
+      "message": "In the bugfix (aosp/, this is declared as:\n```\nextern struct nf_hook_entries **init_nf_hooks_bridgep;\n```\n\nI think the bug fix is missing (aosp/2898201) wasn\u0027t squashed into this patch, so this patch has the bug. Please fix it.",
+      "parentUuid": "e45ba888_9e51da22",
       "revId": "c31a319cfd9608bed10f873c4aa1c5bf2932918c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
