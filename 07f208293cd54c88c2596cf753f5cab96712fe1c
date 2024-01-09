@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75329144_25850406",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-09T18:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feac6a79_ff6d74c5",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e579d866_25577fe9",
@@ -145,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "097f4b26_766f547f",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-09T18:48:16Z",
+      "side": 1,
+      "message": "I tried changing `should_use_process_work_queue` according to this, but I wasn\u0027t able to get a cuttlefish device to boot with the change. It seemed to get stuck pretty early in the boot process. I will try again tomorrow.",
+      "parentUuid": "669db4e7_3ec7bf91",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb129c8_33eb1703",
         "filename": "drivers/android/thread.rs",
         "patchSetId": 3
@@ -178,6 +214,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2464af0c_1e01c2f5",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-09T18:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3f43584_0616af24",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "752cd65a_1f685b84",
@@ -191,6 +245,24 @@
       "writtenOn": "2023-12-13T09:52:51Z",
       "side": 1,
       "message": "This isn\u0027t true anymore. It can only fail if the thread is dead.",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "194fa998_abb8b91d",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-09T18:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "752cd65a_1f685b84",
       "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
