@@ -22,6 +22,23 @@
       },
       "revId": "ea4792c6427a9000997b78eefa13704bc2fdaadc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ec1d45_ad6389de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-09T17:23:05Z",
+      "side": 1,
+      "message": "Why not just use netfilter?",
+      "revId": "ea4792c6427a9000997b78eefa13704bc2fdaadc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
