@@ -556,7 +556,73 @@ void kasan_report_async(void)
 }
 #endif /* CONFIG_KASAN_HW_TAGS */
 
+<<<<<<< HEAD   (2773ab Reapply "kasan: print the original fault addr when access in)
 #ifdef CONFIG_KASAN_INLINE
+=======
+static void __kasan_report(unsigned long addr, size_t size, bool is_write,
+				unsigned long ip)
+{
+	struct kasan_access_info info;
+	void *tagged_addr;
+	void *untagged_addr;
+	unsigned long flags;
+
+#if IS_ENABLED(CONFIG_KUNIT)
+	if (current->kunit_test)
+		kasan_update_kunit_status(current->kunit_test);
+#endif /* IS_ENABLED(CONFIG_KUNIT) */
+
+	disable_trace_on_warning();
+
+	tagged_addr = (void *)addr;
+	untagged_addr = kasan_reset_tag(tagged_addr);
+
+	info.access_addr = tagged_addr;
+	if (addr_has_metadata(untagged_addr))
+		info.first_bad_addr =
+			kasan_find_first_bad_addr(tagged_addr, size);
+	else
+		info.first_bad_addr = untagged_addr;
+	info.access_size = size;
+	info.is_write = is_write;
+	info.ip = ip;
+
+	start_report(&flags);
+
+	print_error_description(&info);
+	if (addr_has_metadata(untagged_addr))
+		kasan_print_tags(get_tag(tagged_addr), info.first_bad_addr);
+	pr_err("\n");
+
+	if (addr_has_metadata(untagged_addr)) {
+		print_address_description(untagged_addr, get_tag(tagged_addr));
+		pr_err("\n");
+		print_memory_metadata(info.first_bad_addr);
+	} else {
+		dump_stack_lvl(KERN_ERR);
+	}
+
+	end_report(&flags, addr);
+}
+
+bool kasan_report(unsigned long addr, size_t size, bool is_write,
+			unsigned long ip)
+{
+	unsigned long flags = user_access_save();
+	bool ret = false;
+
+	if (likely(report_enabled())) {
+		__kasan_report(addr, size, is_write, ip);
+		ret = true;
+	}
+
+	user_access_restore(flags);
+
+	return ret;
+}
+
+#if defined(CONFIG_KASAN_GENERIC) || defined(CONFIG_KASAN_SW_TAGS)
+>>>>>>> BRANCH (d93fa2 Linux 5.15.145)
 /*
  * With CONFIG_KASAN_INLINE, accesses to bogus pointers (outside the high
  * canonical half of the address space) cause out-of-bounds shadow memory reads
