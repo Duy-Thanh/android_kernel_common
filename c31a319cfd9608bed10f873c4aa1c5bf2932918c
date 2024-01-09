@@ -104,6 +104,24 @@
       "parentUuid": "e45ba888_9e51da22",
       "revId": "c31a319cfd9608bed10f873c4aa1c5bf2932918c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04e758b5_95d0428c",
+        "filename": "include/net/net_namespace.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2024-01-09T01:56:17Z",
+      "side": 1,
+      "message": "I\u0027m sorry but I don\u0027t understand what\u0027s problem.\nOn PatchSet3, I can see it as expected.\n\nextern struct nf_hook_entries **init_nf_hooks_bridgep;",
+      "parentUuid": "f37fa1b1_ba2bf3c9",
+      "revId": "c31a319cfd9608bed10f873c4aa1c5bf2932918c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
