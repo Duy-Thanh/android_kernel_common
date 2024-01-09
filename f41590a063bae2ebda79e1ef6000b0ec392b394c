@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afa5c24b_0bd8b989",
+        "filename": "drivers/android/node.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-01-09T01:10:31Z",
+      "side": 1,
+      "message": "Can you document the all fields in these structs? The C code has parsable kerneldoc comments for this. It seems the rust has something similar that https://rust-for-linux.github.io/docs/kernel is based on.\n\nI also think the has_pending_oneway_todo name is a little confusing. Assuming this is the same as has_async_transaction, it does not mean the oneway_todo/async_todo list is non-empty. I would drop or replace the `_todo` suffix on the `has_` field.",
+      "revId": "f41590a063bae2ebda79e1ef6000b0ec392b394c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "676129d1_cf8ed433",
+        "filename": "drivers/android/node.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-01-09T01:10:31Z",
+      "side": 1,
+      "message": "Work in what way? Does it enable some list operations?",
+      "revId": "f41590a063bae2ebda79e1ef6000b0ec392b394c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
