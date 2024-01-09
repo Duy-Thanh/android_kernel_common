@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65aa165f_92c6e4ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973315
+      },
+      "writtenOn": "2024-01-09T01:37:38Z",
+      "side": 1,
+      "message": "I added initiail symbol list for exynos auto to android15-6.6 for SPI_SLAVE.",
+      "revId": "45058033c712c9d46b8ed29ae48da2231c53b4c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
