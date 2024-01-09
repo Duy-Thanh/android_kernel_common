@@ -417,7 +417,11 @@ int fuse_lseek_backing(struct fuse_bpf_args *fa, struct file *file, loff_t offse
 	inode_lock(file->f_inode);
 	backing_file->f_pos = file->f_pos;
 	ret = vfs_llseek(backing_file, fli->offset, fli->whence);
-	flo->offset = ret;
+
+	if (!IS_ERR(ERR_PTR(ret))) {
+		flo->offset = ret;
+		ret = 0;
+	}
 	inode_unlock(file->f_inode);
 	return ret;
 }
