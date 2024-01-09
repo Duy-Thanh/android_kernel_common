@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000064447073",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2903183?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "c68404d0_14bd31d8",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Liam Howlett \u003cliam.howlett@oracle.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c8da623a_f1c5f3a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-09T21:11:20Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Liam Howlett \u003cliam.howlett@oracle.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 596920237 android-build.ayeaye-python-dispatcher_20240109.04_p0",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "588df7ff4fed7f070bbe4938638c57afb50b6b99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
