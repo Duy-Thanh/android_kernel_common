@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a10c1912_03fd9eba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1533741
+      },
+      "writtenOn": "2024-01-09T02:30:36Z",
+      "side": 1,
+      "message": "The test patch：\n\n#define _LARGEFILE64_SOURCE     /* See feature_test_macros(7) */\n#include \u003csys/types.h\u003e\n#include \u003cunistd.h\u003e\n#include \u003cstdio.h\u003e\n#include \u003csys/types.h\u003e\n#include \u003csys/stat.h\u003e\n#include \u003cfcntl.h\u003e\n#include \u003cerrno.h\u003e\n\n#define LSEEK_OFFSET (4ll * 1024 * 1024 * 1024 - 1024)\n\nvoid usage(const char *cmdname)\n{\n\tprintf(\"Usage:\\n\");\n\tprintf(\"\\t%s \u003cpath\u003e\\n\", cmdname);\n}\n\nint main(int argc, char **argv)\n{\n\tint fd \u003d -1, ret \u003d 0;\n\toff64_t off \u003d 0;\n\tconst char *path \u003d NULL;\n\tconst char *cmdname \u003d argv[0];\n\n\tif (argc \u003c 2) {\n\t\tusage(cmdname);\n\t\treturn -EINVAL;\n\t}\n\tpath \u003d argv[1];\n\n\tfd \u003d open(path, O_RDWR | O_CREAT, 0600);\n\tif (fd \u003c 0) {\n\t\tprintf(\"%s: open [%s] failed.\\n\", __func__, path);\n\t\treturn fd;\n\t}\n\n\toff \u003d lseek64(fd, LSEEK_OFFSET, SEEK_SET);\n\tif (off !\u003d LSEEK_OFFSET) {\n\t\tprintf(\"%s: %d\\n\", __func__, __LINE__);\n\t\tret \u003d -EINVAL;\n\t\tgoto out;\n\t}\n\toff \u003d lseek64(fd, 0, SEEK_CUR);\n\tif (off !\u003d (LSEEK_OFFSET)) {\n\t\tprintf(\"Test Failed.\\n\");\n\t\tgoto out;\n\t}\n\tprintf(\"Test Successful.\\n\");\n\nout:\n\tclose(fd);\n\treturn ret;\n}\n\nExample of execution error:\nroot@m2481:/ # /data/lseek64 /sdcard/Android/data/ok                                                                                                                                                      \nTest Failed.",
+      "revId": "6435e7af73ec62e42e28abdea58f37878ec16c57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

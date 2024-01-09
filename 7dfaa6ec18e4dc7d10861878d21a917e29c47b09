@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae85566_38defb98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1533741
+      },
+      "writtenOn": "2024-01-09T02:30:36Z",
+      "side": 1,
+      "message": "\u003e Commit needs to contain a properly formatted Bug: or Fixes: line.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 596573510 android-build.ayeaye-python-dispatcher_20240108.04_p0\n\nPlease fix.",
+      "parentUuid": "bb305bd0_8e5f21d3",
+      "revId": "7dfaa6ec18e4dc7d10861878d21a917e29c47b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "adf40611_e1ec59f0",
