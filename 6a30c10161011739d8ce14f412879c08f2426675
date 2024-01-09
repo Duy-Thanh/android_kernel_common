@@ -16,6 +16,24 @@
       "message": "will this affect KMI? if not, can we have it in android14-6.1",
       "revId": "6a30c10161011739d8ce14f412879c08f2426675",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0e26908_a7965181",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-09T21:10:31Z",
+      "side": 1,
+      "message": "No KMI issues.",
+      "parentUuid": "1d7f4a64_42ce2b76",
+      "revId": "6a30c10161011739d8ce14f412879c08f2426675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
