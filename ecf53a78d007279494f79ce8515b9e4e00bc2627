@@ -46,6 +46,30 @@
       },
       "revId": "ecf53a78d007279494f79ce8515b9e4e00bc2627",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "857569fb_2de6d1e0",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2024-01-09T02:51:56Z",
+      "side": 0,
+      "message": "sg, this is a good catch from upstream regression.",
+      "parentUuid": "47025b7f_043bcbcd",
+      "range": {
+        "startLine": 713,
+        "startChar": 11,
+        "endLine": 713,
+        "endChar": 53
+      },
+      "revId": "ecf53a78d007279494f79ce8515b9e4e00bc2627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
