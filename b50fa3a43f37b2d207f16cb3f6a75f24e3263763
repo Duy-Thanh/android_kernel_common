@@ -22,6 +22,30 @@
       },
       "revId": "b50fa3a43f37b2d207f16cb3f6a75f24e3263763",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8181f0_29f5542a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-01-09T04:53:55Z",
+      "side": 1,
+      "message": "There were many changes between the 5.15 kernel and 6.6 kernel in these files, that is the main reason that it looks a bit different. For example, the function `bio_may_exceed_limits` in block/blk.h does not exist in the 5.15 kernel.",
+      "parentUuid": "30cef86f_6d746bcf",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 47
+      },
+      "revId": "b50fa3a43f37b2d207f16cb3f6a75f24e3263763",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
