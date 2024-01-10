@@ -222,6 +222,11 @@ DECLARE_RESTRICTED_HOOK(android_rvh_blk_flush_plug_list,
 	TP_PROTO(struct blk_plug *plug, bool from_schedule),
 	TP_ARGS(plug, from_schedule), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_blk_execute_rq_nowait,
+	TP_PROTO(struct request_queue *q, struct request *rq,
+		 rq_end_io_fn * done),
+	TP_ARGS(q, rq, done), 1);
+
 #endif /* _TRACE_HOOK_BLOCK_H */
 
 /* This part must be outside protection */

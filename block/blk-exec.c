@@ -9,6 +9,7 @@
 #include <linux/blk-mq.h>
 #include <linux/sched/sysctl.h>
 
+#include <trace/hooks/block.h>
 #include "blk.h"
 #include "blk-mq-sched.h"
 
@@ -55,6 +56,7 @@ void blk_execute_rq_nowait(struct request_queue *q, struct gendisk *bd_disk,
 	rq->rq_disk = bd_disk;
 	rq->end_io = done;
 
+	trace_android_rvh_blk_execute_rq_nowait(q, rq, done);
 	blk_account_io_start(rq);
 
 	/*
