@@ -544,6 +544,15 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_blk_mq_alloc_tag_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_update_nr_requests);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_poll_first);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_poll_second);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_cleanup_queue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_blk_allocated_queue_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_put_request);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_submit_bio_noacct);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_insert_cloned_request);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_account_io_completion);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_update_request);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_start_plug);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_blk_flush_plug_list);
 
 /*
  * For type visibility
