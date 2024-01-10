@@ -40,6 +40,8 @@
 #include <scsi/scsi_transport.h>
 #include <scsi/scsi_cmnd.h>
 
+#include <trace/hooks/scsi.h>
+
 #include "scsi_priv.h"
 #include "scsi_logging.h"
 
@@ -378,6 +380,7 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 	struct Scsi_Host *shost;
 	gfp_t gfp_mask = GFP_KERNEL;
 	int index;
+	bool skip = false;
 
 	if (sht->unchecked_isa_dma && privsize)
 		gfp_mask |= __GFP_DMA;
@@ -385,6 +388,12 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 	shost = kzalloc(sizeof(struct Scsi_Host) + privsize, gfp_mask);
 	if (!shost)
 		return NULL;
+
+	trace_android_vh_scsi_host_alloc(&skip, sht, shost);
+	if (skip) {
+		kfree(shost);
+		return NULL;
+	}
 
 	shost->host_lock = &shost->default_lock;
 	spin_lock_init(shost->host_lock);
