@@ -554,6 +554,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_update_request);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_start_plug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_blk_flush_plug_list);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_blk_execute_rq_nowait);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_kick_flush);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_alloc_flush_queue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_insert_flush);
 
 /*
  * For type visibility

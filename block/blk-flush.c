@@ -70,6 +70,7 @@
 #include <linux/gfp.h>
 #include <linux/blk-mq.h>
 #include <linux/lockdep.h>
+#include <trace/hooks/block.h>
 
 #include "blk.h"
 #include "blk-mq.h"
@@ -320,6 +321,8 @@ static void blk_kick_flush(struct request_queue *q, struct blk_flush_queue *fq,
 	flush_rq->mq_ctx = first_rq->mq_ctx;
 	flush_rq->mq_hctx = first_rq->mq_hctx;
 
+	trace_android_vh_blk_kick_flush(first_rq, flush_rq);
+
 	if (!q->elevator) {
 		flush_rq->tag = first_rq->tag;
 
@@ -424,6 +427,11 @@ void blk_insert_flush(struct request *rq)
 	 */
 	if ((policy & REQ_FSEQ_DATA) &&
 	    !(policy & (REQ_FSEQ_PREFLUSH | REQ_FSEQ_POSTFLUSH))) {
+		bool skip = false;
+
+		trace_android_vh_blk_insert_flush(&skip, rq);
+		if (skip)
+			return;
 		blk_mq_request_bypass_insert(rq, false, false);
 		return;
 	}
@@ -472,6 +480,7 @@ struct blk_flush_queue *blk_alloc_flush_queue(int node, int cmd_size,
 {
 	struct blk_flush_queue *fq;
 	int rq_sz = sizeof(struct request);
+	bool skip = false;
 
 	fq = kzalloc_node(sizeof(*fq), flags, node);
 	if (!fq)
@@ -479,8 +488,12 @@ struct blk_flush_queue *blk_alloc_flush_queue(int node, int cmd_size,
 
 	spin_lock_init(&fq->mq_flush_lock);
 
-	rq_sz = round_up(rq_sz + cmd_size, cache_line_size());
-	fq->flush_rq = kzalloc_node(rq_sz, flags, node);
+	trace_android_vh_blk_alloc_flush_queue(&skip, cmd_size, flags, node,
+					       fq);
+	if (!skip) {
+		rq_sz = round_up(rq_sz + cmd_size, cache_line_size());
+		fq->flush_rq = kzalloc_node(rq_sz, flags, node);
+	}
 	if (!fq->flush_rq)
 		goto fail_rq;
 
