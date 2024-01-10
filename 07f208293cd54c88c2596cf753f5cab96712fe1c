@@ -199,6 +199,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "031a3756_e6c3adf7",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-10T09:46:11Z",
+      "side": 1,
+      "message": "In general, I am in favor of making the wait-for-work logic match C Binder more closely.",
+      "parentUuid": "7e829a58_f7ac1ab3",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb129c8_33eb1703",
         "filename": "drivers/android/thread.rs",
         "patchSetId": 3
