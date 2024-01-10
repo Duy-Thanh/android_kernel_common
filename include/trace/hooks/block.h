@@ -7,6 +7,8 @@
 #if !defined(_TRACE_HOOK_BLOCK_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _TRACE_HOOK_BLOCK_H
 
+#include <linux/sbitmap.h>
+#include <linux/blk-mq.h>
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
 
@@ -20,6 +22,8 @@ struct page;
 struct request_queue;
 struct request;
 struct blk_mq_hw_ctx;
+struct blk_plug;
+struct task_struct;
 #else
 /* struct blk_mq_tags */
 #include <../block/blk-mq-tag.h>
@@ -33,8 +37,10 @@ struct blk_mq_hw_ctx;
 #include <linux/bvec.h>
 /* struct page */
 #include <linux/mm_types.h>
-/* struct request_queue struct request*/
+/* struct request_queue struct request struct blk_plug;*/
 #include <linux/blkdev.h>
+/* struct task_struct */
+#include <linux/sched.h>
 #endif /* __GENKSYMS__ */
 
 DECLARE_HOOK(android_vh_blk_alloc_rqs,
@@ -179,6 +185,42 @@ DECLARE_HOOK(android_vh_blk_poll_first,
 DECLARE_HOOK(android_vh_blk_poll_second,
 	TP_PROTO(struct request_queue *q),
 	TP_ARGS(q));
+
+DECLARE_HOOK(android_vh_blk_cleanup_queue,
+	TP_PROTO(struct request_queue *q),
+	TP_ARGS(q));
+
+DECLARE_RESTRICTED_HOOK(android_rvh_blk_allocated_queue_init,
+	TP_PROTO(bool *skip, struct request_queue *q),
+	TP_ARGS(skip, q), 1);
+
+DECLARE_HOOK(android_vh_blk_put_request,
+	TP_PROTO(struct request *rq),
+	TP_ARGS(rq));
+
+DECLARE_RESTRICTED_HOOK(android_rvh_submit_bio_noacct,
+	TP_PROTO(bool *skip, struct bio *bio),
+	TP_ARGS(skip, bio), 1);
+
+DECLARE_HOOK(android_vh_blk_insert_cloned_request,
+	TP_PROTO(struct request_queue *q, struct request *rq),
+	TP_ARGS(q, rq));
+
+DECLARE_HOOK(android_vh_blk_account_io_completion,
+	TP_PROTO(struct request *rq, unsigned int bytes),
+	TP_ARGS(rq, bytes));
+
+DECLARE_HOOK(android_vh_blk_update_request,
+	TP_PROTO(struct request *rq, blk_status_t error, unsigned int nr_bytes),
+	TP_ARGS(rq, error, nr_bytes));
+
+DECLARE_HOOK(android_vh_blk_start_plug,
+	TP_PROTO(struct task_struct *tsk, struct blk_plug *plug),
+	TP_ARGS(tsk, plug));
+
+DECLARE_RESTRICTED_HOOK(android_rvh_blk_flush_plug_list,
+	TP_PROTO(struct blk_plug *plug, bool from_schedule),
+	TP_ARGS(plug, from_schedule), 1);
 
 #endif /* _TRACE_HOOK_BLOCK_H */
 
