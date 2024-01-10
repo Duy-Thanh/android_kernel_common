@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2511988_3fd8f6f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-01-10T17:04:23Z",
+      "side": 1,
+      "message": "Note: as explained in the commit log footer, I\u0027ve switched to `find_vma()` instead of `vma_lookup()` in this backport. The reason being that vma_lookup() doesn\u0027t exist in v5.10. The problem with `find_vma()` is that it can sometimes return the \"next\" vma, so typically one needs to check `if (addr \u003c vma-\u003evm_start)`. In this case we are fine since we check the vma returned by find_vma() against our cached alloc-\u003evma pointer.",
+      "revId": "823ef171e8b4f1fec206a7e549be4e91c21dd268",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
