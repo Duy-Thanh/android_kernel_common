@@ -16,6 +16,23 @@
       "message": "I uploaded separated patches for updating original our symbol list and updating after enabling SPI_SLAVE\u003dy",
       "revId": "7ec56581bf6b242fcce2639c5e41af9b6a82599a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1dafaed_b3f6a880",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-10T09:58:37Z",
+      "side": 1,
+      "message": "merge conflicts 😞",
+      "revId": "7ec56581bf6b242fcce2639c5e41af9b6a82599a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
