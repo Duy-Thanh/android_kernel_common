@@ -181,6 +181,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e829a58_f7ac1ab3",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-01-10T00:46:16Z",
+      "side": 1,
+      "message": "I have not seen any obvious reason why this should fail. The rust version of waiting for work seems a lot more complicated than the C version though, and I have not untangled it all yet. Can this be simplified?",
+      "parentUuid": "097f4b26_766f547f",
+      "revId": "07f208293cd54c88c2596cf753f5cab96712fe1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb129c8_33eb1703",
         "filename": "drivers/android/thread.rs",
         "patchSetId": 3
