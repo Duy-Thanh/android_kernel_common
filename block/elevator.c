@@ -39,6 +39,7 @@
 #include <linux/blk-cgroup.h>
 
 #include <trace/events/block.h>
+#include <trace/hooks/block.h>
 
 #include "blk.h"
 #include "blk-mq-sched.h"
@@ -781,10 +782,15 @@ ssize_t elv_iosched_show(struct request_queue *q, char *name)
 	if (!queue_is_mq(q))
 		return sprintf(name, "none\n");
 
-	if (!q->elevator)
-		len += sprintf(name+len, "[none] ");
-	else
+	if (!q->elevator) {
+		bool skip = false;
+
+		trace_android_vh_elv_iosched_show(&skip, &len, name, q);
+		if (!skip)
+			len += sprintf(name + len, "[none] ");
+	} else {
 		elv = e->type;
+	}
 
 	spin_lock(&elv_list_lock);
 	list_for_each_entry(__e, &elv_list, list) {

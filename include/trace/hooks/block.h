@@ -215,6 +215,10 @@ DECLARE_HOOK(android_vh_blk_queue_split,
 		 struct bio *split, unsigned int *nr_segs),
 	TP_ARGS(q, bio, split, nr_segs));
 
+DECLARE_HOOK(android_vh_elv_iosched_show,
+	TP_PROTO(bool *skip, int *len, char *name, struct request_queue *q),
+	TP_ARGS(skip, len, name, q));
+
 #endif /* _TRACE_HOOK_BLOCK_H */
 
 /* This part must be outside protection */
