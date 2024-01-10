@@ -35,6 +35,7 @@
 #include <scsi/scsi_dh.h>
 
 #include <trace/events/scsi.h>
+#include <trace/hooks/scsi.h>
 
 #include "scsi_debugfs.h"
 #include "scsi_priv.h"
@@ -1350,8 +1351,13 @@ static inline int scsi_host_queue_ready(struct request_queue *q,
 		return 0;
 
 	if (atomic_read(&shost->host_blocked) > 0) {
-		if (scsi_host_busy(shost) > 0)
-			goto starved;
+		bool skip = false;
+
+		trace_android_vh_scsi_host_queue_ready(&skip, shost);
+		if (!skip) {
+			if (scsi_host_busy(shost) > 0)
+				goto starved;
+		}
 
 		/*
 		 * unblock after host_blocked iterates to zero
@@ -1428,6 +1434,7 @@ static void scsi_softirq_done(struct request *rq)
 	struct scsi_cmnd *cmd = blk_mq_rq_to_pdu(rq);
 	int disposition;
 
+	trace_android_vh_scsi_softirq_done(cmd);
 	INIT_LIST_HEAD(&cmd->eh_entry);
 
 	atomic_inc(&cmd->device->iodone_cnt);
@@ -1542,6 +1549,12 @@ static int scsi_dispatch_cmd(struct scsi_cmnd *cmd)
 /* Size in bytes of the sg-list stored in the scsi-mq command-private data. */
 static unsigned int scsi_mq_inline_sgl_size(struct Scsi_Host *shost)
 {
+	unsigned int ret = 0;
+
+	trace_android_vh_scsi_mq_inline_sgl_size(&ret, shost);
+	if (ret)
+		return ret;
+
 	return min_t(unsigned int, shost->sg_tablesize, SCSI_INLINE_SG_CNT) *
 		sizeof(struct scatterlist);
 }
@@ -1606,6 +1619,7 @@ static void scsi_mq_put_budget(struct request_queue *q)
 {
 	struct scsi_device *sdev = q->queuedata;
 
+	trace_android_vh_scsi_mq_put_budget(q);
 	atomic_dec(&sdev->device_busy);
 }
 
@@ -1613,6 +1627,7 @@ static bool scsi_mq_get_budget(struct request_queue *q)
 {
 	struct scsi_device *sdev = q->queuedata;
 
+	trace_android_vh_scsi_mq_get_budget(q);
 	if (scsi_dev_queue_ready(q, sdev))
 		return true;
 
@@ -1649,7 +1664,11 @@ static blk_status_t scsi_queue_rq(struct blk_mq_hw_ctx *hctx,
 	struct scsi_cmnd *cmd = blk_mq_rq_to_pdu(req);
 	blk_status_t ret;
 	int reason;
+	bool skip = false;
 
+	trace_android_vh_scsi_queue_rq_first(&ret, &skip, req, shost);
+	if (skip)
+		goto out_put_budget;
 	/*
 	 * If the device is not in running state we will reject some or all
 	 * commands.
@@ -1706,6 +1725,9 @@ out_put_budget:
 	case BLK_STS_OK:
 		break;
 	case BLK_STS_RESOURCE:
+		trace_android_vh_scsi_queue_rq_second(&skip, shost);
+		if (skip)
+			break;
 	case BLK_STS_ZONE_RESOURCE:
 		if (scsi_device_blocked(sdev))
 			ret = BLK_STS_DEV_RESOURCE;
@@ -1918,6 +1940,7 @@ int scsi_mq_setup_tags(struct Scsi_Host *shost)
 	if (shost->host_tagset)
 		tag_set->flags |= BLK_MQ_F_TAG_HCTX_SHARED;
 
+	trace_android_vh_scsi_mq_setup_tags(shost, cmd_size);
 	return blk_mq_alloc_tag_set(tag_set);
 }
 
