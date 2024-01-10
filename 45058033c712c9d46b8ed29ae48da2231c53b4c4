@@ -33,6 +33,24 @@
       "message": "Please do not mix your original symbol table addition with the CONFIG option change, that is making this messy to review and will not work well.  Please keep these separate as they are different things entirely.",
       "revId": "45058033c712c9d46b8ed29ae48da2231c53b4c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "722bdd09_377755f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973315
+      },
+      "writtenOn": "2024-01-10T01:16:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75acf13d_35e10340",
+      "revId": "45058033c712c9d46b8ed29ae48da2231c53b4c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
