@@ -16,6 +16,24 @@
       "message": "All of the FROMGIT patches should flow to android-mainline when they land upstream. Presumably they are all in the 6.8 merge window...",
       "revId": "f49cf955e827db5632980ef04c8a509318756c28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "333c9775_6bf2b72d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-10T10:34:05Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like the two arm changes are in the 6.8 merge window. At least, they are not in the arm64 PR.",
+      "parentUuid": "1b3110ba_903a8949",
+      "revId": "f49cf955e827db5632980ef04c8a509318756c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
