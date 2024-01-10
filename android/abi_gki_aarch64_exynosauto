@@ -124,6 +124,7 @@
   __register_chrdev
   __spi_register_driver
   spi_setup
+  spi_slave_abort
   spi_sync
   stream_open
   system_cpucaps
