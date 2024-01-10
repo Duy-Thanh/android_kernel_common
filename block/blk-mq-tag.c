@@ -11,6 +11,7 @@
 
 #include <linux/blk-mq.h>
 #include <linux/delay.h>
+#include <trace/hooks/block.h>
 #include "blk.h"
 #include "blk-mq.h"
 #include "blk-mq-tag.h"
@@ -336,8 +337,13 @@ static void bt_tags_for_each(struct blk_mq_tags *tags, struct sbitmap_queue *bt,
 static void __blk_mq_all_tag_iter(struct blk_mq_tags *tags,
 		busy_tag_iter_fn *fn, void *priv, unsigned int flags)
 {
+	bool skip = false;
+
 	WARN_ON_ONCE(flags & BT_TAG_ITER_RESERVED);
 
+	trace_android_vh_blk_mq_all_tag_iter(&skip, tags, fn, priv);
+	if (skip)
+		return;
 	if (tags->nr_reserved_tags)
 		bt_tags_for_each(tags, tags->breserved_tags, fn, priv,
 				 flags | BT_TAG_ITER_RESERVED);
@@ -438,6 +444,7 @@ void blk_mq_queue_tag_busy_iter(struct request_queue *q, busy_iter_fn *fn,
 {
 	struct blk_mq_hw_ctx *hctx;
 	int i;
+	bool skip = false;
 
 	/*
 	 * __blk_mq_update_nr_hw_queues() updates nr_hw_queues and queue_hw_ctx
@@ -455,6 +462,11 @@ void blk_mq_queue_tag_busy_iter(struct request_queue *q, busy_iter_fn *fn,
 		 * hardware queue, there's nothing to check
 		 */
 		if (!blk_mq_hw_queue_mapped(hctx))
+			continue;
+
+		trace_android_vh_blk_mq_queue_tag_busy_iter(&skip, hctx, fn,
+							    priv);
+		if (skip)
 			continue;
 
 		if (tags->nr_reserved_tags)

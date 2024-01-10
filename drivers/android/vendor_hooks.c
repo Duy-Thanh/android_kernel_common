@@ -557,6 +557,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_blk_execute_rq_nowait);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_kick_flush);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_alloc_flush_queue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_insert_flush);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_all_tag_iter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_queue_tag_busy_iter);
 
 /*
  * For type visibility
