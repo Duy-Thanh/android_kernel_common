@@ -480,7 +480,11 @@ EXPORT_SYMBOL(mmc_remove_host);
  */
 void mmc_free_host(struct mmc_host *host)
 {
+<<<<<<< HEAD   (bc841b UPSTREAM: drm: Fix doc warning in drm_connector_attach_edid_)
 	mmc_crypto_free_host(host);
+=======
+	cancel_delayed_work_sync(&host->detect);
+>>>>>>> BRANCH (c31e35 Linux 4.14.336)
 	mmc_pwrseq_free(host);
 	put_device(&host->class_dev);
 }
