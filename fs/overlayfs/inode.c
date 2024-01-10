@@ -339,6 +339,7 @@ static const char *ovl_get_link(struct dentry *dentry,
 	return p;
 }
 
+<<<<<<< HEAD   (a51bcd Merge 5b02bfc1e7e3 ("ovl: do not encode lower fh with upper )
 bool ovl_is_private_xattr(struct super_block *sb, const char *name)
 {
 	struct ovl_fs *ofs = OVL_FS(sb);
@@ -461,6 +462,8 @@ ssize_t ovl_listxattr(struct dentry *dentry, char *list, size_t size)
 	return res;
 }
 
+=======
+>>>>>>> BRANCH (420a62 ovl: Move xattr support to new xattrs.c file)
 #ifdef CONFIG_FS_POSIX_ACL
 /*
  * Apply the idmapping of the layer to POSIX ACLs. The caller must pass a clone
