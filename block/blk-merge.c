@@ -12,6 +12,7 @@
 #endif
 
 #include <trace/events/block.h>
+#include <trace/hooks/block.h>
 
 #include "blk.h"
 #include "blk-rq-qos.h"
@@ -335,6 +336,8 @@ void __blk_queue_split(struct bio **bio, unsigned int *nr_segs)
 		split = blk_bio_segment_split(q, *bio, &q->bio_split, nr_segs);
 		break;
 	}
+
+	trace_android_rvh_blk_queue_split(q, bio, split, nr_segs);
 
 	if (split) {
 		/* there isn't chance to merge the splitted bio */
