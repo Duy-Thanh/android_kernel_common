@@ -262,6 +262,10 @@ DECLARE_HOOK(android_vh_elv_iosched_show,
 	TP_PROTO(bool *skip, int *len, char *name, struct request_queue *q),
 	TP_ARGS(skip, len, name, q));
 
+DECLARE_HOOK(android_vh_blk_mq_sched_insert_request,
+	TP_PROTO(bool *skip, bool *at_head, struct request *rq),
+	TP_ARGS(skip, at_head, rq));
+
 #endif /* _TRACE_HOOK_BLOCK_H */
 
 /* This part must be outside protection */
