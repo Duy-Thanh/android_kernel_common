@@ -10,6 +10,7 @@
 #include <linux/list_sort.h>
 
 #include <trace/events/block.h>
+#include <trace/hooks/block.h>
 
 #include "blk.h"
 #include "blk-mq.h"
@@ -429,10 +430,13 @@ void blk_mq_sched_insert_request(struct request *rq, bool at_head,
 	struct elevator_queue *e = q->elevator;
 	struct blk_mq_ctx *ctx = rq->mq_ctx;
 	struct blk_mq_hw_ctx *hctx = rq->mq_hctx;
+	bool skip = false;
 
 	WARN_ON(e && (rq->tag != BLK_MQ_NO_TAG));
 
-	if (blk_mq_sched_bypass_insert(hctx, !!e, rq)) {
+	trace_android_vh_blk_mq_sched_insert_request(&skip, rq);
+
+	if (!skip && blk_mq_sched_bypass_insert(hctx, !!e, rq)) {
 		/*
 		 * Firstly normal IO request is inserted to scheduler queue or
 		 * sw queue, meantime we add flush request to dispatch queue(
