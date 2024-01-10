@@ -40,6 +40,8 @@
 #include <scsi/scsi_transport.h>
 #include <scsi/scsi_cmnd.h>
 
+#include <trace/hooks/scsi.h>
+
 #include "scsi_priv.h"
 #include "scsi_logging.h"
 
@@ -429,6 +431,8 @@ struct Scsi_Host *scsi_host_alloc(struct scsi_host_template *sht, int privsize)
 	shost->unchecked_isa_dma = sht->unchecked_isa_dma;
 	shost->no_write_same = sht->no_write_same;
 	shost->host_tagset = sht->host_tagset;
+
+	trace_android_vh_scsi_host_alloc(sht, shost);
 
 	if (shost_eh_deadline == -1 || !sht->eh_host_reset_handler)
 		shost->eh_deadline = -1;

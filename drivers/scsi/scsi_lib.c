@@ -35,6 +35,7 @@
 #include <scsi/scsi_dh.h>
 
 #include <trace/events/scsi.h>
+#include <trace/hooks/scsi.h>
 
 #include "scsi_debugfs.h"
 #include "scsi_priv.h"
@@ -1918,6 +1919,7 @@ int scsi_mq_setup_tags(struct Scsi_Host *shost)
 	if (shost->host_tagset)
 		tag_set->flags |= BLK_MQ_F_TAG_HCTX_SHARED;
 
+	trace_android_vh_scsi_mq_setup_tags(shost);
 	return blk_mq_alloc_tag_set(tag_set);
 }
 
