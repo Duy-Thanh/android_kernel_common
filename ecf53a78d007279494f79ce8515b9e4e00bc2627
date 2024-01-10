@@ -94,6 +94,30 @@
       },
       "revId": "ecf53a78d007279494f79ce8515b9e4e00bc2627",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21b0483a_c31decc2",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1928416
+      },
+      "writtenOn": "2024-01-10T09:16:48Z",
+      "side": 0,
+      "message": "Hello folks,\n\nThanks for adding me on CC here. Yes, it was discussed a few times at LKML, but didn\u0027t get to mainline yet. It was as Di said, due to some more generic need.\n\nAlthough this small change suggested by Wei LGTM.\nI can see that patch on LKML and I will add a comment there.\n\nRegards,\nLukasz",
+      "parentUuid": "f2e59e4c_754e7ed8",
+      "range": {
+        "startLine": 713,
+        "startChar": 11,
+        "endLine": 713,
+        "endChar": 53
+      },
+      "revId": "ecf53a78d007279494f79ce8515b9e4e00bc2627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
