@@ -34,6 +34,24 @@
       "parentUuid": "1b3110ba_903a8949",
       "revId": "f49cf955e827db5632980ef04c8a509318756c28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72d4f654_a3819723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-10T19:12:54Z",
+      "side": 1,
+      "message": "Then we wait until they land. What is the urgency for this in android-mainline?",
+      "parentUuid": "333c9775_6bf2b72d",
+      "revId": "f49cf955e827db5632980ef04c8a509318756c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
