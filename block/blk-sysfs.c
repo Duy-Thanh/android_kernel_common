@@ -18,6 +18,8 @@
 #include "blk-mq-debugfs.h"
 #include "blk-wbt.h"
 
+#include <trace/hooks/block.h>
+
 struct queue_sysfs_entry {
 	struct attribute attr;
 	ssize_t (*show)(struct request_queue *, char *);
@@ -845,6 +847,8 @@ int blk_register_queue(struct gendisk *disk)
 
 	if (WARN_ON(!q))
 		return -ENXIO;
+
+	trace_android_vh_blk_register_queue(q, disk);
 
 	WARN_ONCE(blk_queue_registered(q),
 		  "%s is registering an already registered queue\n",
