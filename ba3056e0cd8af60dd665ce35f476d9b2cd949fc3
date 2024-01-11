@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000064637582",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2905567?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bf8baa4d_de80b31d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-11T03:25:33Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/1b6138385499507147e8f654840f4c39afe6adbf) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d1b6138385499507147e8f654840f4c39afe6adbf)\n\n```\n      ## fs/exfat/fatent.c ##\n     @@\n      #include \u003clinux/slab.h\u003e\n      #include \u003casm/unaligned.h\u003e\n      #include \u003clinux/buffer_head.h\u003e\n    -+#include \u003clinux/blkdev.h\u003e\n    ++#include \u003clinux/blk_types.h\u003e\n      \n      #include \"exfat_raw.h\"\n      #include \"exfat_fs.h\"\n    @@ fs/exfat/fatent.c: int exfat_zeroed_cluster(struct inode *dir, unsigned int clu)\n     -\tstruct buffer_head *bhs[MAX_BUF_PER_PAGE];\n     -\tint nr_bhs \u003d MAX_BUF_PER_PAGE;\n     +\tstruct buffer_head *bh;\n    ++\tstruct address_space *mapping \u003d sb-\u003es_bdev-\u003ebd_inode-\u003ei_mapping;\n      \tsector_t blknr, last_blknr;\n     -\tint err, i, n;\n     +\tint i;\n    @@ fs/exfat/fatent.c: int exfat_zeroed_cluster(struct inode *dir, unsigned int clu)\n     +\t\tbrelse(bh);\n      \t}\n     -\treturn 0;\n    ++\tif (IS_DIRSYNC(dir))\n    ++\t\treturn filemap_write_and_wait_range(mapping,\n    ++\t\t\t\tEXFAT_BLK_TO_B(blknr, sb),\n    ++\t\t\t\tEXFAT_BLK_TO_B(last_blknr, sb) - 1);\n      \n     -release_bhs:\n     -\texfat_err(sb, \"failed zeroed sect %llu\\n\", (unsigned long long)blknr);\n     -\tfor (i \u003d 0; i \u003c n; i++)\n     -\t\tbforget(bhs[i]);\n     -\treturn err;\n    -+\tif (IS_DIRSYNC(dir))\n    -+\t\treturn sync_blockdev_range(sb-\u003es_bdev,\n    -+\t\t\t\tEXFAT_BLK_TO_B(blknr, sb),\n    -+\t\t\t\tEXFAT_BLK_TO_B(last_blknr, sb) - 1);\n    -+\n     +\treturn 0;\n      }\n      \n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 597220718 android-build.ayeaye-python-dispatcher_20240110.04_p0",
+      "revId": "ba3056e0cd8af60dd665ce35f476d9b2cd949fc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
