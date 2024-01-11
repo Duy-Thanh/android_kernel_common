@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad837727_970cc512",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-01-11T12:44:24Z",
+      "side": 1,
+      "message": "\u003e Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\n\u003e Checked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/1b6138385499507147e8f654840f4c39afe6adbf) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d1b6138385499507147e8f654840f4c39afe6adbf)\n\u003e \n\u003e ```\n\u003e       ## fs/exfat/fatent.c ##\n\u003e      @@\n\u003e       #include \u003clinux/slab.h\u003e\n\u003e       #include \u003casm/unaligned.h\u003e\n\u003e       #include \u003clinux/buffer_head.h\u003e\n\u003e     -+#include \u003clinux/blkdev.h\u003e\n\u003e     ++#include \u003clinux/blk_types.h\u003e\n\u003e       \n\u003e       #include \"exfat_raw.h\"\n\u003e       #include \"exfat_fs.h\"\n\u003e     @@ fs/exfat/fatent.c: int exfat_zeroed_cluster(struct inode *dir, unsigned int clu)\n\u003e      -\tstruct buffer_head *bhs[MAX_BUF_PER_PAGE];\n\u003e      -\tint nr_bhs \u003d MAX_BUF_PER_PAGE;\n\u003e      +\tstruct buffer_head *bh;\n\u003e     ++\tstruct address_space *mapping \u003d sb-\u003es_bdev-\u003ebd_inode-\u003ei_mapping;\n\u003e       \tsector_t blknr, last_blknr;\n\u003e      -\tint err, i, n;\n\u003e      +\tint i;\n\u003e     @@ fs/exfat/fatent.c: int exfat_zeroed_cluster(struct inode *dir, unsigned int clu)\n\u003e      +\t\tbrelse(bh);\n\u003e       \t}\n\u003e      -\treturn 0;\n\u003e     ++\tif (IS_DIRSYNC(dir))\n\u003e     ++\t\treturn filemap_write_and_wait_range(mapping,\n\u003e     ++\t\t\t\tEXFAT_BLK_TO_B(blknr, sb),\n\u003e     ++\t\t\t\tEXFAT_BLK_TO_B(last_blknr, sb) - 1);\n\u003e       \n\u003e      -release_bhs:\n\u003e      -\texfat_err(sb, \"failed zeroed sect %llu\\n\", (unsigned long long)blknr);\n\u003e      -\tfor (i \u003d 0; i \u003c n; i++)\n\u003e      -\t\tbforget(bhs[i]);\n\u003e      -\treturn err;\n\u003e     -+\tif (IS_DIRSYNC(dir))\n\u003e     -+\t\treturn sync_blockdev_range(sb-\u003es_bdev,\n\u003e     -+\t\t\t\tEXFAT_BLK_TO_B(blknr, sb),\n\u003e     -+\t\t\t\tEXFAT_BLK_TO_B(last_blknr, sb) - 1);\n\u003e     -+\n\u003e      +\treturn 0;\n\u003e       }\n\u003e       \n\u003e ```\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nSo, at least this needs to be `BACKPORT`. And, was this not suitable for stable@k.o ?",
+      "parentUuid": "bf8baa4d_de80b31d",
+      "revId": "ba3056e0cd8af60dd665ce35f476d9b2cd949fc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
