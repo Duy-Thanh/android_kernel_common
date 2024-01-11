@@ -155,6 +155,24 @@
       "parentUuid": "45497ce7_b2786151",
       "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de35b4b0_75a63c42",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-11T17:31:56Z",
+      "side": 1,
+      "message": "That\u0027s great. Since Rafael has added it to his tree, please change it to \"FROMGIT\" and add the citation to the patch in his tree. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md#requirements-for-other-backports",
+      "parentUuid": "e43e414a_8953ae27",
+      "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
