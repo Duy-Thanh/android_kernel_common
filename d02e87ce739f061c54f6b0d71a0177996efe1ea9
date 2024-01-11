@@ -137,6 +137,24 @@
       "message": "checkpatch flags this line as too long (which should be fixed in the upstream submittal)",
       "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e43e414a_8953ae27",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2024-01-11T03:36:51Z",
+      "side": 1,
+      "message": "Hi Todd,\nThe new patch version suggested by Wei is accepted at LKML.\nPatchset2 is a new porting FROMLIST. Please review. Thank you.",
+      "parentUuid": "45497ce7_b2786151",
+      "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
