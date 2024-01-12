@@ -1620,7 +1620,7 @@ int snd_usb_endpoint_start(struct snd_usb_endpoint *ep)
 			goto __error;
 		}
 
-		err = usb_submit_urb(urb, GFP_ATOMIC);
+		err = -EOPNOTSUPP;
 		if (err < 0) {
 			usb_audio_err(ep->chip,
 				"cannot submit urb %d, error %d: %s\n",
