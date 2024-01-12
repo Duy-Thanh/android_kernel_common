@@ -35166,6 +35166,10 @@ member {
   type_id: 0x048fc360
 }
 member {
+  id: 0x23531e28
+  type_id: 0x026208b2
+}
+member {
   id: 0x2380a48f
   type_id: 0x012ce22f
 }
@@ -35915,6 +35919,11 @@ member {
 member {
   id: 0x34a07023
   type_id: 0x5dafb09e
+}
+member {
+  id: 0x34aaae1a
+  type_id: 0x5d84d1ff
+  offset: 24
 }
 member {
   id: 0x34adb3c9
@@ -46136,10 +46145,10 @@ member {
   offset: 160
 }
 member {
-  id: 0xb2dd57f2
+  id: 0xb2dd5b41
   name: "autoconf"
   type_id: 0xb3e7bac9
-  offset: 30
+  offset: 6
   bitsize: 1
 }
 member {
@@ -128349,10 +128358,10 @@ member {
   offset: 9920
 }
 member {
-  id: 0x7adb50ba
+  id: 0x7adb5caf
   name: "onlink"
   type_id: 0xb3e7bac9
-  offset: 31
+  offset: 7
   bitsize: 1
 }
 member {
@@ -149836,10 +149845,9 @@ member {
   bitsize: 40
 }
 member {
-  id: 0x688b9047
+  id: 0x688b9626
   name: "reserved"
   type_id: 0xb3e7bac9
-  offset: 24
   bitsize: 6
 }
 member {
@@ -190430,6 +190438,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x026208b2
+  kind: STRUCT
+  definition {
+    bytesize: 1
+    member_id: 0x688b9626
+    member_id: 0xb2dd5b41
+    member_id: 0x7adb5caf
+  }
+}
+struct_union {
   id: 0x02c70092
   kind: STRUCT
   definition {
@@ -194839,6 +194857,15 @@ struct_union {
     member_id: 0x2e1d39f7
     member_id: 0x8d88e301
     member_id: 0x8c9fd173
+  }
+}
+struct_union {
+  id: 0x5d84d1ff
+  kind: UNION
+  definition {
+    bytesize: 1
+    member_id: 0x2ddb63e4
+    member_id: 0x23531e28
   }
 }
 struct_union {
@@ -226215,9 +226242,7 @@ struct_union {
     member_id: 0x5ce532c4
     member_id: 0xb5de8e04
     member_id: 0x2165da89
-    member_id: 0x688b9047
-    member_id: 0xb2dd57f2
-    member_id: 0x7adb50ba
+    member_id: 0x34aaae1a
     member_id: 0xe91a1d71
     member_id: 0xbada6e7d
     member_id: 0x08cabd3c
@@ -276266,6 +276291,13 @@ function {
   parameter_id: 0x347303b4
 }
 function {
+  id: 0x7ad03bcc
+  return_type_id: 0x09626b7f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x2fa7f388
+  parameter_id: 0x316cc8eb
+}
+function {
   id: 0x7b05d834
   return_type_id: 0x347303b4
   parameter_id: 0x347303b4
@@ -293583,6 +293615,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x026525e9
   parameter_id: 0x0aa1f0ee
+}
+function {
+  id: 0x9d3354d9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x09626b7f
 }
 function {
   id: 0x9d356d81
@@ -320566,6 +320604,24 @@ elf_symbol {
   crc: 0xd4a12ea1
   type_id: 0x9c874975
   full_name: "devm_mfd_add_devices"
+}
+elf_symbol {
+  id: 0x6e37c2ad
+  name: "devm_mipi_dsi_attach"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9fca9eb4
+  type_id: 0x9d3354d9
+  full_name: "devm_mipi_dsi_attach"
+}
+elf_symbol {
+  id: 0x91f58d29
+  name: "devm_mipi_dsi_device_register_full"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7e564e80
+  type_id: 0x7ad03bcc
+  full_name: "devm_mipi_dsi_device_register_full"
 }
 elf_symbol {
   id: 0x7abe395b
@@ -363966,6 +364022,8 @@ interface {
   symbol_id: 0x888f691d
   symbol_id: 0x86c1623f
   symbol_id: 0x36e39cf6
+  symbol_id: 0x6e37c2ad
+  symbol_id: 0x91f58d29
   symbol_id: 0x7abe395b
   symbol_id: 0xa8b058e5
   symbol_id: 0x47264dbb
