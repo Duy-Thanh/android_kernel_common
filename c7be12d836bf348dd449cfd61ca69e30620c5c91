@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000064765272",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2908099?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bb8b3c6e_57972d18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-12T02:13:07Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2853959](https://r.android.com/c/2853959) on branch android14-5.15.\n\n```\n      ## drivers/android/binder_alloc.c ##\n     @@ drivers/android/binder_alloc.c: static bool debug_low_async_space_locked(struct binder_alloc *alloc, int pid)\n    @@ drivers/android/binder_alloc.c: static bool debug_low_async_space_locked(struct\n      \t}\n      \n     @@ drivers/android/binder_alloc.c: static struct binder_buffer *binder_alloc_new_buf_locked(\n    - \t/* Pad 0-size buffers so they get assigned unique addresses */\n    - \tsize \u003d max(size, sizeof(void *));\n    - \n    --\tif (is_async \u0026\u0026\n    --\t    alloc-\u003efree_async_space \u003c size + sizeof(struct binder_buffer)) {\n    + \t\treturn ERR_PTR(-EINVAL);\n    + \t}\n    + \ttrace_android_vh_binder_alloc_new_buf_locked(size, \u0026alloc-\u003efree_async_space, is_async);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (d99d9f ANDROID: arm64: Disable workaround for CPU errata 2441007 an)\n    + \tif (is_async \u0026\u0026\n    + \t    alloc-\u003efree_async_space \u003c size + sizeof(struct binder_buffer)) {\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\n    ++\t/* Pad 0-size buffers so they get assigned unique addresses */\n    ++\tsize \u003d max(size, sizeof(void *));\n    ++\n     +\tif (is_async \u0026\u0026 alloc-\u003efree_async_space \u003c size) {\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (11ca07 FROMGIT: binder: fix unused alloc-\u003efree_async_space)\n      \t\tbinder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,\n      \t\t\t     \"%d: binder_alloc_buf size %zd failed, no async space left\\n\",\n      \t\t\t      alloc-\u003epid, size);\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 597526587 android-build.ayeaye-python-dispatcher_20240111.04_p0",
+      "revId": "c7be12d836bf348dd449cfd61ca69e30620c5c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000064765272",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2908099?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6f20861a_0c18fb3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-12T02:13:07Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 597526587 android-build.ayeaye-python-dispatcher_20240111.04_p0",
+      "revId": "c7be12d836bf348dd449cfd61ca69e30620c5c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
