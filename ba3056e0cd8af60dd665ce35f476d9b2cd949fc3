@@ -17,6 +17,24 @@
       "parentUuid": "bf8baa4d_de80b31d",
       "revId": "ba3056e0cd8af60dd665ce35f476d9b2cd949fc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f6bcd21_75eb53f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083383
+      },
+      "writtenOn": "2024-01-12T03:01:53Z",
+      "side": 1,
+      "message": "I\u0027ve changed the title to BACKPORT. The patch was cherry-picked from android13-5.10 and modified nothing. It should have no large difference between android12-5.10.",
+      "parentUuid": "ad837727_970cc512",
+      "revId": "ba3056e0cd8af60dd665ce35f476d9b2cd949fc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
