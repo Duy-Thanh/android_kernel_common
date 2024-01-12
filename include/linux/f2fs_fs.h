@@ -359,6 +359,17 @@ enum {
 };
 
 #define OFFSET_BIT_MASK		GENMASK(OFFSET_BIT_SHIFT - 1, 0)
+<<<<<<< HEAD   (f6d42f ANDROID: gki_defconfig: enable CONFIG_TASK_DELAY_ACCT)
+=======
+
+struct node_footer {
+	__le32 nid;		/* node id */
+	__le32 ino;		/* inode number */
+	__le32 flag;		/* include cold/fsync/dentry marks and offset */
+	__le64 cp_ver;		/* checkpoint version */
+	__le32 next_blkaddr;	/* next node page block address */
+} __packed;
+>>>>>>> BRANCH (7c58bf Linux 6.1.72)
 
 struct f2fs_node {
 	/* can be one of three types: inode, direct, and indirect types */

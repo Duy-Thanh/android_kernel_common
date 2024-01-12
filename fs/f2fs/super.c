@@ -666,7 +666,11 @@ static int f2fs_set_zstd_level(struct f2fs_sb_info *sbi, const char *str)
 	if (kstrtouint(str + 1, 10, &level))
 		return -EINVAL;
 
+<<<<<<< HEAD   (f6d42f ANDROID: gki_defconfig: enable CONFIG_TASK_DELAY_ACCT)
 	if (!f2fs_is_compress_level_valid(COMPRESS_ZSTD, level)) {
+=======
+	if (level < zstd_min_clevel() || level > zstd_max_clevel()) {
+>>>>>>> BRANCH (7c58bf Linux 6.1.72)
 		f2fs_info(sbi, "invalid zstd compress level: %d", level);
 		return -EINVAL;
 	}
@@ -4067,6 +4071,7 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
 
 	f2fs_down_write(&sbi->sb_lock);
 
+<<<<<<< HEAD   (f6d42f ANDROID: gki_defconfig: enable CONFIG_TASK_DELAY_ACCT)
 	spin_lock_irqsave(&sbi->error_lock, flags);
 	if (sbi->error_dirty) {
 		memcpy(F2FS_RAW_SUPER(sbi)->s_errors, sbi->errors,
@@ -4075,6 +4080,10 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
 	}
 	memcpy(raw_super->s_stop_reason, sbi->stop_reason, MAX_STOP_REASON);
 	spin_unlock_irqrestore(&sbi->error_lock, flags);
+=======
+	if (raw_super->s_stop_reason[reason] < GENMASK(BITS_PER_BYTE - 1, 0))
+		raw_super->s_stop_reason[reason]++;
+>>>>>>> BRANCH (7c58bf Linux 6.1.72)
 
 	err = f2fs_commit_super(sbi, false);
 
