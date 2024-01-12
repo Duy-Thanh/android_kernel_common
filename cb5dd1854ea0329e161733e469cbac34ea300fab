@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ef6934a_1dd768e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-01-12T11:05:51Z",
+      "side": 1,
+      "message": "Please apply the appropriate tag for this change (FROMLIST, FROMGIT or UPSTREAM) as documented here: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline#common-kernel-patch-requirements",
+      "revId": "cb5dd1854ea0329e161733e469cbac34ea300fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
