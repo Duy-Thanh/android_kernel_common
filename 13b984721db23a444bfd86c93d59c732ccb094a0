@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9c28223_e45e048a",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "I have changed it to `dev_dbg()`",
+      "parentUuid": "c0b970c0_2c599fa7",
+      "range": {
+        "startLine": 395,
+        "startChar": 2,
+        "endLine": 395,
+        "endChar": 10
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80b35770_344d3985",
         "filename": "drivers/usb/gadget/function/f_accessory.c",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-05T09:06:38Z",
       "side": 1,
       "message": "no returning an error?",
+      "range": {
+        "startLine": 430,
+        "startChar": 2,
+        "endLine": 430,
+        "endChar": 8
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8686dd84_5b3296f3",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "The `acc_complete_set_string` function is invoked upon the completion of a request. This [callback function](https://source.corp.google.com/h/android/kernel/superproject/+/common-android-mainline:common/include/linux/usb/gadget.h;drc\u003d14a91ec64347dee6a4f33f0033e77e2b2ee8d57c;bpv\u003d1;bpt\u003d1;l\u003d115) is registered for the `ACCESSORY_SEND_STRING` request. It is my understanding that an error cannot be returned from the complete callback function because complete function signature is returning `void`.\n\nAs I checked at other places, for example [bulk_in_complete](https://source.corp.google.com/h/android/kernel/superproject/+/common-android-mainline:common/drivers/usb/gadget/function/f_mass_storage.c;drc\u003d9c58a2f25f001e5ff9586695d7e49140e611f415;bpv\u003d1;bpt\u003d1;l\u003d414?gsn\u003dbulk_in_complete\u0026gs\u003dKYTHE%3A%2F%2Fkythe%3A%2F%2Fandroid.googlesource.com%2Fkernel%2Fsuperproject%2F%2Fcommon-android-mainline%3Flang%3Dc%252B%252B%3Fpath%3Dcommon%2Fdrivers%2Fusb%2Fgadget%2Ffunction%2Ff_mass_storage.c%23XCeCAp1PdRPIy2wCFJb4cX_mUp6y5pEk6tHYu1uenC0) also does not return an error for a complete callback.",
+      "parentUuid": "80b35770_344d3985",
       "range": {
         "startLine": 430,
         "startChar": 2,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6134d283_d514a269",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "The `acc_complete_set_hid_report_desc` function is invoked upon the completion of a request. \nThis callback function is registered for the `ACCESSORY_SET_HID_REPORT_DESC` request. It is my understanding that an error cannot be returned from within a callback function.",
+      "parentUuid": "a3650423_f304f89a",
+      "range": {
+        "startLine": 479,
+        "startChar": 2,
+        "endLine": 479,
+        "endChar": 8
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "022e97a4_08ac973b",
         "filename": "drivers/usb/gadget/function/f_accessory.c",
         "patchSetId": 7
@@ -83,6 +155,30 @@
       "writtenOn": "2024-01-05T09:06:38Z",
       "side": 1,
       "message": "ftrace is your friend, lines like this are never needed.",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 1
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12b46a5f_1f7a4761",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "Thanks for highlighting it. I have removed it now.",
+      "parentUuid": "022e97a4_08ac973b",
       "range": {
         "startLine": 639,
         "startChar": 0,
@@ -106,6 +202,30 @@
       "writtenOn": "2024-01-05T09:06:38Z",
       "side": 1,
       "message": "wrong error code, right?",
+      "range": {
+        "startLine": 644,
+        "startChar": 10,
+        "endLine": 644,
+        "endChar": 16
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "027d6126_3d461438",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "As far as I checked, I have found that all other instances are returning the `-ENODEV` error for the usb_ep_autoconfig function. For instance, [this](https://source.corp.google.com/h/android/kernel/superproject/+/common-android-mainline:common/drivers/usb/gadget/function/f_ecm.c;l\u003d733?q\u003dusb_ep_autoconfig\u0026ss\u003dh%2Fandroid%2Fkernel%2Fsuperproject%2F%2B%2Frefs%2Fheads%2Fcommon-android-mainline) code also returning the `-ENODEV` error.\n\nCould you please recommend what error code should be returned from here ?",
+      "parentUuid": "5f51d0ab_a9682120",
       "range": {
         "startLine": 644,
         "startChar": 10,

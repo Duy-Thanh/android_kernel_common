@@ -33,6 +33,24 @@
       "message": "Update",
       "revId": "0a83a96187b352343511f68fdb12504e9e8f2088",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c15e9443_d65ddb29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "checkpatch test cases are passing now.",
+      "parentUuid": "c89f8a34_6590015e",
+      "revId": "0a83a96187b352343511f68fdb12504e9e8f2088",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

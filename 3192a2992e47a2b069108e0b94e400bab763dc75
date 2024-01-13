@@ -96,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27b93a09_e0d9bae3",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "I agree with you. Ideally, this logic should not be present within an `#ifdef` conditional statement.\n\nOne potential solution would be to create a new c file, encapsulating all of the logic and providing hooks to invoke the functions. However, based on my understanding, this approach may introduce additional complexity and require a significant investment of time.\n\nIn any case, as indicated in b/120441124#comment29,\nwe plan to propose these changes to upstream. I welcome your thoughts and insights on this matter.",
+      "parentUuid": "795e296a_c5956394",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ad5735b_037aa507",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 3
@@ -107,6 +131,30 @@
       "writtenOn": "2024-01-03T09:19:22Z",
       "side": 1,
       "message": "when drivers work properly, they are quiet.\n\nAlso, no driver should be calling pr_*() functions, use the proper dev_*() calls instead.",
+      "range": {
+        "startLine": 1487,
+        "startChar": 2,
+        "endLine": 1487,
+        "endChar": 9
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56f6cacc_7ea9caa5",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1487,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "Thanks a lot for highlighting it. I have changed it to `dev_info`",
+      "parentUuid": "0ad5735b_037aa507",
       "range": {
         "startLine": 1487,
         "startChar": 2,
@@ -142,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f491c1b_b63f194d",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "I agree. I converted it to the error message.\n\nThe `android_work` function will execute on the worker thread. From my understanding, the work function that will run on the worker thread does not need to return an error. Ideally, errors should be handled gracefully and resources should be released. In our case, whenever an error occurs, I am logging the error. Since I do not have any resources, I have not performed any resource-related actions.\n\nI have checked the other instances which are doing the similar behavior. For example: [hub.c](https://source.corp.google.com/h/android/kernel/superproject/+/common-android-mainline:common/drivers/usb/core/hub.c;l\u003d839;drc\u003d14a91ec64347dee6a4f33f0033e77e2b2ee8d57c?q\u003dINIT_WORK\u0026ss\u003dh%2Fandroid%2Fkernel%2Fsuperproject%2F%2B%2Frefs%2Fheads%2Fcommon-android-mainline:common%2Fdrivers%2Fusb%2F\u0026start\u003d1)",
+      "parentUuid": "0a20c3e5_a58366f2",
+      "range": {
+        "startLine": 1504,
+        "startChar": 2,
+        "endLine": 1504,
+        "endChar": 9
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c944f51b_508e0041",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 3
@@ -153,6 +225,30 @@
       "writtenOn": "2024-01-03T09:19:22Z",
       "side": 1,
       "message": "you just raced with userspace and lost 😞\n\nNever manually add sysfs files to a device like this, do it correctly with a default group.\n\nBut step back, why are you creating a \"bare\" struct device anyway?  What is going to use this?  Where is the documentation in Documentation/ABI/ for the items you are creating and the sysfs files / userspace api you are adding and using?",
+      "range": {
+        "startLine": 1785,
+        "startChar": 8,
+        "endLine": 1785,
+        "endChar": 26
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff81f9ea_8cdd0a85",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1785,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "I used default group to create the sysfs device and added the ABI documentation for it.\nWe are using this sysfs file in the Android userspace to update the state. You can find source code [here](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/base/services/usb/java/com/android/server/usb/UsbDeviceManager.java;l\u003d141;bpv\u003d1;bpt\u003d1)",
+      "parentUuid": "c944f51b_508e0041",
       "range": {
         "startLine": 1785,
         "startChar": 8,
@@ -182,6 +278,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cda35255_78f05a9f",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1803,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "I removed this code.",
+      "parentUuid": "3ea13c5a_2fc4c2a4",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94fcdd9c_6d591f53",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 3
@@ -199,6 +313,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b52625a3_79d58406",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1809,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "Yes, it would be preferable for these functions to be declared in the .h file. However, this is not currently possible as they require the `gadget_info*` parameter, which is only defined within this class.\n\nIf we want to move these functions to the .h file, we would also need to move the `gadget_info*` definition as well. I plan to move `gadget_info*` to the .h file as part of the upcoming upstream work, at which point I will also move these functions.",
+      "parentUuid": "94fcdd9c_6d591f53",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fb2c577_060f8141",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 3
@@ -210,6 +342,30 @@
       "writtenOn": "2024-01-03T09:19:22Z",
       "side": 1,
       "message": "this function is going away, as per the upstream work to remove it.  Please use class_register/class_deregister() instead, it\u0027s safer and simpler.",
+      "range": {
+        "startLine": 1934,
+        "startChar": 17,
+        "endLine": 1934,
+        "endChar": 29
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0838eac6_bef04297",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1934,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "I have used `class_register` and `class_deregister` function.",
+      "parentUuid": "4fb2c577_060f8141",
       "range": {
         "startLine": 1934,
         "startChar": 17,
@@ -245,6 +401,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "583b14bd_595019f6",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "Changed year and author as per https://g3doc.corp.google.com/company/teams/opensource/copyright.md?cl\u003dhead document",
+      "parentUuid": "281e7cb2_37dab5d1",
+      "range": {
+        "startLine": 5,
+        "startChar": 17,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d80f2a29_a736600c",
         "filename": "drivers/usb/gadget/function/f_accessory.c",
         "patchSetId": 3
@@ -256,6 +436,30 @@
       "writtenOn": "2024-01-03T09:12:25Z",
       "side": 1,
       "message": "no license boilerplate please.",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 2
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401f818f_6b05e87c",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "removed the license boilerplate",
+      "parentUuid": "d80f2a29_a736600c",
       "range": {
         "startLine": 8,
         "startChar": 1,
@@ -285,6 +489,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d00cb540_4b350c7b",
+        "filename": "include/linux/usb/f_accessory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "removed this file",
+      "parentUuid": "48d090dd_a73c5302",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4f92afb_6dfd8b7f",
         "filename": "include/uapi/linux/usb/f_accessory.h",
         "patchSetId": 3
@@ -296,6 +518,30 @@
       "writtenOn": "2024-01-03T09:19:22Z",
       "side": 1,
       "message": "why this magic number?",
+      "range": {
+        "startLine": 135,
+        "startChar": 62,
+        "endLine": 135,
+        "endChar": 65
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2e1ce43_ed88b674",
+        "filename": "include/uapi/linux/usb/f_accessory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-01-13T07:24:30Z",
+      "side": 1,
+      "message": "I use #define to make it 256 as a constant.",
+      "parentUuid": "d4f92afb_6dfd8b7f",
       "range": {
         "startLine": 135,
         "startChar": 62,
