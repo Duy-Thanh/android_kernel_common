@@ -120,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0eee4da_8028a4e5",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "I will make the same comment upstream if you submit this there, please put the #ifdef logic in a .h file, that is where it belongs.  For some things in here, it is trivial to do so, for the structure, you should just have a separate structure and just add it as a single variable, not lots of different fields.",
+      "parentUuid": "27b93a09_e0d9bae3",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ad5735b_037aa507",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 3
@@ -318,6 +342,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd26ab8_c29e183c",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1803,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cda35255_78f05a9f",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94fcdd9c_6d591f53",
@@ -349,6 +391,24 @@
       "side": 1,
       "message": "Yes, it would be preferable for these functions to be declared in the .h file. However, this is not currently possible as they require the `gadget_info*` parameter, which is only defined within this class.\n\nIf we want to move these functions to the .h file, we would also need to move the `gadget_info*` definition as well. I plan to move `gadget_info*` to the .h file as part of the upcoming upstream work, at which point I will also move these functions.",
       "parentUuid": "94fcdd9c_6d591f53",
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5dc0ea2_906551fd",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1809,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Please just do it now, it will make everything much simpler overall.",
+      "parentUuid": "b52625a3_79d58406",
       "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -390,6 +450,30 @@
       "side": 1,
       "message": "I have used `class_register` and `class_deregister` function.",
       "parentUuid": "4fb2c577_060f8141",
+      "range": {
+        "startLine": 1934,
+        "startChar": 17,
+        "endLine": 1934,
+        "endChar": 29
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2eed063_2d039c52",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1934,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0838eac6_bef04297",
       "range": {
         "startLine": 1934,
         "startChar": 17,
@@ -447,6 +531,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "864858b4_e4aa4a90",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "583b14bd_595019f6",
+      "range": {
+        "startLine": 5,
+        "startChar": 17,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d80f2a29_a736600c",
@@ -484,6 +592,30 @@
       "side": 1,
       "message": "removed the license boilerplate",
       "parentUuid": "d80f2a29_a736600c",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 2
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "740f126f_3ff78ce5",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "401f818f_6b05e87c",
       "range": {
         "startLine": 8,
         "startChar": 1,
@@ -566,6 +698,30 @@
       "side": 1,
       "message": "I use #define to make it 256 as a constant.",
       "parentUuid": "d4f92afb_6dfd8b7f",
+      "range": {
+        "startLine": 135,
+        "startChar": 62,
+        "endLine": 135,
+        "endChar": 65
+      },
+      "revId": "3192a2992e47a2b069108e0b94e400bab763dc75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c2eac22_8f8f47a6",
+        "filename": "include/uapi/linux/usb/f_accessory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2e1ce43_ed88b674",
       "range": {
         "startLine": 135,
         "startChar": 62,

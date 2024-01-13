@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e48419a_dc579c99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Has the previously identified race conditions been handled here as well, or is that going to be an add-on change?",
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dc92b64_58e96d79",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1450,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "static constant for these string arrays?",
+      "range": {
+        "startLine": 1450,
+        "startChar": 1,
+        "endLine": 1450,
+        "endChar": 5
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0b984b9_f782ee03",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "please just use 3 differently named variables, this logic is impossible to debug and understand at a glance.",
+      "range": {
+        "startLine": 1454,
+        "startChar": 0,
+        "endLine": 1454,
+        "endChar": 42
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1267dd4f_2a2bf3a9",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "sysfs_emit()",
+      "range": {
+        "startLine": 1742,
+        "startChar": 8,
+        "endLine": 1742,
+        "endChar": 15
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6b96eef_3728cbfc",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "nit, blank line not needed.",
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06321152_d211b4e1",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1775,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "not needed, are you sure you ran checkpatch?",
+      "range": {
+        "startLine": 1775,
+        "startChar": 1,
+        "endLine": 1775,
+        "endChar": 5
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffcdc2ea_69d7a649",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "`dev_err()` please.  Again, NO `pr_*` calls in a driver.",
+      "range": {
+        "startLine": 420,
+        "startChar": 2,
+        "endLine": 420,
+        "endChar": 8
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71b7ba0_26f55147",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "`dev_dbg()` please.  Do not use `DBG()` macros, those are VERY old from the 2.6.y days of the USB stack and need to be removed, and they just resolve to `dev_dbg()` anyway.",
+      "range": {
+        "startLine": 635,
+        "startChar": 1,
+        "endLine": 635,
+        "endChar": 4
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7816569a_c68881e1",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "I shouldn\u0027t have to call out every use of stuff like this, you fixed this up elsewhere, right?",
+      "range": {
+        "startLine": 688,
+        "startChar": 0,
+        "endLine": 688,
+        "endChar": 40
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ae0d14_27e33a6c",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "You just crashed and rebooted the device, are you SURE you wanted to do that?",
+      "range": {
+        "startLine": 912,
+        "startChar": 1,
+        "endLine": 912,
+        "endChar": 8
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

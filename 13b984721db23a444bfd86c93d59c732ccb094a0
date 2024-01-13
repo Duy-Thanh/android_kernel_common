@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8d3496f_786eabc9",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9c28223_e45e048a",
+      "range": {
+        "startLine": 395,
+        "startChar": 2,
+        "endLine": 395,
+        "endChar": 10
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80b35770_344d3985",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "152aff0c_6769a093",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8686dd84_5b3296f3",
+      "range": {
+        "startLine": 430,
+        "startChar": 2,
+        "endLine": 430,
+        "endChar": 8
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3650423_f304f89a",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "The `acc_complete_set_hid_report_desc` function is invoked upon the completion of a request. \nThis callback function is registered for the `ACCESSORY_SET_HID_REPORT_DESC` request. It is my understanding that an error cannot be returned from within a callback function.",
       "parentUuid": "a3650423_f304f89a",
+      "range": {
+        "startLine": 479,
+        "startChar": 2,
+        "endLine": 479,
+        "endChar": 8
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7308c3fa_008b01ea",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6134d283_d514a269",
       "range": {
         "startLine": 479,
         "startChar": 2,
@@ -226,6 +298,30 @@
       "side": 1,
       "message": "As far as I checked, I have found that all other instances are returning the `-ENODEV` error for the usb_ep_autoconfig function. For instance, [this](https://source.corp.google.com/h/android/kernel/superproject/+/common-android-mainline:common/drivers/usb/gadget/function/f_ecm.c;l\u003d733?q\u003dusb_ep_autoconfig\u0026ss\u003dh%2Fandroid%2Fkernel%2Fsuperproject%2F%2B%2Frefs%2Fheads%2Fcommon-android-mainline) code also returning the `-ENODEV` error.\n\nCould you please recommend what error code should be returned from here ?",
       "parentUuid": "5f51d0ab_a9682120",
+      "range": {
+        "startLine": 644,
+        "startChar": 10,
+        "endLine": 644,
+        "endChar": 16
+      },
+      "revId": "13b984721db23a444bfd86c93d59c732ccb094a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "845f2dbb_f7ed25c0",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T16:54:22Z",
+      "side": 1,
+      "message": "Sorry, you are right, this is fine.",
+      "parentUuid": "027d6126_3d461438",
       "range": {
         "startLine": 644,
         "startChar": 10,
