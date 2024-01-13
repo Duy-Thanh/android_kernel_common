@@ -106,6 +106,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c45744da_2901a40a",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1527,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-01-13T17:33:45Z",
+      "side": 1,
+      "message": "While refactoring, I believe we need to re-work this function to address the issue fixed in https://lore.kernel.org/linux-usb/1566846655-23935-1-git-send-email-peter.chen@nxp.com/",
+      "range": {
+        "startLine": 1527,
+        "startChar": 34,
+        "endLine": 1527,
+        "endChar": 49
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2665c303_00f6bc2d",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 8
