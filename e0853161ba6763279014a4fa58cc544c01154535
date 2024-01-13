@@ -324,6 +324,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c521c5fa_812caf04",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T17:46:39Z",
+      "side": 1,
+      "message": "are you sure these empty functions are needed?  If so, comment why.",
+      "range": {
+        "startLine": 510,
+        "startChar": 12,
+        "endLine": 510,
+        "endChar": 24
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c71b7ba0_26f55147",
         "filename": "drivers/usb/gadget/function/f_accessory.c",
         "patchSetId": 8
@@ -386,6 +409,29 @@
         "startChar": 1,
         "endLine": 912,
         "endChar": 8
+      },
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5686f940_fb9cf4a6",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1413,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-13T17:46:39Z",
+      "side": 1,
+      "message": "you have multiple different objects, with different lifetimes and owners of those lifetimes, interacting in subtle and tricky ways, so this MUST be documented somehow as to how this should work and how they interact properly.\n\nAs is, I can\u0027t figure it out at all...",
+      "range": {
+        "startLine": 1413,
+        "startChar": 7,
+        "endLine": 1413,
+        "endChar": 20
       },
       "revId": "e0853161ba6763279014a4fa58cc544c01154535",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
