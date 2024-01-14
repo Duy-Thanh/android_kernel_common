@@ -264,6 +264,29 @@ static void lz4_destroy_compress_ctx(struct compress_ctx *cc)
 	cc->private = NULL;
 }
 
+<<<<<<< HEAD   (efec95 Revert "device property: Allow const parameter to dev_fwnode)
+=======
+#ifdef CONFIG_F2FS_FS_LZ4HC
+static int lz4hc_compress_pages(struct compress_ctx *cc)
+{
+	unsigned char level = F2FS_I(cc->inode)->i_compress_level;
+	int len;
+
+	if (level)
+		len = LZ4_compress_HC(cc->rbuf, cc->cbuf->cdata, cc->rlen,
+					cc->clen, level, cc->private);
+	else
+		len = LZ4_compress_default(cc->rbuf, cc->cbuf->cdata, cc->rlen,
+						cc->clen, cc->private);
+	if (!len)
+		return -EAGAIN;
+
+	cc->clen = len;
+	return 0;
+}
+#endif
+
+>>>>>>> BRANCH (7c58bf Linux 6.1.72)
 static int lz4_compress_pages(struct compress_ctx *cc)
 {
 	int len = -EINVAL;
@@ -317,8 +340,6 @@ static const struct f2fs_compress_ops f2fs_lz4_ops = {
 #endif
 
 #ifdef CONFIG_F2FS_FS_ZSTD
-#define F2FS_ZSTD_DEFAULT_CLEVEL	1
-
 static int zstd_init_compress_ctx(struct compress_ctx *cc)
 {
 	zstd_parameters params;
@@ -327,6 +348,7 @@ static int zstd_init_compress_ctx(struct compress_ctx *cc)
 	unsigned int workspace_size;
 	unsigned char level = F2FS_I(cc->inode)->i_compress_level;
 
+	/* Need to remain this for backward compatibility */
 	if (!level)
 		level = F2FS_ZSTD_DEFAULT_CLEVEL;
 
