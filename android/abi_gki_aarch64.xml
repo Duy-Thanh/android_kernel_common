@@ -24,6 +24,7 @@
       <elf-symbol name='__bitmap_and' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x39b52d19'/>
       <elf-symbol name='__bitmap_andnot' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xadfdfcef'/>
       <elf-symbol name='__bitmap_clear' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x922f45a6'/>
+      <elf-symbol name='__bitmap_equal' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf3e6402e'/>
       <elf-symbol name='__bitmap_or' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa084749a'/>
       <elf-symbol name='__bitmap_parse' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4df119fa'/>
       <elf-symbol name='__bitmap_set' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x615911d7'/>
@@ -961,6 +962,7 @@
       <elf-symbol name='device_link_del' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7d5cc4b8'/>
       <elf-symbol name='device_match_fwnode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x78d32ef'/>
       <elf-symbol name='device_match_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x38e9add6'/>
+      <elf-symbol name='device_match_of_node' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x59075f9e'/>
       <elf-symbol name='device_move' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x93108dfe'/>
       <elf-symbol name='device_property_present' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x68dadcd6'/>
       <elf-symbol name='device_property_read_string' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x666bbe22'/>
@@ -1727,6 +1729,7 @@
       <elf-symbol name='gpiod_direction_output_raw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe6a85c24'/>
       <elf-symbol name='gpiod_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe1266524'/>
       <elf-symbol name='gpiod_get_direction' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe1477377'/>
+      <elf-symbol name='gpiod_get_from_of_node' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbbe5efd3'/>
       <elf-symbol name='gpiod_get_optional' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4ed7d6dd'/>
       <elf-symbol name='gpiod_get_raw_value' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1da01f9b'/>
       <elf-symbol name='gpiod_get_raw_value_cansleep' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1a8a9d5d'/>
@@ -2324,6 +2327,7 @@
       <elf-symbol name='mdiobus_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3fe8a8b6'/>
       <elf-symbol name='mdiobus_get_phy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x73e4f38d'/>
       <elf-symbol name='mdiobus_read' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6052139b'/>
+      <elf-symbol name='mdiobus_setup_mdiodev_from_board_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf74f7ecc'/>
       <elf-symbol name='mdiobus_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbb78d0e'/>
       <elf-symbol name='mdiobus_write' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2ba9887f'/>
       <elf-symbol name='media_create_intf_link' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd7954849'/>
@@ -3769,6 +3773,7 @@
       <elf-symbol name='sysfs_create_group' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb65e28cd'/>
       <elf-symbol name='sysfs_create_groups' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x23966c95'/>
       <elf-symbol name='sysfs_create_link' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x477d125'/>
+      <elf-symbol name='sysfs_create_link_nowarn' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x89feef53'/>
       <elf-symbol name='sysfs_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x74eeb146'/>
       <elf-symbol name='sysfs_remove_bin_file' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x159acfac'/>
       <elf-symbol name='sysfs_remove_file_from_group' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc2cf16d0'/>
@@ -28920,7 +28925,7 @@
       <pointer-type-def type-id='fbe9020d' size-in-bits='64' id='d9394db1'/>
       <pointer-type-def type-id='c435a5bb' size-in-bits='64' id='cd97030f'/>
       <pointer-type-def type-id='32358857' size-in-bits='64' id='6d30564f'/>
-      <enum-decl name='__anonymous_enum__3' is-anonymous='yes' filepath='include/linux/phy.h' line='80' column='1' id='08f5ca19'>
+      <enum-decl name='__anonymous_enum__2' is-anonymous='yes' filepath='include/linux/phy.h' line='80' column='1' id='08f5ca19'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='PHY_INTERFACE_MODE_NA' value='0'/>
         <enumerator name='PHY_INTERFACE_MODE_INTERNAL' value='1'/>
@@ -47933,6 +47938,11 @@
         <parameter type-id='ba51dfc4' name='dpm_order' filepath='drivers/base/core.c' line='3800' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='device_match_of_node' mangled-name='device_match_of_node' filepath='drivers/base/core.c' line='4229' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_match_of_node'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/core.c' line='4229' column='1'/>
+        <parameter type-id='eaa32e2f' name='np' filepath='drivers/base/core.c' line='4229' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='device_match_name' mangled-name='device_match_name' filepath='drivers/base/core.c' line='4223' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='device_match_name'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/core.c' line='4223' column='1'/>
         <parameter type-id='eaa32e2f' name='name' filepath='drivers/base/core.c' line='4223' column='1'/>
@@ -57634,6 +57644,14 @@
         <enumerator name='OF_GPIO_PULL_DOWN' value='32'/>
       </enum-decl>
       <pointer-type-def type-id='be0d5cf5' size-in-bits='64' id='38fe9344'/>
+      <function-decl name='gpiod_get_from_of_node' mangled-name='gpiod_get_from_of_node' filepath='drivers/gpio/gpiolib-of.c' line='316' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='gpiod_get_from_of_node'>
+        <parameter type-id='9a537bbe' name='node' filepath='drivers/gpio/gpiolib-of.c' line='316' column='1'/>
+        <parameter type-id='80f4b756' name='propname' filepath='drivers/gpio/gpiolib-of.c' line='317' column='1'/>
+        <parameter type-id='95e97e5e' name='index' filepath='drivers/gpio/gpiolib-of.c' line='317' column='1'/>
+        <parameter type-id='38d4936d' name='dflags' filepath='drivers/gpio/gpiolib-of.c' line='318' column='1'/>
+        <parameter type-id='80f4b756' name='label' filepath='drivers/gpio/gpiolib-of.c' line='319' column='1'/>
+        <return type-id='26760480'/>
+      </function-decl>
       <function-decl name='of_get_named_gpio_flags' mangled-name='of_get_named_gpio_flags' filepath='drivers/gpio/gpiolib-of.c' line='288' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_get_named_gpio_flags'>
         <parameter type-id='9a537bbe' name='np' filepath='drivers/gpio/gpiolib-of.c' line='288' column='1'/>
         <parameter type-id='80f4b756' name='list_name' filepath='drivers/gpio/gpiolib-of.c' line='288' column='1'/>
@@ -94421,6 +94439,168 @@
         </data-member>
       </class-decl>
     </abi-instr>
+    <abi-instr address-size='64' path='drivers/net/phy/mdio-boardinfo.c' language='LANG_C89'>
+      <array-type-def dimensions='1' type-id='a84c031d' size-in-bits='488' id='1de7616e'>
+        <subrange length='61' type-id='7ff19f0f' id='b51728a6'/>
+      </array-type-def>
+      <array-type-def dimensions='1' type-id='95e97e5e' size-in-bits='1024' id='9e942f0d'>
+        <subrange length='32' type-id='7ff19f0f' id='ae5bde82'/>
+      </array-type-def>
+      <array-type-def dimensions='1' type-id='efa21d3b' size-in-bits='2048' id='70a48c94'>
+        <subrange length='32' type-id='7ff19f0f' id='ae5bde82'/>
+      </array-type-def>
+      <class-decl name='mii_bus' size-in-bits='12032' is-struct='yes' visibility='default' filepath='include/linux/phy.h' line='213' column='1' id='ed5381db'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='owner' type-id='2730d015' visibility='default' filepath='include/linux/phy.h' line='214' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='name' type-id='80f4b756' visibility='default' filepath='include/linux/phy.h' line='215' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='id' type-id='1de7616e' visibility='default' filepath='include/linux/phy.h' line='216' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='640'>
+          <var-decl name='priv' type-id='eaa32e2f' visibility='default' filepath='include/linux/phy.h' line='217' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='704'>
+          <var-decl name='read' type-id='22ad5849' visibility='default' filepath='include/linux/phy.h' line='218' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='768'>
+          <var-decl name='write' type-id='e10d6bae' visibility='default' filepath='include/linux/phy.h' line='219' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='832'>
+          <var-decl name='reset' type-id='6edade7b' visibility='default' filepath='include/linux/phy.h' line='220' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='896'>
+          <var-decl name='mdio_lock' type-id='925167dc' visibility='default' filepath='include/linux/phy.h' line='226' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1152'>
+          <var-decl name='parent' type-id='fa0b179b' visibility='default' filepath='include/linux/phy.h' line='228' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1216'>
+          <var-decl name='state' type-id='08f5ca1c' visibility='default' filepath='include/linux/phy.h' line='234' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1280'>
+          <var-decl name='dev' type-id='66e487eb' visibility='default' filepath='include/linux/phy.h' line='235' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8768'>
+          <var-decl name='mdio_map' type-id='70a48c94' visibility='default' filepath='include/linux/phy.h' line='238' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='10816'>
+          <var-decl name='phy_mask' type-id='19c2251e' visibility='default' filepath='include/linux/phy.h' line='241' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='10848'>
+          <var-decl name='phy_ignore_ta_mask' type-id='19c2251e' visibility='default' filepath='include/linux/phy.h' line='244' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='10880'>
+          <var-decl name='irq' type-id='9e942f0d' visibility='default' filepath='include/linux/phy.h' line='250' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='11904'>
+          <var-decl name='reset_delay_us' type-id='95e97e5e' visibility='default' filepath='include/linux/phy.h' line='253' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='11968'>
+          <var-decl name='reset_gpiod' type-id='26760480' visibility='default' filepath='include/linux/phy.h' line='255' column='1'/>
+        </data-member>
+      </class-decl>
+      <enum-decl name='__anonymous_enum__' is-anonymous='yes' filepath='include/linux/phy.h' line='229' column='1' id='08f5ca1c'>
+        <underlying-type type-id='9cac1fee'/>
+        <enumerator name='MDIOBUS_ALLOCATED' value='1'/>
+        <enumerator name='MDIOBUS_REGISTERED' value='2'/>
+        <enumerator name='MDIOBUS_UNREGISTERED' value='3'/>
+        <enumerator name='MDIOBUS_RELEASED' value='4'/>
+      </enum-decl>
+      <class-decl name='mdio_device' size-in-bits='8256' is-struct='yes' visibility='default' filepath='include/linux/mdio.h' line='26' column='1' id='f3a32dbb'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='dev' type-id='66e487eb' visibility='default' filepath='include/linux/mdio.h' line='27' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7488'>
+          <var-decl name='bus' type-id='ff47b24b' visibility='default' filepath='include/linux/mdio.h' line='29' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7552'>
+          <var-decl name='modalias' type-id='16dc656a' visibility='default' filepath='include/linux/mdio.h' line='30' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7808'>
+          <var-decl name='bus_match' type-id='2f28f04c' visibility='default' filepath='include/linux/mdio.h' line='32' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7872'>
+          <var-decl name='device_free' type-id='a5490056' visibility='default' filepath='include/linux/mdio.h' line='33' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7936'>
+          <var-decl name='device_remove' type-id='a5490056' visibility='default' filepath='include/linux/mdio.h' line='34' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8000'>
+          <var-decl name='addr' type-id='95e97e5e' visibility='default' filepath='include/linux/mdio.h' line='37' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8032'>
+          <var-decl name='flags' type-id='95e97e5e' visibility='default' filepath='include/linux/mdio.h' line='38' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8064'>
+          <var-decl name='reset_gpio' type-id='26760480' visibility='default' filepath='include/linux/mdio.h' line='39' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8128'>
+          <var-decl name='reset_ctrl' type-id='9f9b8114' visibility='default' filepath='include/linux/mdio.h' line='40' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8192'>
+          <var-decl name='reset_assert_delay' type-id='f0981eeb' visibility='default' filepath='include/linux/mdio.h' line='41' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8224'>
+          <var-decl name='reset_deassert_delay' type-id='f0981eeb' visibility='default' filepath='include/linux/mdio.h' line='42' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='mdio_board_info' size-in-bits='448' is-struct='yes' visibility='default' filepath='include/linux/phy.h' line='1258' column='1' id='bd07c928'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='bus_id' type-id='80f4b756' visibility='default' filepath='include/linux/phy.h' line='1259' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='modalias' type-id='16dc656a' visibility='default' filepath='include/linux/phy.h' line='1260' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='mdio_addr' type-id='95e97e5e' visibility='default' filepath='include/linux/phy.h' line='1261' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='384'>
+          <var-decl name='platform_data' type-id='eaa32e2f' visibility='default' filepath='include/linux/phy.h' line='1262' column='1'/>
+        </data-member>
+      </class-decl>
+      <pointer-type-def type-id='07b37f3f' size-in-bits='64' id='6edade7b'/>
+      <pointer-type-def type-id='07dc6635' size-in-bits='64' id='22ad5849'/>
+      <pointer-type-def type-id='c85b8434' size-in-bits='64' id='e10d6bae'/>
+      <pointer-type-def type-id='0e30865a' size-in-bits='64' id='88c920e4'/>
+      <pointer-type-def type-id='bd07c928' size-in-bits='64' id='1803be7e'/>
+      <pointer-type-def type-id='f3a32dbb' size-in-bits='64' id='efa21d3b'/>
+      <pointer-type-def type-id='ed5381db' size-in-bits='64' id='ff47b24b'/>
+      <pointer-type-def type-id='a733634c' size-in-bits='64' id='a5490056'/>
+      <function-decl name='mdiobus_setup_mdiodev_from_board_info' mangled-name='mdiobus_setup_mdiodev_from_board_info' filepath='drivers/net/phy/mdio-boardinfo.c' line='23' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mdiobus_setup_mdiodev_from_board_info'>
+        <parameter type-id='ff47b24b' name='bus' filepath='drivers/net/phy/mdio-boardinfo.c' line='23' column='1'/>
+        <parameter type-id='88c920e4' name='cb' filepath='drivers/net/phy/mdio-boardinfo.c' line='24' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-type size-in-bits='64' id='07b37f3f'>
+        <parameter type-id='ff47b24b'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='07dc6635'>
+        <parameter type-id='ff47b24b'/>
+        <parameter type-id='95e97e5e'/>
+        <parameter type-id='95e97e5e'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='c85b8434'>
+        <parameter type-id='ff47b24b'/>
+        <parameter type-id='95e97e5e'/>
+        <parameter type-id='95e97e5e'/>
+        <parameter type-id='1dc6a898'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='0e30865a'>
+        <parameter type-id='ff47b24b'/>
+        <parameter type-id='1803be7e'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='a733634c'>
+        <parameter type-id='efa21d3b'/>
+        <return type-id='48b5725f'/>
+      </function-type>
+    </abi-instr>
     <abi-instr address-size='64' path='drivers/net/phy/mdio_bus.c' language='LANG_C89'>
       <function-decl name='__mdiobus_register' mangled-name='__mdiobus_register' filepath='drivers/net/phy/mdio_bus.c' line='374' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__mdiobus_register'>
         <parameter type-id='ff47b24b' name='bus' filepath='drivers/net/phy/mdio_bus.c' line='374' column='1'/>
@@ -94565,114 +94745,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='drivers/net/phy/phy.c' language='LANG_C89'>
-      <array-type-def dimensions='1' type-id='a84c031d' size-in-bits='488' id='1de7616e'>
-        <subrange length='61' type-id='7ff19f0f' id='b51728a6'/>
-      </array-type-def>
       <class-decl name='phylink' is-struct='yes' visibility='default' is-declaration-only='yes' id='7d5dfb1c'/>
-      <array-type-def dimensions='1' type-id='95e97e5e' size-in-bits='1024' id='9e942f0d'>
-        <subrange length='32' type-id='7ff19f0f' id='ae5bde82'/>
-      </array-type-def>
-      <array-type-def dimensions='1' type-id='efa21d3b' size-in-bits='2048' id='70a48c94'>
-        <subrange length='32' type-id='7ff19f0f' id='ae5bde82'/>
-      </array-type-def>
-      <class-decl name='mdio_device' size-in-bits='8256' is-struct='yes' visibility='default' filepath='include/linux/mdio.h' line='26' column='1' id='f3a32dbb'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='dev' type-id='66e487eb' visibility='default' filepath='include/linux/mdio.h' line='27' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7488'>
-          <var-decl name='bus' type-id='ff47b24b' visibility='default' filepath='include/linux/mdio.h' line='29' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7552'>
-          <var-decl name='modalias' type-id='16dc656a' visibility='default' filepath='include/linux/mdio.h' line='30' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7808'>
-          <var-decl name='bus_match' type-id='2f28f04c' visibility='default' filepath='include/linux/mdio.h' line='32' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7872'>
-          <var-decl name='device_free' type-id='a5490056' visibility='default' filepath='include/linux/mdio.h' line='33' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7936'>
-          <var-decl name='device_remove' type-id='a5490056' visibility='default' filepath='include/linux/mdio.h' line='34' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='8000'>
-          <var-decl name='addr' type-id='95e97e5e' visibility='default' filepath='include/linux/mdio.h' line='37' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='8032'>
-          <var-decl name='flags' type-id='95e97e5e' visibility='default' filepath='include/linux/mdio.h' line='38' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='8064'>
-          <var-decl name='reset_gpio' type-id='26760480' visibility='default' filepath='include/linux/mdio.h' line='39' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='8128'>
-          <var-decl name='reset_ctrl' type-id='9f9b8114' visibility='default' filepath='include/linux/mdio.h' line='40' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='8192'>
-          <var-decl name='reset_assert_delay' type-id='f0981eeb' visibility='default' filepath='include/linux/mdio.h' line='41' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='8224'>
-          <var-decl name='reset_deassert_delay' type-id='f0981eeb' visibility='default' filepath='include/linux/mdio.h' line='42' column='1'/>
-        </data-member>
-      </class-decl>
-      <class-decl name='mii_bus' size-in-bits='12032' is-struct='yes' visibility='default' filepath='include/linux/phy.h' line='213' column='1' id='ed5381db'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='owner' type-id='2730d015' visibility='default' filepath='include/linux/phy.h' line='214' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='name' type-id='80f4b756' visibility='default' filepath='include/linux/phy.h' line='215' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='id' type-id='1de7616e' visibility='default' filepath='include/linux/phy.h' line='216' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='640'>
-          <var-decl name='priv' type-id='eaa32e2f' visibility='default' filepath='include/linux/phy.h' line='217' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='704'>
-          <var-decl name='read' type-id='22ad5849' visibility='default' filepath='include/linux/phy.h' line='218' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='768'>
-          <var-decl name='write' type-id='e10d6bae' visibility='default' filepath='include/linux/phy.h' line='219' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='832'>
-          <var-decl name='reset' type-id='6edade7b' visibility='default' filepath='include/linux/phy.h' line='220' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='896'>
-          <var-decl name='mdio_lock' type-id='925167dc' visibility='default' filepath='include/linux/phy.h' line='226' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1152'>
-          <var-decl name='parent' type-id='fa0b179b' visibility='default' filepath='include/linux/phy.h' line='228' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1216'>
-          <var-decl name='state' type-id='08f5ca1c' visibility='default' filepath='include/linux/phy.h' line='234' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1280'>
-          <var-decl name='dev' type-id='66e487eb' visibility='default' filepath='include/linux/phy.h' line='235' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='8768'>
-          <var-decl name='mdio_map' type-id='70a48c94' visibility='default' filepath='include/linux/phy.h' line='238' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='10816'>
-          <var-decl name='phy_mask' type-id='19c2251e' visibility='default' filepath='include/linux/phy.h' line='241' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='10848'>
-          <var-decl name='phy_ignore_ta_mask' type-id='19c2251e' visibility='default' filepath='include/linux/phy.h' line='244' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='10880'>
-          <var-decl name='irq' type-id='9e942f0d' visibility='default' filepath='include/linux/phy.h' line='250' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='11904'>
-          <var-decl name='reset_delay_us' type-id='95e97e5e' visibility='default' filepath='include/linux/phy.h' line='253' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='11968'>
-          <var-decl name='reset_gpiod' type-id='26760480' visibility='default' filepath='include/linux/phy.h' line='255' column='1'/>
-        </data-member>
-      </class-decl>
-      <enum-decl name='__anonymous_enum__' is-anonymous='yes' filepath='include/linux/phy.h' line='229' column='1' id='08f5ca1c'>
-        <underlying-type type-id='9cac1fee'/>
-        <enumerator name='MDIOBUS_ALLOCATED' value='1'/>
-        <enumerator name='MDIOBUS_REGISTERED' value='2'/>
-        <enumerator name='MDIOBUS_UNREGISTERED' value='3'/>
-        <enumerator name='MDIOBUS_RELEASED' value='4'/>
-      </enum-decl>
       <class-decl name='phy_driver' size-in-bits='4160' is-struct='yes' visibility='default' filepath='include/linux/phy.h' line='476' column='1' id='84a0e7ab'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='mdiodrv' type-id='7eda6831' visibility='default' filepath='include/linux/phy.h' line='477' column='1'/>
@@ -94830,7 +94903,7 @@
         <enumerator name='PHY_NOLINK' value='5'/>
       </enum-decl>
       <typedef-decl name='phy_interface_t' type-id='08f5ca19' filepath='include/linux/phy.h' line='107' column='1' id='d61bf978'/>
-      <enum-decl name='__anonymous_enum__3' is-anonymous='yes' filepath='include/linux/phy.h' line='80' column='1' id='08f5ca19'>
+      <enum-decl name='__anonymous_enum__2' is-anonymous='yes' filepath='include/linux/phy.h' line='80' column='1' id='08f5ca19'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='PHY_INTERFACE_MODE_NA' value='0'/>
         <enumerator name='PHY_INTERFACE_MODE_INTERNAL' value='1'/>
@@ -94860,9 +94933,6 @@
       </enum-decl>
       <qualified-type-def type-id='f9b37274' const='yes' id='3635993f'/>
       <pointer-type-def type-id='89f717fe' size-in-bits='64' id='40c31434'/>
-      <pointer-type-def type-id='07b37f3f' size-in-bits='64' id='6edade7b'/>
-      <pointer-type-def type-id='07dc6635' size-in-bits='64' id='22ad5849'/>
-      <pointer-type-def type-id='c85b8434' size-in-bits='64' id='e10d6bae'/>
       <pointer-type-def type-id='c657e2b9' size-in-bits='64' id='aa2748ad'/>
       <pointer-type-def type-id='918531c2' size-in-bits='64' id='51f1236c'/>
       <pointer-type-def type-id='26a5fedd' size-in-bits='64' id='930fcda9'/>
@@ -94874,12 +94944,9 @@
       <pointer-type-def type-id='501579d1' size-in-bits='64' id='3eb4a20d'/>
       <pointer-type-def type-id='a5dc8838' size-in-bits='64' id='4c9695fa'/>
       <pointer-type-def type-id='05cd341e' size-in-bits='64' id='f727c4d8'/>
-      <pointer-type-def type-id='f3a32dbb' size-in-bits='64' id='efa21d3b'/>
-      <pointer-type-def type-id='ed5381db' size-in-bits='64' id='ff47b24b'/>
       <pointer-type-def type-id='84a0e7ab' size-in-bits='64' id='e812884b'/>
       <pointer-type-def type-id='7d5dfb1c' size-in-bits='64' id='56f3c6ca'/>
       <pointer-type-def type-id='8abd4c90' size-in-bits='64' id='bce7b4e2'/>
-      <pointer-type-def type-id='a733634c' size-in-bits='64' id='a5490056'/>
       <pointer-type-def type-id='6909d288' size-in-bits='64' id='0634414a'/>
       <pointer-type-def type-id='2bb0168c' size-in-bits='64' id='44fd4636'/>
       <pointer-type-def type-id='226cc4c6' size-in-bits='64' id='887cf9b8'/>
@@ -94965,23 +95032,6 @@
         <parameter type-id='eced47f6' name='data' filepath='drivers/net/phy/phy.c' line='1149' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-type size-in-bits='64' id='07b37f3f'>
-        <parameter type-id='ff47b24b'/>
-        <return type-id='95e97e5e'/>
-      </function-type>
-      <function-type size-in-bits='64' id='07dc6635'>
-        <parameter type-id='ff47b24b'/>
-        <parameter type-id='95e97e5e'/>
-        <parameter type-id='95e97e5e'/>
-        <return type-id='95e97e5e'/>
-      </function-type>
-      <function-type size-in-bits='64' id='c85b8434'>
-        <parameter type-id='ff47b24b'/>
-        <parameter type-id='95e97e5e'/>
-        <parameter type-id='95e97e5e'/>
-        <parameter type-id='1dc6a898'/>
-        <return type-id='95e97e5e'/>
-      </function-type>
       <function-type size-in-bits='64' id='c657e2b9'>
         <parameter type-id='7efbcaaf'/>
         <return type-id='95e97e5e'/>
@@ -95046,10 +95096,6 @@
         <parameter type-id='0fbf3cfd'/>
         <parameter type-id='95e97e5e'/>
         <return type-id='b50a4934'/>
-      </function-type>
-      <function-type size-in-bits='64' id='a733634c'>
-        <parameter type-id='efa21d3b'/>
-        <return type-id='48b5725f'/>
       </function-type>
       <function-type size-in-bits='64' id='6909d288'>
         <parameter type-id='7efbcaaf' name='phydev'/>
@@ -97012,35 +97058,28 @@
         <parameter type-id='bc57058f' name='prod' filepath='drivers/net/usb/usbnet.c' line='1655' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usbnet_link_change' mangled-name='usbnet_link_change' filepath='drivers/net/usb/usbnet.c' line='1977' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_link_change'>
-        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='1977' column='1'/>
-        <parameter type-id='b50a4934' name='link' filepath='drivers/net/usb/usbnet.c' line='1977' column='1'/>
-        <parameter type-id='b50a4934' name='need_reset' filepath='drivers/net/usb/usbnet.c' line='1977' column='1'/>
-        <return type-id='48b5725f'/>
+      <function-decl name='usbnet_suspend' mangled-name='usbnet_suspend' filepath='drivers/net/usb/usbnet.c' line='1867' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_suspend'>
+        <parameter type-id='8bf48c31' name='intf' filepath='drivers/net/usb/usbnet.c' line='1867' column='1'/>
+        <parameter type-id='08496218' name='message' filepath='drivers/net/usb/usbnet.c' line='1867' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='usbnet_resume' mangled-name='usbnet_resume' filepath='drivers/net/usb/usbnet.c' line='1900' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_resume'>
+        <parameter type-id='8bf48c31' name='intf' filepath='drivers/net/usb/usbnet.c' line='1900' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='usbnet_get_endpoints' mangled-name='usbnet_get_endpoints' filepath='drivers/net/usb/usbnet.c' line='81' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_get_endpoints'>
         <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='81' column='1'/>
         <parameter type-id='8bf48c31' name='intf' filepath='drivers/net/usb/usbnet.c' line='81' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usbnet_write_cmd_nopm' mangled-name='usbnet_write_cmd_nopm' filepath='drivers/net/usb/usbnet.c' line='2108' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_write_cmd_nopm'>
-        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='2108' column='1'/>
-        <parameter type-id='f9b06939' name='cmd' filepath='drivers/net/usb/usbnet.c' line='2108' column='1'/>
-        <parameter type-id='f9b06939' name='reqtype' filepath='drivers/net/usb/usbnet.c' line='2108' column='1'/>
-        <parameter type-id='1dc6a898' name='value' filepath='drivers/net/usb/usbnet.c' line='2109' column='1'/>
-        <parameter type-id='1dc6a898' name='index' filepath='drivers/net/usb/usbnet.c' line='2109' column='1'/>
-        <parameter type-id='eaa32e2f' name='data' filepath='drivers/net/usb/usbnet.c' line='2109' column='1'/>
-        <parameter type-id='1dc6a898' name='size' filepath='drivers/net/usb/usbnet.c' line='2110' column='1'/>
-        <return type-id='95e97e5e'/>
-      </function-decl>
-      <function-decl name='usbnet_write_cmd_async' mangled-name='usbnet_write_cmd_async' filepath='drivers/net/usb/usbnet.c' line='2134' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_write_cmd_async'>
-        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='2134' column='1'/>
-        <parameter type-id='f9b06939' name='cmd' filepath='drivers/net/usb/usbnet.c' line='2134' column='1'/>
-        <parameter type-id='f9b06939' name='reqtype' filepath='drivers/net/usb/usbnet.c' line='2134' column='1'/>
-        <parameter type-id='1dc6a898' name='value' filepath='drivers/net/usb/usbnet.c' line='2135' column='1'/>
-        <parameter type-id='1dc6a898' name='index' filepath='drivers/net/usb/usbnet.c' line='2135' column='1'/>
-        <parameter type-id='eaa32e2f' name='data' filepath='drivers/net/usb/usbnet.c' line='2135' column='1'/>
-        <parameter type-id='1dc6a898' name='size' filepath='drivers/net/usb/usbnet.c' line='2135' column='1'/>
+      <function-decl name='usbnet_read_cmd' mangled-name='usbnet_read_cmd' filepath='drivers/net/usb/usbnet.c' line='2060' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_read_cmd'>
+        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='2060' column='1'/>
+        <parameter type-id='f9b06939' name='cmd' filepath='drivers/net/usb/usbnet.c' line='2060' column='1'/>
+        <parameter type-id='f9b06939' name='reqtype' filepath='drivers/net/usb/usbnet.c' line='2060' column='1'/>
+        <parameter type-id='1dc6a898' name='value' filepath='drivers/net/usb/usbnet.c' line='2061' column='1'/>
+        <parameter type-id='1dc6a898' name='index' filepath='drivers/net/usb/usbnet.c' line='2061' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='drivers/net/usb/usbnet.c' line='2061' column='1'/>
+        <parameter type-id='1dc6a898' name='size' filepath='drivers/net/usb/usbnet.c' line='2061' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='usbnet_write_cmd' mangled-name='usbnet_write_cmd' filepath='drivers/net/usb/usbnet.c' line='2078' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_write_cmd'>
@@ -97053,22 +97092,53 @@
         <parameter type-id='1dc6a898' name='size' filepath='drivers/net/usb/usbnet.c' line='2079' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usbnet_update_max_qlen' mangled-name='usbnet_update_max_qlen' filepath='drivers/net/usb/usbnet.c' line='343' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_update_max_qlen'>
-        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='343' column='1'/>
+      <function-decl name='usbnet_link_change' mangled-name='usbnet_link_change' filepath='drivers/net/usb/usbnet.c' line='1977' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_link_change'>
+        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='1977' column='1'/>
+        <parameter type-id='b50a4934' name='link' filepath='drivers/net/usb/usbnet.c' line='1977' column='1'/>
+        <parameter type-id='b50a4934' name='need_reset' filepath='drivers/net/usb/usbnet.c' line='1977' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='usbnet_write_cmd_nopm' mangled-name='usbnet_write_cmd_nopm' filepath='drivers/net/usb/usbnet.c' line='2108' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_write_cmd_nopm'>
+        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='2108' column='1'/>
+        <parameter type-id='f9b06939' name='cmd' filepath='drivers/net/usb/usbnet.c' line='2108' column='1'/>
+        <parameter type-id='f9b06939' name='reqtype' filepath='drivers/net/usb/usbnet.c' line='2108' column='1'/>
+        <parameter type-id='1dc6a898' name='value' filepath='drivers/net/usb/usbnet.c' line='2109' column='1'/>
+        <parameter type-id='1dc6a898' name='index' filepath='drivers/net/usb/usbnet.c' line='2109' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='drivers/net/usb/usbnet.c' line='2109' column='1'/>
+        <parameter type-id='1dc6a898' name='size' filepath='drivers/net/usb/usbnet.c' line='2110' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='usbnet_read_cmd_nopm' mangled-name='usbnet_read_cmd_nopm' filepath='drivers/net/usb/usbnet.c' line='2096' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_read_cmd_nopm'>
+        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='2096' column='1'/>
+        <parameter type-id='f9b06939' name='cmd' filepath='drivers/net/usb/usbnet.c' line='2096' column='1'/>
+        <parameter type-id='f9b06939' name='reqtype' filepath='drivers/net/usb/usbnet.c' line='2096' column='1'/>
+        <parameter type-id='1dc6a898' name='value' filepath='drivers/net/usb/usbnet.c' line='2097' column='1'/>
+        <parameter type-id='1dc6a898' name='index' filepath='drivers/net/usb/usbnet.c' line='2097' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='drivers/net/usb/usbnet.c' line='2097' column='1'/>
+        <parameter type-id='1dc6a898' name='size' filepath='drivers/net/usb/usbnet.c' line='2097' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='usbnet_unlink_rx_urbs' mangled-name='usbnet_unlink_rx_urbs' filepath='drivers/net/usb/usbnet.c' line='752' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_unlink_rx_urbs'>
         <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='752' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='usbnet_write_cmd_async' mangled-name='usbnet_write_cmd_async' filepath='drivers/net/usb/usbnet.c' line='2134' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_write_cmd_async'>
+        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='2134' column='1'/>
+        <parameter type-id='f9b06939' name='cmd' filepath='drivers/net/usb/usbnet.c' line='2134' column='1'/>
+        <parameter type-id='f9b06939' name='reqtype' filepath='drivers/net/usb/usbnet.c' line='2134' column='1'/>
+        <parameter type-id='1dc6a898' name='value' filepath='drivers/net/usb/usbnet.c' line='2135' column='1'/>
+        <parameter type-id='1dc6a898' name='index' filepath='drivers/net/usb/usbnet.c' line='2135' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='drivers/net/usb/usbnet.c' line='2135' column='1'/>
+        <parameter type-id='1dc6a898' name='size' filepath='drivers/net/usb/usbnet.c' line='2135' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='usbnet_update_max_qlen' mangled-name='usbnet_update_max_qlen' filepath='drivers/net/usb/usbnet.c' line='343' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_update_max_qlen'>
+        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='343' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='usbnet_tx_timeout' mangled-name='usbnet_tx_timeout' filepath='drivers/net/usb/usbnet.c' line='1294' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_tx_timeout'>
         <parameter type-id='68a2d05b' name='net' filepath='drivers/net/usb/usbnet.c' line='1294' column='1'/>
         <return type-id='48b5725f'/>
-      </function-decl>
-      <function-decl name='usbnet_suspend' mangled-name='usbnet_suspend' filepath='drivers/net/usb/usbnet.c' line='1867' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_suspend'>
-        <parameter type-id='8bf48c31' name='intf' filepath='drivers/net/usb/usbnet.c' line='1867' column='1'/>
-        <parameter type-id='08496218' name='message' filepath='drivers/net/usb/usbnet.c' line='1867' column='1'/>
-        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='usbnet_stop' mangled-name='usbnet_stop' filepath='drivers/net/usb/usbnet.c' line='799' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_stop'>
         <parameter type-id='68a2d05b' name='net' filepath='drivers/net/usb/usbnet.c' line='799' column='1'/>
@@ -97092,30 +97162,6 @@
       <function-decl name='usbnet_set_link_ksettings' mangled-name='usbnet_set_link_ksettings' filepath='drivers/net/usb/usbnet.c' line='962' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_set_link_ksettings'>
         <parameter type-id='68a2d05b' name='net' filepath='drivers/net/usb/usbnet.c' line='962' column='1'/>
         <parameter type-id='b2c34f11' name='cmd' filepath='drivers/net/usb/usbnet.c' line='963' column='1'/>
-        <return type-id='95e97e5e'/>
-      </function-decl>
-      <function-decl name='usbnet_resume' mangled-name='usbnet_resume' filepath='drivers/net/usb/usbnet.c' line='1900' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_resume'>
-        <parameter type-id='8bf48c31' name='intf' filepath='drivers/net/usb/usbnet.c' line='1900' column='1'/>
-        <return type-id='95e97e5e'/>
-      </function-decl>
-      <function-decl name='usbnet_read_cmd_nopm' mangled-name='usbnet_read_cmd_nopm' filepath='drivers/net/usb/usbnet.c' line='2096' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_read_cmd_nopm'>
-        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='2096' column='1'/>
-        <parameter type-id='f9b06939' name='cmd' filepath='drivers/net/usb/usbnet.c' line='2096' column='1'/>
-        <parameter type-id='f9b06939' name='reqtype' filepath='drivers/net/usb/usbnet.c' line='2096' column='1'/>
-        <parameter type-id='1dc6a898' name='value' filepath='drivers/net/usb/usbnet.c' line='2097' column='1'/>
-        <parameter type-id='1dc6a898' name='index' filepath='drivers/net/usb/usbnet.c' line='2097' column='1'/>
-        <parameter type-id='eaa32e2f' name='data' filepath='drivers/net/usb/usbnet.c' line='2097' column='1'/>
-        <parameter type-id='1dc6a898' name='size' filepath='drivers/net/usb/usbnet.c' line='2097' column='1'/>
-        <return type-id='95e97e5e'/>
-      </function-decl>
-      <function-decl name='usbnet_read_cmd' mangled-name='usbnet_read_cmd' filepath='drivers/net/usb/usbnet.c' line='2060' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_read_cmd'>
-        <parameter type-id='12884b9a' name='dev' filepath='drivers/net/usb/usbnet.c' line='2060' column='1'/>
-        <parameter type-id='f9b06939' name='cmd' filepath='drivers/net/usb/usbnet.c' line='2060' column='1'/>
-        <parameter type-id='f9b06939' name='reqtype' filepath='drivers/net/usb/usbnet.c' line='2060' column='1'/>
-        <parameter type-id='1dc6a898' name='value' filepath='drivers/net/usb/usbnet.c' line='2061' column='1'/>
-        <parameter type-id='1dc6a898' name='index' filepath='drivers/net/usb/usbnet.c' line='2061' column='1'/>
-        <parameter type-id='eaa32e2f' name='data' filepath='drivers/net/usb/usbnet.c' line='2061' column='1'/>
-        <parameter type-id='1dc6a898' name='size' filepath='drivers/net/usb/usbnet.c' line='2061' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='usbnet_get_drvinfo' mangled-name='usbnet_get_drvinfo' filepath='drivers/net/usb/usbnet.c' line='1043' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usbnet_get_drvinfo'>
@@ -97195,8 +97241,8 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <function-type size-in-bits='64' id='53e8ab6e'>
-        <parameter type-id='12884b9a'/>
-        <parameter type-id='8bf48c31'/>
+        <parameter type-id='12884b9a' name='dev'/>
+        <parameter type-id='8bf48c31' name='intf'/>
         <return type-id='95e97e5e'/>
       </function-type>
       <function-type size-in-bits='64' id='ec664304'>
@@ -98267,13 +98313,13 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='drivers/of/of_net.c' language='LANG_C89'>
-      <function-decl name='of_get_phy_mode' mangled-name='of_get_phy_mode' filepath='drivers/of/of_net.c' line='23' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_get_phy_mode'>
-        <parameter type-id='9a537bbe' name='np' filepath='drivers/of/of_net.c' line='23' column='1'/>
-        <return type-id='95e97e5e'/>
-      </function-decl>
       <function-decl name='of_get_mac_address' mangled-name='of_get_mac_address' filepath='drivers/of/of_net.c' line='97' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_get_mac_address'>
         <parameter type-id='9a537bbe' name='np' filepath='drivers/of/of_net.c' line='97' column='1'/>
         <return type-id='eaa32e2f'/>
+      </function-decl>
+      <function-decl name='of_get_phy_mode' mangled-name='of_get_phy_mode' filepath='drivers/of/of_net.c' line='23' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_get_phy_mode'>
+        <parameter type-id='9a537bbe' name='np' filepath='drivers/of/of_net.c' line='23' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='drivers/of/of_reserved_mem.c' language='LANG_C89'>
@@ -123546,6 +123592,12 @@
         <parameter type-id='d30bdc51' name='kobj' filepath='fs/sysfs/symlink.c' line='143' column='1'/>
         <parameter type-id='80f4b756' name='name' filepath='fs/sysfs/symlink.c' line='143' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='sysfs_create_link_nowarn' mangled-name='sysfs_create_link_nowarn' filepath='fs/sysfs/symlink.c' line='105' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sysfs_create_link_nowarn'>
+        <parameter type-id='d30bdc51' name='kobj' filepath='fs/sysfs/symlink.c' line='105' column='1'/>
+        <parameter type-id='d30bdc51' name='target' filepath='fs/sysfs/symlink.c' line='105' column='1'/>
+        <parameter type-id='80f4b756' name='name' filepath='fs/sysfs/symlink.c' line='106' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='sysfs_create_link' mangled-name='sysfs_create_link' filepath='fs/sysfs/symlink.c' line='89' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sysfs_create_link'>
         <parameter type-id='d30bdc51' name='kobj' filepath='fs/sysfs/symlink.c' line='89' column='1'/>
@@ -151973,6 +152025,12 @@
         <parameter type-id='f0981eeb' name='bits' filepath='lib/bitmap.c' line='188' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='__bitmap_equal' mangled-name='__bitmap_equal' filepath='lib/bitmap.c' line='46' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__bitmap_equal'>
+        <parameter type-id='f9b37274' name='bitmap1' filepath='lib/bitmap.c' line='46' column='1'/>
+        <parameter type-id='f9b37274' name='bitmap2' filepath='lib/bitmap.c' line='47' column='1'/>
+        <parameter type-id='f0981eeb' name='bits' filepath='lib/bitmap.c' line='47' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__bitmap_clear' mangled-name='__bitmap_clear' filepath='lib/bitmap.c' line='291' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__bitmap_clear'>
         <parameter type-id='1d2c2b85' name='map' filepath='lib/bitmap.c' line='291' column='1'/>
         <parameter type-id='f0981eeb' name='start' filepath='lib/bitmap.c' line='291' column='1'/>
@@ -166349,7 +166407,7 @@
           <var-decl name='' type-id='eb542e10' visibility='default' filepath='include/net/mac80211.h' line='1796' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__26' size-in-bits='160' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1796' column='1' id='eb542e10'>
+      <union-decl name='__anonymous_union__3' size-in-bits='160' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1796' column='1' id='eb542e10'>
         <data-member access='public'>
           <var-decl name='tkip' type-id='5a0ae575' visibility='default' filepath='include/net/mac80211.h' line='1800' column='1'/>
         </data-member>
@@ -166369,7 +166427,7 @@
           <var-decl name='hw' type-id='ea135534' visibility='default' filepath='include/net/mac80211.h' line='1816' column='1'/>
         </data-member>
       </union-decl>
-      <class-decl name='__anonymous_struct__3' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1797' column='1' id='5a0ae575'>
+      <class-decl name='__anonymous_struct__2' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1797' column='1' id='5a0ae575'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='iv32' type-id='19c2251e' visibility='default' filepath='include/net/mac80211.h' line='1798' column='1'/>
         </data-member>
@@ -166377,12 +166435,12 @@
           <var-decl name='iv16' type-id='1dc6a898' visibility='default' filepath='include/net/mac80211.h' line='1799' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__4' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1801' column='1' id='71c656e5'>
+      <class-decl name='__anonymous_struct__3' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1801' column='1' id='71c656e5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='pn' type-id='cf1a4160' visibility='default' filepath='include/net/mac80211.h' line='1802' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__8' size-in-bits='136' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1813' column='1' id='ea135534'>
+      <class-decl name='__anonymous_struct__7' size-in-bits='136' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1813' column='1' id='ea135534'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='seq' type-id='0d8415b5' visibility='default' filepath='include/net/mac80211.h' line='1814' column='1'/>
         </data-member>
@@ -166513,7 +166571,7 @@
         <enumerator name='BAR_RX_EVENT' value='2'/>
         <enumerator name='BA_FRAME_TIMEOUT' value='3'/>
       </enum-decl>
-      <union-decl name='__anonymous_union__27' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='457' column='1' id='2a1a3e21'>
+      <union-decl name='__anonymous_union__4' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='457' column='1' id='2a1a3e21'>
         <data-member access='public'>
           <var-decl name='rssi' type-id='1569e170' visibility='default' filepath='include/net/mac80211.h' line='458' column='1'/>
         </data-member>
