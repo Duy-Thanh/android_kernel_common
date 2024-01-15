@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6fea3f_5b948bdd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2024-01-15T11:52:27Z",
+      "side": 1,
+      "message": "I will remove it.\n\nThanks!",
+      "parentUuid": "ffcea074_ca8a394a",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "62dc81eac5d58875175a9ac7aeba122e70d76307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1ea4937_b63bace4",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-01-15T11:44:48Z",
       "side": 1,
       "message": "Why not submit the needed change upstream first?",
+      "revId": "62dc81eac5d58875175a9ac7aeba122e70d76307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cb551de_e97e59cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2024-01-15T11:52:27Z",
+      "side": 1,
+      "message": "Hi Greg\n\nAs comment, and eevdf allows tasks to run for any amount of time. If I send the change to upstream, it will break the eevdf\u0027s rule, I don\u0027t think it could be accepted. On the other hand, In Android, we only want to do these operations for specific tasks, such as UI, render and so on.\n\nThanks!",
+      "parentUuid": "c1ea4937_b63bace4",
       "revId": "62dc81eac5d58875175a9ac7aeba122e70d76307",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
