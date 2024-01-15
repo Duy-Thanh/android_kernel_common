@@ -16,6 +16,24 @@
       "message": "Everything removed in this patch is added back in aosp/2900933. Why is this patch needed?",
       "revId": "e794e66685d661233dff616da2c5f0cacce97672",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "503cdc75_eefe0957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889770
+      },
+      "writtenOn": "2024-01-15T02:16:38Z",
+      "side": 1,
+      "message": "commit 04b946846bd71e2ecd1fab1ef71d5bcd352fb965 has similar problems like bellow changes.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2900930",
+      "parentUuid": "aeeb335f_f3306cbd",
+      "revId": "e794e66685d661233dff616da2c5f0cacce97672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
