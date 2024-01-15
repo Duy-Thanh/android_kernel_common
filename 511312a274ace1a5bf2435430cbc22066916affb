@@ -16,6 +16,24 @@
       "message": "Everything removed in this patch is added back in aosp/2900932. No changes to parameter list. Why is this needed?",
       "revId": "511312a274ace1a5bf2435430cbc22066916affb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f810a47_0c4689bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889770
+      },
+      "writtenOn": "2024-01-15T02:15:44Z",
+      "side": 1,
+      "message": "commit 71dbcce94412ac785c8c1ddb86b47e03881ee3c7 hsa some problems in below.\n\n1. Not fully cherry-picked from android14-6.1. Only \u0027android_rvh_do_sea\u0027 was imporoted missing two other vendor hooks.\n2. the type of esr is wrong. It should be \u0027unsigned long\u0027 not \u0027unsigned int\u0027\n\nWhen created this pathc, I thought, it will be good reverting \u002771dbcce94412ac785c8c1ddb86b47e03881ee3c7\u0027 and re-cherry-pick https://android-review.googlesource.com/c/kernel/common/+/2484159.",
+      "parentUuid": "091d9cdd_805c1a71",
+      "revId": "511312a274ace1a5bf2435430cbc22066916affb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
