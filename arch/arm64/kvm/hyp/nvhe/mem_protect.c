@@ -2188,6 +2188,13 @@ static int __pkvm_host_unuse_dma_page(phys_addr_t phys_addr)
 
 	hyp_page_ref_dec(p);
 
+	/* Debug check that the page was allowed to the host */
+	if (IS_ENABLED(CONFIG_NVHE_EL2_DEBUG)) {
+		host_lock_component();
+		BUG_ON(!__host_check_page_state_range(phys_addr, PAGE_SIZE, PKVM_NOPAGE));
+		host_unlock_component();
+	}
+
 	return 0;
 }
 
