@@ -35,6 +35,7 @@ _GKI_RISCV64_MAKE_GOALS = [
     "Image.lz4",
     "Image.gz",
     "modules",
+    "deb-pkg",
 ]
 
 _GKI_X86_64_MAKE_GOALS = [
@@ -136,7 +137,7 @@ define_common_kernels(target_configs = {
     "kernel_aarch64_16k": {
         "kmi_symbol_list_strict_mode": False,
         "module_implicit_outs": get_gki_modules_list("arm64"),
-        "make_goals": _GKI_AARCH64_MAKE_GOALS,
+        "make_goals": [ "deb-pkg", ],
     },
     "kernel_aarch64_debug": {
         "kmi_symbol_list_strict_mode": False,
