@@ -5030,19 +5030,30 @@ static vm_fault_t ___handle_speculative_fault(struct mm_struct *mm,
 		return VM_FAULT_RETRY;
 	}
 
-	if (!vmf_allows_speculation(&vmf))
-		return VM_FAULT_RETRY;
-
 	vmf.vma_flags = READ_ONCE(vmf.vma->vm_flags);
 	vmf.vma_page_prot = READ_ONCE(vmf.vma->vm_page_prot);
 
 #ifdef CONFIG_USERFAULTFD
-	/* Can't call userland page fault handler in the speculative path */
-	if (unlikely(vmf.vma_flags & __VM_UFFD_FLAGS)) {
+	 /*
+	  * Only support SPF for SIGBUS+MISSING userfaults in private anonymous
+	  * VMAs. Rest all should be retried with mmap_lock.
+	  */
+        if (unlikely((vmf.vma_flags & __VM_UFFD_FLAGS) &&
+		     (!vma_is_anonymous(vmf.vma) || !(vmf.vma_flags & VM_UFFD_MISSING)))) {
 		trace_spf_vma_notsup(_RET_IP_, vmf.vma, address);
 		return VM_FAULT_RETRY;
 	}
 #endif
+
+	if (!vmf_allows_speculation(&vmf)) {
+		/*
+		 * It doesn't matter if anon_vma isn't there for SIGBUS+MISSING
+		 * userfaults in private anonymous VMAs
+		 */
+		if (!vmf.vma->anon_vma)
+			goto out_uffd;
+		return VM_FAULT_RETRY;
+	}
 
 	if (vmf.vma_flags & VM_GROWSDOWN || vmf.vma_flags & VM_GROWSUP) {
 		/*
@@ -5161,6 +5172,10 @@ static vm_fault_t ___handle_speculative_fault(struct mm_struct *mm,
 
 	local_irq_enable();
 
+	if (!vmf.pte && (vmf.vma_flags & VM_UFFD_MISSING) &&
+	    vma_is_anonymous(vmf.vma) && userfaultfd_using_sigbus(vmf.vma))
+		return VM_FAULT_SIGBUS;
+
 	/*
 	 * We need to re-validate the VMA after checking the bounds, otherwise
 	 * we might have a false positive on the bounds.
@@ -5196,6 +5211,15 @@ static vm_fault_t ___handle_speculative_fault(struct mm_struct *mm,
 out_walk:
 	trace_spf_vma_notsup(_RET_IP_, vmf.vma, address);
 	local_irq_enable();
+	/*
+	 * Failing page-table walk is similar to page-missing so give an
+	 * opportunity to SIGBUS+MISSING userfault to handle it before retrying
+	 * with mmap_lock
+	 */
+out_uffd:
+	if ((vmf.vma_flags & VM_UFFD_MISSING) && vma_is_anonymous(vmf.vma) &&
+	    userfaultfd_using_sigbus(vmf.vma))
+		return VM_FAULT_SIGBUS;
 	return VM_FAULT_RETRY;
 
 out_segv:
