@@ -16,6 +16,29 @@
       "message": "This is a slightly different approach to the fix. Since we ignore the return value from fuse_lseek_backing unless it\u0027s an error, best to make this explicit, I think. Do you agree?\n\n(Daniel and others - the original fix was aosp/2901452)\n\nEither way, I want to add the test here so we can be sure this stays fixed.\n\nAnd Chenyuwen - thank you for finding and fixing this issue. Very much appreciated.",
       "revId": "dcceeea175d6cceca998694d299a359268bfbc41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91b91db7_773baafe",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-01-16T04:10:02Z",
+      "side": 1,
+      "message": "Is it okay when the value of flo-\u003eoffset is in [4G-4K,4G]?",
+      "range": {
+        "startLine": 461,
+        "startChar": 3,
+        "endLine": 461,
+        "endChar": 22
+      },
+      "revId": "dcceeea175d6cceca998694d299a359268bfbc41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
