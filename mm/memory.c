@@ -3458,10 +3458,6 @@ static vm_fault_t do_wp_page(struct vm_fault *vmf)
 
 	if (userfaultfd_pte_wp(vma, *vmf->pte)) {
 		pte_unmap_unlock(vmf->pte, vmf->ptl);
-		if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
-			count_vm_spf_event(SPF_ABORT_USERFAULTFD);
-			return VM_FAULT_RETRY;
-		}
 		return handle_userfault(vmf, VM_UFFD_WP);
 	}
 
@@ -4042,10 +4038,6 @@ skip_pmd_checks:
 		pte_unmap_unlock(vmf->pte, vmf->ptl);
 		if (page)
 			put_page(page);
-		if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
-			count_vm_spf_event(SPF_ABORT_USERFAULTFD);
-			return VM_FAULT_RETRY;
-		}
 		return handle_userfault(vmf, VM_UFFD_MISSING);
 	}
 
