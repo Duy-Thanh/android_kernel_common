@@ -3387,8 +3387,6 @@ static vm_fault_t do_wp_page(struct vm_fault *vmf)
 
 	if (userfaultfd_pte_wp(vma, *vmf->pte)) {
 		pte_unmap_unlock(vmf->pte, vmf->ptl);
-		if (vmf->flags & FAULT_FLAG_SPECULATIVE)
-			return VM_FAULT_RETRY;
 		return handle_userfault(vmf, VM_UFFD_WP);
 	}
 
@@ -3892,7 +3890,8 @@ skip_pmd_checks:
 		entry = pte_mkspecial(pfn_pte(my_zero_pfn(vmf->address),
 						vmf->vma_page_prot));
 		if (!pte_map_lock(vmf))
-			return VM_FAULT_RETRY;
+			goto out_uffd;
+
 		if (!pte_none(*vmf->pte)) {
 			update_mmu_tlb(vma, vmf->address, vmf->pte);
 			goto unlock;
@@ -3900,14 +3899,6 @@ skip_pmd_checks:
 		ret = check_stable_address_space(vma->vm_mm);
 		if (ret)
 			goto unlock;
-		/*
-		 * Don't call the userfaultfd during the speculative path.
-		 * We already checked for the VMA to not be managed through
-		 * userfaultfd, but it may be set in our back once we have lock
-		 * the pte. In such a case we can ignore it this time.
-		 */
-		if (vmf->flags & FAULT_FLAG_SPECULATIVE)
-			goto setpte;
 		/* Deliver the page fault to userland, check inside PT lock */
 		if (userfaultfd_missing(vma)) {
 			pte_unmap_unlock(vmf->pte, vmf->ptl);
@@ -3940,8 +3931,8 @@ skip_pmd_checks:
 		entry = pte_mkwrite(pte_mkdirty(entry));
 
 	if (!pte_map_lock(vmf)) {
-		ret = VM_FAULT_RETRY;
-		goto release;
+		put_page(page);
+		goto out_uffd;
 	}
 
 	if (!pte_none(*vmf->pte)) {
@@ -3954,8 +3945,7 @@ skip_pmd_checks:
 		goto unlock_and_release;
 
 	/* Deliver the page fault to userland, check inside PT lock */
-	if (!(vmf->flags & FAULT_FLAG_SPECULATIVE) &&
-				userfaultfd_missing(vma)) {
+	if (userfaultfd_missing(vma)) {
 		pte_unmap_unlock(vmf->pte, vmf->ptl);
 		put_page(page);
 		return handle_userfault(vmf, VM_UFFD_MISSING);
@@ -3974,13 +3964,22 @@ unlock:
 	return ret;
 unlock_and_release:
 	pte_unmap_unlock(vmf->pte, vmf->ptl);
-release:
 	put_page(page);
 	return ret;
 oom_free_page:
 	put_page(page);
 oom:
 	return VM_FAULT_OOM;
+out_uffd:
+	/*
+	 * It's better to send SIGBUS than retry with mmap_lock to avoid
+	 * contention. It's safe to send SIGBUS even if the page is mapped
+	 * as the userspace is ought to handle that case with
+	 * UFFD_FEATURE_SIGBUS.
+	 */
+	if (userfaultfd_missing(vma))
+		return handle_userfault(vmf, VM_UFFD_MISSING);
+	return VM_FAULT_RETRY;
 }
 
 /*
@@ -5019,18 +5018,10 @@ static vm_fault_t ___handle_speculative_fault(struct mm_struct *mm,
 	}
 
 	if (!vmf_allows_speculation(&vmf))
-		return VM_FAULT_RETRY;
+		goto out_uffd;
 
 	vmf.vma_flags = READ_ONCE(vmf.vma->vm_flags);
 	vmf.vma_page_prot = READ_ONCE(vmf.vma->vm_page_prot);
-
-#ifdef CONFIG_USERFAULTFD
-	/* Can't call userland page fault handler in the speculative path */
-	if (unlikely(vmf.vma_flags & __VM_UFFD_FLAGS)) {
-		trace_spf_vma_notsup(_RET_IP_, vmf.vma, address);
-		return VM_FAULT_RETRY;
-	}
-#endif
 
 	if (vmf.vma_flags & VM_GROWSDOWN || vmf.vma_flags & VM_GROWSUP) {
 		/*
@@ -5155,7 +5146,7 @@ static vm_fault_t ___handle_speculative_fault(struct mm_struct *mm,
 	 */
 	if (read_seqcount_retry(&vmf.vma->vm_sequence, seq)) {
 		trace_spf_vma_changed(_RET_IP_, vmf.vma, address);
-		return VM_FAULT_RETRY;
+		goto out_uffd;
 	}
 
 	mem_cgroup_enter_user_fault();
@@ -5184,6 +5175,14 @@ static vm_fault_t ___handle_speculative_fault(struct mm_struct *mm,
 out_walk:
 	trace_spf_vma_notsup(_RET_IP_, vmf.vma, address);
 	local_irq_enable();
+out_uffd:
+	/*
+	 * Failing page-table walk means that the page is missing.
+	 * Also, it doesn't matter if VMA allows speculation when handling
+	 * userfaults.
+	 */
+	if (vmf.vma_flags & VM_UFFD_MISSING)
+		return handle_userfault(&vmf, VM_UFFD_MISSING);
 	return VM_FAULT_RETRY;
 
 out_segv:
