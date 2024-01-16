@@ -435,6 +435,23 @@
       },
       "revId": "e0853161ba6763279014a4fa58cc544c01154535",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf0d1d3d_064af12e",
+        "filename": "include/uapi/linux/usb/f_accessory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-01-16T19:41:39Z",
+      "side": 1,
+      "message": "Per https://source.android.com/docs/core/interaction/accessories/aoa2, audio mode is deprecated. Is there any reason to carry this along since we removed the audio functionality of this driver?",
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
