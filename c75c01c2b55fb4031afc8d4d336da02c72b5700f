@@ -33,6 +33,24 @@
       "message": "Could you let me know why it failed?",
       "revId": "c75c01c2b55fb4031afc8d4d336da02c72b5700f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e2f608_cfbdbb74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-16T11:00:55Z",
+      "side": 1,
+      "message": "```\nThese symbols are missing from the symbol list and are not available at runtime for unsigned modules:\n  spi_slave_abort required by [\u0027spidev.ko\u0027]```",
+      "parentUuid": "c0b9eb89_6e92aac5",
+      "revId": "c75c01c2b55fb4031afc8d4d336da02c72b5700f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
