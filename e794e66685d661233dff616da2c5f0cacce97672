@@ -34,6 +34,24 @@
       "parentUuid": "aeeb335f_f3306cbd",
       "revId": "e794e66685d661233dff616da2c5f0cacce97672",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a763b2a4_c9f69ec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-16T21:19:05Z",
+      "side": 1,
+      "message": "please fix the problems in the android-mainline version of the hook. Then cherry-pick that here to fix the hook definition instead of this revert/reapply",
+      "parentUuid": "503cdc75_eefe0957",
+      "revId": "e794e66685d661233dff616da2c5f0cacce97672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
