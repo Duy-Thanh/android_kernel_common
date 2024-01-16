@@ -33,6 +33,7 @@
 int sysctl_unprivileged_userfaultfd __read_mostly;
 
 static struct kmem_cache *userfaultfd_ctx_cachep __read_mostly;
+static DECLARE_RWSEM(spf_semaphore);
 
 /*
  * Start with fault_pending_wqh and fault_wqh so they're more likely
@@ -388,6 +389,36 @@ vm_fault_t handle_userfault(struct vm_fault *vmf, unsigned long reason)
 	if (current->flags & (PF_EXITING|PF_DUMPCORE))
 		goto out;
 
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+	if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
+		ret = VM_FAULT_RETRY;
+		if (likely(down_read_trylock(&spf_semaphore))) {
+			unsigned int features;
+			bool released;
+			ctx = vmf->vma->vm_userfaultfd_ctx.ctx;
+			if (!ctx) {
+				ret = VM_FAULT_SIGBUS;
+				goto spf_unlock;
+			}
+			features = ctx->features;
+			released = READ_ONCE(ctx->released);
+			if (read_seqcount_retry(&vmf->vma->vm_sequence,
+						vmf->sequence))
+				goto spf_unlock;
+
+			if (unlikely(released)) {
+				ret = VM_FAULT_NOPAGE;
+				goto spf_unlock;
+			}
+
+			if (features & UFFD_FEATURE_SIGBUS)
+				ret = VM_FAULT_SIGBUS;
+spf_unlock:
+			up_read(&spf_semaphore);
+		}
+		return ret;
+	}
+#endif
 	/*
 	 * Coredumping runs without mmap_lock so we can only check that
 	 * the mmap_lock is held, if PF_DUMPCORE was not set.
@@ -851,7 +882,9 @@ static int userfaultfd_release(struct inode *inode, struct file *file)
 	/* len == 0 means wake all */
 	struct userfaultfd_wake_range range = { .len = 0, };
 	unsigned long new_flags;
-
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+	down_write(&spf_semaphore);
+#endif
 	WRITE_ONCE(ctx->released, true);
 
 	if (!mmget_not_zero(mm))
@@ -908,6 +941,9 @@ wakeup:
 
 	wake_up_poll(&ctx->fd_wqh, EPOLLHUP);
 	userfaultfd_ctx_put(ctx);
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+	up_write(&spf_semaphore);
+#endif
 	return 0;
 }
 
