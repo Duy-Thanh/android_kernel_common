@@ -164,9 +164,17 @@ static void userfaultfd_ctx_get(struct userfaultfd_ctx *ctx)
  * The userfaultfd context reference must have been previously acquired either
  * with userfaultfd_ctx_get() or userfaultfd_ctx_fdget().
  */
-static void userfaultfd_ctx_put(struct userfaultfd_ctx *ctx)
+static void userfaultfd_ctx_put(struct userfaultfd_ctx *ctx, rwlock_t *lock)
 {
-	if (refcount_dec_and_test(&ctx->refcount)) {
+	bool free;
+	if (lock) {
+		write_lock(lock);
+		free = refcount_dec_and_test(&ctx->refcount);
+		write_unlock(lock);
+	} else
+		free = refcount_dec_and_test(&ctx->refcount);
+
+	if (free) {
 		VM_BUG_ON(spin_is_locked(&ctx->fault_pending_wqh.lock));
 		VM_BUG_ON(waitqueue_active(&ctx->fault_pending_wqh));
 		VM_BUG_ON(spin_is_locked(&ctx->fault_wqh.lock));
@@ -388,6 +396,26 @@ vm_fault_t handle_userfault(struct vm_fault *vmf, unsigned long reason)
 	if (current->flags & (PF_EXITING|PF_DUMPCORE))
 		goto out;
 
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+	if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
+		rwlock_t *spf_lock;
+		ret = VM_FAULT_RETRY;
+		/*
+		 * Fetch uffd_spf_lock, which is allocated right after
+		 * mmu_notifier_lock
+		 */
+		if (!mm->mmu_notifier_lock)
+			return ret;
+		spf_lock = (rwlock_t *)(mm->mmu_notifier_lock + 1);
+
+		read_lock(spf_lock);
+		ctx = vmf->vma->vm_userfaultfd_ctx.ctx;
+		if (!ctx || (ctx->features & UFFD_FEATURE_SIGBUS))
+			ret = VM_FAULT_SIGBUS;
+		read_unlock(spf_lock);
+		return ret;
+	}
+#endif
 	/*
 	 * Coredumping runs without mmap_lock so we can only check that
 	 * the mmap_lock is held, if PF_DUMPCORE was not set.
@@ -546,7 +574,7 @@ vm_fault_t handle_userfault(struct vm_fault *vmf, unsigned long reason)
 	 * ctx may go away after this if the userfault pseudo fd is
 	 * already released.
 	 */
-	userfaultfd_ctx_put(ctx);
+	userfaultfd_ctx_put(ctx, NULL);
 
 out:
 	return ret;
@@ -617,7 +645,7 @@ static void userfaultfd_event_wait_completion(struct userfaultfd_ctx *ctx,
 			}
 		mmap_write_unlock(mm);
 
-		userfaultfd_ctx_put(release_new_ctx);
+		userfaultfd_ctx_put(release_new_ctx, NULL);
 	}
 
 	/*
@@ -626,7 +654,7 @@ static void userfaultfd_event_wait_completion(struct userfaultfd_ctx *ctx,
 	 */
 out:
 	WRITE_ONCE(ctx->mmap_changing, false);
-	userfaultfd_ctx_put(ctx);
+	userfaultfd_ctx_put(ctx, NULL);
 }
 
 static void userfaultfd_event_complete(struct userfaultfd_ctx *ctx,
@@ -744,7 +772,7 @@ void mremap_userfaultfd_complete(struct vm_userfaultfd_ctx *vm_ctx,
 		return;
 
 	if (to & ~PAGE_MASK) {
-		userfaultfd_ctx_put(ctx);
+		userfaultfd_ctx_put(ctx, NULL);
 		return;
 	}
 
@@ -851,7 +879,7 @@ static int userfaultfd_release(struct inode *inode, struct file *file)
 	/* len == 0 means wake all */
 	struct userfaultfd_wake_range range = { .len = 0, };
 	unsigned long new_flags;
-
+	rwlock_t *spf_lock = NULL;
 	WRITE_ONCE(ctx->released, true);
 
 	if (!mmget_not_zero(mm))
@@ -907,7 +935,17 @@ wakeup:
 	wake_up_all(&ctx->event_wqh);
 
 	wake_up_poll(&ctx->fd_wqh, EPOLLHUP);
-	userfaultfd_ctx_put(ctx);
+
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+	/*
+	 * Fetch uffd_spf_lock, which is allocated right after
+	 * mmu_notifier_lock
+	 */
+	if (mm->mmu_notifier_lock)
+		spf_lock = (rwlock_t *)(mm->mmu_notifier_lock + 1);
+#endif
+	userfaultfd_ctx_put(ctx, spf_lock);
+
 	return 0;
 }
 
@@ -1115,7 +1153,7 @@ static ssize_t userfaultfd_ctx_read(struct userfaultfd_ctx *ctx, int no_wait,
 			 * The fork thread didn't abort, so we can
 			 * drop the temporary refcount.
 			 */
-			userfaultfd_ctx_put(fork_nctx);
+			userfaultfd_ctx_put(fork_nctx, NULL);
 
 			uwq = list_first_entry(&fork_event,
 					       typeof(*uwq),
@@ -1153,7 +1191,7 @@ static ssize_t userfaultfd_ctx_read(struct userfaultfd_ctx *ctx, int no_wait,
 			 * uffd references it.
 			 */
 			if (ret)
-				userfaultfd_ctx_put(fork_nctx);
+				userfaultfd_ctx_put(fork_nctx, NULL);
 		}
 		spin_unlock_irq(&ctx->event_wqh.lock);
 	}

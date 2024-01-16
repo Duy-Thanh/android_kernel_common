@@ -3387,8 +3387,6 @@ static vm_fault_t do_wp_page(struct vm_fault *vmf)
 
 	if (userfaultfd_pte_wp(vma, *vmf->pte)) {
 		pte_unmap_unlock(vmf->pte, vmf->ptl);
-		if (vmf->flags & FAULT_FLAG_SPECULATIVE)
-			return VM_FAULT_RETRY;
 		return handle_userfault(vmf, VM_UFFD_WP);
 	}
 
@@ -3900,14 +3898,6 @@ skip_pmd_checks:
 		ret = check_stable_address_space(vma->vm_mm);
 		if (ret)
 			goto unlock;
-		/*
-		 * Don't call the userfaultfd during the speculative path.
-		 * We already checked for the VMA to not be managed through
-		 * userfaultfd, but it may be set in our back once we have lock
-		 * the pte. In such a case we can ignore it this time.
-		 */
-		if (vmf->flags & FAULT_FLAG_SPECULATIVE)
-			goto setpte;
 		/* Deliver the page fault to userland, check inside PT lock */
 		if (userfaultfd_missing(vma)) {
 			pte_unmap_unlock(vmf->pte, vmf->ptl);
@@ -3954,8 +3944,7 @@ skip_pmd_checks:
 		goto unlock_and_release;
 
 	/* Deliver the page fault to userland, check inside PT lock */
-	if (!(vmf->flags & FAULT_FLAG_SPECULATIVE) &&
-				userfaultfd_missing(vma)) {
+	if (userfaultfd_missing(vma)) {
 		pte_unmap_unlock(vmf->pte, vmf->ptl);
 		put_page(page);
 		return handle_userfault(vmf, VM_UFFD_MISSING);
@@ -5023,14 +5012,6 @@ static vm_fault_t ___handle_speculative_fault(struct mm_struct *mm,
 
 	vmf.vma_flags = READ_ONCE(vmf.vma->vm_flags);
 	vmf.vma_page_prot = READ_ONCE(vmf.vma->vm_page_prot);
-
-#ifdef CONFIG_USERFAULTFD
-	/* Can't call userland page fault handler in the speculative path */
-	if (unlikely(vmf.vma_flags & __VM_UFFD_FLAGS)) {
-		trace_spf_vma_notsup(_RET_IP_, vmf.vma, address);
-		return VM_FAULT_RETRY;
-	}
-#endif
 
 	if (vmf.vma_flags & VM_GROWSDOWN || vmf.vma_flags & VM_GROWSUP) {
 		/*

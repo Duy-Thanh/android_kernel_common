@@ -505,14 +505,25 @@ static inline void mmu_notifier_invalidate_range(struct mm_struct *mm,
 }
 
 #ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+/*
+ * Hack to make uffd_spf_lock per mm without modifying the mm_struct as that
+ * breaks ABI.
+ * */
+struct mmu_notifier_and_uffd_lock {
+	struct percpu_rw_semaphore mmu_notifier_lock;
+	rwlock_t uffd_spf_lock;
+};
 
 static inline bool mmu_notifier_subscriptions_init(struct mm_struct *mm)
 {
-	mm->mmu_notifier_lock = kzalloc(sizeof(struct percpu_rw_semaphore), GFP_KERNEL);
+	struct mmu_notifier_and_uffd_lock *lock =
+		kzalloc(sizeof(struct mmu_notifier_and_uffd_lock), GFP_KERNEL);
+	mm->mmu_notifier_lock = (struct percpu_rw_semaphore *)lock;
 	if (!mm->mmu_notifier_lock)
 		return false;
 
-	percpu_init_rwsem(mm->mmu_notifier_lock);
+	percpu_init_rwsem(&lock->mmu_notifier_lock);
+	rwlock_init(&lock->uffd_spf_lock);
 	mm->notifier_subscriptions = NULL;
 
 	return true;
