@@ -16,6 +16,24 @@
       "message": "Please provide more details on what features this enables and why the underlying features cannot be sent upstream",
       "revId": "79fd48bf86c20ff93e592a037b44cdbd7e384056",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8cad8f4_9c895a20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-16T21:19:50Z",
+      "side": 1,
+      "message": "unresolve",
+      "parentUuid": "2d8acdb1_a72ded8b",
+      "revId": "79fd48bf86c20ff93e592a037b44cdbd7e384056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
