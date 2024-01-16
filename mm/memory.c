@@ -3458,10 +3458,6 @@ static vm_fault_t do_wp_page(struct vm_fault *vmf)
 
 	if (userfaultfd_pte_wp(vma, *vmf->pte)) {
 		pte_unmap_unlock(vmf->pte, vmf->ptl);
-		if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
-			count_vm_spf_event(SPF_ABORT_USERFAULTFD);
-			return VM_FAULT_RETRY;
-		}
 		return handle_userfault(vmf, VM_UFFD_WP);
 	}
 
@@ -3998,7 +3994,8 @@ skip_pmd_checks:
 		if (unlikely(!vma->anon_vma)) {
 			if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
 				count_vm_spf_event(SPF_ABORT_ANON_VMA);
-				return VM_FAULT_RETRY;
+				ret = VM_FAULT_RETRY;
+				goto out_uffd;
 			}
 			if (__anon_vma_prepare(vma))
 				goto oom;
@@ -4042,10 +4039,6 @@ skip_pmd_checks:
 		pte_unmap_unlock(vmf->pte, vmf->ptl);
 		if (page)
 			put_page(page);
-		if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
-			count_vm_spf_event(SPF_ABORT_USERFAULTFD);
-			return VM_FAULT_RETRY;
-		}
 		return handle_userfault(vmf, VM_UFFD_MISSING);
 	}
 
@@ -4066,6 +4059,14 @@ unlock:
 release:
 	if (page)
 		put_page(page);
+out_uffd:
+	/*
+	 * We don't need anon_vma for handling userfault with
+	 * UFFD_FEATURE_SIGBUS. Also, it's fine to send SIGBUS even if the page
+	 * is mapped as the userspace is supposed to handle that case already.
+	 */
+	if (ret == VM_FAULT_RETRY && userfaultfd_missing(vma))
+		return handle_userfault(vmf, VM_UFFD_MISSING);
 	return ret;
 oom_free_page:
 	put_page(page);
@@ -4996,6 +4997,9 @@ static vm_fault_t __handle_mm_fault(struct vm_area_struct *vma,
 
 	spf_fail:
 		speculative_page_walk_end();
+		/* Failing page-table walk means page is missing */
+		if (userfaultfd_missing(vmf.vma))
+			return handle_userfault(&vmf, VM_UFFD_MISSING);
 		return VM_FAULT_RETRY;
 	}
 #endif	/* CONFIG_SPECULATIVE_PAGE_FAULT */
