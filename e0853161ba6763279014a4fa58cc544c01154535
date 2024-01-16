@@ -255,6 +255,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15da1635_85485918",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1924,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-01-16T19:54:58Z",
+      "side": 1,
+      "message": "We\u0027re ignoring this return value.",
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36495457_a1b5ddf7",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1929,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-01-16T19:54:58Z",
+      "side": 1,
+      "message": "This logic doesn\u0027t make sense, if we fail to register android_usb_class, I don\u0027t believe we should be attempting to unregister it here, we should be cleaning up the other pieces setup in this init function because we\u0027re going to be returning the failure.",
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0616601_2f355ad2",
         "filename": "drivers/usb/gadget/function/f_accessory.c",
         "patchSetId": 8
