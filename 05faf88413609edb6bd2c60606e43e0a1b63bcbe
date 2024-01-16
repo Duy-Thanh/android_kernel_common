@@ -39,6 +39,24 @@
       "message": "invalid commit id 😞",
       "revId": "05faf88413609edb6bd2c60606e43e0a1b63bcbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5188bcba_cb481772",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-16T11:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7bb2a2a_5d23bed3",
+      "revId": "05faf88413609edb6bd2c60606e43e0a1b63bcbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
