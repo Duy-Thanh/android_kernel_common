@@ -33,6 +33,42 @@
       "message": "A change to add the hook symbols to your symbol list should be uploaded as part of the same series.",
       "revId": "ead8220b7b6890ddeb494565995ab5eed8ddab93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1c41a47_23607439",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3236729
+      },
+      "writtenOn": "2024-01-16T08:27:45Z",
+      "side": 1,
+      "message": "While TOS is running alongside with linux, cpu power off operation by linux may need be denied by TOS in some scenarios.Actually if TOS supports SMP, TOS may need deny any\nother cpu to power down in some cases, i.e. there are no-expired timers in TOS.Some features in TOS are not ready yet.",
+      "parentUuid": "b81b3ddf_c0e19880",
+      "revId": "ead8220b7b6890ddeb494565995ab5eed8ddab93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "924c5e1c_4552eea9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3236729
+      },
+      "writtenOn": "2024-01-16T08:27:45Z",
+      "side": 1,
+      "message": "Done.Gerrit:2910702",
+      "parentUuid": "3bac5dde_6edce160",
+      "revId": "ead8220b7b6890ddeb494565995ab5eed8ddab93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
