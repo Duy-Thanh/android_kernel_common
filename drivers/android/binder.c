@@ -6753,6 +6753,50 @@ static int __init init_binder_device(const char *name)
 	return ret;
 }
 
+#ifdef CONFIG_ANDROID_BINDER_IPC_RUST
+
+bool use_rust_binder;
+bool binder_driver_has_been_init;
+
+static int binder_param_set(const char *buffer, const struct kernel_param *kp) {
+	if (binder_driver_has_been_init)
+		return -ENOTSUPP;
+
+	if (!strcmp(buffer, "rust")) {
+		use_rust_binder = true;
+	} else if (!strcmp(buffer, "c")) {
+		use_rust_binder = false;
+	} else {
+		return -EINVAL;
+	}
+	return 0;
+}
+
+static int binder_param_get(char *buffer, const struct kernel_param *kp) {
+	if (use_rust_binder) {
+		buffer[0] = 'r';
+		buffer[1] = 'u';
+		buffer[2] = 's';
+		buffer[3] = 't';
+		buffer[4] = '\n';
+		buffer[5] = 0;
+	} else {
+		buffer[0] = 'c';
+		buffer[1] = '\n';
+		buffer[2] = 0;
+	}
+	return strlen(buffer);
+}
+
+static const struct kernel_param_ops binder_param_ops = {
+	.set = binder_param_set,
+	.get = binder_param_get,
+};
+
+module_param_cb(impl, &binder_param_ops, NULL, 0444);
+
+#endif
+
 static int __init binder_init(void)
 {
 	int ret;
@@ -6761,6 +6805,11 @@ static int __init binder_init(void)
 	struct hlist_node *tmp;
 	char *device_names = NULL;
 	const struct binder_debugfs_entry *db_entry;
+
+#ifdef CONFIG_ANDROID_BINDER_IPC_RUST
+	if (use_rust_binder) return 0;
+	binder_driver_has_been_init = true;
+#endif
 
 	ret = binder_alloc_shrinker_init();
 	if (ret)
