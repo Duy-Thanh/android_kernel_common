@@ -39,6 +39,29 @@
       },
       "revId": "dcceeea175d6cceca998694d299a359268bfbc41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e31fcc_eaab72cc",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-01-16T04:12:59Z",
+      "side": 1,
+      "message": "Should flo-\u003eoffset be updated when vfs_setpos return with -EINVAL?",
+      "range": {
+        "startLine": 465,
+        "startChar": 3,
+        "endLine": 465,
+        "endChar": 40
+      },
+      "revId": "dcceeea175d6cceca998694d299a359268bfbc41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
