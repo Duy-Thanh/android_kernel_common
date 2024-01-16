@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4435e0e9_9b27bb91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-01-16T21:27:03Z",
+      "side": 1,
+      "message": "Thanks again for submitting this, and providing a bit more detail in the commit message. \n\nHowever, it\u0027s still unclear as to *why* this change is needed. If you could please expand on the specific problem being seen and why these hooks help to resolve the problem. If preferred this detail can be shared in the bug.\n\nHaving these rationales are important so we can try to find better common solutions upstream.",
+      "revId": "97c11c62135768cec41990a64f204c9e700d5985",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
