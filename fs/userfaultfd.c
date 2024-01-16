@@ -23,6 +23,7 @@
 #include <linux/file.h>
 #include <linux/bug.h>
 #include <linux/anon_inodes.h>
+#include <linux/rcupdate.h>
 #include <linux/syscalls.h>
 #include <linux/userfaultfd_k.h>
 #include <linux/mempolicy.h>
@@ -71,6 +72,9 @@ struct userfaultfd_ctx {
 	bool mmap_changing;
 	/* mm with one ore more vmas attached to this userfaultfd_ctx */
 	struct mm_struct *mm;
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+	struct rcu_head rcu_head;
+#endif
 };
 
 struct userfaultfd_fork_ctx {
@@ -156,6 +160,25 @@ static void userfaultfd_ctx_get(struct userfaultfd_ctx *ctx)
 	refcount_inc(&ctx->refcount);
 }
 
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+static void __free_userfaultfd_ctx(struct rcu_head *head)
+{
+	struct userfaultfd_ctx *ctx = container_of(head, struct userfaultfd_ctx,
+						   rcu_head);
+	kmem_cache_free(userfaultfd_ctx_cachep, ctx);
+}
+
+static void free_userfaultfd_ctx(struct userfaultfd_ctx *ctx)
+{
+	call_rcu(&ctx->rcu_head, __free_userfaultfd_ctx);
+}
+#else
+static void free_userfaultfd_ctx(struct userfaultfd_ctx *ctx)
+{
+	kmem_cache_free(userfaultfd_ctx_cachep, ctx);
+}
+#endif
+
 /**
  * userfaultfd_ctx_put - Releases a reference to the internal userfaultfd
  * context.
@@ -176,7 +199,7 @@ static void userfaultfd_ctx_put(struct userfaultfd_ctx *ctx)
 		VM_BUG_ON(spin_is_locked(&ctx->fd_wqh.lock));
 		VM_BUG_ON(waitqueue_active(&ctx->fd_wqh));
 		mmdrop(ctx->mm);
-		kmem_cache_free(userfaultfd_ctx_cachep, ctx);
+		free_userfaultfd_ctx(ctx);
 	}
 }
 
@@ -388,6 +411,21 @@ vm_fault_t handle_userfault(struct vm_fault *vmf, unsigned long reason)
 	if (current->flags & (PF_EXITING|PF_DUMPCORE))
 		goto out;
 
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+	if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
+		ret = VM_FAULT_RETRY;
+		/*
+		 * Do it inside RCU section to ensure that the ctx doesn't
+		 * disappear under us.
+		 */
+		rcu_read_lock();
+		ctx = vmf->vma->vm_userfaultfd_ctx.ctx;
+		if (!ctx || (ctx->features & UFFD_FEATURE_SIGBUS))
+			ret = VM_FAULT_SIGBUS;
+		rcu_read_unlock();
+		return ret;
+	}
+#endif
 	/*
 	 * Coredumping runs without mmap_lock so we can only check that
 	 * the mmap_lock is held, if PF_DUMPCORE was not set.
