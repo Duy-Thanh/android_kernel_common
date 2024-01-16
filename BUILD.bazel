@@ -106,6 +106,7 @@ filegroup(
         "android/abi_gki_aarch64_amlogic",
         "android/abi_gki_aarch64_db845c",
         "android/abi_gki_aarch64_pixel",
+        "android/abi_gki_aarch64_qcom",
         "android/abi_gki_aarch64_unisoc",
         "android/abi_gki_aarch64_virtual_device",
     ],
