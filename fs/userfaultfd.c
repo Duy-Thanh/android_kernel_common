@@ -469,13 +469,18 @@ vm_fault_t handle_userfault(struct vm_fault *vmf, unsigned long reason)
 		goto out;
 	}
 
+	ret = VM_FAULT_RETRY;
 	/*
 	 * Handle nowait, not much to do other than tell it to retry
 	 * and wait.
 	 */
-	ret = VM_FAULT_RETRY;
 	if (vmf->flags & FAULT_FLAG_RETRY_NOWAIT)
 		goto out;
+	// Bail out if this fault is speculative.
+	if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
+		count_vm_spf_event(SPF_ABORT_USERFAULTFD);
+		goto out;
+	}
 
 	/* take the reference before dropping the mmap_lock */
 	userfaultfd_ctx_get(ctx);
