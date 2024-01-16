@@ -34,6 +34,24 @@
       "parentUuid": "091d9cdd_805c1a71",
       "revId": "511312a274ace1a5bf2435430cbc22066916affb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46017fd8_9a2fe46e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-16T21:18:23Z",
+      "side": 1,
+      "message": "Oh, I missed the type change for esr. Please fix that in android-mainline. Then you can cherry-pick that fix here instead of the revert/reapply in this series.",
+      "parentUuid": "3f810a47_0c4689bf",
+      "revId": "511312a274ace1a5bf2435430cbc22066916affb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
