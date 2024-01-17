@@ -69,6 +69,24 @@
       "parentUuid": "36e2f608_cfbdbb74",
       "revId": "c75c01c2b55fb4031afc8d4d336da02c72b5700f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6688b25a_830409d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-17T06:44:39Z",
+      "side": 1,
+      "message": "Symbol needs to be added to the symbol list that is used for all builds, not just your build.",
+      "parentUuid": "d5772430_c7dcfc09",
+      "revId": "c75c01c2b55fb4031afc8d4d336da02c72b5700f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
