@@ -16,6 +16,24 @@
       "message": "Add again? Please cite the patch that added them the first time.",
       "revId": "7f44248c82a9442dc1270ab5cf35cdc9ea9cfdb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aceda4ab_ee640a3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2024-01-17T06:52:34Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nI have re-modified the commit, and becaue the commit b8e1f899fc6b has occupies the original change-id, so I have to add a new change-id.\n\nThanks!",
+      "parentUuid": "e01349c6_b2894c7d",
+      "revId": "7f44248c82a9442dc1270ab5cf35cdc9ea9cfdb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
