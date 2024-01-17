@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05407b3c_98eae32e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-17T17:32:49Z",
+      "side": 1,
+      "message": "So we\u0027ve established that even if `repo upload` panics with\n```\nATTENTION: You are uploading an unusually high number of commits.\nYOU PROBABLY DO NOT MEAN TO DO THIS. (Did you rebase across branches?)\n```\nGerrit will know no to upload thousands of individual commits ... 😊",
+      "revId": "d286873d7a078831ce62ab34f36415081e7d706a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
