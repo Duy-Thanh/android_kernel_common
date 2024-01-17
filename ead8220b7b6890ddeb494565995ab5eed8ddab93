@@ -105,6 +105,24 @@
       "parentUuid": "924c5e1c_4552eea9",
       "revId": "ead8220b7b6890ddeb494565995ab5eed8ddab93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc559594_f659169c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-01-17T11:46:43Z",
+      "side": 1,
+      "message": "As part of this series. Please rebase 2910702 on top of this.",
+      "parentUuid": "f2bba0a6_78f87bad",
+      "revId": "ead8220b7b6890ddeb494565995ab5eed8ddab93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
