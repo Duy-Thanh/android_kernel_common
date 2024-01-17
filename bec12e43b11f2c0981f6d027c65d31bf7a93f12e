@@ -22,6 +22,30 @@
       },
       "revId": "bec12e43b11f2c0981f6d027c65d31bf7a93f12e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5468c01_7a631a72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1893826
+      },
+      "writtenOn": "2024-01-17T05:33:23Z",
+      "side": 1,
+      "message": "Updated the commit message with more info about the usage.",
+      "parentUuid": "b89b4bce_2d438aa9",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "bec12e43b11f2c0981f6d027c65d31bf7a93f12e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
