@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca722041_0136b293",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-17T10:41:55Z",
+      "side": 1,
+      "message": "I thought this caused a performance decrease for previous attempts at enabling this.  What has changed since then?",
+      "revId": "c79a343a4a0a16f2bfda2073059866d59ee5fb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
