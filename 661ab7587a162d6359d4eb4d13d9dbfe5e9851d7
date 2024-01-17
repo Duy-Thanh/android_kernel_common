@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5c9b4fd_9a5f8807",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3178523
+      },
+      "writtenOn": "2024-01-17T15:33:52Z",
+      "side": 1,
+      "message": "just cherry-pick from android15-6.6",
+      "revId": "661ab7587a162d6359d4eb4d13d9dbfe5e9851d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
