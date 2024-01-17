@@ -16,6 +16,24 @@
       "message": "All need to have the same change-id.",
       "revId": "549d45ec40486b8ff5e13372f9ece4cd134a5b15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ff1021_c2103219",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937057
+      },
+      "writtenOn": "2024-01-17T11:54:20Z",
+      "side": 1,
+      "message": "Sure Greg\nNew patch: https://android-review.googlesource.com/c/kernel/common/+/2913488\n\nI have abandon this one",
+      "parentUuid": "c04ecc0f_738b7f6a",
+      "revId": "549d45ec40486b8ff5e13372f9ece4cd134a5b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
