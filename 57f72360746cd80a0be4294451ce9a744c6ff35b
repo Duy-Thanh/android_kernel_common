@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fce0fffa_1b6a6dca",
+        "filename": "kernel/trace/trace_preemptirq.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-01-17T19:20:52Z",
+      "side": 1,
+      "message": "now that we have this macro I wonder if it would be cleaner to create a couple of inline `__trace_##point##_rcuidle` functions and insert our vendor hooks in there. Todd, wdyt?",
+      "range": {
+        "startLine": 31,
+        "startChar": 36,
+        "endLine": 31,
+        "endChar": 59
+      },
+      "revId": "57f72360746cd80a0be4294451ce9a744c6ff35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa55aaab_9a2417ae",
+        "filename": "kernel/trace/trace_preemptirq.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-01-17T19:20:52Z",
+      "side": 1,
+      "message": "The original patch in aosp/1513631 seems to trace \"enable\" here. I suppose that was a mistake and this one is correct? Did we have the incorrect vendor hook all this time in android-mainline?",
+      "range": {
+        "startLine": 105,
+        "startChar": 3,
+        "endLine": 105,
+        "endChar": 33
+      },
+      "revId": "57f72360746cd80a0be4294451ce9a744c6ff35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
