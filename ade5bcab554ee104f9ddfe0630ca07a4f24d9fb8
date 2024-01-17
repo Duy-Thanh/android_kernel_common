@@ -136,6 +136,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cee87b1_d5ac4cba",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-17T13:46:53Z",
+      "side": 1,
+      "message": "I will look into improving the error handling here later to eagerly report an error to userspace, as part of the other thread with Arve. Using panic in the kernel is strongly frowned upon unless you really really can\u0027t do anything else, as it could bring down the entire device.",
+      "parentUuid": "407b0c73_9f2620b5",
+      "revId": "ade5bcab554ee104f9ddfe0630ca07a4f24d9fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf776a8c_1a4a3b58",
