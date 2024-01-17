@@ -51,6 +51,24 @@
       "parentUuid": "c0b9eb89_6e92aac5",
       "revId": "c75c01c2b55fb4031afc8d4d336da02c72b5700f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5772430_c7dcfc09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973315
+      },
+      "writtenOn": "2024-01-17T04:58:47Z",
+      "side": 1,
+      "message": "It\u0027s some weired to me because ```android/abi_gki_aarch64_exynosauto``` has ```spi_slave_abort``` in this patch.\n\nCould you let me know which branch the error happened?\n in android15-6.1 branch? or in android15-6.6?",
+      "parentUuid": "36e2f608_cfbdbb74",
+      "revId": "c75c01c2b55fb4031afc8d4d336da02c72b5700f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
