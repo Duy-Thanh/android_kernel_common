@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61b12190_c4097dc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083383
+      },
+      "writtenOn": "2024-01-17T01:27:04Z",
+      "side": 1,
+      "message": "Please remove android/abi_gki_aarch64.xml because it was not used in android14-6.1",
+      "revId": "52ad12a9a671f52c6ca196084af7a80126994675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
