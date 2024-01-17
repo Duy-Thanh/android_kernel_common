@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33812b7d_51b8deb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3178523
+      },
+      "writtenOn": "2024-01-17T15:34:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f98f1440_cc39707f",
+      "revId": "4a8ba193effc4189372b058a284bef7cc829aabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c393bc8f_915228ef",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-12-19T08:21:25Z",
       "side": 1,
       "message": "an array of 1 item?  Why not just use `ANDROID_VENDOR_DATA()` instead?",
+      "range": {
+        "startLine": 886,
+        "startChar": 1,
+        "endLine": 886,
+        "endChar": 26
+      },
+      "revId": "4a8ba193effc4189372b058a284bef7cc829aabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76cf1ddd_02ef70a4",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 3178523
+      },
+      "writtenOn": "2024-01-17T15:34:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c393bc8f_915228ef",
       "range": {
         "startLine": 886,
         "startChar": 1,
