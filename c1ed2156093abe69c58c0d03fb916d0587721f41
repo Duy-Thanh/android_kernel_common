@@ -142,6 +142,30 @@
       },
       "revId": "c1ed2156093abe69c58c0d03fb916d0587721f41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36ebd893_f441f4c6",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-01-17T16:29:05Z",
+      "side": 1,
+      "message": "yeah please separate the vendor hooks in their own CLs since the original CL doesn\u0027t have the find_new_ilb() hook.",
+      "parentUuid": "891abdb4_89f7b532",
+      "range": {
+        "startLine": 333,
+        "startChar": 24,
+        "endLine": 333,
+        "endChar": 48
+      },
+      "revId": "c1ed2156093abe69c58c0d03fb916d0587721f41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
