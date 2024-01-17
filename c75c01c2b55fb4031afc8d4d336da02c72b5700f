@@ -87,6 +87,24 @@
       "parentUuid": "d5772430_c7dcfc09",
       "revId": "c75c01c2b55fb4031afc8d4d336da02c72b5700f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e8ff43d_c452b764",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973315
+      },
+      "writtenOn": "2024-01-17T07:04:25Z",
+      "side": 1,
+      "message": "```android/abi_gki_aarch64_exynosauto``` is listed in ```aarch64_additional_kmi_symbol_lists``` of ```common/BUILD.bazel```.\nI thought the symbol is added to symbol list that is used for all builds for aarch64.\nand x86_64 and riscv doesn\u0027t have additional_kmi_symbol_lists ```common/BUILD.bazel``` currently.\n\nCould you let me know the way to add the symbol to symbol list to all builds?",
+      "parentUuid": "6688b25a_830409d7",
+      "revId": "c75c01c2b55fb4031afc8d4d336da02c72b5700f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
