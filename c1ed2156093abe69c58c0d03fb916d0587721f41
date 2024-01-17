@@ -118,6 +118,30 @@
       },
       "revId": "c1ed2156093abe69c58c0d03fb916d0587721f41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "891abdb4_89f7b532",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2024-01-17T13:46:22Z",
+      "side": 1,
+      "message": "Should they be separate CLs since the original CL is for find_energy_efficient_cpu only?",
+      "parentUuid": "13824f08_eee09fd9",
+      "range": {
+        "startLine": 333,
+        "startChar": 24,
+        "endLine": 333,
+        "endChar": 48
+      },
+      "revId": "c1ed2156093abe69c58c0d03fb916d0587721f41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
