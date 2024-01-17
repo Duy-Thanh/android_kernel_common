@@ -289,6 +289,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8e006b4_4f30586d",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1929,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-17T07:10:28Z",
+      "side": 1,
+      "message": "Good catch, yes, this is incorrect, you don\u0027t unregister something that failed to register 😊",
+      "parentUuid": "36495457_a1b5ddf7",
+      "revId": "e0853161ba6763279014a4fa58cc544c01154535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0616601_2f355ad2",
         "filename": "drivers/usb/gadget/function/f_accessory.c",
         "patchSetId": 8
