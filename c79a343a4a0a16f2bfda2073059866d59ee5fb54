@@ -16,6 +16,24 @@
       "message": "I thought this caused a performance decrease for previous attempts at enabling this.  What has changed since then?",
       "revId": "c79a343a4a0a16f2bfda2073059866d59ee5fb54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d357214c_5808354d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2063993
+      },
+      "writtenOn": "2024-01-17T11:31:25Z",
+      "side": 1,
+      "message": "Hi, Although the CONFIG_TASK_DELAY_ACCT option is enabled, `delayacct` needs to be added to the boot option to take effect, so it does not have any impact on other vendors.\n\n```\nint delayacct_on __read_mostly; /* Delay accounting turned on/off */\nstatic void set_delayacct(bool enabled)\n{\n        if (enabled) {\n                static_branch_enable(\u0026delayacct_key);\n                delayacct_on \u003d 1;\n        } else {\n                delayacct_on \u003d 0;\n                static_branch_disable(\u0026delayacct_key);\n        }\n}\n\nstatic int __init delayacct_setup_enable(char *str)\n{\n        delayacct_on \u003d 1;\n        return 1;\n}\n__setup(\"delayacct\", delayacct_setup_enable);\n```",
+      "parentUuid": "ca722041_0136b293",
+      "revId": "c79a343a4a0a16f2bfda2073059866d59ee5fb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
