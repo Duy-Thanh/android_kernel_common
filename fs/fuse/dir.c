@@ -927,11 +927,11 @@ static int create_new_entry(struct fuse_mount *fm, struct fuse_args *args,
 		if (err)
 			goto out_put_forget_req;
 
-		BUG_ON(args->in_numargs != 2);
+		BUG_ON(args->in_numargs >= ARRAY_SIZE(args->in_args));
 
-		args->in_numargs = 3;
-		args->in_args[2].size = security_ctxlen;
-		args->in_args[2].value = security_ctx;
+		args->in_args[args->in_numargs].size = security_ctxlen;
+		args->in_args[args->in_numargs].value = security_ctx;
+		args->in_numargs++;
 	}
 
 	err = fuse_simple_request(fm, args);
@@ -952,10 +952,27 @@ static int create_new_entry(struct fuse_mount *fm, struct fuse_args *args,
 		fuse_queue_forget(fm->fc, forget, outarg.nodeid, 1);
 		return -ENOMEM;
 	}
+        if (args->opcode == FUSE_NONATOMIC_TMPFILE && inode->i_nlink != 0) {
+		fuse_queue_forget(fm->fc, forget, outarg.nodeid, 1);
+		return -EIO;
+	}
 	kfree(forget);
 
 	d_drop(entry);
-	d = d_splice_alias(inode, entry);
+	if (args->opcode == FUSE_NONATOMIC_TMPFILE) {
+		/*
+		 * d_tmpfile will decrement the link count and print a warning
+		 * if the link count is 0, and we checked that the server sent
+		 * us an inode with an nlink count of 0 above.  Set the nlink
+		 * count to 1 to suppress the warning. btrfs does the same
+		 * thing.
+		 */
+		set_nlink(inode, 1);
+		d_tmpfile(entry, inode);
+		d = NULL;
+	} else {
+		d = d_splice_alias(inode, entry);
+	}
 	if (IS_ERR(d))
 		return PTR_ERR(d);
 
@@ -1044,6 +1061,27 @@ static int fuse_mkdir(struct user_namespace *mnt_userns, struct inode *dir,
 	args.in_args[1].size = entry->d_name.len + 1;
 	args.in_args[1].value = entry->d_name.name;
 	return create_new_entry(fm, &args, dir, entry, S_IFDIR);
+}
+
+static int fuse_tmpfile(struct user_namespace *mnt_userns, struct inode *dir,
+			struct dentry *entry, umode_t mode)
+{
+	struct fuse_tmpfile_in inarg;
+	struct fuse_mount *fm = get_fuse_mount(dir);
+	FUSE_ARGS(args);
+
+	if (!fm->fc->dont_mask)
+		mode &= ~current_umask();
+
+	memset(&inarg, 0, sizeof(inarg));
+	inarg.mode = mode;
+	inarg.umask = current_umask();
+	args.opcode = FUSE_NONATOMIC_TMPFILE;
+	args.in_numargs = 1;
+	args.in_args[0].size = sizeof(inarg);
+	args.in_args[0].value = &inarg;
+
+	return create_new_entry(fm, &args, dir, entry, S_IFREG);
 }
 
 static int fuse_symlink(struct user_namespace *mnt_userns, struct inode *dir,
@@ -2239,6 +2277,7 @@ static const struct inode_operations fuse_dir_inode_operations = {
 	.setattr	= fuse_setattr,
 	.create		= fuse_create,
 	.atomic_open	= fuse_atomic_open,
+	.tmpfile        = fuse_tmpfile,
 	.mknod		= fuse_mknod,
 	.permission	= fuse_permission,
 	.getattr	= fuse_getattr,
