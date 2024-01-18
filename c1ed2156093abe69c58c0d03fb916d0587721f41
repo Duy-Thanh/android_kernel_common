@@ -166,6 +166,30 @@
       },
       "revId": "c1ed2156093abe69c58c0d03fb916d0587721f41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13d3b6f7_ff4638ab",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 3178523
+      },
+      "writtenOn": "2024-01-18T05:36:47Z",
+      "side": 1,
+      "message": "OK, I remove trace_android_rvh_find_new_ilb().",
+      "parentUuid": "36ebd893_f441f4c6",
+      "range": {
+        "startLine": 333,
+        "startChar": 24,
+        "endLine": 333,
+        "endChar": 48
+      },
+      "revId": "c1ed2156093abe69c58c0d03fb916d0587721f41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
