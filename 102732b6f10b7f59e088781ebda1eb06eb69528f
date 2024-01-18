@@ -16,6 +16,24 @@
       "message": "Same as aosp/2909897. If you agree, please abandon.",
       "revId": "102732b6f10b7f59e088781ebda1eb06eb69528f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad841ce_51709d97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899690
+      },
+      "writtenOn": "2024-01-18T22:04:50Z",
+      "side": 1,
+      "message": "Yes if that change merged, then there\u0027s no reason for this change.",
+      "parentUuid": "bef4ee98_a4fe1871",
+      "revId": "102732b6f10b7f59e088781ebda1eb06eb69528f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
