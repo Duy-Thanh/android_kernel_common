@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d2daca5_5d9f45e6",
+        "filename": "kernel/trace/trace_preemptirq.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-18T22:04:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean. Are you saying that we\u0027d change lines 48-49 to this?\n```\ntrace(android_rvh_irqs_enable)(CALLER_ADDR0, CALLER_ADDR1)\n```\nmakes sense.",
+      "parentUuid": "fce0fffa_1b6a6dca",
+      "range": {
+        "startLine": 31,
+        "startChar": 36,
+        "endLine": 31,
+        "endChar": 59
+      },
+      "revId": "57f72360746cd80a0be4294451ce9a744c6ff35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa55aaab_9a2417ae",
         "filename": "kernel/trace/trace_preemptirq.c",
         "patchSetId": 4
