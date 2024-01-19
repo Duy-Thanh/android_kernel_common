@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64bf501a_fa2427bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-01-19T02:07:25Z",
+      "side": 1,
+      "message": "The error introduced by this patch is resolved by the following patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/2919145",
+      "revId": "6fd548507668e8d01e945693992130374576db5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
