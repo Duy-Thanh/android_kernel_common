@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b43cdb2b_636ba989",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-01-19T11:22:21Z",
+      "side": 1,
+      "message": "Should I submit a patch to remove dev_pm_opp_add from android/abi_gki_aarch64_pixel and android/abi_gki_aarch64_db845c, or will you take care of it?",
+      "parentUuid": "b64504d7_d6586ca6",
+      "revId": "6fd548507668e8d01e945693992130374576db5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f0c7efd_5d76a62f",
         "filename": "drivers/opp/of.c",
         "patchSetId": 2
