@@ -1,0 +1,51 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065468419",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2919386?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "77104b30_4f242792",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "    \"net/can/can.ko\",\n"
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "dc7baf50_b7fa25e7",
+        "filename": "modules.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-19T07:31:02Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier modules.bzl` to format the file, or apply the suggested fix.",
+      "revId": "fbff96cc6838596914d854d2b24878f9022ea9fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
