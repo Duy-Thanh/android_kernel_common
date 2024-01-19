@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065503275",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2918748?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c7250e77_05a43e6d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-19T16:22:27Z",
+      "side": 1,
+      "message": "Loaded symbol \"copy_file\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 4,
+        "startChar": 44,
+        "endLine": 4,
+        "endChar": 53
+      },
+      "revId": "8dda032e26ca3605badf25ad4d7c110e6c9da585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
