@@ -16,6 +16,23 @@
       "message": "The error introduced by this patch is resolved by the following patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/2919145",
       "revId": "6fd548507668e8d01e945693992130374576db5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f49cb52_ae6d474d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-01-19T04:39:05Z",
+      "side": 1,
+      "message": "Another important point to note is that this patch removed EXPORT_SYMBOL_GPL(dev_pm_opp_add) and added static inline int dev_pm_opp_add in include/linux/pm_opp.h. However, android/abi_gki_aarch64_pixel and android/abi_gki_aarch64_db845c already include dev_pm_opp_add, resulting in the following error.\n\nSymbols missing from the ksymtab:\n  dev_pm_opp_add\nTarget //common:kernel_aarch64_dist failed to build\n\nShould we remove dev_pm_opp_add from android/abi_gki_aarch64_pixel and android/abi_gki_aarch64_db845c?",
+      "revId": "6fd548507668e8d01e945693992130374576db5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
