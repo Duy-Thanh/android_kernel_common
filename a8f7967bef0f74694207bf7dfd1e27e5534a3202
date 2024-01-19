@@ -131,6 +131,133 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000065498670",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2918748?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "3b9c14d1_c10aeb4c",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2044,
+                "startChar": 0,
+                "endLine": 2044,
+                "endChar": 0
+              },
+              "replacement": "        \":tools/testing/selftests/android/config_x86.xml\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2045,
+                "startChar": 0,
+                "endLine": 2046,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2058,
+                "startChar": 0,
+                "endLine": 2058,
+                "endChar": 0
+              },
+              "replacement": "        \":tools/testing/selftests/android/config_arm.xml\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2059,
+                "startChar": 0,
+                "endLine": 2060,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2339,
+                "startChar": 0,
+                "endLine": 2339,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_tests_x86\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2340,
+                "startChar": 0,
+                "endLine": 2341,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2349,
+                "startChar": 0,
+                "endLine": 2349,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_tests_arm\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2350,
+                "startChar": 0,
+                "endLine": 2351,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2368,
+                "startChar": 0,
+                "endLine": 2368,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_arm64_test_configs\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2369,
+                "startChar": 0,
+                "endLine": 2370,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "8cb17f1f_f80d07a5",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-19T15:32:41Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "a8f7967bef0f74694207bf7dfd1e27e5534a3202",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065498670",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2918748?revision\u003d1",
       "fixSuggestions": [],
       "key": {
         "uuid": "3aa565df_66c0743a",
@@ -142,6 +269,32 @@
         "id": 1757831
       },
       "writtenOn": "2024-01-19T15:32:33Z",
+      "side": 1,
+      "message": "Loaded symbol \"copy_file\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 4,
+        "startChar": 44,
+        "endLine": 4,
+        "endChar": 53
+      },
+      "revId": "a8f7967bef0f74694207bf7dfd1e27e5534a3202",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065498670",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2918748?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e9903ebc_d0c2411a",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-19T15:32:41Z",
       "side": 1,
       "message": "Loaded symbol \"copy_file\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
       "range": {
