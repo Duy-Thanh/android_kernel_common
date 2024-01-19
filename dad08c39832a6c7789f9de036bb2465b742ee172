@@ -16,6 +16,23 @@
       "message": "Respin bug:321154142",
       "revId": "dad08c39832a6c7789f9de036bb2465b742ee172",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab00e7c9_484c0390",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959117
+      },
+      "writtenOn": "2024-01-19T18:30:57Z",
+      "side": 1,
+      "message": "Waiting for aosp/2912902",
+      "revId": "dad08c39832a6c7789f9de036bb2465b742ee172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
