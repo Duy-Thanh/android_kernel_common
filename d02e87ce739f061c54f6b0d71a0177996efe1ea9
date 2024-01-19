@@ -173,6 +173,24 @@
       "parentUuid": "e43e414a_8953ae27",
       "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b799797_489acb01",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2024-01-19T06:37:28Z",
+      "side": 1,
+      "message": "Hi Todd,\nThank you for your help. Now the patch is merged(https://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git/commit/?h\u003dthermal\u0026id\u003ddd75558b2d0b5e2b36ec0ef7e494d2763517d801). According to the citation, change it to \"UPSTREAM\" directly and add the commit id. Please review:)",
+      "parentUuid": "de35b4b0_75a63c42",
+      "revId": "d02e87ce739f061c54f6b0d71a0177996efe1ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
