@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "302b6a34_7263debf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-01-19T11:47:23Z",
+      "side": 1,
+      "message": "Please add it do this patch or via a new patch to this series. We will see in presubmit, whether we need to fix anything else for those devices.",
+      "parentUuid": "b43cdb2b_636ba989",
+      "revId": "6fd548507668e8d01e945693992130374576db5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f0c7efd_5d76a62f",
         "filename": "drivers/opp/of.c",
         "patchSetId": 2
