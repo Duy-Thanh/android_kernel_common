@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efded071_c5468ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-01-20T03:51:43Z",
+      "side": 1,
+      "message": "Add a new patch\nhttps://android-review.googlesource.com/c/kernel/common/+/2920765",
+      "parentUuid": "302b6a34_7263debf",
+      "revId": "6fd548507668e8d01e945693992130374576db5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f0c7efd_5d76a62f",
         "filename": "drivers/opp/of.c",
         "patchSetId": 2
