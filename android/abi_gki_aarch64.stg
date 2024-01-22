@@ -4044,6 +4044,11 @@ pointer_reference {
   pointee_type_id: 0x18bd6530
 }
 pointer_reference {
+  id: 0x0cc07624
+  kind: POINTER
+  pointee_type_id: 0x19413e0d
+}
+pointer_reference {
   id: 0x0cc2a6e7
   kind: POINTER
   pointee_type_id: 0x194a7d01
@@ -295331,6 +295336,12 @@ function {
   parameter_id: 0x26847863
 }
 function {
+  id: 0x19413e0d
+  return_type_id: 0x48b5725f
+  parameter_id: 0x26ee682a
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x1942d44d
   return_type_id: 0x48b5725f
   parameter_id: 0x276a1779
@@ -296897,6 +296908,13 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x310ec01d
   parameter_id: 0x33756485
+}
+function {
+  id: 0x1c167d2e
+  return_type_id: 0x48b5725f
+  parameter_id: 0x32ec08f2
+  parameter_id: 0x0cc07624
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0x1c18b1c5
@@ -330866,6 +330884,11 @@ function {
   parameter_id: 0x0258f96e
 }
 function {
+  id: 0xdd084b85
+  return_type_id: 0x32ec08f2
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0xdd32bce5
   return_type_id: 0x0ae4a2c7
   parameter_id: 0x0cc78943
@@ -363631,6 +363654,15 @@ elf_symbol {
   full_name: "get_each_object_track"
 }
 elf_symbol {
+  id: 0x4579b2cf
+  name: "get_fs_type"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x403e24c8
+  type_id: 0xdd084b85
+  full_name: "get_fs_type"
+}
+elf_symbol {
   id: 0xdb82735d
   name: "get_governor_parent_kobj"
   is_defined: true
@@ -369248,6 +369280,15 @@ elf_symbol {
   crc: 0x3204fe7a
   type_id: 0x9659ea27
   full_name: "iterate_fd"
+}
+elf_symbol {
+  id: 0xfea15456
+  name: "iterate_supers_type"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4a91ba47
+  type_id: 0x1c167d2e
+  full_name: "iterate_supers_type"
 }
 elf_symbol {
   id: 0xca27ab6b
@@ -404432,6 +404473,7 @@ interface {
   symbol_id: 0xaf0c4e38
   symbol_id: 0x08e235b1
   symbol_id: 0x00d00ad1
+  symbol_id: 0x4579b2cf
   symbol_id: 0xdb82735d
   symbol_id: 0x7d6ec6da
   symbol_id: 0x56ec444f
@@ -405056,6 +405098,7 @@ interface {
   symbol_id: 0xbb7edccb
   symbol_id: 0xd4b34ea6
   symbol_id: 0x3c6496cb
+  symbol_id: 0xfea15456
   symbol_id: 0xca27ab6b
   symbol_id: 0x124d42c2
   symbol_id: 0xd106aba0
