@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "288d3df1_96917fea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1829853
+      },
+      "writtenOn": "2024-01-22T12:08:24Z",
+      "side": 1,
+      "message": "\u003e Please **attach an open respin request bug** to this change. Refer the following link for more information:\n\u003e https://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 599484338 android-build.ayeaye-python-dispatcher_20240118.04_p0\n\nPlease fix.\n\nhello~,\n\nI just want to the next release build (2024-1) for android14-6.1 including this patch.\n\nI tried to make a respin request, but just the latest monthly branch is: 2023-12.\n\nAnd I check the latest release build for android14-6.1,  it is android14-6.1-2023-12_r2.\n\nDo I need still make a respin request for a not release monthly branch?",
+      "parentUuid": "fe0b2cd7_fef2616c",
+      "revId": "35cffb6167efc16591df14f5f7eefbb7b2a96d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "aa06d3d0_73166fcd",
@@ -14,6 +32,23 @@
       "writtenOn": "2024-01-22T09:38:51Z",
       "side": 1,
       "message": "Cherry picks for catching up to 2024-1 monthly gki boot image",
+      "revId": "35cffb6167efc16591df14f5f7eefbb7b2a96d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "128d4dc4_5cbbcd6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1829853
+      },
+      "writtenOn": "2024-01-22T12:08:24Z",
+      "side": 1,
+      "message": "hello~ @all,\n\nI just want to the next release build (2024-1) for android14-6.1 including this patch.\n\nI tried to make a respin request, but just the latest monthly branch is: 2023-12.\n\nAnd I check the latest release build for android14-6.1, it is android14-6.1-2023-12_r2.\n\nDo I need still make a respin request for a not release monthly branch?",
       "revId": "35cffb6167efc16591df14f5f7eefbb7b2a96d22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
