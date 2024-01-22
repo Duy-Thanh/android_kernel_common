@@ -1139,6 +1139,7 @@
   balloon_page_enqueue
   __ClearPageMovable
   init_on_free
+  invalidate_tlb
   mutex_trylock
   page_relinquish
   page_reporting_register

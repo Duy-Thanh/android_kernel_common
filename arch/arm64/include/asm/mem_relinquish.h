@@ -11,5 +11,6 @@ struct page;
 
 bool kvm_has_memrelinquish_services(void);
 void page_relinquish(struct page *page);
+void invalidate_tlb(void);
 
 #endif	/* __ASM_MEM_RELINQUISH_H */

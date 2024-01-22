@@ -9,6 +9,7 @@
 
 struct hypervisor_ops {
 	void (*page_relinquish)(struct page *page);
+	void (*invalidate_tlb)(void);
 };
 
 extern struct hypervisor_ops hyp_ops;

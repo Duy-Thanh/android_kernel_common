@@ -15,6 +15,7 @@
 
 static inline bool kvm_has_memrelinquish_services(void) { return false; }
 static inline void page_relinquish(struct page *page) { }
+static inline void invalidate_tlb(void) { }
 
 #endif	/* CONFIG_MEMORY_RELINQUISH */
 

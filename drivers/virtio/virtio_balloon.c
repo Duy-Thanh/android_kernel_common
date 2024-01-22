@@ -149,6 +149,8 @@ static void tell_host(struct virtio_balloon *vb, struct virtqueue *vq)
 
 	sg_init_one(&sg, vb->pfns, sizeof(vb->pfns[0]) * vb->num_pfns);
 
+	invalidate_tlb();
+
 	/* We should always be able to add one buffer to an empty queue. */
 	virtqueue_add_outbuf(vq, &sg, 1, vb, GFP_KERNEL);
 	virtqueue_kick(vq);
@@ -176,6 +178,8 @@ static int virtballoon_free_page_report(struct page_reporting_dev_info *pr_dev_i
 	 */
 	if (WARN_ON_ONCE(err))
 		return err;
+
+	invalidate_tlb();
 
 	virtqueue_kick(vq);
 
