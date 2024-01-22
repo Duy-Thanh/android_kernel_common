@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5640f5a_0ce4dc7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-01-22T16:11:25Z",
+      "side": 1,
+      "message": "@gregkh@google.com I\u0027ve removed the ABI build and I\u0027m in the process of removing ABI monitoring configuration for this branch.\n\nYou should be able to submit this.",
+      "revId": "207e801a51d5b6623176a594c7a94d250f88402a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
