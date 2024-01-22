@@ -16,6 +16,23 @@
       "message": "Respin bug:321674240",
       "revId": "2a05d33f16ed4b3d16bf4ef682a8ee4671dbbe94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc59f8f1_16d2a7c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-22T17:17:10Z",
+      "side": 1,
+      "message": "Needs to wait for 2024-01 branch to release",
+      "revId": "2a05d33f16ed4b3d16bf4ef682a8ee4671dbbe94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
