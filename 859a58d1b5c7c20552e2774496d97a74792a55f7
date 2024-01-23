@@ -1,0 +1,71 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065749623",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2918748?revision\u003d10",
+      "fixSuggestions": [
+        {
+          "fixId": "4af91a81_bdfb6944",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2068,
+                "startChar": 0,
+                "endLine": 2068,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_gen_config\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2069,
+                "startChar": 0,
+                "endLine": 2070,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2276,
+                "startChar": 0,
+                "endLine": 2276,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_gen_config\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 2277,
+                "startChar": 0,
+                "endLine": 2278,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "816bfc02_228f01c7",
+        "filename": "BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-23T00:46:54Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "859a58d1b5c7c20552e2774496d97a74792a55f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
