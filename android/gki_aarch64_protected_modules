@@ -29,6 +29,7 @@ drivers/usb/class/cdc-acm.ko
 drivers/usb/serial/ftdi_sio.ko
 drivers/usb/serial/usbserial.ko
 lib/crypto/libarc4.ko
+lib/kunit/kunit.ko
 net/6lowpan/6lowpan.ko
 net/6lowpan/nhc_dest.ko
 net/6lowpan/nhc_fragment.ko

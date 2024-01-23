@@ -126,6 +126,15 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "aarch64_excluded_abi_symbol_lists",
+    srcs = [
+        # keep sorted
+        "android/excluded_abi_gki_aarch64_kunit",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 define_common_kernels(target_configs = {
     "kernel_aarch64": {
         "kmi_symbol_list_strict_mode": True,
