@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065751600",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2922922?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "943899cd_17adc922",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-23T01:02:35Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/295d8398c67e314d99bb070f38883f83fe94a97a) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d295d8398c67e314d99bb070f38883f83fe94a97a)\n\n```\n      ## rust/Makefile ##\n     @@ rust/Makefile: $(obj)/exports_kernel_generated.h: $(obj)/kernel.o FORCE\n    @@ scripts/Makefile.build: $(obj)/%.s: $(src)/%.rs FORCE\n      $(obj)/%.ll: $(src)/%.rs FORCE\n     \n      ## scripts/Makefile.host ##\n    -@@ scripts/Makefile.host: hostc_flags    \u003d -Wp,-MMD,$(depfile) \\\n    - hostcxx_flags  \u003d -Wp,-MMD,$(depfile) \\\n    -                  $(KBUILD_HOSTCXXFLAGS) $(HOST_EXTRACXXFLAGS) \\\n    +@@ scripts/Makefile.host: _hostc_flags   \u003d $(KBUILD_HOSTCFLAGS)   $(HOST_EXTRACFLAGS)   \\\n    +                  $(HOSTCFLAGS_$(target-stem).o)\n    + _hostcxx_flags \u003d $(KBUILD_HOSTCXXFLAGS) $(HOST_EXTRACXXFLAGS) \\\n                       $(HOSTCXXFLAGS_$(target-stem).o)\n    --hostrust_flags \u003d $(KBUILD_HOSTRUSTFLAGS) $(HOST_EXTRARUSTFLAGS) \\\n    -+hostrust_flags \u003d --emit\u003ddep-info\u003d$(depfile) \\\n    +-_hostrust_flags \u003d $(KBUILD_HOSTRUSTFLAGS) $(HOST_EXTRARUSTFLAGS) \\\n    +-                  $(HOSTRUSTFLAGS_$(target-stem))\n    ++_hostrust_flags \u003d --emit\u003ddep-info\u003d$(depfile) \\\n     +                 $(KBUILD_HOSTRUSTFLAGS) $(HOST_EXTRARUSTFLAGS) \\\n    -                  $(HOSTRUSTFLAGS_$(target-stem))\n    ++                 $(HOSTRUSTFLAGS_$(target-stem))\n      \n      # $(objtree)/$(obj) for including generated headers from checkin source files\n    + ifeq ($(KBUILD_EXTMOD),)\n     @@ scripts/Makefile.host: $(host-cxxobjs): $(obj)/%.o: $(src)/%.cc FORCE\n      # host-rust -\u003e Executable\n      quiet_cmd_host-rust\t\u003d HOSTRUSTC $@\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "02070559d520ef4f8baec5bdfbffd28d796311c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
