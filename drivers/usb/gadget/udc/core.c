@@ -1573,14 +1573,22 @@ static int gadget_bind_driver(struct device *dev)
 	mutex_lock(&udc->connect_lock);
 	ret = usb_gadget_udc_start_locked(udc);
 	if (ret) {
-		mutex_unlock(&udc->connect_lock);
+		// Crash the kernel here so we can get the logs
+		udc = NULL;
+		dev_err(&udc->dev, "%s: gadget failed to start! ret=%d\n",
+			__func__, ret);
 		goto err_start;
 	}
 	usb_gadget_enable_async_callbacks(udc);
 	udc->allow_connect = true;
 	ret = usb_udc_connect_control_locked(udc);
-	if (ret)
+	if (ret) {
+		// Crash the kernel here so we can get the logs
+		udc = NULL;
+		dev_err(&udc->dev, "%s: gadget failed to connect! ret=%d\n",
+			__func__, ret);
 		goto err_connect_control;
+	}
 
 	mutex_unlock(&udc->connect_lock);
 
@@ -1593,20 +1601,24 @@ static int gadget_bind_driver(struct device *dev)
 	if (gadget->irq)
 		synchronize_irq(gadget->irq);
 	usb_gadget_udc_stop_locked(udc);
-	mutex_unlock(&udc->connect_lock);
 
  err_start:
+	mutex_unlock(&udc->connect_lock);
 	driver->unbind(udc->gadget);
 
  err_bind:
 	if (ret != -EISNAM)
 		dev_err(&udc->dev, "failed to start %s: %d\n",
 			driver->function, ret);
+	else
+		dev_err(&udc->dev, "%s: failed to bind gadget! ret=%d\n",
+			__func__, ret);
 
 	mutex_lock(&udc_lock);
 	udc->driver = NULL;
 	driver->is_bound = false;
 	mutex_unlock(&udc_lock);
+
 
 	return ret;
 }
