@@ -52,6 +52,41 @@
       "parentUuid": "446f11cc_dd40461d",
       "revId": "ee9a4b69d70d26206d928f71c43153356c7e5d10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53dbfe3_95a4c1b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-23T18:16:20Z",
+      "side": 1,
+      "message": "Please rebase to fix the merge conflict",
+      "revId": "ee9a4b69d70d26206d928f71c43153356c7e5d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60923831_2d03b95f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-23T18:16:20Z",
+      "side": 1,
+      "message": "This hook is used by multiple partners in addition to MTK and was originally introduced by samsung in aosp/1728852 for android12-5.10 so there might not be a single \"real fix\" and would need to be coordinated.",
+      "parentUuid": "4d667d6a_284ae23a",
+      "revId": "ee9a4b69d70d26206d928f71c43153356c7e5d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
