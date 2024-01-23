@@ -87,6 +87,23 @@
       "parentUuid": "4d667d6a_284ae23a",
       "revId": "ee9a4b69d70d26206d928f71c43153356c7e5d10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2b6be11_3af758d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-23T18:18:10Z",
+      "side": 1,
+      "message": "Please cite aosp/1728852 in the commit message so we tie this to its origin. Unfortunately the 14-6.1 version of this patch wasn\u0027t properly cherry-picked so we don\u0027t have a matching Change-Id.",
+      "revId": "ee9a4b69d70d26206d928f71c43153356c7e5d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
