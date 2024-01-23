@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1eed438_d818a0c7",
+        "filename": "android/abi_gki_aarch64_db845c",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-01-23T05:50:10Z",
+      "side": 0,
+      "message": "Added dev_pm_opp_add_dynamic",
+      "parentUuid": "4df50292_a69154a2",
+      "range": {
+        "startLine": 168,
+        "startChar": 2,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "revId": "d34c4f7940a5a06be00e23b2758a959b98e56856",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "595fb7ce_99402aa0",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-22T09:30:58Z",
       "side": 0,
       "message": "pixel needs `dev_pm_opp_add_dynamic` then",
+      "range": {
+        "startLine": 354,
+        "startChar": 2,
+        "endLine": 354,
+        "endChar": 16
+      },
+      "revId": "d34c4f7940a5a06be00e23b2758a959b98e56856",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dafa5394_8b190a7c",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-01-23T05:50:10Z",
+      "side": 0,
+      "message": "Added dev_pm_opp_add_dynamic",
+      "parentUuid": "595fb7ce_99402aa0",
       "range": {
         "startLine": 354,
         "startChar": 2,
