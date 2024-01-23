@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065751701",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2922996?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "df7244f2_308dcdba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-23T01:03:01Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/df01b7cfcef08bf3fdcac2909d0e1910781d6bfd) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003ddf01b7cfcef08bf3fdcac2909d0e1910781d6bfd)\n\n```\n      ## scripts/Makefile.build ##\n     @@ scripts/Makefile.build: $(obj)/%.lst: $(src)/%.c FORCE\n    @@ scripts/Makefile.build: rust_common_cmd \u003d \\\n     -\t--emit\u003ddep-info\u003d$(depfile)\n     +\t--out-dir $(dir $@) --emit\u003ddep-info\u003d$(depfile)\n      \n    - # `--emit\u003dobj`, `--emit\u003dasm` and `--emit\u003dllvm-ir` imply a single codegen unit\n    - # will be used. We explicitly request `-Ccodegen-units\u003d1` in any case, and\n    + rust_handle_depfile \u003d \\\n    + \tsed -i \u0027/^\\#/d\u0027 $(depfile)\n     \n      ## scripts/Makefile.host ##\n    -@@ scripts/Makefile.host: hostc_flags    \u003d -Wp,-MMD,$(depfile) \\\n    - hostcxx_flags  \u003d -Wp,-MMD,$(depfile) \\\n    -                  $(KBUILD_HOSTCXXFLAGS) $(HOST_EXTRACXXFLAGS) \\\n    +@@ scripts/Makefile.host: _hostc_flags   \u003d $(KBUILD_HOSTCFLAGS)   $(HOST_EXTRACFLAGS)   \\\n    +                  $(HOSTCFLAGS_$(target-stem).o)\n    + _hostcxx_flags \u003d $(KBUILD_HOSTCXXFLAGS) $(HOST_EXTRACXXFLAGS) \\\n                       $(HOSTCXXFLAGS_$(target-stem).o)\n    --hostrust_flags \u003d --emit\u003ddep-info\u003d$(depfile) \\\n    -+\n    +-_hostrust_flags \u003d --emit\u003ddep-info\u003d$(depfile) \\\n     +# `--out-dir` is required to avoid temporaries being created by `rustc` in the\n     +# current working directory, which may be not accessible in the out-of-tree\n     +# modules case.\n    -+hostrust_flags \u003d --out-dir $(dir $@) --emit\u003ddep-info\u003d$(depfile) \\\n    ++_hostrust_flags \u003d --out-dir $(dir $@) --emit\u003ddep-info\u003d$(depfile) \\\n                       $(KBUILD_HOSTRUSTFLAGS) $(HOST_EXTRARUSTFLAGS) \\\n                       $(HOSTRUSTFLAGS_$(target-stem))\n      \n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "f0fc7ebb5c531cbb19f0d3992499a13d6fe55540",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
