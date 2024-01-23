@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960d364f_2790ce5a",
+        "filename": "block/blk-mq.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2172,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2024-01-23T22:05:04Z",
+      "side": 1,
+      "message": "We do not need this and actually it causes problem for bio with single bvec of say size 16K when max_segment_size is 4096. `__blk_queue_split` already correctly handles the cases for with and without subpage segment size enabled.",
+      "revId": "2fdb61f083d6ca8cee771298680665492e1c8451",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
