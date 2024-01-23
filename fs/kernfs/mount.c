@@ -387,7 +387,7 @@ void kernfs_kill_sb(struct super_block *sb)
 void __init kernfs_init(void)
 {
 	kernfs_node_cache = kmem_cache_create("kernfs_node_cache",
-					      sizeof(struct kernfs_node),
+					      sizeof(struct kernfs_node_ext),
 					      0, SLAB_PANIC, NULL);
 
 	/* Creates slab cache for kernfs inode attributes */

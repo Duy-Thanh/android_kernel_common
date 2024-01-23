@@ -647,6 +647,7 @@ static struct kernfs_node *__kernfs_new_node(struct kernfs_root *root,
 					     kuid_t uid, kgid_t gid,
 					     unsigned flags)
 {
+	struct kernfs_node_ext *kn_ext;
 	struct kernfs_node *kn;
 	u32 id_highbits;
 	int ret;
@@ -655,10 +656,11 @@ static struct kernfs_node *__kernfs_new_node(struct kernfs_root *root,
 	if (!name)
 		return NULL;
 
-	kn = kmem_cache_zalloc(kernfs_node_cache, GFP_KERNEL);
-	if (!kn)
+	kn_ext = kmem_cache_zalloc(kernfs_node_cache, GFP_KERNEL);
+	if (!kn_ext)
 		goto err_out1;
 
+	kn = &kn_ext->node;
 	idr_preload(GFP_KERNEL);
 	spin_lock(&kernfs_idr_lock);
 	ret = idr_alloc_cyclic(&root->ino_idr, kn, 1, 0, GFP_ATOMIC);

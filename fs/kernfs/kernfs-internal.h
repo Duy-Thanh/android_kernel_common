@@ -85,18 +85,27 @@ static inline struct kernfs_node *kernfs_dentry_node(struct dentry *dentry)
 static inline void kernfs_set_rev(struct kernfs_node *parent,
 				  struct dentry *dentry)
 {
-	dentry->d_time = parent->dir.rev;
+	struct kernfs_node_ext *node_ext;
+
+	node_ext = container_of(parent, struct kernfs_node_ext, node);
+	dentry->d_time = node_ext->rev;
 }
 
 static inline void kernfs_inc_rev(struct kernfs_node *parent)
 {
-	parent->dir.rev++;
+	struct kernfs_node_ext *node_ext;
+
+	node_ext = container_of(parent, struct kernfs_node_ext, node);
+	node_ext->rev++;
 }
 
 static inline bool kernfs_dir_changed(struct kernfs_node *parent,
 				      struct dentry *dentry)
 {
-	if (parent->dir.rev != dentry->d_time)
+	struct kernfs_node_ext *node_ext;
+
+	node_ext = container_of(parent, struct kernfs_node_ext, node);
+	if (node_ext->rev != dentry->d_time)
 		return true;
 	return false;
 }
