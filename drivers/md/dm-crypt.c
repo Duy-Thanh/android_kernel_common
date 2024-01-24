@@ -1830,6 +1830,7 @@ static void clone_init(struct dm_crypt_io *io, struct bio *clone)
 
 	clone->bi_private = io;
 	clone->bi_end_io  = crypt_endio;
+	clone->bi_ioprio = io->base_bio->bi_ioprio;
 	bio_set_dev(clone, cc->dev->bdev);
 	clone->bi_opf	  = io->base_bio->bi_opf;
 }
