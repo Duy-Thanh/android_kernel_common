@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fdcc5ff_7abfbd62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-24T17:12:35Z",
+      "side": 1,
+      "message": "Failed KernelCommit check:\n```\nCommit is not signed off by the author!\n\nMissing tag: Signed-off-by: Jing-Ting Wu \u003cJing-Ting.Wu@mediatek.com\u003e\n```\nplease fixd",
+      "revId": "3decc674a07a19c845a72ca18bef83dc752c89b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
