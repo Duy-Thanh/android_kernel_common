@@ -16,6 +16,24 @@
       "message": "I think \u003cconfiguration\u003e is missing.",
       "revId": "365f6e56fb2216f58e6a414868b0d145ed9164c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b44280d_4e76322b",
+        "filename": "tools/testing/kunit/android/config_arm64.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2024-01-24T02:51:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39b5f3bd_5304b239",
+      "revId": "365f6e56fb2216f58e6a414868b0d145ed9164c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
