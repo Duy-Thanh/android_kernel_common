@@ -104,6 +104,24 @@
       "message": "Please cite aosp/1728852 in the commit message so we tie this to its origin. Unfortunately the 14-6.1 version of this patch wasn\u0027t properly cherry-picked so we don\u0027t have a matching Change-Id.",
       "revId": "ee9a4b69d70d26206d928f71c43153356c7e5d10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6eb9bb9_6eeaf9aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2024-01-24T06:08:38Z",
+      "side": 1,
+      "message": "OK, I cite aosp/1728852 in the commit message.\nPlease help to review, thank you.",
+      "parentUuid": "f2b6be11_3af758d9",
+      "revId": "ee9a4b69d70d26206d928f71c43153356c7e5d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
