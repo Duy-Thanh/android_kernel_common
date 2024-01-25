@@ -16,6 +16,24 @@
       "message": "This needs to be a cherry-pick from the base branch (android14-6.1)",
       "revId": "4167e90612106e3230e804e5c03c865037a9936c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8764f303_e1ba88f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933031
+      },
+      "writtenOn": "2024-01-25T06:22:43Z",
+      "side": 1,
+      "message": "base branch change is as follow：\nhttps://android-review.googlesource.com/c/kernel/common/+/2847638\nUnable to cherrypick directly",
+      "parentUuid": "0f7f90e0_dc0b45f0",
+      "revId": "4167e90612106e3230e804e5c03c865037a9936c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
