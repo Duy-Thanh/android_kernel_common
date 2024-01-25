@@ -3068,6 +3068,21 @@ static void binder_set_txn_from_error(struct binder_transaction *t, int id,
 	binder_thread_dec_tmpref(from);
 }
 
+static inline
+void binder_wakeup_epoll_thread_ilocked(struct binder_thread *thread)
+{
+	if (thread->looper & BINDER_LOOPER_STATE_POLL)
+		wake_up_interruptible_sync(&thread->wait);
+}
+
+/* Signal a polling thread it has work todo */
+static inline void binder_wakeup_epoll_thread(struct binder_thread *thread)
+{
+	binder_inner_proc_lock(thread->proc);
+	binder_wakeup_epoll_thread_ilocked(thread);
+	binder_inner_proc_unlock(thread->proc);
+}
+
 static void binder_transaction(struct binder_proc *proc,
 			       struct binder_thread *thread,
 			       struct binder_transaction_data *tr, int reply,
@@ -3780,6 +3795,7 @@ static void binder_transaction(struct binder_proc *proc,
 
 	if (reply) {
 		binder_enqueue_thread_work(thread, tcomplete);
+		binder_wakeup_epoll_thread(thread);
 		binder_inner_proc_lock(target_proc);
 		if (target_thread->is_dead) {
 			return_error = BR_DEAD_REPLY;
@@ -3835,6 +3851,7 @@ static void binder_transaction(struct binder_proc *proc,
 		if (return_error == BR_TRANSACTION_PENDING_FROZEN)
 			tcomplete->type = BINDER_WORK_TRANSACTION_PENDING;
 		binder_enqueue_thread_work(thread, tcomplete);
+		binder_wakeup_epoll_thread(thread);
 		if (return_error &&
 		    return_error != BR_TRANSACTION_PENDING_FROZEN)
 			goto err_dead_proc_or_thread;
@@ -3934,6 +3951,7 @@ err_invalid_target_handle:
 				return_error, return_error_param);
 		thread->return_error.cmd = BR_TRANSACTION_COMPLETE;
 		binder_enqueue_thread_work(thread, &thread->return_error.work);
+		binder_wakeup_epoll_thread(thread);
 		binder_send_failed_reply(in_reply_to, return_error);
 	} else {
 		binder_inner_proc_lock(proc);
@@ -3942,6 +3960,7 @@ err_invalid_target_handle:
 		binder_inner_proc_unlock(proc);
 		thread->return_error.cmd = return_error;
 		binder_enqueue_thread_work(thread, &thread->return_error.work);
+		binder_wakeup_epoll_thread(thread);
 	}
 }
 
@@ -4280,6 +4299,7 @@ static int binder_thread_write(struct binder_proc *proc,
 					binder_enqueue_thread_work(
 						thread,
 						&thread->return_error.work);
+					binder_wakeup_epoll_thread(thread);
 					binder_debug(
 						BINDER_DEBUG_FAILED_TRANSACTION,
 						"%d:%d BC_REQUEST_DEATH_NOTIFICATION failed\n",
@@ -4358,11 +4378,13 @@ static int binder_thread_write(struct binder_proc *proc,
 					death->work.type = BINDER_WORK_CLEAR_DEATH_NOTIFICATION;
 					if (thread->looper &
 					    (BINDER_LOOPER_STATE_REGISTERED |
-					     BINDER_LOOPER_STATE_ENTERED))
+					     BINDER_LOOPER_STATE_ENTERED)) {
 						binder_enqueue_thread_work_ilocked(
 								thread,
 								&death->work);
-					else {
+						binder_wakeup_epoll_thread_ilocked(
+								thread);
+					} else {
 						binder_enqueue_work_ilocked(
 								&death->work,
 								&proc->todo);
@@ -4415,10 +4437,11 @@ static int binder_thread_write(struct binder_proc *proc,
 				death->work.type = BINDER_WORK_CLEAR_DEATH_NOTIFICATION;
 				if (thread->looper &
 					(BINDER_LOOPER_STATE_REGISTERED |
-					 BINDER_LOOPER_STATE_ENTERED))
+					 BINDER_LOOPER_STATE_ENTERED)) {
 					binder_enqueue_thread_work_ilocked(
 						thread, &death->work);
-				else {
+					binder_wakeup_epoll_thread_ilocked(thread);
+				} else {
 					binder_enqueue_work_ilocked(
 							&death->work,
 							&proc->todo);
