@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47845948_f4fb7052",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-01-25T19:44:50Z",
+      "side": 1,
+      "message": "Do we need cherry-pick to android15-6.1 as well?",
+      "revId": "fcfeb2d6ed40805bca73f895b481a2cda6359350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
