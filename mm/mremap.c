@@ -234,12 +234,13 @@ static inline bool trylock_vma_ref_count(struct vm_area_struct *vma)
  */
 static inline void unlock_vma_ref_count(struct vm_area_struct *vma)
 {
+	int ret = atomic_cmpxchg(&vma->file_ref_count, -1, 0);
+
 	/*
 	 * This should only be called after a corresponding,
 	 * successful trylock_vma_ref_count().
 	 */
-	VM_BUG_ON_VMA(atomic_cmpxchg(&vma->file_ref_count, -1, 0) != -1,
-		      vma);
+	VM_BUG_ON_VMA(ret != -1, vma);
 }
 #else	/* !CONFIG_SPECULATIVE_PAGE_FAULT */
 static inline bool trylock_vma_ref_count(struct vm_area_struct *vma)
