@@ -52,6 +52,24 @@
       "parentUuid": "5a23c917_8bb9374d",
       "revId": "caefc2610fe19b82c5e8c1bd33b0595e6ccd651b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a518fd9_fff44f3d",
+        "filename": "tools/testing/android/bin/kselftest.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2024-01-26T00:47:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "35ba9c16_65b4ee55",
+      "revId": "caefc2610fe19b82c5e8c1bd33b0595e6ccd651b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
