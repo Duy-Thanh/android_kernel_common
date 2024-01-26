@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "946a55ba_4a4f7b6c",
+        "filename": "tools/testing/android/bin/kselftest.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2024-01-26T00:34:05Z",
+      "side": 1,
+      "message": "Do we want to pull the environment variable `ANDROID_SERIAL` that is typically used for adb and tradefed?",
+      "revId": "caefc2610fe19b82c5e8c1bd33b0595e6ccd651b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
