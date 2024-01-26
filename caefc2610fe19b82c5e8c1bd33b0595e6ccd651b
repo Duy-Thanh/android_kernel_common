@@ -16,6 +16,24 @@
       "message": "Do we want to pull the environment variable `ANDROID_SERIAL` that is typically used for adb and tradefed?",
       "revId": "caefc2610fe19b82c5e8c1bd33b0595e6ccd651b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a23c917_8bb9374d",
+        "filename": "tools/testing/android/bin/kselftest.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-01-26T00:45:50Z",
+      "side": 1,
+      "message": "Yes, we can also pull ANDROID_SERIAL when acloud device lunch is not used, and serial number is not provided. To disable acloud device lunch, we need --skip-cvd-launch, so it doesn\u0027t save the number of flags though.",
+      "parentUuid": "946a55ba_4a4f7b6c",
+      "revId": "caefc2610fe19b82c5e8c1bd33b0595e6ccd651b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
