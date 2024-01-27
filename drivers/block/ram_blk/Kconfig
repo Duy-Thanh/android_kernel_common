@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0
+#
+# Ram block device driver configuration
+#
+
+config CONFIG_RAM_BLK
+	bool "Ram block driver to debug request details such as segments"
+	default y
