@@ -142,8 +142,15 @@ int dma_declare_coherent_memory(struct device *dev, phys_addr_t phys_addr,
 
 void dma_release_coherent_memory(struct device *dev)
 {
+<<<<<<< HEAD   (1a7db4 Revert "ipv6: remove max_size check inline with ipv4")
 	if (dev)
 		_dma_release_coherent_memory(dev->dma_mem);
+=======
+	if (dev) {
+		_dma_release_coherent_memory(dev->dma_mem);
+		dev->dma_mem = NULL;
+	}
+>>>>>>> BRANCH (16ad71 Linux 5.10.209)
 }
 
 static void *__dma_alloc_from_coherent(struct device *dev,

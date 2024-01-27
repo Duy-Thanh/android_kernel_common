@@ -37,8 +37,13 @@ obj-$(CONFIG_FUNCTION_ERROR_INJECTION)	+= error-inject.o
 # 64-bit linker creates .sfpr on demand for final link (vmlinux),
 # so it is only needed for modules, and only for older linkers which
 # do not support --save-restore-funcs
+<<<<<<< HEAD   (1a7db4 Revert "ipv6: remove max_size check inline with ipv4")
 ifeq ($(call ld-ifversion, -lt, 22500, y),y)
 extra-$(CONFIG_PPC64)	+= crtsavres.o
+=======
+ifeq ($(call ld-ifversion, -lt, 225000000, y),y)
+always-$(CONFIG_PPC64)	+= crtsavres.o
+>>>>>>> BRANCH (16ad71 Linux 5.10.209)
 endif
 
 obj-$(CONFIG_PPC_BOOK3S_64) += copyuser_power7.o copypage_power7.o \
