@@ -4402,8 +4402,9 @@ EXPORT_SYMBOL(ieee80211_radar_detected);
 
 ieee80211_conn_flags_t ieee80211_chandef_downgrade(struct cfg80211_chan_def *c)
 {
+	/* no-HT indicates nothing to do */
+	enum nl80211_chan_width new_primary_width = NL80211_CHAN_WIDTH_20_NOHT;
 	ieee80211_conn_flags_t ret;
-	int tmp;
 
 	switch (c->width) {
 	case NL80211_CHAN_WIDTH_20:
@@ -4417,12 +4418,7 @@ ieee80211_conn_flags_t ieee80211_chandef_downgrade(struct cfg80211_chan_def *c)
 		      IEEE80211_CONN_DISABLE_VHT;
 		break;
 	case NL80211_CHAN_WIDTH_80:
-		tmp = (30 + c->chan->center_freq - c->center_freq1)/20;
-		/* n_P40 */
-		tmp /= 2;
-		/* freq_P40 */
-		c->center_freq1 = c->center_freq1 - 20 + 40 * tmp;
-		c->width = NL80211_CHAN_WIDTH_40;
+		new_primary_width = NL80211_CHAN_WIDTH_40;
 		ret = IEEE80211_CONN_DISABLE_VHT;
 		break;
 	case NL80211_CHAN_WIDTH_80P80:
@@ -4432,22 +4428,12 @@ ieee80211_conn_flags_t ieee80211_chandef_downgrade(struct cfg80211_chan_def *c)
 		      IEEE80211_CONN_DISABLE_160MHZ;
 		break;
 	case NL80211_CHAN_WIDTH_160:
-		/* n_P20 */
-		tmp = (70 + c->chan->center_freq - c->center_freq1)/20;
-		/* n_P80 */
-		tmp /= 4;
-		c->center_freq1 = c->center_freq1 - 40 + 80 * tmp;
-		c->width = NL80211_CHAN_WIDTH_80;
+		new_primary_width = NL80211_CHAN_WIDTH_80;
 		ret = IEEE80211_CONN_DISABLE_80P80MHZ |
 		      IEEE80211_CONN_DISABLE_160MHZ;
 		break;
 	case NL80211_CHAN_WIDTH_320:
-		/* n_P20 */
-		tmp = (150 + c->chan->center_freq - c->center_freq1) / 20;
-		/* n_P160 */
-		tmp /= 8;
-		c->center_freq1 = c->center_freq1 - 80 + 160 * tmp;
-		c->width = NL80211_CHAN_WIDTH_160;
+		new_primary_width = NL80211_CHAN_WIDTH_160;
 		ret = IEEE80211_CONN_DISABLE_320MHZ;
 		break;
 	default:
@@ -4467,6 +4453,12 @@ ieee80211_conn_flags_t ieee80211_chandef_downgrade(struct cfg80211_chan_def *c)
 		/* keep c->width */
 		ret = IEEE80211_CONN_DISABLE_HT | IEEE80211_CONN_DISABLE_VHT;
 		break;
+	}
+
+	if (new_primary_width != NL80211_CHAN_WIDTH_20_NOHT) {
+		c->center_freq1 =
+			cfg80211_chandef_primary_freq(c, new_primary_width);
+		c->width = new_primary_width;
 	}
 
 	WARN_ON_ONCE(!cfg80211_chandef_valid(c));
