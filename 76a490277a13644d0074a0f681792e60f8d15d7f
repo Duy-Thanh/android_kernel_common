@@ -16,6 +16,24 @@
       "message": "Please consider cp following fixes.\n\ncommit 555a0ce4558d\nAuthor: Minchan Kim \u003cminchan@kernel.org\u003e\nDate:   Wed Dec 1 15:16:48 2021 -0800\n\n    kernfs: prevent early freeing of root node\n\n\ncommit ad8d869343ae\nAuthor: Minchan Kim \u003cminchan@kernel.org\u003e\nDate:   Wed Apr 27 10:21:51 2022 -0700\n\n    kernfs: fix NULL dereferencing in kernfs_remove",
       "revId": "76a490277a13644d0074a0f681792e60f8d15d7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d4979be_94fb1beb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-01-29T19:47:56Z",
+      "side": 1,
+      "message": "Thanks for suggestion. 555a0ce4558d seems applicable but ad8d869343ae would not be needed here because kernfs_remove() does not use kn-\u003eparent directly, instead calling __kernfs_remove(), which in turn checks `kn` validity before accessing it.",
+      "parentUuid": "a12febac_437b29c0",
+      "revId": "76a490277a13644d0074a0f681792e60f8d15d7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
