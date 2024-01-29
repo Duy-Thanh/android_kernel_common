@@ -1051,6 +1051,17 @@ bool cfg80211_any_usable_channels(struct wiphy *wiphy,
 				  u32 prohibited_flags);
 
 /**
+ * cfg80211_chandef_primary_freq - calculate primary 40/80/160 MHz freq
+ * @chandef: chandef to calculate for
+ * @primary_chan_width: primary channel width to calculate center for
+ *
+ * Returns: the primary 40/80/160 MHz channel center frequency, or -1
+ *	for errors
+ */
+int cfg80211_chandef_primary_freq(const struct cfg80211_chan_def *chandef,
+				  enum nl80211_chan_width primary_chan_width);
+
+/**
  * enum survey_info_flags - survey information flags
  *
  * @SURVEY_INFO_NOISE_DBM: noise (in dBm) was filled in
