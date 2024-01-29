@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee38a82d_36852a71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-01-29T06:07:35Z",
+      "side": 1,
+      "message": "It is going to land in -next for v6.9 but posting it here to unblock the LKFT test jobs running 5.4-lts on DB845c.",
+      "revId": "2a17f983559c10ad4e3c612ada44226fa35864fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
