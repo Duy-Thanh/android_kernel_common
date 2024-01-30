@@ -34,6 +34,24 @@
       "parentUuid": "22dce1bc_8e1b9448",
       "revId": "bd9e799540996c2bc6b351d178c42f2298bfa12c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f11c95c9_aacd30b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-01-30T17:29:43Z",
+      "side": 1,
+      "message": "This change is needed because by default when you turn on RUST at all, it exports all of the `kernel` and `core` bindings across the KMI. Since we don\u0027t have MODVERSIONS working for Rust symbols yet, this can create issues even if nobody is intended to use these symbols at the moment.\n\nAs you point out, the binder driver exports no symbols, and is built-in. That means we don\u0027t actually need any of the `kernel` or `core` symbols that are exported by default in Rust. This patch essentially says that we are not currently supporting Rust modules (`core` and `kernel` aren\u0027t accessible with this patch), and so `MODVERSIONS` will still work on all exported symbols.",
+      "parentUuid": "011f4018_ee5b5adc",
+      "revId": "bd9e799540996c2bc6b351d178c42f2298bfa12c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
