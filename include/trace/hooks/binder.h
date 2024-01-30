@@ -80,8 +80,8 @@ DECLARE_HOOK(android_vh_binder_select_special_worklist,
 	TP_ARGS(list, thread, proc, wait_for_proc_work, nothing_to_do));
 
 DECLARE_HOOK(android_vh_binder_alloc_new_buf_locked,
-	TP_PROTO(size_t size, size_t *free_async_space, int is_async),
-	TP_ARGS(size, free_async_space, is_async));
+	TP_PROTO(size_t size, size_t *free_async_space, int is_async, bool *should_fail),
+	TP_ARGS(size, free_async_space, is_async, should_fail));
 struct binder_transaction_data;
 DECLARE_HOOK(android_vh_binder_reply,
 	TP_PROTO(struct binder_proc *target_proc, struct binder_proc *proc,
