@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8f87cb_3cb44a48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1072623
+      },
+      "writtenOn": "2024-01-30T21:55:44Z",
+      "side": 1,
+      "message": "s/NDROID/ANDROID/",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "f753ec26edf32cc963e0b553ac63118c1db7465e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "561354b7_e3f92829",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072623
+      },
+      "writtenOn": "2024-01-30T21:55:44Z",
+      "side": 1,
+      "message": "Please merge this in the `android14-6.1` branch first, then if a respin is required on this one, we\u0027ll need to request it.",
+      "revId": "f753ec26edf32cc963e0b553ac63118c1db7465e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
