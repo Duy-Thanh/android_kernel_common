@@ -329467,6 +329467,11 @@ function {
   parameter_id: 0x10193e4a
 }
 function {
+  id: 0xfab4e970
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x1042c9d1
+}
+function {
   id: 0xfabc5175
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x106029c6
@@ -362735,6 +362740,15 @@ elf_symbol {
   full_name: "iio_trigger_free"
 }
 elf_symbol {
+  id: 0xaaf2e930
+  name: "iio_trigger_generic_data_rdy_poll"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2d6bcdcb
+  type_id: 0x3b6e45be
+  full_name: "iio_trigger_generic_data_rdy_poll"
+}
+elf_symbol {
   id: 0x613f6d1f
   name: "iio_trigger_notify_done"
   is_defined: true
@@ -363246,6 +363260,15 @@ elf_symbol {
   crc: 0x3c6d2f73
   type_id: 0x15912855
   full_name: "input_copy_abs"
+}
+elf_symbol {
+  id: 0x5a86c89e
+  name: "input_device_enabled"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4e243813
+  type_id: 0xfab4e970
+  full_name: "input_device_enabled"
 }
 elf_symbol {
   id: 0x1cfb5d03
@@ -399358,6 +399381,7 @@ interface {
   symbol_id: 0xfc17cb5d
   symbol_id: 0x7ae28990
   symbol_id: 0xcc1f3656
+  symbol_id: 0xaaf2e930
   symbol_id: 0x613f6d1f
   symbol_id: 0x83c94241
   symbol_id: 0x7551a60b
@@ -399415,6 +399439,7 @@ interface {
   symbol_id: 0xbc652525
   symbol_id: 0x2336c16f
   symbol_id: 0x5b69d05f
+  symbol_id: 0x5a86c89e
   symbol_id: 0x1cfb5d03
   symbol_id: 0x60efc3a4
   symbol_id: 0xc802de31
