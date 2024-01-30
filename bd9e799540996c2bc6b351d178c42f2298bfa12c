@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22dce1bc_8e1b9448",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-30T14:35:00Z",
+      "side": 1,
+      "message": "If the rust binder driver does not export anything, why is this change needed?\n\nAnd this seems to actually export symbols, or am I confused, it creates an extern reference to something that is not there?",
+      "revId": "bd9e799540996c2bc6b351d178c42f2298bfa12c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
