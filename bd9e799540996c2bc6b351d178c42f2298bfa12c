@@ -16,6 +16,24 @@
       "message": "If the rust binder driver does not export anything, why is this change needed?\n\nAnd this seems to actually export symbols, or am I confused, it creates an extern reference to something that is not there?",
       "revId": "bd9e799540996c2bc6b351d178c42f2298bfa12c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "011f4018_ee5b5adc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-30T14:37:53Z",
+      "side": 1,
+      "message": "My understanding is that this is for the symbols in `rust/helpers.c`. Binder is built-in, so Binder can access them even if they are not exported. Without this, the `rust/helpers.c` symbols ends up exported.",
+      "parentUuid": "22dce1bc_8e1b9448",
+      "revId": "bd9e799540996c2bc6b351d178c42f2298bfa12c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
