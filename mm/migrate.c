@@ -2176,7 +2176,7 @@ struct folio *alloc_migration_target(struct folio *src, unsigned long private)
 		order = folio_order(src);
 	}
 	zidx = zone_idx(folio_zone(src));
-	if (is_highmem_idx(zidx) || zidx == ZONE_MOVABLE)
+	if (zidx > ZONE_NORMAL)
 		gfp_mask |= __GFP_HIGHMEM;
 
 	return __folio_alloc(gfp_mask, order, nid, mtc->nmask);
@@ -2683,7 +2683,7 @@ int migrate_misplaced_folio_prepare(struct folio *folio,
 			return -EAGAIN;
 
 		wakeup_kswapd(pgdat->node_zones + z, 0,
-			      folio_order(folio), ZONE_MOVABLE);
+			      folio_order(folio), z);
 		return -EAGAIN;
 	}
 

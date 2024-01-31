@@ -329,6 +329,8 @@ char * const zone_names[MAX_NR_ZONES] = {
 	 "HighMem",
 #endif
 	 "Movable",
+	 "NoSplit",
+	 "NoMerge",
 #ifdef CONFIG_ZONE_DEVICE
 	 "Device",
 #endif
@@ -352,9 +354,9 @@ int user_min_free_kbytes = -1;
 static int watermark_boost_factor __read_mostly = 15000;
 static int watermark_scale_factor = 10;
 
-/* movable_zone is the "real" zone pages in ZONE_MOVABLE are taken from */
-int movable_zone;
-EXPORT_SYMBOL(movable_zone);
+/* virt_zone is the "real" zone pages in virtual zones are taken from */
+int virt_zone;
+EXPORT_SYMBOL(virt_zone);
 
 #if MAX_NUMNODES > 1
 unsigned int nr_node_ids __read_mostly = MAX_NUMNODES;
@@ -888,9 +890,6 @@ buddy_merge_likely(unsigned long pfn, unsigned long buddy_pfn,
 	unsigned long higher_page_pfn;
 	struct page *higher_page;
 
-	if (order >= MAX_PAGE_ORDER - 1)
-		return false;
-
 	higher_page_pfn = buddy_pfn & pfn;
 	higher_page = page + (higher_page_pfn - pfn);
 
@@ -900,9 +899,10 @@ buddy_merge_likely(unsigned long pfn, unsigned long buddy_pfn,
 
 static int zone_max_order(struct zone *zone)
 {
-	int max_order = MAX_PAGE_ORDER;
+	int max_order = zone->order && zone_idx(zone) == ZONE_NOMERGE ? zone->order : MAX_PAGE_ORDER;
 
 	trace_android_vh_mm_customize_zone_max_order(zone, &max_order);
+
 	return max_order;
 }
 
@@ -1030,6 +1030,8 @@ done_merging:
 		to_tail = true;
 	else if (is_shuffle_order(order))
 		to_tail = shuffle_pick_tail();
+	else if (order + 1 >= max_order)
+		to_tail = false;
 	else if (max_order != MAX_PAGE_ORDER)
 		to_tail = false;
 	else
@@ -1907,6 +1909,8 @@ struct page *__rmqueue_smallest(struct zone *zone, unsigned int order,
 	unsigned int current_order;
 	struct free_area *area;
 	struct page *page;
+
+	VM_WARN_ON_ONCE(!zone_is_suitable(zone, order));
 
 	/* Find a page of the appropriate size in the preferred list */
 	for (current_order = order; current_order < NR_PAGE_ORDERS; ++current_order) {
@@ -3565,6 +3569,9 @@ bool __zone_watermark_ok(struct zone *z, unsigned int order, unsigned long mark,
 	if (customized)
 		return wmark_ok;
 
+	if (!zone_is_suitable(z, order))
+		return false;
+
 	/* free_pages may go negative - that's OK */
 	free_pages -= __zone_watermark_unusable_free(z, order, alloc_flags);
 
@@ -3657,6 +3664,9 @@ static inline bool zone_watermark_fast(struct zone *z, unsigned int order,
 {
 	long free_pages;
 	bool is_watermark_ok = false;
+
+	if (!zone_is_suitable(z, order))
+		return false;
 
 	free_pages = zone_page_state(z, NR_FREE_PAGES);
 
@@ -3817,6 +3827,9 @@ retry:
 		bool suitable = true;
 		struct page *page;
 		unsigned long mark;
+
+		if (!zone_is_suitable(zone, order))
+			continue;
 
 		trace_android_vh_mm_customize_suitable_zone(zone, gfp_mask, order, ac->highest_zoneidx,
 							    &use_this_zone, &suitable);
@@ -4528,6 +4541,9 @@ gfp_to_alloc_flags(gfp_t gfp_mask, unsigned int order)
 		alloc_flags |= ALLOC_MIN_RESERVE;
 
 	alloc_flags = gfp_to_alloc_flags_cma(gfp_mask, alloc_flags);
+
+	if (!(gfp_mask & __GFP_DIRECT_RECLAIM) && gfp_order_zone(gfp_mask, order) > ZONE_MOVABLE)
+		alloc_flags |= ALLOC_KSWAPD;
 
 	return alloc_flags;
 }
@@ -6592,9 +6608,9 @@ static void __setup_per_zone_wmarks(void)
 	struct zone *zone;
 	unsigned long flags;
 
-	/* Calculate total number of !ZONE_HIGHMEM and !ZONE_MOVABLE pages */
+	/* Calculate total number of pages below ZONE_HIGHMEM */
 	for_each_zone(zone) {
-		if (!is_highmem(zone) && zone_idx(zone) != ZONE_MOVABLE)
+		if (zone_idx(zone) <= ZONE_NORMAL)
 			lowmem_pages += zone_managed_pages(zone);
 	}
 
@@ -6604,11 +6620,11 @@ static void __setup_per_zone_wmarks(void)
 		spin_lock_irqsave(&zone->lock, flags);
 		tmp = (u64)pages_min * zone_managed_pages(zone);
 		tmp = div64_ul(tmp, lowmem_pages);
-		if (is_highmem(zone) || zone_idx(zone) == ZONE_MOVABLE) {
+		if (zone_idx(zone) > ZONE_NORMAL) {
 			/*
 			 * __GFP_HIGH and PF_MEMALLOC allocations usually don't
-			 * need highmem and movable zones pages, so cap pages_min
-			 * to a small  value here.
+			 * need pages from zones above ZONE_NORMAL, so cap
+			 * pages_min to a small value here.
 			 *
 			 * The WMARK_HIGH-WMARK_LOW and (WMARK_LOW-WMARK_MIN)
 			 * deltas control async page reclaim, and so should

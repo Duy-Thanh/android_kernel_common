@@ -2864,6 +2864,9 @@ enum compact_result try_to_compact_pages(gfp_t gfp_mask, unsigned int order,
 			!__cpuset_zone_allowed(zone, gfp_mask))
 				continue;
 
+		if (!zone_can_frag(zone))
+			continue;
+
 		if (prio > MIN_COMPACT_PRIORITY
 					&& compaction_deferred(zone, order)) {
 			rc = max_t(enum compact_result, COMPACT_DEFERRED, rc);
@@ -2938,6 +2941,9 @@ void compact_node_async(int nid)
 		if (fatal_signal_pending(current))
 			break;
 
+		if (!zone_can_frag(zone))
+			continue;
+
 		cc.zone = zone;
 
 		compact_zone(&cc, NULL);
@@ -2982,6 +2988,9 @@ static int compact_node(pg_data_t *pgdat, bool proactive)
 
 		if (fatal_signal_pending(current))
 			return -EINTR;
+
+		if (!zone_can_frag(zone))
+			continue;
 
 		cc.zone = zone;
 
@@ -3110,6 +3119,9 @@ static bool kcompactd_node_suitable(pg_data_t *pgdat)
 		zone = &pgdat->node_zones[zoneid];
 
 		if (!populated_zone(zone))
+			continue;
+
+		if (!zone_can_frag(zone))
 			continue;
 
 		trace_android_vh_mm_customize_zone_can_compact(zone, &can_compact);
