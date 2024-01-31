@@ -16,6 +16,24 @@
       "message": "Hmm. The ABI breakage is all in `struct tcpm_port` which is declared in drivers/usb/typec/tcpm/tcpm.c and therefore not usable by any vendor module. Seems like this should be safe to allow with some __GENKSYMS__ magic.",
       "revId": "68dc27fe7a3b460ab72e4f487f5f4e75b86b5801",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cae723a_ab81b6c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-31T20:59:45Z",
+      "side": 1,
+      "message": "Maybe, we need to verify that this is ok by hand, as there are hooks around here that might be bleading structures...  Splitting the abi file update into a separate commit will make that easier.",
+      "parentUuid": "cd330d0c_872b46ae",
+      "revId": "68dc27fe7a3b460ab72e4f487f5f4e75b86b5801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
