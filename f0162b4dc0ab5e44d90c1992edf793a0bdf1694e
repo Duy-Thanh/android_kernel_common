@@ -34,6 +34,24 @@
       "parentUuid": "fac3377e_8ad1fdd3",
       "revId": "f0162b4dc0ab5e44d90c1992edf793a0bdf1694e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07bd8a6e_851ccbb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-31T15:46:23Z",
+      "side": 1,
+      "message": "What bug, you can\u0027t update the .stg file, that shows that you are changing the abi.\n\nThe tool shows the breakage:\n```\ntype \u0027struct tcpm_port\u0027 changed\n  byte size changed from 12536 to 12552\n  member \u0027struct usb_power_delivery** pds\u0027 was added\n  member \u0027struct pd_data** pd_list\u0027 was added\n  member \u0027struct usb_power_delivery* pd\u0027 was removed\n  5 members (\u0027struct usb_power_delivery_capabilities* port_source_caps\u0027 .. \u0027struct usb_power_delivery_capabilities* partner_sink_caps\u0027) changed\n    offset changed by 64\n  member \u0027struct usb_power_delivery* selected_pd\u0027 was added\n  5 members (\u0027u32 sink_request\u0027 .. \u0027unsigned int nr_sink_caps\u0027) changed\n    offset changed by 128\n  member \u0027unsigned int pd_count\u0027 was added\n  14 members (\u0027u32 src_pdo[7]\u0027 .. \u0027u32 supply_voltage\u0027) changed\n    offset changed by 160\n  32 members (\u0027struct power_supply* psy\u0027 .. \u0027u8* logbuffer[1024]\u0027) changed\n    offset changed by 128\n```",
+      "parentUuid": "6280343f_8c3ba7de",
+      "revId": "f0162b4dc0ab5e44d90c1992edf793a0bdf1694e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
