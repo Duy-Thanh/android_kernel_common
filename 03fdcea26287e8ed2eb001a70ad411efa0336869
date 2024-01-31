@@ -33,6 +33,23 @@
       "message": "Need to hold on this change due to problems it causes elsewhere (b/298027429)\n\nHopefully we can sort those issues soon so this can go in.",
       "revId": "03fdcea26287e8ed2eb001a70ad411efa0336869",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4fcdc28_727d3e1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-01-31T01:03:02Z",
+      "side": 1,
+      "message": "The upstream change here has been queued to be reverted upstream:\n  https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git/commit/?h\u003dusb-linus\u0026id\u003db717dfbf73e842d15174699fe2c6ee4fdde8aa1f\n\nas it was not following the spec properly. So I don\u0027t think we can take this as it causes regressions on other devices. \n\nI\u0027d advise you to bring the issue with your hardware up on the list so that maintainers can consider how to best resolve the issue. Or propose an alternate patch.",
+      "revId": "03fdcea26287e8ed2eb001a70ad411efa0336869",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
