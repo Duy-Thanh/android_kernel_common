@@ -34,6 +34,24 @@
       "parentUuid": "5fceeecb_2931e71e",
       "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3874a42_12127e8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-31T03:51:17Z",
+      "side": 1,
+      "message": "Yes. The first KMI freeze is coming up soon so it is time to submit symbol lists. It also helps us to review the KMI impact of new symbols.",
+      "parentUuid": "63d9ecaa_b1018b6f",
+      "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
