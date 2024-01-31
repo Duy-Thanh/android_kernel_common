@@ -1105,8 +1105,13 @@ static int f2fs_rename(struct mnt_idmap *idmap, struct inode *old_dir,
 		iput(whiteout);
 	}
 
+<<<<<<< HEAD   (a3b3ea ANDROID: vendor_hooks: Add hook for mmc queue)
 	if (old_is_dir) {
 		if (old_dir_entry)
+=======
+	if (old_dir_entry) {
+		if (old_dir != new_dir)
+>>>>>>> BRANCH (988172 Linux 6.6.14)
 			f2fs_set_link(old_inode, old_dir_entry,
 						old_dir_page, new_dir);
 		else

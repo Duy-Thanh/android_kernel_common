@@ -30,7 +30,10 @@
 #include <linux/swiotlb.h>
 #include <linux/vmalloc.h>
 #include <trace/events/swiotlb.h>
+<<<<<<< HEAD   (a3b3ea ANDROID: vendor_hooks: Add hook for mmc queue)
 #include <trace/hooks/iommu.h>
+=======
+>>>>>>> BRANCH (988172 Linux 6.6.14)
 
 #include "dma-iommu.h"
 
