@@ -52,6 +52,24 @@
       "parentUuid": "6280343f_8c3ba7de",
       "revId": "f0162b4dc0ab5e44d90c1992edf793a0bdf1694e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0f1f986_d81e35e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-31T15:48:10Z",
+      "side": 1,
+      "message": "Yes, this looks to be an \"internal\" structure, but it is \"leaking\" out to the abi.  We have had places where this has happened in the past, so you need to \"prove\" that this change is not a real break.  Please remove the .stg file from this commit and  make it an add-on patch at the end of the series, that makes it easier to review and validate.",
+      "parentUuid": "07bd8a6e_851ccbb6",
+      "revId": "f0162b4dc0ab5e44d90c1992edf793a0bdf1694e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
