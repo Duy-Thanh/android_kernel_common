@@ -16,6 +16,24 @@
       "message": "Do you have a bug number for this CL?",
       "revId": "dac9f450f09cc1af907b3c6b9037e2ce12578963",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4326167_4ff9c0f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-01-31T21:32:23Z",
+      "side": 1,
+      "message": "There is no bug because no partners reported this. Pixel thought cma dmabufs might be counted under file, and when I looked I found that is not true with their custom CMA heap. However it is true (and incorrect) with this upstream heap.",
+      "parentUuid": "51d8101d_a071f68f",
+      "revId": "dac9f450f09cc1af907b3c6b9037e2ce12578963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
