@@ -16,6 +16,24 @@
       "message": "Sorry, but you can not break the abi like this 😞",
       "revId": "f0162b4dc0ab5e44d90c1992edf793a0bdf1694e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6280343f_8c3ba7de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1301696
+      },
+      "writtenOn": "2024-01-31T15:44:52Z",
+      "side": 1,
+      "message": "Are you referring to the stg file? It looks like a bug in the ABI tool",
+      "parentUuid": "fac3377e_8ad1fdd3",
+      "revId": "f0162b4dc0ab5e44d90c1992edf793a0bdf1694e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
