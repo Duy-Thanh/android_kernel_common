@@ -17,7 +17,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
           }
         },
         "allowOverrideInChildProjects": true
@@ -29,7 +29,7 @@
         "value": {"expression":{"expressionString":"label:AIDL-API-Review AND -label:AIDL-API-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
       "legacy": {
@@ -54,7 +54,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
           }
         },
         "allowOverrideInChildProjects": true
@@ -66,7 +66,7 @@
         "value": {"expression":{"expressionString":"label:API-Review=MAX AND -label:API-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
       "legacy": {
@@ -91,7 +91,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
           }
         },
         "allowOverrideInChildProjects": true
@@ -103,7 +103,7 @@
         "value": {"expression":{"expressionString":"label:Build-Team-Review=MAX AND -label:Build-Team-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
       "legacy": {
@@ -124,7 +124,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers)"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -134,7 +134,7 @@
         "value": {"expression":{"expressionString":"-label:Code-Review=MIN AND (-is:android-cherry-pick_exemptedusers AND label:Code-Review=MAX,user=non_uploader OR (is:android-cherry-pick_exemptedusers AND label:Code-Review=MAX,count>=2) OR (label:Code-Review=MAX AND (label:Exempt=+1 OR (uploader:1474732 AND (project:platform/developers/docs OR project:platform/frameworks/support)))))"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Code-Review=MIN","is:android-cherry-pick_exemptedusers","label:Code-Review=MAX,user=non_uploader","is:android-cherry-pick_exemptedusers","label:Code-Review=MAX,count>=2","label:Code-Review=MAX","label:Exempt=+1","uploader:1474732","project:platform/developers/docs","project:platform/frameworks/support"]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","uploader:1587862","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers"]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","is:android-but-lint_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers"]}
       },
       "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
       "legacy": {
@@ -159,7 +159,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
           }
         },
         "allowOverrideInChildProjects": true
@@ -171,7 +171,7 @@
         "value": {"expression":{"expressionString":"label:DrNo-Review=MAX AND -label:DrNo-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
       "legacy": {
@@ -233,7 +233,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
           }
         },
         "allowOverrideInChildProjects": true
@@ -245,7 +245,44 @@
         "value": {"expression":{"expressionString":"label:NDK-API-Review=MAX AND -label:NDK-API-Review=MIN"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+      },
+      "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    },
+    {
+      "submitRequirement": {
+        "name": "No-Unresolved-Comments",
+        "description": {
+          "value": "Changes that have unresolved comments are not submittable. Unless overridden with Unresolved-Comment-Reason: \u003creason\u003e line in change message."
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "has:unresolved"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "-has:unresolved"
+        },
+        "overrideExpression": {
+          "value": {
+            "expressionString": "message:\"^.*Unresolved-Comment-Reason:.*\""
+          }
+        },
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"has:unresolved"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["has:unresolved"]}
+      },
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"-has:unresolved"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+      },
+      "overrideExpressionResult": {
+        "value": {"expression":{"expressionString":"message:\"^.*Unresolved-Comment-Reason:.*\""},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
       },
       "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
       "legacy": {
@@ -270,7 +307,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override\u003d+1"
           }
         },
         "allowOverrideInChildProjects": true
@@ -282,7 +319,7 @@
         "value": {"expression":{"expressionString":"label:Open-Source-Licensing=0 OR (-label:Open-Source-Licensing=MIN AND ((label:Open-Source-Licensing=MAX AND label:Open-Source-Licensing=-1) OR -label:Open-Source-Licensing=-1))"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":["label:Open-Source-Licensing=0"],"failingAtoms":["label:Open-Source-Licensing=MIN","label:Open-Source-Licensing=MAX","label:Open-Source-Licensing=-1","label:Open-Source-Licensing=-1"]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","uploader:1587862","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1"]}
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","is:android-but-lint_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1"]}
       },
       "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
       "legacy": {
@@ -307,7 +344,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "(-label:Performance\u003e0,android-crystalball-crystalball-presubmit AND label:Performance\u003e0) OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override\u003d+1 AND is:pure-revert)"
+            "expressionString": "(-label:Performance\u003e0,android-crystalball-crystalball-presubmit AND label:Performance\u003e0) OR is:android-but-lint_exemptedusers OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override\u003d+1 AND is:pure-revert)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -319,7 +356,7 @@
         "value": {"expression":{"expressionString":"-label:Performance=MIN,android-crystalball-crystalball-presubmit AND -label:Performance=0"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Performance=MIN,android-crystalball-crystalball-presubmit","label:Performance=0"]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"(-label:Performance>0,android-crystalball-crystalball-presubmit AND label:Performance>0) OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override=+1 AND is:pure-revert)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":["label:Performance>0,android-crystalball-crystalball-presubmit","label:Performance>0"],"failingAtoms":["is:android_exemptedusers","is:android-but-lint_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert"]}
+        "value": {"expression":{"expressionString":"(-label:Performance>0,android-crystalball-crystalball-presubmit AND label:Performance>0) OR is:android-but-lint_exemptedusers OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override=+1 AND is:pure-revert)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":["label:Performance>0,android-crystalball-crystalball-presubmit","label:Performance>0"],"failingAtoms":["is:android-but-lint_exemptedusers","is:android_exemptedusers","is:android-but-lint_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert"]}
       },
       "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
       "legacy": {
@@ -340,7 +377,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "label:Bypass-Presubmit\u003d+2 OR is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override\u003d+1 AND is:pure-revert AND -label:Presubmit-Verified\u003d-2)"
+            "expressionString": "label:Bypass-Presubmit\u003d+2 OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override\u003d+1 AND is:pure-revert AND -label:Presubmit-Verified\u003d-2)"
           }
         },
         "allowOverrideInChildProjects": true
@@ -350,7 +387,7 @@
         "value": {"expression":{"expressionString":"-label:Presubmit-Verified=-2 AND (label:Bypass-Presubmit=+1 OR label:Presubmit-Verified-Together=+1 OR (-label:Presubmit-Verified=-1 AND (label:Presubmit-Verified=+2 OR label:Presubmit-Verified=+1)))"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":["label:Presubmit-Verified=+2"],"failingAtoms":["label:Presubmit-Verified=-2","label:Bypass-Presubmit=+1","label:Presubmit-Verified-Together=+1","label:Presubmit-Verified=-1","label:Presubmit-Verified=+1"]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"label:Bypass-Presubmit=+2 OR is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override=+1 AND is:pure-revert AND -label:Presubmit-Verified=-2)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Bypass-Presubmit=+2","is:android_exemptedusers","uploader:1587862","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert","label:Presubmit-Verified=-2"]}
+        "value": {"expression":{"expressionString":"label:Bypass-Presubmit=+2 OR is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override=+1 AND is:pure-revert AND -label:Presubmit-Verified=-2)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Bypass-Presubmit=+2","is:android_exemptedusers","is:android-but-lint_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert","label:Presubmit-Verified=-2"]}
       },
       "patchSetCommitId": "ff2f28c2387b89e156d3d98be6d626d2c3125ed2",
       "legacy": {
