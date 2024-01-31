@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a848396a_93d2bc3c",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-31T20:33:12Z",
+      "side": 1,
+      "message": "what filesystem is this?  These are not symbols that filesystems should be using at all, and NEVER for a driver.",
+      "range": {
+        "startLine": 354,
+        "startChar": 13,
+        "endLine": 354,
+        "endChar": 19
+      },
+      "revId": "c49dc3f483eac4d7908bb4de4a16b20dbb445219",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
