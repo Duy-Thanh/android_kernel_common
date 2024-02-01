@@ -34,6 +34,24 @@
       "parentUuid": "cd330d0c_872b46ae",
       "revId": "68dc27fe7a3b460ab72e4f487f5f4e75b86b5801",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f29ce9_34a6fed9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1301696
+      },
+      "writtenOn": "2024-02-01T07:37:19Z",
+      "side": 1,
+      "message": "stg change uploaded: aosp/2943226",
+      "parentUuid": "9cae723a_ab81b6c5",
+      "revId": "68dc27fe7a3b460ab72e4f487f5f4e75b86b5801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
