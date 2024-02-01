@@ -33,6 +33,41 @@
       "message": "Needs to wait for 2024-01 branch to release",
       "revId": "2a05d33f16ed4b3d16bf4ef682a8ee4671dbbe94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b2dfbb0_707f88d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1974172
+      },
+      "writtenOn": "2024-02-01T01:43:30Z",
+      "side": 1,
+      "message": "android14-6.1-2024-01_r1 has been released. help to review again?",
+      "parentUuid": "dc59f8f1_16d2a7c0",
+      "revId": "2a05d33f16ed4b3d16bf4ef682a8ee4671dbbe94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a751c006_b55bbe65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1974172
+      },
+      "writtenOn": "2024-02-01T01:43:30Z",
+      "side": 1,
+      "message": "android14-6.1-2024-01_r1 has been released. help to review again?",
+      "revId": "2a05d33f16ed4b3d16bf4ef682a8ee4671dbbe94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
