@@ -331059,6 +331059,11 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0xdaf734f3
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x914dbfdc
+}
+function {
   id: 0xdb53d61f
   return_type_id: 0x3f095459
   parameter_id: 0x3b806236
@@ -350850,6 +350855,15 @@ elf_symbol {
   crc: 0x2a1373e3
   type_id: 0x9ce01ea2
   full_name: "cpufreq_driver_target"
+}
+elf_symbol {
+  id: 0x9d35d7e0
+  name: "cpufreq_driver_test_flags"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4d63667e
+  type_id: 0xdaf734f3
+  full_name: "cpufreq_driver_test_flags"
 }
 elf_symbol {
   id: 0x39e2d50e
@@ -403475,6 +403489,7 @@ interface {
   symbol_id: 0xd72ba404
   symbol_id: 0x62250f4d
   symbol_id: 0x1b33e29e
+  symbol_id: 0x9d35d7e0
   symbol_id: 0x39e2d50e
   symbol_id: 0x4eff590a
   symbol_id: 0xe94841a9
