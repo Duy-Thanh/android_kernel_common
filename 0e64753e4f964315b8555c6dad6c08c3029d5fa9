@@ -34,6 +34,24 @@
       "parentUuid": "109d3ec8_db36bc91",
       "revId": "0e64753e4f964315b8555c6dad6c08c3029d5fa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad29c78d_6b247c0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-01T17:22:51Z",
+      "side": 1,
+      "message": "I think the question is more about urgency as it could wait for this patch to land via lts merge. I doubt that lockdep is used outside of testing/debugging and thus this patch could be added locally. So it doesn\u0027t seem that urgent to me.",
+      "parentUuid": "6dc5abe0_6864573a",
+      "revId": "0e64753e4f964315b8555c6dad6c08c3029d5fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
