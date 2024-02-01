@@ -579,6 +579,24 @@
       "parentUuid": "f0080aff_9823689f",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55fb95d7_db11c175",
+        "filename": "include/linux/usb/configfs_uevent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T19:43:28Z",
+      "side": 1,
+      "message": "Ah, ok, that makes a bit more sense.  It\u0027s a mess, sorry.",
+      "parentUuid": "4c7621a7_a3e5f9d7",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
