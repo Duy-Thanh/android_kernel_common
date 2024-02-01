@@ -226,6 +226,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "328d6d8d_fc029e98",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T16:28:57Z",
+      "side": 1,
+      "message": "Right, or a way to create a single attr, rather than a group.  I assume that already exists.  If it does, what\u0027s preventing from using that here?",
+      "parentUuid": "9fb98f00_ff2d17fe",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e05fffd_cf9edb28",
         "filename": "drivers/usb/gadget/configfs_uevent.c",
         "patchSetId": 2
@@ -261,6 +279,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcd58ab3_02788df9",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T16:28:57Z",
+      "side": 1,
+      "message": "As above.  All of this simple class registration looks like boilerplate.  This could be improved in a similar way to how module_platform_driver() removed all of the silly module_{init,exit} copy/paste craziness.",
+      "parentUuid": "b31232d4_bb152891",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc4e8bde_5afc7623",
         "filename": "drivers/usb/gadget/configfs_uevent.h",
         "patchSetId": 2
@@ -272,6 +308,30 @@
       "writtenOn": "2024-02-01T16:18:07Z",
       "side": 1,
       "message": "note, having a function have a boolean is ripe for issues as whenever you see the boolean in the use of it (like in the places you used it), you have to stop, look up the function and read the documentation to see what true/false really means, and then go back to it.\n\nInstead, just have two functions that resolve to the same core function internally, and pass the flag there.  So, for these you will have 4 public functions.  You can do it all with inlines here in the .h file to make it cleaner if you want.\n\nOh, and documentation for what these functions are would be nice, as that makes it easier to review 😊",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 79
+      },
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "511914c8_788d84a2",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T16:28:57Z",
+      "side": 1,
+      "message": "Seeing as this is a band-aid, documentation here can be as simple as a function header (comment).",
+      "parentUuid": "bc4e8bde_5afc7623",
       "range": {
         "startLine": 15,
         "startChar": 0,
