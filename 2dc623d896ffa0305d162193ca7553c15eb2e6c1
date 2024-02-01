@@ -20,6 +20,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3597d4b7_deedd8d3",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1664,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "Can you drop this and the declaration above in favour of \u0026gi-\u003ecdev-\u003eandroid_ops?",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5b82f53_548e6e0e",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "Can this be called before configfs_register_subsystem() to avoid the unregister in the error path?",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e61c7713_56f5ba13",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "Is there no way to avoid this global?",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70abec43_b48ff52e",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "C++ comments?",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afece5f6_190b8a93",
         "filename": "drivers/usb/gadget/configfs_uevent.c",
         "patchSetId": 2
@@ -31,6 +99,108 @@
       "writtenOn": "2024-02-01T11:47:11Z",
       "side": 1,
       "message": "Todo: sort out the dev",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6331e4e_c21a03f1",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "Are all of these debug prints really going to be useful post-development?",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5648a8c2_bd9a4da5",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "Boilerplate.\n\nATTRIBUTE_GROUPS(android_usb_class);",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8d2294c_d8c57868",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "There should probably be one for the above struct too, but I can\u0027t seem to find one.",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92992cc_58bdac2a",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "I wonder how many of these; single attr, single group, single groups, single devices boilerplate scenarios there are and whether it\u0027s worthwhile creating a chain of MACRO()s for them.",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e05fffd_cf9edb28",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "And this ...",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b816c6a1_e828d188",
+        "filename": "include/linux/usb/configfs_uevent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "The LINUX part is odd.  Where else will this be used?",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

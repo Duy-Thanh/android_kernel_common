@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9fe2e8e_f47049fc",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-02-01T12:22:04Z",
+      "side": 1,
+      "message": "Should this eventuality be picked up by CTS?",
+      "parentUuid": "2e2d153d_2b363a53",
+      "revId": "a1a8dc9ff02d6d20dde3d07493f2585bf5a182cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34eabbb1_999d2312",
         "filename": "drivers/usb/gadget/configfs_uevent.h",
         "patchSetId": 1
