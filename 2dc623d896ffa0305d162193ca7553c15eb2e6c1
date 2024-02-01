@@ -242,6 +242,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd1f4564_88f09ddb",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T16:35:41Z",
+      "side": 1,
+      "message": "A group is \"needed\" as this wants to be in a subdirectory.  Gotta keep the abi that previous people created 😞\n\nSo this is fine as-is.",
+      "parentUuid": "328d6d8d_fc029e98",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e05fffd_cf9edb28",
@@ -291,6 +309,24 @@
       "side": 1,
       "message": "As above.  All of this simple class registration looks like boilerplate.  This could be improved in a similar way to how module_platform_driver() removed all of the silly module_{init,exit} copy/paste craziness.",
       "parentUuid": "b31232d4_bb152891",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fd4ecb8_640b0d27",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T16:35:41Z",
+      "side": 1,
+      "message": "Maybe, but the kernel doesn\u0027t have that as usually class create/unregister is part of the module init process where you need to do more than that, just like what is done here.\n\nSo this is all good.",
+      "parentUuid": "fcd58ab3_02788df9",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
