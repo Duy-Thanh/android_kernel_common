@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa976b34_166a5899",
+        "filename": "drivers/usb/gadget/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T11:47:11Z",
+      "side": 1,
+      "message": "Fix odd wording",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afece5f6_190b8a93",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T11:47:11Z",
+      "side": 1,
+      "message": "Todo: sort out the dev",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
