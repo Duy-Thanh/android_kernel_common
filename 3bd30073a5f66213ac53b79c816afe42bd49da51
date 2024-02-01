@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43a906a_354b0705",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-01T17:14:04Z",
+      "side": 1,
+      "message": "Are you trying to target a specific target thread all the time? Why not have a separate binder instance instead that handles this specific work? What criteria is used to select the work?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 61
+      },
+      "revId": "3bd30073a5f66213ac53b79c816afe42bd49da51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28b7c6b8_325d9960",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2942,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-01T17:14:04Z",
+      "side": 1,
+      "message": "skip what? This variable name needs to be more specific.",
+      "range": {
+        "startLine": 2942,
+        "startChar": 6,
+        "endLine": 2942,
+        "endChar": 10
+      },
+      "revId": "3bd30073a5f66213ac53b79c816afe42bd49da51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d3a11f8_ea3c1c85",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4650,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-01T17:14:04Z",
+      "side": 1,
+      "message": "do you need to pass `proc`? wouldn\u0027t `thread-\u003eproc` be enough?",
+      "range": {
+        "startLine": 4650,
+        "startChar": 6,
+        "endLine": 4650,
+        "endChar": 10
+      },
+      "revId": "3bd30073a5f66213ac53b79c816afe42bd49da51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "283b48c9_5dff9858",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4652,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-01T17:14:04Z",
+      "side": 1,
+      "message": "Are you trying to handle the case where `list_emtpy(\u0026thread-\u003etodo) \u0026\u0026 list_empty(\u0026proc-\u003etodo)` but you have work on your own list? Shouldn\u0027t this be one more `else if` entry?",
+      "range": {
+        "startLine": 4651,
+        "startChar": 2,
+        "endLine": 4652,
+        "endChar": 13
+      },
+      "revId": "3bd30073a5f66213ac53b79c816afe42bd49da51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
