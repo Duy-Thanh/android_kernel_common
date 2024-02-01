@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78e6327e_30c971cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T16:32:45Z",
+      "side": 1,
+      "message": "This ABI change is safe, it\u0027s a local structure, and only referenced by external functions as a pointer, so all is good!",
+      "revId": "8a44848b642ea43d6048c25fec2150dc99b9a83f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
