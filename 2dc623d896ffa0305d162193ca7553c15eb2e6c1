@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "999de850_12df3805",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T16:18:07Z",
+      "side": 1,
+      "message": "Looking good!",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa976b34_166a5899",
@@ -122,6 +139,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99f145cc_428c4d3e",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T16:18:07Z",
+      "side": 1,
+      "message": "They are \"free\", just keep them in for now, uncommented as they only are triggered manually anyway.  Should be fine.",
+      "parentUuid": "b6331e4e_c21a03f1",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5648a8c2_bd9a4da5",
         "filename": "drivers/usb/gadget/configfs_uevent.c",
         "patchSetId": 2
@@ -173,6 +208,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fb98f00_ff2d17fe",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T16:18:07Z",
+      "side": 1,
+      "message": "We have enough sysfs attribute macros, I doubt we need more 😊\n\nThat being said, one attribute groups are pretty rare, or at least they should be, otherwise they don\u0027t need to be in a group.",
+      "parentUuid": "e92992cc_58bdac2a",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e05fffd_cf9edb28",
         "filename": "drivers/usb/gadget/configfs_uevent.c",
         "patchSetId": 2
@@ -190,6 +243,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b31232d4_bb152891",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T16:18:07Z",
+      "side": 1,
+      "message": "???",
+      "parentUuid": "3e05fffd_cf9edb28",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc4e8bde_5afc7623",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T16:18:07Z",
+      "side": 1,
+      "message": "note, having a function have a boolean is ripe for issues as whenever you see the boolean in the use of it (like in the places you used it), you have to stop, look up the function and read the documentation to see what true/false really means, and then go back to it.\n\nInstead, just have two functions that resolve to the same core function internally, and pass the flag there.  So, for these you will have 4 public functions.  You can do it all with inlines here in the .h file to make it cleaner if you want.\n\nOh, and documentation for what these functions are would be nice, as that makes it easier to review 😊",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 79
+      },
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b816c6a1_e828d188",
         "filename": "include/linux/usb/configfs_uevent.h",
         "patchSetId": 2
@@ -201,6 +295,24 @@
       "writtenOn": "2024-02-01T12:22:04Z",
       "side": 1,
       "message": "The LINUX part is odd.  Where else will this be used?",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0080aff_9823689f",
+        "filename": "include/linux/usb/configfs_uevent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-01T16:18:07Z",
+      "side": 1,
+      "message": "why is this in include/linux/usb at all?  Can\u0027t it go into the local directory instead?",
+      "parentUuid": "b816c6a1_e828d188",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
