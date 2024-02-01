@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46c98574_20426d1c",
+        "filename": "kernel/trace/trace_preemptirq.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-01T00:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be078130_23122e88",
+      "range": {
+        "startLine": 31,
+        "startChar": 36,
+        "endLine": 31,
+        "endChar": 59
+      },
+      "revId": "57f72360746cd80a0be4294451ce9a744c6ff35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa55aaab_9a2417ae",
@@ -102,6 +126,30 @@
       "writtenOn": "2024-01-17T19:20:52Z",
       "side": 1,
       "message": "The original patch in aosp/1513631 seems to trace \"enable\" here. I suppose that was a mistake and this one is correct? Did we have the incorrect vendor hook all this time in android-mainline?",
+      "range": {
+        "startLine": 105,
+        "startChar": 3,
+        "endLine": 105,
+        "endChar": 33
+      },
+      "revId": "57f72360746cd80a0be4294451ce9a744c6ff35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f0d847a_65baf95e",
+        "filename": "kernel/trace/trace_preemptirq.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-01T00:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa55aaab_9a2417ae",
       "range": {
         "startLine": 105,
         "startChar": 3,
