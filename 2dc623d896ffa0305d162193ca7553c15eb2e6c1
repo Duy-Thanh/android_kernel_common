@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b33de052_6d37e9ba",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1664,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T18:12:02Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "3597d4b7_deedd8d3",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5b82f53_548e6e0e",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "writtenOn": "2024-02-01T12:22:04Z",
       "side": 1,
       "message": "Can this be called before configfs_register_subsystem() to avoid the unregister in the error path?",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8fe80c_6e34121e",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T18:12:02Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "f5b82f53_548e6e0e",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "659aa30e_c567393f",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T18:12:02Z",
+      "side": 1,
+      "message": "As far as I can tell, no. Ultimately other function drivers call create_function_dev(char* name) to create/register their device in the android class.\n\nOpen to proposals if you have an idea how to refactor that function, but that was the best I could come up at the time.",
+      "parentUuid": "e61c7713_56f5ba13",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70abec43_b48ff52e",
         "filename": "drivers/usb/gadget/configfs_uevent.c",
         "patchSetId": 2
@@ -99,6 +153,24 @@
       "writtenOn": "2024-02-01T12:22:04Z",
       "side": 1,
       "message": "C++ comments?",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3cdc72c_50570594",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T18:12:02Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "70abec43_b48ff52e",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -157,6 +229,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2858475a_18524fa0",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T18:12:02Z",
+      "side": 1,
+      "message": "Commented out due to a build error- apparently I\u0027m passing the wrong object, but it was late so I commented them out to get further in the build. Hence my \u0027todo\u0027 comment above. Will leave uncommented once fixed.",
+      "parentUuid": "99f145cc_428c4d3e",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5648a8c2_bd9a4da5",
         "filename": "drivers/usb/gadget/configfs_uevent.c",
         "patchSetId": 2
@@ -185,6 +275,42 @@
       "writtenOn": "2024-02-01T12:22:04Z",
       "side": 1,
       "message": "There should probably be one for the above struct too, but I can\u0027t seem to find one.",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b92404b_67c513cb",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T18:12:02Z",
+      "side": 1,
+      "message": "Ack, will look.",
+      "parentUuid": "e8d2294c_d8c57868",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf61238_0f8a0582",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T18:12:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5648a8c2_bd9a4da5",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -380,6 +506,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bab778bd_bf37e1ab",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T18:12:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "511914c8_788d84a2",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 79
+      },
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b816c6a1_e828d188",
         "filename": "include/linux/usb/configfs_uevent.h",
         "patchSetId": 2
@@ -409,6 +559,24 @@
       "side": 1,
       "message": "why is this in include/linux/usb at all?  Can\u0027t it go into the local directory instead?",
       "parentUuid": "b816c6a1_e828d188",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c7621a7_a3e5f9d7",
+        "filename": "include/linux/usb/configfs_uevent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-01T18:12:02Z",
+      "side": 1,
+      "message": "android_uevent_opts is embedded `struct usb_composite_dev` in include/linux/usb/composite.h. I suppose I could move the struct definition to that file, but create_function_device is called by other function drivers (I believe midi and something else in-tree, need to look into that and was going to add as a separate patch on top of this one.\n\nIt is my understanding that vendors are also using create_function_device in their custom functions/modules.",
+      "parentUuid": "f0080aff_9823689f",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
