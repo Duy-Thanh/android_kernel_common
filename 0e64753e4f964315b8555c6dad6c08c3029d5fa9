@@ -87,6 +87,24 @@
       "parentUuid": "ad29c78d_6b247c0c",
       "revId": "0e64753e4f964315b8555c6dad6c08c3029d5fa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d61342c_aae53507",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-02-02T02:11:40Z",
+      "side": 1,
+      "message": "Removing my -1 since this CL looks fine to me after having taken a closer look.",
+      "parentUuid": "ea0ae29d_a06e529f",
+      "revId": "0e64753e4f964315b8555c6dad6c08c3029d5fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
