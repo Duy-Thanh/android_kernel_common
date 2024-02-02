@@ -70,6 +70,30 @@
       },
       "revId": "c49dc3f483eac4d7908bb4de4a16b20dbb445219",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35bb67d1_1fc8ce74",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 3278638
+      },
+      "writtenOn": "2024-02-02T06:29:52Z",
+      "side": 1,
+      "message": "This is already Broadcom\u0027s latest baseline for gki release 6.1 .\n\nCheck the commit history, other drivers also have touch file system operations.",
+      "parentUuid": "76cd0f19_b69ebba0",
+      "range": {
+        "startLine": 354,
+        "startChar": 13,
+        "endLine": 354,
+        "endChar": 19
+      },
+      "revId": "c49dc3f483eac4d7908bb4de4a16b20dbb445219",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
