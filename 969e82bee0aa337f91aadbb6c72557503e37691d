@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "050faf4a_683ae5da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-02T22:29:25Z",
+      "side": 1,
+      "message": "please create a patch on top of this one to add to your symbol list (or you can make the initial symbol list a child of this patch)",
+      "revId": "969e82bee0aa337f91aadbb6c72557503e37691d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
