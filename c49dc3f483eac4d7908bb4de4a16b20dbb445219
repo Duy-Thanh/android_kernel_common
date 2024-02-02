@@ -94,6 +94,30 @@
       },
       "revId": "c49dc3f483eac4d7908bb4de4a16b20dbb445219",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5bcd36d_c9bafa6a",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-02T17:18:13Z",
+      "side": 1,
+      "message": "Again, a wifi driver should NEVER be touching the filesystem, sorry.  Please have Broadcom contact me and the Android kernel team if they have any questions abou this.",
+      "parentUuid": "35bb67d1_1fc8ce74",
+      "range": {
+        "startLine": 354,
+        "startChar": 13,
+        "endLine": 354,
+        "endChar": 19
+      },
+      "revId": "c49dc3f483eac4d7908bb4de4a16b20dbb445219",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
