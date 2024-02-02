@@ -22,6 +22,30 @@
       },
       "revId": "c49dc3f483eac4d7908bb4de4a16b20dbb445219",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e626de0_33ca12b9",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 3278638
+      },
+      "writtenOn": "2024-02-02T02:57:26Z",
+      "side": 1,
+      "message": "This is a driver for the wifi chip from Broadcom.",
+      "parentUuid": "a848396a_93d2bc3c",
+      "range": {
+        "startLine": 354,
+        "startChar": 13,
+        "endLine": 354,
+        "endChar": 19
+      },
+      "revId": "c49dc3f483eac4d7908bb4de4a16b20dbb445219",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
