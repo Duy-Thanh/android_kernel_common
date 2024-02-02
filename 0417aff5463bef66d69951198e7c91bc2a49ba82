@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d78d4e5a_9504daa4",
+        "filename": "drivers/dma-buf/heaps/deferred-free-helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-02-02T09:23:54Z",
+      "side": 1,
+      "message": "this should add set_freezable() for wait_event_freezable()",
+      "revId": "0417aff5463bef66d69951198e7c91bc2a49ba82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
