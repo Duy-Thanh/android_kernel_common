@@ -70,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d093b2ad_e7a07c95",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1664,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T19:03:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b33de052_6d37e9ba",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5b82f53_548e6e0e",
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Ack.",
       "parentUuid": "f5b82f53_548e6e0e",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cc20e21_c89ae5d0",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T19:03:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b8fe80c_6e34121e",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -140,6 +176,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e7ebbdc_aebd867a",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T19:03:18Z",
+      "side": 1,
+      "message": "Per discussion elsewhere, we have decided to leave the global to minimize impact to other drivers.",
+      "parentUuid": "659aa30e_c567393f",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70abec43_b48ff52e",
@@ -171,6 +225,24 @@
       "side": 1,
       "message": "Ack.",
       "parentUuid": "70abec43_b48ff52e",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9968b82e_fd873de3",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T19:03:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3cdc72c_50570594",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -311,6 +383,42 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "5648a8c2_bd9a4da5",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c569107d_60cbbdb2",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T19:03:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcf61238_0f8a0582",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d6ab5c3_4fc1ac49",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T19:03:18Z",
+      "side": 1,
+      "message": "Didn\u0027t find one either- leaving as is.",
+      "parentUuid": "4b92404b_67c513cb",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -528,6 +636,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a3e3bff_6d28174e",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T19:03:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bab778bd_bf37e1ab",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 79
+      },
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b816c6a1_e828d188",
@@ -595,6 +727,24 @@
       "side": 1,
       "message": "Ah, ok, that makes a bit more sense.  It\u0027s a mess, sorry.",
       "parentUuid": "4c7621a7_a3e5f9d7",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e134ab19_b6885b0b",
+        "filename": "include/linux/usb/configfs_uevent.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T19:03:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55fb95d7_db11c175",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
