@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "290785a3_ffb02567",
+        "filename": "drivers/usb/gadget/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T20:48:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa976b34_166a5899",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3597d4b7_deedd8d3",
@@ -264,6 +282,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f30157_3af24f3e",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T20:48:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afece5f6_190b8a93",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6331e4e_c21a03f1",
@@ -313,6 +349,24 @@
       "side": 1,
       "message": "Commented out due to a build error- apparently I\u0027m passing the wrong object, but it was late so I commented them out to get further in the build. Hence my \u0027todo\u0027 comment above. Will leave uncommented once fixed.",
       "parentUuid": "99f145cc_428c4d3e",
+      "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c28ce415_565e9ede",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T20:48:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2858475a_18524fa0",
       "revId": "2dc623d896ffa0305d162193ca7553c15eb2e6c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

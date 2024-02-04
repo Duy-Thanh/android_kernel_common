@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc3d378a_239125ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-04T20:48:09Z",
+      "side": 1,
+      "message": "Working on testing and I believe there is still a problem with the Kconfig on the allmodconfig build.",
+      "revId": "6f1d093d8aa4e51fd6b91f86d0d6fae3c5b9120e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
