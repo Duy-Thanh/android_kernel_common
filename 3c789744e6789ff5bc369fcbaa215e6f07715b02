@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b015bb61_1e27beea",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2024-02-05T09:55:40Z",
+      "side": 1,
+      "message": "I think `gi-\u003econnected` should be protected by the same lock in configfs_composite_disconnect(), isn\u0027t it?",
+      "revId": "3c789744e6789ff5bc369fcbaa215e6f07715b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4920e2_8be74dc2",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1539,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2024-02-05T09:55:40Z",
+      "side": 1,
+      "message": "As I know, there is no function need to handle control requests before composite_setup() except AoA. I think we can remove this.",
+      "revId": "3c789744e6789ff5bc369fcbaa215e6f07715b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
