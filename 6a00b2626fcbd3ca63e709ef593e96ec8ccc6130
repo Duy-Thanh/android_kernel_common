@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85da9a7f_3d7517a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-05T20:28:57Z",
+      "side": 1,
+      "message": "Hi all,\n\nAs promised, here\u0027s an android15-6.6 rebased version for the allocator.\n\nI haven\u0027t done any testing on this branch yet. I do have a set of scripts to do so which ideally would be converted into a pkvm-module and merged in ACK?\n\nhttps://android-kvm.googlesource.com/linux/+/84aed3a312a5613c4f2c70a8be0385cf511903f7",
+      "revId": "6a00b2626fcbd3ca63e709ef593e96ec8ccc6130",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
