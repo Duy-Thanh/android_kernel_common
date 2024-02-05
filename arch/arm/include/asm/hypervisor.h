@@ -2,7 +2,16 @@
 #ifndef _ASM_ARM_HYPERVISOR_H
 #define _ASM_ARM_HYPERVISOR_H
 
+#include <linux/memory.h>
+#include <linux/mm.h>
+
 #include <asm/xen/hypervisor.h>
+
+struct hypervisor_ops {
+	void (*page_relinquish)(struct page *page);
+};
+
+extern struct hypervisor_ops hyp_ops;
 
 void kvm_init_hyp_services(void);
 bool kvm_arm_hyp_service_available(u32 func_id);
