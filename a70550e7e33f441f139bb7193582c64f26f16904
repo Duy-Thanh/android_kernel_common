@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e02d92f_163b1939",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-05T22:56:26Z",
+      "side": 1,
+      "message": "Same as android15-6.1, should also pull the fix into 14-6.1",
+      "revId": "a70550e7e33f441f139bb7193582c64f26f16904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e90ff1dc_47941a83",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6835,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-05T22:56:26Z",
+      "side": 1,
+      "message": "Looks like there\u0027s a null pointer dereference that is fixed upstream that I believe we should address as part of the topic being merged: \nhttps://lore.kernel.org/all/20240113-pmi632-typec-v2-5-182d9aa0a5b3@linaro.org/",
+      "revId": "a70550e7e33f441f139bb7193582c64f26f16904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
