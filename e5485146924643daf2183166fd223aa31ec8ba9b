@@ -16,6 +16,24 @@
       "message": "Which other branches need this fix?",
       "revId": "e5485146924643daf2183166fd223aa31ec8ba9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f245ef8f_ff739556",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2024-02-05T19:45:23Z",
+      "side": 1,
+      "message": "Just this one. We don\u0027t use LTO in 6.1+ and they should get this patch through -stable anyway.",
+      "parentUuid": "9c26041f_64610541",
+      "revId": "e5485146924643daf2183166fd223aa31ec8ba9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
