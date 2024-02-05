@@ -34,6 +34,24 @@
       "parentUuid": "9c26041f_64610541",
       "revId": "e5485146924643daf2183166fd223aa31ec8ba9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31547034_69d50e8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2024-02-05T19:55:09Z",
+      "side": 1,
+      "message": "Looks like this didn\u0027t land until 6.2 after all, so I\u0027ll cherry-pick this to 6.1 branches too.",
+      "parentUuid": "f245ef8f_ff739556",
+      "revId": "e5485146924643daf2183166fd223aa31ec8ba9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
