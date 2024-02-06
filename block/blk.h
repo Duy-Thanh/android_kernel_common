@@ -21,6 +21,7 @@ DECLARE_STATIC_KEY_FALSE(blk_sub_page_limits);
 struct internal_request_queue {
 	struct request_queue	q;
 	struct delayed_work	requeue_work;
+	bool sub_page_limits;
 };
 
 static inline struct internal_request_queue *
@@ -64,12 +65,15 @@ void blk_free_flush_queue(struct blk_flush_queue *q);
 
 static inline bool blk_queue_sub_page_limits(const struct queue_limits *lim)
 {
+	struct request_queue *q = container_of(lim, struct request_queue, limits);
+	struct internal_request_queue *iq = to_internal_q(q);
+
 	return static_branch_unlikely(&blk_sub_page_limits) &&
-		lim->sub_page_limits;
+		iq->sub_page_limits;
 }
 
 int blk_sub_page_limit_queues_get(void *data, u64 *val);
-void blk_disable_sub_page_limits(struct queue_limits *q);
+void blk_disable_sub_page_limits(struct request_queue *q);
 
 void blk_freeze_queue(struct request_queue *q);
 void __blk_mq_unfreeze_queue(struct request_queue *q, bool force_atomic);

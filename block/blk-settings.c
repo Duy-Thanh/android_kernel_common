@@ -41,6 +41,9 @@ EXPORT_SYMBOL_GPL(blk_queue_rq_timeout);
  */
 void blk_set_default_limits(struct queue_limits *lim)
 {
+	struct request_queue *q = container_of(lim, struct request_queue, limits);
+	struct internal_request_queue *iq = to_internal_q(q);
+
 	lim->max_segments = BLK_MAX_SEGMENTS;
 	lim->max_discard_segments = 1;
 	lim->max_integrity_segments = 0;
@@ -65,7 +68,7 @@ void blk_set_default_limits(struct queue_limits *lim)
 	lim->misaligned = 0;
 	lim->zoned = BLK_ZONED_NONE;
 	lim->zone_write_granularity = 0;
-	lim->sub_page_limits = false;
+	iq->sub_page_limits = false;
 }
 EXPORT_SYMBOL(blk_set_default_limits);
 
@@ -127,12 +130,14 @@ int blk_sub_page_limit_queues_get(void *data, u64 *val)
  * features is not enabled all the time because of the runtime overhead of these
  * features.
  */
-static void blk_enable_sub_page_limits(struct queue_limits *lim)
+static void blk_enable_sub_page_limits(struct request_queue *q)
 {
-	if (lim->sub_page_limits)
+	struct internal_request_queue *iq = to_internal_q(q);
+
+	if (iq->sub_page_limits)
 		return;
 
-	lim->sub_page_limits = true;
+	iq->sub_page_limits = true;
 
 	mutex_lock(&blk_sub_page_limit_lock);
 	if (++blk_nr_sub_page_limit_queues == 1)
@@ -148,12 +153,14 @@ static void blk_enable_sub_page_limits(struct queue_limits *lim)
  * below PAGE_SIZE >> SECTOR_SHIFT. Support for these features is not enabled
  * all the time because of the runtime overhead of these features.
  */
-void blk_disable_sub_page_limits(struct queue_limits *lim)
+void blk_disable_sub_page_limits(struct request_queue *q)
 {
-	if (!lim->sub_page_limits)
+	struct internal_request_queue *iq = to_internal_q(q);
+
+	if (!iq->sub_page_limits)
 		return;
 
-	lim->sub_page_limits = false;
+	iq->sub_page_limits = false;
 
 	mutex_lock(&blk_sub_page_limit_lock);
 	WARN_ON_ONCE(blk_nr_sub_page_limit_queues <= 0);
@@ -188,7 +195,7 @@ void blk_queue_max_hw_sectors(struct request_queue *q, unsigned int max_hw_secto
 	unsigned int max_sectors;
 
 	if (max_hw_sectors < min_max_hw_sectors) {
-		blk_enable_sub_page_limits(limits);
+		blk_enable_sub_page_limits(q);
 		min_max_hw_sectors = 1;
 	}
 
@@ -346,7 +353,7 @@ void blk_queue_max_segment_size(struct request_queue *q, unsigned int max_size)
 	unsigned int min_max_segment_size = PAGE_SIZE;
 
 	if (max_size < min_max_segment_size) {
-		blk_enable_sub_page_limits(&q->limits);
+		blk_enable_sub_page_limits(q);
 		min_max_segment_size = SECTOR_SIZE;
 	}
 
