@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4c419c9_35e000cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-06T15:47:23Z",
+      "side": 1,
+      "message": "Version of this patch in android13-5.10 seems to crash during TH tests. -1 until I investigate it.",
+      "revId": "1372b99a3842238f8f9a9001abd4e1590f3887f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
