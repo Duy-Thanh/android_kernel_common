@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7969c88c_58a925cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-02-06T14:11:37Z",
+      "side": 1,
+      "message": "Unblocks LKFT on device/linaro/dragnboard devboards. Patch already landed in stable.",
+      "revId": "6aabf8acc56762ed5e763bb0edfc174432ccea7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
