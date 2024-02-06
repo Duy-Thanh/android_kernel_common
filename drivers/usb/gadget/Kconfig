@@ -450,6 +450,7 @@ config USB_CONFIGFS_F_MIDI
 	  connections can then be made on the gadget system, using
 	  ALSA's aconnect utility etc.
 
+<<<<<<< HEAD   (6e0e06 ANDROID: usb: gadget: configfs: Add Uevent to notify userspa)
 config USB_CONFIGFS_F_MIDI2
 	bool "MIDI 2.0 function"
 	depends on USB_CONFIGFS
@@ -464,6 +465,16 @@ config USB_CONFIGFS_F_MIDI2
 	  device on the gadget host. It supports UMP 1.1 spec and
 	  responds UMP Stream messages for UMP Endpoint and Function
 	  Block information / configuration.
+=======
+config ANDROID_USB_F_MIDI_INFO
+	bool "Android MIDI function information"
+	depends on ANDROID_USB_CONFIGFS_UEVENT
+	help
+	  Creates a f_midi device in sysfs under the androidN device
+	  within the android_usb class which provides information
+	  about the PCM card and rmidi device created as part of the
+	  f_midi gadget.
+>>>>>>> CHANGE (79d40f ANDROID: usb: gadget: f_midi: Create f_midi device in androi)
 
 config USB_CONFIGFS_F_HID
 	bool "HID function"
