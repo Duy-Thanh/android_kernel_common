@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd3bd1f0_1c20e138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-06T18:52:30Z",
+      "side": 1,
+      "message": "This is a frozen KMI interface so this change breaks KMI and cannot be accepted.",
+      "revId": "2a9a5346df2733f1f756bd8e615d6ead97dab342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
