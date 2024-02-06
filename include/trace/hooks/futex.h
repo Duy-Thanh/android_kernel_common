@@ -33,14 +33,16 @@ DECLARE_HOOK(android_vh_do_futex,
 	TP_ARGS(cmd, flags, uaddr2));
 
 DECLARE_HOOK(android_vh_futex_wait_start,
-	TP_PROTO(unsigned int flags,
+	TP_PROTO(u32 __user *uaddr,
+		 unsigned int flags,
 		 u32 bitset),
-	TP_ARGS(flags, bitset));
+	TP_ARGS(uaddr, flags, bitset));
 
 DECLARE_HOOK(android_vh_futex_wait_end,
-	TP_PROTO(unsigned int flags,
+	TP_PROTO(u32 __user *uaddr,
+		 unsigned int flags,
 		 u32 bitset),
-	TP_ARGS(flags, bitset));
+	TP_ARGS(uaddr, flags, bitset));
 
 DECLARE_HOOK(android_vh_futex_wake_traverse_plist,
 	TP_PROTO(struct plist_head *chain, int *target_nr,
