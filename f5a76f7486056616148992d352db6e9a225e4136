@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c22234c3_888fd851",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-02-06T20:18:52Z",
+      "side": 1,
+      "message": "That is a fused change out of a cherry-pick of 4ca8a0bc83543a0d29a7f5a8b1e8ef3c23dab242 and a partial cherry-pick of https://android.googlesource.com/kernel/common/+/29f006fdefe6f88abde973a0b0f20d2704e93fd4. Please separate the picked changes. Please also clarify why 29f006fdefe6f88abde973a0b0f20d2704e93fd4 is not entirely applied.",
+      "revId": "f5a76f7486056616148992d352db6e9a225e4136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
