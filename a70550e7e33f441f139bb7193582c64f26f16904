@@ -33,6 +33,24 @@
       "message": "Looks like there\u0027s a null pointer dereference that is fixed upstream that I believe we should address as part of the topic being merged: \nhttps://lore.kernel.org/all/20240113-pmi632-typec-v2-5-182d9aa0a5b3@linaro.org/",
       "revId": "a70550e7e33f441f139bb7193582c64f26f16904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3589ce1a_0e0279c5",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6835,
+      "author": {
+        "id": 1301696
+      },
+      "writtenOn": "2024-02-06T02:29:13Z",
+      "side": 1,
+      "message": "Nice catch! Fix uploaded: https://android-review.git.corp.google.com/c/kernel/common/+/2952288",
+      "parentUuid": "e90ff1dc_47941a83",
+      "revId": "a70550e7e33f441f139bb7193582c64f26f16904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
