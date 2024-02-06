@@ -647,7 +647,7 @@ int futex_wait(u32 __user *uaddr, unsigned int flags, u32 val, ktime_t *abs_time
 	if (!bitset)
 		return -EINVAL;
 	q.bitset = bitset;
-	trace_android_vh_futex_wait_start(flags, bitset);
+	trace_android_vh_futex_wait_start(uaddr, flags, bitset);
 
 	to = futex_setup_timer(abs_time, &timeout, flags,
 			       current->timer_slack_ns);
@@ -696,7 +696,7 @@ out:
 		hrtimer_cancel(&to->timer);
 		destroy_hrtimer_on_stack(&to->timer);
 	}
-	trace_android_vh_futex_wait_end(flags, bitset);
+	trace_android_vh_futex_wait_end(uaddr, flags, bitset);
 	return ret;
 }
 
