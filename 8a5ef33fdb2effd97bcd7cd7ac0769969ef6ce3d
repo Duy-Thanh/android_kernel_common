@@ -2,6 +2,26 @@
   "comments": [
     {
       "robotId": "ayeaye",
+      "robotRunId": "AR00000000000067517878",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2954008?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "91f18f02_04e4236c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-02-07T03:21:21Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "8a5ef33fdb2effd97bcd7cd7ac0769969ef6ce3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
       "robotRunId": "AR00000000000067517862",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2954008?revision\u003d4",
       "fixSuggestions": [
@@ -32,6 +52,43 @@
         "id": 1757831
       },
       "writtenOn": "2024-02-07T03:21:07Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "8a5ef33fdb2effd97bcd7cd7ac0769969ef6ce3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000067517862",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2954008?revision\u003d4",
+      "fixSuggestions": [
+        {
+          "fixId": "b6f95133_a8951dac",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 137,
+                "startChar": 0,
+                "endLine": 138,
+                "endChar": 0
+              },
+              "replacement": "        \"protected_exports_list\": \"android/abi_gki_protected_exports_aarch64\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "3f9bb358_3480f5f8",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-02-07T03:21:21Z",
       "side": 1,
       "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "8a5ef33fdb2effd97bcd7cd7ac0769969ef6ce3d",
