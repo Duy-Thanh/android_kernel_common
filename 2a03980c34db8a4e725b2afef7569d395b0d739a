@@ -16,6 +16,29 @@
       "message": "The CL is finally ready for review. Please take a look. I will update and open for review the 5.15 CL in some time.",
       "revId": "2a03980c34db8a4e725b2afef7569d395b0d739a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7f8941d_9b464266",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-07T21:26:02Z",
+      "side": 1,
+      "message": "This spinlock is used just to make sure userfaultfd_ctx is not freed from under us. You can achieve this in a much simpler way by using RCU.",
+      "range": {
+        "startLine": 401,
+        "startChar": 2,
+        "endLine": 401,
+        "endChar": 21
+      },
+      "revId": "2a03980c34db8a4e725b2afef7569d395b0d739a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
