@@ -16,6 +16,23 @@
       "message": "I\u0027m not very familiar with the interconnect layer, but in other drivers we\u0027ve seen cases where a similar switching to rt_mutex seemed logical due to priority inversion cases, but the changes ended up being reverted because the contention on the locks were so high the change in optimistic spinning between mutex and rt_mutex resulted in blocked tasks sleeping, which increased lock acquisition time overall.\n\nHopefully the contention here isn\u0027t so high, but it might be good to get some performance numbers to ensure this doesn\u0027t happen.",
       "revId": "c8bba84e19e99b0c79854a2ffc48471aa2864469",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bf0bd4d_bb618311",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-07T16:54:13Z",
+      "side": 1,
+      "message": "Please send upstream for review.",
+      "revId": "c8bba84e19e99b0c79854a2ffc48471aa2864469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
