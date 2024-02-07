@@ -16,6 +16,24 @@
       "message": "this should add set_freezable() for wait_event_freezable()",
       "revId": "0417aff5463bef66d69951198e7c91bc2a49ba82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f575272_94dba9b1",
+        "filename": "drivers/dma-buf/heaps/deferred-free-helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-02-07T01:56:24Z",
+      "side": 1,
+      "message": "Thanks for catching Hailong.\n\nTJ ok to send a followup patch since it\u0027s probably needed on more branches.",
+      "parentUuid": "d78d4e5a_9504daa4",
+      "revId": "0417aff5463bef66d69951198e7c91bc2a49ba82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
