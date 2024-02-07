@@ -86,6 +86,24 @@
       "message": "Do we need these config options to be duplicated for rust? Are there any use-cases for using different configurations for the Rust and C version. I think it would be simpler to test the Rust version if there was only one config option to change. Related to my comment on the previous patch, if the selection of which one to use is a build time (I still don\u0027t know the answer to that question) then it would probably be easier if there is a single option for the C/Rust selection and have both versions depend on ANDROID_BINDER_IPC. If we remove the C version in the future, then the _RUST option would have no effect and ANDROID_BINDER_IPC by itself would enable the rust version.",
       "revId": "ed77193b738464cd9d81ff7ae125e7be2a455f60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41a5c2f7_37fc9b19",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-07T09:23:35Z",
+      "side": 1,
+      "message": "The plan is to have three possibilities:\n\n1. Enable only C driver.\n2. Enable only Rust driver.\n3. Enable both drivers, and choose which one to use when booting.\n\nIf there\u0027s a better way to achieve this than the current configuration, please let me know. (We might want to move this convo to aosp/2911506.)",
+      "parentUuid": "8fbe34fa_d8df8404",
+      "revId": "ed77193b738464cd9d81ff7ae125e7be2a455f60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
