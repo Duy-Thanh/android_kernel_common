@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000067517202",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2954008?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a5145240_77061251",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-02-07T03:12:13Z",
+      "side": 1,
+      "message": "syntax error near \"protected_exports_list\"",
+      "range": {
+        "startLine": 137,
+        "startChar": 26,
+        "endLine": 137,
+        "endChar": 26
+      },
+      "revId": "05680c67f10e69e4eaf8615093a111674f09bdc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
