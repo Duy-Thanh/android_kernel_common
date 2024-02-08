@@ -24,6 +24,9 @@ static struct class *android_class;
 static struct device *android_device;
 static int index;
 static int gadget_index;
+// Blank line added for Android Canary build test of branch
+// common-android14-6.1
+
 
 struct device *create_function_device(char *name)
 {
