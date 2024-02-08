@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a095ba9_7cfa50a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-08T16:18:58Z",
+      "side": 1,
+      "message": "-1 for now as this needs some documentation added as well because we need\nto be able to point people at it somehow.",
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38391e63_7d6ec962",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-08T16:18:58Z",
+      "side": 1,
+      "message": "-1 for now as this needs some documentation added as well because we need\nto be able to point people at it somehow.",
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
