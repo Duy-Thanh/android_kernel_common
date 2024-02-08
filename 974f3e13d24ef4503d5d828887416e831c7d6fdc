@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b4c03eb_6585eac2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-08T16:33:06Z",
+      "side": 1,
+      "message": "FYI, I think these patches eventually need to be marked as `FROMLIST:`. More details at go/ack-readme.",
+      "revId": "974f3e13d24ef4503d5d828887416e831c7d6fdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
