@@ -51,6 +51,24 @@
       "parentUuid": "b2aeeaff_cb72e2f6",
       "revId": "3743e22778df7cc1b11feaad4ba3a560821d2532",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17117541_f5b61e93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-08T18:39:40Z",
+      "side": 1,
+      "message": "The issue is `__stringify()` macro isn\u0027t defined for certain builds at this point. That\u0027s why the `ANDROID_KABI_USE()` expansion fails. It seems to me that `android_kabi.h` should explicitly `#include \u003cstringify.h\u003e` as it is using such macro. I\u0027ll upload a separate commit for this.",
+      "parentUuid": "43bd2c79_0a296d14",
+      "revId": "3743e22778df7cc1b11feaad4ba3a560821d2532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
