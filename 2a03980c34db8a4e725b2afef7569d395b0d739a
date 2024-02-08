@@ -39,6 +39,30 @@
       },
       "revId": "2a03980c34db8a4e725b2afef7569d395b0d739a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb49440_03e2d9e6",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-08T23:54:29Z",
+      "side": 1,
+      "message": "Done. Thanks for the suggestion. It simplified the code quite a bit.",
+      "parentUuid": "d7f8941d_9b464266",
+      "range": {
+        "startLine": 401,
+        "startChar": 2,
+        "endLine": 401,
+        "endChar": 21
+      },
+      "revId": "2a03980c34db8a4e725b2afef7569d395b0d739a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
