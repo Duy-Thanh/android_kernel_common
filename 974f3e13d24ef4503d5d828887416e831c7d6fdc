@@ -34,6 +34,24 @@
       "parentUuid": "2b4c03eb_6585eac2",
       "revId": "974f3e13d24ef4503d5d828887416e831c7d6fdc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54459179_20f6df14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-08T17:07:28Z",
+      "side": 1,
+      "message": "I see. I suppose the significant changes are to be sent upstream for a future v2? Then it makes sense to use `ANDROID:` as you are doing here and later work on replacing the \"tech-debt\" with the `UPSTREAM:` patches once they land.",
+      "parentUuid": "c372927a_53f61036",
+      "revId": "974f3e13d24ef4503d5d828887416e831c7d6fdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
