@@ -33,6 +33,24 @@
       "message": "Build is broken 😞",
       "revId": "3743e22778df7cc1b11feaad4ba3a560821d2532",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43bd2c79_0a296d14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-08T16:30:25Z",
+      "side": 1,
+      "message": "Yeah, there seems to be something wrong with the `ANDROID_KABI_USE` macro expansion but only for certain builds. I\u0027ll have a closer look and try to figure out what\u0027s going on.",
+      "parentUuid": "b2aeeaff_cb72e2f6",
+      "revId": "3743e22778df7cc1b11feaad4ba3a560821d2532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
