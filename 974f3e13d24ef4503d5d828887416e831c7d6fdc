@@ -52,6 +52,24 @@
       "parentUuid": "c372927a_53f61036",
       "revId": "974f3e13d24ef4503d5d828887416e831c7d6fdc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf7ec40_9d4c0138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-08T17:15:33Z",
+      "side": 1,
+      "message": "My current plan is to iterate here for some more time. And I will keep the CL stack on mainline in sync as well, since I will need a clean set of commits next time I send anything to the list.",
+      "parentUuid": "54459179_20f6df14",
+      "revId": "974f3e13d24ef4503d5d828887416e831c7d6fdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
