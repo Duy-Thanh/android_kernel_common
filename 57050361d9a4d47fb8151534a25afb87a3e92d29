@@ -33,6 +33,132 @@
       "message": "-1 for now as this needs some documentation added as well because we need\nto be able to point people at it somehow.",
       "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caafd5af_0b461660",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-08T16:21:45Z",
+      "side": 1,
+      "message": "-2 for the checkpatch style issues.",
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886ad35e_15afcd00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-08T16:21:45Z",
+      "side": 1,
+      "message": "-2 for the checkpatch style issues.",
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a336e9d_cffa7977",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6764,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-08T16:21:45Z",
+      "side": 1,
+      "message": "global variables need a better prefix please.  `binder_use_rust` perhaps?",
+      "range": {
+        "startLine": 6764,
+        "startChar": 0,
+        "endLine": 6764,
+        "endChar": 4
+      },
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7006acbf_6ae45c36",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6765,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-08T16:21:45Z",
+      "side": 1,
+      "message": "`binder_driver_initialized`?\n\nNaming is hard 😊",
+      "range": {
+        "startLine": 6765,
+        "startChar": 0,
+        "endLine": 6765,
+        "endChar": 4
+      },
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b9953a0_e014b3e2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6781,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-08T16:21:45Z",
+      "side": 1,
+      "message": "checkpatch.pl is your friend.  Sorry about the C style rules...",
+      "range": {
+        "startLine": 6781,
+        "startChar": 72,
+        "endLine": 6781,
+        "endChar": 74
+      },
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ee2802_019bebb0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6783,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-08T16:21:45Z",
+      "side": 1,
+      "message": "are you sure you will never overflow this?  This feels wrong...",
+      "range": {
+        "startLine": 6783,
+        "startChar": 2,
+        "endLine": 6783,
+        "endChar": 8
+      },
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
