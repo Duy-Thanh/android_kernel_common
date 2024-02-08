@@ -52,6 +52,24 @@
       "parentUuid": "63d9ecaa_b1018b6f",
       "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8242e930_a75704b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-02-08T20:27:44Z",
+      "side": 1,
+      "message": "Peter, it\u0027s important that any new symbols added to this branch are included in a symbol list. That let\u0027s us (the GKI team) know which symbols are actually used. Please add these new vendor hook symbols to your symbol list in a follow-up patch and we can merge the changes together.",
+      "parentUuid": "c3874a42_12127e8b",
+      "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
