@@ -33,6 +33,29 @@
       "message": "(also based on my patchset (which built locally), I don\u0027t think the struct and the padding field are needed, and it ?might? get in the way of adding another field here in the future using the available space)",
       "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d96bc0_fe30803f",
+        "filename": "include/linux/ipv6.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-02-09T18:35:52Z",
+      "side": 1,
+      "message": "you sure this shouldn\u0027t be just\n\n\tANDROID_KABI_USE(1, __s32 accept_ra_min_lft);\n\t\nthat seemed to build fine for me on pixel6a aosp baseline of 5.10.198\n\nand I think this will prevent changing \u0027padding\u0027 to a *different* use in the future.\n\nI based my version on git grep ANDROID_KABI_USE which found a\nANDROID_KABI_USE(1, bool initialized)",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 71
+      },
+      "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
