@@ -22,6 +22,30 @@
       },
       "revId": "8af298285de1b6941e297a72a6a6ca13b54a170d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66ed9ab0_deaac02f",
+        "filename": "drivers/cpufreq/virtual-cpufreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-09T21:55:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49e452ce_e59fbf04",
+      "range": {
+        "startLine": 207,
+        "startChar": 28,
+        "endLine": 207,
+        "endChar": 35
+      },
+      "revId": "8af298285de1b6941e297a72a6a6ca13b54a170d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
