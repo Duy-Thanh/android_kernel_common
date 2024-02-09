@@ -92,6 +92,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b0c94d_4759a608",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6764,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-09T10:25:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a336e9d_cffa7977",
+      "range": {
+        "startLine": 6764,
+        "startChar": 0,
+        "endLine": 6764,
+        "endChar": 4
+      },
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7006acbf_6ae45c36",
@@ -105,6 +129,30 @@
       "writtenOn": "2024-02-08T16:21:45Z",
       "side": 1,
       "message": "`binder_driver_initialized`?\n\nNaming is hard 😊",
+      "range": {
+        "startLine": 6765,
+        "startChar": 0,
+        "endLine": 6765,
+        "endChar": 4
+      },
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb9877a_d9df9494",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6765,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-09T10:25:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7006acbf_6ae45c36",
       "range": {
         "startLine": 6765,
         "startChar": 0,
@@ -138,6 +186,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e55badb8_5694bc2b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6781,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-09T10:25:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b9953a0_e014b3e2",
+      "range": {
+        "startLine": 6781,
+        "startChar": 72,
+        "endLine": 6781,
+        "endChar": 74
+      },
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0ee2802_019bebb0",
@@ -151,6 +223,30 @@
       "writtenOn": "2024-02-08T16:21:45Z",
       "side": 1,
       "message": "are you sure you will never overflow this?  This feels wrong...",
+      "range": {
+        "startLine": 6783,
+        "startChar": 2,
+        "endLine": 6783,
+        "endChar": 8
+      },
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75992de6_bdaea1f3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6783,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-09T10:25:19Z",
+      "side": 1,
+      "message": "It says that the buffer is 4k bytes long:\n```c\nstruct kernel_param_ops {\n\t/* How the ops should behave */\n\tunsigned int flags;\n\t/* Returns 0, or -errno.  arg is in kp-\u003earg. */\n\tint (*set)(const char *val, const struct kernel_param *kp);\n\t/* Returns length written or -errno.  Buffer is 4k (ie. be short!) */\n\tint (*get)(char *buffer, const struct kernel_param *kp);\n\t/* Optional function to free kp-\u003earg when module unloaded. */\n\tvoid (*free)(void *arg);\n};\n```\nI added a comment to this effect.",
+      "parentUuid": "a0ee2802_019bebb0",
       "range": {
         "startLine": 6783,
         "startChar": 2,
