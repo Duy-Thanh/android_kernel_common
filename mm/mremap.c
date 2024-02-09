@@ -928,7 +928,7 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 		return ret;
 
 
-	if (__offset_in_page(addr))
+	if (!__PAGE_ALIGNED(addr))
 		return ret;
 
 	old_len = __PAGE_ALIGN(old_len);
