@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49e452ce_e59fbf04",
+        "filename": "drivers/cpufreq/virtual-cpufreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-02-09T20:06:26Z",
+      "side": 1,
+      "message": "Virtual cpufreq driver for Android V?",
+      "range": {
+        "startLine": 207,
+        "startChar": 28,
+        "endLine": 207,
+        "endChar": 35
+      },
+      "revId": "8af298285de1b6941e297a72a6a6ca13b54a170d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
