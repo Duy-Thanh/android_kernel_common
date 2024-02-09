@@ -35,6 +35,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef91a14f_5ce4a8a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-09T18:37:40Z",
+      "side": 1,
+      "message": "I used bazel on my local repo:\n```\n$ repo init -u sso://android/kernel/manifest -b common-android13-5.10\n[...]\n$ tools/bazel run //common:kernel_aarch64_abi_update\n```",
+      "parentUuid": "7140d0ef_e3e2bd9f",
+      "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "949e5e7c_ce75491a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-09T18:37:40Z",
+      "side": 1,
+      "message": "I just noticed that it is automatically keeping the u64 size via union. So I believe you are right that it is not needed. It\u0027s probably a legacy thing we used to do before that union.",
+      "parentUuid": "1a17482a_976c9ff9",
+      "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61d96bc0_fe30803f",
