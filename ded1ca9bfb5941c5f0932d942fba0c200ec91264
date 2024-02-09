@@ -16,6 +16,23 @@
       "message": "How did you generate the xml update part of this?",
       "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a17482a_976c9ff9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-02-09T18:24:14Z",
+      "side": 1,
+      "message": "(also based on my patchset (which built locally), I don\u0027t think the struct and the padding field are needed, and it ?might? get in the way of adding another field here in the future using the available space)",
+      "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
