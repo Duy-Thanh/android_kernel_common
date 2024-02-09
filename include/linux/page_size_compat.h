@@ -20,6 +20,7 @@
 
 #include <linux/align.h>
 #include <linux/mman.h>
+#include <linux/printk.h>
 
 #if defined(CONFIG_PAGE_SHIFT_COMPAT) && CONFIG_PAGE_SHIFT_COMPAT > PAGE_SHIFT
 extern unsigned __page_shift(void);
@@ -40,6 +41,11 @@ extern void __filemap_len(struct inode *inode, unsigned long pgoff, unsigned lon
 
 extern void __filemap_fixup(unsigned long addr, unsigned long prot, unsigned long old_len,
                             unsigned long new_len);
+
+#define pgcompat_err(fmt, ...) \
+	pr_err("pgcompat [%i (%s)]: " fmt, task_pid_nr(current), current->comm, ## __VA_ARGS__)
+
+extern bool __log_alignment(const char* func, unsigned long addr, bool is_aligned);
 #else /* !defined(CONFIG_PAGE_SHIFT_COMPAT) || CONFIG_PAGE_SHIFT_COMPAT <= PAGE_SHIFT */
 #define __PAGE_SHIFT 			PAGE_SHIFT
 
@@ -53,6 +59,11 @@ static inline void __filemap_len(struct inode *inode, unsigned long pgoff, unsig
 
 static inline void __filemap_fixup(unsigned long addr, unsigned long prot, unsigned long old_len,
                                    unsigned long new_len) { }
+
+static inline bool __log_alignment(const char* func, unsigned long addr, bool is_aligned)
+{
+    return is_aligned;
+}
 #endif /* defined(CONFIG_PAGE_SHIFT_COMPAT) && CONFIG_PAGE_SHIFT_COMPAT > PAGE_SHIFT */
 
 #define __PAGE_SIZE 			(_AC(1,UL) << __PAGE_SHIFT)
@@ -60,8 +71,10 @@ static inline void __filemap_fixup(unsigned long addr, unsigned long prot, unsig
 
 #define __PAGE_ALIGN(addr) 		ALIGN(addr, __PAGE_SIZE)
 #define __PAGE_ALIGN_DOWN(addr)	ALIGN_DOWN(addr, __PAGE_SIZE)
-#define __PAGE_ALIGNED(addr)	IS_ALIGNED((unsigned long)(addr), __PAGE_SIZE)
+#define ___PAGE_ALIGNED(addr)	IS_ALIGNED((unsigned long)(addr), __PAGE_SIZE)
 
 #define __offset_in_page(p)		((unsigned long)(p) & ~__PAGE_MASK)
+
+#define __PAGE_ALIGNED(addr)    __log_alignment(__func__, addr, ___PAGE_ALIGNED(addr))
 
 #endif /* __LINUX_PAGE_SIZE_COMPAT_H */

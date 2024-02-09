@@ -141,4 +141,18 @@ void __filemap_fixup(unsigned long addr, unsigned long prot, unsigned long old_l
 		madvise_set_anon_name(mm, anon_addr, anon_len, anon_name);
 	}
 }
+
+bool __log_alignment(const char* func, unsigned long addr, bool is_aligned)
+{
+	if (is_aligned)
+		return true;
+
+	if (!static_branch_unlikely(&page_size_compat))
+		return false;
+
+	pgcompat_err("%s: addr (0x%08lx) not page aligned", func, addr);
+
+	return false;
+}
+
 #endif /* defined(CONFIG_PAGE_SHIFT_COMPAT) && CONFIG_PAGE_SHIFT_COMPAT > PAGE_SHIFT */

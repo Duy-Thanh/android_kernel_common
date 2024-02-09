@@ -3030,7 +3030,7 @@ SYSCALL_DEFINE2(munmap, unsigned long, addr, size_t, len)
 {
 	addr = untagged_addr(addr);
 
-	if (__offset_in_page(addr))
+	if (!__PAGE_ALIGNED(addr))
 		return -EINVAL;
 
 	len = __PAGE_ALIGN(len);
