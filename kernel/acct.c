@@ -431,6 +431,7 @@ static u32 encode_float(u64 value)
  *  do_exit() or when switching to a different output file.
  */
 
+static unsigned long zeroed_static = 0;
 static void fill_ac(acct_t *ac)
 {
 	struct pacct_struct *pacct = &current->signal->pacct;
@@ -480,6 +481,10 @@ static void fill_ac(acct_t *ac)
 	ac->ac_utime = encode_comp_t(nsec_to_AHZ(pacct->ac_utime));
 	ac->ac_stime = encode_comp_t(nsec_to_AHZ(pacct->ac_stime));
 	ac->ac_flag = pacct->ac_flag;
+#if ACCT_VERSION==42
+	ac->ac_ahz = 0;
+#endif
+	smp_rmb();
 	ac->ac_mem = encode_comp_t(pacct->ac_mem);
 	ac->ac_minflt = encode_comp_t(pacct->ac_minflt);
 	ac->ac_majflt = encode_comp_t(pacct->ac_majflt);
