@@ -52816,6 +52816,12 @@ member {
   offset: 512
 }
 member {
+  id: 0x56a72143
+  name: "callback_head"
+  type_id: 0xe3222f5b
+  offset: 1024
+}
+member {
   id: 0x56a7224a
   name: "callback_head"
   type_id: 0xe3222f5b
@@ -241520,7 +241526,7 @@ struct_union {
   kind: STRUCT
   name: "userfaultfd_ctx"
   definition {
-    bytesize: 128
+    bytesize: 144
     member_id: 0x3162bad8
     member_id: 0x05e73814
     member_id: 0xc409a485
@@ -241532,6 +241538,7 @@ struct_union {
     member_id: 0x79d263fe
     member_id: 0xdd180b6b
     member_id: 0x3025dd18
+    member_id: 0x56a72143
   }
 }
 struct_union {
