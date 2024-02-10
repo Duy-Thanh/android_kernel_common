@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5661c6e3_49ccbce5",
+        "filename": "drivers/cpufreq/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-02-10T02:17:24Z",
+      "side": 1,
+      "message": "You definitely want to fix this too to not collide with upstream config name.",
+      "range": {
+        "startLine": 228,
+        "startChar": 7,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "4a660ce7d891b458c125d53e139c422898f56026",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33451d0d_bc946bab",
+        "filename": "drivers/cpufreq/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-02-10T02:17:24Z",
+      "side": 1,
+      "message": "Fix this too.",
+      "range": {
+        "startLine": 229,
+        "startChar": 18,
+        "endLine": 229,
+        "endChar": 19
+      },
+      "revId": "4a660ce7d891b458c125d53e139c422898f56026",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
