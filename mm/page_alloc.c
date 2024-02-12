@@ -171,6 +171,29 @@ EXPORT_PER_CPU_SYMBOL(numa_node);
 
 DEFINE_STATIC_KEY_TRUE(vm_numa_stat_key);
 
+/*
+ * If set to true, restrict using CMA fallback for movable allocations to
+ * specific calls (where __GFP_CMA is set). If set to false, revert to
+ * default behavior.
+ */
+DEFINE_STATIC_KEY_FALSE(restrict_cma_fallback);
+
+static int __init restrict_cma_fallback_setup(char *str)
+{
+#ifdef CONFIG_CMA
+	static_branch_enable(&restrict_cma_fallback);
+#else
+	pr_warn("CONFIG_CMA not set. Ignoring restrict_cma_fallback option\n");
+#endif
+	return 1;
+}
+__setup("restrict_cma_fallback", restrict_cma_fallback_setup);
+
+static inline bool cma_fallback_restricted(void)
+{
+	return static_branch_unlikely(&restrict_cma_fallback);
+}
+
 #ifdef CONFIG_HAVE_MEMORYLESS_NODES
 /*
  * N.B., Do NOT reference the '_numa_mem_' per cpu variable directly.
@@ -2123,7 +2146,7 @@ __rmqueue(struct zone *zone, unsigned int order, int migratetype,
 		 * allocating from CMA when over half of the zone's free memory
 		 * is in the CMA area.
 		 */
-		if (alloc_flags & ALLOC_CMA &&
+		if (!cma_fallback_restricted() && alloc_flags & ALLOC_CMA &&
 		    zone_page_state(zone, NR_FREE_CMA_PAGES) >
 		    zone_page_state(zone, NR_FREE_PAGES) / 2) {
 			page = __rmqueue_cma_fallback(zone, order);
@@ -2134,7 +2157,7 @@ __rmqueue(struct zone *zone, unsigned int order, int migratetype,
 retry:
 	page = __rmqueue_smallest(zone, order, migratetype);
 	if (unlikely(!page)) {
-		if (alloc_flags & ALLOC_CMA)
+		if (!cma_fallback_restricted() && alloc_flags & ALLOC_CMA)
 			page = __rmqueue_cma_fallback(zone, order);
 
 		if (!page && __rmqueue_fallback(zone, order, migratetype,
@@ -2158,8 +2181,13 @@ static int rmqueue_bulk(struct zone *zone, unsigned int order,
 
 	spin_lock_irqsave(&zone->lock, flags);
 	for (i = 0; i < count; ++i) {
-		struct page *page = __rmqueue(zone, order, migratetype,
-								alloc_flags);
+		struct page *page;
+
+		if (cma_fallback_restricted() && is_migrate_cma(migratetype))
+			page = __rmqueue_cma_fallback(zone, order);
+		else
+			page = __rmqueue(zone, order, migratetype, alloc_flags);
+
 		if (unlikely(page == NULL))
 			break;
 
@@ -2673,8 +2701,13 @@ struct page *rmqueue_buddy(struct zone *preferred_zone, struct zone *zone,
 		if (alloc_flags & ALLOC_HIGHATOMIC)
 			page = __rmqueue_smallest(zone, order, MIGRATE_HIGHATOMIC);
 		if (!page) {
-			page = __rmqueue(zone, order, migratetype, alloc_flags);
+			if (cma_fallback_restricted() &&
+			    alloc_flags & ALLOC_CMA)
+				page = __rmqueue_cma_fallback(zone, order);
 
+			if (!page)
+				page = __rmqueue(zone, order, migratetype,
+						 alloc_flags);
 			/*
 			 * If the allocation fails, allow OOM handling access
 			 * to HIGHATOMIC reserves as failing now is worse than
@@ -2741,6 +2774,24 @@ struct page *__rmqueue_pcplist(struct zone *zone, unsigned int order,
 	return page;
 }
 
+static struct page *__rmqueue_pcplist_cma(struct zone *zone,
+					  unsigned int order,
+					  int migratetype,
+					  unsigned int alloc_flags,
+					  struct per_cpu_pages *pcp)
+{
+	struct page *page = NULL;
+	struct list_head *list;
+
+	if (cma_fallback_restricted() && alloc_flags & ALLOC_CMA) {
+		list = &pcp->lists[order_to_pindex(migratetype, order)];
+		page = __rmqueue_pcplist(zone, order, get_cma_migrate_type(),
+					 alloc_flags, pcp, list);
+	}
+
+	return page;
+}
+
 /* Lock and remove page from the per-cpu list */
 static struct page *rmqueue_pcplist(struct zone *preferred_zone,
 			struct zone *zone, unsigned int order,
@@ -2765,8 +2816,15 @@ static struct page *rmqueue_pcplist(struct zone *preferred_zone,
 	 * frees.
 	 */
 	pcp->free_factor >>= 1;
-	list = &pcp->lists[order_to_pindex(migratetype, order)];
-	page = __rmqueue_pcplist(zone, order, migratetype, alloc_flags, pcp, list);
+
+	page = __rmqueue_pcplist_cma(zone, order, migratetype, alloc_flags,
+				     pcp);
+	if (!page) {
+		list = &pcp->lists[order_to_pindex(migratetype, order)];
+		page = __rmqueue_pcplist(zone, order, migratetype, alloc_flags,
+					 pcp, list);
+	}
+
 	pcp_spin_unlock(pcp);
 	pcp_trylock_finish(UP_flags);
 	if (page) {
@@ -3063,7 +3121,9 @@ static inline unsigned int gfp_to_alloc_flags_cma(gfp_t gfp_mask,
 						  unsigned int alloc_flags)
 {
 #ifdef CONFIG_CMA
-	if (gfp_migratetype(gfp_mask) == MIGRATE_MOVABLE)
+	/* Check __GFP_CMA only if CMA fallback is restricted. */
+	if (gfp_migratetype(gfp_mask) == MIGRATE_MOVABLE &&
+	    (!cma_fallback_restricted() || gfp_mask & __GFP_CMA))
 		alloc_flags |= ALLOC_CMA;
 #endif
 	return alloc_flags;
@@ -4367,8 +4427,11 @@ unsigned long __alloc_pages_bulk(gfp_t gfp, int preferred_nid,
 			continue;
 		}
 
-		page = __rmqueue_pcplist(zone, 0, ac.migratetype, alloc_flags,
-								pcp, pcp_list);
+		page = __rmqueue_pcplist_cma(zone, 0, ac.migratetype,
+					     alloc_flags, pcp);
+		if (!page)
+			page = __rmqueue_pcplist(zone, 0, ac.migratetype,
+						 alloc_flags, pcp, pcp_list);
 		if (unlikely(!page)) {
 			/* Try and allocate at least one page */
 			if (!nr_account) {
