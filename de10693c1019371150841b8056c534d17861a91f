@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35336253_84e2a610",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:07:11Z",
+      "side": 1,
+      "message": "please reference commits in the documented way (i.e. not like this, use a short sha1 + the description, it\u0027s in the kernel documentation file for a git shortcut to get this.)",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 47
+      },
+      "revId": "de10693c1019371150841b8056c534d17861a91f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
