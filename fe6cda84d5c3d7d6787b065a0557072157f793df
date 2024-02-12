@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b69c1b8b_75da8662",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6762,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-12T14:07:13Z",
+      "side": 1,
+      "message": "The behavior I had been going for is that it would only use a kcmdline parameter if you enable both drivers. But I guess not having the cfg could still make sense here, since C binder is the default either way.",
+      "parentUuid": "fa23a78a_f3269010",
+      "range": {
+        "startLine": 6762,
+        "startChar": 0,
+        "endLine": 6762,
+        "endChar": 37
+      },
+      "revId": "fe6cda84d5c3d7d6787b065a0557072157f793df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f4f8848_f343de40",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
