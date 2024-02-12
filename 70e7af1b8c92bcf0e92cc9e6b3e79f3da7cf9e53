@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f247ce2_5279f543",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-02-12T21:33:26Z",
+      "side": 1,
+      "message": "Stale lint check; this was fixed in aosp/2958910",
+      "revId": "70e7af1b8c92bcf0e92cc9e6b3e79f3da7cf9e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
