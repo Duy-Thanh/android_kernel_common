@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e210d92d_a3c62f93",
+        "filename": "drivers/cpufreq/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-12T20:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5661c6e3_49ccbce5",
+      "range": {
+        "startLine": 228,
+        "startChar": 7,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "4a660ce7d891b458c125d53e139c422898f56026",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33451d0d_bc946bab",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-10T02:17:24Z",
       "side": 1,
       "message": "Fix this too.",
+      "range": {
+        "startLine": 229,
+        "startChar": 18,
+        "endLine": 229,
+        "endChar": 19
+      },
+      "revId": "4a660ce7d891b458c125d53e139c422898f56026",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b9b33c_278f817a",
+        "filename": "drivers/cpufreq/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-12T20:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33451d0d_bc946bab",
       "range": {
         "startLine": 229,
         "startChar": 18,
