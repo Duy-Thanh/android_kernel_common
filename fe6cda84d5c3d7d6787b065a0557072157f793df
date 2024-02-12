@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "975e6d2b_896a80de",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6762,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:09:01Z",
+      "side": 1,
+      "message": "yeah, #ifdefs are not wanted in .c files in the kernel at all, makes them harder to maintain over time.",
+      "parentUuid": "b69c1b8b_75da8662",
+      "range": {
+        "startLine": 6762,
+        "startChar": 0,
+        "endLine": 6762,
+        "endChar": 37
+      },
+      "revId": "fe6cda84d5c3d7d6787b065a0557072157f793df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f4f8848_f343de40",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
