@@ -152,6 +152,30 @@
       },
       "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb9afcd_1319f400",
+        "filename": "include/linux/ipv6.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T13:51:53Z",
+      "side": 1,
+      "message": "No, padding can be used in a different way in the future, the \"waste\" of a bool for the thing you found should probably be changed to not be like this, this is correct.",
+      "parentUuid": "7a897406_f56a7c0f",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 71
+      },
+      "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
