@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa23a78a_f3269010",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6762,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:02:43Z",
+      "side": 1,
+      "message": "no need for a ifdef at all, right?",
+      "range": {
+        "startLine": 6762,
+        "startChar": 0,
+        "endLine": 6762,
+        "endChar": 37
+      },
+      "revId": "fe6cda84d5c3d7d6787b065a0557072157f793df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f4f8848_f343de40",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6818,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:02:43Z",
+      "side": 1,
+      "message": "no need for a #ifdef",
+      "range": {
+        "startLine": 6818,
+        "startChar": 0,
+        "endLine": 6818,
+        "endChar": 37
+      },
+      "revId": "fe6cda84d5c3d7d6787b065a0557072157f793df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
