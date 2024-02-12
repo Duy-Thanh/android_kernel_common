@@ -1,0 +1,297 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3b44497_9c7ca9e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "Much better, still have some work...",
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a6cdca7_59715c8b",
+        "filename": "drivers/usb/gadget/Kconfig",
+        "patchSetId": 9
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "let\u0027s call this `ANDROID_USB_CONFIGFS_UEVENT` to make it obvious this is an Android-only feature that we are adding.\n\nSame for filenames, let\u0027s make this is obvious this is NOT upstream, nor will it ever be.",
+      "range": {
+        "startLine": 233,
+        "startChar": 7,
+        "endLine": 233,
+        "endChar": 26
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cec5cc8_fc7d4662",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "no locking needed here?  You do that for other places you modify this.",
+      "range": {
+        "startLine": 860,
+        "startChar": 0,
+        "endLine": 860,
+        "endChar": 47
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e58ddb42_05f90493",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "no locking?",
+      "range": {
+        "startLine": 1703,
+        "startChar": 1,
+        "endLine": 1703,
+        "endChar": 22
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a095c8_ca2c27af",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "you leaked memory 😞",
+      "range": {
+        "startLine": 1648,
+        "startChar": 7,
+        "endLine": 1648,
+        "endChar": 27
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38b18f62_a15d21be",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1708,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "if this fails, your class is still around 😞",
+      "range": {
+        "startLine": 1708,
+        "startChar": 0,
+        "endLine": 1708,
+        "endChar": 52
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39e49a60_1ea3fa1e",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "no need to lock, it\u0027s not going to matter, the value could change right after you call this, so it\u0027s ok.",
+      "range": {
+        "startLine": 85,
+        "startChar": 1,
+        "endLine": 85,
+        "endChar": 18
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54823000_898caeb5",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "not a good way to have a device number, sorry, use an idr properly, otherwise this will just grow and grow.",
+      "range": {
+        "startLine": 182,
+        "startChar": 23,
+        "endLine": 182,
+        "endChar": 35
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae7df782_c178b4a9",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "not a good global function name, right?  Why not `android_*` here too?",
+      "range": {
+        "startLine": 186,
+        "startChar": 18,
+        "endLine": 186,
+        "endChar": 40
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c64116_80a8a7b3",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "should not be part of this function, I thought we talked about that.",
+      "range": {
+        "startLine": 12,
+        "startChar": 76,
+        "endLine": 12,
+        "endChar": 86
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a2eeb9_7008fe26",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "external functions shouldn\u0027t have `__` in their name, right?",
+      "range": {
+        "startLine": 12,
+        "startChar": 12,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de9c3891_807ed68d",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "ah, no, make this in the .c file please, export the 4 functions and then you should be fine.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b687155c_dc284633",
+        "filename": "include/linux/usb/configfs_uevent.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:22:13Z",
+      "side": 1,
+      "message": "as mentioned before, no need for \"linux usb\" and all that.\n\nWhy isn\u0027t this called `android_*` as well?",
+      "range": {
+        "startLine": 6,
+        "startChar": 8,
+        "endLine": 6,
+        "endChar": 37
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
