@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5eda37e8_9ff181e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-12T14:01:28Z",
+      "side": 1,
+      "message": "All command line options are documented in one big file in the kernel documentation directory, please add it there.\n\nAlso, we have been adding all new \"Android-only\" command line arguments to start with \"android\", so please follow that convention here.",
+      "parentUuid": "9e3753cc_4bc3ed7d",
+      "revId": "57050361d9a4d47fb8151534a25afb87a3e92d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a336e9d_cffa7977",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
