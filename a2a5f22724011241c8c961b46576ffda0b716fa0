@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71f948a7_2c04edc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-02-12T18:07:02Z",
+      "side": 1,
+      "message": "Bypassing Lint since the ABI is preserved by aosp/2958132",
+      "revId": "a2a5f22724011241c8c961b46576ffda0b716fa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
