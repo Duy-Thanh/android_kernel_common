@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0151778c_efceb48a",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-13T23:36:23Z",
+      "side": 1,
+      "message": "OK. Does it mean all other load/store to this field (mostly in fs/userfaultfd.c) should also be changed accordingly?\n\nIs it ok if the logic of freeing userfaultfd_ctx can be made RCU based regardless of SPF or not? Otherwise, accessing it differently at so many places conditionally would be a bit messy.",
+      "parentUuid": "e58af681_9f4b6327",
+      "range": {
+        "startLine": 421,
+        "startChar": 18,
+        "endLine": 421,
+        "endChar": 40
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd94dff9_a0e7b653",
         "filename": "mm/memory.c",
         "patchSetId": 12
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-13T21:23:53Z",
       "side": 1,
       "message": "No, we are retrying here because the vma changed from under us. I don\u0027t care if you are handling a uffd with VM_FAULT_SIGBUS and it does not matter for you. Short-circuiting like this breaks the conceptual logic that we have to retry with mmap_lock if VMA changed from under us.\n\nIf you want to optimize for VM_FAULT_SIGBUS just refactor that check you added into handle_userfault() as a separate function, call it here and if it confirms a uffd with VM_FAULT_SIGBUS case then return VM_FAULT_SIGBUS in all other cases return VM_FAULT_RETRY as before. And add a comment explaining what you are doing.",
+      "range": {
+        "startLine": 3893,
+        "startChar": 3,
+        "endLine": 3893,
+        "endChar": 17
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8762ebe_72a93caa",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3893,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-13T23:36:23Z",
+      "side": 1,
+      "message": "Got it. Will something like this work?\n\n```\nif (userfaultfd_missing(vma) \u0026\u0026 userfaultfd_using_sigbus(vma))\n          return VM_FAULT_SIGBUS;\nelse\n          return VM_FAULT_RETRY;\n```",
+      "parentUuid": "fd94dff9_a0e7b653",
       "range": {
         "startLine": 3893,
         "startChar": 3,

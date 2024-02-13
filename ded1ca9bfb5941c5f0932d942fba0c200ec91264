@@ -22,6 +22,30 @@
       },
       "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc16d6a_9da1fde9",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3910,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-13T23:36:23Z",
+      "side": 0,
+      "message": "I\u0027ll do that.\n\nHow about removing all the changes in mm/memory.c, except the uffd check in `__handle_speculative_fault()` to return VM_FAULT_SIGBUS if uffd is setup for the vma? \n\nI can make that check even more restrictive to only allow what we need for the GC, i.e. only if vma is register for MISSING faults and has SIGBUS uffd feature then we return VM_FAULT_SIGBUS, otherwise VM_FAULT_RETRY.\n\nThat would be much simpler to argue about, right? I\u0027m not 100% that would suffice though. I\u0027ll do tests (including first-unlock-post-boot) to confirm this before uploading that CL if you agree.",
+      "parentUuid": "11921c93_ebde36eb",
+      "range": {
+        "startLine": 3903,
+        "startChar": 0,
+        "endLine": 3910,
+        "endChar": 15
+      },
+      "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
