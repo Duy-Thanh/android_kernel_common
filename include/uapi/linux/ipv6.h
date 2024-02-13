@@ -198,6 +198,10 @@ enum {
 	DEVCONF_IOAM6_ID_WIDE,
 	DEVCONF_NDISC_EVICT_NOCARRIER,
 	DEVCONF_ACCEPT_UNTRACKED_NA,
+<<<<<<< HEAD   (fa7914 UPSTREAM: bpf: Fix re-attachment branch in bpf_tracing_prog_)
+=======
+	DEVCONF_ACCEPT_RA_MIN_LFT,
+>>>>>>> CHANGE (c2c027 Reapply "net: change accept_ra_min_rtr_lft to affect all RA )
 	DEVCONF_MAX
 };
 

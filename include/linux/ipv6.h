@@ -34,6 +34,10 @@ struct ipv6_devconf {
 	__s32		accept_ra_defrtr;
 	__u32		ra_defrtr_metric;
 	__s32		accept_ra_min_hop_limit;
+<<<<<<< HEAD   (fa7914 UPSTREAM: bpf: Fix re-attachment branch in bpf_tracing_prog_)
+=======
+	__s32		accept_ra_min_lft;
+>>>>>>> CHANGE (c2c027 Reapply "net: change accept_ra_min_rtr_lft to affect all RA )
 	__s32		accept_ra_pinfo;
 	__s32		ignore_routes_with_linkdown;
 #ifdef CONFIG_IPV6_ROUTER_PREF
