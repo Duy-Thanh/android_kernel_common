@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39b6beb_f90cd6a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-13T13:18:11Z",
+      "side": 1,
+      "message": "structures",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 48
+      },
+      "revId": "57d8b42965cdf77e3f53170ef35d4fba3639efca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d25982_b4c0a653",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-13T13:18:11Z",
+      "side": 1,
+      "message": "Why not `hyp_zalloc`?",
+      "range": {
+        "startLine": 843,
+        "startChar": 12,
+        "endLine": 843,
+        "endChar": 21
+      },
+      "revId": "57d8b42965cdf77e3f53170ef35d4fba3639efca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
