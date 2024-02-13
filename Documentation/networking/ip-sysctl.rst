@@ -2083,6 +2083,17 @@ accept_ra_min_hop_limit - INTEGER
 
 	Default: 1
 
+<<<<<<< HEAD   (ee5a1e ANDROID: Update ABI for userfaultfd_ctx)
+=======
+accept_ra_min_lft - INTEGER
+	Minimum acceptable lifetime value in Router Advertisement.
+
+	RA sections with a lifetime less than this value shall be
+	ignored. Zero lifetimes stay unaffected.
+
+	Default: 0
+
+>>>>>>> CHANGE (bdf29b Reapply "net: change accept_ra_min_rtr_lft to affect all RA )
 accept_ra_pinfo - BOOLEAN
 	Learn Prefix Information in Router Advertisement.
 

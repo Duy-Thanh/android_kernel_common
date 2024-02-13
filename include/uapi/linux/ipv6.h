@@ -196,6 +196,12 @@ enum {
 	DEVCONF_IOAM6_ENABLED,
 	DEVCONF_IOAM6_ID,
 	DEVCONF_IOAM6_ID_WIDE,
+<<<<<<< HEAD   (ee5a1e ANDROID: Update ABI for userfaultfd_ctx)
+=======
+	DEVCONF_NDISC_EVICT_NOCARRIER,
+	DEVCONF_ACCEPT_UNTRACKED_NA,
+	DEVCONF_ACCEPT_RA_MIN_LFT,
+>>>>>>> CHANGE (bdf29b Reapply "net: change accept_ra_min_rtr_lft to affect all RA )
 	DEVCONF_MAX
 };
 

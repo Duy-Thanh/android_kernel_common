@@ -34,6 +34,10 @@ struct ipv6_devconf {
 	__s32		accept_ra_defrtr;
 	__u32		ra_defrtr_metric;
 	__s32		accept_ra_min_hop_limit;
+<<<<<<< HEAD   (ee5a1e ANDROID: Update ABI for userfaultfd_ctx)
+=======
+	__s32		accept_ra_min_lft;
+>>>>>>> CHANGE (bdf29b Reapply "net: change accept_ra_min_rtr_lft to affect all RA )
 	__s32		accept_ra_pinfo;
 	__s32		ignore_routes_with_linkdown;
 #ifdef CONFIG_IPV6_ROUTER_PREF
