@@ -16,6 +16,24 @@
       "message": "Commit msg: writting -\u003e writing",
       "revId": "857cdc07751121e4196d1734aaa3001af7eec513",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16b9be8e_c4a05b09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-13T10:35:17Z",
+      "side": 1,
+      "message": "Thanks for having a look at those changes!",
+      "parentUuid": "a7062672_f9f75373",
+      "revId": "857cdc07751121e4196d1734aaa3001af7eec513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
