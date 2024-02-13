@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79854d9d_9c23cca1",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-13T12:55:37Z",
+      "side": 1,
+      "message": "Can\u0027t this be re-written as (without extra if check and decrementing nr_pages)\n```\n\t} while (last_reclaim \u0026\u0026 (reclaimed \u003c nr_pages));\n```",
+      "range": {
+        "startLine": 904,
+        "startChar": 0,
+        "endLine": 908,
+        "endChar": 36
+      },
+      "revId": "4be16f663a230a74f60a0b5785554ecfdf1afa76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
