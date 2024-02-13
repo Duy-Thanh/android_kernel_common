@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11921c93_ebde36eb",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3910,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-13T21:23:53Z",
+      "side": 0,
+      "message": "You are changing the logic for uffd here. Before we would jump to setpte and return 0, now we will either return VM_FAULT_SIGBUS or VM_FAULT_RETRY. I\u0027m not sire if this has any side-effects. Instead of changing the logic please follow my previous comment, use a new function to check for uffd with VM_FAULT_SIGBUS and return VM_FAULT_SIGBUS directly for that case. Keep the rest of the logic as is.",
+      "range": {
+        "startLine": 3903,
+        "startChar": 0,
+        "endLine": 3910,
+        "endChar": 15
+      },
+      "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

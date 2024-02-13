@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e58af681_9f4b6327",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-13T21:23:53Z",
+      "side": 1,
+      "message": "Since ctx field is not marked as __rcu, you should use rcu_access_pointer(), rcu_dereference(), rcu_dereference_protected() when accessing or dereferencing it.",
+      "range": {
+        "startLine": 421,
+        "startChar": 18,
+        "endLine": 421,
+        "endChar": 40
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd94dff9_a0e7b653",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3893,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-13T21:23:53Z",
+      "side": 1,
+      "message": "No, we are retrying here because the vma changed from under us. I don\u0027t care if you are handling a uffd with VM_FAULT_SIGBUS and it does not matter for you. Short-circuiting like this breaks the conceptual logic that we have to retry with mmap_lock if VMA changed from under us.\n\nIf you want to optimize for VM_FAULT_SIGBUS just refactor that check you added into handle_userfault() as a separate function, call it here and if it confirms a uffd with VM_FAULT_SIGBUS case then return VM_FAULT_SIGBUS in all other cases return VM_FAULT_RETRY as before. And add a comment explaining what you are doing.",
+      "range": {
+        "startLine": 3893,
+        "startChar": 3,
+        "endLine": 3893,
+        "endChar": 17
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7937a4a_079678b2",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3935,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-13T21:23:53Z",
+      "side": 1,
+      "message": "same as the first comment.",
+      "range": {
+        "startLine": 3934,
+        "startChar": 2,
+        "endLine": 3935,
+        "endChar": 16
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5529dd56_3e25d2fe",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5021,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-13T21:23:53Z",
+      "side": 1,
+      "message": "same as the first comment. Check for uffd with VM_FAULT_SIGBUS and return VM_FAULT_SIGBUS directly for that case. Keep the rest of the logic as is.",
+      "range": {
+        "startLine": 5021,
+        "startChar": 7,
+        "endLine": 5021,
+        "endChar": 15
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb65c116_4438198b",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5149,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-13T21:23:53Z",
+      "side": 1,
+      "message": "same as the first comment.",
+      "range": {
+        "startLine": 5149,
+        "startChar": 2,
+        "endLine": 5149,
+        "endChar": 16
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0103189e_f2805adf",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5182,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-13T21:23:53Z",
+      "side": 1,
+      "message": "Well, this sounds like it\u0027s safe to speculate for uffd, which is in general not true. You should rephrase to say that handle_userfault() knows how to handle speculative faults.",
+      "range": {
+        "startLine": 5181,
+        "startChar": 4,
+        "endLine": 5182,
+        "endChar": 15
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
