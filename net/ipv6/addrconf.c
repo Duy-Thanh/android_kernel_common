@@ -2753,6 +2753,11 @@ void addrconf_prefix_rcv(struct net_device *dev, u8 *opt, int len, bool sllao)
 		return;
 	}
 
+
+	if (valid_lft != 0 && valid_lft < in6_dev->cnf.accept_ra_min_lft)
+		goto put;
+
+
 	/*
 	 *	Two things going on here:
 	 *	1) Add routes for on-link prefixes
