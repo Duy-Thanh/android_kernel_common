@@ -22,6 +22,30 @@
       },
       "revId": "d47a714fa7cee9671216da007ef562cad6e75c61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e75e1b3_5ff3f6b7",
+        "filename": "mm/memory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3650,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-13T18:42:59Z",
+      "side": 1,
+      "message": "I don\u0027t think migrate_to_ram() is always safe to do without mmap_lock. For example nouveau_dmem_migrate_to_ram() calls migrate_vma_pages()-\u003emigrate_vma_insert_page()-\u003eanon_vma_prepare() and that function will try to change vma-\u003eanon_vma without mmap_lock. If neighboring VMAs are changed at the same time, we can end up using wrong anon_vma. This function explicitly requires mmap_lock: https://elixir.bootlin.com/linux/latest/source/mm/rmap.c#L186",
+      "parentUuid": "38e12a6b_4d7ba37a",
+      "range": {
+        "startLine": 3647,
+        "startChar": 0,
+        "endLine": 3650,
+        "endChar": 3
+      },
+      "revId": "d47a714fa7cee9671216da007ef562cad6e75c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
