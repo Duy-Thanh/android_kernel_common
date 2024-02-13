@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e12a6b_4d7ba37a",
+        "filename": "mm/memory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3650,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-02-13T18:21:26Z",
+      "side": 1,
+      "message": "Should we move this into the below `if (is_migration_entry(entry)) {` ? It just checked the swp_type of the entry.",
+      "range": {
+        "startLine": 3647,
+        "startChar": 0,
+        "endLine": 3650,
+        "endChar": 3
+      },
+      "revId": "d47a714fa7cee9671216da007ef562cad6e75c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
