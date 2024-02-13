@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73faf8c9_c85efda7",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-02-13T21:37:28Z",
+      "side": 1,
+      "message": "Since it is nontrivial for humans to verify that insertion of `sub_page_limits` does not modify the size of struct request_queue, please add the following below this declaration:\n```\nstatic_assert(sizeof(request_queue) \u003d\u003d ...);\n```",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 2
+      },
+      "revId": "837fcda82e1dc88058299e64c64705cc3125c443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
