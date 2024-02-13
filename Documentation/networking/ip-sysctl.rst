@@ -2148,6 +2148,17 @@ accept_ra_min_hop_limit - INTEGER
 
 	Default: 1
 
+<<<<<<< HEAD   (fa7914 UPSTREAM: bpf: Fix re-attachment branch in bpf_tracing_prog_)
+=======
+accept_ra_min_lft - INTEGER
+	Minimum acceptable lifetime value in Router Advertisement.
+
+	RA sections with a lifetime less than this value shall be
+	ignored. Zero lifetimes stay unaffected.
+
+	Default: 0
+
+>>>>>>> CHANGE (c2c027 Reapply "net: change accept_ra_min_rtr_lft to affect all RA )
 accept_ra_pinfo - BOOLEAN
 	Learn Prefix Information in Router Advertisement.
 
