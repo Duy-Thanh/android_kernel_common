@@ -1332,6 +1332,8 @@ int kvm_iommu_register_device(unsigned long id, void *data);
 
 int kvm_iommu_register_driver(struct kvm_iommu_driver *kern_ops);
 
+int kvm_iommu_finalise(void);
+
 /* Allocator interface IDs. */
 #define HYP_ALLOC_MGT_HEAP_ID		0
 #define HYP_ALLOC_MGT_IOMMU_ID		1

@@ -853,6 +853,9 @@ static int kvm_arm_smmu_probe(struct platform_device *pdev)
 	pm_runtime_set_active(dev);
 	pm_runtime_enable(dev);
 
+	if (kvm_arm_smmu_cur == kvm_arm_smmu_count)
+		WARN_ON(kvm_iommu_finalise());
+
 	return 0;
 }
 
