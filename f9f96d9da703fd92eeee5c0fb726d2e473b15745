@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40cb3431_5a94dbdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-02-14T07:24:16Z",
+      "side": 1,
+      "message": "This series fixes display regression on DB845c.\nAlso submitted upstream https://lore.kernel.org/stable/20240129103902.3239531-1-amit.pundir@linaro.org/",
+      "revId": "f9f96d9da703fd92eeee5c0fb726d2e473b15745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
