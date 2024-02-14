@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fb1314f_5380c45d",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-14T00:21:34Z",
+      "side": 1,
+      "message": "re: Does it mean all other load/store to this field (mostly in fs/userfaultfd.c) should also be changed accordingly?\nYes. There are several places in this file.\n\nYes, I think so. SPF is Android-only feature and 5.10+ kernels are all GKI, so they share the same config which enables SPF. So, everyone using GKI kernel uses SPF.",
+      "parentUuid": "0151778c_efceb48a",
+      "range": {
+        "startLine": 421,
+        "startChar": 18,
+        "endLine": 421,
+        "endChar": 40
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd94dff9_a0e7b653",
         "filename": "mm/memory.c",
         "patchSetId": 12
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Got it. Will something like this work?\n\n```\nif (userfaultfd_missing(vma) \u0026\u0026 userfaultfd_using_sigbus(vma))\n          return VM_FAULT_SIGBUS;\nelse\n          return VM_FAULT_RETRY;\n```",
       "parentUuid": "fd94dff9_a0e7b653",
+      "range": {
+        "startLine": 3893,
+        "startChar": 3,
+        "endLine": 3893,
+        "endChar": 17
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f453e21c_2d20bd42",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3893,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-14T00:21:34Z",
+      "side": 1,
+      "message": "```\nif (userfaultfd_missing(vma))\n          return userfaultfd_using_sigbus(vma) ? VM_FAULT_SIGBUS : VM_FAULT_RETRY;\n```",
+      "parentUuid": "b8762ebe_72a93caa",
       "range": {
         "startLine": 3893,
         "startChar": 3,
