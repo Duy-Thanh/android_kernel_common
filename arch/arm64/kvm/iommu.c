@@ -35,6 +35,12 @@ int kvm_iommu_init_hyp(struct kvm_iommu_ops *hyp_ops,
 }
 EXPORT_SYMBOL(kvm_iommu_init_hyp);
 
+int kvm_iommu_register_device(unsigned long id, void *data)
+{
+	return kvm_call_hyp_nvhe(__pkvm_iommu_register, id, data);
+}
+EXPORT_SYMBOL(kvm_iommu_register_device);
+
 int kvm_iommu_init_driver(void)
 {
 	if (WARN_ON(!smp_load_acquire(&iommu_driver )|| !iommu_driver->get_iommu_id))

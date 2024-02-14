@@ -828,8 +828,6 @@ static int kvm_arm_smmu_probe(struct platform_device *pdev)
 	hyp_smmu->iommu.power_domain = power_domain;
 	hyp_smmu->ssid_bits = smmu->ssid_bits;
 
-	kvm_arm_smmu_cur++;
-
 	/*
 	 * The state of endpoints dictates when the SMMU is powered off. To turn
 	 * the SMMU on and off, a genpd driver uses SCMI over the SMC transport,
@@ -846,13 +844,13 @@ static int kvm_arm_smmu_probe(struct platform_device *pdev)
 	 */
 	hyp_smmu->caches_clean_on_power_on = true;
 
+	ret = kvm_iommu_register_device(kvm_arm_smmu_cur, NULL);
+	if (ret)
+		return ret;
+
+	kvm_arm_smmu_cur++;
 	pm_runtime_set_active(dev);
 	pm_runtime_enable(dev);
-	/*
-	 * Take a reference to keep the SMMU powered on while the hypervisor
-	 * initializes it.
-	 */
-	pm_runtime_resume_and_get(dev);
 
 	return 0;
 }
@@ -909,6 +907,7 @@ static struct platform_driver kvm_arm_smmu_driver = {
 		.of_match_table = arm_smmu_of_match,
 		.pm = &kvm_arm_smmu_pm_ops,
 	},
+	.probe = kvm_arm_smmu_probe,
 	.remove = kvm_arm_smmu_remove,
 };
 
@@ -940,12 +939,6 @@ static void kvm_arm_smmu_array_free(void)
 
 	order = get_order(kvm_arm_smmu_count * sizeof(*kvm_arm_smmu_array));
 	free_pages((unsigned long)kvm_arm_smmu_array, order);
-}
-
-int smmu_put_device(struct device *dev, void *data)
-{
-	pm_runtime_put_noidle(dev);
-	return 0;
 }
 
 static int smmu_alloc_idmap_mc(struct kvm_hyp_memcache *idmap_mc)
@@ -995,17 +988,6 @@ static int kvm_arm_smmu_v3_init(void)
 	ret = kvm_arm_smmu_array_alloc();
 	if (ret || !kvm_arm_smmu_count)
 		return ret;
-
-	ret = platform_driver_probe(&kvm_arm_smmu_driver, kvm_arm_smmu_probe);
-	if (ret)
-		goto err_free;
-
-	if (kvm_arm_smmu_cur != kvm_arm_smmu_count) {
-		/* A device exists but failed to probe */
-		ret = -EUNATCH;
-		goto err_free;
-	}
-
 #ifdef MODULE
 	ret = pkvm_load_el2_module(kvm_nvhe_sym(smmu_init_hyp_module),
 				   &pkvm_module_token);
@@ -1031,8 +1013,13 @@ static int kvm_arm_smmu_v3_init(void)
 
 	ret = kvm_iommu_init_hyp(ksym_ref_addr_nvhe(smmu_ops), &idmap_mc, 0);
 
-	WARN_ON(driver_for_each_device(&kvm_arm_smmu_driver.driver, NULL,
-				       NULL, smmu_put_device));
+	if (ret)
+		goto err_free;
+
+	ret = platform_driver_register(&kvm_arm_smmu_driver);
+	if (ret)
+		goto err_free;
+
 	return ret;
 err_free:
 	kvm_arm_smmu_array_free();

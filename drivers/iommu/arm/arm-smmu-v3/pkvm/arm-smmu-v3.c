@@ -726,21 +726,28 @@ static int smmu_init_device(struct hyp_arm_smmu_v3_device *smmu)
 
 static int smmu_init(unsigned long init_arg)
 {
-	int ret;
-	struct hyp_arm_smmu_v3_device *smmu;
 	int smmu_arr_size = PAGE_ALIGN(sizeof(*kvm_hyp_arm_smmu_v3_smmus) * kvm_hyp_arm_smmu_v3_count);
 
 	kvm_hyp_arm_smmu_v3_smmus = kern_hyp_va(kvm_hyp_arm_smmu_v3_smmus);
 
 	WARN_ON(!smmu_take_pages(hyp_virt_to_phys(kvm_hyp_arm_smmu_v3_smmus), smmu_arr_size));
 
-	for_each_smmu(smmu) {
-		ret = smmu_init_device(smmu);
-		if (ret)
-			return ret;
-	}
-
 	return 0;
+}
+
+static int smmu_register_device(unsigned long id, void *data)
+{
+	struct hyp_arm_smmu_v3_device *smmu;
+	int ret;
+
+	if (id >= kvm_hyp_arm_smmu_v3_count)
+		return -ENODEV;
+
+	smmu = &kvm_hyp_arm_smmu_v3_smmus[id];
+	hyp_spin_lock(&smmu->iommu.lock);
+	ret = smmu_init_device(smmu);
+	hyp_spin_unlock(&smmu->iommu.lock);
+	return ret;
 }
 
 static struct kvm_hyp_iommu *smmu_id_to_iommu(pkvm_handle_t smmu_id)
@@ -1251,6 +1258,7 @@ int smmu_init_hyp_module(const struct pkvm_module_ops *ops)
 
 struct kvm_iommu_ops smmu_ops = {
 	.init				= smmu_init,
+	.register_device		= smmu_register_device,
 	.get_iommu_by_id		= smmu_id_to_iommu,
 	.alloc_domain			= smmu_alloc_domain,
 	.free_domain			= smmu_free_domain,
