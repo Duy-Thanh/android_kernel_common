@@ -56,6 +56,7 @@ int kvm_iommu_snapshot_host_stage2(struct kvm_hyp_iommu_domain *domain);
 
 struct kvm_iommu_ops {
 	int (*init)(unsigned long arg);
+	int (*register_device)(unsigned long id, void *data);
 	struct kvm_hyp_iommu *(*get_iommu_by_id)(pkvm_handle_t smmu_id);
 	int (*alloc_domain)(struct kvm_hyp_iommu_domain *domain, u32 type);
 	void (*free_domain)(struct kvm_hyp_iommu_domain *domain);
