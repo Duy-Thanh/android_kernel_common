@@ -38,6 +38,7 @@ void **kvm_hyp_iommu_domains;
 
 static struct hyp_pool iommu_host_pool;
 static struct hyp_pool iommu_atomic_pool;
+static bool kvm_iommu_finalised;
 
 DECLARE_PER_CPU(struct kvm_hyp_req, host_hyp_reqs);
 
@@ -603,7 +604,14 @@ static int kvm_iommu_init_idmap(struct kvm_hyp_memcache *atomic_mc)
 
 int kvm_iommu_register_device(unsigned long id, void *data)
 {
+	if (smp_load_acquire(&kvm_iommu_finalised))
+		return -EBUSY;
 	return kvm_iommu_ops->register_device(id, data);
+}
+
+int kvm_iommu_finalise(void)
+{
+	return cmpxchg_release(&kvm_iommu_finalised, 0, 1) ? -EBUSY : 0;
 }
 
 int kvm_iommu_init(struct kvm_iommu_ops *ops, struct kvm_hyp_memcache *atomic_mc,
