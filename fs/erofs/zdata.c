@@ -818,6 +818,10 @@ static int z_erofs_register_pcluster(struct z_erofs_decompress_frontend *fe)
 
 	if (ztailpacking) {
 		pcl->obj.index = 0;	/* which indicates ztailpacking */
+<<<<<<< HEAD   (479ddc ANDROID: KVM: arm64: Fix kvm_pgtable_stage2_relax_perms)
+=======
+		pcl->tailpacking_size = map->m_plen;
+>>>>>>> BRANCH (f1bb70 Linux 6.1.77)
 	} else {
 		pcl->obj.index = erofs_blknr(sb, map->m_pa);
 
@@ -1014,8 +1018,20 @@ repeat:
 				EROFS_I(inode)->z_fragmentoff + fpos);
 		if (err)
 			goto out;
+<<<<<<< HEAD   (479ddc ANDROID: KVM: arm64: Fix kvm_pgtable_stage2_relax_perms)
 		tight = false;
 		goto next_part;
+=======
+		}
+		get_page(fe->map.buf.page);
+		WRITE_ONCE(fe->pcl->compressed_bvecs[0].page,
+			   fe->map.buf.page);
+		fe->pcl->pageofs_in = map->m_pa & ~PAGE_MASK;
+		fe->mode = Z_EROFS_PCLUSTER_FOLLOWED_NOINPLACE;
+	} else {
+		/* bind cache first when cached decompression is preferred */
+		z_erofs_bind_cache(fe, pagepool);
+>>>>>>> BRANCH (f1bb70 Linux 6.1.77)
 	}
 
 	if (!fe->pcl) {
