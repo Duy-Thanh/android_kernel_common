@@ -41,8 +41,15 @@ int kvm_iommu_register_device(unsigned long id, void *data)
 }
 EXPORT_SYMBOL(kvm_iommu_register_device);
 
+int kvm_iommu_finalise(void)
+{
+	return kvm_call_hyp_nvhe(__pkvm_iommu_finalise);
+}
+EXPORT_SYMBOL(kvm_iommu_finalise);
+
 int kvm_iommu_init_driver(void)
 {
+	/* See kvm_iommu_register_driver(). */
 	if (WARN_ON(!smp_load_acquire(&iommu_driver )|| !iommu_driver->get_iommu_id))
 		return -ENODEV;
 	/*
@@ -64,6 +71,7 @@ int kvm_iommu_init_driver(void)
 
 void kvm_iommu_remove_driver(void)
 {
+	/* See kvm_iommu_register_driver(). */
 	if (smp_load_acquire(&iommu_driver))
 		iommu_driver->remove_driver();
 }
