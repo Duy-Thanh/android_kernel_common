@@ -703,11 +703,10 @@ static int kvm_arm_smmu_probe(struct platform_device *pdev)
 	struct hyp_arm_smmu_v3_device *hyp_smmu;
 	struct kvm_power_domain power_domain = {};
 	unsigned long ias;
+	unsigned long hyp_smmu_order = get_order(sizeof(*hyp_smmu));
 
 	if (kvm_arm_smmu_cur >= kvm_arm_smmu_count)
 		return -ENOSPC;
-
-	hyp_smmu = &kvm_arm_smmu_array[kvm_arm_smmu_cur];
 
 	host_smmu = devm_kzalloc(dev, sizeof(*host_smmu), GFP_KERNEL);
 	if (!host_smmu)
@@ -818,6 +817,8 @@ static int kvm_arm_smmu_probe(struct platform_device *pdev)
 	if (ret)
 		return ret;
 
+	hyp_smmu = (void *)__get_free_pages(GFP_KERNEL | __GFP_ZERO, hyp_smmu_order);
+
 	/* Hypervisor parameters */
 	hyp_smmu->mmio_addr = mmio_addr;
 	hyp_smmu->mmio_size = mmio_size;
@@ -843,7 +844,8 @@ static int kvm_arm_smmu_probe(struct platform_device *pdev)
 	 */
 	hyp_smmu->caches_clean_on_power_on = true;
 
-	ret = kvm_iommu_register_device(kvm_arm_smmu_cur, NULL);
+	ret = kvm_iommu_register_device(kvm_arm_smmu_cur, hyp_smmu);
+	free_pages((unsigned long)hyp_smmu, hyp_smmu_order);
 	if (ret)
 		return ret;
 
