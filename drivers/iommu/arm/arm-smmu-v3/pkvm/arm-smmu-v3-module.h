@@ -41,6 +41,8 @@ extern const struct pkvm_module_ops		*mod_ops;
 #define kvm_iommu_donate_pages_idmap(x)		CALL_FROM_OPS(iommu_donate_pages_idmap, x)
 #define kvm_iommu_reclaim_pages_idmap(x, y)	CALL_FROM_OPS(iommu_reclaim_pages_idmap, x, y)
 #define kvm_iommu_snapshot_host_stage2(x)	CALL_FROM_OPS(iommu_snapshot_host_stage2, x)
+#define hyp_fixmap_map(x)			CALL_FROM_OPS(fixmap_map, x)
+#define hyp_fixmap_unmap()			CALL_FROM_OPS(fixmap_unmap)
 #endif
 
 #endif /* __ARM_SMMU_V3_MODULE__ */

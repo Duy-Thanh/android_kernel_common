@@ -47,6 +47,7 @@ const struct pkvm_module_ops		*mod_ops;
 
 size_t __ro_after_init kvm_hyp_arm_smmu_v3_count;
 struct hyp_arm_smmu_v3_device *kvm_hyp_arm_smmu_v3_smmus;
+DEFINE_HYP_SPINLOCK(registeration_lock);
 
 struct domain_iommu_node {
 	struct kvm_hyp_iommu *iommu;
@@ -745,24 +746,47 @@ static int smmu_register_device(unsigned long id, void *data)
 {
 	struct hyp_arm_smmu_v3_device *smmu;
 	int ret;
+	void *smmu_kernel;
 
+	/* This can be improved but for now we optimize for performance. */
+	BUILD_BUG_ON(sizeof(*smmu) > PAGE_SIZE);
 	if (id >= kvm_hyp_arm_smmu_v3_count)
 		return -ENODEV;
 
+	hyp_spin_lock(&registeration_lock);
 	smmu = &kvm_hyp_arm_smmu_v3_smmus[id];
+	if (smmu->busy) {
+		ret = -EBUSY;
+		goto out_unlock;
+	}
+
+	smmu_kernel = hyp_fixmap_map(hyp_virt_to_phys((void *)kern_hyp_va((unsigned long)data)));
+	memcpy(smmu, smmu_kernel, sizeof(*smmu));
+	hyp_fixmap_unmap();
 	hyp_spin_lock(&smmu->iommu.lock);
 	ret = smmu_init_device(smmu);
 	hyp_spin_unlock(&smmu->iommu.lock);
+	/* Paired with smp_load_acquire() in smmu_id_to_iommu() */
+	smp_store_release(&smmu->busy, !ret);
+
+out_unlock:
+	hyp_spin_unlock(&registeration_lock);
 	return ret;
 }
 
 static struct kvm_hyp_iommu *smmu_id_to_iommu(pkvm_handle_t smmu_id)
 {
+	struct hyp_arm_smmu_v3_device *smmu;
+
 	if (smmu_id >= kvm_hyp_arm_smmu_v3_count)
 		return NULL;
 	smmu_id = array_index_nospec(smmu_id, kvm_hyp_arm_smmu_v3_count);
+	smmu = &kvm_hyp_arm_smmu_v3_smmus[smmu_id];
+	/* Paired with smp_store_release() in smmu_register_device() */
+	if (!smp_load_acquire(&smmu->busy))
+		return NULL;
 
-	return &kvm_hyp_arm_smmu_v3_smmus[smmu_id].iommu;
+	return &smmu->iommu;
 }
 
 int smmu_domain_config_s2(struct kvm_hyp_iommu_domain *domain, u64 *ent)
