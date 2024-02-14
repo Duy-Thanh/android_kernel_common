@@ -36,6 +36,7 @@ struct hyp_arm_smmu_v3_device {
 	struct io_pgtable_cfg	pgtable_cfg_s1;
 	struct io_pgtable_cfg	pgtable_cfg_s2;
 	u32			ssid_bits; /* SSID has max of 20 bits*/
+	bool			busy;
 };
 
 extern size_t kvm_nvhe_sym(kvm_hyp_arm_smmu_v3_count);
