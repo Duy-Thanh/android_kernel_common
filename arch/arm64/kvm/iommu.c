@@ -41,6 +41,12 @@ int kvm_iommu_register_device(unsigned long id, void *data)
 }
 EXPORT_SYMBOL(kvm_iommu_register_device);
 
+int kvm_iommu_finalise(void)
+{
+	return kvm_call_hyp_nvhe(__pkvm_iommu_finalise);
+}
+EXPORT_SYMBOL(kvm_iommu_finalise);
+
 int kvm_iommu_init_driver(void)
 {
 	if (!smp_load_acquire(&iommu_driver) || !iommu_driver->get_iommu_id) {
