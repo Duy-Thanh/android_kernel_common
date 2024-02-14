@@ -46,6 +46,30 @@
       },
       "revId": "837fcda82e1dc88058299e64c64705cc3125c443",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b89709e_d015c379",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-02-14T02:29:41Z",
+      "side": 1,
+      "message": "The static_assert needs to be removed due that depending on the architecture, the data type changes. I tested in armv8, and 128 bytes worked. However, the presubmits are running on -march\u003darmv7-a and it is causing the build to fail\n\nhttps://android-build.corp.google.com/artifact/pending/P69943488/kernel_virt_arm/latest/view/logs%2Fbuild.log.",
+      "parentUuid": "7da5f4c7_43cff709",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 2
+      },
+      "revId": "837fcda82e1dc88058299e64c64705cc3125c443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
