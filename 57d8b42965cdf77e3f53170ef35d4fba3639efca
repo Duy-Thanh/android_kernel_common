@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c301a79b_88b34e8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-15T19:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e39b6beb_f90cd6a5",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 48
+      },
+      "revId": "57d8b42965cdf77e3f53170ef35d4fba3639efca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61d25982_b4c0a653",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "It is memset() in the next function, that\u0027s why I dropped it there, to avoid duplicating the work.\n\nBut as discussed offline, having hyp_zalloc() by default sounds not such a bad idea anyway...",
       "parentUuid": "61d25982_b4c0a653",
+      "range": {
+        "startLine": 843,
+        "startChar": 12,
+        "endLine": 843,
+        "endChar": 21
+      },
+      "revId": "57d8b42965cdf77e3f53170ef35d4fba3639efca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4237e47_c43b671f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-15T19:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44074adc_46ef8a47",
       "range": {
         "startLine": 843,
         "startChar": 12,
