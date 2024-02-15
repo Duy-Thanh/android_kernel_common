@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2a9be69_c4b24f91",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-15T23:14:19Z",
+      "side": 1,
+      "message": "Please don\u0027t store the return value of rcu_access_pointer(). There is nothing to protect us from someone trying to deference it.",
+      "range": {
+        "startLine": 907,
+        "startChar": 26,
+        "endLine": 908,
+        "endChar": 52
+      },
+      "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643467d4_800a3480",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-15T23:14:19Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 1391,
+        "startChar": 26,
+        "endLine": 1391,
+        "endChar": 38
+      },
+      "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911d82d5_302d0c38",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-15T23:14:19Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1456,
+        "startChar": 26,
+        "endLine": 1456,
+        "endChar": 38
+      },
+      "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee23fdd_dbe83508",
+        "filename": "mm/memory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 5224,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-15T23:14:19Z",
+      "side": 1,
+      "message": "can this check be done somewhere early on and the rest kept as is?",
+      "range": {
+        "startLine": 5222,
+        "startChar": 1,
+        "endLine": 5224,
+        "endChar": 25
+      },
+      "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
