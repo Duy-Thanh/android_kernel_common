@@ -22,6 +22,30 @@
       },
       "revId": "b82ab02b63f0e3afbb674224f8961da774b7fcec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22b6587e_aadac675",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-15T10:31:48Z",
+      "side": 1,
+      "message": "How do I do that? The module parameters are automatically prefixed with \"binder.\" by the macro.\n\nI looked in a few different Android kernels and couldn\u0027t find any `android.*` parameters to replicate. I also asked Carlos, and he didn\u0027t know how to do it either.",
+      "parentUuid": "de23e43c_6af36aae",
+      "range": {
+        "startLine": 503,
+        "startChar": 1,
+        "endLine": 503,
+        "endChar": 7
+      },
+      "revId": "b82ab02b63f0e3afbb674224f8961da774b7fcec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
