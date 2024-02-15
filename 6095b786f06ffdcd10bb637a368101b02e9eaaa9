@@ -115,6 +115,30 @@
       },
       "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5813c77_f41af965",
+        "filename": "mm/memory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 5224,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-15T23:49:33Z",
+      "side": 1,
+      "message": "Can we simply add this check before original vmf_allows_speculation() in the very beginning and be done with it? It looks like for this condition you should always return VM_FAULT_SIGBUS, so why not check this once at the beginning and bail out early?",
+      "parentUuid": "e4dc15da_6d3bfd3e",
+      "range": {
+        "startLine": 5222,
+        "startChar": 1,
+        "endLine": 5224,
+        "endChar": 25
+      },
+      "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
