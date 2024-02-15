@@ -16,6 +16,24 @@
       "message": "Do we want a linked list for Rust?  It\u0027s a bad structure for memory reasons, why not just always use an xarray instead?  That\u0027s the way the kernel is moving for it\u0027s data structures, does this HAVE to be a list (i.e. ordering issues?)",
       "revId": "e202fce382bca2d40d5d5ddc5d9028a0d8adc048",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22fa64b2_bacd5391",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-15T13:32:15Z",
+      "side": 1,
+      "message": "oops, didn\u0027t mean to mark this resolved.",
+      "parentUuid": "172fcae3_20cb4279",
+      "revId": "e202fce382bca2d40d5d5ddc5d9028a0d8adc048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
