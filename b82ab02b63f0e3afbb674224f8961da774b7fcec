@@ -46,6 +46,30 @@
       },
       "revId": "b82ab02b63f0e3afbb674224f8961da774b7fcec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "315f843a_04532907",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-15T13:30:45Z",
+      "side": 1,
+      "message": "Ah, must be older branches that are using `android.*` options.\n\nAnd I didn\u0027t think this could be built as a module, but you are right, it\u0027s fine as-is, sorry for the noise.",
+      "parentUuid": "22b6587e_aadac675",
+      "range": {
+        "startLine": 503,
+        "startChar": 1,
+        "endLine": 503,
+        "endChar": 7
+      },
+      "revId": "b82ab02b63f0e3afbb674224f8961da774b7fcec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
