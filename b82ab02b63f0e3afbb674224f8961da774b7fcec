@@ -70,6 +70,30 @@
       },
       "revId": "b82ab02b63f0e3afbb674224f8961da774b7fcec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "577691b7_154697aa",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-15T14:52:12Z",
+      "side": 1,
+      "message": "just to close the loop here... I believe one could override the prefix by defining `MODULE_PARAM_PREFIX` locally. I don\u0027t know if that was the approach for older branches? Anyway, I doubt we want to use that here.",
+      "parentUuid": "315f843a_04532907",
+      "range": {
+        "startLine": 503,
+        "startChar": 1,
+        "endLine": 503,
+        "endChar": 7
+      },
+      "revId": "b82ab02b63f0e3afbb674224f8961da774b7fcec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
