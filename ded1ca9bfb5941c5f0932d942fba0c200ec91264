@@ -70,6 +70,30 @@
       },
       "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4aed107_02993dcd",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3910,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-15T22:22:47Z",
+      "side": 0,
+      "message": "I have simplified quite a bit by containing all the changes within `__handle_speculative_fault()`.",
+      "parentUuid": "11f8f733_abf9b69d",
+      "range": {
+        "startLine": 3903,
+        "startChar": 0,
+        "endLine": 3910,
+        "endChar": 15
+      },
+      "revId": "ded1ca9bfb5941c5f0932d942fba0c200ec91264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

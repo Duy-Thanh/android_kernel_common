@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74f26530_29f2e60a",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-15T22:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fb1314f_5380c45d",
+      "range": {
+        "startLine": 421,
+        "startChar": 18,
+        "endLine": 421,
+        "endChar": 40
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd94dff9_a0e7b653",
@@ -143,6 +167,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50fe3244_25fdf17d",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3893,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-15T22:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f453e21c_2d20bd42",
+      "range": {
+        "startLine": 3893,
+        "startChar": 3,
+        "endLine": 3893,
+        "endChar": 17
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7937a4a_079678b2",
@@ -156,6 +204,30 @@
       "writtenOn": "2024-02-13T21:23:53Z",
       "side": 1,
       "message": "same as the first comment.",
+      "range": {
+        "startLine": 3934,
+        "startChar": 2,
+        "endLine": 3935,
+        "endChar": 16
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af93f3a1_059b62a7",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3935,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-15T22:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7937a4a_079678b2",
       "range": {
         "startLine": 3934,
         "startChar": 2,
@@ -189,6 +261,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc420cc_99c110be",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5021,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-15T22:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5529dd56_3e25d2fe",
+      "range": {
+        "startLine": 5021,
+        "startChar": 7,
+        "endLine": 5021,
+        "endChar": 15
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb65c116_4438198b",
@@ -212,6 +308,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9ed3a56_903806e4",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5149,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-15T22:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb65c116_4438198b",
+      "range": {
+        "startLine": 5149,
+        "startChar": 2,
+        "endLine": 5149,
+        "endChar": 16
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0103189e_f2805adf",
@@ -225,6 +345,30 @@
       "writtenOn": "2024-02-13T21:23:53Z",
       "side": 1,
       "message": "Well, this sounds like it\u0027s safe to speculate for uffd, which is in general not true. You should rephrase to say that handle_userfault() knows how to handle speculative faults.",
+      "range": {
+        "startLine": 5181,
+        "startChar": 4,
+        "endLine": 5182,
+        "endChar": 15
+      },
+      "revId": "e3a4b17760d010dc9831e178a22f60dfadc65536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "965b2dab_33cc887b",
+        "filename": "mm/memory.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5182,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-15T22:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0103189e_f2805adf",
       "range": {
         "startLine": 5181,
         "startChar": 4,
