@@ -762,6 +762,7 @@
       <elf-symbol name='__traceiter_android_vh_sysrq_crash' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x40207816'/>
       <elf-symbol name='__traceiter_android_vh_task_blocks_on_rtmutex' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6e6d9dd0'/>
       <elf-symbol name='__traceiter_android_vh_test_clear_look_around_ref' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf0e40b05'/>
+      <elf-symbol name='__traceiter_android_vh_thermal_pm_notify_suspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3c80ee81'/>
       <elf-symbol name='__traceiter_android_vh_thermal_power_cap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x73b88f94'/>
       <elf-symbol name='__traceiter_android_vh_thermal_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc9b6b745'/>
       <elf-symbol name='__traceiter_android_vh_thermal_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x11150fce'/>
@@ -7557,6 +7558,7 @@
       <elf-symbol name='__tracepoint_android_vh_sysrq_crash' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1ce924b5'/>
       <elf-symbol name='__tracepoint_android_vh_task_blocks_on_rtmutex' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5494b8bf'/>
       <elf-symbol name='__tracepoint_android_vh_test_clear_look_around_ref' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4ffca4ae'/>
+      <elf-symbol name='__tracepoint_android_vh_thermal_pm_notify_suspend' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8224984a'/>
       <elf-symbol name='__tracepoint_android_vh_thermal_power_cap' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf1fd6b34'/>
       <elf-symbol name='__tracepoint_android_vh_thermal_register' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x52c84ba9'/>
       <elf-symbol name='__tracepoint_android_vh_thermal_unregister' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5ba0a594'/>
@@ -119425,35 +119427,7 @@
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='22c4fd1a' size-in-bits='64' id='ec1a9290'/>
-      <class-decl name='disk_events' size-in-bits='1920' is-struct='yes' visibility='default' filepath='block/disk-events.c' line='10' column='1' id='ec1aac50'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='node' type-id='72f469ec' visibility='default' filepath='block/disk-events.c' line='11' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='disk' type-id='33c599da' visibility='default' filepath='block/disk-events.c' line='12' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='block/disk-events.c' line='13' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='block_mutex' type-id='925167dc' visibility='default' filepath='block/disk-events.c' line='15' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='640'>
-          <var-decl name='block' type-id='95e97e5e' visibility='default' filepath='block/disk-events.c' line='16' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='672'>
-          <var-decl name='pending' type-id='f0981eeb' visibility='default' filepath='block/disk-events.c' line='17' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='704'>
-          <var-decl name='clearing' type-id='f0981eeb' visibility='default' filepath='block/disk-events.c' line='18' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='768'>
-          <var-decl name='poll_msecs' type-id='bd54fe1a' visibility='default' filepath='block/disk-events.c' line='20' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='832'>
-          <var-decl name='dwork' type-id='5ad6e0ef' visibility='default' filepath='block/disk-events.c' line='21' column='1'/>
-        </data-member>
-      </class-decl>
+      <class-decl name='disk_events' is-struct='yes' visibility='default' is-declaration-only='yes' id='ec1aac50'/>
       <pointer-type-def type-id='b9157ea1' size-in-bits='64' id='ec2076dd'/>
       <class-decl name='public_key_signature' size-in-bits='640' is-struct='yes' visibility='default' filepath='include/crypto/public_key.h' line='38' column='1' id='ec216e31'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -127943,7 +127917,7 @@
       <pointer-type-def type-id='46f53066' size-in-bits='64' id='fffb07a4'/>
       <qualified-type-def type-id='55efd1a3' const='yes' id='fffdaf52'/>
       <var-decl name='GKI_struct_blk_mq_alloc_data' type-id='17c43c95' mangled-name='GKI_struct_blk_mq_alloc_data' visibility='default' filepath='block/vendor_hooks.c' line='23' column='1' elf-symbol-id='GKI_struct_blk_mq_alloc_data'/>
-      <var-decl name='GKI_struct_readahead_control' type-id='9ec8ec17' mangled-name='GKI_struct_readahead_control' visibility='default' filepath='drivers/android/vendor_hooks.c' line='490' column='1' elf-symbol-id='GKI_struct_readahead_control'/>
+      <var-decl name='GKI_struct_readahead_control' type-id='9ec8ec17' mangled-name='GKI_struct_readahead_control' visibility='default' filepath='drivers/android/vendor_hooks.c' line='498' column='1' elf-symbol-id='GKI_struct_readahead_control'/>
       <var-decl name='GKI_struct_selinux_state' type-id='4ae52763' mangled-name='GKI_struct_selinux_state' visibility='default' filepath='security/selinux/vendor_hooks.c' line='21' column='1' elf-symbol-id='GKI_struct_selinux_state'/>
       <function-decl name='I_BDEV' mangled-name='I_BDEV' filepath='block/bdev.c' line='42' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='I_BDEV'>
         <parameter type-id='7e666abe' name='inode' filepath='block/bdev.c' line='42' column='1'/>
@@ -132643,6 +132617,12 @@
         <parameter type-id='02f11ed4' name='page' filepath='include/trace/hooks/mm.h' line='235' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_android_vh_thermal_pm_notify_suspend' mangled-name='__traceiter_android_vh_thermal_pm_notify_suspend' filepath='include/trace/hooks/thermal.h' line='66' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_thermal_pm_notify_suspend'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/thermal.h' line='66' column='1'/>
+        <parameter type-id='404b1300' name='tz' filepath='include/trace/hooks/thermal.h' line='66' column='1'/>
+        <parameter type-id='7292109c' name='irq_wakeable' filepath='include/trace/hooks/thermal.h' line='66' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_android_vh_thermal_power_cap' mangled-name='__traceiter_android_vh_thermal_power_cap' filepath='include/trace/hooks/thermal.h' line='45' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_thermal_power_cap'>
         <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/thermal.h' line='45' column='1'/>
         <parameter type-id='f9409001' name='power_range' filepath='include/trace/hooks/thermal.h' line='45' column='1'/>
@@ -133817,6 +133797,7 @@
       <var-decl name='__tracepoint_android_vh_sysrq_crash' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_sysrq_crash' visibility='default' filepath='include/trace/hooks/sysrqcrash.h' line='13' column='1' elf-symbol-id='__tracepoint_android_vh_sysrq_crash'/>
       <var-decl name='__tracepoint_android_vh_task_blocks_on_rtmutex' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_task_blocks_on_rtmutex' visibility='default' filepath='include/trace/hooks/dtask.h' line='111' column='1' elf-symbol-id='__tracepoint_android_vh_task_blocks_on_rtmutex'/>
       <var-decl name='__tracepoint_android_vh_test_clear_look_around_ref' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_test_clear_look_around_ref' visibility='default' filepath='include/trace/hooks/mm.h' line='235' column='1' elf-symbol-id='__tracepoint_android_vh_test_clear_look_around_ref'/>
+      <var-decl name='__tracepoint_android_vh_thermal_pm_notify_suspend' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_thermal_pm_notify_suspend' visibility='default' filepath='include/trace/hooks/thermal.h' line='66' column='1' elf-symbol-id='__tracepoint_android_vh_thermal_pm_notify_suspend'/>
       <var-decl name='__tracepoint_android_vh_thermal_power_cap' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_thermal_power_cap' visibility='default' filepath='include/trace/hooks/thermal.h' line='45' column='1' elf-symbol-id='__tracepoint_android_vh_thermal_power_cap'/>
       <var-decl name='__tracepoint_android_vh_thermal_register' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_thermal_register' visibility='default' filepath='include/trace/hooks/thermal.h' line='29' column='1' elf-symbol-id='__tracepoint_android_vh_thermal_register'/>
       <var-decl name='__tracepoint_android_vh_thermal_unregister' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_thermal_unregister' visibility='default' filepath='include/trace/hooks/thermal.h' line='33' column='1' elf-symbol-id='__tracepoint_android_vh_thermal_unregister'/>
@@ -166602,7 +166583,6 @@
     </abi-instr>
   </abi-corpus>
 </abi-corpus-group>
-
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
