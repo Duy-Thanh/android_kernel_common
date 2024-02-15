@@ -22,6 +22,30 @@
       },
       "revId": "5d8bb5bb55306c51091b9095742d61ccbf0059fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "299a663c_044507fb",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-15T15:41:08Z",
+      "side": 1,
+      "message": "That value is hard to interpret, but this is kind of the \"slope\" for reclaiming objects.\n\nIndeed here 1 object \u003d\u003d 1 page. With DEFAULT_SEEK, the coefficient is 1/2. So every time we try to reclaim something from this shrinker, we try to get half of the available pages. With 1, we would try to get _all_ the pages. Maybe that wouldn\u0027t be so bad after all?",
+      "parentUuid": "d8fbd402_7b1484ca",
+      "range": {
+        "startLine": 2284,
+        "startChar": 11,
+        "endLine": 2284,
+        "endChar": 24
+      },
+      "revId": "5d8bb5bb55306c51091b9095742d61ccbf0059fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
