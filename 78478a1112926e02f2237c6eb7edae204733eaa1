@@ -22,6 +22,30 @@
       },
       "revId": "78478a1112926e02f2237c6eb7edae204733eaa1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db32acfd_e9954357",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-15T18:15:21Z",
+      "side": 1,
+      "message": "Good point, if wrongly used an invalid PTE could be returned.\n\nI\u0027ll BUG_ON() as I have no way of recovering from this error.",
+      "parentUuid": "6cbf3414_bb669b37",
+      "range": {
+        "startLine": 509,
+        "startChar": 0,
+        "endLine": 509,
+        "endChar": 50
+      },
+      "revId": "78478a1112926e02f2237c6eb7edae204733eaa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
