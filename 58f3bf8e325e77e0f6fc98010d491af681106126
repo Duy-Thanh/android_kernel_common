@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61664574_cc1ac32d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-16T19:37:31Z",
+      "side": 1,
+      "message": "The presubmit failures are existing issues (b/325593552 and b/292298135) unrelated to this change",
+      "revId": "58f3bf8e325e77e0f6fc98010d491af681106126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
