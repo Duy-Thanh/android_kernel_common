@@ -139,6 +139,30 @@
       },
       "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f08747_7cb2235b",
+        "filename": "mm/memory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 5224,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-16T00:07:02Z",
+      "side": 1,
+      "message": "I see what you mean.\n\nWe should return VM_FAULT_SIGBUS when the page on the faulting address is `missing`. If we do what you are saying (I tried that), then we will keep returning VM_FAULT_SIGBUS on all faults to that vma, even when fault is due to non-missing reasons (like when writing to a zero-page).\n\nWhen I tried that, the tests didn\u0027t fail/crash but such non-missing faults got resolved only after I unregistered the vma from uffd 😊 Until then it would just keep looping as follows:\n```\n1. write to zero-page causes page-fault\n2. fault returns VM_FAULT_SIGBUS\n3. kernel sends SIGBUS\n4. SIGBUS handler in userspace says the faulting page is already handled\n5. thread retries write and hence back to step 1\n```\n\nCurrently I\u0027m returning VM_FAULT_SIGBUS in three cases, all of which indicate missing page:\n1) no anon_vma\n2) failure to walk page-table\n3) no pte",
+      "parentUuid": "c5813c77_f41af965",
+      "range": {
+        "startLine": 5222,
+        "startChar": 1,
+        "endLine": 5224,
+        "endChar": 25
+      },
+      "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
