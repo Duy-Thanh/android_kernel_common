@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54a160ce_6347c4ec",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-16T00:34:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2a9be69_c4b24f91",
+      "range": {
+        "startLine": 907,
+        "startChar": 26,
+        "endLine": 908,
+        "endChar": 52
+      },
+      "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "643467d4_800a3480",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1528ade_8ab5f7d6",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-16T00:34:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643467d4_800a3480",
+      "range": {
+        "startLine": 1391,
+        "startChar": 26,
+        "endLine": 1391,
+        "endChar": 38
+      },
+      "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "911d82d5_302d0c38",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-02-15T23:14:19Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 1456,
+        "startChar": 26,
+        "endLine": 1456,
+        "endChar": 38
+      },
+      "revId": "6095b786f06ffdcd10bb637a368101b02e9eaaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ea7f617_adc71a43",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-16T00:34:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "911d82d5_302d0c38",
       "range": {
         "startLine": 1456,
         "startChar": 26,
