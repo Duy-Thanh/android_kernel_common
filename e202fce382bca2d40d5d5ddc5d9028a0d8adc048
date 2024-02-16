@@ -34,6 +34,24 @@
       "parentUuid": "172fcae3_20cb4279",
       "revId": "e202fce382bca2d40d5d5ddc5d9028a0d8adc048",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d89cf4_de93f671",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-16T09:53:28Z",
+      "side": 1,
+      "message": "The xarray is a good replacement for most of our red/black trees (well, sometimes the rhashtable is a better fit), but I don\u0027t think it can really replace any of the linked lists. Mainly, the linked lists in Rust Binder are used for things such as the todo lists containing stuff to deliver to userspace, as well as the list of threads that are currently waiting for incoming events.\n\nFor both of these, ordering is important. The todo lists have to be queues for correctness reasons. The list of ready threads has to be a stack for performance reasons.\n\nThat said, the Rust standard library already comes with a stack (called [`Vec`](https://doc.rust-lang.org/stable/alloc/vec/struct.Vec.html)) and a queue (called [`VecDeque`](https://doc.rust-lang.org/stable/std/collections/struct.VecDeque.html)). These are probably the most obvious ways to replace the linked lists.\n\nThat said, replacing the linked lists with Vec/VecDeque is rather awkward since we can\u0027t allocate while holding a spinlock. It also introduces new failure paths for operations that are infallible in C Binder.",
+      "parentUuid": "22fa64b2_bacd5391",
+      "revId": "e202fce382bca2d40d5d5ddc5d9028a0d8adc048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
