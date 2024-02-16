@@ -70,6 +70,24 @@
       "parentUuid": "c3874a42_12127e8b",
       "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11174dbd_03ea07b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2024-02-16T01:45:23Z",
+      "side": 1,
+      "message": "We know that we need to update the corresponding hook function to the symbol list. \nHowever, our symbol list has not been uploaded to android15-6.6 yet, and our colleagues are still working on it.\n\nIs it possible to merge this hook function first?\nAfter the symbol list is uploaded, we can provide a patch to add this hook function to the symbol list.",
+      "parentUuid": "8242e930_a75704b4",
+      "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
