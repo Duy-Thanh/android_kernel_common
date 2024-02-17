@@ -36,6 +36,9 @@ extern const struct pkvm_module_ops		*mod_ops;
 #define hyp_fixmap_map(x)			CALL_FROM_OPS(fixmap_map, x)
 #define hyp_fixmap_unmap()			CALL_FROM_OPS(fixmap_unmap)
 #define kern_hyp_va(x)				CALL_FROM_OPS(kern_hyp_va, x)
+#define kvm_iommu_iotlb_gather_add_page(x, y, z, w)  \
+						CALL_FROM_OPS(iommu_iotlb_gather_add_page, \
+							      x, y, z, w)
 #endif
 
 #endif /* __ARM_SMMU_V3_MODULE__ */
