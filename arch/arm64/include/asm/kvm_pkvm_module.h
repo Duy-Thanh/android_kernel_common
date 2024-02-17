@@ -8,6 +8,7 @@
 
 typedef void (*dyn_hcall_t)(struct user_pt_regs *);
 struct kvm_hyp_iommu;
+struct iommu_iotlb_gather;
 
 #ifdef CONFIG_MODULES
 enum pkvm_psci_notification {
@@ -195,6 +196,8 @@ struct pkvm_module_ops {
 	/* These 2 functions change calling convention based on CONFIG_DEBUG_LIST. */
 	typeof(__list_add_valid_or_report) *list_add_valid_or_report;
 	typeof(__list_del_entry_valid_or_report) *list_del_entry_valid_or_report;
+	void (*iommu_iotlb_gather_add_page)(void *cookie, struct iommu_iotlb_gather *gather,
+					    unsigned long iova, size_t size);
 };
 
 int __pkvm_load_el2_module(struct module *this, unsigned long *token);
