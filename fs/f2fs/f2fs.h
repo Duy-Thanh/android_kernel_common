@@ -4250,7 +4250,11 @@ int f2fs_truncate_partial_cluster(struct inode *inode, u64 from, bool lock);
 void f2fs_compress_write_end_io(struct bio *bio, struct page *page);
 bool f2fs_is_compress_backend_ready(struct inode *inode);
 bool f2fs_is_compress_level_valid(int alg, int lvl);
+<<<<<<< HEAD   (86a91f UPSTREAM: cgroup: remove cgroup_rstat_flush_atomic())
 int __init f2fs_init_compress_mempool(void);
+=======
+int f2fs_init_compress_mempool(void);
+>>>>>>> BRANCH (8b4118 Linux 6.1.78)
 void f2fs_destroy_compress_mempool(void);
 void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_task);
 void f2fs_end_read_compressed_page(struct page *page, bool failed,
