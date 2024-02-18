@@ -248,7 +248,7 @@ error:
 	abort_creds(new);
 	return NULL;
 }
-EXPORT_SYMBOL(prepare_creds);
+EXPORT_SYMBOL_NS(prepare_creds, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 /*
  * Prepare credentials for current to perform an execve()
