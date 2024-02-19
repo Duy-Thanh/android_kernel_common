@@ -1,0 +1,297 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c52f459_9d5d349f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "Getting better!",
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d447e56_bd9b8bd5",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "wrong style, see below.",
+      "range": {
+        "startLine": 850,
+        "startChar": 0,
+        "endLine": 850,
+        "endChar": 21
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf60bad_fdfc6eb6",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "as much as I don\u0027t like the current style, always follow the existing one when modifying code that you did not write.",
+      "range": {
+        "startLine": 1705,
+        "startChar": 0,
+        "endLine": 1705,
+        "endChar": 21
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "540155f4_370f1e49",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be after the subsystem is removed?  You create it that way, be consistent please.",
+      "range": {
+        "startLine": 1720,
+        "startChar": 1,
+        "endLine": 1720,
+        "endChar": 22
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f6e69e3_69a877df",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "should have `android_` as the prefix, right?  Same for this `.c` file.",
+      "range": {
+        "startLine": 5,
+        "startChar": 10,
+        "endLine": 5,
+        "endChar": 25
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a46499a1_f34a391c",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "`g_`?  No hungarian notation in the kernel please.  And this is static, not global 😞",
+      "range": {
+        "startLine": 12,
+        "startChar": 35,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba9986ed_a1997379",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "same, please remove.",
+      "range": {
+        "startLine": 14,
+        "startChar": 23,
+        "endLine": 14,
+        "endChar": 25
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "746f7071_4bc9d06c",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "no error checking?  And yes, it can fail, we have reports of this happening \"in the wild\" right now in other subsystems upstream, so be careful and handle it properly please.",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d76bb8_cbf5ccc6",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "you have the ability here to send 3 uevents all at once, that is going to be a mess.  Why not just send one with the proper info in it?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 77
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9aa7a4c_eb86247d",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "dev_dbg() already includes __func__ automatically, you never need to add it again, as that\u0027s just duplicate.  Please remove it from all dev_dbg() calls you add in this patch.",
+      "range": {
+        "startLine": 74,
+        "startChar": 50,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7796812_afa69f1c",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "`static const`, right?",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 6
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42756e12_3bf618d3",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "return value?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf7b15c_c48ac21f",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "return value?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 71
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

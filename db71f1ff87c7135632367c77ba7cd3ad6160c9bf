@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d2ecfd_096ce903",
+        "filename": "drivers/usb/gadget/Kconfig",
+        "patchSetId": 9
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b78f946b_0c039c2c",
+      "range": {
+        "startLine": 233,
+        "startChar": 7,
+        "endLine": 233,
+        "endChar": 26
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cec5cc8_fc7d4662",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Added locking here. Done",
       "parentUuid": "1cec5cc8_fc7d4662",
+      "range": {
+        "startLine": 860,
+        "startChar": 0,
+        "endLine": 860,
+        "endChar": 47
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21074c25_bf36ff85",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "902c6653_8c55d214",
       "range": {
         "startLine": 860,
         "startChar": 0,
@@ -159,6 +207,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d11ab3_490853f5",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b63184d7_9b419685",
+      "range": {
+        "startLine": 1703,
+        "startChar": 1,
+        "endLine": 1703,
+        "endChar": 22
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62a095c8_ca2c27af",
@@ -196,6 +268,30 @@
       "side": 1,
       "message": "Free driver name and function both. Done",
       "parentUuid": "62a095c8_ca2c27af",
+      "range": {
+        "startLine": 1648,
+        "startChar": 7,
+        "endLine": 1648,
+        "endChar": 27
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26b9463c_8b06a8a9",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbab4c02_85281d8b",
       "range": {
         "startLine": 1648,
         "startChar": 7,
@@ -253,6 +349,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd7ccc5b_da02911f",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1708,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f493eb5a_95a36f2a",
+      "range": {
+        "startLine": 1708,
+        "startChar": 0,
+        "endLine": 1708,
+        "endChar": 52
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39e49a60_1ea3fa1e",
@@ -290,6 +410,30 @@
       "side": 1,
       "message": "Removed locking",
       "parentUuid": "39e49a60_1ea3fa1e",
+      "range": {
+        "startLine": 85,
+        "startChar": 1,
+        "endLine": 85,
+        "endChar": 18
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e9ac38c_621c9a1c",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39235ca6_c1a17b08",
       "range": {
         "startLine": 85,
         "startChar": 1,
@@ -360,6 +504,30 @@
       "side": 1,
       "message": "Renamed the function to `android_create_function_device`",
       "parentUuid": "ae7df782_c178b4a9",
+      "range": {
+        "startLine": 186,
+        "startChar": 18,
+        "endLine": 186,
+        "endChar": 40
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a919a9c7_c4e158dd",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T12:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94d75dec_48bf57d2",
       "range": {
         "startLine": 186,
         "startChar": 18,
