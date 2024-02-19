@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b75e3a2_0dbc9515",
+        "filename": "include/linux/io-pgtable-arm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-19T10:03:46Z",
+      "side": 1,
+      "message": "MAYBE: As this header was moved from `drivers/iommu/` to `include/linux/` we probably want to protect this definitions when `CONFIG_IOMMU_IO_PGTABLE_LPAE` is not defined to prevent linking errors. Wdyth ? (the same applies to the below functions)",
+      "revId": "32156c5b346f59f68044bdb9de01c244d466c1dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
