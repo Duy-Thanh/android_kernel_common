@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bbf7c20_38984253",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-19T15:51:35Z",
+      "side": 1,
+      "message": "I think this loop is a little problematic as -ENOMEM is a pretty common return code for a lot of hypercalls, which might not be solvable by topping up the allocator.\n\nJust looking at potential users quickly, IIUC __pkvm_init_vm() will return -ENOMEM when creating more than 256 concurrent VMs for example. Yep, not very likely to happen in practice, but that would create a livelock which is yuck, and not sure if that problem applies in other locations (but it\u0027s likely we\u0027ll fall in the \u0027trap\u0027 of returning -ENOMEM again in the future if not careful).\n\nSuggested alternative instead of \u0027reserving\u0027 -ENOMEM for allocator purposes: let\u0027s use e.g. r3 which the SMCCC provides us with specifically for this purpose. And then refill_hyp_alloc() becomes `refill_hyp_alloc(__nr_pages, __smc_id, VA_ARGS)` and it calls the underlying hvc macro so it can manipulate the result from the smccc call as you\u0027re doing in the reclaim path already. Thoughts?",
+      "range": {
+        "startLine": 429,
+        "startChar": 1,
+        "endLine": 434,
+        "endChar": 18
+      },
+      "revId": "5ed6b524cea63b9ea8d12f8b6146226458438d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2f7cc02_1cb6a1d9",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 5
