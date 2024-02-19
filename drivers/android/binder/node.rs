@@ -313,7 +313,7 @@ impl Node {
         self.owner
             .inner
             .lock()
-            .update_node_refcount(self, inc, strong, count, None);
+            .update_node_refcount(self, inc, strong, count, None, &self.owner);
     }
 
     pub(crate) fn populate_counts(
@@ -358,6 +358,7 @@ impl Node {
     pub(crate) fn submit_oneway(
         &self,
         transaction: DLArc<Transaction>,
+        process: &Process,
         guard: &mut Guard<'_, ProcessInner, SpinLockBackend>,
     ) -> Result<(), (BinderError, DLArc<dyn DeliverToRead>)> {
         if guard.is_dead {
@@ -369,7 +370,7 @@ impl Node {
             inner.oneway_todo.push_back(transaction);
         } else {
             inner.has_oneway_transaction = true;
-            guard.push_work(transaction)?;
+            guard.push_work(transaction, process)?;
         }
         Ok(())
     }
@@ -399,7 +400,7 @@ impl Node {
         let transaction = inner.oneway_todo.pop_front();
         inner.has_oneway_transaction = transaction.is_some();
         if let Some(transaction) = transaction {
-            match guard.push_work(transaction) {
+            match guard.push_work(transaction, &self.owner) {
                 Ok(()) => {}
                 Err((_err, work)) => {
                     // Process is dead.
@@ -558,7 +559,7 @@ impl NodeRef {
             .owner
             .inner
             .lock()
-            .new_node_ref(self.node.clone(), strong, None))
+            .new_node_ref(self.node.clone(), strong, None, &self.node.owner))
     }
 
     /// Updates (increments or decrements) the number of references held against the node. If the
