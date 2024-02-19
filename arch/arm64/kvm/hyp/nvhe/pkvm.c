@@ -1455,20 +1455,69 @@ out_guest_err:
 	return true;
 }
 
-static bool pkvm_install_ioguard_page(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
+static bool pkvm_install_ioguard_page(struct pkvm_hyp_vcpu *hyp_vcpu,
+				      u64 *exit_code)
 {
-	u64 retval = SMCCC_RET_SUCCESS;
 	u64 ipa = smccc_get_arg1(&hyp_vcpu->vcpu);
-	int ret;
+	u64 nr_pages = smccc_get_arg2(&hyp_vcpu->vcpu);
+	u32 fn = smccc_get_function(&hyp_vcpu->vcpu);
+	u64 retval = SMCCC_RET_SUCCESS;
+	u64 nr_guarded = 0;
+	int ret = -EINVAL;
 
-	ret = __pkvm_install_ioguard_page(hyp_vcpu, ipa);
+	/* Legacy non-range version, arg2|arg3 might be garbage */
+	if (fn == ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID)
+		nr_pages = 1;
+	else if (smccc_get_arg3(&hyp_vcpu->vcpu))
+		goto out_guest_err;
+
+	ret = __pkvm_install_ioguard_page(hyp_vcpu, ipa, nr_pages, &nr_guarded);
 	if (ret == -ENOMEM && !pkvm_handle_empty_memcache(hyp_vcpu, exit_code))
 		return true;
 
+out_guest_err:
 	if (ret)
 		retval = SMCCC_RET_INVALID_PARAMETER;
 
-	smccc_set_retval(&hyp_vcpu->vcpu, retval, 0, 0, 0);
+	smccc_set_retval(&hyp_vcpu->vcpu, retval, nr_guarded, 0, 0);
+	return true;
+}
+
+static bool pkvm_remove_ioguard_page(struct pkvm_hyp_vcpu *hyp_vcpu,
+				     u64 *exit_code)
+{
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
+	u64 nr_pages = smccc_get_arg2(&hyp_vcpu->vcpu);
+	u32 fn = smccc_get_function(&hyp_vcpu->vcpu);
+	u64 retval = SMCCC_RET_SUCCESS;
+	int ret = -EINVAL;
+
+	/* Legacy non-range version, arg2|arg3 might be garbage */
+	if (fn == ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID)
+		nr_pages = 1;
+	else if (smccc_get_arg3(&hyp_vcpu->vcpu))
+		goto out_guest_err;
+
+	if (!test_bit(KVM_ARCH_FLAG_MMIO_GUARD, &vm->kvm.arch.flags))
+		goto out_guest_err;
+
+	/*
+	 * Before 6.12 guests, unmap HVCs could be issued. However this operation
+	 * is not necessary:
+	 *   - ioguard is only there to let the hypervisor know where are the
+	 *   MMIO regions.
+	 *   - MMIO_GUARD_MAP will not fail on multiple calls for the same
+	 *   region.
+	 *
+	 * Keep the HVCs for compatibility reason, but do not do anything.
+	 */
+	ret = 0;
+
+out_guest_err:
+	if (ret)
+		retval = SMCCC_RET_INVALID_PARAMETER;
+
+	smccc_set_retval(&hyp_vcpu->vcpu, retval, nr_pages, 0, 0);
 	return true;
 }
 
@@ -1583,6 +1632,8 @@ bool kvm_handle_pvm_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 		val[0] |= BIT(ARM_SMCCC_KVM_FUNC_MMIO_GUARD_ENROLL);
 		val[0] |= BIT(ARM_SMCCC_KVM_FUNC_MMIO_GUARD_MAP);
 		val[0] |= BIT(ARM_SMCCC_KVM_FUNC_MMIO_GUARD_UNMAP);
+		val[0] |= BIT(ARM_SMCCC_KVM_FUNC_MMIO_RGUARD_MAP);
+		val[0] |= BIT(ARM_SMCCC_KVM_FUNC_MMIO_RGUARD_UNMAP);
 		val[0] |= BIT(ARM_SMCCC_KVM_FUNC_MEM_RELINQUISH);
 		break;
 	case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_ENROLL_FUNC_ID:
@@ -1590,13 +1641,11 @@ bool kvm_handle_pvm_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 		val[0] = SMCCC_RET_SUCCESS;
 		break;
 	case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID:
+	case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_RGUARD_MAP_FUNC_ID:
 		return pkvm_install_ioguard_page(hyp_vcpu, exit_code);
 	case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID:
-		if (__pkvm_remove_ioguard_page(hyp_vcpu, vcpu_get_reg(vcpu, 1)))
-			val[0] = SMCCC_RET_INVALID_PARAMETER;
-		else
-			val[0] = SMCCC_RET_SUCCESS;
-		break;
+	case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_RGUARD_UNMAP_FUNC_ID:
+		return pkvm_remove_ioguard_page(hyp_vcpu, exit_code);
 	case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_INFO_FUNC_ID:
 	case ARM_SMCCC_VENDOR_HYP_KVM_HYP_MEMINFO_FUNC_ID:
 		return pkvm_meminfo_call(hyp_vcpu);
