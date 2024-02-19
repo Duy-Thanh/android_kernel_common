@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2fc0338_f945ecbb",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-19T16:14:02Z",
+      "side": 1,
+      "message": "Or ENOSR",
+      "parentUuid": "36a36239_3cd40eeb",
+      "range": {
+        "startLine": 429,
+        "startChar": 1,
+        "endLine": 434,
+        "endChar": 18
+      },
+      "revId": "5ed6b524cea63b9ea8d12f8b6146226458438d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2f7cc02_1cb6a1d9",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 5
