@@ -16,6 +16,24 @@
       "message": "That is a fused change out of a cherry-pick of 4ca8a0bc83543a0d29a7f5a8b1e8ef3c23dab242 and a partial cherry-pick of https://android.googlesource.com/kernel/common/+/29f006fdefe6f88abde973a0b0f20d2704e93fd4. Please separate the picked changes. Please also clarify why 29f006fdefe6f88abde973a0b0f20d2704e93fd4 is not entirely applied.",
       "revId": "f5a76f7486056616148992d352db6e9a225e4136",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9132c088_1f609035",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3278615
+      },
+      "writtenOn": "2024-02-19T10:33:06Z",
+      "side": 1,
+      "message": "There is a big change between upstream and android12-5.10 codebase, so I cannot backport full change of 29f006fdefe6f88abde973a0b0f20d2704e93fd4 into android12-5.10 codebase, For the change of 4ca8a0bc83543a0d29a7f5a8b1e8ef3c23dab242, we only need to use try_cmpxchg(), so it\u0027s not necessary backport full change of 29f006fdefe6f88abde973a0b0f20d2704e93fd4.\n\nThis patch is introduced to fix the critical race issue for platforms support MTE on android12-5.10 codebase.\n\nWill it be fine if I separate the partial cherry-pick change from this change?\nThanks",
+      "parentUuid": "c22234c3_888fd851",
+      "revId": "f5a76f7486056616148992d352db6e9a225e4136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
