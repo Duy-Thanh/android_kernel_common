@@ -22,6 +22,30 @@
       },
       "revId": "8df2daa52ffac5a11a9834ac369db737697eff9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "049a804b_a60b1cf8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-19T18:43:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcc2a2b1_5f860f61",
+      "range": {
+        "startLine": 662,
+        "startChar": 2,
+        "endLine": 667,
+        "endChar": 3
+      },
+      "revId": "8df2daa52ffac5a11a9834ac369db737697eff9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
