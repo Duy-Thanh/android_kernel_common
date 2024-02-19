@@ -119,6 +119,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "926927e7_b1473c3d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-19T16:03:18Z",
+      "side": 1,
+      "message": "Nit: this guy is guaranteed page-aligned, so it\u0027s got 12 (or more with \u003e 4K page sizes) \u0027unused\u0027 bits which are probably enough to hide nr_pages (I guess we should make it a u8, but that should be plenty), so we could squash \u0027head\u0027 and \u0027nr_pages\u0027 in a single u64. But it\u0027s a bit of a hack so no need to change that for now. Maybe something to keep in mind if we run out of return registers 😊",
+      "range": {
+        "startLine": 1351,
+        "startChar": 25,
+        "endLine": 1351,
+        "endChar": 33
+      },
+      "revId": "5ed6b524cea63b9ea8d12f8b6146226458438d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0086bcc5_7c7dcd1d",
