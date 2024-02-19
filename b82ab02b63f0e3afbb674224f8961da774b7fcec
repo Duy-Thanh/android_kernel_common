@@ -142,6 +142,30 @@
       },
       "revId": "b82ab02b63f0e3afbb674224f8961da774b7fcec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77076280_e03b8097",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-19T13:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2147f12a_f1cea811",
+      "range": {
+        "startLine": 503,
+        "startChar": 1,
+        "endLine": 503,
+        "endChar": 7
+      },
+      "revId": "b82ab02b63f0e3afbb674224f8961da774b7fcec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
