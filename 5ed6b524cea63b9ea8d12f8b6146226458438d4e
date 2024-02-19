@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "190eb078_7a934082",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-19T16:08:08Z",
+      "side": 1,
+      "message": "That would mean changing __all__ the HVCs that are using the allocator and that\u0027s few of them now :-\\\n\nHow about I just modify the ENOMEM from the vm_table into EBUSY?\n\nAlso, Mostafa suggested we could in the future actually use the hyp_alloc for that vm_table",
+      "parentUuid": "9bbf7c20_38984253",
+      "range": {
+        "startLine": 429,
+        "startChar": 1,
+        "endLine": 434,
+        "endChar": 18
+      },
+      "revId": "5ed6b524cea63b9ea8d12f8b6146226458438d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2f7cc02_1cb6a1d9",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 5
