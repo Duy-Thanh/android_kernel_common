@@ -274,6 +274,19 @@ impl<T: ForeignOwnable> XArray<T> {
         }
     }
 
+    /// Returns an iterator over the xarray's indices and values.
+    pub fn iter(&self) -> XArrayIterator<'_, T> {
+        XArrayIterator {
+            arr: &self,
+            current_index: Self::to_index(0),
+        }
+    }
+
+    /// Returns an iterator over the xarray's values.
+    pub fn values(&self) -> impl Iterator<Item = &'_ T> {
+        self.iter().map(|(_, v)| v)
+    }
+
     /// Allocates a new index in the array, optionally storing a new value into it, with
     /// configurable bounds for the index range to allocate from.
     ///
@@ -388,6 +401,39 @@ impl<T: ForeignOwnable> PinnedDrop for XArray<T> {
         unsafe {
             bindings::xa_destroy(self.xa.get());
         }
+    }
+}
+
+/// An iterator over the nodes of a [`XArray`].
+///
+/// Instances are created by calling [`XArray::iter`].
+pub struct XArrayIterator<'a, T: ForeignOwnable> {
+    arr: &'a XArray<T>,
+    current_index: c_ulong,
+}
+
+impl<'a, T: ForeignOwnable> Iterator for XArrayIterator<'a, T> {
+    type Item = (usize, &'a T);
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let mut updated_index = self.current_index;
+        let p = unsafe { bindings::xa_find(
+            self.arr.xa.get(),
+            &mut updated_index,
+            core::ffi::c_ulong::MAX,    
+            bindings::XA_PRESENT,
+        ) };
+
+        if p.is_null() {
+            return None;
+        }
+
+        if self.current_index == updated_index {
+            updated_index += 1;
+        }
+
+        self.current_index = updated_index;
+        Some((updated_index as usize, unsafe { &*p.cast::<T>() }))
     }
 }
 
