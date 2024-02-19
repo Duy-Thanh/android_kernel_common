@@ -34,6 +34,24 @@
       "parentUuid": "ccb849dc_17146f3c",
       "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24a79fad_28730cb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3278615
+      },
+      "writtenOn": "2024-02-19T10:50:29Z",
+      "side": 1,
+      "message": "\u003e Ignore the following comment, will it be fine if synchronously update the KMI interface (abi_gki_aarch64.xml) to avoid the breaks KMI?",
+      "parentUuid": "f5a50105_986bffef",
+      "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
