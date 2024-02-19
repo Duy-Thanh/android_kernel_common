@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c8db97_78c69f07",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-02-19T15:31:22Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelSymbolTracker: Missing tracepoint symbols for the following traceiter symbols:\n\nAnalyzer Description: Reports KMI symbol presence status across android branches.\nOwner: gki-eng-team@google.com\n\nMissing tracepoint symbols for the following traceiter symbols:\n  __traceiter_sched_stat_iowait",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "a76a2a60c9d1bc01403ffe0990e0edbe71fe2135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
