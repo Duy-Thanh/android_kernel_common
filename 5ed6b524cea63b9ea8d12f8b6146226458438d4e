@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6564cf86_aec709ee",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1350,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-19T15:23:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ba52a99_d38c43ad",
+      "range": {
+        "startLine": 1350,
+        "startChar": 1,
+        "endLine": 1350,
+        "endChar": 27
+      },
+      "revId": "5ed6b524cea63b9ea8d12f8b6146226458438d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0086bcc5_7c7dcd1d",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "This is to get access to res.a2 and res.a3",
       "parentUuid": "0086bcc5_7c7dcd1d",
+      "range": {
+        "startLine": 894,
+        "startChar": 2,
+        "endLine": 897,
+        "endChar": 9
+      },
+      "revId": "5ed6b524cea63b9ea8d12f8b6146226458438d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b168e02_1c851340",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-19T15:23:01Z",
+      "side": 1,
+      "message": "Well now it\u0027ll only be \"res.a2\"",
+      "parentUuid": "319d8604_d29b7df1",
       "range": {
         "startLine": 894,
         "startChar": 2,
