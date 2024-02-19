@@ -34,6 +34,24 @@
       "parentUuid": "c22234c3_888fd851",
       "revId": "f5a76f7486056616148992d352db6e9a225e4136",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e3fa755_53f55176",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-19T12:27:42Z",
+      "side": 1,
+      "message": "If you\u0027re not able to backport the upstream patches directly, then please can you work with the upstream community to get a fix agreed on for the stable 5.10 kernel? Then we can cherry-pick that into android12-5.10, knowing that it\u0027s been reviewed by the right experts on the mailing list. Thanks.",
+      "parentUuid": "9132c088_1f609035",
+      "revId": "f5a76f7486056616148992d352db6e9a225e4136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
