@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66082ecd_3ccd79ee",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-19T16:29:07Z",
+      "side": 1,
+      "message": "\u003e How about I just modify the ENOMEM from the vm_table into EBUSY?\n\nI think we have a problem with the SVE state thingy as well which probably wants to be using the allocator anyway. I can\u0027t immediately see anything else in the code we currently have, but I\u0027m a little scared that we\u0027ll re-introduce another instance of this bug accidentally in the future. Maybe we can go ahead with your proposal for now given the urgency, but we ought to clean this up sooner rather than later IMO.\n\n\u003e Also, Mostafa suggested we could in the future actually use the hyp_alloc for that vm_table\n\nFWIW that\u0027s not really going to help here in the short term I think. Even if you were thinking of dynamically extending the size of the table, there are other problems we\u0027ll need to fix before we can make all this truly dynamic (e.g. re-using VMIDs when we have more VMs than the architectural limit, ...).",
+      "parentUuid": "c2fc0338_f945ecbb",
+      "range": {
+        "startLine": 429,
+        "startChar": 1,
+        "endLine": 434,
+        "endChar": 18
+      },
+      "revId": "5ed6b524cea63b9ea8d12f8b6146226458438d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2f7cc02_1cb6a1d9",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 5
