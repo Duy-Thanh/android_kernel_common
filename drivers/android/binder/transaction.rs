@@ -276,7 +276,7 @@ impl Transaction {
                             target_node.take_outdated_transaction(&self, &mut process_inner);
                     }
                 }
-                match target_node.submit_oneway(self, &mut process_inner) {
+                match target_node.submit_oneway(self, &process, &mut process_inner) {
                     Ok(()) => return Ok(()),
                     Err((err, work)) => {
                         drop(process_inner);
@@ -301,7 +301,7 @@ impl Transaction {
                 PushWorkRes::FailedDead(me) => Err((BinderError::new_dead(), me)),
             }
         } else {
-            process_inner.push_work(self)
+            process_inner.push_work(self, &process)
         };
         drop(process_inner);
 
