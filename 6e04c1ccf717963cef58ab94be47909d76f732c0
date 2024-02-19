@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4d99884_96c320f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-19T17:46:46Z",
+      "side": 1,
+      "message": "abi changes are \"safe\" they come directly from the `android14-6.1` branch.",
+      "revId": "6e04c1ccf717963cef58ab94be47909d76f732c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
