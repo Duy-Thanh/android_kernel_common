@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eed8fa6_4ee26c37",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2024-02-19T03:21:32Z",
+      "side": 1,
+      "message": "Hi John,\n\nCould this be set to false by default?\nI think it would be better for it to be closed until the cpu selection issue is resolved.\n\nBR",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 43
+      },
+      "revId": "294086c4d3dbf38c2b32d880272928b0f85727d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
