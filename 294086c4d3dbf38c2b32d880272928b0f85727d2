@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d270ecc_7f0caae3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-02-20T19:34:05Z",
+      "side": 1,
+      "message": "Thanks for the review and feedback! Your concern is valid, but this submission is just for testing right now (so it is default enabled to make it easier with automation). \n\nThough I\u0027d love to get any further feedback either here in Gerrit or on lkml with your concerns or thoughts.",
+      "revId": "294086c4d3dbf38c2b32d880272928b0f85727d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9eed8fa6_4ee26c37",
@@ -14,6 +31,30 @@
       "writtenOn": "2024-02-19T03:21:32Z",
       "side": 1,
       "message": "Hi John,\n\nCould this be set to false by default?\nI think it would be better for it to be closed until the cpu selection issue is resolved.\n\nBR",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 43
+      },
+      "revId": "294086c4d3dbf38c2b32d880272928b0f85727d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06c108fc_59867eba",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-02-20T19:34:05Z",
+      "side": 1,
+      "message": "Yes! This change won\u0027t go into android common without the default being set to false. This is set this way for testing purposes right now.\n\nI do also have a patch to address your concern about the cpu-selection on return migration (migrating back to wake cpu). I\u0027m hoping to include it in v9, but I wanted to make sure it didn\u0027t adversely affect performance in other cases.",
+      "parentUuid": "9eed8fa6_4ee26c37",
       "range": {
         "startLine": 127,
         "startChar": 0,
