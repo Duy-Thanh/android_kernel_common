@@ -238,6 +238,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2617a726_4d312603",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1874590
+      },
+      "writtenOn": "2024-02-20T22:52:07Z",
+      "side": 1,
+      "message": "Hi Eric,\nIn AAOS (Android for automotive) kernel lockdown implementation prevents CarPowerManagementService from triggering transition to suspend(ram, disk). Suspend work in Android that doesn\u0027t use kernel 5.15, however 5.15 is used by automotive partners for Android 13. To unblock suspend functionality for automotive Android this patch need to be backported to kernel 5.15.",
+      "parentUuid": "0db78bf0_208188a2",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
