@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fc21f15_391715cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-20T15:34:27Z",
+      "side": 1,
+      "message": "this adds `trace_android_vh_binder_free_buf()` but change 2968562 claims this was a mistake and instead need to use `trace_android_vh_binder_buffer_release()`",
+      "revId": "f0e54736ffa494772f6658f4be17980bcff53a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
