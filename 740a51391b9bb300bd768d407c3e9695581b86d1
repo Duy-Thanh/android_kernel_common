@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "322bf9b9_291fe98a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3488,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-20T15:40:12Z",
+      "side": 1,
+      "message": "this was renamed to `trace_android_vh_alloc_oem_binder_struct()` in the code but wasn\u0027t updated in the commit message :(",
+      "revId": "740a51391b9bb300bd768d407c3e9695581b86d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
