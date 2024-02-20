@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff7cb52f_261ebbce",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-20T17:04:25Z",
+      "side": 1,
+      "message": "This is a bit tricky because under \"kvm.arm_mode\u003dprotected\" the hypervisor manages the pagetables of the guest and the patch requires some modifications from the original upstream (FROMLIST).",
+      "revId": "481634ffde8c44e40aa80d9d766f885e021e9031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
