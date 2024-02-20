@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b229af6f_34974d91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3278615
+      },
+      "writtenOn": "2024-02-20T08:09:28Z",
+      "side": 1,
+      "message": "Hi Todd,\nCurrently, there are various global init exit issues encountered\non Andriod bootup flow. It\u0027s hard to debug these issues on product\nenvironment without a usable coredump.\nFor example, it\u0027s hard to get the root cause why init task is killed by sigbus and sigsegv from the below kmsg:\n[ 4.696032][T400001] e2fsck: /dev/block/by-name/metadata: clean, 35/8192 files, 2083/8192 blocks\n[ 4.696783][T500326] [bq27z561] fg_debug_dump_regs: slave_dump:Reg[0x0073] \u003d 0x05C5\n[ 4.700583][T400001] EXT4-fs (sdc17): mounted filesystem with ordered data mode. Opts: discard\n[ 4.706445][T400001] Kernel panic - not syncing: Attempted to kill init! exitcode\u003d0x00007f0000\n[ 4.706459][T400001] CPU: 4 PID: 1 Comm: init Tainted: G S W 5.10.136-android12-9-00005-gf9a66cbe7091-ab9177899 #1\n[ 4.706464][T400001] Hardware name: MT6983Z/TCZA (DT)\n[ 4.706469][T400001] Call trace:\n[ 4.706482][T400001] dump_backtrace.cfi_jt+0x0/0x8\n[ 4.706493][T400001] dump_stack_lvl+0xc4/0x140\n[ 4.706504][T400001] panic+0x178/0x464\n[ 4.706511][T400001] do_exit+0xb30/0xf9c\n[ 4.706517][T400001] do_group_exit+0x130/0x1c8\n[ 4.706523][T400001] do_group_exit+0x0/0x1c8\n[ 4.706529][T400001] __do_sys_exit_group+0x0/0x18\n[ 4.706535][T400001] __se_sys_exit_group+0x0/0x14\n[ 4.706543][T400001] el0_svc_common+0xd4/0x270\n[ 4.706551][T400001] el0_svc+0x28/0x88\n[ 4.706559][T400001] el0_sync_handler+0x8c/0xf0\n[ 4.706567][T400001] el0_sync+0x1b4/0x1c0\n\nSo I have tried to submit a patch to upstream which dump the last\nexit thread executable sections and registers info to get the exit reason\nbefore panic.\nhttps://lore.kernel.org/lkml/20231110032043.34516-1-qiwu.chen@transsion.com/T/\nMaintainer Oleg agreed that the more info\nthe better, but someone else should ACK this patch.\n\nThis patch add hook in task exiting routine, will be helpful for OEMs to trace any exiting tasks to be noticed.\nThanks",
+      "parentUuid": "c7e1e17e_1f018fe8",
+      "revId": "9597c1f9f427eed6a377c20da61502da358a4f61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a4865d7_73f0a289",
         "filename": "drivers/android/vendor_hooks.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-06T18:57:33Z",
       "side": 1,
       "message": "Move up to line 517",
+      "revId": "9597c1f9f427eed6a377c20da61502da358a4f61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23d2ba00_bd813ef6",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 3278615
+      },
+      "writtenOn": "2024-02-20T08:09:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3a4865d7_73f0a289",
       "revId": "9597c1f9f427eed6a377c20da61502da358a4f61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
