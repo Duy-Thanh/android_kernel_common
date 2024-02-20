@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e0c56e_d2537613",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-20T11:17:22Z",
+      "side": 1,
+      "message": "there\u0027s conflicting patches upstream for this, don\u0027t take this just yet until it\u0027s all straightened out please.",
+      "revId": "93c364354197630ffdfd1cb01a2fb02fd398655c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
