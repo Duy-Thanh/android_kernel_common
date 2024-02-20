@@ -70,6 +70,24 @@
       "parentUuid": "24a79fad_28730cb3",
       "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d4ba43e_84dc115f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3278615
+      },
+      "writtenOn": "2024-02-20T07:43:13Z",
+      "side": 1,
+      "message": "Are there any unfrozen KMI branches for this patch accept?\nCurrently, there are many futex blocked issues reported on GKI-5.10 codebase, we expect this patch could be accepted to trace the futex owner. \nThanks",
+      "parentUuid": "e2a4ec6a_9e09e20f",
+      "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
