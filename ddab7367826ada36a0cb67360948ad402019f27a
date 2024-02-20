@@ -262,6 +262,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b55a5df_b5942a1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-02-20T23:02:11Z",
+      "side": 1,
+      "message": "That issue occurs because Android is denying the \"integrity\" permission, right?  If so, can\u0027t the issue be fixed either by updating Android to stop denying the \"integrity\" permission, *or* by backporting this upstream patch that makes the \"integrity\" permission stop being enforced?  It seems that a decision was made to use the second solution instead of the first --- why?  If this security policy is really ineffective, how come it hasn\u0027t been removed from Android yet?",
+      "parentUuid": "2617a726_4d312603",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
