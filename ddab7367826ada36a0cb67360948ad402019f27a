@@ -286,6 +286,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e60ac6d7_b61c0ce2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2024-02-20T23:53:36Z",
+      "side": 1,
+      "message": "That\u0027s right. The reason is to avoid the spread of lockdown rules in vendors\u0027 policies. For the AAOS case, if we removed the neverallow now, OEMs will start adding allow rules. This will make any further clean up more tedious down the road.\n\nSince this access vector (lockdown) was found not appropriate for SELinux and is not available in the current kernel version, we know that it needs to be removed so let\u0027s stop it early.\n\nBut I agree, once it is backported and we don\u0027t have any supported kernel relying on that rule (I believe 5.15 is the only branch), then we can remove the neverallow from the policy.",
+      "parentUuid": "9b55a5df_b5942a1e",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
