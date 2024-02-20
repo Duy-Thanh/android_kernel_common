@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14c6f9b1_0c7ef3bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-02-20T19:12:45Z",
+      "side": 1,
+      "message": "Please address the following failure for this and other UFS driver CLs:\n```\nChange 2965162 needs to be rebased on top of the latest version of its parent (Change 2964643). Please rebase your entire stack of patches to be up-to-date.\n```",
+      "revId": "49da856540f221286d43f94196dbc8d1e67e3548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
