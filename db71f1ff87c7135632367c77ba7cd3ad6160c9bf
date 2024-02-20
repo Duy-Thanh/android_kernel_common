@@ -162,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b97a41cb_37b85d50",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-20T18:31:17Z",
+      "side": 1,
+      "message": "The addition of this lock could cause a deadlock scenario.\n\nThe existing code locks cdev-\u003elock prior to calling reset_config() - see __composite_disconnect().\n\nandroid_set_unconfigured() calls __android_set_configured() which locks the android specific structure.",
+      "parentUuid": "21074c25_bf36ff85",
+      "range": {
+        "startLine": 860,
+        "startChar": 0,
+        "endLine": 860,
+        "endChar": 47
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e58ddb42_05f90493",
         "filename": "drivers/usb/gadget/composite.c",
         "patchSetId": 9
@@ -221,6 +245,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "b63184d7_9b419685",
+      "range": {
+        "startLine": 1703,
+        "startChar": 1,
+        "endLine": 1703,
+        "endChar": 22
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79e9ff14_81cbeac9",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-20T18:31:17Z",
+      "side": 1,
+      "message": "Similar to above, I believe locking cdev-\u003elock is unnecessary, as android_set_connected() calls __android_set_connected(), which locks the android specific structure.",
+      "parentUuid": "01d11ab3_490853f5",
       "range": {
         "startLine": 1703,
         "startChar": 1,
