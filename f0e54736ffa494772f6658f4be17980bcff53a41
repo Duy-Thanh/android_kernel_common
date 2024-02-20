@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "345eb320_cd2bb3e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-02-20T15:40:02Z",
+      "side": 1,
+      "message": "this is no longer correct and should be `trace_android_vh_alloc_oem_binder_struct()` according to this patch.",
+      "range": {
+        "startLine": 11,
+        "startChar": 37,
+        "endLine": 11,
+        "endChar": 79
+      },
+      "revId": "f0e54736ffa494772f6658f4be17980bcff53a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6fc21f15_391715cd",
