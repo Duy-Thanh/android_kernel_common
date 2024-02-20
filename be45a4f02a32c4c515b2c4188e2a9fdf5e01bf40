@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff786ed_dd0007e7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-20T11:34:24Z",
+      "side": 1,
+      "message": "Nit: I guess these could maybe use a small comment to say \u0027see  kvm_call_refill_hyp_nvhe()\u0027 or something.",
+      "range": {
+        "startLine": 1219,
+        "startChar": 1,
+        "endLine": 1219,
+        "endChar": 55
+      },
+      "revId": "be45a4f02a32c4c515b2c4188e2a9fdf5e01bf40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
