@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a86a4304_29771cf2",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-02-20T19:18:26Z",
+      "side": 1,
+      "message": "Instead of adding two vendorhooks to the same function, can we consolidate these a bit?\n\nAssuming it has no side effects, you might first check the vtime_accounting_enabled_this_cpu(), and then call trace_android_vh_account_task_time() which can also return ticks ?\n\nIs there some reason I\u0027m missing why two of these hooks are needed?",
+      "revId": "d2c2d90c7a128456f01b7a8c9d6fbcd6be89372e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
