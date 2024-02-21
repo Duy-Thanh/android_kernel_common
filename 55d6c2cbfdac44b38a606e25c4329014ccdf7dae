@@ -88,6 +88,24 @@
       "parentUuid": "76e73e69_589c6cf5",
       "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e730573_a015964e",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-21T14:06:46Z",
+      "side": 1,
+      "message": "It is easy to track shared memory for the !protected VMs, the vmRSS gives you this and you would see problems there. So having this counter here does not bring anything interesting.\n\nThe definition for Android14 of this counter is \"memory that was protected but is now shared\". This is important, because we want to make sure we don\u0027t accidentally share too much memory. (or leave anything shared...)\n\nIf we would to account for all the memory of !protected VMs, we break this ABI in Android15. We change its meaning. Android14 expects this counter to be 0 for !protected vm.",
+      "parentUuid": "6a144efb_f3ffed81",
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
