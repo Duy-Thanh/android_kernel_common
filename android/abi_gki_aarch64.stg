@@ -291399,6 +291399,11 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x12c61c4f
+  return_type_id: 0x48b5725f
+  parameter_id: 0x09793771
+}
+function {
   id: 0x12c79320
   return_type_id: 0xd5cc9c9a
   parameter_id: 0x18ea6ae3
@@ -328468,6 +328473,11 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x6720d32f
   parameter_id: 0x1bf16028
+}
+function {
+  id: 0x9fdeaef3
+  return_type_id: 0x6720d32f
+  parameter_id: 0x09793771
 }
 function {
   id: 0x9fe1d618
@@ -401616,6 +401626,15 @@ elf_symbol {
   full_name: "xt_find_match"
 }
 elf_symbol {
+  id: 0x7a3f2cd6
+  name: "xt_register_match"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbcad6010
+  type_id: 0x9fdeaef3
+  full_name: "xt_register_match"
+}
+elf_symbol {
   id: 0xffcb0fa2
   name: "xt_request_find_match"
   is_defined: true
@@ -401632,6 +401651,15 @@ elf_symbol {
   crc: 0x3f5ba116
   type_id: 0x0118ea6e
   full_name: "xt_request_find_target"
+}
+elf_symbol {
+  id: 0x807b9318
+  name: "xt_unregister_match"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x46432d8a
+  type_id: 0x12c61c4f
+  full_name: "xt_unregister_match"
 }
 elf_symbol {
   id: 0x0fc8c78d
@@ -409381,8 +409409,10 @@ interface {
   symbol_id: 0x5a8a6a49
   symbol_id: 0x8eb67e0f
   symbol_id: 0xf6d0be30
+  symbol_id: 0x7a3f2cd6
   symbol_id: 0xffcb0fa2
   symbol_id: 0xa2ee5f12
+  symbol_id: 0x807b9318
   symbol_id: 0x0fc8c78d
   symbol_id: 0xe8e0ea6a
   symbol_id: 0xa5d58813
