@@ -52,6 +52,24 @@
       "parentUuid": "94259ea7_224b4672",
       "revId": "f55a8b9c2bbc2a4e06927c58ccb4e02c0ebb6c80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df0c0cb2_f32c0516",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-21T17:45:51Z",
+      "side": 1,
+      "message": "Hum, giving more thoughts, couldn\u0027t that be a problem with block mapping? \n\nThe walker would stop at the start of that block and only check for the \"Head Page\" in the vmemmap. But different portions of that block could have different sharing flags e.g. SHARED_OWNED, SHARED_BORROWED.\n\nIn other word, aren\u0027t we only checking part of the vmemmap?",
+      "parentUuid": "8e80b2a8_165eaaa6",
+      "revId": "f55a8b9c2bbc2a4e06927c58ccb4e02c0ebb6c80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
