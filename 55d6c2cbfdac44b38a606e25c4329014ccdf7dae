@@ -106,6 +106,24 @@
       "parentUuid": "6a144efb_f3ffed81",
       "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78981399_de266f08",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T14:28:46Z",
+      "side": 1,
+      "message": "vmRSS gives you the sum of the size of the memory portions and I cannot extract how many pages were used by the VM pagetable from this.",
+      "parentUuid": "7e730573_a015964e",
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
