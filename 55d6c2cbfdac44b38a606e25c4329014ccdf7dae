@@ -16,6 +16,24 @@
       "message": "Q: What if we spawn a non-protected VM under protected ? Why don\u0027t we account for shared memory in this case ? Maybe we want to check if the system is running under protected mode ?",
       "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9a11005_ac61ee18",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-21T11:27:14Z",
+      "side": 1,
+      "message": "In that case, you can just check the entire vm footprint :-)\n\nThat\u0027s why it\u0027s called \"protected_shared\" It\u0027s like protected_but_shared. \n\nIt intends to make sure we don\u0027t leave things shared while they shouldn\u0027t.",
+      "parentUuid": "fabcd511_fbf05e72",
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
