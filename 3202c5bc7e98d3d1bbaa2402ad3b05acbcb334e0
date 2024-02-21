@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e15cfb_e405712b",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T10:02:33Z",
+      "side": 1,
+      "message": "Q: Is there a reason why you skipped defining `ARM_SMCCC_KVM_FUNC_MMIO_RGUARD_MAP` as 9 ? Does it conflicts with another definition ?",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6e9511_414afab9",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T10:02:33Z",
+      "side": 1,
+      "message": "The detection for this seems to be pretty early during boot path. We can define it like `static __ro_after_init DEFINE_STATIC_KEY_FALSE(guard_has_range)`",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7df6cad_45748490",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T10:02:33Z",
+      "side": 1,
+      "message": "MAYBE: s/__done/granule_size/ ?",
+      "range": {
+        "startLine": 156,
+        "startChar": 20,
+        "endLine": 156,
+        "endChar": 26
+      },
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b89781f_97a41877",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T10:02:33Z",
+      "side": 1,
+      "message": "MAYBE: IS_ALIGNED(size, guard_granule) ? (same for line 195)",
+      "range": {
+        "startLine": 180,
+        "startChar": 12,
+        "endLine": 180,
+        "endChar": 25
+      },
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "524e90a9_a381b6c9",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T10:02:33Z",
+      "side": 1,
+      "message": "Q: MA_STATE initializes the index with `phys_addr`, then `mas_find` starts searching from the `phys_addr` to `phys_addr + size - 1`. I think it is enough to test `mas.index` \u003d\u003d `phys_addr`, wdyt ?",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5554f2bd_1719b37d",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T10:02:33Z",
+      "side": 1,
+      "message": "MAYBE: Move the entry test before obtaining the refcount.",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78f33d86_8fdb1769",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T10:02:33Z",
+      "side": 1,
+      "message": "Q: Shouldn\u0027t we check for `slab_is_available()` before using `GFP_KERNEL` or we can assume that it is already available ?",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
