@@ -301263,6 +301263,13 @@ function {
   parameter_id: 0x0258f96e
 }
 function {
+  id: 0x32ed092e
+  return_type_id: 0x33756485
+  parameter_id: 0x0258f96e
+  parameter_id: 0xf1a6dfed
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x33281d02
   return_type_id: 0x33756485
   parameter_id: 0x0a134144
@@ -317109,6 +317116,13 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x1ddf3f71
   parameter_id: 0x391f15ea
+}
+function {
+  id: 0x9a14f19b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18456730
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
 }
 function {
   id: 0x9a16828c
@@ -354843,6 +354857,15 @@ elf_symbol {
   full_name: "devm_get_clk_from_child"
 }
 elf_symbol {
+  id: 0x4f3cedfb
+  name: "devm_get_free_pages"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4c601a67
+  type_id: 0x32ed092e
+  full_name: "devm_get_free_pages"
+}
+elf_symbol {
   id: 0x15a83ee8
   name: "devm_gh_rm_register_platform_ops"
   is_defined: true
@@ -370408,6 +370431,15 @@ elf_symbol {
   crc: 0xfa1d4761
   type_id: 0x1923cb99
   full_name: "kill_litter_super"
+}
+elf_symbol {
+  id: 0x95c81f5f
+  name: "kill_pid"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb5a8e08b
+  type_id: 0x9a14f19b
+  full_name: "kill_pid"
 }
 elf_symbol {
   id: 0x053e25cb
@@ -404186,6 +404218,7 @@ interface {
   symbol_id: 0x3a75a119
   symbol_id: 0x5b50e567
   symbol_id: 0xd4aa5b9b
+  symbol_id: 0x4f3cedfb
   symbol_id: 0x15a83ee8
   symbol_id: 0x010f4f76
   symbol_id: 0x33c681cd
@@ -405913,6 +405946,7 @@ interface {
   symbol_id: 0xe657d525
   symbol_id: 0x661955d6
   symbol_id: 0xd6a8ff16
+  symbol_id: 0x95c81f5f
   symbol_id: 0x053e25cb
   symbol_id: 0x567c8a8a
   symbol_id: 0xbc2dc163
