@@ -52,6 +52,24 @@
       "parentUuid": "9132c088_1f609035",
       "revId": "f5a76f7486056616148992d352db6e9a225e4136",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd810e9_9db04b59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3278615
+      },
+      "writtenOn": "2024-02-21T03:43:51Z",
+      "side": 1,
+      "message": "The HW-tag-based KASAN feature is introduced since kernel tag version 5.11, which is not supported on upstream stable 5.10 kernel. Since try_cmpxchg() is not used by someone in stable 5.10 kernel tree, I think introducing try_cmpxchg() fallback won\u0027t be accepted by upstream.",
+      "parentUuid": "7e3fa755_53f55176",
+      "revId": "f5a76f7486056616148992d352db6e9a225e4136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
