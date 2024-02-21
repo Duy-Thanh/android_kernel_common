@@ -160,6 +160,29 @@
       "parentUuid": "81b199f9_e9610da9",
       "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55cac663_f272c02a",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-21T17:39:30Z",
+      "side": 1,
+      "message": "Do we need this? IIRC, EL2 quite rightly won\u0027t let the host mess with the return status of share/unshare.",
+      "range": {
+        "startLine": 392,
+        "startChar": 2,
+        "endLine": 392,
+        "endChar": 29
+      },
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
