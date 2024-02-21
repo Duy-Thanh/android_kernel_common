@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4837dbb3_2f32dca4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-21T17:23:42Z",
+      "side": 1,
+      "message": "Might be cleaner to have the wrapper do the allocation as well?",
+      "range": {
+        "startLine": 50,
+        "startChar": 19,
+        "endLine": 50,
+        "endChar": 36
+      },
+      "revId": "b4e967a5fbc8089691b7ee889430db5670103559",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
