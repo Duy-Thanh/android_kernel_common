@@ -70,6 +70,24 @@
       "parentUuid": "8e80b2a8_165eaaa6",
       "revId": "f55a8b9c2bbc2a4e06927c58ccb4e02c0ebb6c80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2b55376_83421b6d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-21T18:03:34Z",
+      "side": 1,
+      "message": "Hmm, uh oh... My WiP patch that kills the page-table walk fixes that by construction, so the best option is probably to just squash it in here. I\u0027ll see how bad it is to do things incrementally and keep the patches separated, but probably not worth fighting too hard. Thanks for the review!",
+      "parentUuid": "df0c0cb2_f32c0516",
+      "revId": "f55a8b9c2bbc2a4e06927c58ccb4e02c0ebb6c80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
