@@ -88,6 +88,24 @@
       "parentUuid": "e2a4ec6a_9e09e20f",
       "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a38994_9134902c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-21T18:09:03Z",
+      "side": 1,
+      "message": "All `android12-*` and `android13-*` and `android11-*` branches have their ABI frozen, sorry.",
+      "parentUuid": "6d4ba43e_84dc115f",
+      "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
