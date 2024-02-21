@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fab7da60_340ded77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-21T08:48:57Z",
+      "side": 1,
+      "message": "This doesn\u0027t make sense as a Fixes line, as I think you are referring to the upstream version of the commit you are backporting.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 88
+      },
+      "revId": "f5a76f7486056616148992d352db6e9a225e4136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c22234c3_888fd851",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -68,6 +91,24 @@
       "side": 1,
       "message": "The HW-tag-based KASAN feature is introduced since kernel tag version 5.11, which is not supported on upstream stable 5.10 kernel. Since try_cmpxchg() is not used by someone in stable 5.10 kernel tree, I think introducing try_cmpxchg() fallback won\u0027t be accepted by upstream.",
       "parentUuid": "7e3fa755_53f55176",
+      "revId": "f5a76f7486056616148992d352db6e9a225e4136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4679fb5_2020827f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-21T08:48:57Z",
+      "side": 1,
+      "message": "The commit being fixed (2813b9c02962) is present in 5.10.y, so I think this fix can apply there as well. You should probably rework the code to use cmpxchg() instead of try_cmpxchg().",
+      "parentUuid": "7dd810e9_9db04b59",
       "revId": "f5a76f7486056616148992d352db6e9a225e4136",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
