@@ -34,6 +34,24 @@
       "parentUuid": "fabcd511_fbf05e72",
       "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e24c1676_af51e46b",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T11:33:23Z",
+      "side": 1,
+      "message": "As a user of this API I would expect to retrieve it in the same way for protectd/non-protected VMs without necessarily having a separate code path for non-protected.",
+      "parentUuid": "c9a11005_ac61ee18",
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
