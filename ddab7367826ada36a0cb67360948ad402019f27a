@@ -334,6 +334,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c32f97ba_ccce9586",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2024-02-21T05:17:42Z",
+      "side": 1,
+      "message": "That makes sense. Thanks for the suggestion Eric. I\u0027ll send a change to the policy for allowing \"integrity\" on all domains.",
+      "parentUuid": "ffe05001_fb4a458b",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
