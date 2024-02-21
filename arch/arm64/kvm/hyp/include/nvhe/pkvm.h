@@ -146,4 +146,8 @@ int pkvm_load_pvmfw_pages(struct pkvm_hyp_vm *vm, u64 ipa, phys_addr_t phys,
 			  u64 size);
 void pkvm_poison_pvmfw_pages(void);
 
+#ifdef CONFIG_NVHE_EL2_DEBUG
+int pkvm_stage2_snapshot_by_handle(struct kvm_pgtable_snapshot *snap,
+				   pkvm_handle_t handle);
+#endif /* CONFIG_NVHE_EL2_DEBUG */
 #endif /* __ARM64_KVM_NVHE_PKVM_H__ */

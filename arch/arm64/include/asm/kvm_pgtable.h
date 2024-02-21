@@ -458,6 +458,28 @@ struct kvm_pgtable {
 };
 
 /**
+ * struct kvm_pgtable_snapshot - Snapshot page-table wrapper.
+ * @pgtable:		The page-table configuration.
+ * @mc:			Memcache used for pagetable pages allocation.
+ * @pgd_hva:		Host virtual address of a physically contiguous buffer
+ *			used for storing the PGD.
+ * @pgd_pages:		The size of the phyisically contiguous buffer in pages.
+ * @used_pages_hva:	Host virtual address of a physically contiguous buffer
+ *			used for storing the consumed pages from the memcache.
+ * @num_used_pages		The size of the used buffer in pages.
+ * @used_pages_indx		The current index of the used pages array.
+ */
+struct kvm_pgtable_snapshot {
+	struct kvm_pgtable			pgtable;
+	struct kvm_hyp_memcache			mc;
+	void					*pgd_hva;
+	size_t					pgd_pages;
+	phys_addr_t				*used_pages_hva;
+	size_t					num_used_pages;
+	size_t					used_pages_indx;
+};
+
+/**
  * kvm_pgtable_hyp_init() - Initialise a hypervisor stage-1 page-table.
  * @pgt:	Uninitialised page-table structure to initialise.
  * @va_bits:	Maximum virtual address bits.
