@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2010320_592dd49a",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-21T18:28:43Z",
+      "side": 1,
+      "message": "If you make ANDROID_BINDER_IPC_C default yes, then existing defconfigs will work.",
+      "parentUuid": "b7d2d086_524cd29e",
+      "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4eea7a6e_b249bec1",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 1
