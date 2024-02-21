@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t we check for the vmemmap here? \n\ne.g. host_request_unshare would try to check `PKVM_PAGE_SHARED_OWNED` which must be found in the vmemmap?",
       "revId": "f55a8b9c2bbc2a4e06927c58ccb4e02c0ebb6c80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c8aac6_3e052032",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-21T17:35:22Z",
+      "side": 1,
+      "message": "Yep, that is what should be happening (modulo bugs), though that is currently buried into the walker. check_page_state_range() will compare the desired state with the state returned by host_get_page_state() and the latter does the vmemmap lookup.\n\nWe currently still need to the page table walk sadly in order to correctly account for the PKVM_PAGE_RESTRICTED_PROT state which is inferred from the PTE, but yeah that\u0027s really a bummer. I\u0027m currently working on a patch that goes on top of that series to try and improve that and avoid the walk entirely (possibly by just plain removing PKVM_PAGE_RESTRICTED_PROT which isn\u0027t super useful any more).",
+      "parentUuid": "94259ea7_224b4672",
+      "revId": "f55a8b9c2bbc2a4e06927c58ccb4e02c0ebb6c80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
