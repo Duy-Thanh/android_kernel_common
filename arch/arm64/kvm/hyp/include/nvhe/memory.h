@@ -24,12 +24,12 @@ enum pkvm_page_state {
 
 	/* Special non-meta state that only applies to host pages. Will not go in PTE SW bits. */
 	PKVM_MODULE_OWNED_PAGE		= BIT(2),
+	PKVM_NOPAGE			= BIT(3),
 
 	/*
 	 * Meta-states which aren't encoded directly in the PTE's SW bits (or
 	 * the hyp_vmemmap entry for the host)
 	 */
-	PKVM_NOPAGE			= BIT(3),
 	PKVM_PAGE_RESTRICTED_PROT	= BIT(4),
 };
 #define PKVM_PAGE_META_STATES_MASK	(~(BIT(0) | BIT(1)))
