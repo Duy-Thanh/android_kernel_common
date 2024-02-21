@@ -52,6 +52,24 @@
       "parentUuid": "c9a11005_ac61ee18",
       "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e73e69_589c6cf5",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-21T11:58:11Z",
+      "side": 1,
+      "message": "That\u0027s why it\u0027s called \"protected\", to emphasis it is for protected only. This memory that was protected initially and has been shared after. \n\nBy definition, that doesn\u0027t apply to non-protected VM.\n\nThe decision was due to the fact we have no other way of tracking this value, and it\u0027s been proved that it is important to keep an eye on it. While for non-protected VM, the shared memory is the entire footprint for the VM.\n\nBeside, I can\u0027t change this now, even though this is debugfs, as the behaviour is the same as Android14.",
+      "parentUuid": "e24c1676_af51e46b",
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
