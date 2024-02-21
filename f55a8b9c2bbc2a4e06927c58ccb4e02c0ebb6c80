@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94259ea7_224b4672",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-21T17:21:38Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we check for the vmemmap here? \n\ne.g. host_request_unshare would try to check `PKVM_PAGE_SHARED_OWNED` which must be found in the vmemmap?",
+      "revId": "f55a8b9c2bbc2a4e06927c58ccb4e02c0ebb6c80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
