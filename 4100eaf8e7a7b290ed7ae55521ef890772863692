@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ceae946_198e2f4f",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 12
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-21T02:31:09Z",
+      "side": 1,
+      "message": "It might be better to have the default be another Kconfig option. I assume at least the rust version will run without this command-line option if the C version has not been built.",
+      "revId": "4100eaf8e7a7b290ed7ae55521ef890772863692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2e37d94_12148c8a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 6765,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-21T02:31:09Z",
+      "side": 1,
+      "message": "what if the rust driver has not been built. Should this not be rejected? If you don\u0027t reject invalid options I don\u0027t see much point in providing way to read this param back",
+      "revId": "4100eaf8e7a7b290ed7ae55521ef890772863692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "773a2d5f_f35c9dfe",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 6783,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-21T02:31:09Z",
+      "side": 1,
+      "message": "why are you writing one char at a time instead of calling one of the many string helper functions that the kernel has",
+      "revId": "4100eaf8e7a7b290ed7ae55521ef890772863692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
