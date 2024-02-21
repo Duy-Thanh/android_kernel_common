@@ -70,6 +70,24 @@
       "parentUuid": "e24c1676_af51e46b",
       "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a144efb_f3ffed81",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T12:09:05Z",
+      "side": 1,
+      "message": "I tend to disagree because I find it equally important to track the pages for non-protected as well. If you have to track a memory leak because you haven\u0027t given the page table pages back from the hypervisor, would you only test with protected vms ?\n\nThe behavior will be the same as on Android 14 for protected vm case and my suggestion is an extension to what you already do.",
+      "parentUuid": "76e73e69_589c6cf5",
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
