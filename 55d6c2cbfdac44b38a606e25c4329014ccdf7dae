@@ -142,6 +142,24 @@
       "parentUuid": "78981399_de266f08",
       "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd11c24e_613d5004",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T14:47:36Z",
+      "side": 1,
+      "message": "Gotcha is when you use `kvm_account_pgtable_pages` from the host topup. I was confused because on non-protected case you end up on the sharing path from HOST -\u003e HYP (when you give page table pages) and here seems that you are not counting them anymore.",
+      "parentUuid": "81b199f9_e9610da9",
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
