@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7d2d086_524cd29e",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-21T13:47:47Z",
+      "side": 1,
+      "message": "Is it okay to change what the necessary options for enabling C binder are?",
+      "parentUuid": "966b54f3_7c8038a7",
+      "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4eea7a6e_b249bec1",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 1
