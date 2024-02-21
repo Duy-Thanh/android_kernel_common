@@ -104,6 +104,24 @@
       "parentUuid": "8fbe34fa_d8df8404",
       "revId": "ed77193b738464cd9d81ff7ae125e7be2a455f60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c846ad_42c9ad0e",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-21T18:56:52Z",
+      "side": 1,
+      "message": "This config option is used in the code. I don\u0027t think there is any need to have a separate version of it for the rust version, so you should be able to just delete it and use the existing config option instead. For other options, like ANDROID_BINDERFS_RUST, I think there is value in defining them, but not making them user-selectable (see comment above)",
+      "parentUuid": "41a5c2f7_37fc9b19",
+      "revId": "ed77193b738464cd9d81ff7ae125e7be2a455f60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

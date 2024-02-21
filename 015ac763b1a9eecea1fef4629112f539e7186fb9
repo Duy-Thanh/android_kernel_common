@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d8a580_27e055df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-21T18:56:52Z",
+      "side": 1,
+      "message": "you are adding core concepts of the binder driver here that are not related to the optional(?) binderfs piece. I think it would be better to split that into a separate patch, but if not it should at least be mentioned prominently here",
+      "revId": "015ac763b1a9eecea1fef4629112f539e7186fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "173b9712_78b74f22",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-21T18:56:52Z",
+      "side": 1,
+      "message": "you can remove the string here, add a dependency on ANDROID_BINDERFS and change the default to yes. That way you can use CONFIG_ANDROID_BINDERFS_RUST in the Makefile without having to manually copy all the other config options when enabling the rust binder driver (this would also prevent creating a config that would make the rust/c runtime switch option you are adding also resulting switching between incompatible configs)",
+      "revId": "015ac763b1a9eecea1fef4629112f539e7186fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
