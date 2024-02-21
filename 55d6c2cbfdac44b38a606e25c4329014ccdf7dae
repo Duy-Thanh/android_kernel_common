@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fabcd511_fbf05e72",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-21T11:24:47Z",
+      "side": 1,
+      "message": "Q: What if we spawn a non-protected VM under protected ? Why don\u0027t we account for shared memory in this case ? Maybe we want to check if the system is running under protected mode ?",
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
