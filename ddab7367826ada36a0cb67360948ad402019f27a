@@ -310,6 +310,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffe05001_fb4a458b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-02-21T03:53:38Z",
+      "side": 1,
+      "message": "Android\u0027s SELinux policy already allows confidentiality to everyone:\n\n```\nallow domain self:lockdown confidentiality;\n```\n\nHowever, it does *not* allow integrity to everyone.  If we believe that integrity should be allowed to everyone too, shouldn\u0027t we add:\n\n```\nallow domain self:lockdown integrity;\n```\n\nI can see how backporting this kernel patch *in addition to that* may make sense, as it may allow these rules to be entirely removed more quickly than otherwise would have been the case.  What\u0027s confusing to me is that kernel patch, which was intentionally not backported to LTS, is being presented *on its own* as the solution when Android\u0027s SELinux policy is still denying integrity.  If the policy were to be updated first, then you could point to the policy always allowing all the lockdown permissions including integrity, and this backport would make a lot more sense.",
+      "parentUuid": "e60ac6d7_b61c0ce2",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
