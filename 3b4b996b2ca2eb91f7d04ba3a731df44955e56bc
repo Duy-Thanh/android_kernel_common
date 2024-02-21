@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "966b54f3_7c8038a7",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-21T01:47:33Z",
+      "side": 1,
+      "message": "In that case I would suggest making ANDROID_BINDER_IPC_RUST depend on ANDROID_BINDER_IPC and also adding ANDROID_BINDER_IPC_C to enable the C version and have all the other options be shared between the two versions instead of duplicating the options.",
+      "parentUuid": "98be7d3b_fb53c3c1",
+      "revId": "3b4b996b2ca2eb91f7d04ba3a731df44955e56bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4eea7a6e_b249bec1",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 1
