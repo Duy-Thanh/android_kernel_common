@@ -22,6 +22,30 @@
       },
       "revId": "68208d05f88c9b6f20db83bf3dae5ed4494d26b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef9a91b_b9e4a492",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-21T19:13:39Z",
+      "side": 1,
+      "message": "I am not sure, the only issue I see, is that if the SMMU doesn\u0027t support WFE, otherwise if the CPU triggers earlier events, the driver would have to check the CMDQ ptr anyway.\n\nI guess that might be meant for other uses for this function outside the SMMU.",
+      "parentUuid": "0267ab6f_772e4dd1",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 30
+      },
+      "revId": "68208d05f88c9b6f20db83bf3dae5ed4494d26b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
