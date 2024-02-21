@@ -33,6 +33,24 @@
       "message": "you can remove the string here, add a dependency on ANDROID_BINDERFS and change the default to yes. That way you can use CONFIG_ANDROID_BINDERFS_RUST in the Makefile without having to manually copy all the other config options when enabling the rust binder driver (this would also prevent creating a config that would make the rust/c runtime switch option you are adding also resulting switching between incompatible configs)",
       "revId": "015ac763b1a9eecea1fef4629112f539e7186fb9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ec4cb0_35568905",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-21T19:15:17Z",
+      "side": 1,
+      "message": "Note that it is also possible to create config options that can only be enabled by \"selecting\" them from different config options. I\u0027m not sure you have any cases where that would be simpler than the method I described above, but it is possible to get the same end result with `select` (https://www.kernel.org/doc/html/next/kbuild/kconfig-language.html#menu-attributes)",
+      "parentUuid": "173b9712_78b74f22",
+      "revId": "015ac763b1a9eecea1fef4629112f539e7186fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
