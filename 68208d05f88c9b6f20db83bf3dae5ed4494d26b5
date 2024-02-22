@@ -46,6 +46,30 @@
       },
       "revId": "68208d05f88c9b6f20db83bf3dae5ed4494d26b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b335d6_956c5100",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-22T16:32:14Z",
+      "side": 1,
+      "message": "I think using WFE is well worth doing if the SMMU supports SEV, but I also think we should rely on the event stream to wake us up if the delay period is sufficiently large. Look at `__delay()` in `arch/arm64/lib/delay.c` to see how it\u0027s done on the host.",
+      "parentUuid": "6ef9a91b_b9e4a492",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 30
+      },
+      "revId": "68208d05f88c9b6f20db83bf3dae5ed4494d26b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
