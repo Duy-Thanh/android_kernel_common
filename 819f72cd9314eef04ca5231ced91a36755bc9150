@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08b1e847_276367e5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-22T19:58:25Z",
+      "side": 1,
+      "message": ":-\\ \n\nYep, that\u0027s bad!",
+      "parentUuid": "7fe1eae6_3b1f69da",
+      "range": {
+        "startLine": 582,
+        "startChar": 5,
+        "endLine": 582,
+        "endChar": 16
+      },
+      "revId": "819f72cd9314eef04ca5231ced91a36755bc9150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b15c9b4e_47f2c12c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-22T16:11:29Z",
       "side": 1,
       "message": "Same here.",
+      "range": {
+        "startLine": 644,
+        "startChar": 11,
+        "endLine": 644,
+        "endChar": 22
+      },
+      "revId": "819f72cd9314eef04ca5231ced91a36755bc9150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a6cb5c6_88a0fb20",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-22T19:58:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b15c9b4e_47f2c12c",
       "range": {
         "startLine": 644,
         "startChar": 11,
