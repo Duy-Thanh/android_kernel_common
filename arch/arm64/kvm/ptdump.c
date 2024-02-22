@@ -373,26 +373,52 @@ static int kvm_pgtable_debugfs_open(struct inode *m, struct file *file)
 	struct kvm *kvm = m->i_private;
 	struct kvm_s2_mmu *mmu;
 	struct kvm_pgtable *pgtable;
+	struct kvm_pgtable_snapshot *snap;
 	int ret;
-
-	if (is_protected_kvm_enabled())
-		return -EPERM;
 
 	if (!kvm_get_kvm_safe(kvm))
 		return -ENOENT;
+
+	if (is_protected_kvm_enabled()) {
+		snap = kvm_ptdump_get_snapshot(kvm->arch.pkvm.handle, 0, 0);
+		if (!snap)
+			goto free_with_kvm_ref;
+		pgtable = &snap->pgtable;
+	} else {
+		mmu = &kvm->arch.mmu;
+		pgtable = mmu->pgt;
+	}
 
 	mmu = &kvm->arch.mmu;
 	pgtable = mmu->pgt;
 
 	ret = single_open(file, kvm_pgtable_debugfs_show, pgtable);
 	if (ret < 0)
-		kvm_put_kvm(kvm);
+		goto free_with_snapshot;
+
+	return ret;
+free_with_snapshot:
+	if (is_protected_kvm_enabled())
+		kvm_ptdump_put_snapshot(snap);
+free_with_kvm_ref:
+	kvm_put_kvm(kvm);
 	return ret;
 }
 
 static int kvm_pgtable_debugfs_close(struct inode *m, struct file *file)
 {
 	struct kvm *kvm = m->i_private;
+	struct kvm_pgtable_snapshot *snap;
+	struct seq_file *seq;
+	struct kvm_pgtable *pgtable;
+
+	if (is_protected_kvm_enabled()) {
+		seq = (struct seq_file *)file->private_data;
+		pgtable = seq->private;
+		snap = container_of(pgtable, struct kvm_pgtable_snapshot,
+				    pgtable);
+		kvm_ptdump_put_snapshot(snap);
+	}
 
 	kvm_put_kvm(kvm);
 	return single_release(m, file);
