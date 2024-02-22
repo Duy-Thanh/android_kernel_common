@@ -22,6 +22,30 @@
       },
       "revId": "b4e967a5fbc8089691b7ee889430db5670103559",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47044789_8a49e771",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-22T09:06:58Z",
+      "side": 1,
+      "message": "Yeah I was hesitating, to stash all that in an hyp_alloc_account() instead.",
+      "parentUuid": "4837dbb3_2f32dca4",
+      "range": {
+        "startLine": 50,
+        "startChar": 19,
+        "endLine": 50,
+        "endChar": 36
+      },
+      "revId": "b4e967a5fbc8089691b7ee889430db5670103559",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
