@@ -33,6 +33,24 @@
       "message": "Please remove \u0027ABI DIFFERENCES HAVE BEEN DETECTED\u0027 line from the commit message",
       "revId": "78924f6a79a6b5844a3cd40f8ddd321a22aa6ae4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cbdae91_cbe7c6e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-02-22T18:05:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6060baa8_b6eb5f92",
+      "revId": "78924f6a79a6b5844a3cd40f8ddd321a22aa6ae4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
