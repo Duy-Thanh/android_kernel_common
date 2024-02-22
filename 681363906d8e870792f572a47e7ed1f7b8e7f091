@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad391db6_4f9f945f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3301722
+      },
+      "writtenOn": "2024-02-22T11:57:08Z",
+      "side": 1,
+      "message": "repo download -b change-2971555 kernel/common 2971555",
+      "revId": "681363906d8e870792f572a47e7ed1f7b8e7f091",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
