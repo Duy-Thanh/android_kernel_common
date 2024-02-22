@@ -382,6 +382,30 @@
       },
       "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db710816_8308159d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-02-22T22:03:24Z",
+      "side": 1,
+      "message": "It will be necessary to cherry-pick the change (https://r.android.com/2971071) to `android13-tests-dev` so that CTS stops enforcing the neverallow rule.  Then partners could cherry-pick the change into their builds.",
+      "parentUuid": "5ddc283a_e6c8c817",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 60
+      },
+      "revId": "ddab7367826ada36a0cb67360948ad402019f27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
