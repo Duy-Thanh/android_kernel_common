@@ -16,6 +16,23 @@
       "message": "..",
       "revId": "78924f6a79a6b5844a3cd40f8ddd321a22aa6ae4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6060baa8_b6eb5f92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-02-22T17:39:24Z",
+      "side": 1,
+      "message": "Please remove \u0027ABI DIFFERENCES HAVE BEEN DETECTED\u0027 line from the commit message",
+      "revId": "78924f6a79a6b5844a3cd40f8ddd321a22aa6ae4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
