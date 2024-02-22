@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3734d1e_cc478cfc",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-22T04:22:27Z",
+      "side": 1,
+      "message": "Please remove these since they will be added by the GKI team prior to KMI freeze. This patch should look exactly like it did in previous GKI kernels (just the addition of the OEM_DATA_ARRAY)",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 0
+      },
+      "revId": "3d9c90a48fa05be1f29e1c57c59bf4d874ba1958",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
