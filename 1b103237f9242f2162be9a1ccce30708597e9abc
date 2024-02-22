@@ -124,6 +124,24 @@
       "parentUuid": "f7a38994_9134902c",
       "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ff38011_e4e67480",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-22T17:31:53Z",
+      "side": 1,
+      "message": "Sorry, but yes, `android14-*` branches are also frozen.\n\n`android15-*` branches can still take ABI changes for a short while, see the GKI newsletter for the deadlines.",
+      "parentUuid": "d63212f6_44db8fe9",
+      "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
