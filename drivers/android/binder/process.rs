@@ -132,6 +132,7 @@ impl ProcessInner {
     pub(crate) fn push_work(
         &mut self,
         work: DLArc<dyn DeliverToRead>,
+        threads: XArray<Arc<Thread>>,
     ) -> Result<(), (BinderError, DLArc<dyn DeliverToRead>)> {
         // Try to find a ready thread to which to push the work.
         if let Some(thread) = self.ready_threads.pop_front() {
@@ -163,7 +164,7 @@ impl ProcessInner {
             self.work.push_back(work);
 
             // Wake up polling threads, if any.
-            for thread in self.threads.values() {
+            for thread in threads.values() {
                 thread.notify_if_poll_ready(sync);
             }
 
@@ -188,6 +189,7 @@ impl ProcessInner {
         strong: bool,
         count: usize,
         othread: Option<&Thread>,
+        threads: XArray<Arc<Thread>>,
     ) {
         let push = node.update_refcount_locked(inc, strong, count, self);
 
@@ -200,7 +202,7 @@ impl ProcessInner {
                 if let Some(thread) = othread {
                     thread.push_work_deferred(node);
                 } else {
-                    let _ = self.push_work(node);
+                    let _ = self.push_work(node, threads);
                     // Nothing to do: `push_work` may fail if the process is dead, but that's ok as in
                     // that case, it doesn't care about the notification.
                 }
@@ -286,11 +288,11 @@ impl ProcessInner {
         self.outstanding_txns += 1;
     }
 
-    fn txns_pending_locked(&self) -> bool {
+    fn txns_pending_locked(&self, threads: XArray<Arc<Thread>>) -> bool {
         if self.outstanding_txns > 0 {
             return true;
         }
-        for thread in self.threads.values() {
+        for thread in threads.values() {
             if thread.has_current_transaction() {
                 return true;
             }
@@ -487,7 +489,7 @@ impl Process {
         let mut all_nodes = Vec::new();
         loop {
             let inner = self.inner.lock();
-            let num_threads = inner.threads.iter().count();
+            let num_threads = self.threads.iter().count();
             let num_nodes = inner.nodes.iter().count();
 
             if all_threads.capacity() < num_threads || all_nodes.capacity() < num_nodes {
@@ -497,7 +499,7 @@ impl Process {
                 continue;
             }
 
-            for thread in inner.threads.values() {
+            for thread in self.threads.values() {
                 assert!(all_threads.len() < all_threads.capacity());
                 let _ = all_threads.try_push(thread.clone());
             }
@@ -589,8 +591,8 @@ impl Process {
 
         {
             let inner = self.inner.lock();
-            if let Some(thread) = inner.threads.get(&id) {
-                return Ok(thread.clone());
+            if let Some(thread) = self.threads.get_locked(id as usize) {
+                return Ok(thread.borrow().clone().into());
             }
         }
 
@@ -613,7 +615,7 @@ impl Process {
 
     pub(crate) fn push_work(&self, work: DLArc<dyn DeliverToRead>) -> BinderResult {
         // If push_work fails, drop the work item outside the lock.
-        let res = self.inner.lock().push_work(work);
+        let res = self.inner.lock().push_work(work, self.threads);
         match res {
             Ok(()) => Ok(()),
             Err((err, work)) => {
@@ -834,7 +836,7 @@ impl Process {
                 // it is already queued to a worklist.
                 if let Some(node) = ListArc::try_from_arc_or_drop(node) {
                     // This only fails if the process is dead.
-                    let _ = inner.push_work(node);
+                    let _ = inner.push_work(node, self.threads);
                 }
             }
         }
@@ -969,7 +971,7 @@ impl Process {
     }
 
     fn remove_thread(&self, thread: Arc<Thread>) {
-        self.inner.lock().threads.remove(&thread.id);
+        self.threads.remove(thread.id as usize);
         thread.release();
     }
 
@@ -1131,7 +1133,7 @@ impl Process {
 
     fn deferred_flush(&self) {
         let inner = self.inner.lock();
-        for thread in inner.threads.values() {
+        for thread in self.threads.values() {
             thread.exit_looper();
         }
     }
@@ -1204,12 +1206,12 @@ impl Process {
 
         // Do similar dance for the state lock.
         let mut inner = self.inner.lock();
-        let threads = take(&mut inner.threads);
+        // let threads = take(&mut self.threads);
         let nodes = take(&mut inner.nodes);
         drop(inner);
 
         // Release all threads.
-        for thread in threads.values() {
+        for thread in self.threads.values() {
             thread.release();
         }
 

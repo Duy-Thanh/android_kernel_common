@@ -13,6 +13,7 @@ use kernel::{
     sync::lock::{spinlock::SpinLockBackend, Guard},
     sync::{Arc, LockedBy, SpinLock},
     uaccess::UserSliceWriter,
+    xarray::XArray,
 };
 
 use crate::{
@@ -358,6 +359,7 @@ impl Node {
     pub(crate) fn submit_oneway(
         &self,
         transaction: DLArc<Transaction>,
+        threads: XArray<Arc<Thread>>,
         guard: &mut Guard<'_, ProcessInner, SpinLockBackend>,
     ) -> Result<(), (BinderError, DLArc<dyn DeliverToRead>)> {
         if guard.is_dead {
@@ -369,7 +371,7 @@ impl Node {
             inner.oneway_todo.push_back(transaction);
         } else {
             inner.has_oneway_transaction = true;
-            guard.push_work(transaction)?;
+            guard.push_work(transaction, threads)?;
         }
         Ok(())
     }
@@ -399,7 +401,7 @@ impl Node {
         let transaction = inner.oneway_todo.pop_front();
         inner.has_oneway_transaction = transaction.is_some();
         if let Some(transaction) = transaction {
-            match guard.push_work(transaction) {
+            match guard.push_work(transaction, self.owner.threads) {
                 Ok(()) => {}
                 Err((_err, work)) => {
                     // Process is dead.
