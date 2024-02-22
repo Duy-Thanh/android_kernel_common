@@ -106,6 +106,24 @@
       "parentUuid": "6d4ba43e_84dc115f",
       "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d63212f6_44db8fe9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3278615
+      },
+      "writtenOn": "2024-02-22T02:49:59Z",
+      "side": 1,
+      "message": "Are there any unfrozen KMI branch for android14-* and android15-* branches? \nFor https://android-review.googlesource.com/c/kernel/common/+/2951006, I got android14-6.1 branch has ABI frozen.\nHow to get KMI branch frozen info for OEMs? \nThanks",
+      "parentUuid": "f7a38994_9134902c",
+      "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
