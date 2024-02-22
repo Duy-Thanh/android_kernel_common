@@ -22,6 +22,30 @@
       },
       "revId": "9be5a6c11cbe195a1e46745c816082f112c7b60a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d698f3_cb37dd3e",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-22T16:31:11Z",
+      "side": 1,
+      "message": "With the hyp_alloc, yeah, we only send memory to the hypervisor way for page-tables now!\n\n... But that also means the theardown_mc_stage2 is now deprecated!",
+      "parentUuid": "f74def7d_313a7b0e",
+      "range": {
+        "startLine": 500,
+        "startChar": 32,
+        "endLine": 500,
+        "endChar": 45
+      },
+      "revId": "9be5a6c11cbe195a1e46745c816082f112c7b60a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
