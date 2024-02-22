@@ -2068,11 +2068,44 @@ static struct task_struct *pick_next_pushable_task(struct rq *rq)
 	return push_task;
 }
 
+static inline bool __rt_revalidate_rq_state(struct task_struct *task, struct rq *rq,
+					  struct rq *lowest, bool *retry)
+{
+	/*
+	 * We had to unlock the run queue. In the mean time, task could have
+	 * migrated already or had its affinity changed. Also make sure that it
+	 * wasn't scheduled on its rq. It is possible the task was scheduled,
+	 * set "migrate_disabled" and then got preempted, so we must check the
+	 * task migration disable flag here too.
+	 */
+	if (task_rq(task) != rq)
+		return false;
+
+	if (!cpumask_test_cpu(lowest->cpu, &task->cpus_mask))
+		return false;
+
+	if (task_on_cpu(rq, task))
+		return false;
+
+	if (!rt_task(task))
+		return false;
+
+	if (is_migration_disabled(task))
+		return false;
+
+	if (!task_on_rq_queued(task))
+		return false;
+
+	return true;
+}
+
 #ifdef CONFIG_SCHED_PROXY_EXEC
 /* XXX: TODO: Consolidate this w/ dl_revalidate_rq_state */
 static inline bool rt_revalidate_rq_state(struct task_struct *task, struct rq *rq,
 					  struct rq *lowest, bool *retry)
 {
+	if (!sched_proxy_exec())
+		return __rt_revalidate_rq_state(task, rq, lowest, retry);
 	/*
 	 * Releasing the rq lock means we need to re-check pushability.
 	 * Some scenarios:
@@ -2144,34 +2177,7 @@ static inline bool rt_revalidate_rq_state(struct task_struct *task, struct rq *r
 static inline bool rt_revalidate_rq_state(struct task_struct *task, struct rq *rq,
 					  struct rq *lowest, bool *retry)
 {
-	/*
-	 * We had to unlock the run queue. In
-	 * the mean time, task could have
-	 * migrated already or had its affinity changed.
-	 * Also make sure that it wasn't scheduled on its rq.
-	 * It is possible the task was scheduled, set
-	 * "migrate_disabled" and then got preempted, so we must
-	 * check the task migration disable flag here too.
-	 */
-	if (task_rq(task) != rq)
-		return false;
-
-	if (!cpumask_test_cpu(lowest->cpu, &task->cpus_mask))
-		return false;
-
-	if (task_on_cpu(rq, task))
-		return false;
-
-	if (!rt_task(task))
-		return false;
-
-	if (is_migration_disabled(task))
-		return false;
-
-	if (!task_on_rq_queued(task))
-		return false;
-
-	return true;
+	return __rt_revalidate_rq_state(task, rq, lowest, retry);
 }
 #endif
 

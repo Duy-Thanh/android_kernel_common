@@ -1248,7 +1248,6 @@ config SCHED_RT_INVARIANT_TEST
 
 	  Say Y here if you want kernel RT scheduling tests
 	  to be built into the kernel.
-	  Say M if you want this test to build as a module.
 	  Say N if you are unsure.
 
 config SCHED_INFO

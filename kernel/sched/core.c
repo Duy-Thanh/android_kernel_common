@@ -3877,13 +3877,12 @@ static inline void ttwu_do_wakeup(struct task_struct *p)
 #ifdef CONFIG_SCHED_PROXY_EXEC
 static void do_activate_task(struct rq *rq, struct task_struct *p, int en_flags)
 {
-	lockdep_assert_rq_held(rq);
-
 	if (!sched_proxy_exec()) {
 		activate_task(rq, p, en_flags);
 		return;
 	}
 
+	lockdep_assert_rq_held(rq);
 	if (p->sleeping_owner) {
 		struct task_struct *owner = p->sleeping_owner;
 
@@ -3910,7 +3909,12 @@ static inline void proxy_set_task_cpu(struct task_struct *p, int cpu)
 {
 	unsigned int wake_cpu;
 
-	/* Preserve wake_cpu */
+	/*
+	 * Since we enqueuing blocked tasks on a cpu it may not
+	 * be able to run on, preserve wake_cpu when we
+	 * __set_task_cpu so we can return the task to where it
+	 * was previously runnable.
+	 */
 	wake_cpu = p->wake_cpu;
 	__set_task_cpu(p, cpu);
 	p->wake_cpu = wake_cpu;
@@ -4126,28 +4130,26 @@ static inline void activate_blocked_entities(struct rq *target_rq,
 #ifdef CONFIG_SMP
 static inline bool proxy_needs_return(struct rq *rq, struct task_struct *p)
 {
+	bool ret = false;
+
 	if (!sched_proxy_exec())
 		return false;
 
-	if (task_current(rq, p))
-		return false;
-
+	raw_spin_lock(&p->blocked_lock);
 	if (p->blocked_on && p->blocked_on_state == BO_WAKING) {
-		raw_spin_lock(&p->blocked_lock);
-		if (!is_cpu_allowed(p, cpu_of(rq))) {
+		if (!task_current(rq, p) && (p->wake_cpu != cpu_of(rq))) {
 			if (task_current_selected(rq, p)) {
 				put_prev_task(rq, p);
 				rq_set_selected(rq, rq->idle);
 			}
 			deactivate_task(rq, p, DEQUEUE_SLEEP | DEQUEUE_NOCLOCK);
-			resched_curr(rq);
-			raw_spin_unlock(&p->blocked_lock);
-			return true;
+			ret = true;
 		}
+		p->blocked_on_state = BO_RUNNABLE;
 		resched_curr(rq);
-		raw_spin_unlock(&p->blocked_lock);
 	}
-	return false;
+	raw_spin_unlock(&p->blocked_lock);
+	return ret;
 }
 #else /* !CONFIG_SMP */
 static inline bool proxy_needs_return(struct rq *rq, struct task_struct *p)
@@ -4632,6 +4634,12 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 
 		trace_sched_waking(p);
 		ttwu_do_wakeup(p);
+
+		raw_spin_lock_irqsave(&p->blocked_lock, flags);
+		/* If current is waking up, we know we can run here, so set BO_RUNNBLE */
+		if (p->blocked_on_state == BO_WAKING)
+			p->blocked_on_state = BO_RUNNABLE;
+		raw_spin_unlock_irqrestore(&p->blocked_lock, flags);
 		goto out;
 	}
 
@@ -4643,8 +4651,16 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 	 */
 	scoped_guard (raw_spinlock_irqsave, &p->pi_lock) {
 		smp_mb__after_spinlock();
-		if (!ttwu_state_match(p, state, &success))
-			break;
+		if (!ttwu_state_match(p, state, &success)) {
+			/*
+			 * If we're already TASK_RUNNING, and BO_WAKING
+			 * continue on to ttwu_runnable check to force
+			 * proxy_needs_return evaluation
+			 */
+			if (!(READ_ONCE(p->__state) == TASK_RUNNING &&
+			      READ_ONCE(p->blocked_on_state) == BO_WAKING))
+				break;
+		}
 
 		trace_sched_waking(p);
 
@@ -4711,6 +4727,12 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 		 */
 		WRITE_ONCE(p->__state, TASK_WAKING);
 
+		/* XXX can we do something better here for !CONFIG_SCHED_PROXY_EXEC case */
+		raw_spin_lock_irqsave(&p->blocked_lock, flags);
+		if (p->blocked_on_state == BO_WAKING)
+			p->blocked_on_state = BO_RUNNABLE;
+		raw_spin_unlock_irqrestore(&p->blocked_lock, flags);
+
 		/*
 		 * If the owning (remote) CPU is still in the middle of schedule() with
 		 * this task as prev, considering queueing p on the remote CPUs wake_list
@@ -4764,11 +4786,6 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 
 		ttwu_queue(p, cpu, wake_flags);
 	}
-	/* XXX can we do something better here for !CONFIG_SCHED_PROXY_EXEC case */
-	raw_spin_lock_irqsave(&p->blocked_lock, flags);
-	if (p->blocked_on_state == BO_WAKING)
-		p->blocked_on_state = BO_RUNNABLE;
-	raw_spin_unlock_irqrestore(&p->blocked_lock, flags);
 	activate_blocked_entities(cpu_rq(cpu), p, wake_flags);
 out:
 	if (success) {
@@ -5457,6 +5474,39 @@ static void do_balance_callbacks(struct rq *rq, struct balance_callback *head)
 
 		func(rq);
 	}
+}
+
+/*
+ * Only called from __schedule context
+ *
+ * There are some cases where we are going to re-do
+ * the action that added the balance callbacks. We may
+ * not be in a state where we can run them, so just zap
+ * them so they can be properly re-added on the next
+ * time around. This is similar handling to running
+ * the callbacks, execept we just don't call them.
+ */
+static void zap_balance_callbacks(struct rq *rq)
+{
+	struct balance_callback *next, *head;
+	bool found = false;
+
+	lockdep_assert_rq_held(rq);
+
+	head = rq->balance_callback;
+	while (head) {
+
+		if (head == &balance_push_callback)
+			found = true;
+		next = head->next;
+		head->next = NULL;
+		head = next;
+	}
+	if (found)
+		rq->balance_callback = &balance_push_callback;
+	else
+		rq->balance_callback = NULL;
+
 }
 
 static void balance_push(struct rq *rq);
@@ -7103,9 +7153,8 @@ static void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 	 */
 	p->wake_cpu = wake_cpu;
 
+	zap_balance_callbacks(rq);
 	rq_unpin_lock(rq, rf);
-	__balance_callbacks(rq);
-
 	raw_spin_rq_unlock(rq);
 	raw_spin_rq_lock(target_rq);
 
@@ -7127,6 +7176,9 @@ void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 static void proxy_enqueue_on_owner(struct rq *rq, struct task_struct *owner,
 				   struct task_struct *next)
 {
+	lockdep_assert_rq_held(rq);
+	lockdep_assert_held(&owner->blocked_lock);
+
 	/*
 	 * ttwu_activate() will pick them up and place them on whatever rq
 	 * @owner will run next.
@@ -7274,8 +7326,8 @@ find_proxy_task(struct rq *rq, struct task_struct *next, struct rq_flags *rf)
 			 * CPU, but has not yet been enqueued because we are holding the
 			 * rq lock. As a simple solution, just schedule rq->idle to give
 			 * the migration a chance to complete. Much like the migrate_task
-			 * case we should end up back in proxy(), this time hopefully with
-			 * all relevant tasks already enqueued.
+			 * case we should end up back in find_proxy_task(), this time
+			 * hopefully with all relevant tasks already enqueued.
 			 */
 			raw_spin_unlock(&p->blocked_lock);
 			raw_spin_unlock(&mutex->wait_lock);
@@ -7370,7 +7422,7 @@ out:
 static struct task_struct *
 find_proxy_task(struct rq *rq, struct task_struct *next, struct rq_flags *rf)
 {
-	WARN_ONCE(1, "This should never be called in the !PROXY case\n");
+	WARN_ONCE(1, "This should never be called in the !SCHED_PROXY_EXEC case\n");
 	return next;
 }
 #endif /* SCHED_PROXY_EXEC */
@@ -7499,9 +7551,8 @@ pick_again:
 	if (unlikely(task_is_blocked(next))) {
 		next = find_proxy_task(rq, next, &rf);
 		if (!next) {
-			rq_unpin_lock(rq, &rf);
-			__balance_callbacks(rq);
-			rq_repin_lock(rq, &rf);
+			/* zap the balance_callbacks before picking again */
+			zap_balance_callbacks(rq);
 			goto pick_again;
 		}
 		if (next == rq->idle && prev == rq->idle)
@@ -7603,9 +7654,6 @@ static inline void sched_submit_work(struct task_struct *tsk)
 	 * already acquired.
 	 */
 	SCHED_WARN_ON(current->__state & TASK_RTLOCK_WAIT);
-
-	if (task_is_blocked(tsk))
-		return;
 
 	/*
 	 * If we are going to sleep and we have plugged IO queued,

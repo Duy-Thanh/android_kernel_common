@@ -28,7 +28,7 @@
  * prevent the mid priority offensive tasks from running.
  *
  * Copyright © International Business Machines  Corp., 2007, 2008
- * Copyright (C) Google, 2023
+ * Copyright (C) Google, 2023, 2024
  *
  * Authors: John Stultz <jstultz@google.com>
  */
@@ -41,13 +41,10 @@
 #include <linux/kthread.h>
 #include <linux/delay.h>
 #include <linux/sched/rt.h>
-#include <linux/spinlock.h>
 #include <linux/mutex.h>
 #include <linux/rwsem.h>
 #include <linux/smp.h>
 #include <linux/slab.h>
-#include <linux/interrupt.h>
-#include <linux/sched.h>
 #include <uapi/linux/sched/types.h>
 #include <linux/rtmutex.h>
 
@@ -57,10 +54,20 @@ MODULE_LICENSE("GPL");
 
 atomic_t players_ready;
 atomic_t ball_pos;
-unsigned int players_per_team;
+unsigned long players_per_team;
 bool game_over;
 
-#if CONFIG_SCHED_PROXY_EXEC
+#define CHECKIN_TIMEOUT		30
+#define GAME_TIME		10
+
+#define REF_PRIO		20
+#define FAN_PRIO		15
+#define DEF_HI_PRIO		10
+#define OFF_PRIO		5
+#define DEF_MID_PRIO		3
+#define DEF_LOW_PRIO		2
+
+#ifdef CONFIG_SCHED_PROXY_EXEC
 struct mutex *mutex_low_list;
 struct mutex *mutex_mid_list;
 #define test_lock_init(x)	mutex_init(x)
@@ -90,13 +97,15 @@ static struct task_struct *create_fifo_thread(int (*threadfn)(void *data),
 
 	kth = kthread_create(threadfn, data, name);
 	if (IS_ERR(kth)) {
-		pr_warn("%s: Error, kthread_create failed\n", __func__);
+		pr_warn("%s: Error, kthread_create %s failed\n", __func__,
+			name);
 		return kth;
 	}
 	ret = sched_setattr_nocheck(kth, &attr);
 	if (ret) {
 		kthread_stop(kth);
-		pr_warn("%s: Error, failed to set SCHED_FIFO\n", __func__);
+		pr_warn("%s: Error, failed to set SCHED_FIFO for %s\n",
+			__func__, name);
 		return ERR_PTR(ret);
 	}
 
@@ -106,11 +115,10 @@ static struct task_struct *create_fifo_thread(int (*threadfn)(void *data),
 
 static int spawn_players(int (*threadfn)(void *data), char *name, int prio)
 {
-	int current_players = atomic_read(&players_ready);
+	unsigned long current_players, start, i;
 	struct task_struct *kth;
-	long i;
-	long start;
 
+        current_players = atomic_read(&players_ready);
 	/* Create players_per_team threads */
 	for (i = 0; i < players_per_team; i++) {
 		kth = create_fifo_thread(threadfn, (void *)i, name, prio);
@@ -122,10 +130,10 @@ static int spawn_players(int (*threadfn)(void *data), char *name, int prio)
 	/* Wait for players_per_team threads to check in */
 	while (atomic_read(&players_ready) < current_players + players_per_team) {
 		msleep(1);
-		if (jiffies - start > 30 * HZ) {
+		if (jiffies - start > CHECKIN_TIMEOUT * HZ) {
 			pr_err("%s: Error, %s players took too long to checkin "
-			       "(only %i of %i checked in)\n", __func__, name,
-			       atomic_read(&players_ready),
+			       "(only %ld of %ld checked in)\n", __func__, name,
+			       (long)atomic_read(&players_ready),
 			       current_players + players_per_team);
 			return -1;
 		}
@@ -207,27 +215,27 @@ static int crazy_fan_thread(void *arg)
 
 static int referee_thread(void *arg)
 {
-	long game_time = (long)arg;
+	unsigned long game_time = (long)arg;
 	unsigned long final_pos;
 
 	pr_info("Started referee, game_time: %ld secs !\n", game_time);
 	/* Create low  priority defensive team */
-	if (spawn_players(defense_low_thread, "defense-low-thread", 2))
+	if (spawn_players(defense_low_thread, "defense-low-thread", DEF_LOW_PRIO))
 		goto out;
 
-	if (spawn_players(defense_mid_thread, "defense-mid-thread", 3))
+	if (spawn_players(defense_mid_thread, "defense-mid-thread", DEF_MID_PRIO))
 		goto out;
 
 	/* Create mid priority offensive team */
-	if (spawn_players(offense_thread, "offense-thread", 5))
+	if (spawn_players(offense_thread, "offense-thread", OFF_PRIO))
 		goto out;
 
 	/* Create high priority defensive team */
-	if (spawn_players(defense_hi_thread, "defense-hi-thread", 10))
+	if (spawn_players(defense_hi_thread, "defense-hi-thread", DEF_HI_PRIO))
 		goto out;
 
 	/* Create high priority crazy fan threads */
-	if (spawn_players(crazy_fan_thread, "crazy-fan-thread", 15))
+	if (spawn_players(crazy_fan_thread, "crazy-fan-thread", FAN_PRIO))
 		goto out;
 	pr_info("All players checked in! Starting game.\n");
 	atomic_set(&ball_pos, 0);
@@ -247,21 +255,41 @@ static int __init test_sched_football_init(void)
 	struct task_struct *kth;
 	int i;
 
+#ifdef CONFIG_SCHED_PROXY_EXEC
+	/* Avoid running test if PROXY_EXEC is built in, but off via cmdline */
+	if (!sched_proxy_exec()) {
+		pr_warn("CONFIG_SCHED_PROXY_EXEC=y but disabled via boot arg, skipping sched_football tests, as they can hang");
+		return -1;
+	}
+#endif
+
 	players_per_team = num_online_cpus();
 
 	mutex_low_list = kmalloc_array(players_per_team, TEST_LOCK_SIZE, GFP_ATOMIC);
+	if (!mutex_low_list)
+		goto out;
+
 	mutex_mid_list = kmalloc_array(players_per_team, TEST_LOCK_SIZE, GFP_ATOMIC);
-	if (!mutex_low_list || !mutex_mid_list)
-		return -1;
+	if (!mutex_mid_list)
+		goto out_mid_list;
 
 	for (i = 0; i < players_per_team; i++) {
 		test_lock_init(&mutex_low_list[i]);
 		test_lock_init(&mutex_mid_list[i]);
 	}
 
-	kth = create_fifo_thread(referee_thread, (void *)10, "referee-thread", 20);
+	kth = create_fifo_thread(referee_thread, (void *)GAME_TIME, "referee-thread", REF_PRIO);
 	if (IS_ERR(kth))
-		return -1;
+		goto out_create_fifo;
+
 	return 0;
+
+out_create_fifo:
+	kfree(mutex_mid_list);
+out_mid_list:
+	kfree(mutex_low_list);
+out:
+	return -1;
+
 }
 module_init(test_sched_football_init);

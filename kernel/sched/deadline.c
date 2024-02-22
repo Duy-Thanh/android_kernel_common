@@ -2207,11 +2207,8 @@ static struct task_struct *pick_next_pushable_dl_task(struct rq *rq)
 		return NULL;
 
 	next_node = rb_first_cached(&rq->dl.pushable_dl_tasks_root);
-
-next_node:
-	if (next_node) {
+	while (next_node) {
 		p = __node_2_pdl(next_node);
-
 		/*
 		 * cpu argument doesn't matter because we treat a -1 result
 		 * (pushable but can't go to cpu0) the same as a 1 result
@@ -2219,10 +2216,9 @@ next_node:
 		 * pushability.
 		 */
 		if (task_is_pushable(rq, p, 0))
-			return p;
+			break;
 
 		next_node = rb_next(next_node);
-		goto next_node;
 	}
 
 	if (!p)
@@ -2238,10 +2234,36 @@ next_node:
 	return p;
 }
 
+static inline bool __dl_revalidate_rq_state(struct task_struct *task, struct rq *rq,
+					  struct rq *later, bool *retry)
+{
+	if (task_rq(task) != rq)
+		return false;
+
+	if (!cpumask_test_cpu(later->cpu, &task->cpus_mask))
+		return false;
+
+	if (task_on_cpu(rq, task))
+		return false;
+
+	if (!dl_task(task))
+		return false;
+
+	if (is_migration_disabled(task))
+		return false;
+
+	if (!task_on_rq_queued(task))
+		return false;
+
+	return true;
+}
 #ifdef CONFIG_SCHED_PROXY_EXEC
 static inline bool dl_revalidate_rq_state(struct task_struct *task, struct rq *rq,
 					  struct rq *later, bool *retry)
 {
+	if (!sched_proxy_exec())
+		return __dl_revalidate_rq_state(task, rq, later, retry);
+
 	if (!dl_task(task) || is_migration_disabled(task))
 		return false;
 
@@ -2268,25 +2290,7 @@ static inline bool dl_revalidate_rq_state(struct task_struct *task, struct rq *r
 static inline bool dl_revalidate_rq_state(struct task_struct *task, struct rq *rq,
 					  struct rq *later, bool *retry)
 {
-	if (task_rq(task) != rq)
-		return false;
-
-	if (!cpumask_test_cpu(later->cpu, &task->cpus_mask))
-		return false;
-
-	if (task_on_cpu(rq, task))
-		return false;
-
-	if (!dl_task(task))
-		return false;
-
-	if (is_migration_disabled(task))
-		return false;
-
-	if (!task_on_rq_queued(task))
-		return false;
-
-	return true;
+	return __dl_revalidate_rq_state(task, rq, later, retry);
 }
 #endif
 /* Locks the rq it finds */
