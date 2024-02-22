@@ -34,6 +34,24 @@
       "parentUuid": "14c6f9b1_0c7ef3bf",
       "revId": "49da856540f221286d43f94196dbc8d1e67e3548",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e30692_f1a071f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-02-22T18:46:23Z",
+      "side": 1,
+      "message": "The Treehugger Robot still reports the following: \"Change 2964643 needs to be rebased on top of the latest version of its parent (Change 2963456). Please rebase your entire stack of patches to be up-to-date.\"",
+      "parentUuid": "5c98ab84_75d379cd",
+      "revId": "49da856540f221286d43f94196dbc8d1e67e3548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
