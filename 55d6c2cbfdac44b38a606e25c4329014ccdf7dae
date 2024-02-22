@@ -183,6 +183,30 @@
       },
       "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c82c12a9_7dadd00d",
+        "filename": "arch/arm64/kvm/hypercalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-22T11:34:06Z",
+      "side": 1,
+      "message": "Hum, other users above do it, that\u0027s why I assumed yes",
+      "parentUuid": "55cac663_f272c02a",
+      "range": {
+        "startLine": 392,
+        "startChar": 2,
+        "endLine": 392,
+        "endChar": 29
+      },
+      "revId": "55d6c2cbfdac44b38a606e25c4329014ccdf7dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
