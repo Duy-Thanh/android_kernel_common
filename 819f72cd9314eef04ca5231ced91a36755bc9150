@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fe1eae6_3b1f69da",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-22T16:11:29Z",
+      "side": 1,
+      "message": "Are you sure this is safe? The input pointer is completely under host control afaict. Wouldn\u0027t you be better off going via `pkvm_hyp_vcpu_to_hyp_vm()` and getting at `pkvm_hyp_vm::host_kvm`?",
+      "range": {
+        "startLine": 582,
+        "startChar": 5,
+        "endLine": 582,
+        "endChar": 16
+      },
+      "revId": "819f72cd9314eef04ca5231ced91a36755bc9150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b15c9b4e_47f2c12c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-22T16:11:29Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 644,
+        "startChar": 11,
+        "endLine": 644,
+        "endChar": 22
+      },
+      "revId": "819f72cd9314eef04ca5231ced91a36755bc9150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
