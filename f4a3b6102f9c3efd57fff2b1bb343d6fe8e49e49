@@ -22,6 +22,30 @@
       },
       "revId": "f4a3b6102f9c3efd57fff2b1bb343d6fe8e49e49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35203a87_715f63a8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-23T09:03:11Z",
+      "side": 1,
+      "message": "We can, although if SMMUs are properly initialized pKVM will have limited features.\n\nAlso I don\u0027t see a value of having this in the private VA space.\nWe can just use `___pkvm_host_donate_hyp` + `hyp_phys_to_virt`\n\nI can drop this patch and use donation if you think that is better.",
+      "parentUuid": "6e1c7660_6f4eb762",
+      "range": {
+        "startLine": 2317,
+        "startChar": 7,
+        "endLine": 2317,
+        "endChar": 35
+      },
+      "revId": "f4a3b6102f9c3efd57fff2b1bb343d6fe8e49e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
