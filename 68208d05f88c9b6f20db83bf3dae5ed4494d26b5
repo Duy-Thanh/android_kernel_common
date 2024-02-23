@@ -70,6 +70,30 @@
       },
       "revId": "68208d05f88c9b6f20db83bf3dae5ed4494d26b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87619e55_3ef5c8aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-23T09:38:00Z",
+      "side": 1,
+      "message": "I see, thanks for pointing that.\n\nI guess that means if we are using event stream the hypervisor has to control it, as the host is untrusted.\n\nI am not sure there how much benefit we get from that, but my opinion we can leave the delay as is until we get more data.",
+      "parentUuid": "69b335d6_956c5100",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 30
+      },
+      "revId": "68208d05f88c9b6f20db83bf3dae5ed4494d26b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
