@@ -515,6 +515,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "551f1ed7_59d3505b",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Thanks for pointing this out. I recognized it being ugly as I was re-working, but didn\u0027t have a good solution to replace it with.\n\nInvestigating your suggestion, I found https://docs.kernel.org/core-api/idr.html which states \"The IDR interface is deprecated; please use the XArray instead.\"\n\nThat being said, I think we could get by with the simplified IDA instead of IDR/XArray, so I have gone that route.",
+      "parentUuid": "54823000_898caeb5",
+      "range": {
+        "startLine": 182,
+        "startChar": 23,
+        "endLine": 182,
+        "endChar": 35
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae7df782_c178b4a9",
@@ -740,6 +764,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "b687155c_dc284633",
+      "range": {
+        "startLine": 6,
+        "startChar": 8,
+        "endLine": 6,
+        "endChar": 37
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b3037de_98e9556c",
+        "filename": "include/linux/usb/configfs_uevent.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82e2682e_49834b83",
       "range": {
         "startLine": 6,
         "startChar": 8,

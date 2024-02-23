@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c3e03c3_391e1f8c",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Removed due to locking removal below.",
+      "parentUuid": "5d447e56_bd9b8bd5",
+      "range": {
+        "startLine": 850,
+        "startChar": 0,
+        "endLine": 850,
+        "endChar": 21
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcf60bad_fdfc6eb6",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-02-19T12:30:58Z",
       "side": 1,
       "message": "as much as I don\u0027t like the current style, always follow the existing one when modifying code that you did not write.",
+      "range": {
+        "startLine": 1705,
+        "startChar": 0,
+        "endLine": 1705,
+        "endChar": 21
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7863ba2f_0c75bd10",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Removed due to locking removal.",
+      "parentUuid": "fcf60bad_fdfc6eb6",
       "range": {
         "startLine": 1705,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4002091e_4ff83a03",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Ack, previous comments had me move the creation, and I failed to match the destruction. Done.",
+      "parentUuid": "540155f4_370f1e49",
+      "range": {
+        "startLine": 1720,
+        "startChar": 1,
+        "endLine": 1720,
+        "endChar": 22
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f6e69e3_69a877df",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-02-19T12:30:58Z",
       "side": 1,
       "message": "should have `android_` as the prefix, right?  Same for this `.c` file.",
+      "range": {
+        "startLine": 5,
+        "startChar": 10,
+        "endLine": 5,
+        "endChar": 25
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9edc494_c14a1311",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4f6e69e3_69a877df",
       "range": {
         "startLine": 5,
         "startChar": 10,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faa80ac7_a5eab4e4",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a46499a1_f34a391c",
+      "range": {
+        "startLine": 12,
+        "startChar": 35,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba9986ed_a1997379",
@@ -146,6 +266,30 @@
       "writtenOn": "2024-02-19T12:30:58Z",
       "side": 1,
       "message": "same, please remove.",
+      "range": {
+        "startLine": 14,
+        "startChar": 23,
+        "endLine": 14,
+        "endChar": 25
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0269a155_3aea5160",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ba9986ed_a1997379",
       "range": {
         "startLine": 14,
         "startChar": 23,
@@ -204,6 +348,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "035fcf25_b38f9b5d",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Agreed that this is ugly, but sending a single uevent would require userspace changes as well. We are attempting to cleanup these drivers without changes to userspace as we don\u0027t want to be supporting multiple revisions going forward.",
+      "parentUuid": "12d76bb8_cbf5ccc6",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 77
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9aa7a4c_eb86247d",
         "filename": "drivers/usb/gadget/configfs_uevent.c",
         "patchSetId": 11
@@ -215,6 +383,30 @@
       "writtenOn": "2024-02-19T12:30:58Z",
       "side": 1,
       "message": "dev_dbg() already includes __func__ automatically, you never need to add it again, as that\u0027s just duplicate.  Please remove it from all dev_dbg() calls you add in this patch.",
+      "range": {
+        "startLine": 74,
+        "startChar": 50,
+        "endLine": 74,
+        "endChar": 58
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35c522d8_f60c27ff",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Whoops! ack.",
+      "parentUuid": "b9aa7a4c_eb86247d",
       "range": {
         "startLine": 74,
         "startChar": 50,
@@ -271,6 +463,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70a6163e_5566840f",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "42756e12_3bf618d3",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdf7b15c_c48ac21f",
@@ -284,6 +500,30 @@
       "writtenOn": "2024-02-19T12:30:58Z",
       "side": 1,
       "message": "return value?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 71
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1786b70c_195c5571",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T00:47:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fdf7b15c_c48ac21f",
       "range": {
         "startLine": 38,
         "startChar": 0,
