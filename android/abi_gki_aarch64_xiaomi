@@ -351,8 +351,14 @@
   filemap_get_folios
   find_get_pages_range_tag
 
+<<<<<<< PATCH SET (de610b ANDROID: GKI: Update symbol list for xiaomi)
+#required by speed_ui.ko
+  __tracepoint_android_rvh_update_cpus_allowed
+  __traceiter_android_rvh_update_cpus_allowed
+=======
 #required by bcmdhd.ko
   nla_append
   sdio_writew
   sdio_readw
 
+>>>>>>> BASE      (c0ead6 ANDROID: sched/cpuset: Add vendor hook to change tasks affin)
