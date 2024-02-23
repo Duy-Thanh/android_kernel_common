@@ -142,6 +142,24 @@
       "parentUuid": "d63212f6_44db8fe9",
       "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beb34096_fa80f46e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3278615
+      },
+      "writtenOn": "2024-02-23T11:46:14Z",
+      "side": 1,
+      "message": "Thanks, please help review it on android15-6.1 branch: https://android-review.googlesource.com/c/kernel/common/+/2975571",
+      "parentUuid": "8ff38011_e4e67480",
+      "revId": "1b103237f9242f2162be9a1ccce30708597e9abc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
