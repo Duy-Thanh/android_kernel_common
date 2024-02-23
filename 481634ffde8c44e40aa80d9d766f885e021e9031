@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86e96964_5fdcd3e6",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-23T10:03:55Z",
+      "side": 1,
+      "message": "We need a `write_lock` here because other entries can be created on the flight: (see Oliver\u0027s comment : https://lore.kernel.org/linux-arm-kernel/ZV6QXSV_SrYjjoE_@linux.dev/\n)",
+      "parentUuid": "2cbf6acd_265fda58",
+      "revId": "481634ffde8c44e40aa80d9d766f885e021e9031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff7cb52f_261ebbce",
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "As we discussed offline, we should just make sure temporarily this does not explode by checking for pgt \u003d\u003d NULL.",
       "parentUuid": "ff7cb52f_261ebbce",
+      "revId": "481634ffde8c44e40aa80d9d766f885e021e9031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5da1dcd_a6a7ab73",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-23T10:03:55Z",
+      "side": 1,
+      "message": "For these FROMLIST patches I already added the `is_protected_mode` check so it should be fine.",
+      "parentUuid": "3798cb30_e268c762",
       "revId": "481634ffde8c44e40aa80d9d766f885e021e9031",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
