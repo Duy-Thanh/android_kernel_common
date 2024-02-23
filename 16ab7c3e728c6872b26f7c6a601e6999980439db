@@ -51,6 +51,24 @@
       "parentUuid": "e9a10efc_1a067a36",
       "revId": "16ab7c3e728c6872b26f7c6a601e6999980439db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34add74e_1fa3a75b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-23T16:57:19Z",
+      "side": 1,
+      "message": "haaaa, for the host  NOPAGE, really means not owned. (well for guest and hyp as well, but for them if owned \u003d\u003d mapped)",
+      "parentUuid": "909bdaba_432d9b90",
+      "revId": "16ab7c3e728c6872b26f7c6a601e6999980439db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
