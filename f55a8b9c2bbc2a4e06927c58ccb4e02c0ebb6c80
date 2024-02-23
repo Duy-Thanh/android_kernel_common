@@ -88,6 +88,24 @@
       "parentUuid": "df0c0cb2_f32c0516",
       "revId": "f55a8b9c2bbc2a4e06927c58ccb4e02c0ebb6c80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b24e31_a20dc9c1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-23T09:04:54Z",
+      "side": 1,
+      "message": "Alright, that should be fixed now.\n\nI ended up keep the PKVM_PAGE_RESTRICTED_PROT state in place, but only actively use it for MMIO pages (because we don\u0027t have the MODULE_OWNED tracking for MMIO due to the absence of vmemmap). But it does mean that all memory transitions avoid walks on the check path entirely, and that is clearly the most common case -- all MMIO transitions are module-related for now I think.\n\nAnd while at it I also fixed two other bugs where we zeroed the hyp page entries of guest page-table ...",
+      "parentUuid": "b2b55376_83421b6d",
+      "revId": "f55a8b9c2bbc2a4e06927c58ccb4e02c0ebb6c80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
