@@ -118,6 +118,30 @@
       },
       "revId": "c49dc3f483eac4d7908bb4de4a16b20dbb445219",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f13717_caf76a38",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-02-23T13:55:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5bcd36d_c9bafa6a",
+      "range": {
+        "startLine": 354,
+        "startChar": 13,
+        "endLine": 354,
+        "endChar": 19
+      },
+      "revId": "c49dc3f483eac4d7908bb4de4a16b20dbb445219",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
