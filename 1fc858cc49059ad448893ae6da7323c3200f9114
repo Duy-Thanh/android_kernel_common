@@ -16,6 +16,24 @@
       "message": "Q: I wonder if it makes sense to meld this patch into the previous one as the previous one introduces `protected_hyp_mem`. Wdyt ?",
       "revId": "1fc858cc49059ad448893ae6da7323c3200f9114",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85d3d15c_8cc6e2fe",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-23T12:52:58Z",
+      "side": 1,
+      "message": "The previous one only introduces the allocator interface. It creates protected_hyp_mem just so that it builds.\n\nThis patches puts everything in place, including the new calls to hyp_{alloc,free}_account.",
+      "parentUuid": "595e4aa5_eaadb3ce",
+      "revId": "1fc858cc49059ad448893ae6da7323c3200f9114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
