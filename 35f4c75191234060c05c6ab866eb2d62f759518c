@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0d50fa3_3e6cda3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-02-23T21:36:28Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right. This should follow the guidelines for `FROMGIT` since this is not part of Linus\u0027 tree, but rather a part of a maintainer\u0027s tree.",
+      "revId": "35f4c75191234060c05c6ab866eb2d62f759518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766e8c66_cd1cb335",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-02-23T21:36:28Z",
+      "side": 1,
+      "message": "No need to insert whitespace here, please.",
+      "revId": "35f4c75191234060c05c6ab866eb2d62f759518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf0c7c13_2c09c36f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-02-23T21:36:28Z",
+      "side": 1,
+      "message": "This should be formatted differently as per the `FROMGIT` guidelines.",
+      "revId": "35f4c75191234060c05c6ab866eb2d62f759518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10743437_208f8577",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-02-23T21:36:28Z",
+      "side": 1,
+      "message": "s/vilas/vilasbhat. It\u0027s good practice to use your username here.",
+      "revId": "35f4c75191234060c05c6ab866eb2d62f759518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5d5ee5_5b84dcbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-02-23T21:36:28Z",
+      "side": 1,
+      "message": "Can you please attach a bug for this as well?",
+      "revId": "35f4c75191234060c05c6ab866eb2d62f759518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
