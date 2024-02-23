@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1dd71732_8d0ce89f",
+        "filename": "arch/arm64/kvm/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-23T09:11:05Z",
+      "side": 1,
+      "message": "I wonder if we couldn\u0027t just re-use CONFIG_PTDUMP_DEBUGFS. \n\nI don\u0027t see a problem having PTDUMP_DEBUGFS enabled and not PTDUMP_DEBUGFS.\n\nHave you discussed this with Oliver by any chance?",
+      "revId": "481634ffde8c44e40aa80d9d766f885e021e9031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cbf6acd_265fda58",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-23T09:11:05Z",
+      "side": 1,
+      "message": "read_lock() should be enough here?",
+      "revId": "481634ffde8c44e40aa80d9d766f885e021e9031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff7cb52f_261ebbce",
         "filename": "arch/arm64/kvm/ptdump.c",
         "patchSetId": 1
@@ -14,6 +48,24 @@
       "writtenOn": "2024-02-20T17:04:25Z",
       "side": 1,
       "message": "This is a bit tricky because under \"kvm.arm_mode\u003dprotected\" the hypervisor manages the pagetables of the guest and the patch requires some modifications from the original upstream (FROMLIST).",
+      "revId": "481634ffde8c44e40aa80d9d766f885e021e9031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3798cb30_e268c762",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-23T09:11:05Z",
+      "side": 1,
+      "message": "As we discussed offline, we should just make sure temporarily this does not explode by checking for pgt \u003d\u003d NULL.",
+      "parentUuid": "ff7cb52f_261ebbce",
       "revId": "481634ffde8c44e40aa80d9d766f885e021e9031",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
