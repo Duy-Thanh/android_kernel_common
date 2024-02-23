@@ -256,11 +256,14 @@ extern enum system_states {
  * Most likely, you want to use tracing_on/tracing_off.
  */
 
+#if !defined(__GENKSYMS__)
 enum ftrace_dump_mode {
 	DUMP_NONE,
 	DUMP_ALL,
 	DUMP_ORIG,
+	DUMP_PARAM,
 };
+#endif
 
 #ifdef CONFIG_TRACING
 void tracing_on(void);
