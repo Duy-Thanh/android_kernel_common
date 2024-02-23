@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "747d309e_29fc45c2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-23T14:20:44Z",
+      "side": 1,
+      "message": "nit: double empty line",
+      "revId": "16ab7c3e728c6872b26f7c6a601e6999980439db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9a10efc_1a067a36",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-23T14:20:44Z",
+      "side": 1,
+      "message": "host_stage does encode `PKVM_NOPAGE`? it feels like it should e.g. `_pkvm_host_reclaim_page` would call `__host_check_page_state_range(phys, PAGE_SIZE, PKVM_NOPAGE)` and expects to have `host_state \u003d\u003d PKVM_NOPAGE` here.\n\nBut it seems we aren\u0027t always updating this flag: e.g. `handle_host_mem_abort-\u003ehost_stage2_idmap` doesn\u0027t seem to flip it.",
+      "revId": "16ab7c3e728c6872b26f7c6a601e6999980439db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
