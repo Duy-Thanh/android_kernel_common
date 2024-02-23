@@ -1,44 +1,7 @@
 {
-  "presubmit": [
+  "imports": [
     {
-      "name": "CtsHostsideNetworkTests",
-      "options": [
-        {
-          "exclude-annotation": "com.android.testutils.SkipPresubmit"
-        }
-      ]
-    },
-    {
-      "name": "CtsNetTestCases",
-      "options": [
-        {
-          "exclude-annotation": "com.android.testutils.SkipPresubmit"
-        }
-      ]
-    },
-    {
-      "name": "CtsNetTestCasesLatestSdk",
-      "options": [
-        {
-          "exclude-annotation": "com.android.testutils.SkipPresubmit"
-        }
-      ]
-    },
-    {
-      "name": "CtsTelecomTestCases",
-      "options": [
-        {
-          "exclude-annotation": "com.android.testutils.SkipPresubmit"
-        }
-      ]
-    },
-    {
-      "name": "vts_kernel_net_tests",
-      "options": [
-        {
-          "exclude-annotation": "com.android.testutils.SkipPresubmit"
-        }
-      ]
+        "path": "common/net"
     }
   ]
 }
