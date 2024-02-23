@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d8cfc75_399fc6ca",
+        "filename": "arch/arm64/kvm/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-23T11:01:16Z",
+      "side": 1,
+      "message": "Yes, we need a separate config because we depend on `KVM`",
+      "parentUuid": "1dd71732_8d0ce89f",
+      "revId": "481634ffde8c44e40aa80d9d766f885e021e9031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cbf6acd_265fda58",
