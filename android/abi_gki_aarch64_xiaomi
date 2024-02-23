@@ -342,6 +342,7 @@
   bioset_init
   bioset_exit
 
+<<<<<<< HEAD   (246994 ANDROID: GKI: Add symbol list for Nothing)
 #required by mi_asap.ko
   __traceiter_android_vh_read_pages
   __tracepoint_android_vh_read_pages
@@ -350,3 +351,8 @@
   pagecache_get_page
   filemap_get_folios
   find_get_pages_range_tag
+=======
+#required by speed_ui.ko
+  __tracepoint_android_rvh_update_cpus_allowed
+  __traceiter_android_rvh_update_cpus_allowed
+>>>>>>> CHANGE (43adf5 ANDROID: GKI: Update symbol list for xiaomi)
