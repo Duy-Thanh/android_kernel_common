@@ -91,6 +91,9 @@
   tcf_exts_dump_stats
   tcf_exts_validate
   tcf_queue_work
+  kick_process
+  nr_running
+  wake_up_state
   __traceiter_android_rvh_post_init_entity_util_avg
   __traceiter_android_vh_cgroup_set_task
   __traceiter_android_vh_dup_task_struct
@@ -130,6 +133,9 @@
   __traceiter_android_vh_futex_wake_this
   __traceiter_android_vh_futex_wake_traverse_plist
   __traceiter_android_vh_futex_wake_up_q_finish
+  __traceiter_android_vh_exit_check
+  __traceiter_android_vh_exit_signal_whether_wake
+  __traceiter_android_vh_freeze_whether_wake
   __tracepoint_android_vh_alter_mutex_list_add
   __tracepoint_android_vh_mutex_unlock_slowpath
   __tracepoint_android_vh_mutex_opt_spin_start
@@ -147,3 +153,6 @@
   __tracepoint_android_vh_futex_wake_this
   __tracepoint_android_vh_futex_wake_traverse_plist
   __tracepoint_android_vh_futex_wake_up_q_finish
+  __tracepoint_android_vh_exit_check
+  __tracepoint_android_vh_exit_signal_whether_wake
+  __tracepoint_android_vh_freeze_whether_wake
