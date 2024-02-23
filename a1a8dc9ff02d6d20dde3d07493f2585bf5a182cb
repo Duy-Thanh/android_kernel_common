@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45eb1f87_e47d9b37",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2024-02-23T05:37:30Z",
+      "side": 1,
+      "message": "This behavior may be related to older design. Is it better to open a bug to confirm whether it can be removed or not?",
+      "parentUuid": "53fe86b5_88b8d0b5",
+      "revId": "a1a8dc9ff02d6d20dde3d07493f2585bf5a182cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34eabbb1_999d2312",
