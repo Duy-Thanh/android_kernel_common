@@ -680,6 +680,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca166d1_5254a6c4",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T01:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4aafb446_fcc6bb7d",
+      "range": {
+        "startLine": 12,
+        "startChar": 12,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31dc0338_02080f8d",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T01:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95c64116_80a8a7b3",
+      "range": {
+        "startLine": 12,
+        "startChar": 76,
+        "endLine": 12,
+        "endChar": 86
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de9c3891_807ed68d",
@@ -717,6 +765,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "de9c3891_807ed68d",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f55c9759_f3d14f40",
+        "filename": "drivers/usb/gadget/configfs_uevent.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T01:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9490387b_7c8da2d0",
       "range": {
         "startLine": 86,
         "startChar": 0,

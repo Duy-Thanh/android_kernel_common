@@ -323,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d70183e_8fd33090",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T01:10:41Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "746f7071_4bc9d06c",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12d76bb8_cbf5ccc6",
@@ -430,6 +454,30 @@
       "writtenOn": "2024-02-19T12:30:58Z",
       "side": 1,
       "message": "`static const`, right?",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 6
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a4fce8_fb754457",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-23T01:10:41Z",
+      "side": 1,
+      "message": "Changing to `static const` results in the following build warning:\n\n```/drivers/usb/gadget/android_configfs_uevent.c:127:24:\nerror: passing \u0027const struct class *\u0027 to parameter of type \u0027struct class *\u0027\ndiscards qualifiers [-Werror,-Wincompatible-pointer-types-discards-qualifiers]\n  127 |         return class_register(\u0026android_usb_class);\n      |                               ^~~~~~~~~~~~~~~~~~\n/include/linux/device/class.h:102:19:\nnote: expanded from macro \u0027class_register\u0027\n  102 |         __class_register(class, \u0026__key);        \\\n      |                          ^~~~~\n/include/linux/device/class.h:93:56:\nnote: passing argument to parameter \u0027class\u0027 here\n   93 | extern int __must_check __class_register(struct class *class,```",
+      "parentUuid": "f7796812_afa69f1c",
       "range": {
         "startLine": 100,
         "startChar": 0,
