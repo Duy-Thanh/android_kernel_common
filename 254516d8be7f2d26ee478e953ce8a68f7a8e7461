@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6468f55_66be1e8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-24T08:25:29Z",
+      "side": 1,
+      "message": "Sorry, no way we are taking such a big out-of-tree modification to an out-of-tree feature which we finally replaced with in in-tree solution. This will be a maintenance nightmare.",
+      "revId": "254516d8be7f2d26ee478e953ce8a68f7a8e7461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
