@@ -22,6 +22,30 @@
       },
       "revId": "37130541c438390cc3691f8439fff31dfadc6144",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b9f253_ab9b768c",
+        "filename": "mm/memory.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 5052,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-26T21:55:28Z",
+      "side": 1,
+      "message": "If PTE exists then that implies `vmf.vma-\u003eanon_vma !\u003d NULL`. IIUC, it\u0027s not possible to have a non-missing PTE without anon_vma. `do_anonymous_page` calls `__page_add_new_anon_rmap` before setting the pte. And this function expects anon_vma to be there.\n\n\nShould I update the comment as `Not having anon_vma implies that the PTE is missing.`",
+      "parentUuid": "cf53a8bb_8ca91875",
+      "range": {
+        "startLine": 5050,
+        "startChar": 2,
+        "endLine": 5052,
+        "endChar": 26
+      },
+      "revId": "37130541c438390cc3691f8439fff31dfadc6144",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
