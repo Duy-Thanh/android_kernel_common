@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13d9724f_1b408582",
+        "filename": "mm/memory.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 5021,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-26T19:44:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e6d9718_946affcc",
+      "range": {
+        "startLine": 5021,
+        "startChar": 6,
+        "endLine": 5021,
+        "endChar": 25
+      },
+      "revId": "58f3bf8e325e77e0f6fc98010d491af681106126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dfcb43e_4d671840",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd0cf634_908ea6b1",
+        "filename": "mm/memory.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 5059,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-26T19:44:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dfcb43e_4d671840",
+      "range": {
+        "startLine": 5054,
+        "startChar": 2,
+        "endLine": 5059,
+        "endChar": 17
+      },
+      "revId": "58f3bf8e325e77e0f6fc98010d491af681106126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "893ef2e1_3e90bea2",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-02-26T18:57:04Z",
       "side": 1,
       "message": "```\nreturn uffd_missing_sigbus ? VM_FAULT_SIGBUS : VM_FAULT_RETRY;\n```",
+      "range": {
+        "startLine": 5224,
+        "startChar": 1,
+        "endLine": 5226,
+        "endChar": 23
+      },
+      "revId": "58f3bf8e325e77e0f6fc98010d491af681106126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bcd4021_4fa3469a",
+        "filename": "mm/memory.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 5226,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-26T19:44:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "893ef2e1_3e90bea2",
       "range": {
         "startLine": 5224,
         "startChar": 1,
