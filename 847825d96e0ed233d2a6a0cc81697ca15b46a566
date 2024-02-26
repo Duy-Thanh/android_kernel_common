@@ -70,6 +70,30 @@
       },
       "revId": "847825d96e0ed233d2a6a0cc81697ca15b46a566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e61b51c_9468d233",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T17:08:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2e07820_0c7259ba",
+      "range": {
+        "startLine": 609,
+        "startChar": 1,
+        "endLine": 609,
+        "endChar": 14
+      },
+      "revId": "847825d96e0ed233d2a6a0cc81697ca15b46a566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
