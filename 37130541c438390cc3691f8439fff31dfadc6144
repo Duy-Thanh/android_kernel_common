@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf53a8bb_8ca91875",
+        "filename": "mm/memory.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 5052,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-26T20:58:28Z",
+      "side": 1,
+      "message": "What if PTE exists? If vmf.vma-\u003eanon_vma were set, you would proceed with speculative handling but here you just return VM_FAULT_SIGBUS. Why the state of vmf.vma-\u003eanon_vma makes a difference for your decision? If it\u0027s always safe to return VM_FAULT_SIGBUS for uffd_missing_sigbus, why do you wait to check if PTE exists or not in `vmf.vma-\u003eanon_vma !\u003d NULL` case?\n\nThis is confusing and needs to be described in a comment here.",
+      "range": {
+        "startLine": 5050,
+        "startChar": 2,
+        "endLine": 5052,
+        "endChar": 26
+      },
+      "revId": "37130541c438390cc3691f8439fff31dfadc6144",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
