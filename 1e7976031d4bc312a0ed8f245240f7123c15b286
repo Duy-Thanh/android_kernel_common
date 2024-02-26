@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f40e2f15_b7f79bad",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/arm-smmu-v3.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T16:43:36Z",
+      "side": 1,
+      "message": "This doesn\u0027t change ownership?",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 55
+      },
+      "revId": "1e7976031d4bc312a0ed8f245240f7123c15b286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
