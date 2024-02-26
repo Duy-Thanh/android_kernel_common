@@ -46,6 +46,30 @@
       },
       "revId": "f4a3b6102f9c3efd57fff2b1bb343d6fe8e49e49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d62bd3cd_f8047cb5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T13:59:38Z",
+      "side": 1,
+      "message": "Yup, donation looks cleaner to me.",
+      "parentUuid": "35203a87_715f63a8",
+      "range": {
+        "startLine": 2317,
+        "startChar": 7,
+        "endLine": 2317,
+        "endChar": 35
+      },
+      "revId": "f4a3b6102f9c3efd57fff2b1bb343d6fe8e49e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
