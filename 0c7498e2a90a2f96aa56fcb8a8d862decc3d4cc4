@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60dc0f2b_b6ca806d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T14:27:19Z",
+      "side": 1,
+      "message": "afaict, this is only needed because the existing code in `mm.c` is built around transferring pages between different `kvm_hyp_memcache` structures, whereas the IOMMU integration with the new hyp allocator is using a `hyp_pool`.\n\nSo I think either the IOMMU code should use a memcache of its own, or we should provide some simple helpers for this in `mm.c` (e.g. `refill_mempool`) so that other users of the allocator don\u0027t have to duplicate your logic.",
+      "range": {
+        "startLine": 472,
+        "startChar": 6,
+        "endLine": 472,
+        "endChar": 26
+      },
+      "revId": "0c7498e2a90a2f96aa56fcb8a8d862decc3d4cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
