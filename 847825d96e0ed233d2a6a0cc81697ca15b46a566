@@ -22,6 +22,30 @@
       },
       "revId": "847825d96e0ed233d2a6a0cc81697ca15b46a566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5de5b297_8ebc6b68",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T16:41:11Z",
+      "side": 1,
+      "message": "yeah, it was necessary humhum...\n\nchunk_get() will compare the chunk hash... This can be modified by someone else inserting / deleting other chunks nearby, even though this one stays untouched\n\nI could get rid of that spinlock by bypassing that chunk_get() ... but we put those hash checks for a reason",
+      "parentUuid": "92d0615c_3936fb9c",
+      "range": {
+        "startLine": 609,
+        "startChar": 1,
+        "endLine": 609,
+        "endChar": 14
+      },
+      "revId": "847825d96e0ed233d2a6a0cc81697ca15b46a566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
