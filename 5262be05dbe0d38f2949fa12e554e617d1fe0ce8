@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac04baf4_1576d2af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-26T19:43:01Z",
+      "side": 1,
+      "message": "Please provide rationale for why this symbols is needed. Is this for the implementation of a vendor hook? Which one? What feature does this enable?",
+      "revId": "5262be05dbe0d38f2949fa12e554e617d1fe0ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
