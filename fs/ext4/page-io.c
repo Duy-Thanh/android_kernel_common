@@ -375,6 +375,7 @@ void ext4_io_submit(struct ext4_io_submit *io)
 	if (bio) {
 		if (io->io_wbc->sync_mode == WB_SYNC_ALL)
 			io->io_bio->bi_opf |= REQ_SYNC;
+		trace_android_vh_bio_set_ioprio_iter(io->io_bio);
 		submit_bio(io->io_bio);
 	}
 	io->io_bio = NULL;
@@ -422,6 +423,7 @@ submit_and_retry:
 		io_submit_init_bio(io, bh);
 	if (!bio_add_folio(io->io_bio, io_folio, bh->b_size, bh_offset(bh)))
 		goto submit_and_retry;
+	trace_android_vh_bio_set_ioprio(io->io_bio, &io_folio->page);
 	wbc_account_cgroup_owner(io->io_wbc, &folio->page, bh->b_size);
 	io->io_next_block++;
 }
