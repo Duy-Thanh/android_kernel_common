@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "274df11f_931c52d8",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f141609_314e4e99",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "532280f2_de17ff81",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-26T11:24:58Z",
       "side": 1,
       "message": "Similar to the above. I think (without having seen the remainder of this series) that this refers to the destination, but the naming implies that they refer to the request. So it might be good to add DEST somewhere to the define names.",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6209a114_9aace69a",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "532280f2_de17ff81",
       "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7946a5ef_d8d25781",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cf154e2_1c43c29e",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "345db244_dc55238c",
@@ -69,6 +123,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eef8ec6d_f870a93b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "I meant, we blindly try to refill the hyp side of the memcache for the vCPU as the host might have refill it.\n\nI\u0027ll rephrase.",
+      "parentUuid": "345db244_dc55238c",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a2f90f4_c4aa3a10",
@@ -82,6 +154,24 @@
       "writtenOn": "2024-02-26T11:24:58Z",
       "side": 1,
       "message": "Please put in a separate patch or remove this change altogether. This is what we will be told when sending these for review upstream :)",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2115507c_03c7e67f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a2f90f4_c4aa3a10",
       "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -105,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0107a637_f5bd439c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "Hum, that hyp_req is just an extension of the hyp_vcpu. Not sure what renaming we could do?",
+      "parentUuid": "514fb37d_ca255df3",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0dbd85a3_a3ab3017",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 1
@@ -116,6 +224,24 @@
       "writtenOn": "2024-02-26T11:24:58Z",
       "side": 1,
       "message": "READ_ONCE(host_vcpu-\u003earch.hyp_reqs)",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4fd11d8_25739f2b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "Hum, is it really necessary?\n\nThe writer doesn\u0027t use WRITE_ONCE and that operation is completely sequential, the host would write this pointer before the init for that same vCPU, I don\u0027t think we could have any race writer/reader here.",
+      "parentUuid": "0dbd85a3_a3ab3017",
       "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -173,6 +299,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8bb18b7_ffa428bc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db458a67_12bd3b96",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc6e7fba_8fe90fc6",
@@ -190,6 +334,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48fcb23b_35bc4021",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "This is really hard to read anyway...\n\nI\u0027ll refactor where _MAX is the hard limit.\n\nI WARN_ON() if we reach _MAX (i.e. the last element of the list isn\u0027t a LAST_REQ) \n\nI return NULL if we don\u0027t have enough space to fit LAST_REQ.",
+      "parentUuid": "fc6e7fba_8fe90fc6",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c7f8fa1_76990e46",
@@ -203,6 +365,24 @@
       "writtenOn": "2024-02-26T11:24:58Z",
       "side": 1,
       "message": "host_vcpu-\u003earch.hyp_reqs \u003d NULL;\nas well?",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b541a131_d0ea3e49",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T19:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c7f8fa1_76990e46",
       "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
