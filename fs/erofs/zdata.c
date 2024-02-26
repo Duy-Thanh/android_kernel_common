@@ -1668,6 +1668,7 @@ static void z_erofs_submit_queue(struct z_erofs_decompress_frontend *f,
 			if (bio && (cur != last_pa ||
 				    last_bdev != mdev.m_bdev)) {
 submit_bio_retry:
+				trace_android_vh_bio_set_ioprio_iter(bio);
 				submit_bio(bio);
 				if (memstall) {
 					psi_memstall_leave(&pflags);
@@ -1701,6 +1702,7 @@ submit_bio_retry:
 					  bvec.bv_offset))
 				goto submit_bio_retry;
 
+			trace_android_vh_bio_set_ioprio(bio, bvec.bv_page);
 			last_pa = cur + bvec.bv_len;
 			bypass = false;
 		} while ((cur += bvec.bv_len) < end);
@@ -1712,6 +1714,7 @@ submit_bio_retry:
 	} while (owned_head != Z_EROFS_PCLUSTER_TAIL);
 
 	if (bio) {
+		trace_android_vh_bio_set_ioprio_iter(bio);
 		submit_bio(bio);
 		if (memstall)
 			psi_memstall_leave(&pflags);
