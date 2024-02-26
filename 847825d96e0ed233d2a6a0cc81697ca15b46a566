@@ -46,6 +46,30 @@
       },
       "revId": "847825d96e0ed233d2a6a0cc81697ca15b46a566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2e07820_0c7259ba",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-26T16:46:47Z",
+      "side": 1,
+      "message": "I\u0027m keen on keeping the chunk_get because it would explode straight if you try to free something that wasn\u0027t allocated with hyp_alloc in a first place!",
+      "parentUuid": "5de5b297_8ebc6b68",
+      "range": {
+        "startLine": 609,
+        "startChar": 1,
+        "endLine": 609,
+        "endChar": 14
+      },
+      "revId": "847825d96e0ed233d2a6a0cc81697ca15b46a566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
