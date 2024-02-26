@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30eaeacd_872f9c86",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T13:34:44Z",
+      "side": 1,
+      "message": "Are you sure it\u0027s safe to do the accounting after the page has been freed? I couldn\u0027t convince myself about that (espec. when you start looking at the memcg code). I _think_ kfree() does it the other way round, but please double-check.",
+      "range": {
+        "startLine": 1086,
+        "startChar": 2,
+        "endLine": 1086,
+        "endChar": 27
+      },
+      "revId": "421f0ca072c570ddd4182326bcd03b23f703e562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
