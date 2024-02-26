@@ -488,6 +488,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd09cae1_53808f49",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-26T16:18:47Z",
+      "side": 1,
+      "message": "Ah, older kernels, sorry, this is something for newer releases.  All is ok for now, sorry.",
+      "parentUuid": "d5a4fce8_fb754457",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 6
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42756e12_3bf618d3",

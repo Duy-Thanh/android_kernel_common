@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "214a8b70_e6fc84ee",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-26T16:18:47Z",
+      "side": 1,
+      "message": "When a kernel driver is working, it is quiet.  do NOT change this to dev_info(), that would just spam the log and take up lots of resources.\n\nWhy is this not ok to be dev_dbg()?  If you need to debug it, great, turn this line on, otherwise it is off.",
+      "parentUuid": "90c7a879_a62914d8",
+      "range": {
+        "startLine": 62,
+        "startChar": 3,
+        "endLine": 62,
+        "endChar": 10
+      },
+      "revId": "4e84a40f1680d01c8dbfe9234ade7b32efeac59d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55ac6226_ae5f6de9",
         "filename": "drivers/usb/gadget/android_configfs_uevent.c",
         "patchSetId": 15

@@ -186,6 +186,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73f928e0_e7e2a585",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-26T16:18:47Z",
+      "side": 1,
+      "message": "Ok, if no lock is needed, that\u0027s fine, but that\u0027s not exactly obvious 😊",
+      "parentUuid": "b97a41cb_37b85d50",
+      "range": {
+        "startLine": 860,
+        "startChar": 0,
+        "endLine": 860,
+        "endChar": 47
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e58ddb42_05f90493",
         "filename": "drivers/usb/gadget/composite.c",
         "patchSetId": 9
@@ -269,6 +293,30 @@
       "side": 1,
       "message": "Similar to above, I believe locking cdev-\u003elock is unnecessary, as android_set_connected() calls __android_set_connected(), which locks the android specific structure.",
       "parentUuid": "01d11ab3_490853f5",
+      "range": {
+        "startLine": 1703,
+        "startChar": 1,
+        "endLine": 1703,
+        "endChar": 22
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25764775_a3bcdaaf",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-26T16:18:47Z",
+      "side": 1,
+      "message": "Again, this needs to be documented somehow...",
+      "parentUuid": "79e9ff14_81cbeac9",
       "range": {
         "startLine": 1703,
         "startChar": 1,
