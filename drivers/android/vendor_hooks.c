@@ -63,11 +63,15 @@
 #include <trace/hooks/signal.h>
 #include <trace/hooks/logbuf.h>
 #include <trace/hooks/dmabuf.h>
+<<<<<<< PATCH SET (a7a76c ANDROID: Add vendor hook for setting ioprio)
+#include <trace/hooks/ioprio.h>
+=======
 #include <trace/hooks/usb.h>
 #include <trace/hooks/compaction.h>
 #include <trace/hooks/sd.h>
 #include <trace/hooks/user.h>
 #include <trace/hooks/fuse.h>
+>>>>>>> BASE      (9a65b2 ANDROID: ABI: update symbol list for galaxy)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -116,6 +120,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_opt_spin_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_can_spin_on_owner);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_direct_rsteal);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_optimistic_rspin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_set_ioprio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_set_ioprio_ipu);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_set_ioprio_iter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mpam_set);
