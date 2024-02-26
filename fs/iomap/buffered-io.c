@@ -18,6 +18,7 @@
 #include <linux/sched/signal.h>
 #include <linux/migrate.h>
 #include "trace.h"
+#include <trace/hooks/ioprio.h>
 
 #include "../internal.h"
 
@@ -369,8 +370,10 @@ static loff_t iomap_readpage_iter(const struct iomap_iter *iter,
 		gfp_t orig_gfp = gfp;
 		unsigned int nr_vecs = DIV_ROUND_UP(length, PAGE_SIZE);
 
-		if (ctx->bio)
+		if (ctx->bio) {
+			trace_android_vh_bio_set_ioprio_iter(ctx->bio);
 			submit_bio(ctx->bio);
+		}
 
 		if (ctx->rac) /* same as readahead_gfp_mask */
 			gfp |= __GFP_NORETRY | __GFP_NOWARN;
@@ -390,6 +393,7 @@ static loff_t iomap_readpage_iter(const struct iomap_iter *iter,
 		ctx->bio->bi_iter.bi_sector = sector;
 		ctx->bio->bi_end_io = iomap_read_end_io;
 		bio_add_folio_nofail(ctx->bio, folio, plen, poff);
+		trace_android_vh_bio_set_ioprio(ctx->bio, &folio->page);
 	}
 
 done:
@@ -423,6 +427,7 @@ int iomap_read_folio(struct folio *folio, const struct iomap_ops *ops)
 		folio_set_error(folio);
 
 	if (ctx.bio) {
+		trace_android_vh_bio_set_ioprio_iter(ctx.bio);
 		submit_bio(ctx.bio);
 		WARN_ON_ONCE(!ctx.cur_folio_in_bio);
 	} else {
@@ -495,8 +500,10 @@ void iomap_readahead(struct readahead_control *rac, const struct iomap_ops *ops)
 	while (iomap_iter(&iter, ops) > 0)
 		iter.processed = iomap_readahead_iter(&iter, &ctx);
 
-	if (ctx.bio)
+	if (ctx.bio) {
+		trace_android_vh_bio_set_ioprio_iter(ctx.bio);
 		submit_bio(ctx.bio);
+	}
 	if (ctx.cur_folio) {
 		if (!ctx.cur_folio_in_bio)
 			folio_unlock(ctx.cur_folio);
@@ -624,6 +631,8 @@ static int iomap_read_folio_sync(loff_t block_start, struct folio *folio,
 	bio_init(&bio, iomap->bdev, &bvec, 1, REQ_OP_READ);
 	bio.bi_iter.bi_sector = iomap_sector(iomap, block_start);
 	bio_add_folio_nofail(&bio, folio, plen, poff);
+	trace_android_vh_bio_set_ioprio(&bio, &folio->page);
+	trace_android_vh_bio_set_ioprio_iter(&bio);
 	return submit_bio_wait(&bio);
 }
 
@@ -1648,7 +1657,7 @@ iomap_submit_ioend(struct iomap_writepage_ctx *wpc, struct iomap_ioend *ioend,
 		bio_endio(ioend->io_bio);
 		return error;
 	}
-
+	trace_android_vh_bio_set_ioprio_iter(ioend->io_bio);
 	submit_bio(ioend->io_bio);
 	return 0;
 }
@@ -1697,6 +1706,7 @@ iomap_chain_bio(struct bio *prev)
 
 	bio_chain(prev, new);
 	bio_get(prev);		/* for iomap_finish_ioend */
+	trace_android_vh_bio_set_ioprio_iter(prev);
 	submit_bio(prev);
 	return new;
 }
@@ -1752,6 +1762,7 @@ iomap_add_to_ioend(struct inode *inode, loff_t pos, struct folio *folio,
 		atomic_add(len, &ifs->write_bytes_pending);
 	wpc->ioend->io_size += len;
 	wbc_account_cgroup_owner(wbc, &folio->page, len);
+	trace_android_vh_bio_set_ioprio(wpc->ioend->io_bio, &folio->page);
 }
 
 /*

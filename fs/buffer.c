@@ -50,6 +50,7 @@
 #include <linux/fscrypt.h>
 #include <linux/fsverity.h>
 #include <linux/sched/isolation.h>
+#include <trace/hooks/ioprio.h>
 
 #include "internal.h"
 
@@ -2822,6 +2823,9 @@ static void submit_bh_wbc(blk_opf_t opf, struct buffer_head *bh,
 		wbc_init_bio(wbc, bio);
 		wbc_account_cgroup_owner(wbc, bh->b_page, bh->b_size);
 	}
+
+	trace_android_vh_bio_set_ioprio(bio, bh->b_page);
+	trace_android_vh_bio_set_ioprio_iter(bio);
 
 	submit_bio(bio);
 }
