@@ -79,6 +79,7 @@ static struct bio *mpage_bio_submit_read(struct bio *bio)
 {
 	bio->bi_end_io = mpage_read_end_io;
 	guard_bio_eod(bio);
+	trace_android_vh_bio_set_ioprio_iter(bio);
 	submit_bio(bio);
 	return NULL;
 }
@@ -87,6 +88,7 @@ static struct bio *mpage_bio_submit_write(struct bio *bio)
 {
 	bio->bi_end_io = mpage_write_end_io;
 	guard_bio_eod(bio);
+	trace_android_vh_bio_set_ioprio_iter(bio);
 	submit_bio(bio);
 	return NULL;
 }
@@ -308,6 +310,7 @@ alloc_new:
 		goto alloc_new;
 	}
 
+	trace_android_vh_bio_set_ioprio(args->bio, &folio->page);
 	relative_block = block_in_file - args->first_logical_block;
 	nblocks = map_bh->b_size >> blkbits;
 	if ((buffer_boundary(map_bh) && relative_block == nblocks) ||
@@ -626,6 +629,7 @@ alloc_new:
 		goto alloc_new;
 	}
 
+	trace_android_vh_bio_set_ioprio(bio, &folio->page);
 	clean_buffers(&folio->page, first_unmapped);
 
 	BUG_ON(folio_test_writeback(folio));

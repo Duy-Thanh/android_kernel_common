@@ -351,6 +351,7 @@ int ext4_mpage_readpages(struct inode *inode,
 		if (bio && (last_block_in_bio != blocks[0] - 1 ||
 			    !fscrypt_mergeable_bio(bio, inode, next_block))) {
 		submit_and_realloc:
+			trace_android_vh_bio_set_ioprio_iter(bio);
 			submit_bio(bio);
 			bio = NULL;
 		}
@@ -374,9 +375,11 @@ int ext4_mpage_readpages(struct inode *inode,
 		if (!bio_add_folio(bio, folio, length, 0))
 			goto submit_and_realloc;
 
+		trace_android_vh_bio_set_ioprio(bio, &folio->page);
 		if (((map.m_flags & EXT4_MAP_BOUNDARY) &&
 		     (relative_block == map.m_len)) ||
 		    (first_hole != blocks_per_page)) {
+			trace_android_vh_bio_set_ioprio_iter(bio);
 			submit_bio(bio);
 			bio = NULL;
 		} else
@@ -384,6 +387,7 @@ int ext4_mpage_readpages(struct inode *inode,
 		continue;
 	confused:
 		if (bio) {
+			trace_android_vh_bio_set_ioprio_iter(bio);
 			submit_bio(bio);
 			bio = NULL;
 		}
@@ -394,8 +398,10 @@ int ext4_mpage_readpages(struct inode *inode,
 next_page:
 		; /* A label shall be followed by a statement until C23 */
 	}
-	if (bio)
+	if (bio) {
+		trace_android_vh_bio_set_ioprio_iter(bio);
 		submit_bio(bio);
+	}
 	return 0;
 }
 
