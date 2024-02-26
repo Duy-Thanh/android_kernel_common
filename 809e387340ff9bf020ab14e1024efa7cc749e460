@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca5b5c3f_797a6325",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T13:48:36Z",
+      "side": 1,
+      "message": "I think this would be much clearer if you just defined the bitwise encoding using static masks (#defines), and then used `FIELD_FIT, FIELD_PREP, FIELD_GET` to encode/decode it. Then you don\u0027t need to roll your own BUG_ONs() and you can use the same mask definitions at EL1 and EL2.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 0
+      },
+      "revId": "809e387340ff9bf020ab14e1024efa7cc749e460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
