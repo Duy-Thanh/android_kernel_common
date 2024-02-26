@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f141609_314e4e99",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "Naming nit: wouldn\u0027t it be better to include TYPE somewhere in the name of the defines?",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "532280f2_de17ff81",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "Similar to the above. I think (without having seen the remainder of this series) that this refers to the destination, but the naming implies that they refer to the request. So it might be good to add DEST somewhere to the define names.",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf154e2_1c43c29e",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "Two more nits, this isn\u0027t really a description, but the rests themselves right?\n\nAlso fullfill-\u003efulfill",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "345db244_dc55238c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "Not sure I understand this comment, and in turn why we\u0027re refilling the memchache here.",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a2f90f4_c4aa3a10",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "Please put in a separate patch or remove this change altogether. This is what we will be told when sending these for review upstream :)",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514fb37d_ca255df3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "This isn\u0027t only unpinning the host vcpu. I think this requires either a new function or a renaming of this one.",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dbd85a3_a3ab3017",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "READ_ONCE(host_vcpu-\u003earch.hyp_reqs)",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21440883_a7ab915b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "Relates to what I mentioned earlier, but here\u0027s a case where the naming is a bit confusing, i.e., type \u003d\u003d KVM_HYP_REQ_END, but then checking that i is a (similarly sounding) KVM_HYP_REQ_MAX",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc6e7fba_8fe90fc6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure the answer is yes, but is it safe to access hyp_req + 1 if i is at KVM_HYP_REQ_MAX - 1?",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c7f8fa1_76990e46",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T11:24:58Z",
+      "side": 1,
+      "message": "host_vcpu-\u003earch.hyp_reqs \u003d NULL;\nas well?",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
