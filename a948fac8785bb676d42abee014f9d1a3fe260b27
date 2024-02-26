@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a51bc5a_4c138deb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T11:25:09Z",
+      "side": 1,
+      "message": "Why not just pull out `alloc_size` from the chunk, for symmetry with the free path?",
+      "range": {
+        "startLine": 607,
+        "startChar": 15,
+        "endLine": 607,
+        "endChar": 37
+      },
+      "revId": "a948fac8785bb676d42abee014f9d1a3fe260b27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
