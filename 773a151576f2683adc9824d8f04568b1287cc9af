@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b2bc11_ad92a7c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-02-26T07:59:05Z",
+      "side": 1,
+      "message": "`BUILD.bazel` needs an entry for the new file in `aarch64_additional_kmi_symbol_lists`.",
+      "revId": "773a151576f2683adc9824d8f04568b1287cc9af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
