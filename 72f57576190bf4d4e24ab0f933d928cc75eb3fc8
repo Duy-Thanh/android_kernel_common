@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d8a3864_61782766",
+        "filename": "arch/arm64/kvm/hyp/nvhe/page_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T15:13:58Z",
+      "side": 1,
+      "message": "One problem with `bool` arguments is that they\u0027re pretty cryptic at the callsite.\n\nHow about instead renaming this function to `static int __hyp_pool_init(..., bool empty_alloc)` and then having `hyp_pool_init` call it with `false` and add a new `hyp_pool_init_empty` which passes `true`?",
+      "range": {
+        "startLine": 227,
+        "startChar": 38,
+        "endLine": 227,
+        "endChar": 49
+      },
+      "revId": "72f57576190bf4d4e24ab0f933d928cc75eb3fc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
