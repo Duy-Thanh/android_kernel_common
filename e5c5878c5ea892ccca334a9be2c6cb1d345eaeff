@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb1598b_9e50b859",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2009035
+      },
+      "writtenOn": "2024-02-27T22:12:13Z",
+      "side": 1,
+      "message": "This can be applied after merging e5075d8ec564 (\"Merge tag \u0027riscv-for-linus-6.8-mw4\u0027 of git://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux\"), which is part of v6.8-rc1.",
+      "revId": "e5c5878c5ea892ccca334a9be2c6cb1d345eaeff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
