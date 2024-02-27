@@ -613,6 +613,15 @@
   __tracepoint_mm_filemap_delete_from_page_cache
   __tracepoint_mm_filemap_add_to_page_cache
 
+<<<<<<< PATCH SET (d02f78 ANDROID: ABI: update gki symbol list)
+#required by ioprio.ko
+  __traceiter_android_vh_bio_set_ioprio
+  __traceiter_android_vh_bio_set_ioprio_ipu
+  __traceiter_android_vh_bio_set_ioprio_iter
+  __tracepoint_android_vh_bio_set_ioprio
+  __tracepoint_android_vh_bio_set_ioprio_ipu
+  __tracepoint_android_vh_bio_set_ioprio_iter
+=======
 # required by mali_gondul.ko
   anon_inode_getfd
   __arch_clear_user
@@ -708,3 +717,4 @@
   devfreq_cooling_em_register
   dev_pm_qos_read_value
   regcache_cache_only
+>>>>>>> BASE      (f4aba9 ANDROID: Add vendor hook for setting ioprio)
