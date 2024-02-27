@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb04ff99_1c46545c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T15:28:33Z",
+      "side": 1,
+      "message": "Not sure if that would apply to your iommu support. For the memory sharing I take shortcut as of \"we\u0027re going back to the host to map a region of the Guest? Well we might as well topup the memory at the same type\" \n\nBut I believe you only care about refill a specific destination",
+      "revId": "33aa28966417d25a10d68579f85877283ffc3481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36307bec_072c7b86",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T15:28:33Z",
+      "side": 1,
+      "message": "Might as well drop the hyp_req argument and inside the function we directly \n\n`this_cpu_ptr(\u0026kvm_hyp_reqs)` ?",
+      "revId": "33aa28966417d25a10d68579f85877283ffc3481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa21ac76_6d7a83de",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T15:28:33Z",
+      "side": 1,
+      "message": "`if (!WARN_ON(req-\u003etype !\u003d KVM_HYP_REQ_MEM)` ?\n\nSo we catch if we try to use an unsupported request here?",
+      "revId": "33aa28966417d25a10d68579f85877283ffc3481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b48ed2e_26cdf593",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T15:28:33Z",
+      "side": 1,
+      "message": "`KVM_HYP_REQ_END` should be better, as this is common with the vCPU version?\n\n(Warning following review on my series, this will be renamed as KVM_HYP_LAST_REQ)",
+      "revId": "33aa28966417d25a10d68579f85877283ffc3481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
