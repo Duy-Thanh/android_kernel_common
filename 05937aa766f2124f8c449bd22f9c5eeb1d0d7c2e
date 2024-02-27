@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d32766_8f44e02a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T15:20:17Z",
+      "side": 1,
+      "message": "Hopefully we can factor this out into e.g. `refill_hyp_pool` so that others can benefit from the logic.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 0
+      },
+      "revId": "05937aa766f2124f8c449bd22f9c5eeb1d0d7c2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
