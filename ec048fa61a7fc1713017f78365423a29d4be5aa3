@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "235d1fde_94694e3b",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T18:40:43Z",
+      "side": 1,
+      "message": "Just curious, but where do you invalidate the TLB?",
+      "range": {
+        "startLine": 956,
+        "startChar": 11,
+        "endLine": 956,
+        "endChar": 26
+      },
+      "revId": "ec048fa61a7fc1713017f78365423a29d4be5aa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
