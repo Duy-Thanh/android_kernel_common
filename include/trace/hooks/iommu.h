@@ -15,6 +15,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_iommu_setup_dma_ops,
 
 struct iova_domain;
 
+DECLARE_RESTRICTED_HOOK(android_rvh_iommu_dma_info_to_prot,
+	TP_PROTO(unsigned long attrs, int *prot),
+	TP_ARGS(attrs, prot), 1);
+
 DECLARE_HOOK(android_vh_iommu_iovad_alloc_iova,
 	TP_PROTO(struct device *dev, struct iova_domain *iovad, dma_addr_t iova, size_t size),
 	TP_ARGS(dev, iovad, iova, size));
