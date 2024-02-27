@@ -33,6 +33,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/alarmtimer.h>
 
+static const char alarmtimer_group_name[] = "alarmtimer";
+static unsigned int failed_suspend_count = 0;
+
 /**
  * struct alarm_base - Alarm timer bases
  * @lock:		Lock for syncrhonized access to the base
@@ -62,6 +65,68 @@ static DEFINE_SPINLOCK(freezer_delta_lock);
 static struct rtc_timer		rtctimer;
 static struct rtc_device	*rtcdev;
 static DEFINE_SPINLOCK(rtcdev_lock);
+
+/* Duration to check for soonest alarm during kernel suspend */
+static unsigned long suspend_alarm_pending_window_ms = 2 * MSEC_PER_SEC;
+
+static ssize_t suspend_alarm_pending_window_show(struct kobject *kobj,
+					struct kobj_attribute *attr, char *buf)
+{
+	return sysfs_emit(buf, "%lu\n", suspend_alarm_pending_window_ms);
+}
+
+static ssize_t suspend_alarm_pending_window_store(struct kobject *kobj,
+			struct kobj_attribute *attr, const char *buf, size_t n)
+{
+	unsigned long val;
+
+	if (kstrtoul(buf, 10, &val))
+		return -EINVAL;
+
+	suspend_alarm_pending_window_ms = val;
+
+	return n;
+}
+
+static struct kobj_attribute suspend_alarm_pending_window =
+			__ATTR_RW(suspend_alarm_pending_window);
+
+static ssize_t failed_suspend_count_show(struct kobject *kobj,
+					struct kobj_attribute *attr, char *buf)
+{
+	unsigned int val = failed_suspend_count;
+	failed_suspend_count = 0;
+	return sysfs_emit(buf, "%u\n", val);
+}
+
+static struct kobj_attribute failed_suspend_count_attr =
+			__ATTR_RO(failed_suspend_count);
+
+static struct attribute *alarmtimer_attrs[] = {
+	&suspend_alarm_pending_window.attr,
+	&failed_suspend_count_attr.attr,
+	NULL,
+};
+
+static const struct attribute_group alarmtimer_attr_group = {
+	.name   = alarmtimer_group_name,
+	.attrs  = alarmtimer_attrs,
+};
+
+/**
+ * alarmtimer_sysfs_add - Adds sysfs attributes for alarmtimer
+ *
+ * Returns 0 if successful, non-zero value for error.
+ */
+static int alarmtimer_sysfs_add(void)
+{
+	int ret = sysfs_create_group(kernel_kobj, &alarmtimer_attr_group);
+
+	if (ret)
+		pr_warn("[%s] failed to create a sysfs group\n", __func__);
+
+	return ret;
+}
 
 /**
  * alarmtimer_get_rtcdev - Return selected rtcdevice
@@ -99,8 +164,11 @@ static int alarmtimer_rtc_add_device(struct device *dev,
 
 	pdev = platform_device_register_data(dev, "alarmtimer",
 					     PLATFORM_DEVID_AUTO, NULL, 0);
-	if (!IS_ERR(pdev))
+	if (!IS_ERR(pdev)) {
 		device_init_wakeup(&pdev->dev, true);
+		if (alarmtimer_sysfs_add())
+			pr_warn("[%s] Failed to add alarmtimer sysfs attributes\n", __func__);
+	}
 
 	spin_lock_irqsave(&rtcdev_lock, flags);
 	if (!IS_ERR(pdev) && !rtcdev) {
@@ -281,6 +349,7 @@ static int alarmtimer_suspend(struct device *dev)
 		return 0;
 
 	if (ktime_to_ns(min) < 2 * NSEC_PER_SEC) {
+		failed_suspend_count++;
 		pm_wakeup_event(dev, 2 * MSEC_PER_SEC);
 		return -EBUSY;
 	}
