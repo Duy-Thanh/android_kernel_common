@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79df74c9_2c60e97c",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2024-02-27T06:36:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "214a8b70_e6fc84ee",
+      "range": {
+        "startLine": 62,
+        "startChar": 3,
+        "endLine": 62,
+        "endChar": 10
+      },
+      "revId": "4e84a40f1680d01c8dbfe9234ade7b32efeac59d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55ac6226_ae5f6de9",
