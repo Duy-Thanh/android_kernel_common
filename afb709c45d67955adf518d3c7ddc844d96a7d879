@@ -33,6 +33,24 @@
       "message": "HOLD until 29 Feb",
       "revId": "afb709c45d67955adf518d3c7ddc844d96a7d879",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3d6e1ed_d0d0ac4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-02-27T10:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73e97d64_0c06ca9f",
+      "revId": "afb709c45d67955adf518d3c7ddc844d96a7d879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
