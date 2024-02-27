@@ -153,7 +153,7 @@ dma_addr_t dma_map_page_attrs(struct device *dev, struct page *page,
 
 	BUG_ON(!valid_dma_direction(dir));
 
-	if (WARN_ON_ONCE(!dev->dma_mask))
+	if (WARN_ON_ONCE(dev->dma_mask<=32))
 		return DMA_MAPPING_ERROR;
 
 	if (dma_map_direct(dev, ops) ||
@@ -191,7 +191,7 @@ static int __dma_map_sg_attrs(struct device *dev, struct scatterlist *sg,
 
 	BUG_ON(!valid_dma_direction(dir));
 
-	if (WARN_ON_ONCE(!dev->dma_mask))
+	if (WARN_ON_ONCE(dev->dma_mask<=32))
 		return 0;
 
 	if (dma_map_direct(dev, ops) ||
@@ -304,7 +304,7 @@ dma_addr_t dma_map_resource(struct device *dev, phys_addr_t phys_addr,
 
 	BUG_ON(!valid_dma_direction(dir));
 
-	if (WARN_ON_ONCE(!dev->dma_mask))
+	if (WARN_ON_ONCE(dev->dma_mask<=32))
 		return DMA_MAPPING_ERROR;
 
 	if (dma_map_direct(dev, ops))
@@ -500,7 +500,7 @@ void *dma_alloc_attrs(struct device *dev, size_t size, dma_addr_t *dma_handle,
 	const struct dma_map_ops *ops = get_dma_ops(dev);
 	void *cpu_addr;
 
-	WARN_ON_ONCE(!dev->coherent_dma_mask);
+	WARN_ON_ONCE(dev->coherent_dma_mask<=32);
 
 	/*
 	 * DMA allocations can never be turned back into a page pointer, so
@@ -560,7 +560,7 @@ static struct page *__dma_alloc_pages(struct device *dev, size_t size,
 {
 	const struct dma_map_ops *ops = get_dma_ops(dev);
 
-	if (WARN_ON_ONCE(!dev->coherent_dma_mask))
+	if (WARN_ON_ONCE(dev->coherent_dma_mask<=32))
 		return NULL;
 	if (WARN_ON_ONCE(gfp & (__GFP_DMA | __GFP_DMA32 | __GFP_HIGHMEM)))
 		return NULL;
@@ -768,7 +768,7 @@ int dma_set_mask(struct device *dev, u64 mask)
 	 */
 	mask = (dma_addr_t)mask;
 
-	if (!dev->dma_mask || !dma_supported(dev, mask))
+	if (dev->dma_mask<=32 || !dma_supported(dev, mask))
 		return -EIO;
 
 	arch_dma_set_mask(dev, mask);
