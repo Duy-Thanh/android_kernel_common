@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff3ca7e_75f7d135",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/arm-smmu-v3.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T10:33:55Z",
+      "side": 1,
+      "message": "Hmm, this looks pretty hopeless to me. If we can\u0027t sync the STE, we can\u0027t reliably put it back to zero, so I\u0027d be inclined to explode or put the SMMU back into abort.",
+      "range": {
+        "startLine": 571,
+        "startChar": 0,
+        "endLine": 571,
+        "endChar": 13
+      },
+      "revId": "232e3f03f26e49171893d766d562a2c81153d72a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
