@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d424c8be_0cc03bed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-27T15:40:11Z",
+      "side": 1,
+      "message": "Why not just do this in your ufs driver?  No hooks should be required at all.",
+      "revId": "12cca78f7ef7751ed9538b8c89b20cf60d650191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
