@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60e6ce6e_71a8a46b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T18:43:10Z",
+      "side": 1,
+      "message": "We should do that instead, otherwise it\u0027s very hard to reason about atomicity and coherency (espec. if we read these structures back).",
+      "range": {
+        "startLine": 11,
+        "startChar": 21,
+        "endLine": 11,
+        "endChar": 59
+      },
+      "revId": "06273eb452f793c808d37dafa7759db7731a8642",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
