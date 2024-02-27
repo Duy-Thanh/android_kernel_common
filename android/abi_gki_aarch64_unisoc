@@ -398,3 +398,7 @@
   __traceiter_mm_filemap_add_to_page_cache
   __tracepoint_mm_filemap_delete_from_page_cache
   __tracepoint_mm_filemap_add_to_page_cache
+
+#required by ioprio.ko
+  __traceiter_android_vh_bio_ioprio_acct
+  __tracepoint_android_vh_bio_ioprio_acct
