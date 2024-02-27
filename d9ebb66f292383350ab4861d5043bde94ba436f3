@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3012ece7_9bc4f139",
+        "filename": "Documentation/mm/frontswap.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-27T19:22:57Z",
+      "side": 1,
+      "message": "Please mention in the patch description that you had to add this file back. That was not done in the previous version.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 0
+      },
+      "revId": "d9ebb66f292383350ab4861d5043bde94ba436f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c9275f_6a11b09b",
+        "filename": "fs/ext4/readpage.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-27T19:22:57Z",
+      "side": 1,
+      "message": "Please mention in the patch description that this file changed. page was changed to folio.",
+      "range": {
+        "startLine": 348,
+        "startChar": 7,
+        "endLine": 349,
+        "endChar": 30
+      },
+      "revId": "d9ebb66f292383350ab4861d5043bde94ba436f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
