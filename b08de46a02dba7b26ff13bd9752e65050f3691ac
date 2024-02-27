@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb8f1783_785f089b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/arm-smmu-v3.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T14:51:39Z",
+      "side": 1,
+      "message": "`u64`?",
+      "range": {
+        "startLine": 24,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "b08de46a02dba7b26ff13bd9752e65050f3691ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
