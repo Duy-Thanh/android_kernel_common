@@ -16,6 +16,24 @@
       "message": "This isn\u0027t necessary, because ABI monitoring is not enabled yet, so no need to hide this from `GENKSYMS`. Also, this is misspelled. It\u0027s best to just remove this guard.",
       "revId": "6f5e0fa60109003ff3a0a51f0cce8a291f9d5a39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7235abe_7ff5f845",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1986720
+      },
+      "writtenOn": "2024-02-27T23:27:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a760876_d5cbf3bb",
+      "revId": "6f5e0fa60109003ff3a0a51f0cce8a291f9d5a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
