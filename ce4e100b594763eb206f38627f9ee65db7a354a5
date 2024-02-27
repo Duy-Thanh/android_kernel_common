@@ -50,6 +50,24 @@
       "message": "Kalesh, I\u0027m unable to add you as reviewer because you are owner, I guess. But can you please review the CL as well. Thanks.",
       "revId": "ce4e100b594763eb206f38627f9ee65db7a354a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d466f573_7478fe84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-02-27T22:15:24Z",
+      "side": 1,
+      "message": "Done. Once the other presubmtis compelte, you can bypass the check patch failure since you didn\u0027t add the BUG_ON it\u0027s complaining about.",
+      "parentUuid": "6230ca99_608adcf2",
+      "revId": "ce4e100b594763eb206f38627f9ee65db7a354a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
