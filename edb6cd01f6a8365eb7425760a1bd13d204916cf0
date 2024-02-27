@@ -16,6 +16,23 @@
       "message": "Arve: Sorry it took a while to upload this, I\u0027ve been preoccupied trying to debug an issue where it fails to boot on Pixel, but works fine in cuttlefish.",
       "revId": "edb6cd01f6a8365eb7425760a1bd13d204916cf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32bc2582_e4bf7a03",
+        "filename": "drivers/android/binder_pick_impl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-27T16:59:52Z",
+      "side": 1,
+      "message": "This triggers a checkpatch error, but I thought we are not supposed to split long strings over several lines?",
+      "revId": "edb6cd01f6a8365eb7425760a1bd13d204916cf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
