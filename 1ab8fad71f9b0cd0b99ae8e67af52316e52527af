@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f957a496_96acf86f",
+        "filename": "drivers/iommu/io-pgtable-arm-common.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T13:08:59Z",
+      "side": 1,
+      "message": "If pte isn\u0027t a leaf entry (i.e. it\u0027s a table), doesn\u0027t this point a freed memory? Why is that a useful thing to pass to the walker?",
+      "range": {
+        "startLine": 444,
+        "startChar": 6,
+        "endLine": 444,
+        "endChar": 10
+      },
+      "revId": "1ab8fad71f9b0cd0b99ae8e67af52316e52527af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
