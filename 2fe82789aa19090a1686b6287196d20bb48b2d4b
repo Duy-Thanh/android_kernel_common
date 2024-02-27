@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97365216_c129f90d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-arm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T10:29:02Z",
+      "side": 1,
+      "message": "Do we really need this at EL2?",
+      "range": {
+        "startLine": 15,
+        "startChar": 21,
+        "endLine": 15,
+        "endChar": 37
+      },
+      "revId": "2fe82789aa19090a1686b6287196d20bb48b2d4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb2c8ee3_73ba648e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-arm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T10:29:02Z",
+      "side": 1,
+      "message": "Better to return NULL in this case?",
+      "range": {
+        "startLine": 21,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 7
+      },
+      "revId": "2fe82789aa19090a1686b6287196d20bb48b2d4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f449576d_1a5d1ce6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-arm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T10:29:02Z",
+      "side": 1,
+      "message": "Better to return NULL in this case?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 27
+      },
+      "revId": "2fe82789aa19090a1686b6287196d20bb48b2d4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b5561c_7c2b34d8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-arm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-27T10:29:02Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the alignment check be done on the physical address?",
+      "range": {
+        "startLine": 69,
+        "startChar": 17,
+        "endLine": 69,
+        "endChar": 24
+      },
+      "revId": "2fe82789aa19090a1686b6287196d20bb48b2d4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
