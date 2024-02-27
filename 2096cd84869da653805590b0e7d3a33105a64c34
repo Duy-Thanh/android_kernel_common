@@ -51,6 +51,24 @@
       "parentUuid": "7ba895f4_c0db38ce",
       "revId": "2096cd84869da653805590b0e7d3a33105a64c34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "787b80d2_523439a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-27T21:11:46Z",
+      "side": 1,
+      "message": "Hi Todd, Is it ok if we first merge this CL (as it was actively revised and reviewed) and then I get the 5.15 one updated and get it reviewed?",
+      "parentUuid": "b950dd15_da14ea1a",
+      "revId": "2096cd84869da653805590b0e7d3a33105a64c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
