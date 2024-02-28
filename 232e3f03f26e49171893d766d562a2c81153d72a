@@ -22,6 +22,30 @@
       },
       "revId": "232e3f03f26e49171893d766d562a2c81153d72a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fe67cc6_57d4c2af",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/arm-smmu-v3.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T18:00:24Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a bit tricky, as if the STE is not syncing, I\u0027d expect the new value is not observed, but nothing guarantees that.",
+      "parentUuid": "bff3ca7e_75f7d135",
+      "range": {
+        "startLine": 571,
+        "startChar": 0,
+        "endLine": 571,
+        "endChar": 13
+      },
+      "revId": "232e3f03f26e49171893d766d562a2c81153d72a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
