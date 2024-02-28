@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4570ecd1_d23e7b78",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-02-28T00:01:48Z",
+      "side": 1,
+      "message": "Please move this back to being outside of `#define CREATE_TRACE_POINTS`.",
+      "revId": "aaba52bbf2f912fc67d34d683639460e53902538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
