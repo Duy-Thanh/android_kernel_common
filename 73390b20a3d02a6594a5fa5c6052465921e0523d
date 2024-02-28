@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43e89637_44dcab60",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-28T16:22:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46afc8be_7ba4afae",
+      "revId": "73390b20a3d02a6594a5fa5c6052465921e0523d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19309e63_763807c0",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85305242_f68fb3b0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1479,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-28T16:22:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19309e63_763807c0",
+      "revId": "73390b20a3d02a6594a5fa5c6052465921e0523d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90d2c579_854512c7",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-02-28T12:23:31Z",
       "side": 1,
       "message": "smccc_set_retval() would be clearer and more consistent...",
+      "revId": "73390b20a3d02a6594a5fa5c6052465921e0523d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df47a61_b64bc5a3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1489,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-28T16:22:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90d2c579_854512c7",
       "revId": "73390b20a3d02a6594a5fa5c6052465921e0523d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
