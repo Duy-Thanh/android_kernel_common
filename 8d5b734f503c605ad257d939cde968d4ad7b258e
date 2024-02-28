@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75aeba19_6243a592",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T18:08:30Z",
+      "side": 1,
+      "message": "Yes!",
+      "parentUuid": "5edb25e8_2ca3c2c1",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 53
+      },
+      "revId": "8d5b734f503c605ad257d939cde968d4ad7b258e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6de7976e_5487f48e",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
         "patchSetId": 7
@@ -37,6 +61,54 @@
       "writtenOn": "2024-02-27T17:47:07Z",
       "side": 1,
       "message": "I\u0027ve seen this code before!",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 0
+      },
+      "revId": "8d5b734f503c605ad257d939cde968d4ad7b258e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88288f1a_9c3adf96",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T18:08:30Z",
+      "side": 1,
+      "message": "Using proper helpers now.",
+      "parentUuid": "6de7976e_5487f48e",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 0
+      },
+      "revId": "8d5b734f503c605ad257d939cde968d4ad7b258e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d07677a_041cf153",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T18:08:30Z",
+      "side": 1,
+      "message": "Using proper helpers now.",
+      "parentUuid": "6de7976e_5487f48e",
       "range": {
         "startLine": 498,
         "startChar": 0,
