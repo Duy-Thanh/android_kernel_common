@@ -22,6 +22,30 @@
       },
       "revId": "ec048fa61a7fc1713017f78365423a29d4be5aa3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e871c5ac_d3f43830",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T14:48:17Z",
+      "side": 1,
+      "message": "Yes, `CFGI` is not enough, we need also `TLBI`, interestingly the host driver doesn\u0027t do that.",
+      "parentUuid": "235d1fde_94694e3b",
+      "range": {
+        "startLine": 956,
+        "startChar": 11,
+        "endLine": 956,
+        "endChar": 26
+      },
+      "revId": "ec048fa61a7fc1713017f78365423a29d4be5aa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
