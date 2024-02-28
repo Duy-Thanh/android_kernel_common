@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff5821ed_089fad58",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-28T20:54:30Z",
+      "side": 1,
+      "message": "This looks a bit like stage2_map_prefault_idmap(), can we re-use some code?",
+      "range": {
+        "startLine": 906,
+        "startChar": 12,
+        "endLine": 906,
+        "endChar": 34
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4526c66d_ebaeb09a",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-28T20:54:30Z",
+      "side": 1,
+      "message": "I wonder if we could simplify the unmap path by annotating with 0 instead of calling the proper unmap walker ... That would keep all the prefaulting logic to the annotation/map path.",
+      "range": {
+        "startLine": 1231,
+        "startChar": 11,
+        "endLine": 1231,
+        "endChar": 31
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
