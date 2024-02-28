@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "325bc133_4ede2461",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-28T00:33:59Z",
+      "side": 1,
+      "message": "Needs a link to the maintainer tree. See the FROMGIT section of the contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e3c1b37f307215d42b03444abd4f036264551999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
