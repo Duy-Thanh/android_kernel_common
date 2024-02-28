@@ -51,6 +51,24 @@
       "parentUuid": "910fd2fc_0fb3301a",
       "revId": "a53b26244f1ab559bf0a19795f3e5a6ff45cfbb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd2b589_708d960b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-02-28T23:15:58Z",
+      "side": 1,
+      "message": "The same cherry pick will show in \"Cherry picks\" panel and all cherry-picks will have the same change id \"Change-Id: I4e0d54845fca17d2ea534a671ca8cf8fa46cf40a\".",
+      "parentUuid": "d8326836_0730fa38",
+      "revId": "a53b26244f1ab559bf0a19795f3e5a6ff45cfbb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
