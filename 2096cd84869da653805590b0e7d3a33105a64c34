@@ -105,6 +105,24 @@
       "parentUuid": "787b80d2_523439a9",
       "revId": "2096cd84869da653805590b0e7d3a33105a64c34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae6deb57_01bf1329",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-28T18:13:09Z",
+      "side": 1,
+      "message": "Sure. Would manually testing the four possibilities on cuttlefish be sufficient?\n\nBTW, via CTS/VTS tests we ensure that CONFIG_USERFAULTFD is defined for android12-5.4 and above kernels.",
+      "parentUuid": "c29d75b1_f553b7f7",
+      "revId": "2096cd84869da653805590b0e7d3a33105a64c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

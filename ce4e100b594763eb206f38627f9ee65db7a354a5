@@ -105,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5330d0bd_2ec092b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-28T18:13:09Z",
+      "side": 1,
+      "message": "Sorry for missing this before. Fixed in PS21",
+      "parentUuid": "8db1bcd1_c24d18d2",
+      "revId": "ce4e100b594763eb206f38627f9ee65db7a354a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb95da27_4625ac07",
@@ -118,6 +136,24 @@
       "writtenOn": "2024-02-28T18:08:01Z",
       "side": 1,
       "message": "This is a static inline declared at line 161. Why this extern decl?",
+      "revId": "ce4e100b594763eb206f38627f9ee65db7a354a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daafb042_28554684",
+        "filename": "include/linux/userfaultfd_k.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-28T18:13:09Z",
+      "side": 1,
+      "message": "The one at line 161 is for `!CONFIG_USERFAULTFD`. The externed one is for CONFIG_USERFAULTFD and is definted in fs/userfaultfd.c",
+      "parentUuid": "cb95da27_4625ac07",
       "revId": "ce4e100b594763eb206f38627f9ee65db7a354a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
