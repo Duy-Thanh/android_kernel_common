@@ -420,6 +420,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54028c82_385fbe33",
+        "filename": "drivers/usb/gadget/configfs_uevent.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-28T10:01:42Z",
+      "side": 1,
+      "message": "Per our discussion, leaving this hack in place because userspace relies on parsing this uevent for the device state. Have added documentation that explicitly calls out how wrong this is.",
+      "parentUuid": "d44706e9_eabcc410",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 77
+      },
+      "revId": "2ae2b5e0f8cd2772b3efd256361728da7ecb57f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9aa7a4c_eb86247d",
         "filename": "drivers/usb/gadget/configfs_uevent.c",
         "patchSetId": 11

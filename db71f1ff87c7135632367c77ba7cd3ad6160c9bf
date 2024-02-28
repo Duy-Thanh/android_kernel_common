@@ -208,6 +208,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56ae4061_4400fc7d",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-28T10:01:42Z",
+      "side": 1,
+      "message": "Locking documentation added to function documentation in header file.",
+      "parentUuid": "73f928e0_e7e2a585",
+      "range": {
+        "startLine": 860,
+        "startChar": 0,
+        "endLine": 860,
+        "endChar": 47
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e58ddb42_05f90493",
@@ -317,6 +341,30 @@
       "side": 1,
       "message": "Again, this needs to be documented somehow...",
       "parentUuid": "79e9ff14_81cbeac9",
+      "range": {
+        "startLine": 1703,
+        "startChar": 1,
+        "endLine": 1703,
+        "endChar": 22
+      },
+      "revId": "db71f1ff87c7135632367c77ba7cd3ad6160c9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "239d1026_25973fc3",
+        "filename": "drivers/usb/gadget/composite.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-28T10:01:42Z",
+      "side": 1,
+      "message": "Locking documentation added to function documentation in header file.",
+      "parentUuid": "25764775_a3bcdaaf",
       "range": {
         "startLine": 1703,
         "startChar": 1,

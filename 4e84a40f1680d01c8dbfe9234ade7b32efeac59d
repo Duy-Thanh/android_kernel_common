@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "add36928_7e43bb63",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-28T10:01:42Z",
+      "side": 1,
+      "message": "Per Greg\u0027s comment above, will leave as-is.",
+      "parentUuid": "55ac6226_ae5f6de9",
+      "revId": "4e84a40f1680d01c8dbfe9234ade7b32efeac59d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eef2f765_267ac7bc",
@@ -102,6 +120,24 @@
       "writtenOn": "2024-02-26T06:04:17Z",
       "side": 1,
       "message": "NIT.",
+      "revId": "4e84a40f1680d01c8dbfe9234ade7b32efeac59d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42bb5745_42b3e88a",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-28T10:01:42Z",
+      "side": 1,
+      "message": "Per Greg\u0027s comment above, will leave as-is.",
+      "parentUuid": "eef2f765_267ac7bc",
       "revId": "4e84a40f1680d01c8dbfe9234ade7b32efeac59d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
