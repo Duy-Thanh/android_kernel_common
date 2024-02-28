@@ -455,6 +455,8 @@ struct kvm_cpu_context {
 	u64 sys_regs[NR_SYS_REGS];
 
 	struct kvm_vcpu *__hyp_running_vcpu;
+
+	u64	elr_el2;
 };
 
 struct kvm_host_data {
