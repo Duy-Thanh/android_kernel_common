@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7502618_7455a16f",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-28T21:24:00Z",
+      "side": 1,
+      "message": "Posting this CL as an RFC (hence WIP) as I\u0027m not happy with changing `kvm_cpu_context`.\n\nI\u0027ve also tried to return the \"old\" ELR from `__kvm_unexpected_el2_exception()` and pushing it to the stack from its asm caller before it restores the CPU context and `eret`s but that failed given that `SP` may be different between before and after the `eret`.\n\nShould it be stored in yet another per-CPU variable shared between EL1 and EL2? As `switch.h` is both nVHE and VHE, is there a risk of setting the \"wrong\" variable?",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 13
+      },
+      "revId": "f5a3f1c66e770f68737f83d0b7643b2c5ccdb837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
