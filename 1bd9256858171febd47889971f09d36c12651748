@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f042e3d3_769d76e0",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-28T11:35:03Z",
+      "side": 1,
+      "message": "I changed this to depend on `_RUST` instead of just the base `ANDROID_BINDER_IPC` option. Otherwise, this doesn\u0027t pass the allmodconfig target due to the \"The default Binder driver implementation is Rust, but the Rust implementation is disabled\" error.",
+      "revId": "1bd9256858171febd47889971f09d36c12651748",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
