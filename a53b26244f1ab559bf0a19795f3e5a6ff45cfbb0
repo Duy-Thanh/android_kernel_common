@@ -33,6 +33,24 @@
       "message": "Oh, forgot to add that as a cherry-pick, it should have the `cherry picked from` and Merged-In lines",
       "revId": "a53b26244f1ab559bf0a19795f3e5a6ff45cfbb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8326836_0730fa38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2024-02-28T23:06:11Z",
+      "side": 1,
+      "message": "unresolve",
+      "parentUuid": "910fd2fc_0fb3301a",
+      "revId": "a53b26244f1ab559bf0a19795f3e5a6ff45cfbb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
