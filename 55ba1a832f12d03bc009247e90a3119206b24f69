@@ -22,6 +22,30 @@
       },
       "revId": "55ba1a832f12d03bc009247e90a3119206b24f69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5f13601_688721ea",
+        "filename": "virt/kvm/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T17:27:39Z",
+      "side": 1,
+      "message": "This removed later anyway, it is not easy to squash but I will git it a try.",
+      "parentUuid": "8d71dd31_43a8eff0",
+      "range": {
+        "startLine": 96,
+        "startChar": 7,
+        "endLine": 96,
+        "endChar": 16
+      },
+      "revId": "55ba1a832f12d03bc009247e90a3119206b24f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
