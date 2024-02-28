@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58d27b8a_d66a24a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-28T00:37:34Z",
+      "side": 1,
+      "message": "Please put all of this in the commit message and add a \"Link:\" tag with the pointer to the upstream submission.",
+      "parentUuid": "b229af6f_34974d91",
+      "revId": "9597c1f9f427eed6a377c20da61502da358a4f61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a4865d7_73f0a289",
         "filename": "drivers/android/vendor_hooks.c",
         "patchSetId": 1
