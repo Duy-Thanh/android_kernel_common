@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8814374_58e21d58",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-28T16:22:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "800f414b_9595c5b9",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff0ff426_153fc29a",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-28T12:35:59Z",
       "side": 1,
       "message": "Why is it ok if we get an E2BIG?",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d853a4_11f9f7a6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2334,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-28T16:22:18Z",
+      "side": 1,
+      "message": "With this walker, E2BIG just means we had to interrupt the walk to avoid getting stuck at EL2 for too long.\n\nWould you like a comment? :)",
+      "parentUuid": "ff0ff426_153fc29a",
       "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "748e8e61_93d31e72",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-28T16:22:18Z",
+      "side": 1,
+      "message": "The walker will mask ipa_start from ipa. So the delta _has to_ be positive. \n\nHowever the size_t cast is a relic of the past and should be removed!",
+      "parentUuid": "950f82f4_d89e507e",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3316e048_89f4eb8e",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-02-28T12:35:59Z",
       "side": 1,
       "message": "size_mul()",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39bc02e8_f4b389cd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2364,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-28T16:22:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3316e048_89f4eb8e",
       "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -103,6 +175,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78832938_deab3882",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-28T16:22:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cef728a_de03c03f",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04d716e5_f8476aad",
@@ -116,6 +206,24 @@
       "writtenOn": "2024-02-28T12:35:59Z",
       "side": 1,
       "message": "nit: nr_unguarded?",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7661054e_d12bba4d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-28T16:22:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04d716e5_f8476aad",
       "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
