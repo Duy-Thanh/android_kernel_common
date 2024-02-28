@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7e6cd3c_660530be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-28T20:41:50Z",
+      "side": 1,
+      "message": "nit: Maybe consider combining these small patchses because they apply the same change to different syscalls.",
+      "revId": "1a8f9faa35968746d075891152700d1bfbc5567b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
