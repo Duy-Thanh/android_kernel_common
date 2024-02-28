@@ -16,6 +16,24 @@
       "message": "Why not just do this in your ufs driver?  No hooks should be required at all.",
       "revId": "12cca78f7ef7751ed9538b8c89b20cf60d650191",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6722ce8_44dec50e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-02-28T01:11:24Z",
+      "side": 1,
+      "message": "Yes, in subsequent versions of Android, we will avoid adding hook functions, but the development of refactoring features in the current version can\u0027t catch up with the product release.",
+      "parentUuid": "d424c8be_0cc03bed",
+      "revId": "12cca78f7ef7751ed9538b8c89b20cf60d650191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
