@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000069694905",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2969112?revision\u003d3",
+      "key": {
+        "uuid": "b4ad61bf_423bebf5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-02-28T06:18:23Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/9840036786d90cea11a90d1f30b6dc003b34ee67) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d9840036786d90cea11a90d1f30b6dc003b34ee67)\n\n```\n    - ## net/ipv6/udp_offload.c ##\n    -@@ net/ipv6/udp_offload.c: static struct sk_buff *udp6_ufo_fragment(struct sk_buff *skb,\n    - \t\tif (!pskb_may_pull(skb, sizeof(struct udphdr)))\n    - \t\t\tgoto out;\n    - \n    --\t\tif (skb_shinfo(skb)-\u003egso_type \u0026 SKB_GSO_UDP_L4 \u0026\u0026\n    --\t\t    !skb_gso_ok(skb, features | NETIF_F_GSO_ROBUST))\n    -+\t\tif (skb_shinfo(skb)-\u003egso_type \u0026 SKB_GSO_UDP_L4)\n    - \t\t\treturn __udp_gso_segment(skb, features, true);\n    - \n    - \t\tmss \u003d skb_shinfo(skb)-\u003egso_size;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "52bcd1c29bfd5ab367f5afe4366fea2f55ca94be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
