@@ -51,6 +51,24 @@
       "parentUuid": "32bc2582_e4bf7a03",
       "revId": "edb6cd01f6a8365eb7425760a1bd13d204916cf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d0f6c7_635eefa2",
+        "filename": "drivers/android/binder_pick_impl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-28T13:34:59Z",
+      "side": 1,
+      "message": "Voting to override the presubmit failure. There are no other failures than the checkpatch error.",
+      "parentUuid": "ea0bd833_3d7195dd",
+      "revId": "edb6cd01f6a8365eb7425760a1bd13d204916cf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
