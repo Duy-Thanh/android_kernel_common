@@ -211,6 +211,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f8c93ce_4548a5a3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T10:38:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0107a637_f5bd439c",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0dbd85a3_a3ab3017",
@@ -242,6 +260,24 @@
       "side": 1,
       "message": "Hum, is it really necessary?\n\nThe writer doesn\u0027t use WRITE_ONCE and that operation is completely sequential, the host would write this pointer before the init for that same vCPU, I don\u0027t think we could have any race writer/reader here.",
       "parentUuid": "0dbd85a3_a3ab3017",
+      "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8541bc4_c6ad4872",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T10:38:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d4fd11d8_25739f2b",
       "revId": "d9f1ea80638d55ca2901988c900cd88a62bf63a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
