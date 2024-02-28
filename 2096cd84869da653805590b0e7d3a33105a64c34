@@ -69,6 +69,42 @@
       "parentUuid": "b950dd15_da14ea1a",
       "revId": "2096cd84869da653805590b0e7d3a33105a64c34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c29d75b1_f553b7f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-28T18:08:01Z",
+      "side": 1,
+      "message": "It looks like the patch is #ifdef\u0027d correctly, but it would be nice to test those 4 build combinations to make sure we don\u0027t get kernelci errors after this merges.",
+      "parentUuid": "9105b880_0f2c3f40",
+      "revId": "2096cd84869da653805590b0e7d3a33105a64c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a91ad8_6e3abe5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-28T18:08:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "787b80d2_523439a9",
+      "revId": "2096cd84869da653805590b0e7d3a33105a64c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -103,6 +103,23 @@
       "message": "Please fix the checkpatch error:\n```\nERROR:CODE_INDENT: code indent should use tabs where possible\n#386: FILE: mm/memory.c:5042:\n```",
       "revId": "ce4e100b594763eb206f38627f9ee65db7a354a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb95da27_4625ac07",
+        "filename": "include/linux/userfaultfd_k.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-28T18:08:01Z",
+      "side": 1,
+      "message": "This is a static inline declared at line 161. Why this extern decl?",
+      "revId": "ce4e100b594763eb206f38627f9ee65db7a354a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
