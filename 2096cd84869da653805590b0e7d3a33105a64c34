@@ -123,6 +123,24 @@
       "parentUuid": "c29d75b1_f553b7f7",
       "revId": "2096cd84869da653805590b0e7d3a33105a64c34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be74ddfc_cdb7ada5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-28T18:23:13Z",
+      "side": 1,
+      "message": "Yes, that is fine. Our kernels have non-Android downstream users that might use one of these configs so it isn\u0027t enough that we test via CTS/VTS. We need to make sure kernels build and run on various boards no matter how it is built. kernelci is our main testing tool for these non-Android cases. We also get build testing from 0day which does random configs.",
+      "parentUuid": "ae6deb57_01bf1329",
+      "revId": "2096cd84869da653805590b0e7d3a33105a64c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
