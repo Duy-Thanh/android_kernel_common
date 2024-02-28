@@ -16,6 +16,24 @@
       "message": "Please provide rationale for why this symbols is needed. Is this for the implementation of a vendor hook? Which one? What feature does this enable?",
       "revId": "5262be05dbe0d38f2949fa12e554e617d1fe0ce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec002e69_abe45cdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006514
+      },
+      "writtenOn": "2024-02-28T21:58:43Z",
+      "side": 1,
+      "message": "Updated commit text with more info.",
+      "parentUuid": "ac04baf4_1576d2af",
+      "revId": "5262be05dbe0d38f2949fa12e554e617d1fe0ce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
