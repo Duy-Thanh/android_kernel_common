@@ -69,6 +69,24 @@
       "parentUuid": "ea0bd833_3d7195dd",
       "revId": "edb6cd01f6a8365eb7425760a1bd13d204916cf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f25954f0_e2ae586a",
+        "filename": "drivers/android/binder_pick_impl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-28T13:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13d0f6c7_635eefa2",
+      "revId": "edb6cd01f6a8365eb7425760a1bd13d204916cf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
