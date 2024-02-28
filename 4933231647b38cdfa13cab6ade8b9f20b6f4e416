@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "800f414b_9595c5b9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T12:35:59Z",
+      "side": 1,
+      "message": "size_mul()",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0ff426_153fc29a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2334,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T12:35:59Z",
+      "side": 1,
+      "message": "Why is it ok if we get an E2BIG?",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "950f82f4_d89e507e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T12:35:59Z",
+      "side": 1,
+      "message": "Not sure about this. Using the size_* helpers, checking afterwards that the value of size() makes sense (i.e., \u003e 0)?",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3316e048_89f4eb8e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2364,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T12:35:59Z",
+      "side": 1,
+      "message": "size_mul()",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9d455e_7b763aba",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2376,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T12:35:59Z",
+      "side": 1,
+      "message": "same question as above.",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cef728a_de03c03f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T12:35:59Z",
+      "side": 1,
+      "message": "nit: nr_guarded?",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d716e5_f8476aad",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T12:35:59Z",
+      "side": 1,
+      "message": "nit: nr_unguarded?",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
