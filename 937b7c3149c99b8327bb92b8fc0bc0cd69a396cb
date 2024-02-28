@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89cb381e_78b799e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-02-28T20:27:06Z",
+      "side": 1,
+      "message": "BUG() usage in fs/userfaultfd.c that checkpatch test is reporting already existed. So bypassing presubmit.",
+      "revId": "937b7c3149c99b8327bb92b8fc0bc0cd69a396cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
