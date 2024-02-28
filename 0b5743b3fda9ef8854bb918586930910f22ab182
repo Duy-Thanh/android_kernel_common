@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "715c5e1b_83611ece",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T14:25:30Z",
+      "side": 1,
+      "message": "This is discovered at `probe_device` time, then at domain allocation based on that an `IDENTITY_DOMAIN` will be chosen",
+      "parentUuid": "89372c67_3feeb149",
+      "range": {
+        "startLine": 33,
+        "startChar": 9,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "0b5743b3fda9ef8854bb918586930910f22ab182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fae36a1c_946401d2",
         "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-27T18:10:00Z",
       "side": 1,
       "message": "I\u0027d prefer that the drivers which are avoiding the DMA API explicitly tell us, rather than have a generic property.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 69
+      },
+      "revId": "0b5743b3fda9ef8854bb918586930910f22ab182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d197951e_7f1d6cd8",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T14:25:30Z",
+      "side": 1,
+      "message": "I am afraid that is not practical.",
+      "parentUuid": "fae36a1c_946401d2",
       "range": {
         "startLine": 131,
         "startChar": 0,
