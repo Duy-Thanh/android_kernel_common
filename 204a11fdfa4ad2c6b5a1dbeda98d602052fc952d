@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da0e1d31_43b654ce",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/arm-smmu-v3.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T14:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d399465_4de06a02",
+      "range": {
+        "startLine": 738,
+        "startChar": 0,
+        "endLine": 740,
+        "endChar": 0
+      },
+      "revId": "204a11fdfa4ad2c6b5a1dbeda98d602052fc952d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2adc35a3_0060c179",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-27T15:45:05Z",
       "side": 1,
       "message": "This is always `0xffffffff`",
+      "range": {
+        "startLine": 741,
+        "startChar": 42,
+        "endLine": 741,
+        "endChar": 46
+      },
+      "revId": "204a11fdfa4ad2c6b5a1dbeda98d602052fc952d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4fa45ec_ed29bd5a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/arm-smmu-v3.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T14:01:17Z",
+      "side": 1,
+      "message": "Yes, we would need the mask for registers that are partially allowed to be written.",
+      "parentUuid": "2adc35a3_0060c179",
       "range": {
         "startLine": 741,
         "startChar": 42,
