@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7240d92a_2bf4e4dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-02-28T23:48:44Z",
+      "side": 1,
+      "message": "Reported-by: Roman Kiryanov \u003crkir@google.com\u003e (against android13-5.15)\n\n? Maybe a tested-by tag too if Roman is willing to provide it.",
+      "revId": "1c3ef0416801994f4aee8054ba8841ca13c9ecf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
