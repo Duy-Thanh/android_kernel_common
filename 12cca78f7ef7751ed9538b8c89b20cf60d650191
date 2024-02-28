@@ -52,6 +52,24 @@
       "parentUuid": "b6722ce8_44dec50e",
       "revId": "12cca78f7ef7751ed9538b8c89b20cf60d650191",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ee5d90a_d3f979ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-02-28T05:52:27Z",
+      "side": 1,
+      "message": "Yes, i agree that. But our product is about to be released, could we use the hook function for android12-5.10 first. We will modify the code according to your suggestions in subsequent versions, thank you.",
+      "parentUuid": "91b40749_cbf9ba38",
+      "revId": "12cca78f7ef7751ed9538b8c89b20cf60d650191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
