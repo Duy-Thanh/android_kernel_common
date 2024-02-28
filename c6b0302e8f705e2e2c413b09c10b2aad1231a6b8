@@ -22,6 +22,30 @@
       },
       "revId": "c6b0302e8f705e2e2c413b09c10b2aad1231a6b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3373d3d_da11d7d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T14:30:00Z",
+      "side": 1,
+      "message": "`hyp_constants.h` is internal and not exposed to modules.",
+      "parentUuid": "a5bc9874_909a0389",
+      "range": {
+        "startLine": 9,
+        "startChar": 54,
+        "endLine": 9,
+        "endChar": 69
+      },
+      "revId": "c6b0302e8f705e2e2c413b09c10b2aad1231a6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
