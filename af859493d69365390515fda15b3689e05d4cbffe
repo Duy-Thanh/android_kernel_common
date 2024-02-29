@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "536ab4d2_88d4b240",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-29T13:06:12Z",
+      "side": 1,
+      "message": "It\u0027s probably ok for all VMs, but maybe safer to limit to NP anyway?",
+      "range": {
+        "startLine": 1110,
+        "startChar": 1,
+        "endLine": 1110,
+        "endChar": 3
+      },
+      "revId": "af859493d69365390515fda15b3689e05d4cbffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
