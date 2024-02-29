@@ -16,6 +16,24 @@
       "message": "Why?",
       "revId": "3fe6e781aca911530a2dc1c7ebf4c95274f9c66d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0e34c5e_65681870",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-02-29T02:27:22Z",
+      "side": 1,
+      "message": "i.MX95 has a M33 running SCMI firmware, we need these patches for using the SCMI perf protocol to manage cpufreq.\n\nI have added the reasons for needing these patches in the issuetracker, thank you.",
+      "parentUuid": "d64612fb_11165ec3",
+      "revId": "3fe6e781aca911530a2dc1c7ebf4c95274f9c66d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
