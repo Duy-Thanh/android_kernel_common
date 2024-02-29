@@ -8,6 +8,7 @@
 #include <linux/uio.h>
 #include <linux/compat.h>
 #include <linux/fileattr.h>
+#include <linux/fsverity.h>
 
 static ssize_t fuse_send_ioctl(struct fuse_mount *fm, struct fuse_args *args,
 			       struct fuse_ioctl_out *outarg)
@@ -114,6 +115,63 @@ static int fuse_copy_ioctl_iovec(struct fuse_conn *fc, struct iovec *dst,
 #endif
 	}
 
+	return 0;
+}
+
+
+/* For fs-verity, determine iov lengths from input */
+static long fuse_setup_verity_ioctl(unsigned int cmd, unsigned long arg,
+				    struct iovec *iov, unsigned int *in_iovs)
+{
+	switch (cmd) {
+	case FS_IOC_MEASURE_VERITY: {
+		__u16 digest_size;
+		struct fsverity_digest __user *uarg =
+				(struct fsverity_digest __user *)arg;
+
+		if (copy_from_user(&digest_size, &uarg->digest_size,
+				sizeof(digest_size)))
+			return -EFAULT;
+
+		if (digest_size > SIZE_MAX - sizeof(struct fsverity_digest))
+			return -EINVAL;
+
+		iov->iov_len = sizeof(struct fsverity_digest) + digest_size;
+		break;
+	}
+	case FS_IOC_ENABLE_VERITY: {
+		struct fsverity_enable_arg enable;
+		struct fsverity_enable_arg __user *uarg =
+				(struct fsverity_enable_arg __user *)arg;
+		const __u32 max_buffer_len = FUSE_MAX_MAX_PAGES * PAGE_SIZE;
+
+		if (copy_from_user(&enable, uarg, sizeof(enable)))
+			return -EFAULT;
+
+		if (enable.salt_size > max_buffer_len ||
+				enable.sig_size > max_buffer_len)
+			return -ENOMEM;
+
+		if (enable.salt_size > 0) {
+			iov++;
+			(*in_iovs)++;
+
+			iov->iov_base = u64_to_user_ptr(enable.salt_ptr);
+			iov->iov_len = enable.salt_size;
+		}
+
+		if (enable.sig_size > 0) {
+			iov++;
+			(*in_iovs)++;
+
+			iov->iov_base = u64_to_user_ptr(enable.sig_ptr);
+			iov->iov_len = enable.sig_size;
+		}
+		break;
+	}
+	default:
+		break;
+	}
 	return 0;
 }
 
@@ -226,6 +284,12 @@ long fuse_do_ioctl(struct file *file, unsigned int cmd, unsigned long arg,
 		if (_IOC_DIR(cmd) & _IOC_READ) {
 			out_iov = iov;
 			out_iovs = 1;
+		}
+
+		if (cmd == FS_IOC_MEASURE_VERITY || cmd == FS_IOC_ENABLE_VERITY) {
+			err = fuse_setup_verity_ioctl(cmd, arg, iov, &in_iovs);
+			if (err)
+				goto out;
 		}
 	}
 
