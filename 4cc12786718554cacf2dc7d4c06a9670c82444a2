@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ffd9b6e_890d7557",
+        "filename": "arch/arm64/kvm/hyp/nvhe/module.lds.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-29T10:23:36Z",
+      "side": 1,
+      "message": "Is there any reason for not creating a proper .hyp.event_ids section that is separate from .hyp.rodata? That would avoid a lot of churn in module.c no?",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 26
+      },
+      "revId": "4cc12786718554cacf2dc7d4c06a9670c82444a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
