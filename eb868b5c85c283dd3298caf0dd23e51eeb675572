@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbbda34a_2fa818d0",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-29T12:47:10Z",
+      "side": 1,
+      "message": "I\u0027m not sure it\u0027s safe to call this with `mmu_lock` held, as it looks like locking the folio can sleep.",
+      "range": {
+        "startLine": 300,
+        "startChar": 1,
+        "endLine": 300,
+        "endChar": 28
+      },
+      "revId": "eb868b5c85c283dd3298caf0dd23e51eeb675572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9977a69c_3fb4f513",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-29T12:47:10Z",
+      "side": 1,
+      "message": "It\u0027s a pretty ugly macro as-is, so this might just make things worse, but is it worth taking ppage as an additional argument to avoid all the callers having to use `rb_entry()` on the node?",
+      "range": {
+        "startLine": 323,
+        "startChar": 8,
+        "endLine": 323,
+        "endChar": 31
+      },
+      "revId": "eb868b5c85c283dd3298caf0dd23e51eeb675572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cefb512b_6237226e",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2365,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-29T12:47:10Z",
+      "side": 1,
+      "message": "Unrelated change?",
+      "range": {
+        "startLine": 2365,
+        "startChar": 0,
+        "endLine": 2365,
+        "endChar": 74
+      },
+      "revId": "eb868b5c85c283dd3298caf0dd23e51eeb675572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
