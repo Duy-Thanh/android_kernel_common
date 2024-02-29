@@ -8,6 +8,7 @@
 #include <linux/debugobjects.h>
 #include <linux/stringify.h>
 #include <linux/timer_types.h>
+#include <linux/android_kabi.h>
 
 #ifdef CONFIG_LOCKDEP
 /*
