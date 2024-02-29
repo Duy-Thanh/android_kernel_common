@@ -22,6 +22,30 @@
       },
       "revId": "af859493d69365390515fda15b3689e05d4cbffe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45aa4432_02af2158",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-29T16:27:43Z",
+      "side": 1,
+      "message": "I was wondering the same, no strong opinion either way, I\u0027ll update it.",
+      "parentUuid": "536ab4d2_88d4b240",
+      "range": {
+        "startLine": 1110,
+        "startChar": 1,
+        "endLine": 1110,
+        "endChar": 3
+      },
+      "revId": "af859493d69365390515fda15b3689e05d4cbffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
