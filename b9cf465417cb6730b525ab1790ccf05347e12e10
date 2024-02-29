@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "86a75474_d8942fba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-29T18:53:23Z",
+      "side": 1,
+      "message": "Next time please don\u0027t create new patch, simply update the Change-Id from inside gerrit (see the EDIT button under the patch description).",
+      "parentUuid": "ee703eb3_7f025ad2",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 52
+      },
+      "revId": "b9cf465417cb6730b525ab1790ccf05347e12e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9a24f157_b62a78e3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
