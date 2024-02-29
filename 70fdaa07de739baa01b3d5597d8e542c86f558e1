@@ -34,6 +34,24 @@
       "parentUuid": "be4ffaea_47dc8542",
       "revId": "70fdaa07de739baa01b3d5597d8e542c86f558e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d9f4be_57bb9c1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-29T19:59:08Z",
+      "side": 1,
+      "message": "Ok, agree that it is very unlikely that anything in production (or about to launch) depends on this then.",
+      "parentUuid": "588cc953_378ca4eb",
+      "revId": "70fdaa07de739baa01b3d5597d8e542c86f558e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
