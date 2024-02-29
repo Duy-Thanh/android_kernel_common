@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f24e50ff_eb36970a",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-02-29T02:11:14Z",
+      "side": 1,
+      "message": "Is it possible to do:\n```\nbool\nprompt \"Android Binder IPC Driver in C\" if ANDROID_BINDER_IPC_RUST\n```\nInstead to prevent deselecting both ANDROID_BINDER_IPC_C and ANDROID_BINDER_IPC_RUST?",
+      "revId": "1bd9256858171febd47889971f09d36c12651748",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f042e3d3_769d76e0",
