@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29637b47_da436459",
+        "filename": "arch/arm64/kvm/hyp/nvhe/Makefile.module",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-29T10:33:49Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m hating this slightly. I guess we can\u0027t really defend against it anyway (a downstream module makefile might do just that), but is there a way we could avoid that?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 53
+      },
+      "revId": "d0625124599d01ace578624af5c4bf2ad208eed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
