@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b24decc_d580b380",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2334,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-29T12:46:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "724f1700_f22db437",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "950f82f4_d89e507e",
@@ -172,6 +190,24 @@
       "writtenOn": "2024-02-28T12:35:59Z",
       "side": 1,
       "message": "same question as above.",
+      "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e6bdcf0_1d870b71",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2376,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-29T12:46:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c9d455e_7b763aba",
       "revId": "4933231647b38cdfa13cab6ade8b9f20b6f4e416",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
