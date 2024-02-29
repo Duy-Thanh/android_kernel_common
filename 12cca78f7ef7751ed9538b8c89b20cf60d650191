@@ -88,6 +88,24 @@
       "parentUuid": "7ee5d90a_d3f979ea",
       "revId": "12cca78f7ef7751ed9538b8c89b20cf60d650191",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6833ffac_8c188dbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2068679
+      },
+      "writtenOn": "2024-02-29T00:32:08Z",
+      "side": 1,
+      "message": "Okay, these hooks will be deleted.",
+      "parentUuid": "35b50dce_da0b1304",
+      "revId": "12cca78f7ef7751ed9538b8c89b20cf60d650191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
