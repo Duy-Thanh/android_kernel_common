@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c63063b5_6b57a0b2",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "are you sure you want this?  You just rebooted the device as Android devices run with \u0027panic-on-warn\u0027 enabled 😞\n\nIf this is an issue, handle it properly please.  If it can not happen, just remove the check.  Either way, a reboot is probably not a good idea...",
+      "range": {
+        "startLine": 308,
+        "startChar": 1,
+        "endLine": 308,
+        "endChar": 8
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db9908a_24071538",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "dev_dbg() for this and all other pr_debug() calls please.\n\nAlso, even for pr_debug(), __func__ is already in the call, never duplicate it, that\u0027s just a waste.",
+      "range": {
+        "startLine": 383,
+        "startChar": 2,
+        "endLine": 383,
+        "endChar": 10
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24be79bb_f1110533",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "dev_err()?",
+      "range": {
+        "startLine": 417,
+        "startChar": 2,
+        "endLine": 417,
+        "endChar": 8
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "449bde44_ff682b9e",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "why ATOMIC?  Can this be called in interrupt context?",
+      "range": {
+        "startLine": 544,
+        "startChar": 31,
+        "endLine": 544,
+        "endChar": 41
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f184ee7a_8bf2606a",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "no reference counting when saving off a pointer to something else?",
+      "range": {
+        "startLine": 552,
+        "startChar": 13,
+        "endLine": 552,
+        "endChar": 16
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec4187e_1e5650c9",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "no locking needed?  If so, document this at the top of the function or at least mark it with the lock that is held so that tools can catch/check this automatically.\n\n\nAh, in reading further, yes, it looks like a lock is held, so this needs to be documented.",
+      "range": {
+        "startLine": 563,
+        "startChar": 1,
+        "endLine": 563,
+        "endChar": 20
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f017b2f3_2d9587a5",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "I know this is the \"style\" of these drivers, but can you just use dev_dbg() instead?  That way all messages are in a standard format and your userspace life will be easier.",
+      "range": {
+        "startLine": 631,
+        "startChar": 1,
+        "endLine": 631,
+        "endChar": 4
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b25ecc6_82f6b6e7",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "ftrace is your friend 😊",
+      "range": {
+        "startLine": 691,
+        "startChar": 1,
+        "endLine": 691,
+        "endChar": 9
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d6a984_1d95ec8a",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "this is odd, what are you trying to do here?\n\nPreventing \"multiple opens\" is not the job of the kernel, sorry, it doesn\u0027t work.",
+      "range": {
+        "startLine": 892,
+        "startChar": 5,
+        "endLine": 892,
+        "endChar": 16
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98a219da_74d4eee9",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:01:14Z",
+      "side": 1,
+      "message": "rebooted the device 😞",
+      "range": {
+        "startLine": 915,
+        "startChar": 1,
+        "endLine": 915,
+        "endChar": 8
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
