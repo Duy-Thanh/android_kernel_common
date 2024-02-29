@@ -22,6 +22,30 @@
       },
       "revId": "5cb343fb48c4e2272479d411848828901fc931c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408a4a03_4d00d328",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-29T16:15:21Z",
+      "side": 1,
+      "message": "Yeah that sounds like a good idea. That should really never happen, but if it did we\u0027d end up with a half broken state where we\u0027ve committed the SHARED_OWNED state on the host side but failed to update the guest pgt. That has no security impact, but the page would be stuck is this borked state forever, and could never be shared/donated to anybody.",
+      "parentUuid": "a9f7cb7b_0e998671",
+      "range": {
+        "startLine": 1226,
+        "startChar": 60,
+        "endLine": 1226,
+        "endChar": 80
+      },
+      "revId": "5cb343fb48c4e2272479d411848828901fc931c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
