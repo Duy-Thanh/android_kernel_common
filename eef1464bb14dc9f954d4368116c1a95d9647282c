@@ -426,6 +426,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59f51103_b6ebf604",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T20:48:14Z",
+      "side": 1,
+      "message": "As mentioned in chat, just delete this, it\u0027s not protecting you from multiple processes/threads writing to the device node at the same time as the kernel can not protect from that.  This is a policy decision by userspace to just \"not do that, and if you do, you get to keep the pieces\", like a tty device node for example.",
+      "parentUuid": "48b7c875_2319f76a",
+      "range": {
+        "startLine": 892,
+        "startChar": 5,
+        "endLine": 892,
+        "endChar": 16
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98a219da_74d4eee9",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 14
@@ -461,6 +485,30 @@
       "side": 1,
       "message": "Have removed the WARN_ON, but left the interesting single open logic.",
       "parentUuid": "98a219da_74d4eee9",
+      "range": {
+        "startLine": 915,
+        "startChar": 1,
+        "endLine": 915,
+        "endChar": 8
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c9904b_7fa8ebdb",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T20:48:14Z",
+      "side": 1,
+      "message": "Still broken, doesn\u0027t work, think about `dup` 😊",
+      "parentUuid": "456a4fe4_db43d897",
       "range": {
         "startLine": 915,
         "startChar": 1,
