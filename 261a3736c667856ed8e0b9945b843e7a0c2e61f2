@@ -106,6 +106,24 @@
       "parentUuid": "11174dbd_03ea07b4",
       "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "266dd657_e027fd40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-02-29T19:49:41Z",
+      "side": 1,
+      "message": "You can just create a list with these new symbols to get this patch in, but we must have symbol updates now. KMI enforcement is being enabled right now (by Monday) so you\u0027ll need a complete symbol list very soon.",
+      "parentUuid": "c9948550_0bac2a70",
+      "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
