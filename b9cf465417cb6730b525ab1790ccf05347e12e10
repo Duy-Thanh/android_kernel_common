@@ -22,6 +22,47 @@
       },
       "revId": "b9cf465417cb6730b525ab1790ccf05347e12e10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee703eb3_7f025ad2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-02-29T18:48:58Z",
+      "side": 1,
+      "message": "Sure. I fixed this and it created a new gerrit - https://android-review.googlesource.com/c/kernel/common/+/2982415\n\nThanks",
+      "parentUuid": "c47c4175_d45bd60f",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 52
+      },
+      "revId": "b9cf465417cb6730b525ab1790ccf05347e12e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a24f157_b62a78e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-02-29T18:48:58Z",
+      "side": 1,
+      "message": "Restored the old changeId.",
+      "revId": "b9cf465417cb6730b525ab1790ccf05347e12e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
