@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74e2ca6f_3ef7e800",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-29T16:34:30Z",
+      "side": 1,
+      "message": "That is absolutely right and is a nasty bug. As discussed offline, the nice thing is that this series handles np-guest permission faults from user_mem_abort(), which marks the page dirty during write faults, so we do not in fact need make the page dirty here as well. And luckily, if we leave the dirty state untouched here, we can simply call unpin_user_pages() which doesn\u0027t block. I\u0027ll update.",
+      "parentUuid": "dbbda34a_2fa818d0",
+      "range": {
+        "startLine": 300,
+        "startChar": 1,
+        "endLine": 300,
+        "endChar": 28
+      },
+      "revId": "eb868b5c85c283dd3298caf0dd23e51eeb675572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9977a69c_3fb4f513",
         "filename": "arch/arm64/kvm/mmu.c",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-29T12:47:10Z",
       "side": 1,
       "message": "It\u0027s a pretty ugly macro as-is, so this might just make things worse, but is it worth taking ppage as an additional argument to avoid all the callers having to use `rb_entry()` on the node?",
+      "range": {
+        "startLine": 323,
+        "startChar": 8,
+        "endLine": 323,
+        "endChar": 31
+      },
+      "revId": "eb868b5c85c283dd3298caf0dd23e51eeb675572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "752a92fa_43c42812",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-29T16:34:30Z",
+      "side": 1,
+      "message": "I\u0027m struggling a bit to make this not entirely horrible, so I\u0027ll probably keep it as is for now. Please shout if you feel strongly about it though!",
+      "parentUuid": "9977a69c_3fb4f513",
       "range": {
         "startLine": 323,
         "startChar": 8,
@@ -60,6 +108,30 @@
       "writtenOn": "2024-02-29T12:47:10Z",
       "side": 1,
       "message": "Unrelated change?",
+      "range": {
+        "startLine": 2365,
+        "startChar": 0,
+        "endLine": 2365,
+        "endChar": 74
+      },
+      "revId": "eb868b5c85c283dd3298caf0dd23e51eeb675572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faadb030_79490e37",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2365,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-29T16:34:30Z",
+      "side": 1,
+      "message": "Nope, because we can now end up calling this with pKVM, which implies the EL1 pgt struct may not be allocated.",
+      "parentUuid": "cefb512b_6237226e",
       "range": {
         "startLine": 2365,
         "startChar": 0,
