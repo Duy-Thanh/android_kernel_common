@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea1bc744_bd8ef214",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-29T14:10:08Z",
+      "side": 1,
+      "message": "This was to factorize the `this_cpu_ptr` you call everywhere.\n\nBut judging how tight are our deadline right now, feel free to ignore, that\u0027s really not changing the face of the world 😊",
+      "parentUuid": "f4647e98_469c553b",
+      "revId": "33aa28966417d25a10d68579f85877283ffc3481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa21ac76_6d7a83de",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 3
