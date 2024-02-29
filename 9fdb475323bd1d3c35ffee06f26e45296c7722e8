@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09622347_0781addf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-29T12:25:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we fail if the vm is protected?",
+      "range": {
+        "startLine": 989,
+        "startChar": 1,
+        "endLine": 989,
+        "endChar": 3
+      },
+      "revId": "9fdb475323bd1d3c35ffee06f26e45296c7722e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
