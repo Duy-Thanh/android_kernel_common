@@ -125,6 +125,32 @@
  *    ->private_lock		(zap_pte_range->block_dirty_folio)
  */
 
+<<<<<<< HEAD   (6200e441dba51518e2ddf4ae8d430d8faaa8b598 ANDROID: GKI: Add symbol to symbol list for unisoc.)
+||||||| BASE   (31b87efd7731c617746a7df95a52002b77cf33e4 ANDROID: GKI: Add UNISOC symbols allowed in 6.6)
+static void mapping_set_update(struct xa_state *xas,
+		struct address_space *mapping)
+{
+	if (dax_mapping(mapping) || shmem_mapping(mapping))
+		return;
+	xas_set_update(xas, workingset_update_node);
+	xas_set_lru(xas, &shadow_nodes);
+}
+
+=======
+/* Export tracepoints that act as a bare tracehook */
+EXPORT_TRACEPOINT_SYMBOL_GPL(mm_filemap_delete_from_page_cache);
+EXPORT_TRACEPOINT_SYMBOL_GPL(mm_filemap_add_to_page_cache);
+
+static void mapping_set_update(struct xa_state *xas,
+		struct address_space *mapping)
+{
+	if (dax_mapping(mapping) || shmem_mapping(mapping))
+		return;
+	xas_set_update(xas, workingset_update_node);
+	xas_set_lru(xas, &shadow_nodes);
+}
+
+>>>>>>> CHANGE (7d22ae2248e26f0c940277ad47f974ba897a7fa8 ANDROID: TRACE: mm: export mm_filemap_* for calling in ko)
 static void page_cache_delete(struct address_space *mapping,
 				   struct folio *folio, void *shadow)
 {
