@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08ad5121_aad2cebf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-29T14:53:23Z",
+      "side": 1,
+      "message": "This commit is NOT part of [`for-upstream/pkvm-kcfi`](https://android-kvm.googlesource.com/linux/+/refs/heads/for-upstream/pkvm-kcfi) so I\u0027ve used the `for-partners/pkvm` hashtag, which was also used by the CL that introduced the code this commit patches (aosp/2914412).",
+      "revId": "2c2aa0b4ffa626e05fcf58efa71185676f80a979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
