@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "509d0760_4c82c347",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T06:49:18Z",
+      "side": 1,
+      "message": "Almost there!",
+      "revId": "20c8e52999db328264d1bbb37cd406c4be11325f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "550752ba_e463a109",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T06:49:18Z",
+      "side": 1,
+      "message": "lock is still held 😞",
+      "range": {
+        "startLine": 247,
+        "startChar": 2,
+        "endLine": 247,
+        "endChar": 8
+      },
+      "revId": "20c8e52999db328264d1bbb37cd406c4be11325f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09371b1d_03cd69ae",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T06:49:18Z",
+      "side": 1,
+      "message": "your lock is still held 😞",
+      "range": {
+        "startLine": 272,
+        "startChar": 2,
+        "endLine": 272,
+        "endChar": 8
+      },
+      "revId": "20c8e52999db328264d1bbb37cd406c4be11325f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
