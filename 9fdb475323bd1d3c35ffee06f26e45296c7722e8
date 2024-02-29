@@ -22,6 +22,30 @@
       },
       "revId": "9fdb475323bd1d3c35ffee06f26e45296c7722e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "093465cf_901ab8e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-29T16:04:39Z",
+      "side": 1,
+      "message": "That will happen by construction at the check_unshare() step.",
+      "parentUuid": "09622347_0781addf",
+      "range": {
+        "startLine": 989,
+        "startChar": 1,
+        "endLine": 989,
+        "endChar": 3
+      },
+      "revId": "9fdb475323bd1d3c35ffee06f26e45296c7722e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
