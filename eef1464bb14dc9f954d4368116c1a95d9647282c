@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64d00697_6cbfb989",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T20:00:34Z",
+      "side": 1,
+      "message": "I have removed this, as I don\u0027t think it can happen, though there is some unknown with the odd reference counting scheme in this driver.",
+      "parentUuid": "c63063b5_6b57a0b2",
+      "range": {
+        "startLine": 308,
+        "startChar": 1,
+        "endLine": 308,
+        "endChar": 8
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3db9908a_24071538",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 14
@@ -143,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a31f326_f415cc44",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T20:00:34Z",
+      "side": 1,
+      "message": "Yes, I believe all HID code in this driver operates in interrupt context- per https://www.kernel.org/doc/html/v6.6/driver-api/usb/gadget.html, setup() is handled \"in_interrupt\", and all HID functions are accessed either through __acc_setup() (called within gadget setup()) or in a req-\u003ecomplete callback, which I believe is interrupt context as well.",
+      "parentUuid": "449bde44_ff682b9e",
+      "range": {
+        "startLine": 544,
+        "startChar": 31,
+        "endLine": 544,
+        "endChar": 41
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f184ee7a_8bf2606a",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 14
@@ -166,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46838f84_cb92962d",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T20:00:34Z",
+      "side": 1,
+      "message": "Unfortunately, we don\u0027t have an actual device here. We have the very odd implementation of acc_dev_ref, and I am concerned about modifying the existing reference counting logic due to how broken it is, and fear that making changes to the acc_dev_ref reference counting will cause unforeseen issues.\n\nI was working to completely refactor the structure of this driver and properly implement reference counting, but the time to complete that and properly test/debug any issues is not conducive to the product schedule at this time. I would rather proceed with the known (unchanged) behavior from previous android versions then potentially introduce new issues.",
+      "parentUuid": "f184ee7a_8bf2606a",
+      "range": {
+        "startLine": 552,
+        "startChar": 13,
+        "endLine": 552,
+        "endChar": 16
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ec4187e_1e5650c9",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 14
@@ -177,6 +249,30 @@
       "writtenOn": "2024-02-29T07:01:14Z",
       "side": 1,
       "message": "no locking needed?  If so, document this at the top of the function or at least mark it with the lock that is held so that tools can catch/check this automatically.\n\n\nAh, in reading further, yes, it looks like a lock is held, so this needs to be documented.",
+      "range": {
+        "startLine": 563,
+        "startChar": 1,
+        "endLine": 563,
+        "endChar": 20
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88560014_264feb40",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T20:00:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec4187e_1e5650c9",
       "range": {
         "startLine": 563,
         "startChar": 1,
@@ -257,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bf15652_4e6e79fb",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T20:00:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3b25ecc6_82f6b6e7",
+      "range": {
+        "startLine": 691,
+        "startChar": 1,
+        "endLine": 691,
+        "endChar": 9
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31d6a984_1d95ec8a",
@@ -282,6 +402,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48b7c875_2319f76a",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T20:00:34Z",
+      "side": 1,
+      "message": "This is carry over from the previous versions of this driver, and yes, I believe preventing mutliple opens is exactly what it is trying to do.\n\nDo you have a suggestion on how better to handle this?",
+      "parentUuid": "31d6a984_1d95ec8a",
+      "range": {
+        "startLine": 892,
+        "startChar": 5,
+        "endLine": 892,
+        "endChar": 16
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98a219da_74d4eee9",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 14
@@ -293,6 +437,30 @@
       "writtenOn": "2024-02-29T07:01:14Z",
       "side": 1,
       "message": "rebooted the device 😞",
+      "range": {
+        "startLine": 915,
+        "startChar": 1,
+        "endLine": 915,
+        "endChar": 8
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "456a4fe4_db43d897",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T20:00:34Z",
+      "side": 1,
+      "message": "Have removed the WARN_ON, but left the interesting single open logic.",
+      "parentUuid": "98a219da_74d4eee9",
       "range": {
         "startLine": 915,
         "startChar": 1,
