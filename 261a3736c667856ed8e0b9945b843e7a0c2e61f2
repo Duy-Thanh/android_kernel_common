@@ -88,6 +88,24 @@
       "parentUuid": "8242e930_a75704b4",
       "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9948550_0bac2a70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3178523
+      },
+      "writtenOn": "2024-02-29T15:05:21Z",
+      "side": 1,
+      "message": "@tkjos@google.com, Our college who is responsible for symbol list says he need more time to prepare proper patch. Is it possible to merge this hook function first? We will provide symbol list patch ASOP when his work is done.",
+      "parentUuid": "11174dbd_03ea07b4",
+      "revId": "261a3736c667856ed8e0b9945b843e7a0c2e61f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
