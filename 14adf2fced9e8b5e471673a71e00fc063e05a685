@@ -1,0 +1,48 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000069939315",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2981994?revision\u003d2",
+      "key": {
+        "uuid": "28d7260f_e976ba96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-02-29T19:28:01Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Suren Baghdasaryan \u003csurenb@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "fe3b1aeb_c56a19e4",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Suren Baghdasaryan \u003csurenb@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "14adf2fced9e8b5e471673a71e00fc063e05a685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
