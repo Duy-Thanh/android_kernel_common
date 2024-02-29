@@ -34,6 +34,24 @@
       "parentUuid": "a86a4304_29771cf2",
       "revId": "d2c2d90c7a128456f01b7a8c9d6fbcd6be89372e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "265c58e7_4e760b2b",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-02-29T03:50:59Z",
+      "side": 1,
+      "message": "These are side-effects of your internal logic. Can you not have one vendor hook that calls out to the separate hook logic on the vendor side?\n\nI recognize there is some pain with reworking existing vendorhook infrastructure, but also carrying multiple hooks in the same function is a little excessive (older kernels we sometimes add second hooks if the original hook was not sufficient, as we have to preserve KABI, but that\u0027s not the case for a new kernel).\n\n@tkjos@google.com: Your thoughts here?",
+      "parentUuid": "e7b45f9e_a73ab825",
+      "revId": "d2c2d90c7a128456f01b7a8c9d6fbcd6be89372e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
