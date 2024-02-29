@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58ec86b8_daba0573",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:12:42Z",
+      "side": 1,
+      "message": "oops, missed your original comment about these macros, sorry.",
+      "parentUuid": "3db9908a_24071538",
+      "range": {
+        "startLine": 383,
+        "startChar": 2,
+        "endLine": 383,
+        "endChar": 10
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24be79bb_f1110533",
@@ -60,6 +84,30 @@
       "writtenOn": "2024-02-29T07:01:14Z",
       "side": 1,
       "message": "dev_err()?",
+      "range": {
+        "startLine": 417,
+        "startChar": 2,
+        "endLine": 417,
+        "endChar": 8
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff47f0f4_1ba120ed",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:12:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24be79bb_f1110533",
       "range": {
         "startLine": 417,
         "startChar": 2,
@@ -152,6 +200,30 @@
       "writtenOn": "2024-02-29T07:01:14Z",
       "side": 1,
       "message": "I know this is the \"style\" of these drivers, but can you just use dev_dbg() instead?  That way all messages are in a standard format and your userspace life will be easier.",
+      "range": {
+        "startLine": 631,
+        "startChar": 1,
+        "endLine": 631,
+        "endChar": 4
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09d89ac3_e046d2dc",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T07:12:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f017b2f3_2d9587a5",
       "range": {
         "startLine": 631,
         "startChar": 1,
