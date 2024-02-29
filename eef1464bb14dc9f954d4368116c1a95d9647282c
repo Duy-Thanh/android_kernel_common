@@ -496,6 +496,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c52359ed_ba025e97",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T22:14:59Z",
+      "side": 1,
+      "message": "Ok, I have gone ahead and removed this.",
+      "parentUuid": "59f51103_b6ebf604",
+      "range": {
+        "startLine": 892,
+        "startChar": 5,
+        "endLine": 892,
+        "endChar": 16
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98a219da_74d4eee9",
@@ -557,6 +581,30 @@
       "side": 1,
       "message": "Still broken, doesn\u0027t work, think about `dup` 😊",
       "parentUuid": "456a4fe4_db43d897",
+      "range": {
+        "startLine": 915,
+        "startChar": 1,
+        "endLine": 915,
+        "endChar": 8
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca5e1eb_c26a0e2c",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T22:14:59Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "39c9904b_7fa8ebdb",
       "range": {
         "startLine": 915,
         "startChar": 1,

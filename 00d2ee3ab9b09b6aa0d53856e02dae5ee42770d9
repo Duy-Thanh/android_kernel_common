@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b4ed34_ab31ca8b",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T22:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21f24570_78b2afa2",
+      "range": {
+        "startLine": 38,
+        "startChar": 24,
+        "endLine": 38,
+        "endChar": 27
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37358e4d_cea7271c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-29T21:00:01Z",
       "side": 1,
       "message": "a static structure can not be dynamic (i.e. reference counted), that\u0027s not what reference counts are for.  This must be dynamic to work properly.\n\nThis should dictate the lifespan of the object being used, not the code itself (which is what I think this is attempting to reference count, if not, I\u0027m confused.)",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 42
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c047a4_da803bcc",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T22:14:59Z",
+      "side": 1,
+      "message": "I *think* this _acc_dev_ref is used to prevent userspace from creating multiple instances of the f_accessory function in configfs. See kref_read() in acc_init(), which is called in acc_alloc_inst().\n\nBecause the driver is not written dynamically, it must be a singleton, and this is how that was achieved/enforced.\n\nThis is ultimately one of the reasons that the major refactoring is so invasive- pretty much everything needs to be touched to enable multiple instances. See the wip refactoring at aosp/2954951",
+      "parentUuid": "37358e4d_cea7271c",
       "range": {
         "startLine": 273,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c8f9ccb_40c73e6a",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T22:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44e1052f_c298c555",
+      "range": {
+        "startLine": 885,
+        "startChar": 10,
+        "endLine": 885,
+        "endChar": 16
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d52180da_40273850",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-29T21:00:01Z",
       "side": 1,
       "message": "shouldn\u0027t this be called \"last\" after everything is set up?  Otherwise the interface can be called before this function is done initializing.",
+      "range": {
+        "startLine": 992,
+        "startChar": 0,
+        "endLine": 992,
+        "endChar": 44
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f58825b1_2629c501",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T22:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d52180da_40273850",
       "range": {
         "startLine": 992,
         "startChar": 0,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "169118a7_60967f18",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T22:14:59Z",
+      "side": 1,
+      "message": "To clarify, HID driver? If so, resolved by moving hid_register_driver to the end of this config.",
+      "parentUuid": "c32de76f_2b6b124c",
+      "range": {
+        "startLine": 1001,
+        "startChar": 0,
+        "endLine": 1001,
+        "endChar": 12
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19fa8316_dda3d213",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 15
@@ -129,6 +249,30 @@
       "writtenOn": "2024-02-29T21:00:01Z",
       "side": 1,
       "message": "interface id leak?  hid driver register leak?",
+      "range": {
+        "startLine": 1008,
+        "startChar": 0,
+        "endLine": 1008,
+        "endChar": 13
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f4dc822_d37227fa",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T22:14:59Z",
+      "side": 1,
+      "message": "The composite driver does not support de-allocating interface ID\u0027s to my knowledge. see config-\u003enext_interface_id in drivers/usb/gadget/composite.c.\n\nSimilarly, usb_gstrings_attach() does not support cleanup AFAIK.\n\nI am moving the hid_register_driver to the end as requested, so that resolved that leak.",
+      "parentUuid": "19fa8316_dda3d213",
       "range": {
         "startLine": 1008,
         "startChar": 0,
