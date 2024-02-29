@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a4adb5e5_b9f7d0ff",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T06:44:20Z",
+      "side": 1,
+      "message": "No, I don\u0027t think that will work, this is fine for now.",
+      "parentUuid": "f24e50ff_eb36970a",
+      "revId": "1bd9256858171febd47889971f09d36c12651748",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f042e3d3_769d76e0",
         "filename": "drivers/android/Kconfig",
         "patchSetId": 3
