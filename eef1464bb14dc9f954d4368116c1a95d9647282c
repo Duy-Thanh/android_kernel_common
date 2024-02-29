@@ -286,6 +286,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cf49a5a_40374ac9",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T22:18:42Z",
+      "side": 1,
+      "message": "Acknowledged that we are propagating the same problems with the status of this patch. It is NOT ideal, but with the commitment to replace this in the next version hopefully excusable.",
+      "parentUuid": "5876df00_3d0de984",
+      "range": {
+        "startLine": 552,
+        "startChar": 13,
+        "endLine": 552,
+        "endChar": 16
+      },
+      "revId": "eef1464bb14dc9f954d4368116c1a95d9647282c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ec4187e_1e5650c9",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 14
