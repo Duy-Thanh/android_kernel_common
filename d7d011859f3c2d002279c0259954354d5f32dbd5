@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ad8facd_56e9026a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-29T20:58:14Z",
+      "side": 1,
+      "message": "Tested locally and confirmed the fix. Bypassing presubmits to unblock TH tests.",
+      "revId": "d7d011859f3c2d002279c0259954354d5f32dbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
