@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c47c4175_d45bd60f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-29T17:48:23Z",
+      "side": 1,
+      "message": "Please keep it as I6bec2789a68e1b8fc9f4ea8f7267571a333d68ef so that we know where it was cherry-picked from.",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 52
+      },
+      "revId": "b9cf465417cb6730b525ab1790ccf05347e12e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
