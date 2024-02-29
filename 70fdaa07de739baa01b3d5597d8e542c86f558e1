@@ -16,6 +16,24 @@
       "message": "Do we know that this won\u0027t break partners?",
       "revId": "70fdaa07de739baa01b3d5597d8e542c86f558e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "588cc953_378ca4eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-02-29T19:53:54Z",
+      "side": 1,
+      "message": "The original change was merged four weeks ago so it seems unlikely that any partners would already depend on this change? See also https://android-review.git.corp.google.com/c/kernel/common/+/2944905.",
+      "parentUuid": "be4ffaea_47dc8542",
+      "revId": "70fdaa07de739baa01b3d5597d8e542c86f558e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
