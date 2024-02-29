@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ebe54e_2318e450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-02-29T04:20:17Z",
+      "side": 1,
+      "message": "Removing \"Work in progress\" tag on this change. While we have not addressed all feedback from the previous submission (aosp/2894722), I believe it is at feature parity or better with Android 14.\n\nThere are issues (especially with regards to reference counting) which exist in prior Android versions which still exist in this patch set, however due to schedule pressure we are looking to move forward with this as-is.\n\nSome specific prior review feedback which was considered, but ultimately I have chosen not to address at this time is printing messages with dev_dbg as opposed to pr_debug and the related functions. Because we do not have a device properly implemented and passed around with the context, we would be required to rely on the acc_dev-\u003ecdev-\u003egadget-\u003edev device for printing these messages. There are many cases where I question whether the lifecycle of this pointer is valid, and therefore I feel it is a significant risk to make this change at this time.\n\nIt is also important to note that the DBG() and ERROR() macros which are used in other areas of this driver resolve to dev_dbg and dev_err in include/linux/usb/composite.h and are used as helpers to simplify the dereference of the cdev-\u003egadget-\u003edev chain, and therefore I do not believe they are the extremely old (~2.4 kernel era) macros that they may have been confused with. If I am mistaken in this understanding, please let me know, and I will remove the use of these macros in this driver.\n\nThis has been tested on two android auto headunits using a Pixel 6 running Android mainline and appears to be operating correctly. CTS Verifier USB Accessory Test also passes on the Pixel 6 when connected to a Pixel 7 running the CTS Verifier USB Companion App.",
+      "revId": "644d3aad28912eb8f0f39ce4dfc07cf0847bc6b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
