@@ -46,6 +46,30 @@
       },
       "revId": "55ba1a832f12d03bc009247e90a3119206b24f69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77946735_fe409c71",
+        "filename": "virt/kvm/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-29T14:17:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f5f13601_688721ea",
+      "range": {
+        "startLine": 96,
+        "startChar": 7,
+        "endLine": 96,
+        "endChar": 16
+      },
+      "revId": "55ba1a832f12d03bc009247e90a3119206b24f69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
