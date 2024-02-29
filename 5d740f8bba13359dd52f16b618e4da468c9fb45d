@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f399cc11_a9373184",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-29T15:06:40Z",
+      "side": 1,
+      "message": "io-pgtable",
+      "range": {
+        "startLine": 9,
+        "startChar": 57,
+        "endLine": 9,
+        "endChar": 64
+      },
+      "revId": "5d740f8bba13359dd52f16b618e4da468c9fb45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
