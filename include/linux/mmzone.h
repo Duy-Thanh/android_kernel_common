@@ -22,6 +22,7 @@
 #include <linux/mm_types.h>
 #include <linux/page-flags.h>
 #include <linux/local_lock.h>
+#include <linux/android_kabi.h>
 #include <asm/page.h>
 
 /* Free memory management - zoned buddy allocator.  */
@@ -441,6 +442,9 @@ struct lru_gen_folio {
 	/* per-node lru_gen_folio list for global reclaim */
 	struct hlist_nulls_node list;
 #endif
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
 };
 
 enum {
@@ -467,6 +471,8 @@ struct lru_gen_mm_state {
 	unsigned long *filters[NR_BLOOM_FILTERS];
 	/* the mm stats for debugging */
 	unsigned long stats[NR_HIST_GENS][NR_MM_STATS];
+
+	ANDROID_KABI_RESERVE(1);
 };
 
 struct lru_gen_mm_walk {
@@ -484,6 +490,8 @@ struct lru_gen_mm_walk {
 	int batched;
 	bool can_swap;
 	bool force_scan;
+
+	ANDROID_KABI_RESERVE(1);
 };
 
 void lru_gen_init_lruvec(struct lruvec *lruvec);
@@ -1315,11 +1323,13 @@ typedef struct pglist_data {
 	struct mutex kswapd_lock;
 #endif
 	struct task_struct *kswapd;	/* Protected by kswapd_lock */
+	struct task_struct *mkswapd[MAX_KSWAPD_THREADS];
 	int kswapd_order;
 	enum zone_type kswapd_highest_zoneidx;
 
 	int kswapd_failures;		/* Number of 'reclaimed == 0' runs */
 
+	ANDROID_OEM_DATA(1);
 #ifdef CONFIG_COMPACTION
 	int kcompactd_max_order;
 	enum zone_type kcompactd_highest_zoneidx;
@@ -1559,6 +1569,7 @@ static inline struct pglist_data *NODE_DATA(int nid)
 extern struct pglist_data *first_online_pgdat(void);
 extern struct pglist_data *next_online_pgdat(struct pglist_data *pgdat);
 extern struct zone *next_zone(struct zone *zone);
+extern int isolate_anon_lru_page(struct page *page);
 
 /**
  * for_each_online_pgdat - helper macro to iterate over all online nodes
