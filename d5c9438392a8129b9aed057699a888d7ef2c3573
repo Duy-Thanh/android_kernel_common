@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a4924c_fd6a967a",
+        "filename": "arch/arm64/include/asm/kvm_pgtable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-29T12:55:26Z",
+      "side": 1,
+      "message": "Missing kerneldoc update",
+      "range": {
+        "startLine": 778,
+        "startChar": 37,
+        "endLine": 778,
+        "endChar": 42
+      },
+      "revId": "d5c9438392a8129b9aed057699a888d7ef2c3573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
