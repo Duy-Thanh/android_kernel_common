@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21f24570_78b2afa2",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T21:00:01Z",
+      "side": 1,
+      "message": "this has to match the UAPI ioctls, right?  Why not put it there and use it everywhere?",
+      "range": {
+        "startLine": 38,
+        "startChar": 24,
+        "endLine": 38,
+        "endChar": 27
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37358e4d_cea7271c",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T21:00:01Z",
+      "side": 1,
+      "message": "a static structure can not be dynamic (i.e. reference counted), that\u0027s not what reference counts are for.  This must be dynamic to work properly.\n\nThis should dictate the lifespan of the object being used, not the code itself (which is what I think this is attempting to reference count, if not, I\u0027m confused.)",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 42
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44e1052f_c298c555",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T21:00:01Z",
+      "side": 1,
+      "message": "wrong error code for an invalid ioctl, should be -ENOTTY",
+      "range": {
+        "startLine": 885,
+        "startChar": 10,
+        "endLine": 885,
+        "endChar": 16
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d52180da_40273850",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T21:00:01Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be called \"last\" after everything is set up?  Otherwise the interface can be called before this function is done initializing.",
+      "range": {
+        "startLine": 992,
+        "startChar": 0,
+        "endLine": 992,
+        "endChar": 44
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c32de76f_2b6b124c",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T21:00:01Z",
+      "side": 1,
+      "message": "driver should be unregistered.",
+      "range": {
+        "startLine": 1001,
+        "startChar": 0,
+        "endLine": 1001,
+        "endChar": 12
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19fa8316_dda3d213",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-29T21:00:01Z",
+      "side": 1,
+      "message": "interface id leak?  hid driver register leak?",
+      "range": {
+        "startLine": 1008,
+        "startChar": 0,
+        "endLine": 1008,
+        "endChar": 13
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
