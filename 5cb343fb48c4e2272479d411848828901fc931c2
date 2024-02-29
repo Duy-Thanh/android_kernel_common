@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f7cb7b_0e998671",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-29T12:54:39Z",
+      "side": 1,
+      "message": "Should we check explicitly for supported combinations here, rather than potentially kick up an error from the page-table code later for weird requests such as WX?",
+      "range": {
+        "startLine": 1226,
+        "startChar": 60,
+        "endLine": 1226,
+        "endChar": 80
+      },
+      "revId": "5cb343fb48c4e2272479d411848828901fc931c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
