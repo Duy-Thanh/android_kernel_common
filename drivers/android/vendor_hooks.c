@@ -538,6 +538,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_all_tag_iter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_queue_tag_busy_iter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_free_tags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_sched_insert_request);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_hibernation_swap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_cpu_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_hib_resume_bdev);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_encrypt_page);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_authpage_count);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_populate_secure_params);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_auth_params);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_aes_encrypt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_qcom_secure_hibernation_enabled);
+
 /*
  * For type visibility
  */
