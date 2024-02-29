@@ -46,6 +46,30 @@
       },
       "revId": "5cb343fb48c4e2272479d411848828901fc931c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "839dfe99_1ae6958f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-29T16:24:06Z",
+      "side": 1,
+      "message": "Alright, I\u0027ll take that back, the page-table code will happily create WX mappings at stage-2, so the current code is probably not too bad.",
+      "parentUuid": "408a4a03_4d00d328",
+      "range": {
+        "startLine": 1226,
+        "startChar": 60,
+        "endLine": 1226,
+        "endChar": 80
+      },
+      "revId": "5cb343fb48c4e2272479d411848828901fc931c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
