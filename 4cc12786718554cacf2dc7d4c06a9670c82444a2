@@ -22,6 +22,30 @@
       },
       "revId": "4cc12786718554cacf2dc7d4c06a9670c82444a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40ebd664_a61fdc71",
+        "filename": "arch/arm64/kvm/hyp/nvhe/module.lds.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-29T12:13:32Z",
+      "side": 1,
+      "message": "I can\u0027t really remember, but that\u0027s exactly as the host part with `HYPERVISOR_EVENT_IDS`",
+      "parentUuid": "6ffd9b6e_890d7557",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 26
+      },
+      "revId": "4cc12786718554cacf2dc7d4c06a9670c82444a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
