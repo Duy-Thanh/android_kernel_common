@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8dbe8e0_05e4ed4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-01T00:14:42Z",
+      "side": 1,
+      "message": "Maybe add that this will not be propagated forward to android-mainline or android16 branches.",
+      "revId": "4a40370423d922fb706c689c9e4d78109258195a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
