@@ -42,6 +42,7 @@
 #include "configfs.h"
 
 #define FUNCTIONFS_MAGIC	0xa647361 /* Chosen by a honest dice roll ;) */
+#define MAX_ALT_SETTINGS	2		  /* Allow up to 2 alt settings to be set. */
 
 /* Reference counter handling */
 static void ffs_data_get(struct ffs_data *ffs);
@@ -75,6 +76,7 @@ struct ffs_function {
 	short				*interfaces_nums;
 
 	struct usb_function		function;
+	int				cur_alt[MAX_CONFIG_INTERFACES];
 };
 
 
@@ -98,6 +100,7 @@ static int __must_check ffs_func_eps_enable(struct ffs_function *func);
 static int ffs_func_bind(struct usb_configuration *,
 			 struct usb_function *);
 static int ffs_func_set_alt(struct usb_function *, unsigned, unsigned);
+static int ffs_func_get_alt(struct usb_function *f, unsigned int intf);
 static void ffs_func_disable(struct usb_function *);
 static int ffs_func_setup(struct usb_function *,
 			  const struct usb_ctrlrequest *);
@@ -3318,6 +3321,15 @@ static void ffs_reset_work(struct work_struct *work)
 	ffs_data_reset(ffs);
 }
 
+static int ffs_func_get_alt(struct usb_function *f,
+			    unsigned int interface)
+{
+	struct ffs_function *func = ffs_func_from_usb(f);
+	int intf = ffs_func_revmap_intf(func, interface);
+
+	return (intf < 0) ? intf : func->cur_alt[interface];
+}
+
 static int ffs_func_set_alt(struct usb_function *f,
 			    unsigned interface, unsigned alt)
 {
@@ -3325,11 +3337,12 @@ static int ffs_func_set_alt(struct usb_function *f,
 	struct ffs_data *ffs = func->ffs;
 	int ret = 0, intf;
 
-	if (alt != (unsigned)-1) {
-		intf = ffs_func_revmap_intf(func, interface);
-		if (intf < 0)
-			return intf;
-	}
+	if (alt > MAX_ALT_SETTINGS)
+		return -EINVAL;
+
+	intf = ffs_func_revmap_intf(func, interface);
+	if (intf < 0)
+		return intf;
 
 	if (ffs->func)
 		ffs_func_eps_disable(ffs->func);
@@ -3344,22 +3357,34 @@ static int ffs_func_set_alt(struct usb_function *f,
 	if (ffs->state != FFS_ACTIVE)
 		return -ENODEV;
 
-	if (alt == (unsigned)-1) {
-		ffs->func = NULL;
-		ffs_event_add(ffs, FUNCTIONFS_DISABLE);
-		return 0;
-	}
-
 	ffs->func = func;
 	ret = ffs_func_eps_enable(func);
-	if (ret >= 0)
+	if (ret >= 0) {
 		ffs_event_add(ffs, FUNCTIONFS_ENABLE);
+		func->cur_alt[interface] = alt;
+	}
 	return ret;
 }
 
 static void ffs_func_disable(struct usb_function *f)
 {
-	ffs_func_set_alt(f, 0, (unsigned)-1);
+	struct ffs_function *func = ffs_func_from_usb(f);
+	struct ffs_data *ffs = func->ffs;
+
+	if (ffs->func)
+		ffs_func_eps_disable(ffs->func);
+
+	if (ffs->state == FFS_DEACTIVATED) {
+		ffs->state = FFS_CLOSING;
+		INIT_WORK(&ffs->reset_work, ffs_reset_work);
+		schedule_work(&ffs->reset_work);
+		return;
+	}
+
+	if (ffs->state == FFS_ACTIVE) {
+		ffs->func = NULL;
+		ffs_event_add(ffs, FUNCTIONFS_DISABLE);
+	}
 }
 
 static int ffs_func_setup(struct usb_function *f,
@@ -3667,6 +3692,7 @@ static struct usb_function *ffs_alloc(struct usb_function_instance *fi)
 	func->function.bind    = ffs_func_bind;
 	func->function.unbind  = ffs_func_unbind;
 	func->function.set_alt = ffs_func_set_alt;
+	func->function.get_alt = ffs_func_get_alt;
 	func->function.disable = ffs_func_disable;
 	func->function.setup   = ffs_func_setup;
 	func->function.req_match = ffs_func_req_match;
