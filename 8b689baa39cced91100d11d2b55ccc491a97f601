@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f30564_53d2fb71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-02T02:34:30Z",
+      "side": 1,
+      "message": "Re-uploading with the following fix to resolve build issues when CONFIG_ANDROID_USB_F_MIDI_INFO is not set:\n\ndrivers/usb/gadget/function/android_f_midi_info.h: fix static definition of android_remove_midi_device at line 96.\n\nI have validated both cases for the config option. Apologies for the thrash on this - I should have re-tested the disabled case.",
+      "revId": "8b689baa39cced91100d11d2b55ccc491a97f601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
