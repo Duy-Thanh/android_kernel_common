@@ -22,6 +22,30 @@
       },
       "revId": "d7d63acaaabaf83c9aad01076a0642ae992d9002",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f453b99f_deaf5f87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-03-03T15:30:29Z",
+      "side": 1,
+      "message": "Ah, yes, I misunderstood the code, fixed now.",
+      "parentUuid": "b49b490b_6cdaa94e",
+      "range": {
+        "startLine": 72,
+        "startChar": 42,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "d7d63acaaabaf83c9aad01076a0642ae992d9002",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
