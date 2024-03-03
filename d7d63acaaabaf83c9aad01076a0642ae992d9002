@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b49b490b_6cdaa94e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-03-03T13:26:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure that\u0027s true... it certainly dereferences the `node` argument as part of the `RB_EMPTY_NODE()` check. We also have a \npresubmit failure which looks like we\u0027re dereferencing `NULL` here w/o kfence enabled.",
+      "range": {
+        "startLine": 72,
+        "startChar": 42,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "d7d63acaaabaf83c9aad01076a0642ae992d9002",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
