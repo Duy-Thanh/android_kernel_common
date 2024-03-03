@@ -31,6 +31,8 @@
 
 DEFINE_STATIC_KEY_FALSE(kvm_protected_mode_initialized);
 
+/* Test pre submit. */
+
 static struct reserved_mem *pkvm_firmware_mem;
 static phys_addr_t *pvmfw_base = &kvm_nvhe_sym(pvmfw_base);
 static phys_addr_t *pvmfw_size = &kvm_nvhe_sym(pvmfw_size);
