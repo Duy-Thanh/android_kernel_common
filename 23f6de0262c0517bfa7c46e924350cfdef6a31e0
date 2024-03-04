@@ -52,6 +52,24 @@
       "parentUuid": "f02080b4_599a9fac",
       "revId": "23f6de0262c0517bfa7c46e924350cfdef6a31e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e4dab3_b3916cd3",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-03-04T17:00:30Z",
+      "side": 1,
+      "message": "Actually why can\u0027t we hold `write_lock(\u0026kvm-\u003emmu_lock);` while doing this snapshot hvc and move the acconting bits in between `write_lock(\u0026kvm-\u003emmu_lock);` on the fault handling path ? That should work I guess.",
+      "parentUuid": "f9c712b1_9acaee5a",
+      "revId": "23f6de0262c0517bfa7c46e924350cfdef6a31e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
