@@ -51,6 +51,24 @@
       "parentUuid": "173b9712_78b74f22",
       "revId": "015ac763b1a9eecea1fef4629112f539e7186fb9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8581eb2a_e9ca3da4",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-04T15:04:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1ec4cb0_35568905",
+      "revId": "015ac763b1a9eecea1fef4629112f539e7186fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
