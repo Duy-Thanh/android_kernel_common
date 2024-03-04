@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "827951a1_448c79a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-04T15:07:50Z",
+      "side": 1,
+      "message": "The two main things that this adds in Rust Binder are the `Context` and `Process` types. These are types that binderfs interacts with directly; `rust_binder_new_device` will create a new `Context` and `rust_binder_open` will create a new `Process`.\n\nStill, I do see what you mean, I can try to extract functionality out of this patch to a new intermediate patch.",
+      "parentUuid": "67d8a580_27e055df",
+      "revId": "015ac763b1a9eecea1fef4629112f539e7186fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "173b9712_78b74f22",
         "filename": "drivers/android/Kconfig",
         "patchSetId": 14
