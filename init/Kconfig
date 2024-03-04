@@ -102,9 +102,6 @@ config PAHOLE_VERSION
 	int
 	default $(shell,$(srctree)/scripts/pahole-version.sh $(PAHOLE))
 
-config CONSTRUCTORS
-	bool
-
 config IRQ_WORK
 	bool
 
@@ -122,6 +119,12 @@ config THREAD_INFO_IN_TASK
 	  and put_task_stack() in save_thread_stack_tsk() and get_wchan().
 
 menu "General setup"
+
+menuconfig CONSTRUCTORS
+	bool "Rust ABI struct module"
+	help
+	  This option is set automatically for Rust. You can force it on if you
+	  want ABI compatible struct module layout.
 
 config BROKEN
 	bool
