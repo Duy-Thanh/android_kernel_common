@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000070080420",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2923912?revision\u003d8",
+      "key": {
+        "uuid": "d3be54d3_1d163240",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-04T03:32:41Z",
+      "side": 1,
+      "message": "Commit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003csha1\u003e)\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "6336c63e7e0b74c41d380b47e6a4b09888aef839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000070080420",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2923912?revision\u003d8",
+      "key": {
+        "uuid": "e36a4e84_01dc3cb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-04T03:32:41Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: 王如梦 \u003cwangrumeng@xiaomi.corp-partner.google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "c0679ffe_064d6cfd",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: 王如梦 \u003cwangrumeng@xiaomi.corp-partner.google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6336c63e7e0b74c41d380b47e6a4b09888aef839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
