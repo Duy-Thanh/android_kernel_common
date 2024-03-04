@@ -46,6 +46,30 @@
       },
       "revId": "4cc12786718554cacf2dc7d4c06a9670c82444a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4736d38d_b1d2c447",
+        "filename": "arch/arm64/kvm/hyp/nvhe/module.lds.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-04T15:23:45Z",
+      "side": 1,
+      "message": "It seems I can make it work ... No idea why I went that way in a first place",
+      "parentUuid": "40ebd664_a61fdc71",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 26
+      },
+      "revId": "4cc12786718554cacf2dc7d4c06a9670c82444a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
