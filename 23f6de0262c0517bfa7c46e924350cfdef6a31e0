@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "441371d0_d576bc30",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-04T16:08:01Z",
+      "side": 1,
+      "message": "In the init, you rely on `protected_pgtable_mem` to know how much data you need in your memcache.\n\nThis is fine ... BUT that means it can fail with `ENOMEM`. As you you can race with page faults that would increase the size of your page-table while you are trying to walk it.\n\nYou\u0027d need here to handle that case, if ENOMEM, then retry with more memory",
+      "revId": "23f6de0262c0517bfa7c46e924350cfdef6a31e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
