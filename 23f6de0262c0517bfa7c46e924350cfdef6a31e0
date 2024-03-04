@@ -70,6 +70,24 @@
       "parentUuid": "f9c712b1_9acaee5a",
       "revId": "23f6de0262c0517bfa7c46e924350cfdef6a31e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e313b905_d6a1b712",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-04T17:22:10Z",
+      "side": 1,
+      "message": "Hum, yeah, that could be a solution but you would prevent any fault while we do this snapshot which is quite a long operation.\n\nNo strong opinion here.",
+      "parentUuid": "59e4dab3_b3916cd3",
+      "revId": "23f6de0262c0517bfa7c46e924350cfdef6a31e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
