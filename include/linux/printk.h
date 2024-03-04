@@ -392,7 +392,7 @@ struct pi_entry {
 				.level = __builtin_constant_p(_level) ? (_level) : NULL, \
 				.subsys_fmt_prefix = _subsys_fmt_prefix,\
 			};						\
-			static const struct pi_entry *_entry_ptr	\
+			static const struct pi_entry *_entry_ptr __attribute__((unused)) \
 			__used __section(".printk_index") = &_entry;	\
 		}							\
 	} while (0)
