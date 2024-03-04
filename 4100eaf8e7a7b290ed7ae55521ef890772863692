@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f1648ad_dfd31d19",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 12
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-04T15:01:53Z",
+      "side": 1,
+      "message": "Done in aosp/2979538",
+      "parentUuid": "0ceae946_198e2f4f",
+      "revId": "4100eaf8e7a7b290ed7ae55521ef890772863692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2e37d94_12148c8a",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eb5da3c_3c0deac7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 6765,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-04T15:01:53Z",
+      "side": 1,
+      "message": "Done in aosp/2979538",
+      "parentUuid": "b2e37d94_12148c8a",
+      "revId": "4100eaf8e7a7b290ed7ae55521ef890772863692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "773a2d5f_f35c9dfe",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-02-21T02:31:09Z",
       "side": 1,
       "message": "why are you writing one char at a time instead of calling one of the many string helper functions that the kernel has",
+      "revId": "4100eaf8e7a7b290ed7ae55521ef890772863692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3ba3bfa_336f8f9a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 6783,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-04T15:01:53Z",
+      "side": 1,
+      "message": "Done in aosp/2979538",
+      "parentUuid": "773a2d5f_f35c9dfe",
       "revId": "4100eaf8e7a7b290ed7ae55521ef890772863692",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
