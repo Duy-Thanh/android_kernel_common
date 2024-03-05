@@ -16,6 +16,24 @@
       "message": "Stopping here, the rest need to be rebased and resubmitted based on the upstream review.",
       "revId": "310ba6dfb5bdf43a87f1f1899130a84c4edc7285",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "083cf922_52344cd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-05T21:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31d34086_8ed04747",
+      "revId": "310ba6dfb5bdf43a87f1f1899130a84c4edc7285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
