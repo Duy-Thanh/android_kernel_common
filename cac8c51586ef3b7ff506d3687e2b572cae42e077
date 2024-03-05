@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b48ba41f_6010db10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-05T23:59:08Z",
+      "side": 1,
+      "message": "I know that the original also did not change arch/x86/configs/gki_defconfig but we should keep these configs consistent, so please add a separate patch which enables CONFIG_PAGE_PINNER for both ARM64 and x86.",
+      "parentUuid": "9cb17c03_c22c395e",
+      "revId": "cac8c51586ef3b7ff506d3687e2b572cae42e077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4aa16e0_9a28cbe3",
         "filename": "mm/page_alloc.c",
         "patchSetId": 1
