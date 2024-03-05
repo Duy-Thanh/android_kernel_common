@@ -186,6 +186,46 @@
       "message": "This function no longer exists, even though you did not remove it, pleas update this comment to reflect the current logic.",
       "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15f1e218_f9b48efa",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-05T23:52:48Z",
+      "side": 1,
+      "message": "What happens if the original uid_entry gets updated while we are unlocked? Seems like we could be losing data here when we copy over the updated uid_entry_tmp",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44485661_0fe29b22",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-05T23:52:48Z",
+      "side": 1,
+      "message": "Could this be updated to \"find_uid_entry\"?",
+      "range": {
+        "startLine": 476,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 44
+      },
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
