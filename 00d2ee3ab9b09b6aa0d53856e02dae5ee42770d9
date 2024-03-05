@@ -284,6 +284,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b901ccab_fb55bafc",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-05T14:21:44Z",
+      "side": 1,
+      "message": "The patch set uploaded on February 29th moved the hid_register_driver() call to line 1022, which is after the potential failure of this call to usb_interface_id, and therefore resolved this.",
+      "parentUuid": "996d1278_88f7802b",
+      "range": {
+        "startLine": 1001,
+        "startChar": 0,
+        "endLine": 1001,
+        "endChar": 12
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19fa8316_dda3d213",
