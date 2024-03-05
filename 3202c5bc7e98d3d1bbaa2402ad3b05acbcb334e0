@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b1cf63_e407b944",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-05T16:08:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4e15cfb_e405712b",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b6e9511_414afab9",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9078912b_e31f388b",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-05T16:08:29Z",
+      "side": 1,
+      "message": "ack for the ro_after_init. However, none of that is hot path so using a static key here looks a bit overkill.",
+      "parentUuid": "6b6e9511_414afab9",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7df6cad_45748490",
@@ -48,6 +84,30 @@
       "writtenOn": "2024-02-21T10:02:33Z",
       "side": 1,
       "message": "MAYBE: s/__done/granule_size/ ?",
+      "range": {
+        "startLine": 156,
+        "startChar": 20,
+        "endLine": 156,
+        "endChar": 26
+      },
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "162b2923_b8a8d742",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-05T16:08:29Z",
+      "side": 1,
+      "message": "granule_size is something a bit difference. Here it is how much has been done, how many granules have been processed. \n\nBut I\u0027ve renamed to nr_done to align with `mem_encrypt`",
+      "parentUuid": "b7df6cad_45748490",
       "range": {
         "startLine": 156,
         "startChar": 20,
@@ -81,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c70fa15f_c1b7992c",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-05T16:08:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b89781f_97a41877",
+      "range": {
+        "startLine": 180,
+        "startChar": 12,
+        "endLine": 180,
+        "endChar": 25
+      },
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "524e90a9_a381b6c9",
@@ -94,6 +178,24 @@
       "writtenOn": "2024-02-21T10:02:33Z",
       "side": 1,
       "message": "Q: MA_STATE initializes the index with `phys_addr`, then `mas_find` starts searching from the `phys_addr` to `phys_addr + size - 1`. I think it is enough to test `mas.index` \u003d\u003d `phys_addr`, wdyt ?",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bad576be_5cac664b",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-05T16:08:29Z",
+      "side": 1,
+      "message": "you can have a mas with an index lower than phys_addr, as long as this mas intersects with that range.",
+      "parentUuid": "524e90a9_a381b6c9",
       "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -115,6 +217,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b0831f_6a30f3e7",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-05T16:08:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5554f2bd_1719b37d",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78f33d86_8fdb1769",
@@ -128,6 +248,24 @@
       "writtenOn": "2024-02-21T10:02:33Z",
       "side": 1,
       "message": "Q: Shouldn\u0027t we check for `slab_is_available()` before using `GFP_KERNEL` or we can assume that it is already available ?",
+      "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b75da6_57c0942e",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-05T16:08:29Z",
+      "side": 1,
+      "message": "If you\u0027re here, that\u0027s because at least one entry exists. If one exists you\u0027ve been able to add it in a first place, so slab_is_available() is always true here 😊\n\nBut anyway, I\u0027m factoring things out and there is now a \"common\" function to store the refcount that\u0027ll check for the slab.",
+      "parentUuid": "78f33d86_8fdb1769",
       "revId": "3202c5bc7e98d3d1bbaa2402ad3b05acbcb334e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
