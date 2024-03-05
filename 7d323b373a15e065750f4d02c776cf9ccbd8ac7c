@@ -52,6 +52,24 @@
       "parentUuid": "9cd1ce22_bfd72dda",
       "revId": "7d323b373a15e065750f4d02c776cf9ccbd8ac7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0403428_666ed5f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-03-05T12:14:28Z",
+      "side": 1,
+      "message": "We only want to create branches (automatically) that satisfy a certain pattern: `-202?-.*`. Yet, approval needs to span also existing branches. Having said that, I now took a look whether this \"historic\" use case still applies. By now all those branches appear to be deprecated.",
+      "parentUuid": "529b0b17_44e6ac1d",
+      "revId": "7d323b373a15e065750f4d02c776cf9ccbd8ac7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
