@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e388c63_bcd0f0c7",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-05T23:12:34Z",
+      "side": 1,
+      "message": "How can this happen?",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1ba822_26f5c01b",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-05T23:12:34Z",
+      "side": 1,
+      "message": "nit: blank line",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a74796f_d28fb364",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-05T23:12:34Z",
+      "side": 1,
+      "message": "This function no longer exists, even though you did not remove it, pleas update this comment to reflect the current logic.",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
