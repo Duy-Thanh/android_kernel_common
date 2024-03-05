@@ -811,7 +811,14 @@ static void binder_transaction_priority(struct binder_thread *thread,
 	t->set_priority_called = true;
 
 	if (!node->inherit_rt && is_rt_policy(desired.sched_policy)) {
-		desired.prio = NICE_TO_PRIO(0);
+		/*
+		 * The transaction comes from a real-time task.
+		 * However, the target node has RT inheritance
+		 * disabled. Lets try our best and request the
+		 * maximum normal priority, it might improve
+		 * latency under certain scenarios.
+		 */
+		desired.prio = NICE_TO_PRIO(MIN_NICE);
 		desired.sched_policy = SCHED_NORMAL;
 	}
 
