@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d54b6ff_87d275a8",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-05T09:57:45Z",
+      "side": 1,
+      "message": "Figuring this out would be good, but again, you can NOT have a reference count in a static object, that is not how to use a kref sorry.  If you want just an atomic variable, use a `struct refcount` and go from there, or use an `atomic_t` don\u0027t fake it out by doing this.",
+      "parentUuid": "79c047a4_da803bcc",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 42
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44e1052f_c298c555",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 15
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "To clarify, HID driver? If so, resolved by moving hid_register_driver to the end of this config.",
       "parentUuid": "c32de76f_2b6b124c",
+      "range": {
+        "startLine": 1001,
+        "startChar": 0,
+        "endLine": 1001,
+        "endChar": 12
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "996d1278_88f7802b",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-05T09:57:45Z",
+      "side": 1,
+      "message": "Something has to change, this is a leak as-is.",
+      "parentUuid": "169118a7_60967f18",
       "range": {
         "startLine": 1001,
         "startChar": 0,
