@@ -133,7 +133,7 @@ static void capture_page_state(struct page *page,
 {
 	struct folio *folio = page_folio(page);
 
-	record->flags = page->flags;
+	record->flags = page->flags.f;
 	record->mapping = folio_mapping(folio);
 	record->pfn = page_to_pfn(page);
 	record->count = page_count(page);
