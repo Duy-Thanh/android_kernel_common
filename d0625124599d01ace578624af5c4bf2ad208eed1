@@ -46,6 +46,30 @@
       },
       "revId": "d0625124599d01ace578624af5c4bf2ad208eed1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e2772b0_f3f65e02",
+        "filename": "arch/arm64/kvm/hyp/nvhe/Makefile.module",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-06T11:57:51Z",
+      "side": 1,
+      "message": "I could move the tracing related into a separated folder `nvhe/trace/` to only include that by default.\n\nNot sure how to do better as we need to share those definitions between \"core\" and modules.",
+      "parentUuid": "9586ea17_4dc36fa3",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 53
+      },
+      "revId": "d0625124599d01ace578624af5c4bf2ad208eed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
