@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01dad313_2b55e37f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876910
+      },
+      "writtenOn": "2024-03-06T15:48:24Z",
+      "side": 1,
+      "message": "Lee, the com.android.cuttlefish.wifi.tests.WifiE2eTests#testWifiConnects failure on v2/android-gki/ack_platform_integration_main_aosp_cf_x86_64_boot_test should be safe to bypass. b/328409513 for tracking.",
+      "revId": "149ba18604ec71cac89d9c75df322fa9ccd2181f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
