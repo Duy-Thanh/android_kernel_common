@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc6e37ff_aace229a",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-06T18:45:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0d5a187d_0af7f4c4",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e03ae40_3c3bfeb0",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "All right, uid_entry would not be null, I have removed the code",
       "parentUuid": "9e03ae40_3c3bfeb0",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed75c878_8d487a54",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-06T18:45:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "76246e64_71d0febe",
       "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -123,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c99b787b_903dbd4e",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-06T18:45:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5761286a_f368feb1",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cb898bf_8e801f3c",
@@ -154,6 +208,24 @@
       "side": 1,
       "message": "Locked_uid has been removed.",
       "parentUuid": "8cb898bf_8e801f3c",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adab0bb9_d7645ba1",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-06T18:45:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "40b222bb_97820d8d",
       "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -228,6 +300,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a937bdd_4f860ad2",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-06T18:45:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3ac7fc06_43235d4a",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11279595_ed3559cc",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-06T18:45:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fb0da592_ff749456",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cd8ce02_e7fa6cd4",
@@ -263,6 +371,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e274ad34_5d3107fd",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-06T18:45:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f6e848c6_d5c54fd6",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71f120b4_9b0f9b41",
@@ -294,6 +420,24 @@
       "side": 1,
       "message": "hlist_for_each_entry would check if uid_entry is null, so locked_uid has been removed.",
       "parentUuid": "71f120b4_9b0f9b41",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c90ad881_0f475146",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-06T18:45:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "28e3d2c5_30e7c6ad",
       "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
