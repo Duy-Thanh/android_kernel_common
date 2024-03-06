@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b19a3ceb_83d38579",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-06T19:24:27Z",
+      "side": 1,
+      "message": "Please combine this patch with the previous one since the functionality is so closely related.",
+      "revId": "d2c2d90c7a128456f01b7a8c9d6fbcd6be89372e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a86a4304_29771cf2",
@@ -68,6 +85,24 @@
       "side": 1,
       "message": "Hi John,We thought about it carefully, but it still wasn\u0027t easy to merge.\nvoid android_vh_account_process_tick_gran_handler(void *unused, int user_tick, int *ticks)\nThis will operate ticks, and then the subsequent hook can be called only when ticks is not 0. It is difficult to guarantee this logical relationship after merging.",
       "parentUuid": "265c58e7_4e760b2b",
+      "revId": "d2c2d90c7a128456f01b7a8c9d6fbcd6be89372e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1978f725_070d5571",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-06T19:24:27Z",
+      "side": 1,
+      "message": "These could be combined since vtime_accounting_enabled_this_cpu() doesn\u0027t change any state and the 2nd hook can do the same calculation that the first one did to see if tick\u003d\u003d0. So this could reduce to:\n```\n\ttrace_android_vh_account_task_time(p, this_rq(), user_tick, \u0026ticks);\n\tif (!ticks)\n\t\treturn;\n\n\tif (vtime_accounting_enabled_this_cpu())\n\t\treturn;\n```\nYou could also move the `if (vtime_accounting...)` test above the hook (or call it from within the hook).",
+      "parentUuid": "65956b68_30253a53",
       "revId": "d2c2d90c7a128456f01b7a8c9d6fbcd6be89372e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
