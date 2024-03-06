@@ -205,6 +205,7 @@ struct scsi_device {
 	unsigned use_10_for_rw:1; /* first try 10-byte read / write */
 	unsigned use_10_for_ms:1; /* first try 10-byte mode sense/select */
 	unsigned set_dbd_for_ms:1; /* Set "DBD" field in mode sense */
+	unsigned read_before_ms:1;	/* perform a READ before MODE SENSE */
 	unsigned no_report_opcodes:1;	/* no REPORT SUPPORTED OPERATION CODES */
 	unsigned no_write_same:1;	/* no WRITE SAME command */
 	unsigned use_16_for_rw:1; /* Use read/write(16) over read/write(10) */
@@ -493,6 +494,7 @@ struct scsi_exec_args {
 	unsigned int sense_len;		/* sense buffer len */
 	struct scsi_sense_hdr *sshdr;	/* decoded sense header */
 	blk_mq_req_flags_t req_flags;	/* BLK_MQ_REQ flags */
+<<<<<<< HEAD   (e98e76 Merge 6.1.80 into android15-6.1)
 	int scmd_flags;			/* SCMD flags */
 	int *resid;			/* residual length */
 };
@@ -502,6 +504,47 @@ int scsi_execute_cmd(struct scsi_device *sdev, const unsigned char *cmd,
 		     int timeout, int retries,
 		     const struct scsi_exec_args *args);
 
+=======
+	int *resid;			/* residual length */
+};
+
+int scsi_execute_cmd(struct scsi_device *sdev, const unsigned char *cmd,
+		     blk_opf_t opf, void *buffer, unsigned int bufflen,
+		     int timeout, int retries,
+		     const struct scsi_exec_args *args);
+
+/* Make sure any sense buffer is the correct size. */
+#define scsi_execute(_sdev, _cmd, _data_dir, _buffer, _bufflen, _sense,	\
+		     _sshdr, _timeout, _retries, _flags, _rq_flags,	\
+		     _resid)						\
+({									\
+	scsi_execute_cmd(_sdev, _cmd, (_data_dir == DMA_TO_DEVICE ?	\
+			 REQ_OP_DRV_OUT : REQ_OP_DRV_IN) | _flags,	\
+			 _buffer, _bufflen, _timeout, _retries,	\
+			 &(struct scsi_exec_args) {			\
+				.sense = _sense,			\
+				.sshdr = _sshdr,			\
+				.req_flags = _rq_flags & RQF_PM  ?	\
+						BLK_MQ_REQ_PM : 0,	\
+				.resid = _resid,			\
+			 });						\
+})
+
+static inline int scsi_execute_req(struct scsi_device *sdev,
+	const unsigned char *cmd, int data_direction, void *buffer,
+	unsigned bufflen, struct scsi_sense_hdr *sshdr, int timeout,
+	int retries, int *resid)
+{
+	return scsi_execute_cmd(sdev, cmd,
+				data_direction == DMA_TO_DEVICE ?
+				REQ_OP_DRV_OUT : REQ_OP_DRV_IN, buffer,
+				bufflen, timeout, retries,
+				&(struct scsi_exec_args) {
+					.sshdr = sshdr,
+					.resid = resid,
+				});
+}
+>>>>>>> BRANCH (61adba Linux 6.1.81)
 extern void sdev_disable_disk_events(struct scsi_device *sdev);
 extern void sdev_enable_disk_events(struct scsi_device *sdev);
 extern int scsi_vpd_lun_id(struct scsi_device *, char *, size_t);
