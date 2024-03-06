@@ -16,6 +16,24 @@
       "message": "It\u0027s FROMGIT status since akpm took it into his tree and Richard needed to change a little since it\u0027s not cleanly applied it into 6.1 so changed it with BACKPORT.\n\nSuren, let us know if it should still be FROMGIT.",
       "revId": "beb1a8d2c7695ce231fefb63bcb501074b650308",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a829e348_90b2975f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-06T19:19:49Z",
+      "side": 1,
+      "message": "You can mark in `BACKPORT: FROMGIT:` like this one for example: aosp/2975293.\nAlso please describe what changes to the original you had to make. In the above example you can see `[vilasbhat: Removed reference to RPM_INVALID from patch as it does not exist in 5.15]`.\n\nIs this change urgently needed and we can\u0027t wait for it to be pulled into Linus\u0027 tree?",
+      "parentUuid": "f6677854_8e4ba162",
+      "revId": "beb1a8d2c7695ce231fefb63bcb501074b650308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
