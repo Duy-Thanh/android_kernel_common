@@ -22,6 +22,30 @@
       },
       "revId": "ed4b2b9d7ebb6433aefb8780506b0679e97e44f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f88382ea_c829477f",
+        "filename": "arch/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2024-03-06T01:13:50Z",
+      "side": 1,
+      "message": "The module does need to do a FIPS140 compliance check, handling `.rodata` and `.text` only might work for this purpose.\n\nI do define `BUILD_FIPS140_KO`, making the conditional on `defined(BUILD_FIPS140_KO)` is probably a cleaner way - I will experiment if it works as expected. Any issues with the `fips140.ko` module if that changes?",
+      "parentUuid": "eaf730f3_fe808329",
+      "range": {
+        "startLine": 1428,
+        "startChar": 0,
+        "endLine": 1432,
+        "endChar": 0
+      },
+      "revId": "ed4b2b9d7ebb6433aefb8780506b0679e97e44f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
