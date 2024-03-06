@@ -52,6 +52,24 @@
       "parentUuid": "a829e348_90b2975f",
       "revId": "beb1a8d2c7695ce231fefb63bcb501074b650308",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d43b6fd_f4834116",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-06T19:36:30Z",
+      "side": 1,
+      "message": "Understood. Please mention that in the associated bug so that the urgency is clear.",
+      "parentUuid": "d715a470_d9c7ffd7",
+      "revId": "beb1a8d2c7695ce231fefb63bcb501074b650308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
