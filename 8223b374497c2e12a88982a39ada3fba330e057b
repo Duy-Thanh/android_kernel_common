@@ -315,6 +315,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b2e98e_9024588d",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T11:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f1ba822_26f5c01b",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a74796f_d28fb364",
@@ -328,6 +346,24 @@
       "writtenOn": "2024-03-05T23:12:34Z",
       "side": 1,
       "message": "This function no longer exists, even though you did not remove it, pleas update this comment to reflect the current logic.",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f53f5cd_3981045c",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T11:15:13Z",
+      "side": 1,
+      "message": "All right, the part should be removed.",
+      "parentUuid": "3a74796f_d28fb364",
       "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -351,6 +387,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d57fba6a_51b51f18",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T11:15:13Z",
+      "side": 1,
+      "message": "Actually, we can always obtain IO data for a certain time.",
+      "parentUuid": "15f1e218_f9b48efa",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44485661_0fe29b22",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 2
@@ -362,6 +416,30 @@
       "writtenOn": "2024-03-05T23:52:48Z",
       "side": 1,
       "message": "Could this be updated to \"find_uid_entry\"?",
+      "range": {
+        "startLine": 476,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 44
+      },
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "779e322b_94a7f9d8",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T11:15:13Z",
+      "side": 1,
+      "message": "I will push another patch to reduce code redundancy.",
+      "parentUuid": "44485661_0fe29b22",
       "range": {
         "startLine": 476,
         "startChar": 0,
