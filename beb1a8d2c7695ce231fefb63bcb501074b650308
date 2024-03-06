@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6677854_8e4ba162",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2024-03-06T18:49:53Z",
+      "side": 1,
+      "message": "It\u0027s FROMGIT status since akpm took it into his tree and Richard needed to change a little since it\u0027s not cleanly applied it into 6.1 so changed it with BACKPORT.\n\nSuren, let us know if it should still be FROMGIT.",
+      "revId": "beb1a8d2c7695ce231fefb63bcb501074b650308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
