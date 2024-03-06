@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaf730f3_fe808329",
+        "filename": "arch/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-03-06T00:50:58Z",
+      "side": 1,
+      "message": "Do you actually need section merging in general, or do you specifically need `.rodata.._start` and `.rodata.._end` to be put before and after `.rodata` because your module does a FIPS140 compliant integrity check?\n\nDo you define `BUILD_FIPS140_KO` when building your module?  That guards other code changes that are needed for the FIPS140 integrity check to work, namely disabling runtime code patching in certain headers.  I think you should be defining it if you aren\u0027t already.\n\nWould it work to just make the linker script change conditional on `defined(BUILD_FIPS140_KO)` instead of `IS_ENABLED(CONFIG_CRYPTO_FIPS140_MOD)`?",
+      "range": {
+        "startLine": 1428,
+        "startChar": 0,
+        "endLine": 1432,
+        "endChar": 0
+      },
+      "revId": "ed4b2b9d7ebb6433aefb8780506b0679e97e44f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
