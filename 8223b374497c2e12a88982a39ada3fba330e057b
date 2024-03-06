@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d5a187d_0af7f4c4",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T10:42:15Z",
+      "side": 1,
+      "message": "All right, uid_entry would not be null, I have removed the code.",
+      "parentUuid": "c03eabac_f69b4b12",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e03ae40_3c3bfeb0",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2024-03-05T23:33:45Z",
       "side": 1,
       "message": "Same for this chunk, I suspect this is dead code at this point.",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76246e64_71d0febe",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T10:42:15Z",
+      "side": 1,
+      "message": "All right, uid_entry would not be null, I have removed the code",
+      "parentUuid": "9e03ae40_3c3bfeb0",
       "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5761286a_f368feb1",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T10:42:15Z",
+      "side": 1,
+      "message": "ALL right, it has been removed.",
+      "parentUuid": "7d8a5bd2_39c59d8e",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cb898bf_8e801f3c",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 2
@@ -82,6 +136,24 @@
       "writtenOn": "2024-03-05T23:33:45Z",
       "side": 1,
       "message": "I\u0027m not sure I understand the locked_uid bool here.  It seems like it is to flag that the uid_entry bucket has been locked or not, but it doesn\u0027t change the behavior in this function very much, as I\u0027d not expect !uid_entry to be true.",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40b222bb_97820d8d",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T10:42:15Z",
+      "side": 1,
+      "message": "Locked_uid has been removed.",
+      "parentUuid": "8cb898bf_8e801f3c",
       "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -122,6 +194,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ac7fc06_43235d4a",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T10:42:15Z",
+      "side": 1,
+      "message": "Locked_uid has been removed.",
+      "parentUuid": "587c9390_8cb61600",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb0da592_ff749456",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T10:42:15Z",
+      "side": 1,
+      "message": "Locked_uid has been removed.",
+      "parentUuid": "9e388c63_bcd0f0c7",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6cd8ce02_e7fa6cd4",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 2
@@ -139,6 +247,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6e848c6_d5c54fd6",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T10:42:15Z",
+      "side": 1,
+      "message": "It has been removed.",
+      "parentUuid": "6cd8ce02_e7fa6cd4",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71f120b4_9b0f9b41",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 2
@@ -150,6 +276,24 @@
       "writtenOn": "2024-03-05T23:33:45Z",
       "side": 1,
       "message": "Maybe check uid_entry for null here before passing it to io_stats_uid? That is if its actually possible for it to be null here.",
+      "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28e3d2c5_30e7c6ad",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-06T10:42:15Z",
+      "side": 1,
+      "message": "hlist_for_each_entry would check if uid_entry is null, so locked_uid has been removed.",
+      "parentUuid": "71f120b4_9b0f9b41",
       "revId": "8223b374497c2e12a88982a39ada3fba330e057b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
