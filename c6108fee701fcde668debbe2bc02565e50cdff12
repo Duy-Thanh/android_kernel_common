@@ -16,6 +16,24 @@
       "message": "This unsafe block isn\u0027t okay. The `remove` method takes `\u0026self`, so it can be called during iteration which can result in these references becoming dangling.\n\nMost likely we would need to return a clone of the `Arc` here to make this work.",
       "revId": "c6108fee701fcde668debbe2bc02565e50cdff12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a883588e_6fd0b359",
+        "filename": "rust/kernel/xarray.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-03-07T13:17:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2714b38_4d36519d",
+      "revId": "c6108fee701fcde668debbe2bc02565e50cdff12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
