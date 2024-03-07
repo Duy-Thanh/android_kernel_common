@@ -115,5 +115,9 @@
 
   __traceiter_android_vh_alter_mutex_list_add
   __traceiter_android_vh_mutex_unlock_slowpath
+  __traceiter_android_vh_binder_detect_low_async_space_locked
+  __traceiter_android_vh_copy_process
   __tracepoint_android_vh_alter_mutex_list_add
   __tracepoint_android_vh_mutex_unlock_slowpath
+  __tracepoint_android_vh_binder_detect_low_async_space_locked
+  __tracepoint_android_vh_copy_process
