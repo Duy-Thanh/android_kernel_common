@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "baa73e4e_ab16fb55",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-07T03:30:49Z",
+      "side": 1,
+      "message": "I have moved the kref to the dynamically allocated acc_dev struct, and am using a static pointer for the acc_dev_instance which is protected by a mutex.",
+      "parentUuid": "7d54b6ff_87d275a8",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 42
+      },
+      "revId": "00d2ee3ab9b09b6aa0d53856e02dae5ee42770d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44e1052f_c298c555",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 15

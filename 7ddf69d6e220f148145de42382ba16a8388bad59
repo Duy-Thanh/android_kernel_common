@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c29f145_fa58e40f",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-07T03:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7c3a387_46b062a6",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 74,
+        "endChar": 4
+      },
+      "revId": "7ddf69d6e220f148145de42382ba16a8388bad59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bf905d5_6f172c5b",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-05T15:51:59Z",
       "side": 1,
       "message": "nit, `bool`",
+      "range": {
+        "startLine": 80,
+        "startChar": 1,
+        "endLine": 80,
+        "endChar": 4
+      },
+      "revId": "7ddf69d6e220f148145de42382ba16a8388bad59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca4a55fd_0cf77fa4",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-07T03:30:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bf905d5_6f172c5b",
       "range": {
         "startLine": 80,
         "startChar": 1,
