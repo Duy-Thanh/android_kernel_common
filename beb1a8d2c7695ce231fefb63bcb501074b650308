@@ -70,6 +70,24 @@
       "parentUuid": "d715a470_d9c7ffd7",
       "revId": "beb1a8d2c7695ce231fefb63bcb501074b650308",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a21c780_3f7ded4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2024-03-07T03:41:53Z",
+      "side": 1,
+      "message": "Thanks Minchan and Suren, I\u0027ve updated the commit message and bug.",
+      "parentUuid": "0d43b6fd_f4834116",
+      "revId": "beb1a8d2c7695ce231fefb63bcb501074b650308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
