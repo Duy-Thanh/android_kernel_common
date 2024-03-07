@@ -718,8 +718,14 @@ static void __cold _credit_init_bits(size_t bits)
 
 	if (orig < POOL_READY_BITS && new >= POOL_READY_BITS) {
 		crng_reseed(NULL); /* Sets crng_init to CRNG_READY under base_crng.lock. */
-		if (static_key_initialized)
-			execute_in_process_context(crng_set_ready, &set_ready);
+		if (static_key_initialized) {
+			if (!in_atomic()) {
+				static_branch_enable(&crng_is_ready);
+			} else {
+				INIT_WORK(&set_ready.work, crng_set_ready);
+				schedule_work(&set_ready.work);
+			}
+		}
 		atomic_notifier_call_chain(&random_ready_notifier, 0, NULL);
 		wake_up_interruptible(&crng_init_wait);
 		kill_fasync(&fasync, SIGIO, POLL_IN);
