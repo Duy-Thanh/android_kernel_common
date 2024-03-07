@@ -157,7 +157,7 @@ again:
 			goto again;
 		}
 	}
-
+	WARN_ON(zone_dma32_are_empty() && !page);
 	return page;
 }
 
