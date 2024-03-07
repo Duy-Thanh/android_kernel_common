@@ -157,7 +157,7 @@ again:
 			goto again;
 		}
 	}
-
+	WARN_ON(zone_dma32_are_empty() && !page);
 	return page;
 }
 
@@ -182,8 +182,10 @@ static void *dma_direct_alloc_from_pool(struct device *dev, size_t size,
 
 	gfp |= dma_direct_optimal_gfp_mask(dev, &phys_limit);
 	page = dma_alloc_from_pool(dev, size, &ret, gfp, dma_coherent_ok);
-	if (!page)
+	if (!page){
+		WARN_ON(zone_dma32_are_empty());
 		return NULL;
+	}
 	*dma_handle = phys_to_dma_direct(dev, page_to_phys(page));
 	return ret;
 }
