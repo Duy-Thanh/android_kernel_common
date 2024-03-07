@@ -1534,7 +1534,10 @@ void tick_cancel_sched_timer(int cpu)
 {
 	struct tick_sched *ts = &per_cpu(tick_cpu_sched, cpu);
 	ktime_t idle_sleeptime, iowait_sleeptime;
+<<<<<<< HEAD   (4782f1 FROMGIT: usb: xhci: Add error handling in xhci_map_urb_for_d)
 	unsigned long idle_calls, idle_sleeps;
+=======
+>>>>>>> BRANCH (993bed Merge "Merge branch 'android13-5.15' into branch 'android13-)
 
 # ifdef CONFIG_HIGH_RES_TIMERS
 	if (ts->sched_timer.base)
@@ -1543,13 +1546,19 @@ void tick_cancel_sched_timer(int cpu)
 
 	idle_sleeptime = ts->idle_sleeptime;
 	iowait_sleeptime = ts->iowait_sleeptime;
+<<<<<<< HEAD   (4782f1 FROMGIT: usb: xhci: Add error handling in xhci_map_urb_for_d)
 	idle_calls = ts->idle_calls;
 	idle_sleeps = ts->idle_sleeps;
+=======
+>>>>>>> BRANCH (993bed Merge "Merge branch 'android13-5.15' into branch 'android13-)
 	memset(ts, 0, sizeof(*ts));
 	ts->idle_sleeptime = idle_sleeptime;
 	ts->iowait_sleeptime = iowait_sleeptime;
+<<<<<<< HEAD   (4782f1 FROMGIT: usb: xhci: Add error handling in xhci_map_urb_for_d)
 	ts->idle_calls = idle_calls;
 	ts->idle_sleeps = idle_sleeps;
+=======
+>>>>>>> BRANCH (993bed Merge "Merge branch 'android13-5.15' into branch 'android13-)
 }
 #endif
 
