@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38c0696a_34d0ad1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-07T09:01:58Z",
+      "side": 1,
+      "message": "Looking much better!",
+      "revId": "5158e7f88cc5a6a3a00a065e74aee5013070386e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0660017_489d54fa",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-07T09:01:58Z",
+      "side": 1,
+      "message": "Isn\u0027t this what `kref_put_mutex()` was created for?  That way you don\u0027t have to check the lock inside the release callback, which reduces the possibility of the a race condition here.",
+      "range": {
+        "startLine": 301,
+        "startChar": 1,
+        "endLine": 301,
+        "endChar": 9
+      },
+      "revId": "5158e7f88cc5a6a3a00a065e74aee5013070386e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
