@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b76d92b2_19a59018",
+        "filename": "kernel/fork.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2729,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-07T17:07:43Z",
+      "side": 1,
+      "message": "Why pass current and then also current-\u003esignal-\u003enr_threads? It seems like the vendorhook could derive the second from the first?",
+      "revId": "6c2781734bfa7c1fae10314c1304d12b4e2908ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
