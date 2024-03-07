@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43fdfd29_1bc2694a",
+        "filename": "arch/arm64/kernel/module.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-03-07T13:40:32Z",
+      "side": 1,
+      "message": "Is this function and the one above actually used now?",
+      "range": {
+        "startLine": 601,
+        "startChar": 29,
+        "endLine": 601,
+        "endChar": 40
+      },
+      "revId": "bb69cda82d1176b5a3f17020065245c3a55dd94f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
