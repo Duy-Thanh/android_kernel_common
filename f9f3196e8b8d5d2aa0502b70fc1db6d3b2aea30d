@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96e4e82d_53e3c19c",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-07T19:35:59Z",
+      "side": 1,
+      "message": "isn\u0027t this just `pgcount`?",
+      "range": {
+        "startLine": 76,
+        "startChar": 9,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "f9f3196e8b8d5d2aa0502b70fc1db6d3b2aea30d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c73b6738_134d59f3",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-07T19:35:59Z",
+      "side": 1,
+      "message": "and this one is `last_pgoff` ?",
+      "range": {
+        "startLine": 77,
+        "startChar": 9,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "f9f3196e8b8d5d2aa0502b70fc1db6d3b2aea30d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1907a83b_e7f4718c",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-07T19:35:59Z",
+      "side": 1,
+      "message": "You should do this check in the very beginning to avoid unnecessary work.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 13
+      },
+      "revId": "f9f3196e8b8d5d2aa0502b70fc1db6d3b2aea30d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
