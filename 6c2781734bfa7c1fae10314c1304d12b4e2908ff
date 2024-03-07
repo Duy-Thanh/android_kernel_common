@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "be5e3335_e339c033",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-07T17:27:07Z",
+      "side": 1,
+      "message": "Please preserve the change id from the version submitted earlier:\n  https://r.android.com/2966910",
+      "revId": "6c2781734bfa7c1fae10314c1304d12b4e2908ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "de349cfc_38a7345a",
