@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de349cfc_38a7345a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-07T17:13:51Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry-pick the android14-6.1 versioin of this patch to preserve the Change-Id.",
+      "revId": "6c2781734bfa7c1fae10314c1304d12b4e2908ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b76d92b2_19a59018",
