@@ -39,6 +39,30 @@
       },
       "revId": "5158e7f88cc5a6a3a00a065e74aee5013070386e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c6a9c51_9368aa9d",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-07T14:56:36Z",
+      "side": 1,
+      "message": "Thanks, didn\u0027t know about that one. Done.",
+      "parentUuid": "b0660017_489d54fa",
+      "range": {
+        "startLine": 301,
+        "startChar": 1,
+        "endLine": 301,
+        "endChar": 9
+      },
+      "revId": "5158e7f88cc5a6a3a00a065e74aee5013070386e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
