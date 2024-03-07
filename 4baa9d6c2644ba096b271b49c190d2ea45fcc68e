@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e184fd6_16e8a627",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-07T14:13:45Z",
+      "side": 1,
+      "message": "A few missing safety comments, but otherwise LGTM",
+      "revId": "4baa9d6c2644ba096b271b49c190d2ea45fcc68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
