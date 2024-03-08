@@ -16,6 +16,24 @@
       "message": "Looks like the virtual devices need a symbol list update:\n\n`blk_mq_freeze_queue` and `blk_mq_unfreeze_queue`",
       "revId": "f38d28938c6b620b739f833a9defc4d79c3d8201",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbdc719d_59050206",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-03-08T17:08:37Z",
+      "side": 1,
+      "message": "```\nERROR: modpost: \"blk_mq_freeze_queue\" [drivers/block/virtio_blk.ko] undefined!\nERROR: modpost: \"blk_mq_unfreeze_queue\" [drivers/block/virtio_blk.ko] undefined!\n```",
+      "parentUuid": "468153b8_1b395552",
+      "revId": "f38d28938c6b620b739f833a9defc4d79c3d8201",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
