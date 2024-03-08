@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "584d90a9_c6e39069",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-08T17:02:12Z",
+      "side": 1,
+      "message": "Is this needed in the 5.15, 6.1 and 6.6 branches?",
+      "revId": "ea35d2bd073214e84be242287a2e91741c6588ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
