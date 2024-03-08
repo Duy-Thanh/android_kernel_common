@@ -306080,6 +306080,14 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x848c1d93
+  return_type_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x32a623d7
+  parameter_id: 0x391f15ea
+  parameter_id: 0x054f691a
+}
+function {
   id: 0x848db24d
   return_type_id: 0x6720d32f
   parameter_id: 0x6720d32f
@@ -337277,6 +337285,15 @@ elf_symbol {
   crc: 0xc5803a97
   type_id: 0x1dbb54c5
   full_name: "__rt_mutex_init"
+}
+elf_symbol {
+  id: 0xe8433122
+  name: "__rtnl_link_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5f0b2b19
+  type_id: 0x91cbd408
+  full_name: "__rtnl_link_register"
 }
 elf_symbol {
   id: 0x31b4eed9
@@ -375881,6 +375898,15 @@ elf_symbol {
   full_name: "neigh_resolve_output"
 }
 elf_symbol {
+  id: 0xe5dd548f
+  name: "neigh_xmit"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x87256ab0
+  type_id: 0x848c1d93
+  full_name: "neigh_xmit"
+}
+elf_symbol {
   id: 0x6988c1c1
   name: "net_namespace_list"
   is_defined: true
@@ -376203,6 +376229,15 @@ elf_symbol {
   crc: 0x373b061c
   type_id: 0x9cd33969
   full_name: "netif_receive_skb"
+}
+elf_symbol {
+  id: 0x58fc0dd7
+  name: "netif_receive_skb_core"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x67671490
+  type_id: 0x9cd33969
+  full_name: "netif_receive_skb_core"
 }
 elf_symbol {
   id: 0x410cb094
@@ -403918,6 +403953,7 @@ interface {
   symbol_id: 0x2b453adc
   symbol_id: 0xd5276fa4
   symbol_id: 0x98379aaf
+  symbol_id: 0xe8433122
   symbol_id: 0x31b4eed9
   symbol_id: 0x99aa632e
   symbol_id: 0xe68925b8
@@ -408206,6 +408242,7 @@ interface {
   symbol_id: 0x4dbc1b6c
   symbol_id: 0x1a3da5bd
   symbol_id: 0xb6b84793
+  symbol_id: 0xe5dd548f
   symbol_id: 0x6988c1c1
   symbol_id: 0x9da338a6
   symbol_id: 0x91c85f34
@@ -408242,6 +408279,7 @@ interface {
   symbol_id: 0x659c1a4c
   symbol_id: 0x865e414c
   symbol_id: 0xf4d035ba
+  symbol_id: 0x58fc0dd7
   symbol_id: 0x410cb094
   symbol_id: 0x6692f232
   symbol_id: 0xac772e2b
