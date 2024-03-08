@@ -133,9 +133,8 @@ DEFINE_HYP_SPINLOCK(dyn_hcall_lock);
 
 static dyn_hcall_t host_dynamic_hcalls[MAX_DYNAMIC_HCALLS];
 
-int handle_host_dynamic_hcall(struct kvm_cpu_context *host_ctxt)
+int handle_host_dynamic_hcall(struct kvm_cpu_context *host_ctxt, int id)
 {
-	DECLARE_REG(unsigned long, id, host_ctxt, 0);
 	dyn_hcall_t hfn;
 	int dyn_id;
 
@@ -143,8 +142,7 @@ int handle_host_dynamic_hcall(struct kvm_cpu_context *host_ctxt)
 	 * TODO: static key to protect when no dynamic hcall is registered?
 	 */
 
-	dyn_id = (int)(id - KVM_HOST_SMCCC_ID(0)) -
-		 __KVM_HOST_SMCCC_FUNC___dynamic_hcalls;
+	dyn_id = id - __KVM_HOST_SMCCC_FUNC___dynamic_hcalls;
 	if (dyn_id < 0)
 		return HCALL_UNHANDLED;
 
