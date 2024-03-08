@@ -16,6 +16,23 @@
       "message": "Hi, Todd, Please review this commit and help merge it. Thanks.",
       "revId": "dd8cef6368614b1cf2cc209152653744cbe43f83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "123380bd_177197a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-08T19:52:38Z",
+      "side": 1,
+      "message": "aosp/2971898 needs to wait for 2024-03-13 KMI update. Queuing this patch for the KMI update too, but if urgent, this could be rebased to the branch and merge earlier.",
+      "revId": "dd8cef6368614b1cf2cc209152653744cbe43f83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
