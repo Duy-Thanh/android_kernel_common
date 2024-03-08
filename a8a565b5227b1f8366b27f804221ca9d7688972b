@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "addaa68d_dc5746d0",
+        "filename": "mm/mremap.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-08T01:42:51Z",
+      "side": 1,
+      "message": "__offset_in_page() ?",
+      "range": {
+        "startLine": 949,
+        "startChar": 6,
+        "endLine": 949,
+        "endChar": 20
+      },
+      "revId": "a8a565b5227b1f8366b27f804221ca9d7688972b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
