@@ -16,6 +16,24 @@
       "message": "Don\u0027t refresh the .stg as part of a KMI breaking change, that will happen as the last commit of the series when it is merged at the next KMI \"break\" point.",
       "revId": "e4556c4cb7c59807230896ef3aa9d52e90c98c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "304eac2d_57162462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-03-08T10:31:41Z",
+      "side": 1,
+      "message": "This is a PoC for a bug. Sorry for the noise.",
+      "parentUuid": "e802ed54_8b3f127d",
+      "revId": "e4556c4cb7c59807230896ef3aa9d52e90c98c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
