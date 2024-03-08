@@ -53,6 +53,8 @@
   mmc_wait_for_cmd
   __mod_lruvec_state
   __mod_zone_page_state
+  neigh_xmit
+  netif_receive_skb_core
   nf_ct_attach
   nf_ct_delete
   nf_register_net_hook
@@ -102,6 +104,7 @@
   tcf_exts_dump_stats
   tcf_exts_validate
   tcf_queue_work
+  __rtnl_link_register
   __traceiter_android_rvh_post_init_entity_util_avg
   __traceiter_android_rvh_rtmutex_force_update
   __traceiter_android_vh_account_process_tick_gran
