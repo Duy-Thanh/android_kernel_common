@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e77d8a_904dfa8e",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-03-08T19:12:48Z",
+      "side": 1,
+      "message": "is this actually required? get_free_pages should be faster overall, and given that we operate on the order of pages all the time it may make sense to keep the old allocation way",
+      "range": {
+        "startLine": 306,
+        "startChar": 18,
+        "endLine": 306,
+        "endChar": 25
+      },
+      "revId": "200e5b822cc0879335518b0b1873b4c674d812a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
