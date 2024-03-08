@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96d605a6_e56190b6",
+        "filename": "rust/helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T10:09:42Z",
+      "side": 1,
+      "message": "Please match the types in the real header file.\n```suggestion\nint rust_helper_xa_insert(struct xarray *xa, unsigned long index, void *entry, gfp_t gfp)\n```",
+      "revId": "2e79e3206da6ed803510a4207bd6ae6fa7d56ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d794d7_4bdd7fd9",
+        "filename": "rust/kernel/xarray.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T10:09:42Z",
+      "side": 1,
+      "message": "It would be useful to mention the possible errors this can return here.",
+      "revId": "2e79e3206da6ed803510a4207bd6ae6fa7d56ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "497c0922_38e67ec5",
+        "filename": "rust/kernel/xarray.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T10:09:42Z",
+      "side": 1,
+      "message": "Once you match the types, this `try_into` should go away.",
+      "revId": "2e79e3206da6ed803510a4207bd6ae6fa7d56ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
