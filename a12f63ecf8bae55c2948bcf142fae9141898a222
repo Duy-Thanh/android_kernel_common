@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d352e659_7e0d4b59",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-08T00:52:25Z",
+      "side": 1,
+      "message": "The lack of testability is one of the reasons we were looking to move forward with this driver without modifications to the reference counting.\n\nI don\u0027t have a good way to test the teardown path, as userspace restarts everything automatically if I manually clear the UDC (and therefore I can not remove the function instance). Testing has consisted of running cts verifier tests, repeated connection/disconnection from two separate android auto headunits, and rebooting the device. This sanity does pass, but as you\u0027ve pointed out, likely causes an unnoticed deadlock if the teardown logic were ever to be hit. \n\nI was expecting the reboot to cause the subsystem to teardown and call acc_free_inst(), but it appears that is not the case, as I have instrumented the code and do not see that occurring.\n\nI have removed the locking in this function.",
+      "parentUuid": "0890ef7d_00dd178d",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 36
+      },
+      "revId": "a12f63ecf8bae55c2948bcf142fae9141898a222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4725e32e_1e86d4b3",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ac1ece_3db861b4",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-08T00:52:25Z",
+      "side": 1,
+      "message": "acc_set_disconnect() was called in acc_function_disable(), acc_complete_in(), acc_complete_out(), and also accc_release sets dev-\u003edisconnected.\n\nI have removed the setter function and just directly set the variable, and updated the comment as it appeared to have remnants of prior logic.",
+      "parentUuid": "4725e32e_1e86d4b3",
+      "range": {
+        "startLine": 706,
+        "startChar": 0,
+        "endLine": 706,
+        "endChar": 29
+      },
+      "revId": "a12f63ecf8bae55c2948bcf142fae9141898a222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e94b863_4d6a706a",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-03-07T17:24:27Z",
       "side": 1,
       "message": "again, how can this happen if close() already happened?",
+      "range": {
+        "startLine": 797,
+        "startChar": 26,
+        "endLine": 797,
+        "endChar": 38
+      },
+      "revId": "a12f63ecf8bae55c2948bcf142fae9141898a222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9540b1c4_19718aa2",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-08T00:52:25Z",
+      "side": 1,
+      "message": "See other response.",
+      "parentUuid": "7e94b863_4d6a706a",
       "range": {
         "startLine": 797,
         "startChar": 26,
