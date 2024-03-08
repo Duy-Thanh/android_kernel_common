@@ -16,6 +16,24 @@
       "message": "Is this needed in the 5.15, 6.1 and 6.6 branches?",
       "revId": "ea35d2bd073214e84be242287a2e91741c6588ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e39cc326_5f7d0c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-08T20:20:47Z",
+      "side": 1,
+      "message": "Yes. We will need to cherry pick it over.",
+      "parentUuid": "584d90a9_c6e39069",
+      "revId": "ea35d2bd073214e84be242287a2e91741c6588ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
