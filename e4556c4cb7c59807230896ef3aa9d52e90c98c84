@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e802ed54_8b3f127d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-08T10:30:44Z",
+      "side": 1,
+      "message": "Don\u0027t refresh the .stg as part of a KMI breaking change, that will happen as the last commit of the series when it is merged at the next KMI \"break\" point.",
+      "revId": "e4556c4cb7c59807230896ef3aa9d52e90c98c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
