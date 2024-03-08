@@ -22,6 +22,30 @@
       },
       "revId": "73d35b5ad9be2ced6fd18a6b4543f46d4befc6f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c699d19_43c2c44c",
+        "filename": "mm/mmap.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2960,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-03-08T17:21:22Z",
+      "side": 1,
+      "message": "They do it later on in ` do_vmi_munmap()`:\n\n```\n\tif ((offset_in_page(start)) || start \u003e TASK_SIZE || len \u003e TASK_SIZE-start)\n\t\treturn -EINVAL;\n\n\tend \u003d start + PAGE_ALIGN(len);\n\tif (end \u003d\u003d start)\n\t\treturn -EINVAL;\n```\n\nI don\u0027t remember the reason if any why I did it here, let me check...",
+      "parentUuid": "cfeeee2b_d38055e7",
+      "range": {
+        "startLine": 2957,
+        "startChar": 1,
+        "endLine": 2960,
+        "endChar": 25
+      },
+      "revId": "73d35b5ad9be2ced6fd18a6b4543f46d4befc6f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
