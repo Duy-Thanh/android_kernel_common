@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfeeee2b_d38055e7",
+        "filename": "mm/mmap.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2960,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-08T01:39:58Z",
+      "side": 1,
+      "message": "Why do you need to add these checks? Looks like upstream does not have them...",
+      "range": {
+        "startLine": 2957,
+        "startChar": 1,
+        "endLine": 2960,
+        "endChar": 25
+      },
+      "revId": "73d35b5ad9be2ced6fd18a6b4543f46d4befc6f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
