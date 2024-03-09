@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4507a5f_096c31db",
+        "filename": "mm/mmap.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-03-09T06:39:43Z",
+      "side": 1,
+      "message": "I want to keep the delta in this file minimal to avoid conflicts from upstream.",
+      "parentUuid": "e80c2dd9_1e30d45e",
+      "range": {
+        "startLine": 1387,
+        "startChar": 1,
+        "endLine": 1387,
+        "endChar": 43
+      },
+      "revId": "9446fdbc160a0f59cbfc8c4b7a73426d10f3acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35c11cfe_fe0115e7",
@@ -60,6 +84,30 @@
       "writtenOn": "2024-03-08T20:00:26Z",
       "side": 1,
       "message": "what do you mean by special files?",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 90,
+        "endChar": 46
+      },
+      "revId": "9446fdbc160a0f59cbfc8c4b7a73426d10f3acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "685be800_697876be",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-03-09T06:39:43Z",
+      "side": 1,
+      "message": "I have seen mappings where the pgoff is beyond the file size in some cases or the filesize is zero:\n\n```\ndrv_dumb_bo_map - mmap: len \u003d 0x0000000000010000, prot \u003d 0x3, flags \u003d MAP_SHARED, fd \u003d 10, offset \u003d 0x1012c0000, file size \u003d 0x0\n```\n\nthe important thing to note here is that we need to avoid the underflow",
+      "parentUuid": "35c11cfe_fe0115e7",
       "range": {
         "startLine": 90,
         "startChar": 2,
