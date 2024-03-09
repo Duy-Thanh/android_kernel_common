@@ -46,6 +46,30 @@
       },
       "revId": "73d35b5ad9be2ced6fd18a6b4543f46d4befc6f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6bf91f5_ef883ef7",
+        "filename": "mm/mmap.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2960,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-03-09T06:49:54Z",
+      "side": 1,
+      "message": "Becuase we allow some special case to mmap a non aligned address (the anon fixup for filemap faults), we cannot check it in the generic case. Becuase even if there wasn\u0027t anything there to unmap, mmap unconditionally does:\n\n```\ndo_mmap()\n   map_region()\n       do_munmap()\n            do_vmi_munmap()\n```\n\nSo if we did the check here the fixups will fail.\n\nI\u0027ll update the descrition",
+      "parentUuid": "4c699d19_43c2c44c",
+      "range": {
+        "startLine": 2957,
+        "startChar": 1,
+        "endLine": 2960,
+        "endChar": 25
+      },
+      "revId": "73d35b5ad9be2ced6fd18a6b4543f46d4befc6f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
