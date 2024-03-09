@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/328792032",
       "revId": "c8c7658972b94dad334badfc161f7627a7fc4456",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "898a0dd0_78f0b096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-03-09T00:46:54Z",
+      "side": 1,
+      "message": "Need to bypass Lint for ABI: b/324640390",
+      "revId": "c8c7658972b94dad334badfc161f7627a7fc4456",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
