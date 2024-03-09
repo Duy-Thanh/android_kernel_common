@@ -46,6 +46,30 @@
       },
       "revId": "ed4b2b9d7ebb6433aefb8780506b0679e97e44f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "301a01f5_a5a13a1b",
+        "filename": "arch/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-03-09T01:02:52Z",
+      "side": 1,
+      "message": "Anything that works for one module should work for the other too (except anything that\u0027s specifically checking for one particular module, which is the problem here).\n\nI looked into this a bit and I don\u0027t think `BUILD_FIPS140_KO` will work for this.  The file `scripts/module.lds.S` is preprocessed once regardless of how many modules are being built, so it can\u0027t have module-specific definitions available.\n\nI don\u0027t think the `scripts/module.lds.S` patch can be replaced by a module-specific linker script either, unless possibly if we duplicated the whole file.  I\u0027m not an expert in linker scripts, but this seems to be the case.\n\nSo that does leave something like your proposed kconfig option `LINKER_SCRIPT_MERGE_SECTIONS`.  I think it should be organized a bit differently, though.  How about the following:\n\n- Rename it to `CRYPTO_FIPS140_LINKER_SCRIPT_PATCH`\n- Move it to `crypto/Kconfig` next to the other fips140 options.  This would make it easier to maintain as part of the main fips140 patch.\n- Remove the prompt string (i.e., just have `bool` instead of `bool \"string\"`) so that it can only be selected by other options, not set in config files\n- Make `CRYPTO_FIPS140_MOD` select it.\n- Make the (out of tree) option for your module select it too.\n- Make `scripts/module.lds.S` use `defined(CONFIG_CRYPTO_FIPS140_LINKER_SCRIPT_PATCH)` instead of `IS_ENABLED(CONFIG_CRYPTO_FIPS140_MOD)`.",
+      "parentUuid": "f88382ea_c829477f",
+      "range": {
+        "startLine": 1428,
+        "startChar": 0,
+        "endLine": 1432,
+        "endChar": 0
+      },
+      "revId": "ed4b2b9d7ebb6433aefb8780506b0679e97e44f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
