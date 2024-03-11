@@ -16,6 +16,23 @@
       "message": "+Todd for SPR +2",
       "revId": "cd7cb21c2d4ef0f181dd42d73fad2b2da651f750",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3de7285c_f862983f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-11T22:35:36Z",
+      "side": 1,
+      "message": "This series will have to wait for 3-13 to resolve the KMI/CRC break.",
+      "revId": "cd7cb21c2d4ef0f181dd42d73fad2b2da651f750",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
