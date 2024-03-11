@@ -218,7 +218,7 @@ static void kvm_hyp_handle_fpsimd_host(struct kvm_vcpu *vcpu)
 		sve_state->zcr_el1 = read_sysreg_el1(SYS_ZCR);
 		sve_cond_update_zcr_vq(vq_len, SYS_ZCR_EL2);
 		__sve_save_state(sve_state->sve_regs +
-					 sve_ffr_offset(kvm_host_sve_max_vl),
+				 sve_ffr_offset(kvm_host_sve_max_vl),
 				 &sve_state->fpsr);
 
 		/* Still trap SVE since it's handled by hyp in pKVM. */
