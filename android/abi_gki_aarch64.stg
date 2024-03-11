@@ -306806,6 +306806,15 @@ function {
   parameter_id: 0x2cacacc0
 }
 function {
+  id: 0x9873106a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0xf435685e
+  parameter_id: 0x379d63b0
+  parameter_id: 0x6720d32f
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x987349b3
   return_type_id: 0x6720d32f
   parameter_id: 0x118d97cb
@@ -326311,6 +326320,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_alter_rwsem_list_add"
 }
 elf_symbol {
+  id: 0x530ad17d
+  name: "__traceiter_android_vh_binder_alloc_new_buf_locked"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0775dd13
+  type_id: 0x9873106a
+  full_name: "__traceiter_android_vh_binder_alloc_new_buf_locked"
+}
+elf_symbol {
   id: 0xc6c9353c
   name: "__traceiter_android_vh_binder_restore_priority"
   is_defined: true
@@ -327830,6 +327848,15 @@ elf_symbol {
   crc: 0x77914da1
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_alter_rwsem_list_add"
+}
+elf_symbol {
+  id: 0xc8703937
+  name: "__tracepoint_android_vh_binder_alloc_new_buf_locked"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x42ca97f2
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_binder_alloc_new_buf_locked"
 }
 elf_symbol {
   id: 0x57a9a36a
@@ -376157,6 +376184,7 @@ interface {
   symbol_id: 0x505f4289
   symbol_id: 0xd5431a65
   symbol_id: 0xb288a9fe
+  symbol_id: 0x530ad17d
   symbol_id: 0xc6c9353c
   symbol_id: 0x2a9c6616
   symbol_id: 0x5cf60b10
@@ -376326,6 +376354,7 @@ interface {
   symbol_id: 0xd82141b7
   symbol_id: 0xe520cb67
   symbol_id: 0x8184b548
+  symbol_id: 0xc8703937
   symbol_id: 0x57a9a36a
   symbol_id: 0x2e04cb9c
   symbol_id: 0xa9d55136
