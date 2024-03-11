@@ -312117,6 +312117,15 @@ function {
   parameter_id: 0x3e0d8696
 }
 function {
+  id: 0x9bc38ca5
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9bc391f6
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -325865,6 +325874,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_find_busiest_queue"
 }
 elf_symbol {
+  id: 0x83371e9e
+  name: "__traceiter_android_rvh_find_energy_efficient_cpu"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34b4a8f2
+  type_id: 0x9bc38ca5
+  full_name: "__traceiter_android_rvh_find_energy_efficient_cpu"
+}
+elf_symbol {
   id: 0x8bd49e8e
   name: "__traceiter_android_rvh_find_lowest_rq"
   is_defined: true
@@ -327411,6 +327429,15 @@ elf_symbol {
   crc: 0x29dc828c
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_find_busiest_queue"
+}
+elf_symbol {
+  id: 0x60184478
+  name: "__tracepoint_android_rvh_find_energy_efficient_cpu"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x095763c1
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_find_energy_efficient_cpu"
 }
 elf_symbol {
   id: 0x1a0c7568
@@ -376173,6 +376200,7 @@ interface {
   symbol_id: 0xd5b05c65
   symbol_id: 0xf94ce10d
   symbol_id: 0x45d21f87
+  symbol_id: 0x83371e9e
   symbol_id: 0x8bd49e8e
   symbol_id: 0x5d2af80b
   symbol_id: 0xf6f47b2e
@@ -376345,6 +376373,7 @@ interface {
   symbol_id: 0x395b2a73
   symbol_id: 0xb05fc507
   symbol_id: 0xe0cf8a85
+  symbol_id: 0x60184478
   symbol_id: 0x1a0c7568
   symbol_id: 0x46cd6685
   symbol_id: 0xa6457550
