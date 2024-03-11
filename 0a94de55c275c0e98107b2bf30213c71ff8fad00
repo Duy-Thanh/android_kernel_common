@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000070916310",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2996012?revision\u003d3",
+      "key": {
+        "uuid": "67ccc631_ca0994be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-11T17:38:40Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/f73419bb89d606de9be2043febf0957d56627a5b) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003df73419bb89d606de9be2043febf0957d56627a5b).\n\n```\n      ## arch/x86/include/asm/tlbflush.h ##\n     @@ arch/x86/include/asm/tlbflush.h: static inline u64 inc_mm_tlb_gen(struct mm_struct *mm)\n      \treturn atomic64_inc_return(\u0026mm-\u003econtext.tlb_gen);\n    @@ mm/rmap.c: void try_to_unmap_flush_dirty(void)\n      #define TLB_FLUSH_BATCH_PENDING_LARGE\t\t\t\\\n      \t(TLB_FLUSH_BATCH_PENDING_MASK / 2)\n      \n    --static void set_tlb_ubc_flush_pending(struct mm_struct *mm, pte_t pteval)\n    -+static void set_tlb_ubc_flush_pending(struct mm_struct *mm, pte_t pteval,\n    -+\t\t\t\t      unsigned long uaddr)\n    +-static void set_tlb_ubc_flush_pending(struct mm_struct *mm, bool writable)\n    ++static void set_tlb_ubc_flush_pending(struct mm_struct *mm, bool writable,\n    ++\t\tunsigned long uaddr)\n      {\n      \tstruct tlbflush_unmap_batch *tlb_ubc \u003d \u0026current-\u003etlb_ubc;\n    - \tint batch;\n    -@@ mm/rmap.c: static void set_tlb_ubc_flush_pending(struct mm_struct *mm, pte_t pteval)\n    - \tif (!pte_accessible(mm, pteval))\n    - \t\treturn;\n    + \tint batch, nbatch;\n      \n     -\tarch_tlbbatch_add_mm(\u0026tlb_ubc-\u003earch, mm);\n     +\tarch_tlbbatch_add_pending(\u0026tlb_ubc-\u003earch, mm, uaddr);\n    @@ mm/rmap.c: void flush_tlb_batched_pending(struct mm_struct *mm)\n      \t}\n      }\n      #else\n    --static void set_tlb_ubc_flush_pending(struct mm_struct *mm, pte_t pteval)\n    -+static void set_tlb_ubc_flush_pending(struct mm_struct *mm, pte_t pteval,\n    -+\t\t\t\t      unsigned long uaddr)\n    +-static void set_tlb_ubc_flush_pending(struct mm_struct *mm, bool writable)\n    ++static void set_tlb_ubc_flush_pending(struct mm_struct *mm, bool writable,\n    ++\t\tunsigned long uaddr)\n      {\n      }\n      \n    @@ mm/rmap.c: static bool try_to_unmap_one(struct folio *folio, struct vm_area_stru\n      \t\t\t\t */\n      \t\t\t\tpteval \u003d ptep_get_and_clear(mm, address, pvmw.pte);\n      \n    --\t\t\t\tset_tlb_ubc_flush_pending(mm, pteval);\n    -+\t\t\t\tset_tlb_ubc_flush_pending(mm, pteval, address);\n    - \t\t\t} else {\n    - \t\t\t\tpteval \u003d ptep_clear_flush(vma, address, pvmw.pte);\n    - \t\t\t}\n    -@@ mm/rmap.c: static bool try_to_migrate_one(struct folio *folio, struct vm_area_struct *vma,\n    - \t\t\t\t */\n    - \t\t\t\tpteval \u003d ptep_get_and_clear(mm, address, pvmw.pte);\n    - \n    --\t\t\t\tset_tlb_ubc_flush_pending(mm, pteval);\n    -+\t\t\t\tset_tlb_ubc_flush_pending(mm, pteval, address);\n    +-\t\t\t\tset_tlb_ubc_flush_pending(mm, pte_dirty(pteval));\n    ++\t\t\t\tset_tlb_ubc_flush_pending(mm, pte_dirty(pteval), address);\n      \t\t\t} else {\n      \t\t\t\tpteval \u003d ptep_clear_flush(vma, address, pvmw.pte);\n      \t\t\t}\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "0a94de55c275c0e98107b2bf30213c71ff8fad00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
