@@ -355928,6 +355928,24 @@ elf_symbol {
   full_name: "page_reporting_unregister"
 }
 elf_symbol {
+  id: 0x89850bb1
+  name: "page_shift_compat"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x256b7903
+  type_id: 0x6720d32f
+  full_name: "page_shift_compat"
+}
+elf_symbol {
+  id: 0xecb8da90
+  name: "page_shift_compat_enabled"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xce2e3516
+  type_id: 0x8e47c273
+  full_name: "page_shift_compat_enabled"
+}
+elf_symbol {
   id: 0x0fe80546
   name: "pagecache_get_page"
   is_defined: true
@@ -379447,6 +379465,8 @@ interface {
   symbol_id: 0x3c537500
   symbol_id: 0x1b814fa6
   symbol_id: 0x9ca2e070
+  symbol_id: 0x89850bb1
+  symbol_id: 0xecb8da90
   symbol_id: 0x0fe80546
   symbol_id: 0x37d86bb7
   symbol_id: 0x32ecd828
