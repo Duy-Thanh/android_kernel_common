@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d59456_9813f01a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3178523
+      },
+      "writtenOn": "2024-03-11T12:21:48Z",
+      "side": 1,
+      "message": "Hi, Todd,  We already add symbol list by this patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/2997302\nIs this the patch you need? If so, please help merge this two patches, thanks",
+      "revId": "8a826ae216e73f759754a1c28e92c5cc454bb956",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
