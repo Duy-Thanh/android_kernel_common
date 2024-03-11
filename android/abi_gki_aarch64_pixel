@@ -1969,6 +1969,27 @@
   wiphy_unregister
   woken_wake_function
   work_busy
+<<<<<<< HEAD   (23e504 ANDROID: update symbol for unisoc whitelist)
+=======
+  __write_overflow_field
+  ww_mutex_lock
+  ww_mutex_unlock
+  __xa_alloc
+  xa_clear_mark
+  xa_destroy
+  __xa_erase
+  xa_erase
+  xa_find
+  xa_find_after
+  xa_get_mark
+  __xa_insert
+  xa_load
+  xa_set_mark
+  xas_find
+  xas_pause
+  __xa_store
+  xa_store
+>>>>>>> CHANGE (e51893 ANDROID: Update the ABI symbol list)
   __xfrm_state_destroy
   xfrm_state_lookup_byspi
   xfrm_stateonly_find
