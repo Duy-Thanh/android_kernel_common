@@ -773,6 +773,7 @@ static void __hyp_sve_save_guest(struct kvm_vcpu *vcpu)
 	u64 zcr = read_sysreg_el1(SYS_ZCR);
 
 	BUG_ON(zcr & ~ZCR_ELx_LEN_MASK);
+	BUG_ON(vcpu_sve_state_size(vcpu) < SVE_SIG_REGS_SIZE(zcr + 1));
 
 	__vcpu_sys_reg(vcpu, ZCR_EL1) = zcr;
 	sve_cond_update_zcr_vq(zcr, SYS_ZCR_EL2);
