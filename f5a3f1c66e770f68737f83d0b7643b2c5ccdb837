@@ -22,6 +22,30 @@
       },
       "revId": "f5a3f1c66e770f68737f83d0b7643b2c5ccdb837",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "948764ad_896d1a25",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T21:56:14Z",
+      "side": 1,
+      "message": "Hadn\u0027t realized that 6.3 introduced `kvm_hyp_ctxt-\u003esys_regs[ELR_EL2]`, which I\u0027m now using instead.",
+      "parentUuid": "b7502618_7455a16f",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 13
+      },
+      "revId": "f5a3f1c66e770f68737f83d0b7643b2c5ccdb837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
