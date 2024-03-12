@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0671d8d0_7979cedf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-12T13:48:52Z",
+      "side": 1,
+      "message": "Bypassing checkpatch failure. (see cherry-pick on 6.6 for discussion on this)",
+      "revId": "703f234e314586dec949f92f3773b0e9ff119d00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
