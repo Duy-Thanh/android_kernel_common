@@ -105,6 +105,24 @@
       "parentUuid": "65956b68_30253a53",
       "revId": "d2c2d90c7a128456f01b7a8c9d6fbcd6be89372e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d8a802_622e30f6",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-12T12:29:34Z",
+      "side": 1,
+      "message": "Hi, Todd!\nThanks for your suggestion！After local verification we combine this path in https://android-review.googlesource.com/c/kernel/common/+/2968222, pls help to review,(*￣︶￣)",
+      "parentUuid": "1978f725_070d5571",
+      "revId": "d2c2d90c7a128456f01b7a8c9d6fbcd6be89372e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
