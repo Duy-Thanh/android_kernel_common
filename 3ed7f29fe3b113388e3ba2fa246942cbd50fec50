@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a98e3c_52a64445",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-03-12T22:30:18Z",
+      "side": 1,
+      "message": "Bypassing issue to unblock the build. The failing tests are a known issue (b/329128215) that will some time to propagate.",
+      "revId": "3ed7f29fe3b113388e3ba2fa246942cbd50fec50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
