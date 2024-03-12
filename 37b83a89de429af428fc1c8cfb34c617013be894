@@ -16,6 +16,23 @@
       "message": "Please upstream to the applicable Stable first (linux-5.15.y).",
       "revId": "37b83a89de429af428fc1c8cfb34c617013be894",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b1d3e4_1e8d2931",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2024-03-12T20:48:28Z",
+      "side": 1,
+      "message": "Risk assessment here: https://b.corp.google.com/issues/323236756#comment20",
+      "revId": "37b83a89de429af428fc1c8cfb34c617013be894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
