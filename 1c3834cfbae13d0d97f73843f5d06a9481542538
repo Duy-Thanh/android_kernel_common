@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e24217ba_bad4b132",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-12T16:15:54Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry-pick this change from android14-6.1 so the Change-Id is preserved.\n\nAlso, create a patch on top of that cherry-pick to add this symbol to your symbol list.",
+      "revId": "1c3834cfbae13d0d97f73843f5d06a9481542538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
