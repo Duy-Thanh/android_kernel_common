@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f6b9577_eadb65f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-12T18:06:35Z",
+      "side": 1,
+      "message": "Since this changes the KMI, it needs to wait for the 3-27 KMI update.",
+      "revId": "7928eb25f522c2cfd96126fb7c980e2be6a97b47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
