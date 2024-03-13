@@ -16,6 +16,24 @@
       "message": "Hi, William. It has been several days. Is there any problem in merging this patch?",
       "revId": "3304caec9b6fcc328067a551ecfa55db10c18018",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff839281_4e44867e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-13T17:08:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78b7e019_58fe3a53",
+      "revId": "3304caec9b6fcc328067a551ecfa55db10c18018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
