@@ -1648,6 +1648,7 @@
   put_vaddr_frames
   queue_delayed_work_on
   queue_work_on
+  raise_softirq
   ___ratelimit
   raw_notifier_call_chain
   raw_notifier_chain_register
