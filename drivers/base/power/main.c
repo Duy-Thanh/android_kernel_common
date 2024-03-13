@@ -106,6 +106,7 @@ void device_pm_sleep_init(struct device *dev)
 	complete_all(&dev->power.completion);
 	dev->power.wakeup = NULL;
 	INIT_LIST_HEAD(&dev->power.entry);
+	dev->power.async_suspend = pm_async_enabled;
 }
 
 /**
