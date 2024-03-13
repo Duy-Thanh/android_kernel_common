@@ -158,6 +158,8 @@ again:
 		}
 	}
 
+	WARN_ON_ONCE(!page);
+
 	return page;
 }
 
