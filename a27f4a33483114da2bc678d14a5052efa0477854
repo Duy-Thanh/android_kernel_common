@@ -16,6 +16,24 @@
       "message": "Please do this properly upstream first.",
       "revId": "a27f4a33483114da2bc678d14a5052efa0477854",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2280a18f_ff3d02b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2024-03-13T08:49:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8af7ac57_a56de500",
+      "revId": "a27f4a33483114da2bc678d14a5052efa0477854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
