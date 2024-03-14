@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7939eda_48d9386a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1083383
+      },
+      "writtenOn": "2024-03-14T01:52:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "111a2017_266491a6",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 146
+      },
+      "revId": "3198b4d2e974f8bf31823e1b9e7cb9c704ac720c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11cb3559_8079a11a",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-14T00:08:19Z",
       "side": 1,
       "message": "Fix the URL please. No space after `https:`",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 73
+      },
+      "revId": "3198b4d2e974f8bf31823e1b9e7cb9c704ac720c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "160366cb_8dd94c20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1083383
+      },
+      "writtenOn": "2024-03-14T01:52:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11cb3559_8079a11a",
       "range": {
         "startLine": 27,
         "startChar": 0,
