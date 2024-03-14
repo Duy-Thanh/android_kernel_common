@@ -69,6 +69,24 @@
       "parentUuid": "2e59fba6_c0372257",
       "revId": "e8c370b780fe37002b3f3ace57c3f933dc5c52fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69bff434_ee51bad4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-03-14T19:12:07Z",
+      "side": 1,
+      "message": "The small advantage is that a few lines below, the host restore state needs to update the value of ZCR_EL2. If you think the overhead of restoring it twice isn\u0027t that big, I can add it to this function.",
+      "parentUuid": "8ad89c87_3544648f",
+      "revId": "e8c370b780fe37002b3f3ace57c3f933dc5c52fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
