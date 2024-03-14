@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bff7c25_754c101b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2024-03-14T05:14:04Z",
+      "side": 1,
+      "message": "hi,John Stultz\n\nI have revised and resubmitted，please review again！",
+      "parentUuid": "92a1c9ba_5eeb00ed",
+      "revId": "aa1a61c0ec2121e14fefe80a7de095cd9e5e9bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cc8c950_08abb88b",
@@ -84,6 +102,24 @@
       "writtenOn": "2024-03-14T05:06:09Z",
       "side": 1,
       "message": "Your sign off should go below previous submitters, not above.",
+      "revId": "aa1a61c0ec2121e14fefe80a7de095cd9e5e9bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63dedf4e_28b3f9ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2024-03-14T05:14:04Z",
+      "side": 1,
+      "message": "hi,John Stultz\n\nI have revised and resubmitted，please review again！",
+      "parentUuid": "022d5620_d10c39cd",
       "revId": "aa1a61c0ec2121e14fefe80a7de095cd9e5e9bf5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
