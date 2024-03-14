@@ -16,6 +16,23 @@
       "message": "Thanks for the quick updates.",
       "revId": "738942649071efd1a1c21d5ea8a010866da4b19c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8593534e_98ef36ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-14T16:28:08Z",
+      "side": 1,
+      "message": "Please create a patch on top of this one to add the symbol to your symbol list.",
+      "revId": "738942649071efd1a1c21d5ea8a010866da4b19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
