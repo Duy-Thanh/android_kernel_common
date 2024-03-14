@@ -323803,7 +323803,7 @@ elf_symbol {
   name: "__auxiliary_device_add"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1194bc87
+  crc: 0x9fc69e63
   type_id: 0x98efd15f
   full_name: "__auxiliary_device_add"
 }
@@ -325280,7 +325280,7 @@ elf_symbol {
   name: "__irq_domain_alloc_irqs"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb03abfa2
+  crc: 0x93347368
   type_id: 0x9a2424f6
   full_name: "__irq_domain_alloc_irqs"
 }
@@ -325854,7 +325854,7 @@ elf_symbol {
   name: "__page_pinner_put_page"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x94245c4d
+  crc: 0xdab22f46
   type_id: 0x11388634
   full_name: "__page_pinner_put_page"
 }
@@ -326682,7 +326682,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_commit_creds"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd55268dc
+  crc: 0xdcdccfbe
   type_id: 0x9b427bba
   full_name: "__traceiter_android_rvh_commit_creds"
 }
@@ -326826,7 +326826,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_exit_creds"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd399ed27
+  crc: 0x01fe4052
   type_id: 0x9b427bba
   full_name: "__traceiter_android_rvh_exit_creds"
 }
@@ -326853,7 +326853,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_find_energy_efficient_cpu"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x34b4a8f2
+  crc: 0x152992a4
   type_id: 0x9bc38ca5
   full_name: "__traceiter_android_rvh_find_energy_efficient_cpu"
 }
@@ -326970,7 +326970,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_override_creds"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x94513bc8
+  crc: 0x85448bb0
   type_id: 0x9b427bba
   full_name: "__traceiter_android_rvh_override_creds"
 }
@@ -327042,7 +327042,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_revert_creds"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdd3b458d
+  crc: 0x00497709
   type_id: 0x9b427bba
   full_name: "__traceiter_android_rvh_revert_creds"
 }
@@ -330570,7 +330570,7 @@ elf_symbol {
   name: "account_locked_vm"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x573d0dfd
+  crc: 0x7515ffba
   type_id: 0x9b9bd882
   full_name: "account_locked_vm"
 }
@@ -331151,7 +331151,7 @@ elf_symbol {
   name: "auxiliary_device_init"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x908646a1
+  crc: 0x7823bbb8
   type_id: 0x9817938b
   full_name: "auxiliary_device_init"
 }
@@ -335357,7 +335357,7 @@ elf_symbol {
   name: "crypto_register_rng"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x06bddedb
+  crc: 0x9dbfaaad
   type_id: 0x9cc9d859
   full_name: "crypto_register_rng"
 }
@@ -335501,7 +335501,7 @@ elf_symbol {
   name: "crypto_unregister_rng"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5126b8d3
+  crc: 0xf933450a
   type_id: 0x11d16ae5
   full_name: "crypto_unregister_rng"
 }
@@ -350885,7 +350885,7 @@ elf_symbol {
   name: "irq_chip_mask_ack_parent"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3d66066c
+  crc: 0xd4663d76
   type_id: 0x1247424a
   full_name: "irq_chip_mask_ack_parent"
 }
@@ -353225,7 +353225,7 @@ elf_symbol {
   name: "mbox_bind_client"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe4fc5f6e
+  crc: 0xf47b9356
   type_id: 0x91761d4e
   full_name: "mbox_bind_client"
 }
@@ -357244,7 +357244,7 @@ elf_symbol {
   name: "param_get_string"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xff6f8bc9
+  crc: 0x44910aec
   type_id: 0x9c660c95
   full_name: "param_get_string"
 }
@@ -361852,7 +361852,7 @@ elf_symbol {
   name: "regmap_fields_update_bits_base"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4674237b
+  crc: 0xe04edabe
   type_id: 0x9410c635
   full_name: "regmap_fields_update_bits_base"
 }
@@ -368749,7 +368749,7 @@ elf_symbol {
   name: "synth_event_create"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5974b21e
+  crc: 0xcdc78e03
   type_id: 0x924108e7
   full_name: "synth_event_create"
 }
@@ -369766,7 +369766,7 @@ elf_symbol {
   name: "trace_get_event_file"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x96461e75
+  crc: 0x04d78eb4
   type_id: 0xfcfa91ba
   full_name: "trace_get_event_file"
 }
