@@ -66,3 +66,14 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_topology_flags_workfn);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_thermal_stats);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wake_up_sync);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_wake_flags);
+<<<<<<< HEAD   (c8b93c ANDROID: gki_config: Disable CONFIG_DEBUG_STACK_USAGE)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_post_init_entity_util_avg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_effective_cpu_util);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dup_task_struct);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_task_comm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_new_ilb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_pelt_multiplier);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_energy_efficient_cpu);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_util_cfs_boost);
+>>>>>>> CHANGE (87a571 ANDROID: sched: Add vendor hook for cpu_util_cfs_boost)
