@@ -16,6 +16,23 @@
       "message": "This patch series has passed storage-qa compression tests.",
       "revId": "379a4b1644e4c427de19b6166dd636b2399b8758",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "958024b7_76a73a67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2024-03-14T23:32:54Z",
+      "side": 1,
+      "message": "Do we have the risk assessment somewhere? I looked around a bit and didn\u0027t see it. And is there a reason this is FROMGIT instead of a BACKPORT?",
+      "revId": "379a4b1644e4c427de19b6166dd636b2399b8758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
