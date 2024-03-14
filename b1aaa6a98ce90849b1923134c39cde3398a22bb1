@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71fde9f6_50b52e17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-03-14T01:20:23Z",
+      "side": 1,
+      "message": "I think the stuff from here to the end of the paragraph can be replace by:\n\nSo, have an explicit config (config name) that can be selected by various fips140 modules without having to depend on CONFIG_CRYPTO_FIPS140_MOD or CONFIG_CRYPTO_FIPS140_MOD being enabled.",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 53
+      },
+      "revId": "b1aaa6a98ce90849b1923134c39cde3398a22bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7dcb1525_b34a21bc",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -64,6 +87,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c684ff80_168f1cd0",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-03-14T01:20:23Z",
+      "side": 1,
+      "message": "Just saw Eric\u0027s comments in patch 1. Ignore this comment.",
+      "parentUuid": "aed920a3_6acab2d2",
+      "range": {
+        "startLine": 83,
+        "startChar": 7,
+        "endLine": 83,
+        "endChar": 41
+      },
+      "revId": "b1aaa6a98ce90849b1923134c39cde3398a22bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a02a78b5_bbfb2454",
@@ -77,6 +124,30 @@
       "writtenOn": "2024-03-14T01:05:42Z",
       "side": 1,
       "message": "Also, pick a better name? LINKER_SCRIPT_PATCH feels like 3 random words. What\u0027s the intent of the linker patch that is being applied by these scripts?\n\nAnd can we add that doc to this config?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "b1aaa6a98ce90849b1923134c39cde3398a22bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9daa3e83_258ff055",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2024-03-14T01:20:23Z",
+      "side": 1,
+      "message": "I actually liked the original name you had for the config. It at least had some useful info in the name. Maybe be combining that with the convention in this file, you can call it:\n\n`CRYPTO_FIPS140_MERGE_MOD_SECTIONS` or some variant of this that denotes you are merging module sections. I think the Eric\u0027s request to make it just `bool` to avoid users selecting it is valid. But that doesn\u0027t preclude you from having a help text AFAIK. I think having some help text would be useful.",
+      "parentUuid": "a02a78b5_bbfb2454",
       "range": {
         "startLine": 84,
         "startChar": 0,
