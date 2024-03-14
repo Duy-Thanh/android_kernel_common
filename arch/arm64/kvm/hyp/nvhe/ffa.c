@@ -574,35 +574,35 @@ out_unlock:
 		ffa_to_smccc_res(res, ret);
 }
 
-/*
- * Is a given FFA function supported, either by forwarding on directly
- * or by handling at EL2?
- */
 static bool ffa_call_supported(u64 func_id)
 {
 	switch (func_id) {
-	/* Unsupported memory management calls */
-	case FFA_FN64_MEM_RETRIEVE_REQ:
-	case FFA_MEM_RETRIEVE_RESP:
-	case FFA_MEM_RELINQUISH:
-	case FFA_MEM_OP_PAUSE:
-	case FFA_MEM_OP_RESUME:
-	case FFA_MEM_FRAG_RX:
-	case FFA_FN64_MEM_DONATE:
-	/* Indirect message passing via RX/TX buffers */
-	case FFA_MSG_SEND:
-	case FFA_MSG_POLL:
-	case FFA_MSG_WAIT:
-	/* 32-bit variants of 64-bit calls */
+	/* Discovery functions */
+	case FFA_FEATURES:
+	case FFA_ID_GET:
+	case FFA_VERSION:
+	case FFA_PARTITION_INFO_GET:
+
+	/* Memory management calls */
+	case FFA_FN64_RXTX_MAP:
+	case FFA_RXTX_UNMAP:
+	case FFA_MEM_SHARE:
+	case FFA_FN64_MEM_SHARE:
+	case FFA_MEM_RECLAIM:
+	case FFA_MEM_LEND:
+	case FFA_FN64_MEM_LEND:
+	case FFA_MEM_FRAG_TX:
+
+	/* State management */
+	case FFA_RUN:
+
+	/* Message passing */
 	case FFA_MSG_SEND_DIRECT_REQ:
-	case FFA_MSG_SEND_DIRECT_RESP:
-	case FFA_RXTX_MAP:
-	case FFA_MEM_DONATE:
-	case FFA_MEM_RETRIEVE_REQ:
-		return false;
+	case FFA_FN64_MSG_SEND_DIRECT_REQ:
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 static bool do_ffa_features(struct arm_smccc_res *res,
