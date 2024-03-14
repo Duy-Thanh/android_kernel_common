@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "670bd176_09ec36c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-03-14T13:01:28Z",
+      "side": 1,
+      "message": "@mzyngier@google.com : regarding the whole thing with __SVE_VQ_MAX, its value is wrong (i.e., too big) on purpose. At least the following patch (not yet in 6.8) clarifies it:\n\nhttps://lore.kernel.org/all/20240209-arm64-sve-vl-max-comment-v2-1-111b283469ee@kernel.org/",
+      "revId": "e8c370b780fe37002b3f3ace57c3f933dc5c52fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
