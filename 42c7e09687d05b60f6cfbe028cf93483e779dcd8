@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34f68d3a_ed64c1aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-14T02:26:04Z",
+      "side": 1,
+      "message": "Hi Carlos,\nOK, the subject is updated.\nANDROID: vendor_hooks: Add hooks to implement the feature of improving the scheduling priority of binder_sched-\u003etask.",
+      "parentUuid": "29e89a1f_85d4ce76",
+      "range": {
+        "startLine": 7,
+        "startChar": 23,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "42c7e09687d05b60f6cfbe028cf93483e779dcd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33ce9b23_fb560d64",
         "filename": "/COMMIT_MSG",
         "patchSetId": 12
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-11T23:45:02Z",
       "side": 1,
       "message": "nit: Was this meant to be 5?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 2
+      },
+      "revId": "42c7e09687d05b60f6cfbe028cf93483e779dcd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c7136b_10df3339",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-14T02:26:04Z",
+      "side": 1,
+      "message": "Hi Carlos,\nYes, it is 5), updated, thank you !",
+      "parentUuid": "33ce9b23_fb560d64",
       "range": {
         "startLine": 15,
         "startChar": 0,
@@ -77,6 +125,30 @@
       "writtenOn": "2024-03-11T23:45:02Z",
       "side": 1,
       "message": "Why do you pass `t` and then `\u0026t-\u003ework` as a separate parameter, same with `proc` and `\u0026proc-\u003etodo`? This is redundant. Same in other places.",
+      "range": {
+        "startLine": 2976,
+        "startChar": 2,
+        "endLine": 2976,
+        "endChar": 38
+      },
+      "revId": "42c7e09687d05b60f6cfbe028cf93483e779dcd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1026102_e546df51",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2976,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-14T02:26:04Z",
+      "side": 1,
+      "message": "Hi Carlos,\ntrace_android_vh_binder_special_task(t, proc, thread,\u0026t-\u003ework, \u0026proc-\u003etodo, !oneway, \u0026enqueue_task);\ntrace_android_vh_binder_special_task(t, proc, thread, \u0026t-\u003ework, \u0026node-\u003easync_todo, !oneway, \u0026enqueue_task);\ntrace_android_vh_binder_special_task(NULL, proc, thread, w, \u0026proc-\u003etodo, false, \u0026enqueue_task);\n\nThe hook will be used in the three places mentioned above, and depending on the value of t-\u003eandroid_vendor_data1-\u003eux_enable, t-\u003ework or w will be inserted into proc-\u003etodo or node-\u003easync_todo queue. So only t and proc are not enough.",
+      "parentUuid": "53450de9_0990f799",
       "range": {
         "startLine": 2976,
         "startChar": 2,
