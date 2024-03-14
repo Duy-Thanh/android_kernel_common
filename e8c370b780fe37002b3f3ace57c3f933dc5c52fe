@@ -51,6 +51,24 @@
       "parentUuid": "e7fe5b51_812e2c00",
       "revId": "e8c370b780fe37002b3f3ace57c3f933dc5c52fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad89c87_3544648f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2024-03-14T18:04:47Z",
+      "side": 1,
+      "message": "Ah right.\n\nBut is there a real advantage is delaying this VL restore? It would make it more idiot-proof to keep it all together if there is only a minimal (or even no) performance impact.",
+      "parentUuid": "2e59fba6_c0372257",
+      "revId": "e8c370b780fe37002b3f3ace57c3f933dc5c52fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
