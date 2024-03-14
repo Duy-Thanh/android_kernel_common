@@ -33,6 +33,24 @@
       "message": "Don\u0027t we need to restore the original EL2 VL after a save?",
       "revId": "e8c370b780fe37002b3f3ace57c3f933dc5c52fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e59fba6_c0372257",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-03-14T18:01:26Z",
+      "side": 1,
+      "message": "The caller does restore it. The following patch does some refactoring and adds comments to make that clear.",
+      "parentUuid": "e7fe5b51_812e2c00",
+      "revId": "e8c370b780fe37002b3f3ace57c3f933dc5c52fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
