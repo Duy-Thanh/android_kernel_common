@@ -33,6 +33,24 @@
       "message": "Isn\u0027t this a bug that should be fixed upstream?",
       "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5d52f7_ab4c5ee8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-14T19:15:25Z",
+      "side": 1,
+      "message": "unresolved",
+      "parentUuid": "e48ae723_7304871b",
+      "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
