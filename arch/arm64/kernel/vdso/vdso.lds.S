@@ -18,9 +18,9 @@ OUTPUT_ARCH(aarch64)
 
 SECTIONS
 {
-	PROVIDE(_vdso_data = . - __VVAR_PAGES * PAGE_SIZE);
+	PROVIDE(_vdso_data = . - __VVAR_PAGES * MAX_PAGE_SIZE);
 #ifdef CONFIG_TIME_NS
-	PROVIDE(_timens_data = _vdso_data + PAGE_SIZE);
+	PROVIDE(_timens_data = _vdso_data + MAX_PAGE_SIZE);
 #endif
 	. = VDSO_LBASE + SIZEOF_HEADERS;
 
