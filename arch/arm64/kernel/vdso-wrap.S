@@ -13,10 +13,10 @@
 
 	.globl vdso_start, vdso_end
 	.section .rodata
-	.balign PAGE_SIZE
+	.balign MAX_PAGE_SIZE
 vdso_start:
 	.incbin "arch/arm64/kernel/vdso/vdso.so"
-	.balign PAGE_SIZE
+	.balign MAX_PAGE_SIZE
 vdso_end:
 
 	.previous
