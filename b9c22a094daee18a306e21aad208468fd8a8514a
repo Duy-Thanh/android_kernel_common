@@ -16,6 +16,24 @@
       "message": "This function is also called during task migration from find_busiest_queue(), will this override degrade task migration?\n\nSince this is about frequency selection, would it be better to do this in sugov_get_util()? Or if you have your own cpufreq governor and override schedutil, it could go there without any hook.",
       "revId": "b9c22a094daee18a306e21aad208468fd8a8514a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b5c4687_934a74b5",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7672,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2024-03-15T02:41:33Z",
+      "side": 1,
+      "message": "Runnable boost is a feature across task migration (as you said, find_busiest_queue()) and frequency selection.\nIn order to turn on/off this feature, it should be synchronous anywhere.\nIf we only handle it in sugov_get_util(), the behavior for task migration will mismatch.",
+      "parentUuid": "d2f13b5e_ecf32c96",
+      "revId": "b9c22a094daee18a306e21aad208468fd8a8514a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
