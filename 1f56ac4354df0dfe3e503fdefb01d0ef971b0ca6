@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15bc7574_57e4822f",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-03-15T03:05:59Z",
+      "side": 1,
+      "message": "Maybe: This option causes the module linker script to place the delimiters of the text and rodata sections at the appropriate places so that the FIPS 140 integrity check can be performed.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 10
+      },
+      "revId": "1f56ac4354df0dfe3e503fdefb01d0ef971b0ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b802bc36_caa404fc",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-03-15T03:05:59Z",
+      "side": 1,
+      "message": "other FIPS 140 modules",
+      "range": {
+        "startLine": 88,
+        "startChar": 21,
+        "endLine": 88,
+        "endChar": 41
+      },
+      "revId": "1f56ac4354df0dfe3e503fdefb01d0ef971b0ca6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
