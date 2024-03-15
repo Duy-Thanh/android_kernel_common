@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "148ada96_ccb3fbdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2024-03-15T01:32:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71fde9f6_50b52e17",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 53
+      },
+      "revId": "b1aaa6a98ce90849b1923134c39cde3398a22bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dcb1525_b34a21bc",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-14T01:05:42Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 13,
+        "startChar": 12,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "b1aaa6a98ce90849b1923134c39cde3398a22bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "503ca153_7f6b7c66",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2024-03-15T01:32:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7dcb1525_b34a21bc",
       "range": {
         "startLine": 13,
         "startChar": 12,
@@ -148,6 +196,30 @@
       "side": 1,
       "message": "I actually liked the original name you had for the config. It at least had some useful info in the name. Maybe be combining that with the convention in this file, you can call it:\n\n`CRYPTO_FIPS140_MERGE_MOD_SECTIONS` or some variant of this that denotes you are merging module sections. I think the Eric\u0027s request to make it just `bool` to avoid users selecting it is valid. But that doesn\u0027t preclude you from having a help text AFAIK. I think having some help text would be useful.",
       "parentUuid": "a02a78b5_bbfb2454",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "b1aaa6a98ce90849b1923134c39cde3398a22bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcbf240e_009cd0e1",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2024-03-15T01:32:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9daa3e83_258ff055",
       "range": {
         "startLine": 84,
         "startChar": 0,
