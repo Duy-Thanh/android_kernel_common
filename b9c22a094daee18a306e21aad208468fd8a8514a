@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5dddecc_b2c76081",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2024-03-15T03:15:30Z",
+      "side": 1,
+      "message": "Add this symbol to symbol list patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/3003692",
+      "parentUuid": "a4f28b11_29296d9a",
+      "revId": "b9c22a094daee18a306e21aad208468fd8a8514a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2f13b5e_ecf32c96",
