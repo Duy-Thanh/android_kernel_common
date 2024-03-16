@@ -56,13 +56,13 @@ static struct addr_marker address_markers[] = {
 
 #define pt_dump_seq_printf(m, fmt, args...)	\
 ({						\
-	if (m)					\
+	if (m && !seq_has_overflowed(m))					\
 		seq_printf(m, fmt, ##args);	\
 })
 
 #define pt_dump_seq_puts(m, fmt)	\
 ({					\
-	if (m)				\
+	if (m && !seq_has_overflowed(m))				\
 		seq_printf(m, fmt);	\
 })
 
@@ -242,20 +242,22 @@ void note_page(struct ptdump_state *pt_st, unsigned long addr, int level,
 			note_prot_wx(st, addr);
 		}
 
-		pt_dump_seq_printf(st->seq, "0x%016lx-0x%016lx   ",
-				   st->start_address, addr);
+		if (st->start_address <= addr) {
+			pt_dump_seq_printf(st->seq, "0x%016lx-0x%016lx   ",
+					   st->start_address, addr);
 
-		delta = (addr - st->start_address) >> 10;
-		while (!(delta & 1023) && unit[1]) {
-			delta >>= 10;
-			unit++;
+			delta = (addr - st->start_address) >> 10;
+			while (!(delta & 1023) && unit[1]) {
+				delta >>= 10;
+				unit++;
+			}
+			pt_dump_seq_printf(st->seq, "%9lu%c %s", delta, *unit,
+					   pg_info[st->level].name);
+			if (st->current_prot && pg_info[st->level].bits)
+				dump_prot(st, pg_info[st->level].bits,
+					  pg_info[st->level].num);
+			pt_dump_seq_puts(st->seq, "\n");
 		}
-		pt_dump_seq_printf(st->seq, "%9lu%c %s", delta, *unit,
-				   pg_info[st->level].name);
-		if (st->current_prot && pg_info[st->level].bits)
-			dump_prot(st, pg_info[st->level].bits,
-				  pg_info[st->level].num);
-		pt_dump_seq_puts(st->seq, "\n");
 
 		if (addr >= st->marker[1].start_address) {
 			st->marker++;
