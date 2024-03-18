@@ -33,6 +33,23 @@
       "message": "Nevermind, I think this was accidentally restored and this is the wrong branch for it to be on.",
       "revId": "560441b8d03510150f4cf1a1d7bfcf422e1e5b54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d660c38_1607566c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-18T12:55:30Z",
+      "side": 1,
+      "message": "Restored since this is part of the Rust Binder mainline series.",
+      "revId": "560441b8d03510150f4cf1a1d7bfcf422e1e5b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
