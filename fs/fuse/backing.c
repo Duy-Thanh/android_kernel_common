@@ -1948,7 +1948,7 @@ int fuse_getattr_backing(struct fuse_bpf_args *fa,
 	if (!stat)
 		stat = &tmp;
 
-	err = vfs_getattr(backing_path, stat, request_mask, flags);
+	err = vfs_getattr(backing_path, stat, request_mask, flags & ~AT_GETATTR_NOSEC);
 
 	if (!err)
 		fuse_stat_to_attr(get_fuse_conn(entry->d_inode),
