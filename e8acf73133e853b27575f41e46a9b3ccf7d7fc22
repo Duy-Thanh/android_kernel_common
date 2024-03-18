@@ -51,6 +51,24 @@
       "parentUuid": "e48ae723_7304871b",
       "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e10ced_12d5d99e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334410
+      },
+      "writtenOn": "2024-03-18T06:33:51Z",
+      "side": 1,
+      "message": "yes，i think so. We cherry pick since android12-5.10.",
+      "parentUuid": "5c5d52f7_ab4c5ee8",
+      "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
