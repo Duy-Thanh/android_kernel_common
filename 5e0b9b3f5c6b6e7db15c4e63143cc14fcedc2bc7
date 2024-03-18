@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b5bcf9_a60494f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-18T15:02:33Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 10,
+        "startChar": 20,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "5e0b9b3f5c6b6e7db15c4e63143cc14fcedc2bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "439dc6bf_2e4fe14a",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-18T15:02:33Z",
+      "side": 1,
+      "message": "for ret_code, you should use `PTR_ERR()` macros and friends to encode the return error into the pointer.",
+      "revId": "5e0b9b3f5c6b6e7db15c4e63143cc14fcedc2bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b5f2b7d_881b2599",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-18T15:02:33Z",
+      "side": 1,
+      "message": "nit: PAGE_ALIGN() ?",
+      "revId": "5e0b9b3f5c6b6e7db15c4e63143cc14fcedc2bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a48ca74_e26ecd3c",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-18T15:02:33Z",
+      "side": 1,
+      "message": "do we need to test this? isn\u0027t ENOMEM the only case where the mc is just too small?\n\nOr do you want to make sure we don\u0027t introduce another \"type\" of ENOMEM?\n\nIn that case you should probably check for `new_mc_pages \u003e mc_pages`",
+      "revId": "5e0b9b3f5c6b6e7db15c4e63143cc14fcedc2bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d743b344_bac6e21d",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-18T15:02:33Z",
+      "side": 1,
+      "message": "nit: a comment to say why this can fail and why we have to try again?",
+      "revId": "5e0b9b3f5c6b6e7db15c4e63143cc14fcedc2bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
