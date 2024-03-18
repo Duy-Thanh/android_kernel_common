@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6068142b_4502e85e",
+        "filename": "rust/kernel/time.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-03-18T21:24:13Z",
+      "side": 1,
+      "message": "Can we get a rust version of ktime_ms_delta instead? I think it is better to be explicit about which timestamps you are comparing",
+      "revId": "571e930bc1afb607fa3c9d256d9d22367ae5ab24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
