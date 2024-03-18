@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dba7e6c_74a28e70",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-18T15:12:28Z",
+      "side": 1,
+      "message": "`return kvm ? kvm-\u003earch.pkvm.handle : 0` \n\nAnd to be fair, it\u0027s used only in one place so probably that function is not necessary :)",
+      "revId": "ec4160f192693c8e73e185caf92e8e4cdf1dc705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04e66009_617b86f6",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-18T15:12:28Z",
+      "side": 1,
+      "message": "you could get rid of this label with just `if (!ret) return 0;` ?\n\nAnd then the other label could just become \"err\" ?",
+      "revId": "ec4160f192693c8e73e185caf92e8e4cdf1dc705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
