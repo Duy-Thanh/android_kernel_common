@@ -162,3 +162,4 @@
   __tracepoint_android_vh_exit_check
   __tracepoint_android_vh_exit_signal_whether_wake
   __tracepoint_android_vh_freeze_whether_wake
+  wq_worker_comm
