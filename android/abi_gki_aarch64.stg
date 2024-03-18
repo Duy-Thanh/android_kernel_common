@@ -339150,13 +339150,13 @@ elf_symbol {
   full_name: "__traceiter_android_vh_binder_del_ref"
 }
 elf_symbol {
-  id: 0x6da7faa3
-  name: "__traceiter_android_vh_binder_detect_low_async_space_locked"
+  id: 0x07b17980
+  name: "__traceiter_android_vh_binder_detect_low_async_space"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb770ab60
+  crc: 0x52571d7d
   type_id: 0x9a3f4687
-  full_name: "__traceiter_android_vh_binder_detect_low_async_space_locked"
+  full_name: "__traceiter_android_vh_binder_detect_low_async_space"
 }
 elf_symbol {
   id: 0xcb807696
@@ -343335,13 +343335,13 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_binder_del_ref"
 }
 elf_symbol {
-  id: 0xd995cae5
-  name: "__tracepoint_android_vh_binder_detect_low_async_space_locked"
+  id: 0xb7bfddc6
+  name: "__tracepoint_android_vh_binder_detect_low_async_space"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x5112d40e
+  crc: 0xd2dca724
   type_id: 0x18ccbd2c
-  full_name: "__tracepoint_android_vh_binder_detect_low_async_space_locked"
+  full_name: "__tracepoint_android_vh_binder_detect_low_async_space"
 }
 elf_symbol {
   id: 0x19dded7c
@@ -404169,7 +404169,7 @@ interface {
   symbol_id: 0x530ad17d
   symbol_id: 0x5bd6c5e2
   symbol_id: 0x6e0b473c
-  symbol_id: 0x6da7faa3
+  symbol_id: 0x07b17980
   symbol_id: 0xcb807696
   symbol_id: 0xbebf7d98
   symbol_id: 0xe87f2d41
@@ -404634,7 +404634,7 @@ interface {
   symbol_id: 0xc8703937
   symbol_id: 0xec7540bc
   symbol_id: 0x61b56472
-  symbol_id: 0xd995cae5
+  symbol_id: 0xb7bfddc6
   symbol_id: 0x19dded7c
   symbol_id: 0xf32898c6
   symbol_id: 0x28cc114f
