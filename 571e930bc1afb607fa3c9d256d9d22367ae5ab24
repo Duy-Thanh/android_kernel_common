@@ -34,6 +34,24 @@
       "parentUuid": "6068142b_4502e85e",
       "revId": "571e930bc1afb607fa3c9d256d9d22367ae5ab24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "429de6e4_33f62afb",
+        "filename": "rust/kernel/time.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-03-18T23:07:57Z",
+      "side": 1,
+      "message": "If you are planning on supporting both the kernel-ktime api and the rust Instant and Duration api, then I think ktime_ms_delta can be a function not a method. Also note that ktime_ms_delta allows negative results so it might be difficult to implement on top of the std::time like api.\n\nThe time::Instant api looks OK as well but should return a Duration then, not milliseconds. I think you also need duration_since to cover the typical use-cases.",
+      "parentUuid": "e768fb42_aa84d634",
+      "revId": "571e930bc1afb607fa3c9d256d9d22367ae5ab24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
