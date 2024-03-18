@@ -515,6 +515,7 @@ extern void drain_workqueue(struct workqueue_struct *wq);
 extern int schedule_on_each_cpu(work_func_t func);
 
 int execute_in_process_context(work_func_t fn, struct execute_work *);
+int execute_in_non_atomic_context(work_func_t fn, struct execute_work *ew);
 
 extern bool flush_work(struct work_struct *work);
 extern bool cancel_work(struct work_struct *work);

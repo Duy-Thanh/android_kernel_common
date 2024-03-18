@@ -3713,6 +3713,32 @@ int execute_in_process_context(work_func_t fn, struct execute_work *ew)
 EXPORT_SYMBOL_GPL(execute_in_process_context);
 
 /**
+ * execute_in_non_atomic_context - reliably execute the routine with user context
+ * @fn:		the function to execute
+ * @ew:		guaranteed storage for the execute work structure (must
+ *		be available when the work executes)
+ *
+ * Schedules the function for delayed execution if atomic context is available,
+ * otherwise executes the function immediately .
+ *
+ * Return:	0 - function was executed
+ *		1 - function was scheduled for execution
+ */
+int execute_in_non_atomic_context(work_func_t fn, struct execute_work *ew)
+{
+	if (!in_atomic()) {
+		fn(&ew->work);
+		return 0;
+	}
+
+	INIT_WORK(&ew->work, fn);
+	schedule_work(&ew->work);
+
+	return 1;
+}
+EXPORT_SYMBOL_GPL(execute_in_non_atomic_context);
+
+/**
  * free_workqueue_attrs - free a workqueue_attrs
  * @attrs: workqueue_attrs to free
  *
