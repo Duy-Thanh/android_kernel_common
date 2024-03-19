@@ -340992,6 +340992,15 @@ elf_symbol {
   full_name: "devm_memremap"
 }
 elf_symbol {
+  id: 0x86c1623f
+  name: "devm_memunmap"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd7fbf31f
+  type_id: 0x106c9a5c
+  full_name: "devm_memunmap"
+}
+elf_symbol {
   id: 0x36e39cf6
   name: "devm_mfd_add_devices"
   is_defined: true
@@ -385423,6 +385432,7 @@ interface {
   symbol_id: 0x92b974cd
   symbol_id: 0x57498e16
   symbol_id: 0x888f691d
+  symbol_id: 0x86c1623f
   symbol_id: 0x36e39cf6
   symbol_id: 0x6e37c2ad
   symbol_id: 0x91f58d29
