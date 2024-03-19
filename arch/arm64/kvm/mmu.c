@@ -327,11 +327,25 @@ static struct rb_node *find_first_ppage_node(struct rb_root *root, u64 ipa)
 	return prev;
 }
 
+/* Update node to next and return prev */
+static struct rb_node *__inc_ppage_node(struct rb_node **node)
+{
+	struct rb_node *tmp;
+
+	if (!node || !(*node))
+		return NULL;
+
+	tmp = *node;
+	*node = rb_next(*node);
+
+	return tmp;
+}
+
 #define for_ppage_node_in_range(kvm, start, end, __node, temp)				\
 	for (__node = find_first_ppage_node(&(kvm)->arch.pkvm.pinned_pages, start),	\
 	     temp = __node ? rb_next(__node) : NULL;					\
 	     __node;									\
-	     __node = temp)								\
+	     __node = __inc_ppage_node(&temp))						\
 		if (rb_entry(__node, struct kvm_pinned_page, node)->ipa < start)	\
 			continue;							\
 		else if (rb_entry(__node, struct kvm_pinned_page, node)->ipa >= end)	\
