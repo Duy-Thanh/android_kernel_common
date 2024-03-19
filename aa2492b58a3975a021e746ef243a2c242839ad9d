@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95e2c87b_6b7e4f36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-03-19T11:33:23Z",
+      "side": 1,
+      "message": "\u003e Failed to fetch commits for cherry pick check. Is the \"cherry-picked from\" commit ID valid?\n\u003e \"Cherry-picked from\" commit ID: 5d8d40815314684af2593c075e6eee1afb42bb92\n\u003e \n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix. Can you point me to the upstream commit?",
+      "parentUuid": "f47ebfc5_6a4fe648",
+      "revId": "aa2492b58a3975a021e746ef243a2c242839ad9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
