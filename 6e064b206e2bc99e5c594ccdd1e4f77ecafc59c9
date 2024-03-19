@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8754756e_ec4e0ad3",
+        "filename": "rust/kernel/time.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-03-19T20:49:21Z",
+      "side": 1,
+      "message": "This will not always work on old kernel versions where ktime_t is a union, but I assume you don\u0027t need to support kernel versions that old.",
+      "revId": "6e064b206e2bc99e5c594ccdd1e4f77ecafc59c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
