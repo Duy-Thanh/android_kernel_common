@@ -52,7 +52,8 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/oom.h>
-
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/oom.h>
 static int sysctl_panic_on_oom;
 static int sysctl_oom_kill_allocating_task;
 static int sysctl_oom_dump_tasks = 1;
@@ -940,7 +941,7 @@ static void __oom_kill_process(struct task_struct *victim, const char *message)
 	/* Raise event before sending signal: task reaper must see this */
 	count_vm_event(OOM_KILL);
 	memcg_memory_event_mm(mm, MEMCG_OOM_KILL);
-
+	trace_android_vh_oom_get_victim(victim);
 	/*
 	 * We should send SIGKILL before granting access to memory reserves
 	 * in order to prevent the OOM victim from depleting the memory
