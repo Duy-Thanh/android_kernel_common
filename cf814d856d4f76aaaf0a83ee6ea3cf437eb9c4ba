@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea9ea97e_bd48391c",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-20T21:48:09Z",
+      "side": 1,
+      "message": "doesn\u0027t this break the KMI? Any OEM hoping to use the ANDROID_OEM_DATA() field below will be sad.",
+      "revId": "cf814d856d4f76aaaf0a83ee6ea3cf437eb9c4ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
