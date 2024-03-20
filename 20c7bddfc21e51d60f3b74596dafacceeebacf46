@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86346f89_ff77f4c9",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-03-20T08:57:14Z",
+      "side": 1,
+      "message": "Shouldn\u0027t moving that, in the loop condition works? instead of adding new function.",
+      "range": {
+        "startLine": 346,
+        "startChar": 6,
+        "endLine": 346,
+        "endChar": 45
+      },
+      "revId": "20c7bddfc21e51d60f3b74596dafacceeebacf46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
