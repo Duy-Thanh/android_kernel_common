@@ -70,6 +70,30 @@
       },
       "revId": "e0fe2a2795c77d58d109340bd6d1b0c8c1b2a8ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45a3e62e_a6b1df4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-03-20T09:30:42Z",
+      "side": 1,
+      "message": "I think this happens if there is no IOMMU driver at all.",
+      "parentUuid": "ba831e15_c7a33e68",
+      "range": {
+        "startLine": 9,
+        "startChar": 60,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "e0fe2a2795c77d58d109340bd6d1b0c8c1b2a8ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
