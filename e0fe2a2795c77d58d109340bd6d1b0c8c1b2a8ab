@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f47364c_a2f3432f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-03-20T09:16:46Z",
+      "side": 1,
+      "message": "Did the crash happen because the pool init failed but we still set the `kvm_iommu_ops \u003d ops;` ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 60,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "e0fe2a2795c77d58d109340bd6d1b0c8c1b2a8ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
