@@ -17,6 +17,24 @@
       "parentUuid": "f47ebfc5_6a4fe648",
       "revId": "aa2492b58a3975a021e746ef243a2c242839ad9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d18244_894c246d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966983
+      },
+      "writtenOn": "2024-03-20T10:35:14Z",
+      "side": 1,
+      "message": "I deleted the kernel git repository and cloned the kernel code again. The commit id was correct and the git log information was normal (this commit id comes from the Linux master branch);\n\nThe commit id of the series patch is also confirmed to be correct.\n\nThese patches have recently been merged into the trunk from linux-next. Is this causing this problem?",
+      "parentUuid": "95e2c87b_6b7e4f36",
+      "revId": "aa2492b58a3975a021e746ef243a2c242839ad9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
