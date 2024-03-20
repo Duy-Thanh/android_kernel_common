@@ -16,6 +16,24 @@
       "message": "Careful here, this may be abusively restrictive for the guest. Take the following example:\n\n- ZCR_EL1.LEN\u003d\u003d128, max_vl(vcpu)\u003d256\n- ZCR_EL2.LEN\u003d128\n- restore SVE regs\n\nNow the guest is stuck with ZCR_EL1.LEN\u003d\u003d128 because of EL2, even if it was allowed to use 256. You probably want another sve_cond_update_zcr_vq() with the max right after restore.",
       "revId": "5f4d178001d518efba56094d8d230b89a8631123",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eab4cfec_51cd19e5",
+        "filename": "arch/arm64/kvm/hyp/include/hyp/switch.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-03-20T14:06:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2fefcb6_74e5729c",
+      "revId": "5f4d178001d518efba56094d8d230b89a8631123",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
