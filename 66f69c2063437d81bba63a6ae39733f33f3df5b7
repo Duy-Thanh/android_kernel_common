@@ -16,6 +16,24 @@
       "message": "If the anon name for fixup was removed on aosp/3007547, do we still require this change?",
       "revId": "66f69c2063437d81bba63a6ae39733f33f3df5b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "296ef968_3a147968",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-03-20T22:44:02Z",
+      "side": 1,
+      "message": "We still need it. there are callers from userspace that pass for example sizeof(struct foo) to the naming which only gets rounded up to PAGE_SIZE (4K) and splits the previos 16K VMA.",
+      "parentUuid": "f488e2c3_d73e0cd9",
+      "revId": "66f69c2063437d81bba63a6ae39733f33f3df5b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
