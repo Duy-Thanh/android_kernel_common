@@ -46,6 +46,30 @@
       },
       "revId": "e0fe2a2795c77d58d109340bd6d1b0c8c1b2a8ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba831e15_c7a33e68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-03-20T09:29:01Z",
+      "side": 1,
+      "message": "How late do we probe the IOMMU drivers ? Isn\u0027t before the host de-privileges itself ? The shrinker can be invoked either from cmdline by echoing in `scan` or by a low memory condition. Either of these 2 cases are very late after boot, so why did the init function from the IOMMU driver did not complete ?",
+      "parentUuid": "616a1fcb_5031ecf5",
+      "range": {
+        "startLine": 9,
+        "startChar": 60,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "e0fe2a2795c77d58d109340bd6d1b0c8c1b2a8ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
