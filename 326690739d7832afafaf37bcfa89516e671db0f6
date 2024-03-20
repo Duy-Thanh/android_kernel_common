@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72393f1e_9854efcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1874175
+      },
+      "writtenOn": "2024-03-20T20:23:38Z",
+      "side": 1,
+      "message": "This is looking pretty good.  I have one minor comment on naming.",
+      "revId": "326690739d7832afafaf37bcfa89516e671db0f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c6bf993_3c949f0e",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1874175
+      },
+      "writtenOn": "2024-03-20T20:23:38Z",
+      "side": 1,
+      "message": "Is \"sound\" the only use of suspend for USB?  Maybe we should use a more generic name?",
+      "revId": "326690739d7832afafaf37bcfa89516e671db0f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
