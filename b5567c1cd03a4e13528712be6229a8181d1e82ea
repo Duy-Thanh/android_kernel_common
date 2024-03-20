@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61693ff0_b5eaf6b9",
+        "filename": "rust/kernel/time.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-20T16:29:12Z",
+      "side": 1,
+      "message": "It seems there was some minor feedback on this comment: https://lore.kernel.org/all/87wmpxghxg.ffs@tglx/",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 57
+      },
+      "revId": "b5567c1cd03a4e13528712be6229a8181d1e82ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
