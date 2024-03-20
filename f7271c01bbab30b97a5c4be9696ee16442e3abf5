@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37ceffe1_8b9d766b",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-20T10:37:30Z",
+      "side": 1,
+      "message": "Yep, after the init, we\u0027ll execute it, as long as __node is !\u003d NULL.\n\nSee also `hlist_for_each_entry_safe`",
+      "parentUuid": "8ac7979e_6fe0573b",
+      "range": {
+        "startLine": 332,
+        "startChar": 16,
+        "endLine": 332,
+        "endChar": 48
+      },
+      "revId": "f7271c01bbab30b97a5c4be9696ee16442e3abf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "680fc90c_3cb2cc9e",
         "filename": "arch/arm64/kvm/mmu.c",
         "patchSetId": 7
