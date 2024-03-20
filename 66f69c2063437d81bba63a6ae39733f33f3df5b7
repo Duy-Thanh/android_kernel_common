@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f488e2c3_d73e0cd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-03-20T20:17:04Z",
+      "side": 1,
+      "message": "If the anon name for fixup was removed on aosp/3007547, do we still require this change?",
+      "revId": "66f69c2063437d81bba63a6ae39733f33f3df5b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
