@@ -125,6 +125,14 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_switch);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_waking);
 #if defined(CONFIG_SCHEDSTATS)
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_sleep);
+<<<<<<< HEAD   (f3f369 UPSTREAM: wifi: cfg80211: skip regulatory for punctured subc)
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_iowait);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_wait);
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_iowait);
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_blocked);
+>>>>>>> CHANGE (942d51 ANDROID: vendor_hooks: Export the tracepoints sched_stat_blo)
 #endif
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
