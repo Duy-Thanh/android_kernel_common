@@ -15,6 +15,13 @@
 
 #include <linux/bitops.h>
 #include <linux/compiler.h>
+<<<<<<< HEAD   (c206f2 ANDROID: Update symbols to oplus symbol list.)
+||||||| BASE
+#include <linux/android_kabi.h>
+=======
+#include <linux/android_kabi.h>
+#include <linux/android_vendor.h>
+>>>>>>> CHANGE (56285b ANDROID: GKI: add vendor padding variable in struct nf_conn)
 
 #include <linux/netfilter/nf_conntrack_common.h>
 #include <linux/netfilter/nf_conntrack_tcp.h>
@@ -123,6 +130,17 @@ struct nf_conn {
 
 	/* Storage reserved for other modules, must be the last member */
 	union nf_conntrack_proto proto;
+<<<<<<< HEAD   (c206f2 ANDROID: Update symbols to oplus symbol list.)
+||||||| BASE
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+=======
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_OEM_DATA(1);
+>>>>>>> CHANGE (56285b ANDROID: GKI: add vendor padding variable in struct nf_conn)
 };
 
 static inline struct nf_conn *
