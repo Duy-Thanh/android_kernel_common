@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bc993b1_e2c38f6d",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-21T09:56:28Z",
+      "side": 1,
+      "message": "Here, you would return without ret being initialized!",
+      "revId": "939ff3609ddc8751b0d3bd3c04bc4ae1180a01ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
