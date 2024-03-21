@@ -15,6 +15,13 @@
 
 #include <linux/bitops.h>
 #include <linux/compiler.h>
+<<<<<<< HEAD   (5350582b7ee8f549eccad06485cbd32bcc6c49e0 ANDROID: GKI: enable x86_64 symbol import protection)
+||||||| BASE   (ef3d16e0e016e58935944722068fefb7dd3b5499 ANDROID: vendor_hooks: add a field in pglist_data)
+#include <linux/android_kabi.h>
+=======
+#include <linux/android_kabi.h>
+#include <linux/android_vendor.h>
+>>>>>>> CHANGE (bad3ca6c5233b00da238359444230b34312274ab ANDROID: GKI: add vendor padding variable in struct nf_conn)
 
 #include <linux/netfilter/nf_conntrack_common.h>
 #include <linux/netfilter/nf_conntrack_tcp.h>
@@ -121,6 +128,17 @@ struct nf_conn {
 
 	/* Storage reserved for other modules, must be the last member */
 	union nf_conntrack_proto proto;
+<<<<<<< HEAD   (5350582b7ee8f549eccad06485cbd32bcc6c49e0 ANDROID: GKI: enable x86_64 symbol import protection)
+||||||| BASE   (ef3d16e0e016e58935944722068fefb7dd3b5499 ANDROID: vendor_hooks: add a field in pglist_data)
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+=======
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_OEM_DATA(1);
+>>>>>>> CHANGE (bad3ca6c5233b00da238359444230b34312274ab ANDROID: GKI: add vendor padding variable in struct nf_conn)
 };
 
 static inline struct nf_conn *
