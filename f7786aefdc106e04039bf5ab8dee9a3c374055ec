@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1127b3ec_d4b20159",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-21T19:51:01Z",
+      "side": 1,
+      "message": "This commit was never in this branch so you aren\u0027t really reverting anything. Instead cherry-pick the original version of the patch.",
+      "revId": "f7786aefdc106e04039bf5ab8dee9a3c374055ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc6b1cc_856cc856",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-21T19:51:01Z",
+      "side": 1,
+      "message": "Add a comment for why this is needed w/o a respin.",
+      "revId": "f7786aefdc106e04039bf5ab8dee9a3c374055ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
