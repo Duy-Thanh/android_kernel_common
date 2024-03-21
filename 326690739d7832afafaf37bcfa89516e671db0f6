@@ -33,6 +33,24 @@
       "message": "Is \"sound\" the only use of suspend for USB?  Maybe we should use a more generic name?",
       "revId": "326690739d7832afafaf37bcfa89516e671db0f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b81bc22f_5f0986fd",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2024-03-21T00:28:03Z",
+      "side": 1,
+      "message": "Yes, this is specific for the USB suspend. This hook is used in the USB sound card driver(sounds/usb/pcm.c). We will consider the suggestion in the coming implementation. Thanks.",
+      "parentUuid": "2c6bf993_3c949f0e",
+      "revId": "326690739d7832afafaf37bcfa89516e671db0f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
