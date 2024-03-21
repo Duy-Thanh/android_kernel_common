@@ -240,6 +240,7 @@ register_shm_helper(struct tee_context *ctx, unsigned long addr,
 	size_t num_pages;
 	void *ret;
 	int rc;
+	u32 page_flag = FOLL_WRITE;
 
 	if (!tee_device_get(teedev))
 		return ERR_PTR(-EINVAL);
@@ -273,8 +274,9 @@ register_shm_helper(struct tee_context *ctx, unsigned long addr,
 		goto err_free_shm;
 	}
 
+	page_flag |= FOLL_LONGTERM;
 	if (flags & TEE_SHM_USER_MAPPED)
-		rc = pin_user_pages_fast(start, num_pages, FOLL_WRITE,
+		rc = pin_user_pages_fast(start, num_pages, page_flag,
 					 shm->pages);
 	else
 		rc = shm_get_kernel_pages(start, num_pages, shm->pages);
