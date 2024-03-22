@@ -857,12 +857,51 @@ static bool madvise_dontneed_free_valid_vma(struct vm_area_struct *vma,
 	return true;
 }
 
+/*
+ * If MADV_DONTNEED on end of a VMA save this range, to exclude later in do_fault_around()
+ */
+static inline void __dontneed_vma_end(struct vm_area_struct *vma,
+				      unsigned long start, unsigned long end)
+{
+	unsigned long nr_pages_to_evict;
+
+	/* Only handle this for vmas that do perform do_fault around */
+	if (!vma->vm_file || !vma->vm_ops || !vma->vm_ops->map_pages)
+		return;
+
+	/* Is this already being used by someone else? */
+	BUG_ON(vma->vm_private_data != NULL);
+
+	/*
+	 * If the DONTNEED range is it at end of the file save the number of
+	 * pages in vm_private_data to prevent bringing these in later with
+	 * do_fault_around().
+	 */
+	if (start <= vma->vm_start || end != vma->vm_end)
+		return;
+
+	nr_pages_to_evict = (end - start) >> PAGE_SHIFT;
+
+	/*
+	 * For an ELF built with max-page-size=16kB loaded on a 4kB page size
+	 * system, the maximum amout of padding pages will be 3 per segment.
+	 */
+	if (!nr_pages_to_evict || nr_pages_to_evict > 3)
+		return;
+
+	/* Save the number of pages to evict from the end of the VMA */
+	vma->vm_private_data = (void *)nr_pages_to_evict;
+}
+
 static long madvise_dontneed_free(struct vm_area_struct *vma,
 				  struct vm_area_struct **prev,
 				  unsigned long start, unsigned long end,
 				  int behavior)
 {
 	struct mm_struct *mm = vma->vm_mm;
+
+	/* Avoid unnecessary fault around for DONTNEED VMA end ranges */
+	__dontneed_vma_end(vma, start, end);
 
 	*prev = vma;
 	if (!madvise_dontneed_free_valid_vma(vma, start, &end, behavior))

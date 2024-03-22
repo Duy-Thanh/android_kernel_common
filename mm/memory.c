@@ -4482,6 +4482,33 @@ static int __init fault_around_debugfs(void)
 late_initcall(fault_around_debugfs);
 #endif
 
+static inline void __fault_around_only_data_pages(struct vm_area_struct *vma, unsigned long *data_pages)
+{
+	unsigned long evicted_pages = (unsigned long)(vma->vm_private_data);
+	unsigned long end = 0;
+
+	/* Potential MADV_DONTNEED was done on a range that ends at vm_end ? */
+	if (!evicted_pages)
+		return;
+
+	/*
+	 * We try to limit this only to ELF files.
+	 *
+	 * For an ELF built with max-page-size=16kB loaded on a 4kB page size
+	 * system, the maximum amout of padding pages will be 3 per segment.
+	 */
+	if (evicted_pages > 3)
+		return;
+
+	/* Update the data_pages to exclude the evicted range */
+	end = vma->vm_end - (evicted_pages << PAGE_SHIFT);
+	*data_pages = (end - vma->vm_start) >> PAGE_SHIFT;
+
+	/* Drop the pages now to save reclaim work later */
+	truncate_inode_pages_range(vma->vm_file->f_mapping,
+				(loff_t)end, (loff_t)vma->vm_end);
+}
+
 /*
  * do_fault_around() tries to map few pages around the fault address. The hope
  * is that the pages will be needed soon and this will lower the number of
@@ -4510,6 +4537,13 @@ static vm_fault_t do_fault_around(struct vm_fault *vmf)
 	pgoff_t vma_off = vmf->pgoff - vmf->vma->vm_pgoff;
 	pgoff_t from_pte, to_pte;
 	vm_fault_t ret;
+	unsigned long data_pages = vma_pages(vmf->vma);
+
+	/*
+	 * Was the end of the VMA evicted with MADV_DONTNEED?
+	 * If so lets not bother to fault them in again.
+	 */
+	__fault_around_only_data_pages(vmf->vma, &data_pages);
 
 	/* The PTE offset of the start address, clamped to the VMA. */
 	from_pte = max(ALIGN_DOWN(pte_off, nr_pages),
@@ -4517,7 +4551,7 @@ static vm_fault_t do_fault_around(struct vm_fault *vmf)
 
 	/* The PTE offset of the end address, clamped to the VMA and PTE. */
 	to_pte = min3(from_pte + nr_pages, (pgoff_t)PTRS_PER_PTE,
-		      pte_off + vma_pages(vmf->vma) - vma_off) - 1;
+		      pte_off + data_pages - vma_off) - 1;
 
 	if (pmd_none(*vmf->pmd)) {
 		vmf->prealloc_pte = pte_alloc_one(vmf->vma->vm_mm);
