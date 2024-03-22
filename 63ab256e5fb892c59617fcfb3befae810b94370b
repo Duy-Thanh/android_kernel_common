@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000072408205",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3010573?revision\u003d2",
+      "key": {
+        "uuid": "161d1a9e_f4104763",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-22T21:30:45Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "63ab256e5fb892c59617fcfb3befae810b94370b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000072408205",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3010573?revision\u003d2",
+      "key": {
+        "uuid": "50dad345_12326e9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-22T21:30:45Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android13-5.10.\nBase branch change: [2996596](https://r.android.com/c/2996596).\n\n```\n      ## fs/userfaultfd.c ##\n     @@ fs/userfaultfd.c: static int userfaultfd_copy(struct userfaultfd_ctx *ctx,\n    @@ include/linux/userfaultfd_k.h: extern ssize_t mcopy_atomic(struct mm_struct *dst\n      \t\t\t    unsigned long src_start, unsigned long len,\n      \t\t\t    bool *mmap_changing, __u64 mode);\n      extern ssize_t mfill_zeropage(struct mm_struct *dst_mm,\n    --\t\t\t      unsigned long dst_start,\n    --\t\t\t      unsigned long len,\n    --\t\t\t      bool *mmap_changing);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (60884a ANDROID: userfaultfd: allow SPF for UFFD_FEATURE_SIGBUS on p)\n    + \t\t\t      unsigned long dst_start,\n    + \t\t\t      unsigned long len,\n    + \t\t\t      bool *mmap_changing);\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\t\t\t      unsigned long dst_start, unsigned long len,\n    -+\t\t\t      bool *mmap_changing, __u64 mode);\n    ++\t\t\t      atomic_t *mmap_changing, __u64 mode);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (367353 ANDROID: userfaultfd: add MMAP_TRYLOCK mode for COPY/ZEROPAG)\n      extern ssize_t mcopy_continue(struct mm_struct *dst_mm, unsigned long dst_start,\n      \t\t\t      unsigned long len, bool *mmap_changing);\n      extern int mwriteprotect_range(struct mm_struct *dst_mm,\n    @@ mm/userfaultfd.c: static __always_inline ssize_t __mcopy_atomic(struct mm_struct\n      \t * operation (e.g. mremap) running in parallel, bail out and\n      \t * request the user to retry later\n      \t */\n    --\terr \u003d -EAGAIN;\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (60884a ANDROID: userfaultfd: allow SPF for UFFD_FEATURE_SIGBUS on p)\n    + \terr \u003d -EAGAIN;\n      \tif (mmap_changing \u0026\u0026 READ_ONCE(*mmap_changing))\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\tif (mmap_changing \u0026\u0026 atomic_read(mmap_changing))\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (367353 ANDROID: userfaultfd: add MMAP_TRYLOCK mode for COPY/ZEROPAG)\n      \t\tgoto out_unlock;\n      \n    + \t/*\n     @@ mm/userfaultfd.c: ssize_t mcopy_atomic(struct mm_struct *dst_mm, unsigned long dst_start,\n      }\n      \n      ssize_t mfill_zeropage(struct mm_struct *dst_mm, unsigned long start,\n    --\t\t       unsigned long len, bool *mmap_changing)\n    -+\t\t       unsigned long len, bool *mmap_changing, __u64 mode)\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (60884a ANDROID: userfaultfd: allow SPF for UFFD_FEATURE_SIGBUS on p)\n    + \t\t       unsigned long len, bool *mmap_changing)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\t\t       unsigned long len, atomic_t *mmap_changing, __u64 mode)\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (367353 ANDROID: userfaultfd: add MMAP_TRYLOCK mode for COPY/ZEROPAG)\n      {\n      \treturn __mcopy_atomic(dst_mm, start, 0, len, MCOPY_ATOMIC_ZEROPAGE,\n     -\t\t\t      mmap_changing, 0);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "63ab256e5fb892c59617fcfb3befae810b94370b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
