@@ -4574,6 +4574,50 @@ static int __init fault_around_debugfs(void)
 late_initcall(fault_around_debugfs);
 #endif
 
+static inline unsigned long vm_flags_get_nr_pages_evicted(struct vm_area_struct *vma)
+{
+	unsigned long nr_pages = 0;
+
+	if (vma->vm_flags & VM_NR_EVICTED_BIT1)
+		nr_pages |= 1UL;
+	if (vma->vm_flags & VM_NR_EVICTED_BIT2)
+		nr_pages |= 2UL;
+
+	return nr_pages;
+}
+
+/*
+ * If the end of the VMA evicted with MADV_DONTNEED,
+ * lets not bother to fault them in again.
+ */
+static inline void __fault_around_only_data_pages(struct vm_area_struct *vma,
+						  unsigned long *data_pages)
+{
+	unsigned long evicted_pages = vm_flags_get_nr_pages_evicted(vma);
+	unsigned long end = 0;
+
+	/* Potential MADV_DONTNEED was done on a range that ends at vm_end ? */
+	if (!evicted_pages)
+		return;
+
+	/*
+	 * We try to limit this only to ELF files.
+	 *
+	 * For an ELF built with max-page-size=16kB loaded on a 4kB page size
+	 * system, the maximum amout of padding pages will be 3 per segment.
+	 */
+	if (evicted_pages > 3)
+		return;
+
+	/* Update the data_pages to exclude the evicted range */
+	end = vma->vm_end - (evicted_pages << PAGE_SHIFT);
+	*data_pages = (end - vma->vm_start) >> PAGE_SHIFT;
+
+	/* Drop the pages now to save reclaim work later */
+	truncate_inode_pages_range(vma->vm_file->f_mapping,
+				(loff_t)end, (loff_t)vma->vm_end);
+}
+
 /*
  * do_fault_around() tries to map few pages around the fault address. The hope
  * is that the pages will be needed soon and this will lower the number of
@@ -4600,6 +4644,10 @@ static vm_fault_t do_fault_around(struct vm_fault *vmf)
 	pgoff_t start_pgoff = vmf->pgoff;
 	pgoff_t end_pgoff;
 	int off;
+	unsigned long data_pages = vma_pages(vmf->vma);
+
+	__fault_around_only_data_pages(vmf->vma, &data_pages);
+ 
 
 	nr_pages = READ_ONCE(fault_around_bytes) >> PAGE_SHIFT;
 	mask = ~(nr_pages * PAGE_SIZE - 1) & PAGE_MASK;
@@ -4615,7 +4663,7 @@ static vm_fault_t do_fault_around(struct vm_fault *vmf)
 	end_pgoff = start_pgoff -
 		((address >> PAGE_SHIFT) & (PTRS_PER_PTE - 1)) +
 		PTRS_PER_PTE - 1;
-	end_pgoff = min3(end_pgoff, vma_pages(vmf->vma) + vmf->vma->vm_pgoff - 1,
+	end_pgoff = min3(end_pgoff, data_pages + vmf->vma->vm_pgoff - 1,
 			start_pgoff + nr_pages - 1);
 
 	if (pmd_none(*vmf->pmd)) {
