@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9e923f1_b26d8c08",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-22T20:58:05Z",
+      "side": 1,
+      "message": "Fix the spacing",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 13
+      },
+      "revId": "627641a903ab627745f9f8a63a15586be45bdb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29dffb87_bd185e3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-22T20:58:05Z",
+      "side": 1,
+      "message": "cing",
+      "revId": "627641a903ab627745f9f8a63a15586be45bdb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
