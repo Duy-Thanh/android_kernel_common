@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4763819a_f1c6a65c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-22T20:49:13Z",
+      "side": 1,
+      "message": "Please remove",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 68
+      },
+      "revId": "18fd01d16066813a56351be15824c2ad9d5b868b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8a98a03_366f481e",
         "filename": "drivers/android/vendor_hooks.c",
         "patchSetId": 5
