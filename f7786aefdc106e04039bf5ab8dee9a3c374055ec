@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcd3751_12b99c11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1986685
+      },
+      "writtenOn": "2024-03-22T10:02:22Z",
+      "side": 1,
+      "message": "Done in aosp/3009338.",
+      "parentUuid": "1127b3ec_d4b20159",
+      "revId": "f7786aefdc106e04039bf5ab8dee9a3c374055ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bc6b1cc_856cc856",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-21T19:51:01Z",
       "side": 1,
       "message": "Add a comment for why this is needed w/o a respin.",
+      "revId": "f7786aefdc106e04039bf5ab8dee9a3c374055ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a585ae25_189a643e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1986685
+      },
+      "writtenOn": "2024-03-22T10:02:22Z",
+      "side": 1,
+      "message": "Done in aosp/3009338.",
+      "parentUuid": "8bc6b1cc_856cc856",
       "revId": "f7786aefdc106e04039bf5ab8dee9a3c374055ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
