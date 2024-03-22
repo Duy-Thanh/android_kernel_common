@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000072304612",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3003840?revision\u003d2",
+      "key": {
+        "uuid": "fe986d51_b6b8b390",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-22T04:30:51Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/8c1cbec9db1ab044167a7594c88bb5906c9d3ee4) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d8c1cbec9db1ab044167a7594c88bb5906c9d3ee4).\n\n```\n      ## drivers/usb/host/xhci-mem.c ##\n     @@ drivers/usb/host/xhci-mem.c: int xhci_mem_init(struct xhci_hcd *xhci, gfp_t flags)\n      \t\t\t\"// Set ERST base address for ir_set 0 \u003d 0x%llx\",\n    @@ drivers/usb/host/xhci-mem.c: int xhci_mem_init(struct xhci_hcd *xhci, gfp_t flag\n      \txhci_write_64(xhci, val_64, \u0026xhci-\u003eir_set-\u003eerst_base);\n      \n      \t/* Set the event ring dequeue address */\n    -\n    - ## drivers/usb/host/xhci.h ##\n    -@@ drivers/usb/host/xhci.h: struct xhci_intr_reg {\n    - /* Preserve bits 16:31 of erst_size */\n    - #define\tERST_SIZE_MASK\t\t(0xffff \u003c\u003c 16)\n    - \n    -+/* erst_base bitmasks */\n    -+#define ERST_BASE_RSVDP\t\t(0x3f)\n    -+\n    - /* erst_dequeue bitmasks */\n    - /* Dequeue ERST Segment Index (DESI) - Segment number (or alias)\n    -  * where the current dequeue pointer lies.  This is an optional HW hint.\n    -@@ drivers/usb/host/xhci.h: struct xhci_hcd {\n    - \tu8\t\tsbrn;\n    - \tu16\t\thci_version;\n    - \tu8\t\tmax_slots;\n    --\tu8\t\tmax_interrupters;\n    -+\tu16\t\tmax_interrupters;\n    - \tu8\t\tmax_ports;\n    - \tu8\t\tisoc_threshold;\n    - \t/* imod_interval in ns (I * 250ns) */\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "24c768523b581b65cc733f6c6a473112285754b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
