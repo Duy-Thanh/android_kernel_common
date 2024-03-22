@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a98a03_366f481e",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-22T20:48:52Z",
+      "side": 1,
+      "message": "Any reason you are changing the original names of the hooks (this one used to be `android_vh_mm_alloc_pages_direct_reclaim_enter`).",
+      "range": {
+        "startLine": 217,
+        "startChar": 29,
+        "endLine": 217,
+        "endChar": 63
+      },
+      "revId": "18fd01d16066813a56351be15824c2ad9d5b868b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
