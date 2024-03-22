@@ -766,6 +766,51 @@ static int madvise_free_single_vma(struct vm_area_struct *vma,
 	return 0;
 }
 
+static inline void vm_flags_set_nr_pages_to_evict(struct vm_area_struct *vma,
+						  unsigned long nr_pages)
+{
+	vm_flags_t flags = 0;
+	if (nr_pages & 	1UL)
+		flags |=  VM_NR_EVICTED_BIT1;
+	if (nr_pages & 	2UL)
+		flags |=  VM_NR_EVICTED_BIT2;
+
+	vma->vm_flags |= flags;
+}
+
+/*
+ * If MADV_DONTNEED on end of a VMA save this range, to exclude later in do_fault_around()
+ */
+static inline void __dontneed_vma_end(struct vm_area_struct *vma,
+				      unsigned long start, unsigned long end)
+{
+	unsigned long nr_pages_to_evict;
+
+	/* Only handle this for vmas that perform do_fault around() */
+	if (!vma->vm_file || !vma->vm_ops || !vma->vm_ops->map_pages)
+		return;
+
+	/*
+	 * If the DONTNEED range is it at end of the file save the number of
+	 * pages in vm_flags (we only need 2 bits for 16kB aligned ELFs) to
+	 * prevent bringing these in later with do_fault_around().
+	 */
+	if (start <= vma->vm_start || end != vma->vm_end)
+		return;
+
+	nr_pages_to_evict = (end - start) >> PAGE_SHIFT;
+
+	/*
+	 * For an ELF built with max-page-size=16kB loaded on a 4kB page size
+	 * system, the maximum amout of padding pages will be 3 per segment.
+	 */
+	if (!nr_pages_to_evict || nr_pages_to_evict > 3)
+		return;
+
+	/* Save the number of pages to evict from the end of the VMA */
+	vm_flags_set_nr_pages_to_evict(vma, nr_pages_to_evict);
+}
+
 /*
  * Application no longer needs these pages.  If the pages are dirty,
  * it's OK to just throw them away.  The app will be more careful about
@@ -788,6 +833,9 @@ static int madvise_free_single_vma(struct vm_area_struct *vma,
 static long madvise_dontneed_single_vma(struct vm_area_struct *vma,
 					unsigned long start, unsigned long end)
 {
+	/* Avoid unnecessary fault around for DONTNEED VMA end ranges */
+	__dontneed_vma_end(vma, start, end);
+
 	zap_page_range(vma, start, end - start);
 	return 0;
 }

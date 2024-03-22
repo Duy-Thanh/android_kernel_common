@@ -4415,6 +4415,52 @@ static int __init fault_around_debugfs(void)
 late_initcall(fault_around_debugfs);
 #endif
 
+static inline unsigned long vm_flags_get_nr_pages_evicted(struct vm_area_struct *vma)
+{
+	unsigned long nr_pages = 0;
+
+	if (vma->vm_flags & VM_NR_EVICTED_BIT1)
+		nr_pages |= 1UL;
+	if (vma->vm_flags & VM_NR_EVICTED_BIT2)
+		nr_pages |= 2UL;
+
+	return nr_pages;
+}
+
+/*
+ * If the end of the VMA evicted with MADV_DONTNEED,
+ * lets not bother to fault them in again.
+ */
+static inline unsigned long vma_data_pages(struct vm_area_struct *vma)
+{
+	unsigned long nr_pages = vma_pages(vma);
+	unsigned long nr_evicted = vm_flags_get_nr_pages_evicted(vma);
+	loff_t start, end;
+
+	/* Potential MADV_DONTNEED was done on a range that ends at vm_end ? */
+	if (!nr_evicted)
+		return nr_pages;
+
+	/*
+	 * We try to limit this only to ELF files.
+	 *
+	 * For an ELF built with max-page-size=16kB loaded on a 4kB page size
+	 * system, the maximum amout of padding pages will be 3 per segment.
+	 */
+	if (nr_evicted > 3)
+		return nr_pages;
+
+	/* Drop the pages now to save reclaim work later */
+	end = (nr_pages + vma->vm_pgoff) << PAGE_SHIFT;
+	start = end - (nr_evicted << PAGE_SHIFT);
+	trace_printk("truncate %s %ld %ld %ld 0x%lx 0x%lx\n", vma->vm_file->f_path.dentry->d_name.name,
+			  nr_pages, nr_evicted, start, end);
+	truncate_inode_pages_range(vma->vm_file->f_mapping, start, end-1);
+
+	/* Only return the data pages - excluding the evicted range */
+	return nr_pages - nr_evicted;
+}
+
 /*
  * do_fault_around() tries to map few pages around the fault address. The hope
  * is that the pages will be needed soon and this will lower the number of
@@ -4461,7 +4507,7 @@ static vm_fault_t do_fault_around(struct vm_fault *vmf)
 	end_pgoff = start_pgoff -
 		((address >> PAGE_SHIFT) & (PTRS_PER_PTE - 1)) +
 		PTRS_PER_PTE - 1;
-	end_pgoff = min3(end_pgoff, vma_pages(vmf->vma) + vmf->vma->vm_pgoff - 1,
+	end_pgoff = min3(end_pgoff, vma_data_pages(vmf->vma) + vmf->vma->vm_pgoff - 1,
 			start_pgoff + nr_pages - 1);
 
 	if (!(vmf->flags & FAULT_FLAG_SPECULATIVE) &&
