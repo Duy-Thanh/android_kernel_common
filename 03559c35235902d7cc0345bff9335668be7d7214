@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aa5c1cb_7d98ded0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-03-22T20:05:37Z",
+      "side": 1,
+      "message": "I think you should put this in init/Kconfig.gki as a hack-to-fix.",
+      "revId": "03559c35235902d7cc0345bff9335668be7d7214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
