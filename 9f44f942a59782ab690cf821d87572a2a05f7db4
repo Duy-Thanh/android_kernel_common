@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00913d62_99cfd5f8",
+        "filename": "tools/testing/android/coverage_howto.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-03-22T22:44:16Z",
+      "side": 1,
+      "message": "full.",
+      "range": {
+        "startLine": 24,
+        "startChar": 19,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "9f44f942a59782ab690cf821d87572a2a05f7db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8455a569_35caddaa",
+        "filename": "tools/testing/android/coverage_howto.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-03-22T22:44:16Z",
+      "side": 1,
+      "message": "in the tradefed log folder",
+      "range": {
+        "startLine": 37,
+        "startChar": 62,
+        "endLine": 37,
+        "endChar": 70
+      },
+      "revId": "9f44f942a59782ab690cf821d87572a2a05f7db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
