@@ -22,6 +22,30 @@
       },
       "revId": "b5567c1cd03a4e13528712be6229a8181d1e82ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01caeaa7_31c75a98",
+        "filename": "rust/kernel/time.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-22T09:15:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61693ff0_b5eaf6b9",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 57
+      },
+      "revId": "b5567c1cd03a4e13528712be6229a8181d1e82ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
