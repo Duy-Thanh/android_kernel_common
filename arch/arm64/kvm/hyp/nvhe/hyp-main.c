@@ -1700,8 +1700,10 @@ static void handle_host_smc(struct kvm_cpu_context *host_ctxt)
 	func_id &= ~ARM_SMCCC_CALL_HINTS;
 
 	handled = kvm_host_psci_handler(host_ctxt, func_id);
-	if (!handled)
+	if (!handled) {
 		handled = kvm_host_ffa_handler(host_ctxt, func_id);
+		trace_ffa_call_ret(func_id, cpu_reg(host_ctxt, 0), cpu_reg(host_ctxt, 2), handled);
+	}
 	if (!handled && smp_load_acquire(&default_host_smc_handler))
 		handled = default_host_smc_handler(&host_ctxt->regs);
 	if (!handled) {

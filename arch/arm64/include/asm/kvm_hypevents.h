@@ -71,4 +71,34 @@ HYP_EVENT(host_mem_abort,
 	HE_PRINTK("esr=0x%llx addr=0x%llx",
 		  __entry->esr, __entry->addr)
 );
+
+HYP_EVENT(ffa_call,
+	HE_PROTO(u32 func_id),
+	HE_STRUCT(
+		he_field(u32, func_id)
+	),
+	HE_ASSIGN(
+		__entry->func_id = func_id;
+	),
+	HE_PRINTK("[ffa_call] ffa_func=%u",
+		  __entry->func_id)
+);
+
+HYP_EVENT(ffa_call_ret,
+	HE_PROTO(u32 func_id, u32 res_a0, u32 res_a2, bool passthrough),
+	HE_STRUCT(
+		he_field(u32, func_id)
+		he_field(u64, res_a0)
+		he_field(u64, res_a2)
+		he_field(bool, passthrough)
+	),
+	HE_ASSIGN(
+		__entry->func_id = func_id;
+		__entry->res_a0 = res_a0;
+		__entry->res_a2 = res_a2;
+		__entry->passthrough = passthrough;
+		),
+	HE_PRINTK("[ffa_call] ffa_func=0x%x a0=0x%llx a2=0x%llx no_passthrough=%d",
+		  __entry->func_id, __entry->res_a0, __entry->res_a2, __entry->passthrough)
+);
 #endif

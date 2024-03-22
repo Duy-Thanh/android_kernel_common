@@ -638,6 +638,8 @@ bool kvm_host_ffa_handler(struct kvm_cpu_context *host_ctxt, u32 func_id)
 {
 	struct arm_smccc_res res;
 
+	trace_ffa_call(func_id);
+
 	/*
 	 * There's no way we can tell what a non-standard SMC call might
 	 * be up to. Ideally, we would terminate these here and return
