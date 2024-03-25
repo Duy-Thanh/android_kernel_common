@@ -67,4 +67,8 @@ obj-$(CONFIG_TMR_MANAGER)      += xilinx_tmr_manager.o
 obj-$(CONFIG_TMR_INJECT)	+= xilinx_tmr_inject.o
 obj-$(CONFIG_TPS6594_ESM)	+= tps6594-esm.o
 obj-$(CONFIG_TPS6594_PFSM)	+= tps6594-pfsm.o
+<<<<<<< HEAD   (6d4923 ANDROID: Ensure DIMLIB is available for kernel_virt_* builds)
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
+=======
+obj-$(CONFIG_NSM)		+= nsm.o
+>>>>>>> BRANCH (d1bba1 Merge tag '6.8-rc1-smb3-client-fixes' of git://git.samba.org)
