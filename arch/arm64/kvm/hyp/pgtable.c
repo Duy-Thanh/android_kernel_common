@@ -1084,7 +1084,9 @@ static int stage2_coalesce_walk_table_post(const struct kvm_pgtable_visit_ctx *c
 	 * of the page table page.
 	 */
 	if (mm_ops->page_count(childp) == 1) {
-		stage2_unmap_put_pte(ctx, data->mmu, mm_ops);
+		kvm_clear_pte(ctx->ptep);
+		kvm_tlb_flush_vmid_range(data->mmu, ctx->addr, kvm_granule_size(ctx->level));
+		mm_ops->put_page(ctx->ptep);
 		mm_ops->put_page(childp);
 	}
 
