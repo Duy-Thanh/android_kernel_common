@@ -1052,7 +1052,16 @@ static void complete_signal(int sig, struct task_struct *p, enum pid_type type)
 			signal->flags = SIGNAL_GROUP_EXIT;
 			signal->group_exit_code = sig;
 			signal->group_stop_count = 0;
+<<<<<<< HEAD   (c589e3 FROMGIT: rust: fixup MODVERSIONS series)
 			__for_each_thread(signal, t) {
+||||||| BASE
+			t = p;
+			do {
+=======
+			t = p;
+			do {
+				trace_android_vh_exit_signal(t);
+>>>>>>> CHANGE (1be1cb ANDROID: vendor_hooks: Add hooks for signal)
 				task_clear_jobctl_pending(t, JOBCTL_PENDING_MASK);
 				sigaddset(&t->pending.signal, SIGKILL);
 				signal_wake_up(t, 1);
