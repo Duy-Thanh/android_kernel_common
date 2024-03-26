@@ -22,6 +22,30 @@
       },
       "revId": "be1f2ebc3a6c428613a7f882dc818e39c249bf73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddc64637_57f091bf",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-03-26T13:42:58Z",
+      "side": 1,
+      "message": "Well spotted! Fixed now.",
+      "parentUuid": "4158efa2_0de40a52",
+      "range": {
+        "startLine": 1088,
+        "startChar": 38,
+        "endLine": 1088,
+        "endChar": 47
+      },
+      "revId": "be1f2ebc3a6c428613a7f882dc818e39c249bf73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
