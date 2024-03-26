@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7931069_3c7f5c1c",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-26T14:00:49Z",
+      "side": 1,
+      "message": "pgtable.pgd is kvm_pteref_t` which is `__rcu`.\n\nSo you don\u0027t need obviously here to use `rcu_assign/deref_ptr` but you need to add some annotations.\n\nSomething like `(kvm_pteref_t)get_host_va((__force phys_addr_t)snapshot-\u003epgtable.pgd)`",
+      "revId": "cd10544fb992d8405e3d7650a75dd768aebed390",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
