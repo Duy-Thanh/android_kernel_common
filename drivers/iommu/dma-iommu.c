@@ -29,7 +29,11 @@
 #include <linux/spinlock.h>
 #include <linux/swiotlb.h>
 #include <linux/vmalloc.h>
+<<<<<<< HEAD   (a17899 ANDROID: BUILD.bazel: vm_util needs linux/fs.h header file)
 #include <trace/hooks/iommu.h>
+=======
+#include <trace/events/swiotlb.h>
+>>>>>>> BRANCH (d1bba1 Merge tag '6.8-rc1-smb3-client-fixes' of git://git.samba.org)
 
 #include "dma-iommu.h"
 
@@ -1159,6 +1163,8 @@ static dma_addr_t iommu_dma_map_page(struct device *dev, struct page *page,
 			dev_warn_once(dev, "DMA bounce buffers are inactive, unable to map unaligned transaction.\n");
 			return DMA_MAPPING_ERROR;
 		}
+
+		trace_swiotlb_bounced(dev, phys, size);
 
 		aligned_size = iova_align(iovad, size);
 		phys = swiotlb_tbl_map_single(dev, phys, size, aligned_size,

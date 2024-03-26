@@ -48,7 +48,7 @@ void arch_teardown_dma_ops(struct device *dev)
 #endif
 
 void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
-			const struct iommu_ops *iommu, bool coherent)
+			bool coherent)
 {
 	int cls = cache_line_size_of_cpu();
 
@@ -59,7 +59,11 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
 		   ARCH_DMA_MINALIGN, cls);
 
 	dev->dma_coherent = coherent;
+<<<<<<< HEAD   (a17899 ANDROID: BUILD.bazel: vm_util needs linux/fs.h header file)
 	if (iommu) {
+=======
+	if (device_iommu_mapped(dev))
+>>>>>>> BRANCH (d1bba1 Merge tag '6.8-rc1-smb3-client-fixes' of git://git.samba.org)
 		iommu_setup_dma_ops(dev, dma_base, dma_base + size - 1);
 		trace_android_rvh_iommu_setup_dma_ops(dev, dma_base, dma_base + size - 1);
 	}
