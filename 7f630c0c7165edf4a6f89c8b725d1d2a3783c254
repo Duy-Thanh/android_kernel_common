@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "720d2fd6_95b8cc54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-03-26T07:42:28Z",
+      "side": 1,
+      "message": "Carlos, is this the right way to backport the patch without breaking KMI compatibility?",
+      "revId": "7f630c0c7165edf4a6f89c8b725d1d2a3783c254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
