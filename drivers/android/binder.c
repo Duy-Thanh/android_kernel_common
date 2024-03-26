@@ -73,6 +73,7 @@
 
 #include <linux/cacheflush.h>
 
+#include "binder_genl.h"
 #include "binder_internal.h"
 #include "binder_trace.h"
 #include "binder_pick_impl.h"
@@ -3810,10 +3811,25 @@ static void binder_transaction(struct binder_proc *proc,
 		return_error_line = __LINE__;
 		goto err_copy_data_failed;
 	}
-	if (t->buffer->oneway_spam_suspect)
+	if (t->buffer->oneway_spam_suspect) {
 		tcomplete->type = BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT;
-	else
+		if (binder_report_enabled(context, BINDER_REPORT_SPAM)) {
+			struct binder_report report;
+			strncpy(report.name, context->name, 16);
+			report.err = BR_ONEWAY_SPAM_SUSPECT;
+			report.from_pid = proc->pid;
+			report.from_tid = thread->pid;
+			report.to_pid = target_proc ? target_proc->pid : 0;
+			report.to_tid = target_thread ? target_thread->pid : 0;
+			report.reply = reply;
+			report.flags = tr->flags;
+			report.code = tr->code;
+			report.data_size = tr->data_size;
+			binder_send_report(&report, sizeof(report));
+		}
+	} else {
 		tcomplete->type = BINDER_WORK_TRANSACTION_COMPLETE;
+	}
 	t->work.type = BINDER_WORK_TRANSACTION;
 
 	if (reply) {
@@ -3871,8 +3887,24 @@ static void binder_transaction(struct binder_proc *proc,
 		 * process and is put in a pending queue, waiting for the target
 		 * process to be unfrozen.
 		 */
-		if (return_error == BR_TRANSACTION_PENDING_FROZEN)
+		if (return_error == BR_TRANSACTION_PENDING_FROZEN) {
 			tcomplete->type = BINDER_WORK_TRANSACTION_PENDING;
+			if (binder_report_enabled(context, BINDER_REPORT_DELAYED)) {
+				struct binder_report report;
+				strncpy(report.name, context->name, 16);
+				report.err = return_error;
+				report.from_pid = proc->pid;
+				report.from_tid = thread->pid;
+				report.to_pid = target_proc ? target_proc->pid : 0;
+				report.to_tid = target_thread ? target_thread->pid : 0;
+				report.reply = reply;
+				report.flags = tr->flags;
+				report.code = tr->code;
+				report.data_size = tr->data_size;
+				binder_send_report(&report, sizeof(report));
+			}
+
+		}
 		binder_enqueue_thread_work(thread, tcomplete);
 		if (return_error &&
 		    return_error != BR_TRANSACTION_PENDING_FROZEN)
@@ -3932,6 +3964,21 @@ err_invalid_target_handle:
 	if (target_node) {
 		binder_dec_node(target_node, 1, 0);
 		binder_dec_node_tmpref(target_node);
+	}
+
+	if (binder_report_enabled(context, BINDER_REPORT_FAILED)) {
+		struct binder_report report;
+		strncpy(report.name, context->name, 16);
+		report.err = return_error;
+		report.from_pid = proc->pid;
+		report.from_tid = thread->pid;
+		report.to_pid = target_proc ? target_proc->pid : 0;
+		report.to_tid = target_thread ? target_thread->pid : 0;
+		report.reply = reply;
+		report.flags = tr->flags;
+		report.code = tr->code;
+		report.data_size = tr->data_size;
+		binder_send_report(&report, sizeof(report));
 	}
 
 	binder_debug(BINDER_DEBUG_FAILED_TRANSACTION,
@@ -5590,6 +5637,19 @@ static int binder_ioctl_get_extended_error(struct binder_thread *thread,
 	return 0;
 }
 
+static int binder_ioctl_enable_report(struct binder_proc *proc, u32 flags)
+{
+	struct binder_context *context = proc->context;
+
+	pr_info("Set binder report flags %u for %s\n", flags, context->name);
+
+	mutex_lock(&context->context_mgr_node_lock);
+	context->report_flags = flags;
+	mutex_unlock(&context->context_mgr_node_lock);
+
+	return 0;
+}
+
 static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -5798,6 +5858,17 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		if (ret < 0)
 			goto err;
 		break;
+	case BINDER_ENABLE_REPORT: {
+		u32 flags;
+		if (copy_from_user(&flags, ubuf, sizeof(flags))) {
+			ret = -EFAULT;
+			goto err;
+		}
+		ret = binder_ioctl_enable_report(proc, flags);
+		if (ret)
+			goto err;
+		break;
+	}
 	default:
 		ret = -EINVAL;
 		goto err;
@@ -6845,6 +6916,9 @@ static int __init binder_init(void)
 	binder_driver_initialized = true;
 
 	ret = binder_alloc_shrinker_init();
+	if (ret)
+		return ret;
+	ret = binder_init_genl();
 	if (ret)
 		return ret;
 
