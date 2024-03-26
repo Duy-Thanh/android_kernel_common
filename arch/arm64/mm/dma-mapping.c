@@ -48,7 +48,7 @@ void arch_teardown_dma_ops(struct device *dev)
 #endif
 
 void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
-			const struct iommu_ops *iommu, bool coherent)
+			bool coherent)
 {
 	int cls = cache_line_size_of_cpu();
 
@@ -59,7 +59,11 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
 		   ARCH_DMA_MINALIGN, cls);
 
 	dev->dma_coherent = coherent;
+<<<<<<< HEAD   (461720 Merge e88481f74fee ("Merge tag 'rproc-v6.8' of git://git.ker)
 	if (iommu) {
+=======
+	if (device_iommu_mapped(dev))
+>>>>>>> BRANCH (0b7359 Merge tag 'for_linus' of git://git.kernel.org/pub/scm/linux/)
 		iommu_setup_dma_ops(dev, dma_base, dma_base + size - 1);
 		trace_android_rvh_iommu_setup_dma_ops(dev, dma_base, dma_base + size - 1);
 	}

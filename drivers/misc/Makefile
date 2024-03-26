@@ -67,4 +67,8 @@ obj-$(CONFIG_TMR_MANAGER)      += xilinx_tmr_manager.o
 obj-$(CONFIG_TMR_INJECT)	+= xilinx_tmr_inject.o
 obj-$(CONFIG_TPS6594_ESM)	+= tps6594-esm.o
 obj-$(CONFIG_TPS6594_PFSM)	+= tps6594-pfsm.o
+<<<<<<< HEAD   (461720 Merge e88481f74fee ("Merge tag 'rproc-v6.8' of git://git.ker)
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
+=======
+obj-$(CONFIG_NSM)		+= nsm.o
+>>>>>>> BRANCH (0b7359 Merge tag 'for_linus' of git://git.kernel.org/pub/scm/linux/)
