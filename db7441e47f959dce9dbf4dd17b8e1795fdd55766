@@ -39,6 +39,24 @@
       "message": "You need to update abi_gki_aarch64.stg file as well.",
       "revId": "db7441e47f959dce9dbf4dd17b8e1795fdd55766",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16918323_8c1c63ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-03-26T16:47:54Z",
+      "side": 1,
+      "message": "We updated the instructions to not require this anymore. Instead, the Google team will take care of it.\n\nHaving said that, this particular change does not introduce any new symbols that are not already part of the exposed KMI. Hence, no need to update representation files such as .stg in this case.",
+      "parentUuid": "6db540f0_1c7e9eaa",
+      "revId": "db7441e47f959dce9dbf4dd17b8e1795fdd55766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
