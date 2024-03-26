@@ -317451,10 +317451,25 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9bd79f74
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x310ec01d
+}
+function {
   id: 0x9bd7cd8d
   return_type_id: 0x6720d32f
   parameter_id: 0x165dc292
   parameter_id: 0xf017819f
+}
+function {
+  id: 0x9bd7d84b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x310ec01d
+  parameter_id: 0x11cfee5a
 }
 function {
   id: 0x9bd7dc4e
@@ -331646,6 +331661,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_set_cpus_allowed_by_task"
 }
 elf_symbol {
+  id: 0xaf658447
+  name: "__traceiter_android_rvh_set_cpus_allowed_comm"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe6a1eb79
+  type_id: 0x9bd79f74
+  full_name: "__traceiter_android_rvh_set_cpus_allowed_comm"
+}
+elf_symbol {
   id: 0x15170f28
   name: "__traceiter_android_rvh_set_task_comm"
   is_defined: true
@@ -332436,6 +332460,15 @@ elf_symbol {
   crc: 0x0d3aa91b
   type_id: 0x9bad4369
   full_name: "__traceiter_android_vh_rwsem_write_wait_start"
+}
+elf_symbol {
+  id: 0x237634b3
+  name: "__traceiter_android_vh_sched_setaffinity_early"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4ad64ae4
+  type_id: 0x9bd7d84b
+  full_name: "__traceiter_android_vh_sched_setaffinity_early"
 }
 elf_symbol {
   id: 0xb5ed74f6
@@ -333590,6 +333623,15 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_set_cpus_allowed_by_task"
 }
 elf_symbol {
+  id: 0x93751239
+  name: "__tracepoint_android_rvh_set_cpus_allowed_comm"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb95ba364
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_set_cpus_allowed_comm"
+}
+elf_symbol {
   id: 0xc20f1bba
   name: "__tracepoint_android_rvh_set_task_comm"
   is_defined: true
@@ -334380,6 +334422,15 @@ elf_symbol {
   crc: 0x24663cd4
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_rwsem_write_wait_start"
+}
+elf_symbol {
+  id: 0x40d6a8c5
+  name: "__tracepoint_android_vh_sched_setaffinity_early"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1214f733
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_sched_setaffinity_early"
 }
 elf_symbol {
   id: 0x931fa088
@@ -384164,6 +384215,7 @@ interface {
   symbol_id: 0xe48752ef
   symbol_id: 0x4c24a4be
   symbol_id: 0xbe8d73f2
+  symbol_id: 0xaf658447
   symbol_id: 0x15170f28
   symbol_id: 0xc6a28b4a
   symbol_id: 0x9b0cc890
@@ -384252,6 +384304,7 @@ interface {
   symbol_id: 0x6fe41dd1
   symbol_id: 0x93333e39
   symbol_id: 0x947bd437
+  symbol_id: 0x237634b3
   symbol_id: 0xb5ed74f6
   symbol_id: 0xedb34a44
   symbol_id: 0xb841c45e
@@ -384380,6 +384433,7 @@ interface {
   symbol_id: 0x3bb904a5
   symbol_id: 0xec4d6758
   symbol_id: 0x4bc6b114
+  symbol_id: 0x93751239
   symbol_id: 0xc20f1bba
   symbol_id: 0xc5049f7c
   symbol_id: 0x42fff08e
@@ -384468,6 +384522,7 @@ interface {
   symbol_id: 0x878b3583
   symbol_id: 0x203fab27
   symbol_id: 0xbe3d9b79
+  symbol_id: 0x40d6a8c5
   symbol_id: 0x931fa088
   symbol_id: 0xaaf6a826
   symbol_id: 0xff2bccb8
