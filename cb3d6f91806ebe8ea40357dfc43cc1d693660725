@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858018bc_9a8d4831",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2024-03-26T21:13:40Z",
+      "side": 1,
+      "message": "This seems to be added accidentally, I\u0027m guessing from a faulty conflict resolution. This code was removed in https://android-review.googlesource.com/c/kernel/common/+/3007471 This static function is unused.",
+      "range": {
+        "startLine": 521,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 1
+      },
+      "revId": "cb3d6f91806ebe8ea40357dfc43cc1d693660725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
