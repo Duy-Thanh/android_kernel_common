@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6db540f0_1c7e9eaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-26T15:29:54Z",
+      "side": 1,
+      "message": "You need to update abi_gki_aarch64.stg file as well.",
+      "revId": "db7441e47f959dce9dbf4dd17b8e1795fdd55766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
