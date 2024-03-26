@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4158efa2_0de40a52",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-03-26T08:18:32Z",
+      "side": 1,
+      "message": "Do we need to align this to the granule size as well?",
+      "range": {
+        "startLine": 1088,
+        "startChar": 38,
+        "endLine": 1088,
+        "endChar": 47
+      },
+      "revId": "be1f2ebc3a6c428613a7f882dc818e39c249bf73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
