@@ -298441,6 +298441,11 @@ function {
   parameter_id: 0x3e146274
 }
 function {
+  id: 0x36eaa726
+  return_type_id: 0x33756485
+  parameter_id: 0x1d19a9d5
+}
+function {
   id: 0x36f1d1fd
   return_type_id: 0x0490bb4a
   parameter_id: 0x3e146274
@@ -352222,6 +352227,15 @@ elf_symbol {
   full_name: "get_vaddr_frames"
 }
 elf_symbol {
+  id: 0x4ba4e06f
+  name: "get_wchan"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x505343e4
+  type_id: 0x36eaa726
+  full_name: "get_wchan"
+}
+elf_symbol {
   id: 0xbac82e84
   name: "get_zeroed_page"
   is_defined: true
@@ -386449,6 +386463,7 @@ interface {
   symbol_id: 0x4909936e
   symbol_id: 0x474c6d6a
   symbol_id: 0xce04fca2
+  symbol_id: 0x4ba4e06f
   symbol_id: 0xbac82e84
   symbol_id: 0xa8319a8c
   symbol_id: 0x365c2930
