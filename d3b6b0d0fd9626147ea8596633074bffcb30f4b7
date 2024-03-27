@@ -33,6 +33,24 @@
       "message": "Gentle ping on review for this. I\u0027ll send a follow-up CL to update it to match whatever actually ends up going upstream later.",
       "revId": "d3b6b0d0fd9626147ea8596633074bffcb30f4b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f9962fd_46ee74a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-03-27T22:14:30Z",
+      "side": 1,
+      "message": "I\u0027m not subscribed to the list, but if you CC me (or tell me a different way to respond), I can do that.",
+      "parentUuid": "7cef17d9_53ebbde8",
+      "revId": "d3b6b0d0fd9626147ea8596633074bffcb30f4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
