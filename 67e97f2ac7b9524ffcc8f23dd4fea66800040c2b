@@ -16,6 +16,24 @@
       "message": "I cannot see the presubmit failure, is it legitimate?",
       "revId": "67e97f2ac7b9524ffcc8f23dd4fea66800040c2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02890908_6b1c12c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-27T15:30:13Z",
+      "side": 1,
+      "message": "There were two issues- the first that there were 14 characters in the commit message fixes tag hash, and the other that the kernel ABI has changed. I have removed 2 characters in the commit message, and we will likely need to queue up the change for the next ABI break.",
+      "parentUuid": "4894ac57_6d141588",
+      "revId": "67e97f2ac7b9524ffcc8f23dd4fea66800040c2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
