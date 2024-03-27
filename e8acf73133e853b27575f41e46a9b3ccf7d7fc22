@@ -123,6 +123,24 @@
       "parentUuid": "2c173611_ae639f06",
       "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "877da7c9_6ba4045c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334410
+      },
+      "writtenOn": "2024-03-27T09:05:17Z",
+      "side": 1,
+      "message": "Hi Todd\n\nThis is actually an android-specific issue. This feature is previously merged to android kernel in this patchset：\nhttps://android-review.googlesource.com/c/kernel/common/+/610460 by \nconnoro@google.com.\n\nHowever we found some cpufreq transition is not correctly handled, and fix it. Please re-consider if it can be merged to android15-6.6.\n\nThanks.",
+      "parentUuid": "6ebbcc70_929bc843",
+      "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
