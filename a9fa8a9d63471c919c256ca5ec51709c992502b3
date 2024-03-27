@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d748aca_efe33b00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-27T16:55:07Z",
+      "side": 1,
+      "message": "Why was this rebased? now it is out of sync with the other patches.",
+      "revId": "a9fa8a9d63471c919c256ca5ec51709c992502b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
