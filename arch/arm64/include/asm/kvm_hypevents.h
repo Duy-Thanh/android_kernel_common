@@ -91,4 +91,35 @@ HYP_EVENT(__hyp_printk,
 	HE_PRINTK_UNKNOWN_FMT(hyp_printk_fmt_from_id(__entry->fmt_id),
 		__entry->a, __entry->b, __entry->c, __entry->d)
 );
+
+HYP_EVENT(ffa_call,
+	HE_PROTO(u64 func_id),
+	HE_STRUCT(
+		he_field(u64, func_id)
+	),
+	HE_ASSIGN(
+		__entry->func_id = func_id;
+	),
+	HE_PRINTK("ffa_func=0x%llx",
+		  __entry->func_id)
+);
+
+HYP_EVENT(ffa_call_ret,
+	HE_PROTO(u64 func_id, u64 res_a0, u64 res_a2, bool passthrough),
+	HE_STRUCT(
+		he_field(u64, func_id)
+		he_field(u64, res_a0)
+		he_field(u64, res_a2)
+		he_field(bool, passthrough)
+	),
+	HE_ASSIGN(
+		__entry->func_id = func_id;
+		__entry->res_a0 = res_a0;
+		__entry->res_a2 = res_a2;
+		__entry->passthrough = passthrough;
+		),
+	HE_PRINTK("ffa_func=0x%llx a0=0x%llx a2=0x%llx passthrough=%s",
+		  __entry->func_id, __entry->res_a0, __entry->res_a2,
+		  !__entry->passthrough ? "yes" : "no")
+);
 #endif
