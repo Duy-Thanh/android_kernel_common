@@ -12,6 +12,8 @@
  */
 struct binder_transaction;
 struct task_struct;
+struct binder_ref;
+struct binder_node;
 DECLARE_HOOK(android_vh_binder_transaction_init,
 	TP_PROTO(struct binder_transaction *t),
 	TP_ARGS(t));
@@ -39,6 +41,19 @@ DECLARE_HOOK(android_vh_binder_trans,
 	TP_PROTO(struct binder_proc *target_proc, struct binder_proc *proc,
 		struct binder_thread *thread, struct binder_transaction_data *tr),
 	TP_ARGS(target_proc, proc, thread, tr));
+DECLARE_HOOK(android_vh_binder_find_desc,
+    TP_PROTO(struct binder_proc *proc, struct binder_ref *new_ref,
+        struct binder_node *node, bool *loop),
+    TP_ARGS(proc, new_ref, node, loop));
+DECLARE_HOOK(android_vh_binder_set_desc_bit,
+    TP_PROTO(struct binder_ref *ref),
+    TP_ARGS(ref));
+DECLARE_HOOK(android_vh_binder_alloc_desc_opt_init,
+    TP_PROTO(struct binder_proc *proc),
+    TP_ARGS(proc));
+DECLARE_HOOK(android_vh_binder_free_proc,
+	TP_PROTO(struct binder_proc *proc),
+	TP_ARGS(proc));
 
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */
