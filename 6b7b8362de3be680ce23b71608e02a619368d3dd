@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8cebe30_664de9a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-27T19:54:32Z",
+      "side": 1,
+      "message": "Please rebase this chain. The KMI was just updated and the ABI analysis here is no longer valid.",
+      "revId": "6b7b8362de3be680ce23b71608e02a619368d3dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
