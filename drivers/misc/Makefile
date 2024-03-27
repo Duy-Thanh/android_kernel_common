@@ -67,4 +67,8 @@ obj-$(CONFIG_TMR_MANAGER)      += xilinx_tmr_manager.o
 obj-$(CONFIG_TMR_INJECT)	+= xilinx_tmr_inject.o
 obj-$(CONFIG_TPS6594_ESM)	+= tps6594-esm.o
 obj-$(CONFIG_TPS6594_PFSM)	+= tps6594-pfsm.o
+<<<<<<< HEAD   (849c5e Merge ed6c23b17547 ("Merge tag 'pinctrl-v6.8-1' of git://git)
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
+=======
+obj-$(CONFIG_NSM)		+= nsm.o
+>>>>>>> BRANCH (296455 Merge tag 'char-misc-6.8-rc1' of git://git.kernel.org/pub/sc)
