@@ -141,6 +141,24 @@
       "parentUuid": "6ebbcc70_929bc843",
       "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf27271a_65038239",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-27T21:24:00Z",
+      "side": 1,
+      "message": "You are saying this issue was introduced by an android-specific patch? The please add a \"Fixes:\" tag citing the patch that introduced the issue.",
+      "parentUuid": "877da7c9_6ba4045c",
+      "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
