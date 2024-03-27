@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f2877ce_b3c538a8",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-27T15:40:28Z",
+      "side": 1,
+      "message": "I believe we need to be using spin_lock_irqsave() and the associated unlock throughout since this is being called by __composite_disconnect which disabled the irqs. As is, I think the calls to spin_unlock_irq would re-enable irqs pre-maturely. However there is not a kref_put_lock_irqsave() [1] function, despite there being a refcount_dec_and_lock_irqsave() [2].\n\nGreg, do you have advice on how best to address this?\n\n[1] https://elixir.bootlin.com/linux/latest/source/include/linux/kref.h#L92\n[2] https://elixir.bootlin.com/linux/latest/source/lib/refcount.c#L172",
+      "revId": "c5236727e6308b335405dec30befea18df8e1d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
