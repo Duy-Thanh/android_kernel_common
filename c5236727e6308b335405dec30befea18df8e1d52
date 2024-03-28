@@ -34,6 +34,24 @@
       "parentUuid": "5f2877ce_b3c538a8",
       "revId": "c5236727e6308b335405dec30befea18df8e1d52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbd2c351_adfa9048",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-03-28T09:38:49Z",
+      "side": 1,
+      "message": "I have used `spin_lock_irqsave` and `spin_unlock_irqrestore`. \n\nI have used `refcount_dec_and_lock_irqsave` instead of kref_put.",
+      "parentUuid": "8a4818ad_c3e8cbcd",
+      "revId": "c5236727e6308b335405dec30befea18df8e1d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
