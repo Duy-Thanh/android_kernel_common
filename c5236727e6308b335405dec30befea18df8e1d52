@@ -52,6 +52,24 @@
       "parentUuid": "8a4818ad_c3e8cbcd",
       "revId": "c5236727e6308b335405dec30befea18df8e1d52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9299cb49_c22665c5",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-28T13:34:50Z",
+      "side": 1,
+      "message": "That\u0027s brave, hope this works over time!  😊",
+      "parentUuid": "cbd2c351_adfa9048",
+      "revId": "c5236727e6308b335405dec30befea18df8e1d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
