@@ -51,6 +51,24 @@
       "parentUuid": "7cef17d9_53ebbde8",
       "revId": "d3b6b0d0fd9626147ea8596633074bffcb30f4b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b8e3058_88f3641d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-28T11:28:50Z",
+      "side": 1,
+      "message": "Hmm, you don\u0027t need to do it anymore. Someone else wants to continue working on the patch to introduce separate types for instants and durations and so on, so this isn\u0027t the most recent version anymore. I suspect it will take some time until they reach the final version, and I don\u0027t want to wait for that with this CL. I\u0027ll send a CL to update it once they finish that.\n\nBut for posterity if it becomes necessary another time, you can respond by creating a text file with contents like [this][1] (e.g. [filled out][2]) and send it with the `git send-email` command that you find on the bottom of the lore website.\n\n[1]: https://paste.googleplex.com/6021330209603584\n[2]: https://paste.googleplex.com/5918019401809920",
+      "parentUuid": "7f9962fd_46ee74a5",
+      "revId": "d3b6b0d0fd9626147ea8596633074bffcb30f4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
