@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f74bcf86_298e98aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885546
+      },
+      "writtenOn": "2024-03-28T02:58:54Z",
+      "side": 1,
+      "message": "Tested the kernel images with AD1A.240321.001.A6:\nBasic functionality, 20x reboots, 20 mins Astress, and 60x suspend.",
+      "revId": "8f2f0a3b12b9fab8399806f58e05ceb3758c5656",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
