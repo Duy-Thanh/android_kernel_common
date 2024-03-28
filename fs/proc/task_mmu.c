@@ -343,7 +343,7 @@ done:
 	seq_putc(m, '\n');
 }
 
-static int show_map(struct seq_file *m, void *v)
+int show_map(struct seq_file *m, void *v)
 {
 	show_map_vma(m, v);
 	return 0;

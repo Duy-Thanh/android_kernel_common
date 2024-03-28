@@ -29,6 +29,10 @@ struct seq_file {
 	void *private;
 };
 
+extern int show_map(struct seq_file *m, void *v);
+extern struct seq_file *allocate_seq_file(void);
+extern int free_seq_file(struct seq_file *p);
+
 struct seq_operations {
 	void * (*start) (struct seq_file *m, loff_t *pos);
 	void (*stop) (struct seq_file *m, void *v);

@@ -38,6 +38,22 @@ static void *seq_buf_alloc(unsigned long size)
 	return kvmalloc(size, GFP_KERNEL_ACCOUNT);
 }
 
+struct seq_file *allocate_seq_file(void)
+{
+	struct seq_file *p = kmem_cache_zalloc(seq_file_cache, GFP_KERNEL);
+
+	p->buf = seq_buf_alloc(p->size = PAGE_SIZE);
+
+	return p;
+}
+
+int free_seq_file(struct seq_file *p)
+{
+	kvfree(p->buf);
+	kmem_cache_free(seq_file_cache, p);
+	return 0;
+}
+
 /**
  *	seq_open -	initialize sequential file
  *	@file: file we initialize

@@ -19,6 +19,7 @@
 #include <linux/fadvise.h>
 #include <linux/sched.h>
 #include <linux/sched/mm.h>
+#include <linux/seq_file.h>
 #include <linux/mm_inline.h>
 #include <linux/string.h>
 #include <linux/uio.h>
@@ -1464,6 +1465,13 @@ SYSCALL_DEFINE3(madvise, unsigned long, start, size_t, len_in, int, behavior)
 	return do_madvise(current->mm, start, len_in, behavior);
 }
 
+void print_vma(struct vm_area_struct *vma) {
+	struct seq_file *p = allocate_seq_file();
+	show_map(p, vma);
+	pr_err("pgcompat [madv maps]: %s", p->buf);
+	free_seq_file(p);
+}
+
 SYSCALL_DEFINE5(process_madvise, int, pidfd, const struct iovec __user *, vec,
 		size_t, vlen, int, behavior, unsigned int, flags)
 {
@@ -1517,8 +1525,19 @@ SYSCALL_DEFINE5(process_madvise, int, pidfd, const struct iovec __user *, vec,
 	while (iov_iter_count(&iter)) {
 		unsigned long addr = (unsigned long)iter_iov_addr(&iter);
 		if (__offset_in_page(addr)) {
+			struct vm_area_struct *vma = NULL;
+
 			pr_err("pgcompat [%i (%s)]: %s: addr (0x%08lx) not page aligned",
 			task_pid_nr(task), task->comm, __func__, addr);
+
+			if (mmap_write_lock_killable(mm))
+				return -EINTR;
+
+			vma = find_vma(mm, addr);
+			if (vma)
+				print_vma(vma);
+
+			mmap_write_unlock(mm);
 		}
 		ret = do_madvise(mm, addr,
 					iter_iov_len(&iter), behavior);
