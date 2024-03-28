@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "552a153e_bb92acbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2024-03-28T02:59:37Z",
+      "side": 1,
+      "message": "Hi,Todd Kjos\n\nThese symbols are synchronised with the Android14-5.15  abi_gki_aarch64_amlogic file ，this symbol will be used to our drivers，so we need to update it，please review it， thanks！",
+      "revId": "71f6acb9c2bed427bbfc234509dca42cffd776a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
