@@ -195,6 +195,24 @@
       "parentUuid": "22f640d2_70f3ce10",
       "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee29198e_5361f751",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334410
+      },
+      "writtenOn": "2024-03-29T09:58:41Z",
+      "side": 1,
+      "message": "I\u0027ve added a Fixes tag in commit message. Thanks.",
+      "parentUuid": "0ab8a331_139d149d",
+      "revId": "e8acf73133e853b27575f41e46a9b3ccf7d7fc22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
