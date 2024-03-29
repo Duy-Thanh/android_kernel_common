@@ -106,6 +106,24 @@
       "parentUuid": "45b82f01_97c8d160",
       "revId": "c5236727e6308b335405dec30befea18df8e1d52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a0f58e6_f77e8784",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-03-29T18:11:32Z",
+      "side": 1,
+      "message": "Yeah, we did discuss the fact that this is not engineering best practice, and does cause coupling by accessing the internal structure. Definitely not ideal, but because this driver should only exist on the 15-6.1 and 15-6.6 kernels, I would hope that kref wouldn\u0027t change.\n\nAshish- please add a comment highlighting this for future tracking of this.",
+      "parentUuid": "a27ace2c_ccddb95a",
+      "revId": "c5236727e6308b335405dec30befea18df8e1d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
