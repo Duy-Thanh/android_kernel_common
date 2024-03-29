@@ -16,6 +16,23 @@
       "message": "This is the symbol commit with patch，please review it，thanks!\nhttps://android-review.googlesource.com/c/kernel/common/+/3016802\nhttps://android-review.googlesource.com/c/kernel/common/+/3016803",
       "revId": "ffe55d5bad3906a4cab4fd9405164c7811de33b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "525c6b9a_a901a750",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-29T19:09:13Z",
+      "side": 1,
+      "message": "There is no symbol file change - did you forget to include it?",
+      "revId": "ffe55d5bad3906a4cab4fd9405164c7811de33b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
