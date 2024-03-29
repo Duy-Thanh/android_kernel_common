@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c34284dd_9c2b5691",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-29T18:29:24Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry-pick this from a previous release so the Change-Id is preserved",
+      "revId": "0be7f43e2fc80583ddf7fd807132e28fee83db91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
