@@ -88,6 +88,24 @@
       "parentUuid": "9299cb49_c22665c5",
       "revId": "c5236727e6308b335405dec30befea18df8e1d52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a27ace2c_ccddb95a",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-29T18:01:38Z",
+      "side": 1,
+      "message": "You are \"open coding\" the fact that a kref has an internal refcount structure.  That came back to bite people when the kref changed how it handles reference counts internally in the past, but for now, that\u0027s all you have to use.  Just to let you know...",
+      "parentUuid": "45b82f01_97c8d160",
+      "revId": "c5236727e6308b335405dec30befea18df8e1d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
