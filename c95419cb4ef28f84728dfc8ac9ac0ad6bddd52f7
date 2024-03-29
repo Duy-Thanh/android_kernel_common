@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d7803f1_8722da9e",
+        "filename": "kernel/locking/osq_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-29T04:43:44Z",
+      "side": 1,
+      "message": "These exports seem like they should have separate justification. Could you split them into a separate patch/bug?",
+      "revId": "c95419cb4ef28f84728dfc8ac9ac0ad6bddd52f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
