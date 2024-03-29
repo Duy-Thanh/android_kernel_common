@@ -2137,7 +2137,7 @@ update:
 		if (prot != KVM_PGTABLE_PROT_RWX)
 			page[i].host_state |= PKVM_MODULE_OWNED_PAGE;
 		else
-			page[i].host_state &= ~PKVM_MODULE_OWNED_PAGE;
+			page[i].host_state = PKVM_PAGE_OWNED;
 	}
 
 unlock:
