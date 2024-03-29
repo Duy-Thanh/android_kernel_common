@@ -148,10 +148,12 @@
   __traceiter_android_vh_binder_reply
   __traceiter_android_vh_binder_trans
   __traceiter_android_vh_binder_preset
+  __traceiter_android_vh_binder_wait_for_work
   __traceiter_android_vh_do_send_sig_info
   __tracepoint_android_vh_binder_reply
   __tracepoint_android_vh_binder_trans
   __tracepoint_android_vh_binder_preset
+  __tracepoint_android_vh_binder_wait_for_work
   __tracepoint_android_vh_do_send_sig_info
   __traceiter_android_vh_alter_mutex_list_add
   __traceiter_android_vh_mutex_unlock_slowpath
