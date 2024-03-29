@@ -16,6 +16,24 @@
       "message": "Please fix the checkpatch errors:\n```\nERROR:CODE_INDENT: code indent should use tabs where possible\n#168: FILE: include/trace/hooks/binder.h:54:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#169: FILE: include/trace/hooks/binder.h:55:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#170: FILE: include/trace/hooks/binder.h:56:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#172: FILE: include/trace/hooks/binder.h:58:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#173: FILE: include/trace/hooks/binder.h:59:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#174: FILE: include/trace/hooks/binder.h:60:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#176: FILE: include/trace/hooks/binder.h:62:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#177: FILE: include/trace/hooks/binder.h:63:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#179: FILE: include/trace/hooks/binder.h:65:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#180: FILE: include/trace/hooks/binder.h:66:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#181: FILE: include/trace/hooks/binder.h:67:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#182: FILE: include/trace/hooks/binder.h:68:\n```",
       "revId": "df96b066a47994cf2941c9e8e4695299db5df2c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43bc47b7_7debf69f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-29T02:28:10Z",
+      "side": 1,
+      "message": "thanks~ please help to check~",
+      "parentUuid": "b40073c3_c87201e7",
+      "revId": "df96b066a47994cf2941c9e8e4695299db5df2c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
