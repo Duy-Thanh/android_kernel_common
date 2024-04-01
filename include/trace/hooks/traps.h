@@ -34,6 +34,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_arm64_serror_panic,
 	TP_PROTO(struct pt_regs *regs, unsigned long esr),
 	TP_ARGS(regs, esr), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_stack_chk_fail,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused), 1);
+
 #endif /* _TRACE_HOOK_TRAPS_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

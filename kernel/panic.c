@@ -36,6 +36,7 @@
 #include <linux/sysfs.h>
 #include <linux/context_tracking.h>
 #include <trace/events/error_report.h>
+#include <trace/hooks/traps.h>
 #include <asm/sections.h>
 
 #define PANIC_TIMER_STEP 100
@@ -755,7 +756,9 @@ device_initcall(register_warn_debugfs);
  */
 __visible noinstr void __stack_chk_fail(void)
 {
+
 	instrumentation_begin();
+	trace_android_rvh_stack_chk_fail(NULL);
 	panic("stack-protector: Kernel stack is corrupted in: %pB",
 		__builtin_return_address(0));
 	instrumentation_end();
