@@ -16,6 +16,24 @@
       "message": "Please abandon this patch and cherry-pick this from a previous release so the Change-Id is preserved",
       "revId": "0be7f43e2fc80583ddf7fd807132e28fee83db91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26e5dcb0_2aa8f999",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334410
+      },
+      "writtenOn": "2024-04-01T07:37:08Z",
+      "side": 1,
+      "message": "Hi Todd\nThis commit has been integrated into \nhttps://android-review.googlesource.com/c/kernel/common/+/2935490\nPlease help review. Thanks.",
+      "parentUuid": "c34284dd_9c2b5691",
+      "revId": "0be7f43e2fc80583ddf7fd807132e28fee83db91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
