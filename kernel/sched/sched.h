@@ -3278,4 +3278,14 @@ static inline void update_current_exec_runtime(struct task_struct *curr,
 }
 
 extern bool cpu_busy_with_softirqs(int cpu);
+
+#ifdef CONFIG_RT_SOFTIRQ_AWARE_SCHED
+extern bool cpu_busy_with_softirqs(int cpu);
+#else
+static inline bool cpu_busy_with_softirqs(int cpu)
+{
+	return false;
+}
+#endif /* CONFIG_RT_SOFTIRQ_AWARE_SCHED */
+
 #endif /* _KERNEL_SCHED_SCHED_H */
