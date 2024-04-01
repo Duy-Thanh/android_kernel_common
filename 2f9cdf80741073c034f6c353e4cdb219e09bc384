@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7458f3aa_0ebaeeff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-01T17:40:48Z",
+      "side": 1,
+      "message": "The bug referenced here just covers re-adding the RT_SOFTIRQ_AWARE_SCHED functionality(briefly mentioning the export).\n\nBut this export needs a separate bug with more detail as to why this is needed.",
+      "revId": "2f9cdf80741073c034f6c353e4cdb219e09bc384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
