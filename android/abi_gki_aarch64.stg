@@ -317566,6 +317566,13 @@ function {
   parameter_id: 0x052fac00
 }
 function {
+  id: 0x9b30f926
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x26e55184
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9b326937
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -338649,6 +338656,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_test_clear_look_around_ref"
 }
 elf_symbol {
+  id: 0x40d428a7
+  name: "__traceiter_android_vh_thermal_pm_notify_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8d0ef19f
+  type_id: 0x9b30f926
+  full_name: "__traceiter_android_vh_thermal_pm_notify_suspend"
+}
+elf_symbol {
   id: 0x6befbf23
   name: "__traceiter_android_vh_thermal_power_cap"
   is_defined: true
@@ -342706,6 +342722,15 @@ elf_symbol {
   crc: 0x4ffca4ae
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_test_clear_look_around_ref"
+}
+elf_symbol {
+  id: 0xafd4e4b1
+  name: "__tracepoint_android_vh_thermal_pm_notify_suspend"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8224984a
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_thermal_pm_notify_suspend"
 }
 elf_symbol {
   id: 0x6f25dd05
@@ -400576,6 +400601,7 @@ interface {
   symbol_id: 0x34a01a22
   symbol_id: 0xdd9dd67b
   symbol_id: 0x48f0cf25
+  symbol_id: 0x40d428a7
   symbol_id: 0x6befbf23
   symbol_id: 0x226cc38b
   symbol_id: 0xeecc1529
@@ -401027,6 +401053,7 @@ interface {
   symbol_id: 0x3fe0157c
   symbol_id: 0xe5bf742d
   symbol_id: 0x4ef2c337
+  symbol_id: 0xafd4e4b1
   symbol_id: 0x6f25dd05
   symbol_id: 0xa5c71571
   symbol_id: 0xfa3284c7
