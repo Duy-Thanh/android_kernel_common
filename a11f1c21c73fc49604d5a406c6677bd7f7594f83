@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdecf1f4_120877ad",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-04-02T17:45:32Z",
+      "side": 1,
+      "message": "The indentation here unnecessarily differs from the upstream commit.  This should be fixed to avoid conflicts in the future.",
+      "range": {
+        "startLine": 633,
+        "startChar": 0,
+        "endLine": 635,
+        "endChar": 23
+      },
+      "revId": "a11f1c21c73fc49604d5a406c6677bd7f7594f83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
