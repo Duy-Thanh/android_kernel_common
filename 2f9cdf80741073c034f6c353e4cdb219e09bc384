@@ -34,6 +34,24 @@
       "parentUuid": "7458f3aa_0ebaeeff",
       "revId": "2f9cdf80741073c034f6c353e4cdb219e09bc384",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75dfadcb_f6395069",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-02T21:03:42Z",
+      "side": 1,
+      "message": "\u003e This bug is mainly for the export function. I do not create new bug for re-adding the RT_SOFTIRQ_AWARE_SCHED, just cherrypick the patches from android14-6.1.\n\nOk, well, there is two chunks of functionality here and mixing them together with the same bug makes it more difficult to track. So please open a second bug to track re-adding the SOFTIRQ_AWARE_SCHED separately from adding the new export.\n\n\n\u003e As commit message, we use the task_may_not_preempt() to check whether the cpu is busy with softirqs or not. But now, the task_may_not_preempt() func always\n\u003e return false, it can not provide the softirq info. When we select cpu for rt, we also need to know whether the cpu is busy with softirqs or not.\n\nSo, this just asserts you want the export, and doesn\u0027t specifically explain why it is needed, what benefit it brings, etc. Feel free to add the rationale in the bug if you prefer.",
+      "parentUuid": "733441fd_aa7e1fb8",
+      "revId": "2f9cdf80741073c034f6c353e4cdb219e09bc384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
