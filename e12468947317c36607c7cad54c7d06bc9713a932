@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d73c6f16_6d9b4850",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-02T22:46:53Z",
+      "side": 1,
+      "message": "Last year according to https://b.corp.google.com/issues/294180281#comment6 we accepted this vendor hook as a short term solution with expectations that there will be effort to upstream. Has anything been done to upstream it?",
+      "revId": "e12468947317c36607c7cad54c7d06bc9713a932",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
