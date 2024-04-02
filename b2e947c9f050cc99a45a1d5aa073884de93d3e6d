@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5c3c968_60c26eca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T15:33:45Z",
+      "side": 1,
+      "message": "What do you mean ? We use lazy mapping for page level mappings for the guest stage-2 and we let the host handle the fault for us.\n\nShould we specify `can\u0027t use lazy mapping for blocks` ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdb6f6a7_f008a906",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -49,6 +72,63 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "596bf4c4_871455e3",
+        "filename": "arch/arm64/include/asm/kvm_pgtable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T15:33:45Z",
+      "side": 1,
+      "message": "Q: Should we move the comment from the caller of this function here and also add the `memcache` arg in the description ?",
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9cc9979_c714832c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T15:33:45Z",
+      "side": 1,
+      "message": "Q: I think this deserves a comment. I wonder if there is a way for the `VMM` to control this behavior ?",
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68c2914a_4b35043d",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T15:33:45Z",
+      "side": 1,
+      "message": "This seems to always evaluate to `false` as the caller from `kvm_pgtable_walk` already makes sure to setup the `walk_data` fields aligned.",
+      "range": {
+        "startLine": 902,
+        "startChar": 8,
+        "endLine": 902,
+        "endChar": 24
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff5821ed_089fad58",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 2
@@ -65,6 +145,29 @@
         "startChar": 12,
         "endLine": 906,
         "endChar": 34
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3940fb4b_9d83aeb1",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T15:33:45Z",
+      "side": 1,
+      "message": "We need to pass the `leaf` and the `level +1 ` here to verify if the PTE is counted.",
+      "range": {
+        "startLine": 917,
+        "startChar": 15,
+        "endLine": 917,
+        "endChar": 32
       },
       "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
