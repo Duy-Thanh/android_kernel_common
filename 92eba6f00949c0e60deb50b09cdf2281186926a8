@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b4abc3_a2cc5e5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3242460
+      },
+      "writtenOn": "2024-04-02T06:39:26Z",
+      "side": 1,
+      "message": "Hi @vmartensson@google.com\nI would like to add a vendor hook in cpufreq_offline to be accepted in android14-6.1 which is cherry picked from this patch in android13-5.15:\nhttps://android-review.googlesource.com/c/kernel/common/+/2357403/3\nwould you please help to review this patch?\nThanks",
+      "revId": "92eba6f00949c0e60deb50b09cdf2281186926a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
