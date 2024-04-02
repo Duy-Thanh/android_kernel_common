@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bdb6f6a7_f008a906",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T13:10:18Z",
+      "side": 1,
+      "message": "Typo: `lives` ?",
+      "range": {
+        "startLine": 10,
+        "startChar": 61,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a9d1c4b_f670b154",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T13:10:18Z",
+      "side": 1,
+      "message": "Are we talking about the page-table management code for guest stage-2 ? What do you mean by a \"broken block\" ?",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 14,
+        "endChar": 65
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff5821ed_089fad58",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 2
