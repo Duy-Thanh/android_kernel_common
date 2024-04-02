@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ffb5708_8832abd6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-04-02T10:16:50Z",
+      "side": 1,
+      "message": "implicitly",
+      "range": {
+        "startLine": 10,
+        "startChar": 55,
+        "endLine": 10,
+        "endChar": 66
+      },
+      "revId": "8950c6f0823f541298898209abf7eb02b2c44f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a2aca5e_ba286c75",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2139,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-04-02T10:16:50Z",
+      "side": 1,
+      "message": "The asymmetry with the pristine case bothers me a little here. Can this be \u0027\u003d\u0027 instead? If not, then why is it safe to assign `PKVM_PAGE_OWNED` in the other case?",
+      "range": {
+        "startLine": 2139,
+        "startChar": 22,
+        "endLine": 2139,
+        "endChar": 24
+      },
+      "revId": "8950c6f0823f541298898209abf7eb02b2c44f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
