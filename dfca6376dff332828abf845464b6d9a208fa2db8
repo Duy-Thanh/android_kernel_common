@@ -16,6 +16,24 @@
       "message": "This probably needs gki_defconfig update for RISCV as well?",
       "revId": "dfca6376dff332828abf845464b6d9a208fa2db8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "470c5e67_fa0c49e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2024-04-02T01:53:07Z",
+      "side": 1,
+      "message": "yes, enable for RISCV",
+      "parentUuid": "85f3caa3_67658d72",
+      "revId": "dfca6376dff332828abf845464b6d9a208fa2db8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
