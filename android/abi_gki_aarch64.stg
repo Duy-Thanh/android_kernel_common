@@ -13349,6 +13349,11 @@ pointer_reference {
   pointee_type_id: 0x8d947ae0
 }
 pointer_reference {
+  id: 0x29f905a7
+  kind: POINTER
+  pointee_type_id: 0x8da4f001
+}
+pointer_reference {
   id: 0x29f9c70b
   kind: POINTER
   pointee_type_id: 0x8da7fab2
@@ -282708,6 +282713,10 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x8da4f001
+  name: "scan_balance"
+}
+enumeration {
   id: 0xbcb85241
   name: "scsi_cmnd_submitter"
   definition {
@@ -315848,6 +315857,12 @@ function {
   parameter_id: 0x1d5bae2a
 }
 function {
+  id: 0x9b085e75
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x29f905a7
+}
+function {
   id: 0x9b08a261
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -334208,6 +334223,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_try_to_freeze_todo_unfrozen"
 }
 elf_symbol {
+  id: 0x39155e73
+  name: "__traceiter_android_vh_tune_scan_type"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x24602ed2
+  type_id: 0x9b085e75
+  full_name: "__traceiter_android_vh_tune_scan_type"
+}
+elf_symbol {
   id: 0x3947ecb4
   name: "__traceiter_android_vh_tune_swappiness"
   is_defined: true
@@ -336717,6 +336741,15 @@ elf_symbol {
   crc: 0x3f4fe86c
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_try_to_freeze_todo_unfrozen"
+}
+elf_symbol {
+  id: 0x49b955bd
+  name: "__tracepoint_android_vh_tune_scan_type"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x98207e5d
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_tune_scan_type"
 }
 elf_symbol {
   id: 0xfe6b6962
@@ -387663,6 +387696,7 @@ interface {
   symbol_id: 0xfeff2e7f
   symbol_id: 0x2bc25325
   symbol_id: 0x0119fc41
+  symbol_id: 0x39155e73
   symbol_id: 0x3947ecb4
   symbol_id: 0x861a22ce
   symbol_id: 0xe31bb308
@@ -387942,6 +387976,7 @@ interface {
   symbol_id: 0x69721329
   symbol_id: 0xd9d2bcff
   symbol_id: 0x09ba106b
+  symbol_id: 0x49b955bd
   symbol_id: 0xfe6b6962
   symbol_id: 0xd14c5620
   symbol_id: 0x609a86da
