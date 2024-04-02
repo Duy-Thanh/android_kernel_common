@@ -52,6 +52,24 @@
       "parentUuid": "733441fd_aa7e1fb8",
       "revId": "2f9cdf80741073c034f6c353e4cdb219e09bc384",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecc82a3e_fdc04ec3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-02T23:09:26Z",
+      "side": 1,
+      "message": "\u003e So please open a second bug to track re-adding the SOFTIRQ_AWARE_SCHED separately from adding the new export.\n\nI\u0027ve gone ahead and merged the SOFTIRQ_AWARE_SCHED changes, so no need to generate a new bug here. But in the future please track separate requests with separate bugs.\n\nI do still need to see more rationale for this export before merging this bit.",
+      "parentUuid": "75dfadcb_f6395069",
+      "revId": "2f9cdf80741073c034f6c353e4cdb219e09bc384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
