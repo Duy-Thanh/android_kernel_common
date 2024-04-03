@@ -16,6 +16,29 @@
       "message": "won\u0027t this sleep?  i think we\u0027ll run into another sleeping while atomic issue.",
       "revId": "af64ae5eb2a78f1364cd6f2080429095498f1a4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c02ccaa_bfae2454",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2024-04-03T01:51:40Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 1282,
+        "startChar": 7,
+        "endLine": 1282,
+        "endChar": 20
+      },
+      "revId": "af64ae5eb2a78f1364cd6f2080429095498f1a4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
