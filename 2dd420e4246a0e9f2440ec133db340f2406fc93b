@@ -1,0 +1,48 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000073527040",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3024353?revision\u003d1",
+      "key": {
+        "uuid": "3dd2ac6b_071ca0c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-03T06:39:39Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: huzhanyuan \u003chuzhanyuan@oppo.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "233ed229_09d8ebde",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: huzhanyuan \u003chuzhanyuan@oppo.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2dd420e4246a0e9f2440ec133db340f2406fc93b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
