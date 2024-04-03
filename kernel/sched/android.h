@@ -20,8 +20,3 @@ static inline bool uclamp_boosted(struct task_struct *p)
 {
 	return false;
 }
-
-static inline bool uclamp_latency_sensitive(struct task_struct *p)
-{
-	return false;
-}
