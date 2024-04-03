@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24900f69_b1769c16",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-03T17:12:01Z",
+      "side": 1,
+      "message": "let\u0027s make this obviously an android-only thing.  I can redo this and add it to the series that brings back the original fix.",
+      "range": {
+        "startLine": 51,
+        "startChar": 13,
+        "endLine": 51,
+        "endChar": 22
+      },
+      "revId": "8d4629c6b88e1e06c26de07648ecf066084c7a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
