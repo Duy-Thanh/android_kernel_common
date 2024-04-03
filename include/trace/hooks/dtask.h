@@ -97,6 +97,8 @@ DECLARE_HOOK(android_vh_freeze_whether_wake,
 	TP_PROTO(struct task_struct *t, bool *wake),
 	TP_ARGS(t, wake));
 
+<<<<<<< PATCH SET (b4bca0 Revert "ANDROID: vendor_hook: add hooks to protect locking-t)
+=======
 DECLARE_HOOK(android_vh_record_mutex_lock_starttime,
 	TP_PROTO(u64 lock, unsigned long settime_jiffies),
 	TP_ARGS(lock, settime_jiffies));
@@ -119,6 +121,7 @@ DECLARE_HOOK(android_vh_task_blocks_on_rtmutex,
 DECLARE_HOOK(android_vh_rtmutex_waiter_prio,
 	TP_PROTO(struct task_struct *task, int *waiter_prio),
 	TP_ARGS(task, waiter_prio));
+>>>>>>> BASE      (600e18 Revert "ANDROID: ABI: Update oplus symbol list")
 #endif /* _TRACE_HOOK_DTASK_H */
 
 /* This part must be outside protection */
