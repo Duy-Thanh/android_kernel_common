@@ -1,0 +1,42 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000073531051",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3022653?revision\u003d1",
+      "key": {
+        "uuid": "4924bf05_19bb9b62",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-03T07:27:11Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "ee13be8b_d7e5d049",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "        \"android/abi_gki_aarch64_vivo\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "456d5707d8d329d5562adbcea5539373988fc7a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
