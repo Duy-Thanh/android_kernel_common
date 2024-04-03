@@ -225,6 +225,8 @@
   __traceiter_android_vh_exit_signal_whether_wake
   __traceiter_android_vh_freeze_whether_wake
   __traceiter_android_vh_percpu_rwsem_wq_add
+<<<<<<< PATCH SET (99b1b7 Revert "ANDROID: ABI: Update oplus symbol list")
+=======
   __traceiter_android_vh_record_mutex_lock_starttime
   __traceiter_android_vh_record_pcpu_rwsem_starttime
   __traceiter_android_vh_record_rtmutex_lock_starttime
@@ -233,6 +235,7 @@
   __traceiter_android_vh_rt_mutex_steal
   __traceiter_android_vh_rtmutex_waiter_prio
   __traceiter_android_vh_task_blocks_on_rtmutex
+>>>>>>> BASE      (fba99c ANDROID: GKI: Enable CONFIG_RT_SOFTIRQ_AWARE_SCHED)
   __tracepoint_android_vh_alter_mutex_list_add
   __tracepoint_android_vh_mutex_unlock_slowpath
   __tracepoint_android_vh_mutex_opt_spin_start
@@ -254,6 +257,8 @@
   __tracepoint_android_vh_exit_signal_whether_wake
   __tracepoint_android_vh_freeze_whether_wake
   __tracepoint_android_vh_percpu_rwsem_wq_add
+<<<<<<< PATCH SET (99b1b7 Revert "ANDROID: ABI: Update oplus symbol list")
+=======
   __tracepoint_android_vh_record_mutex_lock_starttime
   __tracepoint_android_vh_record_pcpu_rwsem_starttime
   __tracepoint_android_vh_record_rtmutex_lock_starttime
@@ -262,4 +267,5 @@
   __tracepoint_android_vh_rt_mutex_steal
   __tracepoint_android_vh_rtmutex_waiter_prio
   __tracepoint_android_vh_task_blocks_on_rtmutex
+>>>>>>> BASE      (fba99c ANDROID: GKI: Enable CONFIG_RT_SOFTIRQ_AWARE_SCHED)
   wq_worker_comm
