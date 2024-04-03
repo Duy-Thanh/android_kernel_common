@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b3b03fa_4f6dd453",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-03T02:40:05Z",
+      "side": 1,
+      "message": "This change needed to be reverted because the cherry-pick of the old change incorrectly added this function (which was removed upstream), which then caused build issues in the !CONFIG_RT_SOFTIRQ_AWARE_SCHED case.\n\nOnce the revert lands I\u0027ll be re-submitting this change without this chunk.",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 42
+      },
+      "revId": "6d86e2f02d6d69b1b3a022d8106d5051ebe7c47b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
