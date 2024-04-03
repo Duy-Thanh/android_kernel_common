@@ -16,6 +16,24 @@
       "message": "Last year according to https://b.corp.google.com/issues/294180281#comment6 we accepted this vendor hook as a short term solution with expectations that there will be effort to upstream. Has anything been done to upstream it?",
       "revId": "e12468947317c36607c7cad54c7d06bc9713a932",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9091901b_cfc418b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024815
+      },
+      "writtenOn": "2024-04-03T03:19:49Z",
+      "side": 1,
+      "message": "\u003e Last year according to https://b.corp.google.com/issues/294180281#comment6 we accepted this vendor hook as a short term solution with expectations that there will be effort to upstream. Has anything been done to upstream it?\n\n\u003d\u003d\u003d\u003d\u003e\u003e\nthis vendor hook\u0027s owner is not ours. is vivo, we do not have permission to view  https://b.corp.google.com/issues/294180281#comment6. So we do not know that upstreaming process.\n\nbut in our feture we want to reuse this vendor hook, we want to tune the scan_balance base on different scene.",
+      "parentUuid": "d73c6f16_6d9b4850",
+      "revId": "e12468947317c36607c7cad54c7d06bc9713a932",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
