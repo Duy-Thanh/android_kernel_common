@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eecfba48_877c74e1",
+        "filename": "drivers/usb/gadget/function/android_f_accessory.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1264,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-04-03T17:48:06Z",
+      "side": 1,
+      "message": "@kumarashishg@google.com, as discussed, please rework this function and submit as a separate CL (but add to this topic) as this change has already been merged into a15-6.6",
+      "parentUuid": "40f46bb3_cd0ba472",
+      "revId": "af64ae5eb2a78f1364cd6f2080429095498f1a4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c02ccaa_bfae2454",
         "filename": "drivers/usb/gadget/function/android_f_accessory.c",
         "patchSetId": 11
