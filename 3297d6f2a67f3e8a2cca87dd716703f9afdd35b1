@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46feea47_d9778daa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1301696
+      },
+      "writtenOn": "2024-04-03T02:24:59Z",
+      "side": 1,
+      "message": "checkpatch bot:\n```ERROR:GERRIT_CHANGE_ID: Remove Gerrit Change-Id\u0027s before submitting upstream```\n\n@tkjos@google.com should I remove the CHANGE_ID ?",
+      "revId": "3297d6f2a67f3e8a2cca87dd716703f9afdd35b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
