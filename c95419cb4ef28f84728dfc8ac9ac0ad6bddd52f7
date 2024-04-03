@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fa85ad1_653f743b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-03T04:43:17Z",
+      "side": 1,
+      "message": "Also, could you submit a follow on patch adding the new symbols to your KABI symbol file?",
+      "revId": "c95419cb4ef28f84728dfc8ac9ac0ad6bddd52f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d7803f1_8722da9e",
