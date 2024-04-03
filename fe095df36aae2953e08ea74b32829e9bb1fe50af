@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87ded275_e5148d1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2024-04-03T11:11:12Z",
+      "side": 1,
+      "message": "hi，tkjos\n\nI need use is_dma_buf_file function on Android15-6.6，so find the patch and cherry-pick form Android14-5.15. please view it, thanks!\n\ncherry-pick from：https://android-review.googlesource.com/c/kernel/common/+/1878288",
+      "revId": "fe095df36aae2953e08ea74b32829e9bb1fe50af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
