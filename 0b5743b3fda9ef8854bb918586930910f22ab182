@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c7bc4b_8a2a6338",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-04-04T17:38:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "715c5e1b_83611ece",
+      "range": {
+        "startLine": 33,
+        "startChar": 9,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "0b5743b3fda9ef8854bb918586930910f22ab182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fae36a1c_946401d2",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I am afraid that is not practical.",
       "parentUuid": "fae36a1c_946401d2",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 69
+      },
+      "revId": "0b5743b3fda9ef8854bb918586930910f22ab182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61ef2dc0_1d42158d",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-04-04T17:38:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d197951e_7f1d6cd8",
       "range": {
         "startLine": 131,
         "startChar": 0,
