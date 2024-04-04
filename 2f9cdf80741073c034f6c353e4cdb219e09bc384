@@ -70,6 +70,24 @@
       "parentUuid": "75dfadcb_f6395069",
       "revId": "2f9cdf80741073c034f6c353e4cdb219e09bc384",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa9b37b4_c247ef3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-04T23:47:05Z",
+      "side": 1,
+      "message": "Added the rationale myself from discussion in the bug",
+      "parentUuid": "ecc82a3e_fdc04ec3",
+      "revId": "2f9cdf80741073c034f6c353e4cdb219e09bc384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
