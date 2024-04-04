@@ -321,6 +321,8 @@ extern unsigned int kobjsize(const void *objp);
 #define VM_NR_EVICTED_BIT1	(_AC(1,ULL) << 61)	/* Bit1 of Pages evicted from end of VMA */
 #define VM_NR_EVICTED_BIT2	(_AC(1,ULL) << 62)	/* Bit2 of Pages evicted from end of VMA */
 
+#define VM_NR_EVICTED_FLAGS (VM_NR_EVICTED_BIT2|VM_NR_EVICTED_BIT1)
+
 #ifdef CONFIG_ARCH_USES_HIGH_VMA_FLAGS
 #define VM_HIGH_ARCH_BIT_0	32	/* bit only usable on 64-bit architectures */
 #define VM_HIGH_ARCH_BIT_1	33	/* bit only usable on 64-bit architectures */

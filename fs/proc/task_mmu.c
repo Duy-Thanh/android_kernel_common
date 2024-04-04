@@ -10,6 +10,7 @@
 #include <linux/ptrace.h>
 #include <linux/slab.h>
 #include <linux/pagemap.h>
+#include <linux/page_size_migration.h>
 #include <linux/mempolicy.h>
 #include <linux/rmap.h>
 #include <linux/swap.h>
@@ -268,6 +269,8 @@ static void show_vma_header_prefix(struct seq_file *m,
 	seq_putc(m, ' ');
 }
 
+static struct vm_area_struct pad_vma;
+
 static void
 show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 {
@@ -279,6 +282,7 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 	unsigned long start, end;
 	dev_t dev = 0;
 	const char *name = NULL;
+	unsigned long nr_evicted = vm_flags_get_nr_pages_evicted(vma);
 
 	if (file) {
 		struct inode *inode = file_inode(vma->vm_file);
@@ -288,7 +292,7 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 	}
 
 	start = vma->vm_start;
-	end = vma->vm_end;
+	end = vma->vm_end - (nr_evicted << PAGE_SHIFT);
 	show_vma_header_prefix(m, start, end, flags, pgoff, dev, ino);
 
 	/*
@@ -298,6 +302,11 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 	if (file) {
 		seq_pad(m, ' ');
 		seq_file_path(m, file, "\n");
+		goto done;
+	}
+
+	if (vma == &pad_vma) {
+		name = "[page_size_compat]";
 		goto done;
 	}
 
@@ -340,6 +349,13 @@ done:
 		seq_puts(m, name);
 	}
 	seq_putc(m, '\n');
+	if (vma->vm_flags & VM_NR_EVICTED_FLAGS) {
+		pad_vma = *vma;
+		pad_vma.vm_flags = vma->vm_flags & ~(VM_NR_EVICTED_FLAGS|VM_READ|VM_WRITE|VM_EXEC);
+		pad_vma.vm_file = NULL;
+		pad_vma.vm_start = vma->vm_end - (nr_evicted << PAGE_SHIFT);
+		show_map_vma(m, &pad_vma);
+	}
 }
 
 static int show_map(struct seq_file *m, void *v)
