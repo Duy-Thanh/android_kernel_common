@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "4be2acf850ae79a9eb4377a518d0e7db8ae83f7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000073634358",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3026025?revision\u003d2",
+      "key": {
+        "uuid": "877ccc2c_37218cbe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-04T03:04:29Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "4be2acf850ae79a9eb4377a518d0e7db8ae83f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
