@@ -51,6 +51,24 @@
       "parentUuid": "6d7803f1_8722da9e",
       "revId": "c95419cb4ef28f84728dfc8ac9ac0ad6bddd52f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd2da304_34d14420",
+        "filename": "kernel/locking/osq_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-04T02:51:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a9dba192_f6e6465c",
+      "revId": "c95419cb4ef28f84728dfc8ac9ac0ad6bddd52f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
