@@ -113,6 +113,7 @@ enum {
 	BINDER_DEBUG_INTERNAL_REFS          = 1U << 12,
 	BINDER_DEBUG_PRIORITY_CAP           = 1U << 13,
 	BINDER_DEBUG_SPINLOCKS              = 1U << 14,
+	BINDER_DEBUG_FREEZE_NOTIFICATION    = 1U << 15,
 };
 static uint32_t binder_debug_mask = BINDER_DEBUG_USER_ERROR |
 	BINDER_DEBUG_FAILED_TRANSACTION | BINDER_DEBUG_DEAD_TRANSACTION;
@@ -4472,6 +4473,190 @@ static int binder_thread_write(struct binder_proc *proc,
 			binder_inner_proc_unlock(proc);
 		} break;
 
+		case BC_REQUEST_FREEZE_NOTIFICATION:
+		case BC_CLEAR_FREEZE_NOTIFICATION: {
+			uint32_t target;
+			binder_uintptr_t cookie;
+			struct binder_ref *ref;
+			struct binder_ref_freeze *freeze = NULL;
+
+			if (get_user(target, (uint32_t __user *)ptr))
+				return -EFAULT;
+			ptr += sizeof(uint32_t);
+			if (get_user(cookie, (binder_uintptr_t __user *)ptr))
+				return -EFAULT;
+			ptr += sizeof(binder_uintptr_t);
+			if (cmd == BC_REQUEST_FREEZE_NOTIFICATION) {
+				/*
+				 * Allocate memory for freeze notification
+				 * before taking lock
+				 */
+				freeze = kzalloc(sizeof(*freeze), GFP_KERNEL);
+				if (freeze == NULL) {
+					WARN_ON(thread->return_error.cmd !=
+						BR_OK);
+					thread->return_error.cmd = BR_ERROR;
+					binder_enqueue_thread_work(
+						thread,
+						&thread->return_error.work);
+					binder_debug(
+						BINDER_DEBUG_FAILED_TRANSACTION,
+						"%d:%d BC_REQUEST_FREEZE_NOTIFICATION failed\n",
+						proc->pid, thread->pid);
+					break;
+				}
+				freeze->notification_sent = false;
+				freeze->should_send_notification_again = false;
+			}
+			binder_proc_lock(proc);
+			ref = binder_get_ref_olocked(proc, target, false);
+			if (ref == NULL) {
+				binder_user_error("%d:%d %s invalid ref %d\n",
+					proc->pid, thread->pid,
+					cmd == BC_REQUEST_FREEZE_NOTIFICATION ?
+					"BC_REQUEST_FREEZE_NOTIFICATION" :
+					"BC_CLEAR_FREEZE_NOTIFICATION",
+					target);
+				binder_proc_unlock(proc);
+				kfree(freeze);
+				break;
+			}
+
+			binder_debug(BINDER_DEBUG_FREEZE_NOTIFICATION,
+				     "%d:%d %s %016llx ref %d desc %d s %d w %d for node %d\n",
+				     proc->pid, thread->pid,
+				     cmd == BC_REQUEST_FREEZE_NOTIFICATION ?
+				     "BC_REQUEST_FREEZE_NOTIFICATION" :
+				     "BC_CLEAR_FREEZE_NOTIFICATION",
+				     (u64)cookie, ref->data.debug_id,
+				     ref->data.desc, ref->data.strong,
+				     ref->data.weak, ref->node->debug_id);
+
+			binder_node_lock(ref->node);
+			if (cmd == BC_REQUEST_FREEZE_NOTIFICATION) {
+				if (ref->freeze) {
+					binder_user_error("%d:%d BC_REQUEST_FREEZE_NOTIFICATION freeze notification already set\n",
+						proc->pid, thread->pid);
+					binder_node_unlock(ref->node);
+					binder_proc_unlock(proc);
+					kfree(freeze);
+					break;
+				}
+				binder_stats_created(BINDER_STAT_FREEZE);
+				INIT_LIST_HEAD(&freeze->work.entry);
+				freeze->cookie = cookie;
+				ref->freeze = freeze;
+				if (ref->node->proc == NULL) {
+					// TODO handle the case where the target process is already dead.
+				} else {
+					ref->freeze->work.type =
+							ref->node->proc->is_frozen ? BINDER_WORK_FROZEN_BINDER : BINDER_WORK_UNFROZEN_BINDER;
+					binder_inner_proc_lock(proc);
+					binder_enqueue_work_ilocked(
+						&ref->freeze->work, &proc->todo);
+					binder_wakeup_proc_ilocked(proc);
+					binder_inner_proc_unlock(proc);
+				}
+			} else {
+				if (ref->freeze == NULL) {
+					binder_user_error("%d:%d BC_CLEAR_FREEZE_NOTIFICATION freeze notification not active\n",
+						proc->pid, thread->pid);
+					binder_node_unlock(ref->node);
+					binder_proc_unlock(proc);
+					break;
+				}
+				freeze = ref->freeze;
+				if (freeze->cookie != cookie) {
+					binder_user_error("%d:%d BC_CLEAR_FREEZE_NOTIFICATION freeze notification cookie mismatch %016llx != %016llx\n",
+						proc->pid, thread->pid,
+						(u64)freeze->cookie,
+						(u64)cookie);
+					binder_node_unlock(ref->node);
+					binder_proc_unlock(proc);
+					break;
+				}
+				ref->freeze = NULL;
+				binder_inner_proc_lock(proc);
+				if (list_empty(&freeze->work.entry)) {
+					freeze->work.type = BINDER_WORK_CLEAR_FREEZE_NOTIFICATION;
+					if (thread->looper &
+					    (BINDER_LOOPER_STATE_REGISTERED |
+					     BINDER_LOOPER_STATE_ENTERED))
+						binder_enqueue_thread_work_ilocked(
+								thread,
+								&freeze->work);
+					else {
+						binder_enqueue_work_ilocked(
+								&freeze->work,
+								&proc->todo);
+						binder_wakeup_proc_ilocked(
+								proc);
+					}
+				} else {
+					BUG_ON(freeze->work.type != BINDER_WORK_FROZEN_BINDER &&
+								 freeze->work.type != BINDER_WORK_UNFROZEN_BINDER);
+					freeze->work.type = BINDER_WORK_CLEAR_DEATH_NOTIFICATION;
+					if (freeze->notification_sent) {
+						freeze->should_send_notification_again = true;
+					}
+				}
+				binder_inner_proc_unlock(proc);
+			}
+			binder_node_unlock(ref->node);
+			binder_proc_unlock(proc);
+		} break;
+
+		case BC_FREEZE_NOTIFICATION_DONE: {
+			struct binder_work *w;
+			binder_uintptr_t cookie;
+			struct binder_ref_freeze *freeze = NULL;
+
+			if (get_user(cookie, (binder_uintptr_t __user *)ptr))
+				return -EFAULT;
+
+			ptr += sizeof(cookie);
+			binder_inner_proc_lock(proc);
+			list_for_each_entry(w, &proc->delivered_freeze,
+					    entry) {
+				struct binder_ref_freeze *tmp_freeze =
+					container_of(w,
+						     struct binder_ref_freeze,
+						     work);
+
+				if (tmp_freeze->cookie == cookie) {
+					freeze = tmp_freeze;
+					break;
+				}
+			}
+			binder_debug(BINDER_DEBUG_FREEZE_NOTIFICATION,
+				     "%d:%d BC_FREEZE_NOTIFICATION_DONE %016llx found %pK\n",
+				     proc->pid, thread->pid, (u64)cookie,
+				     freeze);
+			if (freeze == NULL) {
+				binder_user_error("%d:%d BC_FREEZE_NOTIFICATION_DONE %016llx not found\n",
+					proc->pid, thread->pid, (u64)cookie);
+				binder_inner_proc_unlock(proc);
+				break;
+			}
+			binder_dequeue_work_ilocked(&freeze->work);
+			if (freeze->should_send_notification_again) {
+				freeze->should_send_notification_again = false;
+				freeze->notification_sent = false;
+				if (thread->looper &
+					(BINDER_LOOPER_STATE_REGISTERED |
+					 BINDER_LOOPER_STATE_ENTERED))
+					binder_enqueue_thread_work_ilocked(
+						thread, &freeze->work);
+				else {
+					binder_enqueue_work_ilocked(
+							&freeze->work,
+							&proc->todo);
+					binder_wakeup_proc_ilocked(proc);
+				}
+			}
+			binder_inner_proc_unlock(proc);
+		} break;
+
 		default:
 			pr_err("%d:%d unknown command %u\n",
 			       proc->pid, thread->pid, cmd);
@@ -4873,6 +5058,52 @@ skip:
 			if (cmd == BR_DEAD_BINDER)
 				goto done; /* DEAD_BINDER notifications can cause transactions */
 		} break;
+
+		case BINDER_WORK_FROZEN_BINDER:
+		case BINDER_WORK_UNFROZEN_BINDER:
+		case BINDER_WORK_CLEAR_FREEZE_NOTIFICATION: {
+			struct binder_ref_freeze *freeze;
+			uint32_t cmd;
+			binder_uintptr_t cookie;
+
+			freeze = container_of(w, struct binder_ref_freeze, work);
+			if (w->type == BINDER_WORK_CLEAR_FREEZE_NOTIFICATION)
+				cmd = BR_CLEAR_FREEZE_NOTIFICATION_DONE;
+			else if (w->type == BINDER_WORK_FROZEN_BINDER)
+				cmd = BR_FROZEN_BINDER;
+			else
+				cmd = BR_UNFROZEN_BINDER;
+			cookie = freeze->cookie;
+
+			binder_debug(BINDER_DEBUG_FREEZE_NOTIFICATION,
+				     "%d:%d %s %016llx\n",
+				      proc->pid, thread->pid,
+				      cmd == BR_FROZEN_BINDER ? "BR_FROZEN_BINDER"
+							: (cmd == BR_UNFROZEN_BINDER ? "BR_UNFROZEN_BINDER" :
+								 "BR_CLEAR_FREEZE_NOTIFICATION_DONE"),
+				      (u64)cookie);
+			if (w->type == BINDER_WORK_CLEAR_FREEZE_NOTIFICATION) {
+				binder_inner_proc_unlock(proc);
+				kfree(freeze);
+				binder_stats_deleted(BINDER_STAT_FREEZE);
+			} else {
+				freeze->notification_sent = true;
+				binder_enqueue_work_ilocked(
+						w, &proc->delivered_freeze);
+				binder_inner_proc_unlock(proc);
+			}
+			if (put_user(cmd, (uint32_t __user *)ptr))
+				return -EFAULT;
+			ptr += sizeof(uint32_t);
+			if (put_user(cookie,
+				     (binder_uintptr_t __user *)ptr))
+				return -EFAULT;
+			ptr += sizeof(binder_uintptr_t);
+			binder_stat_br(proc, thread, cmd);
+			if (cmd == BR_FROZEN_BINDER || cmd == BR_UNFROZEN_BINDER)
+				goto done; /* BR_FROZEN_BINDER and BR_UNFROZEN_BINDER notifications can cause transactions */
+		} break;
+
 		default:
 			binder_inner_proc_unlock(proc);
 			pr_err("%d:%d: bad work type %d\n",
@@ -5492,6 +5723,47 @@ static bool binder_txns_pending_ilocked(struct binder_proc *proc)
 	return false;
 }
 
+static void binder_add_freeze_work_ilocked(struct binder_proc *proc, bool is_frozen)
+{
+	int freeze_notifications = 0;
+	struct rb_node *n;
+	struct binder_ref *ref;
+	enum binder_work_type wtype;
+	while ((n = rb_first(&proc->nodes))) {
+		struct binder_node *node;
+		node = rb_entry(n, struct binder_node, rb_node);
+		hlist_for_each_entry(ref, &node->refs, node_entry) {
+			/*
+			 * Need the node lock to synchronize
+			 * with new notification requests and the
+			 * inner lock to synchronize with queued
+			 * freeze notifications.
+			 */
+			// FIXME. check lock order
+			binder_inner_proc_lock(ref->proc);
+			if (!ref->freeze) {
+				binder_inner_proc_unlock(ref->proc);
+				continue;
+			}
+			freeze_notifications++;
+			wtype = is_frozen ? BINDER_WORK_FROZEN_BINDER : BINDER_WORK_UNFROZEN_BINDER;
+			if (list_empty(&ref->freeze->work.entry)) {
+				ref->freeze->work.type = wtype;
+				binder_enqueue_work_ilocked(&ref->freeze->work,
+									&ref->proc->todo);
+				binder_wakeup_proc_ilocked(ref->proc);
+			} else {
+				BUG_ON(ref->freeze->work.type == BINDER_WORK_CLEAR_FREEZE_NOTIFICATION);
+				if (ref->freeze->notification_sent && ref->freeze->work.type != wtype) {
+					ref->freeze->should_send_notification_again = true;
+				}
+				ref->freeze->work.type = wtype;
+			}
+			binder_inner_proc_unlock(ref->proc);
+		}
+	}
+}
+
 static int binder_ioctl_freeze(struct binder_freeze_info *info,
 			       struct binder_proc *target_proc)
 {
@@ -5502,6 +5774,7 @@ static int binder_ioctl_freeze(struct binder_freeze_info *info,
 		target_proc->sync_recv = false;
 		target_proc->async_recv = false;
 		target_proc->is_frozen = false;
+		binder_add_freeze_work_ilocked(target_proc, false);
 		binder_inner_proc_unlock(target_proc);
 		return 0;
 	}
@@ -5515,6 +5788,7 @@ static int binder_ioctl_freeze(struct binder_freeze_info *info,
 	target_proc->sync_recv = false;
 	target_proc->async_recv = false;
 	target_proc->is_frozen = true;
+	binder_add_freeze_work_ilocked(target_proc, true);
 	binder_inner_proc_unlock(target_proc);
 
 	if (info->timeout_ms > 0)
