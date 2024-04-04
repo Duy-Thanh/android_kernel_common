@@ -22,6 +22,30 @@
       },
       "revId": "8d4629c6b88e1e06c26de07648ecf066084c7a36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3443a8e0_11292c41",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-04-04T10:20:54Z",
+      "side": 1,
+      "message": "Yes, it\u0027s Android-only. If we end up depending on `struct dwc3` in the ABI following your changes, I\u0027ll be happy!",
+      "parentUuid": "24900f69_b1769c16",
+      "range": {
+        "startLine": 51,
+        "startChar": 13,
+        "endLine": 51,
+        "endChar": 22
+      },
+      "revId": "8d4629c6b88e1e06c26de07648ecf066084c7a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
