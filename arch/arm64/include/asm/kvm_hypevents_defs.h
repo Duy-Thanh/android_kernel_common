@@ -25,7 +25,7 @@ struct hyp_entry_hdr {
 
 struct hyp_printk_fmt {
 	/* __MUST__ be the first element */
-	const char	fmt[63];
+	const char	fmt[64];
 };
 
 /*
