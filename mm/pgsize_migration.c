@@ -177,5 +177,52 @@ void madvise_vma_pad_pages(struct vm_area_struct *vma,
 
 	vma_set_pad_pages(vma, nr_pad_pages);
 }
+
+static DEFINE_PER_CPU(struct vm_area_struct, pad_vma);
+
+static const char *pad_name = "[page size compat]";
+
+/*
+ * Returns pad_name if @vma is a padding VMA, else NULL.
+ */
+const char *vma_pad_name(struct vm_area_struct *vma)
+{
+	struct vm_area_struct *pad = this_cpu_ptr(&pad_vma);
+
+	if (!is_pgsize_migration_enabled() || vma != pad)
+		return NULL;
+
+	return pad_name;
+}
+
+/*
+ * Recursively calls show_map_vma() to output an entry for a padding VMA.
+ */
+void show_map_vma_pad(struct vm_area_struct *vma,
+				    show_map_vma_fn func,
+				    struct seq_file *m)
+{
+	struct vm_area_struct *pad = this_cpu_ptr(&pad_vma);
+
+	if (!is_pgsize_migration_enabled())
+		return;
+
+	if (!(vma->vm_flags & VM_PAD_MASK))
+		return;
+
+	*pad = *vma;
+
+	/* Avoid infinite recursion */
+	pad->vm_flags = vma->vm_flags & ~VM_PAD_MASK;
+
+	/* Make the pad vma PROT_NONE */
+	pad->vm_flags = pad->vm_flags & ~(VM_READ|VM_WRITE|VM_EXEC);
+	pad->vm_file = NULL;
+
+	/* Adjust the start to begin at the start of the padding section */
+	pad->vm_start = vma->vm_end - (vma_pad_pages(vma) << PAGE_SHIFT);
+	func(m, pad);
+}
+
 #endif /* PAGE_SIZE == SZ_4K */
 #endif /* CONFIG_64BIT */

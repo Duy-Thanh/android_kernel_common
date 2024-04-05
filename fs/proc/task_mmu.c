@@ -10,6 +10,7 @@
 #include <linux/ptrace.h>
 #include <linux/slab.h>
 #include <linux/pagemap.h>
+#include <linux/pgsize_migration.h>
 #include <linux/mempolicy.h>
 #include <linux/rmap.h>
 #include <linux/swap.h>
@@ -288,7 +289,7 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 	}
 
 	start = vma->vm_start;
-	end = vma->vm_end;
+	end = vma->vm_end - (vma_pad_pages(vma) << PAGE_SHIFT);
 	show_vma_header_prefix(m, start, end, flags, pgoff, dev, ino);
 
 	/*
@@ -300,6 +301,10 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 		seq_file_path(m, file, "\n");
 		goto done;
 	}
+
+	name = vma_pad_name(vma);
+	if (name)
+		goto done;
 
 	if (vma->vm_ops && vma->vm_ops->name) {
 		name = vma->vm_ops->name(vma);
@@ -340,6 +345,8 @@ done:
 		seq_puts(m, name);
 	}
 	seq_putc(m, '\n');
+
+	show_map_vma_pad(vma, show_map_vma, m);
 }
 
 static int show_map(struct seq_file *m, void *v)
