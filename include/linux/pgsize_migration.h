@@ -16,6 +16,7 @@
  */
 
 #include <linux/mm.h>
+#include <linux/seq_file.h>
 #include <linux/sizes.h>
 
 /*
@@ -43,6 +44,8 @@
 #define VM_PAD_BITS		(VM_PAD_16KB_BIT2|VM_PAD_16KB_BIT1|VM_PAD_4KB_BIT2|VM_PAD_4KB_BIT1)
 #define VM_TOTAL_PAD_PAGES 	15
 
+typedef void (*show_map_vma_fn)(struct seq_file *m, struct vm_area_struct *vma);
+
 #if PAGE_SIZE == SZ_4K
 extern void vma_set_pad_pages(struct vm_area_struct *vma,
 			      unsigned long nr_pages);
@@ -51,6 +54,12 @@ extern unsigned long vma_pad_pages(struct vm_area_struct *vma);
 
 extern void madvise_vma_pad_pages(struct vm_area_struct *vma,
 				  unsigned long start, unsigned long end);
+
+extern  void show_map_vma_pad(struct vm_area_struct *vma,
+				    show_map_vma_fn func,
+				    struct seq_file *m);
+
+extern const char *vma_pad_name(struct vm_area_struct *vma);
 #else /* PAGE_SIZE != SZ_4K */
 static inline void vma_set_pad_pages(struct vm_area_struct *vma,
 				     unsigned long nr_pages)
@@ -64,6 +73,17 @@ static inline unsigned long vma_pad_pages(struct vm_area_struct *vma)
 static inline void madvise_vma_pad_pages(struct vm_area_struct *vma,
 					 unsigned long start, unsigned long end)
 {
+}
+
+static inline void show_map_vma_pad(struct vm_area_struct *vma,
+				    show_map_vma_fn func,
+				    struct seq_file *m)
+{
+}
+
+static inline const char *vma_pad_name(struct vm_area_struct *vma)
+{
+	return NULL;
 }
 #endif /* PAGE_SIZE == SZ_4K */
 
