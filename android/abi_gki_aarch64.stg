@@ -361086,6 +361086,15 @@ elf_symbol {
   full_name: "kvfree_call_rcu"
 }
 elf_symbol {
+  id: 0xa91d5234
+  name: "kvfree_sensitive"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7412ed5b
+  type_id: 0x1d0f4148
+  full_name: "kvfree_sensitive"
+}
+elf_symbol {
   id: 0xc9a0daac
   name: "kvm_arch_ptp_get_crosststamp"
   is_defined: true
@@ -390365,6 +390374,7 @@ interface {
   symbol_id: 0xbc9cd951
   symbol_id: 0x15a3f41a
   symbol_id: 0x6e8c6baf
+  symbol_id: 0xa91d5234
   symbol_id: 0xc9a0daac
   symbol_id: 0x63b579b3
   symbol_id: 0x3ae24a16
