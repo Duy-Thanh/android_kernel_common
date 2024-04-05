@@ -121354,6 +121354,12 @@ member {
   offset: 128
 }
 member {
+  id: 0xa03c8629
+  name: "map_changing_lock"
+  type_id: 0x28b9ec9a
+  offset: 960
+}
+member {
   id: 0x7031173c
   name: "map_check_btf"
   type_id: 0x2e2d1155
@@ -127940,10 +127946,10 @@ member {
   offset: 128
 }
 member {
-  id: 0x3025dd18
+  id: 0x3025df0c
   name: "mm"
   type_id: 0x1b36c7a2
-  offset: 960
+  offset: 1536
 }
 member {
   id: 0xf2c3ca3b
@@ -128144,10 +128150,10 @@ member {
   offset: 576
 }
 member {
-  id: 0xdd180b6b
+  id: 0xdd180ba9
   name: "mmap_changing"
   type_id: 0x74d29cf1
-  offset: 928
+  offset: 1472
 }
 member {
   id: 0xc392230a
@@ -265746,7 +265752,7 @@ struct_union {
   kind: STRUCT
   name: "userfaultfd_ctx"
   definition {
-    bytesize: 128
+    bytesize: 200
     member_id: 0x3162bad8
     member_id: 0x05e73814
     member_id: 0xc409a485
@@ -265756,8 +265762,9 @@ struct_union {
     member_id: 0x2d2d0282
     member_id: 0xc55df36f
     member_id: 0x79d263fe
-    member_id: 0xdd180b6b
-    member_id: 0x3025dd18
+    member_id: 0xa03c8629
+    member_id: 0xdd180ba9
+    member_id: 0x3025df0c
   }
 }
 struct_union {
