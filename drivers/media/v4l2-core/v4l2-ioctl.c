@@ -959,12 +959,20 @@ static int check_fmt(struct file *file, enum v4l2_buf_type type)
 			      V4L2_CAP_META_OUTPUT;
 	struct video_device *vfd = video_devdata(file);
 	const struct v4l2_ioctl_ops *ops = vfd->ioctl_ops;
+<<<<<<< HEAD   (a5192f Merge 5.4.272 into android12-5.4-lts)
 	bool is_vid = vfd->vfl_type == VFL_TYPE_GRABBER &&
+=======
+	bool is_vid = vfd->vfl_type == VFL_TYPE_VIDEO &&
+>>>>>>> BRANCH (244893 Linux 5.4.273)
 		      (vfd->device_caps & vid_caps);
 	bool is_vbi = vfd->vfl_type == VFL_TYPE_VBI;
 	bool is_sdr = vfd->vfl_type == VFL_TYPE_SDR;
 	bool is_tch = vfd->vfl_type == VFL_TYPE_TOUCH;
+<<<<<<< HEAD   (a5192f Merge 5.4.272 into android12-5.4-lts)
 	bool is_meta = vfd->vfl_type == VFL_TYPE_GRABBER &&
+=======
+	bool is_meta = vfd->vfl_type == VFL_TYPE_VIDEO &&
+>>>>>>> BRANCH (244893 Linux 5.4.273)
 		       (vfd->device_caps & meta_caps);
 	bool is_rx = vfd->vfl_dir != VFL_DIR_TX;
 	bool is_tx = vfd->vfl_dir != VFL_DIR_RX;
