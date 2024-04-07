@@ -16,6 +16,23 @@
       "message": "bug id is wrong.",
       "revId": "920b38ac74cc047dd9e9cbab5dd6b5359a7fcd9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6306e313_36a3ec7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-04-07T02:04:44Z",
+      "side": 1,
+      "message": "I explained in issuetracker, why I pick these patches. thanks.",
+      "revId": "920b38ac74cc047dd9e9cbab5dd6b5359a7fcd9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
