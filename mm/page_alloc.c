@@ -4078,6 +4078,13 @@ retry:
 	if (page)
 		goto got_pg;
 
+	trace_android_vh_direct_reclaim_before_bypass(&page, gfp_mask, order,
+						      alloc_flags,
+						      can_direct_reclaim,
+						      no_progress_loops);
+	if (page)
+		goto got_pg;
+
 	/* Caller is not willing to reclaim, we can't balance anything */
 	if (!can_direct_reclaim)
 		goto nopage;

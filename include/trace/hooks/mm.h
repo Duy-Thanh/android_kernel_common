@@ -82,6 +82,11 @@ DECLARE_HOOK(android_vh_alloc_pages_slowpath_bypass,
 	TP_PROTO(struct page **pagep, gfp_t alloc_gfp, int order,
 		unsigned int alloc_flags),
 	TP_ARGS(pagep, alloc_gfp, order, alloc_flags));
+DECLARE_HOOK(android_vh_direct_reclaim_before_bypass,
+	TP_PROTO(struct page **pagep, gfp_t gfp_mask, int order, int alloc_flags,
+		bool can_direct_reclaim, int no_progress_loops),
+	TP_ARGS(pagep, gfp_mask, order, alloc_flags, can_direct_reclaim,
+		no_progress_loops));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
