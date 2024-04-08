@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "694bfd69_fc364c8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:24:01Z",
+      "side": 1,
+      "message": "Change deprecated.",
+      "parentUuid": "b5c3c968_60c26eca",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdb6f6a7_f008a906",
@@ -188,6 +212,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2941c05c_cd4ad7a8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:24:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62daf96f_406a6192",
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68c2914a_4b35043d",
@@ -225,6 +267,30 @@
       "side": 1,
       "message": "Change deprecated.",
       "parentUuid": "68c2914a_4b35043d",
+      "range": {
+        "startLine": 902,
+        "startChar": 8,
+        "endLine": 902,
+        "endChar": 24
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d447490_07bb0269",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:24:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dcf57c7_63177227",
       "range": {
         "startLine": 902,
         "startChar": 8,
@@ -319,6 +385,30 @@
       "side": 1,
       "message": "Change deprecated.",
       "parentUuid": "3940fb4b_9d83aeb1",
+      "range": {
+        "startLine": 917,
+        "startChar": 15,
+        "endLine": 917,
+        "endChar": 32
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e418cb6_c9d70e8d",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:24:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eae1d0ba_e3a5be26",
       "range": {
         "startLine": 917,
         "startChar": 15,
