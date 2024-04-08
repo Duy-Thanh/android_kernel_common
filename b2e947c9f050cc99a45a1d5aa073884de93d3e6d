@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a03326d1_abd4c154",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:23:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdb6f6a7_f008a906",
+      "range": {
+        "startLine": 10,
+        "startChar": 61,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a9d1c4b_f670b154",
@@ -60,6 +84,30 @@
       "writtenOn": "2024-04-02T13:10:18Z",
       "side": 1,
       "message": "Are we talking about the page-table management code for guest stage-2 ? What do you mean by a \"broken block\" ?",
+      "range": {
+        "startLine": 14,
+        "startChar": 53,
+        "endLine": 14,
+        "endChar": 65
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0604379d_5e897f95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:23:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a9d1c4b_f670b154",
       "range": {
         "startLine": 14,
         "startChar": 53,
@@ -87,6 +135,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c5e3a0_cd2e7506",
+        "filename": "arch/arm64/include/asm/kvm_pgtable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:23:42Z",
+      "side": 1,
+      "message": "Change deprecated.",
+      "parentUuid": "596bf4c4_871455e3",
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9cc9979_c714832c",
@@ -100,6 +166,24 @@
       "writtenOn": "2024-04-02T15:33:45Z",
       "side": 1,
       "message": "Q: I think this deserves a comment. I wonder if there is a way for the `VMM` to control this behavior ?",
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62daf96f_406a6192",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:23:42Z",
+      "side": 1,
+      "message": "Change deprecated.",
+      "parentUuid": "c9cc9979_c714832c",
       "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -129,6 +213,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dcf57c7_63177227",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:23:42Z",
+      "side": 1,
+      "message": "Change deprecated.",
+      "parentUuid": "68c2914a_4b35043d",
+      "range": {
+        "startLine": 902,
+        "startChar": 8,
+        "endLine": 902,
+        "endChar": 24
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff5821ed_089fad58",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 2
@@ -140,6 +248,30 @@
       "writtenOn": "2024-02-28T20:54:30Z",
       "side": 1,
       "message": "This looks a bit like stage2_map_prefault_idmap(), can we re-use some code?",
+      "range": {
+        "startLine": 906,
+        "startChar": 12,
+        "endLine": 906,
+        "endChar": 34
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d60b85d2_b74520b7",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:23:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff5821ed_089fad58",
       "range": {
         "startLine": 906,
         "startChar": 12,
@@ -175,6 +307,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eae1d0ba_e3a5be26",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:23:42Z",
+      "side": 1,
+      "message": "Change deprecated.",
+      "parentUuid": "3940fb4b_9d83aeb1",
+      "range": {
+        "startLine": 917,
+        "startChar": 15,
+        "endLine": 917,
+        "endChar": 32
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4526c66d_ebaeb09a",
         "filename": "arch/arm64/kvm/hyp/pgtable.c",
         "patchSetId": 2
@@ -186,6 +342,30 @@
       "writtenOn": "2024-02-28T20:54:30Z",
       "side": 1,
       "message": "I wonder if we could simplify the unmap path by annotating with 0 instead of calling the proper unmap walker ... That would keep all the prefaulting logic to the annotation/map path.",
+      "range": {
+        "startLine": 1231,
+        "startChar": 11,
+        "endLine": 1231,
+        "endChar": 31
+      },
+      "revId": "b2e947c9f050cc99a45a1d5aa073884de93d3e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d85b5e_06edfadf",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-08T13:23:42Z",
+      "side": 1,
+      "message": "Yeah this is quite clever! With that I only need the map path to be block aware and the prefault_idmap() is doing most of heavy lifting for me! \n\nThis patch is then modified to make prefault_idmap unconditional.",
+      "parentUuid": "4526c66d_ebaeb09a",
       "range": {
         "startLine": 1231,
         "startChar": 11,
