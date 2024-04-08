@@ -312289,6 +312289,16 @@ function {
   parameter_id: 0x2cacacc0
 }
 function {
+  id: 0x987085c9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0xf1a6dfed
+  parameter_id: 0x6720d32f
+  parameter_id: 0x1d5bae2a
+  parameter_id: 0x6720d32f
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9873106a
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -334027,6 +334037,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_show_suspend_epoch_val"
 }
 elf_symbol {
+  id: 0xdfd06b97
+  name: "__traceiter_android_vh_shrink_slab_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa0334e59
+  type_id: 0x987085c9
+  full_name: "__traceiter_android_vh_shrink_slab_bypass"
+}
+elf_symbol {
   id: 0x58e7556b
   name: "__traceiter_android_vh_sync_txn_recvd"
   is_defined: true
@@ -336437,6 +336456,15 @@ elf_symbol {
   crc: 0x754823e8
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_show_suspend_epoch_val"
+}
+elf_symbol {
+  id: 0x3e70324d
+  name: "__tracepoint_android_vh_shrink_slab_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x0c676a8a
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_shrink_slab_bypass"
 }
 elf_symbol {
   id: 0x39e68fed
@@ -387369,6 +387397,7 @@ interface {
   symbol_id: 0xa2fe718f
   symbol_id: 0xe7f6f975
   symbol_id: 0x6d9f8b13
+  symbol_id: 0xdfd06b97
   symbol_id: 0x58e7556b
   symbol_id: 0x2ecf85e9
   symbol_id: 0x34a01a22
@@ -387637,6 +387666,7 @@ interface {
   symbol_id: 0x923147c1
   symbol_id: 0x42ad45a3
   symbol_id: 0x8712dd01
+  symbol_id: 0x3e70324d
   symbol_id: 0x39e68fed
   symbol_id: 0xefb9e5a3
   symbol_id: 0x3fe0157c
