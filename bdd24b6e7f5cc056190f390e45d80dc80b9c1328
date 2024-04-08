@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc20c426_85623a47",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-08T09:24:52Z",
+      "side": 1,
+      "message": "No, I guess we can drop the check.",
+      "parentUuid": "1b50b0b6_5911c704",
+      "revId": "bdd24b6e7f5cc056190f390e45d80dc80b9c1328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "661a3ee3_3f852814",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "writtenOn": "2024-04-03T18:49:28Z",
       "side": 1,
       "message": "Not sure if there\u0027s any point not trusting EL3 here.\n\nI see other examples where we get directly res-\u003ea3 into memcpy (do_ffa_mem_reclaim()).\n\nI guess it would be fine to blindly `memcpy(host, hyp, version \u003e FFA_VERSION_1_0 ? res.a3 : 8)`",
+      "revId": "bdd24b6e7f5cc056190f390e45d80dc80b9c1328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced7d6c9_4a588a7e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-08T09:24:52Z",
+      "side": 1,
+      "message": "Yes, I guess this is true, we should trust what EL3 responds to us although I tend to get nervous when I don\u0027t have these checks around.",
+      "parentUuid": "661a3ee3_3f852814",
       "revId": "bdd24b6e7f5cc056190f390e45d80dc80b9c1328",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
