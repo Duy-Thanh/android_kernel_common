@@ -78,6 +78,10 @@ DECLARE_HOOK(android_vh_pcp_free_one_page_bypass,
 	TP_PROTO(struct page *page, struct zone *zone, int order, int migratetype,
 		bool *bypass),
 	TP_ARGS(page, zone, order, migratetype, bypass));
+DECLARE_HOOK(android_vh_alloc_pages_slowpath_bypass,
+	TP_PROTO(struct page **pagep, gfp_t alloc_gfp, int order,
+		unsigned int alloc_flags),
+	TP_ARGS(pagep, alloc_gfp, order, alloc_flags));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

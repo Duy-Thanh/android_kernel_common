@@ -4472,6 +4472,11 @@ struct page *__alloc_pages(gfp_t gfp, unsigned int order, int preferred_nid,
 	 */
 	ac.nodemask = nodemask;
 
+	trace_android_vh_alloc_pages_slowpath_bypass(&page, alloc_gfp, order,
+						     alloc_flags);
+	if (page)
+		goto out;
+
 	page = __alloc_pages_slowpath(alloc_gfp, order, &ac);
 
 out:
