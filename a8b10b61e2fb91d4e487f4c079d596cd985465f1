@@ -43,6 +43,50 @@
       ],
       "revId": "a8b10b61e2fb91d4e487f4c079d596cd985465f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000073990158",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3032108?revision\u003d1",
+      "key": {
+        "uuid": "ffc7f4ab_932ccc5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-08T17:27:59Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Roderick Colenbrander \u003croderick@gaikai.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "f6e3dd4c_d5c71278",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Roderick Colenbrander \u003croderick@gaikai.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a8b10b61e2fb91d4e487f4c079d596cd985465f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
