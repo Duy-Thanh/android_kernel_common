@@ -2430,6 +2430,7 @@ void free_unref_page(struct page *page, unsigned int order)
 	struct zone *zone;
 	unsigned long pfn = page_to_pfn(page);
 	int migratetype, pcpmigratetype;
+	bool bypass = false;
 
 	if (!free_unref_page_prepare(page, pfn, order))
 		return;
@@ -2451,6 +2452,12 @@ void free_unref_page(struct page *page, unsigned int order)
 	}
 
 	zone = page_zone(page);
+
+	trace_android_vh_pcp_free_one_page_bypass(page, zone, order,
+						  migratetype, &bypass);
+	if (bypass)
+		return;
+
 	pcp_trylock_prepare(UP_flags);
 	pcp = pcp_spin_trylock(zone->per_cpu_pageset);
 	if (pcp) {
