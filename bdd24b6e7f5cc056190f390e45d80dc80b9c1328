@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db7d5c54_59a882b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-08T09:29:56Z",
+      "side": 1,
+      "message": "I need to work around the ARM FF-A driver initialization before upstreaming this patch, otherwise on built in configurations of the driver they will hit a crash.",
+      "parentUuid": "bbe12b71_6d431b00",
+      "revId": "bdd24b6e7f5cc056190f390e45d80dc80b9c1328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b50b0b6_5911c704",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 2
