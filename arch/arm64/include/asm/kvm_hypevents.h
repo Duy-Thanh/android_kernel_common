@@ -99,6 +99,19 @@ HYP_EVENT(selftest,
 	  HE_ASSIGN(),
 	  HE_PRINTK(" ")
 );
+
+HYP_EVENT(psci_mem_protect,
+	HE_PROTO(u64 count, u64 was),
+	HE_STRUCT(
+		he_field(u64, count)
+		he_field(u64, was)
+	),
+	HE_ASSIGN(
+		__entry->count = count;
+		__entry->was = was;
+	),
+	HE_PRINTK("count=%llu was=%llu", __entry->count, __entry->was)
+);
 #endif
 
 #endif /* __ARM64_KVM_HYPEVENTS_H_ */
