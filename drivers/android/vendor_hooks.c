@@ -274,3 +274,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_free_one_page_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_before_bypass);
