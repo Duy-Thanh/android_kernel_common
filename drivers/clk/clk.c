@@ -93,6 +93,9 @@ struct clk_core {
 	struct kref		ref;
 };
 
+#include <trace/hooks/clk.h>
+#undef TRACE_INCLUDE_PATH
+
 #define CREATE_TRACE_POINTS
 #include <trace/events/clk.h>
 
@@ -1106,6 +1109,8 @@ static void clk_core_disable(struct clk_core *core)
 
 	trace_clk_disable_complete(core);
 
+	trace_android_vh_clk_disable(core->hw);
+
 	clk_core_disable(core->parent);
 }
 
@@ -1172,6 +1177,7 @@ static int clk_core_enable(struct clk_core *core)
 	}
 
 	core->enable_count++;
+	trace_android_vh_clk_enable(core->hw);
 	return 0;
 }
 
@@ -2535,6 +2541,7 @@ static int clk_core_set_rate_nolock(struct clk_core *core,
 	clk_change_rate(top);
 
 	core->req_rate = req_rate;
+	trace_android_vh_clk_set_rate(core->hw, req_rate);
 err:
 	clk_pm_runtime_put(core);
 
