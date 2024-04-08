@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56edf10c_b1422923",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-08T17:25:00Z",
+      "side": 1,
+      "message": "Should the patch be tagged with this ticket ?",
+      "parentUuid": "39e86f23_f1b647ba",
+      "revId": "bdd24b6e7f5cc056190f390e45d80dc80b9c1328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b50b0b6_5911c704",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 2
