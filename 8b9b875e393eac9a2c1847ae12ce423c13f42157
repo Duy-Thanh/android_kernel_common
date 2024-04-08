@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5244fc81_a459b6b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2024-04-08T10:00:00Z",
+      "side": 1,
+      "message": "We are using this vendor hook in kernel 6.6 too, please help to view this.",
+      "revId": "8b9b875e393eac9a2c1847ae12ce423c13f42157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
