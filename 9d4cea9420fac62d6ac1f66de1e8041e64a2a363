@@ -16,6 +16,23 @@
       "message": "ANDROID",
       "revId": "9d4cea9420fac62d6ac1f66de1e8041e64a2a363",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df6d49ff_d8ba2ee1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-04-09T22:29:40Z",
+      "side": 1,
+      "message": "also cp to android15-6.6 and android15-6.1",
+      "revId": "9d4cea9420fac62d6ac1f66de1e8041e64a2a363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
