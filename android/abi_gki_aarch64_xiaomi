@@ -15,3 +15,13 @@
 # required by SAGT module
   __traceiter_android_rvh_before_do_sched_yield
   __tracepoint_android_rvh_before_do_sched_yield
+
+#required by mi_sched.ko
+  __traceiter_android_vh_scheduler_tick
+  __traceiter_android_vh_free_user
+  __traceiter_android_vh_alloc_uid
+  __tracepoint_android_vh_scheduler_tick
+  __tracepoint_android_vh_free_user
+  __tracepoint_android_vh_alloc_uid
+  free_uid
+  find_user
