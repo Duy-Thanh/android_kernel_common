@@ -352519,6 +352519,15 @@ elf_symbol {
   full_name: "end_buffer_read_sync"
 }
 elf_symbol {
+  id: 0x45c0e0ad
+  name: "end_buffer_write_sync"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9ed6547b
+  type_id: 0x17592b81
+  full_name: "end_buffer_write_sync"
+}
+elf_symbol {
   id: 0xe506b877
   name: "errseq_set"
   is_defined: true
@@ -389696,6 +389705,7 @@ interface {
   symbol_id: 0x8f99729e
   symbol_id: 0xb6a9c6f8
   symbol_id: 0x309cb0fd
+  symbol_id: 0x45c0e0ad
   symbol_id: 0xe506b877
   symbol_id: 0xda116c83
   symbol_id: 0xa279fd1d
