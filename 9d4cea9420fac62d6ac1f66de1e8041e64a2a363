@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce79ee2d_37895650",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-04-09T22:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0451eaa_f5092d2b",
+      "revId": "9d4cea9420fac62d6ac1f66de1e8041e64a2a363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df6d49ff_d8ba2ee1",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-09T22:29:40Z",
       "side": 1,
       "message": "also cp to android15-6.6 and android15-6.1",
+      "revId": "9d4cea9420fac62d6ac1f66de1e8041e64a2a363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a076a8f2_2951d145",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-04-09T22:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df6d49ff_d8ba2ee1",
       "revId": "9d4cea9420fac62d6ac1f66de1e8041e64a2a363",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
