@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c25bd32f_d55e936b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-09T03:29:56Z",
+      "side": 1,
+      "message": "This needs a more detailed explanation of:\n1) Why the hook is needed\n2) The benefit gained from having the hook\n3) A deprecation plan for getting sufficient functionality upstream in the mainline Linux Kernel\n\nIf there is any sensitive info, please add those details in the bug.",
+      "revId": "a00df8ccc0eaefcc05612d409f8259c4f1cc758a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
