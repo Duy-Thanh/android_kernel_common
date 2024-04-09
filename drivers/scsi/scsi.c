@@ -85,6 +85,8 @@ unsigned int scsi_logging_level;
 EXPORT_SYMBOL(scsi_logging_level);
 #endif
 
+EXPORT_TRACEPOINT_SYMBOL_GPL(scsi_dispatch_cmd_error);
+EXPORT_TRACEPOINT_SYMBOL_GPL(scsi_dispatch_cmd_timeout);
 #ifdef CONFIG_SCSI_LOGGING
 void scsi_log_send(struct scsi_cmnd *cmd)
 {
