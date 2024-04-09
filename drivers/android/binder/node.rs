@@ -25,6 +25,9 @@ use crate::{
     DArc, DLArc, DTRWrap, DeliverToRead,
 };
 
+mod wrapper;
+pub(crate) use self::wrapper::CritIncrWrapper;
+
 #[derive(Debug)]
 pub(crate) struct CouldNotDeliverCriticalIncrement;
 
@@ -476,6 +479,29 @@ impl Node {
         }
     }
 
+    pub(crate) fn incr_refcount_allow_zero2one_with_wrapper(
+        self: &DArc<Self>,
+        strong: bool,
+        wrapper: CritIncrWrapper,
+        owner_inner: &mut ProcessInner,
+    ) -> Option<DLArc<dyn DeliverToRead>> {
+        match self.incr_refcount_allow_zero2one(strong, owner_inner) {
+            Ok(Some(node)) => Some(node as _),
+            Ok(None) => None,
+            Err(CouldNotDeliverCriticalIncrement) => {
+                let inner = self.inner.access_mut(owner_inner);
+                if strong {
+                    inner.strong.count += 1;
+                    inner.delivery_state.did_crit_strong_push(true);
+                } else {
+                    inner.weak.count += 1;
+                    inner.delivery_state.did_crit_weak_push(true);
+                }
+                Some(wrapper.init(self.clone(), strong))
+            }
+        }
+    }
+
     pub(crate) fn update_refcount(self: &DArc<Self>, inc: bool, count: usize, strong: bool) {
         self.owner
             .inner
@@ -597,18 +623,13 @@ impl Node {
         }
         None
     }
-}
 
-impl DeliverToRead for Node {
-    fn do_work(self: DArc<Self>, _thread: &Thread, writer: &mut UserSliceWriter) -> Result<bool> {
-        let mut owner_inner = self.owner.inner.lock();
-        let inner = self.inner.access_mut(&mut owner_inner);
-
-        inner.delivery_state.has_normal_push = false;
-        assert!(!inner.delivery_state.crit_push_uses_wrapper);
-        inner.delivery_state.has_crit_weak_push = false;
-        inner.delivery_state.has_crit_strong_push = false;
-
+    fn do_work_real(
+        &self,
+        writer: &mut UserSliceWriter,
+        mut guard: Guard<'_, ProcessInner, SpinLockBackend>,
+    ) -> Result<bool> {
+        let inner = self.inner.access_mut(&mut guard);
         let strong = inner.strong.count > 0;
         let has_strong = inner.strong.has_count;
         let weak = strong || inner.weak.count > 0;
@@ -635,9 +656,9 @@ impl DeliverToRead for Node {
         }
         if no_active_inc_refs && !weak {
             // Remove the node if there are no references to it.
-            owner_inner.remove_node(self.ptr);
+            guard.remove_node(self.ptr);
         }
-        drop(owner_inner);
+        drop(guard);
 
         if weak && !has_weak {
             self.write(writer, BR_INCREFS)?;
@@ -653,6 +674,24 @@ impl DeliverToRead for Node {
         }
 
         Ok(true)
+    }
+}
+
+impl DeliverToRead for Node {
+    fn do_work(self: DArc<Self>, _thread: &Thread, writer: &mut UserSliceWriter) -> Result<bool> {
+        let mut owner_inner = self.owner.inner.lock();
+        let inner = self.inner.access_mut(&mut owner_inner);
+
+        inner.delivery_state.has_normal_push = false;
+
+        // If there's a critical push using a wrapper, then we are a no-op.
+        if inner.delivery_state.crit_push_uses_wrapper {
+            return Ok(true);
+        }
+        inner.delivery_state.has_crit_weak_push = false;
+        inner.delivery_state.has_crit_strong_push = false;
+
+        self.do_work_real(writer, owner_inner)
     }
 
     fn should_sync_wakeup(&self) -> bool {
