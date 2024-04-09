@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2a8cd4c_8e319d02",
+        "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-04-09T17:33:31Z",
+      "side": 1,
+      "message": "We already do in `handle_host_smc` in `hyp-main.c`",
+      "parentUuid": "0fefd119_fa703a08",
+      "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6db8343_a547f279",
         "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-09T16:04:46Z",
       "side": 1,
       "message": "This is to be removed ?",
+      "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff2a4f88_ee156ab7",
+        "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-04-09T17:33:31Z",
+      "side": 1,
+      "message": "I am not sure about, I think otherwise we duplicate many IDs?",
+      "parentUuid": "e6db8343_a547f279",
       "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
