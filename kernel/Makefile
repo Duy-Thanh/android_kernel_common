@@ -140,6 +140,10 @@ obj-$(CONFIG_SCF_TORTURE_TEST) += scftorture.o
 
 $(obj)/configs.o: $(obj)/config_data.gz
 
+# ANDROID: Disable LTO on configs.o so changes in .config is reflected
+# in vmlinux. See b/312268956.
+CFLAGS_REMOVE_configs.o += $(CC_FLAGS_LTO)
+
 targets += config_data config_data.gz
 $(obj)/config_data.gz: $(obj)/config_data FORCE
 	$(call if_changed,gzip)
