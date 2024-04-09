@@ -124,6 +124,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d1edc9_1f14cbce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-09T15:24:20Z",
+      "side": 1,
+      "message": "I published the patch upstream and I took it with `FROMLIST` tag.",
+      "parentUuid": "db7d5c54_59a882b1",
+      "revId": "bdd24b6e7f5cc056190f390e45d80dc80b9c1328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9001749f_33215cfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-09T15:24:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25376e81_b660a32e",
+      "revId": "bdd24b6e7f5cc056190f390e45d80dc80b9c1328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b50b0b6_5911c704",
