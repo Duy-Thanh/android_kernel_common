@@ -655,6 +655,7 @@ config DM_AUDIT
 	  Enables audit logging of several security relevant events in the
 	  particular device-mapper targets, especially the integrity target.
 
+<<<<<<< HEAD   (043868 ANDROID: Reapply "io_uring: remove the mode variable in io_f)
 config DM_USER
 	tristate "Block device in userspace"
 	depends on BLK_DEV_DM
@@ -668,5 +669,8 @@ config DM_USER
 	  called dm-user.
 
 	  If unsure, say N.
+=======
+source "drivers/md/dm-vdo/Kconfig"
+>>>>>>> BRANCH (943446 Merge tag 'acpi-6.9-rc1' of git://git.kernel.org/pub/scm/lin)
 
 endif # MD
