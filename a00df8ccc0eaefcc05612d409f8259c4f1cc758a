@@ -34,6 +34,24 @@
       "parentUuid": "c25bd32f_d55e936b",
       "revId": "a00df8ccc0eaefcc05612d409f8259c4f1cc758a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7447ee86_a5dc8c28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-09T16:29:43Z",
+      "side": 1,
+      "message": "Thank you for these! Could you please include these details in the commit message?\n\nFor #3, indeed getting it merged can take a while, but even just the initial submitting of patches is useful, as it helps make sure upstream maintainers are at least aware that there is a potential optimization here. (Additionally, they may be able to point out problems that might occur very rarely, saving you field-debug time :)",
+      "parentUuid": "ecbaa575_01d79c0a",
+      "revId": "a00df8ccc0eaefcc05612d409f8259c4f1cc758a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
