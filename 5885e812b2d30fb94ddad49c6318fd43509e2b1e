@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3d101f1_ef2b817e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024815
+      },
+      "writtenOn": "2024-04-09T09:52:38Z",
+      "side": 1,
+      "message": "we want to reuse this vendor hook in our feture that  can tune the scan_balance base on different scene. the scene is base on out product, not general. So we want this vendor hook, not upstream.",
+      "revId": "5885e812b2d30fb94ddad49c6318fd43509e2b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
