@@ -16,6 +16,24 @@
       "message": "This needs a more detailed explanation of:\n1) Why the hook is needed\n2) The benefit gained from having the hook\n3) A deprecation plan for getting sufficient functionality upstream in the mainline Linux Kernel\n\nIf there is any sensitive info, please add those details in the bug.",
       "revId": "a00df8ccc0eaefcc05612d409f8259c4f1cc758a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecbaa575_01d79c0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2003820
+      },
+      "writtenOn": "2024-04-09T08:29:30Z",
+      "side": 1,
+      "message": "Thanks John for reviewing the patches.\n1) In some cases, we find the 4ms tick is not enough for task scheduling and we will start a new timer in scheduler_tick to do extra task scheduling. The hook in scheduler_tick already exists but when cpus enter idle,  the timer needs to be stopped for saving power (same logic as nohz idle).\n2) We can get about 7% power saving without hurting the performance in certain use case after enabled this feature.\n3) Actually we are considering to upstream it to mainline kernel but it can takes months to get really merged.",
+      "parentUuid": "c25bd32f_d55e936b",
+      "revId": "a00df8ccc0eaefcc05612d409f8259c4f1cc758a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
