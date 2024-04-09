@@ -125,6 +125,21 @@ define_common_kernels(target_configs = {
     },
 })
 
+kernel_build(
+    name = "elsk",
+    srcs = ["//common:kernel_aarch64_sources"],
+    outs = [
+        "vmlinux.o",
+        "kernel/config_data",
+        "kernel/config_data.gz",
+        "kernel/configs.o",
+    ],
+    build_config = "build.config.elsk",
+    make_goals = [
+        "vmlinux_o",
+    ],
+)
+
 # Microdroid is not a real device. The kernel image is built with special
 #  configs to reduce the size. Hence, not using mixed build.
 kernel_build(
