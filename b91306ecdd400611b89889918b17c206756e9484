@@ -16,6 +16,29 @@
       "message": "I can\u0027t see treehugger failures, is it related to the chain or not?",
       "revId": "b91306ecdd400611b89889918b17c206756e9484",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df97c643_c7c4fefd",
+        "filename": "drivers/usb/gadget/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-09T09:14:10Z",
+      "side": 1,
+      "message": "this seems to break platforms, sorry.  Please rebase the series without this change in it and then we might be able to accept it.",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 24
+      },
+      "revId": "b91306ecdd400611b89889918b17c206756e9484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
