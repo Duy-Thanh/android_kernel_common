@@ -320279,6 +320279,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_psci_tos_resident_on"
 }
 elf_symbol {
+  id: 0x13f466b7
+  name: "__traceiter_android_rvh_refrigerator"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x811d8704
+  type_id: 0x9a1a471c
+  full_name: "__traceiter_android_rvh_refrigerator"
+}
+elf_symbol {
   id: 0xe3e24295
   name: "__traceiter_android_rvh_replace_next_task_fair"
   is_defined: true
@@ -323526,6 +323535,15 @@ elf_symbol {
   crc: 0x8bc2acad
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_psci_tos_resident_on"
+}
+elf_symbol {
+  id: 0x3b6248c1
+  name: "__tracepoint_android_rvh_refrigerator"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x5b4562fe
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_refrigerator"
 }
 elf_symbol {
   id: 0x18bac297
@@ -342600,6 +342618,15 @@ elf_symbol {
   crc: 0xd73653c4
   type_id: 0x8e47c273
   full_name: "freezer_active"
+}
+elf_symbol {
+  id: 0x3918f832
+  name: "freezer_cgrp_subsys"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb63c193d
+  type_id: 0x00571446
+  full_name: "freezer_cgrp_subsys"
 }
 elf_symbol {
   id: 0x238d82fe
@@ -377369,6 +377396,7 @@ interface {
   symbol_id: 0xeccbc3c1
   symbol_id: 0xbd2d27dc
   symbol_id: 0xe41b0c78
+  symbol_id: 0x13f466b7
   symbol_id: 0xe3e24295
   symbol_id: 0xaedef3a2
   symbol_id: 0xde725472
@@ -377730,6 +377758,7 @@ interface {
   symbol_id: 0x50605d97
   symbol_id: 0xa5e991f6
   symbol_id: 0x261c997e
+  symbol_id: 0x3b6248c1
   symbol_id: 0x18bac297
   symbol_id: 0x1a849f34
   symbol_id: 0x3f328d3c
@@ -379848,6 +379877,7 @@ interface {
   symbol_id: 0xdfd6609a
   symbol_id: 0x31dfc6e3
   symbol_id: 0x2ed5588c
+  symbol_id: 0x3918f832
   symbol_id: 0x238d82fe
   symbol_id: 0xf5541f28
   symbol_id: 0x89d2da05
