@@ -25,6 +25,103 @@ use crate::{
     DArc, DLArc, DTRWrap, DeliverToRead,
 };
 
+#[derive(Debug)]
+pub(crate) struct CouldNotDeliverCriticalIncrement;
+
+/// Keeps track of how this node is scheduled.
+///
+/// There are two ways to schedule a node to a work list. Just schedule the node itself, or
+/// allocate a wrapper that references the node and schedule the wrapper. These wrappers exists to
+/// make it possible to "move" a node from one list to another - when `do_work` is called directly
+/// on the `Node`, then it's a no-op if there's also a pending wrapper.
+///
+/// Wrappers are generally only needed for zero-to-one refcount increments, and there are two cases
+/// of this: weak increments and strong increments. We call such increments "critical" because it
+/// is critical that they are delivered to the thread doing the increment. Some examples:
+///
+/// * One thread makes a zero-to-one strong increment, and another thread makes a zero-to-one weak
+///   increment. Delivering the node to the thread doing the weak increment is wrong, since the
+///   thread doing the strong increment may have ended a long time ago when the command is actually
+///   processed by userspace.
+///
+/// * We have a weak reference and are about to drop it on one thread. But then another thread does
+///   a zero-to-one strong increment. If the strong increment gets sent to the thread that was
+///   about to drop the weak reference, then the strong increment could be processed after the
+///   other thread has already exited, which would be too late.
+///
+/// Note that trying to create a `ListArc` to the node can succeed even if `has_normal_push` is
+/// set. This is because another thread might just have popped the node from a todo list, but not
+/// yet called `do_work`. However, if `has_normal_push` is false, then creating a `ListArc` should
+/// always succeed.
+struct DeliveryState {
+    /// Has a normal push been scheduled? Regardless of `crit_push_uses_wrapper`, normal pushes are
+    /// always delivered by scheduling `Node`.
+    has_normal_push: bool,
+    /// Has a weak critical increment been scheduled? The `crit_push_uses_wrapper` field determines
+    /// whether it was scheduled using a wrapper or not.
+    has_crit_weak_push: bool,
+    /// Has a strong critical increment been scheduled? The `crit_push_uses_wrapper` field
+    /// determines whether it was scheduled using a wrapper or not.
+    has_crit_strong_push: bool,
+    /// When `true`, the critical pushes are delivered using `CritIncrWrapper`. When `false`, they
+    /// are delivered by just scheduling the `Node`. In the latter case, at most one of the other
+    /// booleans can be true.
+    crit_push_uses_wrapper: bool,
+}
+
+impl DeliveryState {
+    fn should_normal_push(&self) -> bool {
+        !self.has_normal_push && !self.has_crit_weak_push && !self.has_crit_strong_push
+    }
+
+    fn did_normal_push(&mut self) {
+        assert!(self.should_normal_push());
+        self.has_normal_push = true;
+    }
+
+    fn should_crit_weak_push(&self) -> bool {
+        !self.has_crit_weak_push && !self.has_crit_strong_push
+    }
+
+    fn weak_push_need_wrapper(&self) -> bool {
+        assert!(self.should_crit_weak_push());
+        self.has_normal_push
+    }
+
+    fn did_crit_weak_push(&mut self, using_wrapper: bool) {
+        assert!(self.should_crit_weak_push());
+        assert_eq!(using_wrapper, self.weak_push_need_wrapper());
+        self.crit_push_uses_wrapper = using_wrapper;
+        self.has_crit_weak_push = true;
+    }
+
+    fn should_crit_strong_push(&self) -> bool {
+        !self.has_crit_strong_push
+    }
+
+    fn strong_push_need_wrapper(&self) -> bool {
+        assert!(self.should_crit_strong_push());
+        self.has_normal_push || self.has_crit_weak_push
+    }
+
+    fn did_crit_strong_push(&mut self, using_wrapper: bool) {
+        assert!(self.should_crit_strong_push());
+        assert_eq!(using_wrapper, self.strong_push_need_wrapper());
+        if self.has_crit_weak_push && !self.crit_push_uses_wrapper {
+            assert!(using_wrapper);
+            assert!(!self.has_normal_push);
+            // Since `crit_push_uses_wrapper` applies to both types of critical pushes, we need to
+            // make sure that the state doesn't mistakenly think that there's a weak wrapper
+            // scheduled somewhere. To do that, we pretend that the weak critical push was a normal
+            // push, which is okay since we now have a strong critical push.
+            self.has_crit_weak_push = false;
+            self.has_normal_push = true;
+        }
+        self.crit_push_uses_wrapper = using_wrapper;
+        self.has_crit_strong_push = true;
+    }
+}
+
 struct CountState {
     /// The reference count.
     count: usize,
@@ -47,6 +144,7 @@ struct NodeInner {
     strong: CountState,
     /// Weak refcounts held on this node by `NodeRef` objects.
     weak: CountState,
+    delivery_state: DeliveryState,
     /// The binder driver guarantees that oneway transactions sent to the same node are serialized,
     /// that is, userspace will not be given the next one until it has finished processing the
     /// previous oneway transaction. This is done to avoid the case where two oneway transactions
@@ -117,6 +215,12 @@ impl Node {
                 NodeInner {
                     strong: CountState::new(),
                     weak: CountState::new(),
+                    delivery_state: DeliveryState {
+                        has_normal_push: false,
+                        has_crit_weak_push: false,
+                        has_crit_strong_push: false,
+                        crit_push_uses_wrapper: false,
+                    },
                     death_list: List::new(),
                     oneway_todo: List::new(),
                     has_oneway_transaction: false,
@@ -274,8 +378,9 @@ impl Node {
             // that.
             let need_push = should_drop_weak || should_drop_strong;
 
-            if need_push {
+            if need_push && inner.delivery_state.should_normal_push() {
                 let list_arc = ListArc::try_from_arc(self.clone()).ok().unwrap();
+                inner.delivery_state.did_normal_push();
                 Some(list_arc)
             } else {
                 None
@@ -316,11 +421,58 @@ impl Node {
             !is_dead && state.count == 0 && state.has_count
         };
 
-        if need_push {
+        if need_push && inner.delivery_state.should_normal_push() {
             let list_arc = ListArc::try_from_arc(self.clone()).ok().unwrap();
+            inner.delivery_state.did_normal_push();
             Some(list_arc)
         } else {
             None
+        }
+    }
+
+    pub(crate) fn incr_refcount_allow_zero2one(
+        self: &DArc<Self>,
+        strong: bool,
+        owner_inner: &mut ProcessInner,
+    ) -> Result<Option<DLArc<Node>>, CouldNotDeliverCriticalIncrement> {
+        let is_dead = owner_inner.is_dead;
+        let inner = self.inner.access_mut(owner_inner);
+
+        // Get a reference to the state we'll update.
+        let state = if strong {
+            &mut inner.strong
+        } else {
+            &mut inner.weak
+        };
+
+        // Update the count and determine whether we need to push work.
+        state.count += 1;
+        if is_dead || state.has_count {
+            return Ok(None);
+        }
+
+        // Userspace needs to be notified of this.
+        if !strong && inner.delivery_state.should_crit_weak_push() {
+            if inner.delivery_state.weak_push_need_wrapper() {
+                state.count -= 1;
+                Err(CouldNotDeliverCriticalIncrement)
+            } else {
+                let list_arc = ListArc::try_from_arc(self.clone()).ok().unwrap();
+                inner.delivery_state.did_crit_weak_push(false);
+                Ok(Some(list_arc))
+            }
+        } else if strong && inner.delivery_state.should_crit_strong_push() {
+            if inner.delivery_state.strong_push_need_wrapper() {
+                state.count -= 1;
+                Err(CouldNotDeliverCriticalIncrement)
+            } else {
+                let list_arc = ListArc::try_from_arc(self.clone()).ok().unwrap();
+                inner.delivery_state.did_crit_strong_push(false);
+                Ok(Some(list_arc))
+            }
+        } else {
+            // Work is already pushed, and we don't need to push again.
+            Ok(None)
         }
     }
 
@@ -451,6 +603,12 @@ impl DeliverToRead for Node {
     fn do_work(self: DArc<Self>, _thread: &Thread, writer: &mut UserSliceWriter) -> Result<bool> {
         let mut owner_inner = self.owner.inner.lock();
         let inner = self.inner.access_mut(&mut owner_inner);
+
+        inner.delivery_state.has_normal_push = false;
+        assert!(!inner.delivery_state.crit_push_uses_wrapper);
+        inner.delivery_state.has_crit_weak_push = false;
+        inner.delivery_state.has_crit_strong_push = false;
+
         let strong = inner.strong.count > 0;
         let has_strong = inner.strong.has_count;
         let weak = strong || inner.weak.count > 0;
