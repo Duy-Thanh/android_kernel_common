@@ -293079,6 +293079,12 @@ function {
   parameter_id: 0x246dc7d4
 }
 function {
+  id: 0x19832808
+  return_type_id: 0x48b5725f
+  parameter_id: 0x275ab027
+  parameter_id: 0x33756485
+}
+function {
   id: 0x198668f4
   return_type_id: 0x48b5725f
   parameter_id: 0x2668e644
@@ -298045,6 +298051,11 @@ function {
   parameter_id: 0x04b193cc
   parameter_id: 0x18ea6ae3
   parameter_id: 0x2ed8b8f9
+}
+function {
+  id: 0x229f1818
+  return_type_id: 0x106029c6
+  parameter_id: 0x18ea6ae3
 }
 function {
   id: 0x22a7ae7f
@@ -326609,6 +326620,12 @@ function {
   id: 0xca62a8b3
   return_type_id: 0x4585663f
   parameter_id: 0x12e75923
+}
+function {
+  id: 0xcaae52cc
+  return_type_id: 0x4585663f
+  parameter_id: 0x1d44326e
+  parameter_id: 0xc9082b19
 }
 function {
   id: 0xcabd891e
@@ -359927,6 +359944,15 @@ elf_symbol {
   full_name: "is_vmalloc_addr"
 }
 elf_symbol {
+  id: 0x99bcb7fe
+  name: "is_vmalloc_or_module_addr"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1ee47e00
+  type_id: 0x93c72655
+  full_name: "is_vmalloc_or_module_addr"
+}
+elf_symbol {
   id: 0xbb7edccb
   name: "iter_file_splice_write"
   is_defined: true
@@ -365879,6 +365905,15 @@ elf_symbol {
   crc: 0x8b618d08
   type_id: 0x6720d32f
   full_name: "overflowuid"
+}
+elf_symbol {
+  id: 0x591c4b4f
+  name: "page_cache_sync_ra"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbc548521
+  type_id: 0x19832808
+  full_name: "page_cache_sync_ra"
 }
 elf_symbol {
   id: 0xd723c668
@@ -377114,6 +377149,15 @@ elf_symbol {
   full_name: "sock_efree"
 }
 elf_symbol {
+  id: 0xd661cceb
+  name: "sock_from_file"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xeca80468
+  type_id: 0x229f1818
+  full_name: "sock_from_file"
+}
+elf_symbol {
   id: 0x4ece0732
   name: "sock_gen_put"
   is_defined: true
@@ -378852,6 +378896,15 @@ elf_symbol {
   crc: 0xa70ed9dc
   type_id: 0x5760fe36
   full_name: "tcp_hashinfo"
+}
+elf_symbol {
+  id: 0xef808179
+  name: "tcp_sync_mss"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe9cebee3
+  type_id: 0xcaae52cc
+  full_name: "tcp_sync_mss"
 }
 elf_symbol {
   id: 0x857e5dc9
@@ -390519,6 +390572,7 @@ interface {
   symbol_id: 0x73ffe9a9
   symbol_id: 0x03de6dc5
   symbol_id: 0xe4e974b3
+  symbol_id: 0x99bcb7fe
   symbol_id: 0xbb7edccb
   symbol_id: 0x3c6496cb
   symbol_id: 0x124d42c2
@@ -391181,6 +391235,7 @@ interface {
   symbol_id: 0x27d0c7b6
   symbol_id: 0x3d8c84e9
   symbol_id: 0x28b33064
+  symbol_id: 0x591c4b4f
   symbol_id: 0xd723c668
   symbol_id: 0x13dfcd3d
   symbol_id: 0x4f3e5356
@@ -392429,6 +392484,7 @@ interface {
   symbol_id: 0x33edf503
   symbol_id: 0x5ca98337
   symbol_id: 0x83497546
+  symbol_id: 0xd661cceb
   symbol_id: 0x4ece0732
   symbol_id: 0x284bec0f
   symbol_id: 0xb2cef8e2
@@ -392623,6 +392679,7 @@ interface {
   symbol_id: 0xd6adc7e6
   symbol_id: 0xcc386657
   symbol_id: 0xeb0e3e9b
+  symbol_id: 0xef808179
   symbol_id: 0x857e5dc9
   symbol_id: 0x85459353
   symbol_id: 0x1ecfd7d9
