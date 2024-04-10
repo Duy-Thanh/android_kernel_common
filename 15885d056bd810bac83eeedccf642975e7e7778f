@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b01054a_f6277948",
+        "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-04-10T08:57:53Z",
+      "side": 1,
+      "message": "Ah, yes, I will fix it.",
+      "parentUuid": "95091e26_179fcf03",
+      "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f9a0388_08882671",
         "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
         "patchSetId": 4
