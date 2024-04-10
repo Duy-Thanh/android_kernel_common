@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "8c4bb1d17dffba2fbdf4355903b2fa4e738ad9b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074282317",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3023484?revision\u003d2",
+      "key": {
+        "uuid": "d6d29163_a74968e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-10T20:11:27Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/8f0eed4a78a81668bc78923ea09f51a7a663c2b0) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d8f0eed4a78a81668bc78923ea09f51a7a663c2b0).\n\n```\n      ## kernel/freezer.c ##\n     @@ kernel/freezer.c: bool __refrigerator(bool check_kthr_stop)\n      \tfor (;;) {\n    @@ kernel/freezer.c: bool freeze_task(struct task_struct *p)\n      unlock:\n     \n      ## kernel/sched/core.c ##\n    -@@ kernel/sched/core.c: static __always_inline\n    - int task_state_match(struct task_struct *p, unsigned int state)\n    - {\n    +@@ kernel/sched/core.c: int task_state_match(struct task_struct *p, unsigned int state)\n    + \tint match;\n    + \n      \t/*\n     -\t * Serialize against current_save_and_set_rtlock_wait_state() and\n     -\t * current_restore_rtlock_saved_state().\n     +\t * Serialize against current_save_and_set_rtlock_wait_state(),\n     +\t * current_restore_rtlock_saved_state(), and __refrigerator().\n      \t */\n    - \tguard(raw_spinlock_irq)(\u0026p-\u003epi_lock);\n    - \treturn __task_state_match(p, state);\n    + \traw_spin_lock_irq(\u0026p-\u003epi_lock);\n    + \tmatch \u003d __task_state_match(p, state);\n     @@ kernel/sched/core.c: static void ttwu_queue(struct task_struct *p, int cpu, int wake_flags)\n       * The caller holds p::pi_lock if p !\u003d current or has preemption\n       * disabled when p \u003d\u003d current.\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "8c4bb1d17dffba2fbdf4355903b2fa4e738ad9b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
