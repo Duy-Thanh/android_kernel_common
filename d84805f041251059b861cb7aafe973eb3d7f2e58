@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b907815_55c84727",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3362129
+      },
+      "writtenOn": "2024-04-10T09:15:23Z",
+      "side": 1,
+      "message": "We want record the infotmation that consumer calling clk_enable(),clk_disable() and clk_set_arte() everytime, but the driver will only be called when operating the hardware, so if a clock has been enabled/disabled repeatedly form different consumer，we can only record the fisrt one.",
+      "parentUuid": "c6f0fff2_1fe61f9e",
+      "revId": "d84805f041251059b861cb7aafe973eb3d7f2e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1eaee988_b113e89b",
         "filename": "drivers/clk/clk.c",
         "patchSetId": 4
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5c2f48d_fb1ee33c",
+        "filename": "drivers/clk/clk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 3362129
+      },
+      "writtenOn": "2024-04-10T09:15:23Z",
+      "side": 1,
+      "message": "do you mean the trace_clk_disable_complete()? I\u0027m afraid this won\u0027t meet our needs, this hook takes \"struct clk_core *core\" as an input parameter, but our driver cannot use this structure.",
+      "parentUuid": "1eaee988_b113e89b",
+      "range": {
+        "startLine": 1112,
+        "startChar": 0,
+        "endLine": 1112,
+        "endChar": 40
+      },
+      "revId": "d84805f041251059b861cb7aafe973eb3d7f2e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1beab76e_a2c78108",
         "filename": "drivers/clk/clk.c",
         "patchSetId": 4
@@ -54,6 +96,30 @@
       "writtenOn": "2024-04-10T07:12:22Z",
       "side": 1,
       "message": "use the hook above please, if you have to do this.",
+      "range": {
+        "startLine": 1180,
+        "startChar": 1,
+        "endLine": 1180,
+        "endChar": 28
+      },
+      "revId": "d84805f041251059b861cb7aafe973eb3d7f2e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc411b05_de2a4fc5",
+        "filename": "drivers/clk/clk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 3362129
+      },
+      "writtenOn": "2024-04-10T09:15:23Z",
+      "side": 1,
+      "message": "the hook above takes \"struct clk_core *core\" as an input parameter, but our driver cannot use this structure.",
+      "parentUuid": "1beab76e_a2c78108",
       "range": {
         "startLine": 1180,
         "startChar": 1,
