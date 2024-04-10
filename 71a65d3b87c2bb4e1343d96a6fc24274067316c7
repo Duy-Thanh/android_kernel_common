@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a782d38_adcebe3f",
+        "filename": "drivers/misc/pkvm-smc/pkvm/events.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-04-10T15:53:25Z",
+      "side": 1,
+      "message": "Maybe we remove the args, I was hesitant about adding them.",
+      "parentUuid": "abb4887a_0856c401",
+      "revId": "71a65d3b87c2bb4e1343d96a6fc24274067316c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15360526_4b6b9d3d",
         "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
         "patchSetId": 1
