@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e9a772_46239950",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-04-10T01:16:16Z",
+      "side": 1,
+      "message": "s/regoin/region",
+      "range": {
+        "startLine": 17,
+        "startChar": 40,
+        "endLine": 17,
+        "endChar": 46
+      },
+      "revId": "109aaf394aa8eebec62a306c0ae5491ec0bebd05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ab8b825_197847e8",
+        "filename": "include/linux/pgsize_migration.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-04-10T01:16:16Z",
+      "side": 1,
+      "message": "Could you add a brief description how the pads are going to be used to avoid allocating the extra vm_area_struct?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 43
+      },
+      "revId": "109aaf394aa8eebec62a306c0ae5491ec0bebd05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "012592a6_e2fc232c",
+        "filename": "include/linux/pgsize_migration.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-04-10T01:16:16Z",
+      "side": 1,
+      "message": "should we return 0 by default?",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "109aaf394aa8eebec62a306c0ae5491ec0bebd05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e54f241f_e3062dd7",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-04-10T01:16:16Z",
+      "side": 1,
+      "message": "instead of having these macros:\n\n#define VM_PAD_16KB_BIT2\t(_AC(1,ULL) \u003c\u003c 62)\n#define VM_PAD_16KB_BIT1\t(_AC(1,ULL) \u003c\u003c 61)\n#define VM_PAD_4KB_BIT2\t\t(_AC(1,ULL) \u003c\u003c 60)\n#define VM_PAD_4KB_BIT1\t\t(_AC(1,ULL) \u003c\u003c 59)\n\nwe could define a PAD_SHIFT macro for the last 4 bits and set the flags with:\n\nflags |\u003d (nr_pages \u003c\u003c PAD_SHIFT)",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "109aaf394aa8eebec62a306c0ae5491ec0bebd05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
