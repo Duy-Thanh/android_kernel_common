@@ -34,6 +34,24 @@
       "parentUuid": "468153b8_1b395552",
       "revId": "f38d28938c6b620b739f833a9defc4d79c3d8201",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15b1ad3d_140ebb38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-10T17:07:14Z",
+      "side": 1,
+      "message": "Ah, my fault, I should have noticed that, thanks!",
+      "parentUuid": "dbdc719d_59050206",
+      "revId": "f38d28938c6b620b739f833a9defc4d79c3d8201",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
