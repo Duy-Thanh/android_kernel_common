@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074260864",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3023470?revision\u003d6",
+      "key": {
+        "uuid": "2b120308_703feb92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-10T17:05:30Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against AOSP commit.\nAOSP commit: [source](https://android-review.googlesource.com/kernel/common/+/006d1fc45043caf1c94316ddb475ea38d6918ab4).\n\n```\n      ## include/linux/netdevice.h ##\n     @@ include/linux/netdevice.h: struct net_device {\n    @@ include/linux/netdevice.h: struct net_device {\n      \n     -#ifdef CONFIG_WIRELESS_EXT\n     +\t/* Android KMI hack to allow vendors to have their own wifi changes in modules */\n    -+#ifdef __GENKSYMS__\n    -+\tvoid\t\t\t*wireless_handlers;\n    -+\tvoid\t\t\t*wireless_data;\n    -+#else\n      \tconst struct iw_handler_def *wireless_handlers;\n      \tstruct iw_public_data\t*wireless_data;\n    - #endif\n    +-#endif\n    + \tconst struct ethtool_ops *ethtool_ops;\n    + #ifdef CONFIG_NET_L3_MASTER_DEV\n    + \tconst struct l3mdev_ops\t*l3mdev_ops;\n     @@ include/linux/netdevice.h: struct net_device {\n      #if IS_ENABLED(CONFIG_AX25)\n      \tvoid\t\t\t*ax25_ptr;\n      #endif\n     -#if IS_ENABLED(CONFIG_CFG80211)\n     +\t/* Android KMI hack to allow vendors to have their own wifi changes in modules */\n    -+#ifdef __GENKSYMS__\n    -+\tvoid\t\t\t*ieee80211_ptr;\n    -+#else\n      \tstruct wireless_dev\t*ieee80211_ptr;\n    - #endif\n    -+\n    +-#endif\n      #if IS_ENABLED(CONFIG_IEEE802154) || IS_ENABLED(CONFIG_6LOWPAN)\n      \tstruct wpan_dev\t\t*ieee802154_ptr;\n      #endif\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "d4bf78b2c4df7d1a1999ba0bfe062ebeef6cf26d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
