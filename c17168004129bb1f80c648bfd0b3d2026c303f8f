@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d91506c_9eeeb745",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-10T21:11:04Z",
+      "side": 1,
+      "message": "Why the type change here? (I\u0027m guessing you\u0027re just trying to split the field and not grow the structure?) Probably should get a comment in the commit message as to the expected range of the value so folks can see it is a safe change.\n\nAlso, would u32 bit better/more explicit?",
+      "revId": "c17168004129bb1f80c648bfd0b3d2026c303f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62ab5c06_16e34629",
+        "filename": "kernel/sched/debug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-10T21:11:04Z",
+      "side": 1,
+      "message": "Not adding the new field is intentional?",
+      "revId": "c17168004129bb1f80c648bfd0b3d2026c303f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b101552_660467fa",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4751,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-10T21:11:04Z",
+      "side": 1,
+      "message": "nit: I\u0027d align the READ_ONCE( call on the second line.",
+      "revId": "c17168004129bb1f80c648bfd0b3d2026c303f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2144285a_326f5eae",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4759,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-10T21:11:04Z",
+      "side": 1,
+      "message": "I\u0027d maybe split this into separate lines rather than nest the max values. Mixing in the max_t also makes it require a bit more thought to read.",
+      "revId": "c17168004129bb1f80c648bfd0b3d2026c303f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
