@@ -52,6 +52,24 @@
       "parentUuid": "ecbaa575_01d79c0a",
       "revId": "a00df8ccc0eaefcc05612d409f8259c4f1cc758a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "212de081_8fc991af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2003820
+      },
+      "writtenOn": "2024-04-10T01:41:51Z",
+      "side": 1,
+      "message": "Sure, I will add those info into the commit message and also check how to make a initial submit to the community. Thanks for the good suggestions:)",
+      "parentUuid": "7447ee86_a5dc8c28",
+      "revId": "a00df8ccc0eaefcc05612d409f8259c4f1cc758a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
