@@ -46,6 +46,30 @@
       },
       "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f9beea_1cec5bad",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-10T06:55:51Z",
+      "side": 1,
+      "message": "You can not use internel-kernel-header files like that, sorry, it is not allowed.\n\nBut why is this hook needed at all?  Where is the upstream changes that you have submitted to have this work properly in newer kernel releases?",
+      "parentUuid": "0c16726c_a68e3616",
+      "range": {
+        "startLine": 239,
+        "startChar": 43,
+        "endLine": 239,
+        "endChar": 46
+      },
+      "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
