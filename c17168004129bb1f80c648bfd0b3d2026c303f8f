@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ef6c420_32fbcaad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-10T21:31:08Z",
+      "side": 1,
+      "message": "Is this the link to the latest submission of this patch?",
+      "revId": "c17168004129bb1f80c648bfd0b3d2026c303f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d91506c_9eeeb745",
         "filename": "include/linux/sched.h",
         "patchSetId": 1
