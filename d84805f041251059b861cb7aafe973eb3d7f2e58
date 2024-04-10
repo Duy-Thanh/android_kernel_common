@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e5a3552_51b1d465",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-10T17:05:26Z",
+      "side": 1,
+      "message": "What do you want to record this for?  Why can\u0027t the normal tracepoint work for that instead?  This is not something that a clk driver should be using.",
+      "parentUuid": "2b907815_55c84727",
+      "revId": "d84805f041251059b861cb7aafe973eb3d7f2e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1eaee988_b113e89b",
         "filename": "drivers/clk/clk.c",
         "patchSetId": 4
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "do you mean the trace_clk_disable_complete()? I\u0027m afraid this won\u0027t meet our needs, this hook takes \"struct clk_core *core\" as an input parameter, but our driver cannot use this structure.",
       "parentUuid": "1eaee988_b113e89b",
+      "range": {
+        "startLine": 1112,
+        "startChar": 0,
+        "endLine": 1112,
+        "endChar": 40
+      },
+      "revId": "d84805f041251059b861cb7aafe973eb3d7f2e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55fe05e3_e0435a0c",
+        "filename": "drivers/clk/clk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-10T17:05:26Z",
+      "side": 1,
+      "message": "Good point, I missed that, sorry.",
+      "parentUuid": "a5c2f48d_fb1ee33c",
       "range": {
         "startLine": 1112,
         "startChar": 0,
@@ -120,6 +162,30 @@
       "side": 1,
       "message": "the hook above takes \"struct clk_core *core\" as an input parameter, but our driver cannot use this structure.",
       "parentUuid": "1beab76e_a2c78108",
+      "range": {
+        "startLine": 1180,
+        "startChar": 1,
+        "endLine": 1180,
+        "endChar": 28
+      },
+      "revId": "d84805f041251059b861cb7aafe973eb3d7f2e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08322c5a_717594f2",
+        "filename": "drivers/clk/clk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-10T17:05:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fc411b05_de2a4fc5",
       "range": {
         "startLine": 1180,
         "startChar": 1,
