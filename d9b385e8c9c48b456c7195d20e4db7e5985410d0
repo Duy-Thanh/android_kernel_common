@@ -33,6 +33,23 @@
       "message": "If both of these can happen, I think they can both happen close enough together to need two wrappers in your code that deals with this. If the normal node work is a decrement, then before that is processed you need to queue work to get a weak reference, then before that you need to queue work to get a strong reference, then the wrapper first wrapper needs to be ignored and the second wrapper used instead. It looks like this will trigger an assert below though.",
       "revId": "d9b385e8c9c48b456c7195d20e4db7e5985410d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b84e1d_ccf810bb",
+        "filename": "drivers/android/binder/node.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-04-10T23:45:55Z",
+      "side": 1,
+      "message": "can you put blank lines after variables that are followed by a comment describing something else? It makes it easier to read for me. While comments that start on a line usually refers to the next statement, this is not universal. In some code bases, comments can come after the statement.",
+      "revId": "d9b385e8c9c48b456c7195d20e4db7e5985410d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
