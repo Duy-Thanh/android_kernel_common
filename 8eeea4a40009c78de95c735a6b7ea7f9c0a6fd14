@@ -22,6 +22,30 @@
       },
       "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c16726c_a68e3616",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2024-04-10T06:40:19Z",
+      "side": 1,
+      "message": "Thanks for you reminding, I think we can sove this by including the fs/fuse/fuse_i.h file to our modlue code.\nOr we can modify the argument not to pass this fiq to our hook if you don\u0027t think it\u0027s applicable to include this headfile to our kernel module code.",
+      "parentUuid": "c676337e_bab67424",
+      "range": {
+        "startLine": 239,
+        "startChar": 43,
+        "endLine": 239,
+        "endChar": 46
+      },
+      "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
