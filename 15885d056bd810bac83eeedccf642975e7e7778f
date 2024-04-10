@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84682dfd_a0f9ccd2",
+        "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-04-10T14:49:05Z",
+      "side": 1,
+      "message": "Add an extra patch for that.",
+      "parentUuid": "8969aa52_a89a6e90",
+      "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6db8343_a547f279",
@@ -125,6 +143,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e68ade5e_021ca750",
+        "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-04-10T14:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b01054a_f6277948",
+      "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f9a0388_08882671",
@@ -138,6 +174,30 @@
       "writtenOn": "2024-04-09T16:04:46Z",
       "side": 1,
       "message": "Maybe use `ARRAY_SIZE(allow_list)` and remove the `num` definition",
+      "range": {
+        "startLine": 102,
+        "startChar": 79,
+        "endLine": 102,
+        "endChar": 82
+      },
+      "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2236be99_1422eb3d",
+        "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-04-10T14:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f9a0388_08882671",
       "range": {
         "startLine": 102,
         "startChar": 79,
