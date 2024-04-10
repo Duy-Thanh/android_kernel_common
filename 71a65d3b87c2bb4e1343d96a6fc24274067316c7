@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5b6d5ad_50160737",
+        "filename": "drivers/misc/pkvm-smc/pkvm/events.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-10T15:17:25Z",
+      "side": 1,
+      "message": "nit: How about adding a 08 padding for each print so the events appear aligned?",
+      "revId": "71a65d3b87c2bb4e1343d96a6fc24274067316c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15360526_4b6b9d3d",
+        "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-10T15:17:25Z",
+      "side": 1,
+      "message": "This ifdef should be superfluous. define_events.h should already handle this case.",
+      "revId": "71a65d3b87c2bb4e1343d96a6fc24274067316c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
