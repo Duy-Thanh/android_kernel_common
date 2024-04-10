@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8969aa52_a89a6e90",
+        "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-10T08:54:14Z",
+      "side": 1,
+      "message": "Yes but that one is too verbose. When it is enabled it is hard to track anything from it.",
+      "parentUuid": "a2a8cd4c_8e319d02",
+      "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6db8343_a547f279",
         "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
         "patchSetId": 4
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "I am not sure about, I think otherwise we duplicate many IDs?",
       "parentUuid": "e6db8343_a547f279",
+      "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95091e26_179fcf03",
+        "filename": "drivers/misc/pkvm-smc/pkvm/pkvm-smc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-10T08:54:14Z",
+      "side": 1,
+      "message": "In this case pval initialization should be after this.",
+      "parentUuid": "ff2a4f88_ee156ab7",
       "revId": "15885d056bd810bac83eeedccf642975e7e7778f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
