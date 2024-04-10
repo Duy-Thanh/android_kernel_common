@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1187d91c_2a155892",
+        "filename": "drivers/android/binder/node.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-04-10T23:22:27Z",
+      "side": 1,
+      "message": "Is this protected by the same lock as NodeInner? Can you document this as it seems to be required.",
+      "revId": "d9b385e8c9c48b456c7195d20e4db7e5985410d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f06c70_735eae36",
+        "filename": "drivers/android/binder/node.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-04-10T23:22:27Z",
+      "side": 1,
+      "message": "If both of these can happen, I think they can both happen close enough together to need two wrappers in your code that deals with this. If the normal node work is a decrement, then before that is processed you need to queue work to get a weak reference, then before that you need to queue work to get a strong reference, then the wrapper first wrapper needs to be ignored and the second wrapper used instead. It looks like this will trigger an assert below though.",
+      "revId": "d9b385e8c9c48b456c7195d20e4db7e5985410d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
