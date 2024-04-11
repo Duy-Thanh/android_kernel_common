@@ -16,6 +16,23 @@
       "message": "Should change 1268224 be cherry-picked here instead?",
       "revId": "360a4dfc5107aaa47bdfe6ebba8d5837817a7c10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19244542_ada184af",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-11T18:41:41Z",
+      "side": 1,
+      "message": "KABI_RESERVE() is used exclusively for resolving LTS merge KMI issues. This is not useable by partners for anything. Why are you adding these?",
+      "revId": "360a4dfc5107aaa47bdfe6ebba8d5837817a7c10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
