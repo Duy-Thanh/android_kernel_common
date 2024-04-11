@@ -45,6 +45,30 @@
       },
       "revId": "8950c6f0823f541298898209abf7eb02b2c44f82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eb83e14_70b6cac5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2139,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-04-11T08:11:15Z",
+      "side": 1,
+      "message": "The reasoning was that the MODULE_OWNED state can be \u0027additive\u0027 to other states (e.g. RESTRICTED_PROT), though in practice these other additive states are not stored in the struct hyp_page I think, so this was mostly forward looking (we could decide to cache the RESTRICTED_PROT state in hyp_page as well to avoid inferring from the PTE).\n\nI\u0027ll double check that setting this to \u0027\u003d\u0027 here doesn\u0027t break anything, but if so I\u0027ll update the patch, cheers.",
+      "parentUuid": "1a2aca5e_ba286c75",
+      "range": {
+        "startLine": 2139,
+        "startChar": 22,
+        "endLine": 2139,
+        "endChar": 24
+      },
+      "revId": "8950c6f0823f541298898209abf7eb02b2c44f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
