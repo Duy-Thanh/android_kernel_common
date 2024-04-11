@@ -80,6 +80,8 @@ struct userfaultfd_ctx {
 	atomic_t mmap_changing;
 	/* mm with one ore more vmas attached to this userfaultfd_ctx */
 	struct mm_struct *mm;
+
+	ANDROID_KABI_RESERVE(1);
 };
 
 extern vm_fault_t handle_userfault(struct vm_fault *vmf, unsigned long reason);
