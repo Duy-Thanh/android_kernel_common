@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45cb3e38_3b65bdb4",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1714,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-04-11T10:50:36Z",
+      "side": 1,
+      "message": "Hi suren, kalesh,\n\nhow about move this change to do_handle_mm_fault like kernel-5.10-spf.\n```\ndiff --git a/mm/memory.c b/mm/memory.c\nindex d93d8dc1ba40..eaea74612780 100644\n--- a/mm/memory.c\n+++ b/mm/memory.c\n@@ -6830,6 +6830,10 @@ vm_fault_t do_handle_mm_fault(struct vm_area_struct *vma,\n        VM_BUG_ON((flags \u0026 FAULT_FLAG_SPECULATIVE) \u0026\u0026\n                  !vma_can_speculate(vma, flags));\n\n+       /* Clear flags that may lead to release the mmap_sem to retry */\n+       if (flags \u0026 FAULT_FLAG_SPECULATIVE)\n+               flags \u0026\u003d ~(FAULT_FLAG_ALLOW_RETRY|FAULT_FLAG_KILLABLE);\n+\n        __set_current_state(TASK_RUNNING);\n```",
+      "revId": "8937c82c506e8f4916c7af215ec478e5de74bc74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
