@@ -364,6 +364,8 @@ enum binder_prio_state {
  *                        (protected by @outer_lock)
  * @refs_by_node:         rbtree of refs ordered by ref->node
  *                        (protected by @outer_lock)
+ * @next_ref_desc:        monotonic wrap-around counter to get the next handle
+ *                        (protected by @outer_lock)
  * @waiting_threads:      threads currently waiting for proc work
  *                        (protected by @inner_lock)
  * @pid                   PID of group_leader of process
@@ -373,6 +375,8 @@ enum binder_prio_state {
  * @cred                  struct cred associated with the `struct file`
  *                        in binder_open()
  *                        (invariant after initialized)
+ * @flags:                enum proc_flags set via BINDER_SET_PROC_FLAGS.
+ *                        (protected by @inner_lock)
  * @deferred_work_node:   element for binder_deferred_list
  *                        (protected by binder_deferred_lock)
  * @deferred_work:        bitmap of deferred work to perform
@@ -432,10 +436,12 @@ struct binder_proc {
 	struct rb_root nodes;
 	struct rb_root refs_by_desc;
 	struct rb_root refs_by_node;
+	u32 next_ref_desc;
 	struct list_head waiting_threads;
 	int pid;
 	struct task_struct *tsk;
 	const struct cred *cred;
+	u32 flags;
 	struct hlist_node deferred_work_node;
 	int deferred_work;
 	int outstanding_txns;
@@ -444,11 +450,10 @@ struct binder_proc {
 	bool sync_recv;
 	bool async_recv;
 	wait_queue_head_t freeze_wait;
-
 	struct list_head todo;
 	struct binder_stats stats;
 	struct list_head delivered_death;
-	int max_threads;
+	u32 max_threads;
 	int requested_threads;
 	int requested_threads_started;
 	int tmp_ref;
@@ -459,7 +464,6 @@ struct binder_proc {
 	spinlock_t inner_lock;
 	spinlock_t outer_lock;
 	struct dentry *binderfs_entry;
-	bool oneway_spam_detection_enabled;
 };
 
 /**

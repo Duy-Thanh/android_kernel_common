@@ -299,6 +299,14 @@ struct binder_extended_error {
 	__s32	param;
 };
 
+/* Used with BINDER_SET_PROC_FLAGS ioctl */
+enum proc_flags {
+	PF_SPAM_DETECTION	= (1 << 0), /* enable oneway spam detection */
+	PF_LARGE_HANDLES	= (1 << 1), /* use large reference handles */
+
+	PF_SUPPORTED_FLAGS_MASK = (PF_SPAM_DETECTION | PF_LARGE_HANDLES),
+};
+
 enum {
 	BINDER_WRITE_READ		= _IOWR('b', 1, struct binder_write_read),
 	BINDER_SET_IDLE_TIMEOUT		= _IOW('b', 3, __s64),
@@ -312,8 +320,11 @@ enum {
 	BINDER_SET_CONTEXT_MGR_EXT	= _IOW('b', 13, struct flat_binder_object),
 	BINDER_FREEZE			= _IOW('b', 14, struct binder_freeze_info),
 	BINDER_GET_FROZEN_INFO		= _IOWR('b', 15, struct binder_frozen_status_info),
-	BINDER_ENABLE_ONEWAY_SPAM_DETECTION	= _IOW('b', 16, __u32),
 	BINDER_GET_EXTENDED_ERROR	= _IOWR('b', 17, struct binder_extended_error),
+	BINDER_SET_PROC_FLAGS		= _IOWR('b', 18, __u32),
+
+	/* This is deprecated, use BINDER_SET_PROC_FLAGS instead. */
+	BINDER_ENABLE_ONEWAY_SPAM_DETECTION	= _IOW('b', 16, __u32),
 };
 
 /*
