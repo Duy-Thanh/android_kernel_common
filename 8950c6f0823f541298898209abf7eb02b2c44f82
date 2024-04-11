@@ -69,6 +69,30 @@
       },
       "revId": "8950c6f0823f541298898209abf7eb02b2c44f82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2501f473_bfe6b5fe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2139,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-04-11T08:19:52Z",
+      "side": 1,
+      "message": "OK, so MODULE_OWNED is additive to NOPAGE when a page is marked as owned by PKVM_ID_PROTECTED, so using \u0027\u003d\u0027 here would break that. I can\u0027t find anywhere where that would be a problem, so maybe it\u0027s OK, but this asymmetry is in fact consistent with the asymmetric state check further up in this function. Wdyt?",
+      "parentUuid": "0eb83e14_70b6cac5",
+      "range": {
+        "startLine": 2139,
+        "startChar": 22,
+        "endLine": 2139,
+        "endChar": 24
+      },
+      "revId": "8950c6f0823f541298898209abf7eb02b2c44f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
