@@ -162,6 +162,7 @@ void topology_set_cpu_scale(unsigned int cpu, unsigned long capacity)
 {
 	per_cpu(cpu_scale, cpu) = capacity;
 }
+EXPORT_SYMBOL_GPL(topology_set_cpu_scale);
 
 DEFINE_PER_CPU(unsigned long, thermal_pressure);
 EXPORT_PER_CPU_SYMBOL_GPL(thermal_pressure);
