@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4572062_fd33966b",
+        "filename": "drivers/misc/pkvm-smc/pkvm/events.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-04-11T08:26:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f6a7bb1_f2a0686b",
+      "revId": "71a65d3b87c2bb4e1343d96a6fc24274067316c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15360526_4b6b9d3d",
