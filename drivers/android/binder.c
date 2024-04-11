@@ -1218,6 +1218,50 @@ static struct binder_ref *binder_get_ref_olocked(struct binder_proc *proc,
 	return NULL;
 }
 
+static u32 slow_desc_lookup(struct binder_proc *proc)
+{
+	struct binder_ref *ref;
+	struct rb_node *n;
+	u32 desc = 1;
+
+	for (n = rb_first(&proc->refs_by_desc); n; n = rb_next(n)) {
+		ref = rb_entry(n, struct binder_ref, rb_node_desc);
+		if (ref->data.desc > desc)
+			break;
+		desc = ref->data.desc + 1;
+	}
+
+	return desc;
+}
+
+static u32 next_ref_desc(struct binder_proc *proc, struct binder_node *node)
+{
+	struct dbitmap *dbitmap = &proc->dbitmap;
+	unsigned long *new;
+	unsigned nbits;
+	u32 desc;
+
+	/* 0 is reserved for context manager */
+	if (node == proc->context->binder_context_mgr_node)
+		return 0;
+
+	if (unlikely(!dbitmap->map))
+		return slow_desc_lookup(proc);
+
+	desc = dbitmap_get_first_zero_bit(dbitmap);
+	if (likely(desc < dbitmap->nbits))
+		return desc;
+
+	/* Needs an expand,  */
+	nbits = dbitmap->nbits << 1;
+	binder_proc_unlock(proc);
+	new = bitmap_zalloc(nbits, GFP_KERNEL | __GFP_ZERO);
+	binder_proc_lock(proc);
+	dbitmap_expand(dbitmap, new, nbits);
+
+	return dbitmap->nbits;
+}
+
 /**
  * binder_get_ref_for_node_olocked() - get the ref associated with given node
  * @proc:	binder_proc that owns the ref
@@ -1241,12 +1285,14 @@ static struct binder_ref *binder_get_ref_for_node_olocked(
 					struct binder_node *node,
 					struct binder_ref *new_ref)
 {
-	struct binder_context *context = proc->context;
-	struct rb_node **p = &proc->refs_by_node.rb_node;
-	struct rb_node *parent = NULL;
 	struct binder_ref *ref;
-	struct rb_node *n;
+	struct rb_node *parent;
+	struct rb_node **p;
+	u32 desc;
 
+retry:
+	p = &proc->refs_by_node.rb_node;
+	parent = NULL;
 	while (*p) {
 		parent = *p;
 		ref = rb_entry(parent, struct binder_ref, rb_node_node);
@@ -1261,6 +1307,10 @@ static struct binder_ref *binder_get_ref_for_node_olocked(
 	if (!new_ref)
 		return NULL;
 
+	desc = next_ref_desc(proc, node);
+	if (desc == proc->dbitmap.nbits)
+		goto retry;
+
 	binder_stats_created(BINDER_STAT_REF);
 	new_ref->data.debug_id = atomic_inc_return(&binder_last_id);
 	new_ref->proc = proc;
@@ -1268,14 +1318,7 @@ static struct binder_ref *binder_get_ref_for_node_olocked(
 	rb_link_node(&new_ref->rb_node_node, parent, p);
 	rb_insert_color(&new_ref->rb_node_node, &proc->refs_by_node);
 
-	new_ref->data.desc = (node == context->binder_context_mgr_node) ? 0 : 1;
-	for (n = rb_first(&proc->refs_by_desc); n != NULL; n = rb_next(n)) {
-		ref = rb_entry(n, struct binder_ref, rb_node_desc);
-		if (ref->data.desc > new_ref->data.desc)
-			break;
-		new_ref->data.desc = ref->data.desc + 1;
-	}
-
+	new_ref->data.desc = desc;
 	p = &proc->refs_by_desc.rb_node;
 	while (*p) {
 		parent = *p;
@@ -1311,6 +1354,8 @@ static void binder_cleanup_ref_olocked(struct binder_ref *ref)
 		      ref->proc->pid, ref->data.debug_id, ref->data.desc,
 		      ref->node->debug_id);
 
+	if (ref->proc->dbitmap.map)
+		clear_bit(ref->data.desc, ref->proc->dbitmap.map);
 	rb_erase(&ref->rb_node_desc, &ref->proc->refs_by_desc);
 	rb_erase(&ref->rb_node_node, &ref->proc->refs_by_node);
 
@@ -5120,6 +5165,7 @@ static void binder_free_proc(struct binder_proc *proc)
 	put_task_struct(proc->tsk);
 	put_cred(proc->cred);
 	binder_stats_deleted(BINDER_STAT_PROC);
+	dbitmap_free(&proc->dbitmap);
 	kfree(proc);
 }
 
@@ -5817,6 +5863,7 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	struct binderfs_info *info;
 	struct dentry *binder_binderfs_dir_entry_proc = NULL;
 	bool existing_pid = false;
+	int ret;
 
 	binder_debug(BINDER_DEBUG_OPEN_CLOSE, "%s: %d:%d\n", __func__,
 		     current->group_leader->pid, current->pid);
@@ -5824,6 +5871,13 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	proc = kzalloc(sizeof(*proc), GFP_KERNEL);
 	if (proc == NULL)
 		return -ENOMEM;
+
+	ret = dbitmap_init(&proc->dbitmap, BITS_PER_TYPE(unsigned long));
+	if (ret < 0) {
+		kfree(proc);
+		return -ENOMEM;
+	}
+
 	spin_lock_init(&proc->inner_lock);
 	spin_lock_init(&proc->outer_lock);
 	get_task_struct(current->group_leader);
