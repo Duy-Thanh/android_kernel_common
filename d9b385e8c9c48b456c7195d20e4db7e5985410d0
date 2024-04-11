@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcc4001f_3bc8eaf4",
+        "filename": "drivers/android/binder/node.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-11T08:52:36Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a field of `NodeInner`, so it\u0027s also protected by the same lock as other fields in `NodeInner`. I added a line to the docs explaining this.",
+      "parentUuid": "1187d91c_2a155892",
+      "revId": "d9b385e8c9c48b456c7195d20e4db7e5985410d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4f06c70_735eae36",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "791cf9e5_9ea887a9",
+        "filename": "drivers/android/binder/node.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-11T08:52:36Z",
+      "side": 1,
+      "message": "Which assert would it trigger? It looks ok to me.",
+      "parentUuid": "a4f06c70_735eae36",
+      "revId": "d9b385e8c9c48b456c7195d20e4db7e5985410d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7b84e1d_ccf810bb",
         "filename": "drivers/android/binder/node.rs",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2024-04-10T23:45:55Z",
       "side": 1,
       "message": "can you put blank lines after variables that are followed by a comment describing something else? It makes it easier to read for me. While comments that start on a line usually refers to the next statement, this is not universal. In some code bases, comments can come after the statement.",
+      "revId": "d9b385e8c9c48b456c7195d20e4db7e5985410d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5969668d_b20a2adb",
+        "filename": "drivers/android/binder/node.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-11T08:52:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7b84e1d_ccf810bb",
       "revId": "d9b385e8c9c48b456c7195d20e4db7e5985410d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
