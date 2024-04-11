@@ -118,6 +118,30 @@
       },
       "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0277bdd8_a16687c9",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2024-04-11T03:35:34Z",
+      "side": 1,
+      "message": "Our new patch without passing this fuse_iqueue argument has been uploaded.\n\nWe have internally evaluated the changes for this hook and found that they rely on too many customized features of our own, which are from different software modules in Android. These modifications highly depend on the specific requirements of our phones. So, these changes may not be suitable for upstream Linux due to the limitations imposed by our specific user scenario.",
+      "parentUuid": "06d400b2_b4c65699",
+      "range": {
+        "startLine": 239,
+        "startChar": 43,
+        "endLine": 239,
+        "endChar": 46
+      },
+      "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
