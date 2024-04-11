@@ -299,6 +299,11 @@ struct binder_extended_error {
 	__s32	param;
 };
 
+enum binder_proc_flags {
+	BF_SPAM_DETECTION	= (1 << 0),
+	BF_LARGE_HANDLES	= (1 << 1),
+};
+
 enum {
 	BINDER_WRITE_READ		= _IOWR('b', 1, struct binder_write_read),
 	BINDER_SET_IDLE_TIMEOUT		= _IOW('b', 3, __s64),
@@ -312,8 +317,14 @@ enum {
 	BINDER_SET_CONTEXT_MGR_EXT	= _IOW('b', 13, struct flat_binder_object),
 	BINDER_FREEZE			= _IOW('b', 14, struct binder_freeze_info),
 	BINDER_GET_FROZEN_INFO		= _IOWR('b', 15, struct binder_frozen_status_info),
-	BINDER_ENABLE_ONEWAY_SPAM_DETECTION	= _IOW('b', 16, __u32),
+	BINDER_SET_PROC_FLAGS		= _IOW('b', 16, __u32 /* enum binder_proc_flags */),
 	BINDER_GET_EXTENDED_ERROR	= _IOWR('b', 17, struct binder_extended_error),
+
+	/*
+	 * Kept for backwards-compatibility reasons, the older "boolean" value
+	 * is now processed as the 0x01 flag mask, resulting in same behavior.
+	 */
+	BINDER_ENABLE_ONEWAY_SPAM_DETECTION = BINDER_SET_PROC_FLAGS,
 };
 
 /*

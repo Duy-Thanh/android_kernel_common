@@ -1218,6 +1218,36 @@ static struct binder_ref *binder_get_ref_olocked(struct binder_proc *proc,
 	return NULL;
 }
 
+static inline u32 next_ref_desc(struct binder_proc *proc,
+				struct binder_node *node)
+{
+	struct binder_ref *ref;
+	struct rb_node *n;
+	u32 desc;
+
+	if (node == proc->context->binder_context_mgr_node)
+		return 0;
+
+	if (proc->flags & BF_LARGE_HANDLES) {
+		desc = atomic_inc_return(&proc->ref_desc);
+		return desc ? : atomic_inc_return(&proc->ref_desc);
+	}
+
+	/* Slow lookup path. Since BF_LARGE_HANDLES isn't set it means
+	 * that userspace might use the descriptor id as a Vector index
+	 * and thus why we need to find the smallest id available.
+	 */
+	desc = 1;
+	for (n = rb_first(&proc->refs_by_desc); n; n = rb_next(n)) {
+		ref = rb_entry(n, struct binder_ref, rb_node_desc);
+		if (ref->data.desc > desc)
+			break;
+		desc = ref->data.desc + 1;
+	}
+
+	return desc;
+}
+
 /**
  * binder_get_ref_for_node_olocked() - get the ref associated with given node
  * @proc:	binder_proc that owns the ref
@@ -1241,11 +1271,9 @@ static struct binder_ref *binder_get_ref_for_node_olocked(
 					struct binder_node *node,
 					struct binder_ref *new_ref)
 {
-	struct binder_context *context = proc->context;
 	struct rb_node **p = &proc->refs_by_node.rb_node;
 	struct rb_node *parent = NULL;
 	struct binder_ref *ref;
-	struct rb_node *n;
 
 	while (*p) {
 		parent = *p;
@@ -1268,14 +1296,8 @@ static struct binder_ref *binder_get_ref_for_node_olocked(
 	rb_link_node(&new_ref->rb_node_node, parent, p);
 	rb_insert_color(&new_ref->rb_node_node, &proc->refs_by_node);
 
-	new_ref->data.desc = (node == context->binder_context_mgr_node) ? 0 : 1;
-	for (n = rb_first(&proc->refs_by_desc); n != NULL; n = rb_next(n)) {
-		ref = rb_entry(n, struct binder_ref, rb_node_desc);
-		if (ref->data.desc > new_ref->data.desc)
-			break;
-		new_ref->data.desc = ref->data.desc + 1;
-	}
-
+retry:
+	new_ref->data.desc = next_ref_desc(proc, node);
 	p = &proc->refs_by_desc.rb_node;
 	while (*p) {
 		parent = *p;
@@ -1285,6 +1307,8 @@ static struct binder_ref *binder_get_ref_for_node_olocked(
 			p = &(*p)->rb_left;
 		else if (new_ref->data.desc > ref->data.desc)
 			p = &(*p)->rb_right;
+		else if (proc->flags & BF_LARGE_HANDLES)
+			goto retry;
 		else
 			BUG();
 	}
@@ -4679,8 +4703,8 @@ retry:
 		case BINDER_WORK_TRANSACTION_COMPLETE:
 		case BINDER_WORK_TRANSACTION_PENDING:
 		case BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT: {
-			if (proc->oneway_spam_detection_enabled &&
-				   w->type == BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT)
+			if (proc->flags & BF_SPAM_DETECTION &&
+			    w->type == BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT)
 				cmd = BR_ONEWAY_SPAM_SUSPECT;
 			else if (w->type == BINDER_WORK_TRANSACTION_PENDING)
 				cmd = BR_TRANSACTION_PENDING_FROZEN;
@@ -5717,15 +5741,15 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		}
 		break;
 	}
-	case BINDER_ENABLE_ONEWAY_SPAM_DETECTION: {
-		uint32_t enable;
+	case BINDER_SET_PROC_FLAGS: {
+		u32 flags;
 
-		if (copy_from_user(&enable, ubuf, sizeof(enable))) {
+		if (copy_from_user(&flags, ubuf, sizeof(flags))) {
 			ret = -EFAULT;
 			goto err;
 		}
 		binder_inner_proc_lock(proc);
-		proc->oneway_spam_detection_enabled = (bool)enable;
+		proc->flags = flags;
 		binder_inner_proc_unlock(proc);
 		break;
 	}

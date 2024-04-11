@@ -432,6 +432,7 @@ struct binder_proc {
 	struct rb_root nodes;
 	struct rb_root refs_by_desc;
 	struct rb_root refs_by_node;
+	atomic_t ref_desc;
 	struct list_head waiting_threads;
 	int pid;
 	struct task_struct *tsk;
@@ -439,12 +440,12 @@ struct binder_proc {
 	struct hlist_node deferred_work_node;
 	int deferred_work;
 	int outstanding_txns;
+	u32 flags;
 	bool is_dead;
 	bool is_frozen;
 	bool sync_recv;
 	bool async_recv;
 	wait_queue_head_t freeze_wait;
-
 	struct list_head todo;
 	struct binder_stats stats;
 	struct list_head delivered_death;
@@ -459,7 +460,6 @@ struct binder_proc {
 	spinlock_t inner_lock;
 	spinlock_t outer_lock;
 	struct dentry *binderfs_entry;
-	bool oneway_spam_detection_enabled;
 };
 
 /**
