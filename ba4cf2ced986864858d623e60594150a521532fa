@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074388237",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3039055?revision\u003d1",
+      "key": {
+        "uuid": "47de2a98_39b4aa8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-11T11:41:35Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android14-6.1.\nBase branch change: [2975111](https://android-review.googlesource.com/c/2975111).\n\n```\n      ## android/abi_gki_aarch64_xiaomi ##\n     @@\n    -   sdio_writew\n    -   sdio_readw\n    +   bioset_init\n    +   bioset_exit\n      \n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (246994 ANDROID: GKI: Add symbol list for Nothing)\n    + #required by mi_asap.ko\n    +   __traceiter_android_vh_read_pages\n    +   __tracepoint_android_vh_read_pages\n    +@@\n    +   pagecache_get_page\n    +   filemap_get_folios\n    +   find_get_pages_range_tag\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +#required by speed_ui.ko\n     +  __tracepoint_android_rvh_update_cpus_allowed\n     +  __traceiter_android_rvh_update_cpus_allowed\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (43adf5 ANDROID: GKI: Update symbol list for xiaomi)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "ba4cf2ced986864858d623e60594150a521532fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074388237",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3039055?revision\u003d1",
+      "key": {
+        "uuid": "805cb7f5_420f7213",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-11T11:41:35Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "ba4cf2ced986864858d623e60594150a521532fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074388237",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3039055?revision\u003d1",
+      "key": {
+        "uuid": "dbe2397d_2a3eab34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-11T11:41:35Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/4289e1348ea3ba552b8bd401182b55dcb87d5be7).\n\n```\n      ## android/abi_gki_aarch64_xiaomi ##\n     @@\n    -   sdio_writew\n    -   sdio_readw\n    +   bioset_init\n    +   bioset_exit\n      \n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (246994 ANDROID: GKI: Add symbol list for Nothing)\n    + #required by mi_asap.ko\n    +   __traceiter_android_vh_read_pages\n    +   __tracepoint_android_vh_read_pages\n    +@@\n    +   pagecache_get_page\n    +   filemap_get_folios\n    +   find_get_pages_range_tag\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +#required by speed_ui.ko\n     +  __tracepoint_android_rvh_update_cpus_allowed\n     +  __traceiter_android_rvh_update_cpus_allowed\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (43adf5 ANDROID: GKI: Update symbol list for xiaomi)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "ba4cf2ced986864858d623e60594150a521532fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
