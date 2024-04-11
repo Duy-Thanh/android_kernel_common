@@ -14,10 +14,12 @@ obj-$(CONFIG_VT6656)		+= vt6656/
 obj-$(CONFIG_VME_BUS)		+= vme_user/
 obj-$(CONFIG_IIO)		+= iio/
 obj-$(CONFIG_FB_SM750)		+= sm750fb/
-obj-$(CONFIG_USB_EMXX)		+= emxx_udc/
 obj-$(CONFIG_MFD_NVEC)		+= nvec/
+<<<<<<< HEAD   (da6584 ANDROID: gki_defconfig: Realign succinct defconfigs with lat)
 obj-$(CONFIG_ASHMEM)		+= android/
 obj-$(CONFIG_STAGING_BOARD)	+= board/
+=======
+>>>>>>> BRANCH (4cece7 Linux 6.9-rc1)
 obj-$(CONFIG_LTE_GDM724X)	+= gdm724x/
 obj-$(CONFIG_FB_TFT)		+= fbtft/
 obj-$(CONFIG_MOST)		+= most/

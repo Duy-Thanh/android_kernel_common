@@ -333,7 +333,6 @@ config PANIC_TIMEOUT
 config COMPAT
 	bool "Enable support for 32bit binaries"
 	depends on PPC64
-	depends on !CC_IS_CLANG || CLANG_VERSION >= 120000
 	default y if !CPU_LITTLE_ENDIAN
 	select ARCH_WANT_OLD_COMPAT_IPC
 	select COMPAT_OLD_SIGACTION
@@ -689,9 +688,7 @@ config ARCH_SELECTS_CRASH_DUMP
 
 config FA_DUMP
 	bool "Firmware-assisted dump"
-	depends on PPC64 && (PPC_RTAS || PPC_POWERNV)
-	select CRASH_CORE
-	select CRASH_DUMP
+	depends on CRASH_DUMP && PPC64 && (PPC_RTAS || PPC_POWERNV)
 	help
 	  A robust mechanism to get reliable kernel crash dump with
 	  assistance from firmware. This approach does not use kexec,

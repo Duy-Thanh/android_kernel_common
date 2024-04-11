@@ -3,8 +3,13 @@
 #
 config INTEL_MEI_PXP
 	tristate "Intel PXP services of ME Interface"
+<<<<<<< HEAD   (da6584 ANDROID: gki_defconfig: Realign succinct defconfigs with lat)
 	select INTEL_MEI_ME
 	depends on DRM_I915
+=======
+	depends on INTEL_MEI_ME
+	depends on DRM_I915 || DRM_XE
+>>>>>>> BRANCH (4cece7 Linux 6.9-rc1)
 	help
 	  MEI Support for PXP Services on Intel platforms.
 

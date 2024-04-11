@@ -1173,16 +1173,10 @@
 			panels may send no or incorrect EDID data sets.
 			This parameter allows to specify an EDID data sets
 			in the /lib/firmware directory that are used instead.
-			Generic built-in EDID data sets are used, if one of
-			edid/1024x768.bin, edid/1280x1024.bin,
-			edid/1680x1050.bin, or edid/1920x1080.bin is given
-			and no file with the same name exists. Details and
-			instructions how to build your own EDID data are
-			available in Documentation/admin-guide/edid.rst. An EDID
-			data set will only be used for a particular connector,
-			if its name and a colon are prepended to the EDID
-			name. Each connector may use a unique EDID data
-			set by separating the files with a comma.  An EDID
+			An EDID data set will only be used for a particular
+			connector, if its name and a colon are prepended to
+			the EDID name. Each connector may use a unique EDID
+			data set by separating the files with a comma. An EDID
 			data set with no connector name will be used for
 			any connectors not explicitly specified.
 
@@ -1578,12 +1572,28 @@
 			The above will cause the "foo" tracing instance to trigger
 			a snapshot at the end of boot up.
 
-	ftrace_dump_on_oops[=orig_cpu]
+	ftrace_dump_on_oops[=2(orig_cpu) | =<instance>][,<instance> |
+			  ,<instance>=2(orig_cpu)]
 			[FTRACE] will dump the trace buffers on oops.
-			If no parameter is passed, ftrace will dump
-			buffers of all CPUs, but if you pass orig_cpu, it will
-			dump only the buffer of the CPU that triggered the
-			oops.
+			If no parameter is passed, ftrace will dump global
+			buffers of all CPUs, if you pass 2 or orig_cpu, it
+			will dump only the buffer of the CPU that triggered
+			the oops, or the specific instance will be dumped if
+			its name is passed. Multiple instance dump is also
+			supported, and instances are separated by commas. Each
+			instance supports only dump on CPU that triggered the
+			oops by passing 2 or orig_cpu to it.
+
+			ftrace_dump_on_oops=foo=orig_cpu
+
+			The above will dump only the buffer of "foo" instance
+			on CPU that triggered the oops.
+
+			ftrace_dump_on_oops,foo,bar=orig_cpu
+
+			The above will dump global buffer on all CPUs, the
+			buffer of "foo" instance on all CPUs and the buffer
+			of "bar" instance on CPU that triggered the oops.
 
 	ftrace_filter=[function-list]
 			[FTRACE] Limit the functions traced by the function
@@ -4221,6 +4231,7 @@
 			bit 4: print ftrace buffer
 			bit 5: print all printk messages in buffer
 			bit 6: print all CPUs backtrace (if available in the arch)
+			bit 7: print only tasks in uninterruptible (blocked) state
 			*Be aware* that this option may print a _lot_ of lines,
 			so there are risks of losing older messages in the log.
 			Use this option carefully, maybe worth to setup a
