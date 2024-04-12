@@ -69,6 +69,24 @@
       "parentUuid": "7f9962fd_46ee74a5",
       "revId": "d3b6b0d0fd9626147ea8596633074bffcb30f4b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56966709_5f8e7b9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-12T11:11:01Z",
+      "side": 1,
+      "message": "The current version of the patch was accepted in the end: https://lore.kernel.org/all/171287094047.10875.5384110198296900359.tip-bot2@tip-bot2/",
+      "parentUuid": "721ad0b9_f6fbdfae",
+      "revId": "d3b6b0d0fd9626147ea8596633074bffcb30f4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
