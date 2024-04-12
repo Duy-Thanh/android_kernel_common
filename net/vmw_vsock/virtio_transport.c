@@ -112,10 +112,14 @@ virtio_transport_send_pkt_work(struct work_struct *work)
 			break;
 		}
 
+<<<<<<< HEAD   (995a8c Merge 6.1.84 into android14-6.1-lts)
 		pkt = list_first_entry(&vsock->send_pkt_list,
 				       struct virtio_vsock_pkt, list);
 		list_del_init(&pkt->list);
 		spin_unlock_bh(&vsock->send_pkt_list_lock);
+=======
+		reply = virtio_vsock_skb_reply(skb);
+>>>>>>> BRANCH (bf1e3b Linux 6.1.85)
 
 		virtio_transport_deliver_tap_pkt(pkt);
 
@@ -138,6 +142,8 @@ virtio_transport_send_pkt_work(struct work_struct *work)
 			spin_unlock_bh(&vsock->send_pkt_list_lock);
 			break;
 		}
+
+		virtio_transport_deliver_tap_pkt(skb);
 
 		if (reply) {
 			struct virtqueue *rx_vq = vsock->vqs[VSOCK_VQ_RX];
