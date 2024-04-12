@@ -105,6 +105,13 @@ DECLARE_HOOK(android_vh_binder_new_ref,
 DECLARE_HOOK(android_vh_binder_del_ref,
 	TP_PROTO(struct task_struct *proc, uint32_t ref_desc),
 	TP_ARGS(proc, ref_desc));
+struct binder_alloc;
+DECLARE_RESTRICTED_HOOK(android_rvh_binder_update_page_range_lock,
+	TP_PROTO(struct binder_alloc *alloc, bool *locked),
+	TP_ARGS(alloc, locked), 1);
+DECLARE_HOOK(android_vh_binder_update_page_range_unlock,
+	TP_PROTO(struct binder_alloc *alloc, bool *unlocked),
+	TP_ARGS(alloc, unlocked));
 
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */

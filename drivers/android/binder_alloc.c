@@ -188,6 +188,7 @@ static int binder_update_page_range(struct binder_alloc *alloc, int allocate,
 	struct vm_area_struct *vma = NULL;
 	struct mm_struct *mm = NULL;
 	bool need_mm = false;
+	bool locked = false, unlocked = false;
 
 	binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,
 		     "%d: %s pages %pK-%pK\n", alloc->pid,
@@ -213,7 +214,9 @@ static int binder_update_page_range(struct binder_alloc *alloc, int allocate,
 		mm = alloc->mm;
 
 	if (mm) {
-		mmap_write_lock(mm);
+		trace_android_rvh_binder_update_page_range_lock(alloc, &locked);
+		if (!locked)
+			mmap_write_lock(mm);
 		vma = alloc->vma;
 	}
 
@@ -271,7 +274,9 @@ static int binder_update_page_range(struct binder_alloc *alloc, int allocate,
 		trace_binder_alloc_page_end(alloc, index);
 	}
 	if (mm) {
-		mmap_write_unlock(mm);
+		trace_android_vh_binder_update_page_range_unlock(alloc, &unlocked);
+		if (!unlocked)
+			mmap_write_unlock(mm);
 		mmput_async(mm);
 	}
 	return 0;
@@ -304,7 +309,9 @@ err_page_ptr_cleared:
 	}
 err_no_vma:
 	if (mm) {
-		mmap_write_unlock(mm);
+		trace_android_vh_binder_update_page_range_unlock(alloc, &unlocked);
+		if (!unlocked)
+			mmap_write_unlock(mm);
 		mmput_async(mm);
 	}
 	return vma ? -ENOMEM : -ESRCH;
