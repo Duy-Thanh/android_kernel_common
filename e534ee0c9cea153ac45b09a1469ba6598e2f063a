@@ -16,6 +16,29 @@
       "message": "Please help to review this patch.",
       "revId": "e534ee0c9cea153ac45b09a1469ba6598e2f063a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e609c71_cc74ea6b",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-12T17:30:23Z",
+      "side": 1,
+      "message": "Why do you need two variables to track a single lock state?",
+      "range": {
+        "startLine": 191,
+        "startChar": 22,
+        "endLine": 191,
+        "endChar": 30
+      },
+      "revId": "e534ee0c9cea153ac45b09a1469ba6598e2f063a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
