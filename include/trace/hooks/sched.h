@@ -405,10 +405,12 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg_internal,
 	TP_PROTO(u64 now, struct rq *rq, int running, int *ret),
 	TP_ARGS(now, rq, running, ret), 1);
 
+struct cpufreq_policy;
 DECLARE_HOOK(android_vh_map_util_freq,
 	TP_PROTO(unsigned long util, unsigned long freq,
-		unsigned long cap, unsigned long *next_freq),
-	TP_ARGS(util, freq, cap, next_freq));
+		unsigned long cap, unsigned long *next_freq, struct cpufreq_policy *policy,
+		bool *need_freq_update),
+	TP_ARGS(util, freq, cap, next_freq, policy, need_freq_update));
 
 /* macro versions of hooks are no longer required */
 
