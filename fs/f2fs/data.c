@@ -1554,14 +1554,20 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
 	block_t blkaddr;
 	unsigned int start_pgofs;
 	int bidx = 0;
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
 	bool is_hole;
+=======
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 
 	if (!maxblocks)
 		return 0;
 
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
 	if (!map->m_may_create && f2fs_map_blocks_cached(inode, map, flag))
 		goto out;
 
+=======
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 	map->m_bdev = inode->i_sb->s_bdev;
 	map->m_multidev_dio =
 		f2fs_allow_multi_device_dio(F2FS_I_SB(inode), flag);
@@ -1573,6 +1579,42 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
 	pgofs =	(pgoff_t)map->m_lblk;
 	end = pgofs + maxblocks;
 
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
+=======
+	if (!create && f2fs_lookup_extent_cache(inode, pgofs, &ei)) {
+		if (f2fs_lfs_mode(sbi) && flag == F2FS_GET_BLOCK_DIO &&
+							map->m_may_create)
+			goto next_dnode;
+
+		map->m_pblk = ei.blk + pgofs - ei.fofs;
+		map->m_len = min((pgoff_t)maxblocks, ei.fofs + ei.len - pgofs);
+		map->m_flags = F2FS_MAP_MAPPED;
+		if (map->m_next_extent)
+			*map->m_next_extent = pgofs + map->m_len;
+
+		/* for hardware encryption, but to avoid potential issue in future */
+		if (flag == F2FS_GET_BLOCK_DIO)
+			f2fs_wait_on_block_writeback_range(inode,
+						map->m_pblk, map->m_len);
+
+		if (map->m_multidev_dio) {
+			block_t blk_addr = map->m_pblk;
+
+			bidx = f2fs_target_device_index(sbi, map->m_pblk);
+
+			map->m_bdev = FDEV(bidx).bdev;
+			map->m_pblk -= FDEV(bidx).start_blk;
+			map->m_len = min(map->m_len,
+				FDEV(bidx).end_blk + 1 - map->m_pblk);
+
+			if (map->m_may_create)
+				f2fs_update_device_state(sbi, inode->i_ino,
+							blk_addr, map->m_len);
+		}
+		goto out;
+	}
+
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 next_dnode:
 	if (map->m_may_create)
 		f2fs_map_lock(sbi, flag);
@@ -1786,7 +1828,11 @@ unlock_out:
 		f2fs_balance_fs(sbi, dn.node_changed);
 	}
 out:
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
 	trace_f2fs_map_blocks(inode, map, flag, err);
+=======
+	trace_f2fs_map_blocks(inode, map, create, flag, err);
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 	return err;
 }
 
@@ -1826,6 +1872,53 @@ static inline u64 blks_to_bytes(struct inode *inode, u64 blks)
 	return (blks << inode->i_blkbits);
 }
 
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
+=======
+static int __get_data_block(struct inode *inode, sector_t iblock,
+			struct buffer_head *bh, int create, int flag,
+			pgoff_t *next_pgofs, int seg_type, bool may_write)
+{
+	struct f2fs_map_blocks map;
+	int err;
+
+	map.m_lblk = iblock;
+	map.m_len = bytes_to_blks(inode, bh->b_size);
+	map.m_next_pgofs = next_pgofs;
+	map.m_next_extent = NULL;
+	map.m_seg_type = seg_type;
+	map.m_may_create = may_write;
+
+	err = f2fs_map_blocks(inode, &map, create, flag);
+	if (!err) {
+		map_bh(bh, inode->i_sb, map.m_pblk);
+		bh->b_state = (bh->b_state & ~F2FS_MAP_FLAGS) | map.m_flags;
+		bh->b_size = blks_to_bytes(inode, map.m_len);
+
+		if (map.m_multidev_dio)
+			bh->b_bdev = map.m_bdev;
+	}
+	return err;
+}
+
+static int get_data_block_dio_write(struct inode *inode, sector_t iblock,
+			struct buffer_head *bh_result, int create)
+{
+	return __get_data_block(inode, iblock, bh_result, create,
+				F2FS_GET_BLOCK_DIO, NULL,
+				f2fs_rw_hint_to_seg_type(inode->i_write_hint),
+				true);
+}
+
+static int get_data_block_dio(struct inode *inode, sector_t iblock,
+			struct buffer_head *bh_result, int create)
+{
+	return __get_data_block(inode, iblock, bh_result, create,
+				F2FS_GET_BLOCK_DIO, NULL,
+				f2fs_rw_hint_to_seg_type(inode->i_write_hint),
+				false);
+}
+
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 static int f2fs_xattr_fiemap(struct inode *inode,
 				struct fiemap_extent_info *fieinfo)
 {
@@ -2803,7 +2896,11 @@ int f2fs_write_single_data_page(struct page *page, int *submitted,
 		.encrypted_page = NULL,
 		.submitted = 0,
 		.compr_blocks = compr_blocks,
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
 		.need_lock = LOCK_RETRY,
+=======
+		.need_lock = compr_blocks ? LOCK_DONE : LOCK_RETRY,
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 		.post_read = f2fs_post_read_required(inode) ? 1 : 0,
 		.io_type = io_type,
 		.io_wbc = wbc,
@@ -2883,6 +2980,7 @@ write:
 	if (err == -EAGAIN) {
 		err = f2fs_do_write_data_page(&fio);
 		if (err == -EAGAIN) {
+			f2fs_bug_on(sbi, compr_blocks);
 			fio.need_lock = LOCK_REQ;
 			err = f2fs_do_write_data_page(&fio);
 		}

@@ -569,10 +569,19 @@ TRACE_EVENT(f2fs_file_write_iter,
 );
 
 TRACE_EVENT(f2fs_map_blocks,
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
 	TP_PROTO(struct inode *inode, struct f2fs_map_blocks *map, int flag,
 		 int ret),
+=======
+	TP_PROTO(struct inode *inode, struct f2fs_map_blocks *map,
+				int create, int flag, int ret),
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
 	TP_ARGS(inode, map, flag, ret),
+=======
+	TP_ARGS(inode, map, create, flag, ret),
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 
 	TP_STRUCT__entry(
 		__field(dev_t,	dev)
@@ -584,6 +593,10 @@ TRACE_EVENT(f2fs_map_blocks,
 		__field(int,	m_seg_type)
 		__field(bool,	m_may_create)
 		__field(bool,	m_multidev_dio)
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
+=======
+		__field(int,	create)
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 		__field(int,	flag)
 		__field(int,	ret)
 	),
@@ -598,6 +611,10 @@ TRACE_EVENT(f2fs_map_blocks,
 		__entry->m_seg_type	= map->m_seg_type;
 		__entry->m_may_create	= map->m_may_create;
 		__entry->m_multidev_dio	= map->m_multidev_dio;
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
+=======
+		__entry->create		= create;
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 		__entry->flag		= flag;
 		__entry->ret		= ret;
 	),
@@ -605,7 +622,11 @@ TRACE_EVENT(f2fs_map_blocks,
 	TP_printk("dev = (%d,%d), ino = %lu, file offset = %llu, "
 		"start blkaddr = 0x%llx, len = 0x%llx, flags = %u, "
 		"seg_type = %d, may_create = %d, multidevice = %d, "
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
 		"flag = %d, err = %d",
+=======
+		"create = %d, flag = %d, err = %d",
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 		show_dev_ino(__entry),
 		(unsigned long long)__entry->m_lblk,
 		(unsigned long long)__entry->m_pblk,
@@ -614,6 +635,10 @@ TRACE_EVENT(f2fs_map_blocks,
 		__entry->m_seg_type,
 		__entry->m_may_create,
 		__entry->m_multidev_dio,
+<<<<<<< HEAD   (437d71 Merge 5.15.152 into android14-5.15-lts)
+=======
+		__entry->create,
+>>>>>>> BRANCH (9465fe Linux 5.15.153)
 		__entry->flag,
 		__entry->ret)
 );
