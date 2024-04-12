@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18782b9b_f79db1bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-12T11:44:31Z",
+      "side": 1,
+      "message": "do that type of tracing in your clk driver, no need to do that in the core.\n\nAnd if this is something that upstream lacks, please submit the needed changes there first.",
+      "parentUuid": "19df994d_835387c9",
+      "revId": "d84805f041251059b861cb7aafe973eb3d7f2e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1eaee988_b113e89b",
         "filename": "drivers/clk/clk.c",
         "patchSetId": 4
