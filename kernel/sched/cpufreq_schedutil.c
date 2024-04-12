@@ -177,8 +177,17 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 	unsigned int freq;
 	unsigned long next_freq = 0;
 
+<<<<<<< HEAD   (f3f369 UPSTREAM: wifi: cfg80211: skip regulatory for punctured subc)
 	freq = get_capacity_ref_freq(policy);
 	trace_android_vh_map_util_freq(util, freq, max, &next_freq);
+||||||| BASE
+	util = map_util_perf(util);
+	trace_android_vh_map_util_freq(util, freq, max, &next_freq);
+=======
+	util = map_util_perf(util);
+	trace_android_vh_map_util_freq(util, freq, max, &next_freq, policy,
+			&sg_policy->need_freq_update);
+>>>>>>> CHANGE (c76a69 ANDROID: sched: add trace_android_vh_map_util_freq parameter)
 	if (next_freq)
 		freq = next_freq;
 	else
