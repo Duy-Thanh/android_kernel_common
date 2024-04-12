@@ -118,6 +118,7 @@ static inline u64 kvm_granule_size(u32 level)
 static inline bool kvm_level_supports_block_mapping(u32 level)
 {
 	return level >= KVM_PGTABLE_MIN_BLOCK_LEVEL;
+<<<<<<< HEAD   (1d8b23 Merge 5.15.153 into android14-5.15-lts)
 }
 
 static inline bool kvm_pte_table(kvm_pte_t pte, u32 level)
@@ -129,6 +130,8 @@ static inline bool kvm_pte_table(kvm_pte_t pte, u32 level)
 		return false;
 
 	return FIELD_GET(KVM_PTE_TYPE, pte) == KVM_PTE_TYPE_TABLE;
+=======
+>>>>>>> BRANCH (cdfd0a Linux 5.15.154)
 }
 
 /**

@@ -31,6 +31,7 @@ static void free_iova_rcaches(struct iova_domain *iovad);
 static void fq_destroy_all_entries(struct iova_domain *iovad);
 static void fq_flush_timeout(struct timer_list *t);
 
+<<<<<<< HEAD   (1d8b23 Merge 5.15.153 into android14-5.15-lts)
 static unsigned long limit_align_shift(struct iova_domain *iovad, unsigned long shift)
 {
 	unsigned long max_align_shift;
@@ -53,6 +54,12 @@ static int __init iommu_set_def_max_align_shift(char *str)
 }
 early_param("iommu.max_align_shift", iommu_set_def_max_align_shift);
 #endif
+=======
+unsigned long iova_rcache_range(void)
+{
+	return PAGE_SIZE << (IOVA_RANGE_CACHE_MAX_SIZE - 1);
+}
+>>>>>>> BRANCH (cdfd0a Linux 5.15.154)
 
 static int iova_cpuhp_dead(unsigned int cpu, struct hlist_node *node)
 {
