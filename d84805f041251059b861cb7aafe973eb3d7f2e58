@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19df994d_835387c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3362129
+      },
+      "writtenOn": "2024-04-12T07:26:22Z",
+      "side": 1,
+      "message": "1. What do you want to record this for? \ni want record is all traces about consumer\u0027s operation,including clk_enable(),clk_disable() and clk_set_rate(), so that when the system crashed, i can get the infomation that what clocks set before. for example, when someone called twice clk_enable() but once clk_disable() only before system suspend,  this clock can\u0027t be enabled by hardware anymore cause its \u0027clk_enable_count\u0027 is 1.\n2. Why can\u0027t the normal tracepoint work for that instead?\n With my current understanding, the normal tracepoint can only be enabled from debugfs, but i want record the traces information from module initialization to runtime, which requires the tracepoint enabled by clock provider at very beginning(register the trace callback function in driver).",
+      "parentUuid": "9e5a3552_51b1d465",
+      "revId": "d84805f041251059b861cb7aafe973eb3d7f2e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1eaee988_b113e89b",
         "filename": "drivers/clk/clk.c",
         "patchSetId": 4
