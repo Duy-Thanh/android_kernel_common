@@ -293,3 +293,10 @@
   __tracepoint_android_vh_rtmutex_waiter_prio
   __tracepoint_android_vh_task_blocks_on_rtmutex
   wq_worker_comm
+  get_slabinfo
+  vmalloc_nr_pages
+  __mod_lruvec_state
+  mem_cgroup_update_lru_size
+  folio_referenced
+  root_mem_cgroup
+  si_swapinfo
