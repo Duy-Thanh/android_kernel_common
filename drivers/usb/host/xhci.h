@@ -1567,6 +1567,10 @@ struct xhci_td {
 	struct xhci_segment	*bounce_seg;
 	/* actual_length of the URB has already been set */
 	bool			urb_length_set;
+<<<<<<< HEAD   (4bd753 Merge 5.10.212 into android13-5.10-lts)
+=======
+	bool			error_mid_td;
+>>>>>>> BRANCH (d35f38 Linux 5.10.213)
 	unsigned int		num_trbs;
 };
 
