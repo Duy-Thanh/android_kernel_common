@@ -149,6 +149,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6288878_f7fa6fd1",
+        "filename": "drivers/clk/clk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 3362129
+      },
+      "writtenOn": "2024-04-12T06:52:52Z",
+      "side": 1,
+      "message": "To answer your question, I have the following two points to explain:\n1. i want record is all traces about consumer\u0027s operation,including clk_enable(),clk_disable() and clk_set_rate(), so that when the system crashed, i can get the infomation that what clocks set before.  \n2. \"core-\u003eops-\u003edisable(core-\u003ehw)\" won\u0027t be callled when the clk_enable_count greater than 1 in CCF, therefore, lots of traces will be abandorned if i do that in my driver.",
+      "parentUuid": "2d9cf8ca_671dc134",
+      "range": {
+        "startLine": 1112,
+        "startChar": 0,
+        "endLine": 1112,
+        "endChar": 40
+      },
+      "revId": "d84805f041251059b861cb7aafe973eb3d7f2e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1beab76e_a2c78108",
