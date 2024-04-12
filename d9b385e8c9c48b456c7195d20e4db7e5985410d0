@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d18cdc5_89a021ac",
+        "filename": "drivers/android/binder/node.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-12T12:58:11Z",
+      "side": 1,
+      "message": "Marking resolved. Please look again at the new version which has different assertions.",
+      "parentUuid": "791cf9e5_9ea887a9",
+      "revId": "d9b385e8c9c48b456c7195d20e4db7e5985410d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7b84e1d_ccf810bb",
