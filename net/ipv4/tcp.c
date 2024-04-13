@@ -279,6 +279,7 @@
 #include <linux/uaccess.h>
 #include <asm/ioctls.h>
 #include <net/busy_poll.h>
+#include <trace/hooks/net.h>
 
 /* Track pending CMSGs. */
 enum {
@@ -1047,6 +1048,7 @@ int tcp_sendmsg_locked(struct sock *sk, struct msghdr *msg, size_t size)
 	int zc = 0;
 	long timeo;
 
+	trace_android_rvh_net_msg_trans(false, size);
 	flags = msg->msg_flags;
 
 	if ((flags & MSG_ZEROCOPY) && size) {
@@ -2570,6 +2572,7 @@ int tcp_recvmsg(struct sock *sk, struct msghdr *msg, size_t len, int flags,
 	if (unlikely(flags & MSG_ERRQUEUE))
 		return inet_recv_error(sk, msg, len, addr_len);
 
+	trace_android_rvh_net_msg_trans(true, len);
 	if (sk_can_busy_loop(sk) &&
 	    skb_queue_empty_lockless(&sk->sk_receive_queue) &&
 	    sk->sk_state == TCP_ESTABLISHED)

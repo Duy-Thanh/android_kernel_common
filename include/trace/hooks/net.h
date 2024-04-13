@@ -25,6 +25,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sk_alloc,
 DECLARE_RESTRICTED_HOOK(android_rvh_sk_free,
 	TP_PROTO(struct sock *sock), TP_ARGS(sock), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_net_msg_trans,
+	TP_PROTO(bool receiving, size_t size), TP_ARGS(receiving, size), 1);
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_NET_VH_H */
