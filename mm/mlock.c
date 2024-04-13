@@ -261,6 +261,7 @@ void mlock_folio(struct folio *folio)
 		mlock_folio_batch(fbatch);
 	local_unlock(&mlock_fbatch.lock);
 }
+EXPORT_SYMBOL_GPL(mlock_folio);
 
 /**
  * mlock_new_folio - mlock a newly allocated folio not yet on LRU
@@ -305,6 +306,7 @@ void munlock_folio(struct folio *folio)
 		mlock_folio_batch(fbatch);
 	local_unlock(&mlock_fbatch.lock);
 }
+EXPORT_SYMBOL_GPL(munlock_folio);
 
 static int mlock_pte_range(pmd_t *pmd, unsigned long addr,
 			   unsigned long end, struct mm_walk *walk)
