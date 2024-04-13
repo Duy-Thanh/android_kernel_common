@@ -57,6 +57,9 @@ DECLARE_HOOK(android_vh_udp_enqueue_schedule_skb,
 DECLARE_HOOK(android_vh_build_skb_around,
 	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
 
+DECLARE_RESTRICTED_HOOK(android_rvh_net_msg_trans,
+	TP_PROTO(bool receiving, size_t size), TP_ARGS(receiving, size), 1);
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_NET_VH_H */
