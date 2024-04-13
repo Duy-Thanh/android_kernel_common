@@ -106,6 +106,7 @@
 #include <net/gso.h>
 #include <net/xfrm.h>
 #include <trace/events/udp.h>
+#include <trace/hooks/net.h>
 #include <linux/static_key.h>
 #include <linux/btf_ids.h>
 #include <trace/events/skb.h>
@@ -1066,6 +1067,7 @@ int udp_sendmsg(struct sock *sk, struct msghdr *msg, size_t len)
 	if (msg->msg_flags & MSG_OOB) /* Mirror BSD error message compatibility */
 		return -EOPNOTSUPP;
 
+	trace_android_rvh_net_msg_trans(false, len);
 	getfrag = is_udplite ? udplite_getfrag : ip_generic_getfrag;
 
 	fl4 = &inet->cork.fl.u.ip4;
@@ -1809,6 +1811,7 @@ try_again:
 	if (!skb)
 		return err;
 
+	trace_android_rvh_net_msg_trans(true, len);
 	ulen = udp_skb_len(skb);
 	copied = len;
 	if (copied > ulen - off)
