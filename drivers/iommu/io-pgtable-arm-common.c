@@ -433,6 +433,20 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
 				/* Also flush any partial walks */
 				io_pgtable_tlb_flush_walk(iop, iova + i * size, size,
 							  ARM_LPAE_GRANULE(data));
+				if (walker && walker->cb) {
+					int j;
+					arm_lpae_iopte *next_ptep = iopte_deref(pte, data);
+
+					for (j = 0 ; j < ARM_LPAE_PTES_PER_TABLE(data) ; ++j) {
+						struct io_pgtable_ctxt ctx = {
+							.arg	= walker->arg,
+							.addr	= iopte_to_paddr(*next_ptep, data),
+							.size	= ARM_LPAE_BLOCK_SIZE(lvl + 1, data),
+						};
+						walker->cb(&ctx);
+						next_ptep++;
+					}
+				}
 				__arm_lpae_free_pgtable(data, lvl + 1, iopte_deref(pte, data));
 			} else {
 				if (!iommu_iotlb_gather_queued(gather))
