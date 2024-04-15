@@ -22,6 +22,30 @@
       },
       "revId": "f0ac35acf52c2ed5b61783d8214bae023c7f03cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a418f8ce_e14efddd",
+        "filename": "android/abi_gki_aarch64_honda",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2024-04-15T01:16:23Z",
+      "side": 1,
+      "message": "Sorry, I think so but exactly we need symbol \u0027driver_find()\u0027, and can I change commit message only as resubmit ?",
+      "parentUuid": "779ceb84_3df00978",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 5,
+        "endChar": 13
+      },
+      "revId": "f0ac35acf52c2ed5b61783d8214bae023c7f03cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
