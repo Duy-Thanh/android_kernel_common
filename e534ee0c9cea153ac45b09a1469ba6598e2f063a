@@ -39,6 +39,30 @@
       },
       "revId": "e534ee0c9cea153ac45b09a1469ba6598e2f063a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae9b14d4_0b265f2f",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2024-04-15T06:20:40Z",
+      "side": 1,
+      "message": "Thanks Carlos, I thought about it and one variable is enough. I updated the patch with one variable. Please help to check it.",
+      "parentUuid": "8e609c71_cc74ea6b",
+      "range": {
+        "startLine": 191,
+        "startChar": 22,
+        "endLine": 191,
+        "endChar": 30
+      },
+      "revId": "e534ee0c9cea153ac45b09a1469ba6598e2f063a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
