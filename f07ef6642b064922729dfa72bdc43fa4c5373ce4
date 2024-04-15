@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bb5faad_53a26436",
+        "filename": "kernel/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-04-15T10:38:03Z",
+      "side": 1,
+      "message": "The canonical way appears to be \n\n```\nCFLAGS_REMOVE_configs.o +\u003d $(CC_FLAGS_LTO)\n```\n\nExample: https://lore.kernel.org/all/20201211184633.3213045-12-samitolvanen@google.com/",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 46
+      },
+      "revId": "f07ef6642b064922729dfa72bdc43fa4c5373ce4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
