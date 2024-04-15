@@ -11,6 +11,7 @@
  */
 
 #include <linux/dma-buf.h>
+#include <linux/dma-direct.h>
 #include <linux/dma-mapping.h>
 #include <linux/dma-heap.h>
 #include <linux/err.h>
@@ -18,7 +19,6 @@
 #include <linux/mm.h>
 #include <linux/module.h>
 #include <linux/scatterlist.h>
-#include <linux/slab.h>
 #include <linux/vmalloc.h>
 
 static struct dma_heap *sys_heap;
@@ -43,6 +43,7 @@ struct dma_heap_attachment {
 	bool mapped;
 
 	bool uncached;
+	bool needs_swiotlb_bounce;
 };
 
 #define LOW_ORDER_GFP (GFP_HIGHUSER | __GFP_ZERO)
@@ -82,6 +83,21 @@ static struct sg_table *dup_sg_table(struct sg_table *table)
 	}
 
 	return new_table;
+}
+
+static bool attachment_needs_swiotlb_bounce(struct dma_heap_attachment *a)
+{
+	struct scatterlist *sg;
+	int i;
+
+	for_each_sg(a->table->sgl, sg, a->table->orig_nents, i) {
+		phys_addr_t paddr = dma_to_phys(a->dev, sg_dma_address(sg));
+
+		if (is_swiotlb_buffer(a->dev, paddr))
+			return true;
+	}
+
+	return false;
 }
 
 static int system_heap_attach(struct dma_buf *dmabuf,
@@ -145,6 +161,9 @@ static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attac
 	if (ret)
 		return ERR_PTR(ret);
 
+	if (attachment_needs_swiotlb_bounce(a))
+		a->needs_swiotlb_bounce = true;
+
 	a->mapped = true;
 	return table;
 }
@@ -159,6 +178,7 @@ static void system_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
 	if (a->uncached)
 		attr |= DMA_ATTR_SKIP_CPU_SYNC;
 	a->mapped = false;
+	a->needs_swiotlb_bounce = false;
 	dma_unmap_sgtable(attachment->dev, table, direction, attr);
 }
 
@@ -173,12 +193,12 @@ static int system_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
 	if (buffer->vmap_cnt)
 		invalidate_kernel_vmap_range(buffer->vaddr, buffer->len);
 
-	if (!buffer->uncached) {
-		list_for_each_entry(a, &buffer->attachments, list) {
-			if (!a->mapped)
-				continue;
+	list_for_each_entry(a, &buffer->attachments, list) {
+		if (!a->mapped)
+			continue;
+
+		if (!buffer->uncached || a->needs_swiotlb_bounce)
 			dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
-		}
 	}
 	mutex_unlock(&buffer->lock);
 
@@ -196,12 +216,12 @@ static int system_heap_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
 	if (buffer->vmap_cnt)
 		flush_kernel_vmap_range(buffer->vaddr, buffer->len);
 
-	if (!buffer->uncached) {
-		list_for_each_entry(a, &buffer->attachments, list) {
-			if (!a->mapped)
-				continue;
+	list_for_each_entry(a, &buffer->attachments, list) {
+		if (!a->mapped)
+			continue;
+
+		if (!buffer->uncached || a->needs_swiotlb_bounce)
 			dma_sync_sgtable_for_device(a->dev, a->table, direction);
-		}
 	}
 	mutex_unlock(&buffer->lock);
 
