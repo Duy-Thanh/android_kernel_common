@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93214255_57f4c98a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-04-15T08:10:33Z",
+      "side": 1,
+      "message": "Nit: this could be out of the critical section, but not a big deal really",
+      "range": {
+        "startLine": 814,
+        "startChar": 1,
+        "endLine": 815,
+        "endChar": 15
+      },
+      "revId": "2d39597c5c71853774ad40c080430b4d8354cbbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7734df42_376d2075",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-04-15T08:10:33Z",
+      "side": 1,
+      "message": "You should probably default that to false no? IIRC Android zeroes stack allocations, but not sure we should rely on it.",
+      "range": {
+        "startLine": 825,
+        "startChar": 6,
+        "endLine": 825,
+        "endChar": 13
+      },
+      "revId": "2d39597c5c71853774ad40c080430b4d8354cbbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
