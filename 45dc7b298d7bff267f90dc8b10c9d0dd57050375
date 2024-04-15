@@ -16,6 +16,24 @@
       "message": "please explain in the commit message why it is safe to skip taking the lock (presumably you are taking it in the hook handler)",
       "revId": "45dc7b298d7bff267f90dc8b10c9d0dd57050375",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3706512f_7a2bab66",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-15T17:16:17Z",
+      "side": 1,
+      "message": "actually, nm. What you have is good enough.",
+      "parentUuid": "e867f311_95a661b6",
+      "revId": "45dc7b298d7bff267f90dc8b10c9d0dd57050375",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
