@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a230273_e3dc4899",
+        "filename": "drivers/usb/host/xhci-mem.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2195,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-04-15T12:24:15Z",
+      "side": 0,
+      "message": "This symbol is on a symbol list and hence can\u0027t be removed.\n\n```\nSymbols missing from the ksymtab:\n  xhci_check_trb_in_td_math\n```",
+      "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
