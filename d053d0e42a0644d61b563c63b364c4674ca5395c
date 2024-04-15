@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074670778",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3041574?revision\u003d1",
+      "key": {
+        "uuid": "41d6abd6_4b7381b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-15T09:36:37Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/b0b36dcbe0f24383612e5e62bd48df5a8107f7fc) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003db0b36dcbe0f24383612e5e62bd48df5a8107f7fc).\n\n```\n      ## net/netfilter/nf_tables_api.c ##\n     @@ net/netfilter/nf_tables_api.c: static int __nf_tables_abort(struct net *net, enum nfnl_abort_action action)\n    + \tstruct nftables_pernet *nft_net \u003d net_generic(net, nf_tables_net_id);\n      \tstruct nft_trans *trans, *next;\n    - \tLIST_HEAD(set_update_list);\n      \tstruct nft_trans_elem *te;\n     +\tint err \u003d 0;\n      \n    @@ net/netfilter/nf_tables_api.c: static int __nf_tables_abort(struct net *net, enu\n      \n      static int nf_tables_abort(struct net *net, struct sk_buff *skb,\n     @@ net/netfilter/nf_tables_api.c: static int nf_tables_abort(struct net *net, struct sk_buff *skb,\n    - \tgc_seq \u003d nft_gc_seq_begin(nft_net);\n      \tret \u003d __nf_tables_abort(net, action);\n      \tnft_gc_seq_end(nft_net, gc_seq);\n    -+\n    + \n     +\tWARN_ON_ONCE(!list_empty(\u0026nft_net-\u003ecommit_list));\n     +\n      \tmutex_unlock(\u0026nft_net-\u003ecommit_mutex);\n    @@ net/netfilter/nf_tables_api.c: static void __net_exit nf_tables_exit_net(struct\n      \n      \tgc_seq \u003d nft_gc_seq_begin(nft_net);\n      \n    --\tif (!list_empty(\u0026nft_net-\u003ecommit_list) ||\n    --\t    !list_empty(\u0026nft_net-\u003emodule_list))\n    +-\tif (!list_empty(\u0026nft_net-\u003ecommit_list))\n     -\t\t__nf_tables_abort(net, NFNL_ABORT_NONE);\n     +\tWARN_ON_ONCE(!list_empty(\u0026nft_net-\u003ecommit_list));\n     +\n     +\tif (!list_empty(\u0026nft_net-\u003emodule_list))\n     +\t\tnf_tables_module_autoload_cleanup(net);\n    - \n    ++\n      \t__nft_release_tables(net);\n      \n    + \tnft_gc_seq_end(nft_net, gc_seq);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "d053d0e42a0644d61b563c63b364c4674ca5395c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
