@@ -113,11 +113,15 @@
   __traceiter_android_vh_binder_special_task
   __traceiter_android_vh_binder_transaction_received
   __traceiter_android_vh_binder_wait_for_work
+  __traceiter_android_vh_check_class_changed
   __traceiter_android_vh_cgroup_set_task
   __traceiter_android_vh_cpufreq_acct_update_power
   __traceiter_android_vh_check_folio_look_around_ref
   __traceiter_android_vh_dup_task_struct
   __traceiter_android_vh_exit_signal
+  __traceiter_android_vh_freq_qos_remove_request
+  __traceiter_android_vh_freq_qos_update_request
+  __traceiter_android_vh_freq_qos_add_request
   __traceiter_android_vh_irqtime_account_process_tick
   __traceiter_android_vh_kmalloc_slab
   __traceiter_android_vh_free_oem_binder_struct
@@ -173,6 +177,7 @@
   __tracepoint_android_vh_binder_special_task
   __tracepoint_android_vh_binder_transaction_received
   __tracepoint_android_vh_binder_wait_for_work
+  __tracepoint_android_vh_check_class_changed
   __tracepoint_android_vh_cgroup_set_task
   __tracepoint_android_vh_cpufreq_acct_update_power
   __tracepoint_android_vh_dup_task_struct
@@ -215,6 +220,7 @@
   __tracepoint_sched_stat_iowait
   __tracepoint_sched_stat_sleep
   __tracepoint_sched_stat_runtime
+  __tracepoint_sched_stat_wait
   __tracepoint_sched_stat_wait
   __tracepoint_sched_waking
   __tracepoint_task_rename
