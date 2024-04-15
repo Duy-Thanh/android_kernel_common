@@ -387,6 +387,11 @@ DECLARE_HOOK(android_vh_map_util_freq,
 		unsigned long cap, unsigned long *next_freq),
 	TP_ARGS(util, freq, cap, next_freq));
 
+DECLARE_HOOK(android_vh_check_class_changed,
+        TP_PROTO(struct rq *rq, struct task_struct *p,
+		const struct sched_class *prev_class, int oldprio),
+        TP_ARGS(rq, p, prev_class, prev_class));
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */

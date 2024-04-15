@@ -2255,6 +2255,7 @@ static inline void check_class_changed(struct rq *rq, struct task_struct *p,
 				       const struct sched_class *prev_class,
 				       int oldprio)
 {
+	trace_android_vh_check_class_changed(rq, p, prev_class, oldprio);
 	if (prev_class != p->sched_class) {
 		if (prev_class->switched_from)
 			prev_class->switched_from(rq, p);
