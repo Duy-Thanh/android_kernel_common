@@ -46,6 +46,30 @@
       },
       "revId": "f0ac35acf52c2ed5b61783d8214bae023c7f03cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90e5736_a0ab652e",
+        "filename": "android/abi_gki_aarch64_honda",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-04-15T06:52:28Z",
+      "side": 1,
+      "message": "Just for reference, `driver_find` is in the following symbol lists.\n\n11-5.4: exynos, galaxy\n12-5.4: exynos\n13-5.10: galaxy\n13-5.15: exynos_wear, mtktv\n\nUnfortunately, in every single case, it was added as part of an initial symbol list. There is probably some history on older branches, but I haven\u0027t found anything useful.",
+      "parentUuid": "a418f8ce_e14efddd",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 5,
+        "endChar": 13
+      },
+      "revId": "f0ac35acf52c2ed5b61783d8214bae023c7f03cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
