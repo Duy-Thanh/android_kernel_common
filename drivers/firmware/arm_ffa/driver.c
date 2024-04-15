@@ -111,13 +111,20 @@ static u32 ffa_compatible_version_find(u32 version)
 static int ffa_version_check(u32 *version)
 {
 	ffa_value_t ver;
+	u32 req_version = FFA_DRIVER_VERSION;
 
+retry_min_version:
 	invoke_ffa_fn((ffa_value_t){
-		      .a0 = FFA_VERSION, .a1 = FFA_DRIVER_VERSION,
+		      .a0 = FFA_VERSION, .a1 = req_version,
 		      }, &ver);
 
 	if (ver.a0 == FFA_RET_NOT_SUPPORTED) {
 		pr_info("FFA_VERSION returned not supported\n");
+		if (req_version > FFA_MIN_VERSION) {
+			req_version = FFA_MIN_VERSION;
+			goto retry_min_version;
+		}
+
 		return -EOPNOTSUPP;
 	}
 
