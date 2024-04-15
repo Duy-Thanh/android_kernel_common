@@ -418,3 +418,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_save_cmp_len);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_read_lazy_flag);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
+<<<<<<< HEAD   (361370 ANDROID: abi_gki_aarch64_qcom: whitelist some mm symbols)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_queue_request_and_unlock);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_trylock_failed);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_down_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_up_write);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);
+>>>>>>> CHANGE (2870c7 ANDROID: GKI: add percpu_rwsem vendor hooks)
