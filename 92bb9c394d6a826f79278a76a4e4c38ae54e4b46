@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17a52ce6_abd5062d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-15T16:22:25Z",
+      "side": 1,
+      "message": "Please shorten the title and add detailed description of what features this vendor hook enables.",
+      "revId": "92bb9c394d6a826f79278a76a4e4c38ae54e4b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d2c351_f4aa2b69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-15T16:22:25Z",
+      "side": 1,
+      "message": "Add a patch on top of this one to add the symbols to your symbol list",
+      "revId": "92bb9c394d6a826f79278a76a4e4c38ae54e4b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b098bf8c_31695926",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-15T16:22:25Z",
+      "side": 1,
+      "message": "Add a patch on top of this one to add the symbols to your symbol list",
+      "revId": "92bb9c394d6a826f79278a76a4e4c38ae54e4b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50c59f48_0c808d3a",
+        "filename": "include/trace/hooks/net.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-15T16:22:25Z",
+      "side": 1,
+      "message": "Explain in the commet message why this must be a restricted hook",
+      "revId": "92bb9c394d6a826f79278a76a4e4c38ae54e4b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
