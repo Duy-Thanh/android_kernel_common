@@ -70,6 +70,30 @@
       },
       "revId": "f0ac35acf52c2ed5b61783d8214bae023c7f03cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c7a45a_cdd1dbef",
+        "filename": "android/abi_gki_aarch64_honda",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-15T15:36:14Z",
+      "side": 1,
+      "message": "The led-trigger driver does not need driver-find, and yes, it came in through other reviews of huge lists where this was missed.  For this specific use case, it\u0027s obviously not needed given that the in-tree source for led-trigger does not need it.",
+      "parentUuid": "f90e5736_a0ab652e",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 5,
+        "endChar": 13
+      },
+      "revId": "f0ac35acf52c2ed5b61783d8214bae023c7f03cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
