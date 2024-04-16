@@ -655,6 +655,7 @@ config DM_AUDIT
 	  Enables audit logging of several security relevant events in the
 	  particular device-mapper targets, especially the integrity target.
 
+<<<<<<< HEAD   (c82304 ANDROID: selftests: kselftest_harness: Work around missing L)
 config DM_USER
 	tristate "Block device in userspace"
 	depends on BLK_DEV_DM
@@ -668,5 +669,8 @@ config DM_USER
 	  called dm-user.
 
 	  If unsure, say N.
+=======
+source "drivers/md/dm-vdo/Kconfig"
+>>>>>>> BRANCH (259f7d Merge tag 'thermal-6.9-rc1' of git://git.kernel.org/pub/scm/)
 
 endif # MD
