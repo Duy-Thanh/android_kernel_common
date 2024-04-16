@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074797660",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3043872?revision\u003d1",
+      "key": {
+        "uuid": "ee1d593c_11eabbee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-16T08:11:28Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/dfabd2e38be31725210d182c5648b8c24157cef8).\n\n```\n      ## drivers/android/Kconfig ##\n     @@ drivers/android/Kconfig: config ANDROID_BINDER_IPC_SELFTEST\n    @@ drivers/android/Kconfig: config ANDROID_BINDER_IPC_SELFTEST\n      \tdepends on TRACEPOINTS\n     \n      ## drivers/android/Makefile ##\n    -@@ drivers/android/Makefile: ccflags-y +\u003d -I$(src)\t\t\t# needed for trace events\n    - obj-$(CONFIG_ANDROID_BINDERFS)\t\t+\u003d binderfs.o\n    - obj-$(CONFIG_ANDROID_BINDER_IPC)\t+\u003d binder.o binder_alloc.o\n    +@@ drivers/android/Makefile: obj-$(CONFIG_ANDROID_BINDER_IPC_C)\t+\u003d binder.o binder_alloc.o\n      obj-$(CONFIG_ANDROID_BINDER_IPC_SELFTEST) +\u003d binder_alloc_selftest.o\n    + obj-$(CONFIG_ANDROID_BINDERFS_RUST)\t+\u003d binder/rust_binderfs.o\n    + obj-$(CONFIG_ANDROID_BINDER_IPC_RUST)\t+\u003d binder/rust_binder.o\n     +obj-$(CONFIG_ANDROID_DEBUG_SYMBOLS)\t+\u003d android_debug_symbols.o\n      obj-$(CONFIG_ANDROID_VENDOR_HOOKS) +\u003d vendor_hooks.o\n      obj-$(CONFIG_ANDROID_DEBUG_KINFO)\t+\u003d debug_kinfo.o\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "69c1bfef0e576ee9d6b03598a0cf1a838ef62e7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
