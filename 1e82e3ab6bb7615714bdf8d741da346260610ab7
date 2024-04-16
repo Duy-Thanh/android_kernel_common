@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cdae75e_3127af97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-16T18:02:46Z",
+      "side": 1,
+      "message": "please abandon this patch and cherry-pick the `android14-6.1` version so Change-Id is preserved",
+      "revId": "1e82e3ab6bb7615714bdf8d741da346260610ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
