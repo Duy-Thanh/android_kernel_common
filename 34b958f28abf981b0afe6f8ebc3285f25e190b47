@@ -34,6 +34,24 @@
       "parentUuid": "fd8824c2_d5823eb6",
       "revId": "34b958f28abf981b0afe6f8ebc3285f25e190b47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "939cdd55_ee995617",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-16T11:21:13Z",
+      "side": 1,
+      "message": "Fixed in aosp/3042454.",
+      "parentUuid": "990f159e_d6f79f9a",
+      "revId": "34b958f28abf981b0afe6f8ebc3285f25e190b47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
