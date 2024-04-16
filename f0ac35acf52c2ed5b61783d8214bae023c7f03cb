@@ -94,6 +94,30 @@
       },
       "revId": "f0ac35acf52c2ed5b61783d8214bae023c7f03cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c28dbdb3_789af0a1",
+        "filename": "android/abi_gki_aarch64_honda",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2024-04-16T07:47:48Z",
+      "side": 1,
+      "message": "I\u0027ve changed commit message that \u0027driver_find\u0027 is required for our vendor module.",
+      "parentUuid": "29c7a45a_cdd1dbef",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 5,
+        "endChar": 13
+      },
+      "revId": "f0ac35acf52c2ed5b61783d8214bae023c7f03cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
