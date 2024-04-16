@@ -296,10 +296,14 @@ void dwc3_ep0_out_start(struct dwc3 *dwc)
 			continue;
 
 		dwc3_ep->flags &= ~DWC3_EP_DELAY_STOP;
+<<<<<<< HEAD   (ad06ea Merge branch 'android13-5.15' into branch 'android13-5.15-lt)
 		if (dwc->connected)
 			dwc3_stop_active_transfer(dwc3_ep, true, true);
 		else
 			dwc3_remove_requests(dwc, dwc3_ep, -ESHUTDOWN);
+=======
+		dwc3_stop_active_transfer(dwc3_ep, true, true);
+>>>>>>> BRANCH (458ce5 Linux 5.15.149)
 	}
 }
 
@@ -821,7 +825,11 @@ static void dwc3_ep0_inspect_setup(struct dwc3 *dwc,
 	int ret = -EINVAL;
 	u32 len;
 
+<<<<<<< HEAD   (ad06ea Merge branch 'android13-5.15' into branch 'android13-5.15-lt)
 	if (!dwc->gadget_driver || !dwc->softconnect || !dwc->connected)
+=======
+	if (!dwc->gadget_driver || !dwc->connected)
+>>>>>>> BRANCH (458ce5 Linux 5.15.149)
 		goto out;
 
 	trace_dwc3_ctrl_req(ctrl);
