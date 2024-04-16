@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40eea24d_67e1e948",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2024-04-16T06:59:31Z",
+      "side": 1,
+      "message": "Yeah I think this is probably fine. I doubt PUD breakage is going to be very common in our use cases, right?",
+      "revId": "3cea79a28ece390ebf3ab6a712703f3641c1a93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8ced477_e41f3c9b",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2024-04-16T06:59:31Z",
+      "side": 1,
+      "message": "Typo: unnecessary",
+      "revId": "3cea79a28ece390ebf3ab6a712703f3641c1a93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
