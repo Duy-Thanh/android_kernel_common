@@ -419,6 +419,13 @@ alternative_else_nop_endif
 	ldp	x28, x29, [sp, #16 * 14]
 
 	.if	\el == 0
+<<<<<<< HEAD   (0eac7b Merge branch 'android14-6.1' into branch 'android14-6.1-lts')
+=======
+alternative_if ARM64_WORKAROUND_SPECULATIVE_UNPRIV_LOAD
+	tlbi	vale1, xzr
+	dsb	nsh
+alternative_else_nop_endif
+>>>>>>> BRANCH (e5c3b9 Linux 6.1.76)
 alternative_if_not ARM64_UNMAP_KERNEL_AT_EL0
 	ldr	lr, [sp, #S_LR]
 	add	sp, sp, #PT_REGS_SIZE		// restore sp
