@@ -16,6 +16,23 @@
       "message": "Invalid bug, create a new one please, explaining why this is needed now in this branch.",
       "revId": "357e242660f6152ae28a290d7b093464e0c7d0cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89ef8199_060895b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-16T20:00:14Z",
+      "side": 1,
+      "message": "Hmm. This patch got disconnected from the rest of the series. As Greg says, please create a new bug instead of referring to the old one. Then rebase the whole series. It is likely that the series breaks the KMI so it would be queued for the 2024-04-24 KMI update.",
+      "revId": "357e242660f6152ae28a290d7b093464e0c7d0cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
