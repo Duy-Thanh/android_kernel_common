@@ -12,6 +12,9 @@
 #include <asm/kprobes.h>
 #include <asm/patching.h>
 #include <asm/sections.h>
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/patching.h>
+
 
 static DEFINE_RAW_SPINLOCK(patch_lock);
 
@@ -114,11 +117,13 @@ int __kprobes aarch64_insn_patch_text_nosync(void *addr, u32 insn)
 	if ((uintptr_t)tp & 0x3)
 		return -EINVAL;
 
+	trace_android_rvh_aarch64_patch_text_start(addr, insn);
 	ret = aarch64_insn_write(tp, insn);
 	if (ret == 0)
 		caches_clean_inval_pou((uintptr_t)tp,
 				     (uintptr_t)tp + AARCH64_INSN_SIZE);
 
+	trace_android_rvh_aarch64_patch_text_finish(addr, insn);
 	return ret;
 }
 
