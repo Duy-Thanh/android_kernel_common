@@ -101,10 +101,6 @@ EXPORT_PER_CPU_SYMBOL(cpu_core_map);
 DEFINE_PER_CPU_READ_MOSTLY(cpumask_var_t, cpu_die_map);
 EXPORT_PER_CPU_SYMBOL(cpu_die_map);
 
-/* Per CPU bogomips and other parameters */
-DEFINE_PER_CPU_READ_MOSTLY(struct cpuinfo_x86, cpu_info);
-EXPORT_PER_CPU_SYMBOL(cpu_info);
-
 /* CPUs which are the primary SMT threads */
 struct cpumask __cpu_primary_thread_mask __read_mostly;
 
@@ -315,14 +311,6 @@ static void notrace start_secondary(void *unused)
 
 	wmb();
 	cpu_startup_entry(CPUHP_AP_ONLINE_IDLE);
-}
-
-static void __init smp_store_boot_cpu_info(void)
-{
-	struct cpuinfo_x86 *c = &cpu_data(0);
-
-	*c = boot_cpu_data;
-	c->initialized = true;
 }
 
 /*
@@ -1043,29 +1031,15 @@ static __init void disable_smp(void)
 	cpumask_set_cpu(0, topology_die_cpumask(0));
 }
 
-static void __init smp_cpu_index_default(void)
-{
-	int i;
-	struct cpuinfo_x86 *c;
-
-	for_each_possible_cpu(i) {
-		c = &cpu_data(i);
-		/* mark all to hotplug */
-		c->cpu_index = nr_cpu_ids;
-	}
-}
-
 void __init smp_prepare_cpus_common(void)
 {
 	unsigned int i;
 
-	smp_cpu_index_default();
-
-	/*
-	 * Setup boot CPU information
-	 */
-	smp_store_boot_cpu_info(); /* Final full version of the data */
-	mb();
+	/* Mark all except the boot CPU as hotpluggable */
+	for_each_possible_cpu(i) {
+		if (i)
+			per_cpu(cpu_info.cpu_index, i) = nr_cpu_ids;
+	}
 
 	for_each_possible_cpu(i) {
 		zalloc_cpumask_var(&per_cpu(cpu_sibling_map, i), GFP_KERNEL);
@@ -1076,6 +1050,11 @@ void __init smp_prepare_cpus_common(void)
 	}
 
 	set_cpu_sibling_map(0);
+}
+
+void __init smp_prepare_boot_cpu(void)
+{
+	smp_ops.smp_prepare_boot_cpu();
 }
 
 #ifdef CONFIG_X86_64

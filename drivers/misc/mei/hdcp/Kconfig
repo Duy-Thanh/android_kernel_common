@@ -3,8 +3,13 @@
 #
 config INTEL_MEI_HDCP
 	tristate "Intel HDCP2.2 services of ME Interface"
+<<<<<<< HEAD   (a365b2 Merge ca7e91776912 ("Merge tag 'x86-apic-2024-03-10' of git:)
 	select INTEL_MEI_ME
 	depends on DRM_I915
+=======
+	depends on INTEL_MEI_ME
+	depends on DRM_I915 || DRM_XE
+>>>>>>> BRANCH (5e74df Merge tag 'x86-urgent-2024-03-24' of git://git.kernel.org/pu)
 	help
 	  MEI Support for HDCP2.2 Services on Intel platforms.
 

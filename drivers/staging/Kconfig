@@ -46,16 +46,17 @@ source "drivers/staging/iio/Kconfig"
 
 source "drivers/staging/sm750fb/Kconfig"
 
-source "drivers/staging/emxx_udc/Kconfig"
-
 source "drivers/staging/nvec/Kconfig"
 
 source "drivers/staging/media/Kconfig"
 
+<<<<<<< HEAD   (a365b2 Merge ca7e91776912 ("Merge tag 'x86-apic-2024-03-10' of git:)
 source "drivers/staging/android/Kconfig"
 
 source "drivers/staging/board/Kconfig"
 
+=======
+>>>>>>> BRANCH (5e74df Merge tag 'x86-urgent-2024-03-24' of git://git.kernel.org/pu)
 source "drivers/staging/gdm724x/Kconfig"
 
 source "drivers/staging/fbtft/Kconfig"

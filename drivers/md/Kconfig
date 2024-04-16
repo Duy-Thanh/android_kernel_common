@@ -540,7 +540,6 @@ config DM_VERITY
 	  If unsure, say N.
 
 config DM_VERITY_VERIFY_ROOTHASH_SIG
-	def_bool n
 	bool "Verity data device root hash signature verification support"
 	depends on DM_VERITY
 	select SYSTEM_DATA_VERIFICATION
@@ -655,6 +654,7 @@ config DM_AUDIT
 	  Enables audit logging of several security relevant events in the
 	  particular device-mapper targets, especially the integrity target.
 
+<<<<<<< HEAD   (a365b2 Merge ca7e91776912 ("Merge tag 'x86-apic-2024-03-10' of git:)
 config DM_USER
 	tristate "Block device in userspace"
 	depends on BLK_DEV_DM
@@ -668,5 +668,8 @@ config DM_USER
 	  called dm-user.
 
 	  If unsure, say N.
+=======
+source "drivers/md/dm-vdo/Kconfig"
+>>>>>>> BRANCH (5e74df Merge tag 'x86-urgent-2024-03-24' of git://git.kernel.org/pu)
 
 endif # MD

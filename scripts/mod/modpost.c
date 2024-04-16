@@ -1052,7 +1052,9 @@ static void default_mismatch_handler(const char *modname, struct elf_info *elf,
 	sec_mismatch_count++;
 
 	warn("%s: section mismatch in reference: %s+0x%x (section: %s) -> %s (section: %s)\n",
-	     modname, fromsym, (unsigned int)(faddr - from->st_value), fromsec, tosym, tosec);
+	     modname, fromsym,
+	     (unsigned int)(faddr - (from ? from->st_value : 0)),
+	     fromsec, tosym, tosec);
 
 	if (mismatch->mismatch == EXTABLE_TO_NON_TEXT) {
 		if (match(tosec, mismatch->bad_tosec))
@@ -1853,7 +1855,7 @@ static void add_header(struct buffer *b, struct module *mod)
 
 	buf_printf(b,
 		   "\n"
-		   "#ifdef CONFIG_RETPOLINE\n"
+		   "#ifdef CONFIG_MITIGATION_RETPOLINE\n"
 		   "MODULE_INFO(retpoline, \"Y\");\n"
 		   "#endif\n");
 

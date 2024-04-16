@@ -14,10 +14,12 @@ obj-$(CONFIG_VT6656)		+= vt6656/
 obj-$(CONFIG_VME_BUS)		+= vme_user/
 obj-$(CONFIG_IIO)		+= iio/
 obj-$(CONFIG_FB_SM750)		+= sm750fb/
-obj-$(CONFIG_USB_EMXX)		+= emxx_udc/
 obj-$(CONFIG_MFD_NVEC)		+= nvec/
+<<<<<<< HEAD   (a365b2 Merge ca7e91776912 ("Merge tag 'x86-apic-2024-03-10' of git:)
 obj-$(CONFIG_ASHMEM)		+= android/
 obj-$(CONFIG_STAGING_BOARD)	+= board/
+=======
+>>>>>>> BRANCH (5e74df Merge tag 'x86-urgent-2024-03-24' of git://git.kernel.org/pu)
 obj-$(CONFIG_LTE_GDM724X)	+= gdm724x/
 obj-$(CONFIG_FB_TFT)		+= fbtft/
 obj-$(CONFIG_MOST)		+= most/
