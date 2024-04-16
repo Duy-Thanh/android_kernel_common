@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd8824c2_d5823eb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-16T08:57:34Z",
+      "side": 1,
+      "message": "Turns out that this is not enough. There is also a CFI failure when `__list_lru_walk_one` calls `rust_shrink_free_page`.",
+      "revId": "34b958f28abf981b0afe6f8ebc3285f25e190b47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
