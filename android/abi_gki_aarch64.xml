@@ -195,6 +195,7 @@
       <elf-symbol name='__init_swait_queue_head' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x608741b5'/>
       <elf-symbol name='__init_waitqueue_head' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd9a5ea54'/>
       <elf-symbol name='__insert_inode_hash' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd2bbfe5b'/>
+      <elf-symbol name='__invalidate_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe9e182ad'/>
       <elf-symbol name='__iomap_dio_rw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1239b05c'/>
       <elf-symbol name='__ioread32_copy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3801776b'/>
       <elf-symbol name='__ioremap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6b4b2933'/>
@@ -1174,6 +1175,7 @@
       <elf-symbol name='blk_mq_tagset_busy_iter' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd3041fc1'/>
       <elf-symbol name='blk_mq_tagset_wait_completed_request' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf2453c48'/>
       <elf-symbol name='blk_mq_unfreeze_queue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6d084196'/>
+      <elf-symbol name='blk_mq_unique_tag' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd30dcbae'/>
       <elf-symbol name='blk_mq_unquiesce_queue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x229ca65'/>
       <elf-symbol name='blk_mq_update_nr_hw_queues' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf036252d'/>
       <elf-symbol name='blk_mq_virtio_map_queues' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xca776ef5'/>
@@ -1738,6 +1740,7 @@
       <elf-symbol name='dev_driver_string' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x273a8095'/>
       <elf-symbol name='dev_err_probe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9583d7d5'/>
       <elf-symbol name='dev_fetch_sw_netstats' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x21ce3ed1'/>
+      <elf-symbol name='dev_forward_skb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9bff5422'/>
       <elf-symbol name='dev_fwnode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdbcd27e2'/>
       <elf-symbol name='dev_get_by_index' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb4d35af2'/>
       <elf-symbol name='dev_get_by_index_rcu' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x750a6a6b'/>
@@ -1746,6 +1749,7 @@
       <elf-symbol name='dev_get_regmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeed7d9a5'/>
       <elf-symbol name='dev_get_stats' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x237296fe'/>
       <elf-symbol name='dev_get_tstats64' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5e2e44b'/>
+      <elf-symbol name='dev_mc_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5daa5909'/>
       <elf-symbol name='dev_mc_sync_multiple' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x559f462f'/>
       <elf-symbol name='dev_mc_unsync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb9bfb2ce'/>
       <elf-symbol name='dev_open' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2a72451f'/>
@@ -1811,15 +1815,18 @@
       <elf-symbol name='dev_pm_qos_update_user_latency_tolerance' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x125c2c8f'/>
       <elf-symbol name='dev_pm_set_dedicated_wake_irq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4aa99b4b'/>
       <elf-symbol name='dev_pm_set_wake_irq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4aedf5f'/>
+      <elf-symbol name='dev_pre_changeaddr_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15f594b1'/>
       <elf-symbol name='dev_printk_emit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x932cceb0'/>
       <elf-symbol name='dev_queue_xmit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x173641ac'/>
       <elf-symbol name='dev_remove_pack' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x935af3e0'/>
+      <elf-symbol name='dev_set_allmulti' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xebc534e5'/>
       <elf-symbol name='dev_set_mac_address' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x85208e36'/>
       <elf-symbol name='dev_set_mtu' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x28ed12fc'/>
       <elf-symbol name='dev_set_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd75566fd'/>
       <elf-symbol name='dev_set_threaded' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2d874a44'/>
       <elf-symbol name='dev_to_i3cdev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x967711c'/>
       <elf-symbol name='dev_trans_start' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4be5c018'/>
+      <elf-symbol name='dev_uc_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x51d71f15'/>
       <elf-symbol name='dev_uc_sync_multiple' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xae44db0'/>
       <elf-symbol name='dev_uc_unsync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc077074b'/>
       <elf-symbol name='dev_valid_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x62849ac7'/>
@@ -3593,6 +3600,7 @@
       <elf-symbol name='ip6_find_1stfragopt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3f0c45ff'/>
       <elf-symbol name='ip6_local_out' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe10f917c'/>
       <elf-symbol name='ip6_redirect' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4ea39e16'/>
+      <elf-symbol name='ip6_route_input_lookup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x51c10beb'/>
       <elf-symbol name='ip6_route_me_harder' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdf1d8376'/>
       <elf-symbol name='ip6_route_output_flags' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x25dbfaac'/>
       <elf-symbol name='ip6_update_pmtu' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7335e595'/>
@@ -3602,6 +3610,7 @@
       <elf-symbol name='ip_compute_csum' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x20eadeb6'/>
       <elf-symbol name='ip_local_deliver' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x61cbc0a2'/>
       <elf-symbol name='ip_local_out' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc77f2db9'/>
+      <elf-symbol name='ip_route_input_noref' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xef6031cb'/>
       <elf-symbol name='ip_route_me_harder' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcbe85365'/>
       <elf-symbol name='ip_route_output_flow' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5077ac8a'/>
       <elf-symbol name='ip_send_check' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2124474'/>
@@ -4190,6 +4199,7 @@
       <elf-symbol name='netdev_features_change' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfecb1d05'/>
       <elf-symbol name='netdev_increment_features' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x69668826'/>
       <elf-symbol name='netdev_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x20612ead'/>
+      <elf-symbol name='netdev_is_rx_handler_busy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb4f234e4'/>
       <elf-symbol name='netdev_lower_state_changed' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8409b196'/>
       <elf-symbol name='netdev_master_upper_dev_link' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7370e40d'/>
       <elf-symbol name='netdev_notice' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2ea7e52b'/>
@@ -4229,6 +4239,7 @@
       <elf-symbol name='netif_tx_wake_queue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf6d62a24'/>
       <elf-symbol name='netlink_ack' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4a5663ee'/>
       <elf-symbol name='netlink_broadcast' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9f0f7f81'/>
+      <elf-symbol name='netlink_capable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xba665ea'/>
       <elf-symbol name='netlink_kernel_release' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb2f3fd98'/>
       <elf-symbol name='netlink_net_capable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3c819a3d'/>
       <elf-symbol name='netlink_register_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfa599bb2'/>
@@ -4269,6 +4280,8 @@
       <elf-symbol name='nla_put_nohdr' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf468e82'/>
       <elf-symbol name='nla_reserve' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4fb5570b'/>
       <elf-symbol name='nla_reserve_64bit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x65c4d1a'/>
+      <elf-symbol name='nla_strcmp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xedbaee5e'/>
+      <elf-symbol name='nla_strdup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc0ff12fb'/>
       <elf-symbol name='nla_strscpy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x84823cf3'/>
       <elf-symbol name='no_llseek' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x528c8b55'/>
       <elf-symbol name='nonseekable_open' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc18e62cb'/>
@@ -5127,7 +5140,9 @@
       <elf-symbol name='register_filesystem' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe3b397e7'/>
       <elf-symbol name='register_ftrace_export' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9593ef31'/>
       <elf-symbol name='register_inet6addr_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x60352082'/>
+      <elf-symbol name='register_inet6addr_validator_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa77bfd29'/>
       <elf-symbol name='register_inetaddr_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf68285c0'/>
+      <elf-symbol name='register_inetaddr_validator_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc32c71af'/>
       <elf-symbol name='register_kernel_break_hook' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x48a17bef'/>
       <elf-symbol name='register_key_type' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf1ed30b4'/>
       <elf-symbol name='register_kprobe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x472cf3b'/>
@@ -5630,6 +5645,7 @@
       <elf-symbol name='sk_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbfb2c506'/>
       <elf-symbol name='sk_error_report' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa9ee2e1b'/>
       <elf-symbol name='sk_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x56be23e1'/>
+      <elf-symbol name='sk_set_memalloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4d0cfe40'/>
       <elf-symbol name='sk_setup_caps' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x25e2eb58'/>
       <elf-symbol name='skb_add_rx_frag' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3a6d2842'/>
       <elf-symbol name='skb_append_pagefrags' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x40f1684f'/>
@@ -5959,6 +5975,7 @@
       <elf-symbol name='sock_recvmsg' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6710d3e7'/>
       <elf-symbol name='sock_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x14e5d945'/>
       <elf-symbol name='sock_release' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5228b05b'/>
+      <elf-symbol name='sock_sendmsg' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd3150451'/>
       <elf-symbol name='sock_setsockopt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x44bf2051'/>
       <elf-symbol name='sock_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x62737e1d'/>
       <elf-symbol name='sock_wfree' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8ee213b9'/>
@@ -6499,7 +6516,9 @@
       <elf-symbol name='unregister_filesystem' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x88e9230d'/>
       <elf-symbol name='unregister_ftrace_export' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x81f372a2'/>
       <elf-symbol name='unregister_inet6addr_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2fe252cc'/>
+      <elf-symbol name='unregister_inet6addr_validator_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x47c65bfc'/>
       <elf-symbol name='unregister_inetaddr_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfe029963'/>
+      <elf-symbol name='unregister_inetaddr_validator_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xab63baa5'/>
       <elf-symbol name='unregister_key_type' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x819cd856'/>
       <elf-symbol name='unregister_kprobe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeb78b1ed'/>
       <elf-symbol name='unregister_kretprobe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xce598ef2'/>
@@ -52824,7 +52843,7 @@
       <pointer-type-def type-id='3e1d184a' size-in-bits='64' id='6aee814c'/>
       <pointer-type-def type-id='ec84183d' size-in-bits='64' id='6af1ec35'/>
       <pointer-type-def type-id='74e7a035' size-in-bits='64' id='6af64a09'/>
-      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv4/route.c' line='1507' column='1' id='6b1203e5'>
+      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv6/route.c' line='130' column='1' id='6b1203e5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='net/ipv4/route.c' line='1508' column='1'/>
         </data-member>
@@ -119613,7 +119632,35 @@
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='22c4fd1a' size-in-bits='64' id='ec1a9290'/>
-      <class-decl name='disk_events' is-struct='yes' visibility='default' is-declaration-only='yes' id='ec1aac50'/>
+      <class-decl name='disk_events' size-in-bits='1920' is-struct='yes' visibility='default' filepath='block/disk-events.c' line='10' column='1' id='ec1aac50'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='node' type-id='72f469ec' visibility='default' filepath='block/disk-events.c' line='11' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='disk' type-id='33c599da' visibility='default' filepath='block/disk-events.c' line='12' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='block/disk-events.c' line='13' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='block_mutex' type-id='925167dc' visibility='default' filepath='block/disk-events.c' line='15' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='640'>
+          <var-decl name='block' type-id='95e97e5e' visibility='default' filepath='block/disk-events.c' line='16' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='672'>
+          <var-decl name='pending' type-id='f0981eeb' visibility='default' filepath='block/disk-events.c' line='17' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='704'>
+          <var-decl name='clearing' type-id='f0981eeb' visibility='default' filepath='block/disk-events.c' line='18' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='768'>
+          <var-decl name='poll_msecs' type-id='bd54fe1a' visibility='default' filepath='block/disk-events.c' line='20' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='832'>
+          <var-decl name='dwork' type-id='5ad6e0ef' visibility='default' filepath='block/disk-events.c' line='21' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='b9157ea1' size-in-bits='64' id='ec2076dd'/>
       <class-decl name='public_key_signature' size-in-bits='640' is-struct='yes' visibility='default' filepath='include/crypto/public_key.h' line='38' column='1' id='ec216e31'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -129300,6 +129347,11 @@
         <parameter type-id='7359adad' name='hashval' filepath='fs/inode.c' line='498' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='__invalidate_device' mangled-name='__invalidate_device' filepath='block/bdev.c' line='999' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__invalidate_device'>
+        <parameter type-id='b88dd945' name='bdev' filepath='block/bdev.c' line='999' column='1'/>
+        <parameter type-id='b50a4934' name='kill_dirty' filepath='block/bdev.c' line='999' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__iomap_dio_rw' mangled-name='__iomap_dio_rw' filepath='fs/iomap/direct-io.c' line='477' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__iomap_dio_rw'>
         <parameter type-id='80f25feb' name='iocb' filepath='fs/iomap/direct-io.c' line='477' column='1'/>
         <parameter type-id='4fa10f9e' name='iter' filepath='fs/iomap/direct-io.c' line='477' column='1'/>
@@ -135684,6 +135736,10 @@
         <parameter type-id='e7d2a5fc' name='q' filepath='block/blk-mq.c' line='207' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='blk_mq_unique_tag' mangled-name='blk_mq_unique_tag' filepath='block/blk-mq-tag.c' line='649' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_mq_unique_tag'>
+        <parameter type-id='3dad1a48' name='rq' filepath='block/blk-mq-tag.c' line='649' column='1'/>
+        <return type-id='19c2251e'/>
+      </function-decl>
       <function-decl name='blk_mq_unquiesce_queue' mangled-name='blk_mq_unquiesce_queue' filepath='block/blk-mq.c' line='258' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_mq_unquiesce_queue'>
         <parameter type-id='e7d2a5fc' name='q' filepath='block/blk-mq.c' line='258' column='1'/>
         <return type-id='48b5725f'/>
@@ -138695,6 +138751,11 @@
         <parameter type-id='069eeb9e' name='netstats' filepath='net/core/dev.c' line='10736' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='dev_forward_skb' mangled-name='dev_forward_skb' filepath='net/core/dev.c' line='2223' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_forward_skb'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/core/dev.c' line='2223' column='1'/>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/core/dev.c' line='2223' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='dev_fwnode' mangled-name='dev_fwnode' filepath='drivers/base/property.c' line='21' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_fwnode'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/base/property.c' line='21' column='1'/>
         <return type-id='4a935625'/>
@@ -138733,6 +138794,11 @@
         <parameter type-id='68a2d05b' name='dev' filepath='net/core/dev.c' line='10770' column='1'/>
         <parameter type-id='bd3860fe' name='s' filepath='net/core/dev.c' line='10770' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='dev_mc_sync' mangled-name='dev_mc_sync' filepath='net/core/dev_addr_lists.c' line='921' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_mc_sync'>
+        <parameter type-id='68a2d05b' name='to' filepath='net/core/dev_addr_lists.c' line='921' column='1'/>
+        <parameter type-id='68a2d05b' name='from' filepath='net/core/dev_addr_lists.c' line='921' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='dev_mc_sync_multiple' mangled-name='dev_mc_sync_multiple' filepath='net/core/dev_addr_lists.c' line='951' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_mc_sync_multiple'>
         <parameter type-id='68a2d05b' name='to' filepath='net/core/dev_addr_lists.c' line='951' column='1'/>
@@ -139046,6 +139112,12 @@
         <parameter type-id='95e97e5e' name='irq' filepath='drivers/base/power/wakeirq.c' line='50' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='dev_pre_changeaddr_notify' mangled-name='dev_pre_changeaddr_notify' filepath='net/core/dev.c' line='9036' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_pre_changeaddr_notify'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/core/dev.c' line='9036' column='1'/>
+        <parameter type-id='80f4b756' name='addr' filepath='net/core/dev.c' line='9036' column='1'/>
+        <parameter type-id='5799dc94' name='extack' filepath='net/core/dev.c' line='9037' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='dev_printk_emit' mangled-name='dev_printk_emit' filepath='drivers/base/core.c' line='4609' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_printk_emit'>
         <parameter type-id='95e97e5e' name='level' filepath='drivers/base/core.c' line='4609' column='1'/>
         <parameter type-id='8df61054' name='dev' filepath='drivers/base/core.c' line='4609' column='1'/>
@@ -139060,6 +139132,11 @@
       <function-decl name='dev_remove_pack' mangled-name='dev_remove_pack' filepath='net/core/dev.c' line='607' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_remove_pack'>
         <parameter type-id='1c079e60' name='pt' filepath='net/core/dev.c' line='607' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='dev_set_allmulti' mangled-name='dev_set_allmulti' filepath='net/core/dev.c' line='8701' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_set_allmulti'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/core/dev.c' line='8701' column='1'/>
+        <parameter type-id='95e97e5e' name='inc' filepath='net/core/dev.c' line='8701' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='dev_set_mac_address' mangled-name='dev_set_mac_address' filepath='net/core/dev.c' line='9059' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_set_mac_address'>
         <parameter type-id='68a2d05b' name='dev' filepath='net/core/dev.c' line='9059' column='1'/>
@@ -139090,6 +139167,11 @@
       <function-decl name='dev_trans_start' mangled-name='dev_trans_start' filepath='net/sched/sch_generic.c' line='428' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_trans_start'>
         <parameter type-id='68a2d05b' name='dev' filepath='net/sched/sch_generic.c' line='428' column='1'/>
         <return type-id='7359adad'/>
+      </function-decl>
+      <function-decl name='dev_uc_sync' mangled-name='dev_uc_sync' filepath='net/core/dev_addr_lists.c' line='698' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_uc_sync'>
+        <parameter type-id='68a2d05b' name='to' filepath='net/core/dev_addr_lists.c' line='698' column='1'/>
+        <parameter type-id='68a2d05b' name='from' filepath='net/core/dev_addr_lists.c' line='698' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='dev_uc_sync_multiple' mangled-name='dev_uc_sync_multiple' filepath='net/core/dev_addr_lists.c' line='728' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_uc_sync_multiple'>
         <parameter type-id='68a2d05b' name='to' filepath='net/core/dev_addr_lists.c' line='728' column='1'/>
@@ -148408,6 +148490,14 @@
         <parameter type-id='d80b72e6' name='uid' filepath='net/ipv6/route.c' line='3146' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='ip6_route_input_lookup' mangled-name='ip6_route_input_lookup' filepath='net/ipv6/route.c' line='2282' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ip6_route_input_lookup'>
+        <parameter type-id='a2bff676' name='net' filepath='net/ipv6/route.c' line='2282' column='1'/>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/ipv6/route.c' line='2283' column='1'/>
+        <parameter type-id='a99cde64' name='fl6' filepath='net/ipv6/route.c' line='2284' column='1'/>
+        <parameter type-id='11f4a000' name='skb' filepath='net/ipv6/route.c' line='2285' column='1'/>
+        <parameter type-id='95e97e5e' name='flags' filepath='net/ipv6/route.c' line='2286' column='1'/>
+        <return type-id='141b6427'/>
+      </function-decl>
       <function-decl name='ip6_route_me_harder' mangled-name='ip6_route_me_harder' filepath='net/ipv6/netfilter.c' line='23' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ip6_route_me_harder'>
         <parameter type-id='a2bff676' name='net' filepath='net/ipv6/netfilter.c' line='23' column='1'/>
         <parameter type-id='f772df6d' name='sk_partial' filepath='net/ipv6/netfilter.c' line='23' column='1'/>
@@ -148460,6 +148550,14 @@
         <parameter type-id='a2bff676' name='net' filepath='net/ipv4/ip_output.c' line='120' column='1'/>
         <parameter type-id='f772df6d' name='sk' filepath='net/ipv4/ip_output.c' line='120' column='1'/>
         <parameter type-id='0fbf3cfd' name='skb' filepath='net/ipv4/ip_output.c' line='120' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='ip_route_input_noref' mangled-name='ip_route_input_noref' filepath='net/ipv4/route.c' line='2445' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ip_route_input_noref'>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/ipv4/route.c' line='2445' column='1'/>
+        <parameter type-id='78a133c2' name='daddr' filepath='net/ipv4/route.c' line='2445' column='1'/>
+        <parameter type-id='78a133c2' name='saddr' filepath='net/ipv4/route.c' line='2445' column='1'/>
+        <parameter type-id='f9b06939' name='tos' filepath='net/ipv4/route.c' line='2446' column='1'/>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/ipv4/route.c' line='2446' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='ip_route_me_harder' mangled-name='ip_route_me_harder' filepath='net/ipv4/netfilter.c' line='20' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ip_route_me_harder'>
@@ -151475,6 +151573,10 @@
         <parameter is-variadic='yes'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='netdev_is_rx_handler_busy' mangled-name='netdev_is_rx_handler_busy' filepath='net/core/dev.c' line='5184' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netdev_is_rx_handler_busy'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/core/dev.c' line='5184' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
       <function-decl name='netdev_lower_state_changed' mangled-name='netdev_lower_state_changed' filepath='net/core/dev.c' line='8561' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netdev_lower_state_changed'>
         <parameter type-id='68a2d05b' name='lower_dev' filepath='net/core/dev.c' line='8561' column='1'/>
         <parameter type-id='eaa32e2f' name='lower_state_info' filepath='net/core/dev.c' line='8562' column='1'/>
@@ -151672,6 +151774,11 @@
         <parameter type-id='19c2251e' name='group' filepath='net/netlink/af_netlink.c' line='1560' column='1'/>
         <parameter type-id='3eb7c31c' name='allocation' filepath='net/netlink/af_netlink.c' line='1560' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='netlink_capable' mangled-name='netlink_capable' filepath='net/netlink/af_netlink.c' line='905' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netlink_capable'>
+        <parameter type-id='11f4a000' name='skb' filepath='net/netlink/af_netlink.c' line='905' column='1'/>
+        <parameter type-id='95e97e5e' name='cap' filepath='net/netlink/af_netlink.c' line='905' column='1'/>
+        <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='netlink_kernel_release' mangled-name='netlink_kernel_release' filepath='net/netlink/af_netlink.c' line='2106' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netlink_kernel_release'>
         <parameter type-id='f772df6d' name='sk' filepath='net/netlink/af_netlink.c' line='2106' column='1'/>
@@ -151890,6 +151997,16 @@
         <parameter type-id='95e97e5e' name='attrlen' filepath='lib/nlattr.c' line='946' column='1'/>
         <parameter type-id='95e97e5e' name='padattr' filepath='lib/nlattr.c' line='947' column='1'/>
         <return type-id='6fcaf91e'/>
+      </function-decl>
+      <function-decl name='nla_strcmp' mangled-name='nla_strcmp' filepath='lib/nlattr.c' line='827' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='nla_strcmp'>
+        <parameter type-id='0f2a7ce5' name='nla' filepath='lib/nlattr.c' line='827' column='1'/>
+        <parameter type-id='80f4b756' name='str' filepath='lib/nlattr.c' line='827' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='nla_strdup' mangled-name='nla_strdup' filepath='lib/nlattr.c' line='764' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='nla_strdup'>
+        <parameter type-id='0f2a7ce5' name='nla' filepath='lib/nlattr.c' line='764' column='1'/>
+        <parameter type-id='3eb7c31c' name='flags' filepath='lib/nlattr.c' line='764' column='1'/>
+        <return type-id='26a90f95'/>
       </function-decl>
       <function-decl name='nla_strscpy' mangled-name='nla_strscpy' filepath='lib/nlattr.c' line='728' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='nla_strscpy'>
         <parameter type-id='26a90f95' name='dst' filepath='lib/nlattr.c' line='728' column='1'/>
@@ -156236,8 +156353,16 @@
         <parameter type-id='d504f73d' name='nb' filepath='net/ipv6/addrconf_core.c' line='95' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='register_inet6addr_validator_notifier' mangled-name='register_inet6addr_validator_notifier' filepath='net/ipv6/addrconf_core.c' line='113' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='register_inet6addr_validator_notifier'>
+        <parameter type-id='d504f73d' name='nb' filepath='net/ipv6/addrconf_core.c' line='113' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='register_inetaddr_notifier' mangled-name='register_inetaddr_notifier' filepath='net/ipv4/devinet.c' line='1450' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='register_inetaddr_notifier'>
         <parameter type-id='d504f73d' name='nb' filepath='net/ipv4/devinet.c' line='1450' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='register_inetaddr_validator_notifier' mangled-name='register_inetaddr_validator_notifier' filepath='net/ipv4/devinet.c' line='1462' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='register_inetaddr_validator_notifier'>
+        <parameter type-id='d504f73d' name='nb' filepath='net/ipv4/devinet.c' line='1462' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='register_kernel_break_hook' mangled-name='register_kernel_break_hook' filepath='arch/arm64/kernel/debug-monitors.c' line='294' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='register_kernel_break_hook'>
@@ -158822,6 +158947,10 @@
         <parameter type-id='f772df6d' name='sk' filepath='net/core/sock.c' line='2009' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='sk_set_memalloc' mangled-name='sk_set_memalloc' filepath='net/core/sock.c' line='298' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sk_set_memalloc'>
+        <parameter type-id='f772df6d' name='sk' filepath='net/core/sock.c' line='298' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='sk_setup_caps' mangled-name='sk_setup_caps' filepath='net/core/sock.c' line='2181' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sk_setup_caps'>
         <parameter type-id='f772df6d' name='sk' filepath='net/core/sock.c' line='2181' column='1'/>
         <parameter type-id='141b6427' name='dst' filepath='net/core/sock.c' line='2181' column='1'/>
@@ -160634,6 +160763,11 @@
       <function-decl name='sock_release' mangled-name='sock_release' filepath='net/socket.c' line='675' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sock_release'>
         <parameter type-id='13103032' name='sock' filepath='net/socket.c' line='675' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='sock_sendmsg' mangled-name='sock_sendmsg' filepath='net/socket.c' line='727' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sock_sendmsg'>
+        <parameter type-id='13103032' name='sock' filepath='net/socket.c' line='727' column='1'/>
+        <parameter type-id='6b9b777a' name='msg' filepath='net/socket.c' line='727' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='sock_setsockopt' mangled-name='sock_setsockopt' filepath='net/core/sock.c' line='960' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='sock_setsockopt'>
         <parameter type-id='13103032' name='sock' filepath='net/core/sock.c' line='960' column='1'/>
@@ -163420,8 +163554,16 @@
         <parameter type-id='d504f73d' name='nb' filepath='net/ipv6/addrconf_core.c' line='101' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='unregister_inet6addr_validator_notifier' mangled-name='unregister_inet6addr_validator_notifier' filepath='net/ipv6/addrconf_core.c' line='119' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='unregister_inet6addr_validator_notifier'>
+        <parameter type-id='d504f73d' name='nb' filepath='net/ipv6/addrconf_core.c' line='119' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='unregister_inetaddr_notifier' mangled-name='unregister_inetaddr_notifier' filepath='net/ipv4/devinet.c' line='1456' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='unregister_inetaddr_notifier'>
         <parameter type-id='d504f73d' name='nb' filepath='net/ipv4/devinet.c' line='1456' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='unregister_inetaddr_validator_notifier' mangled-name='unregister_inetaddr_validator_notifier' filepath='net/ipv4/devinet.c' line='1468' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='unregister_inetaddr_validator_notifier'>
+        <parameter type-id='d504f73d' name='nb' filepath='net/ipv4/devinet.c' line='1468' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='unregister_key_type' mangled-name='unregister_key_type' filepath='security/keys/key.c' line='1182' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='unregister_key_type'>
@@ -167135,7 +167277,6 @@
     </abi-instr>
   </abi-corpus>
 </abi-corpus-group>
-
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
