@@ -105,6 +105,7 @@ void mlock_vma_page(struct page *page)
 			putback_lru_page(page);
 	}
 }
+EXPORT_SYMBOL_GPL(mlock_vma_page);
 
 /*
  * Finish munlock after successful page isolation
@@ -188,6 +189,7 @@ unsigned int munlock_vma_page(struct page *page)
 
 	return nr_pages - 1;
 }
+EXPORT_SYMBOL_GPL(munlock_vma_page);
 
 /*
  * convert get_user_pages() return value to posix mlock() error
