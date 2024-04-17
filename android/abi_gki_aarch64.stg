@@ -327922,6 +327922,12 @@ function {
   parameter_id: 0x38d23361
 }
 function {
+  id: 0x9d8f7eed
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x2668e644
+}
+function {
   id: 0x9d8f9d80
   return_type_id: 0x6720d32f
   parameter_id: 0x0258f96e
@@ -358432,6 +358438,15 @@ elf_symbol {
   crc: 0xec7eb28b
   type_id: 0x10c35fd7
   full_name: "devm_device_remove_group"
+}
+elf_symbol {
+  id: 0x4e304be8
+  name: "devm_drm_bridge_add"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x681dc9e1
+  type_id: 0x9d8f7eed
+  full_name: "devm_drm_bridge_add"
 }
 elf_symbol {
   id: 0x6bf4c5d2
@@ -408700,6 +408715,7 @@ interface {
   symbol_id: 0x8ed64fa4
   symbol_id: 0x0764373d
   symbol_id: 0x72706e55
+  symbol_id: 0x4e304be8
   symbol_id: 0x6bf4c5d2
   symbol_id: 0x4a6566b1
   symbol_id: 0x0e6117e6
