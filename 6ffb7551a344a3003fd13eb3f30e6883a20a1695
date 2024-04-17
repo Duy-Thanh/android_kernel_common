@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "6ffb7551a344a3003fd13eb3f30e6883a20a1695",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074999018",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3025243?revision\u003d3",
+      "key": {
+        "uuid": "5f822cb3_5c9f3ce1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-17T15:19:01Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/ccb49011bb2ebfd66164dbf68c5bff48917bb5ef) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dccb49011bb2ebfd66164dbf68c5bff48917bb5ef).\n\n```\n      ## fs/ext2/ext2.h ##\n     @@ fs/ext2/ext2.h: struct ext2_inode_info {\n      \tstruct inode\tvfs_inode;\n    @@ fs/ocfs2/super.c: static int ocfs2_susp_quotas(struct ocfs2_super *osb, int unsu\n      \treturn OCFS2_I(inode)-\u003ei_dquot;\n      }\n     \n    - ## fs/quota/dquot.c ##\n    -@@ fs/quota/dquot.c: EXPORT_SYMBOL(dqget);\n    - \n    - static inline struct dquot __rcu **i_dquot(struct inode *inode)\n    - {\n    --\t/* Force __rcu for now until filesystems are fixed */\n    --\treturn (struct dquot __rcu **)inode-\u003ei_sb-\u003es_op-\u003eget_dquots(inode);\n    -+\treturn inode-\u003ei_sb-\u003es_op-\u003eget_dquots(inode);\n    - }\n    - \n    - static int dqinit_needed(struct inode *inode, int type)\n    -\n      ## fs/reiserfs/reiserfs.h ##\n     @@ fs/reiserfs/reiserfs.h: struct reiserfs_inode_info {\n      \tstruct rw_semaphore i_xattr_sem;\n    @@ include/linux/fs.h: struct super_operations {\n     \n      ## include/linux/shmem_fs.h ##\n     @@ include/linux/shmem_fs.h: struct shmem_inode_info {\n    - \tunsigned int\t\tfsflags;\t/* for FS_IOC_[SG]ETFLAGS */\n    - \tatomic_t\t\tstop_eviction;\t/* hold when working on inode */\n    + \tstruct timespec64\ti_crtime;\t/* file creation time */\n    + \tunsigned int\t\tfsflags;\t/* flags for FS_IOC_[SG]ETFLAGS */\n      #ifdef CONFIG_TMPFS_QUOTA\n     -\tstruct dquot\t\t*i_dquot[MAXQUOTAS];\n     +\tstruct dquot __rcu\t*i_dquot[MAXQUOTAS];\n      #endif\n    + \tstruct offset_ctx\tdir_offsets;\t/* stable entry offsets */\n      \tstruct inode\t\tvfs_inode;\n    - };\n     \n      ## mm/shmem.c ##\n     @@ mm/shmem.c: static void shmem_disable_quotas(struct super_block *sb)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "6ffb7551a344a3003fd13eb3f30e6883a20a1695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
