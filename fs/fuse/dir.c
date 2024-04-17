@@ -518,11 +518,21 @@ int fuse_lookup_name(struct super_block *sb, u64 nodeid, const struct qstr *name
 	fuse_lookup_init(fm->fc, &args, nodeid, name, outarg, &bpf_arg.out);
 	err = fuse_simple_request(fm, &args);
 
+<<<<<<< HEAD   (fe5479 Merge 6.6.23 into android15-6.6)
 #ifdef CONFIG_FUSE_BPF
 	if (err == sizeof(bpf_arg.out)) {
 		/* TODO Make sure this handles invalid handles */
 		struct file *backing_file;
 		struct inode *backing_inode;
+=======
+	err = -EIO;
+	if (fuse_invalid_attr(&outarg->attr))
+		goto out_put_forget;
+	if (outarg->nodeid == FUSE_ROOT_ID && outarg->generation != 0) {
+		pr_warn_once("root generation should be zero\n");
+		outarg->generation = 0;
+	}
+>>>>>>> BRANCH (9467d7 Linux 6.6.24)
 
 		err = -ENOENT;
 		if (!entry)
@@ -1509,7 +1519,7 @@ static int fuse_do_statx(struct inode *inode, struct file *file,
 	if (((sx->mask & STATX_SIZE) && !fuse_valid_size(sx->size)) ||
 	    ((sx->mask & STATX_TYPE) && (!fuse_valid_type(sx->mode) ||
 					 inode_wrong_type(inode, sx->mode)))) {
-		make_bad_inode(inode);
+		fuse_make_bad(inode);
 		return -EIO;
 	}
 

@@ -981,8 +981,12 @@ static int swiotlb_area_find_slots(struct device *dev, struct io_tlb_pool *pool,
 	dma_addr_t tbl_dma_addr =
 		phys_to_dma_unencrypted(dev, pool->start) & boundary_mask;
 	unsigned long max_slots = get_max_slots(boundary_mask);
+<<<<<<< HEAD   (fe5479 Merge 6.6.23 into android15-6.6)
 	unsigned int iotlb_align_mask =
 		dma_get_min_align_mask(dev) & ~(IO_TLB_SIZE - 1);
+=======
+	unsigned int iotlb_align_mask = dma_get_min_align_mask(dev);
+>>>>>>> BRANCH (9467d7 Linux 6.6.24)
 	unsigned int nslots = nr_slots(alloc_size), stride;
 	unsigned int offset = swiotlb_align_offset(dev, orig_addr);
 	unsigned int index, slots_checked, count = 0, i;
@@ -994,6 +998,27 @@ static int swiotlb_area_find_slots(struct device *dev, struct io_tlb_pool *pool,
 	BUG_ON(area_index >= pool->nareas);
 
 	/*
+<<<<<<< HEAD   (fe5479 Merge 6.6.23 into android15-6.6)
+	 * For mappings with an alignment requirement don't bother looping to
+	 * unaligned slots once we found an aligned one.
+	 */
+	stride = get_max_slots(max(alloc_align_mask, iotlb_align_mask));
+
+	/*
+	 * For allocations of PAGE_SIZE or larger only look for page aligned
+	 * allocations.
+=======
+	 * Ensure that the allocation is at least slot-aligned and update
+	 * 'iotlb_align_mask' to ignore bits that will be preserved when
+	 * offsetting into the allocation.
+>>>>>>> BRANCH (9467d7 Linux 6.6.24)
+	 */
+<<<<<<< HEAD   (fe5479 Merge 6.6.23 into android15-6.6)
+=======
+	alloc_align_mask |= (IO_TLB_SIZE - 1);
+	iotlb_align_mask &= ~alloc_align_mask;
+
+	/*
 	 * For mappings with an alignment requirement don't bother looping to
 	 * unaligned slots once we found an aligned one.
 	 */
@@ -1003,6 +1028,7 @@ static int swiotlb_area_find_slots(struct device *dev, struct io_tlb_pool *pool,
 	 * For allocations of PAGE_SIZE or larger only look for page aligned
 	 * allocations.
 	 */
+>>>>>>> BRANCH (9467d7 Linux 6.6.24)
 	if (alloc_size >= PAGE_SIZE)
 		stride = umax(stride, PAGE_SHIFT - IO_TLB_SHIFT + 1);
 
