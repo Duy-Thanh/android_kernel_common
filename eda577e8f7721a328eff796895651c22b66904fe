@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78620eeb_18721a6d",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-17T08:45:28Z",
+      "side": 1,
+      "message": "you have to allocate new memory here, to not do so feels wrong.  If this is a performance thing, please submit the real change to binder instead of putting it in a hook.",
+      "range": {
+        "startLine": 771,
+        "startChar": 6,
+        "endLine": 771,
+        "endChar": 16
+      },
+      "revId": "eda577e8f7721a328eff796895651c22b66904fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
