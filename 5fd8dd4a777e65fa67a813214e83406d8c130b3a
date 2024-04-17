@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "5fd8dd4a777e65fa67a813214e83406d8c130b3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074924870",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3045579?revision\u003d1",
+      "key": {
+        "uuid": "abd90b5a_6761507c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-17T16:31:50Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/3363bd0cfbb80dfcd25003cd3815b0ad8b68d0ff) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d3363bd0cfbb80dfcd25003cd3815b0ad8b68d0ff).\n\n```\n      ## kernel/bpf/btf.c ##\n     @@ kernel/bpf/btf.c: static u32 *reg2btf_ids[__BPF_REG_TYPE_MAX] \u003d {\n    @@ kernel/bpf/btf.c: static u32 *reg2btf_ids[__BPF_REG_TYPE_MAX] \u003d {\n      static int btf_check_func_arg_match(struct bpf_verifier_env *env,\n      \t\t\t\t    const struct btf *btf, u32 func_id,\n      \t\t\t\t    struct bpf_reg_state *regs,\n    - \t\t\t\t    bool ptr_to_mem_ok)\n    - {\n    +@@ kernel/bpf/btf.c: static int btf_check_func_arg_match(struct bpf_verifier_env *env,\n    + \tenum bpf_prog_type prog_type \u003d env-\u003eprog-\u003etype \u003d\u003d BPF_PROG_TYPE_EXT ?\n    + \t\tenv-\u003eprog-\u003eaux-\u003edst_prog-\u003etype : env-\u003eprog-\u003etype;\n      \tstruct bpf_verifier_log *log \u003d \u0026env-\u003elog;\n     +\tbool is_kfunc \u003d btf_is_kernel(btf);\n      \tconst char *func_name, *ref_tname;\n    @@ kernel/bpf/btf.c: static int btf_check_func_arg_match(struct bpf_verifier_env *e\n      \t\t\tif (reg-\u003etype \u003d\u003d PTR_TO_BTF_ID) {\n      \t\t\t\treg_btf \u003d reg-\u003ebtf;\n      \t\t\t\treg_ref_id \u003d reg-\u003ebtf_id;\n    --\t\t\t} else if (reg2btf_ids[reg-\u003etype]) {\n    +-\t\t\t} else if (reg2btf_ids[base_type(reg-\u003etype)]) {\n     +\t\t\t} else {\n      \t\t\t\treg_btf \u003d btf_vmlinux;\n    - \t\t\t\treg_ref_id \u003d *reg2btf_ids[reg-\u003etype];\n    + \t\t\t\treg_ref_id \u003d *reg2btf_ids[base_type(reg-\u003etype)];\n     -\t\t\t} else {\n     -\t\t\t\tbpf_log(log, \"kernel function %s args#%d expected pointer to %s %s but R%d is not a pointer to btf_id\\n\",\n     -\t\t\t\t\tfunc_name, i,\n    @@ kernel/bpf/btf.c: static int btf_check_func_arg_match(struct bpf_verifier_env *e\n      \t\t\t\t\treg_ref_tname);\n      \t\t\t\treturn -EINVAL;\n      \t\t\t}\n    --\t\t} else if (btf_get_prog_ctx_type(log, btf, t,\n    --\t\t\t\t\t\t env-\u003eprog-\u003etype, i)) {\n    +-\t\t} else if (btf_get_prog_ctx_type(log, btf, t, prog_type, i)) {\n     -\t\t\t/* If function expects ctx type in BTF check that caller\n     -\t\t\t * is passing PTR_TO_CTX.\n     -\t\t\t */\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "5fd8dd4a777e65fa67a813214e83406d8c130b3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
