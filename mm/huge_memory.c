@@ -2242,6 +2242,7 @@ out:
 	 */
 	mmu_notifier_invalidate_range_only_end(&range);
 }
+EXPORT_SYMBOL_GPL(__split_huge_pmd);
 
 void split_huge_pmd_address(struct vm_area_struct *vma, unsigned long address,
 		bool freeze, struct page *page)
