@@ -1977,13 +1977,26 @@ static inline int pfn_valid(unsigned long pfn)
 	if (pfn_to_section_nr(pfn) >= NR_MEM_SECTIONS)
 		return 0;
 	ms = __pfn_to_section(pfn);
+<<<<<<< HEAD   (f28d3f Merge branch 'android14-6.1' into branch 'android14-6.1-lts')
 	if (!valid_section(ms))
+=======
+	rcu_read_lock_sched();
+	if (!valid_section(ms)) {
+		rcu_read_unlock_sched();
+>>>>>>> BRANCH (f1bb70 Linux 6.1.77)
 		return 0;
 	/*
 	 * Traditionally early sections always returned pfn_valid() for
 	 * the entire section-sized span.
 	 */
+<<<<<<< HEAD   (f28d3f Merge branch 'android14-6.1' into branch 'android14-6.1-lts')
 	return early_section(ms) || pfn_section_valid(ms, pfn);
+=======
+	ret = early_section(ms) || pfn_section_valid(ms, pfn);
+	rcu_read_unlock_sched();
+
+	return ret;
+>>>>>>> BRANCH (f1bb70 Linux 6.1.77)
 }
 #endif
 
