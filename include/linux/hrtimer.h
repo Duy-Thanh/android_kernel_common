@@ -126,6 +126,7 @@ struct hrtimer {
 	u8				is_soft;
 	u8				is_hard;
 
+	ANDROID_OEM_DATA(1);
 	ANDROID_KABI_RESERVE(1);
 };
 
