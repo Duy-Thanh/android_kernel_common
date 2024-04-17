@@ -16,6 +16,24 @@
       "message": "Breaks allmodconfig builds:\n```\nBuildbot Version: androidbuild_buildbot_20240408.00_RC00\nMachine: prod-2004-4905\ntools/bazel build --jobs\u003d80 --make_jobs\u003d80 --repo_manifest\u003d/buildbot/dist_dirs/aosp_kernel-common-android14-6.1-linux-kernel_aarch64_allmodconfig/P73289211/manifest_P73289211.xml --kleaf_localversion --config\u003dandroid_ci --profile\u003d/buildbot/dist_dirs/aosp_kernel-common-android14-6.1-linux-kernel_aarch64_allmodconfig/P73289211/logs/command.profile.json --allow_undeclared_modules --nowarn_undeclared_modules //common:kernel_aarch64_allmodconfig\nExtracting Bazel installation...\nStarting local Bazel server and connecting to it...\nINFO: Analyzed target //common:kernel_aarch64_allmodconfig (53 packages loaded, 93059 targets configured).\nINFO: Found 1 target...\nINFO: From Creating build environment (lto\u003ddefault;notrim) @//common:kernel_aarch64_allmodconfig_env:\nWARNING: MAKE_GOALS from build.config is being deprecated, use make_goals in kernel_build;\nConsider adding:\n\nmake_goals \u003d [\n  \"Image\",\n  \"modules\",\n],\n\nto @//common:kernel_aarch64_allmodconfig kernel.\nERROR: /buildbot/src/android/common-android14-6.1/common/BUILD.bazel:745:13: Building kernel (lto\u003ddefault;notrim) @//common:kernel_aarch64_allmodconfig failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common:kernel_aarch64_allmodconfig) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/9/execroot/__main__/common/drivers/of/unittest-data/tests-phandle.dtsi:11.18-22: Warning (node_name_vs_property_name): /testcase-data/duplicate-name: node name and property name conflict\n/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/9/execroot/__main__/common/drivers/of/unittest-data/tests-phandle.dtsi:11.18-22: Warning (node_name_vs_property_name): /testcase-data/duplicate-name: node name and property name conflict\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-apmixedsys.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-topckgen.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-infra_ao.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-cam.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-img.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-imp_iic_wrap.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-ipe.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-mcu.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-mdp.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-mfg.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-mm.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-vdec.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-venc.o\nERROR: modpost: missing MODULE_LICENSE() in drivers/clk/mediatek/clk-mt8186-wpe.o\nmake[2]: *** [/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/9/execroot/__main__/common/scripts/Makefile.modpost:186: Module.symvers] Error 1\nmake[1]: *** [/buildbot/src/android/common-android14-6.1/out/bazel/output_user_root/0bff201173d7f9f4b05eee35c041b37b/sandbox/linux-sandbox/9/execroot/__main__/common/Makefile:2009: modpost] Error 2\nmake: *** [Makefile:256: __sub-make] Error 2\nTarget //common:kernel_aarch64_allmodconfig failed to build\nUse --verbose_failures to see the command lines of failed build steps.\nINFO: Elapsed time: 718.527s, Critical Path: 691.15s\nINFO: 251 processes: 243 internal, 8 linux-sandbox.\nERROR: Build did NOT complete successfully\n```",
       "revId": "3e4f0ac03211ed0b455b258236e4bd3904ec3cd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8445c5fe_2c4e952c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083383
+      },
+      "writtenOn": "2024-04-17T00:49:02Z",
+      "side": 1,
+      "message": "We will add missing patches soon. Thanks.",
+      "parentUuid": "a1b05dc4_66562a25",
+      "revId": "3e4f0ac03211ed0b455b258236e4bd3904ec3cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
