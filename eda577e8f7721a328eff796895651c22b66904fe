@@ -46,6 +46,30 @@
       },
       "revId": "eda577e8f7721a328eff796895651c22b66904fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6019039e_c2394e30",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-17T14:39:12Z",
+      "side": 1,
+      "message": "Doing this type of thing only for binder feels wrong and will not work properly.",
+      "parentUuid": "8147a337_c6b18be6",
+      "range": {
+        "startLine": 771,
+        "startChar": 6,
+        "endLine": 771,
+        "endChar": 16
+      },
+      "revId": "eda577e8f7721a328eff796895651c22b66904fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
