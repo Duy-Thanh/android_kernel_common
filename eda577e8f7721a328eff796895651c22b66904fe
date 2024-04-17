@@ -22,6 +22,30 @@
       },
       "revId": "eda577e8f7721a328eff796895651c22b66904fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8147a337_c6b18be6",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 2028567
+      },
+      "writtenOn": "2024-04-17T11:22:58Z",
+      "side": 1,
+      "message": "Hello! You can refer to the communication in issue 331900628.\n 1.Here, we use the kcalloc method for memory allocation. When alloc-\u003ebuffer_size \u003e SZ_4M, the memory size allocated is order3, which easily triggers OOM at the lower level, causing random process killings and application crashes. \n 2.Through this hook, we can adjust the memory allocation method based on the memory allocation size to avoid OOM triggered by memory fragmentation on the phone.",
+      "parentUuid": "78620eeb_18721a6d",
+      "range": {
+        "startLine": 771,
+        "startChar": 6,
+        "endLine": 771,
+        "endChar": 16
+      },
+      "revId": "eda577e8f7721a328eff796895651c22b66904fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
