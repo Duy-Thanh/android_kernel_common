@@ -118,6 +118,7 @@
 #if IS_ENABLED(CONFIG_IPV6)
 #include <net/ipv6_stubs.h>
 #endif
+#include <trace/hooks/net.h>
 
 struct udp_table udp_table __read_mostly;
 EXPORT_SYMBOL(udp_table);
@@ -1493,6 +1494,8 @@ int __udp_enqueue_schedule_skb(struct sock *sk, struct sk_buff *skb)
 	int rmem, err = -ENOMEM;
 	spinlock_t *busy = NULL;
 	int size;
+
+	trace_android_vh_udp_enqueue_schedule_skb(sk, skb);
 
 	/* try to avoid the costly atomic add/sub pair when the receive
 	 * queue is full; always allow at least a packet
