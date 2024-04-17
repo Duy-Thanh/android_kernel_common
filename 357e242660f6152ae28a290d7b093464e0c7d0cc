@@ -33,6 +33,24 @@
       "message": "Hmm. This patch got disconnected from the rest of the series. As Greg says, please create a new bug instead of referring to the old one. Then rebase the whole series. It is likely that the series breaks the KMI so it would be queued for the 2024-04-24 KMI update.",
       "revId": "357e242660f6152ae28a290d7b093464e0c7d0cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebfaee4f_0f8a819e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902286
+      },
+      "writtenOn": "2024-04-17T10:41:32Z",
+      "side": 1,
+      "message": "Created https://partnerissuetracker.corp.google.com/issues/335384668 for propagating bootloader based hibernation changes to android15.",
+      "parentUuid": "aaa75ea5_1f96ca90",
+      "revId": "357e242660f6152ae28a290d7b093464e0c7d0cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
