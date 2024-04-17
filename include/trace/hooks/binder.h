@@ -14,6 +14,7 @@ struct binder_transaction;
 struct task_struct;
 struct binder_work;
 struct binder_buffer;
+struct binder_alloc;
 
 DECLARE_HOOK(android_vh_binder_transaction_init,
 	TP_PROTO(struct binder_transaction *t),
@@ -105,6 +106,12 @@ DECLARE_HOOK(android_vh_binder_new_ref,
 DECLARE_HOOK(android_vh_binder_del_ref,
 	TP_PROTO(struct task_struct *proc, uint32_t ref_desc),
 	TP_ARGS(proc, ref_desc));
+DECLARE_HOOK(android_vh_binder_alloc_pages_alloc,
+	TP_PROTO(struct binder_alloc *alloc, bool *skip),
+	TP_ARGS(alloc, skip));
+DECLARE_HOOK(android_vh_binder_alloc_pages_free,
+	TP_PROTO(struct binder_alloc *alloc, bool *skip),
+	TP_ARGS(alloc, skip));
 
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */

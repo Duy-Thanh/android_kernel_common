@@ -747,6 +747,7 @@ int binder_alloc_mmap_handler(struct binder_alloc *alloc,
 	int ret;
 	const char *failure_string;
 	struct binder_buffer *buffer;
+	bool skip_alloc = false, skip_free = false;
 
 	if (unlikely(vma->vm_mm != alloc->mm)) {
 		ret = -EINVAL;
@@ -766,7 +767,9 @@ int binder_alloc_mmap_handler(struct binder_alloc *alloc,
 
 	alloc->buffer = (void __user *)vma->vm_start;
 
-	alloc->pages = kcalloc(alloc->buffer_size / PAGE_SIZE,
+	trace_android_vh_binder_alloc_pages_alloc(alloc, &skip_alloc);
+	if (!skip_alloc)
+		alloc->pages = kcalloc(alloc->buffer_size / PAGE_SIZE,
 			       sizeof(alloc->pages[0]),
 			       GFP_KERNEL);
 	if (alloc->pages == NULL) {
@@ -794,7 +797,9 @@ int binder_alloc_mmap_handler(struct binder_alloc *alloc,
 	return 0;
 
 err_alloc_buf_struct_failed:
-	kfree(alloc->pages);
+	trace_android_vh_binder_alloc_pages_free(alloc, &skip_free);
+	if (!skip_free)
+		kfree(alloc->pages);
 	alloc->pages = NULL;
 err_alloc_pages_failed:
 	alloc->buffer = NULL;
@@ -816,6 +821,7 @@ void binder_alloc_deferred_release(struct binder_alloc *alloc)
 	struct rb_node *n;
 	int buffers, page_count;
 	struct binder_buffer *buffer;
+	bool skip_free = false;
 
 	buffers = 0;
 	mutex_lock(&alloc->mutex);
@@ -866,7 +872,9 @@ void binder_alloc_deferred_release(struct binder_alloc *alloc)
 			__free_page(alloc->pages[i].page_ptr);
 			page_count++;
 		}
-		kfree(alloc->pages);
+		trace_android_vh_binder_alloc_pages_free(alloc, &skip_free);
+		if (!skip_free)
+			kfree(alloc->pages);
 	}
 	mutex_unlock(&alloc->mutex);
 	if (alloc->mm)
