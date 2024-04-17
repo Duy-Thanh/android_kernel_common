@@ -70,6 +70,30 @@
       },
       "revId": "eda577e8f7721a328eff796895651c22b66904fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6199acb2_afb9d3f9",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-17T20:38:20Z",
+      "side": 1,
+      "message": "As stated in the bug, please provide performance analysis of switching to kvmalloc and send a patch with them upstream with the results.",
+      "parentUuid": "6019039e_c2394e30",
+      "range": {
+        "startLine": 771,
+        "startChar": 6,
+        "endLine": 771,
+        "endChar": 16
+      },
+      "revId": "eda577e8f7721a328eff796895651c22b66904fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
