@@ -365,8 +365,14 @@ DECLARE_HOOK(android_vh_skip_swapcache,
 DECLARE_HOOK(android_vh_do_swap_page_spf,
 	TP_PROTO(bool *allow_swap_spf),
 	TP_ARGS(allow_swap_spf));
+<<<<<<< HEAD   (b493b3 UPSTREAM: usb: gadget: ncm: Fix handling of zero block lengt)
 /* macro versions of hooks are no longer required */
 
+=======
+DECLARE_HOOK(android_vh_tune_fault_around_bytes,
+	TP_PROTO(unsigned long *fault_around_bytes),
+	TP_ARGS(fault_around_bytes));
+>>>>>>> CHANGE (8f68ff ANDROID: add vendor hook in do_read_fault to tune fault_arou)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
