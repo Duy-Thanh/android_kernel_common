@@ -187,6 +187,7 @@ DECLARE_HOOK(android_vh_look_around_migrate_folio,
 DECLARE_HOOK(android_vh_look_around,
 	TP_PROTO(struct page_vma_mapped_walk *pvmw, struct folio *folio,
 		struct vm_area_struct *vma, int *referenced),
+<<<<<<< HEAD   (cf685d ANDROID: GKI: Update QCOM symbol list and ABI STG)
 	TP_ARGS(pvmw, folio, vma, referenced));
 
 DECLARE_HOOK(android_vh_mm_alloc_pages_direct_reclaim_enter,
@@ -208,6 +209,35 @@ DECLARE_HOOK(android_vh_slab_folio_alloced,
 DECLARE_HOOK(android_vh_kmalloc_large_alloced,
 	TP_PROTO(struct page *page, unsigned int order, gfp_t flags),
 	TP_ARGS(page, order, flags));
+=======
+	TP_ARGS(pvmw, page, vma, referenced));
+DECLARE_HOOK(android_vh_try_cma_fallback,
+	TP_PROTO(struct zone *zone, unsigned int order, bool *try_cma),
+	TP_ARGS(zone, order, try_cma));
+DECLARE_HOOK(android_vh_set_page_migrating,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_clear_page_migrating,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_cma_alloc_bypass,
+	TP_PROTO(struct cma *cma, unsigned long count, unsigned int align,
+		bool no_warn, struct page **page, bool *bypass),
+	TP_ARGS(cma, count, align, no_warn, page, bypass));
+DECLARE_HOOK(android_vh_alloc_pages_entry,
+	TP_PROTO(gfp_t *gfp, unsigned int order, int preferred_nid,
+		nodemask_t *nodemask),
+	TP_ARGS(gfp, order, preferred_nid, nodemask));
+DECLARE_HOOK(android_vh_isolate_freepages,
+	TP_PROTO(struct compact_control *cc, struct page *page, bool *bypass),
+	TP_ARGS(cc, page, bypass));
+DECLARE_HOOK(android_vh_do_swap_page_spf,
+	TP_PROTO(bool *allow_swap_spf),
+	TP_ARGS(allow_swap_spf));
+DECLARE_HOOK(android_vh_tune_fault_around_bytes,
+	TP_PROTO(unsigned long *fault_around_bytes),
+	TP_ARGS(fault_around_bytes));
+>>>>>>> CHANGE (8f68ff ANDROID: add vendor hook in do_read_fault to tune fault_arou)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
