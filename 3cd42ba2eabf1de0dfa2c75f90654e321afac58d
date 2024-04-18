@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075128616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3048242?revision\u003d1",
+      "key": {
+        "uuid": "6302bdf8_4f23fb34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-18T11:38:48Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/5a70133febf92e1269f98b533ce9f188c2e3b135).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_check_status);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_alloc_rqs);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_rq_ctx_init);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);\n     \n      ## include/trace/hooks/mm.h ##\n    -@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_pcplist_add_cma_pages_bypass,\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_alloc_pages_slowpath,\n      DECLARE_HOOK(android_vh_mmap_region,\n      \tTP_PROTO(struct vm_area_struct *vma, unsigned long addr),\n      \tTP_ARGS(vma, addr));\n     +DECLARE_HOOK(android_vh_try_to_unmap_one,\n    -+\tTP_PROTO(struct vm_area_struct *vma, struct page *page, unsigned long addr, bool ret),\n    -+\tTP_ARGS(vma, page, addr, ret));\n    - \n    ++\tTP_PROTO(struct folio *folio, struct vm_area_struct *vma,\n    ++\t\tunsigned long addr, void *arg, bool ret),\n    ++\tTP_ARGS(folio, vma, addr, arg, ret));\n      #endif /* _TRACE_HOOK_MM_H */\n      \n    + /* This part must be outside protection */\n     \n      ## mm/rmap.c ##\n     @@\n    - \n    + #define CREATE_TRACE_POINTS\n      #include \u003ctrace/events/tlb.h\u003e\n    - \n    + #include \u003ctrace/events/migrate.h\u003e\n    ++#undef CREATE_TRACE_POINTS\n     +#include \u003ctrace/hooks/mm.h\u003e\n    -+\n    - #include \"internal.h\"\n      \n    - static struct kmem_cache *anon_vma_cachep;\n    + #undef CREATE_TRACE_POINTS\n    + #include \u003ctrace/hooks/mm.h\u003e\n     @@ mm/rmap.c: discard:\n      \t}\n      \n      \tmmu_notifier_invalidate_range_end(\u0026range);\n    -+\ttrace_android_vh_try_to_unmap_one(vma, page, address, ret);\n    ++\ttrace_android_vh_try_to_unmap_one(folio, vma, address, arg, ret);\n      \n      \treturn ret;\n      }\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "3cd42ba2eabf1de0dfa2c75f90654e321afac58d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
