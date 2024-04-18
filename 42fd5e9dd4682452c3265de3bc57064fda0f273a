@@ -34,6 +34,24 @@
       "parentUuid": "070f9731_9883de25",
       "revId": "42fd5e9dd4682452c3265de3bc57064fda0f273a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c31cea22_c537818e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-18T07:57:46Z",
+      "side": 1,
+      "message": "Just turn this debugging message on from userspace if your systems want to see the information all the time.  You can do so in your init/boot logic.",
+      "parentUuid": "ef0388fd_068d8c98",
+      "revId": "42fd5e9dd4682452c3265de3bc57064fda0f273a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
