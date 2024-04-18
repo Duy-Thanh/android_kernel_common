@@ -16,6 +16,24 @@
       "message": "That will fill up the kernel log with a lot of unneeded messages, if you need debugging lines, please just turn them on in your system configuration, this can be done in userspace with no kernel changes needed.",
       "revId": "42fd5e9dd4682452c3265de3bc57064fda0f273a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef0388fd_068d8c98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-04-18T07:18:03Z",
+      "side": 1,
+      "message": "Hi Greg, but this isn\u0027t much logging which would flood the dmesg logs.\nI understand we don\u0027t want to show thes messages in dmesg but this seemed to be a healthy notification kid of message.\n\nI\u0027ll try to explore to dothis with your suggestion as well from userspace.",
+      "parentUuid": "070f9731_9883de25",
+      "revId": "42fd5e9dd4682452c3265de3bc57064fda0f273a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
