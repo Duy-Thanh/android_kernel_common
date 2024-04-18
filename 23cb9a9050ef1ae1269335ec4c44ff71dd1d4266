@@ -170,6 +170,30 @@
       },
       "revId": "23cb9a9050ef1ae1269335ec4c44ff71dd1d4266",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97d2d4c_555df2cf",
+        "filename": "fs/buffer.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2828,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2024-04-18T01:53:45Z",
+      "side": 1,
+      "message": "This commit implement two sets of API as one for setting bio\u0027s ioprio just after bio_add_page and another for iterate the whole bio before submit_bio. The reason is the xxx_iter could bail out for a large bio earlier which help to save some CPU\u0027s load.",
+      "parentUuid": "eb8612db_d01f1d61",
+      "range": {
+        "startLine": 2828,
+        "startChar": 1,
+        "endLine": 2828,
+        "endChar": 37
+      },
+      "revId": "23cb9a9050ef1ae1269335ec4c44ff71dd1d4266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
