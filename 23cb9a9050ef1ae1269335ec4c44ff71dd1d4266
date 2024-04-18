@@ -217,6 +217,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdc7fbd4_eae04137",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-04-18T14:58:19Z",
+      "side": 1,
+      "message": "The approach of patch \"block: introduce content activity based ioprio\" is wrong and I do not expect that that patch or any variation of it will be accepted upstream. Block layer code should not extract information from folios. Instead, I/O submitters (filesystems) should set the I/O priority before a bio is submitted. This feedback has already been provided to Unisoc on the linux-block mailing list.",
+      "parentUuid": "f3055f31_5722e5ec",
+      "revId": "23cb9a9050ef1ae1269335ec4c44ff71dd1d4266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b14237a6_19c80024",
         "filename": "fs/buffer.c",
         "patchSetId": 14
