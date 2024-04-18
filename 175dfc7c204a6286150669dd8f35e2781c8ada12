@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b75745d9_8ab521fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-18T18:32:00Z",
+      "side": 1,
+      "message": "Please split into two patches\n1) add the hooks\n2) update the symbol list\n\nThis makes it easy to cherry-pick (1) in a future release without polluting it with symbol changes and an STG update specific to this kernel.",
+      "revId": "175dfc7c204a6286150669dd8f35e2781c8ada12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
