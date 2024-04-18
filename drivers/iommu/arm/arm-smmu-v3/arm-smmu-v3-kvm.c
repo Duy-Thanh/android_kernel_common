@@ -1028,7 +1028,7 @@ static int kvm_arm_smmu_v3_init(void)
 
 	if (ret) {
 		pr_err("Failed to load SMMUv3 IOMMU EL2 module: %d\n", ret);
-		return ret;
+		goto err_free;
 	}
 #endif
 	/*
@@ -1046,13 +1046,16 @@ static int kvm_arm_smmu_v3_init(void)
 		goto err_free;
 
 	ret = kvm_iommu_init_hyp(ksym_ref_addr_nvhe(smmu_ops), &atomic_mc, 0);
+	if (ret)
+		goto err_free;
 
 	WARN_ON(driver_for_each_device(&kvm_arm_smmu_driver.driver, NULL,
 				       NULL, smmu_put_device));
-	return ret;
+	return 0;
 err_free:
+	platform_driver_unregister(&kvm_arm_smmu_driver);
 	kvm_arm_smmu_array_free();
-	return ret;
+	return 0;
 }
 
 static void kvm_arm_smmu_v3_remove(void)

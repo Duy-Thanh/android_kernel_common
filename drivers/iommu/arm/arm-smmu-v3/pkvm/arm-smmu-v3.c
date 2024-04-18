@@ -735,15 +735,20 @@ static int smmu_init(unsigned long init_arg)
 	int ret;
 	struct hyp_arm_smmu_v3_device *smmu;
 	int smmu_arr_size = PAGE_ALIGN(sizeof(*kvm_hyp_arm_smmu_v3_smmus) * kvm_hyp_arm_smmu_v3_count);
+	phys_addr_t smmu_base;
 
 	kvm_hyp_arm_smmu_v3_smmus = kern_hyp_va(kvm_hyp_arm_smmu_v3_smmus);
+	smmu_base = hyp_virt_to_phys(kvm_hyp_arm_smmu_v3_smmus);
 
-	WARN_ON(!smmu_take_pages(hyp_virt_to_phys(kvm_hyp_arm_smmu_v3_smmus), smmu_arr_size));
+	WARN_ON(!smmu_take_pages(smmu_base, smmu_arr_size));
 
 	for_each_smmu(smmu) {
 		ret = smmu_init_device(smmu);
-		if (ret)
+		if (ret) {
+			__pkvm_hyp_donate_host(smmu_base >> PAGE_SHIFT,
+					       smmu_arr_size >> PAGE_SHIFT);
 			return ret;
+		}
 	}
 
 	return 0;
