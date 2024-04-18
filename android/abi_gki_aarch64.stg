@@ -308663,6 +308663,11 @@ function {
   parameter_id: 0x0258f96e
 }
 function {
+  id: 0xaa329345
+  return_type_id: 0xf435685e
+  parameter_id: 0xf435685e
+}
+function {
   id: 0xaa55ab2e
   return_type_id: 0x31b5a66f
   parameter_id: 0x2668e644
@@ -343297,6 +343302,15 @@ elf_symbol {
   full_name: "kmalloc_node_trace"
 }
 elf_symbol {
+  id: 0xd9080e18
+  name: "kmalloc_size_roundup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcc392eea
+  type_id: 0xaa329345
+  full_name: "kmalloc_size_roundup"
+}
+elf_symbol {
   id: 0xcbec700e
   name: "kmalloc_trace"
   is_defined: true
@@ -373412,6 +373426,7 @@ interface {
   symbol_id: 0x98b2ed59
   symbol_id: 0x158dfa03
   symbol_id: 0xa64fdec4
+  symbol_id: 0xd9080e18
   symbol_id: 0xcbec700e
   symbol_id: 0x394ce3dd
   symbol_id: 0x3b959429
