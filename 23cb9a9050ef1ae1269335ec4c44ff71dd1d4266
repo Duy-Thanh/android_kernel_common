@@ -143,6 +143,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcee12a7_921c7840",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2024-04-18T08:07:33Z",
+      "side": 1,
+      "message": "Thanks for the comment. Actually, the upstreaming patch should be deemed as the definition of vendor hook while this commit is the one where the VHs are called by file systems. This commit has followed Matthew\u0027s advice which require an independent API out of block layer.",
+      "parentUuid": "54bf3e4a_8a2501af",
+      "revId": "23cb9a9050ef1ae1269335ec4c44ff71dd1d4266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b14237a6_19c80024",
