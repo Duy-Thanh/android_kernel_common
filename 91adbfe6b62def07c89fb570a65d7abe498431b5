@@ -33,6 +33,29 @@
       "message": "@surenb@google.com is this needed for zram?",
       "revId": "91adbfe6b62def07c89fb570a65d7abe498431b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7dc74cf_14d3c17f",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-18T20:47:34Z",
+      "side": 1,
+      "message": "Can all this be replaced with `bdev \u003d blkdev_get_by_path(file_name, ...)`? `blkdev_get_by_path` is already exported. That would even be an upstreamable change IMO.",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 17
+      },
+      "revId": "91adbfe6b62def07c89fb570a65d7abe498431b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
