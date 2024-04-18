@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075125596",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3048107?revision\u003d4",
+      "key": {
+        "uuid": "5fbde0ad_3dc9c27c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-18T11:06:18Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/fe2ecaf37f1debb97870f5449bab79c93559a387).\n\n```\n      ## drivers/usb/dwc3/trace.c ##\n     @@\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_ep_queue);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_readl);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_writel);\n    + \n    + #define CREATE_TRACE_POINTS\n    + #include \"trace.h\"\n    ++\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_ep_queue);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_readl);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_writel);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_event);\n    + \\ No newline at end of file\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "b09131f94ba85d2220d0c88e7690b10cc9429c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
