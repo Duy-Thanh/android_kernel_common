@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc1dd75a_57bc519c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-19T17:16:52Z",
+      "side": 1,
+      "message": "I verified the only issues are:\n```\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nFAIL: testMinRequiredKernelVersion (kernel_feature_test.KernelFeatureTest.testMinRequiredKernelVersion)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"kernel_feature_test.py\", line 101, in testMinRequiredKernelVersion\nAssertionError: False is not true : 5.15.119-android13-8-00008-g24fca027e4a9-abP73494518 [x86_64] is too old.\n\n----------------------------------------------------------------------\n```\n\nThis test has been granted an exception, see b/325847673. So I\u0027ll bypass presubmit.",
+      "revId": "d6f4ad89cea5905b89998262047476071b7ed8ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
