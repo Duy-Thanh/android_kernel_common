@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5abb40a_a89ab9a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-04-19T15:42:37Z",
+      "side": 1,
+      "message": "I\u0027m not very familiar with this option, but it was already enabled on android14-6.1 and android15-6.1 last year by https://r.android.com/2428204.  It\u0027s probably fine to carry it forward to android15-6.6.  Cc\u0027ing people involved in that change just in case.",
+      "revId": "21f5ad8e8ea6bef8a5383122b1cb745dc5d7b660",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
