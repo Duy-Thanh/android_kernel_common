@@ -22,6 +22,29 @@
       },
       "revId": "997f9a79b16333e1e63bc15f1c03543b667713d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3f58a41_1cf6bfb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-19T21:33:44Z",
+      "side": 1,
+      "message": "Some of these functions are not among the symbols you are adding in the list. I\u0027m confused...",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 45
+      },
+      "revId": "997f9a79b16333e1e63bc15f1c03543b667713d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
