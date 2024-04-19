@@ -305004,6 +305004,11 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x9db75c24
+  return_type_id: 0x6720d32f
+  parameter_id: 0x00defc2c
+}
+function {
   id: 0x9db78784
   return_type_id: 0x6720d32f
   parameter_id: 0x00dd92af
@@ -326548,6 +326553,15 @@ elf_symbol {
   full_name: "crypto_register_ahash"
 }
 elf_symbol {
+  id: 0xd9005076
+  name: "crypto_register_alg"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1f52c299
+  type_id: 0x9db75c24
+  full_name: "crypto_register_alg"
+}
+elf_symbol {
   id: 0xa79ba8cc
   name: "crypto_register_rng"
   is_defined: true
@@ -326717,6 +326731,15 @@ elf_symbol {
   crc: 0x6de968f5
   type_id: 0x12663997
   full_name: "crypto_unregister_ahashes"
+}
+elf_symbol {
+  id: 0x883df740
+  name: "crypto_unregister_alg"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9391b5a4
+  type_id: 0x10afee98
+  full_name: "crypto_unregister_alg"
 }
 elf_symbol {
   id: 0xeb9b8f1f
@@ -371489,6 +371512,7 @@ interface {
   symbol_id: 0x053cd2eb
   symbol_id: 0xd1471c13
   symbol_id: 0x3359f049
+  symbol_id: 0xd9005076
   symbol_id: 0xa79ba8cc
   symbol_id: 0x23b67585
   symbol_id: 0x1e81ded9
@@ -371508,6 +371532,7 @@ interface {
   symbol_id: 0x81600265
   symbol_id: 0x57a4fa38
   symbol_id: 0xa9d18a36
+  symbol_id: 0x883df740
   symbol_id: 0xeb9b8f1f
   symbol_id: 0x4d669c6d
   symbol_id: 0x6715c595
