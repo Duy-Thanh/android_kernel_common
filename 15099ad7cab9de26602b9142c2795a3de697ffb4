@@ -16,6 +16,24 @@
       "message": "driver_find should never be used by any driver module, that is an internal-to-the-kernel function and can be very dangerous to use (for obvious reasons.)  Please fix your code to not use it.",
       "revId": "15099ad7cab9de26602b9142c2795a3de697ffb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "473709cd_60dcf53a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2024-04-19T00:52:53Z",
+      "side": 1,
+      "message": "I\u0027m sorry for delay response.\nI see, so I\u0027ll abandon this patch once and resubmit to add symbols for led-trigger.",
+      "parentUuid": "e106a0cc_37713ebb",
+      "revId": "15099ad7cab9de26602b9142c2795a3de697ffb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
