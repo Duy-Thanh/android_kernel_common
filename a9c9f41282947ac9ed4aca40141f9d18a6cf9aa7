@@ -52,6 +52,24 @@
       "parentUuid": "c6ef4b10_e109a3c2",
       "revId": "a9c9f41282947ac9ed4aca40141f9d18a6cf9aa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fecb610_e3e32ef5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-04-19T11:26:09Z",
+      "side": 1,
+      "message": "In 14-6.1, the symbols are in both kinds of list. They are symbols used by `fips140.ko` and by a partner\u0027s `twofish_generic.ko`.\n\nIn 14-5.15, two different partners have the symbols.",
+      "parentUuid": "a4b2c394_68e72776",
+      "revId": "a9c9f41282947ac9ed4aca40141f9d18a6cf9aa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
