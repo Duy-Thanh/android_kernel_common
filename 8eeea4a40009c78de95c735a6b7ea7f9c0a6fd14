@@ -190,6 +190,30 @@
       },
       "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c76c23b_c2cdfca4",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-19T10:06:50Z",
+      "side": 1,
+      "message": "If they are not complete, then there is no need for a hook at this point in time.  You can always add one in the future if needed.  Please only submit code that is working and is complete.",
+      "parentUuid": "7d2c75de_a02b7962",
+      "range": {
+        "startLine": 239,
+        "startChar": 43,
+        "endLine": 239,
+        "endChar": 46
+      },
+      "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
