@@ -16,6 +16,24 @@
       "message": "Need this change to RISCV gki_defconfig as well to keep things in sync",
       "revId": "df2b3840b7e469c8d8b5ea8f8c3ee2ddee101a09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9533c85f_acf5c02e",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-19T04:28:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "839b1c55_e5290cbb",
+      "revId": "df2b3840b7e469c8d8b5ea8f8c3ee2ddee101a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
