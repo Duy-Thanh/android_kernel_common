@@ -70,6 +70,24 @@
       "parentUuid": "a4b2c394_68e72776",
       "revId": "a9c9f41282947ac9ed4aca40141f9d18a6cf9aa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f2082b_64bd572f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-04-19T15:54:26Z",
+      "side": 1,
+      "message": "I would generally discourage OEMs from adding their own crypto hardware drivers that register algorithms with the kernel crypto API, as it\u0027s been shown that this style of cryptography acceleration is not very useful on Android devices.  It comes with risks and not very many upsides.  That being said, we have been allowing it, in the sense that the functions to register algorithms have been part of the KMI; and some OEMs have been using them.  So unless/until we actually decide to change that policy we should approve carrying forward the KMI like this.  Of course it would be helpful to get more details from the OEM about exactly what algorithm they are registering and what their specific use case is, as we may be able to help them with the problem that they\u0027re trying to solve.",
+      "parentUuid": "4fecb610_e3e32ef5",
+      "revId": "a9c9f41282947ac9ed4aca40141f9d18a6cf9aa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
