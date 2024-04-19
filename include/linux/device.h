@@ -30,7 +30,11 @@
 #include <linux/device/bus.h>
 #include <linux/device/class.h>
 #include <linux/device/driver.h>
+<<<<<<< HEAD   (4b9757 Revert "hrtimer: Report offline hrtimer enqueue")
 #include <linux/android_kabi.h>
+=======
+#include <linux/cleanup.h>
+>>>>>>> BRANCH (81e1dc Linux 6.1.79)
 #include <asm/device.h>
 
 struct device;
@@ -909,6 +913,9 @@ void device_unregister(struct device *dev);
 void device_initialize(struct device *dev);
 int __must_check device_add(struct device *dev);
 void device_del(struct device *dev);
+
+DEFINE_FREE(device_del, struct device *, if (_T) device_del(_T))
+
 int device_for_each_child(struct device *dev, void *data,
 			  int (*fn)(struct device *dev, void *data));
 int device_for_each_child_reverse(struct device *dev, void *data,
@@ -1082,6 +1089,9 @@ extern int (*platform_notify_remove)(struct device *dev);
  */
 struct device *get_device(struct device *dev);
 void put_device(struct device *dev);
+
+DEFINE_FREE(put_device, struct device *, if (_T) put_device(_T))
+
 bool kill_device(struct device *dev);
 
 #ifdef CONFIG_DEVTMPFS
