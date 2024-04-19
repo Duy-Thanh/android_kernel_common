@@ -166,6 +166,30 @@
       },
       "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d2c75de_a02b7962",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2024-04-19T07:58:27Z",
+      "side": 1,
+      "message": "As I explained above, these changes in kernel are not complete and rely on many upper-level functions. So these may not be suitable for upstream yet.",
+      "parentUuid": "56726e0e_4d1dab3c",
+      "range": {
+        "startLine": 239,
+        "startChar": 43,
+        "endLine": 239,
+        "endChar": 46
+      },
+      "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
