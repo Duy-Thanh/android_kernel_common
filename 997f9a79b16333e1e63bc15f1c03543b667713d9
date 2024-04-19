@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9f82534_1bfd87f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-04-19T15:50:32Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Commit Message Validation: Please remove \u0027ABI DIFFERENCES HAVE BEEN DETECTED\u0027 line from the commit message\n\nAnalyzer Description: Validates that commit messages conform to a specific format.\nOwner: ayeaye-team@google.com\n\nPlease remove \u0027ABI DIFFERENCES HAVE BEEN DETECTED\u0027 line from the commit message",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "997f9a79b16333e1e63bc15f1c03543b667713d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
