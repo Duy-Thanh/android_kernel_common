@@ -307255,6 +307255,12 @@ function {
   parameter_id: 0x1bf16028
 }
 function {
+  id: 0x6f6bc9a5
+  return_type_id: 0x38d23361
+  parameter_id: 0x32caaf24
+  parameter_id: 0x1bf16028
+}
+function {
   id: 0x6f9cf068
   return_type_id: 0x1d44326e
   parameter_id: 0x0ca27481
@@ -375869,6 +375875,15 @@ elf_symbol {
   full_name: "led_classdev_unregister"
 }
 elf_symbol {
+  id: 0x61740d72
+  name: "led_get_default_pattern"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34241cd4
+  type_id: 0x6f6bc9a5
+  full_name: "led_get_default_pattern"
+}
+elf_symbol {
   id: 0x62cd5012
   name: "led_get_flash_fault"
   is_defined: true
@@ -375894,6 +375909,15 @@ elf_symbol {
   crc: 0x5369cfa3
   type_id: 0x927aedd4
   full_name: "led_mc_calc_color_components"
+}
+elf_symbol {
+  id: 0xa5be7046
+  name: "led_set_brightness"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0cc5de59
+  type_id: 0x1d3cefc2
+  full_name: "led_set_brightness"
 }
 elf_symbol {
   id: 0xbea2c272
@@ -410744,9 +410768,11 @@ interface {
   symbol_id: 0xa58e6f5d
   symbol_id: 0xfe24eb71
   symbol_id: 0x27d77d55
+  symbol_id: 0x61740d72
   symbol_id: 0x62cd5012
   symbol_id: 0xda95494e
   symbol_id: 0x76f00da5
+  symbol_id: 0xa5be7046
   symbol_id: 0xbea2c272
   symbol_id: 0x2e74d698
   symbol_id: 0x7bbb8d5f
