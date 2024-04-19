@@ -251,6 +251,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47b51b36_03ab77a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2024-04-19T01:34:56Z",
+      "side": 1,
+      "message": "Yes, But the PATCHv9 of upstreaming version as well as the vendor hook has been updated to follow maintainer\u0027s opinion which require an independent API for file system to set the bio\u0027s ioprio.\n\nPATCHv1: do ioprio setting within block layer\nhttps://lore.kernel.org/all/20240123093352.3007660-1-zhaoyang.huang@unisoc.com/\n\nPS: \nmaintainers are not against the idea which set the ioprio via the content activity but the method. They ask me to do this by an independent API that called by file systems. Below chart could be helpful to clarify the relationship\n\nthis commit:\naops_readpage\n{\n    bio_add_page(bio, page);\n+   trace_android_vh_bio_set_ioprio(bio, page);\n}\n\nunisoc_driver(upstreaming PATCHv9):\ntrace_android_vh_bio_set_ioprio/bio_set_ioprio(bio, page)\n{\n    bio-\u003eio_prio \u003d xxx;\n}\n\nupstreaming PATCHv1:\nsubmit_bio(bio)\n{\n+    bio-\u003eio_prio \u003d xxx;\n}",
+      "parentUuid": "7dd3b9e7_8241709f",
+      "revId": "23cb9a9050ef1ae1269335ec4c44ff71dd1d4266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b14237a6_19c80024",
