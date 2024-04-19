@@ -214,6 +214,30 @@
       },
       "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50a6df50_4595cd21",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2024-04-19T11:29:47Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t express it clearly. I\u0027m not saying that this function is incomplete. I mean that these kernel changes plus our other Android modifications is a complete function. If we add this hook in the Android kernel, our function will be complete and work well. So please help to merge this hook to the Android kernel.",
+      "parentUuid": "9c76c23b_c2cdfca4",
+      "range": {
+        "startLine": 239,
+        "startChar": 43,
+        "endLine": 239,
+        "endChar": 46
+      },
+      "revId": "8eeea4a40009c78de95c735a6b7ea7f9c0a6fd14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
