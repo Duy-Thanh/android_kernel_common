@@ -62,6 +62,7 @@ struct dm_user_message {
 	__u64 flags;
 	__u64 sector;
 	__u64 len;
+	__u16 ioprio;
 	__u8 buf[];
 };
 
