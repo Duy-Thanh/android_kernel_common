@@ -2027,17 +2027,20 @@ static unsigned long memsize_bss __initdata_memblock;
 static long memsize_reusable_size;
 
 enum memblock_memsize_state {
-	MEMBLOCK_MEMSIZE_DEBUGFS = 0,
+	MEMBLOCK_MEMSIZE_NONE = 0,
+	MEMBLOCK_MEMSIZE_DEBUGFS,
 	MEMBLOCK_MEMSIZE_PROCFS,
 };
 
-static enum memblock_memsize_state memsize_state __initdata_memblock = MEMBLOCK_MEMSIZE_DEBUGFS;
+static enum memblock_memsize_state memsize_state __initdata_memblock = MEMBLOCK_MEMSIZE_NONE;
 
 static int __init early_memblock_memsize(char *str)
 {
 	if (!str)
 		return -EINVAL;
-	if (strcmp(str, "debugfs") == 0)
+	if (strcmp(str, "none") == 0)
+		memsize_state = MEMBLOCK_MEMSIZE_NONE;
+	else if (strcmp(str, "debugfs") == 0)
 		memsize_state = MEMBLOCK_MEMSIZE_DEBUGFS;
 	else if (strcmp(str, "procfs") == 0)
 		memsize_state = MEMBLOCK_MEMSIZE_PROCFS;
@@ -2206,6 +2209,9 @@ void __init_memblock memblock_memsize_record(const char *name, phys_addr_t base,
 {
 	struct memsize_rgn_struct *rgn;
 	phys_addr_t end;
+
+	if (name && memsize_state == MEMBLOCK_MEMSIZE_NONE)
+		return;
 
 	if (memsize_rgn_count == CONFIG_MAX_MEMBLOCK_MEMSIZE) {
 		pr_err("not enough space on memsize_rgn\n");
