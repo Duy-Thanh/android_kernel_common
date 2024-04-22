@@ -16,6 +16,23 @@
       "message": "build break for several builds. For example: `tools/bazel run //common:kernel_x86_64_dist` fails with:\n```\nERROR: /usr/local/google/home/tkjos/krepo/android14-6.1/common/BUILD.bazel:132:22: Creating kernel config (lto\u003ddefault;notrim) @//common:kernel_x86_64_config failed: (Exit 1): bash failed: error executing KernelConfig command (from target //common:kernel_x86_64_config) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n--- common/arch/x86/configs/gki_defconfig\t2024-04-19 17:15:57.678848603 +0000\n+++ /usr/local/google/home/tkjos/krepo/android14-6.1/out/bazel/output_user_root/200932cd120bec1a7b3acc2e74d6f214/sandbox/linux-sandbox/49/execroot/__main__/out/android14-6.1/common/defconfig\t2024-04-19 17:50:51.015508249 +0000\n@@ -635,7 +635,6 @@\n CONFIG_CRYPTO_CMAC\u003dy\n CONFIG_CRYPTO_MD5\u003dy\n CONFIG_CRYPTO_XCBC\u003dy\n-CONFIG_CRYPTO_LZO\u003dy\n CONFIG_CRYPTO_LZ4\u003dy\n CONFIG_CRYPTO_ZSTD\u003dy\n CONFIG_CRYPTO_ANSI_CPRNG\u003dy\nERROR: savedefconfig does not match common/arch/x86/configs/gki_defconfig\nTarget //common:kernel_x86_64_dist failed to build\nUse --verbose_failures to see the command lines of failed build steps.\nERROR: /usr/local/google/home/tkjos/krepo/android14-6.1/common/BUILD.bazel:132:22 Middleman _middlemen/common_Skernel_Ux86_U64_Udist-runfiles failed: (Exit 1): bash failed: error executing KernelConfig command (from target //common:kernel_x86_64_config) /bin/bash -c ... (remaining 1 argument skipped)\n```\n\ngki_defconfig change needed for x86 too?",
       "revId": "45041f5dd646227352dd981cc4160c94abfad9c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdbadb36_dd951875",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2024-04-22T02:58:54Z",
+      "side": 1,
+      "message": "Looks like we need to include https://android-review.googlesource.com/c/kernel/common/+/3048240/ in this patch",
+      "revId": "45041f5dd646227352dd981cc4160c94abfad9c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
