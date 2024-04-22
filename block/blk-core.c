@@ -828,6 +828,7 @@ EXPORT_SYMBOL(submit_bio_noacct);
 
 static void bio_set_ioprio(struct bio *bio)
 {
+	trace_android_vh_bio_ioprio_acct(bio);
 	/* Nobody set ioprio so far? Initialize it based on task's nice value */
 	if (IOPRIO_PRIO_CLASS(bio->bi_ioprio) == IOPRIO_CLASS_NONE)
 		bio->bi_ioprio = get_current_ioprio();

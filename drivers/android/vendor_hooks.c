@@ -62,6 +62,7 @@
 #include <trace/hooks/logbuf.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/compaction.h>
+#include <trace/hooks/ioprio.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -96,6 +97,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_opt_spin_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_can_spin_on_owner);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_direct_rsteal);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_optimistic_rspin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_ioprio_acct);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mpam_set);
