@@ -16,6 +16,24 @@
       "message": "Hi Todd \u0026 Suren, \n   please help to review this patch.",
       "revId": "f627f90ae547fd3aedf282b3e49a3e54d3ad6125",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2db7dc32_9c88e929",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-22T20:33:00Z",
+      "side": 1,
+      "message": "When cherry-picking patches from earlier kernels please either reopen the old bug referenced in the changelog or file a new one and add a reference to it in the changelog. That way it won\u0027t slip from our radar.",
+      "parentUuid": "0726f409_d4e12a7f",
+      "revId": "f627f90ae547fd3aedf282b3e49a3e54d3ad6125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
