@@ -2019,6 +2019,7 @@ static unsigned long memsize_bss __initdata_memblock;
 static long memsize_reusable_size __initdata_memblock;
 static bool memblock_memsize_tracking __initdata_memblock = true;
 static bool memblock_memsize_use_debugfs __initdata;
+static bool memblock_memsize_disabled __initdata_memblock;
 
 static int __init early_memblock_memsize_debugfs(char *buf)
 {
@@ -2026,29 +2027,45 @@ static int __init early_memblock_memsize_debugfs(char *buf)
 }
 early_param("memblock_memsize_debugfs", early_memblock_memsize_debugfs);
 
+static int __init early_memblock_memsize_disable(char *buf)
+{
+	return kstrtobool(buf, &memblock_memsize_disabled);
+}
+early_param("memblock_memsize_disable", early_memblock_memsize_disable);
+
 void __init memblock_memsize_enable_tracking(void)
 {
+	if (memblock_memsize_disabled)
+		return;
 	memblock_memsize_tracking = true;
 }
 
 void __init memblock_memsize_disable_tracking(void)
 {
+	if (memblock_memsize_disabled)
+		return;
 	memblock_memsize_tracking = false;
 }
 
 void __init memblock_memsize_mod_memmap_size(long size)
 {
+	if (memblock_memsize_disabled)
+		return;
 	memsize_memap += size;
 }
 
 void memblock_memsize_mod_kernel_size(long size)
 {
+	if (memblock_memsize_disabled)
+		return;
 	memsize_kinit += size;
 }
 
 void __init memblock_memsize_kernel_code_data(unsigned long code, unsigned long data,
 		unsigned long ro, unsigned long bss)
 {
+	if (memblock_memsize_disabled)
+		return;
 	memsize_code = code;
 	memsize_data = data;
 	memsize_ro = ro;
@@ -2077,6 +2094,8 @@ static void __init_memblock memsize_get_valid_name(char *valid_name, const char 
 
 void memblock_memsize_mod_reusable_size(long size)
 {
+	if (memblock_memsize_disabled)
+		return;
 	memsize_reusable_size += size;
 }
 
@@ -2187,6 +2206,8 @@ void __init_memblock memblock_memsize_record(const char *name, phys_addr_t base,
 	struct memsize_rgn_struct *rgn;
 	phys_addr_t end;
 
+	if (memblock_memsize_disabled)
+		return;
 	if (memsize_rgn_count == CONFIG_MAX_MEMBLOCK_MEMSIZE) {
 		pr_err("not enough space on memsize_rgn\n");
 		return;
@@ -2220,7 +2241,12 @@ void __init memblock_memsize_detect_hole(void)
 	phys_addr_t prev_end, hole_sz;
 	int idx;
 	struct memblock_region *rgn;
-	int memblock_cnt = (int)memblock.memory.cnt;
+	int memblock_cnt;
+
+	if (memblock_memsize_disabled)
+		return;
+
+	memblock_cnt = (int)memblock.memory.cnt;
 
 	/* assume that the hole size is less than 1 GB */
 	for_each_memblock_type(idx, (&memblock.memory), rgn) {
@@ -2295,11 +2321,15 @@ static void __init_memblock memblock_memsize_free(phys_addr_t free_base,
 
 void __init memblock_memsize_set_name(const char *name)
 {
+	if (memblock_memsize_disabled)
+		return;
 	memblock_memsize_name = name;
 }
 
 void __init memblock_memsize_unset_name(void)
 {
+	if (memblock_memsize_disabled)
+		return;
 	memblock_memsize_name = NULL;
 }
 
@@ -2746,6 +2776,8 @@ static int __init memblock_init_debugfs(void)
 			    &memblock_debug_fops);
 #endif
 #ifdef CONFIG_MEMBLOCK_MEMSIZE
+	if (memblock_memsize_disabled)
+		return 0;
 	if (memblock_memsize_use_debugfs)
 		debugfs_create_file("memsize", 0444, root, NULL,
 				    &memblock_memsize_fops);
