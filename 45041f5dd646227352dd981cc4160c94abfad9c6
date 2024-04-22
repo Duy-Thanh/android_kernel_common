@@ -33,6 +33,24 @@
       "message": "Looks like we need to include https://android-review.googlesource.com/c/kernel/common/+/3048240/ in this patch",
       "revId": "45041f5dd646227352dd981cc4160c94abfad9c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2adbdc2b_2d345f09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966380
+      },
+      "writtenOn": "2024-04-22T05:43:02Z",
+      "side": 1,
+      "message": "Thanks Todd for pointing this out. Have updated the x86 gki_defconfig as mentioned in 3048240/3. With the change, build is successful.\n\n\n Creating system_dlkm image\nTarget //common:kernel_x86_64_dist up-to-date:\n  bazel-bin/common/kernel_x86_64_dist\nINFO: Elapsed time: 216.554s, Critical Path: 214.65s\nINFO: 11 processes: 1 internal, 10 linux-sandbox.\nINFO: Build completed successfully, 11 total actions\nINFO: Running command line: bazel-bin/common/kernel_x86_64_dist",
+      "parentUuid": "92156af8_e3cd54bd",
+      "revId": "45041f5dd646227352dd981cc4160c94abfad9c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
