@@ -13,6 +13,7 @@
 #include <linux/swap.h>
 #include <linux/swapops.h>
 #include <linux/pagemap.h>
+#include <linux/pgsize_migration.h>
 #include <linux/pagevec.h>
 #include <linux/mempolicy.h>
 #include <linux/syscalls.h>
@@ -501,6 +502,7 @@ static int mlock_fixup(struct vm_area_struct *vma, struct vm_area_struct **prev,
 	int ret = 0;
 	int lock = !!(newflags & VM_LOCKED);
 	vm_flags_t old_flags = vma->vm_flags;
+	bool split = false;
 
 	if (newflags == vma->vm_flags || (vma->vm_flags & VM_SPECIAL) ||
 	    is_vm_hugetlb_page(vma) || vma == get_gate_vma(current->mm) ||
@@ -521,12 +523,14 @@ static int mlock_fixup(struct vm_area_struct *vma, struct vm_area_struct **prev,
 		ret = split_vma(mm, vma, start, 1);
 		if (ret)
 			goto out;
+		split = true;
 	}
 
 	if (end != vma->vm_end) {
 		ret = split_vma(mm, vma, end, 0);
 		if (ret)
 			goto out;
+		split = true;
 	}
 
 success:
@@ -547,7 +551,7 @@ success:
 	 */
 
 	if (lock)
-		vma->vm_flags = newflags;
+		vma->vm_flags = vma_pad_fixup_flags(vma, old_flags, newflags, split);
 	else
 		munlock_vma_pages_range(vma, start, end);
 
