@@ -1225,6 +1225,7 @@ static int user_map(struct dm_target *ti, struct bio *bio)
 	entry->msg.flags = bio_flags_to_user_flags(bio);
 	entry->msg.sector = bio->bi_iter.bi_sector;
 	entry->msg.len = bio_size(bio);
+	entry->msg.ioprio = bio_prio(bio);
 	entry->bio = bio;
 	entry->posn_to_user = 0;
 	entry->total_to_user = bio_bytes_needed_to_user(bio);
