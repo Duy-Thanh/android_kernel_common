@@ -2164,19 +2164,23 @@ static bool timekeeping_advance(enum timekeeping_adv_mode mode)
 	int shift = 0, maxshift;
 	unsigned int clock_set = 0;
 	unsigned long flags;
-
+	u64 val;
 	raw_spin_lock_irqsave(&timekeeper_lock, flags);
 
 	/* Make sure we're fully resumed: */
 	if (unlikely(timekeeping_suspended))
 		goto out;
 
-	offset = clocksource_delta(tk_clock_read(&tk->tkr_mono),
+	val = tk_clock_read(&tk->tkr_mono);
+	offset = clocksource_delta(val,
 				   tk->tkr_mono.cycle_last, tk->tkr_mono.mask);
 
 	/* Check if there's really nothing to do */
 	if (offset < real_tk->cycle_interval && mode == TK_ADV_TICK)
 		goto out;
+
+	if (offset > real_tk->cycle_interval * 100)
+		printk_deferred("JDB: Skipped > 100 intervals: %llu (delta) vs %llu (1 interval) cyc_last: %llu read val:%llu\n", offset, real_tk->cycle_interval, tk->tkr_mono.cycle_last, val);
 
 	/* Do some additional sanity checking */
 	timekeeping_check_update(tk, offset);
