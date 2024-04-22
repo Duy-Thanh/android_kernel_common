@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075420304",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3048254?revision\u003d1",
+      "key": {
+        "uuid": "6b2aa615_7766b4b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-22T09:21:53Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/0180d94276192ebb5a1476ee22f35ea03c5767c8).\n\n```\n      ## drivers/usb/core/hcd.c ##\n     @@ drivers/usb/core/hcd.c: EXPORT_SYMBOL_GPL(usb_hcd_setup_local_mem);\n    @@ include/linux/usb.h: struct usb_bus {\n     -#if defined(CONFIG_USB_MON) || defined(CONFIG_USB_MON_MODULE)\n      \tstruct mon_bus *mon_bus;\t/* non-null when associated */\n      \tint monitored;\t\t\t/* non-zero when monitored */\n    --#endif\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (64018a ANDROID: rust_binder: don\u0027t pr_warn on benign errors)\n    + #endif\n    + \n    + \tANDROID_KABI_RESERVE(1);\n    + \tANDROID_KABI_RESERVE(2);\n    + \tANDROID_KABI_RESERVE(3);\n    + \tANDROID_KABI_RESERVE(4);\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (0180d9 ANDROID: GKI: USB: Allow usbmon as a vendor module)\n      };\n      \n      struct usb_dev_state;\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "cb58f43be1ddf2ddccd0e8f4a117ce3593ffca35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
