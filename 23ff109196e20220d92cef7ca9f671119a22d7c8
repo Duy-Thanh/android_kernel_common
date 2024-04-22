@@ -16,6 +16,24 @@
       "message": "Hi suren,\n  anything update? \n  Could you help to review this patch again?",
       "revId": "23ff109196e20220d92cef7ca9f671119a22d7c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b125e441_b593812b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-22T20:01:45Z",
+      "side": 1,
+      "message": "Sorry, this patch had two more copies and got me confused. The original author indicated that they moved the logic that required this hook to an upper layer and don\u0027t need it anymore. If you still need it please file a separate bug and explain the reasons why you need it and why it\u0027s not upstremable. Original reasons brought up by the author are not applicable anymore.",
+      "parentUuid": "6d1e0cfc_505895b7",
+      "revId": "23ff109196e20220d92cef7ca9f671119a22d7c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
