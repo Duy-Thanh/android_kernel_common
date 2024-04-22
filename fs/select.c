@@ -476,8 +476,12 @@ static inline void wait_key_set(poll_table *wait, unsigned long in,
 		wait->_key |= POLLOUT_SET;
 }
 
+<<<<<<< HEAD   (21d35d ANDROID: abi_gki_aarch64_qcom: update abi symbols)
 noinline_for_stack
 static int do_select(int n, fd_set_bits *fds, struct timespec64 *end_time)
+=======
+static noinline_for_stack int do_select(int n, fd_set_bits *fds, struct timespec64 *end_time)
+>>>>>>> BRANCH (5c7587 Linux 6.6.23)
 {
 	ktime_t expire, *to = NULL;
 	struct poll_wqueues table;

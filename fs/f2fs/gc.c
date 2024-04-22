@@ -1398,7 +1398,11 @@ static int move_data_block(struct inode *inode, block_t bidx,
 
 	f2fs_update_data_blkaddr(&dn, newaddr);
 	set_inode_flag(inode, FI_APPEND_WRITE);
+<<<<<<< HEAD   (21d35d ANDROID: abi_gki_aarch64_qcom: update abi symbols)
 
+=======
+put_page_out:
+>>>>>>> BRANCH (5c7587 Linux 6.6.23)
 	f2fs_put_page(fio.encrypted_page, 1);
 recover_block:
 	if (err)

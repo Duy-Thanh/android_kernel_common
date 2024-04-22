@@ -3649,6 +3649,7 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
 
 	if (keep_order)
 		f2fs_down_read(&fio->sbi->io_order_lock);
+<<<<<<< HEAD   (21d35d ANDROID: abi_gki_aarch64_qcom: update abi symbols)
 
 	if (f2fs_allocate_data_block(fio->sbi, fio->page, fio->old_blkaddr,
 			&fio->new_blkaddr, sum, type, fio)) {
@@ -3660,6 +3661,11 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
 			f2fs_del_fsync_node_entry(fio->sbi, fio->page);
 		goto out;
 	}
+=======
+reallocate:
+	f2fs_allocate_data_block(fio->sbi, fio->page, fio->old_blkaddr,
+			&fio->new_blkaddr, sum, type, fio);
+>>>>>>> BRANCH (5c7587 Linux 6.6.23)
 	if (GET_SEGNO(fio->sbi, fio->old_blkaddr) != NULL_SEGNO)
 		f2fs_invalidate_internal_cache(fio->sbi, fio->old_blkaddr);
 
