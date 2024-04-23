@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075568132",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3054228?revision\u003d1",
+      "key": {
+        "uuid": "c027ea2c_6f73d967",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-23T12:12:02Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/7e1cb3bdec3ccb0f8eee538943dd7fa23b35dcba).\n\n```\n      ## kernel/sched/core.c ##\n     @@ kernel/sched/core.c: EXPORT_TRACEPOINT_SYMBOL_GPL(sched_util_est_se_tp);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(sched_update_nr_running_tp);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(sched_switch);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(sched_waking);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (acad3c ANDROID: android: Create and enable debug_symbols driver)\n    + #if defined(CONFIG_SCHEDSTATS)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(sched_wakeup);\n    - #ifdef CONFIG_SCHEDSTATS\n    ++#ifdef CONFIG_SCHEDSTATS\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (7e1cb3 ANDROID: sched: Add EXPORT_SYMBOL_GPL for sched_wakeup)\n      EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_sleep);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_wait);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_iowait);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "6dcdf74690994e36278cb1cb98a4e5918de1623c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
