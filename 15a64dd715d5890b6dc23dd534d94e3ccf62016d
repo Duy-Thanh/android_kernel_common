@@ -33,6 +33,24 @@
       "message": "Removew the STG update from this patch. Create a new patch on top of this one for the KMI update.",
       "revId": "15a64dd715d5890b6dc23dd534d94e3ccf62016d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba41f63b_1380b5c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-23T16:52:02Z",
+      "side": 1,
+      "message": "unresolved",
+      "parentUuid": "5248c010_c09529da",
+      "revId": "15a64dd715d5890b6dc23dd534d94e3ccf62016d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
