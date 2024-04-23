@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d28781dc_a1db7f1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-23T16:51:41Z",
+      "side": 1,
+      "message": "KMI changes are allowed. Please eliminate the KMI workaround and do this properly",
+      "revId": "15a64dd715d5890b6dc23dd534d94e3ccf62016d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5248c010_c09529da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-23T16:51:41Z",
+      "side": 1,
+      "message": "Removew the STG update from this patch. Create a new patch on top of this one for the KMI update.",
+      "revId": "15a64dd715d5890b6dc23dd534d94e3ccf62016d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
