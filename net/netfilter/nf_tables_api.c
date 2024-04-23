@@ -4945,6 +4945,12 @@ static int nf_tables_newset(struct sk_buff *skb, const struct nfnl_info *info,
 		if ((flags & (NFT_SET_ANONYMOUS | NFT_SET_TIMEOUT | NFT_SET_EVAL)) ==
 			     (NFT_SET_ANONYMOUS | NFT_SET_TIMEOUT))
 			return -EOPNOTSUPP;
+<<<<<<< HEAD   (c125e6 ANDROID: GKI: Add symbols to symbol list for honor)
+=======
+		if ((flags & (NFT_SET_CONSTANT | NFT_SET_TIMEOUT)) ==
+			     (NFT_SET_CONSTANT | NFT_SET_TIMEOUT))
+			return -EOPNOTSUPP;
+>>>>>>> BRANCH (9467d7 Linux 6.6.24)
 	}
 
 	desc.dtype = 0;
