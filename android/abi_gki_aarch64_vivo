@@ -32,6 +32,14 @@
   __traceiter_android_vh_check_folio_look_around_ref
   __traceiter_android_vh_clear_rwsem_reader_owned
   __traceiter_android_vh_clear_rwsem_writer_owned
+<<<<<<< PATCH SET (e731f7 ANDROID: GKI: Add symbols to vivo symbol list)
+  __traceiter_android_vh_configfs_uevent_work
+  __traceiter_android_vh_count_workingset_refault
+  __traceiter_android_vh_do_anonymous_page
+  __traceiter_android_vh_do_swap_page
+  __traceiter_android_vh_do_wp_page
+=======
+>>>>>>> BASE      (c38bea ANDROID: usb: Add vendor hooks for USB enumeration.)
   __traceiter_android_vh_dup_task_struct
   __traceiter_android_vh_free_task
   __traceiter_android_vh_irqtime_account_process_tick
@@ -78,6 +86,14 @@
   __tracepoint_android_vh_check_folio_look_around_ref
   __tracepoint_android_vh_clear_rwsem_reader_owned
   __tracepoint_android_vh_clear_rwsem_writer_owned
+<<<<<<< PATCH SET (e731f7 ANDROID: GKI: Add symbols to vivo symbol list)
+  __tracepoint_android_vh_configfs_uevent_work
+  __tracepoint_android_vh_count_workingset_refault
+  __tracepoint_android_vh_do_anonymous_page
+  __tracepoint_android_vh_do_swap_page
+  __tracepoint_android_vh_do_wp_page
+=======
+>>>>>>> BASE      (c38bea ANDROID: usb: Add vendor hooks for USB enumeration.)
   __tracepoint_android_vh_dup_task_struct
   __tracepoint_android_vh_free_task
   __tracepoint_android_vh_irqtime_account_process_tick
