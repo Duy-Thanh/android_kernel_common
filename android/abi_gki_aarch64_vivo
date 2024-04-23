@@ -32,6 +32,7 @@
   __traceiter_android_vh_check_folio_look_around_ref
   __traceiter_android_vh_clear_rwsem_reader_owned
   __traceiter_android_vh_clear_rwsem_writer_owned
+  __traceiter_android_vh_configfs_uevent_work
   __traceiter_android_vh_dup_task_struct
   __traceiter_android_vh_free_task
   __traceiter_android_vh_irqtime_account_process_tick
@@ -78,6 +79,7 @@
   __tracepoint_android_vh_check_folio_look_around_ref
   __tracepoint_android_vh_clear_rwsem_reader_owned
   __tracepoint_android_vh_clear_rwsem_writer_owned
+  __tracepoint_android_vh_configfs_uevent_work
   __tracepoint_android_vh_dup_task_struct
   __tracepoint_android_vh_free_task
   __tracepoint_android_vh_irqtime_account_process_tick
