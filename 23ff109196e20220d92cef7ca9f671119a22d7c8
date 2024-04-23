@@ -34,6 +34,24 @@
       "parentUuid": "6d1e0cfc_505895b7",
       "revId": "23ff109196e20220d92cef7ca9f671119a22d7c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3bc91a9_e156de5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024815
+      },
+      "writtenOn": "2024-04-23T03:14:55Z",
+      "side": 1,
+      "message": "We have create a separate bug(Bug: 336401947). in the bug we have explain why we neet it and why it\u0027s not upstreamable. please help to review.",
+      "parentUuid": "b125e441_b593812b",
+      "revId": "23ff109196e20220d92cef7ca9f671119a22d7c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
