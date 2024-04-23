@@ -16,6 +16,23 @@
       "message": "Please fix checkpatch issues:\n```\nWARNING:LONG_LINE: line length of 136 exceeds 100 columns\n#57: FILE: include/trace/hooks/net.h:31:\n--\nWARNING:LONG_LINE: line length of 136 exceeds 100 columns\n#61: FILE: include/trace/hooks/net.h:35:\n--\nWARNING:LONG_LINE: line length of 136 exceeds 100 columns\n#65: FILE: include/trace/hooks/net.h:39:\n\nSee /tmp/.tmp.checkpatch.log.s7SOL3 for complete output.\nINFO: See checkpatch.log for complete output.\n```",
       "revId": "79f05ec73d8eb44ecae4a56ff24b1a11d1bf5b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9050bbca_552c2919",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-23T16:59:24Z",
+      "side": 1,
+      "message": "Please fix checkpatch issues:\n```\nWARNING:LONG_LINE: line length of 136 exceeds 100 columns\n#57: FILE: include/trace/hooks/net.h:31:\n--\nWARNING:LONG_LINE: line length of 136 exceeds 100 columns\n#61: FILE: include/trace/hooks/net.h:35:\n--\nWARNING:LONG_LINE: line length of 136 exceeds 100 columns\n#65: FILE: include/trace/hooks/net.h:39:\n\nSee /tmp/.tmp.checkpatch.log.s7SOL3 for complete output.\nINFO: See checkpatch.log for complete output.\n```",
+      "revId": "79f05ec73d8eb44ecae4a56ff24b1a11d1bf5b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
