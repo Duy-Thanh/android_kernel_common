@@ -2496,7 +2496,6 @@
   kmalloc_node_trace
   xhci_add_endpoint
   xhci_address_device
-  xhci_check_trb_in_td_math
   xhci_get_endpoint_index
   xhci_get_ep_ctx
   xhci_get_slot_ctx
