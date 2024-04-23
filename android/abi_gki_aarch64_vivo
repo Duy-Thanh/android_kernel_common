@@ -48,10 +48,14 @@
   __traceiter_android_vh_check_nanosleep_syscall
   __traceiter_android_vh_clear_rwsem_reader_owned
   __traceiter_android_vh_clear_rwsem_writer_owned
+<<<<<<< PATCH SET (0b7552 ANDROID: GKI: Add symbols to vivo symbol list)
+  __traceiter_android_vh_configfs_uevent_work
+=======
   __traceiter_android_vh_count_workingset_refault
   __traceiter_android_vh_do_anonymous_page
   __traceiter_android_vh_do_swap_page
   __traceiter_android_vh_do_wp_page
+>>>>>>> BASE      (a9f7b5 ANDROID: GKI: vivo add symbols to symbol list)
   __traceiter_android_vh_dup_task_struct
   __traceiter_android_vh_free_task
   __traceiter_android_vh_fuse_request_end
@@ -134,10 +138,14 @@
   __tracepoint_android_vh_check_nanosleep_syscall
   __tracepoint_android_vh_clear_rwsem_reader_owned
   __tracepoint_android_vh_clear_rwsem_writer_owned
+<<<<<<< PATCH SET (0b7552 ANDROID: GKI: Add symbols to vivo symbol list)
+  __tracepoint_android_vh_configfs_uevent_work
+=======
   __tracepoint_android_vh_count_workingset_refault
   __tracepoint_android_vh_do_anonymous_page
   __tracepoint_android_vh_do_swap_page
   __tracepoint_android_vh_do_wp_page
+>>>>>>> BASE      (a9f7b5 ANDROID: GKI: vivo add symbols to symbol list)
   __tracepoint_android_vh_dup_task_struct
   __tracepoint_android_vh_free_task
   __tracepoint_android_vh_fuse_request_end
