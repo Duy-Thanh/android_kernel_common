@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "16cfb602_1837e097",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1949396
+      },
+      "writtenOn": "2024-04-24T02:18:50Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nSince we prefer not to enable usbmon in GKI kernel image (b/206602616#comment12), this patch allows vendors to enable usbmon themselves per vendor, by making the ABI the same regardless of whether usbmon is enabled or not.\n\nIs this not a proper way to achieve this? Could you kindly advise on a more appropriate way?\n\nThanks",
+      "parentUuid": "d28781dc_a1db7f1d",
+      "revId": "15a64dd715d5890b6dc23dd534d94e3ccf62016d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5248c010_c09529da",
