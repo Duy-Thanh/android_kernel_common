@@ -654,7 +654,7 @@ static void __host_update_page_state(phys_addr_t addr, u64 size, enum pkvm_page_
 }
 
 static int __host_stage2_set_owner_locked(phys_addr_t addr, u64 size, u8 owner_id, bool is_memory,
-					  enum pkvm_page_state nopage_state)
+					  enum pkvm_page_state nopage_state, bool update_iommu)
 {
 	kvm_pte_t annotation;
 	enum kvm_pgtable_prot prot;
@@ -667,8 +667,16 @@ static int __host_stage2_set_owner_locked(phys_addr_t addr, u64 size, u8 owner_i
 
 	ret = host_stage2_try(kvm_pgtable_stage2_annotate, &host_mmu.pgt,
 			      addr, size, &host_s2_pool, annotation);
-	if (ret || !is_memory)
+	if (ret)
 		return ret;
+
+	if (update_iommu) {
+		prot = owner_id == PKVM_ID_HOST ? PKVM_HOST_MEM_PROT : 0;
+		kvm_iommu_host_stage2_idmap(addr, addr + size, prot);
+	}
+
+	if (!is_memory)
+		return 0;
 
 	/* Don't forget to update the vmemmap tracking for the host */
 	if (owner_id == PKVM_ID_HOST)
@@ -676,15 +684,12 @@ static int __host_stage2_set_owner_locked(phys_addr_t addr, u64 size, u8 owner_i
 	else
 		__host_update_page_state(addr, size, PKVM_NOPAGE | nopage_state);
 
-	prot = owner_id == PKVM_ID_HOST ? PKVM_HOST_MEM_PROT : 0;
-	kvm_iommu_host_stage2_idmap(addr, addr + size, prot);
-
 	return 0;
 }
 
 int host_stage2_set_owner_locked(phys_addr_t addr, u64 size, u8 owner_id)
 {
-	return __host_stage2_set_owner_locked(addr, size, owner_id, addr_is_memory(addr), 0);
+	return __host_stage2_set_owner_locked(addr, size, owner_id, addr_is_memory(addr), 0i, true);
 }
 
 static bool host_stage2_force_pte(u64 addr, u64 end, enum kvm_pgtable_prot prot)
@@ -2157,7 +2162,7 @@ update:
 	if (!prot) {
 		ret = __host_stage2_set_owner_locked(addr, nr_pages << PAGE_SHIFT,
 						     PKVM_ID_PROTECTED, !!reg,
-						     PKVM_MODULE_OWNED_PAGE);
+						     PKVM_MODULE_OWNED_PAGE, false);
 	} else {
 		ret = host_stage2_idmap_locked(
 			addr, nr_pages << PAGE_SHIFT, prot, false);
