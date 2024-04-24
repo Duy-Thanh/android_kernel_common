@@ -59,6 +59,7 @@
   blk_mq_start_request
   blk_mq_start_stopped_hw_queues
   blk_mq_stop_hw_queue
+  blk_mq_unique_tag
   blk_mq_unquiesce_queue
   blk_mq_virtio_map_queues
   blk_put_request
@@ -249,8 +250,13 @@
   devfreq_remove_device
   devfreq_remove_governor
   devfreq_update_interval
+  dev_forward_skb
   dev_fwnode
   dev_get_stats
+  dev_mc_sync
+  dev_pre_changeaddr_notify
+  dev_set_allmulti
+  dev_uc_sync
   device_add_disk
   device_create
   device_create_file
@@ -918,6 +924,7 @@
   input_unregister_device
   input_unregister_handle
   int_pow
+  __invalidate_device
   iomem_resource
   iommu_alloc_resv_region
   iommu_device_register
@@ -947,6 +954,8 @@
   __ioremap
   ioremap_cache
   iounmap
+  ip6_route_input_lookup
+  ip_route_input_noref
   iput
   __irq_alloc_descs
   irq_chip_ack_parent
@@ -1127,6 +1136,7 @@
   netdev_err
   netdev_increment_features
   netdev_info
+  netdev_is_rx_handler_busy
   netdev_lower_state_changed
   netdev_master_upper_dev_link
   netdev_notify_peers
@@ -1151,8 +1161,11 @@
   __netif_set_xps_queue
   netif_tx_stop_all_queues
   netif_tx_wake_queue
+  netlink_capable
   net_ratelimit
   nf_conntrack_destroy
+  nla_strcmp
+  nla_strdup
   no_llseek
   nonseekable_open
   noop_llseek
@@ -1539,6 +1552,8 @@
   register_chrdev_region
   register_console
   register_die_notifier
+  register_inet6addr_validator_notifier
+  register_inetaddr_validator_notifier
   register_module_notifier
   register_netdev
   register_netdevice_notifier
@@ -1658,6 +1673,7 @@
   skb_to_sgvec
   skb_tstamp_tx
   sk_error_report
+  sk_set_memalloc
   smp_call_function
   smp_call_function_single
   smp_call_on_cpu
@@ -1709,6 +1725,7 @@
   snd_soc_unregister_component
   snprintf
   soc_device_register
+  sock_sendmsg
   softnet_data
   sort
   __spi_alloc_controller
@@ -1946,6 +1963,8 @@
   __unregister_chrdev
   unregister_chrdev_region
   unregister_console
+  unregister_inet6addr_validator_notifier
+  unregister_inetaddr_validator_notifier
   unregister_netdev
   unregister_netdevice_notifier
   unregister_netdevice_queue
