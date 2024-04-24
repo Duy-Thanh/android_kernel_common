@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "6c22b7a76b167e81a0053030d64ddafe916de3f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075655853",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3050857?revision\u003d2",
+      "key": {
+        "uuid": "2853fc48_17c11768",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-24T03:00:43Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/5662400a9ac03f38ef3b84e4ff9a640a4604bef9) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d5662400a9ac03f38ef3b84e4ff9a640a4604bef9).\n\n```\n      ## include/linux/swapops.h ##\n     @@ include/linux/swapops.h: static inline struct page *pfn_swap_entry_to_page(swp_entry_t entry)\n      \treturn p;\n    @@ mm/filemap.c: void migration_entry_wait_on_locked(swp_entry_t entry, spinlock_t\n      \n      \tq \u003d folio_waitqueue(folio);\n      \tif (!folio_test_uptodate(folio) \u0026\u0026 folio_test_workingset(folio)) {\n    -\n    - ## mm/huge_memory.c ##\n    -@@ mm/huge_memory.c: int change_huge_pmd(struct mmu_gather *tlb, struct vm_area_struct *vma,\n    - #ifdef CONFIG_ARCH_ENABLE_THP_MIGRATION\n    - \tif (is_swap_pmd(*pmd)) {\n    - \t\tswp_entry_t entry \u003d pmd_to_swp_entry(*pmd);\n    --\t\tstruct folio *folio \u003d page_folio(pfn_swap_entry_to_page(entry));\n    -+\t\tstruct folio *folio \u003d pfn_swap_entry_folio(entry);\n    - \t\tpmd_t newpmd;\n    - \n    - \t\tVM_BUG_ON(!is_pmd_migration_entry(*pmd));\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "6c22b7a76b167e81a0053030d64ddafe916de3f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
