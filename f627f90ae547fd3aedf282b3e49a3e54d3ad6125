@@ -34,6 +34,23 @@
       "parentUuid": "0726f409_d4e12a7f",
       "revId": "f627f90ae547fd3aedf282b3e49a3e54d3ad6125",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b19e0aef_7e54e419",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-24T21:43:15Z",
+      "side": 1,
+      "message": "The presubmit errors were a result of an internal infra bug which is fixed now. Please rebase the patchset so we can rerun the tests and submit it. You should also file a separate bug so we can communicate using it. Original bug was filed by another partner and you don\u0027t have access to it.",
+      "revId": "f627f90ae547fd3aedf282b3e49a3e54d3ad6125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
