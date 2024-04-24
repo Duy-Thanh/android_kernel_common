@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "fbb042d2dd848ce2e2991b0f23eed7461ce794e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075567349",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2926512?revision\u003d3",
+      "key": {
+        "uuid": "fd36d4de_2230cf20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-24T00:36:22Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/25747ad9668f1204f858116813c428b63f6e2a12).\n\n```\n      ## Documentation/admin-guide/kernel-parameters.txt ##\n     @@\n    @@ Documentation/admin-guide/kernel-parameters.txt\n      \t\t\tstall warning.\n     \n      ## kernel/rcu/Kconfig ##\n    -@@ kernel/rcu/Kconfig: config RCU_LAZY\n    - \t  To save power, batch RCU callbacks and flush after delay, memory\n    - \t  pressure, or callback list growing too big.\n    +@@ kernel/rcu/Kconfig: config RCU_DOUBLE_CHECK_CB_TIME\n    + \t  Say Y here if you need tighter callback-limit enforcement.\n    + \t  Say N here if you are unsure.\n      \n     +config RCU_BOOT_END_DELAY\n     +\tint \"Minimum time before RCU may consider in-kernel boot as completed\"\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "fbb042d2dd848ce2e2991b0f23eed7461ce794e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
