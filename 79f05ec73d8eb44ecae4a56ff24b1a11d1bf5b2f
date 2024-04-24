@@ -69,6 +69,24 @@
       "parentUuid": "419ff718_43527770",
       "revId": "79f05ec73d8eb44ecae4a56ff24b1a11d1bf5b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d78d764_fee866c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3397442
+      },
+      "writtenOn": "2024-04-24T06:27:42Z",
+      "side": 1,
+      "message": "Done on Patchset 3, This will cause other commits in the Relation chain to conflict, so other commits are also updated.",
+      "parentUuid": "a79cac08_a1f2bda4",
+      "revId": "79f05ec73d8eb44ecae4a56ff24b1a11d1bf5b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
