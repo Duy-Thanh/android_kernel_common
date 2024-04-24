@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f3c1b2_309a1f1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-24T16:17:17Z",
+      "side": 1,
+      "message": "Please re-write you commit message since it is not true that the KMI is a reason for this patch.",
+      "parentUuid": "16cfb602_1837e097",
+      "revId": "15a64dd715d5890b6dc23dd534d94e3ccf62016d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5248c010_c09529da",
