@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "a3813af51318c54b0368c152004304a25cfcf15b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075858226",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3061465?revision\u003d6",
+      "key": {
+        "uuid": "b4a6e546_658ad678",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-25T20:22:40Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/353c3de3f112132e10d8649a97f0a03fad28c745).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_oops_exit);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_size_check);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_format_check);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_dump_buffer);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_online);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_meminfo_cache_adjust);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_si_mem_available_adjust);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_si_meminfo_adjust);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_pm_notify_suspend);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_fill_prdt);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_reprogram_all_keys);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_complete_init);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_prepare_command);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);\n     \n      ## drivers/thermal/thermal_core.c ##\n    +@@\n    + #include \u003clinux/of.h\u003e\n    + #include \u003clinux/suspend.h\u003e\n    + \n    ++#include \u003ctrace/hooks/thermal.h\u003e\n    ++\n    + #define CREATE_TRACE_POINTS\n    + #include \"thermal_trace.h\"\n    + \n     @@ drivers/thermal/thermal_core.c: static int thermal_pm_notify(struct notifier_block *nb,\n      \t\t\t     unsigned long mode, void *_unused)\n      {\n    @@ drivers/thermal/thermal_core.c: static int thermal_pm_notify(struct notifier_blo\n      \tswitch (mode) {\n      \tcase PM_HIBERNATION_PREPARE:\n     @@ drivers/thermal/thermal_core.c: static int thermal_pm_notify(struct notifier_block *nb,\n    - \tcase PM_POST_SUSPEND:\n    - \t\tatomic_set(\u0026in_suspend, 0);\n    - \t\tlist_for_each_entry(tz, \u0026thermal_tz_list, node) {\n    -+\n    + \n    + \t\t\ttz-\u003esuspended \u003d false;\n    + \n     +\t\t\ttrace_android_vh_thermal_pm_notify_suspend(tz, \u0026irq_wakeable);\n     +\t\t\tif (irq_wakeable)\n     +\t\t\t\tcontinue;\n     +\n      \t\t\tthermal_zone_device_init(tz);\n    - \t\t\tthermal_zone_device_update(tz,\n    - \t\t\t\t\t\t   THERMAL_EVENT_UNSPECIFIED);\n    + \t\t\t__thermal_zone_device_update(tz, THERMAL_EVENT_UNSPECIFIED);\n    + \n    +\n    + ## include/trace/hooks/thermal.h ##\n    +@@ include/trace/hooks/thermal.h: DECLARE_HOOK(android_vh_disable_thermal_cooling_stats,\n    + \tTP_PROTO(struct thermal_cooling_device *cdev, bool *disable_stats),\n    + \tTP_ARGS(cdev, disable_stats));\n    + \n    ++struct thermal_zone_device;\n    ++DECLARE_HOOK(android_vh_thermal_pm_notify_suspend,\n    ++\t     TP_PROTO(struct thermal_zone_device *tz, int *irq_wakeable),\n    ++\t     TP_ARGS(tz, irq_wakeable));\n    ++\n    + #endif /* _TRACE_HOOK_THERMAL_H */\n    + /* This part must be outside protection */\n    + #include \u003ctrace/define_trace.h\u003e\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "a3813af51318c54b0368c152004304a25cfcf15b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
