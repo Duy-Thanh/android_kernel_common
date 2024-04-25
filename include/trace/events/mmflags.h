@@ -158,6 +158,10 @@ TRACE_DEFINE_ENUM(___GFP_LAST_BIT);
 #define IF_HAVE_PG_ARCH_3(_name)
 #endif
 
+#ifdef CONFIG_64BIT
+#define IF_HAVE_PG_OEM_RESERVED(_name) ,{1UL << PG_##_name, __stringify(_name)}
+#endif
+
 #define DEF_PAGEFLAG_NAME(_name) { 1UL <<  PG_##_name, __stringify(_name) }
 
 #define __def_pageflag_names						\
@@ -181,6 +185,12 @@ TRACE_DEFINE_ENUM(___GFP_LAST_BIT);
 	DEF_PAGEFLAG_NAME(reclaim),					\
 	DEF_PAGEFLAG_NAME(swapbacked),					\
 	DEF_PAGEFLAG_NAME(unevictable)					\
+#ifdef CONFIG_64BIT
+IF_HAVE_PG_OEM_RESERVED(oem_reserved_1)					\
+IF_HAVE_PG_OEM_RESERVED(oem_reserved_2)					\
+IF_HAVE_PG_OEM_RESERVED(oem_reserved_3)					\
+IF_HAVE_PG_OEM_RESERVED(oem_reserved_4)					\
+#endif
 IF_HAVE_PG_MLOCK(mlocked)						\
 IF_HAVE_PG_HWPOISON(hwpoison)						\
 IF_HAVE_PG_IDLE(idle)							\
