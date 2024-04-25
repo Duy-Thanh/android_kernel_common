@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b288d5b4_5a1c24bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-04-25T16:27:22Z",
+      "side": 1,
+      "message": "Please use the `Author` email address",
+      "range": {
+        "startLine": 16,
+        "startChar": 27,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "9ceb3e679b30d212134b432e394abd5c20c62a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ba71049_1aec15f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-04-25T16:27:22Z",
+      "side": 1,
+      "message": "Please create a patch on top of this one to add the symbols to your symbol list.",
+      "revId": "9ceb3e679b30d212134b432e394abd5c20c62a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
