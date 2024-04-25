@@ -479,6 +479,9 @@ DECLARE_HOOK(android_vh_cpu_cgroup_css_alloc_early,
 DECLARE_HOOK(android_vh_cpu_cgroup_css_free,
 	TP_PROTO(struct cgroup_subsys_state *css),
 	TP_ARGS(css));
+DECLARE_HOOK(android_vh_reweight_entity,
+	TP_PROTO(struct sched_entity *se),
+	TP_ARGS(se));
 
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
