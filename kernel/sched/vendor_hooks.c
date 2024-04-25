@@ -106,3 +106,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg_se);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg_cfs_rq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rt_rq_load_avg_internal);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_map_util_freq);
+<<<<<<< HEAD   (f3f369 UPSTREAM: wifi: cfg80211: skip regulatory for punctured subc)
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_move_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_alloc_early);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_free);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_move_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_alloc_early);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reweight_entity);
+>>>>>>> CHANGE (4b0d17 ANDROID: vendor_hooks: Add hooks in reweight_entity)
