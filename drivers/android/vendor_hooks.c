@@ -62,6 +62,7 @@
 #include <trace/hooks/logbuf.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/compaction.h>
+#include <trace/hooks/sd.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -303,3 +304,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_direct_reclaim_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_may_oom_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_kswapd_done);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_capacity_show);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_init_unmap_multi_segment);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_setup_unmap_multi_segment);
