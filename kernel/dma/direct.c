@@ -490,7 +490,7 @@ int dma_direct_map_sg(struct device *dev, struct scatterlist *sgl, int nents,
 		}
 
 		sg->dma_address = dma_direct_map_page(dev, sg_page(sg),
-				sg->offset, sg->length, dir, attrs);
+				sg->offset, sg->length, dir, attrs, sgl);
 		if (sg->dma_address == DMA_MAPPING_ERROR) {
 			ret = -EIO;
 			goto out_unmap;

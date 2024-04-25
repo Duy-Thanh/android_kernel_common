@@ -158,7 +158,7 @@ dma_addr_t dma_map_page_attrs(struct device *dev, struct page *page,
 
 	if (dma_map_direct(dev, ops) ||
 	    arch_dma_map_page_direct(dev, page_to_phys(page) + offset + size))
-		addr = dma_direct_map_page(dev, page, offset, size, dir, attrs);
+		addr = dma_direct_map_page(dev, page, offset, size, dir, attrs, NULL);
 	else
 		addr = ops->map_page(dev, page, offset, size, dir, attrs);
 	kmsan_handle_dma(page, offset, size, dir);

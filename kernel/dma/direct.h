@@ -84,23 +84,28 @@ static inline void dma_direct_sync_single_for_cpu(struct device *dev,
 
 static inline dma_addr_t dma_direct_map_page(struct device *dev,
 		struct page *page, unsigned long offset, size_t size,
-		enum dma_data_direction dir, unsigned long attrs)
+		enum dma_data_direction dir, unsigned long attrs, struct scatterlist *sgl)
 {
 	phys_addr_t phys = page_to_phys(page) + offset;
-	dma_addr_t dma_addr = phys_to_dma(dev, phys);
+	dma_addr_t dma_addr = phys_to_dma(dev, phys), ret;
 
 	if (is_swiotlb_force_bounce(dev)) {
 		if (is_pci_p2pdma_page(page))
 			return DMA_MAPPING_ERROR;
-		return swiotlb_map(dev, phys, size, dir, attrs);
+		ret = swiotlb_map(dev, phys, size, dir, attrs);
+		if (sgl && ret != DMA_MAPPING_ERROR) sg_dma_mark_swiotlb(sgl);
+		return ret;
 	}
 
 	if (unlikely(!dma_capable(dev, dma_addr, size, true)) ||
 	    dma_kmalloc_needs_bounce(dev, size, dir)) {
 		if (is_pci_p2pdma_page(page))
 			return DMA_MAPPING_ERROR;
-		if (is_swiotlb_active(dev))
-			return swiotlb_map(dev, phys, size, dir, attrs);
+		if (is_swiotlb_active(dev)) {
+			ret = swiotlb_map(dev, phys, size, dir, attrs);
+			if (sgl && ret != DMA_MAPPING_ERROR) sg_dma_mark_swiotlb(sgl);
+			return ret;
+		}
 
 		dev_WARN_ONCE(dev, 1,
 			     "DMA addr %pad+%zu overflow (mask %llx, bus limit %llx).\n",
