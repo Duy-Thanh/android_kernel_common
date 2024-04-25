@@ -220,7 +220,10 @@ void set_ptes(struct mm_struct *mm, unsigned long addr, pte_t *ptep,
 			break;
 		ptep++;
 		addr += PAGE_SIZE;
-		pte = pte_next_pfn(pte);
+		/*
+		 * increment the pfn.
+		 */
+		pte = pfn_pte(pte_pfn(pte) + 1, pte_pgprot((pte)));
 	}
 }
 
