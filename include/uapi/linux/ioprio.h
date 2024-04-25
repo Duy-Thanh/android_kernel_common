@@ -35,6 +35,13 @@ enum {
 	IOPRIO_CLASS_INVALID	= 7,
 };
 
+#define IOPRIO_CLASS_STRINGS \
+	{ IOPRIO_CLASS_NONE,	"none" }, \
+	{ IOPRIO_CLASS_RT,	"rt" }, \
+	{ IOPRIO_CLASS_BE,	"be" }, \
+	{ IOPRIO_CLASS_IDLE,	"idle" }, \
+	{ IOPRIO_CLASS_INVALID,	"invalid" }
+
 /*
  * The RT and BE priority classes both support up to 8 priority levels that
  * can be specified using the lower 3-bits of the priority data.
