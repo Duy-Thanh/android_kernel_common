@@ -4989,7 +4989,7 @@ int reclaim_shmem_address_space(struct address_space *mapping)
 	}
 	rcu_read_unlock();
 
-	return reclaim_pages(&page_list, false);
+	return reclaim_pages(&page_list);
 #else
 	return 0;
 #endif

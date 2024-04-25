@@ -417,7 +417,7 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,
 			return 0;
 		}
 
-		if (!pageout && pmd_young(orig_pmd)) {
+		if (pmd_young(orig_pmd)) {
 			pmdp_invalidate(vma, addr, pmd);
 			orig_pmd = pmd_mkold(orig_pmd);
 
@@ -441,7 +441,7 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,
 huge_unlock:
 		spin_unlock(ptl);
 		if (pageout)
-			reclaim_pages(&folio_list, true);
+			reclaim_pages(&folio_list);
 		return 0;
 	}
 
@@ -522,7 +522,7 @@ regular_folio:
 		if (pageout_anon_only_filter && !folio_test_anon(folio))
 			continue;
 
-		if (!pageout && pte_young(ptent)) {
+		if (pte_young(ptent)) {
 			clear_young_dirty_ptes(vma, addr, pte, nr,
 					       CYDP_CLEAR_YOUNG);
 			tlb_remove_tlb_entries(tlb, pte, nr, addr);
@@ -554,7 +554,7 @@ regular_folio:
 		pte_unmap_unlock(start_pte, ptl);
 	}
 	if (pageout)
-		reclaim_pages(&folio_list, true);
+		reclaim_pages(&folio_list);
 	cond_resched();
 
 	return 0;
