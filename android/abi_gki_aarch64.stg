@@ -318196,6 +318196,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_binder_wait_for_work"
 }
 elf_symbol {
+  id: 0xe479b209
+  name: "__traceiter_android_vh_build_sched_domains"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf1522f52
+  type_id: 0x9a1a471c
+  full_name: "__traceiter_android_vh_build_sched_domains"
+}
+elf_symbol {
   id: 0x02b646c9
   name: "__traceiter_android_vh_build_skb_around"
   is_defined: true
@@ -321245,6 +321254,15 @@ elf_symbol {
   crc: 0x8536cf75
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_binder_wait_for_work"
+}
+elf_symbol {
+  id: 0x0d3c7607
+  name: "__tracepoint_android_vh_build_sched_domains"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb61430d1
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_build_sched_domains"
 }
 elf_symbol {
   id: 0xbf8faf2f
@@ -372914,6 +372932,7 @@ interface {
   symbol_id: 0x5cf60b10
   symbol_id: 0xcc2edef9
   symbol_id: 0x61c82fb5
+  symbol_id: 0xe479b209
   symbol_id: 0x02b646c9
   symbol_id: 0xa9225bf8
   symbol_id: 0x33c527ab
@@ -373253,6 +373272,7 @@ interface {
   symbol_id: 0xa9d55136
   symbol_id: 0xabc729f7
   symbol_id: 0x75b174bb
+  symbol_id: 0x0d3c7607
   symbol_id: 0xbf8faf2f
   symbol_id: 0xd3845a12
   symbol_id: 0x6f146fe1
