@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075842440",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3061465?revision\u003d1",
+      "key": {
+        "uuid": "cbf712f4_e0b969a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-25T15:26:24Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/353c3de3f112132e10d8649a97f0a03fad28c745).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_oops_exit);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_size_check);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_format_check);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_dump_buffer);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_online);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_meminfo_cache_adjust);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_si_mem_available_adjust);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_si_meminfo_adjust);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_pm_notify_suspend);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_fill_prdt);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_reprogram_all_keys);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_complete_init);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_prepare_command);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);\n     \n      ## drivers/thermal/thermal_core.c ##\n     @@ drivers/thermal/thermal_core.c: static int thermal_pm_notify(struct notifier_block *nb,\n    @@ drivers/thermal/thermal_core.c: static int thermal_pm_notify(struct notifier_blo\n      \tswitch (mode) {\n      \tcase PM_HIBERNATION_PREPARE:\n     @@ drivers/thermal/thermal_core.c: static int thermal_pm_notify(struct notifier_block *nb,\n    - \tcase PM_POST_SUSPEND:\n    - \t\tatomic_set(\u0026in_suspend, 0);\n    - \t\tlist_for_each_entry(tz, \u0026thermal_tz_list, node) {\n    -+\n    + \n    + \t\t\ttz-\u003esuspended \u003d false;\n    + \n     +\t\t\ttrace_android_vh_thermal_pm_notify_suspend(tz, \u0026irq_wakeable);\n     +\t\t\tif (irq_wakeable)\n     +\t\t\t\tcontinue;\n     +\n      \t\t\tthermal_zone_device_init(tz);\n    - \t\t\tthermal_zone_device_update(tz,\n    - \t\t\t\t\t\t   THERMAL_EVENT_UNSPECIFIED);\n    + \t\t\t__thermal_zone_device_update(tz, THERMAL_EVENT_UNSPECIFIED);\n    + \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "5be21fdc095cb7b9cb449de9188a0db31b8fc4ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
