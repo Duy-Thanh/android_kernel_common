@@ -31,6 +31,12 @@ enum {
 	IOPRIO_CLASS_IDLE,
 };
 
+#define IOPRIO_CLASS_STRINGS \
+	{ IOPRIO_CLASS_NONE,	"none" }, \
+	{ IOPRIO_CLASS_RT,	"rt" }, \
+	{ IOPRIO_CLASS_BE,	"be" }, \
+	{ IOPRIO_CLASS_IDLE,	"idle" }
+
 /*
  * The RT and BE priority classes both support up to 8 priority levels.
  */
