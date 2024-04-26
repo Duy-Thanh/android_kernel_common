@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ce171de_9498822a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T20:57:28Z",
+      "side": 1,
+      "message": "Needs description similar to https://android-review.googlesource.com/c/kernel/common/+/2610749 which gets generated when you try to build.",
+      "revId": "54f76a273044d5c7aded26c943f2ac5e2fef559c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20da6b5d_b0ceca39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T20:57:28Z",
+      "side": 1,
+      "message": "Add `Bug: 284059805`",
+      "revId": "54f76a273044d5c7aded26c943f2ac5e2fef559c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c009223_73379516",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T20:57:28Z",
+      "side": 1,
+      "message": "Should be `Change-Id: I3ea820f19eac3b0f053bac0830625891e70c1b71`",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "54f76a273044d5c7aded26c943f2ac5e2fef559c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
