@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "90a33832_48e34138",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-04-26T15:17:58Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "8b71c79b_b87fd9eb",
+      "range": {
+        "startLine": 16,
+        "startChar": 27,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "9ceb3e679b30d212134b432e394abd5c20c62a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2ba71049_1aec15f3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -79,6 +103,24 @@
       "side": 1,
       "message": "I have added these symbols to my symbol list. Please review this patch agagin. Thanks!",
       "parentUuid": "2ba71049_1aec15f3",
+      "revId": "9ceb3e679b30d212134b432e394abd5c20c62a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78048ca4_3b46d09c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-04-26T15:17:58Z",
+      "side": 1,
+      "message": "Thank\u0027s for adding the symbols, but please put them in a separate commit. Here\u0027s a recent example of this: https://android-review.googlesource.com/c/kernel/common/+/3064182/1",
+      "parentUuid": "bcd8374b_ae894ac6",
       "revId": "9ceb3e679b30d212134b432e394abd5c20c62a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
