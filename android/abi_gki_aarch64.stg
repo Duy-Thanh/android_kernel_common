@@ -286438,6 +286438,14 @@ function {
   parameter_id: 0xf1a6dfed
 }
 function {
+  id: 0x5b3f6aeb
+  return_type_id: 0x18bd6530
+  parameter_id: 0x391f15ea
+  parameter_id: 0xf435685e
+  parameter_id: 0xf435685e
+  parameter_id: 0xf1a6dfed
+}
+function {
   id: 0x5b450f90
   return_type_id: 0x391f15ea
   parameter_id: 0x33a9d455
@@ -289310,6 +289318,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x90448105
+  return_type_id: 0x6720d32f
+  parameter_id: 0x384c5795
+  parameter_id: 0xf435685e
+  parameter_id: 0x1df06cce
+  parameter_id: 0x379d63b0
+}
+function {
   id: 0x90451752
   return_type_id: 0x6720d32f
   parameter_id: 0x34bfd621
@@ -289904,6 +289920,14 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x36f998d3
   parameter_id: 0x38d23361
+}
+function {
+  id: 0x90e2d95d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x310ec01d
+  parameter_id: 0x498e6bfd
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
 }
 function {
   id: 0x90e31e42
@@ -346180,6 +346204,15 @@ elf_symbol {
   full_name: "kvmemdup"
 }
 elf_symbol {
+  id: 0x1ffd02c1
+  name: "kvrealloc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7ce58981
+  type_id: 0x5b3f6aeb
+  full_name: "kvrealloc"
+}
+elf_symbol {
   id: 0x709f7fc8
   name: "led_classdev_flash_register_ext"
   is_defined: true
@@ -346556,6 +346589,15 @@ elf_symbol {
   crc: 0xba497f13
   type_id: 0x33756485
   full_name: "loops_per_jiffy"
+}
+elf_symbol {
+  id: 0xc84a133c
+  name: "lzo1x_decompress_safe"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x04df8fbc
+  type_id: 0x90448105
+  full_name: "lzo1x_decompress_safe"
 }
 elf_symbol {
   id: 0x7bd17841
@@ -360057,6 +360099,15 @@ elf_symbol {
   full_name: "smp_call_function"
 }
 elf_symbol {
+  id: 0x824ee5eb
+  name: "smp_call_function_any"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8efd59ac
+  type_id: 0x90e2d95d
+  full_name: "smp_call_function_any"
+}
+elf_symbol {
   id: 0x4c674d1e
   name: "smp_call_function_single"
   is_defined: true
@@ -369249,6 +369300,15 @@ elf_symbol {
   full_name: "v4l2_m2m_qbuf"
 }
 elf_symbol {
+  id: 0x36a4341f
+  name: "v4l2_m2m_querybuf"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2985c782
+  type_id: 0x9b9c3080
+  full_name: "v4l2_m2m_querybuf"
+}
+elf_symbol {
   id: 0xabff52f7
   name: "v4l2_m2m_register_media_controller"
   is_defined: true
@@ -375767,6 +375827,7 @@ interface {
   symbol_id: 0x3e5c3d46
   symbol_id: 0x3ae24a16
   symbol_id: 0xbbe14755
+  symbol_id: 0x1ffd02c1
   symbol_id: 0x709f7fc8
   symbol_id: 0xa58e6f5d
   symbol_id: 0xfe24eb71
@@ -375809,6 +375870,7 @@ interface {
   symbol_id: 0x06e891b4
   symbol_id: 0xad10cf0f
   symbol_id: 0x493ce9fc
+  symbol_id: 0xc84a133c
   symbol_id: 0x7bd17841
   symbol_id: 0xf4530070
   symbol_id: 0x62ee8793
@@ -377309,6 +377371,7 @@ interface {
   symbol_id: 0xeedc57e1
   symbol_id: 0x57adf54a
   symbol_id: 0xf46be251
+  symbol_id: 0x824ee5eb
   symbol_id: 0x4c674d1e
   symbol_id: 0x1f9b728b
   symbol_id: 0x99a17453
@@ -378331,6 +378394,7 @@ interface {
   symbol_id: 0xb4198f5a
   symbol_id: 0x0ec6b6da
   symbol_id: 0x5b4a7ca1
+  symbol_id: 0x36a4341f
   symbol_id: 0xabff52f7
   symbol_id: 0x54693ef1
   symbol_id: 0x1f068d9a
