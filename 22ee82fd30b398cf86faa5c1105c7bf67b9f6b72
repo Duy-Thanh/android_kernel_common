@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/336946548 \n(Updated respin bug ID because Oppo filed the wrong at the beginning.)",
       "revId": "22ee82fd30b398cf86faa5c1105c7bf67b9f6b72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "159bc501_1cb92f98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3409162
+      },
+      "writtenOn": "2024-04-26T03:34:52Z",
+      "side": 1,
+      "message": "ID de alteração: I6b9a81a4ebe1f582fdc4b3967c590f5ba450d61e\nAssinado por: dongliang.cui \u003cdongliang.cui@unisoc.com\u003e\n(cereja escolhida no commit Ide181d4737a1b6479bbe1f69f5ab",
+      "revId": "22ee82fd30b398cf86faa5c1105c7bf67b9f6b72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
