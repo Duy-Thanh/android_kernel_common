@@ -108,11 +108,19 @@ static void pvm_init_traps_aa64pfr0(struct kvm_vcpu *vcpu)
 		hcr_clear |= HCR_FIEN;
 	}
 
-	/* Trap AMU */
-	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64PFR0_EL1_AMU), feature_ids)) {
-		hcr_clear |= HCR_AMVOFFEN;
-		cptr_set |= CPTR_EL2_TAM;
-	}
+	/*
+	 * Trap AMU
+	 *
+	 * Currently there's no mechanism for tracking the guest AMU counter
+	 * state. Therefore, ensure that it's not allowed for protected VMs.
+	 */
+	BUILD_BUG_ON(FIELD_GET(ARM64_FEATURE_MASK(ID_AA64PFR0_EL1_AMU),
+			       PVM_ID_AA64PFR0_ALLOW));
+	BUILD_BUG_ON(FIELD_GET(ARM64_FEATURE_MASK(ID_AA64PFR0_EL1_AMU),
+			       PVM_ID_AA64PFR0_RESTRICT_UNSIGNED));
+
+	hcr_clear |= HCR_AMVOFFEN;
+	cptr_set |= CPTR_EL2_TAM;
 
 	/* Trap SVE */
 	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64PFR0_EL1_SVE), feature_ids)) {

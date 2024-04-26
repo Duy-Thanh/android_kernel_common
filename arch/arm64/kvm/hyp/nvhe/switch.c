@@ -19,6 +19,7 @@
 #include <asm/kprobes.h>
 #include <asm/kvm_asm.h>
 #include <asm/kvm_emulate.h>
+#include <asm/kvm_host.h>
 #include <asm/kvm_hyp.h>
 #include <asm/kvm_hypevents.h>
 #include <asm/kvm_mmu.h>
@@ -187,6 +188,47 @@ static void __pmu_switch_to_host(struct kvm_vcpu *vcpu)
 #define __pmu_switch_to_host(v)		do {} while (0)
 #endif
 
+#ifdef CONFIG_ARM64_AMU_EXTN
+#define AMCNTENCLR_MASK GENMASK(15, 0)
+
+static bool __amu_switch_to_guest(struct kvm_vcpu *vcpu)
+{
+	struct kvm_cpu_context *host_ctxt = &this_cpu_ptr(&kvm_host_data)->host_ctxt;
+
+	if (!vcpu_is_protected(vcpu))
+		return false;
+
+	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64PFR0_EL1_AMU), read_sysreg_s(SYS_ID_AA64PFR0_EL1)))
+		return false;
+
+	ctxt_sys_reg(host_ctxt, AMCNTENSET0_EL0) = read_sysreg_s(SYS_AMCNTENSET0_EL0);
+	ctxt_sys_reg(host_ctxt, AMCNTENSET1_EL0) = read_sysreg_s(SYS_AMCNTENSET1_EL0);
+
+	/*
+	 * Note: AMCNTENCLR0/AMCNTENSET0 bits [15,4] are RAZ/WI (DDI0487K.g),
+	 * but could in the future be used for new events.
+	 * Since they are RAZ/WI, clear them anyway so that potential new
+	 * events aren't counted.
+	 */
+	write_sysreg_s(AMCNTENCLR_MASK, SYS_AMCNTENCLR0_EL0);
+	write_sysreg_s(AMCNTENCLR_MASK, SYS_AMCNTENCLR1_EL0);
+
+	return true;
+}
+
+static void __amu_switch_to_host(void)
+{
+	struct kvm_cpu_context *host_ctxt = &this_cpu_ptr(&kvm_host_data)->host_ctxt;
+
+	write_sysreg_s(ctxt_sys_reg(host_ctxt, AMCNTENSET0_EL0), SYS_AMCNTENSET0_EL0);
+	write_sysreg_s(ctxt_sys_reg(host_ctxt, AMCNTENSET1_EL0), SYS_AMCNTENSET1_EL0);
+}
+#else
+#define __amu_switch_to_guest(v)	({ false; })
+#define __amu_switch_to_host(v)		do {} while (0)
+#endif
+
+
 /*
  * Handler for protected VM MSR, MRS or System instruction execution in AArch64.
  *
@@ -296,6 +338,7 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 	struct kvm_cpu_context *host_ctxt;
 	struct kvm_cpu_context *guest_ctxt;
 	struct kvm_s2_mmu *mmu;
+	bool amu_switch_needed;
 	bool pmu_switch_needed;
 	u64 exit_code;
 
@@ -314,6 +357,7 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 	host_ctxt->__hyp_running_vcpu = vcpu;
 	guest_ctxt = &vcpu->arch.ctxt;
 
+	amu_switch_needed = __amu_switch_to_guest(vcpu);
 	pmu_switch_needed = __pmu_switch_to_guest(vcpu);
 
 	__sysreg_save_state_nvhe(host_ctxt);
@@ -395,6 +439,9 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 	 * system may enable SPE here and make use of the TTBRs.
 	 */
 	__debug_restore_host_buffers_nvhe(vcpu);
+
+	if (amu_switch_needed)
+		__amu_switch_to_host();
 
 	if (pmu_switch_needed)
 		__pmu_switch_to_host(vcpu);

@@ -372,6 +372,10 @@ enum vcpu_sysreg {
 	PMOVSSET_EL0,	/* Overflow Flag Status Set Register */
 	PMUSERENR_EL0,	/* User Enable Register */
 
+	/* Activity Monitor Registers */
+	AMCNTENSET0_EL0,	/* Count Enable Set Register 0 */
+	AMCNTENSET1_EL0,	/* Count Enable Set Register 1 */
+
 	/* Pointer Authentication Registers in a strict increasing order. */
 	APIAKEYLO_EL1,
 	APIAKEYHI_EL1,
