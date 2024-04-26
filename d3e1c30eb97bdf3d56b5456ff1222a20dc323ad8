@@ -33,6 +33,23 @@
       "message": "Correções: a78418e6a04c (\"bloqueio: sempre inicializar a prioridade bio IO ao enviar\")\nCo-desenvolvido por: Yibin Ding \u003cyibin.ding@unisoc.com\u003e\nAssinado por: Yibin Ding \u003cyibin.ding@unisoc.com\u003e\nAssinado por: Hongyu Jin \u003chongyu.jin@unisoc.com\u003e\nRevisado por: Eric Biggers \u003cebiggers@google.com\u003e\nRevisado por: Mikulas Patocka \u003cmpatocka@redhat.com\u003e\n[snitzer: cabeçalho de commit revisado]\nAssinado por: Mike Snitzer \u003csnitzer@kernel.org\u003e\nRevisado por: Ming Lei \u003cming.lei@redhat.com\u003e\nLink: https://lore.kernel.org/r/20240130202638.62600-2-snitzer@kernel.org\nAssinado por: Jens Axboe \u003caxboe@kernel.dk\u003e\n\nBug: 331551156 \nBug: 336912811 \nBug: 336946548 \n(cereja escolhida no commit f3c89983cb4fc00be64eb0d5cbcfcdf2cacb965e )\nID de alteração: If54c45760690aea33a4d4a6eb5a56d71d404af8d\nAssinado por: Hongyu Jin \u003chongyu.jin@unisoc.com\u003e",
       "revId": "d3e1c30eb97bdf3d56b5456ff1222a20dc323ad8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dde065cc_3a076352",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3409162
+      },
+      "writtenOn": "2024-04-26T03:42:13Z",
+      "side": 1,
+      "message": "block/blk-core.c",
+      "revId": "d3e1c30eb97bdf3d56b5456ff1222a20dc323ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
