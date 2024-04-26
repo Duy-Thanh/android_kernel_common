@@ -67,6 +67,23 @@
       "message": "Parent:     d3e1c30e (BACKPORT: block: Fix where bio IO priority gets set)\nAuthor:     dongliang.cui \u003cdongliang.cui@unisoc.com\u003e\nAuthorDate: 2024-02-29 18:10:08 +0800\nCommit:     zuofa liu \u003cliuzuofa@realme.com\u003e\nCommitDate: 2024-04-25 13:35:08 +0000\n\nANDROID: TRACE: mm: export mm_filemap_* for calling in ko\n\nIn certain scenarios, we want to track the file names associated with\nfile pages in user version. So we want to export this tracepoint for\ncalling in ko.\n\nBug: 327557147\nBug: 336912811\nBug: 336946548\n\nChange-Id: I6b9a81a4ebe1f582fdc4b3967c590f5ba450d61e\nSigned-off-by: dongliang.cui \u003cdongliang.cui@unisoc.com\u003e\n(cherry picked from commit Ide181d4737a1b6479bbe1f69f5abc8eb2d842742",
       "revId": "22ee82fd30b398cf86faa5c1105c7bf67b9f6b72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d00cf61_b598048e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3409162
+      },
+      "writtenOn": "2024-04-26T04:57:11Z",
+      "side": 1,
+      "message": "ANDROID: TRACE: mm: export mm_filemap_* for calling in ko\n\nIn certain scenarios, we want to track the file names associated with\nfile pages in user version. So we want to export this tracepoint for\ncalling in ko.\n\nBug: 327557147\nBug: 336912811\nBug: 336946548\n\nChange-Id: I6b9a81a4ebe1f582fdc4b3967c590f5ba450d61e\nSigned-off-by: dongliang.cui \u003cdongliang.cui@unisoc.com\u003e\n(cherry picked from commit Ide181d4737a1b6479bbe1f69f5abc8eb2d842742)",
+      "revId": "22ee82fd30b398cf86faa5c1105c7bf67b9f6b72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
