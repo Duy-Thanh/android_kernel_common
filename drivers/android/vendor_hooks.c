@@ -211,6 +211,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_rcv_established_fast_path);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_rcv_established_slow_path);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_memcg_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_capacity_show);
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_finished);
@@ -273,3 +274,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_scan_control);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_continue_reclaim);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_async_psi_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_swapin_walk_pmd_entry);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_process_madvise);
