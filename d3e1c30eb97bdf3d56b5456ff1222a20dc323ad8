@@ -50,6 +50,23 @@
       "message": "block/blk-core.c",
       "revId": "d3e1c30eb97bdf3d56b5456ff1222a20dc323ad8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01b06fba_39350108",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3409162
+      },
+      "writtenOn": "2024-04-26T04:58:38Z",
+      "side": 1,
+      "message": "Change Info\nSubmitted\t4:29 AM\nOwner\t\nzuofa liu\nAuthor\t\nHongyu Jin\nReviewers\t\nMatthias Männich\n+2\n \nJohn Stultz\n+2\n \nHongyu Jin\n \nLint 🤖\n \nTreehugger Robot\n \nTreehugger Robot\n \nTreehugger Robot\n \nPerformance Presubmit\n \nCC\t\nBrune Melo\n \nJack\n \nTreehugger Robot\n \nRepo | Branch\tkernel/common | android13-5.15-2023-10\nSubmit Requirements\nCode-Review\t\n+2\n+2\nPresubmit-Verified\t\n+1\nOpen-Source-Licensing\tNo votes\nCode-Owners\tApproved  \nReview-Enforcement\tSatisfied\nPerformance\t\n+2\nLint\tNo votes\nTrigger Votes\nAutosubmit\n+1\nBACKPORT: block: Fix where bio IO priority gets set\n\nCommit 82b74cac2849 (\"blk-ioprio: Convert from rqos policy to direct\ncall\") pushed setting bio I/O priority down into blk_mq_submit_bio()\n-- which is too low within block core\u0027s submit_bio() because it\nskips setting I/O priority for block drivers that implement\nfops-\u003esubmit_bio() (e.g. DM, MD, etc).\n\nFix this by moving bio_set_ioprio() up from blk-mq.c to blk-core.c and\ncall it from submit_bio().  This ensures all block drivers call\nbio_set_ioprio() during initial bio submission.\n\nFixes: a78418e6a04c (\"block: Always initialize bio IO priority on submit\")\nCo-developed-by: Yibin Ding \u003cyibin.ding@unisoc.com\u003e\nSigned-off-by: Yibin Ding \u003cyibin.ding@unisoc.com\u003e\nSigned-off-by: Hongyu Jin \u003chongyu.jin@unisoc.com\u003e\nReviewed-by: Eric Biggers \u003cebiggers@google.com\u003e\nReviewed-by: Mikulas Patocka \u003cmpatocka@redhat.com\u003e\n[snitzer: revised commit header]\nSigned-off-by: Mike Snitzer \u003csnitzer@kernel.org\u003e\nReviewed-by: Ming Lei \u003cming.lei@redhat.com\u003e\nLink: https://lore.kernel.org/r/20240130202638.62600-2-snitzer@kernel.org\nSigned-off-by: Jens Axboe \u003caxboe@kernel.dk\u003e\n\nBug: 331551156\nBug: 336912811\nBug: 336946548\n(cherry picked from commit f3c89983cb4fc00be64eb0d5cbcfcdf2cacb965e)\nChange-Id: If54c45760690aea33a4d4a6eb5a56d71d404af8d\nSigned-off-by: Hongyu Jin \u003chongyu.jin@unisoc.com\u003e",
+      "revId": "d3e1c30eb97bdf3d56b5456ff1222a20dc323ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
