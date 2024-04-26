@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb18155a_1c4e3005",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T20:55:53Z",
+      "side": 1,
+      "message": "Copy description from the original patch https://android-review.googlesource.com/c/kernel/common/+/2602185",
+      "revId": "d22d20cd7f6e09bc150205831bfdd7749be94425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6fa6b53a_7b98978a",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
