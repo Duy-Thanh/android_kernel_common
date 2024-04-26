@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf667f6d_350d46f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2024-04-26T01:33:25Z",
+      "side": 1,
+      "message": "Respin Bug: b/336946548 \n(Updated respin bug ID because Oppo filed the wrong at the beginning.)",
+      "revId": "bc48e80efddb0531f331c18bde975e8bc5589443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
