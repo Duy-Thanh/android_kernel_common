@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa6b53a_7b98978a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T20:49:53Z",
+      "side": 1,
+      "message": "Add original bug: `Bug: 284059805`",
+      "revId": "d22d20cd7f6e09bc150205831bfdd7749be94425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "944ea88f_f0186613",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T20:49:53Z",
+      "side": 1,
+      "message": "Please keep the same Change-Id as the one you are cherry-picking from. In this case it should be `Change-Id: Ie4a48ae42212c056992d34a10b026b60439d0012`",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "d22d20cd7f6e09bc150205831bfdd7749be94425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
