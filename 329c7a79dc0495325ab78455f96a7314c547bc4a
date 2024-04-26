@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db486089_2fe150ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3406862
+      },
+      "writtenOn": "2024-04-26T07:50:39Z",
+      "side": 1,
+      "message": "\u003e Commit needs to contain a properly formatted Bug: or Fixes: line.\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "8da227bc_03801e8d",
+      "revId": "329c7a79dc0495325ab78455f96a7314c547bc4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18cfdcc7_f0598ee5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3406862
+      },
+      "writtenOn": "2024-04-26T07:50:39Z",
+      "side": 1,
+      "message": "\u003e Commit is not signed off by the author!\n\u003e \n\u003e Missing tag: Signed-off-by: Xiaofeng Yuan \u003cyuanxiaofeng@vivo.com\u003e\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "25fc2db7_4bf297f6",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "329c7a79dc0495325ab78455f96a7314c547bc4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

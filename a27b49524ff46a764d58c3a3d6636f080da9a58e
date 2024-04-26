@@ -16,6 +16,24 @@
       "message": "Please provide some examples of these new page states and how these flags will be used? Why can\u0027t this be submitted upstream?",
       "revId": "a27b49524ff46a764d58c3a3d6636f080da9a58e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aea160cd_cbf1df9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3406862
+      },
+      "writtenOn": "2024-04-26T07:50:39Z",
+      "side": 1,
+      "message": "We can use these pageflags to identify anonymous pages at different ZRAM compression rates. These flags will be used in conjunction with different Android application states. Therefore, I think this is not a generic modification for all Linux devices and is not suitable for upstream submission.",
+      "parentUuid": "16cd8fbc_352f7c5e",
+      "revId": "a27b49524ff46a764d58c3a3d6636f080da9a58e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
