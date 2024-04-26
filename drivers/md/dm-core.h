@@ -227,6 +227,8 @@ struct dm_table {
 #ifdef CONFIG_BLK_INLINE_ENCRYPTION
 	struct blk_crypto_profile *crypto_profile;
 #endif
+
+	ANDROID_OEM_DATA(1);
 };
 
 static inline struct dm_target *dm_table_get_target(struct dm_table *t,
