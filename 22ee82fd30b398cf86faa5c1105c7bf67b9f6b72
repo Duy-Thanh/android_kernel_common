@@ -50,6 +50,23 @@
       "message": "*    -\u003einode-\u003ei_lock\t\t(page_remove_rmap-\u003eset_page_dirty)\n *    -\u003ememcg-\u003emove_lock\t(page_remove_rmap-\u003elock_page_memcg)\n *    bdi.wb-\u003elist_lock\t\t(zap_pte_range-\u003eset_page_dirty)\n *    -\u003einode-\u003ei_lock\t\t(zap_pte_range-\u003eset_page_dirty)\n *    -\u003eprivate_lock\t\t(zap_pte_range-\u003e__set_page_dirty_buffers)\n *\n * -\u003ei_mmap_rwsem\n *   -\u003etasklist_lock            (memory_failure, collect_procs_ao)\n */\n\n/* Export tracepoints that act as a bare tracehook */\nEXPORT_TRACEPOINT_SYMBOL_GPL(mm_filemap_delete_from_page_cache);\nEXPORT_TRACEPOINT_SYMBOL_GPL(mm_filemap_add_to_page_cache);\n\nstatic void page_cache_delete(struct address_space *mapping,\n\t\t\t\t   struct page *page, void *shadow)\n{\n\tXA_STATE(xas, \u0026mapping-\u003ei_pages, page-\u003eindex);\n\tunsigned int nr \u003d 1;\n\n\tmapping_set_update(\u0026xas, mapping);\n\n\t/* hugetlb pages are represented by a single entry in the xarray */\n\tif (!PageHuge(page)) {",
       "revId": "22ee82fd30b398cf86faa5c1105c7bf67b9f6b72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c80aa91_5e792cb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3409162
+      },
+      "writtenOn": "2024-04-26T04:41:52Z",
+      "side": 1,
+      "message": "Parent:     d3e1c30e (BACKPORT: block: Fix where bio IO priority gets set)\nAuthor:     dongliang.cui \u003cdongliang.cui@unisoc.com\u003e\nAuthorDate: 2024-02-29 18:10:08 +0800\nCommit:     zuofa liu \u003cliuzuofa@realme.com\u003e\nCommitDate: 2024-04-25 13:35:08 +0000\n\nANDROID: TRACE: mm: export mm_filemap_* for calling in ko\n\nIn certain scenarios, we want to track the file names associated with\nfile pages in user version. So we want to export this tracepoint for\ncalling in ko.\n\nBug: 327557147\nBug: 336912811\nBug: 336946548\n\nChange-Id: I6b9a81a4ebe1f582fdc4b3967c590f5ba450d61e\nSigned-off-by: dongliang.cui \u003cdongliang.cui@unisoc.com\u003e\n(cherry picked from commit Ide181d4737a1b6479bbe1f69f5abc8eb2d842742",
+      "revId": "22ee82fd30b398cf86faa5c1105c7bf67b9f6b72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
