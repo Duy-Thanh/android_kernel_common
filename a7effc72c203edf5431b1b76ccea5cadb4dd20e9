@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d976299a_6dca8d42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T20:54:39Z",
+      "side": 1,
+      "message": "Copy description from https://android-review.googlesource.com/c/kernel/common/+/2601992 and add a note that you removed android_vh_madvise_pageout_swap_entry().",
+      "revId": "a7effc72c203edf5431b1b76ccea5cadb4dd20e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25c907fb_077074a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T20:54:39Z",
+      "side": 1,
+      "message": "Add `Bug: 284059805`",
+      "revId": "a7effc72c203edf5431b1b76ccea5cadb4dd20e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
