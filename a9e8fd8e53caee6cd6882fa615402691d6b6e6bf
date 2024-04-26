@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6551cb_41416d42",
+        "filename": "include/linux/pgsize_migration.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T17:24:40Z",
+      "side": 1,
+      "message": "From the code this function is used from it seems oldflags is always equal to vma-\u003evm_flags. If so, this calculation can be simpler and you don\u0027t need to pass `vma` to this function.",
+      "range": {
+        "startLine": 119,
+        "startChar": 38,
+        "endLine": 119,
+        "endChar": 51
+      },
+      "revId": "a9e8fd8e53caee6cd6882fa615402691d6b6e6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61af86da_4db87965",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-26T17:24:40Z",
+      "side": 1,
+      "message": "If you port this to 6.1 or higher please make sure to use vm_flags_set()/vm_flags_clear()",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 385,
+        "endChar": 20
+      },
+      "revId": "a9e8fd8e53caee6cd6882fa615402691d6b6e6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
