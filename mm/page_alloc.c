@@ -737,12 +737,14 @@ out:
 static inline unsigned int order_to_pindex(int migratetype, int order)
 {
 
+#ifdef CONFIG_CMA
 	/*
 	 * We shouldn't get here for MIGRATE_CMA if those pages don't
 	 * have their own pcp list. For instance, free_unref_page() sets
 	 * pcpmigratetype to MIGRATE_MOVABLE.
 	 */
 	VM_BUG_ON(!cma_has_pcplist() && migratetype == MIGRATE_CMA);
+#endif
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 	bool movable;
@@ -3085,7 +3087,9 @@ static void __free_frozen_pages(struct page *page, unsigned int order,
 			free_one_page(zone, page, pfn, order, fpi_flags);
 			return;
 		}
+#ifdef CONFIG_CMA
 		if (!cma_has_pcplist() || migratetype != MIGRATE_CMA)
+#endif
 			migratetype = MIGRATE_MOVABLE;
 	}
 
@@ -3205,7 +3209,9 @@ void free_unref_folios(struct folio_batch *folios)
 		 * to the MIGRATE_MOVABLE pcp list.
 		 */
 		if (unlikely(migratetype > MIGRATE_RECLAIMABLE)) {
+#ifdef CONFIG_CMA
 			if (!cma_has_pcplist() || migratetype != MIGRATE_CMA)
+#endif
 				migratetype = MIGRATE_MOVABLE;
 		}
 
