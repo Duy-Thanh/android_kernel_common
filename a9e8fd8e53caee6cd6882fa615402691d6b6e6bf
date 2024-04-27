@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfd9c229_459a60d2",
+        "filename": "include/linux/pgsize_migration.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-27T00:56:13Z",
+      "side": 1,
+      "message": "The oldflag is initialized to vma-\u003evm_flags before the split. If a split happens, split_pad_vma() may have modified/removed the padding flags (in vma-\u003evm_flags).\n\nWe can remove it since newflags is also derived from the original vma-\u003evm_flags. also removed split as well.",
+      "parentUuid": "5e6551cb_41416d42",
+      "range": {
+        "startLine": 119,
+        "startChar": 38,
+        "endLine": 119,
+        "endChar": 51
+      },
+      "revId": "a9e8fd8e53caee6cd6882fa615402691d6b6e6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61af86da_4db87965",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-26T17:24:40Z",
       "side": 1,
       "message": "If you port this to 6.1 or higher please make sure to use vm_flags_set()/vm_flags_clear()",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 385,
+        "endChar": 20
+      },
+      "revId": "a9e8fd8e53caee6cd6882fa615402691d6b6e6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f16501_464c31a3",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-27T00:56:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "61af86da_4db87965",
       "range": {
         "startLine": 385,
         "startChar": 2,
