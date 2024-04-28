@@ -110,9 +110,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
+<<<<<<< HEAD   (af928dda062147e35a1068a058c137aa2ed3f370 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_shmem_get_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_write_timeout_estab_retrans);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_format_check);
+||||||| BASE   (3d19b0b8ad1a3afbd7ee65ccdfaf89bec3c67989 ANDROID: vendor_hooks: add hook to perform targeted memory m)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_show_task);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_process_madvise_begin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_process_madvise_iter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_show_task);
+>>>>>>> CHANGE (0923bde922b4f6146150bac0d5b98827f9d4984b ANDROID: vendor_hooks: add hook to optimize the madvise proc)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks_dn);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
