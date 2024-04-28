@@ -105,6 +105,7 @@
   __traceiter_android_vh_alter_rwsem_list_add
   __traceiter_android_vh_binder_proc_transaction_finish
   __traceiter_android_vh_binder_restore_priority
+  __traceiter_android_vh_bio_ioprio_acct
   __traceiter_android_vh_check_uninterruptible_tasks
   __traceiter_android_vh_check_uninterruptible_tasks_dn
   __traceiter_android_vh_cpu_idle_enter
@@ -175,6 +176,7 @@
   __tracepoint_android_vh_alter_rwsem_list_add
   __tracepoint_android_vh_binder_proc_transaction_finish
   __tracepoint_android_vh_binder_restore_priority
+  __tracepoint_android_vh_bio_ioprio_acct
   __tracepoint_android_vh_check_uninterruptible_tasks
   __tracepoint_android_vh_check_uninterruptible_tasks_dn
   __tracepoint_android_vh_cpu_idle_enter
