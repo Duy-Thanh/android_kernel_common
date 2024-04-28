@@ -123,6 +123,24 @@
       "parentUuid": "bcd8374b_ae894ac6",
       "revId": "9ceb3e679b30d212134b432e394abd5c20c62a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e947848_f61a5061",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3413627
+      },
+      "writtenOn": "2024-04-28T07:31:57Z",
+      "side": 1,
+      "message": "I have added these symbols in a separate commit. Please review again:\nhttps://android-review.googlesource.com/c/kernel/common/+/3064603\nThanks!",
+      "parentUuid": "78048ca4_3b46d09c",
+      "revId": "9ceb3e679b30d212134b432e394abd5c20c62a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
