@@ -64,6 +64,52 @@ DECLARE_HOOK(android_vh_slab_alloc_node,
 DECLARE_HOOK(android_vh_slab_free,
 	TP_PROTO(unsigned long addr, struct kmem_cache *s),
 	TP_ARGS(addr, s));
+<<<<<<< HEAD   (c79ee7 ANDROID: Load cc_library from rules_cc.)
+||||||| BASE
+DECLARE_HOOK(android_vh_meminfo_cache_adjust,
+	TP_PROTO(unsigned long *cached),
+	TP_ARGS(cached));
+DECLARE_HOOK(android_vh_si_mem_available_adjust,
+	TP_PROTO(unsigned long *available),
+	TP_ARGS(available));
+DECLARE_HOOK(android_vh_si_meminfo_adjust,
+	TP_PROTO(unsigned long *totalram, unsigned long *freeram),
+	TP_ARGS(totalram, freeram));
+DECLARE_HOOK(android_vh_slab_folio_alloced,
+	TP_PROTO(unsigned int order, gfp_t flags),
+	TP_ARGS(order, flags));
+DECLARE_HOOK(android_vh_kmalloc_large_alloced,
+	TP_PROTO(struct page *page, unsigned int order, gfp_t flags),
+	TP_ARGS(page, order, flags));
+DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,
+	TP_PROTO(struct inode *inode),
+	TP_ARGS(inode), 1);
+=======
+DECLARE_HOOK(android_vh_meminfo_cache_adjust,
+	TP_PROTO(unsigned long *cached),
+	TP_ARGS(cached));
+DECLARE_HOOK(android_vh_si_mem_available_adjust,
+	TP_PROTO(unsigned long *available),
+	TP_ARGS(available));
+DECLARE_HOOK(android_vh_si_meminfo_adjust,
+	TP_PROTO(unsigned long *totalram, unsigned long *freeram),
+	TP_ARGS(totalram, freeram));
+DECLARE_HOOK(android_vh_slab_folio_alloced,
+	TP_PROTO(unsigned int order, gfp_t flags),
+	TP_ARGS(order, flags));
+DECLARE_HOOK(android_vh_process_madvise_begin,
+	TP_PROTO(struct task_struct *task, int behavior),
+	TP_ARGS(task, behavior));
+DECLARE_HOOK(android_vh_process_madvise_iter,
+	TP_PROTO(struct task_struct *task, int behavior, ssize_t *ret),
+	TP_ARGS(task, behavior, ret));
+DECLARE_HOOK(android_vh_kmalloc_large_alloced,
+	TP_PROTO(struct page *page, unsigned int order, gfp_t flags),
+	TP_ARGS(page, order, flags));
+DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,
+	TP_PROTO(struct inode *inode),
+	TP_ARGS(inode), 1);
+>>>>>>> CHANGE (051746 ANDROID: vendor_hooks: add hook to optimize the madvise proc)
 DECLARE_HOOK(android_vh_test_clear_look_around_ref,
 	TP_PROTO(struct page *page),
 	TP_ARGS(page));
