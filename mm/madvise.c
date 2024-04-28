@@ -32,6 +32,7 @@
 #include <linux/swapops.h>
 #include <linux/shmem_fs.h>
 #include <linux/mmu_notifier.h>
+#include <trace/hooks/mm.h>
 
 #include <asm/tlb.h>
 
@@ -2106,7 +2107,37 @@ SYSCALL_DEFINE5(process_madvise, int, pidfd, const struct iovec __user *, vec,
 		goto release_mm;
 	}
 
+<<<<<<< HEAD   (a527dc6296086cbd0e329c8881d5fd2e1e5b0222 ANDROID: ABI: add initial symbol list for exynos)
 	ret = vector_madvise(mm, &iter, behavior);
+||||||| BASE   (3d19b0b8ad1a3afbd7ee65ccdfaf89bec3c67989 ANDROID: vendor_hooks: add hook to perform targeted memory m)
+	total_len = iov_iter_count(&iter);
+
+	while (iov_iter_count(&iter)) {
+		ret = do_madvise(mm, (unsigned long)iter_iov_addr(&iter),
+					iter_iov_len(&iter), behavior);
+		if (ret < 0)
+			break;
+		iov_iter_advance(&iter, iter_iov_len(&iter));
+	}
+
+	ret = (total_len - iov_iter_count(&iter)) ? : ret;
+=======
+	total_len = iov_iter_count(&iter);
+	trace_android_vh_process_madvise_begin(task, behavior);
+
+	while (iov_iter_count(&iter)) {
+		trace_android_vh_process_madvise_iter(task, behavior, &ret);
+		if (ret < 0)
+			break;
+		ret = do_madvise(mm, (unsigned long)iter_iov_addr(&iter),
+					iter_iov_len(&iter), behavior);
+		if (ret < 0)
+			break;
+		iov_iter_advance(&iter, iter_iov_len(&iter));
+	}
+
+	ret = (total_len - iov_iter_count(&iter)) ? : ret;
+>>>>>>> CHANGE (0923bde922b4f6146150bac0d5b98827f9d4984b ANDROID: vendor_hooks: add hook to optimize the madvise proc)
 
 release_mm:
 	mmput(mm);
