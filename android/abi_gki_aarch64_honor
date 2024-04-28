@@ -30,6 +30,10 @@
   sysctl_max_skb_frags
   find_vm_area
   profile_event_unregister
+  mlock_folio
+  munlock_folio
+  walk_page_vma
+  read_swap_cache_async
   __tracepoint_android_vh_do_shrink_slab
   __traceiter_android_vh_do_shrink_slab
   __tracepoint_android_vh_shrink_slab_bypass
