@@ -56,6 +56,30 @@
       },
       "revId": "91adbfe6b62def07c89fb570a65d7abe498431b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d75fc300_fa35e938",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 3123981
+      },
+      "writtenOn": "2024-04-28T06:33:09Z",
+      "side": 1,
+      "message": "Hi,\nWhich interface can be used to direcyly write the block device with blkdev_get_by_path？\nPreviously using filp_open_block, we can use file-\u003ef_open-\u003ewrite_iter to achivev this function.",
+      "parentUuid": "e7dc74cf_14d3c17f",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 17
+      },
+      "revId": "91adbfe6b62def07c89fb570a65d7abe498431b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
