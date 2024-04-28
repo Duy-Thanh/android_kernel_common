@@ -2879,6 +2879,11 @@ pointer_reference {
   pointee_type_id: 0x07272add
 }
 pointer_reference {
+  id: 0x0b70fc18
+  kind: POINTER
+  pointee_type_id: 0x078316ff
+}
+pointer_reference {
   id: 0x0b716c32
   kind: POINTER
   pointee_type_id: 0x07855656
@@ -305939,6 +305944,12 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x9d3b1e84
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x0b70fc18
+}
+function {
   id: 0x9d3b60fc
   return_type_id: 0x6720d32f
   parameter_id: 0x01c5a749
@@ -366813,6 +366824,15 @@ elf_symbol {
   full_name: "udp_tunnel_xmit_skb"
 }
 elf_symbol {
+  id: 0x3fa12248
+  name: "ufshcd_alloc_host"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2f2c24ce
+  type_id: 0x9d3b1e84
+  full_name: "ufshcd_alloc_host"
+}
+elf_symbol {
   id: 0x5ba31e17
   name: "ufshcd_auto_hibern8_update"
   is_defined: true
@@ -366847,6 +366867,15 @@ elf_symbol {
   crc: 0x24372600
   type_id: 0x9c1de0b0
   full_name: "ufshcd_config_pwr_mode"
+}
+elf_symbol {
+  id: 0xca76e0b2
+  name: "ufshcd_dealloc_host"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x673dbdc3
+  type_id: 0x1178942c
+  full_name: "ufshcd_dealloc_host"
 }
 elf_symbol {
   id: 0x536defb8
@@ -378818,10 +378847,12 @@ interface {
   symbol_id: 0x83627eaa
   symbol_id: 0x7f7d27b4
   symbol_id: 0x674efb6f
+  symbol_id: 0x3fa12248
   symbol_id: 0x5ba31e17
   symbol_id: 0x3b41d1e4
   symbol_id: 0xf8879a71
   symbol_id: 0xa45d6674
+  symbol_id: 0xca76e0b2
   symbol_id: 0x536defb8
   symbol_id: 0x60b0cfc9
   symbol_id: 0x583a63e9
