@@ -1165,6 +1165,33 @@ void __weak module_arch_freeing_init(struct module *mod)
 {
 }
 
+#ifdef CONFIG_MODULE_LIST_SNAPSHOT
+static bool module_list_snapshotted;
+bool is_module_list_snapshotted(void)
+{
+	return module_list_snapshotted;
+}
+
+static void module_snapshot_set(bool enable_snapshot)
+{
+	struct module *mod;
+
+	list_for_each_entry_rcu(mod, &modules, list)
+		mod->snapshotted = enable_snapshot;
+}
+
+void module_list_do_snapshot(bool do_snapshot)
+{
+	module_list_snapshotted = false;
+	if (do_snapshot)
+		print_modules();
+	mutex_lock(&module_mutex);
+	module_snapshot_set(do_snapshot);
+	module_list_snapshotted = do_snapshot;
+	mutex_unlock(&module_mutex);
+}
+#endif
+
 /* Free a module, remove from lists, etc. */
 static void free_module(struct module *mod)
 {
@@ -1202,6 +1229,9 @@ static void free_module(struct module *mod)
 	mod_tree_remove(mod);
 	/* Remove this module from bug list, this uses list_del_rcu */
 	module_bug_cleanup(mod);
+#ifdef CONFIG_MODULE_LIST_SNAPSHOT
+	module_snapshot_set(false);
+#endif
 	/* Wait for RCU-sched synchronizing before releasing mod->list and buglist. */
 	synchronize_rcu();
 	if (try_add_tainted_module(mod))
@@ -3172,9 +3202,19 @@ void print_modules(void)
 	printk(KERN_DEFAULT "Modules linked in:");
 	/* Most callers should already have preempt disabled, but make sure */
 	preempt_disable();
+
+#ifdef CONFIG_MODULE_LIST_SNAPSHOT
+	if (module_list_snapshotted)
+		pr_cont(" as snapshotted plus");
+#endif
+
 	list_for_each_entry_rcu(mod, &modules, list) {
 		if (mod->state == MODULE_STATE_UNFORMED)
 			continue;
+#ifdef CONFIG_MODULE_LIST_SNAPSHOT
+		if (mod->snapshotted)
+			continue;
+#endif
 		pr_cont(" %s%s", mod->name, module_flags(mod, buf, true));
 	}
 

@@ -550,6 +550,9 @@ struct module {
 	struct error_injection_entry *ei_funcs;
 	unsigned int num_ei_funcs;
 #endif
+#ifdef CONFIG_MODULE_LIST_SNAPSHOT
+	bool snapshotted;
+#endif
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
@@ -899,5 +902,14 @@ static inline int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
 	return -EOPNOTSUPP;
 }
 #endif  /* CONFIG_MODULES && CONFIG_KALLSYMS */
-
+#ifdef CONFIG_MODULE_LIST_SNAPSHOT
+void module_list_do_snapshot(bool do_snapshot);
+bool is_module_list_snapshotted(void);
+#else
+static inline void module_list_do_snapshot(bool do_snapshot) {}
+static inline bool is_module_list_snapshotted(void)
+{
+	return false;
+}
+#endif /* CONFIG_MODULE_LIST_SNAPSHOT */
 #endif /* _LINUX_MODULE_H */

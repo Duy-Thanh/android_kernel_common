@@ -59,6 +59,19 @@ config MODULE_UNLOAD_TAINT_TRACKING
 	  page (see bad_page()), the aforementioned details are also
 	  shown. If unsure, say N.
 
+config MODULE_LIST_SNAPSHOT
+	bool "Module list snapshotting"
+	help
+	  This option adds a sysctl, kernel.module_list_snapshot.
+	  When written with a non-zero value, the sysctl prints the list
+	  of loaded kernel modules to the kernel log.
+	  Later calls to print_modules(), for example in warnings and panics,
+	  will only print modules loaded since the sysctl was written.
+	  Unloading a module or writing a non-zero value to the sysctl resets
+	  the snapshot.
+	  This is useful to improve the clarity of module list messages
+	  on systems with a large number of commonly loaded modules.
+
 config MODVERSIONS
 	bool "Module versioning support"
 	help

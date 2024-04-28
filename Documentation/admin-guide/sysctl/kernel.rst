@@ -531,6 +531,16 @@ in an otherwise modular kernel.  This toggle defaults to off
 neither loaded nor unloaded, and the toggle cannot be set back
 to false.  Generally used with the `kexec_load_disabled`_ toggle.
 
+module_list_snapshot
+====================
+
+When written with a non-zero value, the sysctl prints the list
+of loaded kernel modules to the kernel log.
+
+Later calls to print_modules(), for example in warnings and panics,
+will only print modules loaded since the sysctl was written.
+Unloading a module or writing a non-zero value to the sysctl resets
+the snapshot.
 
 .. _msgmni:
 

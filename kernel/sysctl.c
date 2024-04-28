@@ -1040,6 +1040,26 @@ static int sysrq_sysctl_handler(struct ctl_table *table, int write,
 }
 #endif
 
+#ifdef CONFIG_MODULE_LIST_SNAPSHOT
+static int module_list_snapshot_sysctl_handler(struct ctl_table *table, int write,
+				void *buffer, size_t *lenp, loff_t *ppos)
+{
+	int ret, do_snapshot;
+
+	do_snapshot = is_module_list_snapshotted();
+
+	ret = __do_proc_dointvec(&do_snapshot, table, write, buffer,
+			       lenp, ppos, NULL, NULL);
+	if (ret || !write)
+		return ret;
+
+	if (write)
+		module_list_do_snapshot(do_snapshot);
+
+	return ret;
+}
+
+#endif
 static int __do_proc_doulongvec_minmax(void *data, struct ctl_table *table,
 		int write, void *buffer, size_t *lenp, loff_t *ppos,
 		unsigned long convmul, unsigned long convdiv)
@@ -1782,6 +1802,15 @@ static struct ctl_table kern_table[] = {
 		.proc_handler	= proc_dointvec_minmax,
 		.extra1		= SYSCTL_ONE,
 		.extra2		= SYSCTL_ONE,
+	},
+#endif
+#ifdef CONFIG_MODULE_LIST_SNAPSHOT
+	{
+		.procname	= "module_list_snapshot",
+		.data		= NULL,
+		.maxlen		= sizeof(int),
+		.mode		= 0644,
+		.proc_handler	= module_list_snapshot_sysctl_handler,
 	},
 #endif
 #ifdef CONFIG_UEVENT_HELPER
