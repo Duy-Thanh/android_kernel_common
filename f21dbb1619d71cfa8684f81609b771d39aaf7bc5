@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8540728b_fa7ae13f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-04-29T10:11:02Z",
+      "side": 1,
+      "message": "hold, wait for aosp/3060983 to resolve",
+      "revId": "f21dbb1619d71cfa8684f81609b771d39aaf7bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d5378c5_233998e3",
         "filename": "include/uapi/linux/ioprio.h",
         "patchSetId": 2
