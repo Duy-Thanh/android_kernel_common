@@ -16,6 +16,24 @@
       "message": "Please always submit new apis and kernel changes upstream first.\n\nThat being said, I do NOT think this is a good idea at all, as it will confuse the heck out of developers reading kernel log messages, and allow users to \"hide\" their out-of-tree modules from the community, which is not a good idea for a huge number of reasons.",
       "revId": "0d7ec12ce47aa8f699328990ef55d75ad50a3896",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78229b83_9de09542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1247518
+      },
+      "writtenOn": "2024-04-29T06:58:02Z",
+      "side": 1,
+      "message": "Thanks for the feedback.  barring any improvement suggestions I\u0027ll send it upstream and prepare to get flamed.\nThe intent is not to hide out of tree module lists, it\u0027s to improve signal near errors.  Oddly, module list is only printed in warnings and watchdogs but not panics.  Additionally, the positioning of the module list was moved to this position in 2020.\nOpen to suggestions on how we can improve this, but a giant mess of module names in the middle of warnings, watchdogs and stack traces is a challenge for developers seeking to improve linux stability on our production linux systems.",
+      "parentUuid": "979103b5_9a632ee3",
+      "revId": "0d7ec12ce47aa8f699328990ef55d75ad50a3896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
