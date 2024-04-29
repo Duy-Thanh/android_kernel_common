@@ -56,13 +56,22 @@ static struct vdso_info
 } vdso_info;
 
 /* Straight from the ELF specification. */
-static unsigned long elf_hash(const unsigned char *name)
+static unsigned long elf_hash(const char *name)
 {
 	unsigned long h = 0, g;
-	while (*name)
+	const unsigned char *s;
+
+	s = (const unsigned char *) name;
+	while (*s)
 	{
+<<<<<<< PATCH SET (09b0c6 FROMLIST: selftests/vDSO: change elf_hash parameter to signe)
+		h = (h << 4) + *s++;
+		g = h & 0xf0000000;
+		if (h)
+=======
 		h = (h << 4) + *name++;
 		if (g = h & 0xf0000000)
+>>>>>>> BASE      (ddc5d8 ANDROID: GKI: Update QCOM symbol list)
 			h ^= g >> 24;
 		h &= ~g;
 	}
