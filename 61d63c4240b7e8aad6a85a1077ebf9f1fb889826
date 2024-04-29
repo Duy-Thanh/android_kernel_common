@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000076190156",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3065547?revision\u003d2",
+      "key": {
+        "uuid": "4f47e99b_f9531d23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-29T19:39:15Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/24cc65e890d72f0b721b6948a3a71069e9155886).\n\n```\n      ## arch/arm64/configs/gki_defconfig ##\n    -@@ arch/arm64/configs/gki_defconfig: CONFIG_CMDLINE_EXTEND\u003dy\n    +@@ arch/arm64/configs/gki_defconfig: CONFIG_CMDLINE\u003d\"console\u003dttynull stack_depot_disable\u003don cgroup_disable\u003dpressure k\n    + CONFIG_PM_WAKELOCKS\u003dy\n    + CONFIG_PM_WAKELOCKS_LIMIT\u003d0\n    + # CONFIG_PM_WAKELOCKS_GC is not set\n    ++CONFIG_PM_DEBUG\u003dy\n    ++CONFIG_PM_ADVANCED_DEBUG\u003dy\n    + CONFIG_ENERGY_MODEL\u003dy\n    + CONFIG_CPU_IDLE\u003dy\n    + CONFIG_CPU_IDLE_GOV_MENU\u003dy\n    +\n    + ## arch/riscv/configs/gki_defconfig ##\n    +@@ arch/riscv/configs/gki_defconfig: CONFIG_CMDLINE\u003d\"console\u003dttynull stack_depot_disable\u003don cgroup_disable\u003dpressure k\n      CONFIG_PM_WAKELOCKS\u003dy\n      CONFIG_PM_WAKELOCKS_LIMIT\u003d0\n      # CONFIG_PM_WAKELOCKS_GC is not set\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "61d63c4240b7e8aad6a85a1077ebf9f1fb889826",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
