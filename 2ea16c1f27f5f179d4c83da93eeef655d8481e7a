@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc582af3_a574dd8c",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-29T20:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f470d83_205da3e4",
+      "range": {
+        "startLine": 351,
+        "startChar": 0,
+        "endLine": 356,
+        "endChar": 9
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47b78f3c_6e45da4d",
@@ -84,6 +108,30 @@
       "writtenOn": "2024-04-29T19:11:59Z",
       "side": 1,
       "message": "nit: vma-\u003evm_flags \u0026\u003d ~VM_PAD_MASK;",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 116,
+        "endChar": 46
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19a53493_4c27dfca",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-29T20:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47b78f3c_6e45da4d",
       "range": {
         "startLine": 116,
         "startChar": 1,
@@ -164,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae6416a5_6f17295c",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-29T20:40:22Z",
+      "side": 1,
+      "message": "Yes you\u0027re correct. so we do nothing.",
+      "parentUuid": "52d3be15_49e262c2",
+      "range": {
+        "startLine": 371,
+        "startChar": 1,
+        "endLine": 371,
+        "endChar": 19
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c870bb1_c75f2a79",
@@ -187,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66e75537_f3155747",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-29T20:40:22Z",
+      "side": 1,
+      "message": "We don\u0027t need it explicitly set because the flags are also copied from the old vma to newflags in the callers (the lock/prot flags are masked out).\n\n```c\nnewflags |\u003d (vma-\u003evm_flags \u0026 ~mask_old_flags);\n```\n\nSet it here for readability.",
+      "parentUuid": "4c870bb1_c75f2a79",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 385,
+        "endChar": 34
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22ce4bbd_6c961313",
@@ -200,6 +296,30 @@
       "writtenOn": "2024-04-29T19:11:59Z",
       "side": 1,
       "message": "I think you need to add:\n```\nif (second !\u003d vma) vma_set_pad_pages(second, nr_pad_pages);\n```",
+      "range": {
+        "startLine": 390,
+        "startChar": 2,
+        "endLine": 390,
+        "endChar": 34
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "493a3f3b_66e4ac47",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-29T20:40:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "22ce4bbd_6c961313",
       "range": {
         "startLine": 390,
         "startChar": 2,
