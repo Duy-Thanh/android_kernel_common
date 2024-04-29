@@ -34,6 +34,24 @@
       "parentUuid": "979103b5_9a632ee3",
       "revId": "0d7ec12ce47aa8f699328990ef55d75ad50a3896",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58a6b213_47f9fc6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-29T07:06:43Z",
+      "side": 1,
+      "message": "I fail to see how restricting the list of module sis going to \"improve stability\" here, as you are reducing the amount of information provided to the person getting the report, not increasing it.",
+      "parentUuid": "78229b83_9de09542",
+      "revId": "0d7ec12ce47aa8f699328990ef55d75ad50a3896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
