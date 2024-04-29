@@ -16,6 +16,24 @@
       "message": "Why isn\u0027t this either a vendor module or a GKI module? No partner needs it but ARCVM",
       "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165d3a25_376bc838",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2024-04-29T19:44:42Z",
+      "side": 1,
+      "message": "Sorry I should have included that in the commit description.\n\nThe problem with having it as a vendor module is that it requires kernel_read and kernel_write which aren\u0027t allowed to be added to the KMI. Does having it as a GKI module work instead?\n\nI sent out an email asking what the recommended workaround was and was told to build it into the driver image, but please let me know if there\u0027s a better way!",
+      "parentUuid": "c15dd7f5_87cf8429",
+      "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
