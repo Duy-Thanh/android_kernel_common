@@ -50,6 +50,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f470d83_205da3e4",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-29T19:11:59Z",
+      "side": 1,
+      "message": "nit: why not simply:\n```\n\tif (vma_pages(vma))\n\t\tshow_map_vma(m, vma);\n```",
+      "range": {
+        "startLine": 351,
+        "startChar": 0,
+        "endLine": 356,
+        "endChar": 9
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47b78f3c_6e45da4d",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-29T19:11:59Z",
+      "side": 1,
+      "message": "nit: vma-\u003evm_flags \u0026\u003d ~VM_PAD_MASK;",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 116,
+        "endChar": 46
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "62dd31da_dff16506",
         "filename": "mm/pgsize_migration.c",
         "patchSetId": 5
@@ -90,6 +136,75 @@
         "startChar": 6,
         "endLine": 344,
         "endChar": 39
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d3be15_49e262c2",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-29T19:11:59Z",
+      "side": 1,
+      "message": "So, this is the case when original VMA has no padding, so after split there will be no padding as well. Correct?",
+      "range": {
+        "startLine": 371,
+        "startChar": 1,
+        "endLine": 371,
+        "endChar": 19
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c870bb1_c75f2a79",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-29T19:11:59Z",
+      "side": 1,
+      "message": "I think you need to add:\n```\nif (second !\u003d vma) vma_set_pad_pages(second, nr_pad_pages);\n```",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 385,
+        "endChar": 34
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ce4bbd_6c961313",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-29T19:11:59Z",
+      "side": 1,
+      "message": "I think you need to add:\n```\nif (second !\u003d vma) vma_set_pad_pages(second, nr_pad_pages);\n```",
+      "range": {
+        "startLine": 390,
+        "startChar": 2,
+        "endLine": 390,
+        "endChar": 34
       },
       "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
