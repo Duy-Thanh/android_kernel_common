@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6667bd0d_4d050582",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-29T18:39:21Z",
+      "side": 1,
+      "message": "It can happen when mprotect / mlock changes the vma flags. (There are other cases too but we don\u0027t need to handle for linker context). \n\nWe can\u0027t avoid the split since mentioned syscalls depend on this. The padding flags only need updating for correct /proc/*/[s]maps output.",
+      "parentUuid": "8624ec65_35482bc8",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 56
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62dd31da_dff16506",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-29T18:07:39Z",
       "side": 1,
       "message": "can we have this case?\n\n| DDDP | -\u003e | DDD | P |\n\nIf yes, should we handle it too?",
+      "range": {
+        "startLine": 344,
+        "startChar": 6,
+        "endLine": 344,
+        "endChar": 39
+      },
+      "revId": "2ea16c1f27f5f179d4c83da93eeef655d8481e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "203923d0_d014976b",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-29T18:39:21Z",
+      "side": 1,
+      "message": "Yeah but it\u0027s the same as this case 1. (4 pages each was only for example).",
+      "parentUuid": "62dd31da_dff16506",
       "range": {
         "startLine": 344,
         "startChar": 6,
