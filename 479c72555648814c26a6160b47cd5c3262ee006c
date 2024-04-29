@@ -52,6 +52,24 @@
       "parentUuid": "165d3a25_376bc838",
       "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c421bcb_c972e91e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2024-04-29T22:00:33Z",
+      "side": 1,
+      "message": "Hi: @tkjos@google.com \n\nThis is `13-5.15` where we don\u0027t have the tooling for GKI module symbol protection on this kernel and only GKI modules on these kernel are `zram` and `zsmalloc` which are unprotected. We can have this as a unprotected module but better to have it in GKI if it\u0027s not an issue.\n\nWe can add this as protected GKI module for `android14+` if required.",
+      "parentUuid": "f492f6de_48400eb3",
+      "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
