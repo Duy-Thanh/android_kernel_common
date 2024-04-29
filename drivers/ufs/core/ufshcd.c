@@ -2814,7 +2814,7 @@ ufshcd_prepare_req_desc_hdr(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
  * @upiu_flags: flags
  */
 static void ufshcd_prepare_utp_scsi_cmd_upiu(struct scsi_cmnd *cmd,
-					     u8 upiu_flags)
+					     u8 upiu_flags, u8 iid)
 {
 	struct ufshcd_lrb *lrbp = scsi_cmd_priv(cmd);
 	const int tag = scsi_cmd_to_rq(cmd)->tag;
@@ -2826,6 +2826,7 @@ static void ufshcd_prepare_utp_scsi_cmd_upiu(struct scsi_cmnd *cmd,
 		.flags = upiu_flags,
 		.lun = lrbp->lun,
 		.task_tag = tag,
+		.iid = iid,
 		.command_set_type = UPIU_COMMAND_SET_TYPE_SCSI,
 	};
 
@@ -2846,7 +2847,7 @@ static void ufshcd_prepare_utp_scsi_cmd_upiu(struct scsi_cmnd *cmd,
  * @upiu_flags: flags
  */
 static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
-				struct scsi_cmnd *cmd, u8 upiu_flags)
+				struct scsi_cmnd *cmd, u8 upiu_flags, u8 iid)
 {
 	struct ufshcd_lrb *lrbp = scsi_cmd_priv(cmd);
 	struct utp_upiu_req *ucd_req_ptr = lrbp->ucd_req_ptr;
@@ -2860,6 +2861,7 @@ static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
 		.flags = upiu_flags,
 		.lun = lrbp->lun,
 		.task_tag = tag,
+		.iid = iid,
 		.query_function = query->request.query_func,
 		/* Data segment length only need for WRITE_DESC */
 		.data_segment_length =
@@ -2878,7 +2880,7 @@ static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
 		memcpy(ucd_req_ptr + 1, query->descriptor, len);
 }
 
-static inline void ufshcd_prepare_utp_nop_upiu(struct scsi_cmnd *cmd)
+static inline void ufshcd_prepare_utp_nop_upiu(struct scsi_cmnd *cmd, u8 iid)
 {
 	struct ufshcd_lrb *lrbp = scsi_cmd_priv(cmd);
 	struct utp_upiu_req *ucd_req_ptr = lrbp->ucd_req_ptr;
@@ -2889,6 +2891,7 @@ static inline void ufshcd_prepare_utp_nop_upiu(struct scsi_cmnd *cmd)
 	ucd_req_ptr->header = (struct utp_upiu_header){
 		.transaction_code = UPIU_TRANSACTION_NOP_OUT,
 		.task_tag = tag,
+		.iid = iid,
 	};
 }
 
@@ -2904,15 +2907,16 @@ static int ufshcd_compose_devman_upiu(struct ufs_hba *hba,
 				      struct scsi_cmnd *cmd)
 {
 	struct ufshcd_lrb *lrbp = scsi_cmd_priv(cmd);
+	u8 iid = !!(hba->android_quirks & UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE);
 	u8 upiu_flags;
 	int ret = 0;
 
 	ufshcd_prepare_req_desc_hdr(hba, lrbp, &upiu_flags, DMA_NONE, 0);
 
 	if (hba->dev_cmd.type == DEV_CMD_TYPE_QUERY)
-		ufshcd_prepare_utp_query_req_upiu(hba, cmd, upiu_flags);
+		ufshcd_prepare_utp_query_req_upiu(hba, cmd, upiu_flags, iid);
 	else if (hba->dev_cmd.type == DEV_CMD_TYPE_NOP)
-		ufshcd_prepare_utp_nop_upiu(cmd);
+		ufshcd_prepare_utp_nop_upiu(cmd, iid);
 	else
 		ret = -EINVAL;
 
@@ -2938,7 +2942,8 @@ static void ufshcd_comp_scsi_upiu(struct ufs_hba *hba, struct scsi_cmnd *cmd)
 				    cmd->sc_data_direction, 0);
 	if (ioprio_class == IOPRIO_CLASS_RT)
 		upiu_flags |= UPIU_CMD_FLAGS_CP;
-	ufshcd_prepare_utp_scsi_cmd_upiu(cmd, upiu_flags);
+	ufshcd_prepare_utp_scsi_cmd_upiu(cmd, upiu_flags,
+		!!(hba->android_quirks & UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE));
 }
 
 static void ufshcd_init_lrb(struct ufs_hba *hba, struct scsi_cmnd *cmd)
