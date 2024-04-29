@@ -34,6 +34,24 @@
       "parentUuid": "c15dd7f5_87cf8429",
       "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f492f6de_48400eb3",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-29T20:00:01Z",
+      "side": 1,
+      "message": "Yes, this is a good reason to make it a GKI module. See https://source.android.com/docs/core/architecture/kernel/convert-or-add for details. If you have issues, reach out to @ramjiyani@google.com",
+      "parentUuid": "165d3a25_376bc838",
+      "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
