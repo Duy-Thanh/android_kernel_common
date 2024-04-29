@@ -52,6 +52,69 @@
       "parentUuid": "78229b83_9de09542",
       "revId": "0d7ec12ce47aa8f699328990ef55d75ad50a3896",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9d94882_5af60220",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-29T07:08:40Z",
+      "side": 1,
+      "message": "Minor review comments on how to write better kernel code.",
+      "revId": "0d7ec12ce47aa8f699328990ef55d75ad50a3896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b85a95_22ffde5f",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-29T07:08:40Z",
+      "side": 1,
+      "message": "this does not provide a hint as to what is happening here, you now need to go look up what the boolean means 😞",
+      "range": {
+        "startLine": 1233,
+        "startChar": 21,
+        "endLine": 1233,
+        "endChar": 26
+      },
+      "revId": "0d7ec12ce47aa8f699328990ef55d75ad50a3896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ca19a57_9527e808",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3206,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-29T07:08:40Z",
+      "side": 1,
+      "message": "nit, no #ifdef in c code, put the #ifdef all in one place to prevent this type of style, it\u0027s not maintainable over time.",
+      "range": {
+        "startLine": 3206,
+        "startChar": 0,
+        "endLine": 3206,
+        "endChar": 34
+      },
+      "revId": "0d7ec12ce47aa8f699328990ef55d75ad50a3896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
