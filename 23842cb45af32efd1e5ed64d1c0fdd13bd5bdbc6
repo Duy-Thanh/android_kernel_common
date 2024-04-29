@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000076188324",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3065547?revision\u003d1",
+      "key": {
+        "uuid": "b7958c4c_69ba0c75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-29T19:31:40Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/24cc65e890d72f0b721b6948a3a71069e9155886).\n\n```\n      ## arch/arm64/configs/gki_defconfig ##\n    -@@ arch/arm64/configs/gki_defconfig: CONFIG_CMDLINE_EXTEND\u003dy\n    +@@ arch/arm64/configs/gki_defconfig: CONFIG_CMDLINE\u003d\"console\u003dttynull stack_depot_disable\u003don cgroup_disable\u003dpressure k\n      CONFIG_PM_WAKELOCKS\u003dy\n      CONFIG_PM_WAKELOCKS_LIMIT\u003d0\n      # CONFIG_PM_WAKELOCKS_GC is not set\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "23842cb45af32efd1e5ed64d1c0fdd13bd5bdbc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
