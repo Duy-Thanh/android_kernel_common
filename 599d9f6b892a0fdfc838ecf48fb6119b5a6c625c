@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbceef3f_e71fb333",
+        "filename": "mm/mlock.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-29T07:11:10Z",
+      "side": 1,
+      "message": "these are not exported and can not be accessed by modules, sorry.  This is not going to work at all with the ddk.",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 33
+      },
+      "revId": "599d9f6b892a0fdfc838ecf48fb6119b5a6c625c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
