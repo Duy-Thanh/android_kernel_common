@@ -6,6 +6,7 @@
  */
 
 #include <linux/cfi.h>
+#include <trace/hooks/security.h>
 
 enum bug_trap_type report_cfi_failure(struct pt_regs *regs, unsigned long addr,
 				      unsigned long *target, u32 type)
@@ -16,6 +17,8 @@ enum bug_trap_type report_cfi_failure(struct pt_regs *regs, unsigned long addr,
 	else
 		pr_err("CFI failure at %pS (no target information)\n",
 		       (void *)addr);
+
+	trace_android_vh_security_audit_log(0, 0, false, "", *target, addr);
 
 	if (IS_ENABLED(CONFIG_CFI_PERMISSIVE)) {
 		__warn(NULL, 0, (void *)addr, 0, regs, NULL);
