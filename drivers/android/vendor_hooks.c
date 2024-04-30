@@ -35,6 +35,7 @@
 #include <trace/hooks/avc.h>
 #include <trace/hooks/creds.h>
 #include <trace/hooks/selinux.h>
+#include <trace/hooks/security.h>
 #include <trace/hooks/syscall_check.h>
 #include <trace/hooks/gic.h>
 #include <trace/hooks/gic_v3.h>
@@ -167,6 +168,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_remove_request);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_balance_anon_file_reclaim);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_show_max_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_slab_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_audit_log);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_checkroot_setid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_insert);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_delete);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_replace);

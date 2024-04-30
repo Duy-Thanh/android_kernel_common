@@ -14,6 +14,7 @@
 #include <linux/security.h>
 #include <crypto/public_key.h>
 #include <uapi/linux/module.h>
+#include <trace/hooks/security.h>
 #include "internal.h"
 
 #undef MODULE_PARAM_PREFIX
@@ -122,6 +123,8 @@ int module_sig_check(struct load_info *info, int flags)
 		 */
 		return err;
 	}
+
+	trace_android_vh_security_audit_log(2, err, false, "", 0, 0);
 
 	if (is_module_sig_enforced()) {
 		pr_notice("Loading of %s is rejected\n", reason);

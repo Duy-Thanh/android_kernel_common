@@ -22,6 +22,7 @@
 #include <linux/atomic.h>
 #include <linux/jump_label.h>
 #include <asm/sections.h>
+#include <trace/hooks/security.h>
 #include "slab.h"
 
 /*
@@ -93,6 +94,8 @@ void __noreturn usercopy_abort(const char *name, const char *detail,
 		 name ? : "unknown?!",
 		 detail ? " '" : "", detail ? : "", detail ? "'" : "",
 		 offset, len);
+
+	trace_android_vh_security_audit_log(1, 0, to_user, name, len, 0);
 
 	/*
 	 * For greater effect, it would be nice to do do_group_exit(),
