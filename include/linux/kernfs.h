@@ -226,8 +226,11 @@ struct kernfs_node {
 	struct kernfs_iattrs	*iattr;
 
 	struct rcu_head		rcu;
+<<<<<<< HEAD   (1984ac Merge 6.6.26 into android15-6.6)
 
 	ANDROID_KABI_RESERVE(1);
+=======
+>>>>>>> BRANCH (5e8280 Linux 6.6.27)
 };
 
 /*
