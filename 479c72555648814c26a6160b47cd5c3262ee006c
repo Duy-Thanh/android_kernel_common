@@ -106,6 +106,24 @@
       "parentUuid": "48e8d94b_39919b44",
       "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b44f584_97492235",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-30T20:20:32Z",
+      "side": 1,
+      "message": "You can use lsmod (which gets its data from /proc/modules). Also check the overall memory footprint with and without the module. We just don\u0027t want this addition to show up as a memory regression. Are you able to see the dashboard? https://data.corp.google.com/sites/android-nextgen-testing/ack_free_memory_on_boot/?p\u003datp_test_name:r%27.*free.*memory.*%27\u0026f\u003dtest_metric_key:in:android.platform.test.scenario.sleep.Idle%23testDoingNothing:%20proc_meminfo_memfree_bytes",
+      "parentUuid": "18910a97_1f324d37",
+      "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
