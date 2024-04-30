@@ -17,7 +17,10 @@ bool map_shared;
 bool test_uffdio_wp = true;
 unsigned long long *count_verify;
 uffd_test_ops_t *uffd_test_ops;
+<<<<<<< HEAD   (114550 FROMLIST: kselftest: Add a ksft_perror() helper)
 uffd_test_case_ops_t *uffd_test_case_ops;
+=======
+>>>>>>> BRANCH (9467d7 Linux 6.6.24)
 atomic_bool ready_for_fork;
 
 static int uffd_mem_fd_create(off_t mem_size, bool hugetlb)

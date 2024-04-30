@@ -1613,6 +1613,7 @@ void free_swap_and_cache_nr(swp_entry_t entry, int nr)
 	if (non_swap_entry(entry))
 		return;
 
+<<<<<<< HEAD   (114550 FROMLIST: kselftest: Add a ksft_perror() helper)
 	si = get_swap_device(entry);
 	if (!si)
 		return;
@@ -1631,6 +1632,21 @@ void free_swap_and_cache_nr(swp_entry_t entry, int nr)
 		} else {
 			WARN_ON_ONCE(1);
 		}
+=======
+	p = get_swap_device(entry);
+	if (p) {
+		if (WARN_ON(data_race(!p->swap_map[swp_offset(entry)]))) {
+			put_swap_device(p);
+			return 0;
+		}
+
+		count = __swap_entry_free(p, entry);
+		if (count == SWAP_HAS_CACHE &&
+		    !swap_page_trans_huge_swapped(p, entry))
+			__try_to_reclaim_swap(p, swp_offset(entry),
+					      TTRS_UNMAPPED | TTRS_FULL);
+		put_swap_device(p);
+>>>>>>> BRANCH (9467d7 Linux 6.6.24)
 	}
 
 	/*

@@ -4945,6 +4945,12 @@ static int nf_tables_newset(struct sk_buff *skb, const struct nfnl_info *info,
 		if ((flags & (NFT_SET_ANONYMOUS | NFT_SET_TIMEOUT | NFT_SET_EVAL)) ==
 			     (NFT_SET_ANONYMOUS | NFT_SET_TIMEOUT))
 			return -EOPNOTSUPP;
+<<<<<<< HEAD   (114550 FROMLIST: kselftest: Add a ksft_perror() helper)
+=======
+		if ((flags & (NFT_SET_CONSTANT | NFT_SET_TIMEOUT)) ==
+			     (NFT_SET_CONSTANT | NFT_SET_TIMEOUT))
+			return -EOPNOTSUPP;
+>>>>>>> BRANCH (9467d7 Linux 6.6.24)
 	}
 
 	desc.dtype = 0;
