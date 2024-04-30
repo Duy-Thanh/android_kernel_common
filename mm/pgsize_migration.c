@@ -303,8 +303,11 @@ struct vm_area_struct *get_data_vma(struct vm_area_struct *vma)
  * and @pad.
  */
 void show_map_pad_vma(struct vm_area_struct *vma, struct vm_area_struct *pad,
-		      struct seq_file *m, show_pad_vma_fn func)
+		      struct seq_file *m, void* func, bool smaps)
 {
+	show_pad_maps_fn maps_func = (show_pad_maps_fn)func;
+	show_pad_smaps_fn smaps_func = (show_pad_smaps_fn)func;
+
 	if (!pad)
 		return;
 
@@ -320,7 +323,10 @@ void show_map_pad_vma(struct vm_area_struct *vma, struct vm_area_struct *pad,
 	 */
 	BUG_ON(!vma);
 
-	func(m, pad);
+	if (smaps)
+		smaps_func(m, pad);
+	else
+		maps_func(m, pad);
 
 	kfree(pad);
 	kfree(vma);
