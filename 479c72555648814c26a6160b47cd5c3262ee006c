@@ -70,6 +70,24 @@
       "parentUuid": "f492f6de_48400eb3",
       "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48e8d94b_39919b44",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-04-30T16:03:18Z",
+      "side": 1,
+      "message": "Richard, since this has to be built-in for this kernel, can you tell me how much this module adds to the memory footprint for arm64 builds? It\u0027s probably in the noise, but I want to make sure this doesn\u0027t look like a memory regression if we add it to the base kernel.",
+      "parentUuid": "2c421bcb_c972e91e",
+      "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
