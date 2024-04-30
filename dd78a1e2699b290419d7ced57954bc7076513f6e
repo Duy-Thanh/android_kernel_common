@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1593465_076506b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-30T19:29:07Z",
+      "side": 1,
+      "message": "Overriding lint -1 that came from later patch in this series (not being merged now) breaking KABI.",
+      "revId": "dd78a1e2699b290419d7ced57954bc7076513f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
