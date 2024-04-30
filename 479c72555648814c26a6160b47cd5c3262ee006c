@@ -124,6 +124,24 @@
       "parentUuid": "18910a97_1f324d37",
       "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51aad7ec_935f8d6a",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2024-04-30T23:58:32Z",
+      "side": 1,
+      "message": "I\u0027m able to see the dashboard yes!\n\nUnfortunately I don\u0027t have a simple way to test the overall memory footprint without the module as ARCVM won\u0027t boot without it and I don\u0027t have a physical Android test device.\n\nlsmod shows that it\u0027s quite small\n\n```\n9pnet_virtio           28672  0\n```\n\nHowever if you would still like to see the overall memory footprint I would be happy to procure a test device and get those numbers.",
+      "parentUuid": "2b44f584_97492235",
+      "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
