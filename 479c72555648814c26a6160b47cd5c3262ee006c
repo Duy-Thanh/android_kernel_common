@@ -88,6 +88,24 @@
       "parentUuid": "2c421bcb_c972e91e",
       "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18910a97_1f324d37",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2024-04-30T20:03:05Z",
+      "side": 1,
+      "message": "Yes I definitely can!\n\nWe only just managed to get the build working so still need some work to get ARCVM to boot on ARM but once that\u0027s done I can get those numbers for you.\n\nWould the best way to get that be to look at /proc/modules?",
+      "parentUuid": "48e8d94b_39919b44",
+      "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
