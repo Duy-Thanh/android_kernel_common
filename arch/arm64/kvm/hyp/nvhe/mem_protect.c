@@ -599,10 +599,15 @@ int host_stage2_set_owner_locked(phys_addr_t addr, u64 size, enum pkvm_component
 	if (owner_id > PKVM_ID_MAX)
 		return -EINVAL;
 
-	annotation = kvm_init_invalid_leaf_owner(owner_id);
-
-	ret = host_stage2_try(kvm_pgtable_stage2_annotate, &host_mmu.pgt,
-			      addr, size, &host_s2_pool, annotation);
+	if (owner_id == PKVM_ID_HOST) {
+		prot = default_host_prot(addr_is_memory(addr));
+		ret = host_stage2_idmap_locked(addr, size, prot, false);
+	} else {
+		annotation = kvm_init_invalid_leaf_owner(owner_id);
+		ret = host_stage2_try(kvm_pgtable_stage2_annotate,
+				      &host_mmu.pgt,
+				      addr, size, &host_s2_pool, annotation);
+	}
 	if (ret)
 		return ret;
 
