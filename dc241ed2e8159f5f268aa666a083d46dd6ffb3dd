@@ -34,6 +34,24 @@
       "parentUuid": "b6ce33be_26b6c316",
       "revId": "dc241ed2e8159f5f268aa666a083d46dd6ffb3dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c0e23b6_1087dae0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3406862
+      },
+      "writtenOn": "2024-04-30T09:07:50Z",
+      "side": 1,
+      "message": "this is the patch to update the symbol list:\nhttps://android-review.googlesource.com/c/kernel/common/+/3066704",
+      "parentUuid": "722e6009_5d09883a",
+      "revId": "dc241ed2e8159f5f268aa666a083d46dd6ffb3dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
