@@ -18,6 +18,7 @@
 #include <linux/cgroup.h>
 #include <linux/kthread.h>
 #include <linux/blk-mq.h>
+#include <linux/android_vendor.h>
 
 struct blkcg_gq;
 struct blkg_policy_data;
@@ -83,6 +84,8 @@ struct blkcg_gq {
 	int				last_use;
 
 	struct rcu_head			rcu_head;
+
+	ANDROID_OEM_DATA(1);
 };
 
 struct blkcg {
@@ -103,6 +106,8 @@ struct blkcg {
 #ifdef CONFIG_CGROUP_WRITEBACK
 	struct list_head		cgwb_list;
 #endif
+
+	ANDROID_OEM_DATA(1);
 };
 
 static inline struct blkcg *css_to_blkcg(struct cgroup_subsys_state *css)
