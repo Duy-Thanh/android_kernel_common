@@ -79,6 +79,26 @@
       "tag": "",
       "revId": "19068955d8e47f6e447fdab391267f924a583aae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075630372",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3054880?revision\u003d1",
+      "key": {
+        "uuid": "085afdf3_ddb81a95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-30T16:24:08Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/51824b780b719c53113dc39e027fbf670dc66028) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d51824b780b719c53113dc39e027fbf670dc66028).\n\n```\n      ## kernel/rcu/tree.c ##\n    -@@ kernel/rcu/tree.c: EXPORT_SYMBOL_GPL(call_rcu);\n    - \n    +@@ kernel/rcu/tree.c: void call_rcu(struct rcu_head *head, rcu_callback_t func)\n    + EXPORT_SYMBOL_GPL(call_rcu);\n      \n      /* Maximum number of jiffies to wait before draining a batch. */\n     -#define KFREE_DRAIN_JIFFIES (HZ / 50)\n    @@ kernel/rcu/tree.c: EXPORT_SYMBOL_GPL(call_rcu);\n      #define KFREE_N_BATCHES 2\n      #define FREE_N_CHANNELS 2\n      \n    -@@ kernel/rcu/tree.c: need_offload_krc(struct kfree_rcu_cpu *krcp)\n    - \treturn !!krcp-\u003ehead;\n    +@@ kernel/rcu/tree.c: need_wait_for_krwp_work(struct kfree_rcu_cpu_work *krwp)\n    + \treturn !!krwp-\u003ehead_free;\n      }\n      \n     +static void\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "19068955d8e47f6e447fdab391267f924a583aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
