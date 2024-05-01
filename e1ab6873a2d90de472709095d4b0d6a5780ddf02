@@ -70,6 +70,30 @@
       },
       "revId": "e1ab6873a2d90de472709095d4b0d6a5780ddf02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74bcdf9c_089d83ce",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3691,
+      "author": {
+        "id": 1994660
+      },
+      "writtenOn": "2024-05-01T19:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f809fbec_f0d863c2",
+      "range": {
+        "startLine": 3691,
+        "startChar": 0,
+        "endLine": 3691,
+        "endChar": 27
+      },
+      "revId": "e1ab6873a2d90de472709095d4b0d6a5780ddf02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
