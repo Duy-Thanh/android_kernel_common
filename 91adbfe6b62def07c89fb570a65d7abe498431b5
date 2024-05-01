@@ -104,6 +104,30 @@
       },
       "revId": "91adbfe6b62def07c89fb570a65d7abe498431b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194f48c5_943193f6",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-05-01T18:14:04Z",
+      "side": 1,
+      "message": "I checked with people more experienced with the block layer and their feedback is:\n\nblkdev_get_by_path() should be used in the zram driver. Using struct file or any file API when accessing a block device is wrong. They should submit bio\u0027s directly to the block device. There are multiple examples in the out-of-tree SCST project. SCST is a collection of kernel drivers that exports local storage via a SCSI-over-network protocol. Source code is available at https://github.com/SCST-project/. See also the scst/src/dev_handlers/scst_vdisk.c file in that project. We also have an open request to upstream the change for ZRAM driver to use blkdev_get_by_path() in  https://b.corp.google.com/issues/195421698 (might not be accessible for partners).",
+      "parentUuid": "5f1a081b_1a23fea3",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 17
+      },
+      "revId": "91adbfe6b62def07c89fb570a65d7abe498431b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
