@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f67cb2_38bce368",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-05-01T16:35:53Z",
+      "side": 1,
+      "message": "Not needed, removed.",
+      "parentUuid": "e9e8be1e_fe32ff2b",
+      "range": {
+        "startLine": 354,
+        "startChar": 35,
+        "endLine": 354,
+        "endChar": 43
+      },
+      "revId": "087031bc8239542decaa971feae7da6a645509bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1eee11d_40826d11",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91af5ee6_3e23ccba",
+        "filename": "include/linux/pgsize_migration.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-05-01T16:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1eee11d_40826d11",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 0
+      },
+      "revId": "087031bc8239542decaa971feae7da6a645509bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1112247b_dcd4900a",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-05-01T16:17:30Z",
       "side": 1,
       "message": "Instead of adding new maps_func and smaps_func variables just do this:\n```\nif (smaps)\n\t((show_pad_smaps_fn)func)(m, pad);\nelse\n\t((show_pad_maps_fn)func)(m, pad);\n```",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 20
+      },
+      "revId": "087031bc8239542decaa971feae7da6a645509bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90f19b64_a07736df",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-05-01T16:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1112247b_dcd4900a",
       "range": {
         "startLine": 326,
         "startChar": 0,
