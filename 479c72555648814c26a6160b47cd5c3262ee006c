@@ -142,6 +142,24 @@
       "parentUuid": "2b44f584_97492235",
       "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ae3e89b_d86f1c10",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-01T00:05:30Z",
+      "side": 1,
+      "message": "Ok, that does look small. Doesn\u0027t seem likely that we\u0027ll see any regression on the dashboard. Please add the size data above to the commit messsage",
+      "parentUuid": "51aad7ec_935f8d6a",
+      "revId": "479c72555648814c26a6160b47cd5c3262ee006c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
