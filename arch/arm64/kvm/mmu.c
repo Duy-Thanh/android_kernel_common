@@ -289,7 +289,6 @@ static void invalidate_icache_guest_page(void *va, size_t size)
 
 static int pkvm_unmap_guest(struct kvm *kvm, struct kvm_pinned_page *ppage)
 {
-	struct mm_struct *mm = kvm->mm;
 	int ret;
 
 	ret = kvm_call_hyp_nvhe(__pkvm_host_unmap_guest,
@@ -299,7 +298,6 @@ static int pkvm_unmap_guest(struct kvm *kvm, struct kvm_pinned_page *ppage)
 	if (ret)
 		return ret;
 
-	account_locked_vm(mm, 1, false);
 	/*
 	 * Non-protected guest pages are marked dirty from user_mem_abort(),
 	 * no update needed from here.
@@ -339,18 +337,26 @@ static struct rb_node *find_first_ppage_node(struct rb_root *root, u64 ipa)
 
 static int pkvm_unmap_range(struct kvm *kvm, u64 start, u64 end)
 {
+	struct mm_struct *mm = kvm->mm;
 	struct kvm_pinned_page *ppage;
 	struct rb_node *node, *temp;
+	unsigned long cnt = 0;
 	int ret;
 
 	for_ppage_node_in_range(kvm, start, end, node, temp) {
 		ppage = rb_entry(node, struct kvm_pinned_page, node);
 		ret = pkvm_unmap_guest(kvm, ppage);
 		if (ret)
-			return ret;
+			break;
+		cnt++;
 	}
 
-	return 0;
+	/* account_locked_vm may sleep */
+	write_unlock(&kvm->mmu_lock);
+	account_locked_vm(mm, cnt, false);
+	write_lock(&kvm->mmu_lock);
+
+	return ret;
 }
 
 /*
