@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030a097a_cc6d47a9",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3691,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-05-01T19:25:15Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like the upstream commit has `port-\u003econnected \u003d false;`. Is there another commit that needs to be pulled in as well? If this is correct, you at least need to add `BACKPORT: FROMGIT:` since it doesn\u0027t apply cleanly.",
+      "range": {
+        "startLine": 3691,
+        "startChar": 0,
+        "endLine": 3691,
+        "endChar": 27
+      },
+      "revId": "e1ab6873a2d90de472709095d4b0d6a5780ddf02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
