@@ -34,6 +34,24 @@
       "parentUuid": "0d2fde7e_ab045fb5",
       "revId": "6657c436ed73d9e7974a2e77a5fe572e63bf353f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "582ad187_836f339d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-05-01T22:35:18Z",
+      "side": 1,
+      "message": "Yes, it\u0027s needed in android14-5.15, 14-6.1, and 15-6.6. It was requested in stable upstream, but we need this patch sooner than the next LTS release.",
+      "parentUuid": "b26d6366_53fbaccf",
+      "revId": "6657c436ed73d9e7974a2e77a5fe572e63bf353f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
