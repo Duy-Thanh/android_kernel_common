@@ -452,6 +452,8 @@ struct erofs_map_dev {
 
 /* data.c */
 extern const struct file_operations erofs_file_fops;
+void *erofs_read_metadata(struct super_block *sb, struct erofs_buf *buf,
+			  erofs_off_t *offset, int *lengthp);
 void erofs_unmap_metabuf(struct erofs_buf *buf);
 void erofs_put_metabuf(struct erofs_buf *buf);
 void *erofs_bread(struct erofs_buf *buf, struct inode *inode,
@@ -545,10 +547,15 @@ int __init z_erofs_init_zip_subsystem(void);
 void z_erofs_exit_zip_subsystem(void);
 int erofs_try_to_free_all_cached_pages(struct erofs_sb_info *sbi,
 				       struct erofs_workgroup *egrp);
+<<<<<<< HEAD   (5b0660 ANDROID: add dma_max_mapping_size to virtual_device symbol l)
 int erofs_init_managed_cache(struct super_block *sb);
 int z_erofs_load_lz4_config(struct super_block *sb,
 			    struct erofs_super_block *dsb,
 			    struct z_erofs_lz4_cfgs *lz4, int len);
+=======
+int erofs_try_to_free_cached_page(struct page *page);
+int z_erofs_parse_cfgs(struct super_block *sb, struct erofs_super_block *dsb);
+>>>>>>> BRANCH (a3eb3a Linux 6.1.80)
 #else
 static inline void erofs_shrinker_register(struct super_block *sb) {}
 static inline void erofs_shrinker_unregister(struct super_block *sb) {}
@@ -556,6 +563,7 @@ static inline int erofs_init_shrinker(void) { return 0; }
 static inline void erofs_exit_shrinker(void) {}
 static inline int z_erofs_init_zip_subsystem(void) { return 0; }
 static inline void z_erofs_exit_zip_subsystem(void) {}
+<<<<<<< HEAD   (5b0660 ANDROID: add dma_max_mapping_size to virtual_device symbol l)
 static inline int z_erofs_load_lz4_config(struct super_block *sb,
 				  struct erofs_super_block *dsb,
 				  struct z_erofs_lz4_cfgs *lz4, int len)
@@ -567,26 +575,16 @@ static inline int z_erofs_load_lz4_config(struct super_block *sb,
 	return 0;
 }
 static inline int erofs_init_managed_cache(struct super_block *sb) { return 0; }
+=======
+>>>>>>> BRANCH (a3eb3a Linux 6.1.80)
 #endif	/* !CONFIG_EROFS_FS_ZIP */
 
 #ifdef CONFIG_EROFS_FS_ZIP_LZMA
 int z_erofs_lzma_init(void);
 void z_erofs_lzma_exit(void);
-int z_erofs_load_lzma_config(struct super_block *sb,
-			     struct erofs_super_block *dsb,
-			     struct z_erofs_lzma_cfgs *lzma, int size);
 #else
 static inline int z_erofs_lzma_init(void) { return 0; }
 static inline int z_erofs_lzma_exit(void) { return 0; }
-static inline int z_erofs_load_lzma_config(struct super_block *sb,
-			     struct erofs_super_block *dsb,
-			     struct z_erofs_lzma_cfgs *lzma, int size) {
-	if (lzma) {
-		erofs_err(sb, "lzma algorithm isn't enabled");
-		return -EINVAL;
-	}
-	return 0;
-}
 #endif	/* !CONFIG_EROFS_FS_ZIP */
 
 /* flags for erofs_fscache_register_cookie() */
