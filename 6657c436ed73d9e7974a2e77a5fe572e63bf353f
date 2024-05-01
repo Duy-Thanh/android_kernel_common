@@ -52,6 +52,29 @@
       "parentUuid": "b26d6366_53fbaccf",
       "revId": "6657c436ed73d9e7974a2e77a5fe572e63bf353f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e82ebc8_7ddede12",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3688,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-05-01T22:46:03Z",
+      "side": 1,
+      "message": "Looks like you got this flipped. It should be:\n\n```\nif (port-\u003econnected) {\n  if (port-\u003epartner) {\n  ...\n  }\n...\n```",
+      "range": {
+        "startLine": 3686,
+        "startChar": 0,
+        "endLine": 3688,
+        "endChar": 0
+      },
+      "revId": "6657c436ed73d9e7974a2e77a5fe572e63bf353f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
