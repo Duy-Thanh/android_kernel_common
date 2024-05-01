@@ -96,13 +96,19 @@ define_common_kernels(target_configs = {
         "module_implicit_outs": get_gki_modules_list("arm64"),
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
         "ddk_headers_archive": ":kernel_aarch64_ddk_headers_archive",
-        "extra_dist": [":test_mappings_zip"],
+        "extra_dist": [
+            ":test_mappings_zip",
+            ":tests_zip_arm64",
+        ],
     },
     "kernel_x86_64": {
         "kmi_symbol_list_strict_mode": False,
         "module_implicit_outs": get_gki_modules_list("x86_64"),
         "make_goals": _GKI_X86_64_MAKE_GOALS,
-        "extra_dist": [":test_mappings_zip"],
+        "extra_dist": [
+            ":test_mappings_zip",
+            ":test_zip_x86_64",
+        ],
     },
 })
 
