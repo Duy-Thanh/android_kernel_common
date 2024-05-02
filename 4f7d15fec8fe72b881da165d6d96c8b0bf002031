@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464c08d6_8accde9d",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-05-02T20:15:09Z",
+      "side": 1,
+      "message": "Suggestion: instead of passing true/false we can define:\n\n\nenum {\n   PAD_MAPS_FUNC,\n   PAD_SMAPS_FUNC,\n}\n\nand use \n\nshow_map_pad_vma(vma, pad_vma, m, show_map_vma, PAD_MAPS_FUNC);",
+      "range": {
+        "startLine": 309,
+        "startChar": 40,
+        "endLine": 309,
+        "endChar": 50
+      },
+      "revId": "4f7d15fec8fe72b881da165d6d96c8b0bf002031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
