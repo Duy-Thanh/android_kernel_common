@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a88f2a20_15a92075",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-02T18:14:51Z",
+      "side": 1,
+      "message": "For the record, the plan is to upstream this first. Only sending this out for preview in preparation for upstream posting.\n\nTest is done in userspace binderLibTest (aosp/3070045). Please let me know if there are other places where tests should be added.",
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
