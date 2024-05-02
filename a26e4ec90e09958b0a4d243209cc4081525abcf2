@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95b373ac_64232a31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-02T09:55:30Z",
+      "side": 1,
+      "message": "I amended the automerger configuration. I don\u0027t think you need this still once it rolls out.",
+      "revId": "a26e4ec90e09958b0a4d243209cc4081525abcf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cfc4290_6030b6b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-02T09:55:30Z",
+      "side": 1,
+      "message": "I amended the automerger configuration. I don\u0027t think you need this still once it rolls out.",
+      "revId": "a26e4ec90e09958b0a4d243209cc4081525abcf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
