@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf244d3b_6bfd476a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-05-02T21:55:35Z",
+      "side": 1,
+      "message": "Is this really generic for vendors or is it tied to your work in the link below?",
+      "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "810d944d_8545dfb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-05-02T21:55:35Z",
+      "side": 1,
+      "message": "If the max is 1024, would u16 be a better match?",
+      "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
