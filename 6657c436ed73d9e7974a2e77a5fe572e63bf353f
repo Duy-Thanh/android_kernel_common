@@ -75,6 +75,30 @@
       },
       "revId": "6657c436ed73d9e7974a2e77a5fe572e63bf353f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d44394a_3b9d5526",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3688,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2024-05-02T00:01:28Z",
+      "side": 1,
+      "message": "This needs to be fixed. willmcvicker@ Wondering what would be the clean way to do this ? Revert and re-apply ?",
+      "parentUuid": "8e82ebc8_7ddede12",
+      "range": {
+        "startLine": 3686,
+        "startChar": 0,
+        "endLine": 3688,
+        "endChar": 0
+      },
+      "revId": "6657c436ed73d9e7974a2e77a5fe572e63bf353f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
