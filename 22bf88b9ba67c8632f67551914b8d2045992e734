@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8a0dbb7_fdce6471",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-05-02T22:06:58Z",
+      "side": 1,
+      "message": "The only current usecase I have is for the work in the link, but given that vendors  heavily modify their use of PELT signals anyways, it makes more sense to move the actual use of the signals inside vendor hooks and work with vendors instead.",
+      "parentUuid": "bf244d3b_6bfd476a",
+      "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "810d944d_8545dfb6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-02T21:55:35Z",
       "side": 1,
       "message": "If the max is 1024, would u16 be a better match?",
+      "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bceb6498_e4627ce4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-05-02T22:06:58Z",
+      "side": 1,
+      "message": "u16 could work, but reducing it to u16 and getting the extra 32 bits wouldn\u0027t buy us much here since ANDROID_VENDOR_DATA is in multiples of u64.",
+      "parentUuid": "810d944d_8545dfb6",
       "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
