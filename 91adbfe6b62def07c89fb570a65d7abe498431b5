@@ -52,6 +52,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2501c6bc_c9f18754",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-05-02T19:38:51Z",
+      "side": 1,
+      "message": "Ok, sounds like Sandeep will work on fixing the upstream code first.",
+      "revId": "91adbfe6b62def07c89fb570a65d7abe498431b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7dc74cf_14d3c17f",
