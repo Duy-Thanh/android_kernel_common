@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5a4c3d7_66e652d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-05-02T22:48:13Z",
+      "side": 1,
+      "message": "Ok, I just wanted to understand if you\u0027re reserving it for your use, as if we make it generic for vendors, vendors may actually use the reservation 😊, which could result in problems if you do plan to merge your work to android15-6.6 after the freeze.",
+      "parentUuid": "d8a0dbb7_fdce6471",
+      "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "810d944d_8545dfb6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "u16 could work, but reducing it to u16 and getting the extra 32 bits wouldn\u0027t buy us much here since ANDROID_VENDOR_DATA is in multiples of u64.",
       "parentUuid": "810d944d_8545dfb6",
+      "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1657c90a_9f6e5eac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-05-02T22:48:13Z",
+      "side": 1,
+      "message": "Ah, good point. The alignment of the following structure would probably leave a hole anyway, but maybe something for upstream should we need to fit further fields in later.",
+      "parentUuid": "bceb6498_e4627ce4",
       "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
