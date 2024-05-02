@@ -193,6 +193,30 @@
       },
       "revId": "91adbfe6b62def07c89fb570a65d7abe498431b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "161a86b7_b93d4b63",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2024-05-02T17:24:36Z",
+      "side": 1,
+      "message": "As pointed out by Minchan, not allowing filp_open() in drivers seems like Android\u0027s decision. So we need better reason to replace filp_open() in zram with alternative to push this upstream. Until then, we need to carry this filp_open_block() workaround as `ANDROID:` patch.",
+      "parentUuid": "8450beea_035ff679",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 17
+      },
+      "revId": "91adbfe6b62def07c89fb570a65d7abe498431b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
