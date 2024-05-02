@@ -24,6 +24,14 @@ pub(super) struct ArrayRangeAllocator<T> {
 }
 
 impl<T> ArrayRangeAllocator<T> {
+    pub(crate) fn new(size: usize, alloc: EmptyArrayAlloc<T>) -> Self {
+        Self {
+            ranges: alloc.ranges,
+            size,
+            free_oneway_space: size / 2,
+        }
+    }
+
     pub(crate) fn total_size(&self) -> usize {
         self.size
     }
@@ -183,6 +191,18 @@ impl<T> ArrayRangeAllocator<T> {
                 callback(range.offset, range.size, range.data.take());
             }
         }
+    }
+}
+
+pub(crate) struct EmptyArrayAlloc<T> {
+    ranges: Vec<Range<T>>,
+}
+
+impl<T> EmptyArrayAlloc<T> {
+    pub(crate) fn try_new(capacity: usize) -> Result<Self> {
+        Ok(Self {
+            ranges: Vec::try_with_capacity(capacity)?,
+        })
     }
 }
 
