@@ -29,7 +29,7 @@ macro_rules! define_panicking_intrinsics(
     ($reason: tt, { $($ident: ident, )* }) => {
         $(
             #[doc(hidden)]
-            #[export_name = concat!("__rust", stringify!($ident))]
+            #[export_name = stringify!($ident)]
             pub extern "C" fn $ident() {
                 panic!($reason);
             }
@@ -57,14 +57,11 @@ define_panicking_intrinsics!("`f64` should not be used", {
 });
 
 define_panicking_intrinsics!("`i128` should not be used", {
-    __ashrti3,
     __muloti4,
     __multi3,
 });
 
 define_panicking_intrinsics!("`u128` should not be used", {
-    __ashlti3,
-    __lshrti3,
     __udivmodti4,
     __udivti3,
     __umodti3,

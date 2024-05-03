@@ -60,14 +60,9 @@ vmlinux_link()
 	# skip output file argument
 	shift
 
-	if is_enabled CONFIG_LTO_CLANG || is_enabled CONFIG_X86_KERNEL_IBT; then
-		# Use vmlinux.o instead of performing the slow LTO link again.
-		objs=vmlinux.o
-		libs=
-	else
-		objs=vmlinux.a
-		libs="${KBUILD_VMLINUX_LIBS}"
-	fi
+	# Use vmlinux.o instead of performing the slow LTO link again.
+	objs=vmlinux.o
+	libs=
 
 	if is_enabled CONFIG_MODULES; then
 		objs="${objs} .vmlinux.export.o"
@@ -161,9 +156,7 @@ kallsyms()
 		kallsymopt="${kallsymopt} --base-relative"
 	fi
 
-	if is_enabled CONFIG_LTO_CLANG; then
-		kallsymopt="${kallsymopt} --lto-clang"
-	fi
+	kallsymopt="${kallsymopt} --lto-clang"
 
 	info KSYMS ${2}
 	scripts/kallsyms ${kallsymopt} ${1} > ${2}

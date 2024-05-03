@@ -584,11 +584,12 @@ KBUILD_CFLAGS += -fno-strict-aliasing
 
 KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_RUSTFLAGS := $(rust_common_flags) \
-		    -Cpanic=abort -Cembed-bitcode=n -Clto=n \
+		    -Cpanic=abort -C linker-plugin-lto \
 		    -Cforce-unwind-tables=n -Ccodegen-units=1 \
 		    -Csymbol-mangling-version=v0 \
 		    -Crelocation-model=static \
 		    -Zfunction-sections=n \
+		    -Zdwarf-version=5 \
 		    -Dclippy::float_arithmetic
 
 KBUILD_AFLAGS_KERNEL :=

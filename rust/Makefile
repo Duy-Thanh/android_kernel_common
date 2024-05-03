@@ -9,7 +9,8 @@ always-$(CONFIG_RUST) += exports_core_generated.h
 # Missing prototypes are expected in the helpers since these are exported
 # for Rust only, thus there is no header nor prototypes.
 obj-$(CONFIG_RUST) += helpers.o
-CFLAGS_REMOVE_helpers.o = -Wmissing-prototypes -Wmissing-declarations
+CFLAGS_REMOVE_helpers.o = -Wmissing-prototypes -Wmissing-declarations -fno-delete-null-pointer-checks
+CFLAGS_helpers.o = -flto -target aarch64-unknown-linux
 
 always-$(CONFIG_RUST) += libmacros.so
 no-clean-files += libmacros.so
@@ -433,7 +434,6 @@ endif
 
 $(obj)/core.o: private skip_clippy = 1
 $(obj)/core.o: private skip_flags = -Dunreachable_pub
-$(obj)/core.o: private rustc_objcopy = $(foreach sym,$(redirect-intrinsics),--redefine-sym $(sym)=__rust$(sym))
 $(obj)/core.o: private rustc_target_flags = $(core-cfgs)
 $(obj)/core.o: $(RUST_LIB_SRC)/core/src/lib.rs FORCE
 	$(call if_changed_dep,rustc_library)
@@ -441,7 +441,7 @@ ifdef CONFIG_X86_64
 $(obj)/core.o: scripts/target.json
 endif
 
-$(obj)/compiler_builtins.o: private rustc_objcopy = -w -W '__*'
+#$(obj)/compiler_builtins.o: private rustc_objcopy = -w -W '__*'
 $(obj)/compiler_builtins.o: $(src)/compiler_builtins.rs $(obj)/core.o FORCE
 	$(call if_changed_dep,rustc_library)
 

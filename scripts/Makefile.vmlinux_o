@@ -23,9 +23,7 @@ quiet_cmd_gen_initcalls_lds = GEN     $@
 
 targets := .tmp_initcalls.lds
 
-ifdef CONFIG_LTO_CLANG
 initcalls-lds := .tmp_initcalls.lds
-endif
 
 # objtool for vmlinux.o
 # ---------------------------------------------------------------------------
