@@ -16,6 +16,24 @@
       "message": "https://android-review.googlesource.com/c/kernel/common/+/3067825 has this patch as well?",
       "revId": "1e1bb44741350ff3421b7c855a892bbfdfd73024",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "487d8f0a_0d28c856",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899690
+      },
+      "writtenOn": "2024-05-03T18:32:32Z",
+      "side": 1,
+      "message": "Good catch; thank you. Will abandon.",
+      "parentUuid": "7b019f16_39a56905",
+      "revId": "1e1bb44741350ff3421b7c855a892bbfdfd73024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
