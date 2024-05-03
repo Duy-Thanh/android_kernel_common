@@ -128,6 +128,30 @@
       },
       "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef83bfa_f7ad2517",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-03T15:13:10Z",
+      "side": 1,
+      "message": "Actually if I drop a `WARN_ON(sa\u003erunnable_avg \u003e 1024)` in `___update_load_avg()` that seems to explode all over the place for me, so pls double check this actually is safe :)",
+      "parentUuid": "e6fbb993_3a675844",
+      "range": {
+        "startLine": 10,
+        "startChar": 23,
+        "endLine": 10,
+        "endChar": 28
+      },
+      "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
