@@ -105,6 +105,29 @@
       "parentUuid": "bceb6498_e4627ce4",
       "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6fbb993_3a675844",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-03T15:08:20Z",
+      "side": 1,
+      "message": "Are you sure sa-\u003erunnable_avg is always less than 1024? Given that by definition runnable time includes waiting time, and that number of waiting tasks is pretty much unbounded, that\u0027s not the invariant I would expect.",
+      "range": {
+        "startLine": 10,
+        "startChar": 23,
+        "endLine": 10,
+        "endChar": 28
+      },
+      "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
