@@ -178,6 +178,14 @@ static void ffa_retrieve_req(struct arm_smccc_res *res, u32 len)
 			  res);
 }
 
+static void ffa_rx_release(struct arm_smccc_res *res)
+{
+	arm_smccc_1_1_smc(FFA_RX_RELEASE,
+			  0, 0,
+			  0, 0, 0, 0, 0,
+			  res);
+}
+
 static void do_ffa_rxtx_map(struct arm_smccc_res *res,
 			    struct kvm_cpu_context *ctxt)
 {
@@ -564,6 +572,11 @@ static void do_ffa_mem_reclaim(struct arm_smccc_res *res,
 
 		fraglen = res->a3;
 		memcpy((void *)buf + fragoff, hyp_buffers.rx, fraglen);
+		ffa_rx_release(res);
+		if (res->a0 != FFA_SUCCESS) {
+			ret = FFA_RET_INVALID_PARAMETERS;
+			goto out_unlock;
+		}
 	}
 
 	ffa_mem_reclaim(res, handle_lo, handle_hi, flags);
