@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9b530a1_1fab1aea",
+        "filename": "drivers/usb/host/xhci-mem.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2075,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-03T14:42:06Z",
+      "side": 0,
+      "message": "This function is KMI which is frozen. Please refactor the series to preserve this interface and its semantics.",
+      "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a230273_e3dc4899",
         "filename": "drivers/usb/host/xhci-mem.c",
         "patchSetId": 4
