@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000076711312",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3074843?revision\u003d1",
+      "key": {
+        "uuid": "e17ef483_11af0b3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-03T18:04:03Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "173d8ff07603558af182d1166969fca18653fd95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000076711312",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3074843?revision\u003d1",
+      "key": {
+        "uuid": "d52d25cb_5fc6bc7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-03T18:04:03Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android13-5.10.\nBase branch change: [3070252](https://android-review.googlesource.com/c/3070252).\n\n```\n    - ## mm/Makefile ##\n    -@@ mm/Makefile: obj-y\t\t\t:\u003d filemap.o mempool.o oom_kill.o fadvise.o \\\n    - \t\t\t   mm_init.o percpu.o slab_common.o \\\n    - \t\t\t   compaction.o vmacache.o \\\n    - \t\t\t   interval_tree.o list_lru.o workingset.o \\\n    --\t\t\t   debug.o gup.o $(mmu-y)\n    + ## mm/Makefile (new) ##\n    +@@\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (648e13 Android Common Kernel: Initial commit)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++# SPDX-License-Identifier: GPL-2.0\n    ++#\n    ++# Makefile for the linux memory manager.\n    ++#\n    ++\n    ++KASAN_SANITIZE_slab_common.o :\u003d n\n    ++KASAN_SANITIZE_slab.o :\u003d n\n    ++KASAN_SANITIZE_slub.o :\u003d n\n    ++KCSAN_SANITIZE_kmemleak.o :\u003d n\n    ++\n    ++# These produce frequent data race reports: most of them are due to races on\n    ++# the same word but accesses to different bits of that word. Re-enable KCSAN\n    ++# for these when we have more consensus on what to do about them.\n    ++KCSAN_SANITIZE_slab_common.o :\u003d n\n    ++KCSAN_SANITIZE_slab.o :\u003d n\n    ++KCSAN_SANITIZE_slub.o :\u003d n\n    ++KCSAN_SANITIZE_page_alloc.o :\u003d n\n    ++\n    ++# These files are disabled because they produce non-interesting and/or\n    ++# flaky coverage that is not a function of syscall inputs. E.g. slab is out of\n    ++# free pages, or a task is migrated between nodes.\n    ++KCOV_INSTRUMENT_slab_common.o :\u003d n\n    ++KCOV_INSTRUMENT_slob.o :\u003d n\n    ++KCOV_INSTRUMENT_slab.o :\u003d n\n    ++KCOV_INSTRUMENT_slub.o :\u003d n\n    ++KCOV_INSTRUMENT_page_alloc.o :\u003d n\n    ++KCOV_INSTRUMENT_debug-pagealloc.o :\u003d n\n    ++KCOV_INSTRUMENT_kmemleak.o :\u003d n\n    ++KCOV_INSTRUMENT_memcontrol.o :\u003d n\n    ++KCOV_INSTRUMENT_mmzone.o :\u003d n\n    ++KCOV_INSTRUMENT_vmstat.o :\u003d n\n    ++KCOV_INSTRUMENT_failslab.o :\u003d n\n    ++\n    ++CFLAGS_init-mm.o +\u003d $(call cc-disable-warning, override-init)\n    ++CFLAGS_init-mm.o +\u003d $(call cc-disable-warning, initializer-overrides)\n    ++\n    ++mmu-y\t\t\t:\u003d nommu.o\n    ++mmu-$(CONFIG_MMU)\t:\u003d highmem.o memory.o mincore.o \\\n    ++\t\t\t   mlock.o mmap.o mmu_gather.o mprotect.o mremap.o \\\n    ++\t\t\t   msync.o page_vma_mapped.o pagewalk.o \\\n    ++\t\t\t   pgtable-generic.o rmap.o vmalloc.o ioremap.o\n    ++\n    ++\n    ++ifdef CONFIG_CROSS_MEMORY_ATTACH\n    ++mmu-$(CONFIG_MMU)\t+\u003d process_vm_access.o\n    ++endif\n    ++\n    ++obj-y\t\t\t:\u003d filemap.o mempool.o oom_kill.o fadvise.o \\\n    ++\t\t\t   maccess.o page-writeback.o \\\n    ++\t\t\t   readahead.o swap.o truncate.o vmscan.o shmem.o \\\n    ++\t\t\t   util.o mmzone.o vmstat.o backing-dev.o \\\n    ++\t\t\t   mm_init.o percpu.o slab_common.o \\\n    ++\t\t\t   compaction.o vmacache.o \\\n    ++\t\t\t   interval_tree.o list_lru.o workingset.o \\\n     +\t\t\t   debug.o gup.o pgsize_migration.o $(mmu-y)\n    - \n    - # Give \u0027page_alloc\u0027 its own module-parameter namespace\n    - page-alloc-y :\u003d page_alloc.o\n    ++\n    ++# Give \u0027page_alloc\u0027 its own module-parameter namespace\n    ++page-alloc-y :\u003d page_alloc.o\n    ++page-alloc-$(CONFIG_SHUFFLE_PAGE_ALLOCATOR) +\u003d shuffle.o\n    ++CFLAGS_page_alloc.o +\u003d -DDYNAMIC_DEBUG_MODULE\n    ++\n    ++obj-y +\u003d page-alloc.o\n    ++obj-y +\u003d init-mm.o\n    ++obj-y +\u003d memblock.o\n    ++\n    ++ifdef CONFIG_MMU\n    ++\tobj-$(CONFIG_ADVISE_SYSCALLS)\t+\u003d madvise.o\n    ++endif\n    ++\n    ++obj-$(CONFIG_SWAP)\t+\u003d page_io.o swap_state.o swapfile.o swap_slots.o\n    ++obj-$(CONFIG_FRONTSWAP)\t+\u003d frontswap.o\n    ++obj-$(CONFIG_ZSWAP)\t+\u003d zswap.o\n    ++obj-$(CONFIG_HAS_DMA)\t+\u003d dmapool.o\n    ++obj-$(CONFIG_HUGETLBFS)\t+\u003d hugetlb.o\n    ++obj-$(CONFIG_NUMA) \t+\u003d mempolicy.o\n    ++obj-$(CONFIG_SPARSEMEM)\t+\u003d sparse.o\n    ++obj-$(CONFIG_SPARSEMEM_VMEMMAP) +\u003d sparse-vmemmap.o\n    ++obj-$(CONFIG_SLOB) +\u003d slob.o\n    ++obj-$(CONFIG_MMU_NOTIFIER) +\u003d mmu_notifier.o\n    ++obj-$(CONFIG_KSM) +\u003d ksm.o\n    ++obj-$(CONFIG_PAGE_POISONING) +\u003d page_poison.o\n    ++obj-$(CONFIG_SLAB) +\u003d slab.o\n    ++obj-$(CONFIG_SLUB) +\u003d slub.o\n    ++obj-$(CONFIG_KASAN)\t+\u003d kasan/\n    ++obj-$(CONFIG_KFENCE) +\u003d kfence/\n    ++obj-$(CONFIG_FAILSLAB) +\u003d failslab.o\n    ++obj-$(CONFIG_MEMORY_HOTPLUG) +\u003d memory_hotplug.o\n    ++obj-$(CONFIG_MEMTEST)\t\t+\u003d memtest.o\n    ++obj-$(CONFIG_MIGRATION) +\u003d migrate.o\n    ++obj-$(CONFIG_TRANSPARENT_HUGEPAGE) +\u003d huge_memory.o khugepaged.o\n    ++obj-$(CONFIG_PAGE_COUNTER) +\u003d page_counter.o\n    ++obj-$(CONFIG_MEMCG) +\u003d memcontrol.o vmpressure.o\n    ++obj-$(CONFIG_MEMCG_SWAP) +\u003d swap_cgroup.o\n    ++obj-$(CONFIG_CGROUP_HUGETLB) +\u003d hugetlb_cgroup.o\n    ++obj-$(CONFIG_GUP_BENCHMARK) +\u003d gup_benchmark.o\n    ++obj-$(CONFIG_MEMORY_FAILURE) +\u003d memory-failure.o\n    ++obj-$(CONFIG_HWPOISON_INJECT) +\u003d hwpoison-inject.o\n    ++obj-$(CONFIG_DEBUG_KMEMLEAK) +\u003d kmemleak.o\n    ++obj-$(CONFIG_DEBUG_RODATA_TEST) +\u003d rodata_test.o\n    ++obj-$(CONFIG_DEBUG_VM_PGTABLE) +\u003d debug_vm_pgtable.o\n    ++obj-$(CONFIG_PAGE_OWNER) +\u003d page_owner.o\n    ++obj-$(CONFIG_PAGE_PINNER) +\u003d page_pinner.o\n    ++obj-$(CONFIG_CLEANCACHE) +\u003d cleancache.o\n    ++obj-$(CONFIG_MEMORY_ISOLATION) +\u003d page_isolation.o\n    ++obj-$(CONFIG_ZPOOL)\t+\u003d zpool.o\n    ++obj-$(CONFIG_ZBUD)\t+\u003d zbud.o\n    ++obj-$(CONFIG_ZSMALLOC)\t+\u003d zsmalloc.o\n    ++obj-$(CONFIG_Z3FOLD)\t+\u003d z3fold.o\n    ++obj-$(CONFIG_GENERIC_EARLY_IOREMAP) +\u003d early_ioremap.o\n    ++obj-$(CONFIG_CMA)\t+\u003d cma.o\n    ++obj-$(CONFIG_MEMORY_BALLOON) +\u003d balloon_compaction.o\n    ++obj-$(CONFIG_PAGE_EXTENSION) +\u003d page_ext.o\n    ++obj-$(CONFIG_CMA_DEBUGFS) +\u003d cma_debug.o\n    ++obj-$(CONFIG_CMA_SYSFS) +\u003d cma_sysfs.o\n    ++obj-$(CONFIG_USERFAULTFD) +\u003d userfaultfd.o\n    ++obj-$(CONFIG_IDLE_PAGE_TRACKING) +\u003d page_idle.o\n    ++obj-$(CONFIG_FRAME_VECTOR) +\u003d frame_vector.o\n    ++obj-$(CONFIG_DEBUG_PAGE_REF) +\u003d debug_page_ref.o\n    ++obj-$(CONFIG_DAMON) +\u003d damon/\n    ++obj-$(CONFIG_HARDENED_USERCOPY) +\u003d usercopy.o\n    ++obj-$(CONFIG_PERCPU_STATS) +\u003d percpu-stats.o\n    ++obj-$(CONFIG_ZONE_DEVICE) +\u003d memremap.o\n    ++obj-$(CONFIG_HMM_MIRROR) +\u003d hmm.o\n    ++obj-$(CONFIG_MEMFD_CREATE) +\u003d memfd.o\n    ++obj-$(CONFIG_MAPPING_DIRTY_HELPERS) +\u003d mapping_dirty_helpers.o\n    ++obj-$(CONFIG_PTDUMP_CORE) +\u003d ptdump.o\n    ++obj-$(CONFIG_PAGE_REPORTING) +\u003d page_reporting.o\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (a002ae ANDROID: 16K: Introduce /sys/kernel/mm/pgsize_miration/enabl)\n     \n      ## mm/pgsize_migration.c (new) ##\n     @@\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "173d8ff07603558af182d1166969fca18653fd95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
