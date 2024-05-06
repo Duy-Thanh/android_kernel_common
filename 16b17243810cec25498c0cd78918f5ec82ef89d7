@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000076835628",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3075624?revision\u003d1",
+      "key": {
+        "uuid": "545441c3_bd676819",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-06T07:44:41Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/a1865f2e7d10dde00d35a2122b38d2e469ae67ed) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003da1865f2e7d10dde00d35a2122b38d2e469ae67ed).\n\n```\n      ## net/netlink/af_netlink.c ##\n     @@ net/netlink/af_netlink.c: static int netlink_recvmsg(struct socket *sock, struct msghdr *msg, size_t len,\n      \tstruct scm_cookie scm;\n      \tstruct sock *sk \u003d sock-\u003esk;\n      \tstruct netlink_sock *nlk \u003d nlk_sk(sk);\n    +-\tint noblock \u003d flags \u0026 MSG_DONTWAIT;\n     -\tsize_t copied;\n     +\tsize_t copied, max_recvmsg_len;\n      \tstruct sk_buff *skb, *data_skb;\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "16b17243810cec25498c0cd78918f5ec82ef89d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
