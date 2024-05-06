@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "069173fd_1d1eea74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2024-05-06T16:44:15Z",
+      "side": 1,
+      "message": "Let\u0027s drop this patch as it won\u0027t be used under the GUP approach and this change affects mm/",
+      "revId": "077a81d50753aefbf0d1c2fd4bd1e46e7601d18b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
