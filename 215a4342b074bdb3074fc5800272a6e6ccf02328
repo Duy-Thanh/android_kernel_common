@@ -33,6 +33,24 @@
       "message": "My email is wangying37, so I\u0027m not sure if it\u0027s possible to change the sign-off",
       "revId": "215a4342b074bdb3074fc5800272a6e6ccf02328",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d54931d_6627861c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2024-05-06T16:52:47Z",
+      "side": 1,
+      "message": "I think there is misunderstanding. Can you please sign off the patch as\n`Signed-off-by: Ying Wang \u003cwangying37@xiaomi.corp-partner.google.com\u003e`\nCurrently its your email alias `wangying37` in place of your name before the full email address.",
+      "parentUuid": "d66d71bc_85291f21",
+      "revId": "215a4342b074bdb3074fc5800272a6e6ccf02328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
