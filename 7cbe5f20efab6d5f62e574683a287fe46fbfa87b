@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e98ed2_c1f55d87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2024-05-06T16:59:54Z",
+      "side": 1,
+      "message": "Android protected virtual machines use \"pvmfw\" in their boot flow. Add support to nominate a region of memory for the pvmfw. When nominated, the region is shared to the VM as a memory parcel and is unmarked as a demand-paged region.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "7cbe5f20efab6d5f62e574683a287fe46fbfa87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ce74648_7c9dd502",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2024-05-06T16:59:54Z",
+      "side": 1,
+      "message": "I think the reclaim_parcel for pvmfw got accidentally dropped when splitting up the patch.",
+      "revId": "7cbe5f20efab6d5f62e574683a287fe46fbfa87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
