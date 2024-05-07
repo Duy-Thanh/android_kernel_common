@@ -16,6 +16,24 @@
       "message": "Missing the change to drivers/virt/gunyah/Kconfig and include/linux/gunyah_rsc_mgr.h compared to aosp/2475304",
       "revId": "c0e4ba38403676ed17cb8c26e66ce5be8ea3a49b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9625ec28_c75c4b48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2024-05-07T12:06:07Z",
+      "side": 1,
+      "message": "header change is already present in this gerrit. aosp/3072508/2/drivers/virt/gunyah/rsc_mgr.h\nFixed Kconfig in next patchset. Some other config already selects the AUX BUS config. So it went unnoticed. Thanks.",
+      "parentUuid": "663f64ce_2f8ddeee",
+      "revId": "c0e4ba38403676ed17cb8c26e66ce5be8ea3a49b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
