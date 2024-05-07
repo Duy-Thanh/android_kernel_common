@@ -1009,6 +1009,7 @@
   kvfree_call_rcu
   kvfree_sensitive
   kvmalloc_node
+  kvmemdup
   led_mc_calc_color_components
   __list_add_valid_or_report
   __list_del_entry_valid_or_report
