@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000076976566",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3075609?revision\u003d1",
+      "key": {
+        "uuid": "e215f4e3_ad412491",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-07T08:47:00Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/97f7f2ebf3eaa4d5f2e00b0a9c6d23462a25aa2d).\n\n```\n      ## include/linux/mutex.h ##\n     @@\n      #include \u003casm/processor.h\u003e\n      #include \u003clinux/osq_lock.h\u003e\n      #include \u003clinux/debug_locks.h\u003e\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (3bd19b ANDROID: GKI: Update qcom symbol list)\n    + #include \u003clinux/cleanup.h\u003e\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +#include \u003clinux/android_vendor.h\u003e\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (832617 ANDROID: GKI: Add OEM data to mutex/rwsem)\n      \n      #ifdef CONFIG_DEBUG_LOCK_ALLOC\n      # define __DEP_MAP_MUTEX_INITIALIZER(lockname)\t\t\t\\\n    @@ include/linux/rwsem.h: struct rw_semaphore {\n     +\tANDROID_OEM_DATA_ARRAY(1, 2);\n      };\n      \n    - enum rwsem_waiter_type {\n    + /* In all implementations count !\u003d 0 means locked */\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "9aba4cdfd096535eeca67a0652602c8d8b0d2a6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
