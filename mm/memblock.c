@@ -20,6 +20,7 @@
 #include <asm/sections.h>
 #include <linux/io.h>
 #include <linux/sort.h>
+#include <linux/proc_fs.h>
 
 #include "internal.h"
 
@@ -2017,6 +2018,13 @@ static unsigned long memsize_ro __initdata_memblock;
 static unsigned long memsize_bss __initdata_memblock;
 static long memsize_reusable_size __initdata_memblock;
 static bool memblock_memsize_tracking __initdata_memblock = true;
+static bool memblock_memsize_use_debugfs __initdata;
+
+static int __init early_memblock_memsize_debugfs(char *buf)
+{
+	return kstrtobool(buf, &memblock_memsize_use_debugfs);
+}
+early_param("memblock_memsize_debugfs", early_memblock_memsize_debugfs);
 
 void __init memblock_memsize_enable_tracking(void)
 {
@@ -2738,8 +2746,11 @@ static int __init memblock_init_debugfs(void)
 			    &memblock_debug_fops);
 #endif
 #ifdef CONFIG_MEMBLOCK_MEMSIZE
-	debugfs_create_file("memsize", 0444, root,
-			    NULL, &memblock_memsize_fops);
+	if (memblock_memsize_use_debugfs)
+		debugfs_create_file("memsize", 0444, root, NULL,
+				    &memblock_memsize_fops);
+	else
+		proc_create_single("memsize", 0, NULL, memblock_memsize_show);
 #endif
 
 	return 0;
