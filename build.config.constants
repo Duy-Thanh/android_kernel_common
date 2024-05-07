@@ -1,5 +1,9 @@
+<<<<<<< HEAD   (3bd19b ANDROID: GKI: Update qcom symbol list)
 CLANG_VERSION=r510928
 RUSTC_VERSION=1.73.0b
+=======
+CLANG_VERSION=r522817
+>>>>>>> CHANGE (e97ed5 ANDROID: Kleaf: Switch to Clang 18.0.1 (r522817))
 AARCH64_NDK_TRIPLE=aarch64-linux-android31
 X86_64_NDK_TRIPLE=x86_64-linux-android31
 ARM_NDK_TRIPLE=arm-linux-androideabi31
