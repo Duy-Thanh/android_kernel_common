@@ -2257,3 +2257,8 @@
   xhci_remove_secondary_interrupter
   xhci_stop_endpoint_sync
   zap_vma_ptes
+  gunyah_rm_call
+  gunyah_rm_notifier_register
+  gunyah_rm_notifier_unregister
+  gunyah_rm_register_platform_ops
+  gunyah_rm_unregister_platform_ops
