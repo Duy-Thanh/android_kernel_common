@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca497b81_792de8ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2024-05-07T12:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02e98ed2_c1f55d87",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "7cbe5f20efab6d5f62e574683a287fe46fbfa87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ce74648_7c9dd502",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-05-06T16:59:54Z",
       "side": 1,
       "message": "I think the reclaim_parcel for pvmfw got accidentally dropped when splitting up the patch.",
+      "revId": "7cbe5f20efab6d5f62e574683a287fe46fbfa87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcda561f_42b87129",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2024-05-07T12:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ce74648_7c9dd502",
       "revId": "7cbe5f20efab6d5f62e574683a287fe46fbfa87b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
