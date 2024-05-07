@@ -20,6 +20,7 @@
 #include <asm/sections.h>
 #include <linux/io.h>
 #include <linux/sort.h>
+#include <linux/proc_fs.h>
 
 #include "internal.h"
 
@@ -2025,6 +2026,27 @@ static unsigned long memsize_ro __initdata_memblock;
 static unsigned long memsize_bss __initdata_memblock;
 static long memsize_reusable_size;
 
+enum memblock_memsize_state {
+	MEMBLOCK_MEMSIZE_DEBUGFS = 0,
+	MEMBLOCK_MEMSIZE_PROCFS,
+};
+
+static enum memblock_memsize_state memsize_state __initdata_memblock = MEMBLOCK_MEMSIZE_DEBUGFS;
+
+static int __init early_memblock_memsize(char *str)
+{
+	if (!str)
+		return -EINVAL;
+	if (strcmp(str, "debugfs") == 0)
+		memsize_state = MEMBLOCK_MEMSIZE_DEBUGFS;
+	else if (strcmp(str, "procfs") == 0)
+		memsize_state = MEMBLOCK_MEMSIZE_PROCFS;
+	else
+		return -EINVAL;
+	return 0;
+}
+early_param("memblock_memsize", early_memblock_memsize);
+
 void __init memblock_memsize_enable_tracking(void)
 {
 	memblock_memsize_tracking = true;
@@ -2699,8 +2721,12 @@ static int __init memblock_init_debugfs(void)
 			    &memblock_debug_fops);
 #endif
 #ifdef CONFIG_MEMBLOCK_MEMSIZE
-	debugfs_create_file("memsize", 0444, root,
-			    NULL, &memblock_memsize_fops);
+	if (memsize_state == MEMBLOCK_MEMSIZE_DEBUGFS)
+		debugfs_create_file("memsize", 0444, root, NULL,
+				    &memblock_memsize_fops);
+	else if (memsize_state == MEMBLOCK_MEMSIZE_PROCFS)
+		proc_create_single("memsize", 0, NULL,
+				    memblock_memsize_show);
 #endif
 
 	return 0;
