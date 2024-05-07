@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "fae77e9b6d466c71a2ccb4e131b0f5ad7f7a4334",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000076986991",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3064248?revision\u003d2",
+      "key": {
+        "uuid": "a6280b28_3200c4f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-07T12:47:40Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/f4877225313d474659ee53150ccc3d553a978727) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003df4877225313d474659ee53150ccc3d553a978727).\n\n```\n      ## include/linux/skbuff.h ##\n     @@ include/linux/skbuff.h: typedef unsigned char *sk_buff_data_t;\n    @@ include/linux/skbuff.h: typedef unsigned char *sk_buff_data_t;\n       *\t@sk: Socket we are owned by\n     - *\t@ip_defrag_offset: (aka @sk) alternate use of @sk, used in\n     - *\t\tfragmentation management\n    ++ *\t@android_abi: used to be \u0027ip_defrag_offset\u0027 which was removed in 18685451fc4e\n    ++ *\t              (\"inet: inet_defrag: prevent sk release while still in use\")\n       *\t@dev: Device we arrived on/are leaving by\n       *\t@dev_scratch: (aka @dev) alternate use of @dev when @dev would be %NULL\n       *\t@cb: Control buffer. Free for use by every layer. Put private vars here\n     @@ include/linux/skbuff.h: struct sk_buff {\n    - \t\tstruct llist_node\tll_node;\n    - \t};\n      \n    --\tunion {\n    --\t\tstruct sock\t\t*sk;\n    + \tunion {\n    + \t\tstruct sock\t\t*sk;\n     -\t\tint\t\t\tip_defrag_offset;\n    --\t};\n    -+\tstruct sock\t\t*sk;\n    ++\t\tint\t\t\tandroid_abi; /* Was ip_defrag_offset */\n    + \t};\n      \n      \tunion {\n    - \t\tktime_t\t\ttstamp;\n     \n      ## net/ipv4/inet_fragment.c ##\n     @@\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "fae77e9b6d466c71a2ccb4e131b0f5ad7f7a4334",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
