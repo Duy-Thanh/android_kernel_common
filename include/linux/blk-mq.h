@@ -208,6 +208,16 @@ struct request {
 	 */
 	rq_end_io_fn *end_io;
 	void *end_io_data;
+<<<<<<< HEAD   (74ae8d ANDROID: fs: add vendor hook to collect IO statistics)
+||||||| BASE
+
+	ANDROID_KABI_RESERVE(1);
+=======
+
+	ANDROID_OEM_DATA(1);
+
+	ANDROID_KABI_RESERVE(1);
+>>>>>>> CHANGE (943f28 ANDROID: GKI: Add ANDROID_OEM_DATA(1) in struct request to s)
 };
 
 static inline enum req_op req_op(const struct request *req)
