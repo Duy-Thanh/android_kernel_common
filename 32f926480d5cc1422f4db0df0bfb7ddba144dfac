@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "571d3595_382e670b",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2024-05-08T18:01:43Z",
+      "side": 1,
+      "message": "I think we need to reclaim the parcel in more scenarios since the pvmfw parcel doesn\u0027t dissolve to demand paged. We check if mem_handle !\u003d INVAL, so I think we can safely call all the time \u0026 not under the if (vm_status \u003d\u003d LOAD/READ/INIT_FAILED) test.",
+      "range": {
+        "startLine": 990,
+        "startChar": 0,
+        "endLine": 995,
+        "endChar": 52
+      },
+      "revId": "32f926480d5cc1422f4db0df0bfb7ddba144dfac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
