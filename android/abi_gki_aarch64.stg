@@ -332384,7 +332384,7 @@ elf_symbol {
   name: "cpu_subsys"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x992ffdd3
+  crc: 0x08a7bef1
   type_id: 0x257935aa
   full_name: "cpu_subsys"
 }
@@ -345184,7 +345184,7 @@ elf_symbol {
   name: "get_cpu_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8e6dd1ca
+  crc: 0xe3848af1
   type_id: 0xbc4e69b1
   full_name: "get_cpu_device"
 }
@@ -348535,7 +348535,7 @@ elf_symbol {
   name: "inode_newsize_ok"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x72df33ca
+  crc: 0x7049b281
   type_id: 0x936a3614
   full_name: "inode_newsize_ok"
 }
@@ -349030,7 +349030,7 @@ elf_symbol {
   name: "iommu_dma_get_resv_regions"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xee630d7b
+  crc: 0x7b1f9a07
   type_id: 0x10f7e72f
   full_name: "iommu_dma_get_resv_regions"
 }
@@ -349102,7 +349102,7 @@ elf_symbol {
   name: "iommu_get_msi_cookie"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa6bb6c7d
+  crc: 0xeff2a8e7
   type_id: 0x95a57304
   full_name: "iommu_get_msi_cookie"
 }
@@ -350444,7 +350444,7 @@ elf_symbol {
   name: "kernel_kobj"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x086e1424
+  crc: 0xb128fb41
   type_id: 0x23f09c34
   full_name: "kernel_kobj"
 }
@@ -365103,7 +365103,7 @@ elf_symbol {
   name: "setattr_copy"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x895d7c41
+  crc: 0xae2ab20b
   type_id: 0x13bb4203
   full_name: "setattr_copy"
 }
@@ -365112,7 +365112,7 @@ elf_symbol {
   name: "setattr_prepare"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x637f23e8
+  crc: 0x902d65a3
   type_id: 0x9e8855e1
   full_name: "setattr_prepare"
 }
