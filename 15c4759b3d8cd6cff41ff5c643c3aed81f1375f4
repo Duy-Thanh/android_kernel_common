@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce071e5_1ce2b5b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-08T21:03:33Z",
+      "side": 1,
+      "message": "It seems this would have caused an ABI break. The STG file needs to be updated.",
+      "revId": "15c4759b3d8cd6cff41ff5c643c3aed81f1375f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
