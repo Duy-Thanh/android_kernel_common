@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077122917",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3078637?revision\u003d2",
+      "key": {
+        "uuid": "d2952208_2d6b261b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-08T09:45:03Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/549e91a9bbaa0ee480f59357868421a61d369770) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d549e91a9bbaa0ee480f59357868421a61d369770).\n\n```\n      ## drivers/ufs/core/ufshcd.c ##\n     @@ drivers/ufs/core/ufshcd.c: static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)\n    @@ drivers/ufs/core/ufshcd.c: static int ufshcd_exec_dev_cmd(struct ufs_hba *hba,\n      \terr \u003d ufshcd_compose_dev_cmd(hba, lrbp, cmd_type, tag);\n      \tif (unlikely(err))\n      \t\tgoto out;\n    -@@ drivers/ufs/core/ufshcd.c: static void ufshcd_release_scsi_cmd(struct ufs_hba *hba,\n    - \tstruct scsi_cmnd *cmd \u003d lrbp-\u003ecmd;\n    +@@ drivers/ufs/core/ufshcd.c: void ufshcd_release_scsi_cmd(struct ufs_hba *hba,\n      \n      \tscsi_dma_unmap(cmd);\n    + \tufshcd_crypto_clear_prdt(hba, lrbp);\n     -\tlrbp-\u003ecmd \u003d NULL;\t/* Mark the command as completed. */\n      \tufshcd_release(hba);\n      \tufshcd_clk_scaling_update_busy(hba);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "251afd2b5c5dc65bf74fc83c12df5f33dfa141ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
