@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22138c86_939928e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2024-05-08T17:54:26Z",
+      "side": 1,
+      "message": "I suspect tooling will want us to put the defconfig change first so the symbols exist when updating the STG representation.",
+      "revId": "4e70e0fcdf45af92c61a4503047c5c6e3b4c6be5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
