@@ -4537,6 +4537,9 @@ static vm_fault_t do_read_fault(struct vm_fault *vmf)
 	struct vm_area_struct *vma = vmf->vma;
 	vm_fault_t ret = 0;
 
+	trace_android_rvh_do_read_fault(vmf->vma->vm_file, vmf->pgoff,
+					&fault_around_bytes);
+
 	/*
 	 * Let's call ->map_pages() first and use ->fault() as fallback
 	 * if page by the offset is not ready to be mapped (cold cache or

@@ -404,3 +404,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_swap_map_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_post_image_save);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_end_madvise);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_rndis_enabled);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
