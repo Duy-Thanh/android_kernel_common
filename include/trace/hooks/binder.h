@@ -91,6 +91,7 @@ DECLARE_HOOK(android_vh_binder_has_proc_work_ilocked,
 DECLARE_HOOK(android_vh_binder_check_special_work,
 	TP_PROTO(struct binder_proc *proc, struct list_head **special_list),
 	TP_ARGS(proc, special_list));
+<<<<<<< HEAD   (501f58f107abffc12890886764a1be3641742660 ANDROID: GKI: defconfig: Enable a few zram configs)
 DECLARE_HOOK(android_vh_binder_free_proc,
 	TP_PROTO(struct binder_proc *proc),
 	TP_ARGS(proc));
@@ -137,6 +138,26 @@ DECLARE_HOOK(android_vh_binder_new_ref,
 DECLARE_HOOK(android_vh_binder_del_ref,
 	TP_PROTO(struct binder_proc *proc, uint32_t ref_desc),
 	TP_ARGS(proc, ref_desc));
+||||||| BASE   (4a93f65ba7770242e187d7b4bbcb07b3572b3c03 ANDROID: arm64: ioremap/iounmap use range for MMIO guard hyp)
+
+=======
+DECLARE_HOOK(android_vh_binder_looper_state_registered,
+	TP_PROTO(struct binder_thread *thread, struct binder_proc *proc),
+	TP_ARGS(thread, proc));
+DECLARE_HOOK(android_vh_binder_thread_read,
+	TP_PROTO(struct list_head **list, struct binder_proc *proc,
+		struct binder_thread *thread),
+	TP_ARGS(list, proc, thread));
+DECLARE_HOOK(android_vh_binder_free_proc,
+	TP_PROTO(struct binder_proc *proc),
+	TP_ARGS(proc));
+DECLARE_HOOK(android_vh_binder_thread_release,
+	TP_PROTO(struct binder_proc *proc, struct binder_thread *thread),
+	TP_ARGS(proc, thread));
+DECLARE_HOOK(android_vh_binder_read_done,
+	TP_PROTO(struct binder_proc *proc, struct binder_thread *thread),
+	TP_ARGS(proc, thread));
+>>>>>>> CHANGE (b98dd52b77f25f724052221c54b4e197692406e7 ANDROID: GKI: Add symbols to symbol list for tcl)
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

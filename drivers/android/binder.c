@@ -4516,6 +4516,7 @@ static int binder_thread_write(struct binder_proc *proc,
 			}
 			thread->looper |= BINDER_LOOPER_STATE_REGISTERED;
 			binder_inner_proc_unlock(proc);
+			trace_android_vh_binder_looper_state_registered(thread, proc);
 			break;
 		case BC_ENTER_LOOPER:
 			binder_debug(BINDER_DEBUG_THREADS,
@@ -5498,7 +5499,11 @@ static void binder_free_proc(struct binder_proc *proc)
 	put_task_struct(proc->tsk);
 	put_cred(proc->cred);
 	binder_stats_deleted(BINDER_STAT_PROC);
+<<<<<<< HEAD   (501f58f107abffc12890886764a1be3641742660 ANDROID: GKI: defconfig: Enable a few zram configs)
 	dbitmap_free(&proc->dmap);
+||||||| BASE   (4a93f65ba7770242e187d7b4bbcb07b3572b3c03 ANDROID: arm64: ioremap/iounmap use range for MMIO guard hyp)
+=======
+>>>>>>> CHANGE (b98dd52b77f25f724052221c54b4e197692406e7 ANDROID: GKI: Add symbols to symbol list for tcl)
 	trace_android_vh_binder_free_proc(proc);
 	kfree(proc);
 }
@@ -5598,6 +5603,7 @@ static int binder_thread_release(struct binder_proc *proc,
 	if (send_reply)
 		binder_send_failed_reply(send_reply, BR_DEAD_REPLY);
 	binder_release_work(proc, &thread->todo);
+	trace_android_vh_binder_thread_release(proc, thread);
 	binder_thread_dec_tmpref(thread);
 	return active_transactions;
 }
@@ -5671,6 +5677,7 @@ static int binder_ioctl_write_read(struct file *filp, unsigned long arg,
 		if (!binder_worklist_empty_ilocked(&proc->todo) || has_special_work)
 			binder_wakeup_proc_ilocked(proc);
 		binder_inner_proc_unlock(proc);
+		trace_android_vh_binder_read_done(proc, thread);
 		if (ret < 0) {
 			if (copy_to_user(ubuf, &bwr, sizeof(bwr)))
 				ret = -EFAULT;
