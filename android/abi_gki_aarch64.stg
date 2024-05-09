@@ -321453,6 +321453,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_tcp_rtt_estimator"
 }
 elf_symbol {
+  id: 0x9c4fb9ab
+  name: "__traceiter_android_vh_tcp_write_timeout_estab_retrans"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x83dd8683
+  type_id: 0x9bdaaaaa
+  full_name: "__traceiter_android_vh_tcp_write_timeout_estab_retrans"
+}
+elf_symbol {
   id: 0x48f0cf25
   name: "__traceiter_android_vh_test_clear_look_around_ref"
   is_defined: true
@@ -324655,6 +324664,15 @@ elf_symbol {
   crc: 0x34537810
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_tcp_rtt_estimator"
+}
+elf_symbol {
+  id: 0x1a59144d
+  name: "__tracepoint_android_vh_tcp_write_timeout_estab_retrans"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8f6e2f4a
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_tcp_write_timeout_estab_retrans"
 }
 elf_symbol {
   id: 0x4ef2c337
@@ -376276,6 +376294,7 @@ interface {
   symbol_id: 0x34a01a22
   symbol_id: 0xdd9dd67b
   symbol_id: 0x592647e4
+  symbol_id: 0x9c4fb9ab
   symbol_id: 0x48f0cf25
   symbol_id: 0x40d428a7
   symbol_id: 0xe334c57d
@@ -376632,6 +376651,7 @@ interface {
   symbol_id: 0x3fe0157c
   symbol_id: 0xe5bf742d
   symbol_id: 0x3165f55a
+  symbol_id: 0x1a59144d
   symbol_id: 0x4ef2c337
   symbol_id: 0xafd4e4b1
   symbol_id: 0xfcee39f3
