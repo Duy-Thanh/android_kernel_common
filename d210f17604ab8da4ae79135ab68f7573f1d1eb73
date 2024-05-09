@@ -16,6 +16,24 @@
       "message": "Darren, could you find the coverage diff between the original test set and the new test set with CtsWifiBroadcastsHostTestCases added? The test should be added only if there is coverage gain.",
       "revId": "d210f17604ab8da4ae79135ab68f7573f1d1eb73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8a41187_a4c45d75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1972930
+      },
+      "writtenOn": "2024-05-09T15:11:08Z",
+      "side": 1,
+      "message": "Yes, I built up the dashboard to validate which function coverage of the files actually increased, \nI updated the link on Buganizer:b/338500074",
+      "parentUuid": "b7d7278f_499726c7",
+      "revId": "d210f17604ab8da4ae79135ab68f7573f1d1eb73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
