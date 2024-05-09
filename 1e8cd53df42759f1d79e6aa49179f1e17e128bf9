@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e809f771_90f07c5d",
+        "filename": "drivers/android/binder/range_alloc/mod.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-05-09T14:05:09Z",
+      "side": 1,
+      "message": "I\u0027m reading the commits after this one, wondering if there is a way to improve the booleans here by making it an enum, perhaps even with the functions required for the caller to create the allocations needed.\n\nWDYT?",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 167,
+        "endChar": 26
+      },
+      "revId": "1e8cd53df42759f1d79e6aa49179f1e17e128bf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
