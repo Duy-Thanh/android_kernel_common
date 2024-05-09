@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "305b5373_8dcfcadb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2024-05-09T23:06:34Z",
+      "side": 1,
+      "message": "Once the other CL got the ack, will generate stg",
+      "revId": "4e65eec20777e48e8a1ef4c6c95f0592f3ee7568",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
