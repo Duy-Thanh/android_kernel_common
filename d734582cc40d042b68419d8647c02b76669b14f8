@@ -2,6 +2,66 @@
   "comments": [
     {
       "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077300299",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3079545?revision\u003d1",
+      "key": {
+        "uuid": "6a022040_0a3c3676",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-09T12:12:21Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "d734582cc40d042b68419d8647c02b76669b14f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077300299",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3079545?revision\u003d1",
+      "key": {
+        "uuid": "7b34bb6e_f3cb4737",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-09T12:12:21Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "d734582cc40d042b68419d8647c02b76669b14f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077300299",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3079545?revision\u003d1",
+      "key": {
+        "uuid": "47359466_ba5e027e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-09T12:12:21Z",
+      "side": 1,
+      "message": "Can not find the original change on base branch (android14-5.15) for this change.\nPlease ensure that the Change-Id of this change is same as the original change on the base branch.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "d734582cc40d042b68419d8647c02b76669b14f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
       "robotRunId": "AR00000000000077300293",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/3079545?revision\u003d1",
       "key": {
@@ -20,6 +80,64 @@
       "fixSuggestions": [
         {
           "fixId": "95d3534a_369d11d8",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 161,
+                "startChar": 0,
+                "endLine": 166,
+                "endChar": 0
+              },
+              "replacement": "    #    \"drivers/base/regmap/regmap-kunit.ko\",\n    #    \"drivers/base/regmap/regmap-ram.ko\",\n    #    \"drivers/base/regmap/regmap-raw-ram.ko\",\n    #    \"drivers/clk/clk-gate_test.ko\",\n    #    \"drivers/clk/clk_test.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 190,
+                "endChar": 0
+              },
+              "replacement": "    #    \"drivers/hid/hid-uclogic-test.ko\",\n    #    \"drivers/iio/test/iio-test-format.ko\",\n    #    \"drivers/input/tests/input_test.ko\",\n    #    \"drivers/rtc/lib_test.ko\",\n    #    \"fs/ext4/ext4-inode-test.ko\",\n    #    \"fs/fat/fat_test.ko\",\n    #    \"kernel/time/time_test.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 198,
+                "endChar": 0
+              },
+              "replacement": "    #    \"mm/kfence/kfence_test.ko\",\n    #    \"sound/soc/soc-topology-test.ko\",\n    #    \"sound/soc/soc-utils-test.ko\",\n    #    \"net/core/dev_addr_lists_test.ko\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d734582cc40d042b68419d8647c02b76669b14f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077300293",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3079545?revision\u003d1",
+      "key": {
+        "uuid": "8bd5742c_d25d0e93",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-09T12:12:21Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "fa4c450f_bed721ad",
           "description": "Buildifier Suggestion",
           "replacements": [
             {
