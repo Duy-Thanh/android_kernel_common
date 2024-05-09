@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4077e868_06130aee",
+        "filename": "mm/rmap.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-05-09T17:11:20Z",
+      "side": 1,
+      "message": "Yes, but this is needed to implement __trace_android_vh_update_page_mapcount() function which is forward-declared (see DECLARE_INDIRECT_HOOK(android_vh_update_page_mapcount)) and used in rmap.h header.\n.c file can use the tracepoint directly, that\u0027s not a problem.",
+      "parentUuid": "e3158bd5_e75f9a83",
+      "revId": "987c04970d80a7a23121c34ec4a02b90ece88020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79b77d1a_61be4f35",
         "filename": "mm/vmscan.c",
         "patchSetId": 12
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-09T16:38:02Z",
       "side": 1,
       "message": "this isn\u0027t being used in this file",
+      "revId": "987c04970d80a7a23121c34ec4a02b90ece88020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b80201c9_ec0313c9",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-05-09T17:11:20Z",
+      "side": 1,
+      "message": "see answer in mm/rmap.c",
+      "parentUuid": "79b77d1a_61be4f35",
       "revId": "987c04970d80a7a23121c34ec4a02b90ece88020",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2024-05-09T16:38:02Z",
       "side": 1,
       "message": "isn\u0027t the hook being used directly below? Is this needed?",
+      "revId": "987c04970d80a7a23121c34ec4a02b90ece88020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "836252f0_874179aa",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-05-09T17:11:20Z",
+      "side": 1,
+      "message": "see answer in mm/rmap.c",
+      "parentUuid": "53743284_3a21abd1",
       "revId": "987c04970d80a7a23121c34ec4a02b90ece88020",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
