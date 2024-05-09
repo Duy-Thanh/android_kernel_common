@@ -54,14 +54,31 @@ struct domain_iommu_node {
 	unsigned long ref;
 };
 
+/*
+ * The io-pgtable-arm is designed to run concurrently, however having requests from the kernel
+ * can undermine the security of the hypervisor if the kernel is malicous or buggy and doesn't
+ * match the assumptions of the design (mainly no 2 calls can operate on same VA range in the
+ * same page table).
+ * instead of using locks per page table, we can only lock if 2 calls operate in the same VA
+ * range.
+ */
+struct kvm_hyp_smmu_va_sync {
+	u64 va_start;
+	u64 va_end;
+};
+
 struct hyp_arm_smmu_v3_domain {
 	struct kvm_hyp_iommu_domain     *domain;
 	struct list_head		iommu_list;
 	u32				type;
 	hyp_rwlock_t			lock; /* Protects iommu_list. */
-	hyp_spinlock_t			pgt_lock; /* protects page table. */
 	struct io_pgtable		*pgtable;
+	struct kvm_hyp_smmu_va_sync	*sync;
+	unsigned long			sync_bitmap;
 };
+
+#define SYNC_ARR_LEN			(BITS_PER_LONG)
+#define SYNC_ARR_SIZE			(SYNC_ARR_LEN * sizeof(struct kvm_hyp_smmu_va_sync))
 
 struct kvm_iommu_walk_data {
 	struct kvm_iommu_paddr_cache *cache;
@@ -1153,17 +1170,24 @@ out_unlock:
 int smmu_alloc_domain(struct kvm_hyp_iommu_domain *domain, u32 type)
 {
 	struct hyp_arm_smmu_v3_domain *smmu_domain;
+	void * sync = NULL;
+
+	/* ID domain is managed by the hypervisor and trusted. */
+	if (type != KVM_IOMMU_DOMAIN_IDMAP_TYPE) {
+		sync = smmu_alloc(SYNC_ARR_SIZE);
+		if (!sync)
+			return -ENOMEM;
+	}
 
 	smmu_domain = smmu_alloc(sizeof(struct hyp_arm_smmu_v3_domain));
 	if (!smmu_domain)
 		return -ENOMEM;
-
 	/* Can't do much without the IOMMU. */
 	INIT_LIST_HEAD(&smmu_domain->iommu_list);
 	smmu_domain->domain = domain;
 	smmu_domain->type = type;
+	smmu_domain->sync = sync;
 	hyp_rwlock_init(&smmu_domain->lock);
-	hyp_spin_lock_init(&smmu_domain->pgt_lock);
 	domain->priv = (void *)smmu_domain;
 
 	return 0;
@@ -1179,6 +1203,7 @@ void smmu_free_domain(struct kvm_hyp_iommu_domain *domain)
 	if (smmu_domain->pgtable)
 		kvm_arm_io_pgtable_free(smmu_domain->pgtable);
 
+	hyp_free(smmu_domain->sync);
 	hyp_free(smmu_domain);
 }
 
@@ -1262,6 +1287,73 @@ int smmu_resume(struct kvm_hyp_iommu *iommu)
 	return 0;
 }
 
+static void release_va_domain(struct hyp_arm_smmu_v3_domain *smmu_domain)
+{
+	u64 old_sync_bitmap, new_sync_bitmap;
+	int id = hyp_smp_processor_id();
+	struct kvm_hyp_smmu_va_sync *sync = &smmu_domain->sync[id];
+
+       if (!sync->va_start && !sync->va_end)
+               return;
+
+	/*
+	 * cmpxchg64_acquire used to order clearning of va_{start, end} to occur
+	 * after clearing the bit.
+	 */
+       do {
+               old_sync_bitmap = READ_ONCE(smmu_domain->sync_bitmap);
+               new_sync_bitmap = old_sync_bitmap & ~(1ULL << id);
+       } while (cmpxchg64_acquire(&smmu_domain->sync_bitmap, old_sync_bitmap,
+                                new_sync_bitmap) != old_sync_bitmap);
+
+       sync->va_start = 0;
+       sync->va_end = 0;
+}
+
+static bool sync_range_overlap(struct kvm_hyp_smmu_va_sync *this,
+                              struct kvm_hyp_smmu_va_sync *other)
+{
+	return this->va_start < other->va_end && other->va_start < this->va_end;
+}
+
+/*
+ * Although we can tolerate multiple readers (iova_to_phys), this case is not common
+ * and we don't optimize for it.
+ */
+static int sync_va_domain(struct hyp_arm_smmu_v3_domain *smmu_domain,
+                         u64 va_start, u64 va_end)
+{
+	int id = hyp_smp_processor_id();
+	unsigned long old_sync_bitmap, new_sync_bitmap;
+	int i;
+
+	BUG_ON(id >= SYNC_ARR_LEN);
+	WARN_ON(READ_ONCE(smmu_domain->sync_bitmap) & (1ULL << id));
+
+	smmu_domain->sync[id].va_start = va_start;
+	smmu_domain->sync[id].va_end = va_end;
+	/*
+	 * cmpxchg64_release used to order setting of va_{start, end} as they must
+	 * appear correctly after the bit is set.
+	 */
+       do {
+		old_sync_bitmap = READ_ONCE(smmu_domain->sync_bitmap);
+		new_sync_bitmap = old_sync_bitmap | (1ULL << id);
+	} while (cmpxchg64_release(&smmu_domain->sync_bitmap, old_sync_bitmap,
+				   new_sync_bitmap) != old_sync_bitmap);
+
+	for_each_set_bit(i , &old_sync_bitmap, SYNC_ARR_LEN) {
+		if (i == id)
+			continue;
+		if (sync_range_overlap(&smmu_domain->sync[i] , &smmu_domain->sync[id])) {
+			/* We release and retry as 2 cores might fighiting. */
+			release_va_domain(smmu_domain);
+			return -EAGAIN;
+		}
+	}
+	return 0;
+}
+
 int smmu_map_pages(struct kvm_hyp_iommu_domain *domain, unsigned long iova,
 		   phys_addr_t paddr, size_t pgsize,
 		   size_t pgcount, int prot, size_t *total_mapped)
@@ -1275,7 +1367,9 @@ int smmu_map_pages(struct kvm_hyp_iommu_domain *domain, unsigned long iova,
 	if (!IS_ALIGNED(iova | paddr | pgsize, granule))
 		return -EINVAL;
 
-	hyp_spin_lock(&smmu_domain->pgt_lock);
+	if (sync_va_domain(smmu_domain, iova, iova + pgsize * pgcount))
+		return -EAGAIN;
+
 	while (pgcount && !ret) {
 		mapped = 0;
 		ret = smmu_domain->pgtable->ops.map_pages(&smmu_domain->pgtable->ops, iova, paddr, pgsize,
@@ -1290,8 +1384,8 @@ int smmu_map_pages(struct kvm_hyp_iommu_domain *domain, unsigned long iova,
 		iova += mapped;
 		paddr += mapped;
 	}
-	hyp_spin_unlock(&smmu_domain->pgt_lock);
 
+	release_va_domain(smmu_domain);
 	return 0;
 }
 
@@ -1331,10 +1425,13 @@ static size_t smmu_unmap_pages(struct kvm_hyp_iommu_domain *domain, unsigned lon
 	if (!IS_ALIGNED(iova | pgsize, granule))
 		return 0;
 
-	hyp_spin_lock(&smmu_domain->pgt_lock);
+	if (sync_va_domain(smmu_domain, iova, iova + pgsize * pgcount))
+		return 0;
+
 	unmapped = smmu_domain->pgtable->ops.unmap_pages_walk(&smmu_domain->pgtable->ops, iova, pgsize,
 							 pgcount, gather, &walker);
-	hyp_spin_unlock(&smmu_domain->pgt_lock);
+
+	release_va_domain(smmu_domain);
 	return unmapped;
 }
 
@@ -1344,10 +1441,11 @@ static phys_addr_t smmu_iova_to_phys(struct kvm_hyp_iommu_domain *domain,
 	phys_addr_t paddr;
 	struct hyp_arm_smmu_v3_domain *smmu_domain = domain->priv;
 
-	hyp_spin_lock(&smmu_domain->pgt_lock);
-	paddr = smmu_domain->pgtable->ops.iova_to_phys(&smmu_domain->pgtable->ops, iova);
-	hyp_spin_unlock(&smmu_domain->pgt_lock);
+	if (sync_va_domain(smmu_domain, iova, iova + PAGE_SIZE))
+		return 0;
 
+	paddr = smmu_domain->pgtable->ops.iova_to_phys(&smmu_domain->pgtable->ops, iova);
+	release_va_domain(smmu_domain);
 	return paddr;
 }
 
