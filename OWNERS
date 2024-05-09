@@ -13,5 +13,13 @@ smuckle@google.com
 surenb@google.com
 tkjos@google.com
 
+<<<<<<< TARGET BRANCH (bc03af ANDROID: add kselftest_mm_* to test-mapping presubmit. am: 0)
 # The following OWNERS can review changes in android-mainline-riscv64.
 prashanthsw@google.com
+=======
+# Test mapping changes can be made by anyone
+per-file */TEST_MAPPING = *
+
+# Test config xml can be made by anyone
+per-file */*.xml = *
+>>>>>>> SOURCE BRANCH (320b35 ANDROID: add per-file owner rule for TEST_MAPPING.)
