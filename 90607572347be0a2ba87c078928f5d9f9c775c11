@@ -16,6 +16,24 @@
       "message": "Could this be encapsulated into a macro to make it less error prone for future cases? Something like:\n```\nINDIRECT_HOOK(android_vh_add_page_to_lrulist,(folio, compound, lru) params),\n              (struct folio *folio, bool compound, enum lru_list lru));\n```\nWhich would be something like:\n```\n#define INDIRECT_HOOK(hook_name)\\\n  extern struct tracepoint __tracepoint_##hook_name;\\\n  void __trace_##hook_name args;\\\n  static __always_inline void _trace_##hook(params) {\\\n     if (static_key_false(\u0026__tracepoint_##hook_name.key))\\\n\t\t__trace_##hook_name args;\n```\nand would expand to:\n```\nextern struct tracepoint __tracepoint_android_vh_add_page_to_lrulist;\nvoid __trace_android_vh_add_page_to_lrulist(struct folio *folio, bool compound,\n\t\t\t\t\t    enum lru_list lru);\nstatic __always_inline void _trace_android_vh_add_page_to_lrulist(struct folio *folio, bool compound, enum lru_list lru)\n{\n\tif (static_key_false(\u0026__tracepoint_android_vh_add_page_to_lrulist.key))\n\t\t__trace_android_vh_add_page_to_lrulist(folio, compound, lru);\n}\n```",
       "revId": "90607572347be0a2ba87c078928f5d9f9c775c11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a437cc05_9e5aa596",
+        "filename": "include/linux/mm_inline.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-05-09T07:25:17Z",
+      "side": 1,
+      "message": "I added these macros in https://android-review.googlesource.com/c/kernel/common/+/3080385",
+      "parentUuid": "c85303d7_78bc26ae",
+      "revId": "90607572347be0a2ba87c078928f5d9f9c775c11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
