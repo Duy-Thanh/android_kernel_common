@@ -16,6 +16,24 @@
       "message": "Please don\u0027t add the \"ERROR:\" lines to the commit message next time.",
       "revId": "e3208d58c604aa857c75d6192a344d1930e02f4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce668af2_e502e7e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-09T16:14:01Z",
+      "side": 1,
+      "message": "Also, please remember not to add the `ERROR:` lines this time.",
+      "parentUuid": "3f7bbe6d_3f5e5ac1",
+      "revId": "e3208d58c604aa857c75d6192a344d1930e02f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
