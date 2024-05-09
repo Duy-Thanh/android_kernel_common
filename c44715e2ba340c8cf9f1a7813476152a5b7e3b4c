@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05951a5f_f5cf4fdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-09T16:13:13Z",
+      "side": 1,
+      "message": "This needs to be rebased, it has merge conflicts with your other change 3033536. You could avoid this work next time by stacking your patchsets together.",
+      "revId": "c44715e2ba340c8cf9f1a7813476152a5b7e3b4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
