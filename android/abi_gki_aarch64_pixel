@@ -879,6 +879,8 @@
   extcon_set_state_sync
   extcon_unregister_notifier
   fasync_helper
+  fault_around_bytes_get
+  fault_around_bytes_set
   __fdget
   fd_install
   fget
