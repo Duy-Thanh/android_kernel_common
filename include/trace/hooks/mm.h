@@ -107,6 +107,37 @@ DECLARE_HOOK(android_vh_slab_alloc_node,
 DECLARE_HOOK(android_vh_slab_free,
 	TP_PROTO(unsigned long addr, struct kmem_cache *s),
 	TP_ARGS(addr, s));
+<<<<<<< HEAD   (1167608bcacbad17ba117b545f8754dd0d44e4bb ANDROID: sched: proxy-exec: Shortcut out of activate_blocked)
+||||||| BASE   (7526d28b1e051f76e7a44fc6b6b775cadc0866cc FROMGIT: printk/panic: Add option to allow non-panic CPUs to)
+DECLARE_HOOK(android_vh_process_madvise_begin,
+	TP_PROTO(struct task_struct *task, int behavior),
+	TP_ARGS(task, behavior));
+DECLARE_HOOK(android_vh_process_madvise_iter,
+	TP_PROTO(struct task_struct *task, int behavior, ssize_t *ret),
+	TP_ARGS(task, behavior, ret));
+DECLARE_HOOK(android_vh_rmqueue,
+	TP_PROTO(struct zone *preferred_zone, struct zone *zone,
+		unsigned int order, gfp_t gfp_flags,
+		unsigned int alloc_flags, int migratetype),
+	TP_ARGS(preferred_zone, zone, order,
+		gfp_flags, alloc_flags, migratetype));
+=======
+DECLARE_HOOK(android_vh_process_madvise_begin,
+	TP_PROTO(struct task_struct *task, int behavior),
+	TP_ARGS(task, behavior));
+DECLARE_HOOK(android_vh_process_madvise_iter,
+	TP_PROTO(struct task_struct *task, int behavior, ssize_t *ret),
+	TP_ARGS(task, behavior, ret));
+DECLARE_RESTRICTED_HOOK(android_rvh_do_read_fault,
+	TP_PROTO(struct vm_fault *vmf, unsigned long *fault_around_pages),
+	TP_ARGS(vmf, fault_around_pages), 1);
+DECLARE_HOOK(android_vh_rmqueue,
+	TP_PROTO(struct zone *preferred_zone, struct zone *zone,
+		unsigned int order, gfp_t gfp_flags,
+		unsigned int alloc_flags, int migratetype),
+	TP_ARGS(preferred_zone, zone, order,
+		gfp_flags, alloc_flags, migratetype));
+>>>>>>> CHANGE (3e2ca7c9f0f5eaaf6bb01f8fb1b4ed7ca70ec7f8 ANDROID: mm: Add restricted vendor hook in do_read_fault())
 DECLARE_HOOK(android_vh_filemap_get_folio,
 	TP_PROTO(struct address_space *mapping, pgoff_t index,
 		int fgp_flags, gfp_t gfp_mask, struct folio *folio),
