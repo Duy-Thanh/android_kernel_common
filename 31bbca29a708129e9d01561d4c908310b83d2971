@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077312305",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3071883?revision\u003d2",
+      "key": {
+        "uuid": "5064367c_a9d2ca0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-09T15:02:49Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/edc5a009ee3bdc2161e2c3e782a37805617790a3) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dedc5a009ee3bdc2161e2c3e782a37805617790a3).\n\n```\n      ## drivers/usb/typec/tcpm/tcpm.c ##\n    -@@ drivers/usb/typec/tcpm/tcpm.c: static void tcpm_queue_vdm_unlocked(struct tcpm_port *port, const u32 header,\n    - \t\t\t\t    const u32 *data, int cnt, enum tcpm_transmit_type tx_sop_type)\n    - {\n    - \tmutex_lock(\u0026port-\u003elock);\n    --\ttcpm_queue_vdm(port, header, data, cnt, TCPC_TX_SOP);\n    -+\ttcpm_queue_vdm(port, header, data, cnt, tx_sop_type);\n    - \tmutex_unlock(\u0026port-\u003elock);\n    - }\n    - \n    +@@ drivers/usb/typec/tcpm/tcpm.c: static void run_state_machine(struct tcpm_port *port)\n    + \t\tbreak;\n    + \tcase PORT_RESET:\n    + \t\ttcpm_reset_port(port);\n    ++\t\tport-\u003epd_events \u003d 0;\n    + \t\ttcpm_set_cc(port, TYPEC_CC_OPEN);\n    + \t\ttcpm_set_state(port, PORT_RESET_WAIT_OFF,\n    + \t\t\t       PD_T_ERROR_RECOVERY);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "31bbca29a708129e9d01561d4c908310b83d2971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
