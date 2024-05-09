@@ -14,10 +14,16 @@ extern const struct pkvm_module_ops		*mod_ops;
 #undef memcpy
 #undef kvm_flush_dcache_to_poc
 #undef kern_hyp_va
+#undef hyp_smp_processor_id
 
 /* Needs alternatives which is not supported at the moment. */
 #undef cmpxchg64_relaxed
+#undef cmpxchg64_acquire
+#undef cmpxchg64_release
+
 #define cmpxchg64_relaxed			__ll_sc__cmpxchg_case_64
+#define cmpxchg64_acquire			__ll_sc__cmpxchg_case_acq_64
+#define cmpxchg64_release			__ll_sc__cmpxchg_case_rel_64
 
 #define hyp_free(x)				CALL_FROM_OPS(hyp_free, x)
 #define hyp_alloc_errno()			CALL_FROM_OPS(hyp_alloc_errno)
@@ -41,6 +47,7 @@ extern const struct pkvm_module_ops		*mod_ops;
 #define kvm_iommu_donate_pages_atomic(x)	CALL_FROM_OPS(iommu_donate_pages_atomic, x)
 #define kvm_iommu_reclaim_pages_atomic(x, y)	CALL_FROM_OPS(iommu_reclaim_pages_atomic, x, y)
 #define kvm_iommu_snapshot_host_stage2(x)	CALL_FROM_OPS(iommu_snapshot_host_stage2, x)
+#define hyp_smp_processor_id()			CALL_FROM_OPS(hyp_smp_processor_id)
 #endif
 
 #endif /* __ARM_SMMU_V3_MODULE__ */
