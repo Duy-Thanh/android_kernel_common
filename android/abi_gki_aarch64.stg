@@ -324990,6 +324990,13 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x9bc0ce91
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x33756485
+}
+function {
   id: 0x9bc0fd25
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -344833,6 +344840,15 @@ elf_symbol {
   full_name: "__traceiter_dma_fence_emit"
 }
 elf_symbol {
+  id: 0x196ba627
+  name: "__traceiter_do_read_fault"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x00bd8950
+  type_id: 0x9bc0ce91
+  full_name: "__traceiter_do_read_fault"
+}
+elf_symbol {
   id: 0xafc53276
   name: "__traceiter_dwc3_readl"
   is_defined: true
@@ -349115,6 +349131,15 @@ elf_symbol {
   crc: 0xc5a3367a
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_dma_fence_emit"
+}
+elf_symbol {
+  id: 0xe4932765
+  name: "__tracepoint_do_read_fault"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xd4c7afce
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_do_read_fault"
 }
 elf_symbol {
   id: 0x53afc62c
@@ -367314,6 +367339,24 @@ elf_symbol {
   crc: 0x30d08796
   type_id: 0x8432b9df
   full_name: "fasync_helper"
+}
+elf_symbol {
+  id: 0xa07ee6b1
+  name: "fault_around_bytes_get"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6a8f8812
+  type_id: 0x9b17d9b6
+  full_name: "fault_around_bytes_get"
+}
+elf_symbol {
+  id: 0xa0573e6a
+  name: "fault_around_bytes_set"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8ea72db5
+  type_id: 0x99e736ad
+  full_name: "fault_around_bytes_set"
 }
 elf_symbol {
   id: 0xc56006c7
@@ -408907,6 +408950,7 @@ interface {
   symbol_id: 0x7e705ab7
   symbol_id: 0x7b03aae7
   symbol_id: 0x92373f85
+  symbol_id: 0x196ba627
   symbol_id: 0xafc53276
   symbol_id: 0x5e5d9a70
   symbol_id: 0x104ffeec
@@ -409383,6 +409427,7 @@ interface {
   symbol_id: 0xbf086359
   symbol_id: 0xef6e6795
   symbol_id: 0xb2d6f207
+  symbol_id: 0xe4932765
   symbol_id: 0x53afc62c
   symbol_id: 0x3b13741e
   symbol_id: 0xd8f3ca82
@@ -411404,6 +411449,8 @@ interface {
   symbol_id: 0xad3eb214
   symbol_id: 0xb107d2cd
   symbol_id: 0x8628f24d
+  symbol_id: 0xa07ee6b1
+  symbol_id: 0xa0573e6a
   symbol_id: 0xc56006c7
   symbol_id: 0x639b2403
   symbol_id: 0xbbfb394e
