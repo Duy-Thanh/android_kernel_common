@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077440173",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3082146?revision\u003d2",
+      "key": {
+        "uuid": "f871bcb0_a8310001",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-10T08:42:22Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/8f68ff0b3bd66371083846590ff287c167ef32ee).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_sdio_pm_flag_set);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake_finish);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_fault_around_bytes);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_swappiness);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_partial_init);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_adjust_alloc_flags);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_adjust_kvmalloc_flags);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_looper_state_registered);\n     \n      ## include/trace/hooks/mm.h ##\n    -@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_isolate_freepages,\n    - DECLARE_HOOK(android_vh_do_swap_page_spf,\n    - \tTP_PROTO(bool *allow_swap_spf),\n    - \tTP_ARGS(allow_swap_spf));\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_slab_folio_alloced,\n    + DECLARE_HOOK(android_vh_kmalloc_large_alloced,\n    + \tTP_PROTO(struct page *page, unsigned int order, gfp_t flags),\n    + \tTP_ARGS(page, order, flags));\n     +DECLARE_HOOK(android_vh_tune_fault_around_bytes,\n     +\tTP_PROTO(unsigned long *fault_around_bytes),\n     +\tTP_ARGS(fault_around_bytes));\n    @@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_isolate_freepages,\n      /* This part must be outside protection */\n     \n      ## mm/memory.c ##\n    +@@\n    + #include \"pgalloc-track.h\"\n    + #include \"internal.h\"\n    + #include \"swap.h\"\n    ++#include \u003ctrace/hooks/mm.h\u003e\n    + \n    + #if defined(LAST_CPUPID_NOT_IN_PAGE_FLAGS) \u0026\u0026 !defined(CONFIG_COMPILE_TEST)\n    + #warning Unfortunate NUMA and NUMA Balancing config, growing page-frame for last_cpupid.\n     @@ mm/memory.c: static vm_fault_t do_read_fault(struct vm_fault *vmf)\n    - \tstruct vm_area_struct *vma \u003d vmf-\u003evma;\n    + {\n      \tvm_fault_t ret \u003d 0;\n      \n     +\ttrace_android_vh_tune_fault_around_bytes(\u0026fault_around_bytes);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "33ba592f882f5d58ff06b10ffc443f65e6cb469d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
