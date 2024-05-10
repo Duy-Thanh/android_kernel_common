@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077493489",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3080854?revision\u003d4",
+      "key": {
+        "uuid": "c77f34f8_9eba4426",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-10T18:20:21Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android14-6.1.\nBase branch change: [3029985](https://android-review.googlesource.com/c/3029985).\n\n```\n      ## include/linux/userfaultfd_k.h ##\n     @@\n    @@ include/linux/userfaultfd_k.h\n      \t/* waitqueue head for the pending (i.e. not read) userfaults */\n      \twait_queue_head_t fault_pending_wqh;\n     @@ include/linux/userfaultfd_k.h: struct userfaultfd_ctx {\n    - \tatomic_t mmap_changing;\n      \t/* mm with one ore more vmas attached to this userfaultfd_ctx */\n      \tstruct mm_struct *mm;\n    -+\n    -+\tANDROID_KABI_RESERVE(1);\n      };\n     +#endif\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "9962547f68e6dce65cda193350957197cc3c3485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
