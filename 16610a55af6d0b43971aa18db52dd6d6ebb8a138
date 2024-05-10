@@ -16,6 +16,24 @@
       "message": "Needs a \"Bug:\" tag",
       "revId": "16610a55af6d0b43971aa18db52dd6d6ebb8a138",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "189a1bae_3de3ca72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3427375
+      },
+      "writtenOn": "2024-05-10T06:26:23Z",
+      "side": 1,
+      "message": "Updated with Bug tag, please check now.",
+      "parentUuid": "47b9f3b0_27ad3c1a",
+      "revId": "16610a55af6d0b43971aa18db52dd6d6ebb8a138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
