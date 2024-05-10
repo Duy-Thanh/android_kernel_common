@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74803e07_e259cfd8",
+        "filename": "mm/memory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4650,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-05-10T01:06:48Z",
+      "side": 1,
+      "message": "Why aren\u0027t you using a vendor hook instead?",
+      "range": {
+        "startLine": 4650,
+        "startChar": 1,
+        "endLine": 4650,
+        "endChar": 20
+      },
+      "revId": "6533ad175a9120f257ba084e13489fd566c21f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
