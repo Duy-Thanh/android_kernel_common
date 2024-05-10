@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dbdc876_89c7824f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-10T16:03:33Z",
+      "side": 1,
+      "message": "The conflicts resolution looks good to me. However, it seems to me this patch needs to be sent to 5.15.y stable. Is there anything preventing this?",
+      "revId": "4f750d6cfaa1af6a3f89429ef0329d1bc1d212b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
