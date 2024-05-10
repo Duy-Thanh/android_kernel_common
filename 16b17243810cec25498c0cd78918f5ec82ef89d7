@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d62a04_5b9be549",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3011835
+      },
+      "writtenOn": "2024-05-10T01:45:25Z",
+      "side": 1,
+      "message": "\u003e Cherry pick is not clean. Checked against UPSTREAM.\n\u003e UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/a1865f2e7d10dde00d35a2122b38d2e469ae67ed) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003da1865f2e7d10dde00d35a2122b38d2e469ae67ed).\n\u003e \n\u003e ```\n\u003e       ## net/netlink/af_netlink.c ##\n\u003e      @@ net/netlink/af_netlink.c: static int netlink_recvmsg(struct socket *sock, struct msghdr *msg, size_t len,\n\u003e       \tstruct scm_cookie scm;\n\u003e       \tstruct sock *sk \u003d sock-\u003esk;\n\u003e       \tstruct netlink_sock *nlk \u003d nlk_sk(sk);\n\u003e     +-\tint noblock \u003d flags \u0026 MSG_DONTWAIT;\n\u003e      -\tsize_t copied;\n\u003e      +\tsize_t copied, max_recvmsg_len;\n\u003e       \tstruct sk_buff *skb, *data_skb;\n\u003e ```\n\u003e \n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "545441c3_bd676819",
+      "revId": "16b17243810cec25498c0cd78918f5ec82ef89d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
