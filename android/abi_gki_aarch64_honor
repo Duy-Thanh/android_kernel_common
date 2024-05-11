@@ -21,3 +21,9 @@
   __tracepoint_android_vh_rwsem_wake
   __tracepoint_android_vh_rwsem_write_finished
   __tracepoint_android_vh_tune_fault_around_bytes
+  __split_huge_pmd
+  vm_normal_page
+  walk_page_range
+  pmd_clear_bad
+  putback_lru_page
+  isolate_lru_page
