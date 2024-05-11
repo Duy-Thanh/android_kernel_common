@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d60a264_93c68b1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-05-11T10:49:24Z",
+      "side": 1,
+      "message": "Hello Greg,\n\nARM_SCMI_PROTOCOL is tristate, on what considerations did you set CONFIG_ARM_SCMI_PROTOCOL in gki_defconfig to y. For ARM SCMI to be more flexible, could you consider disabling CONFIG_ARM_SCMI_PROTOCOL in the gki_defconfig?",
+      "revId": "52905cda74b6b766aa9618295aaa9452cc6d75fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
