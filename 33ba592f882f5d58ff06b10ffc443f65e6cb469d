@@ -16,6 +16,24 @@
       "message": "please create a patch on top of this one to add the symbol to your symbol list",
       "revId": "33ba592f882f5d58ff06b10ffc443f65e6cb469d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd193ce_7cc730e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2024-05-11T08:51:59Z",
+      "side": 1,
+      "message": "hi tod,we meet a issue about create a symbol patch for this pick.\nthey use same bugid,it report a error when we push this.\n[remote rejected]           HEAD -\u003e refs/for/android14-6.1 (cannot add patch set to 3082146.)\nerror: failed to push",
+      "parentUuid": "92ab7f53_8bad8c55",
+      "revId": "33ba592f882f5d58ff06b10ffc443f65e6cb469d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
