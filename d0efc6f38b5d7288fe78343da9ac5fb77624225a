@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8275f9c2_7bc3690d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-13T15:25:58Z",
+      "side": 1,
+      "message": "Can\u0027t find where this is defined, is it introduced later?",
+      "range": {
+        "startLine": 383,
+        "startChar": 7,
+        "endLine": 383,
+        "endChar": 33
+      },
+      "revId": "d0efc6f38b5d7288fe78343da9ac5fb77624225a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
