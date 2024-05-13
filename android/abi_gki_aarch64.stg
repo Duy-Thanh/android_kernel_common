@@ -307977,6 +307977,17 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x9cb87b44
+  return_type_id: 0x6720d32f
+  parameter_id: 0x078316ff
+  parameter_id: 0x391e34eb
+  parameter_id: 0xf2289b65
+  parameter_id: 0x295c7202
+  parameter_id: 0x295c7202
+  parameter_id: 0x00c72527
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9cbbbdfe
   return_type_id: 0x6720d32f
   parameter_id: 0x060cf413
@@ -372546,6 +372557,15 @@ elf_symbol {
   full_name: "ufshcd_query_attr_retry"
 }
 elf_symbol {
+  id: 0xaa5366ae
+  name: "ufshcd_query_descriptor_retry"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6ec6cf7a
+  type_id: 0x9cb87b44
+  full_name: "ufshcd_query_descriptor_retry"
+}
+elf_symbol {
   id: 0x82188885
   name: "ufshcd_query_flag"
   is_defined: true
@@ -384667,6 +384687,7 @@ interface {
   symbol_id: 0xde541a7b
   symbol_id: 0xf49dae9f
   symbol_id: 0xf6ca1448
+  symbol_id: 0xaa5366ae
   symbol_id: 0x82188885
   symbol_id: 0xf8fc1aee
   symbol_id: 0x5ef2af2f
