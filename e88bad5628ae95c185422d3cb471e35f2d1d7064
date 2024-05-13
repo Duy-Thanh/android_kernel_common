@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c8396db_ff9f9594",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-13T15:16:05Z",
+      "side": 1,
+      "message": "So that makes this behaviour also applicable to standard KVM. Should we guard that with a pgt flag maybe that we set only for pKVM ?",
+      "range": {
+        "startLine": 1064,
+        "startChar": 0,
+        "endLine": 1064,
+        "endChar": 49
+      },
+      "revId": "e88bad5628ae95c185422d3cb471e35f2d1d7064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
