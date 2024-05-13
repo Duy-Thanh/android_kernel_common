@@ -274,7 +274,6 @@ void ioremap_phys_range_hook(phys_addr_t phys_addr, size_t size, pgprot_t prot)
 	while (size) {
 		void *entry = mas_find(&mas, mas_end(phys_addr, size));
 		size_t sub_size = size;
-		int ret;
 
 		if (entry) {
 			if (mas.index <= phys_addr) {
@@ -288,8 +287,7 @@ void ioremap_phys_range_hook(phys_addr_t phys_addr, size_t size, pgprot_t prot)
 		}
 
 		/* Newly guarded region */
-		ret = ioremap_register_phys_range(phys_addr, sub_size);
-		if (ret)
+		if (WARN_ON(ioremap_register_phys_range(phys_addr, sub_size)))
 			break;
 
 		mas_set_range(&mas, phys_addr, mas_end(phys_addr, sub_size));
