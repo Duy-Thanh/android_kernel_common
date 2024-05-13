@@ -1582,6 +1582,14 @@ static void handle___pkvm_stage2_snapshot(struct kvm_cpu_context *host_ctxt)
 #endif
 }
 
+static void handle___pkvm_toogle_smc_trapping(struct kvm_cpu_context *host_ctxt)
+{
+	DECLARE_REG(pkvm_handle_t, handle, host_ctxt, 1);
+	DECLARE_REG(bool, state, host_ctxt, 2);
+
+	cpu_reg(host_ctxt, 1) = pkvm_toogle_smc_trapping_by_handle(handle, state);
+}
+
 typedef void (*hcall_t)(struct kvm_cpu_context *);
 
 #define HANDLE_FUNC(x)	[__KVM_HOST_SMCCC_FUNC_##x] = (hcall_t)handle_##x
@@ -1646,6 +1654,7 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__pkvm_host_iommu_iova_to_phys),
 	HANDLE_FUNC(__pkvm_host_hvc_pd),
 	HANDLE_FUNC(__pkvm_stage2_snapshot),
+	HANDLE_FUNC(__pkvm_toogle_smc_trapping),
 };
 
 static void handle_host_hcall(struct kvm_cpu_context *host_ctxt)
