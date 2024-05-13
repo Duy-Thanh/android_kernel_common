@@ -293561,6 +293561,14 @@ function {
   parameter_id: 0xd5df6730
 }
 function {
+  id: 0x11cd0b26
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0665e6b6
+  parameter_id: 0x3e10b518
+  parameter_id: 0xd5df6730
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x11cf2aed
   return_type_id: 0x48b5725f
   parameter_id: 0x0687edf5
@@ -392276,6 +392284,15 @@ elf_symbol {
   full_name: "seq_put_decimal_ull"
 }
 elf_symbol {
+  id: 0xaa52ec65
+  name: "seq_put_decimal_ull_width"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x20672e2a
+  type_id: 0x11cd0b26
+  full_name: "seq_put_decimal_ull_width"
+}
+elf_symbol {
   id: 0x25bebf3b
   name: "seq_putc"
   is_defined: true
@@ -414186,6 +414203,7 @@ interface {
   symbol_id: 0xc5442265
   symbol_id: 0xe76b6b25
   symbol_id: 0x05b70a90
+  symbol_id: 0xaa52ec65
   symbol_id: 0x25bebf3b
   symbol_id: 0x59b4ca07
   symbol_id: 0xba8007cd
