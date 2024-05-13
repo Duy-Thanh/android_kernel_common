@@ -2940,3 +2940,10 @@ int __pkvm_host_stage2_snapshot(struct kvm_pgtable_snapshot *snap)
 	return ret;
 }
 #endif /* CONFIG_NVHE_EL2_DEBUG */
+
+void __pkvm_toogle_smc_trapping(struct pkvm_hyp_vm *vm, bool state)
+{
+	guest_lock_component(vm);
+	vm->has_smc_trapping = state;
+	guest_unlock_component(vm);
+}

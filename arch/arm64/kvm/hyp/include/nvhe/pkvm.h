@@ -74,6 +74,8 @@ struct pkvm_hyp_vm {
 	 */
 	bool is_dying;
 
+	bool has_smc_trapping;
+
 	/* Array of the hyp vCPU structures for this VM. */
 	struct pkvm_hyp_vcpu *vcpus[];
 };
@@ -201,4 +203,6 @@ static inline int pkvm_init_power_domain(struct kvm_power_domain *pd,
 int pkvm_stage2_snapshot_by_handle(struct kvm_pgtable_snapshot *snap,
 				   pkvm_handle_t handle);
 #endif /* CONFIG_NVHE_EL2_DEBUG */
+
+int pkvm_toogle_smc_trapping_by_handle(pkvm_handle_t handle, bool state);
 #endif /* __ARM64_KVM_NVHE_PKVM_H__ */

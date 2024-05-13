@@ -1666,6 +1666,11 @@ static bool pkvm_forward_trng(struct kvm_vcpu *vcpu)
 bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 {
 	bool handled = false;
+	struct pkvm_hyp_vcpu *hyp_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
+	struct pkvm_hyp_vm *hyp_vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
+
+	if (!hyp_vm->has_smc_trapping)
+		return handled;
 
 	if (smp_load_acquire(&default_guest_smc_handler))
 		handled = default_guest_smc_handler(vcpu);
@@ -1904,3 +1909,18 @@ int pkvm_stage2_snapshot_by_handle(struct kvm_pgtable_snapshot *snap_hva,
 	return ret;
 }
 #endif /* CONFIG_NVHE_EL2_DEBUG */
+
+int pkvm_toogle_smc_trapping_by_handle(pkvm_handle_t handle, bool state)
+{
+	struct pkvm_hyp_vm *vm;
+	int ret = -EINVAL;
+
+	hyp_read_lock(&vm_table_lock);
+	vm = get_vm_by_handle(handle);
+	if (vm) {
+		__pkvm_toogle_smc_trapping(vm, state);
+		ret = 0;
+	}
+	hyp_read_unlock(&vm_table_lock);
+	return ret;
+}
