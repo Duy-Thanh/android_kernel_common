@@ -16,6 +16,24 @@
       "message": "Same thing here...the conflicts resolution looks good (trivial in this case). However, I would prefer the fix to be sent to 5.15.y stable. Why not?",
       "revId": "6010c3df476f1dc4f27ffababbe53ea6d2a48e15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b6244d9_8ae27271",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3011835
+      },
+      "writtenOn": "2024-05-13T01:59:44Z",
+      "side": 1,
+      "message": "We will try upstreaming theses 2 changes to 5.15.y stable, same as change 3075626.",
+      "parentUuid": "bf1b8e46_d3f5d329",
+      "revId": "6010c3df476f1dc4f27ffababbe53ea6d2a48e15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
