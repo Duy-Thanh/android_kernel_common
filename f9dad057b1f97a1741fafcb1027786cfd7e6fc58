@@ -16,6 +16,70 @@
       "message": "Do you still need this, given that the parent change has been abandoned?",
       "revId": "f9dad057b1f97a1741fafcb1027786cfd7e6fc58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3142f1c1_5d58ce9a",
+        "filename": "include/dt-bindings/interconnect/qcom,icc.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-13T08:41:26Z",
+      "side": 1,
+      "message": "These are not included in `QCOM_ICC_TAG_ALWAYS`, which seems a little weird.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5dceeb6f_34536ca6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/dt-bindings/interconnect/qcom,icc.h",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\t QCOM_ICC_TAG_SLEEP | QCOM_ICC_TAG_PWR_ST_0 |\\\n\t\t\t\t\t QCOM_ICC_TAG_PWR_ST_1 | QCOM_ICC_TAG_PWR_ST_2 |\\\n\t\t\t\t\t QCOM_ICC_TAG_PWR_ST_3 | QCOM_ICC_TAG_PWR_ST_4)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f9dad057b1f97a1741fafcb1027786cfd7e6fc58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f37cd4_279b85cf",
+        "filename": "include/dt-bindings/interconnect/qcom,icc.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-13T08:41:26Z",
+      "side": 1,
+      "message": "This seems like an unrelated change based on the commit message.",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 30
+      },
+      "revId": "f9dad057b1f97a1741fafcb1027786cfd7e6fc58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
