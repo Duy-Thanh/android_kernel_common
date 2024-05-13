@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9846810d_e190fe65",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2024-05-13T21:05:28Z",
+      "side": 1,
+      "message": "This is condition value. 2 wouldn\u0027t make sense to me. Just 1 is enough if you want to keep calling the tp.",
+      "range": {
+        "startLine": 30,
+        "startChar": 25,
+        "endLine": 30,
+        "endChar": 26
+      },
+      "revId": "4f839d33fdca0d453fe71cf55115c6ff01b95aff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
