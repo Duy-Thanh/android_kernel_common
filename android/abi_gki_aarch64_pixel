@@ -763,6 +763,7 @@
   drm_gem_vm_open
   drm_get_edid
   drm_get_format_info
+  drm_hdmi_avi_infoframe_from_display_mode
   drm_helper_mode_fill_fb_struct
   drm_helper_probe_single_connector_modes
   drm_ioctl
@@ -1034,6 +1035,7 @@
   handle_sysrq
   hashlen_string
   have_governor_per_policy
+  hdmi_avi_infoframe_pack
   hex2bin
   hex_dump_to_buffer
   hex_to_bin
@@ -1986,6 +1988,7 @@
   seq_putc
   seq_put_decimal_ll
   seq_put_decimal_ull
+  seq_put_decimal_ull_width
   seq_puts
   seq_read
   seq_release
