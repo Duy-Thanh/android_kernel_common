@@ -202,6 +202,14 @@ static int hyp_allocator_map(struct hyp_allocator *allocator,
 			push_hyp_memcache(mc, page, hyp_virt_to_phys, 0);
 			break;
 		}
+
+		/*
+		 * For security reason, we zero the memory on hyp_free. Avoid
+		 * duplicating the work in hyp_alloc by simply zeroing the
+		 * freshly mapped pages.
+		 */
+		memset((void *)va, 0, PAGE_SIZE);
+
 		va += PAGE_SIZE;
 		nr_pages++;
 	}
@@ -596,10 +604,6 @@ end:
 
 	*(this_cpu_ptr(&hyp_allocator_errno)) = ret;
 
-	/* Enforce zeroing allocated memory */
-	if (!ret)
-		memset(chunk_data(chunk), 0, size);
-
 	return ret ? NULL : chunk_data(chunk);
 }
 
@@ -632,6 +636,7 @@ void hyp_free(void *addr)
 {
 	struct chunk_hdr *chunk, *prev_chunk, *next_chunk;
 	struct hyp_allocator *allocator = &hyp_allocator;
+	size_t size = hyp_alloc_size(addr);
 	char *chunk_data = (char *)addr;
 
 	hyp_spin_lock(&allocator->lock);
@@ -639,6 +644,14 @@ void hyp_free(void *addr)
 	chunk = chunk_get(container_of(chunk_data, struct chunk_hdr, data));
 	prev_chunk = chunk_get_prev(chunk, allocator);
 	next_chunk = chunk_get_next(chunk, allocator);
+
+	/*
+	 * The data is still unaccessible from the host. Nonetheless, clear and
+	 * CMO. After that, the hypervisor can call psci_mem_protect_dec() with
+	 * peace of mind.
+	 */
+	memset(addr, 0, size);
+	kvm_flush_dcache_to_poc(addr, size);
 
 	chunk->alloc_size = 0;
 	chunk_hash_update(chunk);
