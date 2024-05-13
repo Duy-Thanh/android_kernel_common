@@ -34,6 +34,24 @@
       "parentUuid": "75e34258_d94baaa8",
       "revId": "b6a5338fed36cca8b1ec560a8768951a95d95b53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ff09f4_be319a98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2024-05-13T07:02:11Z",
+      "side": 1,
+      "message": "here is symbol patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/3081412",
+      "parentUuid": "ca44e6b8_a95b67f1",
+      "revId": "b6a5338fed36cca8b1ec560a8768951a95d95b53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
