@@ -34,6 +34,24 @@
       "parentUuid": "92ab7f53_8bad8c55",
       "revId": "33ba592f882f5d58ff06b10ffc443f65e6cb469d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e13682a1_13f7d0d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2024-05-13T06:57:04Z",
+      "side": 1,
+      "message": "here is symbol patch https://android-review.googlesource.com/c/kernel/common/+/3081412,that cannot push on top of this vendor_hook patch",
+      "parentUuid": "9fd193ce_7cc730e4",
+      "revId": "33ba592f882f5d58ff06b10ffc443f65e6cb469d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
