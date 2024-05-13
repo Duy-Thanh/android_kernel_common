@@ -22,6 +22,30 @@
       },
       "revId": "6533ad175a9120f257ba084e13489fd566c21f31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ad8544_4102d9d2",
+        "filename": "mm/memory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4650,
+      "author": {
+        "id": 1967749
+      },
+      "writtenOn": "2024-05-13T08:06:33Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, Suren. I have updated the patches to use vendor hooks. PTAL, thanks.",
+      "parentUuid": "74803e07_e259cfd8",
+      "range": {
+        "startLine": 4650,
+        "startChar": 1,
+        "endLine": 4650,
+        "endChar": 20
+      },
+      "revId": "6533ad175a9120f257ba084e13489fd566c21f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
