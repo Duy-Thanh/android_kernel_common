@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7584d5_3568764c",
+        "filename": "drivers/virt/gunyah/vm_mgr_mem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-14T12:46:50Z",
+      "side": 1,
+      "message": "IIUC this can have the side effect of removing the linear map alias. Do we recover it in case of an error below?",
+      "range": {
+        "startLine": 147,
+        "startChar": 16,
+        "endLine": 147,
+        "endChar": 38
+      },
+      "revId": "6a77b92a944d495a5ee8318b7a3956d78fc3db9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
