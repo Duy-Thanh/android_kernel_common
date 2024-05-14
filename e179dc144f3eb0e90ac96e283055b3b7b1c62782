@@ -52,6 +52,24 @@
       "parentUuid": "a6fd2579_503b711a",
       "revId": "e179dc144f3eb0e90ac96e283055b3b7b1c62782",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3d8e323_31c2f491",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2024-05-14T12:30:54Z",
+      "side": 1,
+      "message": "Sounds good, please make the defconfig changes ASAP since it will be an ABI breaking change which we will not be able to accept after the KMI freeze for this branch.",
+      "parentUuid": "6fe11fef_8a54080d",
+      "revId": "e179dc144f3eb0e90ac96e283055b3b7b1c62782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
