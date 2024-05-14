@@ -152,6 +152,30 @@
       },
       "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f99e88a_5b07f116",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-05-14T23:29:59Z",
+      "side": 1,
+      "message": "That\u0027s a good catch, but I wonder what a reasonable upper bound for a number of waiting tasks are? Assuming that each task has a runnable_avg of 1024, we\u0027d have a maximum limit of (2^32-1)/1024 \u003d 4194303 tasks or alternatively we can reduce util_avg to 16bits and have 48 bits to work with (2^48-1)/1024 \u003d 274877906943. Those seem like large enough of a margin for the system to work with, thoughts?",
+      "parentUuid": "6ef83bfa_f7ad2517",
+      "range": {
+        "startLine": 10,
+        "startChar": 23,
+        "endLine": 10,
+        "endChar": 28
+      },
+      "revId": "22bf88b9ba67c8632f67551914b8d2045992e734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
