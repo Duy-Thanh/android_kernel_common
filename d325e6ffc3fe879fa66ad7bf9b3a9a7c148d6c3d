@@ -22,6 +22,30 @@
       },
       "revId": "d325e6ffc3fe879fa66ad7bf9b3a9a7c148d6c3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f62194_b0b63de8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-05-14T08:11:48Z",
+      "side": 1,
+      "message": "Hum, this one also clear the meta-data, while hyp_free() only clears the data.\n\nThat said, list_del() should poison the hyp VAs from those meta-data, leaving (at the moment) only mapped_size and the hash.",
+      "parentUuid": "c0bcdd51_edee7dc6",
+      "range": {
+        "startLine": 789,
+        "startChar": 2,
+        "endLine": 790,
+        "endChar": 43
+      },
+      "revId": "d325e6ffc3fe879fa66ad7bf9b3a9a7c148d6c3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
