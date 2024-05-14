@@ -22,6 +22,30 @@
       },
       "revId": "6a77b92a944d495a5ee8318b7a3956d78fc3db9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aba9fbbf_d4fae95d",
+        "filename": "drivers/virt/gunyah/vm_mgr_mem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2024-05-14T17:54:24Z",
+      "side": 1,
+      "message": "This was fixed internally, but the `gunyah_folio_lend_safe` ends up getting removed in the GUP patches anyway. We aren\u0027t removing the linear map alias because the approach we had was rejected upstream and we have an alternate ACK approach which covers us: https://android-review.googlesource.com/c/kernel/common/+/3057022",
+      "parentUuid": "0e7584d5_3568764c",
+      "range": {
+        "startLine": 147,
+        "startChar": 16,
+        "endLine": 147,
+        "endChar": 38
+      },
+      "revId": "6a77b92a944d495a5ee8318b7a3956d78fc3db9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
