@@ -94,6 +94,30 @@
       },
       "revId": "e88bad5628ae95c185422d3cb471e35f2d1d7064",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c68b0e31_776e663d",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-05-14T13:07:41Z",
+      "side": 1,
+      "message": "Done with a newly introduced `KVM_PGTABLE_S2_PREFAULT_BLOCK`",
+      "parentUuid": "b156a81c_be427e09",
+      "range": {
+        "startLine": 1064,
+        "startChar": 0,
+        "endLine": 1064,
+        "endChar": 49
+      },
+      "revId": "e88bad5628ae95c185422d3cb471e35f2d1d7064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
