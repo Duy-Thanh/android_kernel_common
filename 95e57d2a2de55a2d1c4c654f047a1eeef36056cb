@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "686d4cfc_76756e20",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T15:13:10Z",
+      "side": 1,
+      "message": "nit: Why not just multiply by `guard_granule` and remove the need for `guard_shift` altogether?",
+      "range": {
+        "startLine": 169,
+        "startChar": 28,
+        "endLine": 169,
+        "endChar": 43
+      },
+      "revId": "95e57d2a2de55a2d1c4c654f047a1eeef36056cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
