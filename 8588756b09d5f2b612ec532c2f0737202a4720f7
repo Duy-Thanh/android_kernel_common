@@ -1,0 +1,219 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f91ba04_799a3b07",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T15:05:27Z",
+      "side": 1,
+      "message": "physical",
+      "range": {
+        "startLine": 60,
+        "startChar": 47,
+        "endLine": 60,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e487a348_bde2e728",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": " *  which is expected to hold all the unmapped physical the addresses so the\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8588756b09d5f2b612ec532c2f0737202a4720f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3f39bf7_f4efd177",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T15:05:27Z",
+      "side": 1,
+      "message": "Remove \u0027the\u0027",
+      "range": {
+        "startLine": 60,
+        "startChar": 57,
+        "endLine": 60,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6f9dc0ad_1a8d0955",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": " *  which is expected to hold all the unmapped physicall addresses so the\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8588756b09d5f2b612ec532c2f0737202a4720f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a1fd65_4f257cb3",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T15:05:27Z",
+      "side": 1,
+      "message": "privilege",
+      "range": {
+        "startLine": 75,
+        "startChar": 59,
+        "endLine": 75,
+        "endChar": 68
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2df01bc3_9dd556cf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": " * @init: init the driver called once before the kernel de-privilege\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8588756b09d5f2b612ec532c2f0737202a4720f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8e6da5_419505c8",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T15:05:27Z",
+      "side": 1,
+      "message": "Remove \u0027a\u0027",
+      "range": {
+        "startLine": 77,
+        "startChar": 16,
+        "endLine": 77,
+        "endChar": 17
+      },
+      "revId": "8588756b09d5f2b612ec532c2f0737202a4720f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc08c84_775f7d9c",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T15:05:27Z",
+      "side": 1,
+      "message": "emulating",
+      "range": {
+        "startLine": 82,
+        "startChar": 55,
+        "endLine": 82,
+        "endChar": 64
+      },
+      "revId": "8588756b09d5f2b612ec532c2f0737202a4720f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b44a6d0f_b2f4e8dc",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T15:05:27Z",
+      "side": 1,
+      "message": "physical",
+      "range": {
+        "startLine": 89,
+        "startChar": 22,
+        "endLine": 89,
+        "endChar": 25
+      },
+      "revId": "8588756b09d5f2b612ec532c2f0737202a4720f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43bd92be_23683fbc",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T15:05:27Z",
+      "side": 1,
+      "message": "verified",
+      "range": {
+        "startLine": 37,
+        "startChar": 37,
+        "endLine": 37,
+        "endChar": 44
+      },
+      "revId": "8588756b09d5f2b612ec532c2f0737202a4720f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
