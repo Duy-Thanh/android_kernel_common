@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8eeaf78_93541427",
+        "filename": "drivers/android/binder/range_alloc/mod.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-14T16:00:16Z",
+      "side": 1,
+      "message": "I don\u0027t think enums help much in this particular case. If we do that, then we have just need to effectively map the enums to these booleans in `make_alloc`. And I think it\u0027s clearer to define which allocations we need in the functions that make the request, rather than put it in `make_alloc`.",
+      "parentUuid": "e809f771_90f07c5d",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 167,
+        "endChar": 26
+      },
+      "revId": "1e8cd53df42759f1d79e6aa49179f1e17e128bf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f7f661c_5730d7c8",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-09T14:09:22Z",
       "side": 1,
       "message": "Doesn\u0027t this panic if the tree is empty? I guess since we have the empty rang allocator variant, that is never the case?\n\nDo `INVARIANT` comments make sense in safe rust?",
+      "range": {
+        "startLine": 44,
+        "startChar": 43,
+        "endLine": 44,
+        "endChar": 51
+      },
+      "revId": "1e8cd53df42759f1d79e6aa49179f1e17e128bf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ce026c0_7436de95",
+        "filename": "drivers/android/binder/range_alloc/tree.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-14T16:00:16Z",
+      "side": 1,
+      "message": "The tree is never empty because we store both allocated and free regions, so there\u0027s always a range at offset zero.",
+      "parentUuid": "1f7f661c_5730d7c8",
       "range": {
         "startLine": 44,
         "startChar": 43,
