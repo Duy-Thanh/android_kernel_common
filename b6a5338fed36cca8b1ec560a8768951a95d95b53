@@ -52,6 +52,24 @@
       "parentUuid": "ca44e6b8_a95b67f1",
       "revId": "b6a5338fed36cca8b1ec560a8768951a95d95b53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "475b728b_3c5c434f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-14T04:13:53Z",
+      "side": 1,
+      "message": "Your symbol patch needs to be submitted to the android12-5.10. I can\u0027t tell why there is an error, but skip the cherry pick and create a new patch with the symbol change in it.",
+      "parentUuid": "b2ff09f4_be319a98",
+      "revId": "b6a5338fed36cca8b1ec560a8768951a95d95b53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
