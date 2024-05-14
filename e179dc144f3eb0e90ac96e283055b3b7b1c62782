@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5cfb03_d3a596ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2024-05-14T11:32:31Z",
+      "side": 1,
+      "message": "The symbols page_pool_ethtool_stats_get and page_pool_get_stats are not part of the KMI since CONFIG_PAGE_POOL_STATS is not enabled in GKI defconfig. Please enable this flag before making this change.",
+      "revId": "e179dc144f3eb0e90ac96e283055b3b7b1c62782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
