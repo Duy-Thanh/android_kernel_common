@@ -579,6 +579,14 @@ config PKVM_SMC_FILTER
 
 	  Say N here unless you know what you are doing.
 
+config PKVM_GUEST_SMC_HANDLER
+	tristate "pKVM Guest SMC Handler"
+	depends on KVM && ARM64
+	help
+	  Support protected guests SMC handling.
+
+	  Say N here unless you know what you are doing.
+
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"
