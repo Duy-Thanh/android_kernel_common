@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0bcdd51_edee7dc6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-14T08:04:44Z",
+      "side": 1,
+      "message": "Given that the next patch will do the same thing synchronously on free, I guess we should be able to remove this snippet as well? If so, maybe we should just squash the two and call it a day?",
+      "range": {
+        "startLine": 789,
+        "startChar": 2,
+        "endLine": 790,
+        "endChar": 43
+      },
+      "revId": "d325e6ffc3fe879fa66ad7bf9b3a9a7c148d6c3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
