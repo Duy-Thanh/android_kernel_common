@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2261afa8_79c84462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-14T06:47:54Z",
+      "side": 1,
+      "message": "Build break:\n```\n/tmp/bazel-working-directory/_main/common/drivers/firmware/arm_scmi/perf.c:945:11: error: call to undeclared function \u0027scmi_dev_domain_id\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  945 |         domain \u003d scmi_dev_domain_id(dev);\n```\n\nPlease build and test your changes before uploading!",
+      "revId": "3ca439b5816fd8788098d4ef57063722e78faa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
