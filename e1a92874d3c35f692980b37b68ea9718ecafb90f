@@ -16,6 +16,29 @@
       "message": "This will have to be submitted along with #KMI-changes-for-2024-05-22.",
       "revId": "e1a92874d3c35f692980b37b68ea9718ecafb90f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a81fad2d_3847d535",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T18:59:33Z",
+      "side": 1,
+      "message": "What is this needed for?",
+      "range": {
+        "startLine": 108,
+        "startChar": 25,
+        "endLine": 108,
+        "endChar": 26
+      },
+      "revId": "e1a92874d3c35f692980b37b68ea9718ecafb90f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
