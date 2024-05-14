@@ -46,6 +46,30 @@
       },
       "revId": "2a871cad133bd007ab78541d35222734823ee01e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ef291e_eea77c8b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T15:29:35Z",
+      "side": 1,
+      "message": "Ah, yes, `old` is signed!\n\nHowever, it\u0027s still a bit wonky with the `-EOVERFLOW` because you could race a load of `domain_get()` calls with `alloc_domain` and the latter could succeed once the refcount hits zero.\n\nEasiest thing is probably to follow refcount.h and panic if `new \u003c 0` (in addition to `old \u003d\u003d 0`). WDYT?",
+      "parentUuid": "142e47e7_af021a93",
+      "range": {
+        "startLine": 192,
+        "startChar": 21,
+        "endLine": 192,
+        "endChar": 32
+      },
+      "revId": "2a871cad133bd007ab78541d35222734823ee01e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
