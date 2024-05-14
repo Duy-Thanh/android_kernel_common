@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adf72bc3_82b37cd6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-14T22:55:28Z",
+      "side": 1,
+      "message": "I think this is also a clean cherry-pick? What are the conflicts?",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "d265a3524bf163acb8045a2f057acecd7fdd4d78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
