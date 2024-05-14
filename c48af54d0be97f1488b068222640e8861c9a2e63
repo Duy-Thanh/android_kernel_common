@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56dbec0c_10f27ad0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2515,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-14T16:00:32Z",
+      "side": 1,
+      "message": "Incorrect with 16K and 64K pages no? Maybe compare size to PMD_SIZE instead? (And can be done before the walk too)",
+      "range": {
+        "startLine": 2515,
+        "startChar": 23,
+        "endLine": 2515,
+        "endChar": 24
+      },
+      "revId": "c48af54d0be97f1488b068222640e8861c9a2e63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
