@@ -16,6 +16,24 @@
       "message": "Hello Greg,\n\nARM_SCMI_PROTOCOL is tristate, on what considerations did you set CONFIG_ARM_SCMI_PROTOCOL in gki_defconfig to y. For ARM SCMI to be more flexible, could you consider disabling CONFIG_ARM_SCMI_PROTOCOL in the gki_defconfig?",
       "revId": "52905cda74b6b766aa9618295aaa9452cc6d75fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5099686_51e246f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-14T09:13:52Z",
+      "side": 1,
+      "message": "It\u0027s too late in the android15 cycle to make a change like this. It should have been discussed in Jan or Feb.",
+      "parentUuid": "1d60a264_93c68b1b",
+      "revId": "52905cda74b6b766aa9618295aaa9452cc6d75fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
