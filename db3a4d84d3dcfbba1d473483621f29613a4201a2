@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fed0f4f_5e1d86ce",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T14:57:18Z",
+      "side": 1,
+      "message": "I think this can race with a concurrent call to `-\u003efree_domain()`. The `cmpxchg()` in `kvm_iommu_free_domain()` will transition the refcount from 1 -\u003e 0 meaning that the previous `atomic_read()` here can read zero and assume that the domain can be allocated before the free has finished.",
+      "range": {
+        "startLine": 202,
+        "startChar": 22,
+        "endLine": 202,
+        "endChar": 34
+      },
+      "revId": "db3a4d84d3dcfbba1d473483621f29613a4201a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6ed9ddd_9148f5f3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T14:57:18Z",
+      "side": 1,
+      "message": "Why is this using release semantics? If the later `-\u003efree_domain()` call reads from the domain, then those reads could be hoisted earlier. Do you actually want acquire for this?",
+      "range": {
+        "startLine": 218,
+        "startChar": 13,
+        "endLine": 218,
+        "endChar": 35
+      },
+      "revId": "db3a4d84d3dcfbba1d473483621f29613a4201a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
