@@ -22,6 +22,30 @@
       },
       "revId": "598758f183034bf02a015af2e7733183e803930e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a817446_d57e2807",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2024-05-15T04:44:57Z",
+      "side": 1,
+      "message": "yeah, there are no conflicts. Initial patch I raised with \"UPSTREAM\" TAG only but Lint complaining it\u0027s not clean cherry-pick. So, I changed the TAG to BACKPORT.",
+      "parentUuid": "4a99d672_9aaa1d03",
+      "range": {
+        "startLine": 23,
+        "startChar": 37,
+        "endLine": 23,
+        "endChar": 56
+      },
+      "revId": "598758f183034bf02a015af2e7733183e803930e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
