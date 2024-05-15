@@ -736,6 +736,10 @@ struct inode {
 #endif
 
 	void			*i_private; /* fs or device private pointer */
+
+	ANDROID_OEM_DATA(1);
+	ANDROID_OEM_DATA(2);
+	ANDROID_OEM_DATA(3);
 } __randomize_layout;
 
 struct timespec64 timestamp_truncate(struct timespec64 t, struct inode *inode);
@@ -1314,6 +1318,8 @@ struct super_block {
 
 	spinlock_t		s_inode_wblist_lock;
 	struct list_head	s_inodes_wb;	/* writeback inodes */
+
+	ANDROID_OEM_DATA(1);
 } __randomize_layout;
 
 static inline struct user_namespace *i_user_ns(const struct inode *inode)
