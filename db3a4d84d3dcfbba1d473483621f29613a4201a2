@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30e62e8c_bde5519a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-05-15T13:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fed0f4f_5e1d86ce",
+      "range": {
+        "startLine": 202,
+        "startChar": 22,
+        "endLine": 202,
+        "endChar": 34
+      },
+      "revId": "db3a4d84d3dcfbba1d473483621f29613a4201a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6ed9ddd_9148f5f3",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-14T14:57:18Z",
       "side": 1,
       "message": "Why is this using release semantics? If the later `-\u003efree_domain()` call reads from the domain, then those reads could be hoisted earlier. Do you actually want acquire for this?",
+      "range": {
+        "startLine": 218,
+        "startChar": 13,
+        "endLine": 218,
+        "endChar": 35
+      },
+      "revId": "db3a4d84d3dcfbba1d473483621f29613a4201a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a64554e9_89dcd906",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-05-15T13:04:42Z",
+      "side": 1,
+      "message": "Ah, yes, fixed in the previous patch.",
+      "parentUuid": "f6ed9ddd_9148f5f3",
       "range": {
         "startLine": 218,
         "startChar": 13,
