@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b3bcb6_bce8cb7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-05-15T02:43:23Z",
+      "side": 1,
+      "message": "Please fix commit message according to https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
