@@ -1778,11 +1778,19 @@ static int _regmap_raw_write_impl(struct regmap *map, unsigned int reg,
 	 * write.
 	 */
 	if (val == work_val)
+<<<<<<< HEAD   (15b61b Revert "regmap: allow to define reg_update_bits for no bus c)
 		ret = map->bus->write(map->bus_context, map->work_buf,
 				      map->format.reg_bytes +
 				      map->format.pad_bytes +
 				      val_len);
 	else if (map->bus->gather_write)
+=======
+		ret = map->write(map->bus_context, map->work_buf,
+				 map->format.reg_bytes +
+				 map->format.pad_bytes +
+				 val_len);
+	else if (map->bus && map->bus->gather_write)
+>>>>>>> BRANCH (dfa382 Linux 5.10.214)
 		ret = map->bus->gather_write(map->bus_context, map->work_buf,
 					     map->format.reg_bytes +
 					     map->format.pad_bytes,
