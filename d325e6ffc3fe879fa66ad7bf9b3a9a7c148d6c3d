@@ -46,6 +46,30 @@
       },
       "revId": "d325e6ffc3fe879fa66ad7bf9b3a9a7c148d6c3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "740af968_e28674fe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-15T14:00:25Z",
+      "side": 1,
+      "message": "Alright, there is still a bit of duplication but let\u0027s still merge this patch as-is, and we can take our time for the second one which is less urgent I guess",
+      "parentUuid": "62f62194_b0b63de8",
+      "range": {
+        "startLine": 789,
+        "startChar": 2,
+        "endLine": 790,
+        "endChar": 43
+      },
+      "revId": "d325e6ffc3fe879fa66ad7bf9b3a9a7c148d6c3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
