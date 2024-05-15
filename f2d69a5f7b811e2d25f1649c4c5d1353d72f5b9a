@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077867543",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3078627?revision\u003d4",
+      "key": {
+        "uuid": "147ae000_60eeeef5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-15T06:34:59Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/305a357d3595d39be7c001f72e135bc94cbd85da) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d305a357d3595d39be7c001f72e135bc94cbd85da).\n\n```\n      ## drivers/ufs/core/ufshcd.c ##\n     @@\n      /* Polling time to wait for fDeviceInit */\n      #define FDEVICEINIT_COMPL_TIMEOUT 1500 /* millisecs */\n      \n    +-/* UFSHC 4.0 compliant HC support this mode. */\n     +/* UFSHC 4.0 compliant HC support this mode, refer param_set_mcq_mode() */\n    -+static bool use_mcq_mode \u003d true;\n    -+\n    + static bool use_mcq_mode \u003d true;\n    + \n    + static bool is_mcq_supported(struct ufs_hba *hba)\n    +@@ drivers/ufs/core/ufshcd.c: static bool is_mcq_supported(struct ufs_hba *hba)\n    + \treturn hba-\u003emcq_sup \u0026\u0026 use_mcq_mode;\n    + }\n    + \n    +-module_param(use_mcq_mode, bool, 0644);\n     +static int param_set_mcq_mode(const char *val, const struct kernel_param *kp)\n     +{\n     +\tint ret;\n    @@ drivers/ufs/core/ufshcd.c\n     +};\n     +\n     +module_param_cb(use_mcq_mode, \u0026mcq_mode_ops, \u0026use_mcq_mode, 0644);\n    -+MODULE_PARM_DESC(use_mcq_mode, \"Control MCQ mode for controllers starting from UFSHCI 4.0. 1 - enable MCQ, 0 - disable MCQ. MCQ is enabled by default\");\n    -+\n    + MODULE_PARM_DESC(use_mcq_mode, \"Control MCQ mode for controllers starting from UFSHCI 4.0. 1 - enable MCQ, 0 - disable MCQ. MCQ is enabled by default\");\n    + \n      #define ufshcd_toggle_vreg(_dev, _vreg, _on)\t\t\t\t\\\n    - \t({                                                              \\\n    - \t\tint _ret;                                               \\\n     @@ drivers/ufs/core/ufshcd.c: static inline int ufshcd_hba_capabilities(struct ufs_hba *hba)\n    - \tif (err)\n    - \t\tdev_err(hba-\u003edev, \"crypto setup failed\\n\");\n    + \tif (!hba-\u003emcq_sup)\n    + \t\treturn 0;\n      \n     +\thba-\u003emcq_sup \u003d FIELD_GET(MASK_MCQ_SUPPORT, hba-\u003ecapabilities);\n     +\tif (!hba-\u003emcq_sup)\n    @@ drivers/ufs/core/ufshcd.c: static inline int ufshcd_hba_capabilities(struct ufs_\n      \t\t\t\t     hba-\u003emcq_capabilities);\n     \n      ## include/ufs/ufshcd.h ##\n    -@@ include/ufs/ufshcd.h: struct ufs_hba_monitor {\n    -  * @complete_put: whether or not to call ufshcd_rpm_put() from inside\n    -  *\tufshcd_resume_complete()\n    -  * @ext_iid_sup: is EXT_IID is supported by UFSHC\n    -+ * @mcq_sup: is mcq supported by UFSHC\n    -  */\n    - struct ufs_hba {\n    - \tvoid __iomem *mmio_base;\n    -@@ include/ufs/ufshcd.h: struct ufs_hba {\n    - \tu32 luns_avail;\n    - \tbool complete_put;\n    - \tbool ext_iid_sup;\n    +@@ include/ufs/ufshcd.h: struct ufs_hw_queue {\n    + \tspinlock_t cq_lock;\n    + \t/* prevent concurrent access to submission queue */\n    + \tstruct mutex sq_mutex;\n     +\tbool mcq_sup;\n      };\n      \n    - #ifdef CONFIG_SCSI_UFS_VARIABLE_SG_ENTRY_SIZE\n    + static inline bool is_mcq_enabled(struct ufs_hba *hba)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "f2d69a5f7b811e2d25f1649c4c5d1353d72f5b9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
