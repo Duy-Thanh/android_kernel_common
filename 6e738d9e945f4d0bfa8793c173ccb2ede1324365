@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae72147e_3f54149f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-15T14:55:40Z",
+      "side": 1,
+      "message": "Note that for pvmfw to work, we really need the PC of the first vcpu to enter pvmfw. I don\u0027t think userspace can be trusted with that.",
+      "revId": "6e738d9e945f4d0bfa8793c173ccb2ede1324365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
