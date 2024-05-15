@@ -34,6 +34,24 @@
       "parentUuid": "c1b3bcb6_bce8cb7f",
       "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae6e415_ed1a1f8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2024-05-15T11:57:36Z",
+      "side": 1,
+      "message": "Please help to overcome LINT message.",
+      "parentUuid": "e9616f95_a601ebd7",
+      "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
