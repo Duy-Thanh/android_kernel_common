@@ -275323,6 +275323,12 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x016a77c2
+  return_type_id: 0x48b5725f
+  parameter_id: 0x4585663f
+  parameter_id: 0x24dff7bd
+}
+function {
   id: 0x016f0c64
   return_type_id: 0xa9403390
   parameter_id: 0xe276adef
@@ -337929,6 +337935,15 @@ elf_symbol {
   full_name: "devres_add"
 }
 elf_symbol {
+  id: 0xa28f70ab
+  name: "devres_close_group"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdeaef7a3
+  type_id: 0x106c9a5c
+  full_name: "devres_close_group"
+}
+elf_symbol {
   id: 0x2f22f242
   name: "devres_destroy"
   is_defined: true
@@ -345797,6 +345812,15 @@ elf_symbol {
   crc: 0x77a9be91
   type_id: 0x9067de1b
   full_name: "genphy_write_mmd_unsupported"
+}
+elf_symbol {
+  id: 0x10f04788
+  name: "get_cached_msi_msg"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x13640660
+  type_id: 0x016a77c2
+  full_name: "get_cached_msi_msg"
 }
 elf_symbol {
   id: 0xafbdd1c4
@@ -381807,6 +381831,7 @@ interface {
   symbol_id: 0x994f412d
   symbol_id: 0xd155689b
   symbol_id: 0xf4be3f1a
+  symbol_id: 0xa28f70ab
   symbol_id: 0x2f22f242
   symbol_id: 0xe41962a4
   symbol_id: 0xfb540e8c
@@ -382679,6 +382704,7 @@ interface {
   symbol_id: 0xfc12228c
   symbol_id: 0xae957b3b
   symbol_id: 0x77665a1c
+  symbol_id: 0x10f04788
   symbol_id: 0xafbdd1c4
   symbol_id: 0x0431ade4
   symbol_id: 0x01eb2325

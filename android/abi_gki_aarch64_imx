@@ -24,7 +24,9 @@
   __arch_copy_from_user
   __arch_copy_to_user
   arm64_use_ng_mappings
+  arm_smccc_1_1_get_conduit
   __arm_smccc_smc
+  __arm_smccc_sve_check
   atomic_notifier_call_chain
   atomic_notifier_chain_register
   atomic_notifier_chain_unregister
@@ -66,9 +68,11 @@
   bpf_trace_run6
   bpf_trace_run7
   bpf_trace_run8
+  bpf_trace_run9
   bpf_warn_invalid_xdp_action
   bsearch
   build_skb
+  bus_for_each_dev
   bus_register
   bus_register_notifier
   bus_unregister
@@ -295,6 +299,7 @@
   device_create_file
   device_del
   device_destroy
+  device_find_child
   device_for_each_child
   device_get_child_node_count
   device_get_dma_attr
@@ -329,6 +334,7 @@
   devm_alloc_etherdev_mqs
   __devm_alloc_percpu
   devm_backlight_device_register
+  devm_bitmap_zalloc
   devm_blk_crypto_profile_init
   devm_clk_bulk_get
   devm_clk_bulk_get_all
@@ -484,6 +490,7 @@
   __dev_queue_xmit
   devres_add
   __devres_alloc_node
+  devres_close_group
   devres_free
   devres_open_group
   devres_release
@@ -944,6 +951,7 @@
   gen_pool_dma_alloc
   gen_pool_free_owner
   gen_pool_virt_to_phys
+  get_cached_msi_msg
   get_cpu_device
   get_device
   get_device_system_crosststamp
@@ -1125,8 +1133,10 @@
   iommu_fwspec_add_ids
   iommu_fwspec_free
   iommu_get_domain_for_dev
+  iommu_get_domain_for_dev_pasid
   iommu_group_ref_get
   iommu_iova_to_phys
+  iommu_report_device_fault
   ioremap_prot
   iounmap
   __iowrite32_copy
@@ -1194,6 +1204,7 @@
   __kfifo_out_peek
   __kfifo_to_user
   kfree
+  kfree_const
   kfree_sensitive
   kfree_skb_list_reason
   kfree_skb_reason
@@ -1214,6 +1225,7 @@
   kobject_uevent_env
   krealloc
   kstrdup
+  kstrdup_const
   kstrndup
   kstrtobool_from_user
   kstrtoint
@@ -1263,7 +1275,9 @@
   match_string
   mbox_chan_received_data
   mbox_chan_txdone
+  mbox_client_txdone
   mbox_free_channel
+  mbox_request_channel
   mbox_request_channel_byname
   mbox_send_message
   mctrl_gpio_disable_ms
@@ -1370,6 +1384,7 @@
   module_layout
   module_put
   __msecs_to_jiffies
+  msi_domain_get_virq
   msleep
   msleep_interruptible
   mul_u64_u64_div_u64
@@ -1590,14 +1605,17 @@
   param_ops_ulong
   param_ops_ushort
   pci_alloc_irq_vectors
+  pci_ats_supported
   pci_bus_type
   pci_choose_state
   pci_device_group
+  pci_disable_ats
   pci_disable_device
   pci_disable_msi
   pci_disable_msix
   pci_disable_sriov
   pcie_flr
+  pci_enable_ats
   pci_enable_device
   pci_enable_device_mem
   pci_enable_msi
@@ -1772,6 +1790,8 @@
   platform_irqchip_probe
   platform_irq_count
   platform_msi_create_irq_domain
+  platform_msi_domain_alloc_irqs
+  platform_msi_domain_free_irqs
   pm_genpd_add_subdomain
   pm_genpd_init
   pm_genpd_remove
@@ -1843,6 +1863,7 @@
   queue_delayed_work_on
   queue_work_on
   radix_tree_insert
+  radix_tree_tagged
   ___ratelimit
   rational_best_approximation
   raw_notifier_call_chain
@@ -2372,6 +2393,7 @@
   __tracepoint_xdp_exception
   trace_print_array_seq
   trace_print_flags_seq
+  trace_print_hex_seq
   trace_print_symbols_seq
   trace_raw_output_prep
   trace_seq_acquire
@@ -2701,6 +2723,11 @@
   ww_mutex_lock_interruptible
   ww_mutex_unlock
   x509_load_certificate_list
+  __xa_alloc
+  xa_destroy
+  xa_erase
+  __xa_insert
+  xa_load
   xdp_convert_zc_to_xdp_frame
   xdp_do_flush
   xdp_do_redirect
