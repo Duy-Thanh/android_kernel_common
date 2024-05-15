@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c93622e_57c0542d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-05-15T23:15:53Z",
+      "side": 1,
+      "message": "Likely to have KABI impact, and will need to be queued for KABI break next week.",
+      "revId": "b1d6ba13c2765cc66706f4efc29badeb39f51cef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
