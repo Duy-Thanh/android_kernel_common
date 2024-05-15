@@ -16,6 +16,24 @@
       "message": "Hi Todd, I see merge conflicts in abi_gki_aarch64.stg file, are we (developers) allowed to change this file?\n\nThought of fixing the conflict by manual rebase, hence asking.",
       "revId": "6ff061dd658c86d72291ec9f9da7d9c629593b72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa62ad85_252520b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-05-15T11:51:34Z",
+      "side": 1,
+      "message": "Please rebase.",
+      "parentUuid": "a8cba522_6adceb22",
+      "revId": "6ff061dd658c86d72291ec9f9da7d9c629593b72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
