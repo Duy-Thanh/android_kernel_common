@@ -16,6 +16,24 @@
       "message": "Same here, I can\u0027t find the commit. Also needs to be FROMGIT I suppose.",
       "revId": "e2863a445463d273b4d0c893a4f60d9702f4d421",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "792d447f_c3a4c1f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2024-05-15T04:47:55Z",
+      "side": 1,
+      "message": "This commit is part of mainline now.\n\nhttps://github.com/torvalds/linux/commit/c121514df0daa800cc500dc2738e0b8a1c54af98",
+      "parentUuid": "31cb3e2f_badef3e2",
+      "revId": "e2863a445463d273b4d0c893a4f60d9702f4d421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
