@@ -46,16 +46,17 @@ source "drivers/staging/iio/Kconfig"
 
 source "drivers/staging/sm750fb/Kconfig"
 
-source "drivers/staging/emxx_udc/Kconfig"
-
 source "drivers/staging/nvec/Kconfig"
 
 source "drivers/staging/media/Kconfig"
 
+<<<<<<< HEAD   (0122b4 Merge ed302ad52ba3 ("Merge tag 'thermal-6.9-rc1-2' of git://)
 source "drivers/staging/android/Kconfig"
 
 source "drivers/staging/board/Kconfig"
 
+=======
+>>>>>>> BRANCH (4cece7 Linux 6.9-rc1)
 source "drivers/staging/gdm724x/Kconfig"
 
 source "drivers/staging/fbtft/Kconfig"

@@ -3,8 +3,13 @@
 #
 config INTEL_MEI_PXP
 	tristate "Intel PXP services of ME Interface"
+<<<<<<< HEAD   (0122b4 Merge ed302ad52ba3 ("Merge tag 'thermal-6.9-rc1-2' of git://)
 	select INTEL_MEI_ME
 	depends on DRM_I915
+=======
+	depends on INTEL_MEI_ME
+	depends on DRM_I915 || DRM_XE
+>>>>>>> BRANCH (4cece7 Linux 6.9-rc1)
 	help
 	  MEI Support for PXP Services on Intel platforms.
 
