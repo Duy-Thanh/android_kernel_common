@@ -52,6 +52,24 @@
       "parentUuid": "e9616f95_a601ebd7",
       "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55c80d9_e25c9d1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-05-15T15:28:54Z",
+      "side": 1,
+      "message": "Reopening because this issue has not yet been resolved.",
+      "parentUuid": "6ae6e415_ed1a1f8f",
+      "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
