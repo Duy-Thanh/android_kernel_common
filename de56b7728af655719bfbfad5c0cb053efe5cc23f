@@ -33,6 +33,24 @@
       "message": "Please create a patch on top of this one to add the symbol to your symbol list",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f4bada_3dde19a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1728636
+      },
+      "writtenOn": "2024-05-15T22:50:58Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t understand what you said, could you please explain detaily?\nDid you mean that we have to update our abi list at first?\nPlease help us, Thank you.",
+      "parentUuid": "e7a35082_cd2b5320",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
