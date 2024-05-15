@@ -16,6 +16,24 @@
       "message": "Please fix commit message according to https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9616f95_a601ebd7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2024-05-15T07:03:58Z",
+      "side": 1,
+      "message": "Taken care(Space removed after Bug)",
+      "parentUuid": "c1b3bcb6_bce8cb7f",
+      "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
