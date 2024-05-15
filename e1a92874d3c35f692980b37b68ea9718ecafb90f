@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b67ad2_573fd52f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-05-15T00:44:45Z",
+      "side": 1,
+      "message": "Dropped changes to the stg file",
+      "parentUuid": "cfac5bcd_4c4179c2",
+      "revId": "e1a92874d3c35f692980b37b68ea9718ecafb90f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc118487_e868816b",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-05-14T18:59:33Z",
       "side": 1,
       "message": "What is this needed for?",
+      "range": {
+        "startLine": 108,
+        "startChar": 25,
+        "endLine": 108,
+        "endChar": 26
+      },
+      "revId": "e1a92874d3c35f692980b37b68ea9718ecafb90f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e26d4e93_9ded9fe5",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-05-15T00:44:45Z",
+      "side": 1,
+      "message": "Oops, forgot to remove it. We don\u0027t need it.",
+      "parentUuid": "a81fad2d_3847d535",
       "range": {
         "startLine": 108,
         "startChar": 25,
