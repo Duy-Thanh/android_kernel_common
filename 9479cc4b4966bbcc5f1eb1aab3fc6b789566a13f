@@ -16,6 +16,24 @@
       "message": "I can\u0027t find this commit in mainline. Perhaps this should have been a `FROMGIT:` ?",
       "revId": "9479cc4b4966bbcc5f1eb1aab3fc6b789566a13f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281c113e_56534cf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973320
+      },
+      "writtenOn": "2024-05-15T04:48:15Z",
+      "side": 1,
+      "message": "This commit is part of mainline now.\n\nhttps://github.com/torvalds/linux/commit/b7793a1a2f370c28b17d9554b58e9dc51afcfcbd",
+      "parentUuid": "83a924dc_7bac2218",
+      "revId": "9479cc4b4966bbcc5f1eb1aab3fc6b789566a13f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
