@@ -476,8 +476,12 @@ static inline void wait_key_set(poll_table *wait, unsigned long in,
 		wait->_key |= POLLOUT_SET;
 }
 
+<<<<<<< HEAD   (96cbfc Merge 6.1.82 into android14-6.1-lts)
 noinline_for_stack
 static int do_select(int n, fd_set_bits *fds, struct timespec64 *end_time)
+=======
+static noinline_for_stack int do_select(int n, fd_set_bits *fds, struct timespec64 *end_time)
+>>>>>>> BRANCH (e5cd59 Linux 6.1.83)
 {
 	ktime_t expire, *to = NULL;
 	struct poll_wqueues table;
