@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "243c8392_4fc8a8db",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2024-05-15T17:07:52Z",
+      "side": 1,
+      "message": "This needs to be moved just before `CONFIG_BLK_CGROUP_IOPRIO\u003dy` as pointed by all the build failures in presubmit. Please fix it for both gki_defconfig. Relying on cherrypick is a bad idea as gki_defconfig differ between ACK kernel branches.",
+      "revId": "385405cf3eae111bf9e75bbf8b65db3c17eec7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
