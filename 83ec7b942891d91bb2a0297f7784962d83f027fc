@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f12ee13_1620ebfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-05-15T04:10:46Z",
+      "side": 1,
+      "message": "Since this patch is upstream, please change FROMGIT: into UPSTREAM:.",
+      "revId": "83ec7b942891d91bb2a0297f7784962d83f027fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
