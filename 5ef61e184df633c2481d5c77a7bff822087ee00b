@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "445b0a31_720cfbc9",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-16T11:02:40Z",
+      "side": 1,
+      "message": "Why don\u0027t we clear pvmfw in this case? It feels like we should, right?",
+      "range": {
+        "startLine": 524,
+        "startChar": 2,
+        "endLine": 524,
+        "endChar": 25
+      },
+      "revId": "5ef61e184df633c2481d5c77a7bff822087ee00b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
