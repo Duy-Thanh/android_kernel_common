@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7921a5e4_53638e65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-05-16T09:42:53Z",
+      "side": 1,
+      "message": "The commit message mentions `usb_set_device_state` but this is not added.\n\nPlease adjust the commit message or add this symbol.",
+      "revId": "92465a509684b9952e92dcb03d57afa5f1aa4149",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
