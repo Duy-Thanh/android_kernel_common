@@ -151,7 +151,6 @@ int android_class_create(void)
 {
 	return class_register(&android_usb_class);
 }
-EXPORT_SYMBOL_GPL(android_class_create);
 
 void android_class_destroy(void)
 {
