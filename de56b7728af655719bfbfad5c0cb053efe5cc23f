@@ -51,6 +51,24 @@
       "parentUuid": "e7a35082_cd2b5320",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "091f0086_b2b7370a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-16T13:57:06Z",
+      "side": 1,
+      "message": "Yes, you need to update your symbol list before you can use the symbol you have exported. You can look at aosp/3081410 as an example. Documentation is here: https://source.android.com/docs/core/architecture/kernel/howto-symbol-lists",
+      "parentUuid": "00f4bada_3dde19a9",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
