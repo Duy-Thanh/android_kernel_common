@@ -16,6 +16,29 @@
       "message": "For the record, the plan is to upstream this first. Only sending this out for preview in preparation for upstream posting.\n\nTest is done in userspace binderLibTest (aosp/3070045). Please let me know if there are other places where tests should be added.",
       "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a77dbcb_203ea973",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4465,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-05-16T21:56:28Z",
+      "side": 1,
+      "message": "Please introduce two helper functions instead of making functions that are already too long even longer.",
+      "range": {
+        "startLine": 4465,
+        "startChar": 2,
+        "endLine": 4465,
+        "endChar": 36
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
