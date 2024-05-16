@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ff0c203_6fbad2e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-05-16T07:50:15Z",
+      "side": 1,
+      "message": "All of this is available in userspace already, no hook is needed at all.",
+      "revId": "ad2cb447ca24b90505bf1c7655a45b5c400268fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
