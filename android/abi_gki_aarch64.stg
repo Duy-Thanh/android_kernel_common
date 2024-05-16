@@ -283253,6 +283253,12 @@ function {
   parameter_id: 0x320871e3
 }
 function {
+  id: 0x1c1deea6
+  return_type_id: 0x38040a6c
+  parameter_id: 0x0d7ce7cc
+  parameter_id: 0x38040a6c
+}
+function {
   id: 0x1c1e73b0
   return_type_id: 0x48b5725f
   parameter_id: 0x32a623d7
@@ -290815,6 +290821,13 @@ function {
   return_type_id: 0x774358c9
   parameter_id: 0x11e6864c
   parameter_id: 0x67293002
+}
+function {
+  id: 0x75f8c649
+  return_type_id: 0x0d7ce7cc
+  parameter_id: 0x0d7ce7cc
+  parameter_id: 0x3d8951f4
+  parameter_id: 0x4585663f
 }
 function {
   id: 0x7665e08d
@@ -374106,6 +374119,15 @@ elf_symbol {
   full_name: "usb_alloc_coherent"
 }
 elf_symbol {
+  id: 0xa1439ad9
+  name: "usb_alloc_dev"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5dcfe9ee
+  type_id: 0x75f8c649
+  full_name: "usb_alloc_dev"
+}
+elf_symbol {
   id: 0xaf52d437
   name: "usb_alloc_urb"
   is_defined: true
@@ -374419,6 +374441,15 @@ elf_symbol {
   crc: 0x0e08884a
   type_id: 0x15ca3ead
   full_name: "usb_deregister_device_driver"
+}
+elf_symbol {
+  id: 0xd75ad246
+  name: "usb_device_match_id"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5ac019aa
+  type_id: 0x1c1deea6
+  full_name: "usb_device_match_id"
 }
 elf_symbol {
   id: 0xeedbb4b8
@@ -385838,6 +385869,7 @@ interface {
   symbol_id: 0xcb2698e3
   symbol_id: 0xdc59a2d7
   symbol_id: 0xc8d57f30
+  symbol_id: 0xa1439ad9
   symbol_id: 0xaf52d437
   symbol_id: 0xd95773fe
   symbol_id: 0x805677f0
@@ -385873,6 +385905,7 @@ interface {
   symbol_id: 0x784d1cb4
   symbol_id: 0x201afca9
   symbol_id: 0x3be9765e
+  symbol_id: 0xd75ad246
   symbol_id: 0xeedbb4b8
   symbol_id: 0xdefa9d60
   symbol_id: 0x905187d4
