@@ -2094,3 +2094,4 @@ static void __exit gadget_cfs_exit(void)
 	configfs_unregister_subsystem(&gadget_subsys);
 }
 module_exit(gadget_cfs_exit);
+//Blank line added for Android Canary build test of branch common-android-mainline
