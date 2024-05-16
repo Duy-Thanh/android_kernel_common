@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2256bdd8_fa89fef1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2024-05-16T16:53:05Z",
+      "side": 1,
+      "message": "As an aside, QC needs Gunyah available for our first stage modules, so not planning to enable in system_dlkm",
+      "revId": "932132662fdd457e6ce327b4c0ef2e5431652c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
