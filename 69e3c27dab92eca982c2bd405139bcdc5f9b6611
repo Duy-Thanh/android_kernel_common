@@ -70,6 +70,24 @@
       "parentUuid": "6ae6e415_ed1a1f8f",
       "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d662e7_bb82ca1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-05-16T03:05:05Z",
+      "side": 1,
+      "message": "It looks like LINT seems to be complaining of bad cherry pick which isn\u0027t correct.",
+      "parentUuid": "c55c80d9_e25c9d1f",
+      "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
