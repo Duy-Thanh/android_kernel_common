@@ -88,6 +88,24 @@
       "parentUuid": "c55c80d9_e25c9d1f",
       "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c175c220_c66f7a47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-05-16T03:20:01Z",
+      "side": 1,
+      "message": "Hmm ... shouldn\u0027t the text \"cherry picked from commit\" only occur in CLs that have been cherry-picked from Linus\u0027 tree? This CL has been cherry-picked from the Android tree. Hence, I think that the line \"cherry picked from commit\" should be left out.",
+      "parentUuid": "61d662e7_bb82ca1d",
+      "revId": "69e3c27dab92eca982c2bd405139bcdc5f9b6611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
