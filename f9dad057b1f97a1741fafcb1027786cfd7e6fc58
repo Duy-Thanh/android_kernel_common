@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47b5973a_ca5f0803",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951051
+      },
+      "writtenOn": "2024-05-16T18:51:04Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "e95a5c93_193790f4",
+      "revId": "f9dad057b1f97a1741fafcb1027786cfd7e6fc58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3142f1c1_5d58ce9a",
         "filename": "include/dt-bindings/interconnect/qcom,icc.h",
         "patchSetId": 4
@@ -61,6 +79,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e808e24_cf7d2ba8",
+        "filename": "include/dt-bindings/interconnect/qcom,icc.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1951051
+      },
+      "writtenOn": "2024-05-16T18:51:04Z",
+      "side": 1,
+      "message": "The tag values typically for normal HW, there\u0027s just the three logical buckets -- AMC, WAKE, and SLEEP. TAG_ALWAYS mainly is all three, which logically means a \"required\" request. A request that\u0027ll always be present until the client removes it.\n\nThe other most common tag is 3, which is TAG_ACTIVE_ONLY and is just AMC+WAKE, but not SLEEP. Thus, a \"suppressible\" request that goes away automatically when the HLOS goes to sleep and restores when the HLOS wakes up.\n\nTheese tags are bitmasks as you find in this file , and all bits \u003c 8 are reserved for the aggregation \"buckets\". \n \nFor local subsystem core DRVs (which aggregates local resource votes), there are more power states than pre-defined AMC+WAKE+SLEEP, so there are the more generic TAG_PWR_ST_[0-4].\nThe first three  values align to the same bucket indexes as AMC, WAKE, and SLEEP and above these there are more PWR_ST tags than normal HW. The PWR_ST_3,4 are mainly used for PCIE HW states.",
+      "parentUuid": "3142f1c1_5d58ce9a",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "f9dad057b1f97a1741fafcb1027786cfd7e6fc58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42f37cd4_279b85cf",
         "filename": "include/dt-bindings/interconnect/qcom,icc.h",
         "patchSetId": 4
@@ -72,6 +114,30 @@
       "writtenOn": "2024-05-13T08:41:26Z",
       "side": 1,
       "message": "This seems like an unrelated change based on the commit message.",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 30
+      },
+      "revId": "f9dad057b1f97a1741fafcb1027786cfd7e6fc58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87861a81_eeafaad9",
+        "filename": "include/dt-bindings/interconnect/qcom,icc.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1951051
+      },
+      "writtenOn": "2024-05-16T18:51:04Z",
+      "side": 1,
+      "message": "can you please add below to commit description\nAlso add binding for QCOM_ICC_TAG_PERF_MODE, which can be used with\nicc_set_tag() to indicate that the path should use latency-optimized\nsettings for each node in the path if supported.",
+      "parentUuid": "42f37cd4_279b85cf",
       "range": {
         "startLine": 43,
         "startChar": 8,
