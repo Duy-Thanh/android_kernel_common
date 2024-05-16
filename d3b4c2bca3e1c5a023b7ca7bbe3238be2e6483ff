@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3dee840_b2c1d50c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-16T14:01:30Z",
+      "side": 1,
+      "message": "please rebase to resolve merge conflicts. Also, create a patch on top of this one to add the symbols to your symbol list",
+      "revId": "d3b4c2bca3e1c5a023b7ca7bbe3238be2e6483ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
