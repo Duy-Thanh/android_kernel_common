@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0dfd1bc_39c8af0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-05-17T22:57:33Z",
+      "side": 1,
+      "message": "```\nCommit needs to contain a properly formatted Bug: or Fixes: line.\n```\n\nPlease fix the formatting, I think you are missing a space after :",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 13
+      },
+      "revId": "74049aa2cf92e5295035e194c10d721e500f3f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
