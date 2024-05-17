@@ -25,6 +25,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_gfp_zone_flags,
 DECLARE_RESTRICTED_HOOK(android_rvh_set_readahead_gfp_mask,
 			TP_PROTO(unsigned int *flags),	/* gfp_t *flags */
 			TP_ARGS(flags), 1);
+<<<<<<< HEAD   (defe00 UPSTREAM: Revert "arm64: dts: qcom: sm8250: switch UFS QMP P)
 DECLARE_RESTRICTED_HOOK(android_rvh_do_read_fault,
 			TP_PROTO(struct file *file, pgoff_t pgoff,
 				 unsigned long *fault_around_bytes),
@@ -123,6 +124,15 @@ DECLARE_HOOK(android_vh_show_smap,
 	TP_PROTO(struct seq_file *m, unsigned long writeback,
 		unsigned long same, unsigned long huge),
 	TP_ARGS(m, writeback, same, huge));
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_slab_alloc_node,
+	TP_PROTO(void *object, unsigned long addr, struct kmem_cache *s),
+	TP_ARGS(object, addr, s));
+DECLARE_HOOK(android_vh_slab_free,
+	TP_PROTO(unsigned long addr, struct kmem_cache *s),
+	TP_ARGS(addr, s));
+>>>>>>> CHANGE (d5c66a ANDROID: vendor_hooks: add hook to record slab alloc and fre)
 DECLARE_HOOK(android_vh_meminfo_cache_adjust,
 	TP_PROTO(unsigned long *cached),
 	TP_ARGS(cached));
