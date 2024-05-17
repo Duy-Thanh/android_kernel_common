@@ -1,0 +1,113 @@
+<<<<<<< HEAD   (e06733ed385198e74964bdbf4fa9fdc4c2e74929 ANDROID: GKI: update symbol list for galaxy)
+||||||| BASE   (f052f87d33f9f26ae0d420503a5043fd3f42dbf8 ANDROID: vendor_hooks:vendor hook for fiq)
+[abi_symbol_list]
+# commonly used symbols
+  __traceiter_android_vh_logbuf
+  __tracepoint_android_vh_logbuf
+  tracepoint_probe_register
+  tracepoint_probe_unregister
+  cgroup_rm_cftypes
+
+# required by shrink memory module
+  shrink_slab
+  __tracepoint_android_vh_do_shrink_slab
+  __tracepoint_android_vh_shrink_slab_bypass
+  __traceiter_android_vh_do_shrink_slab
+  __traceiter_android_vh_shrink_slab_bypass
+
+# required by SAGT module
+  __traceiter_android_rvh_before_do_sched_yield
+  __tracepoint_android_rvh_before_do_sched_yield
+
+# required by memory
+  ufshcd_alloc_host
+  ufshcd_dealloc_host
+
+#required by metis.ko module
+  __traceiter_android_vh_rwsem_read_wait_start
+  __traceiter_android_vh_rwsem_write_wait_start
+  __traceiter_android_vh_mutex_wait_start
+  __traceiter_android_vh_alter_mutex_list_add
+  __traceiter_android_rvh_cpuset_fork
+  __traceiter_android_vh_sched_setaffinity_early
+  __traceiter_android_rvh_set_cpus_allowed_comm
+  __traceiter_android_rvh_dequeue_task
+  __tracepoint_android_vh_rwsem_read_wait_start
+  __tracepoint_android_vh_rwsem_write_wait_start
+  __tracepoint_android_vh_mutex_wait_start
+  __tracepoint_android_vh_alter_mutex_list_add
+  __tracepoint_android_rvh_cpuset_fork
+  __tracepoint_android_vh_sched_setaffinity_early
+  __tracepoint_android_rvh_set_cpus_allowed_comm
+  __tracepoint_android_rvh_dequeue_task
+  cpuset_cpus_allowed
+  cpufreq_update_policy
+
+#required by millet.ko
+  __traceiter_android_rvh_refrigerator
+  __tracepoint_android_rvh_refrigerator
+  freezer_cgrp_subsys
+
+# required by trace_hook.ko
+  android_rvh_probe_register
+  __traceiter_android_rvh_context_switch
+  __tracepoint_android_rvh_context_switch
+=======
+[abi_symbol_list]
+# commonly used symbols
+  __traceiter_android_vh_logbuf
+  __tracepoint_android_vh_logbuf
+  tracepoint_probe_register
+  tracepoint_probe_unregister
+  cgroup_rm_cftypes
+
+# required by shrink memory module
+  shrink_slab
+  __tracepoint_android_vh_do_shrink_slab
+  __tracepoint_android_vh_shrink_slab_bypass
+  __traceiter_android_vh_do_shrink_slab
+  __traceiter_android_vh_shrink_slab_bypass
+
+# required by SAGT module
+  __traceiter_android_rvh_before_do_sched_yield
+  __tracepoint_android_rvh_before_do_sched_yield
+
+# required by memory
+  ufshcd_alloc_host
+  ufshcd_dealloc_host
+
+#required by metis.ko module
+  __traceiter_android_vh_rwsem_read_wait_start
+  __traceiter_android_vh_rwsem_write_wait_start
+  __traceiter_android_vh_mutex_wait_start
+  __traceiter_android_vh_alter_mutex_list_add
+  __traceiter_android_rvh_cpuset_fork
+  __traceiter_android_vh_sched_setaffinity_early
+  __traceiter_android_rvh_set_cpus_allowed_comm
+  __traceiter_android_rvh_dequeue_task
+  __tracepoint_android_vh_rwsem_read_wait_start
+  __tracepoint_android_vh_rwsem_write_wait_start
+  __tracepoint_android_vh_mutex_wait_start
+  __tracepoint_android_vh_alter_mutex_list_add
+  __tracepoint_android_rvh_cpuset_fork
+  __tracepoint_android_vh_sched_setaffinity_early
+  __tracepoint_android_rvh_set_cpus_allowed_comm
+  __tracepoint_android_rvh_dequeue_task
+  cpuset_cpus_allowed
+  cpufreq_update_policy
+
+#required by millet.ko
+  __traceiter_android_rvh_refrigerator
+  __tracepoint_android_rvh_refrigerator
+  freezer_cgrp_subsys
+
+# required by trace_hook.ko
+  android_rvh_probe_register
+  __traceiter_android_rvh_context_switch
+  __tracepoint_android_rvh_context_switch
+
+# required by dw_wdt.ko
+  android_rvh_probe_register
+  __traceiter_android_rvh_fiq_dump
+  __tracepoint_android_rvh_fiq_dump
+>>>>>>> CHANGE (cb3c17903638c134f24b27c18b90a4b6e66af88b ANDROID: GKI: Update xiaomi symbol list.)
