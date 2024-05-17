@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91653468_3e0fbcc9",
+        "filename": "drivers/cpufreq/scmi-cpufreq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-05-17T19:50:28Z",
+      "side": 1,
+      "message": "`rate` parameter of `freq_set` function is `unsigned long`, it\u0027s better to keep it consistent.",
+      "range": {
+        "startLine": 65,
+        "startChar": 1,
+        "endLine": 65,
+        "endChar": 4
+      },
+      "revId": "fd750ca68f5bb8938468dff832250325da0330a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
