@@ -722,6 +722,7 @@ struct oom_control;
 DECLARE_HOOK(android_vh_mm_may_oom_exit,
 	TP_PROTO(struct oom_control *oc, unsigned long did_some_progress),
 	TP_ARGS(oc, did_some_progress));
+<<<<<<< HEAD   (f26b61355a1b5a3b8286d5bddc7a3fa5a5191317 ANDROID: kasan: Don't instrument Rust globals if UNWIND_PATC)
 DECLARE_HOOK(android_vh_alloc_pages_entry,
 	TP_PROTO(gfp_t *gfp, unsigned int order, int preferred_nid,
 		nodemask_t *nodemask),
@@ -738,6 +739,70 @@ DECLARE_HOOK(android_vh_exit_oom_victim,
 DECLARE_HOOK(android_vh_oom_killer_disable,
 	TP_PROTO(int oom_victims),
 	TP_ARGS(oom_victims));
+||||||| BASE   (0629d7c40c7db792d270a3eb7e81a88329e94d4d ANDROID: GKI: Update symbol list for vivo)
+DECLARE_HOOK(android_vh_calculate_totalreserve_pages,
+	TP_PROTO(bool *skip),
+	TP_ARGS(skip));
+DECLARE_HOOK(android_vh_compact_finished,
+	TP_PROTO(bool *abort_compact),
+	TP_ARGS(abort_compact));
+DECLARE_HOOK(android_vh_madvise_cold_or_pageout_abort,
+	TP_PROTO(struct vm_area_struct *vma, bool *abort_madvise),
+	TP_ARGS(vma, abort_madvise));
+DECLARE_HOOK(android_vh_lruvec_add_folio,
+	TP_PROTO(struct lruvec *lruvec, struct folio *folio, enum lru_list lru,
+		bool tail, bool *skip),
+	TP_ARGS(lruvec, folio, lru, tail, skip));
+DECLARE_HOOK(android_vh_lruvec_del_folio,
+	TP_PROTO(struct lruvec *lruvec, struct folio *folio, enum lru_list lru,
+		bool *skip),
+	TP_ARGS(lruvec, folio, lru, skip));
+DECLARE_HOOK(android_vh_rmqueue_pcplist_override_batch,
+	TP_PROTO(int *batch),
+	TP_ARGS(batch));
+DECLARE_HOOK(android_vh_do_group_exit,
+	TP_PROTO(struct task_struct *tsk),
+	TP_ARGS(tsk));
+=======
+DECLARE_HOOK(android_vh_calculate_totalreserve_pages,
+	TP_PROTO(bool *skip),
+	TP_ARGS(skip));
+DECLARE_HOOK(android_vh_compact_finished,
+	TP_PROTO(bool *abort_compact),
+	TP_ARGS(abort_compact));
+DECLARE_HOOK(android_vh_madvise_cold_or_pageout_abort,
+	TP_PROTO(struct vm_area_struct *vma, bool *abort_madvise),
+	TP_ARGS(vma, abort_madvise));
+DECLARE_HOOK(android_vh_lruvec_add_folio,
+	TP_PROTO(struct lruvec *lruvec, struct folio *folio, enum lru_list lru,
+		bool tail, bool *skip),
+	TP_ARGS(lruvec, folio, lru, tail, skip));
+DECLARE_HOOK(android_vh_lruvec_del_folio,
+	TP_PROTO(struct lruvec *lruvec, struct folio *folio, enum lru_list lru,
+		bool *skip),
+	TP_ARGS(lruvec, folio, lru, skip));
+DECLARE_HOOK(android_vh_rmqueue_pcplist_override_batch,
+	TP_PROTO(int *batch),
+	TP_ARGS(batch));
+DECLARE_HOOK(android_vh_do_group_exit,
+	TP_PROTO(struct task_struct *tsk),
+	TP_ARGS(tsk));
+DECLARE_HOOK(android_vh_swapmem_gather_init,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_swapmem_gather_add_bypass,
+	TP_PROTO(struct mm_struct *mm, swp_entry_t entry, int nr, bool *bypass),
+	TP_ARGS(mm, entry, nr, bypass));
+DECLARE_HOOK(android_vh_swapmem_gather_finish,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_oom_swapmem_gather_init,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_oom_swapmem_gather_finish,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+>>>>>>> CHANGE (c7cef0a95103afbb830d7fc003fc65375f9e5aa9 ANDROID: vendor_hooks: add hooks for exting task's swp_entry)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

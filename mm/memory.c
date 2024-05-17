@@ -1840,6 +1840,7 @@ static unsigned long zap_pte_range(struct mmu_gather *tlb,
 	bool can_reclaim_pt = reclaim_pt_is_enabled(start, end, details);
 	bool direct_reclaim = true;
 	int nr;
+	bool bypass = false;
 
 retry:
 	tlb_change_page_size(tlb, PAGE_SIZE);
@@ -1858,6 +1859,7 @@ retry:
 			break;
 		}
 
+<<<<<<< HEAD   (f26b61355a1b5a3b8286d5bddc7a3fa5a5191317 ANDROID: kasan: Don't instrument Rust globals if UNWIND_PATC)
 		nr = do_zap_pte_range(tlb, vma, pte, addr, end, details, rss,
 				      &force_flush, &force_break, &any_skipped);
 		if (any_skipped)
@@ -1866,7 +1868,132 @@ retry:
 			addr += nr * PAGE_SIZE;
 			direct_reclaim = false;
 			break;
+||||||| BASE   (0629d7c40c7db792d270a3eb7e81a88329e94d4d ANDROID: GKI: Update symbol list for vivo)
+		entry = pte_to_swp_entry(ptent);
+		if (is_device_private_entry(entry) ||
+		    is_device_exclusive_entry(entry)) {
+			page = pfn_swap_entry_to_page(entry);
+			folio = page_folio(page);
+			if (unlikely(!should_zap_folio(details, folio)))
+				continue;
+			/*
+			 * Both device private/exclusive mappings should only
+			 * work with anonymous page so far, so we don't need to
+			 * consider uffd-wp bit when zap. For more information,
+			 * see zap_install_uffd_wp_if_needed().
+			 */
+			WARN_ON_ONCE(!vma_is_anonymous(vma));
+			rss[mm_counter(folio)]--;
+			if (is_device_private_entry(entry))
+				folio_remove_rmap_pte(folio, page, vma);
+			folio_put(folio);
+		} else if (!non_swap_entry(entry)) {
+			max_nr = (end - addr) / PAGE_SIZE;
+			nr = swap_pte_batch(pte, max_nr, ptent);
+			/* Genuine swap entries, hence a private anon pages */
+			if (!should_zap_cows(details))
+				continue;
+			rss[MM_SWAPENTS] -= nr;
+			free_swap_and_cache_nr(entry, nr);
+		} else if (is_migration_entry(entry)) {
+			folio = pfn_swap_entry_folio(entry);
+			if (!should_zap_folio(details, folio))
+				continue;
+			rss[mm_counter(folio)]--;
+		} else if (pte_marker_entry_uffd_wp(entry)) {
+			/*
+			 * For anon: always drop the marker; for file: only
+			 * drop the marker if explicitly requested.
+			 */
+			if (!vma_is_anonymous(vma) &&
+			    !zap_drop_markers(details))
+				continue;
+		} else if (is_guard_swp_entry(entry)) {
+			/*
+			 * Ordinary zapping should not remove guard PTE
+			 * markers. Only do so if we should remove PTE markers
+			 * in general.
+			 */
+			if (!zap_drop_markers(details))
+				continue;
+		} else if (is_hwpoison_entry(entry) ||
+			   is_poisoned_swp_entry(entry)) {
+			if (!should_zap_cows(details))
+				continue;
+		} else {
+			/* We should have covered all the swap entry types */
+			pr_alert("unrecognized swap entry 0x%lx\n", entry.val);
+			WARN_ON_ONCE(1);
+=======
+		entry = pte_to_swp_entry(ptent);
+		if (is_device_private_entry(entry) ||
+		    is_device_exclusive_entry(entry)) {
+			page = pfn_swap_entry_to_page(entry);
+			folio = page_folio(page);
+			if (unlikely(!should_zap_folio(details, folio)))
+				continue;
+			/*
+			 * Both device private/exclusive mappings should only
+			 * work with anonymous page so far, so we don't need to
+			 * consider uffd-wp bit when zap. For more information,
+			 * see zap_install_uffd_wp_if_needed().
+			 */
+			WARN_ON_ONCE(!vma_is_anonymous(vma));
+			rss[mm_counter(folio)]--;
+			if (is_device_private_entry(entry))
+				folio_remove_rmap_pte(folio, page, vma);
+			folio_put(folio);
+		} else if (!non_swap_entry(entry)) {
+			max_nr = (end - addr) / PAGE_SIZE;
+			nr = swap_pte_batch(pte, max_nr, ptent);
+			/* Genuine swap entries, hence a private anon pages */
+			if (!should_zap_cows(details))
+				continue;
+			rss[MM_SWAPENTS] -= nr;
+			trace_android_vh_swapmem_gather_add_bypass(mm, entry, nr, &bypass);
+			if (bypass)
+				goto skip;
+			free_swap_and_cache_nr(entry, nr);
+		} else if (is_migration_entry(entry)) {
+			folio = pfn_swap_entry_folio(entry);
+			if (!should_zap_folio(details, folio))
+				continue;
+			rss[mm_counter(folio)]--;
+		} else if (pte_marker_entry_uffd_wp(entry)) {
+			/*
+			 * For anon: always drop the marker; for file: only
+			 * drop the marker if explicitly requested.
+			 */
+			if (!vma_is_anonymous(vma) &&
+			    !zap_drop_markers(details))
+				continue;
+		} else if (is_guard_swp_entry(entry)) {
+			/*
+			 * Ordinary zapping should not remove guard PTE
+			 * markers. Only do so if we should remove PTE markers
+			 * in general.
+			 */
+			if (!zap_drop_markers(details))
+				continue;
+		} else if (is_hwpoison_entry(entry) ||
+			   is_poisoned_swp_entry(entry)) {
+			if (!should_zap_cows(details))
+				continue;
+		} else {
+			/* We should have covered all the swap entry types */
+			pr_alert("unrecognized swap entry 0x%lx\n", entry.val);
+			WARN_ON_ONCE(1);
+>>>>>>> CHANGE (c7cef0a95103afbb830d7fc003fc65375f9e5aa9 ANDROID: vendor_hooks: add hooks for exting task's swp_entry)
 		}
+<<<<<<< HEAD   (f26b61355a1b5a3b8286d5bddc7a3fa5a5191317 ANDROID: kasan: Don't instrument Rust globals if UNWIND_PATC)
+||||||| BASE   (0629d7c40c7db792d270a3eb7e81a88329e94d4d ANDROID: GKI: Update symbol list for vivo)
+		clear_not_present_full_ptes(mm, addr, pte, nr, tlb->fullmm);
+		zap_install_uffd_wp_if_needed(vma, addr, pte, nr, details, ptent);
+=======
+skip:
+		clear_not_present_full_ptes(mm, addr, pte, nr, tlb->fullmm);
+		zap_install_uffd_wp_if_needed(vma, addr, pte, nr, details, ptent);
+>>>>>>> CHANGE (c7cef0a95103afbb830d7fc003fc65375f9e5aa9 ANDROID: vendor_hooks: add hooks for exting task's swp_entry)
 	} while (pte += nr, addr += PAGE_SIZE * nr, addr != end);
 
 	/*

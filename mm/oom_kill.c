@@ -52,6 +52,8 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/oom.h>
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
@@ -537,6 +539,7 @@ static bool __oom_reap_task_mm(struct mm_struct *mm)
 	 */
 	mm_flags_set(MMF_UNSTABLE, mm);
 
+<<<<<<< HEAD   (f26b61355a1b5a3b8286d5bddc7a3fa5a5191317 ANDROID: kasan: Don't instrument Rust globals if UNWIND_PATC)
 	/*
 	 * It might start racing with the dying task and compete for shared
 	 * resources - e.g. page table lock contention has been observed.
@@ -544,6 +547,12 @@ static bool __oom_reap_task_mm(struct mm_struct *mm)
 	 * of the address space.
 	 */
 	mas_for_each_rev(&mas, vma, 0) {
+||||||| BASE   (0629d7c40c7db792d270a3eb7e81a88329e94d4d ANDROID: GKI: Update symbol list for vivo)
+	for_each_vma(vmi, vma) {
+=======
+	trace_android_vh_oom_swapmem_gather_init(mm);
+	for_each_vma(vmi, vma) {
+>>>>>>> CHANGE (c7cef0a95103afbb830d7fc003fc65375f9e5aa9 ANDROID: vendor_hooks: add hooks for exting task's swp_entry)
 		if (vma->vm_flags & (VM_HUGETLB|VM_PFNMAP))
 			continue;
 
@@ -575,6 +584,7 @@ static bool __oom_reap_task_mm(struct mm_struct *mm)
 			tlb_finish_mmu(&tlb);
 		}
 	}
+	trace_android_vh_oom_swapmem_gather_finish(mm);
 
 	return ret;
 }
