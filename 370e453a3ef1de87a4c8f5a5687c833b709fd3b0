@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9afc2422_eb97b342",
+        "filename": "mm/memory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4650,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-05-17T19:59:35Z",
+      "side": 1,
+      "message": "If you are indeed using both hooks (as I can see in the next patch), it would be better to include `fault_around_bytes` in your new hook so that when we cherry-pick next time we can drop `trace_android_vh_tune_fault_around_bytes` without other changes to this hook. IOW, have this hook as:\n`trace_android_rvh_do_read_fault(vmf-\u003evma-\u003evm_file, vmf-\u003epgoff, \u0026fault_around_bytes);`",
+      "range": {
+        "startLine": 4649,
+        "startChar": 1,
+        "endLine": 4650,
+        "endChar": 32
+      },
+      "revId": "370e453a3ef1de87a4c8f5a5687c833b709fd3b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
