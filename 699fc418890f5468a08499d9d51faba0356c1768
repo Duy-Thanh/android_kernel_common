@@ -34,6 +34,24 @@
       "parentUuid": "20148b95_5f54fd97",
       "revId": "699fc418890f5468a08499d9d51faba0356c1768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5e93774_8adffd56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2024-05-17T05:04:49Z",
+      "side": 1,
+      "message": "In latest patch as well got LINT message \"Cherry pick is not clean. Checked against UPSTREAM\". Please help to overcome LINT message.\n\n@Carlos Llamas mentioned \"This was a false-positive from our tooling which is now checking context in the cherry-picks. I\u0027ve reported this behavior\" (for similar for https://android-review.googlesource.com/c/kernel/common/+/3078628)",
+      "parentUuid": "06e074b0_d22c2ec6",
+      "revId": "699fc418890f5468a08499d9d51faba0356c1768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
