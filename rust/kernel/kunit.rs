@@ -182,6 +182,8 @@ macro_rules! kunit_case {
             generate_params: None,
             status: $crate::bindings::kunit_status_KUNIT_SUCCESS,
             log: core::ptr::null_mut(),
+            attr: crate::bindings::kunit_attributes { speed: 0 },
+            module_name: core::ptr::null_mut(),
         }
     };
     ($name:ident, $run_case:ident) => {
@@ -191,6 +193,8 @@ macro_rules! kunit_case {
             generate_params: None,
             status: $crate::bindings::kunit_status_KUNIT_SUCCESS,
             log: core::ptr::null_mut(),
+            attr: crate::bindings::kunit_attributes { speed: 0 },
+            module_name: core::ptr::null_mut(),
         }
     };
 }
@@ -247,6 +251,7 @@ macro_rules! kunit_unsafe_test_suite {
                     debugfs: core::ptr::null_mut(),
                     log: core::ptr::null_mut(),
                     suite_init_err: 0,
+                    attr: crate::bindings::kunit_attributes { speed: 0 },
                 });
 
             // SAFETY: `KUNIT_TEST_SUITE` is static.
