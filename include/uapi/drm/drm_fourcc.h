@@ -54,7 +54,7 @@ extern "C" {
  * Format modifiers may change any property of the buffer, including the number
  * of planes and/or the required allocation size. Format modifiers are
  * vendor-namespaced, and as such the relationship between a fourcc code and a
- * modifier is specific to the modifer being used. For example, some modifiers
+ * modifier is specific to the modifier being used. For example, some modifiers
  * may preserve meaning - such as number of planes - from the fourcc code,
  * whereas others may not.
  *
@@ -846,7 +846,7 @@ extern "C" {
 				 (((s) & 0x1) << 22) | \
 				 (((c) & 0x7) << 23)))
 
-/* To grandfather in prior block linear format modifiers to the above layout,
+/* To retain prior block linear format modifiers to the above layout,
  * the page kind "0", which corresponds to "pitch/linear" and hence is unusable
  * with block-linear layouts, is remapped within drivers to the value 0xfe,
  * which corresponds to the "generic" kind used for simple single-sample
@@ -1187,13 +1187,13 @@ drm_fourcc_canonicalize_nvidia_format_mod(__u64 modifier)
  * Example: 8x8 luma samples in a 'Y' plane
  *          8x8 chroma 'V' values, in the 'V' plane of a fully-planar YUV buffer
  * -----------------------------   ---------   -----------------   ------------------
- * 2                               DONT CARE   8 samples           4 samples
+ * 2                               DON'T CARE   8 samples           4 samples
  * Example: 8x4 chroma pairs in the 'UV' plane of a semi-planar YUV buffer
  * -----------------------------   ---------   -----------------   ------------------
- * 3                               DONT CARE   4 samples           4 samples
+ * 3                               DON'T CARE   4 samples           4 samples
  * Example: 4x4 pixels in an RGB buffer without alpha
  * -----------------------------   ---------   -----------------   ------------------
- * 4                               DONT CARE   4 samples           4 samples
+ * 4                               DON'T CARE   4 samples           4 samples
  * Example: 4x4 pixels in an RGB buffer with alpha
  */
 
