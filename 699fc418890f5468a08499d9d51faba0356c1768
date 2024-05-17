@@ -70,6 +70,24 @@
       "parentUuid": "a5e93774_8adffd56",
       "revId": "699fc418890f5468a08499d9d51faba0356c1768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1c942c3_35e7565f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-17T15:15:11Z",
+      "side": 1,
+      "message": "This is in fact _NOT_ a clean cherry-pick and as such it should be tagged as `BACKPORT:` just as Bart mentioned. Please also add an entry explaining the conflict resolution e.g. `[joe: fixed conflict due to missing commit xyz]`.",
+      "parentUuid": "c05b58b8_6cc19b79",
+      "revId": "699fc418890f5468a08499d9d51faba0356c1768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
