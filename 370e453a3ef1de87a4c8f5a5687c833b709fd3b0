@@ -22,6 +22,30 @@
       },
       "revId": "370e453a3ef1de87a4c8f5a5687c833b709fd3b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6a4c6d8_4377fc33",
+        "filename": "mm/memory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4650,
+      "author": {
+        "id": 1967749
+      },
+      "writtenOn": "2024-05-17T20:08:58Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, let me update the patches.",
+      "parentUuid": "9afc2422_eb97b342",
+      "range": {
+        "startLine": 4649,
+        "startChar": 1,
+        "endLine": 4650,
+        "endChar": 32
+      },
+      "revId": "370e453a3ef1de87a4c8f5a5687c833b709fd3b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
