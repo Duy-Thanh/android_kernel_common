@@ -6044,6 +6044,11 @@ pointer_reference {
   pointee_type_id: 0x13c36ed4
 }
 pointer_reference {
+  id: 0x0e61e3bf
+  kind: POINTER
+  pointee_type_id: 0x13c76860
+}
+pointer_reference {
   id: 0x0e627592
   kind: POINTER
   pointee_type_id: 0x13c930d6
@@ -8937,6 +8942,11 @@ pointer_reference {
   id: 0x153f0b1a
   kind: POINTER
   pointee_type_id: 0x7ebccaf7
+}
+pointer_reference {
+  id: 0x1549bcfb
+  kind: POINTER
+  pointee_type_id: 0x7f661570
 }
 pointer_reference {
   id: 0x154aa8e2
@@ -16984,6 +16994,11 @@ pointer_reference {
   pointee_type_id: 0x9edc3d1c
 }
 pointer_reference {
+  id: 0x2d27cf10
+  kind: POINTER
+  pointee_type_id: 0x9edfdadc
+}
+pointer_reference {
   id: 0x2d28e8bc
   kind: POINTER
   pointee_type_id: 0x9ee3446f
@@ -18582,6 +18597,11 @@ pointer_reference {
   id: 0x2dd7cacf
   kind: POINTER
   pointee_type_id: 0x9d1fcda3
+}
+pointer_reference {
+  id: 0x2dd7d891
+  kind: POINTER
+  pointee_type_id: 0x9d1f84da
 }
 pointer_reference {
   id: 0x2dd8ba7a
@@ -25317,6 +25337,11 @@ pointer_reference {
   id: 0x35ee4c1c
   kind: POINTER
   pointee_type_id: 0xfdf9d6ed
+}
+pointer_reference {
+  id: 0x35eee11a
+  kind: POINTER
+  pointee_type_id: 0xfdfb62f7
 }
 pointer_reference {
   id: 0x35ef2eea
@@ -75408,6 +75433,12 @@ member {
   offset: 192
 }
 member {
+  id: 0xf9546acb
+  name: "dev_groups"
+  type_id: 0x06433852
+  offset: 384
+}
+member {
   id: 0xf9546bf2
   name: "dev_groups"
   type_id: 0x06433852
@@ -77727,6 +77758,12 @@ member {
   name: "disconnect"
   type_id: 0x0e996219
   offset: 512
+}
+member {
+  id: 0x8da5d9e5
+  name: "disconnect"
+  type_id: 0x0e61e3bf
+  offset: 192
 }
 member {
   id: 0x8da69b4b
@@ -80305,6 +80342,12 @@ member {
   name: "drvwrap"
   type_id: 0x3c6b8341
   offset: 896
+}
+member {
+  id: 0x51e20c8a
+  name: "drvwrap"
+  type_id: 0x3c6b8341
+  offset: 448
 }
 member {
   id: 0xb5b01443
@@ -95741,6 +95784,13 @@ member {
   offset: 3104
 }
 member {
+  id: 0x1aea9f33
+  name: "generic_subclass"
+  type_id: 0x4585663f
+  offset: 1985
+  bitsize: 1
+}
+member {
   id: 0x4a8a7a23
   name: "genfs"
   type_id: 0x2ecc6701
@@ -104984,6 +105034,12 @@ member {
   name: "id_table"
   type_id: 0x39947122
   offset: 1792
+}
+member {
+  id: 0xc4fbc2aa
+  name: "id_table"
+  type_id: 0x38040a6c
+  offset: 1920
 }
 member {
   id: 0xc4fbc795
@@ -122885,6 +122941,12 @@ member {
   name: "match"
   type_id: 0x358a1c52
   offset: 320
+}
+member {
+  id: 0xe616e079
+  name: "match"
+  type_id: 0x35eee11a
+  offset: 64
 }
 member {
   id: 0xe6179934
@@ -154790,6 +154852,12 @@ member {
   offset: 384
 }
 member {
+  id: 0xd77b2d3a
+  name: "probe"
+  type_id: 0x2d27cf10
+  offset: 128
+}
+member {
   id: 0xd77b67e3
   name: "probe"
   type_id: 0x2d6627db
@@ -166858,6 +166926,12 @@ member {
   name: "resume"
   type_id: 0x2de9e33f
   offset: 1280
+}
+member {
+  id: 0xcab23073
+  name: "resume"
+  type_id: 0x2dd7d891
+  offset: 320
 }
 member {
   id: 0xcab23d11
@@ -186807,6 +186881,13 @@ member {
   offset: 40
 }
 member {
+  id: 0x26cce749
+  name: "supports_autosuspend"
+  type_id: 0x4585663f
+  offset: 1984
+  bitsize: 1
+}
+member {
   id: 0x26cce85e
   name: "supports_autosuspend"
   type_id: 0x4585663f
@@ -186958,6 +187039,12 @@ member {
   name: "suspend"
   type_id: 0x2c1e7e89
   offset: 384
+}
+member {
+  id: 0xf397014a
+  name: "suspend"
+  type_id: 0x2dd7d891
+  offset: 256
 }
 member {
   id: 0xf39706bf
@@ -265012,6 +265099,25 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x7f661570
+  kind: STRUCT
+  name: "usb_device_driver"
+  definition {
+    bytesize: 256
+    member_id: 0x0de57ce8
+    member_id: 0xe616e079
+    member_id: 0xd77b2d3a
+    member_id: 0x8da5d9e5
+    member_id: 0xf397014a
+    member_id: 0xcab23073
+    member_id: 0xf9546acb
+    member_id: 0x51e20c8a
+    member_id: 0xc4fbc2aa
+    member_id: 0x26cce749
+    member_id: 0x1aea9f33
+  }
+}
+struct_union {
   id: 0x59048a3d
   kind: STRUCT
   name: "usb_device_id"
@@ -294446,6 +294552,11 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x15ca3ead
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1549bcfb
+}
+function {
   id: 0x15cafbab
   return_type_id: 0x48b5725f
   parameter_id: 0x154aa8e2
@@ -317163,6 +317274,12 @@ function {
   parameter_id: 0x15f20052
 }
 function {
+  id: 0x98fe1360
+  return_type_id: 0x6720d32f
+  parameter_id: 0x1549bcfb
+  parameter_id: 0x0b27dc43
+}
+function {
   id: 0x98ff2dd7
   return_type_id: 0x6720d32f
   parameter_id: 0x11e6864c
@@ -325702,6 +325819,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x03ce74cd
   parameter_id: 0x1bb6a471
+}
+function {
+  id: 0x9d1f84da
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0d7ce7cc
+  parameter_id: 0xf017819f
 }
 function {
   id: 0x9d1fcda3
@@ -335075,6 +335198,11 @@ function {
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x0ca27481
   parameter_id: 0x1d44326e
+}
+function {
+  id: 0xfdfb62f7
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x0d7ce7cc
 }
 function {
   id: 0xfe11706f
@@ -399083,6 +399211,15 @@ elf_symbol {
   full_name: "usb_deregister_dev"
 }
 elf_symbol {
+  id: 0x3be9765e
+  name: "usb_deregister_device_driver"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdadf653f
+  type_id: 0x15ca3ead
+  full_name: "usb_deregister_device_driver"
+}
+elf_symbol {
   id: 0xd75ad246
   name: "usb_device_match_id"
   is_defined: true
@@ -399963,6 +400100,15 @@ elf_symbol {
   crc: 0xf06b7687
   type_id: 0x950d2ca0
   full_name: "usb_register_dev"
+}
+elf_symbol {
+  id: 0xcbba001f
+  name: "usb_register_device_driver"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb4a30ad8
+  type_id: 0x98fe1360
+  full_name: "usb_register_device_driver"
 }
 elf_symbol {
   id: 0x944deaea
@@ -412055,6 +412201,7 @@ interface {
   symbol_id: 0x109adee2
   symbol_id: 0x784d1cb4
   symbol_id: 0x201afca9
+  symbol_id: 0x3be9765e
   symbol_id: 0xd75ad246
   symbol_id: 0xdefa9d60
   symbol_id: 0x905187d4
@@ -412153,6 +412300,7 @@ interface {
   symbol_id: 0xa834737e
   symbol_id: 0x869e15d7
   symbol_id: 0xa60cf3b7
+  symbol_id: 0xcbba001f
   symbol_id: 0x944deaea
   symbol_id: 0x413dc89c
   symbol_id: 0xbc035d91
