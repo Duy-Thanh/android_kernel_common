@@ -33,6 +33,24 @@
       "message": "Wrong change-id and needs to be \"Bug:\"",
       "revId": "b3c59c6ef97a68382150c3e256d69bdee4c18c1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac58c837_7e4ec45f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2024-05-18T00:38:27Z",
+      "side": 1,
+      "message": "Bug: 341178033",
+      "parentUuid": "97a0cafc_cdda4935",
+      "revId": "b3c59c6ef97a68382150c3e256d69bdee4c18c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
