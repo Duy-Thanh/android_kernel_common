@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88663c7f_3ebce1ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-20T16:13:42Z",
+      "side": 1,
+      "message": "Please add a patch on top of this one to add the new symbols to your symbol list",
+      "revId": "9ec907af55af9f388c4a326c4160b48137dd5986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f83f580b_95ed5a37",
+        "filename": "net/core/filter.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-20T16:13:42Z",
+      "side": 1,
+      "message": "coding convention, no braces if a single line of code:\n```\nif (handled)\n  return err;\n```",
+      "revId": "9ec907af55af9f388c4a326c4160b48137dd5986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
