@@ -69,6 +69,23 @@
       "parentUuid": "69bef013_935b0138",
       "revId": "f15b70f0946079cd91f89e3e7abff6b9e58eb530",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed7685d_9dc1b5fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951618
+      },
+      "writtenOn": "2024-05-20T16:46:35Z",
+      "side": 1,
+      "message": "I pushed the symbol commit, https://android-review.googlesource.com/c/kernel/common/+/3095061",
+      "revId": "f15b70f0946079cd91f89e3e7abff6b9e58eb530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
