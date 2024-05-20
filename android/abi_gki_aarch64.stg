@@ -306158,6 +306158,12 @@ function {
   parameter_id: 0x92233392
 }
 function {
+  id: 0x9bbc66c0
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x04f728c1
+}
+function {
   id: 0x9bbcaaf0
   return_type_id: 0x6720d32f
   parameter_id: 0x18e64f74
@@ -322542,6 +322548,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_check_folio_look_around_ref"
 }
 elf_symbol {
+  id: 0x23a3e1fa
+  name: "__traceiter_android_vh_check_nanosleep_syscall"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7884b1a0
+  type_id: 0x9bbc66c0
+  full_name: "__traceiter_android_vh_check_nanosleep_syscall"
+}
+elf_symbol {
   id: 0xa2224fa6
   name: "__traceiter_android_vh_check_uninterruptible_tasks"
   is_defined: true
@@ -326059,6 +326074,15 @@ elf_symbol {
   crc: 0xa7ed008e
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_check_folio_look_around_ref"
+}
+elf_symbol {
+  id: 0xb436fd6c
+  name: "__tracepoint_android_vh_check_nanosleep_syscall"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x1255732f
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_check_nanosleep_syscall"
 }
 elf_symbol {
   id: 0x2cf5984c
@@ -380254,6 +380278,7 @@ interface {
   symbol_id: 0xa9225bf8
   symbol_id: 0x33c527ab
   symbol_id: 0x6aac0cf8
+  symbol_id: 0x23a3e1fa
   symbol_id: 0xa2224fa6
   symbol_id: 0xd37cc550
   symbol_id: 0xef7737f8
@@ -380645,6 +380670,7 @@ interface {
   symbol_id: 0xd3845a12
   symbol_id: 0x6f146fe1
   symbol_id: 0xca5cbc9a
+  symbol_id: 0xb436fd6c
   symbol_id: 0x2cf5984c
   symbol_id: 0x62b6878e
   symbol_id: 0xca10f06e
