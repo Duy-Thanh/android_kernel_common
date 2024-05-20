@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d04a8feb_8271cc1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-20T16:14:36Z",
+      "side": 1,
+      "message": "Oops, you do have a symbol list patch. Done.",
+      "parentUuid": "88663c7f_3ebce1ee",
+      "revId": "9ec907af55af9f388c4a326c4160b48137dd5986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f83f580b_95ed5a37",
