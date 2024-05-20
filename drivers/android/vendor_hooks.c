@@ -60,6 +60,17 @@
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/softlockup.h>
 #include <trace/hooks/power.h>
+<<<<<<< HEAD   (009433 Merge 6.12.15 into android16-6.12)
+||||||| BASE
+#include <trace/hooks/gzvm.h>
+#include <trace/hooks/signal.h>
+#include <trace/hooks/logbuf.h>
+=======
+#include <trace/hooks/cpuinfo.h>
+#include <trace/hooks/gzvm.h>
+#include <trace/hooks/signal.h>
+#include <trace/hooks/logbuf.h>
+>>>>>>> CHANGE (08c63c ANDROID: vendor_hooks: add hook to show more vendor cpu info)
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/signal.h>
 #include <trace/hooks/compaction.h>
@@ -114,6 +125,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_disable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_enable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_online);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpuinfo_c_show);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_meminfo_cache_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_si_mem_available_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_si_meminfo_adjust);
