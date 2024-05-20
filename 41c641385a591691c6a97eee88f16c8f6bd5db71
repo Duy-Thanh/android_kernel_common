@@ -43,6 +43,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4cd625be_9c9f94d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:10:36Z",
+      "side": 1,
+      "message": "Yes, I\u0027ve checked and android15-6.6 already has commit `305a357d3595 (\"scsi: ufs: core: Introduce multi-circular queue capability\")`. However, it has been refactored by commit `a1f871f9f301 (\"scsi: ufs: core: Return earlier if ufshcd_hba_init_crypto_capabilities() fails\")` and commit `9a4327fd8864 (\"scsi: ufs: core: Change the module parameter macro of use_mcq_mode\")`.\n\nI have no idea what this patch is doing then.",
+      "parentUuid": "82342365_54903e0e",
+      "revId": "41c641385a591691c6a97eee88f16c8f6bd5db71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a1997ae_9f3bbde8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:10:36Z",
+      "side": 1,
+      "message": "I\u0027ll drop the KMI update hashtag as there is something clearly wrong with the patch.",
+      "revId": "41c641385a591691c6a97eee88f16c8f6bd5db71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e417286d_69164870",
         "filename": "drivers/ufs/core/ufshcd.c",
         "patchSetId": 14
@@ -54,6 +89,30 @@
       "writtenOn": "2024-05-20T17:38:52Z",
       "side": 1,
       "message": "is this duplicated from lines above?",
+      "range": {
+        "startLine": 2317,
+        "startChar": 1,
+        "endLine": 2319,
+        "endChar": 13
+      },
+      "revId": "41c641385a591691c6a97eee88f16c8f6bd5db71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e15c2eb6_9dcc5bf2",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2319,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:10:36Z",
+      "side": 1,
+      "message": "This is definitely an error because of a collision with commit `a1f871f9f301 (\"scsi: ufs: core: Return earlier if ufshcd_hba_init_crypto_capabilities() fails\")`.",
+      "parentUuid": "e417286d_69164870",
       "range": {
         "startLine": 2317,
         "startChar": 1,
