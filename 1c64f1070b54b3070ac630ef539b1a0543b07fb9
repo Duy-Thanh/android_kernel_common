@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9e91892_066fdc8f",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 2024815
+      },
+      "writtenOn": "2024-05-20T02:58:55Z",
+      "side": 1,
+      "message": "Done\nmove it into https://android-review.googlesource.com/c/kernel/common/+/3075627",
+      "parentUuid": "41ebebe1_80031736",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 61
+      },
+      "revId": "1c64f1070b54b3070ac630ef539b1a0543b07fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71c6bb01_673fc22b",
