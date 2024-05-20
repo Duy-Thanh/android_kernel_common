@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e76a60ab_518697b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-05-20T18:51:45Z",
+      "side": 1,
+      "message": "It looks like this patch needs an STG update as well for the KABI changes?",
+      "revId": "ffca3653edca8d455207c1bb48c2e9ae87461df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
