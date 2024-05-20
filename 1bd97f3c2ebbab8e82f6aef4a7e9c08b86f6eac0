@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04e14fab_38189c59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-05-20T10:19:34Z",
+      "side": 1,
+      "message": "just log this in your driver, no need to add a hook for the core.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 62
+      },
+      "revId": "1bd97f3c2ebbab8e82f6aef4a7e9c08b86f6eac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
