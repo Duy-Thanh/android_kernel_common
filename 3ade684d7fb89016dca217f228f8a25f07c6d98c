@@ -16,6 +16,24 @@
       "message": "This patch is upstream so \"git://git.kernel.org/pub/scm/linux/kernel/git/mkp/scsi.git for-next\" should be left out.",
       "revId": "3ade684d7fb89016dca217f228f8a25f07c6d98c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96e1ab76_1bf6d95d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2024-05-20T08:42:40Z",
+      "side": 1,
+      "message": "Taken care.",
+      "parentUuid": "29b227ed_3f6071e0",
+      "revId": "3ade684d7fb89016dca217f228f8a25f07c6d98c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
