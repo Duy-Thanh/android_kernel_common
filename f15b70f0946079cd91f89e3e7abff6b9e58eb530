@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94b46d4a_86424746",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-20T19:44:05Z",
+      "side": 1,
+      "message": "Please add this to the commit message. Is this an upstream issue? Why shouldn\u0027t this be submitted upstream to suppress this sort of event storm?",
+      "parentUuid": "caa2f896_1792ec4b",
+      "revId": "f15b70f0946079cd91f89e3e7abff6b9e58eb530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69bef013_935b0138",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -84,6 +102,24 @@
       "writtenOn": "2024-05-20T16:46:35Z",
       "side": 1,
       "message": "I pushed the symbol commit, https://android-review.googlesource.com/c/kernel/common/+/3095061",
+      "revId": "f15b70f0946079cd91f89e3e7abff6b9e58eb530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b24f4b33_5e5cef58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-20T19:44:05Z",
+      "side": 1,
+      "message": "you can use the same bug ID since it is really part of creating the vendor hooks.",
+      "parentUuid": "7a63703a_fc6e7ad4",
       "revId": "f15b70f0946079cd91f89e3e7abff6b9e58eb530",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
