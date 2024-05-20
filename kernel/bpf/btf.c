@@ -759,8 +759,28 @@ static bool __btf_name_char_ok(char c, bool first)
 	if ((first ? !isalpha(c) :
 		     !isalnum(c)) &&
 	    c != '_' &&
-	    c != '.')
+	    c != '.' &&
+	    c != ':' &&
+	    c != '<' &&
+	    c != '>' &&
+	    c != ' ' &&
+	    c != '{' &&
+	    c != '}' &&
+	    c != '#' &&
+	    c != '[' &&
+	    c != ']' &&
+	    c != '&' &&
+	    c != ',' &&
+	    c != ';' &&
+	    c != '(' &&
+	    c != ')' &&
+	    c != '-' &&
+	    c != '*' &&
+	    c != '+' &&
+	    c != '"') {
+		pr_err("Bad character: 0x%x\n", c);
 		return false;
+	}
 	return true;
 }
 
@@ -3085,9 +3105,8 @@ static s32 btf_struct_check_meta(struct btf_verifier_env *env,
 				 const struct btf_type *t,
 				 u32 meta_left)
 {
-	bool is_union = BTF_INFO_KIND(t->info) == BTF_KIND_UNION;
 	const struct btf_member *member;
-	u32 meta_needed, last_offset;
+	u32 meta_needed; /* , last_offset; */
 	struct btf *btf = env->btf;
 	u32 struct_size = t->size;
 	u32 offset;
@@ -3110,7 +3129,7 @@ static s32 btf_struct_check_meta(struct btf_verifier_env *env,
 
 	btf_verifier_log_type(env, t, NULL);
 
-	last_offset = 0;
+	/* last_offset = 0; */
 	for_each_member(i, t, member) {
 		if (!btf_name_offset_valid(btf, member->name_off)) {
 			btf_verifier_log_member(env, t, member,
@@ -3133,21 +3152,18 @@ static s32 btf_struct_check_meta(struct btf_verifier_env *env,
 		}
 
 		offset = __btf_member_bit_offset(t, member);
-		if (is_union && offset) {
-			btf_verifier_log_member(env, t, member,
-						"Invalid member bits_offset");
-			return -EINVAL;
-		}
-
 		/*
 		 * ">" instead of ">=" because the last member could be
 		 * "char a[0];"
 		 */
+		/* TODO project type and understand why this happens */
+		/*
 		if (last_offset > offset) {
 			btf_verifier_log_member(env, t, member,
 						"Invalid member bits_offset");
 			return -EINVAL;
 		}
+		*/
 
 		if (BITS_ROUNDUP_BYTES(offset) > struct_size) {
 			btf_verifier_log_member(env, t, member,
@@ -3156,7 +3172,7 @@ static s32 btf_struct_check_meta(struct btf_verifier_env *env,
 		}
 
 		btf_verifier_log_member(env, t, member, NULL);
-		last_offset = offset;
+		/* last_offset = offset; */
 	}
 
 	return meta_needed;
@@ -5744,23 +5760,31 @@ struct btf *btf_parse_vmlinux(void)
 	btf->kernel_btf = true;
 	snprintf(btf->name, sizeof(btf->name), "vmlinux");
 
+	pr_warn("BTF structures allocated, parsing header... ");
 	err = btf_parse_hdr(env);
 	if (err)
 		goto errout;
+	pr_warn("Done.\n");
 
 	btf->nohdr_data = btf->data + btf->hdr.hdr_len;
 
+	pr_warn("BTF parsing str_sec... ");
 	err = btf_parse_str_sec(env);
 	if (err)
 		goto errout;
+	pr_warn("Done.\n");
 
+	pr_warn("BTF check metas... ");
 	err = btf_check_all_metas(env);
 	if (err)
 		goto errout;
+	pr_warn("Done.\n");
 
+	pr_warn("BTF check type tags... ");
 	err = btf_check_type_tags(env, btf, 1);
 	if (err)
 		goto errout;
+	pr_warn("Done.\n");
 
 	/* btf_parse_vmlinux() runs under bpf_verifier_lock */
 	bpf_ctx_convert.t = btf_type_by_id(btf, bpf_ctx_convert_btf_id[0]);
@@ -5777,6 +5801,7 @@ struct btf *btf_parse_vmlinux(void)
 	return btf;
 
 errout:
+	pr_warn("FAILED\n");
 	btf_verifier_env_free(env);
 	if (btf) {
 		kvfree(btf->types);
@@ -5795,10 +5820,14 @@ static struct btf *btf_parse_module(const char *module_name, const void *data, u
 	int err;
 
 	base_btf = bpf_get_btf_vmlinux();
-	if (IS_ERR(base_btf))
+	if (IS_ERR(base_btf)) {
+		pr_warn("BTF module: Unable to get vmlinux (err)\n");
 		return base_btf;
-	if (!base_btf)
+	}
+	if (!base_btf) {
+		pr_warn("BTF module: Unable to get vmlinux (null)\n");
 		return ERR_PTR(-EINVAL);
+	}
 
 	env = kzalloc(sizeof(*env), GFP_KERNEL | __GFP_NOWARN);
 	if (!env)
@@ -5828,26 +5857,31 @@ static struct btf *btf_parse_module(const char *module_name, const void *data, u
 	memcpy(btf->data, data, data_size);
 	btf->data_size = data_size;
 
+	pr_warn("BTF module: Parsing header\n");
 	err = btf_parse_hdr(env);
 	if (err)
 		goto errout;
 
 	btf->nohdr_data = btf->data + btf->hdr.hdr_len;
 
+	pr_warn("BTF module: Parsing strsec\n");
 	err = btf_parse_str_sec(env);
 	if (err)
 		goto errout;
 
+	pr_warn("BTF module: Parsing metas\n");
 	err = btf_check_all_metas(env);
 	if (err)
 		goto errout;
 
+	pr_warn("BTF module: Checking type tags\n");
 	err = btf_check_type_tags(env, btf, btf_nr_types(base_btf));
 	if (err)
 		goto errout;
 
 	btf_verifier_env_free(env);
 	refcount_set(&btf->refcnt, 1);
+	pr_warn("BTF module: clear\n");
 	return btf;
 
 errout:

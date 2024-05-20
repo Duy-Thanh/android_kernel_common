@@ -98,7 +98,7 @@ struct perf_record_throttle {
 };
 
 #ifndef KSYM_NAME_LEN
-#define KSYM_NAME_LEN 512
+#define KSYM_NAME_LEN 1024
 #endif
 
 struct perf_record_ksymbol {
