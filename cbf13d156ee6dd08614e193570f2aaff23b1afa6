@@ -16,6 +16,24 @@
       "message": "What is this for? Please drop this patch it shouldn\u0027t be needed.",
       "revId": "cbf13d156ee6dd08614e193570f2aaff23b1afa6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99128b2b_1af75208",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948715
+      },
+      "writtenOn": "2024-05-20T04:00:38Z",
+      "side": 1,
+      "message": "After built with https://android-review.googlesource.com/c/kernel/common/+/3078627, found stg file updated. I thought need to updated stg.\nAbandoning this change.",
+      "parentUuid": "90210746_44e251c7",
+      "revId": "cbf13d156ee6dd08614e193570f2aaff23b1afa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
