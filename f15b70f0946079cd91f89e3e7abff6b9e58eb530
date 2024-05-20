@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "caa2f896_1792ec4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1951618
+      },
+      "writtenOn": "2024-05-20T16:43:15Z",
+      "side": 1,
+      "message": "filter some app tasks which may fire the nanosleep events storm.",
+      "parentUuid": "eb2e22b2_7d872a4b",
+      "revId": "f15b70f0946079cd91f89e3e7abff6b9e58eb530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69bef013_935b0138",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-20T16:07:54Z",
       "side": 1,
       "message": "Please add a patch on top of this one to add the new symbols to your symbol list.",
+      "revId": "f15b70f0946079cd91f89e3e7abff6b9e58eb530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a63703a_fc6e7ad4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951618
+      },
+      "writtenOn": "2024-05-20T16:43:15Z",
+      "side": 1,
+      "message": "with the same bug id or new bug id?",
+      "parentUuid": "69bef013_935b0138",
       "revId": "f15b70f0946079cd91f89e3e7abff6b9e58eb530",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
