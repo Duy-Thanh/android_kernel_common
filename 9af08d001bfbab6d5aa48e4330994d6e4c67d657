@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t this affect performance?",
       "revId": "9af08d001bfbab6d5aa48e4330994d6e4c67d657",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f37c302_63e05cc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3427396
+      },
+      "writtenOn": "2024-05-20T10:18:20Z",
+      "side": 1,
+      "message": "I have not measured the performance impact with CONFIG_PAGE_POOL_STATS enabled to be frank. All that this CONFIG option does is incrementing per_cpu allocation and recycle stats in the Page Pool API.\n\nIf there is a way to have it enabled only for debug flavors, I\u0027m fine with it.\nPls let me know your thoughts on this.",
+      "parentUuid": "6507dd56_f29110ef",
+      "revId": "9af08d001bfbab6d5aa48e4330994d6e4c67d657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
