@@ -22,6 +22,46 @@
       },
       "revId": "41c641385a591691c6a97eee88f16c8f6bd5db71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82342365_54903e0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T17:38:52Z",
+      "side": 1,
+      "message": "I\u0027m confused, is this basically a re-apply? A sort of revert of commit 9a4327fd8864 (\"scsi: ufs: core: Change the module parameter macro of use_mcq_mode\") ?\n\nhttps://lore.kernel.org/all/20230427094420epcms2p1043333a3e0c0cf58e66164e0b83b3b02@epcms2p1/",
+      "revId": "41c641385a591691c6a97eee88f16c8f6bd5db71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e417286d_69164870",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2319,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T17:38:52Z",
+      "side": 1,
+      "message": "is this duplicated from lines above?",
+      "range": {
+        "startLine": 2317,
+        "startChar": 1,
+        "endLine": 2319,
+        "endChar": 13
+      },
+      "revId": "41c641385a591691c6a97eee88f16c8f6bd5db71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
