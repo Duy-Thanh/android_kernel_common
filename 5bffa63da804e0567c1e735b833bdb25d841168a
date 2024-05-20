@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "55dfb603_a31b76dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3358448
+      },
+      "writtenOn": "2024-05-20T02:56:41Z",
+      "side": 1,
+      "message": "I changed the commit message, please review.",
+      "parentUuid": "d3b8572b_25de6fec",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 89
+      },
+      "revId": "5bffa63da804e0567c1e735b833bdb25d841168a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0ebe84d3_6dc344fb",
