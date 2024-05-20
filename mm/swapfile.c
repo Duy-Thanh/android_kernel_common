@@ -357,8 +357,11 @@ static void swap_cluster_schedule_discard(struct swap_info_struct *si,
 
 static void __free_cluster(struct swap_info_struct *si, struct swap_cluster_info *ci)
 {
+	if (ci->flags & CLUSTER_FLAG_NONEMPTY)
+		list_move_tail(&ci->next, &si->free_clusters);
+	else
+		list_add_tail(&ci->next, &si->free_clusters);
 	ci->flags = CLUSTER_FLAG_FREE;
-	list_add_tail(&ci->next, &si->free_clusters);
 }
 
 /*
@@ -480,7 +483,12 @@ static void dec_cluster_info_page(struct swap_info_struct *p, struct swap_cluste
 	ci->count--;
 
 	if (!ci->count)
-		free_cluster(p, ci);
+		return free_cluster(p, ci);
+
+	if (!(ci->flags & CLUSTER_FLAG_NONEMPTY)) {
+		list_add_tail(&ci->next, &p->nonempty_clusters[ci->order]);
+		ci->flags |= CLUSTER_FLAG_NONEMPTY;
+	}
 }
 
 /*
@@ -537,6 +545,14 @@ new_cluster:
 			ci = list_first_entry(&si->free_clusters, struct swap_cluster_info, next);
 			spin_lock(&ci->lock);
 			list_del(&ci->next);
+			ci->order = order;
+			ci->flags = 0;
+			spin_unlock(&ci->lock);
+			tmp = (ci - si->cluster_info) * SWAPFILE_CLUSTER;
+		} else if (!list_empty(&si->nonempty_clusters[order])) {
+			ci = list_first_entry(&si->nonempty_clusters[order], struct swap_cluster_info, next);
+			spin_lock(&ci->lock);
+			list_del(&ci->next);
 			ci->flags = 0;
 			spin_unlock(&ci->lock);
 			tmp = (ci - si->cluster_info) * SWAPFILE_CLUSTER;
@@ -568,6 +584,7 @@ new_cluster:
 			goto new_cluster;
 		}
 	}
+	WARN_ONCE(ci->order != order, "expecting order %d got %d", order, ci->order);
 	unlock_cluster(ci);
 
 	*offset = tmp;
@@ -2858,6 +2875,9 @@ static int setup_swap_map_and_extents(struct swap_info_struct *p,
 
 	INIT_LIST_HEAD(&p->free_clusters);
 	INIT_LIST_HEAD(&p->discard_clusters);
+
+	for (i = 0; i < SWAP_NR_ORDERS; i++)
+		INIT_LIST_HEAD(&p->nonempty_clusters[i]);
 
 	for (i = 0; i < swap_header->info.nr_badpages; i++) {
 		unsigned int page_nr = swap_header->info.badpages[i];
