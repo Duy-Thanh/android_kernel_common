@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd230c31_43162105",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T17:30:20Z",
+      "side": 1,
+      "message": "It is preferred to always append new entries to the bottom to keep the chronological order of the patch.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "41c641385a591691c6a97eee88f16c8f6bd5db71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

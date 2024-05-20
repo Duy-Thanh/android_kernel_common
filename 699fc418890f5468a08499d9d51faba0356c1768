@@ -106,6 +106,24 @@
       "parentUuid": "e1c942c3_35e7565f",
       "revId": "699fc418890f5468a08499d9d51faba0356c1768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "609c8f4e_8c99894c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T17:30:20Z",
+      "side": 1,
+      "message": "There is no line explaining the conflict resolution.",
+      "parentUuid": "2d92f84e_1b688e91",
+      "revId": "699fc418890f5468a08499d9d51faba0356c1768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
