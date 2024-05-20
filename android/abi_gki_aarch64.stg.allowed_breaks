@@ -86,3 +86,10 @@ type 'enum ftrace_dump_mode' changed
 type 'struct cgroup_root' changed
   member 'u8 android_backport_reserved1[28]' was removed
   member 'union { struct callback_head rcu; struct { u8 android_backport_reserved1[28]; }; union { }; }' was added
+
+variable symbol 'const enum memcg_stat_item ANDROID_GKI_memcg_stat_item' changed
+  CRC changed from 0x7a01e9f7 to 0xdeadbeef
+
+variable symbol 'const enum node_stat_item ANDROID_GKI_node_stat_item' changed
+  CRC changed from 0xc122a9b3 to 0xdeadc0de
+
