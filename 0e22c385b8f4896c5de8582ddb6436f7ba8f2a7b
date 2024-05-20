@@ -18,6 +18,69 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5691c736_da2ee47f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "This is a quick first pass mostly cosmetical and structural feedback and I\u0027ll continue with more passes later. I\u0027m wondering if we should refactor the current death notification handling to accommodate these changes in a bit more generic way. I\u0027ll think about this.",
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae925b28_bd4bb5a7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "Thanks for this documentation, it seems to me that a better place for this would be the commit message. Unfortunately, we don\u0027t have an official \"binder driver\" Documentation and perhaps adding it here might be just noise.",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 35
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8fcb2bf_6b659c51",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "How often would this really be used? It won\u0027t be enabled by default so it may to be worth adding.",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 33
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a77dbcb_203ea973",
@@ -36,6 +99,237 @@
         "startChar": 2,
         "endLine": 4465,
         "endChar": 36
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9be9c5b_e50a7816",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4465,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "I agree with Bart.\n\nI understand this is a \"mirror\" of what death notification is currently doing. However, I would prefer to follow better practices for new code.",
+      "parentUuid": "8a77dbcb_203ea973",
+      "range": {
+        "startLine": 4465,
+        "startChar": 2,
+        "endLine": 4465,
+        "endChar": 36
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73539b19_b584598b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4469,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "nit: I would prefer a \"reversed christmas tree\" order here but not necessary.",
+      "range": {
+        "startLine": 4466,
+        "startChar": 3,
+        "endLine": 4469,
+        "endChar": 43
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb1c9d8_95394131",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4476,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "It might be more concise to do a `copy_from_user()` into a `binder_handle_cookie` type instead of individual members.",
+      "range": {
+        "startLine": 4471,
+        "startChar": 3,
+        "endLine": 4476,
+        "endChar": 35
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f704e2_dd609740",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4477,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "It seems we have enough branches between the command and it would be best to split the paths?",
+      "range": {
+        "startLine": 4477,
+        "startChar": 7,
+        "endLine": 4477,
+        "endChar": 44
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aad53b7_cac22404",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4483,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "In the kernel `if (!freeze)` is preferred. I believe this is suggested by checkpatch. BTW, it would be a good idea to run the script on this. Something like `./scripts/checkpatch.pl -strict -g HEAD`.",
+      "range": {
+        "startLine": 4483,
+        "startChar": 8,
+        "endLine": 4483,
+        "endChar": 22
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58879e68_97bc3c8f",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "I\u0027ll think about adding a {BR/BC}_LAST in the uapi header to avoid having to remember to update this every time",
+      "range": {
+        "startLine": 137,
+        "startChar": 21,
+        "endLine": 137,
+        "endChar": 54
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3faf6b1a_5da80f5d",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "hmmm, the rest of the members would also need kerneldoc entries. If you want to document this I would suggest a single block on top of the whole struct definition, otherwise just leave it out.",
+      "range": {
+        "startLine": 288,
+        "startChar": 1,
+        "endLine": 292,
+        "endChar": 4
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79ec3f65_e467ea67",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "can we pick more concise names? maybe `sent` and `resend`?",
+      "range": {
+        "startLine": 295,
+        "startChar": 1,
+        "endLine": 296,
+        "endChar": 37
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1ec04e7_9d7e114a",
+        "filename": "drivers/android/binderfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "I think it would be nice to split out the binderfs changes onto a separate commit.",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c74e528e_f5312d83",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-20T20:52:18Z",
+      "side": 1,
+      "message": "Would it make more sense to package the two notification in a single ioctl with a struct payload? Similar to how BINDER_FREEZE has a `info-\u003eenable` flag. I\u0027m just thinking out loud about alternatives here, this might complicate the API.",
+      "range": {
+        "startLine": 519,
+        "startChar": 1,
+        "endLine": 519,
+        "endChar": 17
       },
       "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
