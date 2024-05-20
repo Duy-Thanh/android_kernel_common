@@ -78272,10 +78272,10 @@ member {
   offset: 58432
 }
 member {
-  id: 0x58d13a5a
+  id: 0x58d130ce
   name: "ext_cb"
   type_id: 0x3fefb42f
-  offset: 1664
+  offset: 1600
 }
 member {
   id: 0x50922243
@@ -86163,10 +86163,10 @@ member {
   offset: 384
 }
 member {
-  id: 0xabba6185
+  id: 0xabba6700
   name: "full_waiters_pending"
   type_id: 0x6d7f5ff6
-  offset: 648
+  offset: 584
 }
 member {
   id: 0xf667d80f
@@ -174884,10 +174884,10 @@ member {
   type_id: 0x92233392
 }
 member {
-  id: 0xfeab2654
+  id: 0xfeab250b
   name: "time_stamp_abs"
   type_id: 0x6d7f5ff6
-  offset: 1600
+  offset: 1536
 }
 member {
   id: 0xd43e1787
@@ -187542,12 +187542,6 @@ member {
   offset: 2880
 }
 member {
-  id: 0x7ab3faba
-  name: "wait_index"
-  type_id: 0xfc0e1dbd
-  offset: 576
-}
-member {
   id: 0x7ab3febe
   name: "wait_index"
   type_id: 0xfc0e1dbd
@@ -187695,10 +187689,10 @@ member {
   type_id: 0x03913382
 }
 member {
-  id: 0xc133a8ef
+  id: 0xc133a7e4
   name: "waiters_pending"
   type_id: 0x6d7f5ff6
-  offset: 640
+  offset: 576
 }
 member {
   id: 0x3e50fb1a
@@ -187981,10 +187975,10 @@ member {
   type_id: 0xe62ebf07
 }
 member {
-  id: 0x37660e3b
+  id: 0x3766077c
   name: "wakeup_full"
   type_id: 0x6d7f5ff6
-  offset: 656
+  offset: 592
 }
 member {
   id: 0xf5741316
@@ -228326,14 +228320,13 @@ struct_union {
   kind: STRUCT
   name: "rb_irq_work"
   definition {
-    bytesize: 88
+    bytesize: 80
     member_id: 0xd64000c8
     member_id: 0x939ca334
     member_id: 0x7f33767c
-    member_id: 0x7ab3faba
-    member_id: 0xc133a8ef
-    member_id: 0xabba6185
-    member_id: 0x37660e3b
+    member_id: 0xc133a7e4
+    member_id: 0xabba6700
+    member_id: 0x3766077c
   }
 }
 struct_union {
@@ -229916,7 +229909,7 @@ struct_union {
   kind: STRUCT
   name: "ring_buffer_per_cpu"
   definition {
-    bytesize: 488
+    bytesize: 480
     member_id: 0x5161b0e6
     member_id: 0x9fc7ddba
     member_id: 0xd712613b
@@ -238643,7 +238636,7 @@ struct_union {
   kind: STRUCT
   name: "trace_buffer"
   definition {
-    bytesize: 216
+    bytesize: 208
     member_id: 0x2d2d0138
     member_id: 0xe7102ce7
     member_id: 0x9fc7d460
@@ -238655,8 +238648,8 @@ struct_union {
     member_id: 0x0f3caba2
     member_id: 0x45d166c5
     member_id: 0xedbbc0ae
-    member_id: 0xfeab2654
-    member_id: 0x58d13a5a
+    member_id: 0xfeab250b
+    member_id: 0x58d130ce
   }
 }
 struct_union {
