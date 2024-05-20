@@ -333590,6 +333590,15 @@ elf_symbol {
   full_name: "crypto_aead_setkey"
 }
 elf_symbol {
+  id: 0xaa38762b
+  name: "crypto_aes_set_key"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x37b4ee77
+  type_id: 0x9b1c857c
+  full_name: "crypto_aes_set_key"
+}
+elf_symbol {
   id: 0xe5e28fcd
   name: "crypto_ahash_digest"
   is_defined: true
@@ -381611,6 +381620,7 @@ interface {
   symbol_id: 0x2968f72a
   symbol_id: 0x0a2b21ec
   symbol_id: 0xbdd0f4c6
+  symbol_id: 0xaa38762b
   symbol_id: 0xe5e28fcd
   symbol_id: 0xdd9947d5
   symbol_id: 0xff08526f
