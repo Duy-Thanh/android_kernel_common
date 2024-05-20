@@ -22,6 +22,30 @@
       },
       "revId": "fd750ca68f5bb8938468dff832250325da0330a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7618e89_afda37e3",
+        "filename": "drivers/cpufreq/scmi-cpufreq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3430440
+      },
+      "writtenOn": "2024-05-20T08:23:07Z",
+      "side": 1,
+      "message": "Yes, updated to use unsigned long for freq variable. Thanks!",
+      "parentUuid": "91653468_3e0fbcc9",
+      "range": {
+        "startLine": 65,
+        "startChar": 1,
+        "endLine": 65,
+        "endChar": 4
+      },
+      "revId": "fd750ca68f5bb8938468dff832250325da0330a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
