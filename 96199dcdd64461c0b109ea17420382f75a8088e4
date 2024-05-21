@@ -16,6 +16,24 @@
       "message": "why is this needed for this old kernel? Please upload the three patches together (in the upper right of this gerrit page, the three should appear under \"Relation chain\")",
       "revId": "96199dcdd64461c0b109ea17420382f75a8088e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e640a109_68a0a24a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902286
+      },
+      "writtenOn": "2024-05-21T07:28:18Z",
+      "side": 1,
+      "message": "We have kernel-based hibernation use case on the 5.10 kernel. Uploaded the patches together.",
+      "parentUuid": "03a69a50_b1b42e8c",
+      "revId": "96199dcdd64461c0b109ea17420382f75a8088e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
