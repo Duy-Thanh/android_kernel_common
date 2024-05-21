@@ -26544,6 +26544,11 @@ pointer_reference {
   pointee_type_id: 0xc32244f1
 }
 pointer_reference {
+  id: 0x3a62e69e
+  kind: POINTER
+  pointee_type_id: 0xc3cb7ce7
+}
+pointer_reference {
   id: 0x3a6574c9
   kind: POINTER
   pointee_type_id: 0xc3d535bb
@@ -31152,6 +31157,11 @@ qualified {
   id: 0xc3bedf1f
   qualifier: CONST
   qualified_type_id: 0x7ebccaf7
+}
+qualified {
+  id: 0xc3cb7ce7
+  qualifier: CONST
+  qualified_type_id: 0x7f6a4515
 }
 qualified {
   id: 0xc3d535bb
@@ -304762,6 +304772,13 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
+  id: 0x9b49a977
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3a62e69e
+  parameter_id: 0x3e6239e1
+}
+function {
   id: 0x9b49bafb
   return_type_id: 0x6720d32f
   parameter_id: 0x1d44326e
@@ -323735,6 +323752,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_process_madvise"
 }
 elf_symbol {
+  id: 0x93303c51
+  name: "__traceiter_android_vh_ptype_head"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x009eb05f
+  type_id: 0x9b49a977
+  full_name: "__traceiter_android_vh_ptype_head"
+}
+elf_symbol {
   id: 0x3a545b61
   name: "__traceiter_android_vh_ra_tuning_max_page"
   is_defined: true
@@ -327261,6 +327287,15 @@ elf_symbol {
   crc: 0x27fc31af
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_process_madvise"
+}
+elf_symbol {
+  id: 0xb0c197a3
+  name: "__tracepoint_android_vh_ptype_head"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x44c9a532
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_ptype_head"
 }
 elf_symbol {
   id: 0x811d5fab
@@ -380815,6 +380850,7 @@ interface {
   symbol_id: 0xb2fed205
   symbol_id: 0x7d499dab
   symbol_id: 0x46ce0353
+  symbol_id: 0x93303c51
   symbol_id: 0x3a545b61
   symbol_id: 0x7d069e91
   symbol_id: 0x0fa39b81
@@ -381207,6 +381243,7 @@ interface {
   symbol_id: 0x3fef4323
   symbol_id: 0x49b95a49
   symbol_id: 0x2f640519
+  symbol_id: 0xb0c197a3
   symbol_id: 0x811d5fab
   symbol_id: 0x761f292f
   symbol_id: 0xef7ad117
