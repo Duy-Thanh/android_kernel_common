@@ -358233,6 +358233,15 @@ elf_symbol {
   full_name: "dev_pm_opp_put_opp_table"
 }
 elf_symbol {
+  id: 0x1312b8f1
+  name: "dev_pm_opp_register_notifier"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe13e98dc
+  type_id: 0x9d7807e5
+  full_name: "dev_pm_opp_register_notifier"
+}
+elf_symbol {
   id: 0xe6f275cc
   name: "dev_pm_opp_remove"
   is_defined: true
@@ -358285,6 +358294,15 @@ elf_symbol {
   crc: 0xaeb45770
   type_id: 0x9dd2e674
   full_name: "dev_pm_opp_set_sharing_cpus"
+}
+elf_symbol {
+  id: 0x0e308173
+  name: "dev_pm_opp_unregister_notifier"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x792ecfff
+  type_id: 0x9d7807e5
+  full_name: "dev_pm_opp_unregister_notifier"
 }
 elf_symbol {
   id: 0x72797495
@@ -395751,6 +395769,15 @@ elf_symbol {
   full_name: "snd_soc_set_runtime_hwparams"
 }
 elf_symbol {
+  id: 0xcea952e4
+  name: "snd_soc_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x828d799f
+  type_id: 0x9d16dd74
+  full_name: "snd_soc_suspend"
+}
+elf_symbol {
   id: 0x93803c84
   name: "snd_soc_tplg_component_load"
   is_defined: true
@@ -410397,12 +410424,14 @@ interface {
   symbol_id: 0x706732e6
   symbol_id: 0x52c8a093
   symbol_id: 0x4624f3d3
+  symbol_id: 0x1312b8f1
   symbol_id: 0xe6f275cc
   symbol_id: 0x90259097
   symbol_id: 0x4b0b944c
   symbol_id: 0x9b2f909d
   symbol_id: 0xc927ca5d
   symbol_id: 0xe3ab91c3
+  symbol_id: 0x0e308173
   symbol_id: 0x72797495
   symbol_id: 0x8b918cf2
   symbol_id: 0x0343af6f
@@ -414563,6 +414592,7 @@ interface {
   symbol_id: 0x2673800e
   symbol_id: 0x04af389d
   symbol_id: 0x685b01fa
+  symbol_id: 0xcea952e4
   symbol_id: 0x93803c84
   symbol_id: 0x7c7f5167
   symbol_id: 0xe5cef1d3
