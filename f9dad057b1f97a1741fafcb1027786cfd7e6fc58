@@ -101,6 +101,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee9e9c02_e2081fc7",
+        "filename": "include/dt-bindings/interconnect/qcom,icc.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1951051
+      },
+      "writtenOn": "2024-05-21T16:59:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6e808e24_cf7d2ba8",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "f9dad057b1f97a1741fafcb1027786cfd7e6fc58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42f37cd4_279b85cf",
@@ -138,6 +162,30 @@
       "side": 1,
       "message": "can you please add below to commit description\nAlso add binding for QCOM_ICC_TAG_PERF_MODE, which can be used with\nicc_set_tag() to indicate that the path should use latency-optimized\nsettings for each node in the path if supported.",
       "parentUuid": "42f37cd4_279b85cf",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 30
+      },
+      "revId": "f9dad057b1f97a1741fafcb1027786cfd7e6fc58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e74f69ac_f036d954",
+        "filename": "include/dt-bindings/interconnect/qcom,icc.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1951051
+      },
+      "writtenOn": "2024-05-21T16:59:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "87861a81_eeafaad9",
       "range": {
         "startLine": 43,
         "startChar": 8,
