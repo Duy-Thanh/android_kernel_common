@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a609fd04_7530c61b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1951618
+      },
+      "writtenOn": "2024-05-21T12:33:26Z",
+      "side": 1,
+      "message": "We can\u0027t control the behavior of caller, this is not a general issue.",
+      "parentUuid": "94b46d4a_86424746",
+      "revId": "f15b70f0946079cd91f89e3e7abff6b9e58eb530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69bef013_935b0138",
