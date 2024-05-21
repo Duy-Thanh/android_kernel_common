@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078597923",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3095025?revision\u003d9",
+      "key": {
+        "uuid": "13caa57a_bf49fb37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-21T09:12:25Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/4efaa5acf0a1d2b5947f98abb3acf8bfd966422b) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d4efaa5acf0a1d2b5947f98abb3acf8bfd966422b).\n\n```\n      ## fs/eventpoll.c ##\n     @@ fs/eventpoll.c: static __poll_t __ep_eventpoll_poll(struct file *file, poll_table *wait, int dep\n      \treturn res;\n      }\n      \n    ++\n     +/*\n     + * The ffd.file pointer may be in the process of being torn down due to\n     + * being closed, but we may not have finished eventpoll_release() yet.\n    @@ fs/eventpoll.c: static __poll_t __ep_eventpoll_poll(struct file *file, poll_tabl\n      /*\n       * Differs from ep_eventpoll_poll() in that internal callers already have\n       * the ep-\u003emtx so we need to start from depth\u003d1, such that mutex_lock_nested()\n    -@@ fs/eventpoll.c: static __poll_t __ep_eventpoll_poll(struct file *file, poll_table *wait, int dep\n    - static __poll_t ep_item_poll(const struct epitem *epi, poll_table *pt,\n    +@@ fs/eventpoll.c: static __poll_t ep_item_poll(const struct epitem *epi, poll_table *pt,\n      \t\t\t\t int depth)\n      {\n    --\tstruct file *file \u003d epi-\u003effd.file;\n    + \tstruct file *file \u003d epi-\u003effd.file;\n     +\tstruct file *file \u003d epi_fget(epi);\n      \t__poll_t res;\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "01fc13710777a0339218ccaa86e312c4401c6558",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
