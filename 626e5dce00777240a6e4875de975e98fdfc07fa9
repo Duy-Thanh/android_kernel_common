@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2f8ccac_568f3c02",
+        "filename": "arch/arm64/kernel/hibernate.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1902286
+      },
+      "writtenOn": "2024-05-21T07:25:12Z",
+      "side": 0,
+      "message": "Removed in patch-set 4",
+      "parentUuid": "1f3ee2d7_35e4e465",
+      "revId": "626e5dce00777240a6e4875de975e98fdfc07fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42642830_e23dd53f",
         "filename": "arch/arm64/kernel/hibernate.c",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-13T06:54:32Z",
       "side": 0,
       "message": "remove whitespace change",
+      "revId": "626e5dce00777240a6e4875de975e98fdfc07fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b24a94_46e2b49b",
+        "filename": "arch/arm64/kernel/hibernate.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1902286
+      },
+      "writtenOn": "2024-05-21T07:25:12Z",
+      "side": 0,
+      "message": "Removed in patch-set 4",
+      "parentUuid": "42642830_e23dd53f",
       "revId": "626e5dce00777240a6e4875de975e98fdfc07fa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

@@ -16,6 +16,24 @@
       "message": "why? Please describe the issue and how it is resolved by this patch",
       "revId": "191d806712883493bc052e73b8ec5f5554d0a6b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c86e367d_9dee3ff6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1902286
+      },
+      "writtenOn": "2024-05-21T07:25:12Z",
+      "side": 1,
+      "message": "Change has been back-ported for kernel-based hibernation use case on the 5.10 kernel. Please check commit message for description.",
+      "parentUuid": "71c4ec4e_79f4f39f",
+      "revId": "191d806712883493bc052e73b8ec5f5554d0a6b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
