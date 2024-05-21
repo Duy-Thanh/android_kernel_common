@@ -33,6 +33,42 @@
       "message": "Rebase the patch to resolve the merge conflict",
       "revId": "72be45069cefaa619d028f94691914059347ca46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29c665f4_d2cb608a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1867527
+      },
+      "writtenOn": "2024-05-21T02:16:09Z",
+      "side": 1,
+      "message": "Done.\nhttps://android-review.googlesource.com/c/kernel/common/+/3095219/2/drivers/android/vendor_hooks.c",
+      "parentUuid": "0cf59367_6032b047",
+      "revId": "72be45069cefaa619d028f94691914059347ca46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "038b07dd_10e1c89c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1867527
+      },
+      "writtenOn": "2024-05-21T02:16:09Z",
+      "side": 1,
+      "message": "Done.\nhttps://android-review.googlesource.com/c/kernel/common/+/3093563",
+      "parentUuid": "a59a9ca6_c90590e0",
+      "revId": "72be45069cefaa619d028f94691914059347ca46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
