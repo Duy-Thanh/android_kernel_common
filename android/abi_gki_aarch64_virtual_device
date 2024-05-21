@@ -1,5 +1,6 @@
 [abi_symbol_list]
 # commonly used symbols
+  crypto_aes_set_key
   alloc_etherdev_mqs
   alloc_netdev_mqs
   __alloc_pages
