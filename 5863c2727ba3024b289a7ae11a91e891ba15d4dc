@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1e44779_563a74ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-05-21T07:16:10Z",
+      "side": 1,
+      "message": "This should just be a `UPSTREAM` or `BACKPORT` submission of the upstream commit, do not mark it differently.",
+      "revId": "5863c2727ba3024b289a7ae11a91e891ba15d4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
