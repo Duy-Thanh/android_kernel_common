@@ -16,6 +16,23 @@
       "message": "Merged in aosp/3093641, aosp/3093642.",
       "revId": "3b2bc863a54d49fd145408029b2a961bf24be53b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caeae8fa_04d6efec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-21T20:56:24Z",
+      "side": 1,
+      "message": "rebase the series to resolve the merge conflicts",
+      "revId": "3b2bc863a54d49fd145408029b2a961bf24be53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
