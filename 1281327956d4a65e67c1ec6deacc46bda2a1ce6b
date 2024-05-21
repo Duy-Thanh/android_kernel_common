@@ -16,6 +16,29 @@
       "message": "Done",
       "revId": "1281327956d4a65e67c1ec6deacc46bda2a1ce6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4aab1bb_4507b951",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-21T11:49:46Z",
+      "side": 1,
+      "message": "the upstream commit removes this line.\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d4efaa5acf0a1d2b5947f98abb3acf8bfd966422b",
+      "range": {
+        "startLine": 873,
+        "startChar": 0,
+        "endLine": 873,
+        "endChar": 35
+      },
+      "revId": "1281327956d4a65e67c1ec6deacc46bda2a1ce6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
