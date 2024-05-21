@@ -1046,6 +1046,7 @@ struct super_block *get_active_super(struct block_device *bdev)
 	spin_unlock(&sb_lock);
 	return NULL;
 }
+EXPORT_SYMBOL(get_active_super);
 
 struct super_block *user_get_super(dev_t dev, bool excl)
 {
