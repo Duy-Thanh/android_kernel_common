@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078587810",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3075627?revision\u003d13",
+      "key": {
+        "uuid": "4b8b15c8_0c4b1aaf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-21T07:46:03Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/09ebd2be6ec8cf2e2b238cd4b8f3c880534c8539).\n\n```\n    + ## drivers/android/vendor_hooks.c ##\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_mapcount_pages);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_page_mapcount);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_page_to_lrulist);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_del_page_from_lrulist);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_traversal_lruvec);\n     \n      ## include/linux/memcontrol.h ##\n     @@ include/linux/memcontrol.h: enum page_memcg_data_flags {\n      \n    - static inline bool PageMemcgKmem(struct page *page);\n    + static inline bool folio_memcg_kmem(struct folio *folio);\n      \n     +void do_traversal_all_lruvec(void);\n     +\n    @@ include/linux/memcontrol.h: static inline bool PageMemcgKmem(struct page *page)\n      {\n      \treturn true;\n     \n    + ## include/trace/hooks/mm.h ##\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_del_page_from_lrulist,\n    + DECLARE_HOOK(android_vh_show_mapcount_pages,\n    + \tTP_PROTO(void *unused),\n    + \tTP_ARGS(unused));\n    ++DECLARE_HOOK(android_vh_do_traversal_lruvec,\n    ++\tTP_PROTO(struct lruvec *lruvec),\n    ++\tTP_ARGS(lruvec));\n    + \n    + #endif /* _TRACE_HOOK_MM_H */\n    + \n    +\n      ## mm/memcontrol.c ##\n    -@@ mm/memcontrol.c: struct lruvec *lock_page_lruvec_irqsave(struct page *page, unsigned long *flags)\n    +@@ mm/memcontrol.c: struct lruvec *folio_lruvec_lock_irqsave(struct folio *folio,\n      \treturn lruvec;\n      }\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "56df59f98157f64a93fa54d617e6dcddd0c022c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
