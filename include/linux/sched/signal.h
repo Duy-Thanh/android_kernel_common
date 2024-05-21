@@ -246,6 +246,21 @@ struct signal_struct {
 						 * and may have inconsistent
 						 * permissions.
 						 */
+<<<<<<< HEAD   (60376c ANDROID: KVM: arm64: Extend pKVM selftest for protected gues)
+||||||| BASE
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+=======
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+	ANDROID_OEM_DATA(1);
+>>>>>>> CHANGE (a36869 ANDROID: add oem_data to mark signal normal or critical)
 } __randomize_layout;
 
 /*
