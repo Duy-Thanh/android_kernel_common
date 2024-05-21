@@ -16,6 +16,24 @@
       "message": "should this be sent upstream?",
       "revId": "26399713b866aa1ecec4d96226d709b9b98a204e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44208402_96129c86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2024-05-21T00:18:49Z",
+      "side": 1,
+      "message": "This doesn\u0027t happen upstream as canonical path is an Android only feature (aosp/1490941). But if there are any plans to upstream that then I think this could be included",
+      "parentUuid": "6c730932_77b061a9",
+      "revId": "26399713b866aa1ecec4d96226d709b9b98a204e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
