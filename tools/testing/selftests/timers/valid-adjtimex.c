@@ -21,9 +21,6 @@
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU General Public License for more details.
  */
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -63,6 +60,10 @@ int clear_time_state(void)
 #define NUM_FREQ_INVALID 2
 
 #define SHIFTED_PPM (1 << 16)
+<<<<<<< HEAD   (e4cc06 Merge fec50db7033e ("Linux 6.9-rc3") into android-mainline)
+=======
+
+>>>>>>> BRANCH (0bbac3 Linux 6.9-rc4)
 long valid_freq[NUM_FREQ_VALID] = {
 	 -499 * SHIFTED_PPM,
 	 -450 * SHIFTED_PPM,
