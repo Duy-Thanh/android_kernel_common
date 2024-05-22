@@ -16,6 +16,23 @@
       "message": "Done",
       "revId": "4a92b97ae709f6135f1884a188621100b1acdb74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d31b0da6_ae4fa4df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-05-22T10:48:19Z",
+      "side": 1,
+      "message": "Please fix the error provided, your backport is not clean.",
+      "revId": "4a92b97ae709f6135f1884a188621100b1acdb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
