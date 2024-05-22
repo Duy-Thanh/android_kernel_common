@@ -280,8 +280,18 @@ static int tls_do_decryption(struct sock *sk,
 	}
 
 	ret = crypto_aead_decrypt(aead_req);
+<<<<<<< HEAD   (b98ce0 ANDROID: GKI: update the abi for tracing changes in 6.1.84)
 	if (ret == -EINPROGRESS)
 		return 0;
+=======
+	if (ret == -EBUSY) {
+		ret = tls_decrypt_async_wait(ctx);
+		ret = ret ?: -EINPROGRESS;
+	}
+	if (ret == -EINPROGRESS) {
+		if (darg->async)
+			return 0;
+>>>>>>> BRANCH (0a5aad ANDROID: GKI: Update symbol list for mtk)
 
 	if (ret == -EBUSY) {
 		ret = tls_decrypt_async_wait(ctx);

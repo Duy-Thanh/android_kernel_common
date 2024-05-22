@@ -1348,7 +1348,11 @@ parse_ntb:
 	if (to_process == 1 &&
 	    (*(unsigned char *)(ntb_ptr + block_len) == 0x00)) {
 		to_process--;
+<<<<<<< HEAD   (b98ce0 ANDROID: GKI: update the abi for tracing changes in 6.1.84)
 	} else if ((to_process > 0) && (block_len != 0)) {
+=======
+	} else if (to_process > 0) {
+>>>>>>> BRANCH (0a5aad ANDROID: GKI: Update symbol list for mtk)
 		ntb_ptr = (unsigned char *)(ntb_ptr + block_len);
 		goto parse_ntb;
 	}
