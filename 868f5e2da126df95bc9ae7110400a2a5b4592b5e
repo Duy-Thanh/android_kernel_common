@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078774497",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3093452?revision\u003d2",
+      "key": {
+        "uuid": "80dce14e_a5e47264",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-22T07:26:35Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "868f5e2da126df95bc9ae7110400a2a5b4592b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078774497",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3093452?revision\u003d2",
+      "key": {
+        "uuid": "5dcd4b4d_2a90b06e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-22T07:26:35Z",
+      "side": 1,
+      "message": "Please **attach the following Buganizer ID(s)** to the commit message: 320243175.\nThese IDs were found in the original change with number [2959490](https://android-review.googlesource.com/c/2959490) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "868f5e2da126df95bc9ae7110400a2a5b4592b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078774497",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3093452?revision\u003d2",
+      "key": {
+        "uuid": "90771f79_e996a47f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-22T07:26:35Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android14-6.1.\nBase branch change: [2959490](https://android-review.googlesource.com/c/2959490).\n\n```\n      ## Documentation/networking/ip-sysctl.rst ##\n     @@ Documentation/networking/ip-sysctl.rst: accept_ra_min_hop_limit - INTEGER\n      \n      \tDefault: 1\n      \n    --accept_ra_min_rtr_lft - INTEGER\n    --\tMinimum acceptable router lifetime in Router Advertisement.\n    +-accept_ra_pinfo - BOOLEAN\n    ++\n     +accept_ra_min_lft - INTEGER\n     +\tMinimum acceptable lifetime value in Router Advertisement.\n    - \n    --\tRAs with a router lifetime less than this value shall be\n    --\tignored. RAs with a router lifetime of 0 are unaffected.\n    ++\n     +\tRA sections with a lifetime less than this value shall be\n     +\tignored. Zero lifetimes stay unaffected.\n    ++\n    ++\tDefault: 0\n    ++\n    ++\n    + \tLearn Prefix Information in Router Advertisement.\n      \n    - \tDefault: 0\n    - \n    + \tFunctional default:\n     \n      ## include/linux/ipv6.h ##\n     @@ include/linux/ipv6.h: struct ipv6_devconf {\n      \t__s32\t\taccept_ra_defrtr;\n      \t__u32\t\tra_defrtr_metric;\n      \t__s32\t\taccept_ra_min_hop_limit;\n    --\t__s32\t\taccept_ra_min_rtr_lft;\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fa7914 UPSTREAM: bpf: Fix re-attachment branch in bpf_tracing_prog_)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\t__s32\t\taccept_ra_min_lft;\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (c2c027 Reapply \"net: change accept_ra_min_rtr_lft to affect all RA )\n      \t__s32\t\taccept_ra_pinfo;\n      \t__s32\t\tignore_routes_with_linkdown;\n      #ifdef CONFIG_IPV6_ROUTER_PREF\n    @@ include/uapi/linux/ipv6.h: enum {\n      \tDEVCONF_IOAM6_ID_WIDE,\n      \tDEVCONF_NDISC_EVICT_NOCARRIER,\n      \tDEVCONF_ACCEPT_UNTRACKED_NA,\n    --\tDEVCONF_ACCEPT_RA_MIN_RTR_LFT,\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fa7914 UPSTREAM: bpf: Fix re-attachment branch in bpf_tracing_prog_)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\tDEVCONF_ACCEPT_RA_MIN_LFT,\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (c2c027 Reapply \"net: change accept_ra_min_rtr_lft to affect all RA )\n      \tDEVCONF_MAX\n      };\n      \n    @@ net/ipv6/addrconf.c: static struct ipv6_devconf ipv6_devconf __read_mostly \u003d {\n      \t.ra_defrtr_metric\t\u003d IP6_RT_PRIO_USER,\n      \t.accept_ra_from_local\t\u003d 0,\n      \t.accept_ra_min_hop_limit\u003d 1,\n    --\t.accept_ra_min_rtr_lft\t\u003d 0,\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fa7914 UPSTREAM: bpf: Fix re-attachment branch in bpf_tracing_prog_)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\t.accept_ra_min_lft\t\u003d 0,\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (c2c027 Reapply \"net: change accept_ra_min_rtr_lft to affect all RA )\n      \t.accept_ra_pinfo\t\u003d 1,\n      #ifdef CONFIG_IPV6_ROUTER_PREF\n      \t.accept_ra_rtr_pref\t\u003d 1,\n    @@ net/ipv6/addrconf.c: static struct ipv6_devconf ipv6_devconf_dflt __read_mostly\n      \t.ra_defrtr_metric\t\u003d IP6_RT_PRIO_USER,\n      \t.accept_ra_from_local\t\u003d 0,\n      \t.accept_ra_min_hop_limit\u003d 1,\n    --\t.accept_ra_min_rtr_lft\t\u003d 0,\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fa7914 UPSTREAM: bpf: Fix re-attachment branch in bpf_tracing_prog_)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\t.accept_ra_min_lft\t\u003d 0,\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (c2c027 Reapply \"net: change accept_ra_min_rtr_lft to affect all RA )\n      \t.accept_ra_pinfo\t\u003d 1,\n      #ifdef CONFIG_IPV6_ROUTER_PREF\n      \t.accept_ra_rtr_pref\t\u003d 1,\n    @@ net/ipv6/addrconf.c: static inline void ipv6_store_devconf(struct ipv6_devconf *\n      \tarray[DEVCONF_IOAM6_ID_WIDE] \u003d cnf-\u003eioam6_id_wide;\n      \tarray[DEVCONF_NDISC_EVICT_NOCARRIER] \u003d cnf-\u003endisc_evict_nocarrier;\n      \tarray[DEVCONF_ACCEPT_UNTRACKED_NA] \u003d cnf-\u003eaccept_untracked_na;\n    --\tarray[DEVCONF_ACCEPT_RA_MIN_RTR_LFT] \u003d cnf-\u003eaccept_ra_min_rtr_lft;\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fa7914 UPSTREAM: bpf: Fix re-attachment branch in bpf_tracing_prog_)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\tarray[DEVCONF_ACCEPT_RA_MIN_LFT] \u003d cnf-\u003eaccept_ra_min_lft;\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (c2c027 Reapply \"net: change accept_ra_min_rtr_lft to affect all RA )\n      }\n      \n      static inline size_t inet6_ifla6_size(void)\n    @@ net/ipv6/addrconf.c: static const struct ctl_table addrconf_sysctl[] \u003d {\n      \t\t.proc_handler\t\u003d proc_dointvec,\n      \t},\n      \t{\n    --\t\t.procname\t\u003d \"accept_ra_min_rtr_lft\",\n    --\t\t.data\t\t\u003d \u0026ipv6_devconf.accept_ra_min_rtr_lft,\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fa7914 UPSTREAM: bpf: Fix re-attachment branch in bpf_tracing_prog_)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\t\t.procname\t\u003d \"accept_ra_min_lft\",\n     +\t\t.data\t\t\u003d \u0026ipv6_devconf.accept_ra_min_lft,\n    ++\t\t.maxlen\t\t\u003d sizeof(int),\n    ++\t\t.mode\t\t\u003d 0644,\n    ++\t\t.proc_handler\t\u003d proc_dointvec,\n    ++\t},\n    ++\t{\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (c2c027 Reapply \"net: change accept_ra_min_rtr_lft to affect all RA )\n    + \t\t.procname\t\u003d \"accept_ra_pinfo\",\n    + \t\t.data\t\t\u003d \u0026ipv6_devconf.accept_ra_pinfo,\n      \t\t.maxlen\t\t\u003d sizeof(int),\n    - \t\t.mode\t\t\u003d 0644,\n    - \t\t.proc_handler\t\u003d proc_dointvec,\n     \n      ## net/ipv6/ndisc.c ##\n    -@@ net/ipv6/ndisc.c: static void ndisc_router_discovery(struct sk_buff *skb)\n    - \t\treturn;\n    - \t}\n    - \n    --\tlifetime \u003d ntohs(ra_msg-\u003eicmph.icmp6_rt_lifetime);\n    --\n    - \tif (!ipv6_accept_ra(in6_dev)) {\n    - \t\tND_PRINTK(2, info,\n    - \t\t\t  \"RA: %s, did not accept ra for dev: %s\\n\",\n    -@@ net/ipv6/ndisc.c: static void ndisc_router_discovery(struct sk_buff *skb)\n    - \t\tgoto skip_linkparms;\n    - \t}\n    - \n    --\tif (lifetime !\u003d 0 \u0026\u0026 lifetime \u003c in6_dev-\u003ecnf.accept_ra_min_rtr_lft) {\n    --\t\tND_PRINTK(2, info,\n    --\t\t\t  \"RA: router lifetime (%ds) is too short: %s\\n\",\n    --\t\t\t  lifetime, skb-\u003edev-\u003ename);\n    --\t\tgoto skip_linkparms;\n    --\t}\n    --\n    - #ifdef CONFIG_IPV6_NDISC_NODETYPE\n    - \t/* skip link-specific parameters from interior routers */\n    - \tif (skb-\u003endisc_nodetype \u003d\u003d NDISC_NODETYPE_NODEFAULT) {\n     @@ net/ipv6/ndisc.c: static void ndisc_router_discovery(struct sk_buff *skb)\n      \t\tgoto skip_defrtr;\n      \t}\n    @@ net/ipv6/ndisc.c: static void ndisc_router_discovery(struct sk_buff *skb)\n      \t/* Do not accept RA with source-addr found on local machine unless\n      \t * accept_ra_from_local is set to true.\n      \t */\n    -@@ net/ipv6/ndisc.c: skip_linkparms:\n    - \t\tgoto out;\n    - \t}\n    - \n    --\tif (lifetime !\u003d 0 \u0026\u0026 lifetime \u003c in6_dev-\u003ecnf.accept_ra_min_rtr_lft) {\n    --\t\tND_PRINTK(2, info,\n    --\t\t\t  \"RA: router lifetime (%ds) is too short: %s\\n\",\n    --\t\t\t  lifetime, skb-\u003edev-\u003ename);\n    --\t\tgoto out;\n    --\t}\n    --\n    - #ifdef CONFIG_IPV6_ROUTE_INFO\n    - \tif (!in6_dev-\u003ecnf.accept_ra_from_local \u0026\u0026\n    - \t    ipv6_chk_addr(dev_net(in6_dev-\u003edev), \u0026ipv6_hdr(skb)-\u003esaddr,\n     @@ net/ipv6/ndisc.c: skip_linkparms:\n      \t\t\tif (ri-\u003eprefix_len \u003d\u003d 0 \u0026\u0026\n      \t\t\t    !in6_dev-\u003ecnf.accept_ra_defrtr)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "868f5e2da126df95bc9ae7110400a2a5b4592b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
