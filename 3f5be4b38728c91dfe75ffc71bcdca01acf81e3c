@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078861497",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3033572?revision\u003d7",
+      "key": {
+        "uuid": "374d31ae_9fdb453f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-22T20:51:52Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/16350016d8a3678da5012343ca00fa9918340c83).\n\n```\n      ## kernel/user.c ##\n     @@ kernel/user.c: struct user_struct *find_user(kuid_t uid)\n    @@ kernel/user.c: struct user_struct *find_user(kuid_t uid)\n      \n      void free_uid(struct user_struct *up)\n      {\n    -@@ kernel/user.c: void free_uid(struct user_struct *up)\n    - \tif (refcount_dec_and_lock_irqsave(\u0026up-\u003e__count, \u0026uidhash_lock, \u0026flags))\n    - \t\tfree_user(up, flags);\n    - }\n    -+EXPORT_SYMBOL_GPL(free_uid);\n    - \n    - struct user_struct *alloc_uid(kuid_t uid)\n    - {\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "3f5be4b38728c91dfe75ffc71bcdca01acf81e3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
