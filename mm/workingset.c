@@ -16,7 +16,12 @@
 #include <linux/dax.h>
 #include <linux/fs.h>
 #include <linux/mm.h>
+<<<<<<< HEAD   (6200e441dba51518e2ddf4ae8d430d8faaa8b598 ANDROID: GKI: Add symbol to symbol list for unisoc.)
 #include "internal.h"
+||||||| BASE   (9a57b389502a7e7c618c50b3207179251a9b2cab FROMGIT: cgroup/cpuset-v1: Add missing support for cpuset_v2)
+=======
+#include <trace/hooks/mm.h>
+>>>>>>> CHANGE (40610f49d4b610e76c25edae79fc08f82e950d20 ANDROID: vendor hooks: add hook record workingset refault co)
 
 /*
  *		Double CLOCK lists
@@ -426,6 +431,8 @@ bool workingset_test_recent(void *shadow, bool file, bool *workingset,
 	int memcgid;
 	struct pglist_data *pgdat;
 	unsigned long eviction;
+
+	trace_android_vh_count_workingset_refault(folio);
 
 	if (lru_gen_enabled()) {
 		bool recent;

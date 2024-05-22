@@ -216,4 +216,43 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_large_alloced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_should_be_protected);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_referenced_check_bypass);
+<<<<<<< HEAD   (6200e441dba51518e2ddf4ae8d430d8faaa8b598 ANDROID: GKI: Add symbol to symbol list for unisoc.)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_folio_alloced);
+||||||| BASE   (9a57b389502a7e7c618c50b3207179251a9b2cab FROMGIT: cgroup/cpuset-v1: Add missing support for cpuset_v2)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_read_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages_range);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vprintk_store);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_referenced_check_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calculate_totalreserve_pages);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_count_workingset_refault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_read_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages_range);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vprintk_store);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_referenced_check_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calculate_totalreserve_pages);
+>>>>>>> CHANGE (40610f49d4b610e76c25edae79fc08f82e950d20 ANDROID: vendor hooks: add hook record workingset refault co)
