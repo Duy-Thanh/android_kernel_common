@@ -99,9 +99,19 @@ static struct hid_field *hid_register_field(struct hid_report *report, unsigned 
 		return NULL;
 	}
 
+<<<<<<< HEAD   (7ffec309ed4186c017e05fa9c64ac073040ce2df UPSTREAM: wifi: cfg80211: Extend cfg80211_update_owe_info_ev)
 	field = kzalloc((sizeof(struct hid_field) +
 			 usages * sizeof(struct hid_usage) +
 			 usages * sizeof(unsigned)), GFP_KERNEL);
+||||||| BASE   (fadb08b36671868a991c72b5b796cce57fc6363a FROMGIT: xhci: Fix Link TRB DMA in command ring stopped comp)
+	field = kzalloc((sizeof(struct hid_field) +
+			 usages * sizeof(struct hid_usage) +
+			 3 * usages * sizeof(unsigned int)), GFP_KERNEL);
+=======
+	field = kvzalloc((sizeof(struct hid_field) +
+			  usages * sizeof(struct hid_usage) +
+			  3 * usages * sizeof(unsigned int)), GFP_KERNEL);
+>>>>>>> CHANGE (976b055754d716d7881b095248001940900c87a3 UPSTREAM: HID: Use kvzalloc instead of kzalloc in hid_regist)
 	if (!field)
 		return NULL;
 
@@ -661,7 +671,7 @@ static void hid_free_report(struct hid_report *report)
 	unsigned n;
 
 	for (n = 0; n < report->maxfield; n++)
-		kfree(report->field[n]);
+		kvfree(report->field[n]);
 	kfree(report);
 }
 
