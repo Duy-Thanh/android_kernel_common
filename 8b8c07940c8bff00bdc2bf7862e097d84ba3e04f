@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ff17a9a_18505f4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1301696
+      },
+      "writtenOn": "2024-05-22T07:47:37Z",
+      "side": 1,
+      "message": "```\nWARNING:UNKNOWN_COMMIT_ID: Unknown commit id \u0027a6fe37f428c1\u0027, maybe rebased or not pulled?\n```\nThe commit ids regarding the mentioned patch are different between aosp kernel and linux kernel. The one in linux kernel is used here.\n\n```\nERROR:GERRIT_CHANGE_ID: Remove Gerrit Change-Id\u0027s before submitting upstream \n```\nNot sure how to fix this error...\n\n```\nWARNING:BAD_SIGN_OFF: Duplicate signature\n```\nIf I remove the sign-off in the bottom, the patch will be blocked.",
+      "revId": "8b8c07940c8bff00bdc2bf7862e097d84ba3e04f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
