@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8a42ad5_55f56a17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-22T16:15:31Z",
+      "side": 1,
+      "message": "There is a _KernelCommit_ error on this patch since there is no respin bug for this patch. Please follow the respin process. See comment on b/341884841. Once the respin bug is created, add a \"Bug:\" tag citing that bug.",
+      "revId": "ebe993e12a0d155a6db9591d852794821025370d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
