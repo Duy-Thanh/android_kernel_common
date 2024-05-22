@@ -141,6 +141,7 @@ __ring_buffer_alloc(unsigned long size, unsigned flags, struct lock_class_key *k
 	__ring_buffer_alloc((size), (flags), &__key);	\
 })
 
+<<<<<<< HEAD   (8c2305 Merge 5.15.153 into android14-5.15-lts)
 struct ring_buffer_ext_cb {
 	int (*update_footers)(int cpu);
 	int (*swap_reader)(int cpu);
@@ -149,6 +150,9 @@ struct ring_buffer_ext_cb {
 struct trace_buffer *
 ring_buffer_alloc_ext(unsigned long size, struct ring_buffer_ext_cb *cb);
 
+=======
+typedef bool (*ring_buffer_cond_fn)(void *data);
+>>>>>>> BRANCH (cdfd0a Linux 5.15.154)
 int ring_buffer_wait(struct trace_buffer *buffer, int cpu, int full);
 __poll_t ring_buffer_poll_wait(struct trace_buffer *buffer, int cpu,
 			  struct file *filp, poll_table *poll_table, int full);

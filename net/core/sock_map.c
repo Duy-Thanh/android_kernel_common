@@ -414,7 +414,14 @@ static int __sock_map_delete(struct bpf_stab *stab, struct sock *sk_test,
 	int err = 0;
 	unsigned long flags;
 
+<<<<<<< HEAD   (8c2305 Merge 5.15.153 into android14-5.15-lts)
 	raw_spin_lock_irqsave(&stab->lock, flags);
+=======
+	if (irqs_disabled())
+		return -EOPNOTSUPP; /* locks here are hardirq-unsafe */
+
+	raw_spin_lock_bh(&stab->lock);
+>>>>>>> BRANCH (cdfd0a Linux 5.15.154)
 	sk = *psk;
 	if (!sk_test || sk_test == sk)
 		sk = xchg(psk, NULL);
@@ -932,6 +939,9 @@ static int sock_hash_delete_elem(struct bpf_map *map, void *key)
 	struct bpf_shtab_elem *elem;
 	int ret = -ENOENT;
 	unsigned long flags;
+
+	if (irqs_disabled())
+		return -EOPNOTSUPP; /* locks here are hardirq-unsafe */
 
 	hash = sock_hash_bucket_hash(key, key_size);
 	bucket = sock_hash_select_bucket(htab, hash);
