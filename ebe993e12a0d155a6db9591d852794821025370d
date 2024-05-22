@@ -16,6 +16,23 @@
       "message": "There is a _KernelCommit_ error on this patch since there is no respin bug for this patch. Please follow the respin process. See comment on b/341884841. Once the respin bug is created, add a \"Bug:\" tag citing that bug.",
       "revId": "ebe993e12a0d155a6db9591d852794821025370d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "442eb593_1c03de07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-22T16:34:50Z",
+      "side": 1,
+      "message": "This patch was not stacked together with change 3093413 and 3096922. There are dependencies between these patches and thus why the cherry-picks here are _NOT_ clean. Please stack the patches so they apply cleanly.",
+      "revId": "ebe993e12a0d155a6db9591d852794821025370d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
