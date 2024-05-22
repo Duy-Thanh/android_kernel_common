@@ -3,6 +3,7 @@
 // Copyright (C) 2024 Google LLC.
 
 use kernel::{
+    macros::kunit_tests,
     page::PAGE_SIZE,
     prelude::*,
     rbtree::{RBTree, RBTreeNode, RBTreeNodeReservation},
@@ -468,5 +469,353 @@ impl<T> ReserveNewBox<T> {
             self.free_tree_node_res.into_node((size, offset), ()),
             self.desc_node_res,
         )
+    }
+}
+
+#[kunit_tests(android_binder_ipc_rust_range_alloc)]
+mod tests {
+    use core::iter::Iterator;
+
+    use crate::range_alloc::Allocation;
+    use crate::range_alloc::Descriptor;
+    use crate::range_alloc::DescriptorState;
+    use crate::range_alloc::RangeAllocator;
+    use crate::range_alloc::Reservation;
+    use crate::range_alloc::ReserveNewBox;
+    use kernel::prelude::*;
+    use kernel::rbtree::{RBTree, RBTreeCursor};
+    #[test]
+    fn test_reserve_new() {
+        let mut ra: RangeAllocator<usize> = RangeAllocator::new(10).unwrap();
+        let expected: &[Option<DescriptorState<usize>>] = &[None];
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        let offset = ra
+            .reserve_new(4, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let expected = &[test_reserved(), None];
+        assert_eq!(offset, 0);
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        let offset = ra
+            .reserve_new(5, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let expected = &[test_reserved(), test_reserved(), None];
+        assert_eq!(offset, 4);
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        let offset = ra
+            .reserve_new(1, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let expected = &[test_reserved(), test_reserved(), test_reserved()];
+        assert_eq!(offset, 9);
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        let offset = ra.reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap());
+        assert!(offset.is_err());
+    }
+
+    #[test]
+    fn test_reservation_abort_no_merge() {
+        let mut ra: RangeAllocator<usize> = RangeAllocator::new(10).unwrap();
+        let expected: &[Option<DescriptorState<usize>>] =
+            &[test_reserved(), test_reserved(), test_reserved(), None];
+        ra.reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let offset_middle = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        ra.reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_abort(offset_middle).unwrap();
+        let expected = &[test_reserved(), None, test_reserved(), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+    }
+
+    #[test]
+    fn test_reservation_abort_merge_right() {
+        let mut ra: RangeAllocator<usize> = RangeAllocator::new(10).unwrap();
+        let expected: &[Option<DescriptorState<usize>>] =
+            &[test_reserved(), test_reserved(), test_reserved(), None];
+        ra.reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        ra.reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let offset_right = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_abort(offset_right).unwrap();
+        let expected = &[test_reserved(), test_reserved(), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+    }
+
+    #[test]
+    fn test_reservation_abort_merge_left() {
+        let mut ra: RangeAllocator<usize> = RangeAllocator::new(10).unwrap();
+        let expected: &[Option<DescriptorState<usize>>] =
+            &[test_reserved(), test_reserved(), test_reserved(), None];
+        let offset_left = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let offset_middle = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        ra.reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_abort(offset_left).unwrap();
+        let expected = &[None, test_reserved(), test_reserved(), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_abort(offset_middle).unwrap();
+        let expected = &[None, test_reserved(), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+    }
+
+    #[test]
+    fn test_reservation_abort_merge_both() {
+        let mut ra: RangeAllocator<usize> = RangeAllocator::new(10).unwrap();
+        let expected: &[Option<DescriptorState<usize>>] =
+            &[test_reserved(), test_reserved(), test_reserved(), None];
+        let offset_left = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let offset_middle = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let offset_right = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_abort(offset_left).unwrap();
+        ra.reservation_abort(offset_right).unwrap();
+        let expected = &[None, test_reserved(), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_abort(offset_middle).unwrap();
+        let expected = &[None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+    }
+
+    #[test]
+    fn test_reservation_commit() {
+        let mut ra: RangeAllocator<usize> = RangeAllocator::new(10).unwrap();
+        let expected: &[Option<DescriptorState<usize>>] =
+            &[test_reserved(), test_reserved(), test_reserved(), None];
+        let offset_left = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let offset_middle = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let offset_right = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_abort(offset_left).unwrap();
+        ra.reservation_abort(offset_right).unwrap();
+        let expected = &[None, test_reserved(), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_commit(offset_middle, Some(1)).unwrap();
+        let expected = &[None, test_allocated(Some(1)), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+    }
+
+    #[test]
+    fn test_reserve_existing() {
+        let mut ra: RangeAllocator<usize> = RangeAllocator::new(10).unwrap();
+        let expected: &[Option<DescriptorState<usize>>] =
+            &[test_reserved(), test_reserved(), test_reserved(), None];
+        let offset_left = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let offset_middle = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let offset_right = ra
+            .reserve_new(2, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_abort(offset_left).unwrap();
+        ra.reservation_abort(offset_right).unwrap();
+        let expected = &[None, test_reserved(), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_commit(offset_middle, Some(1)).unwrap();
+        let expected = &[None, test_allocated(Some(1)), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        let existing = ra.reserve_existing(offset_middle).unwrap();
+        assert_eq!(existing, (2, Some(1)));
+        let expected = &[None, test_reserved(), None];
+
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+    }
+
+    #[test]
+    fn test_end_to_end() {
+        let mut ra: RangeAllocator<usize> = RangeAllocator::new(1040384).unwrap();
+        let expected: &[Option<DescriptorState<usize>>] = &[None];
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        let offset = ra
+            .reserve_new(16, false, 1, ReserveNewBox::try_new().unwrap())
+            .unwrap();
+        let expected = &[test_reserved(), None];
+        assert_eq!(offset, 0);
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_commit(0, Some(1)).unwrap();
+        let expected = &[test_allocated(Some(1)), None];
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        let existing = ra.reserve_existing(offset).unwrap();
+        assert_eq!(existing, (16, Some(1)));
+
+        let expected = &[test_reserved(), None];
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+
+        ra.reservation_abort(0).unwrap();
+        let expected = &[None];
+        assert_invariant_and_state(ra.tree.cursor_front().unwrap(), &ra.free_tree, expected);
+    }
+
+    fn assert_invariant_and_state(
+        cursor: RBTreeCursor<'_, usize, Descriptor<usize>>,
+        free_tree: &RBTree<(usize, usize), ()>,
+        expected: &[Option<DescriptorState<usize>>],
+    ) {
+        let mut index = 1;
+        let (key, desc) = cursor.current();
+
+        assert_eq!(key, &desc.offset);
+        assert_desc_state_eq(&expected[0], &desc.state);
+
+        // free descriptors should always have corresponding entries in the free tree
+        if desc.state.is_none() {
+            assert!(free_tree.get(&(desc.size, desc.offset)).is_some());
+        }
+
+        let mut last = (desc.offset, desc.size, copy_desc_state(&desc.state));
+        let mut next = cursor.move_next();
+
+        while let Some(n) = next {
+            let (key, desc) = n.current();
+            let (last_offset, last_size, last_state) = last;
+
+            assert_eq!(key, &desc.offset);
+            assert_desc_state_eq(&expected[index], &desc.state);
+
+            // adjacent free descriptors should always be merged together
+            assert!(match (&last_state, &desc.state) {
+                (None, None) => false,
+                _ => true,
+            });
+
+            // any descriptor's offset should always be a function of it's predecessors offset + size
+            assert_eq!(desc.offset, last_offset + last_size);
+
+            // free descriptors should always have corresponding entries in the free tree
+            if desc.state.is_none() {
+                assert!(free_tree.get(&(desc.size, desc.offset)).is_some());
+            }
+
+            last = (desc.offset, desc.size, copy_desc_state(&desc.state));
+            index += 1;
+            next = n.move_next();
+        }
+
+        assert!(expected.len() == index);
+
+        // the free tree should not have extra entries
+        let mut expected_free_count = 0;
+        expected.iter().filter(|&e| e.is_none()).for_each(|_| {
+            expected_free_count += 1;
+        });
+
+        let mut actual_free_count = 0;
+        free_tree.iter().for_each(|_| {
+            actual_free_count += 1;
+        });
+
+        assert_eq!(expected_free_count, actual_free_count);
+    }
+
+    fn assert_desc_state_eq(
+        left: &Option<DescriptorState<usize>>,
+        right: &Option<DescriptorState<usize>>,
+    ) {
+        match (left, right) {
+            (None, None) => (),
+            (Some(DescriptorState::Reserved(_)), Some(DescriptorState::Reserved(_))) => (),
+            (Some(DescriptorState::Allocated(_)), Some(DescriptorState::Allocated(_))) => (),
+            _ => panic!("descriptor states are not equal!"),
+        }
+    }
+
+    fn copy_desc_state(state: &Option<DescriptorState<usize>>) -> Option<DescriptorState<usize>> {
+        let Some(state) = state else {
+            return None;
+        };
+
+        match state {
+            DescriptorState::Reserved(Reservation { is_oneway, pid, .. }) => Some(
+                DescriptorState::new(*is_oneway, *pid, RBTree::try_reserve_node().unwrap()),
+            ),
+            DescriptorState::Allocated(Allocation {
+                is_oneway,
+                pid,
+                data,
+                ..
+            }) => Some(DescriptorState::Allocated(Allocation {
+                is_oneway: *is_oneway,
+                pid: *pid,
+                free_res: RBTree::try_reserve_node().unwrap(),
+                data: *data,
+            })),
+        }
+    }
+
+    fn test_reserved() -> Option<DescriptorState<usize>> {
+        Some(DescriptorState::new(
+            true,
+            1,
+            RBTree::try_reserve_node().unwrap(),
+        ))
+    }
+
+    fn test_allocated(data: Option<usize>) -> Option<DescriptorState<usize>> {
+        let allocation = Allocation {
+            is_oneway: false,
+            pid: 1,
+            free_res: RBTree::try_reserve_node().unwrap(),
+            data,
+        };
+        Some(DescriptorState::Allocated(allocation))
     }
 }
