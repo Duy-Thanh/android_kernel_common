@@ -33,6 +33,24 @@
       "message": "rebase the series to resolve the merge conflicts",
       "revId": "3b2bc863a54d49fd145408029b2a961bf24be53b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d97ec653_c6171bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024815
+      },
+      "writtenOn": "2024-05-22T03:00:18Z",
+      "side": 1,
+      "message": "it seems that https://android-review.googlesource.com/c/kernel/common/+/3093641\nhas already cherry-picked the rest of the patch, So this patch do not need.",
+      "parentUuid": "caeae8fa_04d6efec",
+      "revId": "3b2bc863a54d49fd145408029b2a961bf24be53b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
