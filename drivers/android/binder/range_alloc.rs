@@ -3,6 +3,7 @@
 // Copyright (C) 2024 Google LLC.
 
 use kernel::{
+    macros::kunit_tests,
     page::PAGE_SIZE,
     prelude::*,
     rbtree::{RBTree, RBTreeNode, RBTreeNodeReservation},
@@ -468,5 +469,13 @@ impl<T> ReserveNewBox<T> {
             self.free_tree_node_res.into_node((size, offset), ()),
             self.desc_node_res,
         )
+    }
+}
+
+#[kunit_tests(range_alloc_tree)]
+mod tests {
+    #[test]
+    pub fn test_something() {
+        assert!(false);
     }
 }

@@ -8,6 +8,7 @@
 
 use crate::{bindings, error::Result};
 use alloc::boxed::Box;
+use macros::kunit_tests;
 use core::{
     cmp::{Ord, Ordering},
     marker::PhantomData,
@@ -1209,5 +1210,13 @@ impl<'a, K, V> OccupiedEntry<'a, K, V> {
         let old_node = unsafe { Box::from_raw(self.node_ptr()) };
 
         RBTreeNode { node: old_node }
+    }
+}
+
+#[kunit_tests(foo_bar_baz)]
+mod tests {
+    #[test]
+    pub fn test_something() {
+        assert!(false);
     }
 }
