@@ -510,6 +510,7 @@ int walk_page_range_mm(struct mm_struct *mm, unsigned long start,
 	} while (start = next, start < end);
 	return err;
 }
+EXPORT_SYMBOL_GPL(walk_page_range);
 
 /*
  * Determine if the walk operations specified are permitted to be used for a
