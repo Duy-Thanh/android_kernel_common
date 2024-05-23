@@ -322649,6 +322649,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_select_task_rq_rt"
 }
 elf_symbol {
+  id: 0x28eb5989
+  name: "__traceiter_android_rvh_set_balance_anon_file_reclaim"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6260c8f6
+  type_id: 0x9be885da
+  full_name: "__traceiter_android_rvh_set_balance_anon_file_reclaim"
+}
+elf_symbol {
   id: 0xbe8d73f2
   name: "__traceiter_android_rvh_set_cpus_allowed_by_task"
   is_defined: true
@@ -326355,6 +326364,15 @@ elf_symbol {
   crc: 0xf9571130
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_select_task_rq_rt"
+}
+elf_symbol {
+  id: 0x6d8ed263
+  name: "__tracepoint_android_rvh_set_balance_anon_file_reclaim"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x630fd92c
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_set_balance_anon_file_reclaim"
 }
 elf_symbol {
   id: 0x4bc6b114
@@ -381625,6 +381643,7 @@ interface {
   symbol_id: 0x0f807f10
   symbol_id: 0xe48752ef
   symbol_id: 0x4c24a4be
+  symbol_id: 0x28eb5989
   symbol_id: 0xbe8d73f2
   symbol_id: 0xaf658447
   symbol_id: 0xe56edb7a
@@ -382037,6 +382056,7 @@ interface {
   symbol_id: 0x0daed96e
   symbol_id: 0x3bb904a5
   symbol_id: 0xec4d6758
+  symbol_id: 0x6d8ed263
   symbol_id: 0x4bc6b114
   symbol_id: 0x93751239
   symbol_id: 0x70131d40
