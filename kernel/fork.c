@@ -741,7 +741,20 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 			tmp->anon_vma = NULL;
 		} else if (anon_vma_fork(tmp, mpnt))
 			goto fail_nomem_anon_vma_fork;
+<<<<<<< HEAD   (722988 Merge 6.1.89 into android14-6.1-lts)
 		vm_flags_clear(tmp, VM_LOCKED_MASK);
+=======
+		tmp->vm_flags &= ~(VM_LOCKED | VM_LOCKONFAULT);
+		/*
+		 * Copy/update hugetlb private vma information.
+		 */
+		if (is_vm_hugetlb_page(tmp))
+			hugetlb_dup_vma_private(tmp);
+
+		if (tmp->vm_ops && tmp->vm_ops->open)
+			tmp->vm_ops->open(tmp);
+
+>>>>>>> BRANCH (909ba1 Linux 6.1.90)
 		file = tmp->vm_file;
 		if (file) {
 			struct address_space *mapping = file->f_mapping;
@@ -758,6 +771,7 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 			i_mmap_unlock_write(mapping);
 		}
 
+<<<<<<< HEAD   (722988 Merge 6.1.89 into android14-6.1-lts)
 		/*
 		 * Copy/update hugetlb private vma information.
 		 */
@@ -768,6 +782,9 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 		 * Link the vma into the MT. After using __mt_dup(), memory
 		 * allocation is not necessary here, so it cannot fail.
 		 */
+=======
+		/* Link the vma into the MT */
+>>>>>>> BRANCH (909ba1 Linux 6.1.90)
 		mas.index = tmp->vm_start;
 		mas.last = tmp->vm_end - 1;
 		mas_store(&mas, tmp);
@@ -776,11 +793,15 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 		if (!(tmp->vm_flags & VM_WIPEONFORK))
 			retval = copy_page_range(tmp, mpnt);
 
+<<<<<<< HEAD   (722988 Merge 6.1.89 into android14-6.1-lts)
 		if (tmp->vm_ops && tmp->vm_ops->open)
 			tmp->vm_ops->open(tmp);
 
 		if (retval) {
 			mpnt = mas_find(&mas, ULONG_MAX);
+=======
+		if (retval)
+>>>>>>> BRANCH (909ba1 Linux 6.1.90)
 			goto loop_out;
 		}
 	}
