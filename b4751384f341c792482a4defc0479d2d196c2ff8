@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b464d807_1f99fe6b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-05-23T23:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37026fd8_a46145ed",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 4
+      },
+      "revId": "b4751384f341c792482a4defc0479d2d196c2ff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41e8a5b0_4ea621b7",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66015dcc_3e127cb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-05-23T23:40:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "41e8a5b0_4ea621b7",
+      "revId": "b4751384f341c792482a4defc0479d2d196c2ff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "540958aa_6fe7a5d9",
@@ -54,6 +96,24 @@
       "writtenOn": "2024-05-22T17:51:37Z",
       "side": 1,
       "message": "There are KMI-breaking changes in this patchset so please drop the updates to the STG file. This will be done by the KMI update process.",
+      "revId": "b4751384f341c792482a4defc0479d2d196c2ff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e670f8_592201bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-05-23T23:40:14Z",
+      "side": 1,
+      "message": "the latest patch fixes this.",
+      "parentUuid": "540958aa_6fe7a5d9",
       "revId": "b4751384f341c792482a4defc0479d2d196c2ff8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
