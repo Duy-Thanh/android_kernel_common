@@ -39,6 +39,15 @@ void *hyp_alloc_account(size_t size, struct kvm *host_kvm);
 int hyp_alloc_errno(void);
 
 /**
+ * hyp_alloc_protect() - Protect this chunk with PSCI MEM_PROTECT
+ *
+ * @addr:	Address returned by the original hyp_alloc().
+ *
+ * The protection drops on hyp_free()
+ */
+void hyp_alloc_protect(void *addr);
+
+/**
  * hyp_free() - Free memory allocated with hyp_alloc()
  *
  * @addr:	Address returned by the original hyp_alloc().

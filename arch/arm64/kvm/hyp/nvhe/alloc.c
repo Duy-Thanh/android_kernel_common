@@ -29,6 +29,7 @@ static struct hyp_allocator {
 } hyp_allocator;
 
 struct chunk_hdr {
+#define HYP_ALLOC_PSCI_PROTECT	BIT(1)
 	u32			alloc_size;
 	u32			mapped_size;
 	struct list_head	node;
@@ -71,8 +72,14 @@ static inline void chunk_hash_validate(struct chunk_hdr *chunk)
 #define chunk_is_used(chunk) \
 	(!!(chunk)->alloc_size)
 
+#define chunk_is_psci_protected(chunk) \
+	((chunk)->alloc_size & HYP_ALLOC_PSCI_PROTECT)
+
 #define chunk_hdr_size() \
 	offsetof(struct chunk_hdr, data)
+
+#define chunk_alloc_size(chunk) \
+	((chunk)->alloc_size & ~(HYP_ALLOC_PSCI_PROTECT))
 
 #define chunk_size(size) \
 	(chunk_hdr_size() + max((size_t)(size), MIN_ALLOC))
@@ -234,7 +241,7 @@ static int chunk_install(struct chunk_hdr *chunk, size_t size,
 
 	if (chunk_unmapped_region(prev) < (unsigned long)chunk)
 		return -EINVAL;
-	if ((unsigned long)chunk_data(prev) + prev->alloc_size > (unsigned long)chunk)
+	if ((unsigned long)chunk_data(prev) + chunk_alloc_size(prev) > (unsigned long)chunk)
 		return -EINVAL;
 
 	prev_mapped_size = prev->mapped_size;
@@ -361,7 +368,7 @@ static size_t chunk_dec_map(struct chunk_hdr *chunk,
 	size_t reclaimable;
 
 	start = PAGE_ALIGN((unsigned long)chunk +
-			   chunk_size(chunk->alloc_size));
+			   chunk_size(chunk_alloc_size(chunk)));
 	end = chunk_unmapped_region(chunk);
 
 	if (start >= end)
@@ -577,7 +584,7 @@ void *hyp_alloc(size_t size)
 
 	last_chunk = chunk_get(list_last_entry(&allocator->chunks, struct chunk_hdr, node));
 
-	chunk_addr = (unsigned long)last_chunk + chunk_size(last_chunk->alloc_size);
+	chunk_addr = (unsigned long)last_chunk + chunk_size(chunk_alloc_size(last_chunk));
 	chunk_addr = chunk_addr_fixup(chunk_addr);
 	chunk = (struct chunk_hdr *)chunk_addr;
 
@@ -612,7 +619,7 @@ static size_t hyp_alloc_size(void *addr)
 
 	hyp_spin_lock(&allocator->lock);
 	chunk = chunk_get(container_of(chunk_data, struct chunk_hdr, data));
-	size = chunk->alloc_size;
+	size = chunk_alloc_size(chunk);
 	hyp_spin_unlock(&allocator->lock);
 
 	return size;
@@ -628,6 +635,22 @@ void *hyp_alloc_account(size_t size, struct kvm *host_kvm)
 	return addr;
 }
 
+void hyp_alloc_protect(void *addr)
+{
+	struct hyp_allocator *allocator = &hyp_allocator;
+	char *chunk_data = (char *)addr;
+	struct chunk_hdr *chunk;
+
+	hyp_spin_lock(&allocator->lock);
+	chunk = chunk_get(container_of(chunk_data, struct chunk_hdr, data));
+	if (!chunk_is_psci_protected(chunk)) {
+		chunk->alloc_size |= HYP_ALLOC_PSCI_PROTECT;
+		chunk_hash_update(chunk);
+		psci_mem_protect_inc(1);
+	}
+	hyp_spin_unlock(&allocator->lock);
+}
+
 void hyp_free(void *addr)
 {
 	struct chunk_hdr *chunk, *prev_chunk, *next_chunk;
@@ -639,6 +662,14 @@ void hyp_free(void *addr)
 	chunk = chunk_get(container_of(chunk_data, struct chunk_hdr, data));
 	prev_chunk = chunk_get_prev(chunk, allocator);
 	next_chunk = chunk_get_next(chunk, allocator);
+
+	if (chunk_is_psci_protected(chunk)) {
+		size_t size = chunk_alloc_size(chunk);
+
+		memset(addr, 0, size);
+		kvm_flush_dcache_to_poc(addr, size);
+		psci_mem_protect_dec(1);
+	}
 
 	chunk->alloc_size = 0;
 	chunk_hash_update(chunk);
@@ -700,7 +731,7 @@ static size_t chunk_reclaimable(struct chunk_hdr *chunk,
 	if (chunk_destroyable(chunk, allocator))
 		start = (unsigned long)chunk;
 	else
-		start = PAGE_ALIGN((unsigned long)chunk + chunk_size(chunk->alloc_size));
+		start = PAGE_ALIGN((unsigned long)chunk + chunk_size(chunk_alloc_size(chunk)));
 
 	end = PAGE_ALIGN_DOWN(end);
 	if (start > end)
@@ -807,6 +838,9 @@ int hyp_alloc_init(size_t size)
 {
 	struct hyp_allocator *allocator = &hyp_allocator;
 	int ret;
+
+	/* alloc_size reserved bit */
+	BUILD_BUG_ON(MIN_ALLOC & HYP_ALLOC_PSCI_PROTECT);
 
 	size = PAGE_ALIGN(size);
 
