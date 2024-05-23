@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdddb267_3ceb5292",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-23T10:52:55Z",
+      "side": 1,
+      "message": "Can we send this upstream (and stable@k.o) instead?",
+      "revId": "e7980d0dd57ec85e866e9b9889b45dafef2aed94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9b6fb67_331e5571",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-23T10:52:55Z",
+      "side": 1,
+      "message": "If that is the case, should there not be a `-j` be added to a later version again?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 66
+      },
+      "revId": "e7980d0dd57ec85e866e9b9889b45dafef2aed94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d211baa9_a8275b98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-23T10:52:55Z",
+      "side": 1,
+      "message": "this also applies to android-mainline, right?",
+      "revId": "e7980d0dd57ec85e866e9b9889b45dafef2aed94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
