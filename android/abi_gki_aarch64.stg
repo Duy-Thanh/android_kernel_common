@@ -268617,6 +268617,44 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x0af5108b
+  name: "kernel_read_file_id"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "READING_UNKNOWN"
+    }
+    enumerator {
+      name: "READING_FIRMWARE"
+      value: 1
+    }
+    enumerator {
+      name: "READING_MODULE"
+      value: 2
+    }
+    enumerator {
+      name: "READING_KEXEC_IMAGE"
+      value: 3
+    }
+    enumerator {
+      name: "READING_KEXEC_INITRAMFS"
+      value: 4
+    }
+    enumerator {
+      name: "READING_POLICY"
+      value: 5
+    }
+    enumerator {
+      name: "READING_X509_CERTIFICATE"
+      value: 6
+    }
+    enumerator {
+      name: "READING_MAX_ID"
+      value: 7
+    }
+  }
+}
+enumeration {
   id: 0x093a9d02
   name: "key_being_used_for"
   definition {
@@ -281628,6 +281666,12 @@ function {
   parameter_id: 0x1d44326e
 }
 function {
+  id: 0x17c96337
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1b36c7a2
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x17cb3906
   return_type_id: 0x48b5725f
   parameter_id: 0x1d4da256
@@ -283670,6 +283714,16 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x2f0e69de
   parameter_id: 0x2c8e1aaa
+}
+function {
+  id: 0x1beba11e
+  return_type_id: 0xd5cc9c9a
+  parameter_id: 0x3e10b518
+  parameter_id: 0x27a7c613
+  parameter_id: 0x0cbf60eb
+  parameter_id: 0xf435685e
+  parameter_id: 0x379d63b0
+  parameter_id: 0x0af5108b
 }
 function {
   id: 0x1befd11c
@@ -296669,6 +296723,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x3e10b518
   parameter_id: 0x3185812b
+}
+function {
+  id: 0x92c346f3
+  return_type_id: 0x3a1c763b
+  parameter_id: 0x18bd6530
+  parameter_id: 0x2dec91ef
 }
 function {
   id: 0x92c44c32
@@ -315517,6 +315577,12 @@ function {
   parameter_id: 0x391f15ea
 }
 function {
+  id: 0xc0db8f6d
+  return_type_id: 0x4585663f
+  parameter_id: 0x374090df
+  parameter_id: 0xf435685e
+}
+function {
   id: 0xc125f30f
   return_type_id: 0x4585663f
   parameter_id: 0x3ba261b0
@@ -320525,6 +320591,15 @@ elf_symbol {
   crc: 0xbd462b55
   type_id: 0x90208300
   full_name: "__kfifo_init"
+}
+elf_symbol {
+  id: 0x2b891310
+  name: "__kfifo_len_r"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7846af3e
+  type_id: 0xc0db8f6d
+  full_name: "__kfifo_len_r"
 }
 elf_symbol {
   id: 0x61c1ff20
@@ -344477,6 +344552,15 @@ elf_symbol {
   full_name: "drop_reasons_unregister_subsys"
 }
 elf_symbol {
+  id: 0x367672f6
+  name: "drop_super"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x32ed6d31
+  type_id: 0x1923cb99
+  full_name: "drop_super"
+}
+elf_symbol {
   id: 0xe2b96ffd
   name: "dst_cache_destroy"
   is_defined: true
@@ -352608,6 +352692,15 @@ elf_symbol {
   full_name: "kernel_power_off"
 }
 elf_symbol {
+  id: 0x2c66b4ca
+  name: "kernel_read_file_from_path"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb3fd8fe6
+  type_id: 0x1beba11e
+  full_name: "kernel_read_file_from_path"
+}
+elf_symbol {
   id: 0x05b57a3a
   name: "kernel_recvmsg"
   is_defined: true
@@ -355493,6 +355586,15 @@ elf_symbol {
   full_name: "mktime64"
 }
 elf_symbol {
+  id: 0x77577e05
+  name: "mm_trace_rss_stat"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc831d0d1
+  type_id: 0x17c96337
+  full_name: "mm_trace_rss_stat"
+}
+elf_symbol {
   id: 0xd328c906
   name: "mmc_add_host"
   is_defined: true
@@ -357174,6 +357276,15 @@ elf_symbol {
   crc: 0x202d4ed6
   type_id: 0x914cd9bd
   full_name: "nvmem_cell_write"
+}
+elf_symbol {
+  id: 0x911b1286
+  name: "nvmem_device_find"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xed50de0a
+  type_id: 0x92c346f3
+  full_name: "nvmem_device_find"
 }
 elf_symbol {
   id: 0xd00eb623
@@ -381389,6 +381500,7 @@ interface {
   symbol_id: 0x15a8f184
   symbol_id: 0x2557404e
   symbol_id: 0xb896e3f6
+  symbol_id: 0x2b891310
   symbol_id: 0x61c1ff20
   symbol_id: 0x4eed247b
   symbol_id: 0xaf6dd949
@@ -384049,6 +384161,7 @@ interface {
   symbol_id: 0x4dae13e9
   symbol_id: 0x8003d904
   symbol_id: 0x31eb9c5b
+  symbol_id: 0x367672f6
   symbol_id: 0xe2b96ffd
   symbol_id: 0x126bb89f
   symbol_id: 0x2e0e7810
@@ -384952,6 +385065,7 @@ interface {
   symbol_id: 0xff4a14be
   symbol_id: 0x4e60d546
   symbol_id: 0x0e6a648c
+  symbol_id: 0x2c66b4ca
   symbol_id: 0x05b57a3a
   symbol_id: 0x5da7d3fd
   symbol_id: 0x51fc2e7c
@@ -385273,6 +385387,7 @@ interface {
   symbol_id: 0xe4059d72
   symbol_id: 0x842903b7
   symbol_id: 0x354e8904
+  symbol_id: 0x77577e05
   symbol_id: 0xd328c906
   symbol_id: 0x9a282ce3
   symbol_id: 0xd2482cd8
@@ -385460,6 +385575,7 @@ interface {
   symbol_id: 0x005c3998
   symbol_id: 0x1e629967
   symbol_id: 0xf1401602
+  symbol_id: 0x911b1286
   symbol_id: 0xd00eb623
   symbol_id: 0x23113228
   symbol_id: 0xc1013b0e
