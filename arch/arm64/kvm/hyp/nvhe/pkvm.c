@@ -636,8 +636,10 @@ static void init_pkvm_hyp_vm(struct kvm *host_kvm, struct pkvm_hyp_vm *hyp_vm,
 	hyp_vm->kvm.arch.vtcr = host_mmu.arch.vtcr;
 	hyp_vm->kvm.arch.pkvm.enabled = READ_ONCE(host_kvm->arch.pkvm.enabled);
 
-	if (hyp_vm->kvm.arch.pkvm.enabled)
+	if (hyp_vm->kvm.arch.pkvm.enabled) {
 		pvmfw_load_addr = READ_ONCE(host_kvm->arch.pkvm.pvmfw_load_addr);
+		hyp_alloc_protect(hyp_vm);
+	}
 	hyp_vm->kvm.arch.pkvm.pvmfw_load_addr = pvmfw_load_addr;
 
 	hyp_vm->kvm.arch.mmu.last_vcpu_ran = (int __percpu *)last_ran;
@@ -671,6 +673,7 @@ static int init_pkvm_hyp_vcpu_sve(struct pkvm_hyp_vcpu *hyp_vcpu, struct kvm_vcp
 			ret = hyp_alloc_errno();
 			goto err;
 		}
+		hyp_alloc_protect(sve_state);
 	} else {
 		ret = hyp_pin_shared_mem(sve_state, sve_state + sve_state_size);
 		if (ret)
@@ -938,6 +941,9 @@ int __pkvm_init_vcpu(pkvm_handle_t handle, struct kvm_vcpu *host_vcpu)
 
 	hyp_vm->vcpus[idx] = hyp_vcpu;
 	hyp_vm->nr_vcpus++;
+
+	if (pkvm_hyp_vcpu_is_protected(hyp_vcpu))
+		hyp_alloc_protect(hyp_vcpu);
 
 unlock_vcpus:
 	hyp_spin_unlock(&hyp_vm->vcpus_lock);
