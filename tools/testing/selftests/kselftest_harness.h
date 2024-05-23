@@ -450,14 +450,18 @@ static inline pid_t clone3_vfork(void)
 				_metadata->exit_code = KSFT_FAIL; \
 			} \
 		} \
+		_Bool expected = false; \
+		_Bool desired = true; \
+		_Bool weak = false; \
+		int memorder = __ATOMIC_SEQ_CST; \
 		if (child == 0) { \
 			if (_metadata->setup_completed && !fixture_name##_teardown_parent && \
-					__sync_bool_compare_and_swap(teardown, false, true)) \
+					__atomic_compare_exchange(teardown, &expected, &desired, weak, memorder, memorder)) \
 				fixture_name##_teardown(_metadata, self, variant->data); \
 			_exit(0); \
 		} \
 		if (_metadata->setup_completed && fixture_name##_teardown_parent && \
-				__sync_bool_compare_and_swap(teardown, false, true)) \
+				__atomic_compare_exchange(teardown, &expected, &desired, weak, memorder, memorder)) \
 			fixture_name##_teardown(_metadata, self, variant->data); \
 		munmap(teardown, sizeof(*teardown)); \
 		if (self && fixture_name##_teardown_parent) \
