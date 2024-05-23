@@ -179,6 +179,26 @@
       "tag": "",
       "revId": "e1f2d092e10c8808a2a5553205f44bf665904ae6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078944745",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3099637?revision\u003d1",
+      "key": {
+        "uuid": "96b8f01b_cab03cf7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-23T11:20:31Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/a20c4350c6a12405b7f732b3ee6801ffe2cc45ce) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003da20c4350c6a12405b7f732b3ee6801ffe2cc45ce).\n\n```\n    - ## drivers/ufs/core/ufshcd.c ##\n    -@@ drivers/ufs/core/ufshcd.c: static int ufshcd_clear_tm_cmd(struct ufs_hba *hba, int tag)\n    + ## drivers/scsi/ufs/ufshcd.c ##\n    +@@ drivers/scsi/ufs/ufshcd.c: static int ufshcd_clear_tm_cmd(struct ufs_hba *hba, int tag)\n      \t\t\tmask, 0, 1000, 1000);\n      \n      \tdev_err(hba-\u003edev, \"Clearing task management function with tag %d %s\\n\",\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "e1f2d092e10c8808a2a5553205f44bf665904ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
