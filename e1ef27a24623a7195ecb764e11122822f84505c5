@@ -219,6 +219,26 @@
       "tag": "",
       "revId": "e1ef27a24623a7195ecb764e11122822f84505c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078944782",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3099296?revision\u003d1",
+      "key": {
+        "uuid": "b5970c9a_355c07e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-23T12:06:23Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/7d0bc6360f17ea323ab25939a34857123d7d87e5) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d7d0bc6360f17ea323ab25939a34857123d7d87e5).\n\n```\n      ## drivers/firmware/arm_ffa/bus.c ##\n    -@@ drivers/firmware/arm_ffa/bus.c: struct ffa_device *ffa_device_register(const uuid_t *uuid, int vm_id,\n    +@@ drivers/firmware/arm_ffa/bus.c: struct ffa_device *ffa_device_register(const uuid_t *uuid, int vm_id)\n      \tdev-\u003erelease \u003d ffa_release_device;\n      \tdev_set_name(\u0026ffa_dev-\u003edev, \"arm-ffa-%d\", id);\n      \n     +\tffa_dev-\u003eid \u003d id;\n      \tffa_dev-\u003evm_id \u003d vm_id;\n    - \tffa_dev-\u003eops \u003d ops;\n      \tuuid_copy(\u0026ffa_dev-\u003euuid, uuid);\n    + \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "e1ef27a24623a7195ecb764e11122822f84505c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
