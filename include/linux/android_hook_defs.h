@@ -27,8 +27,11 @@
 #ifndef _LINUX_ANDROID_HOOK_DEFS_H
 #define _LINUX_ANDROID_HOOK_DEFS_H
 
+
+#ifndef __GENKSYMS__
 /* Users of these macros need TP_PROTO() and TP_ARGS() */
 #include <linux/tracepoint.h>
+#endif
 
 #define DECLARE_INDIRECT_HOOK(name, proto, args)			\
 	extern struct tracepoint __tracepoint_##name;			\
