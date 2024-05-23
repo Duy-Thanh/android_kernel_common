@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b1b572a_22cf429c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-05-23T12:38:48Z",
+      "side": 1,
+      "message": "I meant to edit the above.\n\nThe timings do vary... for GKI, -j9 is optimum on my machine. But pahole will be defaulting to 36*1.1 so 39 or 40. At any rate, we see at present just over a 2x speed-up. Our 10s slower could be 1000s slower on allmodconfig.\n\nI don\u0027t think this change will necessarily be well received as not everyone will care about .BTF reproducibility.",
+      "parentUuid": "cb954b1f_d3d554b5",
+      "revId": "e7980d0dd57ec85e866e9b9889b45dafef2aed94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9b6fb67_331e5571",
@@ -96,6 +114,24 @@
       "writtenOn": "2024-05-23T10:52:55Z",
       "side": 1,
       "message": "this also applies to android-mainline, right?",
+      "revId": "e7980d0dd57ec85e866e9b9889b45dafef2aed94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd9edf2f_b52688a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-05-23T12:38:48Z",
+      "side": 1,
+      "message": "No.\n\nMainline has the script as a Makefile because it was being executed many times during the build.\n\nI\u0027ll produce a separate change for that.",
+      "parentUuid": "d211baa9_a8275b98",
       "revId": "e7980d0dd57ec85e866e9b9889b45dafef2aed94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
