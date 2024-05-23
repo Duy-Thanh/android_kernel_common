@@ -1158,17 +1158,44 @@ static __always_inline unsigned int __folio_add_rmap(struct folio *folio,
 		int *nr_pmdmapped)
 {
 	atomic_t *mapped = &folio->_nr_pages_mapped;
+<<<<<<< HEAD   (952ba0 ANDROID: block: export tracepoints)
 	const int orig_nr_pages = nr_pages;
 	int first = 0, nr = 0;
 
+||||||| BASE
+	int first, nr = 0;
+
+=======
+	int first, nr = 0;
+	bool success = false;
+>>>>>>> CHANGE (d9c8bb ANDROID: vendor_hooks: account page-mapcount)
 	__folio_rmap_sanity_checks(folio, page, nr_pages, level);
 
 	switch (level) {
 	case RMAP_LEVEL_PTE:
+<<<<<<< HEAD   (952ba0 ANDROID: block: export tracepoints)
 		if (!folio_test_large(folio)) {
 			nr = atomic_inc_and_test(&folio->_mapcount);
 			break;
 		}
+||||||| BASE
+		do {
+			first = atomic_inc_and_test(&page->_mapcount);
+			if (first && folio_test_large(folio)) {
+				first = atomic_inc_return_relaxed(mapped);
+				first = (first < ENTIRELY_MAPPED);
+			}
+=======
+		do {
+			trace_android_vh_update_page_mapcount(page, true,
+				false, &first, &success);
+			if (!success)
+				first = atomic_inc_and_test(&page->_mapcount);
+			if (first && folio_test_large(folio)) {
+				first = atomic_inc_return_relaxed(mapped);
+				first = (first < ENTIRELY_MAPPED);
+			}
+>>>>>>> CHANGE (d9c8bb ANDROID: vendor_hooks: account page-mapcount)
 
 		do {
 			first += atomic_inc_and_test(&page->_mapcount);
@@ -1529,17 +1556,45 @@ static __always_inline void __folio_remove_rmap(struct folio *folio,
 		enum rmap_level level)
 {
 	atomic_t *mapped = &folio->_nr_pages_mapped;
+<<<<<<< HEAD   (952ba0 ANDROID: block: export tracepoints)
 	int last = 0, nr = 0, nr_pmdmapped = 0;
 	bool partially_mapped = false;
+||||||| BASE
+	int last, nr = 0, nr_pmdmapped = 0;
+	enum node_stat_item idx;
+=======
+	int last, nr = 0, nr_pmdmapped = 0;
+	enum node_stat_item idx;
+	bool success = false;
+>>>>>>> CHANGE (d9c8bb ANDROID: vendor_hooks: account page-mapcount)
 
 	__folio_rmap_sanity_checks(folio, page, nr_pages, level);
 
 	switch (level) {
 	case RMAP_LEVEL_PTE:
+<<<<<<< HEAD   (952ba0 ANDROID: block: export tracepoints)
 		if (!folio_test_large(folio)) {
 			nr = atomic_add_negative(-1, &folio->_mapcount);
 			break;
 		}
+||||||| BASE
+		do {
+			last = atomic_add_negative(-1, &page->_mapcount);
+			if (last && folio_test_large(folio)) {
+				last = atomic_dec_return_relaxed(mapped);
+				last = (last < ENTIRELY_MAPPED);
+			}
+=======
+		do {
+			trace_android_vh_update_page_mapcount(page, false,
+				false, &last, &success);
+			if (!success)
+				last = atomic_add_negative(-1, &page->_mapcount);
+			if (last && folio_test_large(folio)) {
+				last = atomic_dec_return_relaxed(mapped);
+				last = (last < ENTIRELY_MAPPED);
+			}
+>>>>>>> CHANGE (d9c8bb ANDROID: vendor_hooks: account page-mapcount)
 
 		atomic_sub(nr_pages, &folio->_large_mapcount);
 		do {

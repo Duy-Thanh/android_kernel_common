@@ -14,6 +14,9 @@
 #include <linux/pagemap.h>
 #include <linux/memremap.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mm.h>
+
 /*
  * The anon_vma heads a list of private "related" vmas, to scan if
  * an anonymous page pointing to this anon_vma needs to be unmapped:
@@ -325,7 +328,7 @@ static __always_inline void __folio_dup_file_rmap(struct folio *folio,
 		struct page *page, int nr_pages, enum rmap_level level)
 {
 	const int orig_nr_pages = nr_pages;
-
+	bool success = false;
 	__folio_rmap_sanity_checks(folio, page, nr_pages, level);
 
 	switch (level) {
@@ -336,7 +339,9 @@ static __always_inline void __folio_dup_file_rmap(struct folio *folio,
 		}
 
 		do {
-			atomic_inc(&page->_mapcount);
+			trace_android_vh_update_page_mapcount(page, true, false, NULL, &success);
+			if (!success)
+				atomic_inc(&page->_mapcount);
 		} while (page++, --nr_pages > 0);
 		atomic_add(orig_nr_pages, &folio->_large_mapcount);
 		break;
@@ -395,6 +400,7 @@ static __always_inline int __folio_try_dup_anon_rmap(struct folio *folio,
 	const int orig_nr_pages = nr_pages;
 	bool maybe_pinned;
 	int i;
+	bool success = false;
 
 	VM_WARN_ON_FOLIO(!folio_test_anon(folio), folio);
 	__folio_rmap_sanity_checks(folio, page, nr_pages, level);
@@ -432,7 +438,9 @@ static __always_inline int __folio_try_dup_anon_rmap(struct folio *folio,
 		do {
 			if (PageAnonExclusive(page))
 				ClearPageAnonExclusive(page);
-			atomic_inc(&page->_mapcount);
+			trace_android_vh_update_page_mapcount(page, true, false, NULL, &success);
+			if (!success)
+				atomic_inc(&page->_mapcount);
 		} while (page++, --nr_pages > 0);
 		atomic_add(orig_nr_pages, &folio->_large_mapcount);
 		break;
