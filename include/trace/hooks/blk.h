@@ -27,6 +27,12 @@ DECLARE_HOOK(android_vh_do_new_mount_fc,
 	TP_PROTO(struct path *mountpoint, struct vfsmount *mnt),
 	TP_ARGS(mountpoint, mnt));
 
+struct readahead_control;
+
+DECLARE_HOOK(android_vh_f2fs_read_single_page,
+	TP_PROTO(unsigned *op_flag, struct readahead_control *rac),
+	TP_ARGS(op_flag, rac));
+
 #endif /* _TRACE_HOOK_BLK_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
