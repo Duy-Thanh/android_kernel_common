@@ -28,6 +28,7 @@
 #include "segment.h"
 #include "iostat.h"
 #include <trace/events/f2fs.h>
+#include <trace/hooks/blk.h>
 
 #define NUM_PREALLOC_POST_READ_CTXS	128
 
@@ -2077,7 +2078,7 @@ static int f2fs_read_single_page(struct inode *inode, struct folio *folio,
 					struct f2fs_map_blocks *map,
 					struct bio **bio_ret,
 					sector_t *last_block_in_bio,
-					bool is_readahead)
+					struct readahead_control *rac)
 {
 	struct bio *bio = *bio_ret;
 	const unsigned blocksize = blks_to_bytes(inode, 1);
@@ -2086,6 +2087,7 @@ static int f2fs_read_single_page(struct inode *inode, struct folio *folio,
 	sector_t last_block_in_file;
 	sector_t block_nr;
 	pgoff_t index = folio_index(folio);
+	bool is_readahead = rac ? 1 : 0;
 	int ret = 0;
 
 	block_in_file = (sector_t)index;
@@ -2166,6 +2168,7 @@ submit_and_realloc:
 			bio = NULL;
 			goto out;
 		}
+		trace_android_vh_f2fs_read_single_page(&bio->bi_opf, rac);
 	}
 
 	/*
