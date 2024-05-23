@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb954b1f_d3d554b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-05-23T12:06:28Z",
+      "side": 1,
+      "message": "I\u0027ve only tested on GKI. The cumulative impact on an allmodconfig kernel might be more significant.\n\nI admit am I puzzled about the effort that\u0027s gone into the parallelisation feature.\n\nI thought something like LTO might be inhibiting it internally so we don\u0027t see a speed up. But results are non-deterministic for 14, 15 and mainline. And timings for vmlinux barely vary (up to -j9).\n\nI can drop the \"ANDROID: \" and send",
+      "parentUuid": "bdddb267_3ceb5292",
+      "revId": "e7980d0dd57ec85e866e9b9889b45dafef2aed94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e9b6fb67_331e5571",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2024-05-23T10:52:55Z",
       "side": 1,
       "message": "If that is the case, should there not be a `-j` be added to a later version again?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 66
+      },
+      "revId": "e7980d0dd57ec85e866e9b9889b45dafef2aed94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d63f54d6_0c8458f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-05-23T12:06:28Z",
+      "side": 1,
+      "message": "We don\u0027t have that version number yet. I\u0027d also wait to see if someone adds the relevant reproducibility flags (which are non-trivial --btf_feature things) first.",
+      "parentUuid": "e9b6fb67_331e5571",
       "range": {
         "startLine": 18,
         "startChar": 0,
