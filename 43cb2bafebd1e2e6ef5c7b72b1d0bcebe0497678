@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ad01c76_2c308951",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-05-23T09:16:55Z",
+      "side": 1,
+      "message": "Hi, Google\n\nThe symbols in android_gki_aarch64_oplus is currently out of order. Could this commit be merged to reorder them?",
+      "revId": "43cb2bafebd1e2e6ef5c7b72b1d0bcebe0497678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
