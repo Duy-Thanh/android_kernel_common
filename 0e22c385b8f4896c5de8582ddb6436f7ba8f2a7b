@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "899b5cb6_2962ac6a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae925b28_bd4bb5a7",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 35
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8fcb2bf_6b659c51",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-05-20T20:52:18Z",
       "side": 1,
       "message": "How often would this really be used? It won\u0027t be enabled by default so it may to be worth adding.",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 33
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4af2bad1_b335b6d3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "a8fcb2bf_6b659c51",
       "range": {
         "startLine": 137,
         "startChar": 1,
@@ -130,6 +178,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c2e91f8e_b2d74ce2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4465,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9be9c5b_e50a7816",
+      "range": {
+        "startLine": 4465,
+        "startChar": 2,
+        "endLine": 4465,
+        "endChar": 36
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "73539b19_b584598b",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
@@ -141,6 +213,30 @@
       "writtenOn": "2024-05-20T20:52:18Z",
       "side": 1,
       "message": "nit: I would prefer a \"reversed christmas tree\" order here but not necessary.",
+      "range": {
+        "startLine": 4466,
+        "startChar": 3,
+        "endLine": 4469,
+        "endChar": 43
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ba51b0_be60707e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4469,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "73539b19_b584598b",
       "range": {
         "startLine": 4466,
         "startChar": 3,
@@ -174,6 +270,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d9313fd_8c4b29a0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4476,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeb1c9d8_95394131",
+      "range": {
+        "startLine": 4471,
+        "startChar": 3,
+        "endLine": 4476,
+        "endChar": 35
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2f704e2_dd609740",
@@ -197,6 +317,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac39fba4_6bfdd7ae",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4477,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2f704e2_dd609740",
+      "range": {
+        "startLine": 4477,
+        "startChar": 7,
+        "endLine": 4477,
+        "endChar": 44
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7aad53b7_cac22404",
@@ -210,6 +354,30 @@
       "writtenOn": "2024-05-20T20:52:18Z",
       "side": 1,
       "message": "In the kernel `if (!freeze)` is preferred. I believe this is suggested by checkpatch. BTW, it would be a good idea to run the script on this. Something like `./scripts/checkpatch.pl -strict -g HEAD`.",
+      "range": {
+        "startLine": 4483,
+        "startChar": 8,
+        "endLine": 4483,
+        "endChar": 22
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6026d9d_1322d761",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4483,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Done.\n\nRan the script and fixed the errors. There are a few warnings remaining about line too long. Those are long string literals and I got a different warning if I break them into multiple lines.",
+      "parentUuid": "7aad53b7_cac22404",
       "range": {
         "startLine": 4483,
         "startChar": 8,
@@ -266,6 +434,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd78f92_92ce39e8",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Ok. Removed.",
+      "parentUuid": "3faf6b1a_5da80f5d",
+      "range": {
+        "startLine": 288,
+        "startChar": 1,
+        "endLine": 292,
+        "endChar": 4
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79ec3f65_e467ea67",
@@ -279,6 +471,30 @@
       "writtenOn": "2024-05-20T20:52:18Z",
       "side": 1,
       "message": "can we pick more concise names? maybe `sent` and `resend`?",
+      "range": {
+        "startLine": 295,
+        "startChar": 1,
+        "endLine": 296,
+        "endChar": 37
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a181549_365cdc59",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79ec3f65_e467ea67",
       "range": {
         "startLine": 295,
         "startChar": 1,
@@ -312,6 +528,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff604a40_5b505fab",
+        "filename": "drivers/android/binderfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1ec04e7_9d7e114a",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c74e528e_f5312d83",
@@ -325,6 +565,30 @@
       "writtenOn": "2024-05-20T20:52:18Z",
       "side": 1,
       "message": "Would it make more sense to package the two notification in a single ioctl with a struct payload? Similar to how BINDER_FREEZE has a `info-\u003eenable` flag. I\u0027m just thinking out loud about alternatives here, this might complicate the API.",
+      "range": {
+        "startLine": 519,
+        "startChar": 1,
+        "endLine": 519,
+        "endChar": 17
+      },
+      "revId": "0e22c385b8f4896c5de8582ddb6436f7ba8f2a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80b2a1ab_b1d09791",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-05-23T18:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c74e528e_f5312d83",
       "range": {
         "startLine": 519,
         "startChar": 1,
