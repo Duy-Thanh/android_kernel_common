@@ -16,6 +16,24 @@
       "message": "No upstream commit cited. see https://android-review.git.corp.google.com/c/kernel/common/+/3093455/1?tab\u003dchecks",
       "revId": "3c2fffa5a786b6300214395d6e38b4b83442812e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7daacca_3e36bf78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-23T19:54:26Z",
+      "side": 1,
+      "message": "You didn\u0027t resolve this. Please look at the above link for how to cite the upstream commit. This will resolve the Lint warning.",
+      "parentUuid": "d842790a_920310d5",
+      "revId": "3c2fffa5a786b6300214395d6e38b4b83442812e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
