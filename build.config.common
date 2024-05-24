@@ -8,7 +8,8 @@ CLANG_PREBUILT_BIN=prebuilts/clang/host/linux-x86/clang-${CLANG_VERSION}/bin
 BUILDTOOLS_PREBUILT_BIN=build/kernel/build-tools/path/linux-x86
 DTC=${ROOT_DIR}/${BUILDTOOLS_PREBUILT_BIN}/dtc
 
-KCFLAGS="${KCFLAGS} -D__ANDROID_COMMON_KERNEL__"
+AUTOFDO_KCFLAGS="-fdebug-info-for-profiling -mllvm -enable-fs-discriminator=true"
+KCFLAGS="${KCFLAGS} ${AUTOFDO_KCFLAGS} -D__ANDROID_COMMON_KERNEL__"
 EXTRA_CMDS=''
 STOP_SHIP_TRACEPRINTK=1
 IN_KERNEL_MODULES=1
