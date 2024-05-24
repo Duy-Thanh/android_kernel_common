@@ -51,6 +51,24 @@
       "parentUuid": "9f9c8ea1_1f5f7e9e",
       "revId": "967e2cc542c07e0afb1f678bae9db595e120341b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a7e4b13_8065ed01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-05-24T13:40:10Z",
+      "side": 1,
+      "message": "Android is one of the most common users of Linux, so that is very generic, please submit it upstream to get proper review at the very least.\n\nAlso, we can not continue to take hooks for forever without any forward progress on geting the change merged properly upstream for obvious reasons.",
+      "parentUuid": "8da8a9df_d4fad4a9",
+      "revId": "967e2cc542c07e0afb1f678bae9db595e120341b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
