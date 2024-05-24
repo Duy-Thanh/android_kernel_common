@@ -16,6 +16,24 @@
       "message": "Where is the userspace change that requires this?",
       "revId": "05cd0af1beccf96e0614ebb4850c48ffa34affaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858da2f2_4e504094",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2002535
+      },
+      "writtenOn": "2024-05-24T07:49:38Z",
+      "side": 1,
+      "message": "this doesn\u0027t require any userspace change, this patch disables uvc interrupt ep,\n\"This endpoint is optional, but may be mandatory under certain\nconditions\"\n\nThe conditions enumerated are whether...\n\n1. The device supports hardware triggers\n2. The device implements any AutoUpdate controls\n3. The device implements any Asynchronous controls\n\nAs all of those things are implementation dependent, this endpoint\nmight be unnecessary for some users. Further to that it is unusable\nin the current implementation as there is no mechanism within the\nUVC gadget driver that allows data to be sent over that endpoint.\nDisable the interrupt endpoint by default, but check whether the\nuser has asked for it to be enabled in configfs and continue to\ngenerate it if so.",
+      "parentUuid": "f49f5338_234e2329",
+      "revId": "05cd0af1beccf96e0614ebb4850c48ffa34affaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
