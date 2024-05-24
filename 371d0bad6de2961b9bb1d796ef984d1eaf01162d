@@ -16,6 +16,24 @@
       "message": "These are oem hooks\nsamsung team is using it.\n\nThankyou",
       "revId": "371d0bad6de2961b9bb1d796ef984d1eaf01162d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c275be_286da00d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-05-24T07:56:40Z",
+      "side": 1,
+      "message": "That\u0027s pretty impossible given that the symbol is not exported for your use.  Please feel free to resubmit when actually used.",
+      "parentUuid": "d4a4f5dc_279a20c8",
+      "revId": "371d0bad6de2961b9bb1d796ef984d1eaf01162d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
