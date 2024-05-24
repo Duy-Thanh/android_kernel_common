@@ -577,11 +577,23 @@ int fuse_lookup_name(struct super_block *sb, u64 nodeid, const struct qstr *name
 	fuse_lookup_init(fm->fc, &args, nodeid, name, outarg, &bpf_arg.out);
 	err = fuse_simple_request(fm, &args);
 
+<<<<<<< HEAD   (4fc389 Merge c2f8af101ce2 ("mtd: rawnand: meson: fix scrambling mod)
 #ifdef CONFIG_FUSE_BPF
 	if (err == sizeof(bpf_arg.out)) {
 		/* TODO Make sure this handles invalid handles */
 		struct file *backing_file;
 		struct inode *backing_inode;
+=======
+	err = -EIO;
+	if (!outarg->nodeid)
+		goto out_put_forget;
+	if (fuse_invalid_attr(&outarg->attr))
+		goto out_put_forget;
+	if (outarg->nodeid == FUSE_ROOT_ID && outarg->generation != 0) {
+		pr_warn_once("root generation should be zero\n");
+		outarg->generation = 0;
+	}
+>>>>>>> BRANCH (d2a970 btrfs: fix off-by-one chunk length calculation at contains_p)
 
 		err = -ENOENT;
 		if (!entry)
