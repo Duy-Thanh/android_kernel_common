@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "2705db581b1af61af4ebe8bf108c645efa59e61c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079037580",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3102219?revision\u003d1",
+      "key": {
+        "uuid": "a703fb80_b719b634",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-24T02:39:32Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/6bb955fce08cbc8495a72755130d2d220994faee) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d6bb955fce08cbc8495a72755130d2d220994faee).\n\n```\n      ## tools/testing/selftests/kselftest_harness.h ##\n    -@@ tools/testing/selftests/kselftest_harness.h: static_assert(0, \"kselftest harness requires _GNU_SOURCE to be defined\");\n    +@@\n      #include \u003casm/types.h\u003e\n      #include \u003cctype.h\u003e\n      #include \u003cerrno.h\u003e\n    @@ tools/testing/selftests/kselftest_harness.h: void __run_test(struct __fixture_me\n      \n      \t/* reset test struct */\n     @@ tools/testing/selftests/kselftest_harness.h: void __run_test(struct __fixture_metadata *f,\n    - \tmemset(t-\u003eenv, 0, sizeof(t-\u003eenv));\n    + \tt-\u003etrigger \u003d 0;\n      \tmemset(t-\u003eresults-\u003ereason, 0, sizeof(t-\u003eresults-\u003ereason));\n      \n     -\tif (asprintf(\u0026test_name, \"%s%s%s.%s\", f-\u003ename,\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "2705db581b1af61af4ebe8bf108c645efa59e61c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
