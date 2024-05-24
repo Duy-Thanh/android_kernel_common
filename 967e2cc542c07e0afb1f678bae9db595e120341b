@@ -33,6 +33,24 @@
       "message": "This is not a KMI issue, removing that hashtag from the series.",
       "revId": "967e2cc542c07e0afb1f678bae9db595e120341b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8da8a9df_d4fad4a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024815
+      },
+      "writtenOn": "2024-05-24T09:52:13Z",
+      "side": 1,
+      "message": "This feature does not apply to generic scenarios. So is hard to upstream. But for our product produce a significant performance gain. So we need these hooks.",
+      "parentUuid": "9f9c8ea1_1f5f7e9e",
+      "revId": "967e2cc542c07e0afb1f678bae9db595e120341b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
