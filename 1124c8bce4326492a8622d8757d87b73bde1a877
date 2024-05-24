@@ -68,6 +68,24 @@
       "parentUuid": "30f0f1d9_71bea157",
       "revId": "1124c8bce4326492a8622d8757d87b73bde1a877",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "690d4bfd_2f0208de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2002535
+      },
+      "writtenOn": "2024-05-24T16:04:37Z",
+      "side": 1,
+      "message": "Do you want this to be handled in 3093455: BACKPORT: usb: gadget: uvc: Rename uvc_control_ep | https://android-review.googlesource.com/c/kernel/common/+/3093455\ni can update and push again.",
+      "parentUuid": "6af92b08_60ac42b2",
+      "revId": "1124c8bce4326492a8622d8757d87b73bde1a877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
