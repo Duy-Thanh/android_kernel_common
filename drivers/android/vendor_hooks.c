@@ -460,6 +460,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_page_migrating);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_urb_suitable_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_init_queue);
+
 /*
  * For type visibility
  */
