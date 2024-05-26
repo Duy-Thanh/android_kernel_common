@@ -460,6 +460,44 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_page_migrating);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_urb_suitable_bypass);
+<<<<<<< HEAD   (fe1617 UPSTREAM: bpf: Reject variable offset alu on PTR_TO_FLOW_KEY)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_entry);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_oem_binder_struct);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_buffer_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_set_flag);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_clear_flag);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_tsk_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_tsk_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_add_tsk);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_blkio_ticks);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_is_task_waiting_on_io);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_freepages_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_thrashing_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_downgrade_wake_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tmpfile_handle_op);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tmpfile_create);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_secctx);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_create_check_inode);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_send_open);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_spf);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_init_queue);
+>>>>>>> CHANGE (122377 ANDROID: vendor_hooks: add vendor hooks for init mmc queue)
 /*
  * For type visibility
  */
