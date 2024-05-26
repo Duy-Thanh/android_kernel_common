@@ -69,6 +69,24 @@
       "parentUuid": "00f4bada_3dde19a9",
       "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2a818f3_291b5723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1728636
+      },
+      "writtenOn": "2024-05-26T23:30:00Z",
+      "side": 1,
+      "message": "I apologize, but I am slightly confused.\nThe symbol for my vendorhook has already been registered.\nAdditionally, I am able to find consume_skb() symbol within the abi_gki_aarch64.stg file.\nConsequently, is it correct that the only action I should to do is just adding consume_skb to our abi_gki_aarch64_galaxy file?\nAm I accurate in this understanding?",
+      "parentUuid": "091f0086_b2b7370a",
+      "revId": "de56b7728af655719bfbfad5c0cb053efe5cc23f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
