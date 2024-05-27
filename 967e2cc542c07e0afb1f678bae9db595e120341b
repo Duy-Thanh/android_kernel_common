@@ -69,6 +69,24 @@
       "parentUuid": "8da8a9df_d4fad4a9",
       "revId": "967e2cc542c07e0afb1f678bae9db595e120341b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "755e1dbd_14495368",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024815
+      },
+      "writtenOn": "2024-05-27T01:52:51Z",
+      "side": 1,
+      "message": "OK, we will try to upsteram on the future kernel version. \nBut on the android-6.6, please help to review to merge with the hooks method.",
+      "parentUuid": "2a7e4b13_8065ed01",
+      "revId": "967e2cc542c07e0afb1f678bae9db595e120341b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
