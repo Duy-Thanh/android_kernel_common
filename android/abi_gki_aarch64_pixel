@@ -863,6 +863,12 @@
   enable_irq
   enable_percpu_irq
   errno_to_blk_status
+  esp6_input_done2
+  esp6_output_head
+  esp6_output_tail
+  esp_input_done2
+  esp_output_head
+  esp_output_tail
   ether_setup
   eth_mac_addr
   ethtool_op_get_link
@@ -1104,7 +1110,13 @@
   in_aton
   inc_zone_page_state
   in_egroup_p
+  inet6_add_offload
+  inet6_del_offload
+  inet6_offloads
+  inet_add_offload
   inet_csk_get_port
+  inet_del_offload
+  inet_offloads
   init_dummy_netdev
   init_iova_domain
   init_net
@@ -1185,6 +1197,7 @@
   ip_compute_csum
   ip_send_check
   __ipv6_addr_type
+  ipv6_skip_exthdr
   __irq_alloc_descs
   __irq_apply_affinity_hint
   irq_create_mapping_affinity
@@ -1979,6 +1992,7 @@
   scsi_set_sense_information
   scsi_unblock_requests
   sdev_prefix_printk
+  secpath_set
   send_sig_info
   seq_hex_dump
   seq_lseek
@@ -2051,6 +2065,9 @@
   skb_dequeue
   skb_dequeue_tail
   skb_ensure_writable
+  skb_eth_gso_segment
+  skb_ext_add
+  __skb_ext_del
   skb_free_datagram
   __skb_get_hash
   __skb_gso_segment
@@ -2841,9 +2858,14 @@
   xas_pause
   __xa_store
   xa_store
+  xfrm_input
+  xfrm_parse_spi
+  xfrm_register_type_offload
   __xfrm_state_destroy
+  xfrm_state_lookup
   xfrm_state_lookup_byspi
   xfrm_stateonly_find
+  xfrm_unregister_type_offload
   xhci_address_device
   xhci_bus_resume
   xhci_bus_suspend
