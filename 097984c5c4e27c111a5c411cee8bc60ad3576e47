@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65aec701_7a58b569",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-28T22:51:48Z",
+      "side": 1,
+      "message": "To name a specific example see change 3102850. I\u0027m cherry-picking a change and a fix for that change. I don\u0027t know how the SHAs will resolve after submitting.",
+      "parentUuid": "9c75bde4_b979de76",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 61
+      },
+      "revId": "097984c5c4e27c111a5c411cee8bc60ad3576e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d4d906a_13cc3db0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
