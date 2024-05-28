@@ -63,6 +63,7 @@
 #include <trace/hooks/power.h>
 #include <trace/hooks/gzvm.h>
 #include <trace/hooks/signal.h>
+#include <trace/hooks/kprobes.h>
 #include <trace/hooks/logbuf.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/usb.h>
@@ -92,6 +93,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_rtt_estimator);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_enqueue_schedule_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_build_skb_around);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_refrigerator);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_get_insn_slot);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
