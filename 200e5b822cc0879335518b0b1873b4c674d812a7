@@ -22,6 +22,30 @@
       },
       "revId": "200e5b822cc0879335518b0b1873b4c674d812a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8034b312_c4fcfc2c",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2024-05-28T16:35:50Z",
+      "side": 1,
+      "message": "My understanding is that while it was once true that get_free_pages was faster, it\u0027s not any more so this is simply more flexible and consistent.",
+      "parentUuid": "a1e77d8a_904dfa8e",
+      "range": {
+        "startLine": 306,
+        "startChar": 18,
+        "endLine": 306,
+        "endChar": 25
+      },
+      "revId": "200e5b822cc0879335518b0b1873b4c674d812a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
