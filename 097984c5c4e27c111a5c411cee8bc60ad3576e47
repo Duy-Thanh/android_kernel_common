@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e305184e_16055272",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-28T22:41:32Z",
+      "side": 1,
+      "message": "By this logic, commits going to upstream stable would fail checkpatch no? e.g. if they do a partial clone of stable/linux-5.15.y then every single `Fixes: \u003csha1\u003e` would be missing as these come from master.",
+      "parentUuid": "f512b0ba_1530c75e",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 61
+      },
+      "revId": "097984c5c4e27c111a5c411cee8bc60ad3576e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d4d906a_13cc3db0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -61,6 +85,30 @@
       "writtenOn": "2024-05-28T22:27:03Z",
       "side": 1,
       "message": "what does \"repo is a partial clone\" mean?",
+      "range": {
+        "startLine": 19,
+        "startChar": 35,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "097984c5c4e27c111a5c411cee8bc60ad3576e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c585e6_b00ba556",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-28T22:41:32Z",
+      "side": 1,
+      "message": "meaning just a specific commit/branch was cloned and not the whole repo with every branch.",
+      "parentUuid": "8d4d906a_13cc3db0",
       "range": {
         "startLine": 19,
         "startChar": 35,
