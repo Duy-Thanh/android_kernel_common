@@ -52,6 +52,24 @@
       "parentUuid": "e6d445f9_1d5e5e7a",
       "revId": "0f406a06a5f5449811a345b198210f6e81144696",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7772c94_2de10dc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951051
+      },
+      "writtenOn": "2024-05-28T21:23:35Z",
+      "side": 1,
+      "message": "Hi Matthias below is confirmation from maintainer saying that patch is applied and will be available soon in linux-next branch. Let me know if you need more information to get this patch merged as this fix is needed at earlier for qcom release schedule.\n\n\u003e\u003e\u003e    - Link to v1: https://lore.kernel.org/all/20240517070157.19553-1-quic_jkona@quicinc.com/\n\u003e\u003e\u003e ---\n\u003e\u003e\u003e   drivers/cpufreq/scmi-cpufreq.c | 4 ++--\n\u003e\u003e\u003e   1 file changed, 2 insertions(+), 2 deletions(-)\n\u003e\u003e\n\u003e\u003e Applied. Thanks.\n\u003e\u003e\n\u003e\n\u003e Thanks Viresh for the offline update on applying this patch to cpufreq arm\n\u003e tree. Please help share the git tree details of the same, since we need them\n\u003e to pick this change in Google ACK and downstream tree.\n\ngit://git.kernel.org/pub/scm/linux/kernel/git/vireshk/pm.git cpufreq/arm/linux-next\n\nI have pushed it out now, it will be there in linux-next soon. My\nbranch is not fixed, I may end up rebasing it. Ideally, you shouldn\u0027t\nbackport anything to android unless it end ups in Linus\u0027s tree, only\nthen the sha id will be fixed and guaranteed not to change.",
+      "parentUuid": "8a3009c5_a5dddd63",
+      "revId": "0f406a06a5f5449811a345b198210f6e81144696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
