@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1605c1b_680dd3f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2024815
+      },
+      "writtenOn": "2024-05-28T02:45:20Z",
+      "side": 1,
+      "message": "We need it to traversal all lruvec to get the page mapcount info.",
+      "parentUuid": "9e080606_c5446906",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 59
+      },
+      "revId": "90df3442ef5c4f08f1327cd8d2d2096b29ebb38e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72394aca_9f42cb61",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-05-24T07:12:03Z",
       "side": 1,
       "message": "Why is this not upstream?",
+      "revId": "90df3442ef5c4f08f1327cd8d2d2096b29ebb38e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "845ea114_011873fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024815
+      },
+      "writtenOn": "2024-05-28T02:45:20Z",
+      "side": 1,
+      "message": "This feature does not apply to generic scenarios. So is hard to upstream. \nBut for our product produce a significant performance gain. So we need these hooks.\nWe will make it more generic and try to upstream in future kernel version. \nBut it is hard to do in a short time. So on the android15-6.6, please help to review to merge with the hooks method.",
+      "parentUuid": "72394aca_9f42cb61",
       "revId": "90df3442ef5c4f08f1327cd8d2d2096b29ebb38e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
