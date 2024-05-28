@@ -33,6 +33,23 @@
       "message": "create a patch on top of this one to add the symbol to your symbol list",
       "revId": "4fd4ee6570ee5af3ace15d1ea0e46e375531b9c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d1c0119_7c7ef40c",
+        "filename": "kernel/kprobes.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-28T19:53:56Z",
+      "side": 1,
+      "message": "why is PAGE_SIZE needed? It is a constant the handler can see directly.",
+      "revId": "4fd4ee6570ee5af3ace15d1ea0e46e375531b9c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
