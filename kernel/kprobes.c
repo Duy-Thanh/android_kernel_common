@@ -44,6 +44,8 @@
 #include <asm/cacheflush.h>
 #include <asm/errno.h>
 #include <linux/uaccess.h>
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/kprobes.h>
 
 #define KPROBE_HASH_BITS 6
 #define KPROBE_TABLE_SIZE (1 << KPROBE_HASH_BITS)
@@ -184,6 +186,7 @@ kprobe_opcode_t *__get_insn_slot(struct kprobe_insn_cache *c)
 		kfree(kip);
 		goto out;
 	}
+	trace_android_rvh_get_insn_slot(kip->insns);
 	INIT_LIST_HEAD(&kip->list);
 	memset(kip->slot_used, SLOT_CLEAN, slots_per_page(c));
 	kip->slot_used[0] = SLOT_USED;
