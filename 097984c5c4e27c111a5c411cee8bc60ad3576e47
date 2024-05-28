@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f512b0ba_1530c75e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-28T22:30:33Z",
+      "side": 1,
+      "message": "To be clear: A person reading _this_ commit message is not guaranteed to have `aaef73821a3b` available even with full history of _this_ commit. And that is why this check fails.",
+      "parentUuid": "353c08ca_2aae9276",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 61
+      },
+      "revId": "097984c5c4e27c111a5c411cee8bc60ad3576e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d4d906a_13cc3db0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
