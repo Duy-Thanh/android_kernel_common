@@ -34,6 +34,23 @@
       "parentUuid": "bf1b8e46_d3f5d329",
       "revId": "6010c3df476f1dc4f27ffababbe53ea6d2a48e15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f14273b_03f41cd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-28T18:53:41Z",
+      "side": 1,
+      "message": "This has now landed in v5.15.160, thanks Yenchia. The stable commit is `7cff4103be7c (\"netlink: annotate lockless accesses to nlk-\u003emax_recvmsg_len\")`. Do you want to update this patch as `UPSTREAM:` to reflect the new cherry-pick?",
+      "revId": "6010c3df476f1dc4f27ffababbe53ea6d2a48e15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
