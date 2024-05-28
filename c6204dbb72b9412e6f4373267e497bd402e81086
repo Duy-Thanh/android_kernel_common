@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde1bbbc_a339af5b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-28T17:02:15Z",
+      "side": 1,
+      "message": "Please provide much more detail. What feature does this enable? Why can\u0027t this be sent upstream?",
+      "revId": "c6204dbb72b9412e6f4373267e497bd402e81086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ed9701_39575c04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-28T17:02:15Z",
+      "side": 1,
+      "message": "create a patch on top of this one to add the symbols to your symbol list.",
+      "revId": "c6204dbb72b9412e6f4373267e497bd402e81086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9740b0ea_7d115df0",
+        "filename": "kernel/module/strict_rwx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-28T17:02:15Z",
+      "side": 1,
+      "message": "why do you need two hooks here? Please drop one of them.",
+      "revId": "c6204dbb72b9412e6f4373267e497bd402e81086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
