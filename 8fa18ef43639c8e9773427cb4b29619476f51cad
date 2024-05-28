@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81763ff1_45d1466b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-05-28T07:36:24Z",
+      "side": 1,
+      "message": "Need to wait for v6.10-rc1 or relevant topic branches from the merge window to land in android-mainline.",
+      "revId": "8fa18ef43639c8e9773427cb4b29619476f51cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
