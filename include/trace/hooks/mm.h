@@ -401,6 +401,22 @@ DECLARE_HOOK(android_vh_mm_free,
 DECLARE_HOOK(android_vh_mm_init,
 	TP_PROTO(struct mm_struct *mm),
 	TP_ARGS(mm));
+
+DECLARE_HOOK(android_vh_lock_folio_drop_mmap_start,
+	TP_PROTO(struct task_struct **tsk, struct vm_fault *vmf,
+		struct page *page, struct file *file),
+	TP_ARGS(tsk, vmf, page, file));
+
+DECLARE_HOOK(android_vh_lock_folio_drop_mmap_end,
+	TP_PROTO(bool success, struct task_struct **tsk, struct vm_fault *vmf,
+		struct page *page, struct file *file),
+	TP_ARGS(success, tsk, vmf, page, file));
+
+DECLARE_HOOK(android_vh_filemap_update_page,
+	TP_PROTO(struct address_space *mapping, struct page *page,
+		struct file *file),
+	TP_ARGS(mapping, page, file));
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
