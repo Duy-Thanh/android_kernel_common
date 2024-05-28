@@ -16,6 +16,29 @@
       "message": "Can wait for v6.9 to land in android-mainline. It works nevertheless.\n\nReference: v6.10-rc1 commit dc0fdfc855be (\"dm-vdo: use bdev_nr_bytes(bdev) instead of i_size_read(bdev-\u003ebd_inode)\").",
       "revId": "246985af3c11b87460a07eae37e1da219166ca14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5733c5f9_906de927",
+        "filename": "drivers/md/dm-default-key.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-05-28T18:28:00Z",
+      "side": 1,
+      "message": "We should use `bdev_nr_sectors(dev-\u003ebdev)` instead of `bdev_nr_bytes(dev-\u003ebdev) \u003e\u003e SECTOR_SHIFT`, matching `linear_prepare_ioctl()` in `drivers/md/dm-linear.c`.",
+      "range": {
+        "startLine": 363,
+        "startChar": 16,
+        "endLine": 363,
+        "endChar": 56
+      },
+      "revId": "246985af3c11b87460a07eae37e1da219166ca14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
