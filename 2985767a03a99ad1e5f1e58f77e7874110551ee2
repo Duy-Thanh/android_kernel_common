@@ -16,6 +16,24 @@
       "message": "Presubmit-Verified failed, please help to investigate the cause.Thanks",
       "revId": "2985767a03a99ad1e5f1e58f77e7874110551ee2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3bdcc84_fa1dd23f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2024-05-28T19:28:47Z",
+      "side": 1,
+      "message": "The test are failing due to infra issues. Let me re-run and give it a go few more times instead of overriding the failure.",
+      "parentUuid": "79ddb9c0_aca68090",
+      "revId": "2985767a03a99ad1e5f1e58f77e7874110551ee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
