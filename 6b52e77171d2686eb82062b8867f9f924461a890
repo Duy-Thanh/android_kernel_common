@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab06c1f7_04098043",
+        "filename": "drivers/android/binder/range_alloc/tree.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-05-28T13:53:27Z",
+      "side": 1,
+      "message": "nit: note the base case, something along the lines of \"An empty range is represented by a tree with a single entry with a `state` of `None`.\"",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 27
+      },
+      "revId": "6b52e77171d2686eb82062b8867f9f924461a890",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
