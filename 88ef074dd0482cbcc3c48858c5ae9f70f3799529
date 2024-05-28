@@ -16,6 +16,24 @@
       "message": "Since there are CRC changes. Please remove the STG updates, those will get updated with the next KMI update on 06-05-2024",
       "revId": "88ef074dd0482cbcc3c48858c5ae9f70f3799529",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b17a44d_c24e3103",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-28T18:05:40Z",
+      "side": 1,
+      "message": "This patchset should only have additions from what I can tell. Perhaps the STG is outdated and needs rebase on top of the KMI update. Let me check.",
+      "parentUuid": "f735efce_0830ba97",
+      "revId": "88ef074dd0482cbcc3c48858c5ae9f70f3799529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
