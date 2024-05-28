@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d4d906a_13cc3db0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-05-28T22:27:03Z",
+      "side": 1,
+      "message": "what does \"repo is a partial clone\" mean?",
+      "range": {
+        "startLine": 19,
+        "startChar": 35,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "097984c5c4e27c111a5c411cee8bc60ad3576e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c5f4af78_2c55ed9b",
