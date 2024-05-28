@@ -225,6 +225,16 @@ DECLARE_HOOK(android_vh_show_stack_hash,
 	TP_PROTO(struct seq_file *m, struct vm_struct *v),
 	TP_ARGS(m, v));
 
+DECLARE_HOOK(android_vh_lock_folio_drop,
+	TP_PROTO(int mode, struct task_struct **tsk, struct vm_fault *vmf,
+		struct folio *folio, struct file *file),
+	TP_ARGS(mode, tsk, vmf, folio, file));
+
+DECLARE_HOOK(android_vh_filemap_update_page,
+	TP_PROTO(struct address_space *mapping, struct folio *folio,
+		struct file *file),
+	TP_ARGS(mapping, folio, file));
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
