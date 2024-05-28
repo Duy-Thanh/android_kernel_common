@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "353c08ca_2aae9276",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-28T22:28:23Z",
+      "side": 1,
+      "message": "Last I checked, checkpatch tries to identify commit SHAs as ancestor commits. So if `aaef73821a3b` is not an ancestor of this commit, this check will fail. And indeed, `aaef73821a3b` is not an ancestor of android14-6.1. This check makes more sense for `Fixes: aaef73821a3b(...)`, I guess and is otherwise an instance of checkpatch not working well on linux-mainline.",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 61
+      },
+      "revId": "097984c5c4e27c111a5c411cee8bc60ad3576e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d4d906a_13cc3db0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
