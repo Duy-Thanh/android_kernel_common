@@ -406,6 +406,22 @@ DECLARE_HOOK(android_vh_filemap_add_to_page_cache,
 DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
 	TP_PROTO(struct zone *zone, u64 interval),
 	TP_ARGS(zone, interval));
+
+DECLARE_HOOK(android_vh_lock_folio_drop_mmap_start,
+	TP_PROTO(struct task_struct **tsk, struct vm_fault *vmf,
+		struct page *page, struct file *file),
+	TP_ARGS(tsk, vmf, page, file));
+
+DECLARE_HOOK(android_vh_lock_folio_drop_mmap_end,
+	TP_PROTO(bool success, struct task_struct **tsk, struct vm_fault *vmf,
+		struct page *page, struct file *file),
+	TP_ARGS(success, tsk, vmf, page, file));
+
+DECLARE_HOOK(android_vh_filemap_update_page,
+	TP_PROTO(struct address_space *mapping, struct page *page,
+		struct file *file),
+	TP_ARGS(mapping, page, file));
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
