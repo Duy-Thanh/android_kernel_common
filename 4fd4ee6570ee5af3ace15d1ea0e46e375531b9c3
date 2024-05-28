@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc07a3cc_50c3249f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-28T19:52:55Z",
+      "side": 1,
+      "message": "please provide more description. What feature does this enable? Why is this not submitted upstream?",
+      "revId": "4fd4ee6570ee5af3ace15d1ea0e46e375531b9c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc32897c_a595d561",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-28T19:52:55Z",
+      "side": 1,
+      "message": "create a patch on top of this one to add the symbol to your symbol list",
+      "revId": "4fd4ee6570ee5af3ace15d1ea0e46e375531b9c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
