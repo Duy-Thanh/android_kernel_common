@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a2f964f_b0f77464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-05-28T07:32:48Z",
+      "side": 1,
+      "message": "Can wait for v6.9 to land in android-mainline. It works nevertheless.\n\nReference: v6.10-rc1 commit dc0fdfc855be (\"dm-vdo: use bdev_nr_bytes(bdev) instead of i_size_read(bdev-\u003ebd_inode)\").",
+      "revId": "246985af3c11b87460a07eae37e1da219166ca14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
