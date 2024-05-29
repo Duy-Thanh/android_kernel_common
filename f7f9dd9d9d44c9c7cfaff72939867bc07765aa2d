@@ -34,6 +34,24 @@
       "parentUuid": "66e0ae96_4442c341",
       "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e80e9f67_b4e68def",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-05-29T11:44:06Z",
+      "side": 1,
+      "message": "Yes, I am working with the committer Jose on this issue upstream, https://lore.kernel.org/all/20240528091831.13674-1-jtornosm@redhat.com/ is the thread you mentioned previously, but it still does not resolve the issue completely yet, will do as you suggested to revert and cherry pick the fixes when the final fixed merged upstream.",
+      "parentUuid": "9276a17c_9408fa23",
+      "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
