@@ -1515,11 +1515,11 @@ cc_library(
 cc_binary_with_abi(
     name = "kselftest_mm_thuge_gen",
     srcs = [
-        "tools/testing/selftests/mm/mlock2.h",
         "tools/testing/selftests/mm/thuge-gen.c",
     ],
     copts = [
         "-D_GNU_SOURCE",
+        "-Wno-macro-redefined",
     ],
     includes = ["tools/testing/selftests"],
     path_prefix = _KSELFTEST_DIR,
