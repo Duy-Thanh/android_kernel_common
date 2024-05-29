@@ -52,6 +52,24 @@
       "parentUuid": "9276a17c_9408fa23",
       "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f4a806_ed5d93cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-05-29T12:19:35Z",
+      "side": 1,
+      "message": "Thank you! Also once there is a validated fix, do please unrevert the change in android-6.6 and cherry-pick the proper upstream fix there as well.",
+      "parentUuid": "e80e9f67_b4e68def",
+      "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
