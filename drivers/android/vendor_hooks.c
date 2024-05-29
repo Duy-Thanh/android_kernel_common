@@ -86,6 +86,7 @@
 #include <trace/hooks/logbuf.h>
 #include <trace/hooks/remoteproc.h>
 #include <trace/hooks/reboot.h>
+#include <trace/hooks/fs.h>
 #include <trace/hooks/hung_task.h>
 #include <trace/hooks/bug.h>
 #include <trace/hooks/softlockup.h>
@@ -586,6 +587,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_update_page);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_adjust_zone_wmark);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_create_worker);
