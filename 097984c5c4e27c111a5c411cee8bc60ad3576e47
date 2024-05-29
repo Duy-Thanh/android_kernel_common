@@ -193,6 +193,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "36b0d517_444b72df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-05-29T00:00:32Z",
+      "side": 1,
+      "message": "Thanks. This is the default behavior with `repo sync -c`, right?",
+      "parentUuid": "e3c585e6_b00ba556",
+      "range": {
+        "startLine": 19,
+        "startChar": 35,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "097984c5c4e27c111a5c411cee8bc60ad3576e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c5f4af78_2c55ed9b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
