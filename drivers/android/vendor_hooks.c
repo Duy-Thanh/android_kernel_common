@@ -65,6 +65,7 @@
 #include <trace/hooks/compaction.h>
 #include <trace/hooks/sd.h>
 #include <trace/hooks/user.h>
+#include <trace/hooks/psi.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -371,4 +372,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmput);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_pageout_skip);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_event);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);
 
