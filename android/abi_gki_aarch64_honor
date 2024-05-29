@@ -30,6 +30,7 @@
   sysctl_max_skb_frags
   find_vm_area
   profile_event_unregister
+  binder_alloc_copy_from_buffer
   __tracepoint_android_vh_do_shrink_slab
   __traceiter_android_vh_do_shrink_slab
   __tracepoint_android_vh_shrink_slab_bypass
