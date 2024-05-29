@@ -144,6 +144,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37b96e0_e7a0e80a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-29T05:04:18Z",
+      "side": 1,
+      "message": "I opened b/343327514 to track this.",
+      "parentUuid": "506b84a1_bdfe6679",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 61
+      },
+      "revId": "097984c5c4e27c111a5c411cee8bc60ad3576e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d4d906a_13cc3db0",
@@ -205,6 +229,30 @@
       "side": 1,
       "message": "Thanks. This is the default behavior with `repo sync -c`, right?",
       "parentUuid": "e3c585e6_b00ba556",
+      "range": {
+        "startLine": 19,
+        "startChar": 35,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "097984c5c4e27c111a5c411cee8bc60ad3576e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e84ca9_7951f857",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-29T05:04:18Z",
+      "side": 1,
+      "message": "Yes, that is right.",
+      "parentUuid": "36b0d517_444b72df",
       "range": {
         "startLine": 19,
         "startChar": 35,
