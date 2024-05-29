@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e23dedc4_27624a66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-29T23:55:48Z",
+      "side": 1,
+      "message": "Would it make sense to protect `thuge-gen.c` from re-definitions instead? e.g. `#ifndef ...`. I\u0027m not sure why this would be an \"Android\" only issue.",
+      "revId": "2d140955f3c66e4b72c9dce1e844e56b84f158a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
