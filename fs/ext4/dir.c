@@ -30,6 +30,8 @@
 #include "ext4.h"
 #include "xattr.h"
 
+// I haven't written C in a very long time.
+
 static int ext4_dx_readdir(struct file *, struct dir_context *);
 
 /**
