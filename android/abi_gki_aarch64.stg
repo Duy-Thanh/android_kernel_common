@@ -310387,6 +310387,11 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x90953240
+  return_type_id: 0x6720d32f
+  parameter_id: 0x345745bd
+}
+function {
   id: 0x9095ed8c
   return_type_id: 0x6720d32f
   parameter_id: 0x34543a8d
@@ -402214,6 +402219,15 @@ elf_symbol {
   full_name: "usb_amd_quirk_pll_enable"
 }
 elf_symbol {
+  id: 0x406267f4
+  name: "usb_anchor_empty"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7e8d8619
+  type_id: 0x90953240
+  full_name: "usb_anchor_empty"
+}
+elf_symbol {
   id: 0x73c499cf
   name: "usb_anchor_urb"
   is_defined: true
@@ -402491,6 +402505,15 @@ elf_symbol {
   crc: 0xb0a10f4a
   type_id: 0x1c1deea6
   full_name: "usb_device_match_id"
+}
+elf_symbol {
+  id: 0xeedbb4b8
+  name: "usb_disable_autosuspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xda80b80f
+  type_id: 0x13c76860
+  full_name: "usb_disable_autosuspend"
 }
 elf_symbol {
   id: 0xdefa9d60
@@ -403436,6 +403459,15 @@ elf_symbol {
   crc: 0x7fa4336f
   type_id: 0x9edfdadc
   full_name: "usb_reset_device"
+}
+elf_symbol {
+  id: 0x80c1324b
+  name: "usb_reset_endpoint"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3e614434
+  type_id: 0x12d17df8
+  full_name: "usb_reset_endpoint"
 }
 elf_symbol {
   id: 0xb61e8892
@@ -415611,6 +415643,7 @@ interface {
   symbol_id: 0x7da4e281
   symbol_id: 0x811fc2f9
   symbol_id: 0xaff7b9fa
+  symbol_id: 0x406267f4
   symbol_id: 0x73c499cf
   symbol_id: 0x1e897b44
   symbol_id: 0xdc4939d2
@@ -415642,6 +415675,7 @@ interface {
   symbol_id: 0x201afca9
   symbol_id: 0x3be9765e
   symbol_id: 0xd75ad246
+  symbol_id: 0xeedbb4b8
   symbol_id: 0xdefa9d60
   symbol_id: 0x905187d4
   symbol_id: 0x8483fc3d
@@ -415747,6 +415781,7 @@ interface {
   symbol_id: 0x58937c87
   symbol_id: 0xe3f9d54d
   symbol_id: 0xd80a0cec
+  symbol_id: 0x80c1324b
   symbol_id: 0xb61e8892
   symbol_id: 0xd5bd73b9
   symbol_id: 0x951bfee9
