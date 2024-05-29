@@ -16,6 +16,24 @@
       "message": "clk_restore_context symbol also needs to be added.",
       "revId": "881b18215686b1834f09b062931e79d6a0383d97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b461e485_bd8a86f9",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 3427375
+      },
+      "writtenOn": "2024-05-29T06:08:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0f17c475_6abfd793",
+      "revId": "881b18215686b1834f09b062931e79d6a0383d97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
