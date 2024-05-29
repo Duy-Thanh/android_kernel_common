@@ -351921,6 +351921,15 @@ elf_symbol {
   full_name: "bitmap_parse"
 }
 elf_symbol {
+  id: 0xba7da88a
+  name: "bitmap_parse_user"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9a5a8914
+  type_id: 0x9312d42a
+  full_name: "bitmap_parse_user"
+}
+elf_symbol {
   id: 0x10425c32
   name: "bitmap_parselist"
   is_defined: true
@@ -410024,6 +410033,7 @@ interface {
   symbol_id: 0xe4dd862f
   symbol_id: 0x3a1cd883
   symbol_id: 0xa1f151cb
+  symbol_id: 0xba7da88a
   symbol_id: 0x10425c32
   symbol_id: 0xbd9a7739
   symbol_id: 0x82c387e4
