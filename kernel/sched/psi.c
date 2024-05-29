@@ -136,10 +136,15 @@
  * cost-wise, yet way more sensitive and accurate than periodic
  * sampling of the aggregate task states would be.
  */
+<<<<<<< HEAD   (a527dc6296086cbd0e329c8881d5fd2e1e5b0222 ANDROID: ABI: add initial symbol list for exynos)
 #include <linux/sched/clock.h>
 #include <linux/workqueue.h>
 #include <linux/psi.h>
 #include "sched.h"
+||||||| BASE   (c32849c569a93bfa71a7727b28ce2a1a7db2239c ANDROID: KVM: arm64: Fix missing KVM stats accounting)
+=======
+#include <trace/hooks/psi.h>
+>>>>>>> CHANGE (9fec5f6775ce8c64987468b5890f3dc116b2f4f7 ANDROID: psi: Add vendor hooks for PSI tracing)
 
 static int psi_bug __read_mostly;
 
@@ -509,6 +514,8 @@ static void update_triggers(struct psi_group *group, u64 now,
 		if (now < t->last_event_time + t->win.size)
 			continue;
 
+		trace_android_vh_psi_event(t);
+
 		/* Generate an event */
 		if (cmpxchg(&t->event, 0, 1) == 0) {
 			if (t->of)
@@ -520,6 +527,8 @@ static void update_triggers(struct psi_group *group, u64 now,
 		/* Reset threshold breach flag once event got generated */
 		t->pending_event = false;
 	}
+
+	trace_android_vh_psi_group(group);
 }
 
 static u64 update_averages(struct psi_group *group, u64 now)
