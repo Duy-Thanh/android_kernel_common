@@ -66,6 +66,7 @@
 #include <trace/hooks/sd.h>
 #include <trace/hooks/user.h>
 #include <trace/hooks/fuse.h>
+#include <trace/hooks/huge_memory.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -376,3 +377,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thp_vma_allowable_orders);
