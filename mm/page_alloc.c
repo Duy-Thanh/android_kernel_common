@@ -2162,10 +2162,12 @@ int find_suitable_fallback(struct free_area *area, unsigned int order,
 }
 
 /*
- * Reserve a pageblock for exclusive use of high-order atomic allocations if
- * there are no empty page blocks that contain a page with a suitable order
+ * Reserve the pageblock(s) surrounding an allocation request for
+ * exclusive use of high-order atomic allocations if there are no
+ * empty page blocks that contain a page with a suitable order
  */
-static void reserve_highatomic_pageblock(struct page *page, struct zone *zone)
+static void reserve_highatomic_pageblock(struct page *page, int order,
+					 struct zone *zone)
 {
 	int mt;
 	unsigned long max_managed, flags;
@@ -2195,10 +2197,17 @@ static void reserve_highatomic_pageblock(struct page *page, struct zone *zone)
 	/* Yoink! */
 	mt = get_pageblock_migratetype(page);
 	/* Only reserve normal pageblocks (i.e., they can merge with others) */
-	if (migratetype_is_mergeable(mt))
-		if (move_freepages_block(zone, page, mt,
-					 MIGRATE_HIGHATOMIC) != -1)
-			zone->nr_reserved_highatomic += pageblock_nr_pages;
+	if (!migratetype_is_mergeable(mt))
+		goto out_unlock;
+
+	if (order < pageblock_order) {
+		if (move_freepages_block(zone, page, mt, MIGRATE_HIGHATOMIC) == -1)
+			goto out_unlock;
+		zone->nr_reserved_highatomic += pageblock_nr_pages;
+	} else {
+		change_pageblock_range(page, order, MIGRATE_HIGHATOMIC);
+		zone->nr_reserved_highatomic += 1 << order;
+	}
 
 out_unlock:
 	spin_unlock_irqrestore(&zone->lock, flags);
@@ -2210,7 +2219,7 @@ out_unlock:
  * intense memory pressure but failed atomic allocations should be easier
  * to recover from than an OOM.
  *
- * If @force is true, try to unreserve a pageblock even though highatomic
+ * If @force is true, try to unreserve pageblocks even though highatomic
  * pageblock is exhausted.
  */
 static bool unreserve_highatomic_pageblock(const struct alloc_context *ac,
@@ -2258,6 +2267,7 @@ static bool unreserve_highatomic_pageblock(const struct alloc_context *ac,
 			 * adjust the count once.
 			 */
 			if (is_migrate_highatomic(mt)) {
+				unsigned long size;
 				/*
 				 * It should never happen but changes to
 				 * locking could inadvertently allow a per-cpu
@@ -2265,9 +2275,9 @@ static bool unreserve_highatomic_pageblock(const struct alloc_context *ac,
 				 * while unreserving so be safe and watch for
 				 * underflows.
 				 */
-				zone->nr_reserved_highatomic -= min(
-						pageblock_nr_pages,
-						zone->nr_reserved_highatomic);
+				size = max(pageblock_nr_pages, 1UL << order);
+				size = min(size, zone->nr_reserved_highatomic);
+				zone->nr_reserved_highatomic -= size;
 			}
 
 			/*
@@ -2279,11 +2289,19 @@ static bool unreserve_highatomic_pageblock(const struct alloc_context *ac,
 			 * of pageblocks that cannot be completely freed
 			 * may increase.
 			 */
-			ret = move_freepages_block(zone, page, mt,
-						   ac->migratetype);
+			if (order < pageblock_order)
+				ret = move_freepages_block(zone, page, mt,
+							   ac->migratetype);
+			else {
+				move_to_free_list(page, zone, order, mt,
+						  ac->migratetype);
+				change_pageblock_range(page, order,
+						       ac->migratetype);
+				ret = 1;
+			}
 			/*
-			 * Reserving this block already succeeded, so this should
-			 * not fail on zone boundaries.
+			 * Reserving the block(s) already succeeded,
+			 * so this should not fail on zone boundaries.
 			 */
 			WARN_ON_ONCE(ret == -1);
 			if (ret > 0) {
@@ -3591,7 +3609,7 @@ try_this_zone:
 			 * if the pageblock should be reserved for the future
 			 */
 			if (unlikely(alloc_flags & ALLOC_HIGHATOMIC))
-				reserve_highatomic_pageblock(page, zone);
+				reserve_highatomic_pageblock(page, order, zone);
 
 			return page;
 		} else {
