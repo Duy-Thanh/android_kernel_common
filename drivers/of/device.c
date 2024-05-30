@@ -199,7 +199,7 @@ int of_dma_configure_id(struct device *dev, struct device_node *np,
 	}
 
 	coherent = of_dma_is_coherent(np);
-	dev_dbg(dev, "device is%sdma coherent\n",
+	dev_err(dev, "device is%sdma coherent\n",
 		coherent ? " " : " not ");
 
 	iommu = of_iommu_configure(dev, np, id);
@@ -211,8 +211,10 @@ int of_dma_configure_id(struct device *dev, struct device_node *np,
 		return -EPROBE_DEFER;
 	}
 
-	dev_dbg(dev, "device is%sbehind an iommu\n",
+	dev_err(dev, "device is%sbehind an iommu\n",
 		iommu ? " " : " not ");
+
+	dev_err(dev, "KARB: dma_start = %#llx, size = %#llx \n", dma_start, size);
 
 	arch_setup_dma_ops(dev, dma_start, size, iommu, coherent);
 

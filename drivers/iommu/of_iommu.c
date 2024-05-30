@@ -27,14 +27,18 @@ static int of_iommu_xlate(struct device *dev,
 	struct fwnode_handle *fwnode = &iommu_spec->np->fwnode;
 	int ret;
 
+dev_err(dev, "KARB: of_iommu_xlate:  T1\n");
 	ops = iommu_ops_from_fwnode(fwnode);
 	if ((ops && !ops->of_xlate) ||
 	    !of_device_is_available(iommu_spec->np))
 		return NO_IOMMU;
 
+dev_err(dev, "KARB: of_iommu_xlate: T2\n");
 	ret = iommu_fwspec_init(dev, &iommu_spec->np->fwnode, ops);
 	if (ret)
 		return ret;
+
+dev_err(dev, "KARB: of_iommu_xlate : T3\n");
 	/*
 	 * The otherwise-empty fwspec handily serves to indicate the specific
 	 * IOMMU device we're waiting for, which will be useful if we ever get
@@ -42,12 +46,16 @@ static int of_iommu_xlate(struct device *dev,
 	 */
 	if (!ops)
 		return driver_deferred_probe_check_state(dev);
+dev_err(dev, "KARB: of_iommu_xlate : T4\n");
 
 	if (!try_module_get(ops->owner))
 		return -ENODEV;
 
+dev_err(dev, "KARB: of_iommu_xlate : T5\n");
 	ret = ops->of_xlate(dev, iommu_spec);
 	module_put(ops->owner);
+
+dev_err(dev, "KARB: of_iommu_xlate : T6\n");
 	return ret;
 }
 

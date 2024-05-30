@@ -2715,12 +2715,15 @@ int iommu_fwspec_init(struct device *dev, struct fwnode_handle *iommu_fwnode,
 {
 	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
 
+dev_err(dev, "KARB: iommu_fwspec_init: T1\n");
 	if (fwspec)
 		return ops == fwspec->ops ? 0 : -EINVAL;
 
+dev_err(dev, "KARB: iommu_fwspec_init: T2\n");
 	if (!dev_iommu_get(dev))
 		return -ENOMEM;
 
+dev_err(dev, "KARB: iommu_fwspec_init: T3\n");
 	/* Preallocate for the overwhelmingly common case of 1 ID */
 	fwspec = kzalloc(struct_size(fwspec, ids, 1), GFP_KERNEL);
 	if (!fwspec)
@@ -2729,7 +2732,9 @@ int iommu_fwspec_init(struct device *dev, struct fwnode_handle *iommu_fwnode,
 	of_node_get(to_of_node(iommu_fwnode));
 	fwspec->iommu_fwnode = iommu_fwnode;
 	fwspec->ops = ops;
+dev_err(dev, "KARB: iommu_fwspec_init: T4\n");
 	dev_iommu_fwspec_set(dev, fwspec);
+dev_err(dev, "KARB: iommu_fwspec_init: T5\n");
 	return 0;
 }
 EXPORT_SYMBOL_GPL(iommu_fwspec_init);

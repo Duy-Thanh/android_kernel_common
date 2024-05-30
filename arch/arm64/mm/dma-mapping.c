@@ -74,6 +74,7 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
 
 	dev->dma_coherent = coherent;
 	if (iommu) {
+		pr_err("KARB: arch_setup_dma_ops: dma_base = %#llx, size = %#llx \n", dma_base, size);
 		iommu_setup_dma_ops(dev, dma_base, dma_base + size - 1);
 		trace_android_rvh_iommu_setup_dma_ops(dev, dma_base, dma_base + size - 1);
 	}
