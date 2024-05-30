@@ -2378,6 +2378,7 @@
   __traceiter_android_vh_mmc_blk_mq_rw_recovery
   __traceiter_android_vh_mmc_blk_reset
   __traceiter_android_vh_mmc_gpio_cd_irqt
+  __traceiter_android_vh_mmc_init_queue
   __traceiter_android_vh_printk_hotplug
   __traceiter_android_vh_rproc_recovery
   __traceiter_android_vh_scheduler_tick
@@ -2497,6 +2498,7 @@
   __tracepoint_android_vh_mmc_blk_mq_rw_recovery
   __tracepoint_android_vh_mmc_blk_reset
   __tracepoint_android_vh_mmc_gpio_cd_irqt
+  __tracepoint_android_vh_mmc_init_queue
   __tracepoint_android_vh_printk_hotplug
   __tracepoint_android_vh_rproc_recovery
   __tracepoint_android_vh_scheduler_tick
