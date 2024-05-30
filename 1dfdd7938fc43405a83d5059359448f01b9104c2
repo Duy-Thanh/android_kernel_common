@@ -16,6 +16,24 @@
       "message": "Please say more. What are the fluency and timeliness issues? Why can\u0027t this be fixed with an upstream patch?",
       "revId": "1dfdd7938fc43405a83d5059359448f01b9104c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb5fbff_131b5b6d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2032918
+      },
+      "writtenOn": "2024-05-30T08:31:28Z",
+      "side": 1,
+      "message": "Some scenarios of asynchronous binder calls are important for performance,\nand if these Binder calls are blocked due to runnable state, they can cause\nframe drops or long response times. This feature takes effect based on the\nscenario identification and matching whitelist. It does not belong to the \ngeneral solution.",
+      "parentUuid": "d177cd36_4b6dbcf3",
+      "revId": "1dfdd7938fc43405a83d5059359448f01b9104c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
