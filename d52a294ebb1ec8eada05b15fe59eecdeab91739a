@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acdbd739_f85d2b03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-30T20:53:26Z",
+      "side": 1,
+      "message": "rebase the series. this patch is out of sync with its child patches",
+      "revId": "d52a294ebb1ec8eada05b15fe59eecdeab91739a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
