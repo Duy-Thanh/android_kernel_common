@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb6a7c2b_a4119975",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-05-30T22:42:49Z",
+      "side": 1,
+      "message": "As discussed in the bug, please move your target declarations to a separate package that you own. See virtual device for an example.\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android-mainline:common-modules/virtual-device/BUILD.bazel",
+      "revId": "873fa1d72f10ddf6a27373850439847a80b39708",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
