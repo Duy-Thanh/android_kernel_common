@@ -288698,6 +288698,11 @@ function {
   parameter_id: 0x0ae4a2c7
 }
 function {
+  id: 0x35de1544
+  return_type_id: 0x48b5725f
+  parameter_id: 0x9519135f
+}
+function {
   id: 0x35ec664e
   return_type_id: 0xedf277ba
   parameter_id: 0x2c518f27
@@ -357214,6 +357219,15 @@ elf_symbol {
   full_name: "memblock_end_of_DRAM"
 }
 elf_symbol {
+  id: 0x73553ac1
+  name: "memcg_kmem_online_key"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x035d25ab
+  type_id: 0x8e47c273
+  full_name: "memcg_kmem_online_key"
+}
+elf_symbol {
   id: 0xbf158d63
   name: "memcg_sockets_enabled_key"
   is_defined: true
@@ -374148,6 +374162,15 @@ elf_symbol {
   full_name: "stack_depot_fetch"
 }
 elf_symbol {
+  id: 0xeef73c19
+  name: "stack_depot_print"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1e53f827
+  type_id: 0x35de1544
+  full_name: "stack_depot_print"
+}
+elf_symbol {
   id: 0xa33694f6
   name: "stack_trace_print"
   is_defined: true
@@ -388511,6 +388534,7 @@ interface {
   symbol_id: 0x7f797603
   symbol_id: 0x01e78001
   symbol_id: 0x746374fa
+  symbol_id: 0x73553ac1
   symbol_id: 0xbf158d63
   symbol_id: 0xaa97e158
   symbol_id: 0x0b518e04
@@ -390392,6 +390416,7 @@ interface {
   symbol_id: 0x322f6dbd
   symbol_id: 0xf0ca1a39
   symbol_id: 0x4ca735c5
+  symbol_id: 0xeef73c19
   symbol_id: 0xa33694f6
   symbol_id: 0x7e8e12de
   symbol_id: 0xe69a5898
