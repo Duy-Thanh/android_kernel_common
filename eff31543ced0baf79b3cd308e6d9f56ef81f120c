@@ -1,0 +1,48 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079624760",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3107483?revision\u003d2",
+      "key": {
+        "uuid": "60afb3b2_4f7288ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-30T04:15:57Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Lucas Henneman \u003chenneman@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "6e975852_a41cd4b2",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 15,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Lucas Henneman \u003chenneman@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eff31543ced0baf79b3cd308e6d9f56ef81f120c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
