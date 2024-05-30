@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2efdd295_ac9d1e29",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-30T14:08:12Z",
+      "side": 0,
+      "message": "There seems to not be an explanation why this header is no longer needed as source file. It looks like this change does 2 things. What am I missing?",
+      "range": {
+        "startLine": 1518,
+        "startChar": 0,
+        "endLine": 1518,
+        "endChar": 46
+      },
+      "revId": "a1e6a310ad84aeb0cbd467bf40187a81f3ffaf12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
