@@ -52,6 +52,24 @@
       "parentUuid": "d56882ad_d2756f4f",
       "revId": "c0cb41c659016f5b90f1925db2926c5d2fed9c56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f396cc_08e66ea7",
+        "filename": "kernel/sys.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2356,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-05-30T14:50:12Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "4aa2c739_572ae3f2",
+      "revId": "c0cb41c659016f5b90f1925db2926c5d2fed9c56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
