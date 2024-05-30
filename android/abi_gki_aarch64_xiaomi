@@ -240,3 +240,15 @@
   proc_create_net_single
   put_cmsg
   sock_recv_errqueue
+
+#required by mi_mempool.ko
+  __traceiter_android_vh_mmput
+  __tracepoint_android_vh_mmput
+  __traceiter_android_vh_madvise_cold_pageout_skip
+  __tracepoint_android_vh_madvise_cold_pageout_skip
+
+#required by io_limit.ko
+  __traceiter_android_vh_psi_event
+  __traceiter_android_vh_psi_group
+  __tracepoint_android_vh_psi_event
+  __tracepoint_android_vh_psi_group
