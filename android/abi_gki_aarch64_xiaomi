@@ -60,6 +60,10 @@
   scsi_host_lookup
   scsi_device_lookup
 
+# required by xr_hugepage module
+  __traceiter_android_vh_thp_vma_allowable_orders
+  __tracepoint_android_vh_thp_vma_allowable_orders
+
 #required by metis.ko module
   __traceiter_android_vh_rwsem_read_wait_start
   __traceiter_android_vh_rwsem_write_wait_start
