@@ -34,6 +34,41 @@
       "parentUuid": "cb6a7c2b_a4119975",
       "revId": "873fa1d72f10ddf6a27373850439847a80b39708",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8946d654_6da3af16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1099639
+      },
+      "writtenOn": "2024-05-30T22:51:12Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4f8e5b99_9f680431",
+      "revId": "873fa1d72f10ddf6a27373850439847a80b39708",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34fd1488_dd3458d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1099639
+      },
+      "writtenOn": "2024-05-30T22:51:12Z",
+      "side": 1,
+      "message": "i removed this patch from the set since it is not needed for BCM.  the patch which introduces the KMI needed for BCM is all we need at this time, thanks",
+      "revId": "873fa1d72f10ddf6a27373850439847a80b39708",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
