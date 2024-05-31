@@ -16,6 +16,24 @@
       "message": "Sorry, but this is way too much memory overhead for everyone involved.  What feature needs this much space?",
       "revId": "3acfd99717c843b3a1bc4072604f3179fc049396",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcddbbad_d19a7df8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3402659
+      },
+      "writtenOn": "2024-05-31T02:54:14Z",
+      "side": 1,
+      "message": "Sure, let me change \"3 pointers\" to \" 1 pointers\", to reduce the waste of extra memory.",
+      "parentUuid": "4f9e3f04_530de6bb",
+      "revId": "3acfd99717c843b3a1bc4072604f3179fc049396",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
