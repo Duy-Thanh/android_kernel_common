@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f718b1a_014c4a08",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-31T21:55:41Z",
+      "side": 1,
+      "message": "You don\u0027t need any of this. It has been refactored to be handled by `module_param(use_mcq_mode, bool, 0644);`. Again, see commit `9a4327fd8864 (\"scsi: ufs: core: Change the module parameter macro of use_mcq_mode\")`.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 66
+      },
+      "revId": "93bf8548bb9978dd7e74677eca6af4624b61acef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f04c7cb8_70d0cca8",
+        "filename": "include/ufs/ufshcd.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-31T21:55:41Z",
+      "side": 1,
+      "message": "The original commit adds `mcq_sup` to `struct ufs_hba` here, not down in `struct ufs_hw_queue`.",
+      "range": {
+        "startLine": 1105,
+        "startChar": 6,
+        "endLine": 1105,
+        "endChar": 13
+      },
+      "revId": "93bf8548bb9978dd7e74677eca6af4624b61acef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fd0223e_297aa9b5",
+        "filename": "include/ufs/ufshcd.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-31T21:55:41Z",
+      "side": 1,
+      "message": "This was added to the wrong struct, it\u0027s already present in the correct struct ufs_hba.",
+      "range": {
+        "startLine": 1154,
+        "startChar": 1,
+        "endLine": 1154,
+        "endChar": 14
+      },
+      "revId": "93bf8548bb9978dd7e74677eca6af4624b61acef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
