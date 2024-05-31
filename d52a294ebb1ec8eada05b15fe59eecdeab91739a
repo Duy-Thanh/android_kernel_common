@@ -16,6 +16,24 @@
       "message": "rebase the series. this patch is out of sync with its child patches",
       "revId": "d52a294ebb1ec8eada05b15fe59eecdeab91739a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb42e0f9_2aa1b95c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3427375
+      },
+      "writtenOn": "2024-05-31T04:19:37Z",
+      "side": 1,
+      "message": "Have rebased the change, please check once.",
+      "parentUuid": "acdbd739_f85d2b03",
+      "revId": "d52a294ebb1ec8eada05b15fe59eecdeab91739a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
