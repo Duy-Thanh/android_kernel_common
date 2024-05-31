@@ -88,6 +88,24 @@
       "parentUuid": "e4f4a806_ed5d93cc",
       "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d71c303_bfec29da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-05-31T09:26:16Z",
+      "side": 1,
+      "message": "For android-6.6 I think the revert is ok, but for android-upstream I\u0027m hesitant to merge temp workarounds when the priority should be getting it fixed upstream asap.\n\nDoes carrying the revert locally cause major disruption to you in the meantime?",
+      "parentUuid": "3efecfdb_8e613511",
+      "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
