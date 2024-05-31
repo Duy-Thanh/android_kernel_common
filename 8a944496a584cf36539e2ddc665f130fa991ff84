@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d1a0c9_7ca139a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-31T08:58:45Z",
+      "side": 1,
+      "message": "Please send upstream first. I don\u0027t see any reason for us to carry this in android-mainline.",
+      "revId": "8a944496a584cf36539e2ddc665f130fa991ff84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
