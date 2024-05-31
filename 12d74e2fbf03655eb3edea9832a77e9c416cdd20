@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "12d74e2fbf03655eb3edea9832a77e9c416cdd20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079864794",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3107086?revision\u003d2",
+      "key": {
+        "uuid": "39579ed9_30145277",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-31T22:49:55Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/46e714c729c8d1d8110bc0545d7ffe8a759c9dc0) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d46e714c729c8d1d8110bc0545d7ffe8a759c9dc0).\n\n```\n      ## arch/arm64/mm/fault.c ##\n     @@ arch/arm64/mm/fault.c: static int __kprobes do_page_fault(unsigned long far, unsigned long esr,\n    @@ arch/riscv/mm/fault.c: void handle_page_fault(struct pt_regs *regs)\n      \t\tif (!user_mode(regs))\n     \n      ## arch/s390/mm/fault.c ##\n    -@@ arch/s390/mm/fault.c: static void do_exception(struct pt_regs *regs, int access)\n    - \t\treturn;\n    +@@ arch/s390/mm/fault.c: static inline vm_fault_t do_exception(struct pt_regs *regs, int access)\n    + \t\tgoto out;\n      \t}\n      \tcount_vm_vma_lock_event(VMA_LOCK_RETRY);\n     +\tif (fault \u0026 VM_FAULT_MAJOR)\n    @@ arch/s390/mm/fault.c: static void do_exception(struct pt_regs *regs, int access)\n     +\n      \t/* Quick path to respond to signals */\n      \tif (fault_signal_pending(fault, regs)) {\n    - \t\tif (!user_mode(regs))\n    + \t\tfault \u003d VM_FAULT_SIGNAL;\n     \n      ## arch/x86/mm/fault.c ##\n     @@ arch/x86/mm/fault.c: void do_user_addr_fault(struct pt_regs *regs,\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "12d74e2fbf03655eb3edea9832a77e9c416cdd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
