@@ -34,6 +34,24 @@
       "parentUuid": "acdbd739_f85d2b03",
       "revId": "d52a294ebb1ec8eada05b15fe59eecdeab91739a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80af58f3_f501b5de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-31T16:41:10Z",
+      "side": 1,
+      "message": "You have not rebased ALL the patches in the series so this patch is out-of-sync with it\u0027s child patches. Please rebase all four patches in the patchset (retaining the order)",
+      "parentUuid": "bb42e0f9_2aa1b95c",
+      "revId": "d52a294ebb1ec8eada05b15fe59eecdeab91739a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
