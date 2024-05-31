@@ -70,6 +70,24 @@
       "parentUuid": "e80e9f67_b4e68def",
       "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3efecfdb_8e613511",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2024-05-31T02:15:37Z",
+      "side": 1,
+      "message": "Yes. that\u0027s the plan.\nAnd before we have the proper fix, could we have this revert workaround merged first?",
+      "parentUuid": "e4f4a806_ed5d93cc",
+      "revId": "f7f9dd9d9d44c9c7cfaff72939867bc07765aa2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
