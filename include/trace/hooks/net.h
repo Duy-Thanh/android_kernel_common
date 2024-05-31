@@ -16,6 +16,15 @@ DECLARE_HOOK(android_vh_ptype_head,
 
 struct nf_conn;
 struct sock;
+<<<<<<< HEAD   (27021b UPSTREAM: tty: serial: qcom-geni-serial: split out the FIFO )
+||||||| BASE
+struct msghdr;
+struct sk_buff;
+=======
+struct msghdr;
+struct sk_buff;
+struct net_device;
+>>>>>>> CHANGE (86dd89 ANDROID: GKI: net: add vendor hooks for link data path)
 DECLARE_RESTRICTED_HOOK(android_rvh_nf_conn_alloc,
 	TP_PROTO(struct nf_conn *nf_conn), TP_ARGS(nf_conn), 1);
 DECLARE_RESTRICTED_HOOK(android_rvh_nf_conn_free,
@@ -24,6 +33,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sk_alloc,
 	TP_PROTO(struct sock *sock), TP_ARGS(sock), 1);
 DECLARE_RESTRICTED_HOOK(android_rvh_sk_free,
 	TP_PROTO(struct sock *sock), TP_ARGS(sock), 1);
+<<<<<<< HEAD   (27021b UPSTREAM: tty: serial: qcom-geni-serial: split out the FIFO )
 
 struct poll_table_struct;
 typedef struct poll_table_struct poll_table;
@@ -32,6 +42,85 @@ DECLARE_HOOK(android_vh_netlink_poll,
 		__poll_t *mask),
 	TP_ARGS(file, sock, wait, mask));
 
+||||||| BASE
+DECLARE_RESTRICTED_HOOK(android_rvh_tcp_sendmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len),
+	TP_ARGS(sk, msg, len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_tcp_recvmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len, int flags, int *addr_len),
+	TP_ARGS(sk, msg, len, flags, addr_len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_udp_sendmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len),
+	TP_ARGS(sk, msg, len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_udp_recvmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len, int flags, int *addr_len),
+	TP_ARGS(sk, msg, len, flags, addr_len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_udpv6_sendmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len),
+	TP_ARGS(sk, msg, len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_udpv6_recvmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len, int flags, int *addr_len),
+	TP_ARGS(sk, msg, len, flags, addr_len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_tcp_select_window,
+	TP_PROTO(struct sock *sk, u32 *new_win), TP_ARGS(sk, new_win), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_inet_sock_create,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_inet_sock_release,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_bpf_skb_load_bytes,
+	TP_PROTO(const struct sk_buff *skb, u32 offset, void *to, u32 len,
+		int *handled, int *err),
+	TP_ARGS(skb, offset, to, len, handled, err), 1);
+DECLARE_HOOK(android_vh_tcp_rtt_estimator,
+	TP_PROTO(struct sock *sk, long mrtt_us), TP_ARGS(sk, mrtt_us));
+DECLARE_HOOK(android_vh_udp_enqueue_schedule_skb,
+	TP_PROTO(struct sock *sk, struct sk_buff *skb), TP_ARGS(sk, skb));
+DECLARE_HOOK(android_vh_build_skb_around,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_tcp_sendmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len),
+	TP_ARGS(sk, msg, len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_tcp_recvmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len, int flags, int *addr_len),
+	TP_ARGS(sk, msg, len, flags, addr_len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_udp_sendmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len),
+	TP_ARGS(sk, msg, len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_udp_recvmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len, int flags, int *addr_len),
+	TP_ARGS(sk, msg, len, flags, addr_len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_udpv6_sendmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len),
+	TP_ARGS(sk, msg, len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_udpv6_recvmsg,
+	TP_PROTO(struct sock *sk, struct msghdr *msg, size_t len, int flags, int *addr_len),
+	TP_ARGS(sk, msg, len, flags, addr_len), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_tcp_select_window,
+	TP_PROTO(struct sock *sk, u32 *new_win), TP_ARGS(sk, new_win), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_inet_sock_create,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_inet_sock_release,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_bpf_skb_load_bytes,
+	TP_PROTO(const struct sk_buff *skb, u32 offset, void *to, u32 len,
+		int *handled, int *err),
+	TP_ARGS(skb, offset, to, len, handled, err), 1);
+DECLARE_HOOK(android_vh_dc_send_copy,
+	TP_PROTO(struct sk_buff *skb, struct net_device *dev), TP_ARGS(skb, dev));
+DECLARE_HOOK(android_vh_dc_receive,
+	TP_PROTO(struct sk_buff *skb, int *flag), TP_ARGS(skb, flag));
+DECLARE_HOOK(android_vh_tcp_rtt_estimator,
+	TP_PROTO(struct sock *sk, long mrtt_us), TP_ARGS(sk, mrtt_us));
+DECLARE_HOOK(android_vh_udp_enqueue_schedule_skb,
+	TP_PROTO(struct sock *sk, struct sk_buff *skb), TP_ARGS(sk, skb));
+DECLARE_HOOK(android_vh_build_skb_around,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,
+        TP_PROTO(struct sock *sk), TP_ARGS(sk));
+>>>>>>> CHANGE (86dd89 ANDROID: GKI: net: add vendor hooks for link data path)
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_NET_VH_H */
