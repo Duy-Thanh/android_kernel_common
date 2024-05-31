@@ -13,6 +13,7 @@
 #include <linux/err.h>
 #include <linux/slab.h>
 #include <linux/list.h>
+#include <trace/hooks/net.h>
 #include <linux/if_ether.h>
 #include <linux/ieee80211.h>
 #include <linux/nl80211.h>
@@ -6861,6 +6862,8 @@ static int nl80211_get_station(struct sk_buff *skb, struct genl_info *info)
 		return -ENOBUFS;
 	}
 
+	trace_android_vh_set_wifi_state_connect(dev->name, rdev, dev, mac_addr);
+
 	return genlmsg_reply(msg, info);
 }
 
@@ -12216,6 +12219,9 @@ static int nl80211_disconnect(struct sk_buff *skb, struct genl_info *info)
 	wdev_lock(dev->ieee80211_ptr);
 	ret = cfg80211_disconnect(rdev, dev, reason, true);
 	wdev_unlock(dev->ieee80211_ptr);
+
+	trace_android_vh_set_wifi_state_disconnect(dev->name);
+
 	return ret;
 }
 
