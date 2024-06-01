@@ -5235,6 +5235,11 @@ static __always_inline void
 update_cpufreq_ctx_switch(struct rq *rq, struct task_struct *prev)
 {
 #ifdef CONFIG_CPU_FREQ
+	if (prev && prev->dl.flags & SCHED_FLAG_SUGOV) {
+		/* Sugov jut issued an update, don't be too aggressive. */
+		return;
+	}
+
 	/*
 	 * RT and DL should always send a freq update. But we can do some
 	 * simple checks to avoid it when we know it's not necessary.
